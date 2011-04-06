@@ -1,0 +1,87 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xml:lang="en" lang="en"
+      i18n:domain="urban"
+      metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="top_slot"
+             tal:define="dummy python:request.set('disable_border',1)" />
+
+<body>
+<div metal:fill-slot="main"
+     tal:define="foldertypes request/foldertypes|nothing;
+                 BuildLicence python: 'BuildLicence' in request.get('foldertypes', []) or '';
+                 Declaration python: 'Declaration' in request.get('foldertypes', []) or '';
+                 ParcelOutLicence python: 'ParcelOutLicence' in request.get('foldertypes', []) or '';
+                 Division python: 'Division' in request.get('foldertypes', []) or '';
+                 NotaryLetter python: 'NotaryLetter' in request.get('foldertypes', []) or '';
+                 UrbanCertificateOne python: 'UrbanCertificateOne' in request.get('foldertypes', []) or '';
+                 UrbanCertificateTwo python: 'UrbanCertificateTwo' in request.get('foldertypes', []) or '';
+                 workLocation request/workLocation|nothing">
+
+        <script type="text/javascript" charset="iso-8859-1"
+                src="#" tal:attributes="src python: context.absolute_url() + '/referencebrowser.js'">
+        </script>
+
+        <h1 class="documentFirstHeading" i18n:translate="urban_searchbystreet_descr">
+            Title
+        </h1>
+
+        <fieldset><legend><strong i18n:translate="urban_search_parameters">Enter your parameters for the search</strong></legend>
+         <form action="" method="get">
+             <input type="checkbox" name="foldertypes" value="BuildLicence" tal:attributes="checked python: test(BuildLicence, 'checked', '')" /><label i18n:domain="plone" i18n:translate="">BuildLicence</label><br />
+             <input type="checkbox" name="foldertypes" value="Declaration" tal:attributes="checked python: test(Declaration, 'checked', '')" /><label i18n:domain="plone" i18n:translate="">Declaration</label><br />
+             <input type="checkbox" name="foldertypes" value="ParcelOutLicence" tal:attributes="checked python: test(ParcelOutLicence, 'checked', '')" /><label i18n:domain="plone" i18n:translate="">ParcelOutLicence</label><br />
+             <input type="checkbox" name="foldertypes" value="Division" tal:attributes="checked python: test(Division, 'checked', '')" /><label i18n:domain="plone" i18n:translate="">Division</label><br />
+             <input type="checkbox" name="foldertypes" value="NotaryLetter" tal:attributes="checked python: test(NotaryLetter, 'checked', '')" /><label i18n:domain="plone" i18n:translate="">NotaryLetter</label><br />
+             <input type="checkbox" name="foldertypes" value="UrbanCertificateOne" tal:attributes="checked python: test(UrbanCertificateOne, 'checked', '')" /><label i18n:domain="plone" i18n:translate="">UrbanCertificateOne</label><br />
+             <input type="checkbox" name="foldertypes" value="UrbanCertificateTwo" tal:attributes="checked python: test(UrbanCertificateTwo, 'checked', '')" /><label i18n:domain="plone" i18n:translate="">UrbanCertificateTwo</label><br />
+             <br />
+             <input tal:attributes="value python: context.getDefaultStreetTitle(workLocation)" type="text" readonly="readonly" id="workLocation_label" value="" size="30">
+             <input tal:attributes="originalvalue workLocation; value workLocation" type="hidden" id="workLocation" name="workLocation" value="" originalvalue="">
+             <input value="Select street" i18n:attributes="value label_select_street;" type="button" onclick="" value="Add" class="searchButton"
+                    tal:attributes="onclick python: 'javascript:referencebrowser_openBrowser(\'' + context.portal_url.getPortalObject().absolute_url() + '/portal_urban/streets\',\'workLocation\', \'\', \'street\')'">
+             <input type="button" onclick="javascript:referencebrowser_removeReference('workLocation', 0)" i18n:attributes="value" value="Remove selected street" class="destructive">
+             <p><br /><input class="searchButton" type="submit" value="Search" name="Search" i18n:attributes="value" /></p>
+         </form>
+        </fieldset>
+
+
+<!-- Display results --> 
+<tal:block_results condition="workLocation">
+
+<table tal:define="objs python:here.portal_urban.searchByStreet(foldertypes, workLocationUid=workLocation)" class="listing" width=100% border=0 cellspacing=0>
+ <thead>
+  <tr>
+   <th><strong i18n:translate="urban_search_result">Search result</strong></th>
+  </tr>
+ </thead>
+ <!-- Display 'no results' -->
+ <tbody tal:condition="not: objs">
+  <tr>
+   <td i18n:domain="atcontenttypes" i18n:translate="description_no_items_in_topic" class="discreet">No result found.
+   </td>
+  </tr>
+ </tbody>
+ <!-- Display the results body -->
+ <tbody>
+  <tr tal:repeat="obj objs">
+   <td tal:define="oddrow repeat/obj/odd;
+                   obj_wf_state obj/review_state|python: wtool.getInfoFor(obj, 'review_state', '');
+                   obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);" tal:attributes="class python: test(oddrow, 'even', 'odd')">
+    <img src="#" tal:attributes="src obj/getIcon" />
+    <a href="#" tal:content="obj/Title" tal:attributes="href obj/absolute_url;class obj_wf_state_class">Result title</a>
+    <p class="discreet"><span tal:content="structure obj/Description">Result description</span></p>
+   </td>
+  </tr>
+ </tbody>
+</table>
+
+</tal:block_results>
+
+</div>
+
+</body>
+</html>

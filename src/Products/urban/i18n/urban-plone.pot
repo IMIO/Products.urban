@@ -1,0 +1,207 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-04-28 11:35+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+
+#content_types
+msgid "Applicant"
+msgstr ""
+
+msgid "Architect"
+msgstr ""
+
+msgid "Street"
+msgstr ""
+
+msgid "UrbanEvent"
+msgstr ""
+
+msgid "BuildLicence"
+msgstr ""
+
+msgid "UrbanCertificateOne"
+msgstr ""
+
+msgid "UrbanCertificateTwo"
+msgstr ""
+
+msgid "NotaryLetter"
+msgstr ""
+
+msgid "Notary"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "EnvironmentalDeclaration"
+msgstr ""
+
+msgid "FolderManager"
+msgstr ""
+
+msgid "Geometrician"
+msgstr ""
+
+msgid "ParcelOutLicence"
+msgstr ""
+
+msgid "Declaration"
+msgstr ""
+
+msgid "PortionOut"
+msgstr ""
+
+msgid "Recipient"
+msgstr ""
+
+msgid "RecipientCadastre"
+msgstr ""
+
+msgid "UrbanEventType"
+msgstr ""
+
+msgid "UrbanVocabularyTerm"
+msgstr ""
+
+msgid "PcaTerm"
+msgstr ""
+
+msgid "ParcellingTerm"
+msgstr ""
+
+msgid "Street"
+msgstr ""
+
+msgid "WorkLocation"
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "workLocationStreet"
+msgstr ""
+
+#status messages...
+msgid "db_connection_successfull"
+msgstr ""
+
+msgid "db_connection_error"
+msgstr ""
+
+msgid "db_not_connected_error"
+msgstr ""
+
+msgid "please_enter_more_letters"
+msgstr ""
+
+#states
+msgid "in_progress"
+msgstr ""
+
+msgid "closed"
+msgstr ""
+
+msgid "accepted"
+msgstr ""
+
+msgid "refused"
+msgstr ""
+
+msgid "incomplete"
+msgstr ""
+
+msgid "retired"
+msgstr ""
+
+msgid "enabled"
+msgstr ""
+
+msgid "disabled"
+msgstr ""
+
+#transitions
+msgid "retire"
+msgstr ""
+
+msgid "isincomplete"
+msgstr ""
+
+msgid "close"
+msgstr ""
+
+msgid "reopen"
+msgstr ""
+
+msgid "accept"
+msgstr ""
+
+msgid "refuse"
+msgstr ""
+
+msgid "enable"
+msgstr ""
+
+msgid "disable"
+msgstr ""
+
+#control panel
+msgid "UrbanTool"
+msgstr ""
+
+#actions
+msgid "edit"
+msgstr ""
+
+#map.cpt
+msgid "Map"
+msgstr ""
+
+#indexes/metadata
+msgid "getBeginDate"
+msgstr ""
+
+msgid "getEndDate"
+msgstr ""
+
+#validators
+msgid "This field only accept numbers, indents or points !"
+msgstr ""
+
+msgid "Your National Register number must be 11 digits long !"
+msgstr ""
+
+msgid "This National Register number is not valid !"
+msgstr ""
+
+msgid "label_schema_urban_description"
+msgstr ""
+
+msgid "label_schema_urban_details"
+msgstr ""
+
+msgid "label_schema_urban_road"
+msgstr ""
+
+msgid "label_schema_urban_investigation_and_advices"
+msgstr ""
+
+msgid "label_schema_urban_location"
+msgstr ""
+
+msgid "label_schema_urban_carto"
+msgstr ""
+
+msgid "label_schema_urban_events"
+msgstr ""

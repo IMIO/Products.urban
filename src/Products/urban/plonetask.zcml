@@ -1,0 +1,11 @@
+<configure xmlns="http://namespaces.zope.org/zope" 
+           xmlns:browser="http://namespaces.zope.org/browser" 
+           xmlns:zcml="http://namespaces.zope.org/zcml" 
+           xmlns:five="http://namespaces.zope.org/five"> 
+  
+  <adapter zcml:condition="installed Products.PloneTask"
+           for="Products.PloneTask.interfaces.ITask"
+           factory="Products.urban.adapters.CustomTask"
+           provides="Products.PloneTask.interfaces.ITaskCustom"/>
+
+</configure>

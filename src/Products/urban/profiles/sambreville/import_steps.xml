@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<import-steps>
+<import-step
+            id="urban-sambreville-addDefaultObjects"
+            handler="Products.urban.profiles.sambreville.exportimport.addDefaultObjects"
+            title="Add default objects for the Sambreville profile"
+            version="2009-08-13T15:00:00.00000">
+<dependency step="urban-postInstall"/>
+Add default objects for the Sambreville profile
+</import-step>
+<import-step
+            id="urban-sambreville-importSambrevilleStreets"
+            handler="Products.urban.profiles.sambreville.exportimport.importSambrevilleStreets"
+            title="Import Sambreville streets from the Informix application"
+            version="2010-07-29T15:00:00.00000">
+<dependency step="urban-postInstall"/>
+Import Sambreville streets from the Informix application
+</import-step>
+<import-step
+            id="urban-sambreville-importArchitects"
+            handler="Products.urban.profiles.sambreville.exportimport.importArchitects"
+            title="Import architects from the Informix application"
+            version="2010-10-14T11:00:00.00000">
+<dependency step="urban-postInstall"/>
+Import architects from the Informix application
+</import-step>
+<import-step
+            id="urban-sambreville-importGeometricians"
+            handler="Products.urban.profiles.sambreville.exportimport.importGeometricians"
+            title="Import geometricians from the Informix application"
+            version="2010-10-14T11:00:00.00000">
+<dependency step="urban-postInstall"/>
+Import geometricians from the Informix application
+</import-step>
+<import-step
+            id="urban-sambreville-importNotaries"
+            handler="Products.urban.profiles.sambreville.exportimport.importNotaries"
+            title="Import notaries from the Informix application"
+            version="2009-08-13T15:00:00.00000">
+<dependency step="urban-postInstall"/>
+Import notaries from the Informix application
+</import-step>
+<import-step
+            id="urban-sambreville-importPcas"
+            handler="Products.urban.profiles.sambreville.exportimport.importPcas"
+            title="Import pcas from the Informix application"
+            version="2010-10-14T12:00:00.00000">
+<dependency step="urban-postInstall"/>
+Import pcas from the Informix application
+</import-step>
+
+</import-steps>

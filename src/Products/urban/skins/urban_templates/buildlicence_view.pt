@@ -1,0 +1,620 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<metal:block fill-slot="top_slot"
+             tal:define="global parcels context/getParcels;" />
+
+<head>
+<tal:block condition="context/getParcels">
+<div metal:fill-slot="javascript_head_slot" tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
+    <script type="text/javascript" tal:attributes="src python:'portal_skins/openlayers/OpenLayers.js'"></script>
+    <script type="text/javascript" src="mapjsglobals.js"></script>
+    <script tal:content="structure python: 'function init() { ' + context.portal_urban.initMap(context) + '};'"></script>
+</div>
+</tal:block>
+</head>
+
+<body>
+
+<metal:main fill-slot="main">
+<metal:main_macro define-macro="main">
+    <metal:body define-macro="body_macro" 
+                tal:define="applicants context/getApplicants;
+                            useTabbing python: context.portal_urban.getUseTabbing();">
+
+<tal:block condition="python: not parcels or not applicants">
+ <div metal:use-macro="here/urban_macros/macros/urbanPortalMessageMacro" />
+</tal:block>
+
+<h1 class="documentFirstHeading">
+ <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
+ <span tal:replace="here/Title" tal:omit-tag="">Title</span>
+</h1>
+
+<div tal:condition="useTabbing">
+<dl class="formTabs enableFormTabbing">
+    <dt class="formTab" tal:attributes="class python: test(context.getApplicants(), 'formTab', 'formTab notify')" id="fieldsetlegend-urban_description" i18n:domain="plone" i18n:translate="label_schema_urban_description"><span>Description</span></dt>
+    <dd id="fieldset-urban_description">
+<p>&nbsp;</p>
+<fieldset><legend><strong tal:content="context/getLicenceSubject">Subject</strong></legend>
+<span class="discreet" tal:content="structure context/Description">Description</span>
+</fieldset>
+
+ <table cellspacing=0 cellpadding=0 width=100%>
+ <tr>
+  <td valign="top" width=49%>
+   <fieldset><b><legend i18n:translate="applicants">Applicant(s)</legend></b>
+    <div metal:use-macro="here/urban_macros/macros/urbanApplicantsMacro" />
+   </fieldset>
+  </td>
+  <td width="1%"></td>
+  <td valign="top" width=50%>
+   <fieldset><strong><legend i18n:translate="legend_situation">Situation</legend></strong>
+   <div metal:use-macro="here/urban_macros/macros/urbanWorkLocation" />
+  </tr>
+ <tr>
+  <td valign="top" width=50%>
+   <fieldset><b><legend i18n:translate="legend_details">Details</legend></b>
+    <table cellpadding=0 cellspacing=0>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_reference">Reference</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('reference', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_referenceDGATLP">DGATLP reference</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('referenceDGATLP', mode='view')" /><span tal:condition="not: python: context.referenceDGATLP" class="discreet" i18n:translate="content_none">None</span></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="treating_agent">Treating agent</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanFolderManagerMacro" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_folderCategory">Folder category</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategory', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_workType">Work type</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('workType', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_missingParts">Missing parts</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('missingParts', mode='view')" /></td>
+     </tr>
+     <tr tal:condition="context/getMissingPartsDetails">
+      <td valign="top"><u><b><span i18n:translate="urban_label_missingPartsDetails">Missing parts details</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><tal:block replace="structure context/getMissingPartsDetails" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_annoncedDelay">Deadline delay</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('annoncedDelay', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_impactStudy">Impact study</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('impactStudy', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_usage">Usage</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('usage', mode='view')" /></td>
+     </tr>
+    </table>
+   </fieldset>
+  </td>
+  <td width="1%"></td>
+  <td valign="top" width=49%>
+   <fieldset><b><legend i18n:translate="urban_label_architects">Architect(s)</legend></b>
+    <div metal:use-macro="here/urban_macros/macros/urbanArchitectsMacro" />
+   </fieldset>
+   <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
+ <table cellspacing=0 cellpadding=0 width=100%>
+  <tr>
+   <td>
+   <div class="#" tal:attributes="class python: test(parcels, 'field', 'field warning')">
+    <div tal:condition="not: parcels" i18n:translate="warning_add_a_parcel">You must encode concerned parcel(s)
+    </div>
+    <div tal:define="tool python: getattr(context, 'portal_urban');
+                     topic python: getattr(tool.topics, 'searchportionsout');
+                     path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
+                     dummy python: context.setPathCritValue(path_crit, context.UID());
+                     showActions python: True;
+                     showedCols python: ('Title', 'Creator');">
+    <metal:listing use-macro="here/urban_macros/macros/listing" />
+    </div>
+     <form i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/checkPortionsOutSearch'" action="checkPortionsOutSearch" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('PortionOut')">
+      <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
+      <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+      <input type="submit" class="standalone" id="event" value="search_parcels" i18n:attributes="value" />
+     </form>
+   </div>
+  </td>
+ </tr>
+ </table>
+ </fieldset>
+  </td>
+ </tr>
+ </table>
+ </dd>
+ 
+<dt class="formTab" id="fieldsetlegend-urban_road" i18n:domain="plone" i18n:translate="label_schema_urban_road"><span>Road</span></dt>
+<dd id="fieldset-urban_road">
+<p>&nbsp;</p>
+<table>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_roadType">Road type</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('roadType', mode='view')" /></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_roadCoating">Road coating</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('roadCoating', mode='view')" /><span tal:condition="not: python: context.roadCoating " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_roadEquipments">Road equipments</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('roadEquipments', mode='view')" /><span tal:condition="not: python: context.roadEquipments " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /><span tal:condition="not: python: context.floodingLevel " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_pash">PASH</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('pash', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_roadAdaptation">Road adaptation</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('roadAdaptation', mode='view')" /></td>
+ </tr>
+</table>
+
+<dt class="formTab" id="fieldsetlegend-urban_location" i18n:domain="plone" i18n:translate="label_schema_urban_location"><span>Location</span></dt>
+<dd id="fieldset-urban_location" onmouseover="init()">
+<p>&nbsp;</p>
+<table>
+ <tr>
+  <td valign="top"><b><u><span i18n:translate="urban_label_folderZone">Folder zone</span> :</u></b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('folderZone', mode='view')" /></td>
+ </tr>
+ <tr>
+  <td valign="top"><b><u><span i18n:translate="urban_label_folderZoneDetails">Folder zone details</span> :</u></b></td>
+  <td width="2%"></td>
+  <td valign="top"><tal:block replace="structure context/getFolderZoneDetails" /><span tal:condition="not: python: context.folderZoneDetails" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td colspan=2>
+   <u><b><span i18n:translate="urban_label_isInSubdivision">In subdivision</span>?</b></u>
+   <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='view')" />
+   <tal:isInSubdivision condition="python: context.isInSubdivision" define="parcelling context/getParcellings">
+    <metal:myfield use-macro="python:here.widget('parcellings', mode='view')" />
+    <tal:block replace="structure context/getSubdivisionDetails" />
+   </tal:isInSubdivision>
+   </td>
+  </tr>
+ <tr>
+  <td colspan=2>
+   <u><b><span i18n:translate="urban_label_isInPCA">In Municpal Development Plan</span>?</b></u>
+   <metal:myfield use-macro="python:here.widget('isInPCA', mode='view')" />
+   <tal:isInPCA condition="python: context.isInPCA">
+    <metal:myfield use-macro="python:here.widget('pca', mode='view')" />
+   </tal:isInPCA>
+   </td>
+  </tr>
+  <tr>
+   <td valign="top"><u><b><span i18n:translate="urban_label_protectedBuilding">Protected building</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('protectedBuilding', mode='view')" /><span tal:condition="not: python: context.protectedBuilding" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
+  <tr>
+   <td valign="top"><u><b><span i18n:translate="urban_label_protectedBuildingDetails">Protected building details</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><tal:block replace="structure context/getProtectedBuildingDetails" /><span tal:condition="not: python: context.protectedBuildingDetails" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
+  <tr>
+   <td valign="top"><u><b><span i18n:translate="urban_label_SSC">SSC</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('SSC', mode='view')" /><span tal:condition="not: python: context.SSC" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
+  <tr>
+   <td valign="top"><u><b><span i18n:translate="urban_label_RCU">RCU</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('RCU', mode='view')" /><span tal:condition="not: python: context.RCU" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
+ </table>
+
+ <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
+ <table cellspacing=0 cellpadding=0 width=100%>
+  <tr>
+   <td>
+   <div class="#" tal:attributes="class python: test(parcels, 'field', 'field warning')">
+    <div tal:condition="not: parcels" i18n:translate="warning_add_a_parcel">You must encode concerned parcel(s)
+    </div>
+    <div tal:define="tool python: getattr(context, 'portal_urban');
+                     topic python: getattr(tool.topics, 'searchportionsout');
+                     path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
+                     dummy python: context.setPathCritValue(path_crit, context.UID());
+                     showActions python: True;
+                     showedCols python: ('Title', 'Creator');">
+    <metal:listing use-macro="here/urban_macros/macros/listing" />
+    </div>
+     <form i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/checkPortionsOutSearch'" action="checkPortionsOutSearch" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('PortionOut')">
+      <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
+      <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+      <input type="submit" class="standalone" id="event" value="search_parcels" i18n:attributes="value" />
+     </form>
+   </div>
+  </td>
+ </tr>
+ </table>
+ </fieldset>
+
+   <div tal:condition="not: parcels">
+    <p class="discreet" i18n:translate="cartography_map_descr">A map will me displayed when you will have defined concerned parcels</p>
+   </div>
+   <tal:block condition="parcels">
+    <form>
+     <input type="hidden" id="map_initialized" value="0" />
+    </form>
+   <p i18n:translate="cartography" class="discreet">Cartography</p>
+   <table border=0 width=100%>
+       <tr>
+           <td width=70%><div id="map" class="smallmap"></div></td>
+           <td width=30%><iframe name="prcinfosframe" src="" width=100% height=500 scrolling=auto frameborder=0 > </iframe></td>
+       </tr>
+   </table>
+   </tal:block>
+</dd>
+
+<dt class="formTab" id="fieldsetlegend-urban_investigation_and_advices" i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices"><span>Investigation and advices</span></dt>
+<dd id="fieldset-urban_investigation_and_advices">
+<p>&nbsp;</p>
+<table>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_derogation">Derogations</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('derogation', mode='view')" /><span tal:condition="not: python: context.derogation" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_derogationDetails">Derogations details</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><tal:block replace="structure context/getDerogationDetails" /><span tal:condition="not: python: context.derogationDetails" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_investigationArticles">Investigation articles</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('investigationArticles', mode='view')" /><span tal:condition="not: python: context.investigationArticles" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_investigationStart">from</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('investigationStart', mode='view')" /><span tal:condition="not: python: context.investigationStart" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_investigationEnd">to</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('investigationEnd', mode='view')" /><span tal:condition="not: python: context.investigationEnd" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_investigationDetails">Investigation details</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><tal:block replace="structure context/getInvestigationDetails" /><span tal:condition="not: python: context.investigationDetails" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('solicitOpinionsTo', mode='view')" /><span tal:condition="not: python: context.solicitOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+</table>
+</dd>
+
+<dt class="formTab" id="fieldsetlegend-urban_events" i18n:domain="plone" i18n:translate="label_schema_urban_events"><span>Events</span></dt>
+<dd id="fieldset-urban_events">
+<p>&nbsp;</p>
+<fieldset><strong><legend i18n:translate="folder_events">Folder events</legend></strong>
+ <table cellspacing=0 cellpadding=0 width=100%>
+ <tr>
+  <td>
+    <div tal:define="tool python: getattr(context, 'portal_urban');
+                     topic python: getattr(tool.topics, 'searchurbanevents');
+                     path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
+                     dummy python: context.setPathCritValue(path_crit, context.UID());
+                     showActions python: True;"
+         tal:condition="python: not context.portal_quickinstaller.isProductInstalled('PloneTask') or not context.portal_urban.getUsePloneTask()">
+     <metal:listing use-macro="here/urban_macros/macros/listing" />
+    </div>
+    <!-- Begin PloneTask integration -->
+    <tal:block define="tool python: getattr(context, 'portal_urban');
+                       topic python: getattr(tool.topics, 'searchurbanevents');
+                       path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
+                       dummy python: context.setPathCritValue(path_crit, context.UID());">
+    <metal:listing use-macro="here/urban_macros/macros/integratePloneTask" />
+    </tal:block>
+    <!-- End PloneTask integration -->
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <metal:events use-macro="here/urban_macros/macros/urbanEventsMacro" /> 
+  </td>
+ </tr>
+ </table>
+</fieldset>
+
+</dd>
+<div tal:replace="structure provider:plone.belowcontentbody" />
+</dl>
+</div>
+
+<div onmouseover="init()" tal:condition="not: useTabbing">
+
+<fieldset><legend><strong tal:content="context/getLicenceSubject">Subject</strong></legend>
+<span class="discreet" tal:content="structure context/Description">Description</span>
+</fieldset>
+
+ <table cellspacing=0 cellpadding=0 width=100%>
+ <tr>
+  <td valign="top" width=49%>
+   <fieldset><b><legend i18n:translate="applicants">Applicant(s)</legend></b>
+    <div metal:use-macro="here/urban_macros/macros/urbanApplicantsMacro" />
+   </fieldset>
+  </td>
+  <td width="1%"></td>
+  <td valign="top" width=50%>
+   <fieldset><strong><legend i18n:translate="legend_situation">Situation</legend></strong>
+   <div metal:use-macro="here/urban_macros/macros/urbanWorkLocation" />
+  </tr>
+ <tr>
+  <td valign="top" width=50%>
+   <fieldset><b><legend i18n:translate="details">Details</legend></b>
+    <table cellpadding=0 cellspacing=0>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_reference">Reference</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('reference', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_referenceDGATLP">DGATLP reference</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('referenceDGATLP', mode='view')" /><span tal:condition="not: python: context.referenceDGATLP" class="discreet" i18n:translate="content_none">None</span></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="treating_agent">Treating agent</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanFolderManagerMacro" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_folderCategory">Folder category</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategory', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_workType">Work type</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('workType', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_missingParts">Missing parts</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('missingParts', mode='view')" /></td>
+     </tr>
+     <tr tal:condition="context/getMissingPartsDetails">
+      <td valign="top"><u><b><span i18n:translate="urban_label_missingPartsDetails">Missing parts details</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><tal:block replace="structure context/getMissingPartsDetails" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_annoncedDelay">Deadline delay</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('annoncedDelay', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_impactStudy">Impact study</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('impactStudy', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_usage">Usage</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('usage', mode='view')" /></td>
+     </tr>
+    </table>
+   </fieldset>
+  </td>
+  <td width="1%"></td>
+  <td valign="top" width=49%>
+   <fieldset><b><legend i18n:translate="urban_label_architects">Architect(s)</legend></b>
+    <div metal:use-macro="here/urban_macros/macros/urbanArchitectsMacro" />
+   </fieldset>
+   <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
+ <table cellspacing=0 cellpadding=0 width=100%>
+  <tr>
+   <td>
+   <div class="#" tal:attributes="class python: test(parcels, 'field', 'field warning')">
+    <div tal:condition="not: parcels" i18n:translate="warning_add_a_parcel">You must encode concerned parcel(s)
+    </div>
+    <div tal:define="tool python: getattr(context, 'portal_urban');
+                     topic python: getattr(tool.topics, 'searchportionsout');
+                     path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
+                     dummy python: context.setPathCritValue(path_crit, context.UID());
+                     showActions python: True;
+                     showedCols python: ('Title', 'Creator');">
+    <metal:listing use-macro="here/urban_macros/macros/listing" />
+    </div>
+     <form i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/checkPortionsOutSearch'" action="checkPortionsOutSearch" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('PortionOut')">
+      <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
+      <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+      <input type="submit" class="standalone" id="event" value="search_parcels" i18n:attributes="value" />
+     </form>
+   </div>
+  </td>
+ </tr>
+ </table>
+ </fieldset>
+  </td>
+ </tr>
+ </table>
+ 
+<fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_road"></legend></strong>
+<table>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_roadType">Road type</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('roadType', mode='view')" /></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_roadCoating">Road coating</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('roadCoating', mode='view')" /><span tal:condition="not: python: context.roadCoating " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_roadEquipments">Road equipments</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('roadEquipments', mode='view')" /><span tal:condition="not: python: context.roadEquipments " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /><span tal:condition="not: python: context.floodingLevel " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_pash">PASH</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('pash', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_roadAdaptation">Road adaptation</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('roadAdaptation', mode='view')" /></td>
+ </tr>
+</table>
+</fieldset>
+
+<fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_location"></legend></strong>
+<table>
+ <tr>
+  <td valign="top"><b><u><span i18n:translate="urban_label_folderZone">Folder zone</span> :</u></b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('folderZone', mode='view')" /></td>
+ </tr>
+ <tr>
+  <td valign="top"><b><u><span i18n:translate="urban_label_folderZoneDetails">Folder zone details</span> :</u></b></td>
+  <td width="2%"></td>
+  <td valign="top"><tal:block replace="structure context/getFolderZoneDetails" /><span tal:condition="not: python: context.folderZoneDetails" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td colspan=2>
+   <u><b><span i18n:translate="urban_label_isInSubdivision">In subdivision</span>?</b></u>
+   <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='view')" />
+   <tal:isInSubdivision condition="python: context.isInSubdivision" define="parcelling context/getParcellings">
+    <metal:myfield use-macro="python:here.widget('parcellings', mode='view')" />
+    <tal:block replace="structure context/getSubdivisionDetails" />
+   </tal:isInSubdivision>
+   </td>
+  </tr>
+ <tr>
+  <td colspan=2>
+   <u><b><span i18n:translate="urban_label_isInPCA">In Municpal Development Plan</span>?</b></u>
+   <metal:myfield use-macro="python:here.widget('isInPCA', mode='view')" />
+   <tal:isInPCA condition="python: context.isInPCA">
+    <metal:myfield use-macro="python:here.widget('pca', mode='view')" />
+   </tal:isInPCA>
+   </td>
+  </tr>
+  <tr>
+   <td valign="top"><u><b><span i18n:translate="urban_label_protectedBuilding">Protected building</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('protectedBuilding', mode='view')" /><span tal:condition="not: python: context.protectedBuilding" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
+  <tr>
+   <td valign="top"><u><b><span i18n:translate="urban_label_protectedBuildingDetails">Protected building details</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><tal:block replace="structure context/getProtectedBuildingDetails" /><span tal:condition="not: python: context.protectedBuildingDetails" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
+  <tr>
+   <td valign="top"><u><b><span i18n:translate="urban_label_SSC">SSC</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('SSC', mode='view')" /><span tal:condition="not: python: context.SSC" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
+  <tr>
+   <td valign="top"><u><b><span i18n:translate="urban_label_RCU">RCU</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('RCU', mode='view')" /><span tal:condition="not: python: context.RCU" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
+ </table>
+ <tal:block condition="parcels">
+ <form>
+  <input type="hidden" id="map_initialized" value="0" />
+ </form>
+ <p>&nbsp;</p>
+ <p i18n:translate="cartography" class="discreet">Cartography</p>
+ <table border=0 width=100%>
+    <tr>
+        <td width=70%><div id="map" class="smallmap"></div></td>
+        <td width=30%><iframe name="prcinfosframe" src="" width=100% height=500 scrolling=auto frameborder=0 > </iframe></td>
+    </tr>
+ </table>
+ </tal:block>
+</fieldset>
+
+<fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices"></legend></strong>
+<table>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_derogation">Derogations</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('derogation', mode='view')" /><span tal:condition="not: python: context.derogation" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_derogationDetails">Derogations details</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><tal:block replace="structure context/getDerogationDetails" /><span tal:condition="not: python: context.derogationDetails" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_investigationArticles">Investigation articles</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('investigationArticles', mode='view')" /><span tal:condition="not: python: context.investigationArticles" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_investigationStart">from</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('investigationStart', mode='view')" /><span tal:condition="not: python: context.investigationStart" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_investigationEnd">to</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('investigationEnd', mode='view')" /><span tal:condition="not: python: context.investigationEnd" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_investigationDetails">Investigation details</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><tal:block replace="structure context/getInvestigationDetails" /><span tal:condition="not: python: context.investigationDetails" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td><u><b><span i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</span> :</b></u></td>
+  <td width="2%"></td>
+  <td><metal:myfield use-macro="python:here.widget('solicitOpinionsTo', mode='view')" /><span tal:condition="not: python: context.solicitOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+</table>
+</fieldset>
+
+</div>
+
+</metal:body>
+</metal:main_macro>
+</metal:main>
+</body>
+</html>

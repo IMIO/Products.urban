@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<object name="portal_workflow" meta_type="Plone Workflow Tool">
+ <object name="activation_workflow" meta_type="Workflow"/>
+ <object name="urban_licence_workflow" meta_type="Workflow"/>
+ <object name="urbandivision_workflow" meta_type="Workflow"/>
+ <object name="urbanevent_workflow" meta_type="Workflow"/>
+<!-- ##code-section workflowobjects -->
+<!-- ##/code-section workflowobjects -->
+ <bindings>
+  <type type_id="Architect">
+   <bound-workflow workflow_id="activation_workflow" />
+  </type>
+  <type type_id="BuildLicence">
+   <bound-workflow workflow_id="urban_licence_workflow" />
+  </type>
+  <type type_id="Declaration">
+   <bound-workflow workflow_id="urban_licence_workflow" />
+  </type>
+  <type type_id="Division">
+   <bound-workflow workflow_id="urbandivision_workflow" />
+  </type>
+  <type type_id="Dummy">
+   <bound-workflow workflow_id="activation_workflow" />
+  </type>
+  <type type_id="EnvironmentalDeclaration">
+   <bound-workflow workflow_id="urban_licence_workflow" />
+  </type>
+  <type type_id="FolderManager">
+   <bound-workflow workflow_id="activation_workflow" />
+  </type>
+  <type type_id="GenericLicence">
+   <bound-workflow workflow_id="urban_licence_workflow" />
+  </type>
+  <type type_id="Geometrician">
+   <bound-workflow workflow_id="activation_workflow" />
+  </type>
+  <type type_id="Layer">
+   <bound-workflow workflow_id="activation_workflow" />
+  </type>
+  <type type_id="ParcelOutLicence">
+   <bound-workflow workflow_id="urban_licence_workflow" />
+  </type>
+  <type type_id="UrbanCertificateBase">
+   <bound-workflow workflow_id="urban_licence_workflow" />
+  </type>
+  <type type_id="UrbanCertificateTwo">
+   <bound-workflow workflow_id="urban_licence_workflow" />
+  </type>
+  <type type_id="UrbanEvent">
+   <bound-workflow workflow_id="urbanevent_workflow" />
+  </type>
+  <type type_id="UrbanEventType">
+   <bound-workflow workflow_id="activation_workflow" />
+  </type>
+  <type type_id="UrbanVocabularyTerm">
+   <bound-workflow workflow_id="activation_workflow" />
+  </type>
+<!-- ##code-section workflowbindings -->
+<type type_id="Applicant">
+  <bound-workflow workflow_id="" />
+</type>
+<type type_id="Proprietary">
+  <bound-workflow workflow_id="" />
+</type>
+<type type_id="Contact">
+  <bound-workflow workflow_id="" />
+</type>
+<type type_id="Layer">
+  <bound-workflow workflow_id="" />
+</type>
+<type type_id="PortionOut">
+  <bound-workflow workflow_id="" />
+</type>
+<type type_id="Recipient">
+  <bound-workflow workflow_id="" />
+</type>
+<type type_id="RecipientCadastre">
+  <bound-workflow workflow_id="" />
+</type>
+<type type_id="Street">
+  <bound-workflow workflow_id="activation_workflow" />
+</type>
+<type type_id="Notary">
+  <bound-workflow workflow_id="activation_workflow" />
+</type>
+<type type_id="NotaryLetter">
+  <bound-workflow workflow_id="urban_licence_workflow" />
+</type>
+<type type_id="UrbanCertificateOne">
+  <bound-workflow workflow_id="urban_licence_workflow" />
+</type>
+<type type_id="WorkLocation">
+  <bound-workflow workflow_id="" />
+</type>
+<!-- ##/code-section workflowbindings -->
+ </bindings>
+</object>

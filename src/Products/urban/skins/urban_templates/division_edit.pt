@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      i18n:domain="urban">
+
+<body>
+
+<div metal:define-macro="body" >
+
+<metal:base_body use-macro="base_macros/body">
+
+<div metal:fill-slot="widgets"
+           tal:define="global body_onload string: init();
+                       member python: context.portal_membership.getAuthenticatedMember();
+                       border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
+                       dummy python:request.set(border, 1)">
+            <metal:myfield use-macro="python:here.widget('notaryContact', mode='edit')" />           
+            <metal:myfield use-macro="python:here.widget('divisionSubject', mode='edit')" />
+            <metal:myfield use-macro="python:here.widget('comments', mode='edit')" />
+            <metal:myfield use-macro="python:here.widget('foldermanagers', mode='edit')" />
+            <metal:myfield use-macro="python:here.widget('reference', mode='edit')" />
+
+            <fieldset><strong><legend i18n:translate="legend_situation">Situation</legend></strong>
+             <table cellspacing=0 cellpadding=0 width=100%>
+              <tr>
+               <td colspan=2>
+                <div metal:use-macro="here/urban_macros/macros/urbanWorkLocationEdit" />
+               </td>
+              </tr>
+             </table>
+             <br />
+             <metal:myfield use-macro="python:here.widget('folderZone', mode='edit')" />
+            </fieldset>
+
+</div>
+</metal:base_body>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

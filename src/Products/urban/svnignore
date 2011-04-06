@@ -1,0 +1,6 @@
+*.py~
+*.pyc
+*.pt~
+*.bak.*
+*.zargo~
+*.txt~

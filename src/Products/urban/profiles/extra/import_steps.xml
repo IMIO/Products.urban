@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<import-steps>
+  <import-step id="urban-extra"
+               version="20110113-01"
+               handler="Products.urban.setuphandlers.setupExtra"
+               title="urban : extra import steps">
+    <dependency step="skins" />
+    Extra import steps executed after the default profile.
+  </import-step>
+</import-steps>

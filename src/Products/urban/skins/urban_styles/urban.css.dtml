@@ -1,0 +1,90 @@
+/*
+** urban style sheet
+*/
+
+/* <dtml-with base_properties> (do not remove this :) */
+/* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
+
+/* this hide the input appearance while editing the street name */
+#workLocationStreet_label {
+border: 0;
+background: transparent;
+cursor: default;
+}
+
+div.warning {
+/* Class for error indication in forms */
+background-color: #fd7;
+border: 1px solid #d80;
+padding: 0.5em;
+margin: 0 0 1em 0;
+}
+
+/* Colors on states */
+.state-in_progress {
+ color: #FFA500 !important;
+}
+
+.state-closed {
+color: grey !important;
+}
+
+.state-enabled {
+color: green !important;
+}
+
+.state-disabled {
+color: red !important;
+}
+
+.state-accepted {
+color: green !important;
+}
+
+.state-refused {
+color: red !important;
+}
+
+
+/* table styles */
+/* we want a table with no styles at all */
+.no-style-table {
+border: 0 !important;
+padding: 0 !important;
+margin: 0 !important;
+}
+
+.no-style-table td {
+border: 0 !important;
+padding-left: 0 !important;
+margin: 0 !important;
+}
+
+.imageInput {
+    border-width: 0px;
+    background: none;
+}
+
+.noPadding {
+    padding-right: 0em !important;
+    padding-left: 0em !important;
+    padding-top: 0em !important;
+    padding-bottom: 0em !important;
+}
+
+.ptButton {
+    background: &dtml-globalBackgroundColor; url(&dtml-portal_url;/linkOpaque.gif) 5px 1px no-repeat;
+    cursor: pointer;
+    font-size: &dtml-fontSmallSize;;
+    padding: 1px 1px 1px 12px;
+    text-transform: &dtml-textTransform;;
+    /* overflow: visible; IE produces ugly results with this */
+}
+
+legend {
+  background-color: transparent;
+}
+
+
+
+/* </dtml-with> */

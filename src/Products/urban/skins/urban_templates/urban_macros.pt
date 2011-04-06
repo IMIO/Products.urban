@@ -1,0 +1,425 @@
+<div metal:define-macro="urbanFolderManagerMacro" i18n:domain="urban" tal:define="folderManagers here/getFoldermanagers">
+ <tal:loop repeat="folderManager folderManagers" tal:condition="folderManagers">
+   <span tal:content="folderManager/Title">Treating agent name</span><br />
+ </tal:loop>
+ <p tal:condition="not: folderManagers" class="discreet" i18n:translate="no_foldermanager_defined">No folder manager defined</p>
+</div>
+
+<div metal:define-macro="urbanArchitectsMacro" i18n:domain="urban" tal:define="architects here/getArchitects">
+<tal:loop repeat="architect architects" tal:condition="architects">
+<div class="#" tal:define="oddrow repeat/architect/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
+ <b><span tal:replace="python: context.displayValue(architect.listPersonTitles(), architect.getPersonTitle())" />
+ <span tal:content="python: architect.getName1()" />
+ <span tal:content="python: architect.getName2()" /></b><br />
+ <span tal:content="python: architect.getStreet()+' '+architect.getNumber()" /><br />
+ <span tal:content="python: architect.getZipcode()+' '+architect.getCity()" /><br />
+</div>
+</tal:loop>
+</div>
+
+<div metal:define-macro="urbanGeometriciansMacro" i18n:domain="urban" tal:define="geometricians here/getGeometricians">
+<tal:loop repeat="geometrician geometricians" tal:condition="geometricians">
+<div class="#" tal:define="oddrow repeat/geometrician/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
+ <b><span tal:replace="python: context.displayValue(geometrician.listPersonTitles(), geometrician.getPersonTitle())" />
+ <span tal:content="python: geometrician.getName1()" />
+ <span tal:content="python: geometrician.getName2()" /></b><br />
+ <span tal:content="python: geometrician.getStreet()+' '+geometrician.getNumber()" /><br />
+ <span tal:content="python: geometrician.getZipcode()+' '+geometrician.getCity()" /><br />
+</div>
+</tal:loop>
+</div>
+
+<div metal:define-macro="urbanNotariesMacro" i18n:domain="urban" tal:define="notaries here/getNotaryContact">
+<tal:loop repeat="notary notaries">
+<div class="#" tal:define="oddrow repeat/notary/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
+ <b><span tal:replace="python: context.displayValue(notary.listPersonTitles(), notary.getPersonTitle())" />
+ <span tal:content="python: notary.getName1()" />
+ <span tal:content="python: notary.getName2()" /></b><br />
+ <span tal:content="python: notary.getStreet()+' '+notary.getNumber()" /><br />
+ <span tal:content="python: notary.getZipcode()+' '+notary.getCity()" /><br />
+</div>
+</tal:loop>
+</div>
+
+<metal:proprietaries define-macro="urbanProprietariesMacro" i18n:domain="urban">
+ <div class="#" tal:attributes="class python: test(proprietaries, 'field', 'field warning')">
+ <div tal:condition="not: proprietaries" i18n:translate="warning_add_a_proprietary">
+  You must encode proprietary(ies)
+ </div>
+ <table cellspacing=0 cellpadding=0 border=0 width=100% tal:condition="proprietaries">
+ <tal:block repeat="proprietaryObj proprietaries">
+  <tr class="#" tal:define="oddrow repeat/proprietaryObj/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
+   <td>
+    <tal:block define="thisObject python: proprietaryObj; needExternalEdition python:False">
+     <span metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
+    </tal:block>
+    <b>
+     <span tal:replace="python: context.displayValue(proprietaryObj.listPersonTitles(), proprietaryObj.getPersonTitle())" />
+     <span tal:replace="proprietaryObj/getName1|nothing" />
+     <span tal:replace="proprietaryObj/getName2|nothing" /><br />
+    </b>
+    <span tal:replace="python: proprietaryObj.getStreet()+' '+proprietaryObj.getNumber()" /><br />
+    <span tal:replace="python: proprietaryObj.getZipcode()+' '+proprietaryObj.getCity()" />
+   </td>
+  </tr>
+ </tal:block>
+ </table>
+ <br />
+ <form i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('Proprietary')">
+ <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
+ <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+ <input type="submit" class="standalone" id="event" value="add_a_proprietary" i18n:attributes="value" />
+ </form>
+</div>
+</metal:proprietaries>
+
+<metal:applicants define-macro="urbanApplicantsMacro" i18n:domain="urban">
+ <div class="#" tal:attributes="class python: test(applicants, 'field', 'field warning')">
+ <div tal:condition="not: applicants" i18n:translate="warning_add_an_applicant">
+  You must encode applicant(s)
+ </div>
+ <table cellspacing=0 cellpadding=0 border=0 width=100% tal:condition="applicants">
+ <tal:block repeat="applicantObj applicants">
+  <tr class="#" tal:define="oddrow repeat/applicantObj/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
+   <td>
+    <tal:block define="thisObject python: applicantObj; needExternalEdition python:False">
+     <span metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
+    </tal:block>
+    <b>
+     <span tal:replace="python: context.displayValue(applicantObj.listPersonTitles(), applicantObj.getPersonTitle())" />
+     <span tal:replace="applicantObj/getName1|nothing" />
+     <span tal:replace="applicantObj/getName2|nothing" />
+     <tal:block condition="applicantObj/getName1"><br /></tal:block>
+     <span tal:condition="applicantObj/getSociety" tal:replace="applicantObj/getSociety|nothing" />
+     <tal:block condition="applicantObj/getSociety"><br /></tal:block>
+    </b>
+    <span tal:replace="python: applicantObj.getStreet()+' '+applicantObj.getNumber()" /><br />
+    <span tal:replace="python: applicantObj.getZipcode()+' '+applicantObj.getCity()" />
+   </td>
+  </tr>
+ </tal:block>
+ </table>
+ <br />
+ <form i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('Applicant')">
+ <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
+ <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+ <input type="submit" class="standalone" id="event" value="add_an_applicant" i18n:attributes="value" />
+ </form>
+</div>
+</metal:applicants>
+
+<div metal:define-macro="urbanEventsMacro" i18n:domain="urban" tal:define="eventTypes python:context.portal_urban.listEventTypes(context, urbanConfigId=context.portal_type.lower())">
+<form action="createUrbanEvent" method="POST" tal:condition="eventTypes">
+ <input type='hidden' name="urban_folder_id" tal:attributes="value here/getId" value=''>
+ <select name="urban_event_type_uid">
+  <tal:loopEventType repeat="eventType eventTypes">
+   <option tal:attributes="value eventType/UID" value='' tal:content="eventType/Title">
+   </option>
+  </tal:loopEventType>
+ </select>
+ <input class="standalone" type="submit" i18n:attributes="value" value="Add an event">
+</form>
+<p class="discreet" tal:condition="not: eventTypes" i18n:translate="urban_no_eventtype_defined">No event type is defined in the configuration for this element</p>
+</div>
+
+<div metal:define-macro="urbanPortalMessageMacro" i18n:domain="urban">
+<tal:portalMessage define="messages context/constructPortalMessage">
+<dl class="portalMessage warning" tal:repeat="message messages">
+    <dt i18n:domain="plone" i18n:translate="">
+        Warning
+    </dt>
+    <dd tal:content="message"
+        i18n:translate="">
+        The status message.
+    </dd>
+</dl>
+</tal:portalMessage>
+</div>
+
+<!-- Requires defined element "thisObject" as an object -->
+<div metal:define-macro="urbanActionsMacro" i18n:domain="urban">
+
+  <!-- actions panel -->
+
+  <table class="no-style-table" align="right">
+    <tr tal:define="wtool context/portal_workflow;
+                    ext_editor context/portal_properties/site_properties/ext_editor">
+      <!-- Available transitions -->
+      <td tal:repeat="transition python: wtool.getTransitionsFor(thisObject)" class="noPadding" align="left">
+        <form tal:attributes="action python: thisObject.absolute_url() + '/content_status_modify'"
+              tal:define="imageName python: transition['title'] + '.png'"
+              i18n:domain="plone">
+          <input type="hidden" name="workflow_action" tal:attributes="value python: transition['id']" />
+          <input type="hidden" name="came_from"
+                 tal:attributes="value python: context.REQUEST.get('ACTUAL_URL') + '?' + context.REQUEST.get('QUERY_STRING')" />
+          <!-- Icon -->
+          <input tal:condition="python: hasattr(thisObject, imageName)" type="image" tal:attributes="src string:${portal_url}/${imageName};
+                                              title python: transition['id']"
+                 i18n:attributes="title" class="imageInput"/>
+          <!-- Button -->
+          <input tal:condition="python: not hasattr(thisObject, imageName)" class="ptButton"
+                 type="submit" tal:attributes="value python: transition['id'];"
+                 i18n:attributes="value"/>
+        </form>
+      </td>
+
+      <!-- Edit action -->
+      <td tal:condition="python: member.has_permission('Modify portal content', thisObject)"
+          class="noPadding" tal:define="suffix python: test(needExternalEdition and ext_editor,  '/external_edit', '/edit')">
+        <a tal:attributes="href python: thisObject.absolute_url() + suffix">
+          <img src="#" tal:attributes="src string:${portal_url}/edit.gif" title="label_edit" i18n:attributes="title" />
+        </a>
+      </td>
+
+      <!-- Own management of the "delete" action -->
+      <td tal:condition="python: member.has_permission('Delete objects', thisObject)" class="noPadding">
+        <a tal:attributes="href python: thisObject.absolute_url() + '/delete_confirmation'">
+            <!-- Icon -->
+            <img src="#" tal:attributes="src string:${portal_url}/delete_icon.gif" i18n:attributes="title" title="label_remove"
+                 onClick="javascript:confirmDeleteObject(this)" style="cursor:pointer"/>
+        </a>
+      </td>
+  </tr>
+  </table>
+</div>
+
+<!-- This macro need to receive a topic -->
+<!--We can receive parameters here :
+boolean showActions specify if we show the actions column
+list showedCols speicy a list of indexes we want to display if these indexes have been defined in the topic/customViewFields-->
+<div metal:define-macro="listing" i18n:domain="plone">
+<tal:topiccontents define="topicContents python: topic.queryCatalog(batch=True);
+                           batch topicContents;
+                           showActions showActions|nothing;
+                           showedCols showedCols|topic/getCustomViewFields;
+                           isALot isALot|nothing;
+                           isAnEquipment isAnEquipment|nothing;">
+
+    <tal:listing condition="topicContents">
+    <a style='text-align: right' href="#"
+        tal:condition="nocall: here/asPDF|nothing"
+        tal:attributes="href string:${here_url}/asPDF/atct_topic_pdf_template/atct_topic_pdf"
+        i18n:translate="label_download_as_pdf"
+        i18n:domain="atcontenttypes">
+        Download PDF
+    </a>
+
+    <tal:default condition="not:topic/getCustomView|nothing"
+                    define="folderContents topicContents">
+        <metal:listing metal:use-macro="here/folder_listing/macros/listing">
+            <metal:empty metal:fill-slot="no_items_in_listing"></metal:empty>
+        </metal:listing>
+
+    </tal:default>
+    <tal:custom condition="topic/getCustomView|nothing"
+                define="vocab python:topic.listMetaDataFields(False)">
+
+        <table class="listing"
+                summary="Content listing"
+                cellpadding="0" cellspacing="0" width="100%"
+                i18n:attributes="summary summary_content_listing;">
+                <thead>
+                <tr>
+                    <tal:block repeat="field topic/getCustomViewFields">
+                    <th tal:condition="python: field in showedCols"
+                        tal:content="python:vocab.getValue(field, field)"
+                        i18n:translate=""/>
+                    </tal:block>
+                    <th tal:condition="isALot" i18n:domain="urban" i18n:translate="parcels">
+                      Parcels
+                    </th>
+                    <th tal:condition="isAnEquipment" i18n:domain="urban" i18n:translate="launchdate">
+                      Launch date
+                    </th>
+                    <th tal:condition="showActions" i18n:domain="urban" i18n:translate="actions">
+                      Actions
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tal:brain tal:repeat="obj topicContents">
+                <tr tal:define="oddrow repeat/obj/odd;"
+                    tal:attributes="class python:test(oddrow, 'even', 'odd')">
+                    <tal:fields repeat="field topic/getCustomViewFields"
+                                define="url obj/getURL;
+                                        obj_type obj/portal_type;
+                                        obj_typeinfo python: here.portal_types.getTypeInfo(obj_type);
+                                        icon python:portal_url+'/'+ obj_typeinfo.getIcon();
+                                        obj_wf_state obj/review_state|python: wtool.getInfoFor(obj, 'review_state', '');
+                                        obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);
+                                        title_or_id obj/pretty_title_or_id">
+                    <tal:block condition="python: field in showedCols" define="value python: getattr(obj, field, None)">
+                        <td tal:condition="python: field not in ['Title', 'Creator',]"
+                            tal:content="python:topic.formatCatalogMetadata(value)"
+                            i18n:translate=""/>
+                        <td tal:condition="python: field == 'Creator'">
+                         <span tal:content="python: context.portal_membership.getMemberInfo(value)['fullname']">Creator fullname</span>
+                        </td>
+
+                        <td tal:condition="python: field == 'Title'">
+                            <span tal:define="global url python: test(obj.getObject().aq_parent.meta_type == 'UrbanEvent' and obj.portal_properties.site_properties.ext_editor, url + '/external_edit', url)" />
+
+                            <a href="#" tal:attributes="href url">
+                                <img src="#"
+                                        height="16"
+                                        width="16"
+                                        tal:attributes="src icon;
+                                                        alt obj/Type|obj_type"/>
+                            </a>
+
+                            <a href="#" tal:condition="python: obj.portal_type not in ['Link', 'Image']"
+                                        tal:attributes="href url;
+                                                        class obj_wf_state_class"
+                                        tal:content="title_or_id" />
+
+                            <a href="#" tal:condition="python: obj.portal_type == 'Image'"
+                                        tal:attributes="href string:${url}/view;
+                                                        class obj_wf_state_class"
+                                        tal:content="title_or_id" />
+
+                            <a href="#"
+                                tal:condition="python: obj.portal_type == 'Link'"
+                                tal:attributes="href obj/getRemoteUrl;
+                                                class obj_wf_state_class"
+                                class="link-plain"
+                                tal:content="title_or_id" />
+                            <tal:block condition="python: obj.portal_type == 'UrbanEvent'" define="object obj/getObject" repeat="doc object/getDocuments">
+                             <br /><span class="discreet" style="margin-left:20px" tal:content="doc/Title">Document</span>
+                            </tal:block>
+                        </td>
+                    </tal:block>
+                    </tal:fields>
+                <td tal:condition="isALot">
+                    <tal:block repeat="parcel python: obj.getObject().objectValues('PortionOut')">
+                        <span tal:content="parcel/Title" /><br>
+                    </tal:block>
+                </td>
+                <td tal:condition="isAnEquipment">
+                    <span tal:content="python: obj.getObject().getLaunchDate()" />
+                </td>
+                <td tal:condition="showActions" tal:define="thisObject python: obj.getObject(); needExternalEdition python: test(obj.getObject().aq_parent.meta_type == 'UrbanEvent' and obj.portal_properties.site_properties.ext_editor, True, False)">
+                 <div metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
+                </td>
+                </tr>
+                </tal:brain>
+                </tbody>
+        </table>
+    </tal:custom>
+
+    </tal:listing>
+
+    <p class="discreet"
+        tal:condition="python: not topicContents and topic.listCriteria()"
+        i18n:domain="urban"
+        i18n:translate="urban_no_event_added">
+        There are currently no event for this element.
+    </p>
+
+    <p class="discreet"
+        tal:condition="not: topic/listCriteria"
+        i18n:domain="atcontenttypes"
+        i18n:translate="description_no_criteria_in_topic">
+        There are currently no criteria on which to search.
+        Please add them using the 'criteria' tab.
+    </p>
+
+    <!-- Navigation -->
+    <div metal:use-macro="here/batch_macros/macros/navigation" />
+
+</tal:topiccontents>
+</div>
+
+<div metal:define-macro="urbanWorkLocation" i18n:domain="urban" tal:define="primary context/getPrimaryWorkLocation">
+ <label i18n:translate="urban_label_workLocation">Work location</label> :
+ <table cellspacing=0 cellpadding=0 width="400">
+  <tr tal:condition="primary">
+   <td>
+    <span tal:content="primary/Title|nothing">Primary workLocation street</span>
+   </td>
+   <td>
+    <tal:block define="thisObject python: primary; needExternalEdition python:False">
+     <span metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
+    </tal:block>
+   </td>
+  </tr>
+  <tal:loop_on_suppl repeat="suppl context/getSupplementaryWorkLocations">
+  <tr class="#" tal:define="oddrow repeat/suppl/odd;" tal:attributes="class python: oddrow and 'odd' or 'even'">
+   <td>
+    <span tal:content="suppl/Title">Supplementary workLocation street</span>
+   </td>
+   <td align="left">
+    <tal:block define="thisObject python: suppl; needExternalEdition python:False">
+     <span metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
+    </tal:block>
+   </td>
+  </tr>
+  </tal:loop_on_suppl>
+ </table>
+ <br />
+ <tal:add_supplementary_street condition="primary">
+  <form i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('WorkLocation')">
+   <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
+   <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+   <input type="submit" class="standalone" id="add_a_worklocation" value="add_WorkLocation" i18n:attributes="value" />
+  </form>
+  <br />
+ </tal:add_supplementary_street>
+</div>
+
+<div class="field" metal:define-macro="urbanWorkLocationEdit" i18n:domain="urban" tal:define="primary context/getPrimaryWorkLocation">
+ <label i18n:translate="urban_label_workLocation">Work location</label>
+ <table cellspacing=0 cellpadding=0 width=600>
+    <tr>
+      <td>
+      <label i18n:translate="urban_label_street">Street</label>
+      <input tal:condition="primary" tal:attributes="value python: primary.getStreet().Title() or '';" type="text" disabled="disabled" readonly="readonly" id="workLocationStreet_label" value="" size="40">
+      <input tal:condition="not: primary" type="text" disable="disabled" readonly="readonly" id="workLocationStreet_label" value="" size="40">
+      <input tal:condition="primary" tal:attributes="originalvalue python: primary.getStreet().UID() or nothing; value python: primary.getStreet().UID() or nothing" type="hidden" id="workLocationStreet" name="workLocationStreet" value="" originalvalue="">
+      <input tal:condition="not: primary" type="hidden" id="workLocationStreet" name="workLocationStreet" value="" originalvalue="">
+      <div>
+       <input value="Add" i18n:domain="atreferencebrowserwidget" i18n:attributes="value label_add" type="button" onclick="" value="Add" class="searchButton" name="workLocationStreet"
+              tal:attributes="onclick python: 'javascript:referencebrowser_openBrowser(\'' + context.portal_url.getPortalObject().absolute_url() + '/portal_urban/streets\',\'workLocationStreet\', \'\', \'street\')';">
+       <input type="button" onclick="javascript:referencebrowser_removeReference('workLocationStreet', 0)" i18n:attributes="value" value="Remove selected street" class="destructive">
+      </div>
+      </td>
+      <td valign="top">
+      <label i18n:translate="urban_label_number">Number</label>
+      <input tal:attributes="value primary/getNumber|nothing" type="text" name="workLocationNumber" value="" />
+      </td>
+    </tr>
+</table>
+</div>
+
+<div metal:define-macro="integratePloneTask" i18n:domain="urban">
+<!-- Begin PloneTask integration -->
+<tal:block define="tasks python: topic.queryCatalog(batch=True);
+                   batch tasks;"
+           condition="python: context.portal_quickinstaller.isProductInstalled('PloneTask') and context.portal_urban.getUsePloneTask()">
+<!-- div metal:use-macro="here/task_macros/macros/taskList" / -->
+<div tal:content="structure python: context.portal_plonetask.getGanttChart(tasks)" />
+<p class="discreet"
+    tal:condition="python: not tasks"
+    i18n:domain="urban"
+    i18n:translate="urban_no_event_added">
+    There are currently no event for this element.
+</p>
+    <!-- Navigation -->
+    <div metal:use-macro="here/batch_macros/macros/navigation" />
+<fieldset><strong><legend i18n:translate="legend">Legend</legend></strong>
+<table cellspacing=0 cellpadding=0>
+<tr>
+ <td><span style="background: green; color: white;" i18n:translate="tasks_in_progress">Tasks in progress</span></td>
+ <td width=10px></td>
+ <td><span style="background: orange; color: white;" i18n:translate="to_watch_tasks">Tasks to watch (75% of the given delay is exceeded)</span></td>
+ <td width=10px></td>
+ <td><span style="background: red; color: white;" i18n:translate="late_tasks">Late tasks</span></td>
+ <td width=10px></td>
+ <td><span style="background: grey; color: white;" i18n:translate="closed_tasks">Closed tasks</span></td>
+ <td width=10px></td>
+ <td><img src="accept.png"> <span i18n:translate="effective_closing_date">Effective closing date</span></td>
+</tr>
+</table>
+</fieldset>
+</tal:block>
+<!-- End PloneTask integration -->
+</div>

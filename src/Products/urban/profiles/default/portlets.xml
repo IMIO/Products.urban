@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<portlets xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          i18n:domain="urban">
+    <assignment name="portlet_urban"
+                category="context"
+                key="/"
+                manager="plone.leftcolumn"
+                type="portlets.Classic" >
+           <property name="macro">portlet</property>
+           <property name="template">portlet_urban</property>
+    </assignment>
+</portlets>

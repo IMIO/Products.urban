@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<import-steps>
+
+ <import-step 
+    id="urban-Hide-Tools-From-Navigation" 
+    handler="Products.urban.setuphandlers.setupHideToolsFromNavigation"
+    title="Hide Custom tools from Navigation for urban"
+    version="2011-04-03T17:13:03.373583">
+   <dependency step="urban-QI-dependencies"/>
+   Hides custom tools from navigation tree for urban
+ </import-step>
+
+ 
+
+
+ <import-step 
+    id="urban-Update-RoleMappings" 
+    handler="Products.urban.setuphandlers.updateRoleMappings"
+    title="Update Workflow role mappings for urban"
+    version="2011-04-03T17:13:03.373583">
+   <dependency step="urban-QI-dependencies"/>
+   updates the workflow role mappings for urban
+ </import-step>
+
+ <import-step 
+    id="urban-postInstall" 
+    handler="Products.urban.setuphandlers.postInstall"
+    title="manual coded post-install for urban"
+    version="2011-04-03T17:13:03.373583">
+   <dependency step="urban-QI-dependencies"/>
+   manual coded post-install for urban
+ </import-step>
+
+<!-- ##code-section ADDITIONALSTEPS -->
+<!--<import-step
+            id="urban-addUrbanGroups"
+            handler="Products.urban.setuphandlers.addUrbanGroups"
+            title="Add usefull groups for urban"
+            version="2008-10-15T12:00:00.00000">
+  <dependency step="urban-QI-dependencies"/>
+  Add usefull groups for urban
+</import-step>
+
+<import-step
+            id="urban-setDefaultApplicationSecurity"
+            handler="Products.urban.setuphandlers.setDefaultApplicationSecurity"
+            title="Set default application security"
+            version="2008-10-15T12:00:00.00000">
+  <dependency step="urban-QI-dependencies"/>
+  Set default application security
+</import-step>
+
+<import-step
+            id="urban-addBuildLicenceTopics"
+            handler="Products.urban.setuphandlers.addBuildLicenceTopics"
+            title="Add topics in the 'buildlicence' urbanConfig"
+            version="2008-10-15T12:00:00.00000">
+    <dependency step="urban-postInstall"/>
+  Add topics in the 'buildlicence' urbanConfig
+</import-step>
+
+<import-step
+            id="urban-addApplicationFolders"
+            handler="Products.urban.setuphandlers.addApplicationFolders"
+            title="Add specific folders for the application"
+            version="2008-10-15T12:00:00.00000">
+  <dependency step="urban-QI-dependencies"/>
+  Add specific folders for the application
+</import-step>
+
+<import-step
+            id="urban-adaptDefaultPortal"
+            handler="Products.urban.setuphandlers.adaptDefaultPortal"
+            title="Adapt the default portal for the application"
+            version="2008-10-21T12:00:00.00000">
+  <dependency step="urban-QI-dependencies"/>
+  Adapt the default portal for the application
+</import-step>
+-->
+<!-- ##/code-section ADDITIONALSTEPS -->
+
+</import-steps>
+ 

@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="urban">
+
+  <browser:page
+      for="Products.urban.interfaces.IUrbanTool"
+      name="wmc"
+      class=".views.WMC"
+      template="wmc.pt"
+      permission="zope2.View"
+      />
+
+</configure>
+

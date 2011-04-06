@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<object name="portal_factory" meta_type="Plone Factory Tool">
+ <factorytypes>
+  <type portal_type="GenericLicence"/>
+  <type portal_type="Architect"/>
+  <type portal_type="Contact"/>
+  <type portal_type="Street"/>
+  <type portal_type="UrbanEvent"/>
+  <type portal_type="UrbanEventType"/>
+  <type portal_type="Recipient"/>
+  <type portal_type="BuildLicence"/>
+  <type portal_type="ParcelOutLicence"/>
+  <type portal_type="Geometrician"/>
+  <type portal_type="FolderManager"/>
+  <type portal_type="UrbanVocabularyTerm"/>
+  <type portal_type="PortionOut"/>
+  <type portal_type="RecipientCadastre"/>
+  <type portal_type="Layer"/>
+  <type portal_type="Declaration"/>
+  <type portal_type="ParcellingTerm"/>
+  <type portal_type="PcaTerm"/>
+  <type portal_type="City"/>
+  <type portal_type="UrbanCertificateBase"/>
+  <type portal_type="UrbanCertificateTwo"/>
+  <type portal_type="EnvironmentalDeclaration"/>
+  <type portal_type="Equipment"/>
+  <type portal_type="Lot"/>
+  <type portal_type="Division"/>
+  <type portal_type="WorkLocation"/>
+ </factorytypes>
+</object>

@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<metal:block fill-slot="top_slot"
+             tal:define="global body_onload string: init();
+                         dummy python:request.set('disable_border',1)" />
+
+<head>
+
+    <div metal:fill-slot="style_slot" tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
+    <link rel="stylesheet" type="text/css" href="openlayers/theme/default/style.css"/>
+      
+    </div>
+    <div metal:fill-slot="javascript_head_slot" tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
+    
+
+    <script type="text/javascript" tal:attributes="src python:'portal_skins/openlayers/OpenLayers.js'"></script>
+    <script type="text/javascript" tal:attributes="src python:'portal_skins/urban/mapjsglobals.js'"></script>
+  
+
+
+        <tal:block define="topic request/search|nothing" condition="parcels">
+    <script tal:content="python: 'function init() {' 
+        +context.portal_urban.generateMapJS(
+            context
+            ,context.portal_urban.GetListOfCapaKeyBuffer('92103B0309/00S000'),''
+            ,context.portal_urban.GetWKTGeomOfBufferParcel('92103B0309/00S000')
+        )+'};'">
+
+        </script>
+        </tal:block>
+    </div>
+
+</head>
+
+<body tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
+
+<div metal:fill-slot="main">
+<metal:main_macro define-macro="main">
+    <metal:body define-macro="body_macro" >
+
+<h1 class="documentFirstHeading" tal:content="context/Title">Title</h1>
+
+    <div id="panel"></div>
+    <div id="map" class="smallmap"></div>
+
+
+<div tal:replace="structure provider:plone.belowcontentbody" />
+
+</metal:body>
+</metal:main_macro>
+</div>
+</body>
+</html>

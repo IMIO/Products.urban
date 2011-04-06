@@ -1,0 +1,147 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<head>
+<metal:block fill-slot="top_slot"
+             tal:define="global body_onload string: init();
+                         member python: context.portal_membership.getAuthenticatedMember();
+                         border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
+                         dummy python:request.set(border, 1)" />
+
+<tal:block condition="python:list(context.objectValues('RecipientCadastre'))">
+    <div metal:fill-slot="style_slot">
+        <link rel="stylesheet" href="map.css" type="text/css" media="screen" charset="utf-8" />
+    </div>
+
+    <div metal:fill-slot="javascript_head_slot"  tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
+        <script tal:content="string:function init() { ${context/initMap};}">
+        </script>
+    <form>
+     <input type="hidden" id="map_initialized" value="0" />
+    </form>
+
+        <script type="text/javascript" tal:attributes="src python:'portal_skins/openlayers/OpenLayers.js'"></script>
+    </div>
+</tal:block>
+</head>
+
+<body>
+<div metal:fill-slot="main">
+<metal:main_macro define-macro="main">
+<metal:body define-macro="body_macro">
+<h1 class="documentFirstHeading" tal:content="here/Title"/>
+<div tal:replace="structure provider:plone.belowcontenttitle" />
+<!-- Back to the build licence... -->
+<a href=""
+    class="link-parent"
+    tal:define="parent_url python: here.navigationParent(here, template_id)"
+    tal:attributes="href parent_url"
+    i18n:translate="back_to_licence">
+    Go back to the licence
+</a>
+<br />
+
+
+
+
+<tal:showablefields repeat="evtfield python:here.getUrbaneventtypes().getActivatedFields()">
+<tal:block condition="evtfield">
+<u><strong><span i18n:translate="" tal:content="python: 'urban_label_' + evtfield">Optional field label</span></strong> :</u><br />
+<metal:myfield use-macro="python:here.widget(evtfield, mode='view')" />
+</tal:block>
+</tal:showablefields>
+
+<fieldset><strong><legend i18n:translate="event_linked_documents">Event linked documents</legend><strong>
+<div tal:define="tool python: getattr(context, 'portal_urban');
+                 topic python: getattr(tool.topics, 'searchlinkeddocuments');
+                 path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
+                 dummy python: context.setPathCritValue(path_crit, context.UID());
+                 showActions python: True;">
+ <metal:listing use-macro="here/urban_macros/macros/listing" />
+</div>
+</fieldset>
+
+ <form name="quickAdd" action="createObject" method="post">
+          <input name="type_name" value="File" type="hidden">
+          <input class="standalone" id="event" value="Ajouter un Fichier" type="submit">
+
+         </form>
+         <br>
+<u><strong><span i18n:translate="add_a_linked_doc">Add a linked document</span> :</strong></u>
+<br /><br />
+<form action="createUrbanDoc" method="POST">
+<input type='hidden' name="urban_event_uid" tal:attributes="value here/UID" value=''>
+<input type='hidden' name="urban_folder_id" tal:attributes="value here/getId" value=''>
+<select name="urban_template_uid">
+<tal:loopEventType repeat="templateObj python: context.getUrbaneventtypes().objectValues()">
+<option tal:attributes="value templateObj/UID" value='' tal:content="templateObj/Title"> </option>
+</tal:loopEventType>
+</select>
+<input class="standalone" type="submit" i18n:attributes="value" value="create">
+</form>
+<br>
+<tal:block condition="python:here.getUrbaneventtypes().getSpecialFunctionName()">
+<a tal:attributes="href python:here.getUrbaneventtypes().getSpecialFunctionUrl()" tal:content="python:here.getUrbaneventtypes().getSpecialFunctionName()"/><br><br>
+</tal:block>
+
+<tal:block condition="python:list(context.objectValues('RecipientCadastre'))">
+<center>
+<br /><br />
+   <table border=0 width=100%>
+       <tr>
+           <td width=70%><div id="map" class="smallmap"></div></td>
+           <td width=30%><IFRAME name="prcinfosframe" src="" width=400 height=500 scrolling=auto frameborder=0 > </IFRAME></td>
+       </tr>
+   </table>
+</center>
+<br><br>
+<p><u><strong><span i18n:translate="contact_recipients">Contact recipients</span></strong></u></p>
+<table width=100% class="listing" tal:define="recipients python: context.getRecipients()">
+<thead>
+<tr>
+<th colspan="4">
+<span i18n:translate="number_of_recipients">Number of recipients</span> : 
+<strong><span tal:content="python: len(recipients)" /></strong>
+</th>
+</tr>
+<tr>
+ <th i18n:translate="urban_label_parcels">Parcels</th>
+ <th i18n:translate="urban_label_recipients">Recipients</th>
+ <th i18n:translate="urban_label_street">Street</th>
+ <th i18n:translate="urban_label_locality">Locality</th>
+</tr>
+
+</thead>
+<tbody>
+<tal:block repeat="recipientObj recipients">
+<tr tal:define="oddrow repeat/recipientObj/odd;"
+                    tal:attributes="class python:test(oddrow, 'even', 'odd')">
+<td width=10%>
+ <tal:block repeat="recParcel recipientObj/getParcels">
+  <span tal:content="recParcel/Title" /><br />
+ </tal:block>
+</td>
+<td width=35%><span tal:content="python: recipientObj.getName()" /><br><span class="discreet" tal:content="python: recipientObj.Title()" /></td>
+<td width=35%><span tal:content="python: recipientObj.getStreet()" /><br><span class="discreet" tal:content="python: recipientObj.getAdr2()" /></td>
+<td width=20%><span tal:content="python: recipientObj.getAdr1()" /></td>
+</tr>
+</tal:block>
+</tbody>
+</table>
+
+</tal:block>
+
+    <!--tal:block condition="docObj" define="dummy python:docObj.getObject().external_edit()"/-->
+<tal:block condition="python: context.REQUEST.get('doc_uid') != None">
+<tal:block define="docObj python:context.uid_catalog(UID=context.REQUEST.get('doc_uid'))[0]">
+<Script tal:content="python:'document.location = \''+docObj.getObject().absolute_url()+'/external_edit\';'" />
+</tal:block>
+</tal:block>
+
+ </metal:body>
+</metal:main_macro>
+</div>
+</body>
+</html>

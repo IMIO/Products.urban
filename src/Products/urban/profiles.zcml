@@ -1,0 +1,62 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="urban">
+
+  <include package="Products.GenericSetup" file="meta.zcml" />
+
+  <!-- ##code-section profiles.zcml-top #fill in your manual code here -->
+  <!-- ##/code-section profiles.zcml-top -->
+
+  <genericsetup:registerProfile
+      name="default"
+      title="urban"
+      directory="profiles/default"
+      description="Extension profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+  
+  <!-- ##code-section profiles.zcml-bottom #fill in your manual code here -->
+  <genericsetup:registerProfile
+      name="extra"
+      title="urban-extra"
+      directory="profiles/extra"
+      description="Extra Extension profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.urban.interfaces.IUrbanTool"
+  />
+  <genericsetup:registerProfile
+      name="tests"
+      title="urban-tests"
+      directory="profiles/tests"
+      description="Tests Extension profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.urban.interfaces.IUrbanTool"
+  />
+  <genericsetup:registerProfile
+      name="migrations"
+      title="urban-migrations"
+      directory="profiles/migrations"
+      description="Migrations profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.urban.interfaces.IUrbanTool"
+  />
+  <genericsetup:registerProfile
+      name="sambreville"
+      title="urban-sambreville"
+      directory="profiles/sambreville"
+      description="Sambreville Extension profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.urban.interfaces.IUrbanTool"
+  />
+  <genericsetup:registerProfile
+      name="labruyere"
+      title="urban-labruyere"
+      directory="profiles/labruyere"
+      description="La Bruyere Extension profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.urban.interfaces.IUrbanTool"
+  />
+  <!-- ##/code-section profiles.zcml-bottom -->
+
+</configure>

@@ -1,0 +1,317 @@
+1000;Rue d'Auvelais;Arsimont;5060;Belgique
+1005;Rue Basse-Sambre;Arsimont;5060;Belgique
+1010;Rue de la Clef d'Or;Arsimont;5060;Belgique
+1015;Rue Georges Deprez;Arsimont;5060;Belgique
+1020;Rue des Ecoles;Arsimont;5060;Belgique
+1025;Rue du Bourgmestre Evrard;Arsimont;5060;Belgique
+1030;Rue du Fayt;Arsimont;5060;Belgique
+1035;Rue de Fer;Arsimont;5060;Belgique
+1040;Ferme des 4 Lauriers;Arsimont;5060;Belgique
+1043;Rue Fossé aux Chênes;Arsimont;5060;Belgique
+1045;Rue de Fosses;Arsimont;5060;Belgique
+1050;Rue du Gay;Arsimont;5060;Belgique
+1055;Rue de la Grande Fontaine;Arsimont;5060;Belgique
+1060;Rue Haut Baty;Arsimont;5060;Belgique
+1065;Rue Hayettes;Arsimont;5060;Belgique
+1070;Rue Lieutenant Lemercier;Arsimont;5060;Belgique
+1075;Rue du Palton;Arsimont;5060;Belgique
+1080;Rue de la Pêcherie;Arsimont;5060;Belgique
+1085;Rue Grande Pierrère;Arsimont;5060;Belgique
+1090;Place du Louet;Arsimont;5060;Belgique
+1095;Rue Adjudant Roisin;Arsimont;5060;Belgique
+1100;Rue Terne Moreau;Arsimont;5060;Belgique
+1105;Try de Fosses;Arsimont;5060;Belgique
+1110;Try Joli;Arsimont;5060;Belgique
+2000;Rue d'Arsimont;Auvelais;5060;Belgique
+2005;Rue des Auges;Auvelais;5060;Belgique
+2010;Avenue des Anciens Combattants;Auvelais;5060;Belgique
+2015;Avenue Centrale;Auvelais;5060;Belgique
+2020;Avenue du Cimetière;Auvelais;5060;Belgique
+2025;Avenue de la Libération;Auvelais;5060;Belgique
+2026;Avenue des Lilas;Auvelais;5060;Belgique
+2030;Avenue du Progrès;Auvelais;5060;Belgique
+2035;Rue de la Bachée;Auvelais;5060;Belgique
+2040;Rue Bois Sainte-Marie;Auvelais;5060;Belgique
+2045;Rue du Bosquet;Auvelais;5060;Belgique
+2050;Rue de la Bruyère;Auvelais;5060;Belgique
+2055;Rue du Centre;Auvelais;5060;Belgique
+2060;Rue du Charbonnage;Auvelais;5060;Belgique
+2062;Rue du Château;Auvelais;5060;Belgique
+2065;Rue du Chêne;Auvelais;5060;Belgique
+2070;Rue Chère-Voie;Auvelais;5060;Belgique
+2075;Chemin du Hallage;Auvelais;5060;Belgique
+2080;Rue Cimetière des Français;Auvelais;5060;Belgique
+2083;Clos des Aliziers;Auvelais;5060;Belgique
+2085;Clos de l'Espérance;Auvelais;5060;Belgique
+2090;Clos des Hêtres;Auvelais;5060;Belgique
+2095;Clos du Mayeur;Auvelais;5060;Belgique
+2100;Clos des Ormes;Auvelais;5060;Belgique
+2105;Clos des Thuyas;Auvelais;5060;Belgique
+2110;Rue du Comté;Auvelais;5060;Belgique
+2115;Rue Fernand Corbu;Auvelais;5060;Belgique
+2120;Rue de la Croix Rouge;Auvelais;5060;Belgique
+2125;Rue des 2 Auvelais;Auvelais;5060;Belgique
+2130;Rue des 2 Puissances;Auvelais;5060;Belgique
+2135;Rue Docteur Romedenne;Auvelais;5060;Belgique
+2140;Rue des Eaux;Auvelais;5060;Belgique
+2145;Rue d'Eghezée;Auvelais;5060;Belgique
+2150;Rue de Falisolle;Auvelais;5060;Belgique
+2155;Rue de la Feutrerie;Auvelais;5060;Belgique
+2160;Rue des Glaces Nationales;Auvelais;5060;Belgique
+2165;Rue de la Grippelotte;Auvelais;5060;Belgique
+2170;Rue Charles Heuze;Auvelais;5060;Belgique
+2175;Rue Hicguet;Auvelais;5060;Belgique
+2180;Rue de l'Hôtel de Ville;Auvelais;5060;Belgique
+2185;Impasse Botte;Auvelais;5060;Belgique
+2190;Impasse du Voisin;Auvelais;5060;Belgique
+2195;Rue de l'Industrie;Auvelais;5060;Belgique
+2200;Rue de l'Institut;Auvelais;5060;Belgique
+2205;Rue Larronnerie;Auvelais;5060;Belgique
+2210;Rue Lieutenant Lemercier;Auvelais;5060;Belgique
+2215;Rue Marie Saint-Pierre;Auvelais;5060;Belgique
+2220;Rue Michel Melchior;Auvelais;5060;Belgique
+2225;Rue Nouvelle;Auvelais;5060;Belgique
+2230;Rue du Panorama;Auvelais;5060;Belgique
+2235;Rue du Parc;Auvelais;5060;Belgique
+2240;Rue de la Pêcherie;Auvelais;5060;Belgique
+2245;Rue de la Place;Auvelais;5060;Belgique
+2250;Grand Place;Auvelais;5060;Belgique
+2255;Place de la Gare;Auvelais;5060;Belgique
+2260;Place de la Jeunesse;Auvelais;5060;Belgique
+2265;Place de la Sarthe;Auvelais;5060;Belgique
+2270;Place des Tilleuls;Auvelais;5060;Belgique
+2275;Rue du Pont-à-Biesmes;Auvelais;5060;Belgique
+2280;Rue Pont-Sainte-Maxence;Auvelais;5060;Belgique
+2285;Rue de la Principauté;Auvelais;5060;Belgique
+2290;Rue Félix Protin;Auvelais;5060;Belgique
+2295;Rue Radache;Auvelais;5060;Belgique
+2300;Rue du Rominet;Auvelais;5060;Belgique
+2305;Ruelle Evraux;Auvelais;5060;Belgique
+2310;Ruelle du Monument;Auvelais;5060;Belgique
+2315;Ry des Aulnes;Auvelais;5060;Belgique
+2320;Rue Saint-Sang;Auvelais;5060;Belgique
+2325;Rue François Sarteel;Auvelais;5060;Belgique
+2330;Rue des Sartinets;Auvelais;5060;Belgique
+2335;Sentier des Ternes;Auvelais;5060;Belgique
+2340;Rue Seuris;Auvelais;5060;Belgique
+2344;Rue des Sorbiers;Auvelais;5060;Belgique
+2345;Rue Sous-le-Bois;Auvelais;5060;Belgique
+2350;Rue Surmont;Auvelais;5060;Belgique
+2355;Rue Terne Moreau;Auvelais;5060;Belgique
+2360;Terne du Moulin;Auvelais;5060;Belgique
+2363;Rue Tienne Baudouin;Auvelais;5060;Belgique
+2365;Rue du Travail;Auvelais;5060;Belgique
+2370;Rue du Trésor;Auvelais;5060;Belgique
+2375;Rue de la Vacherie;Auvelais;5060;Belgique
+2380;Rue du Vieux Pommier;Auvelais;5060;Belgique
+2385;Rue du Voisin;Auvelais;5060;Belgique
+2390;Rue Félix Willy;Auvelais;5060;Belgique
+2395;Rue de l'Essor;Auvelais;5060;Belgique
+2399;Population de Droit;Auvelais;5060;Belgique
+3005;Rue au Charnoy;Falisolle;5060;Belgique
+3010;Rue du Chef-Lieu;Falisolle;5060;Belgique
+3015;Rue de Claminforge;Falisolle;5060;Belgique
+3016;Clos du Plat Bonnier;Falisolle;5060;Belgique
+3017;Clos du Cortil Dewez;Falisolle;5060;Belgique
+3018;Clos du Duc;Falisolle;5060;Belgique
+3019;Clos des Jardins;Falisolle;5060;Belgique
+3020;Rue des Combattants;Falisolle;5060;Belgique
+3025;Rue Edmond Delvaux;Falisolle;5060;Belgique
+3030;Rue François Dive;Falisolle;5060;Belgique
+3035;Rue de la Fluette;Falisolle;5060;Belgique
+3040;Rue de Fosses;Falisolle;5060;Belgique
+3045;Rue du Gau;Falisolle;5060;Belgique
+3050;Rue du Gay;Falisolle;5060;Belgique
+3055;Rue Grande Pierrère;Falisolle;5060;Belgique
+3060;Rue d'Hamion;Falisolle;5060;Belgique
+3065;Rue Bois de Harzée;Falisolle;5060;Belgique
+3070;Rue Hayettes;Falisolle;5060;Belgique
+3075;Rue Gaston Héraly;Falisolle;5060;Belgique
+3080;Rue de la Logette;Falisolle;5060;Belgique
+3085;Rue Bourgmestre Méhagnoul;Falisolle;5060;Belgique
+3090;Rue J.J. Merlot;Falisolle;5060;Belgique
+3092;Clos des Mines;Falisolle;5060;Belgique
+3093;Rue des Minrias;Falisolle;5060;Belgique
+3095;Rue de la Montagne;Falisolle;5060;Belgique
+3100;Rue de la Pature;Falisolle;5060;Belgique
+3105;Rue de la Petite Pierrère;Falisolle;5060;Belgique
+3110;Place Albert 1er;Falisolle;5060;Belgique
+3115;Place du Centenaire;Falisolle;5060;Belgique
+3120;Rue Pré des Monts;Falisolle;5060;Belgique
+3125;Rue du Préat;Falisolle;5060;Belgique
+3130;Rue Raphaël;Falisolle;5060;Belgique
+3135;Rue de Saint-Lô;Falisolle;5060;Belgique
+3140;Rue Saint-Roch;Falisolle;5060;Belgique
+3145;Rue Sainte-Anne;Falisolle;5060;Belgique
+3150;Try Joli;Falisolle;5060;Belgique
+3155;Rue Vieille Ferme;Falisolle;5060;Belgique
+3160;Rue Vigneron;Falisolle;5060;Belgique
+3165;Rue Joseph Wauters;Falisolle;5060;Belgique
+3170;Rue Gustave Wauthier;Falisolle;5060;Belgique
+4000;Rue Reine Astrid;Keumiée;5060;Belgique
+4005;Rue de Baulet;Keumiée;5060;Belgique
+4010;Rue de la Brasserie;Keumiée;5060;Belgique
+4015;Rue de la Chenée;Keumiée;5060;Belgique
+4020;Rue Fernand Dehousse;Keumiée;5060;Belgique
+4025;Rue de la Ferme;Keumiée;5060;Belgique
+4030;Rue du Moulin des Golettes;Keumiée;5060;Belgique
+4035;Rue de l'Impasse;Keumiée;5060;Belgique
+4040;Rue Léopold Lebrun;Keumiée;5060;Belgique
+4045;Rue Mangon;Keumiée;5060;Belgique
+4050;Rue des Mazuirs;Keumiée;5060;Belgique
+4055;Rue M.Auguste Pietquin;Keumiée;5060;Belgique
+4060;Place Communale;Keumiée;5060;Belgique
+4063;Square de l'Aisance;Keumiée;5060;Belgique
+4065;Rue des Volontaires de Guerre;Keumiée;5060;Belgique
+4070;Rue du Wainage;Keumiée;5060;Belgique
+4075;Rue Zola;Keumiée;5060;Belgique
+5000;Rue des Bachères;Moignelée;5060;Belgique
+5005;Chaussée de Charleroi;Moignelée;5060;Belgique
+5010;Chaussée de Namur;Moignelée;5060;Belgique
+5015;Rue du Chesselet;Moignelée;5060;Belgique
+5020;Rue de la Closière;Moignelée;5060;Belgique
+5025;Rue Dry les Cortils;Moignelée;5060;Belgique
+5030;Rue de l'Eglise;Moignelée;5060;Belgique
+5035;Rue de Farciennes;Moignelée;5060;Belgique
+5040;Rue de Fleurus;Moignelée;5060;Belgique
+5045;Rue Fond des Rys;Moignelée;5060;Belgique
+5050;Sentier du Foriet;Moignelée;5060;Belgique
+5055;Rue Hayelette;Moignelée;5060;Belgique
+5060;Rue de la Jonction;Moignelée;5060;Belgique
+5065;Rue Auguste Meilleur;Moignelée;5060;Belgique
+5070;Rue Barthélemy Molet;Moignelée;5060;Belgique
+5073;Carrefour des Nations;Moignelée;5060;Belgique
+5075;Rue du Poncia;Moignelée;5060;Belgique
+5080;Rue du Rivage;Moignelée;5060;Belgique
+5085;Rue Trieu Malonne;Moignelée;5060;Belgique
+5090;Rue Emile Vandervelde;Moignelée;5060;Belgique
+6000;Rue de l'Abattoir;Tamines;5060;Belgique
+6005;Rue des Alloux;Tamines;5060;Belgique
+6007;Allée des Alouettes;Tamines;5060;Belgique
+6010;Rue du 22 Août;Tamines;5060;Belgique
+6015;Rue des Bachères;Tamines;5060;Belgique
+6020;Rue Baty-Sainte-Barbe;Tamines;5060;Belgique
+6025;Rue Baty-Saint-Pierre;Tamines;5060;Belgique
+6030;Rue Baty-Taille-Gueule;Tamines;5060;Belgique
+6035;Allée Belle-Vue;Tamines;5060;Belgique
+6040;Rue Hilaire Bertinchamps;Tamines;5060;Belgique
+6045;Rue du Bois;Tamines;5060;Belgique
+6050;Rue Bois des Noix;Tamines;5060;Belgique
+6055;Rue Bois Hanolet;Tamines;5060;Belgique
+6060;Rue Bois Saint-Martin;Tamines;5060;Belgique
+6065;Rue du Cadastre;Tamines;5060;Belgique
+6070;Rue des Cailloux;Tamines;5060;Belgique
+6075;Rue Ma Campagne;Tamines;5060;Belgique
+6080;Rue des Champs;Tamines;5060;Belgique
+6085;Au Chant des Oiseaux;Tamines;5060;Belgique
+6090;Rue du Chesselet;Tamines;5060;Belgique
+6092;Clos de la Roseraie;Tamines;5060;Belgique
+6095;Closière J.-B. Scoriel;Tamines;5060;Belgique
+6100;Rue du Collège;Tamines;5060;Belgique
+6105;Rue du Coq;Tamines;5060;Belgique
+6110;Rue de la Côte d'Or;Tamines;5060;Belgique
+6115;Rue des Déportés;Tamines;5060;Belgique
+6120;Rue Emile Duculot;Tamines;5060;Belgique
+6125;Rue de l'Ecluse;Tamines;5060;Belgique
+6130;Rue de la Reine Elisabeth;Tamines;5060;Belgique
+6135;Rue de l'Enseignement;Tamines;5060;Belgique
+6140;Rue Capitaine Fernemont;Tamines;5060;Belgique
+6145;Rue des Fondeurs;Tamines;5060;Belgique
+6150;Rue du Foyer;Tamines;5060;Belgique
+6155;Avenue des Français;Tamines;5060;Belgique
+6160;Galerie du Petit Bruxelles;Tamines;5060;Belgique
+6165;Rue des Genets;Tamines;5060;Belgique
+6170;Avenue F.a.M. Gochet;Tamines;5060;Belgique
+6175;Rue de Grognaux;Tamines;5060;Belgique
+6180;Rue Haute;Tamines;5060;Belgique
+6185;Rue du Hazard;Tamines;5060;Belgique
+6190;Rue des Hiercheuses;Tamines;5060;Belgique
+6195;Rue des Hortensias;Tamines;5060;Belgique
+6200;Rue Frère Hugo;Tamines;5060;Belgique
+6205;Rue de l'Ile;Tamines;5060;Belgique
+6210;Rue Jean Jaurès;Tamines;5060;Belgique
+6214;Place du Jumelage;Tamines;5060;Belgique
+6215;Rue de Keumiée;Tamines;5060;Belgique
+6220;Rue Victor Lagneau;Tamines;5060;Belgique
+6225;Rue Caporal Lefeuvre;Tamines;5060;Belgique
+6230;Rue aux Liziannes;Tamines;5060;Belgique
+6235;Rue des Martyrs;Tamines;5060;Belgique
+6240;Rue Barthélemy Molet;Tamines;5060;Belgique
+6245;Rue Neuve;Tamines;5060;Belgique
+6250;Rue Notre-Dame;Tamines;5060;Belgique
+6255;Rue Nuits-St-Georges;Tamines;5060;Belgique
+6260;Rue d'Oignies;Tamines;5060;Belgique
+6265;Rue des Pachis;Tamines;5060;Belgique
+6270;Rue de la Passerelle;Tamines;5060;Belgique
+6273;Les Pindants;Tamines;5060;Belgique
+6275;Place de l'Etoile;Tamines;5060;Belgique
+6280;Place Saint-Martin;Tamines;5060;Belgique
+6285;Rue du Pont;Tamines;5060;Belgique
+6290;Rue des Prairies;Tamines;5060;Belgique
+6293;Pré des Haz;Tamines;5060;Belgique
+6295;Rue du Presbytère;Tamines;5060;Belgique
+6300;Rue Roi Albert;Tamines;5060;Belgique
+6305;Avenue Président Roosevelt;Tamines;5060;Belgique
+6310;Rue des Rosiers;Tamines;5060;Belgique
+6315;Sentier de la Rotelée;Tamines;5060;Belgique
+6320;Rue Sainte-Barbe;Tamines;5060;Belgique
+6325;Rue Sainte-Catherine;Tamines;5060;Belgique
+6330;Rue Sainte-Eugénie;Tamines;5060;Belgique
+6335;Rue Saint-Jean-Baptiste;Tamines;5060;Belgique
+6340;Rue Saint-Martin;Tamines;5060;Belgique
+6345;Rue Séraphin;Tamines;5060;Belgique
+6350;Rue Sous-la-Ville;Tamines;5060;Belgique
+6355;Square Jean Tousseul;Tamines;5060;Belgique
+6360;Rue de la Station;Tamines;5060;Belgique
+6364;Rue du Tergnia;Tamines;5060;Belgique
+6365;Sentier du Tergnia;Tamines;5060;Belgique
+6370;Rue des Tombes;Tamines;5060;Belgique
+6373;Rue du Triage;Tamines;5060;Belgique
+6375;Rue des Trieux;Tamines;5060;Belgique
+6380;Rue Trieu des Brebis;Tamines;5060;Belgique
+6382;Rue du Troisième Millénaire;Tamines;5060;Belgique
+6385;Rue Trou de l'Enfer;Tamines;5060;Belgique
+6390;Rue du Try;Tamines;5060;Belgique
+6393;Rue de la Vallée du Natisone;Tamines;5060;Belgique
+6395;Rue Val de Sambre;Tamines;5060;Belgique
+6400;Rue de Velaine;Tamines;5060;Belgique
+6403;Rue des Vignes;Tamines;5060;Belgique
+6405;Rue du Waircha;Tamines;5060;Belgique
+7000;Rue des Acacias;Velaine-sur-Sambre;5060;Belgique
+7005;Rue d'Auby;Velaine-sur-Sambre;5060;Belgique
+7010;Rue de Balâtre;Velaine-sur-Sambre;5060;Belgique
+7015;Rue Gustave Bruyr;Velaine-sur-Sambre;5060;Belgique
+7020;Rue du Cortonnoy;Velaine-sur-Sambre;5060;Belgique
+7023;Rue de la Couverterie;Velaine-sur-Sambre;5060;Belgique
+7025;Rue Culot du Bois;Velaine-sur-Sambre;5060;Belgique
+7030;Rue Fernand Dehousse;Velaine-sur-Sambre;5060;Belgique
+7035;Rue Jules Destrée;Velaine-sur-Sambre;5060;Belgique
+7040;Rue de la Duve;Velaine-sur-Sambre;5060;Belgique
+7045;Rue de la Duvette;Velaine-sur-Sambre;5060;Belgique
+7050;Rue des Erables;Velaine-sur-Sambre;5060;Belgique
+7055;Au Farau;Velaine-sur-Sambre;5060;Belgique
+7060;Rue de la Floquette;Velaine-sur-Sambre;5060;Belgique
+7065;Rue Henri Gailly;Velaine-sur-Sambre;5060;Belgique
+7070;Rue du Moulin des Golettes;Velaine-sur-Sambre;5060;Belgique
+7075;Rue de Grognaux;Velaine-sur-Sambre;5060;Belgique
+7080;Rue Halluent;Velaine-sur-Sambre;5060;Belgique
+7085;A la Haupe;Velaine-sur-Sambre;5060;Belgique
+7090;Rue Hurlevent;Velaine-sur-Sambre;5060;Belgique
+7095;Rue de Jemeppe;Velaine-sur-Sambre;5060;Belgique
+7100;Rue d'Onoz;Velaine-sur-Sambre;5060;Belgique
+7105;Place du 11 Novembre;Velaine-sur-Sambre;5060;Belgique
+7110;Rue de Prahy;Velaine-sur-Sambre;5060;Belgique
+7115;Rue de la Roche-Qui-Tourne;Velaine-sur-Sambre;5060;Belgique
+7120;Rue Docteur Séverin;Velaine-sur-Sambre;5060;Belgique
+7125;Rue du Stade;Velaine-sur-Sambre;5060;Belgique
+7130;Rue de Tamines;Velaine-sur-Sambre;5060;Belgique
+7135;Rue du Tombois;Velaine-sur-Sambre;5060;Belgique
+7140;Rue du Tram;Velaine-sur-Sambre;5060;Belgique
+7145;Rue Trieu Melun;Velaine-sur-Sambre;5060;Belgique
+7150;Try d'Oskin;Velaine-sur-Sambre;5060;Belgique
+7155;Rue de la Vallée;Velaine-sur-Sambre;5060;Belgique
+7160;Rue Grand Vau;Velaine-sur-Sambre;5060;Belgique
+7165;Rue du Villez;Velaine-sur-Sambre;5060;Belgique
+7170;Rue Joseph Vincent;Velaine-sur-Sambre;5060;Belgique
+7175;Rue des Volontaires de Guerre;Velaine-sur-Sambre;5060;Belgique
+7180;Rue du Wainage;Velaine-sur-Sambre;5060;Belgique

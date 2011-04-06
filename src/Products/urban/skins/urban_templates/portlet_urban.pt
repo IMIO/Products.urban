@@ -1,0 +1,43 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="urban">
+<body>
+
+<div metal:define-macro="portlet" tal:condition="python: context.getLayout() == 'urban_view' and not context.id == 'urban'">
+
+<metal:block metal:use-macro="here/global_defines/macros/defines" />
+
+<dl class="portlet">
+
+    <!-- Portlet title -->
+    <dt class="portletHeader">
+    <span class="portletTopLeft"></span>
+        <div i18n:translate='urban_searches'>Searches</div>
+    <span class="portletTopRight"></span>
+    </dt>
+
+    <!-- Searches -->
+    <tal:block define="topics python: context.portal_urban.getPortletTopics(context=context)"
+               repeat="topic topics">
+    <dd class="portletItem" 
+        tal:define="oddrow repeat/topic/odd;"
+        tal:attributes="class python:oddrow and 'portletItem even' or 'portletItem odd'">
+        <a tal:attributes="href python: context.absolute_url() + '?search=' + topic.getId()"
+           i18n:translate="" tal:content="topic/Title">Topic title</a>
+    </dd>
+    </tal:block>
+    <dd class="portletFooter">
+        <a href=""
+           tal:attributes="href python: context.absolute_url() + '/map'"
+           class="tile">
+            <span i18n:translate="default_map">
+                Default map
+            </span>
+        </a>
+    </dd>
+
+</dl>
+
+</div>
+</body>
+</html>

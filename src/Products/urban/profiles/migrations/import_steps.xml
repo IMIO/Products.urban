@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<import-steps>
+
+ <import-step
+    id="urban-migrateWorkLocation"
+    handler="Products.urban.profiles.migrations.migrate.migrateWorkLocation"
+    title="Migrate the workLocation attribute"
+    version="2009-09-23T15:00:00.0">
+    Migrate the workLocation attribute
+ </import-step>
+ <import-step
+    id="urban-migratePersonTitle"
+    handler="Products.urban.profiles.migrations.migrate.migratePersonTitle"
+    title="Migrate the personTitle attribute on Contacts"
+    version="2010-04-29T15:00:00.0">
+    Migrate the personTitle attribute
+ </import-step>
+ <import-step
+    id="urban-migrateFolderZone"
+    handler="Products.urban.profiles.migrations.migrate.migrateFolderZone"
+    title="Migrate the folderZone attribute on BuildLicences"
+    version="2011-03-31T16:00:00.0">
+    Migrate the folderZone attribute on BuildLicences
+ </import-step>
+ <import-step
+    id="urban-migrateBuildLicencesInvestigationArticles"
+    handler="Products.urban.profiles.migrations.migrate.migrateBuildLicencesInvestigationArticles"
+    title="investigationArticles is now a MultiSelection"
+    version="2011-04-05T14:00:00.0">
+    investigationArticles replaces both investigationArticle and investigationPoint fields.  We only care about default 330/1 to 330/13
+ </import-step>
+ <import-step
+    id="urban-migrateUrbanEventTypes"
+    handler="Products.urban.profiles.migrations.migrate.migrateUrbanEventTypes"
+    title="Remove the urbanType attribute from UrbanEventTypes"
+    version="2010-04-29T15:00:00.0">
+    Remove the urbanType attribute from UrbanEventTypes
+ </import-step>
+ <import-step
+    id="urban-addEquipmentTypes"
+    handler="Products.urban.profiles.migrations.migrate.addEquipmentTypes"
+    title="Add parceloutlicence equipments types in urban config"
+    version="2010-07-14T15:00:00.0">
+    Add parceloutlicence equipments types in urban config
+ </import-step>
+ <import-step
+    id="urban-addSpecificFeatures"
+    handler="Products.urban.profiles.migrations.migrate.addSpecificFeatures"
+    title="Add specific features for UrbanCertificateOne, UrbanCertificateTwo and NotaryLetters urban configs"
+    version="2010-07-14T16:00:00.0">
+    Add specific features for UrbanCertificateOne, UrbanCertificateTwo and NotaryLetters urban configs
+ </import-step>
+ <import-step
+    id="urban-migrateToContact"
+    handler="Products.urban.profiles.migrations.migrate.migrateToContact"
+    title="More portal_types are now based on Contact.  Migrate old instances"
+    version="2010-07-28T10:30:00.0">
+    More portal_types are now based on Contact.  Migrate old instances
+ </import-step>
+ <import-step
+    id="urban-migrateToMultiStreets"
+    handler="Products.urban.profiles.migrations.migrate.migrateToMultiStreets"
+    title="Migrate to multiple addresses.  Remove existing workLocation and workLocationHouseNumber attributes and create a primary WorkLocation instead"
+    version="2010-08-10T13:00:00.0">
+    Migrate to multiple addresses.  Remove existing workLocation and workLocationHouseNumber attributes and create a primary WorkLocation instead
+ </import-step>
+ <import-step
+    id="urban-migrateTopicsAddPathCriterion"
+    handler="Products.urban.profiles.migrations.migrate.migrateTopicsAddPathCriterion"
+    title="We need some topics to have a path criterion now, so add it if necessary"
+    version="2010-09-22T17:00:00.0">
+    We need some topics to have a path criterion now, so add it if necessary
+ </import-step>
+</import-steps>

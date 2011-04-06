@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<import-steps>
+<import-step
+            id="urban-addTestObjects"
+            handler="Products.urban.setuphandlers.addTestObjects"
+            title="Add some objects for test prupose"
+            version="2008-10-15T15:00:00.00000">
+<dependency step="urban-postInstall"/>
+Add some objects for test prupose
+</import-step>
+</import-steps>

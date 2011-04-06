@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewContext xmlns:xlink="http://www.w3.org/1999/xlink/namespace/" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<General>
+  <Window width="70%" height="500"/>
+  <BoundingBox SRS="EPSG:31370" tal:attributes="minx view/minx; miny view/miny; maxx view/maxx; maxy view/maxy;"/>
+  <Title>Urbanmap WMS</Title>
+  <KeywordList></KeywordList>
+  <Abstract></Abstract>
+</General>
+<LayerList>
+  <Layer tal:repeat="layer view/getLayers" queryable="0" hidden="0">
+    <Server service="WMS" version="1.1.0" title="Geoserver">
+      <OnlineResource xlink:type="simple" tal:attributes="xlink:href layer/url"/>
+    </Server>
+    <Name tal:content="layer/name">urban12345:capa</Name>
+    <Title tal:content="layer/title">Parcellaire</Title>
+    <Abstract></Abstract>
+    <SRS  tal:content="layer/srs">EPSG:31370</SRS>
+    <FormatList>
+      <Format current="1" tal:content="layer/format">image/png</Format>
+    </FormatList>
+    <StyleList>
+      <Style>
+        <Name tal:content="layer/style">default</Name>
+        <Title tal:content="layer/style">default</Title>
+      </Style>
+    </StyleList>
+   </Layer>
+ </LayerList>
+</ViewContext>

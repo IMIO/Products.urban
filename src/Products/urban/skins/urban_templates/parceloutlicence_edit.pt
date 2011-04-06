@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      i18n:domain="urban">
+
+<body>
+<div metal:define-macro="body">
+
+<metal:base_body use-macro="base_macros/body">
+
+<div metal:fill-slot="widgets"
+           tal:define="global body_onload string: init();
+                       member python: context.portal_membership.getAuthenticatedMember();
+                       border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
+                       dummy python:request.set(border, 1)">
+
+            <metal:myfield use-macro="python:here.widget('licenceSubject', mode='edit')" />
+            <metal:myfield use-macro="python:here.widget('description', mode='edit')" />
+            <br />
+            <fieldset><strong><legend i18n:translate="legend_details">Details</legend></strong>
+             <metal:myfield use-macro="python:here.widget('reference', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('referenceDGATLP', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('folderCategory', mode='edit')" />
+            </fieldset>
+            <metal:myfield use-macro="python:here.widget('foldermanagers', mode='edit')" />
+            <metal:myfield use-macro="python:here.widget('geometricians', mode='edit')" />
+            <fieldset>
+             <strong><legend i18n:translate="legend_situation">Situation</legend></strong>
+             <table cellspacing=0 cellpadding=0 width=100%>
+              <tr>
+               <td colspan=2>
+                <div metal:use-macro="here/urban_macros/macros/urbanWorkLocationEdit" />
+               </td>
+              </tr>
+             </table>
+            </fieldset>
+            <fieldset>
+             <strong><legend i18n:translate="legend_investigation">Investigation</legend></strong>
+             <table border=0>
+              <tr>
+               <td><metal:myfield use-macro="python:here.widget('investigationStart', mode='edit')" /></td>
+               <td><metal:myfield use-macro="python:here.widget('investigationEnd', mode='edit')" /></td>
+              </tr>
+             </table>
+             <table border=0>
+              <tr>
+               <td><metal:myfield use-macro="python:here.widget('investigationArticles', mode='edit')" /></td>
+              </tr>
+             </table>
+            </fieldset>
+            <fieldset>
+             <strong><legend i18n:translate="legend_road">Road</legend></strong>
+             <metal:myfield use-macro="python:here.widget('roadType', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('roadCoating', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('roadEquipments', mode='edit')" />
+            </fieldset>
+            <metal:myfield use-macro="python:here.widget('solicitOpinionsTo', mode='edit')" />
+            <metal:myfield use-macro="python:here.widget('folderZone', mode='edit')" />
+            <metal:myfield use-macro="python:here.widget('impactStudy', mode='edit')" />
+            <metal:myfield use-macro="python:here.widget('annoncedDelay', mode='edit')" />
+</div>
+</metal:base_body>
+</div>
+
+</body>
+</html>

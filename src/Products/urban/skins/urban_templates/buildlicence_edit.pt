@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      i18n:domain="urban">
+
+<body>
+<div metal:define-macro="body">
+
+<metal:base_body use-macro="base_macros/body">
+
+<metal:widgets fill-slot="widgets"
+           tal:define="global body_onload string: init();
+                       border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
+                       dummy python:request.set(border, 1);
+                       useTabbing python: context.portal_urban.getUseTabbing()">
+
+        <div tal:condition="not: useTabbing">
+            <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_description">Description</legend></strong>
+             <metal:myfield use-macro="python:here.widget('licenceSubject', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('reference', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('referenceDGATLP', mode='edit')" />
+             <div metal:use-macro="here/urban_macros/macros/urbanWorkLocationEdit" />
+             <metal:myfield use-macro="python:here.widget('architects', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('foldermanagers', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('folderCategory', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('workType', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('missingParts', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('missingPartsDetails', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('annoncedDelay', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('impactStudy', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('usage', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('description', mode='edit')" />
+            </fieldset>
+            <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_road">Road</legend></strong>
+             <metal:myfield use-macro="python:here.widget('roadType', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('roadCoating', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('roadEquipments', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('floodingLevel', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('pash', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('roadAdaptation', mode='edit')" />
+            </fieldset>
+            <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_location">Location</legend></strong>
+             <metal:myfield use-macro="python:here.widget('folderZone', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('folderZoneDetails', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('parcellings', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('subdivisionDetails', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('isInPCA', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('pca', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('protectedBuilding', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('protectedBuildingDetails', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('SSC', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('RCU', mode='edit')" />
+            </fieldset>
+            <fieldset>
+             <strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices">Investigation and advices</legend></strong>
+             <metal:myfield use-macro="python:here.widget('derogation', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('derogationDetails', mode='edit')" />
+             <table border=0>
+              <tr>
+               <td><metal:myfield use-macro="python:here.widget('investigationStart', mode='edit')" /></td>
+               <td><metal:myfield use-macro="python:here.widget('investigationEnd', mode='edit')" /></td>
+              </tr>
+             </table>
+             <table border=0>
+              <tr>
+               <td><metal:myfield use-macro="python:here.widget('investigationArticles', mode='edit')" /></td>
+              </tr>
+             </table>
+            <metal:myfield use-macro="python:here.widget('investigationDetails', mode='edit')" />
+            <metal:myfield use-macro="python:here.widget('solicitOpinionsTo', mode='edit')" />
+            </fieldset>
+        </div>
+
+        <tal:with_tabbing condition="useTabbing">
+              <tal:fieldsets define="sole_fieldset python:len(fieldsets)==1"
+                repeat="fieldset python: ['urban_description', 'urban_road', 'urban_location', 'urban_investigation_and_advices']">
+                <!-- hide some fieldsets... -->
+                <tal:block condition="python: not fieldset in ['metadata', 'default', 'settings', 'categorization', 'ownership', 'dates', ]">
+                <fieldset tal:define="fieldsetid python:putils.normalizeString(fieldset)"
+                        tal:attributes="id string:fieldset-${fieldsetid}"
+                        tal:omit-tag="sole_fieldset">
+                  <legend id=""
+                          tal:content="python: view.getTranslatedSchemaLabel(fieldset)"
+                          tal:attributes="id string:fieldsetlegend-${fieldsetid}"
+                          i18n:translate=""
+                          tal:condition="not:sole_fieldset" />
+                  <br />
+
+                  <tal:description_fieldset condition="python: fieldset == 'urban_description'">
+                  <table width=100%>
+                      <tr>
+                          <td valign='top'>
+                           <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=True)">
+                            <tal:block define="fieldName field/getName">
+                             <metal:fieldMacro use-macro="python:here.widget(fieldName, mode='edit')" />
+                             <tal:block condition="python: fieldName == 'referenceDGATLP'">
+                              <div metal:use-macro="here/urban_macros/macros/urbanWorkLocationEdit" />
+                             </tal:block>
+                            </tal:block>
+                           </tal:fields>
+                           </td>
+                      </tr>
+                  </table>
+                  </tal:description_fieldset>
+
+                  <tal:fields condition="python: not fieldset in ['urban_description', ]" repeat="field python:schematas[fieldset].editableFields(here, visible_only=True)">
+                   <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
+                  </tal:fields>
+                </fieldset>
+                </tal:block>
+              </tal:fieldsets>
+            </tal:with_tabbing>
+</metal:widgets>
+</metal:base_body>
+</div>
+
+</body>
+</html>

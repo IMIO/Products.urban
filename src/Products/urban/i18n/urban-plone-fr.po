@@ -1,0 +1,209 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-04-28 11:35+0000\n"
+"PO-Revision-Date: 2010-08-09 15:00+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+"Language-code: fr\n"
+"Language-name: French\n"
+"Preferred-encodings: utf-8\n"
+"X-is-fallback-for: fr-ca fr-be fr-fr\n"
+
+# content_types
+msgid "Applicant"
+msgstr "Demandeur"
+
+msgid "Architect"
+msgstr "Architecte"
+
+msgid "BuildLicence"
+msgstr "Permis d'urbanisme"
+
+msgid "City"
+msgstr "Localité"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Declaration"
+msgstr "Déclaration"
+
+msgid "EnvironmentalDeclaration"
+msgstr "Déclaration environnementale"
+
+msgid "FolderManager"
+msgstr "Gestionnaire de dossier"
+
+msgid "Geometrician"
+msgstr "Géomètre"
+
+# map.cpt
+msgid "Map"
+msgstr "Carte"
+
+msgid "Notary"
+msgstr "Notaire"
+
+msgid "NotaryLetter"
+msgstr "Lettre de notaire"
+
+msgid "ParcelOutLicence"
+msgstr "Permis d'urbanisation"
+
+msgid "ParcellingTerm"
+msgstr "Lotissement"
+
+msgid "PcaTerm"
+msgstr "Plan Communal d'Aménagement"
+
+msgid "PortionOut"
+msgstr "Parcelle"
+
+msgid "Recipient"
+msgstr "Destinataire"
+
+msgid "RecipientCadastre"
+msgstr "Destinataire cadastre"
+
+msgid "Street"
+msgstr "Rue"
+
+msgid "This National Register number is not valid !"
+msgstr "Ce numéro de registre national n'est pas valide !"
+
+# validators
+msgid "This field only accept numbers, indents or points !"
+msgstr "Ce champ n'accepte que des chiffres, des tirets et des points !"
+
+msgid "UrbanCertificateOne"
+msgstr "Certificat d'urbanisme 1"
+
+msgid "UrbanCertificateTwo"
+msgstr "Certificat d'urbanisme 2"
+
+msgid "UrbanEvent"
+msgstr "Evénement du dossier"
+
+msgid "UrbanEventType"
+msgstr "Type d'événement du dossier"
+
+# control panel
+msgid "UrbanTool"
+msgstr "Configuration de 'urban'"
+
+msgid "UrbanVocabularyTerm"
+msgstr "Terme de vocabulaire urban"
+
+msgid "WorkLocation"
+msgstr "Adresse"
+
+msgid "Your National Register number must be 11 digits long !"
+msgstr "Votre numéro de registre national doit comporter 11 chiffres !"
+
+msgid "accept"
+msgstr "Accepter"
+
+msgid "accepted"
+msgstr "Accepté"
+
+msgid "close"
+msgstr "Clôturer"
+
+msgid "closed"
+msgstr "Clôturé"
+
+msgid "db_connection_error"
+msgstr "Une erreur est survenue lors de la connexion à la base de données.  Le message d'erreur est : '${error}'"
+
+# status messages...
+msgid "db_connection_successfull"
+msgstr "Connexion à la base de donnée réussie."
+
+msgid "db_not_connected_error"
+msgstr "Une erreur est survenue avec la base de données.  Contactez votre administrateur système.  La base de données ne semble pas connectée."
+
+msgid "disable"
+msgstr "desactiver"
+
+msgid "disabled"
+msgstr "Désactivé"
+
+# actions
+msgid "edit"
+msgstr "Modifier le permis"
+
+msgid "enable"
+msgstr "Activer"
+
+msgid "enabled"
+msgstr "Activé"
+
+# indexes/metadata
+msgid "getBeginDate"
+msgstr "Date de début"
+
+msgid "getEndDate"
+msgstr "Echéance"
+
+# states
+msgid "in_progress"
+msgstr "En cours"
+
+msgid "incomplete"
+msgstr "Incomplet"
+
+msgid "isincomplete"
+msgstr "Incomplet"
+
+msgid "label_schema_urban_carto"
+msgstr "Cartographie"
+
+msgid "label_schema_urban_description"
+msgstr "Description"
+
+msgid "label_schema_urban_details"
+msgstr "Détails"
+
+msgid "label_schema_urban_events"
+msgstr "Evénements du dossier"
+
+msgid "label_schema_urban_investigation_and_advices"
+msgstr "Enquête et avis"
+
+msgid "label_schema_urban_location"
+msgstr "Zonage"
+
+msgid "label_schema_urban_road"
+msgstr "Voirie"
+
+msgid "please_enter_more_letters"
+msgstr "Il est nécessaire que vous entriez plusieurs lettres pour effectuer la recherche"
+
+msgid "refuse"
+msgstr "Refuser"
+
+msgid "refused"
+msgstr "Refusé"
+
+msgid "reopen"
+msgstr "Réouvrir"
+
+# transitions
+msgid "retire"
+msgstr "Retirer"
+
+msgid "retired"
+msgstr "Retiré"
+
+msgid "workLocationStreet"
+msgstr "Rue"
+

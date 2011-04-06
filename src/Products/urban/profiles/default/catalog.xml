@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<object name="portal_catalog" meta_type="Plone Catalog Tool">
+  <index name="getName1" 
+         meta_type="FieldIndex">
+    <indexed_attr value="getName1"/>
+  </index>
+  <index name="getName2" 
+         meta_type="FieldIndex">
+    <indexed_attr value="getName2"/>
+  </index>
+  <index name="getDecisionDate" 
+         meta_type="DateIndex">
+    <indexed_attr value="getDecisionDate"/>
+  </index>
+<!-- ##code-section FOOT -->
+  <index name="getRecipientAddress" 
+         meta_type="FieldIndex">
+    <indexed_attr value="getRecipientAddress"/>
+  </index>
+ <index name="parcelInfosIndex" meta_type="KeywordIndex">
+  <indexed_attr value="parcelInfosIndex"/>
+ </index>
+ <column value="parcelInfosIndex"/>
+ <index name="applicantInfosIndex" meta_type="ZCTextIndex">
+  <indexed_attr value="applicantInfosIndex"/>
+  <extra name="index_type" value="Okapi BM25 Rank"/>
+  <extra name="lexicon_id" value="plone_lexicon"/>
+ </index>
+<!-- ##/code-section FOOT -->
+</object>

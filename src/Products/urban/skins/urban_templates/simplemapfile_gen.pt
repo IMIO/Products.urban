@@ -1,0 +1,120 @@
+MAP
+NAME <tal:block content="map_config/getId" />
+# Map image size
+SIZE <tal:block content="map_config/getMapWidth" /> <tal:block content="map_config/getMapHeight" />
+UNITS meters
+EXTENT <tal:block content="python: tool.getMapExtent().replace(',', ' ')">map extent values</tal:block>
+PROJECTION
+'proj=longlat'
+'ellps=WGS84'
+'datum=WGS84'
+'no_defs'
+''
+END
+# Background color for the map canvas -- change as desired
+IMAGECOLOR 192 192 192
+IMAGEQUALITY 95
+IMAGETYPE gif
+OUTPUTFORMAT
+NAME gif
+DRIVER 'GD/GIF'
+MIMETYPE 'image/gif'
+#IMAGEMODE PC256
+EXTENSION 'gif'
+END
+# Legend
+LEGEND
+IMAGECOLOR 255 255 255
+STATUS ON
+KEYSIZE 18 12
+LABEL
+TYPE BITMAP
+SIZE MEDIUM
+COLOR 0 0 89
+END
+END
+# Web interface definition. Only the template parameter
+# is required to display a map. See MapServer documentation
+WEB
+# Set IMAGEPATH to the path where MapServer should
+# write its output.
+IMAGEPATH '/var/www/tmp/'
+TEMPLATE '/var/www/templates/testtemp.html'
+# Set IMAGEURL to the url that points to IMAGEPATH
+# as defined in your web server configuration
+IMAGEURL '/tmp/'
+# WMS server settings
+METADATA
+'wms_title'           '<tal:block content="map_config/getId" />'
+'wms_onlineresource'  'http://<tal:block replace="context/portal_urban/getWebServerHost" />/cgi-bin/mapserv?map=/mapfiles/<tal:block replace="context/UID" />.map&'
+'wms_srs'             'EPSG:4326'
+END
+#Scale range at which web interface will operate
+# Template and header/footer settings
+# Only the template parameter is required to display a map. See MapServer documentation
+END
+<tal:layers define="layers map_config/getLayers|nothing" repeat="layer layers">LAYER
+NAME '<tal:block replace="layer/getId">layer_name</tal:block>'
+TYPE POLYGON
+CONNECTIONTYPE postgis
+CONNECTION "<tal:block replace="python: 'host=%s user=%s password=%s dbname=urbangis' % (tool.getSqlHost(), tool.getSqlUser(), tool.getSqlPassword())" />"
+DATA '<tal:block replace="layer/getData">the_geom FROM layer_name</tal:block>'
+<tal:use_filter condition="layer/getFilter">
+FILTER "<tal:block tal:omit-tag='' replace='layer/getFilter' />"
+</tal:use_filter>
+METADATA
+'wms_title' '<tal:block replace="layer/getId" />'
+END
+STATUS DEFAULT
+TRANSPARENCY 100
+PROJECTION
+'proj=longlat'
+'ellps=WGS84'
+'datum=WGS84'
+'no_defs'
+''
+END
+CLASS
+NAME '<tal:block replace="layer/getId">layer_name</tal:block>'
+STYLE
+SYMBOL 0
+SIZE 3
+OUTLINECOLOR <tal:block replace="layer/getOutlineColor">layer_outlinecolor</tal:block>
+COLOR <tal:block replace="layer/getColor">layer_color</tal:block>
+END
+END
+END</tal:layers>
+
+#loop on additional layers
+<tal:layers define="layers context/getAdditionalLayers|nothing" repeat="layer layers">LAYER
+NAME '<tal:block replace="layer/getId">layer_name</tal:block>'
+TYPE POLYGON
+CONNECTIONTYPE postgis
+CONNECTION "<tal:block replace="python: 'host=%s user=%s password=%s dbname=urbangis' % (tool.getSqlHost(), tool.getSqlUser(), tool.getSqlPassword())" />"
+DATA '<tal:block replace="layer/getData">the_geom FROM layer_name</tal:block>'
+<tal:use_filter condition="layer/getFilter">
+FILTER "<tal:block tal:omit-tag='' replace='layer/getFilter' />"
+</tal:use_filter>
+METADATA
+'wms_title' '<tal:block replace="layer/getId" />'
+END
+STATUS DEFAULT
+TRANSPARENCY 100
+PROJECTION
+'proj=longlat'
+'ellps=WGS84'
+'datum=WGS84'
+'no_defs'
+''
+END
+CLASS
+NAME '<tal:block replace="layer/getId">layer_name</tal:block>'
+STYLE
+SYMBOL 0
+SIZE 3
+OUTLINECOLOR <tal:block replace="layer/getOutlineColor">layer_outlinecolor</tal:block>
+COLOR <tal:block replace="layer/getColor">layer_color</tal:block>
+END
+END
+END</tal:layers>
+END
