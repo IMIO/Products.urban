@@ -27,6 +27,7 @@ setup(name='Products.urban',
           'appy',
           'Plone',
           'Products.MasterSelectWidget',
+          'psycopg2',
       ],
       entry_points="""
       """,
