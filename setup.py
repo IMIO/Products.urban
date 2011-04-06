@@ -26,10 +26,6 @@ setup(name='Products.urban',
           'setuptools',
           'appy',
           'Plone',
-          'PILwoTk',
+          'Pillow',
           'Products.MasterSelectWidget',
-          'psycopg2',
-      ],
-      entry_points="""
-      """,
-      )
+          'psycopg2'])
