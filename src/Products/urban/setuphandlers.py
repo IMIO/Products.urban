@@ -368,7 +368,7 @@ def addUrbanConfigs(context):
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
             newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
             newFolder.invokeFactory("UrbanVocabularyTerm",id="spw-dgo1",title=u"SPW-DGO1")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="dgrne",title=u"DGRNE")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="dgrne",title=u"DGRNE", description=u'<p>15, Avenue Prince de Liège<br />5100 Jambes</p>')
             newFolder.invokeFactory("UrbanVocabularyTerm",id="dnf",title=u"DNF")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="stp",title=u"Service Technique Provincial")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="pi",title=u"Prévention Incendie")
