@@ -378,7 +378,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="pn",title=u"Parc Naturel")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="crmsf",title=u"Commission Royale des Monuments, Sites et Fouilles")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="swde",title=u"SWDE")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="ccatm",title=u"CCATM")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="ccatm",title=u"CCATM", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
             newFolder.invokeFactory("UrbanVocabularyTerm",id="inasep",title=u"INASEP")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="belgacom",title=u"Belgacom", description=u'<p>60, Rue Marie Henriette<br />5000 Namur</p>')
             newFolder.invokeFactory("UrbanVocabularyTerm",id="spge",title=u"SPGE")
