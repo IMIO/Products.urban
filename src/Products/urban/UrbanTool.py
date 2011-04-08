@@ -397,10 +397,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'.odt')
         tempFileNameSignatures = '%s/%s_%f_signatures.%s' % (
             getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'.odt')
-        try:
-            applicantobj=newDocFolder.aq_inner.aq_parent.getApplicants()[0]
-        except IndexError:
-            applicantobj = None
         portal_url=getToolByName(self,'portal_url')
         brain=self.portal_catalog(path=portal_url.getPortalPath()+'/'+'/'.join(portal_url.getRelativeContentPath(newDocFolder.aq_inner.aq_parent)),id='depot-de-la-demande')
         try:
@@ -416,28 +412,28 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if templateHeader:
             templateHeader = StringIO(templateHeader)
             #we render the template so pod instructions into the header template are rendered too
-            renderer = appy.pod.renderer.Renderer(templateHeader, {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameHeader, pythonWithUnoPath=self.getUnoEnabledPython())
+            renderer = appy.pod.renderer.Renderer(templateHeader, {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameHeader, pythonWithUnoPath=self.getUnoEnabledPython())
             renderer.run()
         templateFooter = self.getTemplateFooter()
         if templateFooter:
             templateFooter = StringIO(templateFooter)
             #we render the template so pod instructions into the header template are rendered too
-            renderer = appy.pod.renderer.Renderer(templateFooter, {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameFooter, pythonWithUnoPath=self.getUnoEnabledPython())
+            renderer = appy.pod.renderer.Renderer(templateFooter, {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameFooter, pythonWithUnoPath=self.getUnoEnabledPython())
             renderer.run()
         templateReference = self.getTemplateReference()
         if templateReference:
             templateReference = StringIO(templateReference)
             #we render the template so pod instructions into the header template are rendered too
-            renderer = appy.pod.renderer.Renderer(templateReference, {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameReference, pythonWithUnoPath=self.getUnoEnabledPython())
+            renderer = appy.pod.renderer.Renderer(templateReference, {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameReference, pythonWithUnoPath=self.getUnoEnabledPython())
             renderer.run()
         templateSignatures = self.getTemplateSignatures()
         if templateSignatures:
             templateSignatures = StringIO(templateSignatures)
             #we render the template so pod instructions into the header template are rendered too
-            renderer = appy.pod.renderer.Renderer(templateSignatures, {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameSignatures, pythonWithUnoPath=self.getUnoEnabledPython())
+            renderer = appy.pod.renderer.Renderer(templateSignatures, {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameSignatures, pythonWithUnoPath=self.getUnoEnabledPython())
             renderer.run()
         #now that header and footer are rendered, we can use them in the main pod template and render the entire document
-        renderer = appy.pod.renderer.Renderer(StringIO(urbanTemplateObj), {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj, 'tool': self, 'header':tempFileNameHeader, 'footer':tempFileNameFooter, 'reference':tempFileNameReference, 'signatures': tempFileNameSignatures}, tempFileName, pythonWithUnoPath=self.getUnoEnabledPython())
+        renderer = appy.pod.renderer.Renderer(StringIO(urbanTemplateObj), {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj, 'tool': self, 'header':tempFileNameHeader, 'footer':tempFileNameFooter, 'reference':tempFileNameReference, 'signatures': tempFileNameSignatures}, tempFileName, pythonWithUnoPath=self.getUnoEnabledPython())
         renderer.run()
         # Tell the browser that the resulting page contains ODT
         response = self.REQUEST.RESPONSE
