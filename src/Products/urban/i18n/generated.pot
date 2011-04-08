@@ -999,6 +999,11 @@ msgstr ""
 msgid "urban_label_locality"
 msgstr ""
 
+#. Default: "Usage"
+#: Lot.py
+msgid "urban_label_lotusage"
+msgstr ""
+
 #. Default: "Mapextent"
 #: UrbanTool.py
 msgid "urban_label_mapExtent"

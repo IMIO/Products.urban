@@ -185,7 +185,7 @@ def migrateBuildLicencesInvestigationArticles(context):
         addInvestigationArticles(context, site.portal_urban.buildlicence)
 
     portal_catalog = getToolByName(site, 'portal_catalog')
-    brains = portal_catalog(portal_type=('BuildLicence',))
+    brains = portal_catalog(portal_type=('BuildLicence','ParcelOutLicence'))
     for brain in brains:
         obj = brain.getObject()
         if not hasattr(obj, 'investigationArticle'):

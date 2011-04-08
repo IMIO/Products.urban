@@ -1,6 +1,6 @@
 <div metal:define-macro="urbanFolderManagerMacro" i18n:domain="urban" tal:define="folderManagers here/getFoldermanagers">
  <tal:loop repeat="folderManager folderManagers" tal:condition="folderManagers">
-   <span tal:content="folderManager/Title">Treating agent name</span><br />
+   <span tal:content="python: folderManager.Title()">Treating agent name</span><br />
  </tal:loop>
  <p tal:condition="not: folderManagers" class="discreet" i18n:translate="no_foldermanager_defined">No folder manager defined</p>
 </div>

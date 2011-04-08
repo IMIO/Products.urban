@@ -1615,6 +1615,9 @@ msgstr "Types d'événements"
 msgid "urban_label_usage"
 msgstr "Statistiques INS"
 
+msgid "urban_label_lotusage"
+msgstr "Destination"
+
 #. Default: "Useplonetask"
 #: UrbanTool.py
 msgid "urban_label_usePloneTask"

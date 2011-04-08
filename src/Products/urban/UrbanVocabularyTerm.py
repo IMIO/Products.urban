@@ -97,7 +97,7 @@ class UrbanVocabularyTerm(BaseContent, BrowserDefaultMixin):
         """
         descr = self.Description().strip()
         #add prefix only if description isn't empty
-        #    or is different from code like "<p> </p>" ?? 
+        #    or is different from code like "<p> </p>" ??
         if descr and prefix:
             descr = prefix + descr
         if linebyline:

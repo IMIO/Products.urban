@@ -23,6 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.CMFCore.utils import getToolByName
 ##/code-section module-header
 
 schema = Schema((
@@ -38,8 +39,8 @@ schema = Schema((
     LinesField(
         name='usage',
         widget=MultiSelectionWidget(
+            label_msgid="urban_label_lotusage",
             label='Usage',
-            label_msgid='urban_label_usage',
             i18n_domain='urban',
         ),
         multiValued=True,
@@ -75,6 +76,8 @@ class Lot(BaseFolder, BrowserDefaultMixin):
 
     # Methods
 
+    # Manually created methods
+
     security.declarePublic('listUsages')
     def listUsages(self):
         """
@@ -82,6 +85,8 @@ class Lot(BaseFolder, BrowserDefaultMixin):
         """
         urbantool = getToolByName(self,'portal_urban')
         return DisplayList(urbantool.listVocabulary('lotusages', self))
+
+
 
 registerType(Lot, PROJECTNAME)
 # end of class Lot

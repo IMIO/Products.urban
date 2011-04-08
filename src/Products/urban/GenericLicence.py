@@ -453,14 +453,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  Urb
         urbantool = getToolByName(self,'portal_urban')
         return DisplayList(urbantool.listVocabulary('folderzones', self))
 
-    security.declarePublic('listInvestigationArticles')
-    def listInvestigationArticles(self):
-        """
-          Return a list of investigation articles from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('investigationarticles', self))
-
     security.declarePublic('listDivisions')
     def listDivisions(self):
         """
@@ -533,6 +525,14 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  Urb
         return DisplayList(urbantool.listVocabulary('pashs', self))
 
     # Manually created methods
+
+    security.declarePublic('listInvestigationArticles')
+    def listInvestigationArticles(self):
+        """
+          Return a list of investigation articles from the config
+        """
+        urbantool = getToolByName(self,'portal_urban')
+        return DisplayList(urbantool.listVocabulary('investigationarticles', self))
 
     security.declarePublic('listFloodingLevels')
     def listFloodingLevels(self):
