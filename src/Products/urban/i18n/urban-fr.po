@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-04-05 12:57+0000\n"
+"POT-Creation-Date: 2011-04-11 09:51+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -436,6 +436,33 @@ msgstr "au"
 
 msgid "investigationarticles_folder_title"
 msgstr "Articles pour les enquêtes"
+
+msgid "label_colname_CreationDate"
+msgstr "Créé le"
+
+msgid "label_colname_Creator"
+msgstr "Créateur"
+
+msgid "label_colname_Title"
+msgstr "Titre"
+
+msgid "label_colname_adr1"
+msgstr "Localité"
+
+msgid "label_colname_getBeginDate"
+msgstr "Du"
+
+msgid "label_colname_getEndDate"
+msgstr "Au"
+
+msgid "label_colname_getParcelsForDisplay"
+msgstr "Parcelle(s)"
+
+msgid "label_colname_name"
+msgstr "Nom(s)"
+
+msgid "label_colname_street"
+msgstr "Rue"
 
 msgid "label_edit"
 msgstr "Modifier"
@@ -1248,6 +1275,11 @@ msgstr "Type d'événement"
 msgid "urban_label_locality"
 msgstr "Localité"
 
+#. Default: "Usage"
+#: Lot.py
+msgid "urban_label_lotusage"
+msgstr "Destination"
+
 #. Default: "Mapextent"
 #: UrbanTool.py
 msgid "urban_label_mapExtent"
@@ -1614,9 +1646,6 @@ msgstr "Types d'événements"
 
 msgid "urban_label_usage"
 msgstr "Statistiques INS"
-
-msgid "urban_label_lotusage"
-msgstr "Destination"
 
 #. Default: "Useplonetask"
 #: UrbanTool.py

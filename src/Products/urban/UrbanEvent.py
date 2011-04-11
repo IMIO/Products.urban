@@ -447,7 +447,11 @@ class UrbanEvent(BaseFolder, Taskable, BrowserDefaultMixin):
         """
         recipients=self.objectValues('RecipientCadastre')
         toreturn='<CSV>TitreNomPrenom|AdresseLigne1|AdresseLigne2'
+        wft = getToolByName(self, 'portal_workflow')
         for recipient in recipients:
+            #do not take "disabled" recipients into account
+            if wft.getInfoFor(recipient, 'review_state') == 'disabled':
+                continue
             toreturn=toreturn+'%'+recipient.getName()+'|'+recipient.getStreet()+'|'+recipient.getAdr1()
         toreturn=toreturn+'</CSV>'
         return toreturn

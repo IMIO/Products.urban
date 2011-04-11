@@ -1,6 +1,6 @@
 <div metal:define-macro="urbanFolderManagerMacro" i18n:domain="urban" tal:define="folderManagers here/getFoldermanagers">
  <tal:loop repeat="folderManager folderManagers" tal:condition="folderManagers">
-   <span tal:content="python: folderManager.Title()">Treating agent name</span><br />
+   <span tal:content="folderManager/Title">Treating agent name</span><br />
  </tal:loop>
  <p tal:condition="not: folderManagers" class="discreet" i18n:translate="no_foldermanager_defined">No folder manager defined</p>
 </div>
@@ -185,10 +185,17 @@
 
 <!-- This macro need to receive a topic -->
 <!--We can receive parameters here :
-boolean showActions specify if we show the actions column
-list showedCols speicy a list of indexes we want to display if these indexes have been defined in the topic/customViewFields-->
+object 'topic' could be passed or 'tool'
+object 'tool' could be passed or 'topic'
+string 'specificSearch' is passed if object 'tool' is passed
+boolean 'showActions' specify if we show the actions column
+list 'showedCols' specify a list of indexes we want to display if these indexes have been defined in the topic/customViewFields-->
 <div metal:define-macro="listing" i18n:domain="plone">
-<tal:topiccontents define="topicContents python: topic.queryCatalog(batch=True);
+<tal:topiccontents define="searchEngine python: topic or tool;
+                           specificSearch specificSearch|nothing;
+                           theObjects theObjects|nothing;
+                           batchlen batchlen|nothing;
+                           topicContents python: searchEngine.queryCatalog(batch=True, specificSearch=specificSearch, context=context, theObjects=theObjects, batchlen=batchlen);
                            batch topicContents;
                            showActions showActions|nothing;
                            showedCols showedCols|topic/getCustomViewFields;
@@ -204,26 +211,16 @@ list showedCols speicy a list of indexes we want to display if these indexes hav
         Download PDF
     </a>
 
-    <tal:default condition="not:topic/getCustomView|nothing"
-                    define="folderContents topicContents">
-        <metal:listing metal:use-macro="here/folder_listing/macros/listing">
-            <metal:empty metal:fill-slot="no_items_in_listing"></metal:empty>
-        </metal:listing>
-
-    </tal:default>
-    <tal:custom condition="topic/getCustomView|nothing"
-                define="vocab python:topic.listMetaDataFields(False)">
+    <tal:custom>
 
         <table class="listing"
                 summary="Content listing"
                 cellpadding="0" cellspacing="0" width="100%"
                 i18n:attributes="summary summary_content_listing;">
-                <thead>
+                <thead i18n:domain="urban">
                 <tr>
-                    <tal:block repeat="field topic/getCustomViewFields">
-                    <th tal:condition="python: field in showedCols"
-                        tal:content="python:vocab.getValue(field, field)"
-                        i18n:translate=""/>
+                    <tal:block repeat="field showedCols">
+                     <th i18n:domain="urban" tal:content="python: 'label_colname_' + field" i18n:translate=""/>
                     </tal:block>
                     <th tal:condition="isALot" i18n:domain="urban" i18n:translate="parcels">
                       Parcels
@@ -240,8 +237,8 @@ list showedCols speicy a list of indexes we want to display if these indexes hav
                 <tal:brain tal:repeat="obj topicContents">
                 <tr tal:define="oddrow repeat/obj/odd;"
                     tal:attributes="class python:test(oddrow, 'even', 'odd')">
-                    <tal:fields repeat="field topic/getCustomViewFields"
-                                define="url obj/getURL;
+                    <tal:fields repeat="field showedCols"
+                                define="url obj/getURL|obj/absolute_url;
                                         obj_type obj/portal_type;
                                         obj_typeinfo python: here.portal_types.getTypeInfo(obj_type);
                                         icon python:portal_url+'/'+ obj_typeinfo.getIcon();
@@ -249,15 +246,25 @@ list showedCols speicy a list of indexes we want to display if these indexes hav
                                         obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);
                                         title_or_id obj/pretty_title_or_id">
                     <tal:block condition="python: field in showedCols" define="value python: getattr(obj, field, None)">
-                        <td tal:condition="python: field not in ['Title', 'Creator',]"
-                            tal:content="python:topic.formatCatalogMetadata(value)"
+                        <td tal:condition="python: field not in ['Title', 'Creator', 'name', 'street', ]"
+                            tal:content="structure value"
                             i18n:translate=""/>
+                        <tal:comment replace="nothing">special case for field 'name' where we display the 'title' that is the name reworked just above</tal:comment>
+                        <td tal:condition="python: field == 'name'">
+                         <span tal:content="obj/getName">Name</span>
+                         <br /><span tal:content="obj/Title" class="discreet">Name reworked</span>
+                        </td>
+                        <tal:comment replace="nothing">special case for field 'street' where we display the 'adr2' that is the 'streetname' reworked just above</tal:comment>
+                        <td tal:condition="python: field == 'street'">
+                         <span tal:content="obj/getStreet">Street</span>
+                         <br /><span tal:content="obj/getAdr2" class="discreet">Street name reworked</span>
+                        </td>
                         <td tal:condition="python: field == 'Creator'">
-                         <span tal:content="python: context.portal_membership.getMemberInfo(value)['fullname']">Creator fullname</span>
+                         <span tal:content="python: context.portal_membership.getMemberById(value)">Creator fullname</span>
                         </td>
 
                         <td tal:condition="python: field == 'Title'">
-                            <span tal:define="global url python: test(obj.getObject().aq_parent.meta_type == 'UrbanEvent' and obj.portal_properties.site_properties.ext_editor, url + '/external_edit', url)" />
+                            <span tal:define="global url python: test(obj.portal_type == 'File' and obj.portal_properties.site_properties.ext_editor, url + '/external_edit', url)" />
 
                             <a href="#" tal:attributes="href url">
                                 <img src="#"
@@ -283,8 +290,10 @@ list showedCols speicy a list of indexes we want to display if these indexes hav
                                                 class obj_wf_state_class"
                                 class="link-plain"
                                 tal:content="title_or_id" />
-                            <tal:block condition="python: obj.portal_type == 'UrbanEvent'" define="object obj/getObject" repeat="doc object/getDocuments">
-                             <br /><span class="discreet" style="margin-left:20px" tal:content="doc/Title">Document</span>
+                            <tal:block condition="python: obj.portal_type == 'UrbanEvent'">
+                             <tal:block define="object obj/getObject" repeat="doc object/getDocuments">
+                              <br /><span class="discreet" style="margin-left:20px" tal:content="doc/Title">Document</span>
+                             </tal:block>
                             </tal:block>
                         </td>
                     </tal:block>
@@ -295,9 +304,9 @@ list showedCols speicy a list of indexes we want to display if these indexes hav
                     </tal:block>
                 </td>
                 <td tal:condition="isAnEquipment">
-                    <span tal:content="python: obj.getObject().getLaunchDate()" />
+                    <span tal:content="python: obj.getLaunchDate()" />
                 </td>
-                <td tal:condition="showActions" tal:define="thisObject python: obj.getObject(); needExternalEdition python: test(obj.getObject().aq_parent.meta_type == 'UrbanEvent' and obj.portal_properties.site_properties.ext_editor, True, False)">
+                <td tal:condition="showActions" tal:define="thisObject python: hasattr(obj, 'getObject') and obj.getObject() or obj; needExternalEdition python: test(obj.portal_type == 'File' and obj.portal_properties.site_properties.ext_editor, True, False)">
                  <div metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
                 </td>
                 </tr>
@@ -309,18 +318,10 @@ list showedCols speicy a list of indexes we want to display if these indexes hav
     </tal:listing>
 
     <p class="discreet"
-        tal:condition="python: not topicContents and topic.listCriteria()"
+        tal:condition="python: not topicContents"
         i18n:domain="urban"
         i18n:translate="urban_no_event_added">
         There are currently no event for this element.
-    </p>
-
-    <p class="discreet"
-        tal:condition="not: topic/listCriteria"
-        i18n:domain="atcontenttypes"
-        i18n:translate="description_no_criteria_in_topic">
-        There are currently no criteria on which to search.
-        Please add them using the 'criteria' tab.
     </p>
 
     <!-- Navigation -->

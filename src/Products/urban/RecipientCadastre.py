@@ -97,6 +97,15 @@ class RecipientCadastre(BaseFolder, BrowserDefaultMixin):
         """
         return self.objectValues("PortionOut")
 
+    def getParcelsForDisplay(self):
+        """
+          Return contained Parcels for being displayed...
+        """
+        res = []
+        for parcel in self.getParcels():
+            res.append(parcel.Title())
+        return '<br />'.join(res)
+
     def getRecipientAddress(self):
         return self.getAdr1()+' '+self.getAdr2()
 

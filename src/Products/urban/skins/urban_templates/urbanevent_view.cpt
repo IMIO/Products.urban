@@ -2,15 +2,14 @@
       lang="en"
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="urban">
-
 <head>
 <metal:block fill-slot="top_slot"
              tal:define="global body_onload string: init();
                          member python: context.portal_membership.getAuthenticatedMember();
                          border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
-                         dummy python:request.set(border, 1)" />
+                         dummy python:request.set(border, 1);" />
 
-<tal:block condition="python:list(context.objectValues('RecipientCadastre'))">
+<tal:block condition="context/getRecipients">
     <div metal:fill-slot="style_slot">
         <link rel="stylesheet" href="map.css" type="text/css" media="screen" charset="utf-8" />
     </div>
@@ -30,7 +29,7 @@
 <body>
 <div metal:fill-slot="main">
 <metal:main_macro define-macro="main">
-<metal:body define-macro="body_macro">
+<metal:body define-macro="body_macro" tal:define="recipients context/getRecipients">
 <h1 class="documentFirstHeading" tal:content="here/Title"/>
 <div tal:replace="structure provider:plone.belowcontenttitle" />
 <!-- Back to the build licence... -->
@@ -86,7 +85,27 @@
 <a tal:attributes="href python:here.getUrbaneventtypes().getSpecialFunctionUrl()" tal:content="python:here.getUrbaneventtypes().getSpecialFunctionName()"/><br><br>
 </tal:block>
 
-<tal:block condition="python:list(context.objectValues('RecipientCadastre'))">
+<tal:block define="specificSearch python: 'searchRecipients';
+                   tool python: context.portal_urban;
+                   showedCols python: ('getParcelsForDisplay', 'name', 'street', 'adr1', );
+                   topic python: None;
+                   showActions python: True;
+                   theObjects python: True;
+                   batchlen python: 50">
+    <table width=100% class="listing">
+    <thead>
+    <tr>
+    <th colspan="4">
+    <span i18n:translate="number_of_recipients">Number of recipients</span> : 
+    <strong><span tal:content="python: len(recipients)" /></strong>
+    </th>
+    </tr>
+    </thead>
+    </table>
+    <div metal:use-macro="here/urban_macros/macros/listing" />
+</tal:block>
+
+<tal:carto condition="recipients">
 <center>
 <br /><br />
    <table border=0 width=100%>
@@ -97,43 +116,8 @@
    </table>
 </center>
 <br><br>
-<p><u><strong><span i18n:translate="contact_recipients">Contact recipients</span></strong></u></p>
-<table width=100% class="listing" tal:define="recipients python: context.getRecipients()">
-<thead>
-<tr>
-<th colspan="4">
-<span i18n:translate="number_of_recipients">Number of recipients</span> : 
-<strong><span tal:content="python: len(recipients)" /></strong>
-</th>
-</tr>
-<tr>
- <th i18n:translate="urban_label_parcels">Parcels</th>
- <th i18n:translate="urban_label_recipients">Recipients</th>
- <th i18n:translate="urban_label_street">Street</th>
- <th i18n:translate="urban_label_locality">Locality</th>
-</tr>
+</tal:carto>
 
-</thead>
-<tbody>
-<tal:block repeat="recipientObj recipients">
-<tr tal:define="oddrow repeat/recipientObj/odd;"
-                    tal:attributes="class python:test(oddrow, 'even', 'odd')">
-<td width=10%>
- <tal:block repeat="recParcel recipientObj/getParcels">
-  <span tal:content="recParcel/Title" /><br />
- </tal:block>
-</td>
-<td width=35%><span tal:content="python: recipientObj.getName()" /><br><span class="discreet" tal:content="python: recipientObj.Title()" /></td>
-<td width=35%><span tal:content="python: recipientObj.getStreet()" /><br><span class="discreet" tal:content="python: recipientObj.getAdr2()" /></td>
-<td width=20%><span tal:content="python: recipientObj.getAdr1()" /></td>
-</tr>
-</tal:block>
-</tbody>
-</table>
-
-</tal:block>
-
-    <!--tal:block condition="docObj" define="dummy python:docObj.getObject().external_edit()"/-->
 <tal:block condition="python: context.REQUEST.get('doc_uid') != None">
 <tal:block define="docObj python:context.uid_catalog(UID=context.REQUEST.get('doc_uid'))[0]">
 <Script tal:content="python:'document.location = \''+docObj.getObject().absolute_url()+'/external_edit\';'" />

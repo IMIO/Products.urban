@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-04-05 12:57+0000\n"
+"POT-Creation-Date: 2011-04-11 09:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -434,6 +434,33 @@ msgid "inquiry_to"
 msgstr ""
 
 msgid "investigationarticles_folder_title"
+msgstr ""
+
+msgid "label_colname_CreationDate"
+msgstr ""
+
+msgid "label_colname_Creator"
+msgstr ""
+
+msgid "label_colname_Title"
+msgstr ""
+
+msgid "label_colname_adr1"
+msgstr ""
+
+msgid "label_colname_getBeginDate"
+msgstr ""
+
+msgid "label_colname_getEndDate"
+msgstr ""
+
+msgid "label_colname_getParcelsForDisplay"
+msgstr ""
+
+msgid "label_colname_name"
+msgstr ""
+
+msgid "label_colname_street"
 msgstr ""
 
 msgid "label_edit"
@@ -1242,6 +1269,11 @@ msgstr ""
 #: Address.py
 #: Contact.py
 msgid "urban_label_locality"
+msgstr ""
+
+#. Default: "Usage"
+#: Lot.py
+msgid "urban_label_lotusage"
 msgstr ""
 
 #. Default: "Mapextent"
