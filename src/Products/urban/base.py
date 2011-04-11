@@ -239,7 +239,7 @@ class UrbanBase:
     security.declarePublic('getTerm')
     def getTerm(self, termFolder, termId):
         """
-          Returns a formatted version of the architects to be used in POD templates
+          Returns a term object for a given term folder
         """
         tool = getToolByName(self, 'portal_urban')
         urbanConfig = tool.getUrbanConfig(self)
