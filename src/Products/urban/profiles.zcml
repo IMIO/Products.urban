@@ -26,10 +26,10 @@
       for="Products.urban.interfaces.IUrbanTool"
   />
   <genericsetup:registerProfile
-      name="tests"
-      title="urban-tests"
-      directory="profiles/tests"
-      description="Tests Extension profile for urban."
+      name="labruyere"
+      title="urban-labruyere"
+      directory="profiles/labruyere"
+      description="La Bruyere Extension profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       for="Products.urban.interfaces.IUrbanTool"
   />
@@ -42,6 +42,14 @@
       for="Products.urban.interfaces.IUrbanTool"
   />
   <genericsetup:registerProfile
+      name="mons"
+      title="urban-mons"
+      directory="profiles/mons"
+      description="Mons Extension profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.urban.interfaces.IUrbanTool"
+  />
+  <genericsetup:registerProfile
       name="sambreville"
       title="urban-sambreville"
       directory="profiles/sambreville"
@@ -50,10 +58,10 @@
       for="Products.urban.interfaces.IUrbanTool"
   />
   <genericsetup:registerProfile
-      name="labruyere"
-      title="urban-labruyere"
-      directory="profiles/labruyere"
-      description="La Bruyere Extension profile for urban."
+      name="tests"
+      title="urban-tests"
+      directory="profiles/tests"
+      description="Tests Extension profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       for="Products.urban.interfaces.IUrbanTool"
   />

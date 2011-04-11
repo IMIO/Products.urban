@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<import-steps>
+<import-step
+            id="urban-addMonsUrbanEventTypes"
+            handler="Products.urban.setuphandlers.addUrbanEventTypes"
+            title="Add specific urbanEventTypes for Mons"
+            version="2011-04-11T14:00:00.00000">
+Adapt application for Mons
+</import-step>
+</import-steps>

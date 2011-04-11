@@ -2,8 +2,8 @@
 #
 # File: setuphandlers.py
 #
-# Copyright (c) 2009 by CommunesPlone
-# Generator: ArchGenXML Version 2.4.1
+# Copyright (c) 2011 by CommunesPlone
+# Generator: ArchGenXML Version 2.5
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)

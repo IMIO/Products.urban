@@ -1043,6 +1043,37 @@ def addTestObjects(context):
         from Products.urban.Extensions.imports import import_streets_fromfile
         import_streets_fromfile(tool)
 
+    addUrbanEventTypes(context)
+
+    #add some generic templates in configuration
+    gen_temp = { 'templateHeader':'header.odt', 
+                 'templateFooter':'footer.odt',
+                 'templateReference':'reference.odt',
+                 'templateSignatures':'signatures.odt',
+                 'templateStatsINS':'statsins.odt'
+                }
+
+    for attribname in gen_temp.keys():
+        try:
+            fld = tool.getField(attribname)
+            if not fld.getAccessor(tool)().size:
+                filePath = '%s/templates/%s' % (context._profile_path, gen_temp[attribname])
+                fileDescr = file(filePath, 'rb')
+                fileContent = fileDescr.read()
+                fld.getMutator(tool)(fileContent)
+                fileDescr.close()
+                fld.setContentType(tool, "application/vnd.oasis.opendocument.text")
+                fld.setFilename(tool, gen_temp[attribname])
+                logger.info("Generic template '%s' added: '%s'"%(attribname, gen_temp[attribname]))
+        except IOError, msg:
+            logger.error("Cannot open the file '%s': %s" %(filePath, msg))
+        except Exception, msg:
+            logger.warn("An error occured while processing the tool '%s' attribute: %s" % (attribname,msg))
+
+def addUrbanEventTypes(context):
+    """
+      Helper method for easily adding urbanEventTypes
+    """
     #add some UrbanEventTypes...
     #get the urbanEventTypes dict from the profile
     #get the name of the profile by taking the last part of the _profile_path
@@ -1052,6 +1083,8 @@ def addTestObjects(context):
         exec(from_string)
     except ImportError:
         return
+    site = context.getSite()
+    tool = getToolByName(site, 'portal_urban')
     #add the UrbanEventType
     for urbanConfigId in urbanEventTypes:
         try:
@@ -1084,35 +1117,7 @@ def addTestObjects(context):
             except Exception, msg:
                 #there was an error, reinstalling?  reapplying?  we pass...
                 logger.warn("An error occured while processing the '%s' UrbanEvent: '%s'" % (loginfo, msg))
-
                 pass
-
-    #add some generic templates in configuration
-    gen_temp = { 'templateHeader':'header.odt', 
-                 'templateFooter':'footer.odt',
-                 'templateReference':'reference.odt',
-                 'templateSignatures':'signatures.odt',
-                 'templateStatsINS':'statsins.odt'
-                }
-
-    for attribname in gen_temp.keys():
-        try:
-            fld = tool.getField(attribname)
-            if not fld.getAccessor(tool)().size:
-                filePath = '%s/templates/%s' % (context._profile_path, gen_temp[attribname])
-                fileDescr = file(filePath, 'rb')
-                fileContent = fileDescr.read()
-                fld.getMutator(tool)(fileContent)
-                fileDescr.close()
-                fld.setContentType(tool, "application/vnd.oasis.opendocument.text")
-                fld.setFilename(tool, gen_temp[attribname])
-                logger.info("Generic template '%s' added: '%s'"%(attribname, gen_temp[attribname]))
-        except IOError, msg:
-            logger.error("Cannot open the file '%s': %s" %(filePath, msg))
-        except Exception, msg:
-            logger.warn("An error occured while processing the tool '%s' attribute: %s" % (attribname,msg))
-
-
 
 def importStreets(context):
     #site = context.getSite()
