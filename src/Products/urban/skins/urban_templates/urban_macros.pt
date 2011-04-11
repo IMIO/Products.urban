@@ -260,7 +260,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                          <br /><span tal:content="obj/getAdr2" class="discreet">Street name reworked</span>
                         </td>
                         <td tal:condition="python: field == 'Creator'">
-                         <span tal:content="python: context.portal_membership.getMemberById(value)">Creator fullname</span>
+                         <span tal:content="python: context.portal_membership.getMemberInfo(value)['fullname'] or context.portal_membership.getMemberInfo(value)['username']">Creator fullname</span>
                         </td>
 
                         <td tal:condition="python: field == 'Title'">
