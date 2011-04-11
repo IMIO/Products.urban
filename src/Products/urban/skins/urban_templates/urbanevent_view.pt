@@ -85,7 +85,8 @@
 <a tal:attributes="href python:here.getUrbaneventtypes().getSpecialFunctionUrl()" tal:content="python:here.getUrbaneventtypes().getSpecialFunctionName()"/><br><br>
 </tal:block>
 
-<tal:block define="specificSearch python: 'searchRecipients';
+<tal:block condition="recipients"
+           define="specificSearch python: 'searchRecipients';
                    tool python: context.portal_urban;
                    showedCols python: ('getParcelsForDisplay', 'name', 'street', 'adr1', );
                    topic python: None;
