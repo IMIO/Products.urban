@@ -122,7 +122,7 @@ urbanEventTypes = {
                     {
                     'id': "enquete-publique",
                     'title': "Enquête publique",
-                    'activatedFields': ['eventDate', 'claimsDate', 'explanationsDate', ],
+                    'activatedFields': ['eventDate', 'claimsDate', 'explanationsDate', 'claimsText'],
                     'deadLineDelay': 15,
                     'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
                     'specialFunctionUrl': "addInvestigationPO",
