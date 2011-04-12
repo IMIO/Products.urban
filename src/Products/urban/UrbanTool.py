@@ -400,7 +400,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'.odt')
         try:
             applicantobj=newDocFolder.aq_inner.aq_parent.getApplicants()[0]
-        except IndexError:
+        except:
             applicantobj = None
         portal_url=getToolByName(self,'portal_url')
         brain=self.portal_catalog(path=portal_url.getPortalPath()+'/'+'/'.join(portal_url.getRelativeContentPath(newDocFolder.aq_inner.aq_parent)),id='depot-de-la-demande')
@@ -985,7 +985,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             eventObj=obj.getObject()
             licenceObj=eventObj.getParentNode()
             applicantObj=licenceObj.getApplicants()[0]
-            architectObj=licenceObj.getArchitects()
+            architectObj=licenceObj.getArchitects()[0]
             if architectObj==None:
                 xmlError=xmlError+applicantObj.getName1()+' '+applicantObj.getName2()+'\n'
             worktype=licenceObj.getWorkType()
@@ -997,11 +997,14 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                     xmlContent=xmlContent+'      <Doc_Afd>'+licenceObj.objectValues('PortionOut')[0].getDivisionCode()+'</Doc_Afd>\n'
                 except:
                     xmlError=xmlError+str(licenceObj.getReference())
-                if licenceObj.getWorkLocationStreet():
-                    xmlContent=xmlContent+'      <E_220_straatcode>'+str(licenceObj.getWorkLocationStreetCode())+'</E_220_straatcode>\n'
-                    xmlContent=xmlContent+'      <E_220_straatnaam>'+str(licenceObj.getWorkLocationStreet()).decode('utf-8').encode('iso-8859-1')+'</E_220_straatnaam>\n'
-                else:
-                    xmlError=xmlError+'pas de rue: '+str(licenceObj.getReference())+' '+licenceObj.licenceSubject.encode('iso-8859-1')+' '+applicantObj.name1.encode('iso-8859-1')+' '+applicantObj.name2.encode('iso-8859-1')+'\n'
+                try:
+                    if licenceObj.getWorkLocationStreet():
+                        xmlContent=xmlContent+'      <E_220_straatcode>'+str(licenceObj.getWorkLocationStreetCode())+'</E_220_straatcode>\n'
+                        xmlContent=xmlContent+'      <E_220_straatnaam>'+str(licenceObj.getWorkLocationStreet()).decode('utf-8').encode('iso-8859-1')+'</E_220_straatnaam>\n'
+                    else:
+                        xmlError=xmlError+'pas de rue: '+str(licenceObj.getReference())+' '+licenceObj.licenceSubject.encode('iso-8859-1')+' '+applicantObj.name1.encode('iso-8859-1')+' '+applicantObj.name2.encode('iso-8859-1')+'\n'
+                except:
+                    xmlError=xmlError+'problème de rue: '+str(licenceObj.getReference())+' '+licenceObj.licenceSubject.encode('iso-8859-1')+' '+applicantObj.name1.encode('iso-8859-1')+' '+applicantObj.name2.encode('iso-8859-1')+'\n'
                 xmlContent=xmlContent+'      <E_220_huisnr>'+licenceObj.getWorkLocationHouseNumber()+'</E_220_huisnr>\n'
                 if worktype=='ncmu':
                     xmlWorkType='N_UNI'
