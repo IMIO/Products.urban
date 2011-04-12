@@ -397,8 +397,6 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="70j",title=u"70 jours (article 107§1 / article 264)", termKey="70")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="75j",title=u"75 jours (article 107§2)", termKey="75")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="115j",title=u"115 jours (article 107§2)", termKey="115")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="140j",title=u"140 jours", termKey="140")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="230j",title=u"230 jours", termKey="230")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="art127",title=u"Article 127", termKey="0")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="inconnu",title=u"Inconnu", termKey="0")
 
