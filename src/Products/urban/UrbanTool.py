@@ -978,8 +978,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         xmlContent=xmlContent+'    <E_220_Periode_tot>'+dateto.replace("/","")+'</E_220_Periode_tot>\n'
         xmlContent=xmlContent+'    <E_220_ICT>COM</E_220_ICT>\n'
         xmlContent=xmlContent+'  </E_220_herkomst>\n'
-        liste=["07103","07106","07105","07108","07111","07112","07/113","7115","07/116","07/117","7120","07/121","7124","7126","7128","786","793iii","795","796","0797","08/01","08/04","08/05","08/06","08/09","08/11","08/13","08/14","08/15","08/17","819","08/21","08/22","08/25","08/27","08/29","08/30","08/31","08/32","08/33","08/34","08/36","08/39","08/42","08/45","08/49","08/16"]
-        lsttermarchitect=["NON REQUIS","lui-meme","Eux-memes","elle-meme","lui-meme","lui-meme ","Lui-meme","A COMPLETER "]
+        lsttermarchitect=["NON REQUIS","lui-meme","Eux-memes","elle-meme","lui-meme","lui-même","lui-meme ","Lui-meme","A COMPLETER "]
         htmllist='<HTML><TABLE>'
         for obj in results:
             eventObj=obj.getObject()
@@ -989,7 +988,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             if architectObj==None:
                 xmlError=xmlError+applicantObj.getName1()+' '+applicantObj.getName2()+'\n'
             worktype=licenceObj.getWorkType()
-            if (pw.getInfoFor(licenceObj,'review_state')=='accepted') and (not str(licenceObj.getReference()) in liste):
+            if (pw.getInfoFor(licenceObj,'review_state')=='accepted'):
                 htmllist=htmllist+'<TR><TD>'+str(licenceObj.getReference())+'  '+licenceObj.title.encode('iso-8859-1')+'</TD><TD>'+str(eventObj.getDecisionDate())+'</TD></TR>'
                 xmlContent=xmlContent+'  <Item220>\n'
                 xmlContent=xmlContent+'      <E_220_Ref_Toel>'+str(licenceObj.getReference())+'</E_220_Ref_Toel>\n'
