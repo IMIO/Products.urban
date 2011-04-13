@@ -30,7 +30,6 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 from Products.CMFCore.utils import getToolByName
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
-from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 ##/code-section module-header
 
@@ -116,7 +115,7 @@ Declaration_schema['title'].required = False
 Declaration_schema['title'].searchable = True
 ##/code-section after-schema
 
-class Declaration(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  UrbanBase, BrowserDefaultMixin):
+class Declaration(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

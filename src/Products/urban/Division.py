@@ -30,7 +30,6 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 from Products.CMFCore.utils import getToolByName
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
-from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 ##/code-section module-header
 
@@ -132,7 +131,7 @@ Division_schema['title'].searchable = True
 Division_schema['title'].required = False
 ##/code-section after-schema
 
-class Division(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  UrbanBase, BrowserDefaultMixin):
+class Division(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

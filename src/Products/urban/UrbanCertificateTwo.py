@@ -25,7 +25,6 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
-from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 ##/code-section module-header
 
@@ -81,7 +80,7 @@ UrbanCertificateTwo_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class UrbanCertificateTwo(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  UrbanBase, UrbanCertificateBase, BrowserDefaultMixin):
+class UrbanCertificateTwo(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, UrbanCertificateBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

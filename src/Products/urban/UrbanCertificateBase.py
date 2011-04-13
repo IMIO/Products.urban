@@ -30,7 +30,6 @@ from Products.PageTemplates.GlobalTranslationService import getGlobalTranslation
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
 from Products.urban.indexes import UrbanIndexes
-from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 from zope.i18n import translate
 ##/code-section module-header
@@ -112,7 +111,7 @@ UrbanCertificateBase_schema['title'].required = False
 UrbanCertificateBase_schema['title'].visible = False
 ##/code-section after-schema
 
-class UrbanCertificateBase(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  UrbanBase, BrowserDefaultMixin):
+class UrbanCertificateBase(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

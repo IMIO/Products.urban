@@ -29,7 +29,6 @@ from DateTime import DateTime
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Acquisition import aq_inner, aq_parent
 from Products.CMFCore.utils import getToolByName
-from Products.urban.taskable import Taskable
 from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
 service = getGlobalTranslationService()
 _ = service.translate
@@ -151,7 +150,7 @@ UrbanEvent_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class UrbanEvent(BaseFolder, Taskable, BrowserDefaultMixin):
+class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

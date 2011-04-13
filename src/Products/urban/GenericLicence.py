@@ -31,12 +31,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
-from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
-
-if HAS_PLONETASK:
-    from Products.PloneTask.utils import getCustomAdapter
-
 ##/code-section module-header
 
 schema = Schema((
@@ -396,7 +391,7 @@ GenericLicence_schema['title'].searchable = True
 GenericLicence_schema['title'].widget.visible = False
 ##/code-section after-schema
 
-class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  UrbanBase, BrowserDefaultMixin):
+class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -622,7 +617,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  Urb
         """
           Gets the "adapted" version of myself. If no custom adapter is found, this methods returns me
         """
-        return getCustomAdapter(self, isTask=True)
+        return self
 
     security.declarePublic('getEventById')
     def getEventById(self, eventId):

@@ -1647,11 +1647,6 @@ msgstr "Types d'événements"
 msgid "urban_label_usage"
 msgstr "Statistiques INS"
 
-#. Default: "Useplonetask"
-#: UrbanTool.py
-msgid "urban_label_usePloneTask"
-msgstr "Utiliser PloneTask si celui-ci est présent"
-
 #. Default: "Usetabbing"
 #: UrbanTool.py
 msgid "urban_label_useTabbing"

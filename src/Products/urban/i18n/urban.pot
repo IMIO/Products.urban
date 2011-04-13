@@ -1642,11 +1642,6 @@ msgstr ""
 msgid "urban_label_usage"
 msgstr ""
 
-#. Default: "Useplonetask"
-#: UrbanTool.py
-msgid "urban_label_usePloneTask"
-msgstr ""
-
 #. Default: "Usetabbing"
 #: UrbanTool.py
 msgid "urban_label_useTabbing"

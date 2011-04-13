@@ -31,7 +31,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
-from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 ##/code-section module-header
 
@@ -99,7 +98,7 @@ EnvironmentalDeclaration_schema['title'].required = False
 EnvironmentalDeclaration_schema['title'].visible = False
 ##/code-section after-schema
 
-class EnvironmentalDeclaration(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  UrbanBase, BrowserDefaultMixin):
+class EnvironmentalDeclaration(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

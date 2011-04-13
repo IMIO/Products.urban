@@ -88,12 +88,7 @@
                           path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
                           dummy python: context.setPathCritValue(path_crit, context.UID());
                           showActions python: True;">
-          <tal:block condition="not: python: context.portal_quickinstaller.isProductInstalled('PloneTask') and context.portal_urban.getUsePloneTask()">
            <metal:listing use-macro="here/urban_macros/macros/listing" />
-          </tal:block>
-          <tal:block condition="python: context.portal_quickinstaller.isProductInstalled('PloneTask') and context.portal_urban.getUsePloneTask()">
-           <metal:listing use-macro="here/urban_macros/macros/integratePloneTask" />
-          </tal:block>
          </div>
 
          </tal:not_urban_root>
@@ -105,12 +100,7 @@
                           path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
                           dummy python: context.setPathCritValue(path_crit, context.UID());
                           showActions python: True;">
-          <tal:block condition="not: python: context.portal_quickinstaller.isProductInstalled('PloneTask') and context.portal_urban.getUsePloneTask()">
            <metal:listing use-macro="here/urban_macros/macros/listing" />
-          </tal:block>
-          <tal:block condition="python: context.portal_quickinstaller.isProductInstalled('PloneTask') and context.portal_urban.getUsePloneTask()">
-           <metal:listing use-macro="here/urban_macros/macros/integratePloneTask" />
-          </tal:block>
          </div>
          </tal:urban_root>
 
