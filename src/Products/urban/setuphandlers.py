@@ -3,7 +3,7 @@
 # File: setuphandlers.py
 #
 # Copyright (c) 2011 by CommunesPlone
-# Generator: ArchGenXML Version 2.5
+# Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -39,7 +39,7 @@ def isNoturbanProfile(context):
 
 def setupHideToolsFromNavigation(context):
     """hide tools"""
-    if isNoturbanProfile(context): return 
+    if isNoturbanProfile(context): return
     # uncatalog tools
     site = context.getSite()
     toolnames = ['portal_urban']
@@ -62,7 +62,7 @@ def setupHideToolsFromNavigation(context):
 def updateRoleMappings(context):
     """after workflow changed update the roles mapping. this is like pressing
     the button 'Update Security Setting' and portal_workflow"""
-    if isNoturbanProfile(context): return 
+    if isNoturbanProfile(context): return
     wft = getToolByName(context.getSite(), 'portal_workflow')
     wft.updateRoleMappings()
 
@@ -391,14 +391,14 @@ def addUrbanConfigs(context):
             newFolderid = configFolder.invokeFactory("Folder",id="folderdelays",title=service.translate("urban","folderdelays_folder_title",context=site,default="FolderDelays"))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
-            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="30j",title=u"30 jours (article 107§1 / article 264)", termKey="30")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="70j",title=u"70 jours (article 107§1 / article 264)", termKey="70")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="75j",title=u"75 jours (article 107§2)", termKey="75")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="115j",title=u"115 jours (article 107§2)", termKey="115")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="art127",title=u"Article 127", termKey="0")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="inconnu",title=u"Inconnu", termKey="0")
+            newFolder.setLocallyAllowedTypes(['UrbanDelay'])
+            newFolder.setImmediatelyAddableTypes(['UrbanDelay'])
+            newFolder.invokeFactory("UrbanDelay",id="30j",title=u"30 jours (article 107§1 / article 264)", deadLineDelay=30, alertDelay=20)
+            newFolder.invokeFactory("UrbanDelay",id="70j",title=u"70 jours (article 107§1 / article 264)", deadLineDelay=70, alertDelay=20)
+            newFolder.invokeFactory("UrbanDelay",id="75j",title=u"75 jours (article 107§2)", deadLineDelay=75, alertDelay=20)
+            newFolder.invokeFactory("UrbanDelay",id="115j",title=u"115 jours (article 107§2)", deadLineDelay=115, alertDelay=20)
+            newFolder.invokeFactory("UrbanDelay",id="art127",title=u"Article 127", deadLineDelay=0, alertDelay=20)
+            newFolder.invokeFactory("UrbanDelay",id="inconnu",title=u"Inconnu", deadLineDelay=0, alertDelay=20)
 
             #add the derogations folder
             newFolderid = configFolder.invokeFactory("Folder",id="derogations",title=service.translate("urban","derogations_folder_title",context=site,default="Derogations"))

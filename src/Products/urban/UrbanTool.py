@@ -3,7 +3,7 @@
 # File: UrbanTool.py
 #
 # Copyright (c) 2011 by CommunesPlone
-# Generator: ArchGenXML Version 2.5
+# Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -458,7 +458,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         response.redirect(newDocFolder.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
 
     security.declarePublic('listVocabulary')
-    def listVocabulary(self, vocToReturn, context, vocType="UrbanVocabularyTerm", inUrbanConfig=True):
+    def listVocabulary(self, vocToReturn, context, vocType="UrbanVocabularyTerm", inUrbanConfig=True, keyToUse="termKey"):
         """
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
@@ -473,11 +473,14 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             vocPath = portal_url.getPortalPath()+'/portal_urban/'+vocToReturn+'/'
         brains = self.portal_catalog(path=vocPath, sort_on="getObjPositionInParent", portal_type=vocType, review_state='enabled')
         res=[]
+        if keyToUse == "deadLineDelay":
+            import pdb; pdb.set_trace()
         for brain in brains:
             #if we wrote a termKey, we use it...
             obj = brain.getObject()
-            if hasattr(obj, 'termKey') and obj.getTermKey():
-                key = str(obj.getTermKey())
+            key = getattr(obj, keyToUse, None)
+            if key:
+                key = str(key)
             else:
                 #... either we use the id...
                 key=brain.id
@@ -1507,6 +1510,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         b_start = self.REQUEST.get('b_start', 0)
         batch = Batch(res, batchlen, int(b_start), orphan=0)
         return batch
+
 
 
 registerType(UrbanTool, PROJECTNAME)

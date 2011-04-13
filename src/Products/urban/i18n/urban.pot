@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-04-11 09:51+0000\n"
+"POT-Creation-Date: 2011-04-13 13:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -775,6 +775,10 @@ msgstr ""
 msgid "urban-tests"
 msgstr ""
 
+# Default: Set the number of days the alert will be shown before the deadline delay
+msgid "urban_alertdelay_descr"
+msgstr ""
+
 #. Default: "Enter the 4 coordinates of the map, each coordinate separated by a comma."
 #: UrbanTool.py
 msgid "urban_descr_mapExtent"
@@ -878,6 +882,11 @@ msgstr ""
 #. Default: "Adr2"
 #: RecipientCadastre.py
 msgid "urban_label_adr2"
+msgstr ""
+
+#. Default: "Alertdelay"
+#: UrbanDelay.py
+msgid "urban_label_alertDelay"
 msgstr ""
 
 #. Default: "Annonceddelay"
@@ -1632,6 +1641,11 @@ msgstr ""
 #. Default: "Path of a UNO-enabled Python interpreter (ie /usr/bin/python)"
 #: UrbanTool.py
 msgid "urban_label_unoEnabledPython"
+msgstr ""
+
+#. Default: "Urbandelays"
+#: urbaneventtype_urbandelay.py
+msgid "urban_label_urbandelays"
 msgstr ""
 
 #. Default: "Urbaneventtypes"

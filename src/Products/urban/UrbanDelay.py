@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# File: Geometrician.py
+# File: UrbanDelay.py
 #
 # Copyright (c) 2011 by CommunesPlone
 # Generator: ArchGenXML Version 2.6
@@ -23,18 +23,31 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Contact import Contact
 ##/code-section module-header
 
 schema = Schema((
 
     IntegerField(
-        name='nationalRegister',
+        name='deadLineDelay',
+        default=0,
         widget=IntegerField._properties['widget'](
-            label='Nationalregister',
-            label_msgid='urban_label_nationalRegister',
+            label='Deadlinedelay',
+            label_msgid='urban_label_deadLineDelay',
             i18n_domain='urban',
         ),
+        validators=('isInt',),
+    ),
+    IntegerField(
+        name='alertDelay',
+        default=0,
+        widget=IntegerField._properties['widget'](
+            description='Set the number of days the alert will be shown before the deadline delay',
+            description_msgid="urban_alertdelay_descr",
+            label='Alertdelay',
+            label_msgid='urban_label_alertDelay',
+            i18n_domain='urban',
+        ),
+        validators=('isInt',),
     ),
 
 ),
@@ -43,48 +56,32 @@ schema = Schema((
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-Geometrician_schema = Contact.schema.copy() + \
+UrbanDelay_schema = BaseSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class Geometrician(BaseContent, Contact, BrowserDefaultMixin):
+class UrbanDelay(BaseContent, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
 
-    implements(interfaces.IGeometrician)
+    implements(interfaces.IUrbanDelay)
 
-    meta_type = 'Geometrician'
+    meta_type = 'UrbanDelay'
     _at_rename_after_creation = True
 
-    schema = Geometrician_schema
+    schema = UrbanDelay_schema
 
     ##code-section class-header #fill in your manual code here
-    del schema['title']
-    archetype_name = 'Geometrician'
-    aliases = {
-        '(Default)'  : 'Geometrician_view',
-        'view'       : '(Default)',
-        'index.html' : '(Default)',
-        'edit'       : 'Geometrician_edit',
-        'properties' : 'base_metadata',
-        'sharing'    : '',
-        }
     ##/code-section class-header
 
     # Methods
 
-    # Manually created methods
 
-    def Title(self):
-        return self.getName1() + " " + self.getName2()
-
-
-
-registerType(Geometrician, PROJECTNAME)
-# end of class Geometrician
+registerType(UrbanDelay, PROJECTNAME)
+# end of class UrbanDelay
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer

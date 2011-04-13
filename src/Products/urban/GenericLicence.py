@@ -3,7 +3,7 @@
 # File: GenericLicence.py
 #
 # Copyright (c) 2011 by CommunesPlone
-# Generator: ArchGenXML Version 2.5
+# Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -483,7 +483,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  Urb
           Return a list of delays from the config
         """
         urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('folderdelays', self))
+        return DisplayList(urbantool.listVocabulary('folderdelays', self, vocType="UrbanDelay", keyToUse="deadLineDelay"))
 
     security.declarePublic('defaultInvestigationArticle')
     def defaultInvestigationArticle(self):

@@ -3,8 +3,8 @@
 <import-step
             id="urban-addTestObjects"
             handler="Products.urban.setuphandlers.addTestObjects"
-            title="Add some objects for test prupose"
+            title="Add some objects for test purpose"
             version="2008-10-15T15:00:00.00000">
-Add some objects for test prupose
+Add some objects for test purpose
 </import-step>
 </import-steps>

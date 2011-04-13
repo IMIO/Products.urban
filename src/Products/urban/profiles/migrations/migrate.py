@@ -242,6 +242,12 @@ def addEquipmentTypes(context):
     newFolder.invokeFactory("UrbanVocabularyTerm",id="sewers",title=u"Egouttage")
     newFolder.invokeFactory("UrbanVocabularyTerm",id="water",title=u"Eau")
 
+def migrateFolderDelays(context):
+    """
+      Delays were UrbanVocabularyTerms, no they are UrbanDelays
+    """
+    pass
+
 def migrateTopicsAddPathCriterion(context):
     """
       We need some topics to have a path criterion now, so add it if necessary

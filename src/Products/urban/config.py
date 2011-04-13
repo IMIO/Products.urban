@@ -3,7 +3,7 @@
 # File: urban.py
 #
 # Copyright (c) 2011 by CommunesPlone
-# Generator: ArchGenXML Version 2.5
+# Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -60,6 +60,7 @@ ADD_CONTENT_PERMISSIONS = {
     'Lot': 'urban: Add Lot',
     'Division': 'urban: Add Division',
     'WorkLocation': 'urban: Add WorkLocation',
+    'UrbanDelay': 'urban: Add UrbanDelay',
 }
 
 setDefaultRoles('urban: Add GenericLicence',  ('Manager', ))
@@ -88,6 +89,7 @@ setDefaultRoles('urban: Add Equipment',  ('Manager', ))
 setDefaultRoles('urban: Add Lot',  ('Manager', ))
 setDefaultRoles('urban: Add Division',  ('Manager', ))
 setDefaultRoles('urban: Add WorkLocation',  ('Manager', ))
+setDefaultRoles('urban: Add UrbanDelay',  ('Manager', ))
 
 product_globals = globals()
 
