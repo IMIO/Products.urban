@@ -30,7 +30,6 @@ from GenericLicence import GenericLicence
 from GenericLicence import GenericLicence_schema
 from Products.CMFCore import permissions
 from Products.CMFCore.utils import getToolByName
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
 import appy.pod.renderer
 import os
 import psycopg2

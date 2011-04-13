@@ -25,7 +25,6 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
 ##/code-section module-header
 
 schema = Schema((

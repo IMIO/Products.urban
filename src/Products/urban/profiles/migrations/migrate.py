@@ -1,6 +1,6 @@
 from Products.CMFCore.utils import getToolByName
 import logging
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
+from Products.urban import urbanMessageFactory as _
 logger = logging.getLogger('urban: migrations')
 
 def isNoturbanMigrationsProfile(context):
@@ -228,9 +228,8 @@ def addEquipmentTypes(context):
 
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
-    service = getGlobalTranslationService()
     configFolder=getattr(tool,'parceloutlicence')
-    newFolderid = configFolder.invokeFactory("Folder",id="equipmenttypes",title=service.translate("urban","folderequipmenttypes_folder_title",context=site,default="EquipmentTypes"))
+    newFolderid = configFolder.invokeFactory("Folder",id="equipmenttypes",title=_("urban","folderequipmenttypes_folder_title",context=site,default="EquipmentTypes"))
     newFolder = getattr(configFolder, newFolderid)
     newFolder.setConstrainTypesMode(1)
     newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -271,11 +270,10 @@ def addSpecificFeatures(context):
 
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
-    service = getGlobalTranslationService()
     for urban_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', ]:
         configFolder=getattr(tool,urban_type.lower())
         #we add the specific features folder
-        newFolderid = configFolder.invokeFactory("Folder",id="specificfeatures",title=service.translate("urban","urban_label_specificFeatures",context=site,default="Specific features"))
+        newFolderid = configFolder.invokeFactory("Folder",id="specificfeatures",title=_("urban","urban_label_specificFeatures",context=site,default="Specific features"))
         newFolder = getattr(configFolder, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])

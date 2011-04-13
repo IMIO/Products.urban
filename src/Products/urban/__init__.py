@@ -59,6 +59,8 @@ DirectoryView.registerDirectory('skins', product_globals)
 
 ##code-section custom-init-head #fill in your manual code here
 from AccessControl import ModuleSecurityInfo
+from zope.i18nmessageid import MessageFactory
+urbanMessageFactory = MessageFactory('Products.urban')
 ##/code-section custom-init-head
 
 

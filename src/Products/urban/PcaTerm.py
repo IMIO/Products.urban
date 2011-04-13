@@ -23,7 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
+from Products.urban import urbanMessageFactory as _
 ##/code-section module-header
 
 schema = Schema((
@@ -110,11 +110,9 @@ class PcaTerm(BaseContent, BrowserDefaultMixin):
         """
           Return a list of decree types
         """
-        service = getGlobalTranslationService()
-        _ = service.translate
         lst=[
-             ['royal', _("urban", 'decree_type_royal', context=self, default="Royal")],
-             ['departmental', _("urban", 'decree_type_departmental', context=self, default="Departmental")],
+             ['royal', _("urban", 'decree_type_royal')],
+             ['departmental', _("urban", 'decree_type_departmental')],
               ]
         vocab = []
         for elt in lst:

@@ -24,7 +24,7 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Contact import Contact
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
+from Products.urban import urbanMessageFactory as _
 ##/code-section module-header
 
 schema = Schema((
@@ -104,20 +104,18 @@ class FolderManager(BaseContent, Contact, BrowserDefaultMixin):
         """
           Return a list of available grades from the configuration
         """
-        service = getGlobalTranslationService()
-        _ = service.translate
         lst=[
-             ['agent-accueil', _("urban", 'reception_agent', context=self, default="Reception agent")],
-             ['agent-administratif', _("urban", 'administrative_agent', context=self, default="Administrative agent")],
-             ['agent-technique', _("urban", 'technical_agent', context=self, default="Technical agent")],
-             ['agent-traitant', _("urban", 'treating_agent', context=self, default="Treating agent")],
-             ['directeur-administratif', _("urban", 'administrative_director', context=self, default="Administrative director")],
-             ['directeur-general', _("urban", 'general_director', context=self, default="General director")],
-             ['directeur-technique', _("urban", 'technical_director', context=self, default="Technical director")],
-             ['reponsable', _("urban", 'town_planning_responsable', context=self, default="Town planning responsible")],
-             ['responsable-accueil', _("urban", 'reception_responsable', context=self, default="Reception responsible")],
-             ['responsable-administratif', _("urban", 'administrative_responsable', context=self, default="Administrative responsible")],
-             ['responsable-technique', _("urban", 'technical_responsable', context=self, default="Technical responsible")],
+             ['agent-accueil', _("urban", 'reception_agent')],
+             ['agent-administratif', _("urban", 'administrative_agent')],
+             ['agent-technique', _("urban", 'technical_agent')],
+             ['agent-traitant', _("urban", 'treating_agent')],
+             ['directeur-administratif', _("urban", 'administrative_director')],
+             ['directeur-general', _("urban", 'general_director')],
+             ['directeur-technique', _("urban", 'technical_director')],
+             ['reponsable', _("urban", 'town_planning_responsable')],
+             ['responsable-accueil', _("urban", 'reception_responsable')],
+             ['responsable-administratif', _("urban", 'administrative_responsable')],
+             ['responsable-technique', _("urban", 'technical_responsable')],
               ]
         vocab = []
         for elt in lst:

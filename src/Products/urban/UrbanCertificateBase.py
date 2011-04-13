@@ -26,12 +26,12 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.base import UrbanBase
 from zope.i18n import translate
+from Products.urban import urbanMessageFactory as _
 ##/code-section module-header
 
 schema = Schema((
@@ -234,15 +234,11 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBas
         if self.getApplicants():
             applicant = unicode(self.getApplicants()[0].Title(), 'utf-8')
         else:
-            service = getGlobalTranslationService()
-            _ = service.translate
-            applicant = _("urban", 'no_applicant_defined', context=self, default="No applicant defined")
+            applicant = _("urban", 'no_applicant_defined')
         if self.getNotaryContact():
             notary = unicode(self.getNotaryContact()[0].Title(), 'utf-8')
         else:
-            service = getGlobalTranslationService()
-            _ = service.translate
-            applicant = _("urban", 'no_notary_defined', context=self, default="No notary defined")
+            applicant = _("urban", 'no_notary_defined')
 
         #do not use '%s - %s - %s' type notation as it could raise UnicodeDecodeErrors...
         if applicant and notary:

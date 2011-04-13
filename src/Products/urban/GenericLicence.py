@@ -28,10 +28,10 @@ from Products.urban.config import *
 import warnings
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
 from Products.urban.base import UrbanBase
+from Products.urban import urbanMessageFactory as _
 ##/code-section module-header
 
 schema = Schema((
@@ -535,13 +535,11 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, Bro
           This vocabulary for field floodingLevel returns a list of
           flooding levels : no risk, low risk, moderated risk, high risk
         """
-        service = getGlobalTranslationService()
-        _ = service.translate
         lst=[
-             ['no', _("urban", 'flooding_level_no', context=self, default="No")],
-             ['low', _("urban", 'flooding_level_low', context=self, default="Low risk")],
-             ['moderate', _("urban", 'flooding_level_moderate', context=self, default="Moderate risk")],
-             ['high', _("urban", 'flooding_level_high', context=self, default="High risk")],
+             ['no', _("urban", 'flooding_level_no')],
+             ['low', _("urban", 'flooding_level_low')],
+             ['moderate', _("urban", 'flooding_level_moderate')],
+             ['high', _("urban", 'flooding_level_high')],
             ]
         vocab = []
         for elt in lst:
@@ -666,9 +664,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, Bro
         if self.getApplicants():
             applicant = unicode(self.getApplicants()[0].getName1() + " " + self.getApplicants()[0].getName2(), 'utf-8')
         else:
-            service = getGlobalTranslationService()
-            _ = service.translate
-            applicant = _("urban", 'no_applicant_defined', context=self, default="No applicant defined")
+            applicant = _("urban", 'no_applicant_defined')
         title = str(self.getReference())+ " - " +unicode(self.getLicenceSubject(), 'utf-8') + " - " + applicant
         self.setTitle(title)
         self.reindexObject()

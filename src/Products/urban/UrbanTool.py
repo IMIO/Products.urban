@@ -47,9 +47,6 @@ from Products.PageTemplates.Expressions import getEngine
 from Products.CMFCore.Expression import Expression
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFPlone.PloneBatch import Batch
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
-service = getGlobalTranslationService()
-_ = service.translate
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 DB_QUERY_ERROR = "Programming error in query"
@@ -628,7 +625,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if not result:
             return ((DB_QUERY_ERROR, DB_QUERY_ERROR), )
         if all:
-            result = [{'da':'0', 'divname':_('urban', 'all_divisions', context=self, default='All divisions')}] + result
+            result = [{'da':'0', 'divname':_('urban', 'all_divisions')}] + result
         return result
 
     security.declarePublic('queryDB')
@@ -651,7 +648,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
           delattr(self,'dbc')
       else:
           ptool = getToolByName(self, "plone_utils")
-          ptool.addPortalMessage(_("plone", u"db_connection_error", mapping={u'error': self.dbc}, context=self, default="There was an error connecting to the DB.  The reported error is : '%s'" % self.dbc), type="error")
+          ptool.addPortalMessage(_("plone", u"db_connection_error", mapping={u'error': self.dbc}), type="error")
       return result
 
     def checkDBConnection(self):
@@ -664,9 +661,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
       ptool = getToolByName(self, "plone_utils")
       try:
           dbc = psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (self.getSqlName(), self.getSqlUser(), self.getSqlHost(), self.getSqlPassword()))
-          ptool.addPortalMessage(_("plone", u"db_connection_successfull", context=self, default="db_connection_successfull"), type='info')
+          ptool.addPortalMessage(_("plone", u"db_connection_successfull"), type='info')
       except psycopg2.OperationalError, e:
-          ptool.addPortalMessage(_("plone", u"db_connection_error", context=self, mapping={u'error': unicode(e.__str__(), 'utf-8')}, default="There was an error connecting to the DB.  The reported error is : '%s'" % unicode(e.__str__(), 'utf-8')), type="error")
+          ptool.addPortalMessage(_("plone", u"db_connection_error", mapping={u'error': unicode(e.__str__(), 'utf-8')}))
 
     security.declarePublic('mayAccessUrban')
     def mayAccessUrban(self):
@@ -1112,7 +1109,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         except ParseError:
             #in case something like '*' is entered, ZCTextIndex raises an error...
             ptool = getToolByName(self, "plone_utils")
-            ptool.addPortalMessage(_("plone", u"please_enter_more_letters", context=self, default="Please enter more letters to do the search"), type="info")
+            ptool.addPortalMessage(_("plone", u"please_enter_more_letters"), type="info")
             return res
 
     security.declarePublic('searchByStreet')
@@ -1457,7 +1454,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 #so in french '1' becomes '1er' but in english, '1' becomes '1st',
                 #'2' becomes '2nd', ...
                 daymsgid = "date_day_%s" % day
-                translatedDay = _('urban', daymsgid, context=self, default=day)
+                translatedDay = _('urban', daymsgid)
                 #translate the month
                 #msgids already exist in the 'plonelocales' domain
                 monthMappings = {
@@ -1475,7 +1472,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                         '12': 'dec',
                        }
                 monthmsgid = "month_%s" % monthMappings[month]
-                translatedMonth = _('plonelocales', monthmsgid, context=self, default=month).lower()
+                translatedMonth = _('plonelocales', monthmsgid).lower()
             return "%s %s %s" % (translatedDay, translatedMonth, year)
         return ''
 

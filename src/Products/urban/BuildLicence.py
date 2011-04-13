@@ -30,7 +30,7 @@ from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from GenericLicence import GenericLicence
 from GenericLicence import GenericLicence_schema
 from Products.CMFCore.utils import getToolByName
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
+from Products.urban import urbanMessageFactory as _
 
 slave_fields_subdivision = (
     # if in subdivision, display a textarea the fill some details
@@ -206,12 +206,10 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
           This vocabulary for field roadAdaptation returns a list of
           road adaptations : no, yes modify, yes create
         """
-        service = getGlobalTranslationService()
-        _ = service.translate
         lst=[
-             ['no', _("urban", 'road_adaptation_no', context=self, default="No")],
-             ['modify', _("urban", 'road_adaptation_modify', context=self, default="Yes, modification")],
-             ['create', _("urban", 'road_adaptation_create', context=self, default="Yes, creation")],
+             ['no', _("urban", 'road_adaptation_no')],
+             ['modify', _("urban", 'road_adaptation_modify')],
+             ['create', _("urban", 'road_adaptation_create')],
               ]
         vocab = []
         for elt in lst:
@@ -224,12 +222,10 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
           This vocabulary for field usage returns a list of
           building usage : for habitation, not for habitation
         """
-        service = getGlobalTranslationService()
-        _ = service.translate
         lst=[
-             ['for_habitation', _("urban", 'usage_for_habitation', context=self, default="For habitation")],
-             ['not_for_habitation', _("urban", 'usage_not_for_habitation', context=self, default="Not for habitation")],
-             ['not_applicable', _("urban", 'usage_not_applicable', context=self, default="Not applicable")],
+             ['for_habitation', _("urban", 'usage_for_habitation')],
+             ['not_for_habitation', _("urban", 'usage_not_for_habitation')],
+             ['not_applicable', _("urban", 'usage_not_applicable')],
               ]
         vocab = []
         for elt in lst:

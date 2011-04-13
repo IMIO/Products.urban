@@ -28,10 +28,10 @@ from Products.urban.config import *
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
 from Products.CMFCore.utils import getToolByName
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
 from Products.urban.base import UrbanBase
+from Products.urban import urbanMessageFactory as _
 ##/code-section module-header
 
 schema = Schema((
@@ -158,9 +158,7 @@ class EnvironmentalDeclaration(BaseFolder, UrbanIndexes,  MultipleStreets,  Urba
         if self.getApplicants():
             applicant = self.getApplicants()[0].getName1() + " " + self.getApplicants()[0].getName2()
         else:
-            service = getGlobalTranslationService()
-            _ = service.translate
-            applicant = _("urban", 'no_applicant_defined', context=self, default="No applicant defined")
+            applicant = _("urban", 'no_applicant_defined')
         title = self.getReference() + " - " + applicant + " - " + self.getFinality()
         self.setTitle(title)
         self.reindexObject()

@@ -28,13 +28,10 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 from Products.validation.interfaces.IValidator import IValidator
 from Products.validation import validation
 from Products.CMFCore.utils import getToolByName
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
-service = getGlobalTranslationService()
-_ = service.translate
 
 class BelgianNationalRegValidator:
     #Validate a belgian national register number
-    __implements__ = (IValidator, )
+    implements(IValidator)
     def __init__(self, name):
         self.name = name
     def __call__(self, value, *args, **kwargs):
@@ -276,7 +273,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         else:
             res = unicode(nameSignaletic, 'utf-8')
             if withaddress:
-                res = res + ' ' + _("urban", "residing", context=self, default="residing") + ' ' +  unicode(addressSignaletic, 'utf-8')
+                res = res + ' ' + _("urban", "residing") + ' ' +  unicode(addressSignaletic, 'utf-8')
         return res
 
     security.declarePublic('getAddress')

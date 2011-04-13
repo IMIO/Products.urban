@@ -181,5 +181,5 @@ class MultipleStreets:
             infos = ''
             for wl in getWorkLocations():
                 if infos:
-                    infos = infos + ' ' + _("urban", 'and', context=self, default="and") + ' '
+                    infos = infos + ' ' + _("urban", 'and') + ' '
                 infos = infos + "%s, %s %s %s" % (self.getWorkLocationHouseNumber(), self.getWorkLocationStreet(), self.getWorkLocationZipCode(), self.getWorkLocationCity())
