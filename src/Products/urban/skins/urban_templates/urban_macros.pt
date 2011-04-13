@@ -331,7 +331,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
 </div>
 
 <div metal:define-macro="urbanWorkLocation" i18n:domain="urban" tal:define="primary context/getPrimaryWorkLocation">
- <label i18n:translate="urban_label_workLocation">Work location</label> :
+ <label id="urban_label_workLocation" i18n:translate="urban_label_workLocation">Work location</label> :
  <table cellspacing=0 cellpadding=0 width="400">
   <tr tal:condition="primary">
    <td>
@@ -368,11 +368,11 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
 </div>
 
 <div class="field" metal:define-macro="urbanWorkLocationEdit" i18n:domain="urban" tal:define="primary context/getPrimaryWorkLocation">
- <label i18n:translate="urban_label_workLocation">Work location</label>
+ <label id="urban_label_workLocation" i18n:translate="urban_label_workLocation">Work location</label>
  <table cellspacing=0 cellpadding=0 width=600>
     <tr>
       <td>
-      <label i18n:translate="urban_label_street">Street</label>
+      <label id="urban_label_street" i18n:translate="urban_label_street">Street</label>
       <input tal:condition="primary" tal:attributes="value python: primary.getStreet().Title() or '';" type="text" disabled="disabled" readonly="readonly" id="workLocationStreet_label" value="" size="40">
       <input tal:condition="not: primary" type="text" disable="disabled" readonly="readonly" id="workLocationStreet_label" value="" size="40">
       <input tal:condition="primary" tal:attributes="originalvalue python: primary.getStreet().UID() or nothing; value python: primary.getStreet().UID() or nothing" type="hidden" id="workLocationStreet" name="workLocationStreet" value="" originalvalue="">
@@ -384,7 +384,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
       </div>
       </td>
       <td valign="top">
-      <label i18n:translate="urban_label_number">Number</label>
+      <label id="urban_label_number" i18n:translate="urban_label_number">Number</label>
       <input tal:attributes="value primary/getNumber|nothing" type="text" name="workLocationNumber" value="" />
       </td>
     </tr>
