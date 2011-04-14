@@ -156,7 +156,7 @@ class Division(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  UrbanBase
         """
         """
         pass
-    security.declarePublic('getDefaultReference')
+
     security.declarePublic('getDefaultReference')
     def getDefaultReference(self):
         """
@@ -228,6 +228,7 @@ class Division(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  UrbanBase
 
         return messages
 
+    security.declarePublic('getProprietaries')
     def getProprietaries(self):
         """
            Return the list of applicants for the Licence
@@ -238,6 +239,7 @@ class Division(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  UrbanBase
                 res.append(obj)
         return res
 
+    security.declarePublic('getParcels')
     def getParcels(self):
         """
            Return the list of parcels (portionOut) for the Licence

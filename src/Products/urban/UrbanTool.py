@@ -473,8 +473,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             vocPath = portal_url.getPortalPath()+'/portal_urban/'+vocToReturn+'/'
         brains = self.portal_catalog(path=vocPath, sort_on="getObjPositionInParent", portal_type=vocType, review_state='enabled')
         res=[]
-        if keyToUse == "deadLineDelay":
-            import pdb; pdb.set_trace()
         for brain in brains:
             #if we wrote a termKey, we use it...
             obj = brain.getObject()

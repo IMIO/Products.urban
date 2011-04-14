@@ -67,14 +67,6 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
-    StringField(
-        name='newAttr',
-        widget=StringField._properties['widget'](
-            label='Newattr',
-            label_msgid='urban_label_newAttr',
-            i18n_domain='urban',
-        ),
-    ),
 
 ),
 )
