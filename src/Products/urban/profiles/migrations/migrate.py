@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
 import logging
 from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
+from Acquisition import aq_base
+
 logger = logging.getLogger('urban: migrations')
 
 def isNoturbanMigrationsProfile(context):
@@ -244,9 +247,38 @@ def addEquipmentTypes(context):
 
 def migrateFolderDelays(context):
     """
-      Delays were UrbanVocabularyTerms, no they are UrbanDelays
+      Delays were UrbanVocabularyTerms, now they are UrbanDelays
     """
-    pass
+    #walk into every UrbanConfigs and look for a 'folderdelays' folder
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+    tool = getToolByName(site, 'portal_urban')
+    logger.info("Migrating folderdelays : starting...")
+    #look in every UrbanConfigs
+    for urbanConfig in tool.objectValues('ATFolder'):
+        #check if a "folderdelays" folder exists
+        if hasattr(aq_base(urbanConfig), 'folderdelays'):
+            folderdelays = getattr(urbanConfig, 'folderdelays')
+            #we save the ids to delete in 'ids'
+            for urbanVocTerm in folderdelays.objectValues('UrbanVocabularyTerm'):
+                folderdelays.setConstrainTypesMode(1)
+                folderdelays.setLocallyAllowedTypes(['UrbanDelay'])
+                folderdelays.setImmediatelyAddableTypes(['UrbanDelay'])
+                data = {
+                        'id': urbanVocTerm.getId(),
+                        'title': urbanVocTerm.Title(),
+                        'deadLineDelay': urbanVocTerm.getTermKey(),
+                        }
+                if not isinstance(data['deadLineDelay'], int):
+                    data['deadLineDelay'] = 0
+                #remove the old object before creating the new
+                folderdelays.manage_delObjects(data['id'])
+                newObjId = folderdelays.invokeFactory('UrbanDelay', **data)
+                newObj = getattr(folderdelays, newObjId)
+                logger.info("UrbanVocabularyTerm at '%s' has been migrated" % newObj.absolute_url())
+    logger.info("Migrating folderdelays : do not forget to adapt the alert delay on migrated elements!")
+    logger.info("Migrating folderdelays : done!")
 
 def migrateTopicsAddPathCriterion(context):
     """
