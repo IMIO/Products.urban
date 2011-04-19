@@ -31,7 +31,7 @@ from Products.urban.MultipleStreets import MultipleStreets
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.base import UrbanBase
 from zope.i18n import translate
-from Products.urban import urbanMessageFactory as _
+from zope.i18n import translate as _
 ##/code-section module-header
 
 schema = Schema((
@@ -234,11 +234,11 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBas
         if self.getApplicants():
             applicant = unicode(self.getApplicants()[0].Title(), 'utf-8')
         else:
-            applicant = _("urban", 'no_applicant_defined')
+            applicant = _('no_applicant_defined', 'urban', context=self.REQUEST)
         if self.getNotaryContact():
             notary = unicode(self.getNotaryContact()[0].Title(), 'utf-8')
         else:
-            applicant = _("urban", 'no_notary_defined')
+            applicant = _('no_notary_defined', 'urban', context=self.REQUEST)
 
         #do not use '%s - %s - %s' type notation as it could raise UnicodeDecodeErrors...
         if applicant and notary:

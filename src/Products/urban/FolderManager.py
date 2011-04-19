@@ -24,7 +24,7 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Contact import Contact
-from Products.urban import urbanMessageFactory as _
+from zope.i18n import translate as _
 ##/code-section module-header
 
 schema = Schema((
@@ -105,17 +105,17 @@ class FolderManager(BaseContent, Contact, BrowserDefaultMixin):
           Return a list of available grades from the configuration
         """
         lst=[
-             ['agent-accueil', _("urban", 'reception_agent')],
-             ['agent-administratif', _("urban", 'administrative_agent')],
-             ['agent-technique', _("urban", 'technical_agent')],
-             ['agent-traitant', _("urban", 'treating_agent')],
-             ['directeur-administratif', _("urban", 'administrative_director')],
-             ['directeur-general', _("urban", 'general_director')],
-             ['directeur-technique', _("urban", 'technical_director')],
-             ['reponsable', _("urban", 'town_planning_responsable')],
-             ['responsable-accueil', _("urban", 'reception_responsable')],
-             ['responsable-administratif', _("urban", 'administrative_responsable')],
-             ['responsable-technique', _("urban", 'technical_responsable')],
+             ['agent-accueil', _('reception_agent', 'urban', context=self.REQUEST)],
+             ['agent-administratif', _('administrative_agent', 'urban', context=self.REQUEST)],
+             ['agent-technique', _('technical_agent', 'urban', context=self.REQUEST)],
+             ['agent-traitant', _('treating_agent', 'urban', context=self.REQUEST)],
+             ['directeur-administratif', _('administrative_director', 'urban', context=self.REQUEST)],
+             ['directeur-general', _('general_director', 'urban', context=self.REQUEST)],
+             ['directeur-technique', _('technical_director', 'urban', context=self.REQUEST)],
+             ['reponsable', _('town_planning_responsable', 'urban', context=self.REQUEST)],
+             ['responsable-accueil', _('reception_responsable', 'urban', context=self.REQUEST)],
+             ['responsable-administratif', _('administrative_responsable', 'urban', context=self.REQUEST)],
+             ['responsable-technique', _('technical_responsable', 'urban', context=self.REQUEST)],
               ]
         vocab = []
         for elt in lst:

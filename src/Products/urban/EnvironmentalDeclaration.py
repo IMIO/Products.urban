@@ -31,7 +31,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
 from Products.urban.base import UrbanBase
-from Products.urban import urbanMessageFactory as _
+from zope.i18n import translate as _
 ##/code-section module-header
 
 schema = Schema((
@@ -158,7 +158,7 @@ class EnvironmentalDeclaration(BaseFolder, UrbanIndexes,  MultipleStreets,  Urba
         if self.getApplicants():
             applicant = self.getApplicants()[0].getName1() + " " + self.getApplicants()[0].getName2()
         else:
-            applicant = _("urban", 'no_applicant_defined')
+            applicant = _('no_applicant_defined', 'urban', context=self.REQUEST)
         title = self.getReference() + " - " + applicant + " - " + self.getFinality()
         self.setTitle(title)
         self.reindexObject()

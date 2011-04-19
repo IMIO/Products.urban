@@ -29,7 +29,7 @@ from DateTime import DateTime
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Acquisition import aq_inner, aq_parent
 from Products.CMFCore.utils import getToolByName
-from Products.urban import urbanMessageFactory as _
+from zope.i18n import translate as _
 ##/code-section module-header
 
 schema = Schema((
@@ -466,9 +466,9 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         formattedDate = tool.formatDate(date, translatemonth=translatemonth)
         cityName = unicode(tool.getCityName(), 'utf-8')
         if withCityNamePrefix:
-            return _('urban', 'formatted_date_with_cityname', mapping={'cityName': cityName, 'formattedDate': formattedDate})
+            return _('formatted_date_with_cityname', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate})
         if forDelivery:
-            return _('urban', 'formatted_date_for_delivery', mapping={'cityName': cityName, 'formattedDate': formattedDate})
+            return _('formatted_date_for_delivery', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate})
         return formattedDate
 
 

@@ -20,8 +20,7 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
+from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -30,7 +29,7 @@ from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from GenericLicence import GenericLicence
 from GenericLicence import GenericLicence_schema
 from Products.CMFCore.utils import getToolByName
-from Products.urban import urbanMessageFactory as _
+from zope.i18n import translate as _
 
 slave_fields_subdivision = (
     # if in subdivision, display a textarea the fill some details
@@ -125,9 +124,9 @@ schema = Schema((
         widget=ReferenceBrowserWidget(
             force_close_on_insert=1,
             allow_search=1,
-            allow_browse=0,
-            show_indexes=1,
-            show_index_selector=1,
+            allow_browse=1,
+            show_indexes=0,
+            show_index_selector=0,
             available_indexes={'Title':'Nom'},
             base_query="architectsBaseQuery",
             label='Architects',
@@ -207,9 +206,9 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
           road adaptations : no, yes modify, yes create
         """
         lst=[
-             ['no', _("urban", 'road_adaptation_no')],
-             ['modify', _("urban", 'road_adaptation_modify')],
-             ['create', _("urban", 'road_adaptation_create')],
+             ['no', _('road_adaptation_no', 'urban', context=self.REQUEST)],
+             ['modify', _('road_adaptation_modify', 'urban', context=self.REQUEST)],
+             ['create', _('road_adaptation_create', 'urban', context=self.REQUEST)],
               ]
         vocab = []
         for elt in lst:
@@ -223,9 +222,9 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
           building usage : for habitation, not for habitation
         """
         lst=[
-             ['for_habitation', _("urban", 'usage_for_habitation')],
-             ['not_for_habitation', _("urban", 'usage_not_for_habitation')],
-             ['not_applicable', _("urban", 'usage_not_applicable')],
+             ['for_habitation', _('usage_for_habitation', 'urban', context=self.REQUEST)],
+             ['not_for_habitation', _('usage_not_for_habitation', 'urban', context=self.REQUEST)],
+             ['not_applicable', _('usage_not_applicable', 'urban', context=self.REQUEST)],
               ]
         vocab = []
         for elt in lst:

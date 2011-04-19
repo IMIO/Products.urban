@@ -23,7 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.urban import urbanMessageFactory as _
+from zope.i18n import translate as _
 ##/code-section module-header
 
 schema = Schema((
@@ -111,8 +111,8 @@ class PcaTerm(BaseContent, BrowserDefaultMixin):
           Return a list of decree types
         """
         lst=[
-             ['royal', _("urban", 'decree_type_royal')],
-             ['departmental', _("urban", 'decree_type_departmental')],
+             ['royal', _('decree_type_royal', 'urban', context=self.REQUEST)],
+             ['departmental', _('decree_type_departmental', 'urban', context=self.REQUEST)],
               ]
         vocab = []
         for elt in lst:

@@ -30,7 +30,7 @@ from Products.ZCatalog.Catalog import CatalogError
 from Products.urban.config import URBAN_TYPES, PPNC_LAYERS
 from zope.annotation.interfaces import IAnnotations
 from plone.app.portlets.portlets import classic
-from Products.urban import urbanMessageFactory as _
+from zope.i18n import translate as _
 ##/code-section HEAD
 
 def isNoturbanProfile(context):
@@ -148,7 +148,7 @@ def addUrbanConfigs(context):
     for urban_type in URBAN_TYPES:
         if hasattr(tool, urban_type.lower()):
             continue
-        configFolderid = tool.invokeFactory("Folder",id=urban_type.lower(),title=_("urban","%s_urbanconfig_title" % urban_type.lower()))
+        configFolderid = tool.invokeFactory("Folder",id=urban_type.lower(),title=_("%s_urbanconfig_title" % urban_type.lower(), 'urban', context=site.REQUEST))
         configFolder = getattr(tool, configFolderid)
         configFolder.setConstrainTypesMode(1)
         configFolder.setLocallyAllowedTypes(['Folder'])
@@ -156,20 +156,20 @@ def addUrbanConfigs(context):
 
         #we just created the urbanConfig, proceed with other parameters...
         #add UrbanEventTypes folder
-        newFolderid = configFolder.invokeFactory("Folder",id="urbaneventtypes",title=_("urban","urbaneventtypes_folder_title"))
+        newFolderid = configFolder.invokeFactory("Folder",id="urbaneventtypes",title=_("urbaneventtypes_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(configFolder, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['UrbanEventType'])
         newFolder.setImmediatelyAddableTypes(['UrbanEventType'])
 
         #add FolderManagers folder
-        newFolderid = configFolder.invokeFactory("Folder",id="foldermanagers",title=_("urban","foldermanagers_folder_title"))
+        newFolderid = configFolder.invokeFactory("Folder",id="foldermanagers",title=_("foldermanagers_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(configFolder, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['FolderManager'])
         newFolder.setImmediatelyAddableTypes(['FolderManager'])
         if urban_type == 'ParcelOutLicence':
-            newFolderid = configFolder.invokeFactory("Folder",id="lotusages",title=_("urban","lotusages_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="lotusages",title=_("lotusages_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -178,7 +178,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="greenzone",title=u"Espace vert")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="tosurrendertotown",title=u"Lot à rétrocéder à la commune")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="autre",title=u"Autre")
-            newFolderid = configFolder.invokeFactory("Folder",id="equipmenttypes",title=_("urban","folderequipmenttypes_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="equipmenttypes",title=_("folderequipmenttypes_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -193,7 +193,7 @@ def addUrbanConfigs(context):
 
         if urban_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', ]:
             #we add the specific features folder
-            newFolderid = configFolder.invokeFactory("Folder",id="specificfeatures",title=_("urban","urban_label_specificFeatures"))
+            newFolderid = configFolder.invokeFactory("Folder",id="specificfeatures",title=_("urban_label_specificFeatures", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -218,7 +218,7 @@ def addUrbanConfigs(context):
             #add "Articles" folder
             """
             #add 'articles' folder
-            newFolderid = configFolder.invokeFactory("Folder",id="articles",title=_("urban","articles_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="articles",title=_("articles_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -243,14 +243,14 @@ def addUrbanConfigs(context):
         if urban_type in ['BuildLicence', 'ParcelOutLicence', ]:
             """
             #add Recipients folder
-            newFolderid = configFolder.invokeFactory("Folder",id="recipients",title=_("urban","recipients_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="recipients",title=_(,"recipients_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['Recipient'])
             newFolder.setImmediatelyAddableTypes(['Recipient'])
             """
             #add "necessarydocuments" folder
-            newFolderid = configFolder.invokeFactory("Folder",id="missingparts",title=_("urban","missingparts_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="missingparts",title=_("missingparts_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -266,7 +266,7 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="plan_secteur",title=u"Une copie du plan de secteur")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="isolation",title=u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires")
             #add FolderCategories folder
-            newFolderid = configFolder.invokeFactory("Folder",id="foldercategories",title=_("urban","foldercategories_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="foldercategories",title=_("foldercategories_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -286,7 +286,7 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="ldc",title=u"LDC (permis de lotir dans un PCA, lotissement ou en décentralisation)")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="ldcm",title=u"LDC/M (modification du permis de lotir dans un PCA, RCU, LOTISSEMENT)")
             #add RoadTypes folder
-            newFolderid = configFolder.invokeFactory("Folder",id="folderroadtypes",title=_("urban","folderroadtypes_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="folderroadtypes",title=_("folderroadtypes_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -298,7 +298,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="vic",title=u"Vicinale")
 
             #add RoadEquipments folder
-            newFolderid = configFolder.invokeFactory("Folder",id="folderroadequipments",title=_("urban","folderroadequipments_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="folderroadequipments",title=_("folderroadequipments_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -312,7 +312,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="fosse",title=u"fossé")
 
             #add ProtectedBuildings folder
-            newFolderid = configFolder.invokeFactory("Folder",id="folderprotectedbuildings",title=_("urban","folderprotectedbuildings_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="folderprotectedbuildings",title=_("folderprotectedbuildings_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -323,7 +323,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="archeologique",title=u"à l'Atlas archéologique")
 
             #add Zones folder
-            newFolderid = configFolder.invokeFactory("Folder",id="folderzones",title=_("urban","folderzones_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="folderzones",title=_("folderzones_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -351,7 +351,7 @@ def addUrbanConfigs(context):
             addInvestigationArticles(context, configFolder)
 
             #add RoadCoatings folder
-            newFolderid = configFolder.invokeFactory("Folder",id="folderroadcoatings",title=_("urban","folderroadcoatings_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="folderroadcoatings",title=_("folderroadcoatings_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -360,7 +360,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="bordures",title=u"Bordures")
 
             #add Makers folder
-            newFolderid = configFolder.invokeFactory("Folder",id="foldermakers",title=_("urban","foldermakers_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="foldermakers",title=_("foldermakers_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -386,7 +386,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="voo",title=u"VOO", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
 
             #add Delays folder
-            newFolderid = configFolder.invokeFactory("Folder",id="folderdelays",title=_("urban","folderdelays_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="folderdelays",title=_("folderdelays_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -399,7 +399,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="inconnu",title=u"Inconnu", termKey="0")
 
             #add the derogations folder
-            newFolderid = configFolder.invokeFactory("Folder",id="derogations",title=_("urban","derogations_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="derogations",title=_("derogations_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -411,7 +411,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="dero-lot",title=u"au Lotissement")
 
             #add BuildWorkTypes folder
-            newFolderid = configFolder.invokeFactory("Folder",id="folderbuildworktypes",title=_("urban","folderbuildworktype_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="folderbuildworktypes",title=_("folderbuildworktype_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -431,7 +431,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="autres",title=u"Autres")
 
             #add pashs folder
-            newFolderid = configFolder.invokeFactory("Folder",id="pashs",title=_("urban","pashs_folder_title"))
+            newFolderid = configFolder.invokeFactory("Folder",id="pashs",title=_("pashs_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -445,7 +445,7 @@ def addInvestigationArticles(context, configFolder):
       This method add default investigation articles
     """
     site = context.getSite()
-    newFolderid = configFolder.invokeFactory("Folder",id="investigationarticles",title=_("urban","investigationarticles_folder_title"))
+    newFolderid = configFolder.invokeFactory("Folder",id="investigationarticles",title=_("investigationarticles_folder_title", 'urban', context=site.REQUEST))
     newFolder = getattr(configFolder, newFolderid)
     newFolder.setConstrainTypesMode(1)
     newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -675,7 +675,7 @@ def addGlobalFolders(context):
     )
 
     if not hasattr(tool, "topics"):
-        topicsFolderId = tool.invokeFactory("Folder",id="topics",title=_("urban","topics"))
+        topicsFolderId = tool.invokeFactory("Folder",id="topics",title=_("topics", 'urban', context=site.REQUEST))
         topicsFolder = getattr(tool, topicsFolderId)
         #restrict the addable types to "ATTopic"
         #Add these searches for portal_urban
@@ -705,7 +705,7 @@ def addGlobalFolders(context):
         if stateValues:
             stateCriterion = topic.addCriterion(field='review_state', criterion_type='ATListCriterion')
             stateCriterion.setValue(stateValues)
-        topic.setTitle(_("urban",topicId))
+        topic.setTitle(_(topicId, 'urban', context=site.REQUEST))
         topic.setLimitNumber(True)
         topic.setItemCount(20)
         #set the sort criterion as reversed
@@ -720,7 +720,7 @@ def addGlobalFolders(context):
 
     #add the pcas folder
     if not hasattr(tool, "pcas"):
-        newFolderid = tool.invokeFactory("Folder",id="pcas",title=_("urban","pcas_folder_title"))
+        newFolderid = tool.invokeFactory("Folder",id="pcas",title=_("pcas_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['PcaTerm'])
@@ -731,7 +731,7 @@ def addGlobalFolders(context):
 
     #add the parcelling folder
     if not hasattr(tool, "parcellings"):
-        newFolderid = tool.invokeFactory("Folder",id="parcellings",title=_("urban","parcellings_folder_title"))
+        newFolderid = tool.invokeFactory("Folder",id="parcellings",title=_("parcellings_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['ParcellingTerm'])
@@ -742,7 +742,7 @@ def addGlobalFolders(context):
 
     #add the streets folder
     if not hasattr(tool, "streets"):
-        newFolderid = tool.invokeFactory("Folder",id="streets",title=_("urban","streets_folder_title"))
+        newFolderid = tool.invokeFactory("Folder",id="streets",title=_("streets_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['City'])
@@ -750,7 +750,7 @@ def addGlobalFolders(context):
 
     #add the additional_layers folder
     if not hasattr(tool, "additional_layers"):
-        newFolderid = tool.invokeFactory("Folder",id="additional_layers",title=_("urban","additonal_layers_folder_title"))
+        newFolderid = tool.invokeFactory("Folder",id="additional_layers",title=_("additonal_layers_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['Layer'])
@@ -759,7 +759,7 @@ def addGlobalFolders(context):
 
     #add the persons_titles folder
     if not hasattr(tool, "persons_titles"):
-        newFolderid = tool.invokeFactory("Folder",id="persons_titles",title=_("urban","persons_titles_folder_title"))
+        newFolderid = tool.invokeFactory("Folder",id="persons_titles",title=_("persons_titles_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -777,7 +777,7 @@ def addGlobalFolders(context):
 
     #add the decisions folder
     if not hasattr(tool, "decisions"):
-        newFolderid = tool.invokeFactory("Folder",id="decisions",title=_("urban","decisions_folder_title"))
+        newFolderid = tool.invokeFactory("Folder",id="decisions",title=_("decisions_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
@@ -836,7 +836,7 @@ def addUrbanConfigsTopics(context):
         ),
         )
         if not "topics" in urbanConfig.objectIds():
-            topicsFolderId = urbanConfig.invokeFactory("Folder",id="topics",title=_("urban","topics"))
+            topicsFolderId = urbanConfig.invokeFactory("Folder",id="topics",title=_("topics", 'urban', context=site.REQUEST))
             topicsFolder = getattr(urbanConfig, topicsFolderId)
             #restrict the addable types to "ATTopic"
             #Add these searches by meeting config
@@ -859,7 +859,7 @@ def addUrbanConfigsTopics(context):
                 if stateValues:
                     stateCriterion = topic.addCriterion(field='review_state', criterion_type='ATListCriterion')
                     stateCriterion.setValue(stateValues)
-                topic.setTitle(_("urban","%s_%s"% (urban_type.lower(), topicId)))
+                topic.setTitle(_("%s_%s"% (urban_type.lower(), topicId), 'urban', context=site.REQUEST))
                 topic.setLimitNumber(True)
                 topic.setItemCount(20)
                 #set the sort criterion as reversed
@@ -890,10 +890,10 @@ def adaptDefaultPortal(context):
     #change the content of the front-page
     try:
         frontpage = getattr(site, 'front-page')
-        frontpage.setTitle(_("urban","front_page_title"))
+        frontpage.setTitle(_("front_page_title", 'urban', context=site.REQUEST))
         import pdb; pdb.set_trace()
-        frontpage.setDescription(_("urban","front_page_descr"))
-        frontpage.setText(_("urban","front_page_text"))
+        frontpage.setDescription(_("front_page_descr", 'urban', context=site.REQUEST))
+        frontpage.setText(_("front_page_text", 'urban', context=site.REQUEST))
         frontpage.reindexObject()
     except AttributeError:
         #the 'front-page' object does not exist...
@@ -911,7 +911,7 @@ def addApplicationFolders(context):
     tool = getToolByName(site, 'portal_urban')
 
     if not hasattr(aq_base(site), "urban"):
-        newFolderid = site.invokeFactory("Folder",id="urban",title=_("urban","urban"))
+        newFolderid = site.invokeFactory("Folder",id="urban",title=_("urban", 'urban', context=site.REQUEST))
         newFolder = getattr(site, newFolderid)
         newFolder.setLayout('urban_view')
     else:
@@ -919,7 +919,7 @@ def addApplicationFolders(context):
 
     for urban_type in URBAN_TYPES:
         if not hasattr(newFolder, urban_type.lower() + 's'):
-            newFolderid = newFolder.invokeFactory("Folder",id=urban_type.lower() + 's',title=_(urban_type.lower() + 's',"urban"))
+            newFolderid = newFolder.invokeFactory("Folder",id=urban_type.lower() + 's',title=_(urban_type.lower() + 's', 'urban', context=site.REQUEST))
             newSubFolder = getattr(newFolder, newFolderid)
             newSubFolder.setConstrainTypesMode(1)
             newSubFolder.setLocallyAllowedTypes([urban_type])
@@ -936,7 +936,7 @@ def addApplicationFolders(context):
 
     #add a folder that will contains architects
     if not hasattr(newFolder, "architects"):
-        newFolderid = newFolder.invokeFactory("Folder",id="architects",title=_("urban","architects_folder_title"))
+        newFolderid = newFolder.invokeFactory("Folder",id="architects",title=_("architects_folder_title", 'urban', context=site.REQUEST))
         newSubFolder = getattr(newFolder, newFolderid)
         newSubFolder.setConstrainTypesMode(1)
         newSubFolder.setLocallyAllowedTypes(['Architect'])
@@ -947,7 +947,7 @@ def addApplicationFolders(context):
 
     #add a folder that will contains geometricians
     if not hasattr(newFolder, "geometricians"):
-        newFolderid = newFolder.invokeFactory("Folder",id="geometricians",title=_("urban","geometricians_folder_title"))
+        newFolderid = newFolder.invokeFactory("Folder",id="geometricians",title=_("geometricians_folder_title", 'urban', context=site.REQUEST))
         newSubFolder = getattr(newFolder, newFolderid)
         newSubFolder.setConstrainTypesMode(1)
         newSubFolder.setLocallyAllowedTypes(['Geometrician'])
@@ -958,7 +958,7 @@ def addApplicationFolders(context):
 
     #add a folder that will contains notaries
     if not hasattr(newFolder, "notaries"):
-        newFolderid = newFolder.invokeFactory("Folder",id="notaries",title=_("urban","notaries_folder_title"))
+        newFolderid = newFolder.invokeFactory("Folder",id="notaries",title=_("notaries_folder_title", 'urban', context=site.REQUEST))
         newSubFolder = getattr(newFolder, newFolderid)
         newSubFolder.setConstrainTypesMode(1)
         newSubFolder.setLocallyAllowedTypes(['Notary'])
@@ -972,7 +972,7 @@ def addApplicationFolders(context):
     for search_link in search_links:
         if not hasattr(newFolder, search_link[0]):
             #add a link and translate his title
-            linkId = newFolder.invokeFactory("Link",id=search_link[0],title=_("urban",'urban_%s_descr' % search_link[0]), remoteUrl=search_link[1])
+            linkId = newFolder.invokeFactory("Link",id=search_link[0],title=_('urban_%s_descr' % search_link[0], 'urban', context=site.REQUEST), remoteUrl=search_link[1])
 
 def addTestObjects(context):
     """
@@ -1174,7 +1174,7 @@ def setupExtra(context):
     if not hasattr(portal_urban, "additional_layers"):
         _ = _
         logger.warning("No 'additonal_layers' folder found in portal_urban, we create it.")
-        additional_layers_id = portal_urban.invokeFactory("Folder",id="additional_layers",title=_("urban","additonal_layers_folder_title",context=portal,default="Additional layers"))
+        additional_layers_id = portal_urban.invokeFactory("Folder",id="additional_layers",title=_("additonal_layers_folder_title", 'urban', context=portal.REQUEST, default="Additional layers"))
         additional_layers = getattr(portal_urban, additional_layers_id)
         additional_layers.setConstrainTypesMode(1)
         additional_layers.setLocallyAllowedTypes(['Layer'])

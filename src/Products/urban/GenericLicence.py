@@ -20,8 +20,7 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
+from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -31,7 +30,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
 from Products.urban.base import UrbanBase
-from Products.urban import urbanMessageFactory as _
+from zope.i18n import translate as _
 ##/code-section module-header
 
 schema = Schema((
@@ -536,10 +535,10 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, Bro
           flooding levels : no risk, low risk, moderated risk, high risk
         """
         lst=[
-             ['no', _("urban", 'flooding_level_no')],
-             ['low', _("urban", 'flooding_level_low')],
-             ['moderate', _("urban", 'flooding_level_moderate')],
-             ['high', _("urban", 'flooding_level_high')],
+             ['no', _('flooding_level_no', 'urban', context=self.REQUEST)],
+             ['low', _('flooding_level_low', 'urban', context=self.REQUEST)],
+             ['moderate', _('flooding_level_moderate', 'urban', context=self.REQUEST)],
+             ['high', _('flooding_level_high', 'urban', context=self.REQUEST)],
             ]
         vocab = []
         for elt in lst:
@@ -664,7 +663,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, Bro
         if self.getApplicants():
             applicant = unicode(self.getApplicants()[0].getName1() + " " + self.getApplicants()[0].getName2(), 'utf-8')
         else:
-            applicant = _("urban", 'no_applicant_defined')
+            applicant = _('no_applicant_defined', 'urban', context=self.REQUEST)
         title = str(self.getReference())+ " - " +unicode(self.getLicenceSubject(), 'utf-8') + " - " + applicant
         self.setTitle(title)
         self.reindexObject()

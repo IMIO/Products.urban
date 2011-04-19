@@ -16,7 +16,7 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.urban.config import *
 from Products.CMFCore.utils import getToolByName
-from Products.urban import urbanMessageFactory as _
+from zope.i18n import translate as _
 
 class UrbanBase:
     """
@@ -35,9 +35,9 @@ class UrbanBase:
             #if the signaletic is not empty, we are adding several applicants
             if signaletic:
                 try:
-                    signaletic = signaletic + ' ' + _("urban", 'and') + ' '
+                    signaletic = signaletic + ' ' + _('and', 'urban', context=self.REQUEST) + ' '
                 except UnicodeDecodeError:
-                    signaletic = unicode(signaletic, 'utf-8') + ' ' + _("urban", 'and') + ' '
+                    signaletic = unicode(signaletic, 'utf-8') + ' ' + _('and', 'urban', context=self.REQUEST) + ' '
             try:
                 signaletic = signaletic + applicant.getSignaletic(withaddress=withaddress)
             except UnicodeDecodeError:
@@ -79,7 +79,7 @@ class UrbanBase:
         for notary in notaries:
             #if the signaletic is not empty, we are adding several notaries
             if signaletic:
-                signaletic = unicode(signaletic, 'utf-8') + ' ' + _("urban", 'and') + ' '
+                signaletic = unicode(signaletic, 'utf-8') + ' ' + _('and', 'urban', context=self.REQUEST) + ' '
             signaletic = signaletic + notary.getSignaletic()
         return signaletic
 
@@ -94,10 +94,10 @@ class UrbanBase:
             #if the signaletic is not empty, we are adding several architects
             if signaletic:
                 try:
-                    signaletic = signaletic + ' ' + _("urban", 'and') + ' '
+                    signaletic = signaletic + ' ' + _('and', 'urban', context=self.REQUEST) + ' '
                 except UnicodeDecodeError:
-                    signaletic = unicode(signaletic, 'utf-8') + ' ' + _("urban", 'and') + ' '
-                signaletic = unicode(signaletic, 'utf-8') + ' ' + _("urban", 'and') + ' '
+                    signaletic = unicode(signaletic, 'utf-8') + ' ' + _('and', 'urban', context=self.REQUEST) + ' '
+                signaletic = unicode(signaletic, 'utf-8') + ' ' + _('and', 'urban', context=self.REQUEST) + ' '
             try:
                 signaletic = signaletic + architect.getSignaletic(withaddress=withaddress)
             except UnicodeDecodeError:
@@ -118,13 +118,13 @@ class UrbanBase:
             who = self.getWhoSubmitted()
             if who == 'both':
                 #a notary submitted the request for an applicant
-                return _('urban', 'request_submitted_by_both', mapping={'notary': self.getNotariesSignaletic(), 'applicant': self.getApplicantsSignaletic(), })
+                return _('request_submitted_by_both', 'urban', context=self.REQUEST, mapping={'notary': self.getNotariesSignaletic(), 'applicant': self.getApplicantsSignaletic(), })
             elif who == 'applicant':
                 #an applicant submitted the request for himself
-                return _('urban', 'request_submitted_by_applicant', mapping={'applicant': self.getApplicantsSignaletic(), })
+                return _('request_submitted_by_applicant', 'urban', context=self.REQUEST, mapping={'applicant': self.getApplicantsSignaletic(), })
             elif who == 'notary':
                 #a notary submitted the request without an applicant (??? possible ???)
-                return _('urban', 'request_submitted_by_notary', mapping={'notary': self.getNotariesSignaletic(), })
+                return _('request_submitted_by_notary', 'urban', context=self.REQUEST, mapping={'notary': self.getNotariesSignaletic(), })
             return ''
         elif self.getType() == 'ParceOutLicence':
             return 'test'
@@ -137,7 +137,7 @@ class UrbanBase:
         signaletic = ''
         for wl in self.getWorkLocations():
             if signaletic:
-                signaletic = unicode(signaletic, 'utf-8') + ' ' + _("urban", 'and') + ' '
+                signaletic = unicode(signaletic, 'utf-8') + ' ' + _('and', 'urban', context=self.REQUEST) + ' '
             signaletic = signaletic + wl.getSignaletic()
         return signaletic
 
@@ -182,7 +182,7 @@ class UrbanBase:
         if depositEvent:
             tool = getToolByName(self, 'portal_urban')
             return tool.formatDate(depositEvent.getEventDate())
-        return _("urban", 'warning_no_deposit_date')
+        return _('warning_no_deposit_date', 'urban', context=self.REQUEST)
 
     security.declarePublic('getMultipleApplicantsCSV')
     def getMultipleApplicantsCSV(self):
@@ -258,7 +258,7 @@ class UrbanBase:
                 toreturn=toreturn+'\n'
             #or an "and "
             elif not isFirst:
-                toreturn=toreturn + ' ' + _("urban", 'and') + ' '
+                toreturn=toreturn + ' ' + _('and', 'urban', context=self.REQUEST) + ' '
             toreturn=toreturn+'section '+portionOutObj.getSection()
             toreturn=toreturn+' '+portionOutObj.getRadical()
             if portionOutObj.getBis() !='':

@@ -47,6 +47,7 @@ from Products.PageTemplates.Expressions import getEngine
 from Products.CMFCore.Expression import Expression
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFPlone.PloneBatch import Batch
+from zope.i18n import translate as _
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 DB_QUERY_ERROR = "Programming error in query"
@@ -625,7 +626,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if not result:
             return ((DB_QUERY_ERROR, DB_QUERY_ERROR), )
         if all:
-            result = [{'da':'0', 'divname':_('urban', 'all_divisions')}] + result
+            result = [{'da':'0', 'divname':_('all_divisions', 'urban', context=self.REQUEST)}] + result
         return result
 
     security.declarePublic('queryDB')
@@ -648,7 +649,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
           delattr(self,'dbc')
       else:
           ptool = getToolByName(self, "plone_utils")
-          ptool.addPortalMessage(_("plone", u"db_connection_error", mapping={u'error': self.dbc}), type="error")
+          ptool.addPortalMessage(_(u"db_connection_error", 'plone', mapping={u'error': self.dbc}, context=self.REQUEST), type="error")
       return result
 
     def checkDBConnection(self):
@@ -661,9 +662,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
       ptool = getToolByName(self, "plone_utils")
       try:
           dbc = psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (self.getSqlName(), self.getSqlUser(), self.getSqlHost(), self.getSqlPassword()))
-          ptool.addPortalMessage(_("plone", u"db_connection_successfull"), type='info')
+          ptool.addPortalMessage(_(u"db_connection_successfull", 'plone', context=self.REQUEST), type='info')
       except psycopg2.OperationalError, e:
-          ptool.addPortalMessage(_("plone", u"db_connection_error", mapping={u'error': unicode(e.__str__(), 'utf-8')}))
+          ptool.addPortalMessage(_(u"db_connection_error", 'plone', mapping={u'error': unicode(e.__str__(), 'utf-8')}, context=self.REQUEST))
 
     security.declarePublic('mayAccessUrban')
     def mayAccessUrban(self):
@@ -1109,7 +1110,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         except ParseError:
             #in case something like '*' is entered, ZCTextIndex raises an error...
             ptool = getToolByName(self, "plone_utils")
-            ptool.addPortalMessage(_("plone", u"please_enter_more_letters"), type="info")
+            ptool.addPortalMessage(_(u"please_enter_more_letters", 'plone', context=self.REQUEST), type="info")
             return res
 
     security.declarePublic('searchByStreet')
@@ -1454,7 +1455,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 #so in french '1' becomes '1er' but in english, '1' becomes '1st',
                 #'2' becomes '2nd', ...
                 daymsgid = "date_day_%s" % day
-                translatedDay = _('urban', daymsgid)
+                translatedDay = _(daymsgid, 'urban', context=self.REQUEST)
                 #translate the month
                 #msgids already exist in the 'plonelocales' domain
                 monthMappings = {
@@ -1472,7 +1473,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                         '12': 'dec',
                        }
                 monthmsgid = "month_%s" % monthMappings[month]
-                translatedMonth = _('plonelocales', monthmsgid).lower()
+                translatedMonth = _(monthmsgid, 'plonelocales', context=self.REQUEST).lower()
             return "%s %s %s" % (translatedDay, translatedMonth, year)
         return ''
 
