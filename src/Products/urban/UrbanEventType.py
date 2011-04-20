@@ -53,13 +53,12 @@ schema = Schema((
     ),
     StringField(
         name='eventTypeType',
+        vocabulary_factory="eventTypeType",
         widget=SelectionWidget(
             label='Eventtypetype',
             label_msgid='urban_label_eventTypeType',
             i18n_domain='urban',
         ),
-        enforceVocabulary=True,
-        vocabulary='listEventTypeTypes',
     ),
     StringField(
         name='specialFunctionName',
