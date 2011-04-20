@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-04-13 13:37+0000\n"
+"POT-Creation-Date: 2011-04-20 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -775,7 +775,7 @@ msgstr ""
 msgid "urban-tests"
 msgstr ""
 
-# Default: Set the number of days the alert will be shown before the deadline delay
+#. Default: Set the number of days the alert will be shown before the deadline delay
 msgid "urban_alertdelay_descr"
 msgstr ""
 
@@ -1077,6 +1077,11 @@ msgstr ""
 #. Default: "Destinataire"
 #: UrbanEvent.py
 msgid "urban_label_eventRecipient"
+msgstr ""
+
+#. Default: "Eventtypetype"
+#: UrbanEventType.py
+msgid "urban_label_eventTypeType"
 msgstr ""
 
 #. Default: "Explanationsdate"

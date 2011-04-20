@@ -52,6 +52,16 @@ schema = Schema((
         vocabulary='listOptionalFields',
     ),
     StringField(
+        name='eventTypeType',
+        widget=SelectionWidget(
+            label='Eventtypetype',
+            label_msgid='urban_label_eventTypeType',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        vocabulary='listEventTypeTypes',
+    ),
+    StringField(
         name='specialFunctionName',
         widget=StringField._properties['widget'](
             label='Specialfunctionname',
@@ -109,7 +119,7 @@ class UrbanEventType(BaseFolder, UrbanDelay, BrowserDefaultMixin):
     security.declarePublic('listOptionalFields')
     def listOptionalFields(self):
         """
-         return a DisplayList of fields wich are marked as optional (CP added attribute on the Fields of TeleService)
+         return a DisplayList of fields wich are marked as optional
         """
         from Products.urban.UrbanEvent import UrbanEvent_schema
         lst = []
@@ -120,10 +130,20 @@ class UrbanEventType(BaseFolder, UrbanDelay, BrowserDefaultMixin):
             except AttributeError:
                 #most of time, the field has not the 'optional' attribute
                 pass
-
         return DisplayList(lst)
 
     # Manually created methods
+
+    security.declarePublic('listEventTypeTypes')
+    def listEventTypeTypes(self):
+        """
+         return a DisplayList of eventtype type
+        """
+        lst=[]
+        vocab = []
+        for elt in lst:
+            vocab.append((elt[0], elt[1]))
+        return DisplayList(tuple(vocab))
 
     security.declarePublic('isApplicable')
     def isApplicable(self, obj):
