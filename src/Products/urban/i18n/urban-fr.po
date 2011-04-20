@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-04-13 13:37+0000\n"
+"POT-Creation-Date: 2011-04-20 08:12+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1082,6 +1082,11 @@ msgstr "Date"
 #: UrbanEvent.py
 msgid "urban_label_eventRecipient"
 msgstr "Destinataire du document"
+
+#. Default: "Eventtypetype"
+#: UrbanEventType.py
+msgid "urban_label_eventTypeType"
+msgstr "Catégorie du type d'événement"
 
 #. Default: "Explanationsdate"
 #: UrbanEvent.py

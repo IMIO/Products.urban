@@ -807,6 +807,11 @@ msgstr ""
 msgid "urban_label_eventRecipient"
 msgstr ""
 
+#. Default: "Eventtypetype"
+#: UrbanEventType.py
+msgid "urban_label_eventTypeType"
+msgstr ""
+
 #. Default: "Explanationsdate"
 #: UrbanEvent.py
 msgid "urban_label_explanationsDate"
@@ -1049,11 +1054,6 @@ msgstr ""
 #: Contact.py
 #: Geometrician.py
 msgid "urban_label_nationalRegister"
-msgstr ""
-
-#. Default: "Newattr"
-#: UrbanEventType.py
-msgid "urban_label_newAttr"
 msgstr ""
 
 #. Default: "Notarycontact"
