@@ -58,6 +58,8 @@ DirectoryView.registerDirectory('skins', product_globals)
 
 
 ##code-section custom-init-head #fill in your manual code here
+from zope.i18nmessageid import MessageFactory
+UrbanMessage = MessageFactory("urban")
 ##/code-section custom-init-head
 
 

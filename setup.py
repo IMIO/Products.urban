@@ -22,6 +22,9 @@ setup(name='Products.urban',
       namespace_packages=['Products'],
       include_package_data=True,
       zip_safe=False,
+      extras_require=dict(
+            test=['unittest2', 'zope.testing', 'plone.testing',
+                  'plone.app.testing']),
       install_requires=[
           'setuptools',
           'appy',

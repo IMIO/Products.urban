@@ -4,6 +4,9 @@ from zope.interface import Interface
 from zope.interface.interfaces import IInterface
 
 ##code-section HEAD
+from Products.urban import UrbanMessage as _
+
+
 class IApplicant(Interface):
     """Marker interface for .Applicant.Applicant
     """
@@ -134,8 +137,7 @@ class IEventTypeType(IInterface):
     """
 
 class IAcknoledgment(Interface):
-    """IAcknoledgment type marker interface"""
-    title = _('Accuse de reception')
+    __doc__ = _("""IAcknoledgment type marker interface""")
 
 from zope.component.interface import provideInterface
 provideInterface('', IAcknoledgment, IEventTypeType)
