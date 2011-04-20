@@ -44,6 +44,13 @@
     Add parceloutlicence equipments types in urban config
  </import-step>
  <import-step
+    id="urban-migrateFolderDelays"
+    handler="Products.urban.profiles.migrations.migrate.migrateFolderDelays"
+    title="Migrate delays from UrbanVocabularyTerms to UrbanDelays"
+    version="2011-04-19T10:00:00.0">
+    Delays were UrbanVocabularyTerms, now they are UrbanDelays
+ </import-step>
+ <import-step
     id="urban-addSpecificFeatures"
     handler="Products.urban.profiles.migrations.migrate.addSpecificFeatures"
     title="Add specific features for UrbanCertificateOne, UrbanCertificateTwo and NotaryLetters urban configs"

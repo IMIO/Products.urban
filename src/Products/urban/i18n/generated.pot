@@ -510,6 +510,11 @@ msgstr ""
 msgid "urban-tests"
 msgstr ""
 
+#. Default: "Set the number of days the alert will be shown before the deadline delay"
+#: UrbanDelay.py
+msgid "urban_alertdelay_descr"
+msgstr ""
+
 #. Default: "Enter the 4 coordinates of the map, each coordinate separated by a comma."
 #: UrbanTool.py
 msgid "urban_descr_mapExtent"
@@ -615,6 +620,11 @@ msgstr ""
 msgid "urban_label_adr2"
 msgstr ""
 
+#. Default: "Alertdelay"
+#: UrbanDelay.py
+msgid "urban_label_alertDelay"
+msgstr ""
+
 #. Default: "Annonceddelay"
 #: GenericLicence.py
 msgid "urban_label_annoncedDelay"
@@ -697,6 +707,7 @@ msgid "urban_label_data"
 msgstr ""
 
 #. Default: "Deadlinedelay"
+#: UrbanDelay.py
 #: UrbanEventType.py
 msgid "urban_label_deadLineDelay"
 msgstr ""
@@ -1040,6 +1051,11 @@ msgstr ""
 msgid "urban_label_nationalRegister"
 msgstr ""
 
+#. Default: "Newattr"
+#: UrbanEventType.py
+msgid "urban_label_newAttr"
+msgstr ""
+
 #. Default: "Notarycontact"
 #: Division.py
 #: UrbanCertificateBase.py
@@ -1354,6 +1370,11 @@ msgstr ""
 #. Default: "Path of a UNO-enabled Python interpreter (ie /usr/bin/python)"
 #: UrbanTool.py
 msgid "urban_label_unoEnabledPython"
+msgstr ""
+
+#. Default: "Urbandelays"
+#: urbaneventtype_urbandelay.py
+msgid "urban_label_urbandelays"
 msgstr ""
 
 #. Default: "Urbaneventtypes"

@@ -49,6 +49,9 @@
   <type type_id="UrbanCertificateTwo">
    <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
+  <type type_id="UrbanDelay">
+   <bound-workflow workflow_id="activation_workflow" />
+  </type>
   <type type_id="UrbanEvent">
    <bound-workflow workflow_id="urbanevent_workflow" />
   </type>

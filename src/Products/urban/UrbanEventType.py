@@ -3,7 +3,7 @@
 # File: UrbanEventType.py
 #
 # Copyright (c) 2011 by CommunesPlone
-# Generator: ArchGenXML Version 2.5
+# Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-
+from Products.urban.UrbanDelay import UrbanDelay
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -51,14 +51,6 @@ schema = Schema((
         ),
         vocabulary='listOptionalFields',
     ),
-    IntegerField(
-        name='deadLineDelay',
-        widget=IntegerField._properties['widget'](
-            label='Deadlinedelay',
-            label_msgid='urban_label_deadLineDelay',
-            i18n_domain='urban',
-        ),
-    ),
     StringField(
         name='specialFunctionName',
         widget=StringField._properties['widget'](
@@ -83,12 +75,13 @@ schema = Schema((
 ##/code-section after-local-schema
 
 UrbanEventType_schema = BaseFolderSchema.copy() + \
+    getattr(UrbanDelay, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class UrbanEventType(BaseFolder, BrowserDefaultMixin):
+class UrbanEventType(BaseFolder, UrbanDelay, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

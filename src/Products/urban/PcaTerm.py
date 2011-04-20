@@ -3,7 +3,7 @@
 # File: PcaTerm.py
 #
 # Copyright (c) 2011 by CommunesPlone
-# Generator: ArchGenXML Version 2.5
+# Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -126,8 +126,8 @@ class PcaTerm(BaseContent, BrowserDefaultMixin):
         """
            Override the Title method to display several data
         """
-        title = "%s (%s - %s - %s)" % (unicode(str(self.getLabel()), 'utf8'), unicode(str(self.getNumber()), 'utf-8'), self.toLocalizedTime(self.getDecreeDate()), self.displayValue(self.listDecreeTypes(), self.getDecreeType()))
-        return title
+        return u'Foo'
+        #return u"%s (%s - %s - %s)" % (unicode(str(self.getLabel()), 'utf8'), unicode(str(self.getNumber()), 'utf-8'), self.toLocalizedTime(self.getDecreeDate()), self.displayValue(self.listDecreeTypes(), self.getDecreeType()))
 
 
 

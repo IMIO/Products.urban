@@ -3,7 +3,7 @@
 # File: Division.py
 #
 # Copyright (c) 2011 by CommunesPlone
-# Generator: ArchGenXML Version 2.5
+# Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -155,6 +155,7 @@ class Division(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, BrowserDe
         """
         """
         pass
+
     security.declarePublic('getDefaultReference')
     def getDefaultReference(self):
         """
@@ -226,6 +227,7 @@ class Division(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, BrowserDe
 
         return messages
 
+    security.declarePublic('getProprietaries')
     def getProprietaries(self):
         """
            Return the list of applicants for the Licence
@@ -236,6 +238,7 @@ class Division(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, BrowserDe
                 res.append(obj)
         return res
 
+    security.declarePublic('getParcels')
     def getParcels(self):
         """
            Return the list of parcels (portionOut) for the Licence

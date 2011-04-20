@@ -27,5 +27,6 @@
   <type portal_type="Lot"/>
   <type portal_type="Division"/>
   <type portal_type="WorkLocation"/>
+  <type portal_type="UrbanDelay"/>
  </factorytypes>
 </object>

@@ -1,9 +1,41 @@
 <?xml version="1.0"?>
 <portlets xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-          i18n:domain="urban">
-    <assignment name="portlet_urban"
+    i18n:domain="urban">
+
+    <dependency step="urban-postInstall"/>
+
+    <assignment remove="True"
+                name="navigation"
                 category="context"
                 key="/"
+                manager="plone.leftcolumn"
+                type="portlets.Navigation" />
+
+    <assignment remove="True"
+                name="news"
+                category="context"
+                key="/"
+                manager="plone.rightcolumn"
+                type="portlets.News" />
+
+    <assignment remove="True"
+                name="events"
+                category="context"
+                key="/"
+                manager="plone.rightcolumn"
+                type="portlets.Events" />
+    <assignment name="portlet_firefox"
+                category="context"
+                key="/"
+                manager="plone.leftcolumn"
+                type="portlets.Classic">
+           <property name="macro">portlet</property>
+           <property name="template">portlet_firefox</property>
+    </assignment>
+
+    <assignment name="portlet_urban"
+                category="context"
+                key="/urban"
                 manager="plone.leftcolumn"
                 type="portlets.Classic" >
            <property name="macro">portlet</property>

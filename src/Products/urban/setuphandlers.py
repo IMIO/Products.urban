@@ -3,7 +3,7 @@
 # File: setuphandlers.py
 #
 # Copyright (c) 2011 by CommunesPlone
-# Generator: ArchGenXML Version 2.5
+# Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -38,7 +38,7 @@ def isNoturbanProfile(context):
 
 def setupHideToolsFromNavigation(context):
     """hide tools"""
-    if isNoturbanProfile(context): return 
+    if isNoturbanProfile(context): return
     # uncatalog tools
     site = context.getSite()
     toolnames = ['portal_urban']
@@ -61,7 +61,7 @@ def setupHideToolsFromNavigation(context):
 def updateRoleMappings(context):
     """after workflow changed update the roles mapping. this is like pressing
     the button 'Update Security Setting' and portal_workflow"""
-    if isNoturbanProfile(context): return 
+    if isNoturbanProfile(context): return
     wft = getToolByName(context.getSite(), 'portal_workflow')
     wft.updateRoleMappings()
 
@@ -123,19 +123,6 @@ def postInstall(context):
     logger.info("Refresh portal_catalog : starting...")
     site.portal_catalog.refreshCatalog(clear=True)
     logger.info("Refresh portal_catalog : Done!")
-
-    ann = IAnnotations(site)
-    #clear all unused portlet
-    for portlet in ann['plone.portlets.contextassignments']['plone.rightcolumn'].keys():
-        del ann['plone.portlets.contextassignments']['plone.rightcolumn'][portlet]
-    for portlet in ann['plone.portlets.contextassignments']['plone.leftcolumn'].keys():
-        if portlet not in ('portlet_urban','login'):
-            del ann['plone.portlets.contextassignments']['plone.leftcolumn'][portlet]
-    #create portlet Firefox if not exist
-    if not ann['plone.portlets.contextassignments']['plone.leftcolumn'].has_key('portlet_firefox'):
-        ann['plone.portlets.contextassignments']['plone.leftcolumn']['portlet_firefox'] = classic.Assignment(template='portlet_firefox', macro="portlet")
-
-
 
 ##code-section FOOT
 def addUrbanConfigs(context):
@@ -389,14 +376,14 @@ def addUrbanConfigs(context):
             newFolderid = configFolder.invokeFactory("Folder",id="folderdelays",title=_("folderdelays_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
-            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="30j",title=u"30 jours (article 107§1 / article 264)", termKey="30")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="70j",title=u"70 jours (article 107§1 / article 264)", termKey="70")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="75j",title=u"75 jours (article 107§2)", termKey="75")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="115j",title=u"115 jours (article 107§2)", termKey="115")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="art127",title=u"Article 127", termKey="0")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="inconnu",title=u"Inconnu", termKey="0")
+            newFolder.setLocallyAllowedTypes(['UrbanDelay'])
+            newFolder.setImmediatelyAddableTypes(['UrbanDelay'])
+            newFolder.invokeFactory("UrbanDelay",id="30j",title=u"30 jours (article 107§1 / article 264)", deadLineDelay=30, alertDelay=20)
+            newFolder.invokeFactory("UrbanDelay",id="70j",title=u"70 jours (article 107§1 / article 264)", deadLineDelay=70, alertDelay=20)
+            newFolder.invokeFactory("UrbanDelay",id="75j",title=u"75 jours (article 107§2)", deadLineDelay=75, alertDelay=20)
+            newFolder.invokeFactory("UrbanDelay",id="115j",title=u"115 jours (article 107§2)", deadLineDelay=115, alertDelay=20)
+            newFolder.invokeFactory("UrbanDelay",id="art127",title=u"Article 127", deadLineDelay=0, alertDelay=20)
+            newFolder.invokeFactory("UrbanDelay",id="inconnu",title=u"Inconnu", deadLineDelay=0, alertDelay=20)
 
             #add the derogations folder
             newFolderid = configFolder.invokeFactory("Folder",id="derogations",title=_("derogations_folder_title", 'urban', context=site.REQUEST))
@@ -891,7 +878,6 @@ def adaptDefaultPortal(context):
     try:
         frontpage = getattr(site, 'front-page')
         frontpage.setTitle(_("front_page_title", 'urban', context=site.REQUEST))
-        import pdb; pdb.set_trace()
         frontpage.setDescription(_("front_page_descr", 'urban', context=site.REQUEST))
         frontpage.setText(_("front_page_text", 'urban', context=site.REQUEST))
         frontpage.reindexObject()

@@ -122,5 +122,9 @@ class IWorkLocation(Interface):
     """Marker interface for .WorkLocation.WorkLocation
     """
 
+class IUrbanDelay(Interface):
+    """Marker interface for .UrbanDelay.UrbanDelay
+    """
+
 ##code-section FOOT
 ##/code-section FOOT

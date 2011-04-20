@@ -3,7 +3,7 @@
 # File: urban.py
 #
 # Copyright (c) 2011 by CommunesPlone
-# Generator: ArchGenXML Version 2.5
+# Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -97,6 +97,7 @@ def initialize(context):
     import Lot
     import Division
     import WorkLocation
+    import UrbanDelay
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

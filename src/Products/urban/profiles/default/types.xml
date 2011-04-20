@@ -55,6 +55,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="WorkLocation"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="UrbanDelay"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <!-- ##code-section TYPES -->
  <object name="UrbanCertificateOne"
          meta_type="Factory-based Type Information with dynamic views"/>

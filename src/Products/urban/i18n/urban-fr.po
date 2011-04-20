@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-04-11 09:51+0000\n"
+"POT-Creation-Date: 2011-04-13 13:37+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -776,6 +776,10 @@ msgstr "Urbanisme Sambreville"
 msgid "urban-tests"
 msgstr "Urbanisme tests"
 
+#. Default: Set the number of days the alert will be shown before the deadline delay
+msgid "urban_alertdelay_descr"
+msgstr "Nombre de jour restant à partir duquel une alerte doit être indiquée concernant le délai de cet événement"
+
 #. Default: "Enter the 4 coordinates of the map, each coordinate separated by a comma."
 #: UrbanTool.py
 msgid "urban_descr_mapExtent"
@@ -881,6 +885,11 @@ msgstr "Code postal et localité"
 #: RecipientCadastre.py
 msgid "urban_label_adr2"
 msgstr "Rue et numéro (cadastre)"
+
+#. Default: "Alertdelay"
+#: UrbanDelay.py
+msgid "urban_label_alertDelay"
+msgstr "Délai d'alerte"
 
 #. Default: "Annonceddelay"
 #: GenericLicence.py
@@ -1638,6 +1647,11 @@ msgstr "Type"
 #: UrbanTool.py
 msgid "urban_label_unoEnabledPython"
 msgstr "Chemin de Python avec UNO"
+
+#. Default: "Urbandelays"
+#: urbaneventtype_urbandelay.py
+msgid "urban_label_urbandelays"
+msgstr ""
 
 #. Default: "Urbaneventtypes"
 #: UrbanEventType.py
