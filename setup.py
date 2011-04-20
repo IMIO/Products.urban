@@ -27,5 +27,6 @@ setup(name='Products.urban',
           'appy',
           'Plone',
           'Pillow',
+          'grokcore.component',
           'Products.MasterSelectWidget',
           'psycopg2'])

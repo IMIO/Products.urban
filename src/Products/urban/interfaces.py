@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from zope.interface import Interface
+from zope.interface.interfaces import IInterface
 
 ##code-section HEAD
 class IApplicant(Interface):
@@ -127,4 +128,15 @@ class IUrbanDelay(Interface):
     """
 
 ##code-section FOOT
+class IEventTypeType(IInterface):
+    """
+    Basic event type
+    """
+
+class IAcknoledgment(Interface):
+    """Accuse de Reception"""
+
+from zope.component.interface import provideInterface
+provideInterface('', IAcknoledgment, IEventTypeType)
+
 ##/code-section FOOT
