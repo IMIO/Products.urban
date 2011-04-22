@@ -331,7 +331,7 @@ msgid "environmentaldeclaration_searchretiredlicences"
 msgstr "Déclaration environnementale retirées"
 
 msgid "environmentaldeclaration_urbanconfig_title"
-msgstr "Configuration des déclarations environnementales"
+msgstr "Paramètres des Déclarations environnementales"
 
 msgid "environmentaldeclarations"
 msgstr "Déclarations environnementales"
