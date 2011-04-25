@@ -57,6 +57,8 @@ schema = Schema((
             label='Notarycontact',
             label_msgid='urban_label_notaryContact',
             i18n_domain='urban',
+            popup_name='popup-urban',
+            wild_card_search=True
         ),
         allowed_types= ('Notary',),
         multiValued=True,
@@ -89,6 +91,8 @@ schema = Schema((
             label='Foldermanagers',
             label_msgid='urban_label_foldermanagers',
             i18n_domain='urban',
+            popup_name='popup-urban',
+            wild_card_search=True
         ),
         required= False,
         multiValued=1,

@@ -17,9 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
 from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.urban.config import *
 
@@ -358,15 +356,17 @@ schema = Schema((
         name='foldermanagers',
         widget=ReferenceBrowserWidget(
             force_close_on_insert=1,
-            allow_search=1,
-            allow_browse=1,
-            show_indexes=1,
+            allow_search=True,
+            allow_browse=True,
+            show_indexes=True,
             available_indexes={'Title':'Nom'},
             startup_directory_method="foldermanagersStartupDirectory",
             restrict_browsing_to_startup_directory=1,
             label='Foldermanagers',
             label_msgid='urban_label_foldermanagers',
             i18n_domain='urban',
+            popup_name='popup-urban',
+            wild_card_search=True
         ),
         required= True,
         schemata='urban_description',
@@ -375,7 +375,6 @@ schema = Schema((
         default_method="getDefaultFolderManagers",
         allowed_types=('FolderManager',),
     ),
-
 ),
 )
 

@@ -41,6 +41,8 @@ schema = Schema((
             label='Street',
             label_msgid='urban_label_street',
             i18n_domain='urban',
+            popup_name='popup-urban',
+            wild_card_search=True
         ),
         allowed_types= ('Street',),
         relationship="street",

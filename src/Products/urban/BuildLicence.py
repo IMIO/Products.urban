@@ -24,7 +24,7 @@ from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+#from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from GenericLicence import GenericLicence
 from GenericLicence import GenericLicence_schema
@@ -123,15 +123,17 @@ schema = Schema((
         name='architects',
         widget=ReferenceBrowserWidget(
             force_close_on_insert=1,
-            allow_search=1,
-            allow_browse=1,
-            show_indexes=0,
-            show_index_selector=0,
+            allow_search=True,
+            allow_browse=False,
+            show_indexes=False,
+            show_index_selector=False,
             available_indexes={'Title':'Nom'},
             base_query="architectsBaseQuery",
             label='Architects',
             label_msgid='urban_label_architects',
             i18n_domain='urban',
+            popup_name='popup-urban',
+            wild_card_search=True
         ),
         required= True,
         schemata='urban_description',
@@ -151,6 +153,8 @@ schema = Schema((
             label='Parcellings',
             label_msgid='urban_label_parcellings',
             i18n_domain='urban',
+            popup_name='popup-urban',
+            wild_card_search=True
         ),
         allowed_types=('ParcellingTerm',),
         schemata='urban_location',

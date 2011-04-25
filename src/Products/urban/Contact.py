@@ -24,7 +24,7 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 import cgi
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+#from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.validation.interfaces.IValidator import IValidator
 from Products.validation import validation
 from Products.CMFCore.utils import getToolByName
@@ -75,6 +75,7 @@ schema = Schema((
     ),
     StringField(
         name='name1',
+        searchable=True,
         widget=StringField._properties['widget'](
             label='Name1',
             label_msgid='urban_label_name1',
@@ -83,6 +84,7 @@ schema = Schema((
     ),
     StringField(
         name='name2',
+        searchable=True,
         widget=StringField._properties['widget'](
             label='Name2',
             label_msgid='urban_label_name2',
@@ -206,7 +208,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
-
+    
     security.declarePublic('listPersonTitles')
     def listPersonTitles(self):
         """

@@ -50,6 +50,8 @@ schema = Schema((
             label='Geometricians',
             label_msgid='urban_label_geometricians',
             i18n_domain='urban',
+            popup_name='popup-urban',
+            wild_card_search=True
         ),
         allowed_types=('Geometrician',),
         multiValued=1,

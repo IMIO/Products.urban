@@ -17,16 +17,13 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from DateTime import DateTime
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Acquisition import aq_inner, aq_parent
 from Products.CMFCore.utils import getToolByName
 from zope.i18n import translate as _
@@ -56,6 +53,8 @@ schema = Schema((
             available_indexes={'getFirstname':'First name','getSurname': 'Surname'},
             label_msgid='urban_label_eventRecipient',
             i18n_domain='urban',
+            popup_name='popup-urban',
+            wild_card_search=True
         ),
         allowed_types= ('Recipient','Applicant','Architect'),
         optional=True,
