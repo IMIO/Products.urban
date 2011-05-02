@@ -245,6 +245,25 @@ def addEquipmentTypes(context):
     newFolder.invokeFactory("UrbanVocabularyTerm",id="sewers",title=u"Egouttage")
     newFolder.invokeFactory("UrbanVocabularyTerm",id="water",title=u"Eau")
 
+def addPebMissingPart(context):
+    """
+      Add an element 'peb' in the 'buildlicence' UrbanConfig 'missingparts' folder
+    """
+    #walk into every UrbanConfigs and look for a 'missingparts' folder
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+    tool = getToolByName(site, 'portal_urban')
+    if not hasattr(site.portal_urban.buildlicence, 'missingparts'):
+        logger.error("No 'msisingparts' folder found in 'portal_urban.buildlicence' !!!")
+        return
+    missingPartsFolder = site.portal_urban.buildlicence.missingparts
+    if not hasattr(missingPartsFolder, 'peb'):
+        missingPartsFolder.invokeFactory("UrbanVocabularyTerm",id="peb",title=u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires")
+        logger.info("Added a missing part 'peb' for UrbanConfig 'buildlicence'")
+    else:
+        logger.error("A missing part 'peb' already exists in 'portal_urban.buildlicence' !!!")
+
 def migrateFolderDelays(context):
     """
       Delays were UrbanVocabularyTerms, now they are UrbanDelays

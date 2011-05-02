@@ -194,6 +194,14 @@ urbanEventTypes = {
                                     ),
                     },
                     {
+                    'id': "peb-declaration-initiale",
+                    'title': "PEB : déclaration initiale",
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 0,
+                    'TALCondition' : "python: here.getPebType() == 'complete_process'",
+                    'podTemplates': (),
+                    },
+                    {
                     'id': "debut-des-travaux",
                     'title': "Début des travaux",
                     'deadLineDelay': 15,
@@ -205,6 +213,14 @@ urbanEventTypes = {
                     'title': "Fin des travaux",
                     'deadLineDelay': 15,
                     'activatedFields': ['eventDate', ],
+                    'podTemplates': (),
+                    },
+                    {
+                    'id': "peb-declaration-finale",
+                    'title': "PEB : déclaration finale",
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 15,
+                    'TALCondition' : "python: here.getPebType() == 'complete_process'",
                     'podTemplates': (),
                     },
                     {

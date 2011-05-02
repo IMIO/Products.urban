@@ -194,6 +194,9 @@ msgstr ""
 msgid "label_schema_urban_road"
 msgstr ""
 
+msgid "label_schema_urban_peb"
+msgstr ""
+
 msgid "label_schema_urban_investigation_and_advices"
 msgstr ""
 

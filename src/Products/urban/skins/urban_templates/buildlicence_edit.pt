@@ -26,6 +26,7 @@
              <metal:myfield use-macro="python:here.widget('missingParts', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('missingPartsDetails', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('annoncedDelay', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('annoncedDelayDetails', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('impactStudy', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('usage', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('description', mode='edit')" />
@@ -37,6 +38,7 @@
              <metal:myfield use-macro="python:here.widget('floodingLevel', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('pash', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('roadAdaptation', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('implantation', mode='edit')" />
             </fieldset>
             <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_location">Location</legend></strong>
              <metal:myfield use-macro="python:here.widget('folderZone', mode='edit')" />
@@ -69,11 +71,16 @@
             <metal:myfield use-macro="python:here.widget('investigationDetails', mode='edit')" />
             <metal:myfield use-macro="python:here.widget('solicitOpinionsTo', mode='edit')" />
             </fieldset>
+            <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_peb">PEB</legend></strong>
+             <metal:myfield use-macro="python:here.widget('pebType', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('pebDetails', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('pebStudy', mode='edit')" />
+            </fieldset>
         </div>
 
         <tal:with_tabbing condition="useTabbing">
               <tal:fieldsets define="sole_fieldset python:len(fieldsets)==1"
-                repeat="fieldset python: ['urban_description', 'urban_road', 'urban_location', 'urban_investigation_and_advices']">
+                repeat="fieldset python: ['urban_description', 'urban_road', 'urban_location', 'urban_investigation_and_advices', 'urban_peb']">
                 <!-- hide some fieldsets... -->
                 <tal:block condition="python: not fieldset in ['metadata', 'default', 'settings', 'categorization', 'ownership', 'dates', ]">
                 <fieldset tal:define="fieldsetid python:putils.normalizeString(fieldset)"
@@ -85,7 +92,6 @@
                           i18n:translate=""
                           tal:condition="not:sole_fieldset" />
                   <br />
-
                   <tal:description_fieldset condition="python: fieldset == 'urban_description'">
                   <table width=100%>
                       <tr>

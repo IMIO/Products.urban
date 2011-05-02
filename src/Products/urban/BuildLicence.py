@@ -130,6 +130,37 @@ schema = Schema((
         ),
         schemata='urban_road',
     ),
+    StringField(
+        name='pebType',
+        widget=SelectionWidget(
+            label='Pebtype',
+            label_msgid='urban_label_pebType',
+            i18n_domain='urban',
+        ),
+        schemata='urban_peb',
+        vocabulary='listPebTypes',
+    ),
+    TextField(
+        name='pebDetails',
+        allowable_content_types='text/plain',
+        default_content_type='text/plain',
+        widget=TextAreaWidget(
+            label='Pebdetails',
+            label_msgid='urban_label_pebDetails',
+            i18n_domain='urban',
+        ),
+        default_output_type='text/html',
+        schemata='urban_peb',
+    ),
+    BooleanField(
+        name='pebStudy',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Pebstudy',
+            label_msgid='urban_label_pebStudy',
+            i18n_domain='urban',
+        ),
+    ),
     ReferenceField(
         name='architects',
         widget=ReferenceBrowserWidget(
@@ -240,6 +271,24 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
              ['for_habitation', _("urban", 'usage_for_habitation', context=self, default="For habitation")],
              ['not_for_habitation', _("urban", 'usage_not_for_habitation', context=self, default="Not for habitation")],
              ['not_applicable', _("urban", 'usage_not_applicable', context=self, default="Not applicable")],
+              ]
+        vocab = []
+        for elt in lst:
+            vocab.append((elt[0], elt[1]))
+        return DisplayList(tuple(vocab))
+
+    security.declarePublic('listUsages')
+    def listPebTypes(self):
+        """
+          Vocabulary for field 'pebType'
+        """
+        service = getGlobalTranslationService()
+        _ = service.translate
+        lst=[
+             ['not_applicable', _("urban", 'peb_not_applicable', context=self, default="Not applicable")],
+             ['complete_process', _("urban", 'peb_complete_process', context=self, default="Complete process")],
+             ['form1_process', _("urban", 'peb_form1_process', context=self, default="Form 1 process")],
+             ['form2_process', _("urban", 'peb_form2_process', context=self, default="Form 2 process")],
               ]
         vocab = []
         for elt in lst:

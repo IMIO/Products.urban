@@ -182,6 +182,9 @@ msgstr "Enquête et avis"
 msgid "label_schema_urban_location"
 msgstr "Zonage"
 
+msgid "label_schema_urban_peb"
+msgstr "PEB"
+
 msgid "label_schema_urban_road"
 msgstr "Voirie"
 

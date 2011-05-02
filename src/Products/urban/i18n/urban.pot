@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-05-02 09:39+0000\n"
+"POT-Creation-Date: 2011-05-02 12:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1397,6 +1397,21 @@ msgstr ""
 msgid "urban_label_pca"
 msgstr ""
 
+#. Default: "Pebdetails"
+#: BuildLicence.py
+msgid "urban_label_pebDetails"
+msgstr ""
+
+#. Default: "Pebstudy"
+#: BuildLicence.py
+msgid "urban_label_pebStudy"
+msgstr ""
+
+#. Default: "Pebtype"
+#: BuildLicence.py
+msgid "urban_label_pebType"
+msgstr ""
+
 #. Default: "Persontitle"
 #: Contact.py
 msgid "urban_label_personTitle"
@@ -1828,3 +1843,14 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
+msgid "peb_not_applicable"
+msgstr ""
+
+msgid "peb_complete_process"
+msgstr ""
+
+msgid "peb_form1_process"
+msgstr ""
+
+msgid "peb_form2_process"
+msgstr ""

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-05-02 09:39+0000\n"
+"POT-Creation-Date: 2011-05-02 12:34+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -593,6 +593,18 @@ msgstr "$decreeType du $decreeDate"
 msgid "pcas_folder_title"
 msgstr "Plan Communal d'Aménagement"
 
+msgid "peb_complete_process"
+msgstr "Procédure complète"
+
+msgid "peb_form1_process"
+msgstr "Formulaire 1"
+
+msgid "peb_form2_process"
+msgstr "Formulaire 2"
+
+msgid "peb_not_applicable"
+msgstr "Non applicable"
+
 msgid "persons_titles_folder_title"
 msgstr "Titres des personnes"
 
@@ -1181,7 +1193,7 @@ msgstr "Etude d'incidence?"
 #. Default: "Implantation"
 #: BuildLicence.py
 msgid "urban_label_implantation"
-msgstr "Implantation (art. 137)?"
+msgstr "Implantation (art. 137)"
 
 #. Default: "Initials"
 #: FolderManager.py
@@ -1400,6 +1412,21 @@ msgstr "PASH"
 #: GenericLicence.py
 msgid "urban_label_pca"
 msgstr "Plan Communal d'Aménagement"
+
+#. Default: "Pebdetails"
+#: BuildLicence.py
+msgid "urban_label_pebDetails"
+msgstr "Détails concernant le PEB"
+
+#. Default: "Pebstudy"
+#: BuildLicence.py
+msgid "urban_label_pebStudy"
+msgstr "Etude de faisabilité technique, environnementale et économique"
+
+#. Default: "Pebtype"
+#: BuildLicence.py
+msgid "urban_label_pebType"
+msgstr "Type de PEB"
 
 #. Default: "Persontitle"
 #: Contact.py

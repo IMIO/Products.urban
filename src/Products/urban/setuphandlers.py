@@ -267,6 +267,7 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="notice_environnement",title=u"Notice d'évaluation préalable incidences environnement (annexe 1C) en 2 exemplaires")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="plan_secteur",title=u"Une copie du plan de secteur")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="isolation",title=u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires")
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="peb",title=u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires")
             #add FolderCategories folder
             newFolderid = configFolder.invokeFactory("Folder",id="foldercategories",title=service.translate("urban","foldercategories_folder_title",context=site,default="FolderCategories"))
             newFolder = getattr(configFolder, newFolderid)
