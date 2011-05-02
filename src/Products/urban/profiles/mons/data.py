@@ -13,13 +13,13 @@ urbanEventTypes = {
                                     ),
                     },
                     {
-                    'id': "fiche-technique-be-voirie",
-                    'title': "Fiche technique bureau d'études voirie",
+                    'id': "fiche-technique-energie",
+                    'title': "Fiche technique conseiller en énergie",
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 0,
                     'TALCondition' : "",
                     'podTemplates': (
-                                     {'id': "urb-avis-technique-be-voirie", 'title': "Avis technique"},
+                                     {'id': "urb-avis-technique-energie", 'title': "Avis technique"},
                                     ),
                     },
                     {
