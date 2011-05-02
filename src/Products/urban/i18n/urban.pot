@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-04-20 08:12+0000\n"
+"POT-Creation-Date: 2011-05-02 09:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -894,6 +894,11 @@ msgstr ""
 msgid "urban_label_annoncedDelay"
 msgstr ""
 
+#. Default: "Annonceddelaydetails"
+#: GenericLicence.py
+msgid "urban_label_annoncedDelayDetails"
+msgstr ""
+
 #. Default: "Applicants"
 #: GenericLicence.py
 msgid "urban_label_applicants"
@@ -1167,6 +1172,11 @@ msgstr ""
 #. Default: "Impactstudy"
 #: GenericLicence.py
 msgid "urban_label_impactStudy"
+msgstr ""
+
+#. Default: "Implantation"
+#: BuildLicence.py
+msgid "urban_label_implantation"
 msgstr ""
 
 #. Default: "Initials"

@@ -120,6 +120,16 @@ schema = Schema((
         schemata='urban_road',
         vocabulary='listRoadAdaptations',
     ),
+    BooleanField(
+        name='implantation',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Implantation',
+            label_msgid='urban_label_implantation',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+    ),
     ReferenceField(
         name='architects',
         widget=ReferenceBrowserWidget(

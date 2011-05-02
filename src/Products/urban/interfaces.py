@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from zope.interface import Interface
-from zope.interface.interfaces import IInterface
 
 ##code-section HEAD
+from zope.interface.interfaces import IInterface
+
 class IApplicant(Interface):
     """Marker interface for .Applicant.Applicant
     """

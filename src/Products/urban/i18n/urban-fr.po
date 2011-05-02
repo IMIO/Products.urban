@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-04-20 08:12+0000\n"
+"POT-Creation-Date: 2011-05-02 09:39+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -896,6 +896,11 @@ msgstr "Délai d'alerte"
 msgid "urban_label_annoncedDelay"
 msgstr "Délai annoncé"
 
+#. Default: "Annonceddelaydetails"
+#: GenericLicence.py
+msgid "urban_label_annoncedDelayDetails"
+msgstr "Détails concernant le délai annoncé"
+
 #. Default: "Applicants"
 #: GenericLicence.py
 msgid "urban_label_applicants"
@@ -1172,6 +1177,11 @@ msgstr "Grade"
 #: GenericLicence.py
 msgid "urban_label_impactStudy"
 msgstr "Etude d'incidence?"
+
+#. Default: "Implantation"
+#: BuildLicence.py
+msgid "urban_label_implantation"
+msgstr "Implantation (art. 137)?"
 
 #. Default: "Initials"
 #: FolderManager.py
@@ -1656,7 +1666,7 @@ msgstr "Chemin de Python avec UNO"
 #. Default: "Urbandelays"
 #: urbaneventtype_urbandelay.py
 msgid "urban_label_urbandelays"
-msgstr ""
+msgstr "Délais"
 
 #. Default: "Urbaneventtypes"
 #: UrbanEventType.py

@@ -188,6 +188,18 @@ schema = Schema((
         schemata='urban_description',
         vocabulary='listDelayToAnnonce',
     ),
+    TextField(
+        name='annoncedDelayDetails',
+        allowable_content_types='text/plain',
+        default_content_type='text/plain',
+        widget=TextAreaWidget(
+            label='Annonceddelaydetails',
+            label_msgid='urban_label_annoncedDelayDetails',
+            i18n_domain='urban',
+        ),
+        default_output_type='text/html',
+        schemata='urban_description',
+    ),
     BooleanField(
         name='impactStudy',
         default=False,
