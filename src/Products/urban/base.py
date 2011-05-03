@@ -56,7 +56,7 @@ class UrbanBase:
         for fm in fms:
             #if the signaletic is not empty, we are adding several folder managers
             if signaletic:
-                signaletic = unicode(signaletic, 'utf-8') + '<p>' + unicode(applicant.getSignaletic(), 'utf-8')
+                signaletic = signaletic + '<p>' + fm.getSignaletic()
             else:
                 signaletic = '<p>' + fm.getSignaletic()
             if withgrade:
