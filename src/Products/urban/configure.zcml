@@ -4,9 +4,8 @@
            xmlns:i18n="http://namespaces.zope.org/i18n"
            i18n_domain="urban">
 
-  <include package="Products.MasterSelectWidget"/>
-
   <!-- ##code-section configure.zcml.header -->
+  <include package="Products.MasterSelectWidget"/>
   <include package="five.grok"/>
   <include package=".events" />
   <include package=".browser" />
@@ -14,6 +13,9 @@
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".event.setEventTypeType"/>
   <include file="grok.zcml" />
+  <interface
+    interface=".interfaces.IAcknowledgment"
+    type=".interfaces.IEventTypeType"/>
   <!-- ##/code-section configure.zcml.header -->
 
   <i18n:registerTranslations directory="locales" />
@@ -23,9 +25,6 @@
 
 
   <!-- ##code-section configure.zcml -->
-  <interface
-    interface=".interfaces.IAcknowledgment"
-    type=".interfaces.IEventTypeType"/>
   <!-- ##/code-section configure.zcml -->
 
 </configure>
