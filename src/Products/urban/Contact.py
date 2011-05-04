@@ -208,7 +208,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
-    
+
     security.declarePublic('listPersonTitles')
     def listPersonTitles(self):
         """
@@ -218,7 +218,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
 
     # Manually created methods
 
-    security.declarePublic('listPersonTitles')
+    security.declarePublic('Title')
     def Title(self):
         """
            Generate the title...
@@ -333,7 +333,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
         return self.displayValue(self.listPersonTitles(), self.getPersonTitle())
 
-    security.declarePublic('getPersonTitleValue')
+    security.declarePublic('getPersonTitle')
     def getPersonTitle(self, short=False):
         """
           Overrides the default personTitle accessor
@@ -356,4 +356,3 @@ registerType(Contact, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-
