@@ -283,8 +283,6 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
           Vocabulary for field 'pebType'
         """
-        service = getGlobalTranslationService()
-        _ = service.translate
         lst=[
              ['not_applicable', _("urban", 'peb_not_applicable', context=self, default="Not applicable")],
              ['complete_process', _("urban", 'peb_complete_process', context=self, default="Complete process")],
