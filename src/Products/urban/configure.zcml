@@ -24,6 +24,9 @@
 
 
   <!-- ##code-section configure.zcml -->
+  <interface
+    interface=".interfaces.IAcknoledgment"
+    type=".interfaces.IEventTypeType"/>
   <!-- ##/code-section configure.zcml -->
 
 </configure>

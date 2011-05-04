@@ -130,18 +130,6 @@ class IUrbanDelay(Interface):
     """Marker interface for .UrbanDelay.UrbanDelay
     """
 
-##code-section FOOT
-class IEventTypeType(IInterface):
-    """
-    Basic event type
-    """
-
-class IAcknoledgment(Interface):
-    """Accuse de Reception"""
-
-from zope.component.interface import provideInterface
-provideInterface('', IAcknoledgment, IEventTypeType)
-
 ##/code-section FOOT=======
 class IEventTypeType(IInterface):
     """
@@ -150,8 +138,5 @@ class IEventTypeType(IInterface):
 
 class IAcknoledgment(Interface):
     __doc__ = _("""IAcknoledgment type marker interface""")
-
-from zope.component.interface import provideInterface
-provideInterface('', IAcknoledgment, IEventTypeType)
 
 ##/code-section FOOT
