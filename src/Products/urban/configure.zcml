@@ -13,6 +13,7 @@
   <subscriber for=".interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".event.setEventTypeType"/>
+  <include file="grok.zcml" />
   <!-- ##/code-section configure.zcml.header -->
 
   <i18n:registerTranslations directory="locales" />
