@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ViewContext xmlns:xlink="http://www.w3.org/1999/xlink/namespace/" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<ViewContext version="1.0.0" id="mum2_ogc_workshop"  xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.opengis.net/context" xsi:schemaLocation="http://www.opengis.net/context http://schemas.opengis.net/context/1.0.0/context.xsd">
 <General>
   <Window width="70%" height="500"/>
   <BoundingBox SRS="EPSG:31370" tal:attributes="minx view/minx; miny view/miny; maxx view/maxx; maxy view/maxy;"/>
@@ -25,6 +25,11 @@
         <Title tal:content="layer/style">default</Title>
       </Style>
     </StyleList>
+      <Extension>        
+        <ol:units xmlns:ol="http://openlayers.org/context">m</ol:units> 
+        <ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer> 
+        <ol:opacity xmlns:ol="http://openlayers.org/context">0.5</ol:opacity> 
+      </Extension>     
    </Layer>
  </LayerList>
 </ViewContext>

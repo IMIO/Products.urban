@@ -8,8 +8,24 @@
       for="Products.urban.interfaces.IUrbanTool"
       name="wmc"
       class=".views.WMC"
-      template="wmc.pt"
-      permission="zope2.View"
+      permission="zope2.Public"
       />
+      
+    <browser:page
+          for="Products.urban.interfaces.IUrbanTool"
+          name="testmap"
+          class=".views.testmap"
+          template="testmap.pt"
+          permission="zope2.View"
+          />
+
+    <browser:page
+          for="Products.urban.interfaces.IUrbanTool"
+          name="getProxy"
+          class=".views.ProxyController"
+          attribute="getProxy"
+          permission="zope2.View"
+          />          
+
 </configure>
 
