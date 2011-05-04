@@ -136,7 +136,7 @@ class IEventTypeType(IInterface):
     Basic event type
     """
 
-class IAcknoledgment(Interface):
-    __doc__ = _("""IAcknoledgment type marker interface""")
+class IAcknowledgment(Interface):
+    __doc__ = _("""IAcknowledgment type marker interface""")
 
 ##/code-section FOOT

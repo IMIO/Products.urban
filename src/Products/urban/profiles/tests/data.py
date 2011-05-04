@@ -49,7 +49,7 @@ urbanEventTypes = {
                     'title': "Accusé de réception (dossier complet - article 116 § 1)",
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
-                    'eventTypeType': 'Products.urban.interfaces.IAcknoledgment',
+                    'eventTypeType': 'Products.urban.interfaces.IAcknowledgment',
                     'podTemplates': ({'id': "urb-accuse", 'title': "Accusé de réception"},),
                     },
                     {

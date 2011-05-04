@@ -3,7 +3,7 @@ import unittest2 as unittest
 from zope.component.interface import interfaceToName
 from plone.app.testing import quickInstallProduct, login
 from Products.CMFCore.utils import getToolByName
-from Products.urban.interfaces import IUrbanEventType, IAcknoledgment
+from Products.urban.interfaces import IUrbanEventType, IAcknowledgment
 from Products.urban.testing import URBAN_WITH_PLONE
 
 
@@ -27,7 +27,7 @@ class TestInstall(unittest.TestCase):
         eventType = eventTypes[0]
         self.assertEqual(eventType.getId, 'accuse-de-reception')
 
-    def testAcknoledgmentSearchByInterface(self):
+    def testAcknowledgmentSearchByInterface(self):
         portal = self.layer['portal']
         urbanTool = getToolByName(portal, 'portal_urban')
         urban = portal.urban
@@ -49,17 +49,17 @@ class TestInstall(unittest.TestCase):
         urbanEvent._at_rename_after_creation = False
         urbanEvent.processForm()
         self.assertEqual(len(licence.objectValues('UrbanEvent')), 1)
-        self.failUnless(IAcknoledgment.providedBy(urbanEvent))
+        self.failUnless(IAcknowledgment.providedBy(urbanEvent))
         catalog = getToolByName(portal, 'portal_catalog')
-        interfaceName = interfaceToName(portal, IAcknoledgment)
+        interfaceName = interfaceToName(portal, IAcknowledgment)
         eventTypes = catalog(object_provides=interfaceName,
                              sort_on='sortable_title')
         self.assertEqual(len(eventTypes), 1)
 
-    def testAcknoledgmentEventTypeType(self):
+    def testAcknowledgmentEventTypeType(self):
         portal = self.layer['portal']
         urban = getToolByName(portal, 'portal_urban')
         eventTypes = urban.buildlicence.urbaneventtypes
         accuse = getattr(eventTypes, 'accuse-de-reception')
         eventTypeType = accuse.getEventTypeType()
-        self.assertEqual(eventTypeType, 'Products.urban.interfaces.IAcknoledgment')
+        self.assertEqual(eventTypeType, 'Products.urban.interfaces.IAcknowledgment')
