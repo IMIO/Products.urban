@@ -7,7 +7,7 @@ urbanEventTypes = {
                     'title': "Procédure erronée (article 127)",
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
-                    'TALCondition' : "python: here.getFolderCategory() == 'art127'",
+                    'TALCondition': "python: here.getFolderCategory() == 'art127'",
                     'podTemplates': (
                                      {'id': "urb-procedure-erronee-art127", 'title': "Procédure erronée (article 127 - courrier au demandeur)"},
                                      {'id': "urb-procedure-erronee-art127-rw", 'title': "Procédure erronée (article 127 - courrier à la RW)"},
@@ -49,6 +49,7 @@ urbanEventTypes = {
                     'title': "Accusé de réception (dossier complet - article 116 § 1)",
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
+                    'eventTypeType': 'Products.urban.interfaces.IAcknoledgment',
                     'podTemplates': ({'id': "urb-accuse", 'title': "Accusé de réception"},),
                     },
                     {
