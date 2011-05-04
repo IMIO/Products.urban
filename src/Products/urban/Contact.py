@@ -24,7 +24,7 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 import cgi
-#from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+
 from Products.validation.interfaces.IValidator import IValidator
 from Products.validation import validation
 from Products.CMFCore.utils import getToolByName

@@ -23,8 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
+from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 ##/code-section module-header
 
 schema = Schema((
