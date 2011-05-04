@@ -4,8 +4,6 @@ import logging
 from zope.i18n import translate as _
 from Acquisition import aq_base
 
-from Acquisition import aq_base
-
 logger = logging.getLogger('urban: migrations')
 
 def isNoturbanMigrationsProfile(context):
