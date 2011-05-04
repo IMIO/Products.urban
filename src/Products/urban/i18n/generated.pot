@@ -1177,6 +1177,11 @@ msgstr ""
 msgid "urban_label_puissance"
 msgstr ""
 
+#. Default: "Pylonshost"
+#: UrbanTool.py
+msgid "urban_label_pylonsHost"
+msgstr ""
+
 #. Default: "Radical"
 #: PortionOut.py
 msgid "urban_label_radical"

@@ -137,6 +137,7 @@ schema = Schema((
             label_msgid='urban_label_pebType',
             i18n_domain='urban',
         ),
+        enforceVocabulary=True,
         schemata='urban_peb',
         vocabulary='listPebTypes',
     ),
@@ -277,7 +278,8 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
             vocab.append((elt[0], elt[1]))
         return DisplayList(tuple(vocab))
 
-    security.declarePublic('listUsages')
+    # Manually created methods
+
     def listPebTypes(self):
         """
           Vocabulary for field 'pebType'
@@ -294,8 +296,6 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
         for elt in lst:
             vocab.append((elt[0], elt[1]))
         return DisplayList(tuple(vocab))
-
-    # Manually created methods
 
     security.declarePublic('architectsBaseQuery')
     def architectsBaseQuery(self):

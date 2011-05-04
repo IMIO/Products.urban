@@ -215,6 +215,14 @@ schema = Schema((
         ),
     ),
     StringField(
+        name='pylonsHost',
+        widget=StringField._properties['widget'](
+            label='Pylonshost',
+            label_msgid='urban_label_pylonsHost',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
         name='mapExtent',
         widget=StringField._properties['widget'](
             description="Enter the 4 coordinates of the map, each coordinate separated by a comma.",
