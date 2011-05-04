@@ -24,7 +24,6 @@ from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-#from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from GenericLicence import GenericLicence
 from GenericLicence import GenericLicence_schema
