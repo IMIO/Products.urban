@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
 import logging
-from Products.urban import urbanMessageFactory as _
+from zope.i18n import translate as _
 from Acquisition import aq_base
 
 from Acquisition import aq_base
