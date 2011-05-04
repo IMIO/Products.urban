@@ -271,3 +271,31 @@ class UrbanBase:
             toreturn=toreturn+portionOutObj.getPuissance()
             isFirst=False
         return toreturn
+
+    security.declarePublic('getListCapaKey')
+    def getListCapaKey(self):
+        """
+           Return the list of capaKeys for each parcel(portionOut) for the Licence
+        """
+        listCapaKey=[]
+#        context=aq_inner(self.context)
+        tool=getToolByName(self, "portal_urban")
+        nisNum=tool.getNISNum()
+        for parcel in  self.objectValues('PortionOut'):
+            divisioncode = parcel.getDivisionCode()
+            section = parcel.getSection()
+            radical = parcel.getRadical()
+            puissance = parcel.getPuissance()
+            exposant = parcel.getExposant()
+            bis = parcel.getBis()
+            if not puissance:
+                puissance=0
+            if not exposant:
+                exposant="_"
+            if not bis:
+                bis=0
+#            nis section (radical 0x) / (bis 0x) (exposant si blanc _)  (puissance 00x) 
+            capaKey="%s%s%04d/%02d%s%03d"%(divisioncode,section,int(radical),int(bis),exposant,int(puissance))
+            print capaKey
+            listCapaKey.append(capaKey)
+        return listCapaKey

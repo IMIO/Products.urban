@@ -415,30 +415,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  Urb
     schema = GenericLicence_schema
 
     ##code-section class-header #fill in your manual code here
-    def getListCapaKey(self):
-        """
-           Return the list of capaKeys for each parcel(portionOut) for the Licence
-        """
-        listCapaKey=[]
-#        context=aq_inner(self.context)
-        tool=getToolByName(self, "portal_urban")
-        nisNum=tool.getNISNum()
-        for parcel in  self.objectValues('PortionOut'):
-            division = parcel.getDivision()
-            section = parcel.getSection()
-            radical = parcel.getRadical()
-            bis = parcel.getBis()
-            exposant = parcel.getExposant()
-            puissance = parcel.getPuissance()
-            if exposant =="" or exposant == None:
-                exposant="_"
-            if bis=="":
-                bis=0                
-#            nis section (radical 0x) / (bis 0x) (exposant si blanc _)  (puissance 00x) 
-            capaKey="%s%s%04d/%02d%s%03d"%(nisNum,section,int(radical),bis,exposant,int(puissance))
-            print capaKey
-            listCapaKey.append(capaKey)
-        return listCapaKey    
+
     ##/code-section class-header
 
     # Methods
