@@ -153,21 +153,6 @@ msgstr ""
 msgid "additonal_layers_folder_title"
 msgstr ""
 
-#. Default: "Administrative agent"
-#: FolderManager.py
-msgid "administrative_agent"
-msgstr ""
-
-#. Default: "Administrative director"
-#: FolderManager.py
-msgid "administrative_director"
-msgstr ""
-
-#. Default: "Administrative responsable"
-#: FolderManager.py
-msgid "administrative_responsable"
-msgstr ""
-
 msgid "all_divisions"
 msgstr ""
 
@@ -416,11 +401,6 @@ msgstr ""
 msgid "front_page_title"
 msgstr ""
 
-#. Default: "General director"
-#: FolderManager.py
-msgid "general_director"
-msgstr ""
-
 msgid "geometricians_folder_title"
 msgstr ""
 
@@ -595,6 +575,9 @@ msgstr ""
 msgid "persons_titles_folder_title"
 msgstr ""
 
+msgid "persons_grades_folder_title"
+msgstr ""
+
 #. Default: "Madam"
 #: Contact.py
 msgid "persontitle_madam"
@@ -621,16 +604,6 @@ msgid "persontitle_mister"
 msgstr ""
 
 msgid "proprietaries"
-msgstr ""
-
-#. Default: "Reception agent"
-#: FolderManager.py
-msgid "reception_agent"
-msgstr ""
-
-#. Default: "Reception responsable"
-#: FolderManager.py
-msgid "reception_responsable"
 msgstr ""
 
 msgid "recipients_folder_title"
@@ -719,36 +692,11 @@ msgstr ""
 msgid "tasks_in_progress"
 msgstr ""
 
-#. Default: "Technical agent"
-#: FolderManager.py
-msgid "technical_agent"
-msgstr ""
-
-#. Default: "Technical director"
-#: FolderManager.py
-msgid "technical_director"
-msgstr ""
-
-#. Default: "Technical responsable"
-#: FolderManager.py
-msgid "technical_responsable"
-msgstr ""
-
 msgid "to_watch_tasks"
 msgstr ""
 
 # topics
 msgid "topics"
-msgstr ""
-
-#. Default: "Town planning responsable"
-#: FolderManager.py
-msgid "town_planning_responsable"
-msgstr ""
-
-#. Default: "Treating agent"
-#: FolderManager.py
-msgid "treating_agent"
 msgstr ""
 
 #. Default: "UnoEnabledPython"
