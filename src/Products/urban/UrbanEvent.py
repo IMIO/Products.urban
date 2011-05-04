@@ -53,7 +53,7 @@ schema = Schema((
             available_indexes={'getFirstname':'First name','getSurname': 'Surname'},
             label_msgid='urban_label_eventRecipient',
             i18n_domain='urban',
-            popup_name='popup-urban',
+            popup_name='popup',
             wild_card_search=True
         ),
         allowed_types= ('Recipient','Applicant','Architect'),

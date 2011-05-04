@@ -26,5 +26,3 @@ class WMC(BrowserView):
                 {'url' : defaulturl,'srs':'ESPG:31370','title':'N de parcelle','name' : 'urban'+tool.getNISNum()+':canu','format':'image/png','style':'ParcelsNum'},
                 )
         return layers
-
-referencebrowserwidget_popup = named_template_adapter(ViewPageTemplateFile('templates/referencebrowser_popup.pt'))

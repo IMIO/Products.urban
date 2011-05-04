@@ -365,7 +365,7 @@ schema = Schema((
             label='Foldermanagers',
             label_msgid='urban_label_foldermanagers',
             i18n_domain='urban',
-            popup_name='popup-urban',
+            popup_name='popup',
             wild_card_search=True
         ),
         required= True,

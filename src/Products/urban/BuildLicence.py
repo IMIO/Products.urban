@@ -132,7 +132,7 @@ schema = Schema((
             label='Architects',
             label_msgid='urban_label_architects',
             i18n_domain='urban',
-            popup_name='popup-urban',
+            popup_name='popup',
             wild_card_search=True
         ),
         required= True,
@@ -153,7 +153,7 @@ schema = Schema((
             label='Parcellings',
             label_msgid='urban_label_parcellings',
             i18n_domain='urban',
-            popup_name='popup-urban',
+            popup_name='popup',
             wild_card_search=True
         ),
         allowed_types=('ParcellingTerm',),

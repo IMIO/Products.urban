@@ -11,14 +11,5 @@
       template="wmc.pt"
       permission="zope2.View"
       />
-
-   <adapter
-       for="*"
-       factory=".views.referencebrowserwidget_popup"
-       name="popup-urban"
-       provides="zope.formlib.namedtemplate.INamedTemplate" />
-
-
-
 </configure>
 
