@@ -7,7 +7,8 @@
 
 <div metal:fill-slot="top_slot">
 <metal:block metal:use-macro="here/global_defines/macros/defines" />
-<div tal:define="dummy python:request.set(test(member.has_permission('Manage portal', here), 'enable_border', 'disable_border'), 1)" />
+<div tal:define="member context/@@plone_portal_state/member;
+                 dummy python:request.set(test(member.has_permission('Manage portal', here), 'enable_border', 'disable_border'), 1);" />
 </div>
 
 <div metal:fill-slot="main">

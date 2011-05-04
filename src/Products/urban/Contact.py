@@ -24,17 +24,14 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 import cgi
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+#from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.validation.interfaces.IValidator import IValidator
 from Products.validation import validation
 from Products.CMFCore.utils import getToolByName
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
-service = getGlobalTranslationService()
-_ = service.translate
 
 class BelgianNationalRegValidator:
     #Validate a belgian national register number
-    __implements__ = (IValidator, )
+    implements(IValidator)
     def __init__(self, name):
         self.name = name
     def __call__(self, value, *args, **kwargs):
@@ -78,6 +75,7 @@ schema = Schema((
     ),
     StringField(
         name='name1',
+        searchable=True,
         widget=StringField._properties['widget'](
             label='Name1',
             label_msgid='urban_label_name1',
@@ -86,6 +84,7 @@ schema = Schema((
     ),
     StringField(
         name='name2',
+        searchable=True,
         widget=StringField._properties['widget'](
             label='Name2',
             label_msgid='urban_label_name2',
@@ -209,7 +208,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
-
+    
     security.declarePublic('listPersonTitles')
     def listPersonTitles(self):
         """
@@ -276,7 +275,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         else:
             res = unicode(nameSignaletic, 'utf-8')
             if withaddress:
-                res = res + ' ' + _("urban", "residing", context=self, default="residing") + ' ' +  unicode(addressSignaletic, 'utf-8')
+                res = res + ' ' + _("urban", "residing") + ' ' +  unicode(addressSignaletic, 'utf-8')
         return res
 
     security.declarePublic('getAddress')

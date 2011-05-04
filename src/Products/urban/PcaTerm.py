@@ -23,7 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
+from zope.i18n import translate as _
 ##/code-section module-header
 
 schema = Schema((
@@ -110,11 +110,9 @@ class PcaTerm(BaseContent, BrowserDefaultMixin):
         """
           Return a list of decree types
         """
-        service = getGlobalTranslationService()
-        _ = service.translate
         lst=[
-             ['royal', _("urban", 'decree_type_royal', context=self, default="Royal")],
-             ['departmental', _("urban", 'decree_type_departmental', context=self, default="Departmental")],
+             ['royal', _('decree_type_royal', 'urban', context=self.REQUEST)],
+             ['departmental', _('decree_type_departmental', 'urban', context=self.REQUEST)],
               ]
         vocab = []
         for elt in lst:
@@ -128,8 +126,8 @@ class PcaTerm(BaseContent, BrowserDefaultMixin):
         """
            Override the Title method to display several data
         """
-        title = "%s (%s - %s - %s)" % (unicode(str(self.getLabel()), 'utf8'), unicode(str(self.getNumber()), 'utf-8'), self.toLocalizedTime(self.getDecreeDate()), self.displayValue(self.listDecreeTypes(), self.getDecreeType()))
-        return title
+        return u'Foo'
+        #return u"%s (%s - %s - %s)" % (unicode(str(self.getLabel()), 'utf8'), unicode(str(self.getNumber()), 'utf-8'), self.toLocalizedTime(self.getDecreeDate()), self.displayValue(self.listDecreeTypes(), self.getDecreeType()))
 
 
 

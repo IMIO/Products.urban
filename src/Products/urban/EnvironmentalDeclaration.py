@@ -25,14 +25,12 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
 from Products.CMFCore.utils import getToolByName
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
 from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
+from zope.i18n import translate as _
 ##/code-section module-header
 
 schema = Schema((
@@ -78,6 +76,8 @@ schema = Schema((
             label='Foldermanagers',
             label_msgid='urban_label_foldermanagers',
             i18n_domain='urban',
+            popup_name='popup',
+            wild_card_search=True
         ),
         allowed_types=('FolderManager',),
         multiValued=1,
@@ -159,9 +159,7 @@ class EnvironmentalDeclaration(BaseFolder, UrbanIndexes,  MultipleStreets,  Task
         if self.getApplicants():
             applicant = self.getApplicants()[0].getName1() + " " + self.getApplicants()[0].getName2()
         else:
-            service = getGlobalTranslationService()
-            _ = service.translate
-            applicant = _("urban", 'no_applicant_defined', context=self, default="No applicant defined")
+            applicant = _('no_applicant_defined', 'urban', context=self.REQUEST)
         title = self.getReference() + " - " + applicant + " - " + self.getFinality()
         self.setTitle(title)
         self.reindexObject()

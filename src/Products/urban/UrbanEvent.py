@@ -17,22 +17,15 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
+from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from DateTime import DateTime
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Acquisition import aq_inner, aq_parent
 from Products.CMFCore.utils import getToolByName
-from Products.urban.taskable import Taskable
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
-service = getGlobalTranslationService()
-_ = service.translate
+from zope.i18n import translate as _
 ##/code-section module-header
 
 schema = Schema((
@@ -59,6 +52,8 @@ schema = Schema((
             available_indexes={'getFirstname':'First name','getSurname': 'Surname'},
             label_msgid='urban_label_eventRecipient',
             i18n_domain='urban',
+            popup_name='popup',
+            wild_card_search=True
         ),
         allowed_types= ('Recipient','Applicant','Architect'),
         optional=True,
@@ -151,7 +146,7 @@ UrbanEvent_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class UrbanEvent(BaseFolder, Taskable, BrowserDefaultMixin):
+class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -469,9 +464,9 @@ class UrbanEvent(BaseFolder, Taskable, BrowserDefaultMixin):
         formattedDate = tool.formatDate(date, translatemonth=translatemonth)
         cityName = unicode(tool.getCityName(), 'utf-8')
         if withCityNamePrefix:
-            return _('urban', 'formatted_date_with_cityname', mapping={'cityName': cityName, 'formattedDate': formattedDate}, context=self, default='City and date')
+            return _('formatted_date_with_cityname', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate})
         if forDelivery:
-            return _('urban', 'formatted_date_for_delivery', mapping={'cityName': cityName, 'formattedDate': formattedDate}, context=self, default='City issued on date')
+            return _('formatted_date_for_delivery', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate})
         return formattedDate
 
 

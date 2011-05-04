@@ -141,7 +141,7 @@
 
   <!-- actions panel -->
 
-  <table class="no-style-table" align="right">
+  <table class="no-style-table" align="right" tal:define="member context/@@plone_portal_state/member;">
     <tr tal:define="wtool context/portal_workflow;
                     ext_editor context/portal_properties/site_properties/ext_editor">
       <!-- Available transitions -->
@@ -243,6 +243,8 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                                         obj_typeinfo python: here.portal_types.getTypeInfo(obj_type);
                                         icon python:portal_url+'/'+ obj_typeinfo.getIcon();
                                         obj_wf_state obj/review_state|python: wtool.getInfoFor(obj, 'review_state', '');
+                                        ploneview nocall: context/@@plone;
+                                        normalizeString nocall:ploneview/normalizeString; 
                                         obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);
                                         title_or_id obj/pretty_title_or_id">
                     <tal:block condition="python: field in showedCols" define="value python: getattr(obj, field, None)">

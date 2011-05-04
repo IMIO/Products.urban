@@ -39,14 +39,16 @@ schema = Schema((
     ReferenceField(
         name='notaryContact',
         widget=ReferenceBrowserWidget(
-            allow_search=1,
-            allow_browse=1,
-            force_close_on_insert=1,
+            allow_search=True,
+            allow_browse=True,
+            force_close_on_insert=True,
             startup_directory='urban/notaries',
-            restrict_browsing_to_startup_directory=1,
+            restrict_browsing_to_startup_directory=True,
             label='Notarycontact',
             label_msgid='urban_label_notaryContact',
             i18n_domain='urban',
+            popup_name='popup',
+            wild_card_search=True
         ),
         allowed_types= ('Notary',),
         relationship="notary",
@@ -111,6 +113,8 @@ schema = Schema((
             label='Foldermanagers',
             label_msgid='urban_label_foldermanagers',
             i18n_domain='urban',
+            popup_name='popup',
+            wild_card_search=True
         ),
         allowed_types=('FolderManager',),
         multiValued=1,

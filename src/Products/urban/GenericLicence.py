@@ -17,26 +17,19 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
+from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 import warnings
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
 from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
-
-if HAS_PLONETASK:
-    from Products.PloneTask.utils import getCustomAdapter
-
+from zope.i18n import translate as _
 ##/code-section module-header
 
 schema = Schema((
@@ -376,15 +369,17 @@ schema = Schema((
         name='foldermanagers',
         widget=ReferenceBrowserWidget(
             force_close_on_insert=1,
-            allow_search=1,
-            allow_browse=1,
-            show_indexes=1,
+            allow_search=True,
+            allow_browse=True,
+            show_indexes=True,
             available_indexes={'Title':'Nom'},
             startup_directory_method="foldermanagersStartupDirectory",
             restrict_browsing_to_startup_directory=1,
             label='Foldermanagers',
             label_msgid='urban_label_foldermanagers',
             i18n_domain='urban',
+            popup_name='popup',
+            wild_card_search=True
         ),
         required= True,
         schemata='urban_description',
@@ -393,7 +388,6 @@ schema = Schema((
         default_method="getDefaultFolderManagers",
         allowed_types=('FolderManager',),
     ),
-
 ),
 )
 
@@ -552,13 +546,11 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  Urb
           This vocabulary for field floodingLevel returns a list of
           flooding levels : no risk, low risk, moderated risk, high risk
         """
-        service = getGlobalTranslationService()
-        _ = service.translate
         lst=[
-             ['no', _("urban", 'flooding_level_no', context=self, default="No")],
-             ['low', _("urban", 'flooding_level_low', context=self, default="Low risk")],
-             ['moderate', _("urban", 'flooding_level_moderate', context=self, default="Moderate risk")],
-             ['high', _("urban", 'flooding_level_high', context=self, default="High risk")],
+             ['no', _('flooding_level_no', 'urban', context=self.REQUEST)],
+             ['low', _('flooding_level_low', 'urban', context=self.REQUEST)],
+             ['moderate', _('flooding_level_moderate', 'urban', context=self.REQUEST)],
+             ['high', _('flooding_level_high', 'urban', context=self.REQUEST)],
             ]
         vocab = []
         for elt in lst:
@@ -683,9 +675,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  Urb
         if self.getApplicants():
             applicant = unicode(self.getApplicants()[0].getName1() + " " + self.getApplicants()[0].getName2(), 'utf-8')
         else:
-            service = getGlobalTranslationService()
-            _ = service.translate
-            applicant = _("urban", 'no_applicant_defined', context=self, default="No applicant defined")
+            applicant = _('no_applicant_defined', 'urban', context=self.REQUEST)
         title = str(self.getReference())+ " - " +unicode(self.getLicenceSubject(), 'utf-8') + " - " + applicant
         self.setTitle(title)
         self.reindexObject()

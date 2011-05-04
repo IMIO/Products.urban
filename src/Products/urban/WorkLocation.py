@@ -25,7 +25,6 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
 ##/code-section module-header
 
 schema = Schema((
@@ -42,6 +41,8 @@ schema = Schema((
             label='Street',
             label_msgid='urban_label_street',
             i18n_domain='urban',
+            popup_name='popup',
+            wild_card_search=True
         ),
         allowed_types= ('Street',),
         relationship="street",

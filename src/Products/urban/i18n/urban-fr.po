@@ -1690,11 +1690,19 @@ msgstr "Type"
 msgid "urban_label_unoEnabledPython"
 msgstr "Chemin de Python avec UNO"
 
+<<<<<<< .courant
 #. Default: "Urbandelays"
 #: urbaneventtype_urbandelay.py
 msgid "urban_label_urbandelays"
 msgstr "Délais"
 
+=======
+#. Default: "Urbandelays"
+#: urbaneventtype_urbandelay.py
+msgid "urban_label_urbandelays"
+msgstr ""
+
+>>>>>>> .fusion-droit.r7193
 #. Default: "Urbaneventtypes"
 #: UrbanEventType.py
 msgid "urban_label_urbaneventtypes"

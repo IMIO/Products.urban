@@ -30,7 +30,6 @@ from GenericLicence import GenericLicence
 from GenericLicence import GenericLicence_schema
 from Products.CMFCore import permissions
 from Products.CMFCore.utils import getToolByName
-from Products.PageTemplates.GlobalTranslationService import getGlobalTranslationService
 import appy.pod.renderer
 import os
 import psycopg2
@@ -51,6 +50,8 @@ schema = Schema((
             label='Geometricians',
             label_msgid='urban_label_geometricians',
             i18n_domain='urban',
+            popup_name='popup',
+            wild_card_search=True
         ),
         allowed_types=('Geometrician',),
         multiValued=1,
