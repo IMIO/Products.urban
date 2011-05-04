@@ -1,25 +1,35 @@
 # -*- coding: utf-8 -*-
 from plone.testing import z2
-from plone.app.testing import (PloneWithPackageLayer, PLONE_FIXTURE, IntegrationTesting,
-                               applyProfile)
+from plone.app.testing import PloneWithPackageLayer
+from plone.app.testing import IntegrationTesting
 import Products.urban
 
 
-class UrbanPloneWithPackageLayer(PloneWithPackageLayer):
+class UrbanPloneLayer(PloneWithPackageLayer):
 
     def setUpZope(self, app, configurationContext):
-        super(UrbanPloneWithPackageLayer, self).setUpZope(app, configurationContext)
+        super(UrbanPloneLayer, self).setUpZope(app, configurationContext)
         z2.installProduct(app, 'Products.urban')
 
-    def applyProfiles(self, portal):
-        super(UrbanPloneWithPackageLayer, self).applyProfiles(portal)
-        applyProfile(portal, 'Products.urban:tests')
+    def tearDownZope(self, app):
+        z2.uninstallProduct(app, 'Products.urban')
 
 
-PLONE_WITH_URBAN_INSTALLED = UrbanPloneWithPackageLayer(bases=(PLONE_FIXTURE,),
-                                                       zcml_filename="testing.zcml",
-                                                       zcml_package=Products.urban,
-                                                  gs_profile_id='Products.urban:default',
-                                                  name="PLONE_WITH_URBAN_INSTALLED")
+URBAN = UrbanPloneLayer(
+    zcml_filename="testing.zcml",
+    zcml_package=Products.urban,
+    gs_profile_id='Products.urban:default',
+    name="URBAN")
 
-URBAN_WITH_PLONE = IntegrationTesting(bases=(PLONE_WITH_URBAN_INSTALLED,), name="URBAN_WITH_PLONE")
+URBAN_TESTS_PROFILE = PloneWithPackageLayer(
+    bases=(URBAN, ),
+    zcml_filename="testing.zcml",
+    zcml_package=Products.urban,
+    gs_profile_id='Products.urban:tests',
+    name="URBAN_TESTS_PROFILE")
+
+URBAN_INTEGRATION = IntegrationTesting(
+    bases=(URBAN,), name="URBAN_INTEGRATION")
+
+URBAN_TESTS_PROFILE_INTEGRATION = IntegrationTesting(
+    bases=(URBAN_TESTS_PROFILE,), name="URBAN_TESTS_PROFILE_INTEGRATION")
