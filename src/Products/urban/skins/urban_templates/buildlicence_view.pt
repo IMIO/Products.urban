@@ -87,7 +87,7 @@
 	    	<span id="loading-msg">Chargement des styles et images...</span>
 	    </div> 
 	</div> 
-	<script tal:content="string:var NISNum='${context/portal_url/portal_urban/getNISNum}';var urbanCapakeyArray=${context/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/portal_url}/portal_urban/wmc?uidPlone=${context/UID}';">    
+	<script tal:content="string:var NISNum='${context/portal_url/portal_urban/getNISNum}';var urbanCapakeyArray=${context/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">    
     </script>      
     <script type="text/javascript">document.getElementById('loading-msg').innerHTML = "Chargement de l'API principale...";</script>      
     <script type="text/javascript" src="http://89.16.179.114:5000/lib/ext/Ext/adapter/ext/ext-base.js"></script>

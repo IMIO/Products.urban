@@ -5,9 +5,10 @@
     i18n_domain="urban">
 
   <browser:page
-      for="Products.urban.interfaces.IUrbanTool"
+      for="Products.urban.interfaces.IUrbanBase"
       name="wmc"
       class=".views.WMC"
+      attribute="wmc"
       permission="zope2.Public"
       />
       

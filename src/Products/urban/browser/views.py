@@ -10,19 +10,35 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.form._named import named_template_adapter
 
 class WMC(BrowserView):
-    def __call__(self):
-#        self.context = context
-#        self.request = request
+#       
+#        #return the generated JS code
+#        return self.generateMapJS(self, cqlquery,'','', zoneExtent)        
+    def minx(self):
+        return self.xmin
+    def miny(self):
+        return self.ymin
+    def maxx(self):
+        return self.xmax
+    def maxy(self):
+        return self.ymax
+    def getLayers(self):
+        context=aq_inner(self.context)
+        tool=getToolByName(context, "portal_urban")
+        defaulturl='http://'+tool.getWebServerHost()+'/geoserver/wms'
+        layers = (
+                {'url' : defaulturl,'srs':'EPSG:31370','title':'Parcellaire','name' : 'urban'+tool.getNISNum()+':capa','format':'image/png','style':'default'},
+                {'url' : defaulturl,'srs':'EPSG:31370','title':'Noms de rue','name' : 'urban'+tool.getNISNum()+':toli','format':'image/png','style':'default'},
+                {'url' : defaulturl,'srs':'EPSG:31370','title':'N° de parcelle','name' : 'urban'+tool.getNISNum()+':canu','format':'image/png','style':'ParcelsNum'},
+                )
+        return layers
+    def wmc(self):
 
         """
           Initialize the map on element
         """
         zoneExtent = None
-        uidBuildLicence=self.request.form["uidPlone"]
-        pc = getToolByName(self.context, 'portal_catalog')
-        resultsItem=pc.searchResults(UID=uidBuildLicence)
-        obj=resultsItem[0].getObject()
-        parcels = obj.getParcels()
+        urbantool = getToolByName(self,'portal_urban')
+        parcels = self.context.getParcels()
         cqlquery=''
         if parcels:
             #if we have parcels, display them on a map...
@@ -45,7 +61,7 @@ class WMC(BrowserView):
             cqlquery = '((da = '+parcel.getDivisionCode()+') and ('+cqlquery+'))'
             #calculate the zone to display
             strsql = 'SELECT Xmin(selectedpos.extent),Ymin(selectedpos.extent),Xmax(selectedpos.extent), Ymax(selectedpos.extent) FROM (SELECT Extent(the_geom) FROM capa WHERE '+cqlquery+') AS selectedpos'
-            result = self.context.queryDB(query_string=strsql)[0]
+            result = urbantool.queryDB(query_string=strsql)[0]
             try:
                 self.xmin=result['xmin']
                 self.ymin=result['ymin']
@@ -55,29 +71,7 @@ class WMC(BrowserView):
             except:
                 zoneExtent = ""
         self.tmpl=ViewPageTemplateFile("wmc.pt")
-        return self.tmpl() 
-#       
-#        #return the generated JS code
-#        return self.generateMapJS(self, cqlquery,'','', zoneExtent)        
-    def minx(self):
-        return self.xmin
-    def miny(self):
-        return self.ymin
-    def maxx(self):
-        return self.xmax
-    def maxy(self):
-        return self.ymax
-    def getLayers(self):
-        context=aq_inner(self.context)
-        tool=getToolByName(context, "portal_urban")
-        defaulturl='http://'+tool.getWebServerHost()+'/geoserver/wms'
-        layers = (
-                {'url' : defaulturl,'srs':'EPSG:31370','title':'Parcellaire','name' : 'urban'+tool.getNISNum()+':capa','format':'image/png','style':'default'},
-                {'url' : defaulturl,'srs':'EPSG:31370','title':'Noms de rue','name' : 'urban'+tool.getNISNum()+':toli','format':'image/png','style':'default'},
-                {'url' : defaulturl,'srs':'EPSG:31370','title':'N° de parcelle','name' : 'urban'+tool.getNISNum()+':canu','format':'image/png','style':'ParcelsNum'},
-                )
-        return layers
-        
+        return self.tmpl(self)         
 
 
 class ProxyController(BrowserView):

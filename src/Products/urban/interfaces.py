@@ -138,5 +138,9 @@ class IEventTypeType(IInterface):
 
 class IAcknowledgment(Interface):
     __doc__ = _("""IAcknowledgment type marker interface""")
+    
+class IUrbanBase(Interface):
+    """Marker interface for .Base.UrbanBase
+    """
 
 ##/code-section FOOT

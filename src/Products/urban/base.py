@@ -17,12 +17,16 @@ from AccessControl import ClassSecurityInfo
 from Products.urban.config import *
 from Products.CMFCore.utils import getToolByName
 from zope.i18n import translate as _
+from zope.interface import implements
+import interfaces
 
 class UrbanBase:
     """
       This class manage every methods chared cross different licences
     """
     security = ClassSecurityInfo()
+    
+    implements(interfaces.IUrbanBase)
 
     security.declarePublic('getApplicantsSignaletic')
     def getApplicantsSignaletic(self, withaddress=False):
