@@ -34,16 +34,14 @@
 <div tal:replace="structure provider:plone.belowcontenttitle" />
 <!-- Back to the build licence... -->
 <a href=""
-    class="link-parent"
-    tal:define="parent_url python: here.navigationParent(here, template_id)"
-    tal:attributes="href parent_url"
-    i18n:translate="back_to_licence">
-    Go back to the licence
+   class="link-parent"
+   tal:define="parent_url python: context.getParentNode().absolute_url()"
+   tal:condition="parent_url"
+   tal:attributes="href string:${parent_url}/folder_contents"
+   i18n:translate="back_to_licence">
+  Go back to the licence
 </a>
 <br />
-
-
-
 
 <tal:showablefields repeat="evtfield python:here.getUrbaneventtypes().getActivatedFields()">
 <tal:block condition="evtfield">
