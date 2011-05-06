@@ -24,14 +24,6 @@
                 key="/"
                 manager="plone.rightcolumn"
                 type="portlets.Events" />
-    <assignment name="portlet_firefox"
-                category="context"
-                key="/"
-                manager="plone.leftcolumn"
-                type="portlets.Classic">
-           <property name="macro">portlet</property>
-           <property name="template">portlet_firefox</property>
-    </assignment>
 
     <assignment name="portlet_urban"
                 category="context"
