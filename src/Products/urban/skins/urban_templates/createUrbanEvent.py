@@ -5,7 +5,6 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=urban_event_type_uid='',urban_folder_id=''
+##parameters=urban_event_type_uid='',urban_folder_uid=''
 ##
-print urban_folder_id
-return context.portal_urban.createUrbanEvent(urban_folder_id,urban_event_type_uid)
+return context.portal_urban.createUrbanEvent(urban_folder_uid, urban_event_type_uid)

@@ -373,15 +373,18 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         self.checkDBConnection()
 
     security.declarePublic('createUrbanEvent')
-    def createUrbanEvent(self, urban_folder_id, urban_event_type_uid):
+    def createUrbanEvent(self, urban_folder_uid, urban_event_type_uid):
         """
            Create an urbanEvent on a licence
         """
-        evfolder=getattr(self, urban_folder_id)
-        brain=self.uid_catalog(UID=urban_event_type_uid)
-        urbanEventTypeObj=brain[0].getObject()
-        newUrbanEvent=evfolder.invokeFactory("UrbanEvent",id=self.generateUniqueId('UrbanEvent'),title=urbanEventTypeObj.Title(),urbaneventtypes=(urbanEventTypeObj,))
-        newUrbanEventObj=getattr(evfolder,newUrbanEvent)
+        uid_catalog = getToolByName(self, 'uid_catalog')
+        #the folder to create the UrbanEvent in
+        evfolder=uid_catalog(UID=urban_folder_uid)[0].getObject()
+        #the linked UrbanEventType
+        urbanEventTypeObj=uid_catalog(UID=urban_event_type_uid)[0].getObject()
+        #create the UrbanEvent in the right folder
+        newUrbanEventId=evfolder.invokeFactory("UrbanEvent",id=self.generateUniqueId('UrbanEvent'),title=urbanEventTypeObj.Title(),urbaneventtypes=(urbanEventTypeObj,))
+        newUrbanEventObj=getattr(evfolder,newUrbanEventId)
         return self.REQUEST.RESPONSE.redirect(newUrbanEventObj.absolute_url()+'/edit')
 
     security.declarePublic('createUrbanDoc')

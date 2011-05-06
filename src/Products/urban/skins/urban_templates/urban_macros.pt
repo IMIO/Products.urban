@@ -110,7 +110,7 @@
 
 <div metal:define-macro="urbanEventsMacro" i18n:domain="urban" tal:define="eventTypes python:context.portal_urban.listEventTypes(context, urbanConfigId=context.portal_type.lower())">
 <form action="createUrbanEvent" method="POST" tal:condition="eventTypes">
- <input type='hidden' name="urban_folder_id" tal:attributes="value here/getId" value=''>
+ <input type='hidden' name="urban_folder_uid" tal:attributes="value here/UID" value=''>
  <select name="urban_event_type_uid">
   <tal:loopEventType repeat="eventType eventTypes">
    <option tal:attributes="value eventType/UID" value='' tal:content="eventType/Title">
