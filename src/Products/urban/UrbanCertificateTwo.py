@@ -81,7 +81,7 @@ UrbanCertificateTwo_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class UrbanCertificateTwo(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  UrbanBase, UrbanCertificateBase, BrowserDefaultMixin):
+class UrbanCertificateTwo(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, UrbanCertificateBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

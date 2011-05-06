@@ -20,6 +20,8 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -45,8 +47,6 @@ schema = Schema((
             label='Notarycontact',
             label_msgid='urban_label_notaryContact',
             i18n_domain='urban',
-            popup_name='popup',
-            wild_card_search=True
         ),
         allowed_types= ('Notary',),
         relationship="notary",
@@ -102,17 +102,16 @@ schema = Schema((
     ReferenceField(
         name='foldermanagers',
         widget=ReferenceBrowserWidget(
-            force_close_on_insert=1,
-            allow_browse=1,
-            allow_search=1,
-            show_indexes=1,
+            force_close_on_insert=True,
+            allow_browse=True,
+            allow_search=True,
+            show_indexes=True,
             available_indexes={'Title': 'Nom'},
             startup_directory="portal_urban/division/foldermanagers",
+            wild_card_search=True,
             label='Foldermanagers',
             label_msgid='urban_label_foldermanagers',
             i18n_domain='urban',
-            popup_name='popup',
-            wild_card_search=True
         ),
         allowed_types=('FolderManager',),
         multiValued=1,
@@ -134,7 +133,7 @@ Division_schema['title'].searchable = True
 Division_schema['title'].required = False
 ##/code-section after-schema
 
-class Division(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  UrbanBase, BrowserDefaultMixin):
+class Division(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

@@ -20,10 +20,12 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from archetypes.referencebrowserwidget import ReferenceBrowserWidget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.CMFCore.utils import getToolByName
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
@@ -72,11 +74,10 @@ schema = Schema((
             show_indexes=1,
             available_indexes= {'Title':'Nom'},
             startup_directory="portal_urban/environmentaldeclaration/foldermanagers",
+            wild_card_search=True,
             label='Foldermanagers',
             label_msgid='urban_label_foldermanagers',
             i18n_domain='urban',
-            popup_name='popup',
-            wild_card_search=True
         ),
         allowed_types=('FolderManager',),
         multiValued=1,
@@ -98,7 +99,7 @@ EnvironmentalDeclaration_schema['title'].required = False
 EnvironmentalDeclaration_schema['title'].visible = False
 ##/code-section after-schema
 
-class EnvironmentalDeclaration(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  UrbanBase, BrowserDefaultMixin):
+class EnvironmentalDeclaration(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

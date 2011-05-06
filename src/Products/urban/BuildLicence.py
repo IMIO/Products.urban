@@ -20,7 +20,8 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from archetypes.referencebrowserwidget import ReferenceBrowserWidget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -164,17 +165,16 @@ schema = Schema((
         name='architects',
         widget=ReferenceBrowserWidget(
             force_close_on_insert=1,
-            allow_search=True,
-            allow_browse=False,
-            show_indexes=False,
-            show_index_selector=False,
+            allow_search=1,
+            allow_browse=0,
+            show_indexes=1,
+            show_index_selector=1,
             available_indexes={'Title':'Nom'},
             base_query="architectsBaseQuery",
+            wild_card_search=True,
             label='Architects',
             label_msgid='urban_label_architects',
             i18n_domain='urban',
-            popup_name='popup',
-            wild_card_search=True
         ),
         required= True,
         schemata='urban_description',
@@ -191,11 +191,10 @@ schema = Schema((
             show_indexes=True,
             available_indexes={'subdividerName':'Nom'},
             show_index_selector=True,
+            wild_card_search=True,
             label='Parcellings',
             label_msgid='urban_label_parcellings',
             i18n_domain='urban',
-            popup_name='popup',
-            wild_card_search=True
         ),
         allowed_types=('ParcellingTerm',),
         schemata='urban_location',

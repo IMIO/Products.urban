@@ -17,11 +17,15 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
+
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-from archetypes.referencebrowserwidget import ReferenceBrowserWidget
+
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 import warnings
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
@@ -369,25 +373,25 @@ schema = Schema((
         name='foldermanagers',
         widget=ReferenceBrowserWidget(
             force_close_on_insert=1,
-            allow_search=True,
-            allow_browse=True,
-            show_indexes=True,
+            allow_search=1,
+            allow_browse=1,
+            show_indexes=1,
             available_indexes={'Title':'Nom'},
             startup_directory_method="foldermanagersStartupDirectory",
             restrict_browsing_to_startup_directory=1,
+            wild_card_search=True,
             label='Foldermanagers',
             label_msgid='urban_label_foldermanagers',
             i18n_domain='urban',
-            popup_name='popup',
-            wild_card_search=True
         ),
-        required= True,
+        required=True,
         schemata='urban_description',
         multiValued=1,
         relationship='licenceFolderManagers',
         default_method="getDefaultFolderManagers",
         allowed_types=('FolderManager',),
     ),
+
 ),
 )
 
@@ -402,7 +406,7 @@ GenericLicence_schema['title'].searchable = True
 GenericLicence_schema['title'].widget.visible = False
 ##/code-section after-schema
 
-class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  UrbanBase, BrowserDefaultMixin):
+class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -415,7 +419,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  Urb
     schema = GenericLicence_schema
 
     ##code-section class-header #fill in your manual code here
-
     ##/code-section class-header
 
     # Methods
@@ -700,7 +703,8 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  Taskable,  Urb
 
         return messages
 
-    
+
+
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence
 

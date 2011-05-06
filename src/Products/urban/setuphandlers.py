@@ -125,6 +125,8 @@ def postInstall(context):
     site.portal_catalog.refreshCatalog(clear=True)
     logger.info("Refresh portal_catalog : Done!")
 
+
+
 ##code-section FOOT
 def addUrbanConfigs(context):
     """

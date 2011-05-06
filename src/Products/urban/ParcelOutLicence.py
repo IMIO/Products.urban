@@ -20,6 +20,8 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -45,11 +47,10 @@ schema = Schema((
             show_index_selector=1,
             available_indexes={'Title':'Nom'},
             base_query="geometriciansBaseQuery",
+            wild_card_search=True,
             label='Geometricians',
             label_msgid='urban_label_geometricians',
             i18n_domain='urban',
-            popup_name='popup',
-            wild_card_search=True
         ),
         allowed_types=('Geometrician',),
         multiValued=1,

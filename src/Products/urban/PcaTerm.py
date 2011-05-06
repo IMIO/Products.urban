@@ -130,7 +130,6 @@ class PcaTerm(BaseContent, BrowserDefaultMixin):
         #return u"%s (%s - %s - %s)" % (unicode(str(self.getLabel()), 'utf8'), unicode(str(self.getNumber()), 'utf-8'), self.toLocalizedTime(self.getDecreeDate()), self.displayValue(self.listDecreeTypes(), self.getDecreeType()))
 
 
-
 registerType(PcaTerm, PROJECTNAME)
 # end of class PcaTerm
 
