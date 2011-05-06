@@ -1,0 +1,7 @@
+<div align="center" metal:define-macro="content" i18n:domain="urban" id="portal-firefox" tal:condition="python: 'Firefox' not in context.REQUEST.get('HTTP_USER_AGENT', '')" style="border-style: solid; border-color: red" >
+L'application Urban ne fonctionne correctement qu'avec le navigateur Firefox.
+<br /><br />
+S&eacute;curis&eacute;, fiable et rapide, <a href="http://www.getfirefox.com">Firefox</a> est gratuit et simple &agrave; installer.
+<br /><br />
+<a href="http://www.getfirefox.com"><img src="portlet-firefox.png" /></a>
+</div>
