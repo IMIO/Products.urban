@@ -133,10 +133,6 @@ def postInstall(context):
     for portlet in ann['plone.portlets.contextassignments']['plone.leftcolumn'].keys():
         if portlet not in ('portlet_urban','login'):
             del ann['plone.portlets.contextassignments']['plone.leftcolumn'][portlet]
-    #create portlet Firefox if not exist
-    if not ann['plone.portlets.contextassignments']['plone.leftcolumn'].has_key('portlet_firefox'):
-        ann['plone.portlets.contextassignments']['plone.leftcolumn']['portlet_firefox'] = classic.Assignment(template='portlet_firefox', macro="portlet")
-
 
 
 ##code-section FOOT
