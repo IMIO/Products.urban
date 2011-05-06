@@ -11,6 +11,12 @@
       template="wmc.pt"
       permission="zope2.View"
       />
+    <browser:viewlet
+        name="urban.portlet_firefox"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
+        class=".viewlets.portletFirefox"
+        permission="zope2.View"
+        />       
 
 </configure>
 
