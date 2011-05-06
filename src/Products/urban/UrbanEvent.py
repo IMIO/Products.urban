@@ -17,8 +17,11 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
+
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-from archetypes.referencebrowserwidget import ReferenceBrowserWidget
+
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -35,6 +38,7 @@ schema = Schema((
         default=DateTime(),
         widget=DateTimeField._properties['widget'](
             show_hm=False,
+            condition="python:here.attributeIsUsed('eventDate')",
             label='Eventdate',
             label_msgid='urban_label_eventDate',
             i18n_domain='urban',
@@ -50,10 +54,10 @@ schema = Schema((
             show_indexes=1,
             show_index_selector=1,
             available_indexes={'getFirstname':'First name','getSurname': 'Surname'},
+            wild_card_search=True,
+            condition="python:here.attributeIsUsed('eventRecipient')",
             label_msgid='urban_label_eventRecipient',
             i18n_domain='urban',
-            popup_name='popup',
-            wild_card_search=True
         ),
         allowed_types= ('Recipient','Applicant','Architect'),
         optional=True,
@@ -62,6 +66,7 @@ schema = Schema((
     StringField(
         name='decision',
         widget=SelectionWidget(
+            condition="python:here.attributeIsUsed('decision')",
             label='Decision',
             label_msgid='urban_label_decision',
             i18n_domain='urban',
@@ -74,6 +79,7 @@ schema = Schema((
         name='decisionDate',
         widget=DateTimeField._properties['widget'](
             show_hm=False,
+            condition="python:here.attributeIsUsed('decisionDate')",
             label='Decisiondate',
             label_msgid='urban_label_decisionDate',
             i18n_domain='urban',
@@ -84,6 +90,7 @@ schema = Schema((
         name='decisionText',
         allowable_content_types=('text/plain', 'text/structured', 'text/html', 'application/msword',),
         widget=RichWidget(
+            condition="python:here.attributeIsUsed('decisionText')",
             label='Decisiontext',
             label_msgid='urban_label_decisionText',
             i18n_domain='urban',
@@ -95,6 +102,7 @@ schema = Schema((
         name='explanationsDate',
         widget=DateTimeField._properties['widget'](
             show_hm=False,
+            condition="python:here.attributeIsUsed('explanationsDate')",
             label='Explanationsdate',
             label_msgid='urban_label_explanationsDate',
             i18n_domain='urban',
@@ -105,6 +113,7 @@ schema = Schema((
         name='claimsDate',
         widget=DateTimeField._properties['widget'](
             show_hm=False,
+            condition="python:here.attributeIsUsed('claimsDate')",
             label='Claimsdate',
             label_msgid='urban_label_claimsDate',
             i18n_domain='urban',
@@ -115,6 +124,7 @@ schema = Schema((
         name='claimsText',
         allowable_content_types=('text/plain', 'text/structured', 'text/html', 'application/msword',),
         widget=RichWidget(
+            condition="python:here.attributeIsUsed('claimsText')",
             label='Claimstext',
             label_msgid='urban_label_claimsText',
             i18n_domain='urban',
@@ -125,6 +135,7 @@ schema = Schema((
     ReferenceField(
         name='urbaneventtypes',
         widget=ReferenceBrowserWidget(
+            visible=False,
             label='Urbaneventtypes',
             label_msgid='urban_label_urbaneventtypes',
             i18n_domain='urban',
@@ -468,6 +479,15 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         if forDelivery:
             return _('formatted_date_for_delivery', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate})
         return formattedDate
+
+    def attributeIsUsed(self, attrName):
+        """
+        """
+        urbanEventType = self.getUrbaneventtypes()
+        if urbanEventType:
+            return attrName in self.getUrbaneventtypes().getActivatedFields()
+        else:
+            return False
 
 
 
