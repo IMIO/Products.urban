@@ -4,6 +4,8 @@ from zope.component.interface import getInterface
 
 
 def setEventTypeType(urbanEvent, event):
+    #bypass this for now...
+    return
     urbanEventType = urbanEvent.getUrbaneventtypes()
     urbanEventTypeType = urbanEventType.getEventTypeType()
     eventTypeTypeInterface = getInterface('', urbanEventTypeType)
