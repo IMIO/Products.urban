@@ -324,6 +324,16 @@ msgstr "Déclarations environnementales"
 msgid "event_linked_documents"
 msgstr "Documents liés à cet événement"
 
+#. Default: "Secure, fast and sure, <a href="http://www.getfirefox.com">Firefox</a> is free and easy to install."
+#: firefox.pt
+msgid "firefox_viewlet_descr"
+msgstr "Sécurisé, fiable et rapide, <a href="http://www.getfirefox.com">Firefox</a> est gratuit et simple à installer."
+
+#. Default: "This application works better with Firefox."
+#: firefox.pt
+msgid "firefox_viewlet_title"
+msgstr "Cette application fonctionne mieux avec Firefox."
+
 #. Default: "High risk"
 #: GenericLicence.py
 msgid "flooding_level_high"

@@ -323,6 +323,16 @@ msgstr ""
 msgid "event_linked_documents"
 msgstr ""
 
+#. Default: "This application works better with Firefox."
+#: firefox.pt
+msgid "firefox_viewlet_title"
+msgstr ""
+
+#. Default: "Secure, fast and sure, <a href="http://www.getfirefox.com">Firefox</a> is free and easy to install."
+#: firefox.pt
+msgid "firefox_viewlet_descr"
+msgstr ""
+
 #. Default: "High risk"
 #: GenericLicence.py
 msgid "flooding_level_high"

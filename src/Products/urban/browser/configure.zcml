@@ -29,11 +29,12 @@
       />
 
   <browser:viewlet
-      name="urban.portlet_firefox"
+      name="urban.firefox"
       manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
-      class=".viewlets.portletFirefox"
+      class=".viewlets.FirefoxViewlet"
       permission="zope2.View"
-      />        
-          
+      template="firefox.pt"
+      />
+
 </configure>
 
