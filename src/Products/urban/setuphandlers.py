@@ -125,8 +125,6 @@ def postInstall(context):
     site.portal_catalog.refreshCatalog(clear=True)
     logger.info("Refresh portal_catalog : Done!")
 
-
-
 ##code-section FOOT
 def addUrbanConfigs(context):
     """
@@ -765,6 +763,25 @@ def addGlobalFolders(context):
         newFolder.invokeFactory("UrbanVocabularyTerm",id="misters",title=u"Messieurs")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="ladies",title=u"Mesdames")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="consorts",title=u"Consorts")
+
+    #add the persons_grades folder
+    if not hasattr(tool, "persons_grades"):
+        newFolderid = tool.invokeFactory("Folder",id="persons_grades",title=service.translate("urban","persons_grades_folder_title",context=site,default="Persons grades"))
+        newFolder = getattr(tool, newFolderid)
+        newFolder.setConstrainTypesMode(1)
+        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])        
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='agent-accueil', title="Agent d'accueil"),
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='agent-administratif', title="Agent administratif"),
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='agent-technique', title="Agent technique"),
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='agent-traitant', title="Agent traitant"),
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='directeur-administratif', title="Directeur administratif"),
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='directeur-general', title="Directeur général"),
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='directeur-technique', title="Directeur technique"),
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='reponsable', title="Responsable du Service Urbanisme"),
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='responsable-accueil', title="Responsable d'accueil"),
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='responsable-administratif', title="Responsable administratif"),
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='responsable-technique', title="Responsable technique"),
 
     #add the decisions folder
     if not hasattr(tool, "decisions"):

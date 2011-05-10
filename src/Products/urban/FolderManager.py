@@ -97,31 +97,14 @@ class FolderManager(BaseContent, Contact, BrowserDefaultMixin):
         """
           Return a correctly formatted title
         """
-        return self.getName1() + " " + self.getName2() + " (" + self.displayValue(self.listGrades(),self.getGrade()).encode('utf-8') + ")"
+        return self.getName1() + " " + self.getName2() + " (" + self.displayValue(self.listGrades(),self.getGrade()) + ")"
 
     security.declarePublic('listGrades')
     def listGrades(self):
         """
           Return a list of available grades from the configuration
         """
-        lst=[
-             ['agent-accueil', _('reception_agent', 'urban', context=self.REQUEST)],
-             ['agent-administratif', _('administrative_agent', 'urban', context=self.REQUEST)],
-             ['agent-technique', _('technical_agent', 'urban', context=self.REQUEST)],
-             ['agent-traitant', _('treating_agent', 'urban', context=self.REQUEST)],
-             ['directeur-administratif', _('administrative_director', 'urban', context=self.REQUEST)],
-             ['directeur-general', _('general_director', 'urban', context=self.REQUEST)],
-             ['directeur-technique', _('technical_director', 'urban', context=self.REQUEST)],
-             ['reponsable', _('town_planning_responsable', 'urban', context=self.REQUEST)],
-             ['responsable-accueil', _('reception_responsable', 'urban', context=self.REQUEST)],
-             ['responsable-administratif', _('administrative_responsable', 'urban', context=self.REQUEST)],
-             ['responsable-technique', _('technical_responsable', 'urban', context=self.REQUEST)],
-              ]
-        vocab = []
-        for elt in lst:
-            vocab.append((elt[0], elt[1]))
-        return DisplayList(tuple(vocab)).sortedByValue()
-
+        return DisplayList(self.portal_urban.listVocabulary('persons_grades', self, inUrbanConfig=False))
 
 
 registerType(FolderManager, PROJECTNAME)

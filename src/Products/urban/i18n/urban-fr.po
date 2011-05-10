@@ -154,21 +154,6 @@ msgstr "Ajouter un événement"
 msgid "additonal_layers_folder_title"
 msgstr "Configuration des couches supplémentaires"
 
-#. Default: "Administrative agent"
-#: FolderManager.py
-msgid "administrative_agent"
-msgstr "Agent administratif"
-
-#. Default: "Administrative director"
-#: FolderManager.py
-msgid "administrative_director"
-msgstr "Directeur administratif"
-
-#. Default: "Administrative responsable"
-#: FolderManager.py
-msgid "administrative_responsable"
-msgstr "Responsable administratif"
-
 msgid "all_divisions"
 msgstr "Toutes les divisions"
 
@@ -417,11 +402,6 @@ msgstr "<p>L'application intègre la gestion des permis d'urbanisme et d'urbanis
 msgid "front_page_title"
 msgstr "Gestion de l'Urbanisme"
 
-#. Default: "General director"
-#: FolderManager.py
-msgid "general_director"
-msgstr "Directeur général"
-
 msgid "geometricians_folder_title"
 msgstr "Géomètres"
 
@@ -605,6 +585,9 @@ msgstr "Formulaire 2"
 msgid "peb_not_applicable"
 msgstr "Non applicable"
 
+msgid "persons_grades_folder_title"
+msgstr "Grades des personnes"
+
 msgid "persons_titles_folder_title"
 msgstr "Titres des personnes"
 
@@ -635,16 +618,6 @@ msgstr "Monsieur"
 
 msgid "proprietaries"
 msgstr "Propriétaire(s)"
-
-#. Default: "Reception agent"
-#: FolderManager.py
-msgid "reception_agent"
-msgstr "Agent d'accueil"
-
-#. Default: "Reception responsable"
-#: FolderManager.py
-msgid "reception_responsable"
-msgstr "Responsable d'accueil"
 
 msgid "recipients_folder_title"
 msgstr "Destinataires"
@@ -732,37 +705,12 @@ msgstr "Entrez une condition TAL.  Les variables 'here' et 'member' sont disponi
 msgid "tasks_in_progress"
 msgstr "Tâches en cours"
 
-#. Default: "Technical agent"
-#: FolderManager.py
-msgid "technical_agent"
-msgstr "Agent technique"
-
-#. Default: "Technical director"
-#: FolderManager.py
-msgid "technical_director"
-msgstr "Directeur technique"
-
-#. Default: "Technical responsable"
-#: FolderManager.py
-msgid "technical_responsable"
-msgstr "Responsable technique"
-
 msgid "to_watch_tasks"
 msgstr "Tâches à surveiller (75% du délai a déjà été dépassé)"
 
 # topics
 msgid "topics"
 msgstr "Recherches"
-
-#. Default: "Town planning responsable"
-#: FolderManager.py
-msgid "town_planning_responsable"
-msgstr "Responsable du Service Urbanisme"
-
-#. Default: "Treating agent"
-#: FolderManager.py
-msgid "treating_agent"
-msgstr "Agent traitant"
 
 #. Default: "UnoEnabledPython"
 #: UrbanTool.py
