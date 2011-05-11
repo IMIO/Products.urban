@@ -415,7 +415,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         """
           Return the documents (File) of the UrbanEvent
         """
-        return self.objectValues('ATFile')
+        return self.objectValues('ATBlob')
 
     def getBeginDate(self):
         """

@@ -33,54 +33,50 @@
 <h1 class="documentFirstHeading" tal:content="here/Title"/>
 <div tal:replace="structure provider:plone.belowcontenttitle" />
 <!-- Back to the build licence... -->
-<a href=""
-   class="link-parent"
-   tal:define="parent_url python: context.getParentNode().absolute_url()"
-   tal:condition="parent_url"
-   tal:attributes="href string:${parent_url}"
-   i18n:translate="back_to_licence">
-  Go back to the licence
-</a>
 <br />
+<a class="no_underline" href=".."><img src="goback.png" />&nbsp;<span i18n:translate="back_to_licence">Go back to the licence</span></a>
 
-<tal:showablefields repeat="evtfield python:here.getUrbaneventtypes().getActivatedFields()">
-<tal:block condition="evtfield">
-<u><strong><span i18n:translate="" tal:content="python: 'urban_label_' + evtfield">Optional field label</span></strong> :</u><br />
-<metal:myfield use-macro="python:here.widget(evtfield, mode='view')" />
-</tal:block>
-</tal:showablefields>
+<table>
+    <tr valign="top">
+        <td width=30%>
+        <fieldset><strong><legend i18n:translate="event_data">Event data</legend></strong>
+        <tal:showablefields repeat="evtfield python:here.getUrbaneventtypes().getActivatedFields()">
+        <tal:block condition="evtfield">
+        <u><strong><span i18n:translate="" tal:content="python: 'urban_label_' + evtfield">Optional field label</span></strong> :</u><br />
+        <metal:myfield use-macro="python:here.widget(evtfield, mode='view')" />
+        </tal:block>
+        </tal:showablefields>
+        </fieldset>
 
-<fieldset><strong><legend i18n:translate="event_linked_documents">Event linked documents</legend><strong>
-<div tal:define="specificSearch python: 'searchLinkedDocuments';
-                   tool python: context.portal_urban;
-                   showedCols python: ('Title', 'CreationDate', 'Creator', );
-                   topic python: None;
-                   showActions python: True;
-                   theObjects python: True;
-                   batchlen python: 50">
- <metal:listing use-macro="here/urban_macros/macros/listing" />
-</div>
-</fieldset>
+        <fieldset><strong><legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend></strong>
+        <tal:loopEventType repeat="templateObj python: context.getUrbaneventtypes().objectValues()">
+        <a href="#" tal:attributes="href python: context.absolute_url() + '/createUrbanDoc?urban_template_uid=%s&urban_event_uid=%s' % (templateObj.UID(), here.UID())" tal:content="templateObj/Title">Template title</a><br />
+        </tal:loopEventType>
+        </fieldset>
 
- <form name="quickAdd" action="createObject" method="post">
+        <fieldset><strong><legend i18n:translate="add_an_annex">Add an annex</legend></strong>
+        <form name="quickAdd" action="createObject" method="post">
           <input name="type_name" value="File" type="hidden">
-          <input class="standalone" id="event" value="Ajouter un Fichier" type="submit">
-
+          <input i18n:attributes="value" class="standalone" id="event" value="add_an_annex" type="submit">
          </form>
-         <br>
-<u><strong><span i18n:translate="add_a_linked_doc">Add a linked document</span> :</strong></u>
-<br /><br />
-<form action="createUrbanDoc" method="POST">
-<input type='hidden' name="urban_event_uid" tal:attributes="value here/UID" value=''>
-<input type='hidden' name="urban_folder_id" tal:attributes="value here/getId" value=''>
-<select name="urban_template_uid">
-<tal:loopEventType repeat="templateObj python: context.getUrbaneventtypes().objectValues()">
-<option tal:attributes="value templateObj/UID" value='' tal:content="templateObj/Title"> </option>
-</tal:loopEventType>
-</select>
-<input class="standalone" type="submit" i18n:attributes="value" value="create">
-</form>
-<br>
+        </fieldset>
+        </td>
+        <td width=70%>
+        <fieldset><strong><legend i18n:translate="event_linked_documents">Event linked documents</legend><strong>
+        <div tal:define="specificSearch python: 'searchLinkedDocuments';
+                           tool python: context.portal_urban;
+                           showedCols python: ('Title', 'created', 'Creator', );
+                           topic python: None;
+                           showActions python: True;
+                           theObjects python: False;
+                           batchlen python: 50">
+         <metal:listing use-macro="here/urban_macros/macros/listing" />
+        </div>
+        </fieldset>
+        </td>
+    </tr>
+</table>
+
 <tal:block condition="python:here.getUrbaneventtypes().getSpecialFunctionName()">
 <a tal:attributes="href python:here.getUrbaneventtypes().getSpecialFunctionUrl()" tal:content="python:here.getUrbaneventtypes().getSpecialFunctionName()"/><br><br>
 </tal:block>

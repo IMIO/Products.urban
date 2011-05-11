@@ -388,14 +388,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return self.REQUEST.RESPONSE.redirect(newUrbanEventObj.absolute_url()+'/edit')
 
     security.declarePublic('createUrbanDoc')
-    def createUrbanDoc(self, urban_folder_id, urban_template_uid, urban_event_uid):
+    def createUrbanDoc(self, urban_template_uid, urban_event_uid):
         """
+          Create an element in an UrbanEvent
         """
-        newDocFolder=getattr(self, urban_folder_id)
-        brain=self.uid_catalog(UID=urban_template_uid)
-        urbanTemplateObj=brain[0].getObject()
-        brain=self.uid_catalog(UID=urban_event_uid)
-        urbanEventObj=brain[0].getObject()
+        urbanTemplate=self.uid_catalog(UID=urban_template_uid)[0]
+        urbanTemplateObj=urbanTemplate.getObject()
+        urbanEvent=self.uid_catalog(UID=urban_event_uid)[0]
+        urbanEventObj=urbanEvent.getObject()
+        licenceFolder=urbanEventObj.getParentNode()
         fileType='odt'
         tempFileName = '%s/%s_%f.%s' % (
             getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'.odt')
@@ -408,16 +409,16 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         tempFileNameSignatures = '%s/%s_%f_signatures.%s' % (
             getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'.odt')
         try:
-            applicantobj=newDocFolder.aq_inner.aq_parent.getApplicants()[0]
+            applicantobj=licenceFolder.getApplicants()[0]
         except:
             applicantobj = None
         portal_url=getToolByName(self,'portal_url')
-        brain=self.portal_catalog(path=portal_url.getPortalPath()+'/'+'/'.join(portal_url.getRelativeContentPath(newDocFolder.aq_inner.aq_parent)),id='depot-de-la-demande')
+        brain=self.portal_catalog(path=portal_url.getPortalPath()+'/'+'/'.join(portal_url.getRelativeContentPath(licenceFolder)),id='depot-de-la-demande')
         try:
             recepisseobj = brain[0].getObject()
         except:
             recepisseobj=None
-        brain=self.portal_catalog(path=portal_url.getPortalPath()+'/'+'/'.join(portal_url.getRelativeContentPath(newDocFolder.aq_inner.aq_parent)),id='premier-passage-au-college-communal')
+        brain=self.portal_catalog(path=portal_url.getPortalPath()+'/'+'/'.join(portal_url.getRelativeContentPath(licenceFolder)),id='premier-passage-au-college-communal')
         try:
             collegesubmissionobj= brain[0].getObject()
         except:
@@ -426,28 +427,28 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if templateHeader:
             templateHeader = StringIO(templateHeader)
             #we render the template so pod instructions into the header template are rendered too
-            renderer = appy.pod.renderer.Renderer(templateHeader, {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameHeader, pythonWithUnoPath=self.getUnoEnabledPython())
+            renderer = appy.pod.renderer.Renderer(templateHeader, {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameHeader, pythonWithUnoPath=self.getUnoEnabledPython())
             renderer.run()
         templateFooter = self.getTemplateFooter()
         if templateFooter:
             templateFooter = StringIO(templateFooter)
             #we render the template so pod instructions into the header template are rendered too
-            renderer = appy.pod.renderer.Renderer(templateFooter, {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameFooter, pythonWithUnoPath=self.getUnoEnabledPython())
+            renderer = appy.pod.renderer.Renderer(templateFooter, {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameFooter, pythonWithUnoPath=self.getUnoEnabledPython())
             renderer.run()
         templateReference = self.getTemplateReference()
         if templateReference:
             templateReference = StringIO(templateReference)
             #we render the template so pod instructions into the header template are rendered too
-            renderer = appy.pod.renderer.Renderer(templateReference, {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameReference, pythonWithUnoPath=self.getUnoEnabledPython())
+            renderer = appy.pod.renderer.Renderer(templateReference, {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameReference, pythonWithUnoPath=self.getUnoEnabledPython())
             renderer.run()
         templateSignatures = self.getTemplateSignatures()
         if templateSignatures:
             templateSignatures = StringIO(templateSignatures)
             #we render the template so pod instructions into the header template are rendered too
-            renderer = appy.pod.renderer.Renderer(templateSignatures, {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameSignatures, pythonWithUnoPath=self.getUnoEnabledPython())
+            renderer = appy.pod.renderer.Renderer(templateSignatures, {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameSignatures, pythonWithUnoPath=self.getUnoEnabledPython())
             renderer.run()
         #now that header and footer are rendered, we can use them in the main pod template and render the entire document
-        renderer = appy.pod.renderer.Renderer(StringIO(urbanTemplateObj), {'self': newDocFolder.aq_inner.aq_parent,'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj, 'tool': self, 'header':tempFileNameHeader, 'footer':tempFileNameFooter, 'reference':tempFileNameReference, 'signatures': tempFileNameSignatures}, tempFileName, pythonWithUnoPath=self.getUnoEnabledPython())
+        renderer = appy.pod.renderer.Renderer(StringIO(urbanTemplateObj), {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj, 'tool': self, 'header':tempFileNameHeader, 'footer':tempFileNameFooter, 'reference':tempFileNameReference, 'signatures': tempFileNameSignatures}, tempFileName, pythonWithUnoPath=self.getUnoEnabledPython())
         renderer.run()
         # Tell the browser that the resulting page contains ODT
         response = self.REQUEST.RESPONSE
@@ -458,13 +459,13 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         doc = f.read()
         f.close()
         os.remove(tempFileName)
-        newUrbanDoc=newDocFolder.invokeFactory("File",id=self.generateUniqueId('UrbanEvent'),title=urbanTemplateObj.Title(),content_type='application/vnd.oasis.opendocument.text',file=doc)
-        newUrbanDoc=getattr(newDocFolder,newUrbanDoc)
+        newUrbanDoc=urbanEventObj.invokeFactory("File",id=self.generateUniqueId('UrbanEvent'),title=urbanTemplateObj.Title(),content_type='application/vnd.oasis.opendocument.text',file=doc)
+        newUrbanDoc=getattr(urbanEventObj, newUrbanDoc)
         newUrbanDoc.setFilename(urbanTemplateObj.Title()+'.odt')
         newUrbanDoc.setFormat('application/vnd.oasis.opendocument.text')
         newUrbanDoc.reindexObject()
         self.REQUEST.set('doc_uid',newUrbanDoc.UID())
-        response.redirect(newDocFolder.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
+        response.redirect(urbanEventObj.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
 
     security.declarePublic('listVocabulary')
     def listVocabulary(self, vocToReturn, context, vocType="UrbanVocabularyTerm", inUrbanConfig=True, keyToUse="termKey"):

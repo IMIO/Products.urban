@@ -132,13 +132,17 @@ msgid "add_WorkLocation"
 msgstr ""
 
 # urbanevent_view
-msgid "add_a_linked_doc"
+msgid "generate_a_linked_doc"
 msgstr ""
 
 msgid "add_a_lot"
 msgstr ""
 
 msgid "add_a_proprietary"
+msgstr ""
+
+# urbanevent_view
+msgid "add_an_annex"
 msgstr ""
 
 msgid "add_an_applicant"
@@ -320,6 +324,9 @@ msgstr ""
 msgid "environmentaldeclarations"
 msgstr ""
 
+msgid "event_data"
+msgstr ""
+
 msgid "event_linked_documents"
 msgstr ""
 
@@ -328,7 +335,7 @@ msgstr ""
 msgid "firefox_viewlet_title"
 msgstr ""
 
-#. Default: "Secure, fast and sure, <a href="http://www.getfirefox.com">Firefox</a> is free and easy to install."
+#. Default: "Secure, fast and sure, <a href='http://www.getfirefox.com'>Firefox</a> is free and easy to install."
 #: firefox.pt
 msgid "firefox_viewlet_descr"
 msgstr ""
@@ -424,6 +431,9 @@ msgid "inquiry_to"
 msgstr ""
 
 msgid "investigationarticles_folder_title"
+msgstr ""
+
+msgid "label_colname_created"
 msgstr ""
 
 msgid "label_colname_CreationDate"

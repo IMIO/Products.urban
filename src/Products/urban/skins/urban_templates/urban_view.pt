@@ -88,6 +88,7 @@
                           topic python: getattr(topics, name);
                           path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
                           dummy python: context.setPathCritValue(path_crit, context.UID());
+                          showedCols python: ('Title', 'created', 'Creator', );
                           showActions python: True;">
           <tal:block condition="not: python: context.portal_quickinstaller.isProductInstalled('PloneTask') and context.portal_urban.getUsePloneTask()">
            <metal:listing use-macro="here/urban_macros/macros/listing" />
@@ -105,6 +106,7 @@
                           topic python: getattr(topics, name);
                           path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
                           dummy python: context.setPathCritValue(path_crit, context.UID());
+                          showedCols python: ('Title', 'created', 'Creator', );
                           showActions python: True;">
           <tal:block condition="not: python: context.portal_quickinstaller.isProductInstalled('PloneTask') and context.portal_urban.getUsePloneTask()">
            <metal:listing use-macro="here/urban_macros/macros/listing" />

@@ -132,15 +132,15 @@ msgstr "Ajouter un Certificat d'Urbanisme 2"
 msgid "add_WorkLocation"
 msgstr "Ajouter une adresse"
 
-# urbanevent_view
-msgid "add_a_linked_doc"
-msgstr "Ajouter un document lié au dossier"
-
 msgid "add_a_lot"
 msgstr "Ajouter un lot"
 
 msgid "add_a_proprietary"
 msgstr "Ajouter un propriétaire"
+
+# urbanevent_view
+msgid "add_an_annex"
+msgstr "Ajouter une annexe"
 
 msgid "add_an_applicant"
 msgstr "Ajouter un demandeur"
@@ -321,6 +321,9 @@ msgstr "Paramètres des Déclarations environnementales"
 msgid "environmentaldeclarations"
 msgstr "Déclarations environnementales"
 
+msgid "event_data"
+msgstr "Données concernant l'événement"
+
 msgid "event_linked_documents"
 msgstr "Documents liés à cet événement"
 
@@ -412,6 +415,10 @@ msgstr "<p>L'application intègre la gestion des permis d'urbanisme et d'urbanis
 msgid "front_page_title"
 msgstr "Gestion de l'Urbanisme"
 
+# urbanevent_view
+msgid "generate_a_linked_doc"
+msgstr "Générer un document lié au dossier"
+
 msgid "geometricians_folder_title"
 msgstr "Géomètres"
 
@@ -438,6 +445,9 @@ msgstr "Titre"
 
 msgid "label_colname_adr1"
 msgstr "Localité"
+
+msgid "label_colname_created"
+msgstr "Créé le"
 
 msgid "label_colname_getBeginDate"
 msgstr "Du"

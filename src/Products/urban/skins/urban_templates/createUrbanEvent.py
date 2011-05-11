@@ -1,5 +1,5 @@
-## Script (Python) "createurbanevent"
-##title=Create an urbanEvent
+## Script (Python) "createUrbanEvent"
+##title=Create an UrbanEvent
 ##bind container=container
 ##bind context=context
 ##bind namespace=
