@@ -31,6 +31,27 @@ class TestInstall(unittest.TestCase):
         eventType = eventTypes[0]
         self.assertEqual(eventType.getId, 'accuse-de-reception')
 
+    def testEventWithoutEventTypeType(self):
+        portal = self.layer['portal']
+        urbanTool = getToolByName(portal, 'portal_urban')
+        urban = portal.urban
+        buildLicences = urban.buildlicences
+        urbanConfig = urbanTool.buildlicence
+        LICENCE_ID = 'licence1'
+        login(portal, 'urbaneditor')
+        buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
+        licence = getattr(buildLicences, LICENCE_ID)
+        eventTypes = urbanConfig.urbaneventtypes
+        etudeIncidence = getattr(eventTypes, 'avis-etude-incidence')
+        urbanEventId = urbanTool.generateUniqueId('UrbanEvent')
+        licence.invokeFactory("UrbanEvent",
+                              id=urbanEventId,
+                              title=etudeIncidence.Title(),
+                              urbaneventtypes=(etudeIncidence,))
+        urbanEvent = getattr(licence, urbanEventId)
+        urbanEvent._at_rename_after_creation = False
+        urbanEvent.processForm()
+
     def testAcknowledgmentSearchByInterface(self):
         portal = self.layer['portal']
         urbanTool = getToolByName(portal, 'portal_urban')
