@@ -1507,6 +1507,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if specificSearch == 'searchRecipients':
             #search the existing recipients
             res = portal_catalog(portal_type='RecipientCadastre', path='/'.join(context.getPhysicalPath()))
+        if specificSearch == 'searchLinkedDocuments':
+            #search the existing recipients
+            res = portal_catalog(portal_type='File', path='/'.join(context.getPhysicalPath()))
         else:
             res = []
         if theObjects:

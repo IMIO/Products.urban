@@ -242,7 +242,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                                         obj_type obj/portal_type;
                                         obj_typeinfo python: here.portal_types.getTypeInfo(obj_type);
                                         icon python:portal_url+'/'+ obj_typeinfo.getIcon();
-                                        obj_wf_state obj/review_state|python: wtool.getInfoFor(obj, 'review_state', '');
+                                        obj_wf_state obj/review_state|python: context.portal_workflow.getInfoFor(obj, 'review_state', '');
                                         ploneview nocall: context/@@plone;
                                         normalizeString nocall:ploneview/normalizeString; 
                                         obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);
@@ -262,7 +262,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                          <br /><span tal:content="obj/getAdr2" class="discreet">Street name reworked</span>
                         </td>
                         <td tal:condition="python: field == 'Creator'">
-                         <span tal:content="python: context.portal_membership.getMemberInfo(value)['fullname'] or context.portal_membership.getMemberInfo(value)['username']">Creator fullname</span>
+                         <span tal:content="python: context.portal_membership.getMemberInfo(value) and context.portal_membership.getMemberInfo(value)['fullname'] or ''">Creator fullname</span>
                         </td>
 
                         <td tal:condition="python: field == 'Title'">

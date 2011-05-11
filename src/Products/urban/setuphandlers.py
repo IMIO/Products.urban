@@ -655,12 +655,6 @@ def addGlobalFolders(context):
        ('path', 'ATPathCriterion', '', False),
     ), None, ['Title', 'Creator']
     ),
-    # Linked documents
-    ( 'searchlinkeddocuments',
-    (  ('Type', 'ATPortalTypeCriterion', ['File',], ''),
-       ('path', 'ATPathCriterion', '', False),
-    ), None, ['Title', 'CreationDate', 'Creator']
-    ),
     )
 
     if not hasattr(tool, "topics"):
@@ -766,7 +760,7 @@ def addGlobalFolders(context):
 
     #add the persons_grades folder
     if not hasattr(tool, "persons_grades"):
-        newFolderid = tool.invokeFactory("Folder",id="persons_grades",title=service.translate("urban","persons_grades_folder_title",context=site,default="Persons grades"))
+        newFolderid = tool.invokeFactory("Folder",id="persons_grades",title=_("urban","persons_grades_folder_title",context=site,default="Persons grades"))
         newFolder = getattr(tool, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
