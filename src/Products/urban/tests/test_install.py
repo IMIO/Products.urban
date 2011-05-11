@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest2 as unittest
+from zope.component import createObject
 from zope.component.interface import interfaceToName
 from plone.app.testing import quickInstallProduct, login
 from plone.app.testing import setRoles
@@ -33,24 +34,13 @@ class TestInstall(unittest.TestCase):
 
     def testEventWithoutEventTypeType(self):
         portal = self.layer['portal']
-        urbanTool = getToolByName(portal, 'portal_urban')
         urban = portal.urban
         buildLicences = urban.buildlicences
-        urbanConfig = urbanTool.buildlicence
         LICENCE_ID = 'licence1'
         login(portal, 'urbaneditor')
         buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
         licence = getattr(buildLicences, LICENCE_ID)
-        eventTypes = urbanConfig.urbaneventtypes
-        etudeIncidence = getattr(eventTypes, 'avis-etude-incidence')
-        urbanEventId = urbanTool.generateUniqueId('UrbanEvent')
-        licence.invokeFactory("UrbanEvent",
-                              id=urbanEventId,
-                              title=etudeIncidence.Title(),
-                              urbaneventtypes=(etudeIncidence,))
-        urbanEvent = getattr(licence, urbanEventId)
-        urbanEvent._at_rename_after_creation = False
-        urbanEvent.processForm()
+        createObject('UrbanEvent', 'avis-etude-incidence', licence)
 
     def testAcknowledgmentSearchByInterface(self):
         portal = self.layer['portal']
@@ -63,16 +53,8 @@ class TestInstall(unittest.TestCase):
         buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
         licence = getattr(buildLicences, LICENCE_ID)
         eventTypes = urbanConfig.urbaneventtypes
-        accuse = getattr(eventTypes, 'accuse-de-reception')
-        urbanEventId = urbanTool.generateUniqueId('UrbanEvent')
         self.assertEqual(len(licence.objectValues('UrbanEvent')), 0)
-        licence.invokeFactory("UrbanEvent",
-                              id=urbanEventId,
-                              title=accuse.Title(),
-                              urbaneventtypes=(accuse,))
-        urbanEvent = getattr(licence, urbanEventId)
-        urbanEvent._at_rename_after_creation = False
-        urbanEvent.processForm()
+        urbanEvent = createObject('UrbanEvent', 'accuse-de-reception', licence)
         self.assertEqual(len(licence.objectValues('UrbanEvent')), 1)
         self.failUnless(IAcknowledgment.providedBy(urbanEvent))
         catalog = getToolByName(portal, 'portal_catalog')
