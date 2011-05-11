@@ -107,6 +107,7 @@ class FolderManager(BaseContent, Contact, BrowserDefaultMixin):
         return DisplayList(self.portal_urban.listVocabulary('persons_grades', self, inUrbanConfig=False))
 
 
+
 registerType(FolderManager, PROJECTNAME)
 # end of class FolderManager
 

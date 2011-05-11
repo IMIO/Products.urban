@@ -46,6 +46,9 @@ msgstr "Gestionnaire de dossier"
 msgid "Geometrician"
 msgstr "Géomètre"
 
+msgid "Locality"
+msgstr "Lieu-dit"
+
 # map.cpt
 msgid "Map"
 msgstr "Carte"

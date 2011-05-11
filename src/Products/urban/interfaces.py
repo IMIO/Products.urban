@@ -130,6 +130,10 @@ class IUrbanDelay(Interface):
     """Marker interface for .UrbanDelay.UrbanDelay
     """
 
+class ILocality(Interface):
+    """Marker interface for .Locality.Locality
+    """
+
 ##code-section FOOT
 class IEventTypeType(IInterface):
     """

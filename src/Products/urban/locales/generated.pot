@@ -1,10 +1,10 @@
 # archgenxml generated POT File
-# Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>, 2010.
+# Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2010-05-03 09:55+0000\n"
-"PO-Revision-Date: Wed Apr 28 13:26:48 2010\n"
+"POT-Creation-Date: Wed May 11 16:51:43 2011\n"
+"PO-Revision-Date: Wed May 11 16:51:43 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -16,159 +16,9 @@ msgstr ""
 "Preferred-Encodings: latin1 utf-8\n"
 "Domain: urban\n"
 
-msgid "Add a parcel"
-msgstr ""
-
-msgid "Add an event"
-msgstr ""
-
-msgid "Add this parcel"
-msgstr ""
-
-msgid "BuildLicence"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
-msgid "Declaration"
-msgstr ""
-
-msgid "Delete"
-msgstr ""
-
-msgid "Division"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "Found folder(s)"
-msgstr ""
-
-msgid "Found parcel(s)"
-msgstr ""
-
-msgid "Licence state"
-msgstr ""
-
-msgid "Parcel"
-msgstr ""
-
-msgid "ParcelOutLicence"
-msgstr ""
-
-msgid "Public inquiry"
-msgstr ""
-
-msgid "Reopen"
-msgstr ""
-
-msgid "Road"
-msgstr ""
-
-msgid "Road coating"
-msgstr ""
-
-msgid "Road equipments"
-msgstr ""
-
-msgid "Road type"
-msgstr ""
-
-msgid "Search"
-msgstr ""
-
-# PortionOutSearch
-msgid "Search parcel(s)"
-msgstr ""
-
-# urban_actions
-msgid "View"
-msgstr ""
-
-msgid "actions"
-msgstr ""
-
-# architects_folder_view
-msgid "add_Architect"
-msgstr ""
-
-# urban_view
-msgid "add_BuildLicence"
-msgstr ""
-
-msgid "add_Declaration"
-msgstr ""
-
-# notaries_folder_view
-msgid "add_Notary"
-msgstr ""
-
-msgid "add_NotaryLetter"
-msgstr ""
-
-msgid "add_ParcelOutLicence"
-msgstr ""
-
-msgid "add_UrbanCertificateOne"
-msgstr ""
-
-msgid "add_UrbanCertificateTwo"
-msgstr ""
-
-# urbanevent_view
-msgid "add_a_linked_doc"
-msgstr ""
-
-msgid "add_an_applicant"
-msgstr ""
-
-msgid "add_event"
-msgstr ""
-
-# buildlicence_view
-msgid "applicants"
-msgstr ""
-
-###
-msgid "applicants_folder_title"
-msgstr ""
-
-msgid "architects_folder_title"
-msgstr ""
-
-msgid "back_to_licence"
-msgstr ""
-
-msgid "buildings_layer_title"
-msgstr ""
-
-msgid "buildlicence_searchacceptedlicences"
-msgstr ""
-
-msgid "buildlicence_searchalllicences"
-msgstr ""
-
-msgid "buildlicence_searchincompletelicences"
-msgstr ""
-
-msgid "buildlicence_searchinprogresslicences"
-msgstr ""
-
-msgid "buildlicence_searchrefusedlicences"
-msgstr ""
-
-msgid "buildlicence_searchretiredlicences"
-msgstr ""
-
-msgid "buildlicence_urbanconfig_title"
-msgstr ""
-
-msgid "cartography"
-msgstr ""
-
-msgid "cartography_map_descr"
+#. Default: "Enter the different kind of spelling for this locality"
+#: Locality.py
+msgid "alsocalled_descr"
 msgstr ""
 
 #. Default: "Select the specific features from the left box and drop them in the right box to select them"
@@ -176,280 +26,14 @@ msgstr ""
 msgid "certificateone_specificfeatures_descr"
 msgstr ""
 
-#. Default: "Choose a value"
-#: Contact.py
-msgid "choose_a_value"
-msgstr ""
-
-msgid "click_to_view_or_add"
-msgstr ""
-
-msgid "closed_tasks"
-msgstr ""
-
-msgid "concerned_parcels"
-msgstr ""
-
-msgid "contact_recipients"
-msgstr ""
-
-msgid "content_none"
-msgstr ""
-
-msgid "create"
-msgstr ""
-
-msgid "decisions_folder_title"
-msgstr ""
-
-msgid "declaration_searchacceptedlicences"
-msgstr ""
-
-msgid "declaration_searchalllicences"
-msgstr ""
-
-msgid "declaration_searchincompletelicences"
-msgstr ""
-
-msgid "declaration_searchinprogresslicences"
-msgstr ""
-
-msgid "declaration_searchrefusedlicences"
-msgstr ""
-
-msgid "declaration_searchretiredlicences"
-msgstr ""
-
-msgid "declaration_urbanconfig_title"
-msgstr ""
-
-msgid "decree_type_departmental"
-msgstr ""
-
-msgid "decree_type_royal"
-msgstr ""
-
-# portlet_urban
-msgid "default_map"
-msgstr ""
-
-msgid "derogations_folder_title"
-msgstr ""
-
 #. Default: "Please enter one subject by line with the following format : xx.xx.xx.xx"
 #: EnvironmentalDeclaration.py
 msgid "envionmentaldeclaration_subjects_descr"
 msgstr ""
 
-msgid "event_linked_documents"
-msgstr ""
-
-msgid "folder_events"
-msgstr ""
-
-msgid "folderbuildworktype_folder_title"
-msgstr ""
-
-msgid "foldercategories_folder_title"
-msgstr ""
-
-msgid "folderdelays_folder_title"
-msgstr ""
-
-msgid "folderdivisions_folder_title"
-msgstr ""
-
-msgid "foldermakers_folder_title"
-msgstr ""
-
-msgid "foldermanagers_folder_title"
-msgstr ""
-
-msgid "folderprotectedbuildings_folder_title"
-msgstr ""
-
-msgid "folderroadcoatings_folder_title"
-msgstr ""
-
-msgid "folderroadequipments_folder_title"
-msgstr ""
-
-msgid "folderroadtypes_folder_title"
-msgstr ""
-
-msgid "folderzones_folder_title"
-msgstr ""
-
-# this is an HTML content for the front-page
-msgid "front_page_descr"
-msgstr ""
-
-# this is an HTML content for the front-page
-msgid "front_page_text"
-msgstr ""
-
-# title of the front-page
-msgid "front_page_title"
-msgstr ""
-
-msgid "inquiry_from"
-msgstr ""
-
-msgid "inquiry_item"
-msgstr ""
-
-msgid "inquiry_to"
-msgstr ""
-
-msgid "label_edit"
-msgstr ""
-
-msgid "label_remove"
-msgstr ""
-
-msgid "label_select_street"
-msgstr ""
-
-msgid "late_tasks"
-msgstr ""
-
-msgid "legend"
-msgstr ""
-
-# config folders
-msgid "map_configs_folder_title"
-msgstr ""
-
-msgid "modify_applicant"
-msgstr ""
-
-msgid "no_applicant_defined"
-msgstr ""
-
-msgid "no_notary_defined"
-msgstr ""
-
-msgid "notaries_folder_title"
-msgstr ""
-
-msgid "notaryletter_searchacceptedlicences"
-msgstr ""
-
-msgid "notaryletter_searchalllicences"
-msgstr ""
-
-msgid "notaryletter_searchincompletelicences"
-msgstr ""
-
-msgid "notaryletter_searchinprogresslicences"
-msgstr ""
-
-msgid "notaryletter_searchrefusedlicences"
-msgstr ""
-
-msgid "notaryletter_searchretiredlicences"
-msgstr ""
-
-msgid "notaryletter_urbanconfig_title"
-msgstr ""
-
-msgid "number_of_recipients"
-msgstr ""
-
 #. Default: "OpenOfficePort"
 #: UrbanTool.py
 msgid "open_office_port"
-msgstr ""
-
-msgid "parcellings_folder_title"
-msgstr ""
-
-msgid "parceloutlicence_searchacceptedlicences"
-msgstr ""
-
-msgid "parceloutlicence_searchalllicences"
-msgstr ""
-
-msgid "parceloutlicence_searchincompletelicences"
-msgstr ""
-
-msgid "parceloutlicence_searchinprogresslicences"
-msgstr ""
-
-msgid "parceloutlicence_searchrefusedlicences"
-msgstr ""
-
-msgid "parceloutlicence_searchretiredlicences"
-msgstr ""
-
-msgid "parceloutlicence_urbanconfig_title"
-msgstr ""
-
-msgid "parcels_layer_title"
-msgstr ""
-
-msgid "pashs_folder_title"
-msgstr ""
-
-msgid "pca_of"
-msgstr ""
-
-msgid "pcas_folder_title"
-msgstr ""
-
-#. Default: "Madam"
-#: Contact.py
-msgid "persontitle_madam"
-msgstr ""
-
-#. Default: "Madam and Mister"
-#: Contact.py
-msgid "persontitle_madam_and_mister"
-msgstr ""
-
-#. Default: "Master"
-#: Contact.py
-msgid "persontitle_master"
-msgstr ""
-
-#. Default: "Miss"
-#: Contact.py
-msgid "persontitle_miss"
-msgstr ""
-
-#. Default: "Mister"
-#: Contact.py
-msgid "persontitle_mister"
-msgstr ""
-
-msgid "recipients_folder_title"
-msgstr ""
-
-msgid "road_adaptation_create"
-msgstr ""
-
-msgid "road_adaptation_modify"
-msgstr ""
-
-msgid "road_adaptation_no"
-msgstr ""
-
-msgid "search_parcels"
-msgstr ""
-
-msgid "searcharchitects"
-msgstr ""
-
-msgid "searchlinkeddocuments"
-msgstr ""
-
-msgid "searchportionsout"
-msgstr ""
-
-msgid "searchurbanevents"
-msgstr ""
-
-msgid "simple-map_title"
 msgstr ""
 
 #. Default: "When adding manually a new street, please let the default value"
@@ -467,47 +51,14 @@ msgstr ""
 msgid "street_start_date_descr"
 msgstr ""
 
-msgid "streets_folder_title"
-msgstr ""
-
 #. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here' and 'member' are available"
 #: UrbanEventType.py
 msgid "tal_condition_descr"
 msgstr ""
 
-# tasks
-msgid "tasks_in_progress"
-msgstr ""
-
-msgid "to_watch_tasks"
-msgstr ""
-
-# topics
-msgid "topics"
-msgstr ""
-
-msgid "treating_agent"
-msgstr ""
-
 #. Default: "UnoEnabledPython"
 #: UrbanTool.py
 msgid "uno_enabled_python"
-msgstr ""
-
-msgid "urban"
-msgstr ""
-
-msgid "urban-labruyere"
-msgstr ""
-
-msgid "urban-migrations"
-msgstr ""
-
-msgid "urban-sambreville"
-msgstr ""
-
-# extension profile
-msgid "urban-tests"
 msgstr ""
 
 #. Default: "Set the number of days the alert will be shown before the deadline delay"
@@ -625,6 +176,11 @@ msgstr ""
 msgid "urban_label_alertDelay"
 msgstr ""
 
+#. Default: "Alsocalled"
+#: Locality.py
+msgid "urban_label_alsoCalled"
+msgstr ""
+
 #. Default: "Annonceddelay"
 #: GenericLicence.py
 msgid "urban_label_annoncedDelay"
@@ -633,11 +189,6 @@ msgstr ""
 #. Default: "Annonceddelaydetails"
 #: GenericLicence.py
 msgid "urban_label_annoncedDelayDetails"
-msgstr ""
-
-#. Default: "Applicants"
-#: GenericLicence.py
-msgid "urban_label_applicants"
 msgstr ""
 
 #. Default: "Architects"
@@ -670,12 +221,6 @@ msgstr ""
 msgid "urban_label_bis"
 msgstr ""
 
-#. Default: "Box"
-#: Address.py
-#: Contact.py
-msgid "urban_label_box"
-msgstr ""
-
 #. Default: "City"
 #: Contact.py
 msgid "urban_label_city"
@@ -696,24 +241,13 @@ msgstr ""
 msgid "urban_label_claimsText"
 msgstr ""
 
-#. Default: "Color"
-#: Layer.py
-msgid "urban_label_color"
-msgstr ""
-
 #. Default: "Comments"
 #: Division.py
 msgid "urban_label_comments"
 msgstr ""
 
-#. Default: "Data"
-#: Layer.py
-msgid "urban_label_data"
-msgstr ""
-
 #. Default: "Deadlinedelay"
 #: UrbanDelay.py
-#: UrbanEventType.py
 msgid "urban_label_deadLineDelay"
 msgstr ""
 
@@ -727,19 +261,9 @@ msgstr ""
 msgid "urban_label_decisionDate"
 msgstr ""
 
-#. Default: "Decisionterm"
-#: Decision.py
-msgid "urban_label_decisionTerm"
-msgstr ""
-
 #. Default: "Decisiontext"
 #: UrbanEvent.py
 msgid "urban_label_decisionText"
-msgstr ""
-
-#. Default: "Decisions"
-#: LicenceEvent.py
-msgid "urban_label_decisions"
 msgstr ""
 
 #. Default: "Declarationsubject"
@@ -757,9 +281,6 @@ msgstr ""
 msgid "urban_label_decreeType"
 msgstr ""
 
-msgid "urban_label_defaultRecipient"
-msgstr ""
-
 #. Default: "Derogation"
 #: GenericLicence.py
 msgid "urban_label_derogation"
@@ -772,8 +293,8 @@ msgstr ""
 
 #. Default: "Description"
 #: Declaration.py
-#: Division.py
 #: Equipment.py
+#: GenericLicence.py
 msgid "urban_label_description"
 msgstr ""
 
@@ -822,11 +343,6 @@ msgstr ""
 msgid "urban_label_explanationsDate"
 msgstr ""
 
-#. Default: "Exponent"
-#: PortionsOut.py
-msgid "urban_label_exponent"
-msgstr ""
-
 #. Default: "Exposant"
 #: PortionOut.py
 msgid "urban_label_exposant"
@@ -835,11 +351,6 @@ msgstr ""
 #. Default: "Fax"
 #: Contact.py
 msgid "urban_label_fax"
-msgstr ""
-
-#. Default: "Filter"
-#: Layer.py
-msgid "urban_label_filter"
 msgstr ""
 
 #. Default: "Finality"
@@ -855,14 +366,6 @@ msgstr ""
 #. Default: "Foldercategory"
 #: GenericLicence.py
 msgid "urban_label_folderCategory"
-msgstr ""
-
-msgid "urban_label_folderManager"
-msgstr ""
-
-#. Default: "Folderreference"
-#: GenericLicence.py
-msgid "urban_label_folderReference"
 msgstr ""
 
 #. Default: "Folderzone"
@@ -913,11 +416,6 @@ msgstr ""
 msgid "urban_label_initials"
 msgstr ""
 
-#. Default: "Investigationarticle"
-#: GenericLicence.py
-msgid "urban_label_investigationArticle"
-msgstr ""
-
 #. Default: "Investigationarticles"
 #: GenericLicence.py
 msgid "urban_label_investigationArticles"
@@ -939,11 +437,6 @@ msgstr ""
 msgid "urban_label_investigationOralReclamationNumber"
 msgstr ""
 
-#. Default: "Investigationpoint"
-#: GenericLicence.py
-msgid "urban_label_investigationPoint"
-msgstr ""
-
 #. Default: "Investigationstart"
 #: GenericLicence.py
 #: UrbanCertificateTwo.py
@@ -953,14 +446,6 @@ msgstr ""
 #. Default: "Investigationwritereclamationnumber"
 #: UrbanCertificateTwo.py
 msgid "urban_label_investigationWriteReclamationNumber"
-msgstr ""
-
-#. Default: "Isadecision"
-#: LicenceEventType.py
-msgid "urban_label_isADecision"
-msgstr ""
-
-msgid "urban_label_isAnOpinion"
 msgstr ""
 
 #. Default: "Isdecentralized"
@@ -1002,27 +487,6 @@ msgstr ""
 #. Default: "Licencesubject"
 #: GenericLicence.py
 msgid "urban_label_licenceSubject"
-msgstr ""
-
-#. Default: "Licenceeventdocs"
-#: LicenceEvent.py
-msgid "urban_label_licenceeventdocs"
-msgstr ""
-
-#. Default: "Licenceevents"
-#: GenericLicence.py
-msgid "urban_label_licenceevents"
-msgstr ""
-
-#. Default: "Licenceeventtypes"
-#: LicenceEvent.py
-msgid "urban_label_licenceeventtypes"
-msgstr ""
-
-#. Default: "Locality"
-#: Address.py
-#: Contact.py
-msgid "urban_label_locality"
 msgstr ""
 
 #. Default: "Usage"
@@ -1094,19 +558,9 @@ msgstr ""
 msgid "urban_label_openOfficePort"
 msgstr ""
 
-#. Default: "Outlinecolor"
-#: Layer.py
-msgid "urban_label_outlineColor"
-msgstr ""
-
 #. Default: "Parcellings"
 #: licenceParcelling.py
 msgid "urban_label_parcellings"
-msgstr ""
-
-#. Default: "Parcels"
-#: GenericLicence.py
-msgid "urban_label_parcels"
 msgstr ""
 
 #. Default: "Partie"
@@ -1154,14 +608,6 @@ msgstr ""
 msgid "urban_label_ploneUserId"
 msgstr ""
 
-msgid "urban_label_portionOuts"
-msgstr ""
-
-#. Default: "Portionsouts"
-#: GenericLicence.py
-msgid "urban_label_portionsouts"
-msgstr ""
-
 #. Default: "Protectedbuilding"
 #: GenericLicence.py
 msgid "urban_label_protectedBuilding"
@@ -1185,11 +631,6 @@ msgstr ""
 #. Default: "Radical"
 #: PortionOut.py
 msgid "urban_label_radical"
-msgstr ""
-
-#. Default: "Recipients"
-#: LicenceEvent.py
-msgid "urban_label_recipients"
 msgstr ""
 
 #. Default: "Reference"
@@ -1229,19 +670,9 @@ msgstr ""
 msgid "urban_label_roadEquipments"
 msgstr ""
 
-#. Default: "Roadmodification"
-#: GenericLicence.py
-msgid "urban_label_roadModification"
-msgstr ""
-
 #. Default: "Roadtype"
 #: GenericLicence.py
 msgid "urban_label_roadType"
-msgstr ""
-
-#. Default: "Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word"
-#: urban_searchbyapplicant.py
-msgid "urban_label_searchbyapplicant_descr"
 msgstr ""
 
 #. Default: "Section"
@@ -1316,12 +747,6 @@ msgstr ""
 msgid "urban_label_streetName"
 msgstr ""
 
-#. Default: "Streets"
-#: Contact.py
-#: GenericLicence.py
-msgid "urban_label_streets"
-msgstr ""
-
 #. Default: "Styles"
 #: Layer.py
 msgid "urban_label_styles"
@@ -1382,13 +807,10 @@ msgstr ""
 msgid "urban_label_termKeyStr"
 msgstr ""
 
-msgid "urban_label_termTitle"
-msgstr ""
-
 #. Default: "Title"
 #: Declaration.py
 #: Division.py
-#: Equipment.py
+#: GenericLicence.py
 msgid "urban_label_title"
 msgstr ""
 
@@ -1402,11 +824,6 @@ msgstr ""
 msgid "urban_label_unoEnabledPython"
 msgstr ""
 
-#. Default: "Urbandelays"
-#: urbaneventtype_urbandelay.py
-msgid "urban_label_urbandelays"
-msgstr ""
-
 #. Default: "Urbaneventtypes"
 #: UrbanEventType.py
 msgid "urban_label_urbaneventtypes"
@@ -1414,7 +831,6 @@ msgstr ""
 
 #. Default: "Usage"
 #: BuildLicence.py
-#: Lot.py
 msgid "urban_label_usage"
 msgstr ""
 
@@ -1438,20 +854,6 @@ msgstr ""
 msgid "urban_label_webServerHost"
 msgstr ""
 
-#. Default: "Worklocation"
-#: Declaration.py
-#: Division.py
-#: EnvironmentalDeclaration.py
-msgid "urban_label_workLocation"
-msgstr ""
-
-#. Default: "Worklocationhousenumber"
-#: Declaration.py
-#: Division.py
-#: EnvironmentalDeclaration.py
-msgid "urban_label_workLocationHouseNumber"
-msgstr ""
-
 #. Default: "Worktype"
 #: BuildLicence.py
 msgid "urban_label_workType"
@@ -1465,81 +867,5 @@ msgstr ""
 #. Default: "Zipcode"
 #: Contact.py
 msgid "urban_label_zipcode"
-msgstr ""
-
-msgid "urban_search_parameters"
-msgstr ""
-
-msgid "urban_search_result"
-msgstr ""
-
-msgid "urban_searchbyapplicant_descr"
-msgstr ""
-
-msgid "urban_searchbyparcel_descr"
-msgstr ""
-
-msgid "urban_searchbystreet_descr"
-msgstr ""
-
-msgid "urban_searches"
-msgstr ""
-
-msgid "urbancertificateone_searchacceptedlicences"
-msgstr ""
-
-msgid "urbancertificateone_searchalllicences"
-msgstr ""
-
-msgid "urbancertificateone_searchincompletelicences"
-msgstr ""
-
-msgid "urbancertificateone_searchinprogresslicences"
-msgstr ""
-
-msgid "urbancertificateone_searchrefusedlicences"
-msgstr ""
-
-msgid "urbancertificateone_searchretiredlicences"
-msgstr ""
-
-msgid "urbancertificateone_urbanconfig_title"
-msgstr ""
-
-msgid "urbancertificatetwo_searchacceptedlicences"
-msgstr ""
-
-msgid "urbancertificatetwo_searchalllicences"
-msgstr ""
-
-msgid "urbancertificatetwo_searchincompletelicences"
-msgstr ""
-
-msgid "urbancertificatetwo_searchinprogresslicences"
-msgstr ""
-
-msgid "urbancertificatetwo_searchrefusedlicences"
-msgstr ""
-
-msgid "urbancertificatetwo_searchretiredlicences"
-msgstr ""
-
-msgid "urbancertificatetwo_urbanconfig_title"
-msgstr ""
-
-msgid "urbaneventtypes_folder_title"
-msgstr ""
-
-msgid "viewmap"
-msgstr ""
-
-# error messages...
-msgid "warning_add_a_parcel"
-msgstr ""
-
-msgid "warning_add_an_applicant"
-msgstr ""
-
-msgid "work_location"
 msgstr ""
 

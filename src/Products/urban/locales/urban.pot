@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-05-02 12:34+0000\n"
+"POT-Creation-Date: 2011-05-11 14:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -131,10 +131,6 @@ msgstr ""
 msgid "add_WorkLocation"
 msgstr ""
 
-# urbanevent_view
-msgid "generate_a_linked_doc"
-msgstr ""
-
 msgid "add_a_lot"
 msgstr ""
 
@@ -158,6 +154,11 @@ msgid "additonal_layers_folder_title"
 msgstr ""
 
 msgid "all_divisions"
+msgstr ""
+
+#. Default: "Enter the different kind of spelling for this locality"
+#: Locality.py
+msgid "alsocalled_descr"
 msgstr ""
 
 msgid "and"
@@ -330,14 +331,14 @@ msgstr ""
 msgid "event_linked_documents"
 msgstr ""
 
-#. Default: "This application works better with Firefox."
-#: firefox.pt
-msgid "firefox_viewlet_title"
-msgstr ""
-
 #. Default: "Secure, fast and sure, <a href='http://www.getfirefox.com'>Firefox</a> is free and easy to install."
 #: firefox.pt
 msgid "firefox_viewlet_descr"
+msgstr ""
+
+#. Default: "This application works better with Firefox."
+#: firefox.pt
+msgid "firefox_viewlet_title"
 msgstr ""
 
 #. Default: "High risk"
@@ -418,6 +419,10 @@ msgstr ""
 msgid "front_page_title"
 msgstr ""
 
+# urbanevent_view
+msgid "generate_a_linked_doc"
+msgstr ""
+
 msgid "geometricians_folder_title"
 msgstr ""
 
@@ -433,9 +438,6 @@ msgstr ""
 msgid "investigationarticles_folder_title"
 msgstr ""
 
-msgid "label_colname_created"
-msgstr ""
-
 msgid "label_colname_CreationDate"
 msgstr ""
 
@@ -446,6 +448,9 @@ msgid "label_colname_Title"
 msgstr ""
 
 msgid "label_colname_adr1"
+msgstr ""
+
+msgid "label_colname_created"
 msgstr ""
 
 msgid "label_colname_getBeginDate"
@@ -592,10 +597,22 @@ msgstr ""
 msgid "pcas_folder_title"
 msgstr ""
 
-msgid "persons_titles_folder_title"
+msgid "peb_complete_process"
+msgstr ""
+
+msgid "peb_form1_process"
+msgstr ""
+
+msgid "peb_form2_process"
+msgstr ""
+
+msgid "peb_not_applicable"
 msgstr ""
 
 msgid "persons_grades_folder_title"
+msgstr ""
+
+msgid "persons_titles_folder_title"
 msgstr ""
 
 #. Default: "Madam"
@@ -638,10 +655,11 @@ msgstr ""
 msgid "request_submitted_by_notary"
 msgstr ""
 
+#. Default: "${name} residing at ${address}"
 #. Default: "residing"
 #: Contact.py
 msgid "residing"
-msgstr "${name} residing at ${address}"
+msgstr ""
 
 msgid "road_adaptation_create"
 msgstr ""
@@ -855,6 +873,11 @@ msgstr ""
 #. Default: "Alertdelay"
 #: UrbanDelay.py
 msgid "urban_label_alertDelay"
+msgstr ""
+
+#. Default: "Alsocalled"
+#: Locality.py
+msgid "urban_label_alsoCalled"
 msgstr ""
 
 #. Default: "Annonceddelay"
@@ -1418,6 +1441,11 @@ msgstr ""
 msgid "urban_label_puissance"
 msgstr ""
 
+#. Default: "Pylonshost"
+#: UrbanTool.py
+msgid "urban_label_pylonsHost"
+msgstr ""
+
 #. Default: "Radical"
 #: PortionOut.py
 msgid "urban_label_radical"
@@ -1811,14 +1839,3 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
-msgid "peb_not_applicable"
-msgstr ""
-
-msgid "peb_complete_process"
-msgstr ""
-
-msgid "peb_form1_process"
-msgstr ""
-
-msgid "peb_form2_process"
-msgstr ""

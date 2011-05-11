@@ -125,6 +125,8 @@ def postInstall(context):
     site.portal_catalog.refreshCatalog(clear=True)
     logger.info("Refresh portal_catalog : Done!")
 
+
+
 ##code-section FOOT
 def addUrbanConfigs(context):
     """
@@ -1036,8 +1038,9 @@ def addTestObjects(context):
 
     #create some streets using the Extensions.imports script
     if not tool.streets.objectIds('City'):
-        from Products.urban.Extensions.imports import import_streets_fromfile
+        from Products.urban.Extensions.imports import import_streets_fromfile, import_localities_fromfile
         import_streets_fromfile(tool)
+        import_localities_fromfile(tool)
 
     addUrbanEventTypes(context)
 

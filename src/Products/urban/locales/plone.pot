@@ -42,6 +42,9 @@ msgstr ""
 msgid "Notary"
 msgstr ""
 
+msgid "Locality"
+msgstr ""
+
 msgid "Contact"
 msgstr ""
 

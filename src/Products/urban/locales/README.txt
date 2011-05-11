@@ -1,9 +1,9 @@
-1. How to add msgids from pot to po?
---> run "i18ndude sync --pot the_pot_file the_po_file_to_be_updated"
+1. How to add msgids from pots to pos?
+--> run "sync_pos.sh"
 --> translate the new msgids
 
 2. How to add msgids from pys and zpts?
---> add them to the file.pot (urban domain) or file-plone.pot (plone domain) files
+--> add them to the urban.pot (urban domain) or plone.pot (plone domain) files
 --> run 1.
 
 3. How to create a new language translation file?

@@ -224,6 +224,17 @@ def import_streets_fromdb(self, cityName='', password=''):
 
 def import_streets_fromfile(self, filePath=None, separator=';'):
     """
+      Method for importing localities from a file
+      The CSV needs to have the following format :
+      CityName, ZipCode, StreetCode, StreetName
+      An example is available in the Extensions/localities.txt file of Products.urban
+      In the portal_urban.streets folder, we create a hierarchy of
+      'City's containing 'Street's
+    """
+    return
+
+def import_streets_fromfile(self, filePath=None, separator=';'):
+    """
       Method for importing streets from a file
       The CSV needs to have the following format :
       CityName, ZipCode, StreetCode, StreetName

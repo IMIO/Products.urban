@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-05-02 12:34+0000\n"
+"POT-Creation-Date: 2011-05-11 14:52+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -156,6 +156,11 @@ msgstr "Configuration des couches supplémentaires"
 
 msgid "all_divisions"
 msgstr "Toutes les divisions"
+
+#. Default: "Enter the different kind of spelling for this locality"
+#: Locality.py
+msgid "alsocalled_descr"
+msgstr "Si ce lieu-dit est écrit de différentes manières, utilisez la manière la plus claire de l'appeler comme titre et entrez ici les autres manières de l'écrire"
 
 msgid "and"
 msgstr "et"
@@ -651,8 +656,9 @@ msgstr "Dossier introduit par ${notary} pour ${applicant}"
 msgid "request_submitted_by_notary"
 msgstr "Dossier introduit par ${notary}"
 
-#. Default: "residing"
+#. Default: "${name} residing at ${address}"
 #: Contact.py
+#, fuzzy
 msgid "residing"
 msgstr "${name} demeurant ${address}"
 
@@ -870,6 +876,11 @@ msgstr "Rue et numéro (cadastre)"
 #: UrbanDelay.py
 msgid "urban_label_alertDelay"
 msgstr "Délai d'alerte"
+
+#. Default: "Alsocalled"
+#: Locality.py
+msgid "urban_label_alsoCalled"
+msgstr "Synonymes"
 
 #. Default: "Annonceddelay"
 #: GenericLicence.py
@@ -1433,6 +1444,11 @@ msgstr "Détails concernant le bien (classé ou assimilé)"
 #: PortionOut.py
 msgid "urban_label_puissance"
 msgstr "Puissance"
+
+#. Default: "Pylonshost"
+#: UrbanTool.py
+msgid "urban_label_pylonsHost"
+msgstr "Hôte Pylons"
 
 #. Default: "Radical"
 #: PortionOut.py

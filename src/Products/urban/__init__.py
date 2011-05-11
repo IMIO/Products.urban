@@ -100,6 +100,7 @@ def initialize(context):
     import Division
     import WorkLocation
     import UrbanDelay
+    import Locality
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

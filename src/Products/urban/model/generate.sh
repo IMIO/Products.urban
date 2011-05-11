@@ -1,2 +1,5 @@
 /srv/archgenxml/agx26/bin/archgenxml --cfg generate.conf urban.zargo
-#cp typesxml/*.xml ../profiles/default/types
+#manage generated.pot
+cp ../i18n/generated.pot ../locales
+rm -rf ../i18n
+

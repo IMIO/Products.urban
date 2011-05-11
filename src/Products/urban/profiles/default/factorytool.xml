@@ -28,5 +28,6 @@
   <type portal_type="Division"/>
   <type portal_type="WorkLocation"/>
   <type portal_type="UrbanDelay"/>
+  <type portal_type="Locality"/>
  </factorytypes>
 </object>
