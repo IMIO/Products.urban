@@ -16,6 +16,8 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
+from zope.i18n import translate
+
 import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
@@ -257,26 +259,36 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
           Returns the contact base signaletic : title and names
         """
-        nameSignaletic = self.displayValue(self.listPersonTitles(), self.getPersonTitle()) + ' ' + self.getName1() + ' ' + self.getName2()
-        addressSignaletic = ''
-        if withaddress:
-            #add some fields with the address
+        nameSignaletic = self._getNameSignaletic(linebyline)
+        if not withaddress:
+            if not linebyline:
+                return nameSignaletic
+            else:
+                return '<p>%s</p>' % nameSignaletic
+        else:
             #escape HTML special characters like HTML entities
             addressSignaletic = self.getAddress(linebyline=linebyline)
+            if not linebyline:
+                mapping = dict(name=nameSignaletic, address=addressSignaletic)
+                return translate(u'residing',
+                    domain=u'urban',
+                    mapping=mapping, context=self.REQUEST).encode('utf8')
+            else:
+                #remove the <p></p> from adressSignaletic
+                addressSignaletic = addressSignaletic[3:-4]
+                return '<p>%s<br />%s</p>' % (nameSignaletic,
+                    addressSignaletic)
+
+
+    def _getNameSignaletic(self, linebyline):
+        title = self.displayValue(self.listPersonTitles(),
+            self.getPersonTitle())
+        nameSignaletic = '%s %s %s' % (title, self.getName1(), self.getName2())
         if linebyline:
-            #remove the <p></p> from adressSignaletic
-            addressSignaletic = addressSignaletic[3:-4]
             #escape HTML special characters like HTML entities
-            nameSignaletic = cgi.escape(nameSignaletic)
-            res = '<p>' + nameSignaletic
-            if withaddress:
-                res = res + '<br />' + addressSignaletic
-            res = res + '</p>'
+            return cgi.escape(nameSignaletic)
         else:
-            res = unicode(nameSignaletic, 'utf-8')
-            if withaddress:
-                res = res + ' ' + _("urban", "residing") + ' ' +  unicode(addressSignaletic, 'utf-8')
-        return res
+            return nameSignaletic
 
     security.declarePublic('getAddress')
     def getAddress(self, linebyline=False):
@@ -288,7 +300,16 @@ class Contact(BaseContent, BrowserDefaultMixin):
         zip = self.getZipcode()
         city = self.getCity()
         if not linebyline:
-            return "%s, %s %s %s" % (number, street, zip, city)
+            result = []
+            if number:
+                result.append("%s," % number)
+            if street:
+                result.append(street)
+            if zip:
+                result.append(zip)
+            if city:
+                result.append(city)
+            return ' '.join(result)
         else:
             number = cgi.escape(number)
             street = cgi.escape(street)
@@ -356,4 +377,3 @@ registerType(Contact, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

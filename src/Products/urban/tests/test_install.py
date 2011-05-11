@@ -102,12 +102,33 @@ class TestContact(unittest.TestCase):
         self.buildlicence = self.portal_urban.buildlicence
         self.foldermanagers = self.buildlicence.foldermanagers
 
-    def testSignaletic(self):
+    def test_getSignaleticIsString(self):
         login(self.portal, TEST_USER_NAME)
         self.foldermanagers.invokeFactory('FolderManager', 'agent')
         agent = self.foldermanagers.agent
         agent.setName1(u'Robin')
         agent.setPersonTitle(u'mister')
-        self.failUnless(isinstance(agent.getSignaletic(), unicode))
-        agent.setName1('Robin')
-        self.failUnless(isinstance(agent.getSignaletic(), unicode))
+        self.failUnless(isinstance(agent.getSignaletic(), str))
+        self.failUnless(isinstance(agent.getSignaletic(withaddress=True), str))
+        self.failUnless(isinstance(agent.getSignaletic(linebyline=True), str))
+        self.failUnless(isinstance(agent.getSignaletic(withaddress=True,
+            linebyline=True), str))
+
+    def test_getSignaletic(self):
+        login(self.portal, TEST_USER_NAME)
+        self.foldermanagers.invokeFactory('FolderManager', 'agent')
+        agent = self.foldermanagers.agent
+        agent.setName1(u'Robin')
+        agent.setName2(u'Hood')
+        agent.setPersonTitle(u'mister')
+        agent.setNumber(u'1')
+        agent.setCity(u'Sherwood')
+        agent.REQUEST.set('HTTP_ACCEPT_LANGUAGE', 'fr')
+        self.assertEquals(agent.getSignaletic(), 'Monsieur Robin Hood')
+        self.assertEquals(agent.getSignaletic(linebyline=True),
+            '<p>Monsieur Robin Hood</p>')
+        self.assertEquals(agent.getSignaletic(withaddress=True),
+            'Monsieur Robin Hood demeurant 1, Sherwood')
+        self.assertEquals(agent.getSignaletic(withaddress=True,
+            linebyline=True),
+            '<p>Monsieur Robin Hood<br />1, <br /> Sherwood</p>')

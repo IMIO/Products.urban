@@ -654,7 +654,7 @@ msgstr "Dossier introduit par ${notary}"
 #. Default: "residing"
 #: Contact.py
 msgid "residing"
-msgstr "demeurant"
+msgstr "${name} demeurant ${address}"
 
 msgid "road_adaptation_create"
 msgstr "Oui, ouverture"

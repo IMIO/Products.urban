@@ -641,7 +641,7 @@ msgstr ""
 #. Default: "residing"
 #: Contact.py
 msgid "residing"
-msgstr ""
+msgstr "${name} residing at ${address}"
 
 msgid "road_adaptation_create"
 msgstr ""
