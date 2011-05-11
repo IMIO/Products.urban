@@ -1,8 +1,16 @@
 # -*- coding: utf-8 -*-
-from plone.testing import z2
+from plone.testing import z2, zca
 from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import IntegrationTesting
 import Products.urban
+
+
+URBAN_ZCML = zca.ZCMLSandbox(filename="testing.zcml",
+                             package=Products.urban,
+                             name='URBAN_ZCML')
+
+URBAN_Z2 = z2.IntegrationTesting(bases=(z2.STARTUP, URBAN_ZCML),
+                                 name='URBAN_Z2')
 
 
 class UrbanPloneLayer(PloneWithPackageLayer):
