@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from AccessControl import Unauthorized
 from DateTime import DateTime
+from AccessControl import Unauthorized
 from Acquisition import aq_base
+from zExceptions import BadRequest
 
 #utilities
 def check_role(self, role='Manager', context=None):
@@ -224,17 +225,6 @@ def import_streets_fromdb(self, cityName='', password=''):
 
 def import_streets_fromfile(self, filePath=None, separator=';'):
     """
-      Method for importing localities from a file
-      The CSV needs to have the following format :
-      CityName, ZipCode, StreetCode, StreetName
-      An example is available in the Extensions/localities.txt file of Products.urban
-      In the portal_urban.streets folder, we create a hierarchy of
-      'City's containing 'Street's
-    """
-    return
-
-def import_streets_fromfile(self, filePath=None, separator=';'):
-    """
       Method for importing streets from a file
       The CSV needs to have the following format :
       CityName, ZipCode, StreetCode, StreetName
@@ -272,6 +262,53 @@ def import_streets_fromfile(self, filePath=None, separator=';'):
         i = i+1
     file.close()
     return "%d streets have been imported" % numberOfRecords
+
+def import_localities_fromfile(self, filePath=None, separator=';'):
+    """
+      Method for importing localities from a file
+      The CSV needs to have the following format :
+      title and alsoCalled (with '\n' to separate the elements)
+      An example is available in the Extensions/localities.txt file of Products.urban
+      In the portal_urban.streets folder, we create a hierarchy of
+      'City's containing 'Locality's
+    """
+    if not self.portal_type == 'UrbanTool':
+        raise Unauthorized, "This script must be called on portal_urban!"
+    if not hasattr(self, 'streets'):
+        raise AttributeError, "The streets folder does not exist in portal_urban!"
+
+    #if no filePath is defined, take the localities.txt file stored here
+    if not filePath:
+        import Products.urban.Extensions as ext, os
+        filePath = ext.__path__[0] + '/localities.txt'
+        if not os.path.isfile(filePath):
+            raise ImportError, "The localities.txt file does not exist in Products.urban.Extensions.  Try using your own file by passing it as parameter to this ExternalMethod."
+
+    file = open(filePath, 'r')
+    numberOfRecords = len(file.readlines())
+    file.seek(0)
+    i = 1
+    streetFolder = getattr(self, 'streets')
+    for line in file.readlines():
+        print "Importing locality %d of %d" % (i, numberOfRecords)
+        i = i + 1
+        city, zipcode, localityName, alsoCalled = line.strip().split(separator)
+        cityId = self.plone_utils.normalizeString(city)
+        if not hasattr(aq_base(streetFolder), cityId):
+            #if the city still does not exist, we create it
+            cityObjId = streetFolder.invokeFactory('City', id=cityId, title=city, zipCode=zipcode)
+            cityObj = getattr(streetFolder, cityObjId)
+            cityObj.reindexObject()
+        else:
+            cityObj = getattr(streetFolder, cityId)
+            try:
+                localityId = self.plone_utils.normalizeString(localityName)
+                localityObjId = cityObj.invokeFactory('Locality', id=localityId, localityName=localityName, alsoCalled='\n'.join(alsoCalled.split('|')))
+                localityObj = getattr(cityObj, localityObjId)
+            except BadRequest:
+                print ("The locality with id '%s' already exists!" % (localityId))
+                file.close()
+    file.close()
 
 def import_architects(self, filePath=None, separator=';'):
     """

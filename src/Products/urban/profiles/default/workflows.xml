@@ -37,10 +37,16 @@
   <type type_id="Layer">
    <bound-workflow workflow_id="activation_workflow" />
   </type>
+  <type type_id="Locality">
+   <bound-workflow workflow_id="activation_workflow" />
+  </type>
   <type type_id="ParcelOutLicence">
    <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="RecipientCadastre">
+   <bound-workflow workflow_id="activation_workflow" />
+  </type>
+  <type type_id="Street">
    <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="UrbanCertificateBase">
@@ -79,9 +85,6 @@
 </type>
 <type type_id="Recipient">
   <bound-workflow workflow_id="" />
-</type>
-<type type_id="Street">
-  <bound-workflow workflow_id="activation_workflow" />
 </type>
 <type type_id="Notary">
   <bound-workflow workflow_id="activation_workflow" />

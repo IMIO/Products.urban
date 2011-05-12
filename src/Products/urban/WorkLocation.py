@@ -42,7 +42,7 @@ schema = Schema((
             label_msgid='urban_label_street',
             i18n_domain='urban',
         ),
-        allowed_types= ('Street',),
+        allowed_types= ('Street', 'Locality',),
         relationship="street",
         required=True,
     ),

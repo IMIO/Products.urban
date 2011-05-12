@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-05-11 14:52+0000\n"
+"POT-Creation-Date: 2011-05-12 13:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1284,6 +1284,11 @@ msgstr ""
 #: Address.py
 #: Contact.py
 msgid "urban_label_locality"
+msgstr ""
+
+#. Default: "Localityname"
+#: Locality.py
+msgid "urban_label_localityName"
 msgstr ""
 
 #. Default: "Usage"

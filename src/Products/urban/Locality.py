@@ -22,17 +22,24 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 
-# additional imports from tagged value 'import'
-from Products.urban.Street import Street, Street_schema
-
 ##code-section module-header #fill in your manual code here
+from Products.CMFCore import permissions
 ##/code-section module-header
 
 schema = Schema((
 
+    StringField(
+        name='localityName',
+        widget=StringField._properties['widget'](
+            label='Localityname',
+            label_msgid='urban_label_localityName',
+            i18n_domain='urban',
+        ),
+        required=True,
+    ),
     TextField(
         name='alsoCalled',
-        allowable_content_types=('text/html',),
+        allowable_content_types=('text/plain',),
         widget=RichWidget(
             description='Enter the different kind of spelling for this locality',
             description_msgid="alsocalled_descr",
@@ -40,8 +47,8 @@ schema = Schema((
             label_msgid='urban_label_alsoCalled',
             i18n_domain='urban',
         ),
+        default_content_type='text/plain',
         default_output_type='text/html',
-        default_content_type='text/html',
     ),
 
 ),
@@ -50,13 +57,14 @@ schema = Schema((
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-Locality_schema = Street_schema.copy() + \
+Locality_schema = BaseSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+del Locality_schema['title']
 ##/code-section after-schema
 
-class Locality(Street, BrowserDefaultMixin):
+class Locality(BaseContent, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -72,6 +80,26 @@ class Locality(Street, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
+
+    # Manually created methods
+
+    security.declarePublic('Title')
+    def Title(self):
+        """
+           Update the title to clearly identify the locality in the city
+        """
+        #format is "title (cityZipeCode - cityTitle)"
+        city = self.getParentNode()
+        title = "%s (%s - %s)" % (self.getLocalityName(), city.getZipCode(), city.Title())
+        return str(title)
+
+    security.declareProtected(permissions.View, 'SearchableText')
+    def SearchableText(self):
+        """
+          Override to take Title into account
+        """
+        return self.Title() + self.getRawAlsoCalled()
+
 
 
 registerType(Locality, PROJECTNAME)

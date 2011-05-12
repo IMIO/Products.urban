@@ -1,0 +1,6 @@
+City1;1000;Lieu-dit1;Lieu-dit11|Lieu-ditUn
+City1;1000;Lieu-dit2;Lieu-ditDeu|Lieu-ditDeux
+City2;1000;Lieu-ditTrois;Lieu-dit3|Lieu-ditTroye|Lieu-ditTroua
+City2;1000;Lieu-dit4;
+City3;1000;Lieu-dit5;
+City3;1000;Lieu-dit6;Lieu-ditSis|Lieu-dit66|Lieu-ditSisce

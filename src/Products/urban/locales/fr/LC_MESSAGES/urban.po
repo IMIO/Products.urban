@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-05-11 14:52+0000\n"
+"POT-Creation-Date: 2011-05-12 13:40+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -656,7 +656,7 @@ msgstr "Dossier introduit par ${notary} pour ${applicant}"
 msgid "request_submitted_by_notary"
 msgstr "Dossier introduit par ${notary}"
 
-#. Default: "${name} residing at ${address}"
+#. Default: "residing"
 #: Contact.py
 #, fuzzy
 msgid "residing"
@@ -1289,6 +1289,11 @@ msgstr "Type d'événement"
 #: Contact.py
 msgid "urban_label_locality"
 msgstr "Localité"
+
+#. Default: "Localityname"
+#: Locality.py
+msgid "urban_label_localityName"
+msgstr "Nom généralement constaté pour le lieu-dit"
 
 #. Default: "Usage"
 #: Lot.py
