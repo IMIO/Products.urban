@@ -164,7 +164,7 @@ class Declaration(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, Browse
            Post create hook...
            XXX This should be replaced by a zope event...
         """
-        urbanTool = getToolByName(self,'portal_urban')
+        tool = getToolByName(self,'portal_urban')
         tool.incrementNumerotation(self)
         #create a folder ADDITIONAL_LAYERS_FOLDER that will contain additional layers
         #used while creating the mapfile
