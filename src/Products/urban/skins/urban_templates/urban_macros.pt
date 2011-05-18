@@ -424,46 +424,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
 
 
 <div metal:define-macro="urbanMapCSS" tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
-		<style type="text/css" media="screen">
-	        #loading-mask{
-		        background-color:white;
-		        height:100%;
-		        position:absolute;
-		        left:0;
-		        top:0;
-		        width:100%;
-		        z-index:20000;
-			}
-			#loading{
-		        height:auto;
-		        position:absolute;
-		        width: 300px;
-		        left:40%;
-		        top:40%;
-		        padding:2px;
-		        z-index:20001;
-	    	}
-		    #loading a {
-		        color:#225588;
-		    }
-		    #loading .loading-indicator{
-		        background:white;
-		        color:#444;
-		        font:bold 13px Helvetica, Arial, sans-serif;
-		        height:auto;
-		        margin:0;
-		        padding:10px;
-		        border: 1px solid black;
-		    }
-		    #loading-msg {
-		        font-size: 10px;
-		        font-weight: normal;
-		    }
-		    #loading-title{
-		    	font-size: 2em;
-		    	font-weight: bold;
-		    }
-        </style>
+
         <link rel="stylesheet" type="text/css" tal:attributes="href string:http://${pylonsHost}/lib/ext/Ext/resources/css/ext-all.css"/>
 	    <link rel="stylesheet" type="text/css" tal:attributes="href string:http://${pylonsHost}/lib/ext/Ext/resources/css/xtheme-gray.css"/>
 
@@ -516,7 +477,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
     <script type="text/javascript" tal:attributes="src string:http://${pylonsHost}/app/lib/App/UrbanMap.WMSCapabilitiesWindow.js"></script>
     <script type="text/javascript" tal:attributes="src string:http://${pylonsHost}/app/lib/App/UrbanMap.UrbanLayerNode.js"></script>
     <script type="text/javascript" tal:attributes="src string:http://${pylonsHost}/app/lib/App/UrbanMap.WMCReader.js"></script>
-       
+                
     <script type="text/javascript" tal:attributes="src string:http://${pylonsHost}/app/lib/App/urban-layout.js"></script>
     <script type="text/javascript" tal:attributes="src string:http://${pylonsHost}/app/lib/App/urban-map.js"></script>   
     <!-- debug mode (end) -->
