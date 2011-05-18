@@ -32,5 +32,15 @@ urbanEventTypes = {
                                      {'id': "urb-avis-technique-urbanisme", 'title': "Avis technique"},
                                     ),
                     },
+                    {
+                    'id': "dossier-incomplet-service-technique-voirie",
+                    'title': "Dossier incomplet du service technique voirie",
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 0,
+                    'TALCondition' : "",
+                    'podTemplates': (
+                                     {'id': "urb-dossier-incomplet-technique-voirie", 'title': "Dossier incomplet (service voirie)"},
+                                    ),
+                    },
                    ),
                    }
