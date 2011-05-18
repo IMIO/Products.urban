@@ -31,7 +31,7 @@
  <div metal:use-macro="here/urban_macros/macros/urbanPortalMessageMacro" />
 </tal:block>
 	<tal:block condition="context/getParcels">
-	<div tal:condition="context/getParcels" metal:use-macro="here/urban_macros/macros/urbanMapScript" />
+	<div metal:use-macro="here/urban_macros/macros/urbanMapScript" />
 	</tal:block>
 <h1 class="documentFirstHeading">
  <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
