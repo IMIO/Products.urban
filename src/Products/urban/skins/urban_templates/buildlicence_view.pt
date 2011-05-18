@@ -288,12 +288,9 @@
      <input type="hidden" id="map_initialized" value="0" />
     </form>
    <p i18n:translate="cartography" class="discreet">Cartography</p>
-   <table border=0 width=100%>
-       <tr>
-           <td width=70%><div id="urbanmapctn" style="width:1024px; height:800px"></div></td>
-           <td width=30%><iframe name="prcinfosframe" src="" width=100% height=500 scrolling=auto frameborder=0 > </iframe></td>
-       </tr>
-   </table>
+  
+   <div id="urbanmapctn" style="width:100%; height:800px"></div>
+   
    </tal:block>
 </dd>
 
