@@ -11,13 +11,6 @@
  -->
 
  <!-- ##code-section jsregistry.xml -->
- <javascript cacheable="True"
-             compression="safe"
-             cookable="True"
-             enabled="True"
-             expression=""
-             id="mapjsglobals.js"
-             inline="False"/>
  <!-- ##/code-section jsregistry.xml -->
 
 </object>
