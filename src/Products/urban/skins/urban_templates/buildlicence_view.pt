@@ -11,7 +11,7 @@
 <tal:block condition="context/getParcels">
 
 <div metal:fill-slot="style_slot">
-<!--div metal:use-macro="here/urban_macros/macros/urbanMapCSS" /-->
+	<div metal:use-macro="here/urban_macros/macros/urbanMapCSS" />
 </div>
 <div metal:fill-slot="javascript_head_slot" tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
 
@@ -30,7 +30,19 @@
 <tal:block condition="python: not parcels or not applicants">
  <div metal:use-macro="here/urban_macros/macros/urbanPortalMessageMacro" />
 </tal:block>
+    <div id="loading-mask" style=""></div> 
+	<div id="loading"> 
+	    <div class="loading-indicator">
+	    	<img src="app/img/geode_small.png" alt="geode" width="50" style="margin-right:8px;float:left;vertical-align:top;"/>
 
+	    	<span id="loading-title">UrbanMap</span><br/>
+	    	<!--<br style="clear: both"/>-->
+	    	<a href="http://www.communesplone.org/">Communes&nbsp;Plone</a>
+	    	<br style="clear: both"/>
+	    	<span id="loading-msg">Chargement des styles et images...</span>
+	    </div> 
+	</div> 
+	<div metal:use-macro="here/urban_macros/macros/urbanMapScript" />
 <h1 class="documentFirstHeading">
  <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
  <span tal:replace="here/Title" tal:omit-tag="">Title</span>
