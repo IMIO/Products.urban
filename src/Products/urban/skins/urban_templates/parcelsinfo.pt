@@ -1,13 +1,4 @@
 <metal:block use-macro="here/global_defines/macros/defines" />
-<html i18n:domain="urban">
-<head>
-<link tal:replace="structure provider:plone.resourceregistries.styles"/>
-<link tal:replace="structure provider:plone.resourceregistries.scripts"/>
-<link tal:replace="structure provider:plone.resourceregistries.kineticstylesheets"/>
-
-</head>
-
-<body onload="activateCollapsibles()">
 
 <tal:block define="tmpcapakeys request/capakey|nothing; capakeys python: hasattr(tmpcapakeys, 'isalpha') and [tmpcapakeys,] or tmpcapakeys" repeat="capakey capakeys">
 
@@ -67,8 +58,3 @@
 
 
 </tal:block>
-
-
-
-</body>
-</html>

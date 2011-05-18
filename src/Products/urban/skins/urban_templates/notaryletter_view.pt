@@ -7,18 +7,17 @@
              tal:define="global parcels context/getParcels" />
 
 <head>
-<tal:block condition="context/getParcels">
-<div metal:fill-slot="javascript_head_slot" tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
-    <script type="text/javascript" tal:attributes="src python:'portal_skins/openlayers/OpenLayers.js'"></script>
-    <script type="text/javascript" src="mapjsglobals.js"></script>
-    <script tal:content="python: 'function init() { ' + context.portal_urban.initMap(context) + '};'"></script>
+<div tal:condition="context/getParcels" metal:fill-slot="style_slot" >
+	<div metal:use-macro="here/urban_macros/macros/urbanMapCSS" />
 </div>
-</tal:block>
+<div tal:condition="context/getParcels" metal:fill-slot="javascript_head_slot" tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
+    <div metal:use-macro="here/urban_macros/macros/urbanMapScript" />
+</div>
 </head>
 
 <body>
 
-<div metal:fill-slot="main" onmouseover="init()">
+<div metal:fill-slot="main">
 <metal:main_macro define-macro="main">
     <metal:body define-macro="body_macro" tal:define="applicants context/getApplicants;">
 
@@ -109,12 +108,7 @@
     <input type="hidden" id="map_initialized" value="0" />
    </form>
    <p i18n:translate="cartography" class="discreet">Cartography</p>
-   <table border=0 width=100%>
-       <tr>
-           <td width=70%><div id="map" class="smallmap"></div></td>
-           <td width=30%><iframe name="prcinfosframe" src="" width=100% height=500 scrolling=auto frameborder=0 ></iframe></td>
-       </tr>
-   </table>
+   <div id="urbanmapctn" style="width:100%; height:800px"></div>
    </tal:block>
 
   </td>
