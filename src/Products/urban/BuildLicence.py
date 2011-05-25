@@ -161,6 +161,42 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    TextField(
+        name='roadTechnicalAdvice',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Roadtechnicaladvice',
+            label_msgid='urban_label_roadTechnicalAdvice',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        schemata='urban_road',
+        default_output_type='text/html',
+    ),
+    TextField(
+        name='locationTechnicalAdvice',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Locationtechnicaladvice',
+            label_msgid='urban_label_locationTechnicalAdvice',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        schemata='urban_location',
+        default_output_type='text/html',
+    ),
+    TextField(
+        name='pebTechnicalAdvice',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Pebtechnicaladvice',
+            label_msgid='urban_label_pebTechnicalAdvice',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        schemata='urban_peb',
+        default_output_type='text/html',
+    ),
     ReferenceField(
         name='architects',
         widget=ReferenceBrowserWidget(
@@ -361,7 +397,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
        Finalizes the type schema to alter some fields
     """
     schema.moveField('pca', after='isInPCA')
-    schema.moveField('roadAdaptation', after='architects')
+    schema.moveField('roadAdaptation', before='roadTechnicalAdvice')
     schema.moveField('licenceSubject', after='title')
     schema.moveField('reference', after='licenceSubject')
     schema.moveField('architects', after='reference')

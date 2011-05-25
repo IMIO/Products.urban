@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-05-12 13:40+0000\n"
+"POT-Creation-Date: 2011-05-25 09:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1291,6 +1291,11 @@ msgstr ""
 msgid "urban_label_localityName"
 msgstr ""
 
+#. Default: "Locationtechnicaladvice"
+#: BuildLicence.py
+msgid "urban_label_locationTechnicalAdvice"
+msgstr ""
+
 #. Default: "Usage"
 #: Lot.py
 msgid "urban_label_lotusage"
@@ -1403,6 +1408,11 @@ msgstr ""
 msgid "urban_label_pebStudy"
 msgstr ""
 
+#. Default: "Pebtechnicaladvice"
+#: BuildLicence.py
+msgid "urban_label_pebTechnicalAdvice"
+msgstr ""
+
 #. Default: "Pebtype"
 #: BuildLicence.py
 msgid "urban_label_pebType"
@@ -1501,6 +1511,11 @@ msgstr ""
 #. Default: "Roadmodification"
 #: GenericLicence.py
 msgid "urban_label_roadModification"
+msgstr ""
+
+#. Default: "Roadtechnicaladvice"
+#: BuildLicence.py
+msgid "urban_label_roadTechnicalAdvice"
 msgstr ""
 
 #. Default: "Roadtype"

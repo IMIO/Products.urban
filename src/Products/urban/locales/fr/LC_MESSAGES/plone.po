@@ -183,7 +183,7 @@ msgid "label_schema_urban_investigation_and_advices"
 msgstr "Enquête et avis"
 
 msgid "label_schema_urban_location"
-msgstr "Zonage"
+msgstr "Urbanisme"
 
 msgid "label_schema_urban_peb"
 msgstr "PEB"
