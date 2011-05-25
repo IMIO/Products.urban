@@ -12,7 +12,8 @@
                        member context/@@plone_portal_state/member; 
                        border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
                        dummy python:request.set(border, 1);
-                       useTabbing python: context.portal_urban.getUseTabbing()">
+                       useTabbing python: context.portal_urban.getUseTabbing();
+                       putils context/plone_utils">
 
         <div tal:condition="not: useTabbing">
             <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_description">Description</legend></strong>
