@@ -161,7 +161,7 @@
 <p>&nbsp;</p>
 <table>
  <tr>
-  <td valign="top"><u><b><span i18n:translate="urban_label_roadType">Road type</span> :</b></u></td>
+  <td valign="top" width="200"><u><b><span i18n:translate="urban_label_roadType">Road type</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadType', mode='view')" /></td>
  </tr>
@@ -184,6 +184,11 @@
   <td valign="top"><u><b><span i18n:translate="urban_label_pash">PASH</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('pash', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_drainageTechnicalRequirements">Drainage technical requirements</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('drainageTechnicalRequirements', mode='view')" /><span tal:condition="not: context/getDrainageTechnicalRequirements " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_implantation">Implantation</span> :</b></u></td>
@@ -656,11 +661,12 @@
  </table>
 </fieldset>
 </td>
+</tr><tr>
 <td valign="top">
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_road"></legend></strong>
 <table>
  <tr>
-  <td valign="top"><u><b><span i18n:translate="urban_label_roadType">Road type</span> :</b></u></td>
+  <td valign="top" width="200"><u><b><span i18n:translate="urban_label_roadType">Road type</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadType', mode='view')" /></td>
  </tr>
@@ -683,6 +689,11 @@
   <td valign="top"><u><b><span i18n:translate="urban_label_pash">PASH</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('pash', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_drainageTechnicalRequirements">Drainage technical requirements</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('drainageTechnicalRequirements', mode='view')" /><span tal:condition="not: context/getDrainageTechnicalRequirements " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_implantation">Implantation</span> :</b></u></td>

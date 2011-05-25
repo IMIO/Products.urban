@@ -28,12 +28,13 @@ from Products.urban.config import *
 from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 import warnings
 from DateTime import DateTime
+from zope.i18n import translate as _
 from Products.CMFCore.utils import getToolByName
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
 from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
-from zope.i18n import translate as _
+from Products.urban.utils import drainageTechnicalRequirementsDefaultValue
 ##/code-section module-header
 
 schema = Schema((
@@ -329,6 +330,19 @@ schema = Schema((
         schemata='urban_road',
         multiValued=1,
         vocabulary='listPashs',
+    ),
+    TextField(
+        name='drainageTechnicalRequirements',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Drainagetechnicalrequirements',
+            label_msgid='urban_label_drainageTechnicalRequirements',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default=drainageTechnicalRequirementsDefaultValue,
+        schemata='urban_road',
+        default_output_type='text/html',
     ),
     StringField(
         name='pca',
