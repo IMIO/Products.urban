@@ -16,7 +16,6 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
-from zope.i18n import translate
 
 import interfaces
 
@@ -26,7 +25,7 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 import cgi
-
+from zope.i18n import translate
 from Products.validation.interfaces.IValidator import IValidator
 from Products.validation import validation
 from Products.CMFCore.utils import getToolByName
