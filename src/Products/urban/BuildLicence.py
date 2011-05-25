@@ -329,18 +329,12 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
             vocab.append((elt[0], elt[1]))
         return DisplayList(tuple(vocab))
 
-    security.declarePublic('architectsBaseQuery')
-    def architectsBaseQuery(self):
+    security.declarePublic('architectsStartupDirectory')
+    def architectsStartupDirectory(self):
         """
-          Do add some details for the base query
-          Here, we want to be sure that architects are alphabetically sorted
+          Return the folder were are stored the architects
         """
-        portal = getToolByName(self, 'portal_url').getPortalObject()
-        rootPath = '/'.join(portal.getPhysicalPath())
-        dict = {}
-        dict['path'] = {'query':'%s/urban/architects' % (rootPath)}
-        dict['sort_on'] = 'sortable_title'
-        return dict
+        return '/urban/architects'
 
     security.declarePublic('askFD')
     def askFD(self):
