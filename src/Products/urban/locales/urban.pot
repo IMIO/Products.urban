@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-05-25 11:29+0000\n"
+"POT-Creation-Date: 2011-05-25 14:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -656,7 +656,6 @@ msgid "request_submitted_by_notary"
 msgstr ""
 
 #. Default: "${name} residing at ${address}"
-#. Default: "residing"
 #: Contact.py
 msgid "residing"
 msgstr ""
@@ -1053,6 +1052,11 @@ msgstr ""
 #. Default: "Divisionsubject"
 #: Division.py
 msgid "urban_label_divisionSubject"
+msgstr ""
+
+#. Default: "Drainagetechnicalrequirements"
+#: GenericLicence.py
+msgid "urban_label_drainageTechnicalRequirements"
 msgstr ""
 
 #. Default: "Email"
