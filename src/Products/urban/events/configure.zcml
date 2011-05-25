@@ -9,7 +9,5 @@
   <subscriber for="..interfaces.IPortionOut
                    zope.app.container.interfaces.IObjectRemovedEvent"
               handler=".portionOutEvents.onDelete" />
-  <subscriber for="..interfaces.IApplicant
-                   zope.app.container.interfaces.IObjectRemovedEvent"
-              handler=".applicantEvents.onDelete" />              
+              
 </configure>
