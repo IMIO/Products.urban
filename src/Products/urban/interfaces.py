@@ -7,9 +7,6 @@ from zope.interface.interfaces import IInterface
 from Products.urban import UrbanMessage as _
 
 
-class IApplicant(Interface):
-    """Marker interface for .Applicant.Applicant
-    """
 class IProprietary(Interface):
     """Marker interface for .Proprietary.Proprietary
     """
