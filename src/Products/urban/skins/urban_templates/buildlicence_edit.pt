@@ -39,8 +39,9 @@
              <metal:myfield use-macro="python:here.widget('roadEquipments', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('floodingLevel', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('pash', mode='edit')" />
-             <metal:myfield use-macro="python:here.widget('roadAdaptation', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('implantation', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('roadAdaptation', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('roadTechnicalAdvice', mode='edit')" />
             </fieldset>
             <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_location">Location</legend></strong>
              <metal:myfield use-macro="python:here.widget('folderZone', mode='edit')" />
@@ -54,6 +55,7 @@
              <metal:myfield use-macro="python:here.widget('protectedBuildingDetails', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('SSC', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('RCU', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('locationTechnicalAdvice', mode='edit')" />
             </fieldset>
             <fieldset>
              <strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices">Investigation and advices</legend></strong>
@@ -77,6 +79,7 @@
              <metal:myfield use-macro="python:here.widget('pebType', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('pebDetails', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('pebStudy', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('pebTechnicalAdvice', mode='edit')" />
             </fieldset>
         </div>
 

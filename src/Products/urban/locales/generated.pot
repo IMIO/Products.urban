@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed May 25 11:20:15 2011\n"
-"PO-Revision-Date: Wed May 25 11:20:15 2011\n"
+"POT-Creation-Date: Wed May 25 15:28:09 2011\n"
+"PO-Revision-Date: Wed May 25 15:28:09 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -705,9 +705,19 @@ msgstr ""
 msgid "urban_label_society"
 msgstr ""
 
+#. Default: "Solicitlocationopinionsto"
+#: GenericLicence.py
+msgid "urban_label_solicitLocationOpinionsTo"
+msgstr ""
+
 #. Default: "Solicitopinionsto"
 #: GenericLicence.py
 msgid "urban_label_solicitOpinionsTo"
+msgstr ""
+
+#. Default: "Solicitroadopinionsto"
+#: GenericLicence.py
+msgid "urban_label_solicitRoadOpinionsTo"
 msgstr ""
 
 #. Default: "Specialfunctionname"

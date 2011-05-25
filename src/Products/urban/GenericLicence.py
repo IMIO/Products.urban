@@ -369,6 +369,30 @@ schema = Schema((
         schemata='urban_road',
         vocabulary='listFloodingLevels',
     ),
+    LinesField(
+        name='solicitRoadOpinionsTo',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Solicitroadopinionsto',
+            label_msgid='urban_label_solicitRoadOpinionsTo',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=1,
+        vocabulary='listMakers',
+    ),
+    LinesField(
+        name='solicitLocationOpinionsTo',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Solicitlocationopinionsto',
+            label_msgid='urban_label_solicitLocationOpinionsTo',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary='listMakers',
+    ),
     ReferenceField(
         name='foldermanagers',
         widget=ReferenceBrowserWidget(

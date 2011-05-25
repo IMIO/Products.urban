@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-05-25 09:55+0000\n"
+"POT-Creation-Date: 2011-05-25 11:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1538,9 +1538,19 @@ msgstr ""
 msgid "urban_label_society"
 msgstr ""
 
+#. Default: "Solicitlocationopinionsto"
+#: GenericLicence.py
+msgid "urban_label_solicitLocationOpinionsTo"
+msgstr ""
+
 #. Default: "Solicitopinionsto"
 #: GenericLicence.py
 msgid "urban_label_solicitOpinionsTo"
+msgstr ""
+
+#. Default: "Solicitroadopinionsto"
+#: GenericLicence.py
+msgid "urban_label_solicitRoadOpinionsTo"
 msgstr ""
 
 #. Default: "Specialfunctionname"

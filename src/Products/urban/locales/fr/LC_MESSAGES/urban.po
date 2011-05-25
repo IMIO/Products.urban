@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-05-25 09:55+0000\n"
+"POT-Creation-Date: 2011-05-25 11:29+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -656,7 +656,7 @@ msgstr "Dossier introduit par ${notary} pour ${applicant}"
 msgid "request_submitted_by_notary"
 msgstr "Dossier introduit par ${notary}"
 
-#. Default: "${name} residing at ${address}"
+#. Default: "residing"
 #: Contact.py
 #, fuzzy
 msgid "residing"
@@ -1542,10 +1542,20 @@ msgstr "Section"
 msgid "urban_label_society"
 msgstr "Société"
 
+#. Default: "Solicitlocationopinionsto"
+#: GenericLicence.py
+msgid "urban_label_solicitLocationOpinionsTo"
+msgstr "Un avis sera solicité par l'urbanisme à"
+
 #. Default: "Solicitopinionsto"
 #: GenericLicence.py
 msgid "urban_label_solicitOpinionsTo"
 msgstr "Un avis sera sollicité à"
+
+#. Default: "Solicitroadopinionsto"
+#: GenericLicence.py
+msgid "urban_label_solicitRoadOpinionsTo"
+msgstr "Un avis sera solicité par la voirie à"
 
 #. Default: "Specialfunctionname"
 #: UrbanEventType.py

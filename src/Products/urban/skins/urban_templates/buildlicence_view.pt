@@ -195,6 +195,16 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadAdaptation', mode='view')" /></td>
  </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_solicitRoadOpinionsTo">Solicit road opinions to</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('solicitRoadOpinionsTo', mode='view')" /><span tal:condition="not: context/getSolicitRoadOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_roadTechnicalAdvice">Road technical advice</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('roadTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getRoadTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
 </table>
 
 <dt class="formTab" id="fieldsetlegend-urban_location" i18n:domain="plone" i18n:translate="label_schema_urban_location"><span>Location</span></dt>
@@ -251,6 +261,16 @@
    <td valign="top"><u><b><span i18n:translate="urban_label_RCU">RCU</span> :</b></u></td>
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('RCU', mode='view')" /><span tal:condition="not: python: context.RCU" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
+  <tr>
+   <td valign="top"><u><b><span i18n:translate="urban_label_solicitLocationOpinionsTo">Solicit location opinions to</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('solicitLocationOpinionsTo', mode='view')" /><span tal:condition="not: context/getSolicitLocationOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
+  <tr>
+   <td valign="top"><u><b><span i18n:translate="urban_label_locationTechnicalAdvice">Location technical advice</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getLocationTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
   </tr>
  </table>
 
@@ -354,6 +374,11 @@
   <td width="49%" valign="top"><u><b><span i18n:translate="urban_label_pebStudy">PEB study</span> :</b></u></td>
   <td width="2%"></td>
   <td width="49%" valign="top"><metal:myfield use-macro="python:here.widget('pebStudy', mode='view')" /></td>
+ </tr>
+ <tr>
+  <td width="49%" valign="top"><u><b><span i18n:translate="urban_label_pebTechnicalAdvice">PEB technical advice</span> :</b></u></td>
+  <td width="2%"></td>
+  <td width="49%" valign="top"><metal:myfield use-macro="python:here.widget('pebTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getPebTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  </table>
 </dd>
@@ -618,6 +643,16 @@
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('RCU', mode='view')" /><span tal:condition="not: python: context.RCU" class="discreet" i18n:translate="content_none">None</span></td>
   </tr>
+  <tr>
+   <td valign="top"><u><b><span i18n:translate="urban_label_solicitLocationOpinionsTo">Solicit location opinions to</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('solicitLocationOpinionsTo', mode='view')" /><span tal:condition="not: context/getSolicitLocationOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
+  <tr>
+   <td valign="top"><u><b><span i18n:translate="urban_label_locationTechnicalAdvice">Location technical advice</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getLocationTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
  </table>
 </fieldset>
 </td>
@@ -659,6 +694,16 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadAdaptation', mode='view')" /></td>
  </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_solicitRoadOpinionsTo">Solicit road opinions to</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('solicitRoadOpinionsTo', mode='view')" /><span tal:condition="not: context/getSolicitRoadOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_roadTechnicalAdvice">Road technical advice</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('roadTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getRoadTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
 </table>
 </fieldset>
 </td></tr>
@@ -680,6 +725,11 @@
   <td width="49%" valign="top"><u><b><span i18n:translate="urban_label_pebStudy">PEB study</span> :</b></u></td>
   <td width="2%"></td>
   <td width="49%" valign="top"><metal:myfield use-macro="python:here.widget('pebStudy', mode='view')" /></td>
+ </tr>
+ <tr>
+  <td width="49%" valign="top"><u><b><span i18n:translate="urban_label_pebTechnicalAdvice">PEB technical advice</span> :</b></u></td>
+  <td width="2%"></td>
+  <td width="49%" valign="top"><metal:myfield use-macro="python:here.widget('pebTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getPebTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  </table>
 </fieldset>
