@@ -34,7 +34,8 @@ from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
 from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
-from Products.urban.utils import drainageTechnicalRequirementsDefaultValue
+from Products.urban.utils import drainageTechnicalRequirementsDefaultValue, \
+equipmentAndRoadRequirementsDefaultValue
 ##/code-section module-header
 
 schema = Schema((
@@ -341,6 +342,19 @@ schema = Schema((
         ),
         default_content_type='text/html',
         default=drainageTechnicalRequirementsDefaultValue,
+        schemata='urban_road',
+        default_output_type='text/html',
+    ),
+    TextField(
+        name='equipmentAndRoadRequirements',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Equipmentandroadrequirements',
+            label_msgid='urban_label_equipmentAndRoadRequirements',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default=equipmentAndRoadRequirementsDefaultValue,
         schemata='urban_road',
         default_output_type='text/html',
     ),

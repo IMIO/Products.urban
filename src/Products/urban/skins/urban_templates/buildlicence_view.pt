@@ -191,6 +191,11 @@
   <td valign="top"><metal:myfield use-macro="python:here.widget('drainageTechnicalRequirements', mode='view')" /><span tal:condition="not: context/getDrainageTechnicalRequirements " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_equipmentAndRoadRequirements">Equipment and road requirements</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('equipmentAndRoadRequirements', mode='view')" /><span tal:condition="not: context/getEquipmentAndRoadRequirements " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_implantation">Implantation</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('implantation', mode='view')" /></td>
@@ -660,9 +665,8 @@
   </tr>
  </table>
 </fieldset>
-</td>
-</tr><tr>
-<td valign="top">
+</td></tr>
+<tr><td valign="top">
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_road"></legend></strong>
 <table>
  <tr>
@@ -694,6 +698,11 @@
   <td valign="top"><u><b><span i18n:translate="urban_label_drainageTechnicalRequirements">Drainage technical requirements</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('drainageTechnicalRequirements', mode='view')" /><span tal:condition="not: context/getDrainageTechnicalRequirements " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_equipmentAndRoadRequirements">Equipment and road requirements</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('equipmentAndRoadRequirements', mode='view')" /><span tal:condition="not: context/getEquipmentAndRoadRequirements " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_implantation">Implantation</span> :</b></u></td>
