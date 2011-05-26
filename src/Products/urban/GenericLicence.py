@@ -729,10 +729,10 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, Bro
            Update the title to clearly identify the licence
         """
         if self.getApplicants():
-            applicant = unicode(self.getApplicants()[0].getName1() + " " + self.getApplicants()[0].getName2(), 'utf-8')
+            applicantTitle = self.getApplicants()[0].Title()
         else:
-            applicant = _('no_applicant_defined', 'urban', context=self.REQUEST)
-        title = str(self.getReference())+ " - " +unicode(self.getLicenceSubject(), 'utf-8') + " - " + applicant
+            applicantTitle = _('no_applicant_defined', 'urban', context=self.REQUEST)
+        title = "%s - %s - %s" % (str(self.getReference()), self.getLicenceSubject(), applicantTitle)
         self.setTitle(title)
         self.reindexObject()
 
