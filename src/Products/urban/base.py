@@ -297,7 +297,7 @@ class UrbanBase:
 #            nis section (radical 0x) / (bis 0x) (exposant si blanc _)  (puissance 00x) 
             try:
                 capaKey="%s%s%04d/%02d%s%03d"%(divisioncode,section,int(radical),int(bis),exposant,int(puissance))
-            except:
+            except ValueError:
                 capaKey=""
             listCapaKey.append(capaKey)
         return listCapaKey
