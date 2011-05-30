@@ -752,7 +752,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, Bro
         if not applicants:
             #we warn the user that no applicant have been added...
             messages.append(applicant_message)
-
         return messages
 
 

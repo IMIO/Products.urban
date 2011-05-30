@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon May 30 11:01:00 2011\n"
-"PO-Revision-Date: Mon May 30 11:01:00 2011\n"
+"POT-Creation-Date: Mon May 30 15:41:59 2011\n"
+"PO-Revision-Date: Mon May 30 15:41:59 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -74,6 +74,11 @@ msgstr ""
 #. Default: "Number of the lots, ..."
 #: BuildLicence.py
 msgid "urban_descr_subdivisionDetails"
+msgstr ""
+
+#. Default: "If checked, an additional paragraph will be added in the licence document"
+#: BuildLicence.py
+msgid "urban_help_dgrneUnderground"
 msgstr ""
 
 #. Default: "urban_descr_termKey"
@@ -296,6 +301,11 @@ msgstr ""
 #: Equipment.py
 #: GenericLicence.py
 msgid "urban_label_description"
+msgstr ""
+
+#. Default: "Dgrneunderground"
+#: BuildLicence.py
+msgid "urban_label_dgrneUnderground"
 msgstr ""
 
 #. Default: "Division"

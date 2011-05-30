@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-05-25 14:44+0000\n"
+"POT-Creation-Date: 2011-05-30 13:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -761,6 +761,11 @@ msgstr ""
 msgid "urban_descr_subdivisionDetails"
 msgstr ""
 
+#. Default: "If checked, a additional paragraph will be added in the licence document"
+#: BuildLicence.py
+msgid "urban_help_dgrneUnderground"
+msgstr ""
+
 #. Default: "urban_descr_termKey"
 #: UrbanVocabularyTerm.py
 msgid "urban_help_termKey"
@@ -1024,6 +1029,11 @@ msgstr ""
 #: Declaration.py
 #: GenericLicence.py
 msgid "urban_label_description"
+msgstr ""
+
+#. Default: "Dgrneunderground"
+#: BuildLicence.py
+msgid "urban_label_dgrneUnderground"
 msgstr ""
 
 #. Default: "Division"

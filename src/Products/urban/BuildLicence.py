@@ -197,6 +197,18 @@ schema = Schema((
         schemata='urban_peb',
         default_output_type='text/html',
     ),
+    BooleanField(
+        name='dgrneUnderground',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            description="If checked, an additional paragraph will be added in the licence document",
+            label='Dgrneunderground',
+            label_msgid='urban_label_dgrneUnderground',
+            description_msgid='urban_help_dgrneUnderground',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+    ),
     ReferenceField(
         name='architects',
         widget=ReferenceBrowserWidget(
@@ -406,6 +418,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('pca', after='isInPCA')
     schema.moveField('description', after='usage')
     schema.moveField('pash', after='description')
+    schema.moveField('dgrneUnderground', after='floodingLevel')
     return schema
 
 finalizeSchema(BuildLicence_schema)

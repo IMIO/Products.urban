@@ -42,7 +42,6 @@
 <dl class="formTabs enableFormTabbing">
     <dt class="formTab" tal:attributes="class python: test(context.getApplicants(), 'formTab', 'formTab notify')" id="fieldsetlegend-urban_description" i18n:domain="plone" i18n:translate="label_schema_urban_description"><span>Description</span></dt>
     <dd id="fieldset-urban_description">
-<p>&nbsp;</p>
 <fieldset><legend><strong tal:content="context/getLicenceSubject">Subject</strong></legend>
 <span class="discreet" tal:content="structure context/Description">Description</span>
 </fieldset>
@@ -158,7 +157,6 @@
  
 <dt class="formTab" id="fieldsetlegend-urban_road" i18n:domain="plone" i18n:translate="label_schema_urban_road"><span>Road</span></dt>
 <dd id="fieldset-urban_road">
-<p>&nbsp;</p>
 <table>
  <tr>
   <td valign="top" width="200"><u><b><span i18n:translate="urban_label_roadType">Road type</span> :</b></u></td>
@@ -168,22 +166,27 @@
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_roadCoating">Road coating</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('roadCoating', mode='view')" /><span tal:condition="not: python: context.roadCoating " class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('roadCoating', mode='view')" /><span tal:condition="not: context/roadCoating" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_roadEquipments">Road equipments</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('roadEquipments', mode='view')" /><span tal:condition="not: python: context.roadEquipments " class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('roadEquipments', mode='view')" /><span tal:condition="not: context/getRoadEquipments" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /><span tal:condition="not: python: context.floodingLevel " class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /><span tal:condition="not: context/getFloodingLevel" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_dgrneUnderground">DGRNE Underground</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='view')" /><span tal:condition="not: context/getDgrneUnderground" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_pash">PASH</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('pash', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('pash', mode='view')" /><span tal:condition="not: context/getPash" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_drainageTechnicalRequirements">Drainage technical requirements</span> :</b></u></td>
@@ -220,8 +223,6 @@
 <dt class="formTab" id="fieldsetlegend-urban_location" i18n:domain="plone" i18n:translate="label_schema_urban_location"><span>Location</span></dt>
 <!--  <dd id="fieldset-urban_location" onmouseover="init()"> -->
 <dd id="fieldset-urban_location">
-
-<p>&nbsp;</p>
 <table>
  <tr>
   <td valign="top"><b><u><span i18n:translate="urban_label_folderZone">Folder zone</span> :</u></b></td>
@@ -326,7 +327,6 @@
 
 <dt class="formTab" id="fieldsetlegend-urban_investigation_and_advices" i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices"><span>Investigation and advices</span></dt>
 <dd id="fieldset-urban_investigation_and_advices">
-<p>&nbsp;</p>
 <table>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_derogation">Derogations</span> :</b></u></td>
@@ -368,7 +368,6 @@
 
 <dt class="formTab" id="fieldsetlegend-urban_peb" i18n:domain="plone" i18n:translate="label_schema_urban_peb"><span>PEB</span></dt>
 <dd id="fieldset-urban_peb">
-<p>&nbsp;</p>
  <table cellspacing=0 cellpadding=0 width=100%>
  <tr>
   <td width="49%" valign="top"><u><b><span i18n:translate="urban_label_pebType">PEB type</span> :</b></u></td>
@@ -395,7 +394,6 @@
 
 <dt class="formTab" id="fieldsetlegend-urban_events" i18n:domain="plone" i18n:translate="label_schema_urban_events"><span>Events</span></dt>
 <dd id="fieldset-urban_events">
-<p>&nbsp;</p>
 <fieldset><strong><legend i18n:translate="folder_events">Folder events</legend></strong>
  <table cellspacing=0 cellpadding=0 width=100%>
  <tr>
@@ -679,6 +677,11 @@
   <td valign="top"><u><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /><span tal:condition="not: python: context.floodingLevel " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_dgrneUnderground">DGRNE Underground</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='view')" /><span tal:condition="not: context/getDgrneUnderground" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_pash">PASH</span> :</b></u></td>

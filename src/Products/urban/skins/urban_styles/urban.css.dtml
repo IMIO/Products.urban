@@ -85,6 +85,8 @@ legend {
   background-color: transparent;
 }
 
-
+ul.formTabs {
+margin-bottom: -2em !important;
+}
 
 /* </dtml-with> */

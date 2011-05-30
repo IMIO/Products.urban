@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-05-25 14:44+0000\n"
+"POT-Creation-Date: 2011-05-30 13:39+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -762,6 +762,11 @@ msgstr "Entrez les 4 coordonnées des coins de la carte en séparant les valeurs
 msgid "urban_descr_subdivisionDetails"
 msgstr "Numéro des lots, ..."
 
+#. Default: "If checked, a additional paragraph will be added in the licence document"
+#: BuildLicence.py
+msgid "urban_help_dgrneUnderground"
+msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
+
 #. Default: "urban_descr_termKey"
 #: UrbanVocabularyTerm.py
 msgid "urban_help_termKey"
@@ -1027,6 +1032,11 @@ msgstr "Détails concernant les dérogations"
 #: GenericLicence.py
 msgid "urban_label_description"
 msgstr "Observations"
+
+#. Default: "Dgrneunderground"
+#: BuildLicence.py
+msgid "urban_label_dgrneUnderground"
+msgstr "DGRNE Sous-sol (joindre annexe 2 et 3)"
 
 #. Default: "Division"
 #: PortionOut.py

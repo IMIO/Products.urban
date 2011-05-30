@@ -38,6 +38,7 @@
              <metal:myfield use-macro="python:here.widget('roadCoating', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('roadEquipments', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('floodingLevel', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('pash', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('drainageTechnicalRequirements', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('equipmentAndRoadRequirements', mode='edit')" />
