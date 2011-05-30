@@ -11,7 +11,7 @@
 <tal:block condition="context/getParcels">
 
 <div metal:fill-slot="style_slot" >
-	<div metal:use-macro="here/urban_macros/macros/urbanMapCSS" />
+    <div metal:use-macro="here/urban_macros/macros/urbanMapCSS" />
 </div>
 <div metal:fill-slot="javascript_head_slot" tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
 
@@ -404,18 +404,9 @@
                      topic python: getattr(tool.topics, 'searchurbanevents');
                      path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
                      dummy python: context.setPathCritValue(path_crit, context.UID());
-                     showActions python: True;"
-         tal:condition="python: not context.portal_quickinstaller.isProductInstalled('PloneTask') or not context.portal_urban.getUsePloneTask()">
+                     showActions python: True;">
      <metal:listing use-macro="here/urban_macros/macros/listing" />
     </div>
-    <!-- Begin PloneTask integration -->
-    <tal:block define="tool python: getattr(context, 'portal_urban');
-                       topic python: getattr(tool.topics, 'searchurbanevents');
-                       path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
-                       dummy python: context.setPathCritValue(path_crit, context.UID());">
-    <metal:listing use-macro="here/urban_macros/macros/integratePloneTask" />
-    </tal:block>
-    <!-- End PloneTask integration -->
   </td>
  </tr>
  <tr>
@@ -762,18 +753,9 @@
                      topic python: getattr(tool.topics, 'searchurbanevents');
                      path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
                      dummy python: context.setPathCritValue(path_crit, context.UID());
-                     showActions python: True;"
-         tal:condition="python: not context.portal_quickinstaller.isProductInstalled('PloneTask') or not context.portal_urban.getUsePloneTask()">
+                     showActions python: True;">
      <metal:listing use-macro="here/urban_macros/macros/listing" />
     </div>
-    <!-- Begin PloneTask integration -->
-    <tal:block define="tool python: getattr(context, 'portal_urban');
-                       topic python: getattr(tool.topics, 'searchurbanevents');
-                       path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
-                       dummy python: context.setPathCritValue(path_crit, context.UID());">
-    <metal:listing use-macro="here/urban_macros/macros/integratePloneTask" />
-    </tal:block>
-    <!-- End PloneTask integration -->
   </td>
  </tr>
  <tr>

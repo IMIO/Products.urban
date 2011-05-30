@@ -388,49 +388,14 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
 </table>
 </div>
 
-<div metal:define-macro="integratePloneTask" i18n:domain="urban">
-<!-- Begin PloneTask integration -->
-<tal:block define="tasks python: topic.queryCatalog(batch=True);
-                   batch tasks;"
-           condition="python: context.portal_quickinstaller.isProductInstalled('PloneTask') and context.portal_urban.getUsePloneTask()">
-<!-- div metal:use-macro="here/task_macros/macros/taskList" / -->
-<div tal:content="structure python: context.portal_plonetask.getGanttChart(tasks)" />
-<p class="discreet"
-    tal:condition="python: not tasks"
-    i18n:domain="urban"
-    i18n:translate="urban_no_event_added">
-    There are currently no event for this element.
-</p>
-    <!-- Navigation -->
-    <div metal:use-macro="here/batch_macros/macros/navigation" />
-<fieldset><strong><legend i18n:translate="legend">Legend</legend></strong>
-<table cellspacing=0 cellpadding=0>
-<tr>
- <td><span style="background: green; color: white;" i18n:translate="tasks_in_progress">Tasks in progress</span></td>
- <td width=10px></td>
- <td><span style="background: orange; color: white;" i18n:translate="to_watch_tasks">Tasks to watch (75% of the given delay is exceeded)</span></td>
- <td width=10px></td>
- <td><span style="background: red; color: white;" i18n:translate="late_tasks">Late tasks</span></td>
- <td width=10px></td>
- <td><span style="background: grey; color: white;" i18n:translate="closed_tasks">Closed tasks</span></td>
- <td width=10px></td>
- <td><img src="accept.png"> <span i18n:translate="effective_closing_date">Effective closing date</span></td>
-</tr>
-</table>
-</fieldset>
-</tal:block>
-<!-- End PloneTask integration -->
-</div>
-
-
 <div metal:define-macro="urbanMapCSS" tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
 
         <link rel="stylesheet" type="text/css" tal:attributes="href string:http://${pylonsHost}/lib/ext/Ext/resources/css/ext-all.css"/>
-	    <link rel="stylesheet" type="text/css" tal:attributes="href string:http://${pylonsHost}/lib/ext/Ext/resources/css/xtheme-gray.css"/>
+        <link rel="stylesheet" type="text/css" tal:attributes="href string:http://${pylonsHost}/lib/ext/Ext/resources/css/xtheme-gray.css"/>
 
-	    <link rel="stylesheet" type="text/css" tal:attributes="href string:http://${pylonsHost}/lib/openlayers/theme/default/style.css"/>
-	    <link rel="stylesheet" type="text/css" tal:attributes="href string:http://${pylonsHost}/lib/ext/Ext/ux/grid.RowActions.css"/>
-	    <link rel="stylesheet" type="text/css" tal:attributes="href string:http://${pylonsHost}/app/css/main.css"/> 
+        <link rel="stylesheet" type="text/css" tal:attributes="href string:http://${pylonsHost}/lib/openlayers/theme/default/style.css"/>
+        <link rel="stylesheet" type="text/css" tal:attributes="href string:http://${pylonsHost}/lib/ext/Ext/ux/grid.RowActions.css"/>
+        <link rel="stylesheet" type="text/css" tal:attributes="href string:http://${pylonsHost}/app/css/main.css"/> 
 </div>
 
 <div metal:define-macro="urbanMapScript" tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">

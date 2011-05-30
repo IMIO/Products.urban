@@ -8,7 +8,7 @@
 
 <head>
 <div tal:condition="context/getParcels" metal:fill-slot="style_slot" >
-	<div metal:use-macro="here/urban_macros/macros/urbanMapCSS" />
+    <div metal:use-macro="here/urban_macros/macros/urbanMapCSS" />
 </div>
 <div tal:condition="context/getParcels" metal:fill-slot="javascript_head_slot" tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
     <div metal:use-macro="here/urban_macros/macros/urbanMapScript" />
@@ -173,24 +173,6 @@
  </tr>
  </table>
 </fieldset>
-
-<!-- Begin PloneTask integration -->
-<tal:block condition="python: tasks and context.portal_quickinstaller.isProductInstalled('PloneTask') and context.portal_urban.getUsePloneTask()"
-           define="tool python: getattr(context, 'portal_urban');
-                   topic python: getattr(tool.topics, 'searchurbanevents');
-                   path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
-                   dummy python: context.setPathCritValue(path_crit, context.UID());
-                   tasks topic/queryCatalog;">
-<!-- <div metal:use-macro="here/task_macros/macros/tasksList" /> -->
-<div tal:content="structure python: context.portal_plonetask.getGanttChart(tasks)" />
-<fieldset><strong><legend i18n:translate="legend">Legend</legend></strong>
-<span style="color: green;" i18n:translate="tasks_in_progress">Tasks in progress</span><br />
-<span style="color: orange;" i18n:translate="to_watch_tasks">Tasks to watch (75% of the given delay is exceeded)</span><br />
-<span style="color: red;" i18n:translate="late_tasks">Late tasks</span><br />
-<span style="color: grey;" i18n:translate="closed_tasks">Closed tasks</span>
-</fieldset>
-</tal:block>
-<!-- End PloneTask integration -->
 
 <div tal:replace="structure provider:plone.belowcontentbody" />
 

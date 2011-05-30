@@ -227,9 +227,6 @@ msgstr ""
 msgid "click_to_view_or_add"
 msgstr ""
 
-msgid "closed_tasks"
-msgstr ""
-
 msgid "concerned_parcels"
 msgstr ""
 
@@ -477,9 +474,6 @@ msgstr ""
 msgid "label_select_street"
 msgstr ""
 
-msgid "late_tasks"
-msgstr ""
-
 msgid "legend"
 msgstr ""
 
@@ -723,13 +717,6 @@ msgstr ""
 #. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here' and 'member' are available"
 #: UrbanEventType.py
 msgid "tal_condition_descr"
-msgstr ""
-
-# tasks
-msgid "tasks_in_progress"
-msgstr ""
-
-msgid "to_watch_tasks"
 msgstr ""
 
 # topics
@@ -1719,11 +1706,6 @@ msgid "urban_label_urbaneventtypes"
 msgstr ""
 
 msgid "urban_label_usage"
-msgstr ""
-
-#. Default: "Useplonetask"
-#: UrbanTool.py
-msgid "urban_label_usePloneTask"
 msgstr ""
 
 #. Default: "Usetabbing"

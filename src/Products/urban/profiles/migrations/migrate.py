@@ -9,6 +9,14 @@ logger = logging.getLogger('urban: migrations')
 def isNoturbanMigrationsProfile(context):
     return context.readDataFile("urban_migrations_marker.txt") is None
 
+def migrateToPlone4(context):
+    """
+      Launch every migration steps linked to the Plone4 version
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    migrateTool(context)
+
 def migrateToContact(context):
     """
       More portal_types are now based on Contact.  Migrate old instances
@@ -350,3 +358,16 @@ def addSpecificFeatures(context):
         newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-de-protection-art-209",title=u"Zone de protection (article 209 du CWATUPE)")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-inondable",title=u"Zone à risque inondable (plan P.L.U.I.E.S.)")
 
+def migrateTool(context):
+    """
+        Necessary adaptations about portal_urban
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+    tool = getToolByName(site, 'portal_urban')
+    try:
+        delattr(tool, 'usePloneTask')
+        logger.info("The 'usePloneTask' attribute has been removed from portal_urban")
+    except AttributeError:
+        logger.info("The 'usePloneTask' attribute does not exist on portal_urban!")

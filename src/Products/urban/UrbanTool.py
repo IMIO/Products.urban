@@ -253,15 +253,6 @@ schema = Schema((
         ),
     ),
     BooleanField(
-        name='usePloneTask',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label='Useplonetask',
-            label_msgid='urban_label_usePloneTask',
-            i18n_domain='urban',
-        ),
-    ),
-    BooleanField(
         name='useTabbing',
         default=False,
         widget=BooleanField._properties['widget'](

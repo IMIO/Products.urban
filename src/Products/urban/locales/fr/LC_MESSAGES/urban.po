@@ -228,9 +228,6 @@ msgstr "--- Choisissez ---"
 msgid "click_to_view_or_add"
 msgstr "Cliquez ici pour voir ou ajouter des documents"
 
-msgid "closed_tasks"
-msgstr "Tâches clôturées"
-
 msgid "concerned_parcels"
 msgstr "Parcelle(s) concernée(s)"
 
@@ -478,9 +475,6 @@ msgstr "Supprimer"
 msgid "label_select_street"
 msgstr "Sélectionner une rue"
 
-msgid "late_tasks"
-msgstr "Tâches en retard"
-
 msgid "legend"
 msgstr "Légende"
 
@@ -725,13 +719,6 @@ msgstr "Rues"
 #: UrbanEventType.py
 msgid "tal_condition_descr"
 msgstr "Entrez une condition TAL.  Les variables 'here' et 'member' sont disponibles"
-
-# tasks
-msgid "tasks_in_progress"
-msgstr "Tâches en cours"
-
-msgid "to_watch_tasks"
-msgstr "Tâches à surveiller (75% du délai a déjà été dépassé)"
 
 # topics
 msgid "topics"
@@ -1725,11 +1712,6 @@ msgstr "Types d'événements"
 
 msgid "urban_label_usage"
 msgstr "Statistiques INS"
-
-#. Default: "Useplonetask"
-#: UrbanTool.py
-msgid "urban_label_usePloneTask"
-msgstr "Utiliser PloneTask si celui-ci est présent"
 
 #. Default: "Usetabbing"
 #: UrbanTool.py
