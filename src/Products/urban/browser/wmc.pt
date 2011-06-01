@@ -28,7 +28,7 @@
       <Extension>        
         <ol:units xmlns:ol="http://openlayers.org/context">m</ol:units> 
         <ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer> 
-        <ol:opacity xmlns:ol="http://openlayers.org/context">0.5</ol:opacity> 
+        <ol:opacity xmlns:ol="http://openlayers.org/context" tal:content="layer/opacity">0.5</ol:opacity> 
       </Extension>     
    </Layer>
  </LayerList>
