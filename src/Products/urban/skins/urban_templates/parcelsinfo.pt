@@ -2,7 +2,9 @@
 
 <tal:block define="tmpcapakeys request/capakey|nothing; capakeys python: hasattr(tmpcapakeys, 'isalpha') and [tmpcapakeys,] or tmpcapakeys" repeat="capakey capakeys">
 
-<div tal:define="parcel python: context.portal_urban.getParcelInfos(capakey)">
+<div tal:define="parcel python: context.portal_urban.getParcelInfos(capakey);
+                 normalizeString nocall:context/@@plone/normalizeString;
+				 wtool context/portal_workflow">
       <dl class="collapsible expandedOnLoad" tal:condition="parcel">
         <dt class="collapsibleHeader" tal:content="python:parcel['name']">name</dt>
         <dd class="collapsibleContent">
