@@ -31,6 +31,7 @@ import logging
 logger = logging.getLogger('urban: UrbanTool')
 from DateTime import DateTime
 from StringIO import StringIO
+from Acquisition import aq_base
 from Products.ZCTextIndex.ParseTree import ParseError
 from Products.CMFPlone.i18nl10n import utranslate
 from Products.CMFCore.utils import getToolByName
@@ -450,11 +451,19 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         doc = f.read()
         f.close()
         os.remove(tempFileName)
-        newUrbanDoc=urbanEventObj.invokeFactory("File",id=self.generateUniqueId('UrbanEvent'),title=urbanTemplateObj.Title(),content_type='application/vnd.oasis.opendocument.text',file=doc)
+        #now we need to generate an available id for the new file
+        #the id of the object have to be the same id as the file contained
+        #see http://dev.communesplone.org/trac/ticket/2532
+        urbanTemplateObjId = os.path.splitext(urbanTemplateObj.getId())[0]
+        proposedId = urbanTemplateObjId + '.odt'
+        i = 1
+        while hasattr(aq_base(urbanEventObj), proposedId):
+            proposedId = '%s-%d.odt' % (urbanTemplateObjId, 1)
+            i = i + 1
+        newUrbanDoc=urbanEventObj.invokeFactory("File",id=proposedId,title=urbanTemplateObj.Title(),content_type='application/vnd.oasis.opendocument.text',file=doc)
         newUrbanDoc=getattr(urbanEventObj, newUrbanDoc)
-        newUrbanDoc.setFilename(urbanTemplateObj.Title()+'.odt')
+        newUrbanDoc.setFilename(proposedId)
         newUrbanDoc.setFormat('application/vnd.oasis.opendocument.text')
-        newUrbanDoc.reindexObject()
         self.REQUEST.set('doc_uid',newUrbanDoc.UID())
         response.redirect(urbanEventObj.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
 
