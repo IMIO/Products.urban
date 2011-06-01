@@ -31,7 +31,11 @@ class WMC(BrowserView):
                 {'url' : defaulturl,'srs':'EPSG:31370','title':'N° de parcelle','name' : 'urban'+tool.getNISNum()+':canu','format':'image/png','style':'ParcelsNum'},
                 ]
         for additional_layer in tool.additional_layers.objectValues():
-            layers.append({'url' : additional_layer.getWMSUrl(),'srs':additional_layer.getSRS(),'title':additional_layer.Title,'name' : additional_layer.getLayers(),'format':additional_layer.getLayerFormat(),'style':additional_layer.getStyles()})
+            if additional_layer.getWMSUrl()!="":
+                url=defaulturl
+            else:
+                url=additional_layer.getWMSUrl()
+            layers.append({'url' : url,'srs':additional_layer.getSRS(),'title':additional_layer.Title,'name' : additional_layer.getLayers(),'format':additional_layer.getLayerFormat(),'style':additional_layer.getStyles()})
         return layers
     def wmc(self):
 
