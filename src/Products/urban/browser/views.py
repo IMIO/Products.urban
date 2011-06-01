@@ -25,11 +25,13 @@ class WMC(BrowserView):
         context=aq_inner(self.context)
         tool=getToolByName(context, "portal_urban")
         defaulturl='http://'+tool.getWebServerHost()+'/geoserver/wms'
-        layers = (
+        layers = [
                 {'url' : defaulturl,'srs':'EPSG:31370','title':'Parcellaire','name' : 'urban'+tool.getNISNum()+':capa','format':'image/png','style':'default'},
                 {'url' : defaulturl,'srs':'EPSG:31370','title':'Noms de rue','name' : 'urban'+tool.getNISNum()+':toli','format':'image/png','style':'default'},
                 {'url' : defaulturl,'srs':'EPSG:31370','title':'N° de parcelle','name' : 'urban'+tool.getNISNum()+':canu','format':'image/png','style':'ParcelsNum'},
-                )
+                ]
+        for additional_layer in tool.additional_layers.objectValues():
+            layers.append({'url' : additional_layer.getWMSUrl(),'srs':additional_layer.getSRS(),'title':additional_layer.getTitle(),'name' : 'urban'+tool.getNISNum()+':capa','format':additional_layer.getFormat(),'style':additional_layer.getStyles()})
         return layers
     def wmc(self):
 
