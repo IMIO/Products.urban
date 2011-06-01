@@ -36,28 +36,6 @@
              rel="stylesheet"
              rendering="import"/>
 
- <stylesheet title="EryrOpenlayers map CSS"
-             cacheable="True"
-             compression="safe"
-             cookable="True"
-             enabled="1"
-             expression=""
-             id="map.css"
-             media="all"
-             rel="stylesheet"
-             rendering="import"/>
-
-  <stylesheet title="map_toolbar.css"
-             cacheable="True"
-             compression="safe"
-             cookable="True"
-             enabled="1"
-             expression=""
-             id="map_toolbar.css"
-             media="all"
-             rel="stylesheet"
-             rendering="import"/>
-
   <stylesheet title="urban_hide_columnone.css"
              cacheable="True"
              compression="safe"
