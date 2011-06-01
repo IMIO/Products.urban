@@ -59,6 +59,7 @@
              <metal:myfield use-macro="python:here.widget('SSC', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('RCU', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('locationTechnicalAdvice', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('locationTechnicalConditions', mode='edit')" />
             </fieldset>
             <fieldset>
              <strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices">Investigation and advices</legend></strong>

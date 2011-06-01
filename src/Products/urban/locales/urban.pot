@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-05-30 13:39+0000\n"
+"POT-Creation-Date: 2011-06-01 10:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1300,6 +1300,11 @@ msgstr ""
 #. Default: "Locationtechnicaladvice"
 #: BuildLicence.py
 msgid "urban_label_locationTechnicalAdvice"
+msgstr ""
+
+#. Default: "Locationtechnicalconditions"
+#: BuildLicence.py
+msgid "urban_label_locationTechnicalConditions"
 msgstr ""
 
 #. Default: "Usage"

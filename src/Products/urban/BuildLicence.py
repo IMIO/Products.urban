@@ -186,6 +186,18 @@ schema = Schema((
         default_output_type='text/html',
     ),
     TextField(
+        name='locationTechnicalConditions',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Locationtechnicalconditions',
+            label_msgid='urban_label_locationTechnicalConditions',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        schemata='urban_location',
+        default_output_type='text/html',
+    ),
+    TextField(
         name='pebTechnicalAdvice',
         allowable_content_types=('text/html',),
         widget=RichWidget(

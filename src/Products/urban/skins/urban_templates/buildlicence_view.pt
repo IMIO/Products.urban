@@ -283,6 +283,11 @@
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getLocationTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
   </tr>
+  <tr>
+   <td valign="top"><u><b><span i18n:translate="urban_label_locationTechnicalConditions">Location technical conditions</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalConditions', mode='view')" /><span tal:condition="not: context/getLocationTechnicalConditions" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
  </table>
 
  <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
@@ -651,6 +656,11 @@
    <td valign="top"><u><b><span i18n:translate="urban_label_locationTechnicalAdvice">Location technical advice</span> :</b></u></td>
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getLocationTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
+  <tr>
+   <td valign="top"><u><b><span i18n:translate="urban_label_locationTechnicalConditions">Location technical conditions</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalConditions', mode='view')" /><span tal:condition="not: context/getLocationTechnicalConditions" class="discreet" i18n:translate="content_none">None</span></td>
   </tr>
  </table>
 </fieldset>
