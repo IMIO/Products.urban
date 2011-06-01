@@ -31,7 +31,7 @@ class WMC(BrowserView):
                 {'url' : defaulturl,'srs':'EPSG:31370','title':'N° de parcelle','name' : 'urban'+tool.getNISNum()+':canu','format':'image/png','style':'ParcelsNum'},
                 ]
         for additional_layer in tool.additional_layers.objectValues():
-            if additional_layer.getWMSUrl()!="":
+            if additional_layer.getWMSUrl()=="":
                 url=defaulturl
             else:
                 url=additional_layer.getWMSUrl()
