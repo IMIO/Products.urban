@@ -31,6 +31,10 @@ from GenericLicence import GenericLicence_schema
 from Products.CMFCore.utils import getToolByName
 from zope.i18n import translate as _
 
+from collective.referencedatagridfield import PKG_NAME
+from collective.referencedatagridfield import ReferenceDataGridField
+from collective.referencedatagridfield import ReferenceDataGridWidget
+
 slave_fields_subdivision = (
     # if in subdivision, display a textarea the fill some details
     {'name': 'subdivisionDetails',
@@ -220,6 +224,17 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_road',
+    ),
+
+    ReferenceDataGridField('street',
+            schemata='default',
+            relationship="Street",
+            columns=('numero' ,'title' ,'link' ,'uid'),
+            widget = ReferenceDataGridWidget(
+                label = "street",
+                macro = "street_referencedatagridwidget",
+                visible = {'edit' : 'visible', 'view' : 'visible'}
+         )
     ),
     ReferenceField(
         name='architects',

@@ -56,7 +56,7 @@
   <td width="1%"></td>
   <td valign="top" width=50%>
    <fieldset><strong><legend i18n:translate="legend_situation">Situation</legend></strong>
-   <div metal:use-macro="here/urban_macros/macros/urbanWorkLocation" /></fieldset></td>
+      <div><metal:myfield use-macro="python:here.widget('street', mode='view')" /></div>
   </tr>
  <tr>
   <td valign="top" width=50%>
@@ -556,7 +556,8 @@
 <table border=0 width=100%>
  <tr><td width=50%>
    <fieldset><strong><legend i18n:translate="legend_situation">Situation</legend></strong>
-   <div metal:use-macro="here/urban_macros/macros/urbanWorkLocation" />
+   <!--<div metal:use-macro="here/urban_macros/macros/urbanWorkLocation" /> -->
+      <div><metal:myfield use-macro="python:here.widget('street', mode='view')" /></div>
    </fieldset>
 </td><td>
    <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>

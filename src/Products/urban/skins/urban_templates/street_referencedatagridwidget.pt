@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone">
+<body>
+
+    <!-- VIEW -->
+    <metal:define define-macro="view">
+       
+	  <div class="box" 
+               tal:define="fielddata python:field.getAccessor(context)();
+			   ruid string:${portal_url}/resolveuid/"
+               tal:condition="fielddata">
+
+	    <!-- <h5 tal:content="string:${widget/label}">References</h5> -->
+            <ul><tal:loop tal:repeat="data fielddata">
+		<li class="odd"
+		    tal:define="oddrow repeat/data/odd;"
+                    tal:attributes="class python:oddrow and 'odd' or 'even';"
+		    tal:condition="data/url">
+                    Numero: <span tal:content="data/numero"/>
+                    Rue: <span tal:content="data/title"/>
+		</li></tal:loop>
+            </ul>
+	  </div>
+
+    </metal:define>
+
+
+    <!-- EDIT -->
+    <metal:define define-macro="edit">
+      <metal:use use-macro="field_macro | here/widgets/field/macros/edit">
+        <metal:body metal:fill-slot="widget_body">
+            
+            <table class="referencedatagridwidget-table-edit"
+		       	tal:attributes="id python: 'datagridwidget-table-' + field.getName()"
+            	style="width: 100%"
+                tal:define="columns python:widget.getColumnDefs(field, context);
+                            fielddata python: value or field.getEditAccessor(context)();                           
+                            eventHandler python: test(widget.isAutoInsertEnabled(), 'dataGridFieldFunctions.autoInsertRow(event)', '')
+                           ">
+                <thead tal:condition="python: widget.hasHeader(context, field)">
+                    <tr>
+						<tal:block tal:repeat="c columns"
+                         ><th tal:attributes="class python:not c['visible'] and 'dgw-hidden-column discreet' or 'discreet';"  style="text-align: left" 
+                            tal:content="c/label" 
+                            i18n:translate="">Column name</th
+						 ></tal:block>
+                        <th /> 
+                        <th />
+                        <th />
+                    </tr>
+                </thead>     
+                       
+                <tbody tal:attributes="id python: 'datagridwidget-tbody-' + field.getName()">
+                
+                	<tal:comment replace="nothing">
+                		<!-- Existing data rows -->
+                	</tal:comment>
+                
+                    <tal:row-loop tal:repeat="rows fielddata" tal:define="newRow python: False">
+                    	<tal:row metal:use-macro="here/datagridwidget_edit_row/macros/edit_row"/>
+                    </tal:row-loop>
+
+                	<tal:comment replace="nothing">
+                		<!-- A template row for adding new rows dynamically -->
+                	</tal:comment>
+                    
+	                <tal:empty-row tal:define="newRow python: True">
+	                	<tal:template metal:use-macro="here/datagridwidget_edit_row/macros/edit_empty_row"/>
+	                </tal:empty-row>	                	
+                 </tbody>
+            </table>
+
+            <a class="referencedatagridwidget-add-button" id="datagridwidget-add-button"
+			   tal:condition="field/allow_insert"
+                   tal:attributes='onclick python: "dataGridFieldFunctions.addReferenceDataGridRow(\"" + field.getName() + "\")"'>Add new</a>
+
+			<tal:comment replace="nothing">
+				<!-- Button that allowes creation of the initial row when DGF is empty -->
+			</tal:comment>
+                        	   
+        </metal:body>
+      </metal:use>
+    </metal:define>
+
+    <!-- SEARCH -->
+    <div metal:define-macro="search">
+        <div metal:use-macro="here/datagridwidget/macros/search">
+        </div>
+    </div>
+
+</body>
+
+</html>
+
