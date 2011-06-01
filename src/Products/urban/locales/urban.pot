@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-06-01 10:21+0000\n"
+"POT-Creation-Date: 2011-06-01 12:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -766,6 +766,11 @@ msgstr ""
 msgid "urban_help_dgrneUnderground"
 msgstr ""
 
+#. Default: "Enter the layer image mimetype, for example 'image/jpeg' or 'image/png'"
+#: Layer.py
+msgid "urban_help_layerFormat"
+msgstr ""
+
 #. Default: "urban_descr_termKey"
 #: UrbanVocabularyTerm.py
 msgid "urban_help_termKey"
@@ -1151,11 +1156,6 @@ msgstr ""
 msgid "urban_label_foldermanagers"
 msgstr ""
 
-#. Default: "Format"
-#: Layer.py
-msgid "urban_label_format"
-msgstr ""
-
 #. Default: "Geometricians"
 #: parcelOutGeometricians.py
 msgid "urban_label_geometricians"
@@ -1259,6 +1259,11 @@ msgstr ""
 #. Default: "Launchdate"
 #: Equipment.py
 msgid "urban_label_launchDate"
+msgstr ""
+
+#. Default: "Layerformat"
+#: Layer.py
+msgid "urban_label_layerFormat"
 msgstr ""
 
 #. Default: "Layers"

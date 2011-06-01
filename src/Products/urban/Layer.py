@@ -60,10 +60,12 @@ schema = Schema((
         ),
     ),
     StringField(
-        name='format',
+        name='layerFormat',
         widget=StringField._properties['widget'](
-            label='Format',
-            label_msgid='urban_label_format',
+            description="Enter the layer image mimetype, for example 'image/jpeg' or 'image/png'",
+            label='Layerformat',
+            label_msgid='urban_label_layerFormat',
+            description_msgid='urban_help_layerFormat',
             i18n_domain='urban',
         ),
     ),

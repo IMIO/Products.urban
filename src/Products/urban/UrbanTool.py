@@ -1165,7 +1165,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         section=section.upper()
         exposant=exposant.upper()
         catalogTool = getToolByName(self, 'portal_catalog')
-        #see PortionOut.parcelInfosIndex to see how th index is build
+        #see PortionOut.parcelInfosIndex to see how the index is build
         if partie:
             partiestr = '1'
         else:

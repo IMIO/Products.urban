@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Jun  1 11:51:29 2011\n"
-"PO-Revision-Date: Wed Jun  1 11:51:29 2011\n"
+"POT-Creation-Date: Wed Jun  1 14:42:03 2011\n"
+"PO-Revision-Date: Wed Jun  1 14:42:03 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -79,6 +79,11 @@ msgstr ""
 #. Default: "If checked, an additional paragraph will be added in the licence document"
 #: BuildLicence.py
 msgid "urban_help_dgrneUnderground"
+msgstr ""
+
+#. Default: "Enter the layer image mimetype, for example 'image/jpeg' or 'image/png'"
+#: Layer.py
+msgid "urban_help_layerFormat"
 msgstr ""
 
 #. Default: "urban_descr_termKey"
@@ -406,11 +411,6 @@ msgstr ""
 msgid "urban_label_foldermanagers"
 msgstr ""
 
-#. Default: "Format"
-#: Layer.py
-msgid "urban_label_format"
-msgstr ""
-
 #. Default: "Geometricians"
 #: parcelOutGeometricians.py
 msgid "urban_label_geometricians"
@@ -497,6 +497,11 @@ msgstr ""
 #. Default: "Launchdate"
 #: Equipment.py
 msgid "urban_label_launchDate"
+msgstr ""
+
+#. Default: "Layerformat"
+#: Layer.py
+msgid "urban_label_layerFormat"
 msgstr ""
 
 #. Default: "Layers"

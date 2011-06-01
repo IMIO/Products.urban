@@ -16,6 +16,7 @@ def migrateToPlone4(context):
     if isNoturbanMigrationsProfile(context): return
 
     migrateTool(context)
+    migrateFormatFieldFromLayers(context)
 
 def migrateToContact(context):
     """
@@ -371,3 +372,20 @@ def migrateTool(context):
         logger.info("The 'usePloneTask' attribute has been removed from portal_urban")
     except AttributeError:
         logger.info("The 'usePloneTask' attribute does not exist on portal_urban!")
+
+def migrateFormatFieldFromLayers(context):
+    """
+        The field named 'format' on content_type Layer has been renamed to layerFormat
+        The problem is that it was never stored, so always empty
+        This migration just delete the atribute so...
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+    tool = getToolByName(site, 'portal_urban')
+    for layer in tool.additional_layers.objectValues('Layer'):
+        try:
+            delattr(tool, 'usePloneTask')
+            logger.info("The layer '%s' format's attribute has been removed" % layer.getId())
+        except AttributeError:
+            logger.info("The layer '%s' has no 'format' attribute!" % layer.getId())
