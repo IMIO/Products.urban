@@ -19,6 +19,7 @@ urbanEventTypes = {
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
                     'podTemplates': ({'id': "urb-recepisse", 'title': "Récépissé de la demande (article 115)"},),
+                    'eventTypeType': 'Products.urban.interfaces.IDeposit',
                     },
                     {
                     'id': "recepisse-art15-complement",
@@ -26,6 +27,7 @@ urbanEventTypes = {
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
                     'podTemplates': ({'id': "urb-recepisse-art115-complement", 'title': "Récépissé d'un complément à une demande de permis (article 115)"},),
+                    'eventTypeType': 'Products.urban.interfaces.IDeposit',
                     },
                     {
                     'id': "recepisse-article-116",
@@ -33,12 +35,14 @@ urbanEventTypes = {
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
                     'podTemplates': ({'id': "urb-recepisse-art116", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
+                    'eventTypeType': 'Products.urban.interfaces.IDeposit',
                     },
                     {
                     'id': "dossier-incomplet",
                     'title': "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
+                    'eventTypeType': 'Products.urban.interfaces.IMissingPart',
                     'podTemplates': (
                                      {'id': "urb-dossier-incomplet-demandeur", 'title': "Dossier incomplet (lettre demandeur)"},
                                      {'id': "urb-dossier-incomplet-archi", 'title': "Dossier incomplet (lettre architecte)"},
@@ -57,7 +61,7 @@ urbanEventTypes = {
                     'title': "Avis sur l'étude d'incidence",
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
-                    'TALCondition' : "python: here.getImpactStudy()",
+                    'TALCondition': "python: here.getImpactStudy()",
                     'podTemplates': (
                                      {'id': "urb-avis-etude-incidence", 'title': "Avis sur l'étude d'incidence"},
                                     ),
@@ -67,7 +71,7 @@ urbanEventTypes = {
                     'title': "Demande d'avis (CCATM)",
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
-                    'TALCondition' : "python: 'ccatm' in here.getSolicitOpinionsTo()",
+                    'TALCondition': "python: 'ccatm' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-ccatm", 'title': "Courrier de demande d'avis"},),
                     },
                     {
@@ -75,7 +79,7 @@ urbanEventTypes = {
                     'title': "Demande d'avis (Belgacom)",
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
-                    'TALCondition' : "python: 'belgacom' in here.getSolicitOpinionsTo()",
+                    'TALCondition': "python: 'belgacom' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-belgacom", 'title': "Courrier de demande d'avis"},),
                     },
                     {
@@ -83,7 +87,7 @@ urbanEventTypes = {
                     'title': "Demande d'avis (DGRNE)",
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
-                    'TALCondition' : "python: 'dgrne' in here.getSolicitOpinionsTo()",
+                    'TALCondition': "python: 'dgrne' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-dgrne", 'title': "Courrier de demande d'avis"},),
                     },
                     {
@@ -91,7 +95,7 @@ urbanEventTypes = {
                     'title': "Demande d'avis (DNF)",
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
-                    'TALCondition' : "python: 'dnf' in here.getSolicitOpinionsTo()",
+                    'TALCondition': "python: 'dnf' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-dnf", 'title': "Courrier de demande d'avis"},),
                     },
                     {

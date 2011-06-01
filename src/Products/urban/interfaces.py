@@ -145,6 +145,10 @@ class IDeposit(Interface):
     __doc__ = _("""IDeposit type marker interface""")
 
 
+class IMissingPart(Interface):
+    __doc__ = _("""IMissingPart type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase
     """

@@ -25,6 +25,11 @@
   <interface
     interface=".interfaces.IDeposit"
     type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IMissingPart"
+    type=".interfaces.IEventTypeType"/>
+
   <!-- ##/code-section configure.zcml.header -->
 
   <i18n:registerTranslations directory="locales" />
