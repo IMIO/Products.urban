@@ -33,5 +33,6 @@ setup(name='Products.urban',
           'archetypes.referencebrowserwidget',
           'five.grok',
           'grokcore.component',
+          'collective.referencedatagridfield',
           'Products.MasterSelectWidget',
           'psycopg2'])
