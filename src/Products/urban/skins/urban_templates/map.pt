@@ -1,56 +1,90 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="urban">
+      i18n:domain="urban"
+      tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
 
 <metal:block fill-slot="top_slot"
-             tal:define="global body_onload string: init();
-                         dummy python:request.set('disable_border',1)" />
+             tal:define="global parcels context/getParcels;" />
 
 <head>
+<tal:block condition="context/getParcels">
 
-    <div metal:fill-slot="style_slot" tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
-    <link rel="stylesheet" type="text/css" href="openlayers/theme/default/style.css"/>
-      
-    </div>
-    <div metal:fill-slot="javascript_head_slot" tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
-    
+<div metal:fill-slot="style_slot" >
+    <div metal:use-macro="here/urban_macros/macros/urbanMapCSS" />
+</div>
+<div metal:fill-slot="javascript_head_slot" tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
 
-    <script type="text/javascript" tal:attributes="src python:'portal_skins/openlayers/OpenLayers.js'"></script>
-    <script type="text/javascript" tal:attributes="src python:'portal_skins/urban/mapjsglobals.js'"></script>
-  
-
-
-        <tal:block define="topic request/search|nothing" condition="parcels">
-    <script tal:content="python: 'function init() {' 
-        +context.portal_urban.generateMapJS(
-            context
-            ,context.portal_urban.GetListOfCapaKeyBuffer('92103B0309/00S000'),''
-            ,context.portal_urban.GetWKTGeomOfBufferParcel('92103B0309/00S000')
-        )+'};'">
-
-        </script>
-        </tal:block>
-    </div>
+</div>
+</tal:block>
 
 </head>
 
-<body tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
-
-<div metal:fill-slot="main">
+<body>
+<metal:main fill-slot="main">
 <metal:main_macro define-macro="main">
-    <metal:body define-macro="body_macro" >
+    <metal:body define-macro="body_macro" 
+                tal:define="applicants context/getApplicants;
+                            useTabbing python: context.portal_urban.getUseTabbing();">
 
-<h1 class="documentFirstHeading" tal:content="context/Title">Title</h1>
+<tal:block condition="python: not parcels or not applicants">
+ <div metal:use-macro="here/urban_macros/macros/urbanPortalMessageMacro" />
+</tal:block>
+<tal:block condition="context/getParcels">
+<div metal:use-macro="here/urban_macros/macros/urbanMapScript" />
+</tal:block>
+<h1 class="documentFirstHeading">
+ <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
+ <span tal:replace="here/Title" tal:omit-tag="">Title</span>
+</h1>
 
-    <div id="panel"></div>
-    <div id="map" class="smallmap"></div>
 
+ <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
+ <table cellspacing=0 cellpadding=0 width=100%>
+  <tr>
+   <td valign="top">
+   <div class="#" tal:attributes="class python: test(parcels, 'field', 'field warning')">
+    <div tal:condition="not: parcels" i18n:translate="warning_add_a_parcel">You must encode concerned parcel(s)
+    </div>
+    <div tal:define="tool python: getattr(context, 'portal_urban');
+                     topic python: getattr(tool.topics, 'searchportionsout');
+                     path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
+                     dummy python: context.setPathCritValue(path_crit, context.UID());
+                     showActions python: True;
+                     showedCols python: ('Title', 'Creator');">
+    <metal:listing use-macro="here/urban_macros/macros/listing" />
+    </div>
+     <form i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/checkPortionsOutSearch'" action="checkPortionsOutSearch" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('PortionOut')">
+      <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
+      <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+      <input type="submit" class="standalone" id="event" value="search_parcels" i18n:attributes="value" />
+     </form>
+   </div>
+  </td>
+ </tr>
+ </table>
+ </fieldset>
+
+   <div tal:condition="not: parcels">
+    <p class="discreet" i18n:translate="cartography_map_descr">A map will me displayed when you will have defined concerned parcels</p>
+   </div>
+   <tal:block condition="parcels">
+    <form>
+     <input type="hidden" id="map_initialized" value="0" />
+    </form>
+   <p i18n:translate="cartography" class="discreet">Cartography</p>
+  
+   <div id="urbanmapctn" style="width:100%; height:800px"></div>
+   
+   </tal:block>
 
 <div tal:replace="structure provider:plone.belowcontentbody" />
 
+
+
+
 </metal:body>
 </metal:main_macro>
-</div>
+</metal:main>
 </body>
 </html>
