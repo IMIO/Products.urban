@@ -390,7 +390,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
 
 <div metal:define-macro="urbanMapCSS" tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
 
-        <!--link rel="stylesheet" type="text/css" tal:attributes="href string:http://${pylonsHost}/lib/ext/Ext/resources/css/ext-all.css"/-->
+        <link rel="stylesheet" type="text/css" tal:attributes="href string:ext-all.css"/>
         <link rel="stylesheet" type="text/css" tal:attributes="href string:http://${pylonsHost}/lib/ext/Ext/resources/css/xtheme-gray.css"/>
 
         <link rel="stylesheet" type="text/css" tal:attributes="href string:http://${pylonsHost}/lib/openlayers/theme/default/style.css"/>

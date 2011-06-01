@@ -56,7 +56,7 @@
   <td width="1%"></td>
   <td valign="top" width=50%>
    <fieldset><strong><legend i18n:translate="legend_situation">Situation</legend></strong>
-   <div metal:use-macro="here/urban_macros/macros/urbanWorkLocation" />
+   <div metal:use-macro="here/urban_macros/macros/urbanWorkLocation" /></fieldset></td>
   </tr>
  <tr>
   <td valign="top" width=50%>
@@ -437,7 +437,7 @@
   <td valign="top" width=50%>
    <fieldset><b><legend i18n:translate="urban_label_architects">Architect(s)</legend></b>
     <div metal:use-macro="here/urban_macros/macros/urbanArchitectsMacro" />
-   </fieldset>   
+   </fieldset></td>   
   </tr>
  <tr>
   <td valign="top" width=50%>
