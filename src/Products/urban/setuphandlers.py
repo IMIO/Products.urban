@@ -75,20 +75,6 @@ def postInstall(context):
     #we need external edition so make sure it is activated
     site.portal_properties.site_properties.manage_changeProperties(ext_editor = True)
 
-    #rearrange skins so the 'urban' layer is just after 'custom'...
-    ps = site.portal_skins
-    import string
-    #skinname is like 'Plone Default'
-    selections = ps._getSelections()
-    for skinname in selections:
-        sels = selections[skinname].split(',')
-        new_sels = ['custom', 'urban', ]
-        for sel in sels:
-            if sel != 'custom' and sel != 'urban':
-                new_sels.append(sel)
-    #set the new_sels
-    selections[skinname] = string.join(new_sels, ',')
-
     #install dependencies manually...
     quick_installer = site.portal_quickinstaller
     for dependency in DEPENDENCIES:
@@ -457,7 +443,7 @@ def addInvestigationArticles(context, configFolder):
 
 def addUrbanGroups(context):
     """
-       Add a group of 'urban' application users... 
+       Add a group of 'urban' application users...
     """
     site = context.getSite()
     #add 2 groups
@@ -468,11 +454,11 @@ def addUrbanGroups(context):
 
 def setDefaultApplicationSecurity(context):
     """
-       Set sharing on differents folders to access the application 
+       Set sharing on differents folders to access the application
     """
     #we have to :
-    #give the Reader role to the urban_readers and urban_editors groups on 
-    #portal_urban and application folders 
+    #give the Reader role to the urban_readers and urban_editors groups on
+    #portal_urban and application folders
     #give the Editor role on urban application folders
     site = context.getSite()
     #portal_urban local roles
@@ -748,7 +734,7 @@ def addGlobalFolders(context):
         newFolder = getattr(tool, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])        
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
         newFolder.invokeFactory("UrbanVocabularyTerm",id="notitle",title=u"")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="madam",title=u"Madame")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="miss",title=u"Mademoiselle")
@@ -766,7 +752,7 @@ def addGlobalFolders(context):
         newFolder = getattr(tool, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])        
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
         newFolder.invokeFactory("UrbanVocabularyTerm",id='agent-accueil', title="Agent d'accueil"),
         newFolder.invokeFactory("UrbanVocabularyTerm",id='agent-administratif', title="Agent administratif"),
         newFolder.invokeFactory("UrbanVocabularyTerm",id='agent-technique', title="Agent technique"),
@@ -785,7 +771,7 @@ def addGlobalFolders(context):
         newFolder = getattr(tool, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])        
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
         newFolder.invokeFactory("UrbanVocabularyTerm",id="favorable",title=u"Favorable")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="defavorable",title=u"Défavorable")
 
@@ -897,6 +883,7 @@ def adaptDefaultPortal(context):
         frontpage.setTitle(_("front_page_title", 'urban', context=site.REQUEST))
         frontpage.setDescription(_("front_page_descr", 'urban', context=site.REQUEST))
         frontpage.setText(_("front_page_text", 'urban', context=site.REQUEST))
+        frontpage.setContentType('text/html', 'text')
         frontpage.reindexObject()
     except AttributeError:
         #the 'front-page' object does not exist...
@@ -908,7 +895,7 @@ def adaptDefaultPortal(context):
 
 def addApplicationFolders(context):
     """
-    Add the application folders like 'urban' and 'architects' 
+    Add the application folders like 'urban' and 'architects'
     """
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
@@ -1045,7 +1032,7 @@ def addTestObjects(context):
     addUrbanEventTypes(context)
 
     #add some generic templates in configuration
-    gen_temp = { 'templateHeader':'header.odt', 
+    gen_temp = { 'templateHeader':'header.odt',
                  'templateFooter':'footer.odt',
                  'templateReference':'reference.odt',
                  'templateSignatures':'signatures.odt',
@@ -1182,7 +1169,7 @@ def setupExtra(context):
         additional_layers = getattr(portal_urban, additional_layers_id)
         additional_layers.setConstrainTypesMode(1)
         additional_layers.setLocallyAllowedTypes(['Layer'])
-        additional_layers.setImmediatelyAddableTypes(['Layer'])        
+        additional_layers.setImmediatelyAddableTypes(['Layer'])
     else:
         additional_layers = portal_urban.additional_layers
 
@@ -1206,7 +1193,7 @@ def setupExtra(context):
                         additional_layers.ppnc.setTitle(additional_layers.ppnc.getLayers().upper())
                         additional_layers.ppnc.reindexObject()
                         logger.info("Additional layer '%s' added with layer '%s'"%(layer, layer))
-                    
+
             if not hasattr(aq_base(additional_layers), 'ppnc'):
                 logger.error("Additional layer '%s' added WITHOUT specific layer because no ppnc intersection found"%'ppnc')
                 additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://cartopro1.wallonie.be/WMS/com.esri.wms.Esrimap/PPNC?", layers='ppnc', SRS="ESPG:31370", baseLayer=True)
