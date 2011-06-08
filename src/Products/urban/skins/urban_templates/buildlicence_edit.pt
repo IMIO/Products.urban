@@ -110,7 +110,8 @@
                             <tal:block define="fieldName field/getName">
                              <metal:fieldMacro use-macro="python:here.widget(fieldName, mode='edit')" />
                              <tal:block condition="python: fieldName == 'referenceDGATLP'">
-                              <div metal:use-macro="here/urban_macros/macros/urbanWorkLocationEdit" />
+                              <!--<div metal:use-macro="here/urban_macros/macros/urbanWorkLocationEdit" /> -->
+                              <metal:myfield use-macro="python:here.widget('workLocations', mode='edit')" />
                              </tal:block>
                             </tal:block>
                            </tal:fields>
