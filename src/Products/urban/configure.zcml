@@ -14,9 +14,6 @@
   <include package="five.grok"/>
   <include package=".events" />
   <include package=".browser" />
-  <subscriber for=".interfaces.IUrbanEvent
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
-              handler=".event.setEventTypeType"/>
   <include file="grok.zcml" />
   <interface
     interface=".interfaces.IAcknowledgment"
