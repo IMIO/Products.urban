@@ -25,6 +25,7 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from zope.component.interface import interfaceToName
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from GenericLicence import GenericLicence
 from GenericLicence import GenericLicence_schema
@@ -408,6 +409,29 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         super(GenericLicence).__thisclass__.at_post_edit_script(self)
 
+    def _getLastEvent(self, eventInterface=None):
+        catalog = getToolByName(self, 'portal_catalog')
+        currentPath = '/'.join(self.getPhysicalPath())
+        query = {'path':{'query': currentPath,
+                         'depth': 1},
+                 'meta_type': 'UrbanEvent',
+                 'sort_on': 'created',
+                 'sort_order': 'descending'}
+        if eventInterface is not None:
+            interfaceName = interfaceToName(self, eventInterface)
+            query['object_provides'] = interfaceName
+        events = [brain.getObject() for brain in catalog(**query)[:1]]
+        if events:
+            return events[0]
+
+    def getLastDeposit(self):
+        return self._getLastEvent(interfaces.IDeposit)
+
+    def getLastMissingPart(self):
+        return self._getLastEvent(interfaces.IMissingPart)
+
+    def getLastAcknowledgment(self):
+        return self._getLastEvent(interfaces.IAcknowledgment)
 
 
 registerType(BuildLicence, PROJECTNAME)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from plone.testing import z2, zca
 from plone.app.testing import PloneWithPackageLayer
-from plone.app.testing import IntegrationTesting
+from plone.app.testing import IntegrationTesting, FunctionalTesting
 import Products.urban
 
 
@@ -41,3 +41,6 @@ URBAN_INTEGRATION = IntegrationTesting(
 
 URBAN_TESTS_PROFILE_INTEGRATION = IntegrationTesting(
     bases=(URBAN_TESTS_PROFILE,), name="URBAN_TESTS_PROFILE_INTEGRATION")
+
+URBAN_TESTS_PROFILE_FUNCTIONAL = FunctionalTesting(
+    bases=(URBAN_TESTS_PROFILE,), name="URBAN_TESTS_PROFILE_FUNCTIONAL")
