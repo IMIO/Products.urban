@@ -36,6 +36,7 @@ from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 from Products.urban.utils import drainageTechnicalRequirementsDefaultValue, \
 equipmentAndRoadRequirementsDefaultValue
+from collective.referencedatagridfield import ReferenceDataGridField, ReferenceDataGridWidget
 ##/code-section module-header
 
 schema = Schema((
@@ -420,6 +421,20 @@ schema = Schema((
         schemata='urban_location',
         multiValued=1,
         vocabulary='listMakers',
+    ),
+    ReferenceDataGridField(
+        name='workLocations',
+        widget=ReferenceDataGridWidget(
+            startup_directory="/portal_urban/streets",
+            label="street",
+            visible={'edit' : 'visible', 'view' : 'visible'},
+            macro="street_referencedatagridwidget",
+            label_msgid='urban_label_workLocations',
+            i18n_domain='urban',
+        ),
+        schemata="default",
+        relationship="Street",
+        columns=('numero','title' ,'link' ,'uid'),
     ),
     ReferenceField(
         name='foldermanagers',

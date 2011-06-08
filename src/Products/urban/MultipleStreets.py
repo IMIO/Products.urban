@@ -77,7 +77,7 @@ class MultipleStreets:
             obj.at_post_create_script()
 
     security.declarePublic('getWorkLocations')
-    def getWorkLocations(self, theuid=False):
+    def getWorkLocations__(self, theuid=False):
         """
            Return existing WorkLocation for self
         """

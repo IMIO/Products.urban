@@ -225,17 +225,6 @@ schema = Schema((
         ),
         schemata='urban_road',
     ),
-
-    ReferenceDataGridField('street',
-            schemata='default',
-            relationship="Street",
-            columns=('numero' ,'title' ,'link' ,'uid'),
-            widget = ReferenceDataGridWidget(
-                label = "street",
-                macro = "street_referencedatagridwidget",
-                visible = {'edit' : 'visible', 'view' : 'visible'}
-         )
-    ),
     ReferenceField(
         name='architects',
         widget=ReferenceBrowserWidget(

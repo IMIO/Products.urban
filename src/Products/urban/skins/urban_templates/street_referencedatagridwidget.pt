@@ -7,7 +7,7 @@
 
     <!-- VIEW -->
     <metal:define define-macro="view">
-       
+
 	  <div class="box" 
                tal:define="fielddata python:field.getAccessor(context)();
 			   ruid string:${portal_url}/resolveuid/"
