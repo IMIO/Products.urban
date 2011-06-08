@@ -15,22 +15,23 @@ __docformat__ = 'plaintext'
 
 from zope.component.interface import interfaceToName
 from AccessControl import ClassSecurityInfo
-from Products.urban.config import *
 from Products.CMFCore.utils import getToolByName
 
 from zope.i18n import translate as _
 from zope.interface import implements
 import interfaces
 
-class UrbanBase:
+
+class UrbanBase(object):
     """
       This class manage every methods chared cross different licences
     """
     security = ClassSecurityInfo()
-    
+
     implements(interfaces.IUrbanBase)
 
     security.declarePublic('getApplicantsSignaletic')
+
     def getApplicantsSignaletic(self, withaddress=False):
         """
           Returns a string reprensenting the signaletic of every applicants
@@ -51,6 +52,7 @@ class UrbanBase:
         return signaletic
 
     security.declarePublic('getFolderManagersSignaletic')
+
     def getFolderManagersSignaletic(self, withgrade=True):
         """
           Returns a string reprensenting the signaletic of every folder managers
@@ -69,13 +71,15 @@ class UrbanBase:
         return signaletic
 
     security.declarePublic('getReferenceForTemplate')
+
     def getReferenceForTemplate(self):
         """
-          Calculate the reference to be displayed in the templates 
+          Calculate the reference to be displayed in the templates
         """
         return "Calculated/Reference/%s" % str(self.getReference())
 
     security.declarePublic('getNotariesSignaletic')
+
     def getNotariesSignaletic(self):
         """
           Returns a string reprensenting the signaletic of every notaries
@@ -90,6 +94,7 @@ class UrbanBase:
         return signaletic
 
     security.declarePublic('getArchitectsSignaletic')
+
     def getArchitectsSignaletic(self, withaddress=False):
         """
           Returns a string reprensenting the signaletic of every architects
@@ -111,6 +116,7 @@ class UrbanBase:
         return signaletic
 
     security.declarePublic('submittedBy')
+
     def submittedBy(self):
         """
           Returns a formatted string with data about people that submitted
@@ -119,8 +125,7 @@ class UrbanBase:
           - a notary submitted the request for the applicant
           - a notary submitted the request for himself
         """
-        applicants = self.getApplicants()
-        if self.getPortalTypeName() in ('UrbanCertificateOne','UrbanCertificateTwo','NotaryLetter'):
+        if self.getPortalTypeName() in ('UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter'):
             who = self.getWhoSubmitted()
             if who == 'both':
                 #a notary submitted the request for an applicant
@@ -136,6 +141,7 @@ class UrbanBase:
             return 'test'
 
     security.declarePublic('getWorkLocationSignaletic')
+
     def getWorkLocationSignaletic(self):
         """
           Returns a string reprensenting the different worklocations
@@ -148,6 +154,7 @@ class UrbanBase:
         return signaletic
 
     security.declarePublic('getLicenceTypeAcronym')
+
     def getLicenceTypeAcronym(self):
         """
           Returns a small string representing the licence type
@@ -170,6 +177,7 @@ class UrbanBase:
             return licenceTypes[portal_type]
 
     security.declarePublic('getDefaultFolderManagers')
+
     def getDefaultFolderManagers(self):
         """
           Returns the default folderManagers for a licence
@@ -178,6 +186,7 @@ class UrbanBase:
         pass
 
     security.declarePublic('getDepositDate')
+
     def getDepositDate(self):
         """
           Returns the date the folder was brought to the urbanism service
@@ -191,49 +200,59 @@ class UrbanBase:
         return _('warning_no_deposit_date', 'urban', context=self.REQUEST)
 
     security.declarePublic('getMultipleApplicantsCSV')
+
     def getMultipleApplicantsCSV(self):
         """
           Returns a formatted version of the applicants to be used in POD templates
         """
         applicants = self.getApplicants()
-        toreturn='<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
+        toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for applicant in applicants:
-            toreturn=toreturn+'%'+applicant.getPersonTitleValue()+'|'+applicant.getName1()+'|'+applicant.getName2()+'|'+applicant.getNumber()+', '+applicant.getStreet()+'|'+applicant.getZipcode()+' '+applicant.getCity()
-        toreturn=toreturn+'</CSV>'
+            toreturn = toreturn + '%' + applicant.getPersonTitleValue() + '|' + applicant.getName1() + \
+                    '|' + applicant.getName2() + '|' + applicant.getNumber() + ', ' + \
+                    applicant.getStreet() + '|' + applicant.getZipcode() + ' ' + applicant.getCity()
+        toreturn = toreturn + '</CSV>'
         return toreturn
-    getMultipleApplicants=getMultipleApplicantsCSV
+    getMultipleApplicants = getMultipleApplicantsCSV
 
     security.declarePublic('getMultipleArchitectsCSV')
+
     def getMultipleArchitectsCSV(self):
         """
           Returns a formatted version of the architects to be used in POD templates
         """
         architects = self.getArchitects()
-        toreturn='<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
+        toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for architect in architects:
-            toreturn=toreturn+'%'+architect.getPersonTitleValue()+'|'+architect.getName1()+'|'+architect.getName2()+'|'+architect.getNumber()+', '+architect.getStreet()+'|'+architect.getZipcode()+' '+architect.getCity()
-        toreturn=toreturn+'</CSV>'
+            toreturn = toreturn + '%' + architect.getPersonTitleValue() + '|' + architect.getName1() + '|' +\
+                    architect.getName2() + '|' + architect.getNumber() + ', ' + architect.getStreet() + '|' + \
+                    architect.getZipcode() + ' ' + architect.getCity()
+        toreturn = toreturn + '</CSV>'
         return toreturn
 
     security.declarePublic('getMultipleNotariesCSV')
+
     def getMultipleNotariesCSV(self):
         """
           Returns a formatted version of the notaries to be used in POD templates
         """
         notaries = self.getNotaryContact()
-        toreturn='<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
+        toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for notary in notaries:
-            toreturn=toreturn+'%'+notary.getPersonTitleValue()+'|'+notary.getName1()+'|'+notary.getName2()+'|'+notary.getNumber()+', '+notary.getStreet()+'|'+notary.getZipcode()+' '+notary.getCity()
-        toreturn=toreturn+'</CSV>'
+            toreturn = toreturn + '%' + notary.getPersonTitleValue() + '|' + notary.getName1() + '|' +\
+                    notary.getName2() + '|' + notary.getNumber() + ', ' + notary.getStreet() + '|' +\
+                    notary.getZipcode() + ' ' + notary.getCity()
+        toreturn = toreturn + '</CSV>'
         return toreturn
 
     security.declarePublic('getMultipleRealSubmittersCSV')
+
     def getMultipleRealSubmittersCSV(self):
         """
           Find who really submitted the request...
         """
         who = self.getWhoSubmitted()
-        if who in ['notary', 'both',]:
+        if who in ['notary', 'both']:
             return self.getMultipleNotariesCSV()
         elif who == 'applicant':
             return self.getMultipleApplicantsCSV()
@@ -241,6 +260,7 @@ class UrbanBase:
             return ''
 
     security.declarePublic('getTerm')
+
     def getTerm(self, termFolder, termId):
         """
           Returns a term object for a given term folder
@@ -248,41 +268,41 @@ class UrbanBase:
         tool = getToolByName(self, 'portal_urban')
         urbanConfig = tool.getUrbanConfig(self)
         termFolderObj = getattr(urbanConfig, termFolder)
-        return getattr(termFolderObj, termId) 
+        return getattr(termFolderObj, termId)
 
     security.declarePublic('getPortionOutsText')
+
     def getPortionOutsText(self, linebyline=True):
         """
           Return a displayable version of the parcels
         """
-        toreturn=''
+        toreturn = ''
         isFirst = True
         for portionOutObj in self.getParcels():
             #add a separator between every parcel
             #either a '\n'
             if not isFirst and linebyline:
-                toreturn=toreturn+'\n'
+                toreturn = toreturn + '\n'
             #or an "and "
             elif not isFirst:
-                toreturn=toreturn + ' ' + _('and', 'urban', context=self.REQUEST) + ' '
-            toreturn=toreturn+'section '+portionOutObj.getSection()
-            toreturn=toreturn+' '+portionOutObj.getRadical()
-            if portionOutObj.getBis() !='':
-                toreturn=toreturn+'/'+portionOutObj.getBis()
-            toreturn=toreturn+portionOutObj.getExposant()
-            toreturn=toreturn+portionOutObj.getPuissance()
-            isFirst=False
+                toreturn = toreturn + ' ' + _('and', 'urban', context=self.REQUEST) + ' '
+            toreturn = toreturn + 'section ' + portionOutObj.getSection()
+            toreturn = toreturn + ' ' + portionOutObj.getRadical()
+            if portionOutObj.getBis() != '':
+                toreturn = toreturn + '/' + portionOutObj.getBis()
+            toreturn = toreturn + portionOutObj.getExposant()
+            toreturn = toreturn + portionOutObj.getPuissance()
+            isFirst = False
         return toreturn
 
     security.declarePublic('getListCapaKey')
+
     def getListCapaKey(self):
         """
            Return the list of capaKeys for each parcel(portionOut) for the Licence
         """
-        listCapaKey=[]
+        listCapaKey = []
 #        context=aq_inner(self.context)
-        tool=getToolByName(self, "portal_urban")
-        nisNum=tool.getNISNum()
         for parcel in  self.objectValues('PortionOut'):
             divisioncode = parcel.getDivisionCode()
             section = parcel.getSection()
@@ -291,16 +311,16 @@ class UrbanBase:
             exposant = parcel.getExposant()
             bis = parcel.getBis()
             if not puissance:
-                puissance=0
+                puissance = 0
             if not exposant:
-                exposant="_"
+                exposant = "_"
             if not bis:
-                bis=0
-#            nis section (radical 0x) / (bis 0x) (exposant si blanc _)  (puissance 00x) 
+                bis = 0
+#            nis section (radical 0x) / (bis 0x) (exposant si blanc _)  (puissance 00x)
             try:
-                capaKey="%s%s%04d/%02d%s%03d"%(divisioncode,section,int(radical),int(bis),exposant,int(puissance))
+                capaKey = "%s%s%04d/%02d%s%03d" % (divisioncode, section, int(radical), int(bis), exposant, int(puissance))
             except ValueError:
-                capaKey=""
+                capaKey = ""
             listCapaKey.append(capaKey)
         return listCapaKey
 
