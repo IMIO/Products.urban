@@ -64,12 +64,12 @@
         <td width=70%>
         <fieldset><strong><legend i18n:translate="event_linked_documents">Event linked documents</legend><strong>
         <div tal:define="specificSearch python: 'searchLinkedDocuments';
-                           tool python: context.portal_urban;
-                           showedCols python: ('Title', 'created', 'Creator', );
-                           topic python: None;
-                           showActions python: True;
-                           theObjects python: False;
-                           batchlen python: 50">
+                         tool python: context.portal_urban;
+                         showedCols python: ('Title', 'created', 'Creator', );
+                         topic python: None;
+                         showActions python: True;
+                         theObjects python: False;
+                         batchlen python: 50">
          <metal:listing use-macro="here/urban_macros/macros/listing" />
         </div>
         </fieldset>

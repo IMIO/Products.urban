@@ -690,9 +690,6 @@ msgstr ""
 msgid "searchportionsout"
 msgstr ""
 
-msgid "searchurbanevents"
-msgstr ""
-
 msgid "simple-map_title"
 msgstr ""
 

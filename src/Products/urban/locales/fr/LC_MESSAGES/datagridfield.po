@@ -14,9 +14,9 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: datagridfield\n"
 
-msgid "Road equipments"
-msgstr "Equipements de la voirie au droit du bien"
-
 msgid "Road equipment details"
 msgstr "Détails concernant les équipements"
+
+msgid "Road equipments"
+msgstr "Equipements de la voirie au droit du bien"
 

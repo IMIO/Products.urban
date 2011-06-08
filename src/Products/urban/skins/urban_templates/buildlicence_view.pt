@@ -404,11 +404,13 @@
  <table cellspacing=0 cellpadding=0 width=100%>
  <tr>
   <td>
-    <div tal:define="tool python: getattr(context, 'portal_urban');
-                     topic python: getattr(tool.topics, 'searchurbanevents');
-                     path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
-                     dummy python: context.setPathCritValue(path_crit, context.UID());
-                     showActions python: True;">
+    <div tal:define="specificSearch python: 'searchUrbanEvents';
+                     tool python: context.portal_urban;
+                     showedCols python: ('Title', 'created', 'Creator', );
+                     topic python: None;
+                     showActions python: True;
+                     theObjects python: False;
+                     batchlen python: 50">
      <metal:listing use-macro="here/urban_macros/macros/listing" />
     </div>
   </td>
@@ -764,11 +766,13 @@
  <table cellspacing=0 cellpadding=0 width=100%>
  <tr>
   <td>
-    <div tal:define="tool python: getattr(context, 'portal_urban');
-                     topic python: getattr(tool.topics, 'searchurbanevents');
-                     path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
-                     dummy python: context.setPathCritValue(path_crit, context.UID());
-                     showActions python: True;">
+    <div tal:define="specificSearch python: 'searchUrbanEvents';
+                     tool python: context.portal_urban;
+                     showedCols python: ('Title', 'getBeginDate', 'getEndDate', 'Creator', );
+                     topic python: None;
+                     showActions python: True;
+                     theObjects python: False;
+                     batchlen python: 50">
      <metal:listing use-macro="here/urban_macros/macros/listing" />
     </div>
   </td>

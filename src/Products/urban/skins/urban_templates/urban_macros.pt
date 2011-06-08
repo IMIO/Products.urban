@@ -186,7 +186,6 @@
 <!-- This macro need to receive a topic -->
 <!--We can receive parameters here :
 object 'topic' could be passed or 'tool'
-object 'tool' could be passed or 'topic'
 string 'specificSearch' is passed if object 'tool' is passed
 boolean 'showActions' specify if we show the actions column
 list 'showedCols' specify a list of indexes we want to display if these indexes have been defined in the topic/customViewFields-->
@@ -202,7 +201,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                            isALot isALot|nothing;
                            isAnEquipment isAnEquipment|nothing;">
 
-    <tal:listing condition="topicContents">
+    <tal:listing condition="batch">
     <a style='text-align: right' href="#"
         tal:condition="nocall: here/asPDF|nothing"
         tal:attributes="href string:${here_url}/asPDF/atct_topic_pdf_template/atct_topic_pdf"
@@ -210,7 +209,6 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
         i18n:domain="atcontenttypes">
         Download PDF
     </a>
-
     <tal:custom>
 
         <table class="listing"
@@ -315,7 +313,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
     </tal:listing>
 
     <p class="discreet"
-        tal:condition="python: not topicContents"
+        tal:condition="python: not batch"
         i18n:domain="urban"
         i18n:translate="urban_no_event_added">
         There are currently no event for this element.

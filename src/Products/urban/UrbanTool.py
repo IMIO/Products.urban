@@ -1505,10 +1505,13 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
           This method is used in the templates to search if a topic is not used
         """
         portal_catalog = getToolByName(self, 'portal_catalog')
-        if specificSearch == 'searchRecipients':
+        if specificSearch == 'searchUrbanEvents':
+            #search the existing urbanEvents
+            res = portal_catalog(portal_type='UrbanEvent', path='/'.join(context.getPhysicalPath()))
+        elif specificSearch == 'searchRecipients':
             #search the existing recipients
             res = portal_catalog(portal_type='RecipientCadastre', path='/'.join(context.getPhysicalPath()))
-        if specificSearch == 'searchLinkedDocuments':
+        elif specificSearch == 'searchLinkedDocuments':
             #search the existing recipients
             res = portal_catalog(portal_type='File', path='/'.join(context.getPhysicalPath()))
         else:
@@ -1518,9 +1521,12 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             for brain in res:
                 objs.append(brain.getObject())
             res = objs
-        b_start = self.REQUEST.get('b_start', 0)
-        batch = Batch(res, batchlen, int(b_start), orphan=0)
-        return batch
+        if batch:
+            b_start = self.REQUEST.get('b_start', 0)
+            batch = Batch(res, batchlen, int(b_start), orphan=0)
+            return batch
+        else:
+            return res
 
 
 

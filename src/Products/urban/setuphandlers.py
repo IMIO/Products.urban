@@ -625,12 +625,6 @@ def addGlobalFolders(context):
        ('path', 'ATPathCriterion', '', False),
     ), None, ['Title', 'CreationDate', 'Creator']
     ),
-    # Folder events
-    ( 'searchurbanevents',
-    (  ('Type', 'ATPortalTypeCriterion', ['UrbanEvent',], ''),
-       ('path', 'ATPathCriterion', '', False),
-    ), None, ['Title', 'getBeginDate', 'getEndDate', 'Creator']
-    ),
     # Lots
     ( 'searchlots',
     (  ('Type', 'ATPortalTypeCriterion', ['Lot',], ''),

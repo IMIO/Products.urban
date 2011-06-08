@@ -691,9 +691,6 @@ msgstr "Les notaires"
 msgid "searchportionsout"
 msgstr "Recherche dynamique des parcelles sur un permis"
 
-msgid "searchurbanevents"
-msgstr "Recherche dynamique des événements sur un permis"
-
 msgid "simple-map_title"
 msgstr "Carte simple"
 
