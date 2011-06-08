@@ -72,12 +72,6 @@ msgstr ""
 msgid "RecipientCadastre"
 msgstr ""
 
-msgid "Road equipments"
-msgstr ""
-
-msgid "Road equipments details"
-msgstr ""
-
 msgid "UrbanEventType"
 msgstr ""
 

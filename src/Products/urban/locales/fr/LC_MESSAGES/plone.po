@@ -77,12 +77,6 @@ msgstr "Destinataire"
 msgid "RecipientCadastre"
 msgstr "Destinataire cadastre"
 
-msgid "Road equipments"
-msgstr "Equipement de la voirie au droit du bien"
-
-msgid "Road equipments details"
-msgstr "Détails concernant l'équipement"
-
 msgid "Street"
 msgstr "Rue"
 
