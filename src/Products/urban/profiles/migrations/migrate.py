@@ -17,6 +17,7 @@ def migrateToPlone4(context):
 
     migrateTool(context)
     migrateFormatFieldFromLayers(context)
+    migrateRoadEquipments(context)
 
 def migrateToContact(context):
     """
@@ -389,3 +390,32 @@ def migrateFormatFieldFromLayers(context):
             logger.info("The layer '%s' format's attribute has been removed" % layer.getId())
         except AttributeError:
             logger.info("The layer '%s' has no 'format' attribute!" % layer.getId())
+
+def migrateRoadEquipments(context):
+    """
+        This field is now a DataGridField
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    from types import DictType
+
+    site = context.getSite()
+    catalog = getToolByName(site, 'portal_catalog')
+    #adapt the roadEquipments field
+    brains = catalog(portal_type=('BuildLicence', 'ParcelOutLicence',))
+    for brain in brains:
+        obj = brain.getObject()
+        roadEquipments = obj.getRoadEquipments()
+        #data was stored as a list, now it is a list of dict...
+        if roadEquipments and not isinstance(roadEquipments[0], DictType):
+            #migrate data
+            res = []
+            for roadEquipment in roadEquipments:
+                dict = {}
+                dict['road_equipment'] = roadEquipment
+                dict['road_equipment_details'] = ''
+                res.append(dict)
+            obj.setRoadEquipments(res)
+            logger.info("The roadEquipments for '%s' has been migrated" % obj.getId())
+        else:
+            logger.info("The roadEquipments for '%s' was already migrated!" % obj.getId())

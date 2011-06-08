@@ -22,6 +22,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
+from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -29,14 +30,16 @@ from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 import warnings
 from DateTime import DateTime
 from zope.i18n import translate as _
+from collective.referencedatagridfield import ReferenceDataGridField, ReferenceDataGridWidget
 from Products.CMFCore.utils import getToolByName
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.MultipleStreets import MultipleStreets
 from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 from Products.urban.utils import drainageTechnicalRequirementsDefaultValue, \
 equipmentAndRoadRequirementsDefaultValue
-from collective.referencedatagridfield import ReferenceDataGridField, ReferenceDataGridWidget
 ##/code-section module-header
 
 schema = Schema((
@@ -230,17 +233,16 @@ schema = Schema((
         schemata='urban_road',
         vocabulary='listRoadCoatings',
     ),
-    LinesField(
+    DataGridField(
         name='roadEquipments',
-        widget=MultiSelectionWidget(
-            format='checkbox',
+        widget=DataGridField._properties['widget'](
+            columns={'road_equipment' : SelectColumn("Road equipments", vocabulary="listRoadEquipments"), 'road_equiment_details' : Column("Road equipment details"),},
             label='Roadequipments',
             label_msgid='urban_label_roadEquipments',
             i18n_domain='urban',
         ),
         schemata='urban_road',
-        multiValued=1,
-        vocabulary='listRoadEquipments',
+        columns=("road_equipment", "road_equipment_details"),
     ),
     LinesField(
         name='protectedBuilding',

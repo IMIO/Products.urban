@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-06-01 12:42+0000\n"
+"POT-Creation-Date: 2011-06-08 11:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1755,6 +1755,11 @@ msgstr ""
 #: GenericLicence.py
 #: UrbanCertificateBase.py
 msgid "urban_label_workLocationHouseNumber"
+msgstr ""
+
+#. Default: "street"
+#: GenericLicence.py
+msgid "urban_label_workLocations"
 msgstr ""
 
 #. Default: "Worktype"
