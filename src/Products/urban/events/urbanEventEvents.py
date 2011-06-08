@@ -11,3 +11,8 @@ def setEventTypeType(urbanEvent, event):
     eventTypeTypeInterface = getInterface('', urbanEventTypeType)
     alsoProvides(urbanEvent, eventTypeTypeInterface)
     urbanEvent.reindexObject(['object_provides'])
+
+
+def setCreationDate(urbanEvent, event):
+    urbanEvent.setCreationDate(urbanEvent.getEventDate())
+    urbanEvent.reindexObject(['created'])

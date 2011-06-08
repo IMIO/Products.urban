@@ -15,5 +15,8 @@
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setEventTypeType"/>
+  <subscriber for="..interfaces.IUrbanEvent
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+              handler=".urbanEventEvents.setCreationDate"/>
 
 </configure>
