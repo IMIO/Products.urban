@@ -23,30 +23,34 @@ class TestBuildLicence(unittest.TestCase):
 
     def testGetLastEventWithOneEvent(self):
         self.assertEqual(self.buildLicence._getLastEvent(), None)
-        createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence)
+        createdEvent = createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence)
         event = self.buildLicence._getLastEvent()
+        self.assertEqual(createdEvent, event)
         self.failUnless(event is not None)
 
     def testGetLastEventWithMoreThanOneEvent(self):
         self.assertEqual(self.buildLicence._getLastEvent(), None)
         createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='A')
-        createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='B')
+        ev2 = createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='B')
         event = self.buildLicence._getLastEvent()
         self.failUnless(event is not None)
         self.assertEqual(event.Description(), 'B')
+        self.assertEqual(event, ev2)
 
     def testGetLastDeposit(self):
         self.assertEqual(self.buildLicence.getLastDeposit(), None)
         createObject('UrbanEvent', 'dossier-incomplet', self.buildLicence, description='A')
         createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='B')
-        createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='C')
+        ev3 = createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='C')
         event = self.buildLicence.getLastDeposit()
         self.assertEqual(event.Description(), 'C')
+        self.assertEqual(event, ev3)
 
     def testGetAcknowledgement(self):
         self.assertEqual(self.buildLicence.getLastAcknowledgment(), None)
         createObject('UrbanEvent', 'dossier-incomplet', self.buildLicence, description='A')
-        createObject('UrbanEvent', 'accuse-de-reception', self.buildLicence, description='B')
+        ev2 = createObject('UrbanEvent', 'accuse-de-reception', self.buildLicence, description='B')
         createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='C')
         event = self.buildLicence.getLastAcknowledgment()
         self.assertEqual(event.Description(), 'B')
+        self.assertEqual(event, ev2)
