@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
+from time import sleep
 from zope.component import createObject
 from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
@@ -40,7 +41,9 @@ class TestBuildLicence(unittest.TestCase):
     def testGetLastDeposit(self):
         self.assertEqual(self.buildLicence.getLastDeposit(), None)
         createObject('UrbanEvent', 'dossier-incomplet', self.buildLicence, description='A')
+        sleep(0.2)
         createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='B')
+        sleep(0.2)
         ev3 = createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='C')
         event = self.buildLicence.getLastDeposit()
         self.assertEqual(event.Description(), 'C')

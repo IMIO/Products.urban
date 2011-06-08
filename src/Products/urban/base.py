@@ -13,9 +13,11 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = 'plaintext'
 
+from zope.component.interface import interfaceToName
 from AccessControl import ClassSecurityInfo
 from Products.urban.config import *
 from Products.CMFCore.utils import getToolByName
+
 from zope.i18n import translate as _
 from zope.interface import implements
 import interfaces
@@ -301,3 +303,18 @@ class UrbanBase:
                 capaKey=""
             listCapaKey.append(capaKey)
         return listCapaKey
+
+    def _getLastEvent(self, eventInterface=None):
+        catalog = getToolByName(self, 'portal_catalog')
+        currentPath = '/'.join(self.getPhysicalPath())
+        query = {'path': {'query': currentPath,
+                          'depth': 1},
+                 'meta_type': 'UrbanEvent',
+                 'sort_on': 'created',
+                 'sort_order': 'descending'}
+        if eventInterface is not None:
+            interfaceName = interfaceToName(self, eventInterface)
+            query['object_provides'] = interfaceName
+        events = [brain.getObject() for brain in catalog(**query)[:1]]
+        if events:
+            return events[0]
