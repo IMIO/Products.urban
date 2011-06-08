@@ -19,6 +19,25 @@ def migrateToPlone4(context):
     migrateFormatFieldFromLayers(context)
     migrateRoadEquipments(context)
 
+def migrateToReferenceDataGridField(context):
+    """Migrate declaration, division, environmentalDeclaration, ubranCertificateBase, urbanCertificateTwo, buildLicence, parcelOutLicence types
+        to use referenceDataGridField product instead of workLocation objects
+    """
+    if isNoturbanMigrationsProfile(context):
+        return
+
+    site = context.getSite()
+
+    portal_url = getToolByName(site, 'portal_url')
+
+    brains = site.portal_catalog(portal_type = ['BuildLicence', 'Declaration', 'Division', 'EnvironmentalDeclaration', 'UrbanCertificateBase',
+                    'UrbanCertificateTwo', 'ParcelOutLicence'])
+    for brain in brains:
+        obj = brain.getObject()
+        for previousWorkLocation in obj.objectValues('WorkLocation'):
+            linkStreet = previousWorkLocation.getStreet()
+            numberStreet = previousWorkLocation.getNumber()
+
 def migrateToContact(context):
     """
       More portal_types are now based on Contact.  Migrate old instances

@@ -18,7 +18,8 @@
     <metal:myfield use-macro="python:here.widget('finality', mode='edit')" />
     <metal:myfield use-macro="python:here.widget('subjects', mode='edit')" />
     <fieldset><strong><legend i18n:translate="legend_operation_address">Operation address</legend></strong>
-       <div metal:use-macro="here/urban_macros/macros/urbanWorkLocationEdit" />
+       <!-- <div metal:use-macro="here/urban_macros/macros/urbanWorkLocationEdit" /> -->
+        <metal:myfield use-macro="python:here.widget('workLocations', mode='edit')" />
     </fieldset>
 
 </div>

@@ -28,7 +28,8 @@ from Products.urban.config import *
 from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.CMFCore.utils import getToolByName
 from Products.urban.indexes import UrbanIndexes
-from Products.urban.MultipleStreets import MultipleStreets
+from collective.referencedatagridfield import ReferenceDataGridField
+from collective.referencedatagridfield import ReferenceDataGridWidget
 from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 from zope.i18n import translate as _
@@ -65,6 +66,20 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    ReferenceDataGridField(
+        name='workLocations',
+        widget=ReferenceDataGridWidget(
+            startup_directory='/portal_urban/streets',
+            macro="street_referencedatagridwidget",
+            visible={'edit' : 'visible', 'view' : 'visible'},
+            label='street',
+            label_msgid='urban_label_workLocations',
+            i18n_domain='urban',
+        ),
+        schemata='default',
+        columns=('numero','title' ,'link' ,'uid'),
+        relationship='Street',
+    ),
     ReferenceField(
         name='foldermanagers',
         widget=ReferenceBrowserWidget(
@@ -99,7 +114,7 @@ EnvironmentalDeclaration_schema['title'].required = False
 EnvironmentalDeclaration_schema['title'].visible = False
 ##/code-section after-schema
 
-class EnvironmentalDeclaration(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, BrowserDefaultMixin):
+class EnvironmentalDeclaration(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -139,7 +154,6 @@ class EnvironmentalDeclaration(BaseFolder, UrbanIndexes,  MultipleStreets,  Urba
         #set this permission here if we use the simple_publication_workflow...
         self.manage_permission('List folder contents', ['Manager', ], acquire=0)
         self.updateTitle()
-        self.updateWorkLocation()
 
     security.declarePublic('at_post_edit_script')
     def at_post_edit_script(self):
@@ -148,7 +162,6 @@ class EnvironmentalDeclaration(BaseFolder, UrbanIndexes,  MultipleStreets,  Urba
            XXX This should be replaced by a zope event...
         """
         self.updateTitle()
-        self.updateWorkLocation()
 
     security.declarePublic('updateTitle')
     def updateTitle(self):

@@ -146,11 +146,24 @@ class UrbanBase(object):
         """
           Returns a string reprensenting the different worklocations
         """
+        catalog = getToolByName(self, "uid_catalog")
         signaletic = ''
         for wl in self.getWorkLocations():
+            street = catalog(UID = wl['uid'])[0].getObject()
+            city = street.getParentNode()
+            if street.getPortalTypeName() == 'Locality':
+                streetName = street.getLocalityName()
+            else:
+                streetName = street.getStreetName()
+            number = wl['numero']
             if signaletic:
-                signaletic = unicode(signaletic, 'utf-8') + ' ' + _('and', 'urban', context=self.REQUEST) + ' '
-            signaletic = signaletic + wl.getSignaletic()
+                signaletic = signaletic + ' ' + _('and', 'urban', context=self.REQUEST) + ' '
+            if street.getPortalTypeName() == 'Locality':
+                signaletic += ' ' + _('locality', 'urban', context=self.REQUEST) + ' '            
+            if number:
+                signaletic = signaletic + "%s, %s - %d %s" % (number, streetName, city.getZipCode(), city.Title())
+            else:
+                signaletic = signaletic + "%s (%s - %s)" % (streetName, city.getZipCode(), city.Title())
         return signaletic
 
     security.declarePublic('getLicenceTypeAcronym')

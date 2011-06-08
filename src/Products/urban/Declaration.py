@@ -29,7 +29,8 @@ from Products.CMFPlone.i18nl10n import utranslate
 from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.CMFCore.utils import getToolByName
 from Products.urban.indexes import UrbanIndexes
-from Products.urban.MultipleStreets import MultipleStreets
+from collective.referencedatagridfield import ReferenceDataGridField
+from collective.referencedatagridfield import ReferenceDataGridWidget
 from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 ##/code-section module-header
@@ -83,6 +84,20 @@ schema = Schema((
         ),
         vocabulary='listArticles',
     ),
+    ReferenceDataGridField(
+        name='workLocations',
+        widget=ReferenceDataGridWidget(
+            visible={'edit' : 'visible', 'view' : 'visible'},
+            startup_directory='/portal_urban/streets',
+            macro="street_referencedatagridwidget",
+            label='street declaration',
+            label_msgid='urban_label_workLocations',
+            i18n_domain='urban',
+        ),
+        schemata='default',
+        columns=('numero','title' ,'link' ,'uid'),
+        relationship='Street',
+    ),
     ReferenceField(
         name='foldermanagers',
         widget=ReferenceBrowserWidget(
@@ -117,7 +132,7 @@ Declaration_schema['title'].required = False
 Declaration_schema['title'].searchable = True
 ##/code-section after-schema
 
-class Declaration(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, BrowserDefaultMixin):
+class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -179,7 +194,6 @@ class Declaration(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, Browse
         #set this permission here if we use the simple_publication_workflow...
         self.manage_permission('List folder contents', ['Manager', ], acquire=0)
         self.updateTitle()
-        self.updateWorkLocation()
 
     def at_post_edit_script(self):
         """
@@ -187,7 +201,6 @@ class Declaration(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, Browse
            XXX This should be replaced by a zope event...
         """
         self.updateTitle()
-        self.updateWorkLocation()
 
     security.declarePublic('updateTitle')
     def updateTitle(self):
@@ -256,38 +269,6 @@ class Declaration(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, Browse
             return additionalLayersFolder.objectValues('Layer')
         except AttributeError:
             return None
-
-    security.declarePublic('getWorkLocationStreet')
-    def getWorkLocationStreet(self):
-        """
-          Return the street name
-        """
-        primary = self.getPrimaryWorkLocation()
-        if primary:
-            return primary.getStreet().getStreetName()
-        return ''
-
-    security.declarePublic('getWorkLocationZipCode')
-    def getWorkLocationZipCode(self):
-        """
-          Return the zip code
-        """
-        primary = self.getPrimaryWorkLocation()
-        if primary:
-            return primary.getStreet().aq_inner.aq_parent.getZipCode()
-        return ''
-
-    security.declarePublic('getWorkLocationCity')
-    def getWorkLocationCity(self):
-        """
-          Return the city of the primary WorkLocation
-          We take the Street defined in the WorkLocation and the
-          parent of this street is the City
-        """
-        primary = self.getPrimaryWorkLocation()
-        if primary:
-            return primary.getStreet().aq_inner.aq_parent.Title()
-        return ''
 
 
 

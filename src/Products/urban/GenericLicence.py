@@ -35,7 +35,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.indexes import UrbanIndexes
-from Products.urban.MultipleStreets import MultipleStreets
 from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 from Products.urban.utils import drainageTechnicalRequirementsDefaultValue, \
@@ -475,7 +474,7 @@ GenericLicence_schema['title'].searchable = True
 GenericLicence_schema['title'].widget.visible = False
 ##/code-section after-schema
 
-class GenericLicence(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, BrowserDefaultMixin):
+class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

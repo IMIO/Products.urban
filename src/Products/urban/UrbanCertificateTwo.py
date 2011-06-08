@@ -24,7 +24,8 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.urban.indexes import UrbanIndexes
-from Products.urban.MultipleStreets import MultipleStreets
+from collective.referencedatagridfield import ReferenceDataGridField
+from collective.referencedatagridfield import ReferenceDataGridWidget
 from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 ##/code-section module-header
@@ -67,6 +68,20 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    ReferenceDataGridField(
+        name='workLocations',
+        widget=ReferenceDataGridWidget(
+            startup_directory='/portal_urban/streets',
+            macro="street_referencedatagridwidget",
+            visible={'edit' : 'visible', 'view' : 'visible'},
+            label='street',
+            label_msgid='urban_label_workLocations',
+            i18n_domain='urban',
+        ),
+        schemata='default',
+        columns=('numero','title' ,'link' ,'uid'),
+        relationship='Street',
+    ),
 
 ),
 )
@@ -81,7 +96,7 @@ UrbanCertificateTwo_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class UrbanCertificateTwo(BaseFolder, UrbanIndexes,  MultipleStreets,  UrbanBase, UrbanCertificateBase, BrowserDefaultMixin):
+class UrbanCertificateTwo(BaseFolder, UrbanIndexes,  UrbanBase, UrbanCertificateBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
