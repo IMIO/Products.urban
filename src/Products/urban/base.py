@@ -158,12 +158,13 @@ class UrbanBase(object):
             number = wl['numero']
             if signaletic:
                 signaletic = signaletic + ' ' + _('and', 'urban', context=self.REQUEST) + ' '
-            if street.getPortalTypeName() == 'Locality':
-                signaletic += ' ' + _('locality', 'urban', context=self.REQUEST) + ' '            
+            #special case for locality where we clearly specify that this is a locality
+            if street.portal_type == 'Locality':
+                signaletic += _('locality_for_worklocation', 'urban', context=self.REQUEST, default='locality') + ' '            
             if number:
                 signaletic = signaletic + "%s, %s - %d %s" % (number, streetName, city.getZipCode(), city.Title())
             else:
-                signaletic = signaletic + "%s (%s - %s)" % (streetName, city.getZipCode(), city.Title())
+                signaletic = signaletic + "%s - %d %s" % (streetName, city.getZipCode(), city.Title())
         return signaletic
 
     security.declarePublic('getLicenceTypeAcronym')

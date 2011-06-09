@@ -161,6 +161,9 @@ msgstr ""
 msgid "alsocalled_descr"
 msgstr ""
 
+msgid "locality_for_worklocation"
+msgstr ""
+
 msgid "and"
 msgstr ""
 

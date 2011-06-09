@@ -502,6 +502,9 @@ msgstr "Lots"
 msgid "legend_operation_address"
 msgstr "Adresse de l'exploitation"
 
+msgid "locality_for_worklocation"
+msgstr "au lieu-dit"
+
 msgid "manage_architects"
 msgstr "Gérer les architectes"
 
