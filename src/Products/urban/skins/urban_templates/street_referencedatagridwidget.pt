@@ -19,8 +19,8 @@
 		    tal:define="oddrow repeat/data/odd;"
                     tal:attributes="class python:oddrow and 'odd' or 'even';"
 		    tal:condition="data/url">
-                    Numero: <span tal:content="data/numero"/>
-                    Rue: <span tal:content="data/title"/>
+                    <strong><span i18n:translate="">Number</span>:</strong> <span tal:content="data/numero"/>
+                    <strong><span i18n:translate="">Street</span>:</strong> <span tal:content="data/title"/>
 		</li></tal:loop>
             </ul>
 	  </div>
