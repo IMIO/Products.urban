@@ -728,7 +728,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         #set this permission here if we use the simple_publication_workflow...
         self.manage_permission('List folder contents', ['Manager', ], acquire=0)
         self.updateTitle()
-        self.updateWorkLocation()
 
     security.declarePublic('at_post_edit_script')
     def at_post_edit_script(self):
@@ -737,7 +736,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
            XXX This should be replaced by a zope event...
         """
         self.updateTitle()
-        self.updateWorkLocation()
 
     security.declarePublic('updateTitle')
     def updateTitle(self):
