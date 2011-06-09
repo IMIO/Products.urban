@@ -1882,3 +1882,14 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
+#street_referencedatagridwidget
+msgid "colnamenumero"
+msgstr ""
+
+#street_referencedatagridwidget
+msgid "colnameTitle"
+msgstr ""
+
+#street_referencedatagridwidget
+msgid "Add a work location"
+msgstr ""

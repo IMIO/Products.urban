@@ -59,10 +59,6 @@ msgstr "Notaire"
 msgid "NotaryLetter"
 msgstr "Lettre de notaire"
 
-# street_referencedatagridwidget
-msgid "Number"
-msgstr "Numéro"
-
 msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
 
@@ -194,10 +190,6 @@ msgstr "PEB"
 
 msgid "label_schema_urban_road"
 msgstr "Voirie"
-
-# street_referencedatagridwidget
-msgid "numero"
-msgstr "Numéro"
 
 msgid "please_enter_more_letters"
 msgstr "Il est nécessaire que vous entriez plusieurs lettres pour effectuer la recherche"

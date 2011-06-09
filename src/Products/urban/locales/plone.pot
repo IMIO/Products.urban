@@ -96,18 +96,6 @@ msgstr ""
 msgid "workLocationStreet"
 msgstr ""
 
-#street_referencedatagridwidget
-msgid "numero"
-msgstr ""
-
-#street_referencedatagridwidget
-msgid "Number"
-msgstr ""
-
-#street_referencedatagridwidget
-msgid "Street"
-msgstr ""
-
 #status messages...
 msgid "db_connection_successfull"
 msgstr ""

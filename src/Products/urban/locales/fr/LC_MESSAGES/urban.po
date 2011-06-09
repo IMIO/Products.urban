@@ -18,6 +18,10 @@ msgstr ""
 msgid "Add a parcel"
 msgstr "Ajouter une parcelle"
 
+# street_referencedatagridwidget
+msgid "Add a work location"
+msgstr "Ajouter une adresse"
+
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
@@ -227,6 +231,14 @@ msgstr "--- Choisissez ---"
 
 msgid "click_to_view_or_add"
 msgstr "Cliquez ici pour voir ou ajouter des documents"
+
+# street_referencedatagridwidget
+msgid "colnameTitle"
+msgstr "Rue ou lieu-dit"
+
+# street_referencedatagridwidget
+msgid "colnamenumero"
+msgstr "Numéro"
 
 msgid "concerned_parcels"
 msgstr "Parcelle(s) concernée(s)"
@@ -1762,7 +1774,7 @@ msgstr "Numéro et boîte"
 #. Default: "street"
 #: GenericLicence.py
 msgid "urban_label_workLocations"
-msgstr "Situation des travaux"
+msgstr "Adresse des travaux"
 
 #. Default: "Worktype"
 #: BuildLicence.py

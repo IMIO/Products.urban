@@ -2,7 +2,7 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      i18n:domain="plone">
+      i18n:domain="urban">
 <body>
 
     <!-- VIEW -->
@@ -19,8 +19,8 @@
 		    tal:define="oddrow repeat/data/odd;"
                     tal:attributes="class python:oddrow and 'odd' or 'even';"
 		    tal:condition="data/url">
-                    <strong><span i18n:translate="">Number</span>:</strong> <span tal:content="data/numero"/>
-                    <strong><span i18n:translate="">Street</span>:</strong> <span tal:content="data/title"/>
+                    <strong><span i18n:translate="colnamenumero">Number</span>:</strong> <span tal:content="data/numero"/>
+                    <strong><span i18n:translate="colnameTitle">Street</span>:</strong> <span tal:content="data/title"/>
 		</li></tal:loop>
             </ul>
 	  </div>
@@ -44,7 +44,7 @@
                     <tr>
 			<tal:block tal:repeat="c columns">
                            <th tal:attributes="class python:(not c['visible'] or c['id'] =='link') and 'dgw-hidden-column discreet' or 'discreet';"  style="text-align: left" 
-                               tal:content="c/label" 
+                               tal:content="python: 'colname' + c['label']" 
                                i18n:translate="">Column name</th>
                       </tal:block>
                         <th /> 
@@ -126,8 +126,9 @@
             </table>
 
             <a class="referencedatagridwidget-add-button" id="datagridwidget-add-button"
-			   tal:condition="field/allow_insert"
-                   tal:attributes='onclick python: "dataGridFieldFunctions.addReferenceDataGridRow(\"" + field.getName() + "\")"'>Add new</a>
+			tal:condition="field/allow_insert"
+                        tal:attributes='onclick python: "dataGridFieldFunctions.addReferenceDataGridRow(\"" + field.getName() + "\")"'
+                        i18n:translate="">Add a work location</a>
 
 			<tal:comment replace="nothing">
 				<!-- Button that allowes creation of the initial row when DGF is empty -->
