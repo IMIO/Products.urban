@@ -1228,6 +1228,11 @@ msgstr "Nombre de réclamations orales"
 msgid "urban_label_investigationPoint"
 msgstr "Point"
 
+#. Default: "Investigationreasons"
+#: GenericLicence.py
+msgid "urban_label_investigationReasons"
+msgstr "Particularités, raisons de l'enquête"
+
 #. Default: "Investigationstart"
 #: GenericLicence.py
 #: UrbanCertificateTwo.py
@@ -1760,13 +1765,6 @@ msgstr "Visibilité?"
 msgid "urban_label_webServerHost"
 msgstr "Hôte serveur GeoServer"
 
-#. Default: "Worklocation"
-#: Declaration.py
-#: GenericLicence.py
-#: UrbanCertificateBase.py
-msgid "urban_label_workLocation"
-msgstr "Adresse des travaux"
-
 #. Default: "Worklocationhousenumber"
 #: Declaration.py
 #: GenericLicence.py
@@ -1775,7 +1773,9 @@ msgid "urban_label_workLocationHouseNumber"
 msgstr "Numéro et boîte"
 
 #. Default: "street"
-#: GenericLicence.py
+#: Declaration.py
+#: Division.py
+#: EnvironmentalDeclaration.py
 msgid "urban_label_workLocations"
 msgstr "Adresse des travaux"
 

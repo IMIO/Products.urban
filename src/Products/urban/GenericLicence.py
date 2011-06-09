@@ -309,6 +309,18 @@ schema = Schema((
         default_content_type='text/html',
         default_output_type='text/html',
     ),
+    TextField(
+        name='investigationReasons',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Investigationreasons',
+            label_msgid='urban_label_investigationReasons',
+            i18n_domain='urban',
+        ),
+        schemata='urban_investigation_and_advices',
+        default_content_type='text/html',
+        default_output_type='text/html',
+    ),
     LinesField(
         name='solicitOpinionsTo',
         widget=MultiSelectionWidget(

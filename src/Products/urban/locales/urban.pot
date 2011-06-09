@@ -1196,6 +1196,11 @@ msgstr ""
 msgid "urban_label_investigationDetails"
 msgstr ""
 
+#. Default: "Investigationreasons"
+#: GenericLicence.py
+msgid "urban_label_investigationReasons"
+msgstr ""
+
 #. Default: "Investigationend"
 #: GenericLicence.py
 #: UrbanCertificateTwo.py
@@ -1743,13 +1748,6 @@ msgstr ""
 msgid "urban_label_webServerHost"
 msgstr ""
 
-#. Default: "Worklocation"
-#: Declaration.py
-#: GenericLicence.py
-#: UrbanCertificateBase.py
-msgid "urban_label_workLocation"
-msgstr ""
-
 #. Default: "Worklocationhousenumber"
 #: Declaration.py
 #: GenericLicence.py
@@ -1759,6 +1757,11 @@ msgstr ""
 
 #. Default: "street"
 #: GenericLicence.py
+#: Declaration.py
+#: Division.py
+#: EnvironmentalDeclaration.py
+#: UrbanCertificateBase.py
+#: UrbanCertificateTwo.py
 msgid "urban_label_workLocations"
 msgstr ""
 
