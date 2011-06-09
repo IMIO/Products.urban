@@ -233,7 +233,7 @@ schema = Schema((
     ),
     DataGridField(
         name='roadEquipments',
-        widget=DataGridField._properties['widget'](
+        widget=DataGridWidget(
             columns={'road_equipment' : SelectColumn("Road equipments", vocabulary="listRoadEquipments"), 'road_equipment_details' : Column("Road equipment details"),},
             label='Roadequipments',
             label_msgid='urban_label_roadEquipments',
