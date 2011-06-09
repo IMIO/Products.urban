@@ -78,6 +78,7 @@
               </tr>
              </table>
             <metal:myfield use-macro="python:here.widget('investigationDetails', mode='edit')" />
+            <metal:myfield use-macro="python:here.widget('investigationReasons', mode='edit')" />
             <metal:myfield use-macro="python:here.widget('solicitOpinionsTo', mode='edit')" />
             </fieldset>
             <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_peb">PEB</legend></strong>
@@ -93,7 +94,7 @@
                 repeat="fieldset python: ['urban_description', 'urban_road', 'urban_location', 'urban_investigation_and_advices', 'urban_peb']">
                 <!-- hide some fieldsets... -->
                 <tal:block condition="python: not fieldset in ['metadata', 'default', 'settings', 'categorization', 'ownership', 'dates', ]">
-                <fieldset tal:define="fieldsetid python:putils.normalizeString(fieldset)"
+                <fieldset class="urbanEditWithTabbing" tal:define="fieldsetid python:putils.normalizeString(fieldset)"
                         tal:attributes="id string:fieldset-${fieldsetid}"
                         tal:omit-tag="sole_fieldset">
                   <legend id=""

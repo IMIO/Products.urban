@@ -32,7 +32,7 @@
  <span tal:replace="here/Title" tal:omit-tag="">Title</span>
 </h1>
 
-<div tal:condition="useTabbing">
+<div id="urbanViewWithTabbing" tal:condition="useTabbing">
 <dl class="formTabs enableFormTabbing">
     <dt class="formTab" tal:attributes="class python: test(context.getApplicants(), 'formTab', 'formTab notify')" id="fieldsetlegend-urban_description" i18n:domain="plone" i18n:translate="label_schema_urban_description"><span>Description</span></dt>
     <dd id="fieldset-urban_description">
@@ -327,22 +327,27 @@
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_investigationArticles">Investigation articles</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('investigationArticles', mode='view')" /><span tal:condition="not: python: context.investigationArticles" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('investigationArticles', mode='view')" /><span tal:condition="not: context/getInvestigationArticles" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_investigationStart">from</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('investigationStart', mode='view')" /><span tal:condition="not: python: context.investigationStart" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('investigationStart', mode='view')" /><span tal:condition="not: context/getInvestigationStart" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_investigationEnd">to</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('investigationEnd', mode='view')" /><span tal:condition="not: python: context.investigationEnd" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('investigationEnd', mode='view')" /><span tal:condition="not: context/getInvestigationEnd" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_investigationDetails">Investigation details</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><tal:block replace="structure context/getInvestigationDetails" /><span tal:condition="not: python: context.investigationDetails" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><tal:block replace="structure context/getInvestigationDetails" /><span tal:condition="not: context/getInvestigationDetails" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_investigationReasons">Investigation reasons</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><tal:block replace="structure context/getInvestigationReasons" /><span tal:condition="not: context/getInvestigationReasons" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</span> :</b></u></td>
@@ -522,6 +527,11 @@
   <td valign="top"><u><b><span i18n:translate="urban_label_investigationDetails">Investigation details</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><tal:block replace="structure context/getInvestigationDetails" /><span tal:condition="not: python: context.investigationDetails" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_investigationReasons">Investigation reasons</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><tal:block replace="structure context/getInvestigationReasons" /><span tal:condition="not: context/getInvestigationReasons" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</span> :</b></u></td>
