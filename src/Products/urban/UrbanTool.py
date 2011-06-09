@@ -1459,11 +1459,12 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             else:
                 #we need to translate the month and maybe the day (1er)
                 year, month, day = str(date.strftime('%Y/%m/%d')).split('/')
-                #we try to translate the day in any case...
-                #so in french '1' becomes '1er' but in english, '1' becomes '1st',
-                #'2' becomes '2nd', ...
+                #special case when the day need to be translated
+                #for example in french '1' becomes '1er' but in english, '1' becomes '1st'
+                #if no translation is available, then we use the default where me remove foregoing '0'
+                #'09' becomes '9', ...
                 daymsgid = "date_day_%s" % day
-                translatedDay = _(daymsgid, 'urban', context=self.REQUEST)
+                translatedDay = _(daymsgid, 'urban', context=self.REQUEST, default=day.lstrip('0'))
                 #translate the month
                 #msgids already exist in the 'plonelocales' domain
                 monthMappings = {
