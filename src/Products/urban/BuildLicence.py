@@ -25,15 +25,11 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from zope.i18n import translate as _
+from Products.CMFCore.utils import getToolByName
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from GenericLicence import GenericLicence
 from GenericLicence import GenericLicence_schema
-from Products.CMFCore.utils import getToolByName
-from zope.i18n import translate as _
-
-from collective.referencedatagridfield import PKG_NAME
-from collective.referencedatagridfield import ReferenceDataGridField
-from collective.referencedatagridfield import ReferenceDataGridWidget
 
 slave_fields_subdivision = (
     # if in subdivision, display a textarea the fill some details

@@ -35,7 +35,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.indexes import UrbanIndexes
-from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 from Products.urban.utils import drainageTechnicalRequirementsDefaultValue, \
 equipmentAndRoadRequirementsDefaultValue
@@ -643,8 +642,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
           Return the folder were are stored folder managers
           This depend on the real portal_type
         """
-        portal = getToolByName(self, 'portal_url').getPortalObject()
-        rootPath = '/'.join(portal.getPhysicalPath())
         return '/portal_urban/%s/foldermanagers' % self.getPortalTypeName().lower()
 
     security.declarePublic('getApplicants')
