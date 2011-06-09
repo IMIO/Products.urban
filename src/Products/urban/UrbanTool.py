@@ -29,26 +29,22 @@ from Products.CMFCore.utils import UniqueObject
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
-from DateTime import DateTime
-from StringIO import StringIO
-from Acquisition import aq_base
-from Products.ZCTextIndex.ParseTree import ParseError
-from Products.CMFPlone.i18nl10n import utranslate
-from Products.CMFCore.utils import getToolByName
 import appy.pod.renderer
-import os, time
-from StringIO import StringIO
-from Products.urban.utils import *
-from AccessControl import getSecurityManager
-from Acquisition import aq_inner, aq_parent
-import time
 import psycopg2
 import psycopg2.extras
-from Products.PageTemplates.Expressions import getEngine
+import os, time
+from DateTime import DateTime
+from StringIO import StringIO
+from AccessControl import getSecurityManager
+from Acquisition import aq_base
+from zope.i18n import translate as _
+from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.Expression import Expression
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFPlone.PloneBatch import Batch
-from zope.i18n import translate as _
+from Products.PageTemplates.Expressions import getEngine
+from Products.ZCTextIndex.ParseTree import ParseError
+from Products.urban.utils import getOsTempFolder
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 DB_QUERY_ERROR = "Programming error in query"
@@ -678,12 +674,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
       """
          Check if the provided parameters are OK
       """
-      portal = getToolByName(self, "portal_url").getPortalObject()
-
       #build connection string
       ptool = getToolByName(self, "plone_utils")
       try:
-          dbc = psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (self.getSqlName(), self.getSqlUser(), self.getSqlHost(), self.getSqlPassword()))
+          psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (self.getSqlName(), self.getSqlUser(), self.getSqlHost(), self.getSqlPassword()))
           ptool.addPortalMessage(_(u"db_connection_successfull", 'plone', context=self.REQUEST), type='info')
       except psycopg2.OperationalError, e:
           ptool.addPortalMessage(_(u"db_connection_error", 'plone', mapping={u'error': unicode(e.__str__(), 'utf-8')}, context=self.REQUEST))
@@ -708,7 +702,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
            Create the PortionOut with given parameters...
         """
-        portal_urban = getToolByName(self,'portal_urban')
         dv=self.queryDB("SELECT da,divname FROM da WHERE da="+division)[0]['divname']
         if bis=='0':
             bis=''
@@ -808,7 +801,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
             elif url.startswith("http://") or url.startswith("https://"):
                 if method == "POST":
-                    length = int(self.REQUEST["CONTENT_LENGTH"])
+                    #length = int(self.REQUEST["CONTENT_LENGTH"])
                     headers = {"Content-Type": self.REQUEST["CONTENT_TYPE"]}
                     body = self.REQUEST["BODY"]
 
@@ -841,8 +834,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
              Get List of Capakey around a parcell (ex:92088C0335/00D000)
         """
-
-        dbcon = self.getDBConnection()
         qry = """SELECT capakey
                 FROM capa
                 WHERE st_intersects(
@@ -870,9 +861,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
             Get the Geom (in WKT) of the the buffer (ex:92088C0335/00D000)
         """
-        dbcon = self.getDBConnection()
         qry = "SELECT astext(ST_BUFFER(the_geom,%s)) AS geom FROM capa WHERE capakey LIKE '%s'" % (bufferWidth,parcelleKey)
-
         try:
             results = self.queryDB(qry)
         except:
@@ -928,7 +917,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         #the id of an urbanConfig is the same as the portal_type name of the context in lowercase
         #be sure we have lowercase
         urbanConfigId = urbanConfigId.lower()
-        res = None
         try:
             urbanConfig = getattr(self, urbanConfigId)
             return urbanConfig
@@ -1166,10 +1154,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         exposant=exposant.upper()
         catalogTool = getToolByName(self, 'portal_catalog')
         #see PortionOut.parcelInfosIndex to see how the index is build
-        if partie:
-            partiestr = '1'
-        else:
-            partiestr = '0'
+        #if partie:
+        #    partiestr = '1'
+        #else:
+        #    partiestr = '0'
         parcelInfosIndex = '%s,%s,%s,%s,%s,%s,%s' % (division, section, radical, bis, exposant, puissance, '1')
         brains = catalogTool(portal_type=foldertypes, parcelInfosIndex=parcelInfosIndex)
         parcelInfosIndex2 = '%s,%s,%s,%s,%s,%s,%s' % (division, section, radical, bis, exposant, puissance, '0')
@@ -1252,7 +1240,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         try:
             ctx = getEngine().getContext(data)
             res = Expression(self.getNumerotationTALExpression())(ctx)
-        except Exception, e:
+        except Exception:
             logger.warn('The defined TAL expression about numerotation in portal_urban is wrong!')
         return res
 
@@ -1315,7 +1303,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def generateStatsINS(self, datefrom, dateto):
         """
         """
-        portal_url=getToolByName(self,'portal_url')
         if (len(datefrom) != 10) or (len(dateto) != 10):
             return 'Date incorrecte'
         datesplited=datefrom.split('/')
@@ -1331,7 +1318,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             folderobj=objResult.aq_inner.aq_parent
             if folderobj.getUsage() != 'not_applicable':
                 folders.append(folderobj)
-        fileType='odt'
         tempFileName =  tempFileName = '%s/%s_%f.%s' % (getOsTempFolder(), 'statsins', time.time(),'.odt')
         renderer = appy.pod.renderer.Renderer(StringIO(templateObj), {'self': self, 'folders': folders}, tempFileName)
         renderer.run()
@@ -1507,13 +1493,13 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         portal_catalog = getToolByName(self, 'portal_catalog')
         if specificSearch == 'searchUrbanEvents':
             #search the existing urbanEvents
-            res = portal_catalog(portal_type='UrbanEvent', path='/'.join(context.getPhysicalPath()))
+            res = portal_catalog(portal_type='UrbanEvent', path='/'.join(context.getPhysicalPath()), sort_on='created')
         elif specificSearch == 'searchRecipients':
             #search the existing recipients
-            res = portal_catalog(portal_type='RecipientCadastre', path='/'.join(context.getPhysicalPath()))
+            res = portal_catalog(portal_type='RecipientCadastre', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')
         elif specificSearch == 'searchLinkedDocuments':
             #search the existing recipients
-            res = portal_catalog(portal_type='File', path='/'.join(context.getPhysicalPath()))
+            res = portal_catalog(portal_type='File', path='/'.join(context.getPhysicalPath()), sort_on='created')
         else:
             res = []
         if theObjects:
