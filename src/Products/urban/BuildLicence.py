@@ -404,7 +404,6 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         super(GenericLicence).__thisclass__.at_post_edit_script(self)
 
-
     def getLastDeposit(self):
         return self._getLastEvent(interfaces.IDeposit)
 
@@ -413,6 +412,7 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     def getLastAcknowledgment(self):
         return self._getLastEvent(interfaces.IAcknowledgment)
+
 
 
 registerType(BuildLicence, PROJECTNAME)

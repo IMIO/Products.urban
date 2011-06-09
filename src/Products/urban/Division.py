@@ -110,6 +110,7 @@ schema = Schema((
             label_msgid='urban_label_workLocations',
             i18n_domain='urban',
         ),
+        allowed_types=('Street', 'Locality'),
         schemata='default',
         columns=('numero','title' ,'link' ,'uid'),
         relationship='Street',
@@ -172,7 +173,6 @@ class Division(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         """
         """
         pass
-
     security.declarePublic('getDefaultReference')
     def getDefaultReference(self):
         """
