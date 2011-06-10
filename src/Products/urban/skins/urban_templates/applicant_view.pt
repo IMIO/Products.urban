@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<body>
+<metal:main fill-slot="main">
+<metal:main_macro define-macro="main">
+    <metal:body define-macro="body_macro">
+
+<h1 class="documentFirstHeading">
+ <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
+ <span tal:replace="here/Title" tal:omit-tag="">Title</span>
+</h1>
+<div tal:replace="structure provider:plone.belowcontenttitle" />
+<!-- Back to the build licence... -->
+<br />
+<a class="no_underline" href="."><img src="goback.png" />&nbsp;<span i18n:translate="back_to_licence">Go back to the licence</span></a>
+
+<fieldset><b><legend i18n:translate="legend_applicant_data">Applicant details</legend></b>
+    <table cellpadding=0 cellspacing=0>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_personTitle">personTitle</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('personTitle', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_name1">name1</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('name1', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_name2">name2</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('name2', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_society">Society</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('society', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_street">Street</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('street', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_number">Number</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('number', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_zipcode">Zip code</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('zipcode', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_city">City</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('city', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_email">Email</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('email', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_phone">Phone</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('phone', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_fax">Fax</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('fax', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_nationalRegister">National register</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('nationalRegister', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><u><b><span i18n:translate="urban_label_representedBy">Represented by</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('representedBy', mode='view')" /></td>
+     </tr>
+    </table>
+</fieldset>
+
+</metal:body>
+</metal:main_macro>
+</metal:main>
+</body>
+</html>

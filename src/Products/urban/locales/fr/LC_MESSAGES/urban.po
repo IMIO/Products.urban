@@ -490,6 +490,9 @@ msgstr "Sélectionner une rue"
 msgid "legend"
 msgstr "Légende"
 
+msgid "legend_applicant_data"
+msgstr "Coordonnées du demandeur"
+
 msgid "legend_details"
 msgstr "Détails"
 

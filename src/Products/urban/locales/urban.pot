@@ -480,6 +480,9 @@ msgstr ""
 msgid "legend"
 msgstr ""
 
+msgid "legend_applicant_data"
+msgstr ""
+
 msgid "legend_details"
 msgstr ""
 
