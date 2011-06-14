@@ -54,7 +54,10 @@ urbanEventTypes = {
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
                     'eventTypeType': 'Products.urban.interfaces.IAcknowledgment',
-                    'podTemplates': ({'id': "urb-accuse", 'title': "Accusé de réception"},),
+                    'podTemplates': (
+                                     {'id': "urb-accuse", 'title': "Accusé de réception"},
+                                     {'id': "urb-accuse-demande-paiement", 'title': "Demande de paiement"},
+                                    ),
                     },
                     {
                     'id': "avis-etude-incidence",
