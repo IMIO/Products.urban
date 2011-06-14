@@ -9,16 +9,21 @@
 
 <metal:block fill-slot="top_slot"
              tal:define="dummy python:request.set('disable_border',1)" />
+<head>
+    <title i18n:translate="urban_export_list220">Export list 220</title>
+</head>
 
 <body>
 <div metal:fill-slot="main">
 <!-- définition des variables -->
 
-<h1 class="documentFirstHeading" i18n:translate="urban_statistics_ins">Export statistics INS</h1>
+<h1 class="documentFirstHeading" i18n:translate="urban_export_list220">Export list 220</h1>
 
-<form action="genstatsins" method="GET">
+<form action="urbainxml" method="GET">
 <span i18n:translate="label_from">From</span> : <input type="text" name="datefrom">
-<span i18n:translate="label_to">To</span> : <input type="text" name="dateto">
+<span i18n:translate="label_to">To</span> : <input type="text" name="dateto"><br>
+<input type="checkbox" name="list_only" value=1>
+<label for="list_only" i18n:translate="label_list_only">Only display the list</label>
 <br /><br /><input class="searchButton" type="submit" value="label_export" i18n:attributes="value" />
 
 </form>

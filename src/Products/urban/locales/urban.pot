@@ -467,7 +467,16 @@ msgstr ""
 msgid "investigationarticles_folder_title"
 msgstr ""
 
-msgid "label_colname_CreationDate"
+msgid "label_export"
+msgstr ""
+
+msgid "label_from"
+msgstr ""
+
+msgid "label_to"
+msgstr ""
+
+msgid "label_list_only"
 msgstr ""
 
 msgid "label_colname_Creator"
@@ -1844,6 +1853,12 @@ msgid "urban_searchbyparcel_descr"
 msgstr ""
 
 msgid "urban_searchbystreet_descr"
+msgstr ""
+
+msgid "urban_statistics_ins"
+msgstr ""
+
+msgid "urban_export_list220"
 msgstr ""
 
 msgid "urban_searches"

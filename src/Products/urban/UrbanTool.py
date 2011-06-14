@@ -955,7 +955,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return self.simplemapjs_gen._exec(bound_names=bound_names, args=args, kw=kw)
 
     security.declarePublic('generateUrbainXML')
-    def generateUrbainXML(self, datefrom, dateto,listeseule):
+    def generateUrbainXML(self, datefrom, dateto, list_only):
         """
         """
         if (len(datefrom) != 10) or (len(dateto) != 10):
@@ -1095,7 +1095,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 xmlContent=xmlContent+'  </Item220>\n'
         xmlContent=xmlContent+'</dataroot>\n'
         htmllist=htmllist+'</TABLE></HTML>'
-        if listeseule:
+        if list_only:
             output = StringIO()
             output.write(unicode(htmllist.replace("&","&amp;"),'iso-8859-1'))
             return output.getvalue()

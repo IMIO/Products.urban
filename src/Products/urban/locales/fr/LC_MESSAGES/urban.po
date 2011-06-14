@@ -458,9 +458,6 @@ msgstr "au"
 msgid "investigationarticles_folder_title"
 msgstr "Articles pour les enquêtes"
 
-msgid "label_colname_CreationDate"
-msgstr "Créé le"
-
 msgid "label_colname_Creator"
 msgstr "Créateur"
 
@@ -491,11 +488,23 @@ msgstr "Rue"
 msgid "label_edit"
 msgstr "Modifier"
 
+msgid "label_export"
+msgstr "Exporter"
+
+msgid "label_from"
+msgstr "Du"
+
+msgid "label_list_only"
+msgstr "Afficher seulement la liste"
+
 msgid "label_remove"
 msgstr "Supprimer"
 
 msgid "label_select_street"
 msgstr "Sélectionner une rue"
+
+msgid "label_to"
+msgstr "Au"
 
 msgid "legend"
 msgstr "Légende"
@@ -796,6 +805,9 @@ msgstr "Entrez les 4 coordonnées des coins de la carte en séparant les valeurs
 #: BuildLicence.py
 msgid "urban_descr_subdivisionDetails"
 msgstr "Numéro des lots, ..."
+
+msgid "urban_export_list220"
+msgstr "Exportation liste 220"
 
 #. Default: "If checked, a additional paragraph will be added in the licence document"
 #: BuildLicence.py
@@ -1853,6 +1865,9 @@ msgstr "Recherche de dossiers par rue"
 
 msgid "urban_searches"
 msgstr "Recherches"
+
+msgid "urban_statistics_ins"
+msgstr "Exportation statistiques INS"
 
 msgid "urbancertificateone_searchacceptedlicences"
 msgstr "certificats d'urbanisme 1 acceptés"

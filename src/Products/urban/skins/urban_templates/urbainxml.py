@@ -5,12 +5,12 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=datefrom='',dateto='',listeseule=''
+##parameters=datefrom='',dateto='',list_only=''
 ##
 from DateTime import DateTime
-if listeseule:
+if list_only:
     container.REQUEST.RESPONSE.setHeader('content-type', 'text/html')
 else:
     container.REQUEST.RESPONSE.setHeader('content-type', 'text/plain')
-return context.portal_urban.generateUrbainXML(datefrom,dateto,listeseule)
+return context.portal_urban.generateUrbainXML(datefrom, dateto, list_only)
 
