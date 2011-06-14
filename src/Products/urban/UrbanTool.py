@@ -380,6 +380,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
           Create an element in an UrbanEvent
         """
+        import pdb; pdb.set_trace()
         urbanTemplate=self.uid_catalog(UID=urban_template_uid)[0]
         urbanTemplateObj=urbanTemplate.getObject()
         urbanEvent=self.uid_catalog(UID=urban_event_uid)[0]
@@ -387,15 +388,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         licenceFolder=urbanEventObj.getParentNode()
         fileType='odt'
         tempFileName = '%s/%s_%f.%s' % (
-            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'.odt')
+            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'odt')
         tempFileNameHeader = '%s/%s_%f_header.%s' % (
-            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'.odt')
+            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'odt')
         tempFileNameFooter = '%s/%s_%f_footer.%s' % (
-            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'.odt')
+            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'odt')
         tempFileNameReference = '%s/%s_%f_reference.%s' % (
-            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'.odt')
+            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'odt')
         tempFileNameSignatures = '%s/%s_%f_signatures.%s' % (
-            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'.odt')
+            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'odt')
         try:
             applicantobj=licenceFolder.getApplicants()[0]
         except:
@@ -454,7 +455,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         proposedId = urbanTemplateObjId + '.odt'
         i = 1
         while hasattr(aq_base(urbanEventObj), proposedId):
-            proposedId = '%s-%d.odt' % (urbanTemplateObjId, 1)
+            proposedId = '%s-%d.odt' % (urbanTemplateObjId, i)
             i = i + 1
         newUrbanDoc=urbanEventObj.invokeFactory("File",id=proposedId,title=urbanTemplateObj.Title(),content_type='application/vnd.oasis.opendocument.text',file=doc)
         newUrbanDoc=getattr(urbanEventObj, newUrbanDoc)
