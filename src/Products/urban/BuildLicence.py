@@ -142,7 +142,7 @@ schema = Schema((
     ),
     TextField(
         name='pebDetails',
-        allowable_content_types='text/plain',
+        allowable_content_types="('text/plain',)",
         default_content_type='text/plain',
         widget=TextAreaWidget(
             label='Pebdetails',

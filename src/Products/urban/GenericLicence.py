@@ -256,7 +256,7 @@ schema = Schema((
     ),
     TextField(
         name='protectedBuildingDetails',
-        allowable_content_types='text/plain',
+        allowable_content_types=('text/plain',),
         schemata='urban_location',
         widget=TextAreaWidget(
             label='Protectedbuildingdetails',
@@ -347,7 +347,7 @@ schema = Schema((
     ),
     TextField(
         name='pashDetails',
-        allowable_content_types='text/html',
+        allowable_content_types=('text/html',),
         widget=RichWidget(
             label='Pashdetails',
             label_msgid='urban_label_pashDetails',
