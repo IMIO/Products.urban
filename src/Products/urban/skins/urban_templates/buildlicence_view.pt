@@ -168,6 +168,16 @@
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadEquipments', mode='view')" /><span tal:condition="not: context/getRoadEquipments" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_pash">PASH</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('pash', mode='view')" /><span tal:condition="not: context/getPash" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_pashDetails">PASH details</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('pashDetails', mode='view')" /><span tal:condition="not: context/getPash" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /><span tal:condition="not: context/getFloodingLevel" class="discreet" i18n:translate="content_none">None</span></td>
@@ -176,11 +186,6 @@
   <td valign="top"><u><b><span i18n:translate="urban_label_dgrneUnderground">DGRNE Underground</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='view')" /><span tal:condition="not: context/getDgrneUnderground" class="discreet" i18n:translate="content_none">None</span></td>
- </tr>
- <tr>
-  <td valign="top"><u><b><span i18n:translate="urban_label_pash">PASH</span> :</b></u></td>
-  <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('pash', mode='view')" /><span tal:condition="not: context/getPash" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_drainageTechnicalRequirements">Drainage technical requirements</span> :</b></u></td>
@@ -670,6 +675,16 @@
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadEquipments', mode='view')" /><span tal:condition="not: python: context.roadEquipments " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_pash">PASH</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('pash', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_pashDetails">PASH details</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('pashDetails', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /><span tal:condition="not: python: context.floodingLevel " class="discreet" i18n:translate="content_none">None</span></td>
@@ -678,11 +693,6 @@
   <td valign="top"><u><b><span i18n:translate="urban_label_dgrneUnderground">DGRNE Underground</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='view')" /><span tal:condition="not: context/getDgrneUnderground" class="discreet" i18n:translate="content_none">None</span></td>
- </tr>
- <tr>
-  <td valign="top"><u><b><span i18n:translate="urban_label_pash">PASH</span> :</b></u></td>
-  <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('pash', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_drainageTechnicalRequirements">Drainage technical requirements</span> :</b></u></td>

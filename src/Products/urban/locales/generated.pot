@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Thu Jun  9 15:48:14 2011\n"
-"PO-Revision-Date: Thu Jun  9 15:48:14 2011\n"
+"POT-Creation-Date: Tue Jun 14 11:22:56 2011\n"
+"PO-Revision-Date: Tue Jun 14 11:22:56 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -229,6 +229,11 @@ msgstr ""
 #. Default: "Bis"
 #: PortionOut.py
 msgid "urban_label_bis"
+msgstr ""
+
+#. Default: "Catchmentarea"
+#: GenericLicence.py
+msgid "urban_label_catchmentArea"
 msgstr ""
 
 #. Default: "City"
@@ -616,6 +621,11 @@ msgstr ""
 #. Default: "Pash"
 #: GenericLicence.py
 msgid "urban_label_pash"
+msgstr ""
+
+#. Default: "Pashdetails"
+#: GenericLicence.py
+msgid "urban_label_pashDetails"
 msgstr ""
 
 #. Default: "Pca"

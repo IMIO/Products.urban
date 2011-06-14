@@ -438,7 +438,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('isInPCA', after='subdivisionDetails')
     schema.moveField('pca', after='isInPCA')
     schema.moveField('description', after='usage')
-    schema.moveField('pash', after='description')
+    schema.moveField('pash', after='roadEquipments')
+    schema.moveField('pashDetails', after='pash')
     schema.moveField('dgrneUnderground', after='floodingLevel')
     return schema
 

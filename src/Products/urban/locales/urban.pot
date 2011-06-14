@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-06-08 11:22+0000\n"
+"POT-Creation-Date: 2011-06-14 08:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,10 @@ msgstr ""
 "Domain: urban\n"
 
 msgid "Add a parcel"
+msgstr ""
+
+# street_referencedatagridwidget
+msgid "Add a work location"
 msgstr ""
 
 msgid "Add an event"
@@ -161,9 +165,6 @@ msgstr ""
 msgid "alsocalled_descr"
 msgstr ""
 
-msgid "locality_for_worklocation"
-msgstr ""
-
 msgid "and"
 msgstr ""
 
@@ -228,6 +229,14 @@ msgid "choose_a_value"
 msgstr ""
 
 msgid "click_to_view_or_add"
+msgstr ""
+
+# street_referencedatagridwidget
+msgid "colnameTitle"
+msgstr ""
+
+# street_referencedatagridwidget
+msgid "colnamenumero"
 msgstr ""
 
 msgid "concerned_parcels"
@@ -339,6 +348,26 @@ msgstr ""
 #. Default: "This application works better with Firefox."
 #: firefox.pt
 msgid "firefox_viewlet_title"
+msgstr ""
+
+#. Default: "Close prevention area"
+#: GenericLicence.py
+msgid "close_prevention_area"
+msgstr ""
+
+#. Default: "Far prevention area"
+#: GenericLicence.py
+msgid "far_prevention_area"
+msgstr ""
+
+#. Default: "Supervision area"
+#: GenericLicence.py
+msgid "supervision_area"
+msgstr ""
+
+#. Default: "Outside catchment"
+#: GenericLicence.py
+msgid "outside_catchment"
 msgstr ""
 
 #. Default: "High risk"
@@ -493,6 +522,9 @@ msgid "legend_lots"
 msgstr ""
 
 msgid "legend_operation_address"
+msgstr ""
+
+msgid "locality_for_worklocation"
 msgstr ""
 
 msgid "manage_architects"
@@ -935,6 +967,11 @@ msgstr ""
 msgid "urban_label_box"
 msgstr ""
 
+#. Default: "Catchmentarea"
+#: GenericLicence.py
+msgid "urban_label_catchmentArea"
+msgstr ""
+
 #. Default: "City"
 #: Contact.py
 msgid "urban_label_city"
@@ -1199,11 +1236,6 @@ msgstr ""
 msgid "urban_label_investigationDetails"
 msgstr ""
 
-#. Default: "Investigationreasons"
-#: GenericLicence.py
-msgid "urban_label_investigationReasons"
-msgstr ""
-
 #. Default: "Investigationend"
 #: GenericLicence.py
 #: UrbanCertificateTwo.py
@@ -1218,6 +1250,11 @@ msgstr ""
 #. Default: "Investigationpoint"
 #: GenericLicence.py
 msgid "urban_label_investigationPoint"
+msgstr ""
+
+#. Default: "Investigationreasons"
+#: GenericLicence.py
+msgid "urban_label_investigationReasons"
 msgstr ""
 
 #. Default: "Investigationstart"
@@ -1415,6 +1452,11 @@ msgstr ""
 #. Default: "Pash"
 #: GenericLicence.py
 msgid "urban_label_pash"
+msgstr ""
+
+#. Default: "Pashdetails"
+#: GenericLicence.py
+msgid "urban_label_pashDetails"
 msgstr ""
 
 #. Default: "Pca"
@@ -1759,12 +1801,9 @@ msgid "urban_label_workLocationHouseNumber"
 msgstr ""
 
 #. Default: "street"
-#: GenericLicence.py
 #: Declaration.py
 #: Division.py
 #: EnvironmentalDeclaration.py
-#: UrbanCertificateBase.py
-#: UrbanCertificateTwo.py
 msgid "urban_label_workLocations"
 msgstr ""
 
@@ -1891,14 +1930,3 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
-#street_referencedatagridwidget
-msgid "colnamenumero"
-msgstr ""
-
-#street_referencedatagridwidget
-msgid "colnameTitle"
-msgstr ""
-
-#street_referencedatagridwidget
-msgid "Add a work location"
-msgstr ""

@@ -109,7 +109,7 @@ schema = Schema((
     ),
     TextField(
         name='missingPartsDetails',
-        allowable_content_types='text/plain',
+        allowable_content_types=('text/plain',),
         default_content_type='text/plain',
         widget=TextAreaWidget(
             label='Missingpartsdetails',
@@ -145,7 +145,7 @@ schema = Schema((
     ),
     TextField(
         name='folderZoneDetails',
-        allowable_content_types='text/plain',
+        allowable_content_types=('text/plain',),
         schemata='urban_location',
         widget=TextAreaWidget(
             label='Folderzonedetails',
@@ -169,7 +169,7 @@ schema = Schema((
     ),
     TextField(
         name='derogationDetails',
-        allowable_content_types='text/plain',
+        allowable_content_types=('text/plain',),
         default_content_type='text/plain',
         widget=TextAreaWidget(
             label='Derogationdetails',
@@ -191,7 +191,7 @@ schema = Schema((
     ),
     TextField(
         name='annoncedDelayDetails',
-        allowable_content_types='text/plain',
+        allowable_content_types=('text/plain',),
         default_content_type='text/plain',
         widget=TextAreaWidget(
             label='Annonceddelaydetails',
@@ -344,6 +344,30 @@ schema = Schema((
         schemata='urban_road',
         multiValued=1,
         vocabulary='listPashs',
+    ),
+    TextField(
+        name='pashDetails',
+        allowable_content_types='text/html',
+        widget=RichWidget(
+            label='Pashdetails',
+            label_msgid='urban_label_pashDetails',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        default_content_type='text/html',
+        default_output_type='text/html',
+    ),
+    LinesField(
+        name='catchmentArea',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Catchmentarea',
+            label_msgid='urban_label_catchmentArea',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=1,
+        vocabulary='listCatchmentAreas',
     ),
     TextField(
         name='drainageTechnicalRequirements',
@@ -615,6 +639,24 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         return DisplayList(urbantool.listVocabulary('pashs', self))
 
     # Manually created methods
+
+    security.declarePublic('listCatchmentAreas')
+    def listCatchmentAreas(self):
+        """
+          This vocabulary for field catchmentArea returns a list of
+          catchment areas : close prevention area, far prevention area,
+          supervision area or outside catchment
+        """
+        lst=[
+             ['close', _('close_prevention_area', 'urban', context=self.REQUEST)],
+             ['far', _('far_prevention_area', 'urban', context=self.REQUEST)],
+             ['supervision', _('supervision_area', 'urban', context=self.REQUEST)],
+             ['ouside', _('outside_catchment', 'urban', context=self.REQUEST)],
+            ]
+        vocab = []
+        for elt in lst:
+            vocab.append((elt[0], elt[1]))
+        return DisplayList(tuple(vocab))
 
     security.declarePublic('listInvestigationArticles')
     def listInvestigationArticles(self):
