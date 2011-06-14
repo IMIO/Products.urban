@@ -380,7 +380,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
           Create an element in an UrbanEvent
         """
-        import pdb; pdb.set_trace()
         urbanTemplate=self.uid_catalog(UID=urban_template_uid)[0]
         urbanTemplateObj=urbanTemplate.getObject()
         urbanEvent=self.uid_catalog(UID=urban_event_uid)[0]
