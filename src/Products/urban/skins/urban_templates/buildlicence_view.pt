@@ -178,6 +178,11 @@
   <td valign="top"><metal:myfield use-macro="python:here.widget('pashDetails', mode='view')" /><span tal:condition="not: context/getPash" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_catchmentArea">Catchment area</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('catchmentArea', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /><span tal:condition="not: context/getFloodingLevel" class="discreet" i18n:translate="content_none">None</span></td>
@@ -683,6 +688,11 @@
   <td valign="top"><u><b><span i18n:translate="urban_label_pashDetails">PASH details</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('pashDetails', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><u><b><span i18n:translate="urban_label_catchmentArea">Catchment area</span> :</b></u></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('catchmentArea', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span> :</b></u></td>
