@@ -101,16 +101,16 @@ class TestContact(unittest.TestCase):
         self.foldermanagers.invokeFactory('FolderManager', 'agent')
         agent = self.foldermanagers.agent
         agent.setName1(u'Robin')
-        agent.setName2(u'Hood')
+        agent.setName2(u'Hoodé')
         agent.setPersonTitle(u'mister')
         agent.setNumber(u'1')
         agent.setCity(u'Sherwood')
         agent.REQUEST.set('HTTP_ACCEPT_LANGUAGE', 'fr')
-        self.assertEquals(agent.getSignaletic(), 'Monsieur Robin Hood')
+        self.assertEquals(agent.getSignaletic(), 'Monsieur Robin Hoodé')
         self.assertEquals(agent.getSignaletic(linebyline=True),
-            '<p>Monsieur Robin Hood</p>')
+            '<p>Monsieur Robin Hoodé</p>')
         self.assertEquals(agent.getSignaletic(withaddress=True),
-            'Monsieur Robin Hood demeurant 1, Sherwood')
+            'Monsieur Robin Hoodé demeurant 1, Sherwood')
         self.assertEquals(agent.getSignaletic(withaddress=True,
             linebyline=True),
-            '<p>Monsieur Robin Hood<br />1, <br /> Sherwood</p>')
+            '<p>Monsieur Robin Hoodé<br />1, <br /> Sherwood</p>')
