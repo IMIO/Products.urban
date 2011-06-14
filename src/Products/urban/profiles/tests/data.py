@@ -141,6 +141,7 @@ urbanEventTypes = {
                                      {'id': "urb-enq-annexe25-dem", 'title': "Affiche (annexe 25 - lettre au demandeur)"},
                                      {'id': "urb-enq-annexe25", 'title': "Affiche (annexe 25)"},
                                      {'id': "urb-enq-pv-clot", 'title': "PV de clôture enquête"},
+                                     {'id': "urb-enq-accuse-reclamation", 'title': "Accusé de réception d'une réclamation"},
                                      {'id': "urb-enq-frais", 'title': "Frais d'enquête"},
                                      {'id': "urb-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},
                                     ),
