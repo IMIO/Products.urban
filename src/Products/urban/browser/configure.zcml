@@ -36,5 +36,12 @@
       template="firefox.pt"
       />
 
+  <browser:page
+     for="*"
+     name="urban_searchbystreet_form"
+     class=".searchstreetsform.SearchStreetsForm"
+     permission="zope2.View"
+  />
+
 </configure>
 
