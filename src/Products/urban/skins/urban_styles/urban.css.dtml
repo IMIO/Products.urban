@@ -5,6 +5,17 @@
 /* <dtml-with base_properties> (do not remove this :) */
 /* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
 
+/* align the add button of datagrid widgets on the left */
+#datagridwidget-add-button {
+ float: left;
+ margin-bottom: 1.5em;
+}
+/* hide the column that will receive the street */
+#title_workLocations_new, #title_workLocations_1, #title_workLocations_2, #title_workLocations_3, #title_workLocations_4 {
+ border: 0;
+
+}
+
 /* this hide the input appearance while editing the street name */
 #workLocationStreet_label {
 border: 0;

@@ -35,7 +35,7 @@
             
             <table class="referencedatagridwidget-table-edit"
 		       	tal:attributes="id python: 'datagridwidget-table-' + field.getName()"
-            	style="width: 100%"
+            	style="width: 600px;"
                 tal:define="columns python:widget.getColumnDefs(field, context);
                             fielddata python: value or field.getEditAccessor(context)();                           
                             eventHandler python: test(widget.isAutoInsertEnabled(), 'dataGridFieldFunctions.autoInsertRow(event)', '')
@@ -74,7 +74,7 @@
 		             <tal:cell tal:define="
 					       column columnd/id;
 		                   column_definition python: widget.getColumnDefinition(field, column);
-		                   cell_macro python: path('here/%s/macros' % column_definition.getMacro());
+		                   cell_macro python: column == 'title' and path('here/street_referencedatagrid_styled_cell/macros') or path('here/%s/macros' % column_definition.getMacro());
 		                   edit_macro cell_macro/edit_cell;
 		                   cell_value python:rows.get(column);">
 		                   <span metal:use-macro="edit_macro"/>
@@ -106,7 +106,7 @@
 	            <span tal:define="
 				   column columnd/id;
 	               column_definition python: widget.getColumnDefinition(field, column);
-	               cell_macro python: path('here/%s/macros' % column_definition.getMacro());
+	               cell_macro python: column == 'title' and path('here/street_referencedatagrid_styled_cell/macros') or path('here/%s/macros' % column_definition.getMacro());
 	               edit_empty_macro cell_macro/edit_empty_cell;">
 		               <span metal:use-macro="edit_empty_macro"/>	
 	             </span>
