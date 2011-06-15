@@ -42,6 +42,15 @@
      class=".searchstreetsform.SearchStreetsForm"
      permission="zope2.View"
   />
+  
+  <browser:page
+     for="*"
+     name="contactview"
+     class=".contactview.ContactView"
+     template="templates/contactview.pt"
+     permission="zope2.View"
+  />
+
 
 </configure>
 

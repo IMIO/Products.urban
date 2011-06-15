@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-06-14 08:46+0000\n"
+"POT-Creation-Date: 2011-06-15 10:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,12 @@ msgid "Add an event"
 msgstr ""
 
 msgid "Add this parcel"
+msgstr ""
+
+msgid "Applicant data"
+msgstr ""
+
+msgid "Architect data"
 msgstr ""
 
 msgid "BuildLicence"
@@ -51,7 +57,13 @@ msgstr ""
 msgid "Found parcel(s)"
 msgstr ""
 
+msgid "Geometrician data"
+msgstr ""
+
 msgid "Licence state"
+msgstr ""
+
+msgid "Notary data"
 msgstr ""
 
 msgid "Parcel"
@@ -231,6 +243,11 @@ msgstr ""
 msgid "click_to_view_or_add"
 msgstr ""
 
+#. Default: "Close prevention area"
+#: GenericLicence.py
+msgid "close_prevention_area"
+msgstr ""
+
 # street_referencedatagridwidget
 msgid "colnameTitle"
 msgstr ""
@@ -340,6 +357,11 @@ msgstr ""
 msgid "event_linked_documents"
 msgstr ""
 
+#. Default: "Far prevention area"
+#: GenericLicence.py
+msgid "far_prevention_area"
+msgstr ""
+
 #. Default: "Secure, fast and sure, <a href='http://www.getfirefox.com'>Firefox</a> is free and easy to install."
 #: firefox.pt
 msgid "firefox_viewlet_descr"
@@ -348,26 +370,6 @@ msgstr ""
 #. Default: "This application works better with Firefox."
 #: firefox.pt
 msgid "firefox_viewlet_title"
-msgstr ""
-
-#. Default: "Close prevention area"
-#: GenericLicence.py
-msgid "close_prevention_area"
-msgstr ""
-
-#. Default: "Far prevention area"
-#: GenericLicence.py
-msgid "far_prevention_area"
-msgstr ""
-
-#. Default: "Supervision area"
-#: GenericLicence.py
-msgid "supervision_area"
-msgstr ""
-
-#. Default: "Outside catchment"
-#: GenericLicence.py
-msgid "outside_catchment"
 msgstr ""
 
 #. Default: "High risk"
@@ -467,18 +469,6 @@ msgstr ""
 msgid "investigationarticles_folder_title"
 msgstr ""
 
-msgid "label_export"
-msgstr ""
-
-msgid "label_from"
-msgstr ""
-
-msgid "label_to"
-msgstr ""
-
-msgid "label_list_only"
-msgstr ""
-
 msgid "label_colname_Creator"
 msgstr ""
 
@@ -509,16 +499,25 @@ msgstr ""
 msgid "label_edit"
 msgstr ""
 
+msgid "label_export"
+msgstr ""
+
+msgid "label_from"
+msgstr ""
+
+msgid "label_list_only"
+msgstr ""
+
 msgid "label_remove"
 msgstr ""
 
 msgid "label_select_street"
 msgstr ""
 
-msgid "legend"
+msgid "label_to"
 msgstr ""
 
-msgid "legend_applicant_data"
+msgid "legend"
 msgstr ""
 
 msgid "legend_details"
@@ -597,6 +596,11 @@ msgstr ""
 #. Default: "OpenOfficePort"
 #: UrbanTool.py
 msgid "open_office_port"
+msgstr ""
+
+#. Default: "Outside catchment"
+#: GenericLicence.py
+msgid "outside_catchment"
 msgstr ""
 
 msgid "parcellings_folder_title"
@@ -758,6 +762,11 @@ msgstr ""
 msgid "streets_folder_title"
 msgstr ""
 
+#. Default: "Supervision area"
+#: GenericLicence.py
+msgid "supervision_area"
+msgstr ""
+
 #. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here' and 'member' are available"
 #: UrbanEventType.py
 msgid "tal_condition_descr"
@@ -803,6 +812,9 @@ msgstr ""
 #. Default: "Number of the lots, ..."
 #: BuildLicence.py
 msgid "urban_descr_subdivisionDetails"
+msgstr ""
+
+msgid "urban_export_list220"
 msgstr ""
 
 #. Default: "If checked, a additional paragraph will be added in the licence document"
@@ -1855,13 +1867,10 @@ msgstr ""
 msgid "urban_searchbystreet_descr"
 msgstr ""
 
-msgid "urban_statistics_ins"
-msgstr ""
-
-msgid "urban_export_list220"
-msgstr ""
-
 msgid "urban_searches"
+msgstr ""
+
+msgid "urban_statistics_ins"
 msgstr ""
 
 msgid "urbancertificateone_searchacceptedlicences"

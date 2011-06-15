@@ -7,7 +7,6 @@
 <metal:main fill-slot="main">
 <metal:main_macro define-macro="main">
     <metal:body define-macro="body_macro">
-
 <h1 class="documentFirstHeading">
  <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
  <span tal:replace="here/Title" tal:omit-tag="">Title</span>
@@ -15,9 +14,11 @@
 <div tal:replace="structure provider:plone.belowcontenttitle" />
 <!-- Back to the build licence... -->
 <br />
-<a class="no_underline" href="."><img src="goback.png" />&nbsp;<span i18n:translate="back_to_licence">Go back to the licence</span></a>
+<tal:block condition="view/showLinkToLinkedLicence">
+<a class="no_underline" href="#" tal:attributes="href view/getLinkToLinkedLicence"><img src="goback.png" />&nbsp;<span i18n:translate="back_to_licence">Go back to the licence</span></a>
+</tal:block>
 
-<fieldset><b><legend i18n:translate="legend_applicant_data">Applicant details</legend></b>
+<fieldset><b><legend tal:content="view/getContactLegendValue" i18n:translate="">Contact data</legend></b>
     <table cellpadding=0 cellspacing=0>
      <tr>
       <td valign="top"><u><b><span i18n:translate="urban_label_personTitle">personTitle</span> :</b></u></td>

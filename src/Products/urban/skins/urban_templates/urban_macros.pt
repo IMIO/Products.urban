@@ -8,9 +8,15 @@
 <div metal:define-macro="urbanArchitectsMacro" i18n:domain="urban" tal:define="architects here/getArchitects">
 <tal:loop repeat="architect architects" tal:condition="architects">
 <div class="#" tal:define="oddrow repeat/architect/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
- <b><span tal:replace="python: context.displayValue(architect.listPersonTitles(), architect.getPersonTitle())" />
- <span tal:content="python: architect.getName1()" />
- <span tal:content="python: architect.getName2()" /></b><br />
+ <b>
+  <a href="#" tal:attributes="href python: architect.absolute_url() + '?came_from_licence_uid=' + context.UID()">
+   <span tal:replace="python: context.displayValue(architect.listPersonTitles(), architect.getPersonTitle())" />
+   <span tal:replace="architect/getName1|nothing" />
+   <span tal:replace="architect/getName2|nothing" />
+   <span tal:condition="architect/getSociety" tal:replace="python: '(' + architect.getSociety() + ')'" />
+  </a>
+ </b>
+ <br />
  <span tal:content="python: architect.getStreet()+' '+architect.getNumber()" /><br />
  <span tal:content="python: architect.getZipcode()+' '+architect.getCity()" /><br />
 </div>
@@ -20,9 +26,12 @@
 <div metal:define-macro="urbanGeometriciansMacro" i18n:domain="urban" tal:define="geometricians here/getGeometricians">
 <tal:loop repeat="geometrician geometricians" tal:condition="geometricians">
 <div class="#" tal:define="oddrow repeat/geometrician/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
- <b><span tal:replace="python: context.displayValue(geometrician.listPersonTitles(), geometrician.getPersonTitle())" />
- <span tal:content="python: geometrician.getName1()" />
- <span tal:content="python: geometrician.getName2()" /></b><br />
+  <a href="#" tal:attributes="href python: geometrician.absolute_url() + '?came_from_licence_uid=' + context.UID()">
+   <span tal:replace="python: context.displayValue(geometrician.listPersonTitles(), geometrician.getPersonTitle())" />
+   <span tal:replace="geometrician/getName1|nothing" />
+   <span tal:replace="geometrician/getName2|nothing" />
+   <span tal:condition="geometrician/getSociety" tal:replace="python: '(' + geometrician.getSociety() + ')'" />
+  </a>
  <span tal:content="python: geometrician.getStreet()+' '+geometrician.getNumber()" /><br />
  <span tal:content="python: geometrician.getZipcode()+' '+geometrician.getCity()" /><br />
 </div>
@@ -32,9 +41,15 @@
 <div metal:define-macro="urbanNotariesMacro" i18n:domain="urban" tal:define="notaries here/getNotaryContact">
 <tal:loop repeat="notary notaries">
 <div class="#" tal:define="oddrow repeat/notary/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
- <b><span tal:replace="python: context.displayValue(notary.listPersonTitles(), notary.getPersonTitle())" />
- <span tal:content="python: notary.getName1()" />
- <span tal:content="python: notary.getName2()" /></b><br />
+ <b>
+  <a href="#" tal:attributes="href python: notary.absolute_url() + '?came_from_licence_uid=' + context.UID()">
+     <span tal:replace="python: context.displayValue(notary.listPersonTitles(), notary.getPersonTitle())" />
+     <span tal:replace="notary/getName1|nothing" />
+     <span tal:replace="notary/getName2|nothing" />
+     <span tal:condition="notary/getSociety" tal:replace="notary/getSociety|nothing" />
+     </a>
+ </b>
+ <br />
  <span tal:content="python: notary.getStreet()+' '+notary.getNumber()" /><br />
  <span tal:content="python: notary.getZipcode()+' '+notary.getCity()" /><br />
 </div>
@@ -90,8 +105,7 @@
      <span tal:replace="python: context.displayValue(applicantObj.listPersonTitles(), applicantObj.getPersonTitle())" />
      <span tal:replace="applicantObj/getName1|nothing" />
      <span tal:replace="applicantObj/getName2|nothing" />
-     <tal:block condition="applicantObj/getName1"><br /></tal:block>
-     <span tal:condition="applicantObj/getSociety" tal:replace="applicantObj/getSociety|nothing" />
+     <span tal:condition="applicantObj/getSociety" tal:replace="python: '(' + applicantObj.getSociety() + ')'" />
      <tal:block condition="applicantObj/getSociety"><br /></tal:block>
      </a>
     </b>
