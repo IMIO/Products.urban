@@ -467,7 +467,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         response.redirect(urbanEventObj.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
 
     security.declarePublic('listVocabulary')
-    def listVocabulary(self, vocToReturn, context, vocType="UrbanVocabularyTerm", inUrbanConfig=True, keyToUse="termKey"):
+    def listVocabulary(self, vocToReturn, context, vocType="UrbanVocabularyTerm", inUrbanConfig=True):
         """
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
@@ -483,16 +483,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         brains = self.portal_catalog(path=vocPath, sort_on="getObjPositionInParent", portal_type=vocType, review_state='enabled')
         res=[]
         for brain in brains:
-            #if we wrote a termKey, we use it...
-            obj = brain.getObject()
-            key = getattr(obj, keyToUse, None)
-            if key:
-                key = str(key)
-            else:
-                #... either we use the id...
-                key=brain.id
-            title=brain.Title.decode("utf-8")
-            res.append((key,title))
+            res.append((brain.id,brain.Title))
         return tuple(res)
 
     security.declarePublic('checkPermission')

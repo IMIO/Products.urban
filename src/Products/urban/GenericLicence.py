@@ -599,7 +599,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
           Return a list of delays from the config
         """
         urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('folderdelays', self, vocType="UrbanDelay", keyToUse="deadLineDelay"))
+        return DisplayList(urbantool.listVocabulary('folderdelays', self, vocType="UrbanDelay"))
 
     security.declarePublic('defaultInvestigationArticle')
     def defaultInvestigationArticle(self):
@@ -822,6 +822,17 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             messages.append(applicant_message)
         return messages
 
+    security.declarePublic('getAnnoncedDelay')
+    def getAnnoncedDelay(self, theObject=False):
+        """
+          Returns the annonced delay value or the UrbanDelay if theObject=True
+        """
+        res = self.getField('annoncedDelay').get(self)
+        if res and theObject:
+            tool = getToolByName(self, 'portal_urban')
+            urbanConfig = tool.getUrbanConfig(self)
+            res = getattr(urbanConfig.folderdelays, res)
+        return res
 
 
 registerType(GenericLicence, PROJECTNAME)

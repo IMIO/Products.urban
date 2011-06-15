@@ -18,7 +18,10 @@ def migrateToPlone4(context):
     migrateTool(context)
     migrateFormatFieldFromLayers(context)
     migrateRoadEquipments(context)
-
+    migrateFolderDelays(context)
+    migrateAnnoncedDelays(context)
+    #migrateToReferenceDataGridField(context)
+    
 def migrateToReferenceDataGridField(context):
     """Migrate declaration, division, environmentalDeclaration, ubranCertificateBase, urbanCertificateTwo, buildLicence, parcelOutLicence types
         to use referenceDataGridField product instead of workLocation objects
@@ -438,3 +441,32 @@ def migrateRoadEquipments(context):
             logger.info("The roadEquipments for '%s' has been migrated" % obj.getId())
         else:
             logger.info("The roadEquipments for '%s' was already migrated!" % obj.getId())
+
+def migrateAnnoncedDelays(context):
+    """
+        Before, BuildLicence.annoncedDelay was UrbanVocabularyTerms, now they are UrbanDelays
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+
+    catalog = getToolByName(site, 'portal_catalog')
+    tool = getToolByName(site, 'portal_urban')
+    #adapt the annoncedDelay field
+    portalTypesToConsider = ('BuildLicence', 'ParcelOutLicence',)
+    for portalTypeToConsider in portalTypesToConsider:
+        brains = catalog(portal_type=portalTypeToConsider)
+        urbanConfigId = portalTypeToConsider.lower()
+        urbanConfig = getattr(tool, urbanConfigId)
+        delays = urbanConfig.folderdelays.objectValues('UrbanDelay')
+        for brain in brains:
+            obj = brain.getObject()
+            annoncedDelay = obj.getAnnoncedDelay()
+            #before, the saved value was a digit (an integer in a string)
+            if annoncedDelay.isdigit():
+                #get the corresponding UrbanDelay
+                for delay in delays:
+                    if str(delay.getDeadLineDelay()) == str(annoncedDelay):
+                        #adapt the annoncedDelay
+                        obj.setAnnoncedDelay(delay.getId())
+                        logger.info("The annoncedDelay for '%s' has been migrated" % obj.getId())
