@@ -483,7 +483,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         brains = self.portal_catalog(path=vocPath, sort_on="getObjPositionInParent", portal_type=vocType, review_state='enabled')
         res=[]
         for brain in brains:
-            res.append((brain.id,brain.Title))
+            res.append((brain.id,(brain.Title).decode('utf-8')))
         return tuple(res)
 
     security.declarePublic('checkPermission')
