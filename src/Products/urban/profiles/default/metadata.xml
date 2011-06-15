@@ -4,6 +4,7 @@
   <!-- ##code-section METADATA -->
   <dependencies>
     <dependency>profile-Products.MasterSelectWidget:default</dependency>
+    <dependency>profile-collective.referencedatagridfield:default</dependency>
   </dependencies>
   <!-- ##/code-section METADATA -->
 </metadata>
