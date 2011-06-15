@@ -19,14 +19,6 @@
       attribute="getProxy"
       permission="zope2.View"
       />
-    
-  <browser:page
-      for="Products.urban.interfaces.IUrbanTool"
-      name="testmap"
-      class=".views.testmap"
-      template="testmap.pt"
-      permission="zope2.View"
-      />
 
   <browser:viewlet
       name="urban.firefox"

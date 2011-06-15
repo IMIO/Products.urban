@@ -83,7 +83,8 @@ class TestContact(unittest.TestCase):
         self.portal_urban = self.portal.portal_urban
         self.buildlicence = self.portal_urban.buildlicence
         self.foldermanagers = self.buildlicence.foldermanagers
-
+        self.folderBuildLicences=self.portal.urban.buildlicences
+        
     def test_getSignaleticIsUnicode(self):
         login(self.portal, TEST_USER_NAME)
         self.foldermanagers.invokeFactory('FolderManager', 'agent')
@@ -172,4 +173,24 @@ class TestContact(unittest.TestCase):
         self.assertEquals(agent.getSignaletic(withaddress=True,
             linebyline=True),
             u'<p>Monsieur Robin Hood<br />1, <br /> Sherwoodé</p>')
+
+    def test_getApplicantsSignaletic(self):
+        login(self.portal, TEST_USER_NAME)
+        self.folderBuildLicences.invokeFactory('BuildLicence', 'buildLicence')       
+        buildLicence = self.folderBuildLicences.buildLicence
+        buildLicence.invokeFactory('Applicant', 'applicant')
+        applicant = buildLicence.applicant
+        applicant.setName1(u'Robiné')
+        applicant.setName2(u'Hoodé')
+        applicant.setPersonTitle(u'master')
+        applicant.setNumber(u'1')
+        applicant.setCity(u'Sherwoodé')
+        buildLicence.REQUEST.set('HTTP_ACCEPT_LANGUAGE', 'fr')
+        
+        self.assertEquals(buildLicence.getApplicantsSignaletic(),
+            u'Maître Robiné Hoodé')
+        self.assertEquals(buildLicence.getApplicantsSignaletic(withaddress=True),
+            u'Maître Robiné Hoodé demeurant 1, Sherwoodé')
+
+        
         
