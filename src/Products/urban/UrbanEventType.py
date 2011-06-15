@@ -27,6 +27,7 @@ from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.CMFPlone.i18nl10n import utranslate
 from Products.CMFCore.Expression import Expression, createExprContext
 from Products.CMFCore.utils import getToolByName
+from Products.urban.utils import setRawSchema
 ##/code-section module-header
 
 schema = Schema((
@@ -81,6 +82,7 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setRawSchema(schema)
 ##/code-section after-local-schema
 
 UrbanEventType_schema = BaseFolderSchema.copy() + \

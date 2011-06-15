@@ -30,6 +30,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from GenericLicence import GenericLicence
 from GenericLicence import GenericLicence_schema
+from Products.urban.utils import setRawSchema
 
 slave_fields_subdivision = (
     # if in subdivision, display a textarea the fill some details
@@ -267,6 +268,7 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setRawSchema(schema)
 ##/code-section after-local-schema
 
 BuildLicence_schema = GenericLicence_schema.copy() + \

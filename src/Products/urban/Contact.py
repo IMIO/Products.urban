@@ -29,6 +29,7 @@ from zope.i18n import translate
 from Products.validation.interfaces.IValidator import IValidator
 from Products.validation import validation
 from Products.CMFCore.utils import getToolByName
+from Products.urban.utils import setRawSchema
 
 class BelgianNationalRegValidator:
     #Validate a belgian national register number
@@ -88,7 +89,7 @@ schema = Schema((
         widget=StringField._properties['widget'](
             label='Name2',
             label_msgid='urban_label_name2',
-            i18n_domain='urban',
+            i18n_domain='urban',            
         ),
         searchable=True,
     ),
@@ -183,6 +184,7 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setRawSchema(schema)
 ##/code-section after-local-schema
 
 Contact_schema = BaseSchema.copy() + \
@@ -263,7 +265,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
             if not linebyline:
                 return nameSignaletic
             else:
-                return '<p>%s</p>' % nameSignaletic
+                return u'<p>%s</p>' % nameSignaletic
         else:
             #escape HTML special characters like HTML entities
             addressSignaletic = self.getAddress(linebyline=linebyline)
@@ -271,18 +273,18 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 mapping = dict(name=nameSignaletic, address=addressSignaletic)
                 return translate(u'residing',
                     domain=u'urban',
-                    mapping=mapping, context=self.REQUEST).encode('utf8')
+                    mapping=mapping, context=self.REQUEST)
             else:
                 #remove the <p></p> from adressSignaletic
                 addressSignaletic = addressSignaletic[3:-4]
-                return '<p>%s<br />%s</p>' % (nameSignaletic,
+                return u'<p>%s<br />%s</p>' % (nameSignaletic,
                     addressSignaletic)
 
 
     def _getNameSignaletic(self, linebyline):
         title = self.displayValue(self.listPersonTitles(),
             self.getPersonTitle())
-        nameSignaletic = '%s %s %s' % (title, self.getName1(), self.getName2())
+        nameSignaletic = u'%s %s %s' % (title, self.getName1(), self.getName2())
         if linebyline:
             #escape HTML special characters like HTML entities
             return cgi.escape(nameSignaletic)
@@ -308,13 +310,13 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 result.append(zip)
             if city:
                 result.append(city)
-            return ' '.join(result)
+            return u' '.join(result)
         else:
             number = cgi.escape(number)
             street = cgi.escape(street)
             zip = cgi.escape(zip)
             city = cgi.escape(city)
-            return "<p>%s, %s<br />%s %s</p>" % (number, street, zip, city)
+            return u"<p>%s, %s<br />%s %s</p>" % (number, street, zip, city)
 
     security.declarePublic('showRepresentedByField')
     def showRepresentedByField(self):

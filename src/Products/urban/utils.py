@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import os
+from Products.Archetypes.interfaces import IStringField
+
 def getOsTempFolder():
     tmp = '/tmp'
     if os.path.exists(tmp) and os.path.isdir(tmp):
@@ -43,3 +45,9 @@ equipmentAndRoadRequirementsDefaultValue = """
 <p>6. La réfection ou la construction de trottoir, l’abaissement de bordures et le voûtement de fossé feront l’objet d’une demande d’autorisation séparée auprès de l’administration communale.  Ces travaux sont à charge du demandeur.</p>
 <p>7. Le seuil de portes restera dans l’alignement de la façade actuelle.  Il ne sera pas toléré de débordement sur le domaine public.</p>
 """
+
+
+def setRawSchema(schema):
+    for field in schema.fields():
+        if IStringField.providedBy(field):
+            setattr(field,'raw',True)

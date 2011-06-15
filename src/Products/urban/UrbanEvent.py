@@ -29,6 +29,7 @@ from DateTime import DateTime
 from Acquisition import aq_inner, aq_parent
 from Products.CMFCore.utils import getToolByName
 from zope.i18n import translate as _
+from Products.urban.utils import setRawSchema
 ##/code-section module-header
 
 schema = Schema((
@@ -149,6 +150,7 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setRawSchema(schema)
 ##/code-section after-local-schema
 
 UrbanEvent_schema = BaseFolderSchema.copy() + \

@@ -11,6 +11,7 @@
   <include package="Products.CMFCore" file="meta.zcml"/>
   <include package="Products.Archetypes"/>
   <include package="Products.MasterSelectWidget"/>
+  <include package="collective.referencedatagridfield"/>
   <include package="five.grok"/>
   <include package=".events" />
   <include package=".browser" />

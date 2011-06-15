@@ -33,6 +33,7 @@ from Products.CMFCore.utils import getToolByName
 import appy.pod.renderer
 import os
 import psycopg2
+from Products.urban.utils import setRawSchema
 ##/code-section module-header
 
 schema = Schema((
@@ -62,6 +63,7 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setRawSchema(schema)
 ##/code-section after-local-schema
 
 ParcelOutLicence_schema = GenericLicence_schema.copy() + \

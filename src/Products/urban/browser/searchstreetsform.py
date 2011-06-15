@@ -27,7 +27,7 @@ from zope.formlib import form
 from Products.Five.formlib import formbase
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from collective.plonefinder.widgets.referencewidget import FinderSelectWidget
+#from collective.plonefinder.widgets.referencewidget import FinderSelectWidget
 
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_inner
@@ -52,7 +52,7 @@ class ISearchStreetsForm(Interface):
 
 class SearchStreetsForm(formbase.PageForm):
     form_fields = form.FormFields(ISearchStreetsForm)
-    form_fields['streetSearch'].custom_widget = FinderSelectWidget
+#    form_fields['streetSearch'].custom_widget = FinderSelectWidget
     label = u"Rechercher une rue"
     description = u""
 

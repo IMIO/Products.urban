@@ -45,9 +45,11 @@ from Products.CMFPlone.PloneBatch import Batch
 from Products.PageTemplates.Expressions import getEngine
 from Products.ZCTextIndex.ParseTree import ParseError
 from Products.urban.utils import getOsTempFolder
+from Products.urban.utils import setRawSchema
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 DB_QUERY_ERROR = "Programming error in query"
+
 ##/code-section module-header
 
 schema = Schema((
@@ -308,6 +310,7 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setRawSchema(schema)
 ##/code-section after-local-schema
 
 UrbanTool_schema = OrderedBaseFolderSchema.copy() + \
@@ -488,7 +491,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             else:
                 #... either we use the id...
                 key=brain.id
-            title=brain.Title
+            title=brain.Title.decode("utf-8")
             res.append((key,title))
         return tuple(res)
 

@@ -33,6 +33,7 @@ from collective.referencedatagridfield import ReferenceDataGridField
 from collective.referencedatagridfield import ReferenceDataGridWidget
 from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
+from Products.urban.utils import setRawSchema
 ##/code-section module-header
 
 schema = Schema((
@@ -123,6 +124,7 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setRawSchema(schema)
 ##/code-section after-local-schema
 
 Declaration_schema = BaseFolderSchema.copy() + \

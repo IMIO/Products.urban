@@ -38,6 +38,7 @@ from Products.urban.indexes import UrbanIndexes
 from Products.urban.base import UrbanBase
 from Products.urban.utils import drainageTechnicalRequirementsDefaultValue, \
 equipmentAndRoadRequirementsDefaultValue
+from Products.urban.utils import setRawSchema
 ##/code-section module-header
 
 schema = Schema((
@@ -500,6 +501,7 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setRawSchema(schema)
 ##/code-section after-local-schema
 
 GenericLicence_schema = BaseFolderSchema.copy() + \
