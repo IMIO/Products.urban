@@ -321,6 +321,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="zev",title=u"zone d’espaces verts")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="zn",title=u"zone naturelle")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="zp",title=u"zone de parc")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="znatura2000",title=u"zone Natura 2000")
 
             #add investigation articles folder
             #this is done by a method because the migrateBuildLicencesInvestigationArticles

@@ -136,6 +136,7 @@ schema = Schema((
     LinesField(
         name='folderZone',
         widget=MultiSelectionWidget(
+            size=10,
             label='Folderzone',
             label_msgid='urban_label_folderZone',
             i18n_domain='urban',
@@ -833,6 +834,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             urbanConfig = tool.getUrbanConfig(self)
             res = getattr(urbanConfig.folderdelays, res)
         return res
+
 
 
 registerType(GenericLicence, PROJECTNAME)
