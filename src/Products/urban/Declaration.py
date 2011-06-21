@@ -91,7 +91,7 @@ schema = Schema((
             visible={'edit' : 'visible', 'view' : 'visible'},
             startup_directory='/portal_urban/streets',
             macro="street_referencedatagridwidget",
-            label='street declaration',
+            label='street',
             label_msgid='urban_label_workLocations',
             i18n_domain='urban',
         ),
