@@ -46,8 +46,10 @@ equipmentAndRoadRequirementsDefaultValue = """
 <p>7. Le seuil de portes restera dans l’alignement de la façade actuelle.  Il ne sera pas toléré de débordement sur le domaine public.</p>
 """
 
-
 def setRawSchema(schema):
+    """
+      This method set the 'raw' attribute on every StringField so we avoid unicode encoding problems
+    """
     for field in schema.fields():
         if IStringField.providedBy(field):
             setattr(field,'raw',True)
