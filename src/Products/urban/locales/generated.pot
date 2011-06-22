@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Jun 22 10:25:06 2011\n"
-"PO-Revision-Date: Wed Jun 22 10:25:06 2011\n"
+"POT-Creation-Date: Wed Jun 22 11:47:18 2011\n"
+"PO-Revision-Date: Wed Jun 22 11:47:18 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -691,6 +691,11 @@ msgstr ""
 #. Default: "Radical"
 #: PortionOut.py
 msgid "urban_label_radical"
+msgstr ""
+
+#. Default: "Receiptdate"
+#: UrbanEvent.py
+msgid "urban_label_receiptDate"
 msgstr ""
 
 #. Default: "Reference"

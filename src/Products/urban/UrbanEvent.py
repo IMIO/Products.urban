@@ -46,6 +46,17 @@ schema = Schema((
         ),
         optional=True,
     ),
+    DateTimeField(
+        name='receiptDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            condition="python:here.attributeIsUsed('receiptDate')",
+            label='Receiptdate',
+            label_msgid='urban_label_receiptDate',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
     ReferenceField(
         name='eventRecipient',
         widget=ReferenceBrowserWidget(

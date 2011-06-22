@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-06-21 11:39+0000\n"
+"POT-Creation-Date: 2011-06-22 09:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1553,6 +1553,11 @@ msgstr ""
 msgid "urban_label_radical"
 msgstr ""
 
+#. Default: "Receiptdate"
+#: UrbanEvent.py
+msgid "urban_label_receiptDate"
+msgstr ""
+
 #. Default: "Recipients"
 #: LicenceEvent.py
 msgid "urban_label_recipients"
@@ -1802,6 +1807,11 @@ msgstr ""
 #. Default: "Usetabbing"
 #: UrbanTool.py
 msgid "urban_label_useTabbing"
+msgstr ""
+
+#. Default: "Usedattributes"
+#: LicenceConfig.py
+msgid "urban_label_usedAttributes"
 msgstr ""
 
 #. Default: "Visibility"

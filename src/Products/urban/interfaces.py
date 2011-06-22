@@ -131,6 +131,10 @@ class ILocality(Interface):
     """Marker interface for .Locality.Locality
     """
 
+class ILicenceConfig(Interface):
+    """Marker interface for .LicenceConfig.LicenceConfig
+    """
+
 ##code-section FOOT
 class IEventTypeType(IInterface):
     """

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-06-21 11:39+0000\n"
+"POT-Creation-Date: 2011-06-22 09:51+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1557,6 +1557,11 @@ msgstr "Hôte Pylons"
 msgid "urban_label_radical"
 msgstr "Radical"
 
+#. Default: "Receiptdate"
+#: UrbanEvent.py
+msgid "urban_label_receiptDate"
+msgstr "Date de réception"
+
 #. Default: "Recipients"
 #: LicenceEvent.py
 msgid "urban_label_recipients"
@@ -1808,6 +1813,11 @@ msgstr "Statistiques INS"
 #: UrbanTool.py
 msgid "urban_label_useTabbing"
 msgstr "Utiliser les onglets supplémentaires"
+
+#. Default: "Usedattributes"
+#: LicenceConfig.py
+msgid "urban_label_usedAttributes"
+msgstr "Champs utilisés"
 
 #. Default: "Visibility"
 #: Layer.py
