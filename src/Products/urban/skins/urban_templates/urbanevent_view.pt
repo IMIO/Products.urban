@@ -4,24 +4,13 @@
       i18n:domain="urban">
 <head>
 <metal:block fill-slot="top_slot"
-             tal:define="global body_onload string: init();
-                         member python: context.portal_membership.getAuthenticatedMember();
+             tal:define="member python: context.portal_membership.getAuthenticatedMember();
                          border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
                          dummy python:request.set(border, 1);" />
 
 <tal:block condition="context/getRecipients">
     <div metal:fill-slot="style_slot">
         <link rel="stylesheet" href="map.css" type="text/css" media="screen" charset="utf-8" />
-    </div>
-
-    <div metal:fill-slot="javascript_head_slot"  tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
-        <script tal:content="string:function init() { ${context/initMap};}">
-        </script>
-    <form>
-     <input type="hidden" id="map_initialized" value="0" />
-    </form>
-
-    <script type="text/javascript" tal:attributes="src python:'portal_skins/openlayers/OpenLayers.js'"></script>
     </div>
 </tal:block>
 </head>
