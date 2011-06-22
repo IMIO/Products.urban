@@ -135,6 +135,10 @@ class ILicenceConfig(Interface):
     """Marker interface for .LicenceConfig.LicenceConfig
     """
 
+class IPersonTitleTerm(Interface):
+    """Marker interface for .PersonTitleTerm.PersonTitleTerm
+    """
+
 ##code-section FOOT
 class IEventTypeType(IInterface):
     """

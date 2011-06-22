@@ -16,7 +16,6 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
-
 import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
@@ -89,7 +88,7 @@ schema = Schema((
         widget=StringField._properties['widget'](
             label='Name2',
             label_msgid='urban_label_name2',
-            i18n_domain='urban',            
+            i18n_domain='urban',
         ),
         searchable=True,
     ),
@@ -171,6 +170,7 @@ schema = Schema((
         name='representedBy',
         widget=MultiSelectionWidget(
             condition='python:here.showRepresentedByField()',
+            format='checkbox',
             label='Representedby',
             label_msgid='urban_label_representedBy',
             i18n_domain='urban',
@@ -217,7 +217,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
           Returns possible person titles
         """
-        return DisplayList(self.portal_urban.listVocabulary('persons_titles', self, inUrbanConfig=False))
+        return DisplayList(self.portal_urban.listVocabulary('persons_titles', self, vocType='PersonTitleTerm', inUrbanConfig=False))
 
     # Manually created methods
 
@@ -279,7 +279,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 addressSignaletic = addressSignaletic[3:-4]
                 return u'<p>%s<br />%s</p>' % (nameSignaletic,
                     addressSignaletic)
-
 
     def _getNameSignaletic(self, linebyline):
         title = self.displayValue(self.listPersonTitles(),
@@ -367,7 +366,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         #or the short one...
         tool = getToolByName(self, 'portal_urban')
         if hasattr(tool.persons_titles, self.getField('personTitle').get(self)):
-            return getattr(tool.persons_titles, self.getField('personTitle').get(self)).getTermKeyStr()
+            return getattr(tool.persons_titles, self.getField('personTitle').get(self)).getAbbreviation()
         else:
             return ''
 
@@ -378,3 +377,4 @@ registerType(Contact, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
+

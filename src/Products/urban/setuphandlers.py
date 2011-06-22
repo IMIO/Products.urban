@@ -24,12 +24,9 @@ import transaction
 ##code-section HEAD
 from Acquisition import aq_base
 from Products.urban.config import TOPIC_TYPE
-from Products.CMFCore.WorkflowCore import WorkflowException
 from zExceptions import BadRequest
 from Products.ZCatalog.Catalog import CatalogError
 from Products.urban.config import URBAN_TYPES, PPNC_LAYERS
-from zope.annotation.interfaces import IAnnotations
-from plone.app.portlets.portlets import classic
 from zope.i18n import translate as _
 ##/code-section HEAD
 
@@ -728,18 +725,18 @@ def addGlobalFolders(context):
         newFolderid = tool.invokeFactory("Folder",id="persons_titles",title=_("persons_titles_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
         newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="notitle",title=u"")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="madam",title=u"Madame")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="miss",title=u"Mademoiselle")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="mister",title=u"Monsieur")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="madam_and_mister",title=u"Monsieur et Madame")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="master",title=u"Maître")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="masters",title=u"Maîtres")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="misters",title=u"Messieurs")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="ladies",title=u"Mesdames")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="consorts",title=u"Consorts")
+        newFolder.setLocallyAllowedTypes(['PersonTitleTerm'])
+        newFolder.setImmediatelyAddableTypes(['PersonTitleTerm'])
+        newFolder.invokeFactory("PersonTitleTerm",id="notitle",title=u"", abbreviation="")
+        newFolder.invokeFactory("PersonTitleTerm",id="madam",title=u"Madame", abbreviation="Mme")
+        newFolder.invokeFactory("PersonTitleTerm",id="miss",title=u"Mademoiselle", abbreviation="Mlle")
+        newFolder.invokeFactory("PersonTitleTerm",id="mister",title=u"Monsieur", abbreviation="M")
+        newFolder.invokeFactory("PersonTitleTerm",id="madam_and_mister",title=u"Monsieur et Madame", abbreviation="M et Mme")
+        newFolder.invokeFactory("PersonTitleTerm",id="master",title=u"Maître", abbreviation="Me")
+        newFolder.invokeFactory("PersonTitleTerm",id="masters",title=u"Maîtres", abbreviation="Mes")
+        newFolder.invokeFactory("PersonTitleTerm",id="misters",title=u"Messieurs", abbreviation="MM")
+        newFolder.invokeFactory("PersonTitleTerm",id="ladies",title=u"Mesdames", abbreviation="Mmes")
+        newFolder.invokeFactory("PersonTitleTerm",id="consorts",title=u"Consorts", abbreviation="Crts")
 
     #add the persons_grades folder
     if not hasattr(tool, "persons_grades"):
@@ -893,7 +890,6 @@ def addApplicationFolders(context):
     Add the application folders like 'urban' and 'architects'
     """
     site = context.getSite()
-    tool = getToolByName(site, 'portal_urban')
 
     if not hasattr(aq_base(site), "urban"):
         newFolderid = site.invokeFactory("Folder",id="urban",title=_("urban", 'urban', context=site.REQUEST))
@@ -957,7 +953,7 @@ def addApplicationFolders(context):
     for search_link in search_links:
         if not hasattr(newFolder, search_link[0]):
             #add a link and translate his title
-            linkId = newFolder.invokeFactory("Link",id=search_link[0],title=_('urban_%s_descr' % search_link[0], 'urban', context=site.REQUEST), remoteUrl=search_link[1])
+            newFolder.invokeFactory("Link",id=search_link[0],title=_('urban_%s_descr' % search_link[0], 'urban', context=site.REQUEST), remoteUrl=search_link[1])
 
 def addTestObjects(context):
     """
@@ -1136,7 +1132,7 @@ def setupExtra(context):
         from Products.CPUtils.Extensions.utils import configure_fckeditor
         configure_fckeditor(portal, default=1, allusers=1, custom=1, nomerge=1)
         logger.info('FCKeditor installed, set by default and customised')
-    except ImportError, msg:
+    except ImportError:
         logger.info('Products CPUtils needeed to install and configure FCKeditor')
 
     #we add additional layers here because we take informations from portal_urban
@@ -1158,7 +1154,6 @@ def setupExtra(context):
             portal_urban.setMapExtent(dic[0]['coord'])
 
     if not hasattr(portal_urban, "additional_layers"):
-        _ = _
         logger.warning("No 'additonal_layers' folder found in portal_urban, we create it.")
         additional_layers_id = portal_urban.invokeFactory("Folder",id="additional_layers",title=_("additonal_layers_folder_title", 'urban', context=portal.REQUEST, default="Additional layers"))
         additional_layers = getattr(portal_urban, additional_layers_id)

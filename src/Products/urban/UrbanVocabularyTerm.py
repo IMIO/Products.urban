@@ -28,24 +28,6 @@ from Products.urban.utils import setRawSchema
 
 schema = Schema((
 
-    IntegerField(
-        name='termKey',
-        widget=IntegerField._properties['widget'](
-            description="urban_descr_termKey",
-            label='Termkey',
-            label_msgid='urban_label_termKey',
-            description_msgid='urban_help_termKey',
-            i18n_domain='urban',
-        ),
-    ),
-    StringField(
-        name='termKeyStr',
-        widget=StringField._properties['widget'](
-            label='Termkeystr',
-            label_msgid='urban_label_termKeyStr',
-            i18n_domain='urban',
-        ),
-    ),
     TextField(
         name='description',
         allowable_content_types=('text/plain', 'text/structured', 'text/html', 'application/msword',),

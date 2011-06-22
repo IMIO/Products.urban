@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# File: LicenceConfig.py
+# File: PersonTitleTerm.py
 #
 # Copyright (c) 2011 by CommunesPlone
 # Generator: ArchGenXML Version 2.6
@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-
+from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -28,14 +28,12 @@ from Products.urban.config import *
 schema = Schema((
 
     StringField(
-        name='usedAttributes',
-        widget=SelectionWidget(
-            label='Usedattributes',
-            label_msgid='urban_label_usedAttributes',
+        name='abbreviation',
+        widget=StringField._properties['widget'](
+            label='Abbreviation',
+            label_msgid='urban_label_abbreviation',
             i18n_domain='urban',
         ),
-        multiValued=True,
-        vocabulary='listUsedAttributes',
     ),
 
 ),
@@ -44,23 +42,24 @@ schema = Schema((
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-LicenceConfig_schema = BaseFolderSchema.copy() + \
+PersonTitleTerm_schema = BaseSchema.copy() + \
+    getattr(UrbanVocabularyTerm, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class LicenceConfig(BaseFolder, BrowserDefaultMixin):
+class PersonTitleTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
 
-    implements(interfaces.ILicenceConfig)
+    implements(interfaces.IPersonTitleTerm)
 
-    meta_type = 'LicenceConfig'
+    meta_type = 'PersonTitleTerm'
     _at_rename_after_creation = True
 
-    schema = LicenceConfig_schema
+    schema = PersonTitleTerm_schema
 
     ##code-section class-header #fill in your manual code here
     ##/code-section class-header
@@ -68,8 +67,8 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
     # Methods
 
 
-registerType(LicenceConfig, PROJECTNAME)
-# end of class LicenceConfig
+registerType(PersonTitleTerm, PROJECTNAME)
+# end of class PersonTitleTerm
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer

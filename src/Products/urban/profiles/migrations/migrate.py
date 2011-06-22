@@ -15,23 +15,33 @@ def migrateToPlone4(context):
     """
     if isNoturbanMigrationsProfile(context): return
 
+    #remove useless attribute 'usePloneTask'
     migrateTool(context)
+    #remove the 'format' attribute as it is replaced now by layerFormat
+    #because the name 'format' for a field is problematic...
     migrateFormatFieldFromLayers(context)
+    #this field is now a DataGridField
     migrateRoadEquipments(context)
+    #delays were UrbanVocabularyTerms, now they are UrbanDelays
     migrateFolderDelays(context)
+    #before, BuildLicence.annoncedDelay was UrbanVocabularyTerms, now they are UrbanDelays
     migrateAnnoncedDelays(context)
+    #we have now PersonTitleTerms instead of UrbanVocabularyTerms to manage persons titles
+    migratePersonTitles(context)
+    #remove useless fields 'termKey' and 'termKeyStr'
+    migrateUrbanVocabularyTerms(context)
     #migrateToReferenceDataGridField(context)
     
 def migrateToReferenceDataGridField(context):
-    """Migrate declaration, division, environmentalDeclaration, ubranCertificateBase, urbanCertificateTwo, buildLicence, parcelOutLicence types
-        to use referenceDataGridField product instead of workLocation objects
+    """
+      Migrate Declaration, Division, EnvironmentalDeclaration, UbranCertificateBase,
+      UrbanCertificateTwo, BuildLicence, ParcelOutLicence types to use ReferenceDataGridField
+      product instead of workLocation objects
     """
     if isNoturbanMigrationsProfile(context):
         return
 
     site = context.getSite()
-
-    portal_url = getToolByName(site, 'portal_url')
 
     brains = site.portal_catalog(portal_type = ['BuildLicence', 'Declaration', 'Division', 'EnvironmentalDeclaration', 'UrbanCertificateBase',
                     'UrbanCertificateTwo', 'ParcelOutLicence'])
@@ -48,8 +58,6 @@ def migrateToContact(context):
     if isNoturbanMigrationsProfile(context): return
 
     site = context.getSite()
-
-    portal_url = getToolByName(site, 'portal_url')
 
     brains = site.portal_catalog(portal_type=["Applicant", "Proprietary", "Notary", ])
     
@@ -284,7 +292,7 @@ def addPebMissingPart(context):
     if isNoturbanMigrationsProfile(context): return
 
     site = context.getSite()
-    tool = getToolByName(site, 'portal_urban')
+
     if not hasattr(site.portal_urban.buildlicence, 'missingparts'):
         logger.error("No 'msisingparts' folder found in 'portal_urban.buildlicence' !!!")
         return
@@ -310,11 +318,10 @@ def migrateFolderDelays(context):
         #check if a "folderdelays" folder exists
         if hasattr(aq_base(urbanConfig), 'folderdelays'):
             folderdelays = getattr(urbanConfig, 'folderdelays')
-            #we save the ids to delete in 'ids'
+            folderdelays.setConstrainTypesMode(1)
+            folderdelays.setLocallyAllowedTypes(['UrbanDelay'])
+            folderdelays.setImmediatelyAddableTypes(['UrbanDelay'])
             for urbanVocTerm in folderdelays.objectValues('UrbanVocabularyTerm'):
-                folderdelays.setConstrainTypesMode(1)
-                folderdelays.setLocallyAllowedTypes(['UrbanDelay'])
-                folderdelays.setImmediatelyAddableTypes(['UrbanDelay'])
                 data = {
                         'id': urbanVocTerm.getId(),
                         'title': urbanVocTerm.Title(),
@@ -337,8 +344,9 @@ def migrateTopicsAddPathCriterion(context):
     if isNoturbanMigrationsProfile(context): return
 
     site = context.getSite()
-    tool = getToolByName(site, 'portal_urban')
+
     catalog = getToolByName(site, 'portal_catalog')
+    portal_urban = getToolByName(site, 'portal_urban')
     #find the topics
     brains = catalog(path='/'.join(portal_urban.getPhysicalPath()), portal_type='Topic')
     topicsToAdaptIds = ['searchalllicences', 'searchinprogresslicences', 'searchretiredlicences', 'searchincompletelicences', 'searchacceptedlicences', 'searchrefusedlicences', ]
@@ -408,7 +416,7 @@ def migrateFormatFieldFromLayers(context):
     tool = getToolByName(site, 'portal_urban')
     for layer in tool.additional_layers.objectValues('Layer'):
         try:
-            delattr(tool, 'usePloneTask')
+            delattr(layer, 'format')
             logger.info("The layer '%s' format's attribute has been removed" % layer.getId())
         except AttributeError:
             logger.info("The layer '%s' has no 'format' attribute!" % layer.getId())
@@ -470,3 +478,53 @@ def migrateAnnoncedDelays(context):
                         #adapt the annoncedDelay
                         obj.setAnnoncedDelay(delay.getId())
                         logger.info("The annoncedDelay for '%s' has been migrated" % obj.getId())
+
+def migratePersonTitles(context):
+    """
+        personTitles are now defined in the configuration as PersonTitleTerms, before it was UrbanVocabularyTerms
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+    personTitlesFolder = site.portal_urban.persons_titles
+    personTitlesFolder.setConstrainTypesMode(1)
+    personTitlesFolder.setLocallyAllowedTypes(['PersonTitleTerm'])
+    personTitlesFolder.setImmediatelyAddableTypes(['PersonTitleTerm'])
+    logger.info("Migrating persontitles: starting...")
+    for personTitle in personTitlesFolder.objectValues('UrbanVocabularyTerm'):
+        data = {
+                'id': personTitle.getId(),
+                'title': personTitle.Title(),
+                'abbreviation': personTitle.termKeyStr,
+                }
+        #remove the old object before creating the new
+        personTitlesFolder.manage_delObjects(data['id'])
+        newObjId = personTitlesFolder.invokeFactory('PersonTitleTerm', **data)
+        newObj = getattr(personTitlesFolder, newObjId)
+        logger.info("UrbanVocabularyTerm at '%s' has been migrated to PersonTitleTerm" % newObj.absolute_url())
+    logger.info("Migrating persontitles: done!")
+
+def migrateUrbanVocabularyTerms(context):
+    """
+        Remove useless 'termKey' and 'termKeyStr' fields
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+
+    catalog = getToolByName(site, 'portal_catalog')
+    tool = getToolByName(site, 'portal_urban')
+    brains = site.portal_catalog(portal_type = ['UrbanVocabularyTerm',])
+    logger.info("Migrating UrbanVocabularyTerms: starting...")
+    for brain in brains:
+        term = brain.getObject()
+        migrated = False
+        if hasattr(term, 'termKey'):
+            delattr(term, 'termKey')
+            migrated = True
+        if hasattr(term, 'termKeyStr'):
+            delattr(term, 'termKeyStr')
+            migrated = True
+        if migrated:
+            logger.info("UrbanVocabularyTerm at '%s' has been migrated" % term.absolute_url())
+    logger.info("Migrating UrbanVocabularyTerms: done!")

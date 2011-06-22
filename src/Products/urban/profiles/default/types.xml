@@ -61,6 +61,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="LicenceConfig"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="PersonTitleTerm"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <!-- ##code-section TYPES -->
  <object name="UrbanCertificateOne"
          meta_type="Factory-based Type Information with dynamic views"/>

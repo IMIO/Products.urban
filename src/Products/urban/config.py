@@ -63,6 +63,7 @@ ADD_CONTENT_PERMISSIONS = {
     'UrbanDelay': 'urban: Add UrbanDelay',
     'Locality': 'urban: Add Locality',
     'LicenceConfig': 'urban: Add LicenceConfig',
+    'PersonTitleTerm': 'urban: Add PersonTitleTerm',
 }
 
 setDefaultRoles('urban: Add GenericLicence',  ('Manager', ))
@@ -94,6 +95,7 @@ setDefaultRoles('urban: Add WorkLocation',  ('Manager', ))
 setDefaultRoles('urban: Add UrbanDelay',  ('Manager', ))
 setDefaultRoles('urban: Add Locality',  ('Manager', ))
 setDefaultRoles('urban: Add LicenceConfig',  ('Manager', ))
+setDefaultRoles('urban: Add PersonTitleTerm',  ('Manager', ))
 
 product_globals = globals()
 

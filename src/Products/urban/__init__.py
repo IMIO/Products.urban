@@ -102,6 +102,7 @@ def initialize(context):
     import UrbanDelay
     import Locality
     import LicenceConfig
+    import PersonTitleTerm
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

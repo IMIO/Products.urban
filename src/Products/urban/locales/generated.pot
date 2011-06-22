@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Jun 22 11:47:18 2011\n"
-"PO-Revision-Date: Wed Jun 22 11:47:18 2011\n"
+"POT-Creation-Date: Wed Jun 22 15:18:00 2011\n"
+"PO-Revision-Date: Wed Jun 22 15:18:00 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -86,11 +86,6 @@ msgstr ""
 msgid "urban_help_layerFormat"
 msgstr ""
 
-#. Default: "urban_descr_termKey"
-#: UrbanVocabularyTerm.py
-msgid "urban_help_termKey"
-msgstr ""
-
 #. Default: "Buildlicencenumerotation"
 #: UrbanTool.py
 msgid "urban_label_BuildLicenceNumerotation"
@@ -164,6 +159,11 @@ msgstr ""
 #. Default: "Wmsurl"
 #: Layer.py
 msgid "urban_label_WMSUrl"
+msgstr ""
+
+#. Default: "Abbreviation"
+#: PersonTitleTerm.py
+msgid "urban_label_abbreviation"
 msgstr ""
 
 #. Default: "Activatedfields"
@@ -875,16 +875,6 @@ msgstr ""
 #. Default: "Templatestatsins"
 #: UrbanTool.py
 msgid "urban_label_templateStatsINS"
-msgstr ""
-
-#. Default: "Termkey"
-#: UrbanVocabularyTerm.py
-msgid "urban_label_termKey"
-msgstr ""
-
-#. Default: "Termkeystr"
-#: UrbanVocabularyTerm.py
-msgid "urban_label_termKeyStr"
 msgstr ""
 
 #. Default: "Title"

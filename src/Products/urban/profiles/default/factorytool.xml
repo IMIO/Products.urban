@@ -30,5 +30,6 @@
   <type portal_type="UrbanDelay"/>
   <type portal_type="Locality"/>
   <type portal_type="LicenceConfig"/>
+  <type portal_type="PersonTitleTerm"/>
  </factorytypes>
 </object>
