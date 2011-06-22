@@ -27,9 +27,9 @@ from Products.urban.config import *
 
 schema = Schema((
 
-    StringField(
+    LinesField(
         name='usedAttributes',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
             label='Usedattributes',
             label_msgid='urban_label_usedAttributes',
             i18n_domain='urban',
@@ -48,6 +48,24 @@ LicenceConfig_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+from BuildLicence import BuildLicence_schema
+from ParcelOutLicence import ParcelOutLicence_schema
+from Declaration import Declaration_schema
+from Division import Division_schema
+from UrbanCertificateBase import UrbanCertificateBase_schema
+from UrbanCertificateTwo import UrbanCertificateTwo_schema
+from EnvironmentalDeclaration import EnvironmentalDeclaration_schema
+FTI_SCHEMAS = {
+    'BuildLicence' : BuildLicence_schema,
+    'ParcelOutLicence' : ParcelOutLicence_schema,
+    'Declaration' : Declaration_schema,
+    'Division' : Division_schema,
+    'UrbanCertificateOne' : UrbanCertificateBase_schema,
+    'UrbanCertificateTwo' : UrbanCertificateTwo_schema,
+    'NotaryLetter' : UrbanCertificateBase_schema,
+    'EnvironmentalDeclaration' : EnvironmentalDeclaration_schema,
+}
+
 ##/code-section after-schema
 
 class LicenceConfig(BaseFolder, BrowserDefaultMixin):
@@ -63,9 +81,27 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
     schema = LicenceConfig_schema
 
     ##code-section class-header #fill in your manual code here
+    licence_portal_type = ''  #must be set on creation
     ##/code-section class-header
 
     # Methods
+
+    # Manually created methods
+
+    security.declarePrivate('listUsedAttributes')
+    def listUsedAttributes(self):
+        """
+          Return the available optional fields
+        """
+        res = []
+        if not FTI_SCHEMAS.has_key(self.licence_portal_type):
+            return DisplayList()
+        for field in FTI_SCHEMAS[self.licence_portal_type].fields():
+            if hasattr(field, 'optional'):
+                res.append((field.getName(), self.utranslate(
+                    field.widget.label_msgid, domain=field.widget.i18n_domain, default=field.widget.label)))
+        return DisplayList(tuple(res))
+
 
 
 registerType(LicenceConfig, PROJECTNAME)

@@ -121,11 +121,11 @@ def addUrbanConfigs(context):
     for urban_type in URBAN_TYPES:
         if hasattr(tool, urban_type.lower()):
             continue
-        configFolderid = tool.invokeFactory("Folder",id=urban_type.lower(),title=_("%s_urbanconfig_title" % urban_type.lower(), 'urban', context=site.REQUEST))
+        configFolderid = tool.invokeFactory("LicenceConfig",id=urban_type.lower(),title=_("%s_urbanconfig_title" % urban_type.lower(), 'urban', context=site.REQUEST))
         configFolder = getattr(tool, configFolderid)
-        configFolder.setConstrainTypesMode(1)
-        configFolder.setLocallyAllowedTypes(['Folder'])
-        configFolder.setImmediatelyAddableTypes(['Folder'])
+        configFolder.licence_portal_type = urban_type
+        configFolder.setUsedAttributes(configFolder.listUsedAttributes().keys())
+        configFolder.reindexObject()
 
         #we just created the urbanConfig, proceed with other parameters...
         #add UrbanEventTypes folder

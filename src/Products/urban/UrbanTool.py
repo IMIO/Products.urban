@@ -473,7 +473,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
            by some fields of differents classes
         """
         #search in an urbanConfig or in the tool
-        if inUrbanConfig:            
+        if inUrbanConfig:
             vocPath = "%s/%s/%s" % ('/'.join(self.getPhysicalPath()), self.getUrbanConfig(context).getId(), vocToReturn)
         else:
             vocPath = "%s/%s" % ('/'.join(self.getPhysicalPath()), vocToReturn)

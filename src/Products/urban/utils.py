@@ -53,3 +53,13 @@ def setRawSchema(schema):
     for field in schema.fields():
         if IStringField.providedBy(field):
             setattr(field,'raw',True)
+
+def setOptionalAttributes(schema, optional_fields):
+    """
+      This method set the optional attribute and widget condition on schema fields listed in optional_fields
+    """
+    for fieldname in optional_fields:
+        field = schema.get(fieldname)
+        if field is not None:
+            setattr(field, 'optional', True)
+            field.widget.setCondition("python: here.attributeIsUsed('%s')"%fieldname)

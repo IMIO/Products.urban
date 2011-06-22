@@ -356,3 +356,10 @@ class UrbanBase(object):
         events = [brain.getObject() for brain in catalog(**query)[:1]]
         if events:
             return events[0]
+
+    def attributeIsUsed(self, name):
+        """
+          Is the attribute named name used in this LicenceConfig ?
+        """
+        licenceConfig = getToolByName(self, 'portal_urban').getUrbanConfig(self, urbanConfigId=self.portal_type)
+        return (name in licenceConfig.getUsedAttributes())
