@@ -24,7 +24,6 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Contact import Contact
-from zope.i18n import translate as _
 from Products.urban.utils import setRawSchema
 ##/code-section module-header
 

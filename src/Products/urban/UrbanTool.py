@@ -472,14 +472,11 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
         """
-        #vocPath = self.portal_url()+'/portal_urban/'+vocToReturn+'/'
-        portal_url=getToolByName(self,'portal_url')
-
         #search in an urbanConfig or in the tool
-        if inUrbanConfig:
-            vocPath = portal_url.getPortalPath()+'/portal_urban/'+self.getUrbanConfig(context).getId()+'/'+vocToReturn+'/'
+        if inUrbanConfig:            
+            vocPath = "%s/%s/%s" % ('/'.join(self.getPhysicalPath()), self.getUrbanConfig(context).getId(), vocToReturn)
         else:
-            vocPath = portal_url.getPortalPath()+'/portal_urban/'+vocToReturn+'/'
+            vocPath = "%s/%s" % ('/'.join(self.getPhysicalPath()), vocToReturn)
         brains = self.portal_catalog(path=vocPath, sort_on="getObjPositionInParent", portal_type=vocType, review_state='enabled')
         res=[]
         for brain in brains:

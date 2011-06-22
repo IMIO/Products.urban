@@ -512,8 +512,6 @@ def migrateUrbanVocabularyTerms(context):
 
     site = context.getSite()
 
-    catalog = getToolByName(site, 'portal_catalog')
-    tool = getToolByName(site, 'portal_urban')
     brains = site.portal_catalog(portal_type = ['UrbanVocabularyTerm',])
     logger.info("Migrating UrbanVocabularyTerms: starting...")
     for brain in brains:
