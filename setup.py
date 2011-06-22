@@ -34,5 +34,6 @@ setup(name='Products.urban',
           'five.grok',
           'grokcore.component',
           'collective.referencedatagridfield',
+          'collective.plonefinder',
           'Products.MasterSelectWidget',
           'psycopg2'])

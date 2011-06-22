@@ -12,6 +12,8 @@
   <include package="Products.Archetypes"/>
   <include package="Products.MasterSelectWidget"/>
   <include package="collective.referencedatagridfield"/>
+  <include package="plone.app.portlets" file="meta.zcml" />
+  <include package="collective.plonefinder"/>
   <include package="five.grok"/>
   <include package=".events" />
   <include package=".browser" />
