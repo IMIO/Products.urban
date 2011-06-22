@@ -60,6 +60,16 @@ urbanEventTypes = {
                                     ),
                     },
                     {
+                    'id': "demande-complements-art116-6",
+                    'title': "Demande de compléments (article 116§6)",
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 0,
+                    'TALCondition': "python: here.getLastAcknowledgment()",
+                    'podTemplates': (
+                                     {'id': "urb-demande-complements-art116-6", 'title': "Lettre au demandeur"},
+                                    ),
+                    },
+                    {
                     'id': "avis-etude-incidence",
                     'title': "Avis sur l'étude d'incidence",
                     'activatedFields': ['eventDate', ],
