@@ -29,5 +29,6 @@
   <type portal_type="WorkLocation"/>
   <type portal_type="UrbanDelay"/>
   <type portal_type="Locality"/>
+  <type portal_type="LicenceConfig"/>
  </factorytypes>
 </object>
