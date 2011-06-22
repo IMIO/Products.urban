@@ -30,7 +30,7 @@
 
   <browser:page
      for="*"
-     name="urban_searchbystreet_form"
+     name="urban_searchbystreet"
      class=".searchstreetsform.SearchStreetsForm"
      permission="zope2.View"
   />

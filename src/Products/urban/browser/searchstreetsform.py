@@ -27,7 +27,7 @@ from zope.formlib import form
 from Products.Five.formlib import formbase
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-#from collective.plonefinder.widgets.referencewidget import FinderSelectWidget
+from collective.plonefinder.widgets.referencewidget import FinderSelectWidget
 
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_inner
@@ -36,31 +36,72 @@ class ISearchStreetsForm(Interface):
     """Define the fields of search street form
     """
 
-    buildLicence = schema.Bool(title = (u"Permis d'urbanisme"),)
-    declare = schema.Bool(title = (u"Déclaration"),)
-    buildingLicence = schema.Bool(title = (u"Permis d'urbanisation"),)
-    division = schema.Bool(title = (u"Division"),)
-    notary = schema.Bool(title = (u"Lettre de notaire"),)
-    buildCertificate1 = schema.Bool(title = (u"Certificat d'urbanisme 1"),)
-    buildCertificate2 = schema.Bool(title = (u"Certificat d'urbanisme 2"),)
+    BuildLicence = schema.Bool(title = (u"Permis d'urbanisme"),
+                               default = True)
+    Declaration = schema.Bool(title = (u"Déclaration"), default = True)
+    ParcelOutLicence = schema.Bool(title = (u"Permis d'urbanisation"), default = True)
+    Division = schema.Bool(title = (u"Division"), default = True)
+    NotaryLetter = schema.Bool(title = (u"Lettre de notaire"), default = True)
+    UrbanCertificateBase = schema.Bool(title = (u"Certificat d'urbanisme 1"), default = True)
+    UrbanCertificateTwo = schema.Bool(title = (u"Certificat d'urbanisme 2"), default = True)
 
 
-    streetSearch = schema.Tuple (title=u"Sélectionne rue",
-                                    description =u"Sélectionne une rue à rechercher ",
-                                    default= ()
-                                    )
+    streetSearch = schema.Tuple (title = u"Sélectionner rue",
+                                 description = u"Sélectionner une rue à rechercher ",
+                                 default = (),
+                                 required = False
+                                )
+
+class MyFinderSelectWidget(FinderSelectWidget) :
+    """
+    A widget with a plone_finder link
+    for a Sequence field (tuple or list)
+    that could reference and upload files
+    """
+    template = ViewPageTemplateFile('templates/myfinderbase.pt')
+    finderlabel = (u'') 
+    types = ['Street', 'Locality']
+    forcecloseoninsert = True
 
 class SearchStreetsForm(formbase.PageForm):
     form_fields = form.FormFields(ISearchStreetsForm)
-#    form_fields['streetSearch'].custom_widget = FinderSelectWidget
-    label = u"Rechercher une rue"
+    form_fields['streetSearch'].custom_widget = MyFinderSelectWidget
+    label = u"Recherche de documents par rue"
     description = u""
+    streetsFound = []
+    template = ViewPageTemplateFile('templates/searchstreetsresults.pt')
+
+    def update(self):
+        #initialize base root to be locate to streets configuration folder
+        context = aq_inner(self.context)
+        catalog = getToolByName(context, 'portal_catalog')
+        brain = catalog.searchResults(id = 'streets')
+        self.streetsBase = aq_inner(brain[0].getObject())        
+        super(formbase.PageForm, self).update()
+        self.widgets['streetSearch'].base = self.streetsBase
+
 
     @form.action(u"Rechercher")
     def action_send(self, action, data):
         """search licences
         """
+        #update results display if any
         context = aq_inner(self.context)
+        catalog = getToolByName(context, 'portal_catalog')
         urltool = getToolByName(context, 'portal_url')
         portal = urltool.getPortalObject()
-        self.request.response.redirect(portal.absolute_url())
+        types = ['BuildLicence', 'Declaration', 'ParcelOutLicence', 'Division', 'NotaryLetter', 'UrbanCertificateBase', 'UrbanCertificateTwo']
+        typesToSearch = [typeToSearch for typeToSearch in types if data[typeToSearch]]
+        #perform a search on type
+        #thus, glance at each object if street id is included in this latter
+        brains = catalog.searchResults(portal_type = typesToSearch)
+        self.streetsFound = []
+        for brain in brains:
+            doc = brain.getObject()
+            obj = doc.getWorkLocations()[0]
+            if (not data['streetSearch'] or obj['uid'] in  data['streetSearch']):
+               self.streetsFound.append((doc.Title(), brain.getURL()))
+        #for unclear reason base must be reinitialized before returning template
+        self.widgets['streetSearch'].base = self.streetsBase
+        return self.template()
+
