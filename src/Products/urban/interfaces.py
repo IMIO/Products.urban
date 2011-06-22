@@ -145,6 +145,10 @@ class IEventTypeType(IInterface):
     Basic event type
     """
 
+class IOpinionRequest(Interface):
+    __doc__ = _("""IOpinionRequest type marker interface""")
+
+
 class IAcknowledgment(Interface):
     __doc__ = _("""IAcknowledgment type marker interface""")
 
@@ -155,6 +159,10 @@ class IDeposit(Interface):
 
 class IMissingPart(Interface):
     __doc__ = _("""IMissingPart type marker interface""")
+
+
+class IInquiry(Interface):
+    __doc__ = _("""IInquiry type marker interface""")
 
 
 class IUrbanBase(Interface):

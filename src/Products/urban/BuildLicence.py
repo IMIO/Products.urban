@@ -415,6 +415,9 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastAcknowledgment(self):
         return self._getLastEvent(interfaces.IAcknowledgment)
 
+    def getLastInquiry(self):
+        return self._getLastEvent(interfaces.IInquiry)
+
 
 
 registerType(BuildLicence, PROJECTNAME)

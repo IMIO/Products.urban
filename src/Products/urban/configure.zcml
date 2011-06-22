@@ -19,6 +19,10 @@
   <include package=".browser" />
   <include file="grok.zcml" />
   <interface
+    interface=".interfaces.IOpinionRequest"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IAcknowledgment"
     type=".interfaces.IEventTypeType"/>
 
@@ -28,6 +32,10 @@
 
   <interface
     interface=".interfaces.IMissingPart"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IInquiry"
     type=".interfaces.IEventTypeType"/>
 
   <!-- ##/code-section configure.zcml.header -->

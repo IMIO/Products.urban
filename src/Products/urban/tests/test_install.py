@@ -7,7 +7,8 @@ from plone.app.testing import setRoles
 from plone.app.testing.interfaces import TEST_USER_NAME
 from plone.app.testing.interfaces import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
-from Products.urban.interfaces import IUrbanEventType, IAcknowledgment
+from Products.urban.interfaces import (IUrbanEventType, IAcknowledgment, IOpinionRequest,
+        IInquiry)
 from Products.urban.testing import URBAN_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
 
@@ -62,6 +63,30 @@ class TestInstall(unittest.TestCase):
         eventTypes = catalog(object_provides=interfaceName,
                              sort_on='sortable_title')
         self.assertEqual(len(eventTypes), 1)
+
+    def testInquerySearchByInterface(self):
+        portal = self.layer['portal']
+        urban = portal.urban
+        buildLicences = urban.buildlicences
+        LICENCE_ID = 'licence1'
+        login(portal, 'urbaneditor')
+        buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
+        licence = getattr(buildLicences, LICENCE_ID)
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 0)
+        urbanEvent = createObject('UrbanEvent', 'enquete-publique', licence)
+        self.failUnless(IInquiry.providedBy(urbanEvent))
+
+    def testOpinionRequestSearchByInterface(self):
+        portal = self.layer['portal']
+        urban = portal.urban
+        buildLicences = urban.buildlicences
+        LICENCE_ID = 'licence1'
+        login(portal, 'urbaneditor')
+        buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
+        licence = getattr(buildLicences, LICENCE_ID)
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 0)
+        urbanEvent = createObject('UrbanEvent', 'demande-avis-swde', licence)
+        self.failUnless(IOpinionRequest.providedBy(urbanEvent))
 
     def testAcknowledgmentEventTypeType(self):
         portal = self.layer['portal']

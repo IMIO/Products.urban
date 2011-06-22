@@ -76,6 +76,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition': "python: 'ccatm' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-ccatm", 'title': "Courrier de demande d'avis"},),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequest',
                     },
                     {
                     'id': "demande-avis-belgacom",
@@ -84,6 +85,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition': "python: 'belgacom' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-belgacom", 'title': "Courrier de demande d'avis"},),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequest',
                     },
                     {
                     'id': "demande-avis-dgrne",
@@ -92,6 +94,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition': "python: 'dgrne' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-dgrne", 'title': "Courrier de demande d'avis"},),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequest',
                     },
                     {
                     'id': "demande-avis-dnf",
@@ -100,6 +103,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition': "python: 'dnf' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-dnf", 'title': "Courrier de demande d'avis"},),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequest',
                     },
                     {
                     'id': "demande-avis-spw-dgo1",
@@ -108,6 +112,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition' : "python: 'spw-dgo1' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-spw-dgo1", 'title': "Courrier de demande d'avis"},),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequest',
                     },
                     {
                     'id': "demande-avis-swde",
@@ -116,6 +121,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition' : "python: 'swde' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-swde", 'title': "Courrier de demande d'avis"},),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequest',
                     },
                     {
                     'id': "transmis-1er-dossier-rw",
@@ -145,6 +151,7 @@ urbanEventTypes = {
                                      {'id': "urb-enq-frais", 'title': "Frais d'enquête"},
                                      {'id': "urb-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},
                                     ),
+                    'eventTypeType': 'Products.urban.interfaces.IInquiry',
                     },
                     {
                     'id': "rapport-du-college",
