@@ -399,6 +399,12 @@
  <table cellspacing=0 cellpadding=0 width=100%>
  <tr>
   <td>
+   <metal:events use-macro="here/urban_macros/macros/urbanEventsMacro" />
+   <br />
+  </td>
+ </tr>
+ <tr>
+  <td>
     <div tal:define="specificSearch python: 'searchUrbanEvents';
                      tool python: context.portal_urban;
                      showedCols python: ('Title', 'created', 'Creator', );
@@ -408,11 +414,6 @@
                      batchlen python: 50">
      <metal:listing use-macro="here/urban_macros/macros/listing" />
     </div>
-  </td>
- </tr>
- <tr>
-  <td>
-   <metal:events use-macro="here/urban_macros/macros/urbanEventsMacro" /> 
   </td>
  </tr>
  </table>
