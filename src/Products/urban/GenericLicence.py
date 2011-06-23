@@ -40,7 +40,7 @@ from Products.urban.utils import drainageTechnicalRequirementsDefaultValue, \
 equipmentAndRoadRequirementsDefaultValue
 from Products.urban.utils import setRawSchema, setOptionalAttributes
 
-optional_fields = ['missingPartsDetails', ]
+optional_fields = ['missingPartsDetails','folderZoneDetails','derogationDetails','annoncedDelayDetails','roadType','roadCoating','roadEquipments','protectedBuildingDetails','investigationDetails','investigationReasons','pashDetails','catchmentArea','drainageTechnicalRequirements','equipmentAndRoadRequirements','pca','SSC','RCU','floodingLevel','solicitRoadOpinionsTo' ]
 ##/code-section module-header
 
 schema = Schema((

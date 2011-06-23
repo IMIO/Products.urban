@@ -52,7 +52,7 @@ slave_fields_pca= (
     },
 )
 
-optional_fields = []
+optional_fields = ['subdivisionDetails','isInPCA','roadAdaptation','pebDetails','roadTechnicalAdvice','locationTechnicalAdvice','locationTechnicalConditions','pebTechnicalAdvice','dgrneUnderground']
 ##/code-section module-header
 
 schema = Schema((
