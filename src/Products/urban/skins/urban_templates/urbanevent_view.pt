@@ -10,7 +10,7 @@
 
 <tal:block condition="context/getRecipients">
     <div metal:fill-slot="style_slot">
-        <link rel="stylesheet" href="map.css" type="text/css" media="screen" charset="utf-8" />
+        <!--link rel="stylesheet" href="map.css" type="text/css" media="screen" charset="utf-8" /-->
     </div>
 </tal:block>
 </head>
