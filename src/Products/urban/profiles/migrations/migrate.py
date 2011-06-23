@@ -3,6 +3,7 @@ from Products.CMFCore.utils import getToolByName
 import logging
 from zope.i18n import translate as _
 from Acquisition import aq_base
+from Products.CMFPlone.utils import base_hasattr
 
 logger = logging.getLogger('urban: migrations')
 
@@ -31,6 +32,8 @@ def migrateToPlone4(context):
     #remove useless fields 'termKey' and 'termKeyStr'
     migrateUrbanVocabularyTerms(context)
     #migrateToReferenceDataGridField(context)
+    #We replace licence folders from portal_urban to LicenceConfig objects
+    migrateToLicenceConfig(context)
     
 def migrateToReferenceDataGridField(context):
     """
@@ -50,6 +53,7 @@ def migrateToReferenceDataGridField(context):
         for previousWorkLocation in obj.objectValues('WorkLocation'):
             linkStreet = previousWorkLocation.getStreet()
             numberStreet = previousWorkLocation.getNumber()
+            #to be continued ?????
 
 def migrateToContact(context):
     """
@@ -526,3 +530,39 @@ def migrateUrbanVocabularyTerms(context):
         if migrated:
             logger.info("UrbanVocabularyTerm at '%s' has been migrated" % term.absolute_url())
     logger.info("Migrating UrbanVocabularyTerms: done!")
+
+
+def migrateToLicenceConfig(context):
+    """
+        We replace licence folders from portal_urban to LicenceConfig objects
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    from Products.urban.config import URBAN_TYPES
+    site = context.getSite()
+    tool = getToolByName(site, 'portal_urban')
+    for urban_type in URBAN_TYPES:
+        lcid = urban_type.lower()
+        if not base_hasattr(tool, lcid):
+            continue
+        fid = "%s-old"%lcid
+        oldobj = getattr(tool, lcid)
+        #we continue if urbanconfig isn't more Folder
+        if oldobj.getPortalTypeName() != 'Folder':
+            continue
+        #we rename existing folder
+        oldobj.setId(fid)
+        oldobj.reindexObject()
+        #we create a LicenceConfig with same id and title
+        lcid = tool.invokeFactory("LicenceConfig", id=lcid, title=oldobj.Title())
+        lcobj = getattr(tool, lcid)
+        lcobj.licence_portal_type = urban_type
+        #lcobj.setUsedAttributes(lcobj.listUsedAttributes().keys())
+        #lcobj.reindexObject()
+        #we move the content of original folder to the LicenceConfig obj
+        ids = oldobj.contentIds()
+        cutdata = oldobj.manage_cutObjects(ids)
+        lcobj.manage_pasteObjects(cutdata)
+        #we delete old folder
+        tool.manage_delObjects(ids=[fid])
+        

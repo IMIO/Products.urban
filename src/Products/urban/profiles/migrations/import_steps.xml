@@ -86,6 +86,13 @@
     We need some topics to have a path criterion now, so add it if necessary
  </import-step>
  <import-step
+    id="urban-migrateToLicenceConfig"
+    handler="Products.urban.profiles.migrations.migrate.migrateToLicenceConfig"
+    title="We replace licence folders from portal_urban to LicenceConfig objects"
+    version="2011-06-23T09:00:00.0">
+    We replace licence folders from portal_urban to LicenceConfig objects
+ </import-step>
+ <import-step
     id="urban-migrateToPlone4"
     handler="Products.urban.profiles.migrations.migrate.migrateToPlone4"
     title="Launch every migration steps linked to the Plone4 version"
