@@ -547,7 +547,7 @@ def migrateToLicenceConfig(context):
             continue
         fid = "%s-old"%lcid
         oldobj = getattr(tool, lcid)
-        #we continue if urbanconfig isn't more Folder
+        #we skip if urbanconfig isn't more Folder
         if oldobj.getPortalTypeName() != 'Folder':
             continue
         #we rename existing folder
@@ -557,7 +557,7 @@ def migrateToLicenceConfig(context):
         lcid = tool.invokeFactory("LicenceConfig", id=lcid, title=oldobj.Title())
         lcobj = getattr(tool, lcid)
         lcobj.licence_portal_type = urban_type
-        #lcobj.setUsedAttributes(lcobj.listUsedAttributes().keys())
+        #lcobj.setUsedAttributes(lcobj.listUsedAttributes().keys())   #no optional fields selected !
         #lcobj.reindexObject()
         #we move the content of original folder to the LicenceConfig obj
         ids = oldobj.contentIds()
@@ -565,4 +565,3 @@ def migrateToLicenceConfig(context):
         lcobj.manage_pasteObjects(cutdata)
         #we delete old folder
         tool.manage_delObjects(ids=[fid])
-        

@@ -102,8 +102,6 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
                     field.widget.label_msgid, domain=field.widget.i18n_domain, default=field.widget.label)))
         return DisplayList(tuple(res))
 
-
-
 registerType(LicenceConfig, PROJECTNAME)
 # end of class LicenceConfig
 
