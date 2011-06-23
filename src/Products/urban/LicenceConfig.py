@@ -30,6 +30,8 @@ schema = Schema((
     LinesField(
         name='usedAttributes',
         widget=MultiSelectionWidget(
+            description="Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL",
+            description_msgid="urban_descr_usedAttributes",
             label='Usedattributes',
             label_msgid='urban_label_usedAttributes',
             i18n_domain='urban',

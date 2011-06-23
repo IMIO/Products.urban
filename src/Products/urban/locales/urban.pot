@@ -1819,6 +1819,11 @@ msgstr ""
 msgid "urban_label_usedAttributes"
 msgstr ""
 
+#. Default: "Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL"
+#: LicenceConfig.py
+msgid "urban_descr_usedAttributes"
+msgstr ""
+
 #. Default: "Visibility"
 #: Layer.py
 msgid "urban_label_visibility"

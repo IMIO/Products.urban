@@ -815,6 +815,11 @@ msgstr "Entrez les 4 coordonnées des coins de la carte en séparant les valeurs
 msgid "urban_descr_subdivisionDetails"
 msgstr "Numéro des lots, ..."
 
+#. Default: "Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL"
+#: LicenceConfig.py
+msgid "urban_descr_usedAttributes"
+msgstr "Sélectionner les champs optionnels à utiliser. Utiliser la touche CTRL pour une sélection multiple ou pour désélectionner"
+
 msgid "urban_export_list220"
 msgstr "Exportation liste 220"
 
@@ -1822,7 +1827,7 @@ msgstr "Utiliser les onglets supplémentaires"
 #. Default: "Usedattributes"
 #: LicenceConfig.py
 msgid "urban_label_usedAttributes"
-msgstr "Champs utilisés"
+msgstr "Champs optionnels utilisés"
 
 #. Default: "Visibility"
 #: Layer.py

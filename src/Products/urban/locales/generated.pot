@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Jun 22 16:38:08 2011\n"
-"PO-Revision-Date: Wed Jun 22 16:38:08 2011\n"
+"POT-Creation-Date: Thu Jun 23 15:19:15 2011\n"
+"PO-Revision-Date: Thu Jun 23 15:19:15 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -74,6 +74,11 @@ msgstr ""
 #. Default: "Number of the lots, ..."
 #: BuildLicence.py
 msgid "urban_descr_subdivisionDetails"
+msgstr ""
+
+#. Default: "Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL"
+#: LicenceConfig.py
+msgid "urban_descr_usedAttributes"
 msgstr ""
 
 #. Default: "If checked, an additional paragraph will be added in the licence document"
