@@ -76,6 +76,28 @@ schema = Schema((
         ),
         vocabulary='listDecreeTypes',
     ),
+    TextField(
+        name='changes',
+        allowable_content_types="('text/plain',)",
+        widget=TextAreaWidget(
+            label='Changes',
+            label_msgid='urban_label_changes',
+            i18n_domain='urban',
+        ),
+        default_output_type='text/html',
+        default_content_type='text/plain',
+    ),
+    TextField(
+        name='comment',
+        allowable_content_types="('text/plain',)",
+        widget=TextAreaWidget(
+            label='Comment',
+            label_msgid='urban_label_comment',
+            i18n_domain='urban',
+        ),
+        default_output_type='text/html',
+        default_content_type='text/plain',
+    ),
 
 ),
 )
@@ -128,8 +150,7 @@ class PcaTerm(BaseContent, BrowserDefaultMixin):
         """
            Override the Title method to display several data
         """
-        return u'Foo'
-        #return u"%s (%s - %s - %s)" % (unicode(str(self.getLabel()), 'utf8'), unicode(str(self.getNumber()), 'utf-8'), self.toLocalizedTime(self.getDecreeDate()), self.displayValue(self.listDecreeTypes(), self.getDecreeType()))
+        return u"%s (%s - %s - %s)" % (self.getLabel(), self.getNumber(), self.toLocalizedTime(self.getDecreeDate()), self.displayValue(self.listDecreeTypes(), self.getDecreeType()))
 
 
 registerType(PcaTerm, PROJECTNAME)

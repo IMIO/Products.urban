@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Thu Jun 23 15:19:15 2011\n"
-"PO-Revision-Date: Thu Jun 23 15:19:15 2011\n"
+"POT-Creation-Date: Fri Jun 24 11:39:12 2011\n"
+"PO-Revision-Date: Fri Jun 24 11:39:12 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -241,6 +241,11 @@ msgstr ""
 msgid "urban_label_catchmentArea"
 msgstr ""
 
+#. Default: "Changes"
+#: PcaTerm.py
+msgid "urban_label_changes"
+msgstr ""
+
 #. Default: "City"
 #: Contact.py
 msgid "urban_label_city"
@@ -259,6 +264,11 @@ msgstr ""
 #. Default: "Claimstext"
 #: UrbanEvent.py
 msgid "urban_label_claimsText"
+msgstr ""
+
+#. Default: "Comment"
+#: PcaTerm.py
+msgid "urban_label_comment"
 msgstr ""
 
 #. Default: "Comments"

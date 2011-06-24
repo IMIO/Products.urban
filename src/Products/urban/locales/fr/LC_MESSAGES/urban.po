@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-06-22 13:02+0000\n"
+"POT-Creation-Date: 2011-06-24 09:43+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1005,6 +1005,11 @@ msgstr "Boîte"
 msgid "urban_label_catchmentArea"
 msgstr "Zone de captage"
 
+#. Default: "Changes"
+#: PcaTerm.py
+msgid "urban_label_changes"
+msgstr "Modifications"
+
 #. Default: "City"
 #: Contact.py
 msgid "urban_label_city"
@@ -1029,6 +1034,11 @@ msgstr "Texte des réclamations"
 #: Layer.py
 msgid "urban_label_color"
 msgstr "Couleur"
+
+#. Default: "Comment"
+#: PcaTerm.py
+msgid "urban_label_comment"
+msgstr "Commentaire"
 
 #. Default: "Comments"
 #: Division.py

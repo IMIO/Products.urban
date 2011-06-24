@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-06-22 13:02+0000\n"
+"POT-Creation-Date: 2011-06-24 09:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -814,6 +814,11 @@ msgstr ""
 msgid "urban_descr_subdivisionDetails"
 msgstr ""
 
+#. Default: "Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL"
+#: LicenceConfig.py
+msgid "urban_descr_usedAttributes"
+msgstr ""
+
 msgid "urban_export_list220"
 msgstr ""
 
@@ -998,6 +1003,11 @@ msgstr ""
 msgid "urban_label_catchmentArea"
 msgstr ""
 
+#. Default: "Changes"
+#: PcaTerm.py
+msgid "urban_label_changes"
+msgstr ""
+
 #. Default: "City"
 #: Contact.py
 msgid "urban_label_city"
@@ -1021,6 +1031,11 @@ msgstr ""
 #. Default: "Color"
 #: Layer.py
 msgid "urban_label_color"
+msgstr ""
+
+#. Default: "Comment"
+#: PcaTerm.py
+msgid "urban_label_comment"
 msgstr ""
 
 #. Default: "Comments"
@@ -1817,11 +1832,6 @@ msgstr ""
 #. Default: "Usedattributes"
 #: LicenceConfig.py
 msgid "urban_label_usedAttributes"
-msgstr ""
-
-#. Default: "Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL"
-#: LicenceConfig.py
-msgid "urban_descr_usedAttributes"
 msgstr ""
 
 #. Default: "Visibility"
