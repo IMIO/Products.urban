@@ -359,7 +359,7 @@ class UrbanBase(object):
 
     def attributeIsUsed(self, name):
         """
-          Is the attribute named name used in this LicenceConfig ?
+          Is the attribute named as param name used in this LicenceConfig ?
         """
         licenceConfig = getToolByName(self, 'portal_urban').getUrbanConfig(self, urbanConfigId=self.portal_type)
         return (name in licenceConfig.getUsedAttributes())

@@ -86,7 +86,7 @@
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('missingParts', mode='view')" /></td>
      </tr>
-     <tr tal:condition="context/getMissingPartsDetails">
+     <tr tal:condition="python: context.attributeIsUsed('missingPartsDetails') and context.getMissingPartsDetails()">
       <td valign="top"><u><b><span i18n:translate="urban_label_missingPartsDetails">Missing parts details</span> :</b></u></td>
       <td width="2%"></td>
       <td valign="top"><tal:block replace="structure context/getMissingPartsDetails" /><span tal:condition="not: context/getMissingPartsDetails" class="discreet" i18n:translate="content_none">None</span></td>
@@ -96,7 +96,7 @@
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('annoncedDelay', mode='view')" /></td>
      </tr>
-     <tr>
+     <tr tal:condition="python: context.attributeIsUsed('annoncedDelayDetails')">
       <td valign="top"><u><b><span i18n:translate="urban_label_annoncedDelayDetails">Deadline delay details</span> :</b></u></td>
       <td width="2%"></td>
       <td valign="top"><tal:block replace="structure context/getAnnoncedDelayDetails" /><span tal:condition="not: context/getAnnoncedDelayDetails" class="discreet" i18n:translate="content_none">None</span></td>
@@ -152,17 +152,17 @@
 <dt class="formTab" id="fieldsetlegend-urban_road" i18n:domain="plone" i18n:translate="label_schema_urban_road"><span>Road</span></dt>
 <dd id="fieldset-urban_road">
 <table>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('roadType')">
   <td valign="top" width="200"><u><b><span i18n:translate="urban_label_roadType">Road type</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadType', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('roadCoating')">
   <td valign="top"><u><b><span i18n:translate="urban_label_roadCoating">Road coating</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadCoating', mode='view')" /><span tal:condition="not: context/roadCoating" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('roadEquipments')">
   <td valign="top"><u><b><span i18n:translate="urban_label_roadEquipments">Road equipments</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadEquipments', mode='view')" /><span tal:condition="not: context/getRoadEquipments" class="discreet" i18n:translate="content_none">None</span></td>
@@ -172,32 +172,32 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('pash', mode='view')" /><span tal:condition="not: context/getPash" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('pashDetails')">
   <td valign="top"><u><b><span i18n:translate="urban_label_pashDetails">PASH details</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('pashDetails', mode='view')" /><span tal:condition="not: context/getPash" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('catchmentArea')">
   <td valign="top"><u><b><span i18n:translate="urban_label_catchmentArea">Catchment area</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('catchmentArea', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('catchmentArea', mode='view')" /><span tal:condition="not: context/getPash " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('floodingLevel')">
   <td valign="top"><u><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /><span tal:condition="not: context/getFloodingLevel" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('dgrneUnderground')">
   <td valign="top"><u><b><span i18n:translate="urban_label_dgrneUnderground">DGRNE Underground</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='view')" /><span tal:condition="not: context/getDgrneUnderground" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('drainageTechnicalRequirements')">
   <td valign="top"><u><b><span i18n:translate="urban_label_drainageTechnicalRequirements">Drainage technical requirements</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('drainageTechnicalRequirements', mode='view')" /><span tal:condition="not: context/getDrainageTechnicalRequirements " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('equipmentAndRoadRequirements')">
   <td valign="top"><u><b><span i18n:translate="urban_label_equipmentAndRoadRequirements">Equipment and road requirements</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('equipmentAndRoadRequirements', mode='view')" /><span tal:condition="not: context/getEquipmentAndRoadRequirements " class="discreet" i18n:translate="content_none">None</span></td>
@@ -207,17 +207,17 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('implantation', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('roadAdaptation')">
   <td valign="top"><u><b><span i18n:translate="urban_label_roadAdaptation">Road adaptation</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadAdaptation', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('solicitRoadOpinionsTo')">
   <td valign="top"><u><b><span i18n:translate="urban_label_solicitRoadOpinionsTo">Solicit road opinions to</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('solicitRoadOpinionsTo', mode='view')" /><span tal:condition="not: context/getSolicitRoadOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('roadTechnicalAdvice')">
   <td valign="top"><u><b><span i18n:translate="urban_label_roadTechnicalAdvice">Road technical advice</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getRoadTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
@@ -233,46 +233,46 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('folderZone', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('folderZoneDetails')">
   <td valign="top"><b><u><span i18n:translate="urban_label_folderZoneDetails">Folder zone details</span> :</u></b></td>
   <td width="2%"></td>
-  <td valign="top"><tal:block replace="structure context/getFolderZoneDetails" /><span tal:condition="not: python: context.folderZoneDetails" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><tal:block replace="structure context/getFolderZoneDetails" /><span tal:condition="not: context/getFolderZoneDetails" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td colspan=2 valign="top">
    <u><b><span i18n:translate="urban_label_isInSubdivision">In subdivision</span>?</b></u>
    <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='view')" />
-   <tal:isInSubdivision condition="python: context.isInSubdivision" define="parcelling context/getParcellings">
+   <tal:isInSubdivision condition="python: context.isInSubdivision">
     <metal:myfield use-macro="python:here.widget('parcellings', mode='view')" />
-    <tal:block replace="structure context/getSubdivisionDetails" />
+    <tal:block condition="python: context.attributeIsUsed('subdivisionDetails')" replace="structure context/getSubdivisionDetails" />
    </tal:isInSubdivision>
    </td>
   </tr>
- <tr>
-  <td colspan=2 valign="top">
-   <u><b><span i18n:translate="urban_label_isInPCA">In Municpal Development Plan</span>?</b></u>
-   <metal:myfield use-macro="python:here.widget('isInPCA', mode='view')" />
-   <tal:isInPCA condition="python: context.isInPCA">
-    <metal:myfield use-macro="python:here.widget('pca', mode='view')" />
-   </tal:isInPCA>
+  <tr tal:condition="python: context.attributeIsUsed('isInPCA')">
+   <td colspan=2 valign="top">
+    <u><b><span i18n:translate="urban_label_isInPCA">In Municpal Development Plan</span>?</b></u>
+    <metal:myfield use-macro="python:here.widget('isInPCA', mode='view')" />
+    <tal:isInPCA condition="python: context.attributeIsUsed('pca') and context.getIsInPCA()">
+     <metal:myfield use-macro="python:here.widget('pca', mode='view')" />
+    </tal:isInPCA>
    </td>
   </tr>
   <tr>
    <td valign="top"><u><b><span i18n:translate="urban_label_protectedBuilding">Protected building</span> :</b></u></td>
    <td width="2%"></td>
-   <td valign="top"><metal:myfield use-macro="python:here.widget('protectedBuilding', mode='view')" /><span tal:condition="not: python: context.protectedBuilding" class="discreet" i18n:translate="content_none">None</span></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('protectedBuilding', mode='view')" /><span tal:condition="not: context/getProtectedBuilding" class="discreet" i18n:translate="content_none">None</span></td>
   </tr>
-  <tr>
+  <tr tal:condition="python: context.attributeIsUsed('protectedBuildingDetails')">
    <td valign="top"><u><b><span i18n:translate="urban_label_protectedBuildingDetails">Protected building details</span> :</b></u></td>
    <td width="2%"></td>
-   <td valign="top"><tal:block replace="structure context/getProtectedBuildingDetails" /><span tal:condition="not: python: context.protectedBuildingDetails" class="discreet" i18n:translate="content_none">None</span></td>
+   <td valign="top"><tal:block replace="structure context/getProtectedBuildingDetails" /><span tal:condition="not: context/getProtectedBuildingDetails" class="discreet" i18n:translate="content_none">None</span></td>
   </tr>
-  <tr>
+  <tr tal:condition="python: context.attributeIsUsed('SSC')">
    <td valign="top"><u><b><span i18n:translate="urban_label_SSC">SSC</span> :</b></u></td>
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('SSC', mode='view')" /><span tal:condition="not: python: context.SSC" class="discreet" i18n:translate="content_none">None</span></td>
   </tr>
-  <tr>
+  <tr tal:condition="python: context.attributeIsUsed('RCU')">
    <td valign="top"><u><b><span i18n:translate="urban_label_RCU">RCU</span> :</b></u></td>
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('RCU', mode='view')" /><span tal:condition="not: python: context.RCU" class="discreet" i18n:translate="content_none">None</span></td>
@@ -282,12 +282,12 @@
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('solicitLocationOpinionsTo', mode='view')" /><span tal:condition="not: context/getSolicitLocationOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
   </tr>
-  <tr>
+  <tr tal:condition="python: context.attributeIsUsed('locationTechnicalAdvice')">
    <td valign="top"><u><b><span i18n:translate="urban_label_locationTechnicalAdvice">Location technical advice</span> :</b></u></td>
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getLocationTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
   </tr>
-  <tr>
+  <tr tal:condition="python: context.attributeIsUsed('locationTechnicalConditions')">
    <td valign="top"><u><b><span i18n:translate="urban_label_locationTechnicalConditions">Location technical conditions</span> :</b></u></td>
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalConditions', mode='view')" /><span tal:condition="not: context/getLocationTechnicalConditions" class="discreet" i18n:translate="content_none">None</span></td>
@@ -329,10 +329,10 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('derogation', mode='view')" /><span tal:condition="not: python: context.derogation" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('derogationDetails')">
   <td valign="top"><u><b><span i18n:translate="urban_label_derogationDetails">Derogations details</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><tal:block replace="structure context/getDerogationDetails" /><span tal:condition="not: python: context.derogationDetails" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><tal:block replace="structure context/getDerogationDetails" /><span tal:condition="not: context/getDerogationDetails" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_investigationArticles">Investigation articles</span> :</b></u></td>
@@ -349,12 +349,12 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('investigationEnd', mode='view')" /><span tal:condition="not: context/getInvestigationEnd" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('investigationDetails')">
   <td valign="top"><u><b><span i18n:translate="urban_label_investigationDetails">Investigation details</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><tal:block replace="structure context/getInvestigationDetails" /><span tal:condition="not: context/getInvestigationDetails" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('investigationReasons')">
   <td valign="top"><u><b><span i18n:translate="urban_label_investigationReasons">Investigation reasons</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><tal:block replace="structure context/getInvestigationReasons" /><span tal:condition="not: context/getInvestigationReasons" class="discreet" i18n:translate="content_none">None</span></td>
@@ -375,7 +375,7 @@
   <td width="2%"></td>
   <td width="49%" valign="top"><metal:myfield use-macro="python:here.widget('pebType', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('pebDetails')">
   <td width="49%" valign="top"><u><b><span i18n:translate="urban_label_pebDetails">PEB details</span> :</b></u></td>
   <td width="2%"></td>
   <td width="49%" valign="top"><tal:block replace="structure context/getPebDetails" /><span tal:condition="not: context/getPebDetails" class="discreet" i18n:translate="content_none">None</span></td>
@@ -385,7 +385,7 @@
   <td width="2%"></td>
   <td width="49%" valign="top"><metal:myfield use-macro="python:here.widget('pebStudy', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('pebTechnicalAdvice')">
   <td width="49%" valign="top"><u><b><span i18n:translate="urban_label_pebTechnicalAdvice">PEB technical advice</span> :</b></u></td>
   <td width="2%"></td>
   <td width="49%" valign="top"><metal:myfield use-macro="python:here.widget('pebTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getPebTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
@@ -477,7 +477,7 @@
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('missingParts', mode='view')" /></td>
      </tr>
-     <tr tal:condition="context/getMissingPartsDetails">
+     <tr tal:condition="python: context.attributeIsUsed('missingPartsDetails') and context.getMissingPartsDetails()">
       <td valign="top"><u><b><span i18n:translate="urban_label_missingPartsDetails">Missing parts details</span> :</b></u></td>
       <td width="2%"></td>
       <td valign="top"><tal:block replace="structure context/getMissingPartsDetails" /></td>
@@ -487,7 +487,7 @@
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('annoncedDelay', mode='view')" /></td>
      </tr>
-     <tr>
+     <tr tal:condition="python: context.attributeIsUsed('annoncedDelayDetails')">
       <td valign="top"><u><b><span i18n:translate="urban_label_annoncedDelayDetails">Deadline delay details</span> :</b></u></td>
       <td width="2%"></td>
       <td valign="top"><tal:block replace="structure context/getAnnoncedDelayDetails" /><span tal:condition="not: context/getAnnoncedDelayDetails" class="discreet" i18n:translate="content_none">None</span></td>
@@ -514,10 +514,10 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('derogation', mode='view')" /><span tal:condition="not: python: context.derogation" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('derogationDetails')">
   <td valign="top"><u><b><span i18n:translate="urban_label_derogationDetails">Derogations details</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><tal:block replace="structure context/getDerogationDetails" /><span tal:condition="not: python: context.derogationDetails" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><tal:block replace="structure context/getDerogationDetails" /><span tal:condition="not: context/getDerogationDetails" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_investigationArticles">Investigation articles</span> :</b></u></td>
@@ -534,12 +534,12 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('investigationEnd', mode='view')" /><span tal:condition="not: python: context.investigationEnd" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('investigationDetails')">
   <td valign="top"><u><b><span i18n:translate="urban_label_investigationDetails">Investigation details</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><tal:block replace="structure context/getInvestigationDetails" /><span tal:condition="not: python: context.investigationDetails" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('investigationReasons')">
   <td valign="top"><u><b><span i18n:translate="urban_label_investigationReasons">Investigation reasons</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><tal:block replace="structure context/getInvestigationReasons" /><span tal:condition="not: context/getInvestigationReasons" class="discreet" i18n:translate="content_none">None</span></td>
@@ -600,26 +600,26 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('folderZone', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('folderZoneDetails')">
   <td valign="top"><b><u><span i18n:translate="urban_label_folderZoneDetails">Folder zone details</span> :</u></b></td>
   <td width="2%"></td>
-  <td valign="top"><tal:block replace="structure context/getFolderZoneDetails" /><span tal:condition="not: python: context.folderZoneDetails" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><tal:block replace="structure context/getFolderZoneDetails" /><span tal:condition="not: context/getFolderZoneDetails" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td colspan=2 valign="top">
    <u><b><span i18n:translate="urban_label_isInSubdivision">In subdivision</span>?</b></u>
    <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='view')" />
-   <tal:isInSubdivision condition="python: context.isInSubdivision" define="parcelling context/getParcellings">
+   <tal:isInSubdivision condition="python: context.isInSubdivision">
     <metal:myfield use-macro="python:here.widget('parcellings', mode='view')" />
-    <tal:block replace="structure context/getSubdivisionDetails" />
+    <tal:block condition="python: context.attributeIsUsed('subdivisionDetails')" replace="structure context/getSubdivisionDetails" />
    </tal:isInSubdivision>
    </td>
   </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('isInPCA')">
   <td colspan=2 valign="top">
    <u><b><span i18n:translate="urban_label_isInPCA">In Municpal Development Plan</span>?</b></u>
    <metal:myfield use-macro="python:here.widget('isInPCA', mode='view')" />
-   <tal:isInPCA condition="python: context.isInPCA">
+   <tal:isInPCA condition="python: context.attributeIsUsed('pca') and context.getIsInPCA()">
     <metal:myfield use-macro="python:here.widget('pca', mode='view')" />
    </tal:isInPCA>
    </td>
@@ -627,19 +627,19 @@
   <tr>
    <td valign="top"><u><b><span i18n:translate="urban_label_protectedBuilding">Protected building</span> :</b></u></td>
    <td width="2%"></td>
-   <td valign="top"><metal:myfield use-macro="python:here.widget('protectedBuilding', mode='view')" /><span tal:condition="not: python: context.protectedBuilding" class="discreet" i18n:translate="content_none">None</span></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('protectedBuilding', mode='view')" /><span tal:condition="not: context/getProtectedBuilding" class="discreet" i18n:translate="content_none">None</span></td>
   </tr>
-  <tr>
+  <tr tal:condition="python: context.attributeIsUsed('protectedBuildingDetails')">
    <td valign="top"><u><b><span i18n:translate="urban_label_protectedBuildingDetails">Protected building details</span> :</b></u></td>
    <td width="2%"></td>
-   <td valign="top"><tal:block replace="structure context/getProtectedBuildingDetails" /><span tal:condition="not: python: context.protectedBuildingDetails" class="discreet" i18n:translate="content_none">None</span></td>
+   <td valign="top"><tal:block replace="structure context/getProtectedBuildingDetails" /><span tal:condition="not: context/getProtectedBuildingDetails" class="discreet" i18n:translate="content_none">None</span></td>
   </tr>
-  <tr>
+  <tr tal:condition="python: context.attributeIsUsed('SSC')">
    <td valign="top"><u><b><span i18n:translate="urban_label_SSC">SSC</span> :</b></u></td>
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('SSC', mode='view')" /><span tal:condition="not: python: context.SSC" class="discreet" i18n:translate="content_none">None</span></td>
   </tr>
-  <tr>
+  <tr tal:condition="python: context.attributeIsUsed('RCU')">
    <td valign="top"><u><b><span i18n:translate="urban_label_RCU">RCU</span> :</b></u></td>
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('RCU', mode='view')" /><span tal:condition="not: python: context.RCU" class="discreet" i18n:translate="content_none">None</span></td>
@@ -649,12 +649,12 @@
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('solicitLocationOpinionsTo', mode='view')" /><span tal:condition="not: context/getSolicitLocationOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
   </tr>
-  <tr>
+  <tr tal:condition="python: context.attributeIsUsed('locationTechnicalAdvice')">
    <td valign="top"><u><b><span i18n:translate="urban_label_locationTechnicalAdvice">Location technical advice</span> :</b></u></td>
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getLocationTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
   </tr>
-  <tr>
+  <tr tal:condition="python: context.attributeIsUsed('locationTechnicalConditions')">
    <td valign="top"><u><b><span i18n:translate="urban_label_locationTechnicalConditions">Location technical conditions</span> :</b></u></td>
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalConditions', mode='view')" /><span tal:condition="not: context/getLocationTechnicalConditions" class="discreet" i18n:translate="content_none">None</span></td>
@@ -665,52 +665,52 @@
 <tr><td valign="top">
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_road"></legend></strong>
 <table>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('roadType')">
   <td valign="top" width="200"><u><b><span i18n:translate="urban_label_roadType">Road type</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadType', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('roadCoating')">
   <td valign="top"><u><b><span i18n:translate="urban_label_roadCoating">Road coating</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadCoating', mode='view')" /><span tal:condition="not: python: context.roadCoating " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('roadEquipments')">
   <td valign="top"><u><b><span i18n:translate="urban_label_roadEquipments">Road equipments</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('roadEquipments', mode='view')" /><span tal:condition="not: python: context.roadEquipments " class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('roadEquipments', mode='view')" /><span tal:condition="not: context/getRoadEquipments " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><u><b><span i18n:translate="urban_label_pash">PASH</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('pash', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('pash', mode='view')" /><span tal:condition="not: context/getPash " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('pashDetails')">
   <td valign="top"><u><b><span i18n:translate="urban_label_pashDetails">PASH details</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('pashDetails', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('pashDetails', mode='view')" /><span tal:condition="not: context/getPash " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('catchmentArea')">
   <td valign="top"><u><b><span i18n:translate="urban_label_catchmentArea">Catchment area</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('catchmentArea', mode='view')" /><span tal:condition="not: python: context.pash " class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('catchmentArea', mode='view')" /><span tal:condition="not: context/getPash " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('floodingLevel')">
   <td valign="top"><u><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /><span tal:condition="not: python: context.floodingLevel " class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /><span tal:condition="not: context/getFloodingLevel " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('dgrneUnderground')">
   <td valign="top"><u><b><span i18n:translate="urban_label_dgrneUnderground">DGRNE Underground</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='view')" /><span tal:condition="not: context/getDgrneUnderground" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('drainageTechnicalRequirements')">
   <td valign="top"><u><b><span i18n:translate="urban_label_drainageTechnicalRequirements">Drainage technical requirements</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('drainageTechnicalRequirements', mode='view')" /><span tal:condition="not: context/getDrainageTechnicalRequirements " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('equipmentAndRoadRequirements')">
   <td valign="top"><u><b><span i18n:translate="urban_label_equipmentAndRoadRequirements">Equipment and road requirements</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('equipmentAndRoadRequirements', mode='view')" /><span tal:condition="not: context/getEquipmentAndRoadRequirements " class="discreet" i18n:translate="content_none">None</span></td>
@@ -720,17 +720,17 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('implantation', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('roadAdaptation')">
   <td valign="top"><u><b><span i18n:translate="urban_label_roadAdaptation">Road adaptation</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadAdaptation', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('solicitRoadOpinionsTo')">
   <td valign="top"><u><b><span i18n:translate="urban_label_solicitRoadOpinionsTo">Solicit road opinions to</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('solicitRoadOpinionsTo', mode='view')" /><span tal:condition="not: context/getSolicitRoadOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('roadTechnicalAdvice')">
   <td valign="top"><u><b><span i18n:translate="urban_label_roadTechnicalAdvice">Road technical advice</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getRoadTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
@@ -747,7 +747,7 @@
   <td width="2%"></td>
   <td width="49%" valign="top"><metal:myfield use-macro="python:here.widget('pebType', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('pebDetails')">
   <td width="49%" valign="top"><u><b><span i18n:translate="urban_label_pebDetails">PEB details</span> :</b></u></td>
   <td width="2%"></td>
   <td width="49%" valign="top"><tal:block replace="structure context/getPebDetails" /><span tal:condition="not: context/getPebDetails" class="discreet" i18n:translate="content_none">None</span></td>
@@ -757,7 +757,7 @@
   <td width="2%"></td>
   <td width="49%" valign="top"><metal:myfield use-macro="python:here.widget('pebStudy', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('pebTechnicalAdvice')">
   <td width="49%" valign="top"><u><b><span i18n:translate="urban_label_pebTechnicalAdvice">PEB technical advice</span> :</b></u></td>
   <td width="2%"></td>
   <td width="49%" valign="top"><metal:myfield use-macro="python:here.widget('pebTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getPebTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
