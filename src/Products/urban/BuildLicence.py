@@ -52,7 +52,9 @@ slave_fields_pca= (
     },
 )
 
-optional_fields = ['subdivisionDetails','isInPCA','roadAdaptation','pebDetails','roadTechnicalAdvice','locationTechnicalAdvice','locationTechnicalConditions','pebTechnicalAdvice','dgrneUnderground']
+optional_fields = ['subdivisionDetails','isInPCA','roadAdaptation','pebDetails',
+                   'roadTechnicalAdvice','locationTechnicalAdvice','locationTechnicalConditions',
+                   'pebTechnicalAdvice','locationDgrneUnderground', 'roadDgrneUnderground']
 ##/code-section module-header
 
 schema = Schema((
@@ -164,6 +166,18 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    BooleanField(
+        name='roadDgrneUnderground',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            description="If checked, an additional paragraph will be added in the licence document",
+            label='Roaddgrneunderground',
+            label_msgid='urban_label_roadDgrneUnderground',
+            description_msgid='urban_help_roadDgrneUnderground',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+    ),
     TextField(
         name='roadTechnicalAdvice',
         allowable_content_types=('text/html',),
@@ -175,6 +189,18 @@ schema = Schema((
         default_content_type='text/html',
         schemata='urban_road',
         default_output_type='text/html',
+    ),
+    BooleanField(
+        name='locationDgrneUnderground',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            description="If checked, an additional paragraph will be added in the licence document",
+            label='Locationdgrneunderground',
+            label_msgid='urban_label_locationDgrneUnderground',
+            description_msgid='urban_help_locationDgrneUnderground',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
     ),
     TextField(
         name='locationTechnicalAdvice',
@@ -211,18 +237,6 @@ schema = Schema((
         default_content_type='text/html',
         schemata='urban_peb',
         default_output_type='text/html',
-    ),
-    BooleanField(
-        name='dgrneUnderground',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            description="If checked, an additional paragraph will be added in the licence document",
-            label='Dgrneunderground',
-            label_msgid='urban_label_dgrneUnderground',
-            description_msgid='urban_help_dgrneUnderground',
-            i18n_domain='urban',
-        ),
-        schemata='urban_road',
     ),
     ReferenceField(
         name='architects',
@@ -448,7 +462,6 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('description', after='usage')
     schema.moveField('pash', after='roadEquipments')
     schema.moveField('pashDetails', after='pash')
-    schema.moveField('dgrneUnderground', after='floodingLevel')
     return schema
 
 finalizeSchema(BuildLicence_schema)

@@ -41,7 +41,7 @@
              <metal:myfield use-macro="python:here.widget('pashDetails', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('catchmentArea', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('floodingLevel', mode='edit')" />
-             <metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('roadDgrneUnderground', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('drainageTechnicalRequirements', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('equipmentAndRoadRequirements', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('implantation', mode='edit')" />
@@ -60,6 +60,7 @@
              <metal:myfield use-macro="python:here.widget('protectedBuildingDetails', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('SSC', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('RCU', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('locationDgrneUnderground', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('locationTechnicalAdvice', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('locationTechnicalConditions', mode='edit')" />
             </fieldset>

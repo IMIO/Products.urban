@@ -188,7 +188,7 @@
   <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /><span tal:condition="not: context/getFloodingLevel" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('dgrneUnderground')">
-  <td valign="top"><u><b><span i18n:translate="urban_label_dgrneUnderground">DGRNE Underground</span> :</b></u></td>
+  <td valign="top"><u><b><span i18n:translate="urban_label_dgrneUnderground">DGRNE Underground (location)</span> :</b></u></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='view')" /></td>
  </tr>
@@ -276,6 +276,11 @@
    <td valign="top"><u><b><span i18n:translate="urban_label_RCU">RCU</span> :</b></u></td>
    <td width="2%"></td>
    <td valign="top"><metal:myfield use-macro="python:here.widget('RCU', mode='view')" /><span tal:condition="not: python: context.RCU" class="discreet" i18n:translate="content_none">None</span></td>
+  </tr>
+  <tr tal:condition="python: context.attributeIsUsed('locationDgrneUnderground')">
+   <td valign="top"><u><b><span i18n:translate="urban_label_locationDgrneUnderground">DGRNE Underground</span> :</b></u></td>
+   <td width="2%"></td>
+   <td valign="top"><metal:myfield use-macro="python:here.widget('locationDgrneUnderground', mode='view')" /></td>
   </tr>
   <tr>
    <td valign="top"><u><b><span i18n:translate="urban_label_solicitLocationOpinionsTo">Solicit location opinions to</span> :</b></u></td>
@@ -700,10 +705,10 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /><span tal:condition="not: context/getFloodingLevel " class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr tal:condition="python: context.attributeIsUsed('dgrneUnderground')">
-  <td valign="top"><u><b><span i18n:translate="urban_label_dgrneUnderground">DGRNE Underground</span> :</b></u></td>
+ <tr tal:condition="python: context.attributeIsUsed('roadDgrneUnderground')">
+  <td valign="top"><u><b><span i18n:translate="urban_label_roadDgrneUnderground">DGRNE Underground (road)</span> :</b></u></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='view')" /></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('roadDgrneUnderground', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('drainageTechnicalRequirements')">
   <td valign="top"><u><b><span i18n:translate="urban_label_drainageTechnicalRequirements">Drainage technical requirements</span> :</b></u></td>

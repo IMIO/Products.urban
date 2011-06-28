@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-06-24 09:43+0000\n"
+"POT-Creation-Date: 2011-06-28 08:10+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -823,15 +823,20 @@ msgstr "Sélectionner les champs optionnels à utiliser. Utiliser la touche CTRL
 msgid "urban_export_list220"
 msgstr "Exportation liste 220"
 
-#. Default: "If checked, a additional paragraph will be added in the licence document"
-#: BuildLicence.py
-msgid "urban_help_dgrneUnderground"
-msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
-
 #. Default: "Enter the layer image mimetype, for example 'image/jpeg' or 'image/png'"
 #: Layer.py
 msgid "urban_help_layerFormat"
 msgstr "Entrez le format (mimetype) de la couche, par exemple 'image/jpeg' ou 'image/png'"
+
+#. Default: "If checked, an additional paragraph will be added in the licence document"
+#: BuildLicence.py
+msgid "urban_help_locationDgrneUnderground"
+msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
+
+#. Default: "If checked, an additional paragraph will be added in the licence document"
+#: BuildLicence.py
+msgid "urban_help_roadDgrneUnderground"
+msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
 
 #. Default: "urban_descr_termKey"
 #: UrbanVocabularyTerm.py
@@ -1119,11 +1124,6 @@ msgstr "Détails concernant les dérogations"
 msgid "urban_label_description"
 msgstr "Observations"
 
-#. Default: "Dgrneunderground"
-#: BuildLicence.py
-msgid "urban_label_dgrneUnderground"
-msgstr "DGRNE Sous-sol (joindre annexe 2 et 3)"
-
 #. Default: "Division"
 #: PortionOut.py
 msgid "urban_label_division"
@@ -1392,6 +1392,11 @@ msgstr "Localité"
 msgid "urban_label_localityName"
 msgstr "Nom généralement constaté pour le lieu-dit"
 
+#. Default: "Locationdgrneunderground"
+#: BuildLicence.py
+msgid "urban_label_locationDgrneUnderground"
+msgstr "DGRNE Sous-sol (joindre annexe 2 et 3) (Fiche Urbanisme)"
+
 #. Default: "Locationtechnicaladvice"
 #: BuildLicence.py
 msgid "urban_label_locationTechnicalAdvice"
@@ -1618,6 +1623,11 @@ msgstr "Ouverture ou modification de la voirie"
 #: GenericLicence.py
 msgid "urban_label_roadCoating"
 msgstr "Revêtement"
+
+#. Default: "Roaddgrneunderground"
+#: BuildLicence.py
+msgid "urban_label_roadDgrneUnderground"
+msgstr "DGRNE Sous-sol (joindre annexe 2 et 3) (Fiche Voirie)"
 
 #. Default: "Roadequipments"
 #: GenericLicence.py

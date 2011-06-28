@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-06-24 09:43+0000\n"
+"POT-Creation-Date: 2011-06-28 08:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -822,14 +822,19 @@ msgstr ""
 msgid "urban_export_list220"
 msgstr ""
 
-#. Default: "If checked, a additional paragraph will be added in the licence document"
-#: BuildLicence.py
-msgid "urban_help_dgrneUnderground"
-msgstr ""
-
 #. Default: "Enter the layer image mimetype, for example 'image/jpeg' or 'image/png'"
 #: Layer.py
 msgid "urban_help_layerFormat"
+msgstr ""
+
+#. Default: "If checked, an additional paragraph will be added in the licence document"
+#: BuildLicence.py
+msgid "urban_help_locationDgrneUnderground"
+msgstr ""
+
+#. Default: "If checked, an additional paragraph will be added in the licence document"
+#: BuildLicence.py
+msgid "urban_help_roadDgrneUnderground"
 msgstr ""
 
 #. Default: "urban_descr_termKey"
@@ -1117,11 +1122,6 @@ msgstr ""
 msgid "urban_label_description"
 msgstr ""
 
-#. Default: "Dgrneunderground"
-#: BuildLicence.py
-msgid "urban_label_dgrneUnderground"
-msgstr ""
-
 #. Default: "Division"
 #: PortionOut.py
 msgid "urban_label_division"
@@ -1388,6 +1388,11 @@ msgstr ""
 msgid "urban_label_localityName"
 msgstr ""
 
+#. Default: "Locationdgrneunderground"
+#: BuildLicence.py
+msgid "urban_label_locationDgrneUnderground"
+msgstr ""
+
 #. Default: "Locationtechnicaladvice"
 #: BuildLicence.py
 msgid "urban_label_locationTechnicalAdvice"
@@ -1613,6 +1618,11 @@ msgstr ""
 #. Default: "Roadcoating"
 #: GenericLicence.py
 msgid "urban_label_roadCoating"
+msgstr ""
+
+#. Default: "Roaddgrneunderground"
+#: BuildLicence.py
+msgid "urban_label_roadDgrneUnderground"
 msgstr ""
 
 #. Default: "Roadequipments"
