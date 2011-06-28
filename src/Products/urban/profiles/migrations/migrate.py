@@ -541,6 +541,7 @@ def migrateToLicenceConfig(context):
     from Products.urban.config import URBAN_TYPES
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
+    logger.info("Migrating to LicenceConfigs: starting...")
     for urban_type in URBAN_TYPES:
         lcid = urban_type.lower()
         if not base_hasattr(tool, lcid):
@@ -565,3 +566,5 @@ def migrateToLicenceConfig(context):
         lcobj.manage_pasteObjects(cutdata)
         #we delete old folder
         tool.manage_delObjects(ids=[fid])
+        logger.info("LicenceConfig at '%s' has been migrated" % term.absolute_url())
+    logger.info("Migrating to LicenceConfigs: done!")
