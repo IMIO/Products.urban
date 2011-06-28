@@ -102,7 +102,7 @@
      <form i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/checkPortionsOutSearch'" action="checkPortionsOutSearch" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('PortionOut')">
       <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
       <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
-      <input type="submit" class="standalone" id="event" value="search_parcels" i18n:attributes="value" />
+      <input type="submit" class="context" id="event" value="search_parcels" i18n:attributes="value" />
      </form>
     </p>
    </div>
@@ -137,7 +137,7 @@
  <form i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('Lot')">
  <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
  <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
- <input type="submit" class="standalone" id="event" value="add_a_lot" i18n:attributes="value" />
+ <input type="submit" class="context" id="event" value="add_a_lot" i18n:attributes="value" />
  </form>
  
  </fieldset>
@@ -185,7 +185,7 @@
     <form i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('Equipment')">
     <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
     <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
-    <input type="submit" class="standalone" id="event" value="add_an_equipment" i18n:attributes="value" />
+    <input type="submit" class="context" id="event" value="add_an_equipment" i18n:attributes="value" />
     </form>
     </fieldset>
    <fieldset><strong><legend i18n:translate="legend_road">Road</legend></strong>

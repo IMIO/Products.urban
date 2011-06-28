@@ -118,7 +118,7 @@
 <input type="hidden" name="exposant" value="#" tal:attributes="value python: resold['exposantavant']" />
 <input type="hidden" name="puissance" value="#" tal:attributes="value python: resold['puissanceavant']" />
 <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
-<input type="submit" class="standalone" id="parcel" value="Add this parcel" i18n:attributes="value" />
+<input type="submit" class="context" id="parcel" value="Add this parcel" i18n:attributes="value" />
 </form>
 </tr>
 </tbody>
@@ -156,7 +156,7 @@
 <input type="hidden" name="puissance" value="#" tal:attributes="value python: res['puissance']" />
 <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
 
-<input type="submit" class="standalone" id="parcel" value="Add this parcel" i18n:attributes="value" />
+<input type="submit" class="context" id="parcel" value="Add this parcel" i18n:attributes="value" />
 </form>
 </tr>
 </tbody>

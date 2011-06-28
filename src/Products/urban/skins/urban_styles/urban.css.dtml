@@ -100,4 +100,9 @@ ul.formTabs {
 margin-bottom: -2em !important;
 }
 
+.standalone {
+color: red;
+
+}
+
 /* </dtml-with> */

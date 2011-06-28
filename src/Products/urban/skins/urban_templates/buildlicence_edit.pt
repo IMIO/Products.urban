@@ -20,7 +20,6 @@
              <metal:myfield use-macro="python:here.widget('licenceSubject', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('reference', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('referenceDGATLP', mode='edit')" />
-             <!--<div metal:use-macro="here/urban_macros/macros/urbanWorkLocationEdit" /> -->
              <metal:myfield use-macro="python:here.widget('workLocations', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('architects', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('foldermanagers', mode='edit')" />
@@ -113,7 +112,6 @@
                             <tal:block define="fieldName field/getName">
                              <metal:fieldMacro use-macro="python:here.widget(fieldName, mode='edit')" />
                              <tal:block condition="python: fieldName == 'referenceDGATLP'">
-                              <!--<div metal:use-macro="here/urban_macros/macros/urbanWorkLocationEdit" /> -->
                               <metal:myfield use-macro="python:here.widget('workLocations', mode='edit')" />
                              </tal:block>
                             </tal:block>

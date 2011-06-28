@@ -119,7 +119,7 @@
  <form i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('Applicant')">
  <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
  <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
- <input type="submit" class="standalone" id="event" value="add_an_applicant" i18n:attributes="value" />
+ <input type="submit" class="context" id="event" value="add_an_applicant" i18n:attributes="value" />
  </form>
 </div>
 </metal:applicants>
@@ -133,7 +133,7 @@
    </option>
   </tal:loopEventType>
  </select>
- <input class="standalone" type="submit" i18n:attributes="value" value="Add an event">
+ <input class="context" type="submit" i18n:attributes="value" value="Add an event">
 </form>
 <p class="discreet" tal:condition="not: eventTypes" i18n:translate="urban_no_eventtype_defined">No event type is defined in the configuration for this element</p>
 </div>
@@ -339,67 +339,6 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
     <div metal:use-macro="here/batch_macros/macros/navigation" />
 
 </tal:topiccontents>
-</div>
-
-<div metal:define-macro="urbanWorkLocation" i18n:domain="urban" tal:define="primary context/getPrimaryWorkLocation">
- <label id="urban_label_workLocation" i18n:translate="urban_label_workLocation">Work location</label> :
- <table cellspacing=0 cellpadding=0 width="400">
-  <tr tal:condition="primary">
-   <td>
-    <span tal:content="primary/Title|nothing">Primary workLocation street</span>
-   </td>
-   <td>
-    <tal:block define="thisObject python: primary; needExternalEdition python:False">
-     <span metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
-    </tal:block>
-   </td>
-  </tr>
-  <tal:loop_on_suppl repeat="suppl context/getSupplementaryWorkLocations">
-  <tr class="#" tal:define="oddrow repeat/suppl/odd;" tal:attributes="class python: oddrow and 'odd' or 'even'">
-   <td>
-    <span tal:content="suppl/Title">Supplementary workLocation street</span>
-   </td>
-   <td align="left">
-    <tal:block define="thisObject python: suppl; needExternalEdition python:False">
-     <span metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
-    </tal:block>
-   </td>
-  </tr>
-  </tal:loop_on_suppl>
- </table>
- <br />
- <tal:add_supplementary_street condition="primary">
-  <form i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('WorkLocation')">
-   <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
-   <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
-   <input type="submit" class="standalone" id="add_a_worklocation" value="add_WorkLocation" i18n:attributes="value" />
-  </form>
-  <br />
- </tal:add_supplementary_street>
-</div>
-
-<div class="field" metal:define-macro="urbanWorkLocationEdit" i18n:domain="urban" tal:define="primary context/getPrimaryWorkLocation">
- <label id="urban_label_workLocation" i18n:translate="urban_label_workLocation">Work location</label>
- <table cellspacing=0 cellpadding=0 width=600>
-    <tr>
-      <td>
-      <label id="urban_label_street" i18n:translate="urban_label_street">Street</label>
-      <input tal:condition="primary" tal:attributes="value python: primary.getStreet().Title() or '';" type="text" disabled="disabled" readonly="readonly" id="workLocationStreet_label" value="" size="40">
-      <input tal:condition="not: primary" type="text" disable="disabled" readonly="readonly" id="workLocationStreet_label" value="" size="40">
-      <input tal:condition="primary" tal:attributes="originalvalue python: primary.getStreet().UID() or nothing; value python: primary.getStreet().UID() or nothing" type="hidden" id="workLocationStreet" name="workLocationStreet" value="" originalvalue="">
-      <input tal:condition="not: primary" type="hidden" id="workLocationStreet" name="workLocationStreet" value="" originalvalue="">
-      <div>
-       <input value="Add" i18n:domain="atreferencebrowserwidget" i18n:attributes="value label_add" type="button" onclick="" value="Add" class="searchButton" name="workLocationStreet"
-              tal:attributes="onclick python: 'javascript:referencebrowser_openBrowser(\'' + context.portal_url.getPortalObject().absolute_url() + '/portal_urban/streets\',\'workLocationStreet\', \'\', \'street\')';">
-       <input type="button" onclick="javascript:referencebrowser_removeReference('workLocationStreet', 0)" i18n:attributes="value" value="Remove selected street" class="destructive">
-      </div>
-      </td>
-      <td valign="top">
-      <label id="urban_label_number" i18n:translate="urban_label_number">Number</label>
-      <input tal:attributes="value primary/getNumber|nothing" type="text" name="workLocationNumber" value="" />
-      </td>
-    </tr>
-</table>
 </div>
 
 <div metal:define-macro="urbanMapCSS" tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
