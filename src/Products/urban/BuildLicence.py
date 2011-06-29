@@ -31,6 +31,7 @@ from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from GenericLicence import GenericLicence
 from GenericLicence import GenericLicence_schema
 from Products.urban.utils import setRawSchema, setOptionalAttributes
+from dateutil.relativedelta import relativedelta
 
 slave_fields_subdivision = (
     # if in subdivision, display a textarea the fill some details
@@ -435,6 +436,21 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastInquiry(self):
         return self._getLastEvent(interfaces.IInquiry)
 
+    def getLastTheLicence(self):
+        return self._getLastEvent(interfaces.ITheLicence)
+
+    def getProrogatedToDate(self):
+        """
+          This method will calculate the 'prorogated to' date
+        """
+        lastTheLicenceDecisionDate = self.getLastTheLicence().getDecisionDate()
+        if not lastTheLicenceDecisionDate:
+            return ''
+        else:
+            #the prorogation gives one year more to the applicant
+            tool = getToolByName(self, 'portal_urban')
+            #relativedelta does not work with DateTime so use datetime
+            return tool.formatDate(lastTheLicenceDecisionDate.asdatetime() + relativedelta(years=+1))
 
 
 registerType(BuildLicence, PROJECTNAME)

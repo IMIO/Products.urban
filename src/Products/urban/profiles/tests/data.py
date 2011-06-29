@@ -206,6 +206,7 @@ urbanEventTypes = {
                                      {'id': "urb-decision-frais", 'title': "Ventilation des frais"},
                                      {'id': "urb-debut-travaux", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
                                     ),
+                    'eventTypeType': 'Products.urban.interfaces.ITheLicence',
                     },
                     {
                     'id': "demande-raccordement-egout",
@@ -253,9 +254,11 @@ urbanEventTypes = {
                     'id': "prorogation",
                     'title': "Prorogation du permis",
                     'deadLineDelay': 15,
-                    'activatedFields': ['eventDate', 'decisionDate', 'decision', ],
+                    'activatedFields': ['eventDate', 'decisionDate', 'decision', 'receiptDate', ],
                     'podTemplates': (
                                      {'id': "urb-prorogation", 'title': "Délibération du Collège Communal concernant la prorogation du permis"},
+                                     {'id': "urb-prorogation-transmis-refus", 'title': "Refus de prorogation (lettre au demandeur)"},
+                                     {'id': "urb-prorogation-transmis-accept", 'title': "Acceptation de prorogation (lettre au demandeur)"},
                                     ),
                     },
                     {

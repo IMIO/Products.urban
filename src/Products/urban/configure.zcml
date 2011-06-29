@@ -40,6 +40,10 @@
     interface=".interfaces.IInquiry"
     type=".interfaces.IEventTypeType"/>
 
+  <interface
+    interface=".interfaces.ITheLicence"
+    type=".interfaces.IEventTypeType"/>
+
   <!-- ##/code-section configure.zcml.header -->
 
   <i18n:registerTranslations directory="locales" />

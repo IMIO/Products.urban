@@ -165,6 +165,10 @@ class IInquiry(Interface):
     __doc__ = _("""IInquiry type marker interface""")
 
 
+class ITheLicence(Interface):
+    __doc__ = _("""ITheLicence type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase
     """
