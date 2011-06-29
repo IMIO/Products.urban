@@ -58,7 +58,7 @@
         <fieldset><strong><legend i18n:translate="add_an_annex">Add an annex</legend></strong>
         <form name="quickAdd" action="createObject" method="post">
           <input name="type_name" value="File" type="hidden">
-          <input i18n:attributes="value" class="standalone" id="event" value="add_an_annex" type="submit">
+          <input i18n:attributes="value" class="context" id="event" value="add_an_annex" type="submit">
          </form>
         </fieldset>
         </td>
