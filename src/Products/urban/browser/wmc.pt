@@ -30,6 +30,7 @@
         <ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer> 
         <ol:opacity xmlns:ol="http://openlayers.org/context" tal:content="layer/opacity">0.5</ol:opacity>
         <ol:visibility xmlns:ol="http://openlayers.org/context" tal:content="layer/visibility">false</ol:visibility> 
+        <ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent> 
       </Extension>     
    </Layer>
  </LayerList>
