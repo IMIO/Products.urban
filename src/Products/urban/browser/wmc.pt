@@ -20,9 +20,9 @@
       <Format current="1" tal:content="layer/format">image/png</Format>
     </FormatList>
     <StyleList>
-      <Style>
-        <Name tal:content="layer/style">default</Name>
-        <Title tal:content="layer/style">default</Title>
+      <Style current="1">
+        <Name tal:content="layer/style"></Name>
+        <Title tal:content="layer/style"></Title>
       </Style>
     </StyleList>
       <Extension>        

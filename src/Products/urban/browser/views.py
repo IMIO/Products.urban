@@ -26,8 +26,8 @@ class WMC(BrowserView):
         tool=getToolByName(context, "portal_urban")
         defaulturl='http://'+tool.getWebServerHost()+'/geoserver/wms'
         layers = [
-                {'url' : defaulturl,'srs':'EPSG:31370','title':'Parcellaire','name' : 'urban'+tool.getNISNum()+':capa','format':'image/png','style':'default','hidden': 0},
-                {'url' : defaulturl,'srs':'EPSG:31370','title':'Noms de rue','name' : 'urban'+tool.getNISNum()+':toli','format':'image/png','style':'default','hidden': 0},
+                {'url' : defaulturl,'srs':'EPSG:31370','title':'Parcellaire','name' : 'urban'+tool.getNISNum()+':capa','format':'image/png','style':'','hidden': 0},
+                {'url' : defaulturl,'srs':'EPSG:31370','title':'Noms de rue','name' : 'urban'+tool.getNISNum()+':toli','format':'image/png','style':'','hidden': 0},
                 {'url' : defaulturl,'srs':'EPSG:31370','title':'N° de parcelle','name' : 'urban'+tool.getNISNum()+':canu','format':'image/png','style':'ParcelsNum','hidden': 0},
                 ]
         for additional_layer in tool.additional_layers.objectValues():
