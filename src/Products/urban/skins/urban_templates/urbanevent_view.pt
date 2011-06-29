@@ -26,16 +26,22 @@
 <br />
 <a class="no_underline" href=".."><img src="goback.png" />&nbsp;<span i18n:translate="back_to_licence">Go back to the licence</span></a>
 
-<table>
+<table width=100%>
     <tr valign="top">
         <td width=30%>
         <fieldset><strong><legend i18n:translate="event_data">Event data</legend></strong>
-        <tal:showablefields repeat="evtfield linkedUrbanEventType/getActivatedFields">
-        <tal:block condition="evtfield">
-        <u><strong><span i18n:translate="" tal:content="python: 'urban_label_' + evtfield">Optional field label</span></strong> :</u><br />
-        <metal:myfield use-macro="python:here.widget(evtfield, mode='view')" />
-        </tal:block>
-        </tal:showablefields>
+        <table>
+         <tr tal:repeat="evtfield linkedUrbanEventType/getActivatedFields">
+          <tal:evtfield_is_not_none condition="evtfield">
+           <td>
+            <u><strong i18n:translate="" tal:content="python: 'urban_label_' + evtfield">Optional field label</strong>:</u>&nbsp;&nbsp;&nbsp;&nbsp;
+           </td>
+           <td>
+            <metal:myfield use-macro="python:here.widget(evtfield, mode='view')" />
+           </td>
+          </tal:evtfield_is_not_none>
+         </tr>
+        </table>
         </fieldset>
 
         <fieldset tal:define="templateObjs python: linkedUrbanEventType.objectValues('ATBlob')"><strong><legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend></strong>
