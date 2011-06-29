@@ -189,7 +189,25 @@
 
       <!-- Own management of the "delete" action -->
       <td tal:condition="python: member.has_permission('Delete objects', thisObject)" class="noPadding">
-        <a tal:attributes="href python: thisObject.absolute_url() + '/delete_confirmation'">
+        
+        
+        <!-- will be used for overlays
+
+
+    $('.urbanDelete').prepOverlay(
+        {
+            subtype: 'ajax',
+            filter: common_content_filter,
+            formselector: '#delete_confirmation',
+            noform: function(el) {return $.plonepopups.noformerrorshow(el, 'redirect');},
+            redirect: $.plonepopups.redirectbasehref,
+            closeselector: '[name=form.button.Cancel]',
+            width:'50%'
+        }
+        );   -->
+
+        <a class="urbanDelete" 
+           tal:attributes="href python: thisObject.absolute_url() + '/delete_confirmation'">
             <!-- Icon -->
             <img src="#" tal:attributes="src string:${portal_url}/delete_icon.gif" i18n:attributes="title" title="label_remove"
                  onClick="javascript:confirmDeleteObject(this)" style="cursor:pointer"/>
