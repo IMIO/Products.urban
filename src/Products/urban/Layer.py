@@ -71,14 +71,6 @@ schema = Schema((
         ),
     ),
     BooleanField(
-        name='transparent',
-        widget=BooleanField._properties['widget'](
-            label='Transparent',
-            label_msgid='urban_label_transparent',
-            i18n_domain='urban',
-        ),
-    ),
-    BooleanField(
         name='baseLayer',
         widget=BooleanField._properties['widget'](
             label='Baselayer',
@@ -94,7 +86,6 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
-
 ),
 )
 
