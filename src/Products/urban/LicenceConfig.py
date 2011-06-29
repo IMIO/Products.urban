@@ -105,6 +105,16 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
                     field.widget.label_msgid, domain=field.widget.i18n_domain, default=field.widget.label)))
         return DisplayList(tuple(res))
 
+    security.declarePublic('getIconURL')
+    def getIconURL(self):
+        from Products.CMFCore.utils import getToolByName
+        portal_types = getToolByName(self, 'portal_types')
+        if self.licence_portal_type and hasattr(portal_types, self.licence_portal_type):
+            icon = getattr(portal_types, self.licence_portal_type).getIcon()
+        else:
+            icon = getattr(portal_types, self.meta_type).getIcon()
+        portal_url = getToolByName( self, 'portal_url' )
+        return portal_url() + '/' + icon
 
 
 registerType(LicenceConfig, PROJECTNAME)
