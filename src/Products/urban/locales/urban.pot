@@ -1994,3 +1994,5 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
+msgid "no_document_to_generate"
+msgstr ""

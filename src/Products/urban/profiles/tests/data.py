@@ -223,7 +223,7 @@ urbanEventTypes = {
                     {
                     'id': "peb-declaration-initiale",
                     'title': "PEB : déclaration initiale",
-                    'activatedFields': ['eventDate', ],
+                    'activatedFields': ['receiptDate', ],
                     'deadLineDelay': 0,
                     'TALCondition' : "python: here.getPebType() == 'complete_process'",
                     'podTemplates': (),

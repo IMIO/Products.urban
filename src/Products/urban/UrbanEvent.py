@@ -168,6 +168,7 @@ UrbanEvent_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+UrbanEvent_schema['title'].visible=False
 ##/code-section after-schema
 
 class UrbanEvent(BaseFolder, BrowserDefaultMixin):
@@ -386,7 +387,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
                     cqlquery2=cqlquery2+" and puissance="+portionOutObj.getPuissance()
                 cqlquery2=cqlquery2+")"
             strsql = 'SELECT Xmin(selectedpos.extent),Ymin(selectedpos.extent),Xmax(selectedpos.extent), Ymax(selectedpos.extent) FROM (SELECT Extent(the_geom) FROM capa WHERE '+cqlquery2+') AS selectedpos'
-
 
             try:
                 result = tool.queryDB(query_string=strsql)[0]

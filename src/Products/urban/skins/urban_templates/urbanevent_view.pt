@@ -18,7 +18,8 @@
 <body>
 <div metal:fill-slot="main">
 <metal:main_macro define-macro="main">
-<metal:body define-macro="body_macro" tal:define="recipients context/getRecipients">
+<metal:body define-macro="body_macro" tal:define="recipients context/getRecipients;
+                                                  linkedUrbanEventType context/getUrbaneventtypes">
 <h1 class="documentFirstHeading" tal:content="here/Title"/>
 <div tal:replace="structure provider:plone.belowcontenttitle" />
 <!-- Back to the build licence... -->
@@ -29,7 +30,7 @@
     <tr valign="top">
         <td width=30%>
         <fieldset><strong><legend i18n:translate="event_data">Event data</legend></strong>
-        <tal:showablefields repeat="evtfield python:here.getUrbaneventtypes().getActivatedFields()">
+        <tal:showablefields repeat="evtfield linkedUrbanEventType/getActivatedFields">
         <tal:block condition="evtfield">
         <u><strong><span i18n:translate="" tal:content="python: 'urban_label_' + evtfield">Optional field label</span></strong> :</u><br />
         <metal:myfield use-macro="python:here.widget(evtfield, mode='view')" />
@@ -37,10 +38,15 @@
         </tal:showablefields>
         </fieldset>
 
-        <fieldset><strong><legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend></strong>
-        <tal:loopEventType repeat="templateObj python: context.getUrbaneventtypes().objectValues()">
-        <a href="#" tal:attributes="href python: context.absolute_url() + '/createUrbanDoc?urban_template_uid=%s&urban_event_uid=%s' % (templateObj.UID(), here.UID())" tal:content="templateObj/Title">Template title</a><br />
-        </tal:loopEventType>
+        <fieldset tal:define="templateObjs python: linkedUrbanEventType.objectValues('ATBlob')"><strong><legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend></strong>
+        <tal:templateObjs condition="templateObjs">
+         <tal:loopEventType repeat="templateObj templateObjs">
+          <a href="#" tal:attributes="href python: context.absolute_url() + '/createUrbanDoc?urban_template_uid=%s&urban_event_uid=%s' % (templateObj.UID(), here.UID())" tal:content="templateObj/Title">Template title</a><br />
+         </tal:loopEventType>
+        </tal:templateObjs>
+        <tal:no_templateObjs condition="not: templateObjs">
+         <p class="discreet" i18n:translate="no_document_to_generate">No document to generate</p>
+        </tal:no_templateObjs>
         </fieldset>
 
         <fieldset><strong><legend i18n:translate="add_an_annex">Add an annex</legend></strong>
@@ -66,8 +72,8 @@
     </tr>
 </table>
 
-<tal:block condition="python:here.getUrbaneventtypes().getSpecialFunctionName()">
-<a tal:attributes="href python:here.getUrbaneventtypes().getSpecialFunctionUrl()" tal:content="python:here.getUrbaneventtypes().getSpecialFunctionName()"/><br><br>
+<tal:block condition="linkedUrbanEventType/getSpecialFunctionName">
+<a tal:attributes="href linkedUrbanEventType/getSpecialFunctionUrl" tal:content="linkedUrbanEventType/getSpecialFunctionName"/><br><br>
 </tal:block>
 
 <tal:block condition="recipients"

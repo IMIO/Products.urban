@@ -558,6 +558,9 @@ msgstr "Modifier le demandeur"
 msgid "no_applicant_defined"
 msgstr "Aucun demandeur?"
 
+msgid "no_document_to_generate"
+msgstr "Aucun document à générer"
+
 msgid "no_foldermanager_defined"
 msgstr "Aucun agent traitant défini"
 
