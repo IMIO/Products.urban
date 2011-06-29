@@ -39,4 +39,5 @@ setup(name='Products.urban',
           'python-dateutil',
           'collective.externaleditor',
           'Products.ExternalEditor',
+          'plone.app.referenceintegrity',
           'psycopg2'])

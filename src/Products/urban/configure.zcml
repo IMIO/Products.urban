@@ -16,6 +16,8 @@
   <include package="collective.referencedatagridfield"/>
   <include package="collective.externaleditor"/>
   <include package="collective.plonefinder"/>
+  <include package="plone.app.referenceintegrity"/>
+  
   <include package=".events" />
   <include package=".browser" />
   
