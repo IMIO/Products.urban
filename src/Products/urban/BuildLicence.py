@@ -436,8 +436,14 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastInquiry(self):
         return self._getLastEvent(interfaces.IInquiry)
 
+    def getLastCollegeReport(self):
+        return self._getLastEvent(interfaces.ICollegeReport)
+
     def getLastTheLicence(self):
         return self._getLastEvent(interfaces.ITheLicence)
+
+    def getAllOpinionRequests(self):
+        return self._getAllEvents(interfaces.IOpinionRequest)
 
     def getProrogatedToDate(self):
         """

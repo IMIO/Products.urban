@@ -342,7 +342,7 @@ class UrbanBase(object):
             listCapaKey.append(capaKey)
         return listCapaKey
 
-    def _getLastEvent(self, eventInterface=None):
+    def _getAllEvents(self,  eventInterface=None):
         catalog = getToolByName(self, 'portal_catalog')
         currentPath = '/'.join(self.getPhysicalPath())
         query = {'path': {'query': currentPath,
@@ -353,7 +353,10 @@ class UrbanBase(object):
         if eventInterface is not None:
             interfaceName = interfaceToName(self, eventInterface)
             query['object_provides'] = interfaceName
-        events = [brain.getObject() for brain in catalog(**query)[:1]]
+        return [brain.getObject() for brain in catalog(**query)]
+
+    def _getLastEvent(self, eventInterface=None):
+        events = self._getAllEvents(eventInterface)
         if events:
             return events[0]
 

@@ -38,12 +38,17 @@ class TestBuildLicence(unittest.TestCase):
         self.assertEqual(event.Description(), 'B')
         self.assertEqual(event, ev2)
 
+    def testGetAllOpinionRequests(self):
+        self.assertEqual(self.buildLicence.getAllOpinionRequests(), [])
+        opinionRequest = createObject('UrbanEvent', 'demande-avis-belgacom', self.buildLicence)
+        self.assertEqual(self.buildLicence.getAllOpinionRequests(), [opinionRequest])
+
     def testGetLastDeposit(self):
         self.assertEqual(self.buildLicence.getLastDeposit(), None)
         createObject('UrbanEvent', 'dossier-incomplet', self.buildLicence, description='A')
-        sleep(0.2)
+        sleep(1)
         createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='B')
-        sleep(0.2)
+        sleep(1)
         ev3 = createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='C')
         event = self.buildLicence.getLastDeposit()
         self.assertEqual(event.Description(), 'C')

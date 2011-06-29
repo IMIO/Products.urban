@@ -172,6 +172,7 @@ urbanEventTypes = {
                                      {'id': "urb-rapp-service", 'title': "Rapport du Service"},
                                      {'id': "urb-rapp-college", 'title': "Rapport du Collège"},
                                     ),
+                    'eventTypeType': 'Products.urban.interfaces.ICollegeReport',
                     },
                     {
                     'id': "transmis-2eme-dossier-rw",
@@ -182,6 +183,7 @@ urbanEventTypes = {
                                      {'id': "urb-envoi-second-dossier-rw", 'title': "Lettre envoi deuxième dossier à la RW"},
                                      {'id': "urb-envoi-second-dossier-demandeur", 'title': "Information au demandeur envoi second dossier"},
                                     ),
+                    'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequest',
                     },
                     {
                     'id': "passage-conseil-communal",

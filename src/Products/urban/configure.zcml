@@ -27,7 +27,15 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IWalloonRegionOpinionRequest"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IAcknowledgment"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ICollegeReport"
     type=".interfaces.IEventTypeType"/>
 
   <interface
