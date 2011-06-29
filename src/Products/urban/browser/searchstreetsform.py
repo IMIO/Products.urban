@@ -96,6 +96,7 @@ class SearchStreetsForm(formbase.PageForm):
         #thus, glance at each object if street id is included in this latter
         brains = catalog.searchResults(portal_type = typesToSearch)
         self.streetsFound = []
+
         for brain in brains:
             doc = brain.getObject()
             objs = doc.getWorkLocations()
