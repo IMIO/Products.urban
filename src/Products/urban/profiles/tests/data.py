@@ -229,6 +229,14 @@ urbanEventTypes = {
                     'podTemplates': (),
                     },
                     {
+                    'id': "indication-implantation",
+                    'title': "Indication d'implantation",
+                    'deadLineDelay': 0,
+                    'activatedFields': ['receiptDate', ],
+                    'TALCondition' : "python: here.getImplantation()",
+                    'podTemplates': (),
+                    },
+                    {
                     'id': "debut-des-travaux",
                     'title': "Début des travaux",
                     'deadLineDelay': 15,
