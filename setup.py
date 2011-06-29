@@ -36,4 +36,7 @@ setup(name='Products.urban',
           'collective.referencedatagridfield',
           'collective.plonefinder',
           'Products.MasterSelectWidget',
+          'python-dateutil',
+          'collective.externaleditor',
+          'Products.ExternalEditor',
           'psycopg2'])

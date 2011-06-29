@@ -5,6 +5,7 @@
   <dependencies>
     <dependency>profile-Products.MasterSelectWidget:default</dependency>
     <dependency>profile-collective.referencedatagridfield:default</dependency>
+    <dependency>profile-collective.externaleditor:default</dependency>
   </dependencies>
   <!-- ##/code-section METADATA -->
 </metadata>
