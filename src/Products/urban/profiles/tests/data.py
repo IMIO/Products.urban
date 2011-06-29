@@ -253,8 +253,8 @@ urbanEventTypes = {
                     {
                     'id': "peb-declaration-finale",
                     'title': "PEB : déclaration finale",
-                    'activatedFields': ['eventDate', ],
-                    'deadLineDelay': 15,
+                    'activatedFields': ['receiptDate', ],
+                    'deadLineDelay': 0,
                     'TALCondition' : "python: here.getPebType() == 'complete_process'",
                     'podTemplates': (),
                     },
