@@ -28,7 +28,7 @@ class WMC(BrowserView):
         layers = [
                 {'url' : defaulturl,'srs':'EPSG:31370','title':'Parcellaire','name' : 'urban'+tool.getNISNum()+':capa','format':'image/png','style':'default','opacity':0.5, 'visibility': True},
                 {'url' : defaulturl,'srs':'EPSG:31370','title':'Noms de rue','name' : 'urban'+tool.getNISNum()+':toli','format':'image/png','style':'default','opacity':0.5,'visibility':True},
-                {'url' : defaulturl,'srs':'EPSG:31370','title':'N° de parcelle','name' : 'urban'+tool.getNISNum()+':canu','format':'image/png','style':'ParcelsNum','opacity':0.5, 'visiblity':True},
+                {'url' : defaulturl,'srs':'EPSG:31370','title':'N° de parcelle','name' : 'urban'+tool.getNISNum()+':canu','format':'image/png','style':'ParcelsNum','opacity':0.5, 'visibility':True},
                 ]
         for additional_layer in tool.additional_layers.objectValues():
             if additional_layer.getWMSUrl()=="":
