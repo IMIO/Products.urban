@@ -38,7 +38,7 @@ class WMC(BrowserView):
             opacity=1
             if additional_layer.getTransparent() == True:
                 opacity=0
-            layers.append({'url' : url,'srs':additional_layer.getSRS(),'title':additional_layer.Title,'name' : additional_layer.getLayers(),'format':additional_layer.getLayerFormat(),'style':additional_layer.getStyles(),'opacity':opacity})
+            layers.append({'url' : url,'srs':additional_layer.getSRS(),'title':additional_layer.Title,'name' : additional_layer.getLayers(),'format':additional_layer.getLayerFormat(),'style':additional_layer.getStyles(),'opacity':opacity,'visibility':additional_layer.getVisibility()})
         return layers
     def wmc(self):
 
