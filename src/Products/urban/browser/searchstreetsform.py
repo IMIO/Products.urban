@@ -98,9 +98,14 @@ class SearchStreetsForm(formbase.PageForm):
         self.streetsFound = []
         for brain in brains:
             doc = brain.getObject()
-            obj = doc.getWorkLocations()[0]
-            if (not data['streetSearch'] or obj['uid'] in  data['streetSearch']):
-               self.streetsFound.append((doc.Title(), brain.getURL()))
+            objs = doc.getWorkLocations()
+            if objs:
+                for obj in objs:
+                    if (not data['streetSearch'] or obj['uid'] in  data['streetSearch']):
+                        self.streetsFound.append((doc.Title(), brain.getURL()))
+            elif not data['streetSearch']:
+                self.streetsFound.append((doc.Title(), brain.getURL()))
+            
         #for unclear reason base must be reinitialized before returning template
         self.widgets['streetSearch'].base = self.streetsBase
         return self.template()
