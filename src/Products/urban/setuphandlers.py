@@ -439,6 +439,7 @@ def addInvestigationArticles(context, configFolder):
     newFolder.invokeFactory("UrbanVocabularyTerm",id="330-11",title=u"330 11°",description="<p> « les demandes de permis de lotir ou de permis d’urbanisme impliquant l’application des articles 110 à 113 »</p>")
     newFolder.invokeFactory("UrbanVocabularyTerm",id="330-12",title=u"330 12°",description="<p> « les demandes de permis de lotir et les demandes de permis d’urbanisme relatives à la construction, la reconstruction ou la transformation d’un bâtiment qui se rapportent à des biens immobiliers inscrits sur la liste de sauvegarde, classés, situés dans une zone de protection visée à l’article 205 (lire article 209) ou localisés dans un site mentionné à l’atlas visé à l’article 215 (lire article 233) »</p>")
     newFolder.invokeFactory("UrbanVocabularyTerm",id="330-13",title=u"330 13°",description="<p>« les voiries publiques de la Région classées en réseau interurbain (RESI) par l’arrêté ministériel du 11 août 1994. »</p>")
+    newFolder.invokeFactory("UrbanVocabularyTerm",id="334-2",title=u"334 2°",description="<p>« Dès le lendemain du jour où il est en possession de l’accusé de réception et jusqu’au jour de la clôture de l’enquête publique, le demandeur est tenu d’afficher sur le terrain faisant l’objet de la demande : 2° dans les cas visés à l’article 330, 1° à 5°, et 12°, ou lorsque la dérogation porte sur le gabarit d’un bâtiment, une vue axonométrique du projet et des bâtiments contigus »</p>")
 
 def addUrbanGroups(context):
     """
