@@ -106,9 +106,9 @@
      <span tal:replace="applicantObj/getName1|nothing" />
      <span tal:replace="applicantObj/getName2|nothing" />
      <span tal:condition="applicantObj/getSociety" tal:replace="python: '(' + applicantObj.getSociety() + ')'" />
-     <tal:block condition="applicantObj/getSociety"><br /></tal:block>
      </a>
     </b>
+    <tal:block condition="applicantObj/getStreet"><br /></tal:block>
     <span tal:replace="python: applicantObj.getStreet()+' '+applicantObj.getNumber()" /><br />
     <span tal:replace="python: applicantObj.getZipcode()+' '+applicantObj.getCity()" />
    </td>
