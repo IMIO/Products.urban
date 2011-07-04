@@ -31,7 +31,6 @@ class UrbanBase(object):
     implements(interfaces.IUrbanBase)
 
     security.declarePublic('getApplicantsSignaletic')
-
     def getApplicantsSignaletic(self, withaddress=False):
         """
           Returns a string reprensenting the signaletic of every applicants
@@ -52,7 +51,6 @@ class UrbanBase(object):
         return signaletic
 
     security.declarePublic('getFolderManagersSignaletic')
-
     def getFolderManagersSignaletic(self, withGrade=False, withEmail=False, withTel=False):
         """
           Returns a string reprensenting the signaletic of every folder managers
@@ -75,7 +73,6 @@ class UrbanBase(object):
         return signaletic
 
     security.declarePublic('getReferenceForTemplate')
-
     def getReferenceForTemplate(self):
         """
           Calculate the reference to be displayed in the templates
@@ -83,7 +80,6 @@ class UrbanBase(object):
         return "Calculated/Reference/%s" % str(self.getReference())
 
     security.declarePublic('getNotariesSignaletic')
-
     def getNotariesSignaletic(self):
         """
           Returns a string reprensenting the signaletic of every notaries
@@ -98,7 +94,6 @@ class UrbanBase(object):
         return signaletic
 
     security.declarePublic('getArchitectsSignaletic')
-
     def getArchitectsSignaletic(self, withaddress=False):
         """
           Returns a string reprensenting the signaletic of every architects
@@ -120,7 +115,6 @@ class UrbanBase(object):
         return signaletic
 
     security.declarePublic('submittedBy')
-
     def submittedBy(self):
         """
           Returns a formatted string with data about people that submitted
@@ -145,7 +139,6 @@ class UrbanBase(object):
             return 'test'
 
     security.declarePublic('getWorkLocationSignaletic')
-
     def getWorkLocationSignaletic(self):
         """
           Returns a string reprensenting the different worklocations
@@ -172,7 +165,6 @@ class UrbanBase(object):
         return signaletic
 
     security.declarePublic('getLicenceTypeAcronym')
-
     def getLicenceTypeAcronym(self):
         """
           Returns a small string representing the licence type
@@ -195,7 +187,6 @@ class UrbanBase(object):
             return licenceTypes[portal_type]
 
     security.declarePublic('getDefaultFolderManagers')
-
     def getDefaultFolderManagers(self):
         """
           Returns the default folderManagers for a licence
@@ -204,7 +195,6 @@ class UrbanBase(object):
         pass
 
     security.declarePublic('getDepositDate')
-
     def getDepositDate(self):
         """
           Returns the date the folder was brought to the urbanism service
@@ -218,7 +208,6 @@ class UrbanBase(object):
         return translate('warning_no_deposit_date', 'urban', context=self.REQUEST)
 
     security.declarePublic('getMultipleApplicantsCSV')
-
     def getMultipleApplicantsCSV(self):
         """
           Returns a formatted version of the applicants to be used in POD templates
@@ -234,7 +223,6 @@ class UrbanBase(object):
     getMultipleApplicants = getMultipleApplicantsCSV
 
     security.declarePublic('getMultipleArchitectsCSV')
-
     def getMultipleArchitectsCSV(self):
         """
           Returns a formatted version of the architects to be used in POD templates
@@ -249,7 +237,6 @@ class UrbanBase(object):
         return toreturn
 
     security.declarePublic('getMultipleNotariesCSV')
-
     def getMultipleNotariesCSV(self):
         """
           Returns a formatted version of the notaries to be used in POD templates
@@ -264,7 +251,6 @@ class UrbanBase(object):
         return toreturn
 
     security.declarePublic('getMultipleRealSubmittersCSV')
-
     def getMultipleRealSubmittersCSV(self):
         """
           Find who really submitted the request...
@@ -278,7 +264,6 @@ class UrbanBase(object):
             return ''
 
     security.declarePublic('getTerm')
-
     def getTerm(self, termFolder, termId):
         """
           Returns a term object for a given term folder
@@ -289,7 +274,6 @@ class UrbanBase(object):
         return getattr(termFolderObj, termId)
 
     security.declarePublic('getPortionOutsText')
-
     def getPortionOutsText(self, linebyline=True):
         """
           Return a displayable version of the parcels
@@ -314,7 +298,6 @@ class UrbanBase(object):
         return toreturn
 
     security.declarePublic('getListCapaKey')
-
     def getListCapaKey(self):
         """
            Return the list of capaKeys for each parcel(portionOut) for the Licence
@@ -360,6 +343,7 @@ class UrbanBase(object):
         if events:
             return events[0]
 
+    security.declarePublic('attributeIsUsed')    
     def attributeIsUsed(self, name):
         """
           Is the attribute named as param name used in this LicenceConfig ?
