@@ -430,6 +430,9 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastMissingPart(self):
         return self._getLastEvent(interfaces.IMissingPart)
 
+    def getLastWalloonRegionPrimo(self):
+        return self._getLastEvent(interfaces.IWalloonRegionPrimo)
+
     def getLastAcknowledgment(self):
         return self._getLastEvent(interfaces.IAcknowledgment)
 

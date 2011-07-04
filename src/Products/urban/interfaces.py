@@ -149,6 +149,9 @@ class IOpinionRequest(Interface):
     __doc__ = _("""IOpinionRequest type marker interface""")
 
 
+class IWalloonRegionPrimo(Interface):
+    __doc__ = _("""IWalloonRegionPrimo type marker interface""")
+
 class IWalloonRegionOpinionRequest(Interface):
     __doc__ = _("""IWalloonRegionOpinionRequest type marker interface""")
 

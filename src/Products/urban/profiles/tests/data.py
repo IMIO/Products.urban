@@ -142,6 +142,7 @@ urbanEventTypes = {
                                      {'id': "urb-envoi-premier-dossier-rw", 'title': "Lettre d'envoi du premier dossier à la RW"},
                                      {'id': "urb-envoi-premier-dossier-art127-rw", 'title': "Lettre d'envoi du dossier (article 127) à la RW"},
                                     ),
+                    'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimo',
                     },
                     {
                     'id': "enquete-publique",

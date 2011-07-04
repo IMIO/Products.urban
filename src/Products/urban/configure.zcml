@@ -31,6 +31,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IWalloonRegionPrimo"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IAcknowledgment"
     type=".interfaces.IEventTypeType"/>
 
