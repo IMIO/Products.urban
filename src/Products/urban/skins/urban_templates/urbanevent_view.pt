@@ -28,17 +28,22 @@
 
 <table width=100%>
     <tr valign="top">
-        <td width=30%>
+        <td width=35%>
         <fieldset><strong><legend i18n:translate="event_data">Event data</legend></strong>
         <table>
-         <tr tal:repeat="evtfield linkedUrbanEventType/getActivatedFields">
+         <tr valign="top" tal:repeat="evtfield linkedUrbanEventType/getActivatedFields">
           <tal:evtfield_is_not_none condition="evtfield">
            <td>
             <u><strong i18n:translate="" tal:content="python: 'urban_label_' + evtfield">Optional field label</strong>:</u>&nbsp;&nbsp;&nbsp;&nbsp;
            </td>
-           <td>
-            <metal:myfield use-macro="python:here.widget(evtfield, mode='view')" />
-           </td>
+           <tal:manage_show_nc_if_needed define="value python: getattr(context, evtfield)">
+            <td tal:condition="value">
+             <metal:myfield use-macro="python:here.widget(evtfield, mode='view')" />
+            </td>
+            <td tal:condition="not: value">
+             <span tal:condition="python: not getattr(context, evtfield)" class="discreet" i18n:translate="content_none">None</span>
+            </td>
+           </tal:manage_show_nc_if_needed>
           </tal:evtfield_is_not_none>
          </tr>
         </table>
@@ -62,7 +67,7 @@
          </form>
         </fieldset>
         </td>
-        <td width=70%>
+        <td width=65%>
         <fieldset><strong><legend i18n:translate="event_linked_documents">Event linked documents</legend><strong>
         <div tal:define="specificSearch python: 'searchLinkedDocuments';
                          tool python: context.portal_urban;

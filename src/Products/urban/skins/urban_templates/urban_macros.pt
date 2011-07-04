@@ -173,7 +173,7 @@
                                               title python: transition['id']"
                  i18n:attributes="title" class="imageInput"/>
           <!-- Button -->
-          <input tal:condition="python: not hasattr(thisObject, imageName)" class="ptButton"
+          <input tal:condition="python: not hasattr(thisObject, imageName)"
                  type="submit" tal:attributes="value python: transition['id'];"
                  i18n:attributes="value"/>
         </form>

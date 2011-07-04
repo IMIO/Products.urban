@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Jul  4 10:34:29 2011\n"
-"PO-Revision-Date: Mon Jul  4 10:34:29 2011\n"
+"POT-Creation-Date: Mon Jul  4 14:07:32 2011\n"
+"PO-Revision-Date: Mon Jul  4 14:07:32 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -189,6 +189,11 @@ msgstr ""
 #. Default: "Adr2"
 #: RecipientCadastre.py
 msgid "urban_label_adr2"
+msgstr ""
+
+#. Default: "Adviceagreementlevel"
+#: UrbanEvent.py
+msgid "urban_label_adviceAgreementLevel"
 msgstr ""
 
 #. Default: "Alertdelay"
@@ -711,6 +716,11 @@ msgstr ""
 #. Default: "Receiptdate"
 #: UrbanEvent.py
 msgid "urban_label_receiptDate"
+msgstr ""
+
+#. Default: "Receiveddocumentreference"
+#: UrbanEvent.py
+msgid "urban_label_receivedDocumentReference"
 msgstr ""
 
 #. Default: "Reference"

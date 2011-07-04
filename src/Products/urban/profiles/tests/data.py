@@ -82,7 +82,7 @@ urbanEventTypes = {
                     {
                     'id': "demande-avis-ccatm",
                     'title': "Demande d'avis (CCATM)",
-                    'activatedFields': ['eventDate', ],
+                    'activatedFields': ['eventDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', ],
                     'deadLineDelay': 15,
                     'TALCondition': "python: 'ccatm' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-ccatm", 'title': "Courrier de demande d'avis"},),
@@ -91,7 +91,7 @@ urbanEventTypes = {
                     {
                     'id': "demande-avis-belgacom",
                     'title': "Demande d'avis (Belgacom)",
-                    'activatedFields': ['eventDate', ],
+                    'activatedFields': ['eventDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', ],
                     'deadLineDelay': 15,
                     'TALCondition': "python: 'belgacom' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-belgacom", 'title': "Courrier de demande d'avis"},),
@@ -100,7 +100,7 @@ urbanEventTypes = {
                     {
                     'id': "demande-avis-dgrne",
                     'title': "Demande d'avis (DGRNE)",
-                    'activatedFields': ['eventDate', ],
+                    'activatedFields': ['eventDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', ],
                     'deadLineDelay': 15,
                     'TALCondition': "python: 'dgrne' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-dgrne", 'title': "Courrier de demande d'avis"},),
@@ -109,7 +109,7 @@ urbanEventTypes = {
                     {
                     'id': "demande-avis-dnf",
                     'title': "Demande d'avis (DNF)",
-                    'activatedFields': ['eventDate', ],
+                    'activatedFields': ['eventDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', ],
                     'deadLineDelay': 15,
                     'TALCondition': "python: 'dnf' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-dnf", 'title': "Courrier de demande d'avis"},),
@@ -118,7 +118,7 @@ urbanEventTypes = {
                     {
                     'id': "demande-avis-spw-dgo1",
                     'title': "Demande d'avis (SPW-DGO1)",
-                    'activatedFields': ['eventDate', ],
+                    'activatedFields': ['eventDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', ],
                     'deadLineDelay': 15,
                     'TALCondition' : "python: 'spw-dgo1' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-spw-dgo1", 'title': "Courrier de demande d'avis"},),
@@ -127,7 +127,7 @@ urbanEventTypes = {
                     {
                     'id': "demande-avis-swde",
                     'title': "Demande d'avis (SWDE)",
-                    'activatedFields': ['eventDate', ],
+                    'activatedFields': ['eventDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', ],
                     'deadLineDelay': 15,
                     'TALCondition' : "python: 'swde' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-swde", 'title': "Courrier de demande d'avis"},),

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-07-04 08:05+0000\n"
+"POT-Creation-Date: 2011-07-04 10:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -940,6 +940,11 @@ msgstr ""
 msgid "urban_label_adr2"
 msgstr ""
 
+#. Default: "Adviceagreementlevel"
+#: UrbanEvent.py
+msgid "urban_label_adviceAgreementLevel"
+msgstr ""
+
 #. Default: "Alertdelay"
 #: UrbanDelay.py
 msgid "urban_label_alertDelay"
@@ -1581,6 +1586,11 @@ msgstr ""
 msgid "urban_label_receiptDate"
 msgstr ""
 
+#. Default: "Receiveddocumentreference"
+#: UrbanEvent.py
+msgid "urban_label_receivedDocumentReference"
+msgstr ""
+
 #. Default: "Recipients"
 #: LicenceEvent.py
 msgid "urban_label_recipients"
@@ -1997,3 +2007,12 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
+#. Default: "Read advice"
+#: UrbanEvent.py
+msgid "agreementlevel_read_advice"
+msgstr ""
+
+#. Default: "Respect charges"
+#: UrbanEvent.py
+msgid "agreementlevel_respect_charges"
+msgstr ""

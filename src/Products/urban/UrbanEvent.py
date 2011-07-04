@@ -40,6 +40,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             condition="python:here.attributeIsUsed('eventDate')",
+            format="%d/%m/%Y",
             label='Eventdate',
             label_msgid='urban_label_eventDate',
             i18n_domain='urban',
@@ -51,11 +52,35 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             condition="python:here.attributeIsUsed('receiptDate')",
+            format="%d/%m/%Y",
             label='Receiptdate',
             label_msgid='urban_label_receiptDate',
             i18n_domain='urban',
         ),
         optional=True,
+    ),
+    StringField(
+        name='receivedDocumentReference',
+        widget=StringField._properties['widget'](
+            condition="python:here.attributeIsUsed('receivedDocumentReference')",
+            label='Receiveddocumentreference',
+            label_msgid='urban_label_receivedDocumentReference',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
+    StringField(
+        name='adviceAgreementLevel',
+        widget=SelectionWidget(
+            condition="python:here.attributeIsUsed('adviceAgreementLevel')",
+            format='select',
+            label='Adviceagreementlevel',
+            label_msgid='urban_label_adviceAgreementLevel',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        optional=True,
+        vocabulary='listAdviceAgreementLevels',
     ),
     ReferenceField(
         name='eventRecipient',
@@ -92,6 +117,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             condition="python:here.attributeIsUsed('decisionDate')",
+            format="%d/%m/%Y",
             label='Decisiondate',
             label_msgid='urban_label_decisionDate',
             i18n_domain='urban',
@@ -115,6 +141,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             condition="python:here.attributeIsUsed('explanationsDate')",
+            format="%d/%m/%Y",
             label='Explanationsdate',
             label_msgid='urban_label_explanationsDate',
             i18n_domain='urban',
@@ -126,6 +153,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             condition="python:here.attributeIsUsed('claimsDate')",
+            format="%d/%m/%Y",
             label='Claimsdate',
             label_msgid='urban_label_claimsDate',
             i18n_domain='urban',
@@ -168,7 +196,7 @@ UrbanEvent_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-UrbanEvent_schema['title'].visible=False
+UrbanEvent_schema['title'].widget.visible=False
 ##/code-section after-schema
 
 class UrbanEvent(BaseFolder, BrowserDefaultMixin):
@@ -202,10 +230,29 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     security.declarePublic('listDecisions')
     def listDecisions(self):
         """
-         Return the list of decisions from the configuration
+         Returns the list of decisions from the configuration
         """
         urbantool = getToolByName(self,'portal_urban')
         return DisplayList(urbantool.listVocabulary('decisions', self, inUrbanConfig=False))
+
+    security.declarePublic('listAdviceAgreementLevels')
+    def listAdviceAgreementLevels(self):
+        """
+          Vocabulary for field 'adviceAgreementLevels'
+        """
+        lst=[
+             ['agreementlevel_read_advice', _('agreementlevel_read_advice', 'urban', context=self.REQUEST, default="Read advice")],
+             ['agreementlevel_respect_charges', _('agreementlevel_respect_charges', 'urban', context=self.REQUEST, default="Respect charges")],
+            ]
+        vocab = []
+
+        #we add an empty vocab value of type "choose a value"
+        val = _('urban', EMPTY_VOCAB_VALUE, context=self, default=EMPTY_VOCAB_VALUE)
+        vocab.append(('', val))
+
+        for elt in lst:
+            vocab.append((elt[0], elt[1]))
+        return DisplayList(tuple(vocab))
 
     security.declarePublic('isInt')
     def isInt(self, s):
