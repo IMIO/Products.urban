@@ -363,10 +363,10 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
           Vocabulary for field 'pebType'
         """
         lst=[
-             ['not_applicable', _("urban", 'peb_not_applicable', context=self, default="Not applicable")],
-             ['complete_process', _("urban", 'peb_complete_process', context=self, default="Complete process")],
-             ['form1_process', _("urban", 'peb_form1_process', context=self, default="Form 1 process")],
-             ['form2_process', _("urban", 'peb_form2_process', context=self, default="Form 2 process")],
+             ['not_applicable', _('peb_not_applicable', 'urban', context=self.REQUEST, default="Not applicable")],
+             ['complete_process', _('peb_complete_process', 'urban', context=self.REQUEST, default="Complete process")],
+             ['form1_process', _('peb_form1_process', 'urban', context=self.REQUEST, default="Form 1 process")],
+             ['form2_process', _('peb_form2_process', 'urban', context=self.REQUEST, default="Form 2 process")],
               ]
         vocab = []
         for elt in lst:
