@@ -117,6 +117,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         return portal_url() + '/' + icon
 
 
+
 registerType(LicenceConfig, PROJECTNAME)
 # end of class LicenceConfig
 

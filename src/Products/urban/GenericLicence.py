@@ -36,11 +36,11 @@ from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.base import UrbanBase
-from Products.urban.utils import drainageTechnicalRequirementsDefaultValue, \
+from Products.urban.utils import technicalRemarksDefaultValue, \
 equipmentAndRoadRequirementsDefaultValue
 from Products.urban.utils import setRawSchema, setOptionalAttributes
 
-optional_fields = ['missingPartsDetails','folderZoneDetails','derogationDetails','annoncedDelayDetails','roadType','roadCoating','roadEquipments','protectedBuildingDetails','investigationDetails','investigationReasons','pashDetails','catchmentArea','drainageTechnicalRequirements','equipmentAndRoadRequirements','pca','SSC','RCU','floodingLevel','solicitRoadOpinionsTo' ]
+optional_fields = ['missingPartsDetails','folderZoneDetails','derogationDetails','annoncedDelayDetails','roadType','roadCoating','roadEquipments','protectedBuildingDetails','investigationDetails','investigationReasons','pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks','pca','SSC','RCU','floodingLevel','solicitRoadOpinionsTo' ]
 ##/code-section module-header
 
 schema = Schema((
@@ -374,19 +374,6 @@ schema = Schema((
         vocabulary='listCatchmentAreas',
     ),
     TextField(
-        name='drainageTechnicalRequirements',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label='Drainagetechnicalrequirements',
-            label_msgid='urban_label_drainageTechnicalRequirements',
-            i18n_domain='urban',
-        ),
-        default_content_type='text/html',
-        default=drainageTechnicalRequirementsDefaultValue,
-        schemata='urban_road',
-        default_output_type='text/html',
-    ),
-    TextField(
         name='equipmentAndRoadRequirements',
         allowable_content_types=('text/html',),
         widget=RichWidget(
@@ -396,6 +383,19 @@ schema = Schema((
         ),
         default_content_type='text/html',
         default=equipmentAndRoadRequirementsDefaultValue,
+        schemata='urban_road',
+        default_output_type='text/html',
+    ),
+    TextField(
+        name='technicalRemarks',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Technicalremarks',
+            label_msgid='urban_label_technicalRemarks',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default=technicalRemarksDefaultValue,
         schemata='urban_road',
         default_output_type='text/html',
     ),

@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Tue Jun 28 11:11:32 2011\n"
-"PO-Revision-Date: Tue Jun 28 11:11:32 2011\n"
+"POT-Creation-Date: Mon Jul  4 10:34:29 2011\n"
+"PO-Revision-Date: Mon Jul  4 10:34:29 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -346,11 +346,6 @@ msgstr ""
 #. Default: "Divisionsubject"
 #: Division.py
 msgid "urban_label_divisionSubject"
-msgstr ""
-
-#. Default: "Drainagetechnicalrequirements"
-#: GenericLicence.py
-msgid "urban_label_drainageTechnicalRequirements"
 msgstr ""
 
 #. Default: "Email"
@@ -877,6 +872,11 @@ msgstr ""
 msgid "urban_label_surface"
 msgstr ""
 
+#. Default: "Technicalremarks"
+#: GenericLicence.py
+msgid "urban_label_technicalRemarks"
+msgstr ""
+
 #. Default: "Templatefooter"
 #: UrbanTool.py
 msgid "urban_label_templateFooter"
@@ -907,11 +907,6 @@ msgstr ""
 #: Division.py
 #: GenericLicence.py
 msgid "urban_label_title"
-msgstr ""
-
-#. Default: "Transparent"
-#: Layer.py
-msgid "urban_label_transparent"
 msgstr ""
 
 #. Default: "Path of a UNO-enabled Python interpreter (ie /usr/bin/python)"

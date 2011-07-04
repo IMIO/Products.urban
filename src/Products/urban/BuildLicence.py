@@ -459,6 +459,7 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
             return tool.formatDate(lastTheLicenceDecisionDate.asdatetime() + relativedelta(years=+1))
 
 
+
 registerType(BuildLicence, PROJECTNAME)
 # end of class BuildLicence
 

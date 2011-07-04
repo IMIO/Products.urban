@@ -86,6 +86,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+
 ),
 )
 

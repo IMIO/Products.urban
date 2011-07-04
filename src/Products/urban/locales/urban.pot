@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-06-28 08:10+0000\n"
+"POT-Creation-Date: 2011-07-04 08:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -555,6 +555,9 @@ msgid "modify_applicant"
 msgstr ""
 
 msgid "no_applicant_defined"
+msgstr ""
+
+msgid "no_document_to_generate"
 msgstr ""
 
 msgid "no_foldermanager_defined"
@@ -1135,11 +1138,6 @@ msgstr ""
 #. Default: "Divisionsubject"
 #: Division.py
 msgid "urban_label_divisionSubject"
-msgstr ""
-
-#. Default: "Drainagetechnicalrequirements"
-#: GenericLicence.py
-msgid "urban_label_drainageTechnicalRequirements"
 msgstr ""
 
 #. Default: "Email"
@@ -1762,6 +1760,11 @@ msgstr ""
 msgid "urban_label_surface"
 msgstr ""
 
+#. Default: "Technicalremarks"
+#: GenericLicence.py
+msgid "urban_label_technicalRemarks"
+msgstr ""
+
 #. Default: "Templatefooter"
 #: UrbanTool.py
 msgid "urban_label_templateFooter"
@@ -1994,5 +1997,3 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
-msgid "no_document_to_generate"
-msgstr ""

@@ -15,7 +15,7 @@ def getOsTempFolder():
         raise "Sorry, I can't find a temp folder on your machine."
     return res
 
-drainageTechnicalRequirementsDefaultValue = """
+equipmentAndRoadRequirementsDefaultValue = """
 <p>1. Aucun descendant d’eaux pluviales ne pourra faire saillie sur le domaine public.  Ils seront intégrés dans la maçonnerie de façade.  Ils seront munis d’un dauphin en fonte d’une hauteur de 1 mètre à partir du sol.  Ils seront raccordés au réseau privatif du bâtiment car aucun rejet d’eaux pluviales sur le domaine public n’est autorisé. Cette donnée technique n’est d’application que si le projet prévoit des descendants d’eaux pluviales en façade à rue.</p>
 <p>2. Reprise de l’extension du réseau d’égouttage sur le réseau existant du bâtiment.</p>
 <p>3. L’égout public n’aboutissant pas encore à une station d’épuration collective, les eaux usées transiteront via fosse septique by passable d’une capacité minimale de 3000 litres, rejet vers égout public. (**) Art. R.277§4</p>
@@ -36,7 +36,7 @@ drainageTechnicalRequirementsDefaultValue = """
 <p><b>(**) A.G.W. du 3 mars 2005 relatif au livre II du Code de l’Environnement contenant le Code de l’Eau (M.B. 12/04/2005 – err.21/06/2005), modifié par A.G.W. le 06 décembre 2006 (MB 17.01.2007) relatif au règlement général d’assainissement des eaux urbaines résiduaires.</b></p>
 """
 
-equipmentAndRoadRequirementsDefaultValue = """
+technicalRemarksDefaultValue = """
 <p>1. Les portes (de garage ou autres) et les fenêtres ne peuvent en s’ouvrant faire saillie sur le domaine public.</p>
 <p>2. La Ville de Mons impose de signifier à l’entreprise engagée et au demandeur pour le présent permis de réaliser le nettoyage du trottoir et de la voirie vu que les travaux de XXXX engendreront de la poussière, des débris de briques, …  En cas de non application d’un tel système, la Ville de Mons se réserve le droit de sanctionner l’entreprise engagée et le demandeur par le biais de tous les recours légaux en la matière.</p>
 <p>3. Si le présent permis nécessite une occupation (même partielle) du domaine public, l’entreprise engagée devra introduire au préalable une demande d’ordonnance de police auprès du Service « Réglementation de Police » pour être autorisée à occuper le domaine public nécessaire à l’emprise du chantier.</p>
