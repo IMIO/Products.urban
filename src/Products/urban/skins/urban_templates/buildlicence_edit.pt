@@ -104,7 +104,6 @@
                           tal:attributes="id string:fieldsetlegend-${fieldsetid}"
                           i18n:translate=""
                           tal:condition="not:sole_fieldset" />
-                  <br />
                   <tal:description_fieldset condition="python: fieldset == 'urban_description'">
                   <table width=100%>
                       <tr>
