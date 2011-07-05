@@ -97,7 +97,7 @@ legend {
 }
 
 ul.formTabs {
-margin-bottom: -2em !important;
+margin-bottom: 0 !important;
 }
 
 .standalone {
