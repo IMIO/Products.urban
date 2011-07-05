@@ -566,5 +566,5 @@ def migrateToLicenceConfig(context):
         lcobj.manage_pasteObjects(cutdata)
         #we delete old folder
         tool.manage_delObjects(ids=[fid])
-        logger.info("LicenceConfig at '%s' has been migrated" % term.absolute_url())
+        logger.info("LicenceConfig '%s' has been migrated" % urban_type)
     logger.info("Migrating to LicenceConfigs: done!")
