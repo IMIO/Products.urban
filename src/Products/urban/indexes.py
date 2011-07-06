@@ -9,11 +9,15 @@
 # GNU General Public License (GPL)
 #
 
-__author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
-<stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
+__author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>,
+Stephan GEULETTE <stephan.geulette@uvcw.be>,
+Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
+from plone.indexer import indexer
+from Products.Archetypes.interfaces import IBaseObject
+
 
 class UrbanIndexes:
     """
@@ -22,11 +26,12 @@ class UrbanIndexes:
     security = ClassSecurityInfo()
 
     security.declarePublic('applicantInfosIndex')
+
     def applicantInfosIndex(self):
         """
           Return the informations to index about the applicants
         """
-        res= []
+        res = []
         if self.getPortalTypeName() == 'Division':
             for proprietary in self.getProprietaries():
                 res.append(proprietary.getName1())
@@ -40,6 +45,7 @@ class UrbanIndexes:
         return res
 
     security.declarePublic('parcelInfosIndex')
+
     def parcelInfosIndex(self):
         """
           Indexes some informations about the parcels of 'self'
@@ -75,3 +81,11 @@ class UrbanIndexes:
         except:
             pass
         return parcelsInfos
+
+
+@indexer(IBaseObject)
+def baseobject_title(object):
+    title = object.Title()
+    if isinstance(title, unicode):
+        title = title.encode('utf8')
+    return title
