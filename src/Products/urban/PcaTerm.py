@@ -9,8 +9,9 @@
 # GNU General Public License (GPL)
 #
 
-__author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
-<stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
+__author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>,
+Stephan GEULETTE <stephan.geulette@uvcw.be>,
+Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
@@ -150,8 +151,13 @@ class PcaTerm(BaseContent, BrowserDefaultMixin):
         """
            Override the Title method to display several data
         """
-        return u"%s (%s - %s - %s)" % (self.getLabel(), self.getNumber(), self.toLocalizedTime(self.getDecreeDate()), self.displayValue(self.listDecreeTypes(), self.getDecreeType()))
-
+        label = self.getLabel()
+        number = self.getNumber()
+        decree_date = self.toLocalizedTime(self.getDecreeDate())
+        decree_type = self.displayValue(self.listDecreeTypes(),
+                self.getDecreeType())
+        title = u"%s (%s - %s - %s)" % (label, number, decree_date, decree_type)
+        return title
 
 
 registerType(PcaTerm, PROJECTNAME)
@@ -159,4 +165,3 @@ registerType(PcaTerm, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-
