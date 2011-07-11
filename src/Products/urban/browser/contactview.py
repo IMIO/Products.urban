@@ -11,7 +11,7 @@ class ContactView(BrowserView):
     def getLinkToLinkedLicence(self):
         """
           Return a link to the licence if available
-          (protected by showLinkToLinkedLicence here above)
+          (protected by showLinkToLinkedLicence below)
         """
         context = aq_inner(self.context)
         #either the parent is in URBAN_TYPES
