@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-07-04 10:04+0000\n"
+"POT-Creation-Date: 2011-07-11 13:22+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -836,6 +836,16 @@ msgstr "Sélectionner les champs optionnels à utiliser. Utiliser la touche CTRL
 msgid "urban_export_list220"
 msgstr "Exportation liste 220"
 
+#. Default: "You will only enter dates here.  Further informations will be entered while describing the investigation"
+#: GenericLicence.py
+msgid "urban_help_investigations"
+msgstr "Entrez les dates de début et de fin d'enquête ainsi que les articles concernés.  Les autres données seront encodées lorsque l'enquête sera démarrée."
+
+#. Default: "You will only enter dates here.  Further informations will be entered while describing the investigation"
+#: GenericLicence.py
+msgid "urban_help_investigationsDates"
+msgstr "Les dates de début et de fin d'enquête uniquement sont encodées ici.  Le reste des données concernant l'enquête sera encodé lors de l'ajout de l'événement 'Enquête publique'"
+
 #. Default: "Enter the layer image mimetype, for example 'image/jpeg' or 'image/png'"
 #: Layer.py
 msgid "urban_help_layerFormat"
@@ -1325,6 +1335,16 @@ msgstr "Enquête du"
 #: UrbanCertificateTwo.py
 msgid "urban_label_investigationWriteReclamationNumber"
 msgstr "Nombre de réclamations écrites"
+
+#. Default: "Investigations"
+#: GenericLicence.py
+msgid "urban_label_investigations"
+msgstr "Enquête(s)"
+
+#. Default: "Investigationsdates"
+#: GenericLicence.py
+msgid "urban_label_investigationsDates"
+msgstr "Dates de la ou des enquêtes"
 
 #. Default: "Isadecision"
 #: LicenceEventType.py

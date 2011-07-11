@@ -188,6 +188,12 @@ msgstr ""
 msgid "This National Register number is not valid !"
 msgstr ""
 
+msgid "Check the entered dates, please use following format : dd/mm/yyyy !"
+msgstr ""
+
+msgid "Check the entered dates, the start date must be before the enddate !"
+msgstr ""
+
 msgid "label_schema_urban_description"
 msgstr ""
 

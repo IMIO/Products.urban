@@ -31,6 +31,8 @@ def migrateToPlone4(context):
     migratePersonTitles(context)
     #remove useless fields 'termKey' and 'termKeyStr'
     migrateUrbanVocabularyTerms(context)
+    #remove investigationStart and investigationEnd attributes and replace it by investigationsDates
+    migrateInvestigations(context)
     #migrateToReferenceDataGridField(context)
     #We replace licence folders from portal_urban to LicenceConfig objects
     migrateToLicenceConfig(context)
@@ -508,6 +510,28 @@ def migratePersonTitles(context):
         logger.info("UrbanVocabularyTerm at '%s' has been migrated to PersonTitleTerm" % newObj.absolute_url())
     logger.info("Migrating persontitles: done!")
 
+def migrateInvestigations(context):
+    """
+        Remove investigations attributes
+        investigationStart and investigationEnd are now in investigationsDates
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+
+    brains = site.portal_catalog(portal_type = ['BuildLicence', 'ParcelOutLicence', ])
+    logger.info("Migrating investigations: starting...")
+    for brain in brains:
+        licence = brain.getObject()
+        if hasattr(aq_base(licence), 'investigationStart'):
+            investigationsDates = ({
+                                   'startdate': licence.getInvestigationStart(),
+                                   'enddate': licence.getInvestigationEnd(),
+            },)
+            licence.setInvestigationsDates(investigationsDates)
+            logger.info("%s at '%s' has been migrated" % (licence.portal_type, licence.absolute_url()))
+    logger.info("Migrating investigations: done!")
+
 def migrateUrbanVocabularyTerms(context):
     """
         Remove useless 'termKey' and 'termKeyStr' fields
@@ -530,7 +554,6 @@ def migrateUrbanVocabularyTerms(context):
         if migrated:
             logger.info("UrbanVocabularyTerm at '%s' has been migrated" % term.absolute_url())
     logger.info("Migrating UrbanVocabularyTerms: done!")
-
 
 def migrateToLicenceConfig(context):
     """

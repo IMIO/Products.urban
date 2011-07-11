@@ -19,3 +19,9 @@ msgstr ""
 
 msgid "Road equipment details"
 msgstr ""
+
+msgid "Start date"
+msgstr ""
+
+msgid "End date"
+msgstr ""

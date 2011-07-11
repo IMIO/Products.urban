@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-07-04 10:04+0000\n"
+"POT-Creation-Date: 2011-07-11 13:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -167,6 +167,16 @@ msgid "add_event"
 msgstr ""
 
 msgid "additonal_layers_folder_title"
+msgstr ""
+
+#. Default: "Read advice"
+#: UrbanEvent.py
+msgid "agreementlevel_read_advice"
+msgstr ""
+
+#. Default: "Respect charges"
+#: UrbanEvent.py
+msgid "agreementlevel_respect_charges"
 msgstr ""
 
 msgid "all_divisions"
@@ -825,6 +835,16 @@ msgstr ""
 msgid "urban_export_list220"
 msgstr ""
 
+#. Default: "You will only enter dates here.  Further informations will be entered while describing the investigation"
+#: GenericLicence.py
+msgid "urban_help_investigations"
+msgstr ""
+
+#. Default: "You will only enter dates here.  Further informations will be entered while describing the investigation"
+#: GenericLicence.py
+msgid "urban_help_investigationsDates"
+msgstr ""
+
 #. Default: "Enter the layer image mimetype, for example 'image/jpeg' or 'image/png'"
 #: Layer.py
 msgid "urban_help_layerFormat"
@@ -1310,6 +1330,16 @@ msgstr ""
 #. Default: "Investigationwritereclamationnumber"
 #: UrbanCertificateTwo.py
 msgid "urban_label_investigationWriteReclamationNumber"
+msgstr ""
+
+#. Default: "Investigations"
+#: GenericLicence.py
+msgid "urban_label_investigations"
+msgstr ""
+
+#. Default: "Investigationsdates"
+#: GenericLicence.py
+msgid "urban_label_investigationsDates"
 msgstr ""
 
 #. Default: "Isadecision"
@@ -2007,12 +2037,3 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
-#. Default: "Read advice"
-#: UrbanEvent.py
-msgid "agreementlevel_read_advice"
-msgstr ""
-
-#. Default: "Respect charges"
-#: UrbanEvent.py
-msgid "agreementlevel_respect_charges"
-msgstr ""

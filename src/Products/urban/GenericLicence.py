@@ -301,6 +301,20 @@ schema = Schema((
         multiValued=True,
         vocabulary='listInvestigationArticles',
     ),
+    DataGridField(
+        name='investigations',
+        schemata='urban_investigation_and_advices',
+        widget=DataGridWidget(
+            columns={'startdate' : Column("Start date"), 'enddate' : Column("End date"), 'articles': SelectColumn("Investigation articles", vocabulary='listInvestigationArticles', size=5)},
+            description="You will only enter dates here.  Further informations will be entered while describing the investigation",
+            label='Investigations',
+            label_msgid='urban_label_investigations',
+            description_msgid='urban_help_investigations',
+            i18n_domain='urban',
+        ),
+        allow_oddeven=True,
+        columns=('startdate', 'enddate', 'articles'),
+    ),
     TextField(
         name='investigationDetails',
         allowable_content_types=('text/html',),
@@ -837,6 +851,21 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             urbanConfig = tool.getUrbanConfig(self)
             res = getattr(urbanConfig.folderdelays, res)
         return res
+
+    security.declarePublic('validate_investigations')
+    def validate_investigations(self, value):
+        """
+          Validates the data from the 'investigations' field
+        """
+        for line in value:
+            if line.has_key('orderindex_') and line['orderindex_'] != 'template_row_marker':
+                try:
+                    startdate = DateTime(line['startdate'])
+                    enddate = DateTime(line['enddate'])
+                except:
+                    return "Check the entered dates, please use following format : dd/mm/yyyy"
+                if not enddate > startdate:
+                    return "Check the entered dates, the start date must be before the enddate!"
 
 
 
