@@ -168,6 +168,14 @@ class IDeposit(Interface):
     __doc__ = _("""IDeposit type marker interface""")
 
 
+class IMissingPartDeposit(IDeposit):
+    __doc__ = _("""IMissingPartDeposit type marker interface""")
+
+
+class IModificationDeposit(IDeposit):
+    __doc__ = _("""IModificationDeposit type marker interface""")
+
+
 class IMissingPart(Interface):
     __doc__ = _("""IMissingPart type marker interface""")
 
@@ -182,6 +190,10 @@ class ICollegeReport(Interface):
 
 class ITheLicence(Interface):
     __doc__ = _("""ITheLicence type marker interface""")
+
+
+class IWorkBeginning(Interface):
+    __doc__ = _("""IWorkBeginning type marker interface""")
 
 
 class IUrbanBase(Interface):
