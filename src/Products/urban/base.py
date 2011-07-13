@@ -186,14 +186,6 @@ class UrbanBase(object):
             portal_type = self.REQUEST['__factory__info__']['stack'][0]
             return licenceTypes[portal_type]
 
-    security.declarePublic('getDefaultFolderManagers')
-    def getDefaultFolderManagers(self):
-        """
-          Returns the default folderManagers for a licence
-          This is the default_method for 'foldermanagers' field of different licences
-        """
-        pass
-
     security.declarePublic('getDepositDate')
     def getDepositDate(self):
         """

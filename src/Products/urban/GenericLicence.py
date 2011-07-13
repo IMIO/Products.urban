@@ -510,7 +510,6 @@ schema = Schema((
         schemata='urban_description',
         multiValued=1,
         relationship='licenceFolderManagers',
-        default_method="getDefaultFolderManagers",
         allowed_types=('FolderManager',),
     ),
 

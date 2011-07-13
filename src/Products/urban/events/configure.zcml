@@ -5,18 +5,21 @@
 
   <subscriber for="..interfaces.IArchitect
                    zope.app.container.interfaces.IObjectRemovedEvent"
-              handler=".architectEvents.beforeDelete" />
+              handler=".architectEvents.beforeDelete" />         
   <subscriber for="..interfaces.IPortionOut
                    zope.app.container.interfaces.IObjectRemovedEvent"
               handler=".portionOutEvents.onDelete" />
   <subscriber for="..interfaces.IContact
                    zope.app.container.interfaces.IObjectRemovedEvent"
-              handler=".applicantEvents.onDelete" />              
+              handler=".applicantEvents.onDelete" />
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setEventTypeType"/>
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setCreationDate"/>
+  <subscriber for="..interfaces.IGenericLicence
+                   Products.Archetypes.event.IEditBegunEvent"
+              handler=".licenceEvents.setDefaultFolderManagersEvent"/>           
 
 </configure>
