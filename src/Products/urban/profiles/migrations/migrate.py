@@ -36,6 +36,8 @@ def migrateToPlone4(context):
     #migrateToReferenceDataGridField(context)
     #We replace licence folders from portal_urban to LicenceConfig objects
     migrateToLicenceConfig(context)
+    #we replace architect objects (based on Architect meta_type) by new objects (based on Contact meta_type)
+#    migrateArchitectToContact(context)
     
 def migrateToReferenceDataGridField(context):
     """
@@ -591,3 +593,48 @@ def migrateToLicenceConfig(context):
         tool.manage_delObjects(ids=[fid])
         logger.info("LicenceConfig '%s' has been migrated" % urban_type)
     logger.info("Migrating to LicenceConfigs: done!")
+
+def migrateArchitectToContact(context):
+    """
+        We replace architect objects (based on Architect meta_type) by new objects (based on Contact meta_type)
+    """
+    if isNoturbanMigrationsProfile(context): return
+    portal = context.getSite()
+    architect_folder = portal.urban.architects
+#    import pdb; pdb.set_trace()
+    for architect in architect_folder.objectValues('Architect'):
+        #first we create a new architect
+        attribs = {
+            'title': architect.Title(),
+            'personTitle' : architect.getPersonTitle(),
+            'name1' : architect.getName1(),
+            'name2' : architect.getName2(),
+            'society' : architect.getSociety(),
+            'street' : architect.getStreet(),
+            'number' : architect.getNumber(),
+            'zipcode' : architect.getZipcode(),
+            'city' : architect.getCity(),
+            'email' : architect.getEmail(),
+            'phone' : architect.getPhone(),
+            'fax' : architect.getFax(),
+            'nationalRegister' : architect.getNationalRegister(),
+            'representedBy' : architect.getRepresentedBy(),
+        }
+        oldid = architect.getId()
+        newid = architect_folder.invokeFactory("Architect", id="%s-new"%oldid, **attribs)
+        contact = getattr(architect_folder, newid)
+        #secondly we search and adapt licences referencing the architect
+        licences = architect.getBRefs()
+        for licence in licences:
+            ref_architects = licence.getArchitects()
+            try:
+                i = ref_architects.index(architect)
+                ref_architects[i] = contact
+                licence.setArchitects(ref_architects)
+                licence.reindexObject()
+            except ValueError, msg:
+                logger.error("Error on licence '%s' when searching architect '%s', msg='%s'"%(licence.Title(), architect.Title(),msg))
+        #endly we remove the original architect and replace id of the new one
+#        architect_folder.manage_delObjects(ids=[oldid])
+#        contact.setId(oldid)
+#        contact.reindexObject()
