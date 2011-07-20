@@ -932,7 +932,7 @@ def addApplicationFolders(context):
         newSubFolder.setImmediatelyAddableTypes(['Architect'])
         newSubFolder.setLayout('architects_folder_view')
         #manage the 'Add' permissions...
-        newSubFolder.manage_permission('urban: Add Architect', ['Manager', 'Editor', ], acquire=0)
+        newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
 
     #add a folder that will contains geometricians
     if not hasattr(newFolder, "geometricians"):
