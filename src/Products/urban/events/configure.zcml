@@ -6,9 +6,12 @@
   <subscriber for="..interfaces.IPortionOut
                    zope.app.container.interfaces.IObjectRemovedEvent"
               handler=".portionOutEvents.onDelete" />
-  <subscriber for="..interfaces.IContact
+  <subscriber for="..interfaces.IApplicant
                    zope.app.container.interfaces.IObjectRemovedEvent"
               handler=".applicantEvents.onDelete" />
+  <subscriber for="..interfaces.IContact
+                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+              handler=".contactEvents.setInterface" />
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setEventTypeType"/>

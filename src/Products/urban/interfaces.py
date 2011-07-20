@@ -13,10 +13,20 @@ class IProprietary(Interface):
 class INotary(Interface):
     """Marker interface for .Notary.Notary
     """
-# next lines to be removed when migration #1283 is done
+class IApplicant(Interface):
+    """Marker interface for .Architect.Architect
+    """
 class IArchitect(Interface):
     """Marker interface for .Architect.Architect
     """
+
+CONTACT_INTERFACES = {
+    'Applicant' : IApplicant,
+    'Architect' : IArchitect,
+#    'Notary' : INotary,  # to be taken into account if notary.py is removed
+#    'Proprietary' : IProprietary, # to be taken into account if proprietary.py is removed
+}
+
 ##/code-section HEAD
 
 class IGenericLicence(Interface):
