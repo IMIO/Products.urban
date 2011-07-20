@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from zope.interface import alsoProvides
-from zope.component.interface import getInterface
 from Products.urban.interfaces import CONTACT_INTERFACES
 
 def setInterface(contact, event):
