@@ -1,7 +1,6 @@
 <registry>
   <records interface="plone.app.referenceintegrity.interfaces.ISettings">
     <value key="reference_types">
-        <element>licenceArchitects</element>
         <element>certificateFolderManagers</element>
         <element>declarationFolderManagers</element>
         <element>division_foldermanager</element>
