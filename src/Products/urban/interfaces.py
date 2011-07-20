@@ -13,14 +13,14 @@ class IProprietary(Interface):
 class INotary(Interface):
     """Marker interface for .Notary.Notary
     """
+# next lines to be removed when migration #1283 is done
+class IArchitect(Interface):
+    """Marker interface for .Architect.Architect
+    """
 ##/code-section HEAD
 
 class IGenericLicence(Interface):
     """Marker interface for .GenericLicence.GenericLicence
-    """
-
-class IArchitect(Interface):
-    """Marker interface for .Architect.Architect
     """
 
 class IContact(Interface):

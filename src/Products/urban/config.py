@@ -35,7 +35,6 @@ DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"
 setDefaultRoles(DEFAULT_ADD_CONTENT_PERMISSION, ('Manager', 'Owner', 'Contributor'))
 ADD_CONTENT_PERMISSIONS = {
     'GenericLicence': 'urban: Add GenericLicence',
-    'Architect': 'urban: Add Architect',
     'Contact': 'urban: Add Contact',
     'Street': 'urban: Add Street',
     'UrbanEvent': 'urban: Add UrbanEvent',
@@ -67,7 +66,6 @@ ADD_CONTENT_PERMISSIONS = {
 }
 
 setDefaultRoles('urban: Add GenericLicence',  ('Manager', ))
-setDefaultRoles('urban: Add Architect',  ('Manager', ))
 setDefaultRoles('urban: Add Contact',  ('Manager', ))
 setDefaultRoles('urban: Add Street',  ('Manager', ))
 setDefaultRoles('urban: Add UrbanEvent',  ('Manager', ))

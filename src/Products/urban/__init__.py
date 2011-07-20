@@ -68,12 +68,13 @@ def initialize(context):
     ##code-section custom-init-top #fill in your manual code here
     import Notary
     import Proprietary
+    # next line to be removed when migration #1283 is done
+    import Architect
     ##/code-section custom-init-top
 
     # imports packages and types for registration
 
     import GenericLicence
-    import Architect
     import Contact
     import UrbanTool
     import Street

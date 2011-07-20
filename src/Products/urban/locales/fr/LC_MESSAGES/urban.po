@@ -993,7 +993,7 @@ msgid "urban_label_applicants"
 msgstr "Demandeur"
 
 #. Default: "Architects"
-#: licenceArchitects.py
+#: BuildLicence.py
 msgid "urban_label_architects"
 msgstr "Architecte(s)"
 

@@ -601,7 +601,6 @@ def migrateArchitectToContact(context):
     if isNoturbanMigrationsProfile(context): return
     portal = context.getSite()
     architect_folder = portal.urban.architects
-#    import pdb; pdb.set_trace()
     for architect in architect_folder.objectValues('Architect'):
         #first we create a new architect
         attribs = {
