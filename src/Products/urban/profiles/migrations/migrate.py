@@ -38,6 +38,8 @@ def migrateToPlone4(context):
     migrateToLicenceConfig(context)
     #we replace architect objects (based on Architect meta_type) by new objects (based on Contact meta_type)
 #    migrateArchitectToContact(context)
+    #Migration of contact type objects to provides specific interfaces
+    migrateSpecificContactInterfaces(context)
     
 def migrateToReferenceDataGridField(context):
     """
@@ -637,3 +639,19 @@ def migrateArchitectToContact(context):
 #        architect_folder.manage_delObjects(ids=[oldid])
 #        contact.setId(oldid)
 #        contact.reindexObject()
+
+def migrateSpecificContactInterfaces(context):
+    """
+        Migration of contact type objects to provides specific interfaces
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    from Products.urban.interfaces import CONTACT_INTERFACES
+    from zope.interface import alsoProvides
+    portal = context.getSite()
+    brains = portal.portal_catalog(portal_type = CONTACT_INTERFACES.keys())
+    for brain in brains:
+        contact = brain.getObject()
+        if not contact.__provides__(CONTACT_INTERFACES[brain.Type]):
+            alsoProvides(contact, CONTACT_INTERFACES[brain.Type])
+            contact.reindexObject(['object_provides'])

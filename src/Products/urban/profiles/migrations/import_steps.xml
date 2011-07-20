@@ -100,6 +100,13 @@
     We replace architect objects (based on Architect meta_type) by new objects (based on Contact meta_type)
  </import-step>
  <import-step
+    id="urban-migrateSpecificContactInterfaces"
+    handler="Products.urban.profiles.migrations.migrate.migrateSpecificContactInterfaces"
+    title="Migration of contact type objects to provides specific interfaces"
+    version="2011-07-20T11:00:00.0">
+    Migration of contact type objects to provides specific interfaces
+ </import-step>
+ <import-step
     id="urban-migrateToPlone4"
     handler="Products.urban.profiles.migrations.migrate.migrateToPlone4"
     title="Launch every migration steps linked to the Plone4 version"
