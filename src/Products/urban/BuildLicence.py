@@ -450,6 +450,9 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastWorkBeginning(self):
         return self._getLastEvent(interfaces.IWorkBeginning)
 
+    def getLastProrogation(self):
+        return self._getLastEvent(interfaces.IProrogation)
+
     def getAllOpinionRequests(self):
         return self._getAllEvents(interfaces.IOpinionRequest)
 
@@ -497,3 +500,4 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
 
 finalizeSchema(BuildLicence_schema)
 ##/code-section module-footer
+
