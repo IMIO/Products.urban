@@ -108,7 +108,6 @@ class TestSearchStreetsForm(unittest.TestCase):
         self.streets = self.catalog(portal_type = 'Street')
         self.street = self.streets[0].getObject()
         self.buildLicence.setWorkLocations(({'link': self.streets[0].getURL(), 'numero': '12', 'orderindex_': '1', 'title': self.street.Title(), 'uid': self.street.UID()}, {'link': '', 'numero': '', 'orderindex_': 'template_row_marker', 'title': '', 'uid': ''}))
-        import pdb;pdb.set_trace()         
         import transaction
         transaction.commit()
 	self.browser.open(self.urban.absolute_url()+'/urban_searchbystreet')

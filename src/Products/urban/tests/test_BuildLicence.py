@@ -74,7 +74,6 @@ class TestBuildLicence(unittest.TestCase):
         buildLicence2 = getattr(self.buildLicences, LICENCE_ID)
         buildLicence2.setFoldermanagers(self.portal_urban.getCurrentFolderManager(buildLicence2,initials=False))
         #3 check if agent treatment exist
-        #import pdb;pdb.set_trace()
         self.assertEqual(buildLicence2.getFoldermanagers()[0].getPloneUserId(),'urbaneditor')
         at.setPloneUserId('urbanreader')
         LICENCE_ID = 'licence3'
