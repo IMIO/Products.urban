@@ -603,11 +603,8 @@ def migrateArchitectToContact(context):
     if isNoturbanMigrationsProfile(context): return
     portal = context.getSite()
     architect_folder = portal.urban.architects
-    request = portal.REQUEST
-    from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
-    marker= ILinkIntegrityInfo(request).getEnvMarker()
-    env={marker : 'all'}
-    request.environ.update(env)
+    #from plone.app.referenceintegrity.config import DisableRelationshipsProtectionTemporarily
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
     for architect in architect_folder.objectValues('Architect'):
         #first we create a new architect
         attribs = {
@@ -642,7 +639,9 @@ def migrateArchitectToContact(context):
             except ValueError, msg:
                 logger.error("Error on licence '%s' when searching architect '%s', msg='%s'"%(licence.Title(), architect.Title(),msg))
         #endly we remove the original architect and replace id of the new one
+        #with DisableRelationshipsProtectionTemporarily(['licenceArchitects']):
         architect_folder.manage_delObjects(ids=["%s-old"%id])
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
 
 def migrateSpecificContactInterfaces(context):
     """
