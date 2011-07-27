@@ -89,12 +89,18 @@ def postInstall(context):
     #add our own portal_types to portal_factory
     factory_tool = getToolByName(site, "portal_factory")
     alreadyRegTypes = factory_tool.getFactoryTypes()
+    alreadyRegTypes['Architect'] = 1
     alreadyRegTypes['UrbanCertificateOne'] = 1
     alreadyRegTypes['NotaryLetter'] = 1
     alreadyRegTypes['Notary'] = 1
     alreadyRegTypes['Proprietary'] = 1
     alreadyRegTypes['Applicant'] = 1
     factory_tool.manage_setPortalFactoryTypes(listOfTypeIds=alreadyRegTypes)
+
+    #to be removed after deletion of class Architect
+    architect_type = site.portal_types.Architect
+    architect_type.content_meta_type = "Contact"
+    architect_type.factory = "addContact"
 
     addUrbanConfigs(context)
     addApplicationFolders(context)
@@ -926,7 +932,7 @@ def addApplicationFolders(context):
         newSubFolder.setImmediatelyAddableTypes(['Architect'])
         newSubFolder.setLayout('architects_folder_view')
         #manage the 'Add' permissions...
-        newSubFolder.manage_permission('urban: Add Architect', ['Manager', 'Editor', ], acquire=0)
+        newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
 
     #add a folder that will contains geometricians
     if not hasattr(newFolder, "geometricians"):

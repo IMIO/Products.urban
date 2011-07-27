@@ -25,7 +25,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-    
+
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -45,7 +45,6 @@ from Products.CMFPlone.PloneBatch import Batch
 from Products.PageTemplates.Expressions import getEngine
 from Products.ZCTextIndex.ParseTree import ParseError
 from Products.urban.utils import getOsTempFolder
-from Products.urban.utils import setRawSchema
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 DB_QUERY_ERROR = "Programming error in query"
@@ -310,7 +309,6 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
-setRawSchema(schema)
 ##/code-section after-local-schema
 
 UrbanTool_schema = OrderedBaseFolderSchema.copy() + \
@@ -339,7 +337,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def __init__(self, id=None):
         OrderedBaseFolder.__init__(self,'portal_urban')
         self.setTitle('Urban configuration')
-        
+
         ##code-section constructor-footer #fill in your manual code here
         ##/code-section constructor-footer
 
@@ -347,7 +345,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     # tool should not appear in portal_catalog
     def at_post_edit_script(self):
         self.unindexObject()
-        
+
         ##code-section post-edit-method-footer #fill in your manual code here
         self.checkDBConnection()
         ##/code-section post-edit-method-footer
@@ -497,10 +495,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
            Return the global search topic
         """
         try:
-          topics = getattr(self, 'topics')
-          globalSearch = getattr(topics, 'globalsearch')
+            topics = getattr(self, 'topics')
+            globalSearch = getattr(topics, 'globalsearch')
         except AttributeError:
-          return 0
+            return 0
         return globalSearch
 
     security.declarePublic('getDBConnection')
@@ -623,7 +621,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         for rec in result:
             toreturn=toreturn+[rec]
             if  (rec['radicalavant'] != 0) and not ( (rec['sectionavant']==section) and (rec['radicalavant']==radical) and (rec['exposantavant']==exposant) and (rec['bisavant']==bis) and (rec['puissanceavant']==puissance) ) :
-                  toreturn=toreturn+self.findParcelHistoric(division,rec['sectionavant'],str(rec['radicalavant']),str(rec['bisavant']),rec['exposantavant'],str(rec['puissanceavant']))
+                toreturn=toreturn+self.findParcelHistoric(division,rec['sectionavant'],str(rec['radicalavant']),str(rec['bisavant']),rec['exposantavant'],str(rec['puissanceavant']))
         return toreturn
 
     security.declarePublic('findDivisions')
@@ -640,38 +638,38 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
     security.declarePublic('queryDB')
     def queryDB(self, query_string, connection_string=None):
-      """
-         Execute a query and return the result
-      """
-      self.dbc = self.getDBConnection(connection_string)
-      result = []
-      if type(self.dbc) == psycopg2._psycopg.connection:
-          try:
-              dict_cur = self.dbc.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-              dict_cur.execute(query_string+';')
-              for row in dict_cur.fetchall():
-                  result=result+[dict(row)]
-          except psycopg2.ProgrammingError:
-              result=[]
-              pass
-          self.dbc.close()
-          delattr(self,'dbc')
-      else:
-          ptool = getToolByName(self, "plone_utils")
-          ptool.addPortalMessage(_(u"db_connection_error", 'plone', mapping={u'error': self.dbc}, context=self.REQUEST), type="error")
-      return result
+        """
+           Execute a query and return the result
+        """
+        self.dbc = self.getDBConnection(connection_string)
+        result = []
+        if type(self.dbc) == psycopg2._psycopg.connection:
+            try:
+                dict_cur = self.dbc.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+                dict_cur.execute(query_string+';')
+                for row in dict_cur.fetchall():
+                    result=result+[dict(row)]
+            except psycopg2.ProgrammingError:
+                result=[]
+                pass
+            self.dbc.close()
+            delattr(self,'dbc')
+        else:
+            ptool = getToolByName(self, "plone_utils")
+            ptool.addPortalMessage(_(u"db_connection_error", 'plone', mapping={u'error': self.dbc}, context=self.REQUEST), type="error")
+        return result
 
     def checkDBConnection(self):
-      """
-         Check if the provided parameters are OK
-      """
-      #build connection string
-      ptool = getToolByName(self, "plone_utils")
-      try:
-          psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (self.getSqlName(), self.getSqlUser(), self.getSqlHost(), self.getSqlPassword()))
-          ptool.addPortalMessage(_(u"db_connection_successfull", 'plone', context=self.REQUEST), type='info')
-      except psycopg2.OperationalError, e:
-          ptool.addPortalMessage(_(u"db_connection_error", 'plone', mapping={u'error': unicode(e.__str__(), 'utf-8')}, context=self.REQUEST))
+        """
+           Check if the provided parameters are OK
+        """
+        #build connection string
+        ptool = getToolByName(self, "plone_utils")
+        try:
+            psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (self.getSqlName(), self.getSqlUser(), self.getSqlHost(), self.getSqlPassword()))
+            ptool.addPortalMessage(_(u"db_connection_successfull", 'plone', context=self.REQUEST), type='info')
+        except psycopg2.OperationalError, e:
+            ptool.addPortalMessage(_(u"db_connection_error", 'plone', mapping={u'error': unicode(e.__str__(), 'utf-8')}, context=self.REQUEST))
 
     security.declarePublic('mayAccessUrban')
     def mayAccessUrban(self):
@@ -1513,4 +1511,3 @@ registerType(UrbanTool, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

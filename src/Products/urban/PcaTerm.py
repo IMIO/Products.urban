@@ -25,7 +25,6 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate as _
-from Products.urban.utils import setRawSchema
 ##/code-section module-header
 
 schema = Schema((
@@ -104,7 +103,6 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
-setRawSchema(schema)
 ##/code-section after-local-schema
 
 PcaTerm_schema = BaseSchema.copy() + \
@@ -153,11 +151,12 @@ class PcaTerm(BaseContent, BrowserDefaultMixin):
         """
         label = self.getLabel()
         number = self.getNumber()
-        decree_date = self.toLocalizedTime(self.getDecreeDate())
+        date = self.toLocalizedTime(self.getDecreeDate()).encode('utf8')
         decree_type = self.displayValue(self.listDecreeTypes(),
-                self.getDecreeType())
-        title = u"%s (%s - %s - %s)" % (label, number, decree_date, decree_type)
-        return title
+                self.getDecreeType()).encode('utf8')
+        result = "%s (%s - %s - %s)" % (
+            label, number, date, decree_type)
+        return result
 
 
 registerType(PcaTerm, PROJECTNAME)

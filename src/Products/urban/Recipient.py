@@ -24,7 +24,6 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Contact import Contact
-from Products.urban.utils import setRawSchema
 ##/code-section module-header
 
 schema = Schema((
@@ -34,7 +33,6 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
-setRawSchema(schema)
 ##/code-section after-local-schema
 
 Recipient_schema = Contact.schema.copy() + \
@@ -64,7 +62,7 @@ class Recipient(BaseContent, Contact, BrowserDefaultMixin):
     # Manually created methods
 
     def Title(self):
-	    return self.getName1() + " " + self.getName2()
+        return self.getName1() + " " + self.getName2()
 
 
 
@@ -73,4 +71,3 @@ registerType(Recipient, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

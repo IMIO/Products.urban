@@ -30,7 +30,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from GenericLicence import GenericLicence
 from GenericLicence import GenericLicence_schema
-from Products.urban.utils import setRawSchema, setOptionalAttributes
+from Products.urban.utils import setOptionalAttributes
 from dateutil.relativedelta import relativedelta
 
 slave_fields_subdivision = (
@@ -285,7 +285,6 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
-setRawSchema(schema)
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
@@ -430,6 +429,9 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastMissingPart(self):
         return self._getLastEvent(interfaces.IMissingPart)
 
+    def getLastMissingPartDeposit(self):
+        return self._getLastEvent(interfaces.IMissingPartDeposit)
+
     def getLastWalloonRegionPrimo(self):
         return self._getLastEvent(interfaces.IWalloonRegionPrimo)
 
@@ -444,6 +446,9 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     def getLastTheLicence(self):
         return self._getLastEvent(interfaces.ITheLicence)
+
+    def getLastWorkBeginning(self):
+        return self._getLastEvent(interfaces.IWorkBeginning)
 
     def getAllOpinionRequests(self):
         return self._getAllEvents(interfaces.IOpinionRequest)
@@ -492,4 +497,3 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
 
 finalizeSchema(BuildLicence_schema)
 ##/code-section module-footer
-

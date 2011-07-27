@@ -23,6 +23,15 @@
                 category="context"
                 key="/"
                 manager="plone.rightcolumn"
-                type="portlets.Events" />
-        
+		type="portlets.Events" />
+
+    <!--assignment name="portlet_urban"
+                category="context"
+                key="/urban"
+                manager="plone.leftcolumn"
+                type="portlets.Classic" >
+           <property name="macro">portlet</property>
+           <property name="template">portlet_urban</property>
+    </assignment-->
+
 </portlets>

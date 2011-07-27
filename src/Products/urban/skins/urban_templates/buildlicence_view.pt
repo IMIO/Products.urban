@@ -354,6 +354,11 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('investigationEnd', mode='view')" /><span tal:condition="not: context/getInvestigationEnd" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
+ <tr>
+  <td valign="top"><b><span i18n:translate="urban_label_investigations">Investigations dates</span> :</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('investigations', mode='view')" /></td>
+ </tr>
  <tr tal:condition="python: context.attributeIsUsed('investigationDetails')">
   <td valign="top"><b><span i18n:translate="urban_label_investigationDetails">Investigation details</span> :</b></td>
   <td width="2%"></td>

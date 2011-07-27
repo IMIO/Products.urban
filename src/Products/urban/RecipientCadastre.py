@@ -23,7 +23,6 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.urban.utils import setRawSchema
 ##/code-section module-header
 
 schema = Schema((
@@ -65,7 +64,6 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
-setRawSchema(schema)
 ##/code-section after-local-schema
 
 RecipientCadastre_schema = BaseFolderSchema.copy() + \
@@ -118,4 +116,3 @@ registerType(RecipientCadastre, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

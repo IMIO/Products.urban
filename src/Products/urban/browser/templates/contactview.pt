@@ -80,7 +80,7 @@
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('nationalRegister', mode='view')" /></td>
      </tr>
-     <tr>
+     <tr tal:condition="context/showRepresentedByField">
       <td valign="top"><u><b><span i18n:translate="urban_label_representedBy">Represented by</span> :</b></u></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('representedBy', mode='view')" /></td>

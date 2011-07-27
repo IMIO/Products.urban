@@ -31,9 +31,15 @@ def migrateToPlone4(context):
     migratePersonTitles(context)
     #remove useless fields 'termKey' and 'termKeyStr'
     migrateUrbanVocabularyTerms(context)
+    #remove investigationStart and investigationEnd attributes and replace it by investigationsDates
+    migrateInvestigations(context)
     #migrateToReferenceDataGridField(context)
     #We replace licence folders from portal_urban to LicenceConfig objects
     migrateToLicenceConfig(context)
+    #we replace architect objects (based on Architect meta_type) by new objects (based on Contact meta_type)
+    migrateArchitectToContact(context)
+    #Migration of contact type objects to provides specific interfaces
+    migrateSpecificContactInterfaces(context)
     
 def migrateToReferenceDataGridField(context):
     """
@@ -508,6 +514,28 @@ def migratePersonTitles(context):
         logger.info("UrbanVocabularyTerm at '%s' has been migrated to PersonTitleTerm" % newObj.absolute_url())
     logger.info("Migrating persontitles: done!")
 
+def migrateInvestigations(context):
+    """
+        Remove investigations attributes
+        investigationStart and investigationEnd are now in investigationsDates
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+
+    brains = site.portal_catalog(portal_type = ['BuildLicence', 'ParcelOutLicence', ])
+    logger.info("Migrating investigations: starting...")
+    for brain in brains:
+        licence = brain.getObject()
+        if hasattr(aq_base(licence), 'investigationStart'):
+            investigationsDates = ({
+                                   'startdate': licence.getInvestigationStart(),
+                                   'enddate': licence.getInvestigationEnd(),
+            },)
+            licence.setInvestigationsDates(investigationsDates)
+            logger.info("%s at '%s' has been migrated" % (licence.portal_type, licence.absolute_url()))
+    logger.info("Migrating investigations: done!")
+
 def migrateUrbanVocabularyTerms(context):
     """
         Remove useless 'termKey' and 'termKeyStr' fields
@@ -530,7 +558,6 @@ def migrateUrbanVocabularyTerms(context):
         if migrated:
             logger.info("UrbanVocabularyTerm at '%s' has been migrated" % term.absolute_url())
     logger.info("Migrating UrbanVocabularyTerms: done!")
-
 
 def migrateToLicenceConfig(context):
     """
@@ -568,3 +595,67 @@ def migrateToLicenceConfig(context):
         tool.manage_delObjects(ids=[fid])
         logger.info("LicenceConfig '%s' has been migrated" % urban_type)
     logger.info("Migrating to LicenceConfigs: done!")
+
+def migrateArchitectToContact(context):
+    """
+        We replace architect objects (based on Architect meta_type) by new objects (based on Contact meta_type)
+    """
+    if isNoturbanMigrationsProfile(context): return
+    portal = context.getSite()
+    architect_folder = portal.urban.architects
+    request = portal.REQUEST
+    from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
+    marker= ILinkIntegrityInfo(request).getEnvMarker()
+    env={marker : 'all'}
+    request.environ.update(env)
+    for architect in architect_folder.objectValues('Architect'):
+        #first we create a new architect
+        attribs = {
+            'title': architect.Title(),
+            'personTitle' : architect.getPersonTitle(),
+            'name1' : architect.getName1(),
+            'name2' : architect.getName2(),
+            'society' : architect.getSociety(),
+            'street' : architect.getStreet(),
+            'number' : architect.getNumber(),
+            'zipcode' : architect.getZipcode(),
+            'city' : architect.getCity(),
+            'email' : architect.getEmail(),
+            'phone' : architect.getPhone(),
+            'fax' : architect.getFax(),
+            'nationalRegister' : architect.getNationalRegister(),
+            'representedBy' : architect.getRepresentedBy(),
+        }
+        id = architect.getId()
+        architect.setId("%s-old"%id)
+        architect_folder.invokeFactory("Architect", id=id, **attribs)
+        contact = getattr(architect_folder, id)
+        #secondly we search and adapt licences referencing the architect
+        licences = architect.getBRefs()
+        for licence in licences:
+            ref_architects = licence.getArchitects()
+            try:
+                i = ref_architects.index(architect)
+                ref_architects[i] = contact
+                licence.setArchitects(ref_architects)
+                licence.reindexObject()
+            except ValueError, msg:
+                logger.error("Error on licence '%s' when searching architect '%s', msg='%s'"%(licence.Title(), architect.Title(),msg))
+        #endly we remove the original architect and replace id of the new one
+        architect_folder.manage_delObjects(ids=["%s-old"%id])
+
+def migrateSpecificContactInterfaces(context):
+    """
+        Migration of contact type objects to provides specific interfaces
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    from Products.urban.interfaces import CONTACT_INTERFACES
+    from zope.interface import alsoProvides
+    portal = context.getSite()
+    brains = portal.portal_catalog(portal_type = CONTACT_INTERFACES.keys())
+    for brain in brains:
+        contact = brain.getObject()
+        if not contact.__provides__(CONTACT_INTERFACES[brain.Type]):
+            alsoProvides(contact, CONTACT_INTERFACES[brain.Type])
+            contact.reindexObject(['object_provides'])

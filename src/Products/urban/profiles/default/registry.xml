@@ -1,7 +1,19 @@
 <registry>
   <records interface="plone.app.referenceintegrity.interfaces.ISettings">
     <value key="reference_types">
+        <element>certificateFolderManagers</element>
+        <element>declarationFolderManagers</element>
+        <element>division_foldermanager</element>
+        <element>environmentalDeclarationFolderManagers</element>
         <element>licenceArchitects</element>
+        <element>licenceFolderManagers</element>
+        <element>licenceParcelling</element>
+        <element>notary</element>
+        <element>parcelOutGeometricians</element>
+        <element>recipients</element>
+        <element>street</element>
+        <element>Street</element>
+        <element>UrbanEventType</element>
     </value>
   </records>
 </registry>

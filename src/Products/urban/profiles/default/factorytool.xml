@@ -2,7 +2,6 @@
 <object name="portal_factory" meta_type="Plone Factory Tool">
  <factorytypes>
   <type portal_type="GenericLicence"/>
-  <type portal_type="Architect"/>
   <type portal_type="Contact"/>
   <type portal_type="Street"/>
   <type portal_type="UrbanEvent"/>

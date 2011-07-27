@@ -12,12 +12,13 @@ class TestBuildLicence(unittest.TestCase):
 
     def setUp(self):
         portal = self.layer['portal']
+        self.portal_urban = portal.portal_urban        
         urban = portal.urban
-        buildLicences = urban.buildlicences
+        self.buildLicences = urban.buildlicences
         LICENCE_ID = 'licence1'
         login(portal, 'urbaneditor')
-        buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
-        self.buildLicence = getattr(buildLicences, LICENCE_ID)
+        self.buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
+        self.buildLicence = getattr(self.buildLicences, LICENCE_ID)
 
     def testGetLastEventWithoutEvent(self):
         self.assertEqual(self.buildLicence._getLastEvent(), None)
@@ -62,3 +63,23 @@ class TestBuildLicence(unittest.TestCase):
         event = self.buildLicence.getLastAcknowledgment()
         self.assertEqual(event.Description(), 'B')
         self.assertEqual(event, ev2)
+
+    def testGetCurrentFolderManager(self):
+        #1 link login on treatment agent        
+        at = getattr(self.portal_urban.buildlicence.foldermanagers,'foldermanager1')
+        at.setPloneUserId('urbaneditor')
+        #2 create an empty buildlicence
+        LICENCE_ID = 'licence2'
+        self.buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
+        buildLicence2 = getattr(self.buildLicences, LICENCE_ID)
+        buildLicence2.setFoldermanagers(self.portal_urban.getCurrentFolderManager(buildLicence2,initials=False))
+        #3 check if agent treatment exist
+        #import pdb;pdb.set_trace()
+        self.assertEqual(buildLicence2.getFoldermanagers()[0].getPloneUserId(),'urbaneditor')
+        at.setPloneUserId('urbanreader')
+        LICENCE_ID = 'licence3'
+        self.buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
+        buildLicence3 = getattr(self.buildLicences, LICENCE_ID)
+        buildLicence3.setFoldermanagers(self.portal_urban.getCurrentFolderManager(buildLicence3,initials=False))
+        self.assertEqual(len(buildLicence3.getFoldermanagers()),0)  
+        

@@ -13,14 +13,24 @@ class IProprietary(Interface):
 class INotary(Interface):
     """Marker interface for .Notary.Notary
     """
+class IApplicant(Interface):
+    """Marker interface for .Architect.Architect
+    """
+class IArchitect(Interface):
+    """Marker interface for .Architect.Architect
+    """
+
+CONTACT_INTERFACES = {
+    'Applicant' : IApplicant,
+    'Architect' : IArchitect,
+#    'Notary' : INotary,  # to be taken into account if notary.py is removed
+#    'Proprietary' : IProprietary, # to be taken into account if proprietary.py is removed
+}
+
 ##/code-section HEAD
 
 class IGenericLicence(Interface):
     """Marker interface for .GenericLicence.GenericLicence
-    """
-
-class IArchitect(Interface):
-    """Marker interface for .Architect.Architect
     """
 
 class IContact(Interface):
@@ -168,6 +178,14 @@ class IDeposit(Interface):
     __doc__ = _("""IDeposit type marker interface""")
 
 
+class IMissingPartDeposit(IDeposit):
+    __doc__ = _("""IMissingPartDeposit type marker interface""")
+
+
+class IModificationDeposit(IDeposit):
+    __doc__ = _("""IModificationDeposit type marker interface""")
+
+
 class IMissingPart(Interface):
     __doc__ = _("""IMissingPart type marker interface""")
 
@@ -182,6 +200,10 @@ class ICollegeReport(Interface):
 
 class ITheLicence(Interface):
     __doc__ = _("""ITheLicence type marker interface""")
+
+
+class IWorkBeginning(Interface):
+    __doc__ = _("""IWorkBeginning type marker interface""")
 
 
 class IUrbanBase(Interface):
