@@ -45,7 +45,19 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IMissingPartDeposit"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IModificationDeposit"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IDeposit"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IWorkBeginning"
     type=".interfaces.IEventTypeType"/>
 
   <interface
@@ -58,6 +70,10 @@
 
   <interface
     interface=".interfaces.ITheLicence"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IProrogation"
     type=".interfaces.IEventTypeType"/>
 
   <!-- ##/code-section configure.zcml.header -->
