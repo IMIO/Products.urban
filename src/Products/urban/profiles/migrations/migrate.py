@@ -37,7 +37,7 @@ def migrateToPlone4(context):
     #We replace licence folders from portal_urban to LicenceConfig objects
     migrateToLicenceConfig(context)
     #we replace architect objects (based on Architect meta_type) by new objects (based on Contact meta_type)
-#    migrateArchitectToContact(context)
+    migrateArchitectToContact(context)
     #Migration of contact type objects to provides specific interfaces
     migrateSpecificContactInterfaces(context)
     
@@ -603,6 +603,11 @@ def migrateArchitectToContact(context):
     if isNoturbanMigrationsProfile(context): return
     portal = context.getSite()
     architect_folder = portal.urban.architects
+    request = portal.REQUEST
+    from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
+    marker= ILinkIntegrityInfo(request).getEnvMarker()
+    env={marker : 'all'}
+    request.environ.update(env)
     for architect in architect_folder.objectValues('Architect'):
         #first we create a new architect
         attribs = {
@@ -621,9 +626,10 @@ def migrateArchitectToContact(context):
             'nationalRegister' : architect.getNationalRegister(),
             'representedBy' : architect.getRepresentedBy(),
         }
-        oldid = architect.getId()
-        newid = architect_folder.invokeFactory("Architect", id="%s-new"%oldid, **attribs)
-        contact = getattr(architect_folder, newid)
+        id = architect.getId()
+        architect.setId("%s-old"%id)
+        architect_folder.invokeFactory("Architect", id=id, **attribs)
+        contact = getattr(architect_folder, id)
         #secondly we search and adapt licences referencing the architect
         licences = architect.getBRefs()
         for licence in licences:
@@ -636,9 +642,7 @@ def migrateArchitectToContact(context):
             except ValueError, msg:
                 logger.error("Error on licence '%s' when searching architect '%s', msg='%s'"%(licence.Title(), architect.Title(),msg))
         #endly we remove the original architect and replace id of the new one
-#        architect_folder.manage_delObjects(ids=[oldid])
-#        contact.setId(oldid)
-#        contact.reindexObject()
+        architect_folder.manage_delObjects(ids=["%s-old"%id])
 
 def migrateSpecificContactInterfaces(context):
     """
