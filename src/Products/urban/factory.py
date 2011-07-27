@@ -25,3 +25,23 @@ class UrbanEventFactory(grok.GlobalUtility):
         urbanEvent.processForm()
 
         return urbanEvent
+
+
+class BuildLicenceFactory(grok.GlobalUtility):
+    grok.implements(IFactory)
+    grok.name('BuildLicence')
+
+    def __call__(self, context, licenceId=None, **kwargs):
+        portal = getToolByName(context, 'portal_url').getPortalObject()
+        urban = portal.urban
+        buildLicences = urban.buildlicences
+        if licenceId is None:
+            urbanTool = getToolByName(portal, 'portal_urban')
+            licenceId = urbanTool.generateUniqueId('BuildLicence')
+        licenceId = buildLicences.invokeFactory("BuildLicence",
+                              id=licenceId,
+                              **kwargs)
+        licence = getattr(buildLicences, licenceId)
+        licence._at_rename_after_creation = False
+        licence.processForm()
+        return licence
