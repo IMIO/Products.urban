@@ -153,11 +153,8 @@ class PcaTerm(BaseContent, BrowserDefaultMixin):
         date = self.toLocalizedTime(self.getDecreeDate()).encode('utf8')
         decree_type = self.displayValue(self.listDecreeTypes(),
                 self.getDecreeType()).encode('utf8')
-        try:
-            result = "%s (%s - %s - %s)" % (
-                label, number, date, decree_type)
-        except UnicodeDecodeError:
-            import pdb; pdb.set_trace()
+        result = "%s (%s - %s - %s)" % (
+            label, number, date, decree_type)
         return result
 
 
