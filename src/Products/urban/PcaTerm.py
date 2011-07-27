@@ -24,7 +24,6 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate as _
-from Products.urban.utils import setRawSchema
 ##/code-section module-header
 
 schema = Schema((
@@ -103,7 +102,6 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
-setRawSchema(schema)
 ##/code-section after-local-schema
 
 PcaTerm_schema = BaseSchema.copy() + \
@@ -150,8 +148,17 @@ class PcaTerm(BaseContent, BrowserDefaultMixin):
         """
            Override the Title method to display several data
         """
-        return u"%s (%s - %s - %s)" % (self.getLabel(), self.getNumber(), self.toLocalizedTime(self.getDecreeDate()), self.displayValue(self.listDecreeTypes(), self.getDecreeType()))
-
+        label = self.getLabel()
+        number = self.getNumber()
+        date = self.toLocalizedTime(self.getDecreeDate()).encode('utf8')
+        decree_type = self.displayValue(self.listDecreeTypes(),
+                self.getDecreeType()).encode('utf8')
+        try:
+            result = "%s (%s - %s - %s)" % (
+                label, number, date, decree_type)
+        except UnicodeDecodeError:
+            import pdb; pdb.set_trace()
+        return result
 
 
 registerType(PcaTerm, PROJECTNAME)
@@ -159,4 +166,3 @@ registerType(PcaTerm, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

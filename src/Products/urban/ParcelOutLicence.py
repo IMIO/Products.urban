@@ -33,7 +33,7 @@ from Products.CMFCore.utils import getToolByName
 import appy.pod.renderer
 import os
 import psycopg2
-from Products.urban.utils import setRawSchema, setOptionalAttributes
+from Products.urban.utils import setOptionalAttributes
 
 optional_fields = []
 ##/code-section module-header
@@ -65,7 +65,6 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
-setRawSchema(schema)
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
@@ -138,4 +137,3 @@ registerType(ParcelOutLicence, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

@@ -30,7 +30,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from GenericLicence import GenericLicence
 from GenericLicence import GenericLicence_schema
-from Products.urban.utils import setRawSchema, setOptionalAttributes
+from Products.urban.utils import setOptionalAttributes
 from dateutil.relativedelta import relativedelta
 
 slave_fields_subdivision = (
@@ -285,7 +285,6 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
-setRawSchema(schema)
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
@@ -498,4 +497,3 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
 
 finalizeSchema(BuildLicence_schema)
 ##/code-section module-footer
-

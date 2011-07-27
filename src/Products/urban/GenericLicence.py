@@ -38,7 +38,7 @@ from Products.urban.indexes import UrbanIndexes
 from Products.urban.base import UrbanBase
 from Products.urban.utils import technicalRemarksDefaultValue, \
 equipmentAndRoadRequirementsDefaultValue
-from Products.urban.utils import setRawSchema, setOptionalAttributes
+from Products.urban.utils import setOptionalAttributes
 
 optional_fields = ['missingPartsDetails','folderZoneDetails','derogationDetails','annoncedDelayDetails','roadType','roadCoating','roadEquipments','protectedBuildingDetails','investigationDetails','investigationReasons','pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks','pca','SSC','RCU','floodingLevel','solicitRoadOpinionsTo' ]
 ##/code-section module-header
@@ -517,7 +517,6 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
-setRawSchema(schema)
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
@@ -873,4 +872,3 @@ registerType(GenericLicence, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-
