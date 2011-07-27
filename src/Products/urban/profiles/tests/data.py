@@ -27,7 +27,7 @@ urbanEventTypes = {
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
                     'podTemplates': ({'id': "urb-recepisse-art115-complement", 'title': "Récépissé d'un complément à une demande de permis (article 115)"},),
-                    'eventTypeType': 'Products.urban.interfaces.IDeposit',
+                    'eventTypeType': 'Products.urban.interfaces.IMissingPartDeposit',
                     },
                     {
                     'id': "recepisse-article-116",
@@ -35,7 +35,7 @@ urbanEventTypes = {
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
                     'podTemplates': ({'id': "urb-recepisse-art116", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
-                    'eventTypeType': 'Products.urban.interfaces.IDeposit',
+                    'eventTypeType': 'Products.urban.interfaces.IModificationDeposit',
                     },
                     {
                     'id': "dossier-incomplet",
@@ -245,6 +245,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'activatedFields': ['eventDate', ],
                     'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IWorkBeginning',
                     },
                     {
                     'id': "fin-des-travaux",
@@ -271,6 +272,7 @@ urbanEventTypes = {
                                      {'id': "urb-prorogation-transmis-refus", 'title': "Refus de prorogation (lettre au demandeur)"},
                                      {'id': "urb-prorogation-transmis-accept", 'title': "Acceptation de prorogation (lettre au demandeur)"},
                                     ),
+                    'eventTypeType': 'Products.urban.interfaces.IProrogation',
                     },
                     {
                     'id': "suspension-du-permis",

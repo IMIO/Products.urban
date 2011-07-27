@@ -27,6 +27,8 @@ from Products.urban.config import TOPIC_TYPE
 from zExceptions import BadRequest
 from Products.ZCatalog.Catalog import CatalogError
 from Products.urban.config import URBAN_TYPES, PPNC_LAYERS
+from Products.urban.interfaces import ILicenceContainer
+from zope.interface import alsoProvides
 from zope.i18n import translate as _
 ##/code-section HEAD
 
@@ -910,6 +912,7 @@ def addApplicationFolders(context):
         if not hasattr(newFolder, urban_type.lower() + 's'):
             newFolderid = newFolder.invokeFactory("Folder",id=urban_type.lower() + 's',title=_(urban_type.lower() + 's', 'urban', context=site.REQUEST))
             newSubFolder = getattr(newFolder, newFolderid)
+            alsoProvides(newSubFolder, ILicenceContainer)
             newSubFolder.setConstrainTypesMode(1)
             newSubFolder.setLocallyAllowedTypes([urban_type])
             newSubFolder.setImmediatelyAddableTypes([urban_type])
