@@ -1437,14 +1437,13 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return prefix + cityName
 
     security.declarePublic('formatDate')
-    def formatDate(self, date, long_format=None, time_only=None, translatemonth=True):
+    def formatDate(self, date, translatemonth=True):
         """
           Format the date for printing in pod templates
         """
         if date:
             if not translatemonth:
-                return ulocalized_time(date, long_format=False, time_only=None, context=self,
-                    domain='', request=self.REQUEST)
+                return ulocalized_time(date, context=self, request=self.REQUEST).encode('utf8')
             else:
                 #we need to translate the month and maybe the day (1er)
                 year, month, day = str(date.strftime('%Y/%m/%d')).split('/')
@@ -1453,7 +1452,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 #if no translation is available, then we use the default where me remove foregoing '0'
                 #'09' becomes '9', ...
                 daymsgid = "date_day_%s" % day
-                translatedDay = _(daymsgid, 'urban', context=self.REQUEST, default=day.lstrip('0'))
+                translatedDay = _(daymsgid, 'urban', context=self.REQUEST, default=day.lstrip('0')).encode('utf8')
                 #translate the month
                 #msgids already exist in the 'plonelocales' domain
                 monthMappings = {
@@ -1471,7 +1470,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                         '12': 'dec',
                        }
                 monthmsgid = "month_%s" % monthMappings[month]
-                translatedMonth = _(monthmsgid, 'plonelocales', context=self.REQUEST).lower()
+                translatedMonth = _(monthmsgid, 'plonelocales', context=self.REQUEST).encode('utf8').lower()
             return "%s %s %s" % (translatedDay, translatedMonth, year)
         return ''
 

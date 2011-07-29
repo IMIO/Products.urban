@@ -533,9 +533,9 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         formattedDate = tool.formatDate(date, translatemonth=translatemonth)
         cityName = unicode(tool.getCityName(), 'utf-8')
         if withCityNamePrefix:
-            return _('formatted_date_with_cityname', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate})
+            return _('formatted_date_with_cityname', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate.decode('utf8')}).encode('utf8')
         if forDelivery:
-            return _('formatted_date_for_delivery', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate})
+            return _('formatted_date_for_delivery', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate.decode('utf8')}).encode('utf8')
         return formattedDate
 
     def attributeIsUsed(self, attrName):
