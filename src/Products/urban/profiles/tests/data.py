@@ -3,6 +3,13 @@ urbanEventTypes = {
                     'buildlicence':
                     (
                     {
+                    'id': "example",
+                    'title': "Exemple",
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 0,
+                    'podTemplates': ({'id': "blank", 'title': "exemple"},),
+                    },
+                    {
                     'id': "procedure-erronee-art127",
                     'title': "Procédure erronée (article 127)",
                     'activatedFields': ['eventDate', ],
