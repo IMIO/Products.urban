@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-
+from Products.urban.Inquiry import Inquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
@@ -159,30 +159,6 @@ schema = Schema((
         default_output_type='text/html',
         default_content_type='text/plain',
     ),
-    LinesField(
-        name='derogation',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label='Derogation',
-            label_msgid='urban_label_derogation',
-            i18n_domain='urban',
-        ),
-        schemata='urban_investigation_and_advices',
-        multiValued=1,
-        vocabulary='listDerogations',
-    ),
-    TextField(
-        name='derogationDetails',
-        allowable_content_types=('text/plain',),
-        default_content_type='text/plain',
-        widget=TextAreaWidget(
-            label='Derogationdetails',
-            label_msgid='urban_label_derogationDetails',
-            i18n_domain='urban',
-        ),
-        default_output_type='text/html',
-        schemata='urban_investigation_and_advices',
-    ),
     StringField(
         name='annoncedDelay',
         widget=SelectionWidget(
@@ -269,87 +245,6 @@ schema = Schema((
         ),
         default_output_type='text/html',
         default_content_type='text/plain',
-    ),
-    DateTimeField(
-        name='investigationStart',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            label='Investigationstart',
-            label_msgid='urban_label_investigationStart',
-            i18n_domain='urban',
-        ),
-        schemata='urban_investigation_and_advices',
-    ),
-    DateTimeField(
-        name='investigationEnd',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            label='Investigationend',
-            label_msgid='urban_label_investigationEnd',
-            i18n_domain='urban',
-        ),
-        schemata='urban_investigation_and_advices',
-    ),
-    LinesField(
-        name='investigationArticles',
-        widget=MultiSelectionWidget(
-            label='Investigationarticles',
-            label_msgid='urban_label_investigationArticles',
-            i18n_domain='urban',
-        ),
-        schemata='urban_investigation_and_advices',
-        multiValued=True,
-        vocabulary='listInvestigationArticles',
-    ),
-    DataGridField(
-        name='investigations',
-        schemata='urban_investigation_and_advices',
-        widget=DataGridWidget(
-            columns={'startdate' : Column("Start date"), 'enddate' : Column("End date"), 'articles': SelectColumn("Investigation articles", vocabulary='listInvestigationArticles', size=5)},
-            description="You will only enter dates here.  Further informations will be entered while describing the investigation",
-            label='Investigations',
-            label_msgid='urban_label_investigations',
-            description_msgid='urban_help_investigations',
-            i18n_domain='urban',
-        ),
-        allow_oddeven=True,
-        columns=('startdate', 'enddate', 'articles'),
-    ),
-    TextField(
-        name='investigationDetails',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label='Investigationdetails',
-            label_msgid='urban_label_investigationDetails',
-            i18n_domain='urban',
-        ),
-        schemata='urban_investigation_and_advices',
-        default_content_type='text/html',
-        default_output_type='text/html',
-    ),
-    TextField(
-        name='investigationReasons',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label='Investigationreasons',
-            label_msgid='urban_label_investigationReasons',
-            i18n_domain='urban',
-        ),
-        schemata='urban_investigation_and_advices',
-        default_content_type='text/html',
-        default_output_type='text/html',
-    ),
-    LinesField(
-        name='solicitOpinionsTo',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label='Solicitopinionsto',
-            label_msgid='urban_label_solicitOpinionsTo',
-            i18n_domain='urban',
-        ),
-        schemata='urban_investigation_and_advices',
-        multiValued=1,
-        vocabulary='listMakers',
     ),
     LinesField(
         name='pash',
@@ -521,6 +416,7 @@ setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 GenericLicence_schema = BaseFolderSchema.copy() + \
+    getattr(Inquiry, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
@@ -528,7 +424,7 @@ GenericLicence_schema['title'].searchable = True
 GenericLicence_schema['title'].widget.visible = False
 ##/code-section after-schema
 
-class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
+class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -850,21 +746,14 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             res = getattr(urbanConfig.folderdelays, res)
         return res
 
-    security.declarePublic('validate_investigations')
-    def validate_investigations(self, value):
+    security.declarePublic('getInquiries')
+    def getInquiries(self):
         """
-          Validates the data from the 'investigations' field
+          Returns the existing inquiries
         """
-        for line in value:
-            if line.has_key('orderindex_') and line['orderindex_'] != 'template_row_marker':
-                try:
-                    startdate = DateTime(line['startdate'])
-                    enddate = DateTime(line['enddate'])
-                except:
-                    return "Check the entered dates, please use following format : dd/mm/yyyy"
-                if not enddate > startdate:
-                    return "Check the entered dates, the start date must be before the enddate!"
-
+        #the first inquiry is the one defined on self itself
+        #and the others are extra Inquiry object added
+        return [self, ] + self.objectValues('Inquiry')
 
 
 registerType(GenericLicence, PROJECTNAME)
@@ -872,3 +761,4 @@ registerType(GenericLicence, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
+

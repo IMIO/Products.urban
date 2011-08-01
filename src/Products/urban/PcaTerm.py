@@ -158,8 +158,10 @@ class PcaTerm(BaseContent, BrowserDefaultMixin):
         return result
 
 
+
 registerType(PcaTerm, PROJECTNAME)
 # end of class PcaTerm
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
+

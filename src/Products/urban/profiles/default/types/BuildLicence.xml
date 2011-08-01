@@ -20,6 +20,7 @@
    <element value="PortionOut"/>
    <element value="Folder"/>
    <element value="WorkLocation"/>
+   <element value="Inquiry"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">buildlicence_view</property>

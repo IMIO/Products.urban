@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-07-11 13:22+0000\n"
+"POT-Creation-Date: 2011-08-01 08:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2037,3 +2037,8 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
+msgid "inquiry_title_and_number"
+msgstr ""
+
+msgid "add_an_inquiry"
+msgstr ""

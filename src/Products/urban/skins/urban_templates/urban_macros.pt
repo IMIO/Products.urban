@@ -1,3 +1,57 @@
+<div metal:define-macro="urbanInquiriesMacro" i18n:domain="urban"
+     tal:define="ctype python: context.portal_types.getTypeInfo('Inquiry');
+                 inquiries here/getInquiries">
+<fieldset tal:repeat="inquiry inquiries"><legend><img src="#" tal:attributes="src ctype/getIcon" />&nbsp;<span i18n:translate="inquiry_title_and_number">Inquiry <span i18n:name="number" tal:content="repeat/inquiry/number"></span></span></legend>
+<table>
+ <tr>
+  <td valign="top"><b><span i18n:translate="urban_label_derogation">Derogations</span> :</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:inquiry.widget('derogation', mode='view')" /><span tal:condition="not: inquiry/getDerogation" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr tal:condition="python: context.attributeIsUsed('derogationDetails')">
+  <td valign="top"><b><span i18n:translate="urban_label_derogationDetails">Derogations details</span> :</b></td>
+  <td width="2%"></td>
+  <td valign="top"><tal:block replace="structure inquiry/getDerogationDetails" /><span tal:condition="not: inquiry/getDerogationDetails" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><b><span i18n:translate="urban_label_investigationArticles">Investigation articles</span> :</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:inquiry.widget('investigationArticles', mode='view')" /><span tal:condition="not: inquiry/getInvestigationArticles" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><b><span i18n:translate="urban_label_investigationStart">from</span> :</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:inquiry.widget('investigationStart', mode='view')" /><span tal:condition="not: inquiry/getInvestigationStart" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><b><span i18n:translate="urban_label_investigationEnd">to</span> :</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:inquiry.widget('investigationEnd', mode='view')" /><span tal:condition="not: inquiry/getInvestigationEnd" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr tal:condition="python: context.attributeIsUsed('investigationDetails')">
+  <td valign="top"><b><span i18n:translate="urban_label_investigationDetails">Investigation details</span> :</b></td>
+  <td width="2%"></td>
+  <td valign="top"><tal:block replace="structure inquiry/getInvestigationDetails" /><span tal:condition="not: inquiry/getInvestigationDetails" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr tal:condition="python: context.attributeIsUsed('investigationReasons')">
+  <td valign="top"><b><span i18n:translate="urban_label_investigationReasons">Investigation reasons</span> :</b></td>
+  <td width="2%"></td>
+  <td valign="top"><tal:block replace="structure inquiry/getInvestigationReasons" /><span tal:condition="not: inquiry/getInvestigationReasons" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><b><span i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</span> :</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:inquiry.widget('solicitOpinionsTo', mode='view')" /><span tal:condition="not: inquiry/getSolicitOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+</table>
+</fieldset>
+<form i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post">
+ <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
+ <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+ <input type="submit" class="context" id="event" value="add_an_inquiry" i18n:attributes="value" />
+</form>
+</div>
+
 <div metal:define-macro="urbanFolderManagerMacro" i18n:domain="urban" tal:define="folderManagers here/getFoldermanagers">
  <tal:loop repeat="folderManager folderManagers" tal:condition="folderManagers">
    <span tal:content="folderManager/Title">Treating agent name</span><br />

@@ -28,12 +28,6 @@ msgstr "Architecte"
 msgid "BuildLicence"
 msgstr "Permis d'urbanisme"
 
-msgid "Check the entered dates, please use following format : dd/mm/yyyy"
-msgstr "Vérifiez les dates encodées, utilisez le format suivant s'il vous plaît : jj/mm/aaaa"
-
-msgid "Check the entered dates, the start date must be before the enddate!"
-msgstr "Vérifiez les dates encodées, la date de début doit être avant la date de fin!"
-
 msgid "City"
 msgstr "Localité"
 

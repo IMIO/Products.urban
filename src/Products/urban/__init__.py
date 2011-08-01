@@ -104,6 +104,7 @@ def initialize(context):
     import Locality
     import LicenceConfig
     import PersonTitleTerm
+    import Inquiry
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

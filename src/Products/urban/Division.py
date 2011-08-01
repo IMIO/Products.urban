@@ -177,6 +177,7 @@ class Division(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         """
         """
         pass
+
     security.declarePublic('getDefaultReference')
     def getDefaultReference(self):
         """
@@ -298,3 +299,4 @@ registerType(Division, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
+

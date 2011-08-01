@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-07-11 13:22+0000\n"
+"POT-Creation-Date: 2011-08-01 08:34+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -163,6 +163,9 @@ msgstr "Ajouter un demandeur"
 
 msgid "add_an_equipment"
 msgstr "Ajouter une charge imposée"
+
+msgid "add_an_inquiry"
+msgstr "Ajouter une enquête"
 
 msgid "add_event"
 msgstr "Ajouter un événement"
@@ -473,6 +476,9 @@ msgstr "du"
 
 msgid "inquiry_item"
 msgstr "Point"
+
+msgid "inquiry_title_and_number"
+msgstr "Enquête n°${number}"
 
 msgid "inquiry_to"
 msgstr "au"

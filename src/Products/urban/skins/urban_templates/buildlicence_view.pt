@@ -328,53 +328,7 @@
 
 <dt class="formTab" id="fieldsetlegend-urban_investigation_and_advices" i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices"><span>Investigation and advices</span></dt>
 <dd id="fieldset-urban_investigation_and_advices">
-<table>
- <tr>
-  <td valign="top"><b><span i18n:translate="urban_label_derogation">Derogations</span> :</b></td>
-  <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('derogation', mode='view')" /><span tal:condition="not: python: context.derogation" class="discreet" i18n:translate="content_none">None</span></td>
- </tr>
- <tr tal:condition="python: context.attributeIsUsed('derogationDetails')">
-  <td valign="top"><b><span i18n:translate="urban_label_derogationDetails">Derogations details</span> :</b></td>
-  <td width="2%"></td>
-  <td valign="top"><tal:block replace="structure context/getDerogationDetails" /><span tal:condition="not: context/getDerogationDetails" class="discreet" i18n:translate="content_none">None</span></td>
- </tr>
- <tr>
-  <td valign="top"><b><span i18n:translate="urban_label_investigationArticles">Investigation articles</span> :</b></td>
-  <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('investigationArticles', mode='view')" /><span tal:condition="not: context/getInvestigationArticles" class="discreet" i18n:translate="content_none">None</span></td>
- </tr>
- <tr>
-  <td valign="top"><b><span i18n:translate="urban_label_investigationStart">from</span> :</b></td>
-  <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('investigationStart', mode='view')" /><span tal:condition="not: context/getInvestigationStart" class="discreet" i18n:translate="content_none">None</span></td>
- </tr>
- <tr>
-  <td valign="top"><b><span i18n:translate="urban_label_investigationEnd">to</span> :</b></td>
-  <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('investigationEnd', mode='view')" /><span tal:condition="not: context/getInvestigationEnd" class="discreet" i18n:translate="content_none">None</span></td>
- </tr>
- <tr>
-  <td valign="top"><b><span i18n:translate="urban_label_investigations">Investigations dates</span> :</b></td>
-  <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('investigations', mode='view')" /></td>
- </tr>
- <tr tal:condition="python: context.attributeIsUsed('investigationDetails')">
-  <td valign="top"><b><span i18n:translate="urban_label_investigationDetails">Investigation details</span> :</b></td>
-  <td width="2%"></td>
-  <td valign="top"><tal:block replace="structure context/getInvestigationDetails" /><span tal:condition="not: context/getInvestigationDetails" class="discreet" i18n:translate="content_none">None</span></td>
- </tr>
- <tr tal:condition="python: context.attributeIsUsed('investigationReasons')">
-  <td valign="top"><b><span i18n:translate="urban_label_investigationReasons">Investigation reasons</span> :</b></td>
-  <td width="2%"></td>
-  <td valign="top"><tal:block replace="structure context/getInvestigationReasons" /><span tal:condition="not: context/getInvestigationReasons" class="discreet" i18n:translate="content_none">None</span></td>
- </tr>
- <tr>
-  <td valign="top"><b><span i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</span> :</b></td>
-  <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('solicitOpinionsTo', mode='view')" /><span tal:condition="not: python: context.solicitOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
- </tr>
-</table>
+<metal:listing use-macro="here/urban_macros/macros/urbanInquiriesMacro" />
 </dd>
 
 <dt class="formTab" id="fieldsetlegend-urban_peb" i18n:domain="plone" i18n:translate="label_schema_urban_peb"><span>PEB</span></dt>

@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Jul 20 11:19:47 2011\n"
-"PO-Revision-Date: Wed Jul 20 11:19:47 2011\n"
+"POT-Creation-Date: Mon Aug  1 10:11:38 2011\n"
+"PO-Revision-Date: Mon Aug  1 10:11:38 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -79,11 +79,6 @@ msgstr ""
 #. Default: "Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL"
 #: LicenceConfig.py
 msgid "urban_descr_usedAttributes"
-msgstr ""
-
-#. Default: "You will only enter dates here.  Further informations will be entered while describing the investigation"
-#: GenericLicence.py
-msgid "urban_help_investigations"
 msgstr ""
 
 #. Default: "Enter the layer image mimetype, for example 'image/jpeg' or 'image/png'"
@@ -327,12 +322,12 @@ msgid "urban_label_decreeType"
 msgstr ""
 
 #. Default: "Derogation"
-#: GenericLicence.py
+#: Inquiry.py
 msgid "urban_label_derogation"
 msgstr ""
 
 #. Default: "Derogationdetails"
-#: GenericLicence.py
+#: Inquiry.py
 msgid "urban_label_derogationDetails"
 msgstr ""
 
@@ -462,17 +457,17 @@ msgid "urban_label_initials"
 msgstr ""
 
 #. Default: "Investigationarticles"
-#: GenericLicence.py
+#: Inquiry.py
 msgid "urban_label_investigationArticles"
 msgstr ""
 
 #. Default: "Investigationdetails"
-#: GenericLicence.py
+#: Inquiry.py
 msgid "urban_label_investigationDetails"
 msgstr ""
 
 #. Default: "Investigationend"
-#: GenericLicence.py
+#: Inquiry.py
 #: UrbanCertificateTwo.py
 msgid "urban_label_investigationEnd"
 msgstr ""
@@ -483,12 +478,12 @@ msgid "urban_label_investigationOralReclamationNumber"
 msgstr ""
 
 #. Default: "Investigationreasons"
-#: GenericLicence.py
+#: Inquiry.py
 msgid "urban_label_investigationReasons"
 msgstr ""
 
 #. Default: "Investigationstart"
-#: GenericLicence.py
+#: Inquiry.py
 #: UrbanCertificateTwo.py
 msgid "urban_label_investigationStart"
 msgstr ""
@@ -496,11 +491,6 @@ msgstr ""
 #. Default: "Investigationwritereclamationnumber"
 #: UrbanCertificateTwo.py
 msgid "urban_label_investigationWriteReclamationNumber"
-msgstr ""
-
-#. Default: "Investigations"
-#: GenericLicence.py
-msgid "urban_label_investigations"
 msgstr ""
 
 #. Default: "Isdecentralized"
@@ -801,7 +791,7 @@ msgid "urban_label_solicitLocationOpinionsTo"
 msgstr ""
 
 #. Default: "Solicitopinionsto"
-#: GenericLicence.py
+#: Inquiry.py
 msgid "urban_label_solicitOpinionsTo"
 msgstr ""
 

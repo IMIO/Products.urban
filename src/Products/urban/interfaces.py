@@ -149,6 +149,10 @@ class IPersonTitleTerm(Interface):
     """Marker interface for .PersonTitleTerm.PersonTitleTerm
     """
 
+class IInquiry(Interface):
+    """Marker interface for .Inquiry.Inquiry
+    """
+
 ##code-section FOOT
 class IEventTypeType(IInterface):
     """

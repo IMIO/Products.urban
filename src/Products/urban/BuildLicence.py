@@ -493,7 +493,16 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('description', after='usage')
     schema.moveField('pash', after='roadEquipments')
     schema.moveField('pashDetails', after='pash')
+    schema.moveField('derogation', after='locationTechnicalConditions')
+    schema.moveField('derogationDetails', after='derogation')
+    schema.moveField('investigationArticles', after='derogationDetails')
+    schema.moveField('investigationStart', after='investigationArticles')
+    schema.moveField('investigationEnd', after='investigationStart')
+    schema.moveField('investigationDetails', after='investigationEnd')
+    schema.moveField('investigationReasons', after='investigationDetails')
+    schema.moveField('solicitOpinionsTo', after='investigationReasons')
     return schema
 
 finalizeSchema(BuildLicence_schema)
 ##/code-section module-footer
+

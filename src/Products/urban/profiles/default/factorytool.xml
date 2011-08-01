@@ -30,5 +30,6 @@
   <type portal_type="Locality"/>
   <type portal_type="LicenceConfig"/>
   <type portal_type="PersonTitleTerm"/>
+  <type portal_type="Inquiry"/>
  </factorytypes>
 </object>
