@@ -160,9 +160,6 @@ class UrbanEventType(BaseFolder, UrbanDelay, BrowserDefaultMixin):
         """
         res = True # At least for now
         # Check condition
-        # We never display the example UrbanEventType on a licence
-        if self.id == 'example':
-            return False
         TALCondition = self.getTALCondition().strip()
         if TALCondition:
             portal = getToolByName(self, 'portal_url').getPortalObject()
