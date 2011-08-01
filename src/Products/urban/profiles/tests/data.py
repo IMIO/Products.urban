@@ -303,13 +303,6 @@ urbanEventTypes = {
                                     ),
                     },
                     {
-                    'id': "example",
-                    'title': "Exemple d'événement (Copiez cet élément pour créer votre événement et collez-le dans le dossier 'Types d'événement' )",
-                    'activatedFields': ['eventDate', ],
-                    'deadLineDelay': 0,
-                    'podTemplates': ({'id': "blank", 'title': "Modèle de base à adapter"},),
-                    },
-                    {
                     'id': "divers",
                     'title':"Divers",
                     'showTitle':True, 
