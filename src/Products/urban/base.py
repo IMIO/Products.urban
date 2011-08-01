@@ -56,7 +56,7 @@ class UrbanBase(object):
             if signaletic:
                 signaletic += '<p><strong>%s</strong>' % fm.getSignaletic()
             else:
-                signaletic = '<p><strong>%s</strong>' + fm.getSignaletic()
+                signaletic = '<p><strong>%s</strong>' % fm.getSignaletic()
             if withGrade:
                 signaletic += ' (%s)' % self.displayValue(fm.listGrades(), fm.getGrade()).encode('utf8')
             if withEmail:

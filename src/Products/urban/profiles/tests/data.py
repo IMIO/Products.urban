@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 urbanEventTypes = {
-                    'buildlicence':
-                    (
+                   'buildlicence':
+                   (
                     {
                     'id': "procedure-erronee-art127",
                     'title': "Procédure erronée (article 127)",
@@ -309,6 +309,14 @@ urbanEventTypes = {
                     'deadLineDelay': 0,
                     'podTemplates': ({'id': "blank", 'title': "Modèle de base à adapter"},),
                     },
+                    {
+                    'id': "divers",
+                    'title':"Divers",
+                    'showTitle':True, 
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 0,
+                    'podTemplates': ({'id': "blank", 'title': "Document type"},),
+                    }
                    ),
                    'declaration':
                    (),

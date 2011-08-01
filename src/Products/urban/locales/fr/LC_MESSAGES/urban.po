@@ -1703,6 +1703,11 @@ msgstr "Entrez le nom, le prénom et/ou le numéro de registre national.  Vous p
 msgid "urban_label_section"
 msgstr "Section"
 
+#. Default: "ShowTitle"
+#: UrbanEventType.py
+msgid "urban_label_showTitle"
+msgstr "Edition du titre"
+
 #. Default: "Society"
 #: Contact.py
 msgid "urban_label_society"

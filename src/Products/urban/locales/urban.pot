@@ -950,6 +950,12 @@ msgstr ""
 msgid "urban_label_activatedFields"
 msgstr ""
 
+#. Default: "ShowTitle"
+#: UrbanEventType.py
+msgid "urban_label_showTitle"
+msgstr ""
+
+#
 #. Default: "Adr1"
 #: RecipientCadastre.py
 msgid "urban_label_adr1"

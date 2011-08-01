@@ -194,7 +194,7 @@ UrbanEvent_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-UrbanEvent_schema['title'].widget.visible=False
+UrbanEvent_schema['title'].widget.condition="python:here.showTitle()"
 ##/code-section after-schema
 
 class UrbanEvent(BaseFolder, BrowserDefaultMixin):
@@ -547,6 +547,15 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         else:
             return False
 
+    def showTitle(self):
+        """
+        """
+        urbanEventType = self.getUrbaneventtypes()
+        if urbanEventType:
+            return urbanEventType.getShowTitle() 
+        else:
+            return False
+
 
 
 registerType(UrbanEvent, PROJECTNAME)
@@ -554,4 +563,3 @@ registerType(UrbanEvent, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-
