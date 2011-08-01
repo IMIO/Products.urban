@@ -27,6 +27,41 @@ from Products.urban.config import *
 
 schema = Schema((
 
+    LinesField(
+        name='derogation',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Derogation',
+            label_msgid='urban_label_derogation',
+            i18n_domain='urban',
+        ),
+        schemata='urban_investigation_and_advices',
+        multiValued=1,
+        vocabulary='listDerogations',
+    ),
+    TextField(
+        name='derogationDetails',
+        allowable_content_types=('text/plain',),
+        default_content_type='text/plain',
+        widget=TextAreaWidget(
+            label='Derogationdetails',
+            label_msgid='urban_label_derogationDetails',
+            i18n_domain='urban',
+        ),
+        default_output_type='text/html',
+        schemata='urban_investigation_and_advices',
+    ),
+    LinesField(
+        name='investigationArticles',
+        widget=MultiSelectionWidget(
+            label='Investigationarticles',
+            label_msgid='urban_label_investigationArticles',
+            i18n_domain='urban',
+        ),
+        schemata='urban_investigation_and_advices',
+        multiValued=True,
+        vocabulary='listInvestigationArticles',
+    ),
     DateTimeField(
         name='investigationStart',
         widget=DateTimeField._properties['widget'](
@@ -46,17 +81,6 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_investigation_and_advices',
-    ),
-    LinesField(
-        name='investigationArticles',
-        widget=MultiSelectionWidget(
-            label='Investigationarticles',
-            label_msgid='urban_label_investigationArticles',
-            i18n_domain='urban',
-        ),
-        schemata='urban_investigation_and_advices',
-        multiValued=True,
-        vocabulary='listInvestigationArticles',
     ),
     TextField(
         name='investigationDetails',
@@ -81,30 +105,6 @@ schema = Schema((
         schemata='urban_investigation_and_advices',
         default_content_type='text/html',
         default_output_type='text/html',
-    ),
-    LinesField(
-        name='derogation',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label='Derogation',
-            label_msgid='urban_label_derogation',
-            i18n_domain='urban',
-        ),
-        schemata='urban_investigation_and_advices',
-        multiValued=1,
-        vocabulary='listDerogations',
-    ),
-    TextField(
-        name='derogationDetails',
-        allowable_content_types=('text/plain',),
-        default_content_type='text/plain',
-        widget=TextAreaWidget(
-            label='Derogationdetails',
-            label_msgid='urban_label_derogationDetails',
-            i18n_domain='urban',
-        ),
-        default_output_type='text/html',
-        schemata='urban_investigation_and_advices',
     ),
     LinesField(
         name='solicitOpinionsTo',

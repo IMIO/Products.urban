@@ -756,6 +756,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         return [self, ] + self.objectValues('Inquiry')
 
 
+
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence
 

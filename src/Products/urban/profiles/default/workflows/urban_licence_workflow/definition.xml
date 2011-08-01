@@ -17,6 +17,7 @@
  <permission>Modify view template</permission>
  <permission>urban: Add Layer</permission>
  <permission>urban: Add WorkLocation</permission>
+ <permission>urban: Add Inquiry</permission>
  <permission>Access contents information</permission>
  <state state_id="accepted"
         title="accepted"
@@ -62,6 +63,10 @@
    <permission-role>Reader</permission-role>
   </permission-map>
   <permission-map name="urban: Add Contact"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="urban: Add Inquiry"
                   acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
@@ -142,6 +147,11 @@
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
+  <permission-map name="urban: Add Inquiry"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
   <permission-map name="urban: Add Layer"
                   acquired="False">
    <permission-role>Editor</permission-role>
@@ -203,6 +213,10 @@
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="urban: Add Contact"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="urban: Add Inquiry"
                   acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
@@ -270,6 +284,10 @@
                   acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
+  <permission-map name="urban: Add Inquiry"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
   <permission-map name="urban: Add Layer"
                   acquired="False">
    <permission-role>Manager</permission-role>
@@ -331,6 +349,10 @@
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="urban: Add Contact"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="urban: Add Inquiry"
                   acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
