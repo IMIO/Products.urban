@@ -51,6 +51,15 @@ schema = Schema((
         ),
         vocabulary='listOptionalFields',
     ),
+    BooleanField(
+        name='showTitle',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Showtitle',
+            label_msgid='urban_label_showTitle',
+            i18n_domain='urban',
+        ),
+    ),
     StringField(
         name='eventTypeType',
         vocabulary_factory="eventTypeType",
