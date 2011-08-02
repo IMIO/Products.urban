@@ -422,6 +422,12 @@ GenericLicence_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 GenericLicence_schema['title'].searchable = True
 GenericLicence_schema['title'].widget.visible = False
+#put the the fields coming from Inquiry in a specific schemata
+inquiryFields = Inquiry.schema.filterFields(isMetadata=False)
+#do not take the 2 first fields into account, this is 'id' and 'title'
+inquiryFields = inquiryFields[2:]
+for inquiryField in inquiryFields:
+    GenericLicence_schema[inquiryField.getName()].schemata = 'urban_investigation_and_advices'
 ##/code-section after-schema
 
 class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefaultMixin):
