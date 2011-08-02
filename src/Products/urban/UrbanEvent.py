@@ -552,7 +552,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         """
         urbanEventType = self.getUrbaneventtypes()
         if urbanEventType:
-            return urbanEventType.getShowTitle() 
+            return urbanEventType.getShowTitle()
         else:
             return False
 
@@ -563,3 +563,4 @@ registerType(UrbanEvent, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
+
