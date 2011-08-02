@@ -761,6 +761,12 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         #and the others are extra Inquiry object added
         return [self, ] + self.objectValues('Inquiry')
 
+    security.declarePublic('getUrbanEventInquiries')
+    def getUrbanEventInquiries(self):
+        """
+          Returns the existing UrbanEventInquiries
+        """
+        return self.listFolderContents({'portal_type': 'UrbanEventInquiry',})
 
 
 registerType(GenericLicence, PROJECTNAME)
