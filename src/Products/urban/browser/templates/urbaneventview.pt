@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+<head>
+<metal:block fill-slot="top_slot"
+             tal:define="member context/@@plone_portal_state/member;
+                         border python: member.has_role('Manager') and 'enable_border' or 'disable_border';
+                         dummy python:request.set(border, 1);" />
+
+<tal:block condition="context/getRecipients">
+    <div metal:fill-slot="style_slot">
+        <!--link rel="stylesheet" href="map.css" type="text/css" media="screen" charset="utf-8" /-->
+    </div>
+</tal:block>
+</head>
+
+<body>
+<div metal:fill-slot="main">
+<metal:main_macro define-macro="main">
+<metal:body define-macro="body_macro" tal:define="recipients context/getRecipients;
+                                                  linkedUrbanEventType context/getUrbaneventtypes">
+<h1 class="documentFirstHeading" tal:content="here/Title"/>
+<div tal:replace="structure provider:plone.belowcontenttitle" />
+<!-- Back to the build licence... -->
+<br />
+<a class="no_underline" href=".."><img src="goback.png" />&nbsp;<span i18n:translate="back_to_licence">Go back to the licence</span></a>
+
+<table width=100%>
+    <tr valign="top">
+        <td width=35%>
+         <metal:listing use-macro="here/urban_macros/macros/urbanEventDataMacro" />
+         <metal:listing use-macro="here/urban_macros/macros/urbanEventGenerateDocumentMacro" />
+         <metal:listing use-macro="here/urban_macros/macros/urbanEventAddAnnexMacro" />
+        </td>
+        <td width=65%>
+         <fieldset><strong><legend i18n:translate="event_linked_documents">Event linked documents</legend><strong>
+          <div tal:define="specificSearch python: 'searchLinkedDocuments';
+                           tool python: context.portal_urban;
+                           showedCols python: ('Title', 'created', 'Creator', );
+                           topic python: None;
+                           showActions python: True;
+                           theObjects python: False;
+                           batchlen python: 50">
+          <metal:listing use-macro="here/urban_macros/macros/listing" />
+          </div>
+         </fieldset>
+        </td>
+    </tr>
+</table>
+
+<tal:block condition="linkedUrbanEventType/getSpecialFunctionName">
+<a tal:attributes="href linkedUrbanEventType/getSpecialFunctionUrl" tal:content="linkedUrbanEventType/getSpecialFunctionName"/><br><br>
+</tal:block>
+
+<tal:block condition="python: context.REQUEST.get('doc_uid') != None">
+<tal:block define="docObj python:context.uid_catalog(UID=context.REQUEST.get('doc_uid'))[0]">
+<Script tal:content="python:'document.location = \''+docObj.getObject().absolute_url()+'/external_edit\';'" />
+</tal:block>
+</tal:block>
+
+ </metal:body>
+</metal:main_macro>
+</div>
+</body>
+</html>

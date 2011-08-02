@@ -74,16 +74,19 @@
 <type type_id="Architect">
   <bound-workflow workflow_id="activation_workflow" />
 </type>
-<type type_id="Proprietary">
+<type type_id="Contact">
   <bound-workflow workflow_id="" />
 </type>
-<type type_id="Contact">
+<type type_id="Inquiry">
   <bound-workflow workflow_id="" />
 </type>
 <type type_id="Layer">
   <bound-workflow workflow_id="" />
 </type>
 <type type_id="PortionOut">
+  <bound-workflow workflow_id="" />
+</type>
+<type type_id="Proprietary">
   <bound-workflow workflow_id="" />
 </type>
 <type type_id="Recipient">
@@ -97,6 +100,9 @@
 </type>
 <type type_id="UrbanCertificateOne">
   <bound-workflow workflow_id="urban_licence_workflow" />
+</type>
+<type type_id="UrbanEventInquiry">
+ <bound-workflow workflow_id="urbanevent_workflow" />
 </type>
 <type type_id="WorkLocation">
   <bound-workflow workflow_id="" />

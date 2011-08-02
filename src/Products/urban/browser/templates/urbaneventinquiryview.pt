@@ -4,8 +4,8 @@
       i18n:domain="urban">
 <head>
 <metal:block fill-slot="top_slot"
-             tal:define="member python: context.portal_membership.getAuthenticatedMember();
-                         border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
+             tal:define="member context/@@plone_portal_state/member;
+                         border python: member.has_role('Manager') and 'enable_border' or 'disable_border';
                          dummy python:request.set(border, 1);" />
 
 <tal:block condition="context/getRecipients">
@@ -29,43 +29,45 @@
 <table width=100%>
     <tr valign="top">
         <td width=35%>
-        <fieldset><strong><legend i18n:translate="event_data">Event data</legend></strong>
-        <table>
-         <tr valign="top" tal:repeat="evtfield linkedUrbanEventType/getActivatedFields">
-          <tal:evtfield_is_not_none condition="evtfield">
-           <td>
-            <u><strong i18n:translate="" tal:content="python: 'urban_label_' + evtfield">Optional field label</strong>:</u>&nbsp;&nbsp;&nbsp;&nbsp;
+        <metal:listing use-macro="here/urban_macros/macros/urbanEventDataMacro" />
+         
+        <fieldset tal:define="inqdata view/getInquiryData" tal:condition="inqdata"><strong><legend i18n:translate="inquiry_data">Inquiry data</legend></strong>
+        <tal:comment replace="nothing">Keep context as name of the obj here as some widget rendering will fail if not...</tal:comment>
+        <table tal:define="context python: inqdata[0];
+                           fields python: inqdata[1];">
+         <tr valign="top">
+           <td colspan=2>
+            <p class="discreet" i18n:translate="urban_linked_inquiry_help">Here above are data defined for the inquiry.  If you want to change these informations, click on the name of the linked inquiry here above.</p>
            </td>
-           <tal:manage_show_nc_if_needed define="value python: getattr(context, evtfield)">
-            <td tal:condition="value">
-             <metal:myfield use-macro="python:here.widget(evtfield, mode='view')" />
-            </td>
-            <td tal:condition="not: value">
-             <span tal:condition="python: not getattr(context, evtfield)" class="discreet" i18n:translate="content_none">None</span>
-            </td>
-           </tal:manage_show_nc_if_needed>
-          </tal:evtfield_is_not_none>
          </tr>
-        </table>
-        </fieldset>
+         <tr valign="top">
+          <td>
+           <u><strong i18n:translate="urban_label_linked_inquiry">Linked inquiry</strong>:</u>&nbsp;&nbsp;&nbsp;&nbsp;
+          </td>
+          <td>
+           <a href="#" tal:attributes="href python: context.portal_type == 'BuildLicence' and context.absolute_url() + '/#fieldsetlegend-urban_investigation_and_advices' or context.absolute_url()" tal:content="view/getLinkedInquiryTitle">Linked inquiry title and number</a>
+          </td>
+         </tr>
+         <tal:evtfield repeat="field fields">
+         <tr valign="top">
+          <td>
+           <u><strong i18n:translate="" tal:content="python: 'urban_label_' + field">Inquiry field label</strong>:</u>&nbsp;&nbsp;&nbsp;&nbsp;
+          </td>
+          <tal:manage_show_nc_if_needed define="value python: getattr(context, field)">
+           <td tal:condition="value">
+            <metal:myfield use-macro="python: context.widget(field, mode='view')" />
+           </td>
+           <td tal:condition="not: value">
+            <span tal:condition="not: value" class="discreet" i18n:translate="content_none">None</span>
+           </td>
+          </tal:manage_show_nc_if_needed>
+         </tr>
+         </tal:evtfield>
+       </table>
+       </fieldset>
 
-        <fieldset tal:define="templateObjs python: linkedUrbanEventType.objectValues('ATBlob')"><strong><legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend></strong>
-        <tal:templateObjs condition="templateObjs">
-         <tal:loopEventType repeat="templateObj templateObjs">
-          <a href="#" tal:attributes="href python: context.absolute_url() + '/createUrbanDoc?urban_template_uid=%s&urban_event_uid=%s' % (templateObj.UID(), here.UID())" tal:content="templateObj/Title">Template title</a><br />
-         </tal:loopEventType>
-        </tal:templateObjs>
-        <tal:no_templateObjs condition="not: templateObjs">
-         <p class="discreet" i18n:translate="no_document_to_generate">No document to generate</p>
-        </tal:no_templateObjs>
-        </fieldset>
-
-        <fieldset><strong><legend i18n:translate="add_an_annex">Add an annex</legend></strong>
-        <form name="quickAdd" action="createObject" method="post">
-          <input name="type_name" value="File" type="hidden">
-          <input i18n:attributes="value" class="context" id="event" value="add_an_annex" type="submit">
-         </form>
-        </fieldset>
+        <metal:listing use-macro="here/urban_macros/macros/urbanEventGenerateDocumentMacro" />
+        <metal:listing use-macro="here/urban_macros/macros/urbanEventAddAnnexMacro" />
         </td>
         <td width=65%>
         <fieldset><strong><legend i18n:translate="event_linked_documents">Event linked documents</legend><strong>

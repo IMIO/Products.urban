@@ -83,6 +83,9 @@ msgstr "Rue"
 msgid "This National Register number is not valid !"
 msgstr "Ce numéro de registre national n'est pas valide !"
 
+msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
+msgstr "Cet événement n'est plus lié à une enquête publique !  Définissez une nouvelle enquête publique sur le permis !"
+
 # validators
 msgid "This field only accept numbers, indents or points !"
 msgstr "Ce champ n'accepte que des chiffres, des tirets et des points !"
@@ -95,6 +98,9 @@ msgstr "Certificat d'urbanisme 2"
 
 msgid "UrbanEvent"
 msgstr "Evénement du dossier"
+
+msgid "UrbanEventInquiry"
+msgstr "Evénement liée à une enquête publique"
 
 msgid "UrbanEventType"
 msgstr "Type d'événement du dossier"
@@ -180,7 +186,7 @@ msgid "label_schema_urban_events"
 msgstr "Evénements du dossier"
 
 msgid "label_schema_urban_investigation_and_advices"
-msgstr "Enquête et avis"
+msgstr "Enquêtes et avis"
 
 msgid "label_schema_urban_location"
 msgstr "Urbanisme"

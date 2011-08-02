@@ -364,6 +364,12 @@ msgstr ""
 msgid "event_data"
 msgstr ""
 
+msgid "inquiry_data"
+msgstr ""
+
+msgid "urban_linked_inquiry_help"
+msgstr ""
+
 msgid "event_linked_documents"
 msgstr ""
 
@@ -1143,6 +1149,11 @@ msgstr ""
 #. Default: "Derogation"
 #: GenericLicence.py
 msgid "urban_label_derogation"
+msgstr ""
+
+#. Default: "Linked inquiry"
+#: urbaneventinquiryview.pt
+msgid "urban_label_linked_inquiry"
 msgstr ""
 
 #. Default: "Derogationdetails"

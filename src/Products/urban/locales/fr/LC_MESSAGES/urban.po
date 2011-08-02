@@ -471,6 +471,9 @@ msgstr "Générer un document lié au dossier"
 msgid "geometricians_folder_title"
 msgstr "Géomètres"
 
+msgid "inquiry_data"
+msgstr "Données concernant l'enquête"
+
 msgid "inquiry_from"
 msgstr "du"
 
@@ -1420,6 +1423,11 @@ msgstr "Evénement"
 msgid "urban_label_licenceeventtypes"
 msgstr "Type d'événement"
 
+#. Default: "Linked inquiry"
+#: urbaneventinquiryview.pt
+msgid "urban_label_linked_inquiry"
+msgstr "Enquête liée"
+
 #. Default: "Locality"
 #: Address.py
 #: Contact.py
@@ -1940,6 +1948,9 @@ msgstr "Code Postal"
 #: Contact.py
 msgid "urban_label_zipcode"
 msgstr "Code Postal"
+
+msgid "urban_linked_inquiry_help"
+msgstr "Vous retrouvez ici les informations concernant l'enquête.  Si vous souhaitez modifier ces informations, cliquez sur le lien de l'enquête liée ci-dessous."
 
 #. Default: "There are currently no event added for this element"
 #: urban_macros.pt

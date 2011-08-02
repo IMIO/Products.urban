@@ -1,8 +1,57 @@
+<div metal:define-macro="urbanEventDataMacro" i18n:domain="urban">
+ <fieldset><strong><legend i18n:translate="event_data">Event data</legend></strong>
+  <table>
+    <tal:evtfield repeat="field fields" define="evtdata view/getData;
+                                                context python: evtdata[0];
+                                                fields python: evtdata[1];">
+    <tr valign="top">
+     <td>
+      <u><strong i18n:translate="" tal:content="python: 'urban_label_' + field">Optional field label</strong>:</u>&nbsp;&nbsp;&nbsp;&nbsp;
+     </td>
+     <tal:manage_show_nc_if_needed define="value python: getattr(context, field)">
+      <td tal:condition="value">
+       <metal:myfield use-macro="python: context.widget(field, mode='view')" />
+      </td>
+      <td tal:condition="not: value">
+       <span tal:condition="not: value" class="discreet" i18n:translate="content_none">None</span>
+      </td>
+     </tal:manage_show_nc_if_needed>
+    </tr>
+    </tal:evtfield>
+  </table>
+ </fieldset>
+</div>
+
+<div metal:define-macro="urbanEventGenerateDocumentMacro" i18n:domain="urban">
+ <fieldset tal:define="templateObjs python: linkedUrbanEventType.objectValues('ATBlob')"><strong><legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend></strong>
+  <tal:templateObjs condition="templateObjs">
+   <tal:loopEventType repeat="templateObj templateObjs">
+    <a href="#" tal:attributes="href python: context.absolute_url() + '/createUrbanDoc?urban_template_uid=%s&urban_event_uid=%s' % (templateObj.UID(), here.UID())" tal:content="templateObj/Title">Template title</a><br />
+   </tal:loopEventType>
+  </tal:templateObjs>
+  <tal:no_templateObjs condition="not: templateObjs">
+   <p class="discreet" i18n:translate="no_document_to_generate">No document to generate</p>
+  </tal:no_templateObjs>
+ </fieldset>
+</div>
+
+<div metal:define-macro="urbanEventAddAnnexMacro" i18n:domain="urban">
+ <fieldset><strong><legend i18n:translate="add_an_annex">Add an annex</legend></strong>
+  <form name="quickAdd" action="createObject" method="post">
+    <input name="type_name" value="File" type="hidden">
+    <input i18n:attributes="value" class="context" id="event" value="add_an_annex" type="submit">
+   </form>
+  </fieldset>
+</div>
+
 <div metal:define-macro="urbanInquiriesMacro" i18n:domain="urban"
      tal:define="ctype python: context.portal_types.getTypeInfo('Inquiry');
                  inquiries here/getInquiries;
                  member context/@@plone_portal_state/member;">
 <fieldset tal:repeat="inquiry inquiries"><legend><img src="#" tal:attributes="src ctype/getIcon" />&nbsp;<span i18n:translate="inquiry_title_and_number">Inquiry <span i18n:name="number" tal:content="repeat/inquiry/number"></span></span></legend>
+<tal:actions define="thisObject python: inquiry; needExternalEdition python:False; actionsToHide python: ('transitions',);">
+     <span metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
+</tal:actions>
 <table>
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_derogation">Derogations</span> :</b></td>
@@ -46,7 +95,8 @@
  </tr>
 </table>
 </fieldset>
-<form tal:condition="python: member.has_permission('urban: add Inquiry', context)" i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post">
+
+<form tal:condition="python: member.has_permission('urban: Add Inquiry', context)" i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post">
  <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
  <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
  <input type="submit" class="context" id="event" value="add_an_inquiry" i18n:attributes="value" />
@@ -207,16 +257,21 @@
 </tal:portalMessage>
 </div>
 
-<!-- Requires defined element "thisObject" as an object -->
+<tal:comment replace="nothing">
+Requires defined element "thisObject" as an object and
+can receive a "actionsToHide" list of actions not to display</tal:comment>
 <div metal:define-macro="urbanActionsMacro" i18n:domain="urban">
 
   <!-- actions panel -->
 
-  <table class="no-style-table" align="right" tal:define="member context/@@plone_portal_state/member;">
+  <table class="no-style-table" align="right" tal:define="member context/@@plone_portal_state/member;
+                                                          actionsToHide actionsToHide|python:()">
     <tr tal:define="wtool context/portal_workflow;
                     ext_editor context/portal_properties/site_properties/ext_editor">
       <!-- Available transitions -->
-      <td tal:repeat="transition python: wtool.getTransitionsFor(thisObject)" class="noPadding" align="left">
+      <td tal:condition="python: not 'transitions' in actionsToHide"
+          tal:repeat="transition python: wtool.getTransitionsFor(thisObject)"
+          class="noPadding" align="left">
         <form tal:attributes="action python: thisObject.absolute_url() + '/content_status_modify'"
               tal:define="imageName python: transition['title'] + '.png'"
               i18n:domain="plone">

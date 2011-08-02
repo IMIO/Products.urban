@@ -43,6 +43,21 @@
      permission="zope2.View"
   />
 
+  <browser:page
+     for="*"
+     name="urbaneventinquiryview"
+     class=".urbaneventviews.UrbanEventInquiryView"
+     template="templates/urbaneventinquiryview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="urbaneventview"
+     class=".urbaneventviews.UrbanEventView"
+     template="templates/urbaneventview.pt"
+     permission="zope2.View"
+  />
 
 </configure>
 

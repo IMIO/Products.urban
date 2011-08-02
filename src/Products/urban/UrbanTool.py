@@ -372,7 +372,12 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         #the linked UrbanEventType
         urbanEventTypeObj=uid_catalog(UID=urban_event_type_uid)[0].getObject()
         #create the UrbanEvent in the right folder
-        newUrbanEventId=evfolder.invokeFactory("UrbanEvent",id=self.generateUniqueId('UrbanEvent'),title=urbanEventTypeObj.Title(),urbaneventtypes=(urbanEventTypeObj,))
+        #check first what kind of UrbanEvent should be added
+        if urbanEventTypeObj.getEventTypeType() == "Products.urban.interfaces.IInquiry":
+            typeName = "UrbanEventInquiry"
+        else:
+            typeName = "UrbanEvent"
+        newUrbanEventId=evfolder.invokeFactory(typeName,id=self.generateUniqueId('UrbanEvent'),title=urbanEventTypeObj.Title(),urbaneventtypes=(urbanEventTypeObj,))
         newUrbanEventObj=getattr(evfolder,newUrbanEventId)
         return self.REQUEST.RESPONSE.redirect(newUrbanEventObj.absolute_url()+'/edit')
 
@@ -1482,7 +1487,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         portal_catalog = getToolByName(self, 'portal_catalog')
         if specificSearch == 'searchUrbanEvents':
             #search the existing urbanEvents
-            res = portal_catalog(portal_type='UrbanEvent', path='/'.join(context.getPhysicalPath()), sort_on='created')
+            res = portal_catalog(portal_type=('UrbanEvent', 'UrbanEventInquiry',), path='/'.join(context.getPhysicalPath()), sort_on='created')
         elif specificSearch == 'searchRecipients':
             #search the existing recipients
             res = portal_catalog(portal_type='RecipientCadastre', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')

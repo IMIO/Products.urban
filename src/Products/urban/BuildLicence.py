@@ -423,6 +423,17 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         super(GenericLicence).__thisclass__.at_post_edit_script(self)
 
+    security.declarePublic('mayAddInquiryEvent')
+    def mayAddInquiryEvent(self):
+        """
+           This is used as TALExpression for the UrbanEventInquiry
+           We may add an inquiry if we defined one on the licence
+           We may add another if another is defined on the licence and so on
+        """
+        if len(self.getInquiries()) > len(self.getUrbanEventInquiries()):
+            return True
+        return False
+
     def getLastDeposit(self):
         return self._getLastEvent(interfaces.IDeposit)
 
