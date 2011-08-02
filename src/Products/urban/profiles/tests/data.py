@@ -303,6 +303,27 @@ urbanEventTypes = {
                                     ),
                     },
                     {
+                    'id': "rappel-implantation",
+                    'title':"Rappel implantation",
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 0,
+                    'podTemplates': ({'id': "urb-rappel-implantation", 'title': "Rappel implantation"},),
+                    },
+                    {
+                    'id': "rappel-decl-init-peb",
+                    'title':"Rappel déclaration initiale PEB",
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 0,
+                    'podTemplates': ({'id': "urb-rappel-decl-init-peb", 'title': "Rappel déclaration initiale PEB"},),
+                    },
+                    {
+                    'id': "rappel-implantation-peb",
+                    'title':"Rappel implantation et PEB",
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 0,
+                    'podTemplates': ({'id': "urb-rappel-implantation-peb", 'title': "Rappel implantation et PEB"},),
+                    },
+                    {
                     'id': "divers",
                     'title':"Divers",
                     'showTitle':True, 
