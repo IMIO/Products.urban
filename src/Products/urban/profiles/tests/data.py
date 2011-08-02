@@ -224,6 +224,14 @@ urbanEventTypes = {
                                     ),
                     },
                     {
+                    'id': "avis-technique-peb",
+                    'title':"Avis technique PEB",
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 0,
+                    'podTemplates': ({'id': "avis-technique-peb", 'title': "Avis technique PEB"},)
+                    },
+
+                    {
                     'id': "peb-declaration-initiale",
                     'title': "PEB : déclaration initiale",
                     'activatedFields': ['receiptDate', ],
@@ -259,7 +267,9 @@ urbanEventTypes = {
                     'activatedFields': ['receiptDate', ],
                     'deadLineDelay': 0,
                     'TALCondition' : "python: here.getPebType() == 'complete_process'",
-                    'podTemplates': (),
+                    'podTemplates': (
+                                     {'id':"rapport-final-peb", 'title': "Rapport final PEB"},
+                                    ),
                     },
                     {
                     'id': "prorogation",
