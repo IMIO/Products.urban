@@ -58,13 +58,11 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
-    security.declarePublic('getLinkedInquiry')
     def _getSelfPosition(self):
         """
           Return the position of the self between every UrbanEventInquiry objects
         """
         #find the position of the current UrbanEventInquiry
-        #and get the corresponding data
         urbanEventInquiries = self.aq_inner.aq_parent.getUrbanEventInquiries()
         selfUID = self.UID()
         i = 0

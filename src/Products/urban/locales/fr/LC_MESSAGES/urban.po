@@ -276,6 +276,11 @@ msgstr "Parcelle(s) concernée(s)"
 msgid "contact_recipients"
 msgstr "Destinataire(s) de contact"
 
+#. Default: "Linked urban event inquiry"
+#: urban_macros.pt
+msgid "content_no_urbaneventinquiry"
+msgstr "Aucun événement n'est encore lié à cette enquête publique"
+
 msgid "content_none"
 msgstr "N.C."
 
@@ -1949,8 +1954,18 @@ msgstr "Code Postal"
 msgid "urban_label_zipcode"
 msgstr "Code Postal"
 
+#. Default: "Linked urban event inquiry"
+#: urban_macros.pt
+msgid "urban_link_to_the_linked_urbaneventinquiry"
+msgstr "Cliquez ici pour accéder à l'événement Enquête publique lié"
+
 msgid "urban_linked_inquiry_help"
 msgstr "Vous retrouvez ici les informations concernant l'enquête.  Si vous souhaitez modifier ces informations, cliquez sur le lien de l'enquête liée ci-dessous."
+
+#. Default: "Linked urban event inquiry"
+#: urban_macros.pt
+msgid "urban_linked_urbaneventinquiry"
+msgstr "Événement lié"
 
 #. Default: "There are currently no event added for this element"
 #: urban_macros.pt

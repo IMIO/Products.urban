@@ -102,6 +102,15 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:inquiry.widget('solicitOpinionsTo', mode='view')" /><span tal:condition="not: inquiry/getSolicitOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
+ <tal:comment replace="nothing">Link to the UrbanEventInquiry if exists</tal:comment>
+ <tr>
+  <td valign="top"><b><span i18n:translate="urban_linked_urbaneventinquiry">Linked urban event inquiry</span> :</b></td>
+  <td width="2%"></td>
+  <td valign="top" tal:define="linkedUrbanEventInquiry python: inquiry.getLinkedUrbanEventInquiry();">
+   <a tal:condition="python: linkedUrbanEventInquiry" href="#" tal:attributes="href python:linkedUrbanEventInquiry.absolute_url()" i18n:translate="urban_link_to_the_linked_urbaneventinquiry">Click here to access the linked urban event inquiry</a>
+   <span tal:condition="python: not linkedUrbanEventInquiry" class="discreet" i18n:translate="content_no_urbaneventinquiry">There is no UrbanEventInquiry linked to this inquiry</span>
+  </td>
+ </tr>
 </table>
 </fieldset>
 

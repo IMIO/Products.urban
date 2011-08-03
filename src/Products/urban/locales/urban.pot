@@ -1156,6 +1156,21 @@ msgstr ""
 msgid "urban_label_linked_inquiry"
 msgstr ""
 
+#. Default: "Linked urban event inquiry"
+#: urban_macros.pt
+msgid "urban_linked_urbaneventinquiry"
+msgstr ""
+
+#. Default: "Linked urban event inquiry"
+#: urban_macros.pt
+msgid "urban_link_to_the_linked_urbaneventinquiry"
+msgstr ""
+
+#. Default: "Linked urban event inquiry"
+#: urban_macros.pt
+msgid "content_no_urbaneventinquiry"
+msgstr ""
+
 #. Default: "Derogationdetails"
 #: GenericLicence.py
 msgid "urban_label_derogationDetails"

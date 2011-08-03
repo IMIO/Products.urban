@@ -59,5 +59,13 @@
      permission="zope2.View"
   />
 
+  <browser:page
+     for="Products.urban.interfaces.IInquiry"
+     name="inquiryview"
+     class=".inquiryview.InquiryView"
+     template="templates/inquiryview.pt"
+     permission="zope2.View"
+  />
+
 </configure>
 

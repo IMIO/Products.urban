@@ -142,26 +142,39 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
+    def _getSelfPosition(self):
+        """
+          Return the position of the self between every Inquiry objects
+        """
+        #get the existing Inquiries
+        #getInquiries is a method of GenericLicence
+        #so by acquisition, we get it on the parent or we get it on self
+        #as GenericLicence heritates from Inquiry
+        inquiries = self.getInquiries()
+        selfUID = self.UID()
+        i = 0
+        for inquiry in inquiries:
+            if inquiry.UID() == selfUID:
+                break
+            i = i + 1
+        return i
+
+    security.declarePublic("getLinkedUrbanEventInquiry")
     def getLinkedUrbanEventInquiry(self):
         """
           Return the linked UrbanEventInquiry
         """
         #get the existing UrbanEventInquiries
-        urbanEventInquiries = context.aq_inner.aq_parent.getUrbanEventInquiries()
-        #get the existing Inquiries
-        inquiries = context.aq_inner.aq_parent.getInquiries()
-        contextUID = context.UID()
-        i = 0
-        for inquiry in inquiries:
-            if inquiry.UID() == contextUID:
-                break
-            i = i + 1
-        #i is the number of the Inquiry : inquiry number 1, number 2, ...
-        if i >= len(urbanEventInquiries):
+        #getUrbanEventInquiries is a method of GenericLicence
+        #so by acquisition, we get it on the parent or we get it on self
+        #as GenericLicence heritates from Inquiry
+        urbanEventInquiries = self.getUrbanEventInquiries()
+        position = self._getSelfPosition()
+        if position >= len(urbanEventInquiries):
             #no UrbanEventInquiry exists for this Inquiry
             return None
         else:
-            return urbanEventInquiries[i]
+            return urbanEventInquiries[position]
 
 
 

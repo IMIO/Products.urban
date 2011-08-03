@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<head>
+</head>
+
+<body>
+<metal:main fill-slot="main">
+<metal:main_macro define-macro="main">
+    <metal:body define-macro="body_macro">
+
+<tal:comment replace="nothing">We do not want to be able to see the Inqiury, redirect to the parent view where the inquiries are defined</tal:comment>
+<span tal:define="dummy python: context.REQUEST.RESPONSE.redirect(context.aq_inner.aq_parent.absolute_url() + '/#fieldsetlegend-urban_investigation_and_advices');" />
+
+</metal:body>
+</metal:main_macro>
+</metal:main>
+</body>
+</html>
