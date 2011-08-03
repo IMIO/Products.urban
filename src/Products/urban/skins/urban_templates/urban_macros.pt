@@ -49,7 +49,11 @@
                  inquiries here/getInquiries;
                  member context/@@plone_portal_state/member;">
 <fieldset tal:repeat="inquiry inquiries"><legend><img src="#" tal:attributes="src ctype/getIcon" />&nbsp;<span i18n:translate="inquiry_title_and_number">Inquiry <span i18n:name="number" tal:content="repeat/inquiry/number"></span></span></legend>
-<tal:actions define="thisObject python: inquiry; needExternalEdition python:False; actionsToHide python: ('transitions',);">
+<tal:comment replace="nothing">Do not show the actions on the Licence object representing the first inquiry, only on following ones wich are real Inquiry objects</tal:comment>
+<tal:actions condition="python: not repeatindex == 0" define="repeatindex repeat/inquiry/index;
+                                  thisObject python: inquiry;
+                                  needExternalEdition python:False;
+                                  actionsToHide python: ('transitions',);">
      <span metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
 </tal:actions>
 <table>
