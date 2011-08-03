@@ -769,6 +769,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         return self.listFolderContents({'portal_type': 'UrbanEventInquiry',})
 
 
+
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence
 
