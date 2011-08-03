@@ -142,6 +142,27 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
+    def getLinkedUrbanEventInquiry(self):
+        """
+          Return the linked UrbanEventInquiry
+        """
+        #get the existing UrbanEventInquiries
+        urbanEventInquiries = context.aq_inner.aq_parent.getUrbanEventInquiries()
+        #get the existing Inquiries
+        inquiries = context.aq_inner.aq_parent.getInquiries()
+        contextUID = context.UID()
+        i = 0
+        for inquiry in inquiries:
+            if inquiry.UID() == contextUID:
+                break
+            i = i + 1
+        #i is the number of the Inquiry : inquiry number 1, number 2, ...
+        if i >= len(urbanEventInquiries):
+            #no UrbanEventInquiry exists for this Inquiry
+            return None
+        else:
+            return urbanEventInquiries[i]
+
 
 
 registerType(Inquiry, PROJECTNAME)

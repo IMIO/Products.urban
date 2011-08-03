@@ -23,6 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from zope.i18n import translate
 ##/code-section module-header
 
 schema = Schema((
@@ -57,7 +58,50 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
+    security.declarePublic('getLinkedInquiry')
+    def _getSelfPosition(self):
+        """
+          Return the position of the self between every UrbanEventInquiry objects
+        """
+        #find the position of the current UrbanEventInquiry
+        #and get the corresponding data
+        urbanEventInquiries = self.aq_inner.aq_parent.getUrbanEventInquiries()
+        selfUID = self.UID()
+        i = 0
+        for urbanEventInquiry in urbanEventInquiries:
+            if urbanEventInquiry.UID() == selfUID:
+                break
+            i = i + 1
+        return i
 
+    security.declarePublic('getLinkedInquiry')
+    def getLinkedInquiry(self):
+        """
+          Return the linked Inquiry object if exists
+        """
+        inquiries = self.aq_inner.aq_parent.getInquiries()
+        position = self._getSelfPosition()
+        if position >= len(inquiries):
+            #here we have a problem with a UrbanEventInquiry that is not linked to any
+            #existing Inquiry.  This should not happen...
+            return None
+        else:
+            return inquiries[position]
+
+    security.declarePublic('getLinkedInquiryTitle')
+    def getLinkedInquiryTitle(self):
+        """
+          Returns the title of the linked Inquiry object
+          We want to show in the title the number of the Inquiry
+        """
+        inquiries = self.aq_inner.aq_parent.getInquiries()
+        position = self._getSelfPosition()
+        if position >= len(inquiries):
+            #here we have a problem with a UrbanEventInquiry that is not linked to any
+            #existing Inquiry.  This should not happen...
+            return None
+        else:
+            return translate('inquiry_title_and_number', 'urban', mapping={'number': position+1}, context=self.REQUEST)
 
 registerType(UrbanEventInquiry, PROJECTNAME)
 # end of class UrbanEventInquiry
