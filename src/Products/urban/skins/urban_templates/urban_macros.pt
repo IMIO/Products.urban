@@ -1,3 +1,8 @@
+<div metal:define-macro="goUpOneLevelMacro" i18n:domain="urban">
+<br />
+<a class="no_underline" href=".."><img src="goback.png" />&nbsp;<span i18n:translate="back_to_licence">Go back to the licence</span></a>
+</div>
+
 <div metal:define-macro="urbanEventDataMacro" i18n:domain="urban">
  <fieldset><strong><legend i18n:translate="event_data">Event data</legend></strong>
   <table>

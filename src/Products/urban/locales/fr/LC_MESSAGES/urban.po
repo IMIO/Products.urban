@@ -209,7 +209,7 @@ msgid "articles_folder_title"
 msgstr "Articles"
 
 msgid "back_to_licence"
-msgstr "Retour au permis d'urbanisme"
+msgstr "Retour au permis"
 
 msgid "buildings_layer_title"
 msgstr "Couche bâtiments"

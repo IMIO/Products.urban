@@ -7,24 +7,17 @@
              tal:define="member context/@@plone_portal_state/member;
                          border python: member.has_role('Manager') and 'enable_border' or 'disable_border';
                          dummy python:request.set(border, 1);" />
-
-<tal:block condition="context/getRecipients">
-    <div metal:fill-slot="style_slot">
-        <!--link rel="stylesheet" href="map.css" type="text/css" media="screen" charset="utf-8" /-->
-    </div>
-</tal:block>
 </head>
 
 <body>
 <div metal:fill-slot="main">
 <metal:main_macro define-macro="main">
-<metal:body define-macro="body_macro" tal:define="recipients context/getRecipients;
-                                                  linkedUrbanEventType context/getUrbaneventtypes">
+<metal:body define-macro="body_macro" tal:define="linkedUrbanEventType context/getUrbaneventtypes">
 <h1 class="documentFirstHeading" tal:content="here/Title"/>
 <div tal:replace="structure provider:plone.belowcontenttitle" />
-<!-- Back to the build licence... -->
-<br />
-<a class="no_underline" href=".."><img src="goback.png" />&nbsp;<span i18n:translate="back_to_licence">Go back to the licence</span></a>
+
+<tal:comment replace="nothing">Back to the build licence...</tal:comment>
+<metal:listing use-macro="here/urban_macros/macros/goUpOneLevelMacro" />
 
 <table width=100%>
     <tr valign="top">
