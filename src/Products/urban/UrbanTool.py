@@ -373,11 +373,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         urbanEventTypeObj=uid_catalog(UID=urban_event_type_uid)[0].getObject()
         #create the UrbanEvent in the right folder
         #check first what kind of UrbanEvent should be added
-        if urbanEventTypeObj.getEventTypeType() == "Products.urban.interfaces.IInquiry":
-            typeName = "UrbanEventInquiry"
-        else:
-            typeName = "UrbanEvent"
-        newUrbanEventId=evfolder.invokeFactory(typeName,id=self.generateUniqueId('UrbanEvent'),title=urbanEventTypeObj.Title(),urbaneventtypes=(urbanEventTypeObj,))
+        type_name = "UrbanEvent"
+        if urbanEventTypeObj.getEventTypeType() == 'Products.urban.interfaces.IInquiryEvent':
+            type_name = "UrbanEventInquiry"
+        newUrbanEventId=evfolder.invokeFactory(type_name,id=self.generateUniqueId(type_name),title=urbanEventTypeObj.Title(),urbaneventtypes=(urbanEventTypeObj,))
         newUrbanEventObj=getattr(evfolder,newUrbanEventId)
         return self.REQUEST.RESPONSE.redirect(newUrbanEventObj.absolute_url()+'/edit')
 

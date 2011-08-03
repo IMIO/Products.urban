@@ -44,15 +44,15 @@
   />
 
   <browser:page
-     for="*"
-     name="urbaneventinquiryview"
+     for="Products.urban.interfaces.IInquiryEvent"
+     name="urbaneventview"
      class=".urbaneventviews.UrbanEventInquiryView"
      template="templates/urbaneventinquiryview.pt"
      permission="zope2.View"
   />
 
   <browser:page
-     for="*"
+     for="Products.urban.interfaces.IUrbanEvent"
      name="urbaneventview"
      class=".urbaneventviews.UrbanEventView"
      template="templates/urbaneventview.pt"

@@ -63,6 +63,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Inquiry"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="UrbanEventInquiry"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <!-- ##code-section TYPES -->
  <object name="Architect"
          meta_type="Factory-based Type Information with dynamic views"/>

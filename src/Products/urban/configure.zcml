@@ -23,39 +23,39 @@
   
   <include file="grok.zcml" />
   <interface
-    interface=".interfaces.IOpinionRequest"
+    interface=".interfaces.IOpinionRequestEvent"
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.IWalloonRegionOpinionRequest"
+    interface=".interfaces.IWalloonRegionOpinionRequestEvent"
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.IWalloonRegionPrimo"
+    interface=".interfaces.IWalloonRegionPrimoEvent"
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.IAcknowledgment"
+    interface=".interfaces.IAcknowledgmentEvent"
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.ICollegeReport"
+    interface=".interfaces.ICollegeReportEvent"
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.IDeposit"
+    interface=".interfaces.IDepositEvent"
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.IMissingPart"
+    interface=".interfaces.IMissingPartEvent"
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.IInquiry"
+    interface=".interfaces.IInquiryEvent"
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.ITheLicence"
+    interface=".interfaces.ITheLicenceEvent"
     type=".interfaces.IEventTypeType"/>
 
   <!-- ##/code-section configure.zcml.header -->

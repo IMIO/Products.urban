@@ -10,15 +10,15 @@
  <property name="content_meta_type">Inquiry</property>
  <property name="product">urban</property>
  <property name="factory">addInquiry</property>
- <property name="immediate_view">base_view</property>
+ <property name="immediate_view">inquiryview</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">False</property>
  <property name="allowed_content_types">
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">base_view</property>
+ <property name="default_view">inquiryview</property>
  <property name="view_methods">
-  <element value="base_view"/>
+  <element value="inquiryview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
@@ -29,7 +29,7 @@
          action_id="view"
          category="object" 
          condition_expr=""
-         url_expr="string:${object_url}/view" 
+         url_expr="string:${object_url}/inquiryview" 
          visible="True">
   <permission value="View"/>
  </action>

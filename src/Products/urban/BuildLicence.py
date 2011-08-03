@@ -442,34 +442,34 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
         return True
 
     def getLastDeposit(self):
-        return self._getLastEvent(interfaces.IDeposit)
+        return self._getLastEvent(interfaces.IDepositEvent)
 
     def getLastMissingPart(self):
-        return self._getLastEvent(interfaces.IMissingPart)
+        return self._getLastEvent(interfaces.IMissingPartEvent)
 
     def getLastMissingPartDeposit(self):
-        return self._getLastEvent(interfaces.IMissingPartDeposit)
+        return self._getLastEvent(interfaces.IMissingPartDepositEvent)
 
     def getLastWalloonRegionPrimo(self):
-        return self._getLastEvent(interfaces.IWalloonRegionPrimo)
+        return self._getLastEvent(interfaces.IWalloonRegionPrimoEvent)
 
     def getLastAcknowledgment(self):
-        return self._getLastEvent(interfaces.IAcknowledgment)
+        return self._getLastEvent(interfaces.IAcknowledgmentEvent)
 
     def getLastInquiry(self):
-        return self._getLastEvent(interfaces.IInquiry)
+        return self._getLastEvent(interfaces.IInquiryEvent)
 
     def getLastCollegeReport(self):
-        return self._getLastEvent(interfaces.ICollegeReport)
+        return self._getLastEvent(interfaces.ICollegeReportEvent)
 
     def getLastTheLicence(self):
-        return self._getLastEvent(interfaces.ITheLicence)
+        return self._getLastEvent(interfaces.ITheLicenceEvent)
 
     def getLastWorkBeginning(self):
-        return self._getLastEvent(interfaces.IWorkBeginning)
+        return self._getLastEvent(interfaces.IWorkBeginningEvent)
 
     def getAllOpinionRequests(self):
-        return self._getAllEvents(interfaces.IOpinionRequest)
+        return self._getAllEvents(interfaces.IOpinionRequestEvent)
 
     def getProrogatedToDate(self):
         """

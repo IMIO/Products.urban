@@ -153,60 +153,64 @@ class IInquiry(Interface):
     """Marker interface for .Inquiry.Inquiry
     """
 
+class IUrbanEventInquiry(Interface):
+    """Marker interface for .UrbanEventInquiry.UrbanEventInquiry
+    """
+
 ##code-section FOOT
 class IEventTypeType(IInterface):
     """
     Basic event type
     """
 
-class IOpinionRequest(Interface):
+class IOpinionRequestEvent(Interface):
     __doc__ = _("""IOpinionRequest type marker interface""")
 
 
-class IWalloonRegionPrimo(Interface):
+class IWalloonRegionPrimoEvent(Interface):
     __doc__ = _("""IWalloonRegionPrimo type marker interface""")
 
-class IWalloonRegionOpinionRequest(Interface):
+class IWalloonRegionOpinionRequestEvent(Interface):
     __doc__ = _("""IWalloonRegionOpinionRequest type marker interface""")
 
 
-class IAcknowledgment(Interface):
+class IAcknowledgmentEvent(Interface):
     __doc__ = _("""IAcknowledgment type marker interface""")
 
 
-class ICollegeReport(Interface):
+class ICollegeReportEvent(Interface):
     __doc__ = _("""ICollegeReport type marker interface""")
 
 
-class IDeposit(Interface):
+class IDepositEvent(Interface):
     __doc__ = _("""IDeposit type marker interface""")
 
 
-class IMissingPartDeposit(IDeposit):
+class IMissingPartDepositEvent(IDepositEvent):
     __doc__ = _("""IMissingPartDeposit type marker interface""")
 
 
-class IModificationDeposit(IDeposit):
+class IModificationDepositEvent(IDepositEvent):
     __doc__ = _("""IModificationDeposit type marker interface""")
 
 
-class IMissingPart(Interface):
+class IMissingPartEvent(Interface):
     __doc__ = _("""IMissingPart type marker interface""")
 
 
-class IInquiry(Interface):
+class IInquiryEvent(Interface):
     __doc__ = _("""IInquiry type marker interface""")
 
 
-class ICollegeReport(Interface):
+class ICollegeReportEvent(Interface):
     __doc__ = _("""ICollegeReport type marker interface""")
 
 
-class ITheLicence(Interface):
+class ITheLicenceEvent(Interface):
     __doc__ = _("""ITheLicence type marker interface""")
 
 
-class IWorkBeginning(Interface):
+class IWorkBeginningEvent(Interface):
     __doc__ = _("""IWorkBeginning type marker interface""")
 
 
