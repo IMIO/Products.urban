@@ -46,7 +46,7 @@ schema = Schema((
             label_msgid='urban_label_derogationDetails',
             i18n_domain='urban',
         ),
-        default_output_type='text/html',
+        default_output_type='text/plain',
         default_content_type='text/plain',
     ),
     LinesField(
