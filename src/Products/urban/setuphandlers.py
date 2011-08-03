@@ -28,6 +28,7 @@ from zExceptions import BadRequest
 from Products.ZCatalog.Catalog import CatalogError
 from Products.urban.config import URBAN_TYPES, PPNC_LAYERS
 from zope.i18n import translate as _
+from exportimport import addUrbanEventTypes
 ##/code-section HEAD
 
 def isNoturbanProfile(context):
@@ -1027,7 +1028,6 @@ def addTestObjects(context):
         from Products.urban.Extensions.imports import import_streets_fromfile, import_localities_fromfile
         import_streets_fromfile(tool)
         import_localities_fromfile(tool)
-
     addUrbanEventTypes(context)
 
     #add some generic templates in configuration
@@ -1055,54 +1055,6 @@ def addTestObjects(context):
         except Exception, msg:
             logger.warn("An error occured while processing the tool '%s' attribute: %s" % (attribname,msg))
 
-def addUrbanEventTypes(context):
-    """
-      Helper method for easily adding urbanEventTypes
-    """
-    #add some UrbanEventTypes...
-    #get the urbanEventTypes dict from the profile
-    #get the name of the profile by taking the last part of the _profile_path
-    profile_name = context._profile_path.split('/')[-1]
-    from_string = "from Products.urban.profiles.%s.data import urbanEventTypes" % profile_name
-    try:
-        exec(from_string)
-    except ImportError:
-        return
-    site = context.getSite()
-    tool = getToolByName(site, 'portal_urban')
-    #add the UrbanEventType
-    for urbanConfigId in urbanEventTypes:
-        try:
-            uetFolder = getattr(tool.getUrbanConfig(None, urbanConfigId=urbanConfigId), "urbaneventtypes")
-        except AttributeError:
-            #if we can not get the urbanConfig, we pass this one...
-            logger.warn("An error occured while trying to get the '%s' urbanConfig" % urbanConfigId)
-            continue
-        for uet in urbanEventTypes[urbanConfigId]:
-            try:
-                loginfo = 'unknown'
-                id = uet['id']
-                loginfo = id
-                #we pass every informations including the 'id' in the 'uet' dict
-                newUetId = uetFolder.invokeFactory("UrbanEventType", **uet)
-                newUet = getattr(uetFolder, newUetId)
-                #add the Files in the UrbanEventType
-                for template in uet['podTemplates']:
-                    id = "%s.odt" % template['id']
-                    loginfo = id
-                    title = template['title']
-                    filePath = '%s/templates/%s' % (context._profile_path, id)
-                    fileDescr = file(filePath, 'rb')
-                    fileContent = fileDescr.read()
-                    newUetFileId = newUet.invokeFactory("File", id=id, title=title, file=fileContent)
-                    newUetFile = getattr(newUet, newUetFileId)
-                    newUetFile.setContentType("application/vnd.oasis.opendocument.text")
-                    newUetFile.setFilename(id)
-                    newUetFile.reindexObject()
-            except Exception, msg:
-                #there was an error, reinstalling?  reapplying?  we pass...
-                logger.warn("An error occured while processing the '%s' UrbanEvent: '%s'" % (loginfo, msg))
-                pass
 
 def importStreets(context):
     #site = context.getSite()
