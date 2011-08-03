@@ -19,7 +19,7 @@ urbanEventTypes = {
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
                     'podTemplates': ({'id': "urb-recepisse", 'title': "Récépissé de la demande (article 115)"},),
-                    'eventTypeType': 'Products.urban.interfaces.IDeposit',
+                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
                     'id': "recepisse-art15-complement",
@@ -27,7 +27,7 @@ urbanEventTypes = {
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
                     'podTemplates': ({'id': "urb-recepisse-art115-complement", 'title': "Récépissé d'un complément à une demande de permis (article 115)"},),
-                    'eventTypeType': 'Products.urban.interfaces.IDeposit',
+                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
                     'id': "recepisse-article-116",
@@ -35,14 +35,14 @@ urbanEventTypes = {
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
                     'podTemplates': ({'id': "urb-recepisse-art116", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
-                    'eventTypeType': 'Products.urban.interfaces.IDeposit',
+                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
                     'id': "dossier-incomplet",
                     'title': "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
-                    'eventTypeType': 'Products.urban.interfaces.IMissingPart',
+                    'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
                     'podTemplates': (
                                      {'id': "urb-dossier-incomplet-demandeur", 'title': "Dossier incomplet (lettre demandeur)"},
                                      {'id': "urb-dossier-incomplet-archi", 'title': "Dossier incomplet (lettre architecte)"},
@@ -53,7 +53,7 @@ urbanEventTypes = {
                     'title': "Accusé de réception (dossier complet - article 116 § 1)",
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
-                    'eventTypeType': 'Products.urban.interfaces.IAcknowledgment',
+                    'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
                     'podTemplates': (
                                      {'id': "urb-accuse", 'title': "Accusé de réception"},
                                      {'id': "urb-accuse-demande-paiement", 'title': "Demande de paiement"},
@@ -86,7 +86,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition': "python: 'ccatm' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-ccatm", 'title': "Courrier de demande d'avis"},),
-                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequest',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'id': "demande-avis-belgacom",
@@ -95,7 +95,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition': "python: 'belgacom' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-belgacom", 'title': "Courrier de demande d'avis"},),
-                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequest',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'id': "demande-avis-dgrne",
@@ -104,7 +104,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition': "python: 'dgrne' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-dgrne", 'title': "Courrier de demande d'avis"},),
-                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequest',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'id': "demande-avis-dnf",
@@ -113,7 +113,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition': "python: 'dnf' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-dnf", 'title': "Courrier de demande d'avis"},),
-                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequest',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'id': "demande-avis-spw-dgo1",
@@ -122,7 +122,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition' : "python: 'spw-dgo1' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-spw-dgo1", 'title': "Courrier de demande d'avis"},),
-                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequest',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'id': "demande-avis-swde",
@@ -131,7 +131,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition' : "python: 'swde' in here.getSolicitOpinionsTo()",
                     'podTemplates': ({'id': "urb-avis-swde", 'title': "Courrier de demande d'avis"},),
-                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequest',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'id': "transmis-1er-dossier-rw",
@@ -142,7 +142,7 @@ urbanEventTypes = {
                                      {'id': "urb-envoi-premier-dossier-rw", 'title': "Lettre d'envoi du premier dossier à la RW"},
                                      {'id': "urb-envoi-premier-dossier-art127-rw", 'title': "Lettre d'envoi du dossier (article 127) à la RW"},
                                     ),
-                    'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimo',
+                    'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
                     },
                     {
                     'id': "enquete-publique",
@@ -163,7 +163,7 @@ urbanEventTypes = {
                                      {'id': "urb-enq-frais", 'title': "Frais d'enquête"},
                                      {'id': "urb-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},
                                     ),
-                    'eventTypeType': 'Products.urban.interfaces.IInquiry',
+                    'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
                     },
                     {
                     'id': "rapport-du-college",
@@ -174,7 +174,7 @@ urbanEventTypes = {
                                      {'id': "urb-rapp-service", 'title': "Rapport du Service"},
                                      {'id': "urb-rapp-college", 'title': "Rapport du Collège"},
                                     ),
-                    'eventTypeType': 'Products.urban.interfaces.ICollegeReport',
+                    'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
                     },
                     {
                     'id': "transmis-2eme-dossier-rw",
@@ -185,7 +185,7 @@ urbanEventTypes = {
                                      {'id': "urb-envoi-second-dossier-rw", 'title': "Lettre envoi deuxième dossier à la RW"},
                                      {'id': "urb-envoi-second-dossier-demandeur", 'title': "Information au demandeur envoi second dossier"},
                                     ),
-                    'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequest',
+                    'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
                     },
                     {
                     'id': "passage-conseil-communal",
@@ -210,7 +210,7 @@ urbanEventTypes = {
                                      {'id': "urb-decision-frais", 'title': "Ventilation des frais"},
                                      {'id': "urb-debut-travaux", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
                                     ),
-                    'eventTypeType': 'Products.urban.interfaces.ITheLicence',
+                    'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
                     },
                     {
                     'id': "demande-raccordement-egout",
