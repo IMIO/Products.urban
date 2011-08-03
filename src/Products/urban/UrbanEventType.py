@@ -23,6 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+import logging
 logger = logging.getLogger('urban: UrbanEventType')
 from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.CMFPlone.i18nl10n import utranslate
