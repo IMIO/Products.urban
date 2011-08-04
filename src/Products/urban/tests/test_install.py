@@ -7,8 +7,8 @@ from plone.app.testing import setRoles
 from plone.app.testing.interfaces import TEST_USER_NAME
 from plone.app.testing.interfaces import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
-from Products.urban.interfaces import (IUrbanEventType, IAcknowledgment,
-        IOpinionRequest, IInquiry)
+from Products.urban.interfaces import (IUrbanEventType, IAcknowledgmentEvent,
+        IOpinionRequestEvent, IInquiryEvent)
 from Products.urban.testing import URBAN_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
 
@@ -57,9 +57,9 @@ class TestInstall(unittest.TestCase):
         self.assertEqual(len(licence.objectValues('UrbanEvent')), 0)
         urbanEvent = createObject('UrbanEvent', 'accuse-de-reception', licence)
         self.assertEqual(len(licence.objectValues('UrbanEvent')), 1)
-        self.failUnless(IAcknowledgment.providedBy(urbanEvent))
+        self.failUnless(IAcknowledgmentEvent.providedBy(urbanEvent))
         catalog = getToolByName(portal, 'portal_catalog')
-        interfaceName = interfaceToName(portal, IAcknowledgment)
+        interfaceName = interfaceToName(portal, IAcknowledgmentEvent)
         eventTypes = catalog(object_provides=interfaceName,
                              sort_on='sortable_title')
         self.assertEqual(len(eventTypes), 1)
@@ -74,7 +74,7 @@ class TestInstall(unittest.TestCase):
         licence = getattr(buildLicences, LICENCE_ID)
         self.assertEqual(len(licence.objectValues('UrbanEvent')), 0)
         urbanEvent = createObject('UrbanEvent', 'enquete-publique', licence)
-        self.failUnless(IInquiry.providedBy(urbanEvent))
+        self.failUnless(IInquiryEvent.providedBy(urbanEvent))
 
     def testOpinionRequestSearchByInterface(self):
         portal = self.layer['portal']
@@ -86,7 +86,7 @@ class TestInstall(unittest.TestCase):
         licence = getattr(buildLicences, LICENCE_ID)
         self.assertEqual(len(licence.objectValues('UrbanEvent')), 0)
         urbanEvent = createObject('UrbanEvent', 'demande-avis-swde', licence)
-        self.failUnless(IOpinionRequest.providedBy(urbanEvent))
+        self.failUnless(IOpinionRequestEvent.providedBy(urbanEvent))
 
     def testAcknowledgmentEventTypeType(self):
         portal = self.layer['portal']
@@ -95,7 +95,7 @@ class TestInstall(unittest.TestCase):
         accuse = getattr(eventTypes, 'accuse-de-reception')
         eventTypeType = accuse.getEventTypeType()
         self.assertEqual(eventTypeType,
-            'Products.urban.interfaces.IAcknowledgment')
+            'Products.urban.interfaces.IAcknowledgmentEvent')
 
 
 class TestContact(unittest.TestCase):
