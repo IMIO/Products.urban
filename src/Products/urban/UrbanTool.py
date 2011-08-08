@@ -35,9 +35,10 @@ import psycopg2.extras
 import os, time
 from DateTime import DateTime
 from StringIO import StringIO
-from AccessControl import getSecurityManager
+from AccessControl import getSecurityManager, Unauthorized
 from Acquisition import aq_base
-from zope.i18n import translate as _
+from zope.i18n import translate
+from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.Expression import Expression
 from Products.CMFPlone.i18nl10n import ulocalized_time
@@ -365,12 +366,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def createUrbanEvent(self, urban_folder_uid, urban_event_type_uid):
         """
            Create an urbanEvent on a licence
-        """
+        """        
         uid_catalog = getToolByName(self, 'uid_catalog')
         #the folder to create the UrbanEvent in
         evfolder=uid_catalog(UID=urban_folder_uid)[0].getObject()
         #the linked UrbanEventType
         urbanEventTypeObj=uid_catalog(UID=urban_event_type_uid)[0].getObject()
+        #first of all, check the urbanEvent creation condition again
+        if not urbanEventTypeObj.isApplicable(evtfolder):
+            raise Unauthorized, _("You can not create this UrbanEvent !")
         #create the UrbanEvent in the right folder
         #check first what kind of UrbanEvent should be added
         type_name = "UrbanEvent"
@@ -637,7 +641,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if not result:
             return ((DB_QUERY_ERROR, DB_QUERY_ERROR), )
         if all:
-            result = [{'da':'0', 'divname':_('all_divisions', 'urban', context=self.REQUEST)}] + result
+            result = [{'da':'0', 'divname': translate('all_divisions', 'urban', context=self.REQUEST)}] + result
         return result
 
     security.declarePublic('queryDB')
@@ -660,7 +664,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             delattr(self,'dbc')
         else:
             ptool = getToolByName(self, "plone_utils")
-            ptool.addPortalMessage(_(u"db_connection_error", 'plone', mapping={u'error': self.dbc}, context=self.REQUEST), type="error")
+            ptool.addPortalMessage(_(u"db_connection_error", mapping={u'error': self.dbc}), type="error")
         return result
 
     def checkDBConnection(self):
@@ -671,9 +675,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         ptool = getToolByName(self, "plone_utils")
         try:
             psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (self.getSqlName(), self.getSqlUser(), self.getSqlHost(), self.getSqlPassword()))
-            ptool.addPortalMessage(_(u"db_connection_successfull", 'plone', context=self.REQUEST), type='info')
+            ptool.addPortalMessage(_(u"db_connection_successfull"), type='info')
         except psycopg2.OperationalError, e:
-            ptool.addPortalMessage(_(u"db_connection_error", 'plone', mapping={u'error': unicode(e.__str__(), 'utf-8')}, context=self.REQUEST))
+            ptool.addPortalMessage(_(u"db_connection_error", mapping={u'error': unicode(e.__str__(), 'utf-8')}))
 
     security.declarePublic('mayAccessUrban')
     def mayAccessUrban(self):
@@ -1113,7 +1117,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         except ParseError:
             #in case something like '*' is entered, ZCTextIndex raises an error...
             ptool = getToolByName(self, "plone_utils")
-            ptool.addPortalMessage(_(u"please_enter_more_letters", 'plone', context=self.REQUEST), type="info")
+            ptool.addPortalMessage(_(u"please_enter_more_letters"), type="info")
             return res
 
     security.declarePublic('searchByStreet')
@@ -1456,7 +1460,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 #if no translation is available, then we use the default where me remove foregoing '0'
                 #'09' becomes '9', ...
                 daymsgid = "date_day_%s" % day
-                translatedDay = _(daymsgid, 'urban', context=self.REQUEST, default=day.lstrip('0')).encode('utf8')
+                translatedDay = translate(daymsgid, 'urban', context=self.REQUEST, default=day.lstrip('0')).encode('utf8')
                 #translate the month
                 #msgids already exist in the 'plonelocales' domain
                 monthMappings = {
@@ -1474,7 +1478,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                         '12': 'dec',
                        }
                 monthmsgid = "month_%s" % monthMappings[month]
-                translatedMonth = _(monthmsgid, 'plonelocales', context=self.REQUEST).encode('utf8').lower()
+                translatedMonth = translate(monthmsgid, 'plonelocales', context=self.REQUEST).encode('utf8').lower()
             return "%s %s %s" % (translatedDay, translatedMonth, year)
         return ''
 
