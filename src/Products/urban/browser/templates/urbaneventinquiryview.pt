@@ -45,7 +45,7 @@
            <u><strong i18n:translate="urban_label_linked_inquiry">Linked inquiry</strong>:</u>&nbsp;&nbsp;&nbsp;&nbsp;
           </td>
           <td>
-           <a href="#" tal:attributes="href view/getLinkToTheLicence" tal:content="here/getLinkedInquiryTitle">Linked inquiry title and number</a>
+           <a href="#" tal:attributes="href view/getLinkToTheInquiries" tal:content="view/getLinkedInquiryTitle">Linked inquiry title and number</a>
           </td>
          </tr>
          <tal:evtfield repeat="field fields">

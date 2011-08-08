@@ -369,7 +369,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         uid_catalog = getToolByName(self, 'uid_catalog')
         #the folder to create the UrbanEvent in
-        evfolder=uid_catalog(UID=urban_folder_uid)[0].getObject()
+        evtfolder=uid_catalog(UID=urban_folder_uid)[0].getObject()
         #the linked UrbanEventType
         urbanEventTypeObj=uid_catalog(UID=urban_event_type_uid)[0].getObject()
         #first of all, check the urbanEvent creation condition again
@@ -380,8 +380,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         type_name = "UrbanEvent"
         if urbanEventTypeObj.getEventTypeType() == 'Products.urban.interfaces.IInquiryEvent':
             type_name = "UrbanEventInquiry"
-        newUrbanEventId=evfolder.invokeFactory(type_name,id=self.generateUniqueId(type_name),title=urbanEventTypeObj.Title(),urbaneventtypes=(urbanEventTypeObj,))
-        newUrbanEventObj=getattr(evfolder,newUrbanEventId)
+        newUrbanEventId=evtfolder.invokeFactory(type_name,id=self.generateUniqueId(type_name),title=urbanEventTypeObj.Title(),urbaneventtypes=(urbanEventTypeObj,))
+        newUrbanEventObj=getattr(evtfolder,newUrbanEventId)
         return self.REQUEST.RESPONSE.redirect(newUrbanEventObj.absolute_url()+'/edit')
 
     security.declarePublic('createUrbanDoc')

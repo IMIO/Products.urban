@@ -51,7 +51,7 @@
 
 <div metal:define-macro="urbanInquiriesMacro" i18n:domain="urban"
      tal:define="ctype python: context.portal_types.getTypeInfo('Inquiry');
-                 inquiries here/getInquiries;
+                 inquiries here/getInquiriesForDisplay;
                  member context/@@plone_portal_state/member;">
 <fieldset tal:repeat="inquiry inquiries"><legend><img src="#" tal:attributes="src ctype/getIcon" />&nbsp;<span i18n:translate="inquiry_title_and_number">Inquiry <span i18n:name="number" tal:content="repeat/inquiry/number"></span></span></legend>
 <tal:comment replace="nothing">Do not show the actions on the Licence object representing the first inquiry, only on following ones wich are real Inquiry objects</tal:comment>

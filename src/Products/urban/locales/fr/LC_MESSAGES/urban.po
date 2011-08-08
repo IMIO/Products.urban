@@ -165,7 +165,7 @@ msgid "add_an_equipment"
 msgstr "Ajouter une charge imposée"
 
 msgid "add_an_inquiry"
-msgstr "Ajouter une enquête"
+msgstr "Ajouter une enquête supplémentaire"
 
 msgid "add_event"
 msgstr "Ajouter un événement"

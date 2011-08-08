@@ -20,14 +20,29 @@ import interfaces
 from Products.urban.UrbanEvent import UrbanEvent
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from zope.i18n import translate
+from OFS.ObjectManager import BeforeDeleteException
+from Products.CMFPlone import PloneMessageFactory as _
 ##/code-section module-header
 
 schema = Schema((
 
+    ReferenceField(
+        name='linkedInquiry',
+        widget=ReferenceBrowserWidget(
+            visible=False,
+            label='Linkedinquiry',
+            label_msgid='urban_label_linkedInquiry',
+            i18n_domain='urban',
+        ),
+        allowed_types=('Inquiry', 'GenericLicence'),
+        multiValued=0,
+        relationship='linkedInquiry',
+    ),
 
 ),
 )
@@ -61,48 +76,18 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
 
     # Manually created methods
 
-    def _getSelfPosition(self):
+    security.declarePrivate('manage_beforeDelete')
+    def manage_beforeDelete(self, item, container):
         """
-          Return the position of the self between every UrbanEventInquiry objects
+          We can only remove the last UrbanEventInquiry to avoid mismatch between
+          existing inquiries and UrbanEventInquiries
         """
-        #find the position of the current UrbanEventInquiry
-        urbanEventInquiries = self.aq_inner.aq_parent.getUrbanEventInquiries()
-        selfUID = self.UID()
-        i = 0
-        for urbanEventInquiry in urbanEventInquiries:
-            if urbanEventInquiry.UID() == selfUID:
-                break
-            i = i + 1
-        return i
-
-    security.declarePublic('getLinkedInquiry')
-    def getLinkedInquiry(self):
-        """
-          Return the linked Inquiry object if exists
-        """
-        inquiries = self.aq_inner.aq_parent.getInquiries()
-        position = self._getSelfPosition()
-        if position >= len(inquiries):
-            #here we have a problem with a UrbanEventInquiry that is not linked to any
-            #existing Inquiry.  This should not happen...
-            return None
-        else:
-            return inquiries[position]
-
-    security.declarePublic('getLinkedInquiryTitle')
-    def getLinkedInquiryTitle(self):
-        """
-          Returns the title of the linked Inquiry object
-          We want to show in the title the number of the Inquiry
-        """
-        inquiries = self.aq_inner.aq_parent.getInquiries()
-        position = self._getSelfPosition()
-        if position >= len(inquiries):
-            #here we have a problem with a UrbanEventInquiry that is not linked to any
-            #existing Inquiry.  This should not happen...
-            return None
-        else:
-            return translate('inquiry_title_and_number', 'urban', mapping={'number': position+1}, context=self.REQUEST)
+        existingUrbanEventInquiries = self.getUrbanEventInquiries()
+        lastUrbanEventInquiry = existingUrbanEventInquiries[-1]
+        #if the user is not removing the last UrbanEventInquiry, we raise!
+        if not lastUrbanEventInquiry.UID() == self.UID():
+            raise BeforeDeleteException, _('cannot_remove_urbaneventinquiry_notthelast', mapping={'lasturbaneventinquiryurl': lastUrbanEventInquiry.absolute_url()}, default="You can not delete an UrbanEventInquiry if it is not the last!  Remove the last UrbanEventInquiries before being able to remove this one!")
+        BaseFolder.manage_beforeDelete(self, item, container)
 
 
 

@@ -23,6 +23,9 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from zope.i18n import translate
+from OFS.ObjectManager import BeforeDeleteException
+from Products.CMFPlone import PloneMessageFactory as _
 ##/code-section module-header
 
 schema = Schema((
@@ -145,6 +148,27 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
 
     # Manually created methods
 
+    security.declarePrivate('manage_beforeDelete')
+    def manage_beforeDelete(self, item, container):
+        """
+          We can not remove an Inquiry if a linked UrbanEventInquiry exists
+        """
+        linkedUrbanEventInquiry = self.getLinkedUrbanEventInquiry()
+        if linkedUrbanEventInquiry:
+            raise BeforeDeleteException, 'cannot_remove_inquiry_linkedurbaneventinquiry'
+        BaseContent.manage_beforeDelete(self, item, container)
+
+    security.declarePublic('getLinkedUrbanEventInquiry')
+    def getLinkedUrbanEventInquiry(self):
+        """
+          Return the linked UrbanEventInquiry object if exists
+        """
+        brefs = self.getBRefs('linkedInquiry')
+        if brefs:
+            return brefs[0]
+        else:
+            return None
+
     def _getSelfPosition(self):
         """
           Return the position of the self between every Inquiry objects
@@ -162,22 +186,14 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
             i = i + 1
         return i
 
-    security.declarePublic("getLinkedUrbanEventInquiry")
-    def getLinkedUrbanEventInquiry(self):
+    security.declarePublic('generateInquiryTitle')
+    def generateInquiryTitle(self):
         """
-          Return the linked UrbanEventInquiry
+          Generates a title for the inquiry
         """
-        #get the existing UrbanEventInquiries
-        #getUrbanEventInquiries is a method of GenericLicence
-        #so by acquisition, we get it on the parent or we get it on self
-        #as GenericLicence heritates from Inquiry
-        urbanEventInquiries = self.getUrbanEventInquiries()
+        #we need to generate the title as the number of the inquiry is into it
         position = self._getSelfPosition()
-        if position >= len(urbanEventInquiries):
-            #no UrbanEventInquiry exists for this Inquiry
-            return None
-        else:
-            return urbanEventInquiries[position]
+        return translate('inquiry_title_and_number', 'urban', mapping={'number': position+1}, context=self.REQUEST)
 
 
 

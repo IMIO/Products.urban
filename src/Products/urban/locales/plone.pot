@@ -194,6 +194,15 @@ msgstr ""
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr ""
 
+msgid "genericlicence_investigationstart_valdiation_error"
+msgstr ""
+
+msgid "cannot_remove_inquiry_linkedurbaneventinquiry"
+msgstr ""
+
+msgid "cannot_remove_urbaneventinquiry_notthelast"
+msgstr ""
+
 msgid "You can not create this UrbanEvent !"
 msgstr ""
 

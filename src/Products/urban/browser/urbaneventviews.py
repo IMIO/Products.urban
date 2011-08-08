@@ -25,13 +25,6 @@ class UrbanEventView(BrowserView):
             data[1].append(activatedField)
         return data
 
-    def getLinkToTheLicence(self):
-        """
-          This will return a link to the inquiries on the linked licence
-        """
-        context = aq_inner(self.context)
-        return context.aq_inner.aq_parent.absolute_url() + '/#fieldsetlegend-urban_investigation_and_advices'
-
 class UrbanEventInquiryView(UrbanEventView):
     """
       This manage the view of UrbanEventInquiry
@@ -65,3 +58,23 @@ class UrbanEventInquiryView(UrbanEventView):
             inquiryAttributeName = inquiryAttribute.getName()
             inquiryData[1].append(inquiryAttributeName)
         return inquiryData
+
+    def getLinkToTheInquiries(self):
+        """
+          This will return a link to the inquiries on the linked licence
+        """
+        context = aq_inner(self.context)
+        return context.aq_inner.aq_parent.absolute_url() + '/#fieldsetlegend-urban_investigation_and_advices'
+
+    def getLinkedInquiryTitle(self):
+        """
+          This will return the title of the linked Inquiry
+        """
+        context = aq_inner(self.context)
+        linkedInquiry = context.getLinkedInquiry()
+        if linkedInquiry:
+            if not linkedInquiry.portal_type == 'Inquiry':
+                #we do not use Title as this inquiry is the licence
+                return linkedInquiry.generateInquiryTitle()
+            else:
+                return linkedInquiry.Title()

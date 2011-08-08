@@ -130,6 +130,12 @@ msgstr "Accepter"
 msgid "accepted"
 msgstr "Accepté"
 
+msgid "cannot_remove_inquiry_linkedurbaneventinquiry"
+msgstr "Vous ne pouvez pas supprimer cette enquête car un événement 'Enquête publique' y est lié.  Supprimez d'abord l'événement lié.  <a href='${linkedurbaneventurl}'>Cliquez ici pour y accéder</a>"
+
+msgid "cannot_remove_urbaneventinquiry_notthelast"
+msgstr "Vous ne pouvez pas supprimer cet événement 'Enquête publique' car ce n'est pas le dernier.  Vous devez supprimer le ou les derniers événements 'Enquête publique' avant de pouvoir supprimer celui-ci.    <a href='${lasturbaneventinquiryurl}'>Cliquez ici pour accéder au dernier événement 'Enquête publique'</a>"
+
 msgid "close"
 msgstr "Clôturer"
 
@@ -161,6 +167,9 @@ msgstr "Activer"
 
 msgid "enabled"
 msgstr "Activé"
+
+msgid "genericlicence_investigationstart_valdiation_error"
+msgstr "Un événement de type 'Enquête publique' est lié à cette enquête, vous devez donc définir une date valide.  Si vous souhaitez supprimer cette enquête, supprimez d'abord l'événement lié.  <a href='${linkedurbaneventurl}'>Cliquez ici pour y accéder</a>"
 
 # indexes/metadata
 msgid "getBeginDate"

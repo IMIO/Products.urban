@@ -29,7 +29,7 @@ from Products.urban.config import *
 from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 import warnings
 from DateTime import DateTime
-from zope.i18n import translate as _
+from zope.i18n import translate
 from collective.referencedatagridfield import ReferenceDataGridField, ReferenceDataGridWidget
 from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.Column import Column
@@ -568,10 +568,10 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
           supervision area or outside catchment
         """
         lst=[
-             ['close', _('close_prevention_area', 'urban', context=self.REQUEST)],
-             ['far', _('far_prevention_area', 'urban', context=self.REQUEST)],
-             ['supervision', _('supervision_area', 'urban', context=self.REQUEST)],
-             ['ouside', _('outside_catchment', 'urban', context=self.REQUEST)],
+             ['close', translate('close_prevention_area', 'urban', context=self.REQUEST)],
+             ['far', translate('far_prevention_area', 'urban', context=self.REQUEST)],
+             ['supervision', translate('supervision_area', 'urban', context=self.REQUEST)],
+             ['ouside', translate('outside_catchment', 'urban', context=self.REQUEST)],
             ]
         vocab = []
         for elt in lst:
@@ -593,10 +593,10 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
           flooding levels : no risk, low risk, moderated risk, high risk
         """
         lst=[
-             ['no', _('flooding_level_no', 'urban', context=self.REQUEST)],
-             ['low', _('flooding_level_low', 'urban', context=self.REQUEST)],
-             ['moderate', _('flooding_level_moderate', 'urban', context=self.REQUEST)],
-             ['high', _('flooding_level_high', 'urban', context=self.REQUEST)],
+             ['no', translate('flooding_level_no', 'urban', context=self.REQUEST)],
+             ['low', translate('flooding_level_low', 'urban', context=self.REQUEST)],
+             ['moderate', translate('flooding_level_moderate', 'urban', context=self.REQUEST)],
+             ['high', translate('flooding_level_high', 'urban', context=self.REQUEST)],
             ]
         vocab = []
         for elt in lst:
@@ -618,6 +618,20 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
           This depend on the real portal_type
         """
         return '/portal_urban/%s/foldermanagers' % self.getPortalTypeName().lower()
+
+    security.declarePublic('validate_investigationStart')
+    def validate_investigationStart(self, value):
+        """
+          Validate the investigationStart field
+          If we have an existing UrbanEventInquiry in self
+          we must define an investigationStart date
+        """
+        #if we have a linked UrbanEventInquiry, we must set a correct investigation start date
+        linkedUrbanEventInquiry = self.getLinkedUrbanEventInquiry()
+        if linkedUrbanEventInquiry and value is None:
+            return translate("genericlicence_investigationstart_valdiation_error", mapping={'linkedurbaneventurl': linkedUrbanEventInquiry.absolute_url()}, default="You must define a investigation start date because an UrbanEventInquiry exist.  If you want to remove the inquiry, please delete the linked UrbanEventInquiry first !")
+        else:
+            return
 
     security.declarePublic('getApplicants')
     def getApplicants(self):
@@ -717,7 +731,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         if self.getApplicants():
             applicantTitle = self.getApplicants()[0].Title()
         else:
-            applicantTitle = _('no_applicant_defined', 'urban', context=self.REQUEST)
+            applicantTitle = translate('no_applicant_defined', 'urban', context=self.REQUEST)
         title = "%s - %s - %s" % (self.getReference(), self.getLicenceSubject(), str(applicantTitle))
         self.setTitle(title)
         self.reindexObject()
@@ -758,8 +772,15 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
           Returns the existing inquiries
         """
         #the first inquiry is the one defined on self itself
+        #if a investigationStart is defined
         #and the others are extra Inquiry object added
-        return [self, ] + self.objectValues('Inquiry')
+        res = []
+        inquiryObjects = self.objectValues('Inquiry')
+        #the inquiry on the licence is activated if we have a
+        #investigationStart date or if we have extra Inquiry objects
+        if len(inquiryObjects) or self.getInvestigationStart():
+            res.append(self)
+        return res + inquiryObjects
 
     security.declarePublic('getUrbanEventInquiries')
     def getUrbanEventInquiries(self):

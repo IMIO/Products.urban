@@ -3,23 +3,35 @@
            xmlns:i18n="http://namespaces.zope.org/i18n"
            i18n_domain="urban">
 
-  <subscriber for="..interfaces.IPortionOut
-                   zope.app.container.interfaces.IObjectRemovedEvent"
-              handler=".portionOutEvents.onDelete" />
   <subscriber for="..interfaces.IApplicant
                    zope.app.container.interfaces.IObjectRemovedEvent"
               handler=".applicantEvents.onDelete" />
   <subscriber for="..interfaces.IContact
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".contactEvents.setInterface" />
+  <subscriber for="..interfaces.IInquiry
+                   OFS.interfaces.IObjectWillBeRemovedEvent"
+              handler=".inquiryEvents.beforeDelete" />
+  <subscriber for="..interfaces.IInquiry
+                   zope.app.container.interfaces.IObjectRemovedEvent"
+              handler=".inquiryEvents.afterDelete" />
+  <subscriber for="..interfaces.IInquiry
+                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+              handler=".inquiryEvents.setGeneratedTitle" />
+  <subscriber for="..interfaces.IGenericLicence
+                   Products.Archetypes.event.IEditBegunEvent"
+              handler=".licenceEvents.setDefaultFolderManagersEvent"/>           
+  <subscriber for="..interfaces.IPortionOut
+                   zope.app.container.interfaces.IObjectRemovedEvent"
+              handler=".portionOutEvents.onDelete" />
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setEventTypeType"/>
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setCreationDate"/>
-  <subscriber for="..interfaces.IGenericLicence
-                   Products.Archetypes.event.IEditBegunEvent"
-              handler=".licenceEvents.setDefaultFolderManagersEvent"/>           
+  <subscriber for="..interfaces.IUrbanEventInquiry
+                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+              handler=".urbanEventInquiryEvents.onCreation" />
 
 </configure>

@@ -441,6 +441,19 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
             return False
         return True
 
+    security.declarePublic('getInquiriesForDisplay')
+    def getInquiriesForDisplay(self):
+        """
+          Returns the inquiries to display on the buildlicence_view
+          This will move to the buildlicenceview when it will exist...
+        """
+        inquiries = self.getInquiries()
+        if not inquiries:
+            #we want to display at least the informations about the inquiry
+            #defined on the licence even if no data have been entered
+            inquiries.append(self)
+        return inquiries
+
     def getLastDeposit(self):
         return self._getLastEvent(interfaces.IDepositEvent)
 

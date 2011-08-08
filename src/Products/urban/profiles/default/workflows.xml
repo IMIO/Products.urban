@@ -61,6 +61,9 @@
   <type type_id="UrbanEvent">
    <bound-workflow workflow_id="urbanevent_workflow" />
   </type>
+  <type type_id="UrbanEventInquiry">
+   <bound-workflow workflow_id="urbanevent_workflow" />
+  </type>
   <type type_id="UrbanEventType">
    <bound-workflow workflow_id="activation_workflow" />
   </type>
