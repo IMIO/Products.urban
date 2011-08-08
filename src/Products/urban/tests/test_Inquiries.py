@@ -107,7 +107,6 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         inquiry1 = self.buildLicence
         #maybe no UrbanEventInquiry is linked
         self.assertEquals(inquiry1.getLinkedUrbanEventInquiry(), None)
-        import pdb; pdb.set_trace()
         #now we can create an UrbanEventInquiry
         urbanEventInquiry1 = createObject('UrbanEventInquiry', 'enquete-publique', self.buildLicence)
         self.assertEquals(inquiry1.getLinkedUrbanEventInquiry(), urbanEventInquiry1)
