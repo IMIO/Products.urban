@@ -366,7 +366,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def createUrbanEvent(self, urban_folder_uid, urban_event_type_uid):
         """
            Create an urbanEvent on a licence
-        """        
+        """
         uid_catalog = getToolByName(self, 'uid_catalog')
         #the folder to create the UrbanEvent in
         evfolder=uid_catalog(UID=urban_folder_uid)[0].getObject()

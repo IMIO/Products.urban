@@ -115,6 +115,12 @@ msgstr "Terme de vocabulaire urban"
 msgid "WorkLocation"
 msgstr "Adresse"
 
+msgid "You can not create this UrbanEvent !"
+msgstr "Vous ne pouvez pas créer cet événement !"
+
+msgid "You can not create this UrbanEventInquiry !"
+msgstr "Vous ne pouvez pas créer cet événement enquête publique !"
+
 msgid "Your National Register number must be 11 digits long !"
 msgstr "Votre numéro de registre national doit comporter 11 chiffres !"
 

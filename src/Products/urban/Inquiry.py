@@ -142,6 +142,9 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
+
+    # Manually created methods
+
     def _getSelfPosition(self):
         """
           Return the position of the self between every Inquiry objects
