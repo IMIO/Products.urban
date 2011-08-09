@@ -26,7 +26,8 @@
                  exposant request/exposant|nothing;
                  puissance request/puissance|nothing;
                  partie request/partie|nothing;
-                 divisions python: context.portal_urban.findDivisions(all=False);">
+                 divisions python: context.portal_urban.findDivisions(all=False);
+                 wtool context/portal_workflow;">
         <h1 class="documentFirstHeading" i18n:translate="urban_searchbyparcel_descr">
             Title
         </h1>
@@ -97,6 +98,7 @@
   <tr tal:repeat="brain brains">
    <td tal:define="oddrow repeat/brain/odd;
                    obj python:brain.getObject();
+                   normalizeString nocall:context/@@plone/normalizeString;
                    obj_wf_state obj/review_state|python: wtool.getInfoFor(obj, 'review_state', '');
                    obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);" tal:attributes="class python: test(oddrow, 'even', 'odd')">
     <img src="#" tal:attributes="src brain/getIcon" />
