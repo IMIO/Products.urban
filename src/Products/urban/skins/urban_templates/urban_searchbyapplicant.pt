@@ -19,8 +19,7 @@
                  Division python: 'Division' in request.get('foldertypes', []) or '';
                  NotaryLetter python: 'NotaryLetter' in request.get('foldertypes', []) or '';
                  UrbanCertificateOne python: 'UrbanCertificateOne' in request.get('foldertypes', []) or '';
-                 UrbanCertificateTwo python: 'UrbanCertificateTwo' in request.get('foldertypes', []) or '';
-                 wtool context/portal_workflow;">
+                 UrbanCertificateTwo python: 'UrbanCertificateTwo' in request.get('foldertypes', []) or '';">
         <h1 class="documentFirstHeading" i18n:translate="urban_searchbyapplicant_descr">
             Title
         </h1>
@@ -74,9 +73,8 @@
  <tbody>
   <tr tal:repeat="brain brains">
    <td tal:define="oddrow repeat/brain/odd;
-                   obj python:brain.getObject();
                    normalizeString nocall:context/@@plone/normalizeString; 
-                   obj_wf_state obj/review_state|python: wtool.getInfoFor(obj, 'review_state', '');
+                   obj_wf_state brain/review_state;
                    obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);" tal:attributes="class python: test(oddrow, 'even', 'odd')">
     <img src="#" tal:attributes="src brain/getIcon" />
     <a href="#" tal:content="brain/Title" tal:attributes="href brain/getPath;class obj_wf_state_class">Result title</a>
