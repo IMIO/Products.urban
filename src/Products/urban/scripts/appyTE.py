@@ -24,7 +24,7 @@ from com.sun.star.awt import XWindowListener
 from com.sun.star.awt import XMouseListener
 from com.sun.star.awt import FontDescriptor 
 
-configurl='http://svn.communesplone.org/svn/communesplone/urban/trunk/scripts/config.xml'
+configurl='http://svn.communesplone.org/svn/communesplone/Products.urban/trunk/src/Products/urban/scripts/config.xml'
 
 com_sun_star_awt_WindowAttribute_SHOW        = uno.getConstantByName( "com.sun.star.awt.WindowAttribute.SHOW" )
 com_sun_star_awt_WindowAttribute_FULLSIZE    = uno.getConstantByName( "com.sun.star.awt.WindowAttribute.FULLSIZE" )
