@@ -309,7 +309,7 @@ class UrbanBase(object):
         currentPath = '/'.join(self.getPhysicalPath())
         query = {'path': {'query': currentPath,
                           'depth': 1},
-                 'meta_type': 'UrbanEvent',
+                 'meta_type': ['UrbanEvent', 'UrbanEventInquiry'],
                  'sort_on': 'created',
                  'sort_order': 'descending'}
         if eventInterface is not None:

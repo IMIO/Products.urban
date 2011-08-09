@@ -21,6 +21,7 @@ import interfaces
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
+from Products.CMFCore.utils import getToolByName
 
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
@@ -194,8 +195,6 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         #we need to generate the title as the number of the inquiry is into it
         position = self._getSelfPosition()
         return translate('inquiry_title_and_number', 'urban', mapping={'number': position+1}, context=self.REQUEST)
-
-
 
 registerType(Inquiry, PROJECTNAME)
 # end of class Inquiry

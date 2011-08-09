@@ -141,6 +141,7 @@ urbanEventTypes = {
                     'podTemplates': (
                                      {'id': "urb-envoi-premier-dossier-rw", 'title': "Lettre d'envoi du premier dossier à la RW"},
                                      {'id': "urb-envoi-premier-dossier-art127-rw", 'title': "Lettre d'envoi du dossier (article 127) à la RW"},
+                                     {'id': "urb-form-envoi-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
                     },
@@ -173,6 +174,7 @@ urbanEventTypes = {
                     'podTemplates': (
                                      {'id': "urb-rapp-service", 'title': "Rapport du Service"},
                                      {'id': "urb-rapp-college", 'title': "Rapport du Collège"},
+                                     {'id': "urb-form-envoi-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
                     },
