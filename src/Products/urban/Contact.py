@@ -352,7 +352,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
           Returns the personTitle real value.  Usefull for being used in templates
         """
-        return self.displayValue(self.listPersonTitles(), self.getPersonTitle())
+        return self.displayValue(self.listPersonTitles(), self.getPersonTitle()).encode('UTF-8')
 
     security.declarePublic('getPersonTitle')
     def getPersonTitle(self, short=False):
