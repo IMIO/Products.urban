@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-08-01 08:34+0000\n"
+"POT-Creation-Date: 2011-08-11 09:29+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1428,6 +1428,11 @@ msgstr "Evénement"
 msgid "urban_label_licenceeventtypes"
 msgstr "Type d'événement"
 
+#. Default: "Linkedinquiry"
+#: linkedInquiry.py
+msgid "urban_label_linkedInquiry"
+msgstr "Enquête liée"
+
 #. Default: "Linked inquiry"
 #: urbaneventinquiryview.pt
 msgid "urban_label_linked_inquiry"
@@ -1857,6 +1862,11 @@ msgstr "Fichier gérant les signatures pour les modèles de document"
 #: UrbanTool.py
 msgid "urban_label_templateStatsINS"
 msgstr "Fichier modèle pour les statistiques INS"
+
+#. Default: "Templatestyles"
+#: UrbanTool.py
+msgid "urban_label_templateStyles"
+msgstr "Fichier gérant les styles utilisés dans les différents modèles de document"
 
 # UrbanVocabularyTerm
 #. Default: "Termkey"

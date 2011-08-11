@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-08-01 08:34+0000\n"
+"POT-Creation-Date: 2011-08-11 09:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,6 +163,9 @@ msgstr ""
 msgid "add_an_equipment"
 msgstr ""
 
+msgid "add_an_inquiry"
+msgstr ""
+
 msgid "add_event"
 msgstr ""
 
@@ -272,6 +275,11 @@ msgstr ""
 msgid "contact_recipients"
 msgstr ""
 
+#. Default: "Linked urban event inquiry"
+#: urban_macros.pt
+msgid "content_no_urbaneventinquiry"
+msgstr ""
+
 msgid "content_none"
 msgstr ""
 
@@ -362,12 +370,6 @@ msgid "environmentaldeclarations"
 msgstr ""
 
 msgid "event_data"
-msgstr ""
-
-msgid "inquiry_data"
-msgstr ""
-
-msgid "urban_linked_inquiry_help"
 msgstr ""
 
 msgid "event_linked_documents"
@@ -473,10 +475,16 @@ msgstr ""
 msgid "geometricians_folder_title"
 msgstr ""
 
+msgid "inquiry_data"
+msgstr ""
+
 msgid "inquiry_from"
 msgstr ""
 
 msgid "inquiry_item"
+msgstr ""
+
+msgid "inquiry_title_and_number"
 msgstr ""
 
 msgid "inquiry_to"
@@ -956,12 +964,7 @@ msgstr ""
 msgid "urban_label_activatedFields"
 msgstr ""
 
-#. Default: "ShowTitle"
-#: UrbanEventType.py
-msgid "urban_label_showTitle"
-msgstr ""
-
-#
+# 
 #. Default: "Adr1"
 #: RecipientCadastre.py
 msgid "urban_label_adr1"
@@ -1149,26 +1152,6 @@ msgstr ""
 #. Default: "Derogation"
 #: GenericLicence.py
 msgid "urban_label_derogation"
-msgstr ""
-
-#. Default: "Linked inquiry"
-#: urbaneventinquiryview.pt
-msgid "urban_label_linked_inquiry"
-msgstr ""
-
-#. Default: "Linked urban event inquiry"
-#: urban_macros.pt
-msgid "urban_linked_urbaneventinquiry"
-msgstr ""
-
-#. Default: "Linked urban event inquiry"
-#: urban_macros.pt
-msgid "urban_link_to_the_linked_urbaneventinquiry"
-msgstr ""
-
-#. Default: "Linked urban event inquiry"
-#: urban_macros.pt
-msgid "content_no_urbaneventinquiry"
 msgstr ""
 
 #. Default: "Derogationdetails"
@@ -1440,6 +1423,16 @@ msgstr ""
 #. Default: "Licenceeventtypes"
 #: LicenceEvent.py
 msgid "urban_label_licenceeventtypes"
+msgstr ""
+
+#. Default: "Linkedinquiry"
+#: linkedInquiry.py
+msgid "urban_label_linkedInquiry"
+msgstr ""
+
+#. Default: "Linked inquiry"
+#: urbaneventinquiryview.pt
+msgid "urban_label_linked_inquiry"
 msgstr ""
 
 #. Default: "Locality"
@@ -1725,6 +1718,11 @@ msgstr ""
 msgid "urban_label_section"
 msgstr ""
 
+#. Default: "ShowTitle"
+#: UrbanEventType.py
+msgid "urban_label_showTitle"
+msgstr ""
+
 #. Default: "Society"
 #: Contact.py
 msgid "urban_label_society"
@@ -1862,6 +1860,11 @@ msgstr ""
 msgid "urban_label_templateStatsINS"
 msgstr ""
 
+#. Default: "Templatestyles"
+#: UrbanTool.py
+msgid "urban_label_templateStyles"
+msgstr ""
+
 #. Default: "Termkey"
 #: UrbanVocabularyTerm.py
 msgid "urban_label_termKey"
@@ -1955,6 +1958,19 @@ msgstr ""
 #. Default: "Zipcode"
 #: Contact.py
 msgid "urban_label_zipcode"
+msgstr ""
+
+#. Default: "Linked urban event inquiry"
+#: urban_macros.pt
+msgid "urban_link_to_the_linked_urbaneventinquiry"
+msgstr ""
+
+msgid "urban_linked_inquiry_help"
+msgstr ""
+
+#. Default: "Linked urban event inquiry"
+#: urban_macros.pt
+msgid "urban_linked_urbaneventinquiry"
 msgstr ""
 
 #. Default: "There are currently no event added for this element"
@@ -2069,8 +2085,3 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
-msgid "inquiry_title_and_number"
-msgstr ""
-
-msgid "add_an_inquiry"
-msgstr ""

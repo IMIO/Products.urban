@@ -297,6 +297,15 @@ schema = Schema((
         storage=AttributeStorage(),
     ),
     FileField(
+        name='templateStyles',
+        widget=FileField._properties['widget'](
+            label='Templatestyles',
+            label_msgid='urban_label_templateStyles',
+            i18n_domain='urban',
+        ),
+        storage=AttributeStorage(),
+    ),
+    FileField(
         name='templateStatsINS',
         widget=FileField._properties['widget'](
             label='Templatestatsins',

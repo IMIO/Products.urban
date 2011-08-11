@@ -1035,7 +1035,8 @@ def addTestObjects(context):
                  'templateFooter':'footer.odt',
                  'templateReference':'reference.odt',
                  'templateSignatures':'signatures.odt',
-                 'templateStatsINS':'statsins.odt'
+                 'templateStyles':'styles.odt',
+                 'templateStatsINS':'statsins.odt',
                 }
 
     for attribname in gen_temp.keys():
