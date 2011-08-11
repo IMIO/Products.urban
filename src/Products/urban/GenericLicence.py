@@ -446,17 +446,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
     ##/code-section class-header
 
     # Methods
-    
-    def divideList (self, divider, list):
-        res = []
-        part = len(list)/divider
-        remain = len(list)%divider
-        for i in range(part):
-            res.append(list[i*divider:(i+1)*divider])
-        if remain > 0:
-            res.append(list[divider*part:divider*part+remain])
-        return tuple(res)
-            
 
     security.declarePublic('listFolderCategories')
     def listFolderCategories(self):
@@ -466,14 +455,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         urbantool = getToolByName(self,'portal_urban')
         return DisplayList(urbantool.listVocabulary('foldercategories', self))
 
-    security.declarePublic('templateListFolderCategories')
-    def templateListFolderCategories(self):
-        """
-          Return a list of folder categories from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return urbantool.listVocabulary('foldercategories', self)
-
     security.declarePublic('listRoadTypes')
     def listRoadTypes(self):
         """
@@ -481,14 +462,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         """
         urbantool = getToolByName(self,'portal_urban')
         return DisplayList(urbantool.listVocabulary('folderroadtypes', self))
-
-    security.declarePublic('templateListRoadTypes')
-    def templateListRoadTypes(self):
-        """
-          Return a list of road types from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return urbantool.listVocabulary('folderroadtypes', self)
 
     security.declarePublic('listRoadEquipments')
     def listRoadEquipments(self):
@@ -498,34 +471,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         urbantool = getToolByName(self,'portal_urban')
         return DisplayList(urbantool.listVocabulary('folderroadequipments', self))
 
-    security.declarePublic('templateListRoadEquipments')
-    def templateListRoadEquipments(self):
-        """
-          Return a list of road equipments from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return urbantool.listVocabulary('folderroadequipments', self)
-
-    def templateRoadEquipments(self, tup):
-        res = []
-        for pair in tup:
-            res.append(pair['road_equipment'])
-        return tuple(res)
-
-    def templateRoadEquipmentDetail(self, tup):
-        res = {}
-        for pair in tup:
-            res[pair['road_equipment']]=pair['road_equipment_details']
-        return res
-
-    security.declarePublic('templateListProtectedBuilding')
-    def templateListProtectedBuilding(self):
-        """
-          Return a list of protected buildings mode from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return urbantool.listVocabulary('folderprotectedbuildings', self)
-
     security.declarePublic('listProtectedBuilding')
     def listProtectedBuilding(self):
         """
@@ -534,15 +479,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         urbantool = getToolByName(self,'portal_urban')
         return DisplayList(urbantool.listVocabulary('folderprotectedbuildings', self))
 
-    security.declarePublic('templateZonesFullname')
-    def templateZonesFullname(self, abreviation):
-        urbantool = getToolByName(self,'portal_urban')
-        listVoc = urbantool.listVocabulary('folderzones', self)
-        for pair in listVoc:
-            if abreviation in pair:
-                return pair[1]
-        return ''
-
+    security.declarePublic('listZones')
     def listZones(self):
         """
           Return a list of zones from the config
@@ -566,14 +503,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         urbantool = getToolByName(self,'portal_urban')
         return DisplayList(urbantool.listVocabulary('folderroadcoatings', self))
 
-    def templateRoadCoatingFullname(self, abreviation):
-        urbantool = getToolByName(self,'portal_urban')
-        listV = urbantool.listVocabulary('folderroadcoatings', self)
-        for pair in listV:
-            if abreviation in pair:
-                return pair[1]
-        return ''
-
     security.declarePublic('listMakers')
     def listMakers(self):
         """
@@ -581,35 +510,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         """
         urbantool = getToolByName(self,'portal_urban')
         return DisplayList(urbantool.listVocabulary('foldermakers', self))
-
-    security.declarePublic('templateListMakers')
-    def templateListMakers(self):
-        """
-          Return a list of folder makers from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return urbantool.listVocabulary('foldermakers', self)
-
-    def templateOpinionGiverFullname(self, abreviation):
-        for pair in self.templateListMakers():
-            if abreviation in pair:
-                return pair[1]
-        return None
-
-    def templateAllOpinions(self):
-        all_opinions = list(self.getSolicitRoadOpinionsTo())
-        location_opinions = self.getSolicitLocationOpinionsTo()
-        inquiry = self.getLastInquiry()
-        inquiry_opinions = None
-        if inquiry is not None:
-            inquiry_opinions = inquiry.getLinkedInquiry().getSolicitOpinionsTo()
-        opinion_tank_list = [location_opinions, inquiry_opinions]
-        for opinion_tank in opinion_tank_list:
-            if opinion_tank is not None:
-                for opinion in opinion_tank:
-                    if opinion not in all_opinions:
-                        all_opinions.append(opinion)
-        return tuple(all_opinions) 
 
     security.declarePublic('listDelayToAnnonce')
     def listDelayToAnnonce(self):
@@ -642,10 +542,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         urbantool = getToolByName(self,'portal_urban')
         return DisplayList(urbantool.listVocabulary('derogations', self))
 
-    def templateListDerogations(self):
-        urbantool = getToolByName(self,'portal_urban')
-        return urbantool.listVocabulary('derogations', self)
-
     security.declarePublic('getDefaultReference')
     def getDefaultReference(self):
         """
@@ -663,6 +559,110 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         return DisplayList(urbantool.listVocabulary('pashs', self))
 
     # Manually created methods
+
+    def divideList (self, divider, list):
+        res = []
+        part = len(list)/divider
+        remain = len(list)%divider
+        for i in range(part):
+            res.append(list[i*divider:(i+1)*divider])
+        if remain > 0:
+            res.append(list[divider*part:divider*part+remain])
+        return tuple(res)
+
+    security.declarePublic('templateListFolderCategories')
+    def templateListFolderCategories(self):
+        """
+          Return a list of folder categories from the config
+        """
+        urbantool = getToolByName(self,'portal_urban')
+        return urbantool.listVocabulary('foldercategories', self)
+
+    security.declarePublic('templateListRoadTypes')
+    def templateListRoadTypes(self):
+        """
+          Return a list of road types from the config
+        """
+        urbantool = getToolByName(self,'portal_urban')
+        return urbantool.listVocabulary('folderroadtypes', self)
+
+    security.declarePublic('templateListRoadEquipments')
+    def templateListRoadEquipments(self):
+        """
+          Return a list of road equipments from the config
+        """
+        urbantool = getToolByName(self,'portal_urban')
+        return urbantool.listVocabulary('folderroadequipments', self)
+
+    def templateRoadEquipments(self, tup):
+        res = []
+        for pair in tup:
+            res.append(pair['road_equipment'])
+        return tuple(res)
+
+    def templateRoadEquipmentDetail(self, tup):
+        res = {}
+        for pair in tup:
+            res[pair['road_equipment']]=pair['road_equipment_details']
+        return res
+
+    security.declarePublic('templateListProtectedBuilding')
+    def templateListProtectedBuilding(self):
+        """
+          Return a list of protected buildings mode from the config
+        """
+        urbantool = getToolByName(self,'portal_urban')
+        return urbantool.listVocabulary('folderprotectedbuildings', self)
+
+    security.declarePublic('templateZonesFullname')
+    def templateZonesFullname(self, abreviation):
+        urbantool = getToolByName(self,'portal_urban')
+        listVoc = urbantool.listVocabulary('folderzones', self)
+        for pair in listVoc:
+            if abreviation in pair:
+                return pair[1]
+        return ''
+
+    def templateRoadCoatingFullname(self, abreviation):
+        urbantool = getToolByName(self,'portal_urban')
+        listV = urbantool.listVocabulary('folderroadcoatings', self)
+        for pair in listV:
+            if abreviation in pair:
+                return pair[1]
+        return ''
+
+    security.declarePublic('templateListMakers')
+    def templateListMakers(self):
+        """
+          Return a list of folder makers from the config
+        """
+        urbantool = getToolByName(self,'portal_urban')
+        return urbantool.listVocabulary('foldermakers', self)
+
+    def templateOpinionGiverFullname(self, abreviation):
+        for pair in self.templateListMakers():
+            if abreviation in pair:
+                return pair[1]
+        return None
+
+    def templateAllOpinions(self):
+        all_opinions = list(self.getSolicitRoadOpinionsTo())
+        location_opinions = self.getSolicitLocationOpinionsTo()
+        inquiry = self.getLastInquiry()
+        inquiry_opinions = None
+        if inquiry is not None:
+            inquiry_opinions = inquiry.getLinkedInquiry().getSolicitOpinionsTo()
+        opinion_tank_list = [location_opinions, inquiry_opinions]
+        for opinion_tank in opinion_tank_list:
+            if opinion_tank is not None:
+                for opinion in opinion_tank:
+                    if opinion not in all_opinions:
+                        all_opinions.append(opinion)
+        return tuple(all_opinions)
+
+    def templateListDerogations(self):
+        urbantool = getToolByName(self,'portal_urban')
+        return urbantool.listVocabulary('derogations', self)
 
     security.declarePublic('listCatchmentAreas')
     def listCatchmentAreas(self):
