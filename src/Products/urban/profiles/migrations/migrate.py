@@ -4,6 +4,10 @@ import logging
 from zope.i18n import translate as _
 from Acquisition import aq_base
 from Products.CMFPlone.utils import base_hasattr
+from Products.contentmigration.walker import CustomQueryWalker
+from Products.contentmigration.archetypes import InplaceATFolderMigrator
+from Products.urban.events.urbanEventInquiryEvents import setLinkedInquiry
+from Products.urban.events.urbanEventEvents import setEventTypeType, setCreationDate
 
 logger = logging.getLogger('urban: migrations')
 
@@ -40,7 +44,9 @@ def migrateToPlone4(context):
     migrateArchitectToContact(context)
     #Migration of contact type objects to provides specific interfaces
     migrateSpecificContactInterfaces(context)
-    
+    #Migration of UrbanEvents with id 'enquete-publique' to UrbanEventinquiry
+    migrationToUrbanEventInquiries(context)
+
 def migrateToReferenceDataGridField(context):
     """
       Migrate Declaration, Division, EnvironmentalDeclaration, UbranCertificateBase,
@@ -658,3 +664,41 @@ def migrateSpecificContactInterfaces(context):
         if not contact.__provides__(CONTACT_INTERFACES[brain.Type]):
             alsoProvides(contact, CONTACT_INTERFACES[brain.Type])
             contact.reindexObject(['object_provides'])
+
+class UrbanEventToUrbanEventInquiryMigrator(object, InplaceATFolderMigrator):
+    """
+      Migrate the UrbanEvent having an id of 'enquete-publique'
+      to UrbanEventInquiries
+    """
+    walker = CustomQueryWalker
+    src_meta_type = "UrbanEvent"
+    src_portal_type = "UrbanEvent"
+    dst_meta_type = "UrbanEventInquiry"
+    dst_portal_type = "UrbanEventInquiry"
+
+    def __init__(self, *args, **kwargs):
+        InplaceATFolderMigrator.__init__(self, *args, **kwargs)
+
+    def custom(self):
+        """
+          Events are not raised, we need to call them manually
+        """
+        setLinkedInquiry(self.new, '')
+        setEventTypeType(self.new, '')
+        setCreationDate(self.new, '')
+
+def migrationToUrbanEventInquiries(context):
+    """
+      Call UrbanEventToUrbanEventInquiryMigrator
+    """    
+    if isNoturbanMigrationsProfile(context): return
+
+    migrators = (UrbanEventToUrbanEventInquiryMigrator,)
+
+    portal = context.getSite()
+
+    #Run the migrations
+    for migrator in migrators:
+        walker = migrator.walker(portal, migrator, query={'id': 'enquete-publique'})
+        walker.go()
+

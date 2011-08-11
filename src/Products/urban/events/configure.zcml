@@ -32,6 +32,6 @@
               handler=".urbanEventEvents.setCreationDate"/>
   <subscriber for="..interfaces.IUrbanEventInquiry
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-              handler=".urbanEventInquiryEvents.onCreation" />
+              handler=".urbanEventInquiryEvents.setLinkedInquiry" />
 
 </configure>

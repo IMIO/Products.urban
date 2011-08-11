@@ -1,4 +1,4 @@
-def onCreation(ob, event):
+def setLinkedInquiry(ob, event):
     """
       After creation, link me to my Inquiry
     """
