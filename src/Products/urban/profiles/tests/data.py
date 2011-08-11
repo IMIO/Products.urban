@@ -22,19 +22,30 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
+                    'id': "avis-etude-incidence",
+                    'title': "Avis sur l'étude d'incidence",
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 15,
+                    'TALCondition': "python: here.getImpactStudy()",
+                    'podTemplates': (
+                                     {'id': "urb-avis-etude-incidence", 'title': "Avis sur l'étude d'incidence"},
+                                    ),
+                    },
+                    {
+                    'id': "fiche-recap",
+                    'title': "Fiche récapitulative",
+                    'deadLineDelay': 0,
+                    'activatedFields': ['eventDate', ],
+                    'podTemplates': (
+                                     {'id': "urb-fiche-recap", 'title': "Fiche récapitulative"},
+                                    ),
+                    },
+                    {
                     'id': "recepisse-art15-complement",
                     'title': "Récépissé d'un complément à une demande de permis (article 115)",
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 15,
                     'podTemplates': ({'id': "urb-recepisse-art115-complement", 'title': "Récépissé d'un complément à une demande de permis (article 115)"},),
-                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
-                    },
-                    {
-                    'id': "recepisse-article-116",
-                    'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)",
-                    'activatedFields': ['eventDate', ],
-                    'deadLineDelay': 15,
-                    'podTemplates': ({'id': "urb-recepisse-art116", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
@@ -67,16 +78,6 @@ urbanEventTypes = {
                     'TALCondition': "python: here.getLastAcknowledgment()",
                     'podTemplates': (
                                      {'id': "urb-demande-complements-art116-6", 'title': "Lettre au demandeur"},
-                                    ),
-                    },
-                    {
-                    'id': "avis-etude-incidence",
-                    'title': "Avis sur l'étude d'incidence",
-                    'activatedFields': ['eventDate', ],
-                    'deadLineDelay': 15,
-                    'TALCondition': "python: here.getImpactStudy()",
-                    'podTemplates': (
-                                     {'id': "urb-avis-etude-incidence", 'title': "Avis sur l'étude d'incidence"},
                                     ),
                     },
                     {
@@ -199,6 +200,14 @@ urbanEventTypes = {
                                     ),
                     },
                     {
+                    'id': "recepisse-article-116",
+                    'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)",
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 15,
+                    'podTemplates': ({'id': "urb-recepisse-art116", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
+                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+                    },
+                    {
                     'id': "delivrance-du-permis-octroi-ou-refus",
                     'title': "Délivrance du permis (octroi ou refus)",
                     'activatedFields': ['eventDate', 'decisionDate', 'decision'],
@@ -304,15 +313,6 @@ urbanEventTypes = {
                     'podTemplates': (
                                      {'id': "urb-enveloppes-dem", 'title': "Enveloppes demandeurs"},
                                      {'id': "urb-enveloppes-archi", 'title': "Enveloppes architectes"},
-                                    ),
-                    },
-                    {
-                    'id': "fiche-recap",
-                    'title': "Fiche récapitulative",
-                    'deadLineDelay': 0,
-                    'activatedFields': ['eventDate', ],
-                    'podTemplates': (
-                                     {'id': "urb-fiche-recap", 'title': "Fiche récapitulative"},
                                     ),
                     },
                     {
