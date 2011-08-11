@@ -15,6 +15,10 @@ def afterDelete(ob, event):
       the title of the others so we have something coherent as
       the number of the inquiry is in the title
     """
+    #be sure we are on a real Inquiry as some other types heritate from
+    #Inquiry and so implements the IInquiry interface
+    if not ob.portal_type == 'Inquiry':
+        return
     for inquiry in ob.getInquiries():
         inquiry.setTitle(inquiry.generateInquiryTitle())
         inquiry.reindexObject(idxs=('title',))
@@ -23,5 +27,9 @@ def setGeneratedTitle(ob, event):
     """
       Set my title
     """
+    #be sure we are on a real Inquiry as some other types heritate from
+    #Inquiry and so implements the IInquiry interface
+    if not ob.portal_type == 'Inquiry':
+        return
     ob.setTitle(ob.generateInquiryTitle())
     ob.reindexObject(idxs=('title',))
