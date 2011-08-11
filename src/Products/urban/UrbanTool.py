@@ -253,7 +253,7 @@ schema = Schema((
     ),
     BooleanField(
         name='useTabbing',
-        default=False,
+        default=True,
         widget=BooleanField._properties['widget'](
             label='Usetabbing',
             label_msgid='urban_label_useTabbing',
