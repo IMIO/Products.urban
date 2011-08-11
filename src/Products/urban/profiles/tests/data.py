@@ -337,6 +337,13 @@ urbanEventTypes = {
                     'podTemplates': ({'id': "urb-rappel-implantation-peb", 'title': "Rappel implantation et PEB"},),
                     },
                     {
+                    'id': "demande-irrecevable-art159",
+                    'title':"Demande irrecevable (article 159 bis)",
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 0,
+                    'podTemplates': ({'id': "urb-demande-irrecevable-art159", 'title': "Demande irrecevable (article 159 bis)"},),
+                    },
+                    {
                     'id': "divers",
                     'title':"Divers",
                     'showTitle':True, 
