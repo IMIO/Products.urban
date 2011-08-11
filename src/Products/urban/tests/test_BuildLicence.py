@@ -41,6 +41,11 @@ class TestBuildLicence(unittest.TestCase):
 
     def testGetAllOpinionRequests(self):
         self.assertEqual(self.buildLicence.getAllOpinionRequests(), [])
+        #we can add a 'demande-avis-swde' UrbanEvent if 'swde' is selected
+        #in the list solicitOpinionsTo
+        opinionsToSolicit = self.buildLicence.getSolicitOpinionsTo()
+        extraOpinion = ('belgacom',)
+        self.buildLicence.setSolicitOpinionsTo(opinionsToSolicit+extraOpinion)
         opinionRequest = createObject('UrbanEvent', 'demande-avis-belgacom', self.buildLicence)
         self.assertEqual(self.buildLicence.getAllOpinionRequests(), [opinionRequest])
 
