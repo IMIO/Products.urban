@@ -164,6 +164,7 @@ urbanEventTypes = {
                                      {'id': "urb-enq-accuse-reclamation", 'title': "Accusé de réception d'une réclamation"},
                                      {'id': "urb-enq-frais", 'title': "Frais d'enquête"},
                                      {'id': "urb-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},
+                                     {'id': "urb-enq-ordre-mission", 'title': "Ordre de mission "},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
                     },
