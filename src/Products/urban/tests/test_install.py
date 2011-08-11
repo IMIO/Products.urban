@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest2 as unittest
+from DateTime import DateTime
 from zope.component import createObject
 from zope.component.interface import interfaceToName
 from plone.app.testing import quickInstallProduct, login
@@ -41,6 +42,8 @@ class TestInstall(unittest.TestCase):
         login(portal, 'urbaneditor')
         buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
         licence = getattr(buildLicences, LICENCE_ID)
+        #'avis-etude-incidence' can only be added if it is defined on the licence
+        licence.setImpactStudy(True)
         createObject('UrbanEvent', 'avis-etude-incidence', licence)
 
     def testAcknowledgmentSearchByInterface(self):
@@ -64,7 +67,7 @@ class TestInstall(unittest.TestCase):
                              sort_on='sortable_title')
         self.assertEqual(len(eventTypes), 1)
 
-    def testInquerySearchByInterface(self):
+    def testInquirySearchByInterface(self):
         portal = self.layer['portal']
         urban = portal.urban
         buildLicences = urban.buildlicences
@@ -73,7 +76,12 @@ class TestInstall(unittest.TestCase):
         buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
         licence = getattr(buildLicences, LICENCE_ID)
         self.assertEqual(len(licence.objectValues('UrbanEvent')), 0)
-        urbanEvent = createObject('UrbanEvent', 'enquete-publique', licence)
+        #we can add an 'enquete-publique' UrbanEventInquiry if an Inquiry is defined
+        #so define an investigationStart date on the licence, this correspond to a first
+        #available inquiry
+        date = DateTime()
+        licence.setInvestigationStart(date)
+        urbanEvent = createObject('UrbanEventInquiry', 'enquete-publique', licence)
         self.failUnless(IInquiryEvent.providedBy(urbanEvent))
 
     def testOpinionRequestSearchByInterface(self):
@@ -85,6 +93,11 @@ class TestInstall(unittest.TestCase):
         buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
         licence = getattr(buildLicences, LICENCE_ID)
         self.assertEqual(len(licence.objectValues('UrbanEvent')), 0)
+        #we can add a 'demande-avis-swde' UrbanEvent if 'swde' is selected
+        #in the list solicitOpinionsTo
+        opinionsToSolicit = licence.getSolicitOpinionsTo()
+        extraOpinion = ('swde',)
+        licence.setSolicitOpinionsTo(opinionsToSolicit+extraOpinion)
         urbanEvent = createObject('UrbanEvent', 'demande-avis-swde', licence)
         self.failUnless(IOpinionRequestEvent.providedBy(urbanEvent))
 
