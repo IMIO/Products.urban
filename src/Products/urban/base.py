@@ -310,8 +310,7 @@ class UrbanBase(object):
         query = {'path': {'query': currentPath,
                           'depth': 1},
                  'meta_type': ['UrbanEvent', 'UrbanEventInquiry'],
-                 'sort_on': 'created',
-                 'sort_order': 'descending'}
+                 'sort_on': 'getObjPositionInParent'}
         if eventInterface is not None:
             interfaceName = interfaceToName(self, eventInterface)
             query['object_provides'] = interfaceName
@@ -320,7 +319,7 @@ class UrbanBase(object):
     def _getLastEvent(self, eventInterface=None):
         events = self._getAllEvents(eventInterface)
         if events:
-            return events[0]
+            return events[-1]
 
     security.declarePublic('attributeIsUsed')    
     def attributeIsUsed(self, name):
