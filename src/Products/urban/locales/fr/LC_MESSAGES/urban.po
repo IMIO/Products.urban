@@ -1019,6 +1019,11 @@ msgstr "Architecte(s)"
 msgid "urban_label_article"
 msgstr "Article"
 
+#. Default: "Auditiondate"
+#: UrbanEvent.py
+msgid "urban_label_auditionDate"
+msgstr "Date de la séance d'audition"
+
 #. Default: "Authorizationdate"
 #: ParcellingTerm.py
 msgid "urban_label_authorizationDate"

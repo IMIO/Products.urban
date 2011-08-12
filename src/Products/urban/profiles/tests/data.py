@@ -345,12 +345,25 @@ urbanEventTypes = {
                     'podTemplates': ({'id': "urb-demande-irrecevable-art159", 'title': "Demande irrecevable (article 159 bis)"},),
                     },
                     {
-                    'id': "divers",
-                    'title':"Divers",
-                    'showTitle':True, 
+                    'id': "demande-irrecevable-art159",
+                    'title':"Demande irrecevable (article 159 bis)",
                     'activatedFields': ['eventDate', ],
                     'deadLineDelay': 0,
-                    'podTemplates': ({'id': "blank", 'title': "Document type"},),
+                    'podTemplates': ({'id': "urb-demande-irrecevable-art159", 'title': "Demande irrecevable (article 159 bis)"},),
+                    },
+                    {
+                    'id': "recours-decision-au-conseil-etat",
+                    'title':"Recours du demandeur contre la décision au conseil d'état",
+                    'activatedFields': ['eventDate', 'auditionDate'],
+                    'deadLineDelay': 0,
+                    'podTemplates': (),
+                    },
+                    {
+                    'id': "recours-decision-au-gouvernement",
+                    'title':"Recours du demandeur contre la décision au gouvernement",
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 0,
+                    'podTemplates': (),
                     }
                    ),
                    'declaration':
