@@ -89,6 +89,13 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
             raise BeforeDeleteException, _('cannot_remove_urbaneventinquiry_notthelast', mapping={'lasturbaneventinquiryurl': lastUrbanEventInquiry.absolute_url()}, default="You can not delete an UrbanEventInquiry if it is not the last!  Remove the last UrbanEventInquiries before being able to remove this one!")
         BaseFolder.manage_beforeDelete(self, item, container)
 
+    security.declarePublic('getClaimants')
+    def getClaimants(self):
+        """
+          Return the claimants for this UrbanEventInquiry
+        """
+        return self.listFolderContents({'portal_type': 'Claimant'})
+
 
 
 registerType(UrbanEventInquiry, PROJECTNAME)
