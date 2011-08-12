@@ -31,6 +31,9 @@ msgstr "Permis d'urbanisme"
 msgid "City"
 msgstr "Localité"
 
+msgid "Claimant"
+msgstr "Réclamant"
+
 msgid "Contact"
 msgstr "Contact"
 

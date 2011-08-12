@@ -90,12 +90,16 @@ def postInstall(context):
     #add our own portal_types to portal_factory
     factory_tool = getToolByName(site, "portal_factory")
     alreadyRegTypes = factory_tool.getFactoryTypes()
-    alreadyRegTypes['Architect'] = 1
-    alreadyRegTypes['UrbanCertificateOne'] = 1
-    alreadyRegTypes['NotaryLetter'] = 1
-    alreadyRegTypes['Notary'] = 1
-    alreadyRegTypes['Proprietary'] = 1
-    alreadyRegTypes['Applicant'] = 1
+    typesToRegister = {
+                       'Architect': 1,
+                       'UrbanCertificateOne': 1,
+                       'NotaryLetter': 1,
+                       'Notary': 1,
+                       'Proprietary': 1,
+                       'Applicant': 1,
+                       'Claimant': 1,
+                       }
+    alreadyRegTypes.update(typesToRegister)
     factory_tool.manage_setPortalFactoryTypes(listOfTypeIds=alreadyRegTypes)
 
     #to be removed after deletion of class Architect

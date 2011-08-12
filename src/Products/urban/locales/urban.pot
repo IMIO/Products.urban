@@ -33,6 +33,9 @@ msgstr ""
 msgid "Architect data"
 msgstr ""
 
+msgid "Claimant data"
+msgstr ""
+
 msgid "BuildLicence"
 msgstr ""
 

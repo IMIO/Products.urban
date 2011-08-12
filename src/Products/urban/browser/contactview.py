@@ -16,8 +16,13 @@ class ContactView(BrowserView):
         context = aq_inner(self.context)
         #either the parent is in URBAN_TYPES
         parent = context.aq_inner.aq_parent
-        if parent.portal_type in URBAN_TYPES:
+        parent_portal_type = parent.portal_type
+        if parent_portal_type in URBAN_TYPES:
             return parent.absolute_url()
+        #or an UrbanEventInquiry
+        elif parent_portal_type == "UrbanEventInquiry":
+            grandparent = parent.aq_inner.aq_parent
+            return grandparent.absolute_url()
         #or we have a "came_from_licence_uid" in the REQUEST
         else:
             came_from_licence_uid = context.REQUEST.get('came_from_licence_uid', None)
@@ -34,7 +39,10 @@ class ContactView(BrowserView):
         """
         context = aq_inner(self.context)
         res = False
-        if context.aq_inner.aq_parent.portal_type in URBAN_TYPES:
+        #we can show the link back to the reference if we are on an URBAN_TYPES
+        #or on an UrbanEventInquiry (Claimants)
+        allowed_parent_types = URBAN_TYPES + ['UrbanEventInquiry',]
+        if context.aq_inner.aq_parent.portal_type in allowed_parent_types:
             res = True
         elif context.REQUEST.has_key('came_from_licence_uid'):
             came_from_licence_uid = context.REQUEST.get('came_from_licence_uid', None)

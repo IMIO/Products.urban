@@ -37,6 +37,9 @@ msgstr "Coordonnées de l'architecte"
 msgid "BuildLicence"
 msgstr "Permis d'urbanisme"
 
+msgid "Claimant data"
+msgstr "Coordonnées du réclamant"
+
 msgid "Close"
 msgstr "Clôturer le permis"
 
