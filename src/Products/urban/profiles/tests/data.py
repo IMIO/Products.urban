@@ -293,6 +293,7 @@ urbanEventTypes = {
                                      {'id': "urb-prorogation", 'title': "Délibération du Collège Communal concernant la prorogation du permis"},
                                      {'id': "urb-prorogation-transmis-refus", 'title': "Refus de prorogation (lettre au demandeur)"},
                                      {'id': "urb-prorogation-transmis-accept", 'title': "Acceptation de prorogation (lettre au demandeur)"},
+                                     {'id': "urb-prorogation-transmis-accept-fd", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
                                     ),
                     },
                     {
