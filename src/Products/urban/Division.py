@@ -177,7 +177,6 @@ class Division(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         """
         """
         pass
-
     security.declarePublic('getDefaultReference')
     def getDefaultReference(self):
         """

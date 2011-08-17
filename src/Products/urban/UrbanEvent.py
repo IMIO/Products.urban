@@ -183,18 +183,7 @@ schema = Schema((
         multiValued=0,
         relationship='UrbanEventType',
     ),
-    DateTimeField(
-        name='auditionDate',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            condition="python:here.attributeIsUsed('auditionDate')",
-            format="%d/%m/%Y",
-            label='Auditiondate',
-            label_msgid='urban_label_auditionDate',
-            i18n_domain='urban',
-        ),
-        optional=True,
-    ),
+
 ),
 )
 

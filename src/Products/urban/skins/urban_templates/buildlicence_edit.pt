@@ -47,6 +47,7 @@
              <metal:myfield use-macro="python:here.widget('implantation', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('roadAdaptation', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('roadTechnicalAdvice', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('solicitRoadOpinionsTo', mode='edit')" />
             </fieldset>
             <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_location">Location</legend></strong>
              <metal:myfield use-macro="python:here.widget('folderZone', mode='edit')" />
@@ -63,6 +64,7 @@
              <metal:myfield use-macro="python:here.widget('locationDgrneUnderground', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('locationTechnicalAdvice', mode='edit')" />
              <metal:myfield use-macro="python:here.widget('locationTechnicalConditions', mode='edit')" />
+             <metal:myfield use-macro="python:here.widget('solicitLocationOpinionsTo', mode='edit')" /> 
             </fieldset>
             <fieldset>
              <strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices">Investigation and advices</legend></strong>
