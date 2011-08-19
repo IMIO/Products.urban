@@ -160,6 +160,7 @@ schema = Schema((
     ),
     BooleanField(
         name='pebStudy',
+        default=False,
         widget=BooleanField._properties['widget'](
             label='Pebstudy',
             label_msgid='urban_label_pebStudy',
