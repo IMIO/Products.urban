@@ -138,9 +138,9 @@ schema = Schema((
     DateTimeField(
         name='explanationsDate',
         widget=DateTimeField._properties['widget'](
-            show_hm=False,
+            show_hm=True,
             condition="python:here.attributeIsUsed('explanationsDate')",
-            format="%d/%m/%Y",
+            format="%d/%m/%Y%H",
             label='Explanationsdate',
             label_msgid='urban_label_explanationsDate',
             i18n_domain='urban',
@@ -150,9 +150,9 @@ schema = Schema((
     DateTimeField(
         name='claimsDate',
         widget=DateTimeField._properties['widget'](
-            show_hm=False,
+            show_hm=True,
             condition="python:here.attributeIsUsed('claimsDate')",
-            format="%d/%m/%Y",
+            format="%d/%m/%Y%H",
             label='Claimsdate',
             label_msgid='urban_label_claimsDate',
             i18n_domain='urban',

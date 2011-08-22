@@ -166,6 +166,7 @@ urbanEventTypes = {
                                      {'id': "urb-enq-pv-clot", 'title': "PV de clôture enquête"},
                                      {'id': "urb-enq-frais", 'title': "Frais d'enquête"},
                                      {'id': "urb-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},
+                                     {'id': "urb-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
                     },
