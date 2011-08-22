@@ -153,6 +153,9 @@ msgstr ""
 msgid "add_a_lot"
 msgstr ""
 
+msgid "add_a_claimant"
+msgstr ""
+
 msgid "add_a_proprietary"
 msgstr ""
 
@@ -376,6 +379,9 @@ msgid "event_data"
 msgstr ""
 
 msgid "event_linked_documents"
+msgstr ""
+
+msgid "event_inquiry_claimants"
 msgstr ""
 
 #. Default: "Far prevention area"

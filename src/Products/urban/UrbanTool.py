@@ -1500,6 +1500,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if specificSearch == 'searchUrbanEvents':
             #search the existing urbanEvents
             res = portal_catalog(portal_type=('UrbanEvent', 'UrbanEventInquiry',), path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')
+        elif specificSearch == 'searchClaimants':
+            #search the existing claimants
+            res = portal_catalog(portal_type='Claimant', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')
         elif specificSearch == 'searchRecipients':
             #search the existing recipients
             res = portal_catalog(portal_type='RecipientCadastre', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')

@@ -151,6 +151,9 @@ msgstr "Ajouter un Certificat d'Urbanisme 2"
 msgid "add_WorkLocation"
 msgstr "Ajouter une adresse"
 
+msgid "add_a_claimant"
+msgstr "Ajouter un réclamant"
+
 msgid "add_a_lot"
 msgstr "Ajouter un lot"
 
@@ -375,6 +378,9 @@ msgstr "Déclarations environnementales"
 
 msgid "event_data"
 msgstr "Données concernant l'événement"
+
+msgid "event_inquiry_claimants"
+msgstr "Réclamants"
 
 msgid "event_linked_documents"
 msgstr "Documents liés à cet événement"
@@ -1018,11 +1024,6 @@ msgstr "Architecte(s)"
 #: Declaration.py
 msgid "urban_label_article"
 msgstr "Article"
-
-#. Default: "Auditiondate"
-#: UrbanEvent.py
-msgid "urban_label_auditionDate"
-msgstr "Date de la séance d'audition"
 
 #. Default: "Authorizationdate"
 #: ParcellingTerm.py

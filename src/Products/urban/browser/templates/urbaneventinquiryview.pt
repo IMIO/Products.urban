@@ -81,6 +81,29 @@
          <metal:listing use-macro="here/urban_macros/macros/listing" />
         </div>
         </fieldset>
+        <fieldset><strong><legend i18n:translate="event_inquiry_claimants">Claimants</legend><strong>
+        <form tal:condition="python: member.has_permission('urban: Add Contact', context)"
+              tal:define="ctype python: context.portal_types.getTypeInfo('Claimant');
+                          member context/@@plone_portal_state/member;"
+              i18n:domain="urban"
+              name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'"
+              action="createObject" method="post">
+         <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description"
+              i18n:attributes="title" />
+         <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+         <input type="submit" class="context" id="event" value="add_a_claimant" i18n:attributes="value" />
+         <br /><br />
+        </form>
+        <div tal:define="specificSearch python: 'searchClaimants';
+                         tool python: context.portal_urban;
+                         showedCols python: ('Title', 'created', 'Creator', );
+                         topic python: None;
+                         showActions python: True;
+                         theObjects python: False;
+                         batchlen python: 20">
+         <metal:listing use-macro="here/urban_macros/macros/listing" />
+        </div>
+        </fieldset>
         </td>
     </tr>
 </table>
