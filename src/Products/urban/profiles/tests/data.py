@@ -224,6 +224,7 @@ urbanEventTypes = {
                     'podTemplates': (
                                      {'id': "urb-decision-octroi-dem", 'title': "Octroi du permis (lettre au demandeur)"},
                                      {'id': "urb-decision-octroi-rw", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
+                                     {'id': "urb-decision-octroi-transmis-reclamants", 'title': "Octroi du permis (transmis aux réclamants)"},
                                      {'id': "urb-decision-stats-mod3", 'title': "Statistiques modèle 3"},
                                      {'id': "urb-decision-formulaire-a", 'title': "Annexe 30 - Formulaire A"},
                                      {'id': "urb-decision-egout-travaux", 'title': "Demande de raccordement aux égouts avec travaux (formulaire à remplir par le demandeur)"},
