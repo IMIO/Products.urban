@@ -1035,7 +1035,7 @@ def addTestObjects(context):
     addUrbanEventTypes(context)
 
     #add some generic templates in configuration
-    gen_temp = { 'templateHeader':'header.odt',
+    gen_templates = { 'templateHeader':'header.odt',
                  'templateFooter':'footer.odt',
                  'templateReference':'reference.odt',
                  'templateSignatures':'signatures.odt',
@@ -1043,18 +1043,18 @@ def addTestObjects(context):
                  'templateStatsINS':'statsins.odt',
                 }
 
-    for attribname in gen_temp.keys():
+    for attribname in gen_templates.keys():
         try:
             fld = tool.getField(attribname)
-            if not fld.getAccessor(tool)().size:
-                filePath = '%s/templates/%s' % (context._profile_path, gen_temp[attribname])
+            if not fld.getAccessor(tool)():
+                filePath = '%s/templates/%s' % (context._profile_path, gen_templates[attribname])
                 fileDescr = file(filePath, 'rb')
                 fileContent = fileDescr.read()
                 fld.getMutator(tool)(fileContent)
                 fileDescr.close()
                 fld.setContentType(tool, "application/vnd.oasis.opendocument.text")
-                fld.setFilename(tool, gen_temp[attribname])
-                logger.info("Generic template '%s' added: '%s'"%(attribname, gen_temp[attribname]))
+                fld.setFilename(tool, gen_templates[attribname])
+                logger.info("Generic template '%s' added: '%s'"%(attribname, gen_templates[attribname]))
         except IOError, msg:
             logger.error("Cannot open the file '%s': %s" %(filePath, msg))
         except Exception, msg:
