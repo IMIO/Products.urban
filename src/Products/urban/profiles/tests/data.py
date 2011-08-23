@@ -200,6 +200,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'podTemplates': (
                                      #{'id': "urb-conseil-communal", 'title': "Délibération passée au Conseil Communal"},
+                                     {'id': "urb-conseil-delib-college", 'title': "Délibération passée au collège"},
                                     ),
                     },
                     {
