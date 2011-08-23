@@ -38,13 +38,11 @@ schema = Schema((
         default=DateTime(),
         widget=DateTimeField._properties['widget'](
             show_hm=False,
-            condition="python:here.attributeIsUsed('eventDate')",
             format="%d/%m/%Y",
             label='Eventdate',
             label_msgid='urban_label_eventDate',
             i18n_domain='urban',
         ),
-        optional=True,
     ),
     DateTimeField(
         name='receiptDate',

@@ -111,6 +111,7 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
         return toreturn
 
 
+
 registerType(UrbanEventInquiry, PROJECTNAME)
 # end of class UrbanEventInquiry
 

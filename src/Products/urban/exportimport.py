@@ -4,7 +4,6 @@ import logging
 logger = logging.getLogger('urban: setuphandlers')
 import hashlib
 
-
 def addUrbanEventTypes(context):
     """
       Helper method for easily adding urbanEventTypes

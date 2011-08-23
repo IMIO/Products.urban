@@ -46,6 +46,8 @@ def migrateToPlone4(context):
     migrateSpecificContactInterfaces(context)
     #Migration of UrbanEvents with id 'enquete-publique' to UrbanEventinquiry
     migrationToUrbanEventInquiries(context)
+    #remove 'eventDate' from UrbanEventType.activatedFields
+    migrateUrbanEventTypes(context)
 
 def migrateToReferenceDataGridField(context):
     """
@@ -260,7 +262,9 @@ def migrateBuildLicencesInvestigationArticles(context):
 
 def migrateUrbanEventTypes(context):
     """
-      Migrate the UrbanEventTypes as the urbanType attribute has been removed
+      Migrate the UrbanEventTypes :
+      - remove the 'urbanType' attribute
+      - remove 'eventDate' from activatedFields if needed
     """
     if isNoturbanMigrationsProfile(context): return
 
@@ -273,11 +277,14 @@ def migrateUrbanEventTypes(context):
         obj = brain.getObject()
         #in case we run this script several time, check that the current
         #BuildLicence has not already been converted
-        if not hasattr(obj, 'urbanType'):
-            continue
-        #else, proceed and remove no more used attributes
-        delattr(obj, 'urbanType')
-        logger.info('The urbanType attribute has been removed from %s' % portal_url.getRelativeUrl(obj))
+        if hasattr(obj, 'urbanType'):
+            delattr(obj, 'urbanType')
+            logger.info("The 'urbanType' attribute has been removed from %s" % portal_url.getRelativeUrl(obj))
+        activatedFields = list(obj.getActivatedFields())
+        if 'eventDate' in activatedFields:
+            activatedFields.remove('eventDate')
+            obj.setActivatedFields(activatedFields)
+            logger.info("'eventDate' has been removed from the activatedFields of %s" % portal_url.getRelativeUrl(obj))
 
 def addEquipmentTypes(context):
     """

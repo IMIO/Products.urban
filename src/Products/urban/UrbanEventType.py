@@ -45,6 +45,16 @@ schema = Schema((
         ),
     ),
     StringField(
+        name='eventDateLabel',
+        default='Date',
+        widget=StringField._properties['widget'](
+            label='Eventdatelabel',
+            label_msgid='urban_label_eventDateLabel',
+            i18n_domain='urban',
+        ),
+        required=True,
+    ),
+    StringField(
         name='activatedFields',
         widget=InAndOutWidget(
             label='Activatedfields',

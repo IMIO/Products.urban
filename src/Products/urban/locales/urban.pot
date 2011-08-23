@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-08-11 09:29+0000\n"
+"POT-Creation-Date: 2011-08-23 10:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,10 +33,10 @@ msgstr ""
 msgid "Architect data"
 msgstr ""
 
-msgid "Claimant data"
+msgid "BuildLicence"
 msgstr ""
 
-msgid "BuildLicence"
+msgid "Claimant data"
 msgstr ""
 
 msgid "Close"
@@ -150,10 +150,10 @@ msgstr ""
 msgid "add_WorkLocation"
 msgstr ""
 
-msgid "add_a_lot"
+msgid "add_a_claimant"
 msgstr ""
 
-msgid "add_a_claimant"
+msgid "add_a_lot"
 msgstr ""
 
 msgid "add_a_proprietary"
@@ -211,6 +211,9 @@ msgid "architects_folder_title"
 msgstr ""
 
 msgid "articles_folder_title"
+msgstr ""
+
+msgid "at_hour"
 msgstr ""
 
 msgid "back_to_licence"
@@ -293,9 +296,6 @@ msgid "create"
 msgstr ""
 
 msgid "date_day_01"
-msgstr ""
-
-msgid "at_hour"
 msgstr ""
 
 msgid "decisions_folder_title"
@@ -381,10 +381,10 @@ msgstr ""
 msgid "event_data"
 msgstr ""
 
-msgid "event_linked_documents"
+msgid "event_inquiry_claimants"
 msgstr ""
 
-msgid "event_inquiry_claimants"
+msgid "event_linked_documents"
 msgstr ""
 
 #. Default: "Far prevention area"
@@ -1027,6 +1027,11 @@ msgstr ""
 msgid "urban_label_article"
 msgstr ""
 
+#. Default: "Auditiondate"
+#: UrbanEvent.py
+msgid "urban_label_auditionDate"
+msgstr ""
+
 #. Default: "Authorizationdate"
 #: ParcellingTerm.py
 msgid "urban_label_authorizationDate"
@@ -1210,6 +1215,11 @@ msgstr ""
 #. Default: "Eventdate"
 #: UrbanEvent.py
 msgid "urban_label_eventDate"
+msgstr ""
+
+#. Default: "Eventdatelabel"
+#: UrbanEventType.py
+msgid "urban_label_eventDateLabel"
 msgstr ""
 
 #. Default: "Destinataire"
