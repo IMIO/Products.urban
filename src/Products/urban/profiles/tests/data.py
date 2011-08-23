@@ -16,6 +16,7 @@ urbanEventTypes = {
                     {
                     'id': "depot-de-la-demande",
                     'title': "Dépôt de la demande (récépissé - article 115)",
+                    'eventDateLabel': "Date de dépôt",
                     'activatedFields': [],
                     'deadLineDelay': 15,
                     'podTemplates': ({'id': "urb-recepisse", 'title': "Récépissé de la demande (article 115)"},),
