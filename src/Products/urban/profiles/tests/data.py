@@ -201,8 +201,9 @@ urbanEventTypes = {
                     'activatedFields': [],
                     'deadLineDelay': 15,
                     'podTemplates': (
-                                     #{'id': "urb-conseil-communal", 'title': "Délibération passée au Conseil Communal"},
                                      {'id': "urb-conseil-delib-college", 'title': "Délibération passée au collège"},
+                                     {'id': "urb-conseil-delib-communale-creation", 'title': "Délibération du conseil communal (ouverture de voirie)"},
+                                     {'id': "urb-conseil-delib-communale-modif", 'title': "Délibération du conseil communal (modification de voirie)"},
                                     ),
                     },
                     {
