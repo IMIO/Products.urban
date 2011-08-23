@@ -295,6 +295,9 @@ msgstr ""
 msgid "date_day_01"
 msgstr ""
 
+msgid "at_hour"
+msgstr ""
+
 msgid "decisions_folder_title"
 msgstr ""
 

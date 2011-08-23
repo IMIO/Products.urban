@@ -214,6 +214,9 @@ msgstr "Architectes"
 msgid "articles_folder_title"
 msgstr "Articles"
 
+msgid "at_hour"
+msgstr "à ${hour}"
+
 msgid "back_to_licence"
 msgstr "Retour au permis"
 
