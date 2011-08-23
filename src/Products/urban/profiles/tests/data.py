@@ -229,6 +229,7 @@ urbanEventTypes = {
                                      {'id': "urb-decision-egout-travaux", 'title': "Demande de raccordement aux égouts avec travaux (formulaire à remplir par le demandeur)"},
                                      {'id': "urb-decision-frais", 'title': "Ventilation des frais"},
                                      {'id': "urb-debut-travaux", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
+                                     {'id': "urb-decision-deliberation-college", 'title': "Delibération du collège d'octroi du permis"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
                     },
