@@ -5,7 +5,7 @@ urbanEventTypes = {
                     {
                     'id': "fiche-technique-voirie",
                     'title': "Fiche technique voirie",
-                    'activatedFields': ['eventDate', ],
+                    'activatedFields': [],
                     'deadLineDelay': 0,
                     'TALCondition' : "",
                     'podTemplates': (
@@ -15,7 +15,7 @@ urbanEventTypes = {
                     {
                     'id': "fiche-technique-energie",
                     'title': "Fiche technique conseiller en énergie",
-                    'activatedFields': ['eventDate', ],
+                    'activatedFields': [],
                     'deadLineDelay': 0,
                     'TALCondition' : "",
                     'podTemplates': (
@@ -25,7 +25,7 @@ urbanEventTypes = {
                     {
                     'id': "fiche-technique-urbanisme",
                     'title': "Fiche technique urbanisme",
-                    'activatedFields': ['eventDate', ],
+                    'activatedFields': [],
                     'deadLineDelay': 0,
                     'TALCondition' : "",
                     'podTemplates': (
@@ -33,13 +33,15 @@ urbanEventTypes = {
                                     ),
                     },
                     {
-                    'id': "dossier-incomplet-service-technique-voirie",
-                    'title': "Dossier incomplet du service technique voirie",
-                    'activatedFields': ['eventDate', ],
+                    'id': "dossier-incomplet",
+                    'title': "Dossier incomplet (avec documents 'Dossier à compléter' services techniques)",
+                    'activatedFields': [],
                     'deadLineDelay': 0,
                     'TALCondition' : "",
                     'podTemplates': (
+                                     {'id': "urb-dossier-incomplet-demandeur", 'title': "Dossier incomplet (lettre demandeur)"},
                                      {'id': "urb-dossier-incomplet-technique-voirie", 'title': "Dossier incomplet (service voirie)"},
+                                     {'id': "urb-dossier-incomplet-pieces-manquantes", 'title': "Dossier incomplet (relevé de pièces manquantes)"},
                                     ),
                     },
                    ),
