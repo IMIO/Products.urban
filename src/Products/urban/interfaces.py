@@ -4,6 +4,8 @@ from zope.interface import Interface
 
 ##code-section HEAD
 from zope.interface.interfaces import IInterface
+
+from Products.Archetypes.interfaces import IVocabulary
 from Products.urban import UrbanMessage as _
 
 
@@ -217,5 +219,13 @@ class IWorkBeginningEvent(Interface):
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase
     """
+
+class IReferenceableVocabulary(IVocabulary):
+    """vocabulary used in referenceintegrity"""
+
+    def getObjectsSet(content_instance, values):
+        """returns the set of objects corresponding to the values"""
+
+
 
 ##/code-section FOOT

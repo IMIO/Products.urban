@@ -25,7 +25,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-    
+
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -347,7 +347,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def __init__(self, id=None):
         OrderedBaseFolder.__init__(self,'portal_urban')
         self.setTitle('Urban configuration')
-        
+
         ##code-section constructor-footer #fill in your manual code here
         ##/code-section constructor-footer
 
@@ -355,7 +355,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     # tool should not appear in portal_catalog
     def at_post_edit_script(self):
         self.unindexObject()
-        
+
         ##code-section post-edit-method-footer #fill in your manual code here
         self.checkDBConnection()
         ##/code-section post-edit-method-footer
@@ -485,8 +485,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         self.REQUEST.set('doc_uid',newUrbanDoc.UID())
         response.redirect(urbanEventObj.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
 
-    security.declarePublic('listVocabulary')
-    def listVocabulary(self, vocToReturn, context, vocType="UrbanVocabularyTerm", inUrbanConfig=True):
+    security.declarePrivate('listVocabularyBrains')
+    def listVocabularyBrains(self, vocToReturn, context, vocType="UrbanVocabularyTerm", inUrbanConfig=True):
         """
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
@@ -497,10 +497,29 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         else:
             vocPath = "%s/%s" % ('/'.join(self.getPhysicalPath()), vocToReturn)
         brains = self.portal_catalog(path=vocPath, sort_on="getObjPositionInParent", portal_type=vocType, review_state='enabled')
+        return brains
+
+    security.declarePublic('listVocabulary')
+    def listVocabulary(self, vocToReturn, context, vocType="UrbanVocabularyTerm", inUrbanConfig=True):
+        """
+           This return a list of elements that is used as a vocabulary
+           by some fields of differents classes
+        """
+        brains = self.listVocabularyBrains(vocToReturn, context, vocType,
+                inUrbanConfig)
         res=[]
         for brain in brains:
             res.append((brain.id,(brain.Title).decode('utf-8')))
         return tuple(res)
+
+    security.declarePrivate('listVocabularyObjects')
+    def listVocabularyObjects(self, vocToReturn, context, vocType="UrbanVocabularyTerm", inUrbanConfig=True):
+        brains = self.listVocabularyBrains(vocToReturn, context, vocType,
+                inUrbanConfig)
+        res={}
+        for brain in brains:
+            res[brain.id] = brain.getObject()
+        return res
 
     security.declarePublic('checkPermission')
     def checkPermission(self, permission, obj):
@@ -1538,4 +1557,3 @@ registerType(UrbanTool, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

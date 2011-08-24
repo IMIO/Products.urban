@@ -23,6 +23,8 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.CMFCore.utils import getToolByName
+from Products.urban.interfaces import IReferenceableVocabulary
 ##/code-section module-header
 
 schema = Schema((
@@ -95,5 +97,29 @@ registerType(UrbanVocabularyTerm, PROJECTNAME)
 # end of class UrbanVocabularyTerm
 
 ##code-section module-footer #fill in your manual code here
-##/code-section module-footer
+class UrbanVocabulary(object):
 
+    implements(IReferenceableVocabulary)
+
+    def __init__(self, path):
+        self.path = path
+
+    def getDisplayList(self, content_instance):
+        portal_urban = getToolByName(content_instance, 'portal_urban')
+        result = DisplayList(portal_urban.listVocabulary(self.path,
+            content_instance))
+        return result
+
+    def getObjectsSet(self, content_instance, values):
+        if isinstance(values, str):
+            values = (values,)
+        portal_urban = getToolByName(content_instance, 'portal_urban')
+        objects = portal_urban.listVocabularyObjects(self.path, content_instance)
+        result = set()
+        for value in values:
+            obj = objects.get(value, None)
+            if obj is not None:
+                result.add(obj)
+        return result
+
+##/code-section module-footer

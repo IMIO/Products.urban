@@ -68,6 +68,17 @@
 
 
   <!-- ##code-section configure.zcml -->
+
+  <subscriber
+    for="Products.Archetypes.interfaces.IBaseObject
+         zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+    handler=".handlers.modifiedArchetype" />
+
+  <subscriber
+    for="Products.Archetypes.interfaces.IBaseObject
+         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".handlers.modifiedArchetype" />
+
   <!-- ##/code-section configure.zcml -->
 
 </configure>

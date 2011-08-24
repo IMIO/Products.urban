@@ -13,7 +13,7 @@
         <element>recipients</element>
         <element>street</element>
         <element>Street</element>
-        <element>UrbanEventType</element>
+        <element>referenceableVocabularyTerm</element>
     </value>
   </records>
 </registry>

@@ -39,6 +39,7 @@ from Products.urban.base import UrbanBase
 from Products.urban.utils import technicalRemarksDefaultValue, \
 equipmentAndRoadRequirementsDefaultValue
 from Products.urban.utils import setOptionalAttributes
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 optional_fields = ['missingPartsDetails','folderZoneDetails','derogationDetails','annoncedDelayDetails','roadType','roadCoating','roadEquipments','protectedBuildingDetails','investigationDetails','investigationReasons','pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks','pca','SSC','RCU','floodingLevel','solicitRoadOpinionsTo' ]
 ##/code-section module-header
@@ -96,7 +97,7 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         schemata='urban_description',
-        vocabulary='listFolderCategories',
+        vocabulary=UrbanVocabulary('foldercategories'),
     ),
     LinesField(
         name='missingParts',
@@ -900,4 +901,3 @@ registerType(GenericLicence, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-
