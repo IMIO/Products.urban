@@ -20,7 +20,10 @@
 <metal:main_macro define-macro="main">
 <metal:body define-macro="body_macro" tal:define="recipients context/getRecipients;
                                                   linkedUrbanEventType context/getUrbaneventtypes">
-<h1 class="documentFirstHeading" tal:content="here/Title"/>
+<h1 class="documentFirstHeading">
+ <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
+ <span tal:replace="here/Title" tal:omit-tag="">Title</span>
+</h1>
 <div tal:replace="structure provider:plone.belowcontenttitle" />
 
 <tal:comment replace="nothing">Back to the build licence...</tal:comment>
