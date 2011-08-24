@@ -48,6 +48,8 @@ def migrateToPlone4(context):
     migrationToUrbanEventInquiries(context)
     #remove 'eventDate' from UrbanEventType.activatedFields
     migrateUrbanEventTypes(context)
+    #Add md5Signature and profileName properties for each template
+    addMd5SignatureAndProfileNameProperties(context)
 
 def migrateToReferenceDataGridField(context):
     """
@@ -709,3 +711,34 @@ def migrationToUrbanEventInquiries(context):
         walker = migrator.walker(portal, migrator, query={'id': 'enquete-publique'})
         walker.go()
 
+def addMd5SignatureAndProfileNameProperties(context):
+    """
+      Add md5Signature and profileName properties for each template if not exist
+    """
+    portal = context.getSite()
+    tool = getToolByName(portal, 'portal_urban')    
+    try:
+        #uetFolder = getattr(tool.getUrbanConfig(None, urbanConfigId=None), "urbaneventtypes")
+        blFolder = getattr(tool, 'buildlicence')
+        uetFolder = getattr(blFolder,'urbaneventtypes')
+    except AttributeError:
+        #if we can not get the urbaneventtypes folder, we pass ...
+        logger.warn("An error occured while trying to get the urbaneventtypes in urbanConfig")
+        return
+    import hashlib
+    # for each urbanEventType
+    for objid in uetFolder.objectIds():
+        uet = getattr(uetFolder, objid)
+        # for each template in this urbanEventType
+        for templateid in uet:
+            fileTemplate=getattr(uet,templateid,None)
+            if fileTemplate:
+                dictProperties=dict(fileTemplate.propertyItems())
+                #add properties if not exist
+                if not dictProperties.has_key("md5Signature"):
+                    md5 = hashlib.md5(fileTemplate.data)
+                    md5Signature=md5.digest()
+                    fileTemplate.manage_addProperty("md5Signature",md5Signature,"string")
+                if not dictProperties.has_key("profileName"):
+                    fileTemplate.manage_addProperty("profileName","tests","string")
+                fileTemplate.reindexObject()

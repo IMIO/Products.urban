@@ -55,17 +55,17 @@ def addUrbanEventTypes(context):
                     #if file exist, we must verify some conditions before update template
                     if fileTemplate:
                         profileNamePlone=fileTemplate.getProperty("profileName")
-                        #don't modify ANY templates if
+                        #don't modify this templates if
                         #   1. executing profile is tests and profile in use isn't tests
                         #   2. executing profile is 'xxx' and profile in use is 'yyy'
                         if profileNamePlone!="tests" and (profile_name != profileNamePlone or profile_name == "tests"):
-                            break
+                            continue
                         #get the md5 in property of current template
                         md5SignatureProperty=fileTemplate.getProperty("md5Signature")
                         #calculate the md5 for current template
                         md5 = hashlib.md5(fileTemplate.data)
                         md5SignaturePlone=md5.digest()
-                        #don't modify THIS template if
+                        #don't modify this template if
                         #   1. current template was manually modified by user
                         #   2. the new template is the same that the current
                         if md5SignaturePlone!=md5SignatureProperty or md5SignatureFS == md5SignaturePlone:

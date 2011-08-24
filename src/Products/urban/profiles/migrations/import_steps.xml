@@ -120,4 +120,11 @@
     version="2011-08-09T11:30:00.0">
     Migrate the UrbanEvent having an id of 'enquete-publique' to UrbanEventInquiries
  </import-step>
+ <import-step
+    id="urban-addMd5SignatureAndProfileNameProperties"
+    handler="Products.urban.profiles.migrations.migrate.addMd5SignatureAndProfileNameProperties"
+    title="Add md5Signature and profileName properties for each template"
+    version="2011-08-24T11:00.0">
+    Add md5Signature and profileName properties for each template
+ </import-step>
 </import-steps>
