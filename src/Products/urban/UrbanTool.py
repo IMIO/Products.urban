@@ -430,30 +430,34 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         except:
             collegesubmissionobj=None
         templateHeader = self.getTemplateHeader()
-        if templateHeader:
+        if templateHeader and templateHeader.size:
             templateHeader = StringIO(templateHeader)
             #we render the template so pod instructions into the header template are rendered too
             renderer = appy.pod.renderer.Renderer(templateHeader, {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameHeader, pythonWithUnoPath=self.getUnoEnabledPython())
             renderer.run()
         templateFooter = self.getTemplateFooter()
-        if templateFooter:
+        if templateFooter and templateFooter.size:
             templateFooter = StringIO(templateFooter)
             #we render the template so pod instructions into the header template are rendered too
             renderer = appy.pod.renderer.Renderer(templateFooter, {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameFooter, pythonWithUnoPath=self.getUnoEnabledPython())
             renderer.run()
         templateReference = self.getTemplateReference()
-        if templateReference:
+        if templateReference and templateReference.size:
             templateReference = StringIO(templateReference)
             #we render the template so pod instructions into the header template are rendered too
             renderer = appy.pod.renderer.Renderer(templateReference, {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameReference, pythonWithUnoPath=self.getUnoEnabledPython())
             renderer.run()
         templateSignatures = self.getTemplateSignatures()
-        if templateSignatures:
+        if templateSignatures and templateSignatures.size:
             templateSignatures = StringIO(templateSignatures)
             #we render the template so pod instructions into the header template are rendered too
             renderer = appy.pod.renderer.Renderer(templateSignatures, {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameSignatures, pythonWithUnoPath=self.getUnoEnabledPython())
             renderer.run()
         #now that header and footer are rendered, we can use them in the main pod template and render the entire document
+        #we prepare the styles template
+        templateStyles = self.getTemplateStyles()
+        if templateStyles and templateStyles.size:
+            templateStyles = StringIO(templateStyles)
         renderer = appy.pod.renderer.Renderer(StringIO(urbanTemplateObj), {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj, 'tool': self, 'header':tempFileNameHeader, 'footer':tempFileNameFooter, 'reference':tempFileNameReference, 'signatures': tempFileNameSignatures}, tempFileName, pythonWithUnoPath=self.getUnoEnabledPython())
         renderer.run()
         # Tell the browser that the resulting page contains ODT
