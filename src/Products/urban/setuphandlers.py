@@ -1046,7 +1046,6 @@ def addTestObjects(context):
     for attribname in gen_templates.keys():
         try:
             fld = tool.getField(attribname)
-            import pdb; pdb.set_trace()
             if not fld.getAccessor(tool)() or not fld.getAccessor(tool)().size:
                 filePath = '%s/templates/%s' % (context._profile_path, gen_templates[attribname])
                 fileDescr = file(filePath, 'rb')
