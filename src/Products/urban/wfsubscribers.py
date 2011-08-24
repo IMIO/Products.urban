@@ -77,6 +77,16 @@ def afterRefuse(obj, event):
     ##/code-section afterRefuse
 
 
+def closeEveryUrbanEvents(obj):
+    """
+      This look for every UrbanEvents and close them if they are not
+    """
+    wft = getToolByName(obj, 'portal_workflow')
+    urbanEvents = obj.getUrbanEvents()
+    for urbanEvent in urbanEvents:
+        if wft.getInfoFor(urbanEvent, 'review_state') == 'in_progress':
+            wft.doActionFor(urbanEvent, 'close')
+##/code-section module-header
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
