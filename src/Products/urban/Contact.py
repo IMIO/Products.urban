@@ -210,13 +210,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
 
     # Methods
 
-    security.declarePublic('listPersonTitles')
-    def listPersonTitles(self):
-        """
-          Returns possible person titles
-        """
-        return DisplayList(self.portal_urban.listVocabulary('persons_titles', self, vocType='PersonTitleTerm', inUrbanConfig=False))
-
     # Manually created methods
 
     security.declarePublic('Title')
@@ -230,6 +223,13 @@ class Contact(BaseContent, BrowserDefaultMixin):
             return "%s %s (%s)" % (self.getName1(), self.getName2(), self.getSociety())
         else:
             return "%s %s" % (self.getName1(), self.getName2())
+
+    security.declarePublic('listPersonTitles')
+    def listPersonTitles(self):
+        """
+          Returns possible person titles
+        """
+        return DisplayList(self.portal_urban.listVocabulary('persons_titles', self, vocType='PersonTitleTerm', inUrbanConfig=False))
 
     security.declarePublic('at_post_create_script')
     def at_post_create_script(self):
@@ -347,13 +347,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
             vocab.append((elt.UID(), elt.Title()))
         return DisplayList(tuple(vocab))
 
-    security.declarePublic('getPersonTitleValue')
-    def getPersonTitleValue(self):
-        """
-          Returns the personTitle real value.  Usefull for being used in templates
-        """
-        return self.displayValue(self.listPersonTitles(), self.getPersonTitle()).encode('UTF-8')
-
     security.declarePublic('getPersonTitle')
     def getPersonTitle(self, short=False):
         """
@@ -369,6 +362,13 @@ class Contact(BaseContent, BrowserDefaultMixin):
             return getattr(tool.persons_titles, self.getField('personTitle').get(self)).getAbbreviation()
         else:
             return ''
+
+    security.declarePublic('getPersonTitleValue')
+    def getPersonTitleValue(self):
+        """
+          Returns the personTitle real value.  Usefull for being used in templates
+        """
+        return self.displayValue(self.listPersonTitles(), self.getPersonTitle()).encode('UTF-8')
 
 
 
