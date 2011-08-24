@@ -16,16 +16,6 @@ __docformat__ = 'plaintext'
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
-
-def closeEveryUrbanEvents(obj):
-    """
-      This look for every UrbanEvents and close them if they are not
-    """
-    wft = getToolByName(obj, 'portal_workflow')
-    urbanEvents = obj.getUrbanEvents()
-    for urbanEvent in urbanEvents:
-        if wft.getInfoFor(urbanEvent, 'review_state') == 'in_progress':
-            wft.doActionFor(urbanEvent, 'close')
 ##/code-section module-header
 
 
