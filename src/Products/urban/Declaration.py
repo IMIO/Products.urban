@@ -256,13 +256,6 @@ class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         """
         return self.objectValues('PortionOut')
 
-    security.declarePublic('getUrbanEvents')
-    def getUrbanEvents(self):
-        """
-          Return contained UrbanEvents...
-        """
-        return self.objectValues("UrbanEvent")
-
     security.declarePublic('getAdditionalLayers')
     def getAdditionalLayers(self):
         """

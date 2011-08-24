@@ -328,3 +328,11 @@ class UrbanBase(object):
         """
         licenceConfig = getToolByName(self, 'portal_urban').getUrbanConfig(self, urbanConfigId=self.portal_type)
         return (name in licenceConfig.getUsedAttributes())
+
+    security.declarePublic('getUrbanEvents')
+    def getUrbanEvents(self):
+        """
+          Return every contained UrbanEvents (of any type)...
+        """
+        return self.listFolderContents({'portal_type': ('UrbanEventInquiry', 'UrbanEvent', ),})
+

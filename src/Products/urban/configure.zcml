@@ -64,6 +64,7 @@
 
   <include file="profiles.zcml" />
 
+  <include file="generatedsubscribers.zcml"/>
 
 
   <!-- ##code-section configure.zcml -->

@@ -389,13 +389,6 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
         else:
             return False
 
-    security.declarePublic('getUrbanEvents')
-    def getUrbanEvents(self):
-        """
-          Return contained UrbanEvents...
-        """
-        return self.objectValues("UrbanEvent")
-
     security.declarePublic('getAdditionalLayers')
     def getAdditionalLayers(self):
         """
