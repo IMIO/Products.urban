@@ -280,7 +280,7 @@ schema = Schema((
         ),
         allowed_types=('ParcellingTerm',),
         schemata='urban_location',
-        multiValued=1,
+        multiValued=False,
         relationship='licenceParcelling',
     ),
 
