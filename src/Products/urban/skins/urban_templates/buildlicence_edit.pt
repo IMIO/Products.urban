@@ -35,7 +35,7 @@
                           tal:content="python: view.getTranslatedSchemaLabel(fieldset)"
                           tal:attributes="id string:fieldsetlegend-${fieldsetid}"
                           i18n:translate="" />
-                  <tal:fields condition="python: not fieldset in ['urban_description', ]" repeat="field python:schematas[fieldset].editableFields(here, visible_only=True)">
+                  <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=True)">
                    <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
                   </tal:fields>
                 </fieldset>
