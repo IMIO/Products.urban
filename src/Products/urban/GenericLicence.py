@@ -88,6 +88,21 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
+    ReferenceDataGridField(
+        name='workLocations',
+        widget=ReferenceDataGridWidget(
+            startup_directory="/portal_urban/streets",
+            label="street",
+            visible={'edit' : 'visible', 'view' : 'visible'},
+            macro="street_referencedatagridwidget",
+            label_msgid='urban_label_workLocations',
+            i18n_domain='urban',
+        ),
+        allowed_types=('Street', 'Locality'),
+        schemata="urban_description",
+        relationship="Street",
+        columns=('numero','title' ,'link' ,'uid'),
+    ),
     StringField(
         name='folderCategory',
         widget=SelectionWidget(
@@ -371,21 +386,6 @@ schema = Schema((
         schemata='urban_location',
         multiValued=1,
         vocabulary='listMakers',
-    ),
-    ReferenceDataGridField(
-        name='workLocations',
-        widget=ReferenceDataGridWidget(
-            startup_directory="/portal_urban/streets",
-            label="street",
-            visible={'edit' : 'visible', 'view' : 'visible'},
-            macro="street_referencedatagridwidget",
-            label_msgid='urban_label_workLocations',
-            i18n_domain='urban',
-        ),
-        allowed_types=('Street', 'Locality'),
-        schemata="default",
-        relationship="Street",
-        columns=('numero','title' ,'link' ,'uid'),
     ),
     ReferenceField(
         name='foldermanagers',
@@ -869,6 +869,18 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
             tool = getToolByName(self, 'portal_urban')
             urbanConfig = tool.getUrbanConfig(self)
             res = getattr(urbanConfig.folderdelays, res)
+        return res
+
+    security.declarePublic('getPca')
+    def getPca(self, theObject=False):
+        """
+          Returns the pca value or the PcaTerm if theObject=True
+        """
+        res = self.getField('pca').get(self)
+        if res and theObject:
+            tool = getToolByName(self, 'portal_urban')
+            urbanConfig = tool.getUrbanConfig(self)
+            res = getattr(urbanConfig.pcas, res)
         return res
 
     security.declarePublic('getInquiries')
