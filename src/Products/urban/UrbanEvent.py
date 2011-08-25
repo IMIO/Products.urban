@@ -160,6 +160,7 @@ schema = Schema((
     TextField(
         name='claimsText',
         allowable_content_types=('text/plain', 'text/structured', 'text/html', 'application/msword',),
+        default=claimsTextDefaultValue,
         widget=RichWidget(
             condition="python:here.attributeIsUsed('claimsText')",
             label='Claimstext',

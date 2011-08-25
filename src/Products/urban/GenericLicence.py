@@ -36,8 +36,6 @@ from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.base import UrbanBase
-from Products.urban.utils import technicalRemarksDefaultValue, \
-equipmentAndRoadRequirementsDefaultValue
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
