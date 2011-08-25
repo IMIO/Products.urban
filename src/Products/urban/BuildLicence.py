@@ -249,7 +249,7 @@ schema = Schema((
             show_indexes=1,
             show_index_selector=1,
             available_indexes={'Title':'Nom'},
-            startup_directory_method="architectsStartupDirectory",
+            startup_directory="urban/architects",
             wild_card_search=True,
             restrict_browsing_to_startup_directory=1,
             label='Architects',
@@ -267,11 +267,13 @@ schema = Schema((
         widget=ReferenceBrowserWidget(
             force_close_on_insert=True,
             allow_search=True,
-            allow_browse=False,
+            allow_browse=True,
             show_indexes=True,
-            available_indexes={'subdividerName':'Nom'},
+            available_indexes={'Title':'Nom'},
             show_index_selector=True,
             wild_card_search=True,
+            startup_directory="portal_urban/parcellings",
+            restrict_browsing_to_startup_directory=True,
             label='Parcellings',
             label_msgid='urban_label_parcellings',
             i18n_domain='urban',
@@ -372,13 +374,6 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
         for elt in lst:
             vocab.append((elt[0], elt[1]))
         return DisplayList(tuple(vocab))
-
-    security.declarePublic('architectsStartupDirectory')
-    def architectsStartupDirectory(self):
-        """
-          Return the folder were are stored the architects
-        """
-        return '/urban/architects'
 
     security.declarePublic('askFD')
     def askFD(self):
