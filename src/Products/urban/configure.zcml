@@ -58,17 +58,6 @@
     interface=".interfaces.ITheLicenceEvent"
     type=".interfaces.IEventTypeType"/>
 
-  <!-- ##/code-section configure.zcml.header -->
-
-  <i18n:registerTranslations directory="locales" />
-
-  <include file="profiles.zcml" />
-
-  <include file="generatedsubscribers.zcml"/>
-
-
-  <!-- ##code-section configure.zcml -->
-
   <subscriber
     for="Products.Archetypes.interfaces.IBaseObject
          zope.lifecycleevent.interfaces.IObjectCreatedEvent"
@@ -79,6 +68,16 @@
          zope.lifecycleevent.interfaces.IObjectModifiedEvent"
     handler=".handlers.modifiedArchetype" />
 
+  <!-- ##/code-section configure.zcml.header -->
+
+  <i18n:registerTranslations directory="locales" />
+
+  <include file="profiles.zcml" />
+
+  <include file="generatedsubscribers.zcml"/>
+
+
+  <!-- ##code-section configure.zcml -->
   <!-- ##/code-section configure.zcml -->
 
 </configure>
