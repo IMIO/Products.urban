@@ -25,3 +25,9 @@ msgstr ""
 
 msgid "End date"
 msgstr ""
+
+msgid "Number"
+msgstr ""
+
+msgid "Street"
+msgstr ""

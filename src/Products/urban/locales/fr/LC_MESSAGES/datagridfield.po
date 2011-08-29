@@ -17,6 +17,9 @@ msgstr ""
 msgid "End date"
 msgstr "Date de fin de l'enquête"
 
+msgid "Number"
+msgstr "Numéro"
+
 msgid "Road equipment details"
 msgstr "Détails concernant les équipements"
 
@@ -25,4 +28,7 @@ msgstr "Equipements de la voirie au droit du bien"
 
 msgid "Start date"
 msgstr "Date du début de l'enquête"
+
+msgid "Street"
+msgstr "Rue"
 

@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Thu Aug 25 14:01:34 2011\n"
-"PO-Revision-Date: Thu Aug 25 14:01:34 2011\n"
+"POT-Creation-Date: Mon Aug 29 10:55:05 2011\n"
+"PO-Revision-Date: Mon Aug 29 10:55:05 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -979,7 +979,7 @@ msgstr ""
 msgid "urban_label_webServerHost"
 msgstr ""
 
-#. Default: "street"
+#. Default: "Worklocations"
 #: Declaration.py
 #: Division.py
 #: EnvironmentalDeclaration.py

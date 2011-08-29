@@ -30,7 +30,6 @@ from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 import warnings
 from DateTime import DateTime
 from zope.i18n import translate
-from collective.referencedatagridfield import ReferenceDataGridField, ReferenceDataGridWidget
 from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
@@ -86,20 +85,16 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
-    ReferenceDataGridField(
+    DataGridField(
         name='workLocations',
-        widget=ReferenceDataGridWidget(
-            startup_directory="/portal_urban/streets",
-            label="street",
-            visible={'edit' : 'visible', 'view' : 'visible'},
-            macro="street_referencedatagridwidget",
+        widget=DataGridWidget(
+            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", vocabulary="listStreets"),},
+            label='Worklocations',
             label_msgid='urban_label_workLocations',
             i18n_domain='urban',
         ),
-        allowed_types=('Street', 'Locality'),
         schemata="urban_description",
-        relationship="Street",
-        columns=('numero','title' ,'link' ,'uid'),
+        columns=('number', 'street'),
     ),
     StringField(
         name='folderCategory',
@@ -532,6 +527,14 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         """
         urbantool = getToolByName(self,'portal_urban')
         return DisplayList(urbantool.listVocabulary('pcas', self, vocType="PcaTerm", inUrbanConfig=False))
+
+    security.declarePublic('listStreets')
+    def listStreets(self):
+        """
+          Return a list of Streets from the config
+        """
+        urbantool = getToolByName(self,'portal_urban')
+        return DisplayList(urbantool.listVocabulary('streets', self, vocType=('Street', 'Locality',), id_to_use="UID", inUrbanConfig=False))
 
     security.declarePublic('listDerogations')
     def listDerogations(self):

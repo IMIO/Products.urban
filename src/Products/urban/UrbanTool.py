@@ -486,20 +486,20 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         response.redirect(urbanEventObj.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
 
     security.declarePublic('listVocabulary')
-    def listVocabulary(self, vocToReturn, context, vocType="UrbanVocabularyTerm", inUrbanConfig=True):
+    def listVocabulary(self, vocToReturn, context, vocType="UrbanVocabularyTerm", id_to_use="id", sort_on="getObjPositionInParent", inUrbanConfig=True):
         """
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
         """
         brains = self.listVocabularyBrains(vocToReturn, context, vocType,
-                inUrbanConfig)
+                sort_on, inUrbanConfig)
         res=[]
         for brain in brains:
-            res.append((brain.id,(brain.Title).decode('utf-8')))
+            res.append((getattr(brain, id_to_use),(brain.Title).decode('utf-8')))
         return tuple(res)
 
     security.declarePrivate('listVocabularyBrains')
-    def listVocabularyBrains(self, vocToReturn, context, vocType="UrbanVocabularyTerm", inUrbanConfig=True):
+    def listVocabularyBrains(self, vocToReturn, context, vocType="UrbanVocabularyTerm", sort_on="getObjPositionInParent", inUrbanConfig=True):
         """
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
