@@ -24,6 +24,27 @@ class UrbanEventView(BrowserView):
                 continue
             data[1].append(activatedField)
         return data
+    
+    def mayAddUrbanEvent(self):
+        """
+          Return True if the current user may add an UrbanEvent
+        """
+        context = aq_inner(self.context)
+        member = getToolByName(context, 'portal_membership').getAuthenticatedMember()
+        if member.has_permission('ATContentTypes: Add File', context):
+            return True
+        return False
+
+    def mayAddAnnex(self):
+        """
+          Return True if the current user may add an Annex (File)
+        """
+        context = aq_inner(self.context)
+        member = getToolByName(context, 'portal_membership').getAuthenticatedMember()
+        if member.has_permission('ATContentTypes: Add File', context):
+            return True
+        return False
+
 
 class UrbanEventInquiryView(UrbanEventView):
     """

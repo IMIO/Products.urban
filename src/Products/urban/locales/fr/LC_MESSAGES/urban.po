@@ -603,6 +603,12 @@ msgstr "Aucun agent traitant défini"
 msgid "no_notary_defined"
 msgstr "Aucun notaire?"
 
+msgid "not_permitted_to_add_annex"
+msgstr "Vous ne pouvez pas ajouter d'annexe"
+
+msgid "not_permitted_to_add_urbanevent"
+msgstr "Vous ne pouvez pas générer d'événement"
+
 msgid "notaries_folder_title"
 msgstr "Notaires"
 

@@ -596,6 +596,12 @@ msgstr ""
 msgid "no_document_to_generate"
 msgstr ""
 
+msgid "not_permitted_to_add_urbanevent"
+msgstr ""
+
+msgid "not_permitted_to_add_annex"
+msgstr ""
+
 msgid "no_foldermanager_defined"
 msgstr ""
 

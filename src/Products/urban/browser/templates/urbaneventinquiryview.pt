@@ -5,7 +5,7 @@
 <head>
 <metal:block fill-slot="top_slot"
              tal:define="member context/@@plone_portal_state/member;
-                         border python: member.has_role('Manager') and 'enable_border' or 'disable_border';
+                         border python: member.has_permission('Modify portal content', context) and 'enable_border' or 'disable_border';
                          dummy python:request.set(border, 1);" />
 
 <tal:block condition="context/getRecipients">
@@ -18,7 +18,8 @@
 <body>
 <div metal:fill-slot="main">
 <metal:main_macro define-macro="main">
-<metal:body define-macro="body_macro" tal:define="recipients context/getRecipients;
+<metal:body define-macro="body_macro" tal:define="member context/@@plone_portal_state/member;
+                                                  recipients context/getRecipients;
                                                   linkedUrbanEventType context/getUrbaneventtypes">
 <h1 class="documentFirstHeading">
  <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
@@ -111,8 +112,8 @@
     </tr>
 </table>
 
-<tal:block condition="linkedUrbanEventType/getSpecialFunctionName">
-<a tal:attributes="href linkedUrbanEventType/getSpecialFunctionUrl" tal:content="linkedUrbanEventType/getSpecialFunctionName"/><br><br>
+<tal:block condition="python: member.has_permission('Modify portal content', context) and linkedUrbanEventType.getSpecialFunctionName()">
+ <a tal:attributes="href linkedUrbanEventType/getSpecialFunctionUrl" tal:content="linkedUrbanEventType/getSpecialFunctionName"/><br><br>
 </tal:block>
 
 <tal:block condition="recipients"
