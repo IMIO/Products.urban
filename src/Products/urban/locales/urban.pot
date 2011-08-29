@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-08-23 10:32+0000\n"
+"POT-Creation-Date: 2011-08-29 11:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1020,6 +1020,11 @@ msgstr ""
 #. Default: "Architects"
 #: BuildLicence.py
 msgid "urban_label_architects"
+msgstr ""
+
+#. Default: "Areparcelsverified"
+#: GenericLicence.py
+msgid "urban_label_areParcelsVerified"
 msgstr ""
 
 #. Default: "Article"

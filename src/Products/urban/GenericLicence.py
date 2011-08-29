@@ -38,7 +38,11 @@ from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
-optional_fields = ['missingPartsDetails','folderZoneDetails','derogationDetails','annoncedDelayDetails','roadType','roadCoating','roadEquipments','protectedBuildingDetails','investigationDetails','investigationReasons','pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks','pca','SSC','RCU','floodingLevel','solicitRoadOpinionsTo' ]
+optional_fields = ['missingPartsDetails','folderZoneDetails','derogationDetails',
+                   'annoncedDelayDetails','roadType','roadCoating','roadEquipments',
+                   'protectedBuildingDetails','investigationDetails','investigationReasons',
+                   'pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks',
+                   'pca','SSC','RCU','floodingLevel','solicitRoadOpinionsTo', 'areParcelsVerified',]
 ##/code-section module-header
 
 schema = Schema((
@@ -345,6 +349,16 @@ schema = Schema((
         ),
         schemata='urban_location',
     ),
+    BooleanField(
+        name='areParcelsVerified',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Areparcelsverified',
+            label_msgid='urban_label_areParcelsVerified',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+    ),
     StringField(
         name='floodingLevel',
         widget=SelectionWidget(
@@ -528,14 +542,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         urbantool = getToolByName(self,'portal_urban')
         return DisplayList(urbantool.listVocabulary('pcas', self, vocType="PcaTerm", inUrbanConfig=False))
 
-    security.declarePublic('listStreets')
-    def listStreets(self):
-        """
-          Return a list of Streets from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('streets', self, vocType=('Street', 'Locality',), id_to_use="UID", inUrbanConfig=False))
-
     security.declarePublic('listDerogations')
     def listDerogations(self):
         """
@@ -561,6 +567,14 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         return DisplayList(urbantool.listVocabulary('pashs', self))
 
     # Manually created methods
+
+    security.declarePublic('listStreets')
+    def listStreets(self):
+        """
+          Return a list of Streets from the config
+        """
+        urbantool = getToolByName(self,'portal_urban')
+        return DisplayList(urbantool.listVocabulary('streets', self, vocType=('Street', 'Locality',), id_to_use="UID", inUrbanConfig=False))
 
     def divideList (self, divider, list):
         res = []
