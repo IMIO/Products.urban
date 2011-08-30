@@ -91,13 +91,14 @@ schema = Schema((
     ),
     DataGridField(
         name='workLocations',
+        schemata="urban_description",
         widget=DataGridWidget(
             columns={'number' : Column("Number"), 'street' : SelectColumn("Street", vocabulary="listStreets"),},
             label='Worklocations',
             label_msgid='urban_label_workLocations',
             i18n_domain='urban',
         ),
-        schemata="urban_description",
+        allow_oddeven=True,
         columns=('number', 'street'),
     ),
     StringField(
@@ -226,13 +227,14 @@ schema = Schema((
     ),
     DataGridField(
         name='roadEquipments',
+        schemata='urban_road',
         widget=DataGridWidget(
             columns={'road_equipment' : SelectColumn("Road equipments", vocabulary="listRoadEquipments"), 'road_equipment_details' : Column("Road equipment details"),},
             label='Roadequipments',
             label_msgid='urban_label_roadEquipments',
             i18n_domain='urban',
         ),
-        schemata='urban_road',
+        allow_oddeven=True,
         columns=("road_equipment", "road_equipment_details"),
     ),
     LinesField(

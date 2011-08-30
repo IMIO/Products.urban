@@ -190,6 +190,7 @@ class UrbanEventType(BaseFolder, UrbanDelay, BrowserDefaultMixin):
         return self.listFolderContents({'portal_type': 'File'})
 
 
+
 registerType(UrbanEventType, PROJECTNAME)
 # end of class UrbanEventType
 

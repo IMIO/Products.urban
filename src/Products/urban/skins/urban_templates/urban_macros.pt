@@ -237,13 +237,16 @@
  <div tal:condition="not: applicants" i18n:translate="warning_add_an_applicant">
   You must encode applicant(s)
  </div>
- <table cellspacing=0 cellpadding=0 border=0 width=100% tal:condition="applicants">
+ <table class="listing" cellspacing=0 cellpadding=0 border=0 width=100% tal:condition="applicants">
+ <thead>
+  <tr>
+   <th i18n:translate="">Applicant data</th>
+   <th i18n:translate="">Actions</th>
+  </tr>
+ </thead>
  <tal:block repeat="applicantObj applicants">
   <tr class="#" tal:define="oddrow repeat/applicantObj/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
    <td>
-    <tal:block define="thisObject python: applicantObj; needExternalEdition python:False">
-     <span metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
-    </tal:block>
     <b>
      <a href="#" tal:attributes="href applicantObj/absolute_url">
      <span tal:replace="python: context.displayValue(applicantObj.listPersonTitles(), applicantObj.getPersonTitle())" />
@@ -255,6 +258,11 @@
     <tal:block condition="applicantObj/getStreet"><br /></tal:block>
     <span tal:replace="python: applicantObj.getStreet()+' '+applicantObj.getNumber()" /><br />
     <span tal:replace="python: applicantObj.getZipcode()+' '+applicantObj.getCity()" />
+   </td>
+   <td>
+    <tal:block define="thisObject python: applicantObj; needExternalEdition python:False">
+     <span metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
+    </tal:block>
    </td>
   </tr>
  </tal:block>
@@ -592,7 +600,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                      path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
                      dummy python: context.setPathCritValue(path_crit, context.UID());
                      showActions python: True;
-                     showedCols python: ('Title', 'Creator');">
+                     showedCols python: ('Title',);">
     <metal:listing use-macro="here/urban_macros/macros/listing" />
     </div>
      <form tal:condition="python: member.has_permission('urban: Add PortionOut', context)" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/checkPortionsOutSearch'" action="checkPortionsOutSearch" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('PortionOut')">
