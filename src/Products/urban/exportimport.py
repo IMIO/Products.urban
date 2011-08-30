@@ -59,6 +59,7 @@ def addUrbanEventTypes(context):
                         #   1. executing profile is tests and profile in use isn't tests
                         #   2. executing profile is 'xxx' and profile in use is 'yyy'
                         if profileNamePlone!="tests" and (profile_name != profileNamePlone or profile_name == "tests"):
+                            logger.info("We pass this template (%s) because executing profile '%s' isnt't compatible with this profil (%s)" %(title,profile_name,profileNamePlone))
                             continue
                         #get the md5 in property of current template
                         md5SignatureProperty=fileTemplate.getProperty("md5Signature")
@@ -69,6 +70,7 @@ def addUrbanEventTypes(context):
                         #   1. current template was manually modified by user
                         #   2. the new template is the same that the current
                         if md5SignaturePlone!=md5SignatureProperty or md5SignatureFS == md5SignaturePlone:
+                            logger.info("We pass this template '%s' because it is manually modified or template isn't modified" %title)
                             continue
                         newUetFile=fileTemplate
                         newUetFile.setFile(fileContent)
@@ -79,6 +81,7 @@ def addUrbanEventTypes(context):
                     #modify template's content
                     newUetFile.setContentType("application/vnd.oasis.opendocument.text")
                     newUetFile.setFilename(id)
+                    logger.info("Template '%s' modify" %title)
                     #modify properties
                     dictProperties=dict(newUetFile.propertyItems())
                     if dictProperties.has_key("md5Signature"):
