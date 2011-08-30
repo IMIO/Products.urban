@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Aug 29 12:10:01 2011\n"
-"PO-Revision-Date: Mon Aug 29 12:10:01 2011\n"
+"POT-Creation-Date: Tue Aug 30 12:39:14 2011\n"
+"PO-Revision-Date: Tue Aug 30 12:39:14 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -947,6 +947,11 @@ msgstr ""
 #: Division.py
 #: GenericLicence.py
 msgid "urban_label_title"
+msgstr ""
+
+#. Default: "Transmitdate"
+#: UrbanEvent.py
+msgid "urban_label_transmitDate"
 msgstr ""
 
 #. Default: "Path of a UNO-enabled Python interpreter (ie /usr/bin/python)"

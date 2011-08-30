@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-08-29 11:11+0000\n"
+"POT-Creation-Date: 2011-08-30 11:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -596,16 +596,16 @@ msgstr ""
 msgid "no_document_to_generate"
 msgstr ""
 
-msgid "not_permitted_to_add_urbanevent"
+msgid "no_foldermanager_defined"
+msgstr ""
+
+msgid "no_notary_defined"
 msgstr ""
 
 msgid "not_permitted_to_add_annex"
 msgstr ""
 
-msgid "no_foldermanager_defined"
-msgstr ""
-
-msgid "no_notary_defined"
+msgid "not_permitted_to_add_urbanevent"
 msgstr ""
 
 msgid "notaries_folder_title"
@@ -1916,6 +1916,11 @@ msgstr ""
 #: GenericLicence.py
 #: ParcellingTerm.py
 msgid "urban_label_title"
+msgstr ""
+
+#. Default: "Transmitdate"
+#: UrbanEvent.py
+msgid "urban_label_transmitDate"
 msgstr ""
 
 #. Default: "Transparent"
