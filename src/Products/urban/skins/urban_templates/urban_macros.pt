@@ -580,7 +580,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
     <!-- non debug mode (end) --> 
 </div>
 
-<div metal:define-macro="urbanParcelsMacro">
+<div metal:define-macro="urbanParcelsMacro" i18n:domain='urban'>
  <table tal:define="member context/@@plone_portal_state/member;" cellspacing=0 cellpadding=0 width=100%>
   <tr>
    <td>
@@ -595,7 +595,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                      showedCols python: ('Title', 'Creator');">
     <metal:listing use-macro="here/urban_macros/macros/listing" />
     </div>
-     <form tal:condition="python: member.has_permission('urban: Add PortionOut', context)" i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/checkPortionsOutSearch'" action="checkPortionsOutSearch" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('PortionOut')">
+     <form tal:condition="python: member.has_permission('urban: Add PortionOut', context)" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/checkPortionsOutSearch'" action="checkPortionsOutSearch" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('PortionOut')">
       <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
       <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
       <input type="submit" class="context" id="event" value="search_parcels" i18n:attributes="value" />
