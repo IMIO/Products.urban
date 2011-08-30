@@ -67,5 +67,16 @@
      permission="zope2.View"
   />
 
+  <plone:portlet
+     name="urban.portlets.portlet_urban"
+     interface=".portlet_urban.IUrbanPortlet"
+     view_permission="zope2.View"
+     edit_permission="cmf.ManagePortal"
+     assignment=".portlet_urban.Assignment"
+     renderer=".portlet_urban.Renderer"
+     addview=".portlet_urban.AddForm"
+     editview=".portlet_urban.EditForm"
+  />
+
 </configure>
 
