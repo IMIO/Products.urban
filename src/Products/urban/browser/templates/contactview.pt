@@ -40,6 +40,11 @@
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('society', mode='view')" /></td>
      </tr>
+     <tr tal:condition="python: here.portal_type == 'Applicant'">
+      <td valign="top"><u><b><span i18n:translate="urban_label_isSameAddressAsWorks">Is the applicant address the same address as the works?</span> :</b></u></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('isSameAddressAsWorks', mode='view')" /></td>
+     </tr>
      <tr>
       <td valign="top"><u><b><span i18n:translate="urban_label_street">Street</span> :</b></u></td>
       <td width="2%"></td>

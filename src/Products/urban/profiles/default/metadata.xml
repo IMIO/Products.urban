@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>0.1.433</version>
+  <version>0.1.440</version>
   <!-- ##code-section METADATA -->
   <dependencies>
     <dependency>profile-Products.MasterSelectWidget:default</dependency>

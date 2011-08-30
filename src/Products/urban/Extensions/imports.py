@@ -24,7 +24,7 @@ def createStreet(self, city, zipcode, streetcode, streetname, bestAddresskey=0, 
     cityId = self.plone_utils.normalizeString(city)
     
     if not ex_streets.has_key(city):
-        ex_streets[city] = {'zip':int(zipcode), 'streets':{}}
+        ex_streets[city] = {'zip':zipcode, 'streets':{}}
     #we check if the city has always the same zip
     if ex_streets[city]['zip'] != int(zipcode):
         out.append("! Current record: city '%s', zip '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'"%(city, zipcode, streetname, streetcode, bestAddresskey, regionalroad, startdate, enddate))

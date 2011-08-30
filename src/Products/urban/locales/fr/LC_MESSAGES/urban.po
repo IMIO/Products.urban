@@ -1416,6 +1416,11 @@ msgstr "Le bien se situe dans un PCA"
 msgid "urban_label_isInSubdivision"
 msgstr "Le bien se situe dans un lotissement"
 
+#. Default: "Issameaddressasworks"
+#: Contact.py
+msgid "urban_label_isSameAddressAsWorks"
+msgstr "Adresse identique à l'adresse du bien?"
+
 #. Default: "Issupplementary"
 #: WorkLocation.py
 msgid "urban_label_isSupplementary"

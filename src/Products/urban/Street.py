@@ -23,6 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Acquisition import aq_inner, aq_parent
 from Products.CMFCore import permissions
 ##/code-section module-header
 
@@ -141,6 +142,12 @@ class Street(BaseContent, BrowserDefaultMixin):
           Override to take Title into account
         """
         return self.Title()
+
+    def getCity(self):
+        """
+          Returns the city
+        """
+        return aq_parent(aq_inner(self))
 
 
 

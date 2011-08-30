@@ -27,9 +27,9 @@ from Products.urban.config import *
 
 schema = Schema((
 
-    IntegerField(
+    StringField(
         name='zipCode',
-        widget=IntegerField._properties['widget'](
+        widget=StringField._properties['widget'](
             size=20,
             label='Zipcode',
             label_msgid='urban_label_zipCode',
