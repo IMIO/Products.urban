@@ -133,13 +133,14 @@ class UrbanBase(object):
         catalog = getToolByName(self, "uid_catalog")
         signaletic = ''
         for wl in self.getWorkLocations():
-            street = catalog(UID = wl['uid'])[0].getObject()
+            #wl is a dict with street as the street obj uid and number as the number in the street
+            street = catalog(UID = wl['street'])[0].getObject()
             city = street.getParentNode()
             if street.getPortalTypeName() == 'Locality':
                 streetName = street.getLocalityName()
             else:
                 streetName = street.getStreetName()
-            number = wl['numero']
+            number = wl['number']
             if signaletic:
                 signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
             #special case for locality where we clearly specify that this is a locality
