@@ -182,6 +182,18 @@ schema = Schema((
         ),
         optional=True,
     ),
+    DateTimeField(
+        name='transmitDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            condition="python:here.attributeIsUsed('transmitDate')",
+            format="%d/%m/%Y",
+            label='Transmitdate',
+            label_msgid='urban_label_transmitDate',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
     ReferenceField(
         name='urbaneventtypes',
         widget=ReferenceBrowserWidget(
