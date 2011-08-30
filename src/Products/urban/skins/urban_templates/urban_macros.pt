@@ -474,7 +474,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                                                 class obj_wf_state_class"
                                 class="link-plain"
                                 tal:content="title_or_id" />
-                            <tal:block condition="python: obj.portal_type == 'UrbanEvent'">
+                            <tal:block condition="python: obj.portal_type in ['UrbanEvent', 'UrbanEventInquiry',]">
                              <tal:block define="object obj/getObject" repeat="doc object/getDocuments">
                               <br /><span class="discreet" style="margin-left:20px" tal:content="doc/Title">Document</span>
                              </tal:block>
