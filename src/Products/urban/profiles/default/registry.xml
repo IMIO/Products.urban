@@ -13,7 +13,6 @@
         <element>recipients</element>
         <element>street</element>
         <element>Street</element>
-        <element>referenceableVocabularyTerm</element>
     </value>
   </records>
 </registry>
