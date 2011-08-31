@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
 import logging
+
+from zope.interface import alsoProvides
 from zope.i18n import translate as _
+
 from Acquisition import aq_base
+
 from Products.CMFPlone.utils import base_hasattr
 from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 from Products.urban.events.urbanEventInquiryEvents import setLinkedInquiry
 from Products.urban.events.urbanEventEvents import setEventTypeType, setCreationDate
+from Products.urban.interfaces import ILicenceContainer
 
 logger = logging.getLogger('urban: migrations')
 
@@ -35,8 +40,6 @@ def migrateToPlone4(context):
     migratePersonTitles(context)
     #remove useless fields 'termKey' and 'termKeyStr'
     migrateUrbanVocabularyTerms(context)
-    #remove investigationStart and investigationEnd attributes and replace it by investigationsDates
-    migrateInvestigations(context)
     #migrateToReferenceDataGridField(context)
     #We replace licence folders from portal_urban to LicenceConfig objects
     migrateToLicenceConfig(context)
@@ -50,6 +53,8 @@ def migrateToPlone4(context):
     migrateUrbanEventTypes(context)
     #Add md5Signature and profileName properties for each template
     addMd5SignatureAndProfileNameProperties(context)
+    #Every folder that will contain licences need to provide ILicenceContainer
+    migrateLicenceContainers(context)
 
 def migrateToReferenceDataGridField(context):
     """
@@ -529,28 +534,6 @@ def migratePersonTitles(context):
         logger.info("UrbanVocabularyTerm at '%s' has been migrated to PersonTitleTerm" % newObj.absolute_url())
     logger.info("Migrating persontitles: done!")
 
-def migrateInvestigations(context):
-    """
-        Remove investigations attributes
-        investigationStart and investigationEnd are now in investigationsDates
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-
-    brains = site.portal_catalog(portal_type = ['BuildLicence', 'ParcelOutLicence', ])
-    logger.info("Migrating investigations: starting...")
-    for brain in brains:
-        licence = brain.getObject()
-        if hasattr(aq_base(licence), 'investigationStart'):
-            investigationsDates = ({
-                                   'startdate': licence.getInvestigationStart(),
-                                   'enddate': licence.getInvestigationEnd(),
-            },)
-            licence.setInvestigationsDates(investigationsDates)
-            logger.info("%s at '%s' has been migrated" % (licence.portal_type, licence.absolute_url()))
-    logger.info("Migrating investigations: done!")
-
 def migrateUrbanVocabularyTerms(context):
     """
         Remove useless 'termKey' and 'termKeyStr' fields
@@ -620,6 +603,7 @@ def migrateArchitectToContact(context):
     architect_folder = portal.urban.architects
     #from plone.app.referenceintegrity.config import DisableRelationshipsProtectionTemporarily
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
+    logger.info("Migrating Architects to Contacts: starting...")
     for architect in architect_folder.objectValues('Architect'):
         #first we create a new architect
         attribs = {
@@ -657,12 +641,15 @@ def migrateArchitectToContact(context):
         #with DisableRelationshipsProtectionTemporarily(['licenceArchitects']):
         architect_folder.manage_delObjects(ids=["%s-old"%id])
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
+    logger.info("Migrating Architects to Contacts: done!")
 
 def migrateSpecificContactInterfaces(context):
     """
         Migration of contact type objects to provides specific interfaces
     """
     if isNoturbanMigrationsProfile(context): return
+
+    logger.info("Migrating Specific Contact interfaces: starting...")
 
     from Products.urban.interfaces import CONTACT_INTERFACES
     from zope.interface import alsoProvides
@@ -673,6 +660,7 @@ def migrateSpecificContactInterfaces(context):
         if not contact.__provides__(CONTACT_INTERFACES[brain.Type]):
             alsoProvides(contact, CONTACT_INTERFACES[brain.Type])
             contact.reindexObject(['object_provides'])
+    logger.info("Migrating Specific Contact interfaces: done!")
 
 class UrbanEventToUrbanEventInquiryMigrator(object, InplaceATFolderMigrator):
     """
@@ -702,6 +690,8 @@ def migrationToUrbanEventInquiries(context):
     """    
     if isNoturbanMigrationsProfile(context): return
 
+    logger.info("Migrating to UrbanEventInquiries: starting...")
+
     migrators = (UrbanEventToUrbanEventInquiryMigrator,)
 
     portal = context.getSite()
@@ -710,11 +700,16 @@ def migrationToUrbanEventInquiries(context):
     for migrator in migrators:
         walker = migrator.walker(portal, migrator, query={'id': 'enquete-publique'})
         walker.go()
+    logger.info("Migrating to UrbanEventInquiries: done!")
 
 def addMd5SignatureAndProfileNameProperties(context):
     """
       Add md5Signature and profileName properties for each template if not exist
     """
+    if isNoturbanMigrationsProfile(context): return
+
+    logger.info("Adding md5 signature and 'profileName' property on templates: starting...")
+
     portal = context.getSite()
     tool = getToolByName(portal, 'portal_urban')    
     try:
@@ -742,3 +737,20 @@ def addMd5SignatureAndProfileNameProperties(context):
                 if not dictProperties.has_key("profileName"):
                     fileTemplate.manage_addProperty("profileName","tests","string")
                 fileTemplate.reindexObject()
+    logger.info("Adding md5 signature and 'profileName' property on templates: done!")
+
+def migrateLicenceContainers(context):
+    """
+      Every folder that will contain licences need to provide ILicenceContainer
+    """
+    #folders in the 'urban' application folder are licence containers
+    if isNoturbanMigrationsProfile(context): return
+
+    logger.info("Migrating licence containers: starting...")
+
+    portal = context.getSite()
+    #we are migrating, so we have an urban folder at the root of portal
+    for subFolder in portal.urban.objectValues('ATFolder'):
+        alsoProvides(subFolder, ILicenceContainer)
+        logger.info("Licence folder '%s' now provides IILicenceContainer" % subFolder.getId())
+    logger.info("Migrating licence containers: done!")
