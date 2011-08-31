@@ -320,7 +320,6 @@
 
 <dt class="formTab" id="fieldsetlegend-urban_events" i18n:domain="plone" i18n:translate="label_schema_urban_events"><span>Events</span></dt>
 <dd id="fieldset-urban_events">
-<fieldset><strong><legend i18n:translate="folder_events">Folder events</legend></strong>
  <table cellspacing=0 cellpadding=0 width=100%>
  <tr>
   <td>
@@ -342,13 +341,12 @@
   </td>
  </tr>
  </table>
-</fieldset>
-<div tal:condition="python: len(context.getAllAdvices())" >
-<fieldset><strong><legend>Avis du dossier</legend></strong>
+<div tal:condition="context/getAllAdvices" >
+<fieldset><strong><legend i18n:translate="folder_advice">Folder advices</legend></strong>
  <table cellspacing=0 cellpadding=0 width=100%>
  <tr>
   <td>
-   <metal:events use-macro="here/urban_macros/macros/urbanEventsAdviceMacro" />
+   <metal:events use-macro="here/urban_macros/macros/urbanEventsAdvicesMacro" />
    <br />
   </td>
  </tr>

@@ -233,28 +233,27 @@
 </metal:proprietaries>
 
 <metal:applicants define-macro="urbanApplicantsMacro" i18n:domain="urban">
- <div class="#" tal:attributes="class python: test(applicants, 'field', 'field warning')">
+ <div class="#" tal:attributes="class python: applicants and 'field' or 'field warning'">
  <div tal:condition="not: applicants" i18n:translate="warning_add_an_applicant">
   You must encode applicant(s)
  </div>
- <table class="listing" cellspacing=0 cellpadding=0 border=0 width=100% tal:condition="applicants">
+ <table class="listing" width=100% tal:condition="applicants">
  <thead>
   <tr>
    <th i18n:translate="">Applicant data</th>
    <th i18n:translate="">Actions</th>
   </tr>
  </thead>
- <tal:block repeat="applicantObj applicants">
-  <tr class="#" tal:define="oddrow repeat/applicantObj/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
+ <tbody>
+ <tal:rows repeat="applicantObj applicants">
+  <tr>
    <td>
-    <b>
-     <a href="#" tal:attributes="href applicantObj/absolute_url">
+    <b><a href="#" tal:attributes="href applicantObj/absolute_url">
      <span tal:replace="python: context.displayValue(applicantObj.listPersonTitles(), applicantObj.getPersonTitle())" />
      <span tal:replace="applicantObj/getName1|nothing" />
      <span tal:replace="applicantObj/getName2|nothing" />
      <span tal:condition="applicantObj/getSociety" tal:replace="python: '(' + applicantObj.getSociety() + ')'" />
-     </a>
-    </b>
+    </a></b>
     <tal:block condition="applicantObj/getStreet"><br /></tal:block>
     <span tal:replace="python: applicantObj.getStreet()+' '+applicantObj.getNumber()" /><br />
     <span tal:replace="python: applicantObj.getZipcode()+' '+applicantObj.getCity()" />
@@ -265,7 +264,8 @@
     </tal:block>
    </td>
   </tr>
- </tal:block>
+ </tal:rows>
+ </tbody>
  </table>
  <br />
  <form tal:define="ctype python: context.portal_types.getTypeInfo('Applicant');
@@ -296,10 +296,10 @@
 <p class="discreet" tal:condition="not: eventTypes" i18n:translate="urban_no_eventtype_defined">No event type is defined in the configuration for this element</p>
 </div>
 
-<div metal:define-macro="urbanEventsAdviceMacro" i18n:domain="urban" tal:define="eventTypes python:context.portal_urban.listEventTypes(context, urbanConfigId=context.portal_type.lower())">
+<div metal:define-macro="urbanEventsAdvicesMacro" i18n:domain="urban">
 <form action="createAllAdvices" method="POST"
       tal:define="member context/@@plone_portal_state/member;"
-      tal:condition="python: member.has_permission('urban: Add UrbanEvent', context) and eventTypes">
+      tal:condition="python: member.has_permission('urban: Add UrbanEvent', context)">
  <input class="context" type="submit" i18n:attributes="value" value="Add all advices">
 </form>
 </div>

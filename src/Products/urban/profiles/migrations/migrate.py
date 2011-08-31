@@ -711,7 +711,7 @@ def addMd5SignatureAndProfileNameProperties(context):
     logger.info("Adding md5 signature and 'profileName' property on templates: starting...")
 
     portal = context.getSite()
-    tool = getToolByName(portal, 'portal_urban')    
+    tool = getToolByName(portal, 'portal_urban')
     try:
         #uetFolder = getattr(tool.getUrbanConfig(None, urbanConfigId=None), "urbaneventtypes")
         blFolder = getattr(tool, 'buildlicence')
