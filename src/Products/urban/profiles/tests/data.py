@@ -47,7 +47,7 @@ urbanEventTypes = {
                     'activatedFields': [],
                     'deadLineDelay': 15,
                     'podTemplates': ({'id': "urb-recepisse-art115-complement", 'title': "Récépissé d'un complément à une demande de permis (article 115)"},),
-                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
                     },
                     {
                     'id': "recepisse-article-116",
@@ -284,7 +284,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'activatedFields': [],
                     'podTemplates': (),
-                    'eventTypeType': 'Products.urban.interfaces.IWorkBeginning',
+                    'eventTypeType': 'Products.urban.interfaces.IWorkBeginningEvent',
                     },
                     {
                     'id': "fin-des-travaux",
@@ -314,7 +314,7 @@ urbanEventTypes = {
                                      {'id': "urb-prorogation-transmis-accept", 'title': "Acceptation de prorogation (lettre au demandeur)"},
                                      {'id': "urb-prorogation-transmis-accept-fd", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
                                     ),
-                    'eventTypeType': 'Products.urban.interfaces.IProrogation',
+                    'eventTypeType': 'Products.urban.interfaces.IProrogationEvent',
                     },
                     {
                     'id': "suspension-du-permis",

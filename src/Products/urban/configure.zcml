@@ -57,6 +57,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IMissingPartDepositEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IWorkBeginningEvent"
     type=".interfaces.IEventTypeType"/>
 
