@@ -24,7 +24,7 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
-from Products.urban.interfaces import IReferenceableVocabulary
+from plone.app.referenceintegrity.interfaces import IReferenceableVocabulary
 ##/code-section module-header
 
 schema = Schema((
@@ -123,4 +123,3 @@ class UrbanVocabulary(object):
         return result
 
 ##/code-section module-footer
-

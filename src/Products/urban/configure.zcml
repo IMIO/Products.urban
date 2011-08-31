@@ -68,16 +68,6 @@
     interface=".interfaces.ITheLicenceEvent"
     type=".interfaces.IEventTypeType"/>
 
-  <subscriber
-    for="Products.Archetypes.interfaces.IBaseObject
-         zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-    handler=".handlers.modifiedArchetype" />
-
-  <subscriber
-    for="Products.Archetypes.interfaces.IBaseObject
-         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-    handler=".handlers.modifiedArchetype" />
-
   <interface
     interface=".interfaces.IProrogationEvent"
     type=".interfaces.IEventTypeType"/>
