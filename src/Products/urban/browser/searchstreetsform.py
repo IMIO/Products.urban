@@ -24,7 +24,7 @@ from zope.interface import Interface
 from zope import schema
 
 from zope.formlib import form
-from Products.Five.formlib import formbase
+from five.formlib import formbase
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from collective.plonefinder.widgets.referencewidget import FinderSelectWidget
@@ -59,7 +59,7 @@ class MyFinderSelectWidget(FinderSelectWidget) :
     that could reference and upload files
     """
     template = ViewPageTemplateFile('templates/myfinderbase.pt')
-    finderlabel = (u'') 
+    finderlabel = (u'')
     types = ['Street', 'Locality']
     forcecloseoninsert = True
 
@@ -76,7 +76,7 @@ class SearchStreetsForm(formbase.PageForm):
         context = aq_inner(self.context)
         catalog = getToolByName(context, 'portal_catalog')
         brain = catalog.searchResults(id = 'streets')
-        self.streetsBase = aq_inner(brain[0].getObject())        
+        self.streetsBase = aq_inner(brain[0].getObject())
         super(formbase.PageForm, self).update()
         self.widgets['streetSearch'].base = self.streetsBase
 
@@ -106,8 +106,7 @@ class SearchStreetsForm(formbase.PageForm):
                         self.streetsFound.append((doc.Title(), brain.getURL()))
             elif not data['streetSearch']:
                 self.streetsFound.append((doc.Title(), brain.getURL()))
-            
+
         #for unclear reason base must be reinitialized before returning template
         self.widgets['streetSearch'].base = self.streetsBase
         return self.template()
-

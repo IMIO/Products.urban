@@ -193,7 +193,6 @@ def import_streets_fromdb(self, cityName='', password=''):
     if not hasattr(tool, 'streets'):
         return "The 'streets' folder does not exist in portal_urban!"
 
-    #import pdb; pdb.set_trace()
     ex_streets = {}
     ret = load_existing_streets(self, ex_streets)
     out += ret

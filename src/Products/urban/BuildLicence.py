@@ -470,6 +470,9 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastWorkBeginning(self):
         return self._getLastEvent(interfaces.IWorkBeginningEvent)
 
+    def getLastProrogation(self):
+        return self._getLastEvent(interfaces.IProrogationEvent)
+
     def getAllOpinionRequests(self):
         return self._getAllEvents(interfaces.IOpinionRequestEvent)
 

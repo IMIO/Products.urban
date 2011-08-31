@@ -5,6 +5,8 @@
            i18n_domain="urban">
 
   <!-- ##code-section configure.zcml.header -->
+  <!-- exclude can be removed when five.grok does the exclude -->
+  <exclude package="zope.contentprovider" />
   <include package="Products.Five"/>
   <include package="five.grok"/>
   <include package="Products.GenericSetup" file="meta.zcml"/>
@@ -43,11 +45,19 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IModificationDepositEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IDepositEvent"
     type=".interfaces.IEventTypeType"/>
 
   <interface
     interface=".interfaces.IMissingPartEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IWorkBeginningEvent"
     type=".interfaces.IEventTypeType"/>
 
   <interface
@@ -68,6 +78,10 @@
          zope.lifecycleevent.interfaces.IObjectModifiedEvent"
     handler=".handlers.modifiedArchetype" />
 
+  <interface
+    interface=".interfaces.IProrogationEvent"
+    type=".interfaces.IEventTypeType"/>
+
   <!-- ##/code-section configure.zcml.header -->
 
   <i18n:registerTranslations directory="locales" />
@@ -76,8 +90,15 @@
 
   <include file="generatedsubscribers.zcml"/>
 
-
   <!-- ##code-section configure.zcml -->
+    <adapter
+        for="Products.CMFCore.interfaces.ICatalogAware
+             Products.Archetypes.interfaces.IUIDCatalog"
+        factory="plone.indexer.wrapper.IndexableObjectWrapper"
+        provides="plone.indexer.interfaces.IIndexableObject"
+        />
+
+    <adapter name="Title" factory=".indexes.baseobject_title" />
   <!-- ##/code-section configure.zcml -->
 
 </configure>

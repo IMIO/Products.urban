@@ -50,6 +50,14 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
+                    'id': "recepisse-article-116",
+                    'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)",
+                    'activatedFields': ['eventDate', ],
+                    'deadLineDelay': 15,
+                    'podTemplates': ({'id': "urb-recepisse-art116", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
+                    'eventTypeType': 'Products.urban.interfaces.IModificationDepositEvent',
+                    },
+                    {
                     'id': "dossier-incomplet",
                     'title': "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
                     'activatedFields': [],
@@ -276,6 +284,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'activatedFields': [],
                     'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IWorkBeginning',
                     },
                     {
                     'id': "fin-des-travaux",
@@ -305,6 +314,7 @@ urbanEventTypes = {
                                      {'id': "urb-prorogation-transmis-accept", 'title': "Acceptation de prorogation (lettre au demandeur)"},
                                      {'id': "urb-prorogation-transmis-accept-fd", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
                                     ),
+                    'eventTypeType': 'Products.urban.interfaces.IProrogation',
                     },
                     {
                     'id': "suspension-du-permis",

@@ -160,6 +160,11 @@ class IUrbanEventInquiry(Interface):
     """
 
 ##code-section FOOT
+class ILicenceContainer(Interface):
+    """
+    Marker interface for a folder containing Licences
+    """
+
 class IEventTypeType(IInterface):
     """
     Basic event type
@@ -214,6 +219,10 @@ class ITheLicenceEvent(Interface):
 
 class IWorkBeginningEvent(Interface):
     __doc__ = _("""IWorkBeginning type marker interface""")
+
+
+class IProrogationEvent(Interface):
+    __doc__ = _("""IProrogation type marker interface""")
 
 
 class IUrbanBase(Interface):

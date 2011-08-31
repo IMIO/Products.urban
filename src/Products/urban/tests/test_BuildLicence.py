@@ -12,7 +12,7 @@ class TestBuildLicence(unittest.TestCase):
 
     def setUp(self):
         portal = self.layer['portal']
-        self.portal_urban = portal.portal_urban        
+        self.portal_urban = portal.portal_urban
         urban = portal.urban
         self.buildLicences = urban.buildlicences
         LICENCE_ID = 'licence1'
@@ -34,6 +34,7 @@ class TestBuildLicence(unittest.TestCase):
         self.assertEqual(self.buildLicence._getLastEvent(), None)
         createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='A')
         ev2 = createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='B')
+        sleep(1)
         event = self.buildLicence._getLastEvent()
         self.failUnless(event is not None)
         self.assertEqual(event.Description(), 'B')
@@ -56,6 +57,7 @@ class TestBuildLicence(unittest.TestCase):
         createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='B')
         sleep(1)
         ev3 = createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence, description='C')
+        sleep(1)
         event = self.buildLicence.getLastDeposit()
         self.assertEqual(event.Description(), 'C')
         self.assertEqual(event, ev3)
@@ -70,7 +72,7 @@ class TestBuildLicence(unittest.TestCase):
         self.assertEqual(event, ev2)
 
     def testGetCurrentFolderManager(self):
-        #1 link login on treatment agent        
+        #1 link login on treatment agent
         at = getattr(self.portal_urban.buildlicence.foldermanagers,'foldermanager1')
         at.setPloneUserId('urbaneditor')
         #2 create an empty buildlicence
@@ -79,12 +81,10 @@ class TestBuildLicence(unittest.TestCase):
         buildLicence2 = getattr(self.buildLicences, LICENCE_ID)
         buildLicence2.setFoldermanagers(self.portal_urban.getCurrentFolderManager(buildLicence2,initials=False))
         #3 check if agent treatment exist
-        #import pdb;pdb.set_trace()
         self.assertEqual(buildLicence2.getFoldermanagers()[0].getPloneUserId(),'urbaneditor')
         at.setPloneUserId('urbanreader')
         LICENCE_ID = 'licence3'
         self.buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
         buildLicence3 = getattr(self.buildLicences, LICENCE_ID)
         buildLicence3.setFoldermanagers(self.portal_urban.getCurrentFolderManager(buildLicence3,initials=False))
-        self.assertEqual(len(buildLicence3.getFoldermanagers()),0)  
-        
+        self.assertEqual(len(buildLicence3.getFoldermanagers()),0)

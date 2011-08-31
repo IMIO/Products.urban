@@ -25,7 +25,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-    
+
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -347,7 +347,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def __init__(self, id=None):
         OrderedBaseFolder.__init__(self,'portal_urban')
         self.setTitle('Urban configuration')
-        
+
         ##code-section constructor-footer #fill in your manual code here
         ##/code-section constructor-footer
 
@@ -355,7 +355,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     # tool should not appear in portal_catalog
     def at_post_edit_script(self):
         self.unindexObject()
-        
+
         ##code-section post-edit-method-footer #fill in your manual code here
         self.checkDBConnection()
         ##/code-section post-edit-method-footer
@@ -696,7 +696,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             delattr(self,'dbc')
         else:
             ptool = getToolByName(self, "plone_utils")
-            ptool.addPortalMessage(_(u"db_connection_error", mapping={u'error': self.dbc}), type="error")
+            ptool.addPortalMessage(_(u"db_connection_error", 'plone', mapping={u'error': self.dbc}), type="error")
         return result
 
     def checkDBConnection(self):
@@ -707,9 +707,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         ptool = getToolByName(self, "plone_utils")
         try:
             psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (self.getSqlName(), self.getSqlUser(), self.getSqlHost(), self.getSqlPassword()))
-            ptool.addPortalMessage(_(u"db_connection_successfull"), type='info')
+            ptool.addPortalMessage(_(u"db_connection_successfull", 'plone', context=self.REQUEST), type='info')
         except psycopg2.OperationalError, e:
-            ptool.addPortalMessage(_(u"db_connection_error", mapping={u'error': unicode(e.__str__(), 'utf-8')}))
+            ptool.addPortalMessage(_(u"db_connection_error", 'plone', mapping={u'error': unicode(e.__str__(), 'utf-8')}, context=self.REQUEST))
 
     security.declarePublic('mayAccessUrban')
     def mayAccessUrban(self):
@@ -1557,4 +1557,3 @@ registerType(UrbanTool, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

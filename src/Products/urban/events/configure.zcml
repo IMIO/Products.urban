@@ -20,10 +20,12 @@
               handler=".inquiryEvents.setGeneratedTitle" />
   <subscriber for="..interfaces.IGenericLicence
                    Products.Archetypes.event.IEditBegunEvent"
-              handler=".licenceEvents.setDefaultFolderManagersEvent"/>           
+                   handler=".licenceEvents.setDefaultFolderManagersEvent"/>
+
   <subscriber for="..interfaces.IPortionOut
                    zope.app.container.interfaces.IObjectRemovedEvent"
-              handler=".portionOutEvents.onDelete" />
+                   handler=".portionOutEvents.onDelete" />
+
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setEventTypeType"/>

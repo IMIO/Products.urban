@@ -49,7 +49,6 @@ class TestUrbanEventTypes(unittest.TestCase):
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune2','urban-addCommune1UrbanEventTypes')  
         my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertEqual(my_file_odt.ModificationDate(),my_update_file_datetime)        
-        #import pdb; pdb.set_trace()
         # 6)
         my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         my_file_odt.manage_changeProperties({"profileName":'tests'})

@@ -25,7 +25,7 @@
                 manager="plone.rightcolumn"
                 type="portlets.Events" />
 
-    <portlet 
+    <portlet
        addview="urban.portlets.portlet_urban"
        title="Portlet Urban"
        description="A portlet which can render some searches"
@@ -34,9 +34,9 @@
        <for interface="plone.app.portlets.interfaces.IColumn" />
     </portlet>
 
-    <assignment name="portlet_urban" category="context" key="/urban/"
+    <!-- assignment name="portlet_urban" category="context" key="/urban/"
               manager="plone.leftcolumn" type="urban.portlets.portlet_urban" >
       <property name="macro">portlet</property>
       <property name="template">portlet_urban</property>
-    </assignment>    
+    </assignment -->
 </portlets>
