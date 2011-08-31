@@ -438,6 +438,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                                         obj_typeinfo python: here.portal_types.getTypeInfo(obj_type);
                                         obj_icon python:plone_view.getIcon(obj);
                                         obj_wf_state obj/review_state|python: context.portal_workflow.getInfoFor(obj, 'review_state', '');
+                                        member context/@@plone_portal_state/member;
                                         ploneview nocall: context/@@plone;
                                         normalizeString nocall:ploneview/normalizeString; 
                                         obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);
@@ -483,8 +484,10 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                                 class="link-plain"
                                 tal:content="title_or_id" />
                             <tal:block condition="python: obj.portal_type in ['UrbanEvent', 'UrbanEventInquiry',]">
-                             <tal:block define="object obj/getObject" repeat="doc object/getDocuments">
-                              <br /><span class="discreet" style="margin-left:20px" tal:content="doc/Title">Document</span>
+                             <tal:block define="object obj/getObject;
+                                                suffix python: member.has_permission('Modify portal content', obj) and '/external_edit' or ''"
+                                                repeat="doc object/getDocuments">
+                              <br /><a href="#" class="discreet" style="margin-left:20px" tal:content="doc/Title" tal:attributes="href python: doc.absolute_url() + suffix">Document</a>
                              </tal:block>
                             </tal:block>
                         </td>
