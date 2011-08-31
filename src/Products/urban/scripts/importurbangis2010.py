@@ -210,20 +210,25 @@ conn = psycopg2.connect("dbname='"+databasename+"' user="+login+" host='localhos
 dict_cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 std_cur = conn.cursor()
 
+tablenames=['NSR','PAS','ART','DA','LT','MAP','NA','PE','PRC']
+
 if step in run_steps:
     if action == 'new':
         std_cur.execute('CREATE ROLE %s LOGIN NOINHERIT;'%databasename)
         std_cur.execute('CREATE LANGUAGE plpgsql;')
         conn.commit()
-    #can be changed
+    #can be changed    
+    if action=='update':
+        for tablename in tablenames:
+            if tablename != 'DA':
+                std_cur.execute('DROP TABLE '+tablename.lower()+';')
+                conn.commit()
     print "If asked, enter the password of the postgres user '%s'"%login
     os.system('psql -d %s -U %s -f matrice.sql'%(databasename, login))
 
     cont = raw_input("Press anything to continue or x to exit: ")
     if cont in ('x','X'):
         sys.exit(0)
-
-tablenames=['NSR','PAS','ART','DA','LT','MAP','NA','PE','PRC']
 
 step = 'B'
 if step in run_steps:
@@ -322,11 +327,11 @@ if step in run_steps:
     print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
     for shapefilename in shapefilesnames:
         if action == 'update':
-            dict_cur.execute('DROP TABLE '+shapefilename.lower()+';')
+            dict_cur.execute('DROP TABLE '+shapefilename.lower()+' CASCADE;')
             conn.commit()
         if os.path.exists(shapefilename.lower()+'.sql'):
             os.remove(shapefilename.lower()+'.sql')
-        os.system('shp2pgsql -I -W ISO-8859-1 -s 31300 B_'+shapefilename+'.shp '+shapefilename.lower()+' >>'+shapefilename.lower()+'.sql')
+        os.system('shp2pgsql -I -W ISO-8859-1 -s 31300 B_'+shapefilename+'.shp '+shapefilename.lower()+' >'+shapefilename.lower()+'.sql')
 
 step = 'E'
 if step in run_steps:
