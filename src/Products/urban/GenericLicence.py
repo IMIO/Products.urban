@@ -923,7 +923,33 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         """
         return self.listFolderContents({'portal_type': 'UrbanEventInquiry',})
 
+    security.declarePublic('createAllAdvices')
+    def createAllAdvices(self):
+        """
+           Create all urbanEvent corresponding to advice on a licence
+        """
+        from factory import UrbanEventFactory 
+        listEventTypes = self.getAllAdvices()
+        for listEventType in listEventTypes:
+            my_uef = UrbanEventFactory()
+            my_uef.__call__(listEventType.id,self)
+        return self.REQUEST.RESPONSE.redirect(self.absolute_url()+'/view?#fieldsetlegend-urban_events')
 
+    security.declarePublic('getAllAdvices')
+    def getAllAdvices(self):
+        """
+           return all urbanEvent corresponding to advice on a licence
+        """            
+        tool = getToolByName(self, 'portal_urban')
+        urbanConfig = tool.getUrbanConfig(self)
+        listEventTypes = tool.listEventTypes(self,urbanConfig.id)
+        res = []
+        for listEventType in listEventTypes:
+            obj = listEventType.getObject()
+            #an advice corresponding to IOpinionRequestEvent 
+            if obj.eventTypeType == 'Products.urban.interfaces.IOpinionRequestEvent':
+                res.append(obj)
+        return res
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence

@@ -23,6 +23,9 @@ msgstr ""
 msgid "Add an event"
 msgstr ""
 
+msgid "Add all advices"
+msgstr ""
+
 msgid "Add this parcel"
 msgstr ""
 
@@ -422,6 +425,9 @@ msgid "flooding_level_no"
 msgstr ""
 
 msgid "folder_events"
+msgstr ""
+
+msgid "folder_advice"
 msgstr ""
 
 msgid "folderbuildworktype_folder_title"

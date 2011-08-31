@@ -25,6 +25,9 @@ msgstr "Ajouter une adresse"
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
+msgid "Add all advices"
+msgstr "Ajouter tous les avis"
+
 msgid "Add this parcel"
 msgstr "Ajouter cette parcelle"
 
@@ -425,6 +428,9 @@ msgstr "Non"
 
 msgid "folder_events"
 msgstr "Evénements du dossier"
+
+msgid "folder_advice"
+msgstr "Avis du dossier"
 
 msgid "folderbuildworktype_folder_title"
 msgstr "Nature des demandes"

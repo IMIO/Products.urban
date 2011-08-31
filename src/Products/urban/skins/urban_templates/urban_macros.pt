@@ -296,6 +296,14 @@
 <p class="discreet" tal:condition="not: eventTypes" i18n:translate="urban_no_eventtype_defined">No event type is defined in the configuration for this element</p>
 </div>
 
+<div metal:define-macro="urbanEventsAdviceMacro" i18n:domain="urban" tal:define="eventTypes python:context.portal_urban.listEventTypes(context, urbanConfigId=context.portal_type.lower())">
+<form action="createAllAdvices" method="POST"
+      tal:define="member context/@@plone_portal_state/member;"
+      tal:condition="python: member.has_permission('urban: Add UrbanEvent', context) and eventTypes">
+ <input class="context" type="submit" i18n:attributes="value" value="Add all advices">
+</form>
+</div>
+
 <div metal:define-macro="urbanPortalMessageMacro" i18n:domain="urban">
 <tal:portalMessage define="messages context/constructPortalMessage">
 <dl class="portalMessage warning" tal:repeat="message messages">

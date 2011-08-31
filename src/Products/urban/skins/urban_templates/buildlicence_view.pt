@@ -343,6 +343,18 @@
  </tr>
  </table>
 </fieldset>
+<div tal:condition="python: len(context.getAllAdvices())" >
+<fieldset><strong><legend>Avis du dossier</legend></strong>
+ <table cellspacing=0 cellpadding=0 width=100%>
+ <tr>
+  <td>
+   <metal:events use-macro="here/urban_macros/macros/urbanEventsAdviceMacro" />
+   <br />
+  </td>
+ </tr>
+ </table>
+</fieldset>
+</div>
 </dd>
 
 <div tal:replace="structure provider:plone.belowcontentbody" />
@@ -696,7 +708,18 @@
  </tr>
  </table>
 </fieldset>
-
+<div tal:condition="python: len(context.getAllAdvices())" >
+<fieldset><strong><legend i18n:translate="folder_advice">Folder Advice</legend></strong>
+ <table cellspacing=0 cellpadding=0 width=100%>
+ <tr>
+  <td>
+   <metal:events use-macro="here/urban_macros/macros/urbanEventsAdviceMacro" />
+   <br />
+  </td>
+ </tr>
+ </table>
+</fieldset>
+</div>
 </div>
 
 </metal:body>
