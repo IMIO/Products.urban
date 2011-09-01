@@ -792,7 +792,7 @@ def addGlobalFolders(context):
         newFolder.invokeFactory("UrbanVocabularyTerm",id="favorable",title=u"Favorable")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="favorable-conditionnel",title=u"Favorable conditionnel")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="defavorable",title=u"Défavorable")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="favorable-defaut",title=u"Favorable par défaut")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="favorable-defaut",title=u"Réputé favorable par défaut")
  
 def addUrbanConfigsTopics(context):
     """
