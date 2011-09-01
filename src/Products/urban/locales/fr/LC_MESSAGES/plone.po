@@ -195,7 +195,7 @@ msgid "label_schema_urban_carto"
 msgstr "Cartographie"
 
 msgid "label_schema_urban_description"
-msgstr "Description"
+msgstr "Récapitulatif"
 
 msgid "label_schema_urban_details"
 msgstr "Détails"

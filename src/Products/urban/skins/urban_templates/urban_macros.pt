@@ -267,7 +267,6 @@
  </tal:rows>
  </tbody>
  </table>
- <br />
  <form tal:define="ctype python: context.portal_types.getTypeInfo('Applicant');
                    member context/@@plone_portal_state/member;"
        tal:condition="python: member.has_permission('urban: Add Contact', context)"
@@ -281,27 +280,58 @@
 </metal:applicants>
 
 <div metal:define-macro="urbanEventsMacro" i18n:domain="urban" tal:define="eventTypes python:context.portal_urban.listEventTypes(context, urbanConfigId=context.portal_type.lower())">
-<form action="createUrbanEvent" method="POST"
-      tal:define="member context/@@plone_portal_state/member;"
-      tal:condition="python: member.has_permission('urban: Add UrbanEvent', context) and eventTypes">
- <input type='hidden' name="urban_folder_uid" tal:attributes="value here/UID" value=''>
- <select name="urban_event_type_uid">
-  <tal:loopEventType repeat="eventType eventTypes">
-   <option tal:attributes="value eventType/UID" value='' tal:content="eventType/Title">
-   </option>
-  </tal:loopEventType>
- </select>
- <input class="context" type="submit" i18n:attributes="value" value="Add an event">
-</form>
-<p class="discreet" tal:condition="not: eventTypes" i18n:translate="urban_no_eventtype_defined">No event type is defined in the configuration for this element</p>
-</div>
-
-<div metal:define-macro="urbanEventsAdvicesMacro" i18n:domain="urban">
-<form action="createAllAdvices" method="POST"
-      tal:define="member context/@@plone_portal_state/member;"
-      tal:condition="python: member.has_permission('urban: Add UrbanEvent', context)">
- <input class="context" type="submit" i18n:attributes="value" value="Add all advices">
-</form>
+ <table cellspacing=0 cellpadding=0 width=100%>
+ <tr>
+  <td>
+   <form action="createUrbanEvent" method="POST"
+         tal:define="member context/@@plone_portal_state/member;"
+         tal:condition="python: member.has_permission('urban: Add UrbanEvent', context) and eventTypes">
+    <input type='hidden' name="urban_folder_uid" tal:attributes="value here/UID" value=''>
+    <select name="urban_event_type_uid">
+     <tal:loopEventType repeat="eventType eventTypes">
+      <option tal:attributes="value eventType/UID" value='' tal:content="eventType/Title">
+      </option>
+     </tal:loopEventType>
+    </select>
+    <input class="context" type="submit" i18n:attributes="value" value="Add an event">
+   </form>
+   <p class="discreet" tal:condition="not: eventTypes" i18n:translate="urban_no_eventtype_defined">No event type is defined in the configuration for this element</p>
+   <br />
+  </td>
+ </tr>
+ <tr>
+  <td>
+    <div tal:define="specificSearch python: 'searchUrbanEvents';
+                     tool python: context.portal_urban;
+                     showedCols python: ('Title', 'created', 'Creator', );
+                     topic python: None;
+                     showActions python: True;
+                     theObjects python: False;
+                     batchlen python: 50">
+     <metal:listing use-macro="here/urban_macros/macros/listing" />
+    </div>
+  </td>
+ </tr>
+ </table>
+ <div tal:define="allAdvices context/getAllAdvices" tal:condition="allAdvices" >
+ <fieldset><strong><legend i18n:translate="folder_advice">Folder advices</legend></strong>
+  <table cellspacing=0 cellpadding=0 width=100%>
+  <tr>
+   <td>
+    <form action="createAllAdvices" method="POST"
+          tal:define="member context/@@plone_portal_state/member;"
+          tal:condition="python: member.has_permission('urban: Add UrbanEvent', context)">
+     <input class="context" type="submit" i18n:attributes="value" value="Add all advices">
+    </form>
+    <div class="discreet">
+     <span i18n:translate="add_every_advices_descr">This will automatically generate following advices :</span>&nbsp;
+     <span tal:content="python: ','.join([advice.Title() for advice in allAdvices])" />
+    </div>
+   </td>
+  </tr>
+  </table>
+ </fieldset>
+ </div>
 </div>
 
 <div metal:define-macro="urbanPortalMessageMacro" i18n:domain="urban">

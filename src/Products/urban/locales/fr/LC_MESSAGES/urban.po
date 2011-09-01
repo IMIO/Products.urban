@@ -179,6 +179,9 @@ msgstr "Ajouter une enquête supplémentaire"
 msgid "add_event"
 msgstr "Ajouter un événement"
 
+msgid "add_every_advices_descr"
+msgstr "Ceci ajoutera automatiquement les avis suivants :"
+
 msgid "additonal_layers_folder_title"
 msgstr "Configuration des couches supplémentaires"
 

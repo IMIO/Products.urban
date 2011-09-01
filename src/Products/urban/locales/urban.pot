@@ -2139,3 +2139,5 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
+msgid "add_every_advices_descr"
+msgstr ""
