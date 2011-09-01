@@ -476,6 +476,17 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getAllMissingPartDeposits(self):
         return self._getAllEvents(interfaces.IMissingPartDepositEvent)
 
+    def getAllTechnicalServiceOpinionRequests(self):
+        return self._getAllEvents(interfaces.ITechnicalServiceOpinionRequestEvent)
+
+    def getAllTechnicalServiceOpinionRequestsNoDup(self):
+        allOpinions = self.getAllTechnicalServiceOpinionRequests()
+        allOpinionsNoDup = {}
+        for opinion in allOpinions:
+            actor = opinion.getUrbaneventtypes().getId()
+            allOpinionsNoDup[actor]=opinion
+        return allOpinionsNoDup.values()
+
     def getAllOpinionRequests(self):
         return self._getAllEvents(interfaces.IOpinionRequestEvent)
 

@@ -11,6 +11,7 @@ urbanEventTypes = {
                     'podTemplates': (
                                      {'id': "urb-avis-technique-voirie", 'title': "Avis technique"},
                                     ),
+                    'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
                     },
                     {
                     'id': "fiche-technique-energie",
@@ -21,6 +22,7 @@ urbanEventTypes = {
                     'podTemplates': (
                                      {'id': "urb-avis-technique-energie", 'title': "Avis technique"},
                                     ),
+                    'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
                     },
                     {
                     'id': "fiche-technique-urbanisme",
@@ -31,6 +33,7 @@ urbanEventTypes = {
                     'podTemplates': (
                                      {'id': "urb-avis-technique-urbanisme", 'title': "Avis technique"},
                                     ),
+                    'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
                     },
                     {
                     'id': "dossier-incomplet",

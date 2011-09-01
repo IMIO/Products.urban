@@ -169,6 +169,10 @@ class IEventTypeType(IInterface):
     Basic event type
     """
 
+class ITechnicalServiceOpinionRequestEvent(Interface):
+    __doc__ = _("""ITechnicalServiceOpinionRequest type marker interface""")
+
+
 class IOpinionRequestEvent(Interface):
     __doc__ = _("""IOpinionRequest type marker interface""")
 
