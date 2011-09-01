@@ -696,7 +696,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             delattr(self,'dbc')
         else:
             ptool = getToolByName(self, "plone_utils")
-            ptool.addPortalMessage(_(u"db_connection_error", 'plone', mapping={u'error': self.dbc}), type="error")
+            ptool.addPortalMessage(_(u"db_connection_error", mapping={u'error': self.dbc}), type="error")
         return result
 
     def checkDBConnection(self):
@@ -707,9 +707,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         ptool = getToolByName(self, "plone_utils")
         try:
             psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (self.getSqlName(), self.getSqlUser(), self.getSqlHost(), self.getSqlPassword()))
-            ptool.addPortalMessage(_(u"db_connection_successfull", 'plone', context=self.REQUEST), type='info')
+            ptool.addPortalMessage(_(u"db_connection_successfull"), type='info')
         except psycopg2.OperationalError, e:
-            ptool.addPortalMessage(_(u"db_connection_error", 'plone', mapping={u'error': unicode(e.__str__(), 'utf-8')}, context=self.REQUEST))
+            ptool.addPortalMessage(_(u"db_connection_error", mapping={u'error': unicode(e.__str__(), 'utf-8')}))
 
     security.declarePublic('mayAccessUrban')
     def mayAccessUrban(self):
