@@ -202,7 +202,7 @@ schema = Schema((
             label_msgid='urban_label_externalDecision',
             i18n_domain='urban',
         ),
-        enforceVocabulary=Tue,
+        enforceVocabulary=True,
         optional=True,
         vocabulary='listExternalDecisions',
     ),

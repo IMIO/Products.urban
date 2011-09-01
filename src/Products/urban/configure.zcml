@@ -75,7 +75,15 @@
   <interface
     interface=".interfaces.IProrogationEvent"
     type=".interfaces.IEventTypeType"/>
+  <adapter
+    for="Products.CMFCore.interfaces.ICatalogAware
+        Products.Archetypes.interfaces.IUIDCatalog"
+    factory="plone.indexer.wrapper.IndexableObjectWrapper"
+    provides="plone.indexer.interfaces.IIndexableObject"
+  />
 
+  <adapter name="Title" factory=".indexes.baseobject_title" />
+ 
   <!-- ##/code-section configure.zcml.header -->
 
   <i18n:registerTranslations directory="locales" />
@@ -84,15 +92,8 @@
 
   <include file="generatedsubscribers.zcml"/>
 
-  <!-- ##code-section configure.zcml -->
-    <adapter
-        for="Products.CMFCore.interfaces.ICatalogAware
-             Products.Archetypes.interfaces.IUIDCatalog"
-        factory="plone.indexer.wrapper.IndexableObjectWrapper"
-        provides="plone.indexer.interfaces.IIndexableObject"
-        />
 
-    <adapter name="Title" factory=".indexes.baseobject_title" />
+  <!-- ##code-section configure.zcml -->
   <!-- ##/code-section configure.zcml -->
 
 </configure>
