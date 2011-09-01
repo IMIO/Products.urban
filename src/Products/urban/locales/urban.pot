@@ -2141,3 +2141,28 @@ msgstr ""
 
 msgid "add_every_advices_descr"
 msgstr ""
+
+msgid "urban_description_key_dates_legend"
+msgstr ""
+
+msgid "urban_label_acknowledgmentDate"
+msgstr ""
+
+msgid "urban_label_missingPartDate"
+msgstr ""
+
+msgid "urban_label_walloonRegionPrimoDate"
+msgstr ""
+
+msgid "urban_label_opinionRequestsDate"
+msgstr ""
+
+msgid "urban_label_opinionRequestsTransmitDate"
+msgstr ""
+
+msgid "urban_label_collegeReportDecisionDate"
+msgstr ""
+
+msgid "urban_label_theLicenceDate"
+msgstr ""
+

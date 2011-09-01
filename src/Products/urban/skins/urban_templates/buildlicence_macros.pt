@@ -8,12 +8,71 @@
   </td>
   <td width="1%"></td>
   <td valign="top" width=50%>
-   <fieldset><strong><legend i18n:translate="urban_label_keydates">Key dates</legend></strong>
+   <fieldset><strong><legend i18n:translate="urban_description_key_dates_legend">Key dates</legend></strong>
     <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_receiptDate">Receipt date</span> :</b></td>
       <td width="2%"></td>
-      <td valign="top"><tal:content content="python: 1" /></td>
+      <td valign="top" tal:define="receiptDate view/getReceiptDate">
+       <tal:content condition="receiptDate" content="receiptDate">Content</tal:content>
+       <span class="discreet" tal:condition="not: receiptDate" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_acknowledgmentDate">Acknowledgment date</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="acknowledgmentDate view/getAcknowledgmentDate">
+       <tal:content condition="acknowledgmentDate" content="acknowledgmentDate">Content</tal:content>
+       <span class="discreet" tal:condition="not: acknowledgmentDate" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_missingPartDate">Missing parts date</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="missingPartDate view/getMissingPartDate">
+       <tal:content condition="missingPartDate" content="missingPartDate">Content</tal:content>
+       <span class="discreet" tal:condition="not: missingPartDate" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_walloonRegionPrimoDate">Walloon Region primo date</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="walloonRegionPrimoDate view/getWalloonRegionPrimoDate">
+       <tal:content condition="walloonRegionPrimoDate" content="walloonRegionPrimoDate">Content</tal:content>
+       <span class="discreet" tal:condition="not: walloonRegionPrimoDate" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_opinionRequestsDate">Opinion requests date</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="opinionRequestsDate view/getOpinionRequestsDate">
+       <tal:content condition="opinionRequestsDate" content="opinionRequestsDate">Content</tal:content>
+       <span class="discreet" tal:condition="not: opinionRequestsDate" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_opinionRequestsTransmitDate">Opinion requests transmit date</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="opinionRequestsTransmitDate view/getOpinionRequestsTransmitDate">
+       <tal:content condition="opinionRequestsTransmitDate" content="opinionRequestsTransmitDate">Content</tal:content>
+       <span class="discreet" tal:condition="not: opinionRequestsTransmitDate" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_collegeReportDecisionDate">College report decision date</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="collegeReportDecisionDate view/getCollegeReportDecisionDate">
+       <tal:content condition="collegeReportDecisionDate" content="collegeReportDecisionDate">Content</tal:content>
+       <span class="discreet" tal:condition="not: collegeReportDecisionDate" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_theLicenceDate">The licence date</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="theLicenceDate view/getTheLicenceDate">
+       <tal:content condition="theLicenceDate" content="theLicenceDate">Content</tal:content>
+       <span class="discreet" tal:condition="not: theLicenceDate" i18n:translate="content_none">None</span>
+      </td>
      </tr>
     </table>
    </fieldset>

@@ -10,7 +10,7 @@
  <property name="content_meta_type">BuildLicence</property>
  <property name="product">urban</property>
  <property name="factory">addBuildLicence</property>
- <property name="immediate_view">buildlicence_view</property>
+ <property name="immediate_view">buildlicenceview</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
@@ -24,13 +24,13 @@
    <element value="Inquiry"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">buildlicence_view</property>
+ <property name="default_view">buildlicenceview</property>
  <property name="view_methods">
   <element value="folder_summary_view"/>
   <element value="folder_tabular_view"/>
   <element value="atct_album_view"/>
   <element value="folder_listing"/>
-  <element value="buildlicence_view"/>
+  <element value="buildlicenceview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
@@ -41,7 +41,7 @@
          action_id="view"
          category="object" 
          condition_expr=""
-         url_expr="string:${object_url}/view" 
+         url_expr="string:${object_url}/buildlicenceview" 
          visible="True">
   <permission value="View"/>
  </action>

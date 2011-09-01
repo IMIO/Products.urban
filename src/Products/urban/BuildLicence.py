@@ -473,6 +473,9 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastProrogation(self):
         return self._getLastEvent(interfaces.IProrogationEvent)
 
+    def getLastOpinionRequest(self):
+        return self._getLastEvent(interfaces.IOpinionRequestEvent)
+
     def getAllMissingPartDeposits(self):
         return self._getAllEvents(interfaces.IMissingPartDepositEvent)
 

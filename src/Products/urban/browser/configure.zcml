@@ -34,12 +34,20 @@
      class=".searchstreetsform.SearchStreetsForm"
      permission="zope2.View"
   />
-  
+
   <browser:page
-     for="*"
+     for="Products.urban.interfaces.IContact"
      name="contactview"
      class=".contactview.ContactView"
      template="templates/contactview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IBuildLicence"
+     name="buildlicenceview"
+     class=".buildlicenceview.BuildLicenceView"
+     template="templates/buildlicenceview.pt"
      permission="zope2.View"
   />
 

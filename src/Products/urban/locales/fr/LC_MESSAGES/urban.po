@@ -874,6 +874,9 @@ msgstr "Numéro des lots, ..."
 msgid "urban_descr_usedAttributes"
 msgstr "Sélectionner les champs optionnels à utiliser. Utiliser la touche CTRL pour une sélection multiple ou pour désélectionner"
 
+msgid "urban_description_key_dates_legend"
+msgstr "Dates clés"
+
 msgid "urban_export_list220"
 msgstr "Exportation liste 220"
 
@@ -987,6 +990,9 @@ msgstr "Adresse WMS (url)"
 #: PersonTitleTerm.py
 msgid "urban_label_abbreviation"
 msgstr "Abréviation"
+
+msgid "urban_label_acknowledgmentDate"
+msgstr "Date de l'accusé de réception"
 
 #. Default: "Activatedfields"
 #: UrbanEventType.py
@@ -1113,6 +1119,9 @@ msgstr "Date de la séance de réclamations"
 #: UrbanEvent.py
 msgid "urban_label_claimsText"
 msgstr "Texte des réclamations"
+
+msgid "urban_label_collegeReportDecisionDate"
+msgstr "Date de décision du collège"
 
 #. Default: "Color"
 #: Layer.py
@@ -1526,6 +1535,9 @@ msgstr "Destination"
 msgid "urban_label_mapExtent"
 msgstr "Coordonnées d'affichage de la carte"
 
+msgid "urban_label_missingPartDate"
+msgstr "Date dossier incomplet"
+
 #. Default: "Missingparts"
 #: GenericLicence.py
 msgid "urban_label_missingParts"
@@ -1582,6 +1594,12 @@ msgstr "Expression TAL gérant la référence des permis"
 #: UrbanTool.py
 msgid "urban_label_openOfficePort"
 msgstr "Port OpenOffice"
+
+msgid "urban_label_opinionRequestsDate"
+msgstr "Date d'émission des demandes d'avis"
+
+msgid "urban_label_opinionRequestsTransmitDate"
+msgstr "Date de transmis des demandes d'avis"
 
 #. Default: "Outlinecolor"
 #: Layer.py
@@ -1934,6 +1952,9 @@ msgstr "Clé sous forme texte"
 msgid "urban_label_termTitle"
 msgstr "Valeur utilisée"
 
+msgid "urban_label_theLicenceDate"
+msgstr "Date de notification"
+
 #. Default: "Title"
 #: Declaration.py
 #: GenericLicence.py
@@ -1987,6 +2008,9 @@ msgstr "Champs optionnels utilisés"
 #: Layer.py
 msgid "urban_label_visibility"
 msgstr "Visibilité?"
+
+msgid "urban_label_walloonRegionPrimoDate"
+msgstr "Date primo dossier"
 
 #. Default: "Webserverhost"
 #: UrbanTool.py
