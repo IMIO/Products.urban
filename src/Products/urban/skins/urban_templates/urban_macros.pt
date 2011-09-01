@@ -321,19 +321,19 @@
 <tal:comment replace="nothing">
 Requires defined element "thisObject" as an object and
 can receive a "actionsToHide" list of actions not to display</tal:comment>
-<div metal:define-macro="urbanActionsMacro" i18n:domain="urban">
+<div metal:define-macro="urbanActionsMacro" i18n:domain="urban"
+           tal:define="member context/@@plone_portal_state/member;
+           actionsToHide actionsToHide|python:()">
 
   <!-- actions panel -->
 
-  <table class="no-style-table" align="right" tal:define="member context/@@plone_portal_state/member;
-                                                          actionsToHide actionsToHide|python:()">
-    <tr tal:define="wtool context/portal_workflow;
-                    ext_editor context/portal_properties/site_properties/ext_editor">
+  <div align="right" tal:define="wtool context/portal_workflow;
+                     ext_editor context/portal_properties/site_properties/ext_editor">
       <!-- Available transitions -->
-      <td tal:condition="python: not 'transitions' in actionsToHide"
-          tal:repeat="transition python: wtool.getTransitionsFor(thisObject)"
-          class="noPadding" align="left">
-        <form tal:attributes="action python: thisObject.absolute_url() + '/content_status_modify'"
+      <tal:wf_transitions condition="python: not 'transitions' in actionsToHide"
+                          repeat="transition python: wtool.getTransitionsFor(thisObject)">
+        <form style="display: inline;"
+              tal:attributes="action python: thisObject.absolute_url() + '/content_status_modify'"
               tal:define="imageName python: transition['title'] + '.png'"
               i18n:domain="plone">
           <input type="hidden" name="workflow_action" tal:attributes="value python: transition['id']" />
@@ -348,20 +348,19 @@ can receive a "actionsToHide" list of actions not to display</tal:comment>
                  type="submit" tal:attributes="value python: transition['id'];"
                  i18n:attributes="value"/>
         </form>
-      </td>
+      </tal:wf_transitions>
 
       <!-- Edit action -->
-      <td tal:condition="python: member.has_permission('Modify portal content', thisObject)"
-          class="noPadding" tal:define="suffix python: test(needExternalEdition and ext_editor,  '/external_edit', '/edit')">
-        <a tal:attributes="href python: thisObject.absolute_url() + suffix">
+      <tal:edit_action condition="python: member.has_permission('Modify portal content', thisObject)"
+                       define="suffix python: test(needExternalEdition and ext_editor,  '/external_edit', '/edit')">
+        <a class="noPadding" tal:attributes="href python: thisObject.absolute_url() + suffix">
           <img src="#" tal:attributes="src string:${portal_url}/edit.gif" title="label_edit" i18n:attributes="title" />
         </a>
-      </td>
+      </tal:edit_action>
 
       <!-- Own management of the "delete" action -->
-      <td tal:condition="python: member.has_permission('Delete objects', thisObject)" class="noPadding">
-        
-        
+      <tal:delete_action condition="python: member.has_permission('Delete objects', thisObject)">
+
         <!-- will be used for overlays
 
 
@@ -377,15 +376,14 @@ can receive a "actionsToHide" list of actions not to display</tal:comment>
         }
         );   -->
 
-        <a class="urbanDelete" 
+        <a class="urbanDelete noPadding"  
            tal:attributes="href python: thisObject.absolute_url() + '/delete_confirmation'">
             <!-- Icon -->
             <img src="#" tal:attributes="src string:${portal_url}/delete_icon.gif" i18n:attributes="title" title="label_remove"
                  onClick="javascript:confirmDeleteObject(this)" style="cursor:pointer"/>
         </a>
-      </td>
-  </tr>
-  </table>
+      </tal:delete_action>
+  </div>
 </div>
 
 <!-- This macro need to receive a topic -->
