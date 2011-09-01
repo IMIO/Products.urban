@@ -473,8 +473,30 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastProrogation(self):
         return self._getLastEvent(interfaces.IProrogationEvent)
 
+    def getAllMissingPartDeposits(self):
+        return self._getAllEvents(interfaces.IMissingPartDepositEvent)
+
     def getAllOpinionRequests(self):
         return self._getAllEvents(interfaces.IOpinionRequestEvent)
+
+    def getAllOpinionRequestsNoDup(self):
+        allOpinions = self.getAllOpinionRequests()
+        allOpinionsNoDup = {}
+        for opinion in allOpinions:
+            actor = opinion.getUrbaneventtypes().getId()
+            allOpinionsNoDup[actor]=opinion
+        return allOpinionsNoDup.values()
+
+    def getAllInquiries(self):
+        return self._getAllEvents(interfaces.IInquiryEvent)
+
+    def getAllClaimsTexts(self):
+        claimsTexts = []
+        for inquiry in self.getAllInquiries():
+            text = inquiry.getClaimsText()
+            if text is not "":
+                claimsTexts.append(text)
+        return claimsTexts
 
     def getProrogatedToDate(self):
         """

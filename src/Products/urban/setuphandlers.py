@@ -782,6 +782,18 @@ def addGlobalFolders(context):
         newFolder.invokeFactory("UrbanVocabularyTerm",id="favorable",title=u"Favorable")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="defavorable",title=u"Défavorable")
 
+    #add the external opinions decisions folder
+    if not hasattr(tool, "external-decisions"):
+        newFolderid = tool.invokeFactory("Folder",id="external-decisions",title=_("external_decisions_folder_title", 'urban', context=site.REQUEST))
+        newFolder = getattr(tool, newFolderid)
+        newFolder.setConstrainTypesMode(1)
+        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="favorable",title=u"Favorable")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="favorable-conditionnel",title=u"Favorable conditionnel")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="defavorable",title=u"Défavorable")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="favorable-defaut",title=u"Favorable par défaut")
+ 
 def addUrbanConfigsTopics(context):
     """
       Add the default topics of every urbanConfig

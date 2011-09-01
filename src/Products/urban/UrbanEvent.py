@@ -194,6 +194,18 @@ schema = Schema((
         ),
         optional=True,
     ),
+    StringField(
+        name='externalDecision',
+        widget=StringField._properties['widget'](
+            condition="python:here.attributeIsUsed('externalDecision')",
+            label='Externaldecision',
+            label_msgid='urban_label_externalDecision',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=Tue,
+        optional=True,
+        vocabulary='listExternalDecisions',
+    ),
     ReferenceField(
         name='urbaneventtypes',
         widget=ReferenceBrowserWidget(
@@ -247,6 +259,14 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     # Methods
 
     # Manually created methods
+
+    security.declarePublic('listExternalDecisions')
+    def listExternalDecisions(self):
+        """
+         Returns the list of decisions from the configuration
+        """
+        urbantool = getToolByName(self,'portal_urban')
+        return DisplayList(urbantool.listVocabulary('external-decisions', self, inUrbanConfig=False))
 
     security.declarePublic('listDecisions')
     def listDecisions(self):
