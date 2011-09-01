@@ -313,14 +313,15 @@
   </td>
  </tr>
  </table>
- <div tal:define="allAdvices context/getAllAdvices" tal:condition="allAdvices" >
+ <div tal:define="allAdvices context/getAllAdvices;
+                  member context/@@plone_portal_state/member;
+                  mayAddUrbanEvent python: member.has_permission('urban: Add UrbanEvent', context);"
+      tal:condition="python: allAdvices and mayAddUrbanEvent" >
  <fieldset><strong><legend i18n:translate="folder_advice">Folder advices</legend></strong>
   <table cellspacing=0 cellpadding=0 width=100%>
   <tr>
    <td>
-    <form action="createAllAdvices" method="POST"
-          tal:define="member context/@@plone_portal_state/member;"
-          tal:condition="python: member.has_permission('urban: Add UrbanEvent', context)">
+    <form action="createAllAdvices" method="POST">
      <input class="context" type="submit" i18n:attributes="value" value="Add all advices">
     </form>
     <div class="discreet">
