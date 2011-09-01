@@ -1323,7 +1323,7 @@ msgstr "Détails concernant le zonage"
 #: licenceFolderManagers.py
 #: urbancertificatebase_foldermanager.py
 msgid "urban_label_foldermanagers"
-msgstr "Agent traitant"
+msgstr "Agent(s) traitant(s)"
 
 #. Default: "Geometricians"
 #: parcelOutGeometricians.py

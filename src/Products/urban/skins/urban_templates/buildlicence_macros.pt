@@ -8,8 +8,16 @@
   </td>
   <td width="1%"></td>
   <td valign="top" width=50%>
-   <fieldset><strong><legend i18n:translate="urban_label_workLocations">Work locations</legend></strong>
-      <div><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
+   <fieldset><strong><legend i18n:translate="urban_label_keydates">Key dates</legend></strong>
+    <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_receiptDate">Receipt date</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top"><tal:content content="python: 1" /></td>
+     </tr>
+    </table>
+   </fieldset>
+  </td>
   </tr>
  <tr>
   <td valign="top" width=50%>
@@ -36,7 +44,7 @@
       <td valign="top"><metal:myfield use-macro="python:here.widget('referenceDGATLP', mode='view')" /><span tal:condition="not: python: context.referenceDGATLP" class="discreet" i18n:translate="content_none">None</span></td>
      </tr>
      <tr>
-      <td valign="top"><b><span i18n:translate="treating_agent">Treating agent</span> :</b></td>
+      <td valign="top"><b><span i18n:translate="urban_label_foldermanagers">Treating agent</span> :</b></td>
       <td width="2%"></td>
       <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanFolderManagerMacro" /></td>
      </tr>
@@ -85,6 +93,9 @@
   </td>
   <td width="1%"></td>
   <td valign="top" width=49%>
+   <fieldset><strong><legend i18n:translate="urban_label_workLocations">Work locations</legend></strong>
+      <div><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
+   </fieldset>
    <fieldset><b><legend i18n:translate="urban_label_architects">Architect(s)</legend></b>
     <div metal:use-macro="here/urban_macros/macros/urbanArchitectsMacro" />
    </fieldset>
