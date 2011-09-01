@@ -1270,7 +1270,7 @@ msgstr "Exposant"
 #. Default: "Externaldecision"
 #: UrbanEvent.py
 msgid "urban_label_externalDecision"
-msgstr "Décision (avis externe)"
+msgstr " Avis"
 
 #. Default: "Fax"
 #: Contact.py
