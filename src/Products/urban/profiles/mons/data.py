@@ -5,7 +5,7 @@ urbanEventTypes = {
                     {
                     'id': "fiche-technique-voirie",
                     'title': "Fiche technique voirie",
-                    'activatedFields': [],
+                    'activatedFields': ['decision', ],
                     'deadLineDelay': 0,
                     'TALCondition' : "",
                     'podTemplates': (
@@ -15,7 +15,7 @@ urbanEventTypes = {
                     {
                     'id': "fiche-technique-energie",
                     'title': "Fiche technique conseiller en énergie",
-                    'activatedFields': [],
+                    'activatedFields': ['decision', ],
                     'deadLineDelay': 0,
                     'TALCondition' : "",
                     'podTemplates': (
@@ -25,7 +25,7 @@ urbanEventTypes = {
                     {
                     'id': "fiche-technique-urbanisme",
                     'title': "Fiche technique urbanisme",
-                    'activatedFields': [],
+                    'activatedFields': ['decision', ],
                     'deadLineDelay': 0,
                     'TALCondition' : "",
                     'podTemplates': (
