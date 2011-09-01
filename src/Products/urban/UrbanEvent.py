@@ -196,7 +196,7 @@ schema = Schema((
     ),
     StringField(
         name='externalDecision',
-        widget=StringField._properties['widget'](
+        widget=SelectionWidget(
             condition="python:here.attributeIsUsed('externalDecision')",
             label='Externaldecision',
             label_msgid='urban_label_externalDecision',
