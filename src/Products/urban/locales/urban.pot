@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-09-01 09:27+0000\n"
+"POT-Creation-Date: 2011-09-02 06:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -176,6 +176,9 @@ msgid "add_an_inquiry"
 msgstr ""
 
 msgid "add_event"
+msgstr ""
+
+msgid "add_every_advices_descr"
 msgstr ""
 
 msgid "additonal_layers_folder_title"
@@ -870,6 +873,9 @@ msgstr ""
 msgid "urban_descr_usedAttributes"
 msgstr ""
 
+msgid "urban_description_key_dates_legend"
+msgstr ""
+
 msgid "urban_export_list220"
 msgstr ""
 
@@ -981,6 +987,9 @@ msgstr ""
 #. Default: "Abbreviation"
 #: PersonTitleTerm.py
 msgid "urban_label_abbreviation"
+msgstr ""
+
+msgid "urban_label_acknowledgmentDate"
 msgstr ""
 
 #. Default: "Activatedfields"
@@ -1108,6 +1117,9 @@ msgstr ""
 #. Default: "Claimstext"
 #: UrbanEvent.py
 msgid "urban_label_claimsText"
+msgstr ""
+
+msgid "urban_label_collegeReportDecisionDate"
 msgstr ""
 
 #. Default: "Color"
@@ -1520,6 +1532,9 @@ msgstr ""
 msgid "urban_label_mapExtent"
 msgstr ""
 
+msgid "urban_label_missingPartDate"
+msgstr ""
+
 #. Default: "Missingparts"
 #: GenericLicence.py
 msgid "urban_label_missingParts"
@@ -1575,6 +1590,17 @@ msgstr ""
 #. Default: "Openofficeport"
 #: UrbanTool.py
 msgid "urban_label_openOfficePort"
+msgstr ""
+
+msgid "urban_label_opinionRequestsDate"
+msgstr ""
+
+msgid "urban_label_opinionRequestsTransmitDate"
+msgstr ""
+
+#. Default: "Opiniontext"
+#: UrbanEvent.py
+msgid "urban_label_opinionText"
 msgstr ""
 
 #. Default: "Outlinecolor"
@@ -1927,6 +1953,9 @@ msgstr ""
 msgid "urban_label_termTitle"
 msgstr ""
 
+msgid "urban_label_theLicenceDate"
+msgstr ""
+
 #. Default: "Title"
 #: Declaration.py
 #: GenericLicence.py
@@ -1979,6 +2008,9 @@ msgstr ""
 #. Default: "Visibility"
 #: Layer.py
 msgid "urban_label_visibility"
+msgstr ""
+
+msgid "urban_label_walloonRegionPrimoDate"
 msgstr ""
 
 #. Default: "Webserverhost"
@@ -2137,32 +2169,5 @@ msgid "warning_no_deposit_date"
 msgstr ""
 
 msgid "work_location"
-msgstr ""
-
-msgid "add_every_advices_descr"
-msgstr ""
-
-msgid "urban_description_key_dates_legend"
-msgstr ""
-
-msgid "urban_label_acknowledgmentDate"
-msgstr ""
-
-msgid "urban_label_missingPartDate"
-msgstr ""
-
-msgid "urban_label_walloonRegionPrimoDate"
-msgstr ""
-
-msgid "urban_label_opinionRequestsDate"
-msgstr ""
-
-msgid "urban_label_opinionRequestsTransmitDate"
-msgstr ""
-
-msgid "urban_label_collegeReportDecisionDate"
-msgstr ""
-
-msgid "urban_label_theLicenceDate"
 msgstr ""
 
