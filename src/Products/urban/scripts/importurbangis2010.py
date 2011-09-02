@@ -183,7 +183,8 @@ allsteps = {
     'J' : 'managing the_geom', 
     'K' : 'altering table canu', 
     'L' : 'updating table canu', 
-    'M' : 'setting grants on db objects'
+    'M' : 'adding views', 
+    'N' : 'setting grants on db objects'
 }
 run_steps = sorted(allsteps.keys())
 print "Starting at %s" % time.strftime('%H:%M:%S', time.localtime())
@@ -515,6 +516,18 @@ if step in run_steps:
 step = 'M'
 if step in run_steps:
     print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
+    std_cur.execute('CREATE OR REPLACE VIEW v_map_capa AS \
+ SELECT map.capakey, map.capakey AS codeparcelle, map.urbainkey, map.daa, map.ord, map.pe, map.adr1, map.adr2, map.pe2, map.sl1, map.prc, map.na1, \
+ map.co1, map.cod1, map.ri1, map.acj, map.tv, map.prc2, capa.capaty, capa.shape_area, capa.the_geom, capa.da, capa.section, capa.radical, \
+ capa.exposant, capa.bis, capa.puissance  FROM map \
+   LEFT JOIN capa ON map.capakey::text = capa.capakey::text;')
+    std_cur.execute('CREATE OR REPLACE VIEW v_sections AS \
+ SELECT DISTINCT capa.section, capa.section::text AS section_text  FROM capa;')
+    conn.commit()
+
+step = 'N'
+if step in run_steps:
+    print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
     std_cur.execute('REVOKE ALL ON SCHEMA PUBLIC FROM PUBLIC;')
     std_cur.execute('GRANT USAGE ON SCHEMA PUBLIC TO %s;'%databasename)
     conn.commit()
@@ -536,10 +549,15 @@ if step in run_steps:
                     args.append(argname)
             std_cur.execute("GRANT EXECUTE ON FUNCTION %s(%s) TO %s"%(rec['proname'], ','.join(args), databasename))
             conn.commit()
-    #grants on tables        
+    #grants on tables
     dict_cur.execute("SELECT TABLENAME FROM PG_TABLES WHERE SCHEMANAME='public';")
     for rec in dict_cur.fetchall():
         std_cur.execute("GRANT SELECT, REFERENCES, TRIGGER ON TABLE %s TO %s;"%(rec['tablename'], databasename))
+        conn.commit()
+    #grants on views
+    dict_cur.execute("SELECT VIEWNAME FROM PG_VIEWS WHERE SCHEMANAME='public';")
+    for rec in dict_cur.fetchall():
+        std_cur.execute("GRANT SELECT, REFERENCES, TRIGGER ON TABLE %s TO %s;"%(rec['viewname'], databasename))
         conn.commit()
 
 print "Ending at %s" % time.strftime('%H:%M:%S', time.localtime())
