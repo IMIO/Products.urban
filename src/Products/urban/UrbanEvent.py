@@ -206,6 +206,18 @@ schema = Schema((
         optional=True,
         vocabulary='listExternalDecisions',
     ),
+    TextField(
+        name='opinionText',
+        allowable_content_types=('text/plain', 'text/structured', 'text/html', 'application/msword',),
+        widget=RichWidget(
+            condition="python:here.attributeIsUsed('opinionText')",
+            label='Opiniontext',
+            label_msgid='urban_label_opinionText',
+            i18n_domain='urban',
+        ),
+        default_output_type='text/html',
+        optional=True,
+    ),
     ReferenceField(
         name='urbaneventtypes',
         widget=ReferenceBrowserWidget(

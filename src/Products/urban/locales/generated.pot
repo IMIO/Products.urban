@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Thu Sep  1 14:42:19 2011\n"
-"PO-Revision-Date: Thu Sep  1 14:42:19 2011\n"
+"POT-Creation-Date: Fri Sep  2 08:09:30 2011\n"
+"PO-Revision-Date: Fri Sep  2 08:09:30 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -656,6 +656,11 @@ msgstr ""
 #. Default: "Openofficeport"
 #: UrbanTool.py
 msgid "urban_label_openOfficePort"
+msgstr ""
+
+#. Default: "Opiniontext"
+#: UrbanEvent.py
+msgid "urban_label_opinionText"
 msgstr ""
 
 #. Default: "Parcellings"
