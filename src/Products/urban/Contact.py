@@ -312,9 +312,20 @@ class Contact(BaseContent, BrowserDefaultMixin):
                     addressSignaletic)
 
     def _getNameSignaletic(self, linebyline):
+        import string
         title = self.displayValue(self.listPersonTitles(),
             self.getPersonTitle()).encode('utf8')
         nameSignaletic = '%s %s %s' % (title, self.getName1(), self.getName2())
+        if len(self.getRepresentedBy()) > 0:
+            representatives = self.displayValue(self.listRepresentedBys(), self.getRepresentedBy())
+            represented = 'représenté'
+            if title in set(['Maîtres','Monsieur et Madame','Messieurs','Consorts']):
+                represented = 'représentés' 
+            elif title in set(['Madame','Mademoiselle']):
+                represented = 'représentée'
+            elif title in set(['Mesdames']):
+                represented = 'représentées'
+            nameSignaletic = '%s %s %s %s par %s' % (title, self.getName1(), self.getName2(), represented, representatives)
         if linebyline:
             #escape HTML special characters like HTML entities
             return cgi.escape(nameSignaletic)
