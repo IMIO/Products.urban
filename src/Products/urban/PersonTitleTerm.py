@@ -35,6 +35,24 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    StringField(
+        name='gender',
+        widget=SelectionWidget(
+            label='Gender',
+            label_msgid='urban_label_gender',
+            i18n_domain='urban',
+        ),
+        vocabulary='listGender',
+    ),
+    StringField(
+        name='multiplicity',
+        widget=SelectionWidget(
+            label='Multiplicity',
+            label_msgid='urban_label_multiplicity',
+            i18n_domain='urban',
+        ),
+        vocabulary='listMultiplicity',
+    ),
 
 ),
 )
