@@ -513,14 +513,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         urbantool = getToolByName(self,'portal_urban')
         return DisplayList(urbantool.listVocabulary('folderroadcoatings', self))
 
-    security.declarePublic('listMakers')
-    def listMakers(self):
-        """
-          Return a list of folder makers from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('foldermakers', self))
-
     security.declarePublic('listDelayToAnnonce')
     def listDelayToAnnonce(self):
         """
@@ -543,14 +535,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         """
         urbantool = getToolByName(self,'portal_urban')
         return DisplayList(urbantool.listVocabulary('pcas', self, vocType="PcaTerm", inUrbanConfig=False))
-
-    security.declarePublic('listDerogations')
-    def listDerogations(self):
-        """
-          Return a list of derogations from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('derogations', self))
 
     security.declarePublic('getDefaultReference')
     def getDefaultReference(self):
@@ -700,14 +684,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
             vocab.append((elt[0], elt[1]))
         return DisplayList(tuple(vocab))
 
-    security.declarePublic('listInvestigationArticles')
-    def listInvestigationArticles(self):
-        """
-          Return a list of investigation articles from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('investigationarticles', self))
-
     security.declarePublic('listFloodingLevels')
     def listFloodingLevels(self):
         """
@@ -740,20 +716,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
           This depend on the real portal_type
         """
         return '/portal_urban/%s/foldermanagers' % self.getPortalTypeName().lower()
-
-    security.declarePublic('validate_investigationStart')
-    def validate_investigationStart(self, value):
-        """
-          Validate the investigationStart field
-          If we have an existing UrbanEventInquiry in self
-          we must define an investigationStart date
-        """
-        #if we have a linked UrbanEventInquiry, we must set a correct investigation start date
-        linkedUrbanEventInquiry = self.getLinkedUrbanEventInquiry()
-        if linkedUrbanEventInquiry and value is None:
-            return translate("genericlicence_investigationstart_valdiation_error", mapping={'linkedurbaneventurl': linkedUrbanEventInquiry.absolute_url()}, default="You must define a investigation start date because an UrbanEventInquiry exist.  If you want to remove the inquiry, please delete the linked UrbanEventInquiry first !")
-        else:
-            return
 
     security.declarePublic('getApplicants')
     def getApplicants(self):
@@ -926,7 +888,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
     security.declarePublic('createAllAdvices')
     def createAllAdvices(self):
         """
-           Create all urbanEvent corresponding to advice on a licence
+          Create all urbanEvent corresponding to advice on a licence
         """
         from factory import UrbanEventFactory
         listEventTypes = self.getAllAdvices()
@@ -938,7 +900,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
     security.declarePublic('getAllAdvices')
     def getAllAdvices(self):
         """
-           return all urbanEvent corresponding to advice on a licence
+          Returns all UrbanEvents corresponding to advice on a licence
         """
         tool = getToolByName(self, 'portal_urban')
         urbanConfig = tool.getUrbanConfig(self)
