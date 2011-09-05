@@ -2034,7 +2034,7 @@ msgstr "Numéro et boîte"
 #: Division.py
 #: EnvironmentalDeclaration.py
 msgid "urban_label_workLocations"
-msgstr "Adresse des travaux"
+msgstr "Adresse(s) des travaux"
 
 #. Default: "Worktype"
 #: BuildLicence.py
