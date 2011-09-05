@@ -312,7 +312,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
                     addressSignaletic)
 
     def _getNameSignaletic(self, linebyline):
-        import string
         title = self.displayValue(self.listPersonTitles(),
             self.getPersonTitle()).encode('utf8')
         nameSignaletic = '%s %s %s' % (title, self.getName1(), self.getName2())
