@@ -55,6 +55,8 @@ def migrateToPlone4(context):
     addMd5SignatureAndProfileNameProperties(context)
     #Every folder that will contain licences need to provide ILicenceContainer
     migrateLicenceContainers(context)
+    #Migration of Event objects to provides marker interfaces
+    provideEventMarkerInterfaces(context)
 
 def migrateToReferenceDataGridField(context):
     """
@@ -754,3 +756,30 @@ def migrateLicenceContainers(context):
         alsoProvides(subFolder, ILicenceContainer)
         logger.info("Licence folder '%s' now provides IILicenceContainer" % subFolder.getId())
     logger.info("Migrating licence containers: done!")
+
+def provideEventMarkerInterfaces(context):
+    """
+      implements a marker interface to each event who has it defined in its corresponding EventTypeType
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    logger.info("Migrating Specific Event interfaces: starting...")
+    
+    import string
+    from zope.interface import alsoProvides
+    from zope.component.interface import getInterface
+    interfaces = __import__('Products.urban.interfaces')
+    portal = context.getSite()
+    brains = portal.portal_catalog.searchResults(portal_type='UrbanEvent') 
+    for brain in brains:
+        event = brain.getObject()
+        event_type = event.getUrbaneventtypes()
+        interfacepath = event_type.getEventTypeType()
+        print(interfacepath)
+        interface = None
+        if interfacepath != '':
+            interface = getInterface('', interfacepath) 
+        if interface is not None and not event.__provides__(interface):
+            alsoProvides(event, interface)
+            event.reindexObject(['object_provides'])
+    logger.info("Migrating Specific Event interfaces: done!")

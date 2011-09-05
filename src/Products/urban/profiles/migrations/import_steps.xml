@@ -127,4 +127,11 @@
     version="2011-08-24T11:00.0">
     Add md5Signature and profileName properties for each template
  </import-step>
+ <import-step
+    id="urban-migrationProvideEventMarkerInterfaces"
+    handler="Products.urban.profiles.migrations.migrate.provideEventMarkerInterfaces"
+    title="Provides UrbanEvents with marker interfaces from their corresponding UrbanEventType"
+    version="2011-09-24T11:00.0">
+    Provides UrbanEvents with marker interfaces from their corresponding UrbanEventType
+ </import-step>
 </import-steps>
