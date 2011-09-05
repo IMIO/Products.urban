@@ -61,3 +61,21 @@ class ContactView(BrowserView):
         """
         context = aq_inner(self.context)
         return "%s data" % context.portal_type
+
+    def showRepresentedByField(self):
+        """
+          Only show the representedBy field if the current Contact is an Applicant (portal_type)
+        """
+        context = aq_inner(self.context)
+        if not context.portal_type == 'Applicant':
+            return False
+        return True
+
+    def showClaimingTextField(self):
+        """
+          Only show the claimingText field if the current Contact is a Claimant (portal_type)
+        """
+        context = aq_inner(self.context)
+        if not context.portal_type == 'Claimant':
+            return False
+        return True

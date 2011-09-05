@@ -209,6 +209,17 @@ schema = Schema((
         multiValued=1,
         vocabulary='listRepresentedBys',
     ),
+    TextField(
+        name='claimingText',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            condition="python: here.portal_type == 'Claimant'",
+            label='Claimingtext',
+            label_msgid='urban_label_claimingText',
+            i18n_domain='urban',
+        ),
+        default_output_type='text/html',
+    ),
 
 ),
 )
@@ -319,7 +330,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
             representatives = self.displayValue(self.listRepresentedBys(), self.getRepresentedBy())
             represented = 'représenté'
             if title in set(['Maîtres','Monsieur et Madame','Messieurs','Consorts']):
-                represented = 'représentés' 
+                represented = 'représentés'
             elif title in set(['Madame','Mademoiselle']):
                 represented = 'représentée'
             elif title in set(['Mesdames']):
@@ -357,15 +368,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
             zip = cgi.escape(zip)
             city = cgi.escape(city)
             return "<p>%s, %s<br />%s %s</p>" % (number, street, zip, city)
-
-    security.declarePublic('showRepresentedByField')
-    def showRepresentedByField(self):
-        """
-          Only show the representedBy field if the current Contact is an Applicant (portal_type)
-        """
-        if not self.getPortalTypeName() == 'Applicant':
-            return False
-        return True
 
     security.declarePublic('listRepresentedBys')
     def listRepresentedBys(self):
