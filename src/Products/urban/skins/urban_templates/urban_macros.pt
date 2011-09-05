@@ -28,10 +28,26 @@
      </td>
      <tal:manage_show_nc_if_needed define="value python: getattr(context, field)">
       <td tal:condition="value">
-       <metal:myfield use-macro="python: context.widget(field, mode='view')" />
+       <tal:no_long_text condition="python: not 'Text' in field">
+        <metal:myfield use-macro="python: context.widget(field, mode='view')" />
+       </tal:no_long_text>
+       <!-- For long text, just show the first words and add a link to see the entire text -->
+       <tal:long_text condition="python: 'Text' in field">
+        <tal:block define="infos python: context.portal_urban.getTextToShow(context, field);
+                           isTooLong python: infos[0];
+                           textToShow python: infos[1];">
+         <span tal:condition="isTooLong" id="urban-claims-text">
+          <span tal:replace="structure textToShow">Content...</span>
+          <br /><a class="link-overlay" href="@@longtextview" tal:attributes="href python: context.absolute_url() + '/@@longtextview?field=' + field" i18n:translate="">See more...</a>
+         </span>
+         <tal:block condition="not: isTooLong">
+          <metal:myfield use-macro="python: context.widget(field, mode='view')" />
+         </tal:block>
+        </tal:block>
+       </tal:long_text>
       </td>
       <td tal:condition="not: value">
-       <span tal:condition="not: value" class="discreet" i18n:translate="content_none">None</span>
+        <span tal:condition="not: value" class="discreet" i18n:translate="content_none">None</span>
       </td>
      </tal:manage_show_nc_if_needed>
     </tr>

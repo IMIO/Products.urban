@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-09-02 06:23+0000\n"
+"POT-Creation-Date: 2011-09-05 09:36+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -106,6 +106,9 @@ msgstr "Rechercher"
 # PortionOutSearch
 msgid "Search parcel(s)"
 msgstr "Recherche de parcelles"
+
+msgid "See more..."
+msgstr "Voir tout..."
 
 # urban_actions
 msgid "View"
@@ -1109,6 +1112,11 @@ msgstr "Localité"
 #: UrbanTool.py
 msgid "urban_label_cityName"
 msgstr "Nom de la commune"
+
+#. Default: "Claimingtext"
+#: Contact.py
+msgid "urban_label_claimingText"
+msgstr "Texte de la réclamation"
 
 #. Default: "Claimsdate"
 #: UrbanEvent.py

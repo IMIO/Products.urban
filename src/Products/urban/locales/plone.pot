@@ -235,3 +235,9 @@ msgstr ""
 
 msgid "label_schema_urban_events"
 msgstr ""
+
+msgid "Nothing to show !!!"
+msgstr ""
+
+msgid "The field does not exist !!!"
+msgstr ""

@@ -75,6 +75,14 @@
      permission="zope2.View"
   />
 
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="longtextview"
+     class=".longtextview.LongTextView"
+     template="templates/longtextview.pt"
+     permission="zope2.View"
+  />
+
   <plone:portlet
      name="urban.portlets.portlet_urban"
      interface=".portlet_urban.IUrbanPortlet"

@@ -1550,6 +1550,23 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         else:
             return res
 
+    def getTextToShow(self, context, fieldName):
+        """
+          This method manage long texts and returns a subset of the text if needed
+        """
+        #the max text length to show, in number of characters
+        maxLength = 50
+        def checkMaxLength(text):
+            '''Check if we need to format the text if it is too long.'''
+            utext = unicode(text, 'utf-8')
+            isTooLarge = False
+            if maxLength and len(utext) > maxLength:
+                isTooLarge = True
+                return isTooLarge, utext[:maxLength].encode('utf-8') + '...'
+            return isTooLarge, utext.encode('utf-8')
+        #to be sure that we only have text (usefull for HTML) we get the raw value
+        return checkMaxLength(getattr(context, 'getRaw' + fieldName[0].capitalize() + fieldName[1:])())
+
 
 
 registerType(UrbanTool, PROJECTNAME)

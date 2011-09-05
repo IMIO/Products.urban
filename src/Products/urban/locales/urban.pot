@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-09-02 06:23+0000\n"
+"POT-Creation-Date: 2011-09-05 09:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1109,6 +1109,11 @@ msgstr ""
 msgid "urban_label_cityName"
 msgstr ""
 
+#. Default: "Claimingtext"
+#: Contact.py
+msgid "urban_label_claimingText"
+msgstr ""
+
 #. Default: "Claimsdate"
 #: UrbanEvent.py
 msgid "urban_label_claimsDate"
@@ -2171,3 +2176,5 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
+msgid "See more..."
+msgstr ""

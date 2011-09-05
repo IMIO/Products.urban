@@ -77,6 +77,10 @@ class UrbanEventInquiryView(UrbanEventView):
         inquiryAttributes = inquiryAttributes[2:]
         for inquiryAttribute in inquiryAttributes:
             inquiryAttributeName = inquiryAttribute.getName()
+            if inquiryAttributeName == "claimsText":
+                #as this text can be very long, we do not want to show it with the other
+                #fields, we will display it in the "Claimants" part of the template
+                continue
             inquiryData[1].append(inquiryAttributeName)
         return inquiryData
 

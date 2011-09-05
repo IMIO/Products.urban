@@ -62,6 +62,9 @@ msgstr "Notaire"
 msgid "NotaryLetter"
 msgstr "Lettre de notaire"
 
+msgid "Nothing to show !!!"
+msgstr "Rien à afficher !!!"
+
 msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
 
@@ -82,6 +85,9 @@ msgstr "Destinataire cadastre"
 
 msgid "Street"
 msgstr "Rue"
+
+msgid "The field does not exist !!!"
+msgstr "Le champ ${field} n'existe pas !!!"
 
 msgid "This National Register number is not valid !"
 msgstr "Ce numéro de registre national n'est pas valide !"

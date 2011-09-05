@@ -100,7 +100,7 @@
         </form>
         <div tal:define="specificSearch python: 'searchClaimants';
                          tool python: context.portal_urban;
-                         showedCols python: ('Title', 'created', 'Creator', );
+                         showedCols python: ('Title', );
                          topic python: None;
                          showActions python: True;
                          theObjects python: False;

@@ -123,7 +123,7 @@ schema = Schema((
     ),
     TextField(
         name='decisionText',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html', 'application/msword',),
+        allowable_content_types=('text/html',),
         widget=RichWidget(
             condition="python:here.attributeIsUsed('decisionText')",
             label='Decisiontext',
@@ -159,14 +159,14 @@ schema = Schema((
     ),
     TextField(
         name='claimsText',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html', 'application/msword',),
-        default=claimsTextDefaultValue,
+        allowable_content_types=('text/html',),
         widget=RichWidget(
             condition="python:here.attributeIsUsed('claimsText')",
             label='Claimstext',
             label_msgid='urban_label_claimsText',
             i18n_domain='urban',
         ),
+        default=claimsTextDefaultValue,
         default_output_type='text/html',
         optional= True,
     ),
@@ -208,7 +208,7 @@ schema = Schema((
     ),
     TextField(
         name='opinionText',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html', 'application/msword',),
+        allowable_content_types=('text/html',),
         widget=RichWidget(
             condition="python:here.attributeIsUsed('opinionText')",
             label='Opiniontext',
