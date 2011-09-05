@@ -12,9 +12,13 @@ class BuildLicenceView(BrowserView):
         context = aq_inner(self.context)
         tool = context.portal_urban
         lastDeposit = context.getLastDeposit()
-        if not lastDeposit:
+        if not lastDeposit or not lastDeposit.getEventDate():
             return None
-        return tool.formatDate(lastDeposit.getEventDate(), translatemonth=False)
+        dict = {
+                'url': lastDeposit.absolute_url(),
+                'date': tool.formatDate(lastDeposit.getEventDate(), translatemonth=False)
+               }
+        return dict
 
     def getAcknowledgmentDate(self):
         """
@@ -23,9 +27,13 @@ class BuildLicenceView(BrowserView):
         context = aq_inner(self.context)
         tool = context.portal_urban
         lastAcknowledgment = context.getLastAcknowledgment()
-        if not lastAcknowledgment:
+        if not lastAcknowledgment or not lastAcknowledgment.getEventDate():
             return None
-        return tool.formatDate(lastAcknowledgment.getEventDate(), translatemonth=False)
+        dict = {
+                'url': lastAcknowledgment.absolute_url(),
+                'date': tool.formatDate(lastAcknowledgment.getEventDate(), translatemonth=False)
+               }
+        return dict
 
     def getMissingPartDate(self):
         """
@@ -34,9 +42,13 @@ class BuildLicenceView(BrowserView):
         context = aq_inner(self.context)
         tool = context.portal_urban
         lastMissingPart = context.getLastMissingPart()
-        if not lastMissingPart:
+        if not lastMissingPart or not lastMissingPart.getEventDate():
             return None
-        return tool.formatDate(lastMissingPart.getEventDate(), translatemonth=False)
+        dict = {
+                'url': lastMissingPart.absolute_url(),
+                'date': tool.formatDate(lastMissingPart.getEventDate(), translatemonth=False)
+               }
+        return dict
 
     def getWalloonRegionPrimoDate(self):
         """
@@ -45,9 +57,13 @@ class BuildLicenceView(BrowserView):
         context = aq_inner(self.context)
         tool = context.portal_urban
         walloonRegionPrimo = context.getLastWalloonRegionPrimo()
-        if not walloonRegionPrimo:
+        if not walloonRegionPrimo or not walloonRegionPrimo.getEventDate():
             return None
-        return tool.formatDate(walloonRegionPrimo.getEventDate(), translatemonth=False)
+        dict = {
+                'url': walloonRegionPrimo.absolute_url(),
+                'date': tool.formatDate(walloonRegionPrimo.getEventDate(), translatemonth=False)
+               }        
+        return dict
 
     def getOpinionRequestsDate(self):
         """
@@ -56,9 +72,13 @@ class BuildLicenceView(BrowserView):
         context = aq_inner(self.context)
         tool = context.portal_urban
         opinionRequest = context.getLastOpinionRequest()
-        if not opinionRequest :
+        if not opinionRequest or not opinionRequest.getEventDate():
             return None
-        return tool.formatDate(opinionRequest.getEventDate(), translatemonth=False)
+        dict = {
+                'url': opinionRequest.absolute_url(),
+                'date': tool.formatDate(opinionRequest.getEventDate(), translatemonth=False)
+               }
+        return dict
 
     def getOpinionRequestsTransmitDate(self):
         """
@@ -67,9 +87,13 @@ class BuildLicenceView(BrowserView):
         context = aq_inner(self.context)
         tool = context.portal_urban
         opinionRequest = context.getLastOpinionRequest()
-        if not opinionRequest :
+        if not opinionRequest or not opinionRequest.getTransmitDate():
             return None
-        return tool.formatDate(opinionRequest.getTransmitDate(), translatemonth=False)
+        dict = {
+                'url': opinionRequest.absolute_url(),
+                'date': tool.formatDate(opinionRequest.getTransmitDate(), translatemonth=False)
+               }
+        return dict
 
     def getCollegeReportDecisionDate(self):
         """
@@ -78,9 +102,13 @@ class BuildLicenceView(BrowserView):
         context = aq_inner(self.context)
         tool = context.portal_urban
         collegeReport = context.getLastCollegeReport()
-        if not collegeReport :
+        if not collegeReport or not collegeReport.getEventDate():
             return None
-        return tool.formatDate(collegeReport.getDecisionDate(), translatemonth=False)
+        dict = {
+                'url': collegeReport.absolute_url(),
+                'date': tool.formatDate(collegeReport.getEventDate(), translatemonth=False)
+               }
+        return dict
 
     def getTheLicenceDate(self):
         """
@@ -89,6 +117,10 @@ class BuildLicenceView(BrowserView):
         context = aq_inner(self.context)
         tool = context.portal_urban
         theLicence = context.getLastTheLicence()
-        if not theLicence :
+        if not theLicence or not theLicence.getEventDate():
             return None
-        return tool.formatDate(theLicence.getEventDate(), translatemonth=False)
+        dict = {
+                'url': theLicence.absolute_url(),
+                'date': tool.formatDate(theLicence.getEventDate(), translatemonth=False)
+               }
+        return dict
