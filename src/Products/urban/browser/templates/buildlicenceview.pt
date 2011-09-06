@@ -63,6 +63,7 @@
 <dt class="formTab" id="fieldsetlegend-urban_events" i18n:domain="plone" i18n:translate="label_schema_urban_events"><span>Events</span></dt>
 <dd id="fieldset-urban_events">
  <metal:events use-macro="here/urban_macros/macros/urbanEventsMacro" />
+ <metal:advices use-macro="here/urban_macros/macros/urbanAdvicesEventsMacro" />
 </dd>
 
 </dl>

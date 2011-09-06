@@ -329,6 +329,9 @@
   </td>
  </tr>
  </table>
+</div>
+
+<div metal:define-macro="urbanAdvicesEventsMacro" i18n:domain="urban">
  <div tal:define="allAdvices context/getAllAdvices;
                   member context/@@plone_portal_state/member;
                   mayAddUrbanEvent python: member.has_permission('urban: Add UrbanEvent', context);"
