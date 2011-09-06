@@ -327,13 +327,20 @@ class Contact(BaseContent, BrowserDefaultMixin):
             self.getPersonTitle()).encode('utf8')
         nameSignaletic = '%s %s %s' % (title, self.getName1(), self.getName2())
         if len(self.getRepresentedBy()) > 0:
+            person_title = None
+            for brain in self.portal_catalog.searchResults(portal_type = "PersonTitleTerm"):
+                if self.getPersonTitle() == brain['id']:
+                    person_title = brain.getObject()
+                    break
             representatives = self.displayValue(self.listRepresentedBys(), self.getRepresentedBy())
+            gender = person_title.getGender()
+            multiplicity = person_title.getMultiplicity()
             represented = 'représenté'
-            if title in set(['Maîtres','Monsieur et Madame','Messieurs','Consorts']):
+            if gender == 'male' and multiplicity == 'plural' :
                 represented = 'représentés'
-            elif title in set(['Madame','Mademoiselle']):
+            elif gender == 'female' and multiplicity == 'single' :
                 represented = 'représentée'
-            elif title in set(['Mesdames']):
+            elif gender == 'female' and multiplicity == 'plural' :
                 represented = 'représentées'
             nameSignaletic = '%s %s %s %s par %s' % (title, self.getName1(), self.getName2(), represented, representatives)
         if linebyline:
@@ -368,6 +375,15 @@ class Contact(BaseContent, BrowserDefaultMixin):
             zip = cgi.escape(zip)
             city = cgi.escape(city)
             return "<p>%s, %s<br />%s %s</p>" % (number, street, zip, city)
+
+    security.declarePublic('showRepresentedByField')
+    def showRepresentedByField(self):
+        """
+        Only show the representedBy field if the current Contact is an Applicant (portal_type)
+        """
+        if not self.getPortalTypeName() == 'Applicant':
+            return False
+        return True
 
     security.declarePublic('listRepresentedBys')
     def listRepresentedBys(self):

@@ -19,7 +19,7 @@ from zope.interface import implements
 import interfaces
 from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
+from zope.i18n import translate
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -83,6 +83,28 @@ class PersonTitleTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
+
+    security.declarePublic('listGender')
+    def listGender(self):
+        lst=[
+             ['male', translate('gender_male', 'urban', context=self.REQUEST)],
+             ['female', translate('gender_female', 'urban', context=self.REQUEST)],
+            ]
+        vocab = []
+        for elt in lst:
+            vocab.append((elt[0], elt[1]))
+        return DisplayList(tuple(vocab))
+
+    security.declarePublic('listMultiplicity')
+    def listMultiplicity(self):
+        lst=[
+             ['single', translate('multiplicity_single', 'urban', context=self.REQUEST)],
+             ['plural', translate('multiplicity_plural', 'urban', context=self.REQUEST)],
+            ]
+        vocab = []
+        for elt in lst:
+            vocab.append((elt[0], elt[1]))
+        return DisplayList(tuple(vocab))
 
 
 registerType(PersonTitleTerm, PROJECTNAME)
