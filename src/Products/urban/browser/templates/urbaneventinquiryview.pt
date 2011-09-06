@@ -98,13 +98,24 @@
          <input type="submit" class="context" id="event" value="add_a_claimant" i18n:attributes="value" />
          <br /><br />
         </form>
-        <div tal:define="specificSearch python: 'searchClaimants';
+        <div tal:define="claimants context/getClaimants;
+                         specificSearch python: 'searchClaimants';
                          tool python: context.portal_urban;
                          showedCols python: ('Title', );
                          topic python: None;
                          showActions python: True;
                          theObjects python: False;
                          batchlen python: 20">
+         <table width=100% class="listing" style="margin-bottom: 0;">
+          <thead>
+           <tr>
+            <th colspan="4">
+             <span i18n:translate="number_of_claimants">Number of claimants</span> : 
+             <strong><span tal:content="python: len(claimants)" /></strong>
+            </th>
+           </tr>
+          </thead>
+         </table>
          <metal:listing use-macro="here/urban_macros/macros/listing" />
         </div>
         </fieldset>
@@ -124,7 +135,7 @@
                    showActions python: True;
                    theObjects python: True;
                    batchlen python: 50">
-    <table width=100% class="listing">
+    <table width=100% class="listing" style="margin-bottom: 0;">
     <thead>
     <tr>
     <th colspan="4">

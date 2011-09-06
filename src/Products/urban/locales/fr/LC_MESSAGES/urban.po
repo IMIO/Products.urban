@@ -672,6 +672,9 @@ msgstr "Paramètres des Lettres de notaire"
 msgid "notaryletters"
 msgstr "Lettres de notaires"
 
+msgid "number_of_claimants"
+msgstr "Nombre de réclamants"
+
 msgid "number_of_recipients"
 msgstr "Nombre de destinataires"
 

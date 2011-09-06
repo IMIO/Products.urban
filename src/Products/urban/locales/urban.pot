@@ -651,6 +651,9 @@ msgstr ""
 msgid "number_of_recipients"
 msgstr ""
 
+msgid "number_of_claimants"
+msgstr ""
+
 #. Default: "OpenOfficePort"
 #: UrbanTool.py
 msgid "open_office_port"
@@ -2212,3 +2215,4 @@ msgstr ""
 
 msgid "See more..."
 msgstr ""
+
