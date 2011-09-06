@@ -90,11 +90,6 @@
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('representedBy', mode='view')" /></td>
      </tr>
-     <tr tal:condition="view/showRepresentedByField">
-      <td valign="top"><u><b><span i18n:translate="urban_label_representedBy">Represented by</span> :</b></u></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('representedBy', mode='view')" /></td>
-     </tr>
      <tr tal:condition="view/showClaimingTextField">
       <td valign="top"><u><b><span i18n:translate="urban_label_claimingText">Claiming text</span> :</b></u></td>
       <td width="2%"></td>
