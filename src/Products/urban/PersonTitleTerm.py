@@ -19,10 +19,11 @@ from zope.interface import implements
 import interfaces
 from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-from zope.i18n import translate
+
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from zope.i18n import translate
 ##/code-section module-header
 
 schema = Schema((
@@ -84,6 +85,8 @@ class PersonTitleTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin):
 
     # Methods
 
+    # Manually created methods
+
     security.declarePublic('listGender')
     def listGender(self):
         lst=[
@@ -105,6 +108,7 @@ class PersonTitleTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin):
         for elt in lst:
             vocab.append((elt[0], elt[1]))
         return DisplayList(tuple(vocab))
+
 
 
 registerType(PersonTitleTerm, PROJECTNAME)
