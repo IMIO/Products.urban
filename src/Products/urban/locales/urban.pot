@@ -1,7 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
+<<<<<<< .mine
+"POT-Creation-Date: 2011-09-05 13:29+0000\n"
+=======
 "POT-Creation-Date: 2011-09-05 09:36+0000\n"
+>>>>>>> .r8204
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1291,6 +1295,11 @@ msgstr ""
 msgid "urban_label_fax"
 msgstr ""
 
+#. Default: "Female"
+#: PersonTitleTerm.py
+msgid "gender_female"
+msgstr ""
+
 #. Default: "Filter"
 #: Layer.py
 msgid "urban_label_filter"
@@ -1334,6 +1343,11 @@ msgstr ""
 #: licenceFolderManagers.py
 #: urbancertificatebase_foldermanager.py
 msgid "urban_label_foldermanagers"
+msgstr ""
+
+#. Default: "Gender"
+#: PersonTitleTerm.py
+msgid "urban_label_gender"
 msgstr ""
 
 #. Default: "Geometricians"
@@ -1532,6 +1546,11 @@ msgstr ""
 msgid "urban_label_lotusage"
 msgstr ""
 
+#. Default: "Male"
+#: PersonTitleTerm.py
+msgid "gender_male"
+msgstr ""
+
 #. Default: "Mapextent"
 #: UrbanTool.py
 msgid "urban_label_mapExtent"
@@ -1548,6 +1567,21 @@ msgstr ""
 #. Default: "Missingpartsdetails"
 #: GenericLicence.py
 msgid "urban_label_missingPartsDetails"
+msgstr ""
+
+#. Default: "Multiplicity"
+#: PersonTitleTerm.py
+msgid "urban_label_multiplicity"
+msgstr ""
+
+#. Default: "Single"
+#: PersonTitleTerm.py
+msgid "multiplicity_single"
+msgstr ""
+
+#. Default: "Plural"
+#: PersonTitleTerm.py
+msgid "multiplicity_plural"
 msgstr ""
 
 #. Default: "Name"
