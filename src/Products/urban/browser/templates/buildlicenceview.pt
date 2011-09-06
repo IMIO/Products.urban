@@ -92,6 +92,7 @@
 
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_events">Events</legend></strong>
  <metal:events use-macro="here/urban_macros/macros/urbanEventsMacro" />
+ <metal:advices use-macro="here/urban_macros/macros/urbanAdvicesEventsMacro" />
 </fieldset>
 </div>
 
