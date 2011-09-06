@@ -22,18 +22,16 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
+from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.CMFPlone.i18nl10n import utranslate
-from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.CMFCore.utils import getToolByName
 from Products.urban.indexes import UrbanIndexes
-from collective.referencedatagridfield import ReferenceDataGridField
-from collective.referencedatagridfield import ReferenceDataGridWidget
-from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
 
 optional_fields = []
 ##/code-section module-header
@@ -41,14 +39,13 @@ optional_fields = []
 schema = Schema((
 
     StringField(
-        name='title',
+        name='declarationSubject',
         widget=StringField._properties['widget'](
-            label='Title',
-            label_msgid='urban_label_title',
+            label='Declarationsubject',
+            label_msgid='urban_label_declarationSubject',
             i18n_domain='urban',
         ),
-        required= True,
-        accessor="Title",
+        schemata='urban_description',
     ),
     StringField(
         name='reference',
@@ -58,15 +55,30 @@ schema = Schema((
             label_msgid='urban_label_reference',
             i18n_domain='urban',
         ),
+        schemata='urban_description',
         default_method="getDefaultReference",
     ),
-    StringField(
-        name='declarationSubject',
-        widget=StringField._properties['widget'](
-            label='Declarationsubject',
-            label_msgid='urban_label_declarationSubject',
+    DataGridField(
+        name='workLocations',
+        schemata="urban_description",
+        widget=DataGridWidget(
+            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", vocabulary="listStreets"),},
+            label='Worklocations',
+            label_msgid='urban_label_workLocations',
             i18n_domain='urban',
         ),
+        allow_oddeven=True,
+        columns=('number', 'street'),
+    ),
+    StringField(
+        name='article',
+        widget=SelectionWidget(
+            label='Article',
+            label_msgid='urban_label_article',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        vocabulary='listArticles',
     ),
     TextField(
         name='description',
@@ -77,30 +89,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         default_output_type='text/html',
-    ),
-    StringField(
-        name='article',
-        widget=SelectionWidget(
-            label='Article',
-            label_msgid='urban_label_article',
-            i18n_domain='urban',
-        ),
-        vocabulary='listArticles',
-    ),
-    ReferenceDataGridField(
-        name='workLocations',
-        widget=ReferenceDataGridWidget(
-            visible={'edit' : 'visible', 'view' : 'visible'},
-            startup_directory='/portal_urban/streets',
-            macro="street_referencedatagridwidget",
-            label='street',
-            label_msgid='urban_label_workLocations',
-            i18n_domain='urban',
-        ),
-        allowed_types=('Street', 'Locality'),
-        schemata='default',
-        columns=('numero','title' ,'link' ,'uid'),
-        relationship='Street',
+        schemata='urban_description',
     ),
     ReferenceField(
         name='foldermanagers',
@@ -116,10 +105,11 @@ schema = Schema((
             label_msgid='urban_label_foldermanagers',
             i18n_domain='urban',
         ),
-        allowed_types=('FolderManager',),
+        required= True,
+        schemata='urban_description',
         multiValued=1,
         relationship='declarationFolderManagers',
-        required= True,
+        allowed_types=('FolderManager',),
     ),
 
 ),
@@ -134,7 +124,7 @@ Declaration_schema = BaseFolderSchema.copy() + \
 
 ##code-section after-schema #fill in your manual code here
 Declaration_schema['title'].required = False
-Declaration_schema['title'].searchable = True
+Declaration_schema['title'].widget.visible = False
 ##/code-section after-schema
 
 class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
@@ -169,6 +159,14 @@ class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         return DisplayList(urbantool.listVocabulary('articles', self))
 
     # Manually created methods
+
+    security.declarePublic('listStreets')
+    def listStreets(self):
+        """
+          Return a list of Streets from the config
+        """
+        urbantool = getToolByName(self,'portal_urban')
+        return DisplayList(urbantool.listVocabulary('streets', self, vocType=('Street', 'Locality',), id_to_use="UID", inUrbanConfig=False))
 
     security.declarePublic('getDefaultReference')
     def getDefaultReference(self):
@@ -268,11 +266,40 @@ class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         except AttributeError:
             return None
 
+    def getLastDeposit(self):
+        return self._getLastEvent(interfaces.IDepositEvent)
+
+    def getLastCollegeReport(self):
+        return self._getLastEvent(interfaces.ICollegeReportEvent)
+
+    def getLastTheLicence(self):
+        return self._getLastEvent(interfaces.ITheLicenceEvent)
+
+    security.declarePublic('getArticle')
+    def getArticle(self, theObject=False):
+        """
+          Returns the article value or the UrbanVocabularyTerm if theObject=True
+        """
+        res = self.getField('article').get(self)
+        if res and theObject:
+            tool = getToolByName(self, 'portal_urban')
+            urbanConfig = tool.getUrbanConfig(self)
+            res = getattr(urbanConfig.articles, res)
+        return res
+
 
 
 registerType(Declaration, PROJECTNAME)
 # end of class Declaration
 
 ##code-section module-footer #fill in your manual code here
+def finalizeSchema(schema, folderish=False, moveDiscussion=True):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('description', after='foldermanagers')
+    return schema
+
+finalizeSchema(Declaration_schema)
 ##/code-section module-footer
 

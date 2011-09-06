@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Tue Sep  6 11:17:07 2011\n"
-"PO-Revision-Date: Tue Sep  6 11:17:07 2011\n"
+"POT-Creation-Date: Tue Sep  6 15:44:04 2011\n"
+"PO-Revision-Date: Tue Sep  6 15:44:04 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -79,6 +79,11 @@ msgstr ""
 #. Default: "Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL"
 #: LicenceConfig.py
 msgid "urban_descr_usedAttributes"
+msgstr ""
+
+#. Default: "This field is made to store extra value if needed."
+#: UrbanVocabularyTerm.py
+msgid "urban_help_extraValue"
 msgstr ""
 
 #. Default: "Enter the layer image mimetype, for example 'image/jpeg' or 'image/png'"
@@ -416,6 +421,11 @@ msgstr ""
 #. Default: "Externaldecision"
 #: UrbanEvent.py
 msgid "urban_label_externalDecision"
+msgstr ""
+
+#. Default: "Extravalue"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_extraValue"
 msgstr ""
 
 #. Default: "Fax"
@@ -973,9 +983,9 @@ msgid "urban_label_templateStyles"
 msgstr ""
 
 #. Default: "Title"
-#: Declaration.py
 #: Division.py
 #: GenericLicence.py
+#: ParcellingTerm.py
 msgid "urban_label_title"
 msgstr ""
 

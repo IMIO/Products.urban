@@ -5,6 +5,6 @@
             handler="Products.urban.exportimport.addUrbanEventTypes"
             title="Add specific urbanEventTypes for Mons"
             version="2011-04-11T14:00:00.00000">
-Adapt application for Mons
+Add specific urbanEventTypes for Mons
 </import-step>
 </import-steps>

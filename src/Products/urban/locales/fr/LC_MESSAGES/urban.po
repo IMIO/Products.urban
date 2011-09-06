@@ -1,11 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-<<<<<<< .mine
-"POT-Creation-Date: 2011-09-05 13:29+0000\n"
-=======
-"POT-Creation-Date: 2011-09-05 09:36+0000\n"
->>>>>>> .r8204
+"POT-Creation-Date: 2011-09-06 10:54+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -910,6 +906,11 @@ msgstr "Dates clés"
 msgid "urban_export_list220"
 msgstr "Exportation liste 220"
 
+#. Default: "This field is made to store extra value if needed."
+#: UrbanVocabularyTerm.py
+msgid "urban_help_extraValue"
+msgstr "Ce champ permet de stocker une valeur suuplémentaire qui pourra par exemple être utilisée lors de la génération de documents"
+
 #. Default: "You will only enter dates here.  Further informations will be entered while describing the investigation"
 #: GenericLicence.py
 msgid "urban_help_investigations"
@@ -1318,6 +1319,11 @@ msgstr "Exposant"
 #: UrbanEvent.py
 msgid "urban_label_externalDecision"
 msgstr " Avis"
+
+#. Default: "Extravalue"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_extraValue"
+msgstr "Valeur supplémentaire (champ libre)"
 
 #. Default: "Fax"
 #: Contact.py

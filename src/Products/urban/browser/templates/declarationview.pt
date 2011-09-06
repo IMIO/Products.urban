@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban"
+      tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
+
+<metal:block fill-slot="top_slot"
+             tal:define="global parcels context/getParcels;" />
+
+<head>
+<tal:block condition="context/getParcels">
+
+<div metal:fill-slot="javascript_head_slot" tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
+
+</div>
+</tal:block>
+
+</head>
+
+<body>
+<metal:main fill-slot="main">
+<metal:main_macro define-macro="main">
+    <metal:body define-macro="body_macro" 
+                tal:define="applicants context/getApplicants;
+                            useTabbing python: context.portal_urban.getUseTabbing();
+                            tool python: context.portal_urban;">
+
+<tal:block condition="python: not parcels or not applicants">
+ <div metal:use-macro="here/urban_macros/macros/urbanPortalMessageMacro" />
+</tal:block>
+<h1 class="documentFirstHeading">
+ <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
+ <span tal:replace="here/Title" tal:omit-tag="">Title</span>
+</h1>
+
+<div id="urbanViewWithTabbing" tal:condition="useTabbing">
+<dl class="formTabs enableFormTabbing">
+<dt class="formTab" tal:attributes="class python: context.getApplicants() and 'formTab' or 'formTab notify'" id="fieldsetlegend-urban_description" i18n:domain="plone" i18n:translate="label_schema_urban_description"><span>Description</span></dt>
+<dd id="fieldset-urban_description">
+ <metal:listing use-macro="here/declaration_macros/macros/declarationDescriptionMacro" />
+</dd>
+ 
+<dt class="formTab" id="fieldsetlegend-urban_events" i18n:domain="plone" i18n:translate="label_schema_urban_events"><span>Events</span></dt>
+<dd id="fieldset-urban_events">
+ <metal:events use-macro="here/urban_macros/macros/urbanEventsMacro" />
+</dd>
+
+</dl>
+</div>
+
+<div tal:condition="not: useTabbing">
+<fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_description">Description</legend></strong>
+ <metal:description use-macro="here/declaration_macros/macros/declarationDescriptionMacro" />
+</fieldset>
+
+<fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_events">Events</legend></strong>
+ <metal:events use-macro="here/urban_macros/macros/urbanEventsMacro" />
+</fieldset>
+</div>
+
+<div tal:replace="structure provider:plone.belowcontentbody" />
+
+</metal:body>
+</metal:main_macro>
+</metal:main>
+</body>
+</html>

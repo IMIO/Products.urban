@@ -52,6 +52,14 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IDeclaration"
+     name="declarationview"
+     class=".declarationview.DeclarationView"
+     template="templates/declarationview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IInquiryEvent"
      name="urbaneventview"
      class=".urbaneventviews.UrbanEventInquiryView"

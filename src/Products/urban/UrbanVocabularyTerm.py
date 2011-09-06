@@ -31,7 +31,7 @@ schema = Schema((
 
     TextField(
         name='description',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html', 'application/msword',),
+        allowable_content_types=('text/html',),
         widget=RichWidget(
             label='Description',
             label_msgid='urban_label_description',
@@ -39,6 +39,16 @@ schema = Schema((
         ),
         default_output_type='text/html',
         accessor="Description",
+    ),
+    StringField(
+        name='extraValue',
+        widget=StringField._properties['widget'](
+            description="This field is made to store extra value if needed.",
+            label='Extravalue',
+            label_msgid='urban_label_extraValue',
+            description_msgid='urban_help_extraValue',
+            i18n_domain='urban',
+        ),
     ),
 
 ),

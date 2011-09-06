@@ -1,11 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-<<<<<<< .mine
-"POT-Creation-Date: 2011-09-05 13:29+0000\n"
-=======
-"POT-Creation-Date: 2011-09-05 09:36+0000\n"
->>>>>>> .r8204
+"POT-Creation-Date: 2011-09-06 10:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -108,6 +104,9 @@ msgstr ""
 
 # PortionOutSearch
 msgid "Search parcel(s)"
+msgstr ""
+
+msgid "See more..."
 msgstr ""
 
 # urban_actions
@@ -493,6 +492,16 @@ msgstr ""
 msgid "front_page_title"
 msgstr ""
 
+#. Default: "Female"
+#: PersonTitleTerm.py
+msgid "gender_female"
+msgstr ""
+
+#. Default: "Male"
+#: PersonTitleTerm.py
+msgid "gender_male"
+msgstr ""
+
 # urbanevent_view
 msgid "generate_a_linked_doc"
 msgstr ""
@@ -603,6 +612,16 @@ msgstr ""
 msgid "modify_applicant"
 msgstr ""
 
+#. Default: "Plural"
+#: PersonTitleTerm.py
+msgid "multiplicity_plural"
+msgstr ""
+
+#. Default: "Single"
+#: PersonTitleTerm.py
+msgid "multiplicity_single"
+msgstr ""
+
 msgid "no_applicant_defined"
 msgstr ""
 
@@ -648,10 +667,10 @@ msgstr ""
 msgid "notaryletters"
 msgstr ""
 
-msgid "number_of_recipients"
+msgid "number_of_claimants"
 msgstr ""
 
-msgid "number_of_claimants"
+msgid "number_of_recipients"
 msgstr ""
 
 #. Default: "OpenOfficePort"
@@ -884,6 +903,11 @@ msgid "urban_description_key_dates_legend"
 msgstr ""
 
 msgid "urban_export_list220"
+msgstr ""
+
+#. Default: "This field is made to store extra value if needed."
+#: UrbanVocabularyTerm.py
+msgid "urban_help_extraValue"
 msgstr ""
 
 #. Default: "You will only enter dates here.  Further informations will be entered while describing the investigation"
@@ -1293,14 +1317,14 @@ msgstr ""
 msgid "urban_label_externalDecision"
 msgstr ""
 
+#. Default: "Extravalue"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_extraValue"
+msgstr ""
+
 #. Default: "Fax"
 #: Contact.py
 msgid "urban_label_fax"
-msgstr ""
-
-#. Default: "Female"
-#: PersonTitleTerm.py
-msgid "gender_female"
 msgstr ""
 
 #. Default: "Filter"
@@ -1549,11 +1573,6 @@ msgstr ""
 msgid "urban_label_lotusage"
 msgstr ""
 
-#. Default: "Male"
-#: PersonTitleTerm.py
-msgid "gender_male"
-msgstr ""
-
 #. Default: "Mapextent"
 #: UrbanTool.py
 msgid "urban_label_mapExtent"
@@ -1575,16 +1594,6 @@ msgstr ""
 #. Default: "Multiplicity"
 #: PersonTitleTerm.py
 msgid "urban_label_multiplicity"
-msgstr ""
-
-#. Default: "Single"
-#: PersonTitleTerm.py
-msgid "multiplicity_single"
-msgstr ""
-
-#. Default: "Plural"
-#: PersonTitleTerm.py
-msgid "multiplicity_plural"
 msgstr ""
 
 #. Default: "Name"
@@ -2211,8 +2220,5 @@ msgid "warning_no_deposit_date"
 msgstr ""
 
 msgid "work_location"
-msgstr ""
-
-msgid "See more..."
 msgstr ""
 
