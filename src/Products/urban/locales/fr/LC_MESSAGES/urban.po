@@ -1,7 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
+<<<<<<< .mine
+"POT-Creation-Date: 2011-09-05 13:29+0000\n"
+=======
 "POT-Creation-Date: 2011-09-05 09:36+0000\n"
+>>>>>>> .r8204
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -493,6 +497,16 @@ msgstr "<p>L'application intègre la gestion des permis d'urbanisme et d'urbanis
 msgid "front_page_title"
 msgstr "Gestion de l'Urbanisme"
 
+#. Default: "Female"
+#: PersonTitleTerm.py
+msgid "gender_female"
+msgstr "Féminin"
+
+#. Default: "Male"
+#: PersonTitleTerm.py
+msgid "gender_male"
+msgstr "Masculin"
+
 # urbanevent_view
 msgid "generate_a_linked_doc"
 msgstr "Générer un document lié au dossier"
@@ -602,6 +616,16 @@ msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes"
 
 msgid "modify_applicant"
 msgstr "Modifier le demandeur"
+
+#. Default: "Plural"
+#: PersonTitleTerm.py
+msgid "multiplicity_plural"
+msgstr "Pluriel"
+
+#. Default: "Single"
+#: PersonTitleTerm.py
+msgid "multiplicity_single"
+msgstr "Singulier"
 
 msgid "no_applicant_defined"
 msgstr "Aucun demandeur?"
@@ -1342,6 +1366,11 @@ msgstr "Détails concernant le zonage"
 msgid "urban_label_foldermanagers"
 msgstr "Agent(s) traitant(s)"
 
+#. Default: "Gender"
+#: PersonTitleTerm.py
+msgid "urban_label_gender"
+msgstr "Genre"
+
 #. Default: "Geometricians"
 #: parcelOutGeometricians.py
 msgid "urban_label_geometricians"
@@ -1555,6 +1584,11 @@ msgstr "Pièces manquantes"
 #: GenericLicence.py
 msgid "urban_label_missingPartsDetails"
 msgstr "Détails concernant les pièces manquantes"
+
+#. Default: "Multiplicity"
+#: PersonTitleTerm.py
+msgid "urban_label_multiplicity"
+msgstr "Nombre"
 
 #. Default: "Name"
 #: RecipientCadastre.py
