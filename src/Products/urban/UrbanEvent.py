@@ -39,6 +39,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
+            label_method="eventDateLabel",
             label='Eventdate',
             label_msgid='urban_label_eventDate',
             i18n_domain='urban',
@@ -271,6 +272,13 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     # Methods
 
     # Manually created methods
+
+    security.declarePublic('eventDateLabel')
+    def eventDateLabel(self):
+        """
+         Returns the variable label
+        """
+        return self.getUrbaneventtypes().getEventDateLabel()
 
     security.declarePublic('listExternalDecisions')
     def listExternalDecisions(self):

@@ -8,7 +8,7 @@
   <table>
     <tr valign="top">
      <td>
-      <u><strong tal:content="python: context.getUrbaneventtypes().getEventDateLabel()">Event date label</strong>:</u>&nbsp;&nbsp;&nbsp;&nbsp;
+      <u><strong tal:content="python: context.eventDateLabel()">Event date label</strong>:</u>&nbsp;&nbsp;&nbsp;&nbsp;
      </td>
      <tal:manage_show_nc_if_needed define="value python: getattr(context, 'eventDate')">
       <td tal:condition="value">
