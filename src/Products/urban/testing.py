@@ -12,20 +12,10 @@ URBAN_ZCML = zca.ZCMLSandbox(filename="testing.zcml",
 URBAN_Z2 = z2.IntegrationTesting(bases=(z2.STARTUP, URBAN_ZCML),
                                  name='URBAN_Z2')
 
-
-class UrbanPloneLayer(PloneWithPackageLayer):
-
-    def setUpZope(self, app, configurationContext):
-        super(UrbanPloneLayer, self).setUpZope(app, configurationContext)
-        z2.installProduct(app, 'Products.urban')
-
-    def tearDownZope(self, app):
-        z2.uninstallProduct(app, 'Products.urban')
-
-
-URBAN = UrbanPloneLayer(
+URBAN = PloneWithPackageLayer(
     zcml_filename="testing.zcml",
     zcml_package=Products.urban,
+    additional_z2_products=('Products.urban',),
     gs_profile_id='Products.urban:default',
     name="URBAN")
 
@@ -33,6 +23,7 @@ URBAN_TESTS_PROFILE = PloneWithPackageLayer(
     bases=(URBAN, ),
     zcml_filename="testing.zcml",
     zcml_package=Products.urban,
+    additional_z2_products=('Products.urban',),
     gs_profile_id='Products.urban:tests',
     name="URBAN_TESTS_PROFILE")
 
