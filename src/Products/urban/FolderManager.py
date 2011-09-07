@@ -96,7 +96,7 @@ class FolderManager(BaseContent, Contact, BrowserDefaultMixin):
         """
           Return a correctly formatted title
         """
-        return self.getName1() + " " + self.getName2() + " (" + self.displayValue(self.listGrades(),self.getGrade()) + ")"
+        return "%s %s (%s)" % (self.getName1(), self.getName2(), self.displayValue(self.listGrades(),self.getGrade()).encode('utf8'))
 
     security.declarePublic('listGrades')
     def listGrades(self):
