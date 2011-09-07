@@ -192,6 +192,10 @@ class ICollegeReportEvent(Interface):
     __doc__ = _("""ICollegeReport type marker interface""")
 
 
+class ICommunalCouncilEvent(Interface):
+    __doc__ = _("""ICommunalCouncil type marker interface""")
+
+
 class IDepositEvent(Interface):
     __doc__ = _("""IDeposit type marker interface""")
 

@@ -455,11 +455,17 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastWalloonRegionPrimo(self):
         return self._getLastEvent(interfaces.IWalloonRegionPrimoEvent)
 
+    def getLastWalloonRegionOpinionRequest(self):
+        return self._getLastEvent(interfaces.IWalloonRegionOpinionRequestEvent)
+
     def getLastAcknowledgment(self):
         return self._getLastEvent(interfaces.IAcknowledgmentEvent)
 
     def getLastInquiry(self):
         return self._getLastEvent(interfaces.IInquiryEvent)
+
+    def getLastCommunalCouncil(self):
+        return self._getLastEvent(interfaces.ICommunalCouncilEvent)
 
     def getLastCollegeReport(self):
         return self._getLastEvent(interfaces.ICollegeReportEvent)

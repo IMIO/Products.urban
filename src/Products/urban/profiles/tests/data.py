@@ -214,6 +214,7 @@ urbanEventTypes = {
                                      {'id': "urb-conseil-delib-communale-creation", 'title': "Délibération du conseil communal (ouverture de voirie)"},
                                      {'id': "urb-conseil-delib-communale-modif", 'title': "Délibération du conseil communal (modification de voirie)"},
                                     ),
+                    'eventTypeType': 'Products.urban.interfaces.ICommunalCouncilEvent',
                     },
                     {
                     'id': "recepisse-article-116",

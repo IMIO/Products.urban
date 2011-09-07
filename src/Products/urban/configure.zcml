@@ -25,6 +25,10 @@
   
   <include file="grok.zcml" />
   <interface
+    interface=".interfaces.ICommunalCouncilEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.ITechnicalServiceOpinionRequestEvent"
     type=".interfaces.IEventTypeType"/>
 
