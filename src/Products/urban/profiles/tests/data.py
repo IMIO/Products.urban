@@ -396,7 +396,9 @@ urbanEventTypes = {
                     'activatedFields': [],
                     'eventDateLabel': "Date du dépôt de la demande",
                     'deadLineDelay': 15,
-                    'podTemplates': (),
+                    'podTemplates': (
+                                     {'id': "decl-recepisse", 'title': "Récepissé de la déclaration"},
+                                    ),
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
