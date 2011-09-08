@@ -20,6 +20,8 @@ def afterDelete(ob, event):
     if not ob.portal_type == 'Inquiry':
         return
     for inquiry in ob.getInquiries():
+        if not inquiry.portal_type == 'Inquiry':
+            continue
         inquiry.setTitle(inquiry.generateInquiryTitle())
         inquiry.reindexObject(idxs=('title',))
 
