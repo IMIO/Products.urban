@@ -1112,6 +1112,32 @@ def importStreets(context):
     #fstreets.close()
     pass
 
+
+def addTestBuildlicense(context):
+    """
+    Add a Buildlicence for tests purpose ...
+    """
+    if context.readDataFile('urban_tests_marker.txt') is None:
+        return
+
+    site = context.getSite() 
+    urban_folder = site.urban
+    portal_urban = site.portal_urban
+    portal_buildlicences = portal_urban.buildlicence
+    buildlicences_folder = urban_folder.buildlicences
+    fm_folder = portal_buildlicences.foldermanagers
+    architects_folder = buildlicences_folder.architects
+
+    foldermanager = getattr(fm_folder, 'foldermanager1')
+    print(foldermanager.getName1())
+    architect = getattr(architects_folder, portal_urban.plone_utils.normalizeString('Archi1Name-Archi1FirstName'))
+
+    licence_id = site.generateUniqueId('homewrecker')
+    buildlicences_folder.invokeFactory('BuildLicence', id=licence_id, licenceSubject='starfish chocolates', usage='for_habitation',architects=[architect], foldermanagers=[foldermanager])
+    licence = getattr(buildlicences_folder, licence_id)
+    licence.invokeFactory("Applicant", id=site.generateUniqueId('smithandwesson'), personTitle='masters', name1='Smith &', name2='Wesson', street='Rue du porc dans le yaourt', number='42', zipcode='5032', city='Couillet' )
+    licence.processForm()
+    
 def setupExtra(context):
     if context.readDataFile('urban_extra_marker.txt') is None:
         return

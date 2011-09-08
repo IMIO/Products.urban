@@ -8,4 +8,11 @@
             version="2008-10-15T15:00:00.00000">
 Add some objects for test purpose
 </import-step>
+<import-step
+            id="urban-addTestBuildLicense"
+            handler="Products.urban.setuphandlers.addTestBuildlicense"
+            title="Add a buildlicense for test purpose"
+            version="2011-09-15T15:00:00.00000">
+Add some objects for test purpose
+</import-step>
 </import-steps>
