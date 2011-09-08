@@ -24,6 +24,7 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Contact import Contact
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 ##/code-section module-header
 
 schema = Schema((
@@ -45,7 +46,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         enforceVocabulary=True,
-        vocabulary='listGrades',
+        vocabulary=UrbanVocabulary('persons_grades', inUrbanConfig=False),
     ),
     StringField(
         name='ploneUserId',
@@ -96,14 +97,7 @@ class FolderManager(BaseContent, Contact, BrowserDefaultMixin):
         """
           Return a correctly formatted title
         """
-        return "%s %s (%s)" % (self.getName1(), self.getName2(), self.displayValue(self.listGrades(),self.getGrade()).encode('utf8'))
-
-    security.declarePublic('listGrades')
-    def listGrades(self):
-        """
-          Return a list of available grades from the configuration
-        """
-        return DisplayList(self.portal_urban.listVocabulary('persons_grades', self, inUrbanConfig=False))
+        return "%s %s (%s)" % (self.getName1(), self.getName2(), self.displayValue(self.Vocabulary('grade')[0], self.getGrade()).encode('utf8'))
 
 
 

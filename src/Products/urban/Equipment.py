@@ -103,7 +103,7 @@ class Equipment(BaseFolder, BrowserDefaultMixin):
         """
           Set a correct title if we use invokeFactory
         """
-        self.setTitle(self.displayValue(self.listEquipmentType(), self.getEquipmentType())
+        self.setTitle(self.displayValue(self.Vocabulary('EquipmentType')[0], self.getEquipmentType())
 )
         self.reindexObject()
 

@@ -27,6 +27,7 @@ import cgi
 from zope.i18n import translate
 from Products.CMFCore.utils import getToolByName
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.validation.interfaces.IValidator import IValidator
 from Products.validation import validation
 
@@ -91,7 +92,7 @@ schema = Schema((
             label_msgid='urban_label_personTitle',
             i18n_domain='urban',
         ),
-        vocabulary='listPersonTitles',
+        vocabulary=UrbanVocabulary('persons_titles', vocType='PersonTitleTerm', inUrbanConfig=False),
     ),
     StringField(
         name='name1',
@@ -266,13 +267,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
         else:
             return "%s %s" % (self.getName1(), self.getName2())
 
-    security.declarePublic('listPersonTitles')
-    def listPersonTitles(self):
-        """
-          Returns possible person titles
-        """
-        return DisplayList(self.portal_urban.listVocabulary('persons_titles', self, vocType='PersonTitleTerm', inUrbanConfig=False))
-
     security.declarePublic('at_post_create_script')
     def at_post_create_script(self):
         """
@@ -323,7 +317,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
                     addressSignaletic)
 
     def _getNameSignaletic(self, linebyline):
-        title = self.displayValue(self.listPersonTitles(),
+        title = self.displayValue(self.Vocabulary('personTitle')[0],
             self.getPersonTitle()).encode('utf8')
         nameSignaletic = '%s %s %s' % (title, self.getName1(), self.getName2())
         if len(self.getRepresentedBy()) > 0:
@@ -427,7 +421,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
           Returns the personTitle real value.  Usefull for being used in templates
         """
-        return self.displayValue(self.listPersonTitles(), self.getPersonTitle()).encode('UTF-8')
+        return self.displayValue(self.Vocabulary('personTitle')[0], self.getPersonTitle()).encode('UTF-8')
 
     security.declarePublic('getNumber')
     def getNumber(self):

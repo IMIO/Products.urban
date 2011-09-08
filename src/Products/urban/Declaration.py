@@ -32,6 +32,7 @@ from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 optional_fields = []
 ##/code-section module-header
@@ -62,7 +63,7 @@ schema = Schema((
         name='workLocations',
         schemata="urban_description",
         widget=DataGridWidget(
-            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", vocabulary="listStreets"),},
+            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False)),},
             label='Worklocations',
             label_msgid='urban_label_workLocations',
             i18n_domain='urban',
@@ -78,7 +79,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_description',
-        vocabulary='listArticles',
+        vocabulary=UrbanVocabulary('articles'),
     ),
     TextField(
         name='description',
@@ -153,20 +154,10 @@ class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
     security.declarePublic('listArticles')
     def listArticles(self):
         """
-          Returns the list of available articles
         """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('articles', self))
+        pass
 
     # Manually created methods
-
-    security.declarePublic('listStreets')
-    def listStreets(self):
-        """
-          Return a list of Streets from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('streets', self, vocType=('Street', 'Locality',), id_to_use="UID", inUrbanConfig=False))
 
     security.declarePublic('getDefaultReference')
     def getDefaultReference(self):

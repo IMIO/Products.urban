@@ -25,17 +25,14 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.CMFCore.utils import getToolByName
 from Products.urban.indexes import UrbanIndexes
 from collective.referencedatagridfield import ReferenceDataGridField
 from collective.referencedatagridfield import ReferenceDataGridWidget
-from Products.urban.indexes import UrbanIndexes
-from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
-from zope.i18n import translate
 from zope.i18n import translate as _
 from Products.urban.utils import setOptionalAttributes
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 optional_fields = []
 ##/code-section module-header
@@ -83,7 +80,7 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         multiValued=True,
-        vocabulary='listSpecificFeatures',
+        vocabulary=UrbanVocabulary('specificfeatures'),
     ),
     ReferenceDataGridField(
         name='workLocations',
@@ -152,14 +149,6 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultM
     ##/code-section class-header
 
     # Methods
-
-    security.declarePublic('listSpecificFeatures')
-    def listSpecificFeatures(self):
-        """
-          Returns the available specific features from the urban config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('specificfeatures', self))
 
     # Manually created methods
 

@@ -25,15 +25,13 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.CMFPlone.i18nl10n import utranslate
-from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.CMFCore.utils import getToolByName
 from Products.urban.indexes import UrbanIndexes
 from collective.referencedatagridfield import ReferenceDataGridField
 from collective.referencedatagridfield import ReferenceDataGridWidget
-from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 optional_fields = []
 ##/code-section module-header
@@ -101,7 +99,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         multiValued=True,
-        vocabulary='listZones',
+        vocabulary=UrbanVocabulary('folderzones'),
     ),
     ReferenceDataGridField(
         name='workLocations',
@@ -264,14 +262,6 @@ class Division(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
            Return the list of parcels (portionOut) for the Licence
         """
         return self.objectValues('PortionOut')
-
-    security.declarePublic('listZones')
-    def listZones(self):
-        """
-          Return a list of zones from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('folderzones', self))
 
     security.declarePublic('getAdditionalLayers')
     def getAdditionalLayers(self):

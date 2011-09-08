@@ -31,6 +31,7 @@ from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from GenericLicence import GenericLicence
 from GenericLicence import GenericLicence_schema
 from Products.urban.utils import setOptionalAttributes
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from dateutil.relativedelta import relativedelta
 
 slave_fields_subdivision = (
@@ -68,7 +69,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_description',
-        vocabulary='listBuildWorkTypeTerms',
+        vocabulary=UrbanVocabulary('folderbuildworktypes'),
     ),
     StringField(
         name='usage',
@@ -318,14 +319,6 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     # Methods
 
-    security.declarePublic('listBuildWorkTypeTerms')
-    def listBuildWorkTypeTerms(self):
-        """
-         Return the list of worktypesterm defined in portal_urban
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('folderbuildworktypes', self))
-
     security.declarePublic('listRoadAdaptations')
     def listRoadAdaptations(self):
         """
@@ -542,7 +535,6 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
        Finalizes the type schema to alter some fields
     """
-    schema.moveField('pca', after='isInPCA')
     schema.moveField('roadAdaptation', before='roadTechnicalAdvice')
     schema.moveField('licenceSubject', after='title')
     schema.moveField('reference', after='licenceSubject')
@@ -551,11 +543,12 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('referenceDGATLP', after='reference')
     schema.moveField('foldermanagers', after='architects')
     schema.moveField('workType', after='folderCategory')
-    schema.moveField('isInSubdivision', after='derogationDetails')
+    schema.moveField('folderZoneDetails', after='folderZone')
+    schema.moveField('isInPCA', after='folderZoneDetails')
+    schema.moveField('pca', after='isInPCA')
+    schema.moveField('isInSubdivision', after='pca')
     schema.moveField('parcellings', after='isInSubdivision')
     schema.moveField('subdivisionDetails', after='parcellings')
-    schema.moveField('isInPCA', after='subdivisionDetails')
-    schema.moveField('pca', after='isInPCA')
     schema.moveField('description', after='usage')
     schema.moveField('pash', after='roadEquipments')
     schema.moveField('pashDetails', after='pash')

@@ -4,7 +4,7 @@
 <Object name="Demandeur">
     <Item name="Titre">
         <FieldCode>
-            self.displayValue(applicantobj.listPersonTitles(), applicantobj.getPersonTitle())
+            self.displayValue(applicantobj.Vocabulary('personTitle')[0], applicantobj.getPersonTitle())
         </FieldCode>
     </Item>
     <Item name="Nom">
@@ -57,7 +57,7 @@
 <Object name="Architecte">
     <Item name="Titre">
         <FieldCode>
-            self.displayValue(self.getArchitects().listPersonTitles(), self.getArchitects().getPersonTitle())
+            self.displayValue(self.getArchitects().Vocabulary('personTitle')[0], self.getArchitects().getPersonTitle())
         </FieldCode>
     </Item>
     <Item name="Nom">
@@ -110,7 +110,7 @@
 <Object name="Notaire">
     <Item name="Titre">
         <FieldCode>
-            self.displayValue(self.getNotaryContact().listPersonTitles(), self.getNotaryContact().getPersonTitle())
+            self.displayValue(self.getNotaryContact().Vocabulary('personTitle')[0], self.getNotaryContact().getPersonTitle())
         </FieldCode>
     </Item>
     <Item name="Nom">
@@ -193,7 +193,7 @@
     </Item>
     <Item name="Grade">
         <FieldCode>
-            self.displayValue(self.getFoldermanagers().listGrades(), self.getFoldermanagers().getGrade())
+            self.displayValue(self.getFoldermanagers().Vocabulary('grade')[0], self.getFoldermanagers().getGrade())
         </FieldCode>        
     </Item>
 </Object>
@@ -383,7 +383,7 @@
     </Item>    
     <Item name="Titre">
         <FieldCode>
-            self.displayValue(folder.getApplicants()[0].listPersonTitles(), folder.getApplicants()[0].getPersonTitle())
+            self.displayValue(folder.getApplicants()[0].Vocabulary('personTitle')[0], folder.getApplicants()[0].getPersonTitle())
         </FieldCode>
     </Item>
     <Item name="Nom du demandeur">
@@ -408,7 +408,7 @@
     </Item>
     <Item name="Nom et prénom des demandeurs">
         <FieldCode>
-            self.displayValue(folder.getApplicants()[0].listPersonTitles(), folder.getApplicants()[0].getPersonTitle()) folder.getApplicants()[0].getName2() folder.getApplicants()[0].getName1()
+            self.displayValue(folder.getApplicants()[0].Vocabulary('personTitle')[0], folder.getApplicants()[0].getPersonTitle()) folder.getApplicants()[0].getName2() folder.getApplicants()[0].getName1()
         </FieldCode>        
     </Item>
     <Item name="Rue des travaux">

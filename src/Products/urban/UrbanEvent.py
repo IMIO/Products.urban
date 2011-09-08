@@ -26,9 +26,9 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from DateTime import DateTime
-from Acquisition import aq_inner, aq_parent
 from Products.CMFCore.utils import getToolByName
 from zope.i18n import translate as _
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 ##/code-section module-header
 
 schema = Schema((
@@ -108,7 +108,7 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         optional=True,
-        vocabulary='listDecisions',
+        vocabulary=UrbanVocabulary('decisions', inUrbanConfig=False),
     ),
     DateTimeField(
         name='decisionDate',
@@ -205,7 +205,7 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         optional=True,
-        vocabulary='listExternalDecisions',
+        vocabulary=UrbanVocabulary('externaldecisions', inUrbanConfig=False),
     ),
     TextField(
         name='opinionText',
@@ -279,22 +279,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
          Returns the variable label
         """
         return self.getUrbaneventtypes().getEventDateLabel()
-
-    security.declarePublic('listExternalDecisions')
-    def listExternalDecisions(self):
-        """
-         Returns the list of decisions from the configuration
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('external-decisions', self, inUrbanConfig=False))
-
-    security.declarePublic('listDecisions')
-    def listDecisions(self):
-        """
-         Returns the list of decisions from the configuration
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('decisions', self, inUrbanConfig=False))
 
     security.declarePublic('listAdviceAgreementLevels')
     def listAdviceAgreementLevels(self):

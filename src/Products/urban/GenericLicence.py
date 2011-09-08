@@ -26,7 +26,6 @@ from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 import warnings
 from DateTime import DateTime
 from zope.i18n import translate
@@ -93,7 +92,7 @@ schema = Schema((
         name='workLocations',
         schemata="urban_description",
         widget=DataGridWidget(
-            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", vocabulary="listStreets"),},
+            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False)),},
             label='Worklocations',
             label_msgid='urban_label_workLocations',
             i18n_domain='urban',
@@ -122,7 +121,7 @@ schema = Schema((
         ),
         schemata='urban_description',
         multiValued=True,
-        vocabulary='listMissingParts',
+        vocabulary=UrbanVocabulary('missingparts'),
     ),
     TextField(
         name='missingPartsDetails',
@@ -159,7 +158,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=True,
-        vocabulary='listZones',
+        vocabulary=UrbanVocabulary('folderzones'),
     ),
     TextField(
         name='folderZoneDetails',
@@ -181,7 +180,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_description',
-        vocabulary='listDelayToAnnonce',
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay'),
     ),
     TextField(
         name='annoncedDelayDetails',
@@ -213,7 +212,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_road',
-        vocabulary='listRoadTypes',
+        vocabulary=UrbanVocabulary('folderroadtypes'),
     ),
     StringField(
         name='roadCoating',
@@ -223,13 +222,13 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_road',
-        vocabulary='listRoadCoatings',
+        vocabulary=UrbanVocabulary('folderroadcoatings'),
     ),
     DataGridField(
         name='roadEquipments',
         schemata='urban_road',
         widget=DataGridWidget(
-            columns={'road_equipment' : SelectColumn("Road equipments", vocabulary="listRoadEquipments"), 'road_equipment_details' : Column("Road equipment details"),},
+            columns={'road_equipment' : SelectColumn("Road equipments", UrbanVocabulary('folderroadequipments')), 'road_equipment_details' : Column("Road equipment details"),},
             label='Roadequipments',
             label_msgid='urban_label_roadEquipments',
             i18n_domain='urban',
@@ -247,7 +246,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=1,
-        vocabulary='listProtectedBuilding',
+        vocabulary=UrbanVocabulary('folderprotectedbuildings'),
     ),
     TextField(
         name='protectedBuildingDetails',
@@ -271,7 +270,7 @@ schema = Schema((
         ),
         schemata='urban_road',
         multiValued=1,
-        vocabulary='listPashs',
+        vocabulary=UrbanVocabulary('pashs'),
     ),
     TextField(
         name='pashDetails',
@@ -331,7 +330,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_location',
-        vocabulary='listPcas',
+        vocabulary=UrbanVocabulary('pcas', vocType="PcaTerm", inUrbanConfig=False),
     ),
     StringField(
         name='SSC',
@@ -382,7 +381,7 @@ schema = Schema((
         ),
         schemata='urban_road',
         multiValued=1,
-        vocabulary='listMakers',
+        vocabulary=UrbanVocabulary('foldermakers'),
     ),
     LinesField(
         name='solicitLocationOpinionsTo',
@@ -394,7 +393,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=1,
-        vocabulary='listMakers',
+        vocabulary=UrbanVocabulary('foldermakers'),
     ),
     ReferenceField(
         name='foldermanagers',
@@ -457,85 +456,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
 
     # Methods
 
-    security.declarePublic('listFolderCategories')
-    def listFolderCategories(self):
-        """
-          Return a list of folder categories from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('foldercategories', self))
-
-    security.declarePublic('listRoadTypes')
-    def listRoadTypes(self):
-        """
-          Return a list of road types from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('folderroadtypes', self))
-
-    security.declarePublic('listRoadEquipments')
-    def listRoadEquipments(self):
-        """
-          Return a list of road equipments from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('folderroadequipments', self))
-
-    security.declarePublic('listProtectedBuilding')
-    def listProtectedBuilding(self):
-        """
-          Return a list of protected buildings mode from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('folderprotectedbuildings', self))
-
-    security.declarePublic('listZones')
-    def listZones(self):
-        """
-          Return a list of zones from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('folderzones', self))
-
-    security.declarePublic('listDivisions')
-    def listDivisions(self):
-        """
-          Return a list of divisions from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('folderdivisions', self))
-
-    security.declarePublic('listRoadCoatings')
-    def listRoadCoatings(self):
-        """
-          Return a list of road coatings from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('folderroadcoatings', self))
-
-    security.declarePublic('listDelayToAnnonce')
-    def listDelayToAnnonce(self):
-        """
-          Return a list of delays from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('folderdelays', self, vocType="UrbanDelay"))
-
-    security.declarePublic('defaultInvestigationArticle')
-    def defaultInvestigationArticle(self):
-        """
-          This return the default investigation article
-        """
-        return '330'
-
-    security.declarePublic('listPcas')
-    def listPcas(self):
-        """
-          Return a list of PCA from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('pcas', self, vocType="PcaTerm", inUrbanConfig=False))
-
     security.declarePublic('getDefaultReference')
     def getDefaultReference(self):
         """
@@ -544,23 +464,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         tool = getToolByName(self, 'portal_urban')
         return tool.generateReference(self)
 
-    security.declarePublic('listPashs')
-    def listPashs(self):
-        """
-          Return a list of PASHs
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('pashs', self))
-
     # Manually created methods
-
-    security.declarePublic('listStreets')
-    def listStreets(self):
-        """
-          Return a list of Streets from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('streets', self, vocType=('Street', 'Locality',), id_to_use="UID", inUrbanConfig=False))
 
     def divideList (self, divider, list):
         res = []
@@ -700,14 +604,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         for elt in lst:
             vocab.append((elt[0], elt[1]))
         return DisplayList(tuple(vocab))
-
-    security.declarePublic('listMissingParts')
-    def listMissingParts(self):
-        """
-          Return a list of necessary documents from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('missingparts', self))
 
     security.declarePublic('foldermanagersStartupDirectory')
     def foldermanagersStartupDirectory(self):

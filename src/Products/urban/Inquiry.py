@@ -26,6 +26,7 @@ from Products.urban.config import *
 from zope.i18n import translate
 from OFS.ObjectManager import BeforeDeleteException
 from Products.CMFCore.utils import getToolByName
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 ##/code-section module-header
 
 schema = Schema((
@@ -39,7 +40,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         multiValued=1,
-        vocabulary='listDerogations',
+        vocabulary=UrbanVocabulary('derogations'),
     ),
     TextField(
         name='derogationDetails',
@@ -60,7 +61,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         multiValued=True,
-        vocabulary='listInvestigationArticles',
+        vocabulary=UrbanVocabulary('investigationarticles'),
     ),
     DateTimeField(
         name='investigationStart',
@@ -113,7 +114,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         multiValued=1,
-        vocabulary='listMakers',
+        vocabulary=UrbanVocabulary('foldermakers'),
     ),
 
 ),
@@ -147,30 +148,6 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
     # Methods
 
     # Manually created methods
-
-    security.declarePublic('listDerogations')
-    def listDerogations(self):
-        """
-          Return a list of derogations from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('derogations', self))
-
-    security.declarePublic('listInvestigationArticles')
-    def listInvestigationArticles(self):
-        """
-          Return a list of investigation articles from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('investigationarticles', self))
-
-    security.declarePublic('listMakers')
-    def listMakers(self):
-        """
-          Return a list of folder makers from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('foldermakers', self))
 
     security.declarePublic('validate_investigationStart')
     def validate_investigationStart(self, value):
