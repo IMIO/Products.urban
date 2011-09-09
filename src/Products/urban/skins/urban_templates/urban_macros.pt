@@ -5,7 +5,7 @@
 
 <div metal:define-macro="urbanEventDataMacro" i18n:domain="urban">
  <fieldset><strong><legend i18n:translate="event_data">Event data</legend></strong>
-  <table>
+  <table class="no-style-table">
     <tr valign="top">
      <td>
       <u><strong tal:content="python: context.eventDateLabel()">Event date label</strong>:</u>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -98,7 +98,7 @@
                                   actionsToHide python: ('transitions',);">
      <span metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
 </tal:actions>
-<table>
+<table class="no-style-table">
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_derogation">Derogations</span> :</b></td>
   <td width="2%"></td>
