@@ -57,7 +57,7 @@
 <Object name="Architecte">
     <Item name="Titre">
         <FieldCode>
-            self.displayValue(self.getArchitects().Vocabulary('personTitle')[0], self.getArchitects().getPersonTitle())
+            self.displayValue(self.getArchitects()[0].Vocabulary('personTitle')[0], self.getArchitects()[0].getPersonTitle())
         </FieldCode>
     </Item>
     <Item name="Nom">
@@ -110,7 +110,7 @@
 <Object name="Notaire">
     <Item name="Titre">
         <FieldCode>
-            self.displayValue(self.getNotaryContact().Vocabulary('personTitle')[0], self.getNotaryContact().getPersonTitle())
+            self.displayValue(self.getNotaryContact()[0].Vocabulary('personTitle')[0], self.getNotaryContact()[0].getPersonTitle())
         </FieldCode>
     </Item>
     <Item name="Nom">
@@ -193,7 +193,7 @@
     </Item>
     <Item name="Grade">
         <FieldCode>
-            self.displayValue(self.getFoldermanagers().Vocabulary('grade')[0], self.getFoldermanagers().getGrade())
+            self.displayValue(self.getFoldermanagers()[0].Vocabulary('grade')[0], self.getFoldermanagers()[0].getGrade())
         </FieldCode>        
     </Item>
 </Object>
