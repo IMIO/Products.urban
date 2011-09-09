@@ -151,7 +151,7 @@ class PcaTerm(BaseContent, BrowserDefaultMixin):
         label = self.getLabel()
         number = self.getNumber()
         date = self.toLocalizedTime(self.getDecreeDate()).encode('utf8')
-        decree_type = self.displayValue(self.listDecreeTypes(),
+        decree_type = self.displayValue(self.Vocabulary('decreeType')[0],
                 self.getDecreeType()).encode('utf8')
         result = "%s (%s - %s - %s)" % (
             label, number, date, decree_type)

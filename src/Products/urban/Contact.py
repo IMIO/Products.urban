@@ -326,7 +326,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 if self.getPersonTitle() == brain['id']:
                     person_title = brain.getObject()
                     break
-            representatives = self.displayValue(self.listRepresentedBys(), self.getRepresentedBy())
+            representatives = self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
             gender = person_title.getGender()
             multiplicity = person_title.getMultiplicity()
             represented = 'représenté'
