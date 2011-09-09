@@ -145,18 +145,6 @@ class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
 
     # Methods
 
-    security.declarePublic('generateReference')
-    def generateReference(self):
-        """
-        """
-        pass
-
-    security.declarePublic('listArticles')
-    def listArticles(self):
-        """
-        """
-        pass
-
     # Manually created methods
 
     security.declarePublic('getDefaultReference')
