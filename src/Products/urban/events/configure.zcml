@@ -3,6 +3,9 @@
            xmlns:i18n="http://namespaces.zope.org/i18n"
            i18n_domain="urban">
 
+  <subscriber for="..interfaces.IUrbanVocabularyTerm
+                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+              handler=".urbanvocabularyEvents.setInterfaceAndCreateEvent" /> 
   <subscriber for="..interfaces.IApplicant
                    zope.app.container.interfaces.IObjectRemovedEvent"
               handler=".applicantEvents.onDelete" />

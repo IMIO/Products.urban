@@ -15,7 +15,7 @@ class INotary(Interface):
     """Marker interface for .Notary.Notary
     """
 class IApplicant(Interface):
-    """Marker interface for .Architect.Architect
+    """Marker interface for .Applicant
     """
 class IArchitect(Interface):
     """Marker interface for .Architect.Architect
@@ -32,6 +32,10 @@ CONTACT_INTERFACES = {
 
 class IGenericLicence(Interface):
     """Marker interface for .GenericLicence.GenericLicence
+    """
+
+class IRequestedOrganisation(Interface):
+    """Marker interface for .RequestedOrganisation
     """
 
 class IContact(Interface):

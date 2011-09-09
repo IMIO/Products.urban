@@ -78,6 +78,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Proprietary"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="RequestedOrganisation"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanCertificateOne"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanEventInquiry"

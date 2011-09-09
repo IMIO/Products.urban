@@ -25,6 +25,10 @@
   
   <include file="grok.zcml" />
   <interface
+    interface=".interfaces.IRequestedOrganisation"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.ICommunalCouncilEvent"
     type=".interfaces.IEventTypeType"/>
 
