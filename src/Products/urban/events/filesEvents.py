@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import appy.pod
-from appy.shared.utils import FolderDeleter, executeCommand
+from appy.shared.utils import executeCommand
 import os,time
 from StringIO import StringIO
 from Products.urban.utils import getOsTempFolder
@@ -28,7 +28,7 @@ def updateTemplateStylesEvent(object, event):
     """
         Event activated by adding an ATFile
     """
-    if object.REQUEST.form.has_key('file_file') and object.aq_inner.aq_parent.Type() == 'UrbanEventType':
+    if object.aq_inner.aq_parent.Type() == 'UrbanEventType' and object.REQUEST.form.has_key('file_file'):
         tool = getToolByName(object, 'portal_urban')
         #template style is modify, update all template with style.
         templateStylesFileName = createTemporayTemplateStyle(tool)
@@ -64,8 +64,8 @@ def updateTemplateStyle(tool,fileTemplate,templateStylesFileName):
     #merge style from templateStyle in template    
     cmd = '%s %s %s %s -p%d -t%s' % \
         (tool.getUnoEnabledPython(), CONVSCRIPT, tempFileName, 'odt',
-            2002, templateStylesFileName)
-    ooOutput = executeCommand(cmd)
+            tool.getOpenOfficePort(), templateStylesFileName)
+    executeCommand(cmd)
     #read the merged file
     resTempFileName = tempFileName[:-3]+'res.odt'
     if os.path.isfile(resTempFileName):
