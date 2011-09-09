@@ -56,21 +56,6 @@ color: green !important;
 color: red !important;
 }
 
-
-/* table styles */
-/* we want a table with no styles at all */
-.no-style-table {
-border: 0 !important;
-padding: 0 !important;
-margin: 0 !important;
-}
-
-.no-style-table td {
-border: 0 !important;
-padding-left: 0 !important;
-margin: 0 !important;
-}
-
 .imageInput {
     border-width: 0px;
     background: none;
