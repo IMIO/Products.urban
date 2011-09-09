@@ -25,7 +25,6 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
 from OFS.ObjectManager import BeforeDeleteException
-from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 ##/code-section module-header
 
