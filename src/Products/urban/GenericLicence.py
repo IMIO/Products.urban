@@ -335,8 +335,8 @@ schema = Schema((
     LinesField(
         name='SSC',
         widget=MultiSelectionWidget(
+            size= 15,
             label='Ssc',
-            size=15,
             label_msgid='urban_label_SSC',
             i18n_domain='urban',
         ),
@@ -344,14 +344,17 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary('ssc', inUrbanConfig=False),
     ),
-    StringField(
+    LinesField(
         name='RCU',
-        widget=StringField._properties['widget'](
+        widget=MultiSelectionWidget(
+            size= 10,
             label='Rcu',
             label_msgid='urban_label_RCU',
             i18n_domain='urban',
         ),
         schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('rcu', inUrbanConfig=False),
     ),
     BooleanField(
         name='areParcelsVerified',

@@ -849,6 +849,11 @@ msgstr ""
 msgid "ssc_folder_title"
 msgstr ""
 
+#. Default: "RCU"
+#: setuphandlers.py
+msgid "rcu_folder_title"
+msgstr ""
+
 #. Default: "Supervision area"
 #: GenericLicence.py
 msgid "supervision_area"

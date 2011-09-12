@@ -742,6 +742,20 @@ def addGlobalFolders(context):
         newFolder.setLocallyAllowedTypes(['City'])
         newFolder.setImmediatelyAddableTypes(['City'])
 
+    #add the RCU folder
+    if not hasattr(tool, "rcu"):
+        newFolderid = tool.invokeFactory("Folder",id="rcu",title=_("rcu_folder_title", 'urban', context=site.REQUEST))
+        newFolder = getattr(tool, newFolderid)
+        newFolder.setConstrainTypesMode(1)
+        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+        #add some examples
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="rcu-aire-a",title=u"Aire A habitat centre des villages")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="rcu-aire-b",title=u"Aire B habitat hors centre des villages")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="rcu-aire-c",title=u"Aire C rives des habitats")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="rcu-aire-d",title=u"Aire D activités économiques")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="rcu-aire-e",title=u"Aire E dominante rurale")
+
     #add the SSC folder
     if not hasattr(tool, "ssc"):
         newFolderid = tool.invokeFactory("Folder",id="ssc",title=_("ssc_folder_title", 'urban', context=site.REQUEST))

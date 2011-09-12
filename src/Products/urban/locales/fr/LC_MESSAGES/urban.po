@@ -769,6 +769,11 @@ msgstr "Monsieur"
 msgid "proprietaries"
 msgstr "Propriétaire(s)"
 
+#. Default: "RCU"
+#: setuphandlers.py
+msgid "rcu_folder_title"
+msgstr "RCU"
+
 msgid "recipients_folder_title"
 msgstr "Destinataires"
 
@@ -825,6 +830,11 @@ msgstr "Recherche dynamique des parcelles sur un permis"
 msgid "simple-map_title"
 msgstr "Carte simple"
 
+#. Default: "SSC"
+#: setuphandlers.py
+msgid "ssc_folder_title"
+msgstr "SSC"
+
 #. Default: "When adding manually a new street, please let the default value"
 #: Street.py
 msgid "street_best_address_key_descr"
@@ -840,6 +850,8 @@ msgstr "Date d'expiration de la rue. Laisser vide pour les rues actuellement val
 msgid "street_start_date_descr"
 msgstr "Date de début de validité de la rue"
 
+#. Default: "Streets"
+#: setuphandlers.py
 msgid "streets_folder_title"
 msgstr "Rues"
 
