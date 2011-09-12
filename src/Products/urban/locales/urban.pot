@@ -1179,6 +1179,9 @@ msgstr ""
 msgid "urban_label_collegeReportDecisionDate"
 msgstr ""
 
+msgid "label_colname_eventDate"
+msgstr ""
+
 #. Default: "Color"
 #: Layer.py
 msgid "urban_label_color"

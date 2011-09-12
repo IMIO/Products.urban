@@ -319,7 +319,7 @@
   <td>
     <div tal:define="specificSearch python: 'searchUrbanEvents';
                      tool python: context.portal_urban;
-                     showedCols python: ('Title', 'created', 'Creator', );
+                     showedCols python: ('Title', 'eventDate', );
                      topic python: None;
                      showActions python: True;
                      theObjects python: False;
@@ -501,7 +501,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                                         title_or_id obj/pretty_title_or_id">
                     <tal:block condition="python: field in showedCols" define="value python: getattr(obj, field, None)">
                         <td tal:condition="python: field not in ['Title', 'Creator', 'name', 'street', ]">
-                            <span tal:replace="structure python: here.formatCatalogMetadata(value)">Field value</span>
+                            <span tal:replace="structure python: here.formatCatalogMetadata(value, long_format=False)">Field value</span>
                         </td>
                         <tal:comment replace="nothing">special case for field 'name' where we display the 'title' that is the name reworked just above</tal:comment>
                         <td tal:condition="python: field == 'name'">

@@ -543,6 +543,9 @@ msgstr "Localité"
 msgid "label_colname_created"
 msgstr "Créé le"
 
+msgid "label_colname_eventDate"
+msgstr "Date clé"
+
 msgid "label_colname_getBeginDate"
 msgstr "Du"
 

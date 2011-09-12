@@ -21,6 +21,7 @@
   <indexed_attr value="parcelInfosIndex"/>
  </index>
  <column value="parcelInfosIndex"/>
+ <column value="eventDate"/>
  <index name="applicantInfosIndex" meta_type="ZCTextIndex">
   <indexed_attr value="applicantInfosIndex"/>
   <extra name="index_type" value="Okapi BM25 Rank"/>
