@@ -742,6 +742,33 @@ def addGlobalFolders(context):
         newFolder.setLocallyAllowedTypes(['City'])
         newFolder.setImmediatelyAddableTypes(['City'])
 
+    #add the SSC folder
+    if not hasattr(tool, "ssc"):
+        newFolderid = tool.invokeFactory("Folder",id="ssc",title=_("ssc_folder_title", 'urban', context=site.REQUEST))
+        newFolder = getattr(tool, newFolderid)
+        newFolder.setConstrainTypesMode(1)
+        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+        #add some examples
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-centre-ville",title=u"Zone d'habitat urbain de centre-ville")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-suburbain",title=u"Zone d'habitat suburbain")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-services-publics",title=u"Zone de services publics et d'équipements communautaires")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-industrielle",title=u"Zone industrielle")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-industrielle-verte",title=u"Zone industrielle verte")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-militaire",title=u"Zone militaire")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-habitat-urban-differe",title=u"Zone d'habitat urbain à aménagement différé")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-extraction",title=u"Zone d'extraction")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-loisirs",title=u"Zone de loisirs et de séjours")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-agricole",title=u"Zone agricole")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-vert-social",title=u"Zone d'espace vert social")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-vert-eco",title=u"Zone d'espace vert ecologique")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-vert-mixte",title=u"Zone d'espace vert mixte")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-naturelle",title=u"Zone naturelle")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-forestiere",title=u"Zone forestière")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-forestiere-mixte",title=u"Zone forestière mixte")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-activites-economiques-mixtes",title=u"Zone d'activités économiques mixtes")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-activites-economiques-tertiaires",title=u"Zone d'activités économiques tertiaires")
+
     #add the additional_layers folder
     if not hasattr(tool, "additional_layers"):
         newFolderid = tool.invokeFactory("Folder",id="additional_layers",title=_("additonal_layers_folder_title", 'urban', context=site.REQUEST))

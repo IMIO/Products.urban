@@ -332,14 +332,17 @@ schema = Schema((
         schemata='urban_location',
         vocabulary=UrbanVocabulary('pcas', vocType="PcaTerm", inUrbanConfig=False),
     ),
-    StringField(
+    LinesField(
         name='SSC',
-        widget=StringField._properties['widget'](
+        widget=MultiSelectionWidget(
             label='Ssc',
+            size=15,
             label_msgid='urban_label_SSC',
             i18n_domain='urban',
         ),
         schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('ssc', inUrbanConfig=False),
     ),
     StringField(
         name='RCU',

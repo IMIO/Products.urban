@@ -839,7 +839,14 @@ msgstr ""
 msgid "street_start_date_descr"
 msgstr ""
 
+#. Default: "Streets"
+#: setuphandlers.py
 msgid "streets_folder_title"
+msgstr ""
+
+#. Default: "SSC"
+#: setuphandlers.py
+msgid "ssc_folder_title"
 msgstr ""
 
 #. Default: "Supervision area"
