@@ -170,7 +170,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
           Return a list of folder makers from the config
         """
         urbantool = getToolByName(self,'portal_urban')
-        return DisplayList(urbantool.listVocabulary('foldermakers', self))
+        return DisplayList(urbantool.listVocabulary( 'foldermakers', self, vocType='OrganisationTerm'))
 
     security.declarePublic('validate_investigationStart')
     def validate_investigationStart(self, value):

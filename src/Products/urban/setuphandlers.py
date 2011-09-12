@@ -100,11 +100,10 @@ def postInstall(context):
                        'Proprietary': 1,
                        'Applicant': 1,
                        'Claimant': 1,
-                       'RequestedOrganisation': 1,
                       }
     alreadyRegTypes.update(typesToRegister)
     factory_tool.manage_setPortalFactoryTypes(listOfTypeIds=alreadyRegTypes)
-    
+
     #to be removed after deletion of class Architect
     architect_type = site.portal_types.Architect
     architect_type.content_meta_type = "Contact"
@@ -368,27 +367,32 @@ def addUrbanConfigs(context):
             newFolderid = configFolder.invokeFactory("Folder",id="foldermakers",title=_("foldermakers_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
-            newFolder.setLocallyAllowedTypes(['RequestedOrganisation'])
-            newFolder.setImmediatelyAddableTypes(['RequestedOrganisation'])
-            newFolder.invokeFactory("RequestedOrganisation",id="spw-dgo1",title=u"SPW-DGO1", description=u'<p>Direction Générale opérationnelle<br />Département du réseau de Namur et du Luxembourg<br />District 131.12 - SPY<br />37, Route de Saussin<br />5190 Spy</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="dgrne",title=u"DGRNE", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="dnf",title=u"DNF", description=u'<p>39, Avenue Reine Astrid<br />5000 Namur</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="stp",title=u"Service Technique Provincial", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="pi",title=u"Prévention Incendie", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="bec",title=u"Bureau d'études communal", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="svp",title=u"Service Voyer Principal", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="agriculture",title=u"Agriculture", description=u'<p>Direction Générale opérationnelle<br />Agriculture, Ressources naturelles et Environnement<br />Service extérieur de Wavre<br />4, Avenue Pasteur<br />1300 Wavre</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="pn",title=u"Parc Naturel", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="crmsf",title=u"Commission Royale des Monuments, Sites et Fouilles", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="swde",title=u"SWDE", description=u'<p>14, Rue Joseph Saintraint<br />5000 Namur</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="ccatm",title=u"CCATM", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="inasep",title=u"INASEP", description=u'<p>1b, Rue des Viaux<br />5100 Naninne</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="belgacom",title=u"Belgacom", description=u'<p>60, Rue Marie Henriette<br />5000 Namur</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="spge",title=u"SPGE", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="cibe",title=u"CIBE/Vivaqua", description=u'<p>70, Rue aux Laines<br />1000 Bruxelles</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="sncb",title=u"SNCB", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="infrabel",title=u"Infrabel", description=u'<p>Infrastructure ferroviaire<br />2/003, Place des Guillemins<br />4000 Liège</p>')
-            newFolder.invokeFactory("RequestedOrganisation",id="voo",title=u"VOO", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
+            newFolder.setLocallyAllowedTypes(['OrganisationTerm'])
+            newFolder.setImmediatelyAddableTypes(['OrganisationTerm'])
+            newFolder.invokeFactory("OrganisationTerm",id="spw-dgo1",title=u"SPW-DGO1", description=u'<p>Direction Générale opérationnelle<br />Département du réseau de Namur et du Luxembourg<br />District 131.12 - SPY<br />37, Route de Saussin<br />5190 Spy</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="dgrne",title=u"DGRNE", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="dnf",title=u"DNF", description=u'<p>39, Avenue Reine Astrid<br />5000 Namur</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="stp",title=u"Service Technique Provincial", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="pi",title=u"Prévention Incendie", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="bec",title=u"Bureau d'études communal", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="svp",title=u"Service Voyer Principal", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="agriculture",title=u"Agriculture", description=u'<p>Direction Générale opérationnelle<br />Agriculture, Ressources naturelles et Environnement<br />Service extérieur de Wavre<br />4, Avenue Pasteur<br />1300 Wavre</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="pn",title=u"Parc Naturel", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="crmsf",title=u"Commission Royale des Monuments, Sites et Fouilles", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="swde",title=u"SWDE", description=u'<p>14, Rue Joseph Saintraint<br />5000 Namur</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="ccatm",title=u"CCATM", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="inasep",title=u"INASEP", description=u'<p>1b, Rue des Viaux<br />5100 Naninne</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="belgacom",title=u"Belgacom", description=u'<p>60, Rue Marie Henriette<br />5000 Namur</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="spge",title=u"SPGE", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="cibe",title=u"CIBE/Vivaqua", description=u'<p>70, Rue aux Laines<br />1000 Bruxelles</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="sncb",title=u"SNCB", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="infrabel",title=u"Infrabel", description=u'<p>Infrastructure ferroviaire<br />2/003, Place des Guillemins<br />4000 Liège</p>')
+            newFolder.invokeFactory("OrganisationTerm",id="voo",title=u"VOO", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
+            
+            from zope import event
+            from Products.Archetypes.event import ObjectInitializedEvent
+            for obj in newFolder.objectValues():
+                event.notify(ObjectInitializedEvent(obj))
 
             #add Delays folder
             newFolderid = configFolder.invokeFactory("Folder",id="folderdelays",title=_("folderdelays_folder_title", 'urban', context=site.REQUEST))

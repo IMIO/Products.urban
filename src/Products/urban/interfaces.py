@@ -34,10 +34,6 @@ class IGenericLicence(Interface):
     """Marker interface for .GenericLicence.GenericLicence
     """
 
-class IRequestedOrganisation(Interface):
-    """Marker interface for .RequestedOrganisation
-    """
-
 class IContact(Interface):
     """Marker interface for .Contact.Contact
     """
@@ -160,6 +156,10 @@ class IInquiry(Interface):
 
 class IUrbanEventInquiry(Interface):
     """Marker interface for .UrbanEventInquiry.UrbanEventInquiry
+    """
+
+class IOrganisationTerm(Interface):
+    """Marker interface for .OrganisationTerm.OrganisationTerm
     """
 
 ##code-section FOOT

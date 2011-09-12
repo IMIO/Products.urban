@@ -65,6 +65,7 @@ ADD_CONTENT_PERMISSIONS = {
     'PersonTitleTerm': 'urban: Add PersonTitleTerm',
     'Inquiry': 'urban: Add Inquiry',
     'UrbanEventInquiry': 'urban: Add UrbanEvent',
+    'OrganisationTerm': 'urban: Add OrganisationTerm',
 }
 
 setDefaultRoles('urban: Add GenericLicence',  ('Manager', ))
@@ -97,6 +98,7 @@ setDefaultRoles('urban: Add Locality',  ('Manager', ))
 setDefaultRoles('urban: Add LicenceConfig',  ('Manager', ))
 setDefaultRoles('urban: Add PersonTitleTerm',  ('Manager', ))
 setDefaultRoles('urban: Add Inquiry',  ('Manager', ))
+setDefaultRoles('urban: Add OrganisationTerm',  ('Manager', ))
 
 product_globals = globals()
 
