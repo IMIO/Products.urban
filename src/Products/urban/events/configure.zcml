@@ -30,14 +30,14 @@
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setCreationDate"/>
-  <subscriber for="Products.ATContentTypes.interfaces.IATFile
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".filesEvents.updateTemplateStylesEvent" />                         
   <subscriber for="..interfaces.IUrbanEventInquiry
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".urbanEventInquiryEvents.setLinkedInquiry" />
   <subscriber for="..interfaces.IUrbanTool
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".filesEvents.updateAllTemplatesStylesEvent" />
+  <subscriber for="Products.ATContentTypes.interfaces.IATFile
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".filesEvents.updateTemplateStylesEvent" />                         
 
 </configure>
