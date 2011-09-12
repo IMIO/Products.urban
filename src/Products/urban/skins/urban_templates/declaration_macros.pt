@@ -11,7 +11,7 @@
    <fieldset><strong><legend i18n:translate="urban_description_key_dates_legend">Key dates</legend></strong>
     <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
      <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_receiptDate">Receipt date</span> :</b></td>
+      <td valign="top"><b><span i18n:translate="urban_label_receiptDate">Receipt date</span>:</b></td>
       <td width="2%"></td>
       <td valign="top" tal:define="receiptDate view/getReceiptDate">
        <a href="#" tal:condition="receiptDate" tal:attributes="href python: receiptDate['url']" tal:content="python: receiptDate['date']">Content</a>
@@ -19,7 +19,7 @@
       </td>
      </tr>
      <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_collegeReportDecisionDate">College report decision date</span> :</b></td>
+      <td valign="top"><b><span i18n:translate="urban_label_collegeReportDecisionDate">College report decision date</span>:</b></td>
       <td width="2%"></td>
       <td valign="top" tal:define="collegeReportDecisionDate view/getCollegeReportDecisionDate">
        <a href="#" tal:condition="collegeReportDecisionDate" tal:attributes="href python: collegeReportDecisionDate['url']" tal:content="python: collegeReportDecisionDate['date']">Content</a>
@@ -27,7 +27,7 @@
       </td>
      </tr>
      <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_theLicenceDate">The licence date</span> :</b></td>
+      <td valign="top"><b><span i18n:translate="urban_label_theLicenceDate">The licence date</span>:</b></td>
       <td width="2%"></td>
       <td valign="top" tal:define="theLicenceDate view/getTheLicenceDate">
        <a href="#" tal:condition="theLicenceDate" tal:attributes="href python: theLicenceDate['url']" tal:content="python: theLicenceDate['date']">Content</a>
@@ -47,27 +47,27 @@
    <fieldset><b><legend i18n:translate="legend_details">Details</legend></b>
     <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
      <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_declarationSubject">Declaration subject</span> :</b></td>
+      <td valign="top"><b><span i18n:translate="urban_label_declarationSubject">Declaration subject</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('declarationSubject', mode='view')" /></td>
      </tr>
      <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_description">Description</span> :</b></td>
+      <td valign="top"><b><span i18n:translate="urban_label_description">Description</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('description', mode='view')" /></td>
      </tr>
      <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_reference">Reference</span> :</b></td>
+      <td valign="top"><b><span i18n:translate="urban_label_reference">Reference</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('reference', mode='view')" /></td>
      </tr>
      <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_foldermanagers">Treating agent</span> :</b></td>
+      <td valign="top"><b><span i18n:translate="urban_label_foldermanagers">Treating agent</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanFolderManagerMacro" /></td>
      </tr>
      <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_article">Article</span> :</b></td>
+      <td valign="top"><b><span i18n:translate="urban_label_article">Article</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('article', mode='view')" /></td>
      </tr>

@@ -8,7 +8,7 @@
   <table class="no-style-table">
     <tr valign="top">
      <td>
-      <u><strong tal:content="python: context.eventDateLabel()">Event date label</strong>:</u>&nbsp;&nbsp;&nbsp;&nbsp;
+      <strong tal:content="python: context.eventDateLabel()">Event date label</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
      </td>
      <tal:manage_show_nc_if_needed define="value python: getattr(context, 'eventDate')">
       <td tal:condition="value">
@@ -24,7 +24,7 @@
                                                 fields python: evtdata[1];">
     <tr valign="top">
      <td>
-      <u><strong i18n:translate="" tal:content="python: 'urban_label_' + field">Optional field label</strong>:</u>&nbsp;&nbsp;&nbsp;&nbsp;
+      <strong i18n:translate="" tal:content="python: 'urban_label_' + field">Optional field label</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
      </td>
      <tal:manage_show_nc_if_needed define="value python: getattr(context, field)">
       <td tal:condition="value">
@@ -100,48 +100,48 @@
 </tal:actions>
 <table class="no-style-table">
  <tr>
-  <td valign="top"><b><span i18n:translate="urban_label_derogation">Derogations</span> :</b></td>
+  <td valign="top"><b><span i18n:translate="urban_label_derogation">Derogations</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:inquiry.widget('derogation', mode='view')" /><span tal:condition="not: inquiry/getDerogation" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('derogationDetails')">
-  <td valign="top"><b><span i18n:translate="urban_label_derogationDetails">Derogations details</span> :</b></td>
+  <td valign="top"><b><span i18n:translate="urban_label_derogationDetails">Derogations details</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><tal:block replace="structure inquiry/getDerogationDetails" /><span tal:condition="not: inquiry/getDerogationDetails" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
-  <td valign="top"><b><span i18n:translate="urban_label_investigationArticles">Investigation articles</span> :</b></td>
+  <td valign="top"><b><span i18n:translate="urban_label_investigationArticles">Investigation articles</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:inquiry.widget('investigationArticles', mode='view')" /><span tal:condition="not: inquiry/getInvestigationArticles" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
-  <td valign="top"><b><span i18n:translate="urban_label_investigationStart">from</span> :</b></td>
+  <td valign="top"><b><span i18n:translate="urban_label_investigationStart">from</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:inquiry.widget('investigationStart', mode='view')" /><span tal:condition="not: inquiry/getInvestigationStart" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
-  <td valign="top"><b><span i18n:translate="urban_label_investigationEnd">to</span> :</b></td>
+  <td valign="top"><b><span i18n:translate="urban_label_investigationEnd">to</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:inquiry.widget('investigationEnd', mode='view')" /><span tal:condition="not: inquiry/getInvestigationEnd" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('investigationDetails')">
-  <td valign="top"><b><span i18n:translate="urban_label_investigationDetails">Investigation details</span> :</b></td>
+  <td valign="top"><b><span i18n:translate="urban_label_investigationDetails">Investigation details</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><tal:block replace="structure inquiry/getInvestigationDetails" /><span tal:condition="not: inquiry/getInvestigationDetails" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('investigationReasons')">
-  <td valign="top"><b><span i18n:translate="urban_label_investigationReasons">Investigation reasons</span> :</b></td>
+  <td valign="top"><b><span i18n:translate="urban_label_investigationReasons">Investigation reasons</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><tal:block replace="structure inquiry/getInvestigationReasons" /><span tal:condition="not: inquiry/getInvestigationReasons" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
-  <td valign="top"><b><span i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</span> :</b></td>
+  <td valign="top"><b><span i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:inquiry.widget('solicitOpinionsTo', mode='view')" /><span tal:condition="not: inquiry/getSolicitOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tal:comment replace="nothing">Link to the UrbanEventInquiry if exists</tal:comment>
  <tr>
-  <td valign="top"><b><span i18n:translate="urban_linked_urbaneventinquiry">Linked urban event inquiry</span> :</b></td>
+  <td valign="top"><b><span i18n:translate="urban_linked_urbaneventinquiry">Linked urban event inquiry</span>:</b></td>
   <td width="2%"></td>
   <td valign="top" tal:define="linkedUrbanEventInquiry python: inquiry.getLinkedUrbanEventInquiry();">
    <a tal:condition="python: linkedUrbanEventInquiry" href="#" tal:attributes="href python:linkedUrbanEventInquiry.absolute_url()" i18n:translate="urban_link_to_the_linked_urbaneventinquiry">Click here to access the linked urban event inquiry</a>
@@ -344,7 +344,7 @@
      <input class="context" type="submit" i18n:attributes="value" value="Add all advices">
     </form>
     <div class="discreet">
-     <span i18n:translate="add_every_advices_descr">This will automatically generate following advices :</span>&nbsp;
+     <span i18n:translate="add_every_advices_descr">This will automatically generate following advices:</span>&nbsp;
      <span tal:content="python: ','.join([advice.Title() for advice in allAdvices])" />
     </div>
    </td>
@@ -437,7 +437,7 @@ can receive a "actionsToHide" list of actions not to display</tal:comment>
 </div>
 
 <!-- This macro need to receive a topic -->
-<!--We can receive parameters here :
+<!--We can receive parameters here:
 object 'topic' could be passed or 'tool'
 string 'specificSearch' is passed if object 'tool' is passed
 boolean 'showActions' specify if we show the actions column
