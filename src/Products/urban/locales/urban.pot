@@ -590,6 +590,15 @@ msgstr ""
 msgid "legend_operation_address"
 msgstr ""
 
+msgid "pca_fieldset_legend"
+msgstr ""
+
+msgid "address_fieldset_legend"
+msgstr ""
+
+msgid "subdivision_fieldset_legend"
+msgstr ""
+
 msgid "locality_for_worklocation"
 msgstr ""
 

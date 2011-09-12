@@ -87,7 +87,6 @@ margin-bottom: 0 !important;
 
 .standalone {
 color: red;
-
 }
 
 /* </dtml-with> */

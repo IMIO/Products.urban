@@ -265,15 +265,15 @@
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_isInSubdivision">In subdivision?</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top" tal:define="isInSubdivision context/getIsInSubdivision">
+  <td width="49%" valign="top" valign="top" tal:define="isInSubdivision context/getIsInSubdivision">
    <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='view')" />
    <span tal:condition="not: isInSubdivision" class="discreet" i18n:translate="content_none">None</span>
    <tal:isInSubdivision condition="isInSubdivision">
     <br />
     <metal:myfield use-macro="python:here.widget('parcellings', mode='view')" />
-    <tal:subdivisionDetails condition="python: context.attributeIsUsed('subdivisionDetails') and context.getSubdivisionDetails()">
+    <tal:subdivisionDetails define="subdivisionDetails context/getSubdivisionDetails" condition="python: context.attributeIsUsed('subdivisionDetails') and subdivisionDetails">
      <br />
-     <metal:myfield use-macro="python:here.widget('subdivisionDetails', mode='view')" />
+     <tal:block replace="structure subdivisionDetails" /><span tal:condition="not: subdivisionDetails" class="discreet" i18n:translate="content_none">None</span>
     </tal:subdivisionDetails>
    </tal:isInSubdivision>
   </td>
@@ -364,4 +364,41 @@
   <td width="49%" valign="top"><metal:myfield use-macro="python:here.widget('pebTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getPebTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  </table>
+</div>
+
+<div metal:define-macro="editFieldsMacro" i18n:domain="urban">
+ <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=True)">
+  <tal:block define="fieldName field/getName">
+
+   <tal:comment replace="nothing">Display a fieldset around the 'isInPca' and 'Pca' fields</tal:comment>
+   <tal:pca condition="python: fieldName in ['isInPCA', 'pca',]">
+    <tal:comment replace="nothing">We do the entire job manually when the field is 'isInPca' and there is nothing left to do when it is the 'Pca' field</tal:comment>
+    <tal:manage_pca condition="python: fieldName == 'isInPCA'">
+     <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
+      <legend i18n:translate="pca_fieldset_legend">PCA</legend>
+      <metal:fieldMacro use-macro="python:here.widget('isInPCA', mode='edit')" />
+      <metal:fieldMacro use-macro="python:here.widget('pca', mode='edit')" />
+     </fieldset>
+    </tal:manage_pca>
+   </tal:pca>
+
+   <tal:comment replace="nothing">Display a fieldset around the 'isInSubdivision' and 'subdivisionDetails' fields</tal:comment>
+   <tal:subdivision condition="python: fieldName in ['isInSubdivision', 'parcellings', 'subdivisionDetails',]">
+    <tal:comment replace="nothing">We do the entire job manually when the field is 'isInSubdivision' and there is nothing left to do when it is the 'subdivisionDetails' field</tal:comment>
+    <tal:manage_subdivision condition="python: fieldName == 'isInSubdivision'">
+     <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
+      <legend i18n:translate="subdivision_fieldset_legend">Subdivision</legend>
+      <metal:fieldMacro use-macro="python:here.widget('isInSubdivision', mode='edit')" />
+      <metal:fieldMacro use-macro="python:here.widget('parcellings', mode='edit')" />
+      <metal:fieldMacro use-macro="python:here.widget('subdivisionDetails', mode='edit')" />
+     </fieldset>
+    </tal:manage_subdivision>
+   </tal:subdivision>
+
+
+   <tal:other condition="not: python: fieldName in ['isInPCA', 'pca', 'isInSubdivision', 'parcellings', 'subdivisionDetails',]">
+    <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
+   </tal:other>
+ </tal:block>
+ </tal:fields>
 </div>

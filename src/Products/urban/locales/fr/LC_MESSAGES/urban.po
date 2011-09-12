@@ -188,6 +188,9 @@ msgstr "Ceci ajoutera automatiquement les avis suivants :"
 msgid "additonal_layers_folder_title"
 msgstr "Configuration des couches supplémentaires"
 
+msgid "address_fieldset_legend"
+msgstr "Adresse"
+
 #. Default: "Read advice"
 #: UrbanEvent.py
 msgid "agreementlevel_read_advice"
@@ -717,6 +720,9 @@ msgstr "Couche parcelles"
 msgid "pashs_folder_title"
 msgstr "PASH"
 
+msgid "pca_fieldset_legend"
+msgstr "Plan Communal d'Aménagement"
+
 msgid "pca_of"
 msgstr "$decreeType du $decreeDate"
 
@@ -854,6 +860,9 @@ msgstr "Date de début de validité de la rue"
 #: setuphandlers.py
 msgid "streets_folder_title"
 msgstr "Rues"
+
+msgid "subdivision_fieldset_legend"
+msgstr "Lotissement"
 
 #. Default: "Supervision area"
 #: GenericLicence.py
