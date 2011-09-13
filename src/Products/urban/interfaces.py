@@ -158,8 +158,8 @@ class IUrbanEventInquiry(Interface):
     """Marker interface for .UrbanEventInquiry.UrbanEventInquiry
     """
 
-class IOrganisationTerm(Interface):
-    """Marker interface for .OrganisationTerm.OrganisationTerm
+class IUrbanEventOpinionRequest(Interface):
+    """Marker interface for .UrbanEventOpinionRequest.UrbanEventOpinionRequest
     """
 
 ##code-section FOOT

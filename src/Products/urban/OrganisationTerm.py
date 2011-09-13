@@ -55,7 +55,6 @@ class OrganisationTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin):
     schema = OrganisationTerm_schema
 
     ##code-section class-header #fill in your manual code here
-    
     ##/code-section class-header
 
     # Methods

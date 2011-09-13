@@ -37,9 +37,6 @@
   <type type_id="Locality">
    <bound-workflow workflow_id="activation_workflow" />
   </type>
-  <type type_id="OrganisationTerm">
-   <bound-workflow workflow_id="activation_workflow" />
-  </type>
   <type type_id="ParcelOutLicence">
    <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
