@@ -127,13 +127,6 @@ URBAN_TYPES = ['BuildLicence','ParcelOutLicence','Declaration', 'Division', 'Urb
 #empty value used for listboxes
 EMPTY_VOCAB_VALUE = 'choose_a_value'
 
-HAS_PLONETASK = False
-try:
-    from Products.PloneTask.Task import Task
-    HAS_PLONETASK = True
-except ImportError:
-    HAS_PLONETASK = False
-
 PPNC_LAYERS = {
     'ppnc1' : {'xmin':40824, 'ymin':113446, 'xmax':139390, 'ymax':168195},
     'ppnc2' : {'xmin':122374, 'ymin':116510, 'xmax':218186, 'ymax':169730},

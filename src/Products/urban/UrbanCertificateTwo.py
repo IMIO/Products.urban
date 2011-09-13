@@ -26,7 +26,6 @@ from Products.urban.config import *
 from Products.urban.indexes import UrbanIndexes
 from collective.referencedatagridfield import ReferenceDataGridField
 from collective.referencedatagridfield import ReferenceDataGridWidget
-from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
 

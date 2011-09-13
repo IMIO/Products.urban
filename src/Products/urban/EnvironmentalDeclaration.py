@@ -25,12 +25,10 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 from Products.CMFCore.utils import getToolByName
 from Products.urban.indexes import UrbanIndexes
 from collective.referencedatagridfield import ReferenceDataGridField
 from collective.referencedatagridfield import ReferenceDataGridWidget
-from Products.urban.taskable import Taskable
 from Products.urban.base import UrbanBase
 from zope.i18n import translate as _
 from Products.urban.utils import setOptionalAttributes
