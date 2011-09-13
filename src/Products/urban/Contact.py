@@ -374,8 +374,12 @@ class Contact(BaseContent, BrowserDefaultMixin):
     def showRepresentedByField(self):
         """
         Only show the representedBy field if the current Contact is an Applicant (portal_type)
+        and only for some URBAN_TYPES
         """
         if not self.getPortalTypeName() == 'Applicant':
+            return False
+        parent = self.aq_inner.aq_parent
+        if not parent.portal_type in ['BuildLicence', 'ParcelOutLicence', ]:
             return False
         return True
 
@@ -388,12 +392,13 @@ class Contact(BaseContent, BrowserDefaultMixin):
         #the potential representator are varying upon licence type
         #moreover, as we are using ReferenceField, we can not use getattr...
         lst = []
-        if hasattr(self, 'getNotaryContact'):
-            lst=lst+list(self.getNotaryContact())
-        if hasattr(self, 'getGeometricians'):
-            lst=lst+list(self.getGeometricians())
-        if hasattr(self, 'getArchitects'):
-            lst=lst+self.getArchitects()
+        parent = self.aq_inner.aq_parent
+        if hasattr(parent, 'getNotaryContact'):
+            lst=lst+list(parent.getNotaryContact())
+        if hasattr(parent, 'getGeometricians'):
+            lst=lst+list(parent.getGeometricians())
+        if hasattr(parent, 'getArchitects'):
+            lst=lst+parent.getArchitects()
 
         vocab = []
         for elt in lst:
