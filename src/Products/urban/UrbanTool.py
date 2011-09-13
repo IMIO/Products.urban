@@ -1550,6 +1550,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         else:
             return res
 
+    security.declarePublic('getTextToShow')
     def getTextToShow(self, context, fieldName):
         """
           This method manage long texts and returns a subset of the text if needed
@@ -1566,6 +1567,13 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return isTooLarge, utext.encode('utf-8')
         #to be sure that we only have text (usefull for HTML) we get the raw value
         return checkMaxLength(getattr(context, 'getRaw' + fieldName[0].capitalize() + fieldName[1:])())
+
+    security.declarePublic('getUrbanTypes')
+    def getUrbanTypes(self):
+        """
+          Returns the config.URBAN_TYPES so it can be used in templates and conditions
+        """
+        return URBAN_TYPES
 
 
 

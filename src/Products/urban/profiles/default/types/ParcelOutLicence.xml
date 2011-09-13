@@ -48,18 +48,9 @@
  <action title="Edit" 
          action_id="edit"
          category="object" 
-         condition_expr="not:object/@@plone_lock_info/is_locked_for_current_user"
+         condition_expr="python:context.mayShowEditAction()"
          url_expr="string:${object_url}/edit" 
          visible="True">
   <permission value="Modify portal content"/>
- </action>
- <action title="Properties" 
-         i18n:attributes="title"
-         action_id="metadata"
-         category="object" 
-         condition_expr="python:1"
-         url_expr="string:${object_url}/properties" 
-         visible="True">
-  <permission value="Manage properties"/>
  </action>
 </object>

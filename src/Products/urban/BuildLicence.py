@@ -96,7 +96,7 @@ schema = Schema((
     TextField(
         name='subdivisionDetails',
         allowable_content_types="('text/plain',)",
-        default_content_type='text/plain',
+        schemata='urban_location',
         widget=TextAreaWidget(
             description='Number of the lots, ...',
             description_msgid="urban_descr_subdivisionDetails",
@@ -105,7 +105,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         default_output_type='text/html',
-        schemata='urban_location',
+        default_content_type='text/plain',
     ),
     BooleanField(
         name='isInPCA',

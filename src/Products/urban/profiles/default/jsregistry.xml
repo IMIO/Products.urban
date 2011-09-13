@@ -18,6 +18,14 @@
              expression=""
              id="urbanpopups.js"
              inline="False"/> 
+
+ <javascript cacheable="True"
+             compression="safe"
+             cookable="True"
+             enabled="True"
+             expression="python: context.portal_type in context.portal_urban.getUrbanTypes() and member.has_permission('Modify portal content', context)"
+             id="urbanedittabbing.js"
+             inline="False"/> 
  <!-- ##/code-section jsregistry.xml -->
 
 </object>

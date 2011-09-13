@@ -45,7 +45,7 @@
  <action title="Edit" 
          action_id="edit"
          category="object" 
-         condition_expr="not:object/@@plone_lock_info/is_locked_for_current_user"
+         condition_expr="python:context.mayShowEditAction()"
          url_expr="string:${object_url}/edit" 
          visible="True">
   <permission value="Modify portal content"/>

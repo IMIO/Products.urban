@@ -89,4 +89,8 @@ margin-bottom: 0 !important;
 color: red;
 }
 
+/* remove the outline around the edit.gif image in the form tabbing */
+.urban-edit-tabbing{
+outline: none !important;
+}
 /* </dtml-with> */

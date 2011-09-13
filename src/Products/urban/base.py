@@ -337,3 +337,17 @@ class UrbanBase(object):
         """
         return self.listFolderContents({'portal_type': ('UrbanEventInquiry', 'UrbanEvent', ),})
 
+    security.declarePublic('mayShowEditAction')
+    def mayShowEditAction(self):
+        """
+          Edit action condition expression
+          We can not show the action if the object is locked or if we are using the tabbing
+        """
+        selfPhysPath = '/'.join(self.getPhysicalPath())
+        #do the test in 2 if to avoid getting the tool if not necessary
+        if self.restrictedTraverse(selfPhysPath + '/@@plone_lock_info/is_locked_for_current_user')():
+            return False
+        tool = getToolByName(self, 'portal_urban')
+        if tool.getUseTabbing():
+            return False
+        return True
