@@ -22,13 +22,14 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
+from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.indexes import UrbanIndexes
-from collective.referencedatagridfield import ReferenceDataGridField
-from collective.referencedatagridfield import ReferenceDataGridWidget
 from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
@@ -51,6 +52,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         allowed_types= ('Notary',),
+        schemata='urban_description',
         relationship="notary",
         required=True,
     ),
@@ -62,6 +64,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         required=True,
+        schemata='urban_description',
         accessor="Title",
     ),
     StringField(
@@ -71,6 +74,7 @@ schema = Schema((
             label_msgid='urban_label_reference',
             i18n_domain='urban',
         ),
+        schemata='urban_description',
         default_method="getDefaultReference",
     ),
     StringField(
@@ -80,15 +84,18 @@ schema = Schema((
             label_msgid='urban_label_divisionSubject',
             i18n_domain='urban',
         ),
+        schemata='urban_description',
     ),
     TextField(
         name='comments',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html', 'application/msword',),
+        allowable_content_types=('text/html',),
         widget=RichWidget(
             label='Comments',
             label_msgid='urban_label_comments',
             i18n_domain='urban',
         ),
+        default_content_type='text/html',
+        schemata='urban_description',
         default_output_type='text/html',
     ),
     StringField(
@@ -98,23 +105,21 @@ schema = Schema((
             label_msgid='urban_label_folderZone',
             i18n_domain='urban',
         ),
+        schemata='urban_description',
         multiValued=True,
         vocabulary=UrbanVocabulary('folderzones'),
     ),
-    ReferenceDataGridField(
+    DataGridField(
         name='workLocations',
-        widget=ReferenceDataGridWidget(
-            startup_directory='/portal_urban/streets',
-            macro="street_referencedatagridwidget",
-            visible={'edit' : 'visible', 'view' : 'visible'},
-            label='street',
+        schemata='urban_description',
+        widget=DataGridWidget(
+            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False)),},
+            label='Worklocations',
             label_msgid='urban_label_workLocations',
             i18n_domain='urban',
         ),
-        allowed_types=('Street', 'Locality'),
-        schemata='default',
-        columns=('numero','title' ,'link' ,'uid'),
-        relationship='Street',
+        allow_oddeven=True,
+        columns=('number', 'street'),
     ),
     ReferenceField(
         name='foldermanagers',
