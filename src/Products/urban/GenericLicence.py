@@ -878,6 +878,20 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
             res.append(self)
         return res + inquiryObjects
 
+    security.declarePublic('getOpinionRequests')
+    def getOpinionRequests(self, organisation=''):
+        """
+          Returns the existing opinion requests
+        """
+        opinionRequests = self.objectValues('UrbanEventOpinionRequest')
+        if organisation == '':
+            return opinionRequests
+        res = []
+        for opinionRequest in opinionRequests:
+            if opinionRequest.getRequestedOrganisation() == organisation:
+                res.append(opinionRequest)
+        return res
+
     security.declarePublic('getUrbanEventInquiries')
     def getUrbanEventInquiries(self):
         """

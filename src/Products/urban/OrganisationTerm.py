@@ -20,6 +20,8 @@ import interfaces
 from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -28,6 +30,17 @@ import UrbanEventType
 
 schema = Schema((
 
+    ReferenceField(
+        name='LinkedOpinionRequestEvent',
+        widget=ReferenceBrowserWidget(
+            label='Linkedopinionrequestevent',
+            label_msgid='urban_label_LinkedOpinionRequestEvent',
+            i18n_domain='urban',
+        ),
+        allowed_types=('UrbanEventType',),
+        multiValued=0,
+        relationship='LinkedOpinionRequestEvent',
+    ),
 
 ),
 )

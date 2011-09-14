@@ -162,6 +162,10 @@ class IUrbanEventOpinionRequest(Interface):
     """Marker interface for .UrbanEventOpinionRequest.UrbanEventOpinionRequest
     """
 
+class IOrganisationTerm(Interface):
+    """Marker interface for .OrganisationTerm.OrganisationTerm
+    """
+
 ##code-section FOOT
 class ILicenceContainer(Interface):
     """

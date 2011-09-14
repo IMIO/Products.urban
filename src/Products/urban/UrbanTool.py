@@ -389,6 +389,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         type_name = "UrbanEvent"
         if urbanEventTypeObj.getEventTypeType() == 'Products.urban.interfaces.IInquiryEvent':
             type_name = "UrbanEventInquiry"
+        if urbanEventTypeObj.getEventTypeType() == 'Products.urban.interfaces.IOpinionRequestEvent':
+            type_name = "UrbanEventOpinionRequest"
         newUrbanEventId=evtfolder.invokeFactory(type_name,id=self.generateUniqueId(type_name),title=urbanEventTypeObj.Title(),urbaneventtypes=(urbanEventTypeObj,))
         newUrbanEventObj=getattr(evtfolder,newUrbanEventId)
         return self.REQUEST.RESPONSE.redirect(newUrbanEventObj.absolute_url()+'/edit')
@@ -1526,7 +1528,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         portal_catalog = getToolByName(self, 'portal_catalog')
         if specificSearch == 'searchUrbanEvents':
             #search the existing urbanEvents
-            res = portal_catalog(portal_type=('UrbanEvent', 'UrbanEventInquiry',), path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent', sort_order='reverse')
+            res = portal_catalog(object_provides = 'Products.urban.interfaces.IUrbanEvent', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent', sort_order='reverse')
         elif specificSearch == 'searchClaimants':
             #search the existing claimants
             res = portal_catalog(portal_type='Claimant', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')

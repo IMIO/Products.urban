@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Sep  7 15:54:32 2011\n"
-"PO-Revision-Date: Wed Sep  7 15:54:32 2011\n"
+"POT-Creation-Date: Wed Sep 14 11:08:47 2011\n"
+"PO-Revision-Date: Wed Sep 14 11:08:47 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -124,6 +124,11 @@ msgstr ""
 #. Default: "Equipmenttype"
 #: Equipment.py
 msgid "urban_label_EquipmentType"
+msgstr ""
+
+#. Default: "Linkedopinionrequestevent"
+#: LinkedOpinionRequestEvent.py
+msgid "urban_label_LinkedOpinionRequestEvent"
 msgstr ""
 
 #. Default: "Nisnum"
@@ -803,6 +808,11 @@ msgstr ""
 #. Default: "Representedby"
 #: Contact.py
 msgid "urban_label_representedBy"
+msgstr ""
+
+#. Default: "Requestedorganisation"
+#: UrbanEventOpinionRequest.py
+msgid "urban_label_requestedOrganisation"
 msgstr ""
 
 #. Default: "Roadadaptation"

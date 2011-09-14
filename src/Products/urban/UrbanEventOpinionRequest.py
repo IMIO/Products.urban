@@ -20,9 +20,12 @@ import interfaces
 from Products.urban.UrbanEvent import UrbanEvent
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.CMFCore.utils import getToolByName
 ##/code-section module-header
 
 schema = Schema((
@@ -36,18 +39,19 @@ schema = Schema((
         ),
         optional= False,
         write_permission="Manage portal",
-        default_method="getDefaultRequestedOrganisation",
     ),
-    StringField(
-        name='linkedInquiryUID',
-        widget=StringField._properties['widget'](
-            label='Linkedinquiryuid',
-            label_msgid='urban_label_linkedInquiryUID',
+    ReferenceField(
+        name='linkedInquiry',
+        widget=ReferenceBrowserWidget(
+            label='Linkedinquiry',
+            label_msgid='urban_label_linkedInquiry',
             i18n_domain='urban',
         ),
+        multiValued=0,
+        relationship='linkedInquiry',
+        allowed_types="('Inquiry', 'BuildLicence')",
         optional= False,
         write_permission="Manage portal",
-        default_method="getDefaultLinkedInquiry",
     ),
 
 ),
@@ -79,6 +83,7 @@ class UrbanEventOpinionRequest(BaseContent, UrbanEvent, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
+
 
 registerType(UrbanEventOpinionRequest, PROJECTNAME)
 # end of class UrbanEventOpinionRequest

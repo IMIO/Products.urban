@@ -3,6 +3,12 @@
            xmlns:i18n="http://namespaces.zope.org/i18n"
            i18n_domain="urban">
 
+  <subscriber for="..interfaces.IUrbanEventOpinionRequest
+                   Products.Archetypes.event.IEditBegunEvent"
+              handler=".opinionRequestEvents.setDefaultLinkedInquiry" /> 
+  <subscriber for="..interfaces.IUrbanEventOpinionRequest
+                   Products.Archetypes.event.IEditBegunEvent"
+              handler=".opinionRequestEvents.setDefaultRequestedOrganisation" /> 
   <subscriber for="..interfaces.IOrganisationTerm
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".organisationTermEvents.createLinkedOpinionRequest" /> 

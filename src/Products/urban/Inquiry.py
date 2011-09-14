@@ -203,7 +203,10 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         """
         brefs = self.getBRefs('linkedInquiry')
         if brefs:
-            return brefs[0]
+            #linkedInquiry may come from a UrbanEventInquiry or an UrbanEventOpinionRequest
+            for bref in brefs:
+                if bref.portal_type == 'UrbanEventInquiry':
+                    return bref
         else:
             return None
 

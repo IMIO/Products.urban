@@ -539,7 +539,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                                                 class obj_wf_state_class"
                                 class="link-plain"
                                 tal:content="title_or_id" />
-                            <tal:block condition="python: obj.portal_type in ['UrbanEvent', 'UrbanEventInquiry',]">
+                            <tal:block condition="python: obj.portal_type in ['UrbanEvent', 'UrbanEventInquiry', 'UrbanEventOpinionRequest']">
                              <tal:block define="object obj/getObject;
                                                 suffix python: member.has_permission('Modify portal content', obj) and '/external_edit' or ''"
                                                 repeat="doc object/getDocuments">
