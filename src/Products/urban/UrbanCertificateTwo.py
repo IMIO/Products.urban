@@ -18,6 +18,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
 from Products.urban.UrbanCertificateBase import UrbanCertificateBase
+from Products.urban.Inquiry import Inquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -50,24 +51,6 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
-    IntegerField(
-        name='investigationOralReclamationNumber',
-        default=0,
-        widget=IntegerField._properties['widget'](
-            label='Investigationoralreclamationnumber',
-            label_msgid='urban_label_investigationOralReclamationNumber',
-            i18n_domain='urban',
-        ),
-    ),
-    IntegerField(
-        name='investigationWriteReclamationNumber',
-        default=0,
-        widget=IntegerField._properties['widget'](
-            label='Investigationwritereclamationnumber',
-            label_msgid='urban_label_investigationWriteReclamationNumber',
-            i18n_domain='urban',
-        ),
-    ),
 
 ),
 )
@@ -78,12 +61,13 @@ setOptionalAttributes(schema, optional_fields)
 
 UrbanCertificateTwo_schema = BaseFolderSchema.copy() + \
     getattr(UrbanCertificateBase, 'schema', Schema(())).copy() + \
+    getattr(Inquiry, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class UrbanCertificateTwo(BaseFolder, UrbanIndexes,  UrbanBase, UrbanCertificateBase, BrowserDefaultMixin):
+class UrbanCertificateTwo(BaseFolder, UrbanIndexes,  UrbanBase, UrbanCertificateBase, Inquiry, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

@@ -139,6 +139,16 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:inquiry.widget('solicitOpinionsTo', mode='view')" /><span tal:condition="not: inquiry/getSolicitOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
+ <tr>
+  <td valign="top"><b><span i18n:translate="urban_label_investigationOralReclamationNumber">Number of oral reclamations</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:inquiry.widget('investigationOralReclamationNumber', mode='view')" /></td>
+ </tr>
+ <tr>
+  <td valign="top"><b><span i18n:translate="urban_label_investigationWriteReclamationNumber">Number of write reclamations</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:inquiry.widget('investigationWriteReclamationNumber', mode='view')" /></td>
+ </tr>
  <tal:comment replace="nothing">Link to the UrbanEventInquiry if exists</tal:comment>
  <tr>
   <td valign="top"><b><span i18n:translate="urban_linked_urbaneventinquiry">Linked urban event inquiry</span>:</b></td>

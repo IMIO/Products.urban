@@ -115,6 +115,24 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary('foldermakers'),
     ),
+    IntegerField(
+        name='investigationOralReclamationNumber',
+        default=0,
+        widget=IntegerField._properties['widget'](
+            label='Investigationoralreclamationnumber',
+            label_msgid='urban_label_investigationOralReclamationNumber',
+            i18n_domain='urban',
+        ),
+    ),
+    IntegerField(
+        name='investigationWriteReclamationNumber',
+        default=0,
+        widget=IntegerField._properties['widget'](
+            label='Investigationwritereclamationnumber',
+            label_msgid='urban_label_investigationWriteReclamationNumber',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )

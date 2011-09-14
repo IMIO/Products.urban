@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-09-06 10:54+0000\n"
+"POT-Creation-Date: 2011-09-14 11:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -185,6 +185,9 @@ msgid "add_every_advices_descr"
 msgstr ""
 
 msgid "additonal_layers_folder_title"
+msgstr ""
+
+msgid "address_fieldset_legend"
 msgstr ""
 
 #. Default: "Read advice"
@@ -539,6 +542,9 @@ msgstr ""
 msgid "label_colname_created"
 msgstr ""
 
+msgid "label_colname_eventDate"
+msgstr ""
+
 msgid "label_colname_getBeginDate"
 msgstr ""
 
@@ -588,15 +594,6 @@ msgid "legend_lots"
 msgstr ""
 
 msgid "legend_operation_address"
-msgstr ""
-
-msgid "pca_fieldset_legend"
-msgstr ""
-
-msgid "address_fieldset_legend"
-msgstr ""
-
-msgid "subdivision_fieldset_legend"
 msgstr ""
 
 msgid "locality_for_worklocation"
@@ -725,6 +722,9 @@ msgstr ""
 msgid "pashs_folder_title"
 msgstr ""
 
+msgid "pca_fieldset_legend"
+msgstr ""
+
 msgid "pca_of"
 msgstr ""
 
@@ -775,6 +775,11 @@ msgid "persontitle_mister"
 msgstr ""
 
 msgid "proprietaries"
+msgstr ""
+
+#. Default: "RCU"
+#: setuphandlers.py
+msgid "rcu_folder_title"
 msgstr ""
 
 msgid "recipients_folder_title"
@@ -833,6 +838,11 @@ msgstr ""
 msgid "simple-map_title"
 msgstr ""
 
+#. Default: "SSC"
+#: setuphandlers.py
+msgid "ssc_folder_title"
+msgstr ""
+
 #. Default: "When adding manually a new street, please let the default value"
 #: Street.py
 msgid "street_best_address_key_descr"
@@ -853,14 +863,7 @@ msgstr ""
 msgid "streets_folder_title"
 msgstr ""
 
-#. Default: "SSC"
-#: setuphandlers.py
-msgid "ssc_folder_title"
-msgstr ""
-
-#. Default: "RCU"
-#: setuphandlers.py
-msgid "rcu_folder_title"
+msgid "subdivision_fieldset_legend"
 msgstr ""
 
 #. Default: "Supervision area"
@@ -1177,9 +1180,6 @@ msgid "urban_label_claimsText"
 msgstr ""
 
 msgid "urban_label_collegeReportDecisionDate"
-msgstr ""
-
-msgid "label_colname_eventDate"
 msgstr ""
 
 #. Default: "Color"

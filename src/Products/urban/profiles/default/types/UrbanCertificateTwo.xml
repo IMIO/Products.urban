@@ -10,8 +10,8 @@
  <property name="content_meta_type">UrbanCertificateTwo</property>
  <property name="product">urban</property>
  <property name="factory">addUrbanCertificateTwo</property>
- <property name="immediate_view">folder_listing</property>
- <property name="global_allow">True</property>
+ <property name="immediate_view">inquiryview</property>
+ <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
    <element value="PortionOut"/>
@@ -27,6 +27,7 @@
   <element value="folder_tabular_view"/>
   <element value="atct_album_view"/>
   <element value="folder_listing"/>
+  <element value="inquiryview"/>
   <element value="urbancertificatetwo_view"/>
  </property>
  <property name="default_view_fallback">False</property>
