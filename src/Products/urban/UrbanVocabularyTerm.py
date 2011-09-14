@@ -120,14 +120,16 @@ class UrbanVocabulary(object):
     def getDisplayList(self, content_instance):
         portal_urban = getToolByName(content_instance, 'portal_urban')
         result = DisplayList(portal_urban.listVocabulary(self.path,
-            content_instance, vocType=self.vocType, id_to_use=self.id_to_use, inUrbanConfig=self.inUrbanConfig))
+            content_instance, vocType=self.vocType, id_to_use=self.id_to_use, \
+            inUrbanConfig=self.inUrbanConfig))
         return result
 
     def getObjectsSet(self, content_instance, values):
         if isinstance(values, str):
             values = (values,)
         portal_urban = getToolByName(content_instance, 'portal_urban')
-        objects = portal_urban.listVocabularyObjects(self.path, content_instance)
+        objects = portal_urban.listVocabularyObjects(self.path, content_instance, \
+            id_to_use=self.id_to_use, vocType=self.vocType, inUrbanConfig=self.inUrbanConfig)
         result = set()
         for value in values:
             obj = objects.get(value, None)
