@@ -22,16 +22,18 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
+from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.CMFCore.utils import getToolByName
-from Products.urban.indexes import UrbanIndexes
-from collective.referencedatagridfield import ReferenceDataGridField
-from collective.referencedatagridfield import ReferenceDataGridWidget
-from Products.urban.base import UrbanBase
 from zope.i18n import translate as _
+from Products.CMFCore.utils import getToolByName
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
+from Products.urban.indexes import UrbanIndexes
+from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 optional_fields = []
 ##/code-section module-header
@@ -46,6 +48,7 @@ schema = Schema((
             label_msgid='urban_label_reference',
             i18n_domain='urban',
         ),
+        schemata='urban_description',
         default_method="getDefaultReference",
     ),
     StringField(
@@ -56,6 +59,7 @@ schema = Schema((
             label_msgid='urban_label_finality',
             i18n_domain='urban',
         ),
+        schemata='urban_description',
     ),
     TextField(
         name='subjects',
@@ -66,21 +70,19 @@ schema = Schema((
             label_msgid='urban_label_subjects',
             i18n_domain='urban',
         ),
+        schemata='urban_description',
     ),
-    ReferenceDataGridField(
+    DataGridField(
         name='workLocations',
-        widget=ReferenceDataGridWidget(
-            startup_directory='/portal_urban/streets',
-            macro="street_referencedatagridwidget",
-            visible={'edit' : 'visible', 'view' : 'visible'},
-            label='street',
+        schemata='urban_description',
+        widget=DataGridWidget(
+            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False)),},
+            label='Worklocations',
             label_msgid='urban_label_workLocations',
             i18n_domain='urban',
         ),
-        allowed_types=('Street', 'Locality'),
-        schemata='default',
-        columns=('numero','title' ,'link' ,'uid'),
-        relationship='Street',
+        allow_oddeven=True,
+        columns=('number', 'street'),
     ),
     ReferenceField(
         name='foldermanagers',
