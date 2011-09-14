@@ -3,6 +3,7 @@
   <version>0.1.493</version>
   <!-- ##code-section METADATA -->
   <dependencies>
+    <dependency>profile-Products.DataGridField:default</dependency>
     <dependency>profile-Products.MasterSelectWidget:default</dependency>
     <dependency>profile-collective.externaleditor:default</dependency>
     <dependency>profile-plone.app.referenceintegrity:default</dependency>
