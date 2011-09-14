@@ -117,7 +117,7 @@ ADD_EMPTY_VOCAB_VALUE = True
 #topics
 TOPIC_TYPE = "urban_topic_type"
 #dependencies
-DEPENDENCIES = ["ReferenceDataGridField",]
+DEPENDENCIES = []
 #name of the folder created in a licence that will contain additional
 #layers linked to the licence and used in the mapfile generation
 ADDITIONAL_LAYERS_FOLDER="additional_layers"
