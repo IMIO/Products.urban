@@ -137,7 +137,26 @@
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</span> :</b></td>
   <td width="2%"></td>
+  <td tal:define="showedCols python: ('eventDate', 'receiptDate', 'transmitDate', 'adviceAgreementLevel', );">
+   <table class="listing"
+       summary="Content listing"
+       cellpadding="0" cellspacing="0" width="100%"
+       i18n:attributes="summary summary_content_listing;">
+       <thead i18n:domain="urban">
+       <tr>
+           <tal:block repeat="field showedCols">
+            <th i18n:domain="urban" tal:content="python: 'label_colname_' + field" i18n:translate=""/>
+           </tal:block>
+       </tr>
+       </thead>
+   </table> 
+  </td>
   <td valign="top"><metal:myfield use-macro="python:inquiry.widget('solicitOpinionsTo', mode='view')" /><span tal:condition="not: inquiry/getSolicitOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
+  <td tal:define="opinions inquiry/getSolicitOpinionsTo"
+      tal:repeat="opinion opinions">
+   <a tal:condition="python: inquiry.getLinkedUrbanEventOpinionRequest(opinion) is not None" tal:content="opinion" href="#" tal:attributes="href python:inquiry.getLinkedUrbanEventOpinionRequest(opinion).absolute_url()"></a>
+   <span tal:condition="python: inquiry.getLinkedUrbanEventOpinionRequest(opinion) is None" tal:content="opinion"></span>
+  </td>
  </tr>
  <tal:comment replace="nothing">Link to the UrbanEventInquiry if exists</tal:comment>
  <tr>

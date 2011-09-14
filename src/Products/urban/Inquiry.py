@@ -210,6 +210,20 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         else:
             return None
 
+    security.declarePublic('getLinkedUrbanEventOpinionRequest')
+    def getLinkedUrbanEventOpinionRequest(self, organisation):
+        """
+          Return the linked UrbanEventOpinionRequest objects if exist
+        """
+        brefs = self.getBRefs('linkedInquiry')
+        if brefs:
+            #linkedInquiry may come from a UrbanEventInquiry or an UrbanEventOpinionRequest
+            for bref in brefs:
+                if bref.portal_type == 'UrbanEventOpinionRequest':
+                    if bref.getRequestedOrganisation() == organisation  and bref.getLinkedInquiry() == self:
+                        return bref
+        return None
+
     def _getSelfPosition(self):
         """
           Return the position of the self between every Inquiry objects
