@@ -1,5 +1,8 @@
 #!/usr/bin/make
 #
+
+options =
+
 all: test
 
 bin/python:
@@ -18,7 +21,7 @@ bin/instance: buildout.cfg bin/buildout setup.py
 
 .PHONY: test
 test: bin/test
-	bin/test -s Products.urban
+	bin/test -s Products.urban $(options)
 
 .PHONY: instance
 instance: bin/instance
