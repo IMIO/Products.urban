@@ -363,10 +363,13 @@ def migrateFolderDelays(context):
             folderdelays.setLocallyAllowedTypes(['UrbanDelay'])
             folderdelays.setImmediatelyAddableTypes(['UrbanDelay'])
             for urbanVocTerm in folderdelays.objectValues('UrbanVocabularyTerm'):
+                termKey = ''
+                if hasattr(urbanVocTerm, 'termKey'):
+                    termKey = getattr(urbanVocTerm, 'termKey')
                 data = {
                         'id': urbanVocTerm.getId(),
                         'title': urbanVocTerm.Title(),
-                        'deadLineDelay': urbanVocTerm.getTermKey(),
+                        'deadLineDelay': termKey,
                         }
                 if not isinstance(data['deadLineDelay'], int):
                     data['deadLineDelay'] = 0
