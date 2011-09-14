@@ -66,6 +66,17 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    DateTimeField(
+        name='approvalDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            starting_year=1950,
+            future_years=False,
+            label='Approvaldate',
+            label_msgid='urban_label_approvalDate',
+            i18n_domain='urban',
+        ),
+    ),
     IntegerField(
         name='numberOfParcels',
         widget=IntegerField._properties['widget'](
@@ -128,7 +139,7 @@ class ParcellingTerm(BaseContent, BrowserDefaultMixin):
         """
            Update the title to set a clearly identify the buildlicence
         """
-        title = "%s (%s - %s - %s)" % (self.label, self.subdividerName, self.toLocalizedTime(self.authorizationDate), self.numberOfParcels)
+        title = "%s (%s - %s - %s - %s)" % (self.label, self.subdividerName, self.toLocalizedTime(self.authorizationDate), self.toLocalizedTime(self.approvalDate), self.numberOfParcels)
         self.setTitle(str(title))
         self.reindexObject()
 

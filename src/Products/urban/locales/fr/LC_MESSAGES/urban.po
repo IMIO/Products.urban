@@ -1089,6 +1089,11 @@ msgstr "Délai annoncé"
 msgid "urban_label_annoncedDelayDetails"
 msgstr "Détails concernant le délai annoncé"
 
+#. Default: "Approvaldate"
+#: ParcellingTerm.py
+msgid "urban_label_approvalDate"
+msgstr "Date d'approbation"
+
 #. Default: "Applicants"
 #: GenericLicence.py
 msgid "urban_label_applicants"
