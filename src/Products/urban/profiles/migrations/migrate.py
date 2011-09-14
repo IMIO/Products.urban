@@ -40,7 +40,8 @@ def migrateToPlone4(context):
     migratePersonTitles(context)
     #remove useless fields 'termKey' and 'termKeyStr'
     migrateUrbanVocabularyTerms(context)
-    #migrateToReferenceDataGridField(context)
+    #WorkLocations object disappeared, we now use a workLocations DataGridField
+    migrateToWorkLocationsDataGridField(context)
     #We replace licence folders from portal_urban to LicenceConfig objects
     migrateToLicenceConfig(context)
     #we replace architect objects (based on Architect meta_type) by new objects (based on Contact meta_type)
@@ -58,11 +59,11 @@ def migrateToPlone4(context):
     #Migration of Event objects to provides marker interfaces
     provideEventMarkerInterfaces(context)
 
-def migrateToReferenceDataGridField(context):
+def migrateToWorkLocationsDataGridField(context):
     """
       Migrate Declaration, Division, EnvironmentalDeclaration, UbranCertificateBase,
-      UrbanCertificateTwo, BuildLicence, ParcelOutLicence types to use ReferenceDataGridField
-      product instead of workLocation objects
+      UrbanCertificateTwo, BuildLicence, ParcelOutLicence types to use workLocations DataGridField
+      instead of workLocation objects
     """
     if isNoturbanMigrationsProfile(context):
         return
@@ -72,11 +73,19 @@ def migrateToReferenceDataGridField(context):
     brains = site.portal_catalog(portal_type = ['BuildLicence', 'Declaration', 'Division', 'EnvironmentalDeclaration', 'UrbanCertificateBase',
                     'UrbanCertificateTwo', 'ParcelOutLicence'])
     for brain in brains:
+        locations = []
+        objectToDeleteIds = []
         obj = brain.getObject()
         for previousWorkLocation in obj.objectValues('WorkLocation'):
-            linkStreet = previousWorkLocation.getStreet()
-            numberStreet = previousWorkLocation.getNumber()
-            #to be continued ?????
+            dict = {}
+            dict['street'] = previousWorkLocation.getStreet().UID()
+            dict['number'] = previousWorkLocation.getNumber()
+            locations.append(dict)
+            objectToDeleteIds.append(previousWorkLocation.getId())
+        #remove old WorkLocation objects
+        obj.manage_delObjects(objectToDeleteIds)
+        #set the new workLocations
+        obj.setWorkLocations(locations)
 
 def migrateToContact(context):
     """
@@ -654,7 +663,6 @@ def migrateSpecificContactInterfaces(context):
     logger.info("Migrating Specific Contact interfaces: starting...")
 
     from Products.urban.interfaces import CONTACT_INTERFACES
-    from zope.interface import alsoProvides
     portal = context.getSite()
     brains = portal.portal_catalog(portal_type = CONTACT_INTERFACES.keys())
     for brain in brains:
@@ -764,11 +772,8 @@ def provideEventMarkerInterfaces(context):
     if isNoturbanMigrationsProfile(context): return
 
     logger.info("Migrating Specific Event interfaces: starting...")
-    
-    import string
     from zope.interface import alsoProvides
     from zope.component.interface import getInterface
-    interfaces = __import__('Products.urban.interfaces')
     portal = context.getSite()
     brains = portal.portal_catalog.searchResults(portal_type='UrbanEvent') 
     for brain in brains:

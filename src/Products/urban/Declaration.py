@@ -61,7 +61,7 @@ schema = Schema((
     ),
     DataGridField(
         name='workLocations',
-        schemata="urban_description",
+        schemata='urban_description',
         widget=DataGridWidget(
             columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False)),},
             label='Worklocations',

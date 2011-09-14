@@ -134,4 +134,11 @@
     version="2011-09-24T11:00.0">
     Provides UrbanEvents with marker interfaces from their corresponding UrbanEventType
  </import-step>
+ <import-step
+    id="urban-migrateToWorkLocationsDataGridField"
+    handler="Products.urban.profiles.migrations.migrate.migrateToWorkLocationsDataGridField"
+    title="Migration to use workLocations DataGridField instead of workLocation objects"
+    version="2011-09-14T11:00.0">
+    Migration to use workLocations DataGridField instead of workLocation objects
+ </import-step>
 </import-steps>
