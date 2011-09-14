@@ -429,7 +429,7 @@ urbanEventTypes = {
                    (
                     {
                     'id': "depot-de-la-demande",
-                    'title': "Récépissé",
+                    'title': "Dépôt de la demande",
                     'activatedFields': [],
                     'deadLineDelay': 15,
                     'podTemplates': (),
