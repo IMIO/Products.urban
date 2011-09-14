@@ -513,12 +513,12 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return brains
 
     security.declarePrivate('listVocabularyObjects')
-    def listVocabularyObjects(self, vocToReturn, context, vocType="UrbanVocabularyTerm", inUrbanConfig=True):
-        brains = self.listVocabularyBrains(vocToReturn, context, vocType,
-                inUrbanConfig)
+    def listVocabularyObjects(self, vocToReturn, context, vocType="UrbanVocabularyTerm", id_to_use="id", inUrbanConfig=True):
+        brains = self.listVocabularyBrains(vocToReturn, context, vocType=vocType,
+                inUrbanConfig=inUrbanConfig)
         res={}
         for brain in brains:
-            res[brain.id] = brain.getObject()
+            res[getattr(brain, id_to_use)] = brain.getObject()
         return res
 
     security.declarePublic('checkPermission')
