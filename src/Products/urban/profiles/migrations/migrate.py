@@ -78,7 +78,11 @@ def migrateToWorkLocationsDataGridField(context):
         obj = brain.getObject()
         for previousWorkLocation in obj.objectValues('WorkLocation'):
             dict = {}
-            dict['street'] = previousWorkLocation.getStreet().UID()
+            street = previousWorkLocation.getStreet()
+            streetUID = ''
+            if street:
+                streetUID = street.UID()
+            dict['street'] = streetUID
             dict['number'] = previousWorkLocation.getNumber()
             locations.append(dict)
             objectToDeleteIds.append(previousWorkLocation.getId())
