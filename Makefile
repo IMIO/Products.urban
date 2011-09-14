@@ -1,22 +1,29 @@
 #!/usr/bin/make
 #
-all: run
+all: test
 
-.PHONY: bootstrap
-bootstrap:
+bin/python:
 	virtualenv-2.6 --no-site-packages .
+
+develop-eggs: bin/python bootstrap.py
 	./bin/python bootstrap.py
 
-.PHONY: buildout
-buildout:
-	if ! test -f bin/buildout;then make bootstrap;fi
-	bin/buildout -v
+bin/buildout: develop-eggs
 
-.PHONY: run
-run:
-	if ! test -f bin/instance;then make buildout;fi
+bin/test: buildout.cfg bin/buildout setup.py
+	./bin/buildout -vt 5
+
+bin/instance: buildout.cfg bin/buildout setup.py
+	./bin/buildout -vt 5 install instance
+
+.PHONY: test
+test: bin/test
+	bin/test -s Products.urban
+
+.PHONY: instance
+instance: bin/instance
 	bin/instance fg
 
 .PHONY: cleanall
 cleanall:
-	rm -fr develop-eggs downloads eggs parts .installed.cfg
+	rm -fr bin develop-eggs downloads eggs parts .installed.cfg
