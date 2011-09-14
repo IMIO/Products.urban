@@ -422,7 +422,7 @@ urbanEventTypes = {
                                      {'id': "decl-transmis-decision-fd", 'title': "Transmis décision au FD"},
                                      {'id': "decl-transmis-decision-demandeur", 'title': "Transmis décision au demandeur"},
                                     ),
-                    'eventTypeType': '',
+                    'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
                     },
                    ),
                    'urbancertificateone':
@@ -433,6 +433,7 @@ urbanEventTypes = {
                     'activatedFields': [],
                     'deadLineDelay': 15,
                     'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
                     'id': "octroi-cu1",
@@ -443,6 +444,7 @@ urbanEventTypes = {
                                      {'id': "cu1-lettre-notaire", 'title': "Lettre au notaire (octroi)"},
                                      {'id': "cu1-certif", 'title': "Certificat d'urbanisme 1"},
                                     ),
+                    'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
                     },
                    ),
                    'environmentaldeclaration':

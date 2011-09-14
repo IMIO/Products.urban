@@ -10,7 +10,7 @@
  <property name="content_meta_type">UrbanCertificateBase</property>
  <property name="product">urban</property>
  <property name="factory">addUrbanCertificateBase</property>
- <property name="immediate_view">urbancertificateone_view</property>
+ <property name="immediate_view">urbancertificateoneview</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
@@ -20,12 +20,9 @@
    <element value="WorkLocation"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">urbancertificateone_view</property>
+ <property name="default_view">urbancertificateoneview</property>
  <property name="view_methods">
-  <element value="folder_summary_view"/>
-  <element value="folder_tabular_view"/>
-  <element value="atct_album_view"/>
-  <element value="folder_listing"/>
+  <element value="urbancertificateoneview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>

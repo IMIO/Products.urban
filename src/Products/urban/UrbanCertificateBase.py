@@ -48,7 +48,20 @@ schema = Schema((
             label_msgid='urban_label_reference',
             i18n_domain='urban',
         ),
+        schemata='urban_description',
         default_method="getDefaultReference",
+    ),
+    DataGridField(
+        name='workLocations',
+        schemata='urban_description',
+        widget=DataGridWidget(
+            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False)),},
+            label='Worklocations',
+            label_msgid='urban_label_workLocations',
+            i18n_domain='urban',
+        ),
+        allow_oddeven=True,
+        columns=('number', 'street'),
     ),
     ReferenceField(
         name='notaryContact',
@@ -64,10 +77,11 @@ schema = Schema((
             label_msgid='urban_label_notaryContact',
             i18n_domain='urban',
         ),
-        allowed_types= ('Notary',),
+        required=False,
+        schemata='urban_description',
         multiValued=True,
         relationship="notary",
-        required=False,
+        allowed_types= ('Notary',),
     ),
     StringField(
         name='specificFeatures',
@@ -80,20 +94,22 @@ schema = Schema((
             i18n_domain='urban',
         ),
         enforceVocabulary=True,
+        schemata='urban_description',
         multiValued=True,
         vocabulary=UrbanVocabulary('specificfeatures'),
     ),
-    DataGridField(
-        name='workLocations',
-        schemata='urban_description',
-        widget=DataGridWidget(
-            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False)),},
-            label='Worklocations',
-            label_msgid='urban_label_workLocations',
+    TextField(
+        name='description',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Description',
+            label_msgid='urban_label_description',
             i18n_domain='urban',
         ),
-        allow_oddeven=True,
-        columns=('number', 'street'),
+        schemata='urban_description',
+        default_content_type='text/html',
+        default_output_type='text/html',
+        accessor="Description",
     ),
     ReferenceField(
         name='foldermanagers',
@@ -110,6 +126,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         required= False,
+        schemata='urban_description',
         multiValued=1,
         relationship='certificateFolderManagers',
         default_method="getDefaultFolderManagers",
@@ -128,7 +145,7 @@ UrbanCertificateBase_schema = BaseFolderSchema.copy() + \
 
 ##code-section after-schema #fill in your manual code here
 UrbanCertificateBase_schema['title'].required = False
-UrbanCertificateBase_schema['title'].visible = False
+UrbanCertificateBase_schema['title'].widget.visible = False
 ##/code-section after-schema
 
 class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
@@ -295,8 +312,13 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultM
         if not applicants:
             #we warn the user that no applicant have been added...
             messages.append(applicant_message)
-
         return messages
+
+    def getLastDeposit(self):
+        return self._getLastEvent(interfaces.IDepositEvent)
+
+    def getLastTheLicence(self):
+        return self._getLastEvent(interfaces.ITheLicenceEvent)
 
 
 
@@ -304,5 +326,13 @@ registerType(UrbanCertificateBase, PROJECTNAME)
 # end of class UrbanCertificateBase
 
 ##code-section module-footer #fill in your manual code here
+def finalizeSchema(schema, folderish=False, moveDiscussion=True):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('description', after='foldermanagers')
+    return schema
+
+finalizeSchema(UrbanCertificateBase_schema)
 ##/code-section module-footer
 

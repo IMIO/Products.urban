@@ -60,6 +60,22 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IUrbanCertificateBase"
+     name="urbancertificateoneview"
+     class=".urbancertificateoneview.UrbanCertificateOneView"
+     template="templates/urbancertificateoneview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="urbancertificateone-macros"
+     for="Products.urban.interfaces.IUrbanCertificateBase"
+     class=".urbancertificateoneview.UrbanCertificateOneMacros"
+     template="templates/urbancertificateonemacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IInquiryEvent"
      name="urbaneventview"
      class=".urbaneventviews.UrbanEventInquiryView"

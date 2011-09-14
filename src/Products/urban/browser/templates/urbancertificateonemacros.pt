@@ -1,0 +1,76 @@
+<div metal:define-macro="descriptionMacro" i18n:domain="urban">
+ <table cellspacing=0 cellpadding=0 width=100%>
+ <tr>
+  <td valign="top" width=49%>
+   <fieldset><b><legend i18n:translate="applicants">Applicant(s)</legend></b>
+    <div metal:use-macro="here/urban_macros/macros/urbanApplicantsMacro" />
+   </fieldset>
+  </td>
+  <td width="1%"></td>
+  <td valign="top" width=50%>
+   <fieldset><strong><legend i18n:translate="urban_description_key_dates_legend">Key dates</legend></strong>
+    <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_receiptDate">Receipt date</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="receiptDate view/getReceiptDate">
+       <a href="#" tal:condition="receiptDate" tal:attributes="href python: receiptDate['url']" tal:content="python: receiptDate['date']">Content</a>
+       <span class="discreet" tal:condition="not: receiptDate" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_theLicenceDate">The licence date</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="theLicenceDate view/getTheLicenceDate">
+       <a href="#" tal:condition="theLicenceDate" tal:attributes="href python: theLicenceDate['url']" tal:content="python: theLicenceDate['date']">Content</a>
+       <span class="discreet" tal:condition="not: theLicenceDate" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+    </table>
+   </fieldset>
+  </td>
+  </tr>
+ <tr>
+  <td valign="top" width=50%>
+   <fieldset><b><legend i18n:translate="legend_details">Details</legend></b>
+    <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_reference">Reference</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('reference', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_description">Description</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('description', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_foldermanagers">Treating agent</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanFolderManagerMacro" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_notaryContact">Notary</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanNotariesMacro" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_specificFeatures">Specific features</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('specificFeatures', mode='view')" /></td>
+     </tr>
+    </table>
+   </fieldset>
+  </td>
+  <td width="1%"></td>
+  <td valign="top" width=49%>
+   <fieldset><strong><legend i18n:translate="urban_label_workLocations">Work locations</legend></strong>
+      <div><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
+   </fieldset>
+   <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
+    <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
+   </fieldset>
+  </td>
+ </tr>
+ </table>
+</div>

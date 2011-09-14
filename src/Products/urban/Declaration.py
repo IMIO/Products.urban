@@ -83,14 +83,16 @@ schema = Schema((
     ),
     TextField(
         name='description',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html', 'application/msword',),
+        allowable_content_types=('text/html',),
         widget=RichWidget(
             label='Description',
             label_msgid='urban_label_description',
             i18n_domain='urban',
         ),
-        default_output_type='text/html',
+        default_content_type='text/html',
         schemata='urban_description',
+        default_output_type='text/html',
+        accessor="Description",
     ),
     ReferenceField(
         name='foldermanagers',
