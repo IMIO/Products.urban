@@ -139,7 +139,7 @@ class ParcellingTerm(BaseContent, BrowserDefaultMixin):
         """
            Update the title to set a clearly identify the buildlicence
         """
-        title = "%s (%s - %s - %s - %s)" % (self.label, self.subdividerName, self.toLocalizedTime(self.authorizationDate), self.toLocalizedTime(self.approvalDate), self.numberOfParcels)
+        title = "%s (%s - %s - %s - %s)" % (self.getLabel(), self.getSubdividerName(), self.toLocalizedTime(self.getAuthorizationDate()).encode('utf8'), self.toLocalizedTime(self.getApprovalDate()).encode('utf8'), self.getNumberOfParcels())
         self.setTitle(str(title))
         self.reindexObject()
 
