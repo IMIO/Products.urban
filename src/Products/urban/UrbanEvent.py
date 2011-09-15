@@ -273,6 +273,12 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
 
     # Manually created methods
 
+    def getTemplates(self):
+        """
+          Returns contained templates (File)
+        """
+        return self.getUrbaneventtypes().listFolderContents({'portal_type': 'File'})
+
     security.declarePublic('eventDateLabel')
     def eventDateLabel(self):
         """

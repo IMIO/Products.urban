@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-09-06 10:54+0000\n"
+"POT-Creation-Date: 2011-09-15 07:01+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -537,8 +537,14 @@ msgstr "Titre"
 msgid "label_colname_adr1"
 msgstr "Localité"
 
+msgid "label_colname_adviceAgreementLevel"
+msgstr "Niveau de l'avis"
+
 msgid "label_colname_created"
 msgstr "Créé le"
+
+msgid "label_colname_eventDate"
+msgstr "Date"
 
 msgid "label_colname_getBeginDate"
 msgstr "Du"
@@ -552,8 +558,14 @@ msgstr "Parcelle(s)"
 msgid "label_colname_name"
 msgstr "Nom(s)"
 
+msgid "label_colname_receiptDate"
+msgstr "Date de réception"
+
 msgid "label_colname_street"
 msgstr "Rue"
+
+msgid "label_colname_transmitDate"
+msgstr "Date d'envoi"
 
 msgid "label_edit"
 msgstr "Modifier"
@@ -965,6 +977,11 @@ msgstr "Numérotation des déclarations environnementales"
 #: Equipment.py
 msgid "urban_label_EquipmentType"
 msgstr "Type d'équipement"
+
+#. Default: "Linkedopinionrequestevent"
+#: LinkedOpinionRequestEvent.py
+msgid "urban_label_LinkedOpinionRequestEvent"
+msgstr ""
 
 # UrbanTool
 #. Default: "Nisnum"
@@ -1801,6 +1818,11 @@ msgstr "Code de route régionale"
 #: Contact.py
 msgid "urban_label_representedBy"
 msgstr "Représenté par"
+
+#. Default: "Requestedorganisation"
+#: UrbanEventOpinionRequest.py
+msgid "urban_label_requestedOrganisation"
+msgstr "Organisme"
 
 #. Default: "Roadadaptation"
 #: BuildLicence.py

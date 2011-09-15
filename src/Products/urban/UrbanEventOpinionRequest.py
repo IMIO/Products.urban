@@ -84,6 +84,16 @@ class UrbanEventOpinionRequest(BaseContent, UrbanEvent, BrowserDefaultMixin):
 
     # Methods
 
+    # Manually created methods
+
+    def getTemplates(self):
+        """
+          Returns contained templates (File)
+        """
+        if len(self.getUrbaneventtypes().listFolderContents({'portal_type': 'File'})):
+            return self.getUrbaneventtypes().listFolderContents({'portal_type': 'File'})
+        urbantool = getToolByName(self,'portal_urban')
+        return getattr(urbantool.buildlicence.urbaneventtypes, "config-opinion-request").listFolderContents({'portal_type': 'File'})
 
 registerType(UrbanEventOpinionRequest, PROJECTNAME)
 # end of class UrbanEventOpinionRequest

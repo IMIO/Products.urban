@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-09-06 10:54+0000\n"
+"POT-Creation-Date: 2011-09-15 07:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -536,7 +536,13 @@ msgstr ""
 msgid "label_colname_adr1"
 msgstr ""
 
+msgid "label_colname_adviceAgreementLevel"
+msgstr ""
+
 msgid "label_colname_created"
+msgstr ""
+
+msgid "label_colname_eventDate"
 msgstr ""
 
 msgid "label_colname_getBeginDate"
@@ -551,7 +557,13 @@ msgstr ""
 msgid "label_colname_name"
 msgstr ""
 
+msgid "label_colname_receiptDate"
+msgstr ""
+
 msgid "label_colname_street"
+msgstr ""
+
+msgid "label_colname_transmitDate"
 msgstr ""
 
 msgid "label_edit"
@@ -963,6 +975,11 @@ msgstr ""
 #. Default: "Equipmenttype"
 #: Equipment.py
 msgid "urban_label_EquipmentType"
+msgstr ""
+
+#. Default: "Linkedopinionrequestevent"
+#: LinkedOpinionRequestEvent.py
+msgid "urban_label_LinkedOpinionRequestEvent"
 msgstr ""
 
 #. Default: "Nisnum"
@@ -1797,6 +1814,11 @@ msgstr ""
 #. Default: "Representedby"
 #: Contact.py
 msgid "urban_label_representedBy"
+msgstr ""
+
+#. Default: "Requestedorganisation"
+#: UrbanEventOpinionRequest.py
+msgid "urban_label_requestedOrganisation"
 msgstr ""
 
 #. Default: "Roadadaptation"
