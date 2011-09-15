@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Sep 14 19:29:26 2011\n"
-"PO-Revision-Date: Wed Sep 14 19:29:26 2011\n"
+"POT-Creation-Date: Thu Sep 15 10:38:17 2011\n"
+"PO-Revision-Date: Thu Sep 15 10:38:17 2011\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -309,6 +309,11 @@ msgstr ""
 #. Default: "Comments"
 #: Division.py
 msgid "urban_label_comments"
+msgstr ""
+
+#. Default: "Country"
+#: Contact.py
+msgid "urban_label_country"
 msgstr ""
 
 #. Default: "Deadlinedelay"
@@ -676,6 +681,11 @@ msgstr ""
 #. Default: "Numberofparcels"
 #: ParcellingTerm.py
 msgid "urban_label_numberOfParcels"
+msgstr ""
+
+#. Default: "Numberregister"
+#: Contact.py
+msgid "urban_label_numberRegister"
 msgstr ""
 
 #. Default: "Numerotationtalexpression"

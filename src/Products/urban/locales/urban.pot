@@ -749,6 +749,12 @@ msgstr ""
 msgid "persons_titles_folder_title"
 msgstr ""
 
+msgid "country_folder_title"
+msgstr ""
+
+msgid "external_decisions_folder_title"
+msgstr ""
+
 #. Default: "Madam"
 #: Contact.py
 msgid "persontitle_madam"

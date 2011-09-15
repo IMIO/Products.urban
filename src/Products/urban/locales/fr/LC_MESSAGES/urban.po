@@ -750,6 +750,12 @@ msgstr "Grades des personnes"
 msgid "persons_titles_folder_title"
 msgstr "Titres des personnes"
 
+msgid "country_folder_title"
+msgstr "Pays des personnes"
+
+msgid "external_decisions_folder_title"
+msgstr "Décision des avis externes"
+
 #. Default: "Madam"
 #: Contact.py
 msgid "persontitle_madam"
@@ -1202,6 +1208,11 @@ msgstr "Commentaire"
 #: Division.py
 msgid "urban_label_comments"
 msgstr "Commentaires"
+
+#. Default: "Country"
+#: Contact.py
+msgid "urban_label_country"
+msgstr "Pays"
 
 #. Default: "Concerned elements"
 #: parcelsinfo.py
@@ -1664,6 +1675,11 @@ msgstr "Numéro"
 #: ParcellingTerm.py
 msgid "urban_label_numberOfParcels"
 msgstr "Nombre de lots"
+
+#. Default: "Numberregister"
+#: Contact.py
+msgid "urban_label_numberRegister"
+msgstr "Numéro d'inscription au registre"
 
 #. Default: "Numerotation TAL expression"
 #: UrbanTool.py

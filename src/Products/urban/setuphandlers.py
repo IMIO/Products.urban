@@ -829,6 +829,20 @@ def addGlobalFolders(context):
         newFolder.invokeFactory("UrbanVocabularyTerm",id='responsable-administratif', title="Responsable administratif"),
         newFolder.invokeFactory("UrbanVocabularyTerm",id='responsable-technique', title="Responsable technique"),
 
+    #add the country folder
+    if not hasattr(tool, "country"):
+        newFolderid = tool.invokeFactory("Folder",id="country",title=_("country_folder_title", 'urban', context=site.REQUEST))
+        newFolder = getattr(tool, newFolderid)
+        newFolder.setConstrainTypesMode(1)
+        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='germany', title="Allemagne")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='belgium', title="Belgique")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='france', title="France")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='luxembourg', title="Luxembourg")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id='netherlands', title="Pays Bas")
+      
+
     #add the decisions folder
     if not hasattr(tool, "decisions"):
         newFolderid = tool.invokeFactory("Folder",id="decisions",title=_("decisions_folder_title", 'urban', context=site.REQUEST))

@@ -164,6 +164,16 @@ schema = Schema((
         ),
     ),
     StringField(
+        name='country',
+        default="belgium",
+        widget=SelectionWidget(
+            label='Country',
+            label_msgid='urban_label_country',
+            i18n_domain='urban',
+        ),
+        vocabulary=UrbanVocabulary('country', vocType='UrbanVocabularyTerm', inUrbanConfig=False),
+    ),
+    StringField(
         name='email',
         widget=StringField._properties['widget'](
             label='Email',
@@ -184,6 +194,15 @@ schema = Schema((
         widget=StringField._properties['widget'](
             label='Fax',
             label_msgid='urban_label_fax',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='numberRegister',
+        widget=StringField._properties['widget'](
+            condition="python: here.portal_type == 'Architect'",
+            label='Numberregister',
+            label_msgid='urban_label_numberRegister',
             i18n_domain='urban',
         ),
     ),
@@ -315,7 +334,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 addressSignaletic = addressSignaletic[3:-4]
                 return '<p>%s<br />%s</p>' % (nameSignaletic,
                     addressSignaletic)
-
     def _getNameSignaletic(self, linebyline):
         title = self.displayValue(self.Vocabulary('personTitle')[0],
             self.getPersonTitle()).encode('utf8')
