@@ -23,7 +23,7 @@
              compression="safe"
              cookable="True"
              enabled="True"
-             expression="python: context.portal_type in context.portal_urban.getUrbanTypes() and member.has_permission('Modify portal content', context)"
+             expression="context/showEditTabbing"
              id="urbanedittabbing.js"
              inline="False"/> 
  <!-- ##/code-section jsregistry.xml -->
