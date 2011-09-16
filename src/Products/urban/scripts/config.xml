@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config>
- 
+<Object name="Misc">
+      <Item name="Date (délivré le ...)">
+        <FieldCode>
+            urbanEventObj.getFormattedDate(forDelivery=True)
+        </FieldCode>
+     </Item>
+     <Item name="Commune">
+        <FieldCode>
+            tool.getCityName(prefixed=True) OK
+        </FieldCode>
+     </Item>
+</Object>
 <Object name="Demandeur">
+     <Item name="Signalétique">
+        <FieldCode>
+            self.getApplicantsSignaletic() OK
+        </FieldCode>
+    </Item>
+    <Item name="Signalétique (avec adresse)">
+        <FieldCode>
+            self.getApplicantsSignaletic(withaddress=True) OK
+        </FieldCode>
+    </Item>
     <Item name="Titre">
         <FieldCode>
-            self.displayValue(applicantobj.Vocabulary('personTitle')[0], applicantobj.getPersonTitle())
+            applicantobj.getPersonTitleValue()
         </FieldCode>
     </Item>
     <Item name="Nom">
@@ -55,6 +76,16 @@
 </Object>
 
 <Object name="Architecte">
+    <Item name="Signalétique">
+        <FieldCode>
+            self.getArchitectsSignaletic()
+        </FieldCode>
+    </Item>
+    <Item name="Signalétique (avec adresse)">
+        <FieldCode>
+            self.getArchitectsSignaletic(withaddress=True)
+        </FieldCode>
+    </Item>
     <Item name="Titre">
         <FieldCode>
             self.displayValue(self.getArchitects()[0].Vocabulary('personTitle')[0], self.getArchitects()[0].getPersonTitle())
@@ -200,24 +231,34 @@
  
  
  <Object name="Evénement">    
-    <Item name="Date du document">
+    <Item name="Date">
         <FieldCode>
-            self.toLocalizedTime(urbanEventObj.eventDate,long_format=False)
+            urbanEventObj.getFormattedDate() OK
         </FieldCode>        
     </Item>
-    <Item name="Date de récépissé de dépôt">
+    <Item name="Date (délivré le)">
         <FieldCode>
-            self.toLocalizedTime(recepisseobj.getEventDate(),long_format=False)
+            urbanEventObj.getFormattedDate(forDelivery=True) OK
         </FieldCode>        
     </Item>
-    <Item name="1er passage au Collège">
+    <Item name="Date (préfixée par la commune)">
         <FieldCode>
-            self.toLocalizedTime(collegesubmissionobj.getDecisionDate(),long_format=False)
+            urbanEventObj.getFormattedDate(withCityNamePrefix=True) OK
+        </FieldCode>        
+    </Item>
+    <Item name="Date de réception">
+        <FieldCode>
+            tool.formatDate(urbanEventObj.getReceiptDate()) OK
         </FieldCode>        
     </Item>
     <Item name="Date de la décision">
         <FieldCode>
-            self.toLocalizedTime(urbanEventObj.decisionDate,long_format=False)
+            tool.formatDate(urbanEventObj.getDecisionDate()) OK
+        </FieldCode>        
+    </Item>
+    <Item name="Décision">
+        <FieldCode>
+            self.displayValue(urbanEventObj.Vocabulary('decision')[0], urbanEventObj.getDecision())
         </FieldCode>        
     </Item>
 </Object>
@@ -225,22 +266,27 @@
  <Object name="Enquête">    
     <Item name="Date de début">
         <FieldCode>
-            self.toLocalizedTime(self.getInvestigationStart(),long_format=False)
+            tool.formatDate(self.getInvestigationStart()) OK
         </FieldCode>        
     </Item>
     <Item name="Date de fin">
         <FieldCode>
-            self.toLocalizedTime(self.getInvestigationEnd(),long_format=False)
+            tool.formatDate(self.getInvestigationEnd()) OK
         </FieldCode>        
     </Item>
     <Item name="Date réclamations">
         <FieldCode>
-            self.toLocalizedTime(urbanEventObj.getClaimsDate(),long_format=False)
+            tool.formatDate(urbanEventObj.getClaimsDate()) OK
         </FieldCode>        
     </Item>
     <Item name="Date explications">
         <FieldCode>
-            self.toLocalizedTime(urbanEventObj.getExplanationsDate(),long_format=False)
+            tool.formatDate(urbanEventObj.getExplanationsDate()) OK
+        </FieldCode>        
+    </Item>    
+    <Item name="Articles de l'enquête">
+        <FieldCode>
+           self.displayValue(self.Vocabulary('investigationArticles')[0], urbanEventObj.getLinkedInquiry().getInvestigationArticles()) 
         </FieldCode>        
     </Item>    
 </Object>
@@ -254,6 +300,11 @@
     <Item name="RéférenceDGATLP">
         <FieldCode>
             self.getReferenceDGATLP()
+        </FieldCode>        
+    </Item>
+    <Item name="Adresse des travaux">
+        <FieldCode>
+            self.getWorkLocationSignaletic() OK
         </FieldCode>        
     </Item>
     <Item name="Rue des travaux">
@@ -278,7 +329,27 @@
     </Item>
     <Item name="Parcelles">
         <FieldCode>
-            self.getPortionOutsText()
+            self.getPortionOutsText() OK
+        </FieldCode>        
+    </Item>
+    <Item name="Référence du lotissement">
+        <FieldCode>
+            self.getSubdivisionDetails() OK
+        </FieldCode>        
+    </Item>
+    <Item name="Schéma de structure communale">
+        <FieldCode>
+            self.getSSC() OK
+        </FieldCode>        
+    </Item>
+    <Item name="Réglement communal d'urbanisme">
+        <FieldCode>
+            self.getRCU() OK
+        </FieldCode>        
+    </Item>
+    <Item name="Zonage au plan de secteur">
+        <FieldCode>
+            self.displayValue(self.Vocabulary('folderZone')[0], self.getFolderZone()) OK
         </FieldCode>        
     </Item>
     <Item name="Avis">
@@ -288,10 +359,24 @@
     </Item>
     <Item name="Objet du permis">
         <FieldCode>
-            self.getLicenceSubject()
+            self.getLicenceSubject() OK
         </FieldCode>        
     </Item>
-    
+    <Item name="Délai de réponse annoncé">
+        <FieldCode>
+            self.getAnnoncedDelay() OK
+        </FieldCode>        
+    </Item>
+    <Item name="Type de revêtement">
+        <FieldCode>
+            self.templateRoadCoatingFullname(self.getRoadCoating()) OK
+        </FieldCode>        
+    </Item>
+    <Item name="Demande de dérogation">
+        <FieldCode>
+            self.displayValue(self.Vocabulary('derogation')[0], self.getDerogation())
+        </FieldCode>        
+
 </Object>
 
 <Object name="Déclaration">    
