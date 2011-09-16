@@ -282,9 +282,9 @@ class Contact(BaseContent, BrowserDefaultMixin):
         if not self.getName1():
             return self.getSociety()
         if self.getSociety():
-            return "%s %s (%s)" % (self.getName1(), self.getName2(), self.getSociety())
+            return "%s %s %s (%s)" % (self.getPersonTitleValue(), self.getName1(), self.getName2(), self.getSociety())
         else:
-            return "%s %s" % (self.getName1(), self.getName2())
+            return "%s %s %s" % (self.getPersonTitleValue(), self.getName1(), self.getName2())
 
     security.declarePublic('at_post_create_script')
     def at_post_create_script(self):
