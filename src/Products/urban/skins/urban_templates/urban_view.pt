@@ -87,6 +87,7 @@
                           topic python: getattr(topics, name);
                           path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
                           dummy python: context.setPathCritValue(path_crit, context.UID());
+                          batch python: topic.queryCatalog(batch=True);
                           showedCols python: ('Title', 'created', 'Creator', );
                           showActions python: True;">
           <metal:listing use-macro="here/urban_macros/macros/listing" />
@@ -100,6 +101,7 @@
                           topic python: getattr(topics, name);
                           path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
                           dummy python: context.setPathCritValue(path_crit, context.UID());
+                          batch python: topic.queryCatalog(batch=True);
                           showedCols python: ('Title', 'created', 'Creator', );
                           showActions python: True;">
           <metal:listing use-macro="here/urban_macros/macros/listing" />

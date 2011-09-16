@@ -46,9 +46,10 @@
 
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
-        <div tal:define="tool python: getattr(context, 'portal_urban');
-                         topics python: getattr(tool, 'topics');
-                         topic python: getattr(topics, 'searchgeometricians');
+        <div tal:define="tool python: context.portal_urban;
+                         batch python: tool.queryCatalog(batch=True, specificSearch='searchGeometricians', context=context, theObjects=False, batchlen=50);
+                         showedCols python: ('Title', );
+                         colsLabels python: {'Title': 'geometrician_data'};
                          showActions python: True;">
          <metal:listing use-macro="here/urban_macros/macros/listing" />
         </div>

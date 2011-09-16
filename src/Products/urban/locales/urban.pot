@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-09-14 11:27+0000\n"
+"POT-Creation-Date: 2011-09-15 13:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -537,6 +537,24 @@ msgid "label_colname_Title"
 msgstr ""
 
 msgid "label_colname_adr1"
+msgstr ""
+
+msgid "label_colname_applicant_data"
+msgstr ""
+
+msgid "label_colname_architect_data"
+msgstr ""
+
+msgid "label_colname_claimant_data"
+msgstr ""
+
+msgid "label_colname_recipient_data"
+msgstr ""
+
+msgid "label_colname_notary_data"
+msgstr ""
+
+msgid "label_colname_geometrician_data"
 msgstr ""
 
 msgid "label_colname_created"
@@ -1097,6 +1115,11 @@ msgstr ""
 #. Default: "Applicants"
 #: GenericLicence.py
 msgid "urban_label_applicants"
+msgstr ""
+
+#. Default: "Approvaldate"
+#: ParcellingTerm.py
+msgid "urban_label_approvalDate"
 msgstr ""
 
 #. Default: "Architects"

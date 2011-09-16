@@ -263,36 +263,14 @@
  <div tal:condition="not: applicants" i18n:translate="warning_add_an_applicant">
   You must encode applicant(s)
  </div>
- <table class="listing" width=100% tal:condition="applicants">
- <thead>
-  <tr>
-   <th i18n:translate="">Applicant data</th>
-   <th i18n:translate="">Actions</th>
-  </tr>
- </thead>
- <tbody>
- <tal:rows repeat="applicantObj applicants">
-  <tr>
-   <td>
-    <b><a href="#" tal:attributes="href applicantObj/absolute_url">
-     <span tal:replace="python: context.displayValue(applicantObj.Vocabulary('personTitle')[0], applicantObj.getPersonTitle())" />
-     <span tal:replace="applicantObj/getName1|nothing" />
-     <span tal:replace="applicantObj/getName2|nothing" />
-     <span tal:condition="applicantObj/getSociety" tal:replace="python: '(' + applicantObj.getSociety() + ')'" />
-    </a></b>
-    <tal:block condition="applicantObj/getStreet"><br /></tal:block>
-    <span tal:replace="python: applicantObj.getStreet()+' '+applicantObj.getNumber()" /><br />
-    <span tal:replace="python: applicantObj.getZipcode()+' '+applicantObj.getCity()" />
-   </td>
-   <td>
-    <tal:block define="thisObject python: applicantObj; needExternalEdition python:False">
-     <span metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
-    </tal:block>
-   </td>
-  </tr>
- </tal:rows>
- </tbody>
- </table>
+ <div tal:define="tool python: context.portal_urban;
+                 Batch python:modules['Products.CMFPlone'].Batch;
+                 batch python: Batch(context.getApplicants(), 20);
+                 showedCols python: ('Title', );
+                 colsLabels python: {'Title': 'applicant_data'};
+                 showActions python: True;">
+  <metal:listing use-macro="here/urban_macros/macros/listing" />
+ </div>
  <form tal:define="ctype python: context.portal_types.getTypeInfo('Applicant');
                    member context/@@plone_portal_state/member;"
        tal:condition="python: member.has_permission('urban: Add Contact', context)"
@@ -327,13 +305,10 @@
  </tr>
  <tr>
   <td>
-    <div tal:define="specificSearch python: 'searchUrbanEvents';
-                     tool python: context.portal_urban;
+    <div tal:define="tool python: context.portal_urban;
+                     batch python: tool.queryCatalog(batch=True, specificSearch='searchUrbanEvents', context=context, theObjects=False, batchlen=50);
                      showedCols python: ('Title', 'eventDate', );
-                     topic python: None;
-                     showActions python: True;
-                     theObjects python: False;
-                     batchlen python: 50">
+                     showActions python: True;">
      <metal:listing use-macro="here/urban_macros/macros/listing" />
     </div>
   </td>
@@ -448,18 +423,13 @@ can receive a "actionsToHide" list of actions not to display</tal:comment>
 
 <!-- This macro need to receive a topic -->
 <!--We can receive parameters here:
-object 'topic' could be passed or 'tool'
-string 'specificSearch' is passed if object 'tool' is passed
 boolean 'showActions' specify if we show the actions column
+list 'colsLabels' specify the labels to use in the column.  If nothing is received, we use the elements from showedCols.  This attribute is usefull to rename some labels
 list 'showedCols' specify a list of indexes we want to display if these indexes have been defined in the topic/customViewFields-->
 <div metal:define-macro="listing" i18n:domain="plone">
-<tal:topiccontents define="searchEngine python: topic or tool;
-                           specificSearch specificSearch|nothing;
-                           theObjects theObjects|nothing;
-                           batchlen batchlen|nothing;
-                           topicContents python: searchEngine.queryCatalog(batch=True, specificSearch=specificSearch, context=context, theObjects=theObjects, batchlen=batchlen);
-                           batch topicContents;
-                           showActions showActions|nothing;
+<tal:topiccontents define="showActions showActions|nothing;
+                           colsLabels colsLabels|nothing;
+                           colsLabels python: colsLabels and colsLabels or {};
                            showedCols showedCols|topic/getCustomViewFields;
                            isALot isALot|nothing;
                            isAnEquipment isAnEquipment|nothing;">
@@ -481,7 +451,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                 <thead i18n:domain="urban">
                 <tr>
                     <tal:block repeat="field showedCols">
-                     <th i18n:domain="urban" tal:content="python: 'label_colname_' + field" i18n:translate=""/>
+                     <th i18n:domain="urban" tal:content="python: 'label_colname_' + (colsLabels.has_key(field) and colsLabels[field] or field)" i18n:translate=""/>
                     </tal:block>
                     <th tal:condition="isALot" i18n:domain="urban" i18n:translate="parcels">
                       Parcels
@@ -495,7 +465,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                 </tr>
                 </thead>
                 <tbody>
-                <tal:brain tal:repeat="obj topicContents">
+                <tal:brain tal:repeat="obj batch">
                 <tr tal:define="oddrow repeat/obj/odd;"
                     tal:attributes="class python:test(oddrow, 'even', 'odd')">
                     <tal:fields repeat="field showedCols"
@@ -556,6 +526,13 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                               <br /><a href="#" class="discreet" style="margin-left:20px" tal:content="doc/Title" tal:attributes="href python: doc.absolute_url() + suffix">Document</a>
                              </tal:block>
                             </tal:block>
+                            <tal:comment replace="nothing">Show more values for applicants.  This could be the case for other contacts???</tal:comment>
+                            <tal:applicant condition="python: obj.meta_type == 'Contact'"
+                                           define="thisObject python: hasattr(obj, 'getObject') and obj.getObject() or obj">
+                             <tal:block condition="thisObject/getStreet"><br /></tal:block>
+                             <span tal:replace="python: thisObject.getStreet()+' '+thisObject.getNumber()" /><br />
+                             <span tal:replace="python: thisObject.getZipcode()+' '+thisObject.getCity()" />
+                            </tal:applicant>
                         </td>
                     </tal:block>
                     </tal:fields>
@@ -664,10 +641,8 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
    <div class="#" tal:attributes="class python: test(parcels, 'field', 'field warning')">
     <div tal:condition="not: parcels" i18n:translate="warning_add_a_parcel">You must encode concerned parcel(s)
     </div>
-    <div tal:define="tool python: getattr(context, 'portal_urban');
-                     topic python: getattr(tool.topics, 'searchportionsout');
-                     path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
-                     dummy python: context.setPathCritValue(path_crit, context.UID());
+    <div tal:define="tool python: context.portal_urban;
+                     batch python: tool.queryCatalog(batch=True, specificSearch='searchPortionOuts', context=context, theObjects=False, batchlen=50);                     
                      showActions python: True;
                      showedCols python: ('Title',);">
     <metal:listing use-macro="here/urban_macros/macros/listing" />

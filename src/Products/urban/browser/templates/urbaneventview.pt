@@ -32,15 +32,13 @@
         </td>
         <td width=65%>
          <fieldset><strong><legend i18n:translate="event_linked_documents">Event linked documents</legend><strong>
-          <div tal:define="specificSearch python: 'searchLinkedDocuments';
-                           tool python: context.portal_urban;
+          <div tal:define="tool python: context.portal_urban;
+                           batch python: tool.queryCatalog(batch=True, specificSearch='searchLinkedDocuments', context=context, theObjects=False, batchlen=50);
                            showedCols python: ('Title', 'created', 'Creator', );
-                           topic python: None;
-                           showActions python: True;
-                           theObjects python: False;
-                           batchlen python: 50">
+                           showActions python: True;">
           <metal:listing use-macro="here/urban_macros/macros/listing" />
           </div>
+
          </fieldset>
         </td>
     </tr>

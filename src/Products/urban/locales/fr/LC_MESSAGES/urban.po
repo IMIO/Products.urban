@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-09-14 11:27+0000\n"
+"POT-Creation-Date: 2011-09-15 13:29+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -305,6 +305,9 @@ msgstr "Aucun événement n'est encore lié à cette enquête publique"
 msgid "content_none"
 msgstr "N.C."
 
+msgid "country_folder_title"
+msgstr "Pays des personnes"
+
 msgid "create"
 msgstr "Créer un document"
 
@@ -399,6 +402,9 @@ msgstr "Réclamants"
 
 msgid "event_linked_documents"
 msgstr "Documents liés à cet événement"
+
+msgid "external_decisions_folder_title"
+msgstr "Décision des avis externes"
 
 #. Default: "Far prevention area"
 #: GenericLicence.py
@@ -540,11 +546,23 @@ msgstr "Titre"
 msgid "label_colname_adr1"
 msgstr "Localité"
 
+msgid "label_colname_applicant_data"
+msgstr "Coordonnées du demandeur"
+
+msgid "label_colname_architect_data"
+msgstr "Coordonnées de l'architecte"
+
+msgid "label_colname_claimant_data"
+msgstr "Coordonnées du réclamant"
+
 msgid "label_colname_created"
 msgstr "Créé le"
 
 msgid "label_colname_eventDate"
 msgstr "Date clé"
+
+msgid "label_colname_geometrician_data"
+msgstr "Coordonnées du géomètre"
 
 msgid "label_colname_getBeginDate"
 msgstr "Du"
@@ -557,6 +575,12 @@ msgstr "Parcelle(s)"
 
 msgid "label_colname_name"
 msgstr "Nom(s)"
+
+msgid "label_colname_notary_data"
+msgstr "Coordonnées du notaire"
+
+msgid "label_colname_recipient_data"
+msgstr "Coordonnées du destinataire"
 
 msgid "label_colname_street"
 msgstr "Rue"
@@ -749,12 +773,6 @@ msgstr "Grades des personnes"
 
 msgid "persons_titles_folder_title"
 msgstr "Titres des personnes"
-
-msgid "country_folder_title"
-msgstr "Pays des personnes"
-
-msgid "external_decisions_folder_title"
-msgstr "Décision des avis externes"
 
 #. Default: "Madam"
 #: Contact.py
@@ -1095,15 +1113,15 @@ msgstr "Délai annoncé"
 msgid "urban_label_annoncedDelayDetails"
 msgstr "Détails concernant le délai annoncé"
 
-#. Default: "Approvaldate"
-#: ParcellingTerm.py
-msgid "urban_label_approvalDate"
-msgstr "Date d'approbation"
-
 #. Default: "Applicants"
 #: GenericLicence.py
 msgid "urban_label_applicants"
 msgstr "Demandeur"
+
+#. Default: "Approvaldate"
+#: ParcellingTerm.py
+msgid "urban_label_approvalDate"
+msgstr "Date d'approbation"
 
 #. Default: "Architects"
 #: BuildLicence.py
@@ -1208,11 +1226,6 @@ msgstr "Commentaire"
 #: Division.py
 msgid "urban_label_comments"
 msgstr "Commentaires"
-
-#. Default: "Country"
-#: Contact.py
-msgid "urban_label_country"
-msgstr "Pays"
 
 #. Default: "Concerned elements"
 #: parcelsinfo.py
@@ -1675,11 +1688,6 @@ msgstr "Numéro"
 #: ParcellingTerm.py
 msgid "urban_label_numberOfParcels"
 msgstr "Nombre de lots"
-
-#. Default: "Numberregister"
-#: Contact.py
-msgid "urban_label_numberRegister"
-msgstr "Numéro d'inscription au registre"
 
 #. Default: "Numerotation TAL expression"
 #: UrbanTool.py

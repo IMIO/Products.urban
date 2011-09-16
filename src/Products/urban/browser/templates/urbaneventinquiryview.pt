@@ -71,15 +71,12 @@
         </td>
         <td width=65%>
         <fieldset><strong><legend i18n:translate="event_linked_documents">Event linked documents</legend><strong>
-        <div tal:define="specificSearch python: 'searchLinkedDocuments';
-                         tool python: context.portal_urban;
-                         showedCols python: ('Title', 'created', 'Creator', );
-                         topic python: None;
-                         showActions python: True;
-                         theObjects python: False;
-                         batchlen python: 50">
-         <metal:listing use-macro="here/urban_macros/macros/listing" />
-        </div>
+          <div tal:define="tool python: context.portal_urban;
+                           batch python: tool.queryCatalog(batch=True, specificSearch='searchLinkedDocuments', context=context, theObjects=False, batchlen=50);
+                           showedCols python: ('Title',);
+                           showActions python: True;">
+          <metal:listing use-macro="here/urban_macros/macros/listing" />
+          </div>
         </fieldset>
         <fieldset><strong><legend i18n:translate="event_inquiry_claimants">Claimants</legend><strong>
         <form tal:condition="python: member.has_permission('urban: Add Contact', context)"
@@ -94,14 +91,7 @@
          <input type="submit" class="context" id="event" value="add_a_claimant" i18n:attributes="value" />
          <br /><br />
         </form>
-        <div tal:define="claimants context/getClaimants;
-                         specificSearch python: 'searchClaimants';
-                         tool python: context.portal_urban;
-                         showedCols python: ('Title', );
-                         topic python: None;
-                         showActions python: True;
-                         theObjects python: False;
-                         batchlen python: 20">
+        <div tal:define="claimants context/getClaimants;">
          <table width=100% class="listing" style="margin-bottom: 0;">
           <thead>
            <tr>
@@ -112,7 +102,14 @@
            </tr>
           </thead>
          </table>
-         <metal:listing use-macro="here/urban_macros/macros/listing" />
+          <div tal:define="tool python: context.portal_urban;
+                           Batch python:modules['Products.CMFPlone'].Batch;
+                           batch python: Batch(claimants, 25);
+                           showedCols python: ('Title', );
+                           colsLabels python: {'Title': 'claimant_data'};
+                           showActions python: True;">
+          <metal:listing use-macro="here/urban_macros/macros/listing" />
+          </div>
         </div>
         </fieldset>
         </td>
@@ -123,14 +120,7 @@
  <a tal:attributes="href linkedUrbanEventType/getSpecialFunctionUrl" tal:content="linkedUrbanEventType/getSpecialFunctionName"/><br><br>
 </tal:block>
 
-<tal:block condition="recipients"
-           define="specificSearch python: 'searchRecipients';
-                   tool python: context.portal_urban;
-                   showedCols python: ('getParcelsForDisplay', 'name', 'street', 'adr1', );
-                   topic python: None;
-                   showActions python: True;
-                   theObjects python: True;
-                   batchlen python: 50">
+<tal:block condition="recipients">
     <table width=100% class="listing" style="margin-bottom: 0;">
     <thead>
     <tr>
@@ -141,7 +131,14 @@
     </tr>
     </thead>
     </table>
-    <div metal:use-macro="here/urban_macros/macros/listing" />
+    <div tal:define="tool python: context.portal_urban;
+                     Batch python:modules['Products.CMFPlone'].Batch;
+                     batch python: Batch(recipients, 25);
+                     showedCols python: ('Title',);
+                     colsLabels python: {'Title': 'recipient_data'};
+                     showActions python: True;">
+     <metal:listing use-macro="here/urban_macros/macros/listing" />
+    </div>
 </tal:block>
 
 <tal:carto condition="recipients">
