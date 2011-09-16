@@ -40,6 +40,7 @@ schema = Schema((
         allowed_types=('UrbanEventType',),
         multiValued=0,
         relationship='LinkedOpinionRequestEvent',
+        write_permission="Manage portal",
     ),
 
 ),
