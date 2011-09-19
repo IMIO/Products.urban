@@ -265,7 +265,7 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultM
         if self.getNotaryContact():
             notary = unicode(self.getNotaryContact()[0].Title(), 'utf-8')
         else:
-            applicant = _('no_notary_defined', 'urban', context=self.REQUEST)
+            notary = _('no_notary_defined', 'urban', context=self.REQUEST)
 
         #do not use '%s - %s - %s' type notation as it could raise UnicodeDecodeErrors...
         if applicant and notary:
