@@ -282,9 +282,9 @@ class Contact(BaseContent, BrowserDefaultMixin):
         if not self.getName1():
             return self.getSociety()
         if self.getSociety():
-            return "%s %s %s (%s)" % (self.getPersonTitleValue(), self.getName1(), self.getName2(), self.getSociety())
+            return "%s %s %s (%s)" % (self.getPersonTitle(short=True), self.getName1(), self.getName2(), self.getSociety())
         else:
-            return "%s %s %s" % (self.getPersonTitleValue(), self.getName1(), self.getName2())
+            return "%s %s %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2())
 
     security.declarePublic('at_post_create_script')
     def at_post_create_script(self):
@@ -334,6 +334,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 addressSignaletic = addressSignaletic[3:-4]
                 return '<p>%s<br />%s</p>' % (nameSignaletic,
                     addressSignaletic)
+
     def _getNameSignaletic(self, linebyline):
         title = self.displayValue(self.Vocabulary('personTitle')[0],
             self.getPersonTitle()).encode('utf8')
