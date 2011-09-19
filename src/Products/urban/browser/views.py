@@ -92,13 +92,13 @@ class ProxyController(BrowserView):
             url = self.request.get("url")
             infos = urlparse(url) 
             params = self.request.form
-            
+            """
             try:
                 self.urlList.index(infos[1])
             except ValueError, e:
                print e
                return "Someone try to use not valid host for proxy"
-
+            """
             params.pop("url")
             self.request.response.setHeader('content-type', 'text/json')
             conn = urllib2.urlopen(url+"?%s" % urllib.urlencode(params))
