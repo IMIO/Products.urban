@@ -9,7 +9,7 @@ from Acquisition import aq_base
 
 from Products.CMFPlone.utils import base_hasattr
 from Products.contentmigration.walker import CustomQueryWalker
-from Products.contentmigration.archetypes import InplaceATFolderMigrator
+from Products.contentmigration.archetypes import InplaceATFolderMigrator, InplaceATItemMigrator
 from Products.urban.events.urbanEventInquiryEvents import setLinkedInquiry
 from Products.urban.events.urbanEventEvents import setEventTypeType, setCreationDate
 from Products.urban.interfaces import ILicenceContainer
@@ -58,6 +58,8 @@ def migrateToPlone4(context):
     migrateLicenceContainers(context)
     #Migration of Event objects to provides marker interfaces
     provideEventMarkerInterfaces(context)
+    #get rid of the Proprietary portal_type, we use Applicant
+    migrationProprietaryToContact(context)
     #Migration of Layers
     migrateLayersForMapfish(context)
 
@@ -720,6 +722,37 @@ def migrationToUrbanEventInquiries(context):
         walker = migrator.walker(portal, migrator, query={'id': 'enquete-publique'})
         walker.go()
     logger.info("Migrating to UrbanEventInquiries: done!")
+
+class ProprietaryToApplicantMigrator(object, InplaceATItemMigrator):
+    """
+      Migrate the Contact with portal_type Proprietary to Contact with portal_type Applicant
+    """
+    walker = CustomQueryWalker
+    src_meta_type = "Contact"
+    src_portal_type = "Proprietary"
+    dst_meta_type = "Contact"
+    dst_portal_type = "Applicant"
+
+    def __init__(self, *args, **kwargs):
+        InplaceATItemMigrator.__init__(self, *args, **kwargs)
+
+def migrationProprietaryToContact(context):
+    """
+      Call ProprietaryToApplicantMigrator
+    """    
+    if isNoturbanMigrationsProfile(context): return
+
+    logger.info("Migrating Proprietary portal_type to Applicant portal_type: starting...")
+
+    migrators = (ProprietaryToApplicantMigrator,)
+
+    portal = context.getSite()
+
+    #Run the migrations
+    for migrator in migrators:
+        walker = migrator.walker(portal, migrator)
+        walker.go()
+    logger.info("Migrating Proprietary portal_type to Applicant portal_type: done!")
 
 def addMd5SignatureAndProfileNameProperties(context):
     """

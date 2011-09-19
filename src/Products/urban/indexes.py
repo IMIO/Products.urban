@@ -32,16 +32,10 @@ class UrbanIndexes:
           Return the informations to index about the applicants
         """
         res = []
-        if self.getPortalTypeName() == 'Division':
-            for proprietary in self.getProprietaries():
-                res.append(proprietary.getName1())
-                res.append(proprietary.getName2())
-                res.append(proprietary.getNationalRegister())
-        else:
-            for applicant in self.getApplicants():
-                res.append(applicant.getName1())
-                res.append(applicant.getName2())
-                res.append(applicant.getNationalRegister())
+        for applicant in self.getApplicants():
+            res.append(applicant.getName1())
+            res.append(applicant.getName2())
+            res.append(applicant.getNationalRegister())
         return res
 
     security.declarePublic('parcelInfosIndex')

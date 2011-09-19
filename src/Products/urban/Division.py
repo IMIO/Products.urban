@@ -26,6 +26,7 @@ from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from zope.i18n import translate
 from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
@@ -93,10 +94,11 @@ schema = Schema((
             label_msgid='urban_label_notaryContact',
             i18n_domain='urban',
         ),
-        allowed_types= ('Notary',),
-        schemata='urban_description',
-        relationship="notary",
         required=True,
+        schemata='urban_description',
+        multiValued=True,
+        relationship="notary",
+        allowed_types= ('Notary',),
     ),
     LinesField(
         name='folderZone',
@@ -113,13 +115,14 @@ schema = Schema((
     TextField(
         name='folderZoneDetails',
         allowable_content_types=('text/plain',),
+        default_content_type='text/plain',
         widget=TextAreaWidget(
             label='Folderzonedetails',
             label_msgid='urban_label_folderZoneDetails',
             i18n_domain='urban',
         ),
         default_output_type='text/html',
-        default_content_type='text/plain',
+        schemata='urban_description',
     ),
     TextField(
         name='comments',
@@ -236,12 +239,27 @@ class Division(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         """
            Update the title to set a clearly identify the buildlicence
         """
-        if self.getProprietaries():
-            proprietary = self.getProprietaries()[0].getName1() + " " + self.getProprietaries()[0].getName2()
+        notary = ''
+        applicant = ''
+        if self.getApplicants():
+            applicant = unicode(self.getApplicants()[0].Title(), 'utf-8')
         else:
-            proprietary = "No proprietary defined"
-        title = str(self.getReference())+ " - " +self.getDivisionSubject() + " - " + proprietary
-        self.setTitle(str(title))
+            applicant = translate('no_applicant_defined', 'urban', context=self.REQUEST)
+        if self.getNotaryContact():
+            notary = unicode(self.getNotaryContact()[0].Title(), 'utf-8')
+        else:
+            notary = translate('no_notary_defined', 'urban', context=self.REQUEST)
+
+        #do not use '%s - %s - %s' type notation as it could raise UnicodeDecodeErrors...
+        if applicant and notary:
+            title = str(self.getReference())+ " - " + applicant + " - " + notary
+        elif applicant:
+            title = str(self.getReference())+ " - " + applicant
+        elif notary:
+            title = str(self.getReference())+ " - " + notary
+        else:
+            title = str(self.getReference())
+        self.setTitle(title)
         self.reindexObject()
 
     security.declarePublic('constructPortalMessage')
@@ -250,26 +268,26 @@ class Division(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
            Return a supplementary portal message
         """
         parcels = self.getParcels()
-        proprietaries = self.getProprietaries()
+        applicants = self.getApplicants()
         messages=[]
         parcel_message = "warning_add_a_parcel"
-        proprietary_message = "warning_add_a_proprietary"
+        applicant_message = "warning_add_an_applicant"
         if not parcels:
             #we warn the user that no parcel have been added...
             messages.append(parcel_message)
-        if not proprietaries:
+        if not applicants:
             #we warn the user that no applicant have been added...
-            messages.append(proprietary_message)
+            messages.append(applicant_message)
         return messages
 
-    security.declarePublic('getProprietaries')
-    def getProprietaries(self):
+    security.declarePublic('getApplicants')
+    def getApplicants(self):
         """
-           Return the list of applicants for the Licence
+           Return the list of applicants for the Division
         """
         res = []
         for obj in self.objectValues('Contact'):
-            if obj.portal_type == 'Proprietary':
+            if obj.portal_type == 'Applicant':
                 res.append(obj)
         return res
 
@@ -291,6 +309,12 @@ class Division(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             return additionalLayersFolder.objectValues('Layer')
         except AttributeError:
             return None
+
+    def getLastDeposit(self):
+        return self._getLastEvent(interfaces.IDepositEvent)
+
+    def getLastTheLicence(self):
+        return self._getLastEvent(interfaces.ITheLicenceEvent)
 
 
 

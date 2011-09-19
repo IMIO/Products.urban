@@ -142,6 +142,13 @@
     Migration to use workLocations DataGridField instead of workLocation objects
  </import-step>
  <import-step
+    id="urban-migrationProprietaryToContact"
+    handler="Products.urban.profiles.migrations.migrate.migrationProprietaryToContact"
+    title="Migrate the Contact with portal_type Proprietary to Contact with portal_type Applicant"
+    version="2011-10-19T16:00.0">
+    Migrate the Contact with portal_type Proprietary to Contact with portal_type Applicant
+ </import-step>
+ <import-step
     id="urban-migrateLayersForMapfish"
     handler="Products.urban.profiles.migrations.migrate.migrateLayersForMapfish"
     title="Removes useless layers and change format option"

@@ -215,7 +215,6 @@ class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         if not applicants:
             #we warn the user that no applicant have been added...
             messages.append(applicant_message)
-
         return messages
 
     security.declarePublic('getApplicants')
