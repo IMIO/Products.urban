@@ -1240,7 +1240,8 @@ def setupExtra(context):
     else:
         additional_layers = portal_urban.additional_layers
 
-    if not hasattr(aq_base(additional_layers), 'ppnc'):
+    if False:
+    #if not hasattr(aq_base(additional_layers), 'ppnc'):
         if portal_urban.getMapExtent():
             (xmin, ymin, xmax, ymax) = portal_urban.getMapExtent().split(',')
             already_ppnc = False
@@ -1267,10 +1268,10 @@ def setupExtra(context):
         else:
             logger.error("Additional layer '%s' not added because the mapExtent is not defined in portal_urban"%'ppnc')
     if not hasattr(aq_base(additional_layers), 'batiments'):
-        additional_layers.invokeFactory("Layer",id="batiments",title=u"Bâtiments",layers="urban%s:cabu" % nis,SRS="ESPG:31370",transparent=True,visibility=True)
+        additional_layers.invokeFactory("Layer",id="batiments",title=u"Bâtiments",layers="urban%s:cabu" % nis,SRS="ESPG:31370",transparent=True,visibility=True, layerFormat="image/png")
         logger.info("Additional layer '%s' added"%'batiments')
     if not hasattr(aq_base(additional_layers), 'num_maisons'):
-        additional_layers.invokeFactory("Layer",id="num_maisons",title=u"N° de maison",layers="urban%s:canu" % nis,styles="HousesNum",SRS="ESPG:31370",transparent=True,visibility=True)
+        additional_layers.invokeFactory("Layer",id="num_maisons",title=u"N° de maison",layers="urban%s:canu" % nis,styles="HousesNum",SRS="ESPG:31370",transparent=True,visibility=True, layerFormat="image/png")
         logger.info("Additional layer '%s' added"%'num_maisons')
 
 ##/code-section FOOT

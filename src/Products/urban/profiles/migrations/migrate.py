@@ -58,6 +58,8 @@ def migrateToPlone4(context):
     migrateLicenceContainers(context)
     #Migration of Event objects to provides marker interfaces
     provideEventMarkerInterfaces(context)
+    #Migration of Layers
+    migrateLayersForMapfish(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -795,3 +797,17 @@ def provideEventMarkerInterfaces(context):
             alsoProvides(event, interface)
             event.reindexObject(['object_provides'])
     logger.info("Migrating Specific Event interfaces: done!")
+
+def migrateLayersForMapfish(context):
+    """
+      Removes useless layers and change format option
+    """
+    portal = context.getSite()
+    brains = portal.portal_catalog.searchResults(portal_type='Layer') 
+    for brain in brains:
+        layer = brain.getObject()
+        if brain.id.startswith('ppnc'):
+            layer.aq_inner.aq_parent.manage_delObjects(brain.id)
+            continue
+        if not layer.getLayerFormat():
+            layer.setLayerFormat('image/png')

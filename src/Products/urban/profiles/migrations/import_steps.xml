@@ -141,4 +141,11 @@
     version="2011-09-14T11:00.0">
     Migration to use workLocations DataGridField instead of workLocation objects
  </import-step>
+ <import-step
+    id="urban-migrateLayersForMapfish"
+    handler="Products.urban.profiles.migrations.migrate.migrateLayersForMapfish"
+    title="Removes useless layers and change format option"
+    version="2011-09-14T11:00.0">
+    Removes useless layers and change format option
+ </import-step>
 </import-steps>
