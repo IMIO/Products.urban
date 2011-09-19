@@ -1,9 +1,9 @@
 from Acquisition import aq_inner
 from Products.Five import BrowserView
 
-class UrbanCertificateOneView(BrowserView):
+class DivisionView(BrowserView):
     """
-      This manage the view of UrbanCertificateOne
+      This manage the view of Division
     """
     def getReceiptDate(self):
         """
@@ -35,7 +35,7 @@ class UrbanCertificateOneView(BrowserView):
                }
         return dict
 
-class UrbanCertificateOneMacros(BrowserView):
+class DivisionMacros(BrowserView):
     """
-      This manage the macros of UrbanCertificateOne
+      This manage the macros of Division
     """

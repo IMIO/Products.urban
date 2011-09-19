@@ -7,12 +7,12 @@
 <metal:main fill-slot="main">
 <metal:main_macro define-macro="main">
     <metal:body define-macro="body_macro" 
-                tal:define="applicants context/getApplicants;
-                            useTabbing python: context.portal_urban.getUseTabbing();
+                tal:define="useTabbing python: context.portal_urban.getUseTabbing();
                             tool python: context.portal_urban;
-                            parcels context/getParcels;">
+                            parcels context/getParcels;
+                            applicants context/getApplicants;">
 
-<tal:block condition="python: not parcels or not applicants">
+<tal:block condition="not: parcels|not: applicants">
  <div metal:use-macro="here/urban_macros/macros/urbanPortalMessageMacro" />
 </tal:block>
 <h1 class="documentFirstHeading">
@@ -22,9 +22,9 @@
 
 <div id="urbanViewWithTabbing" tal:condition="useTabbing">
 <dl class="formTabs enableFormTabbing">
-<dt class="formTab" tal:attributes="class python: context.getApplicants() and 'formTab' or 'formTab notify'" id="fieldsetlegend-urban_description" i18n:domain="plone" i18n:translate="label_schema_urban_description"><span>Description</span></dt>
+<dt class="formTab" id="fieldsetlegend-urban_description" i18n:domain="plone" i18n:translate="label_schema_urban_description"><span>Description</span></dt>
 <dd id="fieldset-urban_description">
- <metal:listing use-macro="here/declaration_macros/macros/declarationDescriptionMacro" />
+ <metal:listing use-macro="context/@@division-macros/descriptionMacro" />
 </dd>
  
 <dt class="formTab" id="fieldsetlegend-urban_events" i18n:domain="plone" i18n:translate="label_schema_urban_events"><span>Events</span></dt>
@@ -37,7 +37,7 @@
 
 <div tal:condition="not: useTabbing">
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_description">Description</legend></strong>
- <metal:description use-macro="here/declaration_macros/macros/declarationDescriptionMacro" />
+ <metal:description use-macro="context/@@division-macros/descriptionMacro" />
 </fieldset>
 
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_events">Events</legend></strong>

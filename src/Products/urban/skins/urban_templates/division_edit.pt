@@ -3,45 +3,47 @@
       i18n:domain="urban">
 
 <body>
-
-<div metal:define-macro="body" >
+<div metal:define-macro="body">
 
 <metal:base_body use-macro="base_macros/body">
 
-<div metal:fill-slot="widgets"
+<metal:widgets fill-slot="widgets"
            tal:define="global body_onload string: init();
-                       member python: context.portal_membership.getAuthenticatedMember();
+                       member context/@@plone_portal_state/member; 
                        border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
-                       dummy python:request.set(border, 1)">
-            <metal:myfield use-macro="python:here.widget('notaryContact', mode='edit')" />           
-            <metal:myfield use-macro="python:here.widget('divisionSubject', mode='edit')" />
-            <metal:myfield use-macro="python:here.widget('comments', mode='edit')" />
-            <metal:myfield use-macro="python:here.widget('foldermanagers', mode='edit')" />
-            <metal:myfield use-macro="python:here.widget('reference', mode='edit')" />
+                       dummy python:request.set(border, 1);
+                       useTabbing python: context.portal_urban.getUseTabbing();
+                       putils context/plone_utils">
 
-            <fieldset><strong><legend i18n:translate="legend_situation">Situation</legend></strong>
-             <table cellspacing=0 cellpadding=0 width=100%>
-              <tr>
-               <td colspan=2>
-                <metal:myfield use-macro="python:here.widget('workLocations', mode='edit')" />
-               </td>
-              </tr>
-             </table>
-             <br />
-             <metal:myfield use-macro="python:here.widget('folderZone', mode='edit')" />
-            </fieldset>
+        <div tal:condition="not: useTabbing">
+              <tal:fieldsets repeat="fieldset python: ['urban_description',]">
+                <fieldset>
+                  <legend tal:content="python: view.getTranslatedSchemaLabel(fieldset)"
+                          i18n:translate="" />
+                  <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=True)">
+                   <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
+                  </tal:fields>
+                </fieldset>
+              </tal:fieldsets>
+        </div>
 
-</div>
+        <tal:with_tabbing condition="useTabbing">
+              <tal:fieldsets repeat="fieldset python: ['urban_description',]">
+                <fieldset class="urbanEditWithTabbing" tal:define="fieldsetid python:putils.normalizeString(fieldset)"
+                        tal:attributes="id string:fieldset-${fieldsetid}">
+                  <legend id="#"
+                          tal:content="python: view.getTranslatedSchemaLabel(fieldset)"
+                          tal:attributes="id string:fieldsetlegend-${fieldsetid}"
+                          i18n:translate="" />
+                  <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=True)">
+                   <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
+                  </tal:fields>
+                </fieldset>
+              </tal:fieldsets>
+            </tal:with_tabbing>
+</metal:widgets>
 </metal:base_body>
 </div>
 
 </body>
 </html>
-
-
-
-
-
-
-
-

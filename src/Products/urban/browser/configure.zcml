@@ -76,6 +76,22 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IDivision"
+     name="divisionview"
+     class=".divisionview.DivisionView"
+     template="templates/divisionview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="division-macros"
+     for="Products.urban.interfaces.IDivision"
+     class=".divisionview.DivisionMacros"
+     template="templates/divisionmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IInquiryEvent"
      name="urbaneventview"
      class=".urbaneventviews.UrbanEventInquiryView"

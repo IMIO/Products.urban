@@ -30,21 +30,20 @@
 <h1 class="documentFirstHeading" i18n:translate="search_parcels"></h1>
 <div tal:replace="structure provider:plone.belowcontenttitle" />
 
-<!-- Back to the build licence... -->
-<a href=""
-    class="link-parent"
-    tal:define="licence_url here/absolute_url"
-    tal:attributes="href licence_url"
-    i18n:translate="back_to_licence">
-    Go back to the licence
-</a>
+<tal:comment replace="nothing">Back to the build licence...</tal:comment>
+<metal:listing use-macro="here/urban_macros/macros/goUpOneLevelMacro" />
+<br />
 
 <!-- Display the list of already added parcels -->
-<fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
- <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
+<fieldset><b><legend i18n:translate="concerned_parcels">Concerned parcels</legend></b>
+<div tal:define="tool python: context.portal_urban;
+                 batch python: tool.queryCatalog(batch=True, specificSearch='searchPortionOuts', context=context, theObjects=False, batchlen=50);                     
+                 showActions python: True;
+                 showedCols python: ('Title',);">
+ <metal:listing use-macro="here/urban_macros/macros/listing" />
+</div>
 </fieldset>
 
-<!-- On crée un forumlaire html simple avec les critères de recherche adéquats. -->
 <fieldset><b><legend i18n:translate="">Search parcel(s)</legend></b>
 <form action="" method="GET">
 <table class="listing">
