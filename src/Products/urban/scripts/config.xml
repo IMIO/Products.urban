@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config>
 <Object name="Misc">
-      <Item name="Date (délivré le ...)">
-        <FieldCode>
-            urbanEventObj.getFormattedDate(forDelivery=True)
-        </FieldCode>
-     </Item>
      <Item name="Commune">
         <FieldCode>
             tool.getCityName(prefixed=True) OK
+        </FieldCode>
+     </Item>
+     <Item name="Date de prorogation">
+        <FieldCode>
+            self.getProrogatedToDate() OK
         </FieldCode>
      </Item>
 </Object>
@@ -209,12 +209,12 @@
     </Item>
     <Item name="Fax">
         <FieldCode>
-            self.getFoldermanagers().getFax()
+            self.getFoldermanagers().getFax() OK
         </FieldCode>        
     </Item>
     <Item name="Email">
         <FieldCode>
-            self.getFoldermanagers().getEmail()
+            self.getFoldermanagers().getEmail() OK
         </FieldCode>        
     </Item>
     <Item name="Initials">
@@ -245,6 +245,11 @@
         <FieldCode>
             urbanEventObj.getFormattedDate(withCityNamePrefix=True) OK
         </FieldCode>        
+    </Item>
+    <Item name="Date (délivré le ...)">
+        <FieldCode>
+            urbanEventObj.getFormattedDate(forDelivery=True) OK
+        </FieldCode>
     </Item>
     <Item name="Date de réception">
         <FieldCode>
@@ -362,6 +367,11 @@
             self.getLicenceSubject() OK
         </FieldCode>        
     </Item>
+    <Item name="Nature des travaux">
+        <FieldCode>
+            self.getWorkType() OK
+        </FieldCode>        
+    </Item>
     <Item name="Délai de réponse annoncé">
         <FieldCode>
             self.getAnnoncedDelay() OK
@@ -376,6 +386,19 @@
         <FieldCode>
             self.displayValue(self.Vocabulary('derogation')[0], self.getDerogation())
         </FieldCode>        
+    </Item>
+    <Item name="Prescriptions techniques relatives à la voirie et aux équipements">
+        <AnnotationCode>
+            do text
+from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getEquipmentAndRoadRequirements()))
+        </AnnotationCode>        
+    </Item>
+    <Item name="Remarques techniques">
+        <AnnotationCode>
+            do text
+from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getTechnicalRemarks()))
+        </AnnotationCode>        
+    </Item>
 
 </Object>
 
@@ -415,11 +438,23 @@
             self.getDeclarationSubject()
         </FieldCode>        
     </Item>
+    <Item name="Article CWATUPE">
+        <FieldCode>
+            self.displayValue(self.Vocabulary('article')[0], self.getArticle())
+        </FieldCode>        
+    </Item>    
     <Item name="Numéro article">
         <FieldCode>
             getattr(self.portal_urban.declaration.articles, self.getArticle()).getTermKeyStr()
         </FieldCode>        
     </Item>    
+    <Item name="Texte de l'article">
+        <FieldCode>
+            do text
+from xhtml(self.getArticle(theObject=True).Description())
+        </FieldCode>        
+    </Item>    
+
 </Object>
  
  <Object name="Bien">    
