@@ -40,14 +40,8 @@
 </a>
 
 <!-- Display the list of already added parcels -->
-<fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcels</legend></strong>
-<div tal:define="tool python: getattr(context, 'portal_urban');
-                 topic python: getattr(tool.topics, 'searchportionsout');
-                 path_crit python: getattr(topic, 'crit__path_ATPathCriterion');
-                 dummy python: context.setPathCritValue(path_crit, context.UID());
-                 showActions python: True;">
- <metal:listing use-macro="here/urban_macros/macros/listing" />
-</div>
+<fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
+ <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
 </fieldset>
 
 <!-- On crée un forumlaire html simple avec les critères de recherche adéquats. -->

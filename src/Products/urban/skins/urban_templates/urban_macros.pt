@@ -636,14 +636,14 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
  <table tal:define="member context/@@plone_portal_state/member;" cellspacing=0 cellpadding=0 width=100%>
   <tr>
    <td>
-   <div class="#" tal:attributes="class python: test(parcels, 'field', 'field warning')">
+   <div class="#" tal:define="parcels parcels|context/getParcels" tal:attributes="class python: test(parcels, 'field', 'field warning')">
     <div tal:condition="not: parcels" i18n:translate="warning_add_a_parcel">You must encode concerned parcel(s)
     </div>
     <div tal:define="tool python: context.portal_urban;
                      batch python: tool.queryCatalog(batch=True, specificSearch='searchPortionOuts', context=context, theObjects=False, batchlen=50);                     
                      showActions python: True;
                      showedCols python: ('Title',);">
-    <metal:listing use-macro="here/urban_macros/macros/listing" />
+     <metal:listing use-macro="here/urban_macros/macros/listing" />
     </div>
      <form tal:condition="python: member.has_permission('urban: Add PortionOut', context)" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/checkPortionsOutSearch'" action="checkPortionsOutSearch" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('PortionOut')">
       <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
