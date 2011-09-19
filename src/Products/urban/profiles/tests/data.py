@@ -441,7 +441,7 @@ urbanEventTypes = {
                     'activatedFields': [],
                     'deadLineDelay': 15,
                     'podTemplates': (
-                                     {'id': "cu1-lettre-notaire", 'title': "Lettre au notaire (octroi)"},
+                                     {'id': "cu1-lettre-notaire", 'title': "Lettre au notaire (ou demandeur) (octroi)"},
                                      {'id': "cu1-certif", 'title': "Certificat d'urbanisme 1"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',

@@ -5,7 +5,7 @@
     id="urban-Hide-Tools-From-Navigation" 
     handler="Products.urban.setuphandlers.setupHideToolsFromNavigation"
     title="Hide Custom tools from Navigation for urban"
-    version="2011-09-15T11:47:29.158989">
+    version="2011-09-19T12:19:42.540744">
    <dependency step="urban-QI-dependencies"/>
    Hides custom tools from navigation tree for urban
  </import-step>
@@ -17,7 +17,7 @@
     id="urban-Update-RoleMappings" 
     handler="Products.urban.setuphandlers.updateRoleMappings"
     title="Update Workflow role mappings for urban"
-    version="2011-09-15T11:47:29.158989">
+    version="2011-09-19T12:19:42.540744">
    <dependency step="urban-QI-dependencies"/>
    updates the workflow role mappings for urban
  </import-step>
@@ -26,7 +26,7 @@
     id="urban-postInstall" 
     handler="Products.urban.setuphandlers.postInstall"
     title="manual coded post-install for urban"
-    version="2011-09-15T11:47:29.158989">
+    version="2011-09-19T12:19:42.540744">
    <dependency step="urban-QI-dependencies"/>
    manual coded post-install for urban
  </import-step>
