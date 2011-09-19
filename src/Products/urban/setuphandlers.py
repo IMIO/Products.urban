@@ -322,30 +322,6 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="reprisinventaire",title=u"repris à l'inventaire")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="archeologique",title=u"à l'Atlas archéologique")
 
-            #add Zones folder
-            newFolderid = configFolder.invokeFactory("Folder",id="folderzones",title=_("folderzones_folder_title", 'urban', context=site.REQUEST))
-            newFolder = getattr(configFolder, newFolderid)
-            newFolder.setConstrainTypesMode(1)
-            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="zh",title=u"zone d’habitat")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="zhcr",title=u"zone d’habitat à caractère rural")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="zspec",title=u"zone de services publics et d’équipements communautaires")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="zcet",title=u"zone de centre d'enfouissement technique")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="zl",title=u"zone de loisirs")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="zaem",title=u"zones d’activité économique mixte")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="zaei",title=u"zones d’activité économique industrielle")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="zaesae",title=u"zones d’activité économique spécifique agro-économique")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="zaesgd",title=u"zones d’activité économique spécifique grande distribution")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="ze",title=u"zone d’extraction")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="zadci",title=u"zone d’aménagement différé à caractère industriel")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="za",title=u"zone agricole")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="zf",title=u"zone forestière")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="zev",title=u"zone d’espaces verts")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="zn",title=u"zone naturelle")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="zp",title=u"zone de parc")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="znatura2000",title=u"zone Natura 2000")
-
             #add investigation articles folder
             #this is done by a method because the migrateBuildLicencesInvestigationArticles
             #migration step will use it too
@@ -738,6 +714,31 @@ def addGlobalFolders(context):
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['City'])
         newFolder.setImmediatelyAddableTypes(['City'])
+
+        #add Zones folder
+    if not hasattr(tool, "folderzones"):
+        newFolderid = tool.invokeFactory("Folder",id="folderzones",title=_("folderzones_folder_title", 'urban', context=site.REQUEST))
+        newFolder = getattr(tool, newFolderid)
+        newFolder.setConstrainTypesMode(1)
+        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zh",title=u"zone d’habitat")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zhcr",title=u"zone d’habitat à caractère rural")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zspec",title=u"zone de services publics et d’équipements communautaires")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zcet",title=u"zone de centre d'enfouissement technique")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zl",title=u"zone de loisirs")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zaem",title=u"zones d’activité économique mixte")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zaei",title=u"zones d’activité économique industrielle")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zaesae",title=u"zones d’activité économique spécifique agro-économique")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zaesgd",title=u"zones d’activité économique spécifique grande distribution")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="ze",title=u"zone d’extraction")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zadci",title=u"zone d’aménagement différé à caractère industriel")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="za",title=u"zone agricole")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zf",title=u"zone forestière")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zev",title=u"zone d’espaces verts")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zn",title=u"zone naturelle")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zp",title=u"zone de parc")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="znatura2000",title=u"zone Natura 2000")
 
     #add the RCU folder
     if not hasattr(tool, "rcu"):

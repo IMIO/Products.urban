@@ -158,7 +158,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=True,
-        vocabulary=UrbanVocabulary('folderzones'),
+        vocabulary=UrbanVocabulary('folderzones', inUrbanConfig=False),
     ),
     TextField(
         name='folderZoneDetails',

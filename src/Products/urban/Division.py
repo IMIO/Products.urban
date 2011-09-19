@@ -39,6 +39,48 @@ optional_fields = []
 
 schema = Schema((
 
+    StringField(
+        name='title',
+        widget=StringField._properties['widget'](
+            label='Title',
+            label_msgid='urban_label_title',
+            i18n_domain='urban',
+        ),
+        required=True,
+        schemata='urban_description',
+        accessor="Title",
+    ),
+    StringField(
+        name='divisionSubject',
+        widget=StringField._properties['widget'](
+            label='Divisionsubject',
+            label_msgid='urban_label_divisionSubject',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+    ),
+    StringField(
+        name='reference',
+        widget=StringField._properties['widget'](
+            label='Reference',
+            label_msgid='urban_label_reference',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        default_method="getDefaultReference",
+    ),
+    DataGridField(
+        name='workLocations',
+        schemata='urban_description',
+        widget=DataGridWidget(
+            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False)),},
+            label='Worklocations',
+            label_msgid='urban_label_workLocations',
+            i18n_domain='urban',
+        ),
+        allow_oddeven=True,
+        columns=('number', 'street'),
+    ),
     ReferenceField(
         name='notaryContact',
         widget=ReferenceBrowserWidget(
@@ -56,35 +98,28 @@ schema = Schema((
         relationship="notary",
         required=True,
     ),
-    StringField(
-        name='title',
-        widget=StringField._properties['widget'](
-            label='Title',
-            label_msgid='urban_label_title',
+    LinesField(
+        name='folderZone',
+        widget=MultiSelectionWidget(
+            size=10,
+            label='Folderzone',
+            label_msgid='urban_label_folderZone',
             i18n_domain='urban',
         ),
-        required=True,
         schemata='urban_description',
-        accessor="Title",
+        multiValued=True,
+        vocabulary=UrbanVocabulary('folderzones', inUrbanConfig=False),
     ),
-    StringField(
-        name='reference',
-        widget=StringField._properties['widget'](
-            label='Reference',
-            label_msgid='urban_label_reference',
+    TextField(
+        name='folderZoneDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Folderzonedetails',
+            label_msgid='urban_label_folderZoneDetails',
             i18n_domain='urban',
         ),
-        schemata='urban_description',
-        default_method="getDefaultReference",
-    ),
-    StringField(
-        name='divisionSubject',
-        widget=StringField._properties['widget'](
-            label='Divisionsubject',
-            label_msgid='urban_label_divisionSubject',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
+        default_output_type='text/html',
+        default_content_type='text/plain',
     ),
     TextField(
         name='comments',
@@ -97,29 +132,6 @@ schema = Schema((
         default_content_type='text/html',
         schemata='urban_description',
         default_output_type='text/html',
-    ),
-    StringField(
-        name='folderZone',
-        widget=SelectionWidget(
-            label='Folderzone',
-            label_msgid='urban_label_folderZone',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-        multiValued=True,
-        vocabulary=UrbanVocabulary('folderzones'),
-    ),
-    DataGridField(
-        name='workLocations',
-        schemata='urban_description',
-        widget=DataGridWidget(
-            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False)),},
-            label='Worklocations',
-            label_msgid='urban_label_workLocations',
-            i18n_domain='urban',
-        ),
-        allow_oddeven=True,
-        columns=('number', 'street'),
     ),
     ReferenceField(
         name='foldermanagers',
@@ -154,6 +166,7 @@ Division_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 Division_schema['title'].searchable = True
 Division_schema['title'].required = False
+Division_schema['title'].widget.visible = False
 ##/code-section after-schema
 
 class Division(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
@@ -247,7 +260,6 @@ class Division(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         if not proprietaries:
             #we warn the user that no applicant have been added...
             messages.append(proprietary_message)
-
         return messages
 
     security.declarePublic('getProprietaries')
