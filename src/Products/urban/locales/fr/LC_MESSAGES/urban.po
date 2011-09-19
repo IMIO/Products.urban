@@ -70,6 +70,9 @@ msgstr "Coordonnées du géomètre"
 msgid "Licence state"
 msgstr "Etat du permis"
 
+msgid "Map"
+msgstr "Carte"
+
 msgid "Notary data"
 msgstr "Coordonnées du notaire"
 

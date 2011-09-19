@@ -52,10 +52,6 @@ msgstr "Géomètre"
 msgid "Locality"
 msgstr "Lieu-dit"
 
-# map.cpt
-msgid "Map"
-msgstr "Carte"
-
 msgid "Notary"
 msgstr "Notaire"
 

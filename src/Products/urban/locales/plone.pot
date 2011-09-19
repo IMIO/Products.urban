@@ -173,10 +173,6 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#map.cpt
-msgid "Map"
-msgstr ""
-
 #indexes/metadata
 msgid "getBeginDate"
 msgstr ""

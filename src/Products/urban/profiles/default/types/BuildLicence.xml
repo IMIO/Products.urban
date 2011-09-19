@@ -53,13 +53,4 @@
          visible="True">
   <permission value="Modify portal content"/>
  </action>
- <action title="Map" 
-         i18n:attributes="title"
-         action_id="map"
-         category="object" 
-         condition_expr="python:1"
-         url_expr="string:${object_url}/map" 
-         visible="True">
-  <permission value="View"/>
- </action>
 </object>
