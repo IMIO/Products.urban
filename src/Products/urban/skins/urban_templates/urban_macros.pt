@@ -261,7 +261,8 @@
  </div>
  <div tal:define="tool python: context.portal_urban;
                   Batch python:modules['Products.CMFPlone'].Batch;
-                  batch python: Batch(context.getApplicants(), 20);
+                  b_start request/b_start|python:0;
+                  batch python: Batch(context.getApplicants(), 20, b_start);
                   showedCols python: ('Title', );
                   colsLabels python: {'Title': 'applicant_data'};
                   showActions python: True;">

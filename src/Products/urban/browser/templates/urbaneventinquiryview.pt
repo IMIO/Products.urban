@@ -104,7 +104,8 @@
          </table>
           <div tal:define="tool python: context.portal_urban;
                            Batch python:modules['Products.CMFPlone'].Batch;
-                           batch python: Batch(claimants, 25);
+                           b_start request/b_start|python:0;
+                           batch python: Batch(claimants, 25, b_start);
                            showedCols python: ('Title', );
                            colsLabels python: {'Title': 'claimant_data'};
                            showActions python: True;">
@@ -117,7 +118,9 @@
 </table>
 
 <tal:block condition="python: member.has_permission('Modify portal content', context) and linkedUrbanEventType.getSpecialFunctionName()">
- <a tal:attributes="href linkedUrbanEventType/getSpecialFunctionUrl" tal:content="linkedUrbanEventType/getSpecialFunctionName"/><br><br>
+ <fieldset><strong><legend i18n:translate="event_inquiry_special_function">Claimants</legend><strong>
+  <a tal:attributes="href linkedUrbanEventType/getSpecialFunctionUrl" tal:content="linkedUrbanEventType/getSpecialFunctionName"/><br><br>
+ </fieldset>
 </tal:block>
 
 <tal:block condition="recipients">
@@ -133,25 +136,13 @@
     </table>
     <div tal:define="tool python: context.portal_urban;
                      Batch python:modules['Products.CMFPlone'].Batch;
-                     batch python: Batch(recipients, 25);
+                     b_start request/b_start|python:0;
+                     batch python: Batch(recipients, 50, b_start);
                      showedCols python: ('name', 'adr1', 'street',);
                      showActions python: True;">
      <metal:listing use-macro="here/urban_macros/macros/listing" />
     </div>
 </tal:block>
-
-<tal:carto condition="recipients">
-<center>
-<br /><br />
-   <table border=0 width=100%>
-       <tr>
-           <td width=70%><div id="map" class="smallmap"></div></td>
-           <td width=30%><IFRAME name="prcinfosframe" src="" width=400 height=500 scrolling=auto frameborder=0 > </IFRAME></td>
-       </tr>
-   </table>
-</center>
-<br><br>
-</tal:carto>
 
 <tal:block condition="python: context.REQUEST.get('doc_uid') != None">
 <tal:block define="docObj python:context.uid_catalog(UID=context.REQUEST.get('doc_uid'))[0]">
