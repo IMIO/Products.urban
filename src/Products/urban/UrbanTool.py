@@ -1538,7 +1538,13 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             res = portal_catalog(portal_type='Geometrician', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')
         elif specificSearch == 'searchPortionOuts':
             #search the existing parcels
-            res = portal_catalog(portal_type='PortionOut', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')
+            #we can search existing parcels on a licence (directly contained)
+            if context.portal_type in URBAN_TYPES:
+                depth = 1
+            #or on an UrbanEventInquiry where parcels are contained in RecipientCadastre
+            else:
+                depth = 2
+            res = portal_catalog(portal_type='PortionOut', path={'query': '/'.join(context.getPhysicalPath()), 'depth': depth}, sort_on='getObjPositionInParent')
         elif specificSearch == 'searchClaimants':
             #search the existing claimants
             res = portal_catalog(portal_type='Claimant', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')
