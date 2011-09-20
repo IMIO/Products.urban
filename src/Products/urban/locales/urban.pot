@@ -841,25 +841,13 @@ msgstr ""
 msgid "search_parcels"
 msgstr ""
 
-msgid "searcharchitects"
-msgstr ""
-
 msgid "searchequipments"
-msgstr ""
-
-msgid "searchgeometricians"
 msgstr ""
 
 msgid "searchlinkeddocuments"
 msgstr ""
 
 msgid "searchlots"
-msgstr ""
-
-msgid "searchnotaries"
-msgstr ""
-
-msgid "searchportionsout"
 msgstr ""
 
 msgid "simple-map_title"

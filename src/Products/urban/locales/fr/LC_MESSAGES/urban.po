@@ -842,26 +842,14 @@ msgstr "Derniers éléments"
 msgid "search_parcels"
 msgstr "Ajouter une parcelle"
 
-msgid "searcharchitects"
-msgstr "Les architectes"
-
 msgid "searchequipments"
 msgstr "Les équipements"
-
-msgid "searchgeometricians"
-msgstr "Les géomètres"
 
 msgid "searchlinkeddocuments"
 msgstr "Recherche dynamique des documents liés à un événement"
 
 msgid "searchlots"
 msgstr "Les lots"
-
-msgid "searchnotaries"
-msgstr "Les notaires"
-
-msgid "searchportionsout"
-msgstr "Recherche dynamique des parcelles sur un permis"
 
 msgid "simple-map_title"
 msgstr "Carte simple"
