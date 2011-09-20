@@ -7,6 +7,11 @@ import psycopg2.extras
 import sys
 import time
 
+urbanmap_dir = '/home/srv/urbanmap/urbanMap'
+config_dir = os.path.join(urbanmap_dir, 'config')
+pylon_instances_file = os.path.join(config_dir, 'pylon_instances.txt')
+pg_address = '62.58.108.100:5432'
+
 def convertprc(prc):
    
     AZ=['A','B','C','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
@@ -184,7 +189,8 @@ allsteps = {
     'K' : 'altering table canu', 
     'L' : 'updating table canu', 
     'M' : 'adding views', 
-    'N' : 'setting grants on db objects'
+    'N' : 'setting grants on db objects',
+    'O' : 'creating pylon config file',
 }
 run_steps = sorted(allsteps.keys())
 print "Starting at %s" % time.strftime('%H:%M:%S', time.localtime())
@@ -559,5 +565,54 @@ if step in run_steps:
     for rec in dict_cur.fetchall():
         std_cur.execute("GRANT SELECT, REFERENCES, TRIGGER ON TABLE %s TO %s;"%(rec['viewname'], databasename))
         conn.commit()
+
+step = 'O'
+if step in run_steps:
+    print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
+    if urbanmap_dir:
+        if not os.path.exists(urbanmap_dir):
+            print "Error: urbanmap dir '%s' not exists"%urbanmap_dir
+        else:
+            max_port = 5000
+            instance_exists = False
+            ini_file = '%s.ini'%databasename
+            if os.path.exists(os.path.join(config_dir, pylon_instances_file)):
+                ifile = open(os.path.join(config_dir, pylon_instances_file), 'r')
+                for line in ifile:
+                    line =  line.strip('\n')
+                    if not line: continue
+                    path, file, port = line.split(';')
+                    if os.path.join(path, 'config', file) == os.path.join(config_dir, ini_file):
+                        instance_exists = True
+                        max_port = int(port)
+                        break
+                    if port > max_port:
+                        max_port = int(port)
+                ifile.close()
+            if not max_port or not instance_exists:
+                max_port += 1
+            if not instance_exists:
+                ofile = open(pylon_instances_file, 'a')
+                ofile.write("%s;%s;%s\n"%(urbanmap_dir, ini_file, max_port))
+                ofile.close()
+            if not os.path.exists(os.path.join(config_dir, ini_file)):
+                std_cur.execute("select min(admnr) from da;")
+                rec = std_cur.fetchone()
+                if not rec:
+                    print "error when getting admnr from da"
+                else:
+                    INS = rec[0]
+                    ifile = open(os.path.join(config_dir, 'base.ini'))
+                    out = []
+                    for line in ifile:
+                        outline = line.replace('#PORT#', str(max_port))
+                        outline = outline.replace('#INS#', INS)
+                        outline = outline.replace('#SQLALCHEMYURL#', 'postgresql://%s:%s@%s/%s'%(databasename, databasename, pg_address, databasename))
+                        out.append(outline)
+                    ifile.close()
+                    ofile = open(os.path.join(config_dir, ini_file), 'w')
+                    for line in out:
+                        ofile.write(line)
+                    ofile.close()
 
 print "Ending at %s" % time.strftime('%H:%M:%S', time.localtime())
