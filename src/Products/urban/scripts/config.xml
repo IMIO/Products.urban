@@ -246,11 +246,6 @@
             urbanEventObj.getFormattedDate(withCityNamePrefix=True) 
         </FieldCode>        
     </Item>
-    <Item name="Date (délivré le ...)">
-        <FieldCode>
-            urbanEventObj.getFormattedDate(forDelivery=True) 
-        </FieldCode>
-    </Item>
     <Item name="Date de réception">
         <FieldCode>
             tool.formatDate(urbanEventObj.getReceiptDate()) 
@@ -294,6 +289,19 @@
            self.displayValue(self.Vocabulary('investigationArticles')[0], urbanEventObj.getLinkedInquiry().getInvestigationArticles()) 
         </FieldCode>        
     </Item>    
+    <Item name="Texte des réclamations (enquête)">
+        <AnnotationCode>
+            do text
+from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getLastInquiry().getClaimsText(withaddress=True,linebyline=True)))
+        </AnnotationCode>        
+    </Item>
+    <Item name="Texte des réclamations (réclamants)">
+        <AnnotationCode>
+            do text if urbanEventObj.getClaimants()
+from xhtml(urbanEventObj.getClaimsText())
+        </AnnotationCode>        
+    </Item>
+  
 </Object>
  
  <Object name="Permis de bâtir">    
@@ -385,6 +393,21 @@
     <Item name="Demande de dérogation">
         <FieldCode>
             self.displayValue(self.Vocabulary('derogation')[0], self.getDerogation())
+        </FieldCode>        
+    </Item>
+    <Item name="Date du récépissé de la demande">
+        <FieldCode>
+            tool.formatDate(self.getLastDeposit().getEventDate())
+        </FieldCode>        
+    </Item>
+    <Item name="Date de l'accusé de réception de la demande">
+        <FieldCode>
+            tool.formatDate(self.getLastAcknowledgment().getEventDate())
+        </FieldCode>        
+    </Item>
+    <Item name="Date du dernier rapport de collège">
+        <FieldCode>
+            tool.formatDate(self.getLastCollegeReport().getEventDate())
         </FieldCode>        
     </Item>
     <Item name="Prescriptions techniques relatives à la voirie et aux équipements">
@@ -562,5 +585,27 @@ from xhtml(self.getArticle(theObject=True).Description())
         </FieldCode>        
     </Item>
 </Object>
- 
+
+<Object name="Boucles">
+    <Item name="Articles de l'enquête">
+        <AnnotationCode>
+            do section- for article in self.getInvestigationArticles()
+        </AnnotationCode>
+        <AnnotationCode>
+            do text
+from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getTerm('investigationarticles', article).getFormattedDescription()))
+        </AnnotationCode>
+    </Item>
+    <Item name="Demandes d'avis">
+        <AnnotationCode>
+            do section- for opinion in self.getAllOpinionRequestsNoDup()
+        </AnnotationCode>
+    </Item>
+    <Item name="Demandes d'avis (services techniques)">
+        <AnnotationCode>
+            do section- for opinion in self.getAllTechnicalServiceOpinionRequestsNoDup()
+        </AnnotationCode>
+    </Item>
+
+</Object> 
 </Config>
