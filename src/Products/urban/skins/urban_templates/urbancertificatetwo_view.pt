@@ -21,10 +21,6 @@
 <metal:main_macro define-macro="main">
 <metal:body define-macro="body_macro" tal:define="applicants context/getApplicants;">
 
-<tal:block condition="python: not parcels or not applicants">
- <div metal:use-macro="here/urban_macros/macros/urbanPortalMessageMacro" />
-</tal:block>
-
 <h1 class="documentFirstHeading">
  <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
  <span tal:replace="here/Title" tal:omit-tag="">Title</span>
