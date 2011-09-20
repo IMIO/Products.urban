@@ -603,30 +603,6 @@ def addGlobalFolders(context):
        ('path', 'ATPathCriterion', '', True),
     ), None, ['Title', 'CreationDate', 'Creator']
     ),
-    # Architects
-    # this will be used in the architects_folder_view
-    ( 'searcharchitects',
-    (  ('Type', 'ATPortalTypeCriterion', ['Architect',], ''),
-    ), None, ['Title', 'Creator']
-    ),
-    # Geometricians
-    # this will be used in the geometricians_folder_view
-    ( 'searchgeometricians',
-    (  ('Type', 'ATPortalTypeCriterion', ['Geometrician',], ''),
-    ), None, ['Title', 'Creator']
-    ),
-    # Notariespersons_t
-    # this will be used in the notaries_folder_view
-    ( 'searchnotaries',
-    (  ('Type', 'ATPortalTypeCriterion', ['Notary',], ''),
-    ), None, ['Title', 'Creator']
-    ),
-    # Existing parcels
-    ( 'searchportionsout',
-    (  ('Type', 'ATPortalTypeCriterion', ['PortionOut',], ''),
-       ('path', 'ATPathCriterion', '', False),
-    ), None, ['Title', 'CreationDate', 'Creator']
-    ),
     # Lots
     ( 'searchlots',
     (  ('Type', 'ATPortalTypeCriterion', ['Lot',], ''),

@@ -158,7 +158,7 @@ msgid "db_not_connected_error"
 msgstr "Une erreur est survenue avec la base de données.  Contactez votre administrateur système.  La base de données ne semble pas connectée."
 
 msgid "disable"
-msgstr "desactiver"
+msgstr "Désactiver"
 
 msgid "disabled"
 msgstr "Désactivé"
