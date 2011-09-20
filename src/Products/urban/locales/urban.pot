@@ -165,9 +165,6 @@ msgstr ""
 msgid "add_a_lot"
 msgstr ""
 
-msgid "add_a_proprietary"
-msgstr ""
-
 # urbanevent_view
 msgid "add_an_annex"
 msgstr ""
@@ -2265,9 +2262,6 @@ msgstr ""
 
 # error messages...
 msgid "warning_add_a_parcel"
-msgstr ""
-
-msgid "warning_add_a_proprietary"
 msgstr ""
 
 msgid "warning_add_an_applicant"

@@ -166,9 +166,6 @@ msgstr "Ajouter un réclamant"
 msgid "add_a_lot"
 msgstr "Ajouter un lot"
 
-msgid "add_a_proprietary"
-msgstr "Ajouter un propriétaire"
-
 # urbanevent_view
 msgid "add_an_annex"
 msgstr "Ajouter une annexe"
@@ -2270,9 +2267,6 @@ msgstr "Représentation cartographique"
 # error messages...
 msgid "warning_add_a_parcel"
 msgstr "Veuillez renseigner la ou les parcelles concernée(s)"
-
-msgid "warning_add_a_proprietary"
-msgstr "Veuillez renseigner le ou les propriétaire(s)"
 
 msgid "warning_add_an_applicant"
 msgstr "Veuillez renseigner le ou les demandeur(s)"
