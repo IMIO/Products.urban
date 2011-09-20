@@ -549,6 +549,9 @@ msgstr "Titre"
 msgid "label_colname_adr1"
 msgstr "Localité"
 
+msgid "label_colname_adr2"
+msgstr "Rue et numéro"
+
 msgid "label_colname_applicant_data"
 msgstr "Coordonnées du demandeur"
 

@@ -260,11 +260,11 @@
   You must encode applicant(s)
  </div>
  <div tal:define="tool python: context.portal_urban;
-                 Batch python:modules['Products.CMFPlone'].Batch;
-                 batch python: Batch(context.getApplicants(), 20);
-                 showedCols python: ('Title', );
-                 colsLabels python: {'Title': 'applicant_data'};
-                 showActions python: True;">
+                  Batch python:modules['Products.CMFPlone'].Batch;
+                  batch python: Batch(context.getApplicants(), 20);
+                  showedCols python: ('Title', );
+                  colsLabels python: {'Title': 'applicant_data'};
+                  showActions python: True;">
   <metal:listing use-macro="here/urban_macros/macros/listing" />
  </div>
  <form tal:define="ctype python: context.portal_types.getTypeInfo('Applicant');
