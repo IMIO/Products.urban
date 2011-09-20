@@ -237,3 +237,10 @@ msgstr ""
 
 msgid "The field does not exist !!!"
 msgstr ""
+
+# error messages...
+msgid "warning_add_a_parcel"
+msgstr ""
+
+msgid "warning_add_an_applicant"
+msgstr ""

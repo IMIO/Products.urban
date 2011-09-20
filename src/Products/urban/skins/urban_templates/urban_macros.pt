@@ -336,20 +336,6 @@
  </div>
 </div>
 
-<div metal:define-macro="urbanPortalMessageMacro" i18n:domain="urban">
-<tal:portalMessage define="messages context/constructPortalMessage">
-<dl class="portalMessage warning" tal:repeat="message messages">
-    <dt i18n:domain="plone" i18n:translate="">
-        Warning
-    </dt>
-    <dd tal:content="message"
-        i18n:translate="">
-        The status message.
-    </dd>
-</dl>
-</tal:portalMessage>
-</div>
-
 <tal:comment replace="nothing">
 Requires defined element "thisObject" as an object and
 can receive a "actionsToHide" list of actions not to display</tal:comment>

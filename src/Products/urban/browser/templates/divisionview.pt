@@ -12,9 +12,6 @@
                             parcels context/getParcels;
                             applicants context/getApplicants;">
 
-<tal:block condition="not: parcels|not: applicants">
- <div metal:use-macro="here/urban_macros/macros/urbanPortalMessageMacro" />
-</tal:block>
 <h1 class="documentFirstHeading">
  <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
  <span tal:replace="here/Title" tal:omit-tag="">Title</span>

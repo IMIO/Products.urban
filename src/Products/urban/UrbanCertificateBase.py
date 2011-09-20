@@ -296,24 +296,6 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultM
         """
         return self.objectValues('PortionOut')
 
-    security.declarePublic('constructPortalMessage')
-    def constructPortalMessage(self):
-        """
-           Return a supplementary portal message
-        """
-        parcels = self.getParcels()
-        applicants = self.getApplicants()
-        messages=[]
-        parcel_message = "warning_add_a_parcel"
-        applicant_message = "warning_add_an_applicant"
-        if not parcels:
-            #we warn the user that no parcel have been added...
-            messages.append(parcel_message)
-        if not applicants:
-            #we warn the user that no applicant have been added...
-            messages.append(applicant_message)
-        return messages
-
     def getLastDeposit(self):
         return self._getLastEvent(interfaces.IDepositEvent)
 

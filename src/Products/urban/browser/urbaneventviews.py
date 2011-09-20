@@ -52,6 +52,7 @@ class UrbanEventInquiryView(UrbanEventView):
       It is based on the default UrbanEventView
     """
     def __init__(self, context, request):
+        super(BrowserView, self).__init__(context, request)
         self.context = context
         self.request = request
         self.linkedInquiry = self.context.getLinkedInquiry()

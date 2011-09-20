@@ -236,6 +236,13 @@ msgstr "Retirer"
 msgid "retired"
 msgstr "Retiré"
 
+# error messages...
+msgid "warning_add_a_parcel"
+msgstr "Veuillez renseigner la ou les parcelle(s) concernée(s)"
+
+msgid "warning_add_an_applicant"
+msgstr "Veuillez renseigner le ou les demandeur(s)"
+
 msgid "workLocationStreet"
 msgstr "Rue"
 
