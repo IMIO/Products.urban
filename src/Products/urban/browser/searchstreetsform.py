@@ -60,17 +60,6 @@ def availableStreets(context):
     voc.sort()
     return SimpleVocabulary.fromValues(voc)
 
-class MyFinderSelectWidget(FinderSelectWidget):
-    """
-    A widget with a plone_finder link
-    for a Sequence field (tuple or list)
-    that could reference and upload files
-    """
-    template = ViewPageTemplateFile('templates/myfinderbase.pt')
-    finderlabel = (u'')
-    types = ['Street', 'Locality']
-    forcecloseoninsert = True
-
 class SearchStreetsForm(formbase.PageForm):
     form_fields = form.FormFields(ISearchStreetsForm)
     label = u"Recherche de documents par rue"
@@ -103,17 +92,20 @@ class SearchStreetsForm(formbase.PageForm):
         #thus, glance at each object if street id is included in this latter
         brains = catalog.searchResults(portal_type = typesToSearch)
         self.streetsFound = []
-
+        voc = UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False, browseHistoric=True)
+        voc = voc.getDisplayList(context)
+        UID = voc.getKey(data['streetSearch']) 
+        import pdb; pdb.set_trace()        
         for brain in brains:
             doc = brain.getObject()
             objs = doc.getWorkLocations()
             if objs:
                 for obj in objs:
-                    if (not data['streetSearch'] or obj['uid'] in  data['streetSearch']):
+                    if (not data['streetSearch'] or obj['street'] == UID):
                         self.streetsFound.append((doc.Title(), brain.getURL()))
             elif not data['streetSearch']:
                 self.streetsFound.append((doc.Title(), brain.getURL()))
 
         #for unclear reason base must be reinitialized before returning template
-        self.widgets['streetSearch'].base = self.streetsBase
+        #self.widgets['streetSearch'].base = self.streetsBase
         return self.template()
