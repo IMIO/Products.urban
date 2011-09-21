@@ -582,7 +582,7 @@ if step in run_steps:
                     line =  line.strip('\n')
                     if not line: continue
                     path, file, port = line.split(';')
-                    if os.path.join(path, 'config', file) == os.path.join(config_dir, ini_file):
+                    if os.path.join(path, 'config', file) == os.path.join(config_dir, databasename):
                         instance_exists = True
                         max_port = int(port)
                         break
@@ -593,7 +593,7 @@ if step in run_steps:
                 max_port += 1
             if not instance_exists:
                 ofile = open(pylon_instances_file, 'a')
-                ofile.write("%s;%s;%s\n"%(urbanmap_dir, ini_file, max_port))
+                ofile.write("%s;%s;%s\n"%(urbanmap_dir, databasename, max_port))
                 ofile.close()
             if not os.path.exists(os.path.join(config_dir, ini_file)):
                 std_cur.execute("select min(admnr) from da;")
