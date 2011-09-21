@@ -486,20 +486,23 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         response.redirect(urbanEventObj.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
 
     security.declarePublic('listVocabulary')
-    def listVocabulary(self, vocToReturn, context, vocType="UrbanVocabularyTerm", id_to_use="id", sort_on="getObjPositionInParent", inUrbanConfig=True):
+    def listVocabulary(self, vocToReturn, context, vocType="UrbanVocabularyTerm", id_to_use="id", sort_on="getObjPositionInParent", inUrbanConfig=True, browseHistoric=False):
         """
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
         """
         brains = self.listVocabularyBrains(vocToReturn, context, vocType,
-                sort_on, inUrbanConfig)
+                sort_on, inUrbanConfig, browseHistoric)
         res=[]
         for brain in brains:
-            res.append((getattr(brain, id_to_use),(brain.Title).decode('utf-8')))
+            title = brain.Title
+            if browseHistoric and brain.review_state == 'disabled':
+                title = '~~ %s ~~' % title
+            res.append((getattr(brain, id_to_use),(title).decode('utf-8')))
         return tuple(res)
 
     security.declarePrivate('listVocabularyBrains')
-    def listVocabularyBrains(self, vocToReturn, context, vocType="UrbanVocabularyTerm", sort_on="getObjPositionInParent", inUrbanConfig=True):
+    def listVocabularyBrains(self, vocToReturn, context, vocType="UrbanVocabularyTerm", sort_on="getObjPositionInParent", inUrbanConfig=True, browseHistoric=False):
         """
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
@@ -509,13 +512,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             vocPath = "%s/%s/%s" % ('/'.join(self.getPhysicalPath()), self.getUrbanConfig(context).getId(), vocToReturn)
         else:
             vocPath = "%s/%s" % ('/'.join(self.getPhysicalPath()), vocToReturn)
-        brains = self.portal_catalog(path=vocPath, sort_on="getObjPositionInParent", portal_type=vocType, review_state='enabled')
+        review_state='enabled'
+        if browseHistoric:
+            review_state=['enabled', 'disabled']
+        brains = self.portal_catalog(path=vocPath, sort_on="getObjPositionInParent", portal_type=vocType, review_state=review_state)
         return brains
 
     security.declarePrivate('listVocabularyObjects')
-    def listVocabularyObjects(self, vocToReturn, context, vocType="UrbanVocabularyTerm", id_to_use="id", inUrbanConfig=True):
-        brains = self.listVocabularyBrains(vocToReturn, context, vocType=vocType,
-                inUrbanConfig=inUrbanConfig)
+    def listVocabularyObjects(self, vocToReturn, context, vocType="UrbanVocabularyTerm", id_to_use="id", inUrbanConfig=True, browseHistoric=False):
+        brains = self.listVocabularyBrains(vocToReturn, context, vocType=vocType, inUrbanConfig=inUrbanConfig, browseHistoric=browseHistoric)
         res={}
         for brain in brains:
             res[getattr(brain, id_to_use)] = brain.getObject()

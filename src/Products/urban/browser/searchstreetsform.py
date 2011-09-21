@@ -28,6 +28,8 @@ from five.formlib import formbase
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from collective.plonefinder.widgets.referencewidget import FinderSelectWidget
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from zope.schema.vocabulary import SimpleVocabulary
 
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_inner
@@ -45,14 +47,20 @@ class ISearchStreetsForm(Interface):
     UrbanCertificateBase = schema.Bool(title = (u"Certificat d'urbanisme 1"), default = True)
     UrbanCertificateTwo = schema.Bool(title = (u"Certificat d'urbanisme 2"), default = True)
 
+    streetSearch = schema.Choice (  
+                                    title = u"Sélectionner rue",
+                                    description = u"Sélectionner une rue à rechercher ",
+                                    required = False,
+                                    vocabulary = "Available streets"
+                                 )
 
-    streetSearch = schema.Tuple (title = u"Sélectionner rue",
-                                 description = u"Sélectionner une rue à rechercher ",
-                                 default = (),
-                                 required = False
-                                )
+def availableStreets(context):
+    voc = UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False, browseHistoric=True).getDisplayList(context)
+    voc = voc.values()
+    voc.sort()
+    return SimpleVocabulary.fromValues(voc)
 
-class MyFinderSelectWidget(FinderSelectWidget) :
+class MyFinderSelectWidget(FinderSelectWidget):
     """
     A widget with a plone_finder link
     for a Sequence field (tuple or list)
@@ -65,7 +73,6 @@ class MyFinderSelectWidget(FinderSelectWidget) :
 
 class SearchStreetsForm(formbase.PageForm):
     form_fields = form.FormFields(ISearchStreetsForm)
-    form_fields['streetSearch'].custom_widget = MyFinderSelectWidget
     label = u"Recherche de documents par rue"
     description = u""
     streetsFound = []
@@ -73,12 +80,12 @@ class SearchStreetsForm(formbase.PageForm):
 
     def update(self):
         #initialize base root to be locate to streets configuration folder
-        context = aq_inner(self.context)
+        """context = aq_inner(self.context)
         catalog = getToolByName(context, 'portal_catalog')
         brain = catalog.searchResults(id = 'streets')
-        self.streetsBase = aq_inner(brain[0].getObject())
+        self.streetsBase = aq_inner(brain[0].getObject())"""
         super(formbase.PageForm, self).update()
-        self.widgets['streetSearch'].base = self.streetsBase
+        #self.widgets['streetSearch'].base = self.streetsBase
 
 
     @form.action(u"Rechercher")

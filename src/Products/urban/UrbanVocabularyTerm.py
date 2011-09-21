@@ -111,17 +111,18 @@ class UrbanVocabulary(object):
 
     implements(IReferenceableVocabulary)
 
-    def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", inUrbanConfig=True):
+    def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", inUrbanConfig=True, browseHistoric=False):
         self.path = path
         self.vocType = vocType
         self.id_to_use = id_to_use
         self.inUrbanConfig = inUrbanConfig
+        self.browseHistoric = browseHistoric
 
     def getDisplayList(self, content_instance):
         portal_urban = getToolByName(content_instance, 'portal_urban')
         result = DisplayList(portal_urban.listVocabulary(self.path,
             content_instance, vocType=self.vocType, id_to_use=self.id_to_use, \
-            inUrbanConfig=self.inUrbanConfig))
+            inUrbanConfig=self.inUrbanConfig, browseHistoric=self.browseHistoric))
         return result
 
     def getObjectsSet(self, content_instance, values):
