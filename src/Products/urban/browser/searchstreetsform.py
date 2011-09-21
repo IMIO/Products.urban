@@ -95,7 +95,6 @@ class SearchStreetsForm(formbase.PageForm):
         voc = UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False, browseHistoric=True)
         voc = voc.getDisplayList(context)
         UID = voc.getKey(data['streetSearch']) 
-        import pdb; pdb.set_trace()        
         for brain in brains:
             doc = brain.getObject()
             objs = doc.getWorkLocations()
