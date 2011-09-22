@@ -24,11 +24,6 @@
   
   <include file="grok.zcml" />
 
-  <utility
-    component=".browser.searchstreetsform.availableStreets"
-    name="Available streets"
-    provides="zope.schema.interfaces.IVocabularyFactory"/>
-
   <interface
     interface=".interfaces.ICommunalCouncilEvent"
     type=".interfaces.IEventTypeType"/>

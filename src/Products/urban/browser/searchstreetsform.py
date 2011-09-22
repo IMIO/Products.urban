@@ -28,7 +28,6 @@ from five.formlib import formbase
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from collective.plonefinder.widgets.referencewidget import FinderSelectWidget
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from zope.schema.vocabulary import SimpleVocabulary
 
 from Products.CMFCore.utils import getToolByName
@@ -51,14 +50,8 @@ class ISearchStreetsForm(Interface):
                                     title = u"Sélectionner rue",
                                     description = u"Sélectionner une rue à rechercher ",
                                     required = False,
-                                    vocabulary = "Available streets"
+                                    source = "availableStreets"
                                  )
-
-def availableStreets(context):
-    voc = UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", sort_on="sortable_title", inUrbanConfig=False, allowedStates=['enabled', 'disabled']).getDisplayList(context)
-    voc = voc.values()
-    voc.sort()
-    return SimpleVocabulary.fromValues(voc)
 
 class SearchStreetsForm(formbase.PageForm):
     form_fields = form.FormFields(ISearchStreetsForm)
@@ -72,7 +65,8 @@ class SearchStreetsForm(formbase.PageForm):
 
     @form.action(u"Rechercher")
     def action_send(self, action, data):
-        """search licences
+        """
+          Do the search
         """
         #update results display if any
         context = aq_inner(self.context)
