@@ -219,7 +219,11 @@ tablenames=['NSR','PAS','ART','DA','LT','MAP','NA','PE','PRC']
 
 if step in run_steps:
     if action == 'new':
-        std_cur.execute('CREATE ROLE %s LOGIN NOINHERIT;'%databasename)
+        dict_cur.execute('SELECT ROLNAME FROM PG_ROLES;')
+        results = dict_cur.fetchall()
+        if databasename not in [res[0] for res in results]:
+            std_cur.execute('CREATE ROLE %s LOGIN NOINHERIT;'%databasename)
+            std_cur.execute("ALTER USER %s WITH PASSWORD '%s';"%(databasename, databasename))
         std_cur.execute('CREATE LANGUAGE plpgsql;')
         conn.commit()
     #can be changed    
