@@ -244,3 +244,9 @@ msgstr ""
 
 msgid "warning_add_an_applicant"
 msgstr ""
+
+msgid "Please, select at least one type to search on!"
+msgstr ""
+
+msgid "Please, select a street from the list below!"
+msgstr ""

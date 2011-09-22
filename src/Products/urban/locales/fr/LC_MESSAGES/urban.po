@@ -842,6 +842,9 @@ msgstr "Derniers éléments"
 msgid "search_parcels"
 msgstr "Ajouter une parcelle"
 
+msgid "searchbystreet_result"
+msgstr "Résultat de la recherche"
+
 msgid "searchequipments"
 msgstr "Les équipements"
 

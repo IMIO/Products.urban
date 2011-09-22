@@ -31,6 +31,7 @@ from collective.plonefinder.widgets.referencewidget import FinderSelectWidget
 from zope.schema.vocabulary import SimpleVocabulary
 
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone import PloneMessageFactory as _
 from Acquisition import aq_inner
 
 class ISearchStreetsForm(Interface):
@@ -68,29 +69,34 @@ class SearchStreetsForm(formbase.PageForm):
         """
           Do the search
         """
-        #update results display if any
         context = aq_inner(self.context)
+        #do only the search if at least a street and a type is selected...
+        types = ['BuildLicence', 'Declaration', 'ParcelOutLicence', 'Division', 'NotaryLetter', 'UrbanCertificateBase', 'UrbanCertificateTwo']
+        typesToSearch = [typeToSearch for typeToSearch in types if data[typeToSearch]]
+        streetUID = data['streetSearch']
+        if not typesToSearch or not streetUID:
+            plone_utils = getToolByName(context, 'plone_utils')
+            if not typesToSearch:
+                plone_utils.addPortalMessage(_('Please, select at least one type to search on!'), 'warning')
+            if not streetUID:
+                plone_utils.addPortalMessage(_('Please, select a street from the list below!'), 'warning')
+            return self.template()
+        #update results display if any
         catalog = getToolByName(context, 'portal_catalog')
         urltool = getToolByName(context, 'portal_url')
         portal = urltool.getPortalObject()
-        types = ['BuildLicence', 'Declaration', 'ParcelOutLicence', 'Division', 'NotaryLetter', 'UrbanCertificateBase', 'UrbanCertificateTwo']
-        typesToSearch = [typeToSearch for typeToSearch in types if data[typeToSearch]]
         #perform a search on type
         #thus, glance at each object if street id is included in this latter
-        brains = catalog.searchResults(portal_type = typesToSearch)
+        brains = catalog(portal_type=typesToSearch)
         self.streetsFound = []
-        voc = UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False, allowedStates=['enabled', 'disabled'])
-        voc = voc.getDisplayList(context)
-        UID = voc.getKey(data['streetSearch']) 
         for brain in brains:
-            doc = brain.getObject()
-            objs = doc.getWorkLocations()
-            if objs:
-                for obj in objs:
-                    if (not data['streetSearch'] or obj['street'] == UID):
-                        self.streetsFound.append((doc.Title(), brain.getURL()))
-            elif not data['streetSearch']:
-                self.streetsFound.append((doc.Title(), brain.getURL()))
+            licence = brain.getObject()
+            workLocations = licence.getWorkLocations()
+            for workLocation in workLocations:
+                if workLocation['street'] == streetUID:
+                    self.streetsFound.append(brain)
+                    #it's found, ok, break
+                    break
 
         #for unclear reason base must be reinitialized before returning template
         return self.template()

@@ -2179,6 +2179,9 @@ msgstr ""
 msgid "urban_searchbystreet_descr"
 msgstr ""
 
+msgid "searchbystreet_result"
+msgstr ""
+
 msgid "urban_searches"
 msgstr ""
 

@@ -70,6 +70,12 @@ msgstr "Lotissement"
 msgid "PcaTerm"
 msgstr "Plan Communal d'Aménagement"
 
+msgid "Please, select a street from the list below!"
+msgstr "Sélectionnez la rue à chercher s'il vous plaît!"
+
+msgid "Please, select at least one type to search on!"
+msgstr "Sélectionnez au moins un type de permis!"
+
 msgid "PortionOut"
 msgstr "Parcelle"
 

@@ -13,48 +13,6 @@
       class="edit-form" enctype="multipart/form-data"
       id="zc.page.browser_form">
 
-<script type="text/javascript"><!--
-
-function toggleFormFieldHelp(ob,state) {
-  // ob is the label element
-  var field = findWidgetDiv(ob);
-  if (field) {
-    field.style.visibility = state && 'hidden' || 'visible';
-    var help = document.getElementById("field-help-for-" + ob.htmlFor);
-    if (help) {
-      help.style.visibility = state && 'visible' || 'hidden';
-    }
-  }
-}
-
-function findWidgetDiv(label) {
-  var element = findFormField(label);
-  while (element) {
-    element = element.parentNode;
-    if (element.tagName == 'DIV' && element.getAttribute('class') == 'widget')
-      return element;
-  }
-}
-
-function findFormField(label) {
-  var name = label.htmlFor;
-  var field = label.form[name];
-  // Multiple fields with the same name, such as radiobuttons
-  if (field) {
-    if (field.length)
-      field = field[0];
-    return field;
-  }
-  // No field with the exact name; find one that starts with the name
-  for (var i = 0; field = label.form[i++];) {
-    if (field.name.substr(0, name.length) == name)
-      return field;
-  }
-} 
-
-//-->
-</script>
-
 <div id="viewspace" metal:define-slot="viewspace">
 
   <h1  i18n:translate=""
@@ -100,9 +58,6 @@ function findFormField(label) {
               metal:define-macro="labelcell">
               <label tal:condition="python:hint"
                      tal:attributes="for widget/name"
-                     onmousedown="toggleFormFieldHelp(this,1)"
-                     onmouseup="toggleFormFieldHelp(this,0)"
-                     onmouseout="toggleFormFieldHelp(this,0)"
                      style="cursor: help">
                 <span class="required" tal:condition="widget/required"
                 >*</span><span i18n:translate=""
@@ -160,16 +115,17 @@ function findFormField(label) {
 </div>
 
 </form>
-
-<br/>
 <br/>
 
 <div tal:condition="view/streetsFound">
-  <div>Résultats de la recherche courante</div>
-  <span tal:repeat="street view/streetsFound">
-    <a tal:attributes="href python:street[1]" tal:content="python:street[0]"> </a>
-    <br/>
-  </span>
+<h3 i18n:domain="urban" i18n:translate="searchbystreet_result">Search result</h3>
+    <div tal:define="Batch python:modules['Products.CMFPlone'].Batch;
+                     b_start request/b_start|python:0;
+                     batch python: Batch(view.streetsFound, 20, b_start);
+                     showActions python: True;
+                     showedCols python: ('Title',);">
+     <metal:listing use-macro="here/urban_macros/macros/listing" />
+    </div>
 </div>
 
 <script type="text/javascript"
