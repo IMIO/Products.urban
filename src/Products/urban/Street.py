@@ -152,6 +152,7 @@ class Street(BaseContent, BrowserDefaultMixin):
         return aq_parent(aq_inner(self))
 
 
+
 registerType(Street, PROJECTNAME)
 # end of class Street
 

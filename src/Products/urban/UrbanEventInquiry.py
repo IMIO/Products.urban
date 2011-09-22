@@ -31,6 +31,43 @@ from Products.CMFPlone import PloneMessageFactory as _
 
 schema = Schema((
 
+    DateTimeField(
+        name='explanationsDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=True,
+            condition="python:here.attributeIsUsed('explanationsDate')",
+            format="%d/%m/%Y%H",
+            label='Explanationsdate',
+            label_msgid='urban_label_explanationsDate',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
+    DateTimeField(
+        name='claimsDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=True,
+            condition="python:here.attributeIsUsed('claimsDate')",
+            format="%d/%m/%Y%H",
+            label='Claimsdate',
+            label_msgid='urban_label_claimsDate',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
+    TextField(
+        name='claimsText',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            condition="python:here.attributeIsUsed('claimsText')",
+            label='Claimstext',
+            label_msgid='urban_label_claimsText',
+            i18n_domain='urban',
+        ),
+        default=claimsTextDefaultValue,
+        default_output_type='text/html',
+        optional= True,
+    ),
     ReferenceField(
         name='linkedInquiry',
         widget=ReferenceBrowserWidget(

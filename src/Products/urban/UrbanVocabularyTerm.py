@@ -102,6 +102,7 @@ class UrbanVocabularyTerm(BaseContent, BrowserDefaultMixin):
             return re.sub(r'<[^>]*?>', ' ', descr).replace('  ', ' ')
 
 
+
 registerType(UrbanVocabularyTerm, PROJECTNAME)
 # end of class UrbanVocabularyTerm
 
