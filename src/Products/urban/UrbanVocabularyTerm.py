@@ -102,7 +102,6 @@ class UrbanVocabularyTerm(BaseContent, BrowserDefaultMixin):
             return re.sub(r'<[^>]*?>', ' ', descr).replace('  ', ' ')
 
 
-
 registerType(UrbanVocabularyTerm, PROJECTNAME)
 # end of class UrbanVocabularyTerm
 
@@ -111,18 +110,19 @@ class UrbanVocabulary(object):
 
     implements(IReferenceableVocabulary)
 
-    def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", inUrbanConfig=True, browseHistoric=False):
+    def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled']):
         self.path = path
         self.vocType = vocType
         self.id_to_use = id_to_use
+        self.sort_on = sort_on
         self.inUrbanConfig = inUrbanConfig
-        self.browseHistoric = browseHistoric
+        self.allowedStates = allowedStates
 
     def getDisplayList(self, content_instance):
         portal_urban = getToolByName(content_instance, 'portal_urban')
         result = DisplayList(portal_urban.listVocabulary(self.path,
-            content_instance, vocType=self.vocType, id_to_use=self.id_to_use, \
-            inUrbanConfig=self.inUrbanConfig, browseHistoric=self.browseHistoric))
+            content_instance, vocType=self.vocType, id_to_use=self.id_to_use, sort_on=self.sort_on,\
+            inUrbanConfig=self.inUrbanConfig, allowedStates=self.allowedStates))
         return result
 
     def getObjectsSet(self, content_instance, values):

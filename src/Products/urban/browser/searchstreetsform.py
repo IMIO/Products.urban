@@ -55,7 +55,7 @@ class ISearchStreetsForm(Interface):
                                  )
 
 def availableStreets(context):
-    voc = UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False, browseHistoric=True).getDisplayList(context)
+    voc = UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", sort_on="sortable_title", inUrbanConfig=False, allowedStates=['enabled', 'disabled']).getDisplayList(context)
     voc = voc.values()
     voc.sort()
     return SimpleVocabulary.fromValues(voc)
@@ -68,14 +68,7 @@ class SearchStreetsForm(formbase.PageForm):
     template = ViewPageTemplateFile('templates/searchstreetsresults.pt')
 
     def update(self):
-        #initialize base root to be locate to streets configuration folder
-        """context = aq_inner(self.context)
-        catalog = getToolByName(context, 'portal_catalog')
-        brain = catalog.searchResults(id = 'streets')
-        self.streetsBase = aq_inner(brain[0].getObject())"""
         super(formbase.PageForm, self).update()
-        #self.widgets['streetSearch'].base = self.streetsBase
-
 
     @form.action(u"Rechercher")
     def action_send(self, action, data):
@@ -92,7 +85,7 @@ class SearchStreetsForm(formbase.PageForm):
         #thus, glance at each object if street id is included in this latter
         brains = catalog.searchResults(portal_type = typesToSearch)
         self.streetsFound = []
-        voc = UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False, browseHistoric=True)
+        voc = UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False, allowedStates=['enabled', 'disabled'])
         voc = voc.getDisplayList(context)
         UID = voc.getKey(data['streetSearch']) 
         for brain in brains:
@@ -106,5 +99,4 @@ class SearchStreetsForm(formbase.PageForm):
                 self.streetsFound.append((doc.Title(), brain.getURL()))
 
         #for unclear reason base must be reinitialized before returning template
-        #self.widgets['streetSearch'].base = self.streetsBase
         return self.template()
