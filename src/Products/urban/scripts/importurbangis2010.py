@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-import glob
 import psycopg2
 import psycopg2.extras
 import sys
@@ -155,7 +154,6 @@ def convertprcb(prc):
 def numpolice(sl1):
    
     NUM=['0','1','2','3','4','5','6','7','8','9','0']
-    i=0
     sl1=sl1.strip()
     sl1=sl1.replace('+','')
     sl1terms=sl1.split()
@@ -596,6 +594,8 @@ if step in run_steps:
                 ofile.write("%s;%s;%s\n"%(urbanmap_dir, databasename, max_port))
                 ofile.close()
             if not os.path.exists(os.path.join(config_dir, ini_file)):
+                import socket
+                serverip = socket.gethostbyname(socket.gethostname())
                 std_cur.execute("select min(admnr) from da;")
                 rec = std_cur.fetchone()
                 if not rec:
@@ -607,6 +607,9 @@ if step in run_steps:
                     for line in ifile:
                         outline = line.replace('#PORT#', str(max_port))
                         outline = outline.replace('#INS#', INS)
+                        outline = outline.replace('#MAPFISHPRINTDIR#', os.path.dirname(urbanmap_dir))
+                        outline = outline.replace('#URBANMAPDIR#', urbanmap_dir)
+                        outline = outline.replace('#SERVERIP#', serverip)
                         outline = outline.replace('#SQLALCHEMYURL#', 'postgresql://%s:%s@%s/%s'%(databasename, databasename, pg_address, databasename))
                         out.append(outline)
                     ifile.close()
