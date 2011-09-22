@@ -46,15 +46,8 @@ slave_fields_subdivision = (
      'hide_values': (True, ),
     },
 )
-slave_fields_pca= (
-    # if in a pca, display a selectbox
-    {'name': 'pca',
-     'action': 'show',
-     'hide_values': (True, ),
-    },
-)
 
-optional_fields = ['subdivisionDetails','isInPCA','roadAdaptation','pebDetails',
+optional_fields = ['subdivisionDetails','roadAdaptation','pebDetails',
                    'roadTechnicalAdvice','locationTechnicalAdvice','locationTechnicalConditions',
                    'pebTechnicalAdvice','locationDgrneUnderground', 'roadDgrneUnderground']
 ##/code-section module-header
@@ -106,17 +99,6 @@ schema = Schema((
         ),
         default_output_type='text/html',
         default_content_type='text/plain',
-    ),
-    BooleanField(
-        name='isInPCA',
-        default=False,
-        widget=MasterBooleanWidget(
-            slave_fields=slave_fields_pca,
-            label='Isinpca',
-            label_msgid='urban_label_isInPCA',
-            i18n_domain='urban',
-        ),
-        schemata='urban_location',
     ),
     StringField(
         name='roadAdaptation',

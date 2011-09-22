@@ -32,12 +32,21 @@ from zope.i18n import translate
 from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
-optional_fields = ['missingPartsDetails','folderZoneDetails','derogationDetails',
+slave_fields_pca= (
+    # if in a pca, display a selectbox
+    {'name': 'pca',
+     'action': 'show',
+     'hide_values': (True, ),
+    },
+)
+
+optional_fields = ['missingPartsDetails','folderZoneDetails','derogationDetails','isInPCA',
                    'annoncedDelayDetails','roadType','roadCoating','roadEquipments',
                    'protectedBuildingDetails','investigationDetails','investigationReasons',
                    'pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks',
@@ -400,6 +409,17 @@ schema = Schema((
         schemata='urban_location',
         multiValued=1,
         vocabulary=UrbanVocabulary('foldermakers'),
+    ),
+    BooleanField(
+        name='isInPCA',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_pca,
+            label='Isinpca',
+            label_msgid='urban_label_isInPCA',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
     ),
     ReferenceField(
         name='foldermanagers',
