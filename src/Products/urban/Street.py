@@ -152,13 +152,6 @@ class Street(BaseContent, BrowserDefaultMixin):
         return aq_parent(aq_inner(self))
 
 
-    def sortable_title(self):
-        """
-        """
-        return self.plone_utils.normalizeString(self.Title())
-
-
-
 registerType(Street, PROJECTNAME)
 # end of class Street
 
