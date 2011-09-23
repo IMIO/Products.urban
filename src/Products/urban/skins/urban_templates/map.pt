@@ -27,9 +27,6 @@
                 tal:define="applicants context/getApplicants|nothing;
                             useTabbing python: context.portal_urban.getUseTabbing();">
 
-<tal:block condition="python: not parcels or not applicants">
- <div metal:use-macro="here/urban_macros/macros/urbanPortalMessageMacro" />
-</tal:block>
 <tal:block condition="context/getParcels">
 <div metal:use-macro="here/urban_macros/macros/urbanMapScript" />
 </tal:block>
