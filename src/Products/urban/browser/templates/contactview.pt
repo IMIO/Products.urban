@@ -89,6 +89,14 @@
       </td>
      </tr>
      <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_country">Country</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="country context/getCountry">
+       <metal:myfield use-macro="python:here.widget('country', mode='view')" />
+       <span class="discreet" tal:condition="not: country" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
       <td valign="top"><b><span i18n:translate="urban_label_email">Email</span> :</b></td>
       <td width="2%"></td>
       <td valign="top" tal:define="email context/getEmail">
@@ -110,6 +118,14 @@
       <td valign="top" tal:define="fax context/getFax">
        <metal:myfield use-macro="python:here.widget('fax', mode='view')" />
        <span class="discreet" tal:condition="not: fax" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_registrationNumber">Registration number</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="registrationNumber context/getRegistrationNumber">
+       <metal:myfield use-macro="python:here.widget('registrationNumber', mode='view')" />
+       <span class="discreet" tal:condition="not: registrationNumber" i18n:translate="content_none">None</span>
       </td>
      </tr>
      <tr>

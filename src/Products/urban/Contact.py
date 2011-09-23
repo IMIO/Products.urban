@@ -198,11 +198,11 @@ schema = Schema((
         ),
     ),
     StringField(
-        name='numberRegister',
+        name='registrationNumber',
         widget=StringField._properties['widget'](
             condition="python: here.portal_type == 'Architect'",
-            label='Numberregister',
-            label_msgid='urban_label_numberRegister',
+            label='Registrationnumber',
+            label_msgid='urban_label_registrationNumber',
             i18n_domain='urban',
         ),
     ),

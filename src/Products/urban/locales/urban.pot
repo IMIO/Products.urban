@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-09-15 13:29+0000\n"
+"POT-Creation-Date: 2011-09-23 07:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,6 +69,9 @@ msgstr ""
 msgid "Licence state"
 msgstr ""
 
+msgid "Map"
+msgstr ""
+
 msgid "Notary data"
 msgstr ""
 
@@ -114,9 +117,6 @@ msgid "View"
 msgstr ""
 
 msgid "actions"
-msgstr ""
-
-msgid "Map"
 msgstr ""
 
 # referencebrowser.pt
@@ -304,6 +304,9 @@ msgstr ""
 msgid "content_none"
 msgstr ""
 
+msgid "country_folder_title"
+msgstr ""
+
 msgid "create"
 msgstr ""
 
@@ -397,6 +400,9 @@ msgid "event_inquiry_claimants"
 msgstr ""
 
 msgid "event_linked_documents"
+msgstr ""
+
+msgid "external_decisions_folder_title"
 msgstr ""
 
 #. Default: "Far prevention area"
@@ -551,19 +557,13 @@ msgstr ""
 msgid "label_colname_claimant_data"
 msgstr ""
 
-msgid "label_colname_recipient_data"
-msgstr ""
-
-msgid "label_colname_notary_data"
-msgstr ""
-
-msgid "label_colname_geometrician_data"
-msgstr ""
-
 msgid "label_colname_created"
 msgstr ""
 
 msgid "label_colname_eventDate"
+msgstr ""
+
+msgid "label_colname_geometrician_data"
 msgstr ""
 
 msgid "label_colname_getBeginDate"
@@ -576,6 +576,12 @@ msgid "label_colname_getParcelsForDisplay"
 msgstr ""
 
 msgid "label_colname_name"
+msgstr ""
+
+msgid "label_colname_notary_data"
+msgstr ""
+
+msgid "label_colname_recipient_data"
 msgstr ""
 
 msgid "label_colname_street"
@@ -770,12 +776,6 @@ msgstr ""
 msgid "persons_titles_folder_title"
 msgstr ""
 
-msgid "country_folder_title"
-msgstr ""
-
-msgid "external_decisions_folder_title"
-msgstr ""
-
 #. Default: "Madam"
 #: Contact.py
 msgid "persontitle_madam"
@@ -839,6 +839,9 @@ msgid "search-last-elements"
 msgstr ""
 
 msgid "search_parcels"
+msgstr ""
+
+msgid "searchbystreet_result"
 msgstr ""
 
 msgid "searchequipments"
@@ -1220,6 +1223,11 @@ msgstr ""
 #. Default: "Concerned elements"
 #: parcelsinfo.py
 msgid "urban_label_concerned_elements"
+msgstr ""
+
+#. Default: "Country"
+#: Contact.py
+msgid "urban_label_country"
 msgstr ""
 
 #. Default: "Data"
@@ -1838,6 +1846,11 @@ msgstr ""
 msgid "urban_label_regionalRoad"
 msgstr ""
 
+#. Default: "Registrationnumber"
+#: Contact.py
+msgid "urban_label_registrationNumber"
+msgstr ""
+
 #. Default: "Representedby"
 #: Contact.py
 msgid "urban_label_representedBy"
@@ -2177,9 +2190,6 @@ msgid "urban_searchbyparcel_descr"
 msgstr ""
 
 msgid "urban_searchbystreet_descr"
-msgstr ""
-
-msgid "searchbystreet_result"
 msgstr ""
 
 msgid "urban_searches"
