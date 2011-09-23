@@ -19,6 +19,7 @@ logger = logging.getLogger('urban: setuphandlers')
 from Products.urban.config import PROJECTNAME
 from Products.urban.config import DEPENDENCIES
 import os
+from utils import generatePassword
 from Products.CMFCore.utils import getToolByName
 import transaction
 ##code-section HEAD
@@ -1038,10 +1039,17 @@ def addTestObjects(context):
     #add some users, some architects and some foldermanagers...
     #add 2 users, one as reader and one as editor...
     site = context.getSite()
+    is_mountpoint = len(site.absolute_url_path().split('/')) > 2
 
     try:
-        site.portal_registration.addMember(id="urbanreader", password="urbanreader")
-        site.portal_registration.addMember(id="urbaneditor", password="urbaneditor")
+        password = 'urbanreader' 
+        if is_mountpoint:
+            password = generatePassword(20) 
+        site.portal_registration.addMember(id="urbanreader", password=password)
+        password = 'urbaneditor'
+        if is_mountpoint:
+            password = generatePassword(20)
+        site.portal_registration.addMember(id="urbaneditor", password=password)
         #put users in the correct group
         site.acl_users.source_groups.addPrincipalToGroup("urbanreader", "urban_readers")
         site.acl_users.source_groups.addPrincipalToGroup("urbaneditor", "urban_editors")
