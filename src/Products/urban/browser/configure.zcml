@@ -36,6 +36,14 @@
   />
 
   <browser:page
+     for="Products.ATContentTypes.interfaces.IATFolder"
+     name="urban_view"
+     class=".urbanview.UrbanView"
+     template="templates/urbanview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="*"
      name="map"
      class=".mapview.MapView"
