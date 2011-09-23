@@ -1044,11 +1044,11 @@ def addTestObjects(context):
     try:
         password = 'urbanreader' 
         if is_mountpoint:
-            password = generatePassword(20) 
+            password = generatePassword(8) 
         site.portal_registration.addMember(id="urbanreader", password=password)
         password = 'urbaneditor'
         if is_mountpoint:
-            password = generatePassword(20)
+            password = generatePassword(8)
         site.portal_registration.addMember(id="urbaneditor", password=password)
         #put users in the correct group
         site.acl_users.source_groups.addPrincipalToGroup("urbanreader", "urban_readers")
