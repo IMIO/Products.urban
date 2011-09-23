@@ -496,7 +496,7 @@ msgstr "Bienvenue sur le site vous permettant d'utiliser la gestion des permis d
 
 # this is an HTML content for the front-page
 msgid "front_page_text"
-msgstr "<p>L'application intègre la gestion des permis d'urbanisme et d'urbanisation :<ul><li>gestion de la demande</li><li>gestion des demandeurs, architectes, agents traitants, ...</li><li>production des documents</li><li>workflow de suivi de la demande</li><li>cartographie avec calcul du rayon de 50m, visualisation des parcelles, ...</li><li>...</li></ul></p>"
+msgstr "<p>L'application intègre la gestion des permis d'urbanisme et d'urbanisation :</p><ul><li>gestion de la demande</li><li>gestion des demandeurs, architectes, agents traitants, ...</li><li>production des documents</li><li>workflow de suivi de la demande</li><li>cartographie avec calcul du rayon de 50m, visualisation des parcelles, ...</li><li>échéancier</li><li>...</li></ul><p><a href='urban'>Cliquez ici pour accéder à l'application</a></p><p class='discreet'>Vous devez disposer d'un nom d'utilisateur et d'un mot de passe pour accéder à l'application</p>"
 
 # title of the front-page
 msgid "front_page_title"

@@ -949,6 +949,8 @@ def adaptDefaultPortal(context):
         frontpage.setDescription(_("front_page_descr", 'urban', context=site.REQUEST))
         frontpage.setText(_("front_page_text", 'urban', context=site.REQUEST))
         frontpage.setContentType('text/html', 'text')
+        #remove the presentation mode
+        frontpage.setPresentation(False)
         frontpage.reindexObject()
     except AttributeError:
         #the 'front-page' object does not exist...
