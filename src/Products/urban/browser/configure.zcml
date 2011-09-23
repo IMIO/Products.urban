@@ -36,6 +36,14 @@
   />
 
   <browser:page
+     for="*"
+     name="map"
+     class=".mapview.MapView"
+     template="templates/map.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IContact"
      name="contactview"
      class=".contactview.ContactView"

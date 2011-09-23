@@ -8,16 +8,14 @@
              tal:define="global parcels context/getParcels;" />
 
 <head>
-<tal:block condition="context/getParcels">
+<tal:block condition="parcels">
 
 <div metal:fill-slot="style_slot" >
     <div metal:use-macro="here/urban_macros/macros/urbanMapCSS" />
 </div>
 <div metal:fill-slot="javascript_head_slot" tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
-
 </div>
 </tal:block>
-
 </head>
 
 <body>
@@ -27,7 +25,7 @@
                 tal:define="applicants context/getApplicants|nothing;
                             useTabbing python: context.portal_urban.getUseTabbing();">
 
-<tal:block condition="context/getParcels">
+<tal:block condition="parcels">
 <div metal:use-macro="here/urban_macros/macros/urbanMapScript" />
 </tal:block>
 <h1 class="documentFirstHeading">
@@ -35,28 +33,23 @@
  <span tal:replace="here/Title" tal:omit-tag="">Title</span>
 </h1>
 
-
   <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
    <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
   </fieldset>
 
-   <div tal:condition="not: parcels">
-    <p class="discreet" i18n:translate="cartography_map_descr">A map will me displayed when you will have defined concerned parcels</p>
-   </div>
-   <tal:block condition="parcels">
-    <form>
-     <input type="hidden" id="map_initialized" value="0" />
-    </form>
+  <div tal:condition="not: parcels">
+   <p class="discreet" i18n:translate="cartography_map_descr">A map will me displayed when you will have defined concerned parcels</p>
+  </div>
+
+  <tal:block condition="parcels">
+   <form>
+    <input type="hidden" id="map_initialized" value="0" />
+   </form>
    <p i18n:translate="cartography" class="discreet">Cartography</p>
-  
    <div id="urbanmapctn" style="width:100%; height:800px"></div>
-   
-   </tal:block>
+  </tal:block>
 
-<div tal:replace="structure provider:plone.belowcontentbody" />
-
-
-
+  <div tal:replace="structure provider:plone.belowcontentbody" />
 
 </metal:body>
 </metal:main_macro>
