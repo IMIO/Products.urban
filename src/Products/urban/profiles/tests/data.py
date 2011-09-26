@@ -459,6 +459,17 @@ urbanEventTypes = {
                     'podTemplates': ({'id': "div-recepisse", 'title': "Récépissé de la demande"},),
                     },
                    ),
+                    {
+                    'id': "decision-octroi-refus",
+                    'title': "Octroi/refus de la division",
+                    'activatedFields': [],
+                    'deadLineDelay': 15,
+                    'podTemplates': (
+                                     {'id': "div-decision-octroi.odt", 'title': "Octroi de la division"},
+                                     {'id': "div-transmis-decision.odt", 'title': "Octroi de la division (transmis au notaire)"},
+                                    ),
+                    },
+                   ),
                    'environmentaldeclaration':
                    (
                     {
