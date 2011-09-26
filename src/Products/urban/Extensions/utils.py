@@ -69,7 +69,7 @@ def create_urban_site(self, name='', nis='', pghost='localhost', dbname='', dbus
 #        mp.manage_delObjects(ids=[name]) #in test mode
     else:
         try:
-            site = addPloneSite(mp, name, title='Application Urbanisme en test', extension_ids=('Products.urban:default','Products.urbanskin:default'), create_userfolder=False, validate_email=True, default_language='fr')
+            site = addPloneSite(mp, name, title='Application Urbanisme en test', extension_ids=('Products.urban:default','Products.urbanskin:default'), create_userfolder=False, validate_email=False, default_language='fr', setup_content=False)
             verbose("Created plone site '%s'"%name)
         except Exception, msg:
             error("Plone site not created: %s"%msg)
@@ -78,36 +78,43 @@ def create_urban_site(self, name='', nis='', pghost='localhost', dbname='', dbus
     #configuring site
     site = getattr(mp, name)
     pu = site.portal_urban
-    pu.setCityName(name)
-    pu.setSqlHost(pghost)
-    if nis:
+    if not pu.getSqlHost():
+        pu.setSqlHost(pghost)
+    if not pu.getCityName():
+        pu.setCityName(name)
+    if nis and not pu.getNISNum():
         pu.setNISNum(nis)
     if not dbname:
         dbname = 'urb_%s'%name
-    pu.setSqlName(dbname)
+    if not pu.getSqlName():
+        pu.setSqlName(dbname)
     if not dbuser:
         dbuser = dbname
-    pu.setSqlUser(dbuser)
+    if not pu.getSqlUser():
+        pu.setSqlUser(dbuser)
     if not dbpwd:
         dbpwd = dbname
-    pu.setSqlPassword(dbpwd)
-    if geohost:
+    if not pu.getSqlPassword():
+        pu.setSqlPassword(dbpwd)
+    if geohost and not pu.getWebServerHost():
         pu.setWebServerHost(geohost)
-    if pylonhost:
+    if pylonhost and not pu.getPylonsHost():
         pu.setPylonsHost(pylonhost)
 
-    #running extra step
+    #running extra steps
     ps = site.portal_setup
+    #runImportStepFromProfile(self, profile_id, step_id, run_dependencies=True
     ps.runAllImportStepsFromProfile('profile-Products.urban:extra')
 
-    #running tests step
-    ps.runAllImportStepsFromProfile('profile-Products.urban:extra')
+    #running tests steps
+    ps.runImportStepFromProfile('profile-Products.urban:tests', 'urban-addTestObjects', run_dependencies=True)
+    #ps.runAllImportStepsFromProfile('profile-Products.urban:tests', ignore_dependencies=True)
 
     return sep.join(out)
 
 ###############################################################################
 
-def create_site_from_pylon(self, pif='', geohost=''):
+def create_site_from_pylon(self, pif='', geohost='', dochange='0'):
     """
         Creates urban sites from pylon configuration files
     """
@@ -120,13 +127,16 @@ def create_site_from_pylon(self, pif='', geohost=''):
     def error(line):
         out.append("!! %s"%line)
     pif = '/srv/urbanmap/urbanMap/config/pylon_instances.txt'
+    apply=False
+    if dochange not in ('', '0', 'False', 'false'):
+        apply=True
 
+    out.append("call the script followed by those parameters:")
+    out.append("-> pif=string : pylons instances file")
+    out.append("-> geohost=ip:port : geoserver host")
+    out.append("-> dochange=0 : apply changes")
+    out.append("by example ...?dirname=/srv/urbanmap/config %s"%sep)
     if not pif:
-        #out.append("available properties:%s"%portal.portal_memberdata.propertyItems())
-        out.append("call the script followed by those parameters:")
-        out.append("-> pif=string : pylons instances file")
-        out.append("-> geohost=ip:port : geoserver host")
-        out.append("by example ...?dirname=/srv/urbanmap/config %s"%sep)
         return sep.join(out)
 
     def retLines(filename):
@@ -150,7 +160,7 @@ def create_site_from_pylon(self, pif='', geohost=''):
         path, dbname, port = pifline.split(';')
         sitename = dbname[4:]
         nis = dbuser = dbpwd = pghost = pylonhost = ''
-        inifilename = os.path.join(path, 'config', dbname)
+        inifilename = os.path.join(path, 'config', '%s.ini'%dbname)
         for line in retLines(inifilename):
             line = line.strip('\n')
             if nisre.match(line):
@@ -164,7 +174,9 @@ def create_site_from_pylon(self, pif='', geohost=''):
                 pylonhost = urbanmapre.match(line).group(1)
         if not geohost:
             geohost = "%s:8080"%serverip
-        create_urban_site(self, name=sitename, nis=nis, pghost=pghost, dbname=dbname, dbuser=dbuser, dbpwd=dbpwd, geohost=geohost, pylonhost=pylonhost)
+        verbose("name=%s, nis=%s, pghost=%s, dbname=%s, dbuser=%s, dbpwd=%s, geohost=%s, pylonhost=%s"%(sitename, nis, pghost, dbname, dbuser, dbpwd, geohost, pylonhost))
+        if apply:
+            create_urban_site(self, name=sitename, nis=nis, pghost=pghost, dbname=dbname, dbuser=dbuser, dbpwd=dbpwd, geohost=geohost, pylonhost=pylonhost)
 
     return sep.join(out)
 
