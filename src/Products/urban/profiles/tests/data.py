@@ -458,7 +458,6 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'podTemplates': ({'id': "div-recepisse", 'title': "Récépissé de la demande"},),
                     },
-                   ),
                     {
                     'id': "decision-octroi-refus",
                     'title': "Octroi/refus de la division",
