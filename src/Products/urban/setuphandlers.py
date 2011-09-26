@@ -19,7 +19,7 @@ logger = logging.getLogger('urban: setuphandlers')
 from Products.urban.config import PROJECTNAME
 from Products.urban.config import DEPENDENCIES
 import os
-from utils import generatePassword
+from Products.urban.utils import generatePassword
 from Products.CMFCore.utils import getToolByName
 import transaction
 ##code-section HEAD
