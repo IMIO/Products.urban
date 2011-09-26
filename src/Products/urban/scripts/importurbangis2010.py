@@ -6,10 +6,10 @@ import psycopg2.extras
 import sys
 import time
 
-urbanmap_dir = '/home/srv/urbanmap/urbanMap'
+urbanmap_dir = '/srv/urbanmap/urbanMap'
 config_dir = os.path.join(urbanmap_dir, 'config')
 pylon_instances_file = os.path.join(config_dir, 'pylon_instances.txt')
-pg_address = '62.58.108.100:5432'
+pg_address = 'localhost:5432'
 
 def convertprc(prc):
    
@@ -574,6 +574,8 @@ if step in run_steps:
     if urbanmap_dir:
         if not os.path.exists(urbanmap_dir):
             print "Error: urbanmap dir '%s' not exists"%urbanmap_dir
+        elif not os.path.exists(config_dir):
+            print "Error: config dir '%s' not exists"%config_dir
         else:
             max_port = 5000
             instance_exists = False
