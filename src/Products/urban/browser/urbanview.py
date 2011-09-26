@@ -12,3 +12,9 @@ class UrbanView(BrowserView):
             return True
         except AttributeError:
             return False
+
+    def isUrbanManager(self):
+        from Products.CMFCore.utils import getToolByName
+        context = aq_inner(self.context)
+        member = context.restrictedTraverse('@@plone_portal_state').member()
+        return member.has_role('Manager') or member.has_role('Editor', getToolByName(context, 'portal_urban'))

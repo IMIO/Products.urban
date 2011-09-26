@@ -449,7 +449,9 @@ def addUrbanGroups(context):
        Add a group of 'urban' application users...
     """
     site = context.getSite()
-    #add 2 groups
+    #add 3 groups
+    #one with urban Managers 
+    site.portal_groups.addGroup("urban_managers", title="Urban managers")
     #one with urban Readers
     site.portal_groups.addGroup("urban_readers", title="Urban Readers")
     #one with urban Editors
@@ -465,6 +467,7 @@ def setDefaultApplicationSecurity(context):
     #give the Editor role on urban application folders
     site = context.getSite()
     #portal_urban local roles
+    site.portal_urban.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
     site.portal_urban.manage_addLocalRoles("urban_readers", ("Reader",))
     site.portal_urban.manage_addLocalRoles("urban_editors", ("Reader",))
 
@@ -472,6 +475,7 @@ def setDefaultApplicationSecurity(context):
     #global application folder : "urban_readers" and "urban_editors" can read...
     if hasattr(site, "urban"):
         app_folder = getattr(site, "urban")
+        app_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         app_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         app_folder.manage_addLocalRoles("urban_editors", ("Reader",))
         #set some hardcoded permissions
@@ -489,6 +493,7 @@ def setDefaultApplicationSecurity(context):
             b_folder.manage_addProperty('urbanConfigId', 'buildlicence', 'string')
         except BadRequest:
             pass
+        b_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         b_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         b_folder.manage_addLocalRoles("urban_editors", ("Editor",))
     #parceloutlicences application folder : "urban_readers" can read and "urban_editors" can edit...
@@ -500,6 +505,7 @@ def setDefaultApplicationSecurity(context):
             p_folder.manage_addProperty('urbanConfigId', 'parceloutlicence', 'string')
         except BadRequest:
             pass
+        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
     #declarations application folder : "urban_readers" can read and "urban_editors" can edit...
@@ -511,6 +517,7 @@ def setDefaultApplicationSecurity(context):
             p_folder.manage_addProperty('urbanConfigId', 'declaration', 'string')
         except BadRequest:
             pass
+        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
     #division application folder : "urban_readers" can read and "urban_editors" can edit...
@@ -522,6 +529,7 @@ def setDefaultApplicationSecurity(context):
             p_folder.manage_addProperty('urbanConfigId', 'division', 'string')
         except BadRequest:
             pass
+        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
     #urbancertificatesones application folder : "urban_readers" can read and "urban_editors" can edit...
@@ -533,6 +541,7 @@ def setDefaultApplicationSecurity(context):
             p_folder.manage_addProperty('urbanConfigId', 'urbancertificateone', 'string')
         except BadRequest:
             pass
+        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
     #urbancertificatetwos application folder : "urban_readers" can read and "urban_editors" can edit...
@@ -544,6 +553,7 @@ def setDefaultApplicationSecurity(context):
             p_folder.manage_addProperty('urbanConfigId', 'urbancertificatetwo', 'string')
         except BadRequest:
             pass
+        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
     #notaryletters application folder : "urban_readers" can read and "urban_editors" can edit...
@@ -555,6 +565,7 @@ def setDefaultApplicationSecurity(context):
             p_folder.manage_addProperty('urbanConfigId', 'notaryletter', 'string')
         except BadRequest:
             pass
+        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
     #environmentaldeclarations folder : "urban_readers" can read and "urban_editors" can edit...
@@ -566,24 +577,28 @@ def setDefaultApplicationSecurity(context):
             p_folder.manage_addProperty('urbanConfigId', 'environmentaldeclaration', 'string')
         except BadRequest:
             pass
+        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
     #architects application folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "architects"):
         p_folder = getattr(app_folder, "architects")
         app_folder.manage_permission('Add portal content', ['Manager', 'Contributor', 'Owner', 'Editor', ], acquire=0)
+        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
     #geometricians application folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "geometricians"):
         p_folder = getattr(app_folder, "geometricians")
         app_folder.manage_permission('Add portal content', ['Manager', 'Contributor', 'Owner', 'Editor', ], acquire=0)
+        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
     #notaries application folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "notaries"):
         p_folder = getattr(app_folder, "notaries")
         app_folder.manage_permission('Add portal content', ['Manager', 'Contributor', 'Owner', 'Editor', ], acquire=0)
+        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
 
@@ -1039,11 +1054,15 @@ def addTestObjects(context):
         return
 
     #add some users, some architects and some foldermanagers...
-    #add 2 users, one as reader and one as editor...
+    #add 3 users, one as manager, one as reader and one as editor...
     site = context.getSite()
     is_mountpoint = len(site.absolute_url_path().split('/')) > 2
 
     try:
+        password = 'urbanmanager' 
+        if is_mountpoint:
+            password = generatePassword(8) 
+        site.portal_registration.addMember(id="urbanmanager", password=password)
         password = 'urbanreader' 
         if is_mountpoint:
             password = generatePassword(8) 
@@ -1053,6 +1072,7 @@ def addTestObjects(context):
             password = generatePassword(8)
         site.portal_registration.addMember(id="urbaneditor", password=password)
         #put users in the correct group
+        site.acl_users.source_groups.addPrincipalToGroup("urbanmanager", "urban_managers")
         site.acl_users.source_groups.addPrincipalToGroup("urbanreader", "urban_readers")
         site.acl_users.source_groups.addPrincipalToGroup("urbaneditor", "urban_editors")
     except:

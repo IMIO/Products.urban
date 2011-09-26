@@ -802,6 +802,9 @@ msgstr "Mademoiselle"
 msgid "persontitle_mister"
 msgstr "Monsieur"
 
+msgid "portal_urban"
+msgstr "Configuration de 'urban'"
+
 msgid "proprietaries"
 msgstr "Propriétaire(s)"
 

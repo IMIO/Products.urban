@@ -801,6 +801,9 @@ msgstr ""
 msgid "persontitle_mister"
 msgstr ""
 
+msgid "portal_urban"
+msgstr ""
+
 msgid "proprietaries"
 msgstr ""
 

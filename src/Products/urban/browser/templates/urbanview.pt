@@ -20,7 +20,8 @@
                             isAnon python: context.portal_membership.isAnonymousUser();
                             urban_root python: not context.getProperty('urbanConfigId');
                             portalAbsoluteUrl python: context.portal_url.getPortalObject().absolute_url();
-                            isScheduleAvailable view/isScheduleAvailable">
+                            isScheduleAvailable view/isScheduleAvailable;
+                            isUrbanManager view/isUrbanManager">
 
         <div tal:replace="structure provider:plone.abovecontenttitle" />
 
@@ -63,6 +64,10 @@
                  <img src="../folder_icon.gif" /> <a href="architects" i18n:translate="manage_architects">Manage architects</a><br/>
                  <img src="../folder_icon.gif" /> <a href="notaries" i18n:translate="manage_notaries">Manage notaries</a><br/>
                  <img src="../folder_icon.gif" /> <a href="geometricians" i18n:translate="manage_geometricians">Manage geometricians</a><br/>
+                 <br/>
+                 <div tal:condition="isUrbanManager">
+                  <img src="../maintenance_icon.png" /> <a href="portal_urban" i18n:translate="portal_urban">Urban configuration</a><br/>
+                 </div>
                 </td>
             </tr>
         </table>
