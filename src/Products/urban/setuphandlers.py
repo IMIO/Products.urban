@@ -1210,14 +1210,6 @@ def setupExtra(context):
     else:
         logger.info('user password policy unchanged')
 
-    #Configuring editor
-    try:
-        from Products.CPUtils.Extensions.utils import configure_fckeditor
-        configure_fckeditor(portal, default=1, allusers=1, custom=1, nomerge=1)
-        logger.info('FCKeditor installed, set by default and customised')
-    except ImportError:
-        logger.info('Products CPUtils needeed to install and configure FCKeditor')
-
     #we add additional layers here because we take informations from portal_urban
     #that are set manually after install
     logger.info("Adding additional layers")
