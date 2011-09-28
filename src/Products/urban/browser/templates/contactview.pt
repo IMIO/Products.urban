@@ -120,7 +120,7 @@
        <span class="discreet" tal:condition="not: fax" i18n:translate="content_none">None</span>
       </td>
      </tr>
-     <tr>
+     <tr tal:condition="python: here.portal_type == 'Architect'">
       <td valign="top"><b><span i18n:translate="urban_label_registrationNumber">Registration number</span> :</b></td>
       <td width="2%"></td>
       <td valign="top" tal:define="registrationNumber context/getRegistrationNumber">
