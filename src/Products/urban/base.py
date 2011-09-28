@@ -84,7 +84,7 @@ class UrbanBase(object):
             #if the signaletic is not empty, we are adding several notaries
             if signaletic:
                 signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
-            signaletic += 'Maitre %s' % notary.getSignaletic(withaddress=withaddress)
+            signaletic += notary.getSignaletic(withaddress=withaddress)
         return signaletic
 
     security.declarePublic('getArchitectsSignaletic')
