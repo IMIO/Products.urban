@@ -3,6 +3,11 @@
 
 options =
 
+plonesites = src/Products/urban/scripts/config/plonesites.cfg 
+extras = src/Products/urban/scripts/config/extras.py.tmpl
+
+.PHONY: test instance cleanall portals
+
 all: test
 
 bin/python:
@@ -13,20 +18,36 @@ develop-eggs: bin/python bootstrap.py
 
 bin/buildout: develop-eggs
 
-bin/test: buildout.cfg bin/buildout setup.py
+bin/test: versions.cfg buildout.cfg bin/buildout setup.py
 	./bin/buildout -vt 5
+	touch $@
 
-bin/instance: buildout.cfg bin/buildout setup.py
+bin/instance: versions.cfg buildout.cfg bin/buildout setup.py
 	./bin/buildout -vt 5 install instance
+	touch $@
 
-.PHONY: test
+bin/templates: setup.py
+	./bin/buildout -vt 5 install templates
+	touch $@
+
+bin/templates_per_site: setup.py  
+	./bin/buildout -vt 5 install templates
+	touch $@
+
+pre_extras: bin/templates_per_site $(extras)
+	bin/templates_per_site -i $(extras) -d pre_extras -e py -s tmp/pylon_instances.txt
+
+plonesites.cfg: bin/templates $(plonesites) pre_extras
+	bin/templates -i $(plonesites) -s tmp/pylon_instances.txt > plonesites.cfg
+
 test: bin/test
 	bin/test -s Products.urban $(options)
 
-.PHONY: instance
 instance: bin/instance
 	bin/instance fg
 
-.PHONY: cleanall
 cleanall:
 	rm -fr bin develop-eggs downloads eggs parts .installed.cfg
+
+portals: versions.cfg buildout.cfg plonesites.cfg portals.cfg bin/buildout setup.py
+	./bin/buildout -vt 5 -c portals.cfg

@@ -1,0 +1,4 @@
+parse csv to produce urbans.cfg
+create pre-extras script
+parse csv to produce zope_add.conf
+create bin/instance subcommand that adds the mount points for pre-install

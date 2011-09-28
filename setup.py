@@ -25,7 +25,9 @@ setup(name='Products.urban',
       extras_require=dict(
             test=['unittest2', 'zope.testing', 'plone.testing',
                   'testfixtures',
-                  'plone.app.testing']),
+                  'plone.app.testing'],
+            templates=['genshi',
+                  ]),
       install_requires=[
           'setuptools',
           'appy',
@@ -41,4 +43,9 @@ setup(name='Products.urban',
           'collective.externaleditor',
           'Products.ExternalEditor',
           'plone.app.referenceintegrity',
-          'psycopg2'])
+          'psycopg2'],
+      entry_points={
+          'console_scripts': ['templates = Products.urban.templates:all',
+                'templates_per_site = Products.urban.templates:per_site']
+      },
+      )
