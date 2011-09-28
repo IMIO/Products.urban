@@ -80,6 +80,10 @@ slave_fields_address = (
      'action': 'show',
      'hide_values': (False, ),
     },
+    {'name': 'country',
+     'action': 'show',
+     'hide_values': (False, ),
+    },
 )
 ##/code-section module-header
 
