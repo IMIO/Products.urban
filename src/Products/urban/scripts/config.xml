@@ -93,52 +93,62 @@
     </Item>
     <Item name="Nom">
         <FieldCode>
-            self.getArchitects().getName1()
+            self.getArchitects()[0].getName1()
         </FieldCode>        
     </Item>
     <Item name="Prénom">
         <FieldCode>
-            self.getArchitects().getName2()
+            self.getArchitects()[0].getName2()
         </FieldCode>        
     </Item>
     <Item name="Rue">
         <FieldCode>
-            self.getArchitects().getStreet()
+            self.getArchitects()[0].getStreet()
         </FieldCode>        
     </Item>
     <Item name="Numéro">
         <FieldCode>
-            self.getArchitects().getNumber()
+            self.getArchitects()[0].getNumber()
         </FieldCode>        
     </Item>
     <Item name="CP">
         <FieldCode>
-            self.getArchitects().getZipcode()
+            self.getArchitects()[0].getZipcode()
         </FieldCode>        
     </Item>
     <Item name="Localité">
         <FieldCode>
-            self.getArchitects().getCity()
+            self.getArchitects()[0].getCity()
         </FieldCode>        
     </Item>
     <Item name="Téléphone">
         <FieldCode>
-            self.getArchitects().getPhone()
+            self.getArchitects()[0].getPhone()
         </FieldCode>        
     </Item>
     <Item name="Fax">
         <FieldCode>
-            self.getArchitects().getFax()
+            self.getArchitects()[0].getFax()
         </FieldCode>        
     </Item>
     <Item name="Email">
         <FieldCode>
-            self.getArchitects().getEmail()
+            self.getArchitects()[0].getEmail()
         </FieldCode>        
     </Item>
 </Object>
 
 <Object name="Notaire">
+    <Item name="Signalétique">
+        <FieldCode>
+            self.getNotariesSignaletic() 
+        </FieldCode>
+    </Item>
+    <Item name="Signalétique (avec adresse)">
+        <FieldCode>
+            self.getNotariesSignaletic(withaddress=True) 
+        </FieldCode>
+    </Item>
     <Item name="Titre">
         <FieldCode>
             self.displayValue(self.getNotaryContact()[0].Vocabulary('personTitle')[0], self.getNotaryContact()[0].getPersonTitle())
@@ -146,80 +156,90 @@
     </Item>
     <Item name="Nom">
         <FieldCode>
-            self.getNotaryContact().getName1()
+            self.getNotaryContact()[0].getName1()
         </FieldCode>        
     </Item>
     <Item name="Prénom">
         <FieldCode>
-            self.getNotaryContact().getName2()
+            self.getNoNotaryContact()[0].getName2()
         </FieldCode>        
     </Item>
     <Item name="Rue">
         <FieldCode>
-            self.getNotaryContact().getStreet()
+            self.getNoNotaryContact()[0].getStreet()
         </FieldCode>        
     </Item>
     <Item name="Numéro">
         <FieldCode>
-            self.getNotaryContact().getNumber()
+            self.getNoNotaryContact()[0].getNumber()
         </FieldCode>        
     </Item>
     <Item name="CP">
         <FieldCode>
-            self.getNotaryContact().getZipcode()
+            self.getNoNotaryContact()[0].getZipcode()
         </FieldCode>        
     </Item>
     <Item name="Localité">
         <FieldCode>
-            self.getNotaryContact().getCity()
+            self.getNoNotaryContact()[0].getCity()
         </FieldCode>        
     </Item>
     <Item name="Téléphone">
         <FieldCode>
-            self.getNotaryContact().getPhone()
+            self.getNoNotaryContact()[0].getPhone()
         </FieldCode>        
     </Item>
     <Item name="Fax">
         <FieldCode>
-            self.getNotaryContact().getFax()
+            self.getNoNotaryContact()[0].getFax()
         </FieldCode>        
     </Item>
     <Item name="Email">
         <FieldCode>
-            self.getNotaryContact().getEmail()
+            self.getNoNotaryContact()[0].getEmail()
         </FieldCode>        
     </Item>
 </Object>
  
  <Object name="Agent traitant">    
+    <Item name="Signalétique">
+        <FieldCode>
+            self.getFoldermanagersSignaletic() 
+        </FieldCode>
+    </Item>
+    <Item name="Signalétique (avec n° tel)">
+        <FieldCode>
+            self.getFoldermanagersSignaletic(withTel=True) 
+        </FieldCode>
+    </Item>
     <Item name="Nom">
         <FieldCode>
-            self.getFoldermanagers().getName1()
+            self.getFoldermanagers()[0].getName1()
         </FieldCode>        
     </Item>
     <Item name="Prénom">
         <FieldCode>
-            self.getFoldermanagers().getName2()
+            self.getFoldermanagers()[0].getName2()
         </FieldCode>        
     </Item>
     <Item name="Téléphone">
         <FieldCode>
-            self.getFoldermanagers().getPhone()
+            self.getFoldermanagers()[0].getPhone()
         </FieldCode>        
     </Item>
     <Item name="Fax">
         <FieldCode>
-            self.getFoldermanagers().getFax() 
+            self.getFoldermanagers()[0].getFax() 
         </FieldCode>        
     </Item>
     <Item name="Email">
         <FieldCode>
-            self.getFoldermanagers().getEmail() 
+            self.getFoldermanagers()[0].getEmail() 
         </FieldCode>        
     </Item>
     <Item name="Initials">
         <FieldCode>
-            self.getFoldermanagers().getInitials()
+            self.getFoldermanagers()[0].getInitials()
         </FieldCode>        
     </Item>
     <Item name="Grade">
