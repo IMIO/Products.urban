@@ -8,14 +8,12 @@
 
 <body>
 <metal:main fill-slot="main">
-<metal:main_macro define-macro="main">
+  <metal:main_macro define-macro="main">
     <metal:body define-macro="body_macro">
-
-<tal:comment replace="nothing">We do not want to be able to see the Inquiry, redirect to the parent view where the inquiries are defined</tal:comment>
-<span tal:define="dummy python: context.REQUEST.RESPONSE.redirect(context.aq_inner.aq_parent.absolute_url() + '/#fieldsetlegend-urban_investigation_and_advices');" />
-
-</metal:body>
-</metal:main_macro>
+     <tal:comment replace="nothing">We do not want to be able to see the Inquiry, redirect to the parent view where the inquiries are defined</tal:comment>
+     <span tal:define="dummy python: context.REQUEST.RESPONSE.redirect(context.aq_inner.aq_parent.absolute_url() + '/#fieldsetlegend-urban_investigation_and_advices');" />
+    </metal:body>
+  </metal:main_macro>
 </metal:main>
 </body>
 </html>
