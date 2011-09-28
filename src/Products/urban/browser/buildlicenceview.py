@@ -136,3 +136,8 @@ class BuildLicenceView(BrowserView):
                 'date': tool.formatDate(theLicence.getEventDate(), translatemonth=False)
                }
         return dict
+
+class BuildLicenceMacros(BrowserView):
+    """
+      This manage the macros of BuildLicence
+    """

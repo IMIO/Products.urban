@@ -34,17 +34,17 @@
 <dl class="formTabs enableFormTabbing">
 <dt class="formTab" tal:attributes="class python: context.getApplicants() and 'formTab' or 'formTab notify'" id="fieldsetlegend-urban_description" i18n:domain="plone" i18n:translate="label_schema_urban_description"><span>Description</span></dt>
 <dd id="fieldset-urban_description">
- <metal:listing use-macro="here/buildlicence_macros/macros/buildLicenceDescriptionMacro" />
+ <metal:listing use-macro="context/@@buildlicence-macros/descriptionMacro" />
 </dd>
  
 <dt class="formTab" id="fieldsetlegend-urban_road" i18n:domain="plone" i18n:translate="label_schema_urban_road"><span>Road</span></dt>
 <dd id="fieldset-urban_road">
- <metal:listing use-macro="here/buildlicence_macros/macros/buildLicenceRoadMacro" />
+ <metal:listing use-macro="context/@@buildlicence-macros/roadMacro" />
 </dd>
 
 <dt class="formTab" id="fieldsetlegend-urban_location" i18n:domain="plone" i18n:translate="label_schema_urban_location"><span>Location</span></dt>
 <dd id="fieldset-urban_location">
- <metal:listing use-macro="here/buildlicence_macros/macros/buildLicenceLocationMacro" />
+ <metal:listing use-macro="context/@@buildlicence-macros/locationMacro" />
 </dd>
 
 <dt class="formTab" id="fieldsetlegend-urban_investigation_and_advices" i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices"><span>Investigation and advices</span></dt>
@@ -54,7 +54,7 @@
 
 <dt class="formTab" id="fieldsetlegend-urban_peb" i18n:domain="plone" i18n:translate="label_schema_urban_peb"><span>PEB</span></dt>
 <dd id="fieldset-urban_peb">
- <metal:listing use-macro="here/buildlicence_macros/macros/buildLicencePEBMacro" />
+ <metal:listing use-macro="context/@@buildlicence-macros/PEBMacro" />
 </dd>
 
 <dt class="formTab" id="fieldsetlegend-urban_events" i18n:domain="plone" i18n:translate="label_schema_urban_events"><span>Events</span></dt>
@@ -68,15 +68,15 @@
 
 <div tal:condition="not: useTabbing">
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_description">Description</legend></strong>
- <metal:description use-macro="here/buildlicence_macros/macros/buildLicenceDescriptionMacro" />
+ <metal:description use-macro="context/@@buildlicence-macros/descriptionMacro" />
 </fieldset>
 
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_road">Road</legend></strong>
- <metal:road use-macro="here/buildlicence_macros/macros/buildLicenceRoadMacro" />
+ <metal:road use-macro="context/@@buildlicence-macros/roadMacro" />
 </fieldset>
 
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_location">Location</legend></strong>
- <metal:location use-macro="here/buildlicence_macros/macros/buildLicenceLocationMacro" />
+ <metal:location use-macro="context/@@buildlicence-macros/locationMacro" />
 </fieldset>
 
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices">Investigation and advices</legend></strong>
@@ -84,7 +84,7 @@
 </fieldset>
 
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_peb">PEB</legend></strong>
- <metal:peb use-macro="here/buildlicence_macros/macros/buildLicencePEBMacro" />
+ <metal:peb use-macro="context/@@buildlicence-macros/PEBMacro" />
 </fieldset>
 
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_events">Events</legend></strong>
