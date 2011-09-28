@@ -15,6 +15,7 @@ def configure_urban_site(portal, name='', nis='', pghost='localhost',
         out.append("!! %s" % line)
 
     #configuring portal
+    portal.portal_languages.setDefaultLanguage('fr')
     ps = portal.portal_setup
     ps.runAllImportStepsFromProfile('profile-Products.urban:default')
     ps.runAllImportStepsFromProfile('profile-Products.urbanskin:default')
