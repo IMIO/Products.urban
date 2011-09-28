@@ -191,7 +191,7 @@
  <tr tal:condition="python: context.attributeIsUsed('roadEquipments')">
   <td valign="top"><b><span i18n:translate="urban_label_roadEquipments">Road equipments</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top" style="padding-top: 1em;" tal:define="roadEquipments context/getRoadEquipments"><tal:block condition="roadEquipments"><metal:myfield use-macro="python:here.widget('roadEquipments', mode='view')" /></tal:block><span tal:condition="not: context/getRoadEquipments" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top" style="padding-top: 1em;" tal:define="roadEquipments context/getRoadEquipments"><tal:block condition="roadEquipments"><metal:myfield use-macro="python:here.widget('roadEquipments', mode='view')" /></tal:block><span tal:condition="not: roadEquipments" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_pash">PASH</span>:</b></td>
