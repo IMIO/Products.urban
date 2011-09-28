@@ -5,6 +5,10 @@
 /* <dtml-with base_properties> (do not remove this :) */
 /* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
 
+.listing img, .listing input {
+    vertical-align: sub;
+}
+
 /* align the add button of datagrid widgets on the left */
 #datagridwidget-add-button {
  float: left;
