@@ -19,7 +19,7 @@ def makeContext(pif):
 
     nisre = re.compile(r'^ *INS *= *(\d+)', re.I)
     sqlurlre = re.compile(
-        r'^ *sqlalchemy.url *= *postgresql://(\w+):(\w+)@([\d\.\:]+)/(\w+)',
+        r'^ *sqlalchemy.url *= *postgresql://(\w+):(\w+)@([\w\.\:]+)/(\w+)',
         re.I)
     urbanmapre = re.compile(r'^ *urbanmap_url *= *http://([\d\.\:]+)', re.I)
 
