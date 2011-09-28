@@ -360,7 +360,7 @@ can receive a "actionsToHide" list of actions not to display</tal:comment>
           <!-- Icon -->
           <input tal:condition="python: hasattr(thisObject, imageName)" type="image" tal:attributes="src string:${portal_url}/${imageName};
                                               title python: transition['id']"
-                 i18n:attributes="title" class="imageInput"/>
+                 i18n:attributes="title" />
           <!-- Button -->
           <input tal:condition="python: not hasattr(thisObject, imageName)"
                  type="submit" tal:attributes="value python: transition['id'];"
