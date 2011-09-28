@@ -305,5 +305,13 @@ registerType(Division, PROJECTNAME)
 # end of class Division
 
 ##code-section module-footer #fill in your manual code here
+def finalizeSchema(schema, folderish=False, moveDiscussion=True):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('comments', after='foldermanagers')
+    return schema
+
+finalizeSchema(Division_schema)
 ##/code-section module-footer
 
