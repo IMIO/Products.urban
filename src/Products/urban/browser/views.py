@@ -35,15 +35,13 @@ class WMC(BrowserView):
                 url=defaulturl
             else:
                 url=additional_layer.getWMSUrl()
-                
             hidden = 1
             if additional_layer.getVisibility() == True:
                 hidden = 0
-
             layers.append({'url' : url,'srs':additional_layer.getSRS(),'title':additional_layer.Title,'name' : additional_layer.getLayers(),'format':additional_layer.getLayerFormat(),'style':additional_layer.getStyles(),'hidden': hidden})
         return layers
-    def wmc(self):
 
+    def wmc(self):
         """
           Initialize the map on element
         """
@@ -78,12 +76,12 @@ class WMC(BrowserView):
                 self.ymin=result['ymin']
                 self.xmax=result['xmax']
                 self.ymax=result['ymax']
-                zoneExtent = "%s,%s,%s,%s" % (result['xmin'],result['ymin'],result['xmax'],result['ymax'])
+                #zoneExtent = "%s,%s,%s,%s" % (result['xmin'],result['ymin'],result['xmax'],result['ymax'])
             except:
-                zoneExtent = ""
+                #zoneExtent = ""
+                pass
         self.tmpl=ViewPageTemplateFile("wmc.pt")
         return self.tmpl(self)         
-
 
 class ProxyController(BrowserView):
     urlList = ["localhost:8081","89.16.179.114:8008","89.16.179.114:5000","cartopro2.wallonie.be"]

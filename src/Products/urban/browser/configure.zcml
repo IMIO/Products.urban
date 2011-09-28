@@ -13,6 +13,14 @@
       />
 
   <browser:page
+      for="Products.urban.interfaces.IUrbanEventInquiry"
+      name="wmc"
+      class=".views.WMC"
+      attribute="wmc"
+      permission="zope2.Public"
+      />
+
+  <browser:page
       for="Products.urban.interfaces.IUrbanTool"
       name="getProxy"
       class=".views.ProxyController"

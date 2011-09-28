@@ -9,11 +9,8 @@
 
 <head>
 <tal:block condition="parcels">
-
 <div metal:fill-slot="style_slot" >
     <div metal:use-macro="here/urban_macros/macros/urbanMapCSS" />
-</div>
-<div metal:fill-slot="javascript_head_slot" tal:define="webserverhost python: context.portal_urban.getWebServerHost();">
 </div>
 </tal:block>
 </head>
@@ -45,7 +42,7 @@
    <form>
     <input type="hidden" id="map_initialized" value="0" />
    </form>
-   <p i18n:translate="cartography" class="discreet">Cartography</p>
+   <fieldset><strong><legend i18n:translate="cartography">Cartography</legend></strong></fieldset>
    <div id="urbanmapctn" style="width:100%; height:800px"></div>
   </tal:block>
 

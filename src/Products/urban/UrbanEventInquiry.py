@@ -26,6 +26,7 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from OFS.ObjectManager import BeforeDeleteException
+from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 ##/code-section module-header
 
@@ -146,6 +147,15 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
                     claimant.getZipcode() + ' ' + claimant.getCity()
         toreturn = toreturn + '</CSV>'
         return toreturn
+
+    security.declarePublic('getParcels')
+    def getParcels(self):
+        """
+          return the contained parcels
+        """
+        tool = getToolByName(self, 'portal_urban')
+        parcels = tool.queryCatalog(batch=False, context=self, specificSearch='searchPortionOuts', theObjects=True)
+        return parcels
 
 
 

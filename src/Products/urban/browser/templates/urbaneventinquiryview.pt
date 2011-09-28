@@ -8,10 +8,10 @@
                          border python: member.has_permission('Modify portal content', context) and 'enable_border' or 'disable_border';
                          dummy python:request.set(border, 1);" />
 
-<tal:block condition="context/getRecipients">
-    <div metal:fill-slot="style_slot">
-        <!--link rel="stylesheet" href="map.css" type="text/css" media="screen" charset="utf-8" /-->
-    </div>
+<tal:block condition="parcels">
+<div metal:fill-slot="style_slot" >
+    <div metal:use-macro="here/urban_macros/macros/urbanMapCSS" />
+</div>
 </tal:block>
 </head>
 
@@ -20,7 +20,8 @@
 <metal:main_macro define-macro="main">
 <metal:body define-macro="body_macro" tal:define="member context/@@plone_portal_state/member;
                                                   recipients context/getRecipients;
-                                                  linkedUrbanEventType context/getUrbaneventtypes">
+                                                  linkedUrbanEventType context/getUrbaneventtypes;
+                                                  global parcels python: context.getParcels();">
 <h1 class="documentFirstHeading">
  <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
  <span tal:replace="here/Title" tal:omit-tag="">Title</span>
@@ -118,7 +119,7 @@
 </table>
 
 <tal:block condition="python: member.has_permission('Modify portal content', context) and linkedUrbanEventType.getSpecialFunctionName()">
- <fieldset><strong><legend i18n:translate="event_inquiry_special_function">Claimants</legend><strong>
+ <fieldset><strong><legend i18n:translate="event_inquiry_special_function">Sepcial function</legend><strong>
   <a tal:attributes="href linkedUrbanEventType/getSpecialFunctionUrl" tal:content="linkedUrbanEventType/getSpecialFunctionName"/><br><br>
  </fieldset>
 </tal:block>
@@ -149,6 +150,17 @@
 <Script tal:content="python:'document.location = \''+docObj.getObject().absolute_url()+'/external_edit\';'" />
 </tal:block>
 </tal:block>
+
+
+<tal:block condition="parcels">
+   <div metal:use-macro="here/urban_macros/macros/urbanMapScript" />
+   <form>
+    <input type="hidden" id="map_initialized" value="0" />
+   </form>
+   <p i18n:translate="cartography" class="discreet">Cartography</p>
+   <div id="urbanmapctn" style="width:100%; height:800px"></div>
+</tal:block>
+
 
  </metal:body>
 </metal:main_macro>

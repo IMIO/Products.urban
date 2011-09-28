@@ -3,6 +3,7 @@ from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.urban.Inquiry import Inquiry
+from Products.urban.browser.mapview import MapView
 
 class UrbanEventView(BrowserView):
     """
@@ -46,7 +47,7 @@ class UrbanEventView(BrowserView):
         return False
 
 
-class UrbanEventInquiryView(UrbanEventView):
+class UrbanEventInquiryView(UrbanEventView, MapView):
     """
       This manage the view of UrbanEventInquiry
       It is based on the default UrbanEventView
