@@ -6,10 +6,10 @@ import psycopg2.extras
 import sys
 import time
 
-urbanmap_dir = '/srv/urbanmap/urbanMap'
-config_dir = os.path.join(urbanmap_dir, 'config')
+urbanmap_dir = '/srv/urbanmap/urbanMap'  #directory where urbanmap is installed
+config_dir = os.path.join(urbanmap_dir, 'config') #a subdirectory config must be present !
 pylon_instances_file = os.path.join(config_dir, 'pylon_instances.txt')
-pg_address = 'localhost:5432'
+pg_address = 'localhost:5432' #set the ip address if the browser clients aren't local
 
 def convertprc(prc):
    
@@ -608,6 +608,7 @@ if step in run_steps:
                     print "error when getting admnr from da"
                 else:
                     INS = rec[0]
+                    print "INS='%s'"%INS
                     ifile = open(os.path.join(config_dir, 'base.ini'))
                     out = []
                     for line in ifile:
