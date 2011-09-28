@@ -267,7 +267,6 @@
   <td width="2%"></td>
   <td width="49%" valign="top" valign="top" tal:define="isInSubdivision context/getIsInSubdivision">
    <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='view')" />
-   <span tal:condition="not: isInSubdivision" class="discreet" i18n:translate="content_none">None</span>
    <tal:isInSubdivision condition="isInSubdivision">
     <br />
     <metal:myfield use-macro="python:here.widget('parcellings', mode='view')" />
@@ -283,7 +282,6 @@
   <td width="2%"></td>
   <td valign="top" tal:define="isInPCA context/getIsInPCA">
    <metal:myfield use-macro="python:here.widget('isInPCA', mode='view')" />
-   <span tal:condition="not: isInPCA" class="discreet" i18n:translate="content_none">None</span>
    <tal:isInPCA condition="isInPCA">
     <br />
     <metal:myfield use-macro="python:here.widget('pca', mode='view')" />
@@ -394,7 +392,6 @@
      </fieldset>
     </tal:manage_subdivision>
    </tal:subdivision>
-
 
    <tal:other condition="not: python: fieldName in ['isInPCA', 'pca', 'isInSubdivision', 'parcellings', 'subdivisionDetails',]">
     <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
