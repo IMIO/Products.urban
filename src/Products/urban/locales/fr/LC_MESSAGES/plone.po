@@ -199,6 +199,9 @@ msgstr "Incomplet"
 msgid "isincomplete"
 msgstr "Incomplet"
 
+msgid "label_schema_default"
+msgstr "Données"
+
 msgid "label_schema_urban_carto"
 msgstr "Cartographie"
 

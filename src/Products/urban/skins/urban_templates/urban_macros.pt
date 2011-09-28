@@ -649,3 +649,23 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
  </tr>
  </table>
 </div>
+
+<metal:edit define-macro="editDefaultMacro"
+               tal:define="member context/@@plone_portal_state/member; 
+                       border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
+                       dummy python:request.set(border, 1);
+                       putils context/plone_utils;">
+
+      <tal:fieldsets repeat="fieldset python: ['default',]">
+        <fieldset class="urbanEditWithTabbing" tal:define="fieldsetid python:putils.normalizeString(fieldset)"
+                tal:attributes="id string:fieldset-${fieldsetid}">
+          <legend id="#"
+                  tal:content="python: view.getTranslatedSchemaLabel(fieldset)"
+                  tal:attributes="id string:fieldsetlegend-${fieldsetid}"
+                  i18n:translate="" />
+          <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=True)">
+           <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
+          </tal:fields>
+        </fieldset>
+      </tal:fieldsets>
+</metal:edit>

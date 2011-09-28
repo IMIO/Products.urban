@@ -211,6 +211,9 @@ msgstr ""
 msgid "label_schema_urban_description"
 msgstr ""
 
+msgid "label_schema_default"
+msgstr ""
+
 msgid "label_schema_urban_details"
 msgstr ""
 
