@@ -461,11 +461,11 @@ urbanEventTypes = {
                     {
                     'id': "decision-octroi-refus",
                     'title': "Octroi/refus de la division",
-                    'activatedFields': [],
+                    'activatedFields': ['decisionDate', 'decision'],
                     'deadLineDelay': 15,
                     'podTemplates': (
-                                     {'id': "div-decision-octroi.odt", 'title': "Octroi de la division"},
-                                     {'id': "div-transmis-decision.odt", 'title': "Octroi de la division (transmis au notaire)"},
+                                     {'id': "div-decision-octroi", 'title': "Octroi de la division"},
+                                     {'id': "div-transmis-decision", 'title': "Octroi de la division (transmis au notaire)"},
                                     ),
                     },
                    ),

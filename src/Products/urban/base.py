@@ -74,7 +74,7 @@ class UrbanBase(object):
         return "Calculated/Reference/%s" % str(self.getReference())
 
     security.declarePublic('getNotariesSignaletic')
-    def getNotariesSignaletic(self):
+    def getNotariesSignaletic(self, withaddress=False):
         """
           Returns a string reprensenting the signaletic of every notaries
         """
@@ -84,7 +84,7 @@ class UrbanBase(object):
             #if the signaletic is not empty, we are adding several notaries
             if signaletic:
                 signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
-            signaletic += notary.getSignaletic()
+            signaletic += 'Maitre %s' % notary.getSignaletic(withaddress=withaddress)
         return signaletic
 
     security.declarePublic('getArchitectsSignaletic')
