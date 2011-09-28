@@ -97,4 +97,10 @@ color: red;
 .urban-edit-tabbing{
 outline: none !important;
 }
+
+#datagridwidget-table-workLocations {
+    width: 600px !important;
+}
+
+
 /* </dtml-with> */
