@@ -451,7 +451,7 @@ def addUrbanGroups(context):
     site = context.getSite()
     #add 3 groups
     #one with urban Managers 
-    site.portal_groups.addGroup("urban_managers", title="Urban managers")
+    site.portal_groups.addGroup("urban_managers", title="Urban Managers")
     #one with urban Readers
     site.portal_groups.addGroup("urban_readers", title="Urban Readers")
     #one with urban Editors
