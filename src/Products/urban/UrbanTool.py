@@ -997,7 +997,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         dateto=datesplited[2]+'/'+datesplited[1]+'/'+datesplited[0]
         catalog = getToolByName(self, 'portal_catalog')
         pw = getToolByName(self, 'portal_workflow')
-        results = catalog.searchResults(getDecisionDate = {'query' : (DateTime(datefrom),DateTime(dateto)), 'range' : 'minmax'}, id='delivrance-du-permis-octroi-ou-refus',portal_type = 'UrbanEvent')
+        results = catalog.searchResults(getDecisionDate = {'query' : (DateTime(datefrom),DateTime(dateto)), 'range' : 'minmax'}, object_provides='Products.urban.interfaces.ITheLicenceEvent', portal_type='UrbanEvent')
         i=1
         xmlError=''
         xmlContent='<?xml version="1.0" encoding="iso-8859-1"?>\n'
@@ -1014,8 +1014,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             eventObj=obj.getObject()
             licenceObj=eventObj.getParentNode()
             applicantObj=licenceObj.getApplicants()[0]
-            architectObj=licenceObj.getArchitects()[0]
-            if architectObj==None:
+            architects = licenceObj.getArchitects()
+            if architects:
+                architectObj = architects[0]
+            else:
                 xmlError=xmlError+applicantObj.getName1()+' '+applicantObj.getName2()+'\n'
             worktype=licenceObj.getWorkType()
             if (pw.getInfoFor(licenceObj,'review_state')=='accepted'):
