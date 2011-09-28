@@ -52,7 +52,7 @@ urbanEventTypes = {
                     {
                     'id': "recepisse-article-116",
                     'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)",
-                    'activatedFields': ['eventDate', ],
+                    'activatedFields': [],
                     'deadLineDelay': 15,
                     'podTemplates': ({'id': "urb-recepisse-art116", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
                     'eventTypeType': 'Products.urban.interfaces.IModificationDepositEvent',
@@ -217,14 +217,6 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.ICommunalCouncilEvent',
                     },
                     {
-                    'id': "recepisse-article-116",
-                    'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)",
-                    'activatedFields': [],
-                    'deadLineDelay': 15,
-                    'podTemplates': ({'id': "urb-recepisse-art116", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
-                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
-                    },
-                    {
                     'id': "delivrance-du-permis-octroi-ou-refus",
                     'title': "Délivrance du permis (octroi ou refus)",
                     'eventDateLabel': "Date de notification",
@@ -358,13 +350,6 @@ urbanEventTypes = {
                     'activatedFields': [],
                     'deadLineDelay': 0,
                     'podTemplates': ({'id': "urb-rappel-implantation-peb", 'title': "Rappel implantation et PEB"},),
-                    },
-                    {
-                    'id': "demande-irrecevable-art159",
-                    'title':"Demande irrecevable (article 159 bis)",
-                    'activatedFields': [],
-                    'deadLineDelay': 0,
-                    'podTemplates': ({'id': "urb-demande-irrecevable-art159", 'title': "Demande irrecevable (article 159 bis)"},),
                     },
                     {
                     'id': "demande-irrecevable-art159",
