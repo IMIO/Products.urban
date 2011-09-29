@@ -711,7 +711,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (self.getSqlName(), self.getSqlUser(), self.getSqlHost(), self.getSqlPassword()))
             ptool.addPortalMessage(_(u"db_connection_successfull"), type='info')
         except psycopg2.OperationalError, e:
-            ptool.addPortalMessage(_(u"db_connection_error", mapping={u'error': unicode(e.__str__(), 'utf-8')}))
+            ptool.addPortalMessage(_(u"db_connection_error", mapping={u'error': unicode(e.__str__(), 'utf-8')}), type='error')
 
     security.declarePublic('mayAccessUrban')
     def mayAccessUrban(self):
