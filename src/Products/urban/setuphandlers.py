@@ -19,7 +19,6 @@ logger = logging.getLogger('urban: setuphandlers')
 from Products.urban.config import PROJECTNAME
 from Products.urban.config import DEPENDENCIES
 import os
-from Products.urban.utils import generatePassword
 from Products.CMFCore.utils import getToolByName
 import transaction
 ##code-section HEAD
@@ -32,6 +31,7 @@ from Products.urban.interfaces import ILicenceContainer
 from zope.interface import alsoProvides
 from zope.i18n import translate as _
 from exportimport import addUrbanEventTypes
+from Products.urban.utils import generatePassword
 ##/code-section HEAD
 
 def isNoturbanProfile(context):
