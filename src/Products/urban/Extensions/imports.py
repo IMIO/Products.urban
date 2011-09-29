@@ -24,21 +24,29 @@ def createStreet(self, city, zipcode, streetcode, streetname, bestAddresskey=0, 
     cityId = self.plone_utils.normalizeString(city)
     
     if not ex_streets.has_key(city):
-        ex_streets[city] = {'zip':zipcode, 'streets':{}}
+        ex_streets[city] = {'cityId':'', 'zip':zipcode, 'streets':{}}
     #we check if the city has always the same zip
     if ex_streets[city]['zip'] != int(zipcode):
         out.append("! Current record: city '%s', zip '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'"%(city, zipcode, streetname, streetcode, bestAddresskey, regionalroad, startdate, enddate))
         out.append("&nbsp;&nbsp;... The existing city '%s' has zip '%s'"%(city, ex_streets[city]['zip']))
     cityTemp = cityId
     counter = 1
-    while hasattr(streetFolder, cityId):
-        cityId= "%s%d" %(cityTemp, counter)
-        counter += 1
-
+    if ex_streets[city]['cityId'] == '':
+        print(cityId)
+        while hasattr(streetFolder, cityId):
+            cityId= "%s%d" %(cityTemp, counter)
+            counter += 1
+        ex_streets[city]['cityId']=cityId
+        cityObjId = streetFolder.invokeFactory('City', id=cityId, title=city, zipCode=zipcode)
+        cityObj = getattr(streetFolder, cityId)
+        cityObj.reindexObject()
+    print(cityId)
+    cityId =  ex_streets[city]['cityId']
     #if the city still does not exist, we create it
-    cityObjId = streetFolder.invokeFactory('City', id=cityId, title=city, zipCode=zipcode)
-    cityObj = getattr(streetFolder, cityObjId)
-    cityObj.reindexObject()
+    try:
+        cityObj = getattr(streetFolder, cityId)
+    except:
+        import pdb; pdb.set_trace()
 
     #transform dates into DateTimes
     if startdate:
