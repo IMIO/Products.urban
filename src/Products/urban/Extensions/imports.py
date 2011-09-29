@@ -26,13 +26,12 @@ def createStreet(self, city, zipcode, streetcode, streetname, bestAddresskey=0, 
     if not ex_streets.has_key(city):
         ex_streets[city] = {'cityId':'', 'zip':zipcode, 'streets':{}}
     #we check if the city has always the same zip
-    if ex_streets[city]['zip'] != int(zipcode):
+    if ex_streets[city]['zip'] != zipcode:
         out.append("! Current record: city '%s', zip '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'"%(city, zipcode, streetname, streetcode, bestAddresskey, regionalroad, startdate, enddate))
         out.append("&nbsp;&nbsp;... The existing city '%s' has zip '%s'"%(city, ex_streets[city]['zip']))
     cityTemp = cityId
     counter = 1
     if ex_streets[city]['cityId'] == '':
-        print(cityId)
         while hasattr(streetFolder, cityId):
             cityId= "%s%d" %(cityTemp, counter)
             counter += 1
@@ -40,7 +39,6 @@ def createStreet(self, city, zipcode, streetcode, streetname, bestAddresskey=0, 
         cityObjId = streetFolder.invokeFactory('City', id=cityId, title=city, zipCode=zipcode)
         cityObj = getattr(streetFolder, cityId)
         cityObj.reindexObject()
-    print(cityId)
     cityId =  ex_streets[city]['cityId']
     #if the city still does not exist, we create it
     try:
