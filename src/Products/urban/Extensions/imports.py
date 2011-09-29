@@ -29,14 +29,16 @@ def createStreet(self, city, zipcode, streetcode, streetname, bestAddresskey=0, 
     if ex_streets[city]['zip'] != int(zipcode):
         out.append("! Current record: city '%s', zip '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'"%(city, zipcode, streetname, streetcode, bestAddresskey, regionalroad, startdate, enddate))
         out.append("&nbsp;&nbsp;... The existing city '%s' has zip '%s'"%(city, ex_streets[city]['zip']))
+    cityTemp = cityId
+    counter = 1
+    while hasattr(streetFolder, cityId):
+        cityId= "%s%d" %(cityTemp, counter)
+        counter += 1
 
-    if not hasattr(aq_base(streetFolder), cityId):
-        #if the city still does not exist, we create it
-        cityObjId = streetFolder.invokeFactory('City', id=cityId, title=city, zipCode=zipcode)
-        cityObj = getattr(streetFolder, cityObjId)
-        cityObj.reindexObject()
-    else:
-        cityObj = getattr(streetFolder, cityId)
+    #if the city still does not exist, we create it
+    cityObjId = streetFolder.invokeFactory('City', id=cityId, title=city, zipCode=zipcode)
+    cityObj = getattr(streetFolder, cityObjId)
+    cityObj.reindexObject()
 
     #transform dates into DateTimes
     if startdate:
