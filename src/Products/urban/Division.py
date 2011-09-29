@@ -154,6 +154,7 @@ schema = Schema((
         multiValued=1,
         relationship='division_foldermanager',
         required=True,
+        schemata='urban_description',
     ),
 
 ),
