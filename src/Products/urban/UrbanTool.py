@@ -1140,21 +1140,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 output.write(unicode(xmlContent.replace("&","&amp;"),'iso-8859-1').encode('iso-8859-1'))
                 return output.getvalue()
 
-    security.declarePublic('searchLicense')
-    def searchLicense (self, **keywords):
-        """
-          Find licences with given paramaters
-        """
-        catalogTool = getToolByName(self, 'portal_catalog')
-        res = []
-        try:
-            res = catalogTool(**keywords)
-            return res
-        except ParseError:
-            #in case something like '*' is entered, ZCTextIndex raises an error...
-            ptool = getToolByName(self, "plone_utils")
-            ptool.addPortalMessage(_(u"please_enter_more_letters"), type="info")
-            return res
 
     security.declarePublic('searchByApplicant')
     def searchByApplicant(self, foldertypes, applicantInfosIndex):
