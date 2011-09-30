@@ -98,10 +98,11 @@ schema = Schema((
             label_msgid='urban_label_foldermanagers',
             i18n_domain='urban',
         ),
-        allowed_types=('FolderManager',),
+        required=False,
+        schemata='urban_description',
         multiValued=1,
         relationship='environmentalDeclarationFolderManagers',
-        required=False,
+        allowed_types=('FolderManager',),
     ),
 
 ),

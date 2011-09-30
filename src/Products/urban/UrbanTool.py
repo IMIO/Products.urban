@@ -1140,7 +1140,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 output.write(unicode(xmlContent.replace("&","&amp;"),'iso-8859-1').encode('iso-8859-1'))
                 return output.getvalue()
 
-
     security.declarePublic('searchByApplicant')
     def searchByApplicant(self, foldertypes, applicantInfosIndex):
         """
