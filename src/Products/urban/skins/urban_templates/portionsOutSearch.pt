@@ -62,7 +62,7 @@
                 <tr align=center>
                  <td>
                  <select name="division" value="division"> 
-                    <tal:block repeat="div divisions">                       
+                    <tal:block condition="python: not ('Programming error in query','Programming error in query') in divisions" repeat="div divisions">                       
                        <option tal:attributes="selected python: str(div['da']) == division; value python: div['da'];" tal:content="python: div['divname']" />
                     </tal:block>
                  </select>
