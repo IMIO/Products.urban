@@ -504,7 +504,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                                 tal:content="title_or_id" />
                             <tal:block condition="python: obj.portal_type in ['UrbanEvent', 'UrbanEventInquiry',]">
                              <tal:block define="object obj/getObject;
-                                                suffix python: member.has_permission('Modify portal content', obj) and '/external_edit' or ''"
+                                                suffix python: member.has_permission('Modify portal content', object) and '/external_edit' or ''"
                                                 repeat="doc object/getDocuments">
                               <br /><a href="#" class="discreet" style="margin-left:20px" tal:content="doc/Title" tal:attributes="href python: doc.absolute_url() + suffix">Document</a>
                              </tal:block>
