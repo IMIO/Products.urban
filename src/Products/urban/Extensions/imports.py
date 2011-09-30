@@ -36,15 +36,12 @@ def createStreet(self, city, zipcode, streetcode, streetname, bestAddresskey=0, 
             cityId= "%s%d" %(cityTemp, counter)
             counter += 1
         ex_streets[city]['cityId']=cityId
+        #if the city doesnt exist we create it
         cityObjId = streetFolder.invokeFactory('City', id=cityId, title=city, zipCode=zipcode)
         cityObj = getattr(streetFolder, cityId)
         cityObj.reindexObject()
     cityId =  ex_streets[city]['cityId']
-    #if the city still does not exist, we create it
-    try:
-        cityObj = getattr(streetFolder, cityId)
-    except:
-        import pdb; pdb.set_trace()
+    cityObj = getattr(streetFolder, cityId)
 
     #transform dates into DateTimes
     if startdate:
@@ -147,7 +144,7 @@ def load_existing_streets(self, dic):
     localities = tool.streets.objectValues('City')
     for locality in localities:
         loc_title = locality.Title()
-        dic[loc_title] = {'zip':locality.getZipCode(), 'streets':{}}
+        dic[loc_title] = {'cityId':locality.id, 'zip':locality.getZipCode(), 'streets':{}}
         cnt_ba = cnt_man = 0
         streets = dic[loc_title]['streets']
         for street in locality.objectValues('Street'):
