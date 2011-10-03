@@ -4,6 +4,7 @@ import logging
 
 from zope.interface import alsoProvides
 from zope.i18n import translate as _
+from zope import event
 
 from Acquisition import aq_base
 
@@ -13,7 +14,7 @@ from Products.contentmigration.archetypes import InplaceATFolderMigrator
 from Products.urban.events.urbanEventInquiryEvents import setLinkedInquiry
 from Products.urban.events.urbanEventEvents import setEventTypeType, setCreationDate
 from Products.urban.interfaces import ILicenceContainer
-
+from Products.Archetypes.event import ObjectInitializedEvent
 logger = logging.getLogger('urban: migrations')
 
 def isNoturbanMigrationsProfile(context):
@@ -809,8 +810,8 @@ class UrbanVocabularyTermToOrganisationTermMigrator(object, InplaceATFolderMigra
         for brain in brains:
             if self.new_id in brain.id:
                 self.new.setLinkedOpinionRequestEvent(brain.getObject())
-                break
-     
+                return
+        event.notify(ObjectInitializedEvent(self.new))     
 
 def migrate_foldermakers_terms(context):
     """
@@ -818,7 +819,7 @@ def migrate_foldermakers_terms(context):
     """
     if isNoturbanMigrationsProfile(context): return
 
-    logger.info("Migrating UrbanVocabularyterms 'foldermakers': starting... BLAAAAAAAAA")
+    logger.info("Migrating UrbanVocabularyterms 'foldermakers': starting...")
    
     migrators = (UrbanVocabularyTermToOrganisationTermMigrator,)
 
