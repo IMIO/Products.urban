@@ -803,7 +803,6 @@ class UrbanVocabularyTermToOrganisationTermMigrator(object, InplaceATFolderMigra
         """
           We have to link the OrganisationTerm to its coresponding UrbanEventType 
         """
-        import pdb; pdb.set_trace()
         catalog = getToolByName(self.new, 'portal_catalog')
         self.new_id 
         brains = catalog(portal_type=('UrbanEventType',))
