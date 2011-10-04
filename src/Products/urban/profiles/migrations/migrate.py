@@ -896,6 +896,8 @@ def addInvestigationArticlesToBuildLicenceConfig(context):
       Helper method for updating investigations articles in the investigationArticles
       of the BuildLicences LicenceConfig
     """
+    if isNoturbanMigrationsProfile(context): return
+
     site = context.getSite()
     configFolder = getattr(site.portal_urban, 'buildlicence')
     logger.info("Adding default investigation articles in the BuildLicence LicenceConfig: starting...")
