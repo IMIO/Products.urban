@@ -1012,6 +1012,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         xmlContent=xmlContent+'  </E_220_herkomst>\n'
         lsttermarchitect=["NON REQUIS","lui-meme","Eux-memes","elle-meme","lui-meme","lui-même","lui-meme ","Lui-meme","A COMPLETER "]
         htmllist='<HTML><TABLE>'
+        import pdb; pdb.set_trace()
         for obj in results:
             eventObj=obj.getObject()
             licenceObj=eventObj.getParentNode()
@@ -1030,43 +1031,23 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                     xmlContent=xmlContent+'      <Doc_Afd>'+licenceObj.objectValues('PortionOut')[0].getDivisionCode()+'</Doc_Afd>\n'
                 except:
                     xmlError=xmlError+str(licenceObj.getReference())
-                try:
-                    if licenceObj.getWorkLocationStreet():
-                        xmlContent=xmlContent+'      <E_220_straatcode>'+str(licenceObj.getWorkLocationStreetCode())+'</E_220_straatcode>\n'
-                        xmlContent=xmlContent+'      <E_220_straatnaam>'+str(licenceObj.getWorkLocationStreet()).decode('utf-8').encode('iso-8859-1')+'</E_220_straatnaam>\n'
-                    else:
-                        xmlError=xmlError+'pas de rue: '+str(licenceObj.getReference())+' '+licenceObj.licenceSubject.encode('iso-8859-1')+' '+applicantObj.name1.encode('iso-8859-1')+' '+applicantObj.name2.encode('iso-8859-1')+'\n'
-                except:
-                    xmlError=xmlError+'problème de rue: '+str(licenceObj.getReference())+' '+licenceObj.licenceSubject.encode('iso-8859-1')+' '+applicantObj.name1.encode('iso-8859-1')+' '+applicantObj.name2.encode('iso-8859-1')+'\n'
-                xmlContent=xmlContent+'      <E_220_huisnr>'+licenceObj.getWorkLocationHouseNumber()+'</E_220_huisnr>\n'
-                if worktype=='ncmu':
-                    xmlWorkType='N_UNI'
+                street = number = None
+                if licenceObj.getWorkLocations():
+                    number = licenceObj.getWorkLocations()[0]['number']
+                    street = catalog.searchResults(UID=licenceObj.getWorkLocations()[0]['street'])
+                if street:
+                    street = street[0].getObject()
+                    xmlContent=xmlContent+'      <E_220_straatcode>'+str(street.getStreetCode())+'</E_220_straatcode>\n'
+                    xmlContent=xmlContent+'      <E_220_straatnaam>'+str(street.getStreetName()).decode('utf-8').encode('iso-8859-1')+'</E_220_straatnaam>\n'
                 else:
-                    if worktype=='ncia':
-                        xmlWorkType='N_APPART'
-                    else:
-                        if worktype=='nca':
-                            xmlWorkType='N_AUT'
-                        else:
-                            if worktype=='tmu':
-                                xmlWorkType='T_UNI'
-                            else:
-                                if worktype=='tia':
-                                    xmlWorkType='T_APPART'
-                                else:
-                                    if worktype=='tab':
-                                        xmlWorkType='T_AUT'
-                                    else:
-                                        if worktype=='dg':
-                                            xmlWorkType='DEM'
-                                        else:
-                                            if worktype=='autres':
-                                                xmlWorkType='AUTRE'
-                                            else:
-                                                if worktype=='tnbg':
-                                                    xmlWorkType='T_NBAT'
-                                                else:
-                                                    xmlError=xmlError+str(licenceObj.getReference())+' '+licenceObj.licenceSubject.encode('iso-8859-1')+' '+applicantObj.name1.encode('iso-8859-1')+' '+applicantObj.name2.encode('iso-8859-1')+'\n'
+                    xmlError=xmlError+'pas de rue: '+str(licenceObj.getReference())+' '+licenceObj.licenceSubject.encode('iso-8859-1')+' '+applicantObj.     name1.encode('iso-8859-1')+' '+applicantObj.name2.encode('iso-8859-1')+'\n'
+                if number:
+                    xmlContent=xmlContent+'      <E_220_huisnr>'+number+'</E_220_huisnr>\n'
+                worktype_map = {'ncmu':'N_UNI', 'ncia':'N_APPART', 'nca':'N_AUT', 'tmu':'T_UNI', 'tia':'T_APPART', 'tab':'T_AUT', 'dg':'DEM', 'autres':'AUTRE', 'tnbg':'T_NBAT'}
+                if worktype in worktype_map.keys():
+                     xmlWorkType=worktype_map[worktype]
+                else:
+                     xmlError=xmlError+str(licenceObj.getReference())+' '+licenceObj.licenceSubject.encode('iso-8859-1')+' '+applicantObj.name1.encode('iso-8859-1')+' '+applicantObj.name2.encode('iso-8859-1')+'\n'
                 xmlContent=xmlContent+'      <E_220_Typ>'+xmlWorkType+'</E_220_Typ>\n'
                 xmlContent=xmlContent+'      <E_220_Werk>'+licenceObj.licenceSubject.encode('iso-8859-1')+'</E_220_Werk>\n'
                 strDecisionDate=''+str(eventObj.getDecisionDate())
