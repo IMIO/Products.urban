@@ -390,6 +390,21 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         super(GenericLicence).__thisclass__.at_post_edit_script(self)
 
+    security.declarePublic('mayAddOpinionRequestEvent')
+    def mayAddOpinionRequestEvent(self, organisation):
+        """
+           This is used as TALExpression for the UrbanEventOpinionRequest
+           We may add an OpinionRequest if we asked one in an inquiry on the licence
+           We may add another if another inquiry defined on the licence ask for it and so on
+        """
+        limit = 0
+        inquiries = self.getInquiries()
+        for inquiry in inquiries:
+            if organisation in inquiry.getSolicitOpinionsTo():
+                limit += 1
+        limit = limit - len(self.getOpinionRequests(organisation))
+        return limit > 0
+
     security.declarePublic('mayAddInquiryEvent')
     def mayAddInquiryEvent(self):
         """
@@ -474,8 +489,17 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
             allOpinionsNoDup[actor]=opinion
         return allOpinionsNoDup.values()
 
-    def getAllOpinionRequests(self):
-        return self._getAllEvents(interfaces.IOpinionRequestEvent)
+    def getAllOpinionRequests(self, organisation=""):
+        if organisation == "":
+            return self._getAllEvents(interfaces.IOpinionRequestEvent)
+        catalog = getToolByName(self, 'portal_catalog')
+        currentPath = '/'.join(self.getPhysicalPath())
+        query = {'path': {'query': currentPath,
+                          'depth': 1},
+                 'meta_type': ['UrbanEvent', 'UrbanEventInquiry'],
+                 'sort_on': 'getObjPositionInParent',
+                 'id' : organisation.lower()}
+        return [brain.getObject() for brain in catalog(**query)]
 
     def getAllOpinionRequestsNoDup(self):
         allOpinions = self.getAllOpinionRequests()

@@ -585,8 +585,14 @@ msgstr "Coordonnées du notaire"
 msgid "label_colname_recipient_data"
 msgstr "Coordonnées du destinataire"
 
+msgid "label_colname_receiptDate"
+msgstr "Date de réception"
+
 msgid "label_colname_street"
 msgstr "Rue"
+
+msgid "label_colname_transmitDate"
+msgstr "Date d'envoi"
 
 msgid "label_edit"
 msgstr "Modifier"
@@ -1010,6 +1016,11 @@ msgstr "Numérotation des déclarations environnementales"
 #: Equipment.py
 msgid "urban_label_EquipmentType"
 msgstr "Type d'équipement"
+
+#. Default: "Linkedopinionrequestevent"
+#: LinkedOpinionRequestEvent.py
+msgid "urban_label_LinkedOpinionRequestEvent"
+msgstr ""
 
 # UrbanTool
 #. Default: "Nisnum"
@@ -1861,6 +1872,11 @@ msgstr "Numéro de matricule"
 #: Contact.py
 msgid "urban_label_representedBy"
 msgstr "Représenté par"
+
+#. Default: "Requestedorganisation"
+#: UrbanEventOpinionRequest.py
+msgid "urban_label_requestedOrganisation"
+msgstr "Organisme"
 
 #. Default: "Roadadaptation"
 #: BuildLicence.py

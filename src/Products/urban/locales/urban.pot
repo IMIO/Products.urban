@@ -557,9 +557,6 @@ msgstr ""
 msgid "label_colname_claimant_data"
 msgstr ""
 
-msgid "label_colname_created"
-msgstr ""
-
 msgid "label_colname_eventDate"
 msgstr ""
 
@@ -585,6 +582,9 @@ msgid "label_colname_recipient_data"
 msgstr ""
 
 msgid "label_colname_street"
+msgstr ""
+
+msgid "label_colname_transmitDate"
 msgstr ""
 
 msgid "label_edit"
@@ -1008,6 +1008,11 @@ msgstr ""
 #. Default: "Equipmenttype"
 #: Equipment.py
 msgid "urban_label_EquipmentType"
+msgstr ""
+
+#. Default: "Linkedopinionrequestevent"
+#: LinkedOpinionRequestEvent.py
+msgid "urban_label_LinkedOpinionRequestEvent"
 msgstr ""
 
 #. Default: "Nisnum"
@@ -1857,6 +1862,11 @@ msgstr ""
 #. Default: "Representedby"
 #: Contact.py
 msgid "urban_label_representedBy"
+msgstr ""
+
+#. Default: "Requestedorganisation"
+#: UrbanEventOpinionRequest.py
+msgid "urban_label_requestedOrganisation"
 msgstr ""
 
 #. Default: "Roadadaptation"

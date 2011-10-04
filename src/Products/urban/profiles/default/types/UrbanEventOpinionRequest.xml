@@ -1,39 +1,31 @@
 <?xml version="1.0"?>
-<object name="UrbanCertificateBase"
+<object name="UrbanEventOpinionRequest"
         meta_type="Factory-based Type Information with dynamic views"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         i18n:domain="plone">
    
- <property name="title" i18n:translate="">UrbanCertificateBase</property>
+ <property name="title" i18n:translate="">UrbanEventOpinionRequest</property>
  <property name="description" i18n:translate=""></property>
- <property name="content_icon">UrbanCertificateBase.gif</property>
- <property name="content_meta_type">UrbanCertificateBase</property>
+ <property name="content_icon">UrbanEventInquiry.png</property>
+ <property name="content_meta_type">UrbanEventOpinionRequest</property>
  <property name="product">urban</property>
- <property name="factory">addUrbanCertificateBase</property>
- <property name="immediate_view">folder_listing</property>
- <property name="global_allow">True</property>
- <property name="filter_content_types">True</property>
+ <property name="factory">addUrbanEventOpinionRequest</property>
+ <property name="immediate_view">urbaneventview</property>
+ <property name="global_allow">False</property>
+ <property name="filter_content_types">False</property>
  <property name="allowed_content_types">
-   <element value="PortionOut"/>
-   <element value="UrbanEvent"/>
-   <element value="UrbanEventInquiry"/>
-   <element value="UrbanEventOpinionRequest"/>
-   <element value="Applicant"/>
-   <element value="WorkLocation"/>
+   <element value="File"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">folder_listing</property>
+ <property name="default_view">urbaneventview</property>
  <property name="view_methods">
-  <element value="folder_summary_view"/>
-  <element value="folder_tabular_view"/>
-  <element value="atct_album_view"/>
-  <element value="folder_listing"/>
+  <element value="urbaneventview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
- <alias from="view" to="(selected layout)"/>
+ <alias from="index.html" to="(dynamic view)"/>
+ <alias from="view" to="urbaneventview"/>
  <alias from="edit" to="base_edit"/>
- <alias from="sharing" to="@@sharing"/>
  <action title="View" 
          action_id="view"
          category="object" 

@@ -119,7 +119,7 @@
 </table>
 
 <tal:block condition="python: member.has_permission('Modify portal content', context) and linkedUrbanEventType.getSpecialFunctionName()">
- <fieldset><strong><legend i18n:translate="event_inquiry_special_function">Sepcial function</legend><strong>
+ <fieldset><strong><legend i18n:translate="event_inquiry_special_function">Special function</legend><strong>
   <a tal:attributes="href linkedUrbanEventType/getSpecialFunctionUrl" tal:content="linkedUrbanEventType/getSpecialFunctionName"/><br><br>
  </fieldset>
 </tal:block>

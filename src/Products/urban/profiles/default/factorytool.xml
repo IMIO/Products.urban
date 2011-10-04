@@ -32,5 +32,7 @@
   <type portal_type="PersonTitleTerm"/>
   <type portal_type="Inquiry"/>
   <type portal_type="UrbanEventInquiry"/>
+  <type portal_type="UrbanEventOpinionRequest"/>
+  <type portal_type="OrganisationTerm"/>
  </factorytypes>
 </object>

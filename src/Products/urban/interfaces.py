@@ -15,7 +15,7 @@ class INotary(Interface):
     """Marker interface for .Notary.Notary
     """
 class IApplicant(Interface):
-    """Marker interface for .Architect.Architect
+    """Marker interface for .Applicant
     """
 class IArchitect(Interface):
     """Marker interface for .Architect.Architect
@@ -156,6 +156,14 @@ class IInquiry(Interface):
 
 class IUrbanEventInquiry(Interface):
     """Marker interface for .UrbanEventInquiry.UrbanEventInquiry
+    """
+
+class IUrbanEventOpinionRequest(Interface):
+    """Marker interface for .UrbanEventOpinionRequest.UrbanEventOpinionRequest
+    """
+
+class IOrganisationTerm(Interface):
+    """Marker interface for .OrganisationTerm.OrganisationTerm
     """
 
 ##code-section FOOT

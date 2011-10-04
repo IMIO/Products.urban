@@ -182,14 +182,6 @@ class UrbanEventType(BaseFolder, UrbanDelay, BrowserDefaultMixin):
                 res = False
         return res
 
-    def getTemplates(self):
-        """
-          Returns contained templates (File)
-        """
-        return self.listFolderContents({'portal_type': 'File'})
-
-
-
 registerType(UrbanEventType, PROJECTNAME)
 # end of class UrbanEventType
 

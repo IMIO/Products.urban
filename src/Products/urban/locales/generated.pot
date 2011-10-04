@@ -126,6 +126,11 @@ msgstr ""
 msgid "urban_label_EquipmentType"
 msgstr ""
 
+#. Default: "Linkedopinionrequestevent"
+#: LinkedOpinionRequestEvent.py
+msgid "urban_label_LinkedOpinionRequestEvent"
+msgstr ""
+
 #. Default: "Nisnum"
 #: UrbanTool.py
 msgid "urban_label_NISNum"
@@ -819,6 +824,11 @@ msgstr ""
 #. Default: "Representedby"
 #: Contact.py
 msgid "urban_label_representedBy"
+msgstr ""
+
+#. Default: "Requestedorganisation"
+#: UrbanEventOpinionRequest.py
+msgid "urban_label_requestedOrganisation"
 msgstr ""
 
 #. Default: "Roadadaptation"

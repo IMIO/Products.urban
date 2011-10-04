@@ -57,7 +57,7 @@
 </div>
 
 <div metal:define-macro="urbanEventGenerateDocumentMacro" i18n:domain="urban">
- <fieldset tal:define="templateObjs python: linkedUrbanEventType.getTemplates();
+ <fieldset tal:define="templateObjs python: context.getTemplates();
                        mayAddUrbanEvent view/mayAddUrbanEvent">
   <strong><legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend></strong>
   <tal:templateObjs condition="python: mayAddUrbanEvent and templateObjs">
@@ -137,7 +137,37 @@
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:inquiry.widget('solicitOpinionsTo', mode='view')" /><span tal:condition="not: inquiry/getSolicitOpinionsTo" class="discreet" i18n:translate="content_none">None</span></td>
+  <td tal:define="opinionIds inquiry/getSolicitOpinionsTo" style="padding-top: 1em;">
+    <table tal:condition="opinionIds" cellspacing="0" cellpadding="0" width="100%" class="listing">
+     <thead>
+      <tr>
+       <th i18n:translate="urban_label_requestedOrganisation">Organisation</th>
+       <th i18n:translate="urban_label_eventDate">Date</th>
+       <th i18n:translate="urban_label_receiptDate">Receipt date</th>
+       <th i18n:translate="urban_label_adviceAgreementLevel">Advice agreement level</th>
+      </tr>
+     </thead>
+     <tbody tal:define="tool python: context.portal_urban">
+     <tr tal:repeat="opinionId opinionIds">
+      <tal:block define="opinion python: inquiry.getLinkedUrbanEventOpinionRequest(opinionId)">
+       <tal:anEventIsLinked condition="python: opinion is not None">
+        <td><a href="#" tal:attributes="href opinion/absolute_url" tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">Opinion request</a></td>
+        <td tal:define="eventDate opinion/getEventDate"><span class="#" tal:attributes="class python: eventDate and 'plain' or 'discreet'" tal:content="python: eventDate and tool.formatDate(eventDate, translatemonth=False) or 'content_none'" i18n:translate="">None</span></td>
+        <td tal:define="receiptDate opinion/getReceiptDate"><span class="#" tal:attributes="class python: receiptDate and 'plain' or 'discreet'" tal:content="python: receiptDate and tool.formatDate(receiptDate, translatemonth=False) or 'content_none'" i18n:translate="">None</span></td>
+        <td tal:define="adviceAgreementLevel opinion/getAdviceAgreementLevel"><span class="#" tal:attributes="class python: adviceAgreementLevel and 'plain' or 'discreet'" tal:content="python: adviceAgreementLevel and adviceAgreementLevel or 'content_none'" i18n:translate="">None</span></td>
+       </tal:anEventIsLinked>
+       <tal:noEventIsLinked condition="python: opinion is None">
+        <td tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">Opinion request</td>
+        <td><span class="discreet" i18n:translate="content_none">None</span></td>
+        <td><span class="discreet" i18n:translate="content_none">None</span></td>
+        <td><span class="discreet" i18n:translate="content_none">None</span></td>
+       </tal:noEventIsLinked>
+      </tal:block>
+     </tr>
+     </tbody>
+    </table>
+  </td>
+
  </tr>
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_investigationOralReclamationNumber">Number of oral reclamations</span>:</b></td>
@@ -259,8 +289,7 @@
  <div tal:condition="not: applicants" i18n:translate="warning_add_an_applicant">
   You must encode applicant(s)
  </div>
- <div tal:define="tool python: context.portal_urban;
-                  Batch python:modules['Products.CMFPlone'].Batch;
+ <div tal:define="Batch python:modules['Products.CMFPlone'].Batch;
                   b_start request/b_start|python:0;
                   batch python: Batch(context.getApplicants(), 20, b_start);
                   showedCols python: ('Title', );
@@ -502,7 +531,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                                                 class obj_wf_state_class"
                                 class="link-plain"
                                 tal:content="title_or_id" />
-                            <tal:block condition="python: obj.portal_type in ['UrbanEvent', 'UrbanEventInquiry',]">
+                            <tal:block condition="python: obj.portal_type in ['UrbanEvent', 'UrbanEventInquiry', 'UrbanEventOpinionRequest']">
                              <tal:block define="object obj/getObject;
                                                 suffix python: member.has_permission('Modify portal content', object) and '/external_edit' or ''"
                                                 repeat="doc object/getDocuments">

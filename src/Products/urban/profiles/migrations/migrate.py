@@ -62,6 +62,8 @@ def migrateToPlone4(context):
     migrationProprietaryToContact(context)
     #Migration of Layers
     migrateLayersForMapfish(context)
+    #Migrate the foldermakers UrbanVocabularyTerms to allow them to link an UrbanEventType
+    migrateFoldermakersTerms(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -844,3 +846,48 @@ def migrateLayersForMapfish(context):
             continue
         if not layer.getLayerFormat():
             layer.setLayerFormat('image/png')
+
+class UrbanVocabularyTermToOrganisationTermMigrator(object, InplaceATItemMigrator):
+    """
+      Migrate UrbanVocabularyTerms to OrganisationTerm and link them to their coresponding UrbanEventType
+    """
+    walker = CustomQueryWalker
+    src_meta_type = "UrbanVocabularyTerm"
+    src_portal_type = "UrbanVocabularyTerm"
+    dst_meta_type = "OrganisationTerm"
+    dst_portal_type = "OrganisationTerm"
+
+    def __init__(self, *args, **kwargs):
+        InplaceATItemMigrator.__init__(self, *args, **kwargs)
+
+    def custom(self):
+        """
+          We have to link the OrganisationTerm to its coresponding UrbanEventType 
+        """
+        catalog = getToolByName(self.new, 'portal_catalog')
+        self.new_id 
+        brains = catalog(portal_type=('UrbanEventType',))
+        for brain in brains:
+            if self.new_id in brain.id:
+                self.new.setLinkedOpinionRequestEvent(brain.getObject())
+                break
+     
+def migrateFoldermakersTerms(context):
+    """
+      Run the UrbanVocabularyTermToOrganisationTermMigrator
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    logger.info("Migrating UrbanVocabularyterms 'foldermakers': starting...")
+   
+    migrators = (UrbanVocabularyTermToOrganisationTermMigrator,)
+
+    portal = context.getSite()
+
+    #Run the migrations
+    for migrator in migrators:
+        folder_path = "%s/portal_urban/buildlicence/foldermakers" % '/'.join(portal.getPhysicalPath())
+        walker = migrator.walker(portal, migrator, query={'path':folder_path,})
+        walker.go()
+    logger.info("Migrating UrbanVocabularyterms 'foldermakers': done!")
+

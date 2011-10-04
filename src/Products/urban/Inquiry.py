@@ -113,7 +113,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         multiValued=1,
-        vocabulary=UrbanVocabulary('foldermakers'),
+        vocabulary=UrbanVocabulary('foldermakers', vocType="OrganisationTerm"),
     ),
     IntegerField(
         name='investigationOralReclamationNumber',
@@ -197,9 +197,26 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         """
         brefs = self.getBRefs('linkedInquiry')
         if brefs:
-            return brefs[0]
+            #linkedInquiry may come from a UrbanEventInquiry or an UrbanEventOpinionRequest
+            for bref in brefs:
+                if bref.portal_type == 'UrbanEventInquiry':
+                    return bref
         else:
             return None
+
+    security.declarePublic('getLinkedUrbanEventOpinionRequest')
+    def getLinkedUrbanEventOpinionRequest(self, organisation):
+        """
+          Return the linked UrbanEventOpinionRequest objects if exist
+        """
+        brefs = self.getBRefs('linkedInquiry')
+        if brefs:
+            #linkedInquiry may come from a UrbanEventInquiry or an UrbanEventOpinionRequest
+            for bref in brefs:
+                if bref.portal_type == 'UrbanEventOpinionRequest':
+                    if bref.getRequestedOrganisation() == organisation  and bref.getLinkedInquiry() == self:
+                        return bref
+        return None
 
     def _getSelfPosition(self):
         """
@@ -226,6 +243,13 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         #we need to generate the title as the number of the inquiry is into it
         position = self._getSelfPosition()
         return translate('inquiry_title_and_number', 'urban', mapping={'number': position+1}, context=self.REQUEST)
+
+    security.declarePublic('getSolicitOpinionValue')
+    def getSolicitOpinionValue(self, opinionId):
+        """
+          Return the corresponding opinion value from the given opinionId
+        """
+        return self.Vocabulary('solicitOpinionsTo')[0].getValue(opinionId)
 
 
 
