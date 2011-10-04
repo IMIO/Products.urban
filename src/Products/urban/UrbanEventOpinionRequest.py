@@ -30,16 +30,6 @@ from Products.CMFCore.utils import getToolByName
 
 schema = Schema((
 
-    StringField(
-        name='requestedOrganisation',
-        widget=StringField._properties['widget'](
-            label='Requestedorganisation',
-            label_msgid='urban_label_requestedOrganisation',
-            i18n_domain='urban',
-        ),
-        optional= False,
-        write_permission="Manage portal",
-    ),
     ReferenceField(
         name='linkedInquiry',
         widget=ReferenceBrowserWidget(
@@ -96,8 +86,8 @@ class UrbanEventOpinionRequest(BaseContent, UrbanEvent, BrowserDefaultMixin):
         urbantool = getToolByName(self,'portal_urban')
         return getattr(urbantool.buildlicence.urbaneventtypes, "config-opinion-request").listFolderContents({'portal_type': 'File'})
 
-    security.declarePublic('getRequestedOrganisation')
-    def getRequestedOrganisation(self):
+    security.declarePublic('getLinkedOrganisationTermId')
+    def getLinkedOrganisationTermId(self):
         """
           Returns the id of the term that is linked to the linked UrbanEventType
         """

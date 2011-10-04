@@ -6,9 +6,6 @@
   <subscriber for="..interfaces.IUrbanEventOpinionRequest
                    Products.Archetypes.event.IEditBegunEvent"
               handler=".opinionRequestEvents.setDefaultLinkedInquiry" /> 
-  <subscriber for="..interfaces.IUrbanEventOpinionRequest
-                   Products.Archetypes.event.IEditBegunEvent"
-              handler=".opinionRequestEvents.setDefaultRequestedOrganisation" /> 
   <subscriber for="..interfaces.IOrganisationTerm
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".organisationTermEvents.createLinkedOpinionRequest" /> 

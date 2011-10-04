@@ -792,7 +792,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
             return opinionRequests
         res = []
         for opinionRequest in opinionRequests:
-            if opinionRequest.getRequestedOrganisation() == organisation:
+            if opinionRequest.getLinkedOrganisationTermId() == organisation:
                 res.append(opinionRequest)
         return res
 

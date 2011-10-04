@@ -214,7 +214,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
             #linkedInquiry may come from a UrbanEventInquiry or an UrbanEventOpinionRequest
             for bref in brefs:
                 if bref.portal_type == 'UrbanEventOpinionRequest':
-                    if bref.getRequestedOrganisation() == organisation  and bref.getLinkedInquiry() == self:
+                    if bref.getLinkedOrganisationTermId() == organisation  and bref.getLinkedInquiry() == self:
                         return bref
         return None
 
