@@ -314,6 +314,17 @@ schema = Schema((
         ),
         storage=AttributeStorage(),
     ),
+    StringField(
+        name='editionOutputFormat',
+        default='odt',
+        widget=SelectionWidget(
+            label='Editionoutputformat',
+            label_msgid='urban_label_editionOutputFormat',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        vocabulary=('odt', 'doc'),
+    ),
 
 ),
 )
@@ -405,9 +416,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         urbanEvent=self.uid_catalog(UID=urban_event_uid)[0]
         urbanEventObj=urbanEvent.getObject()
         licenceFolder=urbanEventObj.getParentNode()
-        fileType='odt'
+        fileType = self.getEditionOutputFormat()
         tempFileName = '%s/%s_%f.%s' % (
-            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'odt')
+            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),fileType)
         tempFileNameHeader = '%s/%s_%f_header.%s' % (
             getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'odt')
         tempFileNameFooter = '%s/%s_%f_footer.%s' % (
@@ -475,7 +486,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         #the id of the object have to be the same id as the file contained
         #see http://dev.communesplone.org/trac/ticket/2532
         urbanTemplateObjId = os.path.splitext(urbanTemplateObj.getId())[0]
-        proposedId = urbanTemplateObjId + '.odt'
+        proposedId = urbanTemplateObjId + '.%s' %fileType
         i = 1
         while hasattr(aq_base(urbanEventObj), proposedId):
             proposedId = '%s-%d.odt' % (urbanTemplateObjId, i)
