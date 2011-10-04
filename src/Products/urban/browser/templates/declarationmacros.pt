@@ -1,4 +1,4 @@
-<div metal:define-macro="declarationDescriptionMacro" i18n:domain="urban">
+<div metal:define-macro="descriptionMacro" i18n:domain="urban">
  <table cellspacing=0 cellpadding=0 width=100%>
  <tr>
   <td valign="top" width=49%>

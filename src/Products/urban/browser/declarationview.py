@@ -61,3 +61,8 @@ class DeclarationView(BrowserView):
                 'date': tool.formatDate(theLicence.getEventDate(), translatemonth=False)
                }
         return dict
+
+class DeclarationMacros(BrowserView):
+    """
+      This manage the macros of Declaration
+    """

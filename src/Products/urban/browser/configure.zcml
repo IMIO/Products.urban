@@ -92,6 +92,14 @@
   />
 
   <browser:page
+     name="declaration-macros"
+     for="Products.urban.interfaces.IDeclaration"
+     class=".declarationview.DeclarationMacros"
+     template="templates/declarationmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IUrbanCertificateBase"
      name="urbancertificateoneview"
      class=".urbancertificateoneview.UrbanCertificateOneView"

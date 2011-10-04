@@ -21,7 +21,7 @@
 <dl class="formTabs enableFormTabbing">
 <dt class="formTab" tal:attributes="class python: context.getApplicants() and 'formTab' or 'formTab notify'" id="fieldsetlegend-urban_description" i18n:domain="plone" i18n:translate="label_schema_urban_description"><span>Description</span></dt>
 <dd id="fieldset-urban_description">
- <metal:listing use-macro="here/declaration_macros/macros/declarationDescriptionMacro" />
+ <metal:listing use-macro="here/@@declaration-macros/descriptionMacro" />
 </dd>
  
 <dt class="formTab" id="fieldsetlegend-urban_events" i18n:domain="plone" i18n:translate="label_schema_urban_events"><span>Events</span></dt>
@@ -34,7 +34,7 @@
 
 <div tal:condition="not: useTabbing">
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_description">Description</legend></strong>
- <metal:description use-macro="here/declaration_macros/macros/declarationDescriptionMacro" />
+ <metal:description use-macro="here/@@declaration-macros/descriptionMacro" />
 </fieldset>
 
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_events">Events</legend></strong>
