@@ -182,6 +182,8 @@ class UrbanEventType(BaseFolder, UrbanDelay, BrowserDefaultMixin):
                 res = False
         return res
 
+
+
 registerType(UrbanEventType, PROJECTNAME)
 # end of class UrbanEventType
 

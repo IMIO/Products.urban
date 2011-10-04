@@ -39,8 +39,7 @@ schema = Schema((
         ),
         multiValued=0,
         relationship='linkedInquiry',
-        allowed_types="('Inquiry', 'BuildLicence')",
-        optional= False,
+        allowed_types=('Inquiry', 'BuildLicence'),
         write_permission="Manage portal",
     ),
 
@@ -93,6 +92,7 @@ class UrbanEventOpinionRequest(BaseContent, UrbanEvent, BrowserDefaultMixin):
         """
         urbaneventtypes = self.getUrbaneventtypes()
         brefs = urbaneventtypes.getBRefs('LinkedOpinionRequestEvent')
+        import pdb; pdb.set_trace()
         if brefs:
             return brefs[0].getId()
         else:
