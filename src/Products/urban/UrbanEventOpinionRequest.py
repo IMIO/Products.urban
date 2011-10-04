@@ -92,7 +92,6 @@ class UrbanEventOpinionRequest(BaseContent, UrbanEvent, BrowserDefaultMixin):
         """
         urbaneventtypes = self.getUrbaneventtypes()
         brefs = urbaneventtypes.getBRefs('LinkedOpinionRequestEvent')
-        import pdb; pdb.set_trace()
         if brefs:
             return brefs[0].getId()
         else:
