@@ -488,7 +488,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         response.redirect(urbanEventObj.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
 
     security.declarePublic('listVocabulary')
-    def listVocabulary(self, vocToReturn, context, vocType="UrbanVocabularyTerm", id_to_use="id", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled']):
+    def listVocabulary(self, vocToReturn, context, vocType="UrbanVocabularyTerm", id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled']):
         """
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
@@ -497,10 +497,18 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 sort_on, inUrbanConfig, allowedStates)
         res=[]
         for brain in brains:
-            title = brain.Title
+            #the value to use can be on the brain or on the object
+            if hasattr(brain, value_to_use):
+                value = getattr(brain, value_to_use)
+            else:
+                value = getattr(brain.getObject(), value_to_use)
+            #special case for 'Title' encoding
+            if value_to_use == 'Title':
+                value = value.decode('utf-8')
+            #display a special value for elements that are disabled in the configuration
             if brain.review_state == 'disabled':
-                title = '~~ %s ~~' % title
-            res.append((getattr(brain, id_to_use),(title).decode('utf-8')))
+                value = '~~ %s ~~' % value
+            res.append((getattr(brain, id_to_use), value))
         return tuple(res)
 
     security.declarePrivate('listVocabularyBrains')

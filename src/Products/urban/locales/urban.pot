@@ -539,6 +539,9 @@ msgstr ""
 msgid "label_colname_Creator"
 msgstr ""
 
+msgid "label_colname_receiptDate"
+msgstr ""
+
 msgid "label_colname_Title"
 msgstr ""
 

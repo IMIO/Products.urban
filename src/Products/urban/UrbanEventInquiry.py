@@ -28,6 +28,7 @@ from Products.urban.config import *
 from OFS.ObjectManager import BeforeDeleteException
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 ##/code-section module-header
 
 schema = Schema((
@@ -156,6 +157,14 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
         tool = getToolByName(self, 'portal_urban')
         parcels = tool.queryCatalog(batch=False, context=self, specificSearch='searchPortionOuts', theObjects=True)
         return parcels
+
+    security.declarePublic('getAbbreviatedArticles')
+    def getAbbreviatedArticles(self):
+        """
+          As we have a short version of the article in the title, if we need just
+          the list of articles (330 1°, 330 2°, ...) we will use the extraValue of the Vocabulary term
+        """
+        return self.displayValue(UrbanVocabulary('investigationarticles', value_to_use="extraValue").getDisplayList(self), self.getLinkedInquiry().getInvestigationArticles())
 
 
 

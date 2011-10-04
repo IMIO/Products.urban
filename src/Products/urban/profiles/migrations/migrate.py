@@ -879,7 +879,7 @@ def migrateFoldermakersTerms(context):
     if isNoturbanMigrationsProfile(context): return
 
     logger.info("Migrating UrbanVocabularyterms 'foldermakers': starting...")
-   
+
     migrators = (UrbanVocabularyTermToOrganisationTermMigrator,)
 
     portal = context.getSite()
@@ -891,3 +891,14 @@ def migrateFoldermakersTerms(context):
         walker.go()
     logger.info("Migrating UrbanVocabularyterms 'foldermakers': done!")
 
+def addInvestigationArticlesToBuildLicenceConfig(context):
+    """
+      Helper method for updating investigations articles in the investigationArticles
+      of the BuildLicences LicenceConfig
+    """
+    site = context.getSite()
+    configFolder = getattr(site.portal_urban, 'buildlicence')
+    logger.info("Adding default investigation articles in the BuildLicence LicenceConfig: starting...")
+    from Products.urban.setuphandlers import addInvestigationArticles
+    addInvestigationArticles(context, configFolder)
+    logger.info("Adding default investigation articles in the BuildLicence LicenceConfig: done!")

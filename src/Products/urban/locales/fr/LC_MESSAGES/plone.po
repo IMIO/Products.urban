@@ -49,6 +49,9 @@ msgstr "Gestionnaire de dossier"
 msgid "Geometrician"
 msgstr "Géomètre"
 
+msgid "Inquiry"
+msgstr "Enquête publique"
+
 msgid "Locality"
 msgstr "Lieu-dit"
 

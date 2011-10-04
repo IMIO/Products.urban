@@ -30,6 +30,13 @@
     investigationArticles replaces both investigationArticle and investigationPoint fields.  We only care about default 330/1 to 330/13
  </import-step>
  <import-step
+    id="urban-addInvestigationArticlesToBuildLicenceConfig"
+    handler="Products.urban.profiles.migrations.migrate.addInvestigationArticlesToBuildLicenceConfig"
+    title="Add default investigation articles in the BuildLicence LicenceConfig"
+    version="2011-10-04T12:00:00.0">
+    Add default investigation articles in the BuildLicence LicenceConfig
+ </import-step>
+ <import-step
     id="urban-migrateUrbanEventTypes"
     handler="Products.urban.profiles.migrations.migrate.migrateUrbanEventTypes"
     title="Migrate the UrbanEventTypes"

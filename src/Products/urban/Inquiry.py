@@ -55,6 +55,7 @@ schema = Schema((
     LinesField(
         name='investigationArticles',
         widget=MultiSelectionWidget(
+            size=10,
             label='Investigationarticles',
             label_msgid='urban_label_investigationArticles',
             i18n_domain='urban',

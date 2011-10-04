@@ -558,9 +558,6 @@ msgstr "Coordonnées de l'architecte"
 msgid "label_colname_claimant_data"
 msgstr "Coordonnées du réclamant"
 
-msgid "label_colname_created"
-msgstr "Créé le"
-
 msgid "label_colname_eventDate"
 msgstr "Date clé"
 
@@ -582,11 +579,11 @@ msgstr "Nom(s)"
 msgid "label_colname_notary_data"
 msgstr "Coordonnées du notaire"
 
-msgid "label_colname_recipient_data"
-msgstr "Coordonnées du destinataire"
-
 msgid "label_colname_receiptDate"
 msgstr "Date de réception"
+
+msgid "label_colname_recipient_data"
+msgstr "Coordonnées du destinataire"
 
 msgid "label_colname_street"
 msgstr "Rue"

@@ -27,6 +27,9 @@ msgstr ""
 msgid "Street"
 msgstr ""
 
+msgid "Inquiry"
+msgstr ""
+
 msgid "UrbanEvent"
 msgstr ""
 
