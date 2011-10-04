@@ -1012,7 +1012,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         xmlContent=xmlContent+'  </E_220_herkomst>\n'
         lsttermarchitect=["NON REQUIS","lui-meme","Eux-memes","elle-meme","lui-meme","lui-même","lui-meme ","Lui-meme","A COMPLETER "]
         htmllist='<HTML><TABLE>'
-        import pdb; pdb.set_trace()
         for obj in results:
             eventObj=obj.getObject()
             licenceObj=eventObj.getParentNode()
