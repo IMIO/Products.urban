@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-09-23 07:59+0000\n"
+"POT-Creation-Date: 2011-10-04 14:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -539,9 +539,6 @@ msgstr ""
 msgid "label_colname_Creator"
 msgstr ""
 
-msgid "label_colname_receiptDate"
-msgstr ""
-
 msgid "label_colname_Title"
 msgstr ""
 
@@ -579,6 +576,9 @@ msgid "label_colname_name"
 msgstr ""
 
 msgid "label_colname_notary_data"
+msgstr ""
+
+msgid "label_colname_receiptDate"
 msgstr ""
 
 msgid "label_colname_recipient_data"
@@ -1323,6 +1323,11 @@ msgstr ""
 #. Default: "Divisionsubject"
 #: Division.py
 msgid "urban_label_divisionSubject"
+msgstr ""
+
+#. Default: "Editionoutputformat"
+#: UrbanTool.py
+msgid "urban_label_editionOutputFormat"
 msgstr ""
 
 #. Default: "Email"
