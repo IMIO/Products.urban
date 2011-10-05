@@ -23,7 +23,7 @@ class TestInstall(unittest.TestCase):
         quickInstallProduct(portal, 'Products.urban')
         quickInstallProduct(portal, 'Products.urban')
 
-    def testPresentEventTypes(self):
+    def testEventTypesCreated(self):
         portal = self.layer['portal']
         catalog = getToolByName(portal, 'portal_catalog')
         login(portal, 'urbaneditor')
@@ -31,8 +31,6 @@ class TestInstall(unittest.TestCase):
         eventTypes = catalog(object_provides=interfaceName,
                              sort_on='sortable_title')
         self.failUnless(len(eventTypes) > 0)
-        eventType = eventTypes[0]
-        self.assertEqual(eventType.getId, 'accuse-de-reception')
 
     def testEventWithoutEventTypeType(self):
         portal = self.layer['portal']
