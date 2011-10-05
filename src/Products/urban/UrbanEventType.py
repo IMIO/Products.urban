@@ -23,6 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.CMFPlone import PloneMessageFactory as _
 import logging
 logger = logging.getLogger('urban: UrbanEventType')
 from Products.CMFPlone.i18nl10n import utranslate
@@ -164,10 +165,12 @@ class UrbanEventType(BaseFolder, UrbanDelay, BrowserDefaultMixin):
             vocab.append((elt[0], elt[1]))
         return DisplayList(tuple(vocab))
 
-    security.declarePublic('isApplicable')
-    def isApplicable(self, obj):
+    security.declarePublic('canBeCreatedInLicence')
+    def canBeCreatedInLicence(self, obj):
         """
-          Check if the TAL condition linked to this UrbanEventType is True
+        Creation condition
+
+        computed by evaluating the TAL expression stored in TALCondition field
         """
         res = True # At least for now
         # Check condition
@@ -182,6 +185,10 @@ class UrbanEventType(BaseFolder, UrbanDelay, BrowserDefaultMixin):
                 res = False
         return res
 
+    def checkCreationInLicence(self, obj):
+        if not self.canBeCreatedInLicence(obj):
+            raise ValueError(_("You can not create this UrbanEvent !"))
+
 
 
 registerType(UrbanEventType, PROJECTNAME)
@@ -189,4 +196,3 @@ registerType(UrbanEventType, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

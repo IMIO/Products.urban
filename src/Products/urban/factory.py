@@ -2,8 +2,6 @@
 from five import grok
 from zope.component import IFactory
 from Products.CMFCore.utils import getToolByName
-from AccessControl import Unauthorized
-from Products.CMFPlone import PloneMessageFactory as _
 
 
 class UrbanEventFactory(grok.GlobalUtility):
@@ -16,8 +14,7 @@ class UrbanEventFactory(grok.GlobalUtility):
         urbanConfig = urbanTool.buildlicence
         eventTypes = urbanConfig.urbaneventtypes
         eventtypetype = getattr(eventTypes, eventType)
-        if not eventtypetype.isApplicable(licence):
-            raise Unauthorized(_("You can not create this UrbanEvent !"))
+        eventtypetype.checkCreationInLicence(licence)
         urbanEventId = urbanTool.generateUniqueId('UrbanEvent')
         licence.invokeFactory("UrbanEvent",
                               id=urbanEventId,
@@ -41,8 +38,7 @@ class UrbanEventInquiryFactory(grok.GlobalUtility):
         urbanConfig = urbanTool.buildlicence
         eventTypes = urbanConfig.urbaneventtypes
         eventtypetype = getattr(eventTypes, eventType)
-        if not eventtypetype.isApplicable(licence):
-            raise Unauthorized(_("You can not create this UrbanEventInquiry !"))
+        eventtypetype.checkCreationInLicence(licence)
         urbanEventId = urbanTool.generateUniqueId('UrbanEventInquiry')
         licence.invokeFactory("UrbanEventInquiry",
                               id=urbanEventId,

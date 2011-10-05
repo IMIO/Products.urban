@@ -25,7 +25,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-    
+
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -358,7 +358,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def __init__(self, id=None):
         OrderedBaseFolder.__init__(self,'portal_urban')
         self.setTitle('Urban configuration')
-        
+
         ##code-section constructor-footer #fill in your manual code here
         ##/code-section constructor-footer
 
@@ -366,7 +366,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     # tool should not appear in portal_catalog
     def at_post_edit_script(self):
         self.unindexObject()
-        
+
         ##code-section post-edit-method-footer #fill in your manual code here
         self.checkDBConnection()
         ##/code-section post-edit-method-footer
@@ -382,29 +382,38 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         self.checkDBConnection()
 
+
+    # XXX constant put on the class to ensure it is close to the method that uses
+    # it
+    portal_types_per_event_type_type = {
+        'Products.urban.interfaces.IInquiryEvent':'UrbanEventInquiry',
+        'Products.urban.interfaces.IOpinionRequestEvent':'UrbanEventOpinionRequest',
+        }
+
+    # XXX this method should be moved to the BuildLicence class
     security.declarePublic('createUrbanEvent')
-    def createUrbanEvent(self, urban_folder_uid, urban_event_type_uid):
+    def createUrbanEvent(self, licence_uid, urban_event_type_uid):
         """
            Create an urbanEvent on a licence
         """
         uid_catalog = getToolByName(self, 'uid_catalog')
-        #the folder to create the UrbanEvent in
-        evtfolder=uid_catalog(UID=urban_folder_uid)[0].getObject()
-        #the linked UrbanEventType
-        urbanEventTypeObj=uid_catalog(UID=urban_event_type_uid)[0].getObject()
-        #first of all, check the urbanEvent creation condition again
-        if not urbanEventTypeObj.isApplicable(evtfolder):
-            raise Unauthorized, _("You can not create this UrbanEvent !")
-        #create the UrbanEvent in the right folder
-        #check first what kind of UrbanEvent should be added
-        type_name = "UrbanEvent"
-        if urbanEventTypeObj.getEventTypeType() == 'Products.urban.interfaces.IInquiryEvent':
-            type_name = "UrbanEventInquiry"
-        if urbanEventTypeObj.getEventTypeType() == 'Products.urban.interfaces.IOpinionRequestEvent':
-            type_name = "UrbanEventOpinionRequest"
-        newUrbanEventId=evtfolder.invokeFactory(type_name,id=self.generateUniqueId(type_name),title=urbanEventTypeObj.Title(),urbaneventtypes=(urbanEventTypeObj,))
-        newUrbanEventObj=getattr(evtfolder,newUrbanEventId)
-        return self.REQUEST.RESPONSE.redirect(newUrbanEventObj.absolute_url()+'/edit')
+        # the licence where the UrbanEvent is created
+        licence = uid_catalog(UID=licence_uid)[0].getObject()
+
+        urbanEventType = uid_catalog(UID=urban_event_type_uid)[0].getObject()
+        urbanEventType.checkCreationInLicence(licence)
+
+        eventTypeType = urbanEventType.getEventTypeType()
+        portal_type = self.portal_types_per_event_type_type.get(eventTypeType,
+                "UrbanEvent")
+
+        newUrbanEventId= licence.invokeFactory(portal_type,
+                id=self.generateUniqueId(portal_type),
+                title=urbanEventTypeObj.Title(),
+                urbaneventtypes=(urbanEventTypeObj,))
+        newUrbanEventObj=getattr(licence, newUrbanEventId)
+        return self.REQUEST.RESPONSE.redirect(newUrbanEventObj.absolute_url()
+                + '/edit')
 
     security.declarePublic('createUrbanDoc')
     def createUrbanDoc(self, urban_template_uid, urban_event_uid):
@@ -1063,9 +1072,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                     xmlContent=xmlContent+'      <E_220_huisnr>'+number+'</E_220_huisnr>\n'
                 worktype_map = {'ncmu':'N_UNI', 'ncia':'N_APPART', 'nca':'N_AUT', 'tmu':'T_UNI', 'tia':'T_APPART', 'tab':'T_AUT', 'dg':'DEM', 'autres':'AUTRE', 'tnbg':'T_NBAT'}
                 if worktype in worktype_map.keys():
-                     xmlWorkType=worktype_map[worktype]
+                    xmlWorkType=worktype_map[worktype]
                 else:
-                     xmlError=xmlError+str(licenceObj.getReference())+' '+licenceObj.licenceSubject.encode('iso-8859-1')+' '+applicantObj.name1.encode('iso-8859-1')+' '+applicantObj.name2.encode('iso-8859-1')+'\n'
+                    xmlError=xmlError+str(licenceObj.getReference())+' '+licenceObj.licenceSubject.encode('iso-8859-1')+' '+applicantObj.name1.encode('iso-8859-1')+' '+applicantObj.name2.encode('iso-8859-1')+'\n'
                 xmlContent=xmlContent+'      <E_220_Typ>'+xmlWorkType+'</E_220_Typ>\n'
                 xmlContent=xmlContent+'      <E_220_Werk>'+licenceObj.licenceSubject.encode('iso-8859-1')+'</E_220_Werk>\n'
                 strDecisionDate=''+str(eventObj.getDecisionDate())
@@ -1290,8 +1299,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         res = []
         #now evaluate the TAL condition for every brain
         for brain in brains:
-            obj = brain.getObject()
-            if obj.isApplicable(context):
+            event_type = brain.getObject()
+            if event_type.canBeCreatedInLicence(context):
                 res.append(brain)
         return res
 
@@ -1605,4 +1614,3 @@ registerType(UrbanTool, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 from time import sleep
+from DateTime import DateTime
 from zope.component import createObject
 from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
@@ -42,12 +43,14 @@ class TestBuildLicence(unittest.TestCase):
 
     def testGetAllOpinionRequests(self):
         self.assertEqual(self.buildLicence.getAllOpinionRequests(), [])
-        #we can add a 'demande-avis-swde' UrbanEvent if 'swde' is selected
-        #in the list solicitOpinionsTo
-        opinionsToSolicit = self.buildLicence.getSolicitOpinionsTo()
-        extraOpinion = ('belgacom',)
-        self.buildLicence.setSolicitOpinionsTo(opinionsToSolicit+extraOpinion)
-        opinionRequest = createObject('UrbanEvent', 'demande-avis-belgacom', self.buildLicence)
+
+        # create opinion request
+        opinions = ('belgacom', )
+        self.buildLicence.setInvestigationStart(DateTime('01/01/2011'))
+        self.buildLicence.setSolicitOpinionsTo(opinions)
+        opinionRequest = createObject('UrbanEvent',
+                'belgacom-opinion-request', self.buildLicence)
+
         self.assertEqual(self.buildLicence.getAllOpinionRequests(), [opinionRequest])
 
     def testGetLastDeposit(self):
@@ -97,7 +100,7 @@ class TestBuildLicence(unittest.TestCase):
         extraOpinion = ('belgacom',)
         self.buildLicence.setSolicitOpinionsTo(opinionsToSolicit+extraOpinion)
         self.assertEqual(len(self.buildLicence.getAllAdvices()), 1)
-    
+
     def testCreateAllAdvices(self):
         #no advice is asked, createAllAdvices do nothing
         self.buildLicence.createAllAdvices()
