@@ -92,22 +92,22 @@ class TestBuildLicence(unittest.TestCase):
         buildLicence3.setFoldermanagers(self.portal_urban.getCurrentFolderManager(buildLicence3,initials=False))
         self.assertEqual(len(buildLicence3.getFoldermanagers()),0)
 
-    def testGetAllAdvices(self):
-        #no advice is asked
+    def testGetAllAdvicesWithoutOpinionRequest(self):
         self.assertEqual(self.buildLicence.getAllAdvices(), [])
-        #we can add a 'demande-avis-belgacom' UrbanEvent if 'belgacom' is selected in the list solicitOpinionsTo
-        opinionsToSolicit = self.buildLicence.getSolicitOpinionsTo()
-        extraOpinion = ('belgacom',)
-        self.buildLicence.setSolicitOpinionsTo(opinionsToSolicit+extraOpinion)
+
+    def testGetAllAdvicesWithOpinionRequest(self):
+        self.buildLicence.setInvestigationStart(DateTime('01/01/2011'))
+        opinions = ('belgacom',)
+        self.buildLicence.setSolicitOpinionsTo(opinions)
         self.assertEqual(len(self.buildLicence.getAllAdvices()), 1)
 
-    def testCreateAllAdvices(self):
-        #no advice is asked, createAllAdvices do nothing
+    def testCreateAllAdvicesWithoutOpinionRequest(self):
         self.buildLicence.createAllAdvices()
         self.assertEqual(self.buildLicence.getAllOpinionRequests(), [])
-        #we can add a 'demande-avis-belgacom' UrbanEvent if 'belgacom' is selected in the list solicitOpinionsTo
-        opinionsToSolicit = self.buildLicence.getSolicitOpinionsTo()
-        extraOpinion = ('belgacom',)
-        self.buildLicence.setSolicitOpinionsTo(opinionsToSolicit+extraOpinion)
+
+    def testCreateAllAdvicesWithOpinionRequest(self):
+        self.buildLicence.setInvestigationStart(DateTime('01/01/2011'))
+        opinions = ('belgacom',)
+        self.buildLicence.setSolicitOpinionsTo(opinions)
         self.buildLicence.createAllAdvices()
         self.assertEqual(len(self.buildLicence.getAllOpinionRequests()), 1)
