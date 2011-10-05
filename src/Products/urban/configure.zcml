@@ -11,6 +11,7 @@
   <include package="five.grok"/>
   <include package="Products.GenericSetup" file="meta.zcml"/>
   <include package="Products.GenericSetup"/>
+  <include package="Products.DataGridField"/>
   <include package="Products.CMFCore" file="meta.zcml"/>
   <include package="plone.app.portlets" file="meta.zcml" />
   <include package="Products.Archetypes"/>
