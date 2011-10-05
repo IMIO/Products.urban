@@ -82,7 +82,7 @@ class TestInstall(unittest.TestCase):
         urbanEvent = createObject('UrbanEventInquiry', 'enquete-publique', licence)
         self.failUnless(IInquiryEvent.providedBy(urbanEvent))
 
-    def testOpinionRequestSearchByInterface(self):
+    def testOpinionRequestMarkerInterface(self):
         portal = self.layer['portal']
         urban = portal.urban
         buildLicences = urban.buildlicences
@@ -91,12 +91,12 @@ class TestInstall(unittest.TestCase):
         buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
         licence = getattr(buildLicences, LICENCE_ID)
         self.assertEqual(len(licence.objectValues('UrbanEvent')), 0)
-        #we can add a 'demande-avis-swde' UrbanEvent if 'swde' is selected
-        #in the list solicitOpinionsTo
-        opinionsToSolicit = licence.getSolicitOpinionsTo()
-        extraOpinion = ('swde',)
-        licence.setSolicitOpinionsTo(opinionsToSolicit+extraOpinion)
-        urbanEvent = createObject('UrbanEvent', 'demande-avis-swde', licence)
+        licence.setInvestigationStart(DateTime('01/01/2011'))
+        # we can add a 'swde-opinion-request' UrbanEvent
+        # if and only if 'swde' has been set in solicitOpinionsTo list
+        opinions = ('swde', )
+        licence.setSolicitOpinionsTo(opinions)
+        urbanEvent = createObject('UrbanEvent', 'swde-opinion-request', licence)
         self.failUnless(IOpinionRequestEvent.providedBy(urbanEvent))
 
     def testAcknowledgmentEventTypeType(self):
