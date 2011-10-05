@@ -29,6 +29,7 @@ from Products.urban.config import *
 import warnings
 from DateTime import DateTime
 from zope.i18n import translate
+from zope.component import createObject
 from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
@@ -808,11 +809,9 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         """
           Create all urbanEvent corresponding to advice on a licence
         """
-        from factory import UrbanEventFactory
         listEventTypes = self.getAllAdvices()
         for listEventType in listEventTypes:
-            my_uef = UrbanEventFactory()
-            my_uef.__call__(listEventType.id,self)
+            createObject('UrbanEvent', listEventType.id, self)
         return self.REQUEST.RESPONSE.redirect(self.absolute_url()+'/view?#fieldsetlegend-urban_events')
 
     security.declarePublic('getAllAdvices')
@@ -838,4 +837,3 @@ registerType(GenericLicence, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-
