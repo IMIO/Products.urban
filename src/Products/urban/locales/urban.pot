@@ -850,6 +850,9 @@ msgstr ""
 msgid "searchbystreet_result"
 msgstr ""
 
+msgid "no_result"
+msgstr ""
+
 msgid "searchequipments"
 msgstr ""
 

@@ -851,6 +851,9 @@ msgstr "Ajouter une parcelle"
 msgid "searchbystreet_result"
 msgstr "Résultat de la recherche"
 
+msgid "no_result"
+msgstr "La recherche n'a pas fourni de résultat."
+
 msgid "searchequipments"
 msgstr "Les équipements"
 

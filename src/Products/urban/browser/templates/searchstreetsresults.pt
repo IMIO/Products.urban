@@ -128,6 +128,11 @@
     </div>
 </div>
 
+<div tal:condition="python:not view.streetsFound and request.form">
+<p class="no_result" i18n:domain="urban" i18n:translate="no_result">No result</p>
+</div>
+
+
 <script type="text/javascript"
     tal:define="extra_script view/extra_script | nothing"
     tal:condition="extra_script"

@@ -35,12 +35,11 @@ class TestSearchStreetsForm(unittest.TestCase):
         """
         self.browser.open(self.urban.absolute_url() + '/urban_searchbystreet')
         self.browser.getControl("Rechercher").click()
-        compare(S("(?s).*sultats de la recherche courante.*"),
-                self.browser.contents)
+        compare(S("(?s).*no_result.*"), self.browser.contents)
 
     def testSearchStreetsBuildlicenceWithoutStreet(self):
-        """create a buildlience content without a street
-           and check that this content is found
+        """create a buildlicence content without a street
+           and check that no content is found
            if search is performed without indicating a particular street
         """
         #create a buildlicence content
@@ -51,12 +50,11 @@ class TestSearchStreetsForm(unittest.TestCase):
         transaction.commit()
         self.browser.open(self.urban.absolute_url() + '/urban_searchbystreet')
         self.browser.getControl("Rechercher").click()
-        compare(S("(?s).*sultats de la recherche courante.*"),
-                self.browser.contents)
+        compare(S("(?s).*no_result.*"), self.browser.contents)
 
     def testSearchStreetsNoBuildlicenceWithoutStreet(self):
         """create a buildlicence content item without a street
-           and check that this content is not found
+           and check that no content is found
            if search is performed without indicating a particular street
            and by deselecting buildlicence type
         """
@@ -70,12 +68,11 @@ class TestSearchStreetsForm(unittest.TestCase):
         #deselect buildlicence type as content to find
         self.browser.getControl(name='form.BuildLicence').value = False
         self.browser.getControl("Rechercher").click()
-        self.assertFalse("sultats de la recherche courante" in
-                self.browser.contents)
+        compare(S("(?s).*no_result.*"), self.browser.contents)
 
     def testSearchStreetsDeclarationWithoutStreet(self):
-        """create a buildlience content without a street
-           and check that this content is found
+        """create a declaration content without a street
+           and check that no content is found
            if search is performed without indicating a particular street
         """
         #create a declaration content
@@ -86,14 +83,13 @@ class TestSearchStreetsForm(unittest.TestCase):
         transaction.commit()
         self.browser.open(self.urban.absolute_url() + '/urban_searchbystreet')
         self.browser.getControl("Rechercher").click()
-        compare(S("(?s).*sultats de la recherche courante.*"),
-                self.browser.contents)
+        compare(S("(?s).*no_result.*"), self.browser.contents)
 
     def testSearchStreetsNotDeclarationWithoutStreet(self):
-        """create a buildlicence content without a street
-           and check that this content is not found
+        """create a declaration content without a street
+           and check that no content is found
            if search is performed without indicating a particular street
-           and by deselecting buildlicence type
+           and by deselecting declaration type
         """
         #create a declaration content
         self.declarations = self.urban.declarations
@@ -105,13 +101,12 @@ class TestSearchStreetsForm(unittest.TestCase):
         #deselect declaration type as content to find
         self.browser.getControl(name='form.Declaration').value = False
         self.browser.getControl("Rechercher").click()
-        compare(S("(?s).*sultats de la recherche courante.*"),
-                self.browser.contents)
+        compare(S("(?s).*no_result.*"), self.browser.contents)
 
     def XXXtestSearchStreetsBuildlicenceWithStreet(self):
-        """create a buildlicence content with a street location.
-           Check that this content is found
-           if search is performed by indicating a particular street
+        """
+        test disabled as there are no way to select an option from the select
+        box with testbrowser
         """
         #create a buildlicence content
         self.buildLicences = self.urban.buildlicences
@@ -133,5 +128,5 @@ class TestSearchStreetsForm(unittest.TestCase):
         self.browser.getControl(name='form.streetSearch.to').value = [
                 self.street.UID(), ]
         self.browser.getControl("Rechercher").click()
-        compare(S("(?s).*sultats de la recherche courante.*"),
+        compare(S("(?s).*sultats de la recherche.*"),
                 self.browser.contents)
