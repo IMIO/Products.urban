@@ -114,7 +114,10 @@ msgid "UrbanEvent"
 msgstr "Evénement du dossier"
 
 msgid "UrbanEventInquiry"
-msgstr "Evénement liée à une enquête publique"
+msgstr "Evénement lié à une enquête publique"
+
+msgid "UrbanEventOpinionRequest"
+msgstr "Evénement lié à une demande d'avis"
 
 msgid "UrbanEventType"
 msgstr "Type d'événement du dossier"

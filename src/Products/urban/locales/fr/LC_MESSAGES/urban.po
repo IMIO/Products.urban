@@ -674,6 +674,9 @@ msgstr "Aucun agent traitant défini"
 msgid "no_notary_defined"
 msgstr "Aucun notaire?"
 
+msgid "no_result"
+msgstr "La recherche n'a pas fourni de résultat."
+
 msgid "not_permitted_to_add_annex"
 msgstr "Vous ne pouvez pas ajouter d'annexe"
 
@@ -853,9 +856,6 @@ msgstr "Ajouter une parcelle"
 
 msgid "searchbystreet_result"
 msgstr "Résultat de la recherche"
-
-msgid "no_result"
-msgstr "La recherche n'a pas fourni de résultat."
 
 msgid "searchequipments"
 msgstr "Les équipements"
