@@ -558,6 +558,9 @@ msgstr "Coordonnées de l'architecte"
 msgid "label_colname_claimant_data"
 msgstr "Coordonnées du réclamant"
 
+msgid "label_colname_created"
+msgstr "Créé le"
+
 msgid "label_colname_eventDate"
 msgstr "Date clé"
 
