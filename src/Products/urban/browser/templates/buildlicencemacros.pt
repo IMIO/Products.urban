@@ -145,7 +145,7 @@
      <tr tal:condition="python: context.attributeIsUsed('annoncedDelayDetails')">
       <td valign="top"><b><span i18n:translate="urban_label_annoncedDelayDetails">Deadline delay details</span>:</b></td>
       <td width="2%"></td>
-      <td valign="top"><tal:block replace="structure context/getAnnoncedDelayDetails" /><span tal:condition="not: context/getAnnoncedDelayDetails" class="discreet" i18n:translate="content_none">None</span></td>
+      <td valign="top" tal:define="annoncedDelayDetails context/getAnnoncedDelayDetails"><tal:block replace="structure context/getAnnoncedDelayDetails" /><span tal:condition="not: annoncedDelayDetails" class="discreet" i18n:translate="content_none">None</span></td>
      </tr>
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_impactStudy">Impact study</span>:</b></td>
@@ -162,8 +162,9 @@
   </td>
   <td width="1%"></td>
   <td valign="top" width=49%>
-   <fieldset><strong><legend i18n:translate="urban_label_workLocations">Work locations</legend></strong>
-      <div><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
+   <fieldset tal:define="workLocations context/getWorkLocations"><strong><legend i18n:translate="urban_label_workLocations">Work locations</legend></strong>
+      <div tal:condition="workLocations"><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
+      <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
    </fieldset>
    <fieldset><b><legend i18n:translate="urban_label_architects">Architect(s)</legend></b>
     <div metal:use-macro="here/urban_macros/macros/urbanArchitectsMacro" />
