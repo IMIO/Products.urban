@@ -37,27 +37,99 @@ margin: 0 0 1em 0;
 
 /* Colors on states */
 .state-in_progress {
- color: #FFA500 !important;
+color: #EA6619 !important;
+}
+
+#plone-contentmenu-workflow .state-in_progress {
+    -moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
+    background-color: #EA6619;
+    border: 0.1em solid #EA6619;
+    color: White !important;
+    padding: 0 0.5em;
 }
 
 .state-closed {
 color: grey !important;
 }
 
+#plone-contentmenu-workflow .state-closed {
+    -moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
+    background-color: grey;
+    border: 0.1em solid grey;
+    color: White !important;
+    padding: 0 0.5em;
+}
+
 .state-enabled {
 color: green !important;
+}
+
+#plone-contentmenu-workflow .state-enabled {
+    -moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
+    background-color: green;
+    border: 0.1em solid green;
+    color: White !important;
+    padding: 0 0.5em;
 }
 
 .state-disabled {
 color: red !important;
 }
 
+#plone-contentmenu-workflow .state-disabled {
+    -moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
+    background-color: red;
+    border: 0.1em solid red;
+    color: White !important;
+    padding: 0 0.5em;
+}
+
 .state-accepted {
 color: green !important;
 }
 
+#plone-contentmenu-workflow .state-accepted {
+    -moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
+    background-color: green;
+    border: 0.1em solid green;
+    color: White !important;
+    padding: 0 0.5em;
+}
+
+.state-retired {
+color: grey !important;
+}
+
+#plone-contentmenu-workflow .state-retired {
+    -moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
+    background-color: grey;
+    border: 0.1em solid grey;
+    color: White !important;
+    padding: 0 0.5em;
+}
+
+.state-incomplete {
+color: black !important;
+}
+
+#plone-contentmenu-workflow .state-incomplete {
+    -moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
+    background-color: black;
+    border: 0.1em solid black;
+    color: White !important;
+    padding: 0 0.5em;
+}
+
 .state-refused {
 color: red !important;
+}
+
+#plone-contentmenu-workflow .state-refused {
+    -moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
+    background-color: red;
+    border: 0.1em solid red;
+    color: White !important;
+    padding: 0 0.5em;
 }
 
 .imageInput {
@@ -101,6 +173,5 @@ outline: none !important;
 #datagridwidget-table-workLocations {
     width: 600px !important;
 }
-
 
 /* </dtml-with> */
