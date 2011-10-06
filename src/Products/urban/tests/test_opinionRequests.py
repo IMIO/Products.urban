@@ -30,7 +30,6 @@ class TestOpinionRequest (unittest.TestCase):
     def testCreateLinkedUrbanEventType(self):
         #when adding a new OrganisationTerm, a corresponding UrbanEvent opinion request should be created as well 
         #and linked to it
-        import pdb; pdb.set_trace()
         term_id = self.portal_urban.buildlicence.foldermakers.invokeFactory('OrganisationTerm', id='voodoo', title='Vood00', description='gni')
         term = getattr(self.portal_urban.buildlicence.foldermakers, term_id)
         event.notify(ObjectInitializedEvent(term))
