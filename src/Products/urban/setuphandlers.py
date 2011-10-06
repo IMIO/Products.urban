@@ -967,8 +967,7 @@ def adaptDefaultPortal(context):
         frontpage = getattr(site, 'front-page')
         frontpage.setTitle(_("front_page_title", 'urban', context=site.REQUEST))
         frontpage.setDescription(_("front_page_descr", 'urban', context=site.REQUEST))
-        frontpage.setText(_("front_page_text", 'urban', context=site.REQUEST))
-        frontpage.setContentType('text/html', 'text')
+        frontpage.setText(_("front_page_text", 'urban', context=site.REQUEST), mimetype='text/html')
         #remove the presentation mode
         frontpage.setPresentation(False)
         frontpage.reindexObject()
