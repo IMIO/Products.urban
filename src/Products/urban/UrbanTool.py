@@ -409,8 +409,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
         newUrbanEventId= licence.invokeFactory(portal_type,
                 id=self.generateUniqueId(portal_type),
-                title=urbanEventTypeObj.Title(),
-                urbaneventtypes=(urbanEventTypeObj,))
+                title=urbanEventType.Title(),
+                urbaneventtypes=(urbanEventType,))
         newUrbanEventObj=getattr(licence, newUrbanEventId)
         return self.REQUEST.RESPONSE.redirect(newUrbanEventObj.absolute_url()
                 + '/edit')
