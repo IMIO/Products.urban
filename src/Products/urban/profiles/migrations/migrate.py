@@ -40,29 +40,29 @@ def migrateToPlone4(context):
     migratePersonTitles(context)
     #remove useless fields 'termKey' and 'termKeyStr'
     migrateUrbanVocabularyTerms(context)
-    #WorkLocations object disappeared, we now use a workLocations DataGridField
+    #workLocations object disappeared, we now use a workLocations DataGridField
     migrateToWorkLocationsDataGridField(context)
-    #We replace licence folders from portal_urban to LicenceConfig objects
+    #we replace licence folders from portal_urban to LicenceConfig objects
     migrateToLicenceConfig(context)
     #we replace architect objects (based on Architect meta_type) by new objects (based on Contact meta_type)
     migrateArchitectToContact(context)
-    #Migration of contact type objects to provides specific interfaces
+    #migration of contact type objects to provides specific interfaces
     migrateSpecificContactInterfaces(context)
-    #Migration of UrbanEvents with id 'enquete-publique' to UrbanEventinquiry
+    #migration of UrbanEvents with id 'enquete-publique' to UrbanEventinquiry
     migrationToUrbanEventInquiries(context)
     #remove 'eventDate' from UrbanEventType.activatedFields
     migrateUrbanEventTypes(context)
-    #Add md5Signature and profileName properties for each template
+    #add md5Signature and profileName properties for each template
     addMd5SignatureAndProfileNameProperties(context)
-    #Every folder that will contain licences need to provide ILicenceContainer
+    #every folder that will contain licences need to provide ILicenceContainer
     migrateLicenceContainers(context)
-    #Migration of Event objects to provides marker interfaces
+    #migration of Event objects to provides marker interfaces
     provideEventMarkerInterfaces(context)
     #get rid of the Proprietary portal_type, we use Applicant
     migrationProprietaryToContact(context)
-    #Migration of Layers
+    #migration of Layers
     migrateLayersForMapfish(context)
-    #Migrate the foldermakers UrbanVocabularyTerms to allow them to link an UrbanEventType
+    #migrate the foldermakers UrbanVocabularyTerms to allow them to link an UrbanEventType
     migrateFoldermakersTerms(context)
 
 def migrateToWorkLocationsDataGridField(context):
@@ -628,8 +628,13 @@ def migrateArchitectToContact(context):
     #from plone.app.referenceintegrity.config import DisableRelationshipsProtectionTemporarily
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
     logger.info("Migrating Architects to Contacts: starting...")
-    for architect in architect_folder.objectValues('Architect'):
+    architects = architect_folder.objectValues('Architect')
+    lenArchitects = len(architects)
+    i = 0
+    for architect in architects:
+        i = i + 1
         #first we create a new architect
+        logger.info("Migrating Architect %d/%d" % (i, lenArchitects))
         attribs = {
             'title': architect.Title(),
             'personTitle' : architect.getPersonTitle(),
@@ -719,10 +724,16 @@ def migrationToUrbanEventInquiries(context):
 
     portal = context.getSite()
 
+    #to avoid link integrity problems, disable checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
+
     #Run the migrations
     for migrator in migrators:
         walker = migrator.walker(portal, migrator, query={'id': 'enquete-publique'})
         walker.go()
+    #enable linkintegrity checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
+
     logger.info("Migrating to UrbanEventInquiries: done!")
 
 class ProprietaryToApplicantMigrator(object, InplaceATItemMigrator):
@@ -904,3 +915,4 @@ def addInvestigationArticlesToBuildLicenceConfig(context):
     from Products.urban.setuphandlers import addInvestigationArticles
     addInvestigationArticles(context, configFolder)
     logger.info("Adding default investigation articles in the BuildLicence LicenceConfig: done!")
+
