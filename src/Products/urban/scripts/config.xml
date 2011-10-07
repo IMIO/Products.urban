@@ -203,48 +203,50 @@
  
  <Object name="Agent traitant">    
     <Item name="Signalétique">
-        <FieldCode>
-            self.getFoldermanagersSignaletic() 
-        </FieldCode>
+        <AnnotationCode>
+            do text 
+from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getFolderManagersSignaletic()))
+        </AnnotationCode>        
     </Item>
     <Item name="Signalétique (avec n° tel)">
-        <FieldCode>
-            self.getFoldermanagersSignaletic(withTel=True) 
-        </FieldCode>
+        <AnnotationCode>
+            do text 
+from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getFolderManagersSignaletic((withTel=True)))
+        </AnnotationCode>        
     </Item>
     <Item name="Nom">
         <FieldCode>
-            self.getFoldermanagers()[0].getName1()
+            self.getFolderManagers()[0].getName1()
         </FieldCode>        
     </Item>
     <Item name="Prénom">
         <FieldCode>
-            self.getFoldermanagers()[0].getName2()
+            self.getFolderManagers()[0].getName2()
         </FieldCode>        
     </Item>
     <Item name="Téléphone">
         <FieldCode>
-            self.getFoldermanagers()[0].getPhone()
+            self.getFolderManagers()[0].getPhone()
         </FieldCode>        
     </Item>
     <Item name="Fax">
         <FieldCode>
-            self.getFoldermanagers()[0].getFax() 
+            self.getFolderManagers()[0].getFax() 
         </FieldCode>        
     </Item>
     <Item name="Email">
         <FieldCode>
-            self.getFoldermanagers()[0].getEmail() 
+            self.getFolderManagers()[0].getEmail() 
         </FieldCode>        
     </Item>
     <Item name="Initials">
         <FieldCode>
-            self.getFoldermanagers()[0].getInitials()
+            self.getFolderManagers()[0].getInitials()
         </FieldCode>        
     </Item>
     <Item name="Grade">
         <FieldCode>
-            self.displayValue(self.getFoldermanagers()[0].Vocabulary('grade')[0], self.getFoldermanagers()[0].getGrade())
+            self.displayValue(self.getFolderManagers()[0].Vocabulary('grade')[0], self.getFolderManagers()[0].getGrade())
         </FieldCode>        
     </Item>
 </Object>
