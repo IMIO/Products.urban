@@ -51,6 +51,15 @@
      permission="zope2.View"
   />
 
+  <!-- Old migrated instances use an ATBTreeFolder to store the licences... -->
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATBTreeFolder"
+     name="urban_view"
+     class=".urbanview.UrbanView"
+     template="templates/urbanview.pt"
+     permission="zope2.View"
+  />
+
   <browser:page
      for="*"
      name="map"
