@@ -114,13 +114,13 @@ class UrbanBase(object):
             who = self.getWhoSubmitted()
             if who == 'both':
                 #a notary submitted the request for an applicant
-                return translate('request_submitted_by_both', 'urban', context=self.REQUEST, mapping={'notary': self.getNotariesSignaletic(), 'applicant': self.getApplicantsSignaletic(), }).encode('utf8')
+                return translate('request_submitted_by_both', 'urban', context=self.REQUEST, mapping={'notary': unicode(self.getNotariesSignaletic(), 'utf8'), 'applicant': unicode(self.getApplicantsSignaletic(), 'utf8')}).encode('utf8')
             elif who == 'applicant':
                 #an applicant submitted the request for himself
-                return translate('request_submitted_by_applicant', 'urban', context=self.REQUEST, mapping={'applicant': self.getApplicantsSignaletic(), }).encode('utf8')
+                return translate('request_submitted_by_applicant', 'urban', context=self.REQUEST, mapping={'applicant': unicode(self.getApplicantsSignaletic(), 'utf-8')}).encode('utf8')
             elif who == 'notary':
                 #a notary submitted the request without an applicant (??? possible ???)
-                return translate('request_submitted_by_notary', 'urban', context=self.REQUEST, mapping={'notary': self.getNotariesSignaletic(), }).encode('utf8')
+                return translate('request_submitted_by_notary', 'urban', context=self.REQUEST, mapping={'notary': unicode(self.getNotariesSignaletic(), 'utf-8')}).encode('utf8')
             return ''
         elif self.getType() == 'ParceOutLicence':
             return 'test'
