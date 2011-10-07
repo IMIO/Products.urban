@@ -150,7 +150,6 @@ def addUrbanConfigs(context):
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['UrbanEventType'])
         newFolder.setImmediatelyAddableTypes(['UrbanEventType'])
-        addUrbanEventTypes(context)
         
         #add FolderManagers folder
         newFolderid = configFolder.invokeFactory("Folder",id="foldermanagers",title=_("foldermanagers_folder_title", 'urban', context=site.REQUEST))
