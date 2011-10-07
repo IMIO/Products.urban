@@ -30,6 +30,8 @@ from Products.urban.config import URBAN_TYPES, PPNC_LAYERS
 from Products.urban.interfaces import ILicenceContainer
 from zope.interface import alsoProvides
 from zope.i18n import translate as _
+from zope import event
+from Products.Archetypes.event import ObjectInitializedEvent
 from exportimport import addUrbanEventTypes
 from Products.urban.utils import generatePassword
 ##/code-section HEAD
@@ -148,7 +150,8 @@ def addUrbanConfigs(context):
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['UrbanEventType'])
         newFolder.setImmediatelyAddableTypes(['UrbanEventType'])
-
+        addUrbanEventTypes(context)
+        
         #add FolderManagers folder
         newFolderid = configFolder.invokeFactory("Folder",id="foldermanagers",title=_("foldermanagers_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(configFolder, newFolderid)
@@ -364,11 +367,6 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("OrganisationTerm",id="voo",title=u"VOO", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
             #now, we need to specify that the description's mimetype is 'text/html'
             setHTMLContentType(newFolder, 'description')
-
-            from zope import event
-            from Products.Archetypes.event import ObjectInitializedEvent
-            for obj in newFolder.objectValues():
-                event.notify(ObjectInitializedEvent(obj))
 
             #add Delays folder
             newFolderid = configFolder.invokeFactory("Folder",id="folderdelays",title=_("folderdelays_folder_title", 'urban', context=site.REQUEST))
@@ -1133,6 +1131,9 @@ def addTestObjects(context):
 
     #add default UrbanEventTypes for documents generation
     addUrbanEventTypes(context)
+    #add OpinionRequest UrbanEventTypes by notifying the creation of their corresponding OrganisationTerm
+    for organisation_term in tool.buildlicence.foldermakers.objectValues():
+        event.notify(ObjectInitializedEvent(organisation_term))
 
     #add some generic templates in configuration
     gen_templates = { 'templateHeader':'header.odt',

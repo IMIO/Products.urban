@@ -39,7 +39,7 @@ class TestOpinionRequest (unittest.TestCase):
     def testInquiryWithOpinionRequestIsLinkedToItsUrbanEventOpinionRequest(self):
         #if there is an inquiry with an opinion request and that its corresponding UrbanEventOpinionRequest 
         #is added, a link should be created between this inquiry and this UrbanEventOpinionRequest
-        #setting an investigation start date to activate the inquiry
+        #set an investigation start date to activate the inquiry
         self.buildLicence.setInvestigationStart('18/09/86')
         self.buildLicence.setSolicitOpinionsTo('sncb')
         self.portal_urban.createUrbanEvent(self.buildLicence.UID(), 
