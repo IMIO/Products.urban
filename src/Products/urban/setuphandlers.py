@@ -1062,12 +1062,12 @@ def addTestObjects(context):
     #add 3 users, one as manager, one as reader and one as editor...
     site = context.getSite()
     is_mountpoint = len(site.absolute_url_path().split('/')) > 2
-
     try:
         password = 'urbanmanager' 
         if is_mountpoint:
             password = generatePassword(8) 
-        site.portal_registration.addMember(id="urbanmanager", password=password)
+        member = site.portal_registration.addMember(id="urbanmanager", password=password)
+        member.setMemberProperties({'ext_editor':True})
         password = 'urbanreader' 
         if is_mountpoint:
             password = generatePassword(8) 
@@ -1075,7 +1075,8 @@ def addTestObjects(context):
         password = 'urbaneditor'
         if is_mountpoint:
             password = generatePassword(8)
-        site.portal_registration.addMember(id="urbaneditor", password=password)
+        member = site.portal_registration.addMember(id="urbaneditor", password=password)
+        member.setMemberProperties({'ext_editor':True})
         #put users in the correct group
         site.acl_users.source_groups.addPrincipalToGroup("urbanmanager", "urban_managers")
         site.acl_users.source_groups.addPrincipalToGroup("urbanreader", "urban_readers")
