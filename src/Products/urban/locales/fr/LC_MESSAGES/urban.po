@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-10-07 14:09+0000\n"
+"POT-Creation-Date: 2011-10-10 10:03+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -912,7 +912,7 @@ msgid "topics"
 msgstr "Recherches"
 
 msgid "townshipfoldercategories_folder_title"
-msgstr "Catégories de dossiers communales" 
+msgstr "Catégories de dossiers communales"
 
 #. Default: "UnoEnabledPython"
 #: UrbanTool.py
@@ -1657,6 +1657,11 @@ msgstr "Conditions d'octroi du permis"
 #: Lot.py
 msgid "urban_label_lotusage"
 msgstr "Destination"
+
+#. Default: "Manageablelicences"
+#: FolderManager.py
+msgid "urban_label_manageableLicences"
+msgstr "Types de permis gérés"
 
 #. Default: "Mapextent"
 #: UrbanTool.py

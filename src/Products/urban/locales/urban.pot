@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-10-07 14:09+0000\n"
+"POT-Creation-Date: 2011-10-10 10:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1653,6 +1653,11 @@ msgstr ""
 #. Default: "Usage"
 #: Lot.py
 msgid "urban_label_lotusage"
+msgstr ""
+
+#. Default: "Manageablelicences"
+#: FolderManager.py
+msgid "urban_label_manageableLicences"
 msgstr ""
 
 #. Default: "Mapextent"

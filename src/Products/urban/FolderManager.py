@@ -25,6 +25,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Contact import Contact
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from zope.i18n import translate
 ##/code-section module-header
 
 schema = Schema((
@@ -55,6 +56,17 @@ schema = Schema((
             label_msgid='urban_label_ploneUserId',
             i18n_domain='urban',
         ),
+    ),
+    LinesField(
+        name='manageableLicences',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Manageablelicences',
+            label_msgid='urban_label_manageableLicences',
+            i18n_domain='urban',
+        ),
+        multiValued=True,
+        vocabulary='listLicenceTypes',
     ),
 
 ),
@@ -99,7 +111,14 @@ class FolderManager(BaseContent, Contact, BrowserDefaultMixin):
         """
         return "%s %s (%s)" % (self.getName1(), self.getName2(), self.displayValue(self.Vocabulary('grade')[0], self.getGrade()).encode('utf8'))
 
-
+    security.declarePublic('listLicenceTypes')
+    def listLicenceTypes(self):
+        """
+          Return all the licence types manageable
+        """
+        licence_types = ['buildlicences', 'declarations', 'parceloutlicences', 'urbancertificateones',
+                         'urbancertificatetwos', 'notaryletters', 'divisions', ]
+        return licence_types
 
 registerType(FolderManager, PROJECTNAME)
 # end of class FolderManager
