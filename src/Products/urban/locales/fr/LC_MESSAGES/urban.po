@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-10-04 14:01+0000\n"
+"POT-Creation-Date: 2011-10-07 14:09+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -451,7 +451,7 @@ msgid "folderbuildworktype_folder_title"
 msgstr "Nature des demandes"
 
 msgid "foldercategories_folder_title"
-msgstr "Catégories de dossiers"
+msgstr "Catégories de dossiers RW"
 
 msgid "folderdelays_folder_title"
 msgstr "Délais"
@@ -910,6 +910,9 @@ msgstr "Entrez une condition TAL.  Les variables 'here' et 'member' sont disponi
 # topics
 msgid "topics"
 msgstr "Recherches"
+
+msgid "townshipfoldercategories_folder_title"
+msgstr "Catégories de dossiers communales" 
 
 #. Default: "UnoEnabledPython"
 #: UrbanTool.py
@@ -1422,7 +1425,12 @@ msgstr "Zone inondable"
 #. Default: "Foldercategory"
 #: GenericLicence.py
 msgid "urban_label_folderCategory"
-msgstr "Catégorie du dossier"
+msgstr "Catégorie du dossier RW"
+
+#. Default: "Foldercategorytownship"
+#: GenericLicence.py
+msgid "urban_label_folderCategoryTownship"
+msgstr "Catégorie du dossier communale"
 
 msgid "urban_label_folderManager"
 msgstr "Agent(s) traitant(s)"

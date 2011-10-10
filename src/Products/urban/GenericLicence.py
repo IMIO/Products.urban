@@ -422,6 +422,17 @@ schema = Schema((
         ),
         schemata='urban_location',
     ),
+    StringField(
+        name='folderCategoryTownship',
+        widget=SelectionWidget(
+            label='Foldercategorytownship',
+            label_msgid='urban_label_folderCategoryTownship',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        schemata='urban_description',
+        vocabulary=UrbanVocabulary('townshipfoldercategories'),
+    ),
     ReferenceField(
         name='foldermanagers',
         widget=ReferenceBrowserWidget(
@@ -837,3 +848,4 @@ registerType(GenericLicence, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
+

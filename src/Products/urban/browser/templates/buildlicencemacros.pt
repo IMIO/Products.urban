@@ -123,6 +123,11 @@
       <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategory', mode='view')" /></td>
      </tr>
      <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_folderCategoryTownship">Folder category</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategoryTownship', mode='view')" /></td>
+     </tr>
+     <tr>
       <td valign="top"><b><span i18n:translate="urban_label_workType">Work type</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('workType', mode='view')" /></td>

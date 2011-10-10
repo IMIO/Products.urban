@@ -570,6 +570,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('investigationDetails', after='investigationEnd')
     schema.moveField('investigationReasons', after='investigationDetails')
     schema.moveField('solicitOpinionsTo', after='investigationReasons')
+    schema.moveField('folderCategoryTownship', after='folderCategory')
     return schema
 
 finalizeSchema(BuildLicence_schema)

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-10-04 14:01+0000\n"
+"POT-Creation-Date: 2011-10-07 14:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -539,9 +539,6 @@ msgstr ""
 msgid "label_colname_Creator"
 msgstr ""
 
-msgid "label_colname_created"
-msgstr ""
-
 msgid "label_colname_Title"
 msgstr ""
 
@@ -558,6 +555,9 @@ msgid "label_colname_architect_data"
 msgstr ""
 
 msgid "label_colname_claimant_data"
+msgstr ""
+
+msgid "label_colname_created"
 msgstr ""
 
 msgid "label_colname_eventDate"
@@ -671,6 +671,9 @@ msgid "no_foldermanager_defined"
 msgstr ""
 
 msgid "no_notary_defined"
+msgstr ""
+
+msgid "no_result"
 msgstr ""
 
 msgid "not_permitted_to_add_annex"
@@ -853,9 +856,6 @@ msgstr ""
 msgid "searchbystreet_result"
 msgstr ""
 
-msgid "no_result"
-msgstr ""
-
 msgid "searchequipments"
 msgstr ""
 
@@ -908,6 +908,9 @@ msgstr ""
 
 # topics
 msgid "topics"
+msgstr ""
+
+msgid "townshipfoldercategories_folder_title"
 msgstr ""
 
 #. Default: "UnoEnabledPython"
@@ -1419,6 +1422,11 @@ msgstr ""
 #. Default: "Foldercategory"
 #: GenericLicence.py
 msgid "urban_label_folderCategory"
+msgstr ""
+
+#. Default: "Foldercategorytownship"
+#: GenericLicence.py
+msgid "urban_label_folderCategoryTownship"
 msgstr ""
 
 msgid "urban_label_folderManager"
