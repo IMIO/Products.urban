@@ -542,10 +542,8 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                             </tal:block>
                             <tal:comment replace="nothing">Show more values for applicants.  This could be the case for other contacts???</tal:comment>
                             <tal:applicant condition="python: obj.meta_type == 'Contact'"
-                                           define="thisObject python: hasattr(obj, 'getObject') and obj.getObject() or obj">
-                             <tal:block condition="thisObject/getStreet"><br /></tal:block>
-                             <span tal:replace="python: thisObject.getStreet()+' '+thisObject.getNumber()" /><br />
-                             <span tal:replace="python: thisObject.getZipcode()+' '+thisObject.getCity()" />
+                                           define="obj python: hasattr(obj, 'getObject') and obj.getObject() or obj">
+                             <div metal:use-macro="here/urban_macros/macros/displayAddress" />
                             </tal:applicant>
                         </td>
                     </tal:block>
@@ -700,3 +698,9 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
         </fieldset>
       </tal:fieldsets>
 </metal:edit>
+
+<metal:displayAddress define-macro="displayAddress">
+  <tal:block condition="obj/getStreet"><br /></tal:block>
+  <span tal:replace="python: obj.getStreet()+' '+obj.getNumber()" /><br />
+  <span tal:replace="python: obj.getZipcode()+' '+obj.getCity()" />
+</metal:displayAddress>
