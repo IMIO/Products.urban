@@ -242,11 +242,10 @@ schema = Schema((
             label_msgid='urban_label_architects',
             i18n_domain='urban',
         ),
-        required= True,
+        allowed_types=('Architect',),
         schemata='urban_description',
         multiValued=1,
         relationship='licenceArchitects',
-        allowed_types=('Architect',),
     ),
     ReferenceField(
         name='parcellings',
