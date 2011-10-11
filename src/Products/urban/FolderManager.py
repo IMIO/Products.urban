@@ -117,7 +117,7 @@ class FolderManager(BaseContent, Contact, BrowserDefaultMixin):
         """
           Return all the licence types manageable
         """
-        return URBAN_TYPES 
+        return URBAN_TYPES
 
 
 

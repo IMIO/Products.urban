@@ -128,6 +128,9 @@ ADDITIONAL_LAYERS_FOLDER="additional_layers"
 
 #a list where first element is the meetingConfigId and the second, the meta_type name
 URBAN_TYPES = ['BuildLicence','ParcelOutLicence','Declaration', 'Division', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'EnvironmentalDeclaration', ]
+
+#the different formats proposed for generating document
+GENERATED_DOCUMENT_FORMATS = {'odt':'application/vnd.oasis.opendocument.text' ,'doc':'application/msword'}
 #empty value used for listboxes
 EMPTY_VOCAB_VALUE = 'choose_a_value'
 

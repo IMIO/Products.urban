@@ -102,7 +102,7 @@ schema = Schema((
         name='workLocations',
         schemata="urban_description",
         widget=DataGridWidget(
-            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", sort_on='sortable_title',  inUrbanConfig=False, allowedStates=['enabled'])),},
+            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", sort_on='sortable_title', inUrbanConfig=False, allowedStates=['enabled'])),},
             label='Worklocations',
             label_msgid='urban_label_workLocations',
             i18n_domain='urban',

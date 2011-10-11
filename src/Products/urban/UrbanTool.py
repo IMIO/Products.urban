@@ -25,7 +25,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-
+    
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -46,6 +46,7 @@ from Products.CMFPlone.PloneBatch import Batch
 from Products.PageTemplates.Expressions import getEngine
 from Products.ZCTextIndex.ParseTree import ParseError
 from Products.urban.utils import getOsTempFolder
+from Products.urban.config import GENERATED_DOCUMENT_FORMATS
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 DB_QUERY_ERROR = "Programming error in query"
@@ -323,7 +324,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         enforceVocabulary=True,
-        vocabulary=('odt', 'doc'),
+        vocabulary=GENERATED_DOCUMENT_FORMATS.keys(),
     ),
 
 ),
@@ -358,7 +359,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def __init__(self, id=None):
         OrderedBaseFolder.__init__(self,'portal_urban')
         self.setTitle('Urban configuration')
-
+        
         ##code-section constructor-footer #fill in your manual code here
         ##/code-section constructor-footer
 
@@ -366,7 +367,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     # tool should not appear in portal_catalog
     def at_post_edit_script(self):
         self.unindexObject()
-
+        
         ##code-section post-edit-method-footer #fill in your manual code here
         self.checkDBConnection()
         ##/code-section post-edit-method-footer
@@ -381,7 +382,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
           Post creation hook
         """
         self.checkDBConnection()
-
 
     # XXX constant put on the class to ensure it is close to the method that uses
     # it
@@ -414,7 +414,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         newUrbanEventObj=getattr(licence, newUrbanEventId)
         return self.REQUEST.RESPONSE.redirect(newUrbanEventObj.absolute_url()
                 + '/edit')
-
     security.declarePublic('createUrbanDoc')
     def createUrbanDoc(self, urban_template_uid, urban_event_uid):
         """
@@ -500,10 +499,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         while hasattr(aq_base(urbanEventObj), proposedId):
             proposedId = '%s-%d.odt' % (urbanTemplateObjId, i)
             i = i + 1
-        newUrbanDoc=urbanEventObj.invokeFactory("File",id=proposedId,title=urbanTemplateObj.Title(),content_type='application/vnd.oasis.opendocument.text',file=doc)
+        newUrbanDoc=urbanEventObj.invokeFactory("File",id=proposedId,title=urbanTemplateObj.Title(),content_type=GENERATED_DOCUMENT_FORMATS[fileType],file=doc)
         newUrbanDoc=getattr(urbanEventObj, newUrbanDoc)
         newUrbanDoc.setFilename(proposedId)
-        newUrbanDoc.setFormat('application/vnd.oasis.opendocument.text')
+        newUrbanDoc.setFormat(GENERATED_DOCUMENT_FORMATS[fileType])
         self.REQUEST.set('doc_uid',newUrbanDoc.UID())
         response.redirect(urbanEventObj.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
 
@@ -546,7 +545,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return brains
 
     security.declarePrivate('listVocabularyObjects')
-    def listVocabularyObjects(self, vocToReturn, context, vocType="UrbanVocabularyTerm", id_to_use="id", inUrbanConfig=True, 
+    def listVocabularyObjects(self, vocToReturn, context, vocType="UrbanVocabularyTerm", id_to_use="id", inUrbanConfig=True,
                               sort_on="getObjPositionInParent", allowedStates=['enabled']):
         brains = self.listVocabularyBrains(vocToReturn, context, vocType=vocType, inUrbanConfig=inUrbanConfig, sort_on=sort_on,
                                            allowedStates=allowedStates)
@@ -1616,3 +1615,4 @@ registerType(UrbanTool, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
+
