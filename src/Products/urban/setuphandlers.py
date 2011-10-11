@@ -1226,11 +1226,9 @@ def addTestBuildlicense(context):
     portal_urban = site.portal_urban
     portal_buildlicences = portal_urban.buildlicence
     buildlicences_folder = urban_folder.buildlicences
-    fm_folder = portal_urban.foldermanagers
+    foldermanager = portal_urban.foldermanagers.foldermanager1
     architects_folder = buildlicences_folder.architects
 
-    foldermanager = getattr(fm_folder, 'foldermanager1')
-    print(foldermanager.getName1())
     architect = getattr(architects_folder, portal_urban.plone_utils.normalizeString('Archi1Name-Archi1FirstName'))
 
     licence_id = site.generateUniqueId('homewrecker')
