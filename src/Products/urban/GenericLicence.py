@@ -648,7 +648,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         ids =  []
         for foldermanager in urban_tool.foldermanagers.objectValues():
             if self.getPortalTypeName() in foldermanager.getManageableLicences():
-                ids.append(foldermanager.id)
+                ids.append(foldermanager.getId())
         dict = {}
         dict['path'] = {'query':'%s/portal_urban/foldermanagers' % (rootPath)}
         dict['id'] = ids
