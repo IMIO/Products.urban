@@ -26,6 +26,7 @@ from Products.urban.config import *
 from Contact import Contact
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from zope.i18n import translate
+from Products.urban.config import URBAN_TYPES
 ##/code-section module-header
 
 schema = Schema((
@@ -116,9 +117,9 @@ class FolderManager(BaseContent, Contact, BrowserDefaultMixin):
         """
           Return all the licence types manageable
         """
-        licence_types = ['buildlicences', 'declarations', 'parceloutlicences', 'urbancertificateones',
-                         'urbancertificatetwos', 'notaryletters', 'divisions', ]
-        return licence_types
+        return URBAN_TYPES 
+
+
 
 registerType(FolderManager, PROJECTNAME)
 # end of class FolderManager

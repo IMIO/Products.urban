@@ -75,6 +75,9 @@ msgstr ""
 msgid "Notary data"
 msgstr ""
 
+msgid "NotaryLetter"
+msgstr ""
+
 msgid "Parcel"
 msgstr ""
 
@@ -915,6 +918,12 @@ msgstr ""
 
 msgid "townshipfoldercategories_folder_title"
 msgstr ""
+
+msgid "UrbanCertificateOne"
+msgstr "Certificat d'urbanisme 1"
+
+msgid "UrbanCertificateTwo"
+msgstr "Certificat d'urbanisme 2"
 
 #. Default: "UnoEnabledPython"
 #: UrbanTool.py

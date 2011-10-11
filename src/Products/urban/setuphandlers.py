@@ -151,12 +151,6 @@ def addUrbanConfigs(context):
         newFolder.setLocallyAllowedTypes(['UrbanEventType'])
         newFolder.setImmediatelyAddableTypes(['UrbanEventType'])
         
-        #add FolderManagers folder
-        newFolderid = configFolder.invokeFactory("Folder",id="foldermanagers",title=_("foldermanagers_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(configFolder, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['FolderManager'])
-        newFolder.setImmediatelyAddableTypes(['FolderManager'])
         if urban_type == 'ParcelOutLicence':
             newFolderid = configFolder.invokeFactory("Folder",id="lotusages",title=_("lotusages_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
@@ -669,6 +663,14 @@ def addGlobalFolders(context):
     ),
     )
 
+    #add foldermanagers folder
+    if not hasattr(tool, "foldermanagers"):
+        foldermanagersFolderid = tool.invokeFactory("Folder",id="foldermanagers",title=_("foldermanagers_folder_title", 'urban', context=site.REQUEST))
+        foldermanagersFolder = getattr(tool, foldermanagersFolderid)
+        foldermanagersFolder.setConstrainTypesMode(1)
+        foldermanagersFolder.setLocallyAllowedTypes(['FolderManager'])
+        foldermanagersFolder.setImmediatelyAddableTypes(['FolderManager'])
+
     if not hasattr(tool, "topics"):
         topicsFolderId = tool.invokeFactory("Folder",id="topics",title=_("topics", 'urban', context=site.REQUEST))
         topicsFolder = getattr(tool, topicsFolderId)
@@ -1142,14 +1144,15 @@ def addTestObjects(context):
         logger.info("Geometricians examples have been added")
 
     #add some folder managers in each urbanConfigs...
-    urbanConfigIds = ['buildlicence', 'declaration', 'parceloutlicence', 'urbancertificateone', 'urbancertificatetwo', 'notaryletter', 'division', ]
     tool = site.portal_urban
-    for urbanConfigId in urbanConfigIds:
-        fmFolder = getattr(tool.getUrbanConfig(None, urbanConfigId=urbanConfigId), "foldermanagers")
-        if not fmFolder.objectIds():
-            fmFolder.invokeFactory("FolderManager",id="foldermanager1",name1="Dumont", name2="Jean", grade='agent-technique')
-            fmFolder.invokeFactory("FolderManager",id="foldermanager2",name1="Schmidt", name2="Alain", grade='directeur-general')
-            fmFolder.invokeFactory("FolderManager",id="foldermanager3",name1="Robert", name2="Patrick", grade='responsable-administratif')
+    fmFolder = getattr(tool, "foldermanagers")
+    if not fmFolder.objectIds():
+        fmFolder.invokeFactory("FolderManager",id="foldermanager1",name1="Dumont", name2="Jean", 
+                                grade='agent-technique', manageableLicences='BuildLicence')
+        fmFolder.invokeFactory("FolderManager",id="foldermanager2",name1="Schmidt", name2="Alain",
+                                grade='directeur-general', manageableLicences='NotaryLetter')
+        fmFolder.invokeFactory("FolderManager",id="foldermanager3",name1="Robert", name2="Patrick", 
+                                grade='responsable-administratif', manageableLicences='BuildLicence')
 
     tool = site.portal_urban
 
@@ -1223,7 +1226,7 @@ def addTestBuildlicense(context):
     portal_urban = site.portal_urban
     portal_buildlicences = portal_urban.buildlicence
     buildlicences_folder = urban_folder.buildlicences
-    fm_folder = portal_buildlicences.foldermanagers
+    fm_folder = portal_urban.foldermanagers
     architects_folder = buildlicences_folder.architects
 
     foldermanager = getattr(fm_folder, 'foldermanager1')

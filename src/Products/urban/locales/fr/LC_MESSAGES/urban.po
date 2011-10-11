@@ -76,6 +76,9 @@ msgstr "Carte"
 msgid "Notary data"
 msgstr "Coordonnées du notaire"
 
+msgid "NotaryLetter"
+msgstr "Lettre de notaire"
+
 msgid "Parcel"
 msgstr "Parcelle"
 
@@ -112,6 +115,12 @@ msgstr "Recherche de parcelles"
 
 msgid "See more..."
 msgstr "Voir tout..."
+
+msgid "UrbanCertificateOne"
+msgstr "Certificat d'urbanisme 1"
+
+msgid "UrbanCertificateTwo"
+msgstr "Certificat d'urbanisme 2"
 
 # urban_actions
 msgid "View"
@@ -1664,7 +1673,7 @@ msgstr "Destination"
 #. Default: "Manageablelicences"
 #: FolderManager.py
 msgid "urban_label_manageableLicences"
-msgstr "Types de permis gérés"
+msgstr "Type de permis gérés"
 
 #. Default: "Mapextent"
 #: UrbanTool.py

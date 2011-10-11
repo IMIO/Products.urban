@@ -436,22 +436,17 @@ schema = Schema((
     ReferenceField(
         name='foldermanagers',
         widget=ReferenceBrowserWidget(
-            force_close_on_insert=1,
-            allow_search=1,
-            allow_browse=1,
-            show_indexes=1,
-            available_indexes={'Title':'Nom'},
-            startup_directory_method="foldermanagersStartupDirectory",
-            restrict_browsing_to_startup_directory=1,
-            wild_card_search=True,
+            allow_browse=0,
+            base_query='restrictFolderManagerSearch',
+            show_results_without_query=True,
             label='Foldermanagers',
             label_msgid='urban_label_foldermanagers',
             i18n_domain='urban',
         ),
+        relationship='licenceFolderManagers',
         required=True,
         schemata='urban_description',
         multiValued=1,
-        relationship='licenceFolderManagers',
         allowed_types=('FolderManager',),
     ),
 
@@ -643,13 +638,24 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
             vocab.append((elt[0], elt[1]))
         return DisplayList(tuple(vocab))
 
-    security.declarePublic('foldermanagersStartupDirectory')
-    def foldermanagersStartupDirectory(self):
+    security.declarePublic('restrictFolderManagerSearch')
+    def restrictFolderManagerSearch(self):
         """
-          Return the folder were are stored folder managers
-          This depend on the real portal_type
         """
-        return '/portal_urban/%s/foldermanagers' % self.getPortalTypeName().lower()
+        portal = getToolByName(self, 'portal_url').getPortalObject()
+        rootPath = '/'.join(portal.getPhysicalPath())
+        urban_tool = getToolByName(self, 'portal_urban')
+        ids =  []
+        for foldermanager in urban_tool.foldermanagers.objectValues():
+            manageable_licences = []
+            for licence_type in foldermanager.getManageableLicences():
+                manageable_licences.append(licence_type.encode())
+            if self.getPortalTypeName() in manageable_licences:
+                ids.append(foldermanager.id)
+        dict = {}
+        dict['path'] = {'query':'%s/portal_urban/foldermanagers' % (rootPath)}
+        dict['id'] = ids
+        return dict
 
     security.declarePublic('getApplicants')
     def getApplicants(self):
