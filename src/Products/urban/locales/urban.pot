@@ -293,6 +293,9 @@ msgstr ""
 msgid "concerned_parcels"
 msgstr ""
 
+msgid "contact_no_workslocation_defined"
+msgstr ""
+
 msgid "contact_recipients"
 msgstr ""
 

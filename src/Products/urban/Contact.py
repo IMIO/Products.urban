@@ -84,6 +84,10 @@ slave_fields_address = (
      'action': 'show',
      'hide_values': (False, ),
     },
+    {'name': 'showWorkLocationsAddress',
+     'action': 'show',
+     'hide_values': (True, ),
+    },
 )
 ##/code-section module-header
 

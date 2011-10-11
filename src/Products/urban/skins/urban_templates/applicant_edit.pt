@@ -35,6 +35,21 @@
                 <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
                  <legend i18n:translate="address_fieldset_legend">Address</legend>
                  <metal:fieldMacro use-macro="python:here.widget('isSameAddressAsWorks', mode='edit')" />
+                 <tal:comment replace="nothing">If same address, show the readonly workLocations </tal:comment>
+                 <div class="discreet" id="archetypes-fieldname-showWorkLocationsAddress"
+                                       tal:define="licence python: context.aq_inner.aq_parent;
+                                                   workLocations licence/getWorkLocations">
+                  <tal:workLocationDefined tal:condition="workLocations">
+                   <tal:block define="brains python: context.uid_catalog(UID=workLocations[0]['street']);
+                                      streetOrLocality python: brains and brains[0].getObject() or None" condition="streetOrLocality">
+                    <span tal:replace="python: streetOrLocality.getStreetName() + ' ' + workLocations[0]['number']" /><br />
+                    <span tal:define="city streetOrLocality/getCity" tal:replace="python: city.getZipCode() + ' ' + city.Title()" />
+                   </tal:block>
+                  </tal:workLocationDefined>
+                  <tal:noWorkLocationDefined tal:condition="not: workLocations">
+                   <span class="discreet" i18n:translate="contact_no_workslocation_defined">Warning, no address has been defined for the works location</span>
+                  </tal:noWorkLocationDefined>
+                 </div>
                  <metal:fieldMacro use-macro="python:here.widget('street', mode='edit')" />
                  <metal:fieldMacro use-macro="python:here.widget('number', mode='edit')" />
                  <metal:fieldMacro use-macro="python:here.widget('zipcode', mode='edit')" />

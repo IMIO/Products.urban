@@ -294,6 +294,9 @@ msgstr "Numéro"
 msgid "concerned_parcels"
 msgstr "Parcelle(s) concernée(s)"
 
+msgid "contact_no_workslocation_defined"
+msgstr "Attention, aucune adresse de travaux définie"
+
 msgid "contact_recipients"
 msgstr "Destinataire(s) de contact"
 
@@ -1026,7 +1029,7 @@ msgstr "Type d'équipement"
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"
-msgstr ""
+msgstr "Evénement de demande d'avis lié"
 
 # UrbanTool
 #. Default: "Nisnum"
