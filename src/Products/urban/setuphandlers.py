@@ -1148,11 +1148,11 @@ def addTestObjects(context):
     fmFolder = getattr(tool, "foldermanagers")
     if not fmFolder.objectIds():
         fmFolder.invokeFactory("FolderManager",id="foldermanager1",name1="Dumont", name2="Jean", 
-                                grade='agent-technique', manageableLicences='BuildLicence')
+                                grade='agent-technique', manageableLicences=['BuildLicence'])
         fmFolder.invokeFactory("FolderManager",id="foldermanager2",name1="Schmidt", name2="Alain",
-                                grade='directeur-general', manageableLicences='NotaryLetter')
+                                grade='directeur-general', manageableLicences=['NotaryLetter'])
         fmFolder.invokeFactory("FolderManager",id="foldermanager3",name1="Robert", name2="Patrick", 
-                                grade='responsable-administratif', manageableLicences='BuildLicence')
+                                grade='responsable-administratif', manageableLicences=['BuildLicence'])
 
     tool = site.portal_urban
 
