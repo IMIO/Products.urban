@@ -542,12 +542,14 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             vocPath = "%s/%s/%s" % ('/'.join(self.getPhysicalPath()), self.getUrbanConfig(context).getId(), vocToReturn)
         else:
             vocPath = "%s/%s" % ('/'.join(self.getPhysicalPath()), vocToReturn)
-        brains = self.portal_catalog(path=vocPath, sort_on="getObjPositionInParent", portal_type=vocType, review_state=allowedStates)
+        brains = self.portal_catalog(path=vocPath, sort_on=sort_on, portal_type=vocType, review_state=allowedStates)
         return brains
 
     security.declarePrivate('listVocabularyObjects')
-    def listVocabularyObjects(self, vocToReturn, context, vocType="UrbanVocabularyTerm", id_to_use="id", inUrbanConfig=True, allowedStates=['enabled']):
-        brains = self.listVocabularyBrains(vocToReturn, context, vocType=vocType, inUrbanConfig=inUrbanConfig, allowedStates=allowedStates)
+    def listVocabularyObjects(self, vocToReturn, context, vocType="UrbanVocabularyTerm", id_to_use="id", inUrbanConfig=True, 
+                              sort_on="getObjPositionInParent", allowedStates=['enabled']):
+        brains = self.listVocabularyBrains(vocToReturn, context, vocType=vocType, inUrbanConfig=inUrbanConfig, sort_on=sort_on,
+                                           allowedStates=allowedStates)
         res={}
         for brain in brains:
             res[getattr(brain, id_to_use)] = brain.getObject()
