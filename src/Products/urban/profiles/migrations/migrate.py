@@ -911,7 +911,7 @@ def migrateFoldermanagers(context):
     if isNoturbanMigrationsProfile(context): return
 
     from Products.urban.config import URBAN_TYPES
-    logger.info("Migrating Folder Managers: starting...")
+    logger.info("Migrating Foldermanagers: starting...")
 
     portal = context.getSite()
     tool = portal.portal_urban
@@ -940,7 +940,7 @@ def migrateFoldermanagers(context):
         #delete the old folder
         licence_cfg_folder.manage_delObjects(['foldermanagers'])
 
-    logger.info("Migrating UrbanVocabularyterms 'foldermakers': done!")
+    logger.info("Migrating Foldermanagers: done!")
 
 
 
