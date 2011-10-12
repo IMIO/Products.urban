@@ -29,12 +29,19 @@ from Products.ZCatalog.Catalog import CatalogError
 from Products.urban.config import URBAN_TYPES, PPNC_LAYERS
 from Products.urban.interfaces import ILicenceContainer
 from zope.interface import alsoProvides
-from zope.i18n import translate as _
+from zope.component import queryUtility
+from zope.i18n.interfaces import ITranslationDomain
 from zope import event
 from Products.Archetypes.event import ObjectInitializedEvent
 from exportimport import addUrbanEventTypes
 from Products.urban.utils import generatePassword
 ##/code-section HEAD
+
+def _(msgid, domain, context):
+    translation_domain = queryUtility(ITranslationDomain, domain)
+    return translation_domain.translate(msgid, target_language='fr',
+            default='')
+
 
 def isNoturbanProfile(context):
     return context.readDataFile("urban_marker.txt") is None
@@ -150,7 +157,7 @@ def addUrbanConfigs(context):
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['UrbanEventType'])
         newFolder.setImmediatelyAddableTypes(['UrbanEventType'])
-        
+
         if urban_type == 'ParcelOutLicence':
             newFolderid = configFolder.invokeFactory("Folder",id="lotusages",title=_("lotusages_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
@@ -481,7 +488,7 @@ def addUrbanGroups(context):
     """
     site = context.getSite()
     #add 3 groups
-    #one with urban Managers 
+    #one with urban Managers
     site.portal_groups.addGroup("urban_managers", title="Urban Managers")
     #one with urban Readers
     site.portal_groups.addGroup("urban_readers", title="Urban Readers")
@@ -870,7 +877,7 @@ def addGlobalFolders(context):
         newFolder.invokeFactory("UrbanVocabularyTerm",id='france', title="France")
         newFolder.invokeFactory("UrbanVocabularyTerm",id='luxembourg', title="Luxembourg")
         newFolder.invokeFactory("UrbanVocabularyTerm",id='netherlands', title="Pays Bas")
-      
+
 
     #add the decisions folder
     if not hasattr(tool, "decisions"):
@@ -893,7 +900,7 @@ def addGlobalFolders(context):
         newFolder.invokeFactory("UrbanVocabularyTerm",id="favorable-conditionnel",title=u"Favorable conditionnel")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="defavorable",title=u"Défavorable")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="favorable-defaut",title=u"Réputé favorable par défaut")
- 
+
 def addUrbanConfigsTopics(context):
     """
       Add the default topics of every urbanConfig
@@ -1096,14 +1103,14 @@ def addTestObjects(context):
     site = context.getSite()
     is_mountpoint = len(site.absolute_url_path().split('/')) > 2
     try:
-        password = 'urbanmanager' 
+        password = 'urbanmanager'
         if is_mountpoint:
-            password = generatePassword(8) 
+            password = generatePassword(8)
         member = site.portal_registration.addMember(id="urbanmanager", password=password)
         member.setMemberProperties({'ext_editor':True})
-        password = 'urbanreader' 
+        password = 'urbanreader'
         if is_mountpoint:
-            password = generatePassword(8) 
+            password = generatePassword(8)
         site.portal_registration.addMember(id="urbanreader", password=password)
         password = 'urbaneditor'
         if is_mountpoint:
@@ -1148,11 +1155,11 @@ def addTestObjects(context):
     tool = site.portal_urban
     fmFolder = getattr(tool, "foldermanagers")
     if not fmFolder.objectIds():
-        fmFolder.invokeFactory("FolderManager",id="foldermanager1",name1="Dumont", name2="Jean", 
+        fmFolder.invokeFactory("FolderManager",id="foldermanager1",name1="Dumont", name2="Jean",
                                 grade='agent-technique', manageableLicences=['BuildLicence'])
         fmFolder.invokeFactory("FolderManager",id="foldermanager2",name1="Schmidt", name2="Alain",
                                 grade='directeur-general', manageableLicences=['NotaryLetter'])
-        fmFolder.invokeFactory("FolderManager",id="foldermanager3",name1="Robert", name2="Patrick", 
+        fmFolder.invokeFactory("FolderManager",id="foldermanager3",name1="Robert", name2="Patrick",
                                 grade='responsable-administratif', manageableLicences=['BuildLicence'])
 
     tool = site.portal_urban
@@ -1222,7 +1229,7 @@ def addTestBuildlicense(context):
     if context.readDataFile('urban_tests_marker.txt') is None:
         return
 
-    site = context.getSite() 
+    site = context.getSite()
     urban_folder = site.urban
     portal_urban = site.portal_urban
     portal_buildlicences = portal_urban.buildlicence
@@ -1237,7 +1244,7 @@ def addTestBuildlicense(context):
     licence = getattr(buildlicences_folder, licence_id)
     licence.invokeFactory("Applicant", id=site.generateUniqueId('smithandwesson'), personTitle='masters', name1='Smith &', name2='Wesson', street='Rue du porc dans le yaourt', number='42', zipcode='5032', city='Couillet' )
     licence.processForm()
-    
+
 def setupExtra(context):
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
