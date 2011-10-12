@@ -902,6 +902,48 @@ def migrateFoldermakersTerms(context):
         walker.go()
     logger.info("Migrating UrbanVocabularyterms 'foldermakers': done!")
 
+def migrateFoldermanagers(context):
+    """
+      Move all the FolderManager objects into a single folder at the root of urban config
+      and set value to the field 'manageableLicences' depending on where we found the foldermanager
+      to move
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    from Products.urban.config import URBAN_TYPES
+    logger.info("Migrating Folder Managers: starting...")
+
+    portal = context.getSite()
+    tool = portal.portal_urban
+    #create the new folder 'foldermanagers' at urban cfg root
+    foldermanagers_folder = None
+    if not hasattr(tool, "foldermanagers"):
+        foldermanagers_folder_id = tool.invokeFactory("Folder",id="foldermanagers",title=_("foldermanagers_folder_title", 'urban', context=portal.REQUEST))
+        foldermanagers_folder = getattr(tool, foldermanagers_folder_id)
+        foldermanagers_folder.setConstrainTypesMode(1)
+        foldermanagers_folder.setLocallyAllowedTypes(['FolderManager'])
+        foldermanagers_folder.setImmediatelyAddableTypes(['FolderManager'])
+    else:
+        foldermanagers_folder = tool.foldermanagers
+    #move the foldermanagers spread in the config into the new folder
+    for licence_type in  URBAN_TYPES:
+        licence_cfg_folder = getattr(tool, licence_type.lower())
+        old_folder = licence_cfg_folder.foldermanagers
+        #set the value for the field 'ManageableLicences' depending on the licence type 
+        #where we found the foldermanagers
+        for folder_manager in old_folder.objectValues():
+            folder_manager.setManageableLicences([licence_type])
+        #move the foldermanager objects
+        ids = old_folder.contentIds()
+        cut_data = old_folder.manage_cutObjects(ids)
+        foldermanagers_folder.manage_pasteObjects(cut_data)
+        #delete the old folder
+        licence_cfg_folder.manage_delObjects(['foldermanagers'])
+
+    logger.info("Migrating UrbanVocabularyterms 'foldermakers': done!")
+
+
+
 def addInvestigationArticlesToBuildLicenceConfig(context):
     """
       Helper method for updating investigations articles in the investigationArticles
