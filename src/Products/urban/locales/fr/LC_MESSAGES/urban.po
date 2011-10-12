@@ -1889,7 +1889,7 @@ msgstr "Référence"
 #. Default: "Referencedgatlp"
 #: GenericLicence.py
 msgid "urban_label_referenceDGATLP"
-msgstr "Référence DGATLP"
+msgstr "Référence DGO4"
 
 #. Default: "Regionalroad"
 #: Street.py
