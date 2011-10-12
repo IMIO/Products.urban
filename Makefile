@@ -20,15 +20,15 @@ develop-eggs: bin/python bootstrap.py
 bin/buildout: develop-eggs
 
 bin/test: versions.cfg buildout.cfg bin/buildout setup.py
-	./bin/buildout -vt 5
+	./bin/buildout -Nvt 5
 	touch $@
 
 bin/instance: versions.cfg buildout.cfg bin/buildout setup.py
-	./bin/buildout -vt 5 install instance
+	./bin/buildout -Nvt 5 install instance
 	touch $@
 
 bin/templates: setup.py buildout.cfg
-	./bin/buildout -vt 5 install templates
+	./bin/buildout -Nvt 5 install templates
 	touch $@
 
 bin/templates_per_site: bin/templates
@@ -54,4 +54,4 @@ cleanall:
 	rm -fr bin develop-eggs downloads eggs parts .installed.cfg
 
 portals: versions.cfg buildout.cfg plonesites.cfg portals.cfg bin/buildout setup.py mount_points.conf
-	./bin/buildout -vt 5 -c portals.cfg
+	./bin/buildout -Nvt 5 -c portals.cfg
