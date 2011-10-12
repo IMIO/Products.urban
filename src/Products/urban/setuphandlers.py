@@ -369,6 +369,7 @@ def addUrbanConfigs(context):
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['OrganisationTerm'])
             newFolder.setImmediatelyAddableTypes(['OrganisationTerm'])
+            newFolder.invokeFactory("OrganisationTerm",id="service-pop",title=u"Service population", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
             newFolder.invokeFactory("OrganisationTerm",id="spw-dgo1",title=u"SPW-DGO1", description=u'<p>Direction Générale opérationnelle<br />Département du réseau de Namur et du Luxembourg<br />District 131.12 - SPY<br />37, Route de Saussin<br />5190 Spy</p>')
             newFolder.invokeFactory("OrganisationTerm",id="dgrne",title=u"DGRNE", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
             newFolder.invokeFactory("OrganisationTerm",id="dnf",title=u"DNF", description=u'<p>39, Avenue Reine Astrid<br />5000 Namur</p>')
