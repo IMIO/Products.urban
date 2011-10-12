@@ -926,16 +926,28 @@ def migrateFoldermanagers(context):
     else:
         foldermanagers_folder = tool.foldermanagers
     #move the foldermanagers spread in the config into the new folder
+    foldermanager_ids = {}
     for licence_type in  URBAN_TYPES:
+        ids_to_move = []
         licence_cfg_folder = getattr(tool, licence_type.lower())
         old_folder = licence_cfg_folder.foldermanagers
         #set the value for the field 'ManageableLicences' depending on the licence type 
         #where we found the foldermanagers
-        for folder_manager in old_folder.objectValues():
-            folder_manager.setManageableLicences([licence_type])
+        for foldermanager in old_folder.objectValues():
+            foldermanager_id = foldermanager.getId()
+            if foldermanager_id not in foldermanager_ids.keys():
+                foldermanager.setManageableLicences([licence_type])
+                foldermanager_ids[foldermanager_id] = foldermanager
+                ids_to_move.append(foldermanager_id)
+            else:
+                foldermanager = foldermanager_ids[foldermanager_id]
+                manageable_licences = []
+                for licence in foldermanager.getManageableLicences():
+                    manageable_licences.append(licence)
+                manageable_licences.append(licence_type)
+                foldermanager.setManageableLicences(manageable_licences)
         #move the foldermanager objects
-        ids = old_folder.contentIds()
-        cut_data = old_folder.manage_cutObjects(ids)
+        cut_data = old_folder.manage_cutObjects(ids_to_move)
         foldermanagers_folder.manage_pasteObjects(cut_data)
         #delete the old folder
         licence_cfg_folder.manage_delObjects(['foldermanagers'])
