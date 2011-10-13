@@ -2233,6 +2233,9 @@ msgstr "Aucun élément n'a encore été ajouté"
 msgid "urban_no_eventtype_defined"
 msgstr "Aucun type d'événement n'est défini dans la configuration pour cet élément"
 
+msgid "urban_search_descr"
+msgstr "Recherche de dossiers"
+
 msgid "urban_search_parameters"
 msgstr "Critères de la recherche"
 

@@ -2229,6 +2229,9 @@ msgstr ""
 msgid "urban_no_eventtype_defined"
 msgstr ""
 
+msgid "urban_search_descr"
+msgstr ""
+
 msgid "urban_search_parameters"
 msgstr ""
 

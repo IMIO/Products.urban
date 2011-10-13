@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xml:lang="en" lang="en"
+      i18n:domain="urban"
+      metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="top_slot"
+             tal:define="dummy python:request.set('disable_border',1)" />
+
+<body>
+<div metal:fill-slot="main"
+     tal:define="foldertypes request/foldertypes|nothing;
+                 search_argument request/search_argument|nothing;
+                 search_by request/search_by|nothing;
+                 licence_types view/getLicenceTypes;">
+        <h1 class="documentFirstHeading" i18n:translate="urban_searchbyapplicant_descr">
+            Title
+        </h1>
+
+<form action="" method="get">
+<fieldset><legend><strong i18n:translate="urban_search_parameters">Enter your parameters for the search</strong></legend>
+ <div tal:repeat="licence_type licence_types">
+  <input type="checkbox" name="foldertypes" 
+         tal:define="type_checked python:licence_type in request.get('foldertypes', []) or ''"
+         tal:attributes="value licence_type;checked python: type_checked and 'checked' or ''" />
+  <label tal:content="licence_type" i18n:domain="plone" i18n:translate="">Licence type</label><br />
+ </div>
+ <br/>
+
+ <div id="urbanViewWithTabbing">
+ <dl class="formTabs enableFormTabbing">
+ <dt class="formTab" id="fieldsetlegend-urban_searchbystreet" i18n:domain="plone" i18n:translate="label_schema_urban_searchbystreet"><span>By street</span></dt>
+ <dd id="fieldset-urban_searchbystreet">
+  <metal:listing use-macro="context/@@urbansearch-macros/searchbystreetMacro" />
+ </dd>
+
+ <dt class="formTab" id="fieldsetlegend-urban_searchbyapplicant" i18n:domain="plone" i18n:translate="label_schema_urban_searchbyapplicant"><span>By applicant</span></dt>
+ <dd id="fieldset-urban_searchbyapplicant">
+  <metal:listing use-macro="context/@@urbansearch-macros/searchbyapplicantMacro" />
+ </dd>
+
+ <dt class="formTab" id="fieldsetlegend-urban_searchbyparcel" i18n:domain="plone" i18n:translate="label_schema_urban_searchbyparcel"><span>By parcel</span></dt>
+ <dd id="fieldset-urban_searchbyparcel">
+  <metal:listing use-macro="context/@@urbansearch-macros/searchbyparcelMacro" />
+ </dd>
+ 
+ </dl>
+ </div>
+</fieldset>
+
+ <fieldset>
+  <input class="searchButton" type="submit" value="Search" name="Search" i18n:attributes="value" />
+ </fieldset>
+</form>
+
+
+<!-- Display results -->
+<tal:block_results condition="python: search_argument">
+
+<table tal:define="brains python:here.portal_urban.searchLicence(foldertypes, search_argument, search_by)" class="listing" width=100% border=0 cellspacing=0>
+ <thead>
+  <tr>
+   <th><strong i18n:translate="urban_search_result">Search result</strong></th>
+  </tr>
+ </thead>
+ <!-- Display 'no results' -->
+ <tbody tal:condition="not: brains">
+  <tr>
+   <td i18n:domain="atcontenttypes" i18n:translate="description_no_items_in_topic" class="discreet">No result found.
+   </td>
+  </tr>
+ </tbody>
+ <!-- Display the results body -->
+ <tbody>
+  <tr tal:repeat="brain brains">
+   <td tal:define="oddrow repeat/brain/odd;
+                   normalizeString nocall:context/@@plone/normalizeString; 
+                   obj_wf_state brain/review_state;
+                   obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);" tal:attributes="class python: test(oddrow, 'even', 'odd')">
+    <img src="#" tal:attributes="src brain/getIcon" />
+    <a href="#" tal:content="brain/Title" tal:attributes="href brain/getPath;class obj_wf_state_class">Result title</a>
+    <p class="discreet"><span tal:content="structure brain/Description">Result description</span></p>
+   </td>
+  </tr>
+ </tbody>
+</table>
+
+</tal:block_results>
+
+</div>
+
+</body>
+</html>

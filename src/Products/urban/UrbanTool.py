@@ -1151,15 +1151,28 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 output.write(unicode(xmlContent.replace("&","&amp;"),'iso-8859-1').encode('iso-8859-1'))
                 return output.getvalue()
 
+    security.declarePublic('searchLicence')
+    def searchLicence(self, foldertypes, search_argument, search_by):
+        """
+          Find licences with given paramaters
+        """
+        import pdb; pdb.set_trace()
+        if search_by == 'street':
+            return self.searchByStreet(foldertypes, search_argument)
+        elif search_by == 'applicant':
+            return self.searchByApplicant(foldertypes, search_argument)
+        else:
+            return None
+
     security.declarePublic('searchByApplicant')
-    def searchByApplicant(self, foldertypes, applicantInfosIndex):
+    def searchByApplicant(self, foldertypes, applicant_infos_index):
         """
           Find licences with given paramaters
         """
         catalogTool = getToolByName(self, 'portal_catalog')
         res = []
         try:
-            res = catalogTool(portal_type=foldertypes, applicantInfosIndex=applicantInfosIndex)
+            res = catalogTool(portal_type=foldertypes, applicantInfosIndex=applicant_infos_index)
             return res
         except ParseError:
             #in case something like '*' is entered, ZCTextIndex raises an error...
