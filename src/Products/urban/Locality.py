@@ -108,6 +108,13 @@ class Locality(BaseContent, BrowserDefaultMixin):
         """
         return self.getLocalityName()
 
+    security.declareProtected(permissions.View, 'getStreetName')
+    def getStreetCode(self):
+        """
+          Returns en empty street code
+        """
+        return 0
+
     def getCity(self):
         """
           Returns the city
