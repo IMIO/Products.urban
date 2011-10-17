@@ -1286,8 +1286,8 @@ def setupExtra(context):
     else:
         additional_layers = portal_urban.additional_layers
 
-    if False:
-    #if not hasattr(aq_base(additional_layers), 'ppnc'):
+    import ipdb; ipdb.set_trace()
+    if not hasattr(aq_base(additional_layers), 'ppnc'):
         if portal_urban.getMapExtent():
             (xmin, ymin, xmax, ymax) = portal_urban.getMapExtent().split(',')
             already_ppnc = False
@@ -1298,26 +1298,42 @@ def setupExtra(context):
                 dic = portal_urban.queryDB(request)
                 if dic and dic[0].has_key('intersect') and dic[0]['intersect']:
                     if not already_ppnc:
-                        additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://cartopro1.wallonie.be/WMS/com.esri.wms.Esrimap/PPNC?", layers=layer, SRS="ESPG:31370", baseLayer=True)
+                        additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://cartopro1.wallonie.be/WMS/com.esri.wms.Esrimap/PPNC?", layers=layer, SRS="ESPG:31370", baseLayer=True, layerFormat="image/png")
                         already_ppnc = True
                         logger.info("Additional layer '%s' added with layer '%s'"%('ppnc', layer))
                     else:
                         logger.info("ALREADY found layer !")
-                        additional_layers.invokeFactory("Layer", id=layer, title=layer.upper(), WMSUrl="http://cartopro1.wallonie.be/WMS/com.esri.wms.Esrimap/PPNC?", layers=layer, SRS="ESPG:31370", baseLayer=True)
+                        additional_layers.invokeFactory("Layer", id=layer, title=layer.upper(), WMSUrl="http://cartopro1.wallonie.be/WMS/com.esri.wms.Esrimap/PPNC?", layers=layer, SRS="ESPG:31370", baseLayer=True, layerFormat="image/png")
                         additional_layers.ppnc.setTitle(additional_layers.ppnc.getLayers().upper())
                         additional_layers.ppnc.reindexObject()
                         logger.info("Additional layer '%s' added with layer '%s'"%(layer, layer))
 
             if not hasattr(aq_base(additional_layers), 'ppnc'):
                 logger.error("Additional layer '%s' added WITHOUT specific layer because no ppnc intersection found"%'ppnc')
-                additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://cartopro1.wallonie.be/WMS/com.esri.wms.Esrimap/PPNC?", layers='ppnc', SRS="ESPG:31370", baseLayer=True)
+                additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://cartopro1.wallonie.be/WMS/com.esri.wms.Esrimap/PPNC?", layers='ppnc', SRS="ESPG:31370", baseLayer=True, layerFormat="image/png")
         else:
             logger.error("Additional layer '%s' not added because the mapExtent is not defined in portal_urban"%'ppnc')
+#Layers order
+#PPNC
+#Parcelles
+#Rues
+#Batiments
+#N° parcelle
+#N° maison
+    if not hasattr(aq_base(additional_layers), 'parcelles'):
+        additional_layers.invokeFactory("Layer",id="parcelles",title=u"Parcelles",layers="urban%s:capa" % nis,SRS="ESPG:31370",transparent=False,visibility=True, layerFormat="image/png")
+        logger.info("Additional layer '%s' added"%'parcelles')
+    if not hasattr(aq_base(additional_layers), 'rues'):
+        additional_layers.invokeFactory("Layer",id="rues",title=u"Nom des rues",layers="urban%s:toli" % nis,SRS="ESPG:31370",transparent=True,visibility=True, layerFormat="image/png")
+        logger.info("Additional layer '%s' added"%'rues')
     if not hasattr(aq_base(additional_layers), 'batiments'):
         additional_layers.invokeFactory("Layer",id="batiments",title=u"Bâtiments",layers="urban%s:cabu" % nis,SRS="ESPG:31370",transparent=True,visibility=True, layerFormat="image/png")
         logger.info("Additional layer '%s' added"%'batiments')
+    if not hasattr(aq_base(additional_layers), 'num_parcelle'):
+        additional_layers.invokeFactory("Layer",id="num_parcelle",title=u"N° de parcelle",layers="urban%s:canu" % nis,styles="ParcelsNum", SRS="ESPG:31370",transparent=True,visibility=False, layerFormat="image/png")
+        logger.info("Additional layer '%s' added"%'num_parcelle')
     if not hasattr(aq_base(additional_layers), 'num_maisons'):
-        additional_layers.invokeFactory("Layer",id="num_maisons",title=u"N° de maison",layers="urban%s:canu" % nis,styles="HousesNum",SRS="ESPG:31370",transparent=True,visibility=True, layerFormat="image/png")
+        additional_layers.invokeFactory("Layer",id="num_maisons",title=u"N° de maison",layers="urban%s:canu" % nis,styles="HousesNum",SRS="ESPG:31370",transparent=True,visibility=False, layerFormat="image/png")
         logger.info("Additional layer '%s' added"%'num_maisons')
 
 def setHTMLContentType(folder, fieldName):
