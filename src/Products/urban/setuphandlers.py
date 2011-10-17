@@ -1286,7 +1286,6 @@ def setupExtra(context):
     else:
         additional_layers = portal_urban.additional_layers
 
-    import ipdb; ipdb.set_trace()
     if not hasattr(aq_base(additional_layers), 'ppnc'):
         if portal_urban.getMapExtent():
             (xmin, ymin, xmax, ymax) = portal_urban.getMapExtent().split(',')
