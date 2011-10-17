@@ -64,6 +64,8 @@ def migrateToPlone4(context):
     migrateLayersForMapfish(context)
     #migrate the foldermakers UrbanVocabularyTerms to allow them to link an UrbanEventType
     migrateFoldermakersTerms(context)
+    #Move all the FolderManager objects into a single folder at the root of urban config
+    migrateFoldermanagers(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
