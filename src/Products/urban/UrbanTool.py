@@ -50,7 +50,6 @@ from Products.urban.config import GENERATED_DOCUMENT_FORMATS
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 DB_QUERY_ERROR = "Programming error in query"
-
 ##/code-section module-header
 
 schema = Schema((
@@ -352,6 +351,12 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     schema = UrbanTool_schema
 
     ##code-section class-header #fill in your manual code here
+    # XXX constant put on the class to ensure it is close to the method that uses
+    # it
+    portal_types_per_event_type_type = {
+        'Products.urban.interfaces.IInquiryEvent':'UrbanEventInquiry',
+        'Products.urban.interfaces.IOpinionRequestEvent':'UrbanEventOpinionRequest',
+        }
     ##/code-section class-header
 
 
@@ -383,18 +388,11 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         self.checkDBConnection()
 
-    # XXX constant put on the class to ensure it is close to the method that uses
-    # it
-    portal_types_per_event_type_type = {
-        'Products.urban.interfaces.IInquiryEvent':'UrbanEventInquiry',
-        'Products.urban.interfaces.IOpinionRequestEvent':'UrbanEventOpinionRequest',
-        }
-
-    # XXX this method should be moved to the BuildLicence class
     security.declarePublic('createUrbanEvent')
     def createUrbanEvent(self, licence_uid, urban_event_type_uid):
         """
            Create an urbanEvent on a licence
+           XXX this method should be moved to the BuildLicence class
         """
         uid_catalog = getToolByName(self, 'uid_catalog')
         # the licence where the UrbanEvent is created
@@ -414,6 +412,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         newUrbanEventObj=getattr(licence, newUrbanEventId)
         return self.REQUEST.RESPONSE.redirect(newUrbanEventObj.absolute_url()
                 + '/edit')
+
     security.declarePublic('createUrbanDoc')
     def createUrbanDoc(self, urban_template_uid, urban_event_uid):
         """

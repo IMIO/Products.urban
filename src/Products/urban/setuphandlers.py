@@ -37,12 +37,6 @@ from exportimport import addUrbanEventTypes
 from Products.urban.utils import generatePassword
 ##/code-section HEAD
 
-def _(msgid, domain, context):
-    translation_domain = queryUtility(ITranslationDomain, domain)
-    return translation_domain.translate(msgid, target_language='fr',
-            default='')
-
-
 def isNoturbanProfile(context):
     return context.readDataFile("urban_marker.txt") is None
 
@@ -134,6 +128,10 @@ def postInstall(context):
 
 
 ##code-section FOOT
+def _(msgid, domain, context):
+    translation_domain = queryUtility(ITranslationDomain, domain)
+    return translation_domain.translate(msgid, target_language='fr', default='')
+
 def addUrbanConfigs(context):
     """
       Add the different urban configs
