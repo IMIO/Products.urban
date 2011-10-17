@@ -174,4 +174,111 @@ outline: none !important;
     width: 600px !important;
 }
 
+.urban-add-icon {
+position: absolute;
+padding-top: 3px;
+}
+
+/* display the right icon from the urban-sprite */
+/* if you adapt something here, adapt the relevant contenttype-xxx class here under */
+.icons-on .contenttype-buildlicence {background: no-repeat transparent 0px 1px url(urban-sprite.png);}
+.icons-on .contenttype-applicant {background: no-repeat transparent 0px -213px url(urban-sprite.png);}
+.icons-on .contenttype-architect {background: no-repeat transparent 0px -213px url(urban-sprite.png);}
+.icons-on .contenttype-foldermanager {background: no-repeat transparent 0px -213px url(urban-sprite.png);}
+.icons-on .contenttype-geometrician {background: no-repeat transparent 0px -213px url(urban-sprite.png);}
+.icons-on .contenttype-notary {background: no-repeat transparent 0px -213px url(urban-sprite.png);}
+.icons-on .contenttype-declaration {background: no-repeat transparent 0px -431px url(urban-sprite.png);}
+.icons-on .contenttype-division {background: no-repeat transparent 0px -646px url(urban-sprite.png);}
+.icons-on .contenttype-environmentaldeclaration {background: no-repeat transparent 0px -862px url(urban-sprite.png);}
+.icons-on .contenttype-inquiry {background: no-repeat transparent 0px -1079px url(urban-sprite.png);}
+.icons-on .contenttype-notaryletter {background: no-repeat transparent 0px -1294px url(urban-sprite.png);}
+.icons-on .contenttype-parceloutlicence {background: no-repeat transparent 0px -1511px url(urban-sprite.png);}
+.icons-on .contenttype-portionout {background: no-repeat transparent 0px -1726px url(urban-sprite.png);}
+.icons-on .contenttype-street {background: no-repeat transparent 0px -1944px url(urban-sprite.png);}
+.icons-on .contenttype-urbancertificateone {background: no-repeat transparent 0px -2158px url(urban-sprite.png);}
+.icons-on .contenttype-urbancertificatetwo {background: no-repeat transparent 0px -2374px url(urban-sprite.png);}
+.icons-on .contenttype-urbanevent {background: no-repeat transparent 0px -2590px url(urban-sprite.png);}
+.icons-on .contenttype-urbaneventinquiry {background: no-repeat transparent 0px -2590px url(urban-sprite.png);}
+.icons-on .contenttype-urbaneventopinionrequest {background: no-repeat transparent 0px -2590px url(urban-sprite.png);}
+
+.icons-on .contenttype-buildlicence,
+.icons-on .contenttype-applicant,
+.icons-on .contenttype-architect,
+.icons-on .contenttype-geometrician,
+.icons-on .contenttype-notary,
+.icons-on .contenttype-declaration,
+.icons-on .contenttype-division,
+.icons-on .contenttype-environmentaldeclaration,
+.icons-on .contenttype-inquiry,
+.icons-on .contenttype-notaryletter,
+.icons-on .contenttype-parceloutlicence,
+.icons-on .contenttype-portionout,
+.icons-on .contenttype-street,
+.icons-on .contenttype-urbancertificateone,
+.icons-on .contenttype-urbancertificatetwo,
+.icons-on .contenttype-urbanevent,
+.icons-on .contenttype-urbaneventinquiry,
+.icons-on .contenttype-urbaneventopinionrequest {
+    display: inline-block;
+    *display: block;
+    padding-left: 20px !important;
+}
+
+/* styles for buttons used with specific content_type icon */
+INPUT.button-buildlicence,
+INPUT.button-applicant,
+INPUT.button-architect,
+INPUT.button-geometrician,
+INPUT.button-notary,
+INPUT.button-declaration,
+INPUT.button-division,
+INPUT.button-environmentaldeclaration,
+INPUT.button-inquiry,
+INPUT.button-notaryletter,
+INPUT.button-parceloutlicence,
+INPUT.button-portionout,
+INPUT.button-street,
+INPUT.button-urbancertificateone,
+INPUT.button-urbancertificatetwo,
+INPUT.button-urbanevent,
+INPUT.button-urbaneventinquiry,
+INPUT.button-urbanschedule
+{
+    padding-bottom: 0.1em;
+    padding-top: 0.1em;
+    border-color: buttonface;
+    -moz-border-radius: 0.4em 0.4em 0.4em 0.4em;
+    -webkit-border-radius: 0.4em 0.4em 0.4em 0.4em;
+    border-radius: 0.4em 0.4em 0.4em 0.4em;
+    background-color: appworkspace !important;
+}
+
+/* background position for image on buttons */
+/* if you adapt something here, adapt the relevant contenttype-xxx class here above */
+.button-buildlicence {background-position: 3px 1px !important;}
+.button-applicant {background-position: 3px -213px !important;}
+.button-architect {background-position: 3px -213px !important;}
+.button-foldermanager {background-position: 3px -213px !important;}
+.button-geometrician {background-position: 3px -213px !important;}
+.button-notary {background-position: 3px -213px !important;}
+.button-declaration {background-position: 3px -431px !important;}
+.button-division {background-position: 3px -646px !important;}
+.button-environmentaldeclaration {background-position: 3px -862px !important;}
+.button-inquiry {background-position: 3px -1079px !important;}
+.button-notaryletter {background-position: 3px -1294px !important;}
+.button-parceloutlicence {background-position: 3px -1511px !important;}
+.button-portionout {background-position: 3px -1726px !important;}
+.button-street {background-position: 3px -1944px !important;}
+.button-urbancertificateone {background-position: 3px -2158px !important;}
+.button-urbancertificatetwo {background-position: 3px -2374px !important;}
+.button-urbanevent {background-position: 3px -2590px !important;}
+.button-urbaneventinquiry {background-position: 3px -2590px !important;}
+.button-urbaneventopinionrequest {background-position: 3px -2590px !important;}
+
+.button-urbanschedule {
+    background-image: url(schedule.png);
+    background-position: 3px 1px;
+    background-repeat: no-repeat;
+    padding-left: 20px !important;
+}
 /* </dtml-with> */

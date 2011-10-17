@@ -6,7 +6,6 @@
    
  <property name="title" i18n:translate="">Lot</property>
  <property name="description" i18n:translate=""></property>
- <property name="content_icon">Lot.gif</property>
  <property name="content_meta_type">Lot</property>
  <property name="product">urban</property>
  <property name="factory">addLot</property>

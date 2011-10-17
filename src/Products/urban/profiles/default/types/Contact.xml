@@ -6,7 +6,6 @@
    
  <property name="title" i18n:translate="">Contact</property>
  <property name="description" i18n:translate=""></property>
- <property name="content_icon">Contact.png</property>
  <property name="content_meta_type">Contact</property>
  <property name="product">urban</property>
  <property name="factory">addContact</property>

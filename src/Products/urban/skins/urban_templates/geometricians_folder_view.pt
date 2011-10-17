@@ -37,9 +37,8 @@
         <div class="field">
         <tal:addable_types define="acts context/allowedContentTypes" repeat="act acts" i18n:domain="urban">
          <form tal:condition="python: not isAnon" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post">
-          <img src="#" title="#" tal:define="ctype python: context.portal_types.getTypeInfo(act.id)" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
           <input type="hidden" name="type_name" value="#" tal:attributes="value act/id" />
-          <input type="submit" class="context" id="event" value="#" tal:attributes="value python: 'add_' + act.id" i18n:attributes="value" />
+          <input type="submit" class="contenttype-geometrician button-geometrician" id="event" value="#" tal:attributes="value python: 'add_' + act.id" i18n:attributes="value" />
          </form>
         </tal:addable_types>
         </div>

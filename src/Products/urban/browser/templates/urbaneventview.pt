@@ -14,10 +14,9 @@
 <metal:main_macro define-macro="main">
 <metal:body define-macro="body_macro" tal:define="linkedUrbanEventType context/getUrbaneventtypes;
                                                   member context/@@plone_portal_state/member;">
-<h1 class="documentFirstHeading">
- <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
- <span tal:replace="here/Title" tal:omit-tag="">Title</span>
-</h1>
+
+<metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />
+
 <div tal:replace="structure provider:plone.belowcontenttitle" />
 
 <tal:comment replace="nothing">Back to the build licence...</tal:comment>

@@ -6,7 +6,6 @@
    
  <property name="title" i18n:translate="">UrbanCertificateTwo</property>
  <property name="description" i18n:translate=""></property>
- <property name="content_icon">UrbanCertificateTwo.png</property>
  <property name="content_meta_type">UrbanCertificateTwo</property>
  <property name="product">urban</property>
  <property name="factory">addUrbanCertificateTwo</property>

@@ -5,7 +5,6 @@
    
  <property name="title">PortionsOut</property>
  <property name="description"></property>
- <property name="content_icon">PortionsOut.gif</property>
  <property name="content_meta_type">PortionsOut</property>
  <property name="product">urban</property>
  <property name="factory">addPortionsOut</property>

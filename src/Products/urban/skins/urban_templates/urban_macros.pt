@@ -92,7 +92,7 @@
      tal:define="ctype python: context.portal_types.getTypeInfo('Inquiry');
                  inquiries here/getInquiriesForDisplay;
                  member context/@@plone_portal_state/member;">
-<fieldset tal:repeat="inquiry inquiries"><legend><img src="#" tal:attributes="src ctype/getIcon" />&nbsp;<span i18n:translate="inquiry_title_and_number">Inquiry <span i18n:name="number" tal:content="repeat/inquiry/number"></span></span></legend>
+<fieldset tal:repeat="inquiry inquiries"><legend><span class="contenttype-inquiry" i18n:translate="inquiry_title_and_number">Inquiry <span i18n:name="number" tal:content="repeat/inquiry/number"></span></span></legend>
 <tal:comment replace="nothing">Do not show the actions on the Licence object representing the first inquiry, only on following ones wich are real Inquiry objects</tal:comment>
 <tal:actions condition="python: not repeatindex == 0" define="repeatindex repeat/inquiry/index;
                                   thisObject python: inquiry;
@@ -169,7 +169,6 @@
      </tbody>
     </table>
   </td>
-
  </tr>
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_investigationOralReclamationNumber">Number of oral reclamations</span>:</b></td>
@@ -192,11 +191,10 @@
  </tr>
 </table>
 </fieldset>
-
+<br />
 <form tal:condition="python: member.has_permission('urban: Add Inquiry', context)" i18n:domain="urban" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post">
- <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
  <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
- <input type="submit" class="context" id="event" value="add_an_inquiry" i18n:attributes="value" />
+ <input type="submit" class="contenttype-inquiry button-inquiry" id="event" value="add_an_inquiry" i18n:attributes="value" />
 </form>
 </div>
 
@@ -304,9 +302,8 @@
        tal:condition="python: member.has_permission('urban: Add Contact', context)"
        tal:attributes="action python: context.absolute_url() + '/createObject'"
        i18n:domain="urban" name="quickAdd"  action="createObject" method="post">
- <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
  <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
- <input type="submit" class="context" id="event" value="add_an_applicant" i18n:attributes="value" />
+ <input type="submit" class="urbanButton contenttype-applicant button-applicant" id="event" value="add_an_applicant" i18n:attributes="value" />
  </form>
 </div>
 </metal:applicants>
@@ -325,7 +322,7 @@
       </option>
      </tal:loopEventType>
     </select>
-    <input class="context" type="submit" i18n:attributes="value" value="Add an event">
+    <input class="urbanButton contenttype-urbanevent button-urbanevent" type="submit" i18n:attributes="value" value="Add an event">
    </form>
    <p class="discreet" tal:condition="not: eventTypes" i18n:translate="urban_no_eventtype_defined">No event type is defined in the configuration for this element</p>
    <br />
@@ -354,11 +351,11 @@
   <tr>
    <td>
     <form action="createAllAdvices" method="POST">
-     <input class="context" type="submit" i18n:attributes="value" value="Add all advices">
+     <input class="urbanButton contenttype-urbanevent button-urbanevent" type="submit" i18n:attributes="value" value="Add all advices">
     </form>
     <div class="discreet">
      <span i18n:translate="add_every_advices_descr">This will automatically generate following advices:</span>&nbsp;
-     <span tal:content="python: ','.join([advice.Title() for advice in allAdvices])" />
+     <span tal:content="python: ', '.join([advice.Title() for advice in allAdvices])" />
     </div>
    </td>
   </tr>
@@ -492,6 +489,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                                         ploneview nocall: context/@@plone;
                                         normalizeString nocall:ploneview/normalizeString; 
                                         obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);
+                                        obj_contenttype_class python:'contenttype-' + obj_type.lower();
                                         title_or_id obj/pretty_title_or_id">
                     <tal:block condition="python: field in showedCols" define="value python: getattr(obj, field, None)">
                         <td tal:condition="python: field not in ['Title', 'Creator', 'name', 'street', ]">
@@ -512,27 +510,10 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                         </td>
                         <td tal:condition="python: field == 'Title'">
                             <span tal:define="global url python: test(obj.portal_type == 'File' and obj.portal_properties.site_properties.ext_editor, url + '/external_edit', url)" />
-
-                            <a href="#" tal:attributes="href url">
-                                <tal:icon replace="structure obj_icon"/>
-                            </a>
-
-                            <a href="#" tal:condition="python: obj.portal_type not in ['Link', 'Image']"
-                                        tal:attributes="href url;
-                                                        class obj_wf_state_class"
+                            <a href="#" tal:attributes="href url;
+                                                        class python: obj_wf_state_class + ' ' + obj_contenttype_class"
                                         tal:content="title_or_id" />
 
-                            <a href="#" tal:condition="python: obj.portal_type == 'Image'"
-                                        tal:attributes="href string:${url}/view;
-                                                        class obj_wf_state_class"
-                                        tal:content="title_or_id" />
-
-                            <a href="#"
-                                tal:condition="python: obj.portal_type == 'Link'"
-                                tal:attributes="href obj/getRemoteUrl;
-                                                class obj_wf_state_class"
-                                class="link-plain"
-                                tal:content="title_or_id" />
                             <tal:block condition="python: obj.portal_type in ['UrbanEvent', 'UrbanEventInquiry', 'UrbanEventOpinionRequest']">
                              <tal:block define="object obj/getObject;
                                                 suffix python: member.has_permission('Modify portal content', object) and '/external_edit' or ''"
@@ -669,9 +650,8 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
      <metal:listing use-macro="here/urban_macros/macros/listing" />
     </div>
      <form tal:condition="python: member.has_permission('urban: Add PortionOut', context)" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/checkPortionsOutSearch'" action="checkPortionsOutSearch" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('PortionOut')">
-      <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description" i18n:attributes="title" />
       <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
-      <input type="submit" class="context" id="event" value="search_parcels" i18n:attributes="value" />
+      <input type="submit" class="contenttype-portionout button-portionout" id="event" value="search_parcels" i18n:attributes="value" />
      </form>
    </div>
   </td>
@@ -704,3 +684,10 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
   <span tal:replace="python: obj.getStreet()+' '+obj.getNumber()" /><br />
   <span tal:replace="python: obj.getZipcode()+' '+obj.getCity()" />
 </metal:displayAddress>
+
+<metal:titleWithIcon define-macro="titleWithIcon">
+ <h1 class="documentFirstHeading">
+  <img src="#" tal:attributes="src string:${context/@@plone_portal_state/portal_url}/${context/portal_type}.png" />
+  <span tal:replace="here/Title" tal:omit-tag="">Title</span>
+ </h1>
+</metal:titleWithIcon>

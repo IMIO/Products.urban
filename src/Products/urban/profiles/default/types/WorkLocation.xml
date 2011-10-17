@@ -6,7 +6,6 @@
    
  <property name="title" i18n:translate="">WorkLocation</property>
  <property name="description" i18n:translate=""></property>
- <property name="content_icon">WorkLocation.gif</property>
  <property name="content_meta_type">WorkLocation</property>
  <property name="product">urban</property>
  <property name="factory">addWorkLocation</property>

@@ -6,7 +6,6 @@
    
  <property name="title" i18n:translate="">UrbanEventType</property>
  <property name="description" i18n:translate=""></property>
- <property name="content_icon">UrbanEventType.gif</property>
  <property name="content_meta_type">UrbanEventType</property>
  <property name="product">urban</property>
  <property name="factory">addUrbanEventType</property>

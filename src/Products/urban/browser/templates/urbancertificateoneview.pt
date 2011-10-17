@@ -25,10 +25,7 @@
                             useTabbing python: context.portal_urban.getUseTabbing();
                             tool python: context.portal_urban;">
 
-<h1 class="documentFirstHeading">
- <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
- <span tal:replace="here/Title" tal:omit-tag="">Title</span>
-</h1>
+<metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />
 
 <div id="urbanViewWithTabbing" tal:condition="useTabbing">
 <dl class="formTabs enableFormTabbing">
