@@ -110,9 +110,9 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         from Products.CMFCore.utils import getToolByName
         portal_types = getToolByName(self, 'portal_types')
         if self.licence_portal_type and hasattr(portal_types, self.licence_portal_type):
-            icon = getattr(portal_types, self.licence_portal_type).getIcon()
+            icon = "%s.png" % self.licence_portal_type
         else:
-            icon = getattr(portal_types, self.meta_type).getIcon()
+            icon = "LicenceConfig.png"
         portal_url = getToolByName( self, 'portal_url' )
         return portal_url() + '/' + icon
 
