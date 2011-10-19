@@ -100,7 +100,7 @@ class UrbanEventOpinionRequest(BaseContent, UrbanEvent, BrowserDefaultMixin):
     security.declarePublic('getLinkedOrganisationTerm')
     def getLinkedOrganisationTerm(self):
         """
-          Returns the id of the term that is linked to the linked UrbanEventType
+          Returns of the term that is linked to the linked UrbanEventType
         """
         urbaneventtypes = self.getUrbaneventtypes()
         brefs = urbaneventtypes.getBRefs('LinkedOpinionRequestEvent')
