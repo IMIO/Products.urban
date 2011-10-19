@@ -43,7 +43,8 @@ setup(name='Products.urban',
           'collective.externaleditor',
           'Products.ExternalEditor',
           'plone.app.referenceintegrity',
-          'psycopg2'],
+          'psycopg2',
+          'testfixtures'],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',
                 'templates_per_site = Products.urban.templates:per_site']
