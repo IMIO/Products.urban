@@ -1068,7 +1068,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                     number = licenceObj.getWorkLocations()[0]['number']
                     street = catalog.searchResults(UID=licenceObj.getWorkLocations()[0]['street'])
                 if check(street, 'no street found on licence %s' % str(licenceObj.getReference())):
-                    treet = street[0].getObject()
+                    street = street[0].getObject()
                     xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street.getStreetCode()))
                     xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street.getStreetName()).decode('utf-8').encode('iso-8859-1'))
                 if number:
