@@ -1231,7 +1231,6 @@ def addTestBuildlicense(context):
     site = context.getSite()
     urban_folder = site.urban
     portal_urban = site.portal_urban
-    portal_buildlicences = portal_urban.buildlicence
     buildlicences_folder = urban_folder.buildlicences
     foldermanager = portal_urban.foldermanagers.foldermanager1
     architects_folder = buildlicences_folder.architects
@@ -1249,7 +1248,6 @@ def setupExtra(context):
         return
 
     portal = context.getSite()
-
     #Setting the user password policy
     if portal.validate_email:
         portal.validate_email = False
