@@ -47,6 +47,7 @@ from Products.PageTemplates.Expressions import getEngine
 from Products.ZCTextIndex.ParseTree import ParseError
 from Products.urban.utils import getOsTempFolder
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 DB_QUERY_ERROR = "Programming error in query"
@@ -1017,98 +1018,106 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
     security.declarePublic('generateUrbainXML')
     def generateUrbainXML(self, datefrom, dateto, list_only):
-        """
-        """
-        if (len(datefrom) != 10) or (len(dateto) != 10):
-            return 'Date incorrecte'
-        datesplited=datefrom.split('/')
-        datefrom=datesplited[2]+'/'+datesplited[1]+'/'+datesplited[0]
-        datesplited=dateto.split('/')
-        dateto=datesplited[2]+'/'+datesplited[1]+'/'+datesplited[0]
+
+        def reverseDate (date):
+            split = date.split('/')
+            for i in range(len(split)):
+                if len(split[i]) == 1:
+                    split[i] = '0%s' % split[i] 
+            split.reverse()
+            return '/'.join(split)
+
+        def check (condition, error_message):
+            if not condition:
+                error.append(error_message)
+            return condition
+
+        datefrom = reverseDate(datefrom)
+        dateto = reverseDate(dateto)
         catalog = getToolByName(self, 'portal_catalog')
         pw = getToolByName(self, 'portal_workflow')
-        results = catalog.searchResults(getDecisionDate = {'query' : (DateTime(datefrom),DateTime(dateto)), 'range' : 'minmax'}, object_provides='Products.urban.interfaces.ITheLicenceEvent', portal_type='UrbanEvent')
-        i=1
-        xmlError=''
-        xmlContent='<?xml version="1.0" encoding="iso-8859-1"?>\n'
-        xmlContent=xmlContent+'<dataroot>\n'
-        xmlContent=xmlContent+'  <E_220_herkomst>\n'
-        xmlContent=xmlContent+'    <E_220_NIS_Gem>'+self.getNISNum()+'</E_220_NIS_Gem>\n'
-        xmlContent=xmlContent+'    <E_220_Periode_van>'+datefrom.replace("/","")+'</E_220_Periode_van>\n'
-        xmlContent=xmlContent+'    <E_220_Periode_tot>'+dateto.replace("/","")+'</E_220_Periode_tot>\n'
-        xmlContent=xmlContent+'    <E_220_ICT>COM</E_220_ICT>\n'
-        xmlContent=xmlContent+'  </E_220_herkomst>\n'
-        lsttermarchitect=["NON REQUIS","lui-meme","Eux-memes","elle-meme","lui-meme","lui-même","lui-meme ","Lui-meme","A COMPLETER "]
-        htmllist='<HTML><TABLE>'
+        results = catalog.searchResults(getDecisionDate = {'query' : (DateTime(datefrom),DateTime(dateto)), 'range' : 'minmax'},
+                  object_provides='Products.urban.interfaces.ITheLicenceEvent', portal_type='UrbanEvent')
+        xml = []
+        error = []
+        html_list = []
+        xml.append('<?xml version="1.0" encoding="iso-8859-1"?>')
+        xml.append('<dataroot>')
+        xml.append('  <E_220_herkomst>')
+        xml.append('    <E_220_NIS_Gem>%s</E_220_NIS_Gem>' % self.getNISNum())
+        xml.append('    <E_220_Periode_van>%s</E_220_Periode_van>' % datefrom.replace("/",""))
+        xml.append('    <E_220_Periode_tot>%s</E_220_Periode_tot>' % dateto.replace("/",""))
+        xml.append('    <E_220_ICT>COM</E_220_ICT>')
+        xml.append('  </E_220_herkomst>')
+        html_list.append('<HTML><TABLE>')
         for obj in results:
             eventObj=obj.getObject()
             licenceObj=eventObj.getParentNode()
             applicantObj=licenceObj.getApplicants()[0]
             architects = licenceObj.getArchitects()
-            if architects:
-                architectObj = architects[0]
-            else:
-                xmlError=xmlError+applicantObj.getName1()+' '+applicantObj.getName2()+'\n'
-            worktype=licenceObj.getWorkType()
             if (pw.getInfoFor(licenceObj,'review_state')=='accepted'):
-                htmllist=htmllist+'<TR><TD>'+str(licenceObj.getReference())+'  '+licenceObj.title.encode('iso-8859-1')+'</TD><TD>'+str(eventObj.getDecisionDate())+'</TD></TR>'
-                xmlContent=xmlContent+'  <Item220>\n'
-                xmlContent=xmlContent+'      <E_220_Ref_Toel>'+str(licenceObj.getReference())+'</E_220_Ref_Toel>\n'
-                try:
-                    xmlContent=xmlContent+'      <Doc_Afd>'+licenceObj.objectValues('PortionOut')[0].getDivisionCode()+'</Doc_Afd>\n'
-                except:
-                    xmlError=xmlError+str(licenceObj.getReference())
+                html_list.append('<TR><TD>%s  %s</TD><TD>%s</TD></TR>' \
+                % (str(licenceObj.getReference()), licenceObj.title.encode('iso-8859-1'), str(eventObj.getDecisionDate())))
+                xml.append('  <Item220>')
+                xml.append('      <E_220_Ref_Toel>%s</E_220_Ref_Toel>' % str(licenceObj.getReference()))
+                parcels = licenceObj.getParcels()
+                if check(parcels, 'no parcels found on licence %s' % str(licenceObj.getReference())):
+                    xml.append('      <Doc_Afd>%s</Doc_Afd>' % parcels[0].getDivisionCode())
                 street = number = None
                 if licenceObj.getWorkLocations():
                     number = licenceObj.getWorkLocations()[0]['number']
                     street = catalog.searchResults(UID=licenceObj.getWorkLocations()[0]['street'])
-                if street:
-                    street = street[0].getObject()
-                    xmlContent=xmlContent+'      <E_220_straatcode>'+str(street.getStreetCode())+'</E_220_straatcode>\n'
-                    xmlContent=xmlContent+'      <E_220_straatnaam>'+str(street.getStreetName()).decode('utf-8').encode('iso-8859-1')+'</E_220_straatnaam>\n'
-                else:
-                    xmlError=xmlError+'pas de rue: '+str(licenceObj.getReference())+' '+licenceObj.licenceSubject.encode('iso-8859-1')+' '+applicantObj.     name1.encode('iso-8859-1')+' '+applicantObj.name2.encode('iso-8859-1')+'\n'
+                if check(street, 'no street found on licence %s' % str(licenceObj.getReference())):
+                    treet = street[0].getObject()
+                    xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street.getStreetCode()))
+                    xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street.getStreetName()).decode('utf-8').encode('iso-8859-1'))
                 if number:
-                    xmlContent=xmlContent+'      <E_220_huisnr>'+number+'</E_220_huisnr>\n'
-                worktype_map = {'ncmu':'N_UNI', 'ncia':'N_APPART', 'nca':'N_AUT', 'tmu':'T_UNI', 'tia':'T_APPART', 'tab':'T_AUT', 'dg':'DEM', 'autres':'AUTRE', 'tnbg':'T_NBAT'}
-                if worktype in worktype_map.keys():
-                    xmlWorkType=worktype_map[worktype]
-                else:
-                    xmlError=xmlError+str(licenceObj.getReference())+' '+licenceObj.licenceSubject.encode('iso-8859-1')+' '+applicantObj.name1.encode('iso-8859-1')+' '+applicantObj.name2.encode('iso-8859-1')+'\n'
-                xmlContent=xmlContent+'      <E_220_Typ>'+xmlWorkType+'</E_220_Typ>\n'
-                xmlContent=xmlContent+'      <E_220_Werk>'+licenceObj.licenceSubject.encode('iso-8859-1')+'</E_220_Werk>\n'
-                strDecisionDate=''+str(eventObj.getDecisionDate())
-                xmlContent=xmlContent+'      <E_220_Datum_Verg>'+strDecisionDate[0:4]+strDecisionDate[5:7]+strDecisionDate[8:10]+'</E_220_Datum_Verg>\n'
-                xmlContent=xmlContent+'      <E_220_Instan>COM</E_220_Instan>\n'
-                xmlContent=xmlContent+'      <PERSOON>\n'
-                xmlContent=xmlContent+'        <naam>'+applicantObj.getName1().encode('iso-8859-1')+' '+applicantObj.name2.encode('iso-8859-1')+'</naam>\n'
-                xmlContent=xmlContent+'        <straatnaam>'+applicantObj.getStreet().encode('iso-8859-1')+'</straatnaam>\n'
-                xmlContent=xmlContent+'        <huisnr>'+applicantObj.getNumber()+'</huisnr>\n'
-                xmlContent=xmlContent+'        <postcode>'+applicantObj.getZipcode()+'</postcode>\n'
-                xmlContent=xmlContent+'        <gemeente>'+applicantObj.getCity().encode('iso-8859-1')+'</gemeente>\n'
-                xmlContent=xmlContent+'        <hoedanig>DEMANDEUR</hoedanig>\n'
-                xmlContent=xmlContent+'      </PERSOON>\n'
-                if architectObj:
-                    if architectObj.getName1() in lsttermarchitect:
-                        xmlContent=xmlContent+'      <PERSOON>\n'
-                        xmlContent=xmlContent+'        <naam>'+applicantObj.getName1().encode('iso-8859-1')+' '+applicantObj.name2.encode('iso-8859-1')+'</naam>\n'
-                        xmlContent=xmlContent+'        <straatnaam>'+applicantObj.getStreet().encode('iso-8859-1')+'</straatnaam>\n'
-                        xmlContent=xmlContent+'        <huisnr>'+applicantObj.getNumber()+'</huisnr>\n'
-                        xmlContent=xmlContent+'        <postcode>'+applicantObj.getZipcode()+'</postcode>\n'
-                        xmlContent=xmlContent+'        <gemeente>'+applicantObj.getCity().encode('iso-8859-1')+'</gemeente>\n'
-                        xmlContent=xmlContent+'        <hoedanig>ARCHITECTE</hoedanig>\n'
-                        xmlContent=xmlContent+'      </PERSOON>\n'
+                    xml.append('      <E_220_huisnr>%s</E_220_huisnr>')
+                worktype=licenceObj.getWorkType()
+                work_types=UrbanVocabulary('folderbuildworktypes').getAllVocTerms(licenceObj)
+                worktype_map = {}
+                for k, v in work_types.iteritems():
+                    worktype_map[k] = v.getExtraValue()
+                if check(worktype in worktype_map.keys(),'unknown worktype %s on licence %s' % (worktype ,str(licenceObj.getReference()))):
+                    xml_worktype=worktype_map[worktype]
+                xml.append('      <E_220_Typ>%s</E_220_Typ>' % xml_worktype)
+                xml.append('      <E_220_Werk>%s</E_220_Werk>' % licenceObj.licenceSubject.encode('iso-8859-1'))
+                strDecisionDate = str(eventObj.getDecisionDate())
+                xml.append('      <E_220_Datum_Verg>%s%s%s</E_220_Datum_Verg>' %(strDecisionDate[0:4], strDecisionDate[5:7], strDecisionDate[8:10]))
+                xml.append('      <E_220_Instan>COM</E_220_Instan>')
+                xml.append('      <PERSOON>')
+                xml.append('        <naam>%s %s</naam>' % (applicantObj.getName1().encode('iso-8859-1'), applicantObj.name2.encode('iso-8859-1')))
+                xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().encode('iso-8859-1'))
+                xml.append('        <huisnr>%s</huisnr>' % applicantObj.getNumber())
+                xml.append('        <postcode>%s</postcode>' % applicantObj.getZipcode())
+                xml.append('        <gemeente>%s</gemeente>' % applicantObj.getCity().encode('iso-8859-1'))
+                xml.append('        <hoedanig>DEMANDEUR</hoedanig>')
+                xml.append('      </PERSOON>')
+                if check(architects, 'no architect found on licence %s' % str(licenceObj.getReference())):
+                    architectObj = architects[0]
+                    list_architects_terms=["NON REQUIS","lui-meme","Eux-memes","elle-meme","lui-meme","lui-même","lui-meme ","Lui-meme","A COMPLETER "]
+                    if architectObj.getName1() in list_architects_terms:
+                        xml.append('      <PERSOON>')
+                        xml.append('        <naam>%s %s</naam>' \
+                        % (applicantObj.getName1().encode('iso-8859-1'), applicantObj.name2.encode('iso-8859-1')))
+                        xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().encode('iso-8859-1'))
+                        xml.append('        <huisnr>%s</huisnr>' % applicantObj.getNumber())
+                        xml.append('        <postcode>%s</postcode>' % applicantObj.getZipcode())
+                        xml.append('        <gemeente>%s</gemeente>' % applicantObj.getCity().encode('iso-8859-1'))
+                        xml.append('        <hoedanig>ARCHITECTE</hoedanig>')
+                        xml.append('      </PERSOON>')
                     else:
-                        xmlContent=xmlContent+'      <PERSOON>\n'
-                        xmlContent=xmlContent+'        <naam>'+architectObj.getName1().encode('iso-8859-1')+' '+architectObj.name2.encode('iso-8859-1')+'</naam>\n'
-                        xmlContent=xmlContent+'        <straatnaam>'+architectObj.getStreet().encode('iso-8859-1')+'</straatnaam>\n'
-                        xmlContent=xmlContent+'        <huisnr>'+architectObj.getNumber()+'</huisnr>\n'
-                        xmlContent=xmlContent+'        <postcode>'+architectObj.getZipcode()+'</postcode>\n'
-                        xmlContent=xmlContent+'        <gemeente>'+architectObj.getCity().encode('iso-8859-1')+'</gemeente>\n'
-                        xmlContent=xmlContent+'        <hoedanig>ARCHITECTE</hoedanig>\n'
-                        xmlContent=xmlContent+'      </PERSOON>\n'
-                for prc in licenceObj.objectValues('PortionOut'):
-                    xmlContent=xmlContent+'      <PERCELEN>\n'
+                        xml.append('      <PERSOON>')
+                        xml.append('        <naam>%s %s</naam>' \
+                        % (architectObj.getName1().encode('iso-8859-1'), architectObj.name2.encode('iso-8859-1')))
+                        xml.append('        <straatnaam>%s</straatnaam>' % architectObj.getStreet().encode('iso-8859-1'))
+                        xml.append('        <huisnr>%s</huisnr>' % architectObj.getNumber())
+                        xml.append('        <postcode>%s</postcode>' % architectObj.getZipcode())
+                        xml.append('        <gemeente>%s</gemeente>' % architectObj.getCity().encode('iso-8859-1'))
+                        xml.append('        <hoedanig>ARCHITECTE</hoedanig>')
+                        xml.append('      </PERSOON>')
+                for parcel in parcels:
+                    xml.append('      <PERCELEN>')
                     try:
                         strRadical='%04d'%float(prc.getRadical())
                     except:
@@ -1121,47 +1130,61 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                         strBis='%02d'%float(prc.getBis())
                     except:
                         strBis='00'
-                    xmlContent=xmlContent+'        <E_220_percid>'+prc.getDivisionCode()+'_'+prc.getSection()+'_'+strRadical+'_'+prc.getExposant()+'_'+strPuissance+'_'+strBis+'</E_220_percid>\n'
-                    xmlContent=xmlContent+'        <kadgemnr>'+prc.getDivisionCode()+'</kadgemnr>\n'
-                    xmlContent=xmlContent+'        <sectie>'+prc.getSection()+'</sectie>\n'
-                    xmlContent=xmlContent+'        <grondnr>'+prc.getRadical()+'</grondnr>\n'
+                    xml.append('        <E_220_percid>%s_%s_%s_%s_%s_%s</E_220_percid>' \
+                    % (prc.getDivisionCode(), prc.getSection(), strRadical, prc.getExposant(), strPuissance, strBis))
+                    xml.append('        <kadgemnr>%s</kadgemnr>' % prc.getDivisionCode())
+                    xml.append('        <sectie>%s</sectie>' % prc.getSection())
+                    xml.append('        <grondnr>%s</grondnr>' % prc.getRadical())
                     if prc.getExposant() != '':
-                        xmlContent=xmlContent+'        <exponent>'+prc.getExposant()+'</exponent>\n'
+                        xml.append('        <exponent>%s</exponent>' % prc.getExposant())
                     if prc.getPuissance() != '':
-                        xmlContent=xmlContent+'        <macht>'+prc.getPuissance()+'</macht>\n'
+                        xml.append('        <macht>%s</macht>' % prc.getPuissance())
                     if prc.getBis() != '':
-                        xmlContent=xmlContent+'        <bisnr>'+prc.getBis()+'</bisnr>\n'
-                    xmlContent=xmlContent+'      </PERCELEN>\n'
-
-               ## xmlContent = xmlContent+str(i)+': '+'\n'
-                i=i+1
-                xmlContent=xmlContent+'  </Item220>\n'
-        xmlContent=xmlContent+'</dataroot>\n'
-        htmllist=htmllist+'</TABLE></HTML>'
+                        xml.append('        <bisnr>%s</bisnr>' % prc.getBis())
+                    xml.append('      </PERCELEN>')
+                xml.append('  </Item220>')
+        html_list.append('</TABLE></HTML>')
+        xml.append('</dataroot>')
         if list_only:
             output = StringIO()
-            output.write(unicode(htmllist.replace("&","&amp;"),'iso-8859-1'))
+            output.write(unicode('\n'.join(html_list).replace("&","&amp;"),'iso-8859-1').encode('iso-8859-1'))
             return output.getvalue()
         else:
-            if xmlError != '':
-                return 'Error in these licences:\n\n'+xmlError
+            if error != []:
+                return 'Error in these licences: \n%s' % '\n'.join(error)
             else:
                 output = StringIO()
-                output.write(unicode(xmlContent.replace("&","&amp;"),'iso-8859-1').encode('iso-8859-1'))
+                output.write(unicode('\n'.join(xml).replace("&","&amp;"),'iso-8859-1').encode('iso-8859-1'))
                 return output.getvalue()
 
+    security.declarePublic('getSearchArgumentByKey')
+    def getSearchArgumentByKey(self, request, key_to_match):
+        try:
+            keys = [request['search_arg'][i] for i in range(len(request['search_arg'])) if i % 2 == 0]
+            values = [request['search_arg'][i] for i in range(len(request['search_arg'])) if i % 2 != 0]
+            for i in range(len(keys)):
+                if keys[i] == key_to_match: 
+                    return values[i]
+        except:
+            pass
+        return ''
+
     security.declarePublic('searchLicence')
-    def searchLicence(self, foldertypes, search_argument, search_by):
+    def searchLicence(self, foldertypes, search_arg, search_by):
         """
           Find licences with given paramaters
         """
-        import pdb; pdb.set_trace()
-        if search_by == 'street':
-            return self.searchByStreet(foldertypes, search_argument)
+        search_by = [search_arg[i] for i in range(len(search_arg)) if i % 2 == 0]
+        values = [search_arg[i] for i in range(len(search_arg)) if i % 2 != 0]
+        arguments = {}  
+        for i in range(len(search_by)):
+            arguments[search_by[i]] = values[i]
+        """if search_by == 'street':
+            return self.searchByStreet(foldertypes, search_arg)
         elif search_by == 'applicant':
-            return self.searchByApplicant(foldertypes, search_argument)
-        else:
-            return None
+            return self.searchByApplicant(foldertypes, search_arg)
+        else:"""
+        return None
 
     security.declarePublic('searchByApplicant')
     def searchByApplicant(self, foldertypes, applicant_infos_index):
@@ -1198,6 +1221,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                     res.append(bref.aq_inner.aq_parent)
             return res
         return []
+
 
     security.declarePublic('searchByParcel')
     def searchByParcel(self, foldertypes, division, section, radical, bis, exposant, puissance, partie):

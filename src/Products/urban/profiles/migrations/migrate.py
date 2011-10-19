@@ -877,13 +877,16 @@ class UrbanVocabularyTermToOrganisationTermMigrator(object, InplaceATItemMigrato
         """
           We have to link the OrganisationTerm to its coresponding UrbanEventType 
         """
+        attrs = ['title', 'description', 'extraValue']
+        for attr in attrs:
+            setattr(self.new, attr, getattr(self.old, attr))
         catalog = getToolByName(self.new, 'portal_catalog')
-        self.new_id 
         brains = catalog(portal_type=('UrbanEventType',))
         for brain in brains:
             if self.new_id in brain.id:
                 self.new.setLinkedOpinionRequestEvent(brain.getObject())
-                break
+                return
+        event.notify(ObjectInitializedEvent(self.new))
      
 def migrateFoldermakersTerms(context):
     """

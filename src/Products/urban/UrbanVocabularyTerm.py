@@ -130,15 +130,19 @@ class UrbanVocabulary(object):
     def getObjectsSet(self, content_instance, values):
         if isinstance(values, str):
             values = (values,)
-        portal_urban = getToolByName(content_instance, 'portal_urban')
-        objects = portal_urban.listVocabularyObjects(self.path, content_instance, sort_on=self.sort_on,\
-            id_to_use=self.id_to_use, vocType=self.vocType, inUrbanConfig=self.inUrbanConfig)
+        objects = self.getAllVocTerms(content_instance)
         result = set()
         for value in values:
             obj = objects.get(value, None)
             if obj is not None:
                 result.add(obj)
         return result
+
+    def getAllVocTerms(self, content_instance):
+        portal_urban = getToolByName(content_instance, 'portal_urban')
+        return  portal_urban.listVocabularyObjects(self.path, content_instance, sort_on=self.sort_on,\
+            id_to_use=self.id_to_use, vocType=self.vocType, inUrbanConfig=self.inUrbanConfig)
+               
 
 ##/code-section module-footer
 
