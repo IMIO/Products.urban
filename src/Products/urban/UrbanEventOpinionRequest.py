@@ -97,7 +97,17 @@ class UrbanEventOpinionRequest(BaseContent, UrbanEvent, BrowserDefaultMixin):
         else:
             return ''
 
-
+    security.declarePublic('getLinkedOrganisationTerm')
+    def getLinkedOrganisationTerm(self):
+        """
+          Returns the id of the term that is linked to the linked UrbanEventType
+        """
+        urbaneventtypes = self.getUrbaneventtypes()
+        brefs = urbaneventtypes.getBRefs('LinkedOpinionRequestEvent')
+        if brefs:
+            return brefs[0]
+        else:
+            return None 
 
 registerType(UrbanEventOpinionRequest, PROJECTNAME)
 # end of class UrbanEventOpinionRequest
