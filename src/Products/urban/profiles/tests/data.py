@@ -33,15 +33,6 @@ urbanEventTypes = {
                                     ),
                     },
                     {
-                    'id': "fiche-recap",
-                    'title': "Fiche récapitulative",
-                    'deadLineDelay': 0,
-                    'activatedFields': [],
-                    'podTemplates': (
-                                     {'id': "urb-fiche-recap", 'title': "Fiche récapitulative"},
-                                    ),
-                    },
-                    {
                     'id': "recepisse-art15-complement",
                     'title': "Récépissé d'un complément à une demande de permis (article 115)",
                     'activatedFields': [],
@@ -188,6 +179,15 @@ urbanEventTypes = {
                                      {'id': "urb-decision-deliberation-college", 'title': "Delibération du collège d'octroi du permis"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+                    },
+                    {
+                    'id': "fiche-recap",
+                    'title': "Fiche récapitulative",
+                    'deadLineDelay': 0,
+                    'activatedFields': [],
+                    'podTemplates': (
+                                     {'id': "urb-fiche-recap", 'title': "Fiche récapitulative"},
+                                    ),
                     },
                     {
                     'id': "demande-raccordement-egout",
