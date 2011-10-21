@@ -13,7 +13,12 @@
     <indexed_attr value="getDecisionDate"/>
   </index>
 <!-- ##code-section FOOT -->
-  <index name="getRecipientAddress" 
+   <index name="StreetsUID" 
+           meta_type="KeywordIndex">
+    <indexed_attr value="StreetsUID"/>
+  </index>
+  <column value="StreetsUID"/>
+ <index name="getRecipientAddress" 
          meta_type="FieldIndex">
     <indexed_attr value="getRecipientAddress"/>
   </index>

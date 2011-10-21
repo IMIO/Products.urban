@@ -12,54 +12,72 @@
 <body>
 <div metal:fill-slot="main"
      tal:define="foldertypes request/foldertypes|nothing;
-                 search_argument request/search_argument|nothing;
-                 search_by request/search_by|nothing;
+                 search_arg request/search_arg|nothing;
+                 previous_search_by request/search_by|nothing;
                  licence_types view/getLicenceTypes;">
         <h1 class="documentFirstHeading" i18n:translate="urban_searchbyapplicant_descr">
             Title
         </h1>
-
-<form action="" method="get">
+<form action="" method="get" id="search">
 <fieldset><legend><strong i18n:translate="urban_search_parameters">Enter your parameters for the search</strong></legend>
  <div tal:repeat="licence_type licence_types">
-  <input type="checkbox" name="foldertypes" 
+         <input id="foldertypes" type="checkbox" name="foldertypes" 
          tal:define="type_checked python:licence_type in request.get('foldertypes', []) or ''"
          tal:attributes="value licence_type;checked python: type_checked and 'checked' or ''" />
   <label tal:content="licence_type" i18n:domain="plone" i18n:translate="">Licence type</label><br />
  </div>
  <br/>
-
+ <a id="base_url" tal:attributes="href python: '%s/urbansearchview#fieldsetlegend-urban_searchby' % context.absolute_url()" ></a>
+ <input id=search_by name=search_by type=hidden tal:attributes="value previous_search_by">
  <div id="urbanViewWithTabbing">
  <dl class="formTabs enableFormTabbing">
- <dt class="formTab" id="fieldsetlegend-urban_searchbystreet" i18n:domain="plone" i18n:translate="label_schema_urban_searchbystreet"><span>By street</span></dt>
- <dd id="fieldset-urban_searchbystreet">
+  <dt class="formTab" id="fieldsetlegend-urban_searchbystreet" 
+     i18n:domain="plone" i18n:translate="label_schema_urban_searchbystreet">
+    <span>By street</span>
+  </dt>
+  <dd id="fieldset-urban_searchbystreet"
+   onmouseover="document.getElementById('search').elements['search_by'].value='street';
+   var base_url=document.getElementById('base_url');
+   var search_form=document.getElementById('search');
+   search_form.setAttribute('action', base_url.getAttribute('href')+'street')">
   <metal:listing use-macro="context/@@urbansearch-macros/searchbystreetMacro" />
- </dd>
-
- <dt class="formTab" id="fieldsetlegend-urban_searchbyapplicant" i18n:domain="plone" i18n:translate="label_schema_urban_searchbyapplicant"><span>By applicant</span></dt>
- <dd id="fieldset-urban_searchbyapplicant">
-  <metal:listing use-macro="context/@@urbansearch-macros/searchbyapplicantMacro" />
- </dd>
-
- <dt class="formTab" id="fieldsetlegend-urban_searchbyparcel" i18n:domain="plone" i18n:translate="label_schema_urban_searchbyparcel"><span>By parcel</span></dt>
- <dd id="fieldset-urban_searchbyparcel">
+  </dd>
+  <dt class="formTab" id="fieldsetlegend-urban_searchbyapplicant" 
+     i18n:domain="plone" i18n:translate="label_schema_urban_searchbyapplicant">
+    <span>By applicant</span>
+  </dt>
+  <dd id="fieldset-urban_searchbyapplicant" 
+   onmouseover="document.getElementById('search').elements['search_by'].value='applicant';
+   var base_url=document.getElementById('base_url');
+   var search_form=document.getElementById('search');
+   search_form.setAttribute('action', base_url.getAttribute('href')+'applicant')">
+   <metal:listing use-macro="context/@@urbansearch-macros/searchbyapplicantMacro" />
+  </dd>
+ <dt class="formTab" id="fieldsetlegend-urban_searchbyparcel" 
+     i18n:domain="plone" i18n:translate="label_schema_urban_searchbyparcel">
+    <span>By parcel</span>
+ </dt>
+ <dd id="fieldset-urban_searchbyparcel" 
+   onmouseover="document.getElementById('search').elements['search_by'].value='parcel'; 
+   var base_url=document.getElementById('base_url');
+   var search_form=document.getElementById('search');
+   search_form.setAttribute('action', base_url.getAttribute('href')+'parcel')">
   <metal:listing use-macro="context/@@urbansearch-macros/searchbyparcelMacro" />
  </dd>
- 
  </dl>
  </div>
 </fieldset>
-
  <fieldset>
-  <input class="searchButton" type="submit" value="Search" name="Search" i18n:attributes="value" />
+  <input class="searchButton" type="submit" value="Search" name="Search" i18n:attributes="value">
  </fieldset>
 </form>
 
 
 <!-- Display results -->
-<tal:block_results condition="python: search_argument">
+<tal:block_results condition="python: search_arg">
 
-<table tal:define="brains python:here.portal_urban.searchLicence(foldertypes, search_argument, search_by)" class="listing" width=100% border=0 cellspacing=0>
+<table tal:define="brains view/searchLicence"
+       class="listing" width=100% border=0 cellspacing=0>
  <thead>
   <tr>
    <th><strong i18n:translate="urban_search_result">Search result</strong></th>
@@ -78,7 +96,7 @@
    <td tal:define="oddrow repeat/brain/odd;
                    normalizeString nocall:context/@@plone/normalizeString; 
                    obj_wf_state brain/review_state;
-                   obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);" tal:attributes="class python: test(oddrow, 'even', 'odd')">
+                   obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);" tal:attributes="class python: oddrow and 'even' or 'odd'">
     <img src="#" tal:attributes="src brain/getIcon" />
     <a href="#" tal:content="brain/Title" tal:attributes="href brain/getPath;class obj_wf_state_class">Result title</a>
     <p class="discreet"><span tal:content="structure brain/Description">Result description</span></p>

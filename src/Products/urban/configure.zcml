@@ -92,7 +92,9 @@
   />
 
   <adapter name="Title" factory=".indexes.baseobject_title" />
- 
+
+  <adapter name="StreetsUID" factory=".indexes.genericlicence_streetsuid" />
+
   <!-- ##/code-section configure.zcml.header -->
 
   <i18n:registerTranslations directory="locales" />

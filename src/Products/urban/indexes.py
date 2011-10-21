@@ -17,6 +17,7 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from plone.indexer import indexer
 from Products.Archetypes.interfaces import IBaseObject
+from Products.urban.interfaces import IGenericLicence
 
 
 class UrbanIndexes:
@@ -83,3 +84,10 @@ def baseobject_title(object):
     if isinstance(title, unicode):
         title = title.encode('utf8')
     return title
+
+@indexer(IGenericLicence)
+def genericlicence_streetsuid(object):
+    streets = []
+    for location in object.getWorkLocations():
+        streets.append(location['street'])
+    return streets 
