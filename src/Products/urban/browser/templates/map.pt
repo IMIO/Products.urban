@@ -25,10 +25,7 @@
 <tal:block condition="parcels">
 <div metal:use-macro="here/urban_macros/macros/urbanMapScript" />
 </tal:block>
-<h1 class="documentFirstHeading">
- <tal:block replace="structure python:getattr(here, here.getIcon(1))"/>
- <span tal:replace="here/Title" tal:omit-tag="">Title</span>
-</h1>
+<metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />
 
   <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
    <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
