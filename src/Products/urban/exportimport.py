@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
+from Products.urban.utils import moveElementAfter
 import logging
 logger = logging.getLogger('urban: setuphandlers')
 import hashlib
@@ -27,6 +28,7 @@ def addUrbanEventTypes(context):
             #if we can not get the urbanConfig, we pass this one...
             logger.warn("An error occured while trying to get the '%s' urbanConfig" % urbanConfigId)
             continue
+        last_urbaneventype_id = None
         for uet in urbanEventTypes[urbanConfigId]:
             try:
                 loginfo = 'unknown'
@@ -39,6 +41,12 @@ def addUrbanEventTypes(context):
                 else:
                     newUetId = uetFolder.invokeFactory("UrbanEventType", **uet)
                     newUet = getattr(uetFolder, newUetId)
+                    if last_urbaneventype_id:
+                        moveElementAfter(newUet, uetFolder, 'id', last_urbaneventype_id)
+                    else:
+                        newUet.moveObjectToPosition(newUet.getId(), 0)
+                last_urbaneventype_id = id
+                last_template_id = None
                 #add the Files in the UrbanEventType
                 for template in uet['podTemplates']:
                     id = "%s.odt" % template['id']
@@ -78,6 +86,11 @@ def addUrbanEventTypes(context):
                     else:
                         newUetFileId = newUet.invokeFactory("File", id=id, title=title, file=fileContent)
                         newUetFile = getattr(newUet, newUetFileId)
+                        if last_template_id:
+                            moveElementAfter(newUetFile, newUet, 'id', last_template_id)
+                        else:
+                            newUet.moveObjectToPosition(newUetFile.getId(), 0)
+                    last_template_id = id
                     #modify template's content
                     newUetFile.setContentType("application/vnd.oasis.opendocument.text")
                     newUetFile.setFilename(id)
