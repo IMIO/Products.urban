@@ -104,14 +104,14 @@ schema = Schema((
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-UrbanEventType_schema = BaseFolderSchema.copy() + \
+UrbanEventType_schema = OrderedBaseFolderSchema.copy() + \
     getattr(UrbanDelay, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class UrbanEventType(BaseFolder, UrbanDelay, BrowserDefaultMixin):
+class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
