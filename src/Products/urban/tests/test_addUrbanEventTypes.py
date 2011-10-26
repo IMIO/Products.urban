@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
 from time import sleep
-from zope.component import createObject
 from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
 
@@ -14,7 +13,6 @@ class TestUrbanEventTypes(unittest.TestCase):
         portal = self.layer['portal']
         self.portal_urban = portal.portal_urban
         self.portal_setup = portal.portal_setup
-        urban = portal.urban
         login(portal, 'urbaneditor')
         
     def testAddUrbanEventTypes(self):
@@ -46,7 +44,7 @@ class TestUrbanEventTypes(unittest.TestCase):
         my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertEqual(my_file_odt.ModificationDate(),my_update_file_datetime)         
         # 5)
-        self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune2','urban-addCommune1UrbanEventTypes')  
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune2','urban-addCommune1UrbanEventTypes')
         my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertEqual(my_file_odt.ModificationDate(),my_update_file_datetime)        
         # 6)

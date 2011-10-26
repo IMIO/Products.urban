@@ -16,11 +16,8 @@ __docformat__ = 'plaintext'
 
 import logging
 logger = logging.getLogger('urban: setuphandlers')
-from Products.urban.config import PROJECTNAME
 from Products.urban.config import DEPENDENCIES
-import os
 from Products.CMFCore.utils import getToolByName
-import transaction
 ##code-section HEAD
 from Acquisition import aq_base
 from Products.urban.config import TOPIC_TYPE

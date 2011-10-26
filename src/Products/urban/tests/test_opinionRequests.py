@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
-from time import sleep
-from zope.component import createObject
 from zope import event
-from zope.interface import alsoProvides
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Archetypes.event import EditBegunEvent
 from plone.app.testing import login
@@ -48,7 +45,7 @@ class TestOpinionRequest (unittest.TestCase):
 
         urbaneventtypes = self.portal_urban.buildlicence.urbaneventtypes
         created_urbaneventtype = term.getLinkedOpinionRequestEvent()
-        position = created_urbaneventtype.getObjectPosition(created_urbaneventtype.id)
+        position = urbaneventtypes.getObjectPosition(created_urbaneventtype.id)
         self.failUnless(urbaneventtypes.objectValues()[position-1].getEventTypeType() == created_urbaneventtype.getEventTypeType())
         if len(urbaneventtypes.objectValues()) > position+1:
             self.failUnless(urbaneventtypes.objectValues()[position+1].getEventTypeType() != created_urbaneventtype.getEventTypeType()) 
