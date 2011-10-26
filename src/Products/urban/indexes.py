@@ -77,14 +77,6 @@ class UrbanIndexes:
             pass
         return parcelsInfos
 
-
-@indexer(IBaseObject)
-def baseobject_title(object):
-    title = object.Title()
-    if isinstance(title, unicode):
-        title = title.encode('utf8')
-    return title
-
 @indexer(IGenericLicence)
 def genericlicence_streetsuid(object):
     streets = []

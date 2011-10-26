@@ -91,8 +91,6 @@
     provides="plone.indexer.interfaces.IIndexableObject"
   />
 
-  <adapter name="Title" factory=".indexes.baseobject_title" />
-
   <adapter name="StreetsUID" factory=".indexes.genericlicence_streetsuid" />
 
   <!-- ##/code-section configure.zcml.header -->
