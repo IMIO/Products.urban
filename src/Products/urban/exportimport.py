@@ -34,9 +34,7 @@ def addUrbanEventTypes(context):
             continue
         last_urbaneventype_id = None
         for uet in urbanEventTypes[urbanConfigId]:
-            loginfo = 'unknown'
             id = uet['id']
-            loginfo = id
             #we pass every informations including the 'id' in the 'uet' dict
             folderEvent=getattr(uetFolder,id,None)
             if folderEvent:
@@ -56,7 +54,6 @@ def addUrbanEventTypes(context):
             #add the Files in the UrbanEventType
             for template in uet['podTemplates']:
                 id = "%s.odt" % template['id']
-                loginfo = id
                 title = template['title']
                 #read odt template
                 filePath = '%s/templates/%s' % (context._profile_path, id)
