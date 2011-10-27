@@ -31,7 +31,7 @@ ploneFormTabbing._buildTabs = function(container, legends) {
                 tab += ' onClick = "'+
                        'var search_form = document.getElementsByTagName(\'form\')[1];'+
                        'var action_url = search_form.getAttribute(\'action\');'+
-                       'action_url = action_url.substr(0, action_url.lastIndexOf(\'/\'));'+
+                       'action_url = action_url.substr(0, action_url.lastIndexOf(\'/base_edit\'));'+
                        'search_form.setAttribute(\'action\', action_url+\'/base_edit/#'+lid+'\')"';
             }
             tab += '><a id="'+lid+'" href="#'+lid+'"><span>';
