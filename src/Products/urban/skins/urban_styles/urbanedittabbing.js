@@ -24,7 +24,17 @@ ploneFormTabbing._buildTabs = function(container, legends) {
             tab = '<option '+className+' id="'+lid+'" value="'+lid+'">';
             tab += $(legend).text()+'</option>';
         } else {
-            tab = '<li '+className+'><a id="'+lid+'" href="#'+lid+'"><span>';
+            tab = '<li '+className
+            /* XXX change by urban 
+             *  keep the last selected tab after edition */
+            if ((window.location.href.search("/edit") != -1) && (lid != 'fieldsetlegend-urban_events')) {
+                tab += ' onClick = "'+
+                       'var search_form = document.getElementsByTagName(\'form\')[1];'+
+                       'var action_url = search_form.getAttribute(\'action\');'+
+                       'action_url = action_url.substr(0, action_url.lastIndexOf(\'/\'));'+
+                       'search_form.setAttribute(\'action\', action_url+\'/#'+lid+'\')"';
+            }
+            tab += '><a id="'+lid+'" href="#'+lid+'"><span>';
             /* XXX change by urban */
             /* display the edit icon only if we are not already editing the element... */
             tab += $(legend).text()+'</span>';
