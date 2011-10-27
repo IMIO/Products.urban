@@ -3,6 +3,7 @@
 import os
 import random
 import string
+import hashlib
 
 def moveElementAfter(object_to_move, container, attr_name, attr_value_to_match):
     new_position = container.getObjectPosition(object_to_move.getId())
@@ -16,6 +17,10 @@ def moveElementAfter(object_to_move, container, attr_name, attr_value_to_match):
 
 def generatePassword(length):
     return ''.join(random.choice(string.ascii_letters + string.digits) for x in range(length))
+
+def getMd5Signature(data):
+    md5 = hashlib.md5(data)
+    return md5.digest()
 
 def getOsTempFolder():
     tmp = '/tmp'
