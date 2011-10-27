@@ -5,6 +5,8 @@ import logging
 logger = logging.getLogger('urban: setuphandlers')
 import hashlib
 
+log = []
+
 def addUrbanEventTypes(context):
     """
       Helper method for easily adding urbanEventTypes
@@ -15,10 +17,15 @@ def addUrbanEventTypes(context):
     profile_name = context._profile_path.split('/')[-1]
     from_string = "from Products.urban.profiles.%s.data import urbanEventTypes" % profile_name
     try:
-        exec(from_string)
+        exec(from_string) in locals()
     except ImportError:
         return
+
+    global log
     log = []
+    
+    def loga(config, evt, tmpl, msg):
+        log.append("%s: evt='%s', template='%s' => %s"%(config, evt, tmpl, msg))
 
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
@@ -30,7 +37,7 @@ def addUrbanEventTypes(context):
             #if we can not get the urbanConfig, we pass this one...
             msg = "AttributeError while trying to get the '%s' urbanConfig" % urbanConfigId
             logger.warn(msg)
-            log.append(msg)
+            loga(urbanConfigId, '', '', msg)
             continue
         last_urbaneventype_id = None
         for uet in urbanEventTypes[urbanConfigId]:
@@ -46,9 +53,9 @@ def addUrbanEventTypes(context):
                     moveElementAfter(newUet, uetFolder, 'id', last_urbaneventype_id)
                 else:
                     uetFolder.moveObjectToPosition(newUet.getId(), 0)
-                msg = "Created new UrbanEvenType %s" %newUetId
+                msg = "Created event '%s'" %newUet.Title()
                 logger.warn(msg)
-                log.append(msg)
+                loga(urbanConfigId, newUetId, '', 'Created event')
             last_urbaneventype_id = id
             last_template_id = None
             #add the Files in the UrbanEventType
@@ -70,9 +77,8 @@ def addUrbanEventTypes(context):
                     #   1. executing profile is tests and profile in use isn't tests
                     #   2. executing profile is 'xxx' and profile in use is 'yyy'
                     if profileNamePlone!="tests" and (profile_name != profileNamePlone or profile_name == "tests"):
-                        msg = "Processing urbanEventType %s : we pass this template (%s) because executing profile '%s' isnt't compatible with this profil (%s)" %(last_urbaneventype_id,title,profile_name.encode(),profileNamePlone.encode())
-                        logger.warn(msg)
-                        log.append(msg)
+                        logger.warn("Processing urbanEventType %s : we pass this template (%s) because executing profile '%s' isnt't compatible with this profil (%s)" %(last_urbaneventype_id,title,profile_name.encode(),profileNamePlone.encode()))
+                        loga(urbanConfigId, last_urbaneventype_id, title, "Passed because executing profile '%s' isnt't compatible with this profil (%s)"%(profile_name.encode(),profileNamePlone.encode()))
                         continue
                     #get the md5 in property of current template
                     md5SignatureProperty=fileTemplate.getProperty("md5Signature")
@@ -83,9 +89,8 @@ def addUrbanEventTypes(context):
                     #   1. current template was manually modified by user
                     #   2. the new template is the same that the current
                     if md5SignaturePlone!=md5SignatureProperty:
-                        msg = "Processing urbanEventType %s : we pass the template '%s' because it is manually modified" %(last_urbaneventype_id,title)
-                        logger.warn(msg)
-                        log.append(msg)
+                        logger.warn("Processing urbanEventType %s : we pass the template '%s' because it is manually modified" %(last_urbaneventype_id,title))
+                        loga(urbanConfigId, last_urbaneventype_id, title, 'Passed because manually modified')
                         continue
                     elif md5SignatureFS == md5SignaturePlone:
                         continue
@@ -93,7 +98,7 @@ def addUrbanEventTypes(context):
                     newUetFile.setFile(fileContent)
                     msg = "Updated template %s" %title
                     logger.warn(msg)
-                    log.append(msg)
+                    loga(urbanConfigId, last_urbaneventype_id, title, "Updated")
                 #if file not exist, we can create template
                 else:
                     newUetFileId = newUet.invokeFactory("File", id=id, title=title, file=fileContent)
@@ -104,7 +109,7 @@ def addUrbanEventTypes(context):
                         newUetFile.moveObjectToPosition(newUetFile.getId(), 0)
                     msg = "Added new template %s" %title
                     logger.warn(msg)
-                    log.append(msg)
+                    loga(urbanConfigId, last_urbaneventype_id, title, "Added")
                 last_template_id = id
                 #modify template's content
                 newUetFile.setContentType("application/vnd.oasis.opendocument.text")
