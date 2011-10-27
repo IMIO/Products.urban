@@ -26,13 +26,13 @@ ploneFormTabbing._buildTabs = function(container, legends) {
         } else {
             tab = '<li '+className
             /* XXX change by urban 
-             *  keep the last selected tab after edition */
+             *  keep the last selected tab after edition */ 
             if ((window.location.href.search("/edit") != -1) && (lid != 'fieldsetlegend-urban_events')) {
                 tab += ' onClick = "'+
                        'var search_form = document.getElementsByTagName(\'form\')[1];'+
                        'var action_url = search_form.getAttribute(\'action\');'+
                        'action_url = action_url.substr(0, action_url.lastIndexOf(\'/\'));'+
-                       'search_form.setAttribute(\'action\', action_url+\'/#'+lid+'\')"';
+                       'search_form.setAttribute(\'action\', action_url+\'/base_edit/#'+lid+'\')"';
             }
             tab += '><a id="'+lid+'" href="#'+lid+'"><span>';
             /* XXX change by urban */
