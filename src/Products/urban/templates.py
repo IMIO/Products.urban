@@ -58,7 +58,8 @@ class Sites(object):
 
     def execute(self, pif):
         template = NewTextTemplate(self.source)
-        context = Context(sites=makeContext(pif).values())
+        sites = makeContext(pif)
+        context = Context(sites=[sites[key] for key in sorted(sites.keys())])
         try:
             self.result = template.generate(context).render()
         except UndefinedError, e:
@@ -92,7 +93,7 @@ class PerSite(object):
         if not os.path.exists(self.directory):
             os.mkdir(self.directory)
         self.sites = makeContext(pif)
-        for siteid in self.sites:
+        for siteid in sorted(self.sites.keys()):
             self.execute(siteid)
             self.write(siteid)
 
