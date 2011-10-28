@@ -18,7 +18,7 @@ from DateTime import DateTime
 from Products.urban.exportimport import addUrbanEventTypes
 from Products.urban.exportimport import addGlobalTemplates
 
-def updateAllUrbanTemplates(context):
+def updateAllSambrevilleTemplates(context):
     if context.readDataFile('urban_sambreville_marker.txt') is None:
         return
     addGlobalTemplates(context)

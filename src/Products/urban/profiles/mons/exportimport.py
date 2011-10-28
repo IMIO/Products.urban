@@ -2,7 +2,7 @@
 from Products.urban.exportimport import addUrbanEventTypes
 from Products.urban.exportimport import addGlobalTemplates
 
-def updateAllUrbanTemplates(context):
+def updateAllMonsTemplates(context):
     if context.readDataFile('urban_mons_marker.txt') is None:
         return
     addGlobalTemplates(context)

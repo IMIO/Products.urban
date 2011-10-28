@@ -2,7 +2,7 @@
 <import-steps>
 <import-step
             id="urban-LabruyereUpdateTemplates"
-            handler="Products.urban.profiles.labruyere.exportimport.updateAllUrbanTemplate"
+            handler="Products.urban.profiles.labruyere.exportimport.updateAllLabruyereTemplates"
             title="Add specific UrbanEventTypes and update templates for Labruyere"
             version="2011-09-06T13:00:00.00000">
 USE THIS TO UPDATE TEMPLATES for Labruyere            
