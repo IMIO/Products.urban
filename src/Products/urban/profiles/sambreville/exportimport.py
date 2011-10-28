@@ -15,6 +15,14 @@ __docformat__ = 'plaintext'
 import logging
 logger = logging.getLogger('urban: sambreville profile')
 from DateTime import DateTime
+from Products.urban.exportimport import addUrbanEventTypes
+from Products.urban.exportimport import addGlobalTemplates
+
+def updateAllUrbanTemplates(context):
+    if context.readDataFile('urban_sambreville_marker.txt') is None:
+        return
+    addGlobalTemplates(context)
+    addUrbanEventTypes(context)
 
 def isNoturbanSambrevilleProfile(context):
     return context.readDataFile("urban_sambreville_marker.txt") is None

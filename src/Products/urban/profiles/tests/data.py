@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+from Products.urban.config import DOCUMENT_STRUCTURE_TEMPLATES
+
+globalTemplates = DOCUMENT_STRUCTURE_TEMPLATES  +\
+       [{'id':'styles', 'title':'Fichier gérant les styles utilisés dans les différents modèles de document'},
+        {'id':'statsins', 'title':'Fichier modèle pour les statistiques INS'}
+       ]
+
 urbanEventTypes = {
                    'buildlicence':
                    (

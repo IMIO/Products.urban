@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <import-steps>
 <import-step
-            id="urban-addCommune2UrbanEventTypes"
-            handler="Products.urban.setuphandlers.addUrbanEventTypes"
-            title="Add specific urbanEventTypes for Commune2"
+            id="urban-Commune2UpdateTemplates"
+            handler="Products.urban.profiles.testCommune2.exportimport.updateAllUrbanTemplate"
+            title="Add specific urbanEventTypes and update templates for Commune2"
             version="2011-04-11T14:00:00.00000">
-Adapt application for Mons
+USE THIS TO UPDATE TEMPLATES for Commune2    
 </import-step>
 </import-steps>
