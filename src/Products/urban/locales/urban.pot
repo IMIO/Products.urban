@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-10-10 10:03+0000\n"
+"POT-Creation-Date: 2011-10-28 08:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,6 +113,14 @@ msgid "Search parcel(s)"
 msgstr ""
 
 msgid "See more..."
+msgstr ""
+
+#. Default: "Certificat d'urbanisme 1"
+msgid "UrbanCertificateOne"
+msgstr ""
+
+#. Default: "Certificat d'urbanisme 2"
+msgid "UrbanCertificateTwo"
 msgstr ""
 
 # urban_actions
@@ -524,6 +532,9 @@ msgstr ""
 msgid "geometricians_folder_title"
 msgstr ""
 
+msgid "globaltemplates_folder_title"
+msgstr ""
+
 msgid "inquiry_data"
 msgstr ""
 
@@ -918,12 +929,6 @@ msgstr ""
 
 msgid "townshipfoldercategories_folder_title"
 msgstr ""
-
-msgid "UrbanCertificateOne"
-msgstr "Certificat d'urbanisme 1"
-
-msgid "UrbanCertificateTwo"
-msgstr "Certificat d'urbanisme 2"
 
 #. Default: "UnoEnabledPython"
 #: UrbanTool.py

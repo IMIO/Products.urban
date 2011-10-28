@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-10-10 10:03+0000\n"
+"POT-Creation-Date: 2011-10-28 08:48+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -116,9 +116,11 @@ msgstr "Recherche de parcelles"
 msgid "See more..."
 msgstr "Voir tout..."
 
+#. Default: "Certificat d'urbanisme 1"
 msgid "UrbanCertificateOne"
 msgstr "Certificat d'urbanisme 1"
 
+#. Default: "Certificat d'urbanisme 2"
 msgid "UrbanCertificateTwo"
 msgstr "Certificat d'urbanisme 2"
 
@@ -530,6 +532,9 @@ msgstr "Générer un document lié au dossier"
 
 msgid "geometricians_folder_title"
 msgstr "Géomètres"
+
+msgid "globaltemplates_folder_title"
+msgstr "Modèles généraux"
 
 msgid "inquiry_data"
 msgstr "Données concernant l'enquête"
