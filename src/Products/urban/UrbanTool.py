@@ -47,6 +47,7 @@ from Products.PageTemplates.Expressions import getEngine
 from Products.ZCTextIndex.ParseTree import ParseError
 from Products.urban.utils import getOsTempFolder
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS
+from Products.urban.config import DOCUMENT_STRUCTURE_TEMPLATES
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
@@ -261,60 +262,6 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
-    FileField(
-        name='templateHeader',
-        widget=FileField._properties['widget'](
-            label='Templateheader',
-            label_msgid='urban_label_templateHeader',
-            i18n_domain='urban',
-        ),
-        storage=AttributeStorage(),
-    ),
-    FileField(
-        name='templateFooter',
-        widget=FileField._properties['widget'](
-            label='Templatefooter',
-            label_msgid='urban_label_templateFooter',
-            i18n_domain='urban',
-        ),
-        storage=AttributeStorage(),
-    ),
-    FileField(
-        name='templateReference',
-        widget=FileField._properties['widget'](
-            label='Templatereference',
-            label_msgid='urban_label_templateReference',
-            i18n_domain='urban',
-        ),
-        storage=AttributeStorage(),
-    ),
-    FileField(
-        name='templateSignatures',
-        widget=FileField._properties['widget'](
-            label='Templatesignatures',
-            label_msgid='urban_label_templateSignatures',
-            i18n_domain='urban',
-        ),
-        storage=AttributeStorage(),
-    ),
-    FileField(
-        name='templateStyles',
-        widget=FileField._properties['widget'](
-            label='Templatestyles',
-            label_msgid='urban_label_templateStyles',
-            i18n_domain='urban',
-        ),
-        storage=AttributeStorage(),
-    ),
-    FileField(
-        name='templateStatsINS',
-        widget=FileField._properties['widget'](
-            label='Templatestatsins',
-            label_msgid='urban_label_templateStatsINS',
-            i18n_domain='urban',
-        ),
-        storage=AttributeStorage(),
-    ),
     StringField(
         name='editionOutputFormat',
         default='odt',
@@ -427,14 +374,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         fileType = self.getEditionOutputFormat()
         tempFileName = '%s/%s_%f.%s' % (
             getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),fileType)
-        tempFileNameHeader = '%s/%s_%f_header.%s' % (
-            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'odt')
-        tempFileNameFooter = '%s/%s_%f_footer.%s' % (
-            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'odt')
-        tempFileNameReference = '%s/%s_%f_reference.%s' % (
-            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'odt')
-        tempFileNameSignatures = '%s/%s_%f_signatures.%s' % (
-            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'odt')
+        temp_file_names = {}
         try:
             applicantobj=licenceFolder.getApplicants()[0]
         except:
@@ -450,36 +390,30 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             collegesubmissionobj= brain[0].getObject()
         except:
             collegesubmissionobj=None
-        templateHeader = self.getTemplateHeader()
-        if templateHeader and templateHeader.size:
-            templateHeader = StringIO(templateHeader)
-            #we render the template so pod instructions into the header template are rendered too
-            renderer = appy.pod.renderer.Renderer(templateHeader, {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameHeader, pythonWithUnoPath=self.getUnoEnabledPython())
-            renderer.run()
-        templateFooter = self.getTemplateFooter()
-        if templateFooter and templateFooter.size:
-            templateFooter = StringIO(templateFooter)
-            #we render the template so pod instructions into the header template are rendered too
-            renderer = appy.pod.renderer.Renderer(templateFooter, {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameFooter, pythonWithUnoPath=self.getUnoEnabledPython())
-            renderer.run()
-        templateReference = self.getTemplateReference()
-        if templateReference and templateReference.size:
-            templateReference = StringIO(templateReference)
-            #we render the template so pod instructions into the header template are rendered too
-            renderer = appy.pod.renderer.Renderer(templateReference, {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameReference, pythonWithUnoPath=self.getUnoEnabledPython())
-            renderer.run()
-        templateSignatures = self.getTemplateSignatures()
-        if templateSignatures and templateSignatures.size:
-            templateSignatures = StringIO(templateSignatures)
-            #we render the template so pod instructions into the header template are rendered too
-            renderer = appy.pod.renderer.Renderer(templateSignatures, {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj,}, tempFileNameSignatures, pythonWithUnoPath=self.getUnoEnabledPython())
-            renderer.run()
-        #now that header and footer are rendered, we can use them in the main pod template and render the entire document
+        global_templates = getattr(self, 'globaltemplates')
+        for generic_template in DOCUMENT_STRUCTURE_TEMPLATES:
+            template = getattr(global_templates, '%s.odt' % generic_template['id'])
+            if template and template.size:
+                template = StringIO(template)
+                temp_file_name= '%s/%s_%f.%s' % (getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'odt')
+                temp_file_names[generic_template['id']] = temp_file_name
+                #we render the template so pod instructions into the generic sub-templates are rendered too
+                renderer = appy.pod.renderer.Renderer(template,
+                                                      {'self': licenceFolder, 'urbanEventObj':urbanEventObj,
+                                                       'applicantobj':applicantobj,'recepisseobj':recepisseobj,
+                                                       'collegesubmissionobj':collegesubmissionobj,},
+                                                      temp_file_name, pythonWithUnoPath=self.getUnoEnabledPython())
+                renderer.run()
+        #now that sub-templates are rendered, we can use them in the main pod template and render the entire document
         #we prepare the styles template
-        templateStyles = self.getTemplateStyles()
+        templateStyles = getattr(global_templates, 'styles.odt')
         if templateStyles and templateStyles.size:
             templateStyles = StringIO(templateStyles)
-        renderer = appy.pod.renderer.Renderer(StringIO(urbanTemplateObj), {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj, 'tool': self, 'header':tempFileNameHeader, 'footer':tempFileNameFooter, 'reference':tempFileNameReference, 'signatures': tempFileNameSignatures}, tempFileName, pythonWithUnoPath=self.getUnoEnabledPython())
+        dict_arg = {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,
+                    'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj, 'tool': self}
+        dict_arg.update(temp_file_names)
+        renderer = appy.pod.renderer.Renderer( StringIO(urbanTemplateObj), dict_arg,
+                                              tempFileName, pythonWithUnoPath=self.getUnoEnabledPython())
         renderer.run()
         # Tell the browser that the resulting page contains ODT
         response = self.REQUEST.RESPONSE
@@ -1023,7 +957,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             split = date.split('/')
             for i in range(len(split)):
                 if len(split[i]) == 1:
-                    split[i] = '0%s' % split[i] 
+                    split[i] = '0%s' % split[i]
             split.reverse()
             return '/'.join(split)
 

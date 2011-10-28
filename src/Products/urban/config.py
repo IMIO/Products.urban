@@ -129,6 +129,13 @@ ADDITIONAL_LAYERS_FOLDER="additional_layers"
 #a list where first element is the meetingConfigId and the second, the meta_type name
 URBAN_TYPES = ['BuildLicence','ParcelOutLicence','Declaration', 'Division', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'EnvironmentalDeclaration', ]
 
+#the different templates used to structure a document
+DOCUMENT_STRUCTURE_TEMPLATES = [
+                                {'id':'header', 'title':'Fichier d\'en-tête pour les modèles de document'},
+                                {'id':'footer', 'title':'Fichier de pied de page pour les modèles de document'},
+                                {'id':'reference', 'title':'Fichier gérant la zone \'Référence\' pour les modèles de document'},
+                                {'id':'signatures', 'title':'Fichier gérant les signatures pour les modèles de document'},
+                            ]
 #the different formats proposed for generating document
 GENERATED_DOCUMENT_FORMATS = {'odt':'application/vnd.oasis.opendocument.text' ,'doc':'application/msword'}
 #empty value used for listboxes

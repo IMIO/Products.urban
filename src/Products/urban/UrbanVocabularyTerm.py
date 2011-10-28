@@ -142,7 +142,7 @@ class UrbanVocabulary(object):
         portal_urban = getToolByName(content_instance, 'portal_urban')
         return  portal_urban.listVocabularyObjects(self.path, content_instance, sort_on=self.sort_on,\
             id_to_use=self.id_to_use, vocType=self.vocType, inUrbanConfig=self.inUrbanConfig)
-               
+
 
 ##/code-section module-footer
 

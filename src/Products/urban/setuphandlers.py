@@ -16,8 +16,11 @@ __docformat__ = 'plaintext'
 
 import logging
 logger = logging.getLogger('urban: setuphandlers')
+from Products.urban.config import PROJECTNAME
 from Products.urban.config import DEPENDENCIES
+import os
 from Products.CMFCore.utils import getToolByName
+import transaction
 ##code-section HEAD
 from Acquisition import aq_base
 from Products.urban.config import TOPIC_TYPE
@@ -31,6 +34,7 @@ from zope.i18n.interfaces import ITranslationDomain
 from zope import event
 from Products.Archetypes.event import ObjectInitializedEvent
 from exportimport import addUrbanEventTypes
+from exportimport import addGlobalTemplates
 from Products.urban.utils import generatePassword
 ##/code-section HEAD
 
@@ -667,9 +671,19 @@ def addGlobalFolders(context):
     ),
     )
 
+    #add globaltemplates folder
+    if not hasattr(tool, "globaltemplates"):
+        globaltemplatesFolderid = tool.invokeFactory("Folder",id="globaltemplates",
+                                                     title=_("globaltemplates_folder_title", 'urban', context=site.REQUEST))
+        globaltemplatesFolder = getattr(tool, globaltemplatesFolderid)
+        globaltemplatesFolder.setConstrainTypesMode(1)
+        globaltemplatesFolder.setLocallyAllowedTypes(['File'])
+        globaltemplatesFolder.setImmediatelyAddableTypes(['File'])
+
     #add foldermanagers folder
     if not hasattr(tool, "foldermanagers"):
-        foldermanagersFolderid = tool.invokeFactory("Folder",id="foldermanagers",title=_("foldermanagers_folder_title", 'urban', context=site.REQUEST))
+        foldermanagersFolderid = tool.invokeFactory("Folder",id="foldermanagers",
+                                                    title=_("foldermanagers_folder_title", 'urban', context=site.REQUEST))
         foldermanagersFolder = getattr(tool, foldermanagersFolderid)
         foldermanagersFolder.setConstrainTypesMode(1)
         foldermanagersFolder.setLocallyAllowedTypes(['FolderManager'])
@@ -1173,31 +1187,7 @@ def addTestObjects(context):
         event.notify(ObjectInitializedEvent(organisation_term))
 
     #add some generic templates in configuration
-    gen_templates = { 'templateHeader':'header.odt',
-                 'templateFooter':'footer.odt',
-                 'templateReference':'reference.odt',
-                 'templateSignatures':'signatures.odt',
-                 'templateStyles':'styles.odt',
-                 'templateStatsINS':'statsins.odt',
-                }
-
-    for attribname in gen_templates.keys():
-        try:
-            fld = tool.getField(attribname)
-            if not fld.getAccessor(tool)() or not fld.getAccessor(tool)().size:
-                filePath = '%s/templates/%s' % (context._profile_path, gen_templates[attribname])
-                fileDescr = file(filePath, 'rb')
-                fileContent = fileDescr.read()
-                fld.getMutator(tool)(fileContent)
-                fileDescr.close()
-                fld.setContentType(tool, "application/vnd.oasis.opendocument.text")
-                fld.setFilename(tool, gen_templates[attribname])
-                logger.info("Generic template '%s' added: '%s'"%(attribname, gen_templates[attribname]))
-        except IOError, msg:
-            logger.error("Cannot open the file '%s': %s" %(filePath, msg))
-        except Exception, msg:
-            logger.warn("An error occured while processing the tool '%s' attribute: %s" % (attribname,msg))
-
+    addGlobalTemplates(context)
 
 def importStreets(context):
     #site = context.getSite()

@@ -2,10 +2,25 @@
 from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import moveElementAfter
 from Products.urban.utils import getMd5Signature
+from Products.urban.config import  DOCUMENT_STRUCTURE_TEMPLATES
 import logging
 logger = logging.getLogger('urban: setuphandlers')
 
-log = []
+def loga(msg):
+    logger.warn(msg)
+    return msg
+
+def updateTemplates(context, container, templates, starting_position=''):
+    log = []
+    position_after = starting_position
+    for template in templates:
+       id = "%s.odt" % template['id']
+       filePath = '%s/templates/%s' % (context._profile_path, id)
+       new_content = file(filePath, 'rb').read()
+       log.append(updateTemplate(context, container, template, new_content, position_after))
+       #log[-1][0] is the id of the last template added
+       position_after = log[-1][0] 
+    return log
 
 def updateTemplate(context, container, template, new_content, position_after=''):
     def setProperty(file, property_name, property_value):
@@ -18,7 +33,6 @@ def updateTemplate(context, container, template, new_content, position_after='')
     new_template_id = '%s.odt' % template['id']
     status = [new_template_id]
     new_md5_signature = getMd5Signature(new_content)
-    new_template = None
     old_template = getattr(container, new_template_id, None)
     #if theres an existing template with the same id 
     if old_template:
@@ -29,7 +43,6 @@ def updateTemplate(context, container, template, new_content, position_after='')
             return status
         #else update the template
         else:
-            import pdb; pdb.set_trace()
             old_template.setFile(new_content)
             new_template = old_template
             status.append('updated')
@@ -39,7 +52,7 @@ def updateTemplate(context, container, template, new_content, position_after='')
         new_template = getattr(container, new_template_id)
         status.append('created')
 
-    #thing do to in case we added/updated a new template
+    #to do to if we added/updated a new template: the position in the folder and set some properties
     if position_after:
         moveElementAfter(new_template, container, 'id', position_after)
     else:
@@ -50,10 +63,26 @@ def updateTemplate(context, container, template, new_content, position_after='')
     new_template.reindexObject()
     return status
 
+def addGlobalTemplates(context):
+    """
+    Helper method to add/update the templates at the root of urban config
+    """
+    log = []
+    tool = getToolByName(context.getSite(), 'portal_urban')
+    templates_folder = getattr(tool, 'globaltemplates')
+    templates =  DOCUMENT_STRUCTURE_TEMPLATES
+    templates.append({'id':'styles', 'title':'Fichier gérant les styles utilisés dans les différents modèles de document'})
+    templates.append({'id':'statsins', 'title':'Fichier modèle pour les statistiques INS'})
+    template_log = updateTemplates(context, templates_folder, templates)
+    for status in template_log:
+        if status[1] != 'no changes':
+            log.append(loga("'global templates', template='%s' => %s"%(status[0], status[1])))
+    return '\n'.join(log)
+
 def addUrbanEventTypes(context):
     """
       Helper method for easily adding urbanEventTypes
-      """
+    """
     #add some UrbanEventTypes...
     #get the urbanEventTypes dict from the profile
     #get the name of the profile by taking the last part of the _profile_path
@@ -64,13 +93,7 @@ def addUrbanEventTypes(context):
     except ImportError:
         return
 
-    global log
     log = []
-    
-    def loga(config, evt, tmpl, msg):
-        logger.warn("%s: evt='%s', template='%s' => %s"%(config, evt, tmpl, msg))
-        log.append("%s: evt='%s', template='%s' => %s"%(config, evt, tmpl, msg))
-
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
     #add the UrbanEventType
@@ -79,8 +102,7 @@ def addUrbanEventTypes(context):
             uetFolder = getattr(tool.getUrbanConfig(None, urbanConfigId=urbanConfigId), "urbaneventtypes")
         except AttributeError:
             #if we can not get the urbanConfig, we pass this one...
-            msg = "AttributeError while trying to get the '%s' urbanConfig" % urbanConfigId
-            loga(urbanConfigId, '', '', msg)
+            log.append(loga("AttributeError while trying to get the '%s' urbanConfig" % urbanConfigId))
             continue
         last_urbaneventype_id = None
         for uet in urbanEventTypes[urbanConfigId]:
@@ -96,84 +118,20 @@ def addUrbanEventTypes(context):
                     moveElementAfter(newUet, uetFolder, 'id', last_urbaneventype_id)
                 else:
                     uetFolder.moveObjectToPosition(newUet.getId(), 0)
-                msg = "Created event '%s'" %newUet.Title()
-                loga(urbanConfigId, newUetId, '', 'Created event')
+                log.append(loga("%s: event='%s' => %s"%(urbanConfigId, id, 'created')))
             last_urbaneventype_id = id
-            last_template_id = None
             #add the Files in the UrbanEventType
-            for template in uet['podTemplates']:
-                id = "%s.odt" % template['id']
-                filePath = '%s/templates/%s' % (context._profile_path, id)
-                new_content = file(filePath, 'rb').read()
-                status = updateTemplate(context, newUet , template, new_content, last_template_id)
-                last_template_id = status[0]
+            template_log = updateTemplates(context, newUet, uet['podTemplates'])
+            for status in template_log:
                 if status[1] != 'no changes':
-                    loga(urbanConfigId, last_urbaneventype_id, template['title'], status[1])
+                    log.append(loga("%s: evt='%s', template='%s' => %s"%(urbanConfigId, last_urbaneventype_id, status[0], status[1])))
     return '\n'.join(log)
-    """id = "%s.odt" % template['id']
-                title = template['title']
-                #read odt template
-                filePath = '%s/templates/%s' % (context._profile_path, id)
-                fileDescr = file(filePath, 'rb')
-                fileContent = fileDescr.read()
-                #calculate the md5 for new template
-                md5 = hashlib.md5(fileContent)
-                md5SignatureFS=md5.digest()
-                fileTemplate=getattr(newUet,id,None)
-                #if file exist, we must verify some conditions before update template
-                if fileTemplate:
-                    profileNamePlone=fileTemplate.getProperty("profileName")
+
+    """             profileNamePlone=fileTemplate.getProperty("profileName")
                     #don't modify this templates if
                     #   1. executing profile is tests and profile in use isn't tests
                     #   2. executing profile is 'xxx' and profile in use is 'yyy'
                     if profileNamePlone!="tests" and (profile_name != profileNamePlone or profile_name == "tests"):
                         logger.warn("Processing urbanEventType %s : we pass this template (%s) because executing profile '%s' isnt't compatible with this profil (%s)" %(last_urbaneventype_id,title,profile_name.encode(),profileNamePlone.encode()))
                         loga(urbanConfigId, last_urbaneventype_id, title, "Passed because executing profile '%s' isnt't compatible with this profil (%s)"%(profile_name.encode(),profileNamePlone.encode()))
-                        continue
-                    #get the md5 in property of current template
-                    md5SignatureProperty=fileTemplate.getProperty("md5Signature")
-                    #calculate the md5 for current template
-                    md5 = hashlib.md5(fileTemplate.data)
-                    md5SignaturePlone=md5.digest()
-                    #don't modify this template if
-                    #   1. current template was manually modified by user
-                    #   2. the new template is the same that the current
-                    if md5SignaturePlone!=md5SignatureProperty:
-                        logger.warn("Processing urbanEventType %s : we pass the template '%s' because it is manually modified" %(last_urbaneventype_id,title))
-                        loga(urbanConfigId, last_urbaneventype_id, title, 'Passed because manually modified')
-                        continue
-                    elif md5SignatureFS == md5SignaturePlone:
-                        continue
-                    newUetFile=fileTemplate
-                    newUetFile.setFile(fileContent)
-                    msg = "Updated template %s" %title
-                    logger.warn(msg)
-                    loga(urbanConfigId, last_urbaneventype_id, title, "Updated")
-                #if file not exist, we can create template
-                else:
-                    newUetFileId = newUet.invokeFactory("File", id=id, title=title, file=fileContent)
-                    newUetFile = getattr(newUet, newUetFileId)
-                    if last_template_id:
-                        moveElementAfter(newUetFile, newUet, 'id', last_template_id)
-                    else:
-                        newUetFile.moveObjectToPosition(newUetFile.getId(), 0)
-                    msg = "Added new template %s" %title
-                    logger.warn(msg)
-                    loga(urbanConfigId, last_urbaneventype_id, title, "Added")
-                last_template_id = id
-                #modify template's content
-                newUetFile.setContentType("application/vnd.oasis.opendocument.text")
-                newUetFile.setFilename(id)
-                logger.info("Template '%s' modify" %title)
-                #modify properties
-                dictProperties=dict(newUetFile.propertyItems())
-                if dictProperties.has_key("md5Signature"):
-                    newUetFile.manage_changeProperties({"md5Signature":md5SignatureFS})
-                else:
-                    newUetFile.manage_addProperty("md5Signature",md5SignatureFS,"string")
-                if dictProperties.has_key("profileName"):
-                    newUetFile.manage_changeProperties({"profileName":profile_name})
-                else:
-                    newUetFile.manage_addProperty("profileName",profile_name,"string")
-                newUetFile.reindexObject()"""
-#    return '\n'.join(log)
+                        continue"""
