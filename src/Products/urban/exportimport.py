@@ -31,14 +31,16 @@ def updateTemplate(context, container, template, new_content, position_after='')
             file.manage_addProperty(property_name, property_value, "string")
     
     new_template_id = '%s.odt' % template['id']
+    profile_name = context._profile_path.split('/')[-1]
     status = [new_template_id]
     new_md5_signature = getMd5Signature(new_content)
     old_template = getattr(container, new_template_id, None)
     #if theres an existing template with the same id 
     if old_template:
         #check the md5
-        #if no difference in the content, then do nothing
-        if new_md5_signature == old_template.getProperty("md5Signature"):
+        #if no difference in the content or not in the good profile, then do nothing
+        if (new_md5_signature == old_template.getProperty("md5Signature")) \
+        or (profile_name != old_template.getProperty("profileName") != 'tests'):
             status.append('no changes')
             return status
         #else update the template
@@ -57,23 +59,32 @@ def updateTemplate(context, container, template, new_content, position_after='')
         moveElementAfter(new_template, container, 'id', position_after)
     else:
         container.moveObjectToPosition(new_template.getId(), 0)
-    profile_name = context._profile_path.split('/')[-1]
     for property, value in {'profileName':profile_name, 'md5Signature':new_md5_signature}.items():
         setProperty(new_template, property, value)
     new_template.reindexObject()
     return status
 
+def updateAllUrbanTemplates(context):
+    if context.readDataFile('urban_tests_marker.txt') is None:
+        return
+    addGlobalTemplates(context)
+    addUrbanEventTypes(context)
+
 def addGlobalTemplates(context):
     """
     Helper method to add/update the templates at the root of urban config
     """
+    profile_name = context._profile_path.split('/')[-1]
+    from_string = "from Products.urban.profiles.%s.data import globalTemplates" % profile_name
+    try:
+        exec(from_string) in locals()
+    except ImportError:
+        return
+
     log = []
     tool = getToolByName(context.getSite(), 'portal_urban')
     templates_folder = getattr(tool, 'globaltemplates')
-    templates =  DOCUMENT_STRUCTURE_TEMPLATES
-    templates.append({'id':'styles', 'title':'Fichier gérant les styles utilisés dans les différents modèles de document'})
-    templates.append({'id':'statsins', 'title':'Fichier modèle pour les statistiques INS'})
-    template_log = updateTemplates(context, templates_folder, templates)
+    template_log = updateTemplates(context, templates_folder, globalTemplates)
     for status in template_log:
         if status[1] != 'no changes':
             log.append(loga("'global templates', template='%s' => %s"%(status[0], status[1])))

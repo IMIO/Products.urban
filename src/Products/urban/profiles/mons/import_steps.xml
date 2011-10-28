@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <import-steps>
 <import-step
-            id="urban-addMonsUrbanEventTypes"
-            handler="Products.urban.exportimport.addUrbanEventTypes"
-            title="Add specific urbanEventTypes for Mons"
+            id="urban-MonsUpdateTemplates"
+            handler="Products.urban.profiles.mons.exportimport.updateAllUrbanTemplate"
+            title="Add specific urbanEventTypes and update templates for Mons"
             version="2011-04-11T14:00:00.00000">
-Add specific urbanEventTypes for Mons
+USE THIS TO UPDATE TEMPLATES for Mons
 </import-step>
 </import-steps>

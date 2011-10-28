@@ -35,7 +35,7 @@ class TestUrbanEventTypes(unittest.TestCase):
         my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertEqual(my_file_odt.ModificationDate(),my_update_file_datetime)
         # 3)
-        self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune1','urban-addCommune1UrbanEventTypes')    
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune1','urban-Commune1UpdateTemplates')    
         my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertNotEqual(my_file_odt.ModificationDate(),my_update_file_datetime)
         my_update_file_datetime = my_file_odt.ModificationDate() #warning, date have changed        
@@ -44,7 +44,7 @@ class TestUrbanEventTypes(unittest.TestCase):
         my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertEqual(my_file_odt.ModificationDate(),my_update_file_datetime)         
         # 5)
-        self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune2','urban-addCommune1UrbanEventTypes')
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune2','urban-Commune2UpdateTemplates')
         my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertEqual(my_file_odt.ModificationDate(),my_update_file_datetime)        
         # 6)
@@ -60,6 +60,6 @@ class TestUrbanEventTypes(unittest.TestCase):
         my_file_odt.manage_changeProperties({"md5Signature":'aaaaaaa'})
         my_file_odt.reindexObject()
         my_update_file_datetime = my_file_odt.ModificationDate() #warning, date have changed by manage_changeProperties
-        self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune1','urban-addCommune1UrbanEventTypes')   
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune1','urban-Commune1UpdateTemplates')   
         my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertEqual(my_file_odt.ModificationDate(),my_update_file_datetime)
