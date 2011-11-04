@@ -2,7 +2,6 @@
 from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import moveElementAfter
 from Products.urban.utils import getMd5Signature
-from Products.urban.config import  DOCUMENT_STRUCTURE_TEMPLATES
 import logging
 logger = logging.getLogger('urban: setuphandlers')
 
@@ -137,12 +136,3 @@ def addUrbanEventTypes(context):
                 if status[1] != 'no changes':
                     log.append(loga("%s: evt='%s', template='%s' => %s"%(urbanConfigId, last_urbaneventype_id, status[0], status[1])))
     return '\n'.join(log)
-
-    """             profileNamePlone=fileTemplate.getProperty("profileName")
-                    #don't modify this templates if
-                    #   1. executing profile is tests and profile in use isn't tests
-                    #   2. executing profile is 'xxx' and profile in use is 'yyy'
-                    if profileNamePlone!="tests" and (profile_name != profileNamePlone or profile_name == "tests"):
-                        logger.warn("Processing urbanEventType %s : we pass this template (%s) because executing profile '%s' isnt't compatible with this profil (%s)" %(last_urbaneventype_id,title,profile_name.encode(),profileNamePlone.encode()))
-                        loga(urbanConfigId, last_urbaneventype_id, title, "Passed because executing profile '%s' isnt't compatible with this profil (%s)"%(profile_name.encode(),profileNamePlone.encode()))
-                        continue"""

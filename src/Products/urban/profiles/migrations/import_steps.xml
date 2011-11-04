@@ -176,4 +176,11 @@
     version="2011-09-24T11:00.0">
     Migrate foldermanagers: move them to a single folder and set a value to the field 'manageableLicences'
  </import-step>
+ <import-step
+    id="urban-migrateGlobalTemplates"
+    handler="Products.urban.profiles.migrations.migrate.migrateGlobalTemplates"
+    title="Migrate the global templates of urbanTool in the globaltemplates folder"
+    version="2011-09-24T11:00.0">
+    Migrate global templates: move them to a single folder'
+ </import-step>
 </import-steps>

@@ -13,6 +13,8 @@ from Products.contentmigration.archetypes import InplaceATFolderMigrator, Inplac
 from Products.urban.events.urbanEventInquiryEvents import setLinkedInquiry
 from Products.urban.events.urbanEventEvents import setEventTypeType, setCreationDate
 from Products.urban.interfaces import ILicenceContainer
+from Products.urban.utils import getMd5Signature
+from Products.urban.config import DOCUMENT_STRUCTURE_TEMPLATES
 
 logger = logging.getLogger('urban: migrations')
 
@@ -975,3 +977,34 @@ def addInvestigationArticlesToBuildLicenceConfig(context):
     addInvestigationArticles(context, configFolder)
     logger.info("Adding default investigation articles in the BuildLicence LicenceConfig: done!")
 
+
+def migrateGlobalTemplates(context):
+    """
+    Helper method to move the global templates of urbanTool in the globaltemplates folder
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+    tool = getattr(site, 'portal_urban')
+    templates_folder = getattr(tool, 'globaltemplates')
+    DST = DOCUMENT_STRUCTURE_TEMPLATES 
+    old_templates = {
+        'header':(tool.templateHeader, DST[0]),
+        'footer':(tool.templateFooter, DST[1]),
+        'reference':(tool.templateReference, DST[2]),
+        'signatures':(tool.templateSignatures, DST[3]),
+    }
+
+    for template_id, template_infos in old_templates.items():
+        templates_folder.invokeFactory("File", id=template_id, title=template_infos[1]['title'], file=template_infos[0].data)
+        template = getattr(templates_folder, template_id)
+        properties = dict(template.propertyItems())
+        id = "%s.odt" % template_id
+        file_path = '%s/%s/templates/%s' %('/'.join(context._profile_path.split('/')[:-1]), 'tests', id)
+        filesystem_template = file(file_path, 'rb').read()
+        if 'md5Signature' not in properties.keys():
+            md5_signature = getMd5Signature(filesystem_template)
+            template.manage_addProperty('md5Signature', md5_signature, "string")
+        if 'profileName' not in properties.keys():
+            template.manage_addProperty('profileName', 'tests', "string")
+        delattr(tool, template_infos[0].getId())
