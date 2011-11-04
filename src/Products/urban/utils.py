@@ -7,13 +7,14 @@ import hashlib
 
 def moveElementAfter(object_to_move, container, attr_name, attr_value_to_match):
     new_position = container.getObjectPosition(object_to_move.getId())
-    for content in container.objectValues():
-        attr = getattr(content, attr_name)
-        if isinstance(attr, unicode):
-            attr = attr.encode()
-        if getattr(content, attr_name) == attr_value_to_match and object_to_move != content:
-            new_position = 1 + container.getObjectPosition(content.getId())
-    container.moveObjectToPosition(object_to_move.getId(), new_position)
+    contents = container.objectValues()
+    indexes = range(len(contents))
+    indexes.reverse()
+    for i in indexes:
+        if getattr(contents[i], attr_name) == attr_value_to_match and object_to_move != contents[i]:
+            new_position = 1 + container.getObjectPosition(contents[i].getId())
+            container.moveObjectToPosition(object_to_move.getId(), new_position)
+            return
 
 def generatePassword(length):
     return ''.join(random.choice(string.ascii_letters + string.digits) for x in range(length))
