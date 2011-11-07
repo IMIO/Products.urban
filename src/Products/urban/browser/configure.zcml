@@ -44,6 +44,14 @@
   />
 
   <browser:page
+     for="*"
+     name="searchparcels"
+     class=".searchparcelsview.SearchParcelsView"
+     template="templates/searchparcels.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
      name="urban_view"
      class=".urbanview.UrbanView"

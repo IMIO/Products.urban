@@ -649,9 +649,8 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                      showedCols python: ('Title',);">
      <metal:listing use-macro="here/urban_macros/macros/listing" />
     </div>
-     <form tal:condition="python: member.has_permission('urban: Add PortionOut', context)" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/checkPortionsOutSearch'" action="checkPortionsOutSearch" method="post" tal:define="ctype python: context.portal_types.getTypeInfo('PortionOut')">
-      <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
-      <input type="submit" class="contenttype-portionout button-portionout" id="event" value="search_parcels" i18n:attributes="value" />
+     <form tal:condition="python: member.has_permission('urban: Add PortionOut', context)" name="quickAdd" tal:attributes="action python: context.absolute_url() + '/searchparcels'" action="searchparcels" method="post">
+      <input type="submit" class="contenttype-portionout button-portionout" id="addPortionOut" value="search_parcels" i18n:attributes="value" />
      </form>
    </div>
   </td>

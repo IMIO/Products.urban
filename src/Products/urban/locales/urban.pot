@@ -112,6 +112,26 @@ msgstr ""
 msgid "Search parcel(s)"
 msgstr ""
 
+#. Default: "Choose one of the following forms to search for parcels.  You can cumulate criteria if you exactly know what you are looking for"
+msgid "help_search_parcels"
+msgstr ""
+
+#. Default: "You can not search for parcels for now because there was a problem.  Please contact your system administrator and give him the red error message here above"
+msgid "help_search_connection_problem"
+msgstr ""
+
+#. Default: "Proprietary"
+msgid "urban_search_parcel_by_proprietary"
+msgstr ""
+
+#. Default: "Location"
+msgid "urban_search_parcel_by_location"
+msgstr ""
+
+#. Default: "Cadastral reference"
+msgid "urban_search_parcel_by_cadastral_reference"
+msgstr ""
+
 msgid "See more..."
 msgstr ""
 

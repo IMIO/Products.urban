@@ -536,6 +536,14 @@ msgstr "Géomètres"
 msgid "globaltemplates_folder_title"
 msgstr "Modèles généraux"
 
+#. Default: "You can not search for parcels for now because there was a problem.  Please contact your system administrator and give him the red error message here above"
+msgid "help_search_connection_problem"
+msgstr "Vous ne pouvez pas effectuer de recherche pour l'instant car une erreur s'est produite.  Contactez votre aministrateur système et donnez lui le message d'erreur affiché en rouge ci-dessus."
+
+#. Default: "Choose one of the following forms to search for parcels.  You can cumulate criteria if you exactly know what you are looking for"
+msgid "help_search_parcels"
+msgstr "Choisissez une des 3 recherches ci-dessous.  Si vous savez exactement ce que vous cherchez, vous pouvez croiser les critères de recherche (encoder l'adresse et le nom du propriétaire par exemple)"
+
 msgid "inquiry_data"
 msgstr "Données concernant l'enquête"
 
@@ -2243,6 +2251,18 @@ msgstr "Recherche de dossiers"
 
 msgid "urban_search_parameters"
 msgstr "Critères de la recherche"
+
+#. Default: "Cadastral reference"
+msgid "urban_search_parcel_by_cadastral_reference"
+msgstr "Référence cadastrale"
+
+#. Default: "Location"
+msgid "urban_search_parcel_by_location"
+msgstr "Adresse"
+
+#. Default: "Proprietary"
+msgid "urban_search_parcel_by_proprietary"
+msgstr "Propriétaire"
 
 msgid "urban_search_result"
 msgstr "Résultat de la recherche"
