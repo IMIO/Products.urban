@@ -201,15 +201,16 @@ padding-top: 3px;
 .icons-on .contenttype-urbaneventinquiry {background: no-repeat transparent 0px -2590px url(urban-sprite.png);}
 .icons-on .contenttype-urbaneventopinionrequest {background: no-repeat transparent 0px -2590px url(urban-sprite.png);}
 
-.icons-on .contenttype-buildlicence,
 .icons-on .contenttype-applicant,
 .icons-on .contenttype-architect,
-.icons-on .contenttype-geometrician,
-.icons-on .contenttype-notary,
+.icons-on .contenttype-buildlicence,
 .icons-on .contenttype-declaration,
 .icons-on .contenttype-division,
 .icons-on .contenttype-environmentaldeclaration,
+.icons-on .contenttype-foldermanager,
+.icons-on .contenttype-geometrician,
 .icons-on .contenttype-inquiry,
+.icons-on .contenttype-notary,
 .icons-on .contenttype-notaryletter,
 .icons-on .contenttype-parceloutlicence,
 .icons-on .contenttype-portionout,
