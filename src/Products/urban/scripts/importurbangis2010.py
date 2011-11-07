@@ -586,12 +586,13 @@ if step in run_steps:
                     line =  line.strip('\n')
                     if not line: continue
                     path, file, port = line.split(';')
+                    port = int(port)
                     if os.path.join(path, 'config', file) == os.path.join(config_dir, databasename):
                         instance_exists = True
-                        max_port = int(port)
+                        max_port = port
                         break
                     if port > max_port:
-                        max_port = int(port)
+                        max_port = port
                 ifile.close()
             if not max_port or not instance_exists:
                 max_port += 1
