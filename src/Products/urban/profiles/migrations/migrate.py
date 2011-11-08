@@ -921,6 +921,8 @@ def migrateFoldermanagers(context):
     logger.info("Migrating Foldermanagers: starting...")
 
     portal = context.getSite()
+    #from plone.app.referenceintegrity.config import DisableRelationshipsProtectionTemporarily
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
     tool = portal.portal_urban
     #create the new folder 'foldermanagers' at urban cfg root
     foldermanagers_folder = None

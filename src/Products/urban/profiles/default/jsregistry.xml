@@ -24,7 +24,7 @@
              cookable="True"
              enabled="True"
              expression="context/showEditTabbing"
-             id="urbanedittabbing.js"
+             id="form_tabbing.js"
              inline="False"/> 
  <!-- ##/code-section jsregistry.xml -->
 
