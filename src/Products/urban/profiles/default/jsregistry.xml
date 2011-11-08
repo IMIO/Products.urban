@@ -24,6 +24,14 @@
              cookable="True"
              enabled="True"
              expression="context/showEditTabbing"
+             id="urbanedittabbing.js"
+             inline="False"/> 
+
+ <javascript cacheable="True"
+             compression="safe"
+             cookable="True"
+             enabled="True"
+             expression="not:context/showEditTabbing"
              id="form_tabbing.js"
              inline="False"/> 
  <!-- ##/code-section jsregistry.xml -->
