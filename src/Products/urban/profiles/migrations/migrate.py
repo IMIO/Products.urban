@@ -942,9 +942,10 @@ def migrateFoldermanagers(context):
         old_folder = licence_cfg_folder.foldermanagers
         #set the value for the field 'ManageableLicences' depending on the licence type 
         #where we found the foldermanagers
-        for foldermanager in old_folder.objectValues():
-            foldermanager_id = foldermanager.getId()
+        for old_foldermanager in old_folder.objectValues():
+            foldermanager_id = old_foldermanager.getId()
             if foldermanager_id not in foldermanager_ids.keys():
+                foldermanager = old_foldermanager
                 foldermanager.setManageableLicences([licence_type])
                 foldermanager_ids[foldermanager_id] = foldermanager
                 ids_to_move.append(foldermanager_id)
@@ -955,6 +956,16 @@ def migrateFoldermanagers(context):
                     manageable_licences.append(licence)
                 manageable_licences.append(licence_type)
                 foldermanager.setManageableLicences(manageable_licences)
+
+            for licence in old_foldermanager.getBRefs():
+                ref_foldermanagers = licence.getFoldermanagers()
+                try:
+                    i = ref_foldermanagers.index(old_foldermanager)
+                    ref_foldermanagers[i] = foldermanager
+                    licence.setFoldermanagers(ref_foldermanagers)
+                    licence.reindexObject()
+                except ValueError, msg:
+                    logger.error("Error on licence '%s' when searching architect '%s', msg='%s'"%(licence.Title(), foldermanager.Title(),msg))
         #move the foldermanager objects
         cut_data = old_folder.manage_cutObjects(ids_to_move)
         foldermanagers_folder.manage_pasteObjects(cut_data)
@@ -962,7 +973,7 @@ def migrateFoldermanagers(context):
         licence_cfg_folder.manage_delObjects(['foldermanagers'])
 
     logger.info("Migrating Foldermanagers: done!")
-
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
 
 
 def addInvestigationArticlesToBuildLicenceConfig(context):
