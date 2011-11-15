@@ -52,7 +52,8 @@ def _createTemporayTemplateStyle(tool):
     """
         create Temporary file from template style
     """
-    templateStyles = tool.getTemplateStyles()
+    global_templates = getattr(tool, 'globaltemplates')
+    templateStyles = getattr(global_templates, 'styles.odt')
     if templateStyles and templateStyles.size:
         #save in temporary file, the templateStyles
         templateStylesFileName = '%s/%s_%f.%s' % (getOsTempFolder(), 'templateStyles', time.time(),'odt')

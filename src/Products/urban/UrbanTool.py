@@ -441,7 +441,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         response.redirect(urbanEventObj.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
 
     security.declarePublic('listVocabulary')
-    def listVocabulary(self, vocToReturn, context, vocType="UrbanVocabularyTerm", id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled']):
+    def listVocabulary(self, vocToReturn, context, vocType=["UrbanVocabularyTerm", "OrganisationTerm"], id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled']):
         """
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
@@ -465,7 +465,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return tuple(res)
 
     security.declarePrivate('listVocabularyBrains')
-    def listVocabularyBrains(self, vocToReturn, context, vocType="UrbanVocabularyTerm", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled']):
+    def listVocabularyBrains(self, vocToReturn, context, vocType=["UrbanVocabularyTerm", "OrganisationTerm"], sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled']):
         """
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes

@@ -553,10 +553,19 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
         urbantool = getToolByName(self,'portal_urban')
         return urbantool.listVocabulary('folderprotectedbuildings', self)
 
+    security.declarePublic('templateMissingPartsFullname')
+    def templateMissingPartsFullname(self, abreviation):
+        urbantool = getToolByName(self, 'portal_urban')
+        listVoc = urbantool.listVocabulary('missingparts', self)
+        for pair in listVoc:
+            if abreviation in pair:
+                return pair[1]
+        return ''
+
     security.declarePublic('templateZonesFullname')
     def templateZonesFullname(self, abreviation):
         urbantool = getToolByName(self,'portal_urban')
-        listVoc = urbantool.listVocabulary('folderzones', self)
+        listVoc = urbantool.listVocabulary(vocToReturn='folderzones', context=self, inUrbanConfig=False)
         for pair in listVoc:
             if abreviation in pair:
                 return pair[1]
