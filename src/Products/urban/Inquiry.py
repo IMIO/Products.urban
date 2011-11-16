@@ -26,6 +26,10 @@ from Products.urban.config import *
 from zope.i18n import translate
 from OFS.ObjectManager import BeforeDeleteException
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.utils import setOptionalAttributes
+
+optional_fields = ['derogationDetails', 'investigationDetails',
+                   'investigationReasons',]
 ##/code-section module-header
 
 schema = Schema((
@@ -139,6 +143,7 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 Inquiry_schema = BaseSchema.copy() + \

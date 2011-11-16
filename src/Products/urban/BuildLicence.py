@@ -569,6 +569,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('investigationDetails', after='investigationEnd')
     schema.moveField('investigationReasons', after='investigationDetails')
     schema.moveField('solicitOpinionsTo', after='investigationReasons')
+    schema.moveField('investigationOralReclamationNumber', after='solicitOpinionsTo')
+    schema.moveField('investigationWriteReclamationNumber', after='investigationOralReclamationNumber')
     schema.moveField('folderCategoryTownship', after='folderCategory')
     return schema
 
