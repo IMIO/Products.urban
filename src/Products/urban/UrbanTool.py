@@ -35,7 +35,7 @@ import psycopg2.extras
 import os, time
 from DateTime import DateTime
 from StringIO import StringIO
-from AccessControl import getSecurityManager, Unauthorized
+from AccessControl import getSecurityManager
 from Acquisition import aq_base
 from zope.i18n import translate
 from Products.CMFPlone import PloneMessageFactory as _
@@ -44,10 +44,9 @@ from Products.CMFCore.Expression import Expression
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFPlone.PloneBatch import Batch
 from Products.PageTemplates.Expressions import getEngine
-from Products.ZCTextIndex.ParseTree import ParseError
 from Products.urban.utils import getOsTempFolder
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS
-from Products.urban.config import DOCUMENT_STRUCTURE_TEMPLATES
+from Products.urban.config import GLOBAL_TEMPLATES
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
@@ -391,12 +390,19 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         except:
             collegesubmissionobj=None
         global_templates = getattr(self, 'globaltemplates')
-        for generic_template in DOCUMENT_STRUCTURE_TEMPLATES:
-            template = getattr(global_templates, '%s.odt' % generic_template['id'])
+        #in the global_templates, only some of these templates must be taken into account
+        auto_imported_template_ids = ['header.odt', 'footer.odt', 'reference.odt', 'signatures.odt']
+        for generic_template in GLOBAL_TEMPLATES:
+            #do only import necessary templates if exists...
+            if not generic_template['id'] in auto_imported_template_ids or \
+               not hasattr(aq_base(global_templates), generic_template['id']):
+                continue
+            template = getattr(global_templates, generic_template['id'])
             if template and template.size:
                 template = StringIO(template)
                 temp_file_name= '%s/%s_%f.%s' % (getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'odt')
-                temp_file_names[generic_template['id']] = temp_file_name
+                #remove the '.odt' suffix so terms like "header" can be used in the templates instead of "header.odt"
+                temp_file_names[generic_template['id'][:-4]] = temp_file_name
                 #we render the template so pod instructions into the generic sub-templates are rendered too
                 renderer = appy.pod.renderer.Renderer(template,
                                                       {'self': licenceFolder, 'urbanEventObj':urbanEventObj,
@@ -406,7 +412,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 renderer.run()
         #now that sub-templates are rendered, we can use them in the main pod template and render the entire document
         #we prepare the styles template
-        templateStyles = getattr(global_templates, 'styles.odt')
+        templateStyles = getattr(global_templates, 'styles.odt', None)
         if templateStyles and templateStyles.size:
             templateStyles = StringIO(templateStyles)
         dict_arg = {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,

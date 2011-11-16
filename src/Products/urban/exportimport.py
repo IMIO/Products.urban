@@ -13,12 +13,15 @@ def updateTemplates(context, container, templates, starting_position=''):
     log = []
     position_after = starting_position
     for template in templates:
-       id = "%s.odt" % template['id']
-       filePath = '%s/templates/%s' % (context._profile_path, id)
-       new_content = file(filePath, 'rb').read()
-       log.append(updateTemplate(context, container, template, new_content, position_after))
-       #log[-1][0] is the id of the last template added
-       position_after = log[-1][0] 
+        template_id = template['id']
+        #in the case of GLOBAL_TEMPLATES, the id already ends with '.odt'
+        if not template_id.endswith('.odt'):
+            template_id = "%s.odt" % template_id
+        filePath = '%s/templates/%s' % (context._profile_path, template_id)
+        new_content = file(filePath, 'rb').read()
+        log.append(updateTemplate(context, container, template, new_content, position_after))
+        #log[-1][0] is the id of the last template added
+        position_after = log[-1][0] 
     return log
 
 def updateTemplate(context, container, template, new_content, position_after=''):
@@ -28,8 +31,11 @@ def updateTemplate(context, container, template, new_content, position_after='')
             file.manage_changeProperties({property_name:property_value})
         else:
             file.manage_addProperty(property_name, property_value, "string")
-    
-    new_template_id = '%s.odt' % template['id']
+
+    new_template_id = template['id']
+    #in the case of GLOBAL_TEMPLATES, the id already ends with '.odt'
+    if not new_template_id.endswith('.odt'):
+        new_template_id = "%s.odt" % new_template_id
     profile_name = context._profile_path.split('/')[-1]
     status = [new_template_id]
     new_md5_signature = getMd5Signature(new_content)

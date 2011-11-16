@@ -130,12 +130,14 @@ ADDITIONAL_LAYERS_FOLDER="additional_layers"
 URBAN_TYPES = ['BuildLicence','ParcelOutLicence','Declaration', 'Division', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'EnvironmentalDeclaration', ]
 
 #the different templates used to structure a document
-DOCUMENT_STRUCTURE_TEMPLATES = [
-                                {'id':'header', 'title':'Fichier d\'en-tête pour les modèles de document'},
-                                {'id':'footer', 'title':'Fichier de pied de page pour les modèles de document'},
-                                {'id':'reference', 'title':'Fichier gérant la zone \'Référence\' pour les modèles de document'},
-                                {'id':'signatures', 'title':'Fichier gérant les signatures pour les modèles de document'},
-                            ]
+GLOBAL_TEMPLATES = [
+                    {'id':'header.odt', 'title':'Fichier d\'en-tête pour les modèles de document'},
+                    {'id':'footer.odt', 'title':'Fichier de pied de page pour les modèles de document'},
+                    {'id':'reference.odt', 'title':'Fichier gérant la zone \'Référence\' pour les modèles de document'},
+                    {'id':'signatures.odt', 'title':'Fichier gérant les signatures pour les modèles de document'},
+                    {'id':'statsins.odt', 'title':'Fichier modèle pour les statistiques INS'},
+                    {'id':'styles.odt', 'title':'Fichier gérant les styles communs aux différents modèles de document'},
+                   ]
 #the different formats proposed for generating document
 GENERATED_DOCUMENT_FORMATS = {'odt':'application/vnd.oasis.opendocument.text' ,'doc':'application/msword'}
 #empty value used for listboxes

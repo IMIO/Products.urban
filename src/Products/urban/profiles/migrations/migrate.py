@@ -14,7 +14,7 @@ from Products.urban.events.urbanEventInquiryEvents import setLinkedInquiry
 from Products.urban.events.urbanEventEvents import setEventTypeType, setCreationDate
 from Products.urban.interfaces import ILicenceContainer
 from Products.urban.utils import getMd5Signature
-from Products.urban.config import DOCUMENT_STRUCTURE_TEMPLATES
+from Products.urban.config import GLOBAL_TEMPLATES
 
 logger = logging.getLogger('urban: migrations')
 
@@ -999,21 +999,25 @@ def migrateGlobalTemplates(context):
 
     site = context.getSite()
     tool = getattr(site, 'portal_urban')
+    if not hasattr(tool, 'templateHeader'):
+        #the migration has already been runned, return
+        return
     templates_folder = getattr(tool, 'globaltemplates')
-    DST = DOCUMENT_STRUCTURE_TEMPLATES 
+    GT = GLOBAL_TEMPLATES
     old_templates = {
-        'header':(tool.templateHeader, DST[0]),
-        'footer':(tool.templateFooter, DST[1]),
-        'reference':(tool.templateReference, DST[2]),
-        'signatures':(tool.templateSignatures, DST[3]),
+        'header.odt':(tool.templateHeader, GT[0]),
+        'footer.odt':(tool.templateFooter, GT[1]),
+        'reference.odt':(tool.templateReference, GT[2]),
+        'signatures.odt':(tool.templateSignatures, GT[3]),
+        'statsins.odt':(tool.templateStatsINS, GT[4]),
+        'styles.odt':(tool.templateStyles, GT[5]),
     }
 
     for template_id, template_infos in old_templates.items():
-        templates_folder.invokeFactory("File", id=template_id, title=template_infos[1]['title'], file=template_infos[0].data)
-        template = getattr(templates_folder, template_id)
+        newtemplate_id = templates_folder.invokeFactory("File", id=template_id, title=template_infos[1]['title'], file=template_infos[0].data)
+        template = getattr(templates_folder, newtemplate_id)
         properties = dict(template.propertyItems())
-        id = "%s.odt" % template_id
-        file_path = '%s/%s/templates/%s' %('/'.join(context._profile_path.split('/')[:-1]), 'tests', id)
+        file_path = '%s/%s/templates/%s' %('/'.join(context._profile_path.split('/')[:-1]), 'tests', template_id)
         filesystem_template = file(file_path, 'rb').read()
         if 'md5Signature' not in properties.keys():
             md5_signature = getMd5Signature(filesystem_template)
