@@ -4,6 +4,7 @@ import logging
 
 from zope.interface import alsoProvides
 from zope.i18n import translate as _
+from zope import event
 
 from Acquisition import aq_base
 
@@ -15,6 +16,7 @@ from Products.urban.events.urbanEventEvents import setEventTypeType, setCreation
 from Products.urban.interfaces import ILicenceContainer
 from Products.urban.utils import getMd5Signature
 from Products.urban.config import GLOBAL_TEMPLATES
+from Products.Archetypes.event import ObjectInitializedEvent
 
 logger = logging.getLogger('urban: migrations')
 
