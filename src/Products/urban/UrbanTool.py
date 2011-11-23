@@ -1446,7 +1446,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     security.declarePublic('queryCatalog')
     def queryCatalog(self, batch, context, specificSearch, theObjects=False, batchlen=20):
         """
-          This method is used in the templates to search if a topic is not used
+          This method is used in the templates to display content in listing tables
         """
         portal_catalog = getToolByName(self, 'portal_catalog')
         if specificSearch == 'searchUrbanEvents':
@@ -1479,6 +1479,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         elif specificSearch == 'searchLinkedDocuments':
             #search the existing recipients
             res = portal_catalog(portal_type='File', path='/'.join(context.getPhysicalPath()), sort_on='created')
+        elif specificSearch == 'searchLastElements':
+            #search the existing elements depending on the folder we are in
+            res = portal_catalog(portal_type=URBAN_TYPES, path='/'.join(context.getPhysicalPath()), sort_on='created', sort_order='reverse')
         else:
             res = []
         if theObjects:
