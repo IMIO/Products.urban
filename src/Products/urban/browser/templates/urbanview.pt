@@ -95,7 +95,7 @@
         <fieldset tal:define="tool python: getattr(context, 'portal_urban');">
          <strong><legend i18n:domain="urban" i18n:translate="search-last-elements">Last elements</legend></strong>
          <div tal:define="tool python: context.portal_urban;
-                          batch python: tool.queryCatalog(batch=True, specificSearch='searchLastElements', context=context, theObjects=False, batchlen=50);
+                          batch python: tool.queryCatalog(batch=True, specificSearch='searchLastElements', context=context, theObjects=False, batchlen=20);
                           showedCols python: ('Title', 'created', 'Creator', );
                           showActions python: True;">
           <metal:listing use-macro="here/urban_macros/macros/listing" />
