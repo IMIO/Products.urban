@@ -42,10 +42,14 @@ def updateTemplate(context, container, template, new_content, position_after='')
     old_template = getattr(container, new_template_id, None)
     #if theres an existing template with the same id 
     if old_template:
-        #check the md5
-        #if no difference in the content or not in the good profile, then do nothing
-        if (new_md5_signature == old_template.getProperty("md5Signature")) \
-        or (profile_name != old_template.getProperty("profileName") != 'tests'):
+        #if not in the correct profile -> no changes
+        if profile_name != old_template.getProperty("profileName") != 'tests':
+            status.append('no changes')
+            return status
+        #if in the correct profile but old template has been customised or has the same content than the new one -> no changes
+        elif profile_name == old_template.getProperty("profileName") \
+        and (getMd5Signature(old_template.getFile().getBlob().open().read()) != old_template.getProperty("md5Signature") \
+        or new_md5_signature == old_template.getProperty("md5Signature")):
             status.append('no changes')
             return status
         #else update the template

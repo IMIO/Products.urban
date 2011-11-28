@@ -22,7 +22,10 @@ class TestUrbanEventTypes(unittest.TestCase):
             4) update template testCommune1 by profil test: do nothing
             5) update template testCommune1 by profil testCommune2: do nothing
             6) modify the value of property profilename (testCommune1) by (tests) and launch test profile : replace template
-            7) modify the value of property md5Signature and update template test by profil testCommune1 : do nothing
+            7) modify the value of property md5Signature and update template test by profil testCommune1 : replace template 
+               because the template profile is 'test' so we override it
+            8) change the value of property md5Signature, set the value of property profileName to testCommune1 and update template test 
+               by profil testCommune1 : do nothing because template has been customised
         """
         # 1)
         my_accuse_folder = getattr(self.portal_urban.buildlicence.urbaneventtypes,'accuse-de-reception',None)
@@ -57,6 +60,13 @@ class TestUrbanEventTypes(unittest.TestCase):
         self.assertNotEqual(my_file_odt.modified(),my_update_file_datetime)
         # 7) 
         my_file_odt.manage_changeProperties({"md5Signature":'aaaaaaa'})
+        my_update_file_datetime = my_file_odt.modified() #warning, date have changed by manage_changeProperties
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune1','urban-Commune1UpdateTemplates')   
+        my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
+        self.assertNotEqual(my_file_odt.modified(),my_update_file_datetime)
+        # 8)
+        my_file_odt.manage_changeProperties({"md5Signature":'aaaaaaa'})
+        my_file_odt.manage_changeProperties({"profileName":'testCommune1'})
         my_update_file_datetime = my_file_odt.modified() #warning, date have changed by manage_changeProperties
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune1','urban-Commune1UpdateTemplates')   
         my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
