@@ -27,9 +27,6 @@ from zope.formlib import form
 from five.formlib import formbase
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from collective.plonefinder.widgets.referencewidget import FinderSelectWidget
-from zope.schema.vocabulary import SimpleVocabulary
-
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Acquisition import aq_inner
@@ -83,8 +80,6 @@ class SearchStreetsForm(formbase.PageForm):
             return self.template()
         #update results display if any
         catalog = getToolByName(context, 'portal_catalog')
-        urltool = getToolByName(context, 'portal_url')
-        portal = urltool.getPortalObject()
         #perform a search on type
         #thus, glance at each object if street id is included in this latter
         brains = catalog(portal_type=typesToSearch)
