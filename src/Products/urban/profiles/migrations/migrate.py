@@ -82,7 +82,8 @@ def migrateToWorkLocationsDataGridField(context):
 
     site = context.getSite()
 
-    brains = site.portal_catalog(portal_type = ['BuildLicence', 'Declaration', 'Division', 'EnvironmentalDeclaration', 'UrbanCertificateBase',
+    brains = site.portal_catalog(portal_type = ['BuildLicence', 'Declaration',
+                    'Division', 'EnvironmentalDeclaration', 'UrbanCertificateOne',
                     'UrbanCertificateTwo', 'ParcelOutLicence'])
     for brain in brains:
         locations = []
