@@ -73,7 +73,7 @@ def migrateToPlone4(context):
 
 def migrateToWorkLocationsDataGridField(context):
     """
-      Migrate Declaration, Division, EnvironmentalDeclaration, UbranCertificateBase,
+      Migrate Declaration, Division, EnvironmentalDeclaration, UbranCertificateOne,
       UrbanCertificateTwo, BuildLicence, ParcelOutLicence types to use workLocations DataGridField
       instead of workLocation objects
     """
