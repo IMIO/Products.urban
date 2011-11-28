@@ -453,7 +453,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
             except AttributeError:
                 #for old instances, persons_titles are UrbanVocabularyTerms and have no abbreviation...
                 #we used the no more existing termKeyStr attribute... that is removed in a migration step
-                return getattr(tool.persons_titles, self.getField('personTitle').get(self)).termKeyStr
+                return getattr(tool.persons_titles, self.getField('personTitle').get(self)).termKeyStr.encode('utf-8')
         else:
             return ''
 
