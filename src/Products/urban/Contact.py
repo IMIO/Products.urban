@@ -447,7 +447,13 @@ class Contact(BaseContent, BrowserDefaultMixin):
         #or the short one...
         tool = getToolByName(self, 'portal_urban')
         if hasattr(tool.persons_titles, self.getField('personTitle').get(self)):
-            return getattr(tool.persons_titles, self.getField('personTitle').get(self)).getAbbreviation()
+            #XXX remove this when everybody will use the Plone4 version (aka Sambreville and La Bruyere)
+            try:
+               return getattr(tool.persons_titles, self.getField('personTitle').get(self)).getAbbreviation()
+            except AttributeError:
+                #for old instances, persons_titles are UrbanVocabularyTerms and have no abbreviation...
+                #we used the no more existing termKeyStr attribute... that is removed in a migration step
+                return getattr(tool.persons_titles, self.getField('personTitle').get(self)).termKeyStr
         else:
             return ''
 
