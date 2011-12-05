@@ -489,7 +489,7 @@ msgid "folderroadequipments_folder_title"
 msgstr "Equipements de la route"
 
 msgid "folderroadtypes_folder_title"
-msgstr "Types de routes"
+msgstr "Types de voiries"
 
 msgid "folderzones_folder_title"
 msgstr "Zones du plan de secteur"

@@ -318,18 +318,6 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="module-electrite",title=u"Modules de production d'électricité ou de chaleur")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="divers",title=u"Divers")
 
-            #add RoadTypes folder
-            newFolderid = configFolder.invokeFactory("Folder",id="folderroadtypes",title=_("folderroadtypes_folder_title", 'urban', context=site.REQUEST))
-            newFolder = getattr(configFolder, newFolderid)
-            newFolder.setConstrainTypesMode(1)
-            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="com",title=u"Communale")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="priv",title=u"Privée")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="prov",title=u"Provinciale")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="reg",title=u"Régionale")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="vic",title=u"Vicinale")
-
             #add RoadEquipments folder
             newFolderid = configFolder.invokeFactory("Folder",id="folderroadequipments",title=_("folderroadequipments_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
@@ -763,7 +751,20 @@ def addGlobalFolders(context):
         newFolder.setLocallyAllowedTypes(['City'])
         newFolder.setImmediatelyAddableTypes(['City'])
 
-        #add Zones folder
+    #add global folderroadtypes folder
+    if not hasattr(tool, "globaltemplates"):
+        newFolderid = tool.invokeFactory("Folder",id="folderroadtypes",title=_("folderroadtypes_folder_title", 'urban', context=site.REQUEST))
+        newFolder = getattr(tool, newFolderid)
+        newFolder.setConstrainTypesMode(1)
+        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="com",title=u"Communale")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="priv",title=u"Privée")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="prov",title=u"Provinciale")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="reg",title=u"Régionale")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="vic",title=u"Vicinale")
+
+    #add Zones folder
     if not hasattr(tool, "folderzones"):
         newFolderid = tool.invokeFactory("Folder",id="folderzones",title=_("folderzones_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)

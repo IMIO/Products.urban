@@ -183,4 +183,13 @@
     version="2011-09-24T11:00.0">
     Migrate global templates: move them to a single folder'
  </import-step>
+ <import-step
+    id="urban-migrateRoadTypesAsGlobal"
+    handler="Products.urban.profiles.migrations.migrate.migrateRoadTypesAsGlobal"
+    title="Road types were defined in the BuildLicence LicenceConfig before
+           Now there are at the portal_urban level"
+    version="2011-12-05T16:00.0">
+      Road types were defined in the BuildLicence LicenceConfig before
+      Now there are at the portal_urban level
+ </import-step>
 </import-steps>

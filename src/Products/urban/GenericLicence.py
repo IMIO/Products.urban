@@ -235,7 +235,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_road',
-        vocabulary=UrbanVocabulary('folderroadtypes'),
+        vocabulary=UrbanVocabulary('folderroadtypes', inUrbanConfig=False),
     ),
     StringField(
         name='roadCoating',

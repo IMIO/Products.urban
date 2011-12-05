@@ -70,6 +70,10 @@ def migrateToPlone4(context):
     migrateFoldermakersTerms(context)
     #Move all the FolderManager objects into a single folder at the root of urban config
     migrateFoldermanagers(context)
+    #Road types were defined in the BuildLicence LicenceConfig before
+    #Now there are at the portal_urban level
+    migrateRoadTypesAsGlobal(context)
+
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -1028,3 +1032,31 @@ def migrateGlobalTemplates(context):
         if 'profileName' not in properties.keys():
             template.manage_addProperty('profileName', 'tests', "string")
         delattr(tool, template_infos[0].getId())
+
+
+def migrateRoadTypesAsGlobal(context):
+    """
+      Road types were defined in the BuildLicence LicenceConfig before
+      Now there are at the portal_urban level
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+    site.portal_properties.site_properties.enable_link_integrity_checks = False
+    tool = getToolByName(site, 'portal_urban')
+    configFolder = getattr(tool, 'buildlicence')
+    logger.info("Migration the 'folderroadtypes' folder from the BuildLicence LicenceConfig to portal_urban: starting...")
+    if not hasattr(aq_base(configFolder), 'folderroadtypes'):
+        logger.info("Migration the 'folderroadtypes' folder from the BuildLicence LicenceConfig to portal_urban: already done!")
+        return
+    ids = ['folderroadtypes',]
+    cutdata = configFolder.manage_cutObjects(ids)
+    tool.manage_pasteObjects(cutdata)
+    #change the title moreover
+    tool.folderroadtypes.setTitle(_('folderroadtypes_folder_title', 'urban', context=site.REQUEST))
+    tool.folderroadtypes.reindexObject(['Title',])
+    #remove this folder also from old parceloutlicences LicenceConfig
+    if hasattr(aq_base(tool.parceloutlicence), 'folderroadtypes'):
+        tool.parceloutlicence.manage_delObjects('folderroadtypes')
+    logger.info("Migration the 'folderroadtypes' folder from the BuildLicence LicenceConfig to portal_urban: done!")
+    site.portal_properties.site_properties.enable_link_integrity_checks = True
