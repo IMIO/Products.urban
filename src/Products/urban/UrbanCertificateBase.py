@@ -27,8 +27,6 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate as _
 from Products.CMFCore.utils import getToolByName
-from Products.DataGridField.Column import Column
-from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.base import UrbanBase
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.utils import setOptionalAttributes
@@ -110,6 +108,9 @@ UrbanCertificateBase_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 UrbanCertificateBase_schema['title'].required = False
 UrbanCertificateBase_schema['title'].widget.visible = False
+#hide the solicit opinions to fields for UrbanCertificateOne
+UrbanCertificateBase_schema['solicitRoadOpinionsTo'].widget.visible = False
+UrbanCertificateBase_schema['solicitLocationOpinionsTo'].widget.visible = False
 ##/code-section after-schema
 
 class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserDefaultMixin):
