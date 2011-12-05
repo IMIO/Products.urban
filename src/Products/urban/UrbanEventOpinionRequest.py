@@ -85,6 +85,18 @@ class UrbanEventOpinionRequest(BaseContent, UrbanEvent, BrowserDefaultMixin):
         urbantool = getToolByName(self,'portal_urban')
         return getattr(urbantool.buildlicence.urbaneventtypes, "config-opinion-request").listFolderContents({'portal_type': 'File'})
 
+    security.declarePublic('getLinkedOrganisationTerm')
+    def getLinkedOrganisationTerm(self):
+        """
+          Returns of the term that is linked to the linked UrbanEventType
+        """
+        urbaneventtypes = self.getUrbaneventtypes()
+        brefs = urbaneventtypes.getBRefs('LinkedOpinionRequestEvent')
+        if brefs:
+            return brefs[0]
+        else:
+            return None
+
     security.declarePublic('getLinkedOrganisationTermId')
     def getLinkedOrganisationTermId(self):
         """
@@ -97,17 +109,7 @@ class UrbanEventOpinionRequest(BaseContent, UrbanEvent, BrowserDefaultMixin):
         else:
             return ''
 
-    security.declarePublic('getLinkedOrganisationTerm')
-    def getLinkedOrganisationTerm(self):
-        """
-          Returns of the term that is linked to the linked UrbanEventType
-        """
-        urbaneventtypes = self.getUrbaneventtypes()
-        brefs = urbaneventtypes.getBRefs('LinkedOpinionRequestEvent')
-        if brefs:
-            return brefs[0]
-        else:
-            return None 
+
 
 registerType(UrbanEventOpinionRequest, PROJECTNAME)
 # end of class UrbanEventOpinionRequest
