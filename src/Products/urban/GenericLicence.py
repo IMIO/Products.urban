@@ -295,6 +295,17 @@ schema = Schema((
         multiValued=1,
         vocabulary='listCatchmentAreas',
     ),
+    StringField(
+        name='floodingLevel',
+        widget=SelectionWidget(
+            label='Floodinglevel',
+            label_msgid='urban_label_floodingLevel',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        schemata='urban_road',
+        vocabulary='listFloodingLevels',
+    ),
     TextField(
         name='equipmentAndRoadRequirements',
         allowable_content_types=('text/html',),
@@ -341,17 +352,6 @@ schema = Schema((
         ),
         schemata='urban_location',
         vocabulary=UrbanVocabulary('pcas', vocType="PcaTerm", inUrbanConfig=False),
-    ),
-    StringField(
-        name='floodingLevel',
-        widget=SelectionWidget(
-            label='Floodinglevel',
-            label_msgid='urban_label_floodingLevel',
-            i18n_domain='urban',
-        ),
-        enforceVocabulary=True,
-        schemata='urban_road',
-        vocabulary='listFloodingLevels',
     ),
     LinesField(
         name='solicitRoadOpinionsTo',
