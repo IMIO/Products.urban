@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.Inquiry import Inquiry
+
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
@@ -39,6 +39,19 @@ from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
+slave_fields_subdivision = (
+    # if in subdivision, display a textarea the fill some details
+    {'name': 'subdivisionDetails',
+     'action': 'show',
+     'hide_values': (True, ),
+    },
+    {'name': 'parcellings',
+     'action': 'show',
+     'hide_values': (True, ),
+     'hide_values': (True, ),
+    },
+)
+
 slave_fields_pca= (
     # if in a pca, display a selectbox
     {'name': 'pca',
@@ -47,7 +60,7 @@ slave_fields_pca= (
     },
 )
 
-optional_fields = ['missingPartsDetails','folderZoneDetails','derogationDetails','isInPCA',
+optional_fields = ['subdivisionDetails','missingPartsDetails','folderZoneDetails','derogationDetails','isInPCA',
                    'annoncedDelayDetails','roadType','roadCoating','roadEquipments',
                    'protectedBuildingDetails','investigationDetails','investigationReasons',
                    'pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks',
@@ -247,30 +260,6 @@ schema = Schema((
         columns=("road_equipment", "road_equipment_details"),
     ),
     LinesField(
-        name='protectedBuilding',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label='Protectedbuilding',
-            label_msgid='urban_label_protectedBuilding',
-            i18n_domain='urban',
-        ),
-        schemata='urban_location',
-        multiValued=1,
-        vocabulary=UrbanVocabulary('folderprotectedbuildings'),
-    ),
-    TextField(
-        name='protectedBuildingDetails',
-        allowable_content_types=('text/plain',),
-        schemata='urban_location',
-        widget=TextAreaWidget(
-            label='Protectedbuildingdetails',
-            label_msgid='urban_label_protectedBuildingDetails',
-            i18n_domain='urban',
-        ),
-        default_output_type='text/html',
-        default_content_type='text/plain',
-    ),
-    LinesField(
         name='pash',
         widget=MultiSelectionWidget(
             format='checkbox',
@@ -332,6 +321,17 @@ schema = Schema((
         schemata='urban_road',
         default_output_type='text/html',
     ),
+    BooleanField(
+        name='isInPCA',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_pca,
+            label='Isinpca',
+            label_msgid='urban_label_isInPCA',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+    ),
     StringField(
         name='pca',
         widget=SelectionWidget(
@@ -341,6 +341,89 @@ schema = Schema((
         ),
         schemata='urban_location',
         vocabulary=UrbanVocabulary('pcas', vocType="PcaTerm", inUrbanConfig=False),
+    ),
+    StringField(
+        name='floodingLevel',
+        widget=SelectionWidget(
+            label='Floodinglevel',
+            label_msgid='urban_label_floodingLevel',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        schemata='urban_road',
+        vocabulary='listFloodingLevels',
+    ),
+    LinesField(
+        name='solicitRoadOpinionsTo',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Solicitroadopinionsto',
+            label_msgid='urban_label_solicitRoadOpinionsTo',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('foldermakers'),
+    ),
+    StringField(
+        name='folderCategoryTownship',
+        widget=SelectionWidget(
+            label='Foldercategorytownship',
+            label_msgid='urban_label_folderCategoryTownship',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        schemata='urban_description',
+        vocabulary=UrbanVocabulary('townshipfoldercategories'),
+    ),
+    BooleanField(
+        name='isInSubdivision',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_subdivision,
+            label='Isinsubdivision',
+            label_msgid='urban_label_isInSubdivision',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+    ),
+    TextField(
+        name='subdivisionDetails',
+        allowable_content_types="('text/plain',)",
+        schemata='urban_location',
+        widget=TextAreaWidget(
+            description='Number of the lots, ...',
+            description_msgid="urban_descr_subdivisionDetails",
+            label='Subdivisiondetails',
+            label_msgid='urban_label_subdivisionDetails',
+            i18n_domain='urban',
+        ),
+        default_output_type='text/html',
+        default_content_type='text/plain',
+    ),
+    LinesField(
+        name='protectedBuilding',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Protectedbuilding',
+            label_msgid='urban_label_protectedBuilding',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('folderprotectedbuildings'),
+    ),
+    TextField(
+        name='protectedBuildingDetails',
+        allowable_content_types=('text/plain',),
+        schemata='urban_location',
+        widget=TextAreaWidget(
+            label='Protectedbuildingdetails',
+            label_msgid='urban_label_protectedBuildingDetails',
+            i18n_domain='urban',
+        ),
+        default_output_type='text/html',
+        default_content_type='text/plain',
     ),
     LinesField(
         name='SSC',
@@ -366,39 +449,6 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary('rcu', inUrbanConfig=False),
     ),
-    BooleanField(
-        name='areParcelsVerified',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label='Areparcelsverified',
-            label_msgid='urban_label_areParcelsVerified',
-            i18n_domain='urban',
-        ),
-        schemata='urban_location',
-    ),
-    StringField(
-        name='floodingLevel',
-        widget=SelectionWidget(
-            label='Floodinglevel',
-            label_msgid='urban_label_floodingLevel',
-            i18n_domain='urban',
-        ),
-        enforceVocabulary=True,
-        schemata='urban_road',
-        vocabulary='listFloodingLevels',
-    ),
-    LinesField(
-        name='solicitRoadOpinionsTo',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label='Solicitroadopinionsto',
-            label_msgid='urban_label_solicitRoadOpinionsTo',
-            i18n_domain='urban',
-        ),
-        schemata='urban_road',
-        multiValued=1,
-        vocabulary=UrbanVocabulary('foldermakers'),
-    ),
     LinesField(
         name='solicitLocationOpinionsTo',
         widget=MultiSelectionWidget(
@@ -412,26 +462,14 @@ schema = Schema((
         vocabulary=UrbanVocabulary('foldermakers'),
     ),
     BooleanField(
-        name='isInPCA',
+        name='areParcelsVerified',
         default=False,
-        widget=MasterBooleanWidget(
-            slave_fields=slave_fields_pca,
-            label='Isinpca',
-            label_msgid='urban_label_isInPCA',
+        widget=BooleanField._properties['widget'](
+            label='Areparcelsverified',
+            label_msgid='urban_label_areParcelsVerified',
             i18n_domain='urban',
         ),
         schemata='urban_location',
-    ),
-    StringField(
-        name='folderCategoryTownship',
-        widget=SelectionWidget(
-            label='Foldercategorytownship',
-            label_msgid='urban_label_folderCategoryTownship',
-            i18n_domain='urban',
-        ),
-        enforceVocabulary=True,
-        schemata='urban_description',
-        vocabulary=UrbanVocabulary('townshipfoldercategories'),
     ),
     ReferenceField(
         name='foldermanagers',
@@ -449,6 +487,27 @@ schema = Schema((
         multiValued=1,
         allowed_types=('FolderManager',),
     ),
+    ReferenceField(
+        name='parcellings',
+        widget=ReferenceBrowserWidget(
+            force_close_on_insert=True,
+            allow_search=True,
+            allow_browse=True,
+            show_indexes=True,
+            available_indexes={'Title':'Nom'},
+            show_index_selector=True,
+            wild_card_search=True,
+            startup_directory="portal_urban/parcellings",
+            restrict_browsing_to_startup_directory=True,
+            label='Parcellings',
+            label_msgid='urban_label_parcellings',
+            i18n_domain='urban',
+        ),
+        allowed_types=('ParcellingTerm',),
+        schemata='urban_location',
+        multiValued=False,
+        relationship='licenceParcelling',
+    ),
 
 ),
 )
@@ -458,21 +517,14 @@ setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 GenericLicence_schema = BaseFolderSchema.copy() + \
-    getattr(Inquiry, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 GenericLicence_schema['title'].searchable = True
 GenericLicence_schema['title'].widget.visible = False
-#put the the fields coming from Inquiry in a specific schemata
-inquiryFields = Inquiry.schema.filterFields(isMetadata=False)
-#do not take the 2 first fields into account, this is 'id' and 'title'
-inquiryFields = inquiryFields[2:]
-for inquiryField in inquiryFields:
-    GenericLicence_schema[inquiryField.getName()].schemata = 'urban_investigation_and_advices'
 ##/code-section after-schema
 
-class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefaultMixin):
+class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -790,22 +842,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
             res = getattr(urbanConfig.pcas, res)
         return res
 
-    security.declarePublic('getInquiries')
-    def getInquiries(self):
-        """
-          Returns the existing inquiries
-        """
-        #the first inquiry is the one defined on self itself
-        #if a investigationStart is defined
-        #and the others are extra Inquiry object added
-        res = []
-        inquiryObjects = self.objectValues('Inquiry')
-        #the inquiry on the licence is activated if we have a
-        #investigationStart date or if we have extra Inquiry objects
-        if len(inquiryObjects) or self.getInvestigationStart():
-            res.append(self)
-        return res + inquiryObjects
-
     security.declarePublic('getOpinionRequests')
     def getOpinionRequests(self, organisation=''):
         """
@@ -819,13 +855,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, Inquiry, BrowserDefau
             if opinionRequest.getLinkedOrganisationTermId() == organisation:
                 res.append(opinionRequest)
         return res
-
-    security.declarePublic('getUrbanEventInquiries')
-    def getUrbanEventInquiries(self):
-        """
-          Returns the existing UrbanEventInquiries
-        """
-        return self.listFolderContents({'portal_type': 'UrbanEventInquiry',})
 
     security.declarePublic('createAllAdvices')
     def createAllAdvices(self):

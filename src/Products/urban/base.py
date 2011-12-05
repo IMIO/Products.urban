@@ -309,6 +309,29 @@ class UrbanBase(object):
         """
         return self.listFolderContents({'portal_type': ('UrbanEventInquiry', 'UrbanEvent', ),})
 
+    security.declarePublic('getInquiries')
+    def getInquiries(self):
+        """
+          Returns the existing inquiries
+        """
+        #the first inquiry is the one defined on self itself
+        #if a investigationStart is defined
+        #and the others are extra Inquiry object added
+        res = []
+        inquiryObjects = self.objectValues('Inquiry')
+        #the inquiry on the licence is activated if we have a
+        #investigationStart date or if we have extra Inquiry objects
+        if len(inquiryObjects) or self.getInvestigationStart():
+            res.append(self)
+        return res + inquiryObjects
+
+    security.declarePublic('getUrbanEventInquiries')
+    def getUrbanEventInquiries(self):
+        """
+          Returns the existing UrbanEventInquiries
+        """
+        return self.listFolderContents({'portal_type': 'UrbanEventInquiry',})
+
     security.declarePublic('mayShowEditAction')
     def mayShowEditAction(self):
         """

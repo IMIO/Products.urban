@@ -26,7 +26,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.base import UrbanBase
-from Products.urban.utils import setOptionalAttributes
+from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 
 optional_fields = []
 ##/code-section module-header
@@ -65,6 +65,8 @@ UrbanCertificateTwo_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+#put the the fields coming from Inquiry in a specific schemata
+setSchemataForInquiry(UrbanCertificateTwo_schema)
 ##/code-section after-schema
 
 class UrbanCertificateTwo(BaseFolder, UrbanIndexes,  UrbanBase, UrbanCertificateBase, Inquiry, BrowserDefaultMixin):
@@ -80,6 +82,8 @@ class UrbanCertificateTwo(BaseFolder, UrbanIndexes,  UrbanBase, UrbanCertificate
     schema = UrbanCertificateTwo_schema
 
     ##code-section class-header #fill in your manual code here
+    schemata_order = ['urban_description', 'urban_road', 'urban_location', \
+                      'urban_investigation_and_advices']
     ##/code-section class-header
 
     # Methods

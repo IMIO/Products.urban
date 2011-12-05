@@ -44,3 +44,14 @@ def setOptionalAttributes(schema, optional_fields):
         if field is not None:
             setattr(field, 'optional', True)
             field.widget.setCondition("python: here.attributeIsUsed('%s')"%fieldname)
+
+def setSchemataForInquiry(schema):
+    """
+      Put the the fields coming from Inquiry in a specific schemata
+    """
+    from Products.urban.Inquiry import Inquiry
+    inquiryFields = Inquiry.schema.filterFields(isMetadata=False)
+    #do not take the 2 first fields into account, this is 'id' and 'title'
+    inquiryFields = inquiryFields[2:]
+    for inquiryField in inquiryFields:
+        schema[inquiryField.getName()].schemata = 'urban_investigation_and_advices'

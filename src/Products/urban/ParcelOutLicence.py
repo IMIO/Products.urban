@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-
+from Products.urban.Inquiry import Inquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
@@ -69,13 +69,14 @@ setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 ParcelOutLicence_schema = GenericLicence_schema.copy() + \
+    getattr(Inquiry, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ParcelOutLicence_schema['title'].required = False
 ##/code-section after-schema
 
-class ParcelOutLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
+class ParcelOutLicence(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

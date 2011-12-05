@@ -17,12 +17,11 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-
+from Products.urban.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
-from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -40,29 +39,6 @@ optional_fields = []
 
 schema = Schema((
 
-    StringField(
-        name='reference',
-        widget=StringField._properties['widget'](
-            size=30,
-            label='Reference',
-            label_msgid='urban_label_reference',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-        default_method="getDefaultReference",
-    ),
-    DataGridField(
-        name='workLocations',
-        schemata='urban_description',
-        widget=DataGridWidget(
-            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False)),},
-            label='Worklocations',
-            label_msgid='urban_label_workLocations',
-            i18n_domain='urban',
-        ),
-        allow_oddeven=True,
-        columns=('number', 'street'),
-    ),
     ReferenceField(
         name='notaryContact',
         widget=ReferenceBrowserWidget(
@@ -98,19 +74,6 @@ schema = Schema((
         multiValued=True,
         vocabulary=UrbanVocabulary('specificfeatures'),
     ),
-    TextField(
-        name='description',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label='Description',
-            label_msgid='urban_label_description',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-        default_content_type='text/html',
-        default_output_type='text/html',
-        accessor="Description",
-    ),
     ReferenceField(
         name='foldermanagers',
         widget=ReferenceBrowserWidget(
@@ -141,6 +104,7 @@ setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 UrbanCertificateBase_schema = BaseFolderSchema.copy() + \
+    getattr(GenericLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
@@ -148,7 +112,7 @@ UrbanCertificateBase_schema['title'].required = False
 UrbanCertificateBase_schema['title'].widget.visible = False
 ##/code-section after-schema
 
-class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
+class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -161,6 +125,7 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultM
     schema = UrbanCertificateBase_schema
 
     ##code-section class-header #fill in your manual code here
+    schemata_order = ['urban_description', 'urban_road', 'urban_location']
     ##/code-section class-header
 
     # Methods

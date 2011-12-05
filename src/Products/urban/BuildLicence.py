@@ -17,37 +17,23 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-
+from Products.urban.Inquiry import Inquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate as _
 from Products.CMFCore.utils import getToolByName
-from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
-from GenericLicence import GenericLicence
-from GenericLicence import GenericLicence_schema
-from Products.urban.utils import setOptionalAttributes
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
+from Products.urban.GenericLicence import GenericLicence
+from Products.urban.GenericLicence import GenericLicence_schema
+from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from dateutil.relativedelta import relativedelta
 
-slave_fields_subdivision = (
-    # if in subdivision, display a textarea the fill some details
-    {'name': 'subdivisionDetails',
-     'action': 'show',
-     'hide_values': (True, ),
-    },
-    {'name': 'parcellings',
-     'action': 'show',
-     'hide_values': (True, ),
-     'hide_values': (True, ),
-    },
-)
-
-optional_fields = ['subdivisionDetails','roadAdaptation','pebDetails',
+optional_fields = ['roadAdaptation','pebDetails',
                    'roadTechnicalAdvice','locationTechnicalAdvice','locationTechnicalConditions',
                    'pebTechnicalAdvice','locationDgrneUnderground', 'roadDgrneUnderground']
 ##/code-section module-header
@@ -74,31 +60,6 @@ schema = Schema((
         required= True,
         schemata='urban_description',
         vocabulary='listUsages',
-    ),
-    BooleanField(
-        name='isInSubdivision',
-        default=False,
-        widget=MasterBooleanWidget(
-            slave_fields=slave_fields_subdivision,
-            label='Isinsubdivision',
-            label_msgid='urban_label_isInSubdivision',
-            i18n_domain='urban',
-        ),
-        schemata='urban_location',
-    ),
-    TextField(
-        name='subdivisionDetails',
-        allowable_content_types="('text/plain',)",
-        schemata='urban_location',
-        widget=TextAreaWidget(
-            description='Number of the lots, ...',
-            description_msgid="urban_descr_subdivisionDetails",
-            label='Subdivisiondetails',
-            label_msgid='urban_label_subdivisionDetails',
-            i18n_domain='urban',
-        ),
-        default_output_type='text/html',
-        default_content_type='text/plain',
     ),
     StringField(
         name='roadAdaptation',
@@ -247,27 +208,6 @@ schema = Schema((
         multiValued=1,
         relationship='licenceArchitects',
     ),
-    ReferenceField(
-        name='parcellings',
-        widget=ReferenceBrowserWidget(
-            force_close_on_insert=True,
-            allow_search=True,
-            allow_browse=True,
-            show_indexes=True,
-            available_indexes={'Title':'Nom'},
-            show_index_selector=True,
-            wild_card_search=True,
-            startup_directory="portal_urban/parcellings",
-            restrict_browsing_to_startup_directory=True,
-            label='Parcellings',
-            label_msgid='urban_label_parcellings',
-            i18n_domain='urban',
-        ),
-        allowed_types=('ParcellingTerm',),
-        schemata='urban_location',
-        multiValued=False,
-        relationship='licenceParcelling',
-    ),
 
 ),
 )
@@ -277,13 +217,16 @@ setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 BuildLicence_schema = GenericLicence_schema.copy() + \
+    getattr(Inquiry, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 BuildLicence_schema['title'].required = False
+#put the the fields coming from Inquiry in a specific schemata
+setSchemataForInquiry(BuildLicence_schema)
 ##/code-section after-schema
 
-class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
+class BuildLicence(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -296,6 +239,8 @@ class BuildLicence(BaseFolder, GenericLicence, BrowserDefaultMixin):
     schema = BuildLicence_schema
 
     ##code-section class-header #fill in your manual code here
+    schemata_order = ['urban_description', 'urban_road', 'urban_location',\
+                      'urban_investigation_and_advices', 'urban_peb']
     #implements(interfacesToImplement)
     archetype_name = 'BuildLicence'
 

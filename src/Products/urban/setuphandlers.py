@@ -442,7 +442,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="td",title=u"Taudis", extraValue='TAUDIS')
             # !!! NOT SURE ABOUT  extraValue='INT' . TO BE CHECKED AND CORRECTED !!!
             newFolder.invokeFactory("UrbanVocabularyTerm",id="integration",title=u"Intégration dans voirie publique", extraValue='INT')
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="leasing",title=u"Leasing (pour mémoire SPF Finances, extraValue=)", extraValue='LEASING')
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="leasing",title=u"Leasing (pour mémoire SPF Finances)", extraValue='LEASING')
             newFolder.invokeFactory("UrbanVocabularyTerm",id="autres",title=u"Autres", extraValue='AUTRE')
 
             #add pashs folder
