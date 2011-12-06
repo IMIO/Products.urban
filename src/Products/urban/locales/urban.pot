@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-10-28 08:48+0000\n"
+"POT-Creation-Date: 2011-12-06 10:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,26 +110,6 @@ msgstr ""
 
 # PortionOutSearch
 msgid "Search parcel(s)"
-msgstr ""
-
-#. Default: "Choose one of the following forms to search for parcels.  You can cumulate criteria if you exactly know what you are looking for"
-msgid "help_search_parcels"
-msgstr ""
-
-#. Default: "You can not search for parcels for now because there was a problem.  Please contact your system administrator and give him the red error message here above"
-msgid "help_search_connection_problem"
-msgstr ""
-
-#. Default: "Proprietary"
-msgid "urban_search_parcel_by_proprietary"
-msgstr ""
-
-#. Default: "Location"
-msgid "urban_search_parcel_by_location"
-msgstr ""
-
-#. Default: "Cadastral reference"
-msgid "urban_search_parcel_by_cadastral_reference"
 msgstr ""
 
 msgid "See more..."
@@ -553,6 +533,14 @@ msgid "geometricians_folder_title"
 msgstr ""
 
 msgid "globaltemplates_folder_title"
+msgstr ""
+
+#. Default: "You can not search for parcels for now because there was a problem.  Please contact your system administrator and give him the red error message here above"
+msgid "help_search_connection_problem"
+msgstr ""
+
+#. Default: "Choose one of the following forms to search for parcels.  You can cumulate criteria if you exactly know what you are looking for"
+msgid "help_search_parcels"
 msgstr ""
 
 msgid "inquiry_data"
@@ -1677,6 +1665,11 @@ msgstr ""
 msgid "urban_label_locationDgrneUnderground"
 msgstr ""
 
+#. Default: "Locationfloodinglevel"
+#: GenericLicence.py
+msgid "urban_label_locationFloodingLevel"
+msgstr ""
+
 #. Default: "Locationtechnicaladvice"
 #: BuildLicence.py
 msgid "urban_label_locationTechnicalAdvice"
@@ -2258,6 +2251,18 @@ msgid "urban_search_descr"
 msgstr ""
 
 msgid "urban_search_parameters"
+msgstr ""
+
+#. Default: "Cadastral reference"
+msgid "urban_search_parcel_by_cadastral_reference"
+msgstr ""
+
+#. Default: "Location"
+msgid "urban_search_parcel_by_location"
+msgstr ""
+
+#. Default: "Proprietary"
+msgid "urban_search_parcel_by_proprietary"
 msgstr ""
 
 msgid "urban_search_result"

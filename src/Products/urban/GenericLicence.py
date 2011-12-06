@@ -64,7 +64,7 @@ optional_fields = ['subdivisionDetails','missingPartsDetails','folderZoneDetails
                    'annoncedDelayDetails','roadType','roadCoating','roadEquipments',
                    'protectedBuildingDetails','investigationDetails','investigationReasons',
                    'pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks',
-                   'pca','SSC','RCU','floodingLevel','solicitRoadOpinionsTo', 'areParcelsVerified',]
+                   'pca','SSC','RCU','floodingLevel','solicitRoadOpinionsTo', 'areParcelsVerified', 'locationFloodingLevel']
 ##/code-section module-header
 
 schema = Schema((
@@ -470,6 +470,17 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_location',
+    ),
+    StringField(
+        name='locationFloodingLevel',
+        widget=SelectionWidget(
+            label='Locationfloodinglevel',
+            label_msgid='urban_label_locationFloodingLevel',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        schemata='urban_location',
+        vocabulary='listFloodingLevels',
     ),
     ReferenceField(
         name='foldermanagers',
