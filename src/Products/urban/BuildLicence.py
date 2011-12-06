@@ -40,15 +40,16 @@ optional_fields = ['roadAdaptation','pebDetails',
 
 schema = Schema((
 
-    StringField(
+    LinesField(
         name='workType',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
             label='Worktype',
             label_msgid='urban_label_workType',
             i18n_domain='urban',
         ),
         schemata='urban_location',
-        vocabulary=UrbanVocabulary('folderbuildworktypes'),
+        multiValued=1,
+        vocabulary=UrbanVocabulary(path='folderbuildworktypes', sort_on='sortable_title'),
     ),
     StringField(
         name='usage',
