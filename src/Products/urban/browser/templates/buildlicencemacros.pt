@@ -254,10 +254,10 @@
 
 <div metal:define-macro="locationMacro" i18n:domain="urban">
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
- <tr>
+ <tr tal:condition="python: context.attributeIsUsed('workType')">
   <td valign="top"><b><span i18n:translate="urban_label_workType">Work type</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('workType', mode='view')" /></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('workType', mode='view')" /><span tal:condition="not: context/getWorkType" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_folderZone">Folder zone</span>:</b></td>

@@ -35,7 +35,7 @@ from dateutil.relativedelta import relativedelta
 
 optional_fields = ['roadAdaptation','pebDetails',
                    'roadTechnicalAdvice','locationTechnicalAdvice','locationTechnicalConditions',
-                   'pebTechnicalAdvice','locationDgrneUnderground', 'roadDgrneUnderground']
+                   'pebTechnicalAdvice','locationDgrneUnderground', 'roadDgrneUnderground', 'workType']
 ##/code-section module-header
 
 schema = Schema((
