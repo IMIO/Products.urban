@@ -128,11 +128,6 @@
       <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategoryTownship', mode='view')" /></td>
      </tr>
      <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_workType">Work type</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('workType', mode='view')" /></td>
-     </tr>
-     <tr>
       <td valign="top"><b><span i18n:translate="urban_label_missingParts">Missing parts</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('missingParts', mode='view')" /></td>
@@ -259,6 +254,11 @@
 
 <div metal:define-macro="locationMacro" i18n:domain="urban">
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+ <tr>
+  <td valign="top"><b><span i18n:translate="urban_label_workType">Work type</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('workType', mode='view')" /></td>
+ </tr>
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_folderZone">Folder zone</span>:</b></td>
   <td width="2%"></td>

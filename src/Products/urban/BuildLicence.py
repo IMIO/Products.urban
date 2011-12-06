@@ -47,7 +47,7 @@ schema = Schema((
             label_msgid='urban_label_workType',
             i18n_domain='urban',
         ),
-        schemata='urban_description',
+        schemata='urban_location',
         vocabulary=UrbanVocabulary('folderbuildworktypes'),
     ),
     StringField(
