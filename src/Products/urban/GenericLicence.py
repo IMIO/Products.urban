@@ -306,6 +306,17 @@ schema = Schema((
         schemata='urban_road',
         vocabulary='listFloodingLevels',
     ),
+    StringField(
+        name='locationFloodingLevel',
+        widget=SelectionWidget(
+            label='Locationfloodinglevel',
+            label_msgid='urban_label_locationFloodingLevel',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        schemata='urban_location',
+        vocabulary='listFloodingLevels',
+    ),
     TextField(
         name='equipmentAndRoadRequirements',
         allowable_content_types=('text/html',),
@@ -363,7 +374,7 @@ schema = Schema((
         ),
         schemata='urban_road',
         multiValued=1,
-        vocabulary=UrbanVocabulary('foldermakers'),
+        vocabulary=UrbanVocabulary('foldermakers', vocType="OrganisationTerm"),
     ),
     StringField(
         name='folderCategoryTownship',
@@ -459,7 +470,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=1,
-        vocabulary=UrbanVocabulary('foldermakers'),
+        vocabulary=UrbanVocabulary('foldermakers', vocType="OrganisationTerm"),
     ),
     BooleanField(
         name='areParcelsVerified',
@@ -470,17 +481,6 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_location',
-    ),
-    StringField(
-        name='locationFloodingLevel',
-        widget=SelectionWidget(
-            label='Locationfloodinglevel',
-            label_msgid='urban_label_locationFloodingLevel',
-            i18n_domain='urban',
-        ),
-        enforceVocabulary=True,
-        schemata='urban_location',
-        vocabulary='listFloodingLevels',
     ),
     ReferenceField(
         name='foldermanagers',
