@@ -1671,7 +1671,7 @@ msgstr "DGRNE Sous-sol (joindre annexe 2 et 3) (Fiche Urbanisme)"
 #. Default: "Locationfloodinglevel"
 #: GenericLicence.py
 msgid "urban_label_locationFloodingLevel"
-msgstr "Zone inondable"
+msgstr "Zone inondable (voirie)"
 
 #. Default: "Locationtechnicaladvice"
 #: BuildLicence.py
