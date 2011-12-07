@@ -272,6 +272,15 @@ schema = Schema((
         enforceVocabulary=True,
         vocabulary=GENERATED_DOCUMENT_FORMATS.keys(),
     ),
+    BooleanField(
+        name='generateSingletonDocuments',
+        default=True,
+        widget=BooleanField._properties['widget'](
+            label='Generatesingletondocuments',
+            label_msgid='urban_label_generateSingletonDocuments',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )

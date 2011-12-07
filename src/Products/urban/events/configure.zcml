@@ -36,6 +36,9 @@
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setCreationDate"/>
+  <subscriber for="..interfaces.IUrbanEvent
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+              handler=".urbanEventEvents.generateSingletonDocument"/>
   <subscriber for="..interfaces.IUrbanEventInquiry
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".urbanEventInquiryEvents.setLinkedInquiry" />
