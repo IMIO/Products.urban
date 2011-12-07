@@ -24,17 +24,12 @@ class UrbanSearchView(BrowserView):
     def getLicenceTypes(self):
         return URBAN_TYPES
 
-    def getSearchArgumentByKey(self, key_to_match):
+    def getSearchArgument(self, key_to_match):
         request = aq_inner(self.request)
-        try:
-            keys = [request['search_arg'][i] for i in range(len(request['search_arg'])) if i % 2 == 0]
-            values = [request['search_arg'][i] for i in range(len(request['search_arg'])) if i % 2 != 0]
-            for i in range(len(keys)):
-                if keys[i] == key_to_match: 
-                    return values[i]
-        except:
-            pass
-        return ''
+        if type(key_to_match) == list:
+            return [request.get(key, '') for key in key_to_match]
+        request = aq_inner(self.request)
+        return request.get(key_to_match, '')
 
     def searchLicence(self):
         """
@@ -43,20 +38,22 @@ class UrbanSearchView(BrowserView):
         request = aq_inner(self.request)
         search_by = request.get('search_by', '')
         foldertypes = request.get('foldertypes', [])
-        criteria_name= [request['search_arg'][i] for i in range(len(request.get('search_arg', []))) if i % 2 == 0]
-        criteria_values = [request['search_arg'][i] for i in range(len(request.get('search_arg', []))) if i % 2 != 0]
-        arguments = {}  
-        for i in range(len(criteria_name)):
-            arguments[criteria_name[i]] = criteria_values[i]
+        arguments = {
+                        'street':self.getSearchArgument('street'),
+                        'applicant':self.getSearchArgument('applicant'),
+                        'parcel':self.getSearchArgument(['section', 'radical', 'bis', 'exposant', 'puissance', 'partie']),
+                    }  
         if search_by == 'street':
             return self.searchByStreet(foldertypes, arguments.get(search_by, []))
         elif search_by == 'applicant':
             return self.searchByApplicant(foldertypes, arguments.get(search_by, []))
+        elif search_by == 'parcel':
+            return self.searchByParcel(foldertypes, arguments.get(search_by, []))
         return None
 
     def searchByApplicant(self, foldertypes, applicant_infos_index):
         """
-          Find licences with given paramaters
+          Find licences with applicant paramaters
         """
         catalogTool = getToolByName(self, 'portal_catalog')
         res = []
@@ -69,13 +66,26 @@ class UrbanSearchView(BrowserView):
             ptool.addPortalMessage(msg(u"please_enter_more_letters"), type="info")
             return res
 
-    def searchByStreet(self, foldertypes, workLocationUid):
+    def searchByStreet(self, foldertypes, sreets_uid):
         """
-          Find licences with given paramaters
+          Find licences with location paramaters
         """
-        #we receive the street uid, look back references and returns the found licences
         catalogTool = getToolByName(self, 'portal_catalog')
-        res = catalogTool(portal_type=foldertypes, StreetsUID=workLocationUid)
+        res = catalogTool(portal_type=foldertypes, StreetsUID=sreets_uid)
+        return res
+
+    def searchByParcel(self, foldertypes, parcel_infos_index):
+        """
+          Find licences with parcel paramaters
+        """
+        catalogTool = getToolByName(self, 'portal_catalog')
+        res = []
+        parcelInfos = ','.join(parcel_infos_index[:-1])
+        if parcel_infos_index[-1] == 'on':
+            parcelInfos = ',%s,1' %parcelInfos
+        else:
+            parcelInfos = ',%s,0' %parcelInfos
+        res = catalogTool(portal_type=foldertypes, parcelInfosIndex= parcelInfos)
         return res
 
 class UrbanSearchMacros(BrowserView):

@@ -1,7 +1,6 @@
 <div metal:define-macro="searchbystreetMacro" i18n:domain="urban"
-     tal:define="last_selected_street python: view.getSearchArgumentByKey('street')">
- <input type="hidden" name="search_arg" value="street" />
- <select name=search_arg tal:define="streets view/AvailableStreets">
+     tal:define="last_selected_street python: view.getSearchArgument('street')">
+ <select name=street tal:define="streets view/AvailableStreets">
      <option>Choose a street</option>
      <option tal:repeat="street streets" tal:content="python: street[1]" 
              tal:attributes="value python: street[0]; selected python: street[0] == last_selected_street">
@@ -11,15 +10,54 @@
 </div>
 
 <div metal:define-macro="searchbyapplicantMacro" i18n:domain="urban" 
-     tal:define="last_encoded_value python: view.getSearchArgumentByKey('applicant')">
- <input type="hidden" name="search_arg" value="applicant" />
+     tal:define="last_encoded_applicant python: view.getSearchArgument('applicant')">
  <p align="left" class="discreet" i18n:translate="urban_label_searchbyapplicant_descr">
       Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word
  </p>
- <input size="50" type="text" name="search_arg" tal:attributes="value python: last_encoded_value">
+ <input size="50" type="text" name="street" tal:attributes="value python: last_encoded_applicant">
 </div>
 
 <div metal:define-macro="searchbyparcelMacro" i18n:domain="urban">
  <input type="hidden" name="search_arg" value="parcel"/>
  <input type="hidden" name="search_arg" value="NO PARCEL VALUE SO FAR"/>
+ <span tal:define="division request/division|nothing;
+                 section request/section|nothing;
+                 radical request/radical|nothing;
+                 bis request/bis|nothing;
+                 exposant request/exposant|nothing;
+                 puissance request/puissance|nothing;
+                 partie request/partie|nothing;
+                 divisions python: context.portal_urban.findDivisions(all=False);">
+
+             <div i18n:translate="urban_label_complete_parcel">Merci de renseigner le num&eacute;ro complet de la parcelle recherch&eacute;e  </div>
+             <table class="listing">
+              <thead>
+               <tr>
+                <th><strong i18n:translate="">Division</strong></th>
+                <th><strong i18n:translate="urban_label_section">Section</strong></th>
+                <th><strong i18n:translate="urban_label_radical">Radical</strong></th>
+                <th><strong i18n:translate="urban_label_bis">Bis</strong></th>
+                <th><strong i18n:translate="urban_label_exposant">Exposant</strong></th>
+                <th><strong i18n:translate="urban_label_puissance">Puissance</strong></th>
+                <th><strong i18n:translate="urban_label_partie">Partie</strong></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr align=center>
+                 <td>
+                 <select name="division" value="division"> 
+                    <!--tal:block repeat="div divisions">                       
+                        <option tal:attributes="selected python: str(div['da']) == division; value python: div['da'];" tal:content="python: div['divname']" />
+                    </tal:block-->
+                 </select>
+                 </td>
+                 <td><input style="text-transform: uppercase" size="5" maxlength="1" type="text" name="section" tal:attributes="value section"></td>
+                 <td><input size="5" maxlength="4" type="text" name="radical" tal:attributes="value radical"></td>
+                 <td>/ <input size="4" maxlength="2" type="text" name="bis" tal:attributes="value bis"></td>
+                 <td><input style="text-transform: uppercase" size="5" maxlength="1" type="text" name="exposant" tal:attributes="value exposant"></td>
+                 <td><input size="5" type="text" name="puissance" maxlength="2" tal:attributes="value puissance"></td>
+                 <td><input type="checkbox" name="partie" tal:attributes="value partie"></td>
+                 </tr>
+             </table>
+ </span>
 </div>
