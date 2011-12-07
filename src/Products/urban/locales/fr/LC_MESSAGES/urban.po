@@ -1445,7 +1445,7 @@ msgstr "Nature de l'établissement"
 #. Default: "Floodinglevel"
 #: GenericLicence.py
 msgid "urban_label_floodingLevel"
-msgstr "Zone inondable (Voirie)"
+msgstr "Zone inondable (Fiche Voirie)"
 
 #. Default: "Foldercategory"
 #: GenericLicence.py
@@ -1671,7 +1671,7 @@ msgstr "DGRNE Sous-sol (joindre annexe 2 et 3) (Fiche Urbanisme)"
 #. Default: "Locationfloodinglevel"
 #: GenericLicence.py
 msgid "urban_label_locationFloodingLevel"
-msgstr "Zone inondable (Urbanisme)"
+msgstr "Zone inondable (Fiche Urbanisme)"
 
 #. Default: "Locationtechnicaladvice"
 #: BuildLicence.py
