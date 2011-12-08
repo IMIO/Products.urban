@@ -19,9 +19,8 @@ def setCreationDate(urbanEvent, event):
 
 def generateSingletonDocument(urbanEvent, event):
     urban_tool = getToolByName(urbanEvent, 'portal_urban')
-    if not urban_tool.getGenerateSingletonDocuments:
+    if not urban_tool.getGenerateSingletonDocuments():
         return
     templates = urbanEvent.getTemplates()
     if len(templates) == 1:
-        urban_tool = getToolByName(urbanEvent, 'portal_urban')
         urban_tool.createUrbanDoc(templates[0].UID(), urbanEvent.UID())
