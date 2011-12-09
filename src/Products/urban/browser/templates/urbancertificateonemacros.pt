@@ -57,7 +57,15 @@
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_specificFeatures">Specific features</span>:</b></td>
       <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('specificFeatures', mode='view')" /></td>
+      <td valign="top">
+       <span><metal:myfield use-macro="python:here.widget('specificFeatures', mode='view')" /></span>
+       <span tal:condition="python: context.getSpecificFeatures() != ['']">,</span>
+       <span tal:repeat="customFeature python:context.getCustomSpecificFeatures()">
+       <span tal:define="starting repeat/customFeature/start"
+             tal:condition="python: not starting">,</span>
+       <span tal:content="python:customFeature.values()[0]"></span>
+       </span>
+      </td>
      </tr>
     </table>
    </fieldset>

@@ -22,11 +22,13 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
+from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate as _
 from Products.CMFCore.utils import getToolByName
+from Products.DataGridField.Column import Column
 from Products.urban.base import UrbanBase
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.utils import setOptionalAttributes
@@ -71,6 +73,17 @@ schema = Schema((
         schemata='urban_description',
         multiValued=True,
         vocabulary=UrbanVocabulary('specificfeatures'),
+    ),
+    DataGridField(
+        name='customSpecificFeatures',
+        widget=DataGridWidget(
+            columns={'Features' : Column("Feature")},
+            label='Customspecificfeatures',
+            label_msgid='urban_label_customSpecificFeatures',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        columns=('Features',),
     ),
     ReferenceField(
         name='foldermanagers',
