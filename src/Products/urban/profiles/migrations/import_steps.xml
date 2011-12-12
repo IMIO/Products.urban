@@ -65,13 +65,6 @@
     Delays were UrbanVocabularyTerms, now they are UrbanDelays
  </import-step>
  <import-step
-    id="urban-addSpecificFeatures"
-    handler="Products.urban.profiles.migrations.migrate.addSpecificFeatures"
-    title="Add specific features for UrbanCertificateOne, UrbanCertificateTwo and NotaryLetters urban configs"
-    version="2010-07-14T16:00:00.0">
-    Add specific features for UrbanCertificateOne, UrbanCertificateTwo and NotaryLetters urban configs
- </import-step>
- <import-step
     id="urban-migrateToContact"
     handler="Products.urban.profiles.migrations.migrate.migrateToContact"
     title="More portal_types are now based on Contact.  Migrate old instances"
@@ -192,4 +185,10 @@
       Road types were defined in the BuildLicence LicenceConfig before
       Now there are at the portal_urban level
  </import-step>
+ <import-step
+    id="urban-addFolderCategoriesToUrbanCertificates"
+    handler="Products.urban.profiles.migrations.migrate.addFolderCategoriesToUrbanCertificates"
+    title="Add fodlercategories for UrbanCertificateOne and UrbanCertificateTwo"
+    version="2011-12-12T12:00.0">
+      Add fodlercategories for UrbanCertificateOne and UrbanCertificateTwo</import-step>
 </import-steps>

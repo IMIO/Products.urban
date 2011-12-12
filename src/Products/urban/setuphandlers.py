@@ -201,6 +201,18 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="classe-art-196",title=u"Classé (article 196 du CWATUPE)", description="Classé (article 196 du CWATUPE)")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-de-protection-art-209",title=u"Zone de protection (article 209 du CWATUPE)", description="Zone de protection (article 209 du CWATUPE)")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-inondable",title=u"Zone à risque inondable (plan P.L.U.I.E.S.)", description="Zone à risque inondable (plan P.L.U.I.E.S.)")
+            #add FolderCategories folder
+            newFolderid = configFolder.invokeFactory("Folder",id="foldercategories",title=_("foldercategories_folder_title", 'urban', context=site.REQUEST))
+            newFolder = getattr(configFolder, newFolderid)
+            newFolder.setConstrainTypesMode(1)
+            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+            #categories for UrbanCertificateOnes
+            if urban_type in ['UrbanCertificateOne', ]:
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="cu1",title=u"CU1 (certificat d'urbanisme 1)")
+            #categories for UrbanCertificateTwos
+            elif urban_type in ['UrbanCertificateTwo', ]:
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="cu2",title=u"CU2 (certificat d'urbanisme 2)")
 
         if urban_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', ]:
             #we add the custom township specific features folder
@@ -237,6 +249,7 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="plan_secteur",title=u"Une copie du plan de secteur")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="isolation",title=u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="peb",title=u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires")
+
             #add FolderCategories folder
             newFolderid = configFolder.invokeFactory("Folder",id="foldercategories",title=_("foldercategories_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)

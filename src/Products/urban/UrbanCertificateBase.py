@@ -306,7 +306,10 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
        Finalizes the type schema to alter some fields
     """
-    schema.moveField('description', after='foldermanagers')
+    schema.moveField('referenceDGATLP', after='reference')
+    schema.moveField('notaryContact', after='workLocations')
+    schema.moveField('foldermanagers', after='notaryContact')
+    schema.moveField('description', after='townshipSpecificFeatures')
     return schema
 
 finalizeSchema(UrbanCertificateBase_schema)

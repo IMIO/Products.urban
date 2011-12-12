@@ -73,7 +73,8 @@ def migrateToPlone4(context):
     #Road types were defined in the BuildLicence LicenceConfig before
     #Now there are at the portal_urban level
     migrateRoadTypesAsGlobal(context)
-
+    #add foldercategories to UrbanCertificates
+    addFolderCategoriesToUrbanCertificates(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -423,37 +424,33 @@ def migrateTopicsAddPathCriterion(context):
                 criterion = topic.addCriterion(field='path', criterion_type='ATPathCriterion')
                 criterion.setValue(['',])
 
-def addSpecificFeatures(context):
+def addFolderCategoriesToUrbanCertificates(context):
     """
-        Add specific features for UrbanCertificateOne,
-        UrbanCertificateTwo and NotaryLetters urban configs
+        Add fodlercategories for UrbanCertificateOne and UrbanCertificateTwo
     """
     if isNoturbanMigrationsProfile(context): return
 
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
-    for urban_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', ]:
+    for urban_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', ]:
         configFolder=getattr(tool,urban_type.lower())
         #we add the specific features folder
-        newFolderid = configFolder.invokeFactory("Folder",id="specificfeatures",title=_("urban","urban_label_specificFeatures",context=site,default="Specific features"))
+        if hasattr(aq_base(configFolder), 'foldercategories'):
+            logger.info("LicenceConfig %s already contains a 'foldercategories' folder" % configFolder.id)
+            continue
+        import pdb; pdb.set_trace()
+        newFolderid = configFolder.invokeFactory("Folder",id="foldercategories",title=_("foldercategories_folder_title","urban",context=site.REQUEST,default="Folder categories"))
         newFolder = getattr(configFolder, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
         newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="reglement-regional-urbanisme",title=u"Règlement régional d'urbanisme")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="projet-expropriation",title=u"Projet d'expropriation")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="plan-remembrement",title=u"Plan de remembrement")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="ordonnance-insalubrite",title=u"Ordoncance d'insalubrité")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="legislation-monuments-desaffectes",title=u"Législation monuments désaffectés")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="tuyauterie-gaz-naturel",title=u"Prise souterraine tuyauterie gaz naturel (loi du 12 avril 1965)")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="site-natura-2000",title=u"Site Natura 2000")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="infractions-legislation-urbanisme",title=u"Infractions à la législation sur l'urbanisme ou droit de l'environnement connues")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="perimetre-art-136-136bis",title=u"Périmètre visés aux articles 136 et 136bis du CWATUPE")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="droit-preemption",title=u"Un droit de préemption (article 175 du CWATUPE)")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="liste-sauvegarde-art-193",title=u"Inscrit sur la liste des sauvegardes (article 193 du CWATUPE)")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="classe-art-196",title=u"Classé (article 196 du CWATUPE)")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-de-protection-art-209",title=u"Zone de protection (article 209 du CWATUPE)")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-inondable",title=u"Zone à risque inondable (plan P.L.U.I.E.S.)")
+        #categories for UrbanCertificateOnes
+        if urban_type in ['UrbanCertificateOne', ]:
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="cu1",title=u"CU1 (certificat d'urbanisme 1)")
+        #categories for UrbanCertificateTwos
+        elif urban_type in ['UrbanCertificateTwo', ]:
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="cu2",title=u"CU2 (certificat d'urbanisme 2)")
+        logger.info("LicenceConfig %s now contains a 'foldercategories' folder" % configFolder.id)
 
 def migrateTool(context):
     """
