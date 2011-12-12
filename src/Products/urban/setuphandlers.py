@@ -209,7 +209,8 @@ def addUrbanConfigs(context):
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
             newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="reglement-regional-urbanisme",title=u"bla bla", description="Et mon cul c'est du blanc de poulet")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-a-risque",title=u"Se trouve dans une zone à risque", description="se trouve dans une zone à risque (faible moyen élevé) dans la cartographie Aléa d'inondation par débordement de cours d'eau - dressée dans le cadre du plan P.L.U.I.E.S et annexée à l'arrêté du Gouvernement Wallon, adopté en date du 13 juillet 2008;")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="insalubrite",title=u"Est frappé d'un Arrêté d'insalubrité", description="est frappé d'un Arrêté d'insalubrité OU d'un permis de location datant du [...] - Le futur acquéreur est invité à prendre contact avec le Service Logement Salubrité (tél. : XXX) pour de plus amples informations;")
 
         if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', ]:
             #add "missingparts" folder

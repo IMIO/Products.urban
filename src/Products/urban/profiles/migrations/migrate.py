@@ -476,7 +476,7 @@ def addFoldersToUrbanCertificates(context):
 
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
-    for urban_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', ]:
+    for urban_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', ]:
         configFolder=getattr(tool,urban_type.lower())
         #we add the specific features folder
         if hasattr(aq_base(configFolder), 'foldercategories'):
@@ -507,6 +507,19 @@ def addFoldersToUrbanCertificates(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="form_demande",title=u"Formulaire de demande (formulaire 1A) en 3 exemplaires")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="extrait_cadastral",title=u"Extrait cadastral en 3 exemplaires")
             logger.info("LicenceConfig %s now contains a 'missingparts' folder" % configFolder.id)
+
+        if hasattr(aq_base(configFolder), 'townshipspecificfeatures'):
+            logger.info("LicenceConfig %s already contains a 'townshipspecificfeatures' folder" % configFolder.id)
+        else:
+            #we add the custom township specific features folder
+            newFolderid = configFolder.invokeFactory("Folder",id="townshipspecificfeatures",title=_("urban_label_townshipSpecificFeatures", 'urban', context=site.REQUEST))
+            newFolder = getattr(configFolder, newFolderid)
+            newFolder.setConstrainTypesMode(1)
+            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-a-risque",title=u"Se trouve dans une zone à risque", description="se trouve dans une zone à risque (faible moyen élevé) dans la cartographie Aléa d'inondation par débordement de cours d'eau - dressée dans le cadre du plan P.L.U.I.E.S et annexée à l'arrêté du Gouvernement Wallon, adopté en date du 13 juillet 2008;")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="insalubrite",title=u"Est frappé d'un Arrêté d'insalubrité", description="est frappé d'un Arrêté d'insalubrité OU d'un permis de location datant du [...] - Le futur acquéreur est invité à prendre contact avec le Service Logement Salubrité (tél. : XXX) pour de plus amples informations;")
+            logger.info("LicenceConfig %s now contains a 'townshipspecificfeatures' folder" % configFolder.id)
 
 def migrateTool(context):
     """
