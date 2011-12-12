@@ -28,7 +28,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate as _
 from Products.CMFCore.utils import getToolByName
-from Products.DataGridField.Column import Column
+from Products.DataGridField.LinesColumn import LinesColumn
 from Products.urban.base import UrbanBase
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.utils import setOptionalAttributes
@@ -77,13 +77,13 @@ schema = Schema((
     DataGridField(
         name='customSpecificFeatures',
         widget=DataGridWidget(
-            columns={'Features' : Column("Feature")},
+            columns={'feature' : LinesColumn("Feature")},
             label='Customspecificfeatures',
             label_msgid='urban_label_customSpecificFeatures',
             i18n_domain='urban',
         ),
         schemata='urban_description',
-        columns=('Features',),
+        columns=('feature',),
     ),
     StringField(
         name='townshipSpecificFeatures',
@@ -299,6 +299,15 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence,
     def getLastTheLicence(self):
         return self._getLastEvent(interfaces.ITheLicenceEvent)
 
+    def getCustomSpecificFeaturesAsList(self):
+        """
+          To display custom specific features easily, get it as a list of features
+        """
+        res = []
+        for csf in self.getCustomSpecificFeatures():
+            if csf['feature']:
+                res.append(csf['feature'])
+        return res
 
 
 registerType(UrbanCertificateBase, PROJECTNAME)
