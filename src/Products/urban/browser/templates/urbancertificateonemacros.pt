@@ -67,8 +67,17 @@
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_townshipSpecificFeatures">Township specific features</span>:</b></td>
       <td width="2%"></td>
-      <td valign="top">
-       <span><metal:myfield use-macro="python:here.widget('townshipSpecificFeatures', mode='view')" /></span>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('townshipSpecificFeatures', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_customSpecificFeatures">Custom specific features</span>:</b></td>
+      <td width="2%"></td>
+      <td>
+       <span tal:repeat="customFeature python:context.getCustomSpecificFeatures()">
+       <span tal:define="starting repeat/customFeature/start"
+             tal:condition="python: not starting">,</span>
+       <span tal:content="python:customFeature.values()[0]"></span>
+       </span>
       </td>
      </tr>
      <tr>
