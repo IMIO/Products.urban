@@ -47,14 +47,6 @@ class UrbanCertificateOneView(BrowserView):
                }
         return dict
 
-    def mergeFeatures(self):
-        context = aq_inner(self.context)
-        features = context.getSpecificFeatures()
-        for dic in context.getCustomSpecificFeatures():
-            features.append(dic.values()[0])
-        context.setSpecificFeatures(features)
-        return 'specificFeatures'
-
 class UrbanCertificateOneMacros(BrowserView):
     """
       This manage the macros of UrbanCertificateOne
