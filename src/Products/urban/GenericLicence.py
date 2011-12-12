@@ -744,35 +744,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         """
         return self.objectValues('PortionOut')
 
-    def getBeginDate(self):
-        """
-          Return the beginDate of the Licence
-        """
-        #try to get the beginDate of the UrbanEvent that start the Licence
-        try:
-            urbanevent = getattr(self, "depot-de-la-demande")
-            return urbanevent.getBeginDate()
-        except AttributeError:
-            #if we can not get it, we return the CreationDate
-            return DateTime(self.CreationDate())
-
-    def getEndDate(self):
-        """
-          Return the endDate of the Licence
-        """
-        delay = self.getAnnoncedDelay()
-        if delay and str(delay).isdigit():
-            return self.getBeginDate() + delay
-        else:
-            return self.getBeginDate()
-
-    security.declarePublic('getDatesString')
-    def getDatesString(self):
-        """
-          Produces a string representation of begin and end date for sorting purposes
-        """
-        return str(self.getBeginDate()) + '-' + str(self.getEndDate())
-
     security.declarePublic('adapted')
     def adapted(self):
         """
