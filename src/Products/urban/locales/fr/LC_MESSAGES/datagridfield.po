@@ -17,6 +17,9 @@ msgstr ""
 msgid "End date"
 msgstr "Date de fin de l'enquête"
 
+msgid "Feature"
+msgstr "Particularité supplémentaire"
+
 msgid "Number"
 msgstr "Numéro"
 
@@ -32,5 +35,3 @@ msgstr "Date du début de l'enquête"
 msgid "Street"
 msgstr "Rue"
 
-msgid "Feature"
-msgstr "Particularité supplémentaire"

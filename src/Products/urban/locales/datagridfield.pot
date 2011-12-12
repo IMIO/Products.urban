@@ -31,3 +31,6 @@ msgstr ""
 
 msgid "Street"
 msgstr ""
+
+msgid "Feature"
+msgstr ""
