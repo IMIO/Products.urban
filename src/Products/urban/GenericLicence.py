@@ -60,7 +60,7 @@ slave_fields_pca= (
     },
 )
 
-optional_fields = ['subdivisionDetails','missingPartsDetails','folderZoneDetails','derogationDetails','isInPCA',
+optional_fields = ['subdivisionDetails', 'missingParts', 'missingPartsDetails','folderZoneDetails','derogationDetails','isInPCA',
                    'annoncedDelayDetails','roadType','roadCoating','roadEquipments',
                    'protectedBuildingDetails','investigationDetails','investigationReasons',
                    'pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks',
@@ -126,6 +126,7 @@ schema = Schema((
     StringField(
         name='folderCategory',
         widget=SelectionWidget(
+            format='select',
             label='Foldercategory',
             label_msgid='urban_label_folderCategory',
             i18n_domain='urban',
