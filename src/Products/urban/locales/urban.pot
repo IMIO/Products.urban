@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-12-09 16:28+0000\n"
+"POT-Creation-Date: 2011-12-12 10:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -278,6 +278,11 @@ msgstr ""
 #. Default: "Select the specific features from the left box and drop them in the right box to select them"
 #: UrbanCertificateBase.py
 msgid "certificateone_specificfeatures_descr"
+msgstr ""
+
+#. Default: "Select the specific features from the left box and drop them in the right box to select them"
+#: UrbanCertificateBase.py
+msgid "certificateone_townshipspecificfeatures_descr"
 msgstr ""
 
 #. Default: "Choose a value"
@@ -2149,6 +2154,11 @@ msgstr ""
 #: GenericLicence.py
 #: ParcellingTerm.py
 msgid "urban_label_title"
+msgstr ""
+
+#. Default: "Townshipspecificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_townshipSpecificFeatures"
 msgstr ""
 
 #. Default: "Transmitdate"

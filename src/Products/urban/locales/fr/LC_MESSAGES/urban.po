@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-12-09 16:28+0000\n"
+"POT-Creation-Date: 2011-12-12 10:53+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -279,6 +279,11 @@ msgstr "Une carte sera affichée lorsque les parcelles concernées auront été 
 #. Default: "Select the specific features from the left box and drop them in the right box to select them"
 #: UrbanCertificateBase.py
 msgid "certificateone_specificfeatures_descr"
+msgstr "Choisissez dans la colonne de gauche les éléments à activer et déplacez les avec le bouton [>>] vers la colonne de droite"
+
+#. Default: "Select the specific features from the left box and drop them in the right box to select them"
+#: UrbanCertificateBase.py
+msgid "certificateone_townshipspecificfeatures_descr"
 msgstr "Choisissez dans la colonne de gauche les éléments à activer et déplacez les avec le bouton [>>] vers la colonne de droite"
 
 #. Default: "Choose a value"
@@ -1279,7 +1284,7 @@ msgstr "Pays"
 #. Default: "Customspecificfeatures"
 #: UrbanCertificateBase.py
 msgid "urban_label_customSpecificFeatures"
-msgstr "Particularités du bien (divers)"
+msgstr "Particularités diverses du bien"
 
 #. Default: "Data"
 #: Layer.py
@@ -2154,6 +2159,11 @@ msgstr "Date de notification"
 #: ParcellingTerm.py
 msgid "urban_label_title"
 msgstr "Titre"
+
+#. Default: "Townshipspecificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_townshipSpecificFeatures"
+msgstr "Particularités communales du bien"
 
 #. Default: "Transmitdate"
 #: UrbanEvent.py

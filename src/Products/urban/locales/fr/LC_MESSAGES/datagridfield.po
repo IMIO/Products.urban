@@ -32,5 +32,3 @@ msgstr "Date du début de l'enquête"
 msgid "Street"
 msgstr "Rue"
 
-msgid "Feature"
-msgstr "Particularité"
