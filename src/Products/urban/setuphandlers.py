@@ -201,18 +201,6 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="classe-art-196",title=u"Classé (article 196 du CWATUPE)", description="Classé (article 196 du CWATUPE)")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-de-protection-art-209",title=u"Zone de protection (article 209 du CWATUPE)", description="Zone de protection (article 209 du CWATUPE)")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-inondable",title=u"Zone à risque inondable (plan P.L.U.I.E.S.)", description="Zone à risque inondable (plan P.L.U.I.E.S.)")
-            #add FolderCategories folder
-            newFolderid = configFolder.invokeFactory("Folder",id="foldercategories",title=_("foldercategories_folder_title", 'urban', context=site.REQUEST))
-            newFolder = getattr(configFolder, newFolderid)
-            newFolder.setConstrainTypesMode(1)
-            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-            #categories for UrbanCertificateOnes
-            if urban_type in ['UrbanCertificateOne', ]:
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="cu1",title=u"CU1 (certificat d'urbanisme 1)")
-            #categories for UrbanCertificateTwos
-            elif urban_type in ['UrbanCertificateTwo', ]:
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="cu2",title=u"CU2 (certificat d'urbanisme 2)")
 
         if urban_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', ]:
             #we add the custom township specific features folder
@@ -223,16 +211,8 @@ def addUrbanConfigs(context):
             newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
             newFolder.invokeFactory("UrbanVocabularyTerm",id="reglement-regional-urbanisme",title=u"bla bla", description="Et mon cul c'est du blanc de poulet")
 
-        if urban_type in ['BuildLicence', 'ParcelOutLicence', ]:
-            """
-            #add Recipients folder
-            newFolderid = configFolder.invokeFactory("Folder",id="recipients",title=_(,"recipients_folder_title", 'urban', context=site.REQUEST))
-            newFolder = getattr(configFolder, newFolderid)
-            newFolder.setConstrainTypesMode(1)
-            newFolder.setLocallyAllowedTypes(['Recipient'])
-            newFolder.setImmediatelyAddableTypes(['Recipient'])
-            """
-            #add "necessarydocuments" folder
+        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', ]:
+            #add "missingparts" folder
             newFolderid = configFolder.invokeFactory("Folder",id="missingparts",title=_("missingparts_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
             newFolder.setConstrainTypesMode(1)
@@ -249,6 +229,10 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="plan_secteur",title=u"Une copie du plan de secteur")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="isolation",title=u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="peb",title=u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires")
+            if urban_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', ]:
+                #necessary documents for UrbanCertificates
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="form_demande",title=u"Formulaire de demande (formulaire 1A) en 3 exemplaires")
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="extrait_cadastral",title=u"Extrait cadastral en 3 exemplaires")
 
             #add FolderCategories folder
             newFolderid = configFolder.invokeFactory("Folder",id="foldercategories",title=_("foldercategories_folder_title", 'urban', context=site.REQUEST))
@@ -264,12 +248,18 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="pu",title=u"PU (demande de PERMIS UNIQUE)")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="art127",title=u"UCP (article 127)")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="inconnu",title=u"Inconnue")
-            else:
+            elif urban_type in ['ParcelOutLicence', ]:
                 #categories for ParcelOutLicences
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="lap",title=u"LAP (permis de lotir avec avis préalable du FD)")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="lapm",title=u"LAP/M (modification du permis de lotir avec avis du FD)")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="ldc",title=u"LDC (permis de lotir dans un PCA, lotissement ou en décentralisation)")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="ldcm",title=u"LDC/M (modification du permis de lotir dans un PCA, RCU, LOTISSEMENT)")
+            #categories for UrbanCertificateOnes
+            elif urban_type in ['UrbanCertificateOne', ]:
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="cu1",title=u"CU1 (certificat d'urbanisme 1)")
+            #categories for UrbanCertificateTwos
+            elif urban_type in ['UrbanCertificateTwo', ]:
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="cu2",title=u"CU2 (certificat d'urbanisme 2)")
 
             #add TownshipFolderCategories folder
             newFolderid = configFolder.invokeFactory("Folder",id="townshipfoldercategories",title=_("townshipfoldercategories_folder_title", 'urban', context=site.REQUEST))
@@ -277,28 +267,28 @@ def addUrbanConfigs(context):
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
             newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-            #township categories for BuildLicences
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="nouveau-logement",title=u"Création d'un nouveau logement dans un bâtiment existant")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="parking",title=u"Parking")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="changement-de-destination",title=u"Changement de destination")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="enseigne",title=u"Enseigne")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="commerce",title=u"Commerce")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="nouvelle-habitation",title=u"Construction d'une nouvelle habitation")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="transformation",title=u"Transformation d'une habitation existante")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="immeuble-appartements",title=u"Construction d'un immeuble à appartements")
+            #township categories
             newFolder.invokeFactory("UrbanVocabularyTerm",id="abattre",title=u"Abattre")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="demolition",title=u"Démolition")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="transformation-facade",title=u"Transformation d'une façade")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="recouvrement-toiture",title=u"Remplacement de parement de façade ou de recouvrement de toiture")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="piscine",title=u"Piscine")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="abri-animaux",title=u"Abri pour animaux")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="abri-jardin",title=u"Abri de jardin")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="car-port",title=u"Car-port")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="abri-animaux",title=u"Abri pour animaux")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="changement-de-destination",title=u"Changement de destination")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="clotures-murs",title=u"Clôtures et murs")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="modification-relief",title=u"Modification du relief du sol")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="veranda",title=u"Véranda")
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="module-electrite",title=u"Modules de production d'électricité ou de chaleur")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="commerce",title=u"Commerce")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="demolition",title=u"Démolition")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="divers",title=u"Divers")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="enseigne",title=u"Enseigne")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="immeuble-appartements",title=u"Construction d'un immeuble à appartements")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="modification-relief",title=u"Modification du relief du sol")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="module-electrite",title=u"Modules de production d'électricité ou de chaleur")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="nouvelle-habitation",title=u"Construction d'une nouvelle habitation")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="nouveau-logement",title=u"Création d'un nouveau logement dans un bâtiment existant")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="parking",title=u"Parking")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="piscine",title=u"Piscine")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="recouvrement-toiture",title=u"Remplacement de parement de façade ou de recouvrement de toiture")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="transformation",title=u"Transformation d'une habitation existante")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="transformation-facade",title=u"Transformation d'une façade")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="veranda",title=u"Véranda")
 
             #add RoadEquipments folder
             newFolderid = configFolder.invokeFactory("Folder",id="folderroadequipments",title=_("folderroadequipments_folder_title", 'urban', context=site.REQUEST))
@@ -325,11 +315,6 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="reprisinventaire",title=u"repris à l'inventaire")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="archeologique",title=u"à l'Atlas archéologique")
 
-            #add investigation articles folder
-            #this is done by a method because the migrateBuildLicencesInvestigationArticles
-            #migration step will use it too
-            addInvestigationArticles(context, configFolder)
-
             #add RoadCoatings folder
             newFolderid = configFolder.invokeFactory("Folder",id="folderroadcoatings",title=_("folderroadcoatings_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
@@ -339,6 +324,11 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="filetseau",title=u"Filets d'eau")
             newFolder.invokeFactory("UrbanVocabularyTerm",id="bordures",title=u"Bordures")
 
+        if urban_type in ['BuildLicence', 'ParcelOutLicence', ]:
+            #add investigation articles folder
+            #this is done by a method because the migrateBuildLicencesInvestigationArticles
+            #migration step will use it too
+            addInvestigationArticles(context, configFolder)
             #add Makers folder
             newFolderid = configFolder.invokeFactory("Folder",id="foldermakers",title=_("foldermakers_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)

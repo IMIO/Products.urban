@@ -15,7 +15,7 @@ from Products.urban.events.urbanEventInquiryEvents import setLinkedInquiry
 from Products.urban.events.urbanEventEvents import setEventTypeType, setCreationDate
 from Products.urban.interfaces import ILicenceContainer
 from Products.urban.utils import getMd5Signature
-from Products.urban.config import GLOBAL_TEMPLATES
+from Products.urban.config import GLOBAL_TEMPLATES, URBAN_TYPES
 from Products.Archetypes.event import ObjectInitializedEvent
 
 logger = logging.getLogger('urban: migrations')
@@ -74,7 +74,9 @@ def migrateToPlone4(context):
     #Now there are at the portal_urban level
     migrateRoadTypesAsGlobal(context)
     #add foldercategories to UrbanCertificates
-    addFolderCategoriesToUrbanCertificates(context)
+    addFoldersToUrbanCertificates(context)
+    #add townshipfoldercategories to every LicenceConfig
+    addTownshipCategoriesToAllLicences(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -424,9 +426,51 @@ def migrateTopicsAddPathCriterion(context):
                 criterion = topic.addCriterion(field='path', criterion_type='ATPathCriterion')
                 criterion.setValue(['',])
 
-def addFolderCategoriesToUrbanCertificates(context):
+def addTownshipCategoriesToAllLicences(context):
     """
-        Add fodlercategories for UrbanCertificateOne and UrbanCertificateTwo
+        Add townshipfoldercategories for every LicenceConfigs
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+    tool = getToolByName(site, 'portal_urban')
+    for urban_type in URBAN_TYPES:
+        configFolder=getattr(tool,urban_type.lower())
+        #we add the specific features folder
+        if hasattr(aq_base(configFolder), 'townshipfoldercategories'):
+            logger.info("LicenceConfig %s already contains a 'townshipfoldercategories' folder" % configFolder.id)
+        else:
+            newFolderid = configFolder.invokeFactory("Folder",id="townshipfoldercategories",title=_("townshipfoldercategories_folder_title","urban",context=site.REQUEST,default="Township folder categories"))
+            newFolder = getattr(configFolder, newFolderid)
+            newFolder.setConstrainTypesMode(1)
+            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="abattre",title=u"Abattre")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="abri-animaux",title=u"Abri pour animaux")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="abri-jardin",title=u"Abri de jardin")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="car-port",title=u"Car-port")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="changement-de-destination",title=u"Changement de destination")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="clotures-murs",title=u"Clôtures et murs")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="commerce",title=u"Commerce")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="demolition",title=u"Démolition")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="divers",title=u"Divers")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="enseigne",title=u"Enseigne")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="immeuble-appartements",title=u"Construction d'un immeuble à appartements")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="modification-relief",title=u"Modification du relief du sol")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="module-electrite",title=u"Modules de production d'électricité ou de chaleur")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="nouvelle-habitation",title=u"Construction d'une nouvelle habitation")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="nouveau-logement",title=u"Création d'un nouveau logement dans un bâtiment existant")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="parking",title=u"Parking")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="piscine",title=u"Piscine")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="recouvrement-toiture",title=u"Remplacement de parement de façade ou de recouvrement de toiture")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="transformation",title=u"Transformation d'une habitation existante")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="transformation-facade",title=u"Transformation d'une façade")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="veranda",title=u"Véranda")
+            logger.info("LicenceConfig %s now contains a 'townshipfoldercategories' folder" % configFolder.id)
+
+def addFoldersToUrbanCertificates(context):
+    """
+        Add foldercategories and missingparts for UrbanCertificateOne and UrbanCertificateTwo
     """
     if isNoturbanMigrationsProfile(context): return
 
@@ -437,20 +481,32 @@ def addFolderCategoriesToUrbanCertificates(context):
         #we add the specific features folder
         if hasattr(aq_base(configFolder), 'foldercategories'):
             logger.info("LicenceConfig %s already contains a 'foldercategories' folder" % configFolder.id)
-            continue
-        import pdb; pdb.set_trace()
-        newFolderid = configFolder.invokeFactory("Folder",id="foldercategories",title=_("foldercategories_folder_title","urban",context=site.REQUEST,default="Folder categories"))
-        newFolder = getattr(configFolder, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        #categories for UrbanCertificateOnes
-        if urban_type in ['UrbanCertificateOne', ]:
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="cu1",title=u"CU1 (certificat d'urbanisme 1)")
-        #categories for UrbanCertificateTwos
-        elif urban_type in ['UrbanCertificateTwo', ]:
-            newFolder.invokeFactory("UrbanVocabularyTerm",id="cu2",title=u"CU2 (certificat d'urbanisme 2)")
-        logger.info("LicenceConfig %s now contains a 'foldercategories' folder" % configFolder.id)
+        else:
+            newFolderid = configFolder.invokeFactory("Folder",id="foldercategories",title=_("foldercategories_folder_title","urban",context=site.REQUEST,default="Folder categories"))
+            newFolder = getattr(configFolder, newFolderid)
+            newFolder.setConstrainTypesMode(1)
+            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+            #categories for UrbanCertificateOnes
+            if urban_type in ['UrbanCertificateOne', ]:
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="cu1",title=u"CU1 (certificat d'urbanisme 1)")
+            #categories for UrbanCertificateTwos
+            elif urban_type in ['UrbanCertificateTwo', ]:
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="cu2",title=u"CU2 (certificat d'urbanisme 2)")
+            logger.info("LicenceConfig %s now contains a 'foldercategories' folder" % configFolder.id)
+
+        if hasattr(aq_base(configFolder), 'missingparts'):
+            logger.info("LicenceConfig %s already contains a 'missingparts' folder" % configFolder.id)
+        else:
+            newFolderid = configFolder.invokeFactory("Folder",id="missingparts",title=_("missingparts_folder_title","urban",context=site.REQUEST,default="Missing parts"))
+            newFolder = getattr(configFolder, newFolderid)
+            newFolder.setConstrainTypesMode(1)
+            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+            #necessary documents for UrbanCertificates
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="form_demande",title=u"Formulaire de demande (formulaire 1A) en 3 exemplaires")
+            newFolder.invokeFactory("UrbanVocabularyTerm",id="extrait_cadastral",title=u"Extrait cadastral en 3 exemplaires")
+            logger.info("LicenceConfig %s now contains a 'missingparts' folder" % configFolder.id)
 
 def migrateTool(context):
     """

@@ -186,9 +186,17 @@
       Now there are at the portal_urban level
  </import-step>
  <import-step
-    id="urban-addFolderCategoriesToUrbanCertificates"
-    handler="Products.urban.profiles.migrations.migrate.addFolderCategoriesToUrbanCertificates"
-    title="Add fodlercategories for UrbanCertificateOne and UrbanCertificateTwo"
-    version="2011-12-12T12:00.0">
-      Add fodlercategories for UrbanCertificateOne and UrbanCertificateTwo</import-step>
+    id="urban-addFoldersToUrbanCertificates"
+    handler="Products.urban.profiles.migrations.migrate.addFoldersToUrbanCertificates"
+    title="Add fodlercategories and missingparts for UrbanCertificateOne and UrbanCertificateTwo"
+    version="2011-12-12T14:00.0">
+      Add fodlercategories and missingparts for UrbanCertificateOne and UrbanCertificateTwo
+ </import-step>
+ <import-step
+    id="urban-addTownshipCategoriesToAllLicences"
+    handler="Products.urban.profiles.migrations.migrate.addTownshipCategoriesToAllLicences"
+    title="Add townshipfoldercategories for every LicenceConfigs"
+    version="2011-12-12T15:00.0">
+      Add townshipfoldercategories for every LicenceConfigs
+ </import-step>
 </import-steps>

@@ -50,6 +50,11 @@
       <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategory', mode='view')" /></td>
      </tr>
      <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_folderCategoryTownship">Folder category</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategoryTownship', mode='view')" /></td>
+     </tr>
+     <tr>
       <td valign="top"><b><span i18n:translate="urban_label_foldermanagers">Treating agent</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanFolderManagerMacro" /></td>

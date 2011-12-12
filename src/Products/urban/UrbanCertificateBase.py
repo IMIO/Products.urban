@@ -313,6 +313,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('notaryContact', after='workLocations')
     schema.moveField('foldermanagers', after='notaryContact')
     schema.moveField('description', after='townshipSpecificFeatures')
+    schema.moveField('folderCategoryTownship', after='folderCategory')
     return schema
 
 finalizeSchema(UrbanCertificateBase_schema)
