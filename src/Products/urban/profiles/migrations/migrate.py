@@ -74,7 +74,7 @@ def migrateToPlone4(context):
     #Now there are at the portal_urban level
     migrateRoadTypesAsGlobal(context)
     #add foldercategories to UrbanCertificates
-    addFoldersToUrbanCertificates(context)
+    addFoldersToAllLicences(context)
     #add townshipfoldercategories to every LicenceConfig
     addTownshipCategoriesToAllLicences(context)
 
@@ -468,15 +468,15 @@ def addTownshipCategoriesToAllLicences(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="veranda",title=u"Véranda")
             logger.info("LicenceConfig %s now contains a 'townshipfoldercategories' folder" % configFolder.id)
 
-def addFoldersToUrbanCertificates(context):
+def addFoldersToAllLicences(context):
     """
-        Add foldercategories and missingparts for UrbanCertificateOne and UrbanCertificateTwo
+        Add foldercategories and missingparts for every LicenceConfigs
     """
     if isNoturbanMigrationsProfile(context): return
 
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
-    for urban_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', ]:
+    for urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', ]:
         configFolder=getattr(tool,urban_type.lower())
         #we add the specific features folder
         if hasattr(aq_base(configFolder), 'foldercategories'):

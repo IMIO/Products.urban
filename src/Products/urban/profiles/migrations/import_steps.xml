@@ -186,11 +186,11 @@
       Now there are at the portal_urban level
  </import-step>
  <import-step
-    id="urban-addFoldersToUrbanCertificates"
-    handler="Products.urban.profiles.migrations.migrate.addFoldersToUrbanCertificates"
-    title="Add fodlercategories and missingparts for UrbanCertificateOne and UrbanCertificateTwo"
+    id="urban-addFoldersToAllLicences"
+    handler="Products.urban.profiles.migrations.migrate.addFoldersToAllLicences"
+    title="Add fodlercategories and missingparts for every LicenceConfigs"
     version="2011-12-12T14:00.0">
-      Add fodlercategories and missingparts for UrbanCertificateOne and UrbanCertificateTwo
+      Add fodlercategories and missingparts for every LicenceConfigs
  </import-step>
  <import-step
     id="urban-addTownshipCategoriesToAllLicences"
