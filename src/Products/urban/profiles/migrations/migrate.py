@@ -1006,12 +1006,16 @@ def migrateFoldermanagers(context):
         foldermanagers_folder.setLocallyAllowedTypes(['FolderManager'])
         foldermanagers_folder.setImmediatelyAddableTypes(['FolderManager'])
     else:
-        foldermanagers_folder = tool.foldermanagers
+        logger.info("Migrating Foldermanagers: was already migrated!")
+        return
+
     #move the foldermanagers spread in the config into the new folder
     foldermanager_ids = {}
     for licence_type in  URBAN_TYPES:
         ids_to_move = []
         licence_cfg_folder = getattr(tool, licence_type.lower())
+        if not hasattr(aq_base(licence_cfg_folder), 'foldermanagers'):
+            continue
         old_folder = licence_cfg_folder.foldermanagers
         #set the value for the field 'ManageableLicences' depending on the licence type 
         #where we found the foldermanagers
@@ -1039,6 +1043,7 @@ def migrateFoldermanagers(context):
                     licence.reindexObject()
                 except ValueError, msg:
                     logger.error("Error on licence '%s' when searching architect '%s', msg='%s'"%(licence.Title(), foldermanager.Title(),msg))
+
         #move the foldermanager objects
         cut_data = old_folder.manage_cutObjects(ids_to_move)
         foldermanagers_folder.manage_pasteObjects(cut_data)
