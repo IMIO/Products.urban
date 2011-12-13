@@ -579,9 +579,11 @@ if step in run_steps:
         else:
             max_port = 5000
             instance_exists = False
-            ini_file = '%s.ini'%databasename
-            if os.path.exists(os.path.join(config_dir, pylon_instances_file)):
-                ifile = open(os.path.join(config_dir, pylon_instances_file), 'r')
+            ini_file = os.path.join(config_dir, '%s.ini'%databasename)
+            print pylon_instances_file
+            print ini_file
+            if os.path.exists(pylon_instances_file):
+                ifile = open(pylon_instances_file, 'r')
                 for line in ifile:
                     line =  line.strip('\n')
                     if not line: continue
