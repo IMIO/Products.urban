@@ -44,13 +44,6 @@
     Migrate the UrbanEventTypes
  </import-step>
  <import-step
-    id="urban-addEquipmentTypes"
-    handler="Products.urban.profiles.migrations.migrate.addEquipmentTypes"
-    title="Add parceloutlicence equipments types in urban config"
-    version="2010-07-14T15:00:00.0">
-    Add parceloutlicence equipments types in urban config
- </import-step>
- <import-step
     id="urban-addPebMissingPart"
     handler="Products.urban.profiles.migrations.migrate.addPebMissingPart"
     title="Add an element 'peb' in the 'buildlicence' UrbanConfig 'missingparts' folder"
