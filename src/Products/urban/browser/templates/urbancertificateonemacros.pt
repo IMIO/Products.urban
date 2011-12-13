@@ -74,12 +74,15 @@
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('townshipSpecificFeatures', mode='view')" /></td>
      </tr>
+     <tal:block define="csfs context/getCustomSpecificFeaturesAsList">
      <tr style="border-bottom: 0">
       <td valign="top"><b><span i18n:translate="urban_label_customSpecificFeatures">Custom specific features</span>:</b></td>
       <td width="2%"></td>
-      <td></td>
+      <td>
+       <span tal:condition="not: csfs" class="discreet" i18n:translate="content_none">None</span>
+      </td>
      </tr>
-     <tr>
+     <tr tal:condition="csfs">
       <td colspan="3">
        <table style="margin-top: 0.3em; width: 100%;" class="listing">
         <thead>
@@ -87,12 +90,13 @@
           <th i18n:translate="" i18n:domain="datagridfield">Feature</th>
          </tr>
         </thead>
-        <tr tal:repeat="csf context/getCustomSpecificFeaturesAsList">
+        <tr tal:repeat="csf csfs">
          <td tal:content="structure python: '<br />'.join(csf)">Custom specific feature</td>
         </tr>
        </table>
       </td>
      </tr>
+     </tal:block>
     </table>
    </fieldset>
   </td>

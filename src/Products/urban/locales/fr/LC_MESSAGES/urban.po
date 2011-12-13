@@ -1284,7 +1284,7 @@ msgstr "Pays"
 #. Default: "Customspecificfeatures"
 #: UrbanCertificateBase.py
 msgid "urban_label_customSpecificFeatures"
-msgstr "Particularités diverses du bien"
+msgstr "Particularité(s) diverse(s) du bien"
 
 #. Default: "Data"
 #: Layer.py
@@ -1561,7 +1561,7 @@ msgstr "Point"
 #. Default: "Investigationreasons"
 #: GenericLicence.py
 msgid "urban_label_investigationReasons"
-msgstr "Particularités, raisons de l'enquête"
+msgstr "Particularité(s), raison(s) de l'enquête"
 
 #. Default: "Investigationstart"
 #: GenericLicence.py
@@ -2027,7 +2027,7 @@ msgstr "URL de la fonction spéciale"
 #. Default: "Specificfeatures"
 #: UrbanCertificateBase.py
 msgid "urban_label_specificFeatures"
-msgstr "Particularités du bien"
+msgstr "Particularité(s) du bien"
 
 #. Default: "Sqlhost"
 #: UrbanTool.py
@@ -2163,7 +2163,7 @@ msgstr "Titre"
 #. Default: "Townshipspecificfeatures"
 #: UrbanCertificateBase.py
 msgid "urban_label_townshipSpecificFeatures"
-msgstr "Particularités communales du bien"
+msgstr "Particularité(s) communale(s) du bien"
 
 #. Default: "Transmitdate"
 #: UrbanEvent.py

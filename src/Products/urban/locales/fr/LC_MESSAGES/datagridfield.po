@@ -18,7 +18,7 @@ msgid "End date"
 msgstr "Date de fin de l'enquête"
 
 msgid "Feature"
-msgstr "Particularité supplémentaire"
+msgstr "Description de la particularité diverse"
 
 msgid "Number"
 msgstr "Numéro"

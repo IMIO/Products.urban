@@ -305,7 +305,8 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence,
         """
         res = []
         for csf in self.getCustomSpecificFeatures():
-            if csf['feature']:
+            #in some case, DataGridField add an empty dict...
+            if csf.has_key('feature') and csf['feature']:
                 res.append(csf['feature'])
         return res
 
