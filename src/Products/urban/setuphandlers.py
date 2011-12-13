@@ -725,7 +725,7 @@ def addGlobalFolders(context):
         newFolder.setImmediatelyAddableTypes(['City'])
 
     #add global folderroadtypes folder
-    if not hasattr(tool, "globaltemplates"):
+    if not hasattr(tool, "folderroadtypes"):
         newFolderid = tool.invokeFactory("Folder",id="folderroadtypes",title=_("folderroadtypes_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
         newFolder.setConstrainTypesMode(1)
