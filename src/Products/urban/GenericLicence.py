@@ -246,7 +246,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_road',
-        vocabulary=UrbanVocabulary('folderroadcoatings'),
+        vocabulary=UrbanVocabulary('folderroadcoatings', inUrbanConfig=False),
     ),
     DataGridField(
         name='roadEquipments',
@@ -270,7 +270,7 @@ schema = Schema((
         ),
         schemata='urban_road',
         multiValued=1,
-        vocabulary=UrbanVocabulary('pashs'),
+        vocabulary=UrbanVocabulary('pashs', inUrbanConfig=False),
     ),
     TextField(
         name='pashDetails',

@@ -15,7 +15,7 @@ from Products.urban.events.urbanEventInquiryEvents import setLinkedInquiry
 from Products.urban.events.urbanEventEvents import setEventTypeType, setCreationDate
 from Products.urban.interfaces import ILicenceContainer
 from Products.urban.utils import getMd5Signature
-from Products.urban.config import GLOBAL_TEMPLATES
+from Products.urban.config import GLOBAL_TEMPLATES, URBAN_TYPES
 from Products.Archetypes.event import ObjectInitializedEvent
 
 logger = logging.getLogger('urban: migrations')
@@ -70,9 +70,8 @@ def migrateToPlone4(context):
     migrateFoldermakersTerms(context)
     #Move all the FolderManager objects into a single folder at the root of urban config
     migrateFoldermanagers(context)
-    #Road types were defined in the BuildLicence LicenceConfig before
-    #Now there are at the portal_urban level
-    migrateRoadTypesAsGlobal(context)
+    #Some folders defined on LicenceConfigs are now at the portal_urban root
+    migrateSomeLocalFoldersAsGlobal(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -544,7 +543,6 @@ def migrateToLicenceConfig(context):
     """
     if isNoturbanMigrationsProfile(context): return
 
-    from Products.urban.config import URBAN_TYPES
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
     logger.info("Migrating to LicenceConfigs: starting...")
@@ -982,29 +980,45 @@ def migrateGlobalTemplates(context):
             template.manage_addProperty('profileName', 'tests', "string")
         delattr(tool, template_infos[0].getId())
 
-def migrateRoadTypesAsGlobal(context):
+def migrateSomeLocalFoldersAsGlobal(context):
     """
-      Road types were defined in the BuildLicence LicenceConfig before
-      Now there are at the portal_urban level
+      Some folders defined on LicenceConfigs are now at the portal_urban root
+      This is the case for 'folderroadtypes', 'pashs' and 'foldercoatings'
     """
     if isNoturbanMigrationsProfile(context): return
 
     site = context.getSite()
+    #urban must have been reinstalled before running this step
     site.portal_properties.site_properties.enable_link_integrity_checks = False
     tool = getToolByName(site, 'portal_urban')
-    configFolder = getattr(tool, 'buildlicence')
-    logger.info("Migration the 'folderroadtypes' folder from the BuildLicence LicenceConfig to portal_urban: starting...")
-    if not hasattr(aq_base(configFolder), 'folderroadtypes'):
-        logger.info("Migration the 'folderroadtypes' folder from the BuildLicence LicenceConfig to portal_urban: already done!")
-        return
-    ids = ['folderroadtypes',]
-    cutdata = configFolder.manage_cutObjects(ids)
-    tool.manage_pasteObjects(cutdata)
-    #change the title moreover
-    tool.folderroadtypes.setTitle(_('folderroadtypes_folder_title', 'urban', context=site.REQUEST))
-    tool.folderroadtypes.reindexObject(['Title',])
-    #remove this folder also from old parceloutlicences LicenceConfig
-    if hasattr(aq_base(tool.parceloutlicence), 'folderroadtypes'):
-        tool.parceloutlicence.manage_delObjects('folderroadtypes')
-    logger.info("Migration the 'folderroadtypes' folder from the BuildLicence LicenceConfig to portal_urban: done!")
+
+    #ids of local folders that are now global folders
+    localFolderIds = ['folderroadtypes', 'folderroadcoatings', 'pashs']
+    for localFolderId in localFolderIds:
+        if not hasattr(tool, localFolderId):
+            raise KeyError, "Migrating some local LicenceConfigs folder to the portal_urban root : You must reinstall 'urban' before launching this step!"
+
+    for urban_type in URBAN_TYPES:
+        urban_type_id = urban_type.lower()
+        configFolder = getattr(tool, urban_type_id)
+        for localFolderId in localFolderIds:
+            if hasattr(aq_base(configFolder), localFolderId):
+                #a local folder exists, migrate it
+                localFolder = getattr(configFolder, localFolderId)
+                globalFolder = getattr(tool, localFolderId)
+                ids_to_cut = []
+                for obj in localFolder.objectValues():
+                    #if the element does not already exist in the folder at the root
+                    #of portal_urban, we cut and paste it
+                    objId = obj.id
+                    if not hasattr(globalFolder, objId):
+                        ids_to_cut.append(objId)
+                if ids_to_cut:
+                    #cut and paste elements that does not exist in the global folder
+                    cutdata = localFolder.manage_cutObjects(ids_to_cut)
+                    globalFolder.manage_pasteObjects(cutdata)
+                #delete the useless localFolder
+                configFolder.manage_delObjects([localFolderId,])
+
+    logger.info("Migrating some local LicenceConfigs folder to the portal_urban root : done!")
     site.portal_properties.site_properties.enable_link_integrity_checks = True

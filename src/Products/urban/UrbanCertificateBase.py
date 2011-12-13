@@ -311,6 +311,7 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence,
         return res
 
 
+
 registerType(UrbanCertificateBase, PROJECTNAME)
 # end of class UrbanCertificateBase
 

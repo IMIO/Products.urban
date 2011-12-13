@@ -170,13 +170,11 @@
     Migrate global templates: move them to a single folder'
  </import-step>
  <import-step
-    id="urban-migrateRoadTypesAsGlobal"
-    handler="Products.urban.profiles.migrations.migrate.migrateRoadTypesAsGlobal"
-    title="Road types were defined in the BuildLicence LicenceConfig before
-           Now there are at the portal_urban level"
+    id="urban-migrateSomeLocalFoldersAsGlobal"
+    handler="Products.urban.profiles.migrations.migrate.migrateSomeLocalFoldersAsGlobal"
+    title="Some folders defined on LicenceConfigs are now at the portal_urban root"
     version="2011-12-05T16:00.0">
-      Road types were defined in the BuildLicence LicenceConfig before
-      Now there are at the portal_urban level
+    Some folders defined on LicenceConfigs are now at the portal_urban root
  </import-step>
  <import-step
     id="urban-addFoldersToAllLicences"
