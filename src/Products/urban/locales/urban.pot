@@ -697,9 +697,6 @@ msgstr ""
 msgid "no_document_to_generate"
 msgstr ""
 
-msgid "no_foldermanager_defined"
-msgstr ""
-
 msgid "no_notary_defined"
 msgstr ""
 

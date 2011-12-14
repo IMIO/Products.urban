@@ -42,7 +42,8 @@
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_description">Description</span>:</b></td>
       <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('description', mode='view')" /></td>
+      <td valign="top">
+        <metal:myfield use-macro="python:here.widget('description', mode='view')" /><span tal:condition="not: context/Description" class="discreet" i18n:translate="content_none">None</span></td>
      </tr>
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_folderCategory">Folder category</span>:</b></td>
@@ -101,9 +102,9 @@
    </fieldset>
   </td>
   <td width="1%"></td>
-  <td valign="top" width=49%>
+  <td valign="top" width=49% tal:define="workLocations context/getWorkLocations">
    <fieldset><strong><legend i18n:translate="urban_label_workLocations">Work locations</legend></strong>
-      <div><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
+      <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /><span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
    </fieldset>
    <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
     <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
@@ -143,7 +144,7 @@
  <tr tal:condition="python: context.attributeIsUsed('catchmentArea')">
   <td valign="top"><b><span i18n:translate="urban_label_catchmentArea">Catchment area</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('catchmentArea', mode='view')" /><span tal:condition="not: context/getPash " class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('catchmentArea', mode='view')" /><span tal:condition="not: context/getCatchmentArea" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('floodingLevel')">
   <td valign="top"><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span>:</b></td>
@@ -183,7 +184,10 @@
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_folderZone">Folder zone</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('folderZone', mode='view')" /></td>
+  <td valign="top">
+   <metal:myfield use-macro="python:here.widget('folderZone', mode='view')" />
+   <span tal:condition="not: context/getFolderZone" class="discreet" i18n:translate="content_none">None</span>
+  </td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('folderZoneDetails')">
   <td valign="top"><b><span i18n:translate="urban_label_folderZoneDetails">Folder zone details</span>:</b></td>

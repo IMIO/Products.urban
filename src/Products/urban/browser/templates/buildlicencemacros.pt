@@ -100,7 +100,10 @@
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_description">Description</span>:</b></td>
       <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('description', mode='view')" /></td>
+      <td valign="top">
+       <metal:myfield use-macro="python:here.widget('description', mode='view')" />
+       <span tal:condition="not: context/Description" class="discreet" i18n:translate="content_none">None</span>
+      </td>
      </tr>
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_reference">Reference</span>:</b></td>
@@ -207,7 +210,7 @@
  <tr tal:condition="python: context.attributeIsUsed('catchmentArea')">
   <td valign="top"><b><span i18n:translate="urban_label_catchmentArea">Catchment area</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('catchmentArea', mode='view')" /><span tal:condition="not: context/getPash " class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('catchmentArea', mode='view')" /><span tal:condition="not: context/getCatchmentArea" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('floodingLevel')">
   <td valign="top"><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span>:</b></td>

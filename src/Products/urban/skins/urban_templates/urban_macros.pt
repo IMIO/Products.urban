@@ -202,7 +202,7 @@
  <tal:loop repeat="folderManager folderManagers" tal:condition="folderManagers">
    <span tal:content="folderManager/Title">Treating agent name</span><br />
  </tal:loop>
- <p tal:condition="not: folderManagers" class="discreet" i18n:translate="no_foldermanager_defined">No folder manager defined</p>
+ <span tal:condition="not: folderManagers" class="discreet" i18n:translate="content_none">None</span>
 </div>
 
 <div metal:define-macro="urbanArchitectsMacro" i18n:domain="urban" tal:define="architects here/getArchitects">
