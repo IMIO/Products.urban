@@ -136,12 +136,14 @@ UrbanCertificateBase_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 UrbanCertificateBase_schema['title'].required = False
 UrbanCertificateBase_schema['title'].widget.visible = False
-#remove the annoncedDelays for UrbanCertificateOne
+#remove the annoncedDelays for UrbanCertificates
 del UrbanCertificateBase_schema['annoncedDelay']
 del UrbanCertificateBase_schema['annoncedDelayDetails']
+#remove the impactStudy field for UrbanCertificates
+del UrbanCertificateBase_schema['impactStudy']
 #hide the solicit opinions to fields for UrbanCertificateOne
-del UrbanCertificateBase_schema['solicitRoadOpinionsTo']
-del UrbanCertificateBase_schema['solicitLocationOpinionsTo']
+UrbanCertificateBase_schema['solicitRoadOpinionsTo'].widget.visible=False
+UrbanCertificateBase_schema['solicitLocationOpinionsTo'].widget.visible=False
 ##/code-section after-schema
 
 class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserDefaultMixin):
