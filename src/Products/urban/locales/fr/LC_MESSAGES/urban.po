@@ -660,6 +660,9 @@ msgstr "Lots"
 msgid "legend_operation_address"
 msgstr "Adresse de l'exploitation"
 
+msgid "legend_specific_features"
+msgstr "Particularité(s)"
+
 msgid "locality_for_worklocation"
 msgstr "au lieu-dit"
 

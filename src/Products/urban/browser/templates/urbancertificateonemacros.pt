@@ -65,52 +65,62 @@
       <td width="2%"></td>
       <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanNotariesMacro" /></td>
      </tr>
-     <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_specificFeatures">Specific features</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('specificFeatures', mode='view')" /></td>
-     </tr>
-     <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_townshipSpecificFeatures">Township specific features</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('townshipSpecificFeatures', mode='view')" /></td>
-     </tr>
-     <tal:block define="csfs context/getCustomSpecificFeaturesAsList">
-     <tr style="border-bottom: 0">
-      <td valign="top"><b><span i18n:translate="urban_label_customSpecificFeatures">Custom specific features</span>:</b></td>
-      <td width="2%"></td>
-      <td>
-       <span tal:condition="not: csfs" class="discreet" i18n:translate="content_none">None</span>
-      </td>
-     </tr>
-     <tr tal:condition="csfs">
-      <td colspan="3">
-       <table style="margin-top: 0.3em; width: 100%;" class="listing">
-        <thead>
-         <tr>
-          <th i18n:translate="" i18n:domain="datagridfield">Feature</th>
-         </tr>
-        </thead>
-        <tr tal:repeat="csf csfs">
-         <td tal:content="structure python: '<br />'.join(csf)">Custom specific feature</td>
-        </tr>
-       </table>
-      </td>
-     </tr>
-     </tal:block>
     </table>
    </fieldset>
   </td>
   <td width="1%"></td>
   <td valign="top" width=49% tal:define="workLocations context/getWorkLocations">
    <fieldset><strong><legend i18n:translate="urban_label_workLocations">Work locations</legend></strong>
-      <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /><span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
+      <div tal:condition="workLocations"><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
+      <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
    </fieldset>
    <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
     <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
    </fieldset>
   </td>
  </tr>
+ <tr>
+ <td colspan="3">
+ <fieldset><legend i18n:translate="legend_specific_features">Specific features</legend>
+  <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+   <tr>
+    <td valign="top"><b><span i18n:translate="urban_label_specificFeatures">Specific features</span>:</b></td>
+    <td width="2%"></td>
+    <td valign="top"><metal:myfield use-macro="python:here.widget('specificFeatures', mode='view')" /></td>
+   </tr>
+   <tr>
+    <td valign="top"><b><span i18n:translate="urban_label_townshipSpecificFeatures">Township specific features</span>:</b></td>
+    <td width="2%"></td>
+    <td valign="top"><metal:myfield use-macro="python:here.widget('townshipSpecificFeatures', mode='view')" /></td>
+   </tr>
+   <tal:block define="csfs context/getCustomSpecificFeaturesAsList">
+   <tr style="border-bottom: 0">
+    <td valign="top"><b><span i18n:translate="urban_label_customSpecificFeatures">Custom specific features</span>:</b></td>
+    <td width="2%"></td>
+    <td>
+     <span tal:condition="not: csfs" class="discreet" i18n:translate="content_none">None</span>
+    </td>
+   </tr>
+   <tr tal:condition="csfs">
+    <td colspan="3">
+     <table style="margin-top: 0.3em; width: 100%;" class="listing">
+      <thead>
+       <tr>
+        <th i18n:translate="" i18n:domain="datagridfield">Feature</th>
+       </tr>
+      </thead>
+      <tr tal:repeat="csf csfs">
+       <td tal:content="structure python: '<br />'.join(csf)">Custom specific feature</td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+   </tal:block>
+  </table>
+ </fieldset>
+ </td>
+ </tr>
+ 
  </table>
 </div>
 

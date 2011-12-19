@@ -650,6 +650,9 @@ msgstr ""
 msgid "legend_details"
 msgstr ""
 
+msgid "legend_specific_features"
+msgstr ""
+
 msgid "legend_equipments"
 msgstr ""
 
