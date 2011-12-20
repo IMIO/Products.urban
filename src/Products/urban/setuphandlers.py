@@ -304,21 +304,6 @@ def addUrbanConfigs(context):
                     newFolder.invokeFactory("UrbanVocabularyTerm",id="form_demande",title=u"Formulaire de demande (formulaire 1A) en 3 exemplaires")
                     newFolder.invokeFactory("UrbanVocabularyTerm",id="extrait_cadastral",title=u"Extrait cadastral en 3 exemplaires")
 
-            if not hasattr(aq_base(configFolder), 'folderroadequipments'):
-                #add RoadEquipments folder
-                newFolderid = configFolder.invokeFactory("Folder",id="folderroadequipments",title=_("folderroadequipments_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="eau",title=u"distribution d'eau")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="electricite",title=u"distribution électrique")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="epuration",title=u"canalisation reliée à une station d'épuration publique")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="nonepuration",title=u"canalisation non-reliée à une station d'épuration publique")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="egoutsep",title=u"réseau d'égoutage séparatif")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="pascollecteeaux",title=u"pas de canalisation de collecte des eaux")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="fosse",title=u"fossé")
-
             if not hasattr(aq_base(configFolder), 'folderprotectedbuildings'):
                 #add ProtectedBuildings folder
                 newFolderid = configFolder.invokeFactory("Folder",id="folderprotectedbuildings",title=_("folderprotectedbuildings_folder_title", 'urban', context=site.REQUEST))
@@ -742,6 +727,21 @@ def addGlobalFolders(context):
         newFolder.invokeFactory("UrbanVocabularyTerm",id="prov",title=u"Provinciale")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="reg",title=u"Régionale")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="vic",title=u"Vicinale")
+
+    if not hasattr(tool, 'folderroadequipments'):
+        #add RoadEquipments folder
+        newFolderid = tool.invokeFactory("Folder",id="folderroadequipments",title=_("folderroadequipments_folder_title", 'urban', context=site.REQUEST))
+        newFolder = getattr(tool, newFolderid)
+        newFolder.setConstrainTypesMode(1)
+        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="eau",title=u"distribution d'eau")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="electricite",title=u"distribution électrique")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="epuration",title=u"canalisation reliée à une station d'épuration publique")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="nonepuration",title=u"canalisation non-reliée à une station d'épuration publique")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="egoutsep",title=u"réseau d'égoutage séparatif")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="pascollecteeaux",title=u"pas de canalisation de collecte des eaux")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="fosse",title=u"fossé")
 
     if not hasattr(tool, "folderroadcoatings"):
         #add RoadCoatings folder

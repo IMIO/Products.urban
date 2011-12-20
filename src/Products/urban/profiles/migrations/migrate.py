@@ -993,7 +993,7 @@ def migrateSomeLocalFoldersAsGlobal(context):
     tool = getToolByName(site, 'portal_urban')
 
     #ids of local folders that are now global folders
-    localFolderIds = ['folderroadtypes', 'folderroadcoatings', 'pashs']
+    localFolderIds = ['folderroadtypes', 'folderroadcoatings', 'pashs', 'folderroadequipments']
     for localFolderId in localFolderIds:
         if not hasattr(tool, localFolderId):
             raise KeyError, "Migrating some local LicenceConfigs folder to the portal_urban root : You must reinstall 'urban' before launching this step!"

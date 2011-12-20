@@ -491,7 +491,7 @@ msgid "folderroadcoatings_folder_title"
 msgstr "Revêtements de route"
 
 msgid "folderroadequipments_folder_title"
-msgstr "Equipements de la route"
+msgstr "Equipements de la voirie"
 
 msgid "folderroadtypes_folder_title"
 msgstr "Types de voiries"

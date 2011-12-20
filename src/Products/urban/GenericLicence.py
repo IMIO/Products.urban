@@ -252,7 +252,7 @@ schema = Schema((
         name='roadEquipments',
         schemata='urban_road',
         widget=DataGridWidget(
-            columns={'road_equipment' : SelectColumn("Road equipments", UrbanVocabulary('folderroadequipments')), 'road_equipment_details' : Column("Road equipment details"),},
+            columns={'road_equipment' : SelectColumn("Road equipments", UrbanVocabulary('folderroadequipments', inUrbanConfig=False)), 'road_equipment_details' : Column("Road equipment details"),},
             label='Roadequipments',
             label_msgid='urban_label_roadEquipments',
             i18n_domain='urban',
