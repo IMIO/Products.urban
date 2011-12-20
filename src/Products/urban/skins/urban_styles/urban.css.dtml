@@ -170,8 +170,25 @@ color: red;
 outline: none !important;
 }
 
+/* should go back to Products.DataGridField */
+a.datagridwidget-add-button, a.datagridwidget-add-button:hover {
+    background-position: 5px 5px !important;
+    padding-right: 5px !important;
+}
+
+table[id^="datagridwidget-table"] {
+    border: 1px grey solid;
+    margin-bottom: 0.5em !important;
+}
+
 #datagridwidget-table-workLocations {
     width: 600px !important;
+}
+
+table[id^="datagridwidget-table-"] THEAD TH {
+    padding-left: 0.5em;
+    background-color: #DDDDDD;
+    font-weight: bold !important;
 }
 
 #datagridwidget-table-roadEquipments {
