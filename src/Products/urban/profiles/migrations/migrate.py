@@ -787,15 +787,15 @@ def provideEventMarkerInterfaces(context):
     portal = context.getSite()
     brains = portal.portal_catalog.searchResults(portal_type='UrbanEvent') 
     for brain in brains:
-        event = brain.getObject()
-        event_type = event.getUrbaneventtypes()
+        urbanevent = brain.getObject()
+        event_type = urbanevent.getUrbaneventtypes()
         interfacepath = event_type.getEventTypeType()
         print(interfacepath)
         interface = None
         if interfacepath != '':
             interface = getInterface('', interfacepath) 
         if interface is not None and not event.__provides__(interface):
-            alsoProvides(event, interface)
+            alsoProvides(urbanevent, interface)
             event.reindexObject(['object_provides'])
     logger.info("Migrating Specific Event interfaces: done!")
 
