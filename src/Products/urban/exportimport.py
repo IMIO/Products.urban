@@ -5,8 +5,11 @@ from Products.urban.utils import getMd5Signature
 import logging
 logger = logging.getLogger('urban: setuphandlers')
 
-def loga(msg):
-    logger.warn(msg)
+def loga(msg, type="info"):
+    if type=="info":
+        logger.info(msg)
+    elif type=="warn":
+        logger.warn(msg)
     return msg
 
 def updateTemplates(context, container, templates, starting_position=''):
@@ -122,7 +125,7 @@ def addUrbanEventTypes(context):
             uetFolder = getattr(tool.getUrbanConfig(None, urbanConfigId=urbanConfigId), "urbaneventtypes")
         except AttributeError:
             #if we can not get the urbanConfig, we pass this one...
-            log.append(loga("AttributeError while trying to get the '%s' urbanConfig" % urbanConfigId))
+            log.append(loga("AttributeError while trying to get the '%s' urbanConfig" % urbanConfigId, type="warn"))
             continue
         last_urbaneventype_id = None
         for uet in urbanEventTypes[urbanConfigId]:
