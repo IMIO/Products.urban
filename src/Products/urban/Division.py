@@ -263,17 +263,6 @@ class Division(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         self.setTitle(title)
         self.reindexObject()
 
-    security.declarePublic('getApplicants')
-    def getApplicants(self):
-        """
-           Return the list of applicants for the Division
-        """
-        res = []
-        for obj in self.objectValues('Contact'):
-            if obj.portal_type == 'Applicant':
-                res.append(obj)
-        return res
-
     security.declarePublic('getParcels')
     def getParcels(self):
         """

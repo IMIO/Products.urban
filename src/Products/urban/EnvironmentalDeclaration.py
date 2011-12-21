@@ -183,17 +183,6 @@ class EnvironmentalDeclaration(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefa
         self.setTitle(title)
         self.reindexObject()
 
-    security.declarePublic('getApplicants')
-    def getApplicants(self):
-        """
-           Return the list of applicants for the Licence
-        """
-        res = []
-        for obj in self.objectValues('Contact'):
-            if obj.portal_type == 'Applicant':
-                res.append(obj)
-        return res
-
     def getParcels(self):
         """
            Return the list of parcels (portionOut) for the Licence

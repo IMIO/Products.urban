@@ -30,6 +30,17 @@ class UrbanBase(object):
 
     implements(interfaces.IUrbanBase)
 
+    security.declarePublic('getApplicants')
+    def getApplicants(self):
+        """
+           Return the list of applicants for the Licence
+        """
+        res = []
+        for obj in self.objectValues('Contact'):
+            if obj.portal_type == 'Applicant':
+                res.append(obj)
+        return res
+
     security.declarePublic('getApplicantsSignaletic')
     def getApplicantsSignaletic(self, withaddress=False):
         """
