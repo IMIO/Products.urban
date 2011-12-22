@@ -278,29 +278,22 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence,
         self.setTitle(title)
         self.reindexObject()
 
-    security.declarePublic('getApplicants')
-    def getApplicants(self):
-        """
-           Return the list of applicants for the Licence
-        """
-        res = []
-        for obj in self.objectValues('Contact'):
-            if obj.portal_type == 'Applicant':
-                res.append(obj)
-        return res
-
+    security.declarePublic('getParcels')
     def getParcels(self):
         """
            Return the list of parcels (portionOut) for the Licence
         """
         return self.objectValues('PortionOut')
 
+    security.declarePublic('getLastDeposit')
     def getLastDeposit(self):
         return self._getLastEvent(interfaces.IDepositEvent)
 
+    security.declarePublic('getLastTheLicence')
     def getLastTheLicence(self):
         return self._getLastEvent(interfaces.ITheLicenceEvent)
 
+    security.declarePublic('getCustomSpecificFeaturesAsList')
     def getCustomSpecificFeaturesAsList(self):
         """
           To display custom specific features easily, get it as a list of features
@@ -310,6 +303,43 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence,
             #in some case, DataGridField add an empty dict...
             if csf.has_key('feature') and csf['feature']:
                 res.append(csf['feature'])
+        return res
+
+    security.declarePublic('getSpecificFeaturesForTemplate')
+    def getSpecificFeaturesForTemplate(self, township=False):
+        """
+          Get every enabled specific feature (township or not) from the linked
+          LicenceConfig
+          Helper method used in templates
+        """
+        tool = getToolByName(self, 'portal_urban')
+        portal_catalog = getToolByName(self, 'portal_catalog')
+        config = tool.getUrbanConfig(self, urbanConfigId=self.portal_type.lower())
+        if township:
+            specificFeaturesPath = '/'.join(config.townshipspecificfeatures.getPhysicalPath())
+        else:
+            specificFeaturesPath = '/'.join(config.specificfeatures.getPhysicalPath())
+        params = {
+                  'path': specificFeaturesPath,
+                  'review_state': 'enabled',
+        }
+        res=[]
+        #get every enabled specific features from the config
+        enabledSpecificFeatures = portal_catalog(**params)
+        if township:
+            specificFeatures = self.getTownshipSpecificFeatures()
+        else:
+            specificFeatures = self.getSpecificFeatures()
+        for esf in enabledSpecificFeatures:
+            if esf.id in specificFeatures:
+                res.append(esf.Description)
+            else:
+                res.append(tool.decorateHTML('striked', esf.Description))
+
+        #add customSpecificFeatures
+        if not township:
+            for csf in self.getCustomSpecificFeatures():
+                res.append("<p>%s</p>" % "<br />".join(csf['feature']))
         return res
 
 
