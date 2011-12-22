@@ -308,8 +308,7 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence,
     security.declarePublic('getSpecificFeaturesForTemplate')
     def getSpecificFeaturesForTemplate(self, township=False):
         """
-          Get every enabled specific feature (township or not) from the linked
-          LicenceConfig
+          Return formatted specific features (striked or not)
           Helper method used in templates
         """
         tool = getToolByName(self, 'portal_urban')
