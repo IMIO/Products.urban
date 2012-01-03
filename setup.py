@@ -26,7 +26,7 @@ setup(name='Products.urban',
             test=['unittest2', 'zope.testing', 'plone.testing',
                   'testfixtures',
                   'plone.app.testing'],
-            templates=['genshi',
+            templates=['Genshi',
                   ]),
       install_requires=[
           'setuptools',
