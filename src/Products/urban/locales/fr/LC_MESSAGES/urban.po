@@ -279,12 +279,12 @@ msgstr "Une carte sera affichée lorsque les parcelles concernées auront été 
 #. Default: "Select the specific features from the left box and drop them in the right box to select them"
 #: UrbanCertificateBase.py
 msgid "certificateone_specificfeatures_descr"
-msgstr "Choisissez dans la colonne de gauche les éléments à activer et déplacez les avec le bouton [>>] vers la colonne de droite"
+msgstr "Sélectionnez les éléments à activer"
 
 #. Default: "Select the specific features from the left box and drop them in the right box to select them"
 #: UrbanCertificateBase.py
 msgid "certificateone_townshipspecificfeatures_descr"
-msgstr "Choisissez dans la colonne de gauche les éléments à activer et déplacez les avec le bouton [>>] vers la colonne de droite"
+msgstr "Sélectionnez les éléments à activer"
 
 #. Default: "Choose a value"
 #: Contact.py

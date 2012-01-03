@@ -2,7 +2,7 @@
 #
 # File: UrbanCertificateBase.py
 #
-# Copyright (c) 2011 by CommunesPlone
+# Copyright (c) 2012 by CommunesPlone
 # Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
@@ -59,20 +59,20 @@ schema = Schema((
         relationship="notary",
         allowed_types= ('Notary',),
     ),
-    StringField(
+    LinesField(
         name='specificFeatures',
-        widget=InAndOutWidget(
-            size=15,
+        widget=MultiSelectionWidget(
             description_msgid="certificateone_specificfeatures_descr",
             description='Select the specific features from the left box and drop them in the right box to select them',
+            format='checkbox',
             label='Specificfeatures',
             label_msgid='urban_label_specificFeatures',
             i18n_domain='urban',
         ),
-        enforceVocabulary=True,
         schemata='urban_description',
         multiValued=True,
         vocabulary=UrbanVocabulary('specificfeatures'),
+        enforceVocabulary=True,
     ),
     DataGridField(
         name='customSpecificFeatures',
@@ -85,20 +85,20 @@ schema = Schema((
         schemata='urban_description',
         columns=('feature',),
     ),
-    StringField(
+    LinesField(
         name='townshipSpecificFeatures',
-        widget=InAndOutWidget(
-            size=15,
+        widget=MultiSelectionWidget(
             description_msgid="certificateone_townshipspecificfeatures_descr",
             description='Select the specific features from the left box and drop them in the right box to select them',
+            format='checkbox',
             label='Townshipspecificfeatures',
             label_msgid='urban_label_townshipSpecificFeatures',
             i18n_domain='urban',
         ),
-        enforceVocabulary=True,
         schemata='urban_description',
         multiValued=True,
         vocabulary=UrbanVocabulary('townshipspecificfeatures'),
+        enforceVocabulary=True,
     ),
     ReferenceField(
         name='foldermanagers',

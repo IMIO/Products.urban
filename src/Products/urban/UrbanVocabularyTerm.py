@@ -2,7 +2,7 @@
 #
 # File: UrbanVocabularyTerm.py
 #
-# Copyright (c) 2011 by CommunesPlone
+# Copyright (c) 2012 by CommunesPlone
 # Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
@@ -139,6 +139,7 @@ class UrbanVocabularyTerm(BaseContent, BrowserDefaultMixin):
                 res = nullValue
             renderedDescription = re.sub(re.escape(expr.group()), res, renderedDescription)
         return renderedDescription
+
 
 
 registerType(UrbanVocabularyTerm, PROJECTNAME)
