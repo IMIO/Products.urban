@@ -330,10 +330,13 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence,
         else:
             specificFeatures = self.getSpecificFeatures()
         for esf in enabledSpecificFeatures:
+            obj = esf.getObject()
             if esf.id in specificFeatures:
-                res.append(esf.Description)
+                #render the expressions
+                res.append(obj.getRenderedDescription(self))
             else:
-                res.append(tool.decorateHTML('striked', esf.Description))
+                #replace the expressions by a null value, aka "..."
+                res.append(tool.decorateHTML('striked', obj.getRenderedDescription(self, renderToNull=True)))
 
         #add customSpecificFeatures
         if not township:

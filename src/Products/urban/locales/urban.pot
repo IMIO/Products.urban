@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-12-12 10:53+0000\n"
+"POT-Creation-Date: 2011-12-22 15:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -412,6 +412,9 @@ msgstr ""
 msgid "environmentaldeclarations"
 msgstr ""
 
+msgid "error_in_expr_contact_admin"
+msgstr ""
+
 msgid "event_data"
 msgstr ""
 
@@ -650,9 +653,6 @@ msgstr ""
 msgid "legend_details"
 msgstr ""
 
-msgid "legend_specific_features"
-msgstr ""
-
 msgid "legend_equipments"
 msgstr ""
 
@@ -660,6 +660,9 @@ msgid "legend_lots"
 msgstr ""
 
 msgid "legend_operation_address"
+msgstr ""
+
+msgid "legend_specific_features"
 msgstr ""
 
 msgid "locality_for_worklocation"
@@ -990,6 +993,11 @@ msgid "urban_description_key_dates_legend"
 msgstr ""
 
 msgid "urban_export_list220"
+msgstr ""
+
+#. Default: "If this field is used, you can insert special expressions between [[]] that will be rendered.  This can be something like \"My text [[object/getMyAttribute]] end of the text\".  Object is the licence the term is used in."
+#: UrbanVocabularyTerm.py
+msgid "urban_help_description"
 msgstr ""
 
 #. Default: "This field is made to store extra value if needed."

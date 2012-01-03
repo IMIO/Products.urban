@@ -206,6 +206,7 @@ Considérant que xxx personnes se sont présentées à cette réunion et ont ém
     * ...
 """
 
+NULL_VALUE = "..."
 ##/code-section config-bottom
 
 

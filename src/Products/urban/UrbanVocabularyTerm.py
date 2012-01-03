@@ -23,7 +23,12 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+import re
+import logging
+logger = logging.getLogger('urban: UrbanVocabularyTerm')
+from zope.i18n import translate
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.Expression import Expression, createExprContext
 from plone.app.referenceintegrity.interfaces import IReferenceableVocabulary
 ##/code-section module-header
 
@@ -33,8 +38,10 @@ schema = Schema((
         name='description',
         allowable_content_types=('text/html',),
         widget=RichWidget(
+            description="""If this field is used, you can insert special expressions between [[]] that will be rendered.  This can be something like "My text [[object/getMyAttribute]] end of the text".  Object is the licence the term is used in.""",
             label='Description',
             label_msgid='urban_label_description',
+            description_msgid='urban_help_description',
             i18n_domain='urban',
         ),
         default_output_type='text/html',
@@ -98,9 +105,40 @@ class UrbanVocabularyTerm(BaseContent, BrowserDefaultMixin):
             return descr
         else:
             #we need to make a single string with everything we have in the HTML description
-            import re
             return re.sub(r'<[^>]*?>', ' ', descr).replace('  ', ' ')
 
+    security.declarePublic('getRenderedDescription')
+    def getRenderedDescription(self, obj, renderToNull=False):
+        """
+          Return the description rendered if it contains elements to render
+          An element to render will be place between [[]]
+          So we could have something like :
+          "Some sample text [[python: object.getSpecialAttribute()]] and some text
+          [[object/myTalExpression]] end of the text"
+          If renderToNull is True, the found expressions will not be rendered but
+          replaced by the nullValue defined below
+        """
+        nullValue = NULL_VALUE
+        description = self.Description()
+        renderedDescription = description
+        portal = getToolByName(self, 'portal_url').getPortalObject()
+        for expr in re.finditer('\[\[(.*?)\]\]', description):
+            if not renderToNull:
+                ctx = createExprContext(obj.getParentNode(), portal, obj)
+                try:
+                    #expr.groups()[0] is the expr without the [[]]
+                    res = Expression(expr.groups()[0])(ctx)
+                except Exception, e:
+                    logger.warn("The expression '%s' defined in the UrbanVocabularyTerm at '%s' is wrong! Returned error message is : %s" % (expr.group(), self.absolute_url(), e))
+                    res = translate('error_in_expr_contact_admin', 'urban', mapping={'expr': expr.group()}, context=self.REQUEST)
+                #replace the expression in the description by the result
+                #re work with utf8, not with unicode...
+                if isinstance(res, unicode):
+                    res = res.encode('utf8')
+            else:
+                res = nullValue
+            renderedDescription = re.sub(re.escape(expr.group()), res, renderedDescription)
+        return renderedDescription
 
 
 registerType(UrbanVocabularyTerm, PROJECTNAME)

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-12-12 10:53+0000\n"
+"POT-Creation-Date: 2011-12-22 15:08+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -412,6 +412,9 @@ msgstr "Paramètres des Déclarations environnementales"
 
 msgid "environmentaldeclarations"
 msgstr "Déclarations environnementales"
+
+msgid "error_in_expr_contact_admin"
+msgstr "<b>Erreur dans l'expression ${expr} liée à ce terme de vocabulaire, contactez votre administrateur !!!</b>"
 
 msgid "event_data"
 msgstr "Données concernant l'événement"
@@ -992,6 +995,11 @@ msgstr "Dates clés"
 
 msgid "urban_export_list220"
 msgstr "Exportation liste 220"
+
+#. Default: "If this field is used, you can insert special expressions between [[]] that will be rendered.  This can be something like \"My text [[object/getMyAttribute]] end of the text\".  Object is the licence the term is used in."
+#: UrbanVocabularyTerm.py
+msgid "urban_help_description"
+msgstr "This ce champ est utilisé, il peut contenir des expression entre [[]] qui seront interprétées.  Par exemple \"Mon texte [[object/getMonExpression]] la fin de mon texte\".  'object' est le permis danq lequel est utilisé le terme."
 
 #. Default: "This field is made to store extra value if needed."
 #: UrbanVocabularyTerm.py
