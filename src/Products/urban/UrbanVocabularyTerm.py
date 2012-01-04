@@ -118,7 +118,6 @@ class UrbanVocabularyTerm(BaseContent, BrowserDefaultMixin):
           If renderToNull is True, the found expressions will not be rendered but
           replaced by the nullValue defined below
         """
-        nullValue = NULL_VALUE
         description = self.Description()
         renderedDescription = description
         portal = getToolByName(self, 'portal_url').getPortalObject()
@@ -136,7 +135,7 @@ class UrbanVocabularyTerm(BaseContent, BrowserDefaultMixin):
                 if isinstance(res, unicode):
                     res = res.encode('utf8')
             else:
-                res = nullValue
+                res = NULL_VALUE
             renderedDescription = re.sub(re.escape(expr.group()), res, renderedDescription)
         return renderedDescription
 
