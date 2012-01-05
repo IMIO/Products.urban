@@ -204,6 +204,16 @@ position: absolute;
 padding-top: 3px;
 }
 
+.urban-add-icon-big {
+position: absolute;
+padding-top: 3px;
+}
+
+.urban-licence-schedule {
+float: right;
+margin-top: -2em;
+}
+
 /* display the right icon from the urban-sprite */
 /* if you adapt something here, adapt the relevant contenttype-xxx class here under */
 .icons-on .contenttype-buildlicence {background: no-repeat transparent 0px 1px url(urban-sprite.png);}
@@ -277,6 +287,7 @@ INPUT.button-urbanschedule
     -webkit-border-radius: 0.4em 0.4em 0.4em 0.4em;
     border-radius: 0.4em 0.4em 0.4em 0.4em;
     background-color: ThreeDFace !important;
+    margin-bottom: 0.3em;
 }
 
 /* background position for image on buttons */
