@@ -377,17 +377,6 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary('foldermakers', vocType="OrganisationTerm"),
     ),
-    StringField(
-        name='folderCategoryTownship',
-        widget=SelectionWidget(
-            label='Foldercategorytownship',
-            label_msgid='urban_label_folderCategoryTownship',
-            i18n_domain='urban',
-        ),
-        enforceVocabulary=True,
-        schemata='urban_description',
-        vocabulary=UrbanVocabulary('townshipfoldercategories', with_empty_value=True),
-    ),
     BooleanField(
         name='isInSubdivision',
         default=False,
@@ -472,6 +461,17 @@ schema = Schema((
         schemata='urban_location',
         multiValued=1,
         vocabulary=UrbanVocabulary('foldermakers', vocType="OrganisationTerm"),
+    ),
+    StringField(
+        name='folderCategoryTownship',
+        widget=SelectionWidget(
+            label='Foldercategorytownship',
+            label_msgid='urban_label_folderCategoryTownship',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        schemata='urban_location',
+        vocabulary=UrbanVocabulary('townshipfoldercategories', with_empty_value=True, sort_on='sortable_title'),
     ),
     BooleanField(
         name='areParcelsVerified',

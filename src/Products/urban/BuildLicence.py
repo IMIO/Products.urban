@@ -47,7 +47,7 @@ schema = Schema((
             label_msgid='urban_label_workType',
             i18n_domain='urban',
         ),
-        schemata='urban_location',
+        schemata='urban_description',
         multiValued=1,
         vocabulary=UrbanVocabulary(path='folderbuildworktypes', sort_on='sortable_title'),
     ),
@@ -506,7 +506,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('description', after='usage')
     schema.moveField('pash', after='roadEquipments')
     schema.moveField('pashDetails', after='pash')
-    schema.moveField('areParcelsVerified', after='locationTechnicalConditions')
+    schema.moveField('folderCategoryTownship', after='locationTechnicalConditions')
+    schema.moveField('areParcelsVerified', after='folderCategoryTownship')
     schema.moveField('derogation', after='areParcelsVerified')
     schema.moveField('derogationDetails', after='derogation')
     schema.moveField('investigationArticles', after='derogationDetails')
@@ -517,7 +518,6 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('solicitOpinionsTo', after='investigationReasons')
     schema.moveField('investigationOralReclamationNumber', after='solicitOpinionsTo')
     schema.moveField('investigationWriteReclamationNumber', after='investigationOralReclamationNumber')
-    schema.moveField('folderCategoryTownship', after='folderCategory')
     return schema
 
 finalizeSchema(BuildLicence_schema)

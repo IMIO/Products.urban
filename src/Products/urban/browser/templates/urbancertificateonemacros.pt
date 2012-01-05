@@ -51,11 +51,6 @@
       <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategory', mode='view')" /></td>
      </tr>
      <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_folderCategoryTownship">Folder category</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategoryTownship', mode='view')" /></td>
-     </tr>
-     <tr>
       <td valign="top"><b><span i18n:translate="urban_label_foldermanagers">Treating agent</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanFolderManagerMacro" /></td>
@@ -263,6 +258,11 @@
   <td valign="top"><b><span i18n:translate="urban_label_locationTechnicalConditions">Location technical conditions</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalConditions', mode='view')" /><span tal:condition="not: context/getLocationTechnicalConditions" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><b><span i18n:translate="urban_label_folderCategoryTownship">Folder category</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategoryTownship', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('areParcelsVerified')">
   <td valign="top"><b><span i18n:translate="urban_label_areParcelsVerified">Are parcels verified?</span>:</b></td>

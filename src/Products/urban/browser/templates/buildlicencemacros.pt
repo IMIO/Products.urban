@@ -125,10 +125,10 @@
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategory', mode='view')" /></td>
      </tr>
-     <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_folderCategoryTownship">Folder category</span>:</b></td>
+     <tr tal:condition="python: context.attributeIsUsed('workType')">
+      <td valign="top"><b><span i18n:translate="urban_label_workType">Work type</span>:</b></td>
       <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategoryTownship', mode='view')" /></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('workType', mode='view')" /><span tal:condition="not: context/getWorkType" class="discreet" i18n:translate="content_none">None</span></td>
      </tr>
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_missingParts">Missing parts</span>:</b></td>
@@ -257,15 +257,13 @@
 
 <div metal:define-macro="locationMacro" i18n:domain="urban">
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
- <tr tal:condition="python: context.attributeIsUsed('workType')">
-  <td valign="top"><b><span i18n:translate="urban_label_workType">Work type</span>:</b></td>
-  <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('workType', mode='view')" /><span tal:condition="not: context/getWorkType" class="discreet" i18n:translate="content_none">None</span></td>
- </tr>
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_folderZone">Folder zone</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('folderZone', mode='view')" /></td>
+  <td valign="top">
+   <metal:myfield use-macro="python:here.widget('folderZone', mode='view')" />
+   <span tal:condition="not: context/getFolderZone" class="discreet" i18n:translate="content_none">None</span>
+  </td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('folderZoneDetails')">
   <td valign="top"><b><span i18n:translate="urban_label_folderZoneDetails">Folder zone details</span>:</b></td>
@@ -341,6 +339,11 @@
   <td valign="top"><b><span i18n:translate="urban_label_locationTechnicalConditions">Location technical conditions</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalConditions', mode='view')" /><span tal:condition="not: context/getLocationTechnicalConditions" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr>
+  <td valign="top"><b><span i18n:translate="urban_label_folderCategoryTownship">Folder category</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategoryTownship', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('areParcelsVerified')">
   <td valign="top"><b><span i18n:translate="urban_label_areParcelsVerified">Are parcels verified?</span>:</b></td>
