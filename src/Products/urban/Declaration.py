@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-
+from Products.urban.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
@@ -40,38 +40,6 @@ optional_fields = []
 schema = Schema((
 
     StringField(
-        name='declarationSubject',
-        widget=StringField._properties['widget'](
-            label='Declarationsubject',
-            label_msgid='urban_label_declarationSubject',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-    ),
-    StringField(
-        name='reference',
-        widget=StringField._properties['widget'](
-            size=30,
-            label='Reference',
-            label_msgid='urban_label_reference',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-        default_method="getDefaultReference",
-    ),
-    DataGridField(
-        name='workLocations',
-        schemata='urban_description',
-        widget=DataGridWidget(
-            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False)),},
-            label='Worklocations',
-            label_msgid='urban_label_workLocations',
-            i18n_domain='urban',
-        ),
-        allow_oddeven=True,
-        columns=('number', 'street'),
-    ),
-    StringField(
         name='article',
         widget=SelectionWidget(
             label='Article',
@@ -80,19 +48,6 @@ schema = Schema((
         ),
         schemata='urban_description',
         vocabulary=UrbanVocabulary('articles'),
-    ),
-    TextField(
-        name='description',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label='Description',
-            label_msgid='urban_label_description',
-            i18n_domain='urban',
-        ),
-        default_content_type='text/html',
-        schemata='urban_description',
-        default_output_type='text/html',
-        accessor="Description",
     ),
     ReferenceField(
         name='foldermanagers',
@@ -114,7 +69,6 @@ schema = Schema((
         relationship='declarationFolderManagers',
         allowed_types=('FolderManager',),
     ),
-
 ),
 )
 
@@ -123,14 +77,24 @@ setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 Declaration_schema = BaseFolderSchema.copy() + \
+    getattr(GenericLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 Declaration_schema['title'].required = False
 Declaration_schema['title'].widget.visible = False
+#remove the annoncedDelays for UrbanCertificates
+del Declaration_schema['annoncedDelay']
+del Declaration_schema['annoncedDelayDetails']
+#remove the impactStudy field for UrbanCertificates
+del Declaration_schema['impactStudy']
+#hide the solicit opinions to fields for UrbanCertificateOne
+Declaration_schema['solicitRoadOpinionsTo'].widget.visible=False
+Declaration_schema['solicitLocationOpinionsTo'].widget.visible=False
+
 ##/code-section after-schema
 
-class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
+class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -143,6 +107,7 @@ class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
     schema = Declaration_schema
 
     ##code-section class-header #fill in your manual code here
+    schemata_order = ['urban_description', 'urban_road', 'urban_location']
     ##/code-section class-header
 
     # Methods
@@ -195,7 +160,7 @@ class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             applicant = self.getApplicants()[0].getName1() + " " + self.getApplicants()[0].getName2()
         else:
             applicant = "No applicant defined"
-        title = str(self.getReference())+ " - " +self.getDeclarationSubject() + " - " + applicant
+        title = str(self.getReference())+ " - " +self.getLicenceSubject() + " - " + applicant
         self.setTitle(str(title))
         self.reindexObject()
 

@@ -1331,11 +1331,6 @@ msgstr ""
 msgid "urban_label_decisions"
 msgstr ""
 
-#. Default: "Declarationsubject"
-#: Declaration.py
-msgid "urban_label_declarationSubject"
-msgstr ""
-
 #. Default: "Decreedate"
 #: PcaTerm.py
 msgid "urban_label_decreeDate"

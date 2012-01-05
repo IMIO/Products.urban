@@ -47,11 +47,6 @@
    <fieldset><b><legend i18n:translate="legend_details">Details</legend></b>
     <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
      <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_declarationSubject">Declaration subject</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('declarationSubject', mode='view')" /></td>
-     </tr>
-     <tr>
       <td valign="top"><b><span i18n:translate="urban_label_description">Description</span>:</b></td>
       <td width="2%"></td>
       <td valign="top">

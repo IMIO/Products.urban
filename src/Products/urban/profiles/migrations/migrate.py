@@ -74,6 +74,8 @@ def migrateToPlone4(context):
     migrateGlobalTemplates(context)
     #Some folders defined on LicenceConfigs are now at the portal_urban root
     migrateSomeLocalFoldersAsGlobal(context)
+    #the old declarationSubject field is now licenceSubject
+    migrateDeclarationSubjectField(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -1024,3 +1026,28 @@ def migrateSomeLocalFoldersAsGlobal(context):
 
     logger.info("Migrating some local LicenceConfigs folder to the portal_urban root : done!")
     site.portal_properties.site_properties.enable_link_integrity_checks = True
+
+def migrateDeclarationSubjectField(context):
+    """
+      Before there was a "declarationSubject" field, we will use the default "licenceSubject" field
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+
+    portal_catalog = getToolByName(site, 'portal_catalog')
+    brains = portal_catalog(portal_type=('Declaration', ))
+
+    logger.info("Migrating the 'declarationSubject' field to 'licenceSubject' for Declarations: starting...")
+
+    for brain in brains:
+        obj = brain.getObject()
+        if not hasattr(obj, 'declarationSubject'):
+            #stop the migration, it is already migrated...
+            break
+        subject = obj.declarationSubject
+        obj.setLicenceSubject(subject)
+        delattr(obj, 'declarationSubject')
+        logger.info("%s's licenceSubject has been migrated" % obj.Title())
+
+    logger.info("Migrating the 'declarationSubject' field to 'licenceSubject' for Declarations: done!")

@@ -1332,11 +1332,6 @@ msgstr "Détails de la décision"
 msgid "urban_label_decisions"
 msgstr "Décisions"
 
-#. Default: "Declarationsubject"
-#: Declaration.py
-msgid "urban_label_declarationSubject"
-msgstr "Objet de la déclaration"
-
 #. Default: "Decreedate"
 #: PcaTerm.py
 msgid "urban_label_decreeDate"
@@ -1651,7 +1646,7 @@ msgstr "Couches (Layers)"
 #. Default: "Licencesubject"
 #: GenericLicence.py
 msgid "urban_label_licenceSubject"
-msgstr "Objet du permis"
+msgstr "Objet"
 
 #. Default: "Licenceeventdocs"
 #: LicenceEvent.py
