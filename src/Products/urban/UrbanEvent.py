@@ -27,7 +27,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
-from zope.i18n import translate as _
+from zope.i18n import translate
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 ##/code-section module-header
 
@@ -255,15 +255,14 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
           Vocabulary for field 'adviceAgreementLevels'
         """
         lst=[
-             ['agreementlevel_read_advice', _('agreementlevel_read_advice', 'urban', context=self.REQUEST, default="Read advice")],
-             ['agreementlevel_respect_charges', _('agreementlevel_respect_charges', 'urban', context=self.REQUEST, default="Respect charges")],
+             ['agreementlevel_read_advice', translate('agreementlevel_read_advice', 'urban', context=self.REQUEST, default="Read advice")],
+             ['agreementlevel_respect_charges', translate('agreementlevel_respect_charges', 'urban', context=self.REQUEST, default="Respect charges")],
             ]
+
         vocab = []
-
         #we add an empty vocab value of type "choose a value"
-        val = _('urban', EMPTY_VOCAB_VALUE, context=self, default=EMPTY_VOCAB_VALUE)
+        val = translate('urban', EMPTY_VOCAB_VALUE, context=self, default=EMPTY_VOCAB_VALUE)
         vocab.append(('', val))
-
         for elt in lst:
             vocab.append((elt[0], elt[1]))
         return DisplayList(tuple(vocab))
@@ -549,9 +548,9 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         formattedDate = tool.formatDate(date, translatemonth=translatemonth)
         cityName = unicode(tool.getCityName(), 'utf-8')
         if withCityNamePrefix:
-            return _('formatted_date_with_cityname', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate.decode('utf8')}).encode('utf8')
+            return translate('formatted_date_with_cityname', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate.decode('utf8')}).encode('utf8')
         if forDelivery:
-            return _('formatted_date_for_delivery', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate.decode('utf8')}).encode('utf8')
+            return translate('formatted_date_for_delivery', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate.decode('utf8')}).encode('utf8')
         return formattedDate
 
     def attributeIsUsed(self, attrName):

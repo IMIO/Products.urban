@@ -209,7 +209,7 @@
 <tal:loop repeat="architect architects" tal:condition="architects">
 <div class="#" tal:define="oddrow repeat/architect/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
   <a href="#" tal:attributes="href python: architect.absolute_url() + '?came_from_licence_uid=' + context.UID()">
-   <span tal:replace="python: context.displayValue(architect.Vocabulary('personTitle')[0], architect.getPersonTitle())" />
+   <span tal:replace="python: architect.getPersonTitle(short=True)" />
    <span tal:replace="architect/getName1|nothing" />
    <span tal:replace="architect/getName2|nothing" />
    <span tal:condition="architect/getSociety" tal:replace="python: '(' + architect.getSociety() + ')'" />
@@ -225,7 +225,7 @@
 <tal:loop repeat="geometrician geometricians" tal:condition="geometricians">
 <div class="#" tal:define="oddrow repeat/geometrician/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
   <a href="#" tal:attributes="href python: geometrician.absolute_url() + '?came_from_licence_uid=' + context.UID()">
-   <span tal:replace="python: context.displayValue(geometrician.Vocabulary('personTitle')[0], geometrician.getPersonTitle())" />
+   <span tal:replace="python: geometrician.getPersonTitle(short=True)" />
    <span tal:replace="geometrician/getName1|nothing" />
    <span tal:replace="geometrician/getName2|nothing" />
    <span tal:condition="geometrician/getSociety" tal:replace="python: '(' + geometrician.getSociety() + ')'" />
@@ -240,7 +240,7 @@
 <tal:loop repeat="notary notaries">
 <div class="#" tal:define="oddrow repeat/notary/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
   <a href="#" tal:attributes="href python: notary.absolute_url() + '?came_from_licence_uid=' + context.UID()">
-     <span tal:replace="python: context.displayValue(notary.Vocabulary('personTitle')[0], notary.getPersonTitle())" />
+     <span tal:replace="python: notary.getPersonTitle(short=True)" />
      <span tal:replace="notary/getName1|nothing" />
      <span tal:replace="notary/getName2|nothing" />
      <span tal:condition="notary/getSociety" tal:replace="notary/getSociety|nothing" />
@@ -265,7 +265,7 @@
      <span metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
     </tal:block>
     <b>
-     <span tal:replace="python: context.displayValue(proprietaryObj.Vocabulary('personTitle')[0], proprietaryObj.getPersonTitle())" />
+     <span tal:replace="python: proprietaryObj.getPersonTitle(short=True)" />
      <span tal:replace="proprietaryObj/getName1|nothing" />
      <span tal:replace="proprietaryObj/getName2|nothing" /><br />
     </b>

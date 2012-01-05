@@ -149,7 +149,7 @@ class UrbanVocabulary(object):
 
     implements(IReferenceableVocabulary)
 
-    def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled']):
+    def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False):
         self.path = path
         self.vocType = vocType
         self.id_to_use = id_to_use
@@ -157,12 +157,13 @@ class UrbanVocabulary(object):
         self.sort_on = sort_on
         self.inUrbanConfig = inUrbanConfig
         self.allowedStates = allowedStates
+        self.with_empty_value = with_empty_value
 
     def getDisplayList(self, content_instance):
         portal_urban = getToolByName(content_instance, 'portal_urban')
         result = DisplayList(portal_urban.listVocabulary(self.path,
             content_instance, vocType=self.vocType, id_to_use=self.id_to_use, value_to_use=self.value_to_use, sort_on=self.sort_on,\
-            inUrbanConfig=self.inUrbanConfig, allowedStates=self.allowedStates))
+            inUrbanConfig=self.inUrbanConfig, allowedStates=self.allowedStates, with_empty_value=self.with_empty_value))
         return result
 
     def getObjectsSet(self, content_instance, values):
@@ -179,7 +180,7 @@ class UrbanVocabulary(object):
     def getAllVocTerms(self, content_instance):
         portal_urban = getToolByName(content_instance, 'portal_urban')
         return  portal_urban.listVocabularyObjects(self.path, content_instance, sort_on=self.sort_on,\
-            id_to_use=self.id_to_use, vocType=self.vocType, inUrbanConfig=self.inUrbanConfig)
+            id_to_use=self.id_to_use, vocType=self.vocType, inUrbanConfig=self.inUrbanConfig, allowedStates=self.allowedStates, with_empty_value=self.with_empty_value)
 
 
 ##/code-section module-footer

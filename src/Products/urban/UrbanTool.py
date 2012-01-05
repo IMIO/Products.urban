@@ -456,14 +456,20 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         response.redirect(urbanEventObj.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
 
     security.declarePublic('listVocabulary')
-    def listVocabulary(self, vocToReturn, context, vocType=["UrbanVocabularyTerm", "OrganisationTerm"], id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled']):
+    def listVocabulary(self, vocToReturn, context, vocType=["UrbanVocabularyTerm", "OrganisationTerm"], id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False):
         """
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
         """
         brains = self.listVocabularyBrains(vocToReturn, context, vocType,
-                sort_on, inUrbanConfig, allowedStates)
+                sort_on, inUrbanConfig, allowedStates, with_empty_value)
         res=[]
+        if with_empty_value and brains and len(brains) > 1:
+            #we add an empty vocab value of type "choose a value" at the beginning of the list
+            #except if there is only one value in the list...
+            val = translate('urban', EMPTY_VOCAB_VALUE, context=self, default=EMPTY_VOCAB_VALUE)
+            res.append(('', val))
+
         for brain in brains:
             #the value to use can be on the brain or on the object
             if hasattr(brain, value_to_use):
@@ -480,7 +486,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return tuple(res)
 
     security.declarePrivate('listVocabularyBrains')
-    def listVocabularyBrains(self, vocToReturn, context, vocType=["UrbanVocabularyTerm", "OrganisationTerm"], sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled']):
+    def listVocabularyBrains(self, vocToReturn, context, vocType=["UrbanVocabularyTerm", "OrganisationTerm"], sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False):
         """
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
@@ -495,9 +501,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
     security.declarePrivate('listVocabularyObjects')
     def listVocabularyObjects(self, vocToReturn, context, vocType="UrbanVocabularyTerm", id_to_use="id", inUrbanConfig=True,
-                              sort_on="getObjPositionInParent", allowedStates=['enabled']):
+                              sort_on="getObjPositionInParent", allowedStates=['enabled'], with_empty_value=False):
         brains = self.listVocabularyBrains(vocToReturn, context, vocType=vocType, inUrbanConfig=inUrbanConfig, sort_on=sort_on,
-                                           allowedStates=allowedStates)
+                                           allowedStates=allowedStates, with_empty_value=with_empty_value)
         res={}
         for brain in brains:
             res[getattr(brain, id_to_use)] = brain.getObject()

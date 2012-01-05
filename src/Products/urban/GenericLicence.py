@@ -27,7 +27,6 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 import warnings
-from DateTime import DateTime
 from zope.i18n import translate
 from zope.component import createObject
 from Products.CMFCore.utils import getToolByName
@@ -133,7 +132,7 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('foldercategories'),
+        vocabulary=UrbanVocabulary('foldercategories', with_empty_value=True),
     ),
     LinesField(
         name='missingParts',
@@ -204,7 +203,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay'),
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
     ),
     TextField(
         name='annoncedDelayDetails',
@@ -236,17 +235,18 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_road',
-        vocabulary=UrbanVocabulary('folderroadtypes', inUrbanConfig=False),
+        vocabulary=UrbanVocabulary('folderroadtypes', inUrbanConfig=False, with_empty_value=True),
     ),
     StringField(
         name='roadCoating',
         widget=SelectionWidget(
+            format='select',
             label='Roadcoating',
             label_msgid='urban_label_roadCoating',
             i18n_domain='urban',
         ),
         schemata='urban_road',
-        vocabulary=UrbanVocabulary('folderroadcoatings', inUrbanConfig=False),
+        vocabulary=UrbanVocabulary('folderroadcoatings', inUrbanConfig=False, with_empty_value=True),
     ),
     DataGridField(
         name='roadEquipments',
@@ -386,7 +386,7 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('townshipfoldercategories'),
+        vocabulary=UrbanVocabulary('townshipfoldercategories', with_empty_value=True),
     ),
     BooleanField(
         name='isInSubdivision',
@@ -689,6 +689,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
              ['supervision', translate('supervision_area', 'urban', context=self.REQUEST)],
              ['ouside', translate('outside_catchment', 'urban', context=self.REQUEST)],
             ]
+
         vocab = []
         for elt in lst:
             vocab.append((elt[0], elt[1]))
@@ -706,7 +707,11 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
              ['moderate', translate('flooding_level_moderate', 'urban', context=self.REQUEST)],
              ['high', translate('flooding_level_high', 'urban', context=self.REQUEST)],
             ]
+
         vocab = []
+        #we add an empty vocab value of type "choose a value"
+        val = translate('urban', EMPTY_VOCAB_VALUE, context=self, default=EMPTY_VOCAB_VALUE)
+        vocab.append(('', val))
         for elt in lst:
             vocab.append((elt[0], elt[1]))
         return DisplayList(tuple(vocab))
