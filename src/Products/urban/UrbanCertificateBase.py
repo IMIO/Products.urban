@@ -34,7 +34,7 @@ from Products.urban.indexes import UrbanIndexes
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
-optional_fields = []
+optional_fields = ['customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks', ]
 ##/code-section module-header
 
 schema = Schema((
@@ -99,6 +99,18 @@ schema = Schema((
         multiValued=True,
         vocabulary=UrbanVocabulary('townshipspecificfeatures'),
         enforceVocabulary=True,
+    ),
+    LinesField(
+        name='opinionsToAskIfWorks',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Opinionstoaskifworks',
+            label_msgid='urban_label_opinionsToAskIfWorks',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('opinionstoaskifworks', vocType="OrganisationTerm"),
     ),
     ReferenceField(
         name='foldermanagers',
@@ -285,6 +297,22 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence,
         """
         return self.objectValues('PortionOut')
 
+    security.declarePublic('getOpinionsToAskForWorks')
+    def getOpinionsToAskForWorks(self, theObjects=False):
+        """
+          Returns the opinionsToAskIfWorks values or the OrganisationTerms if theObject=True
+        """
+        res = self.getField('opinionsToAskIfWorks').get(self)
+        if res and theObjects:
+            tool = getToolByName(self, 'portal_urban')
+            urbanConfig = tool.getUrbanConfig(self)
+            opinionsToAskIfWorksConfigFolder = urbanConfig.opinionstoaskifworks
+            elts = res
+            res = []
+            for elt in elts:
+                res.append(getattr(opinionsToAskIfWorksConfigFolder, elt))
+        return res
+
     security.declarePublic('getLastDeposit')
     def getLastDeposit(self):
         return self._getLastEvent(interfaces.IDepositEvent)
@@ -357,8 +385,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('referenceDGATLP', after='reference')
     schema.moveField('notaryContact', after='workLocations')
     schema.moveField('foldermanagers', after='notaryContact')
-    schema.moveField('description', after='townshipSpecificFeatures')
-    schema.moveField('folderCategoryTownship', after='folderCategory')
+    schema.moveField('description', after='opinionsToAskIfWorks')
+    schema.moveField('folderCategoryTownship', after='RCU')
     return schema
 
 finalizeSchema(UrbanCertificateBase_schema)

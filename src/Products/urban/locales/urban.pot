@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-12-22 15:08+0000\n"
+"POT-Creation-Date: 2012-01-05 12:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -751,6 +751,9 @@ msgstr ""
 #. Default: "OpenOfficePort"
 #: UrbanTool.py
 msgid "open_office_port"
+msgstr ""
+
+msgid "opinionstoaskifworks_folder_title"
 msgstr ""
 
 #. Default: "Outside catchment"
@@ -1792,6 +1795,11 @@ msgstr ""
 #. Default: "Opiniontext"
 #: UrbanEvent.py
 msgid "urban_label_opinionText"
+msgstr ""
+
+#. Default: "Opinionstoaskifworks"
+#: UrbanCertificateBase.py
+msgid "urban_label_opinionsToAskIfWorks"
 msgstr ""
 
 #. Default: "Outlinecolor"

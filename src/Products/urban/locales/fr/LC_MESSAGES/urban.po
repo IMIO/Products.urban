@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2011-12-22 15:08+0000\n"
+"POT-Creation-Date: 2012-01-05 12:08+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -753,6 +753,9 @@ msgstr "Nombre de destinataires"
 #: UrbanTool.py
 msgid "open_office_port"
 msgstr "Port sur lequel tourne OpenOffice en mode serveur (2002 par défaut)"
+
+msgid "opinionstoaskifworks_folder_title"
+msgstr "Avis à demander en cas de travaux"
 
 #. Default: "Outside catchment"
 #: GenericLicence.py
@@ -1796,6 +1799,11 @@ msgstr "Date de transmis des demandes d'avis"
 #: UrbanEvent.py
 msgid "urban_label_opinionText"
 msgstr "Texte de l'avis"
+
+#. Default: "Opinionstoaskifworks"
+#: UrbanCertificateBase.py
+msgid "urban_label_opinionsToAskIfWorks"
+msgstr "Avis à demander en cas de travaux"
 
 #. Default: "Outlinecolor"
 #: Layer.py

@@ -301,6 +301,24 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="galeries-minieres",title=u"Galeries minières", description="<p>est situé dans une région traversée par de nombreuses galeries minières et nous ne sommes pas en mesure de déterminer l'état de celle-ci, veuillez donc prendre vos renseignements aurpès du SPW - Département de l'Environnement et de l'Eau - " \
                                                                                                                              "Direction des risques industriels, géologique et miniers - Cellules sous-sol/géologique - Avenue Prince de Liège, 15 à 5100 Jambes;  Le bien est situé sur une zone de consultation en liaison avec les gisements et puits de mine;</p>")
 
+            if not hasattr(aq_base(configFolder), 'opinionstoaskifworks'):
+                #add "Ask opinions to in case of works" folder
+                newFolderid = configFolder.invokeFactory("Folder",id="opinionstoaskifworks",title=_("opinionstoaskifworks_folder_title", 'urban', context=site.REQUEST))
+                newFolder = getattr(configFolder, newFolderid)
+                newFolder.setConstrainTypesMode(1)
+                newFolder.setLocallyAllowedTypes(['OrganisationTerm'])
+                newFolder.setImmediatelyAddableTypes(['OrganisationTerm'])
+                newFolder.invokeFactory("OrganisationTerm",id="ores-gaz-electricite",title=u"ORES - Gaz-Electricité", description=u"<p>Adresse</p>")
+                newFolder.invokeFactory("OrganisationTerm",id="ores-eclairage-public",title=u"ORES - Service Eclairage public", description=u"<p>Adresse</p>")
+                newFolder.invokeFactory("OrganisationTerm",id="belgacom",title=u"Belgacom", description=u"<p>Adresse</p>")
+                newFolder.invokeFactory("OrganisationTerm",id="fluxsys",title=u"Fluxsys", description=u"<p>Adresse</p>")
+                newFolder.invokeFactory("OrganisationTerm",id="air-liquide",title=u"Air Liquide - Div. Belge - Service des Canalisations", description=u"<p>Adresse</p>")
+                newFolder.invokeFactory("OrganisationTerm",id="elia-asset-sud",title=u"Elia Asset Sud", description=u"<p>Adresse</p>")
+                newFolder.invokeFactory("OrganisationTerm",id="swde",title=u"SWDE (Société Wallone de Distribution d'Eau)", description=u"<p>Adresse</p>")
+                newFolder.invokeFactory("OrganisationTerm",id="voo",title=u"Voo", description=u"<p>Adresse</p>")
+                #now, we need to specify that the description's mimetype is 'text/html'
+                setHTMLContentType(newFolder, 'description')
+
         if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', ]:
             if not hasattr(aq_base(configFolder), 'missingparts'):
                 #add "missingparts" folder

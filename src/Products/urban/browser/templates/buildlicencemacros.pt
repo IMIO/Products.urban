@@ -130,12 +130,12 @@
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('workType', mode='view')" /><span tal:condition="not: context/getWorkType" class="discreet" i18n:translate="content_none">None</span></td>
      </tr>
-     <tr>
+     <tr tal:condition="python: context.attributeIsUsed('missingParts')">
       <td valign="top"><b><span i18n:translate="urban_label_missingParts">Missing parts</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('missingParts', mode='view')" /></td>
      </tr>
-     <tr tal:condition="python: context.attributeIsUsed('missingPartsDetails') and context.getMissingPartsDetails()">
+     <tr tal:condition="python: context.attributeIsUsed('missingPartsDetails')">
       <td valign="top"><b><span i18n:translate="urban_label_missingPartsDetails">Missing parts details</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><tal:block replace="structure context/getMissingPartsDetails" /><span tal:condition="not: context/getMissingPartsDetails" class="discreet" i18n:translate="content_none">None</span></td>
@@ -320,7 +320,7 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('locationDgrneUnderground', mode='view')" /></td>
  </tr>
-  <tr tal:condition="python: context.attributeIsUsed('locationFloodingLevel')">
+ <tr tal:condition="python: context.attributeIsUsed('locationFloodingLevel')">
   <td valign="top"><b><span i18n:translate="urban_label_locationFloodingLevel">Flooding level</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('locationFloodingLevel', mode='view')" /><span tal:condition="not: context/getLocationFloodingLevel" class="discreet" i18n:translate="content_none">None</span></td>

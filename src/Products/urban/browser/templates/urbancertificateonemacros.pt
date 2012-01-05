@@ -35,20 +35,24 @@
    <fieldset><b><legend i18n:translate="legend_details">Details</legend></b>
     <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
      <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_licenceSubject">Subject</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('licenceSubject', mode='view')" /></td>
+     </tr>
+     <tr>
       <td valign="top"><b><span i18n:translate="urban_label_reference">Reference</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('reference', mode='view')" /></td>
      </tr>
      <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_description">Description</span>:</b></td>
+      <td valign="top"><b><span i18n:translate="urban_label_referenceDGATLP">Reference DGATLP</span>:</b></td>
       <td width="2%"></td>
-      <td valign="top">
-        <metal:myfield use-macro="python:here.widget('description', mode='view')" /><span tal:condition="not: context/Description" class="discreet" i18n:translate="content_none">None</span></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('referenceDGATLP', mode='view')" /></td>
      </tr>
      <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_folderCategory">Folder category</span>:</b></td>
+      <td valign="top"><b><span i18n:translate="urban_label_notaryContact">Notary</span>:</b></td>
       <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategory', mode='view')" /></td>
+      <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanNotariesMacro" /></td>
      </tr>
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_foldermanagers">Treating agent</span>:</b></td>
@@ -56,9 +60,25 @@
       <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanFolderManagerMacro" /></td>
      </tr>
      <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_notaryContact">Notary</span>:</b></td>
+      <td valign="top"><b><span i18n:translate="urban_label_folderCategory">Folder category</span>:</b></td>
       <td width="2%"></td>
-      <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanNotariesMacro" /></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategory', mode='view')" /></td>
+     </tr>
+     <tr tal:condition="python: context.attributeIsUsed('missingParts')">
+      <td valign="top"><b><span i18n:translate="urban_label_missingParts">Missing parts</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('missingParts', mode='view')" /></td>
+     </tr>
+     <tr tal:condition="python: context.attributeIsUsed('missingPartsDetails')">
+      <td valign="top"><b><span i18n:translate="urban_label_missingPartsDetails">Missing parts details</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><tal:block replace="structure context/getMissingPartsDetails" /><span tal:condition="not: context/getMissingPartsDetails" class="discreet" i18n:translate="content_none">None</span></td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_description">Description</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top">
+        <metal:myfield use-macro="python:here.widget('description', mode='view')" /><span tal:condition="not: context/Description" class="discreet" i18n:translate="content_none">None</span></td>
      </tr>
     </table>
    </fieldset>
@@ -83,12 +103,12 @@
     <td width="2%"></td>
     <td valign="top"><metal:myfield use-macro="python:here.widget('specificFeatures', mode='view')" /></td>
    </tr>
-   <tr>
+   <tr tal:condition="python: context.attributeIsUsed('townshipSpecificFeatures')">
     <td valign="top"><b><span i18n:translate="urban_label_townshipSpecificFeatures">Township specific features</span>:</b></td>
     <td width="2%"></td>
     <td valign="top"><metal:myfield use-macro="python:here.widget('townshipSpecificFeatures', mode='view')" /></td>
    </tr>
-   <tal:block define="csfs context/getCustomSpecificFeaturesAsList">
+   <tal:block condition="python: context.attributeIsUsed('customSpecificFeatures')" define="csfs context/getCustomSpecificFeaturesAsList">
    <tr style="border-bottom: 0">
     <td valign="top"><b><span i18n:translate="urban_label_customSpecificFeatures">Custom specific features</span>:</b></td>
     <td width="2%"></td>
@@ -111,7 +131,12 @@
     </td>
    </tr>
    </tal:block>
-  </table>
+   <tr tal:condition="python: context.attributeIsUsed('opinionsToAskIfWorks')">
+    <td valign="top"><b><span i18n:translate="urban_label_opinionsToAskIfWorks">Opinions to ask in case of works</span>:</b></td>
+    <td width="2%"></td>
+    <td valign="top"><metal:myfield use-macro="python:here.widget('opinionsToAskIfWorks', mode='view')" /><span tal:condition="not: context/getOpinionsToAskIfWorks" class="discreet" i18n:translate="content_none">None</span></td>
+   </tr>
+   </table>
  </fieldset>
  </td>
  </tr>
@@ -197,7 +222,13 @@
  <tr tal:condition="python: context.attributeIsUsed('folderZoneDetails')">
   <td valign="top"><b><span i18n:translate="urban_label_folderZoneDetails">Folder zone details</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><tal:block replace="structure context/getFolderZoneDetails" /><span tal:condition="not: context/getFolderZoneDetails" class="discreet" i18n:translate="content_none">None</span></td> </tr>
+  <td valign="top"><tal:block replace="structure context/getFolderZoneDetails" /><span tal:condition="not: context/getFolderZoneDetails" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
+ <tr tal:condition="python: context.attributeIsUsed('locationFloodingLevel')">
+  <td valign="top"><b><span i18n:translate="urban_label_locationFloodingLevel">Flooding level</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('locationFloodingLevel', mode='view')" /><span tal:condition="not: context/getLocationFloodingLevel" class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_isInSubdivision">In subdivision?</span>:</b></td>
   <td width="2%"></td>
