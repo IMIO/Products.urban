@@ -70,6 +70,8 @@ def migrateToPlone4(context):
     migrateFoldermakersTerms(context)
     #Move all the FolderManager objects into a single folder at the root of urban config
     migrateFoldermanagers(context)
+    #some templates where defined as attributes on the tool, now we store them in a specific folder
+    migrateGlobalTemplates(context)
     #Some folders defined on LicenceConfigs are now at the portal_urban root
     migrateSomeLocalFoldersAsGlobal(context)
 
@@ -793,10 +795,10 @@ def provideEventMarkerInterfaces(context):
         print(interfacepath)
         interface = None
         if interfacepath != '':
-            interface = getInterface('', interfacepath) 
-        if interface is not None and not event.__provides__(interface):
+            interface = getInterface('', interfacepath)
+        if interface is not None and not urbanevent.__provides__(interface):
             alsoProvides(urbanevent, interface)
-            event.reindexObject(['object_provides'])
+            urbanevent.reindexObject(['object_provides'])
     logger.info("Migrating Specific Event interfaces: done!")
 
 def migrateLayersForMapfish(context):
