@@ -204,6 +204,21 @@ class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserD
             res = getattr(urbanConfig.articles, res)
         return res
 
+    security.declarePublic('getReceivability')
+    def getReceivability(self):
+        """
+          Returns a string specifying if self is receivable or not
+        """
+        #get the last college report and check the decision
+        lastCollegeReport = self.getLastCollegeReport()
+        if lastCollegeReport:
+            decisionTerm = lastCollegeReport.getDecision(theObject=True)
+            #we use the extra value field on the term where we store
+            #the 'receivable' text 
+            if decisionTerm:
+                return decisionTerm.getExtraValue()
+        return ''
+
 
 
 registerType(Declaration, PROJECTNAME)
