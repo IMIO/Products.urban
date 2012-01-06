@@ -33,7 +33,7 @@
 <dd id="fieldset-urban_description">
  <metal:block use-macro="context/@@urbancertificateone-macros/descriptionMacro" />
 </dd>
- 
+
 <dt class="formTab" id="fieldsetlegend-urban_road" i18n:domain="plone" i18n:translate="label_schema_urban_road"><span>Road</span></dt>
 <dd id="fieldset-urban_road">
  <metal:listing use-macro="context/@@urbancertificateone-macros/roadMacro" />
@@ -56,6 +56,14 @@
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_description">Description</legend></strong>
  <metal:block use-macro="context/@@urbancertificateone-macros/descriptionMacro" />
 </fieldset>
+
+<fieldset i18n:domain="plone" i18n:translate="label_schema_urban_road"><strong><legend>Road</legend></strong>
+ <metal:road use-macro="context/@@urbancertificateone-macros/roadMacro" />
+</fieldset>
+
+<fieldset i18n:domain="plone" i18n:translate="label_schema_urban_location"><strong><legend>Location</legend></strong></fieldset>
+ <metal:location use-macro="context/@@urbancertificateone-macros/locationMacro" />
+</fieldset> 
 
 <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_events">Events</legend></strong>
  <metal:events use-macro="here/urban_macros/macros/urbanEventsMacro" />

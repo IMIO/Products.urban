@@ -179,7 +179,7 @@
  <tr tal:condition="python: context.attributeIsUsed('floodingLevel')">
   <td valign="top"><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /><span tal:condition="not: context/getFloodingLevel" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('dgrneUnderground')">
   <td valign="top"><b><span i18n:translate="urban_label_dgrneUnderground">DGRNE Underground (location)</span>:</b></td>
@@ -227,7 +227,7 @@
  <tr tal:condition="python: context.attributeIsUsed('locationFloodingLevel')">
   <td valign="top"><b><span i18n:translate="urban_label_locationFloodingLevel">Flooding level</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('locationFloodingLevel', mode='view')" /><span tal:condition="not: context/getLocationFloodingLevel" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('locationFloodingLevel', mode='view')" /></td>
  </tr>
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_isInSubdivision">In subdivision?</span>:</b></td>

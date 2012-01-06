@@ -412,7 +412,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=1,
-        vocabulary=UrbanVocabulary('folderprotectedbuildings'),
+        vocabulary=UrbanVocabulary('folderprotectedbuildings', inUrbanConfig=False),
     ),
     TextField(
         name='protectedBuildingDetails',

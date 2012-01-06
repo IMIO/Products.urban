@@ -43,7 +43,8 @@ class DeclarationView(BrowserView):
             return None
         dict = {
                 'url': collegeReport.absolute_url(),
-                'date': tool.formatDate(collegeReport.getEventDate(), translatemonth=False)
+                'date': "%s - %s" % (tool.formatDate(collegeReport.getEventDate(), translatemonth=False), \
+                context.displayValue(collegeReport.Vocabulary('decision')[0], collegeReport.getDecision()))
                }
         return dict
 
@@ -61,6 +62,7 @@ class DeclarationView(BrowserView):
                 'date': tool.formatDate(theLicence.getEventDate(), translatemonth=False)
                }
         return dict
+
 
 class DeclarationMacros(BrowserView):
     """

@@ -22,7 +22,6 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
-from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -30,8 +29,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
-from Products.DataGridField.Column import Column
-from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 optional_fields = []
@@ -69,6 +66,7 @@ schema = Schema((
         relationship='declarationFolderManagers',
         allowed_types=('FolderManager',),
     ),
+
 ),
 )
 
@@ -91,6 +89,9 @@ del Declaration_schema['impactStudy']
 #hide the solicit opinions to fields for UrbanCertificateOne
 Declaration_schema['solicitRoadOpinionsTo'].widget.visible=False
 Declaration_schema['solicitLocationOpinionsTo'].widget.visible=False
+#no need for missing parts as if it is not complete, it is decided not receivable
+Declaration_schema['missingParts'].widget.visible=False
+Declaration_schema['missingPartsDetails'].widget.visible=False
 
 ##/code-section after-schema
 
@@ -213,7 +214,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
        Finalizes the type schema to alter some fields
     """
-    schema.moveField('description', after='foldermanagers')
+    schema.moveField('description', after='article')
+    schema.moveField('foldermanagers', after='workLocations')
     return schema
 
 finalizeSchema(Declaration_schema)

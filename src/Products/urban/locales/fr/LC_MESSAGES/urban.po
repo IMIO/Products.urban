@@ -488,7 +488,7 @@ msgid "foldermanagers_folder_title"
 msgstr "Agents Traitants"
 
 msgid "folderprotectedbuildings_folder_title"
-msgstr "Classement des biens"
+msgstr "Biens classés ou assimilés"
 
 msgid "folderroadcoatings_folder_title"
 msgstr "Revêtements de route"
