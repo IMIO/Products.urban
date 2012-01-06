@@ -76,6 +76,8 @@ def migrateToPlone4(context):
     migrateSomeLocalFoldersAsGlobal(context)
     #the old declarationSubject field is now licenceSubject
     migrateDeclarationSubjectField(context)
+    #Declarations need an extra value to be defined on UrbanVocabularyTerms in portal_urban.decisions
+    migrateDecisionsForDeclarations(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -1053,3 +1055,33 @@ def migrateDeclarationSubjectField(context):
         logger.info("%s's licenceSubject has been migrated" % obj.Title())
 
     logger.info("Migrating the 'declarationSubject' field to 'licenceSubject' for Declarations: done!")
+
+
+def migrateDecisionsForDeclarations(context):
+    """
+      Declarations need an extra value to be defined on UrbanVocabularyTerms in portal_urban.decisions
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+
+    logger.info("Migrating the 'decisions UrbanVocabularyTems' for Declarations: starting...")
+
+    tool = getToolByName(site, 'portal_urban')
+
+    for obj in tool.decisions.objectValues('UrbanVocabularyTerm'):
+        extraValue = obj.getExtraValue()
+        if not extraValue:
+            if obj.id == 'favorable':
+                obj.setExtraValue('Recevable')
+                logger.info("Extra value added for '%s'" % obj.id)
+            elif obj.id == 'defavorable':
+                obj.setExtraValue('Irrecevable')
+                logger.info("Extra value added for '%s'" % obj.id)
+            else:
+                logger.warn("Unknown term with id '%s', no extra value added!!!'" % obj.id)
+            logger.info("Extra value added for '%s'" % obj.id)
+        else:
+            logger.info("Extra value already exists for '%s' and is '%s'" % (obj.id, extraValue))
+
+    logger.info("Migrating the 'decisions UrbanVocabularyTems' for Declarations: done!!!")

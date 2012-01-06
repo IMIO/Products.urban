@@ -571,6 +571,17 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         else:
             return False
 
+    security.declarePublic('getDecision')
+    def getDecision(self, theObject=False):
+        """
+          Returns the decision value or the UrbanVocabularyTerm if theObject=True
+        """
+        res = self.getField('decision').get(self)
+        if res and theObject:
+            tool = getToolByName(self, 'portal_urban')
+            res = getattr(tool.decisions, res)
+        return res
+
 
 
 registerType(UrbanEvent, PROJECTNAME)

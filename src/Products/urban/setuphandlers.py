@@ -925,8 +925,8 @@ def addGlobalFolders(context):
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
         newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="favorable",title=u"Favorable")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="defavorable",title=u"Défavorable")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="favorable",title=u"Favorable", extraValue="Recevable")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="defavorable",title=u"Défavorable", extraValue="Irrecevable")
 
     #add the external opinions decisions folder
     if not hasattr(tool, "externaldecisions"):

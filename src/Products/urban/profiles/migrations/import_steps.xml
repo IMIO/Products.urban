@@ -190,4 +190,11 @@
     version="2011-12-12T15:00.0">
       Add townshipfoldercategories for every LicenceConfigs
  </import-step>
+ <import-step
+    id="urban-migrateDecisionsForDeclarations"
+    handler="Products.urban.profiles.migrations.migrate.migrateDecisionsForDeclarations"
+    title="Declarations need an extra value to be defined on UrbanVocabularyTerms in portal_urban.decisions"
+    version="2012-01-06T16:30.0">
+      Declarations need an extra value to be defined on UrbanVocabularyTerms in portal_urban.decisions
+ </import-step>
 </import-steps>
