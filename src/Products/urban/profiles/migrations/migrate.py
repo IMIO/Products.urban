@@ -997,11 +997,12 @@ def migrateSomeLocalFoldersAsGlobal(context):
     tool = getToolByName(site, 'portal_urban')
 
     #ids of local folders that are now global folders
-    localFolderIds = ['folderroadtypes', 'folderroadcoatings', 'pashs', 'folderroadequipments']
+    localFolderIds = ['folderroadtypes', 'folderroadcoatings', 'pashs', 'folderroadequipments', 'folderprotectedbuildings']
     for localFolderId in localFolderIds:
         if not hasattr(tool, localFolderId):
             raise KeyError, "Migrating some local LicenceConfigs folder to the portal_urban root : You must reinstall 'urban' before launching this step!"
 
+    logger.info("Migrating some local LicenceConfigs folder to the portal_urban root : starting...")
     for urban_type in URBAN_TYPES:
         urban_type_id = urban_type.lower()
         configFolder = getattr(tool, urban_type_id)
@@ -1023,6 +1024,7 @@ def migrateSomeLocalFoldersAsGlobal(context):
                     globalFolder.manage_pasteObjects(cutdata)
                 #delete the useless localFolder
                 configFolder.manage_delObjects([localFolderId,])
+                logger.info("The '%s' folder of '%s' has been migrated.  Additional ids where '%s'" % (localFolderId, configFolder.id, str(ids_to_cut)))
 
     logger.info("Migrating some local LicenceConfigs folder to the portal_urban root : done!")
     site.portal_properties.site_properties.enable_link_integrity_checks = True
