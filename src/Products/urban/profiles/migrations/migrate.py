@@ -70,6 +70,8 @@ def migrateToPlone4(context):
     migrateFoldermakersTerms(context)
     #Move all the FolderManager objects into a single folder at the root of urban config
     migrateFoldermanagers(context)
+    #some templates where defined as attributes on the tool, now we store them in a specific folder
+    migrateGlobalTemplates(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -839,16 +841,16 @@ def provideEventMarkerInterfaces(context):
     portal = context.getSite()
     brains = portal.portal_catalog.searchResults(portal_type='UrbanEvent') 
     for brain in brains:
-        event = brain.getObject()
-        event_type = event.getUrbaneventtypes()
+        urbanevent = brain.getObject()
+        event_type = urbanevent.getUrbaneventtypes()
         interfacepath = event_type.getEventTypeType()
         print(interfacepath)
         interface = None
         if interfacepath != '':
-            interface = getInterface('', interfacepath) 
-        if interface is not None and not event.__provides__(interface):
-            alsoProvides(event, interface)
-            event.reindexObject(['object_provides'])
+            interface = getInterface('', interfacepath)
+        if interface is not None and not urbanevent.__provides__(interface):
+            alsoProvides(urbanevent, interface)
+            urbanevent.reindexObject(['object_provides'])
     logger.info("Migrating Specific Event interfaces: done!")
 
 def migrateLayersForMapfish(context):
@@ -937,6 +939,7 @@ def migrateFoldermanagers(context):
         foldermanagers_folder.setImmediatelyAddableTypes(['FolderManager'])
     else:
         foldermanagers_folder = tool.foldermanagers
+        return #this migration already done
     #move the foldermanagers spread in the config into the new folder
     foldermanager_ids = {}
     for licence_type in  URBAN_TYPES:
@@ -1003,7 +1006,7 @@ def migrateGlobalTemplates(context):
     site = context.getSite()
     tool = getattr(site, 'portal_urban')
     if not hasattr(tool, 'templateHeader'):
-        #the migration has already been runned, return
+        #the migration has already been run, return
         return
     templates_folder = getattr(tool, 'globaltemplates')
     GT = GLOBAL_TEMPLATES
