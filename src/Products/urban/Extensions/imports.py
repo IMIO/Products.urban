@@ -17,8 +17,9 @@ def createStreet(self, city, zipcode, streetcode, streetname, bestAddresskey=0, 
     out = []
     from Products.CMFCore.utils import getToolByName
     wtool = getToolByName(self, 'portal_workflow')
+    utool = getToolByName(self, 'portal_urban')
     #get the folder where we are going the create the streets in
-    streetFolder = getattr(self, 'streets')
+    streetFolder = getattr(utool, 'streets')
     #first element is the city and second is the street
     #check if we need to create the city
     cityId = self.plone_utils.normalizeString(city)
@@ -58,7 +59,7 @@ def createStreet(self, city, zipcode, streetcode, streetname, bestAddresskey=0, 
         #current record is already existing
         #not an historical record: bakey is not 0 and is unique
         #historical record: bakey + begindate is unique
-        if (enddate is None and bestAddresskey and bestAddresskey == streetdic['bestAddressKey']) or (enddate is not None and bestAddresskey == streetdic['bestAddressKey'] and startdate.Date() == streetdic['startDate'].Date()):
+        if (enddate is None and bestAddresskey and bestAddresskey == streetdic['bestAddressKey'] and streetdic['endDate'] is None) or (enddate is not None and bestAddresskey == streetdic['bestAddressKey'] and startdate.Date() == streetdic['startDate'].Date()):
             #the current record already exists, we don't create it again
             create = False
             #!!! TO BE DONE WHEN UPDATING
@@ -100,14 +101,14 @@ def createStreet(self, city, zipcode, streetcode, streetname, bestAddresskey=0, 
                         out.append("&nbsp;&nbsp;... Found same street code '%s' in city '%s': name '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s', state '%s', <a href='%s'>url</a>"%(streetcode, city, streetdic['streetName'], streetdic['bestAddressKey'], streetdic['regionalRoad'], streetdic['startDate'], streetdic['endDate'], streetdic['state'], streetdic['obj'].absolute_url()))
             else:
                 disable = True
-                out.append("! Disabled current record because historical: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'"%(city, streetname, streetcode, bestAddresskey, regionalroad, startdate, enddate))
 
     if create:
         streetId = streetTest = self.plone_utils.normalizeString(streetname)
         i = 0
         while hasattr(aq_base(cityObj), streetTest):
             i +=1
-            out.append("info: Found existing id '%s' in entity '%s'"%(streetTest, cityObj.Title()))
+            if not disable: #no need to warn for an historical record: normal case
+                out.append("info: Found existing id '%s' in entity '%s'"%(streetTest, cityObj.Title()))
             streetTest = streetId + str(i)
         streetId = streetTest
         try:
@@ -115,8 +116,9 @@ def createStreet(self, city, zipcode, streetcode, streetname, bestAddresskey=0, 
             streetObj = getattr(cityObj, streetObjId)
             #if a street has an endDate, we disable it as this should not be
             #used anymore but present for history purpose
-            if disable:
+            if disable or (enddate and enddate < DateTime()):
                 wtool.doActionFor(streetObj, 'disable')
+                out.append("! Disabled current record because historical: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'"%(city, streetname, streetcode, bestAddresskey, regionalroad, startdate, enddate))
             streetObj.reindexObject()
             #we add the current record in the existing streets dictionary for next checks
             ex_streets[city]['streets'][streetObjId] = {'streetCode' : streetcode,
