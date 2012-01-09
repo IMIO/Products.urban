@@ -103,7 +103,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             if hasattr(field, 'optional'):
                 res.append((field.getName(), self.utranslate(
                     field.widget.label_msgid, domain=field.widget.i18n_domain, default=field.widget.label)))
-        return DisplayList(tuple(res))
+        return DisplayList(tuple(res)).sortedByValue()
 
     security.declarePublic('getIconURL')
     def getIconURL(self):
