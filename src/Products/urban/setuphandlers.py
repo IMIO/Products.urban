@@ -763,6 +763,7 @@ def addGlobalFolders(context):
         newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
         newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
         newFolder.invokeFactory("UrbanVocabularyTerm",id="classe",title=u"classé ou assimilé")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="certificatpatrimoine",title=u"certificat de patrimoine délivré")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="zoneprotection",title=u"zone de protection")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="reprisinventaire",title=u"repris à l'inventaire")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="archeologique",title=u"à l'Atlas archéologique")

@@ -78,6 +78,8 @@ def migrateToPlone4(context):
     migrateDeclarationSubjectField(context)
     #Declarations need an extra value to be defined on UrbanVocabularyTerms in portal_urban.decisions
     migrateDecisionsForDeclarations(context)
+    #some UrbanVocabularyTerms have been added afterward, we need to add them now
+    addMissingUrbanVocabularyTerms(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -329,24 +331,30 @@ def migrateUrbanEventTypes(context):
             obj.setActivatedFields(activatedFields)
             logger.info("'eventDate' has been removed from the activatedFields of %s" % portal_url.getRelativeUrl(obj))
 
-def addPebMissingPart(context):
+def addMissingUrbanVocabularyTerms(context):
     """
-      Add an element 'peb' in the 'buildlicence' UrbanConfig 'missingparts' folder
+      Some UrbanVocabularyTerms have been added afterward, we need to add them now
     """
-    #walk into every UrbanConfigs and look for a 'missingparts' folder
     if isNoturbanMigrationsProfile(context): return
 
     site = context.getSite()
+    logger.info("Adding missing UrbanVocabularyTerms : starting...")
 
-    if not hasattr(site.portal_urban.buildlicence, 'missingparts'):
-        logger.error("No 'msisingparts' folder found in 'portal_urban.buildlicence' !!!")
-        return
-    missingPartsFolder = site.portal_urban.buildlicence.missingparts
-    if not hasattr(missingPartsFolder, 'peb'):
-        missingPartsFolder.invokeFactory("UrbanVocabularyTerm",id="peb",title=u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires")
-        logger.info("Added a missing part 'peb' for UrbanConfig 'buildlicence'")
-    else:
-        logger.error("A missing part 'peb' already exists in 'portal_urban.buildlicence' !!!")
+    #list of sublists of two elements
+    #first element is the folder to add the element in
+    #second element is a dict containing the informations about the element to add
+    termsToAdd = (
+                  (site.portal_urban.buildlicence.missingparts, {'id': 'peb', 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"}),
+                  (site.portal_urban.folderprotectedbuildings, {'id': 'certificatpatrimoine', 'title': u"certificat de patrimoine délivré"}),
+                 )
+
+    for destFolder, data in termsToAdd:
+        if not hasattr(destFolder, data['id']):
+            destFolder.invokeFactory("UrbanVocabularyTerm", **data)
+            logger.info("Added a missing UrbanVocabularyTerm '%s' in '%s'" % (data['id'], '/'.join(destFolder.getPhysicalPath())))
+        else:
+            logger.info("'%s' already exists in '%s'" % (data['id'], '/'.join(destFolder.getPhysicalPath())))
+    logger.info("Adding missing UrbanVocabularyTerms : done!")
 
 def migrateFolderDelays(context):
     """
@@ -1055,7 +1063,6 @@ def migrateDeclarationSubjectField(context):
         logger.info("%s's licenceSubject has been migrated" % obj.Title())
 
     logger.info("Migrating the 'declarationSubject' field to 'licenceSubject' for Declarations: done!")
-
 
 def migrateDecisionsForDeclarations(context):
     """

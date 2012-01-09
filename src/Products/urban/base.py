@@ -357,3 +357,18 @@ class UrbanBase(object):
         if tool.getUseTabbing():
             return False
         return True
+
+    security.declarePublic('getParcellingsForTemplate')
+    def getParcellingsForTemplate(self, withDetails=False):
+        """
+          Format informations about parcellings to be displayed in templates
+        """
+        parcellings = self.getParcellings()
+        if not parcellings:
+            return '-'
+        else:
+            res = parcellings.Title()
+            if withDetails:
+                res = "%s - %s" % (res, self.getRawSubdivisionDetails())
+            return res
+
