@@ -4,9 +4,11 @@
 # GNU General Public License (GPL)
 import grokcore.component as grok
 from zope.component import getGlobalSiteManager
+from zope.i18n import translate
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.interfaces import IVocabularyFactory
+from Products.urban.config import EMPTY_VOCAB_VALUE
 from Products.urban.interfaces import IEventTypeType
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
@@ -18,7 +20,11 @@ class EventTypeType(grok.GlobalUtility):
     def __call__(self, context):
         gsm = getGlobalSiteManager()
         interfaces = gsm.getUtilitiesFor(IEventTypeType)
-        items = [SimpleTerm(interfaceName, interface.__doc__, interface.__doc__)
+        items = []
+        #we add an empty vocab value of type "choose a value"
+        val = translate('urban', EMPTY_VOCAB_VALUE, context=self, default=EMPTY_VOCAB_VALUE)
+        items.append(SimpleTerm('', val, val))
+        items = items + [SimpleTerm(interfaceName, interface.__doc__, interface.__doc__)
                  for interfaceName, interface in interfaces]
         return SimpleVocabulary(items)
 
