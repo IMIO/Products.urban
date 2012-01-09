@@ -317,11 +317,11 @@ class Contact(BaseContent, BrowserDefaultMixin):
             parent.at_post_edit_script()
 
     security.declarePublic('getSignaletic')
-    def getSignaletic(self, withaddress=False, linebyline=False):
+    def getSignaletic(self, short=False, withaddress=False, linebyline=False):
         """
           Returns the contact base signaletic : title and names
         """
-        nameSignaletic = self._getNameSignaletic(linebyline)
+        nameSignaletic = self._getNameSignaletic(short, linebyline)
         if not withaddress:
             if not linebyline:
                 return nameSignaletic
@@ -343,26 +343,23 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 return '<p>%s<br />%s</p>' % (nameSignaletic,
                     addressSignaletic)
 
-    def _getNameSignaletic(self, linebyline):
-        title = self.displayValue(self.Vocabulary('personTitle')[0],
-            self.getPersonTitle()).encode('utf8')
+    def _getNameSignaletic(self, short, linebyline):
+        title = self.getPersonTitleValue(short)
         nameSignaletic = '%s %s %s' % (title, self.getName1(), self.getName2())
         if len(self.getRepresentedBy()) > 0:
-            person_title = None
-            for brain in self.portal_catalog.searchResults(portal_type = "PersonTitleTerm"):
-                if self.getPersonTitle() == brain['id']:
-                    person_title = brain.getObject()
-                    break
+            person_title = self.getPersonTitle(theObject=True)
             representatives = self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
-            gender = person_title.getGender()
-            multiplicity = person_title.getMultiplicity()
-            represented = 'représenté'
-            if gender == 'male' and multiplicity == 'plural' :
-                represented = 'représentés'
-            elif gender == 'female' and multiplicity == 'single' :
-                represented = 'représentée'
-            elif gender == 'female' and multiplicity == 'plural' :
-                represented = 'représentées'
+            gender = multiplicity = represented = ''
+            if person_title:
+                gender = person_title.getGender()
+                multiplicity = person_title.getMultiplicity()
+                represented = 'représenté'
+                if gender == 'male' and multiplicity == 'plural' :
+                    represented = 'représentés'
+                elif gender == 'female' and multiplicity == 'single' :
+                    represented = 'représentée'
+                elif gender == 'female' and multiplicity == 'plural' :
+                    represented = 'représentées'
             nameSignaletic = '%s %s %s %s par %s' % (title, self.getName1(), self.getName2(), represented, representatives)
         if linebyline:
             #escape HTML special characters like HTML entities
@@ -436,14 +433,19 @@ class Contact(BaseContent, BrowserDefaultMixin):
         return DisplayList(tuple(vocab))
 
     security.declarePublic('getPersonTitle')
-    def getPersonTitle(self, short=False):
+    def getPersonTitle(self, short=False, theObject=False):
         """
           Overrides the default personTitle accessor
           Returns the personTitle short version, so 'M' for 'Mister', ...
         """
         #either we need the classic value
         if not short:
-            return self.getField('personTitle').get(self)
+            res = self.getField('personTitle').get(self)
+            if res and theObject:
+                tool = getToolByName(self, 'portal_urban')
+                res = getattr(tool.persons_titles, res)
+            return res
+
         #or the short one...
         tool = getToolByName(self, 'portal_urban')
         if hasattr(tool.persons_titles, self.getField('personTitle').get(self)):
@@ -458,12 +460,14 @@ class Contact(BaseContent, BrowserDefaultMixin):
             return ''
 
     security.declarePublic('getPersonTitleValue')
-    def getPersonTitleValue(self):
+    def getPersonTitleValue(self, short=False):
         """
           Returns the personTitle real value.  Usefull for being used in templates
         """
-        personTitle = self.getPersonTitle()
-        if self.getPersonTitle():
+        personTitle = self.getPersonTitle(short)
+        if short:
+            return personTitle
+        elif personTitle:
             return self.displayValue(self.Vocabulary('personTitle')[0], personTitle).encode('UTF-8')
         else:
             return ''

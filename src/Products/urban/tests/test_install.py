@@ -120,6 +120,13 @@ class TestContact(unittest.TestCase):
         self.buildlicence = self.portal_urban.buildlicence
         self.foldermanagers = self.buildlicence.foldermanagers
         self.folderBuildLicences = self.portal.urban.buildlicences
+        #set language to 'fr' as we do some translations above
+        ltool = self.portal.portal_languages
+        defaultLanguage = 'fr'
+        supportedLanguages = ['en','fr']
+        ltool.manage_setLanguageSettings(defaultLanguage, supportedLanguages, setUseCombinedLanguageCodes=False)
+        #this needs to be done in tests for the language to be taken into account...
+        ltool.setLanguageBindings()
 
     def test_getSignaleticIsString(self):
         login(self.portal, TEST_USER_NAME)

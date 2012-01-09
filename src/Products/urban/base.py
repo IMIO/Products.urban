@@ -65,9 +65,9 @@ class UrbanBase(object):
         for fm in fms:
             #if the signaletic is not empty, we are adding several folder managers
             if signaletic:
-                signaletic += '<p><strong>%s</strong>' % fm.getSignaletic()
+                signaletic += '<p><strong>%s</strong>' % fm.getSignaletic(short=True)
             else:
-                signaletic = '<p><strong>%s</strong>' % fm.getSignaletic()
+                signaletic = '<p><strong>%s</strong>' % fm.getSignaletic(short=True)
             if withGrade:
                 signaletic += ' (%s)' % self.displayValue(fm.Vocabulary('grade')[0], fm.getGrade()).encode('utf8')
             if withEmail:
