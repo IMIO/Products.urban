@@ -23,7 +23,7 @@ def configure_urban_site(portal, name='', nis='', pghost='localhost',
     if not pu.getSqlHost():
         pu.setSqlHost(pghost)
     if not pu.getCityName():
-        pu.setCityName(name)
+        pu.setCityName(name.capitalize())
     if nis and not pu.getNISNum():
         pu.setNISNum(nis)
     if not dbname:
