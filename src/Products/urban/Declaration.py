@@ -214,7 +214,7 @@ class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserD
         if lastCollegeReport:
             decisionTerm = lastCollegeReport.getDecision(theObject=True)
             #we use the extra value field on the term where we store
-            #the 'receivable' text 
+            #the 'receivable' text
             if decisionTerm:
                 return decisionTerm.getExtraValue()
         return ''
