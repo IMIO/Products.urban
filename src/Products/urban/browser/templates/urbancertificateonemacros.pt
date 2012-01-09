@@ -47,7 +47,7 @@
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_referenceDGATLP">Reference DGATLP</span>:</b></td>
       <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('referenceDGATLP', mode='view')" /></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('referenceDGATLP', mode='view')" /><span tal:condition="not: context/getReferenceDGATLP" class="discreet" i18n:translate="content_none">None</span></td>
      </tr>
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_notaryContact">Notary</span>:</b></td>

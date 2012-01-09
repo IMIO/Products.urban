@@ -345,13 +345,23 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
-                    'id': "deliberation-college",
+                    'id': 'avis-technique',
+                    'title': "Avis technique",
+                    'activatedFields': ['transmitDate',],
+                    'eventDateLabel': "Date de retour souhaitée",
+                    'deadLineDelay': 15,
+                    'podTemplates': (
+                                     {'id': 'decl-avis-technique', 'title': "Avis technique urbanisme"},
+                                    ),
+                    },
+                    {
+                    'id': 'deliberation-college',
                     'title': "Délibération collège",
                     'activatedFields': ['decision',],
                     'eventDateLabel': "Date de la séance collège",
                     'deadLineDelay': 15,
                     'podTemplates': (
-                                     {'id': "decl-delib-college", 'title': "Délibération collège"},
+                                     {'id': 'decl-delib-college', 'title': "Délibération collège"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
                     },

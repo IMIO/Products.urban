@@ -129,28 +129,14 @@ class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserD
            Post create hook...
            XXX This should be replaced by a zope event...
         """
-        tool = getToolByName(self,'portal_urban')
-        tool.incrementNumerotation(self)
-        #create a folder ADDITIONAL_LAYERS_FOLDER that will contain additional layers
-        #used while creating the mapfile
-        self.invokeFactory("Folder", id=ADDITIONAL_LAYERS_FOLDER, title=ADDITIONAL_LAYERS_FOLDER)
-        additionalLayersFolder = getattr(self, ADDITIONAL_LAYERS_FOLDER)
-        #constrain the content of this folder to layers only...
-        additionalLayersFolder.setConstrainTypesMode(1)
-        additionalLayersFolder.setLocallyAllowedTypes(['Layer'])
-        additionalLayersFolder.setImmediatelyAddableTypes(['Layer'])
-        additionalLayersFolder.reindexObject()
-        #there is no need for other users than Managers to List folder contents
-        #set this permission here if we use the simple_publication_workflow...
-        self.manage_permission('List folder contents', ['Manager', ], acquire=0)
-        self.updateTitle()
+        super(GenericLicence).__thisclass__.at_post_create_script(self)
 
     def at_post_edit_script(self):
         """
            Post edit hook...
            XXX This should be replaced by a zope event...
         """
-        self.updateTitle()
+        super(GenericLicence).__thisclass__.at_post_edit_script(self)
 
     security.declarePublic('updateTitle')
     def updateTitle(self):
