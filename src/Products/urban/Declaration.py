@@ -92,7 +92,6 @@ Declaration_schema['solicitLocationOpinionsTo'].widget.visible=False
 #no need for missing parts as if it is not complete, it is decided not receivable
 Declaration_schema['missingParts'].widget.visible=False
 Declaration_schema['missingPartsDetails'].widget.visible=False
-
 ##/code-section after-schema
 
 class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserDefaultMixin):
@@ -114,14 +113,6 @@ class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserD
     # Methods
 
     # Manually created methods
-
-    security.declarePublic('getDefaultReference')
-    def getDefaultReference(self):
-        """
-          Returns the reference for the new element
-        """
-        tool = getToolByName(self, 'portal_urban')
-        return tool.generateReference(self)
 
     security.declarePublic('at_post_create_script')
     def at_post_create_script(self):
@@ -150,12 +141,6 @@ class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserD
         title = str(self.getReference())+ " - " +self.getLicenceSubject() + " - " + applicant
         self.setTitle(str(title))
         self.reindexObject()
-
-    def getParcels(self):
-        """
-           Return the list of parcels (portionOut) for the Licence
-        """
-        return self.objectValues('PortionOut')
 
     security.declarePublic('getAdditionalLayers')
     def getAdditionalLayers(self):
