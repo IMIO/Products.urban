@@ -151,6 +151,7 @@ Inquiry_schema = BaseSchema.copy() + \
 
 ##code-section after-schema #fill in your manual code here
 Inquiry_schema['title'].widget.visible = False
+del Inquiry_schema['description']
 ##/code-section after-schema
 
 class Inquiry(BaseContent, BrowserDefaultMixin):
