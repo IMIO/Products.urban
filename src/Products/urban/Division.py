@@ -17,71 +17,24 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-
+from Products.urban.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
-from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
-from Products.CMFCore.utils import getToolByName
-from Products.DataGridField.Column import Column
-from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 optional_fields = []
 ##/code-section module-header
 
 schema = Schema((
 
-    StringField(
-        name='title',
-        widget=StringField._properties['widget'](
-            label='Title',
-            label_msgid='urban_label_title',
-            i18n_domain='urban',
-        ),
-        required=True,
-        schemata='urban_description',
-        accessor="Title",
-    ),
-    StringField(
-        name='divisionSubject',
-        widget=StringField._properties['widget'](
-            label='Divisionsubject',
-            label_msgid='urban_label_divisionSubject',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-    ),
-    StringField(
-        name='reference',
-        widget=StringField._properties['widget'](
-            label='Reference',
-            label_msgid='urban_label_reference',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-        default_method="getDefaultReference",
-    ),
-    DataGridField(
-        name='workLocations',
-        schemata='urban_description',
-        widget=DataGridWidget(
-            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", inUrbanConfig=False)),},
-            label='Worklocations',
-            label_msgid='urban_label_workLocations',
-            i18n_domain='urban',
-        ),
-        allow_oddeven=True,
-        columns=('number', 'street'),
-    ),
     ReferenceField(
         name='notaryContact',
         widget=ReferenceBrowserWidget(
@@ -99,42 +52,6 @@ schema = Schema((
         multiValued=True,
         relationship="notary",
         allowed_types= ('Notary',),
-    ),
-    LinesField(
-        name='folderZone',
-        widget=MultiSelectionWidget(
-            size=10,
-            label='Folderzone',
-            label_msgid='urban_label_folderZone',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-        multiValued=True,
-        vocabulary=UrbanVocabulary('folderzones', inUrbanConfig=False),
-    ),
-    TextField(
-        name='folderZoneDetails',
-        allowable_content_types=('text/plain',),
-        default_content_type='text/plain',
-        widget=TextAreaWidget(
-            label='Folderzonedetails',
-            label_msgid='urban_label_folderZoneDetails',
-            i18n_domain='urban',
-        ),
-        default_output_type='text/html',
-        schemata='urban_description',
-    ),
-    TextField(
-        name='comments',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label='Comments',
-            label_msgid='urban_label_comments',
-            i18n_domain='urban',
-        ),
-        default_content_type='text/html',
-        schemata='urban_description',
-        default_output_type='text/html',
     ),
     ReferenceField(
         name='foldermanagers',
@@ -165,15 +82,27 @@ setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 Division_schema = BaseFolderSchema.copy() + \
+    getattr(GenericLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 Division_schema['title'].searchable = True
 Division_schema['title'].required = False
 Division_schema['title'].widget.visible = False
+#remove the annoncedDelays for Divisons
+del Division_schema['annoncedDelay']
+del Division_schema['annoncedDelayDetails']
+#remove the impactStudy field for Divisons
+del Division_schema['impactStudy']
+#hide the solicit opinions to fields for Divisons
+Division_schema['solicitRoadOpinionsTo'].widget.visible=False
+Division_schema['solicitLocationOpinionsTo'].widget.visible=False
+#no need for missing parts as if it is not complete, it is decided not receivable
+Division_schema['missingParts'].widget.visible=False
+Division_schema['missingPartsDetails'].widget.visible=False
 ##/code-section after-schema
 
-class Division(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
+class Division(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -186,25 +115,12 @@ class Division(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
     schema = Division_schema
 
     ##code-section class-header #fill in your manual code here
+    schemata_order = ['urban_description', 'urban_road', 'urban_location']
     ##/code-section class-header
 
     # Methods
 
     # Manually created methods
-
-    security.declarePublic('generateReference')
-    def generateReference(self):
-        """
-        """
-        return ''
-
-    security.declarePublic('getDefaultReference')
-    def getDefaultReference(self):
-        """
-          Returns the reference for the new element
-        """
-        tool = getToolByName(self, 'portal_urban')
-        return tool.generateReference(self)
 
     security.declarePublic('at_post_create_script')
     def at_post_create_script(self):
@@ -212,28 +128,14 @@ class Division(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
            Post create hook...
            XXX This should be replaced by a zope event...
         """
-        tool = getToolByName(self,'portal_urban')
-        tool.incrementNumerotation(self)
-        #create a folder ADDITIONAL_LAYERS_FOLDER that will contain additional layers
-        #used while creating the mapfile
-        self.invokeFactory("Folder", id=ADDITIONAL_LAYERS_FOLDER, title=ADDITIONAL_LAYERS_FOLDER)
-        additionalLayersFolder = getattr(self, ADDITIONAL_LAYERS_FOLDER)
-        #constrain the content of this folder to layers only...
-        additionalLayersFolder.setConstrainTypesMode(1)
-        additionalLayersFolder.setLocallyAllowedTypes(['Layer'])
-        additionalLayersFolder.setImmediatelyAddableTypes(['Layer'])
-        additionalLayersFolder.reindexObject()
-        #there is no need for other users than Managers to List folder contents
-        #set this permission here if we use the simple_publication_workflow...
-        self.manage_permission('List folder contents', ['Manager', ], acquire=0)
-        self.updateTitle()
+        super(GenericLicence).__thisclass__.at_post_create_script(self)
 
     def at_post_edit_script(self):
         """
            Post edit hook...
            XXX This should be replaced by a zope event...
         """
-        self.updateTitle()
+        super(GenericLicence).__thisclass__.at_post_edit_script(self)
 
     security.declarePublic('updateTitle')
     def updateTitle(self):
@@ -263,27 +165,11 @@ class Division(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         self.setTitle(title)
         self.reindexObject()
 
-    security.declarePublic('getParcels')
-    def getParcels(self):
-        """
-           Return the list of parcels (portionOut) for the Licence
-        """
-        return self.objectValues('PortionOut')
-
-    security.declarePublic('getAdditionalLayers')
-    def getAdditionalLayers(self):
-        """
-          Return a list of additional layers that will be used
-          when generating the mapfile
-        """
-        try:
-            additionalLayersFolder = getattr(self, ADDITIONAL_LAYERS_FOLDER)
-            return additionalLayersFolder.objectValues('Layer')
-        except AttributeError:
-            return None
-
     def getLastDeposit(self):
         return self._getLastEvent(interfaces.IDepositEvent)
+
+    def getLastCollegeReport(self):
+        return self._getLastEvent(interfaces.ICollegeReportEvent)
 
     def getLastTheLicence(self):
         return self._getLastEvent(interfaces.ITheLicenceEvent)
@@ -298,7 +184,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
        Finalizes the type schema to alter some fields
     """
-    schema.moveField('comments', after='foldermanagers')
+    schema.moveField('description', after='notaryContact')
+    schema.moveField('foldermanagers', after='workLocations')
     return schema
 
 finalizeSchema(Division_schema)

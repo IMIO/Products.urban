@@ -32,6 +32,22 @@ class DivisionView(BrowserView):
                }
         return dict
 
+    def getCollegeReportDecisionDate(self):
+        """
+          Returns the last college report decision date
+        """
+        context = aq_inner(self.context)
+        tool = context.portal_urban
+        collegeReport = context.getLastCollegeReport()
+        if not collegeReport or not collegeReport.getEventDate():
+            return None
+        dict = {
+                'url': collegeReport.absolute_url(),
+                'date': "%s - %s" % (tool.formatDate(collegeReport.getEventDate(), translatemonth=False), \
+                context.displayValue(collegeReport.Vocabulary('decision')[0], collegeReport.getDecision()))
+               }
+        return dict
+
     def getTheLicenceDate(self):
         """
           Returns the last licence notification date

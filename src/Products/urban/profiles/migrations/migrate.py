@@ -74,12 +74,14 @@ def migrateToPlone4(context):
     migrateGlobalTemplates(context)
     #Some folders defined on LicenceConfigs are now at the portal_urban root
     migrateSomeLocalFoldersAsGlobal(context)
-    #the old declarationSubject field is now licenceSubject
-    migrateDeclarationSubjectField(context)
+    #Before, there was several xxxSubject fields, now we use licenceSubject
+    migrateSubjectFields(context)
     #Declarations need an extra value to be defined on UrbanVocabularyTerms in portal_urban.decisions
     migrateDecisionsForDeclarations(context)
     #some UrbanVocabularyTerms have been added afterward, we need to add them now
     addMissingUrbanVocabularyTerms(context)
+    #Divisions used a 'comments' field that is now replaced by the default 'description' field
+    migrateDivisionsCommentsToDescription(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -346,6 +348,7 @@ def addMissingUrbanVocabularyTerms(context):
     termsToAdd = (
                   (site.portal_urban.buildlicence.missingparts, {'id': 'peb', 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"}),
                   (site.portal_urban.folderprotectedbuildings, {'id': 'certificatpatrimoine', 'title': u"certificat de patrimoine délivré"}),
+                  (site.portal_urban.folderzones, {'id': 'zhcrza', 'title': u"zone d’habitat à caractère rural sur +/- 50 m et le surplus en zone agricole"}),
                  )
 
     for destFolder, data in termsToAdd:
@@ -1039,30 +1042,62 @@ def migrateSomeLocalFoldersAsGlobal(context):
     logger.info("Migrating some local LicenceConfigs folder to the portal_urban root : done!")
     site.portal_properties.site_properties.enable_link_integrity_checks = True
 
-def migrateDeclarationSubjectField(context):
+def migrateSubjectFields(context):
     """
-      Before there was a "declarationSubject" field, we will use the default "licenceSubject" field
+      Before there was a "declarationSubject", a "divisionSubject", ... field
+      we will use the default "licenceSubject" field now
     """
     if isNoturbanMigrationsProfile(context): return
 
     site = context.getSite()
 
     portal_catalog = getToolByName(site, 'portal_catalog')
-    brains = portal_catalog(portal_type=('Declaration', ))
+    brains = portal_catalog(portal_type=('Declaration', 'Division', ))
 
-    logger.info("Migrating the 'declarationSubject' field to 'licenceSubject' for Declarations: starting...")
+    logger.info("Migrating the 'xxxSubject' fields to 'licenceSubject' : starting...")
+    for brain in brains:
+        obj = brain.getObject()
+        if not hasattr(obj, 'declarationSubject') and not hasattr(obj, 'divisionSubject'):
+            #this type is already migrated, migrate the next one if necessary
+            continue
+        subject = ''
+        if obj.portal_type == 'Declaration':
+            subject = obj.declarationSubject
+            delattr(obj, 'declarationSubject')
+        else:
+            #Divisions
+            subject = obj.divisionSubject
+            delattr(obj, 'divisionSubject')
+        obj.setLicenceSubject(subject)
+        logger.info("%s's licenceSubject has been migrated" % obj.Title())
+
+    logger.info("Migrating the 'xxxSubject' fields to 'licenceSubject': done!")
+
+def migrateDivisionsCommentsToDescription(context):
+    """
+      Divisions used a 'comments' field that is now replaced by the default 'description' field
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+
+    portal_catalog = getToolByName(site, 'portal_catalog')
+    brains = portal_catalog(portal_type=('Division', ))
+
+    logger.info("Migrating the 'comments' field of Divisions to 'description' : starting...")
 
     for brain in brains:
         obj = brain.getObject()
-        if not hasattr(obj, 'declarationSubject'):
+        if not hasattr(aq_base(obj), 'comments'):
             #stop the migration, it is already migrated...
             break
-        subject = obj.declarationSubject
-        obj.setLicenceSubject(subject)
-        delattr(obj, 'declarationSubject')
-        logger.info("%s's licenceSubject has been migrated" % obj.Title())
+        description = obj.Description()
+        comments = aq_base(obj).comments
+        newDescription = str(description) + str(comments)
+        obj.setDescription(newDescription, mimetype='text/html')
+        logger.info("%s's 'comments' field has been migrated" % obj.Title())
 
-    logger.info("Migrating the 'declarationSubject' field to 'licenceSubject' for Declarations: done!")
+    logger.info("Migrating the 'comments' field of Divisions to 'description' : done!")
 
 def migrateDecisionsForDeclarations(context):
     """

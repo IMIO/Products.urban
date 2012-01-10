@@ -191,7 +191,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="veranda",title=u"Véranda")
 
         #add FolderCategories folder
-        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'Declaration']:
+        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'Declaration', 'Division']:
             if not hasattr(aq_base(configFolder), 'foldercategories'):
                 newFolderid = configFolder.invokeFactory("Folder",id="foldercategories",title=_("foldercategories_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
@@ -221,6 +221,9 @@ def addUrbanConfigs(context):
                 #categories for Declarations
                 elif urban_type in ['Declaration', ]:
                         newFolder.invokeFactory("UrbanVocabularyTerm",id="dup",title=u"DUP (Déclaration Urbanistique Préalable)")
+                #categories for Declarations
+                elif urban_type in ['Division', ]:
+                        newFolder.invokeFactory("UrbanVocabularyTerm",id="dup",title=u"DIV (Division notariale)")
 
         if urban_type in ['Declaration', ]:
             #add "Articles" folder
@@ -843,6 +846,7 @@ def addGlobalFolders(context):
         newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
         newFolder.invokeFactory("UrbanVocabularyTerm",id="zh",title=u"zone d'habitat")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="zhcr",title=u"zone d'habitat à caractère rural")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zhcrza",title=u"zone d’habitat à caractère rural sur +/- 50 m et le surplus en zone agricole")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="zspec",title=u"zone de services publics et d'équipements communautaires")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="zcet",title=u"zone de centre d'enfouissement technique")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="zl",title=u"zone de loisirs")

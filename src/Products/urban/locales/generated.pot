@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Jan  9 09:51:27 2012\n"
-"PO-Revision-Date: Mon Jan  9 09:51:27 2012\n"
+"POT-Creation-Date: Tue Jan 10 16:18:40 2012\n"
+"PO-Revision-Date: Tue Jan 10 16:18:40 2012\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -321,11 +321,6 @@ msgstr ""
 msgid "urban_label_comment"
 msgstr ""
 
-#. Default: "Comments"
-#: Division.py
-msgid "urban_label_comments"
-msgstr ""
-
 #. Default: "Country"
 #: Contact.py
 msgid "urban_label_country"
@@ -391,11 +386,6 @@ msgstr ""
 #. Default: "Divisioncode"
 #: PortionOut.py
 msgid "urban_label_divisionCode"
-msgstr ""
-
-#. Default: "Divisionsubject"
-#: Division.py
-msgid "urban_label_divisionSubject"
 msgstr ""
 
 #. Default: "Editionoutputformat"
@@ -484,13 +474,11 @@ msgid "urban_label_folderCategoryTownship"
 msgstr ""
 
 #. Default: "Folderzone"
-#: Division.py
 #: GenericLicence.py
 msgid "urban_label_folderZone"
 msgstr ""
 
 #. Default: "Folderzonedetails"
-#: Division.py
 #: GenericLicence.py
 msgid "urban_label_folderZoneDetails"
 msgstr ""
@@ -840,7 +828,6 @@ msgid "urban_label_receivedDocumentReference"
 msgstr ""
 
 #. Default: "Reference"
-#: Division.py
 #: EnvironmentalDeclaration.py
 #: GenericLicence.py
 msgid "urban_label_reference"
@@ -1014,9 +1001,9 @@ msgid "urban_label_technicalRemarks"
 msgstr ""
 
 #. Default: "Title"
-#: Division.py
 #: GenericLicence.py
 #: ParcellingTerm.py
+#: PcaTerm.py
 msgid "urban_label_title"
 msgstr ""
 
@@ -1066,7 +1053,6 @@ msgid "urban_label_webServerHost"
 msgstr ""
 
 #. Default: "Worklocations"
-#: Division.py
 #: EnvironmentalDeclaration.py
 #: GenericLicence.py
 msgid "urban_label_workLocations"

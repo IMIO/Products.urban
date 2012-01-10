@@ -197,4 +197,18 @@
     version="2012-01-06T16:30.0">
       Declarations need an extra value to be defined on UrbanVocabularyTerms in portal_urban.decisions
  </import-step>
+ <import-step
+    id="urban-migrateSubjectFields"
+    handler="Products.urban.profiles.migrations.migrate.migrateSubjectFields"
+    title="Before, there was several xxxSubject fields, now we use licenceSubject"
+    version="2012-01-10T16:10.0">
+      Before, there was several xxxSubject fields, now we use licenceSubject
+ </import-step>
+ <import-step
+    id="urban-migrateDivisionsCommentsToDescription"
+    handler="Products.urban.profiles.migrations.migrate.migrateDivisionsCommentsToDescription"
+    title="Divisions used a 'comments' field that is now replaced by the default 'description' field"
+    version="2012-01-10T16:15.0">
+      Divisions used a 'comments' field that is now replaced by the default 'description' field
+ </import-step>
 </import-steps>
