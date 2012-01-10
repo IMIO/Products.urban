@@ -231,14 +231,6 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence,
         dict['sort_on'] = 'sortable_title'
         return dict
 
-    security.declarePublic('getDefaultReference')
-    def getDefaultReference(self):
-        """
-          Returns the reference for the new element
-        """
-        tool = getToolByName(self, 'portal_urban')
-        return tool.generateReference(self)
-
     security.declarePublic('at_post_create_script')
     def at_post_create_script(self):
         """
@@ -289,13 +281,6 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence,
             title = str(self.getReference())
         self.setTitle(title)
         self.reindexObject()
-
-    security.declarePublic('getParcels')
-    def getParcels(self):
-        """
-           Return the list of parcels (portionOut) for the Licence
-        """
-        return self.objectValues('PortionOut')
 
     security.declarePublic('getOpinionsToAskForWorks')
     def getOpinionsToAskForWorks(self, theObjects=False):
