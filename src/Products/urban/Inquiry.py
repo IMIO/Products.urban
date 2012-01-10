@@ -151,6 +151,9 @@ Inquiry_schema = BaseSchema.copy() + \
 
 ##code-section after-schema #fill in your manual code here
 Inquiry_schema['title'].widget.visible = False
+#implicitly rmove the not used description field because it is defined with default
+#values that are wrong for BuildLicence that heritates from self and GenericLicence
+#GenericLicence redefines 'description' and self too...  See ticket #3502
 del Inquiry_schema['description']
 ##/code-section after-schema
 
