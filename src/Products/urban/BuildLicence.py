@@ -307,18 +307,6 @@ class BuildLicence(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         else:
             return False
 
-    security.declarePublic('getAdditionalLayers')
-    def getAdditionalLayers(self):
-        """
-          Return a list of additional layers that will be used
-          when generating the mapfile
-        """
-        try:
-            additionalLayersFolder = getattr(self, ADDITIONAL_LAYERS_FOLDER)
-            return additionalLayersFolder.objectValues('Layer')
-        except AttributeError:
-            return None
-
     security.declarePublic('at_post_create_script')
     def at_post_create_script(self):
         """
