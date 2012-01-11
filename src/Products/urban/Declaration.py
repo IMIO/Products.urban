@@ -42,7 +42,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('articles'),
+        vocabulary=UrbanVocabulary('articles', with_empty_value=True),
     ),
     ReferenceField(
         name='foldermanagers',
