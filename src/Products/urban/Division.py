@@ -26,8 +26,6 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
-from Products.urban.indexes import UrbanIndexes
-from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
 
 optional_fields = []
@@ -102,7 +100,7 @@ Division_schema['missingParts'].widget.visible=False
 Division_schema['missingPartsDetails'].widget.visible=False
 ##/code-section after-schema
 
-class Division(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserDefaultMixin):
+class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -143,25 +141,25 @@ class Division(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserDefa
            Update the title to set a clearly identify the buildlicence
         """
         notary = ''
-        applicant = ''
-        if self.getApplicants():
-            applicant = unicode(self.getApplicants()[0].Title(), 'utf-8')
+        proprietary = ''
+        proprietaries = self.getProprietaries()
+        if proprietaries:
+            proprietary = proprietaries[0].Title()
         else:
-            applicant = translate('no_applicant_defined', 'urban', context=self.REQUEST)
+            proprietary = translate('no_proprietary_defined', 'urban', context=self.REQUEST)
         if self.getNotaryContact():
-            notary = unicode(self.getNotaryContact()[0].Title(), 'utf-8')
+            notary = self.getNotaryContact()[0].Title()
         else:
             notary = translate('no_notary_defined', 'urban', context=self.REQUEST)
 
-        #do not use '%s - %s - %s' type notation as it could raise UnicodeDecodeErrors...
-        if applicant and notary:
-            title = str(self.getReference())+ " - " + applicant + " - " + notary
-        elif applicant:
-            title = str(self.getReference())+ " - " + applicant
+        if proprietary and notary:
+            title = "%s - %s - %s" % (self.getReference(), proprietary, notary)
+        elif proprietary:
+            title = "%s - %s" % (self.getReference(), proprietary)
         elif notary:
-            title = str(self.getReference())+ " - " + notary
+            title = "%s - %s" % (self.getReference(), notary)
         else:
-            title = str(self.getReference())
+            title = self.getReference()
         self.setTitle(title)
         self.reindexObject()
 
@@ -173,6 +171,25 @@ class Division(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserDefa
 
     def getLastTheLicence(self):
         return self._getLastEvent(interfaces.ITheLicenceEvent)
+
+    security.declarePublic('getProprietaries')
+    def getProprietaries(self):
+        """
+           Return the list of proprietaries for the Division
+        """
+        res = []
+        for obj in self.objectValues('Contact'):
+            if obj.portal_type == 'Proprietary':
+                res.append(obj)
+        return res
+
+    security.declarePublic('getApplicants')
+    def getApplicants(self):
+        """
+          This method is only overrided to be used for the applicantInfosIndex
+          of indexes.UrbanIndexes
+        """
+        return self.getProprietaries()
 
 
 

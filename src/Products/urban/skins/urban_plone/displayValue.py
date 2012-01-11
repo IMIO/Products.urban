@@ -7,6 +7,12 @@
 ##bind subpath=traverse_subpath
 ##parameters=vocab, value
 
+#XXX changes from urban
+#this script comes from Products.Archetypes
+#this way, if the value is empty, it display a 'N.C.' and not an empty string
+if not value:
+    return "<span class='discreet'>%s</span>" % context.utranslate(msgid='content_none', domain='urban')
+#XXX end of changes
 
 try:
     # Maybe a string?
@@ -19,13 +25,6 @@ except AttributeError:
                           for v in value if v])
     except TypeError:
         pass
-
-#XXX changes from urban
-#this script comes from Products.Archetypes
-#this way, if the value is empty, it display a 'N.C.' and not an empty string
-if not value:
-    return "<span class='discreet'>%s</span>" % context.utranslate(msgid='content_none', domain='urban')
-#XXX end of changes
 
 # Try to convert to a string and do the dirty job.
 return vocab.getValue(context.unicodeEncode(value),

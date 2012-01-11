@@ -34,6 +34,7 @@ class UrbanBase(object):
     def getApplicants(self):
         """
            Return the list of applicants for the Licence
+           XXX This method is overrided in Division.py
         """
         res = []
         for obj in self.objectValues('Contact'):

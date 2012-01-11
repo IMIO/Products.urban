@@ -69,7 +69,7 @@ UrbanCertificateTwo_schema = BaseFolderSchema.copy() + \
 setSchemataForInquiry(UrbanCertificateTwo_schema)
 ##/code-section after-schema
 
-class UrbanCertificateTwo(BaseFolder, UrbanIndexes,  UrbanBase, UrbanCertificateBase, Inquiry, BrowserDefaultMixin):
+class UrbanCertificateTwo(BaseFolder, UrbanCertificateBase, Inquiry, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

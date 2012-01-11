@@ -26,11 +26,9 @@ from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from zope.i18n import translate as _
+from zope.i18n import translate
 from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.LinesColumn import LinesColumn
-from Products.urban.base import UrbanBase
-from Products.urban.indexes import UrbanIndexes
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
@@ -158,7 +156,7 @@ UrbanCertificateBase_schema['solicitRoadOpinionsTo'].widget.visible=False
 UrbanCertificateBase_schema['solicitLocationOpinionsTo'].widget.visible=False
 ##/code-section after-schema
 
-class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserDefaultMixin):
+class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -259,26 +257,24 @@ class UrbanCertificateBase(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence,
            Update the title to clearly identify the certificate
            Display the reference, the applicant and the notary
         """
-        notary = ''
-        applicant = ''
-        if self.getApplicants():
-            applicant = unicode(self.getApplicants()[0].Title(), 'utf-8')
+        applicants = self.getApplicants()
+        if applicants:
+            applicant = self.getApplicants()[0].Title()
         else:
-            applicant = _('no_applicant_defined', 'urban', context=self.REQUEST)
+            applicant = translate('no_applicant_defined', 'urban', context=self.REQUEST)
         if self.getNotaryContact():
-            notary = unicode(self.getNotaryContact()[0].Title(), 'utf-8')
+            notary = self.getNotaryContact()[0].Title()
         else:
-            notary = _('no_notary_defined', 'urban', context=self.REQUEST)
+            notary = translate('no_notary_defined', 'urban', context=self.REQUEST)
 
-        #do not use '%s - %s - %s' type notation as it could raise UnicodeDecodeErrors...
         if applicant and notary:
-            title = str(self.getReference())+ " - " + applicant + " - " + notary
+            title = "%s - %s - %s" % (self.getReference(), applicant, notary)
         elif applicant:
-            title = str(self.getReference())+ " - " + applicant
+            title = "%s - %s" % (self.getReference(), applicant)
         elif notary:
-            title = str(self.getReference())+ " - " + notary
+            title = "%s - %s" % (self.getReference(), notary)
         else:
-            title = str(self.getReference())
+            title = self.getReference()
         self.setTitle(title)
         self.reindexObject()
 

@@ -10,18 +10,13 @@
  <property name="product">urban</property>
  <property name="factory">addDivision</property>
  <property name="immediate_view">divisionview</property>
- <property name="global_allow">False</property>
+ <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
-   <element value="UrbanEvent"/>
-   <element value="File"/>
-   <element value="Applicant"/>
-   <element value="PortionOut"/>
-   <element value="WorkLocation"/>
+   <element value="Proprietary"/>
    <element value="UrbanEvent"/>
    <element value="File"/>
    <element value="PortionOut"/>
-   <element value="Inquiry"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">divisionview</property>

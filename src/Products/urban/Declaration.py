@@ -26,8 +26,6 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
-from Products.urban.indexes import UrbanIndexes
-from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
@@ -94,7 +92,7 @@ Declaration_schema['missingParts'].widget.visible=False
 Declaration_schema['missingPartsDetails'].widget.visible=False
 ##/code-section after-schema
 
-class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserDefaultMixin):
+class Declaration(BaseFolder, GenericLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -128,19 +126,6 @@ class Declaration(BaseFolder, UrbanIndexes,  UrbanBase, GenericLicence, BrowserD
            XXX This should be replaced by a zope event...
         """
         super(GenericLicence).__thisclass__.at_post_edit_script(self)
-
-    security.declarePublic('updateTitle')
-    def updateTitle(self):
-        """
-           Update the title to set a clearly identify the buildlicence
-        """
-        if self.getApplicants():
-            applicant = self.getApplicants()[0].getName1() + " " + self.getApplicants()[0].getName2()
-        else:
-            applicant = "No applicant defined"
-        title = str(self.getReference())+ " - " +self.getLicenceSubject() + " - " + applicant
-        self.setTitle(str(title))
-        self.reindexObject()
 
     security.declarePublic('getAdditionalLayers')
     def getAdditionalLayers(self):

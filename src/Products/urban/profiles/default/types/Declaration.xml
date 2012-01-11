@@ -14,11 +14,9 @@
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
    <element value="Applicant"/>
-   <element value="WorkLocation"/>
    <element value="UrbanEvent"/>
    <element value="File"/>
    <element value="PortionOut"/>
-   <element value="Inquiry"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">declarationview</property>

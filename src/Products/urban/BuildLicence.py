@@ -18,6 +18,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
 from Products.urban.Inquiry import Inquiry
+from Products.urban.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -27,8 +28,6 @@ from zope.i18n import translate as _
 from Products.CMFCore.utils import getToolByName
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
-from Products.urban.GenericLicence import GenericLicence
-from Products.urban.GenericLicence import GenericLicence_schema
 from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from dateutil.relativedelta import relativedelta
@@ -217,8 +216,9 @@ schema = Schema((
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
-BuildLicence_schema = GenericLicence_schema.copy() + \
+BuildLicence_schema = BaseFolderSchema.copy() + \
     getattr(Inquiry, 'schema', Schema(())).copy() + \
+    getattr(GenericLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
@@ -227,7 +227,7 @@ BuildLicence_schema['title'].required = False
 setSchemataForInquiry(BuildLicence_schema)
 ##/code-section after-schema
 
-class BuildLicence(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
+class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

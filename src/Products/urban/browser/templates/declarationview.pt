@@ -7,16 +7,13 @@
 <metal:main fill-slot="main">
 <metal:main_macro define-macro="main">
     <metal:body define-macro="body_macro" 
-                tal:define="applicants context/getApplicants;
-                            useTabbing python: context.portal_urban.getUseTabbing();
-                            tool python: context.portal_urban;
-                            parcels context/getParcels;">
+                tal:define="useTabbing python: context.portal_urban.getUseTabbing();">
 
 <metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />
 
 <div id="urbanViewWithTabbing" tal:condition="useTabbing">
 <dl class="formTabs enableFormTabbing">
-<dt class="formTab" tal:attributes="class python: context.getApplicants() and 'formTab' or 'formTab notify'" id="fieldsetlegend-urban_description" i18n:domain="plone" i18n:translate="label_schema_urban_description"><span>Description</span></dt>
+<dt class="formTab" id="fieldsetlegend-urban_description" i18n:domain="plone" i18n:translate="label_schema_urban_description"><span>Description</span></dt>
 <dd id="fieldset-urban_description">
  <metal:listing use-macro="here/@@declaration-macros/descriptionMacro" />
 </dd>
