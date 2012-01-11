@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2012-01-05 12:08+0000\n"
+"POT-Creation-Date: 2012-01-11 14:27+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -84,6 +84,9 @@ msgstr "Parcelle"
 
 msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
+
+msgid "Proprietary data"
+msgstr "Coordonnées du propriétaire"
 
 msgid "Public inquiry"
 msgstr "Enquête publique"
@@ -177,6 +180,9 @@ msgstr "Ajouter un réclamant"
 msgid "add_a_lot"
 msgstr "Ajouter un lot"
 
+msgid "add_a_proprietary"
+msgstr "Ajouter un propriétaire"
+
 # urbanevent_view
 msgid "add_an_annex"
 msgstr "Ajouter une annexe"
@@ -226,10 +232,6 @@ msgstr "et"
 # buildlicence_view
 msgid "applicants"
 msgstr "Demandeur(s)"
-
-###
-msgid "applicants_folder_title"
-msgstr "Demandeurs"
 
 msgid "architects_folder_title"
 msgstr "Architectes"
@@ -615,6 +617,9 @@ msgstr "Nom(s)"
 msgid "label_colname_notary_data"
 msgstr "Coordonnées du notaire"
 
+msgid "label_colname_proprietary_data"
+msgstr "Coordonnées du propriétaire"
+
 msgid "label_colname_receiptDate"
 msgstr "Date de réception"
 
@@ -685,9 +690,6 @@ msgstr "Configuration des cartes"
 msgid "missingparts_folder_title"
 msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes"
 
-msgid "modify_applicant"
-msgstr "Modifier le demandeur"
-
 #. Default: "Plural"
 #: PersonTitleTerm.py
 msgid "multiplicity_plural"
@@ -706,6 +708,9 @@ msgstr "Aucun document à générer"
 
 msgid "no_notary_defined"
 msgstr "Aucun notaire?"
+
+msgid "no_proprietary_defined"
+msgstr "Aucun propriétaire?"
 
 msgid "no_result"
 msgstr "La recherche n'a pas fourni de résultat."
@@ -2384,6 +2389,9 @@ msgstr "Représentation cartographique"
 # error messages...
 msgid "warning_add_a_parcel"
 msgstr "Veuillez renseigner la ou les parcelles concernée(s)"
+
+msgid "warning_add_a_proprietary"
+msgstr "Veuillez renseigner le ou les propriétaire(s)"
 
 msgid "warning_add_an_applicant"
 msgstr "Veuillez renseigner le ou les demandeur(s)"

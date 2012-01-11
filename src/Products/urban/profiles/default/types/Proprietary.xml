@@ -9,15 +9,15 @@
  <property name="content_meta_type">Contact</property>
  <property name="product">urban</property>
  <property name="factory">addContact</property>
- <property name="immediate_view">base_view</property>
+ <property name="immediate_view">contactview</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">False</property>
  <property name="allowed_content_types">
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">base_view</property>
+ <property name="default_view">contactview</property>
  <property name="view_methods">
-  <element value="base_view"/>
+  <element value="contactview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>

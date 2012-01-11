@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-01-05 12:08+0000\n"
+"POT-Creation-Date: 2012-01-11 14:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,9 +31,6 @@ msgid "Add this parcel"
 msgstr ""
 
 msgid "Applicant data"
-msgstr ""
-
-msgid "Proprietary data"
 msgstr ""
 
 msgid "Architect data"
@@ -85,6 +82,9 @@ msgid "Parcel"
 msgstr ""
 
 msgid "ParcelOutLicence"
+msgstr ""
+
+msgid "Proprietary data"
 msgstr ""
 
 msgid "Public inquiry"
@@ -179,14 +179,14 @@ msgstr ""
 msgid "add_a_lot"
 msgstr ""
 
+msgid "add_a_proprietary"
+msgstr ""
+
 # urbanevent_view
 msgid "add_an_annex"
 msgstr ""
 
 msgid "add_an_applicant"
-msgstr ""
-
-msgid "add_a_proprietary"
 msgstr ""
 
 msgid "add_an_equipment"
@@ -230,10 +230,6 @@ msgstr ""
 
 # licence views
 msgid "applicants"
-msgstr ""
-
-# divisionview
-msgid "proprietaries"
 msgstr ""
 
 msgid "architects_folder_title"
@@ -590,9 +586,6 @@ msgstr ""
 msgid "label_colname_applicant_data"
 msgstr ""
 
-msgid "label_colname_applicant_data"
-msgstr ""
-
 msgid "label_colname_architect_data"
 msgstr ""
 
@@ -621,6 +614,9 @@ msgid "label_colname_name"
 msgstr ""
 
 msgid "label_colname_notary_data"
+msgstr ""
+
+msgid "label_colname_proprietary_data"
 msgstr ""
 
 msgid "label_colname_receiptDate"
@@ -706,13 +702,13 @@ msgstr ""
 msgid "no_applicant_defined"
 msgstr ""
 
-msgid "no_proprietary_defined"
-msgstr ""
-
 msgid "no_document_to_generate"
 msgstr ""
 
 msgid "no_notary_defined"
+msgstr ""
+
+msgid "no_proprietary_defined"
 msgstr ""
 
 msgid "no_result"
@@ -2390,10 +2386,10 @@ msgstr ""
 msgid "warning_add_a_parcel"
 msgstr ""
 
-msgid "warning_add_an_applicant"
+msgid "warning_add_a_proprietary"
 msgstr ""
 
-msgid "warning_add_a_proprietary"
+msgid "warning_add_an_applicant"
 msgstr ""
 
 #. Default: "!!!Warning, no deposit date found!!!"
