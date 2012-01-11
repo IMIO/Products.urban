@@ -67,6 +67,11 @@
       <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategory', mode='view')" /></td>
      </tr>
      <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_notaryContact">Notary</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanNotariesMacro" /></td>
+     </tr>
+     <tr>
       <td valign="top"><b><span i18n:translate="urban_label_description">Description</span>:</b></td>
       <td width="2%"></td>
       <td valign="top">
@@ -107,7 +112,7 @@
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_pash">PASH</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('pash', mode='view')" /><span tal:condition="not: context/getPash" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('pash', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('pashDetails')">
   <td valign="top"><b><span i18n:translate="urban_label_pashDetails">PASH details</span>:</b></td>
@@ -117,7 +122,7 @@
  <tr tal:condition="python: context.attributeIsUsed('catchmentArea')">
   <td valign="top"><b><span i18n:translate="urban_label_catchmentArea">Catchment area</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('catchmentArea', mode='view')" /><span tal:condition="not: context/getCatchmentArea" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('catchmentArea', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('floodingLevel')">
   <td valign="top"><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span>:</b></td>
@@ -159,7 +164,6 @@
   <td width="2%"></td>
   <td valign="top">
    <metal:myfield use-macro="python:here.widget('folderZone', mode='view')" />
-   <span tal:condition="not: context/getFolderZone" class="discreet" i18n:translate="content_none">None</span>
   </td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('folderZoneDetails')">
@@ -201,7 +205,7 @@
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_protectedBuilding">Protected building</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('protectedBuilding', mode='view')" /><span tal:condition="not: context/getProtectedBuilding" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('protectedBuilding', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('protectedBuildingDetails')">
   <td valign="top"><b><span i18n:translate="urban_label_protectedBuildingDetails">Protected building details</span>:</b></td>
@@ -211,12 +215,12 @@
  <tr tal:condition="python: context.attributeIsUsed('SSC')">
   <td valign="top"><b><span i18n:translate="urban_label_SSC">SSC</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('SSC', mode='view')" /><span tal:condition="not: python: context.SSC" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('SSC', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('RCU')">
   <td valign="top"><b><span i18n:translate="urban_label_RCU">RCU</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('RCU', mode='view')" /><span tal:condition="not: python: context.RCU" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('RCU', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('locationDgrneUnderground')">
   <td valign="top"><b><span i18n:translate="urban_label_locationDgrneUnderground">DGRNE Underground</span>:</b></td>

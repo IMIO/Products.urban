@@ -104,7 +104,7 @@
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_derogation">Derogations</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:inquiry.widget('derogation', mode='view')" /><span tal:condition="not: inquiry/getDerogation" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:inquiry.widget('derogation', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: context.attributeIsUsed('derogationDetails')">
   <td valign="top"><b><span i18n:translate="urban_label_derogationDetails">Derogations details</span>:</b></td>
@@ -114,7 +114,7 @@
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_investigationArticles">Investigation articles</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:inquiry.widget('investigationArticles', mode='view')" /><span tal:condition="not: inquiry/getInvestigationArticles" class="discreet" i18n:translate="content_none">None</span></td>
+  <td valign="top"><metal:myfield use-macro="python:inquiry.widget('investigationArticles', mode='view')" /></td>
  </tr>
  <tr>
   <td valign="top"><b><span i18n:translate="urban_label_investigationStart">from</span>:</b></td>
