@@ -782,9 +782,9 @@ def addGlobalFolders(context):
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
         newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-epuration-collective",title=u"Zone d'épuration collective")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-transitoire",title=u"Zone transitoire")
-        newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-epuration-individuelle",title=u"Zone d'épuration individuelle")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-epuration-collective",title=u"Zone d'assainissement collectif")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-transitoire",title=u"Zone d'assainissement transitoire")
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="zone-epuration-individuelle",title=u"Zone d'assainissement individuel")
 
     #add global folderroadtypes folder
     if not hasattr(tool, "folderroadtypes"):
