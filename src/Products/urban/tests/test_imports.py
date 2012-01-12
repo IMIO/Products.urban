@@ -36,6 +36,7 @@ class TestImports(unittest.TestCase):
         self.failUnless(base_hasattr(awans, 'rue-de-lestampage1'))
         rue2 = getattr(awans, 'rue-de-lestampage1')
         self.assertEquals(self.wtool.getInfoFor(rue2, 'review_state'), 'enabled')
+        self.assertEquals(self.wtool.getInfoFor(rue1, 'review_state'), 'disabled')
 
         ##create the same first street => nothing must be done
         createStreet(self.utool, 'Awans', 4340, '0', "Rue de l'Estampage", 7090730, "2010/09/07", "2011/08/04", '', ex_streets)
@@ -48,7 +49,7 @@ class TestImports(unittest.TestCase):
         self.failIf(base_hasattr(awans, 'rue-de-lestampage2'))
         self.assertEquals(len(awans.objectIds()), 2)
 
-        ##create a new street, first last one and after the historical
+        ##create a new street, the actual first and after the historical
         createStreet(self.utool, 'Awans', 4340, '1032', "Rue de la Chaudronnerie", 7090729, "2011/08/04", None, '', ex_streets)
         #checking creation
         self.failUnless(base_hasattr(awans, 'rue-de-la-chaudronnerie'))
@@ -60,6 +61,7 @@ class TestImports(unittest.TestCase):
         self.failUnless(base_hasattr(awans, 'rue-de-la-chaudronnerie1'))
         rue4 = getattr(awans, 'rue-de-la-chaudronnerie1')
         self.assertEquals(self.wtool.getInfoFor(rue4, 'review_state'), 'disabled')
+        self.assertEquals(self.wtool.getInfoFor(rue3, 'review_state'), 'enabled')
 
         ##create a new street, regional road first and after without
         createStreet(self.utool, 'Awans', 4340, '1025', "Rue de Bruxelles", 7020318, "2010/09/07", None, 'N3', ex_streets)
