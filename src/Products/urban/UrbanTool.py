@@ -547,82 +547,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             #if we could not connect, return the error
             return error
 
-    security.declarePublic('findParcel')
-    def findParcel(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None, location=None, prcOwner=None, prcHistory=None):
-        """
-           Return the concerned parcels
-        """
-        section=section.upper()
-        exposant=exposant.upper()
-        if prcHistory:
-            return []
-        else:
-            query_string = "SELECT capa.da, divname, prc, section, radical, exposant, bis, puissance, sl1, na1,pe FROM map left join capa on map.capakey=capa.capakey left join da on capa.da = da.da "
-            condition = ["WHERE "]
-            if division != '0':  #precise division selected
-                condition.append('capa.da = %s'%division)
-            if section:
-                condition.append("section = '%s'"%section)
-            if radical:
-                condition.append("radical = "+radical)
-            if bis:
-                condition.append("bis = "+bis)
-            if exposant:
-                condition.append("exposant = '%s'"%exposant)
-            if puissance:
-                condition.append("puissance = "+puissance)
-            if prcOwner:
-                condition.append("pe ILIKE '%%%s%%'"%prcOwner)
-            if location:
-                condition.append("sl1 ILIKE '%%%s%%'"%location)
-            if len(condition) > 1:
-                query_string += condition[0]
-                query_string += ' and '.join(condition[1:])
-            try:
-                result = self.queryDB(query_string)
-            except:
-                result=[]
-            if result:
-                return result
-            else:
-                return []
-
-    security.declarePublic('findOldParcel')
-    def findOldParcel(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None, prcHistory=None, divname=None, prca=None):
-        """
-        Return the concerned parcels
-        """
-        if prcHistory:
-            toreturn=[{'da':division,'divname':divname,'prca':prca,'sectionavant':section,'radicalavant':radical,'bisavant':bis,'exposantavant':exposant,'puissanceavant':puissance,'level':0}]
-            def getOldPrc(div, sect, rad, exp, puis, bis, level):
-                query_string = "SELECT distinct prca,pas.da,divname,sectionavant,radicalavant,bisavant,exposantavant,puissanceavant FROM pas left join da on pas.da=da.da WHERE pas.da=%s and section = '%s' AND radical = %s AND exposant = '%s' AND puissance = %s AND bis = %s AND prca is not null AND (section != sectionavant or radical != radicalavant or bis != bisavant or exposant != exposantavant or puissance != puissanceavant)"%(div, sect, rad, exp, puis, bis)
-                result = self.queryDB(query_string)
-                for dic in result:
-                    dic['level'] = level+1
-                    toreturn.append(dic)
-                    getOldPrc(div, dic['sectionavant'], dic['radicalavant'], dic['exposantavant'], dic['puissanceavant'], dic['bisavant'], level+1)
-            getOldPrc(division, section, radical, exposant, puissance, bis, 0)
-            return toreturn
-        else:
-            query_string = "SELECT distinct prca,pas.da,divname,sectionavant,radicalavant,bisavant,exposantavant,puissanceavant FROM pas left join da on pas.da=da.da "
-            condition = ["WHERE "]
-            if division != '0':  #precise division selected
-                condition.append('pas.da = %s'%division)
-            if section:
-                condition.append("sectionavant = '%s'"%section)
-            if radical:
-                condition.append("radicalavant = "+radical)
-            if bis:
-                condition.append("bisavant = "+bis)
-            if exposant:
-                condition.append("exposantavant = '%s'"%exposant)
-            if puissance:
-                condition.append("puissanceavant = "+puissance)
-            if len(condition) > 1:
-                query_string += condition[0]
-                query_string += ' and '.join(condition[1:])
-            return self.queryDB(query_string)
-
     security.declarePublic('findParcelHistoric')
     def findParcelHistoric(self, division, section, radical=0, bis=0, exposant='', puissance=0):
         """
@@ -661,7 +585,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if not result:
             return ((DB_QUERY_ERROR, DB_QUERY_ERROR), )
         if all:
-            result = [{'da':'0', 'divname': translate('all_divisions', 'urban', context=self.REQUEST)}] + result
+            result = [{'da':'', 'divname': translate('all_divisions', 'urban', context=self.REQUEST)}] + result
         return result
 
     security.declarePublic('queryDB')

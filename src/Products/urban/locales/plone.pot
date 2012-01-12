@@ -247,11 +247,14 @@ msgstr ""
 msgid "The field does not exist !!!"
 msgstr ""
 
-# error messages...
+#Error messages...
 msgid "warning_add_a_parcel"
 msgstr ""
 
 msgid "warning_add_an_applicant"
+msgstr ""
+
+msgid "warning_enter_search_criteria"
 msgstr ""
 
 msgid "Please, select at least one type to search on!"
