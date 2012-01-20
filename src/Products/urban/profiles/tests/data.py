@@ -152,7 +152,7 @@ urbanEventTypes = {
                     'id': "transmis-2eme-dossier-rw",
                     'title': "Transmis 2eme dossier RW",
                     'eventDateLabel': "Date de transmis",
-                    'activatedFields': ['decisionDate', 'decision'],
+                    'activatedFields': ['decisionDate', 'decision', 'receiptDate'],
                     'deadLineDelay': 15,
                     'podTemplates': (
                                      {'id': "urb-envoi-second-dossier-rw", 'title': "Lettre envoi deuxième dossier à la RW"},
@@ -334,10 +334,11 @@ urbanEventTypes = {
                     {
                     'id': "recours-decision-au-gouvernement",
                     'title':"Recours du demandeur contre la décision au gouvernement",
-                    'activatedFields': ['decisionDate', 'decision', ],
+                    'activatedFields': ['transmitDate', 'decisionDate', 'decision',],
                     'deadLineDelay': 0,
                     'podTemplates': (
-                                     {'id': "urb-recours-GW-demandeur-vs-FD", 'title':"Recours au GW par demandeur contre décision du collège"},
+                                     {'id': "urb-recours-GW-demandeur-vs-FD", 'title':"Recours du demandeur au GW contre décision du collège"},
+                                     {'id': "urb-recours-GW-ville-vs-FD", 'title':"Recours de la ville au GW contre décision du FD"},
                                      {'id': "urb-recours-GW-transmis-decision-FD-art127", 'title':"Transmis au réclamant de la décision du FD concernant recours au GW contre art 127"},
                                      {'id': "urb-recours-GW-transmis-decision-GW-PU", 'title':"Transmis au réclamant de la décision du GW concernant recours au GW"},
                                      ),
