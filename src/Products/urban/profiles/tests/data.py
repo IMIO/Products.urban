@@ -337,9 +337,11 @@ urbanEventTypes = {
                     'activatedFields': ['decisionDate', 'decision', ],
                     'deadLineDelay': 0,
                     'podTemplates': (
-                                     {'id': "urb-recours-GW-transmis-decision-FD-art127", 'title':"Transmis au réclamant de la décision du FD concernant recours au GW contre art 127"},),
-                                     {'id': "urb-recours-GW-transmis-decision-FD-PU", 'title': 
-                    }
+                                     {'id': "urb-recours-GW-demandeur-vs-FD", 'title':"Recours au GW par demandeur contre décision du collège"},
+                                     {'id': "urb-recours-GW-transmis-decision-FD-art127", 'title':"Transmis au réclamant de la décision du FD concernant recours au GW contre art 127"},
+                                     {'id': "urb-recours-GW-transmis-decision-GW-PU", 'title':"Transmis au réclamant de la décision du GW concernant recours au GW"},
+                                     ),
+                   },
                    ),
                    'declaration':
                    (
