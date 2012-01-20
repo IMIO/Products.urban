@@ -75,6 +75,14 @@ urbanEventTypes = {
                                     ),
                     },
                     {
+                    'id': "dossier-irrecevable",
+                    'title': "Dossier irrecevable",
+                    'activatedFields':['decisionDate'],
+                    'podTemplates': (
+                                     {'id':"urb-regularisation-delib-college-refus", 'title':"Délibération refus de régularisation PU"},
+                                    )
+                    },
+                    {
                     'id': "demande-complements-art116-6",
                     'title': "Demande de compléments (article 116§6)",
                     'activatedFields': [],
