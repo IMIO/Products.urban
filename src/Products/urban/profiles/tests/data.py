@@ -328,7 +328,7 @@ urbanEventTypes = {
                     'title':"Recours du demandeur contre la décision au gouvernement",
                     'activatedFields': [],
                     'deadLineDelay': 0,
-                    'podTemplates': (),
+                    'podTemplates': ({'id': "urb-transmis-decision-FD-recours-GW", 'title':"Transmis au réclamant de la décision du FD concernant recours au GW contre art 127"}),
                     }
                    ),
                    'declaration':
