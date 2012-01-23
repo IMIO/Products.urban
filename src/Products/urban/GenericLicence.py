@@ -774,7 +774,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         if self.getApplicants():
             applicantTitle = self.getApplicants()[0].Title()
         else:
-            applicantTitle = translate('no_applicant_defined', 'urban', context=self.REQUEST)
+            applicantTitle = translate('no_applicant_defined', 'urban', context=self.REQUEST).encode('utf8')
         title = "%s - %s - %s" % (self.getReference(), self.getLicenceSubject(), applicantTitle)
         self.setTitle(title)
         self.reindexObject(idxs=('Title', 'applicantInfosIndex',))
