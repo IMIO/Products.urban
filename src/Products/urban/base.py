@@ -24,7 +24,7 @@ import interfaces
 
 class UrbanBase(object):
     """
-      This class manage every methods chared cross different licences
+      This class manage every methods shared cross different licences
     """
     security = ClassSecurityInfo()
 
@@ -212,7 +212,6 @@ class UrbanBase(object):
                     applicant.getStreet() + '|' + applicant.getZipcode() + ' ' + applicant.getCity()
         toreturn = toreturn + '</CSV>'
         return toreturn
-    getMultipleApplicants = getMultipleApplicantsCSV
 
     security.declarePublic('getMultipleArchitectsCSV')
     def getMultipleArchitectsCSV(self):
@@ -373,3 +372,26 @@ class UrbanBase(object):
                 res = "%s - %s" % (res, self.getRawSubdivisionDetails())
             return res
 
+    security.declarePublic('getValueForTemplate')
+    def getValueForTemplate(self, field_name, obj=None, raw_value=None):
+        """
+          Return the display value of the given field
+        """
+        if not obj:
+            obj = self
+        displaylist = obj.Vocabulary(field_name)[0]
+        if raw_value:
+            field_value = raw_value
+        else:
+            field_object = obj.getField(field_name)
+            field_accessor = field_object.getAccessor(obj)
+            field_value = field_accessor()
+        return obj.displayValue(displaylist, field_value)
+
+    security.declarePublic('listVocabularyForTemplate')
+    def listVocabularyForTemplate(self, voc_name):
+        """
+          List a given vocabulary from the config
+        """
+        urbantool = getToolByName(self,'portal_urban')
+        return urbantool.listVocabulary(voc_name, self)

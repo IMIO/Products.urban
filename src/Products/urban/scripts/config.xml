@@ -88,7 +88,7 @@
     </Item>
     <Item name="Titre">
         <FieldCode>
-            self.displayValue(self.getArchitects()[0].Vocabulary('personTitle')[0], self.getArchitects()[0].getPersonTitle())
+            self.getValueForTemplate('personTitle', obj=self.getArchitects()[0])
         </FieldCode>
     </Item>
     <Item name="Nom">
@@ -151,7 +151,7 @@
     </Item>
     <Item name="Titre">
         <FieldCode>
-            self.displayValue(self.getNotaryContact()[0].Vocabulary('personTitle')[0], self.getNotaryContact()[0].getPersonTitle())
+            self.getValueForTemplate('personTitle', obj=self.getNotaryContact()[0])
         </FieldCode>
     </Item>
     <Item name="Nom">
@@ -246,7 +246,7 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getFolderManagersSign
     </Item>
     <Item name="Grade">
         <FieldCode>
-            self.displayValue(self.getFolderManagers()[0].Vocabulary('grade')[0], self.getFolderManagers()[0].getGrade())
+            self.getValueForTemplate('grade', obj=self.getFolderManagers()[0])
         </FieldCode>        
     </Item>
 </Object>
@@ -280,7 +280,7 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getFolderManagersSign
     </Item>
     <Item name="Décision">
         <FieldCode>
-            self.displayValue(urbanEventObj.Vocabulary('decision')[0], urbanEventObj.getDecision())
+            self.getValueForTemplate('decision', obj=urbanEventObj)
         </FieldCode>        
     </Item>
 </Object>
@@ -308,7 +308,7 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getFolderManagersSign
     </Item>    
     <Item name="Articles de l'enquête">
         <FieldCode>
-           self.displayValue(self.Vocabulary('investigationArticles')[0], urbanEventObj.getLinkedInquiry().getInvestigationArticles()) 
+           self.getValueForTemplate('investigationArticles', obj=urbanEventObj.getLinkedInquiry()) 
         </FieldCode>        
     </Item>    
     <Item name="Texte des réclamations (enquête)">
@@ -384,7 +384,7 @@ from xhtml(urbanEventObj.getClaimsText())
     </Item>
     <Item name="Zonage au plan de secteur">
         <FieldCode>
-            self.displayValue(self.Vocabulary('folderZone')[0], self.getFolderZone()) 
+            self.getValueForTemplate('folderZone')
         </FieldCode>        
     </Item>
     <Item name="Avis">
@@ -414,7 +414,7 @@ from xhtml(urbanEventObj.getClaimsText())
     </Item>
     <Item name="Demande de dérogation">
         <FieldCode>
-            self.displayValue(self.Vocabulary('derogation')[0], self.getDerogation())
+            self.getValueForTemplate('derogation')
         </FieldCode>        
     </Item>
     <Item name="Date du récépissé de la demande">
@@ -485,7 +485,7 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getTechnicalRemarks()
     </Item>
     <Item name="Article CWATUPE">
         <FieldCode>
-            self.displayValue(self.Vocabulary('article')[0], self.getArticle())
+            self.getValueForTemplate('article')
         </FieldCode>        
     </Item>    
     <Item name="Numéro article">
@@ -548,7 +548,7 @@ from xhtml(self.getArticle(theObject=True).Description())
     </Item>    
     <Item name="Titre">
         <FieldCode>
-            self.displayValue(folder.getApplicants()[0].Vocabulary('personTitle')[0], folder.getApplicants()[0].getPersonTitle())
+            self.getValueForTemplate('personTitle', obj=folder.getApplicants()[0])
         </FieldCode>
     </Item>
     <Item name="Nom du demandeur">
@@ -569,11 +569,6 @@ from xhtml(self.getArticle(theObject=True).Description())
     <Item name="Date octroi du permis délivré">
         <FieldCode>
             self.toLocalizedTime(self.getEventByEventTypeId(folder, 'delivrance-du-permis-octroi-ou-refus').decisionDate,long_format=False)
-        </FieldCode>        
-    </Item>
-    <Item name="Nom et prénom des demandeurs">
-        <FieldCode>
-            self.displayValue(folder.getApplicants()[0].Vocabulary('personTitle')[0], folder.getApplicants()[0].getPersonTitle()) folder.getApplicants()[0].getName2() folder.getApplicants()[0].getName1()
         </FieldCode>        
     </Item>
     <Item name="Rue des travaux">

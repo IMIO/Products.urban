@@ -242,15 +242,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         """
         return self.getUrbaneventtypes().listFolderContents({'portal_type': 'File'})
 
-    security.declarePublic('templateValue')
-    def templateValue(self, fieldName):
-        """
-          Returns the display value of the give field
-        """
-        displaylist = self.Vocabulary(fieldName)[0]
-        fieldaccessor = getattr(self, "get%s%s" % (fieldName[0].upper(), fieldName[1:]))
-        return self.displayValue(displaylist, fieldaccessor())
-
     security.declarePublic('eventDateLabel')
     def eventDateLabel(self):
         """
@@ -545,11 +536,13 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         return toreturn
 
     security.declarePublic('getFormattedDate')
-    def getFormattedDate(self, date, withCityNamePrefix=False, forDelivery=False, translatemonth=True):
+    def getFormattedDate(self, date=None, withCityNamePrefix=False, forDelivery=False, translatemonth=True):
         """
           Return the date
           withCityNamePrefix and forDelivery are exclusive in the logic here above
         """
+        if not date:
+            date = self.getEventDate()
         tool = getToolByName(self, 'portal_urban')
         formattedDate = tool.formatDate(date, translatemonth=translatemonth)
         cityName = unicode(tool.getCityName(), 'utf-8')

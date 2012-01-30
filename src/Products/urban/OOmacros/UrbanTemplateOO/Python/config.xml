@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config>
-<Object name="Champs généraux">
+<Object name="Misc">
      <Item name="Commune">
         <FieldCode>
             tool.getCityName(prefixed=True) 
@@ -12,8 +12,7 @@
         </FieldCode>
      </Item>
 </Object>
-
-<Object name="Champs Demandeur">
+<Object name="Demandeur">
      <Item name="Signalétique">
         <FieldCode>
             self.getApplicantsSignaletic() 
@@ -76,7 +75,7 @@
     </Item>
 </Object>
 
-<Object name="Champs Architecte">
+<Object name="Architecte">
     <Item name="Signalétique">
         <FieldCode>
             self.getArchitectsSignaletic()
@@ -89,7 +88,7 @@
     </Item>
     <Item name="Titre">
         <FieldCode>
-            self.displayValue(self.getArchitects()[0].Vocabulary('personTitle')[0], self.getArchitects()[0].getPersonTitle())
+            self.getValueForTemplate('personTitle', obj=self.getArchitects()[0])
         </FieldCode>
     </Item>
     <Item name="Nom">
@@ -139,7 +138,7 @@
     </Item>
 </Object>
 
-<Object name="Champs Notaire">
+<Object name="Notaire">
     <Item name="Signalétique">
         <FieldCode>
             self.getNotariesSignaletic() 
@@ -152,7 +151,7 @@
     </Item>
     <Item name="Titre">
         <FieldCode>
-            self.displayValue(self.getNotaryContact()[0].Vocabulary('personTitle')[0], self.getNotaryContact()[0].getPersonTitle())
+            self.getValueForTemplate('personTitle', obj=self.getNotaryContact()[0])
         </FieldCode>
     </Item>
     <Item name="Nom">
@@ -202,7 +201,7 @@
     </Item>
 </Object>
  
-<Object name="Champs Agent traitant">    
+ <Object name="Agent traitant">    
     <Item name="Signalétique">
         <AnnotationCode>
             do text 
@@ -212,90 +211,81 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getFolderManagersSign
     <Item name="Signalétique (avec n° tel)">
         <AnnotationCode>
             do text 
-from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getFolderManagersSignaletic(withTel=True)))
+from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getFolderManagersSignaletic((withTel=True)))
         </AnnotationCode>        
     </Item>
     <Item name="Nom">
         <FieldCode>
-            self.getFoldermanagers()[0].getName1()
+            self.getFolderManagers()[0].getName1()
         </FieldCode>        
     </Item>
     <Item name="Prénom">
         <FieldCode>
-            self.getFoldermanagers()[0].getName2()
+            self.getFolderManagers()[0].getName2()
         </FieldCode>        
     </Item>
     <Item name="Téléphone">
         <FieldCode>
-            self.getFoldermanagers()[0].getPhone()
+            self.getFolderManagers()[0].getPhone()
         </FieldCode>        
     </Item>
     <Item name="Fax">
         <FieldCode>
-            self.getFoldermanagers()[0].getFax() 
+            self.getFolderManagers()[0].getFax() 
         </FieldCode>        
     </Item>
     <Item name="Email">
         <FieldCode>
-            self.getFoldermanagers()[0].getEmail() 
+            self.getFolderManagers()[0].getEmail() 
         </FieldCode>        
     </Item>
     <Item name="Initials">
         <FieldCode>
-            self.getFoldermanagers()[0].getInitials()
+            self.getFolderManagers()[0].getInitials()
         </FieldCode>        
     </Item>
     <Item name="Grade">
         <FieldCode>
-            self.displayValue(self.getFoldermanagers()[0].Vocabulary('grade')[0], self.getFoldermanagers()[0].getGrade())
+            self.getValueForTemplate('grade', obj=self.getFolderManagers()[0])
         </FieldCode>        
     </Item>
 </Object>
  
-<Object name="Champs Evénement">    
+ 
+ <Object name="Evénement">    
     <Item name="Date">
         <FieldCode>
-            urbanEventObj.getFormattedDate(urbanEventObj.getEventDate()) 
+            urbanEventObj.getFormattedDate() 
         </FieldCode>        
     </Item>
     <Item name="Date (délivré le)">
         <FieldCode>
-            urbanEventObj.getFormattedDate(urbanEventObj.getEventDate(), forDelivery=True) 
+            urbanEventObj.getFormattedDate(forDelivery=True) 
         </FieldCode>        
     </Item>
     <Item name="Date (préfixée par la commune)">
         <FieldCode>
-            urbanEventObj.getFormattedDate(urbanEventObj.getEventDate(), withCityNamePrefix=True) 
-        </FieldCode>        
-    </Item>
-    <Item name="Date de transmis">
-        <FieldCode>
-            urbanEventObj.getFormattedDate(urbanEventObj.getTransmitDate()) 
+            urbanEventObj.getFormattedDate(withCityNamePrefix=True) 
         </FieldCode>        
     </Item>
     <Item name="Date de réception">
         <FieldCode>
-            urbanEventObj.getFormattedDate(urbanEventObj.getReceiptDate()) 
+            tool.formatDate(urbanEventObj.getReceiptDate()) 
         </FieldCode>        
     </Item>
     <Item name="Date de la décision">
         <FieldCode>
-            urbanEventObj.getFormattedDate(urbanEventObj.getDecisionDate()) 
-        </FieldCode>        
-    </Item>
-    <Item name="Date de la séance d'audition">
-        <FieldCode>
-            urbanEventObj.getFormattedDate(urbanEventObj.getAuditionDate()) 
+            tool.formatDate(urbanEventObj.getDecisionDate()) 
         </FieldCode>        
     </Item>
     <Item name="Décision">
         <FieldCode>
-            self.displayValue(urbanEventObj.Vocabulary('decision')[0], urbanEventObj.getDecision())
+            self.getValueForTemplate('decision', obj=urbanEventObj)
         </FieldCode>        
     </Item>
 </Object>
  
-<Object name="Champs Enquête">    
+ <Object name="Enquête">    
     <Item name="Date de début">
         <FieldCode>
             tool.formatDate(self.getInvestigationStart()) 
@@ -318,7 +308,7 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getFolderManagersSign
     </Item>    
     <Item name="Articles de l'enquête">
         <FieldCode>
-           self.displayValue(self.Vocabulary('investigationArticles')[0], urbanEventObj.getLinkedInquiry().getInvestigationArticles()) 
+           self.getValueForTemplate('investigationArticles', obj=urbanEventObj.getLinkedInquiry()) 
         </FieldCode>        
     </Item>    
     <Item name="Texte des réclamations (enquête)">
@@ -336,13 +326,13 @@ from xhtml(urbanEventObj.getClaimsText())
   
 </Object>
  
-<Object name="Champs Permis de bâtir">    
+ <Object name="Permis de bâtir">    
     <Item name="Référence">
         <FieldCode>
             self.getReference()
         </FieldCode>        
     </Item>
-    <Item name="Référence DGO">
+    <Item name="RéférenceDGATLP">
         <FieldCode>
             self.getReferenceDGATLP()
         </FieldCode>        
@@ -352,30 +342,49 @@ from xhtml(urbanEventObj.getClaimsText())
             self.getWorkLocationSignaletic() 
         </FieldCode>        
     </Item>
+    <Item name="Rue des travaux">
+        <FieldCode>
+            self.getWorkLocationStreet()
+        </FieldCode>        
+    </Item>
+    <Item name="Numero de maison des travaux">
+        <FieldCode>
+            self.getWorkLocationHouseNumber()
+        </FieldCode>        
+    </Item>
+    <Item name="CP des travaux">
+        <FieldCode>
+            self.getWorkLocationZipCode()
+        </FieldCode>        
+    </Item>
+    <Item name="Localité des travaux">
+        <FieldCode>
+            self.getWorkLocationCity()
+        </FieldCode>        
+    </Item>
     <Item name="Parcelles">
         <FieldCode>
             self.getPortionOutsText() 
         </FieldCode>        
     </Item>
     <Item name="Référence du lotissement">
-        <AnnotationCode>
-            do text
-from xhtml(self.portal_urban.decorateHTML('UrbanBody', self.getSubdivisionDetails()))
-        </AnnotationCode> 
+        <FieldCode>
+            self.getSubdivisionDetails() 
+        </FieldCode>        
     </Item>
     <Item name="Schéma de structure communale">
         <FieldCode>
-            self.templateValue('SSC')
+            self.getSSC() 
         </FieldCode>        
     </Item>
     <Item name="Réglement communal d'urbanisme">
         <FieldCode>
-            self.displayValue(self.Vocabulary('RCU')[0], self.getRCU())
+            self.getRCU() 
         </FieldCode>        
     </Item>
     <Item name="Zonage au plan de secteur">
         <FieldCode>
-            self.displayValue(self.Vocabulary('folderZone')[0], self.getFolderZone()) 
+            self.getValueForTemplate('folderZone')
         </FieldCode>        
     </Item>
     <Item name="Avis">
@@ -390,12 +399,12 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody', self.getSubdivisionDetail
     </Item>
     <Item name="Nature des travaux">
         <FieldCode>
-            self.displayValue(self.Vocabulary('workType')[0], self.getWorkType())
+            self.getWorkType() 
         </FieldCode>        
     </Item>
     <Item name="Délai de réponse annoncé">
         <FieldCode>
-            self.displayValue(self.Vocabulary('annoncedDelay')[0], self.getAnnoncedDelay() )
+            self.getAnnoncedDelay() 
         </FieldCode>        
     </Item>
     <Item name="Type de revêtement">
@@ -405,7 +414,7 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody', self.getSubdivisionDetail
     </Item>
     <Item name="Demande de dérogation">
         <FieldCode>
-            self.displayValue(self.Vocabulary('derogation')[0], self.getDerogation())
+            self.getValueForTemplate('derogation')
         </FieldCode>        
     </Item>
     <Item name="Date du récépissé de la demande">
@@ -435,12 +444,33 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getEquipmentAndRoadRe
 from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getTechnicalRemarks()))
         </AnnotationCode>        
     </Item>
+
 </Object>
 
-<Object name="Champs Déclaration">    
+<Object name="Déclaration">    
     <Item name="Référence">
         <FieldCode>
             self.getReference()
+        </FieldCode>        
+    </Item>
+    <Item name="Rue des travaux">
+        <FieldCode>
+            self.getWorkLocationStreet()
+        </FieldCode>        
+    </Item>
+    <Item name="Numero de maison des travaux">
+        <FieldCode>
+            self.getWorkLocationHouseNumber()
+        </FieldCode>        
+    </Item>
+    <Item name="CP des travaux">
+        <FieldCode>
+            self.getWorkLocationZipCode()
+        </FieldCode>        
+    </Item>
+    <Item name="Localité des travaux">
+        <FieldCode>
+            self.getWorkLocationCity()
         </FieldCode>        
     </Item>
     <Item name="Parcelles">
@@ -455,7 +485,7 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getTechnicalRemarks()
     </Item>
     <Item name="Article CWATUPE">
         <FieldCode>
-            self.displayValue(self.Vocabulary('article')[0], self.getArticle())
+            self.getValueForTemplate('article')
         </FieldCode>        
     </Item>    
     <Item name="Numéro article">
@@ -472,7 +502,35 @@ from xhtml(self.getArticle(theObject=True).Description())
 
 </Object>
  
-<Object name="Champs Statistiques INS">    
+ <Object name="Bien">    
+    <Item name="Rue des travaux">
+        <FieldCode>
+            self.getWorkLocationStreet()
+        </FieldCode>        
+    </Item>
+    <Item name="Numero de maison des travaux">
+        <FieldCode>
+            self.getWorkLocationHouseNumber()
+        </FieldCode>        
+    </Item>
+    <Item name="CP des travaux">
+        <FieldCode>
+            self.getWorkLocationZipCode()
+        </FieldCode>        
+    </Item>
+    <Item name="Localité des travaux">
+        <FieldCode>
+            self.getWorkLocationCity()
+        </FieldCode>        
+    </Item>
+    <Item name="Parcelles">
+        <FieldCode>
+            self.getPortionOutsText()
+        </FieldCode>        
+    </Item>
+</Object>
+ 
+ <Object name="Statistiques INS">    
     <Item name="Boucle documents">
         <AnnotationCode>
             do section for folder in folders
@@ -490,7 +548,7 @@ from xhtml(self.getArticle(theObject=True).Description())
     </Item>    
     <Item name="Titre">
         <FieldCode>
-            self.displayValue(folder.getApplicants()[0].Vocabulary('personTitle')[0], folder.getApplicants()[0].getPersonTitle())
+            self.getValueForTemplate('personTitle', obj=folder.getApplicants()[0])
         </FieldCode>
     </Item>
     <Item name="Nom du demandeur">
@@ -511,11 +569,6 @@ from xhtml(self.getArticle(theObject=True).Description())
     <Item name="Date octroi du permis délivré">
         <FieldCode>
             self.toLocalizedTime(self.getEventByEventTypeId(folder, 'delivrance-du-permis-octroi-ou-refus').decisionDate,long_format=False)
-        </FieldCode>        
-    </Item>
-    <Item name="Nom et prénom des demandeurs">
-        <FieldCode>
-            self.displayValue(folder.getApplicants()[0].Vocabulary('personTitle')[0], folder.getApplicants()[0].getPersonTitle()) folder.getApplicants()[0].getName2() folder.getApplicants()[0].getName1()
         </FieldCode>        
     </Item>
     <Item name="Rue des travaux">
@@ -570,5 +623,6 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getTerm('investigatio
             do section- for opinion in self.getAllTechnicalServiceOpinionRequestsNoDup()
         </AnnotationCode>
     </Item>
+
 </Object> 
 </Config>
