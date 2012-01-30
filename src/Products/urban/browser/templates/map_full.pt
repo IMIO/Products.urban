@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      i18n:domain="urban"
+      tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost;global parcels context/getParcels;"
+      >
+<head>
+    <metal:listing use-macro="here/@@map-macros/urbanMapCSS" />
+</head>
+<body >
+  <div tal:condition="not: parcels">
+   <p class="discreet" i18n:translate="cartography_map_descr">A map will me displayed when you will have defined concerned parcels</p>
+   
+  </div>
+
+  <tal:block condition="parcels">
+  	   <metal:listing use-macro="here/@@map-macros/urbanMapScript" />
+       <div id="urbanmapctn" style="width:100%; height:100%"></div>
+  </tal:block>
+</body>
+</html>

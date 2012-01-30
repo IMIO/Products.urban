@@ -10,7 +10,7 @@
 <head>
 <tal:block condition="parcels">
 <div metal:fill-slot="style_slot" >
-    <div metal:use-macro="here/urban_macros/macros/urbanMapCSS" />
+    <metal:listing use-macro="here/@@map-macros/urbanMapCSS" />
 </div>
 </tal:block>
 </head>
@@ -23,7 +23,7 @@
                             useTabbing python: context.portal_urban.getUseTabbing();">
 
 <tal:block condition="parcels">
-<div metal:use-macro="here/urban_macros/macros/urbanMapScript" />
+<metal:listing use-macro="here/@@map-macros/urbanMapScript" />
 </tal:block>
 <metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />
 

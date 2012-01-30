@@ -105,6 +105,6 @@ class ProxyController(BrowserView):
             return conn.read()
         except Exception, e:
             print e
-        
+    
 class testmap(ProxyController):
     pass

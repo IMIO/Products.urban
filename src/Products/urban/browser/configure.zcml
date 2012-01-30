@@ -75,7 +75,23 @@
      template="templates/map.pt"
      permission="zope2.View"
   />
-
+  
+  <browser:page
+     for="*"
+     name="fullmap"
+     class=".mapview.FullMapView"
+     template="templates/map_full.pt"
+     permission="zope2.View"
+  />
+  
+  <browser:page
+     for="*"
+     name="map-macros"
+     class=".mapview.MapMacros"
+     template="templates/map_macros.pt"
+     permission="zope2.View"
+  />
+  
   <browser:page
      for="Products.urban.interfaces.IContact"
      name="contactview"

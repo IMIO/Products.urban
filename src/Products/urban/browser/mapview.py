@@ -44,3 +44,14 @@ class MapView(BrowserView):
             listCapaKey.append(capaKey)
         return listCapaKey
 
+class FullMapView(MapView):
+    """
+        Display a full screen map
+    """
+    def init(self, context, request):
+        super(MapView, self).__init__(context, request)
+        
+class MapMacros(BrowserView):
+    """
+      This manage the macros of Map
+    """        
