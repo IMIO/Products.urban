@@ -747,9 +747,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                     body = self.REQUEST["BODY"]
 
                     r = urllib2.Request(url, body, headers)
-                    y = urllib2.urlopen(r)
+                    y = urllib2.urlopen(r, timeout=3)
                 else:
-                    y = urllib2.urlopen(url)
+                    y = urllib2.urlopen(url, timeout=3)
 
                 # print content type header
                 i = y.info()
