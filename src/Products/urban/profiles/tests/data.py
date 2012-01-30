@@ -423,6 +423,7 @@ urbanEventTypes = {
                     'activatedFields': [],
                     'deadLineDelay': 15,
                     'podTemplates': ({'id': "div-recepisse", 'title': "Récépissé de la demande"},),
+                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
                     'id': "decision-octroi-refus",
@@ -430,8 +431,9 @@ urbanEventTypes = {
                     'activatedFields': ['decisionDate', 'decision'],
                     'deadLineDelay': 15,
                     'podTemplates': (
-                                     {'id': "div-decision-octroi", 'title': "Octroi de la division"},
-                                     {'id': "div-transmis-decision", 'title': "Octroi de la division (transmis au notaire)"},
+                                     {'id': "div-decision", 'title': "Octroi/refus de la division"},
+                                     {'id': "div-decision-incomplet", 'title': "Dossier incomplet"},
+                                     {'id': "div-transmis-decision", 'title': "Octroi/refus de la division (transmis au notaire)"},
                                     ),
                     },
                    ),
