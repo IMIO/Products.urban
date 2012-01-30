@@ -1,7 +1,7 @@
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
-from Acquisition import aq_inner
+from Acquisition import aq_inner, aq_base
 
 class MapView(BrowserView):
     """
@@ -23,6 +23,11 @@ class MapView(BrowserView):
         """
         listCapaKey = []
         context = aq_inner(self.context)
+        
+        "Allow to show the map without the licence object"
+        if not hasattr(aq_base(context), "getParcels"):
+            return listCapaKey
+        
         for parcel in  context.getParcels():
             divisioncode = parcel.getDivisionCode()
             section = parcel.getSection()
@@ -48,7 +53,7 @@ class FullMapView(MapView):
     """
         Display a full screen map
     """
-    def init(self, context, request):
+    def __init__(self, context, request):
         super(MapView, self).__init__(context, request)
         
 class MapMacros(BrowserView):

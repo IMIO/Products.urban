@@ -4,10 +4,12 @@ from urlparse import urlparse
 from zope import interface
 from zope.formlib import namedtemplate
 from Products.Five import BrowserView
-from Acquisition import aq_inner
+from Acquisition import aq_inner, aq_base
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.form._named import named_template_adapter
+import logging
+logger = logging.getLogger('urban: Views')
 
 class WMC(BrowserView):
 #       
@@ -46,42 +48,56 @@ class WMC(BrowserView):
     def wmc(self):
         """
           Initialize the map on element
+          if no context get the mapextent from config
         """
         zoneExtent = None
         urbantool = getToolByName(self,'portal_urban')
-        parcels = self.context.getParcels()
-        cqlquery=''
-        if parcels:
-            #if we have parcels, display them on a map...
-            #generate the 'selectedpo' layer filter based on contained parcels
-            for parcel in parcels:
-                if cqlquery !='':
-                    cqlquery=cqlquery + " or "
-                cqlquery=cqlquery+"(section='"+parcel.getSection()+"' and radical="+parcel.getRadical()
-                if parcel.getBis() != '':
-                    cqlquery=cqlquery+" and bis="+parcel.getBis()
-                if parcel.getExposant() != '':
-                    cqlquery=cqlquery+" and exposant='"+parcel.getExposant()+"'"
-                else:
-                    cqlquery=cqlquery+" and exposant is NULL"
-                if parcel.getPuissance() != '':
-                    cqlquery=cqlquery+" and puissance="+parcel.getPuissance()
-                else:
-                    cqlquery=cqlquery+" and puissance=0"
-                cqlquery=cqlquery+")"
-            cqlquery = '((da = '+parcel.getDivisionCode()+') and ('+cqlquery+'))'
-            #calculate the zone to display
-            strsql = 'SELECT Xmin(selectedpos.extent),Ymin(selectedpos.extent),Xmax(selectedpos.extent), Ymax(selectedpos.extent) FROM (SELECT Extent(the_geom) FROM capa WHERE '+cqlquery+') AS selectedpos'
-            result = urbantool.queryDB(query_string=strsql)[0]
+        context = aq_inner(self.context)
+        if not hasattr(aq_base(context), "getParcels"):
+            
             try:
-                self.xmin=result['xmin']
-                self.ymin=result['ymin']
-                self.xmax=result['xmax']
-                self.ymax=result['ymax']
+                extent = urbantool.getMapExtent().split(',')
+                self.xmin=extent[0]
+                self.ymin=extent[1]
+                self.xmax=extent[2]
+                self.ymax=extent[3]
                 #zoneExtent = "%s,%s,%s,%s" % (result['xmin'],result['ymin'],result['xmax'],result['ymax'])
             except:
-                #zoneExtent = ""
                 pass
+        else:
+            parcels = self.context.getParcels()
+            cqlquery=''
+            if parcels:
+                #if we have parcels, display them on a map...
+                #generate the 'selectedpo' layer filter based on contained parcels
+                for parcel in parcels:
+                    if cqlquery !='':
+                        cqlquery=cqlquery + " or "
+                    cqlquery=cqlquery+"(section='"+parcel.getSection()+"' and radical="+parcel.getRadical()
+                    if parcel.getBis() != '':
+                        cqlquery=cqlquery+" and bis="+parcel.getBis()
+                    if parcel.getExposant() != '':
+                        cqlquery=cqlquery+" and exposant='"+parcel.getExposant()+"'"
+                    else:
+                        cqlquery=cqlquery+" and exposant is NULL"
+                    if parcel.getPuissance() != '':
+                        cqlquery=cqlquery+" and puissance="+parcel.getPuissance()
+                    else:
+                        cqlquery=cqlquery+" and puissance=0"
+                    cqlquery=cqlquery+")"
+                cqlquery = '((da = '+parcel.getDivisionCode()+') and ('+cqlquery+'))'
+                #calculate the zone to display
+                strsql = 'SELECT Xmin(selectedpos.extent),Ymin(selectedpos.extent),Xmax(selectedpos.extent), Ymax(selectedpos.extent) FROM (SELECT Extent(the_geom) FROM capa WHERE '+cqlquery+') AS selectedpos'
+                result = urbantool.queryDB(query_string=strsql)[0]
+                try:
+                    self.xmin=result['xmin']
+                    self.ymin=result['ymin']
+                    self.xmax=result['xmax']
+                    self.ymax=result['ymax']
+                    #zoneExtent = "%s,%s,%s,%s" % (result['xmin'],result['ymin'],result['xmax'],result['ymax'])
+                except:
+                    #zoneExtent = ""
+                    pass
         self.tmpl=ViewPageTemplateFile("wmc.pt")
         return self.tmpl(self)         
 
