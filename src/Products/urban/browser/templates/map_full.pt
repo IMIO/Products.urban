@@ -5,8 +5,58 @@
       >
 <head>
     <metal:listing use-macro="here/@@map-macros/urbanMapCSS" />
+            <style type="text/css" media="screen">
+	        #loading-mask{
+		        background-color:white;
+		        height:100%;
+		        position:absolute;
+		        left:0;
+		        top:0;
+		        width:100%;
+		        z-index:20000;
+			}
+			#loading{
+		        height:auto;
+		        position:absolute;
+		        width: 300px;
+		        left:40%;
+		        top:40%;
+		        padding:2px;
+		        z-index:20001;
+	    	}
+		    #loading a {
+		        color:#225588;
+		    }
+		    #loading .loading-indicator{
+		        background:white;
+		        color:#444;
+		        font:bold 13px Helvetica, Arial, sans-serif;
+		        height:auto;
+		        margin:0;
+		        padding:10px;
+		        border: 1px solid black;
+		    }
+		    #loading-msg {
+		        font-size: 10px;
+		        font-weight: normal;
+		    }
+		    #loading-title{
+		    	font-size: 2em;
+		    	font-weight: bold;
+		    }
+        </style>
 </head>
 <body >
+    <div id="loading-mask" style=""></div> 
+	<div id="loading"> 
+	    <div class="loading-indicator">
+	    	<span id="loading-title">UrbanMap</span><br/>
+	    	<!--<br style="clear: both"/>-->
+	    	<a href="http://www.communesplone.org/">Communes&nbsp;Plone</a>
+	    	<br style="clear: both"/>
+	    	<span id="loading-msg">Chargement de l'application</span>
+	    </div> 
+	</div> 
   <div tal:condition="not: parcels">
    <p class="discreet" i18n:translate="cartography_map_descr">A map will me displayed when you will have defined concerned parcels</p>
   </div>

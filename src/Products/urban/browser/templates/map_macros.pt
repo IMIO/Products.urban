@@ -29,19 +29,22 @@
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/UrbanMap.SearchForm.Proprietaire.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/UrbanMap.SearchForm.Parcelle.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/UrbanMap.ParamForm.js"></script>
+    
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/GEOB_util.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/GEOB_ows.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/GEOB_managelayers.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/GEOB_FeatureDataModel.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/GEOB_resultspanel.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/GEOB_getfeatureinfo.js"></script>
+    
+
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/UrbanMap.MapPanel.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/UrbanMap.WMSLegend.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/UrbanMap.TreePanel.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/UrbanMap.WMSCapabilitiesWindow.js"></script>
-    <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/UrbanMap.UrbanLayerNode.js"></script>
+    <!--<script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/UrbanMap.UrbanLayerNode.js"></script>-->
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/UrbanMap.WMCReader.js"></script>
-    <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/UrbanMap.LayerStore.js"></script>      
+    <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/UrbanMap.LayerStore.js"></script>
 </div>
 
 <div metal:define-macro="urbanMapScript" tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
