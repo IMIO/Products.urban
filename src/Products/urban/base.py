@@ -212,6 +212,7 @@ class UrbanBase(object):
                     applicant.getStreet() + '|' + applicant.getZipcode() + ' ' + applicant.getCity()
         toreturn = toreturn + '</CSV>'
         return toreturn
+    getMultipleApplicants = getMultipleApplicantsCSV 
 
     security.declarePublic('getMultipleArchitectsCSV')
     def getMultipleArchitectsCSV(self):
