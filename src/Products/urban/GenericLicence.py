@@ -573,30 +573,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             res.append(list[divider*part:divider*part+remain])
         return tuple(res)
 
-    security.declarePublic('templateListFolderCategories')
-    def templateListFolderCategories(self):
-        """
-          Return a list of folder categories from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return urbantool.listVocabulary('foldercategories', self)
-
-    security.declarePublic('templateListRoadTypes')
-    def templateListRoadTypes(self):
-        """
-          Return a list of road types from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return urbantool.listVocabulary('folderroadtypes', self)
-
-    security.declarePublic('templateListRoadEquipments')
-    def templateListRoadEquipments(self):
-        """
-          Return a list of road equipments from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return urbantool.listVocabulary('folderroadequipments', self)
-
     def templateRoadEquipments(self, tup):
         res = []
         for pair in tup:
@@ -608,24 +584,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         for pair in tup:
             res[pair['road_equipment']]=pair['road_equipment_details']
         return res
-
-    security.declarePublic('templateListProtectedBuilding')
-    def templateListProtectedBuilding(self):
-        """
-          Return a list of protected buildings mode from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return urbantool.listVocabulary('folderprotectedbuildings', self)
-
-    security.declarePublic('templateValue')
-    def templateValue(self, fieldName):
-        """
-          Return the display value of the given field
-        """
-        displaylist = self.Vocabulary(fieldName)[0]
-        fieldaccessor = getattr(self, "get%s%s" % (fieldName[0].upper(), fieldName[1:]))
-        return self.displayValue(displaylist, fieldaccessor())
-
 
     security.declarePublic('templateListMakers')
     def templateListMakers(self):
