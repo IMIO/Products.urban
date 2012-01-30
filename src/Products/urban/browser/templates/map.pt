@@ -23,6 +23,7 @@
                             useTabbing python: context.portal_urban.getUseTabbing();">
 
 <tal:block condition="parcels">
+<metal:listing use-macro="here/@@map-macros/urbanMapScriptBase" />
 <metal:listing use-macro="here/@@map-macros/urbanMapScript" />
 </tal:block>
 <metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />

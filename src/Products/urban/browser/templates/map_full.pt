@@ -9,11 +9,11 @@
 <body >
   <div tal:condition="not: parcels">
    <p class="discreet" i18n:translate="cartography_map_descr">A map will me displayed when you will have defined concerned parcels</p>
-   
   </div>
 
   <tal:block condition="parcels">
-  	   <metal:listing use-macro="here/@@map-macros/urbanMapScript" />
+  	   <metal:listing use-macro="here/@@map-macros/urbanMapScriptBase" />
+  	   <metal:listing use-macro="here/@@map-macros/urbanFullMapScript" />
        <div id="urbanmapctn" style="width:100%; height:100%"></div>
   </tal:block>
 </body>
