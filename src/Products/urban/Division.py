@@ -25,6 +25,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
 from Products.urban.utils import setOptionalAttributes
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget 
 
 optional_fields = []
 ##/code-section module-header

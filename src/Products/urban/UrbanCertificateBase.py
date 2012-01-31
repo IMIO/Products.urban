@@ -29,6 +29,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.LinesColumn import LinesColumn
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget 
 
 optional_fields = ['customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks', ]
 ##/code-section module-header

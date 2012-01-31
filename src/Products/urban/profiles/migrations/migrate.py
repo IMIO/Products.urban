@@ -82,6 +82,8 @@ def migrateToPlone4(context):
     addMissingUrbanVocabularyTerms(context)
     #Divisions used a 'comments' field that is now replaced by the default 'description' field
     migrateDivisionsCommentsToDescription(context)
+    #Update all the templates
+    updateUrbanTemplates(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -1159,3 +1161,7 @@ def migrateFoldermanagersReferenceField(context):
                 reference_catalog.uncatalog_object(ref_brain.getPath())
     
     logger.info("Migrating foldermanagers referencefield for divisions, urbancertificates an environmental declarations: done!")
+
+def updateUrbanTemplates(context):
+    setup = getToolByName(context.getSite(), 'portal_setup')
+    setup.runImportStepFromProfile('profile-Products.urban:tests', 'urban-updateAllUrbanTemplates')
