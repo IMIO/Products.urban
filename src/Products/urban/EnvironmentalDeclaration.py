@@ -20,8 +20,6 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
 from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
@@ -83,26 +81,6 @@ schema = Schema((
         ),
         allow_oddeven=True,
         columns=('number', 'street'),
-    ),
-    ReferenceField(
-        name='foldermanagers',
-        widget=ReferenceBrowserWidget(
-            force_close_on_insert=1,
-            allow_search=1,
-            allow_browse=0,
-            show_indexes=1,
-            available_indexes= {'Title':'Nom'},
-            startup_directory="portal_urban/environmentaldeclaration/foldermanagers",
-            wild_card_search=True,
-            label='Foldermanagers',
-            label_msgid='urban_label_foldermanagers',
-            i18n_domain='urban',
-        ),
-        required=False,
-        schemata='urban_description',
-        multiValued=1,
-        relationship='environmentalDeclarationFolderManagers',
-        allowed_types=('FolderManager',),
     ),
 
 ),

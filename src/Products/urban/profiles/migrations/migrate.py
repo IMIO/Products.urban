@@ -1139,6 +1139,7 @@ def migrateFoldermanagersReferenceField(context):
     meta_types = {
                     'UrbanCertificateBase':'certificateFolderManagers',
                     'Declaration':'declarationFolderManagers',
+                    'EnvironmentalDeclaration':'environmentalDeclarationFolderManagers',
                     'Division':'division_foldermanager',
                    }
     site = context.getSite() 
