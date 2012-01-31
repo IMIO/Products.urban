@@ -1127,3 +1127,34 @@ def migrateDecisionsForDeclarations(context):
             logger.info("Extra value already exists for '%s' and is '%s'" % (obj.id, extraValue))
 
     logger.info("Migrating the 'decisions UrbanVocabularyTems' for Declarations: done!!!")
+
+def migrateFoldermanagersReferenceField(context):
+    """
+      Run the FoldermanagersReferenceMigrator
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    logger.info("Migrating foldermanagers referencefield for divisions, urbancertificates an environmental declarations: starting...")
+
+    meta_types = {
+                    'UrbanCertificateBase':'certificateFolderManagers',
+                    'Declaration':'declarationFolderManagers',
+                    'Division':'division_foldermanager',
+                   }
+    site = context.getSite() 
+    portal_catalog = getToolByName(site, 'portal_catalog')
+    reference_catalog = getToolByName(site, 'reference_catalog')
+
+    for meta_type, relationship in meta_types.iteritems():
+        licences_brains = portal_catalog(meta_type=meta_type)
+        for brain in licences_brains:
+            ref_brains = reference_catalog(sourceUID=brain['UID'], relationship=relationship)
+            old_foldermanagers_ids = [brain['targetId'] for brain in ref_brains]
+            if old_foldermanagers_ids:
+                licence = brain.getObject()
+                licence.setFoldermanagers([brain.getObject() for brain in portal_catalog(id=old_foldermanagers_ids)])
+            #remove the old references from the reference_catalog
+            for ref_brain in ref_brains:
+                reference_catalog.uncatalog_object(ref_brain.getPath())
+    
+    logger.info("Migrating foldermanagers referencefield for divisions, urbancertificates an environmental declarations: done!")

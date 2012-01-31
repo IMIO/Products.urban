@@ -20,8 +20,6 @@ import interfaces
 from Products.urban.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
 from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
@@ -109,27 +107,6 @@ schema = Schema((
         schemata='urban_description',
         multiValued=1,
         vocabulary=UrbanVocabulary('opinionstoaskifworks', vocType="OrganisationTerm"),
-    ),
-    ReferenceField(
-        name='foldermanagers',
-        widget=ReferenceBrowserWidget(
-            force_close_on_insert=0,
-            allow_search=1,
-            allow_browse=0,
-            show_indexes=1,
-            available_indexes= {'Title':'Nom'},
-            base_query="restrictFolderManagerSearch",
-            wild_card_search=True,
-            label='Foldermanagers',
-            label_msgid='urban_label_foldermanagers',
-            i18n_domain='urban',
-        ),
-        required= False,
-        schemata='urban_description',
-        multiValued=1,
-        relationship='certificateFolderManagers',
-        default_method="getDefaultFolderManagers",
-        allowed_types=('FolderManager',),
     ),
 
 ),

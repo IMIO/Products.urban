@@ -20,8 +20,6 @@ import interfaces
 from Products.urban.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -43,26 +41,6 @@ schema = Schema((
         ),
         schemata='urban_description',
         vocabulary=UrbanVocabulary('articles', with_empty_value=True),
-    ),
-    ReferenceField(
-        name='foldermanagers',
-        widget=ReferenceBrowserWidget(
-            force_close_on_insert=1,
-            allow_browse=1,
-            allow_search=1,
-            show_indexes=1,
-            available_indexes={'Title':'Nom'},
-            base_query='restrictFolderManagerSearch',
-            wild_card_search=True,
-            label='Foldermanagers',
-            label_msgid='urban_label_foldermanagers',
-            i18n_domain='urban',
-        ),
-        required= True,
-        schemata='urban_description',
-        multiValued=1,
-        relationship='declarationFolderManagers',
-        allowed_types=('FolderManager',),
     ),
 
 ),
