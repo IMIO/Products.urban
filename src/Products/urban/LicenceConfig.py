@@ -40,6 +40,19 @@ schema = Schema((
         multiValued=True,
         vocabulary='listUsedAttributes',
     ),
+    LinesField(
+        name='keyEvents',
+        widget=MultiSelectionWidget(
+            description="Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL",
+            description_msgid="urban_descr_keyEvents",
+            size=10,
+            label='Keyevents',
+            label_msgid='urban_label_keyEvents',
+            i18n_domain='urban',
+        ),
+        multiValued=True,
+        vocabulary='listLicenceEvents',
+    ),
 
 ),
 )
