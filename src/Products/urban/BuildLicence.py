@@ -32,7 +32,7 @@ from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from dateutil.relativedelta import relativedelta
 
-optional_fields = ['roadAdaptation','pebDetails',
+optional_fields = ['implantation','roadAdaptation','pebDetails',
                    'roadTechnicalAdvice','locationTechnicalAdvice','locationTechnicalConditions',
                    'pebTechnicalAdvice','locationDgrneUnderground', 'roadDgrneUnderground', 'workType']
 ##/code-section module-header

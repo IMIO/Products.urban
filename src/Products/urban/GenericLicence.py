@@ -59,10 +59,11 @@ slave_fields_pca= (
     },
 )
 
-optional_fields = ['subdivisionDetails', 'missingParts', 'missingPartsDetails','folderZoneDetails','derogationDetails','isInPCA',
-                   'annoncedDelayDetails','roadType','roadCoating','roadEquipments',
-                   'protectedBuildingDetails','investigationDetails','investigationReasons',
-                   'pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks',
+optional_fields = ['subdivisionDetails','missingParts','missingPartsDetails','folderZoneDetails','folderZone',
+                   'derogationDetails','isInPCA','annoncedDelayDetails','roadType','roadCoating','roadEquipments',
+                   'investigationDetails','investigationReasons','isInSubdivision',
+                   'folderCategoryTownship','protectedBuilding','protectedBuildingDetails',
+                   'pash','pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks',
                    'pca','SSC','RCU','floodingLevel','solicitRoadOpinionsTo', 'areParcelsVerified', 'locationFloodingLevel']
 ##/code-section module-header
 

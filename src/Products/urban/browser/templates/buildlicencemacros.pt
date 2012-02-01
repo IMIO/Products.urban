@@ -197,7 +197,7 @@
   <td width="2%"></td>
   <td valign="top" style="padding-top: 1em;" tal:define="roadEquipments context/getRoadEquipments"><tal:block condition="roadEquipments"><metal:myfield use-macro="python:here.widget('roadEquipments', mode='view')" /></tal:block><span tal:condition="not: roadEquipments" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: 'pash' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_pash">PASH</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('pash', mode='view')" /></td>
@@ -232,7 +232,7 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('solicitRoadOpinionsTo', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: 'implantation' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_implantation">Implantation</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('implantation', mode='view')" /></td>
@@ -257,7 +257,7 @@
 
 <div metal:define-macro="locationMacro" i18n:domain="urban">
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
- <tr>
+ <tr tal:condition="python: 'folderZone' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_folderZone">Folder zone</span>:</b></td>
   <td width="2%"></td>
   <td valign="top">
@@ -268,7 +268,7 @@
   <td valign="top"><b><span i18n:translate="urban_label_folderZoneDetails">Folder zone details</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><tal:block replace="structure context/getFolderZoneDetails" /><span tal:condition="not: context/getFolderZoneDetails" class="discreet" i18n:translate="content_none">None</span></td> </tr>
- <tr>
+ <tr tal:condition="python: 'isInSubdivision' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_isInSubdivision">In subdivision?</span>:</b></td>
   <td width="2%"></td>
   <td width="49%" valign="top" valign="top" tal:define="isInSubdivision context/getIsInSubdivision">
@@ -294,7 +294,7 @@
    </tal:isInPCA>
   </td>
  </tr>
- <tr>
+ <tr tal:condition="python: 'protectedBuilding' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_protectedBuilding">Protected building</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('protectedBuilding', mode='view')" /></td>
@@ -324,7 +324,7 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('locationFloodingLevel', mode='view')" /></td>
  </tr>
- <tr>
+ <tr tal:condition="python: 'solicitLocationOpinionsTo' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_solicitLocationOpinionsTo">Solicit location opinions to</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('solicitLocationOpinionsTo', mode='view')" /></td>
@@ -339,7 +339,7 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalConditions', mode='view')" /><span tal:condition="not: context/getLocationTechnicalConditions" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
- <tr>
+ <tr tal:condition="python: 'folderCategoryTownship' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_folderCategoryTownship">Folder category</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategoryTownship', mode='view')" /></td>
