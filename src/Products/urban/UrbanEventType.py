@@ -97,6 +97,15 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    BooleanField(
+        name='isKeyEvent',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Iskeyevent',
+            label_msgid='urban_label_isKeyEvent',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )

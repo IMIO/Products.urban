@@ -24,3 +24,9 @@ def generateSingletonDocument(urbanEvent, event):
     templates = urbanEvent.getTemplates()
     if len(templates) == 1:
         urban_tool.createUrbanDoc(templates[0].UID(), urbanEvent.UID())
+
+def updateKeyEvent(urbanEvent, event):
+    event_type = urbanEvent.getUrbaneventtypes()
+    if not event_type or event_type.getIsKeyEvent():
+        licence = urbanEvent.aq_parent
+        licence.reindexObject(['last_key_event'])

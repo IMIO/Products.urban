@@ -91,6 +91,7 @@
   />
 
   <adapter name="StreetsUID" factory=".indexes.genericlicence_streetsuid" />
+  <adapter name="last_key_event" factory=".indexes.genericlicence_lastkeyevent" />
 
   <!-- ##/code-section configure.zcml.header -->
 

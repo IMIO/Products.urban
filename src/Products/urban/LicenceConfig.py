@@ -23,6 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.CMFCore.utils import getToolByName
 ##/code-section module-header
 
 schema = Schema((
@@ -39,19 +40,6 @@ schema = Schema((
         ),
         multiValued=True,
         vocabulary='listUsedAttributes',
-    ),
-    LinesField(
-        name='keyEvents',
-        widget=MultiSelectionWidget(
-            description="Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL",
-            description_msgid="urban_descr_keyEvents",
-            size=10,
-            label='Keyevents',
-            label_msgid='urban_label_keyEvents',
-            i18n_domain='urban',
-        ),
-        multiValued=True,
-        vocabulary='listLicenceEvents',
     ),
 
 ),
@@ -120,7 +108,6 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
 
     security.declarePublic('getIconURL')
     def getIconURL(self):
-        from Products.CMFCore.utils import getToolByName
         portal_types = getToolByName(self, 'portal_types')
         if self.licence_portal_type and hasattr(portal_types, self.licence_portal_type):
             icon = "%s.png" % self.licence_portal_type

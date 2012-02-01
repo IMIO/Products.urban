@@ -83,3 +83,10 @@ def genericlicence_streetsuid(object):
     for location in object.getWorkLocations():
         streets.append(location['street'])
     return streets 
+
+@indexer(IGenericLicence)
+def genericlicence_lastkeyevent(object):
+    for event in reversed(object.getUrbanEvents()):
+        event_type = event.getUrbaneventtypes()
+        if event_type.getIsKeyEvent():
+            return "%s,  %s" % (event.getEventDate().strftime("%d/%m/%y"), event_type.Title())

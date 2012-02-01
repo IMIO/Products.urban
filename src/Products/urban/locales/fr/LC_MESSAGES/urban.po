@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2012-01-11 14:27+0000\n"
+"POT-Creation-Date: 2012-02-01 12:31+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1617,6 +1617,11 @@ msgstr "Le bien se situe dans un PCA"
 #: BuildLicence.py
 msgid "urban_label_isInSubdivision"
 msgstr "Le bien se situe dans un lotissement"
+
+#. Default: "Iskeyevent"
+#: UrbanEventType.py
+msgid "urban_label_isKeyEvent"
+msgstr "Événement clé"
 
 #. Default: "Issameaddressasworks"
 #: Contact.py

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-01-11 14:27+0000\n"
+"POT-Creation-Date: 2012-02-01 12:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1613,6 +1613,11 @@ msgstr ""
 #. Default: "Isinsubdivision"
 #: BuildLicence.py
 msgid "urban_label_isInSubdivision"
+msgstr ""
+
+#. Default: "Iskeyevent"
+#: UrbanEventType.py
+msgid "urban_label_isKeyEvent"
 msgstr ""
 
 #. Default: "Issameaddressasworks"
