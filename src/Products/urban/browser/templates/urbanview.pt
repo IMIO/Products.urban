@@ -66,9 +66,6 @@
                  <a class="contenttype-environmentaldeclaration" href="environmentaldeclarations" i18n:translate="environmentaldeclarations">Environmental declarations</a><a href="" tal:condition="python: 'EnvironmentalDeclaration' in [t.id for t in getattr(context, 'environmentaldeclarations').allowedContentTypes()]" tal:attributes="href python: context.absolute_url() + '/environmentaldeclarations/createObject?type_name=EnvironmentalDeclaration'"><img class="urban-add-icon" src="icon_add.gif" /></a><br/>
                 </td>
                 <td width=33%>
-                 <img src="../link_icon.gif" /> <a href="urban_searchbyparcel" i18n:translate="urban_searchbyparcel_descr">Search by parcel</a><br/>
-                 <img src="../link_icon.gif" /> <a href="urban_searchbyapplicant" i18n:translate="urban_searchbyapplicant_descr">Search by applicant</a><br/>
-                 <img src="../link_icon.gif" /> <a href="urban_searchbystreet" i18n:translate="urban_searchbystreet_descr">Search by street</a><br/>
                  <img src="../link_icon.gif" /> <a href="urbansearchview" i18n:translate="urban_search_descr">Search</a><br/>
                  <img src="../engrenage.png" /> <a href="exportlist220" i18n:translate="urban_export_list220">Export list 220</a><br/>
                  <img src="../engrenage.png" /> <a href="statsins" i18n:translate="urban_statistics_ins">Statistics INS</a><br/>

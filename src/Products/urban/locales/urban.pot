@@ -2309,15 +2309,6 @@ msgstr ""
 msgid "urban_search_result"
 msgstr ""
 
-msgid "urban_searchbyapplicant_descr"
-msgstr ""
-
-msgid "urban_searchbyparcel_descr"
-msgstr ""
-
-msgid "urban_searchbystreet_descr"
-msgstr ""
-
 msgid "urban_searches"
 msgstr ""
 

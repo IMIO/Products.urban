@@ -2313,15 +2313,6 @@ msgstr "Propriétaire"
 msgid "urban_search_result"
 msgstr "Résultat de la recherche"
 
-msgid "urban_searchbyapplicant_descr"
-msgstr "Recherche de dossiers par demandeur"
-
-msgid "urban_searchbyparcel_descr"
-msgstr "Recherche de dossiers par parcelle"
-
-msgid "urban_searchbystreet_descr"
-msgstr "Recherche de dossiers par rue"
-
 msgid "urban_searches"
 msgstr "Recherches"
 
