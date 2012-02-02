@@ -3,7 +3,6 @@ from Products.CMFCore.utils import getToolByName
 import logging
 
 from zope.interface import alsoProvides
-from zope.i18n import translate as _
 from zope import event
 
 from Acquisition import aq_base
@@ -894,17 +893,8 @@ def migrateFoldermanagers(context):
     #from plone.app.referenceintegrity.config import DisableRelationshipsProtectionTemporarily
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
     tool = portal.portal_urban
-    #create the new folder 'foldermanagers' at urban cfg root
-    foldermanagers_folder = None
-    if not hasattr(tool, "foldermanagers"):
-        foldermanagers_folder_id = tool.invokeFactory("Folder",id="foldermanagers",title=_("foldermanagers_folder_title", 'urban', context=portal.REQUEST))
-        foldermanagers_folder = getattr(tool, foldermanagers_folder_id)
-        foldermanagers_folder.setConstrainTypesMode(1)
-        foldermanagers_folder.setLocallyAllowedTypes(['FolderManager'])
-        foldermanagers_folder.setImmediatelyAddableTypes(['FolderManager'])
-    else:
-        logger.info("Migrating Foldermanagers: was already migrated!")
-        return
+    if not hasattr(tool, 'foldermanagers'):
+        raise KeyError, "Migrating Foldermanagers objects to a single folder, no 'foldermanagers' folder in portal_urban : You must reinstall 'urban' before launching this step!"
 
     #move the foldermanagers spread in the config into the new folder
     foldermanager_ids = {}
@@ -912,6 +902,7 @@ def migrateFoldermanagers(context):
         ids_to_move = []
         licence_cfg_folder = getattr(tool, licence_type.lower())
         if not hasattr(aq_base(licence_cfg_folder), 'foldermanagers'):
+            logger.info("Migrating Foldermanagers: %s was already migrated!" % licence_type)
             continue
         old_folder = licence_cfg_folder.foldermanagers
         #set the value for the field 'ManageableLicences' depending on the licence type 
@@ -943,7 +934,7 @@ def migrateFoldermanagers(context):
 
         #move the foldermanager objects
         cut_data = old_folder.manage_cutObjects(ids_to_move)
-        foldermanagers_folder.manage_pasteObjects(cut_data)
+        tool.foldermanagers.manage_pasteObjects(cut_data)
         #delete the old folder
         licence_cfg_folder.manage_delObjects(['foldermanagers'])
 
