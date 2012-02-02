@@ -254,7 +254,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         else:
             title = self.getReference()
         self.setTitle(title)
-        self.reindexObject()
+        self.reindexObject(idxs=('Title', 'applicantInfosIndex',))
 
     security.declarePublic('getOpinionsToAskForWorks')
     def getOpinionsToAskForWorks(self, theObjects=False):
