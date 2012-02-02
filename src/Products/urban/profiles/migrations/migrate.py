@@ -983,8 +983,11 @@ def migrateGlobalTemplates(context):
         'reference.odt':(tool.templateReference, GT[2]),
         'signatures.odt':(tool.templateSignatures, GT[3]),
         'statsins.odt':(tool.templateStatsINS, GT[4]),
-        'styles.odt':(tool.templateStyles, GT[5]),
     }
+    #depending on the version of the Data.fs
+    #there could be a portal_urban.templateStyles attribute or not...
+    if hasattr(aq_base(tool), 'templateStyles'):
+        old_templates['styles.odt'] = (tool.templateStyles, GT[5])
 
     for template_id, template_infos in old_templates.items():
         newtemplate_id = templates_folder.invokeFactory("File", id=template_id, title=template_infos[1]['title'], file=template_infos[0].data)
