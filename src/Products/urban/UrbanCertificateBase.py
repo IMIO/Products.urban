@@ -239,11 +239,11 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         if applicants:
             applicant = self.getApplicants()[0].Title()
         else:
-            applicant = translate('no_applicant_defined', 'urban', context=self.REQUEST)
+            applicant = translate('no_applicant_defined', 'urban', context=self.REQUEST).encode('utf8')
         if self.getNotaryContact():
             notary = self.getNotaryContact()[0].Title()
         else:
-            notary = translate('no_notary_defined', 'urban', context=self.REQUEST)
+            notary = translate('no_notary_defined', 'urban', context=self.REQUEST).encode('utf8')
 
         if applicant and notary:
             title = "%s - %s - %s" % (self.getReference(), applicant, notary)
