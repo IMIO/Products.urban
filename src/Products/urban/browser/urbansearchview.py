@@ -41,7 +41,7 @@ class UrbanSearchView(BrowserView):
         arguments = {
                         'street':self.getSearchArgument('street'),
                         'applicant':self.getSearchArgument('applicant'),
-                        'parcel':self.getSearchArgument(['section', 'radical', 'bis', 'exposant', 'puissance', 'partie']),
+                        'parcel':self.getSearchArgument(['division','section', 'radical', 'bis', 'exposant', 'puissance', 'partie']),
                     }  
         if search_by == 'street':
             return self.searchByStreet(foldertypes, arguments.get(search_by, []))
@@ -82,9 +82,9 @@ class UrbanSearchView(BrowserView):
         res = []
         parcelInfos = ','.join(parcel_infos_index[:-1])
         if parcel_infos_index[-1] == 'on':
-            parcelInfos = ',%s,1' %parcelInfos
+            parcelInfos = '%s,1' %parcelInfos
         else:
-            parcelInfos = ',%s,0' %parcelInfos
+            parcelInfos = '%s,0' %parcelInfos
         res = catalogTool(portal_type=foldertypes, parcelInfosIndex= parcelInfos)
         return res
 

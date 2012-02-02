@@ -46,9 +46,9 @@
                 <tr align=center>
                  <td>
                  <select name="division" value="division"> 
-                    <!--tal:block repeat="div divisions">                       
+                    <tal:block repeat="div divisions">                       
                         <option tal:attributes="selected python: str(div['da']) == division; value python: div['da'];" tal:content="python: div['divname']" />
-                    </tal:block-->
+                    </tal:block>
                  </select>
                  </td>
                  <td><input style="text-transform: uppercase" size="5" maxlength="1" type="text" name="section" tal:attributes="value section"></td>
