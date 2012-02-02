@@ -519,7 +519,12 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                             <tal:applicant condition="python: obj.meta_type == 'Contact'"
                                            define="obj python: hasattr(obj, 'getObject') and obj.getObject() or obj">
                              <div metal:use-macro="here/urban_macros/macros/displayAddress" />
-                            </tal:applicant>
+                             </tal:applicant>
+                             <span tal:define="last_key_event python: getattr(obj, 'last_key_event', None)">
+                               <span tal:condition="python: last_key_event and last_key_event != 'None'" > 
+                                  <br/><span class="discreet" tal:content="last_key_event">Last key Event</span>
+                               </span>
+                             </span>
                         </td>
                     </tal:block>
                     </tal:fields>
