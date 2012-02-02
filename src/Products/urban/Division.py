@@ -125,11 +125,11 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
         if proprietaries:
             proprietary = proprietaries[0].Title()
         else:
-            proprietary = translate('no_proprietary_defined', 'urban', context=self.REQUEST)
+            proprietary = translate('no_proprietary_defined', 'urban', context=self.REQUEST).encode('utf8')
         if self.getNotaryContact():
             notary = self.getNotaryContact()[0].Title()
         else:
-            notary = translate('no_notary_defined', 'urban', context=self.REQUEST)
+            notary = translate('no_notary_defined', 'urban', context=self.REQUEST).encode('utf8')
 
         if proprietary and notary:
             title = "%s - %s - %s" % (self.getReference(), proprietary, notary)
