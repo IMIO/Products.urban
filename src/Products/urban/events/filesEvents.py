@@ -4,8 +4,10 @@ from appy.shared.utils import executeCommand
 import os, time
 from StringIO import StringIO
 from Products.urban.utils import getOsTempFolder
+from Products.urban.config import URBAN_TYPES
 from Products.CMFCore.utils import getToolByName
 import logging
+
 logger = logging.getLogger('urban: filesEvents')
 
 CONVSCRIPT = '%s/converter.py' % os.path.dirname(appy.pod.__file__)
@@ -19,15 +21,17 @@ def updateAllTemplatesStylesEvent(object, event):
         #template style is modify, update all template with style.
         templateStylesFileName = _createTemporayTemplateStyle(tool, object)
         if templateStylesFileName:
-            urbanEventTypesFolder = tool.buildlicence.urbaneventtypes
-            numberOfUrbanEventTypes = len(urbanEventTypesFolder.objectValues('UrbanEventType'))
-            logger.info("%d event types to update." % numberOfUrbanEventTypes)
-            #we want a list to be able to call .index here above
-            urbanEventTypes = list(urbanEventTypesFolder.objectValues('UrbanEventType'))
-            for uet in urbanEventTypes:
-                logger.info("Updating UrbanEventType %d/%d" % (urbanEventTypes.index(uet) + 1, numberOfUrbanEventTypes))
-                for fileTemplate in uet.objectValues('ATBlob'):
-                    _updateTemplateStyle(tool, fileTemplate, templateStylesFileName)
+            for licence_type in URBAN_TYPES:
+                urbanEventTypesFolder = getattr(tool, licence_type.lower()).urbaneventtypes
+                import ipdb; ipdb.set_trace()
+                numberOfUrbanEventTypes = len(urbanEventTypesFolder.objectValues('UrbanEventType'))
+                logger.info("%d event types to update." % numberOfUrbanEventTypes)
+                #we want a list to be able to call .index here above
+                urbanEventTypes = list(urbanEventTypesFolder.objectValues('UrbanEventType'))
+                for uet in urbanEventTypes:
+                    logger.info("Updating UrbanEventType %d/%d" % (urbanEventTypes.index(uet) + 1, numberOfUrbanEventTypes))
+                    for fileTemplate in uet.objectValues('ATBlob'):
+                        _updateTemplateStyle(tool, fileTemplate, templateStylesFileName)
             #delete temporary styles files
             os.remove(templateStylesFileName)
     return
