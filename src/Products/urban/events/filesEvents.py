@@ -14,12 +14,12 @@ def updateAllTemplatesStylesEvent(object, event):
     """
         Event activated by the modification of the configuration of urban
     """
-    if object.REQUEST.form.has_key('templateStyles_file'):
+    if object.absolute_url_path().endswith('/portal_urban/globaltemplates/styles.odt'):
         tool = getToolByName(object, 'portal_urban')
         #template style is modify, update all template with style.
-        templateStylesFileName = _createTemporayTemplateStyle(tool)
+        templateStylesFileName = _createTemporayTemplateStyle(tool, object)
         if templateStylesFileName:
-            urbanEventTypesFolder = object.buildlicence.urbaneventtypes
+            urbanEventTypesFolder = tool.buildlicence.urbaneventtypes
             numberOfUrbanEventTypes = len(urbanEventTypesFolder.objectValues('UrbanEventType'))
             logger.info("%d event types to update." % numberOfUrbanEventTypes)
             #we want a list to be able to call .index here above
@@ -27,7 +27,7 @@ def updateAllTemplatesStylesEvent(object, event):
             for uet in urbanEventTypes:
                 logger.info("Updating UrbanEventType %d/%d" % (urbanEventTypes.index(uet) + 1, numberOfUrbanEventTypes))
                 for fileTemplate in uet.objectValues('ATBlob'):
-                    _updateTemplateStyle(object, fileTemplate, templateStylesFileName)
+                    _updateTemplateStyle(tool, fileTemplate, templateStylesFileName)
             #delete temporary styles files
             os.remove(templateStylesFileName)
     return
@@ -48,12 +48,10 @@ def updateTemplateStylesEvent(object, event):
             os.remove(templateStylesFileName)
     return
 
-def _createTemporayTemplateStyle(tool):
+def _createTemporayTemplateStyle(tool, templateStyles):
     """
         create Temporary file from template style
     """
-    global_templates = getattr(tool, 'globaltemplates')
-    templateStyles = getattr(global_templates, 'styles.odt')
     if templateStyles and templateStyles.size:
         #save in temporary file, the templateStyles
         templateStylesFileName = '%s/%s_%f.%s' % (getOsTempFolder(), 'templateStyles', time.time(),'odt')

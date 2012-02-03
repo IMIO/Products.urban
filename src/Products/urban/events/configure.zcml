@@ -45,11 +45,8 @@
   <subscriber for="..interfaces.IUrbanEventInquiry
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".urbanEventInquiryEvents.setLinkedInquiry" />
-  <subscriber for="..interfaces.IUrbanTool
+  <subscriber for="Products.ATContentTypes.interfaces.file.IFileContent
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".filesEvents.updateAllTemplatesStylesEvent" />
-  <subscriber for="Products.ATContentTypes.interfaces.IATFile
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".filesEvents.updateTemplateStylesEvent" />                         
 
 </configure>
