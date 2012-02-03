@@ -23,7 +23,6 @@ def updateAllTemplatesStylesEvent(object, event):
         if templateStylesFileName:
             for licence_type in URBAN_TYPES:
                 urbanEventTypesFolder = getattr(tool, licence_type.lower()).urbaneventtypes
-                import ipdb; ipdb.set_trace()
                 numberOfUrbanEventTypes = len(urbanEventTypesFolder.objectValues('UrbanEventType'))
                 logger.info("%d event types to update." % numberOfUrbanEventTypes)
                 #we want a list to be able to call .index here above
