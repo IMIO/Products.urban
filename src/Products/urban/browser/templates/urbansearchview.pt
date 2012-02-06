@@ -15,8 +15,8 @@
                  search_arg request/search_arg|nothing;
                  previous_search_by request/search_by|nothing;
                  licence_types view/getLicenceTypes;">
-        <h1 class="documentFirstHeading" i18n:translate="urban_searchbyapplicant_descr">
-            Title
+        <h1 class="documentFirstHeading" i18n:translate="urban_search_descr">
+           Search licences 
         </h1>
 <form action="" method="get" id="search">
 <fieldset><legend><strong i18n:translate="urban_search_parameters">Enter your parameters for the search</strong></legend>
@@ -31,9 +31,8 @@
  <input id=search_by name=search_by type=hidden tal:attributes="value previous_search_by">
  <div id="urbanViewWithTabbing">
  <dl class="formTabs enableFormTabbing">
-  <dt class="formTab" id="fieldsetlegend-urban_searchbystreet" 
-     i18n:domain="plone" i18n:translate="label_schema_urban_searchbystreet">
-    <span>By street</span>
+  <dt class="formTab" id="fieldsetlegend-urban_searchbystreet">
+    <span i18n:translate="urban_search_parcel_by_location">By street</span>
   </dt>
   <dd id="fieldset-urban_searchbystreet"
    onmouseover="document.getElementById('search').elements['search_by'].value='street';
@@ -42,9 +41,8 @@
    search_form.setAttribute('action', base_url.getAttribute('href')+'street')">
   <metal:listing use-macro="context/@@urbansearch-macros/searchbystreetMacro" />
   </dd>
-  <dt class="formTab" id="fieldsetlegend-urban_searchbyapplicant" 
-     i18n:domain="plone" i18n:translate="label_schema_urban_searchbyapplicant">
-    <span>By applicant</span>
+  <dt class="formTab" id="fieldsetlegend-urban_searchbyapplicant">
+    <span i18n:translate="urban_search_parcel_by_proprietary">By applicant</span>
   </dt>
   <dd id="fieldset-urban_searchbyapplicant" 
    onmouseover="document.getElementById('search').elements['search_by'].value='applicant';
@@ -53,9 +51,8 @@
    search_form.setAttribute('action', base_url.getAttribute('href')+'applicant')">
    <metal:listing use-macro="context/@@urbansearch-macros/searchbyapplicantMacro" />
   </dd>
- <dt class="formTab" id="fieldsetlegend-urban_searchbyparcel" 
-     i18n:domain="plone" i18n:translate="label_schema_urban_searchbyparcel">
-    <span>By parcel</span>
+ <dt class="formTab" id="fieldsetlegend-urban_searchbyparcel">
+    <span i18n:translate="urban_search_parcel_by_cadastral_reference">By parcel</span>
  </dt>
  <dd id="fieldset-urban_searchbyparcel" 
    onmouseover="document.getElementById('search').elements['search_by'].value='parcel'; 
