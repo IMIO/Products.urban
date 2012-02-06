@@ -2302,8 +2302,8 @@ msgstr ""
 msgid "urban_search_parcel_by_location"
 msgstr ""
 
-#. Default: "Proprietary"
-msgid "urban_search_parcel_by_proprietary"
+#. Default: "Name"
+msgid "urban_search_parcel_by_name"
 msgstr ""
 
 msgid "urban_search_result"

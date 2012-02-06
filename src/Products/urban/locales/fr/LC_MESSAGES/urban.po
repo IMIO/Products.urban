@@ -2306,9 +2306,9 @@ msgstr "Référence cadastrale"
 msgid "urban_search_parcel_by_location"
 msgstr "Adresse"
 
-#. Default: "Proprietary"
-msgid "urban_search_parcel_by_proprietary"
-msgstr "Propriétaire"
+#. Default: "Name"
+msgid "urban_search_parcel_by_name"
+msgstr "Nom"
 
 msgid "urban_search_result"
 msgstr "Résultat de la recherche"
