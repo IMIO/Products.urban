@@ -1999,7 +1999,7 @@ msgstr ""
 
 #. Default: "Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word"
 #: urban_searchbyapplicant.py
-msgid "urban_label_searchbyapplicant_descr"
+msgid "urban_label_searchbyname_descr"
 msgstr ""
 
 #. Default: "Section"

@@ -2002,8 +2002,8 @@ msgstr "Type de voirie"
 
 #. Default: "Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word"
 #: urban_searchbyapplicant.py
-msgid "urban_label_searchbyapplicant_descr"
-msgstr "Entrez le nom, le prénom et/ou le numéro de registre national.  Vous pouvez utiliser le caractère '*' pour spécifier que vous cherchez sur une partie de mot"
+msgid "urban_label_searchbyname_descr"
+msgstr "Entrez le nom, le prénom ou le numéro de registre national.  Vous pouvez utiliser le caractère '*' pour spécifier que vous cherchez sur une partie de mot"
 
 #. Default: "Section"
 #: PortionOut.py

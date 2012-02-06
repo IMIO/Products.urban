@@ -24,7 +24,7 @@
                 <label tal:content="contact_type" i18n:domain="plone" i18n:translate="">Contact type</label>  
  </span>
  <p align="left" class="discreet" i18n:translate="urban_label_searchbyname_descr">
-      Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word
+      Enter the name, the surname or the national register number.  You can use '*' to define if you search on a partial word
  </p>
  <input size="50" type="text" name="name" tal:attributes="value python: last_encoded_name">
 </div>
