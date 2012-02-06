@@ -32,7 +32,7 @@
  <div id="urbanViewWithTabbing">
  <dl class="formTabs enableFormTabbing">
   <dt class="formTab" id="fieldsetlegend-urban_searchbystreet">
-    <span i18n:translate="urban_search_parcel_by_location">By street</span>
+    <span i18n:translate="urban_search_parcel_by_location">Street</span>
   </dt>
   <dd id="fieldset-urban_searchbystreet"
    onmouseover="document.getElementById('search').elements['search_by'].value='street';
@@ -41,18 +41,18 @@
    search_form.setAttribute('action', base_url.getAttribute('href')+'street')">
   <metal:listing use-macro="context/@@urbansearch-macros/searchbystreetMacro" />
   </dd>
-  <dt class="formTab" id="fieldsetlegend-urban_searchbyapplicant">
-    <span i18n:translate="urban_search_parcel_by_proprietary">By applicant</span>
+  <dt class="formTab" id="fieldsetlegend-urban_searchbyname">
+    <span i18n:translate="urban_search_parcel_by_name">Name</span>
   </dt>
-  <dd id="fieldset-urban_searchbyapplicant" 
-   onmouseover="document.getElementById('search').elements['search_by'].value='applicant';
+  <dd id="fieldset-urban_searchbyname" 
+   onmouseover="document.getElementById('search').elements['search_by'].value='name';
    var base_url=document.getElementById('base_url');
    var search_form=document.getElementById('search');
-   search_form.setAttribute('action', base_url.getAttribute('href')+'applicant')">
-   <metal:listing use-macro="context/@@urbansearch-macros/searchbyapplicantMacro" />
+   search_form.setAttribute('action', base_url.getAttribute('href')+'name')">
+   <metal:listing use-macro="context/@@urbansearch-macros/searchbynameMacro" />
   </dd>
  <dt class="formTab" id="fieldsetlegend-urban_searchbyparcel">
-    <span i18n:translate="urban_search_parcel_by_cadastral_reference">By parcel</span>
+    <span i18n:translate="urban_search_parcel_by_cadastral_reference">Parcel</span>
  </dt>
  <dd id="fieldset-urban_searchbyparcel" 
    onmouseover="document.getElementById('search').elements['search_by'].value='parcel'; 

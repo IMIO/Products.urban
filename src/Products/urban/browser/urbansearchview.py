@@ -24,6 +24,9 @@ class UrbanSearchView(BrowserView):
     def getLicenceTypes(self):
         return URBAN_TYPES
 
+    def getContactTypes(self):
+        return ['Architect', 'Notary', 'Geometrician']
+
     def getSearchArgument(self, key_to_match):
         request = aq_inner(self.request)
         if type(key_to_match) == list:
@@ -40,18 +43,51 @@ class UrbanSearchView(BrowserView):
         foldertypes = request.get('foldertypes', [])
         arguments = {
                         'street':self.getSearchArgument('street'),
-                        'applicant':self.getSearchArgument('applicant'),
+                        'name':self.getSearchArgument(['name', 'contacttypes']),
                         'parcel':self.getSearchArgument(['division','section', 'radical', 'bis', 'exposant', 'puissance', 'partie']),
                     }  
         if search_by == 'street':
             return self.searchByStreet(foldertypes, arguments.get(search_by, []))
-        elif search_by == 'applicant':
-            return self.searchByApplicant(foldertypes, arguments.get(search_by, []))
+        elif search_by == 'name':
+            return self.searchByName(foldertypes, arguments.get(search_by, []))
         elif search_by == 'parcel':
             return self.searchByParcel(foldertypes, arguments.get(search_by, []))
         return None
 
-    def searchByApplicant(self, foldertypes, applicant_infos_index):
+    def searchByName(self, foldertypes, arguments):
+        """
+          Find licences by name and by contact categories
+        """
+        name = arguments[0]
+        contact_types = arguments[1]
+        if not type(contact_types) == list:
+            contact_types = [contact_types]
+        result = []
+        for contact_type in contact_types:
+            if contact_type == 'Applicant':
+                result.extend(self.searchByApplicantName(foldertypes, name))
+            else:
+                result.extend(self.searchByContactName(foldertypes, name, contact_type))
+        return result
+
+    def searchByContactName(self, foldertypes, name, contact_type):
+        """
+          Find licences by contact type and by name
+        """
+        catalogTool = getToolByName(self, 'portal_catalog')
+        contacts = licence_ids = []
+        try:
+            contacts = [brain.getObject() for brain in catalogTool(portal_type=contact_type, SearchableText=name)]
+        except ParseError:
+            #in case something like '*' is entered, ZCTextIndex raises an error...
+            ptool = getToolByName(self, "plone_utils")
+            ptool.addPortalMessage(msg(u"please_enter_more_letters"), type="info")
+            pass 
+        for contact in contacts:
+            licence_ids.extend([ref.getId() for ref in contact.getBRefs()])
+        return catalogTool(portal_type=foldertypes, id=licence_ids)
+
+    def searchByApplicantName(self, foldertypes, applicant_infos_index):
         """
           Find licences with applicant paramaters
         """
