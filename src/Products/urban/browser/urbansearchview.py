@@ -62,12 +62,17 @@ class UrbanSearchView(BrowserView):
         contact_types = arguments[1]
         if not type(contact_types) == list:
             contact_types = [contact_types]
+        result_uids = set()
         result = []
         for contact_type in contact_types:
             if contact_type == 'Applicant':
-                result.extend(self.searchByApplicantName(foldertypes, name))
+                sub_result = self.searchByApplicantName(foldertypes, name)
             else:
-                result.extend(self.searchByContactName(foldertypes, name, contact_type))
+                sub_result = self.searchByContactName(foldertypes, name, contact_type)
+            for brain in sub_result:
+                if brain.UID not in result_uids:
+                    result_uids.add(brain.UID)
+                    result.append(brain)
         return result
 
     def searchByContactName(self, foldertypes, name, contact_type):
