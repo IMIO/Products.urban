@@ -100,6 +100,7 @@ def postInstall(context):
     typesToRegister = {
                        'Architect': 1,
                        'UrbanCertificateOne': 1,
+                       'UrbanCertificateTwo':1,
                        'NotaryLetter': 1,
                        'Notary': 1,
                        'Proprietary': 1,
