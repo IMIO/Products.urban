@@ -141,6 +141,22 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IUrbanCertificateBase"
+     name="urbancertificatetwoview"
+     class=".urbancertificatetwoview.UrbanCertificateTwoView"
+     template="templates/urbancertificatetwoview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="urbancertificatetwo-macros"
+     for="Products.urban.interfaces.IUrbanCertificateBase"
+     class=".urbancertificatetwoview.UrbanCertificateTwoMacros"
+     template="templates/urbancertificatetwomacros.pt"
+     permission="zope2.View"
+  />
+
+ <browser:page
      for="Products.urban.interfaces.IDivision"
      name="divisionview"
      class=".divisionview.DivisionView"
