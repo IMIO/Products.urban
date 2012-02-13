@@ -415,6 +415,19 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
                     },
                    ),
+                   'urbancertificatetwo':
+                   (
+                    {
+                    'id':"depot-de-la-demande",
+                    'title':"Dépôt de la demande",
+                    'activatedFields': [],
+                    'deadLineDelay': 15,
+                    'podTemplates': (
+                                     {'id': "cu2-recepisse", 'title': "Récépissé de la demande"},
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+                    },
+                   ),
                    'division':
                    (
                     {
