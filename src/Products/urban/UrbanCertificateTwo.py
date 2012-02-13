@@ -112,5 +112,17 @@ registerType(UrbanCertificateTwo, PROJECTNAME)
 # end of class UrbanCertificateTwo
 
 ##code-section module-footer #fill in your manual code here
+def finalizeSchema(schema, folderish=False, moveDiscussion=True):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('referenceDGATLP', after='reference')
+    schema.moveField('notaryContact', after='workLocations')
+    schema.moveField('foldermanagers', after='notaryContact')
+    schema.moveField('description', after='opinionsToAskIfWorks')
+    schema.moveField('folderCategoryTownship', after='RCU')
+    return schema
+
+finalizeSchema(UrbanCertificateTwo_schema)
 ##/code-section module-footer
 
