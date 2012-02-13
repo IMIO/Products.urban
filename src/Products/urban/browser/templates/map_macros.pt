@@ -1,5 +1,5 @@
 
-<div metal:define-macro="urbanMapCSS" tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
+<div metal:define-macro="urbanMapCSS">
    <link rel="stylesheet" type="text/css" href="https://urbanmap.lescommunes.be/lib/ext/Ext/resources/css/ext-all.css"/>
    <link rel="stylesheet" type="text/css" href="https://urbanmap.lescommunes.be/lib/ext/Ext/resources/css/xtheme-gray.css"/>
    <link rel="stylesheet" type="text/css" href="https://urbanmap.lescommunes.be/lib/openlayers/theme/default/style.css"/>
@@ -7,7 +7,7 @@
    <link rel="stylesheet" type="text/css" href="https://urbanmap.lescommunes.be/app/css/main.css"/> 
 </div>
 
-<div metal:define-macro="urbanMapScriptBase" tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
+<div metal:define-macro="urbanMapScriptBase" tal:define="pylonsHost context/portal_urban/getPylonsHost">
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/lib/ext/Ext/adapter/ext/ext-base.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/lib/ext/Ext/ext-all.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/lib/openlayers/SingleFile.js"></script>
@@ -47,15 +47,15 @@
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/UrbanMap.LayerStore.js"></script>
 </div>
 
-<div metal:define-macro="urbanMapScript" tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
-	<script tal:content="string:var NISNum='${context/portal_url/portal_urban/getNISNum}';var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">    
+<div metal:define-macro="urbanMapScript">
+	<script tal:content="string:var NISNum='${context/portal_urban/getNISNum}';var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">    
 	</script>        
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/urban-layout.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/urban-map.js"></script>   
 </div>
 
-<div metal:define-macro="urbanFullMapScript" tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
-	<script tal:content="string:var NISNum='${context/portal_url/portal_urban/getNISNum}';var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">    
+<div metal:define-macro="urbanFullMapScript">
+	<script tal:content="string:var NISNum='${context/portal_urban/getNISNum}';var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">    
 	</script>        
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/main-layout.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/main-map.js"></script>   
