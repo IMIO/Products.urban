@@ -586,24 +586,13 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             res[pair['road_equipment']]=pair['road_equipment_details']
         return res
 
-    security.declarePublic('templateListMakers')
-    def templateListMakers(self):
-        """
-          Return a list of folder makers from the config
-        """
-        urbantool = getToolByName(self,'portal_urban')
-        return urbantool.listVocabulary('foldermakers', self)
-
-    def templateOpinionGiverFullname(self, abreviation):
-        for pair in self.templateListMakers():
-            if abreviation in pair:
-                return pair[1]
-        return None
-
     def templateAllOpinions(self):
         all_opinions = list(self.getSolicitRoadOpinionsTo())
         location_opinions = self.getSolicitLocationOpinionsTo()
-        inquiry = self.getLastInquiry()
+        if hasattr(self, 'getLastInquiry'):
+            inquiry = self.getLastInquiry()
+        else:
+            inquiry = None
         inquiry_opinions = None
         if inquiry is not None:
             inquiry_opinions = inquiry.getLinkedInquiry().getSolicitOpinionsTo()
@@ -614,10 +603,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
                     if opinion not in all_opinions:
                         all_opinions.append(opinion)
         return tuple(all_opinions)
-
-    def templateListDerogations(self):
-        urbantool = getToolByName(self,'portal_urban')
-        return urbantool.listVocabulary('derogations', self)
 
     security.declarePublic('listCatchmentAreas')
     def listCatchmentAreas(self):

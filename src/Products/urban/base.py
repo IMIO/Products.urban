@@ -16,6 +16,7 @@ __docformat__ = 'plaintext'
 from zope.component.interface import interfaceToName
 from AccessControl import ClassSecurityInfo
 from Products.CMFCore.utils import getToolByName
+from Products.Archetypes.public import DisplayList
 
 from zope.i18n import translate
 from zope.interface import implements
@@ -374,25 +375,56 @@ class UrbanBase(object):
             return res
 
     security.declarePublic('getValueForTemplate')
-    def getValueForTemplate(self, field_name, obj=None, raw_value=None):
+    def getValueForTemplate(self, field_name, obj=None, raw_value=None, vocabulary=None):
+        """
+          Return the display value of the given field
+        """
+        return self._getValueForTemplate(field_name=field_name, obj=obj, raw_value=raw_value,
+                                         vocabulary=vocabulary)
+ 
+    def getValuesForTemplate(self, field_name, obj=None, raw_value=None, vocabulary=None):
+        """
+          Return a list of the display values of the given field
+        """
+        return self._getValueForTemplate(field_name=field_name, obj=obj, raw_value=raw_value,
+                                         vocabulary=vocabulary, list=True)
+
+    def displayValuesFromVocForTemplate(self, raw_value, vocabulary, obj=None):
+        """
+          Return the display value from a given vocabulary
+        """
+        if not raw_value:
+            return []
+        return self._getValueForTemplate(obj=obj, raw_value=raw_value, vocabulary=vocabulary, list=True)
+
+    security.declarePublic('getValueForTemplate')
+    def _getValueForTemplate(self, field_name='', obj=None, raw_value=None, vocabulary=None, list=False):
         """
           Return the display value of the given field
         """
         if not obj:
             obj = self
-        displaylist = obj.Vocabulary(field_name)[0]
+        if not vocabulary:
+            displaylist = obj.Vocabulary(field_name)[0]
+        else:
+            displaylist = DisplayList(vocabulary)
         if raw_value:
             field_value = raw_value
         else:
             field_object = obj.getField(field_name)
             field_accessor = field_object.getAccessor(obj)
             field_value = field_accessor()
-        return obj.displayValue(displaylist, field_value)
+        if field_value == '':
+            return ''
+        if not list:
+            return obj.displayValue(displaylist, field_value)
+        else:
+            return [obj.displayValue(displaylist, value) for value in field_value]
 
     security.declarePublic('listVocabularyForTemplate')
-    def listVocabularyForTemplate(self, voc_name):
+    def listVocabularyForTemplate(self, voc_name, inUrbanConfig=True):
         """
           List a given vocabulary from the config
         """
         urbantool = getToolByName(self,'portal_urban')
-        return urbantool.listVocabulary(voc_name, self)
+        return urbantool.listVocabulary(voc_name, context=self, inUrbanConfig=inUrbanConfig)
