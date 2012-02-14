@@ -64,7 +64,7 @@ def migrateToPlone4(context):
     #get rid of the Proprietary portal_type, we use Applicant
     migrationProprietaryToContact(context)
     #migration of Layers
-    migrateLayersForMapfish(context)
+    #migrateLayersForMapfish(context) #no more needeed
     #migrate the foldermakers UrbanVocabularyTerms to allow them to link an UrbanEventType
     migrateFoldermakersTerms(context)
     #Move all the FolderManager objects into a single folder at the root of urban config
