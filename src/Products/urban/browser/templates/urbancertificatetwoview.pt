@@ -30,6 +30,11 @@
  <metal:listing use-macro="context/@@urbancertificatetwo-macros/locationMacro" />
 </dd> 
  
+<dt class="formTab" id="fieldsetlegend-urban_investigation_and_advices" i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices"><span>Investigation and advices</span></dt>
+<dd id="fieldset-urban_investigation_and_advices">
+ <metal:listing use-macro="here/urban_macros/macros/urbanInquiriesMacro" />
+</dd>
+
 <dt class="formTab" id="fieldsetlegend-urban_events" i18n:domain="plone" i18n:translate="label_schema_urban_events"><span>Events</span></dt>
 <dd id="fieldset-urban_events">
  <metal:events use-macro="here/urban_macros/macros/urbanEventsMacro" />

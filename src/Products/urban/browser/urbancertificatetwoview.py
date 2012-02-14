@@ -47,6 +47,19 @@ class UrbanCertificateTwoView(BrowserView):
                }
         return dict
 
+    def getInquiriesForDisplay(self):
+        """
+          Returns the inquiries to display on the buildlicence_view
+          This will move to the buildlicenceview when it will exist...
+        """
+        context = aq_inner(self.context)
+        inquiries = context.getInquiries()
+        if not inquiries:
+            #we want to display at least the informations about the inquiry
+            #defined on the licence even if no data have been entered
+            inquiries.append(context)
+        return inquiries
+
 class UrbanCertificateTwoMacros(BrowserView):
     """
       This manage the macros of UrbanCertificateTwo
