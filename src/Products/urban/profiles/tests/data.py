@@ -460,6 +460,17 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
                     },
                     {
+                    'id': "rapport-du-college",
+                    'title': "Rapport du Collège",
+                    'activatedFields': ['decisionDate', 'decision', 'decisionText'],
+                    'deadLineDelay': 15,
+                    'podTemplates': (
+                                     {'id': "cu2-rapp-service", 'title': "Rapport du Service"},
+                                     {'id': "cu2-rapp-college", 'title': "Rapport du Collège"},
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+                    },
+                    {
                     'id':"transmis-dossier-rw",
                     'title':"Transmis du dossier RW",
                     'activatedFields': ["decisionDate", "decision"],
