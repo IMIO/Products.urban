@@ -432,7 +432,7 @@ urbanEventTypes = {
                     'title': "*** Demande d'avis CONFIG ***",
                     'activatedFields': [],
                     'TALCondition': "python: False", 
-                    'podTemplates': ({'id': "urb-avis", 'title': "Courrier de demande d'avis"},),
+                    'podTemplates': ({'id': "cu2-avis", 'title': "Courrier de demande d'avis"},),
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
