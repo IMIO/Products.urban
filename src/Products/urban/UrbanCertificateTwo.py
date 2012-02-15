@@ -90,6 +90,24 @@ class UrbanCertificateTwo(BaseFolder, UrbanCertificateBase, Inquiry, BrowserDefa
 
     # Manually created methods
 
+    security.declarePublic('mayAddInquiryEvent')
+    def mayAddInquiryEvent(self):
+        """
+           This is used as TALExpression for the UrbanEventInquiry
+           We may add an inquiry if we defined one on the licence
+           We may add another if another is defined on the licence and so on
+        """
+        #first of all, we can add an InquiryEvent if an inquiry is defined on the licence at least
+        inquiries = self.getInquiries()
+        urbanEventInquiries = self.getUrbanEventInquiries()
+        #if we have only the inquiry defined on the licence and no start date is defined
+        #it means that no inquiryEvent can be added because no inquiry is defined...
+        #or if every UrbanEventInquiry have already been added
+        if (len(inquiries) == 1 and not self.getInvestigationStart()) or \
+           (len(urbanEventInquiries) >= len(inquiries)):
+            return False
+        return True
+
     security.declarePublic('at_post_create_script')
     def at_post_create_script(self):
         """

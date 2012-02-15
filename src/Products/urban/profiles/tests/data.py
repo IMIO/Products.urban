@@ -428,6 +428,18 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
+                    'id': "enquete-publique",
+                    'title': "Enquête publique",
+                    'activatedFields': ['claimsDate', 'explanationsDate', 'claimsText'],
+                    'deadLineDelay': 15,
+                    'TALCondition': "here/mayAddInquiryEvent",
+                    'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
+                    'specialFunctionUrl': "addInvestigationPO",
+                    'podTemplates': (
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+                    },
+                    {
                     'id':"transmis-dossier-rw",
                     'title':"Transmis du dossier RW",
                     'activatedFields': ["decisionDate", "decision"],
