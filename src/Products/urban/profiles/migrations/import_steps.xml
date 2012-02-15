@@ -177,20 +177,6 @@
     Some folders defined on LicenceConfigs are now at the portal_urban root
  </import-step>
  <import-step
-    id="urban-addFoldersToAllLicences"
-    handler="Products.urban.profiles.migrations.migrate.addFoldersToAllLicences"
-    title="Add fodlercategories and missingparts for every LicenceConfigs"
-    version="2011-12-12T14:00.0">
-      Add fodlercategories and missingparts for every LicenceConfigs
- </import-step>
- <import-step
-    id="urban-addTownshipCategoriesToAllLicences"
-    handler="Products.urban.profiles.migrations.migrate.addTownshipCategoriesToAllLicences"
-    title="Add townshipfoldercategories for every LicenceConfigs"
-    version="2011-12-12T15:00.0">
-      Add townshipfoldercategories for every LicenceConfigs
- </import-step>
- <import-step
     id="urban-migrateDecisionsForDeclarations"
     handler="Products.urban.profiles.migrations.migrate.migrateDecisionsForDeclarations"
     title="Declarations need an extra value to be defined on UrbanVocabularyTerms in portal_urban.decisions"
