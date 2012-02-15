@@ -1183,7 +1183,6 @@ def addTestObjects(context):
     """
     if context.readDataFile('urban_tests_marker.txt') is None:
         return
-
     #add some users, some architects and some foldermanagers...
     #add 3 users, one as manager, one as reader and one as editor...
     site = context.getSite()
@@ -1259,8 +1258,9 @@ def addTestObjects(context):
     #add default UrbanEventTypes for documents generation
     addUrbanEventTypes(context)
     #add OpinionRequest UrbanEventTypes by notifying the creation of their corresponding OrganisationTerm
-    for organisation_term in tool.buildlicence.foldermakers.objectValues():
-        event.notify(ObjectInitializedEvent(organisation_term))
+    for licence_type in ['BuildLicence', 'UrbanCertificateTwo']:
+        for organisation_term in getattr(tool, licence_type.lower()).foldermakers.objectValues():
+            event.notify(ObjectInitializedEvent(organisation_term))
 
     #add some generic templates in configuration
     addGlobalTemplates(context)

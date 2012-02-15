@@ -427,6 +427,14 @@ urbanEventTypes = {
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
+                    {   
+                    'id': "config-opinion-request",
+                    'title': "*** Demande d'avis CONFIG ***",
+                    'activatedFields': [],
+                    'TALCondition': "python: False", 
+                    'podTemplates': ({'id': "urb-avis", 'title': "Courrier de demande d'avis"},),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+                    },
                     {
                     'id': "enquete-publique",
                     'title': "Enquête publique",

@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import moveElementAfter
 
 def createLinkedOpinionRequest(term, event):
-    tool = getToolByName(term, 'portal_urban')
-    foldermakers = tool.buildlicence.foldermakers
-    urban_event_types = tool.buildlicence.urbaneventtypes
+    parentfolder = term.aq_parent
+    urban_event_types = parentfolder.urbaneventtypes
     new_id = '%s-%s' %(term.getId(),'opinion-request')
     if new_id in urban_event_types.objectIds():
         return

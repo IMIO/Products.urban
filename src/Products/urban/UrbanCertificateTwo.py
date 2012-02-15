@@ -90,6 +90,21 @@ class UrbanCertificateTwo(BaseFolder, UrbanCertificateBase, Inquiry, BrowserDefa
 
     # Manually created methods
 
+    security.declarePublic('mayAddOpinionRequestEvent')
+    def mayAddOpinionRequestEvent(self, organisation):
+        """
+           This is used as TALExpression for the UrbanEventOpinionRequest
+           We may add an OpinionRequest if we asked one in an inquiry on the licence
+           We may add another if another inquiry defined on the licence ask for it and so on
+        """
+        limit = 0
+        inquiries = self.getInquiries()
+        for inquiry in inquiries:
+            if organisation in inquiry.getSolicitOpinionsTo():
+                limit += 1
+        limit = limit - len(self.getOpinionRequests(organisation))
+        return limit > 0
+
     security.declarePublic('mayAddInquiryEvent')
     def mayAddInquiryEvent(self):
         """
