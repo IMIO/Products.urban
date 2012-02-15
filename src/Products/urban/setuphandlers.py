@@ -388,7 +388,7 @@ def addUrbanConfigs(context):
                     newFolder.invokeFactory("UrbanVocabularyTerm",id="form_demande",title=u"Formulaire de demande (formulaire 1A) en 3 exemplaires")
                     newFolder.invokeFactory("UrbanVocabularyTerm",id="extrait_cadastral",title=u"Extrait cadastral en 3 exemplaires")
 
-        if urban_type in ['BuildLicence', 'ParcelOutLicence', ]:
+        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo']:
             #add investigation articles folder
             #this is done by a method because the migrateBuildLicencesInvestigationArticles
             #migration step will use it too
