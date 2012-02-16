@@ -10,7 +10,7 @@
 
 <tal:block condition="parcels">
 <div metal:fill-slot="style_slot" >
-    <div metal:use-macro="here/urban_macros/macros/urbanMapCSS" />
+    <div metal:use-macro="here/@@map-macros/urbanMapCSS" />
 </div>
 </tal:block>
 </head>
@@ -152,7 +152,7 @@
 
 
 <tal:block condition="parcels">
-   <div metal:use-macro="here/urban_macros/macros/urbanMapScript" />
+   <div metal:use-macro="here/@@map-macros/urbanMapScript" />
    <form>
     <input type="hidden" id="map_initialized" value="0" />
    </form>
