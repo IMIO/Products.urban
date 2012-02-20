@@ -4,7 +4,7 @@ WSGIPythonHome #VIRTUALENVDIR#
 <VirtualHost #SERVERIP#:80>
     ServerName #APACHESERVER#
     DocumentRoot #URBANMAPDIR#
-    <Directory #URBANMAPDIR#
+    <Directory #URBANMAPDIR#>
     Order allow,deny
     Allow from all
     </Directory>
