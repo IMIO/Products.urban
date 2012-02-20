@@ -1,0 +1,15 @@
+WSGIPythonHome #VIRTUALENVDIR#
+# Possible log values include: debug, info, notice, warn, error, crit, alert, emerg.
+
+<VirtualHost #SERVERIP#:80>
+    ServerName #APACHESERVER#
+    DocumentRoot #URBANMAPDIR#
+    <Directory #URBANMAPDIR#
+    Order allow,deny
+    Allow from all
+    </Directory>
+    WSGIScriptAlias / #URBANMAPWSGI#
+    ErrorLog #APACHEERRORLOG#
+    LogLevel error
+    CustomLog #APACHEACCESSLOG# combined
+</VirtualHost>

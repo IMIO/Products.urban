@@ -6,10 +6,11 @@ import psycopg2.extras
 import sys
 import time
 
-urbanmap_dir = '/srv/urbanmap/urbanMap'  #directory where urbanmap is installed
-pythoneggdir = '/srv/urbanmap/python-eggs'
-config_dir = os.path.join(urbanmap_dir, 'config') #a subdirectory config must be present !
-pylon_instances_file = os.path.join(config_dir, 'pylon_instances.txt')
+virtualenv_dir = '/srv/urbanmap'
+urbanmap_dir = '%s/urbanMap' % virtualenv_dir  #directory where urbanmap is installed
+pythoneggs_dir = '%s/python-eggs' % virtualenv_dir
+config_dir = '%s/config' % urbanmap_dir #a subdirectory config must be present !
+pylon_instances_file = '%s/pylon_instances.txt' % config_dir
 pg_address = 'localhost:5432' #set the ip address if the browser clients aren't local
 domain_name = 'communesplone.be' #the apache servername will be "urb-commune.communesplone.be"
 
@@ -583,6 +584,7 @@ if step in run_steps:
             instance_exists = False
             ini_file = os.path.join(config_dir, '%s.ini'%databasename)
             wsgi_file = os.path.join(config_dir, '%s.wsgi'%databasename)
+            apache_file = os.path.join(config_dir, '%s.apache'%databasename)
             if os.path.exists(pylon_instances_file):
                 ifile = open(pylon_instances_file, 'r')
                 for line in ifile:
@@ -604,9 +606,9 @@ if step in run_steps:
                 ofile.write("%s;%s;%s\n"%(urbanmap_dir, databasename, max_port))
                 ofile.close()
                 print "Modifying %s"%pylon_instances_file
+            import socket
+            serverip = socket.gethostbyname(socket.gethostname())
             if not os.path.exists(ini_file):
-                import socket
-                serverip = socket.gethostbyname(socket.gethostname())
                 std_cur.execute("select min(admnr) from da;")
                 rec = std_cur.fetchone()
                 if not rec:
@@ -636,7 +638,7 @@ if step in run_steps:
                 out = []
                 for line in wfile:
                     outline = line.replace('#URBANMAPDIR#', urbanmap_dir)
-                    outline = outline.replace('#PYTHONEGGCACHE#', pythoneggdir)
+                    outline = outline.replace('#PYTHONEGGCACHE#', pythoneggs_dir)
                     outline = outline.replace('#URBANMAPINI#', ini_file)
                     out.append(outline)
                 wfile.close()
@@ -645,5 +647,23 @@ if step in run_steps:
                     ofile.write(line)
                 ofile.close()
                 print "Writing %s"%wsgi_file
+            if not os.path.exists(apache_file):
+                afile = open(os.path.join(config_dir, 'urbanmap_base.apache'))
+                out = []
+                for line in afile:
+                    outline = line.replace('#URBANMAPDIR#', urbanmap_dir)
+                    outline = outline.replace('#VIRTUALENVDIR#', virtualenv_dir)
+                    outline = outline.replace('#SERVERIP#', serverip)
+                    outline = outline.replace('#APACHESERVER#', "%s.%s" % (databasename.replace('_', '-'), domain_name) )
+                    outline = outline.replace('#URBANMAPWSGI#', wsgi_file)
+                    outline = outline.replace('#APACHEERRORLOG#', os.path.join(config_dir, "%s_error.log"%databasename))
+                    outline = outline.replace('#APACHEACCESSLOG#', os.path.join(config_dir, "%s_access.log"%databasename))
+                    out.append(outline)
+                afile.close()
+                ofile = open(apache_file, 'w')
+                for line in out:
+                    ofile.write(line)
+                ofile.close()
+                print "Writing %s"%apache_file
 
 print "Ending at %s" % time.strftime('%H:%M:%S', time.localtime())
