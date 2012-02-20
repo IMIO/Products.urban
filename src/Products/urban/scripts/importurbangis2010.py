@@ -10,6 +10,7 @@ urbanmap_dir = '/srv/urbanmap/urbanMap'  #directory where urbanmap is installed
 config_dir = os.path.join(urbanmap_dir, 'config') #a subdirectory config must be present !
 pylon_instances_file = os.path.join(config_dir, 'pylon_instances.txt')
 pg_address = 'localhost:5432' #set the ip address if the browser clients aren't local
+domain_name = 'communesplone.be' #the apache servername will be "urb-commune.communesplone.be"
 
 def convertprc(prc):
    
@@ -620,6 +621,7 @@ if step in run_steps:
                         outline = outline.replace('#MAPFISHPRINTDIR#', os.path.dirname(urbanmap_dir))
                         outline = outline.replace('#URBANMAPDIR#', urbanmap_dir)
                         outline = outline.replace('#SERVERIP#', serverip)
+                        outline = outline.replace('#APACHESERVER#', "%s.%s" % (databasename.replace('_', '-'), domain_name) )
                         outline = outline.replace('#SQLALCHEMYURL#', 'postgresql://%s:%s@%s/%s'%(databasename, databasename, pg_address, databasename))
                         out.append(outline)
                     ifile.close()

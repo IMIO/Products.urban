@@ -19,7 +19,6 @@ CREATE TABLE ART
     da          Bigint
 );
 
-
 CREATE TABLE DA
  (
     da          Bigint, 
@@ -33,14 +32,10 @@ CREATE TABLE DA
     adm2            Character varying (50)
 );
 
-
-
 CREATE TABLE LT
  (
     LT          smallint
 );
-
-
 
 CREATE TABLE MAP
  (
@@ -63,15 +58,11 @@ CREATE TABLE MAP
     prc2            Character varying (2)
 );
 
-
-
 CREATE TABLE NA
  (
     na          Character varying (68), 
     naflag          Character varying (2)
 );
-
-
 
 CREATE TABLE NSR
  (
@@ -82,10 +73,6 @@ CREATE TABLE NSR
     rspos           real, 
     nsrprov         Character varying (74)
 );
-
-
-
-
 
 CREATE TABLE PE
  (
@@ -99,8 +86,6 @@ CREATE TABLE PE
     dr          Character varying (90), 
     dr2         Character varying (6)
 );
-
-
 
 CREATE TABLE PRC
  (
@@ -191,7 +176,6 @@ CREATE TABLE PRC
     sheet           Character varying (12)
 );
 
-
 CREATE TABLE PAS
  (
     daS         Character varying (12), 
@@ -210,3 +194,4 @@ CREATE TABLE PAS
     ordC            Integer, 
     prcC            Character varying (24)
 );
+
