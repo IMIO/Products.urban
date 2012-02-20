@@ -1108,18 +1108,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         #we get a field like UrbanCertificateBaseNumerotation on self
         #to get the last numerotation for this kind of licence
+        if not obj.portal_type in URBAN_TYPES:
+            return ''
         fieldObj = self.getField(obj.portal_type + 'Numerotation')
         lastValue = '0'
-        if not fieldObj:
-            #in some case (a portal_type not equals to the meta_type)
-            #the portal_type is not set yet at factory time, try to find it
-            fieldObj = self.getField(obj.REQUEST['__factory__info__']['stack'][0] + 'Numerotation')
-        if fieldObj:
-            #get the last value
-            lastValue = fieldObj.getAccessor(self)()
-            if str(lastValue).isdigit():
-                lastValue = int(lastValue)
-                lastValue = lastValue + 1
+        #get the last value
+        lastValue = fieldObj.getAccessor(self)()
+        if str(lastValue).isdigit():
+            lastValue = int(lastValue)
+            lastValue = lastValue + 1
 
         #evaluate the numerotationTALExpression and pass it obj, lastValue and self
         data = {
