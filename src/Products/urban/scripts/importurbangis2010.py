@@ -7,6 +7,7 @@ import sys
 import time
 
 urbanmap_dir = '/srv/urbanmap/urbanMap'  #directory where urbanmap is installed
+pythoneggdir = '/srv/urbanmap/python-eggs'
 config_dir = os.path.join(urbanmap_dir, 'config') #a subdirectory config must be present !
 pylon_instances_file = os.path.join(config_dir, 'pylon_instances.txt')
 pg_address = 'localhost:5432' #set the ip address if the browser clients aren't local
@@ -581,8 +582,7 @@ if step in run_steps:
             max_port = 5000
             instance_exists = False
             ini_file = os.path.join(config_dir, '%s.ini'%databasename)
-            print pylon_instances_file
-            print ini_file
+            wsgi_file = os.path.join(config_dir, '%s.wsgi'%databasename)
             if os.path.exists(pylon_instances_file):
                 ifile = open(pylon_instances_file, 'r')
                 for line in ifile:
@@ -603,7 +603,8 @@ if step in run_steps:
                 ofile = open(pylon_instances_file, 'a')
                 ofile.write("%s;%s;%s\n"%(urbanmap_dir, databasename, max_port))
                 ofile.close()
-            if not os.path.exists(os.path.join(config_dir, ini_file)):
+                print "Modifying %s"%pylon_instances_file
+            if not os.path.exists(ini_file):
                 import socket
                 serverip = socket.gethostbyname(socket.gethostname())
                 std_cur.execute("select min(admnr) from da;")
@@ -625,9 +626,24 @@ if step in run_steps:
                         outline = outline.replace('#SQLALCHEMYURL#', 'postgresql://%s:%s@%s/%s'%(databasename, databasename, pg_address, databasename))
                         out.append(outline)
                     ifile.close()
-                    ofile = open(os.path.join(config_dir, ini_file), 'w')
+                    ofile = open(ini_file, 'w')
                     for line in out:
                         ofile.write(line)
                     ofile.close()
+                    print "Writing %s"%ini_file
+            if not os.path.exists(wsgi_file):
+                wfile = open(os.path.join(config_dir, 'urbanmap_base.wsgi'))
+                out = []
+                for line in wfile:
+                    outline = line.replace('#URBANMAPDIR#', urbanmap_dir)
+                    outline = outline.replace('#PYTHONEGGCACHE#', pythoneggdir)
+                    outline = outline.replace('#URBANMAPINI#', ini_file)
+                    out.append(outline)
+                wfile.close()
+                ofile = open(wsgi_file, 'w')
+                for line in out:
+                    ofile.write(line)
+                ofile.close()
+                print "Writing %s"%wsgi_file
 
 print "Ending at %s" % time.strftime('%H:%M:%S', time.localtime())
