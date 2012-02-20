@@ -612,7 +612,7 @@ if step in run_steps:
                 else:
                     INS = rec[0]
                     print "INS='%s'"%INS
-                    ifile = open(os.path.join(config_dir, 'base.ini'))
+                    ifile = open(os.path.join(config_dir, 'urbanmap_base.ini'))
                     out = []
                     for line in ifile:
                         outline = line.replace('#PORT#', str(max_port))
