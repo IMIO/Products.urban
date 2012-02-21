@@ -1341,7 +1341,7 @@ def addTestLicences(context):
 
     available_licence_types = {
             'BuildLicence':{
-                'licenceSubject':"Projet d'abattoir de perroquets", 
+                'licenceSubject':"Exemple Permis Urbanisme", 
                 'contact_type':'Applicant',
                 'contact_data': {
                                  'personTitle':'masters', 'name1':'Smith &', 'name2':'Wesson', 
@@ -1350,15 +1350,15 @@ def addTestLicences(context):
                                 },
             },
             'Declaration':{
-                'licenceSubject':"Rien à déclarer", 
+                'licenceSubject':"Exemple Déclaration", 
                 'contact_type':'Applicant',
             }, 
             'Division':{
-                'licenceSubject':'...par trois?',
+                'licenceSubject':'Exemple Division',
                 'contact_type':'Proprietary',
             }, 
             'UrbanCertificateOne':{
-                'licenceSubject':'Extension du parc à lamas',
+                'licenceSubject':'Exemple Certificat Urbanisme 1',
                 'contact_type':'Applicant',
             },
             }
@@ -1389,6 +1389,8 @@ def addTestLicences(context):
         if values.has_key('contact_data'):
             contact_data = values['contact_data']
         licence.invokeFactory(values['contact_type'], id=site.generateUniqueId('contact'), **contact_data)
+        #  call post script
+        licence.at_post_create_script()
         # add a dummy portion out
         portionout_data = {
             'divisionCode':'[code XX]', 'division':'[division XX]', 'section':'[section XX]', 'radical':'[radical XX]',
@@ -1430,6 +1432,7 @@ def addTestLicences(context):
         temp.close()
         urban_docs.write('temp', odtfile.id)
     urban_docs.close()"""
+    return True
 
 def setupExtra(context):
     if context.readDataFile('urban_extra_marker.txt') is None:
