@@ -36,6 +36,7 @@ from Products.Archetypes.event import ObjectInitializedEvent
 from exportimport import addUrbanEventTypes
 from exportimport import addGlobalTemplates
 from Products.urban.utils import generatePassword
+from datetime import date
 ##/code-section HEAD
 
 def isNoturbanProfile(context):
@@ -1282,28 +1283,153 @@ def importStreets(context):
     #fstreets.close()
     pass
 
-
-def addTestBuildlicense(context):
+def addTestLicences(context):
     """
-    Add a Buildlicence for tests purpose ...
+    Create one dummy licence of each type, and generate all their associated events and documents.
     """
     if context.readDataFile('urban_tests_marker.txt') is None:
         return
 
     site = context.getSite()
+    urban_tool = site.portal_urban
     urban_folder = site.urban
-    portal_urban = site.portal_urban
-    buildlicences_folder = urban_folder.buildlicences
-    foldermanager = portal_urban.foldermanagers.foldermanager1
-    architects_folder = buildlicences_folder.architects
 
-    architect = getattr(architects_folder, portal_urban.plone_utils.normalizeString('Archi1Name-Archi1FirstName'))
+    def getDummyValueForField(field, licence):
+        if field.getName() in ['contributors', 'creators', 'language',
+                               'effectiveDate', 'expirationDate', 'creation_date']:
+            return None
+        if field.type == 'boolean':
+            return True
+        elif field.type == 'string' or field.type == 'text' or field.type == 'lines':
+            if hasattr(field, 'vocabulary') and field.vocabulary:
+                if type(field.vocabulary) == str:
+                    return getattr(licence, field.vocabulary)()[0]
+                else:
+                    voc_list = field.vocabulary.getDisplayList(licence)
+                    if len(voc_list) > 1:
+                        return voc_list[1]
+                    elif len(voc_list):
+                        return voc_list[0]
+            if field.type != 'lines':
+                return '[%s XXX]' % field.getName()
+        elif field.type == 'reference':
+            if field.widget.startup_directory:
+                ref_folder = site
+                for directory in field.widget.startup_directory.split('/'):
+                    ref_folder = getattr(ref_folder, directory)
+                return [ref_folder.objectValues()[0]]
+            elif field.widget.base_query:
+                catalog = getToolByName(licence, 'portal_catalog')
+                query = getattr(licence, field.widget.base_query)
+                brains = catalog(query())
+                if brains :
+                    return [brains[0].getObject()]
+        elif field.type == 'datagrid':
+            dummy_value = {}
+            for column_name in field.columns:
+                column = field.widget.columns[column_name]
+                if str(type(column)) == "<class 'Products.DataGridField.SelectColumn.SelectColumn'>":
+                    dummy_value[column_name] = column.getVocabulary(licence)[0]
+                elif str(type(column)) == "<class 'Products.DataGridField.Column.Column'>": 
+                    dummy_value[column_name] = '[%s XXX]' % column_name 
+            return tuple([dummy_value])
+        elif field.type == 'integer':
+            return 42
+        elif field.type == 'datetime':
+            return str(date.today())
+        return None
 
-    licence_id = site.generateUniqueId('homewrecker')
-    buildlicences_folder.invokeFactory('BuildLicence', id=licence_id, licenceSubject='starfish chocolates', usage='for_habitation',architects=[architect], foldermanagers=[foldermanager])
-    licence = getattr(buildlicences_folder, licence_id)
-    licence.invokeFactory("Applicant", id=site.generateUniqueId('smithandwesson'), personTitle='masters', name1='Smith &', name2='Wesson', street='Rue du porc dans le yaourt', number='42', zipcode='5032', city='Couillet' )
-    licence.processForm()
+    available_licence_types = {
+            'BuildLicence':{
+                'licenceSubject':"Projet d'abattoir de perroquets", 
+                'contact_type':'Applicant',
+                'contact_data': {
+                                 'personTitle':'masters', 'name1':'Smith &', 'name2':'Wesson', 
+                                 'street':'Rue du porc dans le yaourt', 'number':'42', 'zipcode':'5032', 
+                                 'city':'Couillet'
+                                },
+            },
+            'Declaration':{
+                'licenceSubject':"Rien à déclarer", 
+                'contact_type':'Applicant',
+            }, 
+            'Division':{
+                'licenceSubject':'...par trois?',
+                'contact_type':'Proprietary',
+            }, 
+            'UrbanCertificateOne':{
+                'licenceSubject':'Extension du parc à lamas',
+                'contact_type':'Applicant',
+            },
+            }
+
+    odt_files = []
+    for licence_type, values in available_licence_types.iteritems():
+        licence_folder = getattr(urban_folder, "%ss" % licence_type.lower())
+        #create the licence
+        licence_id = site.generateUniqueId('test_%s' % licence_type.lower())
+        licence_folder.invokeFactory(licence_type, id=licence_id)
+        licence = getattr(licence_folder, licence_id)
+        #fill each licence field with a dummy value
+        for field in licence.schema.fields() :
+            field_name = field.getName()
+            mutator = field.getMutator(licence)
+            if field_name in values.keys():
+                mutator(values[field_name])
+            elif field_name not in ['id', 'reference', 'contributors', 'creators', 'language',]:
+                field_value = getDummyValueForField(field, licence)
+                if field_value:
+                    mutator(field_value)
+        licence.processForm()
+        # add an applicant or a proprietary
+        contact_data = {
+            'personTitle':'mister', 'name1':'[Prénom XXX]', 'name2':'[Nom XXX]', 'street':'[Nom de rue XXX]', 
+            'number':'[n° XXX]', 'zipcode':'[code postal XXX]', 'city':'[Ville XXX]'
+        }
+        if values.has_key('contact_data'):
+            contact_data = values['contact_data']
+        licence.invokeFactory(values['contact_type'], id=site.generateUniqueId('contact'), **contact_data)
+        # add a dummy portion out
+        portionout_data = {
+            'divisionCode':'[code XX]', 'division':'[division XX]', 'section':'[section XX]', 'radical':'[radical XX]',
+            'bis':'[bis XX]', 'exposant':'[exposant XX]', 'puissance':'[puissance XX]', 'partie':False
+        }
+        if values.has_key('portionout_data'):
+            portionout_data = values['portionout_data']
+        portionout_id = licence.invokeFactory('PortionOut', id=site.generateUniqueId('parcelle'),**portionout_data)
+        portionout = getattr(licence, portionout_id)
+        portionout._renameAfterCreation()
+        portionout.updateTitle()
+        #generate all the urban events
+        eventtype_uids = [brain.UID for brain in urban_tool.listEventTypes(licence, urbanConfigId=licence_type.lower())]
+        for event_type_uid in eventtype_uids:
+            urban_tool.createUrbanEvent(licence.UID(), event_type_uid)
+        #fill each event with dummy values and generate all its documents
+        for urban_event in licence.objectValues(['UrbanEvent', 'UrbanEventInquiry', 'UrbanEventOpinionRequest']):
+            event.notify(ObjectInitializedEvent(urban_event))
+            #fill with dummy values
+            for field in urban_event.schema.getSchemataFields('default'):
+                field_name = field.getName()
+                mutator = field.getMutator(urban_event)
+                if field_name not in ['id', 'title']:
+                    field_value = getDummyValueForField(field,urban_event)
+                    if field_value:
+                        mutator(field_value)
+            #generate the documents
+            if not urban_event.objectValues():
+                for template in urban_event.getTemplates():
+                    urban_tool.createUrbanDoc(template.UID(), urban_event.UID())
+            odt_files.extend(urban_event.objectValues('ATBlob'))
+
+    """#this part gathers all the documents generated in one archive
+    import zipfile
+    urban_docs = zipfile.ZipFile('urban_documents', 'a')
+    for odtfile in odt_files:
+        temp = open('temp', 'wb')
+        temp.write(odtfile.data)
+        temp.close()
+        urban_docs.write('temp', odtfile.id)
+    urban_docs.close()"""
 
 def setupExtra(context):
     if context.readDataFile('urban_extra_marker.txt') is None:
