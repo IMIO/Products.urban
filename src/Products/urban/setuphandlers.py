@@ -80,6 +80,7 @@ def postInstall(context):
 
     #we need external edition so make sure it is activated
     site.portal_properties.site_properties.manage_changeProperties(ext_editor = True)
+    site.portal_memberdata.manage_changeProperties(ext_editor = True)
 
     #install dependencies manually...
     quick_installer = site.portal_quickinstaller
