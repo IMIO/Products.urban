@@ -1432,7 +1432,6 @@ def addTestLicences(context):
         temp.close()
         urban_docs.write('temp', odtfile.id)
     urban_docs.close()"""
-    return True
 
 def setupExtra(context):
     if context.readDataFile('urban_extra_marker.txt') is None:
