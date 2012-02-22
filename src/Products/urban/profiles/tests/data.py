@@ -480,6 +480,21 @@ urbanEventTypes = {
                                      {'id': "cu2-envoi-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
                                     ),
                     },
+                    {
+                    'id': "delivrance-du-certificat-octroi-ou-refus",
+                    'title': "Délivrance du certificat (octroi ou refus)",
+                    'eventDateLabel': "Date de notification",
+                    'activatedFields': ['decisionDate', 'decision'],
+                    'deadLineDelay': 15,
+                    'podTemplates': (
+                                     {'id': "cu2-decision-octroi-dem", 'title': "Octroi/refus du certificat (lettre au demandeur)"},
+                                     {'id': "cu2-decision-octroi-rw", 'title': "Octroi/refus du certificat (lettre à l'Urbanisme)"},
+                                     {'id': "cu2-decision-transmis-reclamants", 'title': "Décision du certificat (transmis aux réclamants)"},
+                                     {'id': "cu2-decision-frais", 'title': "Ventilation des frais"},
+                                     {'id': "cu2-decision-deliberation-college", 'title': "Delibération du collège d'octroi du certificat"},
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+                    },
                    ),
                    'division':
                    (

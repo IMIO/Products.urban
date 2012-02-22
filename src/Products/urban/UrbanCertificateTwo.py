@@ -123,6 +123,63 @@ class UrbanCertificateTwo(BaseFolder, UrbanCertificateBase, Inquiry, BrowserDefa
             return False
         return True
 
+    def getLastDeposit(self):
+        return self._getLastEvent(interfaces.IDepositEvent)
+
+    def getLastInquiry(self):
+        return self._getLastEvent(interfaces.IInquiryEvent)
+
+    def getLastCollegeReport(self):
+        return self._getLastEvent(interfaces.ICollegeReportEvent)
+
+    def getLastTheLicence(self):
+        return self._getLastEvent(interfaces.ITheLicenceEvent)
+
+    def getLastOpinionRequest(self):
+        return self._getLastEvent(interfaces.IOpinionRequestEvent)
+
+    def getAllTechnicalServiceOpinionRequests(self):
+        return self._getAllEvents(interfaces.ITechnicalServiceOpinionRequestEvent)
+
+    def getAllTechnicalServiceOpinionRequestsNoDup(self):
+        allOpinions = self.getAllTechnicalServiceOpinionRequests()
+        allOpinionsNoDup = {}
+        for opinion in allOpinions:
+            actor = opinion.getUrbaneventtypes().getId()
+            allOpinionsNoDup[actor]=opinion
+        return allOpinionsNoDup.values()
+
+    def getAllOpinionRequests(self, organisation=""):
+        if organisation == "":
+            return self._getAllEvents(interfaces.IOpinionRequestEvent)
+        catalog = getToolByName(self, 'portal_catalog')
+        currentPath = '/'.join(self.getPhysicalPath())
+        query = {'path': {'query': currentPath,
+                          'depth': 1},
+                 'meta_type': ['UrbanEvent', 'UrbanEventInquiry'],
+                 'sort_on': 'getObjPositionInParent',
+                 'id' : organisation.lower()}
+        return [brain.getObject() for brain in catalog(**query)]
+
+    def getAllOpinionRequestsNoDup(self):
+        allOpinions = self.getAllOpinionRequests()
+        allOpinionsNoDup = {}
+        for opinion in allOpinions:
+            actor = opinion.getUrbaneventtypes().getId()
+            allOpinionsNoDup[actor]=opinion
+        return allOpinionsNoDup.values()
+
+    def getAllInquiries(self):
+        return self._getAllEvents(interfaces.IInquiryEvent)
+
+    def getAllClaimsTexts(self):
+        claimsTexts = []
+        for inquiry in self.getAllInquiries():
+            text = inquiry.getClaimsText()
+            if text is not "":
+                claimsTexts.append(text)
+        return claimsTexts
+
     security.declarePublic('at_post_create_script')
     def at_post_create_script(self):
         """

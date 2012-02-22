@@ -1363,7 +1363,11 @@ def addTestLicences(context):
                 'licenceSubject':'Exemple Certificat Urbanisme 1',
                 'contact_type':'Applicant',
             },
-            }
+                'UrbanCertificateTwo':{
+                'licenceSubject':'Exemple Certificat Urbanisme 2',
+                'contact_type':'Applicant',
+            },
+     }
 
     odt_files = []
     for licence_type, values in available_licence_types.iteritems():
