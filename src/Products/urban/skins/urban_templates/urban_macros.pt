@@ -500,7 +500,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                          <br /><span tal:content="obj/getAdr2" class="discreet">Street name reworked</span>
                         </td>
                         <td tal:condition="python: field == 'Creator'">
-                         <span tal:content="python: context.portal_membership.getMemberInfo(value) and context.portal_membership.getMemberInfo(value)['fullname'] or ''">Creator fullname</span>
+                         <span tal:content="python: context.portal_membership.getMemberInfo(value) and context.portal_membership.getMemberInfo(value)['fullname'] or value">Creator fullname</span>
                         </td>
                         <td tal:condition="python: field == 'Title'">
                             <span tal:define="global url python: test(obj.portal_type == 'File' and obj.portal_properties.site_properties.ext_editor, url + '/external_edit', url)" />
