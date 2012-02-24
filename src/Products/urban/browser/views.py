@@ -106,17 +106,17 @@ class ProxyController(BrowserView):
     def getProxy(self):
         try:
             url = self.request.get("url")
-            infos = urlparse(url) 
+            #infos = urlparse(url) 
             params = self.request.form
             
             params.pop("url")
             self.request.response.setHeader('content-type', 'text/json')
-            conn = urllib2.urlopen(url+"?%s" % urllib.urlencode(params), timeout=3)
+            conn = urllib2.urlopen(url+"?%s" % urllib.urlencode(params), timeout=6)
             data = conn.read()
             conn.close()
             return data
-        except Exception, e:
-            print e
+        except Exception, msg:
+            logger.error("Cannot open url '%s': %s"%(url, msg))
     
 class testmap(ProxyController):
     pass
