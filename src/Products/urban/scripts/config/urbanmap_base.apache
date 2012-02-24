@@ -3,12 +3,13 @@ WSGIPythonHome #VIRTUALENVDIR#
 
 <VirtualHost #SERVERIP#:80>
     ServerName #APACHESERVER#
+    Options -Indexes
     DocumentRoot #URBANMAPDIR#
     <Directory #URBANMAPDIR#>
     Order allow,deny
     Allow from all
     </Directory>
-    WSGIScriptAlias / #URBANMAPWSGI#
+    WSGIScriptAlias /xxx #URBANMAPWSGI#
     ErrorLog #APACHEERRORLOG#
     LogLevel error
     CustomLog #APACHEACCESSLOG# combined
