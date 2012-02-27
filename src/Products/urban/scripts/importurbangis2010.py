@@ -265,26 +265,24 @@ if step in run_steps:
             os.system(commandesed)
             os.remove(tablename.lower()+'temp3.sql')
             os.remove(tablename.lower()+'temp4.sql')        
+        elif tablename=='PE':
+            commandesed= 'sed "s/, dr+/, dr2/g" '+tablename.lower()+'temp2.sql >'+tablename.lower()+'temp3.sql'
+            os.system(commandesed)            
+            commandesed='sed \'s/$/;/\' '+tablename.lower()+'temp3.sql >'+tablename.lower()+'.sql'
+            os.system(commandesed)
+            os.remove(tablename.lower()+'temp3.sql')            
+        elif tablename=='MAP':
+            commandesed= 'sed "s/, pe+/, pe2/g" '+tablename.lower()+'temp2.sql >'+tablename.lower()+'temp3.sql'
+            os.system(commandesed)            
+            commandesed= 'sed "s/, prc+/, prc2/g" '+tablename.lower()+'temp3.sql >'+tablename.lower()+'temp4.sql'
+            os.system(commandesed)            
+            commandesed='sed \'s/$/;/\' '+tablename.lower()+'temp4.sql >'+tablename.lower()+'.sql'
+            os.system(commandesed)
+            os.remove(tablename.lower()+'temp3.sql')            
+            os.remove(tablename.lower()+'temp4.sql')
         else:
-            if tablename=='PE':
-                commandesed= 'sed "s/, dr+/, dr2/g" '+tablename.lower()+'temp2.sql >'+tablename.lower()+'temp3.sql'
-                os.system(commandesed)            
-                commandesed='sed \'s/$/;/\' '+tablename.lower()+'temp3.sql >'+tablename.lower()+'.sql'
-                os.system(commandesed)
-                os.remove(tablename.lower()+'temp3.sql')            
-            else:
-                if tablename=='MAP':
-                    commandesed= 'sed "s/, pe+/, pe2/g" '+tablename.lower()+'temp2.sql >'+tablename.lower()+'temp3.sql'
-                    os.system(commandesed)            
-                    commandesed= 'sed "s/, prc+/, prc2/g" '+tablename.lower()+'temp3.sql >'+tablename.lower()+'temp4.sql'
-                    os.system(commandesed)            
-                    commandesed='sed \'s/$/;/\' '+tablename.lower()+'temp4.sql >'+tablename.lower()+'.sql'
-                    os.system(commandesed)
-                    os.remove(tablename.lower()+'temp3.sql')            
-                    os.remove(tablename.lower()+'temp4.sql')
-                else:
-                    commandesed='sed \'s/$/;/\' '+tablename.lower()+'temp2.sql >'+tablename.lower()+'.sql'
-                    os.system(commandesed)
+            commandesed='sed \'s/$/;/\' '+tablename.lower()+'temp2.sql >'+tablename.lower()+'.sql'
+            os.system(commandesed)
         os.remove(tablename.lower()+'temp.sql')
         os.remove(tablename.lower()+'temp1.sql')
         os.remove(tablename.lower()+'temp2.sql')
