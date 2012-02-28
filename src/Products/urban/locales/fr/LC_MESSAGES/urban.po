@@ -67,6 +67,66 @@ msgstr "Parcelle(s) trouvée(s)"
 msgid "Geometrician data"
 msgstr "Coordonnées du géomètre"
 
+#. Default: "Acknowledgement"
+msgid "IAcknowledgment type marker interface"
+msgstr "Dossier complet"
+
+#. Default: "College report"
+msgid "ICollegeReport type marker interface"
+msgstr "Rapport du collège"
+
+#. Default: "Communal council"
+msgid "ICommunalCouncil type marker interface"
+msgstr "Conseil communal"
+
+#. Default: "Request deposit"
+msgid "IDeposit type marker interface"
+msgstr "Dépôt de la demande"
+
+#. Default: "Inquiry"
+msgid "IInquiry type marker interface"
+msgstr "Enquête publique"
+
+#. Default: "Missing part"
+msgid "IMissingPart type marker interface"
+msgstr "Pièces manquantes"
+
+#. Default: "Missing part deposit"
+msgid "IMissingPartDeposit type marker interface"
+msgstr "Dépôt des pièces manquantes"
+
+#. Default: "Modification deposit"
+msgid "IModificationDeposit type marker interface"
+msgstr "Dépôt d'un modificatif de la demande"
+
+#. Default: "Opinion request"
+msgid "IOpinionRequest type marker interface"
+msgstr "Demande d'avis"
+
+#. Default: "Prorogation"
+msgid "IProrogation type marker interface"
+msgstr "Prorogation"
+
+#. Default: "Technical service opinion request"
+msgid "ITechnicalServiceOpinionRequest type marker interface"
+msgstr "Demande d'avis du service technique"
+
+#. Default: "Licence delivery"
+msgid "ITheLicence type marker interface"
+msgstr "Délivrance du permis/certificat/..."
+
+#. Default: "Walloon region opinion request"
+msgid "IWalloonRegionOpinionRequest type marker interface"
+msgstr "Demande d'avis à la région wallone"
+
+#. Default: "Walloon region primo"
+msgid "IWalloonRegionPrimo type marker interface"
+msgstr "Envoi du primo dossier"
+
+#. Default: "Work beginning"
+msgid "IWorkBeginning type marker interface"
+msgstr "Début des travaux"
+
 msgid "Licence state"
 msgstr "Etat du permis"
 
