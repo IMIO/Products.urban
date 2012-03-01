@@ -658,6 +658,9 @@ def setDefaultApplicationSecurity(context):
     #portal_urban and application folders
     #give the Editor role on urban application folders
     site = context.getSite()
+    #make the undo action visible for the site manager
+    site.portal_actions.user.undo.visible = True
+    site.manage_permission('List undoable changes',['Site Administrator','Manager'],acquire=1, REQUEST=None)
     #portal_urban local roles
     site.portal_urban.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
     site.portal_urban.manage_addLocalRoles("urban_readers", ("Reader",))
