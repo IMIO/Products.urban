@@ -98,12 +98,19 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
           Return the available optional fields
         """
         res = []
+        abr = {
+            'urban_peb':'(peb) ',
+            'urban_location':'(urb) ',
+            'urban_road':'(voi) ', 
+            'urban_investigation_and_advices':'(enq) ',
+            'urban_description':'',
+        }
         if not FTI_SCHEMAS.has_key(self.licence_portal_type):
             return DisplayList()
         for field in FTI_SCHEMAS[self.licence_portal_type].fields():
             if hasattr(field, 'optional'):
-                res.append((field.getName(), self.utranslate(
-                    field.widget.label_msgid, domain=field.widget.i18n_domain, default=field.widget.label)))
+                res.append((field.getName(), "%s%s" %(abr[field.schemata],
+                    self.utranslate(field.widget.label_msgid, domain=field.widget.i18n_domain, default=field.widget.label))))
         return DisplayList(tuple(res)).sortedByValue()
 
     security.declarePublic('getIconURL')

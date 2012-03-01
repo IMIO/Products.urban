@@ -1,14 +1,14 @@
 from Acquisition import aq_inner
-from Products.Five import BrowserView
+from Products.urban.browser.licenceview import LicenceView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
-class DeclarationView(BrowserView):
+class DeclarationView(LicenceView):
     """
       This manage the view of Declaration
     """
     def __init__(self, context, request):
-        super(BrowserView, self).__init__(context, request)
+        super(LicenceView, self).__init__(context, request)
         self.context = context
         self.request = request
         plone_utils = getToolByName(context, 'plone_utils')
@@ -64,7 +64,7 @@ class DeclarationView(BrowserView):
         return dict
 
 
-class DeclarationMacros(BrowserView):
+class DeclarationMacros(LicenceView):
     """
       This manage the macros of Declaration
     """

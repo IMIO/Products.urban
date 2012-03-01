@@ -8,6 +8,7 @@
 <metal:main_macro define-macro="main">
     <metal:body define-macro="body_macro" 
                 tal:define="useTabbing python: context.portal_urban.getUseTabbing();
+                            empty_tabs view/getEmptyTabs; 
                             licenceConfig python: context.portal_urban.getUrbanConfig(context, urbanConfigId=context.portal_type);
                             usedAttributes licenceConfig/getUsedAttributes;">
 
@@ -19,16 +20,20 @@
 <dd id="fieldset-urban_description">
  <metal:listing use-macro="context/@@buildlicence-macros/descriptionMacro" />
 </dd>
- 
+
+<tal:show condition="python: 'urban_road' not in empty_tabs">
 <dt class="formTab" id="fieldsetlegend-urban_road" i18n:domain="plone" i18n:translate="label_schema_urban_road"><span>Road</span></dt>
 <dd id="fieldset-urban_road">
  <metal:listing use-macro="context/@@buildlicence-macros/roadMacro" />
 </dd>
+</tal:show>
 
+<tal:show condition="python: 'urban_location' not in empty_tabs">
 <dt class="formTab" id="fieldsetlegend-urban_location" i18n:domain="plone" i18n:translate="label_schema_urban_location"><span>Location</span></dt>
 <dd id="fieldset-urban_location">
  <metal:listing use-macro="context/@@buildlicence-macros/locationMacro" />
 </dd>
+</tal:show>
 
 <dt class="formTab" id="fieldsetlegend-urban_investigation_and_advices" i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices"><span>Investigation and advices</span></dt>
 <dd id="fieldset-urban_investigation_and_advices">

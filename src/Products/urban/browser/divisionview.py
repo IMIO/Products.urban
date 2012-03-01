@@ -1,14 +1,14 @@
 from Acquisition import aq_inner
-from Products.Five import BrowserView
+from Products.urban.browser.licenceview import LicenceView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
-class DivisionView(BrowserView):
+class DivisionView(LicenceView):
     """
       This manage the view of Division
     """
     def __init__(self, context, request):
-        super(BrowserView, self).__init__(context, request)
+        super(LicenceView, self).__init__(context, request)
         self.context = context
         self.request = request
         plone_utils = getToolByName(context, 'plone_utils')
@@ -63,7 +63,7 @@ class DivisionView(BrowserView):
                }
         return dict
 
-class DivisionMacros(BrowserView):
+class DivisionMacros(LicenceView):
     """
       This manage the macros of Division
     """
