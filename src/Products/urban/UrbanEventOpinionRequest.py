@@ -56,7 +56,7 @@ UrbanEventOpinionRequest_schema = BaseSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class UrbanEventOpinionRequest(BaseContent, UrbanEvent, BrowserDefaultMixin):
+class UrbanEventOpinionRequest(UrbanEvent, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
