@@ -33,6 +33,7 @@ from zope.component import queryUtility
 from zope.i18n.interfaces import ITranslationDomain
 from zope import event
 from Products.Archetypes.event import ObjectInitializedEvent
+from Products.Archetypes.event import EditBegunEvent 
 from exportimport import addUrbanEventTypes
 from exportimport import addGlobalTemplates
 from Products.urban.utils import generatePassword
@@ -1550,6 +1551,8 @@ def addTestLicences(context):
         #fill each event with dummy values and generate all its documents
         for urban_event in licence.objectValues(['UrbanEvent', 'UrbanEventInquiry', 'UrbanEventOpinionRequest']):
             event.notify(ObjectInitializedEvent(urban_event))
+            if urban_event.getPortalTypeName() == 'UrbanEventOpinionRequest':
+                event.notify(EditBegunEvent(urban_event))
             #fill with dummy values
             for field in urban_event.schema.getSchemataFields('default'):
                 field_name = field.getName()
