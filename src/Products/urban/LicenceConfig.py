@@ -109,7 +109,10 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             return DisplayList()
         for field in FTI_SCHEMAS[self.licence_portal_type].fields():
             if hasattr(field, 'optional'):
-                res.append((field.getName(), "%s%s" %(abr[field.schemata],
+                tab = field.schemata
+                if field.schemata in abr.keys():
+                   tab = abr[tab]
+                res.append((field.getName(), "%s%s" %(tab,
                     self.utranslate(field.widget.label_msgid, domain=field.widget.i18n_domain, default=field.widget.label))))
         return DisplayList(tuple(res)).sortedByValue()
 
