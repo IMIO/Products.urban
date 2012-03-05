@@ -163,17 +163,6 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
 
     # Manually created methods
 
-    security.declarePublic('listEventTypeTypes')
-    def listEventTypeTypes(self):
-        """
-         return a DisplayList of eventtype type
-        """
-        lst=[]
-        vocab = []
-        for elt in lst:
-            vocab.append((elt[0], elt[1]))
-        return DisplayList(tuple(vocab))
-
     security.declarePublic('canBeCreatedInLicence')
     def canBeCreatedInLicence(self, obj):
         """
@@ -190,7 +179,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
             try:
                 res = Expression(TALCondition)(ctx)
             except Exception, e:
-                logger.warn("The condition '%s' defined for element at '%s' is wrong!" % (TALCondition, obj.absolute_url()))
+                logger.warn("The condition '%s' defined for element at '%s' is wrong!  Message is : %s" % (TALCondition, obj.absolute_url(), e))
                 res = False
         return res
 
