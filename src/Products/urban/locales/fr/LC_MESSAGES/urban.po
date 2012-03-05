@@ -69,7 +69,7 @@ msgstr "Coordonnées du géomètre"
 
 #. Default: "Acknowledgement"
 msgid "IAcknowledgment type marker interface"
-msgstr "Dossier complet"
+msgstr "Accusé de réception"
 
 #. Default: "College report"
 msgid "ICollegeReport type marker interface"
