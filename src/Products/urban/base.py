@@ -174,6 +174,7 @@ class UrbanBase(object):
                         'BuildLicence': 'PU',
                         'ParcelOutLicence': 'PL',
                         'UrbanCertificateOne': 'CU1',
+                        'UrbanCertificateBase': 'CU1',
                         'UrbanCertificateTwo': 'CU2',
                         'EnvironmentalDeclaration': 'DeclEnv',
                         'Declaration': 'Decl',
