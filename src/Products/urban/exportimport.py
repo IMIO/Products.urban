@@ -50,10 +50,11 @@ def updateTemplate(context, container, template, new_content, position_after='')
             status.append('no changes')
             return status
         #if in the correct profile but old template has been customised or has the same content than the new one -> no changes
-        elif profile_name == old_template.getProperty("profileName") \
-        and (getMd5Signature(old_template.data) != old_template.getProperty("md5Signature") \
-        or new_md5_signature == old_template.getProperty("md5Signature")):
-            status.append('no changes')
+        elif profile_name == old_template.getProperty("profileName"):
+            if getMd5Signature(old_template.data) != old_template.getProperty("md5Signature"):
+                status.append('no update: the template has been modified')
+            elif new_md5_signature == old_template.getProperty("md5Signature"):
+                status.append('no changes')
             return status
         #else update the template
         else:
