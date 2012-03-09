@@ -721,7 +721,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             applicantTitle = translate('no_applicant_defined', 'urban', context=self.REQUEST).encode('utf8')
         title = "%s - %s - %s" % (self.getReference(), self.getLicenceSubject(), applicantTitle)
         self.setTitle(title)
-        self.reindexObject(idxs=('Title', 'applicantInfosIndex',))
+        self.reindexObject(idxs=('SearchableText','Title', 'applicantInfosIndex',))
 
     security.declarePublic('getAnnoncedDelay')
     def getAnnoncedDelay(self, theObject=False):
