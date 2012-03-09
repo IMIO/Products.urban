@@ -1,6 +1,8 @@
 import os, sys
-sys.path.append('#URBANMAPDIR#')
 os.environ['PYTHON_EGG_CACHE'] = '#PYTHONEGGCACHE#'
+sys.path[0:0] = [
+    '#URBANMAPDIR#',
+]
 
 from paste.deploy import loadapp
 

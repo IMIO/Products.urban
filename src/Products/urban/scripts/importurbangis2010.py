@@ -606,6 +606,9 @@ if step in run_steps:
                 print "Modifying %s"%pylon_instances_file
             import socket
             serverip = socket.gethostbyname(socket.gethostname())
+            pathname = os.path.join(os.path.dirname(sys.argv[0]), 'config')
+            if not os.path.exists(pathname):
+                print "Error: base files dir '%s' not exists"%pathname
             if not os.path.exists(ini_file):
                 std_cur.execute("select min(admnr) from da;")
                 rec = std_cur.fetchone()
@@ -614,7 +617,7 @@ if step in run_steps:
                 else:
                     INS = rec[0]
                     print "INS='%s'"%INS
-                    ifile = open(os.path.join(config_dir, 'urbanmap_base.ini'))
+                    ifile = open(os.path.join(pathname, 'urbanmap_base.ini'))
                     out = []
                     for line in ifile:
                         outline = line.replace('#PORT#', str(max_port))
@@ -632,7 +635,7 @@ if step in run_steps:
                     ofile.close()
                     print "Writing %s"%ini_file
             if not os.path.exists(wsgi_file):
-                wfile = open(os.path.join(config_dir, 'urbanmap_base.wsgi'))
+                wfile = open(os.path.join(pathname, 'urbanmap_base.wsgi'))
                 out = []
                 for line in wfile:
                     outline = line.replace('#URBANMAPDIR#', urbanmap_dir)
@@ -646,7 +649,7 @@ if step in run_steps:
                 ofile.close()
                 print "Writing %s"%wsgi_file
             if not os.path.exists(apache_file):
-                afile = open(os.path.join(config_dir, 'urbanmap_base.apache'))
+                afile = open(os.path.join(pathname, 'urbanmap_base.apache'))
                 out = []
                 for line in afile:
                     outline = line.replace('#URBANMAPDIR#', urbanmap_dir)
