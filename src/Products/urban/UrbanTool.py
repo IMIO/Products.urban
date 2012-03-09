@@ -654,6 +654,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         newParcel = getattr(path, newParcelId)
         newParcel._renameAfterCreation()
         newParcel.updateTitle()
+        newParcel.at_post_create_script()
         self.REQUEST.RESPONSE.redirect(path.absolute_url()+'/view')
 
     security.declarePublic('getParcelsFromTopic')
