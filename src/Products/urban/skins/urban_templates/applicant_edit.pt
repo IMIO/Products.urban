@@ -43,7 +43,7 @@
                    <tal:block define="brains python: context.uid_catalog(UID=workLocations[0]['street']);
                                       streetOrLocality python: brains and brains[0].getObject() or None" condition="streetOrLocality">
                     <span tal:replace="python: streetOrLocality.getStreetName() + ' ' + workLocations[0]['number']" /><br />
-                    <span tal:define="city streetOrLocality/getCity" tal:replace="python: city.getZipCode() + ' ' + city.Title()" />
+                    <span tal:define="city streetOrLocality/getCity" tal:replace="python: str(city.getZipCode()) + ' ' + city.Title()" />
                    </tal:block>
                   </tal:workLocationDefined>
                   <tal:noWorkLocationDefined tal:condition="not: workLocations">
