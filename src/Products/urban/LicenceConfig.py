@@ -101,7 +101,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         abr = {
             'urban_peb':'(peb) ',
             'urban_location':'(urb) ',
-            'urban_road':'(voi) ', 
+            'urban_road':'(voi) ',
             'urban_investigation_and_advices':'(enq) ',
             'urban_description':'',
         }
