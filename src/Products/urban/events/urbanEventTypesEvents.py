@@ -7,7 +7,7 @@ def updateKeyEvent(urbanEventType, event):
     licence_path = uet_path[:2]
     licence_path.extend(['urban', '%ss' % uet_path[3]])
     licence_path = '/'.join(licence_path)
-    for brain in catalog(path=licence_path, Title=urbanEventType.Title().split('(')[0]):
+    for brain in catalog(portal_type='UrbanEvent', path=licence_path, Title=urbanEventType.Title().split('(')[0]):
         urban_event = brain.getObject()
         licence = urban_event.aq_parent
         licence.reindexObject(['last_key_event'])

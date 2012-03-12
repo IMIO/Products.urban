@@ -49,7 +49,7 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".filesEvents.updateAllTemplatesStylesEvent" />
   <subscriber for="..interfaces.IUrbanEventType
-                   Products.Archetypes.interfaces.IObjectEditedEvent"
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventTypesEvents.updateKeyEvent" />
 
 </configure>
