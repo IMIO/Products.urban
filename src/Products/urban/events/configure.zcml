@@ -48,5 +48,8 @@
   <subscriber for="Products.ATContentTypes.interfaces.file.IFileContent
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".filesEvents.updateAllTemplatesStylesEvent" />
+  <subscriber for="..interfaces.IUrbanEventType
+                   Products.Archetypes.interfaces.IObjectEditedEvent"
+              handler=".urbanEventTypesEvents.updateKeyEvent" />
 
 </configure>
