@@ -245,8 +245,9 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         """
           Returns contained templates (File)
         """
-        return self.getUrbaneventtypes().listFolderContents({'portal_type': 'File'})
-
+        wf_tool = getToolByName(self, 'portal_workflow')
+        return [template for template in self.getUrbaneventtypes().listFolderContents({'portal_type': 'File'})
+                if wf_tool.getInfoFor(template, 'review_state') == 'enabled']
     security.declarePublic('eventDateLabel')
     def eventDateLabel(self):
         """

@@ -34,6 +34,7 @@ from zope.i18n.interfaces import ITranslationDomain
 from zope import event
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Archetypes.event import EditBegunEvent 
+from Products.CMFPlacefulWorkflow.PlacefulWorkflowTool import WorkflowPolicyConfig_id
 from exportimport import addUrbanEventTypes
 from exportimport import addGlobalTemplates
 from Products.urban.utils import generatePassword
@@ -118,6 +119,7 @@ def postInstall(context):
     architect_type.content_meta_type = "Contact"
     architect_type.factory = "addContact"
 
+    setUrbanConfigWFPolicy(context)
     addUrbanConfigs(context)
     addApplicationFolders(context)
     setDefaultApplicationSecurity(context)
@@ -137,13 +139,42 @@ def _(msgid, domain, context):
     translation_domain = queryUtility(ITranslationDomain, domain)
     return translation_domain.translate(msgid, target_language='fr', default='')
 
+def setUrbanConfigWFPolicy(context):
+    """
+      Define a local wf policy to allow to enable/disable urban templates documents in the config
+    """
+    site = context.getSite()
+    wf_tool = getToolByName(site, 'portal_workflow')
+    #create the local policy for the urban config
+    placefulwf_tool = getToolByName(site, 'portal_placeful_workflow') 
+    if not hasattr(placefulwf_tool, 'urban_cfg_policy'):
+        placefulwf_tool.manage_addWorkflowPolicy('urban_cfg_policy',
+                                                 workflow_policy_type = 'default_workflow_policy (Simple Policy)',
+                                                 duplicate_id = 'empty')
+    policy = getattr(placefulwf_tool, 'urban_cfg_policy')
+    policy.setTitle('Urban config workflow policy')
+    policy.setChain('File', ('activation_workflow',))
+    wf_tool.updateRoleMappings()
+
+    #set this local policy to the urban config folder
+    tool = getToolByName(site, 'portal_urban')
+    if not hasattr(tool, WorkflowPolicyConfig_id):
+        tool.manage_addProduct['CMFPlacefulWorkflow'].manage_addWorkflowPolicyConfig()
+        wf_policy_cfg = getattr(tool, WorkflowPolicyConfig_id)
+        wf_policy_cfg.setPolicyBelow('urban_cfg_policy')
+    wf_tool.updateRoleMappings()
+
 def addUrbanConfigs(context):
     """
       Add the different urban configs
     """
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
-
+    
+    if not hasattr(tool, WorkflowPolicyConfig_id):
+        tool.manage_addProduct['CMFPlacefulWorkflow'].manage_addWorkflowPolicyConfig()
+        wf_policy_cfg = getattr(tool, WorkflowPolicyConfig_id)
+        wf_policy_cfg.setPolicyBelow('urban_cfg_policy')
     for urban_type in URBAN_TYPES:
         licenceConfigId = urban_type.lower()
         if not hasattr(aq_base(tool), licenceConfigId):

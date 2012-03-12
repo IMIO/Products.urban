@@ -80,8 +80,10 @@ class UrbanEventOpinionRequest(UrbanEvent, BrowserDefaultMixin):
         """
           Returns contained templates (File)
         """
+        wf_tool = getToolByName(self, 'portal_workflow')
         if len(self.getUrbaneventtypes().listFolderContents({'portal_type': 'File'})):
-            return self.getUrbaneventtypes().listFolderContents({'portal_type': 'File'})
+            return [template for template in self.getUrbaneventtypes().listFolderContents({'portal_type': 'File'})
+                    if wf_tool.getInfoFor(template, 'review_state') == 'enabled']
         urbantool = getToolByName(self,'portal_urban')
         return getattr(urbantool.buildlicence.urbaneventtypes, "config-opinion-request").listFolderContents({'portal_type': 'File'})
 

@@ -33,7 +33,7 @@
 <table width=100%>
     <tr valign="top">
         <td width=35%>
-        <metal:listing use-macro="here/urban_macros/macros/urbanEventDataMacro" />
+        <metal:listing use-macro="context/@@urbanevent-macros/urbanEventDataMacro" />
          
         <fieldset tal:define="inqdata view/getInquiryData" tal:condition="inqdata"><strong><legend i18n:translate="inquiry_data">Inquiry data</legend></strong>
         <p class="discreet" i18n:translate="urban_linked_inquiry_help">Here above are data defined for the inquiry.  If you want to change these informations, click on the name of the linked inquiry here above.</p>
@@ -66,8 +66,8 @@
        </table>
        </fieldset>
 
-        <metal:listing use-macro="here/urban_macros/macros/urbanEventGenerateDocumentMacro" />
-        <metal:listing use-macro="here/urban_macros/macros/urbanEventAddAnnexMacro" />
+        <metal:listing use-macro="context/@@urbanevent-macros/urbanEventGenerateDocumentMacro" />
+        <metal:listing use-macro="context/@@urbanevent-macros/urbanEventAddAnnexMacro" />
         </td>
         <td width=65%>
         <fieldset><strong><legend i18n:translate="event_linked_documents">Event linked documents</legend><strong>

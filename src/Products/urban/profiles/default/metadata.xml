@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>0.1.579</version>
+  <version>0.1.580</version>
   <!-- ##code-section METADATA -->
   <dependencies>
     <dependency>profile-Products.DataGridField:default</dependency>
@@ -8,6 +8,7 @@
     <dependency>profile-collective.externaleditor:default</dependency>
     <dependency>profile-communesplone.urban.schedule:default</dependency>
     <dependency>profile-plone.app.referenceintegrity:default</dependency>
+    <dependency>profile-Products.CMFPlacefulWorkflow:CMFPlacefulWorkflow</dependency>
   </dependencies>
   <!-- ##/code-section METADATA -->
 </metadata>

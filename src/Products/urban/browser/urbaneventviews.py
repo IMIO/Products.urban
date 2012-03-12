@@ -46,6 +46,32 @@ class UrbanEventView(BrowserView):
             return True
         return False
 
+    def getListOfTemplatesToGenerate(self):
+        """
+        Return a list of dicts. Each dict contains all the infos needed in the html <href> tag to create the 
+        corresponding link for document generation
+        """
+        context = aq_inner(self.context)
+        template_list = [{'name':template.id.split('.')[0], 
+                          'title':template.Title(),
+                          'class':'',
+                          'href':self._generateDocumentHref(context, template),
+                         } for template in context.getTemplates()]
+        for generated_doc in context.objectValues():
+            for template in template_list:
+                if generated_doc.id.startswith(template['name']):
+                    template['class'] = 'highlighted'
+        return template_list
+
+    def _generateDocumentHref(self, context, template):
+        """
+        """
+        return "%s/createUrbanDoc?urban_template_uid=%s&urban_event_uid=%s" %(context.absolute_url(), template.UID(), context.UID())
+
+class UrbanEventMacros(BrowserView):
+    """
+      This manage the macros of BuildLicence
+    """
 
 class UrbanEventInquiryView(UrbanEventView, MapView):
     """
