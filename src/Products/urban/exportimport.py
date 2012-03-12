@@ -53,14 +53,14 @@ def updateTemplate(context, container, template, new_content, position_after='')
         elif profile_name == old_template.getProperty("profileName"):
             if getMd5Signature(old_template.data) != old_template.getProperty("md5Signature"):
                 status.append('no update: the template has been modified')
+                return status
             elif new_md5_signature == old_template.getProperty("md5Signature"):
                 status.append('no changes')
-            return status
+                return status
         #else update the template
-        else:
-            old_template.setFile(new_content)
-            new_template = old_template
-            status.append('updated')
+        old_template.setFile(new_content)
+        new_template = old_template
+        status.append('updated')
     #else create a new template
     else:
         new_template_id = container.invokeFactory("File", id=new_template_id, title=template['title'], file=new_content) 
