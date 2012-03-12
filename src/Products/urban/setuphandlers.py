@@ -171,10 +171,6 @@ def addUrbanConfigs(context):
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
     
-    if not hasattr(tool, WorkflowPolicyConfig_id):
-        tool.manage_addProduct['CMFPlacefulWorkflow'].manage_addWorkflowPolicyConfig()
-        wf_policy_cfg = getattr(tool, WorkflowPolicyConfig_id)
-        wf_policy_cfg.setPolicyBelow('urban_cfg_policy')
     for urban_type in URBAN_TYPES:
         licenceConfigId = urban_type.lower()
         if not hasattr(aq_base(tool), licenceConfigId):
