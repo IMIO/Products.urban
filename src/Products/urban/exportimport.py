@@ -51,13 +51,15 @@ def updateTemplate(context, container, template, new_content, position_after='')
             return status
         #if in the correct profile but old template has been customised or has the same content than the new one -> no changes
         elif profile_name == old_template.getProperty("profileName"):
-            if getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
-                status.append('no update: the template has been modified')
-                return status
-            elif new_md5_signature == old_template.getProperty("md5Loaded"):
+            # has the template in the product evolved ?
+            if new_md5_signature == old_template.getProperty("md5Loaded"):
                 status.append('no changes')
                 return status
-        #else update the template
+            # the template must be updated. Has the template manually evolved in the tool ?
+            elif getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
+                status.append('no update: the template has been modified')
+                return status
+        # we can update the template
         old_template.setFile(new_content)
         new_template = old_template
         status.append('updated')
