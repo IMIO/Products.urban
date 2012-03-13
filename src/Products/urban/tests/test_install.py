@@ -63,7 +63,8 @@ class TestInstall(unittest.TestCase):
         interfaceName = interfaceToName(portal, IAcknowledgmentEvent)
         eventTypes = catalog(object_provides=interfaceName,
                              sort_on='sortable_title')
-        self.assertEqual(len(eventTypes), 1)
+        # == 2 because theres a test buildlicence where the urbanEvent 'accuse-de-reception' has been created as well
+        self.assertEqual(len(eventTypes), 2)
 
     def testInquirySearchByInterface(self):
         portal = self.layer['portal']
