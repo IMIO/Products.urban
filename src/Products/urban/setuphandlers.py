@@ -333,121 +333,81 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm", id="schema-developpement-espace-regional",
                     title=u"Option particulière du schéma de développement de l'espace régional", 
-                    description="<p>fait l'objet d'une option particulière du schéma de développement de \n\
-                    l'espace régional, à savoir ...;</p>"
+                    description="<p>fait l'objet d'une option particulière du schéma de développement de l'espace régional, à savoir ...;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm", id="situe-en-zone",title=u"Situé en Zone [...]", 
-                    description="<p>est situé en [[python: object.getValueForTemplate('folderZone')]] \n\
-                    au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a \n\
-                    pas cessé de produire ses effets pour le bien précité;</p>"
+                    description="<p>est situé en [[python: object.getValueForTemplate('folderZone')]] au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="plan-de-secteur",title=u"Plan de secteur", 
-                    description="<p>est situé - dans un périmètre ... - en [[python: object.getValueForTemplate('folderZone')]] \n\
-                    au projet - de révision du - de - plan de secteur de ... adopté par ... du ...;</p>"
+                    description="<p>est situé - dans un périmètre ... - en [[python: object.getValueForTemplate('folderZone')]] au projet - de révision du - de - plan de secteur de ... adopté par ... du ...;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="plan-communal-ammenagement",
                     title=u"En Plan Communal d'Aménagement", 
-                    description="<p>est situé en [[python: object.getValueForTemplate('folderZone')]] \n\
-                    dans le périmètre du plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] \n\
-                    approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du \n\
-                    [[python: object.getValueForTemplate('pca', subfield='decreeDate').split()[0] ]] et qui \n\
-                    n'a pas cessé de produire ses effets pour le bien précité;</p>"
+                    description="<p>est situé en [[python: object.getValueForTemplate('folderZone')]] dans le périmètre du plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: object.getValueForTemplate('pca', subfield='decreeDate').split()[0] ]] et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="plan-communal-ammenagement-revision",
                     title=u"En Plan Communal d'Aménagement (révision)", 
-                    description="<p>est situé en [[python: object.getValueForTemplate('folderZone')]] dans le périmètre du projet - de révision du \n\
-                    - de - plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] \n\
-                    approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du \n\
-                    [[python: object.getValueForTemplate('pca', subfield='decreeDate').split()[0] ]];</p>"
+                    description="<p>est situé en [[python: object.getValueForTemplate('folderZone')]] dans le périmètre du projet - de révision du - de - plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: object.getValueForTemplate('pca', subfield='decreeDate').split()[0] ]];</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="perimetre-lotissement",
                     title=u"Dans un lot dans le périmètre d'un lotissement", 
-                    description="<p>est situé sur le(s) lot(s) n° [[python: object.getValueForTemplate('subdivisionDetails')]] \n\
-                    dans le périmètre du lotissement [[python: object.getValueForTemplate('parcellings', subfield='label')]]\n\
-                    non périmé autorisé du [[python: object.getValueForTemplate('parcellings', subfield='authorizationDate').split()[0] ]];</p>"
+                    description="<p>est situé sur le(s) lot(s) n° [[python: object.getValueForTemplate('subdivisionDetails')]] dans le périmètre du lotissement [[python: object.getValueForTemplate('parcellings', subfield='label')]]non périmé autorisé du [[python: object.getValueForTemplate('parcellings', subfield='authorizationDate').split()[0] ]];</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="ssc",title=u"Schéma de structure communal", 
-                    description="<p> est situé en [[python: object.getValueForTemplate('SSC')]] \n\
-                    au schéma de structure communal adopté par \n\
-                    [[python: object.getValueForTemplate('SSC', subfield='extraValue').split(' du ')[0] ]] \n\
-                    du [[python: object.getValueForTemplate('SSC', subfield='extraValue').split(' du ')[1] ]];</p>"
+                    description="<p> est situé en [[python: object.getValueForTemplate('SSC')]] au schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue').split(' du ')[0] ]] du [[python: object.getValueForTemplate('SSC', subfield='extraValue').split(' du ')[1] ]];</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="ssc-revision",title=u"Schéma de structure communal (révision)", 
-                    description="<p> est situé en [[python: object.getValueForTemplate('SSC')]] au projet de - révision du - de - schéma de \n\
-                    structure communal adopté par  [[python: object.getValueForTemplate('SSC', subfield='extraValue').split(' du ')[0] ]] \n\
-                    du [[python: object.getValueForTemplate('SSC', subfield='extraValue').split(' du ')[1] ]];</p>"
+                    description="<p> est situé en [[python: object.getValueForTemplate('SSC')]] au projet de - révision du - de - schéma de structure communal adopté par  [[python: object.getValueForTemplate('SSC', subfield='extraValue').split(' du ')[0] ]] du [[python: object.getValueForTemplate('SSC', subfield='extraValue').split(' du ')[1] ]];</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="rcu",title=u"Règlement communal d'urbanisme", 
-                    description="<p>est situé sur le territoire ou la partie du territoire communal où \n\
-                    le règlement communal d'urbanisme [[python: object.getValueForTemplate('folderZone')]] est applicable;</p>"
+                    description="<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme [[python: object.getValueForTemplate('folderZone')]] est applicable;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="rcu-approuve",title=u"Règlement communal d'urbanisme (approuvé)",
-                    description="<p>est situé sur le territoire ou la partie du territoire communal où le \n\
-                    règlement communal d'urbanisme approuvé par \n\
-                    [[python: object.getValueForTemplate('RCU', subfield='extraValue').split(' du ')[0] ]] \n\
-                    du [[python: object.getValueForTemplate('RCU', subfield='extraValue').split(' du ')[1] ]] est applicable;</p>"
+                    description="<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue').split(' du ')[0] ]] du [[python: object.getValueForTemplate('RCU', subfield='extraValue').split(' du ')[1] ]] est applicable;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="rcu-revision",title=u"Règlement communal d'urbanisme (révision)",
-                    description="<p>est situé sur le territoire ou la partie du territoire communal visé(e) \n\
-                    par le projet - de révision du - de - règlement communal d'urbanisme approuvé par \n\
-                    [[python: object.getValueForTemplate('RCU', subfield='extraValue').split(' du ')[0] ]] \n\
-                    du [[python: object.getValueForTemplate('RCU', subfield='extraValue').split(' du ')[1] ]];</p>"
+                    description="<p>est situé sur le territoire ou la partie du territoire communal visé(e) par le projet - de révision du - de - règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue').split(' du ')[0] ]] du [[python: object.getValueForTemplate('RCU', subfield='extraValue').split(' du ')[1] ]];</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="rcu-approuve-provisoirement",
                     title=u"Règlement communal d'urbanisme (approuvé provisoirement)",
-                    description="<p>est situé sur le territoire ou la partie du territoire communal où le \n\
-                    règlement communal d'urbanisme approuvé provisoirement par \n\
-                    [[python: object.getValueForTemplate('RCU', subfield='extraValue').split(' du ')[0] ]] \n\
-                    du [[python: object.getValueForTemplate('RCU', subfield='extraValue').split(' du ')[1] ]] est applicable;</p>"
+                    description="<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé provisoirement par [[python: object.getValueForTemplate('RCU', subfield='extraValue').split(' du ')[0] ]] du [[python: object.getValueForTemplate('RCU', subfield='extraValue').split(' du ')[1] ]] est applicable;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="rcu-unite-paysagere-urbaine",
                     title=u"Règlement communal d'urbanisme (Unité paysagère urbaine)", 
-                    description="<p>est situé en unité paysagère urbaine de bâtisse en ordre continu Art.15 \n\
-                    au règlement communal d'urbanisme en vigueur;</p>"
+                    description="<p>est situé en unité paysagère urbaine de bâtisse en ordre continu Art.15 au règlement communal d'urbanisme en vigueur;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="natura-2000",title=u"Site Natura 2000",
-                    description="<p>est situé dans le périmètre d'un site Natura 2000 visé par l'article 1bis \n\
-                    alinéa unique 18° de la loi du 12 juillet 1973 sur la conservation de la nature, modifié \n\
-                    par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi \n\
-                    que de la faune et de la flore sauvages;</p>"
+                    description="<p>est situé dans le périmètre d'un site Natura 2000 visé par l'article 1bis alinéa unique 18° de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que de la faune et de la flore sauvages;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="natura-2000-art6",
                     title=u"Natura 2000 (article 6 de la loi du 12 juillet 1973)", 
-                    description="<p>est situé dans le périmètre d'un territoire désigné en vertu de \n\
-                    l'article 6 de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par \n\
-                    le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que \n\
-                    de la faune et de la flore sauvages;</p>"
+                    description="<p>est situé dans le périmètre d'un territoire désigné en vertu de l'article 6 de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que de la faune et de la flore sauvages;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="zone-prise-eau",title=u"Zone de prise d'eau", 
-                    description="<p>est situé dans une zone de prise d'eau, de prévention ou de surveillance \n\
-                    au sens du décret du 30 avril 1990 relatif à la protection et l'exploitation des eaux \n\
-                    souterraines et des eaux potabilisables modifié la dernière fois par le décret du 15 avril \n\
-                    1999 relatif au cycle de l'eau et instituant une société publique de gestion de l'eau;</p>"
+                    description="<p>est situé dans une zone de prise d'eau, de prévention ou de surveillance au sens du décret du 30 avril 1990 relatif à la protection et l'exploitation des eaux souterraines et des eaux potabilisables modifié la dernière fois par le décret du 15 avril 1999 relatif au cycle de l'eau et instituant une société publique de gestion de l'eau;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="plan-expropriation",title=u"Plan d'expropriation", 
-                    description="<p> est situé dans les limites d'un plan d'expropriation approuvé par \n\
-                    ... du ... ; le pouvoir expropriant est : ...;</p>"
+                    description="<p> est situé dans les limites d'un plan d'expropriation approuvé par ... du ... ; le pouvoir expropriant est : ...;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="droit-de-preemption", title=u"Droit de préemption", 
-                    description="<p>est situé dans un périmètre d'application du droit de préemption arrêté \n\
-                    par ... du ...; le(s) bénéficiaires(s) du droit de préemption est (sont) : ...;</p>"
+                    description="<p>est situé dans un périmètre d'application du droit de préemption arrêté par ... du ...; le(s) bénéficiaires(s) du droit de préemption est (sont) : ...;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="perimetre-site-desaffecte",title=u"Périmètre site désaffecté", 
@@ -463,15 +423,11 @@ def addUrbanConfigs(context):
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="classe",title=u"Classé (article 196 du CWATUPE)", 
-                    description="<p>est - inscrit sur la liste de sauvegarde visée à l'article 193 - \n\
-                    classé en application de l'article 196 - situé dans une zone de protection visée à \n\
-                    l'article 209 - localisé dans un site repris à l'inventaire des sites archéologiques \n\
-                    visés à l'article 233 - du Code précité;</p>"
+                    description="<p>est - inscrit sur la liste de sauvegarde visée à l'article 193 - classé en application de l'article 196 - situé dans une zone de protection visée à l'article 209 - localisé dans un site repris à l'inventaire des sites archéologiques visés à l'article 233 - du Code précité;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="raccordable-egout",title=u"Raccordable à l'égout", 
-                    description="<p>est actuellement raccordable à l'égout selon les normes fixées \n\
-                    par le Service Technique Communal;</p>"
+                    description="<p>est actuellement raccordable à l'égout selon les normes fixées par le Service Technique Communal;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="raccordable-egout-prevision",title=u"Raccordable à l'égout (prévision)",
@@ -480,13 +436,11 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="zone-faiblement-habitee",
                     title=u"Zone faiblement habitée (épuration individuelle)", 
-                    description="<p>est situé dans une des zones faiblement habitée qui ne seront pas \n\
-                    pourvue d'égout et qui feront l'objet d'une épuration individuelle;</p>"
+                    description="<p>est situé dans une des zones faiblement habitée qui ne seront pas pourvue d'égout et qui feront l'objet d'une épuration individuelle;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="voirie-suffisamment-equipee",title=u"Voirie suffisamment équipée", 
-                    description="<p>bénéficie d'un accès à une voirie suffisamment équipée en eau, électricité, \n\
-                    pourvue d'un revêtement solide et d'une largeur suffisante compte tenu de la situation des lieux;</p>"
+                    description="<p>bénéficie d'un accès à une voirie suffisamment équipée en eau, électricité, pourvue d'un revêtement solide et d'une largeur suffisante compte tenu de la situation des lieux;</p>"
                 )
                 setHTMLContentType(newFolder, 'description')
 
