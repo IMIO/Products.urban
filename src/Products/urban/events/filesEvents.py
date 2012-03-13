@@ -72,8 +72,8 @@ def _updateTemplateStyle(tool, fileTemplate, templateStylesFileName):
     """
         update template fileTemplate by templateStyle
     """ 
-    style_changes_only = 'md5Styles' in fileTemplate.propertyIds() and \
-                         getMd5Signature(fileTemplate.data) == fileTemplate.getProperty('md5Styles')
+    style_changes_only = 'md5Modified' in fileTemplate.propertyIds() and \
+                         getMd5Signature(fileTemplate.data) == fileTemplate.getProperty('md5Modified')
     #save in temporary file, the template
     tempFileName = '%s/%s_%f.%s' % (getOsTempFolder(), fileTemplate._at_uid, time.time(),'odt')
     newTemplate = file(tempFileName,"w" )
@@ -95,7 +95,7 @@ def _updateTemplateStyle(tool, fileTemplate, templateStylesFileName):
         fileTemplate.setFilename(fileName)
         #if it was a template model and that only styles were modified: update the md5styles property
         if style_changes_only:
-            fileTemplate.manage_changeProperties({'md5Styles':getMd5Signature(fileTemplate.data)})
+            fileTemplate.manage_changeProperties({'md5Modified':getMd5Signature(fileTemplate.data)})
         #delete temporary result files
         os.remove(resTempFileName)
     #delete temporary files

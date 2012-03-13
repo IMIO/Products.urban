@@ -51,10 +51,10 @@ def updateTemplate(context, container, template, new_content, position_after='')
             return status
         #if in the correct profile but old template has been customised or has the same content than the new one -> no changes
         elif profile_name == old_template.getProperty("profileName"):
-            if getMd5Signature(old_template.data) != old_template.getProperty("md5Styles"):
+            if getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
                 status.append('no update: the template has been modified')
                 return status
-            elif new_md5_signature == old_template.getProperty("md5Signature"):
+            elif new_md5_signature == old_template.getProperty("md5Loaded"):
                 status.append('no changes')
                 return status
         #else update the template
@@ -72,7 +72,7 @@ def updateTemplate(context, container, template, new_content, position_after='')
         moveElementAfter(new_template, container, 'id', position_after)
     else:
         container.moveObjectToPosition(new_template.getId(), 0)
-    for property, value in {'profileName':profile_name, 'md5Signature':new_md5_signature, 'md5Styles':new_md5_signature}.items():
+    for property, value in {'profileName':profile_name, 'md5Loaded':new_md5_signature, 'md5Modified':new_md5_signature}.items():
         setProperty(new_template, property, value)
     updateTemplateStylesEvent(new_template, None)
     new_template.reindexObject()

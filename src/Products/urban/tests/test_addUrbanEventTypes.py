@@ -59,13 +59,13 @@ class TestUrbanEventTypes(unittest.TestCase):
         my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertNotEqual(my_file_odt.modified(),my_update_file_datetime)
         # 7) 
-        my_file_odt.manage_changeProperties({"md5Styles":'aaaaaaa'})
+        my_file_odt.manage_changeProperties({"md5Modified":'aaaaaaa'})
         my_update_file_datetime = my_file_odt.modified() #warning, date have changed by manage_changeProperties
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune1','urban-Commune1UpdateTemplates')   
         my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertNotEqual(my_file_odt.modified(),my_update_file_datetime)
         # 8)
-        my_file_odt.manage_changeProperties({"md5Styles":'aaaaaaa'})
+        my_file_odt.manage_changeProperties({"md5Modified":'aaaaaaa'})
         my_file_odt.manage_changeProperties({"profileName":'testCommune1'})
         my_update_file_datetime = my_file_odt.modified() #warning, date have changed by manage_changeProperties
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune1','urban-Commune1UpdateTemplates')   
