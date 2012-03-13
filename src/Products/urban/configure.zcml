@@ -18,7 +18,8 @@
   <include package="Products.MasterSelectWidget"/>
   <include package="collective.externaleditor"/>
   <include package="plone.app.referenceintegrity"/>
-  
+  <include package="communesplone.urban.schedule"/>
+
   <include package=".events" />
   <include package=".browser" />
   
