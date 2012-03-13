@@ -1420,15 +1420,15 @@ def addTestObjects(context):
         import_streets_fromfile(tool)
         import_localities_fromfile(tool)
 
+    #add some generic templates in configuration
+    addGlobalTemplates(context)
+
     #add default UrbanEventTypes for documents generation
     addUrbanEventTypes(context)
     #add OpinionRequest UrbanEventTypes by notifying the creation of their corresponding OrganisationTerm
     for licence_type in ['BuildLicence', 'UrbanCertificateTwo']:
         for organisation_term in getattr(tool, licence_type.lower()).foldermakers.objectValues():
             event.notify(ObjectInitializedEvent(organisation_term))
-
-    #add some generic templates in configuration
-    addGlobalTemplates(context)
 
 def importStreets(context):
     #site = context.getSite()
