@@ -1,4 +1,5 @@
 import os
+import platform
 import uno
 import unohelper
 import urllib
@@ -95,9 +96,13 @@ def appyTE(self):
     combobox1 = addComboBox(oWindow,smgr,ctx,'Combobox',75, 15, 300, 20)
     combobox2 = addComboBox(oWindow,smgr,ctx,'Combobox',75, 40, 300, 20)
     button1=addButton(oWindow,smgr,ctx,"Button",10,75,100,20,('Label',),(u'Insérer',) )
-    req = urllib2.Request(configurl)
-    __dir__ = os.path.dirname(os.path.abspath(__file__))
-    filepath = os.path.join(__dir__, 'config.xml').split(':')[1]
+    filepath = os.path.split(__file__)[0].split('file:')[1]
+    if platform.system() == 'Windows':
+        filepath = filepath[3:]
+    else:
+        filepath = filepath[2:]
+    filepath = '/'.join([filepath, 'config.xml'])
+    filepath = filepath.replace('%20', ' ')
     handle = open(filepath, 'r')
     config = handle.read()
     objects=ET.XML(config).findall('Object')
