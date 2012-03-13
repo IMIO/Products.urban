@@ -21,7 +21,7 @@ def makeContext(pif):
     sqlurlre = re.compile(
         r'^ *sqlalchemy.url *= *postgresql://(\w+):(\w+)@([\w\.]+):\d+/(\w+)',
         re.I)
-    urbanmapre = re.compile(r'^ *urbanmap_url *= *http://([\d\.\:]+)', re.I)
+    urbanmapre = re.compile(r'^ *urbanmap_url *= *http://(\S+)', re.I)
 
     sites = {}
 
@@ -43,7 +43,7 @@ def makeContext(pif):
                 pghost = matching.group(3)
             elif urbanmapre.match(line):
                 pylonhost = urbanmapre.match(line).group(1)
-        geohost = "%s:8080" % serverip
+        geohost = "%s:8500" % serverip
         sites[sitename] = dict(sitename=sitename, nis=nis, pghost=pghost,
              dbname=dbname, dbuser=dbuser, dbpwd=dbpwd,
              geohost=geohost, pylonhost=pylonhost)
