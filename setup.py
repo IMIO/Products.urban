@@ -25,7 +25,7 @@ setup(name='Products.urban',
       extras_require=dict(
             test=['unittest2', 'zope.testing', 'plone.testing',
                   'testfixtures',
-                  'plone.app.testing'],
+                  'plone.app.testing','communesplone.urban.schedule'],
             templates=['Genshi',
                   ]),
       install_requires=[
@@ -44,7 +44,8 @@ setup(name='Products.urban',
           'plone.app.referenceintegrity',
           'psycopg2',
           'testfixtures',
-          'communesplone.urban.schedule'],
+          'communesplone.urban.schedule',
+          'Products.CMFPlacefulWorkflow'],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',
                 'templates_per_site = Products.urban.templates:per_site']

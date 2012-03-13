@@ -15,7 +15,7 @@ URBAN_Z2 = z2.IntegrationTesting(bases=(z2.STARTUP, URBAN_ZCML),
 URBAN = PloneWithPackageLayer(
     zcml_filename="testing.zcml",
     zcml_package=Products.urban,
-    additional_z2_products=('Products.urban',),
+    additional_z2_products=('Products.urban','Products.CMFPlacefulWorkflow'),
     gs_profile_id='Products.urban:default',
     name="URBAN")
 
