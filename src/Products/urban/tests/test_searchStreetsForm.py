@@ -18,7 +18,6 @@ class TestSearchStreetsForm(unittest.TestCase):
         #self.request = self.layer['request']
         self.catalog = getToolByName(self.portal, 'portal_catalog')
         self.buildLicences = self.urban.buildlicences
-        self.searchByStreets = self.urban.urban_searchbystreet
         login(self.portal, 'urbaneditor')
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
