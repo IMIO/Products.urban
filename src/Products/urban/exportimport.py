@@ -36,6 +36,11 @@ def updateTemplate(context, container, template, new_content, position_after='')
             file.manage_addProperty(property_name, property_value, "string")
 
     new_template_id = template['id']
+    replace = False
+    site = context.getSite()
+    # we check if the step is called by the external method urban_replace_templates, with the param replace_template
+    if site.REQUEST.has_key('replace_template'):
+        replace = True
     #in the case of GLOBAL_TEMPLATES, the id already ends with '.odt'
     if not new_template_id.endswith('.odt'):
         new_template_id = "%s.odt" % new_template_id
@@ -48,17 +53,16 @@ def updateTemplate(context, container, template, new_content, position_after='')
         #if not in the correct profile -> no changes
         if profile_name != old_template.getProperty("profileName") != 'tests':
             status.append('no changes')
-            return status
         #if in the correct profile but old template has been customised or has the same content than the new one -> no changes
         elif profile_name == old_template.getProperty("profileName"):
             # has the template in the product evolved ?
             if new_md5_signature == old_template.getProperty("md5Loaded"):
                 status.append('no changes')
-                return status
             # the template must be updated. Has the template manually evolved in the tool ?
-            elif getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
+            elif not replace and getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
                 status.append('no update: the template has been modified')
-                return status
+        if len(status) == 2:
+            return status
         # we can update the template
         old_template.setFile(new_content)
         new_template = old_template
