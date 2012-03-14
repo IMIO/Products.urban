@@ -4,6 +4,7 @@ from time import sleep
 from DateTime import DateTime
 from zope.component import createObject
 from plone.app.testing import login
+from Products.CMFCore.utils import getToolByName
 from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
 
 
@@ -20,6 +21,32 @@ class TestBuildLicence(unittest.TestCase):
         login(portal, 'urbaneditor')
         self.buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
         self.buildLicence = getattr(self.buildLicences, LICENCE_ID)
+
+    def testCreateKeyEvent(self):
+        portal = self.layer['portal']
+        portal.urban.buildlicences.manage_delObjects('licence1')
+        catalog = getToolByName(portal, 'portal_catalog')
+        buildlicence = catalog(portal_type='BuildLicence')[0].getObject()
+        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        urban_event = buildlicence.objectValues('UrbanEvent')[-1]
+        urban_event_type = urban_event.getUrbaneventtypes()
+        #so far the index should still be empty
+        self.assertEqual(buildlicence_brain.last_key_event, None)
+        #we delete the urban event from the buildlicence and set the urbanEventType UET as a key event
+        #the index should remains empty as the licence does not contains an urbanEvent UET
+        buildlicence.manage_delObjects(urban_event.id)
+        urban_event_type.setIsKeyEvent(True)
+        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        self.assertEqual(buildlicence_brain.last_key_event, None)
+        #we add an urbanEvent of type UET, the index last_key_event of the licence should be updated
+        self.portal_urban.createUrbanEvent(buildlicence.UID(), urban_event_type.UID())
+        urban_event = buildlicence.objectValues('UrbanEvent')[-1]
+        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        self.assertEqual(buildlicence_brain.last_key_event.split(',  ')[1], urban_event_type.Title())
+        #we remove this event, the index last_key_event of the licence should be back to empty value
+        buildlicence.manage_delObjects(urban_event.id)
+        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        self.assertEqual(buildlicence_brain.last_key_event, None)
 
     def testGetLastEventWithoutEvent(self):
         self.assertEqual(self.buildLicence._getLastEvent(), None)

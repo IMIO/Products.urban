@@ -5,7 +5,7 @@ from zope import event
 from zope.component.interface import interfaceToName
 from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
-from Products.urban.interfaces import IAcknowledgmentEvent, IDepositEvent
+from Products.urban.interfaces import IAcknowledgmentEvent
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.event import ObjectEditedEvent
 
