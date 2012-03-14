@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import unittest
 from time import sleep
+from zope.component.interface import interfaceToName
 from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
-
+from Products.urban.interfaces import IAcknowledgmentEvent
+from Products.CMFCore.utils import getToolByName
 
 class TestUrbanEventTypes(unittest.TestCase):
 
@@ -14,8 +16,59 @@ class TestUrbanEventTypes(unittest.TestCase):
         self.portal_urban = portal.portal_urban
         self.portal_setup = portal.portal_setup
         login(portal, 'urbaneditor')
-        
-    def testAddUrbanEventTypes(self):
+
+    def testUrbanTemplateIsUnderActivationWF(self):
+        """
+        1) check that templates .odt files in urbanEventTypes are under activation wf policy 
+        2) check that generated .odt files in urbanEvents are NOT under any wf policy
+        """
+        portal = self.layer['portal']
+        wf_tool = getToolByName(portal, 'portal_workflow')
+        catalog = getToolByName(portal, 'portal_catalog')
+        #1) check that templates .odt files in urbanEventTypes are under activation wf policy
+        urban_event_type = getattr(self.portal_urban.buildlicence.urbaneventtypes,'accuse-de-reception',None)
+        template = getattr(urban_event_type, 'urb-accuse.odt', None)
+        state = wf_tool.getInfoFor(template, 'review_state')
+        self.assertEqual(state, 'enabled')
+        #2) check that generated .odt files in urbanEvents are NOT under any wf policy      
+        interfaceName = interfaceToName(portal, IAcknowledgmentEvent)
+        urban_event = catalog(object_provides=interfaceName)[0].getObject()
+        document = getattr(urban_event, 'urb-accuse.odt', None)
+        exception_msg = ""
+        try:
+            state = wf_tool.getInfoFor(document, 'review_state')
+        except Exception, error:
+            exception_msg = "%s" % error
+        self.assertEqual(exception_msg, "No workflow provides '${name}' information.")
+
+    def testListAvailableUrbanTemplates(self):
+        """
+        When a template is disabled in the config, it should be removed from the list of documents to generate.
+        When a template is (re)enabled, it should (re)appears in the list.
+        """
+        portal = self.layer['portal']
+        wf_tool = getToolByName(portal, 'portal_workflow')
+        catalog = getToolByName(portal, 'portal_catalog')
+        urban_event_type = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'accuse-de-reception', None)
+        all_templates = [obj for obj in urban_event_type.objectValues() if obj.portal_type == 'File']
+        urban_event = catalog(object_provides=interfaceToName(portal, IAcknowledgmentEvent))[0].getObject()
+        #by default all the templates should be enabled
+        self.assertEqual(len(all_templates), len(urban_event.getTemplates()))
+        for i in range(len(all_templates)):
+            self.assertEqual(all_templates[i].Title(), urban_event.getTemplates()[i].Title())
+        #disable the first template, the available doc list should contain one element less
+        wf_tool.doActionFor(all_templates[0], 'disable')
+        self.assertEqual(len(all_templates)-1, len(urban_event.getTemplates()))
+        for i in range(len(all_templates)-1):
+            self.assertEqual(all_templates[i+1].Title(), urban_event.getTemplates()[i].Title())
+        #re-enable the first template, the available doc list should contain one element more
+        wf_tool.doActionFor(all_templates[0], 'enable')
+        self.assertEqual(len(all_templates), len(urban_event.getTemplates()))
+        for i in range(len(all_templates)):
+            self.assertEqual(all_templates[i].Title(), urban_event.getTemplates()[i].Title())
+
+
+    def testUrbanTemplatesUpdate(self):
         """ 1) add template (by install of test profil)
             2) update template test by profil test(sans modif) : do nothing
             3) update template test by profil testCommune1 : replace template
