@@ -4,6 +4,7 @@ from appy.shared.utils import executeCommand
 import os, time
 from StringIO import StringIO
 from Products.urban.utils import getOsTempFolder
+from Products.urban.utils import getMd5Signature
 from Products.urban.config import URBAN_TYPES
 from Products.CMFCore.utils import getToolByName
 import logging
@@ -28,9 +29,11 @@ def updateAllTemplatesStylesEvent(object, event):
                 #we want a list to be able to call .index here above
                 urbanEventTypes = list(urbanEventTypesFolder.objectValues('UrbanEventType'))
                 for uet in urbanEventTypes:
-                    logger.info("Updating UrbanEventType %d/%d" % (urbanEventTypes.index(uet) + 1, numberOfUrbanEventTypes))
+                    logger.info("Updating UrbanEventType %d/%d : %s" % (urbanEventTypes.index(uet) + 1, numberOfUrbanEventTypes, uet.Title()))
                     for fileTemplate in uet.objectValues('ATBlob'):
+                        logger.info("  model :  %s" % fileTemplate.Title())
                         _updateTemplateStyle(tool, fileTemplate, templateStylesFileName)
+                        logger.info(" %s => updated" % fileTemplate.Title())
             #delete temporary styles files
             os.remove(templateStylesFileName)
     return
@@ -41,12 +44,13 @@ def updateTemplateStylesEvent(object, event):
     """
     #we update the File if it is a template contained in an UrbanEventType actually
     #and we check if there is something to update
-    if object.aq_inner.aq_parent.Type() == 'UrbanEventType' and object.REQUEST.form.has_key('file_file'):
+    if object.aq_inner.aq_parent.Type() == 'UrbanEventType':
         tool = getToolByName(object, 'portal_urban')
         #template style is modify, update all template with style.
-        templateStylesFileName = _createTemporayTemplateStyle(tool)
+        styles = getattr(getattr(tool, 'globaltemplates'), 'styles.odt')
+        templateStylesFileName = _createTemporayTemplateStyle(tool, styles)
         if templateStylesFileName:
-            _updateTemplateStyle(tool,object,templateStylesFileName)
+            _updateTemplateStyle(tool, object, templateStylesFileName)
             #delete temporary styles files
             os.remove(templateStylesFileName)
     return
@@ -67,7 +71,9 @@ def _createTemporayTemplateStyle(tool, templateStyles):
 def _updateTemplateStyle(tool, fileTemplate, templateStylesFileName):
     """
         update template fileTemplate by templateStyle
-    """    
+    """ 
+    style_changes_only = 'md5Modified' in fileTemplate.propertyIds() and \
+                         getMd5Signature(fileTemplate.data) == fileTemplate.getProperty('md5Modified')
     #save in temporary file, the template
     tempFileName = '%s/%s_%f.%s' % (getOsTempFolder(), fileTemplate._at_uid, time.time(),'odt')
     newTemplate = file(tempFileName,"w" )
@@ -87,6 +93,9 @@ def _updateTemplateStyle(tool, fileTemplate, templateStylesFileName):
         fileTemplate.setFile(resTemplate)
         fileTemplate.setContentType("application/vnd.oasis.opendocument.text")
         fileTemplate.setFilename(fileName)
+        #if it was a template model and that only styles were modified: update the md5styles property
+        if style_changes_only:
+            fileTemplate.manage_changeProperties({'md5Modified':getMd5Signature(fileTemplate.data)})
         #delete temporary result files
         os.remove(resTempFileName)
     #delete temporary files

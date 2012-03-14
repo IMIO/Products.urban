@@ -2,6 +2,7 @@
 from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import moveElementAfter
 from Products.urban.utils import getMd5Signature
+from Products.urban.events.filesEvents import updateTemplateStylesEvent
 import logging
 logger = logging.getLogger('urban: setuphandlers')
 
@@ -29,8 +30,7 @@ def updateTemplates(context, container, templates, starting_position=''):
 
 def updateTemplate(context, container, template, new_content, position_after=''):
     def setProperty(file, property_name, property_value):
-        properties = dict(file.propertyItems())
-        if property_name in properties.keys():
+        if property_name in file.propertyIds():
             file.manage_changeProperties({property_name:property_value})
         else:
             file.manage_addProperty(property_name, property_value, "string")
@@ -51,13 +51,15 @@ def updateTemplate(context, container, template, new_content, position_after='')
             return status
         #if in the correct profile but old template has been customised or has the same content than the new one -> no changes
         elif profile_name == old_template.getProperty("profileName"):
-            if getMd5Signature(old_template.data) != old_template.getProperty("md5Signature"):
-                status.append('no update: the template has been modified')
-                return status
-            elif new_md5_signature == old_template.getProperty("md5Signature"):
+            # has the template in the product evolved ?
+            if new_md5_signature == old_template.getProperty("md5Loaded"):
                 status.append('no changes')
                 return status
-        #else update the template
+            # the template must be updated. Has the template manually evolved in the tool ?
+            elif getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
+                status.append('no update: the template has been modified')
+                return status
+        # we can update the template
         old_template.setFile(new_content)
         new_template = old_template
         status.append('updated')
@@ -72,8 +74,9 @@ def updateTemplate(context, container, template, new_content, position_after='')
         moveElementAfter(new_template, container, 'id', position_after)
     else:
         container.moveObjectToPosition(new_template.getId(), 0)
-    for property, value in {'profileName':profile_name, 'md5Signature':new_md5_signature}.items():
+    for property, value in {'profileName':profile_name, 'md5Loaded':new_md5_signature, 'md5Modified':new_md5_signature}.items():
         setProperty(new_template, property, value)
+    updateTemplateStylesEvent(new_template, None)
     new_template.reindexObject()
     return status
 

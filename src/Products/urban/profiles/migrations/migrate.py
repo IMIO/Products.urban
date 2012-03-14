@@ -16,6 +16,7 @@ from Products.urban.interfaces import ILicenceContainer
 from Products.urban.utils import getMd5Signature
 from Products.urban.config import GLOBAL_TEMPLATES, URBAN_TYPES
 from Products.Archetypes.event import ObjectInitializedEvent
+from Products.CMFPlone.utils import safe_hasattr
 
 logger = logging.getLogger('urban: migrations')
 
@@ -750,31 +751,36 @@ def addMd5SignatureAndProfileNameProperties(context):
 
     portal = context.getSite()
     tool = getToolByName(portal, 'portal_urban')
-    try:
-        #uetFolder = getattr(tool.getUrbanConfig(None, urbanConfigId=None), "urbaneventtypes")
-        blFolder = getattr(tool, 'buildlicence')
-        uetFolder = getattr(blFolder,'urbaneventtypes')
-    except AttributeError:
-        #if we can not get the urbaneventtypes folder, we pass ...
-        logger.warn("An error occured while trying to get the urbaneventtypes in urbanConfig")
-        return
-    import hashlib
-    # for each urbanEventType
-    for objid in uetFolder.objectIds():
-        uet = getattr(uetFolder, objid)
-        # for each template in this urbanEventType
-        for templateid in uet:
-            fileTemplate=getattr(uet,templateid,None)
-            if fileTemplate:
-                dictProperties=dict(fileTemplate.propertyItems())
-                #add properties if not exist
-                if not dictProperties.has_key("md5Signature"):
-                    md5 = hashlib.md5(fileTemplate.data)
-                    md5Signature=md5.digest()
-                    fileTemplate.manage_addProperty("md5Signature",md5Signature,"string")
-                if not dictProperties.has_key("profileName"):
-                    fileTemplate.manage_addProperty("profileName","tests","string")
-                fileTemplate.reindexObject()
+
+    folders = []
+    for urban_type in URBAN_TYPES:
+        licenceConfigId = urban_type.lower()
+        if not safe_hasattr(tool, licenceConfigId): return
+        configFolder = getattr(tool, licenceConfigId)
+        if not safe_hasattr(configFolder, 'urbaneventtypes'): return
+        uetfolder = getattr(configFolder, 'urbaneventtypes')
+        for obj in uetfolder.objectValues('UrbanEventType'):
+            folders.append(obj)
+    if safe_hasattr(tool, 'globaltemplates'):
+        folders.append(getattr(tool, 'globaltemplates'))
+
+    # for each template in an urbanEventType or globaltemplates folder
+    for folder in folders:
+        for fileTemplate in folder.objectValues('ATBlob'):
+            dictProperties=dict(fileTemplate.propertyItems())
+            if dictProperties.has_key("md5Signature"):
+                hex = dictProperties["md5Signature"].encode('hex')
+                fileTemplate._delProperty("md5Signature")
+            else:
+                hex = getMd5Signature('cannot say if template has been modified !?')
+            if not dictProperties.has_key("md5Modified"):
+                fileTemplate.manage_addProperty("md5Modified", hex, "string")
+            if not dictProperties.has_key("md5Loaded"):
+                fileTemplate.manage_addProperty("md5Loaded", hex, "string")
+
+            if not dictProperties.has_key("profileName"):
+                fileTemplate.manage_addProperty("profileName","tests","string")
+            fileTemplate.reindexObject()
     logger.info("Adding md5 signature and 'profileName' property on templates: done!")
 
 def migrateLicenceContainers(context):
@@ -982,15 +988,6 @@ def migrateGlobalTemplates(context):
 
     for template_id, template_infos in old_templates.items():
         newtemplate_id = templates_folder.invokeFactory("File", id=template_id, title=template_infos[1]['title'], file=template_infos[0].data)
-        template = getattr(templates_folder, newtemplate_id)
-        properties = dict(template.propertyItems())
-        file_path = '%s/%s/templates/%s' %('/'.join(context._profile_path.split('/')[:-1]), 'tests', template_id)
-        filesystem_template = file(file_path, 'rb').read()
-        if 'md5Signature' not in properties.keys():
-            md5_signature = getMd5Signature(filesystem_template)
-            template.manage_addProperty('md5Signature', md5_signature, "string")
-        if 'profileName' not in properties.keys():
-            template.manage_addProperty('profileName', 'tests', "string")
         delattr(tool, template_infos[0].getId())
 
 def migrateSomeLocalFoldersAsGlobal(context):

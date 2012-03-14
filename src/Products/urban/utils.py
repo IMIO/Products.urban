@@ -21,7 +21,7 @@ def generatePassword(length):
 
 def getMd5Signature(data):
     md5 = hashlib.md5(data)
-    return md5.digest()
+    return md5.hexdigest()
 
 def getOsTempFolder():
     tmp = '/tmp'
