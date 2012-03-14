@@ -17,6 +17,24 @@ def check_zope_admin():
 
 ###############################################################################
 
+def urban_replace_templates(self, replace_template=0):
+    """
+        Call the updateAllUrbanTemplates from tests profile.
+        Must be called with ...?replace_template=1 in url to replace all templates
+    """
+    if not check_zope_admin():
+        return "You must be a zope manager to run this script"
+    if not replace_template:
+        return "Must be called with ...?replace_template=1 in url to replace all templates"
+    from Products.CMFCore.utils import getToolByName
+    ps = getToolByName(self, 'portal_setup')
+    ps.runImportStepFromProfile('profile-Products.urban:tests',
+            'urban-updateAllUrbanTemplates', run_dependencies=False)
+    from datetime import datetime
+    return "Finished at %s"%datetime(1973,02,12).now()
+
+###############################################################################
+
 def create_urban_site(self, name='', nis='', pghost='localhost', dbname='', dbuser='', dbpwd='', geohost='', pylonhost=''):
     """
         creates an urban plone site
