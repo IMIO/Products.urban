@@ -30,13 +30,6 @@
 
   <browser:page
      for="*"
-     name="urban_searchbystreet"
-     class=".searchstreetsform.SearchStreetsForm"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="*"
      name="searchparcels"
      class=".searchparcelsview.SearchParcelsView"
      template="templates/searchparcels.pt"
