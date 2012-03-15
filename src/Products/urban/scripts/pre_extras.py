@@ -51,4 +51,8 @@ def configure_urban_site(portal, name='', nis='', pghost='localhost',
     ps.runImportStepFromProfile('profile-Products.urban:tests',
             'urban-addTestObjects', run_dependencies=True)
 
+    #adding test licences
+    ps.runImportStepFromProfile('profile-Products.urban:tests',
+            'urban-addTestLicences', run_dependencies=True)
+
     return sep.join(out)
