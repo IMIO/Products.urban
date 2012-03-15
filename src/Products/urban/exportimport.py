@@ -71,6 +71,7 @@ def updateTemplate(context, container, template, new_content, position_after='')
     else:
         new_template_id = container.invokeFactory("File", id=new_template_id, title=template['title'], file=new_content) 
         new_template = getattr(container, new_template_id)
+        new_template.setFormat("application/vnd.oasis.opendocument.text")
         status.append('created')
 
     #to do to if we added/updated a new template: the position in the folder and set some properties
