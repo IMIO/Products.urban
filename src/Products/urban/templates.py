@@ -26,7 +26,9 @@ def makeContext(pif):
     sites = {}
 
     for pifline in retLines(pif):
-        pifline = pifline.strip('\n')
+        pifline = pifline.strip(' \n')
+        if not pifline: continue
+        if pifline.startswith('#'): continue
         path, dbname, port = pifline.split(';')
         sitename = dbname[4:]
         nis = dbuser = dbpwd = pghost = pylonhost = ''
