@@ -35,7 +35,6 @@ schema = Schema((
 
     DateTimeField(
         name='eventDate',
-        default=DateTime(),
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
@@ -45,6 +44,7 @@ schema = Schema((
             label_msgid='urban_label_eventDate',
             i18n_domain='urban',
         ),
+        default_method='getDefaultTime',
     ),
     DateTimeField(
         name='transmitDate',
@@ -240,6 +240,9 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     # Methods
 
     # Manually created methods
+
+    def getDefaultTime(self):
+        return DateTime()
 
     def getTemplates(self):
         """
