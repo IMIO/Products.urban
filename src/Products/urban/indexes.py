@@ -16,7 +16,6 @@ __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
 from plone.indexer import indexer
-from Products.Archetypes.interfaces import IBaseObject
 from Products.urban.interfaces import IGenericLicence
 
 
