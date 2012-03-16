@@ -17,19 +17,24 @@ def check_zope_admin():
 
 ###############################################################################
 
-def urban_replace_templates(self, replace_template=0):
+def urban_replace_templates(self, replace_globals=0, replace_events=0):
     """
         Call the updateAllUrbanTemplates from tests profile.
-        Must be called with ...?replace_template=1 in url to replace all templates
+        Must be called with ...?replace_globals=1&replace_events=1 in url to replace all templates
     """
     if not check_zope_admin():
         return "You must be a zope manager to run this script"
-    if not replace_template:
-        return "Must be called with ...?replace_template=1 in url to replace all templates"
+    if not replace_globals and not replace_events:
+        return "Must be called with some parameters to do something\n" + \
+               "-> replace_globals=1 to force replacing globals templates (header, footer, styles, ...)\n" + \
+               "-> replace_events=1 to force replacing events templates\n" + \
+               "by example ...?replace_events=1\n"
+    
     from Products.CMFCore.utils import getToolByName
+    import ipdb; ipdb.set_trace()
     ps = getToolByName(self, 'portal_setup')
-    ps.runImportStepFromProfile('profile-Products.urban:tests',
-            'urban-updateAllUrbanTemplates', run_dependencies=False)
+#    ps.runImportStepFromProfile('profile-Products.urban:tests',
+#            'urban-updateAllUrbanTemplates', run_dependencies=False)
     from datetime import datetime
     return "Finished at %s"%datetime(1973,02,12).now()
 
