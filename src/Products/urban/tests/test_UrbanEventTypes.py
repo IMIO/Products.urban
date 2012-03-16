@@ -20,23 +20,20 @@ class TestUrbanEventTypes(unittest.TestCase):
         self.portal_setup = portal.portal_setup
         login(portal, 'urbaneditor')
 
-    def testLastKeyEventProperty(self):
-        """
-        When the field LastKeyEvent is activated in an urbanEvenType UET of the cfg, all the licences of the 
-        given cfg type should have the index 'lastKeyEvent' updated to the value UET if they owns an 
-        urbanEvent UET and if that urbanEvent is the last keyEvent created in the licence.
-        """
+    def testLastKeyEventPropertyDefaultCase(self):
         portal = self.layer['portal']
         catalog = getToolByName(portal, 'portal_catalog')
         urban_event_type_a = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'rapport-du-college', None)
-        urban_event_type_b = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'service-pop-opinion-request', None)
-        urban_event_type_c = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'depot-de-la-demande', None)
         buildlicence_brain = catalog(portal_type='BuildLicence')[0]
         #by defaut, no key event should be enabled, and the index in the catalog should be empty
         self.assertEqual(urban_event_type_a.getIsKeyEvent(), False)
-        self.assertEqual(urban_event_type_b.getIsKeyEvent(), False)
-        self.assertEqual(urban_event_type_c.getIsKeyEvent(), False)
         self.assertEqual(buildlicence_brain.last_key_event, None)
+
+    def testSetLastKeyEventPropertyWithEventAlreadyExisting(self):
+        portal = self.layer['portal']
+        catalog = getToolByName(portal, 'portal_catalog')
+        urban_event_type_a = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'rapport-du-college', None)
+        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
         #set 'rapport-du-college' as a key event, buildlicence index should be updated, cu2 index should not change as
         #the urbanEventType belongs to buildlicence cfg and not cu2 cfg
         urban_event_type_a.setIsKeyEvent(True)
@@ -45,12 +42,38 @@ class TestUrbanEventTypes(unittest.TestCase):
         cu2_brain = catalog(portal_type='UrbanCertificateTwo')[0]
         self.assertEqual(buildlicence_brain.last_key_event.split(',  ')[1], urban_event_type_a.Title())
         self.assertEqual(cu2_brain.last_key_event, None)
+   
+    def testSetLastKeyEventPropertyWithNoExistingEventCreated(self):
+        """
+        When the field LastKeyEvent is activated in an urbanEvenType UET of the cfg, all the licences of the 
+        given cfg type should have the index 'lastKeyEvent' updated to the value UET if they owns an 
+        urbanEvent UET and if that urbanEvent is the last keyEvent created in the licence.
+        """
+        portal = self.layer['portal']
+        catalog = getToolByName(portal, 'portal_catalog')
+        urban_event_type_b = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'service-pop-opinion-request', None)
+        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
         #set 'service-pop-opinion-request' as a key event, buildlicence last_key_event index should not change 
         #as the corresponding urbanEvent has never been created in this buildlicence
         urban_event_type_b.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_b))
         buildlicence_brain = catalog(portal_type='BuildLicence')[0]
-        self.assertEqual(buildlicence_brain.last_key_event.split(',  ')[1], urban_event_type_a.Title())
+        self.assertEqual(buildlicence_brain.last_key_event, None)
+
+    def testOrderInKeyEventsWhenActivatingLastKeyEventProperty(self):
+        """
+        When the field LastKeyEvent is activated in an urbanEvenType UET of the cfg, all the licences of the 
+        given cfg type should have the index 'lastKeyEvent' updated to the value UET if they owns an 
+        urbanEvent UET and if that urbanEvent is the last keyEvent created in the licence.
+        """
+        portal = self.layer['portal']
+        catalog = getToolByName(portal, 'portal_catalog')
+        urban_event_type_a = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'rapport-du-college', None)
+        urban_event_type_c = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'depot-de-la-demande', None)
+        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        #set 'rapport-du-college' as a key event, buildlicence index should be updated
+        urban_event_type_a.setIsKeyEvent(True)
+        event.notify(ObjectEditedEvent(urban_event_type_a))
         #set 'depot-de-la-demande' as key event, buildlicence last_key_event index should not change as 
         #'rapport-du-college' is still the most recent keyEvent created
         urban_event_type_c.setIsKeyEvent(True)
@@ -65,28 +88,29 @@ class TestUrbanEventTypes(unittest.TestCase):
         self.assertEqual(buildlicence_brain.last_key_event.split(',  ')[1], urban_event_type_c.Title())
 
     def testUrbanTemplateIsUnderActivationWF(self):
-        """
-        Check that templates .odt files in urbanEventTypes are under activation wf policy 
-        Check that generated .odt files in urbanEvents are NOT under any wf policy
-        """
         portal = self.layer['portal']
         wf_tool = getToolByName(portal, 'portal_workflow')
-        catalog = getToolByName(portal, 'portal_catalog')
         #Check that templates .odt files in urbanEventTypes are under activation wf policy
         urban_event_type = getattr(self.portal_urban.buildlicence.urbaneventtypes,'accuse-de-reception',None)
         template = getattr(urban_event_type, 'urb-accuse.odt', None)
         state = wf_tool.getInfoFor(template, 'review_state')
         self.assertEqual(state, 'enabled')
+
+    def testGeneratedDocumentIsNotUnderActivationWF(self):
+        portal = self.layer['portal']
+        catalog = getToolByName(portal, 'portal_catalog')
+        wf_tool = getToolByName(portal, 'portal_workflow')
         #Check that generated .odt files in urbanEvents are NOT under any wf policy      
         interfaceName = interfaceToName(portal, IAcknowledgmentEvent)
         urban_event = catalog(object_provides=interfaceName)[0].getObject()
         document = getattr(urban_event, 'urb-accuse.odt', None)
         exception_msg = ""
         try:
-            state = wf_tool.getInfoFor(document, 'review_state')
+            wf_tool.getInfoFor(document, 'review_state')
         except Exception, error:
             exception_msg = "%s" % error
         self.assertEqual(exception_msg, "No workflow provides '${name}' information.")
+
 
     def testListAvailableUrbanTemplates(self):
         """
