@@ -8,6 +8,7 @@ from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
 from Products.urban.interfaces import IAcknowledgmentEvent
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.event import ObjectEditedEvent
+from Products.CMFPlone.utils import safe_hasattr
 
 class TestUrbanEventTypes(unittest.TestCase):
 
@@ -115,58 +116,114 @@ class TestUrbanEventTypes(unittest.TestCase):
 
 
     def testUrbanTemplatesUpdate(self):
-        """ 1) add template (by install of test profil)
-            2) update template test by profil test(sans modif) : do nothing
-            3) update template test by profil testCommune1 : replace template
-            4) update template testCommune1 by profil test: do nothing
-            5) update template testCommune1 by profil testCommune2: do nothing
-            6) modify the value of property profilename (testCommune1) by (tests) and launch test profile : replace template
-            7) modify the value of property md5Signature and update template test by profil testCommune1 : replace template 
-               because the template profile is 'test' so we override it
-            8) change the value of property md5Signature, set the value of property profileName to testCommune1 and update template test 
-               by profil testCommune1 : do nothing because template has been customised
         """
-        # 1)
+            Testing updating templates, depending on:
+            - profile
+            - md5Loaded
+            - md5Modified
+        """
+        # check if template is well already installed
         my_accuse_folder = getattr(self.portal_urban.buildlicence.urbaneventtypes,'accuse-de-reception',None)
         self.assertNotEqual(my_accuse_folder,None)  
         my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertNotEqual(my_file_odt,None)
         my_update_file_datetime = my_file_odt.modified()
-        # 2)
-        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-addTestObjects')   
-        my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
+
+        # update template test by profil test (same template, identical md5loaded) : do nothing
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')   
         self.assertEqual(my_file_odt.modified(),my_update_file_datetime)
-        # 3)
+
+        # update template test by profil test (md5Loaded changed) : replace
+        my_file_odt.manage_changeProperties({"md5Loaded":'reloadtemplate'})
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')   
+        self.assertNotEqual(my_file_odt.modified(),my_update_file_datetime)
+
+        # update template test by profil testCommune1 : replace template
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune1','urban-Commune1UpdateTemplates')    
-        my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertNotEqual(my_file_odt.modified(),my_update_file_datetime)
         my_update_file_datetime = my_file_odt.modified() #warning, date have changed        
-        # 4)
-        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-addTestObjects') 
-        my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
+
+        # update template testCommune1 by profil test: do nothing
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates') 
         self.assertEqual(my_file_odt.modified(),my_update_file_datetime)         
-        # 5)
+
+        # update template testCommune1 by profil testCommune2: do nothing
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune2','urban-Commune2UpdateTemplates')
-        my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertEqual(my_file_odt.modified(),my_update_file_datetime)        
-        # 6)
-        my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
+
+        # modify the value of property profilename (testCommune1) by (tests) and launch test profile : replace template
         my_file_odt.manage_changeProperties({"profileName":'tests'})
         my_update_file_datetime = my_file_odt.modified() #warning, date have changed by manage_changeProperties
         sleep(1)
-        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-addTestObjects')  
-        my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
         self.assertNotEqual(my_file_odt.modified(),my_update_file_datetime)
-        # 7) 
+
+        # modify the value of property md5Modified and update template test by profil testCommune1 : replace template 
+        #   because the template profile is 'test' so we override it
         my_file_odt.manage_changeProperties({"md5Modified":'aaaaaaa'})
         my_update_file_datetime = my_file_odt.modified() #warning, date have changed by manage_changeProperties
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune1','urban-Commune1UpdateTemplates')   
-        my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertNotEqual(my_file_odt.modified(),my_update_file_datetime)
-        # 8)
+
+        # change the value of property md5Modified, set the value of property profileName to testCommune1 and update template test 
+        #   by profil testCommune1 : do nothing because template has been customised
+        my_file_odt.manage_changeProperties({"md5Loaded":'reloadtemplate'})
         my_file_odt.manage_changeProperties({"md5Modified":'aaaaaaa'})
-        my_file_odt.manage_changeProperties({"profileName":'testCommune1'})
         my_update_file_datetime = my_file_odt.modified() #warning, date have changed by manage_changeProperties
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune1','urban-Commune1UpdateTemplates')   
-        my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertEqual(my_file_odt.modified(),my_update_file_datetime)
+
+    def testUrbanTemplatesUpdateForced(self):
+        """
+            Testing updating templates when force
+        """
+        # check if template is well already installed
+        my_accuse_folder = getattr(self.portal_urban.buildlicence.urbaneventtypes,'accuse-de-reception',None)
+        my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
+        self.assertNotEqual(my_file_odt,None)
+        my_update_file_datetime = my_file_odt.modified()
+        my_header_odt = getattr(self.portal_urban.globaltemplates,'header.odt',None)
+        self.assertNotEqual(my_header_odt, None)
+        my_update_header_datetime = my_header_odt.modified()
+        portal = self.layer['portal']
+
+        # Without forcing: no change
+        my_file_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
+        my_header_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
+        my_update_file_datetime = my_file_odt.modified()
+        my_update_header_datetime = my_header_odt.modified()
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
+        self.assertEqual(my_header_odt.modified(), my_update_header_datetime)
+        self.assertEqual(my_file_odt.modified(),my_update_file_datetime)
+
+        # Forcing replacement of globals, not events
+        portal.REQUEST.form['replace_globals'] = 1
+        my_file_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
+        my_header_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
+        my_update_file_datetime = my_file_odt.modified()
+        my_update_header_datetime = my_header_odt.modified()
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
+        self.assertNotEquals(my_header_odt.modified(), my_update_header_datetime)
+        self.assertEqual(my_file_odt.modified(),my_update_file_datetime)
+
+        # Forcing replacement of events, not globals
+        portal.REQUEST.form.pop('replace_globals')
+        portal.REQUEST.form['replace_events'] = 1
+        my_file_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
+        my_header_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
+        my_update_file_datetime = my_file_odt.modified()
+        my_update_header_datetime = my_header_odt.modified()
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
+        self.assertEquals(my_header_odt.modified(), my_update_header_datetime)
+        self.assertNotEqual(my_file_odt.modified(),my_update_file_datetime)
+
+        # Forcing replacement of events and globals
+        portal.REQUEST.form['replace_globals'] = 1
+        portal.REQUEST.form['replace_events'] = 1
+        my_file_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
+        my_header_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
+        my_update_file_datetime = my_file_odt.modified()
+        my_update_header_datetime = my_header_odt.modified()
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
+        self.assertNotEquals(my_header_odt.modified(), my_update_header_datetime)
+        self.assertNotEqual(my_file_odt.modified(),my_update_file_datetime)

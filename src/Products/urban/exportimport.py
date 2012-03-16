@@ -13,7 +13,7 @@ def loga(msg, type="info"):
         logger.warn(msg)
     return msg
 
-def updateTemplates(context, container, templates, starting_position=''):
+def updateTemplates(context, container, templates, starting_position='', replace=False):
     log = []
     position_after = starting_position
     for template in templates:
@@ -23,12 +23,12 @@ def updateTemplates(context, container, templates, starting_position=''):
             template_id = "%s.odt" % template_id
         filePath = '%s/templates/%s' % (context._profile_path, template_id)
         new_content = file(filePath, 'rb').read()
-        log.append(updateTemplate(context, container, template, new_content, position_after))
+        log.append(updateTemplate(context, container, template, new_content, position_after, replace=replace))
         #log[-1][0] is the id of the last template added
         position_after = log[-1][0] 
     return log
 
-def updateTemplate(context, container, template, new_content, position_after=''):
+def updateTemplate(context, container, template, new_content, position_after='', replace=False):
     def setProperty(file, property_name, property_value):
         if property_name in file.propertyIds():
             file.manage_changeProperties({property_name:property_value})
@@ -36,11 +36,6 @@ def updateTemplate(context, container, template, new_content, position_after='')
             file.manage_addProperty(property_name, property_value, "string")
 
     new_template_id = template['id']
-    replace = False
-    site = context.getSite()
-    # we check if the step is called by the external method urban_replace_templates, with the param replace_template
-    if site.REQUEST.has_key('replace_template'):
-        replace = True
     #in the case of GLOBAL_TEMPLATES, the id already ends with '.odt'
     if not new_template_id.endswith('.odt'):
         new_template_id = "%s.odt" % new_template_id
@@ -102,10 +97,16 @@ def addGlobalTemplates(context):
     except ImportError:
         return
 
+    replace_globals = False
+    site = context.getSite()
+    # we check if the step is called by the external method urban_replace_templates, with the param replace_globals
+    if site.REQUEST.form.has_key('replace_globals'):
+        replace_globals = True
+
     log = []
-    tool = getToolByName(context.getSite(), 'portal_urban')
+    tool = getToolByName(site, 'portal_urban')
     templates_folder = getattr(tool, 'globaltemplates')
-    template_log = updateTemplates(context, templates_folder, globalTemplates)
+    template_log = updateTemplates(context, templates_folder, globalTemplates, replace=replace_globals)
     for status in template_log:
         if status[1] != 'no changes':
             log.append(loga("'global templates', template='%s' => %s"%(status[0], status[1])))
@@ -125,8 +126,13 @@ def addUrbanEventTypes(context):
     except ImportError:
         return
 
-    log = []
+    replace_events = False
     site = context.getSite()
+    # we check if the step is called by the external method urban_replace_templates, with the param replace_events
+    if site.REQUEST.form.has_key('replace_events'):
+        replace_events = True
+
+    log = []
     tool = getToolByName(site, 'portal_urban')
     #add the UrbanEventType
     for urbanConfigId in urbanEventTypes:
@@ -153,7 +159,7 @@ def addUrbanEventTypes(context):
                 log.append(loga("%s: event='%s' => %s"%(urbanConfigId, id, 'created')))
             last_urbaneventype_id = id
             #add the Files in the UrbanEventType
-            template_log = updateTemplates(context, newUet, uet['podTemplates'])
+            template_log = updateTemplates(context, newUet, uet['podTemplates'], replace=replace_events)
             for status in template_log:
                 if status[1] != 'no changes':
                     log.append(loga("%s: evt='%s', template='%s' => %s"%(urbanConfigId, last_urbaneventype_id, status[0], status[1])))
