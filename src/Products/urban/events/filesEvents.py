@@ -31,7 +31,6 @@ def updateAllTemplatesStylesEvent(object, event):
                 for uet in urbanEventTypes:
                     logger.info("Updating UrbanEventType %d/%d : %s" % (urbanEventTypes.index(uet) + 1, numberOfUrbanEventTypes, uet.Title()))
                     for fileTemplate in uet.objectValues('ATBlob'):
-                        logger.info("  model :  %s" % fileTemplate.Title())
                         _updateTemplateStyle(tool, fileTemplate, templateStylesFileName)
                         logger.info(" %s => updated" % fileTemplate.Title())
             #delete temporary styles files
