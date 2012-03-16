@@ -246,7 +246,7 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getFolderManagersSign
     </Item>
     <Item name="Grade">
         <FieldCode>
-            self.getValueForTemplate('grade', obj=self.getFolderManagers()[0])
+            self.displayValue(self.getFoldermanagers()[0].Vocabulary('grade')[0], self.getFoldermanagers()[0].getGrade())
         </FieldCode>        
     </Item>
 </Object>
