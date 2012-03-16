@@ -31,7 +31,6 @@ def urban_replace_templates(self, replace_globals=0, replace_events=0):
                "by example ...?replace_events=1\n"
     
     from Products.CMFCore.utils import getToolByName
-    import ipdb; ipdb.set_trace()
     ps = getToolByName(self, 'portal_setup')
     ps.runImportStepFromProfile('profile-Products.urban:tests',
             'urban-updateAllUrbanTemplates', run_dependencies=False)
