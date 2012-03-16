@@ -33,8 +33,8 @@ def urban_replace_templates(self, replace_globals=0, replace_events=0):
     from Products.CMFCore.utils import getToolByName
     import ipdb; ipdb.set_trace()
     ps = getToolByName(self, 'portal_setup')
-#    ps.runImportStepFromProfile('profile-Products.urban:tests',
-#            'urban-updateAllUrbanTemplates', run_dependencies=False)
+    ps.runImportStepFromProfile('profile-Products.urban:tests',
+            'urban-updateAllUrbanTemplates', run_dependencies=False)
     from datetime import datetime
     return "Finished at %s"%datetime(1973,02,12).now()
 
