@@ -126,6 +126,9 @@ class UrbanCertificateTwo(BaseFolder, UrbanCertificateBase, Inquiry, BrowserDefa
     def getLastDeposit(self):
         return self._getLastEvent(interfaces.IDepositEvent)
 
+    def getLastWalloonRegionPrimo(self):
+        return self._getLastEvent(interfaces.IWalloonRegionPrimoEvent)
+
     def getLastInquiry(self):
         return self._getLastEvent(interfaces.IInquiryEvent)
 

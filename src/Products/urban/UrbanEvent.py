@@ -552,6 +552,8 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         """
         if not date:
             date = self.getEventDate()
+        elif type(date) == str:
+            date = self.getField(date).getAccessor(self)()
         tool = getToolByName(self, 'portal_urban')
         formattedDate = tool.formatDate(date, translatemonth=translatemonth)
         cityName = unicode(tool.getCityName(), 'utf-8')

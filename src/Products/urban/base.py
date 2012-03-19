@@ -427,11 +427,13 @@ class UrbanBase(object):
             field_object = obj.getField(field_name)
             field_accessor = field_object.getAccessor(obj)
             field_value = field_accessor()
-        if field_value == '':
+        if not field_value:
             return ''
         if not list:
             return obj.displayValue(displaylist, field_value)
         else:
+            if type(field_value) == str:
+                field_value = [field_value]
             return [obj.displayValue(displaylist, value) for value in field_value]
 
     security.declarePublic('listVocabularyForTemplate')
