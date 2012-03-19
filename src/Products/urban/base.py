@@ -282,6 +282,7 @@ class UrbanBase(object):
             #or an "and "
             elif not isFirst:
                 toreturn += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
+            toreturn += '%s ' % portionOutObj.getDivision()
             toreturn += 'section %s' % portionOutObj.getSection()
             toreturn += ' %s' % portionOutObj.getRadical()
             if portionOutObj.getBis() != '':
