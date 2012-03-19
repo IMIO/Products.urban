@@ -427,7 +427,18 @@ urbanEventTypes = {
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
-                    {   
+                    {
+                    'id': "dossier-incomplet",
+                    'title': "Dossier incomplet (avec listing des pièces manquantes)",
+                    'activatedFields': [],
+                    'deadLineDelay': 15,
+                    'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+                    'podTemplates': (
+                                     {'id': "cu2-dossier-incomplet-demandeur", 'title': "Dossier incomplet (lettre demandeur)"},
+                                     {'id': "cu2-dossier-incomplet-archi", 'title': "Dossier incomplet (lettre architecte)"},
+                                    ),
+                    },
+                    {
                     'id': "config-opinion-request",
                     'title': "*** Demande d'avis CONFIG ***",
                     'activatedFields': [],
