@@ -309,7 +309,7 @@ msgid "at_hour"
 msgstr "à ${hour}"
 
 msgid "back_to_licence"
-msgstr "Retour au permis"
+msgstr "Retour au dossier"
 
 msgid "buildings_layer_title"
 msgstr "Couche bâtiments"
