@@ -6,11 +6,13 @@ from Products.urban.events.filesEvents import updateTemplateStylesEvent
 import logging
 logger = logging.getLogger('urban: setuphandlers')
 
-def loga(msg, type="info"):
+def loga(msg, type="info", gslog=None):
+    if not gslog:
+        gslog = logging.getLogger('urban: setuphandlers')
     if type=="info":
-        logger.info(msg)
+        gslog.info(msg)
     elif type=="warn":
-        logger.warn(msg)
+        gslog.warn(msg)
     return msg
 
 def updateTemplates(context, container, templates, starting_position='', replace=False):
@@ -104,12 +106,13 @@ def addGlobalTemplates(context):
         replace_globals = True
 
     log = []
+    gslogger = context.getLogger('addGlobalTemplates')
     tool = getToolByName(site, 'portal_urban')
     templates_folder = getattr(tool, 'globaltemplates')
     template_log = updateTemplates(context, templates_folder, globalTemplates, replace=replace_globals)
     for status in template_log:
         if status[1] != 'no changes':
-            log.append(loga("'global templates', template='%s' => %s"%(status[0], status[1])))
+            log.append(loga("'global templates', template='%s' => %s"%(status[0], status[1]), gslog=gslogger))
     return '\n'.join(log)
 
 def addUrbanEventTypes(context):
@@ -133,6 +136,7 @@ def addUrbanEventTypes(context):
         replace_events = True
 
     log = []
+    gslogger = context.getLogger('addUrbanEventTypes')
     tool = getToolByName(site, 'portal_urban')
     #add the UrbanEventType
     for urbanConfigId in urbanEventTypes:
@@ -140,7 +144,7 @@ def addUrbanEventTypes(context):
             uetFolder = getattr(tool.getUrbanConfig(None, urbanConfigId=urbanConfigId), "urbaneventtypes")
         except AttributeError:
             #if we can not get the urbanConfig, we pass this one...
-            log.append(loga("AttributeError while trying to get the '%s' urbanConfig" % urbanConfigId, type="warn"))
+            log.append(loga("AttributeError while trying to get the '%s' urbanConfig" % urbanConfigId, type="warn", gslog=gslogger))
             continue
         last_urbaneventype_id = None
         for uet in urbanEventTypes[urbanConfigId]:
@@ -156,11 +160,11 @@ def addUrbanEventTypes(context):
                     moveElementAfter(newUet, uetFolder, 'id', last_urbaneventype_id)
                 else:
                     uetFolder.moveObjectToPosition(newUet.getId(), 0)
-                log.append(loga("%s: event='%s' => %s"%(urbanConfigId, id, 'created')))
+                log.append(loga("%s: event='%s' => %s"%(urbanConfigId, id, 'created'), gslog=gslogger))
             last_urbaneventype_id = id
             #add the Files in the UrbanEventType
             template_log = updateTemplates(context, newUet, uet['podTemplates'], replace=replace_events)
             for status in template_log:
                 if status[1] != 'no changes':
-                    log.append(loga("%s: evt='%s', template='%s' => %s"%(urbanConfigId, last_urbaneventype_id, status[0], status[1])))
+                    log.append(loga("%s: evt='%s', template='%s' => %s"%(urbanConfigId, last_urbaneventype_id, status[0], status[1]), gslog=gslogger))
     return '\n'.join(log)
