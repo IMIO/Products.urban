@@ -83,7 +83,8 @@ def migrateToPlone4(context):
     #Divisions used a 'comments' field that is now replaced by the default 'description' field
     migrateDivisionsCommentsToDescription(context)
     #Update all the templates
-    updateUrbanTemplates(context)
+    #We must run this step separately, to keep log inside portal_setup
+    #updateUrbanTemplates(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
