@@ -246,7 +246,7 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getFolderManagersSign
     </Item>
     <Item name="Grade">
         <FieldCode>
-            self.getValueForTemplate('grade', obj=self.getFolderManagers()[0])
+            self.displayValue(self.getFoldermanagers()[0].Vocabulary('grade')[0], self.getFoldermanagers()[0].getGrade())
         </FieldCode>        
     </Item>
 </Object>
@@ -417,6 +417,11 @@ from xhtml(urbanEventObj.getClaimsText())
             self.getValueForTemplate('derogation')
         </FieldCode>        
     </Item>
+    <Item name="Décision">
+        <FieldCode>
+            self.getLastTheLicence().getDecision()
+        </FieldCode>        
+    </Item>
     <Item name="Date du récépissé de la demande">
         <FieldCode>
             tool.formatDate(self.getLastDeposit().getEventDate())
@@ -444,7 +449,32 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getEquipmentAndRoadRe
 from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getTechnicalRemarks()))
         </AnnotationCode>        
     </Item>
-
+     <Item name="Date dossier incomplet">
+        <FieldCode>
+            tool.formatDate(self.getLastMissingPart().getEventDate())
+        </FieldCode>
+     </Item>
+     <Item name="Date d'émission des demandes d'avis">
+        <FieldCode>
+            tool.formatDate(self.getLastOpinionRequest().getEventDate())
+        </FieldCode>
+     </Item>
+     <Item name="Date de transmis des demandes d'avis">
+        <FieldCode>
+            tool.formatDate(self.getLastOpinionRequest().getTransmitDate())
+        </FieldCode>
+     </Item>
+     <Item name="Date de notification">
+        <FieldCode>
+            tool.formatDate(self.getLastTheLicence().getEventDate())
+        </FieldCode>
+     </Item>
+     <Item name="Date de dernier envoi RW">
+        <FieldCode>
+            tool.formatDate(self.getLastWalloonRegionOpinionRequest().getEventDate())
+        </FieldCode>
+     </Item>
+     
 </Object>
 
 <Object name="Déclaration">    
