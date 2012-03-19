@@ -40,6 +40,9 @@ msgstr "Coordonnées de l'architecte"
 msgid "BuildLicence"
 msgstr "Permis d'urbanisme"
 
+msgid "MiscDemand"
+msgstr "Demande diverse"
+
 msgid "Claimant data"
 msgstr "Coordonnées du réclamant"
 
@@ -202,6 +205,9 @@ msgstr "Ajouter un Architecte"
 msgid "add_BuildLicence"
 msgstr "Ajouter un Permis d'urbanisme"
 
+msgid "add_MiscDemand"
+msgstr "Ajouter une demande diverse"
+
 msgid "add_Declaration"
 msgstr "Ajouter une déclaration"
 
@@ -329,6 +335,9 @@ msgstr "permis d'urbanisme retirés"
 msgid "buildlicence_urbanconfig_title"
 msgstr "Paramètres des Permis d'urbanisme"
 
+msgid "miscdemand_urbanconfig_title"
+msgstr "Paramètres des Demandes diverses"
+
 msgid "buildlicences"
 msgstr "Permis d'urbanisme"
 
@@ -421,6 +430,9 @@ msgstr "Paramètres des Déclarations"
 
 msgid "declarations"
 msgstr "Déclarations"
+
+msgid "miscdemands"
+msgstr "Demandes diverses"
 
 msgid "decree_type_departmental"
 msgstr "Arrêté Ministeriel"
@@ -1118,6 +1130,11 @@ msgstr "Numérotation des déclarations"
 #: UrbanTool.py
 msgid "urban_label_DivisionNumerotation"
 msgstr "Numérotation des divisions"
+
+#. Default: "MiscDemandnumerotation"
+#: UrbanTool.py
+msgid "urban_label_MiscDemandNumerotation"
+msgstr "Numérotation des demandes diverses"
 
 #. Default: "Environmentaldeclarationnumerotation"
 #: UrbanTool.py
@@ -2464,3 +2481,5 @@ msgstr "!!!Attention, aucune date de dépôt n'a été trouvée!!!"
 msgid "work_location"
 msgstr "Lieu des travaux"
 
+msgid "urban_label_category"
+msgstr "Catégorie"

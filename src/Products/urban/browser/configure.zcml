@@ -164,6 +164,22 @@
      template="templates/divisionmacros.pt"
      permission="zope2.View"
   />
+  
+   <browser:page
+     for="Products.urban.interfaces.IMiscDemand"
+     name="miscdemandview"
+     class=".miscdemandview.MiscDemandView"
+     template="templates/miscdemandview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="miscdemand-macros"
+     for="Products.urban.interfaces.IMiscDemand"
+     class=".miscdemandview.MiscDemandMacros"
+     template="templates/miscdemandmacros.pt"
+     permission="zope2.View"
+  />
 
   <browser:page
      for="Products.urban.interfaces.IInquiryEvent"

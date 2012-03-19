@@ -172,6 +172,15 @@ schema = Schema((
         ),
     ),
     StringField(
+        name='MiscDemandNumerotation',
+        default=0,
+        widget=StringField._properties['widget'](
+            label='Miscdemandnumerotation',
+            label_msgid='urban_label_MiscDemandNumerotation',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
         name='sqlHost',
         widget=StringField._properties['widget'](
             label='Sqlhost',
@@ -653,6 +662,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         newParcelId = path.invokeFactory("PortionOut",id=self.generateUniqueId('PortionOut'),divisionCode=division,division=dv,section=section,radical=radical,bis=bis,exposant=exposant,puissance=puissance,partie=partie)
         newParcel = getattr(path, newParcelId)
         newParcel._renameAfterCreation()
+        newParcel.updateTitle()
         newParcel.at_post_create_script()
         self.REQUEST.RESPONSE.redirect(path.absolute_url()+'/view')
 

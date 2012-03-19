@@ -67,6 +67,7 @@ ADD_CONTENT_PERMISSIONS = {
     'UrbanEventInquiry': 'urban: Add UrbanEvent',
     'UrbanEventOpinionRequest': 'urban: Add UrbanEventOpinionRequest',
     'OrganisationTerm': 'urban: Add OrganisationTerm',
+    'MiscDemand': 'urban: Add MiscDemand',
 }
 
 setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
@@ -101,6 +102,7 @@ setDefaultRoles('urban: Add PersonTitleTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Inquiry', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanEventOpinionRequest', ('Manager', 'Owner', 'Contributor'))
 setDefaultRoles('urban: Add OrganisationTerm', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
 
 product_globals = globals()
 
@@ -127,7 +129,7 @@ DEPENDENCIES = []
 ADDITIONAL_LAYERS_FOLDER="additional_layers"
 
 #a list where first element is the meetingConfigId and the second, the meta_type name
-URBAN_TYPES = ['BuildLicence','ParcelOutLicence','Declaration', 'Division', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'EnvironmentalDeclaration', ]
+URBAN_TYPES = ['BuildLicence','ParcelOutLicence','Declaration', 'Division', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'EnvironmentalDeclaration', 'MiscDemand', ]
 
 #the different templates used to structure a document
 GLOBAL_TEMPLATES = [

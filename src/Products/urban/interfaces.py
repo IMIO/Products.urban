@@ -166,6 +166,10 @@ class IOrganisationTerm(Interface):
     """Marker interface for .OrganisationTerm.OrganisationTerm
     """
 
+class IMiscDemand(Interface):
+    """Marker interface for .MiscDemand.MiscDemand
+    """
+
 ##code-section FOOT
 class ILicenceContainer(Interface):
     """

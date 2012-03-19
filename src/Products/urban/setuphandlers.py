@@ -222,7 +222,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="veranda",title=u"Véranda")
 
         #add FolderCategories folder
-        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'Declaration', 'Division']:
+        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'Declaration', 'Division', 'MiscDemand']:
             if not hasattr(aq_base(configFolder), 'foldercategories'):
                 newFolderid = configFolder.invokeFactory("Folder",id="foldercategories",title=_("foldercategories_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
@@ -252,9 +252,16 @@ def addUrbanConfigs(context):
                 #categories for Declarations
                 elif urban_type in ['Declaration', ]:
                         newFolder.invokeFactory("UrbanVocabularyTerm",id="dup",title=u"DUP (Déclaration Urbanistique Préalable)")
-                #categories for Declarations
+                #categories for Divisions
                 elif urban_type in ['Division', ]:
                         newFolder.invokeFactory("UrbanVocabularyTerm",id="dup",title=u"DIV (Division notariale)")
+                #categories for MiscDemands
+                elif urban_type in ['MiscDemand', ]:
+                        newFolder.invokeFactory("UrbanVocabularyTerm",id="apct",title=u"Avis préalable construction ou transformation")
+                        newFolder.invokeFactory("UrbanVocabularyTerm",id="appu",title=u"Avis préalable permis d'urbanisation")
+                        newFolder.invokeFactory("UrbanVocabularyTerm",id="apd",title=u"Avis préalable de division")
+                        newFolder.invokeFactory("UrbanVocabularyTerm",id="dre",title=u"Demande de raccordement à l'égout")
+                        newFolder.invokeFactory("UrbanVocabularyTerm",id="div",title=u"Divers")
 
         if urban_type in ['Declaration', ]:
             #add "Articles" folder
@@ -775,6 +782,18 @@ def setDefaultApplicationSecurity(context):
     if hasattr(app_folder, "notaries"):
         p_folder = getattr(app_folder, "notaries")
         app_folder.manage_permission('Add portal content', ['Manager', 'Contributor', 'Owner', 'Editor', ], acquire=0)
+        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
+        p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
+        p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
+    #misc demands application folder : "urban_readers" can read and "urban_editors" can edit...
+    if hasattr(app_folder, "miscdemands"):
+        p_folder = getattr(app_folder, "miscdemands")
+        #we add a property usefull for portal_urban.getUrbanConfig
+        try:
+            #we try in case we apply the profile again...
+            p_folder.manage_addProperty('urbanConfigId', 'miscdemand', 'string')
+        except BadRequest:
+            pass
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         p_folder.manage_addLocalRoles("urban_editors", ("Editor",))

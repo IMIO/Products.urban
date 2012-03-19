@@ -179,6 +179,7 @@ class UrbanBase(object):
                         'EnvironmentalDeclaration': 'DeclEnv',
                         'Declaration': 'Decl',
                         'Division': 'Div',
+                        'MiscDemand': 'DD',
                        }
         try:
             return licenceTypes[self.portal_type]

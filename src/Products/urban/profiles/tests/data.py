@@ -530,4 +530,40 @@ urbanEventTypes = {
                     'podTemplates': ({'id': "declaenv-courrier-ft", 'title': "1er envoi (Fonctionnaire technique)"},),
                     },
                    ),
+                   'miscdemand':
+                   (
+                    {
+                    'id': "depot-de-la-demande",
+                    'title': "Dépôt de la demande",
+                    'activatedFields': [],
+                    'eventDateLabel': "Date du dépôt de la demande",
+                    'deadLineDelay': 15,
+                    'podTemplates': (
+                                     {'id': "miscdemand-recepisse", 'title': "Récepissé de la demande"},
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+                    },                    
+                    {
+                    'id': 'deliberation-college',
+                    'title': "Délibération collège",
+                    'activatedFields': ['decision',],
+                    'eventDateLabel': "Date de la séance collège",
+                    'deadLineDelay': 15,
+                    'podTemplates': (
+                                     {'id': 'miscdemand-delib-college', 'title': "Délibération collège"},
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+                    },
+                    {
+                    'id': "transmis-decision",
+                    'title': "Transmis décision au demandeur",
+                    'activatedFields': [],
+                    'eventDateLabel': "Date du transmis",
+                    'deadLineDelay': 15,
+                    'podTemplates': (                                     
+                                     {'id': "miscdemand-transmis-decision-demandeur", 'title': "Transmis décision au demandeur"},
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+                    },
+                   ),
                    }
