@@ -204,4 +204,11 @@
     version="2012-01-10T16:15.0">
      Divisions, Certificates and Declarations inherit the foldermanagers field from GenericLicence now
  </import-step>
+ <import-step
+    id="urban-migrateOpinionRequestTalExpression"
+    handler="Products.urban.profiles.migrations.migrate.migrateOpinionRequestTalExpression"
+    title="Update the TAL condition in the 'opinionRequest' UrbanEventTypes"
+    version="2012-01-10T16:15.0">
+    Update the TAL condition in the 'opinionRequest' UrbanEventTypes
+ </import-step>
 </import-steps>
