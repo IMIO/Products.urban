@@ -837,6 +837,8 @@ def migrateLayersForMapfish(context):
     """
       Removes useless layers and change format option
     """
+    if isNoturbanMigrationsProfile(context): return
+
     portal = context.getSite()
     brains = portal.portal_catalog.searchResults(portal_type='Layer') 
     for brain in brains:
