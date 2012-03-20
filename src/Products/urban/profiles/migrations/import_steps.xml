@@ -37,27 +37,6 @@
     Add default investigation articles in the BuildLicence LicenceConfig
  </import-step>
  <import-step
-    id="urban-migrateUrbanEventTypes"
-    handler="Products.urban.profiles.migrations.migrate.migrateUrbanEventTypes"
-    title="Migrate the UrbanEventTypes"
-    version="2010-04-29T15:00:00.0">
-    Migrate the UrbanEventTypes
- </import-step>
- <import-step
-    id="urban-addMissingUrbanVocabularyTerms"
-    handler="Products.urban.profiles.migrations.migrate.addMissingUrbanVocabularyTerms"
-    title="Some UrbanVocabularyTerms have been added afterward, we need to add them now"
-    version="2012-01-09T13:00:00.0">
-    Some UrbanVocabularyTerms have been added afterward, we need to add them now
- </import-step>
- <import-step
-    id="urban-migrateFolderDelays"
-    handler="Products.urban.profiles.migrations.migrate.migrateFolderDelays"
-    title="Migrate delays from UrbanVocabularyTerms to UrbanDelays"
-    version="2011-04-19T10:00:00.0">
-    Delays were UrbanVocabularyTerms, now they are UrbanDelays
- </import-step>
- <import-step
     id="urban-migrateToContact"
     handler="Products.urban.profiles.migrations.migrate.migrateToContact"
     title="More portal_types are now based on Contact.  Migrate old instances"
@@ -79,67 +58,11 @@
     We need some topics to have a path criterion now, so add it if necessary
  </import-step>
  <import-step
-    id="urban-migrateToLicenceConfig"
-    handler="Products.urban.profiles.migrations.migrate.migrateToLicenceConfig"
-    title="We replace licence folders from portal_urban to LicenceConfig objects"
-    version="2011-06-23T09:00:00.0">
-    We replace licence folders from portal_urban to LicenceConfig objects
- </import-step>
- <import-step
-    id="urban-migrateArchitectToContact"
-    handler="Products.urban.profiles.migrations.migrate.migrateArchitectToContact"
-    title="We replace architect objects (based on Architect meta_type) by new objects (based on Contact meta_type)"
-    version="2011-05-30T11:00:00.0">
-    We replace architect objects (based on Architect meta_type) by new objects (based on Contact meta_type)
- </import-step>
- <import-step
-    id="urban-migrateSpecificContactInterfaces"
-    handler="Products.urban.profiles.migrations.migrate.migrateSpecificContactInterfaces"
-    title="Migration of contact type objects to provides specific interfaces"
-    version="2011-07-20T11:00:00.0">
-    Migration of contact type objects to provides specific interfaces
- </import-step>
- <import-step
     id="urban-migrateToPlone4"
     handler="Products.urban.profiles.migrations.migrate.migrateToPlone4"
     title="Launch every migration steps linked to the Plone4 version"
     version="2011-05-30T11:00:00.0">
     Launch every migration steps linked to the Plone4 version
- </import-step>
- <import-step
-    id="urban-migrationToUrbanEventInquiries"
-    handler="Products.urban.profiles.migrations.migrate.migrationToUrbanEventInquiries"
-    title="Migrate the UrbanEvent having an id of 'enquete-publique' to UrbanEventInquiries"
-    version="2011-08-09T11:30:00.0">
-    Migrate the UrbanEvent having an id of 'enquete-publique' to UrbanEventInquiries
- </import-step>
- <import-step
-    id="urban-addMd5SignatureAndProfileNameProperties"
-    handler="Products.urban.profiles.migrations.migrate.addMd5SignatureAndProfileNameProperties"
-    title="Add md5Signature and profileName properties for each template"
-    version="2011-08-24T11:00.0">
-    Add md5Signature and profileName properties for each template
- </import-step>
- <import-step
-    id="urban-migrationProvideEventMarkerInterfaces"
-    handler="Products.urban.profiles.migrations.migrate.provideEventMarkerInterfaces"
-    title="Provides UrbanEvents with marker interfaces from their corresponding UrbanEventType"
-    version="2011-09-24T11:00.0">
-    Provides UrbanEvents with marker interfaces from their corresponding UrbanEventType
- </import-step>
- <import-step
-    id="urban-migrateToWorkLocationsDataGridField"
-    handler="Products.urban.profiles.migrations.migrate.migrateToWorkLocationsDataGridField"
-    title="Migration to use workLocations DataGridField instead of workLocation objects"
-    version="2011-09-14T11:00.0">
-    Migration to use workLocations DataGridField instead of workLocation objects
- </import-step>
- <import-step
-    id="urban-migrationProprietaryToContact"
-    handler="Products.urban.profiles.migrations.migrate.migrationProprietaryToContact"
-    title="Migrate the Contact with portal_type Proprietary to Contact with portal_type Applicant"
-    version="2011-10-19T16:00.0">
-    Migrate the Contact with portal_type Proprietary to Contact with portal_type Applicant
  </import-step>
  <import-step
     id="urban-migrateLayersForMapfish"
@@ -149,66 +72,10 @@
     Removes useless layers and change format option
  </import-step>
  <import-step
-    id="urban-migrateFoldermakersTerms"
-    handler="Products.urban.profiles.migrations.migrate.migrateFoldermakersTerms"
-    title="Migrate foldermakers UrbanVocabularyTerms to OrganisationTerms"
-    version="2011-09-24T11:00.0">
-    Migrate foldermakers UrbanVocabularyTerms to OrganisationTerms
- </import-step>
- <import-step
-    id="urban-migrateFoldermanagers"
-    handler="Products.urban.profiles.migrations.migrate.migrateFoldermanagers"
-    title="Migrate foldermanagers to a single folder"
-    version="2011-09-24T11:00.0">
-    Migrate foldermanagers: move them to a single folder and set a value to the field 'manageableLicences'
- </import-step>
- <import-step
-    id="urban-migrateGlobalTemplates"
-    handler="Products.urban.profiles.migrations.migrate.migrateGlobalTemplates"
-    title="Migrate the global templates of urbanTool in the globaltemplates folder"
-    version="2011-09-24T11:00.0">
-    Migrate global templates: move them to a single folder'
- </import-step>
- <import-step
-    id="urban-migrateSomeLocalFoldersAsGlobal"
-    handler="Products.urban.profiles.migrations.migrate.migrateSomeLocalFoldersAsGlobal"
-    title="Some folders defined on LicenceConfigs are now at the portal_urban root"
-    version="2011-12-05T16:00.0">
-    Some folders defined on LicenceConfigs are now at the portal_urban root
- </import-step>
- <import-step
-    id="urban-migrateDecisionsForDeclarations"
-    handler="Products.urban.profiles.migrations.migrate.migrateDecisionsForDeclarations"
-    title="Declarations need an extra value to be defined on UrbanVocabularyTerms in portal_urban.decisions"
-    version="2012-01-06T16:30.0">
-      Declarations need an extra value to be defined on UrbanVocabularyTerms in portal_urban.decisions
- </import-step>
- <import-step
-    id="urban-migrateSubjectFields"
-    handler="Products.urban.profiles.migrations.migrate.migrateSubjectFields"
-    title="Before, there was several xxxSubject fields, now we use licenceSubject"
-    version="2012-01-10T16:10.0">
-      Before, there was several xxxSubject fields, now we use licenceSubject
- </import-step>
- <import-step
-    id="urban-migrateDivisionsCommentsToDescription"
-    handler="Products.urban.profiles.migrations.migrate.migrateDivisionsCommentsToDescription"
-    title="Divisions used a 'comments' field that is now replaced by the default 'description' field"
-    version="2012-01-10T16:15.0">
-      Divisions used a 'comments' field that is now replaced by the default 'description' field
- </import-step>
- <import-step
     id="urban-migrateFoldermanagersReferenceField"
     handler="Products.urban.profiles.migrations.migrate.migrateFoldermanagersReferenceField"
     title="Divisions, Certificates and Declarations inherit the foldermanagers field from GenericLicence now"
     version="2012-01-10T16:15.0">
      Divisions, Certificates and Declarations inherit the foldermanagers field from GenericLicence now
- </import-step>
- <import-step
-    id="urban-migrateOpinionRequestTalExpression"
-    handler="Products.urban.profiles.migrations.migrate.migrateOpinionRequestTalExpression"
-    title="Update the TAL condition in the 'opinionRequest' UrbanEventTypes"
-    version="2012-01-10T16:15.0">
-    Update the TAL condition in the 'opinionRequest' UrbanEventTypes
  </import-step>
 </import-steps>
