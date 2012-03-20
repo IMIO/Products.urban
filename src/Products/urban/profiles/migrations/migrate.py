@@ -706,6 +706,8 @@ def migrationToUrbanEventInquiries(context):
     for migrator in migrators:
         walker = migrator.walker(portal, migrator, query={'id': 'enquete-publique'})
         walker.go()
+        # we need to reset the class variable to avoid using current query in next use of CustomQueryWalker
+        walker.__class__.additionalQuery = {}
     #enable linkintegrity checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
 
@@ -740,6 +742,8 @@ def migrationProprietaryToContact(context):
     for migrator in migrators:
         walker = migrator.walker(portal, migrator)
         walker.go()
+        # we need to reset the class variable to avoid using current query in next use of CustomQueryWalker
+        walker.__class__.additionalQuery = {}
     logger.info("Migrating Proprietary portal_type to Applicant portal_type: done!")
 
 def addMd5SignatureAndProfileNameProperties(context):
@@ -883,6 +887,8 @@ def migrateFoldermakersTerms(context):
         folder_path = "%s/portal_urban/buildlicence/foldermakers" % '/'.join(portal.getPhysicalPath())
         walker = migrator.walker(portal, migrator, query={'path':folder_path,})
         walker.go()
+        # we need to reset the class variable to avoid using current query in next use of CustomQueryWalker
+        walker.__class__.additionalQuery = {}
     logger.info("Migrating UrbanVocabularyterms 'foldermakers': done!")
 
 def migrateFoldermanagers(context):
