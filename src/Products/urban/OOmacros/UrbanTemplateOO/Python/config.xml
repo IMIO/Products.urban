@@ -216,37 +216,37 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getFolderManagersSign
     </Item>
     <Item name="Nom">
         <FieldCode>
-            self.getFolderManagers()[0].getName1()
+            self.getFoldermanagers()[0].getName1()
         </FieldCode>        
     </Item>
     <Item name="Prénom">
         <FieldCode>
-            self.getFolderManagers()[0].getName2()
+            self.getFoldermanagers()[0].getName2()
         </FieldCode>        
     </Item>
     <Item name="Téléphone">
         <FieldCode>
-            self.getFolderManagers()[0].getPhone()
+            self.getFoldermanagers()[0].getPhone()
         </FieldCode>        
     </Item>
     <Item name="Fax">
         <FieldCode>
-            self.getFolderManagers()[0].getFax() 
+            self.getFoldermanagers()[0].getFax() 
         </FieldCode>        
     </Item>
     <Item name="Email">
         <FieldCode>
-            self.getFolderManagers()[0].getEmail() 
+            self.getFoldermanagers()[0].getEmail() 
         </FieldCode>        
     </Item>
     <Item name="Initials">
         <FieldCode>
-            self.getFolderManagers()[0].getInitials()
+            self.getFoldermanagers()[0].getInitials()
         </FieldCode>        
     </Item>
     <Item name="Grade">
         <FieldCode>
-            self.displayValue(self.getFoldermanagers()[0].Vocabulary('grade')[0], self.getFoldermanagers()[0].getGrade())
+            self.getValueForTemplate('grade', obj=self.getFoldermanagers()[0])
         </FieldCode>        
     </Item>
 </Object>
