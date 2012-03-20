@@ -824,7 +824,6 @@ def provideEventMarkerInterfaces(context):
         urbanevent = brain.getObject()
         event_type = urbanevent.getUrbaneventtypes()
         interfacepath = event_type.getEventTypeType()
-        print(interfacepath)
         interface = None
         if interfacepath != '':
             interface = getInterface('', interfacepath)
@@ -842,7 +841,7 @@ def migrateLayersForMapfish(context):
     for brain in brains:
         layer = brain.getObject()
         if brain.id.startswith('ppnc'):
-            layer.aq_inner.aq_parent.manage_delObjects(brain.id)
+            #layer.aq_inner.aq_parent.manage_delObjects(brain.id)
             continue
         if not layer.getLayerFormat():
             layer.setLayerFormat('image/png')
