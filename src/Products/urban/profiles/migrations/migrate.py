@@ -17,6 +17,7 @@ from Products.urban.utils import getMd5Signature
 from Products.urban.config import GLOBAL_TEMPLATES, URBAN_TYPES
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.CMFPlone.utils import safe_hasattr
+from re import search
 
 logger = logging.getLogger('urban: migrations')
 
@@ -82,6 +83,10 @@ def migrateToPlone4(context):
     addMissingUrbanVocabularyTerms(context)
     #Divisions used a 'comments' field that is now replaced by the default 'description' field
     migrateDivisionsCommentsToDescription(context)
+    #Migrate the foldermanager references
+    #migrateFoldermanagersReferenceField(context) #no more needed
+    #Migrate the tal expression in the UrbanEvenType of opinions request
+    migrateOpinionRequestTalExpression(context)
     #Update all the templates
     #We must run this step separately, to keep log inside portal_setup
     #updateUrbanTemplates(context)
@@ -1163,3 +1168,22 @@ def migrateFoldermanagersReferenceField(context):
 def updateUrbanTemplates(context):
     setup = getToolByName(context.getSite(), 'portal_setup')
     setup.runImportStepFromProfile('profile-Products.urban:tests', 'urban-updateAllUrbanTemplates')
+
+def migrateOpinionRequestTalExpression(context):
+    """
+    The tal expression used in the opinion request UrbanEventType has changed so it should be updated
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+    urban_tool = getToolByName(site, 'portal_urban')
+    for licence_type in  URBAN_TYPES:
+        licence_cfg= getattr(urban_tool, licence_type.lower(), None)
+        if licence_cfg:
+            opinion_request_events = [event for event in licence_cfg.urbaneventtypes.objectValues() if event.id.endswith('opinion-request')]
+            for opinion_request_cfg in opinion_request_events[1:]:
+                tal_condition = opinion_request_cfg.getTALCondition()
+                match = search("'(.*?)' in here.getSolicitOpinionsTo()", tal_condition)
+                if match:
+                    tal_condition = "python: here.mayAddOpinionRequestEvent('%s')" % match.group(1)
+                    opinion_request_cfg.setTALCondition(tal_condition)
