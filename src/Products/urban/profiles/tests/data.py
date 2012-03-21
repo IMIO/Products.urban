@@ -531,6 +531,27 @@ urbanEventTypes = {
                                     ),
                     },
                    ),
+                   'notaryletter':
+                   (
+                    {
+                    'id': "depot-de-la-demande",
+                    'title': "Dépôt de la demande",
+                    'activatedFields': [],
+                    'deadLineDelay': 40,
+                    'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+                    },
+                    {
+                    'id': "octroi-lettre-notaire",
+                    'title': "Octroi de la lettre d'information notariale",
+                    'eventDateLabel': "Date de notification",
+                    'deadLineDelay': 15,
+                    'podTemplates': (
+                                     {'id': "not-lettre-information-notariale", 'title': "Octroi de la lettre d'information notariale"},
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+                    },
+                   ),
                    'environmentaldeclaration':
                    (
                     {

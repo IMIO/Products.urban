@@ -29,14 +29,6 @@
       />
 
   <browser:page
-     for="*"
-     name="searchparcels"
-     class=".searchparcelsview.SearchParcelsView"
-     template="templates/searchparcels.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
      name="urban_view"
      class=".urbanview.UrbanView"
@@ -149,7 +141,23 @@
      permission="zope2.View"
   />
 
- <browser:page
+  <browser:page
+     for="Products.urban.interfaces.IUrbanCertificateBase"
+     name="notaryletterview"
+     class=".notaryletterview.NotaryLetterView"
+     template="templates/notaryletterview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="notaryletter-macros"
+     for="Products.urban.interfaces.IUrbanCertificateBase"
+     class=".notaryletterview.NotaryLetterMacros"
+     template="templates/notarylettermacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IDivision"
      name="divisionview"
      class=".divisionview.DivisionView"

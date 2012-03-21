@@ -1503,6 +1503,15 @@ def addTestLicences(context):
                 'licenceSubject':'Exemple Certificat Urbanisme 2',
                 'contact_type':'Applicant',
             },
+            'NotaryLetter':{
+                'licenceSubject':'Exemple Lettre de notaire',
+                'contact_type':'Applicant',
+            },
+            'MiscDemand':{
+                'licenceSubject':'Exemple Demande diverse',
+                'contact_type':'Applicant',
+            },
+ 
      }
 
     odt_files = []
@@ -1531,7 +1540,7 @@ def addTestLicences(context):
         if values.has_key('contact_data'):
             contact_data = values['contact_data']
         licence.invokeFactory(values['contact_type'], id=site.generateUniqueId('contact'), **contact_data)
-        #  call post script
+        # call post script
         licence.at_post_create_script()
         # add a dummy portion out
         portionout_data = {

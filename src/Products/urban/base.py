@@ -176,12 +176,13 @@ class UrbanBase(object):
                         'UrbanCertificateOne': 'CU1',
                         'UrbanCertificateBase': 'CU1',
                         'UrbanCertificateTwo': 'CU2',
-                        'NotaryLetter': 'Not',
                         'EnvironmentalDeclaration': 'DeclEnv',
                         'Declaration': 'Decl',
                         'Division': 'Div',
                         'MiscDemand': 'DD',
                        }
+        if "notaryletter" in self.id:
+            return 'Not'
         try:
             return licenceTypes[self.portal_type]
         except KeyError:
