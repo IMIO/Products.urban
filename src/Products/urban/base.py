@@ -176,6 +176,7 @@ class UrbanBase(object):
                         'UrbanCertificateOne': 'CU1',
                         'UrbanCertificateBase': 'CU1',
                         'UrbanCertificateTwo': 'CU2',
+                        'NotaryLetter': 'Not',
                         'EnvironmentalDeclaration': 'DeclEnv',
                         'Declaration': 'Decl',
                         'Division': 'Div',

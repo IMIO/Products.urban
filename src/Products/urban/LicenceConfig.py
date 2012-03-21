@@ -59,6 +59,7 @@ from Division import Division_schema
 from UrbanCertificateBase import UrbanCertificateBase_schema
 from UrbanCertificateTwo import UrbanCertificateTwo_schema
 from EnvironmentalDeclaration import EnvironmentalDeclaration_schema
+from MiscDemand import MiscDemand_schema
 FTI_SCHEMAS = {
     'BuildLicence' : BuildLicence_schema,
     'ParcelOutLicence' : ParcelOutLicence_schema,
@@ -68,6 +69,7 @@ FTI_SCHEMAS = {
     'UrbanCertificateTwo' : UrbanCertificateTwo_schema,
     'NotaryLetter' : UrbanCertificateBase_schema,
     'EnvironmentalDeclaration' : EnvironmentalDeclaration_schema,
+    'MiscDemand' : MiscDemand_schema,
 }
 
 ##/code-section after-schema

@@ -35,6 +35,13 @@ schema = Schema((
 ),
 )
 
+optional_fields = ['subdivisionDetails','missingParts','missingPartsDetails','folderZoneDetails','folderZone',
+                   'derogationDetails','isInPCA','annoncedDelayDetails','roadType','roadCoating','roadEquipments',
+                   'investigationDetails','investigationReasons','isInSubdivision', 'solicitLocationOpinionsTo',
+                   'folderCategoryTownship','protectedBuilding','protectedBuildingDetails',
+                   'pash','pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks',
+                   'pca','SSC','RCU','floodingLevel','solicitRoadOpinionsTo', 'areParcelsVerified', 'locationFloodingLevel']
+
 ##code-section after-local-schema #fill in your manual code here
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
