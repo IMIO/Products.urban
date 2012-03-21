@@ -2,7 +2,7 @@
 from Products.urban.utils import moveElementAfter
 
 def createLinkedOpinionRequest(term, event):
-    parentfolder = term.aq_parent
+    parentfolder = term.aq_parent.aq_parent
     urban_event_types = parentfolder.urbaneventtypes
     new_id = '%s-%s' %(term.getId(),'opinion-request')
     if new_id in urban_event_types.objectIds():
