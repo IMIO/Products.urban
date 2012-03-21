@@ -105,6 +105,7 @@ def migrateToWorkLocationsDataGridField(context):
     brains = site.portal_catalog(portal_type = ['BuildLicence', 'Declaration',
                     'Division', 'EnvironmentalDeclaration', 'UrbanCertificateOne',
                     'UrbanCertificateTwo', 'ParcelOutLicence'])
+    count = 0
     for brain in brains:
         locations = []
         objectToDeleteIds = []
@@ -119,10 +120,14 @@ def migrateToWorkLocationsDataGridField(context):
             dict['number'] = previousWorkLocation.getNumber()
             locations.append(dict)
             objectToDeleteIds.append(previousWorkLocation.getId())
-        #remove old WorkLocation objects
-        obj.manage_delObjects(objectToDeleteIds)
-        #set the new workLocations
-        obj.setWorkLocations(locations)
+        if objectToDeleteIds:
+            #remove old WorkLocation objects
+            obj.manage_delObjects(objectToDeleteIds)
+            #set the new workLocations
+            obj.setWorkLocations(locations)
+            count += 1
+    logger = context.getLogger('migrateToWorkLocationsDataGridField (replacing WorkLocation object by datagrid field)')
+    logger.info(" %d licences migrated"%count)
 
 def migrateToContact(context):
     """
