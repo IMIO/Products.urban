@@ -17,16 +17,22 @@ def check_zope_admin():
 
 ###############################################################################
 
-def urban_check_addresses(self):
+def urban_check_addresses(self, restore=''):
     """
         Check licences addresses: status, saving/restoring
     """
     if not check_zope_admin():
         return "You must be a zope manager to run this script"
     out = []
+    details = []
     saved = {}
+    do_restore = False
+    if restore not in ('', '0', 'False', 'false'):
+        do_restore = True
+
     from Products.CMFCore.utils import getToolByName
     site = getToolByName(self, 'portal_url').getPortalObject()
+    uidc = getToolByName(self, 'uid_catalog')
 
     def dump_dic(outfile, dic):
         ofile = open( outfile, 'w')
@@ -43,19 +49,37 @@ def urban_check_addresses(self):
     load_dic(save_file, saved)
 
     brains = site.portal_catalog(portal_type = ['BuildLicence', 'Declaration', 'Division', 'EnvironmentalDeclaration', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'ParcelOutLicence'])
-    count_db_lic = count_db_good = count_db_bad =count_db_ns = count_fl_good = count_fl_rest = 0
+    count_db_lic = count_db_good = count_db_bad =count_db_ns = count_fl_good = count_fl_rest = count_fl_new = 0
     #import ipdb; ipdb.set_trace()
     for brain in brains:
         count_db_lic += 1
         lic = brain.getObject()
         path = brain.getPath()
         addresses = lic.getWorkLocations()
+        # the licence isn't yet in the saved dict
         if not saved.has_key(path):
             saved[path] = {'addr':addresses}
             count_db_ns += 1
+        # the saved licence contains an address
         elif len(saved[path]['addr']):
             count_fl_good += 1
-            if not len(addresses): count_fl_rest += 1
+            if not len(addresses):
+                count_fl_rest += 1
+                if do_restore:
+                    found = True
+                    for addr in saved[path]['addr']:
+                        if not uidc(UID=addr['street']): found = False
+                    if found:
+                        lic.setWorkLocations(saved[path]['addr'])
+                        details.append("%s: %s"%(path, str(lic.getWorkLocations())))
+                    else:
+                        details.append("%s: %s !! some streets not found in db"%(path, str(saved[path]['addr'])))
+                    #obj.reindexObject()
+        # the saved licence doesn't contain any address, we have to complete it
+        elif len(addresses):
+            count_fl_new += 1
+            saved[path]['addr'] = addresses
+            
         if len(addresses):
             count_db_good += 1
         else:
@@ -69,7 +93,9 @@ def urban_check_addresses(self):
     out.append("<br /><b>Compared to saved</b>")
     out.append("Number of licences not yet saved: %d"%count_db_ns)
     out.append("Saved licences with addr: %d"%count_fl_good)
+    out.append("Saved licences with new addr: %d"%count_fl_new)
     out.append("Saved licences with addr to restore: %d"%count_fl_rest)
+    out += details
     return '<br />\n'.join(out)
 
 ###############################################################################
