@@ -67,7 +67,7 @@ def urban_check_addresses(self, restore='',  missing=''):
             count_db_good += 1
         else:
             count_db_bad += 1
-            miss.append("%s: missing address"%(path))
+            miss.append("%s: %s"%(path, lic.Title()))
 
         # the licence isn't yet in the saved dict
         if not saved.has_key(path):
