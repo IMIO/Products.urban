@@ -17,6 +17,63 @@ def check_zope_admin():
 
 ###############################################################################
 
+def urban_check_addresses(self):
+    """
+        Check licences addresses: status, saving/restoring
+    """
+    if not check_zope_admin():
+        return "You must be a zope manager to run this script"
+    out = []
+    saved = {}
+    from Products.CMFCore.utils import getToolByName
+    site = getToolByName(self, 'portal_url').getPortalObject()
+
+    def dump_dic(outfile, dic):
+        ofile = open( outfile, 'w')
+        ofile.write(dic.__str__())
+        ofile.close()
+    def load_dic(infile, dic):
+        if os.path.exists(infile):
+            ofile = open( infile, 'r')
+            dic.update(eval(ofile.read()))
+            ofile.close()
+    import os
+    home = os.environ.get('INSTANCE_HOME') # like .../parts/instance in a buildout env
+    save_file = os.path.join(home, '../../saved_addresses.txt') # root of the buildout
+    load_dic(save_file, saved)
+
+    brains = site.portal_catalog(portal_type = ['BuildLicence', 'Declaration', 'Division', 'EnvironmentalDeclaration', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'ParcelOutLicence'])
+    count_db_lic = count_db_good = count_db_bad =count_db_ns = count_fl_good = count_fl_rest = 0
+    #import ipdb; ipdb.set_trace()
+    for brain in brains:
+        count_db_lic += 1
+        lic = brain.getObject()
+        path = brain.getPath()
+        addresses = lic.getWorkLocations()
+        if not saved.has_key(path):
+            saved[path] = {'addr':addresses}
+            count_db_ns += 1
+        elif len(saved[path]['addr']):
+            count_fl_good += 1
+            if not len(addresses): count_fl_rest += 1
+        if len(addresses):
+            count_db_good += 1
+        else:
+            count_db_bad += 1
+
+    dump_dic(save_file, saved)
+    out.append("<b>In current db</b>")
+    out.append("Number of licences: %d"%count_db_lic)
+    out.append("Licences with addresses: %d"%count_db_good)
+    out.append("Licences without addresses: %d"%count_db_bad)
+    out.append("<br /><b>Compared to saved</b>")
+    out.append("Number of licences not yet saved: %d"%count_db_ns)
+    out.append("Saved licences with addr: %d"%count_fl_good)
+    out.append("Saved licences with addr to restore: %d"%count_fl_rest)
+    return '<br />\n'.join(out)
+
+###############################################################################
+
 def urban_replace_templates(self, replace_globals=0, replace_events=0):
     """
         Call the updateAllUrbanTemplates from tests profile.
