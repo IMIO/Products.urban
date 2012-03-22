@@ -27,7 +27,7 @@ def urban_check_addresses(self, restore='',  missing=''):
     out.append("-> restore=1 : to restore addresses from file system dictionary")
     out.append("-> missing=1 : to print without address object's path<br />")
     details = ['<br />Restored']
-    missing = ['<br />Missing']
+    miss = ['<br />Missing']
     saved = {}
     do_restore = False
     if restore not in ('', '0', 'False', 'false'):
@@ -67,7 +67,7 @@ def urban_check_addresses(self, restore='',  missing=''):
             count_db_good += 1
         else:
             count_db_bad += 1
-            missing.append("%s: missing address"%(path))
+            miss.append("%s: missing address"%(path))
 
         # the licence isn't yet in the saved dict
         if not saved.has_key(path):
@@ -106,7 +106,7 @@ def urban_check_addresses(self, restore='',  missing=''):
     if do_restore:
         out += details
     if print_missing:
-        out += missing
+        out += miss
     return '<br />\n'.join(out)
 
 ###############################################################################
