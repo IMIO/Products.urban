@@ -17,18 +17,24 @@ def check_zope_admin():
 
 ###############################################################################
 
-def urban_check_addresses(self, restore=''):
+def urban_check_addresses(self, restore='',  missing=''):
     """
         Check licences addresses: status, saving/restoring
     """
     if not check_zope_admin():
         return "You must be a zope manager to run this script"
-    out = []
-    details = []
+    out = ["You can call the script with following parameters:"]
+    out.append("-> restore=1 : to restore addresses from file system dictionary")
+    out.append("-> missing=1 : to print without address object's path<br />")
+    details = ['<br />Restored']
+    missing = ['<br />Missing']
     saved = {}
     do_restore = False
     if restore not in ('', '0', 'False', 'false'):
         do_restore = True
+    print_missing = False
+    if missing not in ('', '0', 'False', 'false'):
+        print_missing = True
 
     from Products.CMFCore.utils import getToolByName
     site = getToolByName(self, 'portal_url').getPortalObject()
@@ -56,6 +62,13 @@ def urban_check_addresses(self, restore=''):
         lic = brain.getObject()
         path = brain.getPath()
         addresses = lic.getWorkLocations()
+
+        if len(addresses):
+            count_db_good += 1
+        else:
+            count_db_bad += 1
+            missing.append("%s: missing address"%(path))
+
         # the licence isn't yet in the saved dict
         if not saved.has_key(path):
             saved[path] = {'addr':addresses}
@@ -80,11 +93,6 @@ def urban_check_addresses(self, restore=''):
             count_fl_new += 1
             saved[path]['addr'] = addresses
             
-        if len(addresses):
-            count_db_good += 1
-        else:
-            count_db_bad += 1
-
     dump_dic(save_file, saved)
     out.append("<b>In current db</b>")
     out.append("Number of licences: %d"%count_db_lic)
@@ -95,7 +103,10 @@ def urban_check_addresses(self, restore=''):
     out.append("Saved licences with addr: %d"%count_fl_good)
     out.append("Saved licences with new addr: %d"%count_fl_new)
     out.append("Saved licences with addr to restore: %d"%count_fl_rest)
-    out += details
+    if do_restore:
+        out += details
+    if print_missing:
+        out += missing
     return '<br />\n'.join(out)
 
 ###############################################################################
