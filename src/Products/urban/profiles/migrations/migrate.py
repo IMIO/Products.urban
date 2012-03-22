@@ -32,23 +32,14 @@ def migrateToPlone4(context):
 
     #remove useless attribute 'usePloneTask'
     migrateTool(context)
-    #remove the 'format' attribute as it is replaced now by layerFormat
-    #because the name 'format' for a field is problematic...
-    migrateFormatFieldFromLayers(context)
     #this field is now a DataGridField
     migrateRoadEquipments(context)
     #delays were UrbanVocabularyTerms, now they are UrbanDelays
     migrateFolderDelays(context)
-    #before, BuildLicence.annoncedDelay was UrbanVocabularyTerms, now they are UrbanDelays
-    migrateAnnoncedDelays(context)
     #we have now PersonTitleTerms instead of UrbanVocabularyTerms to manage persons titles
     migratePersonTitles(context)
-    #remove useless fields 'termKey' and 'termKeyStr'
-    migrateUrbanVocabularyTerms(context)
     #workLocations object disappeared, we now use a workLocations DataGridField
     migrateToWorkLocationsDataGridField(context)
-    #we replace licence folders from portal_urban to LicenceConfig objects
-    migrateToLicenceConfig(context)
     #we replace architect objects (based on Architect meta_type) by new objects (based on Contact meta_type)
     migrateArchitectToContact(context)
     #migration of contact type objects to provides specific interfaces
@@ -59,32 +50,16 @@ def migrateToPlone4(context):
     migrateUrbanEventTypes(context)
     #add md5Signature and profileName properties for each template
     addMd5SignatureAndProfileNameProperties(context)
-    #every folder that will contain licences need to provide ILicenceContainer
-    migrateLicenceContainers(context)
-    #migration of Event objects to provides marker interfaces
-    provideEventMarkerInterfaces(context)
-    #get rid of the Proprietary portal_type, we use Applicant
-    migrationProprietaryToContact(context)
-    #migration of Layers
-    #migrateLayersForMapfish(context) #no more needeed
     #migrate the foldermakers UrbanVocabularyTerms to allow them to link an UrbanEventType
     migrateFoldermakersTerms(context)
     #Move all the FolderManager objects into a single folder at the root of urban config
     migrateFoldermanagers(context)
-    #some templates where defined as attributes on the tool, now we store them in a specific folder
-    migrateGlobalTemplates(context)
-    #Some folders defined on LicenceConfigs are now at the portal_urban root
-    migrateSomeLocalFoldersAsGlobal(context)
-    #Before, there was several xxxSubject fields, now we use licenceSubject
-    migrateSubjectFields(context)
     #Declarations need an extra value to be defined on UrbanVocabularyTerms in portal_urban.decisions
     migrateDecisionsForDeclarations(context)
     #some UrbanVocabularyTerms have been added afterward, we need to add them now
     addMissingUrbanVocabularyTerms(context)
     #Divisions used a 'comments' field that is now replaced by the default 'description' field
     migrateDivisionsCommentsToDescription(context)
-    #Migrate the foldermanager references
-    #migrateFoldermanagersReferenceField(context) #no more needed
     #Migrate the tal expression in the UrbanEvenType of opinions request
     migrateOpinionRequestTalExpression(context)
     #Update all the templates
@@ -101,6 +76,8 @@ def migrateToWorkLocationsDataGridField(context):
         return
 
     site = context.getSite()
+    
+    if not site.portal_catalog(portal_type='WorkLocation'): return
 
     brains = site.portal_catalog(portal_type = ['BuildLicence', 'Declaration',
                     'Division', 'EnvironmentalDeclaration', 'UrbanCertificateOne',
@@ -127,198 +104,7 @@ def migrateToWorkLocationsDataGridField(context):
             obj.setWorkLocations(locations)
             count += 1
     logger = context.getLogger('migrateToWorkLocationsDataGridField (replacing WorkLocation object by datagrid field)')
-    logger.info(" %d licences migrated"%count)
-
-def migrateToContact(context):
-    """
-      More portal_types are now based on Contact.  Migrate old instances
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-
-    brains = site.portal_catalog(portal_type=["Applicant", "Proprietary", "Notary", ])
-    
-    for brain in brains:
-        obj = brain.getObject()
-        if obj.meta_type == "Contact":
-            continue
-        data = {
-                'personTitle': obj.getPersonTitle(),
-                'name1': obj.getName1(),
-                'name2': obj.getName2(),
-                'society': obj.getSociety(),
-                'street': obj.getStreet(),
-                'number': obj.getNumber(),
-                'zipcode': obj.getZipcode(),
-                'city': obj.getCity(),
-                'email': obj.getEmail(),
-                'phone': obj.getPhone(),
-                'fax': obj.getFax(),
-                'nationRegister': obj.getNationalRegister(),
-               }
-        parent = obj.aq_inner.aq_parent
-        oldId = obj.getId()
-        oldPortalType = obj.portal_type
-        newId = parent.invokeFactory(type_name=oldPortalType, id=oldId + '_new', **data)
-        newObj = getattr(parent, newId)
-        #keep references for Notary
-        if oldPortalType == "Notary":
-            brefs = obj.getBRefs()
-            for bref in brefs:
-                bref.setNotaryContact(newObj)
-        newObj.reindexObject()
-        #remove the old object
-        parent.manage_delObjects(oldId)
-
-def migrateToMultiStreets(context):
-    """
-      Migrate to multiple addresses.  Remove existing workLocation and
-      workLocationHouseNumber attributes and create a primary WorkLocation
-      instead
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-
-    portal_url = getToolByName(site, 'portal_url')
-    reference_catalog = getToolByName(site, 'reference_catalog')
-
-    types_to_migrate = ['BuildLicence', 'ParcelOutLicence', 'Declaration',\
-                        'Division', 'NotaryLetter', 'UrbanCertificateOne',\
-                        'UrbanCertificateTwo', 'EnvironmentalDeclaration', ]
-
-    brains = site.portal_catalog(portal_type=types_to_migrate)
-    for brain in brains:
-        obj = brain.getObject()
-        #in case we run this script several time, check that the current
-        #element has not already been converted
-        if not hasattr(obj, 'workLocationHouseNumber'):
-            continue
-        #else, proceed : add a primary WorkLocation and remove no more used attributes
-        #get the street...
-        objuid = obj.UID()
-        refbrain = reference_catalog(relationship='street', sourceUID=objuid)
-        #if we did not found the street, we continue to the next element
-        if not refbrain:
-            continue
-        workLocationStreetObj = refbrain[0].getObject().getTargetObject()
-        workLocationNumber = obj.workLocationHouseNumber
-        normalizedNumber = site.plone_utils.normalizeString(workLocationNumber)
-        id = "%s-%s" % (workLocationStreetObj.getId(), normalizedNumber)
-        i = 1
-        while id in obj.objectIds():
-            id = "%s-%d" % (id, i)
-            i = i + 1
-        data = {
-                'street': workLocationStreetObj,
-                'number': workLocationNumber,
-                'isSupplementary': False,
-                }
-        newId = obj.invokeFactory("WorkLocation", id=id, **data)
-        newObj = getattr(obj, newId)
-        newObj.at_post_create_script()
-
-        #the workLocation attribute was a ReferenceField
-        delattr(obj, 'workLocationHouseNumber')
-        logger.info('%s element is now multiple addresses aware' % portal_url.getRelativeUrl(obj))
-
-def migrateWorkLocation(context):
-    """
-      Migrate the workLocation attribute.  Check if a workLocation street is
-      already selected and remove old workLocationStreet, workLocationZipCode
-      and workLocationCity attributes
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-
-    portal_url = getToolByName(site, 'portal_url')
-
-    brains = site.portal_catalog(portal_type="BuildLicence")
-    for brain in brains:
-        obj = brain.getObject()
-        #in case we run this script several time, check that the current
-        #BuildLicence has not already been converted
-        if not hasattr(obj, 'workLocationStreet'):
-            continue
-        #else, proceed and remove no more used attributes
-        delattr(obj, 'workLocationStreet')
-        delattr(obj, 'workLocationZipCode')
-        delattr(obj, 'workLocationCity')
-        logger.info('%s workLocation* attributes have been migrated' % portal_url.getRelativeUrl(obj))
-
-def migratePersonTitle(context):
-    """
-      personTitle was hardcoded in french on Contacts...  Map old values to new...
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-
-    mapping = {
-               'Madame':'madam',
-               'Monsieur':'mister',
-               'Mademoiselle':'miss',
-               'Monsieur et Madame':'madam_and_mister',
-               'Maître':'master',
-              }
-    portal_catalog = getToolByName(site, 'portal_catalog')
-    brains = portal_catalog(portal_type=('Applicant', 'Architect',))
-    for brain in brains:
-        obj = brain.getObject()
-        personTitle = obj.getPersonTitle()
-        for key in mapping.keys():
-            if key == personTitle:
-                obj.setPersonTitle(mapping[key])
-                logger.info('%s personTitle attribute has been migrated to %s' % (site.portal_url.getRelativeUrl(obj), key))
-                obj.reindexObject()
-
-def migrateFolderZone(context):
-    """
-      folderZone is now multiValued
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-
-    portal_catalog = getToolByName(site, 'portal_catalog')
-    brains = portal_catalog(portal_type=('BuildLicence', 'ParcelOutLicence',))
-    for brain in brains:
-        obj = brain.getObject()
-        fz = obj.folderZone
-        obj.setFolderZone((fz,))
-        logger.info("%s's folder zone has been migrated" % obj.Title())
-
-def migrateBuildLicencesInvestigationArticles(context):
-    """
-      investigationArticles is now a MultiSelection and replace
-      both investigationArticle and investigationPoint fields
-      We only care about default 330/1 to 330/13
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-
-    #first, be sure that we have the right defined values in the configuration
-    if not hasattr(site.portal_urban.buildlicence, 'investigationarticles'):
-        from Products.urban.setuphandlers import addInvestigationArticles
-        addInvestigationArticles(context, site.portal_urban.buildlicence)
-
-    portal_catalog = getToolByName(site, 'portal_catalog')
-    brains = portal_catalog(portal_type=('BuildLicence','ParcelOutLicence'))
-    for brain in brains:
-        obj = brain.getObject()
-        if not hasattr(obj, 'investigationArticle'):
-            continue
-        article = obj.investigationArticle
-        point = obj.investigationPoint
-        if point and article == 330:
-            obj.setInvestigationArticles(('330-%s' % str(point),))
-        #remove old useless fields
-        delattr(obj, 'investigationArticle')
-        delattr(obj, 'investigationPoint')
-        logger.info("%s's investigation article has been migrated" % obj.Title())
+    logger.info("%d licences migrated"%count)
 
 def migrateUrbanEventTypes(context):
     """
@@ -332,6 +118,8 @@ def migrateUrbanEventTypes(context):
 
     portal_url = getToolByName(site, 'portal_url')
 
+    count = 0
+    logger = context.getLogger('migrateUrbanEventTypes')
     brains = site.portal_catalog(portal_type="UrbanEventType")
     for brain in brains:
         obj = brain.getObject()
@@ -353,7 +141,7 @@ def addMissingUrbanVocabularyTerms(context):
     if isNoturbanMigrationsProfile(context): return
 
     site = context.getSite()
-    logger.info("Adding missing UrbanVocabularyTerms : starting...")
+    logger = context.getLogger('addMissingUrbanVocabularyTerms')
 
     #list of sublists of two elements
     #first element is the folder to add the element in
@@ -368,9 +156,8 @@ def addMissingUrbanVocabularyTerms(context):
         if not hasattr(destFolder, data['id']):
             destFolder.invokeFactory("UrbanVocabularyTerm", **data)
             logger.info("Added a missing UrbanVocabularyTerm '%s' in '%s'" % (data['id'], '/'.join(destFolder.getPhysicalPath())))
-        else:
-            logger.info("'%s' already exists in '%s'" % (data['id'], '/'.join(destFolder.getPhysicalPath())))
-    logger.info("Adding missing UrbanVocabularyTerms : done!")
+#        else:
+#            logger.info("'%s' already exists in '%s'" % (data['id'], '/'.join(destFolder.getPhysicalPath())))
 
 def migrateFolderDelays(context):
     """
@@ -381,7 +168,8 @@ def migrateFolderDelays(context):
 
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
-    logger.info("Migrating folderdelays : starting...")
+    logger = context.getLogger('migrateFolderDelays')
+    count = 0
     #look in every UrbanConfigs
     for urbanConfig in tool.objectValues('ATFolder'):
         #check if a "folderdelays" folder exists
@@ -405,30 +193,10 @@ def migrateFolderDelays(context):
                 folderdelays.manage_delObjects(data['id'])
                 newObjId = folderdelays.invokeFactory('UrbanDelay', **data)
                 newObj = getattr(folderdelays, newObjId)
+                count += 1
                 logger.info("UrbanVocabularyTerm at '%s' has been migrated" % newObj.absolute_url())
-    logger.info("Migrating folderdelays : do not forget to adapt the alert delay on migrated elements!")
-    logger.info("Migrating folderdelays : done!")
-
-def migrateTopicsAddPathCriterion(context):
-    """
-      We need some topics to have a path criterion now, so add it if necessary
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-
-    catalog = getToolByName(site, 'portal_catalog')
-    portal_urban = getToolByName(site, 'portal_urban')
-    #find the topics
-    brains = catalog(path='/'.join(portal_urban.getPhysicalPath()), portal_type='Topic')
-    topicsToAdaptIds = ['searchalllicences', 'searchinprogresslicences', 'searchretiredlicences', 'searchincompletelicences', 'searchacceptedlicences', 'searchrefusedlicences', ]
-    for brain in brains:
-        if brain.id in topicsToAdaptIds:
-            topic = brain.getObject()
-            #check if the criterion is already there
-            if not 'crit__path_ATPathCriterion' in topic.objectIds():
-                criterion = topic.addCriterion(field='path', criterion_type='ATPathCriterion')
-                criterion.setValue(['',])
+    if count:
+        logger.info("Do not forget to adapt the alert delay on migrated elements!")
 
 def migrateTool(context):
     """
@@ -438,28 +206,12 @@ def migrateTool(context):
 
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
+    logger = context.getLogger('migrateTool')
     try:
         delattr(tool, 'usePloneTask')
         logger.info("The 'usePloneTask' attribute has been removed from portal_urban")
     except AttributeError:
-        logger.info("The 'usePloneTask' attribute does not exist on portal_urban!")
-
-def migrateFormatFieldFromLayers(context):
-    """
-        The field named 'format' on content_type Layer has been renamed to layerFormat
-        The problem is that it was never stored, so always empty
-        This migration just delete the atribute so...
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-    tool = getToolByName(site, 'portal_urban')
-    for layer in tool.additional_layers.objectValues('Layer'):
-        try:
-            delattr(layer, 'format')
-            logger.info("The layer '%s' format's attribute has been removed" % layer.getId())
-        except AttributeError:
-            logger.info("The layer '%s' has no 'format' attribute!" % layer.getId())
+        pass
 
 def migrateRoadEquipments(context):
     """
@@ -472,6 +224,7 @@ def migrateRoadEquipments(context):
     site = context.getSite()
     catalog = getToolByName(site, 'portal_catalog')
     #adapt the roadEquipments field
+    logger = context.getLogger('migrateRoadEquipments')
     brains = catalog(portal_type=('BuildLicence', 'ParcelOutLicence',))
     for brain in brains:
         obj = brain.getObject()
@@ -487,37 +240,6 @@ def migrateRoadEquipments(context):
                 res.append(dict)
             obj.setRoadEquipments(res)
             logger.info("The roadEquipments for '%s' has been migrated" % obj.getId())
-        else:
-            logger.info("The roadEquipments for '%s' was already migrated!" % obj.getId())
-
-def migrateAnnoncedDelays(context):
-    """
-        Before, BuildLicence.annoncedDelay was UrbanVocabularyTerms, now they are UrbanDelays
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-
-    catalog = getToolByName(site, 'portal_catalog')
-    tool = getToolByName(site, 'portal_urban')
-    #adapt the annoncedDelay field
-    portalTypesToConsider = ('BuildLicence', 'ParcelOutLicence',)
-    for portalTypeToConsider in portalTypesToConsider:
-        brains = catalog(portal_type=portalTypeToConsider)
-        urbanConfigId = portalTypeToConsider.lower()
-        urbanConfig = getattr(tool, urbanConfigId)
-        delays = urbanConfig.folderdelays.objectValues('UrbanDelay')
-        for brain in brains:
-            obj = brain.getObject()
-            annoncedDelay = obj.getAnnoncedDelay()
-            #before, the saved value was a digit (an integer in a string)
-            if annoncedDelay.isdigit():
-                #get the corresponding UrbanDelay
-                for delay in delays:
-                    if str(delay.getDeadLineDelay()) == str(annoncedDelay):
-                        #adapt the annoncedDelay
-                        obj.setAnnoncedDelay(delay.getId())
-                        logger.info("The annoncedDelay for '%s' has been migrated" % obj.getId())
 
 def migratePersonTitles(context):
     """
@@ -530,7 +252,7 @@ def migratePersonTitles(context):
     personTitlesFolder.setConstrainTypesMode(1)
     personTitlesFolder.setLocallyAllowedTypes(['PersonTitleTerm'])
     personTitlesFolder.setImmediatelyAddableTypes(['PersonTitleTerm'])
-    logger.info("Migrating persontitles: starting...")
+    logger = context.getLogger('migratePersonTitles')
     for personTitle in personTitlesFolder.objectValues('UrbanVocabularyTerm'):
         data = {
                 'id': personTitle.getId(),
@@ -542,66 +264,6 @@ def migratePersonTitles(context):
         newObjId = personTitlesFolder.invokeFactory('PersonTitleTerm', **data)
         newObj = getattr(personTitlesFolder, newObjId)
         logger.info("UrbanVocabularyTerm at '%s' has been migrated to PersonTitleTerm" % newObj.absolute_url())
-    logger.info("Migrating persontitles: done!")
-
-def migrateUrbanVocabularyTerms(context):
-    """
-        Remove useless 'termKey' and 'termKeyStr' fields
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-
-    brains = site.portal_catalog(portal_type = ['UrbanVocabularyTerm',])
-    logger.info("Migrating UrbanVocabularyTerms: starting...")
-    for brain in brains:
-        term = brain.getObject()
-        migrated = False
-        if hasattr(term, 'termKey'):
-            delattr(term, 'termKey')
-            migrated = True
-        if hasattr(term, 'termKeyStr'):
-            delattr(term, 'termKeyStr')
-            migrated = True
-        if migrated:
-            logger.info("UrbanVocabularyTerm at '%s' has been migrated" % term.absolute_url())
-    logger.info("Migrating UrbanVocabularyTerms: done!")
-
-def migrateToLicenceConfig(context):
-    """
-        We replace licence folders from portal_urban to LicenceConfig objects
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-    tool = getToolByName(site, 'portal_urban')
-    logger.info("Migrating to LicenceConfigs: starting...")
-    for urban_type in URBAN_TYPES:
-        lcid = urban_type.lower()
-        if not base_hasattr(tool, lcid):
-            continue
-        fid = "%s-old"%lcid
-        oldobj = getattr(tool, lcid)
-        #we skip if urbanconfig isn't more Folder
-        if oldobj.getPortalTypeName() != 'Folder':
-            continue
-        #we rename existing folder
-        oldobj.setId(fid)
-        oldobj.reindexObject()
-        #we create a LicenceConfig with same id and title
-        lcid = tool.invokeFactory("LicenceConfig", id=lcid, title=oldobj.Title())
-        lcobj = getattr(tool, lcid)
-        lcobj.licence_portal_type = urban_type
-        #lcobj.setUsedAttributes(lcobj.listUsedAttributes().keys())   #no optional fields selected !
-        #lcobj.reindexObject()
-        #we move the content of original folder to the LicenceConfig obj
-        ids = oldobj.contentIds()
-        cutdata = oldobj.manage_cutObjects(ids)
-        lcobj.manage_pasteObjects(cutdata)
-        #we delete old folder
-        tool.manage_delObjects(ids=[fid])
-        logger.info("LicenceConfig '%s' has been migrated" % urban_type)
-    logger.info("Migrating to LicenceConfigs: done!")
 
 def migrateArchitectToContact(context):
     """
@@ -610,9 +272,11 @@ def migrateArchitectToContact(context):
     if isNoturbanMigrationsProfile(context): return
     portal = context.getSite()
     architect_folder = portal.urban.architects
+    path = "%s/urban/architects" % '/'.join(portal.getPhysicalPath())
+    if not portal.portal_catalog(portal_type=['Architect'], query={'path':path}): return
     #from plone.app.referenceintegrity.config import DisableRelationshipsProtectionTemporarily
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
-    logger.info("Migrating Architects to Contacts: starting...")
+    logger = context.getLogger('migrateArchitectToContact')
     architects = architect_folder.objectValues('Architect')
     lenArchitects = len(architects)
     i = 0
@@ -655,7 +319,6 @@ def migrateArchitectToContact(context):
         #with DisableRelationshipsProtectionTemporarily(['licenceArchitects']):
         architect_folder.manage_delObjects(ids=["%s-old"%id])
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
-    logger.info("Migrating Architects to Contacts: done!")
 
 def migrateSpecificContactInterfaces(context):
     """
@@ -663,8 +326,7 @@ def migrateSpecificContactInterfaces(context):
     """
     if isNoturbanMigrationsProfile(context): return
 
-    logger.info("Migrating Specific Contact interfaces: starting...")
-
+    logger = context.getLogger('migrateSpecificContactInterfaces')
     from Products.urban.interfaces import CONTACT_INTERFACES
     portal = context.getSite()
     brains = portal.portal_catalog(portal_type = CONTACT_INTERFACES.keys())
@@ -673,7 +335,7 @@ def migrateSpecificContactInterfaces(context):
         if not contact.__provides__(CONTACT_INTERFACES[brain.Type]):
             alsoProvides(contact, CONTACT_INTERFACES[brain.Type])
             contact.reindexObject(['object_provides'])
-    logger.info("Migrating Specific Contact interfaces: done!")
+            logger.info("Adding interface on '%s'"%contact.absolute_url())
 
 class UrbanEventToUrbanEventInquiryMigrator(object, InplaceATFolderMigrator):
     """
@@ -703,12 +365,9 @@ def migrationToUrbanEventInquiries(context):
     """    
     if isNoturbanMigrationsProfile(context): return
 
-    logger.info("Migrating to UrbanEventInquiries: starting...")
-
+    logger = context.getLogger('migrationToUrbanEventInquiries')
     migrators = (UrbanEventToUrbanEventInquiryMigrator,)
-
     portal = context.getSite()
-
     #to avoid link integrity problems, disable checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
 
@@ -720,41 +379,7 @@ def migrationToUrbanEventInquiries(context):
         walker.__class__.additionalQuery = {}
     #enable linkintegrity checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
-
-    logger.info("Migrating to UrbanEventInquiries: done!")
-
-class ProprietaryToApplicantMigrator(object, InplaceATItemMigrator):
-    """
-      Migrate the Contact with portal_type Proprietary to Contact with portal_type Applicant
-    """
-    walker = CustomQueryWalker
-    src_meta_type = "Contact"
-    src_portal_type = "Proprietary"
-    dst_meta_type = "Contact"
-    dst_portal_type = "Applicant"
-
-    def __init__(self, *args, **kwargs):
-        InplaceATItemMigrator.__init__(self, *args, **kwargs)
-
-def migrationProprietaryToContact(context):
-    """
-      Call ProprietaryToApplicantMigrator
-    """    
-    if isNoturbanMigrationsProfile(context): return
-
-    logger.info("Migrating Proprietary portal_type to Applicant portal_type: starting...")
-
-    migrators = (ProprietaryToApplicantMigrator,)
-
-    portal = context.getSite()
-
-    #Run the migrations
-    for migrator in migrators:
-        walker = migrator.walker(portal, migrator)
-        walker.go()
-        # we need to reset the class variable to avoid using current query in next use of CustomQueryWalker
-        walker.__class__.additionalQuery = {}
-    logger.info("Migrating Proprietary portal_type to Applicant portal_type: done!")
+    logger.info("content migration done!")
 
 def addMd5SignatureAndProfileNameProperties(context):
     """
@@ -762,8 +387,7 @@ def addMd5SignatureAndProfileNameProperties(context):
     """
     if isNoturbanMigrationsProfile(context): return
 
-    logger.info("Adding md5 signature and 'profileName' property on templates: starting...")
-
+    logger = context.getLogger('addMd5SignatureAndProfileNameProperties')
     portal = context.getSite()
     tool = getToolByName(portal, 'portal_urban')
 
@@ -790,68 +414,14 @@ def addMd5SignatureAndProfileNameProperties(context):
                 hex = getMd5Signature('cannot say if template has been modified !?')
             if not dictProperties.has_key("md5Modified"):
                 fileTemplate.manage_addProperty("md5Modified", hex, "string")
+                logger.info("Property md5Modified has been added on '%s'"%fileTemplate.absolute_url())
             if not dictProperties.has_key("md5Loaded"):
                 fileTemplate.manage_addProperty("md5Loaded", hex, "string")
+                logger.info("Property md5Loaded has been added on '%s'"%fileTemplate.absolute_url())
 
             if not dictProperties.has_key("profileName"):
                 fileTemplate.manage_addProperty("profileName","tests","string")
             fileTemplate.reindexObject()
-    logger.info("Adding md5 signature and 'profileName' property on templates: done!")
-
-def migrateLicenceContainers(context):
-    """
-      Every folder that will contain licences need to provide ILicenceContainer
-    """
-    #folders in the 'urban' application folder are licence containers
-    if isNoturbanMigrationsProfile(context): return
-
-    logger.info("Migrating licence containers: starting...")
-
-    portal = context.getSite()
-    #we are migrating, so we have an urban folder at the root of portal
-    for subFolder in portal.urban.objectValues('ATFolder'):
-        alsoProvides(subFolder, ILicenceContainer)
-        logger.info("Licence folder '%s' now provides IILicenceContainer" % subFolder.getId())
-    logger.info("Migrating licence containers: done!")
-
-def provideEventMarkerInterfaces(context):
-    """
-      implements a marker interface to each event who has it defined in its corresponding EventTypeType
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    logger.info("Migrating Specific Event interfaces: starting...")
-    from zope.interface import alsoProvides
-    from zope.component.interface import getInterface
-    portal = context.getSite()
-    brains = portal.portal_catalog.searchResults(portal_type='UrbanEvent') 
-    for brain in brains:
-        urbanevent = brain.getObject()
-        event_type = urbanevent.getUrbaneventtypes()
-        interfacepath = event_type.getEventTypeType()
-        interface = None
-        if interfacepath != '':
-            interface = getInterface('', interfacepath)
-        if interface is not None and not urbanevent.__provides__(interface):
-            alsoProvides(urbanevent, interface)
-            urbanevent.reindexObject(['object_provides'])
-    logger.info("Migrating Specific Event interfaces: done!")
-
-def migrateLayersForMapfish(context):
-    """
-      Removes useless layers and change format option
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    portal = context.getSite()
-    brains = portal.portal_catalog.searchResults(portal_type='Layer') 
-    for brain in brains:
-        layer = brain.getObject()
-        if brain.id.startswith('ppnc'):
-            #layer.aq_inner.aq_parent.manage_delObjects(brain.id)
-            continue
-        if not layer.getLayerFormat():
-            layer.setLayerFormat('image/png')
 
 class UrbanVocabularyTermToOrganisationTermMigrator(object, InplaceATItemMigrator):
     """
@@ -868,7 +438,7 @@ class UrbanVocabularyTermToOrganisationTermMigrator(object, InplaceATItemMigrato
 
     def custom(self):
         """
-          We have to link the OrganisationTerm to its coresponding UrbanEventType 
+          We have to link the OrganisationTerm to its corresponding UrbanEventType 
         """
         attrs = ['title', 'description', 'extraValue']
         for attr in attrs:
@@ -887,7 +457,7 @@ def migrateFoldermakersTerms(context):
     """
     if isNoturbanMigrationsProfile(context): return
 
-    logger.info("Migrating UrbanVocabularyterms 'foldermakers': starting...")
+    logger = context.getLogger('migrateFoldermakersTerms')
 
     migrators = (UrbanVocabularyTermToOrganisationTermMigrator,)
 
@@ -900,7 +470,7 @@ def migrateFoldermakersTerms(context):
         walker.go()
         # we need to reset the class variable to avoid using current query in next use of CustomQueryWalker
         walker.__class__.additionalQuery = {}
-    logger.info("Migrating UrbanVocabularyterms 'foldermakers': done!")
+    logger.info("content migration done!")
 
 def migrateFoldermanagers(context):
     """
@@ -911,7 +481,7 @@ def migrateFoldermanagers(context):
     if isNoturbanMigrationsProfile(context): return
 
     from Products.urban.config import URBAN_TYPES
-    logger.info("Migrating Foldermanagers: starting...")
+    logger = context.getLogger('migrateFoldermanagers')
 
     portal = context.getSite()
     #from plone.app.referenceintegrity.config import DisableRelationshipsProtectionTemporarily
@@ -926,9 +496,9 @@ def migrateFoldermanagers(context):
         ids_to_move = []
         licence_cfg_folder = getattr(tool, licence_type.lower())
         if not hasattr(aq_base(licence_cfg_folder), 'foldermanagers'):
-            logger.info("Migrating Foldermanagers: %s was already migrated!" % licence_type)
             continue
         old_folder = licence_cfg_folder.foldermanagers
+        logger.info("'%s' will be  migrated!" % old_folder.absolute_url())
         #set the value for the field 'ManageableLicences' depending on the licence type 
         #where we found the foldermanagers
         for old_foldermanager in old_folder.objectValues():
@@ -962,127 +532,7 @@ def migrateFoldermanagers(context):
         #delete the old folder
         licence_cfg_folder.manage_delObjects(['foldermanagers'])
 
-    logger.info("Migrating Foldermanagers: done!")
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
-
-def addInvestigationArticlesToBuildLicenceConfig(context):
-    """
-      Helper method for updating investigations articles in the investigationArticles
-      of the BuildLicences LicenceConfig
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-    configFolder = getattr(site.portal_urban, 'buildlicence')
-    logger.info("Adding default investigation articles in the BuildLicence LicenceConfig: starting...")
-    from Products.urban.setuphandlers import addInvestigationArticles
-    addInvestigationArticles(context, configFolder)
-    logger.info("Adding default investigation articles in the BuildLicence LicenceConfig: done!")
-
-def migrateGlobalTemplates(context):
-    """
-    Helper method to move the global templates of urbanTool in the globaltemplates folder
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-    tool = getattr(site, 'portal_urban')
-    if not hasattr(tool, 'templateHeader'):
-        #the migration has already been runned, return
-        return
-    templates_folder = getattr(tool, 'globaltemplates')
-    GT = GLOBAL_TEMPLATES
-    old_templates = {
-        'header.odt':(tool.templateHeader, GT[0]),
-        'footer.odt':(tool.templateFooter, GT[1]),
-        'reference.odt':(tool.templateReference, GT[2]),
-        'signatures.odt':(tool.templateSignatures, GT[3]),
-        'statsins.odt':(tool.templateStatsINS, GT[4]),
-    }
-    #depending on the version of the Data.fs
-    #there could be a portal_urban.templateStyles attribute or not...
-    if hasattr(aq_base(tool), 'templateStyles'):
-        old_templates['styles.odt'] = (tool.templateStyles, GT[5])
-
-    for template_id, template_infos in old_templates.items():
-        newtemplate_id = templates_folder.invokeFactory("File", id=template_id, title=template_infos[1]['title'], file=template_infos[0].data)
-        delattr(tool, template_infos[0].getId())
-
-def migrateSomeLocalFoldersAsGlobal(context):
-    """
-      Some folders defined on LicenceConfigs are now at the portal_urban root
-      This is the case for 'folderroadtypes', 'pashs' and 'foldercoatings'
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-    #urban must have been reinstalled before running this step
-    site.portal_properties.site_properties.enable_link_integrity_checks = False
-    tool = getToolByName(site, 'portal_urban')
-
-    #ids of local folders that are now global folders
-    localFolderIds = ['folderroadtypes', 'folderroadcoatings', 'pashs', 'folderroadequipments', 'folderprotectedbuildings']
-    for localFolderId in localFolderIds:
-        if not hasattr(tool, localFolderId):
-            raise KeyError, "Migrating some local LicenceConfigs folder to the portal_urban root : You must reinstall 'urban' before launching this step!"
-
-    logger.info("Migrating some local LicenceConfigs folder to the portal_urban root : starting...")
-    for urban_type in URBAN_TYPES:
-        urban_type_id = urban_type.lower()
-        configFolder = getattr(tool, urban_type_id)
-        for localFolderId in localFolderIds:
-            if hasattr(aq_base(configFolder), localFolderId):
-                #a local folder exists, migrate it
-                localFolder = getattr(configFolder, localFolderId)
-                globalFolder = getattr(tool, localFolderId)
-                ids_to_cut = []
-                for obj in localFolder.objectValues():
-                    #if the element does not already exist in the folder at the root
-                    #of portal_urban, we cut and paste it
-                    objId = obj.id
-                    if not hasattr(globalFolder, objId):
-                        ids_to_cut.append(objId)
-                if ids_to_cut:
-                    #cut and paste elements that does not exist in the global folder
-                    cutdata = localFolder.manage_cutObjects(ids_to_cut)
-                    globalFolder.manage_pasteObjects(cutdata)
-                #delete the useless localFolder
-                configFolder.manage_delObjects([localFolderId,])
-                logger.info("The '%s' folder of '%s' has been migrated.  Additional ids where '%s'" % (localFolderId, configFolder.id, str(ids_to_cut)))
-
-    logger.info("Migrating some local LicenceConfigs folder to the portal_urban root : done!")
-    site.portal_properties.site_properties.enable_link_integrity_checks = True
-
-def migrateSubjectFields(context):
-    """
-      Before there was a "declarationSubject", a "divisionSubject", ... field
-      we will use the default "licenceSubject" field now
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    site = context.getSite()
-
-    portal_catalog = getToolByName(site, 'portal_catalog')
-    brains = portal_catalog(portal_type=('Declaration', 'Division', ))
-
-    logger.info("Migrating the 'xxxSubject' fields to 'licenceSubject' : starting...")
-    for brain in brains:
-        obj = brain.getObject()
-        if not hasattr(obj, 'declarationSubject') and not hasattr(obj, 'divisionSubject'):
-            #this type is already migrated, migrate the next one if necessary
-            continue
-        subject = ''
-        if obj.portal_type == 'Declaration':
-            subject = obj.declarationSubject
-            delattr(obj, 'declarationSubject')
-        else:
-            #Divisions
-            subject = obj.divisionSubject
-            delattr(obj, 'divisionSubject')
-        obj.setLicenceSubject(subject)
-        logger.info("%s's licenceSubject has been migrated" % obj.Title())
-
-    logger.info("Migrating the 'xxxSubject' fields to 'licenceSubject': done!")
 
 def migrateDivisionsCommentsToDescription(context):
     """
@@ -1094,8 +544,7 @@ def migrateDivisionsCommentsToDescription(context):
 
     portal_catalog = getToolByName(site, 'portal_catalog')
     brains = portal_catalog(portal_type=('Division', ))
-
-    logger.info("Migrating the 'comments' field of Divisions to 'description' : starting...")
+    logger = context.getLogger('migrateDivisionsCommentsToDescription')
 
     for brain in brains:
         obj = brain.getObject()
@@ -1108,8 +557,6 @@ def migrateDivisionsCommentsToDescription(context):
         obj.setDescription(newDescription, mimetype='text/html')
         logger.info("%s's 'comments' field has been migrated" % obj.Title())
 
-    logger.info("Migrating the 'comments' field of Divisions to 'description' : done!")
-
 def migrateDecisionsForDeclarations(context):
     """
       Declarations need an extra value to be defined on UrbanVocabularyTerms in portal_urban.decisions
@@ -1117,9 +564,7 @@ def migrateDecisionsForDeclarations(context):
     if isNoturbanMigrationsProfile(context): return
 
     site = context.getSite()
-
-    logger.info("Migrating the 'decisions UrbanVocabularyTems' for Declarations: starting...")
-
+    logger = context.getLogger('migrateDecisionsForDeclarations')
     tool = getToolByName(site, 'portal_urban')
 
     for obj in tool.decisions.objectValues('UrbanVocabularyTerm'):
@@ -1134,42 +579,8 @@ def migrateDecisionsForDeclarations(context):
             else:
                 logger.warn("Unknown term with id '%s', no extra value added!!!'" % obj.id)
             logger.info("Extra value added for '%s'" % obj.id)
-        else:
-            logger.info("Extra value already exists for '%s' and is '%s'" % (obj.id, extraValue))
-
-    logger.info("Migrating the 'decisions UrbanVocabularyTems' for Declarations: done!!!")
-
-def migrateFoldermanagersReferenceField(context):
-    """
-      Run the FoldermanagersReferenceMigrator
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    logger.info("Migrating foldermanagers referencefield for divisions, urbancertificates an environmental declarations: starting...")
-
-    meta_types = {
-                    'UrbanCertificateBase':'certificateFolderManagers',
-                    'Declaration':'declarationFolderManagers',
-                    'EnvironmentalDeclaration':'environmentalDeclarationFolderManagers',
-                    'Division':'division_foldermanager',
-                   }
-    site = context.getSite() 
-    portal_catalog = getToolByName(site, 'portal_catalog')
-    reference_catalog = getToolByName(site, 'reference_catalog')
-
-    for meta_type, relationship in meta_types.iteritems():
-        licences_brains = portal_catalog(meta_type=meta_type)
-        for brain in licences_brains:
-            ref_brains = reference_catalog(sourceUID=brain['UID'], relationship=relationship)
-            old_foldermanagers_ids = [brain['targetId'] for brain in ref_brains]
-            if old_foldermanagers_ids:
-                licence = brain.getObject()
-                licence.setFoldermanagers([brain.getObject() for brain in portal_catalog(id=old_foldermanagers_ids)])
-            #remove the old references from the reference_catalog
-            for ref_brain in ref_brains:
-                reference_catalog.uncatalog_object(ref_brain.getPath())
-    
-    logger.info("Migrating foldermanagers referencefield for divisions, urbancertificates an environmental declarations: done!")
+#        else:
+#            logger.info("Extra value already exists for '%s' and is '%s'" % (obj.id, extraValue))
 
 def updateUrbanTemplates(context):
     setup = getToolByName(context.getSite(), 'portal_setup')
@@ -1181,6 +592,7 @@ def migrateOpinionRequestTalExpression(context):
     """
     if isNoturbanMigrationsProfile(context): return
 
+    logger = context.getLogger('migrateOpinionRequestTalExpression')
     site = context.getSite()
     urban_tool = getToolByName(site, 'portal_urban')
     for licence_type in  URBAN_TYPES:
@@ -1192,4 +604,5 @@ def migrateOpinionRequestTalExpression(context):
                 match = search("'(.*?)' in here.getSolicitOpinionsTo()", tal_condition)
                 if match:
                     tal_condition = "python: here.mayAddOpinionRequestEvent('%s')" % match.group(1)
+                    logger.info("Migrated expression of '%s'"%opinion_request_cfg.absolute_url())
                     opinion_request_cfg.setTALCondition(tal_condition)
