@@ -1,6 +1,7 @@
 from Products.Five import BrowserView
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
+from Products.urban.indexes import genericlicence_parcelinfoindex
 
 class LicenceView(BrowserView):
     """
@@ -54,6 +55,14 @@ class LicenceView(BrowserView):
                 if field.getName() in used_fields_names:
                     return False
         return True
+
+    def hasParcelHistoric(self, parcel_brain):
+        context = aq_inner(self.context)
+        catalog = getToolByName(context, 'portal_catalog')
+        return len([brain for brain in catalog(
+                    sort_limit=2, 
+                    parcelInfosIndex=genericlicence_parcelinfoindex(context)()) 
+                    if brain.id != context.id]) > 0
 
 class LicenceMacros(BrowserView):
     """

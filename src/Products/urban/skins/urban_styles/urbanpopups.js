@@ -7,4 +7,10 @@ jQuery(function($){
        subtype: 'ajax',
        urlmatch: '@@claimstextview',
    });
+
+    // parcel historic popup
+    $('#urban-parcel-historic a').prepOverlay({
+       subtype: 'ajax',
+       urlmatch: '@@genericlicenceview',
+   });
 });

@@ -230,6 +230,14 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="parcelhistoricview"
+     class=".parcelhistoricview.ParcelHistoricView"
+     template="templates/parcelhistoricview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="*"
      name="urbansearchview"
      class=".urbansearchview.UrbanSearchView"
@@ -244,6 +252,14 @@
      template="templates/urbansearchmacros.pt"
      permission="zope2.View"
   />
+
+  <browser:page 
+     for="*" 
+     name="searchparcels" 
+     class=".searchparcelsview.SearchParcelsView" 
+     template="templates/searchparcels.pt" 
+     permission="zope2.View" 
+  /> 
 
   <plone:portlet
      name="urban.portlets.portlet_urban"

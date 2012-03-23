@@ -23,6 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.CMFCore.utils import getToolByName
 ##/code-section module-header
 
 schema = Schema((
@@ -162,7 +163,23 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         #after creation, reindex the parent so the parcelInfosIndex is OK
         self.aq_inner.aq_parent.reindexObject()
 
-
+    security.declarePublic('hasParcelHistoric')
+    def hasParcelHistoric(self):
+        catalog = getToolByName(self, 'portal_catalog')
+        licence = self.aq_parent
+        res = []
+        res.append(self.getDivisionCode())
+        res.append(self.getSection())
+        res.append(self.getRadical())
+        res.append(self.getBis())
+        res.append(self.getExposant())
+        res.append(self.getPuissance())
+        if self.getPartie():
+            res.append('1')
+        else:
+            res.append('0')
+        parcel_infos = ",".join(res)
+        return len([brain for brain in catalog(sort_limit=2, parcelInfosIndex= parcel_infos) if brain.id != licence.id]) > 0
 
 registerType(PortionOut, PROJECTNAME)
 # end of class PortionOut

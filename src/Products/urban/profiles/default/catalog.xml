@@ -27,10 +27,10 @@
          meta_type="FieldIndex">
     <indexed_attr value="getRecipientAddress"/>
   </index>
+  <column value="parcelInfosIndex"/>
   <index name="parcelInfosIndex" meta_type="KeywordIndex">
     <indexed_attr value="parcelInfosIndex"/>
   </index>
-  <column value="parcelInfosIndex"/>
   <column value="eventDate"/>
   <index name="applicantInfosIndex" meta_type="ZCTextIndex">
     <indexed_attr value="applicantInfosIndex"/>

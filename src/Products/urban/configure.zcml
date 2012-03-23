@@ -92,6 +92,7 @@
     provides="plone.indexer.interfaces.IIndexableObject"
   />
 
+  <adapter name="parcelInfosIndex" factory=".indexes.genericlicence_parcelinfoindex" />
   <adapter name="StreetsUID" factory=".indexes.genericlicence_streetsuid" />
   <adapter name="last_key_event" factory=".indexes.genericlicence_lastkeyevent" />
 

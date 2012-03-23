@@ -38,43 +38,43 @@ class UrbanIndexes:
             res.append(applicant.getNationalRegister())
         return res
 
-    security.declarePublic('parcelInfosIndex')
 
-    def parcelInfosIndex(self):
-        """
-          Indexes some informations about the parcels of 'self'
-          It builds a list of parcels infos.  Parcels infos are :
-          - code divison
-          - division
-          - section
-          - radical
-          - bis
-          - exposant
-          - puissance
-          Separated by a ','
-          What we need to do is to do an 'exact' search on it
-          This index is a ZCTextIndex based on the plone_lexicon so we
-          are sure that indexed values are lowercase
-        """
-        parcelsInfos = []
-        try:
-            for parcel in self.getParcels():
-                res = []
-                res.append(parcel.getDivisionCode())
-                res.append(parcel.getSection())
-                res.append(parcel.getRadical())
-                res.append(parcel.getBis())
-                res.append(parcel.getExposant())
-                res.append(parcel.getPuissance())
-                if parcel.getPartie():
-                    res.append('1')
-                else:
-                    res.append('0')
-                parcelInfos = ",".join(res)
-                parcelsInfos.append(parcelInfos)
-        except:
-            pass
-        return parcelsInfos
+@indexer(IGenericLicence)
+def genericlicence_parcelinfoindex(object):
+    """
+    Indexes some informations about the parcels of 'self'
+    It builds a list of parcels infos.  Parcels infos are :
+    - code divison
+    - division
+    - section
+    - radical
+    - bis
+    - exposant
+    - puissance
+    Separated by a ','
+    What we need to do is to do an 'exact' search on it
+    This index is a ZCTextIndex based on the plone_lexicon so we
+    are sure that indexed values are lowercase
+    """
+    parcelsInfos = []
+    try:
+        for parcel in object.getParcels():
+            res = []
+            res.append(parcel.getDivisionCode())
+            res.append(parcel.getSection())
+            res.append(parcel.getRadical())
+            res.append(parcel.getBis())
+            res.append(parcel.getExposant())
+            res.append(parcel.getPuissance())
+            if parcel.getPartie():
+                res.append('1')
+            else:
+                res.append('0')
+            parcelInfos = ",".join(res)
+            parcelsInfos.append(parcelInfos)
+    except:
+       pass
+    return parcelsInfos
 
 @indexer(IGenericLicence)
 def genericlicence_streetsuid(object):
