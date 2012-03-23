@@ -65,6 +65,7 @@ def migrateToPlone4(context):
     #Update all the templates
     #We must run this step separately, to keep log inside portal_setup
     #updateUrbanTemplates(context)
+    migrateConfigFoldersAllowedTypes(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -606,3 +607,22 @@ def migrateOpinionRequestTalExpression(context):
                     tal_condition = "python: here.mayAddOpinionRequestEvent('%s')" % match.group(1)
                     logger.info("Migrated expression of '%s'"%opinion_request_cfg.absolute_url())
                     opinion_request_cfg.setTALCondition(tal_condition)
+
+def migrateConfigFoldersAllowedTypes(context):
+    """
+    Some object types have changed throughout urban evolution: the allowed content types of some config folder should 
+    follow these changes accordingly.
+    """
+    site = context.getSite()
+    urban_tool = getToolByName(site, 'portal_urban')
+    evolution_mapping = [
+        {'oldtype':('UrbanVocabularyTerm',) , 'newtype':('OrganisationTerm',), 'foldername':'foldermakers'},
+    ]
+    for change in evolution_mapping:
+        for licence_type in  URBAN_TYPES:
+            licence_cfg= getattr(urban_tool, licence_type.lower(), None)
+            if licence_cfg and hasattr(licence_cfg, change['foldername']):
+                folder = getattr(licence_cfg, change['foldername'])
+                if folder.getImmediatelyAddableTypes() == folder.getLocallyAllowedTypes() == change['oldtype']:
+                    folder.setImmediatelyAddableTypes(change['newtype'])
+                    folder.setLocallyAllowedTypes(change['newtype'])
