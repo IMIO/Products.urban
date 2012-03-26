@@ -59,19 +59,7 @@ def genericlicence_parcelinfoindex(object):
     parcelsInfos = []
     try:
         for parcel in object.getParcels():
-            res = []
-            res.append(parcel.getDivisionCode())
-            res.append(parcel.getSection())
-            res.append(parcel.getRadical())
-            res.append(parcel.getBis())
-            res.append(parcel.getExposant())
-            res.append(parcel.getPuissance())
-            if parcel.getPartie():
-                res.append('1')
-            else:
-                res.append('0')
-            parcelInfos = ",".join(res)
-            parcelsInfos.append(parcelInfos)
+            parcelsInfos.append(parcel.getIndexValue())
     except:
        pass
     return parcelsInfos

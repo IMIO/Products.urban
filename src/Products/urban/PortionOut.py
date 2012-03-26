@@ -163,10 +163,7 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         #after creation, reindex the parent so the parcelInfosIndex is OK
         self.aq_inner.aq_parent.reindexObject()
 
-    security.declarePublic('hasParcelHistoric')
-    def hasParcelHistoric(self):
-        catalog = getToolByName(self, 'portal_catalog')
-        licence = self.aq_parent
+    def getIndexValue(self):
         res = []
         res.append(self.getDivisionCode())
         res.append(self.getSection())
@@ -178,7 +175,14 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
             res.append('1')
         else:
             res.append('0')
-        parcel_infos = ",".join(res)
+        return ",".join(res)
+
+
+    security.declarePublic('hasParcelHistoric')
+    def hasParcelHistoric(self):
+        catalog = getToolByName(self, 'portal_catalog')
+        licence = self.aq_parent
+        parcel_infos = self.getIndexValue()
         return len([brain for brain in catalog(sort_limit=2, parcelInfosIndex= parcel_infos) if brain.id != licence.id]) > 0
 
 registerType(PortionOut, PROJECTNAME)

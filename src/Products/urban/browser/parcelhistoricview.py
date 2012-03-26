@@ -22,18 +22,7 @@ class ParcelHistoricView(BrowserView):
         context = aq_inner(self.context)
         catalog = getToolByName(context, 'portal_catalog')
         parcel = getattr(context, self.parcel_id)
-        res = []
-        res.append(parcel.getDivisionCode())
-        res.append(parcel.getSection())
-        res.append(parcel.getRadical())
-        res.append(parcel.getBis())
-        res.append(parcel.getExposant())
-        res.append(parcel.getPuissance())
-        if parcel.getPartie():
-            res.append('1')
-        else:
-            res.append('0')
-        parcel_infos = ",".join(res)
+        parcel_infos = parcel.getIndexValue() 
         base_url = '/'.join(getToolByName(context, 'portal_url')().split('/')[:-1])
         return [{'title':brain.Title, 
                  'url':'%s%s' % (base_url, brain.getPath()), 
