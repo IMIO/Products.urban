@@ -341,7 +341,7 @@ if step in run_steps:
             conn.commit()
         if os.path.exists(shapefilename.lower()+'.sql'):
             os.remove(shapefilename.lower()+'.sql')
-        os.system('shp2pgsql -I -W ISO-8859-1 -s 31300 B_'+shapefilename+'.shp '+shapefilename.lower()+' >'+shapefilename.lower()+'.sql')
+        os.system('shp2pgsql -I -W ISO-8859-1 -s 31370 B_'+shapefilename+'.shp '+shapefilename.lower()+' >'+shapefilename.lower()+'.sql')
 
 step = 'E'
 if step in run_steps:
