@@ -199,6 +199,10 @@ table[id^="datagridwidget-table-"] THEAD TH {
     width: 400px;
 }
 
+.urban-linkedfolders-icon {
+position: relative;
+}
+
 .urban-add-icon {
 position: absolute;
 padding-top: 3px;

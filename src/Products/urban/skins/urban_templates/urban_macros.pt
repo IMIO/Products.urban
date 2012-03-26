@@ -452,7 +452,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                          <span tal:condition="parcel_historic" id="urban-parcel-historic">
                              <a class="link-overlay" href="@@parcelhistoricview" 
                                 tal:attributes="href python: context.absolute_url() + '/@@parcelhistoricview?id=' + parcel_id" i18n:translate="">
-                               <img  src="icon_add_big.png" />
+                               <img  src="linkedfolders.png" class="urban-linkedfolders-icon"/>
                              </a>
                          </span>
                      </td>
