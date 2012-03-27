@@ -58,7 +58,8 @@
   <tal:templates_link condition="python: mayAddUrbanEvent and templates_list">
    <table>
    <tal:loopEventType repeat="template templates_list">
-   <tr tal:attributes="class python: template['class']">
+   <tr>
+    <td tal:attributes="class python: template['class']">&nbsp</td><td>&nbsp</td>
     <td><a href="#" tal:attributes="href python: template['href'];"
                     tal:content="python: template['title']">Template Title</a><br/>
     </td>
