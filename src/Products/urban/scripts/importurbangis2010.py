@@ -236,7 +236,7 @@ if step in run_steps:
                 try:
                     std_cur.execute('DROP TABLE '+tablename.lower()+' CASCADE;')
                     conn.commit()
-                except Error, msg:
+                except Exception, msg:
                     print "Cannot remove table '%s': %s"%(tablename, msg)
     print "If asked, enter the password of the postgres user '%s'"%login
     os.system('psql -d %s -U %s -f matrice.sql'%(databasename, login))
