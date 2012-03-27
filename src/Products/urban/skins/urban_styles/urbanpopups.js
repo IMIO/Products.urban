@@ -8,8 +8,8 @@ jQuery(function($){
        urlmatch: '@@claimstextview',
    });
 
-    // parcel historic popup
-    $('#urban-parcel-historic a').prepOverlay({
+    // parcel history popup
+    $('#urban-parcel-related-licences a').prepOverlay({
        subtype: 'ajax',
        urlmatch: '@@genericlicenceview',
    });

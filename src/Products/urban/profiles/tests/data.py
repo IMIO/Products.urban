@@ -410,7 +410,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'podTemplates': (
                                      {'id': "cu1-lettre-notaire", 'title': "Lettre au notaire (ou demandeur) (octroi)"},
-                                     {'id': "cu1-certif", 'title': "Certificat d'urbanisme 1"},
+                                     {'id': "cu1-certif", 'title': "Certificat d'urbanisme 1 (annexe 35 formulaire I B)"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
                     },
@@ -504,7 +504,7 @@ urbanEventTypes = {
                                      {'id': "cu2-decision-transmis-reclamants", 'title': "Décision du certificat (transmis aux réclamants)"},
                                      {'id': "cu2-decision-frais", 'title': "Ventilation des frais"},
                                      {'id': "cu2-decision-deliberation-college", 'title': "Delibération du collège d'octroi du certificat"},
-                                     {'id': "cu2-certif", 'title': "Certificat d'urbanisme 2"},
+                                     {'id': "cu2-certif", 'title': "Certificat d'urbanisme 2 (annexe 35 formulaire II B)"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
                     },
@@ -547,7 +547,7 @@ urbanEventTypes = {
                     'eventDateLabel': "Date de notification",
                     'deadLineDelay': 15,
                     'podTemplates': (
-                                     {'id': "not-lettre-information-notariale", 'title': "Octroi de la lettre d'information notariale"},
+                                     {'id': "not-lettre-information-notariale", 'title': "Lettre d'information notariale (annexe 49 formulaire III)"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
                     },

@@ -3,7 +3,7 @@ from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
-class ParcelHistoricView(BrowserView):
+class ParcelRecordsView(BrowserView):
     """
       This manage the view of long text
     """
@@ -15,7 +15,7 @@ class ParcelHistoricView(BrowserView):
             plone_utils = getToolByName(context, 'plone_utils')
             plone_utils.addPortalMessage(_('Nothing to show !!!'), type="error")
 
-    def getParcelHistoric(self):
+    def getRelatedLicencesOfParcel(self):
         """
           Returns the entire text
         """

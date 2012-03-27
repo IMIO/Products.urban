@@ -231,9 +231,9 @@
 
   <browser:page
      for="Products.urban.interfaces.IGenericLicence"
-     name="parcelhistoricview"
-     class=".parcelhistoricview.ParcelHistoricView"
-     template="templates/parcelhistoricview.pt"
+     name="parcelrecordsview"
+     class=".parcelrecordsview.ParcelRecordsView"
+     template="templates/parcelrecordsview.pt"
      permission="zope2.View"
   />
 

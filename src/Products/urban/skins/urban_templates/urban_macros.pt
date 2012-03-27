@@ -447,11 +447,11 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                              </span>
                      </td>
                      <td tal:condition="isAParcel"  
-                         tal:define="parcel_historic python: obj.portal_type == 'PortionOut' and obj.getObject().hasParcelHistoric();
+                         tal:define="parcel_history python: obj.portal_type == 'PortionOut' and obj.getObject().hasRelatedLicences();
                                      parcel_id python: obj.id">
-                         <span tal:condition="parcel_historic" id="urban-parcel-historic">
-                             <a class="link-overlay" href="@@parcelhistoricview" 
-                                tal:attributes="href python: context.absolute_url() + '/@@parcelhistoricview?id=' + parcel_id" i18n:translate="">
+                         <span tal:condition="parcel_history" id="urban-parcel-related-licences">
+                             <a class="link-overlay" href="@@parcelrecordsview" 
+                                tal:attributes="href python: context.absolute_url() + '/@@parcelrecordsview?id=' + parcel_id" i18n:translate="">
                                <img  src="linkedfolders.png" class="urban-linkedfolders-icon"/>
                              </a>
                          </span>

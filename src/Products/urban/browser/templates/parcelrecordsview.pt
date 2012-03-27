@@ -13,7 +13,7 @@
     <div i18n:translate="parcel_linked_folders">
             Dossiers liés à la parcelle:
     </div>
-    <div tal:repeat="licence_info view/getParcelHistoric">
+    <div tal:repeat="licence_info view/getRelatedLicencesOfParcel">
             <a class="link-overlay" 
                tal:attributes="href python: licence_info['url']; class python: licence_info['class']"
                tal:content="python: licence_info['title']" i18n:translate="">lien vers les anciens permis</a>

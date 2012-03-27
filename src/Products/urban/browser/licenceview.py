@@ -56,7 +56,7 @@ class LicenceView(BrowserView):
                     return False
         return True
 
-    def hasParcelHistoric(self, parcel_brain):
+    def hasRelatedLicencesOnParcel(self, parcel_brain):
         context = aq_inner(self.context)
         catalog = getToolByName(context, 'portal_catalog')
         return len([brain for brain in catalog(

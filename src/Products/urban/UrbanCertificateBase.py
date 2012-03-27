@@ -30,6 +30,7 @@ from Products.DataGridField.LinesColumn import LinesColumn
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from DateTime import DateTime
 
 optional_fields = ['customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks', ]
 ##/code-section module-header
@@ -331,6 +332,51 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
                 res.append("<p>%s</p>" % "<br />".join(csf['feature']))
         return res
 
+    security.declarePublic('getLicencesOfTheParcels')
+    def getLicencesOfTheParcels(self, licence_type=''):
+        history = []
+        licence_uids = set([])
+        for parcel in self.getParcels():
+            for brain in parcel.getRelatedLicences(licence_type=licence_type):
+                if brain.UID not in licence_uids:
+                    history.extend(parcel.getRelatedLicences(licence_type=licence_type))
+                    licence_uids.add(brain.UID)
+        return history
+
+    security.declarePublic('getBuildlicencesOfTheParcels')
+    def getBuildlicencesOfTheParcels(self):
+        buildlicences = []
+        limit_date = DateTime('1977/01/01')
+        for brain in self.getLicencesOfTheParcels(licence_type='BuildLicence'):
+            buildlicence = brain.getObject()
+            delivered = buildlicence.getLastTheLicence()
+            if delivered and delivered.getDecision() == 'favorable' and delivered.getDecisionDate() > limit_date:
+                buildlicences.append(buildlicence)
+        return buildlicences
+
+    security.declarePublic('getUrbanCertificateOneOfTheParcels')
+    def getUrbanCertificateOneOfTheParcels(self):
+        cu1s = []
+        #cu1 cannot be older than 2 years
+        limit_date = self.getLastTheLicence().getEventDate() - 731
+        for brain in self.getLicencesOfTheParcels(licence_type='UrbanCertificateOne'):
+            cu1 = brain.getObject()
+            delivered = cu1.getLastTheLicence()
+            if delivered and delivered.getDecisionDate() > limit_date:
+                cu1s.append(cu1)
+        return cu1s
+
+    security.declarePublic('getUrbanCertificateTwoOfTheParcels')
+    def getUrbanCertificateTwoOfTheParcels(self):
+        cu2s = []
+        #cu2 cannot be older than 2 years
+        limit_date = self.getLastTheLicence().getEventDate() - 731
+        for brain in self.getLicencesOfTheParcels(licence_type='UrbanCertificateTwo'):
+            cu2 = brain.getObject()
+            delivered = cu2.getLastTheLicence()
+            if delivered and delivered.getDecisionDate() > limit_date:
+                cu2s.append(cu2)
+        return cu2s
 
 
 registerType(UrbanCertificateBase, PROJECTNAME)
