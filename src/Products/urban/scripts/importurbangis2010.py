@@ -230,11 +230,14 @@ if step in run_steps:
         std_cur.execute('CREATE LANGUAGE plpgsql;')
         conn.commit()
     #can be changed    
-    if action=='update':
+    if action=='update':            
         for tablename in tablenames:
             if tablename != 'DA':
-                std_cur.execute('DROP TABLE '+tablename.lower()+';')
-                conn.commit()
+                try:
+                    std_cur.execute('DROP TABLE '+tablename.lower()+' CASCADE;')
+                    conn.commit()
+                except Error, msg:
+                    print "Cannot remove table '%s': %s"%(tablename, msg)
     print "If asked, enter the password of the postgres user '%s'"%login
     os.system('psql -d %s -U %s -f matrice.sql'%(databasename, login))
 
