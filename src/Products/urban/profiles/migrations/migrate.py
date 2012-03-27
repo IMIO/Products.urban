@@ -632,7 +632,8 @@ def migrateConfigFoldersAllowedTypes(context):
 def restoreOrganisationTermsLink(context):
     """
     Check that the organisationTerm are correctly linked to an urbaneventype, 
-    If its not the case, create a new one and link it.
+    If its not the case, search for the correct urbanEventType to link.
+    If we couldnt find any, create a new one and link it.
     """
     site = context.getSite()
     catalog = getToolByName(site, 'portal_catalog')
@@ -642,7 +643,6 @@ def restoreOrganisationTermsLink(context):
         if licence_cfg and hasattr(licence_cfg, 'foldermakers'):
             fm_folder = getattr(licence_cfg, 'foldermakers')
             uet_path = '/'.join(licence_cfg.urbaneventtypes.getPhysicalPath())
-            #import ipdb; ipdb.set_trace()
             for vocterm in fm_folder.objectValues('OrganisationTerm'):
                 linked_uet = vocterm.getLinkedOpinionRequestEvent()
                 #no link or not linked to the good urbanEventType
@@ -651,7 +651,8 @@ def restoreOrganisationTermsLink(context):
                     #search for an existing corresponding urbanEventType
                     for brain in brains:
                         if brain.id.startswith("%s-" % vocterm.id) or brain.id.endswith("-%s" % vocterm.id): 
+                            #if we find one, we link it
                             vocterm.setLinkedOpinionRequestEvent(brain.getObject())
                             break
-                    #if we could not find any, create a new one
+                    #if we could not find any, create a new one and link it
                     event.notify(ObjectInitializedEvent(vocterm))
