@@ -338,13 +338,23 @@ step = 'D'
 shapefilesnames=('CaBu','CaNu','CaPa','GeLi','GePn','GePt','InLi','InPt','ToLi','ToPt')    
 if step in run_steps:
     print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
+    error = False
     for shapefilename in shapefilesnames:
         if action == 'update':
-            dict_cur.execute('DROP TABLE '+shapefilename.lower()+' CASCADE;')
-            conn.commit()
+            try:
+                dict_cur.execute('DROP TABLE '+shapefilename.lower()+' CASCADE;')
+                conn.commit()
+            except Exception, msg:
+                error = True
+                print "Cannot remove table '%s': %s"%(shapefilename.lower(), msg)
         if os.path.exists(shapefilename.lower()+'.sql'):
             os.remove(shapefilename.lower()+'.sql')
         os.system('shp2pgsql -I -W ISO-8859-1 -s 31370 B_'+shapefilename+'.shp '+shapefilename.lower()+' >'+shapefilename.lower()+'.sql')
+
+    if error:
+        cont = raw_input("Press anything to continue or x to exit: ")
+        if cont in ('x','X'):
+            sys.exit(0)
 
 step = 'E'
 if step in run_steps:
