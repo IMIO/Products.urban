@@ -218,6 +218,11 @@ float: right;
 margin-top: -2em;
 }
 
+.urban-document-already-created {
+background-color: #D0D0D0;
+}
+
+
 /* display the right icon from the urban-sprite */
 /* if you adapt something here, adapt the relevant contenttype-xxx class here under */
 .icons-on .contenttype-applicant {background: no-repeat transparent 0px -213px url(urban-sprite.png);}

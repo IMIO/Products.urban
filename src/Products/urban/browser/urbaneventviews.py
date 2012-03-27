@@ -60,7 +60,7 @@ class UrbanEventView(BrowserView):
         for generated_doc in context.objectValues():
             for template in template_list:
                 if generated_doc.id.startswith(template['name']):
-                    template['class'] = 'highlighted'
+                    template['class'] = 'urban-document-already-created'
         return template_list
 
     def _generateDocumentHref(self, context, template):
