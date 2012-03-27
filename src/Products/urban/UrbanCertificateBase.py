@@ -378,6 +378,17 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
                 cu2s.append(cu2)
         return cu2s
 
+    security.declarePublic('getParceloutlicenceOfTheParcels')
+    def getParceloutlicenceOfTheParcels(self):
+        parceloutlicences = []
+        limit_date = DateTime('1977/01/01') 
+        for brain in self.getLicencesOfTheParcels(licence_type='ParcelOutLicence'):
+            parceloutlicence = brain.getObject()
+            delivered = parceloutlicence.getLastTheLicence()
+            if delivered and delivered.getDecision() == 'favorable' and delivered.getDecisionDate() > limit_date:
+                parceloutlicences.append(parceloutlicence)
+        return parceloutlicences
+
 
 registerType(UrbanCertificateBase, PROJECTNAME)
 # end of class UrbanCertificateBase
