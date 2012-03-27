@@ -1627,7 +1627,7 @@ def setupExtra(context):
         additional_layers = portal_urban.additional_layers
 
     if not hasattr(aq_base(additional_layers), 'ppnc'):
-        additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://79.99.203.67:8510/geoserver/gwc/service/wms ", layers='PPNC', SRS="ESPG:31370", baseLayer=True, layerFormat="image/jpeg", visibility=True)
+        additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://79.99.203.67:8510/geoserver/gwc/service/wms", layers='PPNC', SRS="ESPG:31370", baseLayer=True, layerFormat="image/jpeg", visibility=False)
 """
         if portal_urban.getMapExtent():
             (xmin, ymin, xmax, ymax) = portal_urban.getMapExtent().split(',')
