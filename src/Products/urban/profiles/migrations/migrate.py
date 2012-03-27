@@ -66,6 +66,8 @@ def migrateToPlone4(context):
     #We must run this step separately, to keep log inside portal_setup
     #updateUrbanTemplates(context)
     migrateConfigFoldersAllowedTypes(context)
+    #restore the linked urbaneventype of the organisationTerms in foldermakers
+    restoreOrganisationTermsLink(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -447,7 +449,7 @@ class UrbanVocabularyTermToOrganisationTermMigrator(object, InplaceATItemMigrato
         catalog = getToolByName(self.new, 'portal_catalog')
         brains = catalog(portal_type=('UrbanEventType',))
         for brain in brains:
-            if self.new_id in brain.id:
+            if brain.id.startswith("%s-" % self.new_id) or brain.id.endswith("-%s" % self.new_id):
                 self.new.setLinkedOpinionRequestEvent(brain.getObject())
                 return
         event.notify(ObjectInitializedEvent(self.new))
@@ -615,10 +617,10 @@ def migrateConfigFoldersAllowedTypes(context):
     """
     site = context.getSite()
     urban_tool = getToolByName(site, 'portal_urban')
-    evolution_mapping = [
+    changes = [
         {'oldtype':('UrbanVocabularyTerm',) , 'newtype':('OrganisationTerm',), 'foldername':'foldermakers'},
     ]
-    for change in evolution_mapping:
+    for change in changes:
         for licence_type in  URBAN_TYPES:
             licence_cfg= getattr(urban_tool, licence_type.lower(), None)
             if licence_cfg and hasattr(licence_cfg, change['foldername']):
@@ -626,3 +628,30 @@ def migrateConfigFoldersAllowedTypes(context):
                 if folder.getImmediatelyAddableTypes() == folder.getLocallyAllowedTypes() == change['oldtype']:
                     folder.setImmediatelyAddableTypes(change['newtype'])
                     folder.setLocallyAllowedTypes(change['newtype'])
+
+def restoreOrganisationTermsLink(context):
+    """
+    Check that the organisationTerm are correctly linked to an urbaneventype, 
+    If its not the case, create a new one and link it.
+    """
+    site = context.getSite()
+    catalog = getToolByName(site, 'portal_catalog')
+    urban_tool = getToolByName(site, 'portal_urban')
+    for licence_type in  URBAN_TYPES:
+        licence_cfg= getattr(urban_tool, licence_type.lower(), None)
+        if licence_cfg and hasattr(licence_cfg, 'foldermakers'):
+            fm_folder = getattr(licence_cfg, 'foldermakers')
+            uet_path = '/'.join(licence_cfg.urbaneventtypes.getPhysicalPath())
+            #import ipdb; ipdb.set_trace()
+            for vocterm in fm_folder.objectValues('OrganisationTerm'):
+                linked_uet = vocterm.getLinkedOpinionRequestEvent()
+                #no link or not linked to the good urbanEventType
+                if not linked_uet or (not linked_uet.id.startswith("%s-" % vocterm.id) and not linked_uet.id.endswith("-%s" % vocterm.id)):
+                    brains = catalog(portal_type=('UrbanEventType',), path=uet_path)
+                    #search for an existing corresponding urbanEventType
+                    for brain in brains:
+                        if brain.id.startswith("%s-" % vocterm.id) or brain.id.endswith("-%s" % vocterm.id): 
+                            vocterm.setLinkedOpinionRequestEvent(brain.getObject())
+                            break
+                    #if we could not find any, create a new one
+                    event.notify(ObjectInitializedEvent(vocterm))
