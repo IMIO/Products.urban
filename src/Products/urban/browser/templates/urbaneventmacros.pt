@@ -56,11 +56,15 @@
                        mayAddUrbanEvent view/mayAddUrbanEvent">
   <strong><legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend></strong>
   <tal:templates_link condition="python: mayAddUrbanEvent and templates_list">
+   <table>
    <tal:loopEventType repeat="template templates_list">
-   <a href="#" tal:attributes="href python: template['href'];
-                               class python: template['class']" 
-               tal:content="python: template['title']">Template Title</a><br/>
+   <tr tal:attributes="class python: template['class']">
+    <td><a href="#" tal:attributes="href python: template['href'];"
+                    tal:content="python: template['title']">Template Title</a><br/>
+    </td>
+   </tr>
    </tal:loopEventType>
+   </table>
   </tal:templates_link>
   <tal:no_templateObjs condition="not: templates_list">
    <p class="discreet" i18n:translate="no_document_to_generate">No document to generate</p>
