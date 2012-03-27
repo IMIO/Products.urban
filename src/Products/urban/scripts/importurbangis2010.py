@@ -344,7 +344,7 @@ if step in run_steps:
         if action == 'update':
             try:
                 command = 'DROP TABLE %s CASCADE;'%sfl
-                dict_cur.execute()
+                dict_cur.execute(command)
                 conn.commit()
             except Exception, msg:
                 error = True
