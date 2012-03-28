@@ -1379,7 +1379,7 @@ def addTestObjects(context):
     fmFolder = getattr(tool, "foldermanagers")
     if not fmFolder.objectIds():
         fmFolder.invokeFactory("FolderManager",id="foldermanager1",name1="Dumont", name2="Jean",
-                                grade='agent-technique', manageableLicences=URBAN_TYPES)
+                                grade='agent-technique', manageableLicences=URBAN_TYPES, ploneUserId='admin')
         fmFolder.invokeFactory("FolderManager",id="foldermanager2",name1="Schmidt", name2="Alain",
                                 grade='directeur-general', manageableLicences=URBAN_TYPES)
         fmFolder.invokeFactory("FolderManager",id="foldermanager3",name1="Robert", name2="Patrick",
