@@ -45,7 +45,8 @@ def makeContext(pif):
                 pghost = matching.group(3)
             elif urbanmapre.match(line):
                 pylonhost = urbanmapre.match(line).group(1)
-        geohost = "%s:8080" % serverip
+        #geohost = "%s:8080" % serverip
+        geohost = "geoserver.communesplone.be"
         sites[sitename] = dict(sitename=sitename, nis=nis, pghost=pghost,
              dbname=dbname, dbuser=dbuser, dbpwd=dbpwd,
              geohost=geohost, pylonhost=pylonhost)
