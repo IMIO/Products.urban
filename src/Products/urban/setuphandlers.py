@@ -1553,6 +1553,7 @@ def addTestLicences(context):
         portionout = getattr(licence, portionout_id)
         portionout._renameAfterCreation()
         portionout.updateTitle()
+        licence.reindexObject(idxs=['parcelInfosIndex'])
         #generate all the urban events
         eventtype_uids = [brain.UID for brain in urban_tool.listEventTypes(licence, urbanConfigId=licence_type.lower())]
         for event_type_uid in eventtype_uids:
