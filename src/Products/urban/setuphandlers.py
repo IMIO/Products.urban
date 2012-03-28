@@ -1628,7 +1628,7 @@ def setupExtra(context):
 
     if not hasattr(aq_base(additional_layers), 'ppnc'):
         additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://79.99.203.67:8510/geoserver/gwc/service/wms", layers='PPNC', SRS="ESPG:31370", baseLayer=True, layerFormat="image/jpeg", visibility=False)
-"""
+    """
         if portal_urban.getMapExtent():
             (xmin, ymin, xmax, ymax) = portal_urban.getMapExtent().split(',')
             already_ppnc = False
@@ -1654,7 +1654,7 @@ def setupExtra(context):
                 additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://cartopro1.wallonie.be/WMS/com.esri.wms.Esrimap/PPNC?", layers='ppnc', SRS="ESPG:31370", baseLayer=True, layerFormat="image/png")
         else:
             logger.error("Additional layer '%s' not added because the mapExtent is not defined in portal_urban"%'ppnc')
-"""
+    """
 #Layers order
 #PPNC
 #Parcelles
