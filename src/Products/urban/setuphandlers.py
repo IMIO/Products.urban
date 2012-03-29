@@ -1374,7 +1374,7 @@ def addTestObjects(context):
         geoFolder.invokeFactory("Geometrician",id="geometrician3",name1="GeometricianName3", name2="GeometricianSurname3")
         logger.info("Geometricians examples have been added")
 
-    #add some folder managers in each urbanConfigs...
+    #add some folder managers
     tool = site.portal_urban
     fmFolder = getattr(tool, "foldermanagers")
     if not fmFolder.objectIds():

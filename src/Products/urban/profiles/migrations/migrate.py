@@ -616,18 +616,20 @@ def migrateConfigFoldersAllowedTypes(context):
     follow these changes accordingly.
     """
     site = context.getSite()
+    logger = context.getLogger('migrateConfigFoldersAllowedTypes')
     urban_tool = getToolByName(site, 'portal_urban')
     changes = [
         {'oldtype':('UrbanVocabularyTerm',) , 'newtype':('OrganisationTerm',), 'foldername':'foldermakers'},
     ]
     for change in changes:
-        for licence_type in  URBAN_TYPES:
+        for licence_type in URBAN_TYPES:
             licence_cfg= getattr(urban_tool, licence_type.lower(), None)
             if licence_cfg and hasattr(licence_cfg, change['foldername']):
                 folder = getattr(licence_cfg, change['foldername'])
                 if folder.getImmediatelyAddableTypes() == folder.getLocallyAllowedTypes() == change['oldtype']:
                     folder.setImmediatelyAddableTypes(change['newtype'])
                     folder.setLocallyAllowedTypes(change['newtype'])
+                    logger.info("Replaced addable types on folder '%s': value '%s'"%('/'.join(folder.getPhysicalPath()), change['newtype']))
 
 def restoreOrganisationTermsLink(context):
     """
@@ -638,6 +640,7 @@ def restoreOrganisationTermsLink(context):
     site = context.getSite()
     catalog = getToolByName(site, 'portal_catalog')
     urban_tool = getToolByName(site, 'portal_urban')
+    logger = context.getLogger('restoreOrganisationTermsLink')
     for licence_type in  URBAN_TYPES:
         licence_cfg= getattr(urban_tool, licence_type.lower(), None)
         if licence_cfg and hasattr(licence_cfg, 'foldermakers'):
@@ -653,6 +656,8 @@ def restoreOrganisationTermsLink(context):
                         if brain.id.startswith("%s-" % vocterm.id) or brain.id.endswith("-%s" % vocterm.id): 
                             #if we find one, we link it
                             vocterm.setLinkedOpinionRequestEvent(brain.getObject())
+                            logger.info("Link event '%s' to organisation term '%s'"%(brain.getPath(), '/'.join(vocterm.getPhysicalPath())))
                             break
                     #if we could not find any, create a new one and link it
                     event.notify(ObjectInitializedEvent(vocterm))
+                    logger.info("Create a new eventtype for organisation term '%s'"%'/'.join(vocterm.getPhysicalPath()))
