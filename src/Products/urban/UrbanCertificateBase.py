@@ -389,6 +389,15 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
                 parceloutlicences.append(parceloutlicence)
         return parceloutlicences
 
+    security.declarePublic('hasEventNamed')
+    def hasEventNamed(self, title):
+        """
+        Tells if the licence contains an urbanEvent named 'title'
+        """
+        catalog = getToolByName(self, 'portal_catalog')
+        if catalog(portal_type='UrbanEvent', path=self.absolute_url_path(), Title=title):
+            return True
+        return False
 
 registerType(UrbanCertificateBase, PROJECTNAME)
 # end of class UrbanCertificateBase
