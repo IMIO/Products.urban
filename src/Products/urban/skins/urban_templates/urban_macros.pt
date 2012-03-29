@@ -384,7 +384,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                     </th>
                     <th tal:condition="isAParcel" i18n:domain="urban" i18n:translate="">
                     </th>
-                    <th tal:condition="showActions" i18n:domain="urban" i18n:translate="actions">
+                    <th style="text-align: right" tal:condition="showActions" i18n:domain="urban" i18n:translate="actions">
                       Actions
                     </th>
                 </tr>
