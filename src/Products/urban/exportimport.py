@@ -11,6 +11,8 @@ def loga(msg, type="info", gslog=None):
         gslog = logging.getLogger('urban: setuphandlers')
     if type=="info":
         gslog.info(msg)
+    elif type=="warning":
+        gslog.warning(msg)
     elif type=="warn":
         gslog.warn(msg)
     return msg
@@ -144,7 +146,7 @@ def addUrbanEventTypes(context):
             uetFolder = getattr(tool.getUrbanConfig(None, urbanConfigId=urbanConfigId), "urbaneventtypes")
         except AttributeError:
             #if we can not get the urbanConfig, we pass this one...
-            log.append(loga("AttributeError while trying to get the '%s' urbanConfig" % urbanConfigId, type="warn", gslog=gslogger))
+            log.append(loga("AttributeError while trying to get the '%s' urbanConfig" % urbanConfigId, type="warning", gslog=gslogger))
             continue
         last_urbaneventype_id = None
         for uet in urbanEventTypes[urbanConfigId]:
