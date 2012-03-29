@@ -797,6 +797,12 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             return True
         return False
 
+    security.declarePublic('hasNoEventNamed')
+    def hasNoEventNamed(self, title):
+        """
+        Tells if the licence does not contain any urbanEvent named 'title'
+        """
+        return not self.hasEventNamed(title)
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence

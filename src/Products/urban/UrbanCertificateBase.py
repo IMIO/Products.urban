@@ -399,6 +399,13 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
             return True
         return False
 
+    security.declarePublic('hasNoEventNamed')
+    def hasNoEventNamed(self, title):
+        """
+        Tells if the licence does not contain any urbanEvent named 'title'
+        """
+        return not self.hasEventNamed(title)
+
 registerType(UrbanCertificateBase, PROJECTNAME)
 # end of class UrbanCertificateBase
 
