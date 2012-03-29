@@ -13,6 +13,7 @@ config_dir = '%s/config' % urbanmap_dir #a subdirectory config must be present !
 pylon_instances_file = '%s/pylon_instances.txt' % config_dir
 pg_address = 'localhost:5432' #set the ip address if the browser clients aren't local
 domain_name = 'communesplone.be' #the apache servername will be "urb-commune.communesplone.be"
+CREATE_APACHE = True
 
 def convertprc(prc):
    
@@ -665,7 +666,7 @@ if step in run_steps:
                     ofile.write(line)
                 ofile.close()
                 print "Writing %s"%wsgi_file
-            if not os.path.exists(apache_file):
+            if CREATE_APACHE and not os.path.exists(apache_file):
                 afile = open(os.path.join(pathname, 'urbanmap_base.apache'))
                 out = []
                 for line in afile:
