@@ -1,3 +1,4 @@
+from AccessControl import ClassSecurityInfo
 from Acquisition import aq_inner
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
@@ -68,6 +69,20 @@ class UrbanEventView(BrowserView):
         """
         return "%s/createUrbanDoc?urban_template_uid=%s&urban_event_uid=%s" %(context.absolute_url(), template.UID(), context.UID())
 
+    def getRecipients(self):
+        """
+         Return the recipients of the UrbanEvent 
+        """
+        context = aq_inner(self.context)
+        return context.objectValues('RecipientCadastre')
+
+    def getUrbaneventtypes(self):
+        """
+          Return the accessor urbanEventTypes()
+        """
+        context = aq_inner(self.context)
+        return context.getUrbaneventtypes()
+
 class UrbanEventMacros(BrowserView):
     """
       This manage the macros of BuildLicence
@@ -86,6 +101,10 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
         if not self.linkedInquiry:
             plone_utils = getToolByName(context, 'plone_utils')
             plone_utils.addPortalMessage(_('This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !'), type="error")
+
+    def getParcels(self):
+        context = aq_inner(self.context)
+        return context.getParcels()
 
     def getInquiryData(self):
         """
@@ -131,3 +150,74 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
                 return linkedInquiry.generateInquiryTitle()
             else:
                 return linkedInquiry.Title()
+
+    def getInvestigationPOs(self):
+        """
+          Search the parcels in a radius of 50 meters...
+        """
+        #if we do the search again, we first delete old datas...
+        #remove every RecipientCadastre
+        context = aq_inner(self.context)
+        recipients = context.getRecipients()
+        if recipients:
+            context.manage_delObjects([recipient.getId() for recipient in recipients])
+
+        #then we can go...
+        tool=getToolByName(context,'portal_urban')
+        portal_url=getToolByName(context,'portal_url')
+        event_path=portal_url.getPortalPath()+'/'+'/'.join(portal_url.getRelativeContentPath(context))
+        strsql = "SELECT da, section,radical,exposant,bis,puissance,capakey FROM capa where intersects(buffer((select memgeomunion(the_geom) from capa where "
+        strfilter=''
+        for portionOutObj in context.aq_inner.aq_parent.objectValues('PortionOut'):
+            if strfilter !='':
+                strfilter=strfilter + " or "
+            strfilter=strfilter+"(da="+portionOutObj.getDivisionCode()+" and section='"+portionOutObj.getSection()+"' and radical="+portionOutObj.getRadical()
+            if portionOutObj.getBis() != '':
+                strfilter=strfilter+" and bis="+portionOutObj.getBis()
+            if portionOutObj.getExposant() != '':
+                strfilter=strfilter+" and exposant='"+portionOutObj.getExposant()+"'"
+            if portionOutObj.getPuissance() != '':
+                strfilter=strfilter+" and puissance="+portionOutObj.getPuissance()
+            strfilter=strfilter+")"
+
+        strsql=strsql+strfilter+"),50), capa.the_geom);"
+        print strsql
+        rsportionouts=tool.queryDB(query_string=strsql)
+        for rsportionout in rsportionouts:
+            print rsportionout
+            divisioncode=str(rsportionout['da'])
+            section=rsportionout['section']
+            radical=str(rsportionout['radical'])
+            exposant=rsportionout['exposant']
+            bis=str(rsportionout['bis'])
+            puissance=str(rsportionout['puissance'])
+            if bis == '0':
+                bis = ''
+            if puissance == '0':
+                puissance = ''
+            #rspocads=tool.queryDB(query_string="select * from map left join prc on map.prc=prc.prc where capakey LIKE '"+rsportionout['capakey']+"'")
+            rspocads=tool.queryDB(query_string="select * from map where capakey = '"+rsportionout['capakey']+"' order by pe")
+            for rspocad in rspocads:
+                print rspocad
+                rspes=tool.queryDB(query_string="select * from pe where daa = "+str(rspocad['daa'])+";")
+
+                for rspe in rspes:
+                    print rspe
+                    #to avoid having several times the same Recipient (that could for example be on several parcels
+                    #we first look in portal_catalog where Recipients are catalogued
+                    brains=context.portal_catalog(portal_type="RecipientCadastre", path={'query':event_path,}, Title=str(rspe['pe']))
+                    if len(brains) > 0:
+                        newrecipient=brains[0].getObject()
+                    else:
+                        brains=context.portal_catalog(portal_type="RecipientCadastre", path={'query': event_path,}, getRecipientAddress=(str(rspe['adr1'])+' '+str(rspe['adr2'])))
+                        if len(brains) > 0:
+                            newrecipient=brains[0].getObject()
+                            newrecipient.setTitle(newrecipient.Title()+' & '+rspe['pe'])
+                            newrecipient.setName(newrecipient.getName()+' OU '+context.parseCadastreName(rspe['pe']))
+                            newrecipient.reindexObject()
+                        else:
+                            newrecipientname = context.invokeFactory("RecipientCadastre",id=context.generateUniqueId('RecipientCadastre'),title=rspe['pe'],name=context.parseCadastreName(rspe['pe']),adr1=rspe['adr1'],adr2=rspe['adr2'],street=context.parseCadastreStreet(rspe['adr2']),daa=rspe['daa'])
+                            newrecipient=getattr(context,newrecipientname)
+                    #create the PortionOut using the createPortionOut method...
+                    context.portal_urban.createPortionOut(path=newrecipient,division=divisioncode, section=section, radical=radical, bis=bis, exposant=exposant, puissance=puissance, partie=False)
+        return context.REQUEST.RESPONSE.redirect(context.absolute_url()+'/view')

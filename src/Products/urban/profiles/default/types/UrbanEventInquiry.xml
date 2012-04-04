@@ -9,7 +9,7 @@
  <property name="content_meta_type">UrbanEventInquiry</property>
  <property name="product">urban</property>
  <property name="factory">addUrbanEventInquiry</property>
- <property name="immediate_view">urbaneventview</property>
+ <property name="immediate_view">urbaneventinquiryview</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
@@ -21,17 +21,17 @@
    <element value="File"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">urbaneventview</property>
+ <property name="default_view">urbaneventinquiryview</property>
  <property name="view_methods">
   <element value="folder_summary_view"/>
   <element value="folder_tabular_view"/>
   <element value="atct_album_view"/>
   <element value="folder_listing"/>
-  <element value="urbaneventview"/>
+  <element value="urbaneventinquiryview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
- <alias from="view" to="urbaneventview"/>
+ <alias from="view" to="urbaneventinquiryview"/>
  <alias from="edit" to="base_edit"/>
  <alias from="sharing" to="@@sharing"/>
  <action title="View" 

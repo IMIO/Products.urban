@@ -39,7 +39,7 @@ schema = Schema((
             show_hm=False,
             format="%d/%m/%Y",
             label_method="eventDateLabel",
-            starting_year=1960,
+            starting_year=1975,
             label='Eventdate',
             label_msgid='urban_label_eventDate',
             i18n_domain='urban',
@@ -52,7 +52,7 @@ schema = Schema((
             show_hm=False,
             condition="python:here.attributeIsUsed('transmitDate')",
             format="%d/%m/%Y",
-            starting_year=1960,
+            starting_year=1975,
             label='Transmitdate',
             label_msgid='urban_label_transmitDate',
             i18n_domain='urban',
@@ -65,7 +65,7 @@ schema = Schema((
             show_hm=False,
             condition="python:here.attributeIsUsed('receiptDate')",
             format="%d/%m/%Y",
-            starting_year=1960,
+            starting_year=1975,
             label='Receiptdate',
             label_msgid='urban_label_receiptDate',
             i18n_domain='urban',
@@ -88,7 +88,7 @@ schema = Schema((
             show_hm=False,
             condition="python:here.attributeIsUsed('auditionDate')",
             format="%d/%m/%Y",
-            starting_year=1960,
+            starting_year=1975,
             label='Auditiondate',
             label_msgid='urban_label_auditionDate',
             i18n_domain='urban',
@@ -101,7 +101,7 @@ schema = Schema((
             show_hm=False,
             condition="python:here.attributeIsUsed('decisionDate')",
             format="%d/%m/%Y",
-            starting_year=1960,
+            starting_year=1975,
             label='Decisiondate',
             label_msgid='urban_label_decisionDate',
             i18n_domain='urban',
@@ -251,7 +251,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         wf_tool = getToolByName(self, 'portal_workflow')
         return [template for template in self.getUrbaneventtypes().listFolderContents({'portal_type': 'File'})
                 if wf_tool.getInfoFor(template, 'review_state') == 'enabled']
-
     security.declarePublic('eventDateLabel')
     def eventDateLabel(self):
         """
@@ -365,77 +364,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             toreturn=name
         return toreturn
 
-    security.declarePublic('addInvestigationPOs')
-    def addInvestigationPOs(self):
-        """
-          Search the parcels in a radius of 50 meters...
-        """
-        #if we do the search again, we first delete old datas...
-        #remove every RecipientCadastre
-        recipients = self.getRecipients()
-        if recipients:
-            self.manage_delObjects([recipient.getId() for recipient in recipients])
-
-        #then we can go...
-        tool=getToolByName(self,'portal_urban')
-        portal_url=getToolByName(self,'portal_url')
-        event_path=portal_url.getPortalPath()+'/'+'/'.join(portal_url.getRelativeContentPath(self))
-        strsql = "SELECT da, section,radical,exposant,bis,puissance,capakey FROM capa where intersects(buffer((select memgeomunion(the_geom) from capa where "
-        strfilter=''
-        for portionOutObj in self.aq_inner.aq_parent.objectValues('PortionOut'):
-            if strfilter !='':
-                strfilter=strfilter + " or "
-            strfilter=strfilter+"(da="+portionOutObj.getDivisionCode()+" and section='"+portionOutObj.getSection()+"' and radical="+portionOutObj.getRadical()
-            if portionOutObj.getBis() != '':
-                strfilter=strfilter+" and bis="+portionOutObj.getBis()
-            if portionOutObj.getExposant() != '':
-                strfilter=strfilter+" and exposant='"+portionOutObj.getExposant()+"'"
-            if portionOutObj.getPuissance() != '':
-                strfilter=strfilter+" and puissance="+portionOutObj.getPuissance()
-            strfilter=strfilter+")"
-
-        strsql=strsql+strfilter+"),50), capa.the_geom);"
-        print strsql
-        rsportionouts=tool.queryDB(query_string=strsql)
-        for rsportionout in rsportionouts:
-            print rsportionout
-            divisioncode=str(rsportionout['da'])
-            section=rsportionout['section']
-            radical=str(rsportionout['radical'])
-            exposant=rsportionout['exposant']
-            bis=str(rsportionout['bis'])
-            puissance=str(rsportionout['puissance'])
-            if bis == '0':
-                bis = ''
-            if puissance == '0':
-                puissance = ''
-            #rspocads=tool.queryDB(query_string="select * from map left join prc on map.prc=prc.prc where capakey LIKE '"+rsportionout['capakey']+"'")
-            rspocads=tool.queryDB(query_string="select * from map where capakey = '"+rsportionout['capakey']+"' order by pe")
-            for rspocad in rspocads:
-                print rspocad
-                rspes=tool.queryDB(query_string="select * from pe where daa = "+str(rspocad['daa'])+";")
-
-                for rspe in rspes:
-                    print rspe
-                    #to avoid having several times the same Recipient (that could for example be on several parcels
-                    #we first look in portal_catalog where Recipients are catalogued
-                    brains=self.portal_catalog(portal_type="RecipientCadastre", path={'query':event_path,}, Title=str(rspe['pe']))
-                    if len(brains) > 0:
-                        newrecipient=brains[0].getObject()
-                    else:
-                        brains=self.portal_catalog(portal_type="RecipientCadastre", path={'query': event_path,}, getRecipientAddress=(str(rspe['adr1'])+' '+str(rspe['adr2'])))
-                        if len(brains) > 0:
-                            newrecipient=brains[0].getObject()
-                            newrecipient.setTitle(newrecipient.Title()+' & '+rspe['pe'])
-                            newrecipient.setName(newrecipient.getName()+' OU '+self.parseCadastreName(rspe['pe']))
-                            newrecipient.reindexObject()
-                        else:
-                            newrecipientname = self.invokeFactory("RecipientCadastre",id=self.generateUniqueId('RecipientCadastre'),title=rspe['pe'],name=self.parseCadastreName(rspe['pe']),adr1=rspe['adr1'],adr2=rspe['adr2'],street=self.parseCadastreStreet(rspe['adr2']),daa=rspe['daa'])
-                            newrecipient=getattr(self,newrecipientname)
-                    #create the PortionOut using the createPortionOut method...
-                    self.portal_urban.createPortionOut(path=newrecipient,division=divisioncode, section=section, radical=radical, bis=bis, exposant=exposant, puissance=puissance, partie=False)
-        return self.REQUEST.RESPONSE.redirect(self.absolute_url()+'/view')
-
     security.declarePublic('initMap')
     def initMap(self):
         """
@@ -473,12 +401,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             #this layer will be used in the PageTemplate generating the mapfile
         #return the generated JS code
         return self.portal_urban.generateMapJS(self, cqlquery, cqlquery2,'', zoneExtent)
-
-    def getRecipients(self):
-        """
-          Return the recipients of the UrbanEvent
-        """
-        return self.objectValues('RecipientCadastre')
 
     def getInvestigationLetterFile(self):
         """

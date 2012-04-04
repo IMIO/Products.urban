@@ -12,7 +12,7 @@
 <body>
 <div metal:fill-slot="main">
 <metal:main_macro define-macro="main">
-<metal:body define-macro="body_macro" tal:define="linkedUrbanEventType context/getUrbaneventtypes;
+<metal:body define-macro="body_macro" tal:define="linkedUrbanEventType view/getUrbaneventtypes;
                                                   member context/@@plone_portal_state/member;">
 
 <metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />
@@ -43,9 +43,6 @@
     </tr>
 </table>
 
-<tal:block condition="python: member.has_permission('Modify portal content', context) and linkedUrbanEventType.getSpecialFunctionName()">
- <a tal:attributes="href linkedUrbanEventType/getSpecialFunctionUrl" tal:content="linkedUrbanEventType/getSpecialFunctionName"/><br><br>
-</tal:block>
 
 <tal:block condition="python: context.REQUEST.get('doc_uid') != None">
 <tal:block define="docObj python:context.uid_catalog(UID=context.REQUEST.get('doc_uid'))[0]">

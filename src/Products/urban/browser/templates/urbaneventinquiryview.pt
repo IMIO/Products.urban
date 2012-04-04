@@ -19,9 +19,9 @@
 <div metal:fill-slot="main">
 <metal:main_macro define-macro="main">
 <metal:body define-macro="body_macro" tal:define="member context/@@plone_portal_state/member;
-                                                  recipients context/getRecipients;
-                                                  linkedUrbanEventType context/getUrbaneventtypes;
-                                                  global parcels python: context.getParcels();">
+                                                  recipients view/getRecipients;
+                                                  linkedUrbanEventType view/getUrbaneventtypes;
+                                                  global parcels view/getParcels;">
 
 <metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />
 
@@ -117,9 +117,10 @@
     </tr>
 </table>
 
-<tal:block condition="python: member.has_permission('Modify portal content', context) and linkedUrbanEventType.getSpecialFunctionName()">
- <fieldset><strong><legend i18n:translate="event_inquiry_special_function">Special function</legend><strong>
-  <a tal:attributes="href linkedUrbanEventType/getSpecialFunctionUrl" tal:content="linkedUrbanEventType/getSpecialFunctionName"/><br><br>
+<tal:block condition="python: member.has_permission('Modify portal content', context) 
+                              and linkedUrbanEventType.getEventTypeType() == 'Products.urban.interfaces.IInquiryEvent'">
+ <fieldset>
+  <a tal:attributes="href python: 'addInvestigationPO'" tal:content="python: 'Rechercher les propriétaires situés dans un rayon de 50m'"/><br><br>
  </fieldset>
 </tal:block>
 

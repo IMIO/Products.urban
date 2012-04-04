@@ -191,8 +191,9 @@
 
   <browser:page
      for="Products.urban.interfaces.IInquiryEvent"
-     name="urbaneventview"
+     name="urbaneventinquiryview"
      class=".urbaneventviews.UrbanEventInquiryView"
+     allowed_attributes="getInvestigationPOs"
      template="templates/urbaneventinquiryview.pt"
      permission="zope2.View"
   />

@@ -7,4 +7,4 @@
 ##bind subpath=traverse_subpath
 ##parameters=
 ##
-return context.addInvestigationPOs()
+return context.restrictedTraverse('@@urbaneventinquiryview').getInvestigationPOs()

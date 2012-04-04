@@ -27,8 +27,9 @@ from Products.CMFPlone import PloneMessageFactory as _
 import logging
 logger = logging.getLogger('urban: UrbanEventType')
 from Products.CMFPlone.i18nl10n import utranslate
-from Products.CMFCore.Expression import Expression, createExprContext
+from Products.CMFCore.Expression import Expression
 from Products.CMFCore.utils import getToolByName
+from Products.PageTemplates.Expressions import getEngine
 ##/code-section module-header
 
 schema = Schema((
@@ -78,22 +79,6 @@ schema = Schema((
         widget=SelectionWidget(
             label='Eventtypetype',
             label_msgid='urban_label_eventTypeType',
-            i18n_domain='urban',
-        ),
-    ),
-    StringField(
-        name='specialFunctionName',
-        widget=StringField._properties['widget'](
-            label='Specialfunctionname',
-            label_msgid='urban_label_specialFunctionName',
-            i18n_domain='urban',
-        ),
-    ),
-    StringField(
-        name='specialFunctionUrl',
-        widget=StringField._properties['widget'](
-            label='Specialfunctionurl',
-            label_msgid='urban_label_specialFunctionUrl',
             i18n_domain='urban',
         ),
     ),
@@ -175,7 +160,16 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         TALCondition = self.getTALCondition().strip()
         if TALCondition:
             portal = getToolByName(self, 'portal_url').getPortalObject()
-            ctx = createExprContext(obj.getParentNode(), portal, obj)
+            data = {
+                'nothing':      None,
+                'portal':       portal,
+                'object':       obj,
+                'event':        self,
+                'request':      getattr(portal, 'REQUEST', None),
+                'here':         obj,
+                'licence':      obj,
+            }
+            ctx = getEngine().getContext(data)
             try:
                 res = Expression(TALCondition)(ctx)
             except Exception, e:
