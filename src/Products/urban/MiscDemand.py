@@ -26,7 +26,12 @@ from Products.urban.config import *
 from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-optional_fields = []
+optional_fields = ['subdivisionDetails','missingParts','missingPartsDetails','folderZoneDetails','folderZone',
+                   'derogationDetails','isInPCA','annoncedDelayDetails','roadType','roadCoating','roadEquipments',
+                   'investigationDetails','investigationReasons','isInSubdivision', 'solicitLocationOpinionsTo',
+                   'folderCategoryTownship','protectedBuilding','protectedBuildingDetails',
+                   'pash','pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks',
+                   'pca','SSC','RCU','floodingLevel','solicitRoadOpinionsTo', 'areParcelsVerified', 'locationFloodingLevel']
 ##/code-section module-header
 
 schema = Schema((
@@ -34,13 +39,6 @@ schema = Schema((
 
 ),
 )
-
-optional_fields = ['subdivisionDetails','missingParts','missingPartsDetails','folderZoneDetails','folderZone',
-                   'derogationDetails','isInPCA','annoncedDelayDetails','roadType','roadCoating','roadEquipments',
-                   'investigationDetails','investigationReasons','isInSubdivision', 'solicitLocationOpinionsTo',
-                   'folderCategoryTownship','protectedBuilding','protectedBuildingDetails',
-                   'pash','pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks',
-                   'pca','SSC','RCU','floodingLevel','solicitRoadOpinionsTo', 'areParcelsVerified', 'locationFloodingLevel']
 
 ##code-section after-local-schema #fill in your manual code here
 setOptionalAttributes(schema, optional_fields)
