@@ -524,10 +524,10 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getTechnicalRemarks()
         </FieldCode>        
     </Item>    
     <Item name="Texte de l'article">
-        <FieldCode>
+        <AnnotationCode>
             do text
 from xhtml(self.getArticle(theObject=True).Description())
-        </FieldCode>        
+        </AnnotationCode>        
     </Item>    
 
 </Object>
