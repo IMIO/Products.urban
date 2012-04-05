@@ -228,15 +228,17 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
-    StringField(
+    LinesField(
         name='roadType',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
+            format='checkbox',
             label='Roadtype',
             label_msgid='urban_label_roadType',
             i18n_domain='urban',
         ),
         schemata='urban_road',
-        vocabulary=UrbanVocabulary('folderroadtypes', inUrbanConfig=False, with_empty_value=True),
+        multiValued=1,
+        vocabulary=UrbanVocabulary('folderroadtypes', inUrbanConfig=False, with_empty_value=False),
     ),
     StringField(
         name='roadCoating',
@@ -803,6 +805,8 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         Tells if the licence does not contain any urbanEvent named 'title'
         """
         return not self.hasEventNamed(title)
+
+
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence
