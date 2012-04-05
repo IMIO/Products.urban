@@ -409,7 +409,7 @@ from xhtml(urbanEventObj.getClaimsText())
     </Item>
     <Item name="Type de revêtement">
         <FieldCode>
-            self.templateRoadCoatingFullname(self.getRoadCoating()) 
+            self.getValueForTemplate('roadCoating') 
         </FieldCode>        
     </Item>
     <Item name="Demande de dérogation">
