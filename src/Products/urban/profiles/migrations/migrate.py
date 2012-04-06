@@ -7,14 +7,12 @@ from zope import event
 
 from Acquisition import aq_base
 
-from Products.CMFPlone.utils import base_hasattr
 from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator, InplaceATItemMigrator
 from Products.urban.events.urbanEventInquiryEvents import setLinkedInquiry
 from Products.urban.events.urbanEventEvents import setEventTypeType, setCreationDate
-from Products.urban.interfaces import ILicenceContainer
 from Products.urban.utils import getMd5Signature
-from Products.urban.config import GLOBAL_TEMPLATES, URBAN_TYPES
+from Products.urban.config import URBAN_TYPES
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.CMFPlone.utils import safe_hasattr
 from re import search
@@ -121,7 +119,6 @@ def migrateUrbanEventTypes(context):
 
     portal_url = getToolByName(site, 'portal_url')
 
-    count = 0
     logger = context.getLogger('migrateUrbanEventTypes')
     brains = site.portal_catalog(portal_type="UrbanEventType")
     for brain in brains:
@@ -451,8 +448,10 @@ class UrbanVocabularyTermToOrganisationTermMigrator(object, InplaceATItemMigrato
         for brain in brains:
             if brain.id.startswith("%s-" % self.new_id) or brain.id.endswith("-%s" % self.new_id):
                 self.new.setLinkedOpinionRequestEvent(brain.getObject())
+                logger.info("OrganisationTerm '%s' has been migrated" % self.new_id)
                 return
         event.notify(ObjectInitializedEvent(self.new))
+        logger.info("OrganisationTerm '%s' has been migrated" % self.new_id)
      
 def migrateFoldermakersTerms(context):
     """
@@ -518,6 +517,7 @@ def migrateFoldermanagers(context):
                     manageable_licences.append(licence)
                 manageable_licences.append(licence_type)
                 foldermanager.setManageableLicences(manageable_licences)
+            logger.info("Foldermanager '%s' has been migrated" % foldermanager.Title()) 
 
             for licence in old_foldermanager.getBRefs():
                 ref_foldermanagers = licence.getFoldermanagers()
