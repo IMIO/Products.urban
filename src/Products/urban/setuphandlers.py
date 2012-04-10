@@ -1505,7 +1505,7 @@ def addTestLicences(context):
             },
             'NotaryLetter':{
                 'licenceSubject':'Exemple Lettre de notaire',
-                'contact_type':'Applicant',
+                'contact_type':'Proprietary',
             },
             'MiscDemand':{
                 'licenceSubject':'Exemple Demande diverse',

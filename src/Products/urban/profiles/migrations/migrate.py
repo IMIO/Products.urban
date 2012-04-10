@@ -666,16 +666,16 @@ def restoreOrganisationTermsLink(context):
 
 def migrateApplicantToProprietaryForCU(context):
     """
-    for CU1 and CU2, the contacts portal_type should be "proprietary" and not "applicant"
+    for notary letters, CU1 and CU2, the contacts portal_type should be "proprietary" and not "applicant"
     """
     site = context.getSite()
     catalog = getToolByName(site, 'portal_catalog')
     urban = getattr(site, 'urban')
-    for licence_type in  ['urbancertificateones', 'urbancertificatetwos']:
+    for licence_type in  ['notaries', 'urbancertificateones', 'urbancertificatetwos']:
         licence_folder = getattr(urban, licence_type, None)
         path = '/'.join(licence_folder.getPhysicalPath())
         for brain in catalog(portal_type=('Applicant',), path=path, depth=2):
             applicant = brain.getObject()
             applicant.portal_type = 'Proprietary'
             applicant.reindexObject()
-            logger.info("Migrated CU applicant %s to a proprietary" % applicant.Title())
+            logger.info("Migrated applicant %s to a proprietary" % applicant.Title())
