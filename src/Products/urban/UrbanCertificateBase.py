@@ -332,6 +332,17 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
                 res.append("<p>%s</p>" % "<br />".join(csf['feature']))
         return res
 
+    security.declarePublic('getProprietaries')
+    def getProprietaries(self):
+        """
+           Return the list of proprietaries for the Division
+        """
+        res = []
+        for obj in self.objectValues('Contact'):
+            if obj.portal_type == 'Proprietary':
+                res.append(obj)
+        return res
+
     security.declarePublic('getLicencesOfTheParcels')
     def getLicencesOfTheParcels(self, licence_type=''):
         history = []

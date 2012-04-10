@@ -66,6 +66,8 @@ def migrateToPlone4(context):
     migrateConfigFoldersAllowedTypes(context)
     #restore the linked urbaneventype of the organisationTerms in foldermakers
     restoreOrganisationTermsLink(context)
+    #migrate applicants of CUs to proprietaries
+    migrateApplicantToProprietaryForCU(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -661,3 +663,19 @@ def restoreOrganisationTermsLink(context):
                     #if we could not find any, create a new one and link it
                     event.notify(ObjectInitializedEvent(vocterm))
                     logger.info("Create a new eventtype for organisation term '%s'"%'/'.join(vocterm.getPhysicalPath()))
+
+def migrateApplicantToProprietaryForCU(context):
+    """
+    for CU1 and CU2, the contacts portal_type should be "proprietary" and not "applicant"
+    """
+    site = context.getSite()
+    catalog = getToolByName(site, 'portal_catalog')
+    urban = getattr(site, 'urban')
+    for licence_type in  ['urbancertificateones', 'urbancertificatetwos']:
+        licence_folder = getattr(urban, licence_type, None)
+        path = '/'.join(licence_folder.getPhysicalPath())
+        for brain in catalog(portal_type=('Applicant',), path=path, depth=2):
+            applicant = brain.getObject()
+            applicant.portal_type = 'Proprietary'
+            applicant.reindexObject()
+            logger.info("Migrated CU applicant %s to a proprietary" % applicant.Title())
