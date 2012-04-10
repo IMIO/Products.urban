@@ -230,7 +230,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         self.updateTitle()
 
-    security.declarepublic('updatetitle')
+    security.declarePublic('updatetitle')
     def updatetitle(self):
         """
            Update the title to clearly identify the certificate
