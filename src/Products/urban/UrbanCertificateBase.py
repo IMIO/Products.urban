@@ -230,34 +230,33 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         self.updateTitle()
 
-    security.declarePublic('updatetitle')
-    def updatetitle(self):
+    security.declarePublic('updateTitle')
+    def updateTitle(self):
         """
-           Update the title to clearly identify the certificate
-           Display the reference, the applicant and the notary
+           Update the title to set a clearly identify the buildlicence
         """
         notary = ''
         proprietary = ''
-        proprietaries = self.getproprietaries()
+        proprietaries = self.getProprietaries()
         if proprietaries:
-            proprietary = proprietaries[0].title()
+            proprietary = proprietaries[0].Title()
         else:
-            proprietary = translate('no_proprietary_defined', 'urban', context=self.request).encode('utf8')
-        if self.getnotarycontact():
-            notary = self.getnotarycontact()[0].title()
+            proprietary = translate('no_proprietary_defined', 'urban', context=self.REQUEST).encode('utf8')
+        if self.getNotaryContact():
+            notary = self.getNotaryContact()[0].Title()
         else:
-            notary = translate('no_notary_defined', 'urban', context=self.request).encode('utf8')
+            notary = translate('no_notary_defined', 'urban', context=self.REQUEST).encode('utf8')
 
         if proprietary and notary:
-            title = "%s - %s - %s" % (self.getreference(), proprietary, notary)
+            title = "%s - %s - %s" % (self.getReference(), proprietary, notary)
         elif proprietary:
-            title = "%s - %s" % (self.getreference(), proprietary)
+            title = "%s - %s" % (self.getReference(), proprietary)
         elif notary:
-            title = "%s - %s" % (self.getreference(), notary)
+            title = "%s - %s" % (self.getReference(), notary)
         else:
-            title = self.getreference()
-        self.settitle(title)
-        self.reindexobject(idxs=('title', 'applicantinfosindex',))
+            title = self.getReference()
+        self.setTitle(title)
+        self.reindexObject(idxs=('Title', 'applicantInfosIndex',))
 
     security.declarePublic('getOpinionsToAskForWorks')
     def getOpinionsToAskForWorks(self, theObjects=False):
