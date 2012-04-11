@@ -99,7 +99,6 @@ def initialize(context):
     import Equipment
     import Lot
     import Division
-    import WorkLocation
     import UrbanDelay
     import Locality
     import LicenceConfig
