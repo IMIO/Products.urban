@@ -149,7 +149,7 @@ class UrbanVocabulary(object):
 
     implements(IReferenceableVocabulary)
 
-    def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False):
+    def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False, datagridfield_key='street'):
         self.path = path
         self.vocType = vocType
         self.id_to_use = id_to_use
@@ -158,6 +158,7 @@ class UrbanVocabulary(object):
         self.inUrbanConfig = inUrbanConfig
         self.allowedStates = allowedStates
         self.with_empty_value = with_empty_value
+        self.datagridfield_key = datagridfield_key
 
     def getDisplayList(self, content_instance):
         portal_urban = getToolByName(content_instance, 'portal_urban')
@@ -172,6 +173,8 @@ class UrbanVocabulary(object):
         objects = self.getAllVocTerms(content_instance)
         result = set()
         for value in values:
+            if type(value) == dict:
+                value = value[self.datagridfield_key]
             obj = objects.get(value, None)
             if obj is not None:
                 result.add(obj)
