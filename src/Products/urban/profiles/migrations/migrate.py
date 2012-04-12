@@ -582,8 +582,7 @@ def migrateDecisionsForDeclarations(context):
                 obj.setExtraValue('Irrecevable')
                 logger.info("Extra value added for '%s'" % obj.id)
             else:
-                logger.warn("Unknown term with id '%s', no extra value added!!!'" % obj.id)
-            logger.info("Extra value added for '%s'" % obj.id)
+                logger.warning("Unknown term with id '%s', no extra value added!!!'" % obj.id)
 #        else:
 #            logger.info("Extra value already exists for '%s' and is '%s'" % (obj.id, extraValue))
 
