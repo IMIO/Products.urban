@@ -368,38 +368,29 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     security.declarePublic('getUrbanCertificateOneOfTheParcels')
     def getUrbanCertificateOneOfTheParcels(self):
-        cu1s = []
-        #cu1 cannot be older than 2 years
+         #cu1 cannot be older than 2 years
         limit_date = self.getLastTheLicence().getEventDate() - 731
-        for brain in self.getLicencesOfTheParcels(licence_type='UrbanCertificateOne'):
-            cu1 = brain.getObject()
-            delivered = cu1.getLastTheLicence()
-            if delivered and delivered.getDecisionDate() > limit_date:
-                cu1s.append(cu1)
-        return cu1s
+        return self.getLicenceOfTheParcels('UrbanCertificateOne', limit_date)
 
     security.declarePublic('getUrbanCertificateTwoOfTheParcels')
     def getUrbanCertificateTwoOfTheParcels(self):
-        cu2s = []
         #cu2 cannot be older than 2 years
         limit_date = self.getLastTheLicence().getEventDate() - 731
-        for brain in self.getLicencesOfTheParcels(licence_type='UrbanCertificateTwo'):
-            cu2 = brain.getObject()
-            delivered = cu2.getLastTheLicence()
-            if delivered and delivered.getDecisionDate() > limit_date:
-                cu2s.append(cu2)
-        return cu2s
+        return self.getLicenceOfTheParcels('UrbanCertificateTwo', limit_date)
 
     security.declarePublic('getParceloutlicenceOfTheParcels')
     def getParceloutlicenceOfTheParcels(self):
-        parceloutlicences = []
         limit_date = DateTime('1977/01/01') 
-        for brain in self.getLicencesOfTheParcels(licence_type='ParcelOutLicence'):
-            parceloutlicence = brain.getObject()
-            delivered = parceloutlicence.getLastTheLicence()
+        return self.getLicenceOfTheParcels('ParcelOutLicence', limit_date)
+
+    def getLicenceOfTheParcels(self, licence_type, limit_date):
+        licences = []
+        for brain in self.getLicencesOfTheParcels(licence_type=licence_type):
+            licence = brain.getObject()
+            delivered = licence.getLastTheLicence()
             if delivered and delivered.getDecision() == 'favorable' and delivered.getDecisionDate() > limit_date:
-                parceloutlicences.append(parceloutlicence)
-        return parceloutlicences
+                licences.append(licence)
+        return licences
 
     security.declarePublic('hasEventNamed')
     def hasEventNamed(self, title):
