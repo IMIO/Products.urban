@@ -152,7 +152,7 @@ class Declaration(BaseFolder, GenericLicence, BrowserDefaultMixin):
             if decisionTerm:
                 if decisionTerm.getExtraValue():
                     return decisionTerm.getExtraValue()
-                return "[No ExtraValue defined for the decision term '%s']" %s decisionTerm.Title()
+                return "[No ExtraValue defined for the decision term '%s']" % decisionTerm.Title()
         return ''
 
 
