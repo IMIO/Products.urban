@@ -5,7 +5,7 @@ from Products.CMFPlone import PloneMessageFactory as _
 
 class ParcelRecordsView(BrowserView):
     """
-      This manage the view of long text
+      This manage the view of the popup showing the licences related to some parcels
     """
     def __init__(self, context, request):
         self.context = context
@@ -17,7 +17,7 @@ class ParcelRecordsView(BrowserView):
 
     def getRelatedLicencesOfParcel(self):
         """
-          Returns the entire text
+          Returns the licences related to a parcel
         """
         context = aq_inner(self.context)
         catalog = getToolByName(context, 'portal_catalog')

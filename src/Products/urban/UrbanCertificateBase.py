@@ -344,31 +344,14 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
                 res.append(obj)
         return res
 
-    security.declarePublic('getLicencesOfTheParcels')
-    def getLicencesOfTheParcels(self, licence_type=''):
-        history = []
-        licence_uids = set([])
-        for parcel in self.getParcels():
-            for brain in parcel.getRelatedLicences(licence_type=licence_type):
-                if brain.UID not in licence_uids:
-                    history.extend(parcel.getRelatedLicences(licence_type=licence_type))
-                    licence_uids.add(brain.UID)
-        return history
-
     security.declarePublic('getBuildlicencesOfTheParcels')
     def getBuildlicencesOfTheParcels(self):
-        buildlicences = []
         limit_date = DateTime('1977/01/01')
-        for brain in self.getLicencesOfTheParcels(licence_type='BuildLicence'):
-            buildlicence = brain.getObject()
-            delivered = buildlicence.getLastTheLicence()
-            if delivered and delivered.getDecision() == 'favorable' and delivered.getDecisionDate() > limit_date:
-                buildlicences.append(buildlicence)
-        return buildlicences
+        return self.getLicenceOfTheParcels('BuildLicence', limit_date)
 
     security.declarePublic('getUrbanCertificateOneOfTheParcels')
     def getUrbanCertificateOneOfTheParcels(self):
-         #cu1 cannot be older than 2 years
+        #cu1 cannot be older than 2 years
         limit_date = self.getLastTheLicence().getEventDate() - 731
         return self.getLicenceOfTheParcels('UrbanCertificateOne', limit_date)
 
