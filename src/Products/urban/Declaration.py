@@ -150,7 +150,9 @@ class Declaration(BaseFolder, GenericLicence, BrowserDefaultMixin):
             #we use the extra value field on the term where we store
             #the 'receivable' text
             if decisionTerm:
-                return decisionTerm.getExtraValue()
+                if decisionTerm.getExtraValue():
+                    return decisionTerm.getExtraValue()
+                return "[No ExtraValue defined for the decision term '%s']" %s decisionTerm.Title()
         return ''
 
 
