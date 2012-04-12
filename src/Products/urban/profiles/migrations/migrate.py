@@ -581,7 +581,6 @@ def migrateDecisionsForDeclarations(context):
                 logger.info("Extra value added for '%s'" % obj.id)
             else:
                 logger.warning("Unknown term with id '%s', no extra value added!!!'" % obj.id)
-            logger.info("Extra value added for '%s'" % obj.id)
 #        else:
 #            logger.info("Extra value already exists for '%s' and is '%s'" % (obj.id, extraValue))
 
