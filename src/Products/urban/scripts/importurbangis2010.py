@@ -321,7 +321,11 @@ step = 'C'
 if step in run_steps:
     print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
     if action == 'new':
-        if os.path.exists('/usr/share/postgresql/8.4/contrib/postgis-1.5'):
+        if os.path.exists('/usr/share/postgresql/9.1/contrib/postgis-1.5'):
+            os.system('psql -q -d %s -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql'%databasename)
+            os.system('psql -q -d '+databasename+' -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql')
+            os.system('psql -q -d '+databasename+' -f /usr/share/postgresql/9.1/contrib/postgis_comments.sql')
+        elif os.path.exists('/usr/share/postgresql/8.4/contrib/postgis-1.5'):
             os.system('psql -q -d %s -f /usr/share/postgresql/8.4/contrib/postgis-1.5/postgis.sql'%databasename)
             os.system('psql -q -d '+databasename+' -f /usr/share/postgresql/8.4/contrib/postgis-1.5/spatial_ref_sys.sql')
             os.system('psql -q -d '+databasename+' -f /usr/share/postgresql/8.4/contrib/postgis_comments.sql')
