@@ -228,7 +228,7 @@ if step in run_steps:
         if databasename not in [res[0] for res in results]:
             std_cur.execute('CREATE ROLE %s LOGIN NOINHERIT;'%databasename)
             std_cur.execute("ALTER USER %s WITH PASSWORD '%s';"%(databasename, databasename))
-        dict_cur.execute('SELECT NAME FROM PG_LANGUAGE;')
+        dict_cur.execute('SELECT LANNAME FROM PG_LANGUAGE;')
         results = dict_cur.fetchall()
         if 'plpgsql' not in [res[0] for res in results]:
             std_cur.execute('CREATE LANGUAGE plpgsql;')
