@@ -158,7 +158,7 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
         #if we do the search again, we first delete old datas...
         #remove every RecipientCadastre
         context = aq_inner(self.context)
-        recipients = context.getRecipients()
+        recipients = self.getRecipients()
         if recipients:
             context.manage_delObjects([recipient.getId() for recipient in recipients])
 
