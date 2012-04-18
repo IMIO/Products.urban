@@ -1499,10 +1499,6 @@ def addTestLicences(context):
                 'licenceSubject':'Exemple Certificat Urbanisme 1',
                 'contact_type':'Applicant',
             },
-            'UrbanCertificateTwo':{
-                'licenceSubject':'Exemple Certificat Urbanisme 2',
-                'contact_type':'Applicant',
-            },
             'NotaryLetter':{
                 'licenceSubject':'Exemple Lettre de notaire',
                 'contact_type':'Applicant',
