@@ -408,6 +408,9 @@ def addMd5SignatureAndProfileNameProperties(context):
     # for each template in an urbanEventType or globaltemplates folder
     for folder in folders:
         for fileTemplate in folder.objectValues('ATBlob'):
+            if fileTemplate.getContentType() == 'application/zip':
+                fileTemplate.setFormat("application/vnd.oasis.opendocument.text")
+                logger.info("Content type corrected on '%s'"%fileTemplate.absolute_url())
             dictProperties=dict(fileTemplate.propertyItems())
             if dictProperties.has_key("md5Signature"):
                 hex = dictProperties["md5Signature"].encode('hex')
