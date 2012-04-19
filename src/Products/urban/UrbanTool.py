@@ -1469,6 +1469,17 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         return URBAN_TYPES
 
+    security.declarePublic('isScheduleAvailable')
+    def isScheduleAvailable(self, context):
+        try:
+            scheduleview = context.restrictedTraverse('@@schedule')
+        except AttributeError:
+            return False
+        #the schedule is available on pages using the 'urban_view' view (aka page listing licences)
+        #or on a licence itself
+        if context.getLayout() == 'urban_view' or context.portal_type in URBAN_TYPES:
+            return True
+        return False
 
 
 registerType(UrbanTool, PROJECTNAME)

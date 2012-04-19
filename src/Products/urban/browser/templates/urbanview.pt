@@ -19,7 +19,6 @@
                             isAnon context/@@plone_portal_state/anonymous;
                             urban_root python: not context.getProperty('urbanConfigId');
                             portal_url context/@@plone_portal_state/portal_url;
-                            isScheduleAvailable view/isScheduleAvailable;
                             isUrbanManager view/isUrbanManager">
 
         <div tal:replace="structure provider:plone.abovecontenttitle" />
@@ -36,13 +35,6 @@
               </tal:addable_types>
             </tal:add_icon>
         </h1>
-
-        <tal:schedule condition="isScheduleAvailable">
-         <a class="urban-licence-schedule" href="schedule">
-           <img src="../schedule.png" />
-           &nbsp;<span i18n:domain="urbanschedule" i18n:translate="Schedule">Schedule</span>
-         </a>
-        </tal:schedule>
 
         <!--div tal:replace="structure provider:plone.belowcontenttitle" /-->
 

@@ -613,6 +613,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
 </metal:displayAddress>
 
 <metal:titleWithIcon define-macro="titleWithIcon">
+ <div tal:replace="structure provider:plone.abovecontenttitle" />
  <h1 class="documentFirstHeading">
   <img src="#" tal:attributes="src string:${context/@@plone_portal_state/portal_url}/${context/portal_type}.png" />
   <span tal:replace="here/Title" tal:omit-tag="">Title</span>
