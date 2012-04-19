@@ -14,7 +14,7 @@ class UrbanCertificateOneView(LicenceView):
         plone_utils = getToolByName(context, 'plone_utils')
         if not self.context.getParcels():
             plone_utils.addPortalMessage(_('warning_add_a_parcel'), type="warning")
-        if not self.context.getApplicants():
+        if not self.context.getProprietaries():
             plone_utils.addPortalMessage(_('warning_add_an_applicant'), type="warning")
 
 class UrbanCertificateOneMacros(LicenceView):
