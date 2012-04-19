@@ -1475,9 +1475,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             scheduleview = context.restrictedTraverse('@@schedule')
         except AttributeError:
             return False
-        #the schedule is available on pages using the 'urban_view' view (aka page listing licences)
-        #or on a licence itself
-        if context.getLayout() == 'urban_view' or context.portal_type in URBAN_TYPES:
+        #the schedule is available at the root of the application and for now, in the buildlicences related views
+        if (context.getLayout() == 'urban_view' and not context.getProperty('urbanConfigId')) or \
+           context.getProperty('urbanConfigId') == 'buildlicence' or context.portal_type == 'BuildLicence':
             return True
         return False
 
