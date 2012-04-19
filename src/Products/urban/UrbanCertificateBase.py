@@ -358,7 +358,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         for parcel in self.getParcels():
             for brain in parcel.getRelatedLicences(licence_type=licence_type):
                 if brain.UID not in licence_uids:
-                    history.extend(parcel.getRelatedLicences(licence_type=licence_type))
+                    history.append(brain)
                     licence_uids.add(brain.UID)
         return history
 
