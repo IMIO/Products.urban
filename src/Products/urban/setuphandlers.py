@@ -119,14 +119,33 @@ def postInstall(context):
     architect_type.content_meta_type = "Contact"
     architect_type.factory = "addContact"
 
+    logger.info("setUrbanConfigWFPolicy : starting...")
     setUrbanConfigWFPolicy(context)
+    logger.info("setUrbanConfigWFPolicy : Done")
+    logger.info("addUrbanConfigs : starting...")
     addUrbanConfigs(context)
+    logger.info("addUrbanConfigs : Done")
+    logger.info("addApplicationFolders : starting...")
     addApplicationFolders(context)
+    logger.info("addApplicationFolders : Done")
+    logger.info("setDefaultApplicationSecurity : starting...")
     setDefaultApplicationSecurity(context)
+    logger.info("setDefaultApplicationSecurity : Done")
+    logger.info("addGlobalFolders : starting...")
     addGlobalFolders(context)
+    logger.info("addGlobalFolders : Done")
+    logger.info("addUrbanConfigsTopics : starting...")
     addUrbanConfigsTopics(context)
+    logger.info("addUrbanConfigsTopics : Done")
+    logger.info("addUrbanGroups : starting...")
     addUrbanGroups(context)
+    logger.info("addUrbanGroups : Done")
+    logger.info("adaptDefaultPortal : starting...")
     adaptDefaultPortal(context)
+    logger.info("adaptDefaultPortal : Done")
+    #install the urbanskin if available
+    logger.info("installUrbanskin : starting...")
+    installUrbanskin(context)
     #refresh catalog after all these objects have been added...
     logger.info("Refresh portal_catalog : starting...")
     site.portal_catalog.refreshCatalog(clear=True)
@@ -1207,6 +1226,17 @@ def addUrbanConfigsTopics(context):
                 topic.setCustomView(True)
                 topic.setCustomViewFields(topicViewFields)
                 topic.reindexObject()
+
+def installUrbanskin(context):
+    """
+       Install Products.urbanskin if available
+    """
+    site = context.getSite()
+    try:
+        site.portal_setup.runAllImportStepsFromProfile('profile-Products.urbanskin:default')
+        logger.info("installUrbanskin : Done")
+    except KeyError:
+        logger.info("installUrbanskin : Products.urbanskin not found, skin not installed!")
 
 def adaptDefaultPortal(context):
     """
