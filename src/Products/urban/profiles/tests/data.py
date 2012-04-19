@@ -92,14 +92,6 @@ urbanEventTypes = {
                                      {'id': "urb-demande-complements-art116-6", 'title': "Lettre au demandeur"},
                                     ),
                     },
-                    {   
-                    'id': "config-opinion-request",
-                    'title': "*** Demande d'avis CONFIG ***",
-                    'activatedFields': [],
-                    'TALCondition': "python: False", 
-                    'podTemplates': ({'id': "urb-avis", 'title': "Courrier de demande d'avis"},),
-                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
-                    },
                     {
                     'id': "transmis-1er-dossier-rw",
                     'title': "Transmis 1er dossier RW",
@@ -136,6 +128,14 @@ urbanEventTypes = {
                                      {'id': "urb-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+                    },
+                    {
+                    'id': "config-opinion-request",
+                    'title': "*** Demande d'avis CONFIG ***",
+                    'activatedFields': [],
+                    'TALCondition': "python: False",
+                    'podTemplates': ({'id': "urb-avis", 'title': "Courrier de demande d'avis"},),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'id': "rapport-du-college",
@@ -438,14 +438,6 @@ urbanEventTypes = {
                                     ),
                     },
                     {
-                    'id': "config-opinion-request",
-                    'title': "*** Demande d'avis CONFIG ***",
-                    'activatedFields': [],
-                    'TALCondition': "python: False", 
-                    'podTemplates': ({'id': "cu2-avis", 'title': "Courrier de demande d'avis"},),
-                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
-                    },
-                    {
                     'id': "enquete-publique",
                     'title': "Enquête publique",
                     'activatedFields': ['claimsDate', 'explanationsDate', 'claimsText'],
@@ -468,6 +460,14 @@ urbanEventTypes = {
                                      {'id': "cu2-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+                    },
+                    {
+                    'id': "config-opinion-request",
+                    'title': "*** Demande d'avis CONFIG ***",
+                    'activatedFields': [],
+                    'TALCondition': "python: False",
+                    'podTemplates': ({'id': "cu2-avis", 'title': "Courrier de demande d'avis"},),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'id': "rapport-du-college",
