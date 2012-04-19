@@ -94,8 +94,7 @@
    </fieldset>
   </td>
  </tr>
- <tr>
- <td valign="top" width=50%>
+ <td valign="top" >
  <fieldset><legend i18n:translate="legend_specific_features">Specific features</legend>
   <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
    <tr>
@@ -139,7 +138,6 @@
    </table>
  </fieldset>
  </td>
- </tr>
  
  </table>
 </div>

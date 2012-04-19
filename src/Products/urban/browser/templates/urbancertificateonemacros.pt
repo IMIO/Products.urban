@@ -95,7 +95,7 @@
   </td>
  </tr>
  <tr>
- <td colspan="3">
+ <td>
  <fieldset><legend i18n:translate="legend_specific_features">Specific features</legend>
   <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
    <tr>
