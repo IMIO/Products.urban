@@ -2,13 +2,13 @@
  <table cellspacing=0 cellpadding=0 width=100%>
  <tr>
   <td valign="top" width=49%>
-   <fieldset><b><legend i18n:translate="applicants">Applicant(s)</legend></b>
+   <fieldset><legend i18n:translate="applicants">Applicant(s)</legend>
     <div metal:use-macro="here/urban_macros/macros/urbanApplicantsMacro" />
    </fieldset>
   </td>
   <td width="1%"></td>
   <td valign="top" width=50%>
-   <fieldset><strong><legend i18n:translate="urban_description_key_dates_legend">Key dates</legend></strong>
+   <fieldset><legend i18n:translate="urban_description_key_dates_legend">Key dates</legend>
     <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_receiptDate">Receipt date</span>:</b></td>
@@ -36,7 +36,7 @@
      </tr>
     </table>
    </fieldset>
-   <fieldset><strong><legend i18n:translate="urban_label_workLocations">Work locations</legend></strong>
+   <fieldset><legend i18n:translate="urban_label_workLocations">Work locations</legend>
       <div><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
    </fieldset>
 
@@ -44,7 +44,7 @@
   </tr>
  <tr>
   <td valign="top" width=50%>
-   <fieldset><b><legend i18n:translate="legend_details">Details</legend></b>
+   <fieldset><legend i18n:translate="legend_details">Details</legend>
     <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_reference">Reference</span>:</b></td>
@@ -84,7 +84,7 @@
   </td>
   <td width="1%"></td>
   <td valign="top" width=49%>
-   <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
+   <fieldset><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
     <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
    </fieldset>
   </td>
@@ -248,7 +248,7 @@
   <td valign="top"><metal:myfield use-macro="python:here.widget('areParcelsVerified', mode='view')" /></td>
  </tr>
 </table>
-<fieldset tal:condition="useTabbing"><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
+<fieldset tal:condition="useTabbing"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
  <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
 </fieldset>
 </div>
