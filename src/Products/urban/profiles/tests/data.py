@@ -435,7 +435,6 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
                     'podTemplates': (
                                      {'id': "cu2-dossier-incomplet-demandeur", 'title': "Dossier incomplet (lettre demandeur)"},
-                                     {'id': "cu2-dossier-incomplet-archi", 'title': "Dossier incomplet (lettre architecte)"},
                                     ),
                     },
                     {
