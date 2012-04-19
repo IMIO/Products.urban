@@ -351,6 +351,17 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         return self.getProprietaries()
 
+    security.declarePublic('getLicencesOfTheParcels') 
+    def getLicencesOfTheParcels(self, licence_type=''): 
+        history = [] 
+        licence_uids = set([]) 
+        for parcel in self.getParcels(): 
+            for brain in parcel.getRelatedLicences(licence_type=licence_type): 
+                if brain.UID not in licence_uids: 
+                    history.extend(parcel.getRelatedLicences(licence_type=licence_type)) 
+                    licence_uids.add(brain.UID) 
+        return history 
+
     security.declarePublic('getBuildlicencesOfTheParcels')
     def getBuildlicencesOfTheParcels(self):
         limit_date = DateTime('1977/01/01')
