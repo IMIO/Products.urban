@@ -2,8 +2,9 @@ from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from Products.CMFPlone import PloneMessageFactory as msg
+from Products.CMFPlone.PloneBatch import Batch
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.config import URBAN_TYPES 
+from Products.urban.config import URBAN_TYPES
 from Products.ZCTextIndex.ParseTree import ParseError
 
 class UrbanSearchView(BrowserView):
@@ -17,7 +18,7 @@ class UrbanSearchView(BrowserView):
 
     def AvailableStreets(self):
         context = aq_inner(self.context)
-        voc = UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", sort_on="sortable_title", 
+        voc = UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", sort_on="sortable_title",
                               inUrbanConfig=False, allowedStates=['enabled', 'disabled'])
         return voc.getDisplayList(context).sortedByValue().items()
 
@@ -45,14 +46,17 @@ class UrbanSearchView(BrowserView):
                         'street':self.getSearchArgument('street'),
                         'name':self.getSearchArgument(['name', 'contacttypes']),
                         'parcel':self.getSearchArgument(['division','section', 'radical', 'bis', 'exposant', 'puissance', 'partie']),
-                    }  
+                    }
         if search_by == 'street':
-            return self.searchByStreet(foldertypes, arguments.get(search_by, []))
+            res = self.searchByStreet(foldertypes, arguments.get(search_by, []))
         elif search_by == 'name':
-            return self.searchByName(foldertypes, arguments.get(search_by, []))
+            res = self.searchByName(foldertypes, arguments.get(search_by, []))
         elif search_by == 'parcel':
-            return self.searchByParcel(foldertypes, arguments.get(search_by, []))
-        return None
+            res = self.searchByParcel(foldertypes, arguments.get(search_by, []))
+        else:
+            return None
+        batch = Batch(res, len(res), 0, orphan=0)
+        return batch
 
     def searchByName(self, foldertypes, arguments):
         """
@@ -87,7 +91,7 @@ class UrbanSearchView(BrowserView):
             #in case something like '*' is entered, ZCTextIndex raises an error...
             ptool = getToolByName(self, "plone_utils")
             ptool.addPortalMessage(msg(u"please_enter_more_letters"), type="info")
-            pass 
+            pass
         for contact in contacts:
             licence_ids.extend([ref.getId() for ref in contact.getBRefs()])
         return catalogTool(portal_type=foldertypes, id=licence_ids)
