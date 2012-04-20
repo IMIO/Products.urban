@@ -48,7 +48,7 @@ class LicenceView(BrowserView):
 
     def isEmptyTab(self, tab_name):
         context = aq_inner(self.context)
-        urban_tool = getToolByName(context, 'portal_urban') 
+        urban_tool = getToolByName(context, 'portal_urban')
         used_fields_names = set(getattr(urban_tool, context.getPortalTypeName().lower()).getUsedAttributes())
         if used_fields_names :
             for field in context.schema.getSchemataFields(tab_name):
@@ -60,8 +60,8 @@ class LicenceView(BrowserView):
         context = aq_inner(self.context)
         catalog = getToolByName(context, 'portal_catalog')
         return len([brain for brain in catalog(
-                    sort_limit=2, 
-                    parcelInfosIndex=genericlicence_parcelinfoindex(context)()) 
+                    sort_limit=2,
+                    parcelInfosIndex=genericlicence_parcelinfoindex(context)())
                     if brain.id != context.id]) > 0
 
 class LicenceMacros(BrowserView):

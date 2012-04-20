@@ -94,6 +94,22 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IParcelOutLicence"
+     name="parceloutlicenceview"
+     class=".parceloutlicenceview.ParcelOutLicenceView"
+     template="templates/parceloutlicenceview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="parceloutlicence-macros"
+     for="Products.urban.interfaces.IParcelOutLicence"
+     class=".parceloutlicenceview.ParcelOutLicenceMacros"
+     template="templates/parceloutlicencemacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IDeclaration"
      name="declarationview"
      class=".declarationview.DeclarationView"

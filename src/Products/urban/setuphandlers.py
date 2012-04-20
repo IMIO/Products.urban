@@ -33,7 +33,7 @@ from zope.component import queryUtility
 from zope.i18n.interfaces import ITranslationDomain
 from zope import event
 from Products.Archetypes.event import ObjectInitializedEvent
-from Products.Archetypes.event import EditBegunEvent 
+from Products.Archetypes.event import EditBegunEvent
 from Products.CMFPlacefulWorkflow.PlacefulWorkflowTool import WorkflowPolicyConfig_id
 from exportimport import addUrbanEventTypes
 from exportimport import addGlobalTemplates
@@ -1429,7 +1429,7 @@ def addTestObjects(context):
     #add default UrbanEventTypes for documents generation
     addUrbanEventTypes(context)
     #add OpinionRequest UrbanEventTypes by notifying the creation of their corresponding OrganisationTerm
-    for licence_type in ['BuildLicence', 'UrbanCertificateTwo']:
+    for licence_type in ['BuildLicence', 'UrbanCertificateTwo', 'ParcelOutLicence']:
         for organisation_term in getattr(tool, licence_type.lower()).foldermakers.objectValues():
             event.notify(ObjectInitializedEvent(organisation_term))
 
@@ -1498,8 +1498,8 @@ def addTestLicences(context):
                 column = field.widget.columns[column_name]
                 if str(type(column)) == "<class 'Products.DataGridField.SelectColumn.SelectColumn'>":
                     dummy_value[column_name] = column.getVocabulary(licence)[0]
-                elif str(type(column)) == "<class 'Products.DataGridField.Column.Column'>": 
-                    dummy_value[column_name] = '[%s XXX]' % column_name 
+                elif str(type(column)) == "<class 'Products.DataGridField.Column.Column'>":
+                    dummy_value[column_name] = '[%s XXX]' % column_name
             return tuple([dummy_value])
         elif field.type == 'integer':
             return 42
@@ -1509,22 +1509,26 @@ def addTestLicences(context):
 
     available_licence_types = {
             'BuildLicence':{
-                'licenceSubject':"Exemple Permis Urbanisme", 
+                'licenceSubject':"Exemple Permis Urbanisme",
                 'contact_type':'Applicant',
                 'contact_data': {
-                                 'personTitle':'masters', 'name1':'Smith &', 'name2':'Wesson', 
-                                 'street':'Rue du porc dans le yaourt', 'number':'42', 'zipcode':'5032', 
+                                 'personTitle':'masters', 'name1':'Smith &', 'name2':'Wesson',
+                                 'street':'Rue du porc dans le yaourt', 'number':'42', 'zipcode':'5032',
                                  'city':'Couillet'
                                 },
             },
-            'Declaration':{
-                'licenceSubject':"Exemple Déclaration", 
+            'ParcelOutLicence':{
+                'licenceSubject':"Exemple Permis d'urbanisation",
                 'contact_type':'Applicant',
-            }, 
+            },
+            'Declaration':{
+                'licenceSubject':"Exemple Déclaration",
+                'contact_type':'Applicant',
+            },
             'Division':{
                 'licenceSubject':'Exemple Division',
                 'contact_type':'Proprietary',
-            }, 
+            },
             'UrbanCertificateOne':{
                 'licenceSubject':'Exemple Certificat Urbanisme 1',
                 'contact_type':'Proprietary',
@@ -1541,7 +1545,7 @@ def addTestLicences(context):
                 'licenceSubject':'Exemple Demande diverse',
                 'contact_type':'Applicant',
             },
- 
+
      }
 
     odt_files = []
@@ -1550,8 +1554,10 @@ def addTestLicences(context):
         #create the licence
         licence_id = site.generateUniqueId('test_%s' % licence_type.lower())
         licence_folder.invokeFactory(licence_type, id=licence_id)
+        logger.info('creating test %s' % licence_type)
         licence = getattr(licence_folder, licence_id)
         #fill each licence field with a dummy value
+        logger.info('   test %s --> fill fields with dummy values' % licence_type)
         for field in licence.schema.fields() :
             field_name = field.getName()
             mutator = field.getMutator(licence)
@@ -1563,8 +1569,9 @@ def addTestLicences(context):
                     mutator(field_value)
         licence.processForm()
         # add an applicant or a proprietary
+        logger.info('   test %s --> add an applicant and a dummy parcel' % licence_type)
         contact_data = {
-            'personTitle':'mister', 'name1':'[Prénom XXX]', 'name2':'[Nom XXX]', 'street':'[Nom de rue XXX]', 
+            'personTitle':'mister', 'name1':'[Prénom XXX]', 'name2':'[Nom XXX]', 'street':'[Nom de rue XXX]',
             'number':'[n° XXX]', 'zipcode':'[code postal XXX]', 'city':'[Ville XXX]'
         }
         if values.has_key('contact_data'):
@@ -1585,10 +1592,12 @@ def addTestLicences(context):
         portionout.updateTitle()
         licence.reindexObject(idxs=['parcelInfosIndex'])
         #generate all the urban events
+        logger.info('   test %s --> create all the events' % licence_type)
         eventtype_uids = [brain.UID for brain in urban_tool.listEventTypes(licence, urbanConfigId=licence_type.lower())]
         for event_type_uid in eventtype_uids:
             urban_tool.createUrbanEvent(licence.UID(), event_type_uid)
         #fill each event with dummy values and generate all its documents
+        logger.info('   test %s --> generate all the documents' % licence_type)
         for urban_event in licence.objectValues(['UrbanEvent', 'UrbanEventInquiry', 'UrbanEventOpinionRequest']):
             event.notify(ObjectInitializedEvent(urban_event))
             if urban_event.getPortalTypeName() == 'UrbanEventOpinionRequest':
