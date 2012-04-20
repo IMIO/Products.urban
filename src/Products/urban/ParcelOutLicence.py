@@ -54,6 +54,7 @@ schema = Schema((
             label='Geometricians',
             label_msgid='urban_label_geometricians',
             i18n_domain='urban',
+            show_results_without_query=True
         ),
         allowed_types=('Geometrician',),
         multiValued=1,
