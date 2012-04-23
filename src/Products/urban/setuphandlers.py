@@ -165,7 +165,7 @@ def setUrbanConfigWFPolicy(context):
     site = context.getSite()
     wf_tool = getToolByName(site, 'portal_workflow')
     #create the local policy for the urban config
-    placefulwf_tool = getToolByName(site, 'portal_placeful_workflow') 
+    placefulwf_tool = getToolByName(site, 'portal_placeful_workflow')
     if not hasattr(placefulwf_tool, 'urban_cfg_policy'):
         placefulwf_tool.manage_addWorkflowPolicy('urban_cfg_policy',
                                                  workflow_policy_type = 'default_workflow_policy (Simple Policy)',
@@ -189,7 +189,7 @@ def addUrbanConfigs(context):
     """
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
-    
+
     for urban_type in URBAN_TYPES:
         licenceConfigId = urban_type.lower()
         if not hasattr(aq_base(tool), licenceConfigId):

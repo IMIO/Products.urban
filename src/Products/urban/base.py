@@ -100,19 +100,33 @@ class UrbanBase(object):
             signaletic += notary.getSignaletic(withaddress=withaddress)
         return signaletic
 
+    security.declarePublic('getContactsSignaletic')
+    def getContactsSignaletic(self, contacts, withaddress=False):
+        """
+          Returns a string reprensenting the signaletic of every contact
+        """
+        signaletic = ''
+        for contact in contacts:
+            #if the signaletic is not empty, we are adding several contacts
+            if signaletic:
+                signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
+            signaletic += contact.getSignaletic(withaddress=withaddress)
+        return signaletic
+
+
     security.declarePublic('getArchitectsSignaletic')
     def getArchitectsSignaletic(self, withaddress=False):
         """
           Returns a string reprensenting the signaletic of every architects
         """
-        architects = self.getArchitects()
-        signaletic = ''
-        for architect in architects:
-            #if the signaletic is not empty, we are adding several architects
-            if signaletic:
-                signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
-            signaletic += architect.getSignaletic(withaddress=withaddress)
-        return signaletic
+        return self.getContactsSignaletic(self.getArchitects())
+
+    security.declarePublic('getGeometriciansSignaletic')
+    def getGeometriciansSignaletic(self, withaddress=False):
+        """
+          Returns a string reprensenting the signaletic of every geometricians
+        """
+        return self.getContactsSignaletic(self.getGeometricians())
 
     security.declarePublic('submittedBy')
     def submittedBy(self):

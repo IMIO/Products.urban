@@ -74,6 +74,7 @@ schema = Schema((
     ),
     StringField(
         name='cityName',
+        default='MaCommune',
         widget=StringField._properties['widget'](
             label='Cityname',
             label_msgid='urban_label_cityName',

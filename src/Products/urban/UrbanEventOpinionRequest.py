@@ -85,7 +85,8 @@ class UrbanEventOpinionRequest(UrbanEvent, BrowserDefaultMixin):
             return [template for template in self.getUrbaneventtypes().listFolderContents({'portal_type': 'File'})
                     if wf_tool.getInfoFor(template, 'review_state') == 'enabled']
         urbantool = getToolByName(self,'portal_urban')
-        return getattr(urbantool.buildlicence.urbaneventtypes, "config-opinion-request").listFolderContents({'portal_type': 'File'})
+        opinionrequest_config = getattr(getattr(urbantool, self.aq_parent.portal_type.lower()).urbaneventtypes, "config-opinion-request")
+        return opinionrequest_config.listFolderContents({'portal_type': 'File'})
 
     security.declarePublic('getLinkedOrganisationTerm')
     def getLinkedOrganisationTerm(self):
