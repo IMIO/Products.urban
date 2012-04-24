@@ -1,0 +1,90 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<body>
+<metal:main fill-slot="main">
+<metal:main_macro define-macro="main">
+    <metal:body define-macro="body_macro"
+                tal:define="useTabbing python: context.portal_urban.getUseTabbing();
+                            empty_tabs view/getEmptyTabs;
+                            licenceConfig python: context.portal_urban.getUrbanConfig(context, urbanConfigId=context.portal_type);
+                            usedAttributes licenceConfig/getUsedAttributes;">
+
+<metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />
+
+<div id="urbanViewWithTabbing" tal:condition="useTabbing">
+<dl class="formTabs enableFormTabbing">
+<dt class="formTab" id="fieldsetlegend-urban_description" i18n:domain="plone" i18n:translate="label_schema_urban_description"><span>Description</span></dt>
+<dd id="fieldset-urban_description">
+ <metal:listing use-macro="context/@@parceloutlicence-macros/descriptionMacro" />
+</dd>
+
+<tal:show condition="python: 'urban_road' not in empty_tabs">
+<dt class="formTab" id="fieldsetlegend-urban_road" i18n:domain="plone" i18n:translate="label_schema_urban_road"><span>Road</span></dt>
+<dd id="fieldset-urban_road">
+ <metal:listing use-macro="context/@@parceloutlicence-macros/roadMacro" />
+</dd>
+</tal:show>
+
+<tal:show condition="python: 'urban_location' not in empty_tabs">
+<dt class="formTab" id="fieldsetlegend-urban_location" i18n:domain="plone" i18n:translate="label_schema_urban_location"><span>Location</span></dt>
+<dd id="fieldset-urban_location">
+ <metal:listing use-macro="context/@@parceloutlicence-macros/locationMacro" />
+</dd>
+</tal:show>
+
+<dt class="formTab" id="fieldsetlegend-urban_investigation_and_advices" i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices"><span>Investigation and advices</span></dt>
+<dd id="fieldset-urban_investigation_and_advices">
+ <metal:listing use-macro="here/urban_macros/macros/urbanInquiriesMacro" />
+</dd>
+
+<!--dt class="formTab" id="fieldsetlegend-urban_peb" i18n:domain="plone" i18n:translate="label_schema_urban_peb"><span>PEB</span></dt>
+<dd id="fieldset-urban_peb">
+ <metal:listing use-macro="context/@@parceloutlicence-macros/PEBMacro" />
+</dd-->
+
+<dt class="formTab" id="fieldsetlegend-urban_events" i18n:domain="plone" i18n:translate="label_schema_urban_events"><span>Events</span></dt>
+<dd id="fieldset-urban_events">
+ <metal:events use-macro="here/urban_macros/macros/urbanEventsMacro" />
+ <metal:advices use-macro="here/urban_macros/macros/urbanAdvicesEventsMacro" />
+</dd>
+
+</dl>
+</div>
+
+<div tal:condition="not: useTabbing">
+<fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_description">Description</legend></strong>
+ <metal:description use-macro="context/@@parceloutlicence-macros/descriptionMacro" />
+</fieldset>
+
+<fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_road">Road</legend></strong>
+ <metal:road use-macro="context/@@parceloutlicence-macros/roadMacro" />
+</fieldset>
+
+<fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_location">Location</legend></strong>
+ <metal:location use-macro="context/@@parceloutlicence-macros/locationMacro" />
+</fieldset>
+
+<fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices">Investigation and advices</legend></strong>
+ <metal:inquiries use-macro="here/urban_macros/macros/urbanInquiriesMacro" />
+</fieldset>
+
+<!--fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_peb">PEB</legend></strong>
+ <metal:peb use-macro="context/@@parceloutlicence-macros/PEBMacro" />
+</fieldset-->
+
+<fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_events">Events</legend></strong>
+ <metal:events use-macro="here/urban_macros/macros/urbanEventsMacro" />
+ <metal:advices use-macro="here/urban_macros/macros/urbanAdvicesEventsMacro" />
+</fieldset>
+</div>
+
+<div tal:replace="structure provider:plone.belowcontentbody" />
+
+</metal:body>
+</metal:main_macro>
+</metal:main>
+</body>
+</html>
