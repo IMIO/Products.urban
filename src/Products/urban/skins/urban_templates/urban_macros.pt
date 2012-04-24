@@ -549,7 +549,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
    <div tal:condition="not: useTabbing">
        <metal:listing use-macro="here/urban_macros/macros/editLicenceFieldsNoTabbingMacro" />
    </div>
-   
+
    <tal:with_tabbing condition="useTabbing">
        <metal:listing use-macro="here/urban_macros/macros/editLicenceFieldsWithTabbingMacro" />
    </tal:with_tabbing>

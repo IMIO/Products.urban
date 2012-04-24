@@ -33,7 +33,7 @@ from Products.CMFCore.utils import getToolByName
 import appy.pod.renderer
 import os
 import psycopg2
-from Products.urban.utils import setOptionalAttributes
+from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 
 optional_fields = []
 ##/code-section module-header
@@ -75,6 +75,8 @@ ParcelOutLicence_schema = GenericLicence_schema.copy() + \
 
 ##code-section after-schema #fill in your manual code here
 ParcelOutLicence_schema['title'].required = False
+#put the the fields coming from Inquiry in a specific schemata
+setSchemataForInquiry(ParcelOutLicence_schema)
 ##/code-section after-schema
 
 class ParcelOutLicence(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
@@ -91,6 +93,8 @@ class ParcelOutLicence(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin)
 
     ##code-section class-header #fill in your manual code here
     archetype_name = 'ParcelOutLicence'
+    schemata_order = ['urban_description', 'urban_road', 'urban_location',\
+                      'urban_investigation_and_advices']
     ##/code-section class-header
 
     # Methods
