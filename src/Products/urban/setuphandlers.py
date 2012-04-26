@@ -90,14 +90,6 @@ def postInstall(context):
         if not dependency in quick_installer.listInstalledProducts():
             quick_installer.installProduct(dependency)
 
-    #add metadata not added yet by PloneTask...
-    try:
-        site.portal_catalog.addColumn('getBeginDate')
-        site.portal_catalog.addColumn('getEndDate')
-    except CatalogError:
-        #metadatas already exists, we pass...
-        pass
-
     #add our own portal_types to portal_factory
     factory_tool = getToolByName(site, "portal_factory")
     alreadyRegTypes = factory_tool.getFactoryTypes()
