@@ -37,13 +37,6 @@
             </tal:add_icon>
         </h1>
 
-        <tal:schedule condition="isScheduleAvailable">
-         <a class="urban-licence-schedule" href="schedule">
-           <img src="../schedule.png" />
-           &nbsp;<span i18n:domain="urbanschedule" i18n:translate="Schedule">Schedule</span>
-         </a>
-        </tal:schedule>
-
         <!--div tal:replace="structure provider:plone.belowcontenttitle" /-->
 
         <p class="documentDescription">
