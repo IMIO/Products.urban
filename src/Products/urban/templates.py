@@ -21,7 +21,7 @@ def makeContext(pif):
     sqlurlre = re.compile(
         r'^ *sqlalchemy.url *= *postgresql://(\w+):(\w+)@([\w\.]+):\d+/(\w+)',
         re.I)
-    urbanmapre = re.compile(r'^ *urbanmap_url *= *http://([\d\.\:]+)', re.I)
+    urbanmapre = re.compile(r'^ *urbanmap_url *= *http://([^ ]+)', re.I)
 
     sites = {}
 
