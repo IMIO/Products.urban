@@ -119,14 +119,14 @@ class UrbanBase(object):
         """
           Returns a string reprensenting the signaletic of every architects
         """
-        return self.getContactsSignaletic(self.getArchitects())
+        return self.getContactsSignaletic(self.getArchitects(), withaddress=withaddress)
 
     security.declarePublic('getGeometriciansSignaletic')
     def getGeometriciansSignaletic(self, withaddress=False):
         """
           Returns a string reprensenting the signaletic of every geometricians
         """
-        return self.getContactsSignaletic(self.getGeometricians())
+        return self.getContactsSignaletic(self.getGeometricians(), withaddress=withaddress)
 
     security.declarePublic('submittedBy')
     def submittedBy(self):
@@ -400,7 +400,7 @@ class UrbanBase(object):
         """
         return self._getValueForTemplate(field_name=field_name, obj=obj, raw_value=raw_value,
                                          vocabulary=vocabulary, subfield_name=subfield)
- 
+
     def getValuesForTemplate(self, field_name, obj=None, raw_value=None, vocabulary=None):
         """
           Return a list of the display values of the given field

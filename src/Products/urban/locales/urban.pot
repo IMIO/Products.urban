@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-02-01 12:31+0000\n"
+"POT-Creation-Date: 2012-04-04 12:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,6 +64,66 @@ msgid "Found parcel(s)"
 msgstr ""
 
 msgid "Geometrician data"
+msgstr ""
+
+#. Default: "Acknowledgement"
+msgid "IAcknowledgment type marker interface"
+msgstr ""
+
+#. Default: "College report"
+msgid "ICollegeReport type marker interface"
+msgstr ""
+
+#. Default: "Communal council"
+msgid "ICommunalCouncil type marker interface"
+msgstr ""
+
+#. Default: "Request deposit"
+msgid "IDeposit type marker interface"
+msgstr ""
+
+#. Default: "Inquiry"
+msgid "IInquiry type marker interface"
+msgstr ""
+
+#. Default: "Missing part"
+msgid "IMissingPart type marker interface"
+msgstr ""
+
+#. Default: "Missing part deposit"
+msgid "IMissingPartDeposit type marker interface"
+msgstr ""
+
+#. Default: "Modification deposit"
+msgid "IModificationDeposit type marker interface"
+msgstr ""
+
+#. Default: "Opinion request"
+msgid "IOpinionRequest type marker interface"
+msgstr ""
+
+#. Default: "Prorogation"
+msgid "IProrogation type marker interface"
+msgstr ""
+
+#. Default: "Technical service opinion request"
+msgid "ITechnicalServiceOpinionRequest type marker interface"
+msgstr ""
+
+#. Default: "Licence delivery"
+msgid "ITheLicence type marker interface"
+msgstr ""
+
+#. Default: "Walloon region opinion request"
+msgid "IWalloonRegionOpinionRequest type marker interface"
+msgstr ""
+
+#. Default: "Walloon region primo"
+msgid "IWalloonRegionPrimo type marker interface"
+msgstr ""
+
+#. Default: "Work beginning"
+msgid "IWorkBeginning type marker interface"
 msgstr ""
 
 msgid "Licence state"
@@ -670,6 +730,9 @@ msgstr ""
 msgid "legend_specific_features"
 msgstr ""
 
+msgid "linked_folders"
+msgstr ""
+
 msgid "locality_for_worklocation"
 msgstr ""
 
@@ -1071,6 +1134,11 @@ msgstr ""
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"
+msgstr ""
+
+#. Default: "Miscdemandnumerotation"
+#: UrbanTool.py
+msgid "urban_label_MiscDemandNumerotation"
 msgstr ""
 
 #. Default: "Nisnum"
@@ -2400,62 +2468,3 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
-#. Default: "Technical service opinion request"
-msgid "ITechnicalServiceOpinionRequest type marker interface"
-msgstr ""
-
-#. Default: "Opinion request" 
-msgid "IOpinionRequest type marker interface"
-msgstr ""
-
-#. Default: "Walloon region primo"
-msgid "IWalloonRegionPrimo type marker interface"
-msgstr ""
-
-#. Default: "Walloon region opinion request" 
-msgid "IWalloonRegionOpinionRequest type marker interface"
-msgstr ""
-
-#. Default: "Acknowledgement"
-msgid "IAcknowledgment type marker interface"
-msgstr ""
-
-#. Default: "College report" 
-msgid "ICollegeReport type marker interface"
-msgstr ""
-
-#. Default: "Communal council" 
-msgid "ICommunalCouncil type marker interface"
-msgstr ""
-
-#. Default: "Request deposit" 
-msgid "IDeposit type marker interface"
-msgstr ""
-
-#. Default: "Missing part deposit" 
-msgid "IMissingPartDeposit type marker interface"
-msgstr ""
-
-#. Default: "Modification deposit"
-msgid "IModificationDeposit type marker interface"
-msgstr ""
-
-#. Default: "Missing part" 
-msgid "IMissingPart type marker interface"
-msgstr ""
-
-#. Default: "Inquiry" 
-msgid "IInquiry type marker interface"
-msgstr ""
-
-#. Default: "Licence delivery" 
-msgid "ITheLicence type marker interface"
-msgstr ""
-
-#. Default: "Work beginning" 
-msgid "IWorkBeginning type marker interface"
-msgstr ""
-
-#. Default: "Prorogation" 
-msgid "IProrogation type marker interface"
-msgstr ""

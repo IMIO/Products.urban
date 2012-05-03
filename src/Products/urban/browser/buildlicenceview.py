@@ -59,7 +59,7 @@ class BuildLicenceView(LicenceView):
         dict = {
                 'url': walloonRegionPrimo.absolute_url(),
                 'date': tool.formatDate(walloonRegionPrimo.getEventDate(), translatemonth=False)
-               }        
+               }
         return dict
 
     def getOpinionRequestsDate(self):

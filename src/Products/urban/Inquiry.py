@@ -86,6 +86,7 @@ schema = Schema((
             label_msgid='urban_label_investigationEnd',
             i18n_domain='urban',
         ),
+        #default_method='computeInvestigationEnd'
     ),
     TextField(
         name='investigationDetails',
@@ -261,7 +262,15 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         """
         return self.Vocabulary('solicitOpinionsTo')[0].getValue(opinionId)
 
-
+    security.declarePublic('getInvestigationEnd')
+    def computeInvestigationEnd(self):
+        """
+          Compute the investigation end date starting from the investigation start date.
+          Ideally it should take off-days and weekends into account.
+        """
+        start_date = self.getInvestigationStart()
+        import ipdb; ipdb.set_trace()
+        return 0
 
 registerType(Inquiry, PROJECTNAME)
 # end of class Inquiry
