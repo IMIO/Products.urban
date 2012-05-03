@@ -302,7 +302,10 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
     def askFD(self):
         """
         """
-        return self.getFolderCategory() in ['udc', 'uap', 'cu2', 'lap', 'lapm']
+        if self.getFolderCategory() in ['udc', 'uap', 'cu2', 'lap', 'lapm']:
+            return True
+        else:
+            return False
 
     security.declarePublic('at_post_create_script')
     def at_post_create_script(self):
