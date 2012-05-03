@@ -52,7 +52,7 @@
      template="templates/map.pt"
      permission="zope2.View"
   />
-  
+
   <browser:page
      for="*"
      name="fullmap"
@@ -60,7 +60,7 @@
      template="templates/map_full.pt"
      permission="zope2.View"
   />
-  
+
   <browser:page
      for="*"
      name="map-macros"
@@ -68,7 +68,7 @@
      template="templates/map_macros.pt"
      permission="zope2.View"
   />
-  
+
   <browser:page
      for="Products.urban.interfaces.IContact"
      name="contactview"
@@ -270,13 +270,29 @@
      permission="zope2.View"
   />
 
-  <browser:page 
-     for="*" 
-     name="searchparcels" 
-     class=".searchparcelsview.SearchParcelsView" 
-     template="templates/searchparcels.pt" 
-     permission="zope2.View" 
-  /> 
+  <browser:page
+     for="*"
+     name="urbanstatsview"
+     class=".urbanstatsview.UrbanStatsView"
+     template="templates/urbanstatsview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="urbanstats-macros"
+     for="*"
+     class=".urbanstatsview.UrbanStatsMacros"
+     template="templates/urbanstatsmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="searchparcels"
+     class=".searchparcelsview.SearchParcelsView"
+     template="templates/searchparcels.pt"
+     permission="zope2.View"
+  />
 
   <plone:portlet
      name="urban.portlets.portlet_urban"

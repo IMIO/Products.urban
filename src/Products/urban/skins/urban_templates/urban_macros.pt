@@ -333,7 +333,7 @@ can receive a "actionsToHide" list of actions not to display</tal:comment>
         }
         );   -->
 
-        <a class="urbanDelete noPadding"  
+        <a class="urbanDelete noPadding"
            tal:attributes="href python: thisObject.absolute_url() + '/delete_confirmation'">
             <!-- Icon -->
             <img src="#" tal:attributes="src string:${portal_url}/delete_icon.gif" i18n:attributes="title" title="label_remove"
