@@ -23,10 +23,11 @@ from Products.CMFCore.utils import getToolByName
 import transaction
 ##code-section HEAD
 from Acquisition import aq_base
+from Products.CMFPlone.utils import base_hasattr
 from Products.urban.config import TOPIC_TYPE
 from zExceptions import BadRequest
 from Products.ZCatalog.Catalog import CatalogError
-from Products.urban.config import URBAN_TYPES, PPNC_LAYERS
+from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import ILicenceContainer
 from zope.interface import alsoProvides
 from zope.component import queryUtility
@@ -132,12 +133,16 @@ def postInstall(context):
     logger.info("addUrbanGroups : starting...")
     addUrbanGroups(context)
     logger.info("addUrbanGroups : Done")
+    logger.info("addLicencesection : starting...")
+    addLicencesCollection(context)
+    logger.info("addLicencesCollection : Done")
     logger.info("adaptDefaultPortal : starting...")
     adaptDefaultPortal(context)
     logger.info("adaptDefaultPortal : Done")
     #install the urbanskin if available
     logger.info("installUrbanskin : starting...")
     installUrbanskin(context)
+    logger.info("installUrbanskin : Done")
     #refresh catalog after all these objects have been added...
     logger.info("Refresh portal_catalog : starting...")
     site.portal_catalog.refreshCatalog(clear=True)
@@ -648,6 +653,18 @@ def addUrbanGroups(context):
     site.portal_groups.addGroup("urban_readers", title="Urban Readers")
     #one with urban Editors
     site.portal_groups.addGroup("urban_editors", title="Urban Editors")
+
+def addLicencesCollection(context):
+    """
+        Add a collection in urban folder, regrouping all licences
+    """
+    coll_id = 'licences-collection'
+    site = context.getSite()
+    if not base_hasattr(site.urban, coll_id):
+        site.urban.invokeFactory("Topic", id = coll_id)
+        topic = getattr(site.urban, coll_id)
+        type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
+        type_crit.setValue(URBAN_TYPES)
 
 def setDefaultApplicationSecurity(context):
     """
