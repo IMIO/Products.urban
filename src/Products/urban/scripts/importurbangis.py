@@ -232,8 +232,7 @@ if step in run_steps:
         results = dict_cur.fetchall()
         if 'plpgsql' not in [res[0] for res in results]:
             std_cur.execute('CREATE LANGUAGE plpgsql;')
-        conn.commit()
-    #can be changed    
+    #can be changed
     if action=='update':            
         for tablename in tablenames:
             if tablename != 'DA':
@@ -245,6 +244,8 @@ if step in run_steps:
                     print "Cannot remove table '%s': %s"%(tablename, msg)
     print "If asked, enter the password of the postgres user '%s'"%login
     os.system('psql -d %s -U %s -f matrice.sql'%(databasename, login))
+
+    conn.commit()
 
     cont = raw_input("Press anything to continue or x to exit: ")
     if cont in ('x','X'):
@@ -316,7 +317,8 @@ if step in run_steps:
                 if not divvalue:
                     divvalue = prop
                 dict_cur.execute("update da set divname='%s' where da = %d;"%(divvalue.replace("'", "''"),da))
-        
+    conn.commit()
+
 step = 'C'
 if step in run_steps:
     print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
@@ -339,6 +341,7 @@ if step in run_steps:
         else:
             print "path for postgis sql files not found"
 
+    conn.commit()
 #cont = raw_input("Press anything to continue or x to exit: ")
 #if cont in ('x','X'):
 #    sys.exit(0)
@@ -368,6 +371,8 @@ if step in run_steps:
         if cont in ('x','X'):
             sys.exit(0)
 
+    conn.commit()
+
 step = 'E'
 if step in run_steps:
     print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
@@ -378,21 +383,19 @@ if step in run_steps:
             pass
         os.system('psql -q -o '+shapefilename.lower()+'.log -d '+databasename+' -f '+shapefilename.lower()+'.sql')
 
+    conn.commit()
+
 step = 'F'
 upd_cur = conn.cursor()
 if step in run_steps:
     print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
     dict_cur.execute('ALTER TABLE capa ADD COLUMN da bigint;')
-    conn.commit()
     dict_cur.execute('ALTER TABLE capa ADD COLUMN section character varying(1);')
-    conn.commit()
     dict_cur.execute('ALTER TABLE capa ADD COLUMN radical integer;')
-    conn.commit()
     dict_cur.execute('ALTER TABLE capa ADD COLUMN exposant character varying(1);')
-    conn.commit()
     dict_cur.execute('ALTER TABLE capa ADD COLUMN bis integer;')
-    conn.commit()
     dict_cur.execute('ALTER TABLE capa ADD COLUMN puissance integer;')
+
     conn.commit()
 
 step = 'G'
@@ -416,7 +419,6 @@ if step in run_steps:
         i = i + 1
         dict_prc=convertprc(rec['prc'])    
         upd_cur.execute('update capa set da='+str(rec['daa'])[0:5]+', section=\''+dict_prc['section']+'\', radical='+str(dict_prc['radical'])+', exposant=\''+dict_prc['exposant']+'\', bis='+dict_prc['bis']+', puissance='+dict_prc['puissance']+' where capakey = \''+rec['capakey']+'\';')
-        conn.commit()
     print "Reached 5/5"
 
     upd_cur.execute('update capa set exposant=NULL where exposant=\'\';')
@@ -426,30 +428,19 @@ step = 'H'
 if step in run_steps:
     print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
     dict_cur.execute('ALTER TABLE pas ADD COLUMN "ID" bigserial;')
-    conn.commit()
     dict_cur.execute('ALTER TABLE pas ADD PRIMARY KEY ("ID");')
-    conn.commit()
     dict_cur.execute('ALTER TABLE pas ADD COLUMN da bigint;')
-    conn.commit()
     dict_cur.execute('ALTER TABLE pas ADD COLUMN section character varying(1);')
-    conn.commit()
     dict_cur.execute('ALTER TABLE pas ADD COLUMN radical integer;')
-    conn.commit()
     dict_cur.execute('ALTER TABLE pas ADD COLUMN exposant character varying(1);')
-    conn.commit()
     dict_cur.execute('ALTER TABLE pas ADD COLUMN bis integer;')
-    conn.commit()
     dict_cur.execute('ALTER TABLE pas ADD COLUMN puissance integer;')
-    conn.commit()
     dict_cur.execute('ALTER TABLE pas ADD COLUMN sectionavant character varying(1);')
-    conn.commit()
     dict_cur.execute('ALTER TABLE pas ADD COLUMN radicalavant integer;')
-    conn.commit()
     dict_cur.execute('ALTER TABLE pas ADD COLUMN exposantavant character varying(1);')
-    conn.commit()
     dict_cur.execute('ALTER TABLE pas ADD COLUMN bisavant integer;')
-    conn.commit()
     dict_cur.execute('ALTER TABLE pas ADD COLUMN puissanceavant integer;')
+
     conn.commit()
 
 step = 'I'
@@ -482,13 +473,12 @@ if step in run_steps:
                 sqlprca=''
             dict_prc=convertprcb(section+' '+str(rec['prcb1'])) 
             upd_cur.execute('update pas set da='+da+', section=\''+dict_prc['section']+'\', radical='+str(dict_prc['radical'])+', exposant=\''+dict_prc['exposant']+'\', bis='+dict_prc['bis']+', puissance='+dict_prc['puissance']+sqlprca+' where "ID" = '+str(rec['ID'])+';')
-            conn.commit()
         except:
             pass
 
     upd_cur.execute('update pas set exposant=NULL where exposant=\'\';')
-    conn.commit()
     upd_cur.execute('update pas set exposantavant=NULL where exposantavant=\'\';')
+
     conn.commit()
 
 step = 'J'
@@ -519,7 +509,6 @@ if step in run_steps:
     columns = [col['column_name'] for col in dict_cur.fetchall() if col['column_name'] == 'numpolice']
     if not len(columns):
         dict_cur.execute('ALTER TABLE canu ADD COLUMN numpolice character varying(15);')
-        conn.commit()
 
     for rec in recs:
         if i in steps.keys():
@@ -536,15 +525,17 @@ if step in run_steps:
             if len(res_cur_map)==1:
                 try:
                     upd_cur.execute('update canu set numpolice=\''+numpolice(res_cur_map[0]['sl1'])+'\' where gid='+ str(rec['gid']) +';')
-                    conn.commit()
                 except Exception, msg:
                     print "error when updating numpolice in canu for geom='%s', capakey='%s', gid='%s', sl1='%s'"%(rec['the_geom'], res_cur_capa[0]['capakey'], rec['gid'], res_cur_map[0]['sl1'])
     print "Reached 5/5"
+
+    conn.commit()
 
 step = 'L'
 if step in run_steps:
     print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
     upd_cur.execute('update canu set numpolice=NULL where numpolice=\'\';')
+
     conn.commit()
 
 step = 'M'
@@ -557,6 +548,7 @@ if step in run_steps:
    LEFT JOIN capa ON map.capakey::text = capa.capakey::text;')
     std_cur.execute('CREATE OR REPLACE VIEW v_sections AS \
  SELECT DISTINCT capa.section, capa.section::text AS section_text  FROM capa;')
+
     conn.commit()
 
 step = 'N'
@@ -564,7 +556,6 @@ if step in run_steps:
     print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
     std_cur.execute('REVOKE ALL ON SCHEMA PUBLIC FROM PUBLIC;')
     std_cur.execute('GRANT USAGE ON SCHEMA PUBLIC TO %s;'%databasename)
-    conn.commit()
     std_cur.execute("SELECT OID FROM PG_NAMESPACE where NSPNAME = 'public';")
     rec = std_cur.fetchone()
     if not rec:
@@ -582,17 +573,16 @@ if step in run_steps:
                     argname = std_cur.fetchone()[0]
                     args.append(argname)
             std_cur.execute("GRANT EXECUTE ON FUNCTION %s(%s) TO %s"%(rec['proname'], ','.join(args), databasename))
-            conn.commit()
     #grants on tables
     dict_cur.execute("SELECT TABLENAME FROM PG_TABLES WHERE SCHEMANAME='public';")
     for rec in dict_cur.fetchall():
         std_cur.execute("GRANT SELECT, REFERENCES, TRIGGER ON TABLE %s TO %s;"%(rec['tablename'], databasename))
-        conn.commit()
     #grants on views
     dict_cur.execute("SELECT VIEWNAME FROM PG_VIEWS WHERE SCHEMANAME='public';")
     for rec in dict_cur.fetchall():
         std_cur.execute("GRANT SELECT, REFERENCES, TRIGGER ON TABLE %s TO %s;"%(rec['viewname'], databasename))
-        conn.commit()
+
+    conn.commit()
 
 step = 'O'
 if step in run_steps:
