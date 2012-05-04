@@ -51,16 +51,17 @@ class UrbanStatsView(BrowserView):
         date.reverse()
         return '/'.join(date)
 
-    def computeStatistics(self):
+    def computeStatistics(self, args=None):
         context = aq_inner(self.context)
         request = aq_inner(self.request)
         site = getToolByName(context, 'portal_url').getPortalObject()
-        args = {
-                'licence_type':self.getSearchArgument('licence_types'),
-                'licence_state':self.getSearchArgument('licence_states'),
-                'date_start':self.getSearchArgument(['from_year','from_month','from_day']),
-                'date_end':self.getSearchArgument(['to_year','to_month','to_day']),
-               }
+        if not args:
+            args = {
+                    'licence_type':self.getSearchArgument('licence_types'),
+                    'licence_state':self.getSearchArgument('licence_states'),
+                    'date_start':self.getSearchArgument(['from_year','from_month','from_day']),
+                    'date_end':self.getSearchArgument(['to_year','to_month','to_day']),
+                   }
         result = self.getEmptyResultTable(args)
         catalog = getToolByName(context, 'portal_catalog')
         brains = catalog(portal_type=args['licence_type'],
@@ -69,19 +70,24 @@ class UrbanStatsView(BrowserView):
                         )
         for brain in brains:
             result[brain.portal_type][brain.review_state] += 1
-        self.sumPartialResults(result)
+        self.sumPartialResults(result, total=len(brains))
         return result
 
-    def sumPartialResults(self, table):
+    def sumPartialResults(self, table, total):
         sum_line = {}
         for line in table.values():
-            line['sum'] = sum(line.values())
+            partial_sum = sum(line.values())
+            line['sum'] = '%i (%i %%)' %(partial_sum, 100*partial_sum/total)
             for column_name, cell_value in line.iteritems():
                 if column_name in sum_line:
                     sum_line[column_name] += cell_value
                 else:
                     sum_line[column_name] = cell_value
+        for key,value in sum_line.iteritems():
+            if key is not 'sum':
+                sum_line[key] = '%i (%i %%)' %(value, 100*value/total)
         table['sum'] = sum_line
+        table['sum']['sum'] = '%i (100 %%)' % total
 
     def getEmptyResultTable(self, arguments):
         matrix = {}

@@ -104,7 +104,7 @@
 <tal:block_results condition="python: stats_arg">
 <tal:stats define="stats view/computeStatistics">
 <h1>Statistics results :</h1>
-<span tal:content="python: '%s dossiers créés entre le %s et le %s' %(stats['sum']['sum'], view.getDisplayDate('to'), view.getDisplayDate('from'))">
+<span tal:content="python: '%s dossiers créés entre le %s et le %s' %(stats['sum']['sum'].split()[0], view.getDisplayDate('to'), view.getDisplayDate('from'))">
 </span>
 <br/><br/>
          <div tal:define="tool python: context.portal_urban;
