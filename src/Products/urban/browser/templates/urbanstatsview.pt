@@ -101,16 +101,18 @@
 </form>
 
 <!-- Display results -->
-<tal:block_results condition="python: stats_arg"
-                   define="stats view/computeStatistics">
+<tal:block_results condition="python: stats_arg">
+<tal:stats define="stats view/computeStatistics">
 <h1>Statistics results :</h1>
 <span tal:content="python: '%s dossiers créés entre le %s et le %s' %(stats['sum']['sum'], view.getDisplayDate('to'), view.getDisplayDate('from'))">
 </span>
 <br/><br/>
          <div tal:define="tool python: context.portal_urban;
+                          stats view/computeStatistics;
                           table python: stats;">
          <metal:listing use-macro="context/@@urbanstats-macros/statslisting" />
          </div>
+</tal:stats>
 </tal:block_results>
 
 </div>

@@ -11,7 +11,7 @@
 
 <body>
 <div metal:fill-slot="main"
-     tal:define="foldertypes request/foldertypes|nothing;
+     tal:define="foldertypes python: request.get('foldertypes', ['BuildLicence']);
                  search_arg request/search_arg|nothing;
                  previous_search_by request/search_by|nothing;
                  licence_types view/getLicenceTypes;">
@@ -22,7 +22,7 @@
 <fieldset><legend><strong i18n:translate="urban_search_parameters">Enter your parameters for the search</strong></legend>
  <div tal:repeat="licence_type licence_types">
          <input id="foldertypes" type="checkbox" name="foldertypes"
-         tal:define="type_checked python:licence_type in request.get('foldertypes', []) or ''"
+         tal:define="type_checked python:licence_type in foldertypes or False"
          tal:attributes="value licence_type;checked python: type_checked and 'checked' or ''" />
   <label tal:content="licence_type" i18n:domain="plone" i18n:translate="">Licence type</label><br />
  </div>
@@ -44,7 +44,7 @@
   <dt class="formTab" id="fieldsetlegend-urban_searchbyname">
     <span i18n:translate="urban_search_parcel_by_name">Name</span>
   </dt>
-  <dd id="fieldset-urban_searchbyname" 
+  <dd id="fieldset-urban_searchbyname"
    onmouseover="document.getElementById('search').elements['search_by'].value='name';
    var base_url=document.getElementById('base_url');
    var search_form=document.getElementById('search');
