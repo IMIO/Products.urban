@@ -16,17 +16,13 @@ __docformat__ = 'plaintext'
 
 import logging
 logger = logging.getLogger('urban: setuphandlers')
-from Products.urban.config import PROJECTNAME
 from Products.urban.config import DEPENDENCIES
-import os
 from Products.CMFCore.utils import getToolByName
-import transaction
 ##code-section HEAD
 from Acquisition import aq_base
 from Products.CMFPlone.utils import base_hasattr
 from Products.urban.config import TOPIC_TYPE
 from zExceptions import BadRequest
-from Products.ZCatalog.Catalog import CatalogError
 from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import ILicenceContainer
 from zope.interface import alsoProvides
@@ -56,7 +52,7 @@ def setupHideToolsFromNavigation(context):
     if navtreeProperties.hasProperty('idsNotToList'):
         for toolname in toolnames:
             try:
-                portal[toolname].unindexObject()
+                site[toolname].unindexObject()
             except:
                 pass
             current = list(navtreeProperties.getProperty('idsNotToList') or [])
