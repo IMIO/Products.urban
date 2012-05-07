@@ -19,6 +19,7 @@
   <include package="collective.externaleditor"/>
   <include package="plone.app.referenceintegrity"/>
   <include package="communesplone.urban.schedule"/>
+  <include package="communesplone.iconified_document_actions"/>
   <include package="Products.CMFPlacefulWorkflow"/>
 
   <include package=".events" />
