@@ -74,7 +74,7 @@
                     inputname python: 'from';
                     formname python: 'stats_form';
                     show_hm python: 0;
-                    inputvalue view/getDefaultStartDate;">
+                    inputvalue request/from|view/getDefaultStartDate;">
       <metal:box use-macro="here/calendar_macros/macros/calendarDatePickerBox|default">
                <!-- a calendar, hopefully -->
       </metal:box>
@@ -86,7 +86,7 @@
                     inputname python: 'to';
                     formname python: 'stats_form';
                     show_hm python: 0;
-                    inputvalue view/getDefaultEndDate;">
+                    inputvalue request/to|view/getDefaultEndDate;">
       <metal:box use-macro="here/calendar_macros/macros/calendarDatePickerBox|default">
                <!-- a calendar, hopefully -->
       </metal:box>
@@ -104,10 +104,12 @@
 <tal:block_results condition="python: stats_arg">
 <tal:stats define="stats view/computeStatistics">
 <h1>Statistics results :</h1>
-<span tal:content="python: '%s dossiers créés entre le %s et le %s' %(stats['sum']['sum'].split()[0], view.getDisplayDate('to'), view.getDisplayDate('from'))">
+<span tal:content="python: '%s dossiers créés entre le %s et le %s' %(stats['sum']['sum'].split()[0],
+                   view.getDisplayDate('from'), view.getDisplayDate('to'))">
 </span>
 <br/><br/>
-         <div tal:define="tool python: context.portal_urban;
+         <div tal:condition="python: stats['sum']['sum'] != '0'"
+              tal:define="tool python: context.portal_urban;
                           stats view/computeStatistics;
                           table python: stats;">
          <metal:listing use-macro="context/@@urbanstats-macros/statslisting" />

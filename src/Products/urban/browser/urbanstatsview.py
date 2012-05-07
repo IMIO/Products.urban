@@ -1,5 +1,6 @@
 from Acquisition import aq_inner
 from datetime import date
+from datetime import timedelta
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.urban.config import URBAN_TYPES
@@ -33,7 +34,7 @@ class UrbanStatsView(BrowserView):
         return '%s-01-01' %(str(date.today().year))
 
     def getDefaultEndDate(self):
-        return str(date.today())
+        return str(date.today() + timedelta(days=1))
 
     def getSearchArgument(self, key_to_match):
         request = aq_inner(self.request)
@@ -62,18 +63,21 @@ class UrbanStatsView(BrowserView):
                     'date_start':self.getSearchArgument(['from_year','from_month','from_day']),
                     'date_end':self.getSearchArgument(['to_year','to_month','to_day']),
                    }
-        result = self.getEmptyResultTable(args)
         catalog = getToolByName(context, 'portal_catalog')
         brains = catalog(portal_type=args['licence_type'],
                          created={'query':[DateTime('/'.join(args['date_start'])), DateTime('/'.join(args['date_end']))], 'range':'minmax'},
                          review_state=args['licence_state']
                         )
+        if not brains :
+            return {'sum':{'sum':'0'}}
+        result = self.getEmptyResultTable(args)
         for brain in brains:
             result[brain.portal_type][brain.review_state] += 1
         self.sumPartialResults(result, total=len(brains))
         return result
 
     def sumPartialResults(self, table, total):
+        #in case where no result is found, partials sums are useless
         sum_line = {}
         for line in table.values():
             partial_sum = sum(line.values())
