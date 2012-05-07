@@ -16,17 +16,15 @@ __docformat__ = 'plaintext'
 
 import logging
 logger = logging.getLogger('urban: setuphandlers')
-from Products.urban.config import PROJECTNAME
 from Products.urban.config import DEPENDENCIES
-import os
 from Products.CMFCore.utils import getToolByName
-import transaction
 ##code-section HEAD
 from Acquisition import aq_base
+from Products.CMFPlone.utils import base_hasattr
 from Products.urban.config import TOPIC_TYPE
 from zExceptions import BadRequest
 from Products.ZCatalog.Catalog import CatalogError
-from Products.urban.config import URBAN_TYPES, PPNC_LAYERS
+from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import ILicenceContainer
 from zope.interface import alsoProvides
 from zope.component import queryUtility
@@ -55,7 +53,7 @@ def setupHideToolsFromNavigation(context):
     if navtreeProperties.hasProperty('idsNotToList'):
         for toolname in toolnames:
             try:
-                portal[toolname].unindexObject()
+                site[toolname].unindexObject()
             except:
                 pass
             current = list(navtreeProperties.getProperty('idsNotToList') or [])
@@ -126,6 +124,7 @@ def postInstall(context):
     addGlobalFolders(context)
     addUrbanConfigsTopics(context)
     addUrbanGroups(context)
+    addLicencesCollection(context)
     adaptDefaultPortal(context)
     #refresh catalog after all these objects have been added...
     logger.info("Refresh portal_catalog : starting...")
@@ -637,6 +636,18 @@ def addUrbanGroups(context):
     site.portal_groups.addGroup("urban_readers", title="Urban Readers")
     #one with urban Editors
     site.portal_groups.addGroup("urban_editors", title="Urban Editors")
+
+def addLicencesCollection(context):
+    """
+        Add a collection in urban folder, regrouping all licences
+    """
+    coll_id = 'licences-collection'
+    site = context.getSite()
+    if not base_hasattr(site.urban, coll_id):
+        site.urban.invokeFactory("Topic", id = coll_id)
+        topic = getattr(site.urban, coll_id)
+        type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
+        type_crit.setValue(URBAN_TYPES)
 
 def setDefaultApplicationSecurity(context):
     """
