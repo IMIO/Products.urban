@@ -42,18 +42,18 @@ class TestUrbanEventTypes(unittest.TestCase):
         cu2_brain = catalog(portal_type='UrbanCertificateTwo')[0]
         self.assertEqual(buildlicence_brain.last_key_event.split(',  ')[1], urban_event_type_a.Title())
         self.assertEqual(cu2_brain.last_key_event, None)
-   
+
     def testSetLastKeyEventPropertyWithNoExistingEventCreated(self):
         """
-        When the field LastKeyEvent is activated in an urbanEvenType UET of the cfg, all the licences of the 
-        given cfg type should have the index 'lastKeyEvent' updated to the value UET if they owns an 
+        When the field LastKeyEvent is activated in an urbanEvenType UET of the cfg, all the licences of the
+        given cfg type should have the index 'lastKeyEvent' updated to the value UET if they owns an
         urbanEvent UET and if that urbanEvent is the last keyEvent created in the licence.
         """
         portal = self.layer['portal']
         catalog = getToolByName(portal, 'portal_catalog')
         urban_event_type_b = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'service-pop-opinion-request', None)
         buildlicence_brain = catalog(portal_type='BuildLicence')[0]
-        #set 'service-pop-opinion-request' as a key event, buildlicence last_key_event index should not change 
+        #set 'service-pop-opinion-request' as a key event, buildlicence last_key_event index should not change
         #as the corresponding urbanEvent has never been created in this buildlicence
         urban_event_type_b.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_b))
@@ -62,8 +62,8 @@ class TestUrbanEventTypes(unittest.TestCase):
 
     def testOrderInKeyEventsWhenActivatingLastKeyEventProperty(self):
         """
-        When the field LastKeyEvent is activated in an urbanEvenType UET of the cfg, all the licences of the 
-        given cfg type should have the index 'lastKeyEvent' updated to the value UET if they owns an 
+        When the field LastKeyEvent is activated in an urbanEvenType UET of the cfg, all the licences of the
+        given cfg type should have the index 'lastKeyEvent' updated to the value UET if they owns an
         urbanEvent UET and if that urbanEvent is the last keyEvent created in the licence.
         """
         portal = self.layer['portal']
@@ -74,7 +74,7 @@ class TestUrbanEventTypes(unittest.TestCase):
         #set 'rapport-du-college' as a key event, buildlicence index should be updated
         urban_event_type_a.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_a))
-        #set 'depot-de-la-demande' as key event, buildlicence last_key_event index should not change as 
+        #set 'depot-de-la-demande' as key event, buildlicence last_key_event index should not change as
         #'rapport-du-college' is still the most recent keyEvent created
         urban_event_type_c.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_c))
@@ -100,7 +100,7 @@ class TestUrbanEventTypes(unittest.TestCase):
         portal = self.layer['portal']
         catalog = getToolByName(portal, 'portal_catalog')
         wf_tool = getToolByName(portal, 'portal_workflow')
-        #Check that generated .odt files in urbanEvents are NOT under any wf policy      
+        #Check that generated .odt files in urbanEvents are NOT under any wf policy
         interfaceName = interfaceToName(portal, IAcknowledgmentEvent)
         urban_event = catalog(object_provides=interfaceName)[0].getObject()
         document = getattr(urban_event, 'urb-accuse.odt', None)
@@ -122,7 +122,9 @@ class TestUrbanEventTypes(unittest.TestCase):
         catalog = getToolByName(portal, 'portal_catalog')
         urban_event_type = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'accuse-de-reception', None)
         all_templates = [obj for obj in urban_event_type.objectValues() if obj.portal_type == 'File']
-        urban_event = catalog(object_provides=interfaceToName(portal, IAcknowledgmentEvent))[0].getObject()
+        folder_path= "%s/urban/buildlicences" % '/'.join(portal.getPhysicalPath())
+        urban_event = catalog(object_provides=interfaceToName(portal, IAcknowledgmentEvent), path={'query':folder_path, 'depth':2})
+        urban_event = urban_event[0].getObject()
         #by default all the templates should be enabled
         self.assertEqual(len(all_templates), len(urban_event.getTemplates()))
         for i in range(len(all_templates)):
@@ -148,7 +150,7 @@ class TestUrbanEventTypes(unittest.TestCase):
         """
         # check if template is well already installed
         my_accuse_folder = getattr(self.portal_urban.buildlicence.urbaneventtypes,'accuse-de-reception',None)
-        self.assertNotEqual(my_accuse_folder,None)  
+        self.assertNotEqual(my_accuse_folder,None)
         my_file_odt = getattr(my_accuse_folder,'urb-accuse.odt',None)
         self.assertNotEqual(my_file_odt,None)
         my_update_file_datetime = my_file_odt.modified()
