@@ -110,7 +110,7 @@
        <tbody>
         <tr>
          <td>
-          <input type="text" name="location" tal:attributes="value location" /></td>
+          <input type="text" id="location" name="location" tal:attributes="value location; disabled python: request.get('browseOldParcels') and 'disabled' or ''" /></td>
         </tr>
        </tbody>
       </table>
@@ -128,7 +128,7 @@
        <tbody>
         <tr>
          <td>
-          <input type="text" name="proprietary" tal:attributes="value prcOwner" />
+          <input type="text" id="prcOwner" name="prcOwner" tal:attributes="value prcOwner; disabled python: request.get('browseOldParcels') and 'disabled' or ''" />
          </td>
         </tr>
        </tbody>
@@ -136,9 +136,23 @@
    </td>
  </tr>
  <tr>
-   <td>
-     <input type="checkbox" name="browseOldParcels" value="1" tal:attributes="checked python: request.get('browseOldParcels') and 'checked' or ''"/>
-     <label i18n:domain="plone" i18n:translate="">Browse old parcels</label>
+   <td colspan=3>
+     <input onclick="var adress = document.getElementById('location');
+                     var owner = document.getElementById('prcOwner');
+                     var browseOldParcels = document.getElementById('browseOldParcels');
+                     var oldParcels = (browseOldParcels.getAttribute('checked') != 'checked');
+                     if (oldParcels) {
+                        owner.setAttribute('disabled', 'disabled');
+                        adress.setAttribute('disabled', 'disabled');
+                        browseOldParcels.setAttribute('checked', 'checked');
+                     }
+                     else {
+                        adress.removeAttribute('disabled');
+                        owner.removeAttribute('disabled');
+                        browseOldParcels.setAttribute('checked', '');
+                     }"
+           type="checkbox" id="browseOldParcels" name="browseOldParcels" value="1" checked="bla" tal:attributes="checked python: request.get('browseOldParcels') and 'checked' or ''"/>
+     <label i18n:domain="plone" i18n:translate="">Browse old parcels (Only works with the parcel reference)</label>
    <td>
  </tr>
 </table><br/>

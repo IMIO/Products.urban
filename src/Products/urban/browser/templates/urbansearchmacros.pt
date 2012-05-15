@@ -2,26 +2,26 @@
      tal:define="last_selected_street python: view.getSearchArgument('street')">
  <select name=street tal:define="streets view/AvailableStreets">
      <option>Choose a street</option>
-     <option tal:repeat="street streets" tal:content="python: street[1]" 
+     <option tal:repeat="street streets" tal:content="python: street[1]"
              tal:attributes="value python: street[0]; selected python: street[0] == last_selected_street">
              street
      </option>
  </select>
 </div>
 
-<div metal:define-macro="searchbynameMacro" i18n:domain="urban" 
+<div metal:define-macro="searchbynameMacro" i18n:domain="urban"
         tal:define="last_encoded_name python: view.getSearchArgument('name');
                     contact_types view/getContactTypes">
  <input id="contacttypes" type="checkbox" name="contacttypes" value="Applicant"
-  tal:define="type_checked python:'Applicant' in view.getSearchArgument('contacttypes') or 
+  tal:define="type_checked python:'Applicant' in view.getSearchArgument('contacttypes') or
                                  not view.getSearchArgument('contacttypes')"
   tal:attributes=" checked python: type_checked and 'checked' or ''" />
                 <label tal:content="python: 'Applicant'" i18n:domain="plone" i18n:translate="">Contact type</label>
  <span tal:repeat="contact_type contact_types">
-                    <input id="contacttypes" type="checkbox" name="contacttypes" 
+                    <input id="contacttypes" type="checkbox" name="contacttypes"
                      tal:define="type_checked python:contact_type in view.getSearchArgument('contacttypes') or ''"
                       tal:attributes="value contact_type;checked python: type_checked and 'checked' or ''" />
-                <label tal:content="contact_type" i18n:domain="plone" i18n:translate="">Contact type</label>  
+                <label tal:content="contact_type" i18n:domain="plone" i18n:translate="">Contact type</label>
  </span>
  <p align="left" class="discreet" i18n:translate="urban_label_searchbyname_descr">
       Enter the name, the surname or the national register number.  You can use '*' to define if you search on a partial word
@@ -57,8 +57,8 @@
                 <tbody>
                 <tr align=center>
                  <td>
-                 <select name="division" value="division"> 
-                    <tal:block repeat="div divisions">                       
+                 <select name="division" value="division">
+                    <tal:block repeat="div divisions">
                         <option tal:attributes="selected python: str(div['da']) == division; value python: div['da'];" tal:content="python: div['divname']" />
                     </tal:block>
                  </select>

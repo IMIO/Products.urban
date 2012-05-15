@@ -91,7 +91,7 @@ class SearchParcelsView(BrowserView):
         if prcHistory:
             return []
         result = []
-        if browseOldParcels:
+        if browseOldParcels and not prcHistory and not prcOwner:
            result = self.browseOldParcel(division, section, radical, bis, exposant, puissance)
         section=section.upper()
         exposant=exposant.upper()
