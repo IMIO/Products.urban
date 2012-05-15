@@ -11,11 +11,11 @@ class SearchParcelsView(BrowserView):
         super(BrowserView, self).__init__(context, request)
         self.context = context
         self.request = request
-        self.tool = getToolByName(context, 'portal_urban')        
+        self.tool = getToolByName(context, 'portal_urban')
         #this way, if portal_urban.findDivisions display a portal message
         #it will be displayed on the page
         self.divisions = self.tool.findDivisions()
-        #if the search was launched with no criteria, add a messag
+        #if the search was launched with no criteria, add a message
         if not self.searchHasCriteria(self.request):
             #we still not launched the search, everything is ok ;-)
             if request.has_key('division') \
@@ -53,7 +53,36 @@ class SearchParcelsView(BrowserView):
         else:
             return True
 
-    def findParcel(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None, location=None, prcOwner=None, prcHistory=None):
+    def browseOldParcel(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None):
+        """
+           Return the concerned parcels
+        """
+        section=section.upper()
+        exposant=exposant.upper()
+        query_string = "SELECT distinct prca as prc, pas.da, divname, sectionavant as section, radicalavant as radical, bisavant as bis, exposantavant as exposant, puissanceavant as puissance FROM pas left join da on pas.da=da.da "
+        condition = ["WHERE prca is not null and "]
+        if division != '':  #precise division selected
+            condition.append('pas.da = %s' % division)
+        if section:
+            condition.append("sectionavant = '%s'" % section)
+        if radical:
+            condition.append("radicalavant = "+radical)
+        if bis:
+            condition.append("bisavant = "+bis)
+        if exposant:
+            condition.append("exposantavant = '%s'" %exposant)
+        if puissance:
+            condition.append("puissanceavant = "+puissance)
+        if len(condition) > 1:
+            query_string += condition[0]
+            query_string += ' and '.join(condition[1:])
+            result = self.tool.queryDB(query_string)
+            for res in result:
+                res['old'] = True
+        return result
+
+
+    def findParcel(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None, location=None, prcOwner=None, prcHistory=None, browseOldParcels=None):
         """
            Return the concerned parcels
         """
@@ -61,32 +90,34 @@ class SearchParcelsView(BrowserView):
             return []
         if prcHistory:
             return []
-        else:
-            section=section.upper()
-            exposant=exposant.upper()
-            query_string = "SELECT capa.da, divname, prc, section, radical, exposant, bis, puissance, sl1, na1,pe FROM map left join capa on map.capakey=capa.capakey left join da on capa.da = da.da "
-            condition = ["WHERE "]
-            if division != '':  #precise division selected
-                condition.append('capa.da = %s' % division)
-            if section:
-                condition.append("section = '%s'" % section)
-            if radical:
-                condition.append("radical = "+radical)
-            if bis:
-                condition.append("bis = "+bis)
-            if exposant:
-                condition.append("exposant = '%s'" %exposant)
-            if puissance:
-                condition.append("puissance = "+puissance)
-            if prcOwner:
-                condition.append("pe ILIKE '%%%s%%'" % prcOwner)
-            if location:
-                condition.append("sl1 ILIKE '%%%s%%'" % location)
-            if len(condition) > 1:
-                query_string += condition[0]
-                query_string += ' and '.join(condition[1:])
-            result = self.tool.queryDB(query_string)
-            return result
+        result = []
+        if browseOldParcels:
+           result = self.browseOldParcel(division, section, radical, bis, exposant, puissance)
+        section=section.upper()
+        exposant=exposant.upper()
+        query_string = "SELECT capa.da, divname, prc, section, radical, exposant, bis, puissance, sl1, na1,pe FROM map left join capa on map.capakey=capa.capakey left join da on capa.da = da.da "
+        condition = ["WHERE "]
+        if division != '':  #precise division selected
+            condition.append('capa.da = %s' % division)
+        if section:
+            condition.append("section = '%s'" % section)
+        if radical:
+            condition.append("radical = "+radical)
+        if bis:
+            condition.append("bis = "+bis)
+        if exposant:
+            condition.append("exposant = '%s'" %exposant)
+        if puissance:
+            condition.append("puissance = "+puissance)
+        if prcOwner:
+            condition.append("pe ILIKE '%%%s%%'" % prcOwner)
+        if location:
+            condition.append("sl1 ILIKE '%%%s%%'" % location)
+        if len(condition) > 1:
+            query_string += condition[0]
+            query_string += ' and '.join(condition[1:])
+            result.extend(self.tool.queryDB(query_string))
+        return result
 
     def findOldParcel(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None, prcHistory=None, divname=None, prca=None):
         """
@@ -96,7 +127,7 @@ class SearchParcelsView(BrowserView):
             toreturn=[{'da':division,'divname':divname,'prca':prca,'sectionavant':section,'radicalavant':radical,'bisavant':bis,'exposantavant':exposant,'puissanceavant':puissance,'level':0}]
             def getOldPrc(div, sect, rad, exp, puis, bis, level):
                 query_string = "SELECT distinct prca,pas.da,divname,sectionavant,radicalavant,bisavant,exposantavant,puissanceavant FROM pas left join da on pas.da=da.da WHERE pas.da=%s and section = '%s' AND radical = %s AND exposant = '%s' AND puissance = %s AND bis = %s AND prca is not null AND (section != sectionavant or radical != radicalavant or bis != bisavant or exposant != exposantavant or puissance != puissanceavant)"%(div, sect, rad, exp, puis, bis)
-                result = self.queryDB(query_string)
+                result = self.tool.queryDB(query_string)
                 for dic in result:
                     dic['level'] = level+1
                     toreturn.append(dic)
