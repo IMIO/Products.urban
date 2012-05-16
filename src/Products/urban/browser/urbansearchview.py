@@ -125,11 +125,19 @@ class UrbanSearchView(BrowserView):
         """
         catalogTool = getToolByName(self, 'portal_catalog')
         res = []
-        parcelInfos = ','.join(parcel_infos_index[:-1])
         if parcel_infos_index[-1] == 'on':
-            parcelInfos = '%s,1' %parcelInfos
+            parcel_infos_index[-1] = '1'
         else:
-            parcelInfos = '%s,0' %parcelInfos
+            parcel_infos_index[-1] = '0'
+        parcelInfos = [','.join(parcel_infos_index)]
+        #boilerplate to handle the case where the parcels in the licences have no values for bis and exposant
+        if parcel_infos_index[3] == '0':
+            parcelInfos.append('%s,,%s' % (','.join(parcel_infos_index[:3]), ','.join(parcel_infos_index[4:])))
+        if parcel_infos_index[5] == '0':
+            parcelInfos.append('%s,,%s' % (','.join(parcel_infos_index[:5]), parcel_infos_index[6]))
+        if parcel_infos_index[3] == '0' and parcel_infos_index[5] == '0':
+            parcelInfos.append('%s,,%s,,%s' % (','.join(parcel_infos_index[:3]), parcel_infos_index[4], parcel_infos_index[6]))
+        #boilerplate end
         res = catalogTool(portal_type=foldertypes, parcelInfosIndex= parcelInfos)
         return res
 
