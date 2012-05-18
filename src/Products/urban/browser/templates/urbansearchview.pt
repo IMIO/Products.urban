@@ -21,7 +21,8 @@
 <metal:listing use-macro="here/urban_macros/macros/goBackToMacro" />
 
 <fieldset><legend><strong i18n:translate="urban_search_parameters">Enter your parameters for the search</strong></legend>
-<form action="" method="get" id="search">
+ <form action="" method="get" id="search"
+       tal:define="divisions view/getDivisions|nothing">
  <div tal:repeat="licence_type licence_types">
          <input id="foldertypes" type="checkbox" name="foldertypes"
          tal:define="type_checked python:licence_type in foldertypes or False"
@@ -57,7 +58,6 @@
     <span i18n:translate="urban_search_parcel_by_cadastral_reference">Parcel</span>
   </dt>
   <dd id="fieldset-urban_searchbyparcel"
-      tal:define="divisions view/getDivisions|nothing"
    onmouseover="document.getElementById('search').elements['search_by'].value='parcel';
    var base_url=document.getElementById('base_url');
    var search_form=document.getElementById('search');
