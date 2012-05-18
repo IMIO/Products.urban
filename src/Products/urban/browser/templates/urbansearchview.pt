@@ -65,7 +65,7 @@
   <p tal:condition="not: divisions" i18n:translate="help_search_connection_problem">
    You can not search folders by parcels for now because there was a problem.  Please contact your system administrator and give him the red error message here above
   </p>
-  <span tal:condition="divisions"><!--metal:listing use-macro="context/@@urbansearch-macros/searchbyparcelMacro" /--></span>
+  <span tal:condition="divisions"><metal:listing use-macro="context/@@urbansearch-macros/searchbyparcelMacro" /></span>
  </dd>
  </dl>
  </div>
