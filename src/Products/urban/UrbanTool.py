@@ -477,7 +477,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if with_empty_value and brains and len(brains) > 1:
             #we add an empty vocab value of type "choose a value" at the beginning of the list
             #except if there is only one value in the list...
-            val = translate('urban', EMPTY_VOCAB_VALUE, context=self, default=EMPTY_VOCAB_VALUE)
+            val = translate(EMPTY_VOCAB_VALUE, 'urban', context=self.REQUEST, default=EMPTY_VOCAB_VALUE)
             res.append(('', val))
 
         for brain in brains:
@@ -1473,7 +1473,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     security.declarePublic('isScheduleAvailable')
     def isScheduleAvailable(self, context):
         try:
-            scheduleview = context.restrictedTraverse('@@schedule')
+            context.restrictedTraverse('@@schedule')
         except AttributeError:
             return False
         #the schedule is available at the root of the application and for now, in the buildlicences related views
