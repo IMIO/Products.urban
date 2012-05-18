@@ -770,7 +770,7 @@ urbanEventTypes = {
                     'title':"Demande irrecevable (article 159 bis)",
                     'activatedFields': [],
                     'deadLineDelay': 0,
-                    'podTemplates': ({'id': "lot-demande-irrecevable-art159", 'title': "Demande irrecevable (article 159 bis)"},),
+                    'podTemplates': (),
                     },
                     {
                     'id': "recours-decision-au-conseil-etat",

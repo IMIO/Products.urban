@@ -323,39 +323,6 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
         """
         super(GenericLicence).__thisclass__.at_post_edit_script(self)
 
-    security.declarePublic('mayAddOpinionRequestEvent')
-    def mayAddOpinionRequestEvent(self, organisation):
-        """
-           This is used as TALExpression for the UrbanEventOpinionRequest
-           We may add an OpinionRequest if we asked one in an inquiry on the licence
-           We may add another if another inquiry defined on the licence ask for it and so on
-        """
-        limit = 0
-        inquiries = self.getInquiries()
-        for inquiry in inquiries:
-            if organisation in inquiry.getSolicitOpinionsTo():
-                limit += 1
-        limit = limit - len(self.getOpinionRequests(organisation))
-        return limit > 0
-
-    security.declarePublic('mayAddInquiryEvent')
-    def mayAddInquiryEvent(self):
-        """
-           This is used as TALExpression for the UrbanEventInquiry
-           We may add an inquiry if we defined one on the licence
-           We may add another if another is defined on the licence and so on
-        """
-        #first of all, we can add an InquiryEvent if an inquiry is defined on the licence at least
-        inquiries = self.getInquiries()
-        urbanEventInquiries = self.getUrbanEventInquiries()
-        #if we have only the inquiry defined on the licence and no start date is defined
-        #it means that no inquiryEvent can be added because no inquiry is defined...
-        #or if every UrbanEventInquiry have already been added
-        if (len(inquiries) == 1 and not self.getInvestigationStart()) or \
-           (len(urbanEventInquiries) >= len(inquiries)):
-            return False
-        return True
-
     def getLastDeposit(self):
         return self._getLastEvent(interfaces.IDepositEvent)
 
@@ -374,9 +341,6 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
     def getLastAcknowledgment(self):
         return self._getLastEvent(interfaces.IAcknowledgmentEvent)
 
-    def getLastInquiry(self):
-        return self._getLastEvent(interfaces.IInquiryEvent)
-
     def getLastCommunalCouncil(self):
         return self._getLastEvent(interfaces.ICommunalCouncilEvent)
 
@@ -392,53 +356,11 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
     def getLastProrogation(self):
         return self._getLastEvent(interfaces.IProrogationEvent)
 
-    def getLastOpinionRequest(self):
-        return self._getLastEvent(interfaces.IOpinionRequestEvent)
-
     def getAllMissingPartDeposits(self):
         return self._getAllEvents(interfaces.IMissingPartDepositEvent)
 
     def getAllTechnicalServiceOpinionRequests(self):
         return self._getAllEvents(interfaces.ITechnicalServiceOpinionRequestEvent)
-
-    def getAllTechnicalServiceOpinionRequestsNoDup(self):
-        allOpinions = self.getAllTechnicalServiceOpinionRequests()
-        allOpinionsNoDup = {}
-        for opinion in allOpinions:
-            actor = opinion.getUrbaneventtypes().getId()
-            allOpinionsNoDup[actor]=opinion
-        return allOpinionsNoDup.values()
-
-    def getAllOpinionRequests(self, organisation=""):
-        if organisation == "":
-            return self._getAllEvents(interfaces.IOpinionRequestEvent)
-        catalog = getToolByName(self, 'portal_catalog')
-        currentPath = '/'.join(self.getPhysicalPath())
-        query = {'path': {'query': currentPath,
-                          'depth': 1},
-                 'meta_type': ['UrbanEvent', 'UrbanEventInquiry'],
-                 'sort_on': 'getObjPositionInParent',
-                 'id' : organisation.lower()}
-        return [brain.getObject() for brain in catalog(**query)]
-
-    def getAllOpinionRequestsNoDup(self):
-        allOpinions = self.getAllOpinionRequests()
-        allOpinionsNoDup = {}
-        for opinion in allOpinions:
-            actor = opinion.getUrbaneventtypes().getId()
-            allOpinionsNoDup[actor]=opinion
-        return allOpinionsNoDup.values()
-
-    def getAllInquiries(self):
-        return self._getAllEvents(interfaces.IInquiryEvent)
-
-    def getAllClaimsTexts(self):
-        claimsTexts = []
-        for inquiry in self.getAllInquiries():
-            text = inquiry.getClaimsText()
-            if text is not "":
-                claimsTexts.append(text)
-        return claimsTexts
 
     def getProrogatedToDate(self):
         """

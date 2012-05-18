@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.Inquiry import Inquiry
+from Products.urban.BuildLicence import BuildLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
@@ -25,17 +25,8 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from archetypes.referencebrowserwidget import ReferenceBrowserWidget
-from GenericLicence import GenericLicence
-from GenericLicence import GenericLicence_schema
-from Products.CMFCore import permissions
 from Products.CMFCore.utils import getToolByName
-import appy.pod.renderer
-import os
-import psycopg2
-from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
-
-optional_fields = []
+from Products.urban.utils import setOptionalAttributes
 ##/code-section module-header
 
 schema = Schema((
@@ -70,26 +61,33 @@ schema = Schema((
         multiValued=1,
         relationship='parcelOutGeometricians',
         required=True,
+        schemata='urban_description',
     ),
 
 ),
 )
 
 ##code-section after-local-schema #fill in your manual code here
+from Products.urban.BuildLicence import optional_fields
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
-ParcelOutLicence_schema = GenericLicence_schema.copy() + \
-    getattr(Inquiry, 'schema', Schema(())).copy() + \
+ParcelOutLicence_schema = BaseFolderSchema.copy() + \
+    getattr(BuildLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ParcelOutLicence_schema['title'].required = False
-#put the the fields coming from Inquiry in a specific schemata
-setSchemataForInquiry(ParcelOutLicence_schema)
+# ParcelOutLicence is almost the same as BuildLicence but with some fields are useless so remove them
+del ParcelOutLicence_schema['pebType']
+del ParcelOutLicence_schema['pebDetails']
+del ParcelOutLicence_schema['pebStudy']
+del ParcelOutLicence_schema['pebTechnicalAdvice']
+del ParcelOutLicence_schema['architects']
+del ParcelOutLicence_schema['usage']
 ##/code-section after-schema
 
-class ParcelOutLicence(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
+class ParcelOutLicence(BaseFolder, BuildLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -106,14 +104,6 @@ class ParcelOutLicence(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin)
     schemata_order = ['urban_description', 'urban_road', 'urban_location',\
                       'urban_investigation_and_advices']
     ##/code-section class-header
-
-    # Methods
-
-    security.declarePublic('generateReference')
-    def generateReference(self):
-        """
-        """
-        pass
 
     # Manually created methods
 
@@ -136,7 +126,7 @@ class ParcelOutLicence(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin)
            Post create hook...
            XXX This should be replaced by a zope event...
         """
-        super(GenericLicence).__thisclass__.at_post_create_script(self)
+        super(BuildLicence).__thisclass__.at_post_create_script(self)
 
     security.declarePublic('at_post_edit_script')
     def at_post_edit_script(self):
@@ -144,40 +134,7 @@ class ParcelOutLicence(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin)
            Post create hook...
            XXX This should be replaced by a zope event...
         """
-        super(GenericLicence).__thisclass__.at_post_edit_script(self)
-
-    security.declarePublic('mayAddOpinionRequestEvent')
-    def mayAddOpinionRequestEvent(self, organisation):
-        """
-           This is used as TALExpression for the UrbanEventOpinionRequest
-           We may add an OpinionRequest if we asked one in an inquiry on the licence
-           We may add another if another inquiry defined on the licence ask for it and so on
-        """
-        limit = 0
-        inquiries = self.getInquiries()
-        for inquiry in inquiries:
-            if organisation in inquiry.getSolicitOpinionsTo():
-                limit += 1
-        limit = limit - len(self.getOpinionRequests(organisation))
-        return limit > 0
-
-    security.declarePublic('mayAddInquiryEvent')
-    def mayAddInquiryEvent(self):
-        """
-           This is used as TALExpression for the UrbanEventInquiry
-           We may add an inquiry if we defined one on the licence
-           We may add another if another is defined on the licence and so on
-        """
-        #first of all, we can add an InquiryEvent if an inquiry is defined on the licence at least
-        inquiries = self.getInquiries()
-        urbanEventInquiries = self.getUrbanEventInquiries()
-        #if we have only the inquiry defined on the licence and no start date is defined
-        #it means that no inquiryEvent can be added because no inquiry is defined...
-        #or if every UrbanEventInquiry have already been added
-        if (len(inquiries) == 1 and not self.getInvestigationStart()) or \
-           (len(urbanEventInquiries) >= len(inquiries)):
-            return False
-        return True
+        super(BuildLicence).__thisclass__.at_post_edit_script(self)
 
     def getLastDeposit(self):
         return self._getLastEvent(interfaces.IDepositEvent)
@@ -197,9 +154,6 @@ class ParcelOutLicence(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin)
     def getLastAcknowledgment(self):
         return self._getLastEvent(interfaces.IAcknowledgmentEvent)
 
-    def getLastInquiry(self):
-        return self._getLastEvent(interfaces.IInquiryEvent)
-
     def getLastCommunalCouncil(self):
         return self._getLastEvent(interfaces.ICommunalCouncilEvent)
 
@@ -215,53 +169,8 @@ class ParcelOutLicence(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin)
     def getLastProrogation(self):
         return self._getLastEvent(interfaces.IProrogationEvent)
 
-    def getLastOpinionRequest(self):
-        return self._getLastEvent(interfaces.IOpinionRequestEvent)
-
     def getAllMissingPartDeposits(self):
         return self._getAllEvents(interfaces.IMissingPartDepositEvent)
-
-    def getAllTechnicalServiceOpinionRequests(self):
-        return self._getAllEvents(interfaces.ITechnicalServiceOpinionRequestEvent)
-
-    def getAllTechnicalServiceOpinionRequestsNoDup(self):
-        allOpinions = self.getAllTechnicalServiceOpinionRequests()
-        allOpinionsNoDup = {}
-        for opinion in allOpinions:
-            actor = opinion.getUrbaneventtypes().getId()
-            allOpinionsNoDup[actor]=opinion
-        return allOpinionsNoDup.values()
-
-    def getAllOpinionRequests(self, organisation=""):
-        if organisation == "":
-            return self._getAllEvents(interfaces.IOpinionRequestEvent)
-        catalog = getToolByName(self, 'portal_catalog')
-        currentPath = '/'.join(self.getPhysicalPath())
-        query = {'path': {'query': currentPath,
-                          'depth': 1},
-                 'meta_type': ['UrbanEvent', 'UrbanEventInquiry'],
-                 'sort_on': 'getObjPositionInParent',
-                 'id' : organisation.lower()}
-        return [brain.getObject() for brain in catalog(**query)]
-
-    def getAllOpinionRequestsNoDup(self):
-        allOpinions = self.getAllOpinionRequests()
-        allOpinionsNoDup = {}
-        for opinion in allOpinions:
-            actor = opinion.getUrbaneventtypes().getId()
-            allOpinionsNoDup[actor]=opinion
-        return allOpinionsNoDup.values()
-
-    def getAllInquiries(self):
-        return self._getAllEvents(interfaces.IInquiryEvent)
-
-    def getAllClaimsTexts(self):
-        claimsTexts = []
-        for inquiry in self.getAllInquiries():
-            text = inquiry.getClaimsText()
-            if text is not "":
-                claimsTexts.append(text)
-        return claimsTexts
 
 
 
@@ -269,5 +178,15 @@ registerType(ParcelOutLicence, PROJECTNAME)
 # end of class ParcelOutLicence
 
 ##code-section module-footer #fill in your manual code here
+def finalizeSchema(schema, folderish=False, moveDiscussion=True):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('isModification', after='folderCategory')
+    schema.moveField('description', after='impactStudy')
+    schema.moveField('geometricians', after='workLocations')
+    return schema
+
+finalizeSchema(ParcelOutLicence_schema)
 ##/code-section module-footer
 

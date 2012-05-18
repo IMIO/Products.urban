@@ -20,20 +20,27 @@
    <element value="UrbanEvent"/>
    <element value="UrbanEventInquiry"/>
    <element value="UrbanEventOpinionRequest"/>
+   <element value="UrbanEventOpinionRequest"/>
+   <element value="UrbanEventInquiry"/>
+   <element value="Applicant"/>
+   <element value="Inquiry"/>
+   <element value="UrbanEvent"/>
+   <element value="File"/>
+   <element value="PortionOut"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">inquiryview</property>
+ <property name="default_view">buildlicenceview</property>
  <property name="view_methods">
   <element value="folder_summary_view"/>
   <element value="folder_tabular_view"/>
   <element value="atct_album_view"/>
   <element value="folder_listing"/>
   <element value="parceloutlicenceview"/>
-  <element value="inquiryview"/>
+  <element value="buildlicenceview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
- <alias from="view" to="(selected layout)"/>
+ <alias from="view" to="buildlicenceview"/>
  <alias from="edit" to="base_edit"/>
  <alias from="sharing" to="@@sharing"/>
  <action title="View" 
@@ -43,6 +50,14 @@
          url_expr="string:${object_url}/view" 
          visible="True">
   <permission value="View"/>
+ </action>
+ <action title="Edit" 
+         action_id="edit"
+         category="object" 
+         condition_expr="python:context.mayShowEditAction()"
+         url_expr="string:${object_url}/edit" 
+         visible="True">
+  <permission value="Modify portal content"/>
  </action>
  <action title="Edit" 
          action_id="edit"

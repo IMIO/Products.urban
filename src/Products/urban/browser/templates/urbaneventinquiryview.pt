@@ -10,7 +10,6 @@
 
 <tal:block condition="parcels">
 <div metal:fill-slot="style_slot" >
-    <div metal:use-macro="here/@@map-macros/urbanMapCSS" />
 </div>
 </tal:block>
 </head>
@@ -35,7 +34,7 @@
         <td width=35%>
         <metal:listing use-macro="context/@@urbanevent-macros/urbanEventDataMacro" />
          
-        <fieldset tal:define="inqdata view/getInquiryData" tal:condition="inqdata"><strong><legend i18n:translate="inquiry_data">Inquiry data</legend></strong>
+        <fieldset tal:define="inqdata view/getInquiryData" tal:condition="inqdata"><legend i18n:translate="inquiry_data">Inquiry data</legend>
         <p class="discreet" i18n:translate="urban_linked_inquiry_help">Here above are data defined for the inquiry.  If you want to change these informations, click on the name of the linked inquiry here above.</p>
         <tal:comment replace="nothing">Keep context as name of the obj here as some widget rendering will fail if not...</tal:comment>
         <table class="no-style-table" tal:define="context python: inqdata[0];
@@ -70,7 +69,7 @@
         <metal:listing use-macro="context/@@urbanevent-macros/urbanEventAddAnnexMacro" />
         </td>
         <td width=65%>
-        <fieldset><strong><legend i18n:translate="event_linked_documents">Event linked documents</legend><strong>
+        <fieldset><legend i18n:translate="event_linked_documents">Event linked documents</legend>
           <div tal:define="tool python: context.portal_urban;
                            batch python: tool.queryCatalog(batch=True, specificSearch='searchLinkedDocuments', context=context, theObjects=False, batchlen=50);
                            showedCols python: ('Title',);
@@ -78,7 +77,7 @@
           <metal:listing use-macro="here/urban_macros/macros/listing" />
           </div>
         </fieldset>
-        <fieldset><strong><legend i18n:translate="event_inquiry_claimants">Claimants</legend><strong>
+        <fieldset><legend i18n:translate="event_inquiry_claimants">Claimants</legend>
         <form tal:condition="python: member.has_permission('urban: Add Contact', context)"
               tal:define="ctype python: context.portal_types.getTypeInfo('Claimant');
                           member context/@@plone_portal_state/member;"

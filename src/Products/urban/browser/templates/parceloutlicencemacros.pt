@@ -117,6 +117,11 @@
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategory', mode='view')" /></td>
      </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_isModification">Modification?</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('isModification', mode='view')" /></td>
+     </tr>
      <tr tal:condition="python: 'workType' in usedAttributes">
       <td valign="top"><b><span i18n:translate="urban_label_workType">Work type</span>:</b></td>
       <td width="2%"></td>
@@ -164,7 +169,7 @@
       <div tal:condition="workLocations"><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
       <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
    </fieldset>
-   <fieldset><legend i18n:translate="urban_label_geometricians">Architect(s)</legend>
+   <fieldset><legend i18n:translate="urban_label_geometricians">Geometrician(s)</legend>
     <div metal:use-macro="here/urban_macros/macros/urbanGeometriciansMacro" />
    </fieldset>
    <fieldset><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>

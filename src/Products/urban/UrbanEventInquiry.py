@@ -78,7 +78,7 @@ schema = Schema((
             label_msgid='urban_label_linkedInquiry',
             i18n_domain='urban',
         ),
-        allowed_types=('Inquiry', 'UrbanCertificateTwo', 'BuildLicence', 'ParcelOutLicence'),
+        allowed_types=('Inquiry', 'UrbanCertificateTwo', 'BuildLicence'),
         multiValued=0,
         relationship='linkedInquiry',
     ),

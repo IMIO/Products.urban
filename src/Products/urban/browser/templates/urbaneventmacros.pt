@@ -1,5 +1,5 @@
 <div metal:define-macro="urbanEventDataMacro" i18n:domain="urban">
- <fieldset><strong><legend i18n:translate="event_data">Event data</legend></strong>
+ <fieldset><legend i18n:translate="event_data">Event data</legend>
   <table class="no-style-table">
     <tr valign="top">
      <td>
@@ -54,7 +54,7 @@
 <div metal:define-macro="urbanEventGenerateDocumentMacro" i18n:domain="urban">
  <fieldset tal:define="templates_list view/getListOfTemplatesToGenerate;
                        mayAddUrbanEvent view/mayAddUrbanEvent">
-  <strong><legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend></strong>
+  <legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend>
   <tal:templates_link condition="python: mayAddUrbanEvent and templates_list">
    <table>
    <tal:loopEventType repeat="template templates_list">
@@ -77,7 +77,7 @@
 </div>
 
 <div metal:define-macro="urbanEventAddAnnexMacro" i18n:domain="urban">
- <fieldset tal:define="mayAddAnnex view/mayAddAnnex"><strong><legend i18n:translate="add_an_annex">Add an annex</legend></strong>
+ <fieldset tal:define="mayAddAnnex view/mayAddAnnex"><legend i18n:translate="add_an_annex">Add an annex</legend>
   <form tal:condition="mayAddAnnex" name="quickAdd" action="createObject" method="post">
     <input name="type_name" value="File" type="hidden">
     <input i18n:attributes="value" class="context" id="event" value="add_an_annex" type="submit">

@@ -40,7 +40,7 @@ UrbanDoc_schema = ATFileSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-UrbanDoc_schema['file'].validators = tuple(list(UrbanDoc_schema['file'].validators).append(ContentTypeValidator(('application/vnd.oasis.opendocument.text')))
+#UrbanDoc_schema['file'].validators = tuple(list(UrbanDoc_schema['file'].validators).append(ContentTypeValidator(('application/vnd.oasis.opendocument.text')))
 ##/code-section after-schema
 
 class UrbanDoc(ATFile):
@@ -59,6 +59,7 @@ class UrbanDoc(ATFile):
     ##/code-section class-header
 
     # Methods
+
 
 registerType(UrbanDoc, PROJECTNAME)
 # end of class UrbanDoc
