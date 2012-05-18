@@ -609,6 +609,16 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
+                    'id': "avis-etude-incidence",
+                    'title': "Avis sur l'étude d'incidence",
+                    'activatedFields': [],
+                    'deadLineDelay': 15,
+                    'TALCondition': "python: here.getImpactStudy()",
+                    'podTemplates': (
+                                     {'id': "lot-avis-etude-incidence", 'title': "Avis sur l'étude d'incidence"},
+                                    ),
+                    },
+                    {
                     'id': "dossier-incomplet",
                     'title': "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
                     'activatedFields': [],
