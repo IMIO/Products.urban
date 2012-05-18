@@ -5,6 +5,7 @@ from Products.CMFPlone import PloneMessageFactory as msg
 from Products.CMFPlone.PloneBatch import Batch
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import URBAN_TYPES
+from Products.urban.UrbanTool import DB_QUERY_ERROR
 from Products.ZCTextIndex.ParseTree import ParseError
 
 class UrbanSearchView(BrowserView):
@@ -27,6 +28,20 @@ class UrbanSearchView(BrowserView):
 
     def getContactTypes(self):
         return ['Architect', 'Notary', 'Geometrician']
+
+    def getDivisions(self):
+        """
+          Returns the existing divisions
+          If we had a problem getting the divisions, we return nothing so the
+          search form is not displayed
+        """
+        context = aq_inner(self.context)
+        tool = getToolByName(context, 'portal_urban')
+        divisions = tool.findDivisions(all=False)
+        #check that we correctly received divisions
+        if DB_QUERY_ERROR in str(divisions):
+            return None
+        return divisions
 
     def getSearchArgument(self, key_to_match):
         request = aq_inner(self.request)

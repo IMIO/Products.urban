@@ -10,14 +10,16 @@
              tal:define="dummy python:request.set('disable_border',1)" />
 
 <body>
-<div metal:fill-slot="main"
-     tal:define="foldertypes python: request.get('foldertypes', ['BuildLicence']);
+<div metal:fill-slot="main">
+<div tal:define="foldertypes python: request.get('foldertypes', ['BuildLicence']);
                  search_arg request/search_arg|nothing;
                  previous_search_by request/search_by|nothing;
                  licence_types view/getLicenceTypes;">
-        <h1 class="documentFirstHeading" i18n:translate="urban_search_descr">
+  <h1 class="documentFirstHeading" i18n:translate="urban_search_descr">
            Search licences
-        </h1>
+  </h1>
+<div tal:replace="structure provider:plone.belowcontenttitle" />
+
 <form action="" method="get" id="search">
 <fieldset><legend><strong i18n:translate="urban_search_parameters">Enter your parameters for the search</strong></legend>
  <div tal:repeat="licence_type licence_types">
@@ -51,15 +53,19 @@
    search_form.setAttribute('action', base_url.getAttribute('href')+'name')">
    <metal:listing use-macro="context/@@urbansearch-macros/searchbynameMacro" />
   </dd>
- <dt class="formTab" id="fieldsetlegend-urban_searchbyparcel">
+  <dt class="formTab" id="fieldsetlegend-urban_searchbyparcel">
     <span i18n:translate="urban_search_parcel_by_cadastral_reference">Parcel</span>
- </dt>
- <dd id="fieldset-urban_searchbyparcel"
+  </dt>
+  <dd id="fieldset-urban_searchbyparcel"
+      tal:define="divisions view/getDivisions|nothing"
    onmouseover="document.getElementById('search').elements['search_by'].value='parcel';
    var base_url=document.getElementById('base_url');
    var search_form=document.getElementById('search');
    search_form.setAttribute('action', base_url.getAttribute('href')+'parcel')">
-  <metal:listing use-macro="context/@@urbansearch-macros/searchbyparcelMacro" />
+  <p tal:condition="not: divisions" i18n:translate="help_search_connection_problem">
+   You can not search folders by parcels for now because there was a problem.  Please contact your system administrator and give him the red error message here above
+  </p>
+  <span tal:condition="divisions"><!--metal:listing use-macro="context/@@urbansearch-macros/searchbyparcelMacro" /--></span>
  </dd>
  </dl>
  </div>
@@ -101,6 +107,6 @@
 </tal:block_results>
 
 </div>
-
+</div>
 </body>
 </html>

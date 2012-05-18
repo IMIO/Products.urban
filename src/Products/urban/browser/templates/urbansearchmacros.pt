@@ -39,7 +39,7 @@
                  exposant request/exposant|nothing;
                  puissance request/puissance|nothing;
                  partie request/partie|nothing;
-                 divisions python: context.portal_urban.findDivisions(all=False);">
+                 divisions view/getDivisions|nothing">
 
              <div i18n:translate="urban_label_complete_parcel">Merci de renseigner le num&eacute;ro complet de la parcelle recherch&eacute;e  </div>
              <table class="listing">
