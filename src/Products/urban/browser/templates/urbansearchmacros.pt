@@ -1,7 +1,6 @@
 <div metal:define-macro="searchbystreetMacro" i18n:domain="urban"
      tal:define="last_selected_street python: view.getSearchArgument('street')">
  <select name=street tal:define="streets view/AvailableStreets">
-     <option>Choose a street</option>
      <option tal:repeat="street streets" tal:content="python: street[1]"
              tal:attributes="value python: street[0]; selected python: street[0] == last_selected_street">
              street
@@ -41,7 +40,7 @@
                  partie request/partie|nothing;
                  divisions view/getDivisions|nothing">
 
-             <div i18n:translate="urban_label_complete_parcel">Merci de renseigner le num&eacute;ro complet de la parcelle recherch&eacute;e  </div>
+             <div class='discreet' i18n:translate="urban_label_complete_parcel">Please enter the complete parcel informations</div>
              <table class="listing">
               <thead>
                <tr>

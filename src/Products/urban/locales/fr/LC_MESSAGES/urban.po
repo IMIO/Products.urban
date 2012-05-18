@@ -40,9 +40,6 @@ msgstr "Coordonnées de l'architecte"
 msgid "BuildLicence"
 msgstr "Permis d'urbanisme"
 
-msgid "MiscDemand"
-msgstr "Demande diverse"
-
 msgid "Claimant data"
 msgstr "Coordonnées du réclamant"
 
@@ -136,6 +133,9 @@ msgstr "Etat du permis"
 msgid "Map"
 msgstr "Carte"
 
+msgid "MiscDemand"
+msgstr "Demande diverse"
+
 msgid "Notary data"
 msgstr "Coordonnées du notaire"
 
@@ -205,9 +205,6 @@ msgstr "Ajouter un Architecte"
 msgid "add_BuildLicence"
 msgstr "Ajouter un Permis d'urbanisme"
 
-msgid "add_MiscDemand"
-msgstr "Ajouter une demande diverse"
-
 msgid "add_Declaration"
 msgstr "Ajouter une déclaration"
 
@@ -220,6 +217,9 @@ msgstr "Ajouter une déclaration environnementale"
 # referencebrowser.pt
 msgid "add_Geometrician"
 msgstr "Ajouter un Géomètre"
+
+msgid "add_MiscDemand"
+msgstr "Ajouter une demande diverse"
 
 # notaries_folder_view
 msgid "add_Notary"
@@ -308,9 +308,6 @@ msgstr "Articles"
 msgid "at_hour"
 msgstr "à ${hour}"
 
-msgid "back_to_licence"
-msgstr "Retour au dossier"
-
 msgid "buildings_layer_title"
 msgstr "Couche bâtiments"
 
@@ -334,9 +331,6 @@ msgstr "permis d'urbanisme retirés"
 
 msgid "buildlicence_urbanconfig_title"
 msgstr "Paramètres des Permis d'urbanisme"
-
-msgid "miscdemand_urbanconfig_title"
-msgstr "Paramètres des Demandes diverses"
 
 msgid "buildlicences"
 msgstr "Permis d'urbanisme"
@@ -430,9 +424,6 @@ msgstr "Paramètres des Déclarations"
 
 msgid "declarations"
 msgstr "Déclarations"
-
-msgid "miscdemands"
-msgstr "Demandes diverses"
 
 msgid "decree_type_departmental"
 msgstr "Arrêté Ministeriel"
@@ -618,6 +609,9 @@ msgstr "Géomètres"
 msgid "globaltemplates_folder_title"
 msgstr "Modèles généraux"
 
+msgid "go_back"
+msgstr "Retour"
+
 #. Default: "You can not search for parcels for now because there was a problem.  Please contact your system administrator and give him the red error message here above"
 msgid "help_search_connection_problem"
 msgstr "Vous ne pouvez pas effectuer de recherche pour l'instant car une erreur s'est produite.  Contactez votre aministrateur système et donnez lui le message d'erreur affiché en rouge ci-dessus."
@@ -758,6 +752,12 @@ msgstr "Gérer les notaires"
 # config folders
 msgid "map_configs_folder_title"
 msgstr "Configuration des cartes"
+
+msgid "miscdemand_urbanconfig_title"
+msgstr "Paramètres des Demandes diverses"
+
+msgid "miscdemands"
+msgstr "Demandes diverses"
 
 msgid "missingparts_folder_title"
 msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes"
@@ -1131,11 +1131,6 @@ msgstr "Numérotation des déclarations"
 msgid "urban_label_DivisionNumerotation"
 msgstr "Numérotation des divisions"
 
-#. Default: "MiscDemandnumerotation"
-#: UrbanTool.py
-msgid "urban_label_MiscDemandNumerotation"
-msgstr "Numérotation des demandes diverses"
-
 #. Default: "Environmentaldeclarationnumerotation"
 #: UrbanTool.py
 msgid "urban_label_EnvironmentalDeclarationNumerotation"
@@ -1150,6 +1145,11 @@ msgstr "Type d'équipement"
 #: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"
 msgstr "Evénement de demande d'avis lié"
+
+#. Default: "MiscDemandnumerotation"
+#: UrbanTool.py
+msgid "urban_label_MiscDemandNumerotation"
+msgstr "Numérotation des demandes diverses"
 
 # UrbanTool
 #. Default: "Nisnum"
@@ -1316,6 +1316,11 @@ msgstr "Boîte"
 msgid "urban_label_catchmentArea"
 msgstr "Zone de captage"
 
+#. Default: "Category"
+#: MiscDemand.py
+msgid "urban_label_category"
+msgstr "Catégorie"
+
 #. Default: "Changes"
 #: PcaTerm.py
 msgid "urban_label_changes"
@@ -1363,6 +1368,9 @@ msgstr "Commentaire"
 #: Division.py
 msgid "urban_label_comments"
 msgstr "Commentaires"
+
+msgid "urban_label_complete_parcel"
+msgstr "Merci de renseigner le numéro complet de la parcelle recherchée"
 
 #. Default: "Concerned elements"
 #: parcelsinfo.py
@@ -2481,5 +2489,3 @@ msgstr "!!!Attention, aucune date de dépôt n'a été trouvée!!!"
 msgid "work_location"
 msgstr "Lieu des travaux"
 
-msgid "urban_label_category"
-msgstr "Catégorie"

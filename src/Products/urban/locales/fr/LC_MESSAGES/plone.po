@@ -55,6 +55,9 @@ msgstr "Enquête publique"
 msgid "Locality"
 msgstr "Lieu-dit"
 
+msgid "MiscDemand"
+msgstr "Demande diverse"
+
 msgid "Notary"
 msgstr "Notaire"
 
@@ -69,9 +72,6 @@ msgstr "Permis d'urbanisation"
 
 msgid "ParcellingTerm"
 msgstr "Lotissement"
-
-msgid "MiscDemand"
-msgstr "Demande diverse"
 
 msgid "PcaTerm"
 msgstr "Plan Communal d'Aménagement"

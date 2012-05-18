@@ -15,13 +15,13 @@
                  search_arg request/search_arg|nothing;
                  previous_search_by request/search_by|nothing;
                  licence_types view/getLicenceTypes;">
-  <h1 class="documentFirstHeading" i18n:translate="urban_search_descr">
-           Search licences
-  </h1>
-<div tal:replace="structure provider:plone.belowcontenttitle" />
+<h1 class="documentFirstHeading" i18n:translate="urban_search_descr">Search licences</h1>
 
-<form action="" method="get" id="search">
+<tal:comment replace="nothing">Back to the build licence...</tal:comment>
+<metal:listing use-macro="here/urban_macros/macros/goBackToMacro" />
+
 <fieldset><legend><strong i18n:translate="urban_search_parameters">Enter your parameters for the search</strong></legend>
+<form action="" method="get" id="search">
  <div tal:repeat="licence_type licence_types">
          <input id="foldertypes" type="checkbox" name="foldertypes"
          tal:define="type_checked python:licence_type in foldertypes or False"
@@ -69,11 +69,12 @@
  </dd>
  </dl>
  </div>
-</fieldset>
- <fieldset>
-  <input class="searchButton" type="submit" value="Search" name="Search" i18n:attributes="value">
- </fieldset>
+ <br />
+ <input class="searchButton" type="submit" value="Search" name="Search" i18n:attributes="value">
+ <br />
+ <br />
 </form>
+</fieldset>
 
 
 <!-- Display results -->
@@ -94,7 +95,7 @@
   </tr>
  </tbody>
  <!-- Display the results body -->
- <tbody>
+ <tbody tal:condition="brains">
          <div tal:define="tool python: context.portal_urban;
                           batch python: brains;
                           showedCols python: ('Title', 'created', 'Creator', );

@@ -1,8 +1,8 @@
-<div metal:define-macro="goBackToTheLicenceMacro" i18n:domain="urban">
+<div metal:define-macro="goBackToMacro" i18n:domain="urban">
 <br />
 <a class="no_underline" href="#"
    tal:define="tool python: context.portal_urban"
-   tal:attributes="href python: context.portal_type in tool.getUrbanTypes() and context.absolute_url() or context.aq_inner.aq_parent.absolute_url()"><img src="goback.png" />&nbsp;<span i18n:translate="back_to_licence">Go back to the licence</span></a>
+   tal:attributes="href python: context.portal_type in tool.getUrbanTypes() and context.absolute_url() or context.aq_inner.aq_parent.absolute_url()"><img src="goback.png" />&nbsp;<span i18n:translate="go_back">Go back</span></a>
 </div>
 
 <div metal:define-macro="urbanInquiriesMacro" i18n:domain="urban"

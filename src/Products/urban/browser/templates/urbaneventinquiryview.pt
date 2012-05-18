@@ -27,8 +27,8 @@
 
 <div tal:replace="structure provider:plone.belowcontenttitle" />
 
-<tal:comment replace="nothing">Back to the build licence...</tal:comment>
-<metal:listing use-macro="here/urban_macros/macros/goBackToTheLicenceMacro" />
+<tal:comment replace="nothing">Go back...</tal:comment>
+<metal:listing use-macro="here/urban_macros/macros/goBackToMacro" />
 
 <table width=100%>
     <tr valign="top">

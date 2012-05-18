@@ -20,8 +20,8 @@ class UrbanSearchView(BrowserView):
     def AvailableStreets(self):
         context = aq_inner(self.context)
         voc = UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", sort_on="sortable_title",
-                              inUrbanConfig=False, allowedStates=['enabled', 'disabled'])
-        return voc.getDisplayList(context).sortedByValue().items()
+                              inUrbanConfig=False, allowedStates=['enabled', 'disabled'], with_empty_value=True)
+        return voc.getDisplayList(context).items()
 
     def getLicenceTypes(self):
         return URBAN_TYPES

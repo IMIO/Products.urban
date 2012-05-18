@@ -108,6 +108,9 @@ msgstr ""
 msgid "workLocationStreet"
 msgstr ""
 
+msgid "MiscDemand"
+msgstr ""
+
 #status messages...
 msgid "db_connection_successfull"
 msgstr ""

@@ -14,7 +14,7 @@
 <!-- Back to the build licence... -->
 <br />
 <tal:block condition="view/showLinkToLinkedLicence">
-<a class="no_underline" href="#" tal:attributes="href view/getLinkToLinkedLicence"><img src="goback.png" />&nbsp;<span i18n:translate="back_to_licence">Go back to the licence</span></a>
+<a class="no_underline" href="#" tal:attributes="href view/getLinkToLinkedLicence"><img src="goback.png" />&nbsp;<span i18n:translate="go_back">Go back...</span></a>
 </tal:block>
 
 <fieldset><b><legend tal:content="view/getContactLegendValue" i18n:translate="">Contact data</legend></b>
