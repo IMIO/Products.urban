@@ -10,6 +10,7 @@
 
 <tal:block condition="parcels">
 <div metal:fill-slot="style_slot" >
+    <div metal:use-macro="here/@@map-macros/urbanMapCSS" /> 
 </div>
 </tal:block>
 </head>
@@ -17,18 +18,21 @@
 <body>
 <div metal:fill-slot="main">
 <metal:main_macro define-macro="main">
-<metal:body define-macro="body_macro" tal:define="member context/@@plone_portal_state/member;
+<metal:body define-macro="body_macro" tal:define="useTabbing python: context.portal_urban.getUseTabbing();
+                                                  member context/@@plone_portal_state/member;
                                                   recipients view/getRecipients;
                                                   linkedUrbanEventType view/getUrbaneventtypes;
                                                   global parcels view/getParcels;">
 
 <metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />
 
-<div tal:replace="structure provider:plone.belowcontenttitle" />
-
 <tal:comment replace="nothing">Go back...</tal:comment>
 <metal:listing use-macro="here/urban_macros/macros/goBackToMacro" />
 
+<div id="urbanViewWithTabbing" tal:condition="useTabbing">
+<dl class="formTabs enableFormTabbing">
+<dt class="formTab" id="fieldsetlegend-event_inquiry_documents" i18n:translate="event_inquiry_documents"><span>Description</span></dt>
+<dd id="fieldset-event_inquiry_documents">
 <table width=100%>
     <tr valign="top">
         <td width=35%>
@@ -77,52 +81,58 @@
           <metal:listing use-macro="here/urban_macros/macros/listing" />
           </div>
         </fieldset>
-        <fieldset><legend i18n:translate="event_inquiry_claimants">Claimants</legend>
-        <form tal:condition="python: member.has_permission('urban: Add Contact', context)"
-              tal:define="ctype python: context.portal_types.getTypeInfo('Claimant');
-                          member context/@@plone_portal_state/member;"
-              i18n:domain="urban"
-              name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'"
-              action="createObject" method="post">
-         <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description"
-              i18n:attributes="title" />
-         <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
-         <input type="submit" class="context" id="event" value="add_a_claimant" i18n:attributes="value" />
-         <br /><br />
-        </form>
-        <div tal:define="claimants context/getClaimants;">
-         <table width=100% class="listing" style="margin-bottom: 0;">
-          <thead>
-           <tr>
-            <th colspan="4">
-             <span i18n:translate="number_of_claimants">Number of claimants</span> : 
-             <strong><span tal:content="python: len(claimants)" /></strong>
-            </th>
-           </tr>
-          </thead>
-         </table>
-          <div tal:define="tool python: context.portal_urban;
-                           Batch python:modules['Products.CMFPlone'].Batch;
-                           b_start request/b_start|python:0;
-                           batch python: Batch(claimants, 25, b_start);
-                           showedCols python: ('Title', );
-                           colsLabels python: {'Title': 'claimant_data'};
-                           showActions python: True;">
-          <metal:listing use-macro="here/urban_macros/macros/listing" />
-          </div>
-        </div>
-        </fieldset>
+
         </td>
     </tr>
 </table>
+</dd>
 
+<dt class="formTab" id="fieldsetlegend-event_inquiry_claimants" i18n:translate="event_inquiry_claimants"><span>Claimants</span></dt>
+<dd id="fieldset-event_inquiry_claimants">
+<form tal:condition="python: member.has_permission('urban: Add Contact', context)"
+      tal:define="ctype python: context.portal_types.getTypeInfo('Claimant');
+                  member context/@@plone_portal_state/member;"
+      i18n:domain="urban"
+      name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'"
+      action="createObject" method="post">
+ <img src="#" title="#" tal:attributes="src python: ctype.getIcon(); title ctype/description"
+      i18n:attributes="title" />
+ <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+ <input type="submit" class="context" id="event" value="add_a_claimant" i18n:attributes="value" />
+ <br /><br />
+</form>
+<div tal:define="claimants context/getClaimants;">
+ <table width=100% class="listing" style="margin-bottom: 0;">
+  <thead>
+   <tr>
+    <th colspan="4">
+     <span i18n:translate="number_of_claimants">Number of claimants</span> : 
+     <strong><span tal:content="python: len(claimants)" /></strong>
+    </th>
+   </tr>
+  </thead>
+ </table>
+  <div tal:define="tool python: context.portal_urban;
+                   Batch python:modules['Products.CMFPlone'].Batch;
+                   b_start request/b_start|python:0;
+                   batch python: Batch(claimants, 25, b_start);
+                   showedCols python: ('Title', );
+                   colsLabels python: {'Title': 'claimant_data'};
+                   showActions python: True;">
+  <metal:listing use-macro="here/urban_macros/macros/listing" />
+  </div>
+</div>
+</dd>
+
+<dt class="formTab" id="fieldsetlegend-urbaneventinquiry_recipients" i18n:translate="urbaneventinquiry_recipients"><span>Recipients</span></dt>
+<dd id="fieldset-urbaneventinquiry_recipients">
 <tal:block condition="python: member.has_permission('Modify portal content', context) 
                               and linkedUrbanEventType.getEventTypeType() == 'Products.urban.interfaces.IInquiryEvent'">
- <fieldset>
-  <a tal:attributes="href python: 'addInvestigationPO'" tal:content="python: 'Rechercher les propriétaires situés dans un rayon de 50m'"/><br><br>
- </fieldset>
+  <form action="addInvestigationPO">
+   <input type="submit" tal:attributes="value string:Rechercher les propriétaires situés dans un rayon de 50m" />
+  </form>
+  <p>&nbsp;</p>
 </tal:block>
-
 <tal:block condition="recipients">
     <table width=100% class="listing" style="margin-bottom: 0;">
     <thead>
@@ -143,14 +153,11 @@
      <metal:listing use-macro="here/urban_macros/macros/listing" />
     </div>
 </tal:block>
-
 <tal:block condition="python: context.REQUEST.get('doc_uid') != None">
 <tal:block define="docObj python:context.uid_catalog(UID=context.REQUEST.get('doc_uid'))[0]">
 <Script tal:content="python:'document.location = \''+docObj.getObject().absolute_url()+'/external_edit\';'" />
 </tal:block>
 </tal:block>
-
-
 <tal:block condition="parcels">
    <div metal:use-macro="here/@@map-macros/urbanMapScript" />
    <form>
@@ -159,7 +166,9 @@
    <p i18n:translate="cartography" class="discreet">Cartography</p>
    <div id="urbanmapctn" style="width:100%; height:800px"></div>
 </tal:block>
+</dd>
 
+</div>
 
  </metal:body>
 </metal:main_macro>
