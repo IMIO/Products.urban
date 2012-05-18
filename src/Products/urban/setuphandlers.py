@@ -168,7 +168,7 @@ def setUrbanConfigWFPolicy(context):
                                                  duplicate_id = 'empty')
     policy = getattr(placefulwf_tool, 'urban_cfg_policy')
     policy.setTitle('Urban config workflow policy')
-    policy.setChain('File', ('activation_workflow',))
+    policy.setChain('UrbanDoc', ('activation_workflow',))
     wf_tool.updateRoleMappings()
 
     #set this local policy to the urban config folder
@@ -855,8 +855,8 @@ def addGlobalFolders(context):
                                                      title=_("globaltemplates_folder_title", 'urban', context=site.REQUEST))
         globaltemplatesFolder = getattr(tool, globaltemplatesFolderid)
         globaltemplatesFolder.setConstrainTypesMode(1)
-        globaltemplatesFolder.setLocallyAllowedTypes(['File'])
-        globaltemplatesFolder.setImmediatelyAddableTypes(['File'])
+        globaltemplatesFolder.setLocallyAllowedTypes(['UrbanDoc'])
+        globaltemplatesFolder.setImmediatelyAddableTypes(['UrbanDoc'])
 
     #add foldermanagers folder
     if not hasattr(tool, "foldermanagers"):

@@ -121,7 +121,7 @@ class TestUrbanEventTypes(unittest.TestCase):
         wf_tool = getToolByName(portal, 'portal_workflow')
         catalog = getToolByName(portal, 'portal_catalog')
         urban_event_type = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'accuse-de-reception', None)
-        all_templates = [obj for obj in urban_event_type.objectValues() if obj.portal_type == 'File']
+        all_templates = [obj for obj in urban_event_type.objectValues() if obj.portal_type == 'UrbanDoc']
         folder_path= "%s/urban/buildlicences" % '/'.join(portal.getPhysicalPath())
         urban_event = catalog(object_provides=interfaceToName(portal, IAcknowledgmentEvent), path={'query':folder_path, 'depth':2})
         urban_event = urban_event[0].getObject()

@@ -29,7 +29,7 @@ def updateTemplates(context, container, templates, starting_position='', replace
         new_content = file(filePath, 'rb').read()
         log.append(updateTemplate(context, container, template, new_content, position_after, replace=replace))
         #log[-1][0] is the id of the last template added
-        position_after = log[-1][0] 
+        position_after = log[-1][0]
     return log
 
 def updateTemplate(context, container, template, new_content, position_after='', replace=False):
@@ -47,7 +47,7 @@ def updateTemplate(context, container, template, new_content, position_after='',
     status = [new_template_id]
     new_md5_signature = getMd5Signature(new_content)
     old_template = getattr(container, new_template_id, None)
-    #if theres an existing template with the same id 
+    #if theres an existing template with the same id
     if old_template:
         #if not in the correct profile -> no changes
         if profile_name != old_template.getProperty("profileName") != 'tests':
@@ -68,7 +68,7 @@ def updateTemplate(context, container, template, new_content, position_after='',
         status.append('updated')
     #else create a new template
     else:
-        new_template_id = container.invokeFactory("File", id=new_template_id, title=template['title'], file=new_content) 
+        new_template_id = container.invokeFactory("UrbanDoc", id=new_template_id, title=template['title'], file=new_content)
         new_template = getattr(container, new_template_id)
         new_template.setFormat("application/vnd.oasis.opendocument.text")
         status.append('created')

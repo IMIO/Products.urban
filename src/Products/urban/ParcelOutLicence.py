@@ -57,11 +57,11 @@ schema = Schema((
             label_msgid='urban_label_geometricians',
             i18n_domain='urban',
         ),
-        allowed_types=('Geometrician',),
-        multiValued=1,
-        relationship='parcelOutGeometricians',
         required=True,
         schemata='urban_description',
+        multiValued=1,
+        relationship='parcelOutGeometricians',
+        allowed_types=('Geometrician',),
     ),
 
 ),
@@ -105,7 +105,15 @@ class ParcelOutLicence(BaseFolder, BuildLicence, BrowserDefaultMixin):
                       'urban_investigation_and_advices']
     ##/code-section class-header
 
+    # Methods
+
     # Manually created methods
+
+    security.declarePublic('generateReference')
+    def generateReference(self):
+        """
+        """
+        pass
 
     security.declarePublic('geometriciansBaseQuery')
     def geometriciansBaseQuery(self):

@@ -25,6 +25,7 @@ from Products.ATContentTypes.content.file import ATFileSchema
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.ContentTypeValidator.validator import ContentTypeValidator
 ##/code-section module-header
 
 schema = Schema((
@@ -40,7 +41,7 @@ UrbanDoc_schema = ATFileSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-#UrbanDoc_schema['file'].validators = tuple(list(UrbanDoc_schema['file'].validators).append(ContentTypeValidator(('application/vnd.oasis.opendocument.text')))
+UrbanDoc_schema['file'].validators.append(ContentTypeValidator(('application/vnd.oasis.opendocument.text',)))
 ##/code-section after-schema
 
 class UrbanDoc(ATFile):
