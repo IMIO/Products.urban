@@ -130,10 +130,6 @@ class IDivision(Interface):
     """Marker interface for .Division.Division
     """
 
-class IWorkLocation(Interface):
-    """Marker interface for .WorkLocation.WorkLocation
-    """
-
 class IUrbanDelay(Interface):
     """Marker interface for .UrbanDelay.UrbanDelay
     """

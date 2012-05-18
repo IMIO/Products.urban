@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-02-01 12:31+0000\n"
+"POT-Creation-Date: 2012-05-18 11:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,13 +66,73 @@ msgstr ""
 msgid "Geometrician data"
 msgstr ""
 
+#. Default: "Acknowledgement"
+msgid "IAcknowledgment type marker interface"
+msgstr ""
+
+#. Default: "College report"
+msgid "ICollegeReport type marker interface"
+msgstr ""
+
+#. Default: "Communal council"
+msgid "ICommunalCouncil type marker interface"
+msgstr ""
+
+#. Default: "Request deposit"
+msgid "IDeposit type marker interface"
+msgstr ""
+
+#. Default: "Inquiry"
+msgid "IInquiry type marker interface"
+msgstr ""
+
+#. Default: "Missing part"
+msgid "IMissingPart type marker interface"
+msgstr ""
+
+#. Default: "Missing part deposit"
+msgid "IMissingPartDeposit type marker interface"
+msgstr ""
+
+#. Default: "Modification deposit"
+msgid "IModificationDeposit type marker interface"
+msgstr ""
+
+#. Default: "Opinion request"
+msgid "IOpinionRequest type marker interface"
+msgstr ""
+
+#. Default: "Prorogation"
+msgid "IProrogation type marker interface"
+msgstr ""
+
+#. Default: "Technical service opinion request"
+msgid "ITechnicalServiceOpinionRequest type marker interface"
+msgstr ""
+
+#. Default: "Licence delivery"
+msgid "ITheLicence type marker interface"
+msgstr ""
+
+#. Default: "Walloon region opinion request"
+msgid "IWalloonRegionOpinionRequest type marker interface"
+msgstr ""
+
+#. Default: "Walloon region primo"
+msgid "IWalloonRegionPrimo type marker interface"
+msgstr ""
+
+#. Default: "Work beginning"
+msgid "IWorkBeginning type marker interface"
+msgstr ""
+
 msgid "Licence state"
 msgstr ""
 
-msgid "MiscDemand"
+msgid "Map"
 msgstr ""
 
-msgid "Map"
+msgid "MiscDemand"
 msgstr ""
 
 msgid "Notary data"
@@ -247,9 +307,6 @@ msgstr ""
 msgid "at_hour"
 msgstr ""
 
-msgid "go_back"
-msgstr ""
-
 msgid "buildings_layer_title"
 msgstr ""
 
@@ -275,9 +332,6 @@ msgid "buildlicence_urbanconfig_title"
 msgstr ""
 
 msgid "buildlicences"
-msgstr ""
-
-msgid "miscdemands"
 msgstr ""
 
 msgid "cartography"
@@ -318,9 +372,6 @@ msgid "colnamenumero"
 msgstr ""
 
 msgid "concerned_parcels"
-msgstr ""
-
-msgid "urban_label_complete_parcel"
 msgstr ""
 
 msgid "contact_no_workslocation_defined"
@@ -557,6 +608,9 @@ msgstr ""
 msgid "globaltemplates_folder_title"
 msgstr ""
 
+msgid "go_back"
+msgstr ""
+
 #. Default: "You can not search for parcels for now because there was a problem.  Please contact your system administrator and give him the red error message here above"
 msgid "help_search_connection_problem"
 msgstr ""
@@ -698,10 +752,13 @@ msgstr ""
 msgid "map_configs_folder_title"
 msgstr ""
 
-msgid "missingparts_folder_title"
+msgid "miscdemand_urbanconfig_title"
 msgstr ""
 
-msgid "miscdemand_urbanconfig_title"
+msgid "miscdemands"
+msgstr ""
+
+msgid "missingparts_folder_title"
 msgstr ""
 
 #. Default: "Plural"
@@ -1088,14 +1145,14 @@ msgstr ""
 msgid "urban_label_LinkedOpinionRequestEvent"
 msgstr ""
 
-#. Default: "Nisnum"
-#: UrbanTool.py
-msgid "urban_label_NISNum"
-msgstr ""
-
 #. Default: "MiscDemandnumerotation"
 #: UrbanTool.py
 msgid "urban_label_MiscDemandNumerotation"
+msgstr ""
+
+#. Default: "Nisnum"
+#: UrbanTool.py
+msgid "urban_label_NISNum"
 msgstr ""
 
 #. Default: "Notaryletternumerotation"
@@ -1258,10 +1315,11 @@ msgstr ""
 msgid "urban_label_catchmentArea"
 msgstr ""
 
+#. Default: "Catégorie"
 #. Default: "Category"
 #: MiscDemand.py
 msgid "urban_label_category"
-msgstr "Catégorie"
+msgstr ""
 
 #. Default: "Changes"
 #: PcaTerm.py
@@ -1309,6 +1367,9 @@ msgstr ""
 #. Default: "Comments"
 #: Division.py
 msgid "urban_label_comments"
+msgstr ""
+
+msgid "urban_label_complete_parcel"
 msgstr ""
 
 #. Default: "Concerned elements"
@@ -1643,6 +1704,11 @@ msgstr ""
 #. Default: "Iskeyevent"
 #: UrbanEventType.py
 msgid "urban_label_isKeyEvent"
+msgstr ""
+
+#. Default: "Ismodification"
+#: ParcelOutLicence.py
+msgid "urban_label_isModification"
 msgstr ""
 
 #. Default: "Issameaddressasworks"
@@ -2425,62 +2491,3 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
-#. Default: "Technical service opinion request"
-msgid "ITechnicalServiceOpinionRequest type marker interface"
-msgstr ""
-
-#. Default: "Opinion request" 
-msgid "IOpinionRequest type marker interface"
-msgstr ""
-
-#. Default: "Walloon region primo"
-msgid "IWalloonRegionPrimo type marker interface"
-msgstr ""
-
-#. Default: "Walloon region opinion request" 
-msgid "IWalloonRegionOpinionRequest type marker interface"
-msgstr ""
-
-#. Default: "Acknowledgement"
-msgid "IAcknowledgment type marker interface"
-msgstr ""
-
-#. Default: "College report" 
-msgid "ICollegeReport type marker interface"
-msgstr ""
-
-#. Default: "Communal council" 
-msgid "ICommunalCouncil type marker interface"
-msgstr ""
-
-#. Default: "Request deposit" 
-msgid "IDeposit type marker interface"
-msgstr ""
-
-#. Default: "Missing part deposit" 
-msgid "IMissingPartDeposit type marker interface"
-msgstr ""
-
-#. Default: "Modification deposit"
-msgid "IModificationDeposit type marker interface"
-msgstr ""
-
-#. Default: "Missing part" 
-msgid "IMissingPart type marker interface"
-msgstr ""
-
-#. Default: "Inquiry" 
-msgid "IInquiry type marker interface"
-msgstr ""
-
-#. Default: "Licence delivery" 
-msgid "ITheLicence type marker interface"
-msgstr ""
-
-#. Default: "Work beginning" 
-msgid "IWorkBeginning type marker interface"
-msgstr ""
-
-#. Default: "Prorogation" 
-msgid "IProrogation type marker interface"
-msgstr ""

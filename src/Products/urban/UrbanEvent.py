@@ -252,6 +252,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         return [template for template in self.getUrbaneventtypes().listFolderContents({'portal_type': 'File'})
                 if wf_tool.getInfoFor(template, 'review_state') == 'enabled']
     security.declarePublic('eventDateLabel')
+    security.declarePublic('eventDateLabel')
     def eventDateLabel(self):
         """
          Returns the variable label

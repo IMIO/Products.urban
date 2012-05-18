@@ -413,6 +413,8 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         return not self.hasEventNamed(title)
 
+
+
 registerType(UrbanCertificateBase, PROJECTNAME)
 # end of class UrbanCertificateBase
 

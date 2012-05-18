@@ -58,7 +58,6 @@ ADD_CONTENT_PERMISSIONS = {
     'Equipment': 'urban: Add Equipment',
     'Lot': 'urban: Add Lot',
     'Division': 'urban: Add Division',
-    'WorkLocation': 'urban: Add WorkLocation',
     'UrbanDelay': 'urban: Add UrbanDelay',
     'Locality': 'urban: Add Locality',
     'LicenceConfig': 'urban: Add LicenceConfig',
@@ -94,7 +93,6 @@ setDefaultRoles('urban: Add EnvironmentalDeclaration', ("Manager", "Contributor"
 setDefaultRoles('urban: Add Equipment', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Lot', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Division', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add WorkLocation', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanDelay', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Locality', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add LicenceConfig', ("Manager", "Contributor"))

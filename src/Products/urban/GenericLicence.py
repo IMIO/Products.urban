@@ -122,7 +122,7 @@ schema = Schema((
         ),
         allow_oddeven=True,
         columns=('number', 'street'),
-        vocabulary=UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", sort_on='sortable_title', inUrbanConfig=False, allowedStates=['enabled'])
+        vocabulary=UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", sort_on='sortable_title', inUrbanConfig=False, allowedStates=['enabled']),
     ),
     StringField(
         name='folderCategory',

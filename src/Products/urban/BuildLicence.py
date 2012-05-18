@@ -57,7 +57,7 @@ schema = Schema((
             label_msgid='urban_label_usage',
             i18n_domain='urban',
         ),
-        required= True,
+        required=True,
         schemata='urban_description',
         vocabulary='listUsages',
     ),

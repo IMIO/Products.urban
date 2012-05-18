@@ -40,6 +40,16 @@ optional_fields = []
 
 schema = Schema((
 
+    BooleanField(
+        name='isModification',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Ismodification',
+            label_msgid='urban_label_isModification',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+    ),
     ReferenceField(
         name='geometricians',
         widget=ReferenceBrowserWidget(
@@ -51,10 +61,10 @@ schema = Schema((
             available_indexes={'Title':'Nom'},
             base_query="geometriciansBaseQuery",
             wild_card_search=True,
+            show_results_without_query=True,
             label='Geometricians',
             label_msgid='urban_label_geometricians',
             i18n_domain='urban',
-            show_results_without_query=True
         ),
         allowed_types=('Geometrician',),
         multiValued=1,
@@ -252,6 +262,7 @@ class ParcelOutLicence(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin)
             if text is not "":
                 claimsTexts.append(text)
         return claimsTexts
+
 
 
 registerType(ParcelOutLicence, PROJECTNAME)

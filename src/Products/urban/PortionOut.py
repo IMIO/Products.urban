@@ -177,7 +177,6 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
             res.append('0')
         return ",".join(res)
 
-
     security.declarePublic('hasRelatedLicences')
     def hasRelatedLicences(self, licence_type=''):
         catalog = getToolByName(self, 'portal_catalog')
@@ -201,6 +200,8 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         else:
             brains = catalog(parcelInfosIndex=parcel_infos)
         return [brain for brain in brains if brain.id != licence.id]
+
+
 
 registerType(PortionOut, PROJECTNAME)
 # end of class PortionOut

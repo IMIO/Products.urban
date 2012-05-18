@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Mar 19 13:54:19 2012\n"
-"PO-Revision-Date: Mon Mar 19 13:54:19 2012\n"
+"POT-Creation-Date: Fri May 18 13:15:38 2012\n"
+"PO-Revision-Date: Fri May 18 13:15:38 2012\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -585,14 +585,14 @@ msgstr ""
 msgid "urban_label_isKeyEvent"
 msgstr ""
 
+#. Default: "Ismodification"
+#: ParcelOutLicence.py
+msgid "urban_label_isModification"
+msgstr ""
+
 #. Default: "Issameaddressasworks"
 #: Contact.py
 msgid "urban_label_isSameAddressAsWorks"
-msgstr ""
-
-#. Default: "Issupplementary"
-#: WorkLocation.py
-msgid "urban_label_isSupplementary"
 msgstr ""
 
 #. Default: "Label"
@@ -711,7 +711,6 @@ msgstr ""
 #. Default: "Number"
 #: Contact.py
 #: PcaTerm.py
-#: WorkLocation.py
 msgid "urban_label_number"
 msgstr ""
 
@@ -921,16 +920,6 @@ msgstr ""
 msgid "urban_label_solicitRoadOpinionsTo"
 msgstr ""
 
-#. Default: "Specialfunctionname"
-#: UrbanEventType.py
-msgid "urban_label_specialFunctionName"
-msgstr ""
-
-#. Default: "Specialfunctionurl"
-#: UrbanEventType.py
-msgid "urban_label_specialFunctionUrl"
-msgstr ""
-
 #. Default: "Specificfeatures"
 #: UrbanCertificateBase.py
 msgid "urban_label_specificFeatures"
@@ -964,7 +953,6 @@ msgstr ""
 #. Default: "Street"
 #: Contact.py
 #: RecipientCadastre.py
-#: WorkLocation.py
 msgid "urban_label_street"
 msgstr ""
 

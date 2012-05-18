@@ -51,8 +51,6 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Division"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="WorkLocation"
-         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanDelay"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Locality"
