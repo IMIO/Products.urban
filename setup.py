@@ -46,7 +46,8 @@ setup(name='Products.urban',
           'testfixtures',
           'communesplone.urban.schedule',
           'communesplone.iconified_document_actions',
-          'Products.CMFPlacefulWorkflow'],
+          'Products.CMFPlacefulWorkflow',
+          'Products.ContentTypeValidator'],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',
                 'templates_per_site = Products.urban.templates:per_site']
