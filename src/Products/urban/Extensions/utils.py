@@ -111,7 +111,7 @@ def urban_check_addresses(self, restore='',  missing=''):
 
 ###############################################################################
 
-def urban_replace_templates(self, replace_globals=0, replace_events=0):
+def urban_replace_templates(self, reload_globals=0, replace_mod_globals=0, reload_events=0, replace_mod_events=0):
     """
         Call the updateAllUrbanTemplates from tests profile.
         Must be called with ...?replace_globals=1&replace_events=1 in url to replace all templates
@@ -120,9 +120,11 @@ def urban_replace_templates(self, replace_globals=0, replace_events=0):
         return "You must be a zope manager to run this script"
     if not replace_globals and not replace_events:
         return "Must be called with some parameters to do something\n" + \
-               "-> replace_globals=1 to force replacing globals templates (header, footer, styles, ...)\n" + \
-               "-> replace_events=1 to force replacing events templates\n" + \
-               "by example ...?replace_events=1\n"
+               "-> reload_globals=... to force reloading global templates (not changed on the file system)\n" + \
+               "-> replace_mod_globals=... to force replacing globals templates CHANGED by user\n" + \
+               "-> reload_events=... to force reloading events templates (not changed on the file system)\n" + \
+               "-> replace_mod_events=... to force replacing events templates CHANGED by user\n" + \
+               "by example ...?replace_mod_events=1\n"
     
     from Products.CMFCore.utils import getToolByName
     ps = getToolByName(self, 'portal_setup')

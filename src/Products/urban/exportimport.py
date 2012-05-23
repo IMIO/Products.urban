@@ -17,7 +17,7 @@ def loga(msg, type="info", gslog=None):
         gslog.warn(msg)
     return msg
 
-def updateTemplates(context, container, templates, starting_position='', replace=False):
+def updateTemplates(context, container, templates, starting_position='', reload=False, replace_mod=False):
     log = []
     position_after = starting_position
     for template in templates:
@@ -27,12 +27,12 @@ def updateTemplates(context, container, templates, starting_position='', replace
             template_id = "%s.odt" % template_id
         filePath = '%s/templates/%s' % (context._profile_path, template_id)
         new_content = file(filePath, 'rb').read()
-        log.append(updateTemplate(context, container, template, new_content, position_after, replace=replace))
+        log.append(updateTemplate(context, container, template, new_content, position_after, reload=reload, replace_mod=replace_mod))
         #log[-1][0] is the id of the last template added
         position_after = log[-1][0] 
     return log
 
-def updateTemplate(context, container, template, new_content, position_after='', replace=False):
+def updateTemplate(context, container, template, new_content, position_after='', reload=False, replace_mod=False):
     def setProperty(file, property_name, property_value):
         if property_name in file.propertyIds():
             file.manage_changeProperties({property_name:property_value})
@@ -56,9 +56,10 @@ def updateTemplate(context, container, template, new_content, position_after='',
         elif profile_name == old_template.getProperty("profileName"):
             # has the template in the product evolved ?
             if new_md5_signature == old_template.getProperty("md5Loaded"):
-                status.append('no changes')
+                if not reload:
+                    status.append('no changes')
             # the template must be updated. Has the template manually evolved in the tool ?
-            elif not replace and getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
+            elif not replace_mod and getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
                 status.append('no update: the template has been modified')
         if len(status) == 2:
             return status
@@ -101,17 +102,20 @@ def addGlobalTemplates(context):
     except ImportError:
         return
 
-    replace_globals = False
+    reload_globals = False
+    replace_mod_globals = False
     site = context.getSite()
     # we check if the step is called by the external method urban_replace_templates, with the param replace_globals
-    if site.REQUEST.form.has_key('replace_globals'):
-        replace_globals = True
+    if site.REQUEST.form.has_key('reload_globals'):
+        reload_globals = True
+    if site.REQUEST.form.has_key('replace_mod_globals'):
+        replace_mod_globals = True
 
     log = []
     gslogger = context.getLogger('addGlobalTemplates')
     tool = getToolByName(site, 'portal_urban')
     templates_folder = getattr(tool, 'globaltemplates')
-    template_log = updateTemplates(context, templates_folder, globalTemplates, replace=replace_globals)
+    template_log = updateTemplates(context, templates_folder, globalTemplates, replace_mod=replace_mod_globals, reload=reload_globals)
     for status in template_log:
         if status[1] != 'no changes':
             log.append(loga("'global templates', template='%s' => %s"%(status[0], status[1]), gslog=gslogger))
@@ -131,11 +135,14 @@ def addUrbanEventTypes(context):
     except ImportError:
         return
 
-    replace_events = False
+    reload_events = False
+    replace_mod_events = False
     site = context.getSite()
     # we check if the step is called by the external method urban_replace_templates, with the param replace_events
-    if site.REQUEST.form.has_key('replace_events'):
-        replace_events = True
+    if site.REQUEST.form.has_key('reload_events'):
+        reload_events = True
+    if site.REQUEST.form.has_key('replace_mod_events'):
+        replace_mod_events = True
 
     log = []
     gslogger = context.getLogger('addUrbanEventTypes')
@@ -165,7 +172,7 @@ def addUrbanEventTypes(context):
                 log.append(loga("%s: event='%s' => %s"%(urbanConfigId, id, 'created'), gslog=gslogger))
             last_urbaneventype_id = id
             #add the Files in the UrbanEventType
-            template_log = updateTemplates(context, newUet, uet['podTemplates'], replace=replace_events)
+            template_log = updateTemplates(context, newUet, uet['podTemplates'], replace_mod=replace_mod_events, reload=reload_events)
             for status in template_log:
                 if status[1] != 'no changes':
                     log.append(loga("%s: evt='%s', template='%s' => %s"%(urbanConfigId, last_urbaneventype_id, status[0], status[1]), gslog=gslogger))
