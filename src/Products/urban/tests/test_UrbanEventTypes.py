@@ -9,6 +9,7 @@ from Products.urban.interfaces import IAcknowledgmentEvent
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.event import ObjectEditedEvent
 from Products.CMFPlone.utils import safe_hasattr
+from Products.urban.utils import getMd5Signature
 
 class TestUrbanEventTypes(unittest.TestCase):
 
@@ -214,6 +215,13 @@ class TestUrbanEventTypes(unittest.TestCase):
         portal = self.layer['portal']
 
         # Without forcing: no change
+        # First loaded template is the same
+        my_update_file_datetime = my_file_odt.modified()
+        my_update_header_datetime = my_header_odt.modified()
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
+        self.assertEqual(my_header_odt.modified(), my_update_header_datetime)
+        self.assertEqual(my_file_odt.modified(),my_update_file_datetime)
+        # Second loaded template isn't the same and template is modified
         my_file_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
         my_header_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
         my_update_file_datetime = my_file_odt.modified()
@@ -222,34 +230,24 @@ class TestUrbanEventTypes(unittest.TestCase):
         self.assertEqual(my_header_odt.modified(), my_update_header_datetime)
         self.assertEqual(my_file_odt.modified(),my_update_file_datetime)
 
-        # Forcing replacement of globals, not events
-        portal.REQUEST.form['replace_globals'] = 1
-        my_file_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
-        my_header_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
+        # Forcing replacement when loaded template is the same as on the file system
+        my_file_odt.manage_changeProperties({"md5Loaded":getMd5Signature(my_file_odt.data), "md5Modified":getMd5Signature(my_file_odt.data)})
+        my_header_odt.manage_changeProperties({"md5Loaded":getMd5Signature(my_header_odt.data), "md5Modified":getMd5Signature(my_header_odt.data)})
+        portal.REQUEST.form['reload_globals'] = 1
         my_update_file_datetime = my_file_odt.modified()
         my_update_header_datetime = my_header_odt.modified()
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
         self.assertNotEquals(my_header_odt.modified(), my_update_header_datetime)
         self.assertEqual(my_file_odt.modified(),my_update_file_datetime)
+        portal.REQUEST.form.pop('reload_globals')
 
-        # Forcing replacement of events, not globals
-        portal.REQUEST.form.pop('replace_globals')
-        portal.REQUEST.form['replace_events'] = 1
+        # Forcing replacement when template has been modified
+        portal.REQUEST.form['replace_mod_events'] = 1
         my_file_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
         my_header_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
         my_update_file_datetime = my_file_odt.modified()
         my_update_header_datetime = my_header_odt.modified()
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
-        self.assertEquals(my_header_odt.modified(), my_update_header_datetime)
-        self.assertNotEqual(my_file_odt.modified(),my_update_file_datetime)
-
-        # Forcing replacement of events and globals
-        portal.REQUEST.form['replace_globals'] = 1
-        portal.REQUEST.form['replace_events'] = 1
-        my_file_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
-        my_header_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
-        my_update_file_datetime = my_file_odt.modified()
-        my_update_header_datetime = my_header_odt.modified()
-        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
-        self.assertNotEquals(my_header_odt.modified(), my_update_header_datetime)
-        self.assertNotEqual(my_file_odt.modified(),my_update_file_datetime)
+        self.assertEqual(my_header_odt.modified(), my_update_header_datetime)
+        self.assertNotEquals(my_file_odt.modified(),my_update_file_datetime)
+        portal.REQUEST.form.pop('replace_mod_events')
