@@ -49,7 +49,6 @@ def urban_check_addresses(self, restore='',  missing=''):
             ofile = open( infile, 'r')
             dic.update(eval(ofile.read()))
             ofile.close()
-    import os
     home = os.environ.get('INSTANCE_HOME') # like .../parts/instance in a buildout env
     save_file = os.path.join(home, '../../saved_addresses.txt') # root of the buildout
     load_dic(save_file, saved)
@@ -118,12 +117,12 @@ def urban_replace_templates(self, reload_globals=0, replace_mod_globals=0, reloa
     """
     if not check_zope_admin():
         return "You must be a zope manager to run this script"
-    out = ( "Must be called with some parameters to do something\n" + \
+    out = ["Must be called with some parameters to do something\n" + \
                "-> reload_globals=... to force reloading global templates (not changed on the file system)\n" + \
                "-> replace_mod_globals=... to force replacing globals templates CHANGED by user\n" + \
                "-> reload_events=... to force reloading events templates (not changed on the file system)\n" + \
                "-> replace_mod_events=... to force replacing events templates CHANGED by user\n" + \
-               "by example ...?replace_mod_events=1\n\n", )
+               "by example ...?replace_mod_events=1\n\n",]
     if not reload_globals and not replace_mod_globals and not reload_events and not replace_mod_events:
         return "\n".join(out)
     
