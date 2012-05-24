@@ -108,7 +108,6 @@ def initialize(context):
     import UrbanEventOpinionRequest
     import OrganisationTerm
     import MiscDemand
-    import UrbanDoc
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]
@@ -141,5 +140,19 @@ def initialize(context):
                               permission  = ADD_CONTENT_PERMISSIONS[klassname])
 
     ##code-section custom-init-bottom #fill in your manual code here
+    #Initialize UrbanDoc portal_type
+    from plone.app.blob import content
+    from Products.ATContentTypes import permission as atct
+    from Products.urban.subtypes.urbandoc import addATBlobUrbanDoc
+    replacement_types = (
+            ('UrbanDoc', addATBlobUrbanDoc),
+            )
+    for name, constructor in replacement_types:
+        cmfutils.ContentInit("%s: %s" % ("Products.urban", name),
+                content_types = (content.ATBlob,),
+                permission = DEFAULT_ADD_CONTENT_PERMISSION,
+                extra_constructors = (constructor,),
+                ).initialize(context)
+
     ##/code-section custom-init-bottom
 

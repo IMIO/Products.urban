@@ -13,12 +13,12 @@
  <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
-   <element value="File"/>
    <element value="Recipient"/>
    <element value="RecipientCadastre"/>
    <element value="PortionOut"/>
    <element value="Claimant"/>
    <element value="File"/>
+   <element value="UrbanDoc"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">urbaneventinquiryview</property>

@@ -26,7 +26,7 @@ class UrbanEventView(BrowserView):
                 continue
             data[1].append(activatedField)
         return data
-    
+
     def mayAddUrbanEvent(self):
         """
           Return True if the current user may add an UrbanEvent
@@ -49,11 +49,11 @@ class UrbanEventView(BrowserView):
 
     def getListOfTemplatesToGenerate(self):
         """
-        Return a list of dicts. Each dict contains all the infos needed in the html <href> tag to create the 
+        Return a list of dicts. Each dict contains all the infos needed in the html <href> tag to create the
         corresponding link for document generation
         """
         context = aq_inner(self.context)
-        template_list = [{'name':template.id.split('.')[0], 
+        template_list = [{'name':template.id.split('.')[0],
                           'title':template.Title(),
                           'class':'',
                           'href':self._generateDocumentHref(context, template),
@@ -71,7 +71,7 @@ class UrbanEventView(BrowserView):
 
     def getRecipients(self):
         """
-         Return the recipients of the UrbanEvent 
+         Return the recipients of the UrbanEvent
         """
         context = aq_inner(self.context)
         return context.objectValues('RecipientCadastre')

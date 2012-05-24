@@ -401,6 +401,7 @@ class UrbanBase(object):
         return self._getValueForTemplate(field_name=field_name, obj=obj, raw_value=raw_value,
                                          vocabulary=vocabulary, subfield_name=subfield)
 
+    security.declarePublic('getValuesForTemplate')
     def getValuesForTemplate(self, field_name, obj=None, raw_value=None, vocabulary=None):
         """
           Return a list of the display values of the given field
@@ -408,6 +409,7 @@ class UrbanBase(object):
         return self._getValueForTemplate(field_name=field_name, obj=obj, raw_value=raw_value,
                                          vocabulary=vocabulary, list=True)
 
+    security.declarePublic('displayValuesFromVocForTemplate')
     def displayValuesFromVocForTemplate(self, raw_value, vocabulary, obj=None):
         """
           Return the display value from a given vocabulary
@@ -416,7 +418,6 @@ class UrbanBase(object):
             return []
         return self._getValueForTemplate(obj=obj, raw_value=raw_value, vocabulary=vocabulary, list=True)
 
-    security.declarePublic('getValueForTemplate')
     def _getValueForTemplate(self, field_name='', obj=None, raw_value=None, vocabulary=None, subfield_name=None, list=False):
         """
           Return the display value of the given field

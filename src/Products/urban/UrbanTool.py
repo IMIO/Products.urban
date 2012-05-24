@@ -458,7 +458,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         while hasattr(aq_base(urbanEventObj), proposedId):
             proposedId = '%s-%d.odt' % (urbanTemplateObjId, i)
             i = i + 1
-        newUrbanDoc=urbanEventObj.invokeFactory("File",id=proposedId,title=urbanTemplateObj.Title(),content_type=GENERATED_DOCUMENT_FORMATS[fileType],file=doc)
+        newUrbanDoc=urbanEventObj.invokeFactory("UrbanDoc",id=proposedId,title=urbanTemplateObj.Title(),content_type=GENERATED_DOCUMENT_FORMATS[fileType],file=doc)
         newUrbanDoc=getattr(urbanEventObj, newUrbanDoc)
         newUrbanDoc.setFilename(proposedId)
         newUrbanDoc.setFormat(GENERATED_DOCUMENT_FORMATS[fileType])
@@ -1426,6 +1426,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             #search the existing recipients
             res = portal_catalog(portal_type='RecipientCadastre', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')
         elif specificSearch == 'searchLinkedDocuments':
+            #search the existing recipients
+            res = portal_catalog(portal_type='UrbanDoc', path='/'.join(context.getPhysicalPath()), sort_on='created')
+        elif specificSearch == 'searchLinkedAnnexes':
             #search the existing recipients
             res = portal_catalog(portal_type='File', path='/'.join(context.getPhysicalPath()), sort_on='created')
         elif specificSearch == 'searchLastElements':

@@ -421,7 +421,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         """
           Return the documents (File) of the UrbanEvent
         """
-        return self.objectValues('ATBlob')
+        return self.listFolderContents(contentFilter={"portal_type" : "UrbanDoc"})
 
     def getBeginDate(self):
         """
