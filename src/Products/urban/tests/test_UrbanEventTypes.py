@@ -212,14 +212,22 @@ class TestUrbanEventTypes(unittest.TestCase):
         my_update_header_datetime = my_header_odt.modified()
         portal = self.layer['portal']
 
-        # Without forcing: no change
-        # First loaded template is the same
+        # Without forcing
+        # First loaded template is the same: no replacement
         my_update_file_datetime = my_file_odt.modified()
         my_update_header_datetime = my_header_odt.modified()
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
         self.assertEqual(my_header_odt.modified(), my_update_header_datetime)
         self.assertEqual(my_file_odt.modified(),my_update_file_datetime)
-        # Second loaded template isn't the same and template is modified
+        # Second loaded template isn't the same and template isn't modified: replacement
+        my_file_odt.manage_changeProperties({"md5Loaded":'reloadtemplate'})
+        my_header_odt.manage_changeProperties({"md5Loaded":'reloadtemplate'})
+        my_update_file_datetime = my_file_odt.modified()
+        my_update_header_datetime = my_header_odt.modified()
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
+        self.assertNotEquals(my_header_odt.modified(), my_update_header_datetime)
+        self.assertNotEquals(my_file_odt.modified(),my_update_file_datetime)
+        # Second loaded template isn't the same and template is modified : no replacement
         my_file_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
         my_header_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
         my_update_file_datetime = my_file_odt.modified()
@@ -228,24 +236,53 @@ class TestUrbanEventTypes(unittest.TestCase):
         self.assertEqual(my_header_odt.modified(), my_update_header_datetime)
         self.assertEqual(my_file_odt.modified(),my_update_file_datetime)
 
-        # Forcing replacement when loaded template is the same as on the file system
+        # Forcing replacement when loaded template is the same as on the file system and hasn't been manually modified: replacement
         my_file_odt.manage_changeProperties({"md5Loaded":getMd5Signature(my_file_odt.data), "md5Modified":getMd5Signature(my_file_odt.data)})
         my_header_odt.manage_changeProperties({"md5Loaded":getMd5Signature(my_header_odt.data), "md5Modified":getMd5Signature(my_header_odt.data)})
         portal.REQUEST.form['reload_globals'] = 1
+        portal.REQUEST.form['reload_events'] = 1
         my_update_file_datetime = my_file_odt.modified()
         my_update_header_datetime = my_header_odt.modified()
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
         self.assertNotEquals(my_header_odt.modified(), my_update_header_datetime)
+        self.assertNotEquals(my_file_odt.modified(),my_update_file_datetime)
+
+        # Forcing replacement when loaded template is the same as on the file system but has been manually modified: no replacement
+        my_file_odt.manage_changeProperties({"md5Loaded":getMd5Signature(my_file_odt.data), "md5Modified":'modified'})
+        my_header_odt.manage_changeProperties({"md5Loaded":getMd5Signature(my_header_odt.data), "md5Modified":'modified'})
+        portal.REQUEST.form['reload_globals'] = 1
+        portal.REQUEST.form['reload_events'] = 1
+        my_update_file_datetime = my_file_odt.modified()
+        my_update_header_datetime = my_header_odt.modified()
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
+        self.assertEqual(my_header_odt.modified(), my_update_header_datetime)
         self.assertEqual(my_file_odt.modified(),my_update_file_datetime)
         portal.REQUEST.form.pop('reload_globals')
+        portal.REQUEST.form.pop('reload_events')
+
+        # Forcing replacement when loaded template is the same as on the file system, has been manually modified but is forced for this case: replacement
+        my_file_odt.manage_changeProperties({"md5Loaded":getMd5Signature(my_file_odt.data), "md5Modified":'modified'})
+        my_header_odt.manage_changeProperties({"md5Loaded":getMd5Signature(my_header_odt.data), "md5Modified":'modified'})
+        portal.REQUEST.form['reload_globals'] = 1
+        portal.REQUEST.form['reload_events'] = 1
+        portal.REQUEST.form['replace_mod_globals'] = 1
+        portal.REQUEST.form['replace_mod_events'] = 1
+        my_update_file_datetime = my_file_odt.modified()
+        my_update_header_datetime = my_header_odt.modified()
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
+        self.assertNotEquals(my_header_odt.modified(), my_update_header_datetime)
+        self.assertNotEquals(my_file_odt.modified(),my_update_file_datetime)
+        portal.REQUEST.form.pop('reload_globals')
+        portal.REQUEST.form.pop('reload_events')
 
         # Forcing replacement when template has been modified
+        portal.REQUEST.form['replace_mod_globals'] = 1
         portal.REQUEST.form['replace_mod_events'] = 1
         my_file_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
         my_header_odt.manage_changeProperties({"md5Loaded":'reloadtemplate', "md5Modified":'modified'})
         my_update_file_datetime = my_file_odt.modified()
         my_update_header_datetime = my_header_odt.modified()
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests','urban-updateAllUrbanTemplates')
-        self.assertEqual(my_header_odt.modified(), my_update_header_datetime)
+        self.assertNotEquals(my_header_odt.modified(), my_update_header_datetime)
         self.assertNotEquals(my_file_odt.modified(),my_update_file_datetime)
         portal.REQUEST.form.pop('replace_mod_events')

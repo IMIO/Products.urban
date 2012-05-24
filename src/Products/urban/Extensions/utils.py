@@ -117,14 +117,15 @@ def urban_replace_templates(self, reload_globals=0, replace_mod_globals=0, reloa
     """
     if not check_zope_admin():
         return "You must be a zope manager to run this script"
-    out = ["Must be called with some parameters to do something\n" + \
-               "-> reload_globals=... to force reloading global templates (not changed on the file system)\n" + \
-               "-> replace_mod_globals=... to force replacing globals templates CHANGED by user\n" + \
-               "-> reload_events=... to force reloading events templates (not changed on the file system)\n" + \
-               "-> replace_mod_events=... to force replacing events templates CHANGED by user\n" + \
-               "by example ...?replace_mod_events=1\n\n",]
+    out = ["<p>Must be called with some parameters to do something"]
+    out.append("-> reload_globals=... to force reloading global templates (not changed on the file system)")
+    out.append("-> replace_mod_globals=... to force replacing globals templates CHANGED by user")
+    out.append("-> reload_events=... to force reloading events templates (not changed on the file system)")
+    out.append("-> replace_mod_events=... to force replacing events templates CHANGED by user")
+    out.append("by example ...?replace_mod_events=1</p>")
+    out.append('')
     if not reload_globals and not replace_mod_globals and not reload_events and not replace_mod_events:
-        return "\n".join(out)
+        return "<br />\n".join(out)
     
     from Products.CMFCore.utils import getToolByName
     ps = getToolByName(self, 'portal_setup')
@@ -132,7 +133,7 @@ def urban_replace_templates(self, reload_globals=0, replace_mod_globals=0, reloa
             'urban-updateAllUrbanTemplates', run_dependencies=False)
     from datetime import datetime
     out.append("=> Run and finished at %s"%datetime(1973,02,12).now())
-    return "\n".join(out)
+    return "<br />\n".join(out)
 
 ###############################################################################
 
