@@ -54,13 +54,18 @@ def updateTemplate(context, container, template, new_content, position_after='',
             status.append('no changes')
         #if in the correct profile but old template has been customised or has the same content than the new one -> no changes
         elif profile_name == old_template.getProperty("profileName"):
-            # has the template in the product evolved ?
-            if new_md5_signature == old_template.getProperty("md5Loaded"):
-                if not reload:
-                    status.append('no changes')
-            # the template must be updated. Has the template manually evolved in the tool ?
-            elif not replace_mod and getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
-                status.append('no update: the template has been modified')
+            # Is the template different on the file system
+            if new_md5_signature != old_template.getProperty("md5Loaded"):
+                # We will replace unless the template has been manually modified and we don't force replace
+                if not replace_mod and getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
+                    status.append('no update: the template has been modified')
+            # No change on the file system. Forcing ?
+            elif reload:
+                # We will replace unless the template has been manually modified and we don't force replace
+                if not replace_mod and getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
+                    status.append('no update: the template has been modified')
+            else:
+                status.append('no changes')
         if len(status) == 2:
             return status
         # we can update the template
