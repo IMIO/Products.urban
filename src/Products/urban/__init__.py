@@ -142,7 +142,6 @@ def initialize(context):
     ##code-section custom-init-bottom #fill in your manual code here
     #Initialize UrbanDoc portal_type
     from plone.app.blob import content
-    from Products.ATContentTypes import permission as atct
     from Products.urban.subtypes.urbandoc import addATBlobUrbanDoc
     replacement_types = (
             ('UrbanDoc', addATBlobUrbanDoc),
