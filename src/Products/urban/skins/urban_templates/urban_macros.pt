@@ -401,7 +401,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                                         obj_wf_state obj/review_state|python: context.portal_workflow.getInfoFor(obj, 'review_state', '');
                                         member context/@@plone_portal_state/member;
                                         ploneview nocall: context/@@plone;
-                                        normalizeString nocall:ploneview/normalizeString; 
+                                        normalizeString nocall:ploneview/normalizeString;
                                         obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);
                                         obj_contenttype_class python:'contenttype-' + obj_type.lower();
                                         title_or_id obj/pretty_title_or_id">
@@ -423,7 +423,8 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                          <span tal:content="python: context.portal_membership.getMemberInfo(value) and context.portal_membership.getMemberInfo(value)['fullname'] or value">Creator fullname</span>
                         </td>
                         <td tal:condition="python: field == 'Title'">
-                            <span tal:define="global url python: test(obj.portal_type == 'File' and obj.portal_properties.site_properties.ext_editor, url + '/external_edit', url)" />
+                                <span tal:define="global url python: test((obj.portal_type == 'File'  or obj.portal_type == 'UrbanDoc')
+                                                                           and obj.portal_properties.site_properties.ext_editor, url + '/external_edit', url)" />
                             <a href="#" tal:attributes="href url;
                                                         class python: obj_wf_state_class + ' ' + obj_contenttype_class"
                                         tal:content="title_or_id" />
@@ -441,16 +442,16 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                              <div metal:use-macro="here/urban_macros/macros/displayAddress" />
                              </tal:applicant>
                              <span tal:define="last_key_event python: getattr(obj, 'last_key_event', None)">
-                               <span tal:condition="python: last_key_event and last_key_event != 'None'" > 
+                               <span tal:condition="python: last_key_event and last_key_event != 'None'" >
                                   <br/><span class="discreet" tal:content="last_key_event">Last key Event</span>
                                </span>
                              </span>
                      </td>
-                     <td tal:condition="isAParcel"  
+                     <td tal:condition="isAParcel"
                          tal:define="parcel_history python: obj.portal_type == 'PortionOut' and obj.getObject().hasRelatedLicences();
                                      parcel_id python: obj.id">
                          <span tal:condition="parcel_history" id="urban-parcel-related-licences">
-                             <a class="link-overlay" href="@@parcelrecordsview" 
+                             <a class="link-overlay" href="@@parcelrecordsview"
                                 tal:attributes="href python: context.absolute_url() + '/@@parcelrecordsview?id=' + parcel_id" i18n:translate="">
                                <img  src="linkedfolders.png" class="urban-linkedfolders-icon"/>
                              </a>
@@ -467,7 +468,10 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                 <td tal:condition="isAnEquipment">
                     <span tal:content="python: obj.getLaunchDate()" />
                 </td>
-                <td tal:condition="showActions" tal:define="thisObject python: hasattr(obj, 'getObject') and obj.getObject() or obj; needExternalEdition python: test(obj.portal_type == 'File' and obj.portal_properties.site_properties.ext_editor, True, False)">
+                <td tal:condition="showActions"
+                        tal:define="thisObject python: hasattr(obj, 'getObject') and obj.getObject() or obj;
+                                    needExternalEdition python: test((obj.portal_type == 'File' or obj.portal_type == 'UrbanDoc')
+                                                                      and obj.portal_properties.site_properties.ext_editor, True, False)">
                  <div metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
                 </td>
                 </tr>
