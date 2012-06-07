@@ -22,9 +22,9 @@ class ParcelRecordsView(BrowserView):
         context = aq_inner(self.context)
         catalog = getToolByName(context, 'portal_catalog')
         parcel = getattr(context, self.parcel_id)
-        parcel_infos = parcel.getIndexValue() 
-        base_url = '/'.join(getToolByName(context, 'portal_url')().split('/')[:-1])
-        return [{'title':brain.Title, 
-                 'url':'%s%s' % (base_url, brain.getPath()), 
+        parcel_infos = parcel.getIndexValue()
+        base_url = getToolByName(context, 'portal_url').getPortalObject().absolute_url()
+        return [{'title':brain.Title,
+            'url':'%s/%s' % (base_url, '/'.join(brain.getPath().split('/')[2:])),
                  'class':'state-%s contenttype-%s' % (brain.review_state, brain.portal_type.lower())}
                 for brain in catalog(parcelInfosIndex=parcel_infos, sort_on='sortable_title') if brain.id != context.id]
