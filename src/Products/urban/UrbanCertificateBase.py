@@ -295,7 +295,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         return res
 
     security.declarePublic('getSpecificFeaturesForTemplate')
-    def getSpecificFeaturesForTemplate(self, township=False):
+    def getSpecificFeaturesForTemplate(self, township=False, active_style='', inactive_style='striked'):
         """
           Return formatted specific features (striked or not)
           Helper method used in templates
@@ -322,10 +322,16 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
             obj = esf.getObject()
             if esf.id in specificFeatures:
                 #render the expressions
-                res.append(obj.getRenderedDescription(self))
+                render = obj.getRenderedDescription(self)
+                if active_style:
+                    render = tool.decorateHTML(active_style, render)
+                res.append(render)
             else:
                 #replace the expressions by a null value, aka "..."
-                res.append(tool.decorateHTML('striked', obj.getRenderedDescription(self, renderToNull=True)))
+                render = obj.getRenderedDescription(self, renderToNull=True)
+                if inactive_style:
+                    render = tool.decorateHTML(inactive_style, render)
+                res.append(render)
 
         #add customSpecificFeatures
         if not township:

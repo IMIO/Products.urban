@@ -253,6 +253,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
                 if wf_tool.getInfoFor(template, 'review_state') == 'enabled']
     security.declarePublic('eventDateLabel')
     security.declarePublic('eventDateLabel')
+
     def eventDateLabel(self):
         """
          Returns the variable label
