@@ -68,6 +68,8 @@ def migrateToPlone4(context):
     restoreOrganisationTermsLink(context)
     #migrate applicants of CUs to proprietaries
     migrateApplicantToProprietaryForCU(context)
+    #migrate templates and generated files portal_type from 'File' to 'UrbanDoc'
+    migrateFilesToUrbanDoc(context)
 
 def migrateToWorkLocationsDataGridField(context):
     """
@@ -79,7 +81,7 @@ def migrateToWorkLocationsDataGridField(context):
         return
 
     site = context.getSite()
-    
+
     if not site.portal_catalog(portal_type='WorkLocation'): return
 
     brains = site.portal_catalog(portal_type = ['BuildLicence', 'Declaration',
@@ -364,7 +366,7 @@ class UrbanEventToUrbanEventInquiryMigrator(object, InplaceATFolderMigrator):
 def migrationToUrbanEventInquiries(context):
     """
       Call UrbanEventToUrbanEventInquiryMigrator
-    """    
+    """
     if isNoturbanMigrationsProfile(context): return
 
     logger = context.getLogger('migrationToUrbanEventInquiries')
@@ -443,7 +445,7 @@ class UrbanVocabularyTermToOrganisationTermMigrator(object, InplaceATItemMigrato
 
     def custom(self):
         """
-          We have to link the OrganisationTerm to its corresponding UrbanEventType 
+          We have to link the OrganisationTerm to its corresponding UrbanEventType
         """
         attrs = ['title', 'description', 'extraValue']
         for attr in attrs:
@@ -457,7 +459,7 @@ class UrbanVocabularyTermToOrganisationTermMigrator(object, InplaceATItemMigrato
                 return
         event.notify(ObjectInitializedEvent(self.new))
         logger.info("OrganisationTerm '%s' has been migrated" % self.new_id)
-     
+
 def migrateFoldermakersTerms(context):
     """
       Run the UrbanVocabularyTermToOrganisationTermMigrator
@@ -506,7 +508,7 @@ def migrateFoldermanagers(context):
             continue
         old_folder = licence_cfg_folder.foldermanagers
         logger.info("'%s' will be  migrated!" % old_folder.absolute_url())
-        #set the value for the field 'ManageableLicences' depending on the licence type 
+        #set the value for the field 'ManageableLicences' depending on the licence type
         #where we found the foldermanagers
         for old_foldermanager in old_folder.objectValues():
             foldermanager_id = old_foldermanager.getId()
@@ -522,7 +524,7 @@ def migrateFoldermanagers(context):
                     manageable_licences.append(licence)
                 manageable_licences.append(licence_type)
                 foldermanager.setManageableLicences(manageable_licences)
-            logger.info("Foldermanager '%s' has been migrated" % foldermanager.Title()) 
+            logger.info("Foldermanager '%s' has been migrated" % foldermanager.Title())
 
             for licence in old_foldermanager.getBRefs():
                 ref_foldermanagers = licence.getFoldermanagers()
@@ -616,7 +618,7 @@ def migrateOpinionRequestTalExpression(context):
 
 def migrateConfigFoldersAllowedTypes(context):
     """
-    Some object types have changed throughout urban evolution: the allowed content types of some config folder should 
+    Some object types have changed throughout urban evolution: the allowed content types of some config folder should
     follow these changes accordingly.
     """
     site = context.getSite()
@@ -637,7 +639,7 @@ def migrateConfigFoldersAllowedTypes(context):
 
 def restoreOrganisationTermsLink(context):
     """
-    Check that the organisationTerm are correctly linked to an urbaneventype, 
+    Check that the organisationTerm are correctly linked to an urbaneventype,
     If its not the case, search for the correct urbanEventType to link.
     If we couldnt find any, create a new one and link it.
     """
@@ -657,7 +659,7 @@ def restoreOrganisationTermsLink(context):
                     brains = catalog(portal_type=('UrbanEventType',), path=uet_path)
                     #search for an existing corresponding urbanEventType
                     for brain in brains:
-                        if brain.id.startswith("%s-" % vocterm.id) or brain.id.endswith("-%s" % vocterm.id): 
+                        if brain.id.startswith("%s-" % vocterm.id) or brain.id.endswith("-%s" % vocterm.id):
                             #if we find one, we link it
                             vocterm.setLinkedOpinionRequestEvent(brain.getObject())
                             logger.info("Link event '%s' to organisation term '%s'"%(brain.getPath(), '/'.join(vocterm.getPhysicalPath())))
@@ -681,3 +683,44 @@ def migrateApplicantToProprietaryForCU(context):
             applicant.portal_type = 'Proprietary'
             applicant.reindexObject()
             logger.info("Migrated applicant %s to a proprietary" % applicant.Title())
+
+def migrateFilesToUrbanDoc(context):
+    """
+    we need our own portal_type for the generated urban documents (at least to distinguish them from annex documents
+    which are added manually)
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    logger = context.getLogger('migrationToUrbanDoc')
+    portal = context.getSite()
+    path = '/'.join(['', portal.getPhysicalPath()[1], 'portal_urban', 'globaltemplates'])
+    migrators = {
+                    FilesToUrbanDocMigrator: {'SearchableText':['cu1 OR cu2 OR decl OR div OR lot OR miscdemand OR "not" OR urb']},
+                    FilesToUrbanDocMigrator: {'path':path},
+                }
+    #to avoid link integrity problems, disable checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
+
+    #Run the migrations
+    for migrator, query in migrators.iteritems():
+        walker = migrator.walker(portal, migrator, query=query)
+        walker.go()
+        # we need to reset the class variable to avoid using current query in next use of CustomQueryWalker
+        walker.__class__.additionalQuery = {}
+    #enable linkintegrity checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
+    logger.info("content migration done!")
+
+
+class FilesToUrbanDocMigrator(object, InplaceATItemMigrator):
+    """
+    migrate urbaneventypes templates and genrated documents to UrbanDoc type
+    """
+    walker = CustomQueryWalker
+    src_meta_type = "ATBlob"
+    src_portal_type = "File"
+    dst_meta_type = "UrbanDoc"
+    dst_portal_type = "UrbanDoc"
+
+    def __init__(self, *args, **kwargs):
+        InplaceATItemMigrator.__init__(self, *args, **kwargs)
