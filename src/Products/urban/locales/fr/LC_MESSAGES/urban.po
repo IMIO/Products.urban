@@ -818,7 +818,7 @@ msgid "notaryletter_urbanconfig_title"
 msgstr "Paramètres des Lettres de notaire"
 
 msgid "notaryletters"
-msgstr "Lettres de notaires"
+msgstr "Lettres de notaire"
 
 msgid "number_of_claimants"
 msgstr "Nombre de réclamants"
