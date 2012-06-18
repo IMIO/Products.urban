@@ -400,7 +400,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'podTemplates': (
                                      {'id': "cu1-recepisse", 'title': "Récépissé de la demande"},
-                                    ),
+                                   ),
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
@@ -422,6 +422,8 @@ urbanEventTypes = {
                     'podTemplates': (
                                      {'id': "cu1-lettre-notaire", 'title': "Lettre au notaire (ou demandeur) (octroi)"},
                                      {'id': "cu1-certif", 'title': "Certificat d'urbanisme 1 (annexe 35 formulaire I B)"},
+                                     {'id': "cu1-demande-paiement", 'title': "Demande de paiement"},
+                                     {'id': "cu1-rappel-demande-paiement", 'title': "Rappel paiement"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
                     },
