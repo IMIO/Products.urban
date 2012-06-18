@@ -400,15 +400,15 @@ class Contact(BaseContent, BrowserDefaultMixin):
         Only show the representedBy field if the current Contact is an Applicant (portal_type)
         and only for some URBAN_TYPES
         """
-        if not self.getPortalTypeName() == 'Applicant':
-            return False
         parent = self.aq_inner.aq_parent
         #if the Contact is just created, we are in portal_factory.The parent is a TempFolder
         if parent.portal_type == 'TempFolder':
             parent = parent.aq_parent.aq_parent
-        if not parent.portal_type in ['BuildLicence', 'ParcelOutLicence', ]:
-            return False
-        return True
+        if parent.portal_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne']:
+            return True
+        if self.getPortalTypeName() == 'Applicant':
+            return True
+        return False
 
     security.declarePublic('listRepresentedBys')
     def listRepresentedBys(self):
@@ -418,19 +418,17 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
         #the potential representator are varying upon licence type
         #moreover, as we are using ReferenceField, we can not use getattr...
-        lst = []
+        potential_contacts = []
         parent = self.aq_inner.aq_parent
         if hasattr(parent, 'getNotaryContact'):
-            lst=lst+list(parent.getNotaryContact())
+            potential_contacts.extend(list(parent.getNotaryContact()))
         if hasattr(parent, 'getGeometricians'):
-            lst=lst+list(parent.getGeometricians())
+            potential_contacts.extend(list(parent.getGeometricians()))
         if hasattr(parent, 'getArchitects'):
-            lst=lst+parent.getArchitects()
+            potential_contacts.extend(parent.getArchitects())
 
-        vocab = []
-        for elt in lst:
-            vocab.append((elt.UID(), elt.Title()))
-        return DisplayList(tuple(vocab))
+        vocabulary = [(contact.UID(), contact.Title(),) for contact in potential_contacts]
+        return DisplayList(tuple(vocabulary))
 
     security.declarePublic('getPersonTitle')
     def getPersonTitle(self, short=False, theObject=False):
