@@ -404,6 +404,17 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
+                    'id':"transmis-dossier-rw",
+                    'title':"Transmis du dossier RW",
+                    'activatedFields': ["decisionDate", "decision"],
+                    'deadLineDelay': 15,
+                    'podTemplates': (
+                                     {'id': "cu1-envoi-dossier-rw", 'title': "Lettre d'envoi du dossier à la RW"},
+                                     {'id': "cu1-envoi-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+                    },
+                    {
                     'id': "octroi-cu1",
                     'title': "Octroi du certificat",
                     'activatedFields': [],
