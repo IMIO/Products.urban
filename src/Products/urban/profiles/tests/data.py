@@ -53,6 +53,39 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IModificationDepositEvent',
                     },
                     {
+                    'id': "fiche-technique-voirie",
+                    'title': "Fiche technique voirie",
+                    'activatedFields': ['decision', 'opinionText', ],
+                    'deadLineDelay': 0,
+                    'TALCondition' : "",
+                    'podTemplates': (
+                                     {'id': "urb-avis-technique-voirie", 'title': "Avis technique"},
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+                    },
+                    {
+                    'id': "fiche-technique-energie",
+                    'title': "Fiche technique conseiller en énergie",
+                    'activatedFields': ['decision', 'opinionText', ],
+                    'deadLineDelay': 0,
+                    'TALCondition' : "",
+                    'podTemplates': (
+                                     {'id': "urb-avis-technique-energie", 'title': "Avis technique"},
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+                    },
+                    {
+                    'id': "fiche-technique-urbanisme",
+                    'title': "Fiche technique urbanisme",
+                    'activatedFields': ['decision', 'opinionText', ],
+                    'deadLineDelay': 0,
+                    'TALCondition' : "",
+                    'podTemplates': (
+                                     {'id': "urb-avis-technique-urbanisme", 'title': "Avis technique"},
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+                    },
+                    {
                     'id': "dossier-incomplet",
                     'title': "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
                     'activatedFields': [],
@@ -402,6 +435,28 @@ urbanEventTypes = {
                                      {'id': "cu1-recepisse", 'title': "Récépissé de la demande"},
                                    ),
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+                    },
+                    {
+                    'id': "fiche-technique-voirie",
+                    'title': "Fiche technique voirie",
+                    'activatedFields': ['decision', 'opinionText', ],
+                    'deadLineDelay': 0,
+                    'TALCondition' : "",
+                    'podTemplates': (
+                                     {'id': "cu1-avis-technique-voirie", 'title': "Avis technique"},
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+                    },
+                    {
+                    'id': "fiche-technique-urbanisme",
+                    'title': "Fiche technique urbanisme",
+                    'activatedFields': ['decision', 'opinionText', ],
+                    'deadLineDelay': 0,
+                    'TALCondition' : "",
+                    'podTemplates': (
+                                     {'id': "cu1-avis-technique-urbanisme", 'title': "Avis technique"},
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
                     },
                     {
                     'id':"transmis-dossier-rw",

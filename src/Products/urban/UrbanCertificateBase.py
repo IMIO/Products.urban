@@ -357,17 +357,6 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         return self.getProprietaries()
 
-    security.declarePublic('getLicencesOfTheParcels')
-    def getLicencesOfTheParcels(self, licence_type=''):
-        history = []
-        licence_uids = set([])
-        for parcel in self.getParcels():
-            for brain in parcel.getRelatedLicences(licence_type=licence_type):
-                if brain.UID not in licence_uids:
-                    history.append(brain)
-                    licence_uids.add(brain.UID)
-        return history
-
     security.declarePublic('getBuildlicencesOfTheParcels')
     def getBuildlicencesOfTheParcels(self):
         limit_date = DateTime('1977/01/01')
@@ -379,28 +368,10 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         limit_date = self.getLastTheLicence().getEventDate() - 731
         return self.getLicenceOfTheParcels('UrbanCertificateOne', limit_date)
 
-    security.declarePublic('getUrbanCertificateTwoOfTheParcels')
-    def getUrbanCertificateTwoOfTheParcels(self):
-        #cu2 cannot be older than 2 years
-        limit_date = self.getLastTheLicence().getEventDate() - 731
-        return self.getLicenceOfTheParcels('UrbanCertificateTwo', limit_date)
-
     security.declarePublic('getParceloutlicenceOfTheParcels')
     def getParceloutlicenceOfTheParcels(self):
         limit_date = DateTime('1977/01/01')
         return self.getLicenceOfTheParcels('ParcelOutLicence', limit_date)
-
-    def getLicenceOfTheParcels(self, licence_type, limit_date):
-        licences = []
-        for brain in self.getLicencesOfTheParcels(licence_type=licence_type):
-            licence = brain.getObject()
-            delivered = licence.getLastTheLicence()
-            if delivered and delivered.getDecisionDate() > limit_date:
-                if delivered.getDecision() == 'favorable':
-                    licences.append(licence)
-                elif licence_type in ['UrbanCertificateTwo', 'UrbanCertificateOne']:
-                    licences.append(licence)
-        return licences
 
     security.declarePublic('hasEventNamed')
     def hasEventNamed(self, title):

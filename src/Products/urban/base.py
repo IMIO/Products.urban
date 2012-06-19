@@ -402,12 +402,12 @@ class UrbanBase(object):
                                          vocabulary=vocabulary, subfield_name=subfield)
 
     security.declarePublic('getValuesForTemplate')
-    def getValuesForTemplate(self, field_name, obj=None, raw_value=None, vocabulary=None):
+    def getValuesForTemplate(self, field_name, obj=None, raw_value=None, vocabulary=None, subfield=None):
         """
           Return a list of the display values of the given field
         """
         return self._getValueForTemplate(field_name=field_name, obj=obj, raw_value=raw_value,
-                                         vocabulary=vocabulary, list=True)
+                                         vocabulary=vocabulary, subfield_name=subfield, list=True)
 
     security.declarePublic('displayValuesFromVocForTemplate')
     def displayValuesFromVocForTemplate(self, raw_value, vocabulary, obj=None):
