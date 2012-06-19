@@ -396,7 +396,7 @@ urbanEventTypes = {
                     {
                     'id': "depot-de-la-demande",
                     'title': "Dépôt de la demande",
-                    'activatedFields': [],
+                    'activatedFields': ['receivedDocumentReference'],
                     'deadLineDelay': 15,
                     'podTemplates': (
                                      {'id': "cu1-recepisse", 'title': "Récépissé de la demande"},
