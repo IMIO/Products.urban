@@ -47,7 +47,6 @@ slave_fields_subdivision = (
     {'name': 'parcellings',
      'action': 'show',
      'hide_values': (True, ),
-     'hide_values': (True, ),
     },
 )
 
@@ -518,6 +517,7 @@ schema = Schema((
             label='Parcellings',
             label_msgid='urban_label_parcellings',
             i18n_domain='urban',
+            default_search_index='Title',
         ),
         allowed_types=('ParcellingTerm',),
         schemata='urban_location',
