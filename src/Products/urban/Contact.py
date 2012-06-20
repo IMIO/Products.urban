@@ -477,7 +477,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
         #special behaviour for the applicants if we mentionned that the applicant's address
         #is the same as the works's address
-        if self.portal_type == "Applicant" and self.getIsSameAddressAsWorks():
+        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
             #get the works address
             licence = self.aq_inner.aq_parent
             workLocations = licence.getWorkLocations()
@@ -509,7 +509,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
         #special behaviour for the applicants if we mentionned that the applicant's address
         #is the same as the works's address
-        if self.portal_type == "Applicant" and self.getIsSameAddressAsWorks():
+        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
             #get the works address
             street = self._getStreetFromLicence()
             if not street:
@@ -525,7 +525,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
         #special behaviour for the applicants if we mentionned that the applicant's address
         #is the same as the works's address
-        if self.portal_type == "Applicant" and self.getIsSameAddressAsWorks():
+        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
             #get the works address
             street = self._getStreetFromLicence()
             if not street:
@@ -541,7 +541,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
         #special behaviour for the applicants if we mentionned that the applicant's address
         #is the same as the works's address
-        if self.portal_type == "Applicant" and self.getIsSameAddressAsWorks():
+        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
             #get the works address
             street = self._getStreetFromLicence()
             if not street:
