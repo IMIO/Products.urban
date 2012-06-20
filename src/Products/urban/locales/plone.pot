@@ -78,6 +78,9 @@ msgstr ""
 msgid "PortionOut"
 msgstr ""
 
+msgid "Proprietary"
+msgstr ""
+
 msgid "Recipient"
 msgstr ""
 

@@ -85,6 +85,9 @@ msgstr "Sélectionnez au moins un type de permis!"
 msgid "PortionOut"
 msgstr "Parcelle"
 
+msgid "Proprietary"
+msgstr "Propriétaire"
+
 msgid "Recipient"
 msgstr "Destinataire"
 
