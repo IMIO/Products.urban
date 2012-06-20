@@ -832,9 +832,14 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         return licences
 
     security.declarePublic('getUrbanCertificateTwoOfTheParcels')
-    def getUrbanCertificateTwoOfTheParcels(self):
+    def getUrbanCertificateTwoOfTheParcels(self, date=None):
         #cu2 cannot be older than 2 years
-        limit_date = self.getLastTheLicence().getEventDate() - 731
+        if  self.getLastTheLicence():
+            limit_date = self.getLastTheLicence().getEventDate() - 731
+        elif date:
+            limit_date = date - 731
+        else:
+            limit_date = self.getLastDeposit().getEventDate() - 731
         return self.getLicenceOfTheParcels('UrbanCertificateTwo', limit_date)
 
 

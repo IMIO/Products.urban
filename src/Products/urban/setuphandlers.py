@@ -392,7 +392,7 @@ def addUrbanConfigs(context):
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="rcu",title=u"Règlement communal d'urbanisme", 
-                    description="<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme [[python: object.getValueForTemplate('folderZone')]] est applicable;</p>"
+                    description="<p>est situé sur le territoire ou la partie du territoire communal où le règlement régional d'urbanisme [[python: object.getValueForTemplate('folderZone')]] est applicable;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="rcu-approuve",title=u"Règlement communal d'urbanisme (approuvé)",
