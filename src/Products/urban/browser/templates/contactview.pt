@@ -50,7 +50,7 @@
        <span class="discreet" tal:condition="not: society" i18n:translate="content_none">None</span>
       </td>
      </tr>
-     <tr tal:condition="python: here.portal_type == 'Applicant'">
+     <tr tal:condition="python: here.portal_type == 'Applicant' or here.portal_type == 'Proprietary'">
       <td valign="top"><b><span i18n:translate="urban_label_isSameAddressAsWorks">Is the applicant address the same address as the works?</span> :</b></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('isSameAddressAsWorks', mode='view')" /></td>

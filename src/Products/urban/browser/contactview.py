@@ -30,7 +30,7 @@ class ContactView(BrowserView):
             linkedLicenceBrains = uid_catalog(UID=came_from_licence_uid)
             linkedLicence = linkedLicenceBrains[0].getObject()
             return linkedLicence.absolute_url()
-   
+
     def showLinkToLinkedLicence(self):
         """
           Check if we have what necessary to show a link to the linked licence :
@@ -53,7 +53,7 @@ class ContactView(BrowserView):
                 if linkedLicenceBrains:
                     res = True
         return res
-    
+
     def getContactLegendValue(self):
         """
           Generates a label that will be used in the legend of a fieldset

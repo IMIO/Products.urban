@@ -133,7 +133,7 @@ schema = Schema((
         default=False,
         widget=MasterBooleanWidget(
             slave_fields=slave_fields_address,
-            condition="python: here.portal_type == 'Applicant'",
+            condition="python: here.portal_type == 'Applicant' or here.portal_type == 'Proprietary'",
             label='Issameaddressasworks',
             label_msgid='urban_label_isSameAddressAsWorks',
             i18n_domain='urban',
