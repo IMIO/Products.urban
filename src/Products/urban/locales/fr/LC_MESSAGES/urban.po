@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2012-05-18 11:18+0000\n"
+"POT-Creation-Date: 2012-06-21 12:47+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -343,6 +343,16 @@ msgstr "Une carte sera affichée lorsque les parcelles concernées auront été 
 
 #. Default: "Select the specific features from the left box and drop them in the right box to select them"
 #: UrbanCertificateBase.py
+msgid "certificateone_locationspecificfeatures_descr"
+msgstr ""
+
+#. Default: "Select the specific features from the left box and drop them in the right box to select them"
+#: UrbanCertificateBase.py
+msgid "certificateone_roadspecificfeatures_descr"
+msgstr ""
+
+#. Default: "Select the specific features from the left box and drop them in the right box to select them"
+#: UrbanCertificateBase.py
 msgid "certificateone_specificfeatures_descr"
 msgstr "Sélectionnez les éléments à activer"
 
@@ -487,11 +497,11 @@ msgstr "Données concernant l'événement"
 msgid "event_inquiry_claimants"
 msgstr "Réclamants"
 
-msgid "event_linked_documents"
-msgstr "Documents liés à cet événement"
-
 msgid "event_linked_annexes"
 msgstr "Annexes liées à cet événement"
+
+msgid "event_linked_documents"
+msgstr "Documents liés à cet événement"
 
 msgid "external_decisions_folder_title"
 msgstr "Décision des avis externes"
@@ -1319,7 +1329,7 @@ msgstr "Boîte"
 msgid "urban_label_catchmentArea"
 msgstr "Zone de captage"
 
-#. Default: "Catégorie"
+#. Default: "Category"
 #: MiscDemand.py
 #, fuzzy
 msgid "urban_label_category"
@@ -1697,6 +1707,11 @@ msgstr "Est un avis?"
 msgid "urban_label_isDecentralized"
 msgstr "Commune décentralisée?"
 
+#. Default: "Isdefaultvalue"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_isDefaultValue"
+msgstr ""
+
 #. Default: "Isinpca"
 #: BuildLicence.py
 msgid "urban_label_isInPCA"
@@ -1797,6 +1812,11 @@ msgstr "DGRNE Sous-sol (joindre annexe 2 et 3) (Fiche Urbanisme)"
 #: GenericLicence.py
 msgid "urban_label_locationFloodingLevel"
 msgstr "Zone inondable (Fiche Urbanisme)"
+
+#. Default: "Locationspecificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_locationSpecificFeatures"
+msgstr "Particularités du bien (Fiche Urbanisme)"
 
 #. Default: "Locationtechnicaladvice"
 #: BuildLicence.py
@@ -2084,6 +2104,11 @@ msgstr "Equipement de la voirie au droit du bien"
 msgid "urban_label_roadModification"
 msgstr "Modification de voirie"
 
+#. Default: "Roadspecificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_roadSpecificFeatures"
+msgstr "Particularités du bien (Fiche Voirie)"
+
 #. Default: "Roadtechnicaladvice"
 #: BuildLicence.py
 msgid "urban_label_roadTechnicalAdvice"
@@ -2103,6 +2128,11 @@ msgstr "Entrez le nom, le prénom ou le numéro de registre national.  Vous pouv
 #: PortionOut.py
 msgid "urban_label_section"
 msgstr "Section"
+
+#. Default: "Selectedfield"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_selectedField"
+msgstr ""
 
 #. Default: "ShowTitle"
 #: UrbanEventType.py

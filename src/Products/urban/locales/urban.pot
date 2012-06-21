@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-05-18 11:18+0000\n"
+"POT-Creation-Date: 2012-06-21 12:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -342,6 +342,16 @@ msgstr ""
 
 #. Default: "Select the specific features from the left box and drop them in the right box to select them"
 #: UrbanCertificateBase.py
+msgid "certificateone_locationspecificfeatures_descr"
+msgstr ""
+
+#. Default: "Select the specific features from the left box and drop them in the right box to select them"
+#: UrbanCertificateBase.py
+msgid "certificateone_roadspecificfeatures_descr"
+msgstr ""
+
+#. Default: "Select the specific features from the left box and drop them in the right box to select them"
+#: UrbanCertificateBase.py
 msgid "certificateone_specificfeatures_descr"
 msgstr ""
 
@@ -486,10 +496,10 @@ msgstr ""
 msgid "event_inquiry_claimants"
 msgstr ""
 
-msgid "event_linked_documents"
+msgid "event_linked_annexes"
 msgstr ""
 
-msgid "event_linked_annexes"
+msgid "event_linked_documents"
 msgstr ""
 
 msgid "external_decisions_folder_title"
@@ -1694,6 +1704,11 @@ msgstr ""
 msgid "urban_label_isDecentralized"
 msgstr ""
 
+#. Default: "Isdefaultvalue"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_isDefaultValue"
+msgstr ""
+
 #. Default: "Isinpca"
 #: BuildLicence.py
 msgid "urban_label_isInPCA"
@@ -1793,6 +1808,11 @@ msgstr ""
 #. Default: "Locationfloodinglevel"
 #: GenericLicence.py
 msgid "urban_label_locationFloodingLevel"
+msgstr ""
+
+#. Default: "Locationspecificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_locationSpecificFeatures"
 msgstr ""
 
 #. Default: "Locationtechnicaladvice"
@@ -2081,6 +2101,11 @@ msgstr ""
 msgid "urban_label_roadModification"
 msgstr ""
 
+#. Default: "Roadspecificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_roadSpecificFeatures"
+msgstr ""
+
 #. Default: "Roadtechnicaladvice"
 #: BuildLicence.py
 msgid "urban_label_roadTechnicalAdvice"
@@ -2099,6 +2124,11 @@ msgstr ""
 #. Default: "Section"
 #: PortionOut.py
 msgid "urban_label_section"
+msgstr ""
+
+#. Default: "Selectedfield"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_selectedField"
 msgstr ""
 
 #. Default: "ShowTitle"

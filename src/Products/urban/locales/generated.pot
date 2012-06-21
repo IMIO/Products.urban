@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Jun 20 14:49:58 2012\n"
-"PO-Revision-Date: Wed Jun 20 14:49:58 2012\n"
+"POT-Creation-Date: Thu Jun 21 13:26:38 2012\n"
+"PO-Revision-Date: Thu Jun 21 13:26:38 2012\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,16 @@ msgstr ""
 #. Default: "Enter the different kind of spelling for this locality"
 #: Locality.py
 msgid "alsocalled_descr"
+msgstr ""
+
+#. Default: "Select the specific features from the left box and drop them in the right box to select them"
+#: UrbanCertificateBase.py
+msgid "certificateone_locationspecificfeatures_descr"
+msgstr ""
+
+#. Default: "Select the specific features from the left box and drop them in the right box to select them"
+#: UrbanCertificateBase.py
+msgid "certificateone_roadspecificfeatures_descr"
 msgstr ""
 
 #. Default: "Select the specific features from the left box and drop them in the right box to select them"
@@ -646,6 +656,11 @@ msgstr ""
 msgid "urban_label_locationFloodingLevel"
 msgstr ""
 
+#. Default: "Locationspecificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_locationSpecificFeatures"
+msgstr ""
+
 #. Default: "Locationtechnicaladvice"
 #: BuildLicence.py
 msgid "urban_label_locationTechnicalAdvice"
@@ -885,6 +900,11 @@ msgstr ""
 msgid "urban_label_roadEquipments"
 msgstr ""
 
+#. Default: "Roadspecificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_roadSpecificFeatures"
+msgstr ""
+
 #. Default: "Roadtechnicaladvice"
 #: BuildLicence.py
 msgid "urban_label_roadTechnicalAdvice"
@@ -898,6 +918,11 @@ msgstr ""
 #. Default: "Section"
 #: PortionOut.py
 msgid "urban_label_section"
+msgstr ""
+
+#. Default: "Selectedfield"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_selectedField"
 msgstr ""
 
 #. Default: "Showtitle"
