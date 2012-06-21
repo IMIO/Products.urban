@@ -32,7 +32,8 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from DateTime import DateTime
 
-optional_fields = ['customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks', ]
+optional_fields = ['roadSpecificFeatures', 'locationSpecificFeatures', 'customSpecificFeatures',
+                   'townshipSpecificFeatures', 'opinionsToAskIfWorks', ]
 ##/code-section module-header
 
 schema = Schema((
@@ -70,6 +71,36 @@ schema = Schema((
         schemata='urban_description',
         multiValued=True,
         vocabulary=UrbanVocabulary('specificfeatures'),
+        enforceVocabulary=True,
+    ),
+    LinesField(
+        name='roadSpecificFeatures',
+        widget=MultiSelectionWidget(
+            description_msgid="certificateone_roadspecificfeatures_descr",
+            description='Select the specific features from the left box and drop them in the right box to select them',
+            format='checkbox',
+            label='Roadspecificfeatures',
+            label_msgid='urban_label_roadSpecificFeatures',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=True,
+        vocabulary=UrbanVocabulary('roadspecificfeatures'),
+        enforceVocabulary=True,
+    ),
+    LinesField(
+        name='locationSpecificFeatures',
+        widget=MultiSelectionWidget(
+            description_msgid="certificateone_locationspecificfeatures_descr",
+            description='Select the specific features from the left box and drop them in the right box to select them',
+            format='checkbox',
+            label='Locationspecificfeatures',
+            label_msgid='urban_label_locationSpecificFeatures',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=True,
+        vocabulary=UrbanVocabulary('locationspecificfeatures'),
         enforceVocabulary=True,
     ),
     DataGridField(

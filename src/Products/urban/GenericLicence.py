@@ -514,10 +514,10 @@ schema = Schema((
             wild_card_search=True,
             startup_directory="portal_urban/parcellings",
             restrict_browsing_to_startup_directory=True,
+            default_search_index='Title',
             label='Parcellings',
             label_msgid='urban_label_parcellings',
             i18n_domain='urban',
-            default_search_index='Title',
         ),
         allowed_types=('ParcellingTerm',),
         schemata='urban_location',
@@ -807,7 +807,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         """
         return not self.hasEventNamed(title)
 
-
     security.declarePublic('getLicencesOfTheParcels')
     def getLicencesOfTheParcels(self, licence_type=''):
         history = []
@@ -841,6 +840,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         else:
             limit_date = self.getLastDeposit().getEventDate() - 731
         return self.getLicenceOfTheParcels('UrbanCertificateTwo', limit_date)
+
 
 
 registerType(GenericLicence, PROJECTNAME)
