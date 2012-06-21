@@ -489,6 +489,9 @@ msgstr ""
 msgid "event_linked_documents"
 msgstr ""
 
+msgid "event_linked_annexes"
+msgstr ""
+
 msgid "external_decisions_folder_title"
 msgstr ""
 

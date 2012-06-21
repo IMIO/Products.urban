@@ -490,6 +490,9 @@ msgstr "Réclamants"
 msgid "event_linked_documents"
 msgstr "Documents liés à cet événement"
 
+msgid "event_linked_annexes"
+msgstr "Annexes liées à cet événement"
+
 msgid "external_decisions_folder_title"
 msgstr "Décision des avis externes"
 
