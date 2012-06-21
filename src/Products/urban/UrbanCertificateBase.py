@@ -326,7 +326,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         return res
 
     security.declarePublic('getSpecificFeaturesForTemplate')
-    def getSpecificFeaturesForTemplate(self, township=False, active_style='', inactive_style='striked'):
+    def getSpecificFeaturesForTemplate(self, where=[''], active_style='', inactive_style='striked'):
         """
           Return formatted specific features (striked or not)
           Helper method used in templates
@@ -334,40 +334,38 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         tool = getToolByName(self, 'portal_urban')
         portal_catalog = getToolByName(self, 'portal_catalog')
         config = tool.getUrbanConfig(self, urbanConfigId=self.portal_type.lower())
-        if township:
-            specificFeaturesPath = '/'.join(config.townshipspecificfeatures.getPhysicalPath())
-        else:
-            specificFeaturesPath = '/'.join(config.specificfeatures.getPhysicalPath())
-        params = {
-                  'path': specificFeaturesPath,
-                  'review_state': 'enabled',
-        }
+        #get every enabled specific features from each config
+        enabledSpecificFeatures = {}
+        for location in where:
+            specificFeaturesPath = '/'.join(getattr(config, "%sspecificfeatures" % location).getPhysicalPath())
+            params = {
+                      'path': specificFeaturesPath,
+                      'review_state': 'enabled',
+            }
+            enabled_terms = portal_catalog(**params)
+            enabledSpecificFeatures[location] = portal_catalog(**params)
         res=[]
-        #get every enabled specific features from the config
-        enabledSpecificFeatures = portal_catalog(**params)
-        if township:
-            specificFeatures = self.getTownshipSpecificFeatures()
-        else:
-            specificFeatures = self.getSpecificFeatures()
-        for esf in enabledSpecificFeatures:
-            obj = esf.getObject()
-            if esf.id in specificFeatures:
-                #render the expressions
-                render = obj.getRenderedDescription(self)
-                if active_style:
-                    render = tool.decorateHTML(active_style, render)
-                res.append(render)
-            else:
-                #replace the expressions by a null value, aka "..."
-                render = obj.getRenderedDescription(self, renderToNull=True)
-                if inactive_style:
-                    render = tool.decorateHTML(inactive_style, render)
-                res.append(render)
-
-        #add customSpecificFeatures
-        if not township:
-            for csf in self.getCustomSpecificFeatures():
-                res.append("<p>%s</p>" % "<br />".join(csf['feature']))
+        for location in where:
+            method_name = "get%sSpecificFeatures" % location.capitalize()
+            specificFeatures = getattr(self, method_name)()
+            for esf in enabledSpecificFeatures[location]:
+                obj = esf.getObject()
+                if esf.id in specificFeatures:
+                    #render the expressions
+                    render = obj.getRenderedDescription(self)
+                    if active_style:
+                        render = tool.decorateHTML(active_style, render)
+                    res.append(render)
+                else:
+                    #replace the expressions by a null value, aka "..."
+                    render = obj.getRenderedDescription(self, renderToNull=True)
+                    if inactive_style:
+                        render = tool.decorateHTML(inactive_style, render)
+                    res.append(render)
+            #add customSpecificFeatures
+            if location == '':
+                for csf in self.getCustomSpecificFeatures():
+                    res.append("<p>%s</p>" % "<br />".join(csf['feature']))
         return res
 
     security.declarePublic('getProprietaries')

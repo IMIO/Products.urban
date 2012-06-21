@@ -187,7 +187,7 @@
   <td valign="top"><metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: 'roadSpecificFeatures' in usedAttributes">
-  <td valign="top"><b><span i18n:translate="urban_label_roadspecificfeatures">Road specific features</span>:</b></td>
+  <td valign="top"><b><span i18n:translate="urban_label_roadSpecificFeatures">Road specific features</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadSpecificFeatures', mode='view')" /></td>
  </tr>
@@ -280,7 +280,7 @@
   <td valign="top"><metal:myfield use-macro="python:here.widget('RCU', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: 'locationSpecificFeatures' in usedAttributes">
-  <td valign="top"><b><span i18n:translate="urban_label_locationspecificfeatures">Location specific features</span>:</b></td>
+  <td valign="top"><b><span i18n:translate="urban_label_locationSpecificFeatures">Location specific features</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('locationSpecificFeatures', mode='view')" /></td>
  </tr>
