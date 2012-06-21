@@ -20,6 +20,8 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from plone.app.blob.content import ATBlob
+from plone.app.blob.content import ATBlobSchema
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -64,7 +66,7 @@ schema = Schema((
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-Equipment_schema = BaseFolderSchema.copy() + \
+Equipment_schema = BaseFolderSchema + ATBlobSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
@@ -72,7 +74,7 @@ Equipment_schema['title'].widget.visible = False
 Equipment_schema['title'].required = False
 ##/code-section after-schema
 
-class Equipment(BaseFolder, BrowserDefaultMixin):
+class Equipment(BaseFolder, ATBlob):
     """
     """
     security = ClassSecurityInfo()
