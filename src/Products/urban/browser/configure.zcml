@@ -305,5 +305,13 @@
      editview=".portlet_urban.EditForm"
   />
 
+  <browser:page
+      for="Products.urban.interfaces.IUrbanTool"
+      name="templatessum"
+      class=".views.TemplatesSummary"
+      template="templates/templatessummary.pt"
+      permission="zope2.View"
+      />
+
 </configure>
 

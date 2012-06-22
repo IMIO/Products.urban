@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+<body>
+<metal:main fill-slot="main">
+<metal:main_macro define-macro="main">
+<metal:body define-macro="body_macro" 
+            tal:define="globaltemplates view/getGlobalTemplates;
+                        unused python:globaltemplates.pop(0);
+                        eventstemplates view/getEventsTemplates;">
+
+<h1 i18n:translate="templates_summary_title">Templates summary</h1>
+<img src="warning.png" /><span i18n:translate="templates_summary_modified"> = Template has been modified</span>
+<h2 i18n:translate="globaltemplates_folder_title">Global templates</h2>
+<p tal:condition="not:globaltemplates" i18n:translate="">No template.</p>
+<ul tal:condition="globaltemplates">
+    <li tal:repeat="template globaltemplates">
+        <a tal:attributes="href python:'%s/external_edit'%template.absolute_url()" tal:content="template/Title" />
+        <img tal:define="status python:view.isModified(template)" tal:condition="status" tal:attributes="src status" />
+    </li>
+</ul>
+<h2 i18n:translate="templates_events_title">Events templates</h2>
+<div class="templates-types-events" tal:condition="eventstemplates" tal:repeat="types eventstemplates">
+    <h3 i18n:translate="" tal:content="python: types.pop(0)">Type</h3>
+    <tal:events tal:repeat="events types">
+        <tal:templ tal:condition="python: len(events) > 1">
+            <h4 tal:content="python:events.pop(0)">Event</h4>
+            <ul tal:condition="events">
+                <li tal:repeat="template events">
+                    <a tal:attributes="href python:'%s/external_edit'%template.absolute_url()" tal:content="template/Title" />
+                    <img tal:define="status python:view.isModified(template)" tal:condition="status" tal:attributes="src status" />
+                </li>
+            </ul>
+        </tal:templ>
+    </tal:events>
+</div>
+</metal:body>
+</metal:main_macro>
+</metal:main>
+</body>
+</html>

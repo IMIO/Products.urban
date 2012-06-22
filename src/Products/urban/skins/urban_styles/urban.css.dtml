@@ -334,4 +334,18 @@ INPUT.button-urbanschedule
     background-repeat: no-repeat;
     padding-left: 20px !important;
 }
+
+.templates-types-events {
+    padding-left: 1em;
+}
+
+.templates-types-events h3{
+    color: #75AD0A;
+}
+
+.templates-types-events h4, .templates-types-events ul{
+    padding-left: 1em;
+}
+
+
 /* </dtml-with> */
