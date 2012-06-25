@@ -472,7 +472,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         #search in an urbanConfig or in the tool
         if in_urban_config:
-            voc_folder = getattr(getattr(self, self.getUrbanConfig(context).getId()), vocabulary_name)
+            config_folder = getattr(self, self.getUrbanConfig(context).getId())
+            if not hasattr(config_folder, vocabulary_name):
+                return ['']
+            voc_folder = getattr(config_folder, vocabulary_name)
         else:
             voc_folder = getattr(self, vocabulary_name)
         default_values = [voc_term.id for voc_term in voc_folder.listFolderContents() if voc_term.getIsDefaultValue()]
