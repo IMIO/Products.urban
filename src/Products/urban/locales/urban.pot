@@ -2459,3 +2459,18 @@ msgstr ""
 #. Default: "Prorogation" 
 msgid "IProrogation type marker interface"
 msgstr ""
+
+#. Default: "Templates summary"
+#: templatessummary.pt
+msgid "templates_summary_title"
+msgstr ""
+
+#. Default: "Events templates"
+#: templatessummary.pt
+msgid "templates_events_title"
+msgstr ""
+
+#. Default: " = Template has been modified"
+#: templatessummary.pt
+msgid "templates_summary_modified"
+msgstr ""

@@ -6,8 +6,11 @@ from zope.formlib import namedtemplate
 from Products.Five import BrowserView
 from Acquisition import aq_inner, aq_base
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import safe_hasattr
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.form._named import named_template_adapter
+from Products.urban.config import URBAN_TYPES
+from Products.urban.utils import getMd5Signature
 import logging
 logger = logging.getLogger('urban: Views')
 
@@ -120,3 +123,48 @@ class ProxyController(BrowserView):
     
 class testmap(ProxyController):
     pass
+
+class TemplatesSummary(BrowserView):
+    """
+        Get all templates information to give a summary
+    """
+    
+    def __init__(self, context, request):
+        super(BrowserView, self).__init__(context, request)
+        self.context = context
+        self.request = request
+        self.tool = getToolByName(context, 'portal_urban')
+
+    def getUrbanDoc(self, folder):
+        return folder.listFolderContents(contentFilter={'portal_type':['UrbanDoc']})
+
+    def getGlobalTemplates(self):
+        templates = ['globaltemplates']
+        for templ in self.getUrbanDoc(self.tool.globaltemplates):
+            templates.append(templ)
+        return templates
+
+    def getEventsTemplates(self):
+        templates=[]
+        for urban_type in URBAN_TYPES:
+            templ_by_type = [urban_type]
+            licenceConfigId = urban_type.lower()
+            if not safe_hasattr(self.tool, licenceConfigId): continue
+            configFolder = getattr(self.tool, licenceConfigId)
+            if not safe_hasattr(configFolder, 'urbaneventtypes'): continue
+            uetfolder = getattr(configFolder, 'urbaneventtypes')
+            for obj in uetfolder.objectValues('UrbanEventType'):
+                templ_by_event = [obj.Title()]
+                for templ in self.getUrbanDoc(obj):
+                    templ_by_event.append(templ)
+                templ_by_type.append(templ_by_event)
+            templates.append(templ_by_type)
+        return templates
+    
+    def isModified(self, template):
+        if not template.hasProperty('md5Modified'):
+            return "question-mark.gif"
+        if template.md5Modified != getMd5Signature(template.data):
+            #template manually changed
+            return "warning.png"
+        return None

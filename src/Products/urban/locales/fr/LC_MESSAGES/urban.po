@@ -1020,6 +1020,21 @@ msgstr "Zone de surveillance"
 msgid "tal_condition_descr"
 msgstr "Entrez une condition TAL.  Les variables 'here' et 'member' sont disponibles"
 
+#. Default: "Events templates"
+#: templatessummary.pt
+msgid "templates_events_title"
+msgstr "Modèles liés à des événements"
+
+#. Default: " = Template has been modified"
+#: templatessummary.pt
+msgid "templates_summary_modified"
+msgstr " = Le modèle a été modifié"
+
+#. Default: "Templates summary"
+#: templatessummary.pt
+msgid "templates_summary_title"
+msgstr "Liste des modèles définis dans la configuration"
+
 # topics
 msgid "topics"
 msgstr "Recherches"
