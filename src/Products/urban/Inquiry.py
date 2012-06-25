@@ -23,8 +23,10 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+import inspect
 from zope.i18n import translate
 from OFS.ObjectManager import BeforeDeleteException
+from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
 
@@ -178,6 +180,19 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
     # Methods
 
     # Manually created methods
+
+    security.declarePublic('getDefaultValue')
+    def getDefaultValue(self):
+
+        urban_tool = getToolByName(self, 'portal_urban')
+        field = context = None
+        for frame_record in inspect.stack():
+            if frame_record[3] == 'getDefault':
+                field = frame_record[0].f_locals['self']
+                context = frame_record[0]. f_locals['instance']
+        vocabulary_name = field.vocabulary.path
+        in_urban_config = field.vocabulary.inUrbanConfig
+        return urban_tool.getVocabularyDefaultValue(vocabulary_name=vocabulary_name, context=context, in_urban_config=in_urban_config)
 
     security.declarePublic('validate_investigationStart')
     def validate_investigationStart(self, value):
