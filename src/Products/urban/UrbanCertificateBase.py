@@ -71,6 +71,7 @@ schema = Schema((
         schemata='urban_description',
         multiValued=True,
         vocabulary=UrbanVocabulary('specificfeatures'),
+        default_method='getDefaultValue',
         enforceVocabulary=True,
     ),
     LinesField(
@@ -86,6 +87,7 @@ schema = Schema((
         schemata='urban_road',
         multiValued=True,
         vocabulary=UrbanVocabulary('roadspecificfeatures'),
+        default_method='getDefaultValue',
         enforceVocabulary=True,
     ),
     LinesField(
@@ -101,6 +103,7 @@ schema = Schema((
         schemata='urban_location',
         multiValued=True,
         vocabulary=UrbanVocabulary('locationspecificfeatures'),
+        default_method='getDefaultValue',
         enforceVocabulary=True,
     ),
     DataGridField(
@@ -127,6 +130,7 @@ schema = Schema((
         schemata='urban_description',
         multiValued=True,
         vocabulary=UrbanVocabulary('townshipspecificfeatures'),
+        default_method='getDefaultValue',
         enforceVocabulary=True,
     ),
     LinesField(
@@ -140,6 +144,7 @@ schema = Schema((
         schemata='urban_description',
         multiValued=1,
         vocabulary=UrbanVocabulary('opinionstoaskifworks', vocType="OrganisationTerm"),
+        default_method='getDefaultValue',
     ),
 
 ),

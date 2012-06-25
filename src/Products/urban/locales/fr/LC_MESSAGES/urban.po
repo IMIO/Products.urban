@@ -1725,7 +1725,7 @@ msgstr "Commune décentralisée?"
 #. Default: "Isdefaultvalue"
 #: UrbanVocabularyTerm.py
 msgid "urban_label_isDefaultValue"
-msgstr ""
+msgstr "Est une valeur par défaut"
 
 #. Default: "Isinpca"
 #: BuildLicence.py

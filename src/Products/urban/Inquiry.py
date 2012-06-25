@@ -44,6 +44,7 @@ schema = Schema((
         ),
         multiValued=1,
         vocabulary=UrbanVocabulary('derogations'),
+        default_method='getDefaultValue',
     ),
     TextField(
         name='derogationDetails',
@@ -66,6 +67,7 @@ schema = Schema((
         ),
         multiValued=True,
         vocabulary=UrbanVocabulary('investigationarticles'),
+        default_method='getDefaultValue',
     ),
     DateTimeField(
         name='investigationStart',
@@ -119,6 +121,7 @@ schema = Schema((
         ),
         multiValued=1,
         vocabulary=UrbanVocabulary('foldermakers', vocType="OrganisationTerm"),
+        default_method='getDefaultValue',
     ),
     IntegerField(
         name='investigationOralReclamationNumber',

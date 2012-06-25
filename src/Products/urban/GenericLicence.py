@@ -243,6 +243,7 @@ schema = Schema((
         schemata='urban_road',
         multiValued=1,
         vocabulary=UrbanVocabulary('folderroadtypes', inUrbanConfig=False, with_empty_value=False),
+        default_method='getDefaultValue',
     ),
     StringField(
         name='roadCoating',
@@ -254,6 +255,7 @@ schema = Schema((
         ),
         schemata='urban_road',
         vocabulary=UrbanVocabulary('folderroadcoatings', inUrbanConfig=False, with_empty_value=True),
+        default_method='getDefaultValue',
     ),
     DataGridField(
         name='roadEquipments',
@@ -278,6 +280,7 @@ schema = Schema((
         schemata='urban_road',
         multiValued=1,
         vocabulary=UrbanVocabulary('pashs', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     TextField(
         name='pashDetails',
@@ -310,7 +313,7 @@ schema = Schema((
             label_msgid='urban_label_floodingLevel',
             i18n_domain='urban',
         ),
-        enforceVocabulary=True,
+        enforceVocabulary= True,
         schemata='urban_road',
         vocabulary='listFloodingLevels',
     ),
@@ -371,6 +374,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         vocabulary=UrbanVocabulary('pcas', vocType="PcaTerm", inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     LinesField(
         name='solicitRoadOpinionsTo',
@@ -383,6 +387,7 @@ schema = Schema((
         schemata='urban_road',
         multiValued=1,
         vocabulary=UrbanVocabulary('foldermakers', vocType="OrganisationTerm"),
+        default_method='getDefaultValue',
     ),
     BooleanField(
         name='isInSubdivision',
@@ -420,6 +425,7 @@ schema = Schema((
         schemata='urban_location',
         multiValued=1,
         vocabulary=UrbanVocabulary('folderprotectedbuildings', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     TextField(
         name='protectedBuildingDetails',
@@ -444,6 +450,7 @@ schema = Schema((
         schemata='urban_location',
         multiValued=1,
         vocabulary=UrbanVocabulary('ssc', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     LinesField(
         name='RCU',
@@ -456,6 +463,7 @@ schema = Schema((
         schemata='urban_location',
         multiValued=1,
         vocabulary=UrbanVocabulary('rcu', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     LinesField(
         name='solicitLocationOpinionsTo',
@@ -468,6 +476,7 @@ schema = Schema((
         schemata='urban_location',
         multiValued=1,
         vocabulary=UrbanVocabulary('foldermakers', vocType="OrganisationTerm"),
+        default_method='getDefaultValue',
     ),
     StringField(
         name='folderCategoryTownship',
@@ -479,6 +488,7 @@ schema = Schema((
         enforceVocabulary=True,
         schemata='urban_location',
         vocabulary=UrbanVocabulary('townshipfoldercategories', with_empty_value=True, sort_on='sortable_title'),
+        default_method='getDefaultValue',
     ),
     BooleanField(
         name='areParcelsVerified',
@@ -582,7 +592,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
                 context = frame_record[0]. f_locals['instance']
         vocabulary_name = field.vocabulary.path
         in_urban_config = field.vocabulary.inUrbanConfig
-
         return urban_tool.getVocabularyDefaultValue(vocabulary_name=vocabulary_name, context=context, in_urban_config=in_urban_config)
 
     def divideList (self, divider, list):

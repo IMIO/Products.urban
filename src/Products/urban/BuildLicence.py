@@ -49,6 +49,7 @@ schema = Schema((
         schemata='urban_description',
         multiValued=1,
         vocabulary=UrbanVocabulary(path='folderbuildworktypes', sort_on='sortable_title'),
+        default_method='getDefaultValue',
     ),
     StringField(
         name='usage',
