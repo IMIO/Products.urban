@@ -166,6 +166,14 @@ class IMiscDemand(Interface):
     """Marker interface for .MiscDemand.MiscDemand
     """
 
+class ITextConfig(Interface):
+    """Marker interface for .TextConfig.TextConfig
+    """
+
+class IUrbanConfigurationValue(Interface):
+    """Marker interface for .UrbanConfigurationValue.UrbanConfigurationValue
+    """
+
 ##code-section FOOT
 class ILicenceContainer(Interface):
     """

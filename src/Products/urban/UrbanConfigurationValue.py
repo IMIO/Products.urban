@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# File: UrbanDelay.py
+# File: UrbanConfigurationValue.py
 #
 # Copyright (c) 2012 by CommunesPlone
 # Generator: ArchGenXML Version 2.6
@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
+
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -27,27 +27,14 @@ from Products.urban.config import *
 
 schema = Schema((
 
-    IntegerField(
-        name='deadLineDelay',
-        default=0,
-        widget=IntegerField._properties['widget'](
-            label='Deadlinedelay',
-            label_msgid='urban_label_deadLineDelay',
+    BooleanField(
+        name='isDefaultValue',
+        default= False,
+        widget=BooleanField._properties['widget'](
+            label='Isdefaultvalue',
+            label_msgid='urban_label_isDefaultValue',
             i18n_domain='urban',
         ),
-        validators=('isInt',),
-    ),
-    IntegerField(
-        name='alertDelay',
-        default=0,
-        widget=IntegerField._properties['widget'](
-            description='Set the number of days the alert will be shown before the deadline delay',
-            description_msgid="urban_alertdelay_descr",
-            label='Alertdelay',
-            label_msgid='urban_label_alertDelay',
-            i18n_domain='urban',
-        ),
-        validators=('isInt',),
     ),
 
 ),
@@ -56,24 +43,23 @@ schema = Schema((
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-UrbanDelay_schema = BaseSchema.copy() + \
-    getattr(UrbanConfigurationValue, 'schema', Schema(())).copy() + \
+UrbanConfigurationValue_schema = BaseSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class UrbanDelay(BaseContent, UrbanConfigurationValue, BrowserDefaultMixin):
+class UrbanConfigurationValue(BaseContent, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
 
-    implements(interfaces.IUrbanDelay)
+    implements(interfaces.IUrbanConfigurationValue)
 
-    meta_type = 'UrbanDelay'
+    meta_type = 'UrbanConfigurationValue'
     _at_rename_after_creation = True
 
-    schema = UrbanDelay_schema
+    schema = UrbanConfigurationValue_schema
 
     ##code-section class-header #fill in your manual code here
     ##/code-section class-header
@@ -81,8 +67,8 @@ class UrbanDelay(BaseContent, UrbanConfigurationValue, BrowserDefaultMixin):
     # Methods
 
 
-registerType(UrbanDelay, PROJECTNAME)
-# end of class UrbanDelay
+registerType(UrbanConfigurationValue, PROJECTNAME)
+# end of class UrbanConfigurationValue
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer

@@ -27,6 +27,7 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 import warnings
+import inspect
 from zope.i18n import translate
 from zope.component import createObject
 from Products.CMFCore.utils import getToolByName
@@ -134,6 +135,7 @@ schema = Schema((
         enforceVocabulary=True,
         schemata='urban_description',
         vocabulary=UrbanVocabulary('foldercategories', with_empty_value=True),
+        default_method='getDefaultValue',
     ),
     LinesField(
         name='missingParts',
@@ -146,6 +148,7 @@ schema = Schema((
         schemata='urban_description',
         multiValued=True,
         vocabulary=UrbanVocabulary('missingparts'),
+        default_method='getDefaultValue',
     ),
     TextField(
         name='missingPartsDetails',
@@ -205,6 +208,7 @@ schema = Schema((
         ),
         schemata='urban_description',
         vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
+        default_method='getDefaultValue',
     ),
     TextField(
         name='annoncedDelayDetails',
@@ -566,6 +570,20 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         return tool.generateReference(self)
 
     # Manually created methods
+
+    security.declarePublic('getDefaultValue')
+    def getDefaultValue(self):
+
+        urban_tool = getToolByName(self, 'portal_urban')
+        field = context = None
+        for frame_record in inspect.stack():
+            if frame_record[3] == 'getDefault':
+                field = frame_record[0].f_locals['self']
+                context = frame_record[0]. f_locals['instance']
+        vocabulary_name = field.vocabulary.path
+        in_urban_config = field.vocabulary.inUrbanConfig
+
+        return urban_tool.getVocabularyDefaultValue(vocabulary_name=vocabulary_name, context=context, in_urban_config=in_urban_config)
 
     def divideList (self, divider, list):
         res = []

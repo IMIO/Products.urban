@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-
+from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -65,6 +65,7 @@ schema = Schema((
 ##/code-section after-local-schema
 
 UrbanVocabularyTerm_schema = BaseSchema.copy() + \
+    getattr(UrbanConfigurationValue, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
@@ -72,7 +73,7 @@ UrbanVocabularyTerm_schema['title'].label_msgid = "urban_label_termTitle"
 UrbanVocabularyTerm_schema['title'].i18n_domain = "urban"
 ##/code-section after-schema
 
-class UrbanVocabularyTerm(BaseContent, BrowserDefaultMixin):
+class UrbanVocabularyTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

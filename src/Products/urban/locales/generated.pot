@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Thu Jun 21 13:26:38 2012\n"
-"PO-Revision-Date: Thu Jun 21 13:26:38 2012\n"
+"POT-Creation-Date: Mon Jun 25 13:37:26 2012\n"
+"PO-Revision-Date: Mon Jun 25 13:37:26 2012\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -581,7 +581,7 @@ msgid "urban_label_isDecentralized"
 msgstr ""
 
 #. Default: "Isdefaultvalue"
-#: UrbanVocabularyTerm.py
+#: UrbanConfigurationValue.py
 msgid "urban_label_isDefaultValue"
 msgstr ""
 
@@ -920,11 +920,6 @@ msgstr ""
 msgid "urban_label_section"
 msgstr ""
 
-#. Default: "Selectedfield"
-#: UrbanVocabularyTerm.py
-msgid "urban_label_selectedField"
-msgstr ""
-
 #. Default: "Showtitle"
 #: UrbanEventType.py
 msgid "urban_label_showTitle"
@@ -1024,6 +1019,11 @@ msgstr ""
 #. Default: "Technicalremarks"
 #: GenericLicence.py
 msgid "urban_label_technicalRemarks"
+msgstr ""
+
+#. Default: "Texts"
+#: TextConfig.py
+msgid "urban_label_texts"
 msgstr ""
 
 #. Default: "Title"
