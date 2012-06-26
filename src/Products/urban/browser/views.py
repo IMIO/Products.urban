@@ -136,7 +136,7 @@ class TemplatesSummary(BrowserView):
         self.tool = getToolByName(context, 'portal_urban')
 
     def getUrbanDoc(self, folder):
-        return folder.listFolderContents(contentFilter={'portal_type':['UrbanDoc']})
+        return folder.listFolderContents(contentFilter={'portal_type':['File']})
 
     def getGlobalTemplates(self):
         templates = ['globaltemplates']
