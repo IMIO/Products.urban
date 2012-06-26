@@ -186,6 +186,7 @@ schema = Schema((
         schemata='urban_location',
         multiValued=True,
         vocabulary=UrbanVocabulary('folderzones', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     TextField(
         name='folderZoneDetails',
@@ -583,7 +584,9 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
 
     security.declarePublic('getDefaultValue')
     def getDefaultValue(self):
-
+        """
+         Return the vocabulary default value(s) of a field
+        """
         urban_tool = getToolByName(self, 'portal_urban')
         field = context = None
         for frame_record in inspect.stack():
