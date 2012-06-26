@@ -52,7 +52,7 @@ class TestDefaultValues(unittest.TestCase):
         #create a new buildlicence
         buildlicences.invokeFactory('BuildLicence', id='newlicence',title='blabla')
         newlicence = buildlicences.newlicence
-        #the value of folderCategory should be the one marked as default value
+        #the value of missing parts should be the one marked as default value
         self.assertEqual((vocabulary_term.id,), newlicence.getMissingParts())
 
 
@@ -80,7 +80,7 @@ class TestDefaultValues(unittest.TestCase):
         #create a new buildlicence
         buildlicences.invokeFactory('BuildLicence', id='newlicence',title='blabla')
         newlicence = buildlicences.newlicence
-        #the value of folderCategory should be the one marked as default value
+        #the value of missing parts should be the one marked as default value
         self.assertEqual((vocabulary_term_1.id, vocabulary_term_2.id,), newlicence.getMissingParts())
 
 
