@@ -404,11 +404,15 @@ class Contact(BaseContent, BrowserDefaultMixin):
         #if the Contact is just created, we are in portal_factory.The parent is a TempFolder
         if parent.portal_type == 'TempFolder':
             parent = parent.aq_parent.aq_parent
-        if parent.portal_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne']:
-            return True
-        if self.getPortalTypeName() == 'Applicant':
-            return True
-        return False
+        if not parent.portal_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne']:
+            return False
+        if self.getPortalTypeName() not in ['Applicant', 'Proprietary']:
+            return False
+        if hasattr(parent, 'getArchitects') and not parent.getArchitects():
+            return False
+        if hasattr(parent, 'getNotaryContact') and not parent.getNotaryContact():
+            return False
+        return True
 
     security.declarePublic('listRepresentedBys')
     def listRepresentedBys(self):
