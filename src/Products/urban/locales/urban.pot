@@ -496,6 +496,9 @@ msgstr ""
 msgid "event_inquiry_claimants"
 msgstr ""
 
+msgid "event_inquiry_recipients"
+msgstr ""
+
 msgid "event_linked_annexes"
 msgstr ""
 

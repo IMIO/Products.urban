@@ -134,7 +134,7 @@
 </div>
 </dd>
 
-<dt class="formTab" id="fieldsetlegend-urbaneventinquiry_recipients" i18n:translate="urbaneventinquiry_recipients"><span>Recipients</span></dt>
+<dt class="formTab" id="fieldsetlegend-urbaneventinquiry_recipients" i18n:translate="event_inquiry_recipients"><span>Recipients</span></dt>
 <dd id="fieldset-urbaneventinquiry_recipients">
 <tal:block condition="python: member.has_permission('Modify portal content', context) 
                               and linkedUrbanEventType.getEventTypeType() == 'Products.urban.interfaces.IInquiryEvent'">

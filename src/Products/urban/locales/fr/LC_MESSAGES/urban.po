@@ -497,6 +497,9 @@ msgstr "Données concernant l'événement"
 msgid "event_inquiry_claimants"
 msgstr "Réclamants"
 
+msgid "event_inquiry_recipients"
+msgstr "Propriétaires concernés"
+
 msgid "event_linked_annexes"
 msgstr "Annexes liées à cet événement"
 
@@ -1344,7 +1347,7 @@ msgstr "Boîte"
 msgid "urban_label_catchmentArea"
 msgstr "Zone de captage"
 
-#. Default: "Category"
+#. Default: "Catégorie"
 #: MiscDemand.py
 #, fuzzy
 msgid "urban_label_category"
