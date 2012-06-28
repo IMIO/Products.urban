@@ -7,12 +7,6 @@
              tal:define="member context/@@plone_portal_state/member;
                          border python: member.has_permission('Modify portal content', context) and 'enable_border' or 'disable_border';
                          dummy python:request.set(border, 1);" />
-
-<tal:block condition="parcels">
-<div metal:fill-slot="style_slot" >
-    <div metal:use-macro="here/@@map-macros/urbanMapCSS" /> 
-</div>
-</tal:block>
 </head>
 
 <body>
@@ -25,6 +19,8 @@
                                                   global parcels view/getParcels;">
 
 <metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />
+
+<div tal:replace="structure provider:plone.belowcontenttitle" />
 
 <tal:comment replace="nothing">Go back...</tal:comment>
 <metal:listing use-macro="here/urban_macros/macros/goBackToMacro" />
@@ -70,7 +66,6 @@
        </fieldset>
 
         <metal:listing use-macro="context/@@urbanevent-macros/urbanEventGenerateDocumentMacro" />
-        <metal:listing use-macro="context/@@urbanevent-macros/urbanEventAddAnnexMacro" />
         </td>
         <td width=65%>
         <fieldset><legend i18n:translate="event_linked_documents">Event linked documents</legend>
@@ -82,6 +77,21 @@
           </div>
         </fieldset>
 
+        </td>
+    </tr>
+    <tr valign="top">
+        <td width=35%>
+         <metal:listing use-macro="context/@@urbanevent-macros/urbanEventAddAnnexMacro" />
+        </td>
+        <td width=65%>
+         <fieldset><legend i18n:translate="event_linked_annexes">Event linked annexes</legend>
+          <div tal:define="tool python: context.portal_urban;
+                           batch python: tool.queryCatalog(batch=True, specificSearch='searchLinkedAnnexes', context=context, theObjects=False, batchlen=50);
+                           showedCols python: ('Title', 'created', 'Creator', );
+                           showActions python: True;">
+          <metal:listing use-macro="here/urban_macros/macros/listing" />
+          </div>
+         </fieldset>
         </td>
     </tr>
 </table>
@@ -133,7 +143,7 @@
   </form>
   <p>&nbsp;</p>
 </tal:block>
-<tal:block condition="recipients">
+<tal:recipients condition="recipients">
     <table width=100% class="listing" style="margin-bottom: 0;">
     <thead>
     <tr>
@@ -152,20 +162,13 @@
                      showActions python: True;">
      <metal:listing use-macro="here/urban_macros/macros/listing" />
     </div>
-</tal:block>
+</tal:recipients>
 <tal:block condition="python: context.REQUEST.get('doc_uid') != None">
 <tal:block define="docObj python:context.uid_catalog(UID=context.REQUEST.get('doc_uid'))[0]">
 <Script tal:content="python:'document.location = \''+docObj.getObject().absolute_url()+'/external_edit\';'" />
 </tal:block>
 </tal:block>
-<tal:block condition="parcels">
-   <div metal:use-macro="here/@@map-macros/urbanMapScript" />
-   <form>
-    <input type="hidden" id="map_initialized" value="0" />
-   </form>
-   <p i18n:translate="cartography" class="discreet">Cartography</p>
-   <div id="urbanmapctn" style="width:100%; height:800px"></div>
-</tal:block>
+
 </dd>
 
 </div>
