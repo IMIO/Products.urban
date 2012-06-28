@@ -461,7 +461,7 @@ def addUrbanConfigs(context):
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="raccordable-egout-prevision",title=u"Raccordable à l'égout (prévision)",
-                    description="<p>sera raccordable àl'égout selon les prévisions actuelles;</p>"
+                    description="<p>sera raccordable à l'égout selon les prévisions actuelles;</p>"
                 )
                 newFolder.invokeFactory(
                     "UrbanVocabularyTerm",id="zone-faiblement-habitee",
@@ -611,7 +611,7 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="reconnaissance-economique",title=u"Périmètre de reconnaissance économique", description="<p>est repris dans un périmètre de reconnaissance économique;</p>")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="site-seveso",title=u"A moins de 2000m d'un site SEVESO", description="<p>est situé à moins de 2000m d'un site classé SEVESO à savoir [...];</p>")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="gestion-des-sols",title=u"Gestion des sols", description="<p>état des sols, nous ne sommes pas en mesure de déterminer si le bien est ou pas inscrit dans la banque de données au sens de l'article 10 du décret du 5 décembre 2008 relatif à la gestion des sols (Décret du 05 décembre 2008, art.89, al.2)</p>")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="galeries-minieres",title=u"Galeries minières", description="<p>est situé dans une région traversée par de nombreuses galeries minières et nous ne sommes pas en mesure de déterminer l'état de celle-ci, veuillez donc prendre vos renseignements aurpès du SPW - Département de l'Environnement et de l'Eau - " \
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="galeries-minieres",title=u"Galeries minières", description="<p>est situé dans une région traversée par de nombreuses galeries minières et nous ne sommes pas en mesure de déterminer l'état de celle-ci, veuillez donc prendre vos renseignements auprès du SPW - Département de l'Environnement et de l'Eau - " \
                                                                                                                              "Direction des risques industriels, géologique et miniers - Cellules sous-sol/géologique - Avenue Prince de Liège, 15 à 5100 Jambes;  Le bien est situé sur une zone de consultation en liaison avec les gisements et puits de mine;</p>")
 
             if not hasattr(aq_base(configFolder), 'opinionstoaskifworks'):
