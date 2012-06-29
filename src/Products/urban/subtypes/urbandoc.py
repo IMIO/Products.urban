@@ -7,11 +7,6 @@ from Products.Archetypes.atapi import FileWidget
 from Products.validation import V_REQUIRED
 from Products.ContentTypeValidator.validator import ContentTypeValidator
 
-
-#Factory definition for our new portal_type UrbanDoc, not sure its the best place to define a factory.
-def addATBlobUrbanDoc(container, id, **kwargs):
-    return addATBlob(container, id, subtype='UrbanDoc', **kwargs)
-
 #the schema extension:
 #  Use the extension defined for plone4 files that add the field 'File' to the schema.
 #  We customise this field by adding a validator (to check the content is an odt file) on it.

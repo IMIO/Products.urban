@@ -166,6 +166,10 @@ class IMiscDemand(Interface):
     """Marker interface for .MiscDemand.MiscDemand
     """
 
+class IUrbanDoc(Interface):
+    """Marker interface for .UrbanDoc.UrbanDoc
+    """
+
 ##code-section FOOT
 class ILicenceContainer(Interface):
     """
