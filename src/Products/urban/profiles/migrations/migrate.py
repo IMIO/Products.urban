@@ -694,15 +694,15 @@ def migrateFilesToUrbanDoc(context):
     logger = context.getLogger('migrationToUrbanDoc')
     portal = context.getSite()
     path = '/'.join(['', portal.getPhysicalPath()[1], 'portal_urban', 'globaltemplates'])
-    migrators = [
-                    FilesToUrbanDocMigrator: {'SearchableText':['cu1 OR cu2 OR decl OR div OR lot OR miscdemand OR "not" OR urb']},
-                    FilesToUrbanDocMigrator: {'path':path},
-                ]
+    migrators = (
+                    (FilesToUrbanDocMigrator, {'SearchableText':['cu1 OR cu2 OR decl OR div OR lot OR miscdemand OR "not" OR urb']}),
+                    (FilesToUrbanDocMigrator, {'path':path}),
+                )
     #to avoid link integrity problems, disable checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
 
     #Run the migrations
-    for migrator, query in migrators.iteritems():
+    for migrator, query in migrators:
         walker = migrator.walker(portal, migrator, query=query)
         walker.go()
         # we need to reset the class variable to avoid using current query in next use of CustomQueryWalker
