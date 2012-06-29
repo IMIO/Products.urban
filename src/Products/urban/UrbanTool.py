@@ -481,6 +481,18 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         default_values = [voc_term.id for voc_term in voc_folder.listFolderContents() if voc_term.getIsDefaultValue()]
         return default_values and default_values or ['']
 
+    security.declarePublic('getTextDefaultValue')
+    def getTextDefaultValue(self, fieldname, context):
+        """
+         Return the first vocabulary term marked as default value of the vocabulary named vocabulary_name
+        """
+        #search in an urbanConfig or in the tool
+        licence_config = getattr(self, self.getUrbanConfig(context).getId())
+        for config in licence_config.getTextDefaultValues():
+            if config['fieldname'] == fieldname:
+                return config['text']
+        return ''
+
     security.declarePublic('listVocabulary')
     def listVocabulary(self, vocToReturn, context, vocType=["UrbanVocabularyTerm", "OrganisationTerm"], id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False):
         """

@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>1.1.4</version>
+  <version>1.1.14</version>
   <!-- ##code-section METADATA -->
   <dependencies>
     <dependency>profile-Products.DataGridField:default</dependency>
+    <dependency>profile-collective.datagridcolumns:default</dependency>
     <dependency>profile-Products.MasterSelectWidget:default</dependency>
     <dependency>profile-collective.externaleditor:default</dependency>
     <dependency>profile-communesplone.urban.schedule:default</dependency>

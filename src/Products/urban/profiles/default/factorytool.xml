@@ -34,7 +34,6 @@
   <type portal_type="UrbanEventOpinionRequest"/>
   <type portal_type="OrganisationTerm"/>
   <type portal_type="MiscDemand"/>
-  <type portal_type="TextConfig"/>
   <type portal_type="UrbanConfigurationValue"/>
  </factorytypes>
 </object>

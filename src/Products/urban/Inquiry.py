@@ -58,6 +58,7 @@ schema = Schema((
         ),
         default_output_type='text/plain',
         default_content_type='text/plain',
+        default_method='getDefaultText',
     ),
     LinesField(
         name='investigationArticles',
@@ -100,6 +101,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         default_content_type='text/html',
+        default_method='getDefaultText',
         default_output_type='text/html',
     ),
     TextField(
@@ -111,6 +113,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         default_content_type='text/html',
+        default_method='getDefaultText',
         default_output_type='text/html',
     ),
     LinesField(

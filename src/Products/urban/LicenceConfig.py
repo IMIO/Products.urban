@@ -20,10 +20,19 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
+from zope.i18n import translate
+from Products.Archetypes.public import DisplayList
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
+from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.validators.validator import isTextFieldConfiguredValidator
+from Products.validation import V_REQUIRED
 ##/code-section module-header
 
 schema = Schema((
@@ -41,6 +50,18 @@ schema = Schema((
         multiValued=True,
         vocabulary='listUsedAttributes',
     ),
+    DataGridField(
+        name='textDefaultValues',
+        widget=DataGridWidget(
+            columns={'fieldname' : SelectColumn('FieldName', 'getVoc'), 'text' : TextAreaColumn('Text', rows=6, cols=60)},
+            label='Textdefaultvalues',
+            label_msgid='urban_label_textDefaultValues',
+            i18n_domain='urban',
+        ),
+        allow_oddeven=True,
+        columns=('fieldname', 'text'),
+        validators=(('isTextFieldConfiguredValidator', V_REQUIRED)),
+    ),
 
 ),
 )
@@ -52,26 +73,6 @@ LicenceConfig_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-from BuildLicence import BuildLicence_schema
-from ParcelOutLicence import ParcelOutLicence_schema
-from Declaration import Declaration_schema
-from Division import Division_schema
-from UrbanCertificateBase import UrbanCertificateBase_schema
-from UrbanCertificateTwo import UrbanCertificateTwo_schema
-from EnvironmentalDeclaration import EnvironmentalDeclaration_schema
-from MiscDemand import MiscDemand_schema
-FTI_SCHEMAS = {
-    'BuildLicence' : BuildLicence_schema,
-    'ParcelOutLicence' : ParcelOutLicence_schema,
-    'Declaration' : Declaration_schema,
-    'Division' : Division_schema,
-    'UrbanCertificateOne' : UrbanCertificateBase_schema,
-    'UrbanCertificateTwo' : UrbanCertificateTwo_schema,
-    'NotaryLetter' : UrbanCertificateBase_schema,
-    'EnvironmentalDeclaration' : EnvironmentalDeclaration_schema,
-    'MiscDemand' : MiscDemand_schema,
-}
-
 ##/code-section after-schema
 
 class LicenceConfig(BaseFolder, BrowserDefaultMixin):
@@ -107,9 +108,9 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_investigation_and_advices':'(enq) ',
             'urban_description':'',
         }
-        if not FTI_SCHEMAS.has_key(self.licence_portal_type):
+        if not self._getSchema(self.licence_portal_type):
             return DisplayList()
-        for field in FTI_SCHEMAS[self.licence_portal_type].fields():
+        for field in self._getSchema(self.licence_portal_type).fields():
             if hasattr(field, 'optional'):
                 tab = field.schemata
                 if field.schemata in abr.keys():
@@ -127,6 +128,43 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             icon = "LicenceConfig.png"
         portal_url = getToolByName( self, 'portal_url' )
         return portal_url() + '/' + icon
+
+    def getVoc(self):
+        #we have to know from where the method has been called in order to know which text
+        #fields to propose to be "default valued"
+        licence_type = self.licence_portal_type
+        licence_schema = self._getSchema(licence_type)
+        abr = {
+            'urban_peb':'(peb) ',
+            'urban_location':'(urb) ',
+            'urban_road':'(voi) ',
+            'urban_investigation_and_advices':'(enq) ',
+            'urban_description':'',
+        }
+        available_fields = [field for field in licence_schema.fields() if field.getType() == 'Products.Archetypes.Field.TextField' and field.getName() != 'rights']
+        vocabulary_fields = [(field.getName(), '%s %s' % (translate(field.widget.label_msgid,'urban', context=self.REQUEST), abr[field.schemata])) for field in available_fields]
+        #return a vocabulary containing the names of all the text fields of the schema
+        return DisplayList(sorted(vocabulary_fields, key=lambda name:name[1]))
+
+    def _getSchema(self, licencetype):
+        licence_modules = {
+            'buildlicence' : 'BuildLicence',
+            'parceloutlicence' : 'ParcelOutLicence',
+            'declaration' : 'Declaration',
+            'division' : 'Division',
+            'urbancertificateone' : 'UrbanCertificateBase',
+            'urbancertificatetwo' : 'UrbanCertificateTwo',
+            'notaryletter' : 'UrbanCertificateBase',
+            'environmentaldeclaration' : 'EnvironmentalDeclaration',
+            'miscdemand' : 'MiscDemand',
+        }
+        licence_type = licencetype.lower()
+        if licence_type not in licence_modules.keys():
+            return None
+        module_name = 'Products.urban.%s' % licence_modules[licence_type]
+        attribute = "%s_schema" % licence_modules[licence_type]
+        module = __import__(module_name, fromlist=[attribute])
+        return getattr(module, attribute)
 
 
 

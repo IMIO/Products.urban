@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-06-21 12:47+0000\n"
+"POT-Creation-Date: 2012-06-29 11:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1033,6 +1033,24 @@ msgstr ""
 #. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here' and 'member' are available"
 #: UrbanEventType.py
 msgid "tal_condition_descr"
+msgstr ""
+
+#. Default: "Events templates"
+#: templatessummary.pt
+msgid "templates_events_title"
+msgstr ""
+
+#. Default: " = Template has been modified"
+#: templatessummary.pt
+msgid "templates_summary_modified"
+msgstr ""
+
+#. Default: "Templates summary"
+#: templatessummary.pt
+msgid "templates_summary_title"
+msgstr ""
+
+msgid "textconfig_folder_title"
 msgstr ""
 
 # topics
@@ -2294,6 +2312,11 @@ msgstr ""
 msgid "urban_label_termTitle"
 msgstr ""
 
+#. Default: "Textdefaultvalues"
+#: LicenceConfig.py
+msgid "urban_label_textDefaultValues"
+msgstr ""
+
 msgid "urban_label_theLicenceDate"
 msgstr ""
 
@@ -2527,17 +2550,3 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
-#. Default: "Templates summary"
-#: templatessummary.pt
-msgid "templates_summary_title"
-msgstr ""
-
-#. Default: "Events templates"
-#: templatessummary.pt
-msgid "templates_events_title"
-msgstr ""
-
-#. Default: " = Template has been modified"
-#: templatessummary.pt
-msgid "templates_summary_modified"
-msgstr ""

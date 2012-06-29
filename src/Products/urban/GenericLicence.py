@@ -153,25 +153,27 @@ schema = Schema((
     TextField(
         name='missingPartsDetails',
         allowable_content_types=('text/plain',),
-        default_content_type='text/plain',
         widget=TextAreaWidget(
             label='Missingpartsdetails',
             label_msgid='urban_label_missingPartsDetails',
             i18n_domain='urban',
         ),
-        default_output_type='text/html',
         schemata='urban_description',
+        default_method='getDefaultText',
+        default_content_type='text/plain',
+        default_output_type='text/html',
     ),
     TextField(
         name='description',
-        allowable_content_types=('text/html',),
         widget=RichWidget(
             label='Description',
             label_msgid='urban_label_description',
             i18n_domain='urban',
         ),
         default_content_type='text/html',
+        allowable_content_types=('text/html',),
         schemata='urban_description',
+        default_method='getDefaultText',
         default_output_type='text/html',
         accessor="Description",
     ),
@@ -191,14 +193,15 @@ schema = Schema((
     TextField(
         name='folderZoneDetails',
         allowable_content_types=('text/plain',),
-        schemata='urban_location',
         widget=TextAreaWidget(
             label='Folderzonedetails',
             label_msgid='urban_label_folderZoneDetails',
             i18n_domain='urban',
         ),
-        default_output_type='text/html',
         default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/html',
     ),
     StringField(
         name='annoncedDelay',
@@ -214,14 +217,15 @@ schema = Schema((
     TextField(
         name='annoncedDelayDetails',
         allowable_content_types=('text/plain',),
-        default_content_type='text/plain',
         widget=TextAreaWidget(
             label='Annonceddelaydetails',
             label_msgid='urban_label_annoncedDelayDetails',
             i18n_domain='urban',
         ),
-        default_output_type='text/html',
         schemata='urban_description',
+        default_method='getDefaultText',
+        default_content_type='text/plain',
+        default_output_type='text/html',
     ),
     BooleanField(
         name='impactStudy',
@@ -285,14 +289,15 @@ schema = Schema((
     ),
     TextField(
         name='pashDetails',
-        allowable_content_types=('text/html',),
         widget=RichWidget(
             label='Pashdetails',
             label_msgid='urban_label_pashDetails',
             i18n_domain='urban',
         ),
-        schemata='urban_road',
         default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_road',
+        default_method='getDefaultText',
         default_output_type='text/html',
     ),
     LinesField(
@@ -344,7 +349,6 @@ schema = Schema((
     ),
     TextField(
         name='technicalRemarks',
-        allowable_content_types=('text/html',),
         widget=RichWidget(
             label='Technicalremarks',
             label_msgid='urban_label_technicalRemarks',
@@ -352,7 +356,9 @@ schema = Schema((
         ),
         default_content_type='text/html',
         default=technicalRemarksDefaultValue,
+        allowable_content_types=('text/html',),
         schemata='urban_road',
+        default_method='getDefaultText',
         default_output_type='text/html',
     ),
     BooleanField(
@@ -404,7 +410,6 @@ schema = Schema((
     TextField(
         name='subdivisionDetails',
         allowable_content_types="('text/plain',)",
-        schemata='urban_location',
         widget=TextAreaWidget(
             description='Number of the lots, ...',
             description_msgid="urban_descr_subdivisionDetails",
@@ -412,8 +417,10 @@ schema = Schema((
             label_msgid='urban_label_subdivisionDetails',
             i18n_domain='urban',
         ),
-        default_output_type='text/html',
         default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/html',
     ),
     LinesField(
         name='protectedBuilding',
@@ -431,14 +438,15 @@ schema = Schema((
     TextField(
         name='protectedBuildingDetails',
         allowable_content_types=('text/plain',),
-        schemata='urban_location',
         widget=TextAreaWidget(
             label='Protectedbuildingdetails',
             label_msgid='urban_label_protectedBuildingDetails',
             i18n_domain='urban',
         ),
-        default_output_type='text/html',
         default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/html',
     ),
     LinesField(
         name='SSC',
@@ -596,6 +604,19 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         vocabulary_name = field.vocabulary.path
         in_urban_config = field.vocabulary.inUrbanConfig
         return urban_tool.getVocabularyDefaultValue(vocabulary_name=vocabulary_name, context=context, in_urban_config=in_urban_config)
+
+    security.declarePublic('getDefaultText')
+    def getDefaultText(self):
+        """
+         Return the default text of a rich text field
+        """
+        urban_tool = getToolByName(self, 'portal_urban')
+        field = context = None
+        for frame_record in inspect.stack():
+            if frame_record[3] == 'getDefault':
+                field = frame_record[0].f_locals['self']
+                context = frame_record[0]. f_locals['instance']
+        return urban_tool.getTextDefaultValue(field.getName(), context)
 
     def divideList (self, divider, list):
         res = []

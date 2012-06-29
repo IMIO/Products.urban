@@ -60,6 +60,9 @@ DirectoryView.registerDirectory('skins', product_globals)
 ##code-section custom-init-head #fill in your manual code here
 from zope.i18nmessageid import MessageFactory
 UrbanMessage = MessageFactory("urban")
+from Products.validation import validation
+from validators.validator import isTextFieldConfiguredValidator
+validation.register(isTextFieldConfiguredValidator('isTextFieldConfigured'))
 ##/code-section custom-init-head
 
 
@@ -108,7 +111,6 @@ def initialize(context):
     import UrbanEventOpinionRequest
     import OrganisationTerm
     import MiscDemand
-    import TextConfig
     import UrbanConfigurationValue
 
     # Initialize portal tools

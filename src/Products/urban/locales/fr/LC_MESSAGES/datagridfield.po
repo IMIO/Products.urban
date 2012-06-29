@@ -35,3 +35,8 @@ msgstr "Date du début de l'enquête"
 msgid "Street"
 msgstr "Rue"
 
+msgid "Text"
+msgstr "Texte par défaut"
+
+msgid "FieldName"
+msgstr "Champ"

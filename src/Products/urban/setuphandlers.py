@@ -28,7 +28,6 @@ from Products.urban.config import TOPIC_TYPE
 from zExceptions import BadRequest
 from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import ILicenceContainer
-from Products.urban import TextConfig
 from zope.interface import alsoProvides
 from zope.component import queryUtility
 from zope.i18n.interfaces import ITranslationDomain
@@ -209,11 +208,6 @@ def addUrbanConfigs(context):
             newFolder.setConstrainTypesMode(1)
             newFolder.setLocallyAllowedTypes(['UrbanEventType',])
             newFolder.setImmediatelyAddableTypes(['UrbanEventType',])
-
-        #add UrbanEventTypes folder
-        if not hasattr(aq_base(configFolder), 'textconfig'):
-            newFolderid = configFolder.invokeFactory("TextConfig",id="textconfig",title=_("textconfig_folder_title", 'urban', context=site.REQUEST))
-            newFolder = getattr(configFolder, newFolderid)
 
         #add TownshipFolderCategories folder
         if not hasattr(aq_base(configFolder), 'townshipfoldercategories'):

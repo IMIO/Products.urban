@@ -34,3 +34,9 @@ msgstr ""
 
 msgid "Feature"
 msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "FieldName"
+msgstr ""

@@ -69,6 +69,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_description',
+        default_method='getDefaultText',
     ),
     DataGridField(
         name='workLocations',
