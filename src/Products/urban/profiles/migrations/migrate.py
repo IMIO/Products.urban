@@ -693,9 +693,9 @@ def migrateFilesToUrbanDoc(context):
 
     logger = context.getLogger('migrationToUrbanDoc')
     portal = context.getSite()
-    path = '/'.join(['', portal.getPhysicalPath()[1], 'portal_urban', 'globaltemplates'])
+    path = "%s/portal_urban/globaltemplates"%'/'.join(portal.getPhysicalPath())
     migrators = (
-                    (FilesToUrbanDocMigrator, {'SearchableText':['cu1 OR cu2 OR decl OR div OR lot OR miscdemand OR "not" OR urb']}),
+                    (FilesToUrbanDocMigrator, {'SearchableText':['cu1 OR cu2 OR decl OR div OR lot OR miscdemand OR "not" OR urb OR peb OR declaenv']}),
                     (FilesToUrbanDocMigrator, {'path':path}),
                 )
     #to avoid link integrity problems, disable checks
