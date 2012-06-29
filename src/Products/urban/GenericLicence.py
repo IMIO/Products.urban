@@ -343,7 +343,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         default_content_type='text/html',
-        default=equipmentAndRoadRequirementsDefaultValue,
+        default_method='getDefaultText',
         schemata='urban_road',
         default_output_type='text/html',
     ),

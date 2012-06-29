@@ -60,7 +60,7 @@ schema = Schema((
         ),
         allow_oddeven=True,
         columns=('fieldname', 'text'),
-        validators=(('isTextFieldConfiguredValidator', V_REQUIRED)),
+        validators=('isTextFieldConfigured',),
     ),
 
 ),
