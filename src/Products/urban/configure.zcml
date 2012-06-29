@@ -95,7 +95,7 @@
 
   <adapter
     name=".subtypes.urbandoc"
-    for=".subtypes.interfaces.IATBlobUrbanDoc"
+    for=".interfaces.IUrbanDoc"
     factory=".subtypes.urbandoc.UrbanDocExtender" />
 
   <adapter name="parcelInfosIndex" factory=".indexes.genericlicence_parcelinfoindex" />

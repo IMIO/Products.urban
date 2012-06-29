@@ -170,6 +170,10 @@ class IUrbanConfigurationValue(Interface):
     """Marker interface for .UrbanConfigurationValue.UrbanConfigurationValue
     """
 
+class IUrbanDoc(Interface):
+    """Marker interface for .UrbanDoc.UrbanDoc
+    """
+
 ##code-section FOOT
 class ILicenceContainer(Interface):
     """

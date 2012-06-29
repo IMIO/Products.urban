@@ -26,16 +26,6 @@ __docformat__ = 'plaintext'
 from Products.CMFCore.permissions import setDefaultRoles
 ##code-section config-head #fill in your manual code here
 
-#register interfaces that should be applied on UrbanDoc content type
-from Products.urban.subtypes.interfaces import IATBlobUrbanDoc
-from plone.app.blob.markings import interfaces as blob_interfaces
-from plone.app.blob.markings import z2interfaces
-from Products.ATContentTypes.interface import file as atfile
-from Products.ATContentTypes.interfaces import IATFile as Z2IATFile
-blob_interfaces['UrbanDoc'] = [IATBlobUrbanDoc, atfile.IATFile, atfile.IFileContent]
-z2interfaces['UrbanDoc'] = [Z2IATFile]
-#/register interfaces that should be applied on UrbanDoc objects end
-
 ##/code-section config-head
 
 
@@ -79,6 +69,7 @@ ADD_CONTENT_PERMISSIONS = {
     'OrganisationTerm': 'urban: Add OrganisationTerm',
     'MiscDemand': 'urban: Add MiscDemand',
     'UrbanConfigurationValue': 'urban: Add UrbanConfigurationValue',
+    'UrbanDoc': 'urban: Add UrbanDoc',
 }
 
 setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
@@ -114,6 +105,7 @@ setDefaultRoles('urban: Add UrbanEventOpinionRequest', ('Manager', 'Owner', 'Con
 setDefaultRoles('urban: Add OrganisationTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanConfigurationValue',  ('Manager', ))
+setDefaultRoles('urban: Add UrbanDoc',  ('Manager', ))
 
 product_globals = globals()
 

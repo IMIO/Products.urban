@@ -35,5 +35,6 @@
   <type portal_type="OrganisationTerm"/>
   <type portal_type="MiscDemand"/>
   <type portal_type="UrbanConfigurationValue"/>
+  <type portal_type="UrbanDoc"/>
  </factorytypes>
 </object>
