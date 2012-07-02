@@ -1421,23 +1421,33 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return ''
 
     security.declarePublic('queryCatalog')
-    def queryCatalog(self, batch, context, specificSearch, theObjects=False, batchlen=20):
+    def queryCatalog(self, batch, context, specificSearch, theObjects=False, batchlen=20, **kwargs):
         """
           This method is used in the templates to display content in listing tables
+          If some kwargs are received, they will update the defined querystring of the specificSearch
         """
         portal_catalog = getToolByName(self, 'portal_catalog')
         if specificSearch == 'searchUrbanEvents':
             #search the existing urbanEvents
-            res = portal_catalog(object_provides = 'Products.urban.interfaces.IUrbanEvent', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent', sort_order='reverse')
+            queryString = {'object_provides':'Products.urban.interfaces.IUrbanEvent',
+                           'path':'/'.join(context.getPhysicalPath()),
+                           'sort_on':'getObjPositionInParent',
+                           'sort_order':'reverse',}
         elif specificSearch == 'searchArchitects':
             #search the existing architects
-            res = portal_catalog(portal_type='Architect', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')
+            queryString = {'portal_type':'Architect',
+                           'path':'/'.join(context.getPhysicalPath()),
+                           'sort_on':'getObjPositionInParent',}
         elif specificSearch == 'searchNotaries':
             #search the existing architects
-            res = portal_catalog(portal_type='Notary', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')
+            queryString = {'portal_type':'Notary',
+                           'path':'/'.join(context.getPhysicalPath()),
+                           'sort_on':'getObjPositionInParent'}
         elif specificSearch == 'searchGeometricians':
             #search the existing architects
-            res = portal_catalog(portal_type='Geometrician', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')
+            queryString = {'portal_type':'Geometrician',
+                           'path':'/'.join(context.getPhysicalPath()),
+                           'sort_on':'getObjPositionInParent'}
         elif specificSearch == 'searchPortionOuts':
             #search the existing parcels
             #we can search existing parcels on a licence (directly contained)
@@ -1446,24 +1456,39 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             #or on an UrbanEventInquiry where parcels are contained in RecipientCadastre
             else:
                 depth = 2
-            res = portal_catalog(portal_type='PortionOut', path={'query': '/'.join(context.getPhysicalPath()), 'depth': depth}, sort_on='getObjPositionInParent')
+            queryString = {'portal_type':'PortionOut',
+                           'path':{'query': '/'.join(context.getPhysicalPath()), 'depth': depth},
+                            'sort_on':'getObjPositionInParent'}
         elif specificSearch == 'searchClaimants':
             #search the existing claimants
-            res = portal_catalog(portal_type='Claimant', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')
+            queryString = {'portal_type':'Claimant',
+                           'path':'/'.join(context.getPhysicalPath()),
+                           'sort_on':'getObjPositionInParent'}
         elif specificSearch == 'searchRecipients':
             #search the existing recipients
-            res = portal_catalog(portal_type='RecipientCadastre', path='/'.join(context.getPhysicalPath()), sort_on='getObjPositionInParent')
+            queryString = {'portal_type':'RecipientCadastre',
+                           'path':'/'.join(context.getPhysicalPath()),
+                           'sort_on':'getObjPositionInParent'}
         elif specificSearch == 'searchLinkedDocuments':
             #search the existing recipients
-            res = portal_catalog(portal_type='UrbanDoc', path='/'.join(context.getPhysicalPath()), sort_on='created')
+            queryString = {'portal_type':'UrbanDoc',
+                           'path':'/'.join(context.getPhysicalPath()),
+                           'sort_on':'created'}
         elif specificSearch == 'searchLinkedAnnexes':
             #search the existing recipients
-            res = portal_catalog(portal_type='File', path='/'.join(context.getPhysicalPath()), sort_on='created')
+            queryString = {'portal_type':'File',
+                           'path':'/'.join(context.getPhysicalPath()),
+                           'sort_on':'created'}
         elif specificSearch == 'searchLastElements':
             #search the existing elements depending on the folder we are in
-            res = portal_catalog(portal_type=URBAN_TYPES, path='/'.join(context.getPhysicalPath()), sort_on='created', sort_order='reverse')
-        else:
-            res = []
+            queryString = {'portal_type':URBAN_TYPES,
+                           'path':'/'.join(context.getPhysicalPath()),
+                           'sort_on':'created',
+                           'sort_order':'reverse'}
+
+        #update queryString with given kwargs
+        queryString.update(kwargs)
+        res = portal_catalog(queryString)
         if theObjects:
             objs = []
             for brain in res:
