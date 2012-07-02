@@ -296,37 +296,37 @@ def addUrbanConfigs(context):
                 newFolder.setConstrainTypesMode(1)
                 newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
                 newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_1",title=u"article 263 §1er 1° les aménagements conformes à la destination normale des cours et jardins", extraValue="article 263 §1er 1°",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_1",title=u"263 §1er 1° les aménagements conformes à la destination normale des cours et jardins", extraValue="263 §1er 1°",
                                         description="« article 263 §1er 1° les aménagements conformes à la destination normale des cours et jardins pour autant qu’ils relèvent des actes et travaux visés à l’article 262, 4°, b, d, e et g, mais n’en remplissent pas les conditions; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_2",title=u"article 263 §1er 2° la pose ou l'enlèvement d'un car-port <30m²", extraValue="article 263 §1er 2°",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_2",title=u"263 §1er 2° la pose ou l'enlèvement d'un car-port <30m²", extraValue="263 §1er 2°",
                                         description="« article 263 §1er 2° par propriété, la pose ou l’enlèvement d’un car port d’une superficie maximale de 30,00 m² qui ne respecte pas les conditions visées à l’article 262, 5°, f; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_3",title=u"article 263 §1er 3° l'ouverture ou la modification de baies", extraValue="article 263 §1er 3°",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_3",title=u"263 §1er 3° l'ouverture ou la modification de baies", extraValue="263 §1er 3°",
                                         description="« article 263 §1er 3° l’ouverture ou la modification de baies autres que celles visées à l’article 262, 9° et 10°, de même aspect architectural que les baies existantes; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_4",title=u"article 263 §1er 4° le remplacement de parements d'élévation/couverture de toiture par plus isolants", extraValue="article 263 §1er 4°",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_4",title=u"263 §1er 4° le remplacement de parements d'élévation/couverture de toiture par plus isolants", extraValue="263 §1er 4°",
                                         description="« article 263 §1er 4° le remplacement de parements d’élévation et de couvertures de toiture par des parements et couvertures isolants visés à l’article 262, 11°, qui n’en remplissent pas les conditions; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_5a",title=u"article 263 §1er 5° a) la construction d'un volume secondaire en contiguïté <30m²", extraValue="article 263 §1er 5° a)",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_5a",title=u"263 §1er 5° a) la construction d'un volume secondaire en contiguïté <30m²", extraValue="263 §1er 5° a)",
                                         description="« article 263 §1er 5° a) par propriété, la construction ou le remplacement d’un volume secondaire par un volume secondaire, sans étage s’il est érigé en contiguïté avec un bâtiment existant, à l’arrière de ce bâtiment ou en recul d’au moins 4,00 m de l’alignement ou raccordé à ce bâtiment par un volume à toiture plate; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_5b",title=u"article 263 §1er 5° b) la construction d'un volume secondaire isolé <30m²", extraValue="article 263 §1er 5° b)",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_5b",title=u"263 §1er 5° b) la construction d'un volume secondaire isolé <30m²", extraValue="263 §1er 5° b)",
                                         description="« article 263 §1er 5° b) par propriété, la construction ou le remplacement d’un volume secondaire par un volume secondaire, sans étage s’il est isolé et érigé à l’arrière d’un bâtiment existant; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_6a",title=u"article 263 §1er 6° a) la construction d'un abri pour un ou des animaux", extraValue="article 263 §1er 6° a)",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_6a",title=u"263 §1er 6° a) la construction d'un abri pour un ou des animaux", extraValue="263 §1er 6° a)",
                                         description="« article 263 §1er 6° a) dans les cours et jardins, les abris pour un ou des animaux; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_6b",title=u"article 263 §1er 6° b) la pose d'un rucher", extraValue="article 263 §1er 6° b)",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_6b",title=u"263 §1er 6° b) la pose d'un rucher", extraValue="263 §1er 6° b)",
                                         description="« article 263 §1er 6° b) dans les cours et jardins, un rucher, sans préjudice de l’application des dispositions visées au Code rural; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_6c",title=u"article 263 §1er 6° c) Clôtures/portiques/portillons", extraValue="article 263 §1er 6° c)",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_6c",title=u"263 §1er 6° c) Clôtures/portiques/portillons", extraValue="263 §1er 6° c)",
                                         description="« article 263 §1er 6° c) dans les cours et jardins, la pose de clôtures, de portiques ou de portillons autres que ceux visés à l’article 262, 5°, e; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_6d",title=u"article 263 §1er 6° d) Etang/piscine non couverte < 75m²", extraValue="article 263 §1er 6° d)",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_6d",title=u"263 §1er 6° d) Etang/piscine non couverte < 75m²", extraValue="263 §1er 6° d)",
                                         description="« article 263 §1er 6° d) dans les cours et jardins, par propriété, pour autant qu’ils soient situés à l’arrière de l’habitation, la création d’un étang ou d’une piscine non couverte n’excédant pas 75,00 m² pour autant que les déblais nécessaires à ces aménagements n’entraînent aucune modification sensible du relief naturel du sol sur le reste de la propriété; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_7",title=u"article 263 §1er 7° Démolition <30 m²", extraValue="article 263 §1er 7°",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_7",title=u"263 §1er 7° Démolition <30 m²", extraValue="263 §1er 7°",
                                         description="« article 263 §1er 7° la démolition de constructions sans étage ni sous-sol;")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_8a",title=u"article 263 §1er 8° a) les silos de stockage", extraValue="article 263 §1er 8° a)",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_8a",title=u"263 §1er 8° a) les silos de stockage", extraValue="263 §1er 8° a)",
                                         description="« article 263 §1er 8° a) pour les exploitations agricoles, la construction de silos de stockage en tout ou en partie enterrés, pour autant que le niveau supérieur des murs de soutènement n’excède pas de 1,50 m le niveau du relief naturel du sol; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_8b",title=u"article 263 §1er 8° b) les dalles de fumière", extraValue="article 263 §1er 8° b)",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_8b",title=u"263 §1er 8° b) les dalles de fumière", extraValue="263 §1er 8° b)",
                                         description="« article 263 §1er 8° b) pour les exploitations agricoles, l’établissement d’une dalle de fumière; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_8c",title=u"article 263 §1er 8° c) les citernes de récolte ou de stockage d'eau/effluents d'élevage", extraValue="article 263 §1er 8° c)",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_8c",title=u"263 §1er 8° c) les citernes de récolte ou de stockage d'eau/effluents d'élevage", extraValue="263 §1er 8° c)",
                                         description="« article 263 §1er 8° c) pour les exploitations agricoles, la pose de citernes de récolte ou de stockage d’eau ou d’effluents d’élevage, en tout ou en partie enterrées, pour autant que le niveau supérieur du mur de soutènement n’excède pas 0,50 m et que les citernes soient implantées à 10,00 m minimum de tout cours d’eau navigable ou non navigable, à 3,00 m minimum du domaine public et à 20,00 m minimum de toute habitation autre que celle de l’exploitant; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_9",title=u"article 263 §1er 9° la culture de sapins de Noël", extraValue="article 263 §1er 9°",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_9",title=u"263 §1er 9° la culture de sapins de Noël", extraValue="263 §1er 9°",
                                         description="« article 263 §1er 9° la culture de sapins de Noël pour une période ne dépassant pas douze ans; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_10",title=u"article 263 §1er 10° les miradors", extraValue="article 263 §1er 10°",
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="263_1_10",title=u"263 §1er 10° les miradors", extraValue="263 §1er 10°",
                                         description="« article 263 §1er 10° dans la zone contiguë à la zone forestière, les miradors en bois visés à l’article 1er, § 1er, 9°, de la loi du 28 février 1882 sur la chasse; »")
 
         if urban_type == 'ParcelOutLicence':

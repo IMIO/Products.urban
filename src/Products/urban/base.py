@@ -406,8 +406,8 @@ class UrbanBase(object):
         """
           Return a list of the display values of the given field
         """
-        return self._getValueForTemplate(field_name=field_name, obj=obj, raw_value=raw_value,
-                                         vocabulary=vocabulary, subfield_name=subfield, list=True)
+        return self._getValuesForTemplate(field_name=field_name, obj=obj, raw_value=raw_value,
+                                         vocabulary=vocabulary, subfield_name=subfield)
 
     security.declarePublic('displayValuesFromVocForTemplate')
     def displayValuesFromVocForTemplate(self, raw_value, vocabulary, obj=None):
@@ -416,9 +416,27 @@ class UrbanBase(object):
         """
         if not raw_value:
             return []
-        return self._getValueForTemplate(obj=obj, raw_value=raw_value, vocabulary=vocabulary, list=True)
+        return self._getValuesForTemplate(obj=obj, raw_value=raw_value, vocabulary=vocabulary)
 
-    def _getValueForTemplate(self, field_name='', obj=None, raw_value=None, vocabulary=None, subfield_name=None, list=False):
+    def _getValuesForTemplate(self, field_name='', obj=None, raw_value=None, vocabulary=None, subfield_name=None):
+        """
+          Return the display value of the given field
+        """
+        if not obj:
+            obj = self
+        if subfield_name:
+            field = obj.getField(field_name)
+            if field.vocabulary:
+                objs = [field.vocabulary.getAllVocTerms(obj).get(key, None) for key in field.getRaw(obj)]
+            else:
+                catalog = getToolByName(self, 'portal_catalog')
+                objs = [obj_.getObject() for obj_ in catalog(UID=field.getRaw(obj))]
+            field_name = subfield_name
+            return [self._getValueForTemplate(field_name, obj_, raw_value, vocabulary) for obj_ in objs]
+        return self._getValueForTemplate(field_name, obj, raw_value, vocabulary)
+
+
+    def _getValueForTemplate(self, field_name='', obj=None, raw_value=None, vocabulary=None, subfield_name=None):
         """
           Return the display value of the given field
         """
@@ -429,7 +447,7 @@ class UrbanBase(object):
             if field.vocabulary:
                 voc_key = field.getRaw(obj)
                 if type(voc_key) != str:
-                    voc_key = voc_key[0]
+                    obj = field.vocabulary.getAllVocTerms(obj).get(voc_key[0], None)
                 obj = field.vocabulary.getAllVocTerms(obj).get(voc_key, None)
             else:
                 catalog = getToolByName(self, 'portal_catalog')
@@ -447,12 +465,12 @@ class UrbanBase(object):
             field_value = field_accessor()
         if not field_value:
             return ''
-        if not list:
+        if type(field_value) == str:
             return obj.displayValue(displaylist, field_value)
-        else:
-            if type(field_value) == str:
-                field_value = [field_value]
-            return [obj.displayValue(displaylist, value) for value in field_value]
+        result = [obj.displayValue(displaylist, value) for value in field_value]
+        if len(result) == 1:
+            return result[0]
+        return result
 
     security.declarePublic('listVocabularyForTemplate')
     def listVocabularyForTemplate(self, voc_name, inUrbanConfig=True):

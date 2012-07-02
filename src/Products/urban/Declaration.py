@@ -32,14 +32,15 @@ optional_fields = []
 
 schema = Schema((
 
-    StringField(
+    LinesField(
         name='article',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
             label='Article',
             label_msgid='urban_label_article',
             i18n_domain='urban',
         ),
         schemata='urban_description',
+        multiValued=1,
         vocabulary=UrbanVocabulary('articles', with_empty_value=True),
         default_method='getDefaultValue',
     ),
@@ -126,18 +127,6 @@ class Declaration(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     def getLastTheLicence(self):
         return self._getLastEvent(interfaces.ITheLicenceEvent)
-
-    security.declarePublic('getArticle')
-    def getArticle(self, theObject=False):
-        """
-          Returns the article value or the UrbanVocabularyTerm if theObject=True
-        """
-        res = self.getField('article').get(self)
-        if res and theObject:
-            tool = getToolByName(self, 'portal_urban')
-            urbanConfig = tool.getUrbanConfig(self)
-            res = getattr(urbanConfig.articles, res)
-        return res
 
     security.declarePublic('getReceivability')
     def getReceivability(self):
