@@ -48,9 +48,9 @@
 </div>
 
 <div metal:define-macro="urbanMapScript">
-	<script tal:content="string:var NISNum='${context/portal_urban/getNISNum}';var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">    
+	<script tal:content="string:var NISNum='${context/portal_urban/getNISNum}';var urbanProrietariesCapakeyArray=${view/getListProprietariesCapaKey};var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">    
 	</script>        
-    <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/urban-layout.js"></script>
+    <script type="text/javascript" src="http://mondomaine.be/fleron/app/lib/App/urban-layout.js"></script>
     <script type="text/javascript" src="https://urbanmap.lescommunes.be/app/lib/App/urban-map.js"></script>   
 </div>
 

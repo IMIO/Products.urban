@@ -2,6 +2,7 @@ from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Acquisition import aq_inner, aq_base
+from Products.urban.interfaces import IInquiry
 
 class MapView(BrowserView):
     """
@@ -28,7 +29,7 @@ class MapView(BrowserView):
         if not hasattr(aq_base(context), "getParcels"):
             return listCapaKey
         
-        for parcel in  context.getParcels():
+        for parcel in context.getParcels():
             divisioncode = parcel.getDivisionCode()
             section = parcel.getSection()
             radical = parcel.getRadical()
@@ -47,6 +48,44 @@ class MapView(BrowserView):
             except ValueError:
                 capaKey = ""
             listCapaKey.append(capaKey)
+
+        return listCapaKey
+
+    def getListProprietariesCapaKey(self):
+        """
+           Return the list of capaKeys for each parcel of concerned proprietaries
+        """
+        listCapaKey = []
+        context = aq_inner(self.context)
+
+        "Allow to show the map without the licence object"
+        if not hasattr(aq_base(context), "getParcels"):
+            return listCapaKey
+
+        #add the inquiry parcels if possible
+        if IInquiry.providedBy(context):
+            #get last inquiry
+            lastInquiry = context.getLastInquiry()
+            if lastInquiry:
+                # only display active parcels on the map
+                for parcel in lastInquiry.getParcels(onlyActive=True):
+                    divisioncode = parcel.getDivisionCode()
+                    section = parcel.getSection()
+                    radical = parcel.getRadical()
+                    puissance = parcel.getPuissance()
+                    exposant = parcel.getExposant()
+                    bis = parcel.getBis()
+                    if not puissance:
+                        puissance = 0
+                    if not exposant:
+                        exposant = "_"
+                    if not bis:
+                        bis = 0
+                    try:
+                        capaKey = "%s%s%04d/%02d%s%03d" % (divisioncode, section, int(radical), int(bis), exposant, int(puissance))
+                    except ValueError:
+                        capaKey = ""
+                    listCapaKey.append(capaKey)
         return listCapaKey
 
 class FullMapView(MapView):

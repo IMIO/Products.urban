@@ -14,7 +14,7 @@
 <metal:main_macro define-macro="main">
 <metal:body define-macro="body_macro" tal:define="useTabbing python: context.portal_urban.getUseTabbing();
                                                   member context/@@plone_portal_state/member;
-                                                  recipients view/getRecipients;
+                                                  recipients context/getRecipients;
                                                   linkedUrbanEventType view/getUrbaneventtypes;
                                                   global parcels view/getParcels;">
 

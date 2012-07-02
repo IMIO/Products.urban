@@ -1,4 +1,3 @@
-from AccessControl import ClassSecurityInfo
 from Acquisition import aq_inner
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
@@ -69,13 +68,6 @@ class UrbanEventView(BrowserView):
         """
         return "%s/createUrbanDoc?urban_template_uid=%s&urban_event_uid=%s" %(context.absolute_url(), template.UID(), context.UID())
 
-    def getRecipients(self):
-        """
-         Return the recipients of the UrbanEvent
-        """
-        context = aq_inner(self.context)
-        return context.objectValues('RecipientCadastre')
-
     def getUrbaneventtypes(self):
         """
           Return the accessor urbanEventTypes()
@@ -105,6 +97,10 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
     def getParcels(self):
         context = aq_inner(self.context)
         return context.getParcels()
+
+    def getRecipients(self):
+        context = aq_inner(self.context)
+        return context.getRecipients()
 
     def getInquiryData(self):
         """
@@ -158,7 +154,7 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
         #if we do the search again, we first delete old datas...
         #remove every RecipientCadastre
         context = aq_inner(self.context)
-        recipients = self.getRecipients()
+        recipients = context.getRecipients()
         if recipients:
             context.manage_delObjects([recipient.getId() for recipient in recipients])
 

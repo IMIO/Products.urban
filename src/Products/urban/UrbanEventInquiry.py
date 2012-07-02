@@ -128,12 +128,25 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
             raise BeforeDeleteException, _('cannot_remove_urbaneventinquiry_notthelast', mapping={'lasturbaneventinquiryurl': lastUrbanEventInquiry.absolute_url()}, default="You can not delete an UrbanEventInquiry if it is not the last!  Remove the last UrbanEventInquiries before being able to remove this one!")
         BaseFolder.manage_beforeDelete(self, item, container)
 
+    def getRecipients(self, theObjects=True, onlyActive=False):
+        """
+         Return the recipients of the UrbanEvent
+        """
+        queryString = {'portal_type': 'RecipientCadastre',
+                       'path': '/'.join(self.getPhysicalPath())}
+        if onlyActive:
+            queryString['review_state'] = 'enabled'
+        brains = self.portal_catalog(**queryString)
+        if theObjects:
+            return [brain.getObject() for brain in brains]
+        return brains
+
     security.declarePublic('getClaimants')
     def getClaimants(self):
         """
           Return the claimants for this UrbanEventInquiry
         """
-        return self.listFolderContents({'portal_type': 'Claimant'})
+        return self.listFolderContents({'portal_type': 'Claimant',})
 
     security.declarePublic('getMultipleClaimantsCSV')
     def getMultipleClaimantsCSV(self):
@@ -150,12 +163,22 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
         return toreturn
 
     security.declarePublic('getParcels')
-    def getParcels(self):
+    def getParcels(self, onlyActive=False):
         """
-          return the contained parcels
+          Returns the contained parcels
+          Parcels in this container are created while calculating the "rayon de 50m"
+          We can specify here that we only want active parcels because we can deactivate some proprietaries
         """
         tool = getToolByName(self, 'portal_urban')
-        parcels = tool.queryCatalog(batch=False, context=self, specificSearch='searchPortionOuts', theObjects=True)
+        if onlyActive:
+            #only take active RecipientCadastre paths into account
+            activeRecipients = self.getRecipients(theObjects=False, onlyActive=True)
+            paths = [activeRecipient.getPath() for activeRecipient in activeRecipients]
+            params = {'path':{'query': paths, 'depth':2},}
+            return tool.queryCatalog(batch=False, context=self, specificSearch='searchPortionOuts', theObjects=True, **params)
+        else:
+            return tool.queryCatalog(batch=False, context=self, specificSearch='searchPortionOuts', theObjects=True)
+
         return parcels
 
     security.declarePublic('getAbbreviatedArticles')
