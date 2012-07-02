@@ -349,16 +349,15 @@ schema = Schema((
     ),
     TextField(
         name='technicalRemarks',
+        allowable_content_types=('text/html',),
         widget=RichWidget(
             label='Technicalremarks',
             label_msgid='urban_label_technicalRemarks',
             i18n_domain='urban',
         ),
         default_content_type='text/html',
-        default=technicalRemarksDefaultValue,
-        allowable_content_types=('text/html',),
-        schemata='urban_road',
         default_method='getDefaultText',
+        schemata='urban_road',
         default_output_type='text/html',
     ),
     BooleanField(

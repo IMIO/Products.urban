@@ -25,6 +25,7 @@ import transaction
 from Acquisition import aq_base
 from Products.CMFPlone.utils import base_hasattr
 from Products.urban.config import TOPIC_TYPE
+from Products.urban.config import DefaultTexts
 from zExceptions import BadRequest
 from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import ILicenceContainer
@@ -1589,6 +1590,23 @@ def importStreets(context):
     #    newStreet=cityfolder.invokeFactory("Street",id=site.generateUniqueId('Street'),streetName=items[0],streetCode=items[3])
     #fstreets.close()
     pass
+
+def setDefaultValues(context):
+    """
+    Set some default values in the config
+    """
+    if context.readDataFile('urban_tests_marker.txt') is None:
+        return
+
+    site = context.getSite()
+    urban_tool = site.portal_urban
+    urban_folder = site.urban
+
+    #set default values for text fields
+    for licencetype, defaulttexts in DefaultTexts.iteritems():
+        licence_config = getattr(urban_tool, licencetype.lower())
+        licence_config.setTextDefaultValues([{'text': text, 'fieldname': field} for field, text in defaulttexts.iteritems()])
+
 
 def addTestLicences(context):
     """
