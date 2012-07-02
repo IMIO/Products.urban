@@ -70,6 +70,8 @@ def migrateToPlone4(context):
     migrateApplicantToProprietaryForCU(context)
     #migrate templates and generated files portal_type from 'File' to 'UrbanDoc'
     migrateFilesToUrbanDoc(context)
+    #change allowed types in globaltemplates folder
+    migrateGlobalTemplatesAllowedTypes(context)
 
 def contentmigrationLogger(oldObject, **kwargs):
     """ Generic logger method to be used with CustomQueryWalker """
@@ -759,3 +761,13 @@ class FilesToUrbanDocMigrator(object, InplaceATItemMigrator):
     def last_migrate_reindex(self):
         self.new.reindexObject(idxs=['object_provides', 'portal_type',
             'Type', 'UID'])
+
+def migrateGlobalTemplatesAllowedTypes(context):
+    site = context.getSite()
+    logger = context.getLogger('migrateGlobalTemplatesAllowedTypes')
+    urban_tool = getToolByName(site, 'portal_urban')
+    folder = getattr(urban_tool, 'globaltemplates')
+    if folder.getImmediatelyAddableTypes() == folder.getLocallyAllowedTypes() == ('File',):
+        folder.setImmediatelyAddableTypes('UrbanDoc')
+        folder.setLocallyAllowedTypes('UrbanDoc')
+        logger.info("Replaced addable types on folder '%s': value 'UrbanDoc'"%('/'.join(folder.getPhysicalPath())))
