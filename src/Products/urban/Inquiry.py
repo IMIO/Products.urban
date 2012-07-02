@@ -197,6 +197,19 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         in_urban_config = field.vocabulary.inUrbanConfig
         return urban_tool.getVocabularyDefaultValue(vocabulary_name=vocabulary_name, context=context, in_urban_config=in_urban_config)
 
+    security.declarePublic('getDefaultText')
+    def getDefaultText(self):
+        """
+         Return the default text of a rich text field
+        """
+        urban_tool = getToolByName(self, 'portal_urban')
+        field = context = None
+        for frame_record in inspect.stack():
+            if frame_record[3] == 'getDefault':
+                field = frame_record[0].f_locals['self']
+                context = frame_record[0]. f_locals['instance']
+        return urban_tool.getTextDefaultValue(field.getName(), context)
+
     security.declarePublic('validate_investigationStart')
     def validate_investigationStart(self, value):
         """

@@ -20,6 +20,10 @@ class TestDefaultValues(unittest.TestCase):
         urban = portal.urban
         login(portal, 'urbanmanager')
 
+    """
+    Tests for the configurable listing default values
+    """
+
 
     def testNoDefaultValuesConfigured(self):
         buildlicences = self.buildlicences
@@ -94,3 +98,39 @@ class TestDefaultValues(unittest.TestCase):
             for field in licence.schema.fields():
                 if isinstance(field.vocabulary, UrbanVocabulary) and field.type != 'datagrid':
                     self.assertEquals(field.default_method, 'getDefaultValue')
+
+
+    """
+    Tests for the text default values
+    """
+
+    def testNoTextDefaultValuesConfigured(self):
+        buildlicences = self.buildlicences
+        #create a new buildlicence
+        buildlicences.invokeFactory('BuildLicence', id='newlicence',title='blabla')
+        newlicence = buildlicences.newlicence
+        #text fields should be empty by default
+        self.assertEqual('', newlicence.Description())
+
+
+    def testTextValueConfigured(self):
+        licence_config = self.site.portal_urban.buildlicence
+        #set the default text value fotr the fdescription field
+        default_text = '<p>Bla bla</p>'
+        licence_config.setTextDefaultValues(({'text': default_text, 'fieldname': 'description'},))
+        #any new licence should have this text as value for the description field
+        self.site.urban.buildlicences.invokeFactory('BuildLicence', 'buildlicence')
+        licence = self.site.urban.buildlicences.buildlicence
+        self.assertEquals(default_text, licence.Description())
+
+
+    def testDefaultTextMethodIsDefinedForEachTextField(self):
+        #each field with a configurable listing (<=> has a UrbanVocabulary defined as its vocabulary) should
+        #have the 'getDefaultValue' method defined on it, else the default value system wont work
+        site = self.site
+        catalog = getToolByName(site, 'portal_catalog')
+        test_licences = [brain.getObject() for brain in catalog(portal_type=URBAN_TYPES)]
+        for licence in test_licences:
+            for field in licence.schema.fields():
+                if hasattr(field, 'defaut_content_type') and field.default_content_type.startswith('text'):
+                    self.assertEquals(field.default_method, 'getDefaultText')

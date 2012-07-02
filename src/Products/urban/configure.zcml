@@ -17,6 +17,7 @@
   <include package="Products.Archetypes"/>
   <include package="Products.MasterSelectWidget"/>
   <include package="collective.externaleditor"/>
+  <include package="collective.datagridcolumns"/>
   <include package="plone.app.referenceintegrity"/>
   <include package="communesplone.urban.schedule"/>
   <include package="communesplone.iconified_document_actions"/>
