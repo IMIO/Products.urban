@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2012-06-29 11:35+0000\n"
+"POT-Creation-Date: 2012-06-29 11:40+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -855,6 +855,9 @@ msgstr "Avis à demander en cas de travaux"
 msgid "outside_catchment"
 msgstr "Hors captage"
 
+msgid "parcelLinkedLicences"
+msgstr "Dossier(s) lié(s)"
+
 msgid "parcellings_folder_title"
 msgstr "Lotissements"
 
@@ -1050,9 +1053,6 @@ msgstr " = Le modèle a été modifié"
 #: templatessummary.pt
 msgid "templates_summary_title"
 msgstr "Liste des modèles définis dans la configuration"
-
-msgid "textconfig_folder_title"
-msgstr "Valeur par défaut des champs de texte"
 
 # topics
 msgid "topics"

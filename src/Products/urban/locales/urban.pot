@@ -884,6 +884,9 @@ msgstr ""
 msgid "parcels_layer_title"
 msgstr ""
 
+msgid "parcelLinkedLicences"
+msgstr ""
+
 msgid "pashs_folder_title"
 msgstr ""
 
@@ -1048,9 +1051,6 @@ msgstr ""
 #. Default: "Templates summary"
 #: templatessummary.pt
 msgid "templates_summary_title"
-msgstr ""
-
-msgid "textconfig_folder_title"
 msgstr ""
 
 # topics

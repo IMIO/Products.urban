@@ -382,7 +382,8 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                     <th tal:condition="isAnEquipment" i18n:domain="urban" i18n:translate="launchdate">
                       Launch date
                     </th>
-                    <th tal:condition="isAParcel" i18n:domain="urban" i18n:translate="">
+                    <th tal:condition="isAParcel" i18n:domain="urban" i18n:translate="parcelLinkedLicences">
+                      Parcel linked licences
                     </th>
                     <th style="text-align: right" tal:condition="showActions" i18n:domain="urban" i18n:translate="actions">
                       Actions
@@ -456,6 +457,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                                <img  src="linkedfolders.png" class="urban-linkedfolders-icon"/>
                              </a>
                          </span>
+                         <span tal:condition="not:parcel_history">-</span>
                      </td>
 
                     </tal:block>

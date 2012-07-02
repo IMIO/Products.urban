@@ -20,6 +20,9 @@ msgstr "Date de fin de l'enquête"
 msgid "Feature"
 msgstr "Description de la particularité diverse"
 
+msgid "FieldName"
+msgstr "Champ"
+
 msgid "Number"
 msgstr "Numéro"
 
@@ -38,5 +41,3 @@ msgstr "Rue"
 msgid "Text"
 msgstr "Texte par défaut"
 
-msgid "FieldName"
-msgstr "Champ"
