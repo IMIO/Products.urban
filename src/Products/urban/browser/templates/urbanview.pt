@@ -80,7 +80,7 @@
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
         <fieldset style="margin: 0" tal:define="tool python: getattr(context, 'portal_urban');">
-         <strong><legend i18n:domain="urban" i18n:translate="search-last-elements">Last elements</legend></strong>
+         <legend i18n:domain="urban" i18n:translate="search-last-elements">Last elements</legend>
          <div tal:define="tool python: context.portal_urban;
                           batch python: tool.queryCatalog(batch=True, specificSearch='searchLastElements', context=context, theObjects=False, batchlen=20);
                           showedCols python: ('Title', 'created', 'Creator', );
