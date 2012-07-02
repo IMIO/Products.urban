@@ -411,7 +411,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                         </td>
                         <tal:comment replace="nothing">special case for field 'name' where we display the 'title' that is the name reworked just above</tal:comment>
                         <td tal:condition="python: field == 'name'">
-                         <span tal:content="obj/getName">Name</span>
+                         <span tal:attributes="class python: obj_wf_state_class + ' ' + obj_contenttype_class" tal:content="obj/getName">Name</span>
                          <br /><span tal:content="obj/Title" class="discreet">Name reworked</span>
                         </td>
                         <tal:comment replace="nothing">special case for field 'street' where we display the 'adr2' that is the 'streetname' reworked just above</tal:comment>
