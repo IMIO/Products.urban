@@ -404,7 +404,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         #if the Contact is just created, we are in portal_factory.The parent is a TempFolder
         if parent.portal_type == 'TempFolder':
             parent = parent.aq_parent.aq_parent
-        if not parent.portal_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne']:
+        if not parent.portal_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'Division']:
             return False
         if self.getPortalTypeName() not in ['Applicant', 'Proprietary']:
             return False
