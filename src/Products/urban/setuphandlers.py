@@ -84,8 +84,15 @@ def postInstall(context):
     #we need external edition so make sure it is activated
     site.portal_properties.site_properties.manage_changeProperties(ext_editor = True)
     site.portal_memberdata.manage_changeProperties(ext_editor = True)
-    site.portal_properties.site_properties.manage_changeProperties(
-            typesUseViewActionInListings = ('Image', 'File', 'UrbanDoc'))
+    #for collective.externaleditor
+    try:
+        from collective.externaleditor.browser.controlpanel import IExternalEditorSchema
+        control_panel_adapter_obj = IExternalEditorSchema(site)
+        control_panel_adapter_obj.ext_editor = True
+        if not 'UrbanDoc' in control_panel_adapter_obj.externaleditor_enabled_types:
+            control_panel_adapter_obj.externaleditor_enabled_types.append('UrbanDoc')
+    except:
+        pass
 
     #install dependencies manually...
     quick_installer = site.portal_quickinstaller
@@ -1600,7 +1607,6 @@ def setDefaultValues(context):
 
     site = context.getSite()
     urban_tool = site.portal_urban
-    urban_folder = site.urban
 
     #set default values for text fields
     for licencetype, defaulttexts in DefaultTexts.iteritems():
