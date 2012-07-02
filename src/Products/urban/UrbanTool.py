@@ -462,6 +462,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         newUrbanDoc=getattr(urbanEventObj, newUrbanDoc)
         newUrbanDoc.setFilename(proposedId)
         newUrbanDoc.setFormat(GENERATED_DOCUMENT_FORMATS[fileType])
+        newUrbanDoc._at_rename_after_creation = False
+        newUrbanDoc.processForm()
         self.REQUEST.set('doc_uid',newUrbanDoc.UID())
         response.redirect(urbanEventObj.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
 

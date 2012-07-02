@@ -693,17 +693,33 @@ def migrateFilesToUrbanDoc(context):
 
     logger = context.getLogger('migrationToUrbanDoc')
     portal = context.getSite()
-    path = "%s/portal_urban/globaltemplates"%'/'.join(portal.getPhysicalPath())
-    migrators = (
-                    (FilesToUrbanDocMigrator, {'SearchableText':['cu1 OR cu2 OR decl OR div OR lot OR miscdemand OR "not" OR urb OR peb OR declaenv']}),
-                    (FilesToUrbanDocMigrator, {'path':path}),
-                )
+    header = getattr(portal.portal_urban.globaltemplates, 'header.odt')
+    # if migration has already been run, we pass it
+    if header.portal_type == 'UrbanDoc':
+        logger.info("Already done!")
+        return
     #to avoid link integrity problems, disable checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
 
+    def filter_template_and_annex(oldObject, **kwargs):
+        # Annexes programmatically created have '_at_creation_flag' to True
+        if oldObject.__dict__['_at_creation_flag']:
+            oldObject._at_rename_after_creation = False
+            oldObject.processForm()
+        # if we don't have an odt, we skip the file: this is certainly a manually added annex
+        if oldObject.getContentType() != 'application/vnd.oasis.opendocument.text':
+            return False
+        kwargs['logger'].info("Replaced type of '%s'"%'/'.join(kwargs['purl'].getRelativeContentPath(oldObject)))
+        return True
+
+    migrators = (
+#                    (FilesToUrbanDocMigrator, {'SearchableText':['cu1 OR cu2 OR decl OR div OR lot OR miscdemand OR "not" OR urb OR peb OR declaenv']}),
+                    (FilesToUrbanDocMigrator, {'path':'/'.join(portal.getPhysicalPath())}, filter_template_and_annex),
+                )
+
     #Run the migrations
-    for migrator, query in migrators:
-        walker = migrator.walker(portal, migrator, query=query)
+    for migrator, query, call in migrators:
+        walker = migrator.walker(portal, migrator, query=query, callBefore=call, logger=logger, purl=portal.portal_url)
         walker.go()
         # we need to reset the class variable to avoid using current query in next use of CustomQueryWalker
         walker.__class__.additionalQuery = {}
@@ -724,3 +740,17 @@ class FilesToUrbanDocMigrator(object, InplaceATItemMigrator):
 
     def __init__(self, *args, **kwargs):
         InplaceATItemMigrator.__init__(self, *args, **kwargs)
+
+    # migrate all fields except 'file', which needs special handling...
+    fields_map = {
+        'file': None,
+    }
+
+    def migrate_data(self):
+        self.new.getField('file').getMutator(self.new)(self.old)
+        #self.new.setFilename(self.old.getFilename())
+        #self.new.setFormat(self.old.getContentType())
+
+    def last_migrate_reindex(self):
+        self.new.reindexObject(idxs=['object_provides', 'portal_type',
+            'Type', 'UID'])

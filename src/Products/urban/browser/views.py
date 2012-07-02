@@ -145,6 +145,7 @@ class TemplatesSummary(BrowserView):
         return templates
 
     def getEventsTemplates(self):
+        # return something like [[urban_type1, [uet1, doc1, doc2, ...], [uet2, doc3, ...], ...], [urban_type2, [], ...], ...]
         templates=[]
         for urban_type in URBAN_TYPES:
             templ_by_type = [urban_type]
