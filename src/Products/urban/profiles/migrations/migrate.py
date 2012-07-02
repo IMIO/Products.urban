@@ -71,6 +71,11 @@ def migrateToPlone4(context):
     #migrate templates and generated files portal_type from 'File' to 'UrbanDoc'
     migrateFilesToUrbanDoc(context)
 
+def contentmigrationLogger(oldObject, **kwargs):
+    """ Generic logger method to be used with CustomQueryWalker """
+    kwargs['logger'].info('/'.join(kwargs['purl'].getRelativeContentPath(oldObject)))
+    return True
+    
 def migrateToWorkLocationsDataGridField(context):
     """
       Migrate Declaration, Division, EnvironmentalDeclaration, UbranCertificateOne,
@@ -377,7 +382,7 @@ def migrationToUrbanEventInquiries(context):
 
     #Run the migrations
     for migrator in migrators:
-        walker = migrator.walker(portal, migrator, query={'id': 'enquete-publique'})
+        walker = migrator.walker(portal, migrator, query={'id': 'enquete-publique'}, callBefore=contentmigrationLogger, logger=logger, purl=portal.portal_url)
         walker.go()
         # we need to reset the class variable to avoid using current query in next use of CustomQueryWalker
         walker.__class__.additionalQuery = {}
