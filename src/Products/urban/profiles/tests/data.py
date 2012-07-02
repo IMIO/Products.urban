@@ -59,7 +59,7 @@ urbanEventTypes = {
                     'deadLineDelay': 0,
                     'TALCondition' : "",
                     'podTemplates': (
-                                     {'id': "urb-avis-technique-voirie", 'title': "Avis technique"},
+                                     {'id': "urb-avis-technique-voirie", 'title': "Avis technique voirie"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
                     },
@@ -70,7 +70,7 @@ urbanEventTypes = {
                     'deadLineDelay': 0,
                     'TALCondition' : "",
                     'podTemplates': (
-                                     {'id': "urb-avis-technique-energie", 'title': "Avis technique"},
+                                     {'id': "urb-avis-technique-energie", 'title': "Avis technique énergie"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
                     },
@@ -81,7 +81,7 @@ urbanEventTypes = {
                     'deadLineDelay': 0,
                     'TALCondition' : "",
                     'podTemplates': (
-                                     {'id': "urb-avis-technique-urbanisme", 'title': "Avis technique"},
+                                     {'id': "urb-avis-technique-urbanisme", 'title': "Avis technique urbanisme"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
                     },
@@ -439,22 +439,22 @@ urbanEventTypes = {
                     {
                     'id': "fiche-technique-voirie",
                     'title': "Fiche technique voirie",
-                    'activatedFields': ['decision', 'opinionText', ],
+                    'activatedFields': ['decision', 'opinionText', 'receiptDate',],
                     'deadLineDelay': 0,
                     'TALCondition' : "",
                     'podTemplates': (
-                                     {'id': "cu1-avis-technique-voirie", 'title': "Avis technique"},
+                                     {'id': "cu1-avis-technique-voirie", 'title': "Avis technique voirie"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
                     },
                     {
                     'id': "fiche-technique-urbanisme",
                     'title': "Fiche technique urbanisme",
-                    'activatedFields': ['decision', 'opinionText', ],
+                    'activatedFields': ['decision', 'opinionText', 'receiptDate',] ,
                     'deadLineDelay': 0,
                     'TALCondition' : "",
                     'podTemplates': (
-                                     {'id': "cu1-avis-technique-urbanisme", 'title': "Avis technique"},
+                                     {'id': "cu1-avis-technique-urbanisme", 'title': "Avis technique urbanisme"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
                     },
