@@ -83,6 +83,7 @@ def postInstall(context):
     #we need external edition so make sure it is activated
     site.portal_properties.site_properties.manage_changeProperties(ext_editor = True)
     site.portal_memberdata.manage_changeProperties(ext_editor = True)
+    site.portal_properties.site_properties.manage_changeProperties(typesUseViewActionInListings = ('Image', 'File', 'UrbanDoc'))
     #for collective.externaleditor
     try:
         from collective.externaleditor.browser.controlpanel import IExternalEditorSchema
