@@ -212,10 +212,20 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('catchmentArea', mode='view')" /></td>
  </tr>
+ <tr tal:condition="python: 'catchmentAreaDetails' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_catchmentAreaDetails">Catchment area details</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('catchmentAreaDetails', mode='view')" /></td>
+ </tr>
  <tr tal:condition="python: 'floodingLevel' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_floodingLevel">Flooding level</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevel', mode='view')" /></td>
+ </tr>
+ <tr tal:condition="python: 'floodingLevelDetails' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_floodingLevelDetails">Flooding level details</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevelDetails', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: 'equipmentAndRoadRequirements' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_equipmentAndRoadRequirements">Equipment and road requirements</span>:</b></td>
@@ -309,10 +319,20 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('SSC', mode='view')" /></td>
  </tr>
+ <tr tal:condition="python: 'sscDetails' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_sscDetails">SSC details</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('sscDetails', mode='view')" /></td>
+ </tr>
  <tr tal:condition="python: 'RCU' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_RCU">RCU</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('RCU', mode='view')" /></td>
+ </tr>
+ <tr tal:condition="python: 'rcuDetails' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_rcuDetails">RCU details</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('rcuDetails', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: 'locationDgrneUnderground' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_locationDgrneUnderground">DGRNE Underground</span>:</b></td>

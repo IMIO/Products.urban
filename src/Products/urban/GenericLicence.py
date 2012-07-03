@@ -63,8 +63,9 @@ optional_fields = ['subdivisionDetails','missingParts','missingPartsDetails','fo
                    'derogationDetails','isInPCA','annoncedDelayDetails','roadType','roadCoating','roadEquipments',
                    'investigationDetails','investigationReasons','isInSubdivision', 'solicitLocationOpinionsTo',
                    'folderCategoryTownship','protectedBuilding','protectedBuildingDetails',
-                   'pash','pashDetails','catchmentArea','equipmentAndRoadRequirements','technicalRemarks',
-                   'pca','SSC','RCU','floodingLevel','solicitRoadOpinionsTo', 'areParcelsVerified', 'locationFloodingLevel']
+                   'pash','pashDetails','catchmentArea', 'catchmentAreaDetails','equipmentAndRoadRequirements','technicalRemarks',
+                   'pca','SSC','sscDetails','RCU','rcuDetails','floodingLevel','floodingLevelDetails','solicitRoadOpinionsTo',
+                   'areParcelsVerified','locationFloodingLevel']
 ##/code-section module-header
 
 schema = Schema((
@@ -312,6 +313,19 @@ schema = Schema((
         multiValued=1,
         vocabulary='listCatchmentAreas',
     ),
+    TextField(
+        name='catchmentAreaDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Catchmentareadetails',
+            label_msgid='urban_label_catchmentAreaDetails',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        default_method='getDefaultText',
+        default_content_type='text/plain',
+        default_output_type='text/plain',
+    ),
     StringField(
         name='floodingLevel',
         widget=SelectionWidget(
@@ -322,6 +336,19 @@ schema = Schema((
         enforceVocabulary= True,
         schemata='urban_road',
         vocabulary='listFloodingLevels',
+    ),
+    TextField(
+        name='floodingLevelDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Floodingleveldetails',
+            label_msgid='urban_label_floodingLevelDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_road',
+        default_output_type='text/plain',
     ),
     StringField(
         name='locationFloodingLevel',
@@ -460,6 +487,19 @@ schema = Schema((
         vocabulary=UrbanVocabulary('ssc', inUrbanConfig=False),
         default_method='getDefaultValue',
     ),
+    TextField(
+        name='sscDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Sscdetails',
+            label_msgid='urban_label_sscDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
+    ),
     LinesField(
         name='RCU',
         widget=MultiSelectionWidget(
@@ -472,6 +512,19 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary('rcu', inUrbanConfig=False),
         default_method='getDefaultValue',
+    ),
+    TextField(
+        name='rcuDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Rcudetails',
+            label_msgid='urban_label_rcuDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
     ),
     LinesField(
         name='solicitLocationOpinionsTo',

@@ -96,7 +96,7 @@ schema = Schema((
     ),
     TextField(
         name='pebDetails',
-        allowable_content_types="('text/plain',)",
+        allowable_content_types= ('text/plain',),
         widget=TextAreaWidget(
             label='Pebdetails',
             label_msgid='urban_label_pebDetails',

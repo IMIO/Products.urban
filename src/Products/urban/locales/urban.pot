@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-06-29 11:40+0000\n"
+"POT-Creation-Date: 2012-07-03 06:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -854,6 +854,9 @@ msgstr ""
 msgid "outside_catchment"
 msgstr ""
 
+msgid "parcelLinkedLicences"
+msgstr ""
+
 msgid "parcellings_folder_title"
 msgstr ""
 
@@ -882,9 +885,6 @@ msgid "parceloutlicences"
 msgstr ""
 
 msgid "parcels_layer_title"
-msgstr ""
-
-msgid "parcelLinkedLicences"
 msgstr ""
 
 msgid "pashs_folder_title"
@@ -1349,6 +1349,11 @@ msgstr ""
 msgid "urban_label_catchmentArea"
 msgstr ""
 
+#. Default: "Catchmentareadetails"
+#: GenericLicence.py
+msgid "urban_label_catchmentAreaDetails"
+msgstr ""
+
 #. Default: "Catégorie"
 #. Default: "Category"
 #: MiscDemand.py
@@ -1583,6 +1588,11 @@ msgstr ""
 #. Default: "Floodinglevel"
 #: GenericLicence.py
 msgid "urban_label_floodingLevel"
+msgstr ""
+
+#. Default: "Floodingleveldetails"
+#: GenericLicence.py
+msgid "urban_label_floodingLevelDetails"
 msgstr ""
 
 #. Default: "Foldercategory"
@@ -2050,6 +2060,11 @@ msgstr ""
 msgid "urban_label_radical"
 msgstr ""
 
+#. Default: "Rcudetails"
+#: GenericLicence.py
+msgid "urban_label_rcuDetails"
+msgstr ""
+
 #. Default: "Receiptdate"
 #: UrbanEvent.py
 msgid "urban_label_receiptDate"
@@ -2210,6 +2225,11 @@ msgstr ""
 #. Default: "Sqluser"
 #: UrbanTool.py
 msgid "urban_label_sqlUser"
+msgstr ""
+
+#. Default: "Sscdetails"
+#: GenericLicence.py
+msgid "urban_label_sscDetails"
 msgstr ""
 
 #. Default: "Startdate"
