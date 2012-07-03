@@ -1977,6 +1977,9 @@ msgstr ""
 msgid "urban_label_parcels"
 msgstr ""
 
+msgid "urban_label_parcelsLocations"
+msgstr ""
+
 #. Default: "Partie"
 #: PortionOut.py
 msgid "urban_label_partie"

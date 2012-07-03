@@ -85,7 +85,7 @@
   </td>
   <td width="1%"></td>
   <td valign="top" width=49% tal:define="workLocations context/getWorkLocations">
-   <fieldset><legend i18n:translate="urban_label_workLocations">Work locations</legend>
+   <fieldset><legend i18n:translate="urban_label_parcelsLocations">Parcels locations</legend>
       <div tal:condition="workLocations"><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
       <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
    </fieldset>
