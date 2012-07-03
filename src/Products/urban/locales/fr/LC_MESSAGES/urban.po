@@ -1044,6 +1044,11 @@ msgstr "Entrez une condition TAL.  Les variables 'here' et 'member' sont disponi
 msgid "templates_events_title"
 msgstr "Modèles liés à des événements"
 
+#. Default: "Total template's number: ${tot}. Modified template's number: ${mod}."
+#: templatessummary.pt
+msgid "templates_summary_count"
+msgstr "Nombre total de modèles: ${tot}. Nombre de modèles modifiés: ${mod}"
+
 #. Default: " = Template has been modified"
 #: templatessummary.pt
 msgid "templates_summary_modified"

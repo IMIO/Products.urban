@@ -1053,6 +1053,11 @@ msgstr ""
 msgid "templates_summary_title"
 msgstr ""
 
+#. Default: "Total template's number: ${tot}. Modified template's number: ${mod}."
+#: templatessummary.pt
+msgid "templates_summary_count"
+msgstr ""
+
 # topics
 msgid "topics"
 msgstr ""

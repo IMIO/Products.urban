@@ -134,6 +134,8 @@ class TemplatesSummary(BrowserView):
         self.context = context
         self.request = request
         self.tool = getToolByName(context, 'portal_urban')
+        self.tot_count = 0
+        self.mod_count = 0
 
     def getUrbanDoc(self, folder):
         return folder.listFolderContents(contentFilter={'portal_type':['UrbanDoc']})
@@ -145,7 +147,7 @@ class TemplatesSummary(BrowserView):
         return templates
 
     def getEventsTemplates(self):
-        # return something like [[urban_type1, [uet1, doc1, doc2, ...], [uet2, doc3, ...], ...], [urban_type2, [], ...], ...]
+        # return something like [[urban_type1, [uet1, {doc1}, {doc2}, ...], [uet2, {doc3}, ...], ...], [urban_type2, [], ...], ...]
         templates=[]
         for urban_type in URBAN_TYPES:
             templ_by_type = [urban_type]
@@ -157,7 +159,8 @@ class TemplatesSummary(BrowserView):
             for obj in uetfolder.objectValues('UrbanEventType'):
                 templ_by_event = [obj.Title()]
                 for templ in self.getUrbanDoc(obj):
-                    templ_by_event.append(templ)
+                    self.tot_count += 1
+                    templ_by_event.append({'o':templ, 's':self.isModified(templ)})
                 templ_by_type.append(templ_by_event)
             templates.append(templ_by_type)
         return templates
@@ -167,5 +170,6 @@ class TemplatesSummary(BrowserView):
             return "question-mark.gif"
         if template.md5Modified != getMd5Signature(template.data):
             #template manually changed
+            self.mod_count += 1
             return "warning.png"
         return None
