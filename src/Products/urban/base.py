@@ -433,10 +433,10 @@ class UrbanBase(object):
                 objs = [obj_.getObject() for obj_ in catalog(UID=field.getRaw(obj))]
             field_name = subfield_name
             return [self._getValueForTemplate(field_name, obj_, raw_value, vocabulary) for obj_ in objs]
-        return self._getValueForTemplate(field_name, obj, raw_value, vocabulary)
+        return self._getValueForTemplate(field_name, obj, raw_value, vocabulary, list=True)
 
 
-    def _getValueForTemplate(self, field_name='', obj=None, raw_value=None, vocabulary=None, subfield_name=None):
+    def _getValueForTemplate(self, field_name='', obj=None, raw_value=None, vocabulary=None, subfield_name=None, list=False):
         """
           Return the display value of the given field
         """
@@ -468,7 +468,7 @@ class UrbanBase(object):
         if type(field_value) == str:
             return obj.displayValue(displaylist, field_value)
         result = [obj.displayValue(displaylist, value) for value in field_value]
-        if len(result) == 1:
+        if len(result) == 1 and not list:
             return result[0]
         return result
 

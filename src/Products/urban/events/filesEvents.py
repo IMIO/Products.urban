@@ -70,7 +70,7 @@ def _createTemporayTemplateStyle(tool, templateStyles):
 def _updateTemplateStyle(tool, fileTemplate, templateStylesFileName):
     """
         update template fileTemplate by templateStyle
-    """ 
+    """
     style_changes_only = 'md5Modified' in fileTemplate.propertyIds() and \
                          getMd5Signature(fileTemplate.data) == fileTemplate.getProperty('md5Modified')
     #save in temporary file, the template
@@ -78,7 +78,7 @@ def _updateTemplateStyle(tool, fileTemplate, templateStylesFileName):
     newTemplate = file(tempFileName,"w" )
     newTemplate.write(StringIO(fileTemplate).read())
     newTemplate.close()
-    #merge style from templateStyle in template    
+    #merge style from templateStyle in template
     cmd = '%s %s %s %s -p%d -t%s' % \
         (tool.getUnoEnabledPython(), CONVSCRIPT, tempFileName, 'odt',
             tool.getOpenOfficePort(), templateStylesFileName)
