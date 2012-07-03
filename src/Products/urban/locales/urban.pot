@@ -947,6 +947,11 @@ msgstr ""
 msgid "tal_condition_descr"
 msgstr ""
 
+#. Default: "Total template's number: ${tot}. Modified template's number: ${mod}."
+#: templatessummary.pt
+msgid "templates_summary_count"
+msgstr ""
+
 # topics
 msgid "topics"
 msgstr ""

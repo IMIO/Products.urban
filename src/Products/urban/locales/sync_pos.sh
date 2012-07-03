@@ -1,3 +1,5 @@
-i18ndude sync --pot urban.pot fr/LC_MESSAGES/urban.po
-i18ndude sync --pot plone.pot fr/LC_MESSAGES/plone.po
-i18ndude sync --pot datagridfield.pot fr/LC_MESSAGES/datagridfield.po
+files="urban plone datagridfield"
+for file in $files; do
+    i18ndude sync --pot $file.pot fr/LC_MESSAGES/$file.po
+    msgfmt -o fr/LC_MESSAGES/$file.mo fr/LC_MESSAGES/$file.po
+done
