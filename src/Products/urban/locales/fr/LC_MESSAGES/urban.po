@@ -770,10 +770,10 @@ msgid "map_configs_folder_title"
 msgstr "Configuration des cartes"
 
 msgid "miscdemand_urbanconfig_title"
-msgstr "Paramètres des Demandes diverses"
+msgstr "Paramètres des 'divers'"
 
 msgid "miscdemands"
-msgstr "Demandes diverses"
+msgstr "Divers"
 
 msgid "missingparts_folder_title"
 msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes"
@@ -1183,7 +1183,7 @@ msgstr "Evénement de demande d'avis lié"
 #. Default: "MiscDemandnumerotation"
 #: UrbanTool.py
 msgid "urban_label_MiscDemandNumerotation"
-msgstr "Numérotation des demandes diverses"
+msgstr "Numérotation des 'divers'"
 
 # UrbanTool
 #. Default: "Nisnum"
