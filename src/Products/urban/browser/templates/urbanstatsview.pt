@@ -40,9 +40,9 @@
  <fieldset><legend><strong i18n:translate="urban_search_parameters">Enter your parameters for the search</strong></legend>
  <table>
   <tr>
-    <td><strong i18n:translate="urban_licence_type">Licence Type</strong></td>
+    <td><strong i18n:translate="urban_stats_type">Licence Type</strong></td>
     <td width="5%"></td>
-    <td><strong i18n:translate="urban_licence_state">Licence state</strong></td>
+    <td><strong i18n:translate="urban_stats_state">Licence state</strong></td>
   </tr>
   <tr><td><br/></td></tr>
   <tr>
@@ -66,10 +66,10 @@
 </table>
 <table>
   <tr>
-    <td><br/><strong i18n:translate="urban_creation_date">Creation date </strong></td>
+    <td><br/><strong i18n:translate="urban_stats_date">Creation date </strong></td>
   </tr>
   <tr>
-    <td><div i18n:translate="urban_licence_from">From: </div>
+    <td><div i18n:translate="urban_stats_from">From: </div>
     <tal:to define="id python: 'from';
                     inputname python: 'from';
                     formname python: 'stats_form';
@@ -81,7 +81,7 @@
     </tal:to>
    </td>
    <td width="5%"></td>
-   <td><div i18n:translate="urban_licence_to">To: </div>
+   <td><div i18n:translate="urban_stats_to">To: </div>
     <tal:to define="id python: 'to';
                     inputname python: 'to';
                     formname python: 'stats_form';
