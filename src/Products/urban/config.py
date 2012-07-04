@@ -103,7 +103,7 @@ setDefaultRoles('urban: Add Inquiry', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanEventOpinionRequest', ('Manager', 'Owner', 'Contributor'))
 setDefaultRoles('urban: Add OrganisationTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add UrbanDoc',  ('Manager', ))
+setDefaultRoles('urban: Add UrbanDoc', ("Manager", "Contributor"))
 
 product_globals = globals()
 
