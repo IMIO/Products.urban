@@ -65,7 +65,7 @@ optional_fields = ['subdivisionDetails','missingParts','missingPartsDetails','fo
                    'folderCategoryTownship','protectedBuilding','protectedBuildingDetails',
                    'pash','pashDetails','catchmentArea', 'catchmentAreaDetails','equipmentAndRoadRequirements','technicalRemarks',
                    'pca','SSC','sscDetails','RCU','rcuDetails','floodingLevel','floodingLevelDetails','solicitRoadOpinionsTo',
-                   'areParcelsVerified','locationFloodingLevel', 'licenceSubject', 'referenceDGATLP']
+                   'areParcelsVerified','locationFloodingLevel', 'licenceSubject', 'referenceDGATLP', 'locationTechnicalRemarks']
 ##/code-section module-header
 
 schema = Schema((
@@ -385,6 +385,19 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
+        default_output_type='text/html',
+    ),
+    TextField(
+        name='locationTechnicalRemarks',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Locationtechnicalremarks',
+            label_msgid='urban_label_locationTechnicalRemarks',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
         default_output_type='text/html',
     ),
     BooleanField(

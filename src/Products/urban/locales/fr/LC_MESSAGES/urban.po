@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2012-07-03 06:28+0000\n"
+"POT-Creation-Date: 2012-07-04 11:31+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1360,7 +1360,7 @@ msgstr "Zone de captage"
 msgid "urban_label_catchmentAreaDetails"
 msgstr "Détails concernant la zone de captage"
 
-#. Default: "Category"
+#. Default: "Catégorie"
 #: MiscDemand.py
 #, fuzzy
 msgid "urban_label_category"
@@ -1863,6 +1863,11 @@ msgstr "Avis technique urbanisme"
 #: BuildLicence.py
 msgid "urban_label_locationTechnicalConditions"
 msgstr "Conditions d'octroi du permis"
+
+#. Default: "Locationtechnicalremarks"
+#: GenericLicence.py
+msgid "urban_label_locationTechnicalRemarks"
+msgstr "Remarques techniques (Fiche Urbanisme)"
 
 #. Default: "Usage"
 #: Lot.py

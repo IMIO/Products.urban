@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-07-03 06:28+0000\n"
+"POT-Creation-Date: 2012-07-04 11:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1043,6 +1043,11 @@ msgstr ""
 msgid "templates_events_title"
 msgstr ""
 
+#. Default: "Total template's number: ${tot}. Modified template's number: ${mod}."
+#: templatessummary.pt
+msgid "templates_summary_count"
+msgstr ""
+
 #. Default: " = Template has been modified"
 #: templatessummary.pt
 msgid "templates_summary_modified"
@@ -1051,11 +1056,6 @@ msgstr ""
 #. Default: "Templates summary"
 #: templatessummary.pt
 msgid "templates_summary_title"
-msgstr ""
-
-#. Default: "Total template's number: ${tot}. Modified template's number: ${mod}."
-#: templatessummary.pt
-msgid "templates_summary_count"
 msgstr ""
 
 # topics
@@ -1859,6 +1859,11 @@ msgstr ""
 #. Default: "Locationtechnicalconditions"
 #: BuildLicence.py
 msgid "urban_label_locationTechnicalConditions"
+msgstr ""
+
+#. Default: "Locationtechnicalremarks"
+#: GenericLicence.py
+msgid "urban_label_locationTechnicalRemarks"
 msgstr ""
 
 #. Default: "Usage"

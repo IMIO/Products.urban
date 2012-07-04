@@ -247,6 +247,11 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalConditions', mode='view')" /><span tal:condition="not: context/getLocationTechnicalConditions" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
+ <tr tal:condition="python: 'locationTechnicalRemarks' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_locationTechnicalRemarks">Technical remarks</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('locationTechnicalRemarks', mode='view')" /><span tal:condition="not: context/getLocationTechnicalRemarks " class="discreet" i18n:translate="content_none">None</span></td>
+ </tr>
  <tr tal:condition="python: 'folderCategoryTownship' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_folderCategoryTownship">Folder category</span>:</b></td>
   <td width="2%"></td>
