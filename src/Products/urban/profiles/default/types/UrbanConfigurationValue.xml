@@ -10,7 +10,7 @@
  <property name="product">urban</property>
  <property name="factory">addUrbanConfigurationValue</property>
  <property name="immediate_view">base_view</property>
- <property name="global_allow">True</property>
+ <property name="global_allow">False</property>
  <property name="filter_content_types">False</property>
  <property name="allowed_content_types">
  </property>
