@@ -65,7 +65,7 @@ optional_fields = ['subdivisionDetails','missingParts','missingPartsDetails','fo
                    'folderCategoryTownship','protectedBuilding','protectedBuildingDetails',
                    'pash','pashDetails','catchmentArea', 'catchmentAreaDetails','equipmentAndRoadRequirements','technicalRemarks',
                    'pca','SSC','sscDetails','RCU','rcuDetails','floodingLevel','floodingLevelDetails','solicitRoadOpinionsTo',
-                   'areParcelsVerified','locationFloodingLevel']
+                   'areParcelsVerified','locationFloodingLevel', 'licenceSubject', 'referenceDGATLP']
 ##/code-section module-header
 
 schema = Schema((

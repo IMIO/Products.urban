@@ -34,7 +34,7 @@
   <td valign="top" width=50%>
    <fieldset><legend i18n:translate="legend_details">Details</legend>
     <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
-     <tr>
+     <tr tal:condition="python: 'licenceSubject' in usedAttributes">
       <td valign="top"><b><span i18n:translate="urban_label_licenceSubject">Subject</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('licenceSubject', mode='view')" /></td>
@@ -44,7 +44,7 @@
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('reference', mode='view')" /></td>
      </tr>
-     <tr>
+     <tr tal:condition="python: 'referenceDGATLP' in usedAttributes">
       <td valign="top"><b><span i18n:translate="urban_label_referenceDGATLP">Reference DGATLP</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('referenceDGATLP', mode='view')" /><span tal:condition="not: context/getReferenceDGATLP" class="discreet" i18n:translate="content_none">None</span></td>
@@ -98,7 +98,7 @@
  <td colspan="3">
  <fieldset><legend i18n:translate="legend_specific_features">Specific features</legend>
   <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
-   <tr>
+   <tr tal:condition="python: 'specificFeatures' in usedAttributes">
     <td valign="top"><b><span i18n:translate="urban_label_specificFeatures">Specific features</span>:</b></td>
     <td width="2%"></td>
     <td valign="top"><metal:myfield use-macro="python:here.widget('specificFeatures', mode='view')" /></td>

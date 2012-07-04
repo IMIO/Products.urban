@@ -32,8 +32,8 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from DateTime import DateTime
 
-optional_fields = ['roadSpecificFeatures', 'locationSpecificFeatures', 'customSpecificFeatures',
-                   'townshipSpecificFeatures', 'opinionsToAskIfWorks', ]
+optional_fields = ['specificFeatures', 'roadSpecificFeatures', 'locationSpecificFeatures',
+                   'customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks',]
 ##/code-section module-header
 
 schema = Schema((
