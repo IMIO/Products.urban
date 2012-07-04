@@ -342,4 +342,41 @@ def export_urban_docs(self, delete=''):
     dump_dic(save_file, docs)
     return '\n'.join(out)
 
+###############################################################################
 
+def import_urban_docs(self, dochange=''):
+    """
+        Export all UrbanDoc with attributes
+    """
+    if not check_zope_admin():
+        return "You must be a zope manager to run this script"
+    do_change = False
+    if dochange not in ('', '0', 'False', 'false'):
+        do_change = True
+
+    from Products.CMFCore.utils import getToolByName
+    import base64
+    purl = getToolByName(self, 'portal_url')
+    portal = purl.getPortalObject()
+    out = ['<h1>UrbanDoc import</h1>']
+    docs = {}
+    home = os.environ.get('INSTANCE_HOME') # like .../parts/instance in a buildout env
+    save_file = os.path.join(home, '../../saved_docs.txt') # root of the buildout
+    load_dic(save_file, docs)
+    for path in sorted(docs.keys()):
+        parentpath, id = os.path.split(path)
+        parent = portal.unrestrictedTraverse(parentpath)
+        if not do_change:
+            out.append("-> id '%s' will be created in '%s'"%(id, parentpath))
+        else:
+            new_doc_id = parent.invokeFactory("UrbanDoc", id=id, title=docs[path]['title'], file=base64.b64decode(docs[path]['data']))
+            new_doc = getattr(parent, new_doc_id)
+            new_doc.setFilename(new_doc_id)
+            new_doc.setFormat("application/vnd.oasis.opendocument.text")
+            new_doc.manage_addProperty('profileName', docs[path]['prof'], "string")
+            new_doc.manage_addProperty('md5Loaded', docs[path]['load'], "string")
+            new_doc.manage_addProperty('md5Modified', docs[path]['mod'], "string")
+            new_doc.reindexObject()
+            out.append("-> id '%s' created in '%s'"%(new_doc_id, parentpath))
+
+    return '<br />\n'.join(out)
