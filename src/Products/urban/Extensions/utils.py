@@ -15,6 +15,17 @@ def check_zope_admin():
         return True
     return False
 
+def dump_dic(outfile, dic):
+    ofile = open( outfile, 'w')
+    ofile.write(dic.__str__())
+    ofile.close()
+
+def load_dic(infile, dic):
+    if os.path.exists(infile):
+        ofile = open( infile, 'r')
+        dic.update(eval(ofile.read()))
+        ofile.close()
+
 ###############################################################################
 
 def urban_check_addresses(self, restore='',  missing=''):
@@ -40,15 +51,6 @@ def urban_check_addresses(self, restore='',  missing=''):
     site = getToolByName(self, 'portal_url').getPortalObject()
     uidc = getToolByName(self, 'uid_catalog')
 
-    def dump_dic(outfile, dic):
-        ofile = open( outfile, 'w')
-        ofile.write(dic.__str__())
-        ofile.close()
-    def load_dic(infile, dic):
-        if os.path.exists(infile):
-            ofile = open( infile, 'r')
-            dic.update(eval(ofile.read()))
-            ofile.close()
     home = os.environ.get('INSTANCE_HOME') # like .../parts/instance in a buildout env
     save_file = os.path.join(home, '../../saved_addresses.txt') # root of the buildout
     load_dic(save_file, saved)
@@ -301,3 +303,80 @@ def create_site_from_pylon(self, pif='', geohost='', dochange='0'):
     return sep.join(out)
 
 ###############################################################################
+
+def export_urban_docs(self, delete=''):
+    """
+        Export all UrbanDoc with attributes
+    """
+    if not check_zope_admin():
+        return "You must be a zope manager to run this script"
+    do_del = False
+    if delete not in ('', '0', 'False', 'false'):
+        do_del = True
+
+    from Products.CMFCore.utils import getToolByName
+    import base64
+    purl = getToolByName(self, 'portal_url')
+    portal = purl.getPortalObject()
+    portalpath = purl.getPortalPath()
+    out = ['<h1>UrbanDoc export</h1>']
+    docs = {}
+    brains = portal.portal_catalog(portal_type = 'UrbanDoc', path='%s/%s'%(portalpath, 'portal_urban'), sort_on='path')
+    count_doc = 0
+    #import ipdb; ipdb.set_trace()
+    for brain in brains:
+        count_doc += 1
+        doc = brain.getObject()
+        path = brain.getPath()
+        out.append("-> %s<br />"%path)
+        if docs.has_key(path):
+            out.append("!! path '%s' key already exists"%path)
+        docs[path] = {'title':brain.Title, 'prof':doc.profileName, 'load':doc.md5Loaded, 'mod':doc.md5Modified, 
+                      'data':base64.b64encode(doc.data)}
+        if do_del:
+            parent = doc.getParentNode()
+            parent.manage_delObjects([brain.id])
+    out.append('<p>Found %d documents</p>'%count_doc)
+    home = os.environ.get('INSTANCE_HOME') # like .../parts/instance in a buildout env
+    save_file = os.path.join(home, '../../saved_docs.txt') # root of the buildout
+    dump_dic(save_file, docs)
+    return '\n'.join(out)
+
+###############################################################################
+
+def import_urban_docs(self, dochange=''):
+    """
+        Export all UrbanDoc with attributes
+    """
+    if not check_zope_admin():
+        return "You must be a zope manager to run this script"
+    do_change = False
+    if dochange not in ('', '0', 'False', 'false'):
+        do_change = True
+
+    from Products.CMFCore.utils import getToolByName
+    import base64
+    purl = getToolByName(self, 'portal_url')
+    portal = purl.getPortalObject()
+    out = ['<h1>UrbanDoc import</h1>']
+    docs = {}
+    home = os.environ.get('INSTANCE_HOME') # like .../parts/instance in a buildout env
+    save_file = os.path.join(home, '../../saved_docs.txt') # root of the buildout
+    load_dic(save_file, docs)
+    for path in sorted(docs.keys()):
+        parentpath, id = os.path.split(path)
+        parent = portal.unrestrictedTraverse(parentpath)
+        if not do_change:
+            out.append("-> id '%s' will be created in '%s'"%(id, parentpath))
+        else:
+            new_doc_id = parent.invokeFactory("UrbanDoc", id=id, title=docs[path]['title'], file=base64.b64decode(docs[path]['data']))
+            new_doc = getattr(parent, new_doc_id)
+            new_doc.setFilename(new_doc_id)
+            new_doc.setFormat("application/vnd.oasis.opendocument.text")
+            new_doc.manage_addProperty('profileName', docs[path]['prof'], "string")
+            new_doc.manage_addProperty('md5Loaded', docs[path]['load'], "string")
+            new_doc.manage_addProperty('md5Modified', docs[path]['mod'], "string")
+            new_doc.reindexObject()
+            out.append("-> id '%s' created in '%s'"%(new_doc_id, parentpath))
+
+    return '<br />\n'.join(out)
