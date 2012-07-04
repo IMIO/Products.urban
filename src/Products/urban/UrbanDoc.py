@@ -59,6 +59,7 @@ class UrbanDoc(ATBlob):
 
     # Methods
 
+
 registerType(UrbanDoc, PROJECTNAME)
 # end of class UrbanDoc
 
