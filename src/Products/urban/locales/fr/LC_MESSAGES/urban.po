@@ -1349,7 +1349,7 @@ msgstr "Boîte"
 msgid "urban_label_catchmentArea"
 msgstr "Zone de captage"
 
-#. Default: "Category"
+#. Default: "Catégorie"
 #: MiscDemand.py
 #, fuzzy
 msgid "urban_label_category"
@@ -2464,8 +2464,29 @@ msgstr "Résultat de la recherche"
 msgid "urban_searches"
 msgstr "Recherches"
 
+msgid "urban_statistics"
+msgstr "Statistiques"
+
 msgid "urban_statistics_ins"
 msgstr "Exportation statistiques INS"
+
+msgid "urban_stats_date"
+msgstr "Créé entre"
+
+msgid "urban_stats_descr"
+msgstr "Statistiques des dossiers"
+
+msgid "urban_stats_from"
+msgstr "le:"
+
+msgid "urban_stats_state"
+msgstr "État"
+
+msgid "urban_stats_to"
+msgstr "et le:"
+
+msgid "urban_stats_type"
+msgstr "Type de dossier"
 
 msgid "urbancertificateone_searchacceptedlicences"
 msgstr "certificats d'urbanisme 1 acceptés"

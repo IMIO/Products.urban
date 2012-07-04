@@ -2445,7 +2445,28 @@ msgstr ""
 msgid "urban_searches"
 msgstr ""
 
+msgid "urban_statistics"
+msgstr ""
+
 msgid "urban_statistics_ins"
+msgstr ""
+
+msgid "urban_stats_date"
+msgstr ""
+
+msgid "urban_stats_descr"
+msgstr ""
+
+msgid "urban_stats_from"
+msgstr ""
+
+msgid "urban_stats_state"
+msgstr ""
+
+msgid "urban_stats_to"
+msgstr ""
+
+msgid "urban_stats_type"
 msgstr ""
 
 msgid "urbancertificateone_searchacceptedlicences"
