@@ -1043,12 +1043,7 @@ msgstr ""
 msgid "templates_events_title"
 msgstr ""
 
-#. Default: "Total template's number: ${tot}. Modified template's number: ${mod}."
-#: templatessummary.pt
-msgid "templates_summary_count"
-msgstr ""
-
-#. Default: " = Template has been modified"
+#. Default: " = template has been modified."
 #: templatessummary.pt
 msgid "templates_summary_modified"
 msgstr ""
@@ -1056,6 +1051,11 @@ msgstr ""
 #. Default: "Templates summary"
 #: templatessummary.pt
 msgid "templates_summary_title"
+msgstr ""
+
+#. Default: "Total template's number: ${tot}. Modified template's number: ${mod}. "
+#: templatessummary.pt
+msgid "templates_summary_count"
 msgstr ""
 
 # topics
@@ -1359,7 +1359,6 @@ msgstr ""
 msgid "urban_label_catchmentAreaDetails"
 msgstr ""
 
-#. Default: "Catégorie"
 #. Default: "Category"
 #: MiscDemand.py
 msgid "urban_label_category"

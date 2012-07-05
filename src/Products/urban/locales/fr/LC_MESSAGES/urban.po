@@ -1044,15 +1044,15 @@ msgstr "Entrez une condition TAL.  Les variables 'here' et 'member' sont disponi
 msgid "templates_events_title"
 msgstr "Modèles liés à des événements"
 
-#. Default: "Total template's number: ${tot}. Modified template's number: ${mod}."
+#. Default: "Total template's number: ${tot}. Modified template's number: ${mod}. "
 #: templatessummary.pt
 msgid "templates_summary_count"
-msgstr "Nombre total de modèles: ${tot}. Nombre de modèles modifiés: ${mod}"
+msgstr "Nombre total de modèles: ${tot}. Nombre de modèles modifiés: ${mod}. "
 
-#. Default: " = Template has been modified"
+#. Default: " = template has been modified."
 #: templatessummary.pt
 msgid "templates_summary_modified"
-msgstr " = Le modèle a été modifié"
+msgstr " = le modèle a été modifié."
 
 #. Default: "Templates summary"
 #: templatessummary.pt
@@ -1360,9 +1360,8 @@ msgstr "Zone de captage"
 msgid "urban_label_catchmentAreaDetails"
 msgstr "Détails concernant la zone de captage"
 
-#. Default: "Catégorie"
+#. Default: "Category"
 #: MiscDemand.py
-#, fuzzy
 msgid "urban_label_category"
 msgstr "Catégorie"
 
