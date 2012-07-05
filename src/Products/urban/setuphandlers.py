@@ -784,7 +784,7 @@ def addUrbanGroups(context):
     #one with urban Readers
     site.portal_groups.addGroup("urban_readers", title="Urban Readers")
     #one with urban Editors
-    site.portal_groups.addGroup("urban_editors", title="Urban Editors")
+    site.portal_groups.addGroup("urban_editors", title="Urban Editors", roles=["Contributor"])
 
 def addLicencesCollection(context):
     """
@@ -813,7 +813,7 @@ def setDefaultApplicationSecurity(context):
     #portal_urban local roles
     site.portal_urban.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
     site.portal_urban.manage_addLocalRoles("urban_readers", ("Reader",))
-    site.portal_urban.manage_addLocalRoles("urban_editors", ("Contributor", "Reader",))
+    site.portal_urban.manage_addLocalRoles("urban_editors", ("Reader",))
 
     #application folders local roles
     #global application folder : "urban_readers" and "urban_editors" can read...
