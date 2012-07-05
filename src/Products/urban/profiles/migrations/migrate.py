@@ -22,6 +22,15 @@ logger = logging.getLogger('urban: migrations')
 def isNoturbanMigrationsProfile(context):
     return context.readDataFile("urban_migrations_marker.txt") is None
 
+def migrateToUrban114(context):
+    """
+     Launch every migration steps for the version 1.1.4
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    #add the role 'contributor' to the urban_editors group
+    migrateUrbanEditorRoles(context)
+
 def migrateToPlone4(context):
     """
       Launch every migration steps linked to the Plone4 version
@@ -763,6 +772,8 @@ class FilesToUrbanDocMigrator(object, InplaceATItemMigrator):
             'Type', 'UID'])
 
 def migrateGlobalTemplatesAllowedTypes(context):
+    if isNoturbanMigrationsProfile(context): return
+
     site = context.getSite()
     logger = context.getLogger('migrateGlobalTemplatesAllowedTypes')
     urban_tool = getToolByName(site, 'portal_urban')
@@ -771,3 +782,12 @@ def migrateGlobalTemplatesAllowedTypes(context):
         folder.setImmediatelyAddableTypes('UrbanDoc')
         folder.setLocallyAllowedTypes('UrbanDoc')
         logger.info("Replaced addable types on folder '%s': value 'UrbanDoc'"%('/'.join(folder.getPhysicalPath())))
+
+def migrateUrbanEditorRoles(context):
+    """
+     the group urban_editor should have the role 'Contributor' to be able to generate singleton documents
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+    site.portal_groups.setRolesForGroup('urban_editors', ('Contributor',))
