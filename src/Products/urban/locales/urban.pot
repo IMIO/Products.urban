@@ -1032,7 +1032,17 @@ msgstr ""
 msgid "tal_condition_descr"
 msgstr ""
 
-#. Default: "Total template's number: ${tot}. Modified template's number: ${mod}."
+#. Default: " = template has been modified."
+#: templatessummary.pt
+msgid "templates_summary_modified"
+msgstr ""
+
+#. Default: "Templates summary"
+#: templatessummary.pt
+msgid "templates_summary_title"
+msgstr ""
+
+#. Default: "Total template's number: ${tot}. Modified template's number: ${mod}. "
 #: templatessummary.pt
 msgid "templates_summary_count"
 msgstr ""
@@ -1333,7 +1343,6 @@ msgstr ""
 msgid "urban_label_catchmentArea"
 msgstr ""
 
-#. Default: "Catégorie"
 #. Default: "Category"
 #: MiscDemand.py
 msgid "urban_label_category"

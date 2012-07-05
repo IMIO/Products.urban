@@ -136,6 +136,8 @@ class TemplatesSummary(BrowserView):
         self.tool = getToolByName(context, 'portal_urban')
         self.tot_count = 0
         self.mod_count = 0
+        self.editicon = 'edit.gif'
+        self.editlink = 'edit'
 
     def getUrbanDoc(self, folder):
         return folder.listFolderContents(contentFilter={'portal_type':['UrbanDoc']})
@@ -144,6 +146,10 @@ class TemplatesSummary(BrowserView):
         templates = ['globaltemplates']
         for templ in self.getUrbanDoc(self.tool.globaltemplates):
             templates.append(templ)
+            self.tot_count += 1
+        if len(templates) > 1 and templates[1].externalEditorEnabled():
+            self.editicon = 'extedit_icon.png'
+            self.editlink = 'external_edit'
         return templates
 
     def getEventsTemplates(self):
