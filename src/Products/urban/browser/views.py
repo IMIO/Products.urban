@@ -145,9 +145,9 @@ class TemplatesSummary(BrowserView):
     def getGlobalTemplates(self):
         templates = ['globaltemplates']
         for templ in self.getUrbanDoc(self.tool.globaltemplates):
-            templates.append(templ)
+            templates.append({'o':templ, 's':self.isModified(templ)})
             self.tot_count += 1
-        if len(templates) > 1 and templates[1].externalEditorEnabled():
+        if len(templates) > 1 and templates[1]['o'].externalEditorEnabled():
             self.editicon = 'extedit_icon.png'
             self.editlink = 'external_edit'
         return templates

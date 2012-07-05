@@ -19,10 +19,10 @@
 <h2 i18n:translate="globaltemplates_folder_title">Global templates</h2>
 <p tal:condition="not:globaltemplates" i18n:translate="">No template.</p>
 <ul tal:condition="globaltemplates">
-    <li tal:repeat="template globaltemplates">
-        <a tal:attributes="href python:'%s/%s'%(template.absolute_url(), editlink)"><img tal:attributes="src editicon"/></a>
-        <a tal:attributes="href python:'%s/view'%template.absolute_url()" tal:content="template/Title" />
-        <img tal:define="status python:view.isModified(template)" tal:condition="status" tal:attributes="src status" />
+    <li tal:repeat="dic globaltemplates">
+        <a tal:attributes="href python:'%s/%s'%(dic['o'].absolute_url(), editlink)"><img tal:attributes="src editicon"/></a>
+        <a tal:attributes="href python:'%s/view'%dic['o'].absolute_url()" tal:content="dic/o/Title" />
+        <img tal:condition="dic/s" tal:attributes="src dic/s" />
     </li>
 </ul>
 <h2 i18n:translate="templates_events_title">Events templates</h2>
