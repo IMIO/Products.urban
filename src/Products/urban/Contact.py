@@ -414,6 +414,13 @@ class Contact(BaseContent, BrowserDefaultMixin):
             return False
         return True
 
+    security.declarePublic('getRepresentedBy')
+    def getRepresentedBy(self):
+        for contact_uid in self.getField('representedBy').getRaw(self):
+            if contact_uid not in self.listRepresentedBys().keys():
+                return ()
+        return self.getField('representedBy').getRaw(self)
+
     security.declarePublic('listRepresentedBys')
     def listRepresentedBys(self):
         """
