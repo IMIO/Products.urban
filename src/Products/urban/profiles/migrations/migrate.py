@@ -30,6 +30,8 @@ def migrateToUrban114(context):
 
     #add the role 'contributor' to the urban_editors group
     migrateUrbanEditorRoles(context)
+    #change voc terms used for the CU1 CU2 and notary letter specific features
+    migrateVocabularyTermsOfCUSpecificFeatures(context)
 
 def migrateToPlone4(context):
     """
@@ -791,3 +793,32 @@ def migrateUrbanEditorRoles(context):
 
     site = context.getSite()
     site.portal_groups.setRolesForGroup('urban_editors', ('Contributor',))
+
+def migrateVocabularyTermsOfCUSpecificFeatures(context):
+    """
+     Changes in getValueForTemplate method
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    site = context.getSite()
+    urbancfg = site.portal_urban
+    vocterms_ids = {
+            'plan-communal-ammenagement':"<p>est situé en [[python: object.getValueForTemplate('folderZone')]] dans le périmètre du plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: '/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]] et qui n'a pas cessé de produire ses effets pour le bien précité;</p>",
+            'plan-communal-ammenagement-revision':"<p>est situé en [[python: object.getValueForTemplate('folderZone')]] dans le périmètre du projet - de révision du - de - plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: '/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]];</p>",
+            'perimetre-lotissement':"<p>est situé sur le(s) lot(s) n° [[python: object.getValueForTemplate('subdivisionDetails')]] dans le périmètre du lotissement [[python: object.getValueForTemplate('parcellings', subfield='label')]]non périmé autorisé du [[python: '/'.join(object.getValueForTemplate('parcellings', subfield='authorizationDate').split()[0].split('/')[::-1]) ]];</p>",
+            'ssc':"<p> est situé en [[python: object.getValueForTemplate('SSC')]] au schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>",
+            'ssc-revision':"<p> est situé en [[python: object.getValueForTemplate('SSC')]] au projet de - révision du - de - schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>",
+            'rcu':"<p>est situé sur le territoire ou la partie du territoire communal où le règlement régional d'urbanisme [[python: object.getValueForTemplate('folderZone') ]] est applicable;</p>",
+            'rcu-approuve':"<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue')]] est applicable;</p>",
+            'rcu-revision':"<p>est situé sur le territoire ou la partie du territoire communal visé(e) par le projet - de révision du - de - règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue')]] est applicable;</p>",
+            'rcu-approuve-provisoirement':"<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé provisoirement par [[python: ', '.join(object.getValuesForTemplate('RCU', subfield='extraValue')) ]] est applicable;</p>",
+            }
+
+    for licence_type in ['urbancertificateone', 'urbancertificatetwo', 'notaryletter']:
+        configfolder = getattr(urbancfg, licence_type)
+        for vocfolder in ['specificfeatures', 'locationspecificfeatures']:
+            if hasattr(configfolder, vocfolder):
+                folder = getattr(configfolder, vocfolder)
+                for id_key, replacement_text in vocterms_ids.iteritems():
+                    if hasattr(folder, id_key):
+                        getattr(folder, id_key).setDescription(replacement_text)
