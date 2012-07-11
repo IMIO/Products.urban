@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-07-04 11:31+0000\n"
+"POT-Creation-Date: 2012-07-04 14:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1812,6 +1812,11 @@ msgstr ""
 #. Default: "Licenceeventtypes"
 #: LicenceEvent.py
 msgid "urban_label_licenceeventtypes"
+msgstr ""
+
+#. Default: "Linkedcu2s"
+#: Declaration.py
+msgid "urban_label_linkedCU2s"
 msgstr ""
 
 #. Default: "Linkedinquiry"

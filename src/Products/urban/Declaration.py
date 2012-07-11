@@ -24,10 +24,11 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
-optional_fields = []
+optional_fields = ['linkedCU2s']
 ##/code-section module-header
 
 schema = Schema((
@@ -43,6 +44,21 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary('articles', with_empty_value=True),
         default_method='getDefaultValue',
+    ),
+    ReferenceField(
+        name='linkedCU2s',
+        widget=ReferenceBrowserWidget(
+            allow_browse=0,
+            base_query='restrictCU2Search',
+            show_results_without_query=True,
+            label='Linkedcu2s',
+            label_msgid='urban_label_linkedCU2s',
+            i18n_domain='urban',
+        ),
+        allowed_types=('UrbanCertificateTwo',),
+        schemata='urban_location',
+        multiValued=1,
+        relationship='parcelCU2s',
     ),
 
 ),
@@ -144,6 +160,19 @@ class Declaration(BaseFolder, GenericLicence, BrowserDefaultMixin):
                     return decisionTerm.getExtraValue()
                 return "[No ExtraValue defined for the decision term '%s']" % decisionTerm.Title()
         return ''
+
+    security.declarePublic('restrictCU2Search')
+    def restrictCU2Search(self):
+        """
+        """
+        catalog = getToolByName(self, 'portal_catalog')
+        portal = getToolByName(self, 'portal_url').getPortalObject()
+        rootPath = '/'.join(portal.getPhysicalPath())
+        dict = {}
+        dict['path'] = {'query':'%s/urban/urbancertificatetwos' % (rootPath)}
+        brain = catalog(id=self.id)[0]
+        dict['parcelInfosIndex'] = brain.parcelInfosIndex
+        return dict
 
 
 

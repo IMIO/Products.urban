@@ -140,7 +140,7 @@
   <td valign="top"><metal:myfield use-macro="python:here.widget('floodingLevelDetails', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: 'dgrneUnderground' in usedAttributes">
-  <td valign="top"><b><span i18n:translate="urban_label_dgrneUnderground">DGRNE Underground (location)</span>:</b></td>
+  <td valign="top"><b><span i18n:translate="urban_label_dgrneUnderground">DGRNE Underground (road)</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='view')" /></td>
  </tr>
@@ -271,6 +271,11 @@
   <td valign="top"><b><span i18n:translate="urban_label_areParcelsVerified">Are parcels verified?</span>:</b></td>
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('areParcelsVerified', mode='view')" /></td>
+ </tr>
+ <tr tal:condition="python: 'linkedCU2s' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_linkedCU2s">CU2's of the parcel</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('linkedCU2s', mode='view')" /></td>
  </tr>
 </table>
 <fieldset tal:condition="useTabbing"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
