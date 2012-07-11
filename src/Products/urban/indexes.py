@@ -69,7 +69,7 @@ def genericlicence_streetsuid(object):
     streets = []
     for location in object.getWorkLocations():
         streets.append(location['street'])
-    return streets 
+    return streets
 
 @indexer(IGenericLicence)
 def genericlicence_lastkeyevent(object):
