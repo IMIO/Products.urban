@@ -578,7 +578,7 @@ schema = Schema((
         name='foldermanagers',
         widget=ReferenceBrowserWidget(
             allow_browse=0,
-            base_query='restrictFolderManagerSearch',
+            base_query='foldermanagersBaseQuery',
             show_results_without_query=True,
             label='Foldermanagers',
             label_msgid='urban_label_foldermanagers',
@@ -763,8 +763,8 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             vocab.append((elt[0], elt[1]))
         return DisplayList(tuple(vocab))
 
-    security.declarePublic('restrictFolderManagerSearch')
-    def restrictFolderManagerSearch(self):
+    security.declarePublic('foldermanagersBaseQuery')
+    def foldermanagersBaseQuery(self):
         """
         """
         portal = getToolByName(self, 'portal_url').getPortalObject()

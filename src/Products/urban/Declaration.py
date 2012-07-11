@@ -49,7 +49,7 @@ schema = Schema((
         name='linkedCU2s',
         widget=ReferenceBrowserWidget(
             allow_browse=0,
-            base_query='restrictCU2Search',
+            base_query='CU2BaseQuery',
             show_results_without_query=True,
             label='Linkedcu2s',
             label_msgid='urban_label_linkedCU2s',
@@ -161,8 +161,8 @@ class Declaration(BaseFolder, GenericLicence, BrowserDefaultMixin):
                 return "[No ExtraValue defined for the decision term '%s']" % decisionTerm.Title()
         return ''
 
-    security.declarePublic('restrictCU2Search')
-    def restrictCU2Search(self):
+    security.declarePublic('CU2BaseQuery')
+    def CU2BaseQuery(self):
         """
         """
         catalog = getToolByName(self, 'portal_catalog')
