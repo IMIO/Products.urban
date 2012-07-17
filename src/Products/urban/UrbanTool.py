@@ -491,7 +491,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         #search in an urbanConfig or in the tool
         licence_config = getattr(self, self.getUrbanConfig(context).getId())
         for config in licence_config.getTextDefaultValues():
-            if config['fieldname'] == fieldname:
+            if config.has_key('fieldname') and config['fieldname'] == fieldname:
                 return config['text']
         return ''
 
