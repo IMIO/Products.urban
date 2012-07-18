@@ -791,6 +791,7 @@ def migrateUrbanEditorRoles(context):
     """
     if isNoturbanMigrationsProfile(context): return
 
+    logger = context.getLogger('migrateUrbanEditorRoles')
     site = context.getSite()
     app_folder = getattr(site, "urban")
     for foldername in ['buildlicences', 'parceloutlicences', 'declarations', 'divisions', 'urbancertificateones', 'urbancertificatetwos', 'notaryletters', 'environmentaldeclarations', 'miscdemands', 'architects', 'geometricians', 'notaries']:
@@ -802,6 +803,7 @@ def migrateUrbanEditorRoles(context):
                 ex_roles.append("Contributor")
                 folder.manage_setLocalRoles('urban_editors', ex_roles)
                 folder.reindexObject()
+                logger.info("Added locally contributor role to urban_editors group on folder '%s'"%foldername)
 
 def migrateVocabularyTermsOfCUSpecificFeatures(context):
     """
@@ -809,6 +811,7 @@ def migrateVocabularyTermsOfCUSpecificFeatures(context):
     """
     if isNoturbanMigrationsProfile(context): return
 
+    logger = context.getLogger('migrateVocabularyTermsOfCUSpecificFeatures')
     site = context.getSite()
     urbancfg = site.portal_urban
     vocterms_ids = {
@@ -831,3 +834,4 @@ def migrateVocabularyTermsOfCUSpecificFeatures(context):
                 for id_key, replacement_text in vocterms_ids.iteritems():
                     if hasattr(folder, id_key):
                         getattr(folder, id_key).setDescription(replacement_text)
+                        logger.info("Set new description in folder '%s: %s', on term '%s'"%(licence_type, vocfolder, id_key))
