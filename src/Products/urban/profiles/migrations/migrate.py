@@ -792,7 +792,16 @@ def migrateUrbanEditorRoles(context):
     if isNoturbanMigrationsProfile(context): return
 
     site = context.getSite()
-    site.portal_groups.setRolesForGroup('urban_editors', ('Contributor',))
+    app_folder = getattr(site, "urban")
+    for foldername in ['buildlicences', 'parceloutlicences', 'declarations', 'divisions', 'urbancertificateones', 'urbancertificatetwos', 'notaryletters', 'environmentaldeclarations', 'miscdemands', 'architects', 'geometricians', 'notaries']:
+        if hasattr(app_folder, foldername):
+            folder = getattr(app_folder, foldername)
+            roles = dict(folder.get_local_roles())
+            if roles.has_key('urban_editors') and not 'Contributor' in roles['urban_editors']:
+                ex_roles = list(roles['urban_editors'])
+                ex_roles.append("Contributor")
+                folder.manage_setLocalRoles('urban_editors', ex_roles)
+                folder.reindexObject()
 
 def migrateVocabularyTermsOfCUSpecificFeatures(context):
     """
