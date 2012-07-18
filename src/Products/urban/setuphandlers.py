@@ -784,7 +784,7 @@ def addUrbanGroups(context):
     #one with urban Readers
     site.portal_groups.addGroup("urban_readers", title="Urban Readers")
     #one with urban Editors
-    site.portal_groups.addGroup("urban_editors", title="Urban Editors", roles=["Contributor"])
+    site.portal_groups.addGroup("urban_editors", title="Urban Editors")
 
 def addLicencesCollection(context):
     """
@@ -839,7 +839,7 @@ def setDefaultApplicationSecurity(context):
             pass
         b_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         b_folder.manage_addLocalRoles("urban_readers", ("Reader",))
-        b_folder.manage_addLocalRoles("urban_editors", ("Editor",))
+        b_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
     #parceloutlicences application folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "parceloutlicences"):
         p_folder = getattr(app_folder, "parceloutlicences")
@@ -851,7 +851,7 @@ def setDefaultApplicationSecurity(context):
             pass
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
+        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
     #declarations application folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "declarations"):
         p_folder = getattr(app_folder, "declarations")
@@ -863,7 +863,7 @@ def setDefaultApplicationSecurity(context):
             pass
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
+        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
     #division application folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "divisions"):
         p_folder = getattr(app_folder, "divisions")
@@ -875,7 +875,7 @@ def setDefaultApplicationSecurity(context):
             pass
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
+        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
     #urbancertificatesones application folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "urbancertificateones"):
         p_folder = getattr(app_folder, "urbancertificateones")
@@ -887,7 +887,7 @@ def setDefaultApplicationSecurity(context):
             pass
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
+        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
     #urbancertificatetwos application folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "urbancertificatetwos"):
         p_folder = getattr(app_folder, "urbancertificatetwos")
@@ -899,7 +899,7 @@ def setDefaultApplicationSecurity(context):
             pass
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
+        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
     #notaryletters application folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "notaryletters"):
         p_folder = getattr(app_folder, "notaryletters")
@@ -911,7 +911,7 @@ def setDefaultApplicationSecurity(context):
             pass
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
+        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
     #environmentaldeclarations folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "environmentaldeclarations"):
         p_folder = getattr(app_folder, "environmentaldeclarations")
@@ -923,28 +923,28 @@ def setDefaultApplicationSecurity(context):
             pass
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
+        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
     #architects application folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "architects"):
         p_folder = getattr(app_folder, "architects")
         app_folder.manage_permission('Add portal content', ['Manager', 'Contributor', 'Owner', 'Editor', ], acquire=0)
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
+        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
     #geometricians application folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "geometricians"):
         p_folder = getattr(app_folder, "geometricians")
         app_folder.manage_permission('Add portal content', ['Manager', 'Contributor', 'Owner', 'Editor', ], acquire=0)
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
+        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
     #notaries application folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "notaries"):
         p_folder = getattr(app_folder, "notaries")
         app_folder.manage_permission('Add portal content', ['Manager', 'Contributor', 'Owner', 'Editor', ], acquire=0)
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
+        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
     #misc demands application folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "miscdemands"):
         p_folder = getattr(app_folder, "miscdemands")
@@ -956,7 +956,7 @@ def setDefaultApplicationSecurity(context):
             pass
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor",))
+        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
 
 def addGlobalFolders(context):
     """
