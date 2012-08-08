@@ -345,22 +345,24 @@ class Contact(BaseContent, BrowserDefaultMixin):
 
     def _getNameSignaletic(self, short, linebyline):
         title = self.getPersonTitleValue(short)
-        nameSignaletic = '%s %s %s' % (title, self.getName1(), self.getName2())
+        namedefined = self.getName1() or self.getName2()
+        namepart = namedefined and '%s %s' % (self.getName1(), self.getName2()) or self.getSociety()
+        nameSignaletic = '%s %s' % (title, namepart)
         if len(self.getRepresentedBy()) > 0:
             person_title = self.getPersonTitle(theObject=True)
             representatives = self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
-            gender = multiplicity = represented = ''
+            gender = multiplicity = ''
+            represented = 'représenté'
             if person_title:
                 gender = person_title.getGender()
                 multiplicity = person_title.getMultiplicity()
-                represented = 'représenté'
                 if gender == 'male' and multiplicity == 'plural' :
                     represented = 'représentés'
                 elif gender == 'female' and multiplicity == 'single' :
                     represented = 'représentée'
                 elif gender == 'female' and multiplicity == 'plural' :
                     represented = 'représentées'
-            nameSignaletic = '%s %s %s %s par %s' % (title, self.getName1(), self.getName2(), represented, representatives)
+            nameSignaletic = '%s %s %s par %s' % (title, namepart, represented, representatives)
         if linebyline:
             #escape HTML special characters like HTML entities
             return cgi.escape(nameSignaletic)
