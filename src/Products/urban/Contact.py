@@ -109,7 +109,6 @@ schema = Schema((
             label_msgid='urban_label_name1',
             i18n_domain='urban',
         ),
-        searchable=True,
     ),
     StringField(
         name='name2',
@@ -118,7 +117,6 @@ schema = Schema((
             label_msgid='urban_label_name2',
             i18n_domain='urban',
         ),
-        searchable=True,
     ),
     StringField(
         name='society',
