@@ -973,7 +973,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             eventObj=obj.getObject()
             licenceObj=eventObj.getParentNode()
             applicantObj=licenceObj.getApplicants()[0]
-            architects = licenceObj.getArchitects()
+            architects = hasattr(licenceObj, 'getArchitects') and licenceObj.getArchitects() or []
             if (pw.getInfoFor(licenceObj,'review_state')=='accepted'):
                 html_list.append('<TR><TD>%s  %s</TD><TD>%s</TD></TR>' \
                 % (str(licenceObj.getReference()), licenceObj.title.encode('iso-8859-1'), str(eventObj.getDecisionDate())))
@@ -1142,7 +1142,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return at_obj.Schema()[fieldRealName]
 
     security.declarePublic('generateReference')
-    def generateReference(self, obj):
+    def generateReference(self, obj, **kwargs):
         """
          Generates a reference based on the numerotationTALExpression
         """
@@ -1169,6 +1169,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 'portal': self.aq_inner.aq_parent,
                 'date': DateTime(),
                }
+        data.update(kwargs)
         res = ''
         try:
             ctx = getEngine().getContext(data)
@@ -1481,12 +1482,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             queryString = {'portal_type':'File',
                            'path':'/'.join(context.getPhysicalPath()),
                            'sort_on':'created'}
-        elif specificSearch == 'searchLastElements':
-            #search the existing elements depending on the folder we are in
-            queryString = {'portal_type':URBAN_TYPES,
-                           'path':'/'.join(context.getPhysicalPath()),
-                           'sort_on':'created',
-                           'sort_order':'reverse'}
 
         #update queryString with given kwargs
         queryString.update(kwargs)
