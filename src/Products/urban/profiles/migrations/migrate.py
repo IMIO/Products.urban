@@ -32,6 +32,8 @@ def migrateToUrban114(context):
     migrateUrbanEditorRoles(context)
     #change voc terms used for the CU1 CU2 and notary letter specific features
     migrateVocabularyTermsOfCUSpecificFeatures(context)
+    #workType field is now multivalued, string values should be put into a tuple
+    migrateWorkTypes(context)
 
 def migrateToPlone4(context):
     """
@@ -88,7 +90,7 @@ def contentmigrationLogger(oldObject, **kwargs):
     """ Generic logger method to be used with CustomQueryWalker """
     kwargs['logger'].info('/'.join(kwargs['purl'].getRelativeContentPath(oldObject)))
     return True
-    
+
 def migrateToWorkLocationsDataGridField(context):
     """
       Migrate Declaration, Division, EnvironmentalDeclaration, UbranCertificateOne,
@@ -835,3 +837,23 @@ def migrateVocabularyTermsOfCUSpecificFeatures(context):
                     if hasattr(folder, id_key):
                         getattr(folder, id_key).setDescription(replacement_text)
                         logger.info("Set new description in folder '%s: %s', on term '%s'"%(licence_type, vocfolder, id_key))
+
+
+def migrateWorkTypes(context):
+    """
+    Make sure the value(s) of the field workType are in a list
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    logger = context.getLogger('migrateWorkTypes')
+
+    site = context.getSite()
+    catalog = site.portal_catalog
+    brains = catalog(portal_type=URBAN_TYPES)
+    for brain in brains:
+        licence = brain.getObject()
+        if licence.getField('workType'):
+            old_val = licence.getWorkType()
+            if old_val and len(old_val) == len([val for val in old_val if len(val) == 1]):
+                logger.info("Corrected workType for %s"%licence.absolute_url())
+                licence.setWorkType(''.join(licence.getWorkType()))
