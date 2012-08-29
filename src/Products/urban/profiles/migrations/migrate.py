@@ -32,6 +32,8 @@ def migrateToUrban114(context):
     migrateUrbanEditorRoles(context)
     #change voc terms used for the CU1 CU2 and notary letter specific features
     migrateVocabularyTermsOfCUSpecificFeatures(context)
+    #workType field is now multivalued, string values should be put into a tuple
+    migrateWorkTypes(context)
 
 def migrateToPlone4(context):
     """
@@ -83,8 +85,6 @@ def migrateToPlone4(context):
     migrateFilesToUrbanDoc(context)
     #change allowed types in globaltemplates folder
     migrateGlobalTemplatesAllowedTypes(context)
-    #workType field is now multivalued, string values should be put into a tuple
-    migrateWorkTypes(context)
 
 def contentmigrationLogger(oldObject, **kwargs):
     """ Generic logger method to be used with CustomQueryWalker """
@@ -854,6 +854,6 @@ def migrateWorkTypes(context):
         licence = brain.getObject()
         if licence.getField('workType'):
             old_val = licence.getWorkType()
-            if len(old_val) == len([val for val in old_val if len(val) == 1]):
+            if old_val and len(old_val) == len([val for val in old_val if len(val) == 1]):
+                logger.info("Corrected workType for %s"%licence.absolute_url())
                 licence.setWorkType(''.join(licence.getWorkType()))
-    logger.info('done!')
