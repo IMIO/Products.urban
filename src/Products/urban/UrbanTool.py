@@ -957,6 +957,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         pw = getToolByName(self, 'portal_workflow')
         results = catalog.searchResults(getDecisionDate = {'query' : (DateTime(datefrom),DateTime(dateto)), 'range' : 'minmax'},
                   object_provides='Products.urban.interfaces.ITheLicenceEvent', portal_type='UrbanEvent')
+        results = [brain.getObject() for brain in results if brain.getObject().aq_parent.portal_type in ['BuildLicence',]]
         xml = []
         error = []
         html_list = []
@@ -969,11 +970,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         xml.append('    <E_220_ICT>COM</E_220_ICT>')
         xml.append('  </E_220_herkomst>')
         html_list.append('<HTML><TABLE>')
-        for obj in results:
-            eventObj=obj.getObject()
+        for eventObj in results:
             licenceObj=eventObj.getParentNode()
-            applicantObj=licenceObj.getApplicants()[0]
-            architects = hasattr(licenceObj, 'getArchitects') and licenceObj.getArchitects() or []
+            applicantObj= licenceObj.getApplicants() and licenceObj.getApplicants()[0] or None
+            architects = licenceObj.getField('architects') and licenceObj.getArchitects() or []
             if (pw.getInfoFor(licenceObj,'review_state')=='accepted'):
                 html_list.append('<TR><TD>%s  %s</TD><TD>%s</TD></TR>' \
                 % (str(licenceObj.getReference()), licenceObj.title.encode('iso-8859-1'), str(eventObj.getDecisionDate())))
@@ -989,14 +989,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 if check(street, 'no street found on licence %s' % str(licenceObj.getReference())):
                     street = street[0].getObject()
                     xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street.getStreetCode()))
-                    xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street.getStreetName()).decode('utf-8').encode('iso-8859-1'))
+                    xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street.getStreetName()).decode('iso-8859-1').encode('iso-8859-1'))
                 if number:
                     xml.append('      <E_220_huisnr>%s</E_220_huisnr>')
-                worktype=licenceObj.getWorkType()
+                worktype=licenceObj.getWorkType()[0]
                 work_types=UrbanVocabulary('folderbuildworktypes').getAllVocTerms(licenceObj)
                 worktype_map = {}
                 for k, v in work_types.iteritems():
                     worktype_map[k] = v.getExtraValue()
+                xml_worktype=''
                 if check(worktype in worktype_map.keys(),'unknown worktype %s on licence %s' % (worktype ,str(licenceObj.getReference()))):
                     xml_worktype=worktype_map[worktype]
                 xml.append('      <E_220_Typ>%s</E_220_Typ>' % xml_worktype)
@@ -1005,11 +1006,11 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 xml.append('      <E_220_Datum_Verg>%s%s%s</E_220_Datum_Verg>' %(strDecisionDate[0:4], strDecisionDate[5:7], strDecisionDate[8:10]))
                 xml.append('      <E_220_Instan>COM</E_220_Instan>')
                 xml.append('      <PERSOON>')
-                xml.append('        <naam>%s %s</naam>' % (applicantObj.getName1().encode('iso-8859-1'), applicantObj.name2.encode('iso-8859-1')))
-                xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().encode('iso-8859-1'))
+                xml.append('        <naam>%s %s</naam>' % (applicantObj.getName1().decode('iso-8859-1').encode('iso-8859-1'), applicantObj.getName2().decode('iso-8859-1').encode('iso-8859-1')))
+                xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().decode('iso-8859-1').encode('iso-8859-1'))
                 xml.append('        <huisnr>%s</huisnr>' % applicantObj.getNumber())
                 xml.append('        <postcode>%s</postcode>' % applicantObj.getZipcode())
-                xml.append('        <gemeente>%s</gemeente>' % applicantObj.getCity().encode('iso-8859-1'))
+                xml.append('        <gemeente>%s</gemeente>' % applicantObj.getCity().decode('iso-8859-1').encode('iso-8859-1'))
                 xml.append('        <hoedanig>DEMANDEUR</hoedanig>')
                 xml.append('      </PERSOON>')
                 if check(architects, 'no architect found on licence %s' % str(licenceObj.getReference())):
@@ -1029,13 +1030,13 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                         xml.append('      <PERSOON>')
                         xml.append('        <naam>%s %s</naam>' \
                         % (architectObj.getName1().encode('iso-8859-1'), architectObj.name2.encode('iso-8859-1')))
-                        xml.append('        <straatnaam>%s</straatnaam>' % architectObj.getStreet().encode('iso-8859-1'))
+                        xml.append('        <straatnaam>%s</straatnaam>' % architectObj.getStreet().decode('iso-8859-1').encode('iso-8859-1'))
                         xml.append('        <huisnr>%s</huisnr>' % architectObj.getNumber())
                         xml.append('        <postcode>%s</postcode>' % architectObj.getZipcode())
                         xml.append('        <gemeente>%s</gemeente>' % architectObj.getCity().encode('iso-8859-1'))
                         xml.append('        <hoedanig>ARCHITECTE</hoedanig>')
                         xml.append('      </PERSOON>')
-                for parcel in parcels:
+                for prc in parcels:
                     xml.append('      <PERCELEN>')
                     try:
                         strRadical='%04d'%float(prc.getRadical())
