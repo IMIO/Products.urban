@@ -1244,7 +1244,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         datefrom=datesplited[2]+'/'+datesplited[1]+'/'+datesplited[0]
         datesplited=dateto.split('/')
         dateto=datesplited[2]+'/'+datesplited[1]+'/'+datesplited[0]
-        templateObj=self.getTemplateStatsINS()
+        global_templates = getattr(self, 'globaltemplates')
+        templateObj=getattr(global_templates, 'statsins.odt')
         catalog = getToolByName(self, 'portal_catalog')
         results = catalog.searchResults(getBeginDate = {'query' : (DateTime(datefrom),DateTime(dateto)), 'range' : 'minmax'}, id='debut-des-travaux',portal_type = 'UrbanEvent')
         folders=[]
