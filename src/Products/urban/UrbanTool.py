@@ -33,11 +33,13 @@ import appy.pod.renderer
 import psycopg2
 import psycopg2.extras
 import os, time
+#from urlparse import urlparse
 from DateTime import DateTime
 from StringIO import StringIO
 from AccessControl import getSecurityManager
 from Acquisition import aq_base
 from zope.i18n import translate
+from plone.memoize import ram
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.Expression import Expression
@@ -1537,7 +1539,18 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return True
         return False
 
+    def _pylonsHostChange(method, self):
+        return self.getPylonsHost()
 
+    security.declarePublic('getStaticPylonsHost')
+    #@ram.cache(_pylonsHostChange) #not so necessary in this case
+    def getStaticPylonsHost(self):
+        """
+          Returns the domain name of the pylonsHost attribute
+        """
+        #res = urlparse(self.getPylonsHost()) #getPylonsHost doesn't contain a valid url beginning with http
+        #return '%s://%s'%(res.scheme, res.netloc)
+        return "http://%s"%self.getPylonsHost().split('/')[0] #don't use os.path!
 
 registerType(UrbanTool, PROJECTNAME)
 # end of class UrbanTool
