@@ -1802,6 +1802,15 @@ def setupExtra(context):
     else:
         logger.info('user password policy unchanged')
 
+    #we apply a method of CPUtils to configure CKeditor
+    logger.info("Configuring CKeditor")
+    try:
+        from Products.CPUtils.Extensions.utils import configure_ckeditor
+        if not hasattr(portal.portal_properties, 'ckeditor_properties') or portal.portal_properties.site_properties.default_editor != 'CKeditor':
+            configure_ckeditor(portal, custom='urban')
+    except ImportError:
+        pass
+
     #we add additional layers here because we take informations from portal_urban
     #that are set manually after install
     logger.info("Adding additional layers")
