@@ -257,7 +257,7 @@
                   member context/@@plone_portal_state/member;
                   mayAddUrbanEvent python: member.has_permission('urban: Add UrbanEvent', context);"
       tal:condition="python: allAdvices and mayAddUrbanEvent" >
- <fieldset><strong><legend i18n:translate="folder_advice">Folder advices</legend></strong>
+ <fieldset><legend i18n:translate="folder_advice">Folder advices</legend>
   <table cellspacing=0 cellpadding=0 width=100%>
   <tr>
    <td>
