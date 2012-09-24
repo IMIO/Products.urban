@@ -345,6 +345,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
             specificFeaturesPath = '/'.join(getattr(config, "%sspecificfeatures" % location).getPhysicalPath())
             params = {
                       'path': specificFeaturesPath,
+                      'sort_on': 'getObjPositionInParent',
                       'review_state': 'enabled',
             }
             enabled_terms = portal_catalog(**params)
