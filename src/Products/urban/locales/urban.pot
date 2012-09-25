@@ -57,6 +57,9 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+msgid "event_inquiry_documents"
+msgstr ""
+
 msgid "Found folder(s)"
 msgstr ""
 

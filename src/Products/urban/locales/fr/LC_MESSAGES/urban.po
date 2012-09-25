@@ -497,6 +497,9 @@ msgstr "Données concernant l'événement"
 msgid "event_inquiry_claimants"
 msgstr "Réclamants"
 
+msgid "event_inquiry_documents"
+msgstr "Récapitulatif"
+
 msgid "event_inquiry_recipients"
 msgstr "Propriétaires concernés"
 
