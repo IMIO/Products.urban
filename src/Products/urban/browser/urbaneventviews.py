@@ -216,4 +216,4 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
                             newrecipient=getattr(context,newrecipientname)
                     #create the PortionOut using the createPortionOut method...
                     context.portal_urban.createPortionOut(path=newrecipient,division=divisioncode, section=section, radical=radical, bis=bis, exposant=exposant, puissance=puissance, partie=False)
-        return context.REQUEST.RESPONSE.redirect(context.absolute_url()+'/view')
+        return context.REQUEST.RESPONSE.redirect(context.absolute_url()+'/#fieldsetlegend-urbaneventinquiry_recipients')
