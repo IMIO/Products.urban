@@ -57,7 +57,6 @@ def urban_check_addresses(self, restore='',  missing=''):
 
     brains = site.portal_catalog(portal_type = ['BuildLicence', 'Declaration', 'Division', 'EnvironmentalDeclaration', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'ParcelOutLicence'])
     count_db_lic = count_db_good = count_db_bad =count_db_ns = count_fl_good = count_fl_rest = count_fl_new = 0
-    #import ipdb; ipdb.set_trace()
     for brain in brains:
         count_db_lic += 1
         lic = brain.getObject()
@@ -323,7 +322,6 @@ def export_urban_docs(self, delete=''):
     docs = {}
     brains = portal.portal_catalog(portal_type = 'UrbanDoc', path='%s/%s'%(portalpath, 'portal_urban'), sort_on='path')
     count_doc = 0
-    #import ipdb; ipdb.set_trace()
     for brain in brains:
         count_doc += 1
         doc = brain.getObject()

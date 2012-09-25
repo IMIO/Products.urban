@@ -388,12 +388,12 @@ def importBuildlicences(self):
             if headline[0] == 'DATA':
                 break
             mapping.append(headline)
-    
+
     licence_type = mapping[0][0]
     licence_container = getattr(self, '%ss' % licence_type.lower())
     field_mapping = mapping[0]
     foldermanager = site.portal_urban.foldermanagers.foldermanager1
-    dummy_licence_id = licence_container.invokeFactory(licence_type, id=site.generateUniqueId('dummy'), 
+    dummy_licence_id = licence_container.invokeFactory(licence_type, id=site.generateUniqueId('dummy'),
                                                        usage='for_habitation', foldermanagers=[foldermanager])
     dummy_licence = getattr(licence_container, dummy_licence_id)
     dummies_objects = {licence_type:dummy_licence}
@@ -404,7 +404,7 @@ def importBuildlicences(self):
             field = field_mapping[i]
             if field:
                 if hasattr(dummy_licence, field):
-                    lkws[0][field] = data[i]     
+                    lkws[0][field] = data[i]
                 else:
                     lkws = globals()[field](dummy_licence, lkws, data[i])
         #import ipdb; ipdb.set_trace()
@@ -423,7 +423,7 @@ def importBuildlicences(self):
                     if data[i]:
                         empty_data = False
                     if hasattr(dummies_objects[subobject_type], field):
-                        kws[0][field] = data[i]     
+                        kws[0][field] = data[i]
                     else:
                         kws = globals()[field](licence, kws, data[i])
             #import ipdb; ipdb.set_trace()
@@ -464,7 +464,7 @@ def parseRadicalAndExposant(context, kws, raw_radical):
         new_kw = kw.copy()
         for k,v in fields.items():
             if v:
-                new_kw.update({k:v}) 
+                new_kw.update({k:v})
         kws.append(new_kw)
     if len(kws) > 1:
         kws.pop(0)
@@ -502,7 +502,7 @@ def parseDecision(context, kws, decision_text):
     urban_event_fields.append({'decisionText':decision_text})
     for dic in urban_event_fields:
         kws[0].update(dic)
-    return kws 
+    return kws
 
 def parseApplicantName(context, kws, raw_name):
     name_fields = []
@@ -534,7 +534,7 @@ def parseWorkLocations(context, kws, raw_adress):
     site = getToolByName(context, 'portal_url').getPortalObject()
     urban_streets_path = '/'.join(site.portal_urban.streets.getPhysicalPath())
     noisy_words = set(('du', 'de', 'le', 'la', 'les', 'à'))
-    numbers = city = adress = '' 
+    numbers = city = adress = ''
 
     match = search('([^,]*),\s*(.*)\s+(\w+$)', raw_adress)
     if match:
@@ -546,10 +546,10 @@ def parseWorkLocations(context, kws, raw_adress):
         if match:
             city = match.group(2).capitalize()
             adress = match.group(1).split()
-    street_keywords = [word.capitalize() for word in adress if word not in noisy_words] 
+    street_keywords = [word.capitalize() for word in adress if word not in noisy_words]
     street_keywords.append(city)
     streets_brains = catalog(
-                             portal_type = 'Street', 
+                             portal_type = 'Street',
                              path = {'query':urban_streets_path, 'depth': 2},
                              Title = street_keywords
                             )
@@ -608,9 +608,9 @@ def restoreWorklocations(self):
             if headline[0] == 'DATA':
                 break
             mapping.append(headline)
-    
+
     licence_type = mapping[0][0]
     licence_container = getattr(self, '%ss' % licence_type.lower())
     field_mapping = mapping[0]
 
- 
+
