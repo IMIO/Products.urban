@@ -33,6 +33,7 @@ from zope.component import createObject
 from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
+from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.base import UrbanBase
@@ -116,14 +117,15 @@ schema = Schema((
         name='workLocations',
         schemata="urban_description",
         widget=DataGridWidget(
-            columns={'number' : Column("Number"), 'street' : SelectColumn("Street", UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", sort_on='sortable_title', inUrbanConfig=False, allowedStates=['enabled'])),},
+            columns={'number' : Column("Number"), 'street' : ReferenceColumn("Street", surf_site=False, object_provides=('Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',))},
+            helper_js=('datagridwidget.js', 'datagridautocomplete.js'),
             label='Worklocations',
             label_msgid='urban_label_workLocations',
             i18n_domain='urban',
         ),
         allow_oddeven=True,
         columns=('number', 'street'),
-        vocabulary=UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", sort_on='sortable_title', inUrbanConfig=False, allowedStates=['enabled']),
+        validators=('isValidStreetName',),
     ),
     StringField(
         name='folderCategory',

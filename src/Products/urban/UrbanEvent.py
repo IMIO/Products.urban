@@ -251,9 +251,8 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         wf_tool = getToolByName(self, 'portal_workflow')
         return [template for template in self.getUrbaneventtypes().listFolderContents({'portal_type': 'UrbanDoc'})
                 if wf_tool.getInfoFor(template, 'review_state') == 'enabled']
-    security.declarePublic('eventDateLabel')
-    security.declarePublic('eventDateLabel')
 
+    security.declarePublic('eventDateLabel')
     def eventDateLabel(self):
         """
          Returns the variable label

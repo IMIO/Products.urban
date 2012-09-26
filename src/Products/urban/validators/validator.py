@@ -19,3 +19,17 @@ class isTextFieldConfiguredValidator:
                                     default=u"The field '${fieldname}' is configured twice",
                                     mapping={'fieldname':val['fieldname']}))
         return 1
+
+
+class isValidStreetNameValidator:
+    implements(IValidator)
+
+    def __init__(self, name):
+        self.name = name
+
+    def __call__(self, value, *args, **kwargs):
+        for line in value:
+            if line['orderindex_'] != 'template_row_marker' and not line['street']:
+                return translate(_('urban_streetnameerror',
+                                    default=u"Please select a valid street"))
+        return 1
