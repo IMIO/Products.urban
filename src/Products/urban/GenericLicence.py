@@ -29,7 +29,6 @@ from Products.urban.config import *
 import warnings
 import inspect
 from zope.i18n import translate
-from zope.component import createObject
 from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
@@ -842,7 +841,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             applicantTitle = translate('no_applicant_defined', 'urban', context=self.REQUEST).encode('utf8')
         title = "%s - %s - %s" % (self.getReference(), self.getLicenceSubject(), applicantTitle)
         self.setTitle(title)
-        self.reindexObject(idxs=('Title', 'applicantInfosIndex',))
+        self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
 
     security.declarePublic('getAnnoncedDelay')
     def getAnnoncedDelay(self, theObject=False):
@@ -888,7 +887,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
           Create all urbanEvent corresponding to advice on a licence
         """
         urban_tool = getToolByName(self, 'portal_urban')
-        uid_catalog = getToolByName(self, 'uid_catalog')
         listEventTypes = self.getAllAdvices()
         for eventType in listEventTypes:
             eventType.checkCreationInLicence(self)

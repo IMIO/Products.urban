@@ -140,7 +140,7 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
         else:
             title = self.getReference()
         self.setTitle(title)
-        self.reindexObject(idxs=('Title', 'applicantInfosIndex',))
+        self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
 
     def getLastDeposit(self):
         return self._getLastEvent(interfaces.IDepositEvent)

@@ -292,7 +292,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         else:
             title = self.getReference()
         self.setTitle(title)
-        self.reindexObject(idxs=('Title', 'applicantInfosIndex',))
+        self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
 
     security.declarePublic('getOpinionsToAskForWorks')
     def getOpinionsToAskForWorks(self, theObjects=False):
@@ -348,7 +348,6 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
                       'sort_on': 'getObjPositionInParent',
                       'review_state': 'enabled',
             }
-            enabled_terms = portal_catalog(**params)
             enabledSpecificFeatures[location] = portal_catalog(**params)
         res=[]
         for location in where:

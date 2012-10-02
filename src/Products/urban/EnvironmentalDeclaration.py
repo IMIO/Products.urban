@@ -160,7 +160,7 @@ class EnvironmentalDeclaration(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefa
             applicant = _('no_applicant_defined', 'urban', context=self.REQUEST)
         title = self.getReference() + " - " + applicant + " - " + self.getFinality()
         self.setTitle(title)
-        self.reindexObject()
+        self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
 
     def getParcels(self):
         """
