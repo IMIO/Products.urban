@@ -2,7 +2,7 @@
 <br />
 <a class="no_underline" href="#"
    tal:define="tool python: context.portal_urban"
-   tal:attributes="href python: context.portal_type in tool.getUrbanTypes() and context.absolute_url() or context.aq_inner.aq_parent.absolute_url()"><img src="goback.png" />&nbsp;<span i18n:translate="go_back">Go back</span></a>
+   tal:attributes="href python: context.portal_type in tool.getUrbanTypes() and context.absolute_url() or '%s#fieldsetlegend-urban_events' % context.aq_inner.aq_parent.absolute_url()"><img src="goback.png" />&nbsp;<span i18n:translate="go_back">Go back</span></a>
 </div>
 
 <div metal:define-macro="urbanInquiriesMacro" i18n:domain="urban"
@@ -603,9 +603,24 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
       <metal:fieldMacro use-macro="python:here.widget('subdivisionDetails', mode='edit')" />
      </fieldset>
     </tal:manage_subdivision>
-   </tal:subdivision>
+    </tal:subdivision>
 
-   <tal:other condition="not: python: fieldName in ['isInPCA', 'pca', 'isInSubdivision', 'parcellings', 'subdivisionDetails',]">
+   <tal:comment replace="nothing">put the detail field on the right of the specificfeatures field</tal:comment>
+   <tal:specificfeatures condition="python: fieldName in ['specificFeatures', 'roadSpecificFeatures',
+   'locationSpecificFeatures', 'townshipSpecificFeatures']"><br/><br/>
+   <div>
+    <table align='left'>
+     <tr>
+      <td><metal:fieldMacro use-macro="python:here.widget('%s' % fieldName, mode='edit')" /></td>
+      <td><metal:fieldMacro use-macro="python:here.widget('%sDetail' % fieldName, mode='edit')" /></td>
+     </tr>
+    </table>
+   </div>
+   </tal:specificfeatures>
+
+   <tal:other condition="not: python: fieldName in ['isInPCA', 'pca', 'isInSubdivision', 'parcellings', 'subdivisionDetails',
+   'specificFeatures', 'specificFeaturesDetail', 'roadSpecificFeatures', 'roadSpecificFeaturesDetail', 'locationSpecificFeatures',
+   'locationSpecificFeaturesDetail', 'townshipSpecificFeatures', 'townshipSpecificFeaturesDetail']">
     <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
    </tal:other>
  </tal:block>
