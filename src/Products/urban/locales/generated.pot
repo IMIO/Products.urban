@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Thu Oct  4 11:07:44 2012\n"
-"PO-Revision-Date: Thu Oct  4 11:07:44 2012\n"
+"POT-Creation-Date: Fri Oct  5 10:19:59 2012\n"
+"PO-Revision-Date: Fri Oct  5 10:19:59 2012\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -676,6 +676,11 @@ msgstr ""
 msgid "urban_label_locationSpecificFeatures"
 msgstr ""
 
+#. Default: "Locationspecificfeaturesdetail"
+#: UrbanCertificateBase.py
+msgid "urban_label_locationSpecificFeaturesDetail"
+msgstr ""
+
 #. Default: "Locationtechnicaladvice"
 #: BuildLicence.py
 msgid "urban_label_locationTechnicalAdvice"
@@ -930,6 +935,11 @@ msgstr ""
 msgid "urban_label_roadSpecificFeatures"
 msgstr ""
 
+#. Default: "Roadspecificfeaturesdetail"
+#: UrbanCertificateBase.py
+msgid "urban_label_roadSpecificFeaturesDetail"
+msgstr ""
+
 #. Default: "Roadtechnicaladvice"
 #: BuildLicence.py
 msgid "urban_label_roadTechnicalAdvice"
@@ -1071,6 +1081,11 @@ msgstr ""
 #. Default: "Townshipspecificfeatures"
 #: UrbanCertificateBase.py
 msgid "urban_label_townshipSpecificFeatures"
+msgstr ""
+
+#. Default: "Townshipspecificfeaturesdetail"
+#: UrbanCertificateBase.py
+msgid "urban_label_townshipSpecificFeaturesDetail"
 msgstr ""
 
 #. Default: "Transmitdate"

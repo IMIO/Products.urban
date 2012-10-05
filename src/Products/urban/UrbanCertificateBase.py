@@ -26,7 +26,9 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
 from Products.CMFCore.utils import getToolByName
+from Products.DataGridField.DataGridField import FixedRow
 from Products.DataGridField.LinesColumn import LinesColumn
+from Products.DataGridField.Column import Column
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
@@ -145,6 +147,70 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary('opinionstoaskifworks', vocType="OrganisationTerm"),
         default_method='getDefaultValue',
+    ),
+    DataGridField(
+        name='specificFeaturesDetail',
+        widget=DataGridWidget(
+            columns={'detail' : Column("detail")},
+            label='Specificfeaturesdetail',
+            label_msgid='urban_label_specificFeaturesDetail',
+            i18n_domain='urban',
+        ),
+        fixed_rows='getSpecificFeaturesDetailRows',
+        allow_insert= False,
+        allow_reorder= False,
+        allow_oddeven=True,
+        allow_delete= False,
+        schemata="urban_description",
+        columns= ('detail',),
+    ),
+    DataGridField(
+        name='roadSpecificFeaturesDetail',
+        widget=DataGridWidget(
+            columns={'detail' : Column("detail")},
+            label='Roadspecificfeaturesdetail',
+            label_msgid='urban_label_roadSpecificFeaturesDetail',
+            i18n_domain='urban',
+        ),
+        fixed_rows='getRoadFeaturesDetailRows',
+        allow_insert= False,
+        allow_reorder= False,
+        allow_oddeven=True,
+        allow_delete= False,
+        schemata="urban_road",
+        columns= ('detail',),
+    ),
+    DataGridField(
+        name='locationSpecificFeaturesDetail',
+        widget=DataGridWidget(
+            columns={'detail' : Column("detail")},
+            label='Locationspecificfeaturesdetail',
+            label_msgid='urban_label_locationSpecificFeaturesDetail',
+            i18n_domain='urban',
+        ),
+        fixed_rows='getLocationFeaturesDetailRows',
+        allow_insert= False,
+        allow_reorder= False,
+        allow_oddeven=True,
+        allow_delete= False,
+        schemata="urban_location",
+        columns= ('detail',),
+    ),
+    DataGridField(
+        name='townshipSpecificFeaturesDetail',
+        widget=DataGridWidget(
+            columns={'detail' : Column("detail")},
+            label='Townshipspecificfeaturesdetail',
+            label_msgid='urban_label_townshipSpecificFeaturesDetail',
+            i18n_domain='urban',
+        ),
+        fixed_rows='getTownshipFeaturesDetailRows',
+        allow_insert= False,
+        allow_reorder= False,
+        allow_oddeven=True,
+        allow_delete= False,
+        schemata="urban_description",
+        columns= ('detail',),
     ),
 
 ),
@@ -265,6 +331,28 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
            XXX This should be replaced by a zope event...
         """
         self.updateTitle()
+
+    security.declarePublic('getSpecificFeaturesDetailRows')
+    def getSpecificFeaturesDetailRows(self):
+        return self.getSpecificFeaturesRows()
+
+    security.declarePublic('getRoadFeaturesDetailRows')
+    def getRoadFeaturesDetailRows(self):
+        return self.getSpecificFeaturesRows(location='road')
+
+    security.declarePublic('getLocationFeaturesDetailRows')
+    def getLocationFeaturesDetailRows(self):
+        return self.getSpecificFeaturesRows(location='location')
+
+    security.declarePublic('getTownshipFeaturesDetailRows')
+    def getTownshipFeaturesDetailRows(self):
+        return self.getSpecificFeaturesRows(location='township')
+
+    def getSpecificFeaturesRows(self, location=''):
+        portal_urban = getToolByName(self, 'portal_urban')
+        vocname = '%sspecificfeatures' % location
+        return [FixedRow(keyColumn = 'detail', initialData={'detail':''}) for i in
+                portal_urban.listVocabularyBrains(vocToReturn=vocname, context=self)]
 
     security.declarePublic('updateTitle')
     def updateTitle(self):

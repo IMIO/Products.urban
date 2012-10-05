@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-07-04 14:13+0000\n"
+"POT-Creation-Date: 2012-10-05 08:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,9 +55,6 @@ msgid "Division"
 msgstr ""
 
 msgid "Edit"
-msgstr ""
-
-msgid "event_inquiry_documents"
 msgstr ""
 
 msgid "Found folder(s)"
@@ -497,6 +494,9 @@ msgid "event_data"
 msgstr ""
 
 msgid "event_inquiry_claimants"
+msgstr ""
+
+msgid "event_inquiry_documents"
 msgstr ""
 
 msgid "event_inquiry_recipients"
@@ -1046,6 +1046,11 @@ msgstr ""
 msgid "templates_events_title"
 msgstr ""
 
+#. Default: "Total template's number: ${tot}. Modified template's number: ${mod}. "
+#: templatessummary.pt
+msgid "templates_summary_count"
+msgstr ""
+
 #. Default: " = template has been modified."
 #: templatessummary.pt
 msgid "templates_summary_modified"
@@ -1054,11 +1059,6 @@ msgstr ""
 #. Default: "Templates summary"
 #: templatessummary.pt
 msgid "templates_summary_title"
-msgstr ""
-
-#. Default: "Total template's number: ${tot}. Modified template's number: ${mod}. "
-#: templatessummary.pt
-msgid "templates_summary_count"
 msgstr ""
 
 # topics
@@ -1861,6 +1861,11 @@ msgstr ""
 msgid "urban_label_locationSpecificFeatures"
 msgstr ""
 
+#. Default: "Locationspecificfeaturesdetail"
+#: UrbanCertificateBase.py
+msgid "urban_label_locationSpecificFeaturesDetail"
+msgstr ""
+
 #. Default: "Locationtechnicaladvice"
 #: BuildLicence.py
 msgid "urban_label_locationTechnicalAdvice"
@@ -2165,6 +2170,11 @@ msgstr ""
 msgid "urban_label_roadSpecificFeatures"
 msgstr ""
 
+#. Default: "Roadspecificfeaturesdetail"
+#: UrbanCertificateBase.py
+msgid "urban_label_roadSpecificFeaturesDetail"
+msgstr ""
+
 #. Default: "Roadtechnicaladvice"
 #: BuildLicence.py
 msgid "urban_label_roadTechnicalAdvice"
@@ -2228,6 +2238,11 @@ msgstr ""
 #. Default: "Specificfeatures"
 #: UrbanCertificateBase.py
 msgid "urban_label_specificFeatures"
+msgstr ""
+
+#. Default: "Specificfeaturesdetail"
+#: UrbanCertificateBase.py
+msgid "urban_label_specificFeaturesDetail"
 msgstr ""
 
 #. Default: "Sqlhost"
@@ -2373,6 +2388,11 @@ msgstr ""
 #. Default: "Townshipspecificfeatures"
 #: UrbanCertificateBase.py
 msgid "urban_label_townshipSpecificFeatures"
+msgstr ""
+
+#. Default: "Townshipspecificfeaturesdetail"
+#: UrbanCertificateBase.py
+msgid "urban_label_townshipSpecificFeaturesDetail"
 msgstr ""
 
 #. Default: "Transmitdate"
