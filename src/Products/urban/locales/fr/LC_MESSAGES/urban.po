@@ -1118,6 +1118,9 @@ msgstr "Dates clés"
 msgid "urban_export_list220"
 msgstr "Exportation liste 220"
 
+msgid "urban_fullmap_descr"
+msgstr "Carte"
+
 #. Default: "If this field is used, you can insert special expressions between [[]] that will be rendered.  This can be something like \"My text [[object/getMyAttribute]] end of the text\".  Object is the licence the term is used in."
 #: UrbanVocabularyTerm.py
 msgid "urban_help_description"
