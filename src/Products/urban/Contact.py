@@ -342,7 +342,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
                     addressSignaletic)
 
     def _getNameSignaletic(self, short, linebyline):
-        title = self.getPersonTitleValue(short)
+        title = self.getPersonTitleValue(short, extra=False)
         namedefined = self.getName1() or self.getName2()
         namepart = namedefined and '%s %s' % (self.getName1(), self.getName2()) or self.getSociety()
         nameSignaletic = '%s %s' % (title, namepart)
@@ -469,13 +469,15 @@ class Contact(BaseContent, BrowserDefaultMixin):
             return ''
 
     security.declarePublic('getPersonTitleValue')
-    def getPersonTitleValue(self, short=False):
+    def getPersonTitleValue(self, short=False, extra=True):
         """
           Returns the personTitle real value.  Usefull for being used in templates
         """
-        personTitle = self.getPersonTitle(short)
+        personTitle = self.getPersonTitle(short, theObject=extra)
         if short:
             return personTitle
+        elif extra:
+            return personTitle.extraValue
         elif personTitle:
             return self.displayValue(self.Vocabulary('personTitle')[0], personTitle).encode('UTF-8')
         else:
