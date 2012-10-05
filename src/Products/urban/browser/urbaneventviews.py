@@ -56,7 +56,7 @@ class UrbanEventView(BrowserView):
                           'title':template.Title(),
                           'class':'',
                           'href':self._generateDocumentHref(context, template),
-                         } for template in context.getTemplates()]
+                         } for template in context.getTemplates() if template.mayGenerateUrbanDoc(context)]
         for generated_doc in context.objectValues():
             for template in template_list:
                 if generated_doc.id.startswith(template['name']):
