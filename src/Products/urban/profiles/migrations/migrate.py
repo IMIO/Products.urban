@@ -24,7 +24,7 @@ def isNoturbanMigrationsProfile(context):
 
 def migrateToUrban115(context):
     """
-     Launch every migration steps for the version 1.1.4
+     Launch every migration steps for the version 1.1.5
     """
     if isNoturbanMigrationsProfile(context): return
 
