@@ -9,6 +9,13 @@
     Launch every migration steps linked to the urban 1.1.4 tag
  </import-step>
  <import-step
+    id="urban-migrateToUrban115"
+    handler="Products.urban.profiles.migrations.migrate.migrateToUrban115"
+    title="Launch every migration steps linked to the urban 1.1.5 version"
+    version="2012-05-30T11:00:00.0">
+    Launch every migration steps linked to the urban 1.1.5 tag
+ </import-step>
+ <import-step
     id="urban-migrateToPlone4"
     handler="Products.urban.profiles.migrations.migrate.migrateToPlone4"
     title="Launch every migration steps linked to the Plone4 version"

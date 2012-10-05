@@ -22,6 +22,16 @@ logger = logging.getLogger('urban: migrations')
 def isNoturbanMigrationsProfile(context):
     return context.readDataFile("urban_migrations_marker.txt") is None
 
+def migrateToUrban115(context):
+    """
+     Launch every migration steps for the version 1.1.4
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    # now use the extravalue of the person Titles to distinguish the title use to adress a contact
+    # from the one used the contact signaletic
+    migratePersonTitles(context)
+
 def migrateToUrban114(context):
     """
      Launch every migration steps for the version 1.1.4
@@ -857,3 +867,17 @@ def migrateWorkTypes(context):
             if old_val and len(old_val) == len([val for val in old_val if len(val) == 1]):
                 logger.info("Corrected workType for %s"%licence.absolute_url())
                 licence.setWorkType(''.join(licence.getWorkType()))
+
+def migratePersonTitles(context):
+    """
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    logger = context.getLogger('migratePersonTitles')
+    site = context.getSite()
+    urban_tool = getToolByName(site, 'portal_urban')
+    for persontitle in urban_tool.persons_titles.objectValues():
+        if not persontitle.extraValue:
+            persontitle.extraValue = persontitle.Title()
+            logger.info("Migrated personTitleTerm '%s'" % persontitle.Title())
+
