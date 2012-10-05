@@ -29,7 +29,7 @@ def migrateToUrban115(context):
     if isNoturbanMigrationsProfile(context): return
 
     # now use the extravalue of the person Titles to distinguish the title use to adress a contact
-    # from the one used the contact signaletic
+    # from the one used in the contact signaletic
     migratePersonTitles(context)
 
 def migrateToUrban114(context):
