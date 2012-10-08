@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+  <body>
+    <metal:fill fill-slot="content-core">
+       <metal:main_macro define-macro="content-core">
+
+          <tal:fields tal:define="field_macro field_macro | context/widgets/field/macros/view"
+                      tal:repeat="field python:context.Schema().filterFields(isMetadata=0)">
+
+            <tal:if_visible define="purl nocall:context/portal_url;
+                                    portal purl/getPortalObject;
+                                    mode string:view;
+                                    visState python:field.widget.isVisible(here, mode);
+                                    visCondition python:field.widget.testCondition(None, portal, context);"
+                                    condition="python:visState == 'visible' and visCondition and view.showTALCondition(field)">
+
+                     <metal:use_field use-macro="field_macro" />
+            </tal:if_visible>
+          </tal:fields>
+
+       </metal:main_macro>
+    </metal:fill>
+  </body>
+</html>

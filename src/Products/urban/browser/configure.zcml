@@ -231,6 +231,14 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IUrbanDoc"
+     name="urbandocview"
+     class=".urbandocview.UrbanDocView"
+     template="templates/urbandocview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IInquiry"
      name="inquiryview"
      class=".inquiryview.InquiryView"
