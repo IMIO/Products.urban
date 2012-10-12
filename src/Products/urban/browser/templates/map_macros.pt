@@ -23,6 +23,8 @@
     
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/ClickControl.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/lib/ext/Ext/ux/grid.RowActions.js'%staticPylonsHost"></script>
+    <script type="text/javascript" tal:attributes="src python:'%s/lib/ext/Ext/ux/grid.RowExpander.js'%staticPylonsHost"></script>
+    
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.PrintForm.js'%staticPylonsHost"></script> 
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.ParcelleGrid.js'%staticPylonsHost"></script>     
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.SearchForm.js'%staticPylonsHost"></script>
@@ -37,7 +39,6 @@
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_resultspanel.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_getfeatureinfo.js'%staticPylonsHost"></script>
     
-
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.MapPanel.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.WMSLegend.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.TreePanel.js'%staticPylonsHost"></script>
