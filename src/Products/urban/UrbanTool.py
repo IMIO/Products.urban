@@ -293,6 +293,14 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    StringField(
+        name='lastCadastreUpdate',
+        widget=StringField._properties['widget'](
+            label="Last update of the cadastre data base",
+            label_msgid='urban_label_lastCadastreUpdate',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )
@@ -994,7 +1002,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                     xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street.getStreetName()).decode('iso-8859-1').encode('iso-8859-1'))
                 if number:
                     xml.append('      <E_220_huisnr>%s</E_220_huisnr>')
-                worktype=licenceObj.getWorkType()[0]
+                worktype=licenceObj.getWorkType() and licenceObj.getWorkType()[0] or ''
                 work_types=UrbanVocabulary('folderbuildworktypes').getAllVocTerms(licenceObj)
                 worktype_map = {}
                 for k, v in work_types.iteritems():
@@ -1543,7 +1551,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return self.getPylonsHost()
 
     security.declarePublic('getStaticPylonsHost')
-    #@ram.cache(_pylonsHostChange) #not so necessary in this case
     def getStaticPylonsHost(self):
         """
           Returns the domain name of the pylonsHost attribute
@@ -1551,6 +1558,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         #res = urlparse(self.getPylonsHost()) #getPylonsHost doesn't contain a valid url beginning with http
         #return '%s://%s'%(res.scheme, res.netloc)
         return "http://%s"%self.getPylonsHost().split('/')[0] #don't use os.path!
+
+
 
 registerType(UrbanTool, PROJECTNAME)
 # end of class UrbanTool
