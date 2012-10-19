@@ -65,11 +65,6 @@ from validators.validator import isTextFieldConfiguredValidator
 validation.register(isTextFieldConfiguredValidator('isTextFieldConfigured'))
 from validators.validator import isValidStreetNameValidator
 validation.register(isValidStreetNameValidator('isValidStreetName'))
-# temporary monkey patch for ReferenceColumn
-from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
-from Products.urban.monkey import patchedColumnInit
-ReferenceColumn.__init__ = patchedColumnInit
-# end monkey patch
 ##/code-section custom-init-head
 
 
@@ -150,8 +145,6 @@ def initialize(context):
         context.registerClass(meta_type   = all_ftis[i]['meta_type'],
                               constructors= (all_constructors[i],),
                               permission  = ADD_CONTENT_PERMISSIONS[klassname])
-
-
 
     ##code-section custom-init-bottom #fill in your manual code here
     ##/code-section custom-init-bottom
