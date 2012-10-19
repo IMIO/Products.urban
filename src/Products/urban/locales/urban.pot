@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-10-05 13:02+0000\n"
+"POT-Creation-Date: 2012-10-19 09:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -850,6 +850,9 @@ msgid "open_office_port"
 msgstr ""
 
 msgid "opinionstoaskifworks_folder_title"
+msgstr ""
+
+msgid "outdated_parcels_in_use"
 msgstr ""
 
 #. Default: "Outside catchment"
@@ -1982,6 +1985,11 @@ msgstr ""
 msgid "urban_label_opinionsToAskIfWorks"
 msgstr ""
 
+#. Default: "Outdated"
+#: PortionOut.py
+msgid "urban_label_outdated"
+msgstr ""
+
 #. Default: "Outlinecolor"
 #: Layer.py
 msgid "urban_label_outlineColor"
@@ -2621,7 +2629,6 @@ msgstr ""
 msgid "viewmap"
 msgstr ""
 
-# error messages...
 msgid "warning_add_a_parcel"
 msgstr ""
 
@@ -2634,6 +2641,10 @@ msgstr ""
 #. Default: "!!!Warning, no deposit date found!!!"
 #: base.py
 msgid "warning_no_deposit_date"
+msgstr ""
+
+# error messages...
+msgid "warning_outdated_parcel"
 msgstr ""
 
 msgid "work_location"

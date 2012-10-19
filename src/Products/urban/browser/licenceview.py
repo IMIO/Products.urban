@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from Products.Five import BrowserView
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
@@ -56,13 +58,13 @@ class LicenceView(BrowserView):
                     return False
         return True
 
-    def hasRelatedLicencesOnParcel(self, parcel_brain):
+    def hasOutdatedParcels(self):
         context = aq_inner(self.context)
-        catalog = getToolByName(context, 'portal_catalog')
-        return len([brain for brain in catalog(
-                    sort_limit=2,
-                    parcelInfosIndex=genericlicence_parcelinfoindex(context)())
-                    if brain.id != context.id]) > 0
+        portal_workflow = getToolByName(self, 'portal_workflow')
+        if portal_workflow.getInfoFor(self.context, 'review_state') in ['accepted', 'refused',]:
+            return False
+        return any([parcel.getOutdated() for parcel in context.listFolderContents(contentFilter={"portal_type" : "PortionOut"})])
+
 
 class LicenceMacros(BrowserView):
     """

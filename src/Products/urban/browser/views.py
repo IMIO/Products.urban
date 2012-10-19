@@ -15,9 +15,9 @@ import logging
 logger = logging.getLogger('urban: Views')
 
 class WMC(BrowserView):
-#       
+#
 #        #return the generated JS code
-#        return self.generateMapJS(self, cqlquery,'','', zoneExtent)        
+#        return self.generateMapJS(self, cqlquery,'','', zoneExtent)
     def minx(self):
         return self.xmin
     def miny(self):
@@ -57,7 +57,7 @@ class WMC(BrowserView):
         urbantool = getToolByName(self,'portal_urban')
         context = aq_inner(self.context)
         if not hasattr(aq_base(context), "getParcels"):
-            
+
             try:
                 extent = urbantool.getMapExtent().split(',')
                 self.xmin=extent[0]
@@ -102,16 +102,16 @@ class WMC(BrowserView):
                     #zoneExtent = ""
                     pass
         self.tmpl=ViewPageTemplateFile("wmc.pt")
-        return self.tmpl(self)         
+        return self.tmpl(self)
 
 class ProxyController(BrowserView):
     urlList = ["localhost:8081","89.16.179.114:8008","89.16.179.114:5000","cartopro2.wallonie.be"]
     def getProxy(self):
         try:
             url = self.request.get("url")
-            #infos = urlparse(url) 
+            #infos = urlparse(url)
             params = self.request.form
-            
+
             params.pop("url")
             self.request.response.setHeader('content-type', 'text/json')
             conn = urllib2.urlopen(url+"?%s" % urllib.urlencode(params), timeout=6)
@@ -120,7 +120,7 @@ class ProxyController(BrowserView):
             return data
         except Exception, msg:
             logger.error("Cannot open url '%s': %s"%(url, msg))
-    
+
 class testmap(ProxyController):
     pass
 
@@ -128,7 +128,7 @@ class TemplatesSummary(BrowserView):
     """
         Get all templates information to give a summary
     """
-    
+
     def __init__(self, context, request):
         super(BrowserView, self).__init__(context, request)
         self.context = context
@@ -170,7 +170,7 @@ class TemplatesSummary(BrowserView):
                 templ_by_type.append(templ_by_event)
             templates.append(templ_by_type)
         return templates
-    
+
     def isModified(self, template):
         if not template.hasProperty('md5Modified'):
             return "question-mark.gif"

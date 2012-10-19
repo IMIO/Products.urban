@@ -93,6 +93,15 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    BooleanField(
+        name='outdated',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Outdated',
+            label_msgid='urban_label_outdated',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )

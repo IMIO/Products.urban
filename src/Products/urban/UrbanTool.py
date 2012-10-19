@@ -293,14 +293,6 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
-    StringField(
-        name='lastCadastreUpdate',
-        widget=StringField._properties['widget'](
-            label="Last update of the cadastre data base",
-            label_msgid='urban_label_lastCadastreUpdate',
-            i18n_domain='urban',
-        ),
-    ),
 
 ),
 )

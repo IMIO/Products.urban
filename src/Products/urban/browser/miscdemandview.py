@@ -5,7 +5,7 @@ from Products.CMFPlone import PloneMessageFactory as _
 
 class MiscDemandView(LicenceView):
     """
-      This manage the view of 
+      This manage the view of
     """
     def __init__(self, context, request):
         super(LicenceView, self).__init__(context, request)
@@ -16,6 +16,8 @@ class MiscDemandView(LicenceView):
             plone_utils.addPortalMessage(_('warning_add_a_parcel'), type="warning")
         if not self.context.getApplicants():
             plone_utils.addPortalMessage(_('warning_add_an_applicant'), type="warning")
+        if not self.hasOutdatedParcels():
+            plone_utils.addPortalMessage(_('warning_outdated_parcel'), type="warning")
 
     def getCollegeReportDecisionDate(self):
         """
