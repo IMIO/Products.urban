@@ -423,7 +423,8 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                         <td tal:condition="python: field == 'Creator'">
                          <span tal:content="python: context.portal_membership.getMemberInfo(value) and context.portal_membership.getMemberInfo(value)['fullname'] or value">Creator fullname</span>
                         </td>
-                        <td tal:condition="python: field == 'Title'">
+                        <td tal:condition="python: field == 'Title'"
+                            tal:attributes="style python: (isAParcel and obj.getObject().getOutdated()) and 'background-color:cyan' or ''">
                                 <span tal:define="global url python: test((obj.portal_type == 'File'  or obj.portal_type == 'UrbanDoc')
                                                                            and obj.portal_properties.site_properties.ext_editor, url + '/external_edit', url)" />
                             <a href="#" tal:attributes="href url;
@@ -501,7 +502,9 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
  <table tal:define="member context/@@plone_portal_state/member;" cellspacing=0 cellpadding=0 width=100%>
   <tr>
    <td>
-   <div class="#" tal:define="parcels parcels|context/getParcels" tal:attributes="class python: test(parcels, 'field', 'field warning')">
+    <div class="#" tal:define="parcels parcels|context/getParcels;
+                               upToDateParcel python:True"
+                   tal:attributes="class python: test(parcels, 'field', 'field warning')">
     <div tal:condition="not: parcels" i18n:translate="warning_add_a_parcel">You must encode concerned parcel(s)
     </div>
     <div tal:define="tool python: context.portal_urban;
@@ -522,7 +525,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
 </div>
 
 <metal:edit define-macro="editDefaultMacro"
-               tal:define="member context/@@plone_portal_state/member; 
+               tal:define="member context/@@plone_portal_state/member;
                        border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
                        dummy python:request.set(border, 1);
                        putils context/plone_utils;">
