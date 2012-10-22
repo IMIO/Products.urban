@@ -311,8 +311,8 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
            We may add an OpinionRequest if we asked one in an inquiry on the licence
            We may add another if another inquiry defined on the licence ask for it and so on
         """
-        limit = 0
-        inquiries = self.getInquiries()
+        limit = organisation in self.getSolicitOpinionsTo() and 1 or 0
+        inquiries = [inq for inq in self.getInquiries() if inq != self]
         for inquiry in inquiries:
             if organisation in inquiry.getSolicitOpinionsTo():
                 limit += 1

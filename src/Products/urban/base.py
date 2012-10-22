@@ -231,7 +231,7 @@ class UrbanBase(object):
                     applicant.getStreet() + '|' + applicant.getZipcode() + ' ' + applicant.getCity()
         toreturn = toreturn + '</CSV>'
         return toreturn
-    getMultipleApplicants = getMultipleApplicantsCSV 
+    getMultipleApplicants = getMultipleApplicantsCSV
 
     security.declarePublic('getMultipleArchitectsCSV')
     def getMultipleArchitectsCSV(self):
@@ -326,7 +326,7 @@ class UrbanBase(object):
         if events:
             return events[-1]
 
-    security.declarePublic('attributeIsUsed')    
+    security.declarePublic('attributeIsUsed')
     def attributeIsUsed(self, name):
         """
           Is the attribute named as param name used in this LicenceConfig ?
