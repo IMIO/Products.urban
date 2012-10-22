@@ -541,13 +541,46 @@ if step in run_steps:
 step = 'M'
 if step in run_steps:
     print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
-    std_cur.execute('CREATE OR REPLACE VIEW v_map_capa AS \
- SELECT map.capakey, map.capakey AS codeparcelle, map.urbainkey, map.daa, map.ord, map.pe, map.adr1, map.adr2, map.pe2, map.sl1, map.prc, map.na1, \
- map.co1, map.cod1, map.ri1, map.acj, map.tv, map.prc2, capa.capaty, capa.shape_area, capa.the_geom, capa.da, capa.section, capa.radical, \
- capa.exposant, capa.bis, capa.puissance  FROM map \
-   LEFT JOIN capa ON map.capakey::text = capa.capakey::text;')
+    v_map_capa_cmd = "CREATE OR REPLACE VIEW v_map_capa AS \
+ SELECT map.capakey, map.capakey AS codeparcelle, map.urbainkey, map.daa, map.ord, map.sl1, map.prc, map.na1, map.co1, map.cod1, map.ri1, map.acj, map.tv, \
+ map.prc2, capa.capaty, capa.shape_area, capa.the_geom, capa.da, capa.section, capa.radical, capa.exposant, capa.bis, capa.puissance, prc.\"in\", prc.ha1, \
+ prc.rscod, array_to_string(ARRAY( SELECT pe.pe \
+           FROM pe \
+          WHERE pe.daa = map.daa \
+          ORDER BY pe.pos), '; '::text) AS pe, array_to_string(ARRAY( SELECT pe.adr1 \
+           FROM pe \
+          WHERE pe.daa = map.daa \
+          ORDER BY pe.pos), '; '::text) AS adr1, array_to_string(ARRAY( SELECT pe.adr2 \
+           FROM pe \
+          WHERE pe.daa = map.daa \
+          ORDER BY pe.pos), '; '::text) AS adr2 \
+   FROM map \
+   LEFT JOIN capa ON map.capakey::text = capa.capakey::text \
+   LEFT JOIN prc ON map.daa = prc.daa AND map.ord::text = prc.ord::text \
+  ORDER BY map.capakey, map.sl1, array_to_string(ARRAY( SELECT pe.pe \
+   FROM pe \
+  WHERE pe.daa = map.daa \
+  ORDER BY pe.pos), '; '::text);"
+
+    std_cur.execute(v_map_capa_cmd)
+
     std_cur.execute('CREATE OR REPLACE VIEW v_sections AS \
  SELECT DISTINCT capa.section, capa.section::text AS section_text  FROM capa;')
+
+    std_cur.execute('CREATE INDEX gelity_idx ON geli (GELITY ASC NULLS LAST);')
+    std_cur.execute('CREATE INDEX geptty_idx ON GePt (GEPTTY ASC NULLS LAST);')
+    std_cur.execute('CREATE INDEX gepnty_idx ON GePn (GEPNTY ASC NULLS LAST);')
+    std_cur.execute('CREATE INDEX inlity_idx ON InLi (INLITY ASC NULLS LAST);')
+    std_cur.execute('CREATE INDEX tolity_idx ON ToLi (TOLITY ASC NULLS LAST);')
+    std_cur.execute('CREATE INDEX toptty_idx ON ToPt (TOPTTY ASC NULLS LAST);')
+    std_cur.execute('CREATE UNIQUE INDEX geli_pk_idx ON GeLi USING btree  (gid);')
+    std_cur.execute('CREATE UNIQUE INDEX gept_pk_idx ON GePt USING btree  (gid);')
+    std_cur.execute('CREATE UNIQUE INDEX gepn_pk_idx ON GePn USING btree  (gid);')
+    std_cur.execute('CREATE UNIQUE INDEX inli_pk_idx ON InLi USING btree  (gid);')
+    std_cur.execute('CREATE UNIQUE INDEX toli_pk_idx ON ToLi USING btree  (gid);')
+    std_cur.execute('CREATE UNIQUE INDEX topt_pk_idx ON ToPt USING btree  (gid);')
+    std_cur.execute('CREATE INDEX cabuty_idx ON cabu (cabuty ASC NULLS LAST);')
+    std_cur.execute('CREATE INDEX capaty_idx ON capa (capaty ASC NULLS LAST);')
 
     conn.commit()
 

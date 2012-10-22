@@ -29,7 +29,8 @@ CREATE TABLE DA
     adm1            Character varying (50), 
     mut         Character varying (4), 
     dan2            Character varying (64), 
-    adm2            Character varying (50)
+    adm2            Character varying (50),
+    CONSTRAINT da_pk PRIMARY KEY (da)
 );
 
 CREATE TABLE LT
