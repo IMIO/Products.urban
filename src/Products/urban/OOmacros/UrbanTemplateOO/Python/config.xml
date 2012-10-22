@@ -417,6 +417,12 @@ from xhtml(urbanEventObj.getClaimsText())
             self.getValueForTemplate('derogation')
         </FieldCode>        
     </Item>
+    <Item name="Remarques techniques (fiche urbanisme)">
+        <AnnotationCode>
+            do text
+from xhtml(self.portal_urban.decorateHTML('UrbanBody', self.getLocationTechnicalRemarks()))
+        </AnnotationCode>        
+    </Item>
     <Item name="Décision">
         <FieldCode>
             self.getLastTheLicence().getDecision()
