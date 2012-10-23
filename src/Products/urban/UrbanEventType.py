@@ -23,6 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.CMFPlone import PloneMessageFactory as _
 import logging
 logger = logging.getLogger('urban: UrbanEventType')
@@ -30,6 +31,15 @@ from Products.CMFPlone.i18nl10n import utranslate
 from Products.CMFCore.Expression import Expression
 from Products.CMFCore.utils import getToolByName
 from Products.PageTemplates.Expressions import getEngine
+
+slave_fields_keyevent= (
+    # if in a keyEvent, display a selectbox
+    {'name': 'isKeyEvent',
+     'action': 'show',
+     'hide_values': (True, ),
+    },
+)
+
 ##/code-section module-header
 
 schema = Schema((
@@ -85,11 +95,23 @@ schema = Schema((
     BooleanField(
         name='isKeyEvent',
         default=False,
-        widget=BooleanField._properties['widget'](
+        widget=BooleanWidget(
+            slave_fields=slave_fields_keyevent,
             label='Iskeyevent',
             label_msgid='urban_label_isKeyEvent',
             i18n_domain='urban',
         ),
+    ),
+    LinesField(
+        name='keyDates',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Keydates',
+            label_msgid='urban_label_keyDates',
+            i18n_domain='urban',
+        ),
+        multiValued=True,
+        vocabulary='listActivatedDates',
     ),
 
 ),
@@ -180,6 +202,14 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
     def checkCreationInLicence(self, obj):
         if not self.canBeCreatedInLicence(obj):
             raise ValueError(_("You can not create this UrbanEvent !"))
+
+    security.declarePublic('listActivatedDates')
+    def listActivatedDates(self):
+        from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
+        activated_date_fields = [(fieldname, utranslate(msgid="urban_label_" + fieldname, domain='urban', default=fieldname, context=self))
+                                 for fieldname in self.getActivatedFields()
+                                 if fieldname and UrbanEventInquiry_schema.get(fieldname).getType()=='Products.Archetypes.Field.DateTimeField']
+        return DisplayList([('eventDate', self.getEventDateLabel().decode('utf-8'))] + activated_date_fields)
 
 
 

@@ -422,8 +422,7 @@ class UrbanBase(object):
         """
           Return the display value of the given field
         """
-        if not obj:
-            obj = self
+        obj = obj and obj or self
         if subfield_name:
             field = obj.getField(field_name)
             if field.vocabulary:
@@ -441,8 +440,7 @@ class UrbanBase(object):
         """
           Return the display value of the given field
         """
-        if not obj:
-            obj = self
+        obj = obj and obj or self
         if not vocabulary:
             displaylist = obj.Vocabulary(field_name)[0]
         else:

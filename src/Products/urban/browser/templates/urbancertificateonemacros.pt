@@ -9,21 +9,13 @@
   <td width="1%"></td>
   <td valign="top" width=50%>
    <fieldset><legend i18n:translate="urban_description_key_dates_legend">Key dates</legend>
-    <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
-     <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_receiptDate">Receipt date</span>:</b></td>
+    <table tal:define="keyDates view/getKeyDates" class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+     <tr tal:repeat="date keyDates">
+      <td valign="top"><b><span tal:content="python: date['label']">Receipt date</span>:</b></td>
       <td width="2%"></td>
-      <td valign="top" tal:define="receiptDate view/getReceiptDate">
-       <a href="#" tal:condition="receiptDate" tal:attributes="href python: receiptDate['url']" tal:content="python: receiptDate['date']">Content</a>
-       <span class="discreet" tal:condition="not: receiptDate" i18n:translate="content_none">None</span>
-      </td>
-     </tr>
-     <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_theLicenceDate">The licence date</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top" tal:define="theLicenceDate view/getTheLicenceDate">
-       <a href="#" tal:condition="theLicenceDate" tal:attributes="href python: theLicenceDate['url']" tal:content="python: theLicenceDate['date']">Content</a>
-       <span class="discreet" tal:condition="not: theLicenceDate" i18n:translate="content_none">None</span>
+      <td valign="top" tal:define="date_value python: date['date']">
+       <a href="#" tal:condition="date_value" tal:attributes="href python: date['url']" tal:content="python: date_value">Content</a>
+       <span class="discreet" tal:condition="not: date_value" i18n:translate="content_none">None</span>
       </td>
      </tr>
     </table>

@@ -3,7 +3,10 @@
 from Products.Five import BrowserView
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.i18nl10n import utranslate
 from Products.urban.indexes import genericlicence_parcelinfoindex
+from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
+from Products.urban.interfaces import IUrbanEvent
 
 class LicenceView(BrowserView):
     """
@@ -64,6 +67,47 @@ class LicenceView(BrowserView):
         if portal_workflow.getInfoFor(self.context, 'review_state') in ['accepted', 'refused',]:
             return False
         return any([parcel.getOutdated() for parcel in context.listFolderContents(contentFilter={"portal_type" : "PortionOut"})])
+
+    def getKeyDates(self):
+        context = aq_inner(self.context)
+        catalog = getToolByName(context, 'portal_catalog')
+        urban_tool = getToolByName(context, 'portal_urban')
+        config = urban_tool.getUrbanConfig(context)
+        ordered_dates = []
+        key_dates = {}
+        dates = {}
+        # search in the config for all the Key urbaneventtypes and their key dates
+        for eventtype in config.urbaneventtypes.listFolderContents():
+            if eventtype.getIsKeyEvent():
+                displaylist = eventtype.listActivatedDates()
+                keydates = [(date, displaylist.getValue(date)) for  date in eventtype.getKeyDates()]
+                ordered_dates.append((eventtype.UID(), eventtype.getKeyDates()))
+                key_dates[eventtype.UID()] = keydates
+                dates[eventtype.UID()] = {}
+        # now check each event to see if its a key Event, if yes, we gather the key date values found on this event
+        linked_eventtype_field = UrbanEventInquiry_schema.get('urbaneventtypes')
+        for event_brain in catalog(path={'query':context.absolute_url_path()}, object_provides=IUrbanEvent.__identifier__, sort_on='created', sort_order='descending'):
+            event = event_brain.getObject()
+            eventtype_uid = linked_eventtype_field.getRaw(event)
+            if eventtype_uid in dates.keys() and not dates[eventtype_uid]:
+                for date in key_dates[eventtype_uid]:
+                    date_value = getattr(event, date[0])
+                    dates[eventtype_uid][date[0]] = {
+                          'url': event_brain.getPath(),
+                          'date':  date_value and urban_tool.formatDate(date_value, translatemonth=False) or None,
+                          'label': date[1],
+                          'event': event_brain.Title,
+                          }
+        # flatten the result to a list before returning it
+        dates_list = []
+        for uid, date_names in ordered_dates:
+            for date in date_names:
+                if dates[uid]:
+                    dates_list.append(dates[uid][date])
+                else:
+                    dates_list.append(None)
+        return dates_list
+
 
 
 class LicenceMacros(BrowserView):

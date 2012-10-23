@@ -544,6 +544,42 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
       </tal:fieldsets>
 </metal:edit>
 
+<metal:edit define-macro="editUrbaneventtypeMacro"
+               tal:define="member context/@@plone_portal_state/member;
+                       border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
+                       dummy python:request.set(border, 1);
+                       putils context/plone_utils;">
+
+      <tal:fieldsets repeat="fieldset python: ['default',]">
+        <fieldset class="urbanEditWithTabbing" tal:define="fieldsetid python:putils.normalizeString(fieldset)"
+                tal:attributes="id string:fieldset-${fieldsetid}">
+          <legend id="#"
+                  tal:content="python: view.getTranslatedSchemaLabel(fieldset)"
+                  tal:attributes="id string:fieldsetlegend-${fieldsetid}"
+                  i18n:translate="" />
+
+        <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=True)">
+
+        <tal:keyevent condition="python: fieldName in ['isKeyEvent', 'keyDates',]"
+                 define="fieldName field/getName">
+           <tal:manage_keyevent condition="python: fieldName == 'isKeyEvent'">
+             <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
+              <legend i18n:translate="pca_fieldset_legend">Is key event</legend>
+               <metal:fieldMacro use-macro="python:here.widget('isKeyEvent', mode='edit')" />
+               <metal:fieldMacro use-macro="python:here.widget('keyDates', mode='edit')" />
+             </fieldset>
+           </tal:manage_keyevent>
+         </tal:keyevent>
+
+          <tal:default condition="python: fieldName not in ['isKeyEvent', 'keyDates',]"
+                 define="fieldName field/getName">
+           <metal:fieldMacro use-macro="python:here.widget(fieldName, mode='edit')" />
+         </tal:default>
+        </tal:fields>
+        </fieldset>
+      </tal:fieldsets>
+</metal:edit>
+
 <div metal:define-macro="editLicenceFieldsNoTabbingMacro" i18n:domain="urban">
 <tal:fieldsets repeat="fieldset python: ['urban_description', 'urban_road', 'urban_location', 'urban_investigation_and_advices', 'urban_peb']">
   <fieldset>
