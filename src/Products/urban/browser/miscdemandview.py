@@ -19,22 +19,6 @@ class MiscDemandView(LicenceView):
         if self.hasOutdatedParcels():
             plone_utils.addPortalMessage(_('warning_outdated_parcel'), type="warning")
 
-    def getCollegeReportDecisionDate(self):
-        """
-          Returns the last college report decision date
-        """
-        context = aq_inner(self.context)
-        tool = context.portal_urban
-        collegeReport = context.getLastCollegeReport()
-        if not collegeReport or not collegeReport.getEventDate():
-            return None
-        dict = {
-                'url': collegeReport.absolute_url(),
-                'date': "%s - %s" % (tool.formatDate(collegeReport.getEventDate(), translatemonth=False), \
-                context.displayValue(collegeReport.Vocabulary('decision')[0], collegeReport.getDecision()))
-               }
-        return dict
-
 class MiscDemandMacros(LicenceView):
     """
       This manage the macros of Declaration
