@@ -34,7 +34,7 @@ from Products.PageTemplates.Expressions import getEngine
 
 slave_fields_keyevent= (
     # if in a keyEvent, display a selectbox
-    {'name': 'isKeyEvent',
+    {'name': 'keyDates',
      'action': 'show',
      'hide_values': (True, ),
     },
@@ -95,7 +95,7 @@ schema = Schema((
     BooleanField(
         name='isKeyEvent',
         default=False,
-        widget=BooleanWidget(
+        widget=MasterBooleanWidget(
             slave_fields=slave_fields_keyevent,
             label='Iskeyevent',
             label_msgid='urban_label_isKeyEvent',

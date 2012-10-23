@@ -17,36 +17,6 @@ class LicenceView(BrowserView):
         self.context = context
         self.request = request
 
-    def getReceiptDate(self):
-        """
-          Returns the receiptDate
-        """
-        context = aq_inner(self.context)
-        tool = context.portal_urban
-        lastDeposit = context.getLastDeposit()
-        if not lastDeposit or not lastDeposit.getEventDate():
-            return None
-        dict = {
-                'url': lastDeposit.absolute_url(),
-                'date': tool.formatDate(lastDeposit.getEventDate(), translatemonth=False)
-               }
-        return dict
-
-    def getTheLicenceDate(self):
-        """
-          Returns the last licence notification date
-        """
-        context = aq_inner(self.context)
-        tool = context.portal_urban
-        theLicence = context.getLastTheLicence()
-        if not theLicence or not theLicence.getEventDate():
-            return None
-        dict = {
-                'url': theLicence.absolute_url(),
-                'date': tool.formatDate(theLicence.getEventDate(), translatemonth=False)
-               }
-        return dict
-
     def getEmptyTabs(self):
         tabnames = ['urban_location', 'urban_road']
         return [tabname for tabname in tabnames if self.isEmptyTab(tabname)]
@@ -102,10 +72,7 @@ class LicenceView(BrowserView):
         dates_list = []
         for uid, date_names in ordered_dates:
             for date in date_names:
-                if dates[uid]:
-                    dates_list.append(dates[uid][date])
-                else:
-                    dates_list.append(None)
+                dates_list.append(dates[uid].get(date, None))
         return dates_list
 
 
