@@ -163,7 +163,6 @@ class TestBuildLicence(unittest.TestCase):
         self.assertEqual(self.buildLicence.getAllOpinionRequests(), [])
 
     def testCreateAllAdvicesWithOpinionRequest(self):
-        self.buildLicence.setInvestigationStart(DateTime('01/01/2011'))
         opinions = ('belgacom',)
         self.buildLicence.setSolicitOpinionsTo(opinions)
         self.buildLicence.createAllAdvices()

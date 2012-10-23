@@ -349,10 +349,9 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         if organisation == "":
             return self._getAllEvents(interfaces.IOpinionRequestEvent)
         catalog = getToolByName(self, 'portal_catalog')
-        currentPath = '/'.join(self.getPhysicalPath())
-        query = {'path': {'query': currentPath,
+        query = {'path': {'query': self.absolute_url_path(),
                           'depth': 1},
-                 'meta_type': ['UrbanEvent', 'UrbanEventInquiry'],
+                 'object_provides': IOpinionRequestEvent.__identifier__,
                  'sort_on': 'getObjPositionInParent',
                  'id' : organisation.lower()}
         return [brain.getObject() for brain in catalog(**query)]

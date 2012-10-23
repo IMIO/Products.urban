@@ -319,6 +319,7 @@ class UrbanBase(object):
         if eventInterface is not None:
             interfaceName = interfaceToName(self, eventInterface)
             query['object_provides'] = interfaceName
+            query.pop('meta_type')
         return [brain.getObject() for brain in catalog(**query)]
 
     def _getLastEvent(self, eventInterface=None):
