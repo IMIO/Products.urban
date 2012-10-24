@@ -18,6 +18,16 @@
        <span class="discreet" tal:condition="not: date_value" i18n:translate="content_none">None</span>
       </td>
      </tr>
+      <tr>
+       <td valign="top"><b><span i18n:translate="urban_label_investigationStart">from</span>:</b></td>
+       <td width="2%"></td>
+       <td valign="top"><metal:myfield use-macro="python:context.widget('investigationStart', mode='view')" /><span tal:condition="not: context/getInvestigationStart" class="discreet" i18n:translate="content_none">None</span></td>
+      </tr>
+      <tr>
+       <td valign="top"><b><span i18n:translate="urban_label_investigationEnd">to</span>:</b></td>
+       <td width="2%"></td>
+       <td valign="top"><metal:myfield use-macro="python:context.widget('investigationEnd', mode='view')" /><span tal:condition="not: context/getInvestigationEnd" class="discreet" i18n:translate="content_none">None</span></td>
+     </tr>
     </table>
    </fieldset>
   </td>
