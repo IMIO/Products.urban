@@ -53,21 +53,22 @@ class LicenceView(BrowserView):
                 keydates = [(date, displaylist.getValue(date)) for  date in eventtype.getKeyDates()]
                 ordered_dates.append((eventtype.UID(), eventtype.getKeyDates()))
                 key_dates[eventtype.UID()] = keydates
-                dates[eventtype.UID()] = {}
+                dates[eventtype.UID()] = dict([(date[0], {
+                    'date':None,
+                    'label': date[0] == 'eventDate' and eventtype.Title() or'%s (%s)' % (date[1], eventtype.Title())
+                    }) for date in keydates])
         # now check each event to see if its a key Event, if yes, we gather the key date values found on this event
         linked_eventtype_field = UrbanEventInquiry_schema.get('urbaneventtypes')
         for event_brain in catalog(path={'query':context.absolute_url_path()}, object_provides=IUrbanEvent.__identifier__, sort_on='created', sort_order='descending'):
             event = event_brain.getObject()
             eventtype_uid = linked_eventtype_field.getRaw(event)
-            if eventtype_uid in dates.keys() and not dates[eventtype_uid]:
+            if eventtype_uid in dates.keys() and not dates[eventtype_uid].get('url', ''):
                 for date in key_dates[eventtype_uid]:
                     date_value = getattr(event, date[0])
-                    dates[eventtype_uid][date[0]] = {
+                    dates[eventtype_uid][date[0]].update({
                           'url': event_brain.getPath(),
                           'date':  date_value and urban_tool.formatDate(date_value, translatemonth=False) or None,
-                          'label': date[1],
-                          'event': event_brain.Title,
-                          }
+                          })
         # flatten the result to a list before returning it
         dates_list = []
         for uid, date_names in ordered_dates:

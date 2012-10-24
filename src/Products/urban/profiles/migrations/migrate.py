@@ -31,6 +31,10 @@ def migrateToUrban115(context):
     # now use the extravalue of the person Titles to distinguish the title use to adress a contact
     # from the one used in the contact signaletic
     migratePersonTitles(context)
+    # The key dates displayed on the each licence summary are now configurable rather than hard-coded.
+    # This step turns some urbanEventTypes as keyEvent and select their key dates to keep the same dates
+    # displayed as before the change
+    migrateKeyDates(context)
 
 def migrateToUrban114(context):
     """
@@ -880,4 +884,65 @@ def migratePersonTitles(context):
         if not persontitle.extraValue:
             persontitle.extraValue = persontitle.Title()
             logger.info("Migrated personTitleTerm '%s'" % persontitle.Title())
+
+def migrateKeyDates(context):
+    """
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    logger = context.getLogger('migrateKeyDates')
+    site = context.getSite()
+    portal_urban = getToolByName(site, 'portal_urban')
+    # browse trough all the configs of all the licences, turn some UrbanEventType into key Events
+    # and select some key dates
+    to_migrate = {
+            'buildlicence':[
+                'depot-de-la-demande',
+                'dossier-incomplet',
+                'accuse-de-reception',
+                'transmis-1er-dossier-rw',
+                'rapport-du-college',
+                'delivrance-du-permis-octroi-ou-refus',
+                ],
+            'declaration':[
+                'depot-de-la-demande',
+                'deliberation-college',
+                'transmis-decision',
+                ],
+            'urbancertificateone':[
+                'depot-de-la-demande',
+                'octroi-cu1',
+                ],
+            'urbancertificatetwo':[
+                'depot-de-la-demande',
+                'octroi-cu2',
+                ],
+            'division':[
+                'depot-de-la-demande',
+                'decision-octroi-refus',
+                ],
+            'notaryletter':[
+                'depot-de-la-demande',
+                'octroi-lettre-notaire',
+                ],
+            'miscdemand':[
+                'depot-de-la-demande',
+                'deliberation-college',
+                'transmis-decision',
+                ],
+            'parceloutlicence':[
+                'depot-de-la-demande',
+                'dossier-incomplet',
+                'accuse-de-reception',
+                'transmis-1er-dossier-rw',
+                'rapport-du-college',
+                'delivrance-du-permis-octroi-ou-refus',
+                ],
+           }
+    for configname, eventtypes in to_migrate.iteritems():
+        config = getattr(getattr(portal_urban, configname), 'urbaneventtypes')
+        for event_id in eventtypes:
+            eventtype = getattr(config, event_id)
+            eventtype.setIsKeyEvent(True)
+            eventtype.setKeyDates(('eventDate',))
 
