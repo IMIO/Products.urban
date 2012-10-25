@@ -23,7 +23,6 @@ urbanEventTypes = {
                     'eventDateLabel': "Date de dépôt",
                     'activatedFields': [],
                     'deadLineDelay': 15,
-                    'eventDateLabel': "Date du dépôt de la demande",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': ({'id': "urb-recepisse", 'title': "Récépissé de la demande (article 115)"},),
@@ -94,7 +93,6 @@ urbanEventTypes = {
                     'activatedFields': [],
                     'deadLineDelay': 15,
                     'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
-                    'eventDateLabel': 'Date dossier incomplet',
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -108,7 +106,6 @@ urbanEventTypes = {
                     'activatedFields': ['transmitDate'],
                     'deadLineDelay': 15,
                     'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
-                    'eventDateLabel': "Date de l'accusé de reception",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -139,7 +136,7 @@ urbanEventTypes = {
                     'title': "Transmis 1er dossier RW",
                     'activatedFields': ['decisionDate', 'decision'],
                     'deadLineDelay': 15,
-                    'eventDateLabel': "Date primo dossier",
+                    'eventDateLabel': "Date de transmis",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -186,7 +183,6 @@ urbanEventTypes = {
                     'title': "Rapport du Collège",
                     'activatedFields': ['decisionDate', 'decision', 'decisionText'],
                     'deadLineDelay': 15,
-                    'eventDateLabel': "Date de décision du collège",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -400,7 +396,6 @@ urbanEventTypes = {
                     'title': "Dépôt de la demande",
                     'activatedFields': [],
                     'deadLineDelay': 15,
-                    'eventDateLabel': "Date du dépôt de la demande",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -423,7 +418,7 @@ urbanEventTypes = {
                     'title': "Délibération collège",
                     'activatedFields': ['decision',],
                     'deadLineDelay': 15,
-                    'eventDateLabel': "Date décision du collège",
+                    'eventDateLabel': "Date de la séance collège",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -436,7 +431,7 @@ urbanEventTypes = {
                     'title': "Transmis décision au FD et demandeur",
                     'activatedFields': [],
                     'deadLineDelay': 15,
-                    'eventDateLabel': "Date de notification",
+                    'eventDateLabel': "Date de transmis",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -453,7 +448,6 @@ urbanEventTypes = {
                     'title': "Dépôt de la demande",
                     'activatedFields': ['receivedDocumentReference'],
                     'deadLineDelay': 15,
-                    'eventDateLabel': "Date du dépôt de la demande",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -499,7 +493,6 @@ urbanEventTypes = {
                     'title': "Octroi du certificat",
                     'activatedFields': [],
                     'deadLineDelay': 15,
-                    'eventDateLabel': 'Date de notification',
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -518,7 +511,6 @@ urbanEventTypes = {
                     'title':"Dépôt de la demande",
                     'activatedFields': [],
                     'deadLineDelay': 15,
-                    'eventDateLabel': "Date du dépôt de la demande",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -616,7 +608,6 @@ urbanEventTypes = {
                     'title': "Dépôt de la demande",
                     'activatedFields': [],
                     'deadLineDelay': 15,
-                    'eventDateLabel': "Date du dépôt de la demande",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': ({'id': "div-recepisse", 'title': "Récépissé de la demande"},),
@@ -627,7 +618,6 @@ urbanEventTypes = {
                     'title': "Octroi/refus de la division",
                     'activatedFields': ['decisionDate', 'decision'],
                     'deadLineDelay': 15,
-                    'eventDateLabel': 'Date de notification',
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -644,7 +634,6 @@ urbanEventTypes = {
                     'title': "Dépôt de la demande",
                     'activatedFields': [],
                     'deadLineDelay': 40,
-                    'eventDateLabel': "Date du dépôt de la demande",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (),
@@ -680,7 +669,6 @@ urbanEventTypes = {
                     'title': "Dépôt de la demande",
                     'activatedFields': [],
                     'deadLineDelay': 15,
-                    'eventDateLabel': "Date du dépôt de la demande",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -694,7 +682,6 @@ urbanEventTypes = {
                     'activatedFields': ['decision',],
                     'eventDateLabel': "Date de la séance collège",
                     'deadLineDelay': 15,
-                    'eventDateLabel': 'Date de décision du collège',
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -707,7 +694,7 @@ urbanEventTypes = {
                     'title': "Transmis décision au demandeur",
                     'activatedFields': [],
                     'deadLineDelay': 15,
-                    'eventDateLabel': 'Date de notification',
+                    'eventDateLabel': 'Date du transmis',
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -724,7 +711,6 @@ urbanEventTypes = {
                     'activatedFields': [],
                     'deadLineDelay': 15,
                     'isKeyEvent': True,
-                    'eventDateLabel': "Date du dépôt de la demande",
                     'keyDates': ('eventDate',),
                     'podTemplates': ({'id': "lot-recepisse", 'title': "Récépissé de la demande (article 115)"},),
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
@@ -744,7 +730,6 @@ urbanEventTypes = {
                     'title': "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
                     'activatedFields': [],
                     'deadLineDelay': 15,
-                    'eventDateLabel': 'Date dossier incomplet',
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
@@ -757,7 +742,6 @@ urbanEventTypes = {
                     'title': "Accusé de réception (dossier complet - article 116 § 1)",
                     'activatedFields': ['transmitDate'],
                     'deadLineDelay': 15,
-                    'eventDateLabel': "Date de l'accusé de reception",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
@@ -779,7 +763,7 @@ urbanEventTypes = {
                     'title': "Transmis 1er dossier RW",
                     'activatedFields': ['decisionDate', 'decision'],
                     'deadLineDelay': 15,
-                    'eventDateLabel': "Date primo dossier",
+                    'eventDateLabel': "Date de transmis",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -826,7 +810,6 @@ urbanEventTypes = {
                     'title': "Rapport du Collège",
                     'activatedFields': ['decisionDate', 'decision', 'decisionText'],
                     'deadLineDelay': 15,
-                    'eventDateLabel': "Date de décision du collège",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -866,7 +849,6 @@ urbanEventTypes = {
                     'eventDateLabel': "Date de notification",
                     'activatedFields': ['decisionDate', 'decision'],
                     'deadLineDelay': 15,
-                    'eventDateLabel': "Date de notification",
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (

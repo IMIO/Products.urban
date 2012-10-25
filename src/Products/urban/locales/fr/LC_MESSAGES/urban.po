@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2012-10-19 09:13+0000\n"
+"POT-Creation-Date: 2012-10-25 11:18+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1790,6 +1790,11 @@ msgstr "Adresse identique à l'adresse du bien?"
 #: WorkLocation.py
 msgid "urban_label_isSupplementary"
 msgstr "Supplémentaire?"
+
+#. Default: "Keydates"
+#: UrbanEventType.py
+msgid "urban_label_keyDates"
+msgstr "Dates clés"
 
 #. Default: "Label"
 #: ParcellingTerm.py

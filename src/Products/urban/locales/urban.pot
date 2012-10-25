@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-10-19 09:13+0000\n"
+"POT-Creation-Date: 2012-10-25 11:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1786,6 +1786,11 @@ msgstr ""
 #. Default: "Issupplementary"
 #: WorkLocation.py
 msgid "urban_label_isSupplementary"
+msgstr ""
+
+#. Default: "Keydates"
+#: UrbanEventType.py
+msgid "urban_label_keyDates"
 msgstr ""
 
 #. Default: "Label"
