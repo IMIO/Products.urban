@@ -248,7 +248,7 @@ def addUrbanConfigs(context):
             newFolder.invokeFactory("UrbanVocabularyTerm",id="veranda",title=u"Véranda")
 
         #add FolderCategories folder
-        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'Declaration', 'Division', 'MiscDemand']:
+        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'Declaration', 'Division', 'MiscDemand', 'NotaryLetter']:
             if not hasattr(aq_base(configFolder), 'foldercategories'):
                 newFolderid = configFolder.invokeFactory("Folder",id="foldercategories",title=_("foldercategories_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
@@ -275,6 +275,9 @@ def addUrbanConfigs(context):
                 #categories for UrbanCertificateTwos
                 elif urban_type in ['UrbanCertificateTwo', ]:
                     newFolder.invokeFactory("UrbanVocabularyTerm",id="cu2",title=u"CU2 (certificat d'urbanisme 2)")
+                #categories for UrbanCertificateTwos
+                elif urban_type in ['NotaryLetter', ]:
+                    newFolder.invokeFactory("UrbanVocabularyTerm",id="not",title=u"NOT (Lettre d'information notariale)")
                 #categories for Declarations
                 elif urban_type in ['Declaration', ]:
                         newFolder.invokeFactory("UrbanVocabularyTerm",id="dup",title=u"DUP (Déclaration Urbanistique Préalable)")
