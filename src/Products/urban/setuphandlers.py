@@ -945,6 +945,13 @@ def setDefaultApplicationSecurity(context):
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
+    #parcellings application folder : "urban_readers" can read and "urban_editors" can edit...
+    if hasattr(app_folder, "parcellings"):
+        p_folder = getattr(app_folder, "parcellings")
+        app_folder.manage_permission('Add portal content', ['Manager', 'Contributor', 'Owner', 'Editor', ], acquire=0)
+        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
+        p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
+        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
     #misc demands application folder : "urban_readers" can read and "urban_editors" can edit...
     if hasattr(app_folder, "miscdemands"):
         p_folder = getattr(app_folder, "miscdemands")
@@ -1054,17 +1061,6 @@ def addGlobalFolders(context):
         newFolder.invokeFactory("PcaTerm",id="pca1",label=u"Plan communal d'aménagement 1", number='1', decreeDate="2009/01/01", decreeType="royal")
         newFolder.invokeFactory("PcaTerm",id="pca2",label=u"Plan communal d'aménagement 2", number='2', decreeDate="2008/06/23", decreeType="royal")
         newFolder.invokeFactory("PcaTerm",id="pca3",label=u"Plan communal d'aménagement 3", number='3', decreeDate="2001/12/13", decreeType="departmental")
-
-    #add the parcelling folder
-    if not hasattr(tool, "parcellings"):
-        newFolderid = tool.invokeFactory("Folder",id="parcellings",title=_("parcellings_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['ParcellingTerm'])
-        newFolder.setImmediatelyAddableTypes(['ParcellingTerm'])
-        newFolder.invokeFactory("ParcellingTerm",id="p1",title=u"Lotissement 1 (André Ledieu - 01/01/2005 - 10)", label="Lotissement 1", subdividerName="André Ledieu", authorizationDate="2005/01/01", approvaleDate="2005/01/12", numberOfParcels=10)
-        newFolder.invokeFactory("ParcellingTerm",id="p2",title=u"Lotissement 2 (Ets Tralala - 01/06/2007 - 8)", label="Lotissement 2", subdividerName="Ets Tralala", authorizationDate="2007/06/01", approvaleDate="2007/06/12", numberOfParcels=8)
-        newFolder.invokeFactory("ParcellingTerm",id="p3",title=u"Lotissement 3 (SPRL Construction - 02/05/2001 - 15)", label="Lotissement 3", subdividerName="SPRL Construction", authorizationDate="2001/05/02", approvaleDate="2001/05/10", numberOfParcels=15)
 
     #add the streets folder
     if not hasattr(tool, "streets"):
@@ -1486,6 +1482,17 @@ def addApplicationFolders(context):
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
 
+    #add a folder that will contains parcellings
+    if not hasattr(newFolder, "parcellings"):
+        newFolderid = newFolder.invokeFactory("Folder",id="parcellings",title=_("parcellings_folder_title", 'urban', context=site.REQUEST))
+        newSubFolder = getattr(newFolder, newFolderid)
+        newSubFolder.setConstrainTypesMode(1)
+        newSubFolder.setLocallyAllowedTypes(['ParcellingTerm'])
+        newSubFolder.setImmediatelyAddableTypes(['ParcellingTerm'])
+        newSubFolder.setLayout('parcellings_folder_view')
+        #manage the 'Add' permissions...
+        newSubFolder.manage_permission('urban: Add ParcellingTerm', ['Manager', 'Editor', ], acquire=0)
+
     #add default links to searches
     search_links = [('searchbyparcel', 'urban_searchbyparcel'), ('searchbyapplicant', 'urban_searchbyapplicant?foldertypes=BuildLicence&foldertypes=Declaration&foldertypes=ParcelOutLicence'), ('searchbystreet', 'urban_searchbystreet?foldertypes=BuildLicence&foldertypes=Declaration&foldertypes=ParcelOutLicence'), ]
     for search_link in search_links:
@@ -1551,6 +1558,15 @@ def addTestObjects(context):
         geoFolder.invokeFactory("Geometrician",id="geometrician2",name1="GeometricianName2", name2="GeometricianSurname2")
         geoFolder.invokeFactory("Geometrician",id="geometrician3",name1="GeometricianName3", name2="GeometricianSurname3")
         logger.info("Geometricians examples have been added")
+
+    #add some parcellings...
+    urbanFolder = getattr(site, "urban")
+    parcelFolder = getattr(urbanFolder, "parcellings")
+    if not parcelFolder.objectIds():
+        parcelFolder.invokeFactory("ParcellingTerm",id="p1",title=u"Lotissement 1 (André Ledieu - 01/01/2005 - 10)", label="Lotissement 1", subdividerName="André Ledieu", authorizationDate="2005/01/01", approvaleDate="2005/01/12", numberOfParcels=10)
+        parcelFolder.invokeFactory("ParcellingTerm",id="p2",title=u"Lotissement 2 (Ets Tralala - 01/06/2007 - 8)", label="Lotissement 2", subdividerName="Ets Tralala", authorizationDate="2007/06/01", approvaleDate="2007/06/12", numberOfParcels=8)
+        parcelFolder.invokeFactory("ParcellingTerm",id="p3",title=u"Lotissement 3 (SPRL Construction - 02/05/2001 - 15)", label="Lotissement 3", subdividerName="SPRL Construction", authorizationDate="2001/05/02", approvaleDate="2001/05/10", numberOfParcels=15)
+        logger.info("ParcellingTerms examples have been added")
 
     #add some folder managers
     tool = site.portal_urban

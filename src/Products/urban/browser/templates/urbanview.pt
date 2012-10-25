@@ -69,6 +69,7 @@
                  <img src="../folder_icon.gif" /> <a href="architects" i18n:translate="manage_architects">Manage architects</a><br/>
                  <img src="../folder_icon.gif" /> <a href="notaries" i18n:translate="manage_notaries">Manage notaries</a><br/>
                  <img src="../folder_icon.gif" /> <a href="geometricians" i18n:translate="manage_geometricians">Manage geometricians</a><br/>
+                 <img src="../folder_icon.gif" /> <a href="parcellings" i18n:translate="manage_parcellings">Manage parcellings</a><br/>
                  <br/>
                  <div tal:condition="isUrbanManager">
                   <img src="../maintenance_icon.png" /> <a href="portal_urban" i18n:translate="portal_urban">Urban configuration</a><br/>
