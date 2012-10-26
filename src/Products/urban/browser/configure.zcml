@@ -206,7 +206,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IInquiryEvent"
+     for="Products.urban.interfaces.IUrbanEventInquiry"
      name="urbaneventinquiryview"
      class=".urbaneventviews.UrbanEventInquiryView"
      allowed_attributes="getInvestigationPOs"
