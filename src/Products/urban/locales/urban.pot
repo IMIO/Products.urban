@@ -773,6 +773,9 @@ msgstr ""
 msgid "manage_notaries"
 msgstr ""
 
+msgid "manage_parcellings"
+msgstr ""
+
 # config folders
 msgid "map_configs_folder_title"
 msgstr ""
