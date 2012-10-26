@@ -1440,21 +1440,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                            'path':'/'.join(context.getPhysicalPath()),
                            'sort_on':'getObjPositionInParent',
                            'sort_order':'reverse',}
-        elif specificSearch == 'searchArchitects':
-            #search the existing architects
-            queryString = {'portal_type':'Architect',
-                           'path':'/'.join(context.getPhysicalPath()),
-                           'sort_on':'getObjPositionInParent',}
-        elif specificSearch == 'searchNotaries':
-            #search the existing architects
-            queryString = {'portal_type':'Notary',
-                           'path':'/'.join(context.getPhysicalPath()),
-                           'sort_on':'getObjPositionInParent'}
-        elif specificSearch == 'searchGeometricians':
-            #search the existing architects
-            queryString = {'portal_type':'Geometrician',
-                           'path':'/'.join(context.getPhysicalPath()),
-                           'sort_on':'getObjPositionInParent'}
         elif specificSearch == 'searchPortionOuts':
             #search the existing parcels
             #we can search existing parcels on a licence (directly contained)

@@ -231,6 +231,9 @@ msgstr "Ajouter une Lettre de notaire"
 msgid "add_ParcelOutLicence"
 msgstr "Ajouter un Permis d'urbanisation"
 
+msgid "add_ParcellingTerm"
+msgstr "Ajouter un lotissement"
+
 msgid "add_UrbanCertificateOne"
 msgstr "Ajouter un Certificat d'Urbanisme 1"
 
@@ -701,6 +704,9 @@ msgstr "Nom(s)"
 
 msgid "label_colname_notary_data"
 msgstr "Coordonnées du notaire"
+
+msgid "label_colname_parcellingterm_data"
+msgstr "Lotissements"
 
 msgid "label_colname_proprietary_data"
 msgstr "Coordonnées du propriétaire"

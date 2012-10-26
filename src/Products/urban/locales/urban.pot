@@ -227,6 +227,9 @@ msgstr ""
 msgid "add_NotaryLetter"
 msgstr ""
 
+msgid "add_ParcellingTerm"
+msgstr ""
+
 msgid "add_ParcelOutLicence"
 msgstr ""
 
@@ -699,6 +702,9 @@ msgid "label_colname_name"
 msgstr ""
 
 msgid "label_colname_notary_data"
+msgstr ""
+
+msgid "label_colname_parcellingterm_data"
 msgstr ""
 
 msgid "label_colname_proprietary_data"
