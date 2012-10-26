@@ -35,6 +35,9 @@ def migrateToUrban115(context):
     # This step turns some urbanEventTypes as keyEvent and select their key dates to keep the same dates
     # displayed as before the change
     migrateKeyDates(context)
+    # The parcellings folder has been moved from './portal_urban' to './urban'
+    # the notaries , geometricians and architects folders views are now a browserview
+    migrateParcellingsFolder(context)
 
 def migrateToUrban114(context):
     """
@@ -887,6 +890,7 @@ def migratePersonTitles(context):
 
 def migrateKeyDates(context):
     """
+    set some eventType as keyEvent and set their eventDate as keyDate
     """
     if isNoturbanMigrationsProfile(context): return
 
@@ -946,3 +950,20 @@ def migrateKeyDates(context):
             eventtype.setIsKeyEvent(True)
             eventtype.setKeyDates(('eventDate',))
 
+def migrateParcellingsFolder(context):
+    """
+    cut and paste the folder pacrellings from './portal_urba' to './urban'
+    change the layout name of the notaries, geometricians, architects and parcellings folders
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    logger = context.getLogger('migrateParcellingsFolder')
+    site = context.getSite()
+    portal_urban = getToolByName(site, 'portal_urban')
+
+    cut_data = portal_urban.manage_cutObjects(['parcellings',])
+    site.urban.manage_pasteObjects(cut_data)
+
+    for foldername in ['notaries', 'architects', 'geometricians', 'parcellings']:
+        folder = getattr(site.urban, foldername)
+        folder.setLayout('%s_folderview' % foldername)
