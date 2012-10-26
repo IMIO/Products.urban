@@ -744,6 +744,28 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="leasing",title=u"Leasing (pour mémoire SPF Finances)", extraValue='LEASING')
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="autres",title=u"Autres", extraValue='AUTRE')
 
+        if urban_type in ['BuildLicence',]:
+            #add PEB categories folder
+            #this is done by a method because the migrateToUrban115
+            #migration step will use it too
+            addPEBCategories(context, configFolder)
+
+def addPEBCategories(context, configFolder):
+    """
+      This method add default PEB categories
+    """
+    site = context.getSite()
+    if not hasattr(aq_base(configFolder), 'pebcategories'):
+        newFolderid = configFolder.invokeFactory("Folder",id="pebcategories",title=_("pebcategories_folder_title", 'urban', context=site.REQUEST))
+        newFolder = getattr(configFolder, newFolderid)
+        newFolder.setConstrainTypesMode(1)
+        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="not_applicable",title=_('peb_not_applicable', 'urban', context=site.REQUEST))
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="complete_process",title=_('peb_complete_process', 'urban', context=site.REQUEST))
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="form1_process",title=_('peb_form1_process', 'urban', context=site.REQUEST))
+        newFolder.invokeFactory("UrbanVocabularyTerm",id="form2_process",title=_('peb_form2_process', 'urban', context=site.REQUEST))
+
 def addInvestigationArticles(context, configFolder):
     """
       This method add default investigation articles

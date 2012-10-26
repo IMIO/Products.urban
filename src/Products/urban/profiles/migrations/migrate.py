@@ -38,6 +38,8 @@ def migrateToUrban115(context):
     # The parcellings folder has been moved from './portal_urban' to './urban'
     # the notaries , geometricians and architects folders views are now a browserview
     migrateParcellingsFolder(context)
+    #PEB categories are now configurable, this step creates the folder configs with some vocabulary
+    migratePEBCategories(context)
 
 def migrateToUrban114(context):
     """
@@ -961,9 +963,24 @@ def migrateParcellingsFolder(context):
     site = context.getSite()
     portal_urban = getToolByName(site, 'portal_urban')
 
+    if not hasattr(portal_urban, 'parcellings'): return
     cut_data = portal_urban.manage_cutObjects(['parcellings',])
     site.urban.manage_pasteObjects(cut_data)
 
     for foldername in ['notaries', 'architects', 'geometricians', 'parcellings']:
         folder = getattr(site.urban, foldername)
         folder.setLayout('%s_folderview' % foldername)
+
+def migratePEBCategories(context):
+    """
+    Create pebcategories folders and their default values in bulidlicence and parceloutlicence configs
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    logger = context.getLogger('migrateParcellingsFolder')
+    site = context.getSite()
+    portal_urban = getToolByName(site, 'portal_urban')
+    from Products.urban.setuphandlers import addPEBCategories
+    for config_name in ['buildlicence',]:
+        config = getattr(portal_urban, config_name)
+        addPEBCategories(context, config)

@@ -919,13 +919,16 @@ msgid "peb_complete_process"
 msgstr "Procédure complète"
 
 msgid "peb_form1_process"
-msgstr "Formulaire 1"
+msgstr "Déclaration simplifiée"
 
 msgid "peb_form2_process"
-msgstr "Formulaire 2"
+msgstr "Engagement PEB"
 
 msgid "peb_not_applicable"
 msgstr "Non applicable"
+
+msgid "pebcategories_folder_title"
+msgstr "Catégories PEB"
 
 msgid "persons_grades_folder_title"
 msgstr "Grades des personnes"

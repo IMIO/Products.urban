@@ -917,6 +917,9 @@ msgstr ""
 msgid "peb_complete_process"
 msgstr ""
 
+msgid "pebcategories_folder_title"
+msgstr ""
+
 msgid "peb_form1_process"
 msgstr ""
 

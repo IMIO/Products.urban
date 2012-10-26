@@ -92,7 +92,8 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         schemata='urban_peb',
-        vocabulary='listPebTypes',
+        vocabulary=UrbanVocabulary(path='pebcategories'),
+        default_method='getDefaultValue',
     ),
     TextField(
         name='pebDetails',
@@ -281,23 +282,6 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
              ['for_habitation', _('usage_for_habitation', 'urban', context=self.REQUEST)],
              ['not_for_habitation', _('usage_not_for_habitation', 'urban', context=self.REQUEST)],
              ['not_applicable', _('usage_not_applicable', 'urban', context=self.REQUEST)],
-              ]
-        vocab = []
-        for elt in lst:
-            vocab.append((elt[0], elt[1]))
-        return DisplayList(tuple(vocab))
-
-    # Manually created methods
-
-    def listPebTypes(self):
-        """
-          Vocabulary for field 'pebType'
-        """
-        lst=[
-             ['not_applicable', _('peb_not_applicable', 'urban', context=self.REQUEST, default="Not applicable")],
-             ['complete_process', _('peb_complete_process', 'urban', context=self.REQUEST, default="Complete process")],
-             ['form1_process', _('peb_form1_process', 'urban', context=self.REQUEST, default="Form 1 process")],
-             ['form2_process', _('peb_form2_process', 'urban', context=self.REQUEST, default="Form 2 process")],
               ]
         vocab = []
         for elt in lst:
