@@ -24,11 +24,11 @@ class MapView(BrowserView):
         """
         listCapaKey = []
         context = aq_inner(self.context)
-        
+
         "Allow to show the map without the licence object"
         if not hasattr(aq_base(context), "getParcels"):
             return listCapaKey
-        
+
         for parcel in context.getParcels():
             divisioncode = parcel.getDivisionCode()
             section = parcel.getSection()
@@ -94,8 +94,19 @@ class FullMapView(MapView):
     """
     def __init__(self, context, request):
         super(MapView, self).__init__(context, request)
-        
+
+    def isUrbanUser(self):
+        context = aq_inner(self.context)
+        portal_groups = getToolByName(context, 'portal_groups')
+        member = context.restrictedTraverse('@@plone_portal_state').member()
+        urban_groups = ['urban_readers', 'urban_editors', 'urban_managers']
+        user_groups = portal_groups.getGroupsByUserId(member.getId())
+        is_urban_user = any([group.__str__() for group in user_groups if group.__str__() in urban_groups])
+        is_manager = member.has_role('Manager')
+        return is_urban_user or is_manager
+
+
 class MapMacros(BrowserView):
     """
       This manage the macros of Map
-    """        
+    """

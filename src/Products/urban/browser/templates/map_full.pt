@@ -1,8 +1,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
       i18n:domain="urban"
-      tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost;"
+      tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost;
+                  is_urban_user view/isUrbanUser"
       >
+
 <head>
     <metal:listing use-macro="here/@@map-macros/urbanMapCSS" />
             <style type="text/css" media="screen">
@@ -47,21 +49,28 @@
         </style>
 </head>
 <body >
-    <div id="loading-mask" style=""></div> 
-	<div id="loading"> 
+
+<tal:unauthorized condition="python: not is_urban_user">
+You have to be logged and authenticated to view this page
+</tal:unauthorized>
+
+<tal:authorized condition="python: is_urban_user">
+    <div id="loading-mask" style=""></div>
+	<div id="loading">
 	    <div class="loading-indicator">
 	    	<span id="loading-title">UrbanMap</span><br/>
 	    	<!--<br style="clear: both"/>-->
 	    	<a href="http://www.communesplone.org/">Communes&nbsp;Plone</a>
 	    	<br style="clear: both"/>
 	    	<span id="loading-msg">Chargement de l'application</span>
-	    </div> 
-	</div> 
+	    </div>
+	</div>
  
 
   	   <metal:listing use-macro="here/@@map-macros/urbanMapScriptBase" />
   	   <metal:listing use-macro="here/@@map-macros/urbanFullMapScript" />
        <div id="urbanmapctn" style="width:100%; height:100%"></div>
- 
+
+</tal:authorized>
 </body>
 </html>
