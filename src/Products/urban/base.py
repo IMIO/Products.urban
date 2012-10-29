@@ -285,12 +285,14 @@ class UrbanBase(object):
         return getattr(termFolderObj, termId)
 
     security.declarePublic('getPortionOutsText')
-    def getPortionOutsText(self, linebyline=True):
+    def getPortionOutsText(self, linebyline=False):
         """
           Return a displayable version of the parcels
         """
         toreturn = ''
         isFirst = True
+        first_div = None
+        first_section = None
         for portionOutObj in self.getParcels():
             #add a separator between every parcel
             #either a '\n'
@@ -298,9 +300,18 @@ class UrbanBase(object):
                 toreturn += '\n'
             #or an "and "
             elif not isFirst:
-                toreturn += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
-            toreturn += '%s ' % portionOutObj.getDivision()
-            toreturn += 'section %s' % portionOutObj.getSection()
+                toreturn += ', '
+            elif isFirst:
+                first_div = portionOutObj.getDivision()
+                toreturn += '%s ' % portionOutObj.getDivision()
+                first_section = portionOutObj.getSection()
+                toreturn += 'section %s' % portionOutObj.getSection()
+                toreturn += ' n° '
+            else:
+                if first_div != portionOutObj.getDivision():
+                    toreturn += '%s ' % portionOutObj.getDivision()
+                if first_section != portionOutObj.getSection():
+                    toreturn += 'section %s ' % portionOutObj.getSection()
             toreturn += ' %s' % portionOutObj.getRadical()
             if portionOutObj.getBis() != '':
                 toreturn += '/%s' % portionOutObj.getBis()
