@@ -22,29 +22,6 @@ class TestKeyEvent(unittest.TestCase):
         self.buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
         self.buildLicence = getattr(self.buildLicences, LICENCE_ID)
 
-    def testKeyEventDefaultCase(self):
-        portal = self.layer['portal']
-        portal.urban.buildlicences.manage_delObjects('licence1')
-        catalog = getToolByName(portal, 'portal_catalog')
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
-        #so far the index should still be empty
-        self.assertEqual(buildlicence_brain.last_key_event, None)
-
-    def testNoKeyEventCreated(self):
-        portal = self.layer['portal']
-        portal.urban.buildlicences.manage_delObjects('licence1')
-        catalog = getToolByName(portal, 'portal_catalog')
-        buildlicence = catalog(portal_type='BuildLicence')[0].getObject()
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
-        urban_event = buildlicence.objectValues('UrbanEvent')[-1]
-        urban_event_type = urban_event.getUrbaneventtypes()
-        #we delete the urban event from the buildlicence and set the urbanEventType UET as a key event
-        #the index should remains empty as the licence does not contains an urbanEvent UET
-        buildlicence.manage_delObjects(urban_event.id)
-        urban_event_type.setIsKeyEvent(True)
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
-        self.assertEqual(buildlicence_brain.last_key_event, None)
-
     def testCreateKeyEvent(self):
         portal = self.layer['portal']
         portal.urban.buildlicences.manage_delObjects('licence1')
@@ -75,7 +52,7 @@ class TestKeyEvent(unittest.TestCase):
         #we remove the key event, the index last_key_event of the licence should be back to empty value
         buildlicence.manage_delObjects(urban_event.id)
         buildlicence_brain = catalog(portal_type='BuildLicence')[0]
-        self.assertEqual(buildlicence_brain.last_key_event, None)
+        self.failUnless(not buildlicence_brain.last_key_event.endswith('vrance du permis (octroi ou refus)' )
 
     def testEventDateAsKeyDate(self):
         """
