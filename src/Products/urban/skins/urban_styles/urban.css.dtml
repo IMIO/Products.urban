@@ -6,7 +6,7 @@
 /* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
 
 .listing img, .listing input {
-    vertical-align: sub;
+vertical-align: sub;
 }
 
 /* align the add button of datagrid widgets on the left */
@@ -347,5 +347,33 @@ INPUT.button-urbanschedule
     padding-left: 1em;
 }
 
+.specificFeatures div div div{
+height: 22.3px;
+}
+
+.specificFeatures [id$="0"], .specificFeatures [id$="2"], .specificFeatures [id$="4"], .specificFeatures [id$="6"], .specificFeatures [id$="8"] {
+background-color: lightgray;
+}
+
+.specificFeaturesDetails, .specificFeatures{
+vertical-align:top;
+}
+
+.specificFeaturesDetails table{
+border-width:0px;
+}
+
+.specificFeaturesDetails tr.odd{
+background-color: lightgray;
+}
+
+.specificFeaturesDetails tr{
+height: 21.92px;
+}
+
+.specificFeaturesDetails th{
+background-color:white !important;
+margin-bottom:1px;
+}
 
 /* </dtml-with> */

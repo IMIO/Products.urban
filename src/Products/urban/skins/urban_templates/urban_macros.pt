@@ -650,8 +650,8 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
    <div>
     <table align='left'>
      <tr>
-      <td><metal:fieldMacro use-macro="python:here.widget('%s' % fieldName, mode='edit')" /></td>
-      <td><metal:fieldMacro use-macro="python:here.widget('%sDetail' % fieldName, mode='edit')" /></td>
+      <td class="specificFeatures"><metal:fieldMacro use-macro="python:here.widget('%s' % fieldName, mode='edit')" /></td>
+      <td class="specificFeaturesDetails"><metal:fieldMacro use-macro="python:here.widget('%sDetail' % fieldName, mode='edit')" /></td>
      </tr>
     </table>
    </div>
