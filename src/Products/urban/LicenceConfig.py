@@ -62,6 +62,25 @@ schema = Schema((
         columns=('fieldname', 'text'),
         validators=('isTextFieldConfigured',),
     ),
+    StringField(
+        name='referenceTALExpression',
+        default="python: obj.getLicenceTypeAcronym() + '/' + date.strftime('%Y') + '/' + numerotation + '/' + tool.getCurrentFolderManager(obj, initials=True)",
+        widget=StringField._properties['widget'](
+            size=100,
+            label='Referencetalexpression',
+            label_msgid='urban_label_referenceTALExpression',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='numerotation',
+        default=0,
+        widget=StringField._properties['widget'](
+            label='Numerotation',
+            label_msgid='urban_label_numerotation',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )
