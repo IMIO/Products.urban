@@ -40,6 +40,8 @@ def migrateToUrban115(context):
     migrateParcellingsFolder(context)
     #PEB categories are now configurable, this step creates the folder configs with some vocabulary
     migratePEBCategories(context)
+    #numerotation and reference TAL expression is now specific to each licence type
+    migrateReferenceNumerotation(context)
 
 def migrateToUrban114(context):
     """
@@ -984,3 +986,21 @@ def migratePEBCategories(context):
     for config_name in ['buildlicence',]:
         config = getattr(portal_urban, config_name)
         addPEBCategories(context, config)
+
+def migrateReferenceNumerotation(context):
+    """
+    Copy each numerotation value found on portal_urban to the 'numerotation' field on each licence folder.
+    Copy the numerotationTALExpression value of portal_urban to the referenceTALExpression field
+    of each licence config.
+    """
+    if isNoturbanMigrationsProfile(context): return
+
+    logger = context.getLogger('migrateReferenceNumerotation')
+    site = context.getSite()
+    portal_urban = getToolByName(site, 'portal_urban')
+    for licence_type in URBAN_TYPES:
+        config = getattr(portal_urban, licence_type.lower())
+        if hasattr(portal_urban, 'numerotationTALExpression'):
+            config.setReferenceTALExpression(portal_urban.numerotationTALExpression)
+        if hasattr(portal_urban, '%sTALExpression' % licence_type):
+            config.setNumerotation(getattr(portal_urban, '%sNumerotation' % licence_type))
