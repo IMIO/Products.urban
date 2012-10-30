@@ -436,22 +436,26 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
                       'sort_on': 'getObjPositionInParent',
                       'review_state': 'enabled',
             }
-            enabledSpecificFeatures[location] = portal_catalog(**params)
+            enabledSpecificFeatures[location] = list(portal_catalog(**params))
         res=[]
         for location in where:
-            method_name = "get%sSpecificFeatures" % location.capitalize()
-            specificFeatures = getattr(self, method_name)()
-            for esf in enabledSpecificFeatures[location]:
+            specificfeature_accessor = "get%sSpecificFeatures" % location.capitalize()
+            specificfeaturedetail_accessor = "get%sSpecificFeaturesDetail" % location.capitalize()
+            specificFeatures = getattr(self, specificfeature_accessor)()
+            for index_esf, esf in enumerate(enabledSpecificFeatures[location]):
                 obj = esf.getObject()
+                detail = getattr(self, specificfeaturedetail_accessor)()[index_esf]['detail']
                 if esf.id in specificFeatures:
                     #render the expressions
                     render = obj.getRenderedDescription(self)
+                    render =  detail and '%s %s' % (render, detail) or render
                     if active_style:
                         render = tool.decorateHTML(active_style, render)
                     res.append(render)
                 else:
                     #replace the expressions by a null value, aka "..."
                     render = obj.getRenderedDescription(self, renderToNull=True)
+                    render =  detail and '%s %s' % (render, detail) or render
                     if inactive_style:
                         render = tool.decorateHTML(inactive_style, render)
                     res.append(render)
