@@ -28,5 +28,5 @@ def generateSingletonDocument(urbanEvent, event):
 def updateKeyEvent(urbanEvent, event):
     event_type = urbanEvent.getUrbaneventtypes()
     if not event_type or event_type.getIsKeyEvent():
-        licence = urbanEvent.aq_parent
+        licence = urbanEvent.aq_inner.aq_parent
         licence.reindexObject(['last_key_event'])

@@ -1027,7 +1027,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         for parcel in parcels:
             brains = catalogTool(portal_type=foldertypes, parcelInfosIndex=parcel)
             res += brains
-        #remove brains for wich no parcel at all is defined...
+        #remove brains for which no parcel at all is defined...
         return [r for r in res if r.parcelInfosIndex]
 
     security.declarePublic('getReferenceBrowserSearchAtObj')
