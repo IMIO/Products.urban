@@ -40,7 +40,7 @@
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".urbanEventEvents.generateSingletonDocument"/>
   <subscriber for="..interfaces.IUrbanEvent
-                   zope.app.container.interfaces.IObjectMovedEvent"
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventEvents.updateKeyEvent"/>
   <subscriber for="..interfaces.IUrbanEventInquiry
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
