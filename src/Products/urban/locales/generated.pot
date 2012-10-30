@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Oct 22 16:15:17 2012\n"
-"PO-Revision-Date: Mon Oct 22 16:15:17 2012\n"
+"POT-Creation-Date: Tue Oct 30 14:00:29 2012\n"
+"PO-Revision-Date: Tue Oct 30 14:00:29 2012\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -126,26 +126,6 @@ msgstr ""
 msgid "urban_help_roadDgrneUnderground"
 msgstr ""
 
-#. Default: "Buildlicencenumerotation"
-#: UrbanTool.py
-msgid "urban_label_BuildLicenceNumerotation"
-msgstr ""
-
-#. Default: "Declarationnumerotation"
-#: UrbanTool.py
-msgid "urban_label_DeclarationNumerotation"
-msgstr ""
-
-#. Default: "Divisionnumerotation"
-#: UrbanTool.py
-msgid "urban_label_DivisionNumerotation"
-msgstr ""
-
-#. Default: "Environmentaldeclarationnumerotation"
-#: UrbanTool.py
-msgid "urban_label_EnvironmentalDeclarationNumerotation"
-msgstr ""
-
 #. Default: "Equipmenttype"
 #: Equipment.py
 msgid "urban_label_EquipmentType"
@@ -156,24 +136,9 @@ msgstr ""
 msgid "urban_label_LinkedOpinionRequestEvent"
 msgstr ""
 
-#. Default: "Miscdemandnumerotation"
-#: UrbanTool.py
-msgid "urban_label_MiscDemandNumerotation"
-msgstr ""
-
 #. Default: "Nisnum"
 #: UrbanTool.py
 msgid "urban_label_NISNum"
-msgstr ""
-
-#. Default: "Notaryletternumerotation"
-#: UrbanTool.py
-msgid "urban_label_NotaryLetterNumerotation"
-msgstr ""
-
-#. Default: "Parceloutlicencenumerotation"
-#: UrbanTool.py
-msgid "urban_label_ParcelOutLicenceNumerotation"
 msgstr ""
 
 #. Default: "Rcu"
@@ -195,16 +160,6 @@ msgstr ""
 #: UrbanDoc.py
 #: UrbanEventType.py
 msgid "urban_label_TALCondition"
-msgstr ""
-
-#. Default: "Urbancertificateonenumerotation"
-#: UrbanTool.py
-msgid "urban_label_UrbanCertificateOneNumerotation"
-msgstr ""
-
-#. Default: "Urbancertificatetwonumerotation"
-#: UrbanTool.py
-msgid "urban_label_UrbanCertificateTwoNumerotation"
 msgstr ""
 
 #. Default: "Wmsurl"
@@ -775,9 +730,9 @@ msgstr ""
 msgid "urban_label_numberOfParcels"
 msgstr ""
 
-#. Default: "Numerotationtalexpression"
-#: UrbanTool.py
-msgid "urban_label_numerotationTALExpression"
+#. Default: "Numerotation"
+#: LicenceConfig.py
+msgid "urban_label_numerotation"
 msgstr ""
 
 #. Default: "Openofficeport"
@@ -909,6 +864,11 @@ msgstr ""
 #. Default: "Referencedgatlp"
 #: GenericLicence.py
 msgid "urban_label_referenceDGATLP"
+msgstr ""
+
+#. Default: "Referencetalexpression"
+#: LicenceConfig.py
+msgid "urban_label_referenceTALExpression"
 msgstr ""
 
 #. Default: "Regionalroad"

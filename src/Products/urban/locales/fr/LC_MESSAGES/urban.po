@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2012-10-25 11:18+0000\n"
+"POT-Creation-Date: 2012-10-30 13:02+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1979,6 +1979,11 @@ msgstr "Numéro"
 msgid "urban_label_numberOfParcels"
 msgstr "Nombre de lots"
 
+#. Default: "Numerotation"
+#: LicenceConfig.py
+msgid "urban_label_numerotation"
+msgstr "Numérotation"
+
 #. Default: "Numerotation TAL expression"
 #: UrbanTool.py
 msgid "urban_label_numerotationTALExpression"
@@ -2008,7 +2013,7 @@ msgstr "Avis à demander en cas de travaux"
 #. Default: "Outdated"
 #: PortionOut.py
 msgid "urban_label_outdated"
-msgstr ""
+msgstr "À mettre à jour"
 
 #. Default: "Outlinecolor"
 #: Layer.py
@@ -2152,6 +2157,11 @@ msgstr "Référence"
 #: GenericLicence.py
 msgid "urban_label_referenceDGATLP"
 msgstr "Référence DGO4"
+
+#. Default: "Referencetalexpression"
+#: LicenceConfig.py
+msgid "urban_label_referenceTALExpression"
+msgstr "Expression TAL générant la référence"
 
 #. Default: "Regionalroad"
 #: Street.py

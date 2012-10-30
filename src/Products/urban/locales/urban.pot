@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-10-25 11:18+0000\n"
+"POT-Creation-Date: 2012-10-30 13:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -227,10 +227,10 @@ msgstr ""
 msgid "add_NotaryLetter"
 msgstr ""
 
-msgid "add_ParcellingTerm"
+msgid "add_ParcelOutLicence"
 msgstr ""
 
-msgid "add_ParcelOutLicence"
+msgid "add_ParcellingTerm"
 msgstr ""
 
 msgid "add_UrbanCertificateOne"
@@ -917,9 +917,6 @@ msgstr ""
 msgid "peb_complete_process"
 msgstr ""
 
-msgid "pebcategories_folder_title"
-msgstr ""
-
 msgid "peb_form1_process"
 msgstr ""
 
@@ -927,6 +924,9 @@ msgid "peb_form2_process"
 msgstr ""
 
 msgid "peb_not_applicable"
+msgstr ""
+
+msgid "pebcategories_folder_title"
 msgstr ""
 
 msgid "persons_grades_folder_title"
@@ -1976,6 +1976,11 @@ msgstr ""
 msgid "urban_label_numberOfParcels"
 msgstr ""
 
+#. Default: "Numerotation"
+#: LicenceConfig.py
+msgid "urban_label_numerotation"
+msgstr ""
+
 #. Default: "Numerotation TAL expression"
 #: UrbanTool.py
 msgid "urban_label_numerotationTALExpression"
@@ -2148,6 +2153,11 @@ msgstr ""
 #. Default: "Referencedgatlp"
 #: GenericLicence.py
 msgid "urban_label_referenceDGATLP"
+msgstr ""
+
+#. Default: "Referencetalexpression"
+#: LicenceConfig.py
+msgid "urban_label_referenceTALExpression"
 msgstr ""
 
 #. Default: "Regionalroad"

@@ -93,97 +93,6 @@ schema = Schema((
         ),
     ),
     StringField(
-        name='numerotationTALExpression',
-        default="python: obj.getLicenceTypeAcronym() + '/' + date.strftime('%Y') + '/' + numerotation + '/' + tool.getCurrentFolderManager(obj, initials=True)",
-        widget=StringField._properties['widget'](
-            size=100,
-            label='Numerotationtalexpression',
-            label_msgid='urban_label_numerotationTALExpression',
-            i18n_domain='urban',
-        ),
-    ),
-    StringField(
-        name='BuildLicenceNumerotation',
-        default=0,
-        widget=StringField._properties['widget'](
-            label='Buildlicencenumerotation',
-            label_msgid='urban_label_BuildLicenceNumerotation',
-            i18n_domain='urban',
-        ),
-    ),
-    StringField(
-        name='ParcelOutLicenceNumerotation',
-        default=0,
-        widget=StringField._properties['widget'](
-            label='Parceloutlicencenumerotation',
-            label_msgid='urban_label_ParcelOutLicenceNumerotation',
-            i18n_domain='urban',
-        ),
-    ),
-    StringField(
-        name='DeclarationNumerotation',
-        default=0,
-        widget=StringField._properties['widget'](
-            label='Declarationnumerotation',
-            label_msgid='urban_label_DeclarationNumerotation',
-            i18n_domain='urban',
-        ),
-    ),
-    StringField(
-        name='UrbanCertificateOneNumerotation',
-        default=0,
-        widget=StringField._properties['widget'](
-            label='Urbancertificateonenumerotation',
-            label_msgid='urban_label_UrbanCertificateOneNumerotation',
-            i18n_domain='urban',
-        ),
-    ),
-    StringField(
-        name='UrbanCertificateTwoNumerotation',
-        default=0,
-        widget=StringField._properties['widget'](
-            label='Urbancertificatetwonumerotation',
-            label_msgid='urban_label_UrbanCertificateTwoNumerotation',
-            i18n_domain='urban',
-        ),
-    ),
-    StringField(
-        name='NotaryLetterNumerotation',
-        default=0,
-        widget=StringField._properties['widget'](
-            label='Notaryletternumerotation',
-            label_msgid='urban_label_NotaryLetterNumerotation',
-            i18n_domain='urban',
-        ),
-    ),
-    StringField(
-        name='EnvironmentalDeclarationNumerotation',
-        default=0,
-        widget=StringField._properties['widget'](
-            label='Environmentaldeclarationnumerotation',
-            label_msgid='urban_label_EnvironmentalDeclarationNumerotation',
-            i18n_domain='urban',
-        ),
-    ),
-    StringField(
-        name='DivisionNumerotation',
-        default=0,
-        widget=StringField._properties['widget'](
-            label='Divisionnumerotation',
-            label_msgid='urban_label_DivisionNumerotation',
-            i18n_domain='urban',
-        ),
-    ),
-    StringField(
-        name='MiscDemandNumerotation',
-        default=0,
-        widget=StringField._properties['widget'](
-            label='Miscdemandnumerotation',
-            label_msgid='urban_label_MiscDemandNumerotation',
-            i18n_domain='urban',
-        ),
-    ),
-    StringField(
         name='sqlHost',
         widget=StringField._properties['widget'](
             label='Sqlhost',
@@ -1151,15 +1060,12 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         #we get a field like UrbanCertificateBaseNumerotation on self
         #to get the last numerotation for this kind of licence
-        portal_type = obj.portal_type
-        if portal_type == 'UrbanCertificateBase':
-            portal_type = 'UrbanCertificateOne'
-        if not portal_type in URBAN_TYPES:
+        licence_config = self.getUrbanConfig(obj)
+        if not licence_config:
             return ''
-        fieldObj = self.getField(portal_type + 'Numerotation')
         lastValue = '0'
         #get the last value
-        lastValue = fieldObj.getAccessor(self)()
+        lastValue = licence_config.getNumerotation()
         if str(lastValue).isdigit():
             lastValue = int(lastValue)
             lastValue = lastValue + 1
@@ -1176,7 +1082,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         res = ''
         try:
             ctx = getEngine().getContext(data)
-            res = Expression(self.getNumerotationTALExpression())(ctx)
+            res = Expression(licence_config.getReferenceTALExpression())(ctx)
         except Exception:
             logger.warn('The defined TAL expression about numerotation in portal_urban is wrong!')
         return res

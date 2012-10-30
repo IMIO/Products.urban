@@ -288,6 +288,8 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
             vocab.append((elt[0], elt[1]))
         return DisplayList(tuple(vocab))
 
+    # Manually created methods
+
     security.declarePublic('askFD')
     def askFD(self):
         """
