@@ -851,7 +851,6 @@ def setDefaultApplicationSecurity(context):
         app_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         app_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         app_folder.manage_addLocalRoles("urban_editors", ("Reader",))
-        app_folder.manage_addLocalRoles("urban_map_readers", ("Reader",))
         #set some hardcoded permissions
         #sharing is only managed by the 'Managers'
         app_folder.manage_permission('Sharing page: Delegate roles', ['Manager', ], acquire=0)
