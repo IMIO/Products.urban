@@ -803,10 +803,16 @@ def addUrbanGroups(context):
     #add 3 groups
     #one with urban Managers
     site.portal_groups.addGroup("urban_managers", title="Urban Managers")
+    site.portal_groups.setRolesForGroup('urban_managers', ('UrbanMapReader',))
     #one with urban Readers
     site.portal_groups.addGroup("urban_readers", title="Urban Readers")
+    site.portal_groups.setRolesForGroup('urban_readers', ('UrbanMapReader',))
     #one with urban Editors
     site.portal_groups.addGroup("urban_editors", title="Urban Editors")
+    site.portal_groups.setRolesForGroup('urban_editors', ('UrbanMapReader',))
+    #one with map Readers
+    site.portal_groups.addGroup("urban_map_readers", title="Urban Map Readers")
+    site.portal_groups.setRolesForGroup('urban_map_readers', ('UrbanMapReader',))
 
 def addLicencesCollection(context):
     """
@@ -836,6 +842,7 @@ def setDefaultApplicationSecurity(context):
     site.portal_urban.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
     site.portal_urban.manage_addLocalRoles("urban_readers", ("Reader",))
     site.portal_urban.manage_addLocalRoles("urban_editors", ("Reader",))
+    site.portal_urban.manage_addLocalRoles("urban_map_readers", ("Reader",))
 
     #application folders local roles
     #global application folder : "urban_readers" and "urban_editors" can read...
@@ -844,6 +851,7 @@ def setDefaultApplicationSecurity(context):
         app_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         app_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         app_folder.manage_addLocalRoles("urban_editors", ("Reader",))
+        app_folder.manage_addLocalRoles("urban_map_readers", ("Reader",))
         #set some hardcoded permissions
         #sharing is only managed by the 'Managers'
         app_folder.manage_permission('Sharing page: Delegate roles', ['Manager', ], acquire=0)
@@ -1547,10 +1555,15 @@ def addTestObjects(context):
             password = generatePassword(8)
         member = site.portal_registration.addMember(id="urbaneditor", password=password)
         member.setMemberProperties({'ext_editor':True})
+        password = 'urbanmapreader'
+        if is_mountpoint:
+            password = generatePassword(8)
+        site.portal_registration.addMember(id="urbanmapreader", password=password)
         #put users in the correct group
         site.acl_users.source_groups.addPrincipalToGroup("urbanmanager", "urban_managers")
         site.acl_users.source_groups.addPrincipalToGroup("urbanreader", "urban_readers")
         site.acl_users.source_groups.addPrincipalToGroup("urbaneditor", "urban_editors")
+        site.acl_users.source_groups.addPrincipalToGroup("urbanmapreader", "urban_map_readers")
     except:
         #if something wrong happens (one object already exists), we pass...
         pass

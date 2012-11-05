@@ -99,11 +99,10 @@ class FullMapView(MapView):
         context = aq_inner(self.context)
         portal_groups = getToolByName(context, 'portal_groups')
         member = context.restrictedTraverse('@@plone_portal_state').member()
-        urban_groups = ['urban_readers', 'urban_editors', 'urban_managers']
         user_groups = portal_groups.getGroupsByUserId(member.getId())
-        is_urban_user = any([group.__str__() for group in user_groups if group.__str__() in urban_groups])
+        is_map_user = member.has_role('UrbanMapReader')
         is_manager = member.has_role('Manager')
-        return is_urban_user or is_manager
+        return is_map_user or is_manager
 
 
 class MapMacros(BrowserView):
