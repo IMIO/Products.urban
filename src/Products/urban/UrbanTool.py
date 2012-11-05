@@ -1239,15 +1239,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
           The numerotation in the configuration is a string that contains an integer
         """
         #update the last reference in the configuration
-        fieldObj = self.getField(obj.portal_type + 'Numerotation')
-        value = fieldObj.getAccessor(self)()
+        config = self.getUrbanConfig(obj)
+        value =  config.getNumerotation()
         if not str(value).isdigit():
             value = '0'
         else:
             value = int(value)
             value = value + 1
         #set the new value
-        fieldObj.set(self, value)
+        config.setNumerotation(value)
         self.reindexObject()
 
     security.declarePublic('getCurrentFolderManager')
