@@ -43,7 +43,7 @@ def migrateToUrban115(context):
     #numerotation and reference TAL expression is now specific to each licence type
     migrateReferenceNumerotation(context)
     # allow users belonging to UrbanMapReaderGroup to see the urban main page
-    migrateFullMapReader(context)
+    # migrateFullMapReader(context)
 
 def migrateToUrban114(context):
     """
