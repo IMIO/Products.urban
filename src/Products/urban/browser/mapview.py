@@ -99,7 +99,6 @@ class FullMapView(MapView):
         context = aq_inner(self.context)
         portal_groups = getToolByName(context, 'portal_groups')
         member = context.restrictedTraverse('@@plone_portal_state').member()
-        user_groups = portal_groups.getGroupsByUserId(member.getId())
         is_map_user = member.has_role('UrbanMapReader')
         is_manager = member.has_role('Manager')
         return is_map_user or is_manager
