@@ -42,8 +42,6 @@ def migrateToUrban115(context):
     migratePEBCategories(context)
     #numerotation and reference TAL expression is now specific to each licence type
     migrateReferenceNumerotation(context)
-    # allow users belonging to UrbanMapReaderGroup to see the urban main page
-    # migrateFullMapReader(context)
 
 def migrateToUrban114(context):
     """
@@ -1006,15 +1004,4 @@ def migrateReferenceNumerotation(context):
             config.setReferenceTALExpression(portal_urban.numerotationTALExpression)
         if hasattr(portal_urban, '%sTALExpression' % licence_type):
             config.setNumerotation(getattr(portal_urban, '%sNumerotation' % licence_type))
-
-def migrateFullMapReader(context):
-    """
-    allow FullmapReadear to view urban main page
-    """
-    if isNoturbanMigrationsProfile(context): return
-
-    logger = context.getLogger('migrateFullMapReader')
-    site = context.getSite()
-    urban = getToolByName(site, 'urban')
-    urban.manage_addLocalRoles("urban_map_readers", ("Reader",))
 

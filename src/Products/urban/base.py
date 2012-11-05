@@ -14,6 +14,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = 'plaintext'
 
 from zope.component.interface import interfaceToName
+from plone.memoize import instance
 from AccessControl import ClassSecurityInfo
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.public import DisplayList
@@ -30,6 +31,16 @@ class UrbanBase(object):
     security = ClassSecurityInfo()
 
     implements(interfaces.IUrbanBase)
+
+    security.declarePublic('getLicenceConfig')
+    #@instance.memoize
+    def getLicenceConfig(self):
+        """
+        """
+        portal_urban = getToolByName(self, 'portal_urban')
+        config = getattr(portal_urban, self.portal_type.lower(), None)
+        return config
+
 
     security.declarePublic('getApplicants')
     def getApplicants(self):

@@ -851,7 +851,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         res = self.getField('annoncedDelay').get(self)
         if res and theObject:
             tool = getToolByName(self, 'portal_urban')
-            urbanConfig = tool.getUrbanConfig(self)
+            urbanConfig = self.getLicenceConfig()
             res = getattr(urbanConfig.folderdelays, res)
         return res
 
@@ -863,7 +863,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         res = self.getField('pca').get(self)
         if res and theObject:
             tool = getToolByName(self, 'portal_urban')
-            urbanConfig = tool.getUrbanConfig(self)
+            urbanConfig = self.getLicenceConfig()
             res = getattr(urbanConfig.pcas, res)
         return res
 
@@ -905,7 +905,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
           Returns all UrbanEvents corresponding to advice on a licence
         """
         tool = getToolByName(self, 'portal_urban')
-        urbanConfig = tool.getUrbanConfig(self)
+        urbanConfig = self.getLicenceConfig()
         listEventTypes = tool.listEventTypes(self,urbanConfig.id)
         res = []
         for listEventType in listEventTypes:

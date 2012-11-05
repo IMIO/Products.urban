@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from plone.memoize import view
 from Products.Five import BrowserView
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
@@ -17,13 +18,27 @@ class LicenceView(BrowserView):
         self.context = context
         self.request = request
 
+    @view.memoize
+    def getCatalog(self):
+        context = aq_inner(self.context)
+        return getToolByName(context, 'portal_catalog')
+
+    @view.memoize
+    def getPortalUrban(self):
+        context = aq_inner(self.context)
+        return getToolByName(context, 'portal_urban')
+
+    def getLicenceConfig(self):
+        context = aq_inner(self.context)
+        return context.getLicenceConfig()
+
     def getEmptyTabs(self):
         tabnames = ['urban_location', 'urban_road']
         return [tabname for tabname in tabnames if self.isEmptyTab(tabname)]
 
     def isEmptyTab(self, tab_name):
         context = aq_inner(self.context)
-        urban_tool = getToolByName(context, 'portal_urban')
+        urban_tool = self.getPortalUrban()
         used_fields_names = set(getattr(urban_tool, context.getPortalTypeName().lower()).getUsedAttributes())
         if used_fields_names :
             for field in context.schema.getSchemataFields(tab_name):
@@ -40,14 +55,14 @@ class LicenceView(BrowserView):
 
     def getKeyDates(self):
         context = aq_inner(self.context)
-        catalog = getToolByName(context, 'portal_catalog')
-        urban_tool = getToolByName(context, 'portal_urban')
-        config = urban_tool.getUrbanConfig(context)
+        catalog = self.getCatalog()
+        urban_tool = self.getPortalUrban()
+        config = context.getLicenceConfig()
         ordered_dates = []
         key_dates = {}
         dates = {}
         # search in the config for all the Key urbaneventtypes and their key dates
-        for eventtype in config.urbaneventtypes.listFolderContents():
+        for eventtype in config.urbaneventtypes.objectValues():
             if eventtype.getIsKeyEvent():
                 displaylist = eventtype.listActivatedDates()
                 keydates = [(date, displaylist.getValue(date)) for  date in eventtype.getKeyDates()]
