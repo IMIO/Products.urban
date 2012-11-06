@@ -953,6 +953,7 @@ def migrateKeyDates(context):
             eventtype = getattr(config, event_id)
             eventtype.setIsKeyEvent(True)
             eventtype.setKeyDates(('eventDate',))
+            logger.info("Migrated urbanEventType '%s'" % eventtype.Title())
 
 def migrateParcellingsFolder(context):
     """
@@ -972,6 +973,7 @@ def migrateParcellingsFolder(context):
     for foldername in ['notaries', 'architects', 'geometricians', 'parcellings']:
         folder = getattr(site.urban, foldername)
         folder.setLayout('%s_folderview' % foldername)
+    logger.info("Migrated parcellings")
 
 def migratePEBCategories(context):
     """
@@ -986,6 +988,7 @@ def migratePEBCategories(context):
     for config_name in ['buildlicence',]:
         config = getattr(portal_urban, config_name)
         addPEBCategories(context, config)
+    logger.info("Migrated PEB categories")
 
 def migrateReferenceNumerotation(context):
     """
@@ -1002,6 +1005,7 @@ def migrateReferenceNumerotation(context):
         config = getattr(portal_urban, licence_type.lower())
         if hasattr(portal_urban, 'numerotationTALExpression'):
             config.setReferenceTALExpression(portal_urban.numerotationTALExpression)
-        if hasattr(portal_urban, '%sTALExpression' % licence_type):
+        if hasattr(portal_urban, '%sNumerotation' % licence_type):
             config.setNumerotation(getattr(portal_urban, '%sNumerotation' % licence_type))
+    logger.info("Migrated numerotation")
 
