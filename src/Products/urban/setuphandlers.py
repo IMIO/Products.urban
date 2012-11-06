@@ -754,7 +754,7 @@ def addPEBCategories(context, configFolder):
     """
       This method add default PEB categories
     """
-    site = context.getSite()
+    site = getToolByName(context, 'portal_url').getPortalObject()
     if not hasattr(aq_base(configFolder), 'pebcategories'):
         newFolderid = configFolder.invokeFactory("Folder",id="pebcategories",title=_("pebcategories_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(configFolder, newFolderid)
