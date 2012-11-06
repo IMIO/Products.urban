@@ -1,0 +1,8 @@
+History
+=======
+
+1.1.6 (unreleased)
+------------------
+#4764 added style 'UrbanAdress' used to customize style in the adress field of documents
+
+* Init Rls for plone3
