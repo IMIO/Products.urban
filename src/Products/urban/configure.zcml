@@ -26,6 +26,7 @@
 
   <include package=".events" />
   <include package=".browser" />
+  <include package=".migration" />
 
   <include file="grok.zcml" />
 
