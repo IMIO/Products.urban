@@ -104,6 +104,8 @@ def migrateParcellingsFolder(context):
     portal_urban = getToolByName(site, 'portal_urban')
 
     if not hasattr(portal_urban, 'parcellings'): return
+    if hasattr(site.urban, 'parcellings'):
+        site.urban.manage_delObjects(['parcellings'])
     cut_data = portal_urban.manage_cutObjects(['parcellings',])
     site.urban.manage_pasteObjects(cut_data)
 
