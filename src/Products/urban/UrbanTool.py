@@ -336,7 +336,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 #we render the template so pod instructions into the generic sub-templates are rendered too
                 renderer = appy.pod.renderer.Renderer(template,
                                                       {'self': licenceFolder, 'urbanEventObj':urbanEventObj,
-                                                       'applicantobj':applicantobj,'recepisseobj':recepisseobj,
+                                                       'applicantobj':applicantobj, 'recepisseobj':recepisseobj,
+                                                       'tool':self,
                                                        'collegesubmissionobj':collegesubmissionobj,},
                                                       temp_file_name, pythonWithUnoPath=self.getUnoEnabledPython())
                 renderer.run()
