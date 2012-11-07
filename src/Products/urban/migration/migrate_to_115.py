@@ -97,7 +97,7 @@ def migrateKeyDates(context):
 
 def migrateParcellingsFolder(context):
     """
-    cut and paste the folder pacrellings from './portal_urba' to './urban'
+    cut and paste the folder parcellings from './portal_urban' to './urban'
     change the layout name of the notaries, geometricians, architects and parcellings folders
     """
     site = getToolByName(context, 'portal_url').getPortalObject()
@@ -114,7 +114,7 @@ def migrateParcellingsFolder(context):
 
 def migratePEBCategories(context):
     """
-    Create pebcategories folders and their default values in bulidlicence and parceloutlicence configs
+    Create pebcategories folders and their default values in buildlicence and parceloutlicence configs
     """
     site = getToolByName(context, 'portal_url').getPortalObject()
     portal_urban = getToolByName(site, 'portal_urban')
