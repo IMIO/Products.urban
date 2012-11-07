@@ -74,7 +74,7 @@ class LicenceView(BrowserView):
                     }) for date in keydates])
         # now check each event to see if its a key Event, if yes, we gather the key date values found on this event
         linked_eventtype_field = UrbanEventInquiry_schema.get('urbaneventtypes')
-        for event_brain in catalog(path={'query':context.absolute_url_path()}, object_provides=IUrbanEvent.__identifier__, sort_on='created', sort_order='descending'):
+        for event_brain in catalog(path={'query':'/'.join(context.getPhysicalPath())}, object_provides=IUrbanEvent.__identifier__, sort_on='created', sort_order='descending'):
             event = event_brain.getObject()
             eventtype_uid = linked_eventtype_field.getRaw(event)
             if eventtype_uid in dates.keys() and not dates[eventtype_uid].get('url', ''):
