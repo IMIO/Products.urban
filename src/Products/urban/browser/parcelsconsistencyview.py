@@ -55,19 +55,19 @@ class ParcelsConsistencyView(BrowserView):
         context = aq_inner(self.context)
         urban_tool = getToolByName(context, 'portal_urban')
         result = []
-        section=section.upper()
-        exposant=exposant.upper()
         query_string = "SELECT capa.da, divname, prc, section, radical, exposant, bis, puissance, sl1, na1,pe FROM map left join capa on map.capakey=capa.capakey left join da on capa.da = da.da "
         condition = ["WHERE "]
         if division != '':  #precise division selected
             condition.append('capa.da = %s' % division)
         if section:
+            section=section.upper()
             condition.append("section = '%s'" % section)
         if radical:
             condition.append("radical = "+radical)
         if bis:
             condition.append("bis = "+bis)
         if exposant:
+            exposant=exposant.upper()
             condition.append("exposant = '%s'" %exposant)
         if puissance:
             condition.append("puissance = "+puissance)
