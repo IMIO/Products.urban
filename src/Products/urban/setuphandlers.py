@@ -108,6 +108,7 @@ def postInstall(context):
                        'Architect': 1,
                        'UrbanCertificateOne': 1,
                        'UrbanCertificateTwo':1,
+                       'EnvClassThree': 1,
                        'NotaryLetter': 1,
                        'Notary': 1,
                        'Proprietary': 1,
@@ -754,7 +755,7 @@ def addPEBCategories(context, configFolder):
     """
       This method add default PEB categories
     """
-    site = getToolByName(context, 'portal_url').getPortalObject()
+    site = hasattr(context, 'getSite') and context.getSite() or getToolByName(context, 'portal_url').getPortalObject()
     if not hasattr(aq_base(configFolder), 'pebcategories'):
         newFolderid = configFolder.invokeFactory("Folder",id="pebcategories",title=_("pebcategories_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(configFolder, newFolderid)
@@ -941,13 +942,13 @@ def setDefaultApplicationSecurity(context):
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
         p_folder.manage_addLocalRoles("urban_readers", ("Reader",))
         p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-    #environmentaldeclarations folder : "urban_readers" can read and "urban_editors" can edit...
-    if hasattr(app_folder, "environmentaldeclarations"):
-        p_folder = getattr(app_folder, "environmentaldeclarations")
+    #envclassthrees folder : "urban_readers" can read and "urban_editors" can edit...
+    if hasattr(app_folder, "envclassthrees"):
+        p_folder = getattr(app_folder, "envclassthrees")
         #we add a property usefull for portal_urban.getUrbanConfig
         try:
             #we try in case we apply the profile again...
-            p_folder.manage_addProperty('urbanConfigId', 'environmentaldeclaration', 'string')
+            p_folder.manage_addProperty('urbanConfigId', 'envclassthree', 'string')
         except BadRequest:
             pass
         p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader",))
@@ -1477,6 +1478,8 @@ def addApplicationFolders(context):
                 #exception for some portal_types having a different meta_type
                 if urban_type in ['UrbanCertificateOne', 'NotaryLetter', ]:
                     newSubFolder.manage_permission('urban: Add UrbanCertificateBase', ['Manager', 'Editor', ], acquire=0)
+                if urban_type in ['EnvClassThree',]:
+                    newSubFolder.manage_permission('urban: Add EnvironmentBase', ['Manager', 'Editor', ], acquire=0)
 
     #add a folder that will contains architects
     if not hasattr(newFolder, "architects"):

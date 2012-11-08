@@ -114,10 +114,6 @@ class IUrbanCertificateTwo(Interface):
     """Marker interface for .UrbanCertificateTwo.UrbanCertificateTwo
     """
 
-class IEnvironmentalDeclaration(Interface):
-    """Marker interface for .EnvironmentalDeclaration.EnvironmentalDeclaration
-    """
-
 class IEquipment(Interface):
     """Marker interface for .Equipment.Equipment
     """
@@ -172,6 +168,10 @@ class IUrbanConfigurationValue(Interface):
 
 class IUrbanDoc(Interface):
     """Marker interface for .UrbanDoc.UrbanDoc
+    """
+
+class IEnvironmentBase(Interface):
+    """Marker interface for .EnvironmentBase.EnvironmentBase
     """
 
 ##code-section FOOT

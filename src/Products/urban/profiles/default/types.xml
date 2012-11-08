@@ -43,8 +43,6 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanCertificateTwo"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="EnvironmentalDeclaration"
-         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Equipment"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Lot"
@@ -73,6 +71,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanDoc"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="EnvironmentBase"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <!-- ##code-section TYPES -->
  <object name="Applicant"
          meta_type="Factory-based Type Information with dynamic views"/>
@@ -88,7 +88,7 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanCertificateOne"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanCertificateTwo"
+ <object name="EnvClassThree"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanDoc"
          meta_type="Factory-based Type Information with dynamic views"/>

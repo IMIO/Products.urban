@@ -100,7 +100,6 @@ def initialize(context):
     import City
     import UrbanCertificateBase
     import UrbanCertificateTwo
-    import EnvironmentalDeclaration
     import Equipment
     import Lot
     import Division
@@ -115,6 +114,7 @@ def initialize(context):
     import MiscDemand
     import UrbanConfigurationValue
     import UrbanDoc
+    import EnvironmentBase
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

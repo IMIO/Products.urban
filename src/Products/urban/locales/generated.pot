@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Tue Oct 30 14:00:29 2012\n"
-"PO-Revision-Date: Tue Oct 30 14:00:29 2012\n"
+"POT-Creation-Date: Thu Nov  8 08:47:06 2012\n"
+"PO-Revision-Date: Thu Nov  8 08:47:06 2012\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -39,11 +39,6 @@ msgstr ""
 #. Default: "Select the specific features from the left box and drop them in the right box to select them"
 #: UrbanCertificateBase.py
 msgid "certificateone_townshipspecificfeatures_descr"
-msgstr ""
-
-#. Default: "Please enter one subject by line with the following format : xx.xx.xx.xx"
-#: EnvironmentalDeclaration.py
-msgid "envionmentaldeclaration_subjects_descr"
 msgstr ""
 
 #. Default: "OpenOfficePort"
@@ -432,11 +427,6 @@ msgstr ""
 #. Default: "Fax"
 #: Contact.py
 msgid "urban_label_fax"
-msgstr ""
-
-#. Default: "Finality"
-#: EnvironmentalDeclaration.py
-msgid "urban_label_finality"
 msgstr ""
 
 #. Default: "Floodinglevel"
@@ -856,7 +846,6 @@ msgid "urban_label_receivedDocumentReference"
 msgstr ""
 
 #. Default: "Reference"
-#: EnvironmentalDeclaration.py
 #: GenericLicence.py
 msgid "urban_label_reference"
 msgstr ""
@@ -1027,11 +1016,6 @@ msgstr ""
 msgid "urban_label_subdivisionDetails"
 msgstr ""
 
-#. Default: "Subjects"
-#: EnvironmentalDeclaration.py
-msgid "urban_label_subjects"
-msgstr ""
-
 #. Default: "Surface"
 #: Lot.py
 msgid "urban_label_surface"
@@ -1105,7 +1089,6 @@ msgid "urban_label_webServerHost"
 msgstr ""
 
 #. Default: "Worklocations"
-#: EnvironmentalDeclaration.py
 #: GenericLicence.py
 msgid "urban_label_workLocations"
 msgstr ""

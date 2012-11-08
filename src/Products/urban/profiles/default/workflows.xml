@@ -19,7 +19,7 @@
   <type type_id="Dummy">
    <bound-workflow workflow_id="activation_workflow" />
   </type>
-  <type type_id="EnvironmentalDeclaration">
+  <type type_id="EnvironmentBase">
    <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="FolderManager">

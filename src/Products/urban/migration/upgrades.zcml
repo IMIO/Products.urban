@@ -14,7 +14,7 @@
     <gs:upgradeStep
         title="Upgrade urban to 1.1.5"
         description="urban upgrade step"
-        source="*"
+        source="1.1.4"
         destination="1.1.5"
         handler=".migrate_to_115.migrateToUrban115"
         profile="Products.urban:default" />

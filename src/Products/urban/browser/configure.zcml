@@ -189,6 +189,22 @@
      permission="zope2.View"
   />
 
+  <browser:page
+     for="Products.urban.interfaces.IEnvironmentBase"
+     name="envclassthreeview"
+     class=".envclassthreeview.EnvClassThreeView"
+     template="templates/envclassthreeview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="envclassthree-macros"
+     for="Products.urban.interfaces.IEnvironmentBase"
+     class=".envclassthreeview.EnvClassThreeMacros"
+     template="templates/envclassthreemacros.pt"
+     permission="zope2.View"
+  />
+
    <browser:page
      for="Products.urban.interfaces.IMiscDemand"
      name="miscdemandview"

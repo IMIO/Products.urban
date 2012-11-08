@@ -1,47 +1,46 @@
 <?xml version="1.0"?>
-<object name="EnvironmentalDeclaration"
+<object name="EnvClassThree"
         meta_type="Factory-based Type Information with dynamic views"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         i18n:domain="plone">
-   
- <property name="title" i18n:translate="">EnvironmentalDeclaration</property>
+
+ <property name="title" i18n:translate="">EnvClassThree</property>
  <property name="description" i18n:translate=""></property>
- <property name="content_meta_type">EnvironmentalDeclaration</property>
+ <property name="content_meta_type">EnvironmentBase</property>
  <property name="product">urban</property>
- <property name="factory">addEnvironmentalDeclaration</property>
- <property name="immediate_view">folder_listing</property>
- <property name="global_allow">False</property>
+ <property name="factory">addEnvironmentBase</property>
+ <property name="immediate_view">envclassthreeview</property>
+ <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
-   <element value="Applicant"/>
+   <element value="Proprietary"/>
+   <element value="PortionOut"/>
+   <element value="UrbanEvent"/>
+   <element value="WorkLocation"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">environmentaldeclaration_view</property>
+ <property name="default_view">envclassthreeview</property>
  <property name="view_methods">
-  <element value="folder_summary_view"/>
-  <element value="folder_tabular_view"/>
-  <element value="atct_album_view"/>
-  <element value="folder_listing"/>
-  <element value="environmentaldeclaration_view"/>
+  <element value="envclassthreeview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
- <alias from="view" to="(selected layout)"/>
+ <alias from="view" to="envclassthreeview"/>
  <alias from="edit" to="base_edit"/>
  <alias from="sharing" to="@@sharing"/>
- <action title="View" 
+ <action title="View"
          action_id="view"
-         category="object" 
+         category="object"
          condition_expr=""
-         url_expr="string:${object_url}/environmentaldeclaration_view" 
+         url_expr="string:${object_url}/view"
          visible="True">
   <permission value="View"/>
  </action>
- <action title="Edit" 
+ <action title="Edit"
          action_id="edit"
-         category="object" 
+         category="object"
          condition_expr="python:context.mayShowEditAction()"
-         url_expr="string:${object_url}/edit" 
+         url_expr="string:${object_url}/edit"
          visible="True">
   <permission value="Modify portal content"/>
  </action>

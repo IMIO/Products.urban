@@ -54,7 +54,6 @@ ADD_CONTENT_PERMISSIONS = {
     'City': 'urban: Add City',
     'UrbanCertificateBase': 'urban: Add UrbanCertificateBase',
     'UrbanCertificateTwo': 'urban: Add UrbanCertificateTwo',
-    'EnvironmentalDeclaration': 'urban: Add EnvironmentalDeclaration',
     'Equipment': 'urban: Add Equipment',
     'Lot': 'urban: Add Lot',
     'Division': 'urban: Add Division',
@@ -69,6 +68,7 @@ ADD_CONTENT_PERMISSIONS = {
     'MiscDemand': 'urban: Add MiscDemand',
     'UrbanConfigurationValue': 'urban: Add UrbanConfigurationValue',
     'UrbanDoc': 'urban: Add UrbanDoc',
+    'EnvironmentBase': 'urban: Add EnvironmentBase',
 }
 
 setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
@@ -91,7 +91,6 @@ setDefaultRoles('urban: Add PcaTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add City', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanCertificateBase', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanCertificateTwo', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add EnvironmentalDeclaration', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Equipment', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Lot', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Division', ("Manager", "Contributor"))
@@ -105,6 +104,7 @@ setDefaultRoles('urban: Add OrganisationTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanConfigurationValue',  ('Manager', ))
 setDefaultRoles('urban: Add UrbanDoc', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add EnvironmentBase', ("Manager", "Contributor"))
 
 product_globals = globals()
 
@@ -131,7 +131,8 @@ DEPENDENCIES = []
 ADDITIONAL_LAYERS_FOLDER="additional_layers"
 
 #a list where first element is the meetingConfigId and the second, the meta_type name
-URBAN_TYPES = ['BuildLicence','ParcelOutLicence','Declaration', 'Division', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'EnvironmentalDeclaration', 'MiscDemand', ]
+URBAN_TYPES = ['BuildLicence','ParcelOutLicence','Declaration', 'Division', 'UrbanCertificateOne', 'UrbanCertificateTwo',
+               'NotaryLetter', 'MiscDemand', 'EnvClassThree']
 
 #the different templates used to structure a document
 GLOBAL_TEMPLATES = [

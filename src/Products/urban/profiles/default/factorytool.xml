@@ -21,7 +21,6 @@
   <type portal_type="City"/>
   <type portal_type="UrbanCertificateBase"/>
   <type portal_type="UrbanCertificateTwo"/>
-  <type portal_type="EnvironmentalDeclaration"/>
   <type portal_type="Equipment"/>
   <type portal_type="Lot"/>
   <type portal_type="Division"/>
@@ -36,5 +35,6 @@
   <type portal_type="MiscDemand"/>
   <type portal_type="UrbanConfigurationValue"/>
   <type portal_type="UrbanDoc"/>
+  <type portal_type="EnvironmentBase"/>
  </factorytypes>
 </object>
