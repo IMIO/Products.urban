@@ -256,47 +256,48 @@ if step in run_steps:
     print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
     for tablename in tablenames:
         print "Processing table %d/%d ('%s')" % (tablenames.index(tablename)+1, len(tablenames), tablename)
+        tnl = tablename.lower()
         try:
-            os.remove(tablename.lower()+'.sql')
+            os.remove('%s.sql'%tnl)
         except:
             pass
-        os.system('mdb-export -I ck03out.mdb '+tablename+' > '+tablename.lower()+'temp.sql')
-        commandesed= 'sed "s/\\x27/\\\'\\\'/g" '+tablename.lower()+'temp.sql >'+tablename.lower()+'temp1.sql'
+        os.system('mdb-export -I ck03out.mdb %s > %s_temp.sql'%(tnl, tnl))
+        commandesed= 'sed "s/\\x27/\\\'\\\'/g" %s_temp.sql >%s_temp1.sql'%(tnl, tnl)
         os.system(commandesed)
-        commandesed= 'sed "s/\\x22/\\\'/g" '+tablename.lower()+'temp1.sql >'+tablename.lower()+'temp2.sql'
-        os.system(commandesed)    
+        commandesed= 'sed "s/\\x22/\\\'/g" %s_temp1.sql >%s_temp2.sql'%(tnl, tnl)
+        os.system(commandesed)
         if tablename=='PRC':
-            commandesed= 'sed "s/in,/\\\"in\\\",/g" '+tablename.lower()+'temp2.sql >'+tablename.lower()+'temp3.sql'
+            commandesed= 'sed "s/in,/\\\"in\\\",/g" %s_temp2.sql >%s_temp3.sql'%(tnl, tnl)
             os.system(commandesed)
-            commandesed= 'sed "s/14, 56,/n14, n56,/g" '+tablename.lower()+'temp3.sql >'+tablename.lower()+'temp4.sql'
+            commandesed= 'sed "s/14, 56,/n14, n56,/g" %s_temp3.sql >%s_temp4.sql'%(tnl, tnl)
             os.system(commandesed)        
-            commandesed='sed \'s/$/;/\' '+tablename.lower()+'temp4.sql >'+tablename.lower()+'.sql'
+            commandesed='sed "s/$/;/" %s_temp4.sql >%s.sql'%(tnl, tnl)
             os.system(commandesed)
-            os.remove(tablename.lower()+'temp3.sql')
-            os.remove(tablename.lower()+'temp4.sql')        
+            os.remove('%s_temp3.sql'%tnl)
+            os.remove('%s_temp4.sql'%tnl)        
         elif tablename=='PE':
-            commandesed= 'sed "s/, dr+/, dr2/g" '+tablename.lower()+'temp2.sql >'+tablename.lower()+'temp3.sql'
+            commandesed= 'sed "s/, dr+/, dr2/g" %s_temp2.sql >%s_temp3.sql'%(tnl, tnl)
             os.system(commandesed)            
-            commandesed='sed \'s/$/;/\' '+tablename.lower()+'temp3.sql >'+tablename.lower()+'.sql'
+            commandesed='sed "s/$/;/" %s_temp3.sql >%s.sql'%(tnl, tnl)
             os.system(commandesed)
-            os.remove(tablename.lower()+'temp3.sql')            
+            os.remove('%s_temp3.sql'%tnl)            
         elif tablename=='MAP':
-            commandesed= 'sed "s/, pe+/, pe2/g" '+tablename.lower()+'temp2.sql >'+tablename.lower()+'temp3.sql'
+            commandesed= 'sed "s/, pe+/, pe2/g" %s_temp2.sql >%s_temp3.sql'%(tnl, tnl)
             os.system(commandesed)            
-            commandesed= 'sed "s/, prc+/, prc2/g" '+tablename.lower()+'temp3.sql >'+tablename.lower()+'temp4.sql'
+            commandesed= 'sed "s/, prc+/, prc2/g" %s_temp3.sql >%s_temp4.sql'%(tnl, tnl)
             os.system(commandesed)            
-            commandesed='sed \'s/$/;/\' '+tablename.lower()+'temp4.sql >'+tablename.lower()+'.sql'
+            commandesed='sed \'s/$/;/\' %s_temp4.sql >%s.sql'%(tnl, tnl)
             os.system(commandesed)
-            os.remove(tablename.lower()+'temp3.sql')            
-            os.remove(tablename.lower()+'temp4.sql')
+            os.remove('%s_temp3.sql'%tnl)            
+            os.remove('%s_temp4.sql'%tnl)
         else:
-            commandesed='sed \'s/$/;/\' '+tablename.lower()+'temp2.sql >'+tablename.lower()+'.sql'
+            commandesed='sed "s/$/;/" %s_temp2.sql >%s.sql'%(tnl, tnl)
             os.system(commandesed)
-        os.remove(tablename.lower()+'temp.sql')
-        os.remove(tablename.lower()+'temp1.sql')
-        os.remove(tablename.lower()+'temp2.sql')
+        os.remove('%s_temp.sql'%tnl)
+        os.remove('%s_temp1.sql'%tnl)
+        os.remove('%s_temp2.sql'%tnl)
         if not ((tablename=='DA') and (action=='update')):
-            os.system('psql -q -d '+databasename+' -f '+tablename.lower()+'.sql')
+            os.system('psql -q -d '+databasename+' -f %s.sql'%tnl)
         if tablename=='DA' and action == 'new':
             dict_cur.execute('ALTER TABLE da ADD COLUMN divname character varying(50);')
             dict_cur.execute('select da, dan1 from da;')
