@@ -30,6 +30,19 @@ optional_fields =[]
 
 schema = Schema((
 
+    TextField(
+        name='businessDescription',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Businessdescription',
+            label_msgid='urban_label_businessDescription',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_description',
+        default_output_type='text/html',
+    ),
 
 ),
 )
@@ -73,6 +86,8 @@ class EnvironmentBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     # Methods
 
+    # Manually created methods
+
     security.declarePublic('at_post_create_script')
     def at_post_create_script(self):
         """
@@ -101,6 +116,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
             return None
 
 
+
 registerType(EnvironmentBase, PROJECTNAME)
 # end of class EnvironmentBase
 
@@ -110,7 +126,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
        Finalizes the type schema to alter some fields
     """
     schema.moveField('foldermanagers', after='workLocations')
-    schema.moveField('description', after='foldermanagers')
+    schema.moveField('businessDescription', after='foldermanagers')
+    schema.moveField('description', after='businessDescription')
     return schema
 
 finalizeSchema(EnvironmentBase_schema)

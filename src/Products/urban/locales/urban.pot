@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-11-08 08:56+0000\n"
+"POT-Creation-Date: 2012-11-08 15:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -481,11 +481,6 @@ msgid "envclassthree_searchrefusedlicences"
 msgstr ""
 
 msgid "envclassthree_searchretiredlicences"
-msgstr ""
-
-#. Default: "Please enter one subject by line with the following format : xx.xx.xx.xx"
-#: EnvClassThree.py
-msgid "envclassthree_subjects_descr"
 msgstr ""
 
 msgid "envclassthree_urbanconfig_title"
@@ -1377,6 +1372,11 @@ msgstr ""
 #: Address.py
 #: Contact.py
 msgid "urban_label_box"
+msgstr ""
+
+#. Default: "Businessdescription"
+#: EnvironmentBase.py
+msgid "urban_label_businessDescription"
 msgstr ""
 
 #. Default: "Catchmentarea"

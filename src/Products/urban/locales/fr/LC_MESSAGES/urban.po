@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2012-11-08 08:56+0000\n"
+"POT-Creation-Date: 2012-11-08 15:15+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -483,11 +483,6 @@ msgstr "déclarations environnementales refusées"
 
 msgid "envclassthree_searchretiredlicences"
 msgstr "déclarations environnementales retirées"
-
-#. Default: "Please enter one subject by line with the following format : xx.xx.xx.xx"
-#: EnvClassThree.py
-msgid "envclassthree_subjects_descr"
-msgstr ""
 
 msgid "envclassthree_urbanconfig_title"
 msgstr "Paramètres des déclarations environnementales"
@@ -1379,6 +1374,11 @@ msgstr "Bis"
 #: Contact.py
 msgid "urban_label_box"
 msgstr "Boîte"
+
+#. Default: "Businessdescription"
+#: EnvironmentBase.py
+msgid "urban_label_businessDescription"
+msgstr "Description de l'établissement"
 
 #. Default: "Catchmentarea"
 #: GenericLicence.py

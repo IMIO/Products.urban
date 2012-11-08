@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Thu Nov  8 08:47:06 2012\n"
-"PO-Revision-Date: Thu Nov  8 08:47:06 2012\n"
+"POT-Creation-Date: Thu Nov  8 16:15:10 2012\n"
+"PO-Revision-Date: Thu Nov  8 16:15:10 2012\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -250,6 +250,11 @@ msgstr ""
 #. Default: "Bis"
 #: PortionOut.py
 msgid "urban_label_bis"
+msgstr ""
+
+#. Default: "Businessdescription"
+#: EnvironmentBase.py
+msgid "urban_label_businessDescription"
 msgstr ""
 
 #. Default: "Catchmentarea"

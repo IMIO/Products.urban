@@ -51,6 +51,14 @@
       <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategory', mode='view')" /></td>
      </tr>
      <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_businessDescription">Business description</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top">
+       <metal:myfield use-macro="python:here.widget('businessDescription', mode='view')" />
+       <span tal:condition="not: context/getBusinessDescription" class="discreet" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
       <td valign="top"><b><span i18n:translate="urban_label_description">Description</span>:</b></td>
       <td width="2%"></td>
       <td valign="top">
