@@ -311,7 +311,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         if not self.portal_type in ['Applicant', 'Proprietary', ]:
             return
         parent = self.getParentNode()
-        if parent.portal_type in ["Declaration", "BuildLicence", "ParcelOutLicence", "UrbanCertificateOne", "UrbanCertificateTwo", "NotaryLetter", "EnvironmentalDeclaration", "Division", "MiscDemand", ]:
+        if parent.portal_type in ["Declaration", "BuildLicence", "ParcelOutLicence", "UrbanCertificateOne", "UrbanCertificateTwo", "NotaryLetter", "EnvClassThree", "Division", "MiscDemand", ]:
             parent.at_post_edit_script()
 
     security.declarePublic('getSignaletic')

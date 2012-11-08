@@ -40,7 +40,7 @@ msgstr "Contact"
 msgid "Declaration"
 msgstr "Déclaration"
 
-msgid "EnvironmentalDeclaration"
+msgid "EnvClassThree"
 msgstr "Déclaration environnementale"
 
 msgid "FolderManager"

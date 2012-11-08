@@ -652,7 +652,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
                     },
                    ),
-                   'environmentaldeclaration':
+                   'envclassthree':
                    (
                     {
                     'id': "premier-envoi",

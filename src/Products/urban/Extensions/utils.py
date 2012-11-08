@@ -55,7 +55,7 @@ def urban_check_addresses(self, restore='',  missing=''):
     save_file = os.path.join(home, '../../saved_addresses.txt') # root of the buildout
     load_dic(save_file, saved)
 
-    brains = site.portal_catalog(portal_type = ['BuildLicence', 'Declaration', 'Division', 'EnvironmentalDeclaration', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'ParcelOutLicence'])
+    brains = site.portal_catalog(portal_type = ['BuildLicence', 'Declaration', 'Division', 'EnvClassThree', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'ParcelOutLicence'])
     count_db_lic = count_db_good = count_db_bad =count_db_ns = count_fl_good = count_fl_rest = count_fl_new = 0
     for brain in brains:
         count_db_lic += 1

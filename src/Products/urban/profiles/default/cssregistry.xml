@@ -41,7 +41,7 @@
              compression="safe"
              cookable="True"
              enabled="1"
-             expression="python: here.meta_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanEvent', 'PortionOut', 'Contact', 'UrbanCertificateBase', 'UrbanCertificateTwo', 'Declaration', 'Division', 'EnvironmentalDeclaration', ]"
+             expression="python: here.meta_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanEvent', 'PortionOut', 'Contact', 'UrbanCertificateBase', 'UrbanCertificateTwo', 'Declaration', 'Division', 'EnvironmentBase', ]"
              id="urban_hide_columnone.css"
              media="all"
              rel="stylesheet"
