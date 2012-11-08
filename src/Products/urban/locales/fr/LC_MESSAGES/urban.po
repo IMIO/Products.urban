@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2012-10-30 13:02+0000\n"
+"POT-Creation-Date: 2012-11-08 08:56+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -57,6 +57,9 @@ msgstr "Division"
 
 msgid "Edit"
 msgstr "Modifier le permis"
+
+msgid "EnvClassThree"
+msgstr "Déclaration environnementale"
 
 msgid "Found folder(s)"
 msgstr "Dossier(s) trouvé(s)"
@@ -211,7 +214,7 @@ msgstr "Ajouter une déclaration"
 msgid "add_Division"
 msgstr "Ajouter une division"
 
-msgid "add_EnvironmentalDeclaration"
+msgid "add_EnvClassThree"
 msgstr "Ajouter une déclaration environnementale"
 
 # referencebrowser.pt
@@ -462,33 +465,33 @@ msgstr "Divisions"
 msgid "effective_closing_date"
 msgstr "Date de clôture"
 
+msgid "envclassthree_searchacceptedlicences"
+msgstr "déclarations environnementales acceptées"
+
+msgid "envclassthree_searchalllicences"
+msgstr "toutes les déclarations environnementales"
+
+msgid "envclassthree_searchincompletelicences"
+msgstr "déclarations environnementales incomplètes"
+
+msgid "envclassthree_searchinprogresslicences"
+msgstr "déclarations environnementales en cours"
+
+msgid "envclassthree_searchrefusedlicences"
+msgstr "déclarations environnementales refusées"
+
+msgid "envclassthree_searchretiredlicences"
+msgstr "déclarations environnementales retirées"
+
 #. Default: "Please enter one subject by line with the following format : xx.xx.xx.xx"
-#: EnvironmentalDeclaration.py
-msgid "envionmentaldeclaration_subjects_descr"
-msgstr "Entrez une rubrique par ligne en respectant le format xx.xx.xx.xx"
+#: EnvClassThree.py
+msgid "envclassthree_subjects_descr"
+msgstr ""
 
-msgid "environmentaldeclaration_searchacceptedlicences"
-msgstr "Déclaration environnementale acceptées"
+msgid "envclassthree_urbanconfig_title"
+msgstr "Paramètres des déclarations environnementales"
 
-msgid "environmentaldeclaration_searchalllicences"
-msgstr "Toutes les déclaration environnementale"
-
-msgid "environmentaldeclaration_searchincompletelicences"
-msgstr "Déclaration environnementale incomplètes"
-
-msgid "environmentaldeclaration_searchinprogresslicences"
-msgstr "Déclaration environnementale en cours"
-
-msgid "environmentaldeclaration_searchrefusedlicences"
-msgstr "Déclaration environnementale refusées"
-
-msgid "environmentaldeclaration_searchretiredlicences"
-msgstr "Déclaration environnementale retirées"
-
-msgid "environmentaldeclaration_urbanconfig_title"
-msgstr "Paramètres des Déclarations environnementales"
-
-msgid "environmentaldeclarations"
+msgid "envclassthrees"
 msgstr "Déclarations environnementales"
 
 msgid "error_in_expr_contact_admin"
@@ -1198,7 +1201,7 @@ msgstr "Numérotation des divisions"
 
 #. Default: "Environmentaldeclarationnumerotation"
 #: UrbanTool.py
-msgid "urban_label_EnvironmentalDeclarationNumerotation"
+msgid "urban_label_EnvClassThreeNumerotation"
 msgstr "Numérotation des déclarations environnementales"
 
 #. Default: "Equipmenttype"
@@ -1614,7 +1617,7 @@ msgid "urban_label_filter"
 msgstr "Filtre"
 
 #. Default: "Finality"
-#: EnvironmentalDeclaration.py
+#: EnvClassThree.py
 msgid "urban_label_finality"
 msgstr "Nature de l'établissement"
 
@@ -2356,7 +2359,7 @@ msgid "urban_label_subdivisionDetails"
 msgstr "Détails sur le lotissement"
 
 #. Default: "Subjects"
-#: EnvironmentalDeclaration.py
+#: EnvClassThree.py
 msgid "urban_label_subjects"
 msgstr "Rubriques"
 
@@ -2504,7 +2507,7 @@ msgstr "Numéro et boîte"
 #. Default: "street"
 #: Declaration.py
 #: Division.py
-#: EnvironmentalDeclaration.py
+#: EnvClassThree.py
 msgid "urban_label_workLocations"
 msgstr "Adresse(s) des travaux"
 

@@ -73,10 +73,46 @@ class EnvironmentBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     # Methods
 
+    security.declarePublic('at_post_create_script')
+    def at_post_create_script(self):
+        """
+           Post create hook...
+           XXX This should be replaced by a zope event...
+        """
+        super(GenericLicence).__thisclass__.at_post_create_script(self)
+
+    def at_post_edit_script(self):
+        """
+           Post edit hook...
+           XXX This should be replaced by a zope event...
+        """
+        super(GenericLicence).__thisclass__.at_post_edit_script(self)
+
+    security.declarePublic('getAdditionalLayers')
+    def getAdditionalLayers(self):
+        """
+          Return a list of additional layers that will be used
+          when generating the mapfile
+        """
+        try:
+            additionalLayersFolder = getattr(self, ADDITIONAL_LAYERS_FOLDER)
+            return additionalLayersFolder.objectValues('Layer')
+        except AttributeError:
+            return None
+
 
 registerType(EnvironmentBase, PROJECTNAME)
 # end of class EnvironmentBase
 
 ##code-section module-footer #fill in your manual code here
+def finalizeSchema(schema, folderish=False, moveDiscussion=True):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('foldermanagers', after='workLocations')
+    schema.moveField('description', after='foldermanagers')
+    return schema
+
+finalizeSchema(EnvironmentBase_schema)
 ##/code-section module-footer
 

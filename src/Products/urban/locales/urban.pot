@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-10-30 13:02+0000\n"
+"POT-Creation-Date: 2012-11-08 08:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,6 +55,10 @@ msgid "Division"
 msgstr ""
 
 msgid "Edit"
+msgstr ""
+
+#. Default: "Déclaration environnementale"
+msgid "EnvClassThree"
 msgstr ""
 
 msgid "Found folder(s)"
@@ -210,7 +214,7 @@ msgstr ""
 msgid "add_Division"
 msgstr ""
 
-msgid "add_EnvironmentalDeclaration"
+msgid "add_EnvClassThree"
 msgstr ""
 
 # referencebrowser.pt
@@ -461,33 +465,33 @@ msgstr ""
 msgid "effective_closing_date"
 msgstr ""
 
+msgid "envclassthree_searchacceptedlicences"
+msgstr ""
+
+msgid "envclassthree_searchalllicences"
+msgstr ""
+
+msgid "envclassthree_searchincompletelicences"
+msgstr ""
+
+msgid "envclassthree_searchinprogresslicences"
+msgstr ""
+
+msgid "envclassthree_searchrefusedlicences"
+msgstr ""
+
+msgid "envclassthree_searchretiredlicences"
+msgstr ""
+
 #. Default: "Please enter one subject by line with the following format : xx.xx.xx.xx"
-#: EnvironmentalDeclaration.py
-msgid "envionmentaldeclaration_subjects_descr"
+#: EnvClassThree.py
+msgid "envclassthree_subjects_descr"
 msgstr ""
 
-msgid "environmentaldeclaration_searchacceptedlicences"
+msgid "envclassthree_urbanconfig_title"
 msgstr ""
 
-msgid "environmentaldeclaration_searchalllicences"
-msgstr ""
-
-msgid "environmentaldeclaration_searchincompletelicences"
-msgstr ""
-
-msgid "environmentaldeclaration_searchinprogresslicences"
-msgstr ""
-
-msgid "environmentaldeclaration_searchrefusedlicences"
-msgstr ""
-
-msgid "environmentaldeclaration_searchretiredlicences"
-msgstr ""
-
-msgid "environmentaldeclaration_urbanconfig_title"
-msgstr ""
-
-msgid "environmentaldeclarations"
+msgid "envclassthrees"
 msgstr ""
 
 msgid "error_in_expr_contact_admin"
@@ -1197,7 +1201,7 @@ msgstr ""
 
 #. Default: "Environmentaldeclarationnumerotation"
 #: UrbanTool.py
-msgid "urban_label_EnvironmentalDeclarationNumerotation"
+msgid "urban_label_EnvClassThreeNumerotation"
 msgstr ""
 
 #. Default: "Equipmenttype"
@@ -1611,7 +1615,7 @@ msgid "urban_label_filter"
 msgstr ""
 
 #. Default: "Finality"
-#: EnvironmentalDeclaration.py
+#: EnvClassThree.py
 msgid "urban_label_finality"
 msgstr ""
 
@@ -2353,7 +2357,7 @@ msgid "urban_label_subdivisionDetails"
 msgstr ""
 
 #. Default: "Subjects"
-#: EnvironmentalDeclaration.py
+#: EnvClassThree.py
 msgid "urban_label_subjects"
 msgstr ""
 
@@ -2500,7 +2504,7 @@ msgstr ""
 #. Default: "street"
 #: Declaration.py
 #: Division.py
-#: EnvironmentalDeclaration.py
+#: EnvClassThree.py
 msgid "urban_label_workLocations"
 msgstr ""
 
