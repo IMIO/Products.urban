@@ -636,7 +636,7 @@ def addUrbanConfigs(context):
                 #now, we need to specify that the description's mimetype is 'text/html'
                 setHTMLContentType(newFolder, 'description')
 
-        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', ]:
+        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'EnvClassThree']:
             if not hasattr(aq_base(configFolder), 'missingparts'):
                 #add "missingparts" folder
                 newFolderid = configFolder.invokeFactory("Folder",id="missingparts",title=_("missingparts_folder_title", 'urban', context=site.REQUEST))
@@ -659,6 +659,10 @@ def addUrbanConfigs(context):
                     #necessary documents for UrbanCertificates
                     newFolder.invokeFactory("UrbanVocabularyTerm",id="form_demande",title=u"Formulaire de demande (formulaire 1A) en 3 exemplaires")
                     newFolder.invokeFactory("UrbanVocabularyTerm",id="extrait_cadastral",title=u"Extrait cadastral en 3 exemplaires")
+                if urban_type in ['EnvClassThree',]:
+                    #necessary documents for environment licences
+                    newFolder.invokeFactory("UrbanVocabularyTerm",id="form_demande",title=u"Formulaire de demande en 4 exemplaires")
+                    newFolder.invokeFactory("UrbanVocabularyTerm",id="plan",title=u"Plans")
 
         if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo']:
             #add investigation articles folder
@@ -750,6 +754,18 @@ def addUrbanConfigs(context):
             #this is done by a method because the migrateToUrban115
             #migration step will use it too
             addPEBCategories(context, configFolder)
+
+        if urban_type in ['EnvClassThree',]:
+            site = hasattr(context, 'getSite') and context.getSite() or getToolByName(context, 'portal_url').getPortalObject()
+            if not hasattr(aq_base(configFolder), 'inadmissibilityreasons'):
+                newFolderid = configFolder.invokeFactory("Folder",id="inadmissibilityreasons",title=_("inadmissibilityreasons_folder_title", 'urban', context=site.REQUEST))
+                newFolder = getattr(configFolder, newFolderid)
+                newFolder.setConstrainTypesMode(1)
+                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="missing_parts",title=u"Pièces/renseignements manquants")
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="no_deposit_receipt",title=u"Le dossier n'a pas été déposé contre récipissé")
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="no_recommanded_deposit",title=u"Le dossier n'a pas été envoyé par recommandé")
 
 def addPEBCategories(context, configFolder):
     """

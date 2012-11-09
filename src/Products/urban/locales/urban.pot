@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-11-08 15:15+0000\n"
+"POT-Creation-Date: 2012-11-09 07:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -638,6 +638,9 @@ msgstr ""
 
 #. Default: "Choose one of the following forms to search for parcels.  You can cumulate criteria if you exactly know what you are looking for"
 msgid "help_search_parcels"
+msgstr ""
+
+msgid "inadmissibilityreasons_folder_title"
 msgstr ""
 
 msgid "inquiry_data"
@@ -1692,6 +1695,11 @@ msgstr ""
 #. Default: "Implantation"
 #: BuildLicence.py
 msgid "urban_label_implantation"
+msgstr ""
+
+#. Default: "Inadmissibilityreasons"
+#: EnvironmentBase.py
+msgid "urban_label_inadmissibilityReasons"
 msgstr ""
 
 #. Default: "Initials"

@@ -24,8 +24,9 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.urban.utils import setOptionalAttributes
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
-optional_fields =[]
+optional_fields =['inadmissibilityReasons']
 ##/code-section module-header
 
 schema = Schema((
@@ -42,6 +43,19 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_description',
         default_output_type='text/html',
+    ),
+    LinesField(
+        name='inadmissibilityReasons',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Inadmissibilityreasons',
+            label_msgid='urban_label_inadmissibilityReasons',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        multiValued=1,
+        vocabulary=UrbanVocabulary(path='inadmissibilityreasons', sort_on='sortable_title'),
+        default_method='getDefaultValue',
     ),
 
 ),
@@ -127,7 +141,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField('foldermanagers', after='workLocations')
     schema.moveField('businessDescription', after='foldermanagers')
-    schema.moveField('description', after='businessDescription')
+    schema.moveField('missingParts', after='inadmissibilityReasons')
     return schema
 
 finalizeSchema(EnvironmentBase_schema)
