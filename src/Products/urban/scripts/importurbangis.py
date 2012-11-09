@@ -262,6 +262,16 @@ if step in run_steps:
         except:
             pass
         os.system("mdb-export -I -q \\' ck03out.mdb %s > %s_temp.sql"%(tnl, tnl))
+        # we remove the doublequotes wrapping table name and columns names
+        commandesed= 'sed "h;s/^.* VALUES //;x;s/^\(.* VALUES \).*/\1/;s/\x22//g;G;s/\n//" %s_temp.sql >%s_temp3.sql'%(tnl, tnl)
+        # h : copy the line (actual pattern space) to hold space
+        # s/^.* VALUES // : remove the first part of the line
+        # x : exchange pattern space and hold space
+        # s/^\(.* VALUES \).*/\1/ : replace entire content with first part
+        # s/\x22//g : remove doublequotes
+        # G : concatenate pattern space, \n and hold space
+        # s/\n// : remove \n
+        os.system(commandesed)
         #import shutil
         #shutil.copyfile('/srv/import_urban/spa/%s_temp.sql'%tnl, '/srv/import_urban/spa/%s_oldq.sql'%tnl)
         if tablename=='PRC':
