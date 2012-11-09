@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2012-11-09 10:17+0000\n"
+"POT-Creation-Date: 2012-11-09 10:35+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1390,6 +1390,14 @@ msgstr "Boîte"
 #: EnvironmentBase.py
 msgid "urban_label_businessDescription"
 msgstr "Description de l'établissement"
+
+msgid "urban_label_businessLocation"
+msgstr "Adresse de l'établissement"
+
+#. Default: "Businessoldlocation"
+#: EnvironmentBase.py
+msgid "urban_label_businessOldLocation"
+msgstr "Ancienne adresse de l'établissement"
 
 #. Default: "Catchmentarea"
 #: GenericLicence.py

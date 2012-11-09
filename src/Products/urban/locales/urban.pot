@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-11-09 10:17+0000\n"
+"POT-Creation-Date: 2012-11-09 10:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -301,11 +301,11 @@ msgstr ""
 msgid "and"
 msgstr ""
 
-msgid "applicationreasons_folder_title"
-msgstr ""
-
 # licence views
 msgid "applicants"
+msgstr ""
+
+msgid "applicationreasons_folder_title"
 msgstr ""
 
 msgid "architects_folder_title"
@@ -1388,6 +1388,14 @@ msgstr ""
 #. Default: "Businessdescription"
 #: EnvironmentBase.py
 msgid "urban_label_businessDescription"
+msgstr ""
+
+msgid "urban_label_businessLocation"
+msgstr ""
+
+#. Default: "Businessoldlocation"
+#: EnvironmentBase.py
+msgid "urban_label_businessOldLocation"
 msgstr ""
 
 #. Default: "Catchmentarea"

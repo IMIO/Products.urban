@@ -20,8 +20,11 @@
      </tr>
     </table>
    </fieldset>
-   <fieldset><legend i18n:translate="urban_label_workLocations">Work locations</legend>
+   <fieldset><legend i18n:translate="urban_label_businessLocation">Work locations</legend>
       <div><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
+   </fieldset>
+   <fieldset tal:condition="python: context.getBusinessOldLocation()"><legend i18n:translate="urban_label_businessOldLocation">Work locations</legend>
+      <div><metal:myfield use-macro="python:here.widget('businessOldLocation', mode='view')" /></div>
    </fieldset>
 
   </td>

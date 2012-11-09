@@ -185,6 +185,10 @@ table[id^="datagridwidget-table"] {
     width: 600px !important;
 }
 
+#datagridwidget-table-businessOldLocation {
+    width: 600px !important;
+}
+
 table[id^="datagridwidget-table-"] THEAD TH {
     padding-left: 0.5em;
     background-color: #DDDDDD;

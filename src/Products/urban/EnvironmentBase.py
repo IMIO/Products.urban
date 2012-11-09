@@ -20,9 +20,13 @@ import interfaces
 from Products.urban.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
+from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
@@ -56,6 +60,20 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary(path='applicationreasons', sort_on='getObjPositionInParent'),
         default_method='getDefaultValue',
+    ),
+    DataGridField(
+        name='businessOldLocation',
+        schemata="urban_description",
+        widget=DataGridWidget(
+            columns={'number' : Column("Number"), 'street' : ReferenceColumn("Street", surf_site=False, object_provides=('Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',))},
+            helper_js=('datagridwidget.js', 'datagridautocomplete.js'),
+            label='Businessoldlocation',
+            label_msgid='urban_label_businessOldLocation',
+            i18n_domain='urban',
+        ),
+        allow_oddeven=True,
+        columns=('number', 'street'),
+        validators=('isValidStreetName',),
     ),
     LinesField(
         name='inadmissibilityReasons',
