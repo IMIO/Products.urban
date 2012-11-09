@@ -263,7 +263,7 @@ if step in run_steps:
             pass
         os.system("mdb-export -I -q \\' ck03out.mdb %s > %s_temp.sql"%(tnl, tnl))
         # we remove the doublequotes wrapping table name and columns names
-        commandesed= 'sed "h;s/^.* VALUES //;x;s/^\(.* VALUES \).*/\1/;s/\x22//g;G;s/\n//" %s_temp.sql >%s_temp3.sql'%(tnl, tnl)
+        commandesed= 'sed "h;s/^.* VALUES //;x;s/^\\(.* VALUES \\).*/\\1/;s/\\x22//g;G;s/\\n//" %s_temp.sql >%s_temp1.sql'%(tnl, tnl)
         # h : copy the line (actual pattern space) to hold space
         # s/^.* VALUES // : remove the first part of the line
         # x : exchange pattern space and hold space
@@ -273,9 +273,9 @@ if step in run_steps:
         # s/\n// : remove \n
         os.system(commandesed)
         #import shutil
-        #shutil.copyfile('/srv/import_urban/spa/%s_temp.sql'%tnl, '/srv/import_urban/spa/%s_oldq.sql'%tnl)
+        #shutil.copyfile('/srv/import_urban/spa/%s_temp1.sql'%tnl, '/srv/import_urban/spa/%s_oldsed.sql'%tnl)
         if tablename=='PRC':
-            commandesed= 'sed "s/in,/\\\"in\\\",/g" %s_temp.sql >%s_temp3.sql'%(tnl, tnl)
+            commandesed= 'sed "s/in,/\\\"in\\\",/g" %s_temp1.sql >%s_temp3.sql'%(tnl, tnl)
             os.system(commandesed)
             commandesed= 'sed "s/14, 56,/n14, n56,/g" %s_temp3.sql >%s_temp4.sql'%(tnl, tnl)
             os.system(commandesed)        
@@ -284,13 +284,13 @@ if step in run_steps:
             os.remove('%s_temp3.sql'%tnl)
             os.remove('%s_temp4.sql'%tnl)        
         elif tablename=='PE':
-            commandesed= 'sed "s/, dr+/, dr2/g" %s_temp.sql >%s_temp3.sql'%(tnl, tnl)
+            commandesed= 'sed "s/, dr+/, dr2/g" %s_temp1.sql >%s_temp3.sql'%(tnl, tnl)
             os.system(commandesed)            
             commandesed='sed "s/$/;/" %s_temp3.sql >%s.sql'%(tnl, tnl)
             os.system(commandesed)
             os.remove('%s_temp3.sql'%tnl)            
         elif tablename=='MAP':
-            commandesed= 'sed "s/, pe+/, pe2/g" %s_temp.sql >%s_temp3.sql'%(tnl, tnl)
+            commandesed= 'sed "s/, pe+/, pe2/g" %s_temp1.sql >%s_temp3.sql'%(tnl, tnl)
             os.system(commandesed)            
             commandesed= 'sed "s/, prc+/, prc2/g" %s_temp3.sql >%s_temp4.sql'%(tnl, tnl)
             os.system(commandesed)            
@@ -299,9 +299,10 @@ if step in run_steps:
             os.remove('%s_temp3.sql'%tnl)            
             os.remove('%s_temp4.sql'%tnl)
         else:
-            commandesed='sed "s/$/;/" %s_temp.sql >%s.sql'%(tnl, tnl)
+            commandesed='sed "s/$/;/" %s_temp1.sql >%s.sql'%(tnl, tnl)
             os.system(commandesed)
         os.remove('%s_temp.sql'%tnl)
+        os.remove('%s_temp1.sql'%tnl)
         if not ((tablename=='DA') and (action=='update')):
             os.system('psql -q -d '+databasename+' -f %s.sql'%tnl)
         if tablename=='DA' and action == 'new':
