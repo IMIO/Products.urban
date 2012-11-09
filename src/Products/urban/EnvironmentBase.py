@@ -45,6 +45,19 @@ schema = Schema((
         default_output_type='text/html',
     ),
     LinesField(
+        name='applicationReasons',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Applicationreasons',
+            label_msgid='urban_label_applicationReasons',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        multiValued=1,
+        vocabulary=UrbanVocabulary(path='applicationreasons', sort_on='getObjPositionInParent'),
+        default_method='getDefaultValue',
+    ),
+    LinesField(
         name='inadmissibilityReasons',
         widget=MultiSelectionWidget(
             format='checkbox',
@@ -54,7 +67,7 @@ schema = Schema((
         ),
         schemata='urban_description',
         multiValued=1,
-        vocabulary=UrbanVocabulary(path='inadmissibilityreasons', sort_on='sortable_title'),
+        vocabulary=UrbanVocabulary(path='inadmissibilityreasons', sort_on='getObjPositionInParent'),
         default_method='getDefaultValue',
     ),
 

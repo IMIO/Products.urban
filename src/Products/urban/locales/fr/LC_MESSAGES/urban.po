@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2012-11-09 07:52+0000\n"
+"POT-Creation-Date: 2012-11-09 10:17+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -305,6 +305,9 @@ msgstr "et"
 # buildlicence_view
 msgid "applicants"
 msgstr "Demandeur(s)"
+
+msgid "applicationreasons_folder_title"
+msgstr "Motifs de la demande"
 
 msgid "architects_folder_title"
 msgstr "Architectes"
@@ -1321,6 +1324,11 @@ msgstr "Détails concernant le délai annoncé"
 #: GenericLicence.py
 msgid "urban_label_applicants"
 msgstr "Demandeur"
+
+#. Default: "Applicationreasons"
+#: EnvironmentBase.py
+msgid "urban_label_applicationReasons"
+msgstr "Motifs de la demande"
 
 #. Default: "Approvaldate"
 #: ParcellingTerm.py

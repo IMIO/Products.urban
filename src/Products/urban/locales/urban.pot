@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-11-09 07:52+0000\n"
+"POT-Creation-Date: 2012-11-09 10:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -299,6 +299,9 @@ msgid "alsocalled_descr"
 msgstr ""
 
 msgid "and"
+msgstr ""
+
+msgid "applicationreasons_folder_title"
 msgstr ""
 
 # licence views
@@ -1319,6 +1322,11 @@ msgstr ""
 #. Default: "Applicants"
 #: GenericLicence.py
 msgid "urban_label_applicants"
+msgstr ""
+
+#. Default: "Applicationreasons"
+#: EnvironmentBase.py
+msgid "urban_label_applicationReasons"
 msgstr ""
 
 #. Default: "Approvaldate"

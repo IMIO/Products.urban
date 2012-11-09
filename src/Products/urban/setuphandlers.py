@@ -756,7 +756,6 @@ def addUrbanConfigs(context):
             addPEBCategories(context, configFolder)
 
         if urban_type in ['EnvClassThree',]:
-            site = hasattr(context, 'getSite') and context.getSite() or getToolByName(context, 'portal_url').getPortalObject()
             if not hasattr(aq_base(configFolder), 'inadmissibilityreasons'):
                 newFolderid = configFolder.invokeFactory("Folder",id="inadmissibilityreasons",title=_("inadmissibilityreasons_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
@@ -766,6 +765,20 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="missing_parts",title=u"Pièces/renseignements manquants")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="no_deposit_receipt",title=u"Le dossier n'a pas été déposé contre récipissé")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="no_recommanded_deposit",title=u"Le dossier n'a pas été envoyé par recommandé")
+
+            if not hasattr(aq_base(configFolder), 'applicationreasons'):
+                newFolderid = configFolder.invokeFactory("Folder",id="applicationreasons",title=_("applicationreasons_folder_title", 'urban', context=site.REQUEST))
+                newFolder = getattr(configFolder, newFolderid)
+                newFolder.setConstrainTypesMode(1)
+                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="new_business",title=u"Mise en activité d'un établissement nouveau")
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="class_change",title=u"Maintien en activité d'un établissement qui vient d'être rangé en classe 3 suite à une modification de la liste des installations et activités classées")
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="licence_expiration",title=u"Maintien en activité d’un établissement dont la durée de validité de la déclaration est arrivée à expiration")
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="restart_old_business",title=u"Remise en activité d’un établissement existant")
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="transformation",title=u"Extension ou de la transformation d’un établissement ancien")
+                newFolder.invokeFactory("UrbanVocabularyTerm",id="location_move",title=u"Déplacement de l’établissement")
+
 
 def addPEBCategories(context, configFolder):
     """

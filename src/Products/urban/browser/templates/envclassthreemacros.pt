@@ -58,6 +58,13 @@
        <span tal:condition="not: context/getBusinessDescription" class="discreet" i18n:translate="content_none">None</span>
       </td>
      </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_applicationReasons">Application reasons</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top">
+       <metal:myfield use-macro="python:here.widget('applicationReasons', mode='view')" />
+      </td>
+     </tr>
      <tr tal:condition="python: 'inadmissibilityReasons' in usedAttributes">
       <td valign="top"><b><span i18n:translate="urban_label_inadmissibilityReasons">Inadmissibility reasons</span>:</b></td>
       <td width="2%"></td>
