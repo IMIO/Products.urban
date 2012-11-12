@@ -29,8 +29,23 @@ from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 
 optional_fields =['inadmissibilityReasons']
+
+slave_fields_oldlocation= (
+    {'name': 'businessOldLocation',
+     'action': 'show',
+     'hide_values': ('location_move', ),
+    },
+)
+
+slave_fields_missingparts= (
+    {'name': 'missingParts',
+     'action': 'show',
+     'hide_values': ('missing_parts', ),
+    },
+)
 ##/code-section module-header
 
 schema = Schema((
@@ -48,16 +63,15 @@ schema = Schema((
         schemata='urban_description',
         default_output_type='text/html',
     ),
-    LinesField(
+    StringField(
         name='applicationReasons',
-        widget=MultiSelectionWidget(
-            format='checkbox',
+        widget=MasterSelectWidget(
+            slave_fields=slave_fields_oldlocation,
             label='Applicationreasons',
             label_msgid='urban_label_applicationReasons',
             i18n_domain='urban',
         ),
         schemata='urban_description',
-        multiValued=1,
         vocabulary=UrbanVocabulary(path='applicationreasons', sort_on='getObjPositionInParent'),
         default_method='getDefaultValue',
     ),
@@ -75,16 +89,15 @@ schema = Schema((
         columns=('number', 'street'),
         validators=('isValidStreetName',),
     ),
-    LinesField(
+    StringField(
         name='inadmissibilityReasons',
-        widget=MultiSelectionWidget(
-            format='checkbox',
+        widget=MasterSelectWidget(
+            slave_fields=slave_fields_missingparts,
             label='Inadmissibilityreasons',
             label_msgid='urban_label_inadmissibilityReasons',
             i18n_domain='urban',
         ),
         schemata='urban_description',
-        multiValued=1,
         vocabulary=UrbanVocabulary(path='inadmissibilityreasons', sort_on='getObjPositionInParent'),
         default_method='getDefaultValue',
     ),
@@ -173,6 +186,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('foldermanagers', after='workLocations')
     schema.moveField('businessDescription', after='foldermanagers')
     schema.moveField('missingParts', after='inadmissibilityReasons')
+    schema.moveField('description', after='missingParts')
     return schema
 
 finalizeSchema(EnvironmentBase_schema)

@@ -1719,7 +1719,7 @@ msgstr "Implantation (art. 137)"
 #. Default: "Inadmissibilityreasons"
 #: EnvironmentBase.py
 msgid "urban_label_inadmissibilityReasons"
-msgstr "Motifs d'irrecevabilité"
+msgstr "Motif d'irrecevabilité"
 
 #. Default: "Initials"
 #: FolderManager.py
