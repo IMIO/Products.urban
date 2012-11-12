@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-11-09 10:35+0000\n"
+"POT-Creation-Date: 2012-11-12 12:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1018,6 +1018,9 @@ msgid "searchlinkeddocuments"
 msgstr ""
 
 msgid "searchlots"
+msgstr ""
+
+msgid "sectorialconditions_folder_title"
 msgstr ""
 
 msgid "simple-map_title"
@@ -2261,6 +2264,11 @@ msgstr ""
 #. Default: "Section"
 #: PortionOut.py
 msgid "urban_label_section"
+msgstr ""
+
+#. Default: "Sectorialcondition"
+#: EnvironmentBase.py
+msgid "urban_label_sectorialCondition"
 msgstr ""
 
 #. Default: "Selectedfield"

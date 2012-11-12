@@ -30,6 +30,7 @@ from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
 optional_fields =['inadmissibilityReasons']
 
@@ -40,12 +41,6 @@ slave_fields_oldlocation= (
     },
 )
 
-slave_fields_missingparts= (
-    {'name': 'missingParts',
-     'action': 'show',
-     'hide_values': ('missing_parts', ),
-    },
-)
 ##/code-section module-header
 
 schema = Schema((
@@ -89,17 +84,39 @@ schema = Schema((
         columns=('number', 'street'),
         validators=('isValidStreetName',),
     ),
-    StringField(
+    LinesField(
         name='inadmissibilityReasons',
-        widget=MasterSelectWidget(
-            slave_fields=slave_fields_missingparts,
+        widget=MultiSelectionWidget(
+            format='checkbox',
             label='Inadmissibilityreasons',
             label_msgid='urban_label_inadmissibilityReasons',
             i18n_domain='urban',
         ),
         schemata='urban_description',
+        multiValued=1,
         vocabulary=UrbanVocabulary(path='inadmissibilityreasons', sort_on='getObjPositionInParent'),
         default_method='getDefaultValue',
+    ),
+    ReferenceField(
+        name='sectorialCondition',
+        widget=ReferenceBrowserWidget(
+            visible=True,
+            allow_browse=True,
+            allow_search=True,
+            show_indexes=True,
+            available_indexes={'Title':'Nom'},
+            show_index_selector=True,
+            startup_directory='portal_urban/sectorialconditions',
+            restrict_browsing_to_startup_directory=True,
+            default_search_index='Title',
+            wild_card_search=True,
+            label='Sectorialcondition',
+            label_msgid='urban_label_sectorialCondition',
+            i18n_domain='urban',
+        ),
+        schemata="urban_description",
+        multiValued=True,
+        relationship='sectorialconditions',
     ),
 
 ),
@@ -186,7 +203,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('foldermanagers', after='workLocations')
     schema.moveField('businessDescription', after='foldermanagers')
     schema.moveField('missingParts', after='inadmissibilityReasons')
-    schema.moveField('description', after='missingParts')
+    schema.moveField('missingPartsDetails', after='missingParts')
+    schema.moveField('description', after='missingPartsDetails')
     return schema
 
 finalizeSchema(EnvironmentBase_schema)
