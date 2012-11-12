@@ -98,6 +98,27 @@ schema = Schema((
         default_method='getDefaultValue',
     ),
     ReferenceField(
+        name='integralConditions',
+        widget=ReferenceBrowserWidget(
+            visible=True,
+            allow_browse=True,
+            allow_search=True,
+            show_indexes=True,
+            available_indexes={'Title':'Nom'},
+            show_index_selector=True,
+            startup_directory='portal_urban/integralconditions',
+            restrict_browsing_to_startup_directory=True,
+            default_search_index='Title',
+            wild_card_search=True,
+            label='Integralconditions',
+            label_msgid='urban_label_integralConditions',
+            i18n_domain='urban',
+        ),
+        schemata="urban_description",
+        multiValued=True,
+        relationship='integralconditions',
+    ),
+    ReferenceField(
         name='sectorialCondition',
         widget=ReferenceBrowserWidget(
             visible=True,

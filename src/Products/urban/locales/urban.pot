@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-11-12 12:31+0000\n"
+"POT-Creation-Date: 2012-11-12 15:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -659,6 +659,9 @@ msgid "inquiry_title_and_number"
 msgstr ""
 
 msgid "inquiry_to"
+msgstr ""
+
+msgid "integralconditions_folder_title"
 msgstr ""
 
 msgid "investigationarticles_folder_title"
@@ -1724,6 +1727,11 @@ msgstr ""
 #. Default: "Initials"
 #: FolderManager.py
 msgid "urban_label_initials"
+msgstr ""
+
+#. Default: "Integralconditions"
+#: EnvironmentBase.py
+msgid "urban_label_integralConditions"
 msgstr ""
 
 #. Default: "Investigationarticle"

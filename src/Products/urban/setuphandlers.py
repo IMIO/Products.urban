@@ -1259,6 +1259,14 @@ def addGlobalFolders(context):
         newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-activites-economiques-tertiaires",title=u"Zone d'activités économiques tertiaires")
 
     #add the secorial conditions folder
+    if not hasattr(tool, "integralconditions"):
+        newFolderid = tool.invokeFactory("Folder",id="integralconditions",title=_("integralconditions_folder_title", 'urban', context=site.REQUEST))
+        newFolder = getattr(tool, newFolderid)
+        newFolder.setConstrainTypesMode(1)
+        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+
+    #add the secorial conditions folder
     if not hasattr(tool, "sectorialconditions"):
         newFolderid = tool.invokeFactory("Folder",id="sectorialconditions",title=_("sectorialconditions_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
