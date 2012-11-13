@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import sys
+sys.path[0:0] = [
+    '/srv/urbanmap/eggs/psycopg2-2.4.2-py2.7-linux-x86_64.egg']
+
 import os
 import psycopg2
 import psycopg2.extras
@@ -14,6 +18,32 @@ pylon_instances_file = '%s/pylon_instances.txt' % config_dir
 pg_address = 'localhost:5432' #set the ip address if the browser clients aren't local
 domain_name = 'communesplone.be' #the apache servername will be "urb-commune.communesplone.be"
 CREATE_APACHE = True
+
+def runCommand(cmd):
+    """ run an os command and get back the stdout and stderr outputs """
+    ret = os.system(cmd + ' >_cmd_pv.out 2>_cmd_pv.err')
+    stdout = stderr = []
+    try:
+        if os.path.exists('_cmd_pv.out'):
+            ofile = open( '_cmd_pv.out', 'r')
+            stdout = ofile.readlines()
+            ofile.close()
+            os.remove('_cmd_pv.out')
+        else:
+            print("File %s does not exist" % '_cmd_pv.out')
+    except IOError:
+        print("Cannot open %s file" % '_cmd_pv.out')
+    try:
+        if os.path.exists('_cmd_pv.err'):
+            ifile = open( '_cmd_pv.err', 'r')
+            stderr = ifile.readlines()
+            ifile.close()
+            os.remove('_cmd_pv.err')
+        else:
+            print("File %s does not exist" % '_cmd_pv.err')
+    except IOError:
+        print("Cannot open %s file" % '_cmd_pv.err')
+    return( stdout,stderr )
 
 def convertprc(prc):
    
@@ -254,6 +284,11 @@ if step in run_steps:
 step = 'B'
 if step in run_steps:
     print "Step %s (%s): %s" % (step, time.strftime('%H:%M:%S', time.localtime()), allsteps[step])
+    out,  err = runCommand("mdb-export")
+    backend = ''
+    if "-I <backend>" in ''.join(err):
+        backend = 'postgres'
+        
     for tablename in tablenames:
         print "Processing table %d/%d ('%s')" % (tablenames.index(tablename)+1, len(tablenames), tablename)
         tnl = tablename.lower()
@@ -261,7 +296,8 @@ if step in run_steps:
             os.remove('%s.sql'%tnl)
         except:
             pass
-        os.system("mdb-export -I -q \\' ck03out.mdb %s > %s_temp.sql"%(tnl, tnl))
+        os.system("mdb-export -I %s -q \\' ck03out.mdb %s > %s_temp.sql"%(backend, tnl, tnl))
+        
         # we remove the doublequotes wrapping table name and columns names
         commandesed= 'sed "h;s/^.* VALUES //;x;s/^\\(.* VALUES \\).*/\\1/;s/\\x22//g;G;s/\\n//" %s_temp.sql >%s_temp1.sql'%(tnl, tnl)
         # h : copy the line (actual pattern space) to hold space
