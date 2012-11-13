@@ -655,6 +655,18 @@ urbanEventTypes = {
                    'envclassthree':
                    (
                     {
+                    'id': "depot-de-la-demande",
+                    'title': "Dépôt de la demande",
+                    'activatedFields': [],
+                    'deadLineDelay': 15,
+                    'isKeyEvent': True,
+                    'keyDates': ('eventDate',),
+                    'podTemplates': (
+                                     {'id': "env3-recepisse", 'title': "Récepissé de la déclaration"},
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+                    },
+                    {
                     'id': "premier-envoi",
                     'title': "Premier envoi",
                     'activatedFields': [],
@@ -907,6 +919,6 @@ urbanEventTypes = {
                                      {'id': "lot-recours-GW-transmis-decision-FD-art127", 'title':"Transmis au réclamant de la décision du FD concernant recours au GW contre art 127"},
                                      {'id': "lot-recours-GW-transmis-decision-GW-PU", 'title':"Transmis au réclamant de la décision du GW concernant recours au GW"},
                                      ),
-                   },
-                  ),
-                 }
+                    },
+                   ),
+                  }

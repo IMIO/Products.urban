@@ -2,8 +2,8 @@
  <table cellspacing=0 cellpadding=0 width=100%>
  <tr>
   <td valign="top" width=49%>
-   <fieldset><legend i18n:translate="proprietaries">Proprietary</legend>
-    <div metal:use-macro="here/urban_macros/macros/urbanProprietariesMacro" />
+   <fieldset><legend i18n:translate="applicants">Applicant(s)</legend>
+    <div metal:use-macro="here/urban_macros/macros/urbanApplicantsMacro" />
    </fieldset>
   </td>
   <td width="1%"></td>
