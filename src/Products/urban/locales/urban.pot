@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-11-12 15:13+0000\n"
+"POT-Creation-Date: 2012-11-13 08:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2277,6 +2277,11 @@ msgstr ""
 #. Default: "Sectorialcondition"
 #: EnvironmentBase.py
 msgid "urban_label_sectorialCondition"
+msgstr ""
+
+#. Default: "Sectorialconditions"
+#: EnvironmentBase.py
+msgid "urban_label_sectorialConditions"
 msgstr ""
 
 #. Default: "Selectedfield"

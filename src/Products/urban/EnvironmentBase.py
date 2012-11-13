@@ -32,7 +32,7 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
-optional_fields =['inadmissibilityReasons']
+optional_fields =['inadmissibilityReasons', 'integralConditions', 'sectorialConditions']
 
 slave_fields_oldlocation= (
     {'name': 'businessOldLocation',
@@ -119,7 +119,7 @@ schema = Schema((
         relationship='integralconditions',
     ),
     ReferenceField(
-        name='sectorialCondition',
+        name='sectorialConditions',
         widget=ReferenceBrowserWidget(
             visible=True,
             allow_browse=True,
@@ -131,8 +131,8 @@ schema = Schema((
             restrict_browsing_to_startup_directory=True,
             default_search_index='Title',
             wild_card_search=True,
-            label='Sectorialcondition',
-            label_msgid='urban_label_sectorialCondition',
+            label='Sectorialconditions',
+            label_msgid='urban_label_sectorialConditions',
             i18n_domain='urban',
         ),
         schemata="urban_description",
@@ -211,6 +211,17 @@ class EnvironmentBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         except AttributeError:
             return None
 
+    security.declarePublic('getProprietaries')
+    def getProprietaries(self):
+        """
+           Return the list of proprietaries for the certificate
+        """
+        res = []
+        for obj in self.objectValues('Contact'):
+            if obj.portal_type == 'Proprietary':
+                res.append(obj)
+        return res
+
 
 
 registerType(EnvironmentBase, PROJECTNAME)
@@ -222,7 +233,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
        Finalizes the type schema to alter some fields
     """
     schema.moveField('foldermanagers', after='workLocations')
-    schema.moveField('businessDescription', after='foldermanagers')
+    schema.moveField('businessDescription', after='folderCategory')
     schema.moveField('missingParts', after='inadmissibilityReasons')
     schema.moveField('missingPartsDetails', after='missingParts')
     schema.moveField('description', after='missingPartsDetails')

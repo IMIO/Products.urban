@@ -2,8 +2,8 @@
  <table cellspacing=0 cellpadding=0 width=100%>
  <tr>
   <td valign="top" width=49%>
-   <fieldset><legend i18n:translate="applicants">Applicant(s)</legend>
-    <div metal:use-macro="here/urban_macros/macros/urbanApplicantsMacro" />
+   <fieldset><legend i18n:translate="proprietaries">Proprietary</legend>
+    <div metal:use-macro="here/urban_macros/macros/urbanProprietariesMacro" />
    </fieldset>
   </td>
   <td width="1%"></td>
@@ -20,13 +20,23 @@
      </tr>
     </table>
    </fieldset>
-   <fieldset><legend i18n:translate="urban_label_businessLocation">Work locations</legend>
-      <div><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
+   <fieldset tal:condition="python: not context.getBusinessOldLocation()"><legend i18n:translate="urban_label_businessLocation">Work locations</legend>
+     <div><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
    </fieldset>
-   <fieldset tal:condition="python: context.getBusinessOldLocation()"><legend i18n:translate="urban_label_businessOldLocation">Work locations</legend>
-      <div><metal:myfield use-macro="python:here.widget('businessOldLocation', mode='view')" /></div>
-   </fieldset>
-
+   <table tal:condition="python: context.getBusinessOldLocation()">
+     <tr>
+       <td>
+        <fieldset><legend i18n:translate="urban_label_businessLocation">Work locations</legend>
+         <div><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
+        </fieldset>
+       </td>
+       <td>
+        <fieldset><legend i18n:translate="urban_label_businessOldLocation">Work locations</legend>
+         <div><metal:myfield use-macro="python:here.widget('businessOldLocation', mode='view')" /></div>
+        </fieldset>
+       </td>
+     </tr>
+    </table>
   </td>
   </tr>
  <tr>
@@ -77,6 +87,22 @@
       <td valign="top"><b><span i18n:translate="urban_label_missingParts">Missing parts</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('missingParts', mode='view')" /></td>
+     </tr>
+     <tr tal:condition="python: 'integralConditions' in usedAttributes">
+      <td valign="top"><b><span i18n:translate="urban_label_integralConditions">Missing parts</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top">
+       <metal:myfield use-macro="python:here.widget('integralConditions', mode='view')" />
+       <span tal:condition="not: context/getIntegralConditions" class="discreet" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr tal:condition="python: 'sectorialConditions' in usedAttributes">
+      <td valign="top"><b><span i18n:translate="urban_label_sectorialConditions">Missing parts</span>:</b></td>
+      <td width="2%">
+      <td valign="top">
+       <metal:myfield use-macro="python:here.widget('sectorialConditions', mode='view')" />
+       <span tal:condition="not: context/getSectorialConditions" class="discreet" i18n:translate="content_none">None</span>
+      </td>
      </tr>
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_description">Description</span>:</b></td>
