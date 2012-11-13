@@ -671,7 +671,7 @@ urbanEventTypes = {
                     'title': "Premier envoi",
                     'activatedFields': [],
                     'deadLineDelay': 15,
-                    'podTemplates': ({'id': "declaenv-courrier-ft", 'title': "1er envoi (Fonctionnaire technique)"},),
+                    'podTemplates': ({'id': "env3-courrier-ft", 'title': "1er envoi (Fonctionnaire technique)"},),
                     },
                    ),
                    'miscdemand':
