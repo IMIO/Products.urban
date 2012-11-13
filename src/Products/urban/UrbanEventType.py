@@ -157,9 +157,9 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         """
          return a DisplayList of fields wich are marked as optional
         """
-        from Products.urban.UrbanEvent import UrbanEvent_schema
+        from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
         lst = []
-        for field in UrbanEvent_schema.fields():
+        for field in UrbanEventInquiry_schema.fields():
             try:
                 if field.optional == True:
                     lst.append((field.getName(), utranslate(msgid="urban_label_" + field.getName(), domain='urban', default=field.getName(), context=self)))
