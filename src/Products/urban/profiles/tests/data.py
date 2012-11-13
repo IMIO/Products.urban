@@ -667,11 +667,10 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
-                    'id': "premier-envoi",
-                    'title': "Premier envoi",
+                    'id': "demande-irrecevable",
+                    'title': "Demande irrecevable",
                     'activatedFields': [],
-                    'deadLineDelay': 15,
-                    'podTemplates': ({'id': "env3-courrier-ft", 'title': "1er envoi (Fonctionnaire technique)"},),
+                    'podTemplates': ({'id': "env3-demande-irrecevable", 'title': "Demande irrecevable (lettre au demandeur)"},),
                     },
                    ),
                    'miscdemand':
