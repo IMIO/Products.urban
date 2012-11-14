@@ -2,7 +2,8 @@
 
 import sys
 sys.path[0:0] = [
-    '/srv/urbanmap/eggs/psycopg2-2.4.2-py2.7-linux-x86_64.egg']
+    #replace this line with the urbanmap psycopg2 egg path, according you run this script with the urbanmap python
+    #like '/srv/urbanmap/eggs/psycopg2-2.4.2-py2.7-linux-x86_64.egg']
 
 import os
 import psycopg2
