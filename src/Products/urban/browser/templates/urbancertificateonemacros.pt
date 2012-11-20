@@ -89,40 +89,27 @@
  <tr>
  <td>
  <fieldset><legend i18n:translate="legend_specific_features">Specific features</legend>
-  <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
-   <tr tal:condition="python: 'specificFeatures' in usedAttributes">
-    <td valign="top"><b><span i18n:translate="urban_label_specificFeatures">Specific features</span>:</b></td>
+  <table tal:define="specificfeatures_types python: ['', 'township', 'custom']"
+         class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+   <tal:specificfeatures repeat="subtype specificfeatures_types ">
+   <tr tal:condition="python: '%s%specificFeatures' % (subtype, subtype and 'S' or 's') in usedAttributes"
+       tal:define="specificfeatures python: view.getSpecificFeatures(subtype=subtype);
+                   translation python: 'urban_label_%s%specificFeatures' % (subtype, subtype and 'S' or 's')">
+    <td valign="top"><b><span tal:content="translation">Specific features</span>:</b></td>
     <td width="2%"></td>
-    <td valign="top"><metal:myfield use-macro="python:here.widget('specificFeatures', mode='view')" /></td>
-   </tr>
-   <tr tal:condition="python: 'townshipSpecificFeatures' in usedAttributes">
-    <td valign="top"><b><span i18n:translate="urban_label_townshipSpecificFeatures">Township specific features</span>:</b></td>
-    <td width="2%"></td>
-    <td valign="top"><metal:myfield use-macro="python:here.widget('townshipSpecificFeatures', mode='view')" /></td>
-   </tr>
-   <tal:block condition="python: 'customSpecificFeatures' in usedAttributes" define="csfs context/getCustomSpecificFeaturesAsList">
-   <tr style="border-bottom: 0">
-    <td valign="top"><b><span i18n:translate="urban_label_customSpecificFeatures">Custom specific features</span>:</b></td>
-    <td width="2%"></td>
-    <td>
-     <span tal:condition="not: csfs" class="discreet" i18n:translate="content_none">None</span>
+    <td tal:condition="not: specificfeatures" >
+     <span class="discreet" i18n:translate="content_none">None</span>
     </td>
-   </tr>
-   <tr tal:condition="csfs">
-    <td colspan="3">
-     <table style="margin-top: 0.3em; width: 100%;" class="listing">
-      <thead>
-       <tr>
-        <th i18n:translate="" i18n:domain="datagridfield">Feature</th>
-       </tr>
-      </thead>
-      <tr tal:repeat="csf csfs">
-       <td tal:content="structure python: '<br />'.join(csf)">Custom specific feature</td>
+    <td tal:condition="specificfeatures">
+     <table>
+      <tr tal:repeat="specificfeature specificfeatures">
+       <td tal:content="specificfeature">Specific feature</td>
       </tr>
      </table>
     </td>
+    <td width="2%"></td>
    </tr>
-   </tal:block>
+   </tal:specificfeatures>
    <tr tal:condition="python: 'opinionsToAskIfWorks' in usedAttributes">
     <td valign="top"><b><span i18n:translate="urban_label_opinionsToAskIfWorks">Opinions to ask in case of works</span>:</b></td>
     <td width="2%"></td>
@@ -132,7 +119,7 @@
  </fieldset>
  </td>
  </tr>
- 
+
  </table>
 </div>
 

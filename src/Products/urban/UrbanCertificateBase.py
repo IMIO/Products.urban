@@ -28,7 +28,11 @@ from zope.i18n import translate
 from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.DataGridField import FixedRow
 from Products.DataGridField.LinesColumn import LinesColumn
+from Products.DataGridField.CheckboxColumn import CheckboxColumn
 from Products.DataGridField.Column import Column
+from Products.DataGridField.FixedColumn import FixedColumn
+from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
+from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
@@ -60,58 +64,58 @@ schema = Schema((
         relationship="notary",
         allowed_types= ('Notary',),
     ),
-    LinesField(
+    DataGridField(
         name='specificFeatures',
-        widget=MultiSelectionWidget(
-            description_msgid="certificateone_specificfeatures_descr",
-            description='Select the specific features from the left box and drop them in the right box to select them',
-            format='checkbox',
+        widget=DataGridWidget(
+            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : Column('Detail')},
             label='Specificfeatures',
             label_msgid='urban_label_specificFeatures',
             i18n_domain='urban',
         ),
+        fixed_rows='getSpecificFeaturesRows',
+        allow_insert= False,
+        allow_reorder= False,
+        allow_oddeven= True,
+        allow_delete= False,
         schemata='urban_description',
-        multiValued=True,
-        vocabulary=UrbanVocabulary('specificfeatures'),
-        default_method='getDefaultValue',
-        enforceVocabulary=True,
+        columns= ('UID', 'check', 'text', 'detail',),
     ),
-    LinesField(
+    DataGridField(
         name='roadSpecificFeatures',
-        widget=MultiSelectionWidget(
-            description_msgid="certificateone_roadspecificfeatures_descr",
-            description='Select the specific features from the left box and drop them in the right box to select them',
-            format='checkbox',
+        widget=DataGridWidget(
+            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : Column('Detail')},
             label='Roadspecificfeatures',
             label_msgid='urban_label_roadSpecificFeatures',
             i18n_domain='urban',
         ),
+        fixed_rows='getRoadFeaturesRows',
+        allow_insert= False,
+        allow_reorder= False,
+        allow_oddeven= True,
+        allow_delete= False,
         schemata='urban_road',
-        multiValued=True,
-        vocabulary=UrbanVocabulary('roadspecificfeatures'),
-        default_method='getDefaultValue',
-        enforceVocabulary=True,
+        columns= ('UID', 'check', 'text', 'detail',),
     ),
-    LinesField(
+    DataGridField(
         name='locationSpecificFeatures',
-        widget=MultiSelectionWidget(
-            description_msgid="certificateone_locationspecificfeatures_descr",
-            description='Select the specific features from the left box and drop them in the right box to select them',
-            format='checkbox',
+        widget=DataGridWidget(
+            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : Column('Detail')},
             label='Locationspecificfeatures',
             label_msgid='urban_label_locationSpecificFeatures',
             i18n_domain='urban',
         ),
+        fixed_rows='getLocationFeaturesRows',
+        allow_insert= False,
+        allow_reorder= False,
+        allow_oddeven= True,
+        allow_delete= False,
         schemata='urban_location',
-        multiValued=True,
-        vocabulary=UrbanVocabulary('locationspecificfeatures'),
-        default_method='getDefaultValue',
-        enforceVocabulary=True,
+        columns= ('UID', 'check', 'text', 'detail',),
     ),
     DataGridField(
         name='customSpecificFeatures',
         widget=DataGridWidget(
-            columns={'feature' : LinesColumn("Feature")},
+            columns={'feature' : TextAreaColumn("Feature", rows=1, cols=10)},
             label='Customspecificfeatures',
             label_msgid='urban_label_customSpecificFeatures',
             i18n_domain='urban',
@@ -119,21 +123,21 @@ schema = Schema((
         schemata='urban_description',
         columns=('feature',),
     ),
-    LinesField(
+    DataGridField(
         name='townshipSpecificFeatures',
-        widget=MultiSelectionWidget(
-            description_msgid="certificateone_townshipspecificfeatures_descr",
-            description='Select the specific features from the left box and drop them in the right box to select them',
-            format='checkbox',
+        widget=DataGridWidget(
+            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : Column('Detail')},
             label='Townshipspecificfeatures',
             label_msgid='urban_label_townshipSpecificFeatures',
             i18n_domain='urban',
         ),
+        fixed_rows='getTownshipFeaturesRows',
+        allow_insert= False,
+        allow_reorder= False,
+        allow_oddeven= True,
+        allow_delete= False,
         schemata='urban_description',
-        multiValued=True,
-        vocabulary=UrbanVocabulary('townshipspecificfeatures'),
-        default_method='getDefaultValue',
-        enforceVocabulary=True,
+        columns= ('UID', 'check', 'text', 'detail',),
     ),
     LinesField(
         name='opinionsToAskIfWorks',
@@ -147,70 +151,6 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary('opinionstoaskifworks', vocType="OrganisationTerm"),
         default_method='getDefaultValue',
-    ),
-    DataGridField(
-        name='specificFeaturesDetail',
-        widget=DataGridWidget(
-            columns={'detail' : Column("detail")},
-            label='Specificfeaturesdetail',
-            label_msgid='urban_label_specificFeaturesDetail',
-            i18n_domain='urban',
-        ),
-        fixed_rows='getSpecificFeaturesDetailRows',
-        allow_insert= False,
-        allow_reorder= False,
-        allow_oddeven=True,
-        allow_delete= False,
-        schemata="urban_description",
-        columns= ('detail',),
-    ),
-    DataGridField(
-        name='roadSpecificFeaturesDetail',
-        widget=DataGridWidget(
-            columns={'detail' : Column("detail")},
-            label='Roadspecificfeaturesdetail',
-            label_msgid='urban_label_roadSpecificFeaturesDetail',
-            i18n_domain='urban',
-        ),
-        fixed_rows='getRoadFeaturesDetailRows',
-        allow_insert= False,
-        allow_reorder= False,
-        allow_oddeven=True,
-        allow_delete= False,
-        schemata="urban_road",
-        columns= ('detail',),
-    ),
-    DataGridField(
-        name='locationSpecificFeaturesDetail',
-        widget=DataGridWidget(
-            columns={'detail' : Column("detail")},
-            label='Locationspecificfeaturesdetail',
-            label_msgid='urban_label_locationSpecificFeaturesDetail',
-            i18n_domain='urban',
-        ),
-        fixed_rows='getLocationFeaturesDetailRows',
-        allow_insert= False,
-        allow_reorder= False,
-        allow_oddeven=True,
-        allow_delete= False,
-        schemata="urban_location",
-        columns= ('detail',),
-    ),
-    DataGridField(
-        name='townshipSpecificFeaturesDetail',
-        widget=DataGridWidget(
-            columns={'detail' : Column("detail")},
-            label='Townshipspecificfeaturesdetail',
-            label_msgid='urban_label_townshipSpecificFeaturesDetail',
-            i18n_domain='urban',
-        ),
-        fixed_rows='getTownshipFeaturesDetailRows',
-        allow_insert= False,
-        allow_reorder= False,
-        allow_oddeven=True,
-        allow_delete= False,
-        schemata="urban_description",
-        columns= ('detail',),
     ),
 
 ),
@@ -332,27 +272,27 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         self.updateTitle()
 
-    security.declarePublic('getSpecificFeaturesDetailRows')
-    def getSpecificFeaturesDetailRows(self):
-        return self.getSpecificFeaturesRows()
+    security.declarePublic('getSpecificFeaturesRows')
+    def getSpecificFeaturesRows(self):
+        return self._getSpecificFeaturesRows()
 
-    security.declarePublic('getRoadFeaturesDetailRows')
-    def getRoadFeaturesDetailRows(self):
-        return self.getSpecificFeaturesRows(location='road')
+    security.declarePublic('getRoadFeaturesRows')
+    def getRoadFeaturesRows(self):
+        return self._getSpecificFeaturesRows(location='road')
 
-    security.declarePublic('getLocationFeaturesDetailRows')
-    def getLocationFeaturesDetailRows(self):
-        return self.getSpecificFeaturesRows(location='location')
+    security.declarePublic('getLocationFeaturesRows')
+    def getLocationFeaturesRows(self):
+        return self._getSpecificFeaturesRows(location='location')
 
-    security.declarePublic('getTownshipFeaturesDetailRows')
-    def getTownshipFeaturesDetailRows(self):
-        return self.getSpecificFeaturesRows(location='township')
+    security.declarePublic('getTownshipFeaturesRows')
+    def getTownshipFeaturesRows(self):
+        return self._getSpecificFeaturesRows(location='township')
 
-    def getSpecificFeaturesRows(self, location=''):
+    def _getSpecificFeaturesRows(self, location=''):
         portal_urban = getToolByName(self, 'portal_urban')
         vocname = '%sspecificfeatures' % location
-        return [FixedRow(keyColumn = 'detail', initialData={'detail':''}) for i in
-                portal_urban.listVocabularyBrains(vocToReturn=vocname, context=self)]
+        return [FixedRow(keyColumn = 'text', initialData={'check':vocterm.getIsDefaultValue() and '1' or '', 'UID':vocterm.UID(), 'text':vocterm.Title(), 'detail':''})
+                for vocterm in portal_urban.listVocabularyObjects(vocToReturn=vocname, context=self).values()]
 
     security.declarePublic('updateTitle')
     def updateTitle(self):
@@ -405,18 +345,6 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
     security.declarePublic('getLastTheLicence')
     def getLastTheLicence(self):
         return self._getLastEvent(interfaces.ITheLicenceEvent)
-
-    security.declarePublic('getCustomSpecificFeaturesAsList')
-    def getCustomSpecificFeaturesAsList(self):
-        """
-          To display custom specific features easily, get it as a list of features
-        """
-        res = []
-        for csf in self.getCustomSpecificFeatures():
-            #in some case, DataGridField add an empty dict...
-            if csf.has_key('feature') and csf['feature']:
-                res.append(csf['feature'])
-        return res
 
     security.declarePublic('getSpecificFeaturesForTemplate')
     def getSpecificFeaturesForTemplate(self, where=[''], active_style='', inactive_style='striked'):
