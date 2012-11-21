@@ -903,7 +903,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                     xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street.getStreetCode()))
                     xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street.getStreetName()).decode('iso-8859-1').encode('iso-8859-1'))
                 if number:
-                    xml.append('      <E_220_huisnr>%s</E_220_huisnr>')
+                    xml.append('      <E_220_huisnr>%s</E_220_huisnr>' % number)
                 worktype=licenceObj.getWorkType() and licenceObj.getWorkType()[0] or ''
                 work_types=UrbanVocabulary('folderbuildworktypes').getAllVocTerms(licenceObj)
                 worktype_map = {}
