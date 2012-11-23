@@ -140,5 +140,34 @@ def migrateReferenceNumerotation(context):
             config.setReferenceTALExpression(portal_urban.numerotationTALExpression)
         if hasattr(portal_urban, '%sNumerotation' % licence_type):
             config.setNumerotation(getattr(portal_urban, '%sNumerotation' % licence_type))
+            delattr(portal_urban, '%sNumerotation' % licence_type)
+    delattr(portal_urban, 'numerotationTALExpression')
     logger.info("Migrated numerotation")
 
+def migrateSpecificFeatures(context):
+    """
+    Migrate old fields xxxSpecificFeatures and xxxSpecificFeaturesDetails from CU1, CU2 and notary letters into one field
+    """
+    for portal_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter']:
+        # gather all the folders to migrate
+        catalog = getToolByName(context, 'portal_catalog')
+        licence_brains = catalog(portal_type=portal_type)
+        for brain in licence_brains:
+            licence = bain.getObject()
+            for subtype in ['', 'township', 'location', 'road']:
+                # generate the default values from the config (getFixedRows...)
+                defaultrows_method =  'get%sFeaturesRows' % (subtype and subtype.capitalize() or 'Speficic')
+                default_rows = getattr(obj, defaultrows_method)()
+                # get the old values from the old field and the detail field
+                old_specificFeatures = getattr(obj, 'get%sSpecificFeatures' % subtype.capitalize())()
+                detail = getattr(obj, 'get%sSpecificFeaturesDetails' % subtype.capitalize())()
+                # modify these rows accordingly to the old values found
+                for index, row in enumerate(default_rows):
+                    if row['id'] in old_specificFeatures:
+                        row['check'] = '1'
+                    try:
+                        row['detail'] = detail[index]['detail']
+                    except:
+                        pass
+                # delete detail field
+                delattr(obj, '%s%specificFeaturesDetails' % (subtype, subtype and 'S' or 's'))

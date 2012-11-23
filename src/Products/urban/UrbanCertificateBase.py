@@ -67,7 +67,7 @@ schema = Schema((
     DataGridField(
         name='specificFeatures',
         widget=DataGridWidget(
-            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
+            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
             label='Specificfeatures',
             label_msgid='urban_label_specificFeatures',
             i18n_domain='urban',
@@ -78,12 +78,12 @@ schema = Schema((
         allow_oddeven= True,
         allow_delete= False,
         schemata='urban_description',
-        columns= ('UID', 'check', 'text', 'detail',),
+        columns= ('id', 'check', 'text', 'detail',),
     ),
     DataGridField(
         name='roadSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
+            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
             label='Roadspecificfeatures',
             label_msgid='urban_label_roadSpecificFeatures',
             i18n_domain='urban',
@@ -94,12 +94,12 @@ schema = Schema((
         allow_oddeven= True,
         allow_delete= False,
         schemata='urban_road',
-        columns= ('UID', 'check', 'text', 'detail',),
+        columns= ('id', 'check', 'text', 'detail',),
     ),
     DataGridField(
         name='locationSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
+            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
             label='Locationspecificfeatures',
             label_msgid='urban_label_locationSpecificFeatures',
             i18n_domain='urban',
@@ -110,7 +110,7 @@ schema = Schema((
         allow_oddeven= True,
         allow_delete= False,
         schemata='urban_location',
-        columns= ('UID', 'check', 'text', 'detail',),
+        columns= ('id', 'check', 'text', 'detail',),
     ),
     DataGridField(
         name='customSpecificFeatures',
@@ -126,7 +126,7 @@ schema = Schema((
     DataGridField(
         name='townshipSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
+            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
             label='Townshipspecificfeatures',
             label_msgid='urban_label_townshipSpecificFeatures',
             i18n_domain='urban',
@@ -137,7 +137,7 @@ schema = Schema((
         allow_oddeven= True,
         allow_delete= False,
         schemata='urban_description',
-        columns= ('UID', 'check', 'text', 'detail',),
+        columns= ('id', 'check', 'text', 'detail',),
     ),
     LinesField(
         name='opinionsToAskIfWorks',
@@ -291,7 +291,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def _getSpecificFeaturesRows(self, location=''):
         portal_urban = getToolByName(self, 'portal_urban')
         vocname = '%sspecificfeatures' % location
-        return [FixedRow(keyColumn = 'text', initialData={'check':vocterm.getIsDefaultValue() and '1' or '', 'UID':vocterm.UID(), 'text':vocterm.Title(), 'detail':''})
+        return [FixedRow(keyColumn = 'text', initialData={'check':vocterm.getIsDefaultValue() and '1' or '', 'id':vocterm.id, 'text':vocterm.Title(), 'detail':''})
                 for vocterm in portal_urban.listVocabularyObjects(vocToReturn=vocname, context=self).values()]
 
     security.declarePublic('updateTitle')
@@ -363,13 +363,13 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
                       'path': specificFeaturesPath,
                       'sort_on': 'getObjPositionInParent',
             }
-            configSpecificFeatures[location] = dict([(brain.UID, brain.getObject(),) for brain in list(portal_catalog(**params))])
+            configSpecificFeatures[location] = dict([(brain.id, brain.getObject(),) for brain in list(portal_catalog(**params))])
         res=[]
         for location in where:
             specificfeature_accessor = "get%sSpecificFeatures" % location.capitalize()
             specificFeatures = getattr(self, specificfeature_accessor)()
             for specificfeature in specificFeatures:
-                vocterm = configSpecificFeatures[location][specificfeature['UID']]
+                vocterm = configSpecificFeatures[location][specificfeature['id']]
                 detail = specificfeature['detail']
                 if specificfeature['check']:
                     #render the expressions
