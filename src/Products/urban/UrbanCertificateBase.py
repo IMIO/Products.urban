@@ -67,7 +67,7 @@ schema = Schema((
     DataGridField(
         name='specificFeatures',
         widget=DataGridWidget(
-            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : Column('Detail')},
+            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
             label='Specificfeatures',
             label_msgid='urban_label_specificFeatures',
             i18n_domain='urban',
@@ -83,7 +83,7 @@ schema = Schema((
     DataGridField(
         name='roadSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : Column('Detail')},
+            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
             label='Roadspecificfeatures',
             label_msgid='urban_label_roadSpecificFeatures',
             i18n_domain='urban',
@@ -99,7 +99,7 @@ schema = Schema((
     DataGridField(
         name='locationSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : Column('Detail')},
+            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
             label='Locationspecificfeatures',
             label_msgid='urban_label_locationSpecificFeatures',
             i18n_domain='urban',
@@ -115,18 +115,18 @@ schema = Schema((
     DataGridField(
         name='customSpecificFeatures',
         widget=DataGridWidget(
-            columns={'feature' : TextAreaColumn("Feature", rows=1, cols=10)},
+            columns={'text' : TextAreaColumn("Feature", rows=1, cols=50)},
             label='Customspecificfeatures',
             label_msgid='urban_label_customSpecificFeatures',
             i18n_domain='urban',
         ),
         schemata='urban_description',
-        columns=('feature',),
+        columns=('text',),
     ),
     DataGridField(
         name='townshipSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : Column('Detail')},
+            columns= {'UID' : FixedColumn('UID', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
             label='Townshipspecificfeatures',
             label_msgid='urban_label_townshipSpecificFeatures',
             i18n_domain='urban',
@@ -355,34 +355,32 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         tool = getToolByName(self, 'portal_urban')
         portal_catalog = getToolByName(self, 'portal_catalog')
         config = tool.getUrbanConfig(self, urbanConfigId=self.portal_type.lower())
-        #get every enabled specific features from each config
-        enabledSpecificFeatures = {}
+        #get all the specificfeatures vocabular terms from each config
+        configSpecificFeatures = {}
         for location in where:
             specificFeaturesPath = '/'.join(getattr(config, "%sspecificfeatures" % location).getPhysicalPath())
             params = {
                       'path': specificFeaturesPath,
                       'sort_on': 'getObjPositionInParent',
-                      'review_state': 'enabled',
             }
-            enabledSpecificFeatures[location] = list(portal_catalog(**params))
+            configSpecificFeatures[location] = dict([(brain.UID, brain.getObject(),) for brain in list(portal_catalog(**params))])
         res=[]
         for location in where:
             specificfeature_accessor = "get%sSpecificFeatures" % location.capitalize()
-            specificfeaturedetail_accessor = "get%sSpecificFeaturesDetail" % location.capitalize()
             specificFeatures = getattr(self, specificfeature_accessor)()
-            for index_esf, esf in enumerate(enabledSpecificFeatures[location]):
-                obj = esf.getObject()
-                detail = getattr(self, specificfeaturedetail_accessor)()[index_esf]['detail']
-                if esf.id in specificFeatures:
+            for specificfeature in specificFeatures:
+                vocterm = configSpecificFeatures[location][specificfeature['UID']]
+                detail = specificfeature['detail']
+                if specificfeature['check']:
                     #render the expressions
-                    render = obj.getRenderedDescription(self)
+                    render = vocterm.getRenderedDescription(self)
                     render =  detail and '%s %s' % (render, detail) or render
                     if active_style:
                         render = tool.decorateHTML(active_style, render)
                     res.append(render)
                 else:
                     #replace the expressions by a null value, aka "..."
-                    render = obj.getRenderedDescription(self, renderToNull=True)
+                    render = vocterm.getRenderedDescription(self, renderToNull=True)
                     render =  detail and '%s %s' % (render, detail) or render
                     if inactive_style:
                         render = tool.decorateHTML(inactive_style, render)
