@@ -1,13 +1,13 @@
-from Products.urban.browser.licenceview import LicenceView
+from Products.urban.browser.urbancertificatebaseview import UrbanCertificateBaseView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
-class NotaryLetterView(LicenceView):
+class NotaryLetterView(UrbanCertificateBaseView):
     """
       This manage the view of NotaryLetter
     """
     def __init__(self, context, request):
-        super(LicenceView, self).__init__(context, request)
+        super(UrbanCertificateBaseView, self).__init__(context, request)
         self.context = context
         self.request = request
         plone_utils = getToolByName(context, 'plone_utils')
@@ -18,7 +18,7 @@ class NotaryLetterView(LicenceView):
         if self.hasOutdatedParcels():
             plone_utils.addPortalMessage(_('warning_outdated_parcel'), type="warning")
 
-class NotaryLetterMacros(LicenceView):
+class NotaryLetterMacros(UrbanCertificateBaseView):
     """
       This manage the macros of NotaryLetter
     """

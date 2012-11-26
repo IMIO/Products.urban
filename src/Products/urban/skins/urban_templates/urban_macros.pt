@@ -644,22 +644,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
     </tal:manage_subdivision>
     </tal:subdivision>
 
-   <tal:comment replace="nothing">put the detail field on the right of the specificfeatures field</tal:comment>
-   <tal:specificfeatures condition="python: fieldName in ['specificFeatures', 'roadSpecificFeatures',
-   'locationSpecificFeatures', 'townshipSpecificFeatures']"><br/><br/>
-   <div>
-    <table align='left'>
-     <tr>
-      <td class="specificFeatures"><metal:fieldMacro use-macro="python:here.widget('%s' % fieldName, mode='edit')" /></td>
-      <td class="specificFeaturesDetails"><metal:fieldMacro use-macro="python:here.widget('%sDetail' % fieldName, mode='edit')" /></td>
-     </tr>
-    </table>
-   </div>
-   </tal:specificfeatures>
-
-   <tal:other condition="not: python: fieldName in ['isInPCA', 'pca', 'isInSubdivision', 'parcellings', 'subdivisionDetails',
-   'specificFeatures', 'specificFeaturesDetail', 'roadSpecificFeatures', 'roadSpecificFeaturesDetail', 'locationSpecificFeatures',
-   'locationSpecificFeaturesDetail', 'townshipSpecificFeatures', 'townshipSpecificFeaturesDetail']">
+   <tal:other condition="not: python: fieldName in ['isInPCA', 'pca', 'isInSubdivision', 'parcellings', 'subdivisionDetails',]">
     <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
    </tal:other>
  </tal:block>

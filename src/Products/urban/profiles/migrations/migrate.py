@@ -38,10 +38,12 @@ def migrateToUrban115(context):
     # The parcellings folder has been moved from './portal_urban' to './urban'
     # the notaries , geometricians and architects folders views are now a browserview
     migrateParcellingsFolder(context)
-    #PEB categories are now configurable, this step creates the folder configs with some vocabulary
+    # PEB categories are now configurable, this step creates the folder configs with some vocabulary
     migratePEBCategories(context)
-    #numerotation and reference TAL expression is now specific to each licence type
+    # numerotation and reference TAL expression is now specific to each licence type
     migrateReferenceNumerotation(context)
+    #
+    migrateSpecificFeatures(context)
 
 def migrateToUrban114(context):
     """
@@ -1011,3 +1013,33 @@ def migrateReferenceNumerotation(context):
             config.setNumerotation(getattr(portal_urban, '%sNumerotation' % licence_type))
     logger.info("Migrated numerotation")
 
+def migrateSpecificFeatures(context):
+    """
+    Migrate old fields xxxSpecificFeatures and xxxSpecificFeaturesDetails from CU1, CU2 and notary letters into one field
+    """
+    for portal_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter']:
+        # gather all the folders to migrate
+        site = context.getSite()
+        catalog = getToolByName(site, 'portal_catalog')
+        licence_brains = catalog(portal_type=portal_type)
+        for brain in licence_brains:
+            licence = brain.getObject()
+            for subtype in ['', 'township', 'location', 'road']:
+                # generate the default values from the config (getFixedRows...)
+                defaultrows_method =  'get%sFeaturesRows' % (subtype and subtype.capitalize() or 'Specific')
+                default_rows = [row.initialData for row in getattr(licence, defaultrows_method)()]
+                # get the old values from the old field and the detail field
+                old_specificFeatures = getattr(licence, '%s%specificFeatures' % (subtype, subtype and 'S' or 's'))
+                detail = getattr(licence, '%s%specificFeaturesDetail' % (subtype, subtype and 'S' or 's'))
+                # modify these rows accordingly to the old values found
+                #import ipdb; ipdb.set_trace()
+                for index, row in enumerate(default_rows):
+                    if row['id'] in old_specificFeatures:
+                        row['check'] = '1'
+                    try:
+                        row['detail'] = detail[index]['detail']
+                    except:
+                        pass
+                getattr(licence, 'set%sSpecificFeatures' % subtype.capitalize())(default_rows)
+                # delete detail field
+                delattr(licence, '%s%specificFeaturesDetail' % (subtype, subtype and 'S' or 's'))

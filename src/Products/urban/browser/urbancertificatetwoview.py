@@ -1,14 +1,14 @@
 from Acquisition import aq_inner
-from Products.urban.browser.licenceview import LicenceView
+from Products.urban.browser.urbancertificatebaseview import UrbanCertificateBaseView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
-class UrbanCertificateTwoView(LicenceView):
+class UrbanCertificateTwoView(UrbanCertificateBaseView):
     """
       This manage the view of UrbanCertificateTwo
     """
     def __init__(self, context, request):
-        super(LicenceView, self).__init__(context, request)
+        super(UrbanCertificateBaseView, self).__init__(context, request)
         self.context = context
         self.request = request
         plone_utils = getToolByName(context, 'plone_utils')
@@ -32,7 +32,7 @@ class UrbanCertificateTwoView(LicenceView):
             inquiries.append(context)
         return inquiries
 
-class UrbanCertificateTwoMacros(LicenceView):
+class UrbanCertificateTwoMacros(UrbanCertificateBaseView):
     """
       This manage the macros of UrbanCertificateTwo
     """
