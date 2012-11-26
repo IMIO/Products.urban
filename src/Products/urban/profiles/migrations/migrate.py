@@ -952,10 +952,13 @@ def migrateKeyDates(context):
     for configname, eventtypes in to_migrate.iteritems():
         config = getattr(getattr(portal_urban, configname), 'urbaneventtypes')
         for event_id in eventtypes:
-            eventtype = getattr(config, event_id)
-            eventtype.setIsKeyEvent(True)
-            eventtype.setKeyDates(('eventDate',))
-            logger.info("Migrated urbanEventType '%s'" % eventtype.Title())
+            if hasattr(config, event_id):
+                eventtype = getattr(config, event_id)
+                eventtype.setIsKeyEvent(True)
+                eventtype.setKeyDates(('eventDate',))
+                logger.info("Migrated urbanEventType '%s'" % eventtype.Title())
+            else:
+                logger.info("Could not find urbanEventType '%s'" % eventtype.Title())
 
 def migrateParcellingsFolder(context):
     """
