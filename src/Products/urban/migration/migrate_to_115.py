@@ -24,7 +24,7 @@ def migrateToUrban115(context):
     migratePEBCategories(context)
     #numerotation and reference TAL expression is now specific to each licence type
     migrateReferenceNumerotation(context)
-    #
+    # the fields specificFeature and specificFeaturesDetail of CU1, CU2, NotaryLetter are now merged
     migrateSpecificFeatures(context)
 
 def migratePersonTitles(context):
@@ -92,10 +92,13 @@ def migrateKeyDates(context):
     for configname, eventtypes in to_migrate.iteritems():
         config = getattr(getattr(portal_urban, configname), 'urbaneventtypes')
         for event_id in eventtypes:
-            eventtype = getattr(config, event_id)
-            eventtype.setIsKeyEvent(True)
-            eventtype.setKeyDates(('eventDate',))
-            logger.info("Migrated key date on  urbanEventType '%s'" % eventtype.Title())
+            if hasattr(config, event_id):
+                eventtype = getattr(config, event_id)
+                eventtype.setIsKeyEvent(True)
+                eventtype.setKeyDates(('eventDate',))
+                logger.info("Migrated key date on  urbanEventType '%s'" % eventtype.Title())
+            else:
+                logger.info("Could not find urbanEventType '%s'" % eventtype.Title())
 
 def migrateParcellingsFolder(context):
     """
@@ -157,6 +160,7 @@ def migrateSpecificFeatures(context):
         licence_brains = catalog(portal_type=portal_type)
         for brain in licence_brains:
             licence = brain.getObject()
+            logger.info("Migrate specificFeatures of licence: '%s'" % licence.Title())
             for subtype in ['', 'township', 'location', 'road']:
                 # generate the default values from the config (getFixedRows...)
                 defaultrows_method =  'get%sFeaturesRows' % (subtype and subtype.capitalize() or 'Specific')
@@ -176,3 +180,4 @@ def migrateSpecificFeatures(context):
                 getattr(licence, 'set%sSpecificFeatures' % subtype.capitalize())(default_rows)
                 # delete detail field
                 delattr(licence, '%s%specificFeaturesDetail' % (subtype, subtype and 'S' or 's'))
+    logger.info("Migrated specificFeatures")
