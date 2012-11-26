@@ -42,7 +42,7 @@ def migrateToUrban115(context):
     migratePEBCategories(context)
     # numerotation and reference TAL expression is now specific to each licence type
     migrateReferenceNumerotation(context)
-    #
+    # the fields specificFeature and specificFeaturesDetail of CU1, CU2, NotaryLetter are now merged
     migrateSpecificFeatures(context)
 
 def migrateToUrban114(context):
@@ -1024,6 +1024,7 @@ def migrateSpecificFeatures(context):
         licence_brains = catalog(portal_type=portal_type)
         for brain in licence_brains:
             licence = brain.getObject()
+            logger.info("Migrate specificFeatures of licence: '%s'" % licence.Title())
             for subtype in ['', 'township', 'location', 'road']:
                 # generate the default values from the config (getFixedRows...)
                 defaultrows_method =  'get%sFeaturesRows' % (subtype and subtype.capitalize() or 'Specific')
@@ -1032,7 +1033,6 @@ def migrateSpecificFeatures(context):
                 old_specificFeatures = getattr(licence, '%s%specificFeatures' % (subtype, subtype and 'S' or 's'))
                 detail = getattr(licence, '%s%specificFeaturesDetail' % (subtype, subtype and 'S' or 's'))
                 # modify these rows accordingly to the old values found
-                #import ipdb; ipdb.set_trace()
                 for index, row in enumerate(default_rows):
                     if row['id'] in old_specificFeatures:
                         row['check'] = '1'
@@ -1043,3 +1043,4 @@ def migrateSpecificFeatures(context):
                 getattr(licence, 'set%sSpecificFeatures' % subtype.capitalize())(default_rows)
                 # delete detail field
                 delattr(licence, '%s%specificFeaturesDetail' % (subtype, subtype and 'S' or 's'))
+    logger.info("Migrated specificFeatures")
