@@ -351,4 +351,13 @@ INPUT.button-urbanschedule
     padding-left: 1em;
 }
 
+
+table[id$=ecificFeatures] td{ 
+   vertical-align: middle; 
+} 
+
+table[id$=ecificFeatures] tr.odd{ 
+   background-color: lightgray; 
+} 
+
 /* </dtml-with> */

@@ -14,6 +14,9 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: datagridfield\n"
 
+msgid "Detail"
+msgstr "Détail"
+
 msgid "End date"
 msgstr "Date de fin de l'enquête"
 
@@ -32,6 +35,9 @@ msgstr "Détails concernant les équipements"
 msgid "Road equipments"
 msgstr "Equipements de la voirie au droit du bien"
 
+msgid "Select"
+msgstr "+"
+
 msgid "Start date"
 msgstr "Date du début de l'enquête"
 
@@ -39,5 +45,5 @@ msgid "Street"
 msgstr "Rue"
 
 msgid "Text"
-msgstr "Texte par défaut"
+msgstr "Texte"
 

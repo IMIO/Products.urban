@@ -40,3 +40,10 @@ msgstr ""
 
 msgid "FieldName"
 msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Detail"
+msgstr ""
+
