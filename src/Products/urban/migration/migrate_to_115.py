@@ -167,7 +167,9 @@ def migrateSpecificFeatures(context):
                 default_rows = [row.initialData for row in getattr(licence, defaultrows_method)()]
                 # get the old values from the old field and the detail field
                 old_specificFeatures = getattr(licence, '%s%specificFeatures' % (subtype, subtype and 'S' or 's'))
-                detail = getattr(licence, '%s%specificFeaturesDetail' % (subtype, subtype and 'S' or 's'))
+                detail = None
+                if hasattr(licence, '%s%specificFeaturesDetail' % (subtype, subtype and 'S' or 's')):
+                    detail = getattr(licence, '%s%specificFeaturesDetail' % (subtype, subtype and 'S' or 's'))
                 # modify these rows accordingly to the old values found
                 #import ipdb; ipdb.set_trace()
                 for index, row in enumerate(default_rows):
@@ -179,5 +181,6 @@ def migrateSpecificFeatures(context):
                         pass
                 getattr(licence, 'set%sSpecificFeatures' % subtype.capitalize())(default_rows)
                 # delete detail field
-                delattr(licence, '%s%specificFeaturesDetail' % (subtype, subtype and 'S' or 's'))
+                if hasattr(licence, '%s%specificFeaturesDetail' % (subtype, subtype and 'S' or 's')):
+                    delattr(licence, '%s%specificFeaturesDetail' % (subtype, subtype and 'S' or 's'))
     logger.info("Migrated specificFeatures")
