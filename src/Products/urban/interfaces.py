@@ -174,6 +174,10 @@ class IEnvironmentBase(Interface):
     """Marker interface for .EnvironmentBase.EnvironmentBase
     """
 
+class IEnvironmentRubricTerm(Interface):
+    """Marker interface for .EnvironmentRubricTerm.EnvironmentRubricTerm
+    """
+
 ##code-section FOOT
 class ILicenceContainer(Interface):
     """
