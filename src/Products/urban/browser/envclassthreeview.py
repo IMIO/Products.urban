@@ -19,6 +19,12 @@ class EnvClassThreeView(LicenceView):
         if self.hasOutdatedParcels():
             plone_utils.addPortalMessage(_('warning_outdated_parcel'), type="warning")
 
+    def getRubrics(self):
+        context = aq_inner(self.context)
+        catalog = getToolByName(context, 'portal_catalog')
+        rubric_uids = context.getField('rubrics').getRaw(context)
+        rubric_brains = catalog(UID=rubric_uids)
+        return ['<p>%s</p>%s' % (brain.Title.split(':')[0], brain.Description) for brain in rubric_brains]
 
 class EnvClassThreeMacros(LicenceView):
     """

@@ -4,6 +4,7 @@ import os
 import random
 import string
 import hashlib
+from HTMLParser import HTMLParser
 
 def moveElementAfter(object_to_move, container, attr_name, attr_value_to_match):
     new_position = container.getObjectPosition(object_to_move.getId())
@@ -55,3 +56,24 @@ def setSchemataForInquiry(schema):
     inquiryFields = inquiryFields[2:]
     for inquiryField in inquiryFields:
         schema[inquiryField.getName()].schemata = 'urban_investigation_and_advices'
+
+from HTMLParser import HTMLParser
+
+
+#class and function to strip a text from all its HTML tags
+class MLStripper(HTMLParser):
+
+    def __init__(self):
+        self.reset()
+        self.fed = []
+
+    def handle_data(self, d):
+        self.fed.append(d)
+
+    def get_data(self):
+        return ''.join(self.fed)
+
+def strip_tags(html):
+    s = MLStripper()
+    s.feed(html)
+    return s.get_data()

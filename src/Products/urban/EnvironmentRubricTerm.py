@@ -25,6 +25,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.urban.utils import strip_tags
 ##/code-section module-header
 
 schema = Schema((
@@ -32,12 +33,12 @@ schema = Schema((
     ReferenceField(
         name='exploitationCondition',
         widget=ReferenceBrowserWidget(
-            allow_search=True,
-            allow_browse=True,
-            force_close_on_insert=True,
+            allow_browse= True,
+            allow_search= True,
+            force_close_on_insert= True,
             startup_directory_method='getExploitationConditionsPath',
-            show_indexes=False,
-            wild_card_search=True,
+            show_indexes= False,
+            wild_card_search= True,
             label='Exploitationcondition',
             label_msgid='urban_label_exploitationCondition',
             i18n_domain='urban',
@@ -77,9 +78,18 @@ class EnvironmentRubricTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixi
 
     # Manually created methods
 
+    def updateTitle(self):
+        class_number = self.getExtraValue()
+        rubric_number = self.Title().split()[2]
+        description = strip_tags(self.Description())
+        new_title =  "classe %s,  %s : %s" % (class_number, rubric_number, description)
+        self.setTitle(new_title)
+        self.reindexObject(idxs=('Title', 'SearchableText', 'sortable_title', ))
+
     def getExploitationConditionsPath(self):
         portal_urban = getToolByName(self, 'portal_urban')
         return '/'.join(portal_urban.exploitationconditions.getPhysicalPath())
+
 
 
 registerType(EnvironmentRubricTerm, PROJECTNAME)

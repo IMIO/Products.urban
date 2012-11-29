@@ -6,4 +6,3 @@ def onDelete(ob, event):
     """
     ob.aq_inner.aq_parent.reindexObject(idxs=["parcelInfosIndex"])
 
-    

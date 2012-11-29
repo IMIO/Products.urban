@@ -71,6 +71,20 @@
        <span tal:condition="not: context/getBusinessDescription" class="discreet" i18n:translate="content_none">None</span>
       </td>
      </tr>
+     <tr tal:define="rubrics view/getRubrics">
+      <td valign="top"><b><span i18n:translate="urban_label_rubrics">Rubrics</span>:</b></td>
+      <td width="2%"></td>
+      <td tal:condition="not: rubrics" >
+       <span class="discreet" i18n:translate="content_none">None</span>
+      </td>
+      <td tal:condition="rubrics">
+       <ul>
+        <tal:rubric repeat="rubric rubrics">
+         <li><tal:value tal:content="structure python: rubric">Rubric</tal:value>
+        </tal:rubric>
+       </ul>
+      </td>
+     </tr>
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_applicationReasons">Application reasons</span>:</b></td>
       <td width="2%"></td>

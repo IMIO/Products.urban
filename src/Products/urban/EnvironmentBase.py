@@ -24,6 +24,7 @@ from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
@@ -57,6 +58,25 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_description',
         default_output_type='text/html',
+    ),
+    ReferenceField(
+        name='rubrics',
+        widget=ReferenceBrowserWidget(
+            allow_search=True,
+            allow_browse=True,
+            force_close_on_insert=True,
+            startup_directory_method='getRubricsConfigPath',
+            show_indexes=False,
+            wild_card_search=True,
+            restrict_browsing_to_startup_directory= True,
+            label='Rubrics',
+            label_msgid='urban_label_rubrics',
+            i18n_domain='urban',
+        ),
+        allowed_types= ('EnvironmentRubricTerm',),
+        schemata='urban_description',
+        multiValued=True,
+        relationship="rubric",
     ),
     StringField(
         name='applicationReasons',
@@ -222,6 +242,10 @@ class EnvironmentBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
                 res.append(obj)
         return res
 
+    def getRubricsConfigPath(self):
+        portal_urban = getToolByName(self, 'portal_urban')
+        return '/'.join(portal_urban.envclassthree.rubrics.getPhysicalPath())
+
 
 
 registerType(EnvironmentBase, PROJECTNAME)
@@ -234,6 +258,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField('foldermanagers', after='workLocations')
     schema.moveField('businessDescription', after='folderCategory')
+    schema.moveField('rubrics', after='businessDescription')
     schema.moveField('missingParts', after='inadmissibilityReasons')
     schema.moveField('missingPartsDetails', after='missingParts')
     schema.moveField('description', after='missingPartsDetails')
