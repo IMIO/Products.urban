@@ -756,6 +756,14 @@ def addUrbanConfigs(context):
             addPEBCategories(context, configFolder)
 
         if urban_type in ['EnvClassThree',]:
+            if not hasattr(aq_base(configFolder), 'rubrics'):
+                newFolderid = configFolder.invokeFactory("Folder",id="rubrics",title=_("rubrics_folder_title", 'urban', context=site.REQUEST))
+                newFolder = getattr(configFolder, newFolderid)
+                newFolder.setConstrainTypesMode(1)
+                newFolder.setLocallyAllowedTypes(['Folder'])
+                newFolder.setImmediatelyAddableTypes(['Folder'])
+                addRubricValues(context, 3, newFolder)
+
             if not hasattr(aq_base(configFolder), 'inadmissibilityreasons'):
                 newFolderid = configFolder.invokeFactory("Folder",id="inadmissibilityreasons",title=_("inadmissibilityreasons_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
@@ -779,6 +787,27 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="transformation",title=u"Extension ou de la transformation d’un établissement ancien")
                 newFolder.invokeFactory("UrbanVocabularyTerm",id="location_move",title=u"Déplacement de l’établissement")
 
+def addRubricValues(context, class_type, config_folder):
+    categories = [
+            "01   AGRICULTURE, DETENTION D'ANIMAUX, SERVICES ANNEXES",
+            "02   SYLVICULTURE, EXPLOITATION FORESTIÈRE, SERVICES ANNEXES",
+            "05   PÊCHE, AQUACULTURE",
+            "10   EXTRACTION DE HOUILLE, DE LIGNITE ET DE TOURBE",
+            "11   EXTRACTION D'HYDROCARBURES, SERVICES ANNEXES",
+            "13   EXTRACTION DE MINERAIS MÉTALLIQUES ",
+            "14   AUTRES INDUSTRIES EXTRACTIVES",
+            "15   INDUSTRIES AGRO-ALIMENTAIRES",
+            "16   INDUSTRIE DU TABAC",
+            "17   INDUSTRIE TEXTILE",
+            ]
+
+    for category in categories:
+        newFolderid = config_folder.invokeFactory("Folder",id=category.split()[0], title=category)
+        newFolder = getattr(config_folder, newFolderid)
+        newFolder.setConstrainTypesMode(1)
+        newFolder.setLocallyAllowedTypes(['EnvironmentRubricTerm'])
+        newFolder.setImmediatelyAddableTypes(['EnvironmentRubricTerm'])
+    return
 
 def addPEBCategories(context, configFolder):
     """
@@ -1258,21 +1287,27 @@ def addGlobalFolders(context):
         newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-activites-economiques-mixtes",title=u"Zone d'activités économiques mixtes")
         newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-activites-economiques-tertiaires",title=u"Zone d'activités économiques tertiaires")
 
-    #add the secorial conditions folder
+    #add the exploitation conditions folder
     if not hasattr(tool, "integralconditions"):
-        newFolderid = tool.invokeFactory("Folder",id="integralconditions",title=_("integralconditions_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-
-    #add the secorial conditions folder
-    if not hasattr(tool, "sectorialconditions"):
-        newFolderid = tool.invokeFactory("Folder",id="sectorialconditions",title=_("sectorialconditions_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+        conditionsid = tool.invokeFactory("Folder",id="exploitationconditions",title=_("exploitationconditions_folder_title", 'urban', context=site.REQUEST))
+        conditions = getattr(tool, conditionsid)
+        conditions.setConstrainTypesMode(1)
+        conditions.setLocallyAllowedTypes(['Folder'])
+        conditions.setImmediatelyAddableTypes(['Folder'])
+        #add the secorial conditions folder
+        if not hasattr(conditions, "integralconditions"):
+            newFolderid = conditions.invokeFactory("Folder",id="integralconditions",title=_("integralconditions_folder_title", 'urban', context=site.REQUEST))
+            newFolder = getattr(conditions, newFolderid)
+            newFolder.setConstrainTypesMode(1)
+            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+        #add the secorial conditions folder
+        if not hasattr(conditions, "sectorialconditions"):
+            newFolderid = conditions.invokeFactory("Folder",id="sectorialconditions",title=_("sectorialconditions_folder_title", 'urban', context=site.REQUEST))
+            newFolder = getattr(conditions, newFolderid)
+            newFolder.setConstrainTypesMode(1)
+            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
 
     #add the additional_layers folder
     if not hasattr(tool, "additional_layers"):

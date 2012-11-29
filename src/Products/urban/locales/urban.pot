@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-11-13 08:04+0000\n"
+"POT-Creation-Date: 2012-11-27 08:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -513,6 +513,9 @@ msgstr ""
 msgid "event_linked_documents"
 msgstr ""
 
+msgid "exploitationconditions_folder_title"
+msgstr ""
+
 msgid "external_decisions_folder_title"
 msgstr ""
 
@@ -1003,6 +1006,9 @@ msgid "road_adaptation_modify"
 msgstr ""
 
 msgid "road_adaptation_no"
+msgstr ""
+
+msgid "rubrics_folder_title"
 msgstr ""
 
 msgid "search-last-elements"
@@ -1607,6 +1613,11 @@ msgstr ""
 #. Default: "Explanationsdate"
 #: UrbanEvent.py
 msgid "urban_label_explanationsDate"
+msgstr ""
+
+#. Default: "Exploitationcondition"
+#: EnvironmentRubricTerm.py
+msgid "urban_label_exploitationCondition"
 msgstr ""
 
 #. Default: "Exponent"
@@ -2262,6 +2273,11 @@ msgstr ""
 #. Default: "Roadtype"
 #: GenericLicence.py
 msgid "urban_label_roadType"
+msgstr ""
+
+#. Default: "Rubrics"
+#: EnvironmentBase.py
+msgid "urban_label_rubrics"
 msgstr ""
 
 #. Default: "Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word"

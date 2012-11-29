@@ -69,6 +69,7 @@ ADD_CONTENT_PERMISSIONS = {
     'UrbanConfigurationValue': 'urban: Add UrbanConfigurationValue',
     'UrbanDoc': 'urban: Add UrbanDoc',
     'EnvironmentBase': 'urban: Add EnvironmentBase',
+    'EnvironmentRubricTerm': 'urban: Add EnvironmentRubricTerm',
 }
 
 setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
@@ -105,6 +106,7 @@ setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanConfigurationValue',  ('Manager', ))
 setDefaultRoles('urban: Add UrbanDoc', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvironmentBase', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add EnvironmentRubricTerm', ("Manager", "Contributor"))
 
 product_globals = globals()
 

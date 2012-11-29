@@ -22,6 +22,9 @@
   <type type_id="EnvironmentBase">
    <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
+  <type type_id="EnvironmentRubricTerm">
+   <bound-workflow workflow_id="activation_workflow" />
+  </type>
   <type type_id="FolderManager">
    <bound-workflow workflow_id="activation_workflow" />
   </type>

@@ -114,6 +114,9 @@ msgstr ""
 msgid "MiscDemand"
 msgstr ""
 
+msgid "EnvironmentRubricTerm"
+msgstr ""
+
 #status messages...
 msgid "db_connection_successfull"
 msgstr ""

@@ -115,6 +115,7 @@ def initialize(context):
     import UrbanConfigurationValue
     import UrbanDoc
     import EnvironmentBase
+    import EnvironmentRubricTerm
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

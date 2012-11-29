@@ -43,6 +43,9 @@ msgstr "Déclaration"
 msgid "EnvClassThree"
 msgstr "Déclaration environnementale"
 
+msgid "EnvironmentRubricTerm"
+msgstr "Rubrique environnement"
+
 msgid "FolderManager"
 msgstr "Gestionnaire de dossier"
 

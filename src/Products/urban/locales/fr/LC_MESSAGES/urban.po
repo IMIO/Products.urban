@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2012-11-13 08:04+0000\n"
+"POT-Creation-Date: 2012-11-27 08:50+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -514,6 +514,9 @@ msgstr "Annexes liées à cet événement"
 msgid "event_linked_documents"
 msgstr "Documents liés à cet événement"
 
+msgid "exploitationconditions_folder_title"
+msgstr "Conditions d'exploitation"
+
 msgid "external_decisions_folder_title"
 msgstr "Décision des avis externes"
 
@@ -1005,6 +1008,9 @@ msgstr "Oui, modification"
 
 msgid "road_adaptation_no"
 msgstr "Non"
+
+msgid "rubrics_folder_title"
+msgstr "Rubriques"
 
 msgid "search-last-elements"
 msgstr "Derniers éléments"
@@ -1611,6 +1617,11 @@ msgstr "Catégorie du type d'événement"
 #: UrbanEvent.py
 msgid "urban_label_explanationsDate"
 msgstr "Date de la séance d'explications"
+
+#. Default: "Exploitationcondition"
+#: EnvironmentRubricTerm.py
+msgid "urban_label_exploitationCondition"
+msgstr "Condition d'exploitation liée"
 
 #. Default: "Exponent"
 #: PortionsOut.py
@@ -2266,6 +2277,11 @@ msgstr "Avis technique voirie"
 #: GenericLicence.py
 msgid "urban_label_roadType"
 msgstr "Type de voirie"
+
+#. Default: "Rubrics"
+#: EnvironmentBase.py
+msgid "urban_label_rubrics"
+msgstr "Rubrique(s)"
 
 #. Default: "Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word"
 #: urban_searchbyapplicant.py

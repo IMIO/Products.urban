@@ -36,5 +36,6 @@
   <type portal_type="UrbanConfigurationValue"/>
   <type portal_type="UrbanDoc"/>
   <type portal_type="EnvironmentBase"/>
+  <type portal_type="EnvironmentRubricTerm"/>
  </factorytypes>
 </object>
