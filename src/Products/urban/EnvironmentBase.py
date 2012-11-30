@@ -33,7 +33,7 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
-optional_fields =['inadmissibilityReasons']
+optional_fields =['inadmissibilityReasons', 'roadTechnicalAdvice', 'locationTechnicalAdvice']
 
 slave_fields_oldlocation= (
     {'name': 'businessOldLocation',
@@ -145,6 +145,32 @@ schema = Schema((
         schemata="urban_description",
         multiValued=True,
         relationship='additionalconditions',
+    ),
+    TextField(
+        name='roadTechnicalAdvice',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Roadtechnicaladvice',
+            label_msgid='urban_label_roadTechnicalAdvice',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_road',
+        default_output_type='text/html',
+    ),
+    TextField(
+        name='locationTechnicalAdvice',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Locationtechnicaladvice',
+            label_msgid='urban_label_locationTechnicalAdvice',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/html',
     ),
 
 ),
