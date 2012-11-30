@@ -33,7 +33,7 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
-optional_fields =['inadmissibilityReasons', 'integralConditions', 'sectorialConditions']
+optional_fields =['inadmissibilityReasons']
 
 slave_fields_oldlocation= (
     {'name': 'businessOldLocation',
@@ -118,46 +118,33 @@ schema = Schema((
         default_method='getDefaultValue',
     ),
     ReferenceField(
-        name='integralConditions',
+        name='minimumLegalConditions',
         widget=ReferenceBrowserWidget(
-            visible=True,
-            allow_browse=True,
-            allow_search=True,
-            show_indexes=True,
-            available_indexes={'Title':'Nom'},
-            show_index_selector=True,
-            startup_directory='portal_urban/integralconditions',
-            restrict_browsing_to_startup_directory=True,
-            default_search_index='Title',
-            wild_card_search=True,
-            label='Integralconditions',
-            label_msgid='urban_label_integralConditions',
+            visible=False,
+            label='Minimumlegalconditions',
+            label_msgid='urban_label_minimumLegalConditions',
             i18n_domain='urban',
         ),
         schemata="urban_description",
         multiValued=True,
-        relationship='integralconditions',
+        relationship='minimumconditions',
     ),
     ReferenceField(
-        name='sectorialConditions',
+        name='additionalLegalConditions',
         widget=ReferenceBrowserWidget(
-            visible=True,
             allow_browse=True,
             allow_search=True,
-            show_indexes=True,
-            available_indexes={'Title':'Nom'},
-            show_index_selector=True,
-            startup_directory='portal_urban/sectorialconditions',
-            restrict_browsing_to_startup_directory=True,
             default_search_index='Title',
+            startup_directory='portal_urban/exploitationconditions',
+            restrict_browsing_to_startup_directory=True,
             wild_card_search=True,
-            label='Sectorialconditions',
-            label_msgid='urban_label_sectorialConditions',
+            label='Additionallegalconditions',
+            label_msgid='urban_label_additionalLegalConditions',
             i18n_domain='urban',
         ),
         schemata="urban_description",
         multiValued=True,
-        relationship='sectorialconditions',
+        relationship='additionalconditions',
     ),
 
 ),

@@ -20,11 +20,44 @@ class EnvClassThreeView(LicenceView):
             plone_utils.addPortalMessage(_('warning_outdated_parcel'), type="warning")
 
     def getRubrics(self):
+        """
+        display the rubrics number, their class and then the text
+        """
         context = aq_inner(self.context)
         catalog = getToolByName(context, 'portal_catalog')
         rubric_uids = context.getField('rubrics').getRaw(context)
         rubric_brains = catalog(UID=rubric_uids)
         return ['<p>%s</p>%s' % (brain.Title.split(':')[0], brain.Description) for brain in rubric_brains]
+
+    def _sortConditions(self, conditions):
+        """
+        sort exploitation conditions in this order: CI & CS, CI, CS
+        """
+        order = ['CI & CS', 'CI', 'CS']
+        sorted_conditions = dict([(val, [],) for val in order])
+        for cond in conditions:
+            val = cond.getExtraValue()
+            sorted_conditions[val].append({'type':val, 'url':cond.absolute_url(), 'title':cond.Title()})
+        sort = []
+        for val in order:
+            sort.extend(sorted_conditions[val])
+        return sort
+
+    def getMinimumConditions(self):
+        """
+        sort the conditions from the fields 'minimumLegalConditions'  by type (integral, sectorial, ...)
+        """
+        context = aq_inner(self.context)
+        min_conditions = context.getMinimumLegalConditions()
+        return self._sortConditions(min_conditions)
+
+    def getAdditionalConditions(self):
+        """
+        sort the conditions from the fields 'additionalLegalConditions'  by type (integral, sectorial, ...)
+        """
+        context = aq_inner(self.context)
+        sup_conditions = context.getAdditionalLegalConditions()
+        return self._sortConditions(sup_conditions)
 
 class EnvClassThreeMacros(LicenceView):
     """

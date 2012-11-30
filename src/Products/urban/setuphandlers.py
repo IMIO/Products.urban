@@ -1288,26 +1288,37 @@ def addGlobalFolders(context):
         newFolder.invokeFactory("UrbanVocabularyTerm",id="ssc-activites-economiques-tertiaires",title=u"Zone d'activités économiques tertiaires")
 
     #add the exploitation conditions folder
-    if not hasattr(tool, "integralconditions"):
+    condtions = None
+    if not hasattr(tool, "exploitationconditions"):
         conditionsid = tool.invokeFactory("Folder",id="exploitationconditions",title=_("exploitationconditions_folder_title", 'urban', context=site.REQUEST))
         conditions = getattr(tool, conditionsid)
         conditions.setConstrainTypesMode(1)
         conditions.setLocallyAllowedTypes(['Folder'])
         conditions.setImmediatelyAddableTypes(['Folder'])
-        #add the secorial conditions folder
-        if not hasattr(conditions, "integralconditions"):
-            newFolderid = conditions.invokeFactory("Folder",id="integralconditions",title=_("integralconditions_folder_title", 'urban', context=site.REQUEST))
-            newFolder = getattr(conditions, newFolderid)
-            newFolder.setConstrainTypesMode(1)
-            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        #add the secorial conditions folder
-        if not hasattr(conditions, "sectorialconditions"):
-            newFolderid = conditions.invokeFactory("Folder",id="sectorialconditions",title=_("sectorialconditions_folder_title", 'urban', context=site.REQUEST))
-            newFolder = getattr(conditions, newFolderid)
-            newFolder.setConstrainTypesMode(1)
-            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+        #add the 'integral and sectorial conditions' folder
+    else:
+        conditions = getattr(tool, "exploitationconditions")
+    #add the 'integral and sectorial conditions' folder
+    if not hasattr(conditions, "i_and s_conditions"):
+        newFolderid = conditions.invokeFactory("Folder",id="i_and_s_conditions",title=_("i_and_s_conditions_folder_title", 'urban', context=site.REQUEST))
+        newFolder = getattr(conditions, newFolderid)
+        newFolder.setConstrainTypesMode(1)
+        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+    #add the integral conditions folder
+    if not hasattr(conditions, "integralconditions"):
+        newFolderid = conditions.invokeFactory("Folder",id="integralconditions",title=_("integralconditions_folder_title", 'urban', context=site.REQUEST))
+        newFolder = getattr(conditions, newFolderid)
+        newFolder.setConstrainTypesMode(1)
+        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+    #add the sectorial conditions folder
+    if not hasattr(conditions, "sectorialconditions"):
+        newFolderid = conditions.invokeFactory("Folder",id="sectorialconditions",title=_("sectorialconditions_folder_title", 'urban', context=site.REQUEST))
+        newFolder = getattr(conditions, newFolderid)
+        newFolder.setConstrainTypesMode(1)
+        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
+        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
 
     #add the additional_layers folder
     if not hasattr(tool, "additional_layers"):

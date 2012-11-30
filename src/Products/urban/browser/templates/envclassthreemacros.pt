@@ -80,7 +80,7 @@
       <td tal:condition="rubrics">
        <ul>
         <tal:rubric repeat="rubric rubrics">
-         <li><tal:value tal:content="structure python: rubric">Rubric</tal:value>
+         <li><tal:value tal:replace="structure python: rubric">Rubric</tal:value>
         </tal:rubric>
        </ul>
       </td>
@@ -102,27 +102,31 @@
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('missingParts', mode='view')" /></td>
      </tr>
-     <tr tal:condition="python: 'integralConditions' in usedAttributes">
-      <td valign="top"><b><span i18n:translate="urban_label_integralConditions">Missing parts</span>:</b></td>
+     <tr tal:define="min_conditions view/getMinimumConditions;
+                     sup_conditions view/getAdditionalConditions">
+      <td valign="top"><b><span i18n:translate="urban_label_minimumLegalConditions">Exploitation conditions</span>:</b></td>
       <td width="2%"></td>
-      <td valign="top">
-       <metal:myfield use-macro="python:here.widget('integralConditions', mode='view')" />
-       <span tal:condition="not: context/getIntegralConditions" class="discreet" i18n:translate="content_none">None</span>
+      <td tal:condition="python: not (min_conditions or sup_conditions)" valign="top">
+       <span class="discreet" i18n:translate="content_none">None</span>
       </td>
-     </tr>
-     <tr tal:condition="python: 'sectorialConditions' in usedAttributes">
-      <td valign="top"><b><span i18n:translate="urban_label_sectorialConditions">Missing parts</span>:</b></td>
-      <td width="2%">
-      <td valign="top">
-       <metal:myfield use-macro="python:here.widget('sectorialConditions', mode='view')" />
-       <span tal:condition="not: context/getSectorialConditions" class="discreet" i18n:translate="content_none">None</span>
+      <td tal:condition="python: min_conditions or sup_conditions">
+       <ul>
+        <tal:rubric repeat="cond min_conditions">
+         <li><span tal:content="python: '%s :' % cond['type']">condition type</span>
+             <a tal:attributes="href python: cond['url']" tal:content="python: cond['title']"></a>
+        </tal:rubric>
+        <hr tal:condition="sup_conditions">
+        <tal:rubric repeat="cond sup_conditions">
+         <li><span tal:content="python: '%s :' % cond['type']">condition type</span>
+             <a tal:attributes="href python: cond['url']" tal:content="python: cond['title']"></a>
+        </tal:rubric>
+       </ul>
       </td>
      </tr>
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_description">Description</span>:</b></td>
       <td width="2%"></td>
       <td valign="top">
-       <metal:myfield use-macro="python:here.widget('description', mode='view')" />
        <span tal:condition="not: context/Description" class="discreet" i18n:translate="content_none">None</span>
       </td>
      </tr>

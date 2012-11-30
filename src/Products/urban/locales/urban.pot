@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-11-27 08:50+0000\n"
+"POT-Creation-Date: 2012-11-30 07:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -644,6 +644,9 @@ msgstr ""
 
 #. Default: "Choose one of the following forms to search for parcels.  You can cumulate criteria if you exactly know what you are looking for"
 msgid "help_search_parcels"
+msgstr ""
+
+msgid "i_and_s_conditions_folder_title"
 msgstr ""
 
 msgid "inadmissibilityreasons_folder_title"
@@ -1295,6 +1298,11 @@ msgstr ""
 msgid "urban_label_activatedFields"
 msgstr ""
 
+#. Default: "Additionallegalconditions"
+#: EnvironmentBase.py
+msgid "urban_label_additionalLegalConditions"
+msgstr ""
+
 # 
 #. Default: "Adr1"
 #: RecipientCadastre.py
@@ -1740,11 +1748,6 @@ msgstr ""
 msgid "urban_label_initials"
 msgstr ""
 
-#. Default: "Integralconditions"
-#: EnvironmentBase.py
-msgid "urban_label_integralConditions"
-msgstr ""
-
 #. Default: "Investigationarticle"
 #: GenericLicence.py
 msgid "urban_label_investigationArticle"
@@ -1969,6 +1972,11 @@ msgstr ""
 #. Default: "Mapextent"
 #: UrbanTool.py
 msgid "urban_label_mapExtent"
+msgstr ""
+
+#. Default: "Minimumlegalconditions"
+#: EnvironmentBase.py
+msgid "urban_label_minimumLegalConditions"
 msgstr ""
 
 msgid "urban_label_missingPartDate"
@@ -2288,16 +2296,6 @@ msgstr ""
 #. Default: "Section"
 #: PortionOut.py
 msgid "urban_label_section"
-msgstr ""
-
-#. Default: "Sectorialcondition"
-#: EnvironmentBase.py
-msgid "urban_label_sectorialCondition"
-msgstr ""
-
-#. Default: "Sectorialconditions"
-#: EnvironmentBase.py
-msgid "urban_label_sectorialConditions"
 msgstr ""
 
 #. Default: "Selectedfield"

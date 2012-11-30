@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2012-11-27 08:50+0000\n"
+"POT-Creation-Date: 2012-11-30 07:37+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -646,6 +646,9 @@ msgstr "Vous ne pouvez pas effectuer de recherche pour l'instant car une erreur 
 #. Default: "Choose one of the following forms to search for parcels.  You can cumulate criteria if you exactly know what you are looking for"
 msgid "help_search_parcels"
 msgstr "Choisissez une des 3 recherches ci-dessous.  Si vous savez exactement ce que vous cherchez, vous pouvez croiser les critères de recherche (encoder l'adresse et le nom du propriétaire par exemple)"
+
+msgid "i_and_s_conditions_folder_title"
+msgstr "Conditions intégrales & sectorielles"
 
 msgid "inadmissibilityreasons_folder_title"
 msgstr "Motifs d'irrecevabilité"
@@ -1297,6 +1300,11 @@ msgstr "Date de l'accusé de réception"
 msgid "urban_label_activatedFields"
 msgstr "Champ(s) activé(s)"
 
+#. Default: "Additionallegalconditions"
+#: EnvironmentBase.py
+msgid "urban_label_additionalLegalConditions"
+msgstr "Condtions intégrales et sectorielles supplémentaires"
+
 #. Default: "Adr1"
 #: RecipientCadastre.py
 msgid "urban_label_adr1"
@@ -1743,11 +1751,6 @@ msgstr "Motifs d'irrecevabilité"
 msgid "urban_label_initials"
 msgstr "Initiales"
 
-#. Default: "Integralconditions"
-#: EnvironmentBase.py
-msgid "urban_label_integralConditions"
-msgstr "Conditions intégrales"
-
 #. Default: "Investigationarticle"
 #: GenericLicence.py
 msgid "urban_label_investigationArticle"
@@ -1973,6 +1976,11 @@ msgstr "Type de permis gérés"
 #: UrbanTool.py
 msgid "urban_label_mapExtent"
 msgstr "Coordonnées d'affichage de la carte"
+
+#. Default: "Minimumlegalconditions"
+#: EnvironmentBase.py
+msgid "urban_label_minimumLegalConditions"
+msgstr "Conditions intégrales et sectorielles liées"
 
 msgid "urban_label_missingPartDate"
 msgstr "Date dossier incomplet"
@@ -2292,16 +2300,6 @@ msgstr "Entrez le nom, le prénom ou le numéro de registre national.  Vous pouv
 #: PortionOut.py
 msgid "urban_label_section"
 msgstr "Section"
-
-#. Default: "Sectorialcondition"
-#: EnvironmentBase.py
-msgid "urban_label_sectorialCondition"
-msgstr "Conditions sectorielles"
-
-#. Default: "Sectorialconditions"
-#: EnvironmentBase.py
-msgid "urban_label_sectorialConditions"
-msgstr "Conditions sectorielles"
 
 #. Default: "Selectedfield"
 #: UrbanVocabularyTerm.py
