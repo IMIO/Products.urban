@@ -259,6 +259,32 @@ class EnvironmentBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         portal_urban = getToolByName(self, 'portal_urban')
         return '/'.join(portal_urban.envclassthree.rubrics.getPhysicalPath())
 
+    security.declarePrivate('_getConditions')
+    def _getConditions(self, restrict=['CI & CS', 'CI', 'CS']):
+        all_conditions = self.getMinimumLegalConditions()
+        all_conditions.extend(self.getAdditionalLegalConditions())
+        return [cond for cond in all_conditions if cond.getExtraValue() in restrict]
+
+    security.declarePublic('getIntegralConditions')
+    def getIntegralConditions(self):
+        """
+         Return all the integral conditions,
+        """
+        return self._getConditions(restrict=['CI'])
+
+    security.declarePublic('getSectorialConditions')
+    def getSectorialConditions(self):
+        """
+         Return all the sectorial conditions,
+        """
+        return self._getConditions(restrict=['CS'])
+
+    security.declarePublic('getIandSConditions')
+    def getIandSConditions(self):
+        """
+         Return all the integral & sectorial conditions,
+        """
+        return self._getConditions(restrict=['CI & CS'])
 
 
 registerType(EnvironmentBase, PROJECTNAME)

@@ -1980,7 +1980,7 @@ msgstr "Coordonnées d'affichage de la carte"
 #. Default: "Minimumlegalconditions"
 #: EnvironmentBase.py
 msgid "urban_label_minimumLegalConditions"
-msgstr "Conditions intégrales et sectorielles liées"
+msgstr "Conditions intégrales et sectorielles"
 
 msgid "urban_label_missingPartDate"
 msgstr "Date dossier incomplet"

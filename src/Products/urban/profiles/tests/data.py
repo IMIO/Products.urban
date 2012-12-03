@@ -661,9 +661,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
-                    'podTemplates': (
-                                     {'id': "env3-recepisse", 'title': "Récepissé de la déclaration"},
-                                    ),
+                    'podTemplates': ({'id': "env3-recepisse", 'title': "Récepissé de la déclaration"},),
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
@@ -671,6 +669,21 @@ urbanEventTypes = {
                     'title': "Demande irrecevable",
                     'activatedFields': [],
                     'podTemplates': ({'id': "env3-demande-irrecevable", 'title': "Demande irrecevable (lettre au demandeur)"},),
+                    },
+                    {
+                    'id': "demande-recevable",
+                    'title': "Demande recevable",
+                    'activatedFields': [],
+                    'podTemplates': (
+                                     {'id': "env3-demande-recevable", 'title': "Demande recevable sans conditions complémentaires (lettre au demandeur)"},
+                                     {'id': "env3-demande-recevable-cond", 'title': "Demande recevable avec conditions complémentaires (lettre au demandeur)"},
+                                    ),
+                    },
+                    {
+                    'id': "rapport-au-college",
+                    'title': "Rapport des services techniques au collège",
+                    'activatedFields': [],
+                    'podTemplates': (,),
                     },
                    ),
                    'miscdemand':
