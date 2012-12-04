@@ -123,8 +123,7 @@
        </ul>
       </td>
      </tr>
-     <tr tal:condition="python: 'additionalConditions' in usedAttributes"
-         tal:define="field python: 'additionalConditions'">
+     <tr tal:define="field python: 'additionalConditions'">
       <td valign="top"><b><span i18n:translate="urban_label_additionalConditions">Additional exploitation conditions</span>:</b></td>
       <td width="2%"></td>
       <td valign="top" id="urban-additional-conditions"

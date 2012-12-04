@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Dec  3 16:21:03 2012\n"
-"PO-Revision-Date: Mon Dec  3 16:21:03 2012\n"
+"POT-Creation-Date: Tue Dec  4 12:14:54 2012\n"
+"PO-Revision-Date: Tue Dec  4 12:14:54 2012\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -492,6 +492,11 @@ msgstr ""
 #. Default: "Grade"
 #: FolderManager.py
 msgid "urban_label_grade"
+msgstr ""
+
+#. Default: "Hasadditionalconditions"
+#: EnvironmentBase.py
+msgid "urban_label_hasAdditionalConditions"
 msgstr ""
 
 #. Default: "Impactstudy"

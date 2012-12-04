@@ -31,14 +31,23 @@ from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
-optional_fields =['inadmissibilityReasons', 'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalConditions']
+optional_fields =['inadmissibilityReasons', 'roadTechnicalAdvice', 'locationTechnicalAdvice',
+                  'hasAdditionalConditions']
 
 slave_fields_oldlocation= (
     {'name': 'businessOldLocation',
      'action': 'show',
      'hide_values': ('location_move', ),
+    },
+)
+
+slave_fields_additionalconditions= (
+    {'name': 'additionalConditions',
+     'action': 'show',
+     'hide_values': (True, ),
     },
 )
 
@@ -145,6 +154,17 @@ schema = Schema((
         schemata="urban_description",
         multiValued=True,
         relationship='additionalconditions',
+    ),
+    BooleanField(
+        name='hasAdditionalConditions',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_additionalconditions,
+            label='Hasadditionalconditions',
+            label_msgid='urban_label_hasAdditionalConditions',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
     ),
     TextField(
         name='additionalConditions',

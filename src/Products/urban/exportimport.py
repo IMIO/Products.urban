@@ -74,7 +74,8 @@ def updateTemplate(context, container, template, new_content, position_after='',
         status.append('updated')
     #else create a new template
     else:
-        new_template_id = container.invokeFactory("UrbanDoc", id=new_template_id, title=template['title'], file=new_content)
+        new_template_id = container.invokeFactory("UrbanDoc", id=new_template_id, title=template['title'], file=new_content,
+                                                  TALCondition=template.has_key('TALCondition') and template['TALCondition'] or '')
         new_template = getattr(container, new_template_id)
         status.append('created')
 

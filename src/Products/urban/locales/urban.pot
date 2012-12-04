@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-12-04 06:52+0000\n"
+"POT-Creation-Date: 2012-12-04 12:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1731,6 +1731,11 @@ msgstr ""
 #. Default: "Grade"
 #: FolderManager.py
 msgid "urban_label_grade"
+msgstr ""
+
+#. Default: "Hasadditionalconditions"
+#: EnvironmentBase.py
+msgid "urban_label_hasAdditionalConditions"
 msgstr ""
 
 #. Default: "Impactstudy"
