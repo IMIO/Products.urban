@@ -8,9 +8,13 @@ jQuery(function($){
        urlmatch: '@@claimstextview',
    });
 
+    // Long text popup
+    $('#urban-additional-conditions a').prepOverlay({
+       subtype: 'ajax',
+   });
+
     // parcel history popup
     $('#urban-parcel-related-licences a').prepOverlay({
        subtype: 'ajax',
-       urlmatch: '@@genericlicenceview',
    });
 });

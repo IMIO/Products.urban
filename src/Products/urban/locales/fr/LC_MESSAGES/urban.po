@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2012-11-30 07:37+0000\n"
+"POT-Creation-Date: 2012-12-04 06:52+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1299,6 +1299,11 @@ msgstr "Date de l'accusé de réception"
 #: UrbanEventType.py
 msgid "urban_label_activatedFields"
 msgstr "Champ(s) activé(s)"
+
+#. Default: "Additionalconditions"
+#: EnvironmentBase.py
+msgid "urban_label_additionalConditions"
+msgstr "Conditions d'exploitations complémentaires"
 
 #. Default: "Additionallegalconditions"
 #: EnvironmentBase.py

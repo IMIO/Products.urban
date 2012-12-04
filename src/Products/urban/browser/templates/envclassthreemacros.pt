@@ -123,10 +123,29 @@
        </ul>
       </td>
      </tr>
+     <tr tal:condition="python: 'additionalConditions' in usedAttributes"
+         tal:define="field python: 'additionalConditions'">
+      <td valign="top"><b><span i18n:translate="urban_label_additionalConditions">Additional exploitation conditions</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top" id="urban-additional-conditions"
+          tal:define="infos python: context.portal_urban.getTextToShow(context, field);
+                      isTooLong python: infos[0];
+                      textToShow python: infos[1];">
+       <tal:toolong condition="isTooLong">
+          <span tal:replace="structure textToShow">Content...</span>
+          <br /><a class="link-overlay" href="@@longtextview" tal:attributes="href python: context.absolute_url() + '/@@longtextview?field=' + field" i18n:translate="">See more...</a>
+       </tal:toolong>
+       <tal:nottoolong condition="not: isTooLong">
+         <metal:myfield use-macro="python: context.widget(field, mode='view')" />
+         <span tal:condition="not: context/getAdditionalConditions" class="discreet" i18n:translate="content_none">None</span>
+       </tal:nottoolong>
+      </td>
+     </tr>
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_description">Description</span>:</b></td>
       <td width="2%"></td>
       <td valign="top">
+       <metal:myfield use-macro="python:here.widget('description', mode='view')" />
        <span tal:condition="not: context/Description" class="discreet" i18n:translate="content_none">None</span>
       </td>
      </tr>

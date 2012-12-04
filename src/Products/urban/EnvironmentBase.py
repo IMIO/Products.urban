@@ -33,7 +33,7 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
-optional_fields =['inadmissibilityReasons', 'roadTechnicalAdvice', 'locationTechnicalAdvice']
+optional_fields =['inadmissibilityReasons', 'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalConditions']
 
 slave_fields_oldlocation= (
     {'name': 'businessOldLocation',
@@ -145,6 +145,19 @@ schema = Schema((
         schemata="urban_description",
         multiValued=True,
         relationship='additionalconditions',
+    ),
+    TextField(
+        name='additionalConditions',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Additionalconditions',
+            label_msgid='urban_label_additionalConditions',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_description',
+        default_output_type='text/html',
     ),
     TextField(
         name='roadTechnicalAdvice',
@@ -287,6 +300,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         return self._getConditions(restrict=['CI & CS'])
 
 
+
 registerType(EnvironmentBase, PROJECTNAME)
 # end of class EnvironmentBase
 
@@ -300,7 +314,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('rubrics', after='businessDescription')
     schema.moveField('missingParts', after='inadmissibilityReasons')
     schema.moveField('missingPartsDetails', after='missingParts')
-    schema.moveField('description', after='missingPartsDetails')
+    schema.moveField('description', after='additionalConditions')
     return schema
 
 finalizeSchema(EnvironmentBase_schema)

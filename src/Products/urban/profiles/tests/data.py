@@ -681,9 +681,9 @@ urbanEventTypes = {
                     },
                     {
                     'id': "rapport-au-college",
-                    'title': "Rapport des services techniques au collège",
+                    'title': "Rapport du service au collège",
                     'activatedFields': [],
-                    'podTemplates': (,),
+                    'podTemplates': ({'id': "env3-rapport-au-college", 'title': "Rapport au collège"},),
                     },
                    ),
                    'miscdemand':
