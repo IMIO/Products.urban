@@ -28,6 +28,9 @@ from Products.urban.config import *
 from Products.CMFCore.Expression import Expression
 from Products.CMFCore.utils import getToolByName
 from Products.PageTemplates.Expressions import getEngine
+import logging
+
+logger = logging.getLogger('urban: UrbanDoc')
 ##/code-section module-header
 
 schema = Schema((
