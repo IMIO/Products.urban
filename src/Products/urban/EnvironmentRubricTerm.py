@@ -30,6 +30,14 @@ from Products.urban.utils import strip_tags
 
 schema = Schema((
 
+    StringField(
+        name='number',
+        widget=StringField._properties['widget'](
+            label='Number',
+            label_msgid='urban_label_number',
+            i18n_domain='urban',
+        ),
+    ),
     ReferenceField(
         name='exploitationCondition',
         widget=ReferenceBrowserWidget(
@@ -77,10 +85,12 @@ class EnvironmentRubricTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixi
     # Methods
 
     # Manually created methods
+    def getClass(self):
+        return self.getExtraValue()
 
     def updateTitle(self):
-        class_number = self.getExtraValue()
-        rubric_number = self.Title().split()[2]
+        class_number = self.getClass()
+        rubric_number = self.getNumber()
         description = strip_tags(self.Description())
         new_title =  "classe %s,  %s : %s" % (class_number, rubric_number, description)
         self.setTitle(new_title)
