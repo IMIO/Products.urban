@@ -70,7 +70,7 @@ class LicenceView(BrowserView):
                 key_dates[eventtype.UID()] = keydates
                 dates[eventtype.UID()] = dict([(date[0], {
                     'date':None,
-                    'label': date[0] == 'eventDate' and eventtype.Title() or '%s (%s)' % (date[1], eventtype.Title().decode('utf8'))
+                    'label': date[0] == 'eventDate' and eventtype.Title() or '%s (%s)' % (eventtype.Title().decode('utf8'), date[1])
                     }) for date in keydates])
         # now check each event to see if its a key Event, if yes, we gather the key date values found on this event
         linked_eventtype_field = UrbanEventInquiry_schema.get('urbaneventtypes')
