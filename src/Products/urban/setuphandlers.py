@@ -1299,7 +1299,7 @@ def addGlobalFolders(context):
     else:
         conditions = getattr(tool, "exploitationconditions")
     #add the 'integral and sectorial conditions' folder
-    if not hasattr(conditions, "i_and s_conditions"):
+    if not hasattr(conditions, "i_and_s_conditions"):
         newFolderid = conditions.invokeFactory("Folder",id="i_and_s_conditions",title=_("i_and_s_conditions_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(conditions, newFolderid)
         newFolder.setConstrainTypesMode(1)
