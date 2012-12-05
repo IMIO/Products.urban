@@ -748,6 +748,9 @@ msgstr ""
 msgid "label_list_only"
 msgstr ""
 
+msgid "label_no"
+msgstr ""
+
 msgid "label_remove"
 msgstr ""
 

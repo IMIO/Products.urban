@@ -123,10 +123,12 @@
        </ul>
       </td>
      </tr>
-     <tr tal:define="field python: 'additionalConditions'">
+     <tr tal:define="field python: 'additionalConditions';
+                     hasAdditionalConditions context/getHasAdditionalConditions">
       <td valign="top"><b><span i18n:translate="urban_label_additionalConditions">Additional exploitation conditions</span>:</b></td>
       <td width="2%"></td>
       <td valign="top" id="urban-additional-conditions"
+          tal:condition="hasAdditionalConditions"
           tal:define="infos python: context.portal_urban.getTextToShow(context, field);
                       isTooLong python: infos[0];
                       textToShow python: infos[1];">
@@ -138,6 +140,9 @@
          <metal:myfield use-macro="python: context.widget(field, mode='view')" />
          <span tal:condition="not: context/getAdditionalConditions" class="discreet" i18n:translate="content_none">None</span>
        </tal:nottoolong>
+      </td>
+      <td valign="top" tal:condition="python: not hasAdditionalConditions">
+         <span i18n:translate="label_no">No</span>
       </td>
      </tr>
      <tr>

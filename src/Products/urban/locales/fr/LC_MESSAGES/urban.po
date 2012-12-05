@@ -749,6 +749,9 @@ msgstr "Du"
 msgid "label_list_only"
 msgstr "Afficher seulement la liste"
 
+msgid "label_no"
+msgstr "Non"
+
 msgid "label_remove"
 msgstr "Supprimer"
 
