@@ -19,4 +19,12 @@
         handler=".migrate_to_115.migrateToUrban115"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Upgrade urban to 1.1.6"
+        description="urban upgrade step"
+        source="1.1.5"
+        destination="1.1.6"
+        handler=".migrate_to_116.migrateToUrban116"
+        profile="Products.urban:default" />
+
 </configure>
