@@ -45,7 +45,7 @@ class EnvClassThreeView(LicenceView):
 
     def getMinimumConditions(self):
         """
-        sort the conditions from the fields 'minimumLegalConditions'  by type (integral, sectorial, ...)
+        sort the conditions from the field 'minimumLegalConditions'  by type (integral, sectorial, ...)
         """
         context = aq_inner(self.context)
         min_conditions = context.getMinimumLegalConditions()
@@ -53,7 +53,7 @@ class EnvClassThreeView(LicenceView):
 
     def getAdditionalConditions(self):
         """
-        sort the conditions from the fields 'additionalLegalConditions'  by type (integral, sectorial, ...)
+        sort the conditions from the field 'additionalLegalConditions'  by type (integral, sectorial, ...)
         """
         context = aq_inner(self.context)
         sup_conditions = context.getAdditionalLegalConditions()
