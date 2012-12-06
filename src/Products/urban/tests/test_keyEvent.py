@@ -2,6 +2,7 @@
 import unittest
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
+from zope.lifecycleevent import ObjectRemovedEvent
 from time import sleep
 from DateTime import DateTime
 from zope.component import createObject
@@ -49,14 +50,16 @@ class TestKeyEvent(unittest.TestCase):
         portal.urban.buildlicences.manage_delObjects('licence1')
         catalog = getToolByName(portal, 'portal_catalog')
         buildlicence = catalog(portal_type='BuildLicence')[0].getObject()
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        old_index_value = catalog(portal_type='BuildLicence')[0].last_key_event
         urban_event = buildlicence.objectValues('UrbanEvent')[-1]
         urban_event_type = urban_event.getUrbaneventtypes()
         urban_event_type.setIsKeyEvent(True)
-        #we remove the key event, the index last_key_event of the licence should be back to empty value
+        #we remove the key event, the index last_key_event of the licence should be back to its original value
         buildlicence.manage_delObjects(urban_event.id)
+        event = ObjectRemovedEvent(urban_event)
+        notify(event)
         buildlicence_brain = catalog(portal_type='BuildLicence')[0]
-        self.failUnless(not buildlicence_brain.last_key_event.endswith('vrance du permis (octroi ou refus)' ))
+        self.assertEqual(buildlicence_brain.last_key_event, old_index_value)
 
     def testEventDateAsKeyDate(self):
         """
