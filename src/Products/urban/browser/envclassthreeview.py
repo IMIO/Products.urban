@@ -14,7 +14,7 @@ class EnvClassThreeView(LicenceView):
         plone_utils = getToolByName(context, 'plone_utils')
         if not self.context.getParcels():
             plone_utils.addPortalMessage(_('warning_add_a_parcel'), type="warning")
-        if not self.context.getProprietaries():
+        if not self.context.getApplicants():
             plone_utils.addPortalMessage(_('warning_add_a_proprietary'), type="warning")
         if self.hasOutdatedParcels():
             plone_utils.addPortalMessage(_('warning_outdated_parcel'), type="warning")
