@@ -44,6 +44,8 @@ def migrateToUrban115(context):
     migrateReferenceNumerotation(context)
     # the fields specificFeature and specificFeaturesDetail of CU1, CU2, NotaryLetter are now merged
     migrateSpecificFeatures(context)
+    # the css file needed for the street autocomplete cannot be merged an cached else the autocomplete is broken
+    migrateAutocompleteCSS(context)
 
 def migrateToUrban114(context):
     """
@@ -1050,3 +1052,17 @@ def migrateSpecificFeatures(context):
                 if hasattr(licence, '%s%specificFeaturesDetail' % (subtype, subtype and 'S' or 's')):
                     delattr(licence, '%s%specificFeaturesDetail' % (subtype, subtype and 'S' or 's'))
     logger.info("Migrated specificFeatures")
+
+
+def migrateAutocompleteCSS(context):
+    """
+    For now theres a bug in the autocomplete product: it broke when its css file is cached and merged
+    This step make sure that this css ressource is kept non-cached and non-merged
+    """
+    site = context.getSite()
+    portal_css = getToolByName(site, 'portal_css')
+    style_sheet = portal_css.getResource('++resource++jquery-ui-autocomplete.theme/jquery.ui.all.css')
+    style_sheet.setCookable(False)
+    style_sheet.setCacheable(False)
+    logger.info("Migrated worklocation autocomplete stylesheet")
+
