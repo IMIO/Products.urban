@@ -34,7 +34,8 @@ from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
-optional_fields =['inadmissibilityReasons', 'roadTechnicalAdvice', 'locationTechnicalAdvice',]
+optional_fields =['inadmissibilityReasons', 'roadTechnicalAdvice', 'locationTechnicalAdvice',
+                  'additionalLegalConditions']
 
 slave_fields_oldlocation= (
     {'name': 'businessOldLocation',
