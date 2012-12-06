@@ -42,6 +42,9 @@
   <subscriber for="..interfaces.IUrbanEvent
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventEvents.updateKeyEvent"/>
+  <subscriber for="..interfaces.IUrbanEvent
+                   zope.app.container.interfaces.IObjectRemovedEvent"
+              handler=".urbanEventEvents.updateKeyEvent" />
   <subscriber for="..interfaces.IUrbanEventInquiry
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".urbanEventInquiryEvents.setLinkedInquiry" />

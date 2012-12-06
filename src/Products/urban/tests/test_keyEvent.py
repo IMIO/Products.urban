@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
 from time import sleep
 from DateTime import DateTime
 from zope.component import createObject
@@ -37,6 +39,8 @@ class TestKeyEvent(unittest.TestCase):
         #we add an urbanEvent of type UET, the index last_key_event of the licence should be updated
         self.portal_urban.createUrbanEvent(buildlicence.UID(), urban_event_type.UID())
         urban_event = buildlicence.objectValues('UrbanEvent')[-1]
+        event = ObjectModifiedEvent(urban_event)
+        notify(event)
         buildlicence_brain = catalog(portal_type='BuildLicence')[0]
         self.assertEqual(buildlicence_brain.last_key_event.split(',  ')[1], urban_event_type.Title())
 
@@ -52,7 +56,7 @@ class TestKeyEvent(unittest.TestCase):
         #we remove the key event, the index last_key_event of the licence should be back to empty value
         buildlicence.manage_delObjects(urban_event.id)
         buildlicence_brain = catalog(portal_type='BuildLicence')[0]
-        self.failUnless(not buildlicence_brain.last_key_event.endswith('vrance du permis (octroi ou refus)' )
+        self.failUnless(not buildlicence_brain.last_key_event.endswith('vrance du permis (octroi ou refus)' ))
 
     def testEventDateAsKeyDate(self):
         """
