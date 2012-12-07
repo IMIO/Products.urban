@@ -3,9 +3,11 @@ History
 
 1.1.6 (unreleased)
 ------------------
-Added style 'UrbanAdress' used to customize style in the adress field of documents (#4764)
+Added style 'UrbanAdress' used to customize style in the adress field of documents (#4764).
 
-Added beta licence type 'Environmental Declaration'
+Added beta version of licence type 'Environmental Declaration'.
+
+Use an autocomplete for the licence search by street (#5163).
 
 bugfixes: 
 - UrbanEvent view doesnt crash anymore when a wrong TAL condition is defined on an UrbanDoc
