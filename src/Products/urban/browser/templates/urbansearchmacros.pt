@@ -1,11 +1,26 @@
 <div metal:define-macro="searchbystreetMacro" i18n:domain="urban"
-     tal:define="last_selected_street python: view.getSearchArgument('street')">
- <select name=street tal:define="streets view/AvailableStreets">
-     <option tal:repeat="street streets" tal:content="python: street[1]"
-             tal:attributes="value python: street[0]; selected python: street[0] == last_selected_street">
-             street
-     </option>
- </select>
+      tal:define="last_encoded_street python: view.getSearchArgument('street');
+                  portal_url nocall:context/portal_url;
+                  portal portal_url/getPortalObject;
+                  js python: ['datagridautocomplete.js']">
+     <tal:js repeat="item js">
+      <script type="text/javascript"
+              charset="iso-8859-1"
+              tal:condition="python:exists('portal/%s' % item)"
+              tal:attributes="src string:$portal_url/$item">
+      </script>
+     </tal:js>
+     <div style="display:none" class="edit_common"
+          tal:attributes="data-context-call python: portal.absolute_url();
+                          data-object-provides python: 'Products.urban.interfaces.IStreet';
+                          data-surf-site python: '';
+                          data-search-site python: 'true';">
+     </div>
+     <input name="street"
+            class="dataGridAutocompleteColumn"
+            size="50"
+            type="text"
+            tal:attributes="value last_encoded_street" />
 </div>
 
 <div metal:define-macro="searchbynameMacro" i18n:domain="urban"

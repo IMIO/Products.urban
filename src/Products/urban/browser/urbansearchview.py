@@ -126,12 +126,14 @@ class UrbanSearchView(BrowserView):
             ptool.addPortalMessage(msg(u"please_enter_more_letters"), type="info")
             return res
 
-    def searchByStreet(self, foldertypes, sreets_uid):
+    def searchByStreet(self, foldertypes, street_name):
         """
           Find licences with location paramaters
         """
         catalogTool = getToolByName(self, 'portal_catalog')
-        res = catalogTool(portal_type=foldertypes, StreetsUID=sreets_uid)
+        street_name = street_name.replace('(', ' ').replace(')', ' ')
+        street_uids = [brain.UID for brain in catalogTool(portal_type='Street', Title=street_name)]
+        res = catalogTool(portal_type=foldertypes, StreetsUID=street_uids)
         return res
 
     def searchByParcel(self, foldertypes, parcel_infos_index):
