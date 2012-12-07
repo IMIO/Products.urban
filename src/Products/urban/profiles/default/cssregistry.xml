@@ -47,16 +47,5 @@
              rel="stylesheet"
              rendering="import"/>
 
-  <stylesheet title="++resource++jquery-ui-autocomplete.theme/jquery.ui.all.css"
-             cacheable="False"
-             compression="safe"
-             cookable="False"
-             enabled="1"
-             expression=""
-             id="++resource++jquery-ui-autocomplete.theme/jquery.ui.all.css"
-             media="all"
-             rel="stylesheet"
-             rendering="import"/>
-
  <!-- ##/code-section cssregistry.xml -->
 </object>
