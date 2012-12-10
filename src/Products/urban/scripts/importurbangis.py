@@ -363,7 +363,7 @@ if step in run_steps:
                 if prop.endswith(" div"):
                     ville = prop.split(" ")		
                     prop = ville[0]
-				prop = prop + " ("+number.group(1)+")"
+                prop = prop + " ("+number.group(1)+")"
                 divvalue = raw_input("Enter a divname value for '%s': proposed '%s' (press <Enter> to keep the proposed value)>"%(dan1, prop))
                 if not divvalue:
                     divvalue = prop
