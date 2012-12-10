@@ -1029,6 +1029,8 @@ def migrateSpecificFeatures(context):
             licence = brain.getObject()
             logger.info("Migrate specificFeatures of licence: '%s'" % licence.Title())
             for subtype in ['', 'township', 'location', 'road']:
+                if not hasattr(licence, '%s%specificFeatures' % (subtype, subtype and 'S' or 's')):
+                    continue
                 # generate the default values from the config (getFixedRows...)
                 defaultrows_method =  'get%sFeaturesRows' % (subtype and subtype.capitalize() or 'Specific')
                 default_rows = [row.initialData for row in getattr(licence, defaultrows_method)()]
