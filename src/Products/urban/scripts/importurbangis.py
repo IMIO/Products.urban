@@ -358,6 +358,17 @@ if step in run_steps:
                 elif prop.find(' ') > 0:
                     prop = ' '.join([x for x in prop.split(' ') if x])
                 prop = prop.capitalize()
+                if prop.endswith(" div"):
+                    a = prop.split("div")		
+                    prop = a[0]
+                    try:
+                        l = ['1','2','3','4','5','6','7','8','9','0',]
+                        for i in l:
+                            if i in prop:
+                                number =''.join('('+i+')')
+                                prop = prop.replace(i,number)
+                    except:
+                        None                
                 divvalue = raw_input("Enter a divname value for '%s': proposed '%s' (press <Enter> to keep the proposed value)>"%(dan1, prop))
                 if not divvalue:
                     divvalue = prop
