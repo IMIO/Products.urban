@@ -10,6 +10,7 @@ import psycopg2
 import psycopg2.extras
 import sys
 import time
+import re
 
 virtualenv_dir = '/srv/urbanmap'
 urbanmap_dir = '%s/urbanMap' % virtualenv_dir  #directory where urbanmap is installed
@@ -348,6 +349,7 @@ if step in run_steps:
             results = dict_cur.fetchall()
             for (da, dan1) in results:
                 prop = dan1.capitalize()
+                number = re.search("(\d+)", prop)
                 pos = dan1.find('DIV/')
                 if pos >= 0:
                     prop = prop[pos+4:]
@@ -359,16 +361,9 @@ if step in run_steps:
                     prop = ' '.join([x for x in prop.split(' ') if x])
                 prop = prop.capitalize()
                 if prop.endswith(" div"):
-                    a = prop.split("div")		
-                    prop = a[0]
-                    try:
-                        l = ['1','2','3','4','5','6','7','8','9','0',]
-                        for i in l:
-                            if i in prop:
-                                number =''.join('('+i+')')
-                                prop = prop.replace(i,number)
-                    except:
-                        None                
+                    ville = prop.split(" ")		
+                    prop = ville[0]
+				prop = prop + " ("+number.group(1)+")"
                 divvalue = raw_input("Enter a divname value for '%s': proposed '%s' (press <Enter> to keep the proposed value)>"%(dan1, prop))
                 if not divvalue:
                     divvalue = prop
