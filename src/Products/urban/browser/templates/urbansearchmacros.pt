@@ -12,7 +12,7 @@
      </tal:js>
      <div style="display:none" class="edit_common"
           tal:attributes="data-context-call python: portal.absolute_url();
-                          data-object-provides python: 'Products.urban.interfaces.IStreet';
+                          data-object-provides view/getStreetInterfaces;
                           data-surf-site python: '';
                           data-search-site python: 'true';">
      </div>

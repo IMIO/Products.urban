@@ -50,6 +50,13 @@ class UrbanSearchView(BrowserView):
         request = aq_inner(self.request)
         return request.get(key_to_match, '')
 
+    def getStreetInterfaces(self):
+        interfaces = [
+                'Products.urban.interfaces.IStreet',
+                'Products.urban.interfaces.ILocality',
+                ]
+        return ','.join(interfaces)
+
     def searchLicence(self):
         """
           Find licences with given paramaters
