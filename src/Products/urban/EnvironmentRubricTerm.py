@@ -85,6 +85,7 @@ class EnvironmentRubricTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixi
     # Methods
 
     # Manually created methods
+
     def getClass(self):
         return self.getExtraValue()
 

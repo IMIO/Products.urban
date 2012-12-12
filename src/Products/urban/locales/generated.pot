@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Tue Dec  4 15:46:00 2012\n"
-"PO-Revision-Date: Tue Dec  4 15:46:00 2012\n"
+"POT-Creation-Date: Wed Dec 12 08:46:47 2012\n"
+"PO-Revision-Date: Wed Dec 12 08:46:47 2012\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -135,6 +135,11 @@ msgstr ""
 #: UrbanDoc.py
 #: UrbanEventType.py
 msgid "urban_label_TALCondition"
+msgstr ""
+
+#. Default: "Transparence"
+#: Layer.py
+msgid "urban_label_Transparence"
 msgstr ""
 
 #. Default: "Wmsurl"
