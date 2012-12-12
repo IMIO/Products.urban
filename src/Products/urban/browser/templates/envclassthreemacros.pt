@@ -356,3 +356,44 @@
  <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
 </fieldset>
 </div>
+
+
+<div metal:define-macro="urbanInquiriesMacro" i18n:domain="urban">
+<table class="no-style-table">
+ <tr>
+  <td valign="top"><b><span i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</span>:</b></td>
+  <td width="2%"></td>
+  <td tal:define="opinionIds here/getSolicitOpinionsTo" style="padding-top: 1em;">
+    <table tal:condition="opinionIds" cellspacing="0" cellpadding="0" width="100%" class="listing">
+     <thead>
+      <tr>
+       <th i18n:translate="urban_label_requestedOrganisation">Organisation</th>
+       <th i18n:translate="urban_label_eventDate">Date</th>
+       <th i18n:translate="urban_label_receiptDate">Receipt date</th>
+       <th i18n:translate="urban_label_adviceAgreementLevel">Advice agreement level</th>
+      </tr>
+     </thead>
+     <tbody tal:define="tool python: context.portal_urban">
+     <tr tal:repeat="opinionId opinionIds">
+      <tal:block define="opinion python: here.getLinkedUrbanEventOpinionRequest(opinionId)">
+       <tal:anEventIsLinked condition="python: opinion is not None">
+        <td><a href="#" tal:attributes="href opinion/absolute_url" tal:content="python: here.getSolicitOpinionValue(opinionId)">Opinion request</a></td>
+        <td tal:define="eventDate opinion/getEventDate"><span class="#" tal:attributes="class python: eventDate and 'plain' or 'discreet'" tal:content="python: eventDate and tool.formatDate(eventDate, translatemonth=False) or 'content_none'" i18n:translate="">None</span></td>
+        <td tal:define="receiptDate opinion/getReceiptDate"><span class="#" tal:attributes="class python: receiptDate and 'plain' or 'discreet'" tal:content="python: receiptDate and tool.formatDate(receiptDate, translatemonth=False) or 'content_none'" i18n:translate="">None</span></td>
+        <td tal:define="adviceAgreementLevel opinion/getAdviceAgreementLevel"><span class="#" tal:attributes="class python: adviceAgreementLevel and 'plain' or 'discreet'" tal:content="python: adviceAgreementLevel and adviceAgreementLevel or 'content_none'" i18n:translate="">None</span></td>
+       </tal:anEventIsLinked>
+       <tal:noEventIsLinked condition="python: opinion is None">
+        <td tal:content="python: here.getSolicitOpinionValue(opinionId)">Opinion request</td>
+        <td><span class="discreet" i18n:translate="content_none">None</span></td>
+        <td><span class="discreet" i18n:translate="content_none">None</span></td>
+        <td><span class="discreet" i18n:translate="content_none">None</span></td>
+       </tal:noEventIsLinked>
+      </tal:block>
+     </tr>
+     </tbody>
+    </table>
+  </td>
+ </tr>
+</table>
+</div>
+

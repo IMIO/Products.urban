@@ -18,6 +18,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
 from Products.urban.GenericLicence import GenericLicence
+from Products.urban.Inquiry import Inquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget
@@ -28,7 +29,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
-from Products.urban.utils import setOptionalAttributes
+from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
@@ -207,6 +208,7 @@ setOptionalAttributes(schema, optional_fields)
 
 EnvironmentBase_schema = BaseFolderSchema.copy() + \
     getattr(GenericLicence, 'schema', Schema(())).copy() + \
+    getattr(Inquiry, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
@@ -217,12 +219,12 @@ del EnvironmentBase_schema['annoncedDelay']
 del EnvironmentBase_schema['annoncedDelayDetails']
 #remove the impactStudy field for Environments
 del EnvironmentBase_schema['impactStudy']
-#hide the solicit opinions to fields for EnvironmentOne
 EnvironmentBase_schema['solicitRoadOpinionsTo'].widget.visible=False
 EnvironmentBase_schema['solicitLocationOpinionsTo'].widget.visible=False
+setSchemataForInquiry(EnvironmentBase_schema)
 ##/code-section after-schema
 
-class EnvironmentBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
+class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -235,7 +237,8 @@ class EnvironmentBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
     schema = EnvironmentBase_schema
 
     ##code-section class-header #fill in your manual code here
-    schemata_order = ['urban_description', 'urban_road', 'urban_location']
+    schemata_order = ['urban_description', 'urban_road', 'urban_location',\
+                      'urban_investigation_and_advices']
     ##/code-section class-header
 
     # Methods

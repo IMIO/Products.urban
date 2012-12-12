@@ -664,11 +664,7 @@ def addUrbanConfigs(context):
                     newFolder.invokeFactory("UrbanVocabularyTerm",id="form_demande",title=u"Formulaire de demande en 4 exemplaires")
                     newFolder.invokeFactory("UrbanVocabularyTerm",id="plan",title=u"Plans")
 
-        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo']:
-            #add investigation articles folder
-            #this is done by a method because the migrateBuildLicencesInvestigationArticles
-            #migration step will use it too
-            addInvestigationArticles(context, configFolder)
+        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo', 'EnvClassThree']:
             if not hasattr(aq_base(configFolder), 'foldermakers'):
                 #add Makers folder
                 newFolderid = configFolder.invokeFactory("Folder",id="foldermakers",title=_("foldermakers_folder_title", 'urban', context=site.REQUEST))
@@ -699,6 +695,11 @@ def addUrbanConfigs(context):
                 #now, we need to specify that the description's mimetype is 'text/html'
                 setHTMLContentType(newFolder, 'description')
 
+        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo']:
+            #add investigation articles folder
+            #this is done by a method because the migrateBuildLicencesInvestigationArticles
+            #migration step will use it too
+            addInvestigationArticles(context, configFolder)
             if not hasattr(aq_base(configFolder), 'folderdelays'):
                 #add Delays folder
                 newFolderid = configFolder.invokeFactory("Folder",id="folderdelays",title=_("folderdelays_folder_title", 'urban', context=site.REQUEST))
@@ -1721,7 +1722,7 @@ def addTestObjects(context):
     #add default UrbanEventTypes for documents generation
     addUrbanEventTypes(context)
     #add OpinionRequest UrbanEventTypes by notifying the creation of their corresponding OrganisationTerm
-    for licence_type in ['BuildLicence', 'UrbanCertificateTwo', 'ParcelOutLicence']:
+    for licence_type in ['BuildLicence', 'UrbanCertificateTwo', 'ParcelOutLicence', 'EnvClassThree']:
         for organisation_term in getattr(tool, licence_type.lower()).foldermakers.objectValues():
             event.notify(ObjectInitializedEvent(organisation_term))
 

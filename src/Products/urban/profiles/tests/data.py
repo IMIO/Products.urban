@@ -686,6 +686,15 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
                     },
                     {
+                    'id': "config-opinion-request",
+                    'title': "*** Demande d'avis CONFIG ***",
+                    'activatedFields': [],
+                    'TALCondition': "python: False",
+                    'podTemplates': ({'id': "env3-avis", 'title': "Courrier de demande d'avis"},),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+                    },
+
+                    {
                     'id': "acceptation-de-la-demande-cond",
                     'title': "Prise d'acte avec conditions",
                     'activatedFields': [],
