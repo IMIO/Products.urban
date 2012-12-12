@@ -30,19 +30,11 @@ from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
 optional_fields =['inadmissibilityReasons', 'roadTechnicalAdvice', 'locationTechnicalAdvice',
                   'additionalLegalConditions']
-
-slave_fields_oldlocation= (
-    {'name': 'businessOldLocation',
-     'action': 'show',
-     'hide_values': ('location_move', ),
-    },
-)
 
 slave_fields_additionalconditions= (
     {'name': 'additionalConditions',
@@ -89,8 +81,8 @@ schema = Schema((
     ),
     StringField(
         name='applicationReasons',
-        widget=MasterSelectWidget(
-            slave_fields=slave_fields_oldlocation,
+        widget=SelectionWidget(
+            format='checkbox',
             label='Applicationreasons',
             label_msgid='urban_label_applicationReasons',
             i18n_domain='urban',
@@ -290,7 +282,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     def getRubricsConfigPath(self):
         portal_urban = getToolByName(self, 'portal_urban')
-        return '/'.join(portal_urban.envclassthree.rubrics.getPhysicalPath())
+        return '/'.join(portal_urban.envclassthree.rubrics.getPhysicalPath())[1:]
 
     security.declarePrivate('_getConditions')
     def _getConditions(self, restrict=['CI & CS', 'CI', 'CS']):
