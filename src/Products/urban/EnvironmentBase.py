@@ -223,10 +223,9 @@ EnvironmentBase_schema['solicitRoadOpinionsTo'].widget.visible=False
 EnvironmentBase_schema['solicitLocationOpinionsTo'].widget.visible=False
 setSchemataForInquiry(EnvironmentBase_schema)
 def hidesInquiryFields(schema):
-    inquiry_fields = [field for field in schema.filterFields(isMetadata=False)
-                      if field.schemata == 'urban_investigation_and_advices' and field.getName() != 'solicitOpinionsTo']
-    for field in inquiry_fields:
-        field.widget.visible = False
+    for field in schema.filterFields(isMetadata=False):
+        if field.schemata == 'urban_investigation_and_advices' and field.getName() != 'solicitOpinionsTo':
+            field.widget.visible = False
 hidesInquiryFields(EnvironmentBase_schema)
 ##/code-section after-schema
 
