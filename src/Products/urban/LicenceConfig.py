@@ -160,10 +160,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_investigation_and_advices':'(enq) ',
             'urban_description':'',
         }
-        try:
-            available_fields = [field for field in licence_schema.fields() if field.getType() == 'Products.Archetypes.Field.TextField' and field.getName() != 'rights']
-        except:
-            import ipdb; ipdb.set_trace()
+        available_fields = [field for field in licence_schema.fields() if field.getType() == 'Products.Archetypes.Field.TextField' and field.getName() != 'rights']
         vocabulary_fields = [(field.getName(), '%s %s' % (translate(field.widget.label_msgid,'urban', context=self.REQUEST), abr[field.schemata])) for field in available_fields]
         #return a vocabulary containing the names of all the text fields of the schema
         return DisplayList(sorted(vocabulary_fields, key=lambda name:name[1]))

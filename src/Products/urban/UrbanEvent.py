@@ -29,6 +29,7 @@ from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from zope.i18n import translate
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.utils import setOptionalAttributes
 ##/code-section module-header
 
 schema = Schema((
@@ -50,7 +51,6 @@ schema = Schema((
         name='transmitDate',
         widget=DateTimeField._properties['widget'](
             show_hm=False,
-            condition="python:here.attributeIsUsed('transmitDate')",
             format="%d/%m/%Y",
             starting_year=1960,
             label='Transmitdate',
@@ -63,7 +63,6 @@ schema = Schema((
         name='receiptDate',
         widget=DateTimeField._properties['widget'](
             show_hm=False,
-            condition="python:here.attributeIsUsed('receiptDate')",
             format="%d/%m/%Y",
             starting_year=1960,
             label='Receiptdate',
@@ -75,7 +74,6 @@ schema = Schema((
     StringField(
         name='receivedDocumentReference',
         widget=StringField._properties['widget'](
-            condition="python:here.attributeIsUsed('receivedDocumentReference')",
             label='Receiveddocumentreference',
             label_msgid='urban_label_receivedDocumentReference',
             i18n_domain='urban',
@@ -86,7 +84,6 @@ schema = Schema((
         name='auditionDate',
         widget=DateTimeField._properties['widget'](
             show_hm=False,
-            condition="python:here.attributeIsUsed('auditionDate')",
             format="%d/%m/%Y",
             starting_year=1960,
             label='Auditiondate',
@@ -99,7 +96,6 @@ schema = Schema((
         name='decisionDate',
         widget=DateTimeField._properties['widget'](
             show_hm=False,
-            condition="python:here.attributeIsUsed('decisionDate')",
             format="%d/%m/%Y",
             starting_year=1960,
             label='Decisiondate',
@@ -111,7 +107,6 @@ schema = Schema((
     StringField(
         name='decision',
         widget=SelectionWidget(
-            condition="python:here.attributeIsUsed('decision')",
             label='Decision',
             label_msgid='urban_label_decision',
             i18n_domain='urban',
@@ -124,7 +119,6 @@ schema = Schema((
         name='decisionText',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            condition="python:here.attributeIsUsed('decisionText')",
             label='Decisiontext',
             label_msgid='urban_label_decisionText',
             i18n_domain='urban',
@@ -135,7 +129,6 @@ schema = Schema((
     StringField(
         name='adviceAgreementLevel',
         widget=SelectionWidget(
-            condition="python:here.attributeIsUsed('adviceAgreementLevel')",
             format='select',
             label='Adviceagreementlevel',
             label_msgid='urban_label_adviceAgreementLevel',
@@ -148,7 +141,6 @@ schema = Schema((
     StringField(
         name='externalDecision',
         widget=SelectionWidget(
-            condition="python:here.attributeIsUsed('externalDecision')",
             label='Externaldecision',
             label_msgid='urban_label_externalDecision',
             i18n_domain='urban',
@@ -161,7 +153,6 @@ schema = Schema((
         name='opinionText',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            condition="python:here.attributeIsUsed('opinionText')",
             label='Opiniontext',
             label_msgid='urban_label_opinionText',
             i18n_domain='urban',
@@ -179,7 +170,6 @@ schema = Schema((
             show_index_selector=1,
             available_indexes={'getFirstname':'First name','getSurname': 'Surname'},
             wild_card_search=True,
-            condition="python:here.attributeIsUsed('eventRecipient')",
             label_msgid='urban_label_eventRecipient',
             i18n_domain='urban',
         ),
@@ -204,6 +194,8 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
+optional_fields = [field.getName() for field in schema.filterFields(isMetadata=False) if field.getName() != 'eventDate']
+setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 UrbanEvent_schema = BaseFolderSchema.copy() + \

@@ -219,8 +219,6 @@ del EnvironmentBase_schema['annoncedDelay']
 del EnvironmentBase_schema['annoncedDelayDetails']
 #remove the impactStudy field for Environments
 del EnvironmentBase_schema['impactStudy']
-EnvironmentBase_schema['solicitRoadOpinionsTo'].widget.visible=False
-EnvironmentBase_schema['solicitLocationOpinionsTo'].widget.visible=False
 setSchemataForInquiry(EnvironmentBase_schema)
 def hidesInquiryFields(schema):
     for field in schema.filterFields(isMetadata=False):
