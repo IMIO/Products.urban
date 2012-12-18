@@ -80,15 +80,16 @@ schema = Schema((
         multiValued=True,
         relationship="rubric",
     ),
-    StringField(
+    LinesField(
         name='applicationReasons',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
             format='checkbox',
             label='Applicationreasons',
             label_msgid='urban_label_applicationReasons',
             i18n_domain='urban',
         ),
         schemata='urban_description',
+        multiValued=True,
         vocabulary=UrbanVocabulary(path='applicationreasons', sort_on='getObjPositionInParent'),
         default_method='getDefaultValue',
     ),
