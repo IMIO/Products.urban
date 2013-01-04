@@ -3,4 +3,6 @@ from Products.CMFCore.utils import getToolByName
 
 def setDefaultLinkedInquiry(opinionRequest, event):
     if opinionRequest.checkCreationFlag():
-        opinionRequest.setLinkedInquiry(opinionRequest.aq_inner.aq_parent.getInquiries()[-1])
+        licence = opinionRequest.aq_inner.aq_parent
+        inquiry = licence.getInquiries() and licence.getInquiries()[-1] or licence
+        opinionRequest.setLinkedInquiry(licence)
