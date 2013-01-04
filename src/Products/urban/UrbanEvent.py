@@ -2,7 +2,7 @@
 #
 # File: UrbanEvent.py
 #
-# Copyright (c) 2012 by CommunesPlone
+# Copyright (c) 2013 by CommunesPlone
 # Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
