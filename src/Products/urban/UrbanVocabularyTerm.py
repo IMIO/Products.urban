@@ -2,7 +2,7 @@
 #
 # File: UrbanVocabularyTerm.py
 #
-# Copyright (c) 2012 by CommunesPlone
+# Copyright (c) 2013 by CommunesPlone
 # Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
@@ -111,34 +111,10 @@ class UrbanVocabularyTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMi
     security.declarePublic('getRenderedDescription')
     def getRenderedDescription(self, obj, renderToNull=False):
         """
-          Return the description rendered if it contains elements to render
-          An element to render will be place between [[]]
-          So we could have something like :
-          "Some sample text [[python: object.getSpecialAttribute()]] and some text
-          [[object/myTalExpression]] end of the text"
-          If renderToNull is True, the found expressions will not be rendered but
-          replaced by the nullValue defined below
+          see renderText method of UrbanTool
         """
-        description = self.Description()
-        renderedDescription = description
-        portal = getToolByName(self, 'portal_url').getPortalObject()
-        for expr in re.finditer('\[\[(.*?)\]\]', description):
-            if not renderToNull:
-                ctx = createExprContext(obj.getParentNode(), portal, obj)
-                try:
-                    #expr.groups()[0] is the expr without the [[]]
-                    res = Expression(expr.groups()[0])(ctx)
-                except Exception, e:
-                    logger.warn("The expression '%s' defined in the UrbanVocabularyTerm at '%s' is wrong! Returned error message is : %s" % (expr.group(), self.absolute_url(), e))
-                    res = translate('error_in_expr_contact_admin', 'urban', mapping={'expr': expr.group()}, context=self.REQUEST)
-                #replace the expression in the description by the result
-                #re work with utf8, not with unicode...
-                if isinstance(res, unicode):
-                    res = res.encode('utf8')
-            else:
-                res = NULL_VALUE
-            renderedDescription = re.sub(re.escape(expr.group()), res, renderedDescription)
-        return renderedDescription
+        portal_urban = getToolByName(obj, 'portal_urban')
+        return portal_urban.renderText(text=self.Description(), context=obj, renderToNull=renderToNull)
 
 
 

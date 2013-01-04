@@ -2,7 +2,7 @@
 #
 # File: UrbanCertificateBase.py
 #
-# Copyright (c) 2012 by CommunesPlone
+# Copyright (c) 2013 by CommunesPlone
 # Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
@@ -67,7 +67,7 @@ schema = Schema((
     DataGridField(
         name='specificFeatures',
         widget=DataGridWidget(
-            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
+            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'value' : FixedColumn('Value'), 'text' : TextAreaColumn('Text', rows=1, cols=50)},
             label='Specificfeatures',
             label_msgid='urban_label_specificFeatures',
             i18n_domain='urban',
@@ -78,12 +78,12 @@ schema = Schema((
         allow_oddeven= True,
         allow_delete= False,
         schemata='urban_description',
-        columns= ('id', 'check', 'text', 'detail',),
+        columns= ('id', 'check', 'value', 'text',),
     ),
     DataGridField(
         name='roadSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
+            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'value' : FixedColumn('Value'), 'text' : TextAreaColumn('Text', rows=1, cols=50)},
             label='Roadspecificfeatures',
             label_msgid='urban_label_roadSpecificFeatures',
             i18n_domain='urban',
@@ -94,12 +94,12 @@ schema = Schema((
         allow_oddeven= True,
         allow_delete= False,
         schemata='urban_road',
-        columns= ('id', 'check', 'text', 'detail',),
+        columns= ('id', 'check', 'value', 'text',),
     ),
     DataGridField(
         name='locationSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
+            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'value' : FixedColumn('Value'), 'text' : TextAreaColumn('Text', rows=1, cols=50)},
             label='Locationspecificfeatures',
             label_msgid='urban_label_locationSpecificFeatures',
             i18n_domain='urban',
@@ -110,7 +110,7 @@ schema = Schema((
         allow_oddeven= True,
         allow_delete= False,
         schemata='urban_location',
-        columns= ('id', 'check', 'text', 'detail',),
+        columns= ('id', 'check', 'value', 'text',),
     ),
     DataGridField(
         name='customSpecificFeatures',
@@ -126,7 +126,7 @@ schema = Schema((
     DataGridField(
         name='townshipSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'text' : FixedColumn('Text'), 'detail' : TextAreaColumn('Detail', rows=1, cols=50)},
+            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'value' : FixedColumn('Value'), 'text' : TextAreaColumn('Text', rows=1, cols=50)},
             label='Townshipspecificfeatures',
             label_msgid='urban_label_townshipSpecificFeatures',
             i18n_domain='urban',
@@ -137,7 +137,7 @@ schema = Schema((
         allow_oddeven= True,
         allow_delete= False,
         schemata='urban_description',
-        columns= ('id', 'check', 'text', 'detail',),
+        columns= ('id', 'check', 'value', 'text',),
     ),
     LinesField(
         name='opinionsToAskIfWorks',
@@ -291,7 +291,12 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def _getSpecificFeaturesRows(self, location=''):
         portal_urban = getToolByName(self, 'portal_urban')
         vocname = '%sspecificfeatures' % location
-        return [FixedRow(keyColumn = 'text', initialData={'check':vocterm.getIsDefaultValue() and '1' or '', 'id':vocterm.id, 'text':vocterm.Title(), 'detail':''})
+        return [FixedRow(keyColumn = 'value', initialData={
+                                        'check':vocterm.getIsDefaultValue() and '1' or '',
+                                        'id':vocterm.id,
+                                        'value':vocterm.Title(),
+                                        'text':vocterm.Description(),
+                                        })
                 for vocterm in portal_urban.listVocabularyObjects(vocToReturn=vocname, context=self).values()]
 
     security.declarePublic('updateTitle')
@@ -370,18 +375,15 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
             specificFeatures = getattr(self, specificfeature_accessor)()
             for specificfeature in specificFeatures:
                 vocterm = configSpecificFeatures[location][specificfeature['id']]
-                detail = specificfeature['detail']
                 if specificfeature['check']:
                     #render the expressions
-                    render = vocterm.getRenderedDescription(self)
-                    render =  detail and '%s %s' % (render, detail) or render
+                    render = tool.renderText(text=specificfeature['text'], context=self)
                     if active_style:
                         render = tool.decorateHTML(active_style, render)
                     res.append(render)
                 else:
                     #replace the expressions by a null value, aka "..."
                     render = vocterm.getRenderedDescription(self, renderToNull=True)
-                    render =  detail and '%s %s' % (render, detail) or render
                     if inactive_style:
                         render = tool.decorateHTML(inactive_style, render)
                     res.append(render)

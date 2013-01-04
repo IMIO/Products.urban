@@ -2,7 +2,7 @@
 #
 # File: UrbanTool.py
 #
-# Copyright (c) 2012 by CommunesPlone
+# Copyright (c) 2013 by CommunesPlone
 # Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
@@ -33,6 +33,7 @@ import appy.pod.renderer
 import psycopg2
 import psycopg2.extras
 import os, time
+import re
 #from urlparse import urlparse
 from DateTime import DateTime
 from StringIO import StringIO
@@ -42,7 +43,7 @@ from zope.i18n import translate
 from plone.memoize import ram
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.Expression import Expression
+from Products.CMFCore.Expression import Expression, createExprContext
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFPlone.PloneBatch import Batch
 from Products.PageTemplates.Expressions import getEngine
@@ -1418,6 +1419,38 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
           Returns the config.URBAN_TYPES so it can be used in templates and conditions
         """
         return URBAN_TYPES
+
+    security.declarePublic('renderText')
+    def renderText(self, text, context, renderToNull=False):
+        """
+          Return the description rendered if it contains elements to render
+          An element to render will be place between [[]]
+          So we could have something like :
+          "Some sample text [[python: object.getSpecialAttribute()]] and some text
+          [[object/myTalExpression]] end of the text"
+          If renderToNull is True, the found expressions will not be rendered but
+          replaced by the nullValue defined below
+        """
+        portal = getToolByName(self, 'portal_url').getPortalObject()
+        renderedDescription = text
+        #import ipdb; ipdb.set_trace()
+        for expr in re.finditer('\[\[(.*?)\]\]', text):
+            if not renderToNull:
+                ctx = createExprContext(context.getParentNode(), portal, context)
+                try:
+                    #expr.groups()[0] is the expr without the [[]]
+                    res = Expression(expr.groups()[0])(ctx)
+                except Exception, e:
+                    logger.warn("The expression '%s' defined in the UrbanVocabularyTerm at '%s' is wrong! Returned error message is : %s" % (expr.group(), self.absolute_url(), e))
+                    res = translate('error_in_expr_contact_admin', 'urban', mapping={'expr': expr.group()}, context=self.REQUEST)
+                #replace the expression in the description by the result
+                #re work with utf8, not with unicode...
+                if isinstance(res, unicode):
+                    res = res.encode('utf8')
+            else:
+                res = NULL_VALUE
+            renderedDescription = re.sub(re.escape(expr.group()), res, renderedDescription)
+        return renderedDescription
 
     security.declarePublic('isScheduleAvailable')
     def isScheduleAvailable(self, context):
