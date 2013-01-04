@@ -13,7 +13,7 @@ class UrbanCertificateBaseView(LicenceView):
     def getSpecificFeatures(self, subtype=''):
         context = aq_inner(self.context)
         accessor = getattr(context, 'get%sSpecificFeatures' % subtype.capitalize())
-        specific_features =  accessor()
+        specific_features = accessor()
         return [spf['value'] for spf in specific_features if not spf.has_key('check') or spf['check']]
 
 class UrbanCertificateBaseMacros(LicenceView):

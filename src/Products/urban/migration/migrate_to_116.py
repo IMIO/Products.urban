@@ -49,8 +49,9 @@ def migrateSpecificFeatures(context):
             for subtype in ['', 'location', 'road', 'township']:
                 features_accessor = getattr(licence, 'get%sSpecificFeatures' % subtype.capitalize())
                 specificfeatures = features_accessor()
+                new_specificfeatures = []
                 for spf in specificfeatures:
-                    path = '%s/portal_urban/%s' % (site.absolute_url_path(), portal_type.lower())
+                    path = '%s/portal_urban/%s/%sspecificfeatures' % (site.absolute_url_path(), portal_type.lower(), subtype)
                     vocterm_brain = catalog(id=spf['id'], path=path)
                     vocterm = len(vocterm_brain) == 1 and vocterm_brain[0].getObject() or None
                     newtext = ''
@@ -60,5 +61,8 @@ def migrateSpecificFeatures(context):
                     if vocterm:
                         newtext = '%s %s</p>' % (vocterm.Description()[:-4], newtext)
                     spf['text'] = newtext
+                    new_specificfeatures.append(spf)
+                features_mutator = getattr(licence, 'set%sSpecificFeatures' % subtype.capitalize())
+                features_mutator(tuple(new_specificfeatures))
 
 
