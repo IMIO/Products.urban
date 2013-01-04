@@ -12,6 +12,8 @@ Added beta version of licence type 'Environmental Declaration'.
 
 Use an autocomplete for the licence search by street (#5163).
 
+Text of the specificFeatures fields are now editable within a licence (CU1, CU2, notaryletter) (#5280)
+
 bugfixes:
 - UrbanEvent view doesnt crash anymore when a wrong TAL condition is defined on an UrbanDoc
 - corrected template "accuse de reception d'une reclamation" (#5168, #5198)
