@@ -1204,6 +1204,9 @@ msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
 msgid "urban_help_termKey"
 msgstr "Si ce champ n'est pas rempli, l'identifiant de ce terme sera utilisé"
 
+msgid "urban_investigationStart"
+msgstr "Enquête publique n°${number} du"
+
 #. Default: "Buildlicencenumerotation"
 #: UrbanTool.py
 msgid "urban_label_BuildLicenceNumerotation"

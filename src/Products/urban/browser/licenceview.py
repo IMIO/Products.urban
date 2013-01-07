@@ -91,6 +91,23 @@ class LicenceView(BrowserView):
                 dates_list.append(dates[uid].get(date, None))
         return dates_list
 
+    def getInquiryDates(self):
+        """
+          return the start/end dates of each inquiry and a link to its corresponding urbanEventInquiry (if it exists)
+        """
+        context = aq_inner(self.context)
+        urban_tool = self.getPortalUrban()
+        inquirydates = []
+        for inquiry in context.getInquiries():
+            start_date = inquiry.getInvestigationStart()
+            end_date = inquiry.getInvestigationEnd()
+            inquiry_event = [inq_event for inq_event in context.objectValues('UrbanEventInquiry') if inq_event.getLinkedInquiry() == inquiry]
+            inquirydates.append({
+                'start_date':start_date and urban_tool.formatDate(start_date, translatemonth=False) or None,
+                'end_date':end_date and urban_tool.formatDate(end_date, translatemonth=False) or None,
+                'url': inquiry_event and inquiry_event[0].absolute_url() or None,
+                })
+        return inquirydates
 
 
 class LicenceMacros(BrowserView):
