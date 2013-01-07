@@ -31,24 +31,6 @@ optional_fields = []
 
 schema = Schema((
 
-    DateTimeField(
-        name='investigationStart',
-        widget=DateTimeField._properties['widget'](
-            show_hm=0,
-            label='Investigationstart',
-            label_msgid='urban_label_investigationStart',
-            i18n_domain='urban',
-        ),
-    ),
-    DateTimeField(
-        name='investigationEnd',
-        widget=DateTimeField._properties['widget'](
-            show_hm=0,
-            label='Investigationend',
-            label_msgid='urban_label_investigationEnd',
-            i18n_domain='urban',
-        ),
-    ),
 
 ),
 )

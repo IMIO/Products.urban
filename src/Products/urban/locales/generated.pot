@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Jan  7 13:24:02 2013\n"
-"PO-Revision-Date: Mon Jan  7 13:24:02 2013\n"
+"POT-Creation-Date: Mon Jan  7 14:34:04 2013\n"
+"PO-Revision-Date: Mon Jan  7 14:34:04 2013\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -531,7 +531,6 @@ msgstr ""
 
 #. Default: "Investigationend"
 #: Inquiry.py
-#: UrbanCertificateTwo.py
 msgid "urban_label_investigationEnd"
 msgstr ""
 
@@ -547,7 +546,6 @@ msgstr ""
 
 #. Default: "Investigationstart"
 #: Inquiry.py
-#: UrbanCertificateTwo.py
 msgid "urban_label_investigationStart"
 msgstr ""
 
