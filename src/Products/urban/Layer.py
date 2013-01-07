@@ -86,11 +86,11 @@ schema = Schema((
         ),
     ),
     BooleanField(
-        name='Transparency',
+        name='transparency',
         default=True,
         widget=BooleanField._properties['widget'](
             label='Transparency',
-            label_msgid='urban_label_Transparency',
+            label_msgid='urban_label_transparency',
             i18n_domain='urban',
         ),
     ),

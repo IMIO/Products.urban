@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Jan  7 13:00:33 2013\n"
-"PO-Revision-Date: Mon Jan  7 13:00:33 2013\n"
+"POT-Creation-Date: Mon Jan  7 13:24:02 2013\n"
+"PO-Revision-Date: Mon Jan  7 13:24:02 2013\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -135,11 +135,6 @@ msgstr ""
 #: UrbanDoc.py
 #: UrbanEventType.py
 msgid "urban_label_TALCondition"
-msgstr ""
-
-#. Default: "Transparency"
-#: Layer.py
-msgid "urban_label_Transparency"
 msgstr ""
 
 #. Default: "Wmsurl"
@@ -1069,6 +1064,11 @@ msgstr ""
 #. Default: "Transmitdate"
 #: UrbanEvent.py
 msgid "urban_label_transmitDate"
+msgstr ""
+
+#. Default: "Transparency"
+#: Layer.py
+msgid "urban_label_transparency"
 msgstr ""
 
 #. Default: "Path of a UNO-enabled Python interpreter (ie /usr/bin/python)"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-07 12:01+0000\n"
+"POT-Creation-Date: 2013-01-07 12:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1276,11 +1276,6 @@ msgstr ""
 msgid "urban_label_TALCondition"
 msgstr ""
 
-#. Default: "Transparency"
-#: Layer.py
-msgid "urban_label_Transparency"
-msgstr ""
-
 #. Default: "Urbancertificateonenumerotation"
 #: UrbanTool.py
 msgid "urban_label_UrbanCertificateOneNumerotation"
@@ -2522,6 +2517,11 @@ msgstr ""
 #. Default: "Transmitdate"
 #: UrbanEvent.py
 msgid "urban_label_transmitDate"
+msgstr ""
+
+#. Default: "Transparency"
+#: Layer.py
+msgid "urban_label_transparency"
 msgstr ""
 
 #. Default: "Transparent"
