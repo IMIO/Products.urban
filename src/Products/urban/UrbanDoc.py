@@ -78,12 +78,6 @@ class UrbanDoc(ATBlob):
 
     # Manually created methods
 
-    security.declarePublic('newOperation')
-    def newOperation(self):
-        """
-        """
-        pass
-
     def mayGenerateUrbanDoc(self, obj):
         """
         Creation condition
