@@ -171,10 +171,20 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('dgrneUnderground', mode='view')" /></td>
  </tr>
- <tr tal:condition="python: 'roadSpecificFeatures' in usedAttributes">
+ <tr tal:condition="python: 'roadSpecificFeatures' in usedAttributes"
+     tal:define="specificfeatures python: view.getSpecificFeatures(subtype='road')">
   <td valign="top"><b><span i18n:translate="urban_label_roadSpecificFeatures">Road specific features</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('roadSpecificFeatures', mode='view')" /></td>
+  <td tal:condition="not: specificfeatures" >
+     <span class="discreet" i18n:translate="content_none">None</span>
+  </td>
+  <td tal:condition="specificfeatures">
+   <table>
+     <tr tal:repeat="specificfeature specificfeatures">
+      <td tal:content="specificfeature">Specific feature</td>
+     </tr>
+   </table>
+  </td>
  </tr>
  <tr tal:condition="python: 'equipmentAndRoadRequirements' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_equipmentAndRoadRequirements">Equipment and road requirements</span>:</b></td>
@@ -279,10 +289,20 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('locationDgrneUnderground', mode='view')" /></td>
  </tr>
- <tr tal:condition="python: 'locationSpecificFeatures' in usedAttributes">
+ <tr tal:condition="python: 'locationSpecificFeatures' in usedAttributes"
+     tal:define="specificfeatures python: view.getSpecificFeatures(subtype='location')">
   <td valign="top"><b><span i18n:translate="urban_label_locationSpecificFeatures">Location specific features</span>:</b></td>
   <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('locationSpecificFeatures', mode='view')" /></td>
+  <td tal:condition="not: specificfeatures" >
+     <span class="discreet" i18n:translate="content_none">None</span>
+  </td>
+  <td tal:condition="specificfeatures">
+   <table>
+     <tr tal:repeat="specificfeature specificfeatures">
+      <td tal:content="specificfeature">Specific feature</td>
+     </tr>
+   </table>
+  </td>
  </tr>
  <tr tal:condition="python: 'locationTechnicalAdvice' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_locationTechnicalAdvice">Location technical advice</span>:</b></td>
