@@ -4,7 +4,7 @@ History
 1.1.6 (unreleased)
 ------------------
 
-Added field Transparence on class Layer (#5197)
+Added field Transparence on class Layer (#5197).
 
 Added style 'UrbanAdress' used to customize style in the adress field of documents (#4764).
 
@@ -12,8 +12,11 @@ Added beta version of licence type 'Environmental Declaration'.
 
 Use an autocomplete for the licence search by street (#5163).
 
-Text of the specificFeatures fields are now editable within a licence (CU1, CU2, notaryletter) (#5280)
+Text of the specificFeatures fields are now editable within a licence (CU1, CU2, notaryletter) (#5280).
+
+Added an optional field 'architects' on MiscDemand class (#5286).
 
 bugfixes:
-- UrbanEvent view doesnt crash anymore when a wrong TAL condition is defined on an UrbanDoc
-- corrected template "accuse de reception d'une reclamation" (#5168, #5198)
+- UrbanEvent view doesnt crash anymore when a wrong TAL condition is defined on an UrbanDoc.
+- corrected template "accuse de reception d'une reclamation" (#5168, #5198).
+- corrected the display of the specificFeatures for notary letters.

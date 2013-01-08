@@ -1337,7 +1337,7 @@ def addGlobalFolders(context):
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['PersonTitleTerm'])
         newFolder.setImmediatelyAddableTypes(['PersonTitleTerm'])
-        newFolder.invokeFactory("PersonTitleTerm",id="notitle",title=u"", abbreviation="", gender="male", multiplicity="single")
+        newFolder.invokeFactory("PersonTitleTerm",id="notitle",title=u"", extraValue="Madame, Monsieur", abbreviation="", gender="male", multiplicity="single")
         newFolder.invokeFactory("PersonTitleTerm",id="madam",title=u"Madame", extraValue= "Madame",abbreviation="Mme", gender="female", multiplicity="single")
         newFolder.invokeFactory("PersonTitleTerm",id="miss",title=u"Mademoiselle", extraValue="Mademoiselle" ,abbreviation="Mlle", gender="female", multiplicity="single")
         newFolder.invokeFactory("PersonTitleTerm",id="mister",title=u"Monsieur", extraValue="Monsieur" ,abbreviation="M", gender="male", multiplicity="single")
