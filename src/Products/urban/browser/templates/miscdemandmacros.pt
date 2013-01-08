@@ -58,6 +58,9 @@
   </td>
   <td width="1%"></td>
   <td valign="top" width=49%>
+   <fieldset tal:condition="python: 'architects' in usedAttributes"><legend i18n:translate="urban_label_architects">Architect(s)</legend>
+    <div metal:use-macro="here/urban_macros/macros/urbanArchitectsMacro" />
+   </fieldset>
    <fieldset><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
     <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
    </fieldset>

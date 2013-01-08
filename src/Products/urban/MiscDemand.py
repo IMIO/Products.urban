@@ -26,17 +26,38 @@ from Products.urban.config import *
 from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 optional_fields = ['subdivisionDetails','missingParts','missingPartsDetails','folderZoneDetails','folderZone',
                    'derogationDetails','isInPCA','annoncedDelayDetails','roadType','roadCoating','roadEquipments',
                    'investigationDetails','investigationReasons','isInSubdivision', 'solicitLocationOpinionsTo',
                    'folderCategoryTownship','protectedBuilding','protectedBuildingDetails',
                    'pash','pashDetails','catchmentArea', 'catchmentAreaDetails','equipmentAndRoadRequirements','technicalRemarks',
                    'pca','SSC','sscDetails','RCU','rcuDetails','floodingLevel','floodingLevelDetails','solicitRoadOpinionsTo',
-                   'areParcelsVerified', 'locationFloodingLevel']
+                   'areParcelsVerified', 'locationFloodingLevel', 'architects']
 ##/code-section module-header
 
 schema = Schema((
 
+    ReferenceField(
+        name='architects',
+        widget=ReferenceBrowserWidget(
+            allow_search=True,
+            allow_browse=True,
+            force_close_on_insert=True,
+            startup_directory='urban/architects',
+            restrict_browsing_to_startup_directory=True,
+            wild_card_search=True,
+            show_index_selector=True,
+            label='Architects',
+            label_msgid='urban_label_architects',
+            i18n_domain='urban',
+        ),
+        required=False,
+        schemata='urban_description',
+        multiValued=True,
+        relationship="miscdemandarchitects",
+        allowed_types='Architect',
+    ),
 
 ),
 )
@@ -58,7 +79,6 @@ MiscDemand_schema['folderCategory'].widget.label_msgid='urban_label_category'
 MiscDemand_schema['solicitRoadOpinionsTo'].widget.visible=False
 MiscDemand_schema['solicitLocationOpinionsTo'].widget.visible=False
 MiscDemand_schema['missingParts'].widget.visible=False
-MiscDemand_schema['missingPartsDetails'].widget.visible=False
 MiscDemand_schema['missingPartsDetails'].widget.visible=False
 ##/code-section after-schema
 
