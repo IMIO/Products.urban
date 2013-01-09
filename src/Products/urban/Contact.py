@@ -91,7 +91,7 @@ slave_fields_address = (
 )
 
 slave_fields_representedby = (
-    # if isSameAddressAsWorks, hide the address related fields
+    # applicant is either represented by a society or by another contact but not both at the same time
     {'name': 'representedBy',
      'action': 'show',
      'hide_values': (False, ),
