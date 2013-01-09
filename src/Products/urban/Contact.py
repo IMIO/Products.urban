@@ -89,6 +89,15 @@ slave_fields_address = (
      'hide_values': (True, ),
     },
 )
+
+slave_fields_representedby = (
+    # if isSameAddressAsWorks, hide the address related fields
+    {'name': 'representedBy',
+     'action': 'show',
+     'hide_values': (False, ),
+    },
+)
+
 ##/code-section module-header
 
 schema = Schema((
@@ -123,6 +132,17 @@ schema = Schema((
         widget=StringField._properties['widget'](
             label='Society',
             label_msgid='urban_label_society',
+            i18n_domain='urban',
+        ),
+    ),
+    BooleanField(
+        name='representedBySociety',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_representedby,
+            condition="python: here.portal_type == 'Applicant' or here.portal_type == 'Proprietary'",
+            label='Representedbysociety',
+            label_msgid='urban_label_representedBySociety',
             i18n_domain='urban',
         ),
     ),
@@ -287,7 +307,9 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
         if not self.getName1():
             return self.getSociety()
-        if self.getSociety():
+        if self.getRepresentedBySociety():
+            return "%s %s %s repr. par %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2(), self.getSociety())
+        elif self.getSociety():
             return "%s %s %s (%s)" % (self.getPersonTitle(short=True), self.getName1(), self.getName2(), self.getSociety())
         else:
             return "%s %s %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2())
@@ -346,9 +368,9 @@ class Contact(BaseContent, BrowserDefaultMixin):
         namedefined = self.getName1() or self.getName2()
         namepart = namedefined and '%s %s' % (self.getName1(), self.getName2()) or self.getSociety()
         nameSignaletic = '%s %s' % (title, namepart)
-        if len(self.getRepresentedBy()) > 0:
+        if len(self.getRepresentedBy()) > 0 or self.getRepresentedBySociety():
             person_title = self.getPersonTitle(theObject=True)
-            representatives = self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
+            representatives =  self.getRepresentedBySociety() and self.getSociety() or self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
             gender = multiplicity = ''
             represented = 'représenté'
             if person_title:

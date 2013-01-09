@@ -15,7 +15,7 @@
                        putils context/plone_utils;">
 
 
- <tal:comment replace="nothing">This edit form is only used by the Applicant portal_type, others use the base_edit</tal:comment>
+ <tal:comment replace="nothing">This edit form is only used by the Proprietary portal_type, others use the base_edit</tal:comment>
 
       <tal:fieldsets repeat="fieldset python: ['default',]">
         <fieldset class="urbanEditWithTabbing" tal:define="fieldsetid python:putils.normalizeString(fieldset)"

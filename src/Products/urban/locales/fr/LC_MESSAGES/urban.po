@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2013-01-08 10:08+0000\n"
+"POT-Creation-Date: 2013-01-09 08:42+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -2251,6 +2251,11 @@ msgstr "Numéro de matricule"
 #: Contact.py
 msgid "urban_label_representedBy"
 msgstr "Représenté par"
+
+#. Default: "Representedbysociety"
+#: Contact.py
+msgid "urban_label_representedBySociety"
+msgstr "Représenté par la société"
 
 #. Default: "Requestedorganisation"
 #: UrbanEventOpinionRequest.py

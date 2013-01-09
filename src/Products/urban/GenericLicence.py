@@ -578,9 +578,11 @@ schema = Schema((
     ReferenceField(
         name='foldermanagers',
         widget=ReferenceBrowserWidget(
-            allow_browse=0,
+            allow_browse=False,
             base_query='foldermanagersBaseQuery',
             show_results_without_query=True,
+            wild_card_search=True,
+            allow_search=False,
             label='Foldermanagers',
             label_msgid='urban_label_foldermanagers',
             i18n_domain='urban',
@@ -588,7 +590,7 @@ schema = Schema((
         relationship='licenceFolderManagers',
         required=True,
         schemata='urban_description',
-        multiValued=1,
+        multiValued=True,
         allowed_types=('FolderManager',),
     ),
     ReferenceField(
