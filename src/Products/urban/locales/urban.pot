@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-10-30 13:02+0000\n"
+"POT-Creation-Date: 2013-01-07 12:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1248,6 +1248,11 @@ msgstr ""
 #. Default: "Talcondition"
 #: UrbanEventType.py
 msgid "urban_label_TALCondition"
+msgstr ""
+
+#. Default: "Transparency"
+#: Layer.py
+msgid "urban_label_Transparency"
 msgstr ""
 
 #. Default: "Urbancertificateonenumerotation"

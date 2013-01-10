@@ -45,7 +45,7 @@ class WMC(BrowserView):
             hidden = 1
             if additional_layer.getVisibility() == True:
                 hidden = 0
-            layers.append({'url' : url,'srs':additional_layer.getSRS(),'title':additional_layer.Title,'name' : additional_layer.getLayers(),'format':additional_layer.getLayerFormat(),'style':additional_layer.getStyles(),'hidden': hidden})
+            layers.append({'url' : url,'srs':additional_layer.getSRS(),'title':additional_layer.Title,'name' : additional_layer.getLayers(),'format':additional_layer.getLayerFormat(),'style':additional_layer.getStyles(),'hidden': hidden, 'transparency':additional_layer.getTransparency() and 'true' or 'false'})
         return layers
 
     def wmc(self):
