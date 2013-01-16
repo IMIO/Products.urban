@@ -171,6 +171,7 @@ class UrbanSearchView(BrowserView):
         parcels_historic = self.queryParcels(division, section, radical, bis, exposant, puissance, browseoldparcels)
         for parcel in parcels_historic:
             parcel_infos.extend(parcel.getAllSearchRefs())
+        import ipdb; ipdb.set_trace()
         res = catalogTool(portal_type=foldertypes, parcelInfosIndex=parcel_infos)
         return res
 
@@ -207,27 +208,32 @@ class UrbanSearchView(BrowserView):
         parcels = [ParcelHistoric(highlight=True, **r) for r in records]
         parcels = mergeDuplicate(parcels)
         if browseold:
-            def buildRelativesChain(parcel, prc, link='prca'):
+            def buildRelativesChain(parcel, link='prca'):
                 o_link = link == 'prca' and 'prcc' or 'prca'
                 link_name  = link == 'prca' and 'parents' or 'childs'
                 o_link_name  = link == 'prca' and 'childs' or 'parents'
                 division = parcel.division
-                section = prc[0]
-                prcb1 = prc[1:]
-                prcb1 = '%s%s%s' % (prcb1[:-3], ' '.join(['' for i in range(12-len(prcb1))]), prcb1[-3:])
-                query_string = "SELECT distinct %s, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
-                                FROM pas left join da on da.da = pas.da \
-                                WHERE pas.da = %s and section = '%s' and pas.prcb1 = '%s' and pas.%s IS NOT NULL" % (link, division, section, prcb1, o_link)
-                records = self.tool.queryDB(query_string)
-                relatives = [ParcelHistoric(**r) for r in records]
-                relative = mergeDuplicate(relatives)[0]
-                setattr(relative, link_name, [buildRelativesChain(relative, prc, link) for prc in getattr(relative, link_name)])
-                relative.addRelative(o_link_name, [parcel])
-                return relative
+                to_return = []
+                for prc in getattr(parcel, link_name):
+                    section = prc[0]
+                    prcb1 = prc[1:]
+                    prcb1 = '%s%s%s' % (prcb1[:-3], ' '.join(['' for i in range(12-len(prcb1))]), prcb1[-3:])
+                    query_string = "SELECT distinct %s, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
+                                    FROM pas left join da on da.da = pas.da \
+                                    WHERE pas.da = %s and section = '%s' and pas.prcb1 = '%s' and pas.%s IS NOT NULL" % (link, division, section, prcb1, o_link)
+                    records = self.tool.queryDB(query_string)
+                    relatives = [ParcelHistoric(**r) for r in records]
+                    if not relatives:
+                        continue
+                    relative = mergeDuplicate(relatives)[0]
+                    setattr(relative, link_name, buildRelativesChain(relative, link))
+                    relative.addRelative(o_link_name, [parcel])
+                    to_return.append(relative)
+                return to_return
             all_nodes = {}
             for i, parcel in enumerate(parcels):
-                parcel.parents = [buildRelativesChain(parcel, parent, 'prca') for parent in parcel.parents]
-                parcel.childs = [buildRelativesChain(parcel, child, 'prcc') for child in parcel.childs]
+                parcel.parents = buildRelativesChain(parcel, 'prca')
+                parcel.childs = buildRelativesChain(parcel, 'prcc')
                 parcel_nodes = parcel.getAllNodes(nodes={})
                 common_nodes = list(set(parcel_nodes.keys()).intersection(set(all_nodes.keys())))
                 if common_nodes:
@@ -243,7 +249,6 @@ class UrbanSearchView(BrowserView):
                 else:
                     all_nodes.update(dict([(k, parcel_nodes[k]['node']) for k in parcel_nodes.keys()]))
         return [p for p in parcels if p]
-
 
 
 class ParcelHistoric:
