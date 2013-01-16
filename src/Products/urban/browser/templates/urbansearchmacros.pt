@@ -1,5 +1,5 @@
 <div metal:define-macro="searchbystreetMacro" i18n:domain="urban"
-      tal:define="last_encoded_street python: view.getSearchArgument('street');
+      tal:define="last_encoded_street request/street|nothing;
                   portal_url nocall:context/portal_url;
                   portal portal_url/getPortalObject;
                   js python: ['datagridautocomplete.js']">
@@ -24,17 +24,17 @@
 </div>
 
 <div metal:define-macro="searchbynameMacro" i18n:domain="urban"
-        tal:define="last_encoded_name python: view.getSearchArgument('name');
-                    contact_types view/getContactTypes">
+        tal:define="last_encoded_name request/name|nothing;
+                    contact_types view/getContactTypes;
+                    contacts_checked python: request.get('contacttypes', [])">
  <input id="contacttypes" type="checkbox" name="contacttypes" value="Applicant"
-  tal:define="type_checked python:'Applicant' in view.getSearchArgument('contacttypes') or
-                                 not view.getSearchArgument('contacttypes')"
-  tal:attributes=" checked python: type_checked and 'checked' or ''" />
+         tal:define="type_checked python: not contacts_checked or 'Applicant' in contacts_checked"
+         tal:attributes=" checked python: type_checked and 'checked' or ''" />
                 <label tal:content="python: 'Applicant'" i18n:domain="plone" i18n:translate="">Contact type</label>
  <span tal:repeat="contact_type contact_types">
                     <input id="contacttypes" type="checkbox" name="contacttypes"
-                     tal:define="type_checked python:contact_type in view.getSearchArgument('contacttypes') or ''"
-                      tal:attributes="value contact_type;checked python: type_checked and 'checked' or ''" />
+                     tal:define="type_checked python:contact_type in contacts_checked or ''"
+                      tal:attributes="value contact_type; checked python: type_checked and 'checked' or ''" />
                 <label tal:content="contact_type" i18n:domain="plone" i18n:translate="">Contact type</label>
  </span>
  <p align="left" class="discreet" i18n:translate="urban_label_searchbyname_descr">
@@ -53,7 +53,8 @@
                  exposant request/exposant|nothing;
                  puissance request/puissance|nothing;
                  partie request/partie|nothing;
-                 divisions view/getDivisions|nothing">
+                 divisions view/getDivisions|nothing;
+                 browseoldparcels request/browseoldparcels|nothing">
 
              <div class='discreet' i18n:translate="urban_label_complete_parcel">Please enter the complete parcel informations</div>
              <table class="listing">
@@ -85,5 +86,7 @@
                  <td><input type="checkbox" name="partie" tal:attributes="value partie"></td>
                  </tr>
              </table>
+             <input type="checkbox" name="browseoldparcels" value="1" checked="" tal:attributes="checked browseoldparcels"/>
+             <label i18n:translate="urban_browse_old_parcels">Browse old parcels (Only works with the parcel reference)</label>
  </span>
 </div>

@@ -1140,6 +1140,9 @@ msgstr "Urbanisme tests"
 msgid "urban_alertdelay_descr"
 msgstr "Nombre de jour restant à partir duquel une alerte doit être indiquée concernant le délai de cet événement"
 
+msgid "urban_browse_old_parcels"
+msgstr "Chercher les anciennes parcelles (fonctionne uniquement avec la recherche par référence cadastrale)"
+
 #. Default: "Enter the 4 coordinates of the map, each coordinate separated by a comma."
 #: UrbanTool.py
 msgid "urban_descr_mapExtent"

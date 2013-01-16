@@ -1139,6 +1139,9 @@ msgstr ""
 msgid "urban_alertdelay_descr"
 msgstr ""
 
+msgid "urban_browse_old_parcels"
+msgstr ""
+
 #. Default: "Enter the 4 coordinates of the map, each coordinate separated by a comma."
 #: UrbanTool.py
 msgid "urban_descr_mapExtent"

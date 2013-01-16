@@ -151,7 +151,7 @@
                         browseOldParcels.setAttribute('checked', '');
                      }"
            type="checkbox" id="browseOldParcels" name="browseOldParcels" value="1" checked="bla" tal:attributes="checked python: request.get('browseOldParcels') and 'checked' or ''"/>
-     <label i18n:domain="plone" i18n:translate="">Browse old parcels (Only works with the parcel reference)</label>
+     <label i18n:translate="urban_browse_old_parcels">Browse old parcels (Only works with the parcel reference)</label>
    <td>
  </tr>
 </table><br/>

@@ -66,13 +66,13 @@ class SearchParcelsView(BrowserView):
         if section:
             condition.append("sectionavant = '%s'" % section)
         if radical:
-            condition.append("radicalavant = "+radical)
+            condition.append("radicalavant = %s" % radical)
         if bis:
-            condition.append("bisavant = "+bis)
+            condition.append("bisavant = %s" % bis)
         if exposant:
-            condition.append("exposantavant = '%s'" %exposant)
+            condition.append("exposantavant = '%s'" % exposant)
         if puissance:
-            condition.append("puissanceavant = "+puissance)
+            condition.append("puissanceavant = %s" % puissance)
         if len(condition) > 1:
             query_string += condition[0]
             query_string += ' and '.join(condition[1:])
@@ -138,17 +138,17 @@ class SearchParcelsView(BrowserView):
             query_string = "SELECT distinct prca,pas.da,divname,sectionavant,radicalavant,bisavant,exposantavant,puissanceavant FROM pas left join da on pas.da=da.da "
             condition = ["WHERE "]
             if division != '0':  #precise division selected
-                condition.append('pas.da = %s'%division)
+                condition.append('pas.da = %s' % division)
             if section:
-                condition.append("sectionavant = '%s'"%section)
+                condition.append("sectionavant = '%s'" % section)
             if radical:
-                condition.append("radicalavant = "+radical)
+                condition.append("radicalavant = %s" % radical)
             if bis:
-                condition.append("bisavant = "+bis)
+                condition.append("bisavant = %s" % bis)
             if exposant:
-                condition.append("exposantavant = '%s'"%exposant)
+                condition.append("exposantavant = '%s'" % exposant)
             if puissance:
-                condition.append("puissanceavant = "+puissance)
+                condition.append("puissanceavant = %s" % puissance)
             if len(condition) > 1:
                 query_string += condition[0]
                 query_string += ' and '.join(condition[1:])
