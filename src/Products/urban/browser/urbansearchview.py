@@ -1,5 +1,6 @@
 ## -*- coding: utf-8 -*-
 
+from zope.i18n import translate
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
@@ -19,6 +20,10 @@ class UrbanSearchView(BrowserView):
         self.context = context
         self.request = request
         self.tool = getToolByName(context, 'portal_urban')
+        if not self.enoughSearchCriterias(self.request):
+            plone_utils = getToolByName(context, 'plone_utils')
+            plone_utils.addPortalMessage(translate('warning_enter_search_criteria'), type="warning")
+
 
     def AvailableStreets(self):
         context = aq_inner(self.context)
@@ -59,6 +64,15 @@ class UrbanSearchView(BrowserView):
                 'Products.urban.interfaces.ILocality',
                 ]
         return ','.join(interfaces)
+
+    def enoughSearchCriterias(self, request):
+        """
+        """
+        if request.get('search_by', '') == 'parcel':
+            args_name = ['division','section', 'radical', 'bis', 'exposant', 'puissance']
+            valid_args = [request.get(name) for name in args_name if request.get(name)]
+            return len(valid_args) > 2
+        return True
 
     def searchLicence(self):
         """
@@ -148,6 +162,8 @@ class UrbanSearchView(BrowserView):
           Find licences with parcel paramaters
         """
 
+        if not self.enoughSearchCriterias(self.context.REQUEST):
+            return []
         catalogTool = getToolByName(self, 'portal_catalog')
         parcel_infos = []
         arg_index = ParcelHistoric(division=division, section=section, radical=radical, bis=bis, exposant=exposant, puissance=puissance)
