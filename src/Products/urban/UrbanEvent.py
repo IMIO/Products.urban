@@ -294,6 +294,8 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
            Return a parsed version of data from Cadastre so we obtain something
            more beautiful to display
         """
+        if street == None:
+            return 'NO ADDRESS FOUND'
         print '\n\n Street: '+street
         i=0
         toreturn=''
