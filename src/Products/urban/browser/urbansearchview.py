@@ -171,7 +171,6 @@ class UrbanSearchView(BrowserView):
         parcels_historic = self.queryParcels(division, section, radical, bis, exposant, puissance, browseoldparcels)
         for parcel in parcels_historic:
             parcel_infos.extend(parcel.getAllSearchRefs())
-        import ipdb; ipdb.set_trace()
         res = catalogTool(portal_type=foldertypes, parcelInfosIndex=parcel_infos)
         return res
 
