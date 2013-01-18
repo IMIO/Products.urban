@@ -165,30 +165,20 @@ class UrbanSearchView(BrowserView):
         if not self.enoughSearchCriterias(self.context.REQUEST):
             return []
         catalogTool = getToolByName(self, 'portal_catalog')
-        parcel_infos = []
+        parcel_infos = set()
         arg_index = ParcelHistoric(division=division, section=section, radical=radical, bis=bis, exposant=exposant, puissance=puissance)
-        parcel_infos.append(arg_index.getSearchRef())
+        parcel_infos.add(arg_index.getSearchRef())
         parcels_historic = self.queryParcels(division, section, radical, bis, exposant, puissance, browseoldparcels)
         for parcel in parcels_historic:
-            parcel_infos.extend(parcel.getAllSearchRefs())
-        res = catalogTool(portal_type=foldertypes, parcelInfosIndex=parcel_infos)
+            for ref in parcel.getAllSearchRefs():
+                parcel_infos.add(ref)
+        res = catalogTool(portal_type=foldertypes, parcelInfosIndex=list(parcel_infos))
         return res
 
     def queryParcels(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None, browseold=False):
         """
         Return the concerned parcels
         """
-        def mergeDuplicate(parcel_historics):
-            checked = {}
-            for i, historic in enumerate(parcel_historics):
-                key = historic.key()
-                if key in checked.keys():
-                    parcel_historics[checked[key]].mergeRelatives(historic)
-                    parcel_historics[i] = None
-                else:
-                    checked[key] = i
-            return [parcel for parcel in parcel_historics if parcel]
-
         query_string = browseold and \
                        "SELECT distinct prca, prcc, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
                         FROM pas left join da on da.da = pas.da" or \
@@ -205,66 +195,68 @@ class UrbanSearchView(BrowserView):
             query_string = '%s WHERE %s' % (query_string, ' and '.join(conditions))
         records = self.tool.queryDB(query_string)
         parcels = [ParcelHistoric(highlight=True, **r) for r in records]
-        parcels = mergeDuplicate(parcels)
+        parcels = ParcelHistoric.mergeDuplicate(parcels)
         if browseold:
-            def buildRelativesChain(parcel, link='prca'):
-                o_link = link == 'prca' and 'prcc' or 'prca'
-                link_name  = link == 'prca' and 'parents' or 'childs'
-                o_link_name  = link == 'prca' and 'childs' or 'parents'
-                division = parcel.division
-                to_return = []
-                for prc in getattr(parcel, link_name):
-                    section = prc[0]
-                    prcb1 = prc[1:]
-                    prcb1 = '%s%s%s' % (prcb1[:-3], ' '.join(['' for i in range(12-len(prcb1))]), prcb1[-3:])
-                    query_string = "SELECT distinct %s, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
-                                    FROM pas left join da on da.da = pas.da \
-                                    WHERE pas.da = %s and section = '%s' and pas.prcb1 = '%s' and pas.%s IS NOT NULL" % (link, division, section, prcb1, o_link)
-                    records = self.tool.queryDB(query_string)
-                    relatives = [ParcelHistoric(**r) for r in records]
-                    if not relatives:
-                        continue
-                    relative = mergeDuplicate(relatives)[0]
-                    setattr(relative, link_name, buildRelativesChain(relative, link))
-                    relative.addRelative(o_link_name, [parcel])
-                    to_return.append(relative)
-                return to_return
-            all_nodes = {}
             for i, parcel in enumerate(parcels):
-                parcel.parents = buildRelativesChain(parcel, 'prca')
-                parcel.childs = buildRelativesChain(parcel, 'prcc')
-                parcel_nodes = parcel.getAllNodes(nodes={})
-                common_nodes = list(set(parcel_nodes.keys()).intersection(set(all_nodes.keys())))
-                if common_nodes:
-                    if parcel.key() in all_nodes:
-                        all_nodes[parcel.key()].highlight = True
-                    else:
-                        fusion_node = parcel_nodes[common_nodes[0]]
-                        for i, key in enumerate(common_nodes):
-                            if abs(parcel_nodes[key]['distance']) < abs(fusion_node['distance']):
-                                fusion_node = parcel_nodes[key]
-                        fusion_node['node'].replaceNode(all_nodes[fusion_node['node'].key()])
-                    parcels[i] = None
-                else:
-                    all_nodes.update(dict([(k, parcel_nodes[k]['node']) for k in parcel_nodes.keys()]))
-        return [p for p in parcels if p]
+                parcel.buildRelativesChain(self.tool, 'parents')
+                parcel.buildRelativesChain(self.tool, 'childs')
+        return parcels
 
 
 class ParcelHistoric:
+
+    @staticmethod
+    def mergeDuplicate(parcel_historics):
+        checked = {}
+        for i, historic in enumerate(parcel_historics):
+            key = historic.key()
+            if key in checked.keys():
+                parcel_historics[checked[key]].mergeRelatives(historic)
+                parcel_historics[i] = None
+            else:
+                checked[key] = i
+        return [parcel for parcel in parcel_historics if parcel]
+
 
     def __init__(self, highlight=False, prc='', prca='', prcc='', **refs):
         self.highlight = highlight
         self.parents = self.diffPrc(prca, prc) and [prca] or []
         self.childs = self.diffPrc(prcc, prc) and [prcc] or []
         self.divname = self.division = self.section = self.radical = self.bis =  self.exposant =  self.puissance = ''
+        self.refs = ['divname', 'division', 'section', 'radical', 'bis', 'exposant', 'puissance']
         self.setRefs(**refs)
 
     def __str__(self):
-        refs = ['divname', 'division', 'section', 'radical', 'bis', 'exposant', 'puissance']
-        return ' '.join([getattr(self, attr, '') for attr in refs])
+        return ' '.join([getattr(self, attr, '') for attr in self.refs])
+
+    def __hash__(self):
+        return self.__str__()
 
     def key(self):
         return self.__str__()
+
+    def buildRelativesChain(self, urban_tool, link_name):
+        o_link_name  = link_name == 'parents' and 'childs' or 'parents'
+        link = link_name == 'parents' and 'prca' or 'prcc'
+        o_link = link == 'prca' and 'prcc' or 'prca'
+        division = self.division
+        relatives_chain = []
+        for prc in getattr(self, link_name):
+            section = prc[0]
+            prcb1 = prc[1:]
+            prcb1 = '%s%s%s' % (prcb1[:-3], ' '.join(['' for i in range(12-len(prcb1))]), prcb1[-3:])
+            query_string = "SELECT distinct %s, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
+                            FROM pas left join da on da.da = pas.da \
+                            WHERE pas.da = %s and section = '%s' and pas.prcb1 = '%s' and pas.%s IS NOT NULL" % (link, division, section, prcb1, o_link)
+            records = urban_tool.queryDB(query_string)
+            relatives = [ParcelHistoric(**r) for r in records]
+            if not relatives:
+                continue
+            relative = ParcelHistoric.mergeDuplicate(relatives)[0]
+            relative.buildRelativesChain(urban_tool, link_name)
+            relative.addRelative(o_link_name, [self])
+            relatives_chain.append(relative)
+        setattr(self, link_name, relatives_chain)
 
     def getSearchRef(self):
         return ','.join([val and str(val) or '' for val in [self.division, self.section, self.radical, self.bis, self.exposant, self.puissance, '0']])
@@ -283,54 +275,19 @@ class ParcelHistoric:
                     relative.getAllNodes(directions, nodes, dist)
         return nodes
 
-    def getAllNodesByLevel(self):
-        nodes = {}
-        nodes = self.getAllNodes(nodes=nodes)
-        levels = {}
-        for k, v in nodes.iteritems():
-            if v['distance'] not in levels.keys():
-                levels[v['distance']] = [v['node']]
-            else:
-                levels[v['distance']].append(v['node'])
-        return [levels[d] for d in sorted(levels.keys())]
-
-    def replaceNode(self, new_node):
-        merge_point = set([p.key() for p in self.parents]) != set([p.key() for p in new_node.parents]) and 'parents' or 'childs'
-        opposite = merge_point == 'parents' and 'childs' or 'parents'
-        for relative in getattr(self, merge_point):
-            setattr(relative, opposite, [new_node])
-            new_node.addRelative(merge_point, [relative])
-
-    def mergeRelatives(self, other):
-        self.mergeParents(other)
-        self.mergeChilds(other)
-
-    def mergeParents(self, other):
-        existing_parents = [str(p) for p in self.parents]
-        for parent in other.parents:
-            if str(parent) not in existing_parents:
-                self.addParent(parent)
-
-    def mergeChilds(self, other):
-        existing_childs = [str(p) for p in self.childs]
-        for child in other.childs:
-            if str(child) not in existing_childs:
-                self.addChild(child)
+    def mergeRelatives(self, other, merge_points=['parents', 'childs']):
+        for merge_point in merge_points:
+            existing_relatives= [str(p) for p in getattr(self, merge_point)]
+            relatives = [relative for relative in getattr(other, merge_point) if str(relative) not in existing_relatives]
+            self.addRelative(merge_point, relatives)
 
     def diffPrc(self, prc_ac, prc):
         return prc_ac and prc_ac.replace(' ','')[1:] != prc.replace(' ','') or False
 
-    def isHighlighted(self):
-        return self.highlight
-
-    def setRefs(self, divname= '', division='', section='', radical='', bis='', exposant='', puissance='', **kwargs):
-        self.divname = str(divname)
-        self.division = division and str(division) or ''
-        self.section = str(section)
-        self.radical = str(radical)
-        self.bis = bis and str(bis) or ''
-        self.exposant = str(exposant)
-        self.puissance = puissance and str(puissance) or ''
+    def setRefs(self, **kwargs):
+        for ref in self.refs:
+            val = kwargs.get(ref, '') and str(kwargs[ref]) or ''
+            setattr(self, ref, val)
 
     def getRelatives(self, name):
         return getattr(self, '%s' % name, [])
@@ -345,12 +302,6 @@ class ParcelHistoric:
 
     def addChilds(self, childs):
         self.childs.extend(childs)
-
-    def addParent(self, parent):
-        self.parents.append(parent)
-
-    def addChild(self, child):
-        self.childs.append(child)
 
 class UrbanSearchMacros(BrowserView):
     """
