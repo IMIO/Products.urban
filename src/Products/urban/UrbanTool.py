@@ -500,35 +500,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             #if we could not connect, return the error
             return error
 
-    security.declarePublic('findParcelHistoric')
-    def findParcelHistoric(self, division, section, radical=0, bis=0, exposant='', puissance=0):
-        """
-           Return the concerned parcels
-        """
-        toreturn=[]
-        query_string = 'SELECT distinct da, sectionavant,radicalavant,bisavant,exposantavant,puissanceavant FROM pas WHERE da ='+division+' and section ILIKE \''+section+'\' and radical='+radical
-        if bis:
-            query_string=query_string+' and bis=\''+bis+'\''
-        if exposant:
-            query_string=query_string+' and exposant ILIKE \''+exposant+'\''
-        if puissance:
-            query_string=query_string+' and puissance='+puissance
-        query_string=query_string+' and not (sectionavant ILIKE \''+section+'\' and radicalavant='+radical
-        if bis:
-            query_string=query_string+' and bisavant=\''+bis+'\''
-        if exposant:
-            query_string=query_string+' and exposantavant ILIKE \''+exposant+'\''
-        if puissance:
-            query_string=query_string+' and puissanceavant='+puissance
-        query_string=query_string+')'
-
-        result = self.queryDB(query_string)
-        for rec in result:
-            toreturn=toreturn+[rec]
-            if  (rec['radicalavant'] != 0) and not ( (rec['sectionavant']==section) and (rec['radicalavant']==radical) and (rec['exposantavant']==exposant) and (rec['bisavant']==bis) and (rec['puissanceavant']==puissance) ) :
-                toreturn=toreturn+self.findParcelHistoric(division,rec['sectionavant'],str(rec['radicalavant']),str(rec['bisavant']),rec['exposantavant'],str(rec['puissanceavant']))
-        return toreturn
-
     security.declarePublic('findDivisions')
     def findDivisions(self, all=True):
         """
@@ -989,48 +960,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 output = StringIO()
                 output.write(unicode('\n'.join(xml).replace("&","&amp;"),'iso-8859-1').encode('iso-8859-1'))
                 return output.getvalue()
-
-    security.declarePublic('searchByParcel')
-    def searchByParcel(self, foldertypes, division, section, radical, bis, exposant, puissance, partie):
-        """
-          Find parcels with given paramaters and returns the linked licences
-        """
-        if len(bis)==1:
-            bis='0'+bis
-        section=section.upper()
-        exposant=exposant.upper()
-        catalogTool = getToolByName(self, 'portal_catalog')
-        #see PortionOut.parcelInfosIndex to see how the index is build
-        #if partie:
-        #    partiestr = '1'
-        #else:
-        #    partiestr = '0'
-        parcelInfosIndex = '%s,%s,%s,%s,%s,%s,%s' % (division, section, radical, bis, exposant, puissance, '1')
-        brains = catalogTool(portal_type=foldertypes, parcelInfosIndex=parcelInfosIndex)
-        parcelInfosIndex2 = '%s,%s,%s,%s,%s,%s,%s' % (division, section, radical, bis, exposant, puissance, '0')
-        brains = brains + catalogTool(portal_type=foldertypes, parcelInfosIndex=parcelInfosIndex2)
-        #if we did not found any real parcel, returns
-
-        oldsparcels=self.findParcelHistoric(division, section, radical, bis, exposant, puissance)
-        if (not brains) and (not oldsparcels):
-            return []
-        parcels = []
-        parcels.append(parcelInfosIndex)
-        parcels.append(parcelInfosIndex2)
-        for oldparcel in oldsparcels:
-            parcel = '%s,%s,%s,%s,%s,%s,%s' % (str(oldparcel['da']), oldparcel['sectionavant'], oldparcel['radicalavant'], oldparcel['bisavant'], oldparcel['exposantavant'], oldparcel['puissanceavant'], '0')
-            parcelwithpartie = '%s,%s,%s,%s,%s,%s,%s' % (str(oldparcel['da']), oldparcel['sectionavant'], oldparcel['radicalavant'], oldparcel['bisavant'], oldparcel['exposantavant'], oldparcel['puissanceavant'], '1')
-            #remove the '0' values
-            parcel = parcel.replace(',0,', ',,')
-            parcelwithpartie = parcelwithpartie.replace(',0,', ',,')
-            parcels.append(parcel)
-            parcels.append(parcelwithpartie)
-        res = []
-        for parcel in parcels:
-            brains = catalogTool(portal_type=foldertypes, parcelInfosIndex=parcel)
-            res += brains
-        #remove brains for which no parcel at all is defined...
-        return [r for r in res if r.parcelInfosIndex]
 
     security.declarePublic('getReferenceBrowserSearchAtObj')
     def getReferenceBrowserSearchAtObj(self, at_url):
