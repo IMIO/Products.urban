@@ -97,6 +97,7 @@ schema = Schema((
         name='outdated',
         default=False,
         widget=BooleanField._properties['widget'](
+            visible={'edit':'hidden', 'view':'visible'},
             label='Outdated',
             label_msgid='urban_label_outdated',
             i18n_domain='urban',
