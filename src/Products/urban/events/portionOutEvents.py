@@ -22,7 +22,7 @@ def setValidParcel(parcel, event):
         else:
             parcel.setOutdated(False)
     else:
-        parcel.setOutdated(False)
+        parcel.setIsOfficialParcel(False)
     parcel.reindexObject()
 
 def setDivisionCode(parcel, event):
