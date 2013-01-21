@@ -57,6 +57,7 @@ schema = Schema((
             label_msgid='urban_label_section',
             i18n_domain='urban',
         ),
+        validators=('isValidSection',),
     ),
     StringField(
         name='radical',
@@ -65,6 +66,7 @@ schema = Schema((
             label_msgid='urban_label_radical',
             i18n_domain='urban',
         ),
+        validators=('isValidRadical',),
     ),
     StringField(
         name='bis',
@@ -73,6 +75,7 @@ schema = Schema((
             label_msgid='urban_label_bis',
             i18n_domain='urban',
         ),
+        validators=('isValidBis',),
     ),
     StringField(
         name='exposant',
@@ -81,6 +84,7 @@ schema = Schema((
             label_msgid='urban_label_exposant',
             i18n_domain='urban',
         ),
+        validators=('isValidExposant',),
     ),
     StringField(
         name='puissance',
@@ -89,6 +93,7 @@ schema = Schema((
             label_msgid='urban_label_puissance',
             i18n_domain='urban',
         ),
+        validators=('isValidPuissance',),
     ),
     BooleanField(
         name='partie',

@@ -495,6 +495,27 @@ msgstr ""
 msgid "error_in_expr_contact_admin"
 msgstr ""
 
+msgid "error_textcfg"
+msgstr ""
+
+msgid "error_streetname"
+msgstr ""
+
+msgid "error_section"
+msgstr ""
+
+msgid "error_radical"
+msgstr ""
+
+msgid "error_bis"
+msgstr ""
+
+msgid "error_exposant"
+msgstr ""
+
+msgid "error_puissance"
+msgstr ""
+
 msgid "event_data"
 msgstr ""
 

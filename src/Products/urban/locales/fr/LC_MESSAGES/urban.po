@@ -493,8 +493,29 @@ msgstr "Paramètres des déclarations environnementales"
 msgid "envclassthrees"
 msgstr "Déclarations environnementales"
 
+msgid "error_bis"
+msgstr "Bis doit être un nombre compris entre 0 et 100 (ex: 42)"
+
+msgid "error_exposant"
+msgstr "L'exposant doit être une seule lettre majuscule (ex: C)"
+
 msgid "error_in_expr_contact_admin"
 msgstr "<b>Erreur dans l'expression ${expr} liée à ce terme de vocabulaire, contactez votre administrateur !!!</b>"
+
+msgid "error_puissance"
+msgstr "La puissance doit être un nombre compris entre 0 et 100 (ex: 42)"
+
+msgid "error_radical"
+msgstr "Le radical doit être un nombre (ex:42) "
+
+msgid "error_section"
+msgstr "La section doit être une seule lettre majuscule (ex: C)"
+
+msgid "error_streetname"
+msgstr "Nom de rue invalide"
+
+msgid "error_textcfg"
+msgstr "Le champ '${fieldname}' est configuré deux fois"
 
 msgid "event_data"
 msgstr "Données concernant l'événement"

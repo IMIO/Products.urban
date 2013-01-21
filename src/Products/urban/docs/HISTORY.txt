@@ -16,6 +16,12 @@ Text of the specificFeatures fields are now editable within a licence (CU1, CU2,
 
 Added an optional field 'architects' on MiscDemand class (#5286).
 
+Added field 'represented by society' on applicant/proprietary (#5282).
+
+Now, the licence search works with old parcels references and also works with incomplete parcels references as well (#5099).
+
+Urban editors can now add parcels manually (#5285)
+
 bugfixes:
 - UrbanEvent view doesnt crash anymore when a wrong TAL condition is defined on an UrbanDoc.
 - corrected template "accuse de reception d'une reclamation" (#5168, #5198).
