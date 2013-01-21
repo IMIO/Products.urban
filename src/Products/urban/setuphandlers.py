@@ -1898,7 +1898,6 @@ def addTestLicences(context):
         portionout_id = licence.invokeFactory('PortionOut', id=site.generateUniqueId('parcelle'),**portionout_data)
         portionout = getattr(licence, portionout_id)
         portionout._renameAfterCreation()
-        portionout.updateTitle()
         licence.reindexObject(idxs=['parcelInfosIndex'])
         #generate all the urban events
         logger.info('   test %s --> create all the events' % licence_type)

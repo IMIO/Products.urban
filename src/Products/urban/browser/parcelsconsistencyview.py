@@ -32,7 +32,7 @@ class ParcelsConsistencyView(BrowserView):
             parcel = brain.getObject()
             if parcel.getIsOfficialParcel() and parcel.getDivisionCode() and parcel.getSection():
                 references = dict([(name, getattr(parcel,'get%s' % name.capitalize())()) for name in ref_names])
-                outdated = urban_tool.queryParcels(fuzzy=False, **references) and False or True
+                outdated = not urban_tool.queryParcels(fuzzy=False, **references)
             else:
                 outdated = False
             parcel.setOutdated(outdated)

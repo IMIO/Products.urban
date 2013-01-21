@@ -19,6 +19,8 @@ def migrateToUrban116(context):
     migrateSpecificFeatures(context)
     # add extravalue 'Madame, Monsieur' to 'no value' title vocterm (or create it)
     migrateSocietyTitle(context)
+    # adapt the value of division field of all parcels
+    migrateParcelsDivision(context)
 
     # finish with reinstalling urban and adding the templates
     logger.info("starting to reinstall urban...")
@@ -108,5 +110,25 @@ def migrateSocietyTitle(context):
         titles_folder.moveObjectsToTop(notitle_id)
         notitle_term.reindexObject()
         logger.info("created a new PersonTitleTerm 'notitle'")
+    logger.info("migration step done!")
+
+def migrateParcelsDivision(context):
+    """
+     The field division is now a select field,
+     its raw value is now a key that is the division code
+    """
+    site = getToolByName(context, 'portal_url').getPortalObject()
+    urban_tool = getToolByName(site, 'portal_urban')
+    logger = logging.getLogger('urban: migrate parcels division field->')
+    logger.info("starting migration step")
+
+    catalog = getToolByName(site, 'portal_catalog')
+    for parcel_brain in catalog(portal_type='PortionOut'):
+        parcel = parcel_brain.getObject()
+        division_code = parcel.getDivisionCode()
+        if division_code.isdigit() and parcel.getDivision().isalpha():
+            parcel.setDivision(division_code)
+            parcel.reindexObject()
+            logger.info('Migrated parcel %s' % parcel.Title())
     logger.info("migration step done!")
 
