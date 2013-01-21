@@ -16,6 +16,13 @@ def setValidParcel(parcel, event):
     references = dict([(name, getattr(parcel,'get%s' % name.capitalize())()) for name in ref_names])
     exists_in_DB = urban_tool.queryParcels(browseold=True, fuzzy=False, **references) and True or False
     parcel.setIsOfficialParcel(exists_in_DB)
+    if exists_in_DB:
+        if not urban_tool.queryParcels(fuzzy=False, **references):
+            parcel.setOutdated(True)
+        else:
+            parcel.setOutdated(False)
+    else:
+        parcel.setOutdated(False)
     parcel.reindexObject()
 
 def setDivisionCode(parcel, event):

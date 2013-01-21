@@ -9,6 +9,23 @@
 vertical-align: sub;
 }
 
+/* Color manual parcels in cyan and outdated parcels in orange*/
+table.listing tbody tr.odd td.outdated_parcel {
+    background: none repeat scroll 0 0 orange;
+}
+
+table.listing tbody tr.even td.outdated_parcel {
+    background: none repeat scroll 0 0 orange;
+}
+
+table.listing tbody tr.odd td.manual_parcel {
+    background: none repeat scroll 0 0 cyan;
+}
+
+table.listing tbody tr.even td.manual_parcel {
+    background: none repeat scroll 0 0 cyan;
+}
+
 /* align the add button of datagrid widgets on the left */
 #datagridwidget-add-button {
  float: left;
@@ -352,12 +369,12 @@ INPUT.button-urbanschedule
 }
 
 
-table[id$=ecificFeatures] td{ 
-   vertical-align: middle; 
-} 
+table[id$=ecificFeatures] td{
+   vertical-align: middle;
+}
 
-table[id$=ecificFeatures] tr.odd{ 
-   background-color: lightgray; 
-} 
+table[id$=ecificFeatures] tr.odd{
+   background-color: lightgray;
+}
 
 /* </dtml-with> */

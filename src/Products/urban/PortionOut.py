@@ -114,6 +114,16 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    BooleanField(
+        name='outdated',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            visible={'edit':'hidden', 'view':'visible'},
+            label='Outdated',
+            label_msgid='urban_label_outdated',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )
@@ -227,6 +237,13 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
             brains = catalog(parcelInfosIndex=parcel_infos)
         return [brain for brain in brains if brain.id != licence.id]
 
+    security.declarePublic('getCSSClass')
+    def getCSSClass(self):
+        if self.getOutdated():
+            return 'outdated_parcel'
+        elif not self.getIsOfficialParcel():
+            return 'manual_parcel'
+        return ''
 
 
 registerType(PortionOut, PROJECTNAME)

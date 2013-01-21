@@ -27,12 +27,12 @@ class ParcelsConsistencyView(BrowserView):
                     'critical_outdated_parcels' :[],
                     'outdated_parcels' :[],
                 }
+        ref_names = ['division', 'section', 'radical', 'bis', 'exposant', 'puissance']
         for brain in parcelbrains:
             parcel = brain.getObject()
-            if parcel.getDivisionCode() :
-                found = urban_tool.queryParcels(division = parcel.getDivisionCode(), section = parcel.getSection(), radical = parcel.getRadical(),
-                                                bis = parcel.getBis(), exposant = parcel.getExposant(), puissance = parcel.getPuissance(), browseold=True)
-                outdated = found == [] and True or False
+            if parcel.getIsOfficialParcel() and parcel.getDivisionCode() and parcel.getSection():
+                references = dict([(name, getattr(parcel,'get%s' % name.capitalize())()) for name in ref_names])
+                outdated = urban_tool.queryParcels(fuzzy=False, **references) and False or True
             else:
                 outdated = False
             parcel.setOutdated(outdated)

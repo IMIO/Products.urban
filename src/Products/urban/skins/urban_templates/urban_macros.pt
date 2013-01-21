@@ -424,7 +424,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
                          <span tal:content="python: context.portal_membership.getMemberInfo(value) and context.portal_membership.getMemberInfo(value)['fullname'] or value">Creator fullname</span>
                         </td>
                         <td tal:condition="python: field == 'Title'"
-                            tal:attributes="style python: (isAParcel and not obj.getObject().getIsOfficialParcel()) and 'background-color:cyan' or ''">
+                            tal:attributes="class python: isAParcel and obj.getObject().getCSSClass() or ''">
                                 <span tal:define="global url python: test((obj.portal_type == 'File'  or obj.portal_type == 'UrbanDoc')
                                                                            and obj.portal_properties.site_properties.ext_editor, url + '/external_edit', url)" />
                             <a href="#" tal:attributes="href url;
