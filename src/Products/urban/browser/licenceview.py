@@ -51,7 +51,7 @@ class LicenceView(BrowserView):
         portal_workflow = getToolByName(self, 'portal_workflow')
         if portal_workflow.getInfoFor(self.context, 'review_state') in ['accepted', 'refused',]:
             return False
-        return any([parcel.getOutdated() for parcel in context.listFolderContents(contentFilter={"portal_type" : "PortionOut"})])
+        return any([not parcel.getIsOfficialParcel for parcel in context.listFolderContents(contentFilter={"portal_type" : "PortionOut"})])
 
     def getKeyDates(self):
         context = aq_inner(self.context)

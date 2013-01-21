@@ -24,6 +24,8 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.Archetypes.utils import DisplayList
 ##/code-section module-header
 
 schema = Schema((
@@ -31,6 +33,7 @@ schema = Schema((
     StringField(
         name='divisionCode',
         widget=StringField._properties['widget'](
+            visible={'edit':'hidden', 'view':'visible'},
             label='Divisioncode',
             label_msgid='urban_label_divisionCode',
             i18n_domain='urban',
@@ -38,11 +41,14 @@ schema = Schema((
     ),
     StringField(
         name='division',
-        widget=StringField._properties['widget'](
+        widget=SelectionWidget(
+            format='select',
             label='Division',
             label_msgid='urban_label_division',
             i18n_domain='urban',
         ),
+        enforceVocabulary=True,
+        vocabulary='listDivisionNames',
     ),
     StringField(
         name='section',
@@ -94,12 +100,12 @@ schema = Schema((
         ),
     ),
     BooleanField(
-        name='outdated',
-        default=False,
+        name='isOfficialParcel',
+        default=True,
         widget=BooleanField._properties['widget'](
             visible={'edit':'hidden', 'view':'visible'},
-            label='Outdated',
-            label_msgid='urban_label_outdated',
+            label='Isofficialparcel',
+            label_msgid='urban_label_isOfficialParcel',
             i18n_domain='urban',
         ),
     ),
@@ -114,7 +120,7 @@ PortionOut_schema = BaseSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-PortionOut_schema['title'].visible = False
+PortionOut_schema['title'].widget.visible = False
 ##/code-section after-schema
 
 class PortionOut(BaseContent, BrowserDefaultMixin):
@@ -140,7 +146,7 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         """
           Set a correct title if we use invokeFactory
         """
-        division = self.getDivision()
+        division = self.listDivisionNames().getValue(self.getDivision())
         section = self.getSection()
         radical = self.getRadical()
         bis = self.getBis()
@@ -186,6 +192,11 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         else:
             res.append('0')
         return ",".join(res)
+
+    security.declarePublic('listDivisionNames')
+    def listDivisionNames(self):
+        urban_tool = getToolByName(self, 'portal_urban')
+        return DisplayList([(str(div['da']), div['divname']) for div in urban_tool.findDivisions(all=False)])
 
     security.declarePublic('hasRelatedLicences')
     def hasRelatedLicences(self, licence_type=''):

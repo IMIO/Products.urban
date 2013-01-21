@@ -78,3 +78,95 @@ def strip_tags(html):
     s.feed(html)
     return s.get_data()
 
+
+#class to retrieve and manipulate more easily parcels and their historic from the cadastral DB
+class ParcelHistoric:
+
+    @staticmethod
+    def mergeDuplicate(parcel_historics):
+        checked = {}
+        for i, historic in enumerate(parcel_historics):
+            key = historic.key()
+            if key in checked.keys():
+                parcel_historics[checked[key]].mergeRelatives(historic)
+                parcel_historics[i] = None
+            else:
+                checked[key] = i
+        return [parcel for parcel in parcel_historics if parcel]
+
+
+    def __init__(self, highlight=False, prc='', prca='', prcc='', **refs):
+        self.highlight = highlight
+        self.parents = self.diffPrc(prca, prc) and [prca] or []
+        self.childs = self.diffPrc(prcc, prc) and [prcc] or []
+        self.divname = self.division = self.section = self.radical = self.bis =  self.exposant =  self.puissance = ''
+        self.refs = ['divname', 'division', 'section', 'radical', 'bis', 'exposant', 'puissance']
+        self.setRefs(**refs)
+
+    def __str__(self):
+        return ' '.join([getattr(self, attr, '') for attr in self.refs])
+
+    def key(self):
+        return self.__str__()
+
+    def buildRelativesChain(self, urban_tool, link_name):
+        o_link_name  = link_name == 'parents' and 'childs' or 'parents'
+        link = link_name == 'parents' and 'prca' or 'prcc'
+        o_link = link == 'prca' and 'prcc' or 'prca'
+        division = self.division
+        relatives_chain = []
+        for prc in getattr(self, link_name):
+            section = prc[0]
+            prcb1 = prc[1:]
+            prcb1 = '%s%s%s' % (prcb1[:-3], ' '.join(['' for i in range(12-len(prcb1))]), prcb1[-3:])
+            query_string = "SELECT distinct %s, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
+                            FROM pas left join da on da.da = pas.da \
+                            WHERE pas.da = %s and section = '%s' and pas.prcb1 = '%s' and pas.%s IS NOT NULL" % (link, division, section, prcb1, o_link)
+            records = urban_tool.queryDB(query_string)
+            relatives = [ParcelHistoric(**r) for r in records]
+            if not relatives:
+                continue
+            relative = ParcelHistoric.mergeDuplicate(relatives)[0]
+            relative.buildRelativesChain(urban_tool, link_name)
+            relative.addRelatives(o_link_name, [self])
+            relatives_chain.append(relative)
+        setattr(self, link_name, relatives_chain)
+
+    def getSearchRef(self):
+        return ','.join([val and str(val) or '' for val in [self.division, self.section, self.radical, self.bis, self.exposant, self.puissance, '0']])
+
+    def getAllSearchRefs(self):
+        all_nodes = {}
+        all_nodes = [n['node'] for n in self.getAllNodes(nodes=all_nodes).values()]
+        return [node.getSearchRef() for node in all_nodes]
+
+    def getAllNodes(self, directions=['childs', 'parents'], nodes={}, distance=0):
+        nodes[self.key()] = {'node':self, 'distance':distance}
+        for direction in directions:
+            dist = direction == 'childs' and distance + 1 or distance - 1
+            for relative in self.getRelatives(direction):
+                if str(relative) not in nodes.keys():
+                    relative.getAllNodes(directions, nodes, dist)
+        return nodes
+
+    def mergeRelatives(self, other, link_names=['parents', 'childs']):
+        for link_name in link_names:
+            existing_relatives= [str(p) for p in getattr(self, link_name)]
+            relatives = [relative for relative in getattr(other, link_name) if str(relative) not in existing_relatives]
+            self.addRelatives(link_name, relatives)
+
+    def diffPrc(self, prc_ac, prc):
+        return prc_ac and prc_ac.replace(' ','')[1:] != prc.replace(' ','') or False
+
+    def setRefs(self, **kwargs):
+        for ref in self.refs:
+            val = kwargs.get(ref, '') and str(kwargs[ref]) or ''
+            setattr(self, ref, val)
+
+    def getRelatives(self, name):
+        return getattr(self, '%s' % name, [])
+
+    def addRelatives(self, name, relatives):
+        class_attr = getattr(self, name, None)
+        if class_attr != None:
+            class_attr.extend(relatives)

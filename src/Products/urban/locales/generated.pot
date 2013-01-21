@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Jan  9 09:47:58 2013\n"
-"PO-Revision-Date: Wed Jan  9 09:47:58 2013\n"
+"POT-Creation-Date: Mon Jan 21 10:37:34 2013\n"
+"PO-Revision-Date: Mon Jan 21 10:37:34 2013\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -585,6 +585,11 @@ msgstr ""
 msgid "urban_label_isModification"
 msgstr ""
 
+#. Default: "Isofficialparcel"
+#: PortionOut.py
+msgid "urban_label_isOfficialParcel"
+msgstr ""
+
 #. Default: "Issameaddressasworks"
 #: Contact.py
 msgid "urban_label_isSameAddressAsWorks"
@@ -759,11 +764,6 @@ msgstr ""
 #. Default: "Opinionstoaskifworks"
 #: UrbanCertificateBase.py
 msgid "urban_label_opinionsToAskIfWorks"
-msgstr ""
-
-#. Default: "Outdated"
-#: PortionOut.py
-msgid "urban_label_outdated"
 msgstr ""
 
 #. Default: "Parcellings"

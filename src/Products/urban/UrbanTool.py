@@ -48,6 +48,7 @@ from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFPlone.PloneBatch import Batch
 from Products.PageTemplates.Expressions import getEngine
 from Products.urban.utils import getOsTempFolder
+from Products.urban.utils import ParcelHistoric
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS
 from Products.urban.config import GLOBAL_TEMPLATES
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
@@ -511,6 +512,34 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if all:
             result = [{'da':'', 'divname': translate('all_divisions', 'urban', context=self.REQUEST)}] + result
         return result
+
+    security.declarePublic('queryParcels')
+    def queryParcels(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None, browseold=False, fuzzy=True):
+        """
+         Return the concerned parcels
+        """
+        query_string = browseold and \
+                       "SELECT distinct prca, prcc, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
+                        FROM pas left join da on da.da = pas.da" or \
+                       "SELECT capa.da as division, divname, prc, section, radical, exposant, bis, puissance \
+                        FROM map left join capa on map.capakey=capa.capakey left join da on capa.da = da.da "
+        conditions = []
+        division != 0 and conditions.append("%s.da= %s" % (browseold and 'pas' or 'capa', division))
+        section       and conditions.append("section= '%s'" % section)
+        (radical or not fuzzy) and conditions.append("radical = %s" % (radical and radical or '0'))
+        (bis or not fuzzy) and conditions.append("bis = %s" % (bis and bis or '0'))
+        (exposant or not fuzzy) and conditions.append("exposant %s" % (not exposant and 'is NULL' or "= '%s'" % exposant))
+        (puissance or not fuzzy) and conditions.append("puissance = %s" % (puissance and puissance or '0'))
+        if conditions:
+            query_string = '%s WHERE %s' % (query_string, ' and '.join(conditions))
+        records = self.queryDB(query_string)
+        parcels = [ParcelHistoric(highlight=True, **r) for r in records]
+        parcels = ParcelHistoric.mergeDuplicate(parcels)
+        if browseold:
+            for i, parcel in enumerate(parcels):
+                parcel.buildRelativesChain(self, 'parents')
+                parcel.buildRelativesChain(self, 'childs')
+        return parcels
 
     security.declarePublic('queryDB')
     def queryDB(self, query_string, connection_string=None):

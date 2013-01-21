@@ -30,6 +30,18 @@
   <subscriber for="..interfaces.IPortionOut
                    zope.app.container.interfaces.IObjectRemovedEvent"
                    handler=".portionOutEvents.onDelete" />
+  <subscriber for="..interfaces.IPortionOut
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+                   handler=".portionOutEvents.setValidParcel" />
+  <subscriber for="..interfaces.IPortionOut
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+                   handler=".portionOutEvents.setDivisionCode" />
+  <subscriber for="..interfaces.IPortionOut
+                   Products.Archetypes.interfaces.IObjectEditedEvent"
+                   handler=".portionOutEvents.setValidParcel" />
+  <subscriber for="..interfaces.IPortionOut
+                   Products.Archetypes.interfaces.IObjectEditedEvent"
+                   handler=".portionOutEvents.setDivisionCode" />
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setEventTypeType"/>
@@ -60,5 +72,8 @@
   <subscriber for="..interfaces.IEnvironmentBase
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".environmentLicenceEvents.setExploitationConditions"/>
+  <subscriber for="..interfaces.IMiscDemand
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".miscDemandEvents.createApplicant"/>
 
 </configure>
