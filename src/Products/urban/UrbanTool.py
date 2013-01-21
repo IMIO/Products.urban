@@ -525,7 +525,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                         FROM map left join capa on map.capakey=capa.capakey left join da on capa.da = da.da "
         conditions = []
         division != 0 and conditions.append("%s.da= %s" % (browseold and 'pas' or 'capa', division))
-        section       and conditions.append("section= '%s'" % section)
+        (section or not fuzzy) and conditions.append("section %s" % (not section and 'is NULL' or "= '%s'" % section))
         (radical or not fuzzy) and conditions.append("radical = %s" % (radical and radical or '0'))
         (bis or not fuzzy) and conditions.append("bis = %s" % (bis and bis or '0'))
         (exposant or not fuzzy) and conditions.append("exposant %s" % (not exposant and 'is NULL' or "= '%s'" % exposant))

@@ -57,6 +57,7 @@ schema = Schema((
             label_msgid='urban_label_section',
             i18n_domain='urban',
         ),
+        required=True,
         validators=('isValidSection',),
     ),
     StringField(
@@ -244,6 +245,7 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         elif not self.getIsOfficialParcel():
             return 'manual_parcel'
         return ''
+
 
 
 registerType(PortionOut, PROJECTNAME)

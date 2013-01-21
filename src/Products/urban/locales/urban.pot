@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-21 09:39+0000\n"
+"POT-Creation-Date: 2013-01-21 18:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -492,28 +492,28 @@ msgstr ""
 msgid "envclassthrees"
 msgstr ""
 
-msgid "error_in_expr_contact_admin"
-msgstr ""
-
-msgid "error_textcfg"
-msgstr ""
-
-msgid "error_streetname"
-msgstr ""
-
-msgid "error_section"
-msgstr ""
-
-msgid "error_radical"
-msgstr ""
-
 msgid "error_bis"
 msgstr ""
 
 msgid "error_exposant"
 msgstr ""
 
+msgid "error_in_expr_contact_admin"
+msgstr ""
+
 msgid "error_puissance"
+msgstr ""
+
+msgid "error_radical"
+msgstr ""
+
+msgid "error_section"
+msgstr ""
+
+msgid "error_streetname"
+msgstr ""
+
+msgid "error_textcfg"
 msgstr ""
 
 msgid "event_data"
@@ -2108,6 +2108,11 @@ msgstr ""
 #. Default: "Opinionstoaskifworks"
 #: UrbanCertificateBase.py
 msgid "urban_label_opinionsToAskIfWorks"
+msgstr ""
+
+#. Default: "Outdated"
+#: PortionOut.py
+msgid "urban_label_outdated"
 msgstr ""
 
 #. Default: "Outlinecolor"
