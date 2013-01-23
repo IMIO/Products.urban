@@ -99,6 +99,9 @@ class ParcelHistoric:
         self.highlight = highlight
         self.parents = self.diffPrc(prca, prc) and [prca] or []
         self.childs = self.diffPrc(prcc, prc) and [prcc] or []
+        self.prc = prc
+        self.proprietary = refs.get('proprietary', '')
+        self.location = refs.get('location', '')
         self.divname = self.division = self.section = self.radical = self.bis =  self.exposant =  self.puissance = ''
         self.refs = ['divname', 'division', 'section', 'radical', 'bis', 'exposant', 'puissance']
         self.setRefs(**refs)
@@ -148,6 +151,16 @@ class ParcelHistoric:
                 if str(relative) not in nodes.keys():
                     relative.getAllNodes(directions, nodes, dist)
         return nodes
+
+    def getParcelAsDictionary(self):
+        infos = dict([(ref, getattr(self, ref)) for ref in self.refs])
+        if self.prc:
+            infos['prc'] = self.prc
+        if self.proprietary:
+            infos['proprietary'] = self.proprietary
+        if self.location:
+            infos['location'] = self.location
+        return infos
 
     def mergeRelatives(self, other, link_names=['parents', 'childs']):
         for link_name in link_names:

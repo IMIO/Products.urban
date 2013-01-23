@@ -159,7 +159,7 @@
 </form>
 
 <!-- Display results -->
-<tal:block define="results python:view.findParcel(division=division,section=section,radical=radical,bis=bis,exposant=exposant,puissance=puissance,location=location,prcOwner=prcOwner,prcHistory=prcHistory, browseOldParcels=browseOldParcels);
+<tal:block define="results python:view.findParcel(division=division,section=section,radical=radical,bis=bis,exposant=exposant,puissance=puissance,location=location,prc_owner=prcOwner,prc_history=prcHistory, browseoldparcels=browseOldParcels);
                    oldparcels request/prcHistory | nothing"
            condition="python: results or oldparcels">
 <br />
@@ -173,7 +173,7 @@
  </thead>
  <!-- Display 'no results' -->
  <tal:block condition="not: python:results or prcOwner or location">
- <tal:def define="resultsOldPrc python: view.findOldParcel(division=division,section=section,radical=radical,bis=bis,exposant=exposant,puissance=puissance,prcHistory=prcHistory,divname=divname,prca=prca)">
+ <tal:def define="resultsOldPrc python: view.findOldParcel(division=division,section=section,radical=radical,bis=bis,exposant=exposant,puissance=puissance)">
   <tr tal:condition="not: resultsOldPrc">
    <td colspan=2 i18n:domain="atcontenttypes" i18n:translate="description_no_items_in_topic" class="discreet">No result found.</td>
   </tr>
@@ -182,19 +182,20 @@
    <td fcolor="#FF0000">
     <span tal:replace="structure python: '&nbsp;'*resold['level']*3" tal:condition="python: resold.has_key('level') and resold['level']"/>
     <span tal:content="python: resold['divname']"/>
-    <span tal:content="python: str(resold['prca'])"></span>
+    <span tal:content="python: str(resold['prc'])"></span>
     <span i18n:translate="" tal:condition="python: not resold.has_key('level') or resold['level']">(Attention!! ancien nom de parcelle)</span>
    </td>
    </tal:block>
    <td>
     <form i18n:domain="urban" name="quickAddParcel" tal:attributes="action python: context.absolute_url() + '/addPortionOutScript'" action="#" method="post">
-     <input type="hidden" name="division" value="#" tal:attributes="value python: resold['da']" />
-     <input type="hidden" name="section" value="#" tal:attributes="value python: resold['sectionavant']" />
-     <input type="hidden" name="radical" value="#" tal:attributes="value python: resold['radicalavant']" />
-     <input type="hidden" name="bis" value="#" tal:attributes="value python: resold['bisavant']" />
-     <input type="hidden" name="exposant" value="#" tal:attributes="value python: resold['exposantavant']" />
-     <input type="hidden" name="puissance" value="#" tal:attributes="value python: resold['puissanceavant']" />
+     <input type="hidden" name="division" value="#" tal:attributes="value python: resold['division']" />
+     <input type="hidden" name="section" value="#" tal:attributes="value python: resold['section']" />
+     <input type="hidden" name="radical" value="#" tal:attributes="value python: resold['radical']" />
+     <input type="hidden" name="bis" value="#" tal:attributes="value python: resold['bis']" />
+     <input type="hidden" name="exposant" value="#" tal:attributes="value python: resold['exposant']" />
+     <input type="hidden" name="puissance" value="#" tal:attributes="value python: resold['puissance']" />
      <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
+     <input type="hidden" name="old" value="#" tal:attributes="value python: resold.get('old', False) or resold.get('level', False)"/>
      <input type="submit" class="context" id="parcel" value="Add this parcel" i18n:attributes="value" />
     </form>
    </td>
@@ -208,23 +209,24 @@
     <span tal:content="python: res['divname']"/>
     <span tal:content="python: res['prc']"/>
     <span i18n:translate="" tal:condition="python: res.has_key('old') and res['old']">(Attention!! ancien nom de parcelle)</span><br>
-    <span tal:condition="python: res.has_key('sl1')" tal:content="python: res['sl1']"/><br>
-    <span tal:condition="python: res.has_key('pe')" tal:content="python: res['pe']"/><br>
+    <span tal:condition="python: res.has_key('location')" tal:content="python: res['location']"/><br>
+    <span tal:condition="python: res.has_key('proprietary')" tal:content="python: res['proprietary']"/><br>
    </td>
    <td>
     <form i18n:domain="urban" name="quickAddParcel" tal:attributes="action python: context.absolute_url() + '/addPortionOutScript'" action="#" method="post">
-      <input type="hidden" name="division" value="#" tal:attributes="value python: res['da']" />
+      <input type="hidden" name="division" value="#" tal:attributes="value python: res['division']" />
       <input type="hidden" name="section" value="#" tal:attributes="value python: res['section']" />
       <input type="hidden" name="radical" value="#" tal:attributes="value python: res['radical']" />
       <input type="hidden" name="bis" value="#" tal:attributes="value python: res['bis']" />
       <input type="hidden" name="exposant" value="#" tal:attributes="value python: res['exposant']" />
       <input type="hidden" name="puissance" value="#" tal:attributes="value python: res['puissance']" />
       <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
+      <input type="hidden" name="old" value="#" tal:attributes="value python: res.get('old', False)"/>
       <input type="submit" class="context" id="parcel" value="Add this parcel" i18n:attributes="value" />
     </form>
 
     <form i18n:domain="urban" name="findPrcHistory" tal:attributes="action python: context.absolute_url() + '/searchparcels'" action="#" method="post">
-      <input type="hidden" name="division" value="#" tal:attributes="value python: res['da']" />
+      <input type="hidden" name="division" value="#" tal:attributes="value python: res['division']" />
       <input type="hidden" name="section" value="#" tal:attributes="value python: res['section']" />
       <input type="hidden" name="radical" value="#" tal:attributes="value python: res['radical']" />
       <input type="hidden" name="bis" value="#" tal:attributes="value python: res['bis']" />
@@ -234,6 +236,7 @@
       <input type="hidden" name="prcHistory" value="1"/>
       <input type="hidden" name="divname" value="#" tal:attributes="value python: res['divname']" />
       <input type="hidden" name="prca" value="#" tal:attributes="value python: res['prc']" />
+      <input type="hidden" name="old" value="#" tal:attributes="value python: res.get('old', False)"/>
       <input type="submit" class="searchButton" id="parcel" value="Rechercher les anciens noms" i18n:attributes="value" />
     </form>
    </td>

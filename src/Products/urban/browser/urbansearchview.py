@@ -169,11 +169,10 @@ class UrbanSearchView(BrowserView):
         parcel_infos = set()
         arg_index = ParcelHistoric(division=division, section=section, radical=radical, bis=bis, exposant=exposant, puissance=puissance)
         parcel_infos.add(arg_index.getSearchRef())
-        parcels_historic = self.tool.queryParcels(division, section, radical, bis, exposant, puissance, browseoldparcels)
+        parcels_historic = self.tool.queryParcels(division, section, radical, bis, exposant, puissance, browseold=browseoldparcels, historic=True)
         for parcel in parcels_historic:
             for ref in parcel.getAllSearchRefs():
                 parcel_infos.add(ref)
-        import ipdb; ipdb.set_trace()
         res = catalogTool(portal_type=foldertypes, parcelInfosIndex=list(parcel_infos))
         return res
 

@@ -514,14 +514,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return result
 
     security.declarePublic('queryParcels')
-    def queryParcels(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None, browseold=False, fuzzy=True):
+    def queryParcels(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None, location=None, prcowner=None,
+                     browseold=False, historic=False, fuzzy=True):
         """
          Return the concerned parcels
         """
         query_string = browseold and \
                        "SELECT distinct prca, prcc, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
                         FROM pas left join da on da.da = pas.da" or \
-                       "SELECT capa.da as division, divname, prc, section, radical, exposant, bis, puissance \
+                       "SELECT capa.da as division, divname, prc, section, radical, exposant, bis, puissance, pe as proprietary, sl1 as location \
                         FROM map left join capa on map.capakey=capa.capakey left join da on capa.da = da.da "
         conditions = []
         division != 0 and conditions.append("%s.da= %s" % (browseold and 'pas' or 'capa', division))
@@ -530,12 +531,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         (bis or not fuzzy) and conditions.append("bis = %s" % (bis and bis or '0'))
         (exposant or not fuzzy) and conditions.append("exposant %s" % (not exposant and 'is NULL' or "= '%s'" % exposant))
         (puissance or not fuzzy) and conditions.append("puissance = %s" % (puissance and puissance or '0'))
+        if not browseold:
+            prcowner and conditions.append("pe ILIKE '%%%s%%'" % prcowner)
+            location and conditions.append("sl1 ILIKE '%%%s%%'" % location)
         if conditions:
             query_string = '%s WHERE %s' % (query_string, ' and '.join(conditions))
         records = self.queryDB(query_string)
         parcels = [ParcelHistoric(highlight=True, **r) for r in records]
         parcels = ParcelHistoric.mergeDuplicate(parcels)
-        if browseold:
+        if historic:
             for i, parcel in enumerate(parcels):
                 parcel.buildRelativesChain(self, 'parents')
                 parcel.buildRelativesChain(self, 'childs')
@@ -592,18 +596,18 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return False
 
     security.declarePublic('createPortionOut')
-    def createPortionOut(self, path, division, section, radical, bis, exposant, puissance, partie):
+    def createPortionOut(self, path, division, section, radical, bis, exposant, puissance, partie, old=False):
         """
            Create the PortionOut with given parameters...
         """
-        dv=self.queryDB("SELECT da,divname FROM da WHERE da="+division)[0]['divname']
         if bis=='0':
             bis=''
         if len(bis)==1:
             bis='0'+bis
         if puissance=='0':
             puissance=''
-        newParcelId = path.invokeFactory("PortionOut",id=self.generateUniqueId('PortionOut'),divisionCode=division,division=dv,section=section,radical=radical,bis=bis,exposant=exposant,puissance=puissance,partie=partie)
+        newParcelId = path.invokeFactory("PortionOut", id=self.generateUniqueId('PortionOut'), divisionCode=division, division=division, section=section,
+                                         radical=radical, bis=bis, exposant=exposant, puissance=puissance, partie=partie, outdated=old)
         newParcel = getattr(path, newParcelId)
         newParcel._renameAfterCreation()
         newParcel.at_post_create_script()

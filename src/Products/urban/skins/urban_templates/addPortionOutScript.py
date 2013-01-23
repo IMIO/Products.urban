@@ -13,8 +13,9 @@ bis = context.REQUEST.get('bis', None)
 exposant = context.REQUEST.get('exposant', None)
 puissance = context.REQUEST.get('puissance', None)
 partie = context.REQUEST.get('partie', None)
+old= context.REQUEST.get('old', None)
 
 if not section or not division:
     return context.REQUEST.RESPONSE.redirect(context.absolute_url())
 
-return context.portal_urban.createPortionOut(path=context,division=division,section=section,radical=radical,bis=bis,exposant=exposant,puissance=puissance, partie=partie)
+return context.portal_urban.createPortionOut(path=context,division=division,section=section,radical=radical,bis=bis,exposant=exposant,puissance=puissance, partie=partie, old=old)
