@@ -79,14 +79,14 @@ class SearchParcelsView(BrowserView):
         """
         parcel = self.tool.queryParcels(division, section, radical, bis, exposant, puissance, browseold=True, fuzzy=False)[0]
         parcel.buildRelativesChain(self.tool, 'parents')
-        def buildParentsChain(parcel, result, level=0):
+        def buildResult(parcel, result, level=0):
             parcel_infos = parcel.getParcelAsDictionary()
             parcel_infos['level'] = level
             if not level:
                 parcel_infos['old'] = old
             result.append(parcel_infos)
             for parent in parcel.parents:
-                buildParentsChain(parent, result, level+1)
+                buildResult(parent, result, level+1)
         to_return = []
-        buildParentsChain(parcel, to_return)
+        buildResult(parcel, to_return)
         return to_return
