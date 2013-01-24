@@ -497,7 +497,7 @@ msgid "error_bis"
 msgstr "Bis doit être un nombre compris entre 0 et 100 (ex: 42)"
 
 msgid "error_exposant"
-msgstr "L'exposant doit être une seule lettre majuscule (ex: C)"
+msgstr "L'exposant doit être une lettre majuscule ou un nombre"
 
 msgid "error_in_expr_contact_admin"
 msgstr "<b>Erreur dans l'expression ${expr} liée à ce terme de vocabulaire, contactez votre administrateur !!!</b>"
@@ -814,6 +814,9 @@ msgstr "Gérer les notaires"
 
 msgid "manage_parcellings"
 msgstr "Gérer les lotissements"
+
+msgid "manual_parcel"
+msgstr "Ajouter une parcelle à la main"
 
 # config folders
 msgid "map_configs_folder_title"

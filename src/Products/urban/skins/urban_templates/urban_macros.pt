@@ -524,7 +524,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
      </td><td width="2%"></td><td>
      <form tal:condition="python: member.has_permission('urban: Add PortionOut', context)" name="manualQuickAdd"
            tal:attributes="action python: context.absolute_url() + '/createObject?type_name=PortionOut'" action="searchparcels" method="post">
-      <input type="submit" class="contenttype-portionout button-portionout" id="manualAddPortionOut" value="Add a parcel manually" i18n:attributes="value" />
+      <input type="submit" class="contenttype-portionout button-portionout" id="manualAddPortionOut" value="manual_parcel" i18n:attributes="value" />
      </form>
      </td></tr>
     </table>

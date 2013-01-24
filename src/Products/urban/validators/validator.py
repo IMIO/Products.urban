@@ -78,9 +78,9 @@ class isValidExposantValidator:
         self.name = name
 
     def __call__(self, value, *args, **kwargs):
-        if value == '' or (len(value) == 1 and value.isalpha() and value.isupper()):
+        if value == '' or (len(value) < 3 and ((value.isalpha() and value.isupper()) or value.isdigit())):
             return 1
-        return translate(_('error_exposant', default=u"Exposant should be a single uppercase letter"))
+        return translate(_('error_exposant', default=u"Exposant should be uppercase letters or digits"))
 
 
 class isValidPuissanceValidator:

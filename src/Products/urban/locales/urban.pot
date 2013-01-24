@@ -814,6 +814,9 @@ msgstr ""
 msgid "manage_parcellings"
 msgstr ""
 
+msgid "manual_parcel"
+msgstr ""
+
 # config folders
 msgid "map_configs_folder_title"
 msgstr ""
