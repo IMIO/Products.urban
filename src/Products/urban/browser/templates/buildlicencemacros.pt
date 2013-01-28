@@ -150,6 +150,11 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadCoating', mode='view')" /></td>
  </tr>
+ <tr tal:condition="python: 'townshipCouncilFolder' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_townshipCouncilFolder">Township council folder</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('townshipCouncilFolder', mode='view')" /></td>
+ </tr>
  <tr tal:condition="python: 'roadEquipments' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_roadEquipments">Road equipments</span>:</b></td>
   <td width="2%"></td>

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-28 07:40+0000\n"
+"POT-Creation-Date: 2013-01-28 09:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1234,6 +1234,11 @@ msgstr ""
 #. Default: "urban_descr_termKey"
 #: UrbanVocabularyTerm.py
 msgid "urban_help_termKey"
+msgstr ""
+
+#. Default: "If checked, an additional paragraph will be added in the licence document"
+#: BuildLicence.py
+msgid "urban_help_townshipCouncilFolder"
 msgstr ""
 
 msgid "urban_investigationStart"
@@ -2550,6 +2555,11 @@ msgstr ""
 #: GenericLicence.py
 #: ParcellingTerm.py
 msgid "urban_label_title"
+msgstr ""
+
+#. Default: "Townshipcouncilfolder"
+#: BuildLicence.py
+msgid "urban_label_townshipCouncilFolder"
 msgstr ""
 
 #. Default: "Townshipspecificfeatures"

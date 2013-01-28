@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Jan 28 08:50:18 2013\n"
-"PO-Revision-Date: Mon Jan 28 08:50:18 2013\n"
+"POT-Creation-Date: Mon Jan 28 10:19:22 2013\n"
+"PO-Revision-Date: Mon Jan 28 10:19:22 2013\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -99,6 +99,11 @@ msgstr ""
 #. Default: "If checked, an additional paragraph will be added in the licence document"
 #: BuildLicence.py
 msgid "urban_help_roadDgrneUnderground"
+msgstr ""
+
+#. Default: "If checked, an additional paragraph will be added in the licence document"
+#: BuildLicence.py
+msgid "urban_help_townshipCouncilFolder"
 msgstr ""
 
 #. Default: "Equipmenttype"
@@ -1068,6 +1073,11 @@ msgstr ""
 #: ParcellingTerm.py
 #: PcaTerm.py
 msgid "urban_label_title"
+msgstr ""
+
+#. Default: "Townshipcouncilfolder"
+#: BuildLicence.py
+msgid "urban_label_townshipCouncilFolder"
 msgstr ""
 
 #. Default: "Townshipspecificfeatures"

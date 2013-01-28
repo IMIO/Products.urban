@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2013-01-28 07:40+0000\n"
+"POT-Creation-Date: 2013-01-28 09:12+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1236,6 +1236,11 @@ msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
 #: UrbanVocabularyTerm.py
 msgid "urban_help_termKey"
 msgstr "Si ce champ n'est pas rempli, l'identifiant de ce terme sera utilisé"
+
+#. Default: "If checked, an additional paragraph will be added in the licence document"
+#: BuildLicence.py
+msgid "urban_help_townshipCouncilFolder"
+msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
 
 msgid "urban_investigationStart"
 msgstr "Enquête publique n°${number} du"
@@ -2555,6 +2560,11 @@ msgstr "Date de notification"
 #: ParcellingTerm.py
 msgid "urban_label_title"
 msgstr "Titre"
+
+#. Default: "Townshipcouncilfolder"
+#: BuildLicence.py
+msgid "urban_label_townshipCouncilFolder"
+msgstr "Dossier \"Conseil Communal\""
 
 #. Default: "Townshipspecificfeatures"
 #: UrbanCertificateBase.py

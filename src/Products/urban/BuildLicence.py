@@ -34,7 +34,8 @@ from dateutil.relativedelta import relativedelta
 
 optional_fields = ['implantation','roadAdaptation','pebDetails', 'requirementFromFD',
                    'roadTechnicalAdvice','locationTechnicalAdvice','locationTechnicalConditions',
-                   'pebTechnicalAdvice','locationDgrneUnderground', 'roadDgrneUnderground', 'workType']
+                   'pebTechnicalAdvice','locationDgrneUnderground', 'roadDgrneUnderground', 'workType',
+                   'townshipCouncilFolder']
 ##/code-section module-header
 
 schema = Schema((
@@ -62,16 +63,17 @@ schema = Schema((
         schemata='urban_description',
         vocabulary='listUsages',
     ),
-    StringField(
-        name='roadAdaptation',
-        default='no',
-        widget=SelectionWidget(
-            label='Roadadaptation',
-            label_msgid='urban_label_roadAdaptation',
+    BooleanField(
+        name='townshipCouncilFolder',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            description="If checked, an additional paragraph will be added in the licence document",
+            label='Townshipcouncilfolder',
+            label_msgid='urban_label_townshipCouncilFolder',
+            description_msgid='urban_help_townshipCouncilFolder',
             i18n_domain='urban',
         ),
         schemata='urban_road',
-        vocabulary='listRoadAdaptations',
     ),
     BooleanField(
         name='implantation',
@@ -117,6 +119,17 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_peb',
+    ),
+    StringField(
+        name='roadAdaptation',
+        default='no',
+        widget=SelectionWidget(
+            label='Roadadaptation',
+            label_msgid='urban_label_roadAdaptation',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        vocabulary='listRoadAdaptations',
     ),
     BooleanField(
         name='roadDgrneUnderground',
@@ -425,6 +438,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('investigationOralReclamationNumber', after='solicitOpinionsTo')
     schema.moveField('investigationWriteReclamationNumber', after='investigationOralReclamationNumber')
     schema.moveField('requirementFromFD', after='locationDgrneUnderground')
+    schema.moveField('townshipCouncilFolder', after='roadCoating')
     return schema
 
 finalizeSchema(BuildLicence_schema)
