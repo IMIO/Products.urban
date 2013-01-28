@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-21 18:49+0000\n"
+"POT-Creation-Date: 2013-01-28 07:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -800,6 +800,12 @@ msgid "legend_specific_features"
 msgstr ""
 
 msgid "locality_for_worklocation"
+msgstr ""
+
+msgid "location_fdrequirement_decision"
+msgstr ""
+
+msgid "location_fdrequirement_opinion"
 msgstr ""
 
 msgid "manage_architects"
@@ -2289,6 +2295,11 @@ msgstr ""
 #. Default: "Requestedorganisation"
 #: UrbanEventOpinionRequest.py
 msgid "urban_label_requestedOrganisation"
+msgstr ""
+
+#. Default: "Requirementfromfd"
+#: BuildLicence.py
+msgid "urban_label_requirementFromFD"
 msgstr ""
 
 #. Default: "Roadadaptation"

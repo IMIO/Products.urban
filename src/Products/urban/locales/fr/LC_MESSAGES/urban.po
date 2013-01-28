@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2013-01-21 18:49+0000\n"
+"POT-Creation-Date: 2013-01-28 07:40+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -802,6 +802,12 @@ msgstr "Particularité(s)"
 
 msgid "locality_for_worklocation"
 msgstr "au lieu-dit"
+
+msgid "location_fdrequirement_decision"
+msgstr "Décision"
+
+msgid "location_fdrequirement_opinion"
+msgstr "Avis"
 
 msgid "manage_architects"
 msgstr "Gérer les architectes"
@@ -2293,6 +2299,11 @@ msgstr "Représenté par la société"
 #: UrbanEventOpinionRequest.py
 msgid "urban_label_requestedOrganisation"
 msgstr "Organisme"
+
+#. Default: "Requirementfromfd"
+#: BuildLicence.py
+msgid "urban_label_requirementFromFD"
+msgstr "Fonctionnaire délégué"
 
 #. Default: "Roadadaptation"
 #: BuildLicence.py

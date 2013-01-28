@@ -32,7 +32,7 @@ from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from dateutil.relativedelta import relativedelta
 
-optional_fields = ['implantation','roadAdaptation','pebDetails',
+optional_fields = ['implantation','roadAdaptation','pebDetails', 'requirementFromFD',
                    'roadTechnicalAdvice','locationTechnicalAdvice','locationTechnicalConditions',
                    'pebTechnicalAdvice','locationDgrneUnderground', 'roadDgrneUnderground', 'workType']
 ##/code-section module-header
@@ -168,6 +168,18 @@ schema = Schema((
         schemata='urban_location',
         default_output_type='text/html',
     ),
+    LinesField(
+        name='requirementFromFD',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Requirementfromfd',
+            label_msgid='urban_label_requirementFromFD',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary='listRequirementsFromFD',
+    ),
     TextField(
         name='locationTechnicalConditions',
         allowable_content_types=('text/html',),
@@ -267,9 +279,7 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
              ['modify', _('road_adaptation_modify', 'urban', context=self.REQUEST)],
              ['create', _('road_adaptation_create', 'urban', context=self.REQUEST)],
               ]
-        vocab = []
-        for elt in lst:
-            vocab.append((elt[0], elt[1]))
+        vocab = [(elt[0], elt[1]) for elt in lst]
         return DisplayList(tuple(vocab))
 
     security.declarePublic('listUsages')
@@ -283,12 +293,22 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
              ['not_for_habitation', _('usage_not_for_habitation', 'urban', context=self.REQUEST)],
              ['not_applicable', _('usage_not_applicable', 'urban', context=self.REQUEST)],
               ]
-        vocab = []
-        for elt in lst:
-            vocab.append((elt[0], elt[1]))
+        vocab = [(elt[0], elt[1]) for elt in lst]
         return DisplayList(tuple(vocab))
 
     # Manually created methods
+
+    security.declarePublic('listRequirementsFromFD')
+    def listRequirementsFromFD(self):
+        """
+          This vocabulary for field requirementsFromFD returns this list: decision, opinion
+        """
+        lst=[
+             ['opinion', _('location_fdrequirement_opinion', 'urban', context=self.REQUEST)],
+             ['decision', _('location_fdrequirement_decision', 'urban', context=self.REQUEST)],
+              ]
+        vocab = [(elt[0], elt[1]) for elt in lst]
+        return DisplayList(tuple(vocab))
 
     security.declarePublic('askFD')
     def askFD(self):
@@ -404,6 +424,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('solicitOpinionsTo', after='investigationReasons')
     schema.moveField('investigationOralReclamationNumber', after='solicitOpinionsTo')
     schema.moveField('investigationWriteReclamationNumber', after='investigationOralReclamationNumber')
+    schema.moveField('requirementFromFD', after='locationDgrneUnderground')
     return schema
 
 finalizeSchema(BuildLicence_schema)
