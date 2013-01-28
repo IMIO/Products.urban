@@ -35,6 +35,7 @@ class UrbanIndexes:
         for applicant in self.getApplicants():
             res.append(applicant.getName1())
             res.append(applicant.getName2())
+            res.append(applicant.getSociety())
             res.append(applicant.getNationalRegister())
         return res
 
