@@ -2323,7 +2323,7 @@ msgstr "Revêtement"
 #. Default: "Roaddgrneunderground"
 #: BuildLicence.py
 msgid "urban_label_roadDgrneUnderground"
-msgstr "DGRNE Sous-sol (joindre annexe 2 et 3) (Fiche Voirie)"
+msgstr "SPW DGO 3 Mines (joindre annexe 2 et 3)"
 
 #. Default: "Roadequipments"
 #: GenericLicence.py
