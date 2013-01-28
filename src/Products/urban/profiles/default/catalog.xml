@@ -1,21 +1,25 @@
 <?xml version="1.0"?>
 <object name="portal_catalog" meta_type="Plone Catalog Tool">
+  <index name="getReference" 
+         meta_type="KeywordIndex">
+    <indexed_attr value="getReference"/>
+  </index>
   <index name="getDecisionDate" 
          meta_type="DateIndex">
     <indexed_attr value="getDecisionDate"/>
   </index>
 <!-- ##code-section FOOT -->
-  <index name="last_key_event" 
+  <index name="last_key_event"
            meta_type="KeywordIndex">
     <indexed_attr value="last_key_event"/>
   </index>
   <column value="last_key_event"/>
-  <index name="StreetsUID" 
+  <index name="StreetsUID"
            meta_type="KeywordIndex">
     <indexed_attr value="StreetsUID"/>
   </index>
   <column value="StreetsUID"/>
-  <index name="getRecipientAddress" 
+  <index name="getRecipientAddress"
          meta_type="FieldIndex">
     <indexed_attr value="getRecipientAddress"/>
   </index>

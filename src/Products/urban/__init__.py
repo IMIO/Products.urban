@@ -75,6 +75,8 @@ from validators.validator import isValidExposantValidator
 validation.register(isValidExposantValidator('isValidExposant'))
 from validators.validator import isValidPuissanceValidator
 validation.register(isValidPuissanceValidator('isValidPuissance'))
+from validators.validator import isNotDuplicatedReferenceValidator
+validation.register(isNotDuplicatedReferenceValidator('isNotDuplicatedReference'))
 ##/code-section custom-init-head
 
 

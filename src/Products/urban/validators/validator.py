@@ -2,8 +2,13 @@ from Products.validation.interfaces.IValidator import IValidator
 from zope.interface import implements
 from zope.i18n import translate
 from Products.urban import UrbanMessage as _
+from Products.CMFCore.utils import getToolByName
 
 class isTextFieldConfiguredValidator:
+    """
+    Check if a text field has been already configured or not, so it cannot be configured twice
+    and have several conflictual default values
+    """
     implements(IValidator)
 
     def __init__(self, name):
@@ -22,6 +27,9 @@ class isTextFieldConfiguredValidator:
 
 
 class isValidStreetNameValidator:
+    """
+     Check that theres no empty adress defined on the workLocation field
+    """
     implements(IValidator)
 
     def __init__(self, name):
@@ -35,6 +43,32 @@ class isValidStreetNameValidator:
         return 1
 
 
+
+class isNotDuplicatedReferenceValidator:
+    """
+     Check that the reference of the licence is not already used on another licence
+     (can happen when two licences are edited at the same time)
+    """
+    implements(IValidator)
+
+    def __init__(self, name):
+        self.name = name
+
+    def __call__(self, value, *args, **kwargs):
+        #compare this reference to the reference of the last  5 created licences
+        licence = kwargs['instance']
+        catalog = getToolByName(licence, 'portal_catalog')
+        same_ref_licences = catalog(portal_type=licence.portal_type, getReference=value)
+        #import ipdb; ipdb.set_trace()
+        if len(same_ref_licences) > 1 :
+                return translate(_('error_reference',
+                                    default=u"This reference has already been encoded"))
+        return 1
+
+
+"""
+Validators for parcel reference values, used in the case where the parcel is addded manually
+"""
 class isValidSectionValidator:
     implements(IValidator)
 
