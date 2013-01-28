@@ -302,6 +302,11 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('locationFloodingLevel', mode='view')" /></td>
  </tr>
+ <tr tal:condition="python: 'requirementFromFD' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_requirementFromFD">Requirement from FD</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('requirementFromFD', mode='view')" /></td>
+ </tr>
  <tr tal:condition="python: 'solicitLocationOpinionsTo' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_solicitLocationOpinionsTo">Solicit location opinions to</span>:</b></td>
   <td width="2%"></td>
