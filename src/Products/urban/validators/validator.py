@@ -58,12 +58,11 @@ class isNotDuplicatedReferenceValidator:
         #compare this reference to the reference of the last  5 created licences
         licence = kwargs['instance']
         catalog = getToolByName(licence, 'portal_catalog')
-        same_ref_licences = catalog(portal_type=licence.portal_type, getReference=value)
-        #import ipdb; ipdb.set_trace()
-        if len(same_ref_licences) > 1 :
-                return translate(_('error_reference',
-                                    default=u"This reference has already been encoded"))
-        return 1
+        similar_licences = catalog(portal_type=licence.portal_type, getReference=value)
+        if not similar_licences or (len(similar_licences) == 1 and licence.id == similar_licences[0].id):
+            return 1
+        return translate(_('error_reference',
+                            default=u"This reference has already been encoded"))
 
 
 """

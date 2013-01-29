@@ -507,7 +507,7 @@ msgstr ""
 msgid "error_radical"
 msgstr ""
 
-msgid "error_refrence"
+msgid "error_reference"
 msgstr ""
 
 msgid "error_section"

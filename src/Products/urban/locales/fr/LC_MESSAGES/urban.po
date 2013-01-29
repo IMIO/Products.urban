@@ -508,8 +508,8 @@ msgstr "La puissance doit être un nombre compris entre 0 et 100 (ex: 42)"
 msgid "error_radical"
 msgstr "Le radical doit être un nombre (ex:42) "
 
-msgid "error_refrence"
-msgstr "Il existe un autre permis avec le même référence"
+msgid "error_reference"
+msgstr "La référence existe déjà sur un autre permis"
 
 msgid "error_section"
 msgstr "La section doit être une seule lettre majuscule (ex: C)"
