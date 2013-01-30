@@ -246,7 +246,7 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
             return 'manual_parcel'
         return ''
 
-    security.declarePublic('getParcel')
+    security.declarePublic('getHistoric')
     def getHistoric(self):
         """
          Return the "parcel historic" object of this parcel
@@ -257,6 +257,7 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
                                                historic=True, fuzzy=False, browseold=self.getOutdated())
             return historic[0]
         return None
+
 
 
 registerType(PortionOut, PROJECTNAME)

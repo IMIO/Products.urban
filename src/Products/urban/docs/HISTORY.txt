@@ -26,8 +26,11 @@ Added validator on reference field to check that each reference is unique (#5430
 
 Show historic of old parcels on licences "map" tab and allow to show the location of their "children" (#4754).
 
+Urban editors can now add parcel owner manually on inquiry events (#5289).
+
 bugfixes:
 - UrbanEvent view doesnt crash anymore when a wrong TAL condition is defined on an UrbanDoc.
 - corrected template "accuse de reception d'une reclamation" (#5168, #5198).
 - corrected the display of the specificFeatures for notary letters.
 - The "50m area" used in inquiries doesnt crash anymore when finding parcel owner without address (#5376).
+- Added warning on inquiry event when parcel owners without adress are found (#5289).

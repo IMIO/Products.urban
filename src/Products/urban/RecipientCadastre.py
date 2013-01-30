@@ -34,6 +34,7 @@ schema = Schema((
             label_msgid='urban_label_name',
             i18n_domain='urban',
         ),
+        required=True,
     ),
     StringField(
         name='adr1',
@@ -42,6 +43,7 @@ schema = Schema((
             label_msgid='urban_label_adr1',
             i18n_domain='urban',
         ),
+        required=True,
     ),
     StringField(
         name='adr2',
@@ -58,6 +60,7 @@ schema = Schema((
             label_msgid='urban_label_street',
             i18n_domain='urban',
         ),
+        required=True,
     ),
 
 ),
@@ -70,6 +73,8 @@ RecipientCadastre_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+RecipientCadastre_schema['title'].widget.visible = False
+RecipientCadastre_schema['adr2'].widget.visible = False
 ##/code-section after-schema
 
 class RecipientCadastre(BaseFolder, BrowserDefaultMixin):

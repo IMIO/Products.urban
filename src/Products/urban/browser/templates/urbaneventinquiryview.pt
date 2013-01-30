@@ -33,7 +33,7 @@
     <tr valign="top">
         <td width=35%>
         <metal:listing use-macro="context/@@urbanevent-macros/urbanEventDataMacro" />
-         
+
         <fieldset tal:define="inqdata view/getInquiryData" tal:condition="inqdata"><legend i18n:translate="inquiry_data">Inquiry data</legend>
         <p class="discreet" i18n:translate="urban_linked_inquiry_help">Here above are data defined for the inquiry.  If you want to change these informations, click on the name of the linked inquiry here above.</p>
         <tal:comment replace="nothing">Keep context as name of the obj here as some widget rendering will fail if not...</tal:comment>
@@ -116,7 +116,7 @@
   <thead>
    <tr>
     <th colspan="4">
-     <span i18n:translate="number_of_claimants">Number of claimants</span> : 
+     <span i18n:translate="number_of_claimants">Number of claimants</span> :
      <strong><span tal:content="python: len(claimants)" /></strong>
     </th>
    </tr>
@@ -136,10 +136,15 @@
 
 <dt class="formTab" id="fieldsetlegend-urbaneventinquiry_recipients" i18n:translate="event_inquiry_recipients"><span>Recipients</span></dt>
 <dd id="fieldset-urbaneventinquiry_recipients">
-<tal:block condition="python: member.has_permission('Modify portal content', context) 
+<tal:block condition="python: member.has_permission('Modify portal content', context)
                               and linkedUrbanEventType.getEventTypeType() == 'Products.urban.interfaces.IInquiryEvent'">
   <form action="addInvestigationPO">
    <input type="submit" tal:attributes="value string:Rechercher les propriétaires situés dans un rayon de 50m" />
+  </form>
+  <form name="quickAdd" action="createRecipientCadatsre" method="post"
+        tal:condition="python: member.has_permission('urban: Add RecipientCadastre', context)"
+        tal:attributes="action python: context.absolute_url() + '/createObject?type_name=RecipientCadastre'">
+   <input type="submit" id="event" value="Add recipientcadastre manually"  i18n:attributes="value" />
   </form>
   <p>&nbsp;</p>
 </tal:block>
@@ -148,7 +153,7 @@
     <thead>
     <tr>
     <th colspan="4">
-    <span i18n:translate="number_of_recipients">Number of recipients</span> : 
+    <span i18n:translate="number_of_recipients">Number of recipients</span> :
     <strong><span tal:content="python: len(recipients)" /></strong>
     </th>
     </tr>

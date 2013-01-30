@@ -27,6 +27,9 @@ msgstr ""
 msgid "Add an event"
 msgstr ""
 
+msgid "Add recipientcadastre manually"
+msgstr ""
+
 msgid "Add this parcel"
 msgstr ""
 

@@ -28,6 +28,9 @@ msgstr "Ajouter tous les avis"
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
+msgid "Add recipientcadastre manually"
+msgstr "Ajouter un propriétaire"
+
 msgid "Add this parcel"
 msgstr "Ajouter cette parcelle"
 

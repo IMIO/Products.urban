@@ -165,7 +165,7 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
         context = aq_inner(self.context)
         recipients = context.getRecipients()
         if recipients:
-            context.manage_delObjects([recipient.getId() for recipient in recipients])
+            context.manage_delObjects([recipient.getId() for recipient in recipients if recipient.Title()])
 
         #then we can go...
         tool=getToolByName(context,'portal_urban')
