@@ -55,11 +55,10 @@ class isNotDuplicatedReferenceValidator:
         self.name = name
 
     def __call__(self, value, *args, **kwargs):
-        #compare this reference to the reference of the last  5 created licences
         licence = kwargs['instance']
         catalog = getToolByName(licence, 'portal_catalog')
         similar_licences = catalog(portal_type=licence.portal_type, getReference=value)
-        if not similar_licences or (len(similar_licences) == 1 and licence.id == similar_licences[0].id):
+        if not similar_licences or (len(similar_licences) == 1 and licence.UID() == similar_licences[0].UID):
             return 1
         return translate(_('error_reference',
                             default=u"This reference has already been encoded"))
