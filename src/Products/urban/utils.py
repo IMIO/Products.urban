@@ -127,19 +127,17 @@ class ParcelHistoric:
                             WHERE pas.da = %s and section = '%s' and pas.prcb1 = '%s' and pas.%s IS NOT NULL" % (link, division, section, prcb1, o_link)
             records = urban_tool.queryDB(query_string)
             relatives = [ParcelHistoric(**r) for r in records]
-            if not relatives:
-                continue
-            relative = ParcelHistoric.mergeDuplicate(relatives)[0]
-            relative.buildRelativesChain(urban_tool, link_name)
-            relative.addRelatives(o_link_name, [self])
-            relatives_chain.append(relative)
+            if relatives:
+                relative = ParcelHistoric.mergeDuplicate(relatives)[0]
+                relative.buildRelativesChain(urban_tool, link_name)
+                relative.addRelatives(o_link_name, [self])
+                relatives_chain.append(relative)
         setattr(self, link_name, relatives_chain)
 
     def getSearchRef(self):
         return ','.join([val and str(val) or '' for val in [self.division, self.section, self.radical, self.bis, self.exposant, self.puissance, '0']])
 
     def getAllSearchRefs(self):
-        all_nodes = {}
         all_nodes = [n['node'] for n in self.getAllNodes(nodes=all_nodes).values()]
         return [node.getSearchRef() for node in all_nodes]
 
@@ -154,6 +152,7 @@ class ParcelHistoric:
 
     def getParcelAsDictionary(self):
         infos = dict([(ref, getattr(self, ref)) for ref in self.refs])
+        infos['highlight'] = self.highlight
         if self.prc:
             infos['prc'] = self.prc
         if self.proprietary:
@@ -161,6 +160,28 @@ class ParcelHistoric:
         if self.location:
             infos['location'] = self.location
         return infos
+
+    def getHistoricForDisplay(self):
+        def buildResult(parcel, result, level=0, link='parents'):
+            parcel_infos = parcel.getParcelAsDictionary()
+            parcel_infos['level'] = level
+            if link == 'childs':
+                if level !=0 or result == []:
+                    result.append(parcel_infos)
+            for relative in getattr(parcel, link):
+                next_level = link=='parents' and level-1 or level+1
+                buildResult(relative, result, next_level, link)
+            if link == 'parents':
+                result.append(parcel_infos)
+            old = parcel.childs and True or False
+            parcel_infos['old'] = old
+        to_return = []
+        buildResult(self, to_return, link='parents')
+        buildResult(self, to_return, link='childs')
+        min_lvl = abs(min([prc['level'] for prc in to_return]))
+        for parcel in to_return:
+            parcel['level'] = parcel['level'] + min_lvl
+        return to_return
 
     def mergeRelatives(self, other, link_names=['parents', 'childs']):
         for link_name in link_names:

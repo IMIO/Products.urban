@@ -179,11 +179,11 @@
   </tr>
   <tr tal:repeat="resold resultsOldPrc">
    <tal:block define="oddrow repeat/resold/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
-   <td fcolor="#FF0000">
-    <span tal:replace="structure python: '&nbsp;'*resold['level']*3" tal:condition="python: resold.has_key('level') and resold['level']"/>
+   <td fcolor="#FF0000" tal:attributes="style python: resold['highlight'] and 'color:green' or ''">
+    <span tal:replace="structure python: '&nbsp;'*resold['level']*3" tal:condition="python: resold['level']"/>
     <span tal:content="python: resold['divname']"/>
     <span tal:content="python: str(resold['prc'])"></span>
-    <span i18n:translate="" tal:condition="python: not resold.has_key('level') or resold['level']">(Attention!! ancien nom de parcelle)</span>
+    <span i18n:translate="" tal:condition="python: resold['old']">(Attention!! ancien nom de parcelle)</span>
    </td>
    </tal:block>
    <td>
@@ -237,7 +237,7 @@
       <input type="hidden" name="divname" value="#" tal:attributes="value python: res['divname']" />
       <input type="hidden" name="prca" value="#" tal:attributes="value python: res['prc']" />
       <input type="hidden" name="old" value="#" tal:attributes="value python: res.get('old', False)"/>
-      <input type="submit" class="searchButton" id="parcel" value="Rechercher les anciens noms" i18n:attributes="value" />
+      <input type="submit" class="searchButton" id="parcel" value="Rechercher les autres noms" i18n:attributes="value" />
     </form>
    </td>
   </tr>

@@ -24,30 +24,35 @@ class MapView(BrowserView):
         """
         listCapaKey = []
         context = aq_inner(self.context)
+        request = aq_inner(self.request)
 
         "Allow to show the map without the licence object"
         if not hasattr(aq_base(context), "getParcels"):
             return listCapaKey
 
-        for parcel in context.getParcels():
-            divisioncode = parcel.getDivisionCode()
-            section = parcel.getSection()
-            radical = parcel.getRadical()
-            puissance = parcel.getPuissance()
-            exposant = parcel.getExposant()
-            bis = parcel.getBis()
-            if not puissance:
-                puissance = 0
-            if not exposant:
-                exposant = "_"
-            if not bis:
-                bis = 0
-#            nis section (radical 0x) / (bis 0x) (exposant si blanc _)  (puissance 00x)
-            try:
-                capaKey = "%s%s%04d/%02d%s%03d" % (divisioncode, section, int(radical), int(bis), exposant, int(puissance))
-            except ValueError:
-                capaKey = ""
-            listCapaKey.append(capaKey)
+        if request.get('show_old_parcel'):
+            listCapaKey = ["%s%s%04d/%02d%s%03d" % (request.get('division'), request.get('section'), int(request.get('radical')),
+                                                    int(request.get('bis')), request.get('exposant'), int(request.get('puissance')))]
+        else:
+            for parcel in self.getParcels():
+                divisioncode = parcel.getDivisionCode()
+                section = parcel.getSection()
+                radical = parcel.getRadical()
+                puissance = parcel.getPuissance()
+                exposant = parcel.getExposant()
+                bis = parcel.getBis()
+                if not puissance:
+                    puissance = 0
+                if not exposant:
+                    exposant = "_"
+                if not bis:
+                    bis = 0
+    #            nis section (radical 0x) / (bis 0x) (exposant si blanc _)  (puissance 00x)
+                try:
+                    capaKey = "%s%s%04d/%02d%s%03d" % (divisioncode, section, int(radical), int(bis), exposant, int(puissance))
+                except ValueError:
+                    capaKey = ""
+                listCapaKey.append(capaKey)
 
         return listCapaKey
 
@@ -87,6 +92,18 @@ class MapView(BrowserView):
                         capaKey = ""
                     listCapaKey.append(capaKey)
         return listCapaKey
+
+    def getOldParcels(self):
+        context = aq_inner(self.context)
+        urban_tool = getToolByName(context, 'portal_urban')
+        return [parcel.getHistoric().getHistoricForDisplay() for parcel in context.getParcels() if parcel.getOutdated()]
+
+    def getParcels(self):
+        context = aq_inner(self.context)
+        request = aq_inner(self.request)
+        if request.get('show_old_parcel'):
+            return True
+        return [parcel for parcel in context.getParcels() if parcel.getIsOfficialParcel() and not parcel.getOutdated()]
 
 class FullMapView(MapView):
     """

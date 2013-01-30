@@ -246,6 +246,17 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
             return 'manual_parcel'
         return ''
 
+    security.declarePublic('getParcel')
+    def getHistoric(self):
+        """
+         Return the "parcel historic" object of this parcel
+        """
+        if self.getIsOfficialParcel():
+            urban_tool = getToolByName(self, 'portal_urban')
+            historic = urban_tool.queryParcels(self.getDivision(), self.getSection(), self.getRadical(), self.getBis(), self.getExposant(), self.getPuissance(),
+                                               historic=True, fuzzy=False, browseold=self.getOutdated())
+            return historic[0]
+        return None
 
 
 registerType(PortionOut, PROJECTNAME)

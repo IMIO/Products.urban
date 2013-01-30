@@ -185,6 +185,9 @@ msgstr ""
 msgid "See more..."
 msgstr ""
 
+msgid "Show this parcel on map"
+msgstr ""
+
 #. Default: "Certificat d'urbanisme 1"
 msgid "UrbanCertificateOne"
 msgstr ""
@@ -901,6 +904,9 @@ msgid "number_of_claimants"
 msgstr ""
 
 msgid "number_of_recipients"
+msgstr ""
+
+msgid "old_parcels_history"
 msgstr ""
 
 #. Default: "OpenOfficePort"

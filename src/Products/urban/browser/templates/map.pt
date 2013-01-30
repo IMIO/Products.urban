@@ -5,7 +5,7 @@
       tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
 
 <metal:block fill-slot="top_slot"
-             tal:define="global parcels context/getParcels;" />
+            tal:define="global parcels view/getParcels;" />
 
 <head>
 <tal:block condition="parcels">
@@ -18,9 +18,10 @@
 <body>
 <metal:main fill-slot="main">
 <metal:main_macro define-macro="main">
-    <metal:body define-macro="body_macro" 
+    <metal:body define-macro="body_macro"
                 tal:define="applicants context/getApplicants|nothing;
-                            useTabbing python: context.portal_urban.getUseTabbing();">
+                            useTabbing python: context.portal_urban.getUseTabbing();
+                            old_parcels view/getOldParcels" >
 
 <tal:block condition="parcels">
 <metal:listing use-macro="here/@@map-macros/urbanMapScriptBase" />
@@ -32,8 +33,49 @@
    <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
   </fieldset>
 
+  <tal:block condition="old_parcels">
+     <fieldset><strong><legend i18n:translate="old_parcels_history">Old parcels historic</legend></strong>
+     <table class="listing">
+      <!--thead>
+        <tr><th style="cursor: pointer"
+                          tal:attributes="colspan python: len(old_parcels)">The following parcels cant be displayed on the map because they are too old</th>
+        </tr>
+      </thead-->
+      <tr>
+      <tal:column tal:repeat="parcel_historic old_parcels">
+      <td>
+       <div tal:repeat="parcel parcel_historic">
+        <tal:block define="oddrow repeat/parcel/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
+         <span tal:replace="structure python: '&nbsp;'*parcel['level']*3" tal:condition="python: parcel['level']"/>
+         <span fcolor="#FF0000" tal:attributes="style python: parcel['highlight'] and 'background-color:orange' or ''">
+          <span tal:content="python: parcel['divname']"/>
+          <span tal:content="python: str(parcel['prc'])"></span>
+          </span>
+
+          <form i18n:domain="urban" name="showparcel"
+                tal:condition="repeat/parcel/end">
+           <input type="hidden" name="show_old_parcel" value="1"/>
+           <input type="hidden" name="division" value="#" tal:attributes="value python: parcel['division']" />
+           <input type="hidden" name="section" value="#" tal:attributes="value python: parcel['section']" />
+           <input type="hidden" name="radical" value="#" tal:attributes="value python: parcel['radical'] and parcel['radical'] or 0" />
+           <input type="hidden" name="bis" value="#" tal:attributes="value python: parcel['bis'] and parcel['bis'] or 0" />
+           <input type="hidden" name="exposant" value="#" tal:attributes="value python: parcel['exposant']" />
+           <input type="hidden" name="puissance" value="#" tal:attributes="value python: parcel['puissance'] and parcel['puissance'] or 0" />
+           <input type="submit" class="context" id="parcel" value="Show this parcel on map" i18n:attributes="value" />
+          </form>
+        </tal:block>
+       </div>
+      </td>
+      <!--td width="5%">
+      </td-->
+      </tal:column>
+     </tr>
+    </table>
+   </fieldset>
+  </tal:block>
+
   <div tal:condition="not: parcels">
-   <p class="discreet" i18n:translate="cartography_map_descr">A map will me displayed when you will have defined concerned parcels</p>
+   <p class="discreet" i18n:translate="cartography_map_descr">A map will be displayed when you will have defined concerned parcels</p>
   </div>
 
   <tal:block condition="parcels">

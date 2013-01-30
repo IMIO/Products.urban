@@ -186,6 +186,9 @@ msgstr "Recherche de parcelles"
 msgid "See more..."
 msgstr "Voir tout..."
 
+msgid "Show this parcel on map"
+msgstr "Montrer sur la carte"
+
 #. Default: "Certificat d'urbanisme 1"
 msgid "UrbanCertificateOne"
 msgstr "Certificat d'urbanisme 1"
@@ -903,6 +906,9 @@ msgstr "Nombre de réclamants"
 
 msgid "number_of_recipients"
 msgstr "Nombre de destinataires"
+
+msgid "old_parcels_history"
+msgstr "Historique des anciennes parcelles"
 
 #. Default: "OpenOfficePort"
 #: UrbanTool.py
