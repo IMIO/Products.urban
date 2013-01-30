@@ -632,39 +632,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 parcels.append(topicItemObj)
         return parcels
 
-    security.declarePublic('getParcelInfos')
-    def getParcelInfos(self,capakey):
-        parcelInfos={}
-        strsql="select * from map where capakey='"+capakey+"'"
-        try:
-            result = self.queryDB(query_string=strsql)[0]
-            divname=self.queryDB("SELECT da,divname FROM da WHERE da="+str(result['daa'])[0:5])[0]['divname']
-            parcelInfos['name']=divname+' '+result['prc']
-            parcelInfos['ownername']=result['pe']
-            parcelInfos['ownerstreet']=result['adr2']
-            parcelInfos['ownercity']=result['adr1']
-            parcelInfos['type']=result['na1']
-            strsql="select * from capa where capakey='"+capakey+"'"
-            result = self.queryDB(query_string=strsql)[0]
-            parcelInfos['division']=str(result['da'])
-            parcelInfos['section']=result['section']
-            parcelInfos['radical']=str(result['radical'])
-            if result['bis']==0:
-                parcelInfos['bis']=''
-            else:
-                parcelInfos['bis']=str(result['bis'])
-            if result['exposant'] != None:
-                parcelInfos['exposant']=result['exposant']
-            else:
-                parcelInfos['exposant']=''
-            if result['puissance']==0:
-                parcelInfos['puissance']=''
-            else:
-                parcelInfos['puissance']=str(result['puissance'])
-        except:
-            pass
-        return parcelInfos
-
     security.declarePublic('WfsProxy')
     def WfsProxy(self):
         """
@@ -1395,7 +1362,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         portal = getToolByName(self, 'portal_url').getPortalObject()
         renderedDescription = text
-        #import ipdb; ipdb.set_trace()
         for expr in re.finditer('\[\[(.*?)\]\]', text):
             if not renderToNull:
                 ctx = createExprContext(context.getParentNode(), portal, context)
