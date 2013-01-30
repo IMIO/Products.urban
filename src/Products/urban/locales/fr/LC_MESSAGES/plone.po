@@ -103,6 +103,9 @@ msgstr "Rue"
 msgid "The field does not exist !!!"
 msgstr "Le champ ${field} n'existe pas !!!"
 
+msgid "There are parcel owners without any address found! Desactivate them!"
+msgstr "Il existe des propriétaires concernés par l'enquête dont l'adresse n'a pas été trouvée! Il faut les désactiver! "
+
 msgid "This National Register number is not valid !"
 msgstr "Ce numéro de registre national n'est pas valide !"
 

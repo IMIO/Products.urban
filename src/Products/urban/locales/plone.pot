@@ -208,6 +208,9 @@ msgstr ""
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr ""
 
+msgid "There are parcel owners without any address found! Desactivate them!"
+msgstr ""
+
 msgid "genericlicence_investigationstart_valdiation_error"
 msgstr ""
 

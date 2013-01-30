@@ -89,10 +89,12 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
         super(BrowserView, self).__init__(context, request)
         self.context = context
         self.request = request
+        plone_utils = getToolByName(context, 'plone_utils')
         self.linkedInquiry = self.context.getLinkedInquiry()
         if not self.linkedInquiry:
-            plone_utils = getToolByName(context, 'plone_utils')
             plone_utils.addPortalMessage(_('This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !'), type="error")
+        if self.hasPOWithoutAddress():
+            plone_utils.addPortalMessage(_('There are parcel owners without any address found! Desactivate them!'), type="warning")
 
     def getParcels(self):
         context = aq_inner(self.context)
@@ -101,6 +103,13 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
     def getRecipients(self):
         context = aq_inner(self.context)
         return context.getRecipients()
+
+    def hasPOWithoutAddress(self):
+        context = aq_inner(self.context)
+        for parcel_owner in context.getRecipients(onlyActive=True):
+            if not parcel_owner.getStreet() or not parcel_owner.getAdr1():
+                return True
+        return False
 
     def getInquiryData(self):
         """

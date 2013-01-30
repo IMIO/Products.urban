@@ -458,7 +458,9 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             #do not take "disabled" recipients into account
             if wft.getInfoFor(recipient, 'review_state') == 'disabled':
                 continue
-            toreturn=toreturn+'%'+recipient.getName()+'|'+recipient.getStreet()+'|'+recipient.getAdr1()
+            street = recipient.getStreet() and recipient.getStreet() or ''
+            address = recipient.getAdr1() and recipient.getAdr1() or ''
+            toreturn=toreturn+'%'+recipient.getName()+'|'+street+'|'+address
         toreturn=toreturn+'</CSV>'
         return toreturn
 
