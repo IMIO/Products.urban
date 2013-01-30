@@ -35,7 +35,7 @@ from dateutil.relativedelta import relativedelta
 optional_fields = ['implantation','roadAdaptation','pebDetails', 'requirementFromFD',
                    'roadTechnicalAdvice','locationTechnicalAdvice','locationTechnicalConditions',
                    'pebTechnicalAdvice','locationDgrneUnderground', 'roadDgrneUnderground', 'workType',
-                   'townshipCouncilFolder']
+                   'townshipCouncilFolder', 'roadMiscDescription']
 ##/code-section module-header
 
 schema = Schema((
@@ -130,6 +130,19 @@ schema = Schema((
         ),
         schemata='urban_road',
         vocabulary='listRoadAdaptations',
+    ),
+    TextField(
+        name='roadMiscDescription',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Roadmiscdescription',
+            label_msgid='urban_label_roadMiscDescription',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_road',
+        default_output_type='text/html',
     ),
     BooleanField(
         name='roadDgrneUnderground',
@@ -423,7 +436,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('parcellings', after='isInSubdivision')
     schema.moveField('subdivisionDetails', after='parcellings')
     schema.moveField('description', after='usage')
-    schema.moveField('pash', after='roadEquipments')
+    schema.moveField('roadMiscDescription', after='roadEquipments')
+    schema.moveField('pash', after='roadMiscDescription')
     schema.moveField('pashDetails', after='pash')
     schema.moveField('folderCategoryTownship', after='locationTechnicalConditions')
     schema.moveField('areParcelsVerified', after='folderCategoryTownship')
@@ -438,7 +452,6 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('investigationOralReclamationNumber', after='solicitOpinionsTo')
     schema.moveField('investigationWriteReclamationNumber', after='investigationOralReclamationNumber')
     schema.moveField('requirementFromFD', after='locationDgrneUnderground')
-    schema.moveField('townshipCouncilFolder', after='roadCoating')
     return schema
 
 finalizeSchema(BuildLicence_schema)

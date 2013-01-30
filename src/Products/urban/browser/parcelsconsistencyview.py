@@ -38,7 +38,7 @@ class ParcelsConsistencyView(BrowserView):
             parcel.setOutdated(outdated)
             licence = parcel.aq_inner.aq_parent
             infos = {'parcel':brain.Title, 'licence title':licence.Title(), 'licence path': licence.absolute_url()}
-            if outdated:
+            if outdated or not parcel.getIsOfficialParcel():
                 if portal_workflow.getInfoFor(licence, 'review_state') == 'in_progress':
                     result['critical_outdated_parcels'].append(infos)
                 else:

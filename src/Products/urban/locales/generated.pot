@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Jan 28 10:19:22 2013\n"
-"PO-Revision-Date: Mon Jan 28 10:19:22 2013\n"
+"POT-Creation-Date: Wed Jan 30 11:47:34 2013\n"
+"PO-Revision-Date: Wed Jan 30 11:47:34 2013\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -934,6 +934,11 @@ msgstr ""
 #. Default: "Roadequipments"
 #: GenericLicence.py
 msgid "urban_label_roadEquipments"
+msgstr ""
+
+#. Default: "Roadmiscdescription"
+#: BuildLicence.py
+msgid "urban_label_roadMiscDescription"
 msgstr ""
 
 #. Default: "Roadspecificfeatures"
