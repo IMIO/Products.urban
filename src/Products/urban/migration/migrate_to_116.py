@@ -21,6 +21,8 @@ def migrateToUrban116(context):
     migrateSocietyTitle(context)
     # adapt the value of division field of all parcels
     migrateParcelsDivision(context)
+    # adapt the style config of ckeditor to include urban styles
+    migrateCKeditor(context)
 
     # finish with reinstalling urban and adding the templates
     logger.info("starting to reinstall urban...")
@@ -132,3 +134,16 @@ def migrateParcelsDivision(context):
             logger.info('Migrated parcel %s' % parcel.Title())
     logger.info("migration step done!")
 
+def migrateCKeditor(context):
+    """
+    """
+    site = getToolByName(context, 'portal_url').getPortalObject()
+    urban_tool = getToolByName(site, 'portal_urban')
+    logger = logging.getLogger('urban: migrate ckeditor style config->')
+    logger.info("starting migration step")
+
+    properties_tool = getToolByName(site, 'portal_properties')
+    custom_menu_style = u"[\n/* Styles Urban */\n{ name : 'Urban Body'\t\t, element : 'p', attributes : { 'class' : 'UrbanBody' } },\n{ name : 'Urabn title'\t        , element : 'p', attributes : { 'class' : 'UrbanTitle' } },\n{ name : 'Urabn title 2'\t, element : 'p', attributes : { 'class' : 'UrbanTitle2' } },\n{ name : 'Urban title 3'\t, element : 'p', attributes : { 'class' : 'UrbanTitle3' } },\n{ name : 'Urban address'\t, element : 'p', attributes : { 'class' : 'UrbanAddress' } },\n{ name : 'Urban table'\t        , element : 'p', attributes : { 'class' : 'UrbanTable' } },\n/* Block Styles */\n{ name : 'Grey Title'\t\t, element : 'h2', styles : { 'color' : '#888' } },\n{ name : 'Grey Sub Title'\t, element : 'h3', styles : { 'color' : '#888' } },\n{ name : 'Discreet bloc'\t, element : 'p', attributes : { 'class' : 'discreet' } },\n/* Inline styles */\n{ name : 'Discreet text'\t, element : 'span', attributes : { 'class' : 'discreet' } },\n{ name : 'Marker: Yellow'\t, element : 'span', styles : { 'background-color' : 'Yellow' } },\n{ name : 'Typewriter'\t\t, element : 'tt' },\n{ name : 'Computer Code'\t, element : 'code' },\n{ name : 'Keyboard Phrase'\t, element : 'kbd' },\n{ name : 'Sample Text'\t\t, element : 'samp' },\n{ name : 'Variable'\t\t, element : 'var' },\n{ name : 'Deleted Text'\t\t, element : 'del' },\n{ name : 'Inserted Text'\t, element : 'ins' },\n{ name : 'Cited Work'\t\t, element : 'cite' },\n{ name : 'Inline Quotation'\t, element : 'q' },\n{ name : 'Language: RTL'\t, element : 'span', attributes : { 'dir' : 'rtl' } },\n{ name : 'Language: LTR'\t, element : 'span', attributes : { 'dir' : 'ltr' } },\n/* Objects styles */\n{ name : 'Image on right'\t, element : 'img', attributes : { 'class' : 'image-right' } },\n{ name : 'Image on left'\t, element : 'img', attributes : { 'class' : 'image-left' } },\n{ name : 'Image centered'\t, element : 'img', attributes : { 'class' : 'image-inline' } },\n{ name : 'Borderless Table'     , element : 'table', styles: { 'border-style': 'hidden', 'background-color' : '#E6E6FA' } },\n{ name : 'Square Bulleted List', element : 'ul', styles : { 'list-style-type' : 'square' } }\n\n]\n"
+    ckprops = properties_tool.ckeditor_properties
+    ckprops.manage_changeProperties(menuStyles=custom_menu_style)
+    logger.info("migration step done!")
