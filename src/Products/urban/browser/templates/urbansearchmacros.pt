@@ -23,6 +23,16 @@
             tal:attributes="value last_encoded_street" />
 </div>
 
+
+<div metal:define-macro="searchbyfolderreferenceMacro" i18n:domain="urban"
+        tal:define="last_encoded_reference request/folderref|nothing">
+ <p align="left" class="discreet" i18n:translate="urban_label_searchbyfolderreference_descr">
+      Enter the folder reference. You can use '*' to define if you search on a partial word
+ </p>
+ <input size="50" type="text" name="folderref" tal:attributes="value python: last_encoded_reference">
+</div>
+
+
 <div metal:define-macro="searchbynameMacro" i18n:domain="urban"
         tal:define="last_encoded_name request/name|nothing;
                     contact_types view/getContactTypes;

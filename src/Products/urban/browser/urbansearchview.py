@@ -66,6 +66,14 @@ class UrbanSearchView(BrowserView):
                 ]
         return ','.join(interfaces)
 
+    def getLicenceInterfaces(self):
+        request = aq_inner(self.request)
+        #import ipdb; ipdb.set_trace()
+        interfaces = ['Products.urban.interfaces.IBuildLicence']
+        if request.has_key('foldertypes'):
+            interfaces = ['Products.urban.interfaces.I%s' % licence_type for licence_type in request.get('foldertypes')]
+        return ','.join(interfaces)
+
     def enoughSearchCriterias(self, request):
         """
         """
@@ -84,11 +92,14 @@ class UrbanSearchView(BrowserView):
         foldertypes = request.get('foldertypes', [])
         arguments = {
                         'street':self.getArgument('street'),
+                        'folderref':self.getArgument('folderref'),
                         'name':self.getArgument(['name', 'contacttypes']),
                         'parcel':self.getArgument(['division','section', 'radical', 'bis', 'exposant', 'puissance', 'partie', 'browseoldparcels']),
                     }
         if search_by == 'street':
             res = self.searchByStreet(foldertypes, **arguments.get(search_by, []))
+        elif search_by == 'folderref':
+            res = self.searchByFolderReference(foldertypes, **arguments.get(search_by, []))
         elif search_by == 'name':
             res = self.searchByName(foldertypes, **arguments.get(search_by, []))
         elif search_by == 'parcel':
@@ -155,8 +166,14 @@ class UrbanSearchView(BrowserView):
         catalogTool = getToolByName(self, 'portal_catalog')
         street = street.replace('(', ' ').replace(')', ' ')
         street_uids = [brain.UID for brain in catalogTool(portal_type='Street', Title=street)]
-        res = catalogTool(portal_type=foldertypes, StreetsUID=street_uids)
-        return res
+        return catalogTool(portal_type=foldertypes, StreetsUID=street_uids)
+
+    def searchByFolderReference(self, foldertypes, folderref):
+        """
+          Find licences by name and by contact categories
+        """
+        catalogTool = getToolByName(self, 'portal_catalog')
+        return catalogTool(portal_type=foldertypes, getReference=folderref)
 
     def searchByParcel(self, foldertypes, division, section, radical, bis, exposant, puissance, partie, browseoldparcels=False):
         """
@@ -173,8 +190,7 @@ class UrbanSearchView(BrowserView):
         for parcel in parcels_historic:
             for ref in parcel.getAllSearchRefs():
                 parcel_infos.add(ref)
-        res = catalogTool(portal_type=foldertypes, parcelInfosIndex=list(parcel_infos))
-        return res
+        return catalogTool(portal_type=foldertypes, parcelInfosIndex=list(parcel_infos))
 
 class UrbanSearchMacros(BrowserView):
     """

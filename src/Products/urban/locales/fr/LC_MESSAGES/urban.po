@@ -2378,7 +2378,10 @@ msgid "urban_label_rubrics"
 msgstr "Rubrique(s)"
 
 #. Default: "Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word"
-#: urban_searchbyapplicant.py
+msgid "urban_label_searchbyfolderreference_descr"
+msgstr "Entrez la référence du dossier. Vous pouvez utiliser le caractère '*' pour spécifier que vous cherchez sur une partie de mot"
+
+#. Default: "Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word"
 msgid "urban_label_searchbyname_descr"
 msgstr "Entrez le nom, le prénom ou le numéro de registre national.  Vous pouvez utiliser le caractère '*' pour spécifier que vous cherchez sur une partie de mot"
 
@@ -2713,6 +2716,10 @@ msgstr "Critères de la recherche"
 #. Default: "Cadastral reference"
 msgid "urban_search_parcel_by_cadastral_reference"
 msgstr "Référence cadastrale"
+
+#. Default: "Folder reference"
+msgid "urban_search_parcel_by_folder_reference"
+msgstr "Référence du dossier"
 
 #. Default: "Location"
 msgid "urban_search_parcel_by_location"

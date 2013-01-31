@@ -44,6 +44,16 @@
    search_form.setAttribute('action', base_url.getAttribute('href')+'street')">
   <metal:listing use-macro="context/@@urbansearch-macros/searchbystreetMacro" />
   </dd>
+  <dt class="formTab" id="fieldsetlegend-urban_searchbyfolderreference">
+    <span i18n:translate="urban_search_parcel_by_folder_reference">Folder reference</span>
+  </dt>
+  <dd id="fieldset-urban_searchbyfolderreference"
+   onmouseover="document.getElementById('search').elements['search_by'].value='folderref';
+   var base_url=document.getElementById('base_url');
+   var search_form=document.getElementById('search');
+   search_form.setAttribute('action', base_url.getAttribute('href')+'folderreference')">
+  <metal:listing use-macro="context/@@urbansearch-macros/searchbyfolderreferenceMacro" />
+  </dd>
   <dt class="formTab" id="fieldsetlegend-urban_searchbyname">
     <span i18n:translate="urban_search_parcel_by_name">Name</span>
   </dt>

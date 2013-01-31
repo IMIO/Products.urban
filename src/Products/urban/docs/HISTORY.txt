@@ -28,6 +28,8 @@ Show historic of old parcels on licences "map" tab and allow to show the locatio
 
 Urban editors can now add parcel owner manually on inquiry events (#5289).
 
+Added search by "folder reference" in urban folder search (#4878).
+
 bugfixes:
 - UrbanEvent view doesnt crash anymore when a wrong TAL condition is defined on an UrbanDoc.
 - corrected template "accuse de reception d'une reclamation" (#5168, #5198).
