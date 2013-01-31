@@ -66,14 +66,6 @@ class UrbanSearchView(BrowserView):
                 ]
         return ','.join(interfaces)
 
-    def getLicenceInterfaces(self):
-        request = aq_inner(self.request)
-        #import ipdb; ipdb.set_trace()
-        interfaces = ['Products.urban.interfaces.IBuildLicence']
-        if request.has_key('foldertypes'):
-            interfaces = ['Products.urban.interfaces.I%s' % licence_type for licence_type in request.get('foldertypes')]
-        return ','.join(interfaces)
-
     def enoughSearchCriterias(self, request):
         """
         """
