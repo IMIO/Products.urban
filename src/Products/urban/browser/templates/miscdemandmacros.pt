@@ -40,8 +40,8 @@
       <td width="2%"></td>
       <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanFolderManagerMacro" /></td>
      </tr>
-     <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_category">Category</span>:</b></td>
+     <tr tal:condition="python: 'folderCategory' in usedAttributes">
+      <td valign="top"><b><span i18n:translate="urban_label_folderCategory">Category</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategory', mode='view')" /></td>
      </tr>
