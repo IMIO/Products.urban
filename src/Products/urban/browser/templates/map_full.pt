@@ -65,7 +65,7 @@ You have to be logged and authenticated to view this page
 	    	<span id="loading-msg">Chargement de l'application</span>
 	    </div>
 	</div>
- 
+
 
   	   <metal:listing use-macro="here/@@map-macros/urbanMapScriptBase" />
   	   <metal:listing use-macro="here/@@map-macros/urbanFullMapScript" />

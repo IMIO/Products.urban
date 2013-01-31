@@ -23,6 +23,8 @@ def migrateToUrban116(context):
     migrateParcelsDivision(context)
     # adapt the style config of ckeditor to include urban styles
     migrateCKeditor(context)
+    #prefix pylon hots url with 'http//'
+    migratePylonHostURL(context)
 
     # finish with reinstalling urban and adding the templates
     logger.info("starting to reinstall urban...")
@@ -147,3 +149,20 @@ def migrateCKeditor(context):
     ckprops = properties_tool.ckeditor_properties
     ckprops.manage_changeProperties(menuStyles=custom_menu_style)
     logger.info("migration step done!")
+
+def migratePylonHostURL(context):
+    """
+     prefix the pylon host url by http:// if its not already prefixed
+    """
+    site = getToolByName(context, 'portal_url').getPortalObject()
+    urban_tool = getToolByName(site, 'portal_urban')
+    logger = logging.getLogger('urban: migrate pylon host url->')
+    logger.info("starting migration step")
+
+    pylon_host = urban_tool.getPylonsHost()
+    if pylon_host and not pylon_host.startswith('http'):
+        new_url = 'http://%s' % pylon_host
+        urban_tool.setPylonsHost(new_url)
+        logger.info("changed pylon host url to %s" % new_url)
+    logger.info("migration step done!")
+
