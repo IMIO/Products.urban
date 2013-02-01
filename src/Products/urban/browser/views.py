@@ -114,7 +114,9 @@ class ProxyController(BrowserView):
 
             params.pop("url")
             self.request.response.setHeader('content-type', 'text/json')
-            conn = urllib2.urlopen(url+"?%s" % urllib.urlencode(params), timeout=6)
+            if params:
+                url = url+"?%s" % urllib.urlencode(params)
+            conn = urllib2.urlopen(url, timeout=6)
             data = conn.read()
             conn.close()
             return data
