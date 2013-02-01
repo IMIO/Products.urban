@@ -156,6 +156,13 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
                     self.utranslate(field.widget.label_msgid, domain=field.widget.i18n_domain, default=field.widget.label))))
         return DisplayList(tuple(res)).sortedByValue()
 
+    security.declarePublic('getActiveTabs')
+    def getActiveTabs(self):
+        """
+          Return the tabs in use
+        """
+        return [tab for tab in self.getTabsConfig() if tab['display']]
+
     security.declarePrivate('getTabsConfigRows')
     def getTabsConfigRows(self):
         """
@@ -173,7 +180,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
 
         types = {
                 'buildlicence': full_tabs_config,
-                'parceloutlicence': full_tabs_config,
+                'parceloutlicence': inquiry_tabs_config,
                 'declaration': minimum_tabs_config,
                 'division': minimum_tabs_config,
                 'urbancertificateone': minimum_tabs_config,

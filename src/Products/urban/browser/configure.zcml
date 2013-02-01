@@ -81,7 +81,7 @@
      for="Products.urban.interfaces.IBuildLicence"
      name="buildlicenceview"
      class=".buildlicenceview.BuildLicenceView"
-     template="templates/buildlicenceview.pt"
+     template="templates/licenceview.pt"
      permission="zope2.View"
   />
 
@@ -97,7 +97,7 @@
      for="Products.urban.interfaces.IParcelOutLicence"
      name="parceloutlicenceview"
      class=".parceloutlicenceview.ParcelOutLicenceView"
-     template="templates/parceloutlicenceview.pt"
+     template="templates/licenceview.pt"
      permission="zope2.View"
   />
 
@@ -113,7 +113,7 @@
      for="Products.urban.interfaces.IDeclaration"
      name="declarationview"
      class=".declarationview.DeclarationView"
-     template="templates/declarationview.pt"
+     template="templates/licenceview.pt"
      permission="zope2.View"
   />
 
@@ -129,7 +129,7 @@
      for="Products.urban.interfaces.IUrbanCertificateBase"
      name="urbancertificateoneview"
      class=".urbancertificateoneview.UrbanCertificateOneView"
-     template="templates/urbancertificateoneview.pt"
+     template="templates/licenceview.pt"
      permission="zope2.View"
   />
 
@@ -145,7 +145,7 @@
      for="Products.urban.interfaces.IUrbanCertificateBase"
      name="urbancertificatetwoview"
      class=".urbancertificatetwoview.UrbanCertificateTwoView"
-     template="templates/urbancertificatetwoview.pt"
+     template="templates/licenceview.pt"
      permission="zope2.View"
   />
 
@@ -161,7 +161,7 @@
      for="Products.urban.interfaces.IUrbanCertificateBase"
      name="notaryletterview"
      class=".notaryletterview.NotaryLetterView"
-     template="templates/notaryletterview.pt"
+     template="templates/licenceview.pt"
      permission="zope2.View"
   />
 
@@ -177,7 +177,7 @@
      for="Products.urban.interfaces.IDivision"
      name="divisionview"
      class=".divisionview.DivisionView"
-     template="templates/divisionview.pt"
+     template="templates/licenceview.pt"
      permission="zope2.View"
   />
 
@@ -193,7 +193,7 @@
      for="Products.urban.interfaces.IEnvironmentBase"
      name="envclassthreeview"
      class=".envclassthreeview.EnvClassThreeView"
-     template="templates/envclassthreeview.pt"
+     template="templates/licenceview.pt"
      permission="zope2.View"
   />
 
@@ -209,7 +209,7 @@
      for="Products.urban.interfaces.IMiscDemand"
      name="miscdemandview"
      class=".miscdemandview.MiscDemandView"
-     template="templates/miscdemandview.pt"
+     template="templates/licenceview.pt"
      permission="zope2.View"
   />
 

@@ -347,28 +347,3 @@
  <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
 </fieldset>
 </div>
-
-<div metal:define-macro="PEBMacro" i18n:domain="urban">
- <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
- <tr>
-  <td width="49%" valign="top"><b><span i18n:translate="urban_label_pebType">PEB type</span>:</b></td>
-  <td width="2%"></td>
-  <td width="49%" valign="top"><metal:myfield use-macro="python:here.widget('pebType', mode='view')" /></td>
- </tr>
- <tr tal:condition="python: 'pebDetails' in usedAttributes">
-  <td width="49%" valign="top"><b><span i18n:translate="urban_label_pebDetails">PEB details</span>:</b></td>
-  <td width="2%"></td>
-  <td width="49%" valign="top"><tal:block replace="structure context/getPebDetails" /><span tal:condition="not: context/getPebDetails" class="discreet" i18n:translate="content_none">None</span></td>
- </tr>
- <tr>
-  <td width="49%" valign="top"><b><span i18n:translate="urban_label_pebStudy">PEB study</span>:</b></td>
-  <td width="2%"></td>
-  <td width="49%" valign="top"><metal:myfield use-macro="python:here.widget('pebStudy', mode='view')" /></td>
- </tr>
- <tr tal:condition="python: 'pebTechnicalAdvice' in usedAttributes">
-  <td width="49%" valign="top"><b><span i18n:translate="urban_label_pebTechnicalAdvice">PEB technical advice</span>:</b></td>
-  <td width="2%"></td>
-  <td width="49%" valign="top"><metal:myfield use-macro="python:here.widget('pebTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getPebTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
- </tr>
- </table>
-</div>

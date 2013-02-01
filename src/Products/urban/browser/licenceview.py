@@ -32,6 +32,23 @@ class LicenceView(BrowserView):
         context = aq_inner(self.context)
         return context.getLicenceConfig()
 
+    def getMacro(self, tab):
+        context = aq_inner(self.context)
+        portal_type = context.portal_type.lower()
+        if tab in ['description', 'road', 'location', 'peb']:
+            return context.unrestrictedTraverse('@@%s-macros/%sMacro' % (portal_type, tab))
+        else:
+            url_tool = getToolByName(context, 'portal_url')
+            site = url_tool.getPortalObject()
+            urban_macros = site.urban_macros
+            if tab == 'investigation_and_advices':
+                return urban_macros.macros['urbanInquiriesMacro']
+            else:
+                return urban_macros.macros['urbanEventsMacro']
+
+    def getTabs(self):
+        return self.getLicenceConfig().getActiveTabs()
+
     def getEmptyTabs(self):
         tabnames = ['urban_location', 'urban_road']
         return [tabname for tabname in tabnames if self.isEmptyTab(tabname)]

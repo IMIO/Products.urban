@@ -42,6 +42,13 @@ class UrbanBase(object):
         return config
 
 
+    security.declarePublic('getTabs')
+    def getTabs(self):
+        """
+          Returns the tabs in use for this licence, their order and their name
+        """
+        return self.getLicenceConfig().getActiveTabs()
+
     security.declarePublic('getApplicants')
     def getApplicants(self):
         """

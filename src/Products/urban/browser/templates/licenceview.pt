@@ -8,49 +8,29 @@
 <metal:main_macro define-macro="main">
     <metal:body define-macro="body_macro"
                 tal:define="useTabbing python: context.portal_urban.getUseTabbing();
+                            tabs view/getTabs;
                             empty_tabs view/getEmptyTabs;
                             usedAttributes python: view.getLicenceConfig().getUsedAttributes();">
 
 <metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />
 
 <div id="urbanViewWithTabbing" tal:condition="useTabbing">
+
 <dl class="formTabs enableFormTabbing">
-<dt class="formTab" id="fieldsetlegend-urban_description" i18n:domain="plone" i18n:translate="label_schema_urban_description"><span>Description</span></dt>
-<dd id="fieldset-urban_description">
- <metal:listing use-macro="context/@@buildlicence-macros/descriptionMacro" />
-</dd>
-
-<tal:show condition="python: 'urban_road' not in empty_tabs">
-<dt class="formTab" id="fieldsetlegend-urban_road" i18n:domain="plone" i18n:translate="label_schema_urban_road"><span>Road</span></dt>
-<dd id="fieldset-urban_road">
- <metal:listing use-macro="context/@@buildlicence-macros/roadMacro" />
-</dd>
-</tal:show>
-
-<tal:show condition="python: 'urban_location' not in empty_tabs">
-<dt class="formTab" id="fieldsetlegend-urban_location" i18n:domain="plone" i18n:translate="label_schema_urban_location"><span>Location</span></dt>
-<dd id="fieldset-urban_location">
- <metal:listing use-macro="context/@@buildlicence-macros/locationMacro" />
-</dd>
-</tal:show>
-
-<dt class="formTab" id="fieldsetlegend-urban_investigation_and_advices" i18n:domain="plone" i18n:translate="label_schema_urban_investigation_and_advices"><span>Investigation and advices</span></dt>
-<dd id="fieldset-urban_investigation_and_advices">
- <metal:listing use-macro="here/urban_macros/macros/urbanInquiriesMacro" />
-</dd>
-
-<dt class="formTab" id="fieldsetlegend-urban_peb" i18n:domain="plone" i18n:translate="label_schema_urban_peb"><span>PEB</span></dt>
-<dd id="fieldset-urban_peb">
- <metal:listing use-macro="context/@@buildlicence-macros/PEBMacro" />
-</dd>
+<tal:tab_loop repeat="tab tabs">
+    <dt class="formTab" tal:attributes="id python: 'fieldsetlegend-urban_%s' % tab['value']">
+        <span tal:content="python: tab['display_name']">Tab name</span>
+    </dt>
+    <dd  tal:define="macro python: view.getMacro(tab['value'])" tal:attributes="id python: 'fieldset-urban_%s' % tab['value']">
+         <metal:listing use-macro="macro" />
+    </dd>
+</tal:tab_loop>
 
 <dt class="formTab" id="fieldsetlegend-urban_events" i18n:domain="plone" i18n:translate="label_schema_urban_events"><span>Events</span></dt>
 <dd id="fieldset-urban_events">
  <metal:events use-macro="here/urban_macros/macros/urbanEventsMacro" />
  <metal:advices use-macro="here/urban_macros/macros/urbanAdvicesEventsMacro" />
 </dd>
-
-</dl>
 </div>
 
 <div tal:condition="not: useTabbing">

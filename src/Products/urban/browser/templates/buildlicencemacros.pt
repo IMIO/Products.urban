@@ -353,7 +353,7 @@
 </fieldset>
 </div>
 
-<div metal:define-macro="PEBMacro" i18n:domain="urban">
+<div metal:define-macro="pebMacro" i18n:domain="urban">
  <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
  <tr>
   <td width="49%" valign="top"><b><span i18n:translate="urban_label_pebType">PEB type</span>:</b></td>
