@@ -49,20 +49,6 @@ class LicenceView(BrowserView):
     def getTabs(self):
         return self.getLicenceConfig().getActiveTabs()
 
-    def getEmptyTabs(self):
-        tabnames = ['urban_location', 'urban_road']
-        return [tabname for tabname in tabnames if self.isEmptyTab(tabname)]
-
-    def isEmptyTab(self, tab_name):
-        context = aq_inner(self.context)
-        urban_tool = self.getPortalUrban()
-        used_fields_names = set(getattr(urban_tool, context.getPortalTypeName().lower()).getUsedAttributes())
-        if used_fields_names :
-            for field in context.schema.getSchemataFields(tab_name):
-                if field.getName() in used_fields_names:
-                    return False
-        return True
-
     def hasOutdatedParcels(self):
         context = aq_inner(self.context)
         portal_workflow = getToolByName(self, 'portal_workflow')
