@@ -94,6 +94,15 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    BooleanField(
+        name='queryable',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Queryable',
+            label_msgid='urban_label_queryable',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )
