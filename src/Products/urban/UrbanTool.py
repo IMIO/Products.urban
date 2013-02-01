@@ -1441,7 +1441,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         #res = urlparse(self.getPylonsHost()) #getPylonsHost doesn't contain a valid url beginning with http
         #return '%s://%s'%(res.scheme, res.netloc)
-        return "http://%s"%self.getPylonsHost().split('/')[0] #don't use os.path!
+        return '/'.join(self.getPylonsHost().split('/')[:3]) #don't use os.path!
 
 
 
