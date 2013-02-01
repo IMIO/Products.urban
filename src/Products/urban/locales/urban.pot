@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-31 13:40+0000\n"
+"POT-Creation-Date: 2013-02-01 14:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2245,6 +2245,11 @@ msgstr ""
 #. Default: "Pylonshost"
 #: UrbanTool.py
 msgid "urban_label_pylonsHost"
+msgstr ""
+
+#. Default: "Queryable"
+#: Layer.py
+msgid "urban_label_queryable"
 msgstr ""
 
 #. Default: "Radical"
