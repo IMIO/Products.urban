@@ -30,13 +30,11 @@ class TestLicenceStatsView(unittest.TestCase):
 
     def testStatsViewDisplay(self):
         #check that the stats view is simply available
-        self.assertEqual(True,True)
         self.browser.open(self.urban.absolute_url() + '/urbanstatsview')
         compare(S("(?s).*Licences statistics.*"), self.browser.contents)
 
     def testStatsViewEmptyResult(self):
         #check the display result when no licences fall under stats criteria
-        self.assertEqual(True,True)
         self.browser.open(self.urban.absolute_url() + '/urbanstatsview')
         self.browser.getControl("Statistics").click()
         new_url = '%s/urbanstatsview%s' % (self.urban.absolute_url(), self.browser.url.split('/urban')[1])
@@ -45,7 +43,6 @@ class TestLicenceStatsView(unittest.TestCase):
 
     def testStatsViewsResult(self):
         #check the normal case display result
-        self.assertEqual(True,True)
         self.browser.open(self.urban.absolute_url() + '/urbanstatsview')
         self.browser.getControl(name="licence_states").getControl(value='in_progress').click()
         self.browser.getControl("Statistics").click()
