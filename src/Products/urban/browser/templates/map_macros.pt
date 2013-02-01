@@ -33,6 +33,7 @@
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.ParamForm.js'%staticPylonsHost"></script>
     
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_util.js'%staticPylonsHost"></script>
+    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_waiter.js'%staticPylonsHost"></script>    
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_ows.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_managelayers.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_FeatureDataModel.js'%staticPylonsHost"></script>
@@ -43,9 +44,7 @@
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.WMSLegend.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.TreePanel.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.WMSCapabilitiesWindow.js'%staticPylonsHost"></script>
-    <!--<script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.UrbanLayerNode.js'%staticPylonsHost"></script>-->
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.WMCReader.js'%staticPylonsHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.LayerStore.js'%staticPylonsHost"></script>
 </div>
 
 <div metal:define-macro="urbanMapScript" tal:define="staticPylonsHost context/portal_urban/getStaticPylonsHost">
