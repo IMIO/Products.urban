@@ -51,8 +51,8 @@ ploneFormTabbing._buildTabs = function(container, legends) {
             tab += $(legend).text()+'</option>';
         } else {
             tab = '<li '+className
-            /* XXX change by urban 
-             *  keep the last selected tab after edition */ 
+            /* XXX change by urban
+             *  keep the last selected tab after edition */
             if ((window.location.href.search("/edit") != -1) && (lid != 'fieldsetlegend-urban_events')) {
                 tab += ' onClick = "'+
                        'var search_form = document.getElementsByTagName(\'form\')[1];'+

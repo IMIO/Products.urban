@@ -30,6 +30,9 @@ from Products.Archetypes.public import DisplayList
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
+from Products.DataGridField.DataGridField import FixedRow
+from Products.DataGridField.FixedColumn import FixedColumn
+from Products.DataGridField.CheckboxColumn import CheckboxColumn
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.validators.validator import isTextFieldConfiguredValidator
 from Products.validation import V_REQUIRED
@@ -49,6 +52,21 @@ schema = Schema((
         ),
         multiValued=True,
         vocabulary='listUsedAttributes',
+    ),
+    DataGridField(
+        name='tabsConfig',
+        widget=DataGridWidget(
+            columns= {'display' : CheckboxColumn('Display'), 'value' : FixedColumn('Value'), 'display_name' : Column('Name')},
+            label='Tabsconfig',
+            label_msgid='urban_label_tabsConfig',
+            i18n_domain='urban',
+        ),
+        allow_delete= False,
+        fixed_rows='getTabsConfigRows',
+        allow_insert= False,
+        allow_reorder= True,
+        allow_oddeven= True,
+        columns= ('display', 'value', 'display_name',),
     ),
     DataGridField(
         name='textDefaultValues',
@@ -137,6 +155,36 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
                 res.append((field.getName(), "%s%s" %(tab,
                     self.utranslate(field.widget.label_msgid, domain=field.widget.i18n_domain, default=field.widget.label))))
         return DisplayList(tuple(res)).sortedByValue()
+
+    security.declarePrivate('getTabsConfigRows')
+    def getTabsConfigRows(self):
+        """
+        """
+        default_names ={
+                'description':'Récapitulatif',
+                'road':'Voirie',
+                'location':'Urbanisme',
+                'investigation_and_advices':'Enquêtes et avis',
+                'peb':'PEB',
+                }
+        minimum_tabs_config = ['description', 'road', 'location']
+        inquiry_tabs_config = ['description', 'road', 'location', 'investigation_and_advices']
+        full_tabs_config = ['description', 'road', 'location', 'investigation_and_advices', 'peb']
+
+        types = {
+                'buildlicence': full_tabs_config,
+                'parceloutlicence': full_tabs_config,
+                'declaration': minimum_tabs_config,
+                'division': minimum_tabs_config,
+                'urbancertificateone': minimum_tabs_config,
+                'urbancertificatetwo': inquiry_tabs_config,
+                'notaryletter': minimum_tabs_config,
+                'envclassthree': inquiry_tabs_config,
+                'miscdemand': minimum_tabs_config,
+                }
+        licence_type = self.id
+        return [FixedRow(keyColumn = 'value', initialData={'display':'1', 'value':tabname, 'display_name':default_names[tabname]})
+                for tabname in types[licence_type]]
 
     security.declarePublic('getIconURL')
     def getIconURL(self):

@@ -612,16 +612,20 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
 
 <metal:editLicenceFieldsWithTabbingMacro define-macro="editLicenceFieldsWithTabbingMacro"
                                          i18n:domain="urban"
-                                         tal:define="putils context/plone_utils;">
-<tal:fieldsets repeat="fieldset context/schemata_order">
+                                         tal:define="putils context/plone_utils;
+                                                     tabs_config python: [tab for tab in context.getTabs() if tab['display']]">
+<tal:fieldsets repeat="tab_config tabs_config">
+ <tal:tab define="fieldset python: 'urban_%s' % tab_config['value'];
+                  display_name python: tab_config['display_name']">
   <fieldset class="urbanEditWithTabbing" tal:define="fieldsetid python:putils.normalizeString(fieldset)"
           tal:attributes="id string:fieldset-${fieldsetid}">
     <legend id="#"
-            tal:content="python: view.getTranslatedSchemaLabel(fieldset)"
+            tal:content="display_name"
             tal:attributes="id string:fieldsetlegend-${fieldsetid}"
             i18n:translate="" />
       <metal:listing use-macro="here/urban_macros/macros/editLicenceFieldsMacro" />
   </fieldset>
+ </tal:tab>
 </tal:fieldsets>
 </metal:editLicenceFieldsWithTabbingMacro>
 

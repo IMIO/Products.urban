@@ -846,6 +846,21 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         self.setTitle(title)
         self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
 
+    security.declarePrivate('getConfig')
+    def getConfig(self):
+        """
+          Returns the folder config
+        """
+        urban_tool = getToolByName(self, 'portal_urban')
+        return urban_tool.getUrbanConfig(self)
+
+    security.declarePublic('getTabs')
+    def getTabs(self):
+        """
+          Returns the tabs in use for this licence, their order and their name
+        """
+        return self.getConfig().getTabsConfig()
+
     security.declarePublic('getAnnoncedDelay')
     def getAnnoncedDelay(self, theObject=False):
         """
