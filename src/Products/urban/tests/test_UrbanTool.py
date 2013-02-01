@@ -20,5 +20,5 @@ class TestBuildLicence(unittest.TestCase):
     def testGetStaticPylonsHost(self):
         self.portal_urban.setPylonsHost('http://pylon')
         self.assertEqual(self.portal_urban.getStaticPylonsHost(), 'http://pylon')
-        self.portal_urban.setPylonsHost('urban.communesplone.be/trilili')
+        self.portal_urban.setPylonsHost('http://urban.communesplone.be/trilili')
         self.assertEqual(self.portal_urban.getStaticPylonsHost(), 'http://urban.communesplone.be')
