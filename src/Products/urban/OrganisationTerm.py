@@ -73,6 +73,15 @@ class OrganisationTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin):
 
     # Methods
 
+    # Manually created methods
+
+    security.declarePublic('getAddressCSV')
+    def getAddressCSV(self):
+        name = self.Title()
+        lines = self.Description()[3:-4].split('<br />')
+        description = lines[:-2]
+        address = lines[-2:]
+        return '%s|%s|%s|%s' % (name, ' '.join(description), address[0], address[1])
 
 registerType(OrganisationTerm, PROJECTNAME)
 # end of class OrganisationTerm

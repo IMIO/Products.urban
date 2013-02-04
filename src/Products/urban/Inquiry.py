@@ -375,6 +375,20 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
                 claimsTexts.append(text)
         return claimsTexts
 
+    security.declarePublic('getFolderMakersCSV')
+    def getFolderMakersCSV(self):
+        """
+          Returns a formatted version of the folder maker address to be used in POD templates
+        """
+        urban_tool = getToolByName(self, 'portal_urban')
+        foldermakers_config = urban_tool.getUrbanConfig(self).foldermakers
+        foldermakers = [fm for fm in foldermakers_config.objectValues() if fm.id in self.getSolicitOpinionsTo()]
+        toreturn = '<CSV>Nom|Description|AdresseLigne1|AdresseLigne2'
+        for foldermaker in foldermakers:
+            toreturn = toreturn + '%' + foldermaker.getAddressCSV()
+        toreturn = toreturn + '</CSV>'
+        #import ipdb; ipdb.set_trace()
+        return toreturn
 
 
 registerType(Inquiry, PROJECTNAME)
