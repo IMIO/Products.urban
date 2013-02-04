@@ -72,8 +72,4 @@
   <subscriber for="..interfaces.IEnvironmentBase
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".environmentLicenceEvents.setExploitationConditions"/>
-  <subscriber for="..interfaces.IMiscDemand
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".miscDemandEvents.createApplicant"/>
-
 </configure>
