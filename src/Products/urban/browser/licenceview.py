@@ -32,7 +32,7 @@ class LicenceView(BrowserView):
         context = aq_inner(self.context)
         return context.getLicenceConfig()
 
-    def getMacro(self, tab):
+    def getTabMacro(self, tab):
         context = aq_inner(self.context)
         portal_type = context.portal_type.lower()
         if tab in ['description', 'road', 'location', 'peb']:

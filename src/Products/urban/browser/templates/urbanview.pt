@@ -48,15 +48,51 @@
         <table width=100%>
             <tr valign=top>
                 <td width=34% valign=top>
-                 <a class="contenttype-buildlicence" href="buildlicences" i18n:translate="buildlicences">Build licences</a><a href="" tal:condition="python: 'BuildLicence' in [t.id for t in getattr(context, 'buildlicences').allowedContentTypes()]" tal:attributes="href python: context.absolute_url() + '/buildlicences/createObject?type_name=BuildLicence'"><img class="urban-add-icon" src="icon_add.gif" /></a><br/>
-                 <a class="contenttype-parceloutlicence" href="parceloutlicences" i18n:translate="parceloutlicences">ParcelOut licences</a><a href="" tal:condition="python: 'ParcelOutLicence' in [t.id for t in getattr(context, 'parceloutlicences').allowedContentTypes()]" tal:attributes="href python: context.absolute_url() + '/parceloutlicences/createObject?type_name=ParcelOutLicence'"><img class="urban-add-icon" src="icon_add.gif" /></a><br/>
-                 <a class="contenttype-declaration" href="declarations" i18n:translate="declarations">Declarations</a><a href="" tal:condition="python: 'Declaration' in [t.id for t in getattr(context, 'declarations').allowedContentTypes()]" tal:attributes="href python: context.absolute_url() + '/declarations/createObject?type_name=Declaration'"><img class="urban-add-icon" src="icon_add.gif" /></a><br/>
-                 <a class="contenttype-division" href="divisions" i18n:translate="divisions">Divisions</a><a href="" tal:condition="python: 'Division' in [t.id for t in getattr(context, 'divisions').allowedContentTypes()]" tal:attributes="href python: context.absolute_url() + '/divisions/createObject?type_name=Division'"><img class="urban-add-icon" src="icon_add.gif" /></a><br/>
-                 <a class="contenttype-notaryletter" href="notaryletters" i18n:translate="notaryletters">Notary letters</a><a href="" tal:condition="python: 'NotaryLetter' in [t.id for t in getattr(context, 'notaryletters').allowedContentTypes()]" tal:attributes="href python: context.absolute_url() + '/notaryletters/createObject?type_name=NotaryLetter'"><img class="urban-add-icon" src="icon_add.gif" /></a><br/>
-                 <a class="contenttype-urbancertificateone" href="urbancertificateones" i18n:translate="urbancertificateones">Urban certificate 1</a><a href="" tal:condition="python: 'UrbanCertificateOne' in [t.id for t in getattr(context, 'urbancertificateones').allowedContentTypes()]" tal:attributes="href python: context.absolute_url() + '/urbancertificateones/createObject?type_name=UrbanCertificateOne'"><img class="urban-add-icon" src="icon_add.gif" /></a><br/>
-                 <a class="contenttype-urbancertificatetwo" href="urbancertificatetwos" i18n:translate="urbancertificatetwos">Urban certificate 2</a><a href="" tal:condition="python: 'UrbanCertificateTwo' in [t.id for t in getattr(context, 'urbancertificatetwos').allowedContentTypes()]" tal:attributes="href python: context.absolute_url() + '/urbancertificatetwos/createObject?type_name=UrbanCertificateTwo'"><img class="urban-add-icon" src="icon_add.gif" /></a><br/>
-                 <a class="contenttype-envclassthree" href="envclassthrees" i18n:translate="envclassthrees">Environmental declarations</a><a href="" tal:condition="python: 'EnvClassThree' in [t.id for t in getattr(context, 'envclassthrees').allowedContentTypes()]" tal:attributes="href python: context.absolute_url() + '/envclassthrees/createObject?type_name=EnvClassThree'"><img class="urban-add-icon" src="icon_add.gif" /></a><br/>
-                 <a class="contenttype-miscdemand" href="miscdemands" i18n:translate="miscdemands">Miscellaneous Demands</a><a href="" tal:condition="python: 'MiscDemand' in [t.id for t in getattr(context, 'miscdemands').allowedContentTypes()]" tal:attributes="href python: context.absolute_url() + '/miscdemands/createObject?type_name=MiscDemand'"><img class="urban-add-icon" src="icon_add.gif" /></a><br/>
+                 <a class="contenttype-buildlicence" href="buildlicences" i18n:translate="buildlicences">Build licences</a>
+                 <a href="" tal:condition="python: 'BuildLicence' in [t.id for t in getattr(context, 'buildlicences').allowedContentTypes()]"
+                            tal:attributes="href python: context.absolute_url() + '/buildlicences/createObject?type_name=BuildLicence'">
+                    <img class="urban-add-icon" src="icon_add.gif" />
+                 </a><br/>
+                 <a class="contenttype-parceloutlicence" href="parceloutlicences" i18n:translate="parceloutlicences">ParcelOut licences</a>
+                 <a href="" tal:condition="python: 'ParcelOutLicence' in [t.id for t in getattr(context, 'parceloutlicences').allowedContentTypes()]"
+                            tal:attributes="href python: context.absolute_url() + '/parceloutlicences/createObject?type_name=ParcelOutLicence'">
+                    <img class="urban-add-icon" src="icon_add.gif" />
+                 </a><br/>
+                 <a class="contenttype-declaration" href="declarations" i18n:translate="declarations">Declarations</a>
+                 <a href="" tal:condition="python: 'Declaration' in [t.id for t in getattr(context, 'declarations').allowedContentTypes()]"
+                            tal:attributes="href python: context.absolute_url() + '/declarations/createObject?type_name=Declaration'">
+                            <img class="urban-add-icon" src="icon_add.gif" />
+                 </a><br/>
+                 <a class="contenttype-division" href="divisions" i18n:translate="divisions">Divisions</a>
+                 <a href="" tal:condition="python: 'Division' in [t.id for t in getattr(context, 'divisions').allowedContentTypes()]"
+                            tal:attributes="href python: context.absolute_url() + '/divisions/createObject?type_name=Division'">
+                    <img class="urban-add-icon" src="icon_add.gif" />
+                 </a><br/>
+                 <a class="contenttype-notaryletter" href="notaryletters" i18n:translate="notaryletters">Notary letters</a>
+                 <a href="" tal:condition="python: 'NotaryLetter' in [t.id for t in getattr(context, 'notaryletters').allowedContentTypes()]"
+                           tal:attributes="href python: context.absolute_url() + '/notaryletters/createObject?type_name=NotaryLetter'">
+                    <img class="urban-add-icon" src="icon_add.gif" />
+                 </a><br/>
+                 <a class="contenttype-urbancertificateone" href="urbancertificateones" i18n:translate="urbancertificateones">Urban certificate 1</a>
+                 <a href="" tal:condition="python: 'UrbanCertificateOne' in [t.id for t in getattr(context, 'urbancertificateones').allowedContentTypes()]"
+                           tal:attributes="href python: context.absolute_url() + '/urbancertificateones/createObject?type_name=UrbanCertificateOne'">
+                    <img class="urban-add-icon" src="icon_add.gif" />
+                 </a><br/>
+                 <a class="contenttype-urbancertificatetwo" href="urbancertificatetwos" i18n:translate="urbancertificatetwos">Urban certificate 2</a>
+                 <a href="" tal:condition="python: 'UrbanCertificateTwo' in [t.id for t in getattr(context, 'urbancertificatetwos').allowedContentTypes()]"
+                            tal:attributes="href python: context.absolute_url() + '/urbancertificatetwos/createObject?type_name=UrbanCertificateTwo'">
+                   <img class="urban-add-icon" src="icon_add.gif" />
+                 </a><br/>
+                 <a class="contenttype-envclassthree" href="envclassthrees" i18n:translate="envclassthrees">Environmental declarations</a>
+                 <a href="" tal:condition="python: 'EnvClassThree' in [t.id for t in getattr(context, 'envclassthrees').allowedContentTypes()]"
+                            tal:attributes="href python: context.absolute_url() + '/envclassthrees/createObject?type_name=EnvClassThree'">
+                   <img class="urban-add-icon" src="icon_add.gif" />
+                 </a><br/>
+                 <a class="contenttype-miscdemand" href="miscdemands" i18n:translate="miscdemands">Miscellaneous Demands</a>
+                 <a href="" tal:condition="python: 'MiscDemand' in [t.id for t in getattr(context, 'miscdemands').allowedContentTypes()]"
+                            tal:attributes="href python: context.absolute_url() + '/miscdemands/createObject?type_name=MiscDemand'">
+                            <img class="urban-add-icon" src="icon_add.gif" />
+                </a><br/>
                 </td>
                 <td width=33%>
                  <img src="../link_icon.gif" /> <a href="fullmap" i18n:translate="urban_fullmap_descr">Full map</a><br/>
