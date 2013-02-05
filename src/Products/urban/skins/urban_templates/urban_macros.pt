@@ -605,7 +605,7 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
 </tal:fieldsets>
 </div>
 
-<metal:editLicenceMacro define-macro="editLicenceMacro" i18n:domain="urban" tal:define="useTabbing python: context.portal_urban.getUseTabbing();">
+<metal:editLicenceMacro define-macro="editLicenceMacro" i18n:domain="urban" tal:define="useTabbing python: context.portal_urban.getUrbanConfig(context).getUseTabbingForEdit();">
    <div tal:condition="not: useTabbing">
        <metal:listing use-macro="here/urban_macros/macros/editLicenceFieldsNoTabbingMacro" />
    </div>

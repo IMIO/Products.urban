@@ -83,6 +83,8 @@ class OrganisationTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin):
         address = lines[-2:]
         return '%s|%s|%s|%s' % (name, ' '.join(description), address[0], address[1])
 
+
+
 registerType(OrganisationTerm, PROJECTNAME)
 # end of class OrganisationTerm
 

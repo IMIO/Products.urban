@@ -175,15 +175,6 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
-    BooleanField(
-        name='useTabbing',
-        default=True,
-        widget=BooleanField._properties['widget'](
-            label='Usetabbing',
-            label_msgid='urban_label_useTabbing',
-            i18n_domain='urban',
-        ),
-    ),
     StringField(
         name='editionOutputFormat',
         default='odt',

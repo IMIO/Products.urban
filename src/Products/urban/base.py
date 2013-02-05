@@ -405,7 +405,7 @@ class UrbanBase(object):
         if self.restrictedTraverse(selfPhysPath + '/@@plone_lock_info/is_locked_for_current_user')():
             return False
         tool = getToolByName(self, 'portal_urban')
-        if tool.getUseTabbing():
+        if tool.getUrbanConfig(self).getUseTabbingForDisplay():
             return False
         return True
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-02-01 14:41+0000\n"
+"POT-Creation-Date: 2013-02-05 08:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2639,9 +2639,14 @@ msgstr ""
 msgid "urban_label_usage"
 msgstr ""
 
-#. Default: "Usetabbing"
-#: UrbanTool.py
-msgid "urban_label_useTabbing"
+#. Default: "Usetabbingfordisplay"
+#: LicenceConfig.py
+msgid "urban_label_useTabbingForDisplay"
+msgstr ""
+
+#. Default: "Usetabbingforedit"
+#: LicenceConfig.py
+msgid "urban_label_useTabbingForEdit"
 msgstr ""
 
 #. Default: "Usedattributes"

@@ -391,6 +391,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         return toreturn
 
 
+
 registerType(Inquiry, PROJECTNAME)
 # end of class Inquiry
 

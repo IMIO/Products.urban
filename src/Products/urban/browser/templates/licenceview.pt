@@ -7,7 +7,7 @@
 <metal:main fill-slot="main">
 <metal:main_macro define-macro="main">
     <metal:body define-macro="body_macro"
-                tal:define="useTabbing python: context.portal_urban.getUseTabbing();
+                tal:define="useTabbing python: view.getLicenceConfig().getUseTabbingForDisplay();
                             tabs view/getTabs;
                             usedAttributes python: view.getLicenceConfig().getUsedAttributes();">
 
