@@ -46,7 +46,7 @@ def migrateEnvironmentDeclaration(context):
     if hasattr(site.urban, 'environmentaldeclarations'):
         site.urban.manage_delObjects('environmentaldeclarations')
         logger.info("deleted old environmental declarations folder")
-    if hasattr(urban_tool, 'environmentaldeclaration'):
+    if hasattr(urban_tool, 'environmentaldeclaration') and not hasattr(urban_tool, 'envclassthree'):
         urban_tool.manage_renameObject(id='environmentaldeclaration',  new_id='envclassthree')
         logger.info("deleted old environmental declarations config folder")
     logger.info("migration step done!")
