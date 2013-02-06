@@ -80,7 +80,7 @@ def migrateSpecificFeatures(context):
                     if spf.has_key('detail'):
                         newtext = spf.pop('detail')
                         spf['value'] = spf['text']
-                        logger.info("migrating %sSpecificFeature of licence %s" % (location, licence.Title()))
+                        logger.info("migrating %sSpecificFeature of licence %s" % (subtype, licence.Title()))
                     if vocterm:
                         newtext = '%s %s</p>' % (vocterm.Description()[:-4], newtext)
                     spf['text'] = newtext
