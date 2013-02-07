@@ -58,5 +58,6 @@
 	<script tal:content="string:var NISNum='${context/portal_urban/getNISNum}';var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">    
 	</script>        
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/main-layout.js'%staticPylonsHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/main-map.js'%staticPylonsHost"></script>   
+    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/main-map.js'%staticPylonsHost"></script>
+    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.LayerStore.js'%staticPylonsHost"></script>
 </div>
