@@ -1624,14 +1624,7 @@ def addApplicationFolders(context):
             #add a link and translate his title
             newFolder.invokeFactory("Link",id=search_link[0],title=_('urban_%s_descr' % search_link[0], 'urban', context=site.REQUEST), remoteUrl=search_link[1])
 
-def addTestObjects(context):
-    """
-       Add some users and objects for test purpose...
-    """
-    if context.readDataFile('urban_tests_marker.txt') is None:
-        return
-    #add some users, some architects and some foldermanagers...
-    #add 3 users, one as manager, one as reader and one as editor...
+def addTestUsers(context):
     site = context.getSite()
     is_mountpoint = len(site.absolute_url_path().split('/')) > 2
     try:
@@ -1662,7 +1655,17 @@ def addTestObjects(context):
         #if something wrong happens (one object already exists), we pass...
         pass
 
-    #add some architects...
+def addTestObjects(context):
+    """
+       Add some users and objects for test purpose...
+    """
+    if context.readDataFile('urban_tests_marker.txt') is None:
+        return
+    #add some users, some architects and some foldermanagers...
+    #add 3 users, one as manager, one as reader and one as editor...
+    site = context.getSite()
+    addTestUsers(context)
+        #add some architects...
     urbanFolder = getattr(site, "urban")
     notFolder = getattr(urbanFolder, "architects")
     if not notFolder.objectIds():
@@ -1748,7 +1751,7 @@ def setDefaultValues(context):
     """
     Set some default values in the config
     """
-    if context.readDataFile('urban_tests_marker.txt') is None:
+    if context.readDataFile('urban_marker.txt') is None:
         return
 
     site = context.getSite()
