@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <import-steps>
 
- <import-step 
-    id="urban-Hide-Tools-From-Navigation" 
+ <import-step
+    id="urban-Hide-Tools-From-Navigation"
     handler="Products.urban.setuphandlers.setupHideToolsFromNavigation"
     title="Hide Custom tools from Navigation for urban"
     version="2013-01-04T11:30:41.455297">
@@ -10,11 +10,11 @@
    Hides custom tools from navigation tree for urban
  </import-step>
 
- 
 
 
- <import-step 
-    id="urban-Update-RoleMappings" 
+
+ <import-step
+    id="urban-Update-RoleMappings"
     handler="Products.urban.setuphandlers.updateRoleMappings"
     title="Update Workflow role mappings for urban"
     version="2013-01-04T11:30:41.455297">
@@ -22,13 +22,31 @@
    updates the workflow role mappings for urban
  </import-step>
 
- <import-step 
-    id="urban-postInstall" 
+ <import-step
+    id="urban-postInstall"
     handler="Products.urban.setuphandlers.postInstall"
     title="manual coded post-install for urban"
     version="2013-01-04T11:30:41.455297">
    <dependency step="urban-QI-dependencies"/>
    manual coded post-install for urban
+ </import-step>
+
+ <import-step
+            id="urban-updateAllUrbanTemplates"
+            handler="Products.urban.exportimport.updateAllUrbanTemplates"
+            title="Update all the templates (generic templates and urbanEventTypes templates) and create urbanEventTypes"
+            version="2008-10-15T15:00:00.00000">
+   <dependency step="urban-QI-dependencies"/>
+  USE THIS TO UPDATE ALL TEMPLATES
+ </import-step>
+
+ <import-step
+            id="urban-setDefaultValues"
+            handler="Products.urban.setuphandlers.setDefaultValues"
+            title="Set some default values in the config"
+            version="2012-06-15T15:00:00.00000">
+   <dependency step="urban-QI-dependencies"/>
+ Set default valuess for test purpose
  </import-step>
 
 <!-- ##code-section ADDITIONALSTEPS -->

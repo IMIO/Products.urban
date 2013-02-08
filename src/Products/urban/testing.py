@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from plone.testing import z2, zca
+from plone.testing import z2, zca, Layer
 from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import IntegrationTesting, FunctionalTesting
 import Products.urban
@@ -19,12 +19,22 @@ URBAN = PloneWithPackageLayer(
     gs_profile_id='Products.urban:default',
     name="URBAN")
 
-URBAN_TESTS_PROFILE = PloneWithPackageLayer(
+URBAN_TESTS_PROFILE_DEFAULT = PloneWithPackageLayer(
     bases=(URBAN, ),
     zcml_filename="testing.zcml",
     zcml_package=Products.urban,
     additional_z2_products=('Products.urban',),
-    gs_profile_id='Products.urban:tests',
+    gs_profile_id='Products.urban:default',
+    name="URBAN_TESTS_PROFILE_DEFAULT")
+
+class UrbanTestLayer(Layer):
+
+    def setUp(self):
+        portal = self['portal']
+        applyProfile(portal, 'Products.urban:tests')
+
+URBAN_TESTS_PROFILE = UrbanTestLayer(
+    bases=(URBAN_TESTS_PROFILE_DEFAULT, ),
     name="URBAN_TESTS_PROFILE")
 
 URBAN_INTEGRATION = IntegrationTesting(

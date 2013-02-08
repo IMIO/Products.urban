@@ -94,7 +94,7 @@ def updateTemplate(context, container, template, new_content, position_after='',
     return status
 
 def updateAllUrbanTemplates(context):
-    if context.readDataFile('urban_tests_marker.txt') is None:
+    if context.readDataFile('urban_marker.txt') is None:
         return
     addGlobalTemplates(context)
     addUrbanEventTypes(context)
