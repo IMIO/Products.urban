@@ -291,13 +291,14 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def _getSpecificFeaturesRows(self, location=''):
         portal_urban = getToolByName(self, 'portal_urban')
         vocname = '%sspecificfeatures' % location
+        vocterms = [brain.getObject() for brain in portal_urban.listVocabularyBrains(vocToReturn=vocname, context=self)]
         return [FixedRow(keyColumn = 'value', initialData={
                                         'check':vocterm.getIsDefaultValue() and '1' or '',
                                         'id':vocterm.id,
                                         'value':vocterm.Title(),
                                         'text':vocterm.Description(),
                                         })
-                for vocterm in portal_urban.listVocabularyObjects(vocToReturn=vocname, context=self).values()]
+                for vocterm in vocterms]
 
     security.declarePublic('updateTitle')
     def updateTitle(self):
