@@ -68,6 +68,24 @@ schema = Schema((
         allow_oddeven= True,
         columns= ('display', 'value', 'display_name',),
     ),
+    BooleanField(
+        name='useTabbingForDisplay',
+        default=True,
+        widget=BooleanField._properties['widget'](
+            label='Usetabbingfordisplay',
+            label_msgid='urban_label_useTabbingForDisplay',
+            i18n_domain='urban',
+        ),
+    ),
+    BooleanField(
+        name='useTabbingForEdit',
+        default=True,
+        widget=BooleanField._properties['widget'](
+            label='Usetabbingforedit',
+            label_msgid='urban_label_useTabbingForEdit',
+            i18n_domain='urban',
+        ),
+    ),
     DataGridField(
         name='textDefaultValues',
         widget=DataGridWidget(
