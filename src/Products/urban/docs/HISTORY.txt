@@ -1,8 +1,14 @@
 History
 =======
 
-1.1.6 (unreleased)
+1.1.7 (unreleased)
 ------------------
+
+Added options bar to licences listing (#5476, #5250).
+
+
+1.1.6
+-----
 
 Added field Transparence on class Layer (#5197).
 
@@ -30,7 +36,7 @@ Urban editors can now add parcel owner manually on inquiry events (#5289).
 
 Added search by "folder reference" in urban folder search (#4878).
 
-Licences tabs can be renamed and reordered (#5465). 
+Licences tabs can be renamed and reordered (#5465).
 
 bugfixes:
 - UrbanEvent view doesnt crash anymore when a wrong TAL condition is defined on an UrbanDoc.
