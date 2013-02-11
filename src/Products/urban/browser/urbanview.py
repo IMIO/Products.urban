@@ -14,14 +14,13 @@ class UrbanView(BrowserView):
         member = context.restrictedTraverse('@@plone_portal_state').member()
         return member.has_role('Manager') or member.has_role('Editor', getToolByName(context, 'portal_urban'))
 
-    def getLicencesBatch(self, context, sort='sortable_title', batchlen=20, **kwargs):
+    def getLicencesBatch(self, context, sort='sortable_title', **kwargs):
         catalog = getToolByName(context, 'portal_catalog')
         request = aq_inner(self.request)
         foldermanager = request.get('foldermanager', '')
-        fm_plone_id = foldermanager and catalog(UID=foldermanager)[0].getObject().getPloneUserId() or ''
         state = request.get('review_state', '')
-        batchlen = int(request.get('batch_len', batchlen))
-        sort = request.get('sort_by', sort)
+        batchlen = int(request.get('batch_len', '') and request.get('batch_len') or self.listBatchSizes()[0])
+        sort = request.get('sort_by', sort) and request.get('sort_by') or sort
         sort_order = request.get('reverse_order', 'descending')
 
         queryString = {
@@ -31,7 +30,7 @@ class UrbanView(BrowserView):
                 'sort_order':sort_order,
                 }
         if foldermanager:
-            queryString['listCreators'] = fm_plone_id
+            queryString['folder_manager'] = foldermanager
         if state:
             queryString['review_state'] = state
         queryString.update(kwargs)
@@ -74,7 +73,7 @@ class UrbanView(BrowserView):
     def listBatchSizes(self):
         """
         """
-        return ['2', '30', '50', '100']
+        return ['20', '30', '50', '100']
 
 class UrbanViewMacros(BrowserView):
     """

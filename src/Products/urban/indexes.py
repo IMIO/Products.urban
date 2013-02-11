@@ -78,3 +78,7 @@ def genericlicence_lastkeyevent(object):
         event_type = event.getUrbaneventtypes()
         if event_type.getIsKeyEvent():
             return "%s,  %s" % (event.getEventDate().strftime("%d/%m/%y"), event_type.Title())
+
+@indexer(IGenericLicence)
+def genericlicence_foldermanager(object):
+    return [foldermanager.UID() for foldermanager in object.getFoldermanagers()]
