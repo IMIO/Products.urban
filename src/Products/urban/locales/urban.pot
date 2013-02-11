@@ -33,6 +33,9 @@ msgstr ""
 msgid "Add this parcel"
 msgstr ""
 
+msgid "All"
+msgstr ""
+
 msgid "Applicant data"
 msgstr ""
 
@@ -46,6 +49,9 @@ msgid "Claimant data"
 msgstr ""
 
 msgid "Close"
+msgstr ""
+
+msgid "creation date"
 msgstr ""
 
 msgid "Declaration"
@@ -62,6 +68,9 @@ msgstr ""
 
 #. Default: "Déclaration environnementale"
 msgid "EnvClassThree"
+msgstr ""
+
+msgid "Filter"
 msgstr ""
 
 msgid "Found folder(s)"
@@ -474,6 +483,9 @@ msgstr ""
 msgid "effective_closing_date"
 msgstr ""
 
+msgid "elements_by_page"
+msgstr ""
+
 msgid "envclassthree_searchacceptedlicences"
 msgstr ""
 
@@ -790,6 +802,9 @@ msgstr ""
 msgid "label_to"
 msgstr ""
 
+msgid "last created event date"
+msgstr ""
+
 msgid "legend"
 msgstr ""
 
@@ -1025,6 +1040,9 @@ msgstr ""
 msgid "proprietaries"
 msgstr ""
 
+msgid "reverse_order"
+msgstr ""
+
 #. Default: "RCU"
 #: setuphandlers.py
 msgid "rcu_folder_title"
@@ -1081,6 +1099,9 @@ msgid "sectorialconditions_folder_title"
 msgstr ""
 
 msgid "simple-map_title"
+msgstr ""
+
+msgid "sort_by"
 msgstr ""
 
 #. Default: "SSC"

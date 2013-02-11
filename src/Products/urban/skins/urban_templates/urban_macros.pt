@@ -596,8 +596,9 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
 <tal:fieldsets repeat="tab_config tabs_config">
  <tal:tab define="fieldset python: 'urban_%s' % tab_config['value'];
                   display_name python: tab_config['display_name']">
-  <fieldset>
+  <fieldset tal:define="fieldsetid python:putils.normalizeString(fieldset)">
     <legend tal:content="display_name"
+            tal:attributes="id string:fieldsetlegend-${fieldsetid}"
             i18n:translate="" />
       <metal:listing use-macro="here/urban_macros/macros/editLicenceFieldsMacro" />
   </fieldset>

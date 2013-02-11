@@ -5,6 +5,21 @@
 /* <dtml-with base_properties> (do not remove this :) */
 /* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
 
+table.filter_listing th {
+    background: none repeat scroll 0 0 #DDDDDD;
+    border-color: #E7E7E7;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 0.1em;
+    color: #666666;
+    text-align: left;
+    padding: 0.3em 0.5em;
+    vertical-align: center;
+}
+
+table.filter_listing th {
+}
+
 .listing img, .listing input {
 vertical-align: sub;
 }

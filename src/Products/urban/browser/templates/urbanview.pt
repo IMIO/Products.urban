@@ -119,13 +119,15 @@
 
         <fieldset style="margin: 0" tal:define="tool python: getattr(context, 'portal_urban');">
          <legend i18n:domain="urban" i18n:translate="search-last-elements">Last elements</legend>
+
+
          <div tal:define="sort python: urban_root and 'created' or 'sortable_title';
                           batch python: view.getLicencesBatch(context=context, sort=sort);
                           showedCols python: ('Title', 'created', 'Creator', );
                           showActions python: True;">
+          <metal:listing use-macro="context/@@urban-macros/filter_listing" />
           <metal:listing use-macro="here/urban_macros/macros/listing" />
          </div>
-
          </fieldset>
 
     </metal:body>

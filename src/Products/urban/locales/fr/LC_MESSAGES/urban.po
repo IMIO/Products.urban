@@ -34,6 +34,9 @@ msgstr "Ajouter un propriétaire"
 msgid "Add this parcel"
 msgstr "Ajouter cette parcelle"
 
+msgid "All"
+msgstr "Tous"
+
 msgid "Applicant data"
 msgstr "Coordonnées du demandeur"
 
@@ -64,6 +67,9 @@ msgstr "Modifier le permis"
 #. Default: "Déclaration environnementale"
 msgid "EnvClassThree"
 msgstr "Déclaration environnementale"
+
+msgid "Filter"
+msgstr "Filtrer"
 
 msgid "Found folder(s)"
 msgstr "Dossier(s) trouvé(s)"
@@ -421,6 +427,9 @@ msgstr "Pays des personnes"
 msgid "create"
 msgstr "Créer un document"
 
+msgid "creation date"
+msgstr "Date de création"
+
 msgid "date_day_01"
 msgstr "1er"
 
@@ -474,6 +483,9 @@ msgstr "Divisions"
 #: urban_macros.pt
 msgid "effective_closing_date"
 msgstr "Date de clôture"
+
+msgid "elements_by_page"
+msgstr "Résultats/page"
 
 msgid "envclassthree_searchacceptedlicences"
 msgstr "déclarations environnementales acceptées"
@@ -791,6 +803,9 @@ msgstr "Sélectionner une rue"
 msgid "label_to"
 msgstr "Au"
 
+msgid "last created event date"
+msgstr "Date du dernier événement créé"
+
 msgid "legend"
 msgstr "Légende"
 
@@ -1048,6 +1063,9 @@ msgstr "Dossier introduit par ${notary}"
 msgid "residing"
 msgstr "${name} demeurant ${address}"
 
+msgid "reverse_order"
+msgstr "Inverser l'ordre"
+
 msgid "road_adaptation_create"
 msgstr "Oui, ouverture"
 
@@ -1083,6 +1101,9 @@ msgstr "Conditions sectorielles"
 
 msgid "simple-map_title"
 msgstr "Carte simple"
+
+msgid "sort_by"
+msgstr "Trier par"
 
 #. Default: "SSC"
 #: setuphandlers.py

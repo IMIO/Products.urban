@@ -1173,16 +1173,13 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         self.reindexObject()
 
     security.declarePublic('getCurrentFolderManager')
-    def getCurrentFolderManager(self, obj, initials=True):
+    def getCurrentFolderManager(self, initials=True):
         """
           Returns the current FolderManager initials or object
         """
         #the current FolderManager is based on the current Plone User and the
         #ploneUserId defined on the folderManagers for the 'obj' kind of licence
-        urbanConfig = self.getUrbanConfig(obj)
-        if not urbanConfig:
-            return ''
-        folderManagersFolder = urbanConfig.foldermanagers
+        folderManagersFolder = self.foldermanagers
         pm = getToolByName(self, 'portal_membership')
         currentPloneUserId = pm.getAuthenticatedMember().getId()
         for fm in folderManagersFolder.objectValues('FolderManager'):

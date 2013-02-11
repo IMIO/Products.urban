@@ -16,14 +16,67 @@ class UrbanView(BrowserView):
 
     def getLicencesBatch(self, context, sort='sortable_title', batchlen=20, **kwargs):
         catalog = getToolByName(context, 'portal_catalog')
+        request = aq_inner(self.request)
+        foldermanager = request.get('foldermanager', '')
+        fm_plone_id = foldermanager and catalog(UID=foldermanager)[0].getObject().getPloneUserId() or ''
+        state = request.get('review_state', '')
+        batchlen = int(request.get('batch_len', batchlen))
+        sort = request.get('sort_by', sort)
+        sort_order = request.get('reverse_order', 'descending')
+
         queryString = {
                 'portal_type':URBAN_TYPES,
                 'path':'/'.join(context.getPhysicalPath()),
                 'sort_on':sort,
-                'sort_order':'reverse',
+                'sort_order':sort_order,
                 }
+        if foldermanager:
+            queryString['listCreators'] = fm_plone_id
+        if state:
+            queryString['review_state'] = state
         queryString.update(kwargs)
         brains = catalog(queryString)
         b_start = int(context.REQUEST.get('b_start', 0))
         batch = Batch(brains, batchlen, b_start, orphan=0)
         return batch
+
+    def getArgument(self, key_to_match):
+        request = aq_inner(self.request)
+        if type(key_to_match) == list:
+            return dict([(key, request.get(key, '')) for key in key_to_match])
+        request = aq_inner(self.request)
+        return request.get(key_to_match, '')
+
+    def listFolderManagers(self):
+        """
+          Returns the available folder managers
+        """
+        context = aq_inner(self.context)
+        catalog = getToolByName(context, 'portal_catalog')
+        urban_tool = getToolByName(context, 'portal_urban')
+        current_foldermanager = urban_tool.getCurrentFolderManager(initials=False)
+        return [(brain.UID, brain.Title.split('(')[0]) for brain in catalog(portal_type='FolderManager') if brain.UID != current_foldermanager.UID()]
+
+    def amIFolderManager(self):
+        """
+         return the folder manager bound to the current plone id user if it exists
+        """
+        context = aq_inner(self.context)
+        urban_tool = getToolByName(context, 'portal_urban')
+        return urban_tool.getCurrentFolderManager(initials=False)
+
+    def listAvailableStates(self):
+        """
+         return available licence states
+        """
+        return ['in_progress', 'accepted', 'refused', 'incomplete']
+
+    def listBatchSizes(self):
+        """
+        """
+        return ['2', '30', '50', '100']
+
+class UrbanViewMacros(BrowserView):
+    """
+      This manage the macros of urban view
+    """
