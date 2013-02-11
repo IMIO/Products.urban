@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from plone.testing import z2, zca, Layer
 from plone.app.testing import PloneWithPackageLayer
-from plone.app.testing import IntegrationTesting, FunctionalTesting
+from plone.app.testing import IntegrationTesting, FunctionalTesting, helpers
 import Products.urban
 
 
@@ -30,8 +30,8 @@ URBAN_TESTS_PROFILE_DEFAULT = PloneWithPackageLayer(
 class UrbanTestLayer(Layer):
 
     def setUp(self):
-        portal = self['portal']
-        applyProfile(portal, 'Products.urban:tests')
+        with helpers.ploneSite() as portal:
+            helpers.applyProfile(portal, 'Products.urban:tests')
 
 URBAN_TESTS_PROFILE = UrbanTestLayer(
     bases=(URBAN_TESTS_PROFILE_DEFAULT, ),
