@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
 import logging
+import re
 
 logger = logging.getLogger('urban: migrations')
 
