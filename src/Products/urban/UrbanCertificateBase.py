@@ -359,23 +359,12 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
           Helper method used in templates
         """
         tool = getToolByName(self, 'portal_urban')
-        portal_catalog = getToolByName(self, 'portal_catalog')
-        config = tool.getUrbanConfig(self, urbanConfigId=self.portal_type.lower())
         #get all the specificfeatures vocabular terms from each config
-        configSpecificFeatures = {}
-        for location in where:
-            specificFeaturesPath = '/'.join(getattr(config, "%sspecificfeatures" % location).getPhysicalPath())
-            params = {
-                      'path': specificFeaturesPath,
-                      'sort_on': 'getObjPositionInParent',
-            }
-            configSpecificFeatures[location] = dict([(brain.id, brain.getObject(),) for brain in list(portal_catalog(**params))])
         res=[]
         for location in where:
             specificfeature_accessor = "get%sSpecificFeatures" % location.capitalize()
             specificFeatures = getattr(self, specificfeature_accessor)()
             for specificfeature in specificFeatures:
-                vocterm = configSpecificFeatures[location][specificfeature['id']]
                 if specificfeature['check']:
                     #render the expressions
                     render = tool.renderText(text=specificfeature['text'], context=self)
@@ -384,7 +373,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
                     res.append(render)
                 else:
                     #replace the expressions by a null value, aka "..."
-                    render = vocterm.getRenderedDescription(self, renderToNull=True)
+                    render = tool.renderText(text=specificfeature['text'], context=self, renderToNull=True)
                     if inactive_style:
                         render = tool.decorateHTML(inactive_style, render)
                     res.append(render)
