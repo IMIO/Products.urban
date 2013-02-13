@@ -1183,6 +1183,9 @@ msgstr "Si l'interpréteur Python qui tourne Zope et Plone ne dispose pas de la 
 msgid "urban"
 msgstr "Urbanisme"
 
+msgid "urban-demo"
+msgstr "Urbanisme démo (permis d'exemples)"
+
 msgid "urban-extra"
 msgstr "Urbanisme extra"
 

@@ -85,12 +85,17 @@ def postInstall(context):
     if isNoturbanProfile(context):
         return
 
-    corePostInstall(context)
-    extraPostInstall(context)
+    corePostInstall(context, refresh=False)
+    extraPostInstall(context, refresh=False)
+    site = context.getSite()
+    #refresh catalog after all these objects have been added...
+    logger.info("Refresh portal_catalog : starting...")
+    site.portal_catalog.refreshCatalog(clear=True)
+    logger.info("Refresh portal_catalog : Done!")
 
 
-def corePostInstall(context):
-    # all install custom code required for tests
+def corePostInstall(context, refresh=True):
+    # all installation custom code required for tests
 
     if isNoturbanProfile(context):
         return
@@ -150,29 +155,20 @@ def corePostInstall(context):
     logger.info("addGlobalFolders : starting...")
     addGlobalFolders(context)
     logger.info("addGlobalFolders : Done")
-    logger.info("addUrbanConfigsTopics : starting...")
-    addUrbanConfigsTopics(context)
-    logger.info("addUrbanConfigsTopics : Done")
     logger.info("addUrbanGroups : starting...")
     addUrbanGroups(context)
     logger.info("addUrbanGroups : Done")
-    logger.info("addLicencesection : starting...")
-    addLicencesCollection(context)
-    logger.info("addLicencesCollection : Done")
     logger.info("adaptDefaultPortal : starting...")
     adaptDefaultPortal(context)
     logger.info("adaptDefaultPortal : Done")
-    #install the urbanskin if available
-    logger.info("installUrbanskin : starting...")
-    installUrbanskin(context)
-    logger.info("installUrbanskin : Done")
-    #refresh catalog after all these objects have been added...
-    logger.info("Refresh portal_catalog : starting...")
-    site.portal_catalog.refreshCatalog(clear=True)
-    logger.info("Refresh portal_catalog : Done!")
+    if refresh:
+        #refresh catalog after all these objects have been added...
+        logger.info("Refresh portal_catalog : starting...")
+        site.portal_catalog.refreshCatalog(clear=True)
+        logger.info("Refresh portal_catalog : Done!")
 
 
-def extraPostInstall(context):
+def extraPostInstall(context, refresh=True):
     # all installation custom code not required for tests
 
     if isNoturbanProfile(context):
@@ -181,6 +177,21 @@ def extraPostInstall(context):
     logger.info("addUrbanConfigs : starting...")
     addUrbanConfigs(context)
     logger.info("addUrbanConfigs : Done")
+    logger.info("addUrbanConfigsTopics : starting...")
+    addUrbanConfigsTopics(context)
+    logger.info("addUrbanConfigsTopics : Done")
+    logger.info("addLicencesection : starting...")
+    addLicencesCollection(context)
+    logger.info("addLicencesCollection : Done")
+    #install the urbanskin if available
+    logger.info("installUrbanskin : starting...")
+    installUrbanskin(context)
+    logger.info("installUrbanskin : Done")
+    if refresh:
+        #refresh catalog after all these objects have been added...
+        logger.info("Refresh portal_catalog : starting...")
+        site.portal_catalog.refreshCatalog(clear=True)
+        logger.info("Refresh portal_catalog : Done!")
 
 
 ##code-section FOOT
