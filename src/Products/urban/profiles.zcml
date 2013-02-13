@@ -64,7 +64,7 @@
       description="Test Extension profile for testing urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       for="Products.urban.interfaces.IUrbanTool"
-  />    
+  />
   <genericsetup:registerProfile
       name="sambreville"
       title="urban-sambreville"
@@ -72,6 +72,13 @@
       description="Sambreville Extension profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       for="Products.urban.interfaces.IUrbanTool"
+  />
+  <genericsetup:registerProfile
+      name="demo"
+      title="urban-demo"
+      directory="profiles/demo"
+      description="Demo Extension profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
   />
   <genericsetup:registerProfile
       name="tests"
