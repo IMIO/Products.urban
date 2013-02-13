@@ -129,7 +129,7 @@ def corePostInstall(context):
         'Proprietary': 1,
         'Applicant': 1,
         'Claimant': 1,
-                      }
+    }
     alreadyRegTypes.update(typesToRegister)
     factory_tool.manage_setPortalFactoryTypes(listOfTypeIds=alreadyRegTypes)
 
@@ -640,7 +640,7 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory("UrbanVocabularyTerm", id="site-seveso", title=u"A moins de 2000m d'un site SEVESO", description="<p>est situé à moins de 2000m d'un site classé SEVESO à savoir [...];</p>")
                 newFolder.invokeFactory("UrbanVocabularyTerm", id="gestion-des-sols", title=u"Gestion des sols", description="<p>état des sols, nous ne sommes pas en mesure de déterminer si le bien est ou pas inscrit dans la banque de données au sens de l'article 10 du décret du 5 décembre 2008 relatif à la gestion des sols (Décret du 05 décembre 2008, art.89, al.2)</p>")
                 newFolder.invokeFactory("UrbanVocabularyTerm", id="galeries-minieres", title=u"Galeries minières", description="<p>est situé dans une région traversée par de nombreuses galeries minières et nous ne sommes pas en mesure de déterminer l'état de celle-ci, veuillez donc prendre vos renseignements auprès du SPW - Département de l'Environnement et de l'Eau - " \
-                                                                                                                             "Direction des risques industriels, géologique et miniers - Cellules sous-sol/géologique - Avenue Prince de Liège, 15 à 5100 Jambes;  Le bien est situé sur une zone de consultation en liaison avec les gisements et puits de mine;</p>")
+                                        "Direction des risques industriels, géologique et miniers - Cellules sous-sol/géologique - Avenue Prince de Liège, 15 à 5100 Jambes;  Le bien est situé sur une zone de consultation en liaison avec les gisements et puits de mine;</p>")
 
             if not hasattr(aq_base(configFolder), 'opinionstoaskifworks'):
                 #add "Ask opinions to in case of works" folder
@@ -825,7 +825,7 @@ def addRubricValues(context, class_type, config_folder):
         "15   INDUSTRIES AGRO-ALIMENTAIRES",
         "16   INDUSTRIE DU TABAC",
         "17   INDUSTRIE TEXTILE",
-        ]
+    ]
 
     for category in categories:
         newFolderid = config_folder.invokeFactory("Folder", id=category.split()[0], title=category)
@@ -1095,18 +1095,24 @@ def addGlobalFolders(context):
     #add global topics
     #a criterion can have 4 values if necessary
     topicsInfo = (
-    # Lots
-    ( 'searchlots',
-    (  ('Type', 'ATPortalTypeCriterion', ['Lot', ], ''),
-       ('path', 'ATPathCriterion', '', False),
-    ), None, ['Title', 'Creator']
-    ),
-    # Equipments
-    ( 'searchequipments',
-    (  ('Type', 'ATPortalTypeCriterion', ['Equipment', ], ''),
-       ('path', 'ATPathCriterion', '', False),
-    ), None, ['Title', 'Creator']
-    ),
+        # Lots
+        (
+            'searchlots',
+            (
+                ('Type', 'ATPortalTypeCriterion', ['Lot', ], ''),
+                ('path', 'ATPathCriterion', '', False),
+            ),
+            None, ['Title', 'Creator']
+        ),
+        # Equipments
+        (
+            'searchequipments',
+            (
+                ('Type', 'ATPortalTypeCriterion', ['Equipment', ], ''),
+                ('path', 'ATPathCriterion', '', False),
+            ),
+            None, ['Title', 'Creator']
+        ),
     )
 
     #add globaltemplates folder
@@ -1437,7 +1443,6 @@ def setAllowedFieldsOfVocabularies(context):
     modules = map(__import__, module_names)
 
 
-
 def addUrbanConfigsTopics(context):
     """
       Add the default topics of every urbanConfig
@@ -1450,43 +1455,62 @@ def addUrbanConfigsTopics(context):
             continue
         urbanConfig = getattr(tool, urban_type.lower())
         topicsInfo = (
-        #this will be used in the urban_view
-        # Portlet search "every licences"
-        ( 'searchalllicences',
-        (  ('Type', 'ATPortalTypeCriterion', urban_type),
-           ('path', 'ATPathCriterion', ''),
-        ), None, ['Title', 'CreationDate', 'Creator']
-        ),
-        # Portlet search "in_progress licences"
-        ( 'searchinprogresslicences',
-        (  ('Type', 'ATPortalTypeCriterion', urban_type),
-           ('path', 'ATPathCriterion', ''),
-        ), ('in_progress', ), ['Title', 'CreationDate', 'Creator']
-        ),
-        # Portlet search "retired licences"
-        ( 'searchretiredlicences',
-        (  ('Type', 'ATPortalTypeCriterion', urban_type),
-           ('path', 'ATPathCriterion', ''),
-        ), ('retired', ), ['Title', 'CreationDate', 'Creator']
-        ),
-        # Portlet search "incomplete licences"
-        ( 'searchincompletelicences',
-        (  ('Type', 'ATPortalTypeCriterion', urban_type),
-           ('path', 'ATPathCriterion', ''),
-        ), ('incomplete', ), ['Title', 'CreationDate', 'Creator']
-        ),
-        # Portlet search "accepted licences"
-        ( 'searchacceptedlicences',
-        (  ('Type', 'ATPortalTypeCriterion', urban_type),
-           ('path', 'ATPathCriterion', ''),
-        ), ('accepted', ), ['Title', 'CreationDate', 'Creator']
-        ),
-        # Portlet search "refused licences"
-        ( 'searchrefusedlicences',
-        (  ('Type', 'ATPortalTypeCriterion', urban_type),
-           ('path', 'ATPathCriterion', ''),
-        ), ('refused', ), ['Title', 'CreationDate', 'Creator']
-        ),
+            #this will be used in the urban_view
+            # Portlet search "every licences"
+            (
+                'searchalllicences',
+                (
+                    ('Type', 'ATPortalTypeCriterion', urban_type),
+                    ('path', 'ATPathCriterion', ''),
+                ),
+                None, ['Title', 'CreationDate', 'Creator']
+            ),
+            # Portlet search "in_progress licences"
+            (
+                'searchinprogresslicences',
+                (
+                    ('Type', 'ATPortalTypeCriterion', urban_type),
+                    ('path', 'ATPathCriterion', ''),
+                ),
+                ('in_progress', ), ['Title', 'CreationDate', 'Creator']
+            ),
+            # Portlet search "retired licences"
+            (
+                'searchretiredlicences',
+                (
+                    ('Type', 'ATPortalTypeCriterion', urban_type),
+                    ('path', 'ATPathCriterion', ''),
+                ),
+                ('retired', ),
+                ['Title', 'CreationDate', 'Creator']
+            ),
+            # Portlet search "incomplete licences"
+            (
+                'searchincompletelicences',
+                (
+                    ('Type', 'ATPortalTypeCriterion', urban_type),
+                    ('path', 'ATPathCriterion', ''),
+                ),
+                ('incomplete', ), ['Title', 'CreationDate', 'Creator']
+            ),
+            # Portlet search "accepted licences"
+            (
+                'searchacceptedlicences',
+                (
+                    ('Type', 'ATPortalTypeCriterion', urban_type),
+                    ('path', 'ATPathCriterion', ''),
+                ),
+                ('accepted', ), ['Title', 'CreationDate', 'Creator']
+            ),
+            # Portlet search "refused licences"
+            (
+                'searchrefusedlicences',
+                (
+                    ('Type', 'ATPortalTypeCriterion', urban_type),
+                    ('path', 'ATPathCriterion', ''),
+                ),
+                ('refused', ), ['Title', 'CreationDate', 'Creator']
+            ),
         )
         if not "topics" in urbanConfig.objectIds():
             topicsFolderId = urbanConfig.invokeFactory("Folder", id="topics", title=_("topics", 'urban', context=site.REQUEST))
@@ -1663,7 +1687,7 @@ def addTestUsers(context):
         if is_mountpoint:
             password = generatePassword(8)
         member = site.portal_registration.addMember(id="urbanmanager", password=password)
-        member.setMemberProperties({'ext_editor':True})
+        member.setMemberProperties({'ext_editor': True})
         password = 'urbanreader'
         if is_mountpoint:
             password = generatePassword(8)
@@ -1672,7 +1696,7 @@ def addTestUsers(context):
         if is_mountpoint:
             password = generatePassword(8)
         member = site.portal_registration.addMember(id="urbaneditor", password=password)
-        member.setMemberProperties({'ext_editor':True})
+        member.setMemberProperties({'ext_editor': True})
         password = 'urbanmapreader'
         if is_mountpoint:
             password = generatePassword(8)
@@ -1737,11 +1761,11 @@ def addTestObjects(context):
     fmFolder = getattr(tool, "foldermanagers")
     if not fmFolder.objectIds():
         fmFolder.invokeFactory("FolderManager", id="foldermanager1", name1="Dumont", name2="Jean",
-                                grade='agent-technique', manageableLicences=URBAN_TYPES, ploneUserId='admin')
+                               grade='agent-technique', manageableLicences=URBAN_TYPES, ploneUserId='admin')
         fmFolder.invokeFactory("FolderManager", id="foldermanager2", name1="Schmidt", name2="Alain",
-                                grade='directeur-general', manageableLicences=URBAN_TYPES)
+                               grade='directeur-general', manageableLicences=URBAN_TYPES)
         fmFolder.invokeFactory("FolderManager", id="foldermanager3", name1="Robert", name2="Patrick",
-                                grade='responsable-administratif', manageableLicences=URBAN_TYPES)
+                               grade='responsable-administratif', manageableLicences=URBAN_TYPES)
 
     tool = site.portal_urban
 
@@ -1854,45 +1878,44 @@ def addTestLicences(context):
         return None
 
     available_licence_types = {
-            'BuildLicence':{
-                'licenceSubject':"Exemple Permis Urbanisme",
-                'contact_type':'Applicant',
-                'contact_data': {
-                                 'personTitle':'masters', 'name1':'Smith &', 'name2':'Wesson',
-                                 'street':'Rue du porc dans le yaourt', 'number':'42', 'zipcode':'5032',
-                                 'city':'Couillet'
-                                },
+        'BuildLicence': {
+            'licenceSubject': "Exemple Permis Urbanisme",
+            'contact_type': 'Applicant',
+            'contact_data':  {
+                'personTitle': 'masters', 'name1': 'Smith &', 'name2': 'Wesson',
+                'street': 'Rue du porc dans le yaourt', 'number': '42', 'zipcode': '5032',
+                'city': 'Couillet'
             },
-            'ParcelOutLicence':{
-                'licenceSubject':"Exemple Permis d'urbanisation",
-                'contact_type':'Applicant',
-            },
-            'Declaration':{
-                'licenceSubject':"Exemple Déclaration",
-                'contact_type':'Applicant',
-            },
-            'Division':{
-                'licenceSubject':'Exemple Division',
-                'contact_type':'Proprietary',
-            },
-            'UrbanCertificateOne':{
-                'licenceSubject':'Exemple Certificat Urbanisme 1',
-                'contact_type':'Proprietary',
-            },
-            'UrbanCertificateTwo':{
-                'licenceSubject':'Exemple Certificat Urbanisme 2',
-                'contact_type':'Proprietary',
-            },
-            'NotaryLetter':{
-                'licenceSubject':'Exemple Lettre de notaire',
-                'contact_type':'Proprietary',
-            },
-            'MiscDemand':{
-                'licenceSubject':'Exemple Demande diverse',
-                'contact_type':'Applicant',
-            },
-
-     }
+        },
+        'ParcelOutLicence': {
+            'licenceSubject': "Exemple Permis d'urbanisation",
+            'contact_type': 'Applicant',
+        },
+        'Declaration': {
+            'licenceSubject': "Exemple Déclaration",
+            'contact_type': 'Applicant',
+        },
+        'Division': {
+            'licenceSubject': 'Exemple Division',
+            'contact_type': 'Proprietary',
+        },
+        'UrbanCertificateOne': {
+            'licenceSubject': 'Exemple Certificat Urbanisme 1',
+            'contact_type': 'Proprietary',
+        },
+        'UrbanCertificateTwo': {
+            'licenceSubject': 'Exemple Certificat Urbanisme 2',
+            'contact_type': 'Proprietary',
+        },
+        'NotaryLetter': {
+            'licenceSubject': 'Exemple Lettre de notaire',
+            'contact_type': 'Proprietary',
+        },
+        'MiscDemand': {
+            'licenceSubject': 'Exemple Demande diverse',
+            'contact_type': 'Applicant',
+        },
+    }
 
     odt_files = []
     for licence_type, values in available_licence_types.iteritems():
@@ -1917,20 +1940,20 @@ def addTestLicences(context):
         # add an applicant or a proprietary
         logger.info('   test %s --> add an applicant and a dummy parcel' % licence_type)
         contact_data = {
-            'personTitle':'mister', 'name1':'[Prénom XXX]', 'name2':'[Nom XXX]', 'street':'[Nom de rue XXX]',
-            'number':'[n° XXX]', 'zipcode':'[code postal XXX]', 'city':'[Ville XXX]'
+            'personTitle': 'mister', 'name1': '[Prénom XXX]', 'name2': '[Nom XXX]', 'street': '[Nom de rue XXX]',
+            'number': '[n° XXX]', 'zipcode': '[code postal XXX]', 'city': '[Ville XXX]'
         }
-        if values.has_key('contact_data'):
+        if 'contact_data' in values:
             contact_data = values['contact_data']
         licence.invokeFactory(values['contact_type'], id=site.generateUniqueId('contact'), **contact_data)
         # call post script
         licence.at_post_create_script()
         # add a dummy portion out
         portionout_data = {
-            'divisionCode':'[code XX]', 'division':'[division XX]', 'section':'[section XX]', 'radical':'[radical XX]',
-            'bis':'[bis XX]', 'exposant':'[exposant XX]', 'puissance':'[puissance XX]', 'partie':False
+            'divisionCode': '[code XX]', 'division': '[division XX]', 'section': '[section XX]', 'radical': '[radical XX]',
+            'bis': '[bis XX]', 'exposant': '[exposant XX]', 'puissance': '[puissance XX]', 'partie': False
         }
-        if values.has_key('portionout_data'):
+        if 'portionout_data' in values:
             portionout_data = values['portionout_data']
         portionout_id = licence.invokeFactory('PortionOut', id=site.generateUniqueId('parcelle'), **portionout_data)
         portionout = getattr(licence, portionout_id)
@@ -2013,7 +2036,7 @@ def setupExtra(context):
     #we add the map coordinates
     if not portal_urban.getMapExtent() or portal_urban.getMapExtent().count(', ') != 3:
         dic = portal_urban.queryDB("SELECT (Xmin(ext.extent) ||', '|| Ymin(ext.extent)||', '|| Xmax(ext.extent)||', '|| Ymax(ext.extent)) as coord FROM (SELECT Extent(the_geom) FROM capa) AS ext;")
-        if dic and dic[0].has_key('coord'):
+        if dic and 'coord' in dic[0]:
             portal_urban.setMapExtent(dic[0]['coord'])
 
     if not hasattr(portal_urban, "additional_layers"):
@@ -2064,19 +2087,20 @@ def setupExtra(context):
 #N° maison
     if not hasattr(aq_base(additional_layers), 'parcelles'):
         additional_layers.invokeFactory("Layer", id="parcelles", title=u"Parcelles", layers="urban%s:capa" % nis, SRS="ESPG:31370", transparent=False, visibility=True, layerFormat="image/png")
-        logger.info("Additional layer '%s' added"%'parcelles')
+        logger.info("Additional layer '%s' added" % 'parcelles')
     if not hasattr(aq_base(additional_layers), 'rues'):
         additional_layers.invokeFactory("Layer", id="rues", title=u"Nom des rues", layers="urban%s:toli" % nis, SRS="ESPG:31370", transparent=True, visibility=True, layerFormat="image/png")
-        logger.info("Additional layer '%s' added"%'rues')
+        logger.info("Additional layer '%s' added" % 'rues')
     if not hasattr(aq_base(additional_layers), 'batiments'):
         additional_layers.invokeFactory("Layer", id="batiments", title=u"Bâtiments", layers="urban%s:cabu" % nis, SRS="ESPG:31370", transparent=True, visibility=True, layerFormat="image/png")
-        logger.info("Additional layer '%s' added"%'batiments')
+        logger.info("Additional layer '%s' added" % 'batiments')
     if not hasattr(aq_base(additional_layers), 'num_parcelle'):
         additional_layers.invokeFactory("Layer", id="num_parcelle", title=u"N° de parcelle", layers="urban%s:canu" % nis, styles="ParcelsNum", SRS="ESPG:31370", transparent=True, visibility=False, layerFormat="image/png")
-        logger.info("Additional layer '%s' added"%'num_parcelle')
+        logger.info("Additional layer '%s' added" % 'num_parcelle')
     if not hasattr(aq_base(additional_layers), 'num_maisons'):
         additional_layers.invokeFactory("Layer", id="num_maisons", title=u"N° de maison", layers="urban%s:canu" % nis, styles="HousesNum", SRS="ESPG:31370", transparent=True, visibility=False, layerFormat="image/png")
-        logger.info("Additional layer '%s' added"%'num_maisons')
+        logger.info("Additional layer '%s' added" % 'num_maisons')
+
 
 def setHTMLContentType(folder, fieldName):
     """
