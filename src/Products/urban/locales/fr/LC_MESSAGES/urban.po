@@ -1187,7 +1187,7 @@ msgid "urban-demo"
 msgstr "Urbanisme démo (permis d'exemples)"
 
 msgid "urban-extra"
-msgstr "Urbanisme extra"
+msgstr "Urbanisme extra (valeurs de config et modèles par defaut)"
 
 msgid "urban-labruyere"
 msgstr "Urbanisme La Bruyère"
@@ -1197,10 +1197,6 @@ msgstr "Urbanisme migrations"
 
 msgid "urban-sambreville"
 msgstr "Urbanisme Sambreville"
-
-# extension profile
-msgid "urban-tests"
-msgstr "Urbanisme tests"
 
 #. Default: Set the number of days the alert will be shown before the deadline delay
 msgid "urban_alertdelay_descr"

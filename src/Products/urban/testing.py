@@ -15,17 +15,17 @@ URBAN_Z2 = z2.IntegrationTesting(bases=(z2.STARTUP, URBAN_ZCML),
 URBAN = PloneWithPackageLayer(
     zcml_filename="testing.zcml",
     zcml_package=Products.urban,
-    additional_z2_products=('Products.urban','Products.CMFPlacefulWorkflow'),
+    additional_z2_products=('Products.urban', 'Products.CMFPlacefulWorkflow'),
     gs_profile_id='Products.urban:default',
     name="URBAN")
 
 URBAN_TESTS_PROFILE_DEFAULT = PloneWithPackageLayer(
-    bases=(URBAN, ),
+    bases=(URBAN,),
     zcml_filename="testing.zcml",
     zcml_package=Products.urban,
-    additional_z2_products=('Products.urban',),
-    gs_profile_id='Products.urban:default',
+    gs_profile_id='Products.urban:tests',
     name="URBAN_TESTS_PROFILE_DEFAULT")
+
 
 class UrbanTestLayer(Layer):
 

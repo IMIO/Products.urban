@@ -1198,7 +1198,7 @@ msgid "urban-sambreville"
 msgstr ""
 
 # extension profile
-msgid "urban-tests"
+msgid "urban-extra"
 msgstr ""
 
 #. Default: Set the number of days the alert will be shown before the deadline delay

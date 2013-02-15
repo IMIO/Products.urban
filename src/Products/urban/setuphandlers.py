@@ -33,8 +33,7 @@ from zope import event
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Archetypes.event import EditBegunEvent
 from Products.CMFPlacefulWorkflow.PlacefulWorkflowTool import WorkflowPolicyConfig_id
-from exportimport import addUrbanEventTypes
-from exportimport import addGlobalTemplates
+from exportimport import updateAllUrbanTemplates
 from Products.urban.utils import generatePassword
 from datetime import date
 ##/code-section HEAD
@@ -96,7 +95,6 @@ def postInstall(context):
 
 def corePostInstall(context, refresh=True):
     # all installation custom code required for tests
-
     if isNoturbanProfile(context):
         return
 
@@ -161,6 +159,10 @@ def corePostInstall(context, refresh=True):
     logger.info("adaptDefaultPortal : starting...")
     adaptDefaultPortal(context)
     logger.info("adaptDefaultPortal : Done")
+    #install the urbanskin if available
+    logger.info("installUrbanskin : starting...")
+    installUrbanskin(context)
+    logger.info("installUrbanskin : Done")
     if refresh:
         #refresh catalog after all these objects have been added...
         logger.info("Refresh portal_catalog : starting...")
@@ -170,23 +172,23 @@ def corePostInstall(context, refresh=True):
 
 def extraPostInstall(context, refresh=True):
     # all installation custom code not required for tests
-
-    if isNoturbanProfile(context):
+    import ipdb; ipdb.set_trace()
+    if context.readDataFile('urban_extra_marker.txt') is None:
         return
 
+    site = context.getSite()
     logger.info("addUrbanConfigs : starting...")
     addUrbanConfigs(context)
     logger.info("addUrbanConfigs : Done")
+    logger.info("addEventTypesAndTemplates : starting...")
+    addDefaultEventTypesAndTemplates(context)
+    logger.info("addEventTypesAndTemplates : Done")
     logger.info("addUrbanConfigsTopics : starting...")
     addUrbanConfigsTopics(context)
     logger.info("addUrbanConfigsTopics : Done")
     logger.info("addLicencesection : starting...")
     addLicencesCollection(context)
     logger.info("addLicencesCollection : Done")
-    #install the urbanskin if available
-    logger.info("installUrbanskin : starting...")
-    installUrbanskin(context)
-    logger.info("installUrbanskin : Done")
     if refresh:
         #refresh catalog after all these objects have been added...
         logger.info("Refresh portal_catalog : starting...")
@@ -650,7 +652,7 @@ def addUrbanConfigs(context):
                 newFolder.invokeFactory("UrbanVocabularyTerm", id="reconnaissance-economique", title=u"Périmètre de reconnaissance économique", description="<p>est repris dans un périmètre de reconnaissance économique;</p>")
                 newFolder.invokeFactory("UrbanVocabularyTerm", id="site-seveso", title=u"A moins de 2000m d'un site SEVESO", description="<p>est situé à moins de 2000m d'un site classé SEVESO à savoir [...];</p>")
                 newFolder.invokeFactory("UrbanVocabularyTerm", id="gestion-des-sols", title=u"Gestion des sols", description="<p>état des sols, nous ne sommes pas en mesure de déterminer si le bien est ou pas inscrit dans la banque de données au sens de l'article 10 du décret du 5 décembre 2008 relatif à la gestion des sols (Décret du 05 décembre 2008, art.89, al.2)</p>")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="galeries-minieres", title=u"Galeries minières", description="<p>est situé dans une région traversée par de nombreuses galeries minières et nous ne sommes pas en mesure de déterminer l'état de celle-ci, veuillez donc prendre vos renseignements auprès du SPW - Département de l'Environnement et de l'Eau - " \
+                newFolder.invokeFactory("UrbanVocabularyTerm", id="galeries-minieres", title=u"Galeries minières", description="<p>est situé dans une région traversée par de nombreuses galeries minières et nous ne sommes pas en mesure de déterminer l'état de celle-ci, veuillez donc prendre vos renseignements auprès du SPW - Département de l'Environnement et de l'Eau - "
                                         "Direction des risques industriels, géologique et miniers - Cellules sous-sol/géologique - Avenue Prince de Liège, 15 à 5100 Jambes;  Le bien est situé sur une zone de consultation en liaison avec les gisements et puits de mine;</p>")
 
             if not hasattr(aq_base(configFolder), 'opinionstoaskifworks'):
@@ -1449,11 +1451,6 @@ def addGlobalFolders(context):
         newFolder.invokeFactory("UrbanVocabularyTerm", id="favorable-defaut", title=u"Réputé favorable par défaut")
 
 
-def setAllowedFieldsOfVocabularies(context):
-    module_names = [class_name for class_name in ADD_CONTENT_PERMISSIONS.keys()]
-    modules = map(__import__, module_names)
-
-
 def addUrbanConfigsTopics(context):
     """
       Add the default topics of every urbanConfig
@@ -1602,7 +1599,11 @@ def adaptDefaultPortal(context):
 
     #hide de sendto action
     #set visible = 0
-    site.portal_actions.document_actions.sendto.manage_changeProperties(visible=False)
+    try:
+        site.portal_actions.document_actions.sendto.manage_changeProperties(visible=False)
+    except AttributeError:
+        #the 'front-page' object does not exist...
+        pass
 
 
 def addApplicationFolders(context):
@@ -1722,11 +1723,11 @@ def addTestUsers(context):
         pass
 
 
-def addTestObjects(context):
+def addDefaultObjects(context):
     """
        Add some users and objects for test purpose...
     """
-    if context.readDataFile('urban_tests_marker.txt') is None:
+    if context.readDataFile('urban_extra_marker.txt') is None:
         return
     #add some users, some architects and some foldermanagers...
     #add 3 users, one as manager, one as reader and one as editor...
@@ -1771,6 +1772,7 @@ def addTestObjects(context):
     tool = site.portal_urban
     fmFolder = getattr(tool, "foldermanagers")
     if not fmFolder.objectIds():
+        #import ipdb; ipdb.set_trace()
         fmFolder.invokeFactory("FolderManager", id="foldermanager1", name1="Dumont", name2="Jean",
                                grade='agent-technique', manageableLicences=URBAN_TYPES, ploneUserId='admin')
         fmFolder.invokeFactory("FolderManager", id="foldermanager2", name1="Schmidt", name2="Alain",
@@ -1778,19 +1780,21 @@ def addTestObjects(context):
         fmFolder.invokeFactory("FolderManager", id="foldermanager3", name1="Robert", name2="Patrick",
                                grade='responsable-administratif', manageableLicences=URBAN_TYPES)
 
-    tool = site.portal_urban
-
     #create some streets using the Extensions.imports script
     if not tool.streets.objectIds('City'):
         from Products.urban.Extensions.imports import import_streets_fromfile, import_localities_fromfile
         import_streets_fromfile(tool)
         import_localities_fromfile(tool)
 
-    #add some generic templates in configuration
-    addGlobalTemplates(context)
 
-    #add default UrbanEventTypes for documents generation
-    addUrbanEventTypes(context)
+def addDefaultEventTypesAndTemplates(context):
+    """
+     Add default urban event types and their default document templates
+    """
+    site = context.getSite()
+    tool = site.portal_urban
+    #add global templates, default UrbanEventTypes and their templates for documents generation
+    updateAllUrbanTemplates(context)
     #add OpinionRequest UrbanEventTypes by notifying the creation of their corresponding OrganisationTerm
     for licence_type in ['BuildLicence', 'UrbanCertificateTwo', 'ParcelOutLicence', 'EnvClassThree']:
         for organisation_term in getattr(tool, licence_type.lower()).foldermakers.objectValues():
@@ -1832,11 +1836,11 @@ def setDefaultValues(context):
         licence_config.setTextDefaultValues([{'text': text, 'fieldname': field} for field, text in defaulttexts.iteritems()])
 
 
-def addTestLicences(context):
+def addDemoLicences(context):
     """
     Create one dummy licence of each type, and generate all their associated events and documents.
     """
-    if context.readDataFile('urban_tests_marker.txt') is None:
+    if context.readDataFile('urban_demo_marker.txt') is None:
         return
 
     site = context.getSite()
