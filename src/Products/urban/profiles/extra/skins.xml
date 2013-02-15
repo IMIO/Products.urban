@@ -18,15 +18,15 @@
  <object name="urban_templates"
          meta_type="Filesystem Directory View"
          directory="urban/skins/urban_templates"/>
- 
+
  <skin-path name="*">
-  <layer insert-after="custom" 
+  <layer insert-after="custom"
          name="urban_images"/>
-  <layer insert-after="custom" 
+  <layer insert-after="custom"
          name="urban_plone"/>
-  <layer insert-after="custom" 
+  <layer insert-after="custom"
          name="urban_styles"/>
-  <layer insert-after="custom" 
+  <layer insert-after="custom"
          name="urban_templates"/>
  </skin-path>
 

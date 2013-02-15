@@ -3,14 +3,6 @@
   <version>1.1.7</version>
   <!-- ##code-section METADATA -->
   <dependencies>
-    <dependency>profile-Products.DataGridField:default</dependency>
-    <dependency>profile-collective.datagridcolumns:default</dependency>
-    <dependency>profile-Products.MasterSelectWidget:default</dependency>
-    <dependency>profile-collective.externaleditor:default</dependency>
-    <dependency>profile-collective.js.jqueryui:default</dependency>
-    <dependency>profile-communesplone.urban.schedule:default</dependency>
-    <dependency>profile-communesplone.iconified_document_actions:default</dependency>
-    <dependency>profile-plone.app.referenceintegrity:default</dependency>
     <dependency>profile-Products.CMFPlacefulWorkflow:CMFPlacefulWorkflow</dependency>
   </dependencies>
   <!-- ##/code-section METADATA -->
