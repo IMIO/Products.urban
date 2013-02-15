@@ -3,14 +3,3 @@ City1;1000;2;Street2
 City2;1001;3;Street1
 City2;1001;4;Street2
 City2;1001;5;Street3
-City2;1001;6;Street4
-City3;1002;7;Street1
-City3;1002;8;Street2
-City3;1002;9;Street3
-City3;1002;10;Street4
-City3;1002;11;Street5
-City3;1002;12;Street6
-City3;1002;13;Street7
-City3;1002;14;Street8
-City3;1002;15;Street9
-City3;1002;16;Street10
