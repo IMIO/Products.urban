@@ -6,16 +6,18 @@ from Products.urban.events.filesEvents import updateTemplateStylesEvent
 import logging
 logger = logging.getLogger('urban: setuphandlers')
 
+
 def loga(msg, type="info", gslog=None):
     if not gslog:
         gslog = logging.getLogger('urban: setuphandlers')
-    if type=="info":
+    if type == "info":
         gslog.info(msg)
-    elif type=="warning":
+    elif type == "warning":
         gslog.warning(msg)
-    elif type=="warn":
+    elif type == "warn":
         gslog.warn(msg)
     return msg
+
 
 def updateTemplates(context, container, templates, starting_position='', reload=False, replace_mod=False):
     log = []
@@ -32,10 +34,11 @@ def updateTemplates(context, container, templates, starting_position='', reload=
         position_after = log[-1][0]
     return log
 
+
 def updateTemplate(context, container, template, new_content, position_after='', reload=False, replace_mod=False):
     def setProperty(file, property_name, property_value):
         if property_name in file.propertyIds():
-            file.manage_changeProperties({property_name:property_value})
+            file.manage_changeProperties({property_name: property_value})
         else:
             file.manage_addProperty(property_name, property_value, "string")
 
@@ -75,7 +78,7 @@ def updateTemplate(context, container, template, new_content, position_after='',
     #else create a new template
     else:
         new_template_id = container.invokeFactory("UrbanDoc", id=new_template_id, title=template['title'], file=new_content,
-                                                  TALCondition=template.has_key('TALCondition') and template['TALCondition'] or '')
+                                                  TALCondition=('TALCondition' in template) and template['TALCondition'] or '')
         new_template = getattr(container, new_template_id)
         status.append('created')
 
@@ -87,17 +90,19 @@ def updateTemplate(context, container, template, new_content, position_after='',
         moveElementAfter(new_template, container, 'id', position_after)
     else:
         container.moveObjectToPosition(new_template.getId(), 0)
-    for property, value in {'profileName':profile_name, 'md5Loaded':new_md5_signature, 'md5Modified':new_md5_signature}.items():
+    for property, value in {'profileName': profile_name, 'md5Loaded': new_md5_signature, 'md5Modified': new_md5_signature}.items():
         setProperty(new_template, property, value)
     updateTemplateStylesEvent(new_template, None)
     new_template.reindexObject()
     return status
 
+
 def updateAllUrbanTemplates(context):
-    if context.readDataFile('urban_marker.txt') is None:
+    if context.readDataFile('urban_extra_marker.txt') is None:
         return
     addGlobalTemplates(context)
     addUrbanEventTypes(context)
+
 
 def addGlobalTemplates(context):
     """
@@ -114,9 +119,9 @@ def addGlobalTemplates(context):
     replace_mod_globals = False
     site = context.getSite()
     # we check if the step is called by the external method urban_replace_templates, with the param replace_globals
-    if site.REQUEST.form.has_key('reload_globals'):
+    if 'reload_globals' in site.REQUEST.form:
         reload_globals = True
-    if site.REQUEST.form.has_key('replace_mod_globals'):
+    if 'replace_mod_globals' in site.REQUEST.form:
         replace_mod_globals = True
 
     log = []
@@ -126,8 +131,9 @@ def addGlobalTemplates(context):
     template_log = updateTemplates(context, templates_folder, globalTemplates, replace_mod=replace_mod_globals, reload=reload_globals)
     for status in template_log:
         if status[1] != 'no changes':
-            log.append(loga("'global templates', template='%s' => %s"%(status[0], status[1]), gslog=gslogger))
+            log.append(loga("'global templates', template='%s' => %s" % (status[0], status[1]), gslog=gslogger))
     return '\n'.join(log)
+
 
 def addUrbanEventTypes(context):
     """
@@ -147,9 +153,9 @@ def addUrbanEventTypes(context):
     replace_mod_events = False
     site = context.getSite()
     # we check if the step is called by the external method urban_replace_templates, with the param replace_events
-    if site.REQUEST.form.has_key('reload_events'):
+    if 'reload_events' in site.REQUEST.form:
         reload_events = True
-    if site.REQUEST.form.has_key('replace_mod_events'):
+    if 'replace_mod_events' in site.REQUEST.form:
         replace_mod_events = True
 
     log = []
@@ -167,9 +173,9 @@ def addUrbanEventTypes(context):
         for uet in urbanEventTypes[urbanConfigId]:
             id = uet['id']
             #we pass every informations including the 'id' in the 'uet' dict
-            folderEvent=getattr(uetFolder,id,None)
+            folderEvent = getattr(uetFolder, id, None)
             if folderEvent:
-                newUet=folderEvent
+                newUet = folderEvent
             else:
                 newUetId = uetFolder.invokeFactory("UrbanEventType", **uet)
                 newUet = getattr(uetFolder, newUetId)
@@ -177,11 +183,11 @@ def addUrbanEventTypes(context):
                     moveElementAfter(newUet, uetFolder, 'id', last_urbaneventype_id)
                 else:
                     uetFolder.moveObjectToPosition(newUet.getId(), 0)
-                log.append(loga("%s: event='%s' => %s"%(urbanConfigId, id, 'created'), gslog=gslogger))
+                log.append(loga("%s: event='%s' => %s" % (urbanConfigId, id, 'created'), gslog=gslogger))
             last_urbaneventype_id = id
             #add the Files in the UrbanEventType
             template_log = updateTemplates(context, newUet, uet['podTemplates'], replace_mod=replace_mod_events, reload=reload_events)
             for status in template_log:
                 if status[1] != 'no changes':
-                    log.append(loga("%s: evt='%s', template='%s' => %s"%(urbanConfigId, last_urbaneventype_id, status[0], status[1]), gslog=gslogger))
+                    log.append(loga("%s: evt='%s', template='%s' => %s" % (urbanConfigId, last_urbaneventype_id, status[0], status[1]), gslog=gslogger))
     return '\n'.join(log)
