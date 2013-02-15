@@ -2,6 +2,6 @@
 <metadata>
   <version>1</version>
    <dependencies>
-     <dependency>profile-Products.urban:default</dependency>
+     <dependency>profile-Products.urban:extra</dependency>
    </dependencies>
 </metadata>

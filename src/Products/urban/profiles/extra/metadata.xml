@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <metadata>
   <dependencies>
+    <dependency>profile-Products.urban:default</dependency>
     <dependency>profile-Products.DataGridField:default</dependency>
     <dependency>profile-collective.datagridcolumns:default</dependency>
     <dependency>profile-Products.MasterSelectWidget:default</dependency>

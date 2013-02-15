@@ -1,28 +1,29 @@
 <?xml version="1.0"?>
 <import-steps>
+
  <import-step
-    id="urban-Update-RoleMappings"
-    handler="Products.urban.setuphandlers.updateRoleMappings"
-    title="Update Workflow role mappings for urban"
+    id="urban-addGlobalFolders"
+    handler="Products.urban.setuphandlers.addGlobalFolders"
+    title="Add global config folders with test values"
     version="2013-01-04T11:30:41.455297">
-   updates the workflow role mappings for urban
+   Add global config folders with test values
  </import-step>
 
  <import-step
-    id="urban-corePostInstall"
-    handler="Products.urban.setuphandlers.corePostInstall"
-    title="manual coded post-install for urban"
+    id="urban-addUrbanConfigs"
+    handler="Products.urban.setuphandlers.addUrbanConfigs"
+    title="Add local config folders with test values"
     version="2013-01-04T11:30:41.455297">
-   manual coded post-install for urban
+   Add local config folders with test values
  </import-step>
 
  <import-step
-             id="urban-addDefaultObjects"
-             handler="Products.urban.setuphandlers.addDefaultObjects"
-             title="Add some objects for test purpose"
-             version="2008-10-15T15:00:00.00000">
-   <dependency step="urban-extraPostInstall"/>
- Add some objects for test purpose
+    id="urban-addDefaultObjects"
+    handler="Products.urban.setuphandlers.addDefaultObjects"
+    title="Add some objects for test purpose"
+    version="2008-10-15T15:00:00.00000">
+   <dependency step="urban-addGlobalFolders"/>
+ Add default config values for test purpose
  </import-step>
 
 </import-steps>

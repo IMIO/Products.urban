@@ -71,7 +71,7 @@ def setupHideToolsFromNavigation(context):
 def updateRoleMappings(context):
     """after workflow changed update the roles mapping. this is like pressing
     the button 'Update Security Setting' and portal_workflow"""
-    if isNoturbanProfile(context):
+    if context.readDataFile('urban_extra_marker.txt') is None:
         return
     wft = getToolByName(context.getSite(), 'portal_workflow')
     wft.updateRoleMappings()
@@ -150,9 +150,6 @@ def corePostInstall(context, refresh=True):
     logger.info("setDefaultApplicationSecurity : starting...")
     setDefaultApplicationSecurity(context)
     logger.info("setDefaultApplicationSecurity : Done")
-    logger.info("addGlobalFolders : starting...")
-    addGlobalFolders(context)
-    logger.info("addGlobalFolders : Done")
     logger.info("addUrbanGroups : starting...")
     addUrbanGroups(context)
     logger.info("addUrbanGroups : Done")
@@ -172,14 +169,19 @@ def corePostInstall(context, refresh=True):
 
 def extraPostInstall(context, refresh=True):
     # all installation custom code not required for tests
-    import ipdb; ipdb.set_trace()
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
 
     site = context.getSite()
+    logger.info("addGlobalFolders : starting...")
+    addGlobalFolders(context)
+    logger.info("addGlobalFolders : Done")
     logger.info("addUrbanConfigs : starting...")
     addUrbanConfigs(context)
     logger.info("addUrbanConfigs : Done")
+    logger.info("addDefaultObjects : starting...")
+    addDefaultObjects(context)
+    logger.info("addDefaultObjects : Done")
     logger.info("addEventTypesAndTemplates : starting...")
     addDefaultEventTypesAndTemplates(context)
     logger.info("addEventTypesAndTemplates : Done")
@@ -228,12 +230,37 @@ def setUrbanConfigWFPolicy(context):
     wf_tool.updateRoleMappings()
 
 
+def setFolderAllowedTypes(folder, portal_types):
+    """
+    """
+    if type(portal_types) != list:
+        portal_types = [portal_types]
+    folder.setConstrainTypesMode(1)
+    folder.setLocallyAllowedTypes(portal_types)
+    folder.setImmediatelyAddableTypes(portal_types)
+
+
+def createFolderVocabulary(folder, vocabulary_list, portal_type):
+    """
+    """
+    for voc in vocabulary_list[1:]:
+        folder.invokeFactory(portal_type, **voc)
+
+
 def addUrbanConfigs(context):
     """
       Add the different urban configs
     """
+    if context.readDataFile('urban_extra_marker.txt') is None:
+        return
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
+
+    profile_name = context._profile_path.split('/')[-1]
+    module_name = 'Products.urban.profiles.%s.config_default_values' % profile_name
+    attribute = 'default_values'
+    module = __import__(module_name, fromlist=[attribute])
+    default_values = getattr(module, attribute)
 
     for urban_type in URBAN_TYPES:
         licenceConfigId = urban_type.lower()
@@ -252,38 +279,16 @@ def addUrbanConfigs(context):
         if not hasattr(aq_base(configFolder), 'urbaneventtypes'):
             newFolderid = configFolder.invokeFactory("Folder", id="urbaneventtypes", title=_("urbaneventtypes_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
-            newFolder.setConstrainTypesMode(1)
-            newFolder.setLocallyAllowedTypes(['UrbanEventType'])
-            newFolder.setImmediatelyAddableTypes(['UrbanEventType'])
+            setFolderAllowedTypes(newFolder, 'UrbanEventType')
 
         #add TownshipFolderCategories folder
         if not hasattr(aq_base(configFolder), 'townshipfoldercategories'):
             newFolderid = configFolder.invokeFactory("Folder", id="townshipfoldercategories", title=_("townshipfoldercategories_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
-            newFolder.setConstrainTypesMode(1)
-            newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-            newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="abattre", title=u"Abattre")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="abri-animaux", title=u"Abri pour animaux")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="abri-jardin", title=u"Abri de jardin")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="car-port", title=u"Car-port")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="changement-de-destination", title=u"Changement de destination")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="clotures-murs", title=u"Clôtures et murs")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="commerce", title=u"Commerce")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="demolition", title=u"Démolition")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="divers", title=u"Divers")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="enseigne", title=u"Enseigne")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="immeuble-appartements", title=u"Immeuble à appartements")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="modification-relief", title=u"Modification du relief du sol")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="module-electrite", title=u"Modules de production d'électricité ou de chaleur")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="nouvelle-habitation", title=u"Nouvelle habitation")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="nouveau-logement", title=u"Nouveau logement dans un bâtiment existant")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="parking", title=u"Parking")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="piscine", title=u"Piscine")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="recouvrement-toiture", title=u"Remplacement de parement de façade ou de recouvrement de toiture")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="transformation", title=u"Transformation d'une habitation existante")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="transformation-facade", title=u"Transformation d'une façade")
-            newFolder.invokeFactory("UrbanVocabularyTerm", id="veranda", title=u"Véranda")
+            vocabulary_list = default_values['townshipfoldercategories']
+            portal_type = vocabulary_list[0]
+            setFolderAllowedTypes(newFolder, portal_type)
+            createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
         #add FolderCategories folder
         if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'Declaration', 'Division', 'MiscDemand']:
@@ -307,369 +312,96 @@ def addUrbanConfigs(context):
                     newFolder.invokeFactory("UrbanVocabularyTerm", id="lapm", title=u"LAP/M (modification du permis de lotir avec avis du FD)")
                     newFolder.invokeFactory("UrbanVocabularyTerm", id="ldc", title=u"LDC (permis de lotir dans un PCA, lotissement ou en décentralisation)")
                     newFolder.invokeFactory("UrbanVocabularyTerm", id="ldcm", title=u"LDC/M (modification du permis de lotir dans un PCA, RCU, LOTISSEMENT)")
-                #categories for UrbanCertificateOnes
+                    #categories for UrbanCertificateOnes
                 elif urban_type in ['UrbanCertificateOne']:
                     newFolder.invokeFactory("UrbanVocabularyTerm", id="cu1", title=u"CU1 (certificat d'urbanisme 1)")
-                #categories for UrbanCertificateTwos
+                    #categories for UrbanCertificateTwos
                 elif urban_type in ['UrbanCertificateTwo']:
                     newFolder.invokeFactory("UrbanVocabularyTerm", id="cu2", title=u"CU2 (certificat d'urbanisme 2)")
-                #categories for Declarations
+                    #categories for Declarations
                 elif urban_type in ['Declaration']:
-                        newFolder.invokeFactory("UrbanVocabularyTerm", id="dup", title=u"DUP (Déclaration Urbanistique Préalable)")
-                #categories for Divisions
+                    newFolder.invokeFactory("UrbanVocabularyTerm", id="dup", title=u"DUP (Déclaration Urbanistique Préalable)")
+                    #categories for Divisions
                 elif urban_type in ['Division']:
-                        newFolder.invokeFactory("UrbanVocabularyTerm", id="dup", title=u"DIV (Division notariale)")
-                #categories for MiscDemands
+                    newFolder.invokeFactory("UrbanVocabularyTerm", id="dup", title=u"DIV (Division notariale)")
+                    #categories for MiscDemands
                 elif urban_type in ['MiscDemand']:
-                        newFolder.invokeFactory("UrbanVocabularyTerm", id="apct", title=u"Avis préalable construction ou transformation")
-                        newFolder.invokeFactory("UrbanVocabularyTerm", id="appu", title=u"Avis préalable permis d'urbanisation")
-                        newFolder.invokeFactory("UrbanVocabularyTerm", id="apd", title=u"Avis préalable de division")
-                        newFolder.invokeFactory("UrbanVocabularyTerm", id="dre", title=u"Demande de raccordement à l'égout")
-                        newFolder.invokeFactory("UrbanVocabularyTerm", id="div", title=u"Divers")
+                    newFolder.invokeFactory("UrbanVocabularyTerm", id="apct", title=u"Avis préalable construction ou transformation")
+                    newFolder.invokeFactory("UrbanVocabularyTerm", id="appu", title=u"Avis préalable permis d'urbanisation")
+                    newFolder.invokeFactory("UrbanVocabularyTerm", id="apd", title=u"Avis préalable de division")
+                    newFolder.invokeFactory("UrbanVocabularyTerm", id="dre", title=u"Demande de raccordement à l'égout")
+                    newFolder.invokeFactory("UrbanVocabularyTerm", id="div", title=u"Divers")
 
         if urban_type in ['Declaration', ]:
             #add "Articles" folder
             if not hasattr(aq_base(configFolder), 'articles'):
                 newFolderid = configFolder.invokeFactory("Folder", id="articles", title=_("articles_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_1", title=u"article 263 §1er 1° les aménagements conformes à la destination normale des cours et jardins", extraValue="263 §1er 1°",
-                                        description="« article 263 §1er 1° les aménagements conformes à la destination normale des cours et jardins pour autant qu’ils relèvent des actes et travaux visés à l’article 262, 4°, b, d, e et g, mais n’en remplissent pas les conditions; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_2", title=u"article 263 §1er 2° la pose ou l'enlèvement d'un car-port <30m²", extraValue="263 §1er 2°",
-                                        description="« article 263 §1er 2° par propriété, la pose ou l’enlèvement d’un car port d’une superficie maximale de 30, 00 m² qui ne respecte pas les conditions visées à l’article 262, 5°, f; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_3", title=u"article 263 §1er 3° l'ouverture ou la modification de baies", extraValue="263 §1er 3°",
-                                        description="« article 263 §1er 3° l’ouverture ou la modification de baies autres que celles visées à l’article 262, 9° et 10°, de même aspect architectural que les baies existantes; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_4", title=u"article 263 §1er 4° le remplacement de parements d'élévation/couverture de toiture par plus isolants", extraValue="263 §1er 4°",
-                                        description="« article 263 §1er 4° le remplacement de parements d’élévation et de couvertures de toiture par des parements et couvertures isolants visés à l’article 262, 11°, qui n’en remplissent pas les conditions; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_5a", title=u"article 263 §1er 5° a) la construction d'un volume secondaire en contiguïté <30m²", extraValue="263 §1er 5° a)",
-                                        description="« article 263 §1er 5° a) par propriété, la construction ou le remplacement d’un volume secondaire par un volume secondaire, sans étage s’il est érigé en contiguïté avec un bâtiment existant, à l’arrière de ce bâtiment ou en recul d’au moins 4, 00 m de l’alignement ou raccordé à ce bâtiment par un volume à toiture plate; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_5b", title=u"article 263 §1er 5° b) la construction d'un volume secondaire isolé <30m²", extraValue="263 §1er 5° b)",
-                                        description="« article 263 §1er 5° b) par propriété, la construction ou le remplacement d’un volume secondaire par un volume secondaire, sans étage s’il est isolé et érigé à l’arrière d’un bâtiment existant; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_6a", title=u"article 263 §1er 6° a) la construction d'un abri pour un ou des animaux", extraValue="263 §1er 6° a)",
-                                        description="« article 263 §1er 6° a) dans les cours et jardins, les abris pour un ou des animaux; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_6b", title=u"article 263 §1er 6° b) la pose d'un rucher", extraValue="263 §1er 6° b)",
-                                        description="« article 263 §1er 6° b) dans les cours et jardins, un rucher, sans préjudice de l’application des dispositions visées au Code rural; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_6c", title=u"article 263 §1er 6° c) Clôtures/portiques/portillons", extraValue="263 §1er 6° c)",
-                                        description="« article 263 §1er 6° c) dans les cours et jardins, la pose de clôtures, de portiques ou de portillons autres que ceux visés à l’article 262, 5°, e; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_6d", title=u"article 263 §1er 6° d) Etang/piscine non couverte < 75m²", extraValue="263 §1er 6° d)",
-                                        description="« article 263 §1er 6° d) dans les cours et jardins, par propriété, pour autant qu’ils soient situés à l’arrière de l’habitation, la création d’un étang ou d’une piscine non couverte n’excédant pas 75, 00 m² pour autant que les déblais nécessaires à ces aménagements n’entraînent aucune modification sensible du relief naturel du sol sur le reste de la propriété; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_7", title=u"article 263 §1er 7° Démolition <30 m²", extraValue="263 §1er 7°",
-                                        description="« article 263 §1er 7° la démolition de constructions sans étage ni sous-sol;")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_8a", title=u"article 263 §1er 8° a) les silos de stockage", extraValue="263 §1er 8° a)",
-                                        description="« article 263 §1er 8° a) pour les exploitations agricoles, la construction de silos de stockage en tout ou en partie enterrés, pour autant que le niveau supérieur des murs de soutènement n’excède pas de 1, 50 m le niveau du relief naturel du sol; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_8b", title=u"article 263 §1er 8° b) les dalles de fumière", extraValue="263 §1er 8° b)",
-                                        description="« article 263 §1er 8° b) pour les exploitations agricoles, l’établissement d’une dalle de fumière; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_8c", title=u"article 263 §1er 8° c) les citernes de récolte ou de stockage d'eau/effluents d'élevage", extraValue="263 §1er 8° c)",
-                                        description="« article 263 §1er 8° c) pour les exploitations agricoles, la pose de citernes de récolte ou de stockage d’eau ou d’effluents d’élevage, en tout ou en partie enterrées, pour autant que le niveau supérieur du mur de soutènement n’excède pas 0, 50 m et que les citernes soient implantées à 10, 00 m minimum de tout cours d’eau navigable ou non navigable, à 3, 00 m minimum du domaine public et à 20, 00 m minimum de toute habitation autre que celle de l’exploitant; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_9", title=u"article 263 §1er 9° la culture de sapins de Noël", extraValue="263 §1er 9°",
-                                        description="« article 263 §1er 9° la culture de sapins de Noël pour une période ne dépassant pas douze ans; »")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="263_1_10", title=u"article 263 §1er 10° les miradors", extraValue="263 §1er 10°",
-                                        description="« article 263 §1er 10° dans la zone contiguë à la zone forestière, les miradors en bois visés à l’article 1er, § 1er, 9°, de la loi du 28 février 1882 sur la chasse; »")
+                vocabulary_list = default_values['articles']
+                portal_type = vocabulary_list[0]
+                setFolderAllowedTypes(newFolder, portal_type)
+                createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
         if urban_type == 'ParcelOutLicence':
             if not hasattr(aq_base(configFolder), 'lotusages'):
                 newFolderid = configFolder.invokeFactory("Folder", id="lotusages", title=_("lotusages_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="buildable", title=u"Lot bâtissable")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="greenzone", title=u"Espace vert")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="tosurrendertotown", title=u"Lot à rétrocéder à la commune")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="autre", title=u"Autre")
+                vocabulary_list = default_values['lotusages']
+                portal_type = vocabulary_list[0]
+                setFolderAllowedTypes(newFolder, portal_type)
+                createFolderVocabulary(newFolder, vocabulary_list, portal_type)
             if not hasattr(aq_base(configFolder), 'equipmenttypes'):
                 newFolderid = configFolder.invokeFactory("Folder", id="equipmenttypes", title=_("folderequipmenttypes_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="telecom", title=u"Télécomunication")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="electricity", title=u"Electricité")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="gas", title=u"Gaz")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="teledistribution", title=u"Télédistribution")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="sewers", title=u"Egouttage")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="water", title=u"Eau")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="autre", title=u"Autre")
+                vocabulary_list = default_values['equipmenttypes']
+                portal_type = vocabulary_list[0]
+                setFolderAllowedTypes(newFolder, portal_type)
+                createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
         if urban_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter']:
             #we add the specific features folder
             if not hasattr(aq_base(configFolder), 'specificfeatures'):
                 newFolderid = configFolder.invokeFactory("Folder", id="specificfeatures", title=_("urban_label_specificFeatures", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="schema-developpement-espace-regional",
-                    title=u"Option particulière du schéma de développement de l'espace régional",
-                    description="<p>fait l'objet d'une option particulière du schéma de développement de l'espace régional, à savoir ...;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="situe-en-zone", title=u"Situé en Zone [...]",
-                    description="<p>est situé en [[python: object.getValueForTemplate('folderZone')]] au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="plan-de-secteur", title=u"Plan de secteur",
-                    description="<p>est situé - dans un périmètre ... - en [[python: object.getValueForTemplate('folderZone')]] au projet - de révision du - de - plan de secteur de ... adopté par ... du ...;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="plan-communal-ammenagement",
-                    title=u"En Plan Communal d'Aménagement",
-                    description="<p>est situé en [[python: object.getValueForTemplate('folderZone')]] dans le périmètre du plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: '/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]] et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="plan-communal-ammenagement-revision",
-                    title=u"En Plan Communal d'Aménagement (révision)",
-                    description="<p>est situé en [[python: object.getValueForTemplate('folderZone')]] dans le périmètre du projet - de révision du - de - plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: '/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]];</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="perimetre-lotissement",
-                    title=u"Dans un lot dans le périmètre d'un lotissement",
-                    description="<p>est situé sur le(s) lot(s) n° [[python: object.getValueForTemplate('subdivisionDetails')]] dans le périmètre du lotissement [[python: object.getValueForTemplate('parcellings', subfield='label')]]non périmé autorisé du [[python: '/'.join(object.getValueForTemplate('parcellings', subfield='authorizationDate').split()[0].split('/')[::-1]) ]];</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="ssc", title=u"Schéma de structure communal",
-                    description="<p> est situé en [[python: object.getValueForTemplate('SSC')]] au schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="ssc-revision", title=u"Schéma de structure communal (révision)",
-                    description="<p> est situé en [[python: object.getValueForTemplate('SSC')]] au projet de - révision du - de - schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="rcu", title=u"Règlement communal d'urbanisme",
-                    description="<p>est situé sur le territoire ou la partie du territoire communal où le règlement régional d'urbanisme [[python: object.getValueForTemplate('folderZone') ]] est applicable;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="rcu-approuve", title=u"Règlement communal d'urbanisme (approuvé)",
-                    description="<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue')]] est applicable;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="rcu-revision", title=u"Règlement communal d'urbanisme (révision)",
-                    description="<p>est situé sur le territoire ou la partie du territoire communal visé(e) par le projet - de révision du - de - règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue')]] est applicable;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="rcu-approuve-provisoirement",
-                    title=u"Règlement communal d'urbanisme (approuvé provisoirement)",
-                    description="<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé provisoirement par [[python: ', '.join(object.getValuesForTemplate('RCU', subfield='extraValue')) ]] est applicable;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="rcu-unite-paysagere-urbaine",
-                    title=u"Règlement communal d'urbanisme (Unité paysagère urbaine)",
-                    description="<p>est situé en unité paysagère urbaine de bâtisse en ordre continu Art.15 au règlement communal d'urbanisme en vigueur;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="natura-2000", title=u"Site Natura 2000",
-                    description="<p>est situé dans le périmètre d'un site Natura 2000 visé par l'article 1bis alinéa unique 18° de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que de la faune et de la flore sauvages;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="natura-2000-art6",
-                    title=u"Natura 2000 (article 6 de la loi du 12 juillet 1973)",
-                    description="<p>est situé dans le périmètre d'un territoire désigné en vertu de l'article 6 de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que de la faune et de la flore sauvages;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="zone-prise-eau", title=u"Zone de prise d'eau",
-                    description="<p>est situé dans une zone de prise d'eau, de prévention ou de surveillance au sens du décret du 30 avril 1990 relatif à la protection et l'exploitation des eaux souterraines et des eaux potabilisables modifié la dernière fois par le décret du 15 avril 1999 relatif au cycle de l'eau et instituant une société publique de gestion de l'eau;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="plan-expropriation", title=u"Plan d'expropriation",
-                    description="<p> est situé dans les limites d'un plan d'expropriation approuvé par ... du ... ; le pouvoir expropriant est : ...;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="droit-de-preemption", title=u"Droit de préemption",
-                    description="<p>est situé dans un périmètre d'application du droit de préemption arrêté par ... du ...; le(s) bénéficiaires(s) du droit de préemption est (sont) : ...;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="perimetre-site-desaffecte", title=u"Périmètre site désaffecté",
-                    description="<p>est situé dans le périmètre du site d'activité économique désaffecté suivant : ...;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="revitalisation-urbaine", title=u"Revitalisation urbaine",
-                    description="<p>est situé dans un périmètre de revitalisation urbaine;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="renovation-urbaine", title=u"Rénovation urbaine",
-                    description="<p>est situé dans un périmètre de rénovation urbaine;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="classe", title=u"Classé (article 196 du CWATUPE)",
-                    description="<p>est - inscrit sur la liste de sauvegarde visée à l'article 193 - classé en application de l'article 196 - situé dans une zone de protection visée à l'article 209 - localisé dans un site repris à l'inventaire des sites archéologiques visés à l'article 233 - du Code précité;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="raccordable-egout", title=u"Raccordable à l'égout",
-                    description="<p>est actuellement raccordable à l'égout selon les normes fixées par le Service Technique Communal;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="raccordable-egout-prevision", title=u"Raccordable à l'égout (prévision)",
-                    description="<p>sera raccordable à l'égout selon les prévisions actuelles;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="zone-faiblement-habitee",
-                    title=u"Zone faiblement habitée (épuration individuelle)",
-                    description="<p>est situé dans une des zones faiblement habitée qui ne seront pas pourvue d'égout et qui feront l'objet d'une épuration individuelle;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="voirie-suffisamment-equipee", title=u"Voirie suffisamment équipée",
-                    description="<p>bénéficie d'un accès à une voirie suffisamment équipée en eau, électricité, pourvue d'un revêtement solide et d'une largeur suffisante compte tenu de la situation des lieux;</p>"
-                )
+                vocabulary_list = default_values['specificfeatures']
+                portal_type = vocabulary_list[0]
+                setFolderAllowedTypes(newFolder, portal_type)
+                createFolderVocabulary(newFolder, vocabulary_list, portal_type)
                 setHTMLContentType(newFolder, 'description')
 
             if not hasattr(aq_base(configFolder), 'roadspecificfeatures'):
                 newFolderid = configFolder.invokeFactory("Folder", id="roadspecificfeatures", title=_("urban_label_roadSpecificFeatures", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="raccordable-egout", title=u"Raccordable à l'égout",
-                    description="<p>est actuellement raccordable à l'égout selon les normes fixées par le Service Technique Communal;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="raccordable-egout-prevision", title=u"Raccordable à l'égout (prévision)",
-                    description="<p>sera raccordable àl'égout selon les prévisions actuelles;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="zone-faiblement-habitee",
-                    title=u"Zone faiblement habitée (épuration individuelle)",
-                    description="<p>est situé dans une des zones faiblement habitée qui ne seront pas pourvue d'égout et qui feront l'objet d'une épuration individuelle;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="voirie-suffisamment-equipee", title=u"Voirie suffisamment équipée",
-                    description="<p>bénéficie d'un accès à une voirie suffisamment équipée en eau, électricité, pourvue d'un revêtement solide et d'une largeur suffisante compte tenu de la situation des lieux;</p>"
-                )
+                vocabulary_list = default_values['roadspecificfeatures']
+                portal_type = vocabulary_list[0]
+                setFolderAllowedTypes(newFolder, portal_type)
+                createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
             if not hasattr(aq_base(configFolder), 'locationspecificfeatures'):
                 newFolderid = configFolder.invokeFactory("Folder", id="locationspecificfeatures", title=_("urban_label_locationSpecificFeatures", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="schema-developpement-espace-regional",
-                    title=u"Option particulière du schéma de développement de l'espace régional",
-                    description="<p>fait l'objet d'une option particulière du schéma de développement de l'espace régional, à savoir ...;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="situe-en-zone", title=u"Situé en Zone [...]",
-                    description="<p>est situé en [[python: object.getValueForTemplate('folderZone')]] au plan de secteur de ... adopté par ... du ... et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="plan-de-secteur", title=u"Plan de secteur",
-                    description="<p>est situé - dans un périmètre ... - en [[python: object.getValueForTemplate('folderZone')]] au projet - de révision du - de - plan de secteur de ... adopté par ... du ...;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="plan-communal-ammenagement",
-                    title=u"En Plan Communal d'Aménagement",
-                    description="<p>est situé en [[python: object.getValueForTemplate('folderZone')]] dans le périmètre du plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: '/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]] et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="plan-communal-ammenagement-revision",
-                    title=u"En Plan Communal d'Aménagement (révision)",
-                    description="<p>est situé en [[python: object.getValueForTemplate('folderZone')]] dans le périmètre du projet - de révision du - de - plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: '/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]];</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="perimetre-lotissement",
-                    title=u"Dans un lot dans le périmètre d'un lotissement",
-                    description="<p>est situé sur le(s) lot(s) n° [[python: object.getValueForTemplate('subdivisionDetails')]] dans le périmètre du lotissement [[python: object.getValueForTemplate('parcellings', subfield='label')]]non périmé autorisé du [[python: '/'.join(object.getValueForTemplate('parcellings', subfield='authorizationDate').split()[0].split('/')[::-1]) ]];</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="ssc", title=u"Schéma de structure communal",
-                    description="<p> est situé en [[python: object.getValueForTemplate('SSC')]] au schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="ssc-revision", title=u"Schéma de structure communal (révision)",
-                    description="<p> est situé en [[python: object.getValueForTemplate('SSC')]] au projet de - révision du - de - schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="rcu", title=u"Règlement communal d'urbanisme",
-                    description="<p>est situé sur le territoire ou la partie du territoire communal où le règlement régional d'urbanisme [[python: object.getValueForTemplate('folderZone') ]] est applicable;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="rcu-approuve", title=u"Règlement communal d'urbanisme (approuvé)",
-                    description="<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue')]] est applicable;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="rcu-revision", title=u"Règlement communal d'urbanisme (révision)",
-                    description="<p>est situé sur le territoire ou la partie du territoire communal visé(e) par le projet - de révision du - de - règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue')]] est applicable;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="rcu-approuve-provisoirement",
-                    title=u"Règlement communal d'urbanisme (approuvé provisoirement)",
-                    description="<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé provisoirement par [[python: ', '.join(object.getValuesForTemplate('RCU', subfield='extraValue')) ]] est applicable;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="rcu-unite-paysagere-urbaine",
-                    title=u"Règlement communal d'urbanisme (Unité paysagère urbaine)",
-                    description="<p>est situé en unité paysagère urbaine de bâtisse en ordre continu Art.15 au règlement communal d'urbanisme en vigueur;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="natura-2000", title=u"Site Natura 2000",
-                    description="<p>est situé dans le périmètre d'un site Natura 2000 visé par l'article 1bis alinéa unique 18° de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que de la faune et de la flore sauvages;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="natura-2000-art6",
-                    title=u"Natura 2000 (article 6 de la loi du 12 juillet 1973)",
-                    description="<p>est situé dans le périmètre d'un territoire désigné en vertu de l'article 6 de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que de la faune et de la flore sauvages;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="zone-prise-eau", title=u"Zone de prise d'eau",
-                    description="<p>est situé dans une zone de prise d'eau, de prévention ou de surveillance au sens du décret du 30 avril 1990 relatif à la protection et l'exploitation des eaux souterraines et des eaux potabilisables modifié la dernière fois par le décret du 15 avril 1999 relatif au cycle de l'eau et instituant une société publique de gestion de l'eau;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="plan-expropriation", title=u"Plan d'expropriation",
-                    description="<p> est situé dans les limites d'un plan d'expropriation approuvé par ... du ... ; le pouvoir expropriant est : ...;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="droit-de-preemption", title=u"Droit de préemption",
-                    description="<p>est situé dans un périmètre d'application du droit de préemption arrêté par ... du ...; le(s) bénéficiaires(s) du droit de préemption est (sont) : ...;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="perimetre-site-desaffecte", title=u"Périmètre site désaffecté",
-                    description="<p>est situé dans le périmètre du site d'activité économique désaffecté suivant : ...;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="revitalisation-urbaine", title=u"Revitalisation urbaine",
-                    description="<p>est situé dans un périmètre de revitalisation urbaine;</p>"
-                )
-                newFolder.invokeFactory(
-                    "UrbanVocabularyTerm", id="classe", title=u"Classé (article 196 du CWATUPE)",
-                    description="<p>est - inscrit sur la liste de sauvegarde visée à l'article 193 - classé en application de l'article 196 - situé dans une zone de protection visée à l'article 209 - localisé dans un site repris à l'inventaire des sites archéologiques visés à l'article 233 - du Code précité;</p>"
-                )
+                vocabulary_list = default_values['locationspecificfeatures']
+                portal_type = vocabulary_list[0]
+                setFolderAllowedTypes(newFolder, portal_type)
+                createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
             #we add the custom township specific features folder
             if not hasattr(aq_base(configFolder), 'townshipspecificfeatures'):
                 newFolderid = configFolder.invokeFactory("Folder", id="townshipspecificfeatures", title=_("urban_label_townshipSpecificFeatures", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="zone-a-risque", title=u"Se trouve dans une zone à risque", description="<p>se trouve dans une zone à risque (faible moyen élevé) dans la cartographie Aléa d'inondation par débordement de cours d'eau - dressée dans le cadre du plan P.L.U.I.E.S et annexée à l'arrêté du Gouvernement Wallon, adopté en date du 13 juillet 2008;</p>")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="insalubrite", title=u"Est frappé d'un Arrêté d'insalubrité", description="<p>est frappé d'un Arrêté d'insalubrité OU d'un permis de location datant du [...] - Le futur acquéreur est invité à prendre contact avec le Service Logement Salubrité (tél. : [...]) pour de plus amples informations;</p>")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="infraction-urbanistique", title=u"Infraction urbanistique", description="<p>fait l'objet d'une infraction urbanistique reconnue par notre Administration communale portant sur [...];</p>")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="cu1", title=u"Certificat d'Urbanisme 1 dans les deux ans", description="<p>a fait l'objet, dans les deux dernières années, d'un Certificat d'Urbanisme n°1 datant du [...] et portant la référence [...];</p>")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="permis-urbanisme", title=u"Permis d'Urbanisme depuis 1976", description="<p>a fait l'objet depuis 1976 d'un permis d'urbanisme daté de [...] pour [...] - REFUS/ACCEPTE - Réf.: [...];</p>")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="reconnaissance-economique", title=u"Périmètre de reconnaissance économique", description="<p>est repris dans un périmètre de reconnaissance économique;</p>")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="site-seveso", title=u"A moins de 2000m d'un site SEVESO", description="<p>est situé à moins de 2000m d'un site classé SEVESO à savoir [...];</p>")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="gestion-des-sols", title=u"Gestion des sols", description="<p>état des sols, nous ne sommes pas en mesure de déterminer si le bien est ou pas inscrit dans la banque de données au sens de l'article 10 du décret du 5 décembre 2008 relatif à la gestion des sols (Décret du 05 décembre 2008, art.89, al.2)</p>")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="galeries-minieres", title=u"Galeries minières", description="<p>est situé dans une région traversée par de nombreuses galeries minières et nous ne sommes pas en mesure de déterminer l'état de celle-ci, veuillez donc prendre vos renseignements auprès du SPW - Département de l'Environnement et de l'Eau - "
-                                        "Direction des risques industriels, géologique et miniers - Cellules sous-sol/géologique - Avenue Prince de Liège, 15 à 5100 Jambes;  Le bien est situé sur une zone de consultation en liaison avec les gisements et puits de mine;</p>")
+                vocabulary_list = default_values['townshipspecificfeatures']
+                portal_type = vocabulary_list[0]
+                setFolderAllowedTypes(newFolder, portal_type)
+                createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
             if not hasattr(aq_base(configFolder), 'opinionstoaskifworks'):
                 #add "Ask opinions to in case of works" folder
                 newFolderid = configFolder.invokeFactory("Folder", id="opinionstoaskifworks", title=_("opinionstoaskifworks_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['OrganisationTerm'])
-                newFolder.setImmediatelyAddableTypes(['OrganisationTerm'])
-                newFolder.invokeFactory("OrganisationTerm", id="ores-gaz-electricite", title=u"ORES - Gaz-Electricité", description=u"<p>Adresse</p>")
-                newFolder.invokeFactory("OrganisationTerm", id="ores-eclairage-public", title=u"ORES - Service Eclairage public", description=u"<p>Adresse</p>")
-                newFolder.invokeFactory("OrganisationTerm", id="belgacom", title=u"Belgacom", description=u"<p>Adresse</p>")
-                newFolder.invokeFactory("OrganisationTerm", id="fluxsys", title=u"Fluxsys", description=u"<p>Adresse</p>")
-                newFolder.invokeFactory("OrganisationTerm", id="air-liquide", title=u"Air Liquide - Div. Belge - Service des Canalisations", description=u"<p>Adresse</p>")
-                newFolder.invokeFactory("OrganisationTerm", id="elia-asset-sud", title=u"Elia Asset Sud", description=u"<p>Adresse</p>")
-                newFolder.invokeFactory("OrganisationTerm", id="swde", title=u"SWDE (Société Wallone de Distribution d'Eau)", description=u"<p>Adresse</p>")
-                newFolder.invokeFactory("OrganisationTerm", id="voo", title=u"Voo", description=u"<p>Adresse</p>")
+                vocabulary_list = default_values['opinionstoaskifworks']
+                portal_type = vocabulary_list[0]
+                setFolderAllowedTypes(newFolder, portal_type)
+                createFolderVocabulary(newFolder, vocabulary_list, portal_type)
                 #now, we need to specify that the description's mimetype is 'text/html'
                 setHTMLContentType(newFolder, 'description')
 
@@ -706,29 +438,10 @@ def addUrbanConfigs(context):
                 #add Makers folder
                 newFolderid = configFolder.invokeFactory("Folder", id="foldermakers", title=_("foldermakers_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['OrganisationTerm'])
-                newFolder.setImmediatelyAddableTypes(['OrganisationTerm'])
-                newFolder.invokeFactory("OrganisationTerm", id="service-pop", title=u"Service population", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="spw-dgo1", title=u"SPW-DGO1", description=u'<p>Direction Générale opérationnelle<br />Département du réseau de Namur et du Luxembourg<br />District 131.12 - SPY<br />37, Route de Saussin<br />5190 Spy</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="dgrne", title=u"DGRNE", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="dnf", title=u"DNF", description=u'<p>39, Avenue Reine Astrid<br />5000 Namur</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="stp", title=u"Service Technique Provincial", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="pi", title=u"Prévention Incendie", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="bec", title=u"Bureau d'études communal", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="svp", title=u"Service Voyer Principal", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="agriculture", title=u"Agriculture", description=u'<p>Direction Générale opérationnelle<br />Agriculture, Ressources naturelles et Environnement<br />Service extérieur de Wavre<br />4, Avenue Pasteur<br />1300 Wavre</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="pn", title=u"Parc Naturel", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="crmsf", title=u"Commission Royale des Monuments, Sites et Fouilles", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="swde", title=u"SWDE", description=u'<p>14, Rue Joseph Saintraint<br />5000 Namur</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="ccatm", title=u"CCATM", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="inasep", title=u"INASEP", description=u'<p>1b, Rue des Viaux<br />5100 Naninne</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="belgacom", title=u"Belgacom", description=u'<p>60, Rue Marie Henriette<br />5000 Namur</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="spge", title=u"SPGE", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="cibe", title=u"CIBE/Vivaqua", description=u'<p>70, Rue aux Laines<br />1000 Bruxelles</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="sncb", title=u"SNCB", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="infrabel", title=u"Infrabel", description=u'<p>Infrastructure ferroviaire<br />2/003, Place des Guillemins<br />4000 Liège</p>')
-                newFolder.invokeFactory("OrganisationTerm", id="voo", title=u"VOO", description=u'<p>1, Rue xxx<br />xxxx Commune</p>')
+                vocabulary_list = default_values['foldermakers']
+                portal_type = vocabulary_list[0]
+                setFolderAllowedTypes(newFolder, portal_type)
+                createFolderVocabulary(newFolder, vocabulary_list, portal_type)
                 #now, we need to specify that the description's mimetype is 'text/html'
                 setHTMLContentType(newFolder, 'description')
 
@@ -741,51 +454,28 @@ def addUrbanConfigs(context):
                 #add Delays folder
                 newFolderid = configFolder.invokeFactory("Folder", id="folderdelays", title=_("folderdelays_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanDelay'])
-                newFolder.setImmediatelyAddableTypes(['UrbanDelay'])
-                newFolder.invokeFactory("UrbanDelay", id="30j", title=u"30 jours", deadLineDelay=30, alertDelay=20)
-                newFolder.invokeFactory("UrbanDelay", id="70j", title=u"70 jours", deadLineDelay=70, alertDelay=20)
-                newFolder.invokeFactory("UrbanDelay", id="75j", title=u"75 jours", deadLineDelay=75, alertDelay=20)
-                newFolder.invokeFactory("UrbanDelay", id="115j", title=u"115 jours", deadLineDelay=115, alertDelay=20)
-                newFolder.invokeFactory("UrbanDelay", id="230j", title=u"230 jours", deadLineDelay=230, alertDelay=20)
-                newFolder.invokeFactory("UrbanDelay", id="art127", title=u"Article 127", deadLineDelay=0, alertDelay=20)
-                newFolder.invokeFactory("UrbanDelay", id="inconnu", title=u"Inconnu", deadLineDelay=0, alertDelay=20)
+                vocabulary_list = default_values['folderdelays']
+                portal_type = vocabulary_list[0]
+                setFolderAllowedTypes(newFolder, portal_type)
+                createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
             if not hasattr(aq_base(configFolder), 'derogations'):
                 #add the derogations folder
                 newFolderid = configFolder.invokeFactory("Folder", id="derogations", title=_("derogations_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="dero-ps", title=u"au Plan de secteur")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="dero-pca", title=u"au Plan Communal d'Aménagement")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="dero-rru", title=u"au Règlement Régional d'Urbanisme")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="dero-rcu", title=u"au Règlement Communal d'Urbanisme")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="dero-lot", title=u"au Lotissement")
+                vocabulary_list = default_values['derogations']
+                portal_type = vocabulary_list[0]
+                setFolderAllowedTypes(newFolder, portal_type)
+                createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
             if not hasattr(aq_base(configFolder), 'folderbuildworktypes'):
                 #add BuildWorkTypes folder
                 newFolderid = configFolder.invokeFactory("Folder", id="folderbuildworktypes", title=_("folderbuildworktype_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="ncmu", title=u"Nouvelle construction - Maison unifamiliale", extraValue='N_UNI')
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="ncia", title=u"Nouvelle construction - Immeuble appartements", extraValue='N_APPART')
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="nca", title=u"Nouvelle construction - Autres", extraValue='N_AUT')
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="tmu", title=u"Transformation - maison unifamiliale", extraValue='T_UNI')
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="tia", title=u"Transformation - immeuble appartements", extraValue='T_APPART')
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="tab", title=u"Transformation - autre bâtiment", extraValue='T_AUT')
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="dg", title=u"Démolition - Général", extraValue='DEM')
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="lg", title=u"Lotissement - Général", extraValue='LOT')
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="tnbg", title=u"Transformation Non-bâti - Général", extraValue='T_NBAT')
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="td", title=u"Taudis", extraValue='TAUDIS')
-                # !!! NOT SURE ABOUT  extraValue='INT' . TO BE CHECKED AND CORRECTED !!!
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="integration", title=u"Intégration dans voirie publique", extraValue='INT')
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="leasing", title=u"Leasing (pour mémoire SPF Finances)", extraValue='LEASING')
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="autres", title=u"Autres", extraValue='AUTRE')
+                vocabulary_list = default_values['folderbuildworktypes']
+                portal_type = vocabulary_list[0]
+                setFolderAllowedTypes(newFolder, portal_type)
+                createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
         if urban_type in ['BuildLicence', ]:
             #add PEB categories folder
@@ -805,25 +495,18 @@ def addUrbanConfigs(context):
             if not hasattr(aq_base(configFolder), 'inadmissibilityreasons'):
                 newFolderid = configFolder.invokeFactory("Folder", id="inadmissibilityreasons", title=_("inadmissibilityreasons_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="missing_parts", title=u"Pièces/renseignements manquants")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="no_deposit_receipt", title=u"Le dossier n'a pas été déposé contre récipissé")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="no_recommanded_deposit", title=u"Le dossier n'a pas été envoyé par recommandé")
+                vocabulary_list = default_values['inadmissibilityreasons']
+                portal_type = vocabulary_list[0]
+                setFolderAllowedTypes(newFolder, portal_type)
+                createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
             if not hasattr(aq_base(configFolder), 'applicationreasons'):
                 newFolderid = configFolder.invokeFactory("Folder", id="applicationreasons", title=_("applicationreasons_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="new_business", title=u"Mise en activité d'un établissement nouveau")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="class_change", title=u"Maintien en activité d'un établissement qui vient d'être rangé en classe 3 suite à une modification de la liste des installations et activités classées")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="licence_expiration", title=u"Maintien en activité d’un établissement dont la durée de validité de la déclaration est arrivée à expiration")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="restart_old_business", title=u"Remise en activité d’un établissement existant")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="transformation", title=u"Extension ou de la transformation d’un établissement ancien")
-                newFolder.invokeFactory("UrbanVocabularyTerm", id="location_move", title=u"Déplacement de l’établissement")
+                vocabulary_list = default_values['applicationreasons']
+                portal_type = vocabulary_list[0]
+                setFolderAllowedTypes(newFolder, portal_type)
+                createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
 
 def addRubricValues(context, class_type, config_folder):
@@ -1102,8 +785,16 @@ def addGlobalFolders(context):
     """
     Add folders with properties used by several licence types
     """
+    if context.readDataFile('urban_extra_marker.txt') is None:
+        return
     site = context.getSite()
     tool = site.portal_urban
+
+    profile_name = context._profile_path.split('/')[-1]
+    module_name = 'Products.urban.profiles.%s.config_default_values' % profile_name
+    attribute = 'default_values'
+    module = __import__(module_name, fromlist=[attribute])
+    default_values = getattr(module, attribute)
 
     #add global topics
     #a criterion can have 4 values if necessary
@@ -1133,27 +824,21 @@ def addGlobalFolders(context):
         globaltemplatesFolderid = tool.invokeFactory("Folder", id="globaltemplates",
                                                      title=_("globaltemplates_folder_title", 'urban', context=site.REQUEST))
         globaltemplatesFolder = getattr(tool, globaltemplatesFolderid)
-        globaltemplatesFolder.setConstrainTypesMode(1)
-        globaltemplatesFolder.setLocallyAllowedTypes(['UrbanDoc'])
-        globaltemplatesFolder.setImmediatelyAddableTypes(['UrbanDoc'])
+        setFolderAllowedTypes(globaltemplatesFolder, 'UrbanDoc')
 
     #add foldermanagers folder
     if not hasattr(tool, "foldermanagers"):
         foldermanagersFolderid = tool.invokeFactory("Folder", id="foldermanagers",
                                                     title=_("foldermanagers_folder_title", 'urban', context=site.REQUEST))
         foldermanagersFolder = getattr(tool, foldermanagersFolderid)
-        foldermanagersFolder.setConstrainTypesMode(1)
-        foldermanagersFolder.setLocallyAllowedTypes(['FolderManager'])
-        foldermanagersFolder.setImmediatelyAddableTypes(['FolderManager'])
+        setFolderAllowedTypes(foldermanagersFolder, 'FolderManager')
 
     if not hasattr(tool, "topics"):
         topicsFolderId = tool.invokeFactory("Folder", id="topics", title=_("topics", 'urban', context=site.REQUEST))
         topicsFolder = getattr(tool, topicsFolderId)
         #restrict the addable types to "ATTopic"
         #Add these searches for portal_urban
-        topicsFolder.setConstrainTypesMode(1)
-        topicsFolder.setLocallyAllowedTypes(['Topic'])
-        topicsFolder.setImmediatelyAddableTypes(['Topic'])
+        setFolderAllowedTypes(topicsFolder, 'Topic')
     else:
         topicsFolder = getattr(tool, "topics")
     for topicId, topicCriteria, stateValues, topicViewFields in topicsInfo:
@@ -1193,262 +878,167 @@ def addGlobalFolders(context):
     if not hasattr(tool, "pcas"):
         newFolderid = tool.invokeFactory("Folder", id="pcas", title=_("pcas_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['PcaTerm'])
-        newFolder.setImmediatelyAddableTypes(['PcaTerm'])
-        newFolder.invokeFactory("PcaTerm", id="pca1", label=u"Plan communal d'aménagement 1", number='1', decreeDate="2009/01/01", decreeType="royal")
-        newFolder.invokeFactory("PcaTerm", id="pca2", label=u"Plan communal d'aménagement 2", number='2', decreeDate="2008/06/23", decreeType="royal")
-        newFolder.invokeFactory("PcaTerm", id="pca3", label=u"Plan communal d'aménagement 3", number='3', decreeDate="2001/12/13", decreeType="departmental")
+        vocabulary_list = default_values['pcas']
+        portal_type = vocabulary_list[0]
+        setFolderAllowedTypes(newFolder, portal_type)
+        createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
     #add the streets folder
     if not hasattr(tool, "streets"):
         newFolderid = tool.invokeFactory("Folder", id="streets", title=_("streets_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['City'])
-        newFolder.setImmediatelyAddableTypes(['City'])
+        setFolderAllowedTypes(newFolder, 'City')
 
     if not hasattr(tool, "pashs"):
         #add pashs folder
         newFolderid = tool.invokeFactory("Folder", id="pashs", title=_("pashs_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zone-epuration-collective", title=u"Zone d'assainissement collectif")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zone-transitoire", title=u"Zone d'assainissement transitoire")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zone-epuration-individuelle", title=u"Zone d'assainissement individuel")
+        vocabulary_list = default_values['pashs']
+        portal_type = vocabulary_list[0]
+        setFolderAllowedTypes(newFolder, portal_type)
+        createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
     #add global folderroadtypes folder
     if not hasattr(tool, "folderroadtypes"):
         newFolderid = tool.invokeFactory("Folder", id="folderroadtypes", title=_("folderroadtypes_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="com", title=u"Communale")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="priv", title=u"Privée")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="prov", title=u"Provinciale")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="reg", title=u"Régionale")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="vic", title=u"Vicinale")
+        vocabulary_list = default_values['pcas']
+        portal_type = vocabulary_list[0]
+        setFolderAllowedTypes(newFolder, portal_type)
+        createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
     if not hasattr(tool, 'folderprotectedbuildings'):
         #add ProtectedBuildings folder
         newFolderid = tool.invokeFactory("Folder", id="folderprotectedbuildings", title=_("folderprotectedbuildings_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="classe", title=u"classé ou assimilé")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="certificatpatrimoine", title=u"certificat de patrimoine délivré")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zoneprotection", title=u"zone de protection")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="reprisinventaire", title=u"repris à l'inventaire")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="archeologique", title=u"à l'Atlas archéologique")
+        vocabulary_list = default_values['folderprotectedbuildings']
+        portal_type = vocabulary_list[0]
+        setFolderAllowedTypes(newFolder, portal_type)
+        createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
     if not hasattr(tool, 'folderroadequipments'):
         #add RoadEquipments folder
         newFolderid = tool.invokeFactory("Folder", id="folderroadequipments", title=_("folderroadequipments_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="eau", title=u"distribution d'eau")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="electricite", title=u"distribution électrique")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="epuration", title=u"canalisation reliée à une station d'épuration publique")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="nonepuration", title=u"canalisation non-reliée à une station d'épuration publique")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="egoutsep", title=u"réseau d'égoutage séparatif")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="pascollecteeaux", title=u"pas de canalisation de collecte des eaux")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="fosse", title=u"fossé")
+        vocabulary_list = default_values['folderroadequipments']
+        portal_type = vocabulary_list[0]
+        setFolderAllowedTypes(newFolder, portal_type)
+        createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
     if not hasattr(tool, "folderroadcoatings"):
         #add RoadCoatings folder
         newFolderid = tool.invokeFactory("Folder", id="folderroadcoatings", title=_("folderroadcoatings_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="filetseau", title=u"Filets d'eau")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="bordures", title=u"Bordures")
+        vocabulary_list = default_values['folderroadcoatings']
+        portal_type = vocabulary_list[0]
+        setFolderAllowedTypes(newFolder, portal_type)
+        createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
     #add Zones folder
     if not hasattr(tool, "folderzones"):
         newFolderid = tool.invokeFactory("Folder", id="folderzones", title=_("folderzones_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zh", title=u"zone d'habitat")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zhcr", title=u"zone d'habitat à caractère rural")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zhcrza", title=u"zone d’habitat à caractère rural sur +/- 50 m et le surplus en zone agricole")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zspec", title=u"zone de services publics et d'équipements communautaires")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zcet", title=u"zone de centre d'enfouissement technique")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zl", title=u"zone de loisirs")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zaem", title=u"zones d'activité économique mixte")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zaei", title=u"zones d'activité économique industrielle")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zaesae", title=u"zones d'activité économique spécifique agro-économique")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zaesgd", title=u"zones d'activité économique spécifique grande distribution")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ze", title=u"zone d'extraction")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zadci", title=u"zone d'aménagement différé à caractère industriel")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="za", title=u"zone agricole")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zf", title=u"zone forestière")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zev", title=u"zone d'espaces verts")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zn", title=u"zone naturelle")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="zp", title=u"zone de parc")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="znatura2000", title=u"zone Natura 2000")
+        vocabulary_list = default_values['folderzones']
+        portal_type = vocabulary_list[0]
+        setFolderAllowedTypes(newFolder, portal_type)
+        createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
     #add the RCU folder
     if not hasattr(tool, "rcu"):
         newFolderid = tool.invokeFactory("Folder", id="rcu", title=_("rcu_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        #add some examples
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="rcu-aire-a", title=u"Aire A habitat centre des villages")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="rcu-aire-b", title=u"Aire B habitat hors centre des villages")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="rcu-aire-c", title=u"Aire C rives des habitats")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="rcu-aire-d", title=u"Aire D activités économiques")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="rcu-aire-e", title=u"Aire E dominante rurale")
+        vocabulary_list = default_values['rcu']
+        portal_type = vocabulary_list[0]
+        setFolderAllowedTypes(newFolder, portal_type)
+        createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
     #add the SSC folder
     if not hasattr(tool, "ssc"):
         newFolderid = tool.invokeFactory("Folder", id="ssc", title=_("ssc_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        #add some examples
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-centre-ville", title=u"Zone d'habitat urbain de centre-ville")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-suburbain", title=u"Zone d'habitat suburbain")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-services-publics", title=u"Zone de services publics et d'équipements communautaires")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-industrielle", title=u"Zone industrielle")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-industrielle-verte", title=u"Zone industrielle verte")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-militaire", title=u"Zone militaire")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-habitat-urban-differe", title=u"Zone d'habitat urbain à aménagement différé")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-extraction", title=u"Zone d'extraction")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-loisirs", title=u"Zone de loisirs et de séjours")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-agricole", title=u"Zone agricole")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-vert-social", title=u"Zone d'espace vert social")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-vert-eco", title=u"Zone d'espace vert ecologique")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-vert-mixte", title=u"Zone d'espace vert mixte")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-naturelle", title=u"Zone naturelle")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-forestiere", title=u"Zone forestière")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-forestiere-mixte", title=u"Zone forestière mixte")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-activites-economiques-mixtes", title=u"Zone d'activités économiques mixtes")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="ssc-activites-economiques-tertiaires", title=u"Zone d'activités économiques tertiaires")
+        vocabulary_list = default_values['ssc']
+        portal_type = vocabulary_list[0]
+        setFolderAllowedTypes(newFolder, portal_type)
+        createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
     #add the exploitation conditions folder
     if not hasattr(tool, "exploitationconditions"):
         conditionsid = tool.invokeFactory("Folder", id="exploitationconditions", title=_("exploitationconditions_folder_title", 'urban', context=site.REQUEST))
         conditions = getattr(tool, conditionsid)
-        conditions.setConstrainTypesMode(1)
-        conditions.setLocallyAllowedTypes(['Folder'])
-        conditions.setImmediatelyAddableTypes(['Folder'])
+        setFolderAllowedTypes(conditions, 'Folder')
         #add the 'integral and sectorial conditions' folder
     else:
         conditions = getattr(tool, "exploitationconditions")
+
     #add the 'integral and sectorial conditions' folder
     if not hasattr(conditions, "i_and_s_conditions"):
         newFolderid = conditions.invokeFactory("Folder", id="i_and_s_conditions", title=_("i_and_s_conditions_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(conditions, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+        setFolderAllowedTypes(newFolder, 'UrbanVocabularyTerm')
+
     #add the integral conditions folder
     if not hasattr(conditions, "integralconditions"):
         newFolderid = conditions.invokeFactory("Folder", id="integralconditions", title=_("integralconditions_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(conditions, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+        setFolderAllowedTypes(newFolder, 'UrbanVocabularyTerm')
+
     #add the sectorial conditions folder
     if not hasattr(conditions, "sectorialconditions"):
         newFolderid = conditions.invokeFactory("Folder", id="sectorialconditions", title=_("sectorialconditions_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(conditions, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+        setFolderAllowedTypes(newFolder, 'UrbanVocabularyTerm')
 
     #add the additional_layers folder
     if not hasattr(tool, "additional_layers"):
         newFolderid = tool.invokeFactory("Folder", id="additional_layers", title=_("additonal_layers_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['Layer'])
-        newFolder.setImmediatelyAddableTypes(['Layer'])
+        setFolderAllowedTypes(newFolder, 'UrbanVocabularyTerm')
         #additional layers are added in the extra step "setupExtra"
 
     #add the persons_titles folder
     if not hasattr(tool, "persons_titles"):
         newFolderid = tool.invokeFactory("Folder", id="persons_titles", title=_("persons_titles_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['PersonTitleTerm'])
-        newFolder.setImmediatelyAddableTypes(['PersonTitleTerm'])
-        newFolder.invokeFactory("PersonTitleTerm", id="notitle", title=u"", extraValue="Madame, Monsieur", abbreviation="", gender="male", multiplicity="single")
-        newFolder.invokeFactory("PersonTitleTerm", id="madam", title=u"Madame", extraValue="Madame", abbreviation="Mme", gender="female", multiplicity="single")
-        newFolder.invokeFactory("PersonTitleTerm", id="miss", title=u"Mademoiselle", extraValue="Mademoiselle", abbreviation="Mlle", gender="female", multiplicity="single")
-        newFolder.invokeFactory("PersonTitleTerm", id="mister", title=u"Monsieur", extraValue="Monsieur", abbreviation="M", gender="male", multiplicity="single")
-        newFolder.invokeFactory("PersonTitleTerm", id="madam_and_mister", title=u"Monsieur et Madame", extraValue="Madame, Monsieur", abbreviation="M et Mme", gender="male", multiplicity="plural")
-        newFolder.invokeFactory("PersonTitleTerm", id="master", title=u"Maître", extraValue="Maître", abbreviation="Me", gender="male", multiplicity="single")
-        newFolder.invokeFactory("PersonTitleTerm", id="masters", title=u"Maîtres", extraValue="Maitres", abbreviation="Mes", gender="male", multiplicity="plural")
-        newFolder.invokeFactory("PersonTitleTerm", id="misters", title=u"Messieurs", extraValue="Messieurs", abbreviation="MM", gender="male", multiplicity="plural")
-        newFolder.invokeFactory("PersonTitleTerm", id="ladies", title=u"Mesdames", extraValue="Mesdames", abbreviation="Mmes", gender="female", multiplicity="plural")
-        newFolder.invokeFactory("PersonTitleTerm", id="consorts", title=u"Consorts", extraValue="Consorts", abbreviation="Crts", gender="male", multiplicity="plural")
+        vocabulary_list = default_values['persons_titles']
+        portal_type = vocabulary_list[0]
+        setFolderAllowedTypes(newFolder, portal_type)
+        createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
     #add the persons_grades folder
     if not hasattr(tool, "persons_grades"):
         newFolderid = tool.invokeFactory("Folder", id="persons_grades", title=_("persons_grades_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='agent-accueil', title="Agent d'accueil"),
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='agent-administratif', title="Agent administratif"),
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='agent-technique', title="Agent technique"),
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='agent-traitant', title="Agent traitant"),
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='directeur-administratif', title="Directeur administratif"),
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='directeur-general', title="Directeur général"),
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='directeur-technique', title="Directeur technique"),
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='reponsable', title="Responsable du Service Urbanisme"),
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='responsable-accueil', title="Responsable d'accueil"),
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='responsable-administratif', title="Responsable administratif"),
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='responsable-technique', title="Responsable technique"),
+        vocabulary_list = default_values['persons_grades']
+        portal_type = vocabulary_list[0]
+        setFolderAllowedTypes(newFolder, portal_type)
+        createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
     #add the country folder
     if not hasattr(tool, "country"):
         newFolderid = tool.invokeFactory("Folder", id="country", title=_("country_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='germany', title="Allemagne")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='belgium', title="Belgique")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='france', title="France")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='luxembourg', title="Luxembourg")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id='netherlands', title="Pays Bas")
+        vocabulary_list = default_values['country']
+        portal_type = vocabulary_list[0]
+        setFolderAllowedTypes(newFolder, portal_type)
+        createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
     #add the decisions folder
     if not hasattr(tool, "decisions"):
         newFolderid = tool.invokeFactory("Folder", id="decisions", title=_("decisions_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="favorable", title=u"Favorable", extraValue="Recevable")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="defavorable", title=u"Défavorable", extraValue="Irrecevable")
+        vocabulary_list = default_values['decisions']
+        portal_type = vocabulary_list[0]
+        setFolderAllowedTypes(newFolder, portal_type)
+        createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
     #add the external opinions decisions folder
     if not hasattr(tool, "externaldecisions"):
         newFolderid = tool.invokeFactory("Folder", id="externaldecisions", title=_("external_decisions_folder_title", 'urban', context=site.REQUEST))
         newFolder = getattr(tool, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="favorable", title=u"Favorable")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="favorable-conditionnel", title=u"Favorable conditionnel")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="defavorable", title=u"Défavorable")
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="favorable-defaut", title=u"Réputé favorable par défaut")
+        vocabulary_list = default_values['externaldecisions']
+        portal_type = vocabulary_list[0]
+        setFolderAllowedTypes(newFolder, portal_type)
+        createFolderVocabulary(newFolder, vocabulary_list, portal_type)
 
 
 def addUrbanConfigsTopics(context):
