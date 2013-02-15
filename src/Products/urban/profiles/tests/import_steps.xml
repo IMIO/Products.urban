@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-
+<import-steps>
  <import-step
     id="urban-Update-RoleMappings"
     handler="Products.urban.setuphandlers.updateRoleMappings"
@@ -9,14 +9,14 @@
    updates the workflow role mappings for urban
  </import-step>
 
- <!--import-step
+ <import-step
     id="urban-postInstall"
-    handler="Products.urban.setuphandlers.postInstall"
+    handler="Products.urban.setuphandlers.corePostInstall"
     title="manual coded post-install for urban"
     version="2013-01-04T11:30:41.455297">
    <dependency step="urban-QI-dependencies"/>
    manual coded post-install for urban
- </import-step-->
+ </import-step>
 
  <import-step
             id="urban-setDefaultValues"
@@ -24,6 +24,13 @@
             title="Set some default values in the config"
             version="2012-06-15T15:00:00.00000">
    <dependency step="urban-QI-dependencies"/>
- Set default valuess for test purpose
+ Set default values for test purpose
+ </import-step>
+ <import-step
+             id="urban-addTestObjects"
+             handler="Products.urban.setuphandlers.addTestObjects"
+             title="Add some objects for test purpose"
+             version="2008-10-15T15:00:00.00000">
+ Add some objects for test purpose
  </import-step>
 </import-steps>
