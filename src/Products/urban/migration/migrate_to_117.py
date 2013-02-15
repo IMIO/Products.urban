@@ -5,6 +5,7 @@ import re
 
 logger = logging.getLogger('urban: migrations')
 
+
 def migrateToUrban117(context):
     """
      Launch every migration steps for the version 1.1.7
@@ -19,21 +20,22 @@ def migrateToUrban117(context):
     logger.info("starting to reinstall urban...")
     setup_tool = getToolByName(context, 'portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:tests', 'urban-addTestObjects')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-extraPostInstall')
     logger.info("reinstalling urban done!")
     logger.info("migration done!")
+
 
 def migrateNumerotationExpressions(context):
     """
      adapt the way to call getCurrentFolderManager method in numerotation expressions
     """
-    site = getToolByName(context, 'portal_url').getPortalObject()
     urban_tool = getToolByName(context, 'portal_urban')
     logger = logging.getLogger('urban: migrate to environmental declarations ->')
     logger.info("starting migration step")
 
     configs = urban_tool.objectValues('LicenceConfig')
     regex = 'getCurrentFolderManager\\(.*?(obj\s*,?\s*).*?\\)'
+
     def adaptCall(matchobj):
         return matchobj.group(0).replace(matchobj.group(1), '')
 

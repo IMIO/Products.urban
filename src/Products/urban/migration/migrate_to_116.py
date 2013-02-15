@@ -2,9 +2,8 @@
 from Products.CMFCore.utils import getToolByName
 import logging
 
-from Products.urban.config import URBAN_TYPES
-
 logger = logging.getLogger('urban: migrations')
+
 
 def migrateToUrban116(context):
     """
@@ -30,9 +29,10 @@ def migrateToUrban116(context):
     logger.info("starting to reinstall urban...")
     setup_tool = getToolByName(context, 'portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:tests', 'urban-addTestObjects')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-extraPostInstall')
     logger.info("reinstalling urban done!")
     logger.info("migration done!")
+
 
 def migrateEnvironmentDeclaration(context):
     """
@@ -51,13 +51,13 @@ def migrateEnvironmentDeclaration(context):
         logger.info("deleted old environmental declarations config folder")
     logger.info("migration step done!")
 
+
 def migrateSpecificFeatures(context):
     """
      merge the content of the old 'detail' text zone with the specificFeature description text
      and put the result in the 'text' zone
     """
     site = getToolByName(context, 'portal_url').getPortalObject()
-    urban_tool = getToolByName(site, 'portal_urban')
     logger = logging.getLogger('urban: migrate specific features ->')
     logger.info("starting migration step")
 
@@ -77,7 +77,7 @@ def migrateSpecificFeatures(context):
                     vocterm_brain = catalog(id=spf['id'], path=path)
                     vocterm = len(vocterm_brain) == 1 and vocterm_brain[0].getObject() or None
                     newtext = ''
-                    if spf.has_key('detail'):
+                    if 'detail' in spf:
                         newtext = spf.pop('detail')
                         spf['value'] = spf['text']
                         logger.info("migrating %sSpecificFeature of licence %s" % (subtype, licence.Title()))
@@ -88,6 +88,7 @@ def migrateSpecificFeatures(context):
                 features_mutator = getattr(licence, 'set%sSpecificFeatures' % subtype.capitalize())
                 features_mutator(tuple(new_specificfeatures))
     logger.info("migration step done!")
+
 
 def migrateSocietyTitle(context):
     """
@@ -116,13 +117,13 @@ def migrateSocietyTitle(context):
         logger.info("created a new PersonTitleTerm 'notitle'")
     logger.info("migration step done!")
 
+
 def migrateParcelsDivision(context):
     """
      The field division is now a select field,
      its raw value is now a key that is the division code
     """
     site = getToolByName(context, 'portal_url').getPortalObject()
-    urban_tool = getToolByName(site, 'portal_urban')
     logger = logging.getLogger('urban: migrate parcels division field->')
     logger.info("starting migration step")
 
@@ -136,11 +137,11 @@ def migrateParcelsDivision(context):
             logger.info('Migrated parcel %s' % parcel.Title())
     logger.info("migration step done!")
 
+
 def migrateCKeditor(context):
     """
     """
     site = getToolByName(context, 'portal_url').getPortalObject()
-    urban_tool = getToolByName(site, 'portal_urban')
     logger = logging.getLogger('urban: migrate ckeditor style config->')
     logger.info("starting migration step")
 
@@ -149,6 +150,7 @@ def migrateCKeditor(context):
     ckprops = properties_tool.ckeditor_properties
     ckprops.manage_changeProperties(menuStyles=custom_menu_style)
     logger.info("migration step done!")
+
 
 def migratePylonHostURL(context):
     """
@@ -165,4 +167,3 @@ def migratePylonHostURL(context):
         urban_tool.setPylonsHost(new_url)
         logger.info("changed pylon host url to %s" % new_url)
     logger.info("migration step done!")
-
