@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from plone.testing import z2, zca, Layer
-from plone.app.testing import PloneWithPackageLayer
-from plone.app.testing import IntegrationTesting, FunctionalTesting, helpers
+from plone.app.testing import PloneWithPackageLayer, IntegrationTesting, FunctionalTesting, helpers
 import Products.urban
 
 
@@ -12,17 +11,10 @@ URBAN_ZCML = zca.ZCMLSandbox(filename="testing.zcml",
 URBAN_Z2 = z2.IntegrationTesting(bases=(z2.STARTUP, URBAN_ZCML),
                                  name='URBAN_Z2')
 
-URBAN = PloneWithPackageLayer(
+URBAN_TESTS_PROFILE_DEFAULT = PloneWithPackageLayer(
     zcml_filename="testing.zcml",
     zcml_package=Products.urban,
     additional_z2_products=('Products.urban', 'Products.CMFPlacefulWorkflow'),
-    gs_profile_id='Products.urban:default',
-    name="URBAN")
-
-URBAN_TESTS_PROFILE_DEFAULT = PloneWithPackageLayer(
-    bases=(URBAN,),
-    zcml_filename="testing.zcml",
-    zcml_package=Products.urban,
     gs_profile_id='Products.urban:tests',
     name="URBAN_TESTS_PROFILE_DEFAULT")
 
@@ -41,7 +33,7 @@ URBAN_INTEGRATION = IntegrationTesting(
     bases=(URBAN_TESTS_PROFILE_DEFAULT,), name="URBAN_INTEGRATION")
 
 URBAN_TESTS_PROFILE_INTEGRATION = IntegrationTesting(
-    bases=(URBAN_TESTS_PROFILE,), name="URBAN_TESTS_PROFILE_INTEGRATION")
+    bases=(URBAN_TESTS_PROFILE_DEFAULT,), name="URBAN_TESTS_PROFILE_INTEGRATION")
 
 URBAN_TESTS_PROFILE_FUNCTIONAL = FunctionalTesting(
-    bases=(URBAN_TESTS_PROFILE,), name="URBAN_TESTS_PROFILE_FUNCTIONAL")
+    bases=(URBAN_TESTS_PROFILE_DEFAULT,), name="URBAN_TESTS_PROFILE_FUNCTIONAL")
