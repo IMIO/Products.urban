@@ -1,4 +1,8 @@
 <?xml version="1.0"?>
 <metadata>
   <version>1</version>
+    <dependencies>
+      <!-- needed or else the layer setup crashes when trying to call scripts in portal_skins (eg: displayValue)-->
+      <dependency>profile-Products.CMFPlacefulWorkflow:CMFPlacefulWorkflow</dependency>
+   </dependencies>
 </metadata>
