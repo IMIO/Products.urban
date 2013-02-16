@@ -100,7 +100,7 @@ schema = Schema((
     ),
     StringField(
         name='referenceTALExpression',
-        default="python: obj.getLicenceTypeAcronym() + '/' + date.strftime('%Y') + '/' + numerotation + '/' + tool.getCurrentFolderManager(obj, initials=True)",
+        default="python: obj.getLicenceTypeAcronym() + '/' + date.strftime('%Y') + '/' + numerotation + '/' + tool.getCurrentFolderManager(initials=True)",
         widget=StringField._properties['widget'](
             size=100,
             label='Referencetalexpression',
