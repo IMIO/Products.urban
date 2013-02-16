@@ -147,6 +147,11 @@ def corePostInstall(context, refresh=True):
     logger.info("addApplicationFolders : starting...")
     addApplicationFolders(context)
     logger.info("addApplicationFolders : Done")
+    #install the urbanskin if available
+    #urbanskin should be installed before the call of 'adaptDefaultPortal'
+    logger.info("installUrbanskin : starting...")
+    installUrbanskin(context)
+    logger.info("installUrbanskin : Done")
     logger.info("setDefaultApplicationSecurity : starting...")
     setDefaultApplicationSecurity(context)
     logger.info("setDefaultApplicationSecurity : Done")
@@ -169,12 +174,12 @@ def extraPostInstall(context, refresh=True):
         return
 
     site = context.getSite()
-    logger.info("addGlobalFolders : starting...")
-    addGlobalFolders(context)
-    logger.info("addGlobalFolders : Done")
     logger.info("addUrbanConfigs : starting...")
     addUrbanConfigs(context)
     logger.info("addUrbanConfigs : Done")
+    logger.info("addGlobalFolders : starting...")
+    addGlobalFolders(context)
+    logger.info("addGlobalFolders : Done")
     logger.info("addDefaultObjects : starting...")
     addDefaultObjects(context)
     logger.info("addDefaultObjects : Done")
@@ -187,10 +192,6 @@ def extraPostInstall(context, refresh=True):
     logger.info("addLicencesCollection: starting...")
     addLicencesCollection(context)
     logger.info("addLicencesCollection : Done")
-    #install the urbanskin if available
-    logger.info("installUrbanskin : starting...")
-    installUrbanskin(context)
-    logger.info("installUrbanskin : Done")
     if refresh:
         #refresh catalog after all these objects have been added...
         logger.info("Refresh portal_catalog : starting...")
@@ -240,7 +241,7 @@ def setFolderAllowedTypes(folder, portal_types):
     folder.setImmediatelyAddableTypes(portal_types)
 
 
-def createDefaultValues(folder, objects_list, portal_type=''):
+def createFolderDefaultValues(folder, objects_list, portal_type=''):
     """
      Create all the objects
     """
@@ -248,6 +249,22 @@ def createDefaultValues(folder, objects_list, portal_type=''):
         portal_type = objects_list[0]
     for obj in objects_list[1:]:
         folder.invokeFactory(portal_type, **obj)
+
+
+def createFolderWithDefaultValues(container, folder_id, site, default_objects=[], portal_type='Folder', content_portal_type=''):
+    """
+    """
+    newFolderid = container.invokeFactory(portal_type, id=folder_id, title=_("%s_folder_title" % folder_id, 'urban', context=site.REQUEST))
+    newFolder = getattr(container, newFolderid)
+    if not content_portal_type:
+        if folder_id in default_objects:
+            vocabulary_list = default_objects[folder_id]
+            content_portal_type = vocabulary_list[0]
+            setFolderAllowedTypes(newFolder, content_portal_type)
+            createFolderDefaultValues(newFolder, vocabulary_list, content_portal_type)
+    else:
+        setFolderAllowedTypes(newFolder, content_portal_type)
+    return newFolder
 
 
 def addUrbanConfigs(context):
@@ -286,12 +303,7 @@ def addUrbanConfigs(context):
 
         #add TownshipFolderCategories folder
         if not hasattr(aq_base(configFolder), 'townshipfoldercategories'):
-            newFolderid = configFolder.invokeFactory("Folder", id="townshipfoldercategories", title=_("townshipfoldercategories_folder_title", 'urban', context=site.REQUEST))
-            newFolder = getattr(configFolder, newFolderid)
-            vocabulary_list = default_values['townshipfoldercategories']
-            portal_type = vocabulary_list[0]
-            setFolderAllowedTypes(newFolder, portal_type)
-            createDefaultValues(newFolder, vocabulary_list, portal_type)
+            createFolderWithDefaultValues(configFolder, 'townshipfoldercategories', site, default_values)
 
         #add FolderCategories folder
         if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'Declaration', 'Division', 'MiscDemand']:
@@ -338,73 +350,34 @@ def addUrbanConfigs(context):
         if urban_type in ['Declaration', ]:
             #add "Articles" folder
             if not hasattr(aq_base(configFolder), 'articles'):
-                newFolderid = configFolder.invokeFactory("Folder", id="articles", title=_("articles_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['articles']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
+                createFolderWithDefaultValues(configFolder, 'articles', site, default_values)
 
         if urban_type == 'ParcelOutLicence':
             if not hasattr(aq_base(configFolder), 'lotusages'):
-                newFolderid = configFolder.invokeFactory("Folder", id="lotusages", title=_("lotusages_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['lotusages']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
+                createFolderWithDefaultValues(configFolder, 'lotusages', site, default_values)
+
             if not hasattr(aq_base(configFolder), 'equipmenttypes'):
-                newFolderid = configFolder.invokeFactory("Folder", id="equipmenttypes", title=_("folderequipmenttypes_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['equipmenttypes']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
+                createFolderWithDefaultValues(configFolder, 'equipmenttypes', site, default_values)
 
         if urban_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter']:
             #we add the specific features folder
             if not hasattr(aq_base(configFolder), 'specificfeatures'):
-                newFolderid = configFolder.invokeFactory("Folder", id="specificfeatures", title=_("urban_label_specificFeatures", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['specificfeatures']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
+                newFolder = createFolderWithDefaultValues(configFolder, 'specificfeatures', site, default_values)
                 setHTMLContentType(newFolder, 'description')
 
             if not hasattr(aq_base(configFolder), 'roadspecificfeatures'):
-                newFolderid = configFolder.invokeFactory("Folder", id="roadspecificfeatures", title=_("urban_label_roadSpecificFeatures", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['roadspecificfeatures']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
+                createFolderWithDefaultValues(configFolder, 'roadspecificfeatures', site, default_values)
 
             if not hasattr(aq_base(configFolder), 'locationspecificfeatures'):
-                newFolderid = configFolder.invokeFactory("Folder", id="locationspecificfeatures", title=_("urban_label_locationSpecificFeatures", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['locationspecificfeatures']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
+                createFolderWithDefaultValues(configFolder, 'locationspecificfeatures', site, default_values)
 
             #we add the custom township specific features folder
             if not hasattr(aq_base(configFolder), 'townshipspecificfeatures'):
-                newFolderid = configFolder.invokeFactory("Folder", id="townshipspecificfeatures", title=_("urban_label_townshipSpecificFeatures", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['townshipspecificfeatures']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
+                createFolderWithDefaultValues(configFolder, 'townshipspecificfeatures', site, default_values)
 
             if not hasattr(aq_base(configFolder), 'opinionstoaskifworks'):
                 #add "Ask opinions to in case of works" folder
-                newFolderid = configFolder.invokeFactory("Folder", id="opinionstoaskifworks", title=_("opinionstoaskifworks_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['opinionstoaskifworks']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
+                newFolder = createFolderWithDefaultValues(configFolder, 'opinionstoaskifworks', site, default_values)
                 #now, we need to specify that the description's mimetype is 'text/html'
                 setHTMLContentType(newFolder, 'description')
 
@@ -413,9 +386,7 @@ def addUrbanConfigs(context):
                 #add "missingparts" folder
                 newFolderid = configFolder.invokeFactory("Folder", id="missingparts", title=_("missingparts_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
+                setFolderAllowedTypes(newFolder, 'UrbanVocabularyTerm')
                 if urban_type in ['BuildLicence', ]:
                     #necessary documents for BuildLicences
                     newFolder.invokeFactory("UrbanVocabularyTerm", id="form_demande", title=u"Formulaire de demande (annexe 20) en 2 exemplaires")
@@ -438,54 +409,24 @@ def addUrbanConfigs(context):
 
         if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo', 'EnvClassThree']:
             if not hasattr(aq_base(configFolder), 'foldermakers'):
-                #add Makers folder
-                newFolderid = configFolder.invokeFactory("Folder", id="foldermakers", title=_("foldermakers_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['foldermakers']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
+                newFolder = createFolderWithDefaultValues(configFolder, 'foldermakers', site, default_values)
                 #now, we need to specify that the description's mimetype is 'text/html'
                 setHTMLContentType(newFolder, 'description')
 
         if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo']:
-            #add investigation articles folder
             if not hasattr(aq_base(configFolder), 'investigationarticles'):
-                newFolderid = configFolder.invokeFactory("Folder", id="investigationarticles", title=_("investigationarticles_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['investigationarticles']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
+                newFolder = createFolderWithDefaultValues(configFolder, 'investigationarticles', site, default_values)
                 #now, we need to specify that the description's mimetype is 'text/html'
                 setHTMLContentType(newFolder, 'description')
 
             if not hasattr(aq_base(configFolder), 'folderdelays'):
-                #add Delays folder
-                newFolderid = configFolder.invokeFactory("Folder", id="folderdelays", title=_("folderdelays_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['folderdelays']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
+                createFolderWithDefaultValues(configFolder, 'folderdelays', site, default_values)
 
             if not hasattr(aq_base(configFolder), 'derogations'):
-                #add the derogations folder
-                newFolderid = configFolder.invokeFactory("Folder", id="derogations", title=_("derogations_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['derogations']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
+                createFolderWithDefaultValues(configFolder, 'derogations', site, default_values)
 
             if not hasattr(aq_base(configFolder), 'folderbuildworktypes'):
-                #add BuildWorkTypes folder
-                newFolderid = configFolder.invokeFactory("Folder", id="folderbuildworktypes", title=_("folderbuildworktype_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['folderbuildworktypes']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
+                createFolderWithDefaultValues(configFolder, 'folderbuildworktypes', site, default_values)
 
         if urban_type in ['BuildLicence', ]:
             #add PEB categories folder
@@ -497,26 +438,11 @@ def addUrbanConfigs(context):
             if not hasattr(aq_base(configFolder), 'rubrics'):
                 newFolderid = configFolder.invokeFactory("Folder", id="rubrics", title=_("rubrics_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['Folder'])
-                newFolder.setImmediatelyAddableTypes(['Folder'])
+                setFolderAllowedTypes(newFolder, 'Folder')
                 addRubricValues(context, 3, newFolder)
 
             if not hasattr(aq_base(configFolder), 'inadmissibilityreasons'):
-                newFolderid = configFolder.invokeFactory("Folder", id="inadmissibilityreasons", title=_("inadmissibilityreasons_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['inadmissibilityreasons']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
-
-            if not hasattr(aq_base(configFolder), 'applicationreasons'):
-                newFolderid = configFolder.invokeFactory("Folder", id="applicationreasons", title=_("applicationreasons_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                vocabulary_list = default_values['applicationreasons']
-                portal_type = vocabulary_list[0]
-                setFolderAllowedTypes(newFolder, portal_type)
-                createDefaultValues(newFolder, vocabulary_list, portal_type)
+                createFolderWithDefaultValues(configFolder, 'inadmissibilityreasons', site, default_values)
 
 
 def addRubricValues(context, class_type, config_folder):
@@ -801,24 +727,14 @@ def addGlobalFolders(context):
 
     #add globaltemplates folder
     if not hasattr(tool, "globaltemplates"):
-        globaltemplatesFolderid = tool.invokeFactory("Folder", id="globaltemplates",
-                                                     title=_("globaltemplates_folder_title", 'urban', context=site.REQUEST))
-        globaltemplatesFolder = getattr(tool, globaltemplatesFolderid)
-        setFolderAllowedTypes(globaltemplatesFolder, 'UrbanDoc')
+        createFolderWithDefaultValues(tool, 'globaltemplates', site, content_portal_type='UrbanDoc')
 
     #add foldermanagers folder
     if not hasattr(tool, "foldermanagers"):
-        foldermanagersFolderid = tool.invokeFactory("Folder", id="foldermanagers",
-                                                    title=_("foldermanagers_folder_title", 'urban', context=site.REQUEST))
-        foldermanagersFolder = getattr(tool, foldermanagersFolderid)
-        setFolderAllowedTypes(foldermanagersFolder, 'FolderManager')
+        createFolderWithDefaultValues(tool, 'foldermanagers', site, content_portal_type='FolderManager')
 
     if not hasattr(tool, "topics"):
-        topicsFolderId = tool.invokeFactory("Folder", id="topics", title=_("topics", 'urban', context=site.REQUEST))
-        topicsFolder = getattr(tool, topicsFolderId)
-        #restrict the addable types to "ATTopic"
-        #Add these searches for portal_urban
-        setFolderAllowedTypes(topicsFolder, 'Topic')
+        topicsFolder = createFolderWithDefaultValues(tool, 'topics', site, content_portal_type='Topic')
     else:
         topicsFolder = getattr(tool, "topics")
     for topicId, topicCriteria, stateValues, topicViewFields in topicsInfo:
@@ -856,169 +772,70 @@ def addGlobalFolders(context):
 
     #add the pcas folder
     if not hasattr(tool, "pcas"):
-        newFolderid = tool.invokeFactory("Folder", id="pcas", title=_("pcas_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        vocabulary_list = default_values['pcas']
-        portal_type = vocabulary_list[0]
-        setFolderAllowedTypes(newFolder, portal_type)
-        createDefaultValues(newFolder, vocabulary_list, portal_type)
+        createFolderWithDefaultValues(tool, 'pcas', site, default_values)
 
     #add the streets folder
     if not hasattr(tool, "streets"):
-        newFolderid = tool.invokeFactory("Folder", id="streets", title=_("streets_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        setFolderAllowedTypes(newFolder, 'City')
+        createFolderWithDefaultValues(tool, 'streets', site, default_values, content_portal_type='City')
 
     if not hasattr(tool, "pashs"):
         #add pashs folder
-        newFolderid = tool.invokeFactory("Folder", id="pashs", title=_("pashs_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        vocabulary_list = default_values['pashs']
-        portal_type = vocabulary_list[0]
-        setFolderAllowedTypes(newFolder, portal_type)
-        createDefaultValues(newFolder, vocabulary_list, portal_type)
+        createFolderWithDefaultValues(tool, 'pashs', site, default_values)
 
     #add global folderroadtypes folder
     if not hasattr(tool, "folderroadtypes"):
-        newFolderid = tool.invokeFactory("Folder", id="folderroadtypes", title=_("folderroadtypes_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        vocabulary_list = default_values['pcas']
-        portal_type = vocabulary_list[0]
-        setFolderAllowedTypes(newFolder, portal_type)
-        createDefaultValues(newFolder, vocabulary_list, portal_type)
+        createFolderWithDefaultValues(tool, 'folderroadtypes', site, default_values)
 
     if not hasattr(tool, 'folderprotectedbuildings'):
-        #add ProtectedBuildings folder
-        newFolderid = tool.invokeFactory("Folder", id="folderprotectedbuildings", title=_("folderprotectedbuildings_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        vocabulary_list = default_values['folderprotectedbuildings']
-        portal_type = vocabulary_list[0]
-        setFolderAllowedTypes(newFolder, portal_type)
-        createDefaultValues(newFolder, vocabulary_list, portal_type)
+        createFolderWithDefaultValues(tool, 'folderprotectedbuildings', site, default_values)
 
     if not hasattr(tool, 'folderroadequipments'):
-        #add RoadEquipments folder
-        newFolderid = tool.invokeFactory("Folder", id="folderroadequipments", title=_("folderroadequipments_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        vocabulary_list = default_values['folderroadequipments']
-        portal_type = vocabulary_list[0]
-        setFolderAllowedTypes(newFolder, portal_type)
-        createDefaultValues(newFolder, vocabulary_list, portal_type)
+        createFolderWithDefaultValues(tool, 'folderroadequipments', site, default_values)
 
     if not hasattr(tool, "folderroadcoatings"):
-        #add RoadCoatings folder
-        newFolderid = tool.invokeFactory("Folder", id="folderroadcoatings", title=_("folderroadcoatings_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        vocabulary_list = default_values['folderroadcoatings']
-        portal_type = vocabulary_list[0]
-        setFolderAllowedTypes(newFolder, portal_type)
-        createDefaultValues(newFolder, vocabulary_list, portal_type)
+        createFolderWithDefaultValues(tool, 'folderroadcoatings', site, default_values)
 
-    #add Zones folder
     if not hasattr(tool, "folderzones"):
-        newFolderid = tool.invokeFactory("Folder", id="folderzones", title=_("folderzones_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        vocabulary_list = default_values['folderzones']
-        portal_type = vocabulary_list[0]
-        setFolderAllowedTypes(newFolder, portal_type)
-        createDefaultValues(newFolder, vocabulary_list, portal_type)
+        createFolderWithDefaultValues(tool, 'folderzones', site, default_values)
 
-    #add the RCU folder
     if not hasattr(tool, "rcu"):
-        newFolderid = tool.invokeFactory("Folder", id="rcu", title=_("rcu_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        vocabulary_list = default_values['rcu']
-        portal_type = vocabulary_list[0]
-        setFolderAllowedTypes(newFolder, portal_type)
-        createDefaultValues(newFolder, vocabulary_list, portal_type)
+        createFolderWithDefaultValues(tool, 'rcu', site, default_values)
 
-    #add the SSC folder
     if not hasattr(tool, "ssc"):
-        newFolderid = tool.invokeFactory("Folder", id="ssc", title=_("ssc_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        vocabulary_list = default_values['ssc']
-        portal_type = vocabulary_list[0]
-        setFolderAllowedTypes(newFolder, portal_type)
-        createDefaultValues(newFolder, vocabulary_list, portal_type)
+        createFolderWithDefaultValues(tool, 'ssc', site, default_values)
 
-    #add the exploitation conditions folder
     if not hasattr(tool, "exploitationconditions"):
-        conditionsid = tool.invokeFactory("Folder", id="exploitationconditions", title=_("exploitationconditions_folder_title", 'urban', context=site.REQUEST))
-        conditions = getattr(tool, conditionsid)
-        setFolderAllowedTypes(conditions, 'Folder')
-        #add the 'integral and sectorial conditions' folder
+        conditions = createFolderWithDefaultValues(tool, 'exploitationconditions', site, content_portal_type='Folder')
     else:
         conditions = getattr(tool, "exploitationconditions")
 
     #add the 'integral and sectorial conditions' folder
     if not hasattr(conditions, "i_and_s_conditions"):
-        newFolderid = conditions.invokeFactory("Folder", id="i_and_s_conditions", title=_("i_and_s_conditions_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(conditions, newFolderid)
-        setFolderAllowedTypes(newFolder, 'UrbanVocabularyTerm')
+        createFolderWithDefaultValues(conditions, 'i_and_s_conditions', site, content_portal_type='UrbanVocabularyTerm')
 
-    #add the integral conditions folder
     if not hasattr(conditions, "integralconditions"):
-        newFolderid = conditions.invokeFactory("Folder", id="integralconditions", title=_("integralconditions_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(conditions, newFolderid)
-        setFolderAllowedTypes(newFolder, 'UrbanVocabularyTerm')
+        createFolderWithDefaultValues(conditions, 'integralconditions', site, content_portal_type='UrbanVocabularyTerm')
 
-    #add the sectorial conditions folder
     if not hasattr(conditions, "sectorialconditions"):
-        newFolderid = conditions.invokeFactory("Folder", id="sectorialconditions", title=_("sectorialconditions_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(conditions, newFolderid)
-        setFolderAllowedTypes(newFolder, 'UrbanVocabularyTerm')
+        createFolderWithDefaultValues(conditions, 'sectorialconditions', site, content_portal_type='UrbanVocabularyTerm')
 
-    #add the additional_layers folder
     if not hasattr(tool, "additional_layers"):
-        newFolderid = tool.invokeFactory("Folder", id="additional_layers", title=_("additonal_layers_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        setFolderAllowedTypes(newFolder, 'UrbanVocabularyTerm')
-        #additional layers are added in the extra step "setupExtra"
+        createFolderWithDefaultValues(tool, 'additional_layers', site, content_portal_type='UrbanVocabularyTerm')
 
-    #add the persons_titles folder
     if not hasattr(tool, "persons_titles"):
-        newFolderid = tool.invokeFactory("Folder", id="persons_titles", title=_("persons_titles_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        vocabulary_list = default_values['persons_titles']
-        portal_type = vocabulary_list[0]
-        setFolderAllowedTypes(newFolder, portal_type)
-        createDefaultValues(newFolder, vocabulary_list, portal_type)
+        createFolderWithDefaultValues(tool, 'persons_titles', site, default_values)
 
-    #add the persons_grades folder
     if not hasattr(tool, "persons_grades"):
-        newFolderid = tool.invokeFactory("Folder", id="persons_grades", title=_("persons_grades_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        vocabulary_list = default_values['persons_grades']
-        portal_type = vocabulary_list[0]
-        setFolderAllowedTypes(newFolder, portal_type)
-        createDefaultValues(newFolder, vocabulary_list, portal_type)
+        createFolderWithDefaultValues(tool, 'persons_grades', site, default_values)
 
-    #add the country folder
     if not hasattr(tool, "country"):
-        newFolderid = tool.invokeFactory("Folder", id="country", title=_("country_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        vocabulary_list = default_values['country']
-        portal_type = vocabulary_list[0]
-        setFolderAllowedTypes(newFolder, portal_type)
-        createDefaultValues(newFolder, vocabulary_list, portal_type)
+        createFolderWithDefaultValues(tool, 'country', site, default_values)
 
-    #add the decisions folder
     if not hasattr(tool, "decisions"):
-        newFolderid = tool.invokeFactory("Folder", id="decisions", title=_("decisions_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        vocabulary_list = default_values['decisions']
-        portal_type = vocabulary_list[0]
-        setFolderAllowedTypes(newFolder, portal_type)
-        createDefaultValues(newFolder, vocabulary_list, portal_type)
+        createFolderWithDefaultValues(tool, 'decisions', site, default_values)
 
-    #add the external opinions decisions folder
     if not hasattr(tool, "externaldecisions"):
-        newFolderid = tool.invokeFactory("Folder", id="externaldecisions", title=_("external_decisions_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(tool, newFolderid)
-        vocabulary_list = default_values['externaldecisions']
-        portal_type = vocabulary_list[0]
-        setFolderAllowedTypes(newFolder, portal_type)
-        createDefaultValues(newFolder, vocabulary_list, portal_type)
+        createFolderWithDefaultValues(tool, 'externaldecisions', site, default_values)
 
 
 def addUrbanConfigsTopics(context):
@@ -1323,7 +1140,7 @@ def addDefaultObjects(context):
     notFolder = getattr(urbanFolder, "notaries")
     if not notFolder.objectIds():
         objects_list = default_objects['notaries']
-        createDefaultValues(notFolder, objects_list)
+        createFolderDefaultValues(notFolder, objects_list)
         logger.info("Notaries examples have been added")
 
     #add some geometricians...
@@ -1331,7 +1148,7 @@ def addDefaultObjects(context):
     geoFolder = getattr(urbanFolder, "geometricians")
     if not geoFolder.objectIds():
         objects_list = default_objects['geometricians']
-        createDefaultValues(geoFolder, objects_list)
+        createFolderDefaultValues(geoFolder, objects_list)
         logger.info("Geometricians examples have been added")
 
     #add some parcellings...
@@ -1339,7 +1156,7 @@ def addDefaultObjects(context):
     parcelFolder = getattr(urbanFolder, "parcellings")
     if not parcelFolder.objectIds():
         objects_list = default_objects['parcellings']
-        createDefaultValues(parcelFolder, objects_list)
+        createFolderDefaultValues(parcelFolder, objects_list)
         logger.info("ParcellingTerms examples have been added")
 
     #add some folder managers
@@ -1349,7 +1166,7 @@ def addDefaultObjects(context):
         objects_list = default_objects['foldermanagers']
         for obj in objects_list[1:]:
             obj.update({'manageableLicences': URBAN_TYPES})
-        createDefaultValues(fmFolder, objects_list)
+        createFolderDefaultValues(fmFolder, objects_list)
 
     #create some streets using the Extensions.imports script
     if not tool.streets.objectIds('City'):

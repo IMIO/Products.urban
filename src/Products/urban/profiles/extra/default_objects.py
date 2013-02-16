@@ -23,6 +23,7 @@ default_objects = {
     ],
 
     'foldermanagers': [
+        'FolderManager',
         {'id': "foldermanager1", 'name1': "Dumont", 'name2': "Jean", 'grade': 'agent-technique', 'ploneUserId': 'admin'},
         {'id': "foldermanager2", 'name1': "Schmidt", 'name2': "Alain", 'grade': 'directeur-general'},
         {'id': "foldermanager3", 'name1': "Robert", 'name2': "Patrick", 'grade': 'responsable-administratif'},
