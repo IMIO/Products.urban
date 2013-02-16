@@ -549,142 +549,33 @@ def setDefaultApplicationSecurity(context):
         #hide the 'Properties' tab to other roles than 'Manager'
         app_folder.manage_permission('Manage properties', ['Manager', ], acquire=0)
 
-    #buildlicences folder : "urban_readers" can read and "urban_editors" can edit...
-    if hasattr(app_folder, "buildlicences"):
-        b_folder = getattr(app_folder, "buildlicences")
-        #we add a property usefull for portal_urban.getUrbanConfig
-        try:
-            #we try in case we apply the profile again...
-            b_folder.manage_addProperty('urbanConfigId', 'buildlicence', 'string')
-        except BadRequest:
-            pass
-        b_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
-        b_folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-        b_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-    #parceloutlicences application folder : "urban_readers" can read and "urban_editors" can edit...
-    if hasattr(app_folder, "parceloutlicences"):
-        p_folder = getattr(app_folder, "parceloutlicences")
-        #we add a property usefull for portal_urban.getUrbanConfig
-        try:
-            #we try in case we apply the profile again...
-            p_folder.manage_addProperty('urbanConfigId', 'parceloutlicence', 'string')
-        except BadRequest:
-            pass
-        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
-        p_folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-    #declarations application folder : "urban_readers" can read and "urban_editors" can edit...
-    if hasattr(app_folder, "declarations"):
-        p_folder = getattr(app_folder, "declarations")
-        #we add a property usefull for portal_urban.getUrbanConfig
-        try:
-            #we try in case we apply the profile again...
-            p_folder.manage_addProperty('urbanConfigId', 'declaration', 'string')
-        except BadRequest:
-            pass
-        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
-        p_folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-    #division application folder : "urban_readers" can read and "urban_editors" can edit...
-    if hasattr(app_folder, "divisions"):
-        p_folder = getattr(app_folder, "divisions")
-        #we add a property usefull for portal_urban.getUrbanConfig
-        try:
-            #we try in case we apply the profile again...
-            p_folder.manage_addProperty('urbanConfigId', 'division', 'string')
-        except BadRequest:
-            pass
-        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
-        p_folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-    #urbancertificatesones application folder : "urban_readers" can read and "urban_editors" can edit...
-    if hasattr(app_folder, "urbancertificateones"):
-        p_folder = getattr(app_folder, "urbancertificateones")
-        #we add a property usefull for portal_urban.getUrbanConfig
-        try:
-            #we try in case we apply the profile again...
-            p_folder.manage_addProperty('urbanConfigId', 'urbancertificateone', 'string')
-        except BadRequest:
-            pass
-        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
-        p_folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-    #urbancertificatetwos application folder : "urban_readers" can read and "urban_editors" can edit...
-    if hasattr(app_folder, "urbancertificatetwos"):
-        p_folder = getattr(app_folder, "urbancertificatetwos")
-        #we add a property usefull for portal_urban.getUrbanConfig
-        try:
-            #we try in case we apply the profile again...
-            p_folder.manage_addProperty('urbanConfigId', 'urbancertificatetwo', 'string')
-        except BadRequest:
-            pass
-        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
-        p_folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-    #notaryletters application folder : "urban_readers" can read and "urban_editors" can edit...
-    if hasattr(app_folder, "notaryletters"):
-        p_folder = getattr(app_folder, "notaryletters")
-        #we add a property usefull for portal_urban.getUrbanConfig
-        try:
-            #we try in case we apply the profile again...
-            p_folder.manage_addProperty('urbanConfigId', 'notaryletter', 'string')
-        except BadRequest:
-            pass
-        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
-        p_folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-    #envclassthrees folder : "urban_readers" can read and "urban_editors" can edit...
-    if hasattr(app_folder, "envclassthrees"):
-        p_folder = getattr(app_folder, "envclassthrees")
-        #we add a property usefull for portal_urban.getUrbanConfig
-        try:
-            #we try in case we apply the profile again...
-            p_folder.manage_addProperty('urbanConfigId', 'envclassthree', 'string')
-        except BadRequest:
-            pass
-        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
-        p_folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-    #architects application folder : "urban_readers" can read and "urban_editors" can edit...
-    if hasattr(app_folder, "architects"):
-        p_folder = getattr(app_folder, "architects")
-        app_folder.manage_permission('Add portal content', ['Manager', 'Contributor', 'Owner', 'Editor', ], acquire=0)
-        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
-        p_folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-    #geometricians application folder : "urban_readers" can read and "urban_editors" can edit...
-    if hasattr(app_folder, "geometricians"):
-        p_folder = getattr(app_folder, "geometricians")
-        app_folder.manage_permission('Add portal content', ['Manager', 'Contributor', 'Owner', 'Editor', ], acquire=0)
-        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
-        p_folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-    #notaries application folder : "urban_readers" can read and "urban_editors" can edit...
-    if hasattr(app_folder, "notaries"):
-        p_folder = getattr(app_folder, "notaries")
-        app_folder.manage_permission('Add portal content', ['Manager', 'Contributor', 'Owner', 'Editor', ], acquire=0)
-        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
-        p_folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-    #parcellings application folder : "urban_readers" can read and "urban_editors" can edit...
-    if hasattr(app_folder, "parcellings"):
-        p_folder = getattr(app_folder, "parcellings")
-        app_folder.manage_permission('Add portal content', ['Manager', 'Contributor', 'Owner', 'Editor', ], acquire=0)
-        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
-        p_folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-    #misc demands application folder : "urban_readers" can read and "urban_editors" can edit...
-    if hasattr(app_folder, "miscdemands"):
-        p_folder = getattr(app_folder, "miscdemands")
-        #we add a property usefull for portal_urban.getUrbanConfig
-        try:
-            #we try in case we apply the profile again...
-            p_folder.manage_addProperty('urbanConfigId', 'miscdemand', 'string')
-        except BadRequest:
-            pass
-        p_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
-        p_folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-        p_folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
+    licencesfolder_names = [
+        'buildlicences', 'parceloutlicences', 'declarations', 'divisions', 'urbancertificateones',
+        'urbancertificatetwos', 'notaryletters', 'envclassthrees', 'miscdemands'
+    ]
+    #licence folder : "urban_readers" can read and "urban_editors" can edit...
+    for folder_name in licencesfolder_names:
+        if hasattr(app_folder, folder_name):
+            folder = getattr(app_folder, "buildlicences")
+            #we add a property usefull for portal_urban.getUrbanConfig
+            try:
+                #we try in case we apply the profile again...
+                folder.manage_addProperty('urbanConfigId', folder_name.strip('s'), 'string')
+            except BadRequest:
+                pass
+            folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
+            folder.manage_addLocalRoles("urban_readers", ("Reader", ))
+            folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
+
+    #objects application folder : "urban_readers" can read and "urban_editors" can edit...
+    objectsfolder_names = ['architects', 'geometricians', 'notaries', 'parcellings']
+    for folder_name in objectsfolder_names:
+        if hasattr(app_folder, folder_name):
+            folder = getattr(app_folder, folder_name)
+            app_folder.manage_permission('Add portal content', ['Manager', 'Contributor', 'Owner', 'Editor', ], acquire=0)
+            folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
+            folder.manage_addLocalRoles("urban_readers", ("Reader", ))
+            folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
 
 
 def addGlobalFolders(context):
@@ -725,14 +616,6 @@ def addGlobalFolders(context):
         ),
     )
 
-    #add globaltemplates folder
-    if not hasattr(tool, "globaltemplates"):
-        createFolderWithDefaultValues(tool, 'globaltemplates', site, content_portal_type='UrbanDoc')
-
-    #add foldermanagers folder
-    if not hasattr(tool, "foldermanagers"):
-        createFolderWithDefaultValues(tool, 'foldermanagers', site, content_portal_type='FolderManager')
-
     if not hasattr(tool, "topics"):
         topicsFolder = createFolderWithDefaultValues(tool, 'topics', site, content_portal_type='Topic')
     else:
@@ -770,72 +653,36 @@ def addGlobalFolders(context):
         topic.setCustomViewFields(topicViewFields)
         topic.reindexObject()
 
-    #add the pcas folder
-    if not hasattr(tool, "pcas"):
-        createFolderWithDefaultValues(tool, 'pcas', site, default_values)
+    if not hasattr(tool, "globaltemplates"):
+        createFolderWithDefaultValues(tool, 'globaltemplates', site, content_portal_type='UrbanDoc')
 
-    #add the streets folder
+    if not hasattr(tool, "foldermanagers"):
+        createFolderWithDefaultValues(tool, 'foldermanagers', site, content_portal_type='FolderManager')
+
     if not hasattr(tool, "streets"):
         createFolderWithDefaultValues(tool, 'streets', site, default_values, content_portal_type='City')
 
-    if not hasattr(tool, "pashs"):
-        #add pashs folder
-        createFolderWithDefaultValues(tool, 'pashs', site, default_values)
-
-    #add global folderroadtypes folder
-    if not hasattr(tool, "folderroadtypes"):
-        createFolderWithDefaultValues(tool, 'folderroadtypes', site, default_values)
-
-    if not hasattr(tool, 'folderprotectedbuildings'):
-        createFolderWithDefaultValues(tool, 'folderprotectedbuildings', site, default_values)
-
-    if not hasattr(tool, 'folderroadequipments'):
-        createFolderWithDefaultValues(tool, 'folderroadequipments', site, default_values)
-
-    if not hasattr(tool, "folderroadcoatings"):
-        createFolderWithDefaultValues(tool, 'folderroadcoatings', site, default_values)
-
-    if not hasattr(tool, "folderzones"):
-        createFolderWithDefaultValues(tool, 'folderzones', site, default_values)
-
-    if not hasattr(tool, "rcu"):
-        createFolderWithDefaultValues(tool, 'rcu', site, default_values)
-
-    if not hasattr(tool, "ssc"):
-        createFolderWithDefaultValues(tool, 'ssc', site, default_values)
+    folder_names = ['pcas', 'pashs', 'folderroadtypes', 'folderprotectedbuildings',
+                    'folderroadequipments', 'folderroadcoatings', 'folderzones', 'rcu', 'ssc']
+    for folder_name in folder_names:
+        if not hasattr(tool, folder_name):
+            createFolderWithDefaultValues(tool, folder_name, site, default_values)
 
     if not hasattr(tool, "exploitationconditions"):
         conditions = createFolderWithDefaultValues(tool, 'exploitationconditions', site, content_portal_type='Folder')
     else:
         conditions = getattr(tool, "exploitationconditions")
-
-    #add the 'integral and sectorial conditions' folder
-    if not hasattr(conditions, "i_and_s_conditions"):
-        createFolderWithDefaultValues(conditions, 'i_and_s_conditions', site, content_portal_type='UrbanVocabularyTerm')
-
-    if not hasattr(conditions, "integralconditions"):
-        createFolderWithDefaultValues(conditions, 'integralconditions', site, content_portal_type='UrbanVocabularyTerm')
-
-    if not hasattr(conditions, "sectorialconditions"):
-        createFolderWithDefaultValues(conditions, 'sectorialconditions', site, content_portal_type='UrbanVocabularyTerm')
-
+    #add the exploitation conditions subfolders
+    for folder_name in ['i_and_s_conditions', 'integralconditions', 'sectorialconditions']:
+        if not hasattr(tool, folder_name):
+            createFolderWithDefaultValues(conditions, folder_name, site, content_portal_type='UrbanVocabularyTerm')
     if not hasattr(tool, "additional_layers"):
         createFolderWithDefaultValues(tool, 'additional_layers', site, content_portal_type='UrbanVocabularyTerm')
 
-    if not hasattr(tool, "persons_titles"):
-        createFolderWithDefaultValues(tool, 'persons_titles', site, default_values)
-
-    if not hasattr(tool, "persons_grades"):
-        createFolderWithDefaultValues(tool, 'persons_grades', site, default_values)
-
-    if not hasattr(tool, "country"):
-        createFolderWithDefaultValues(tool, 'country', site, default_values)
-
-    if not hasattr(tool, "decisions"):
-        createFolderWithDefaultValues(tool, 'decisions', site, default_values)
-
-    if not hasattr(tool, "externaldecisions"):
-        createFolderWithDefaultValues(tool, 'externaldecisions', site, default_values)
+    folder_names = ['persons_titles', 'persons_grades', 'country', 'decisions', 'externaldecisions']
+    for folder_name in folder_names:
+        if not hasattr(tool, folder_name):
+            createFolderWithDefaultValues(tool, folder_name, site, default_values)
 
 
 def addUrbanConfigsTopics(context):
@@ -1011,9 +858,7 @@ def addApplicationFolders(context):
             newFolderid = newFolder.invokeFactory("Folder", id=urban_type.lower() + 's', title=_(urban_type.lower() + 's', 'urban', context=site.REQUEST))
             newSubFolder = getattr(newFolder, newFolderid)
             alsoProvides(newSubFolder, ILicenceContainer)
-            newSubFolder.setConstrainTypesMode(1)
-            newSubFolder.setLocallyAllowedTypes([urban_type])
-            newSubFolder.setImmediatelyAddableTypes([urban_type])
+            setFolderAllowedTypes(newSubFolder, urban_type)
             #set the layout to "urban_view"
             newSubFolder.setLayout('urban_view')
             #manage the 'Add' permissions...
@@ -1030,9 +875,7 @@ def addApplicationFolders(context):
     if not hasattr(newFolder, "architects"):
         newFolderid = newFolder.invokeFactory("Folder", id="architects", title=_("architects_folder_title", 'urban', context=site.REQUEST))
         newSubFolder = getattr(newFolder, newFolderid)
-        newSubFolder.setConstrainTypesMode(1)
-        newSubFolder.setLocallyAllowedTypes(['Architect'])
-        newSubFolder.setImmediatelyAddableTypes(['Architect'])
+        setFolderAllowedTypes(newSubFolder, 'Architect')
         newSubFolder.setLayout('architects_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
@@ -1041,9 +884,7 @@ def addApplicationFolders(context):
     if not hasattr(newFolder, "geometricians"):
         newFolderid = newFolder.invokeFactory("Folder", id="geometricians", title=_("geometricians_folder_title", 'urban', context=site.REQUEST))
         newSubFolder = getattr(newFolder, newFolderid)
-        newSubFolder.setConstrainTypesMode(1)
-        newSubFolder.setLocallyAllowedTypes(['Geometrician'])
-        newSubFolder.setImmediatelyAddableTypes(['Geometrician'])
+        setFolderAllowedTypes(newSubFolder, 'Geometrician')
         newSubFolder.setLayout('geometricians_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Geometrician', ['Manager', 'Editor', ], acquire=0)
@@ -1052,9 +893,7 @@ def addApplicationFolders(context):
     if not hasattr(newFolder, "notaries"):
         newFolderid = newFolder.invokeFactory("Folder", id="notaries", title=_("notaries_folder_title", 'urban', context=site.REQUEST))
         newSubFolder = getattr(newFolder, newFolderid)
-        newSubFolder.setConstrainTypesMode(1)
-        newSubFolder.setLocallyAllowedTypes(['Notary'])
-        newSubFolder.setImmediatelyAddableTypes(['Notary'])
+        setFolderAllowedTypes(newSubFolder, 'Notary')
         newSubFolder.setLayout('notaries_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
@@ -1063,10 +902,8 @@ def addApplicationFolders(context):
     if not hasattr(newFolder, "parcellings"):
         newFolderid = newFolder.invokeFactory("Folder", id="parcellings", title=_("parcellings_folder_title", 'urban', context=site.REQUEST))
         newSubFolder = getattr(newFolder, newFolderid)
+        setFolderAllowedTypes(newSubFolder, 'ParcellingTerm')
         newSubFolder.setConstrainTypesMode(1)
-        newSubFolder.setLocallyAllowedTypes(['ParcellingTerm'])
-        newSubFolder.setImmediatelyAddableTypes(['ParcellingTerm'])
-        newSubFolder.setLayout('parcellings_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add ParcellingTerm', ['Manager', 'Editor', ], acquire=0)
 
@@ -1367,16 +1204,6 @@ def addDemoLicences(context):
                 for template in urban_event.getTemplates():
                     urban_tool.createUrbanDoc(template.UID(), urban_event.UID())
             odt_files.extend(urban_event.objectValues('ATBlob'))
-
-    """#this part gathers all the documents generated in one archive
-    import zipfile
-    urban_docs = zipfile.ZipFile('urban_documents', 'a')
-    for odtfile in odt_files:
-        temp = open('temp', 'wb')
-        temp.write(odtfile.data)
-        temp.close()
-        urban_docs.write('temp', odtfile.id)
-    urban_docs.close()"""
 
 
 def setupExtra(context):
