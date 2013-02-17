@@ -109,11 +109,10 @@ def addGlobalTemplates(context):
     Helper method to add/update the templates at the root of urban config
     """
     profile_name = context._profile_path.split('/')[-1]
-    from_string = "from Products.urban.profiles.%s.data import globalTemplates" % profile_name
-    try:
-        exec(from_string) in locals()
-    except ImportError:
-        return
+    module_name = 'Products.urban.profiles.%s.data' % profile_name
+    attribute = 'globalTemplates'
+    module = __import__(module_name, fromlist=[attribute])
+    globalTemplates = getattr(module, attribute)
 
     reload_globals = False
     replace_mod_globals = False
@@ -143,11 +142,10 @@ def addUrbanEventTypes(context):
     #get the urbanEventTypes dict from the profile
     #get the name of the profile by taking the last part of the _profile_path
     profile_name = context._profile_path.split('/')[-1]
-    from_string = "from Products.urban.profiles.%s.data import urbanEventTypes" % profile_name
-    try:
-        exec(from_string) in locals()
-    except ImportError:
-        return
+    module_name = 'Products.urban.profiles.%s.data' % profile_name
+    attribute = 'urbanEventTypes'
+    module = __import__(module_name, fromlist=[attribute])
+    urbanEventTypes = getattr(module, attribute)
 
     reload_events = False
     replace_mod_events = False
