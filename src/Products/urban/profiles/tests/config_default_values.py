@@ -48,7 +48,7 @@ default_values = {
 
     'persons_titles': [
         'PersonTitleTerm',
-        {'id': "notitle", 'title': u"", 'extraValue': "Madame, Monsieur", 'abbreviation': "", 'gender': "male", 'multiplicity': "single"},
+        {'id': "master", 'title': u"Maître", 'extraValue': "Maître", 'abbreviation': "Me", 'gender': "male", 'multiplicity': "single"},
     ],
 
     'persons_grades': [
