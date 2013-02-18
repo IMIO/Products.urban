@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from plone.testing import z2, zca, Layer
+from plone.testing import z2, zca
 from plone.app.testing import PloneWithPackageLayer, IntegrationTesting, FunctionalTesting, helpers
 import Products.urban
 
@@ -25,11 +25,11 @@ class UrbanTestLayer(IntegrationTesting):
         with helpers.ploneSite() as portal:
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
 
-URBAN_TESTS_LICENCES = UrbanTestLayer(
-    bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_LICENCES")
-
 URBAN_TESTS_PROFILE_INTEGRATION = IntegrationTesting(
     bases=(URBAN_TESTS_PROFILE_DEFAULT,), name="URBAN_TESTS_PROFILE_INTEGRATION")
 
 URBAN_TESTS_PROFILE_FUNCTIONAL = FunctionalTesting(
     bases=(URBAN_TESTS_PROFILE_DEFAULT,), name="URBAN_TESTS_PROFILE_FUNCTIONAL")
+
+URBAN_TESTS_LICENCES = UrbanTestLayer(
+    bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_LICENCES")

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import unittest2 as unittest
-from DateTime import DateTime
 from zope.component import createObject
 from zope.component.interface import interfaceToName
 from plone.app.testing import quickInstallProduct, login
@@ -9,92 +8,66 @@ from plone.app.testing.interfaces import TEST_USER_NAME
 from plone.app.testing.interfaces import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import (IUrbanEventType, IAcknowledgmentEvent, IOpinionRequestEvent, IInquiryEvent)
-from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
+from Products.urban.testing import URBAN_TESTS_LICENCES, URBAN_TESTS_PROFILE_INTEGRATION
 
 
 class TestInstall(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_INTEGRATION
+    layer = URBAN_TESTS_LICENCES
+
+    def setUp(self):
+        portal = self.layer['portal']
+        self.portal = portal
+        login(portal, 'urbaneditor')
+        self.licence = portal.urban.buildlicences.objectValues()[0]
 
     def testReinstall(self):
-        portal = self.layer['portal']
-        quickInstallProduct(portal, 'Products.urban')
-        quickInstallProduct(portal, 'Products.urban')
+        quickInstallProduct(self.portal, 'Products.urban')
+        quickInstallProduct(self.portal, 'Products.urban')
 
     def testEventTypesCreated(self):
-        portal = self.layer['portal']
-        catalog = getToolByName(portal, 'portal_catalog')
-        login(portal, 'urbaneditor')
-        interfaceName = interfaceToName(portal, IUrbanEventType)
-        eventTypes = catalog(object_provides=interfaceName,
-                             sort_on='sortable_title')
+        catalog = getToolByName(self.portal, 'portal_catalog')
+        interfaceName = interfaceToName(self.portal, IUrbanEventType)
+        eventTypes = catalog(object_provides=interfaceName, sort_on='sortable_title')
         self.failUnless(len(eventTypes) > 0)
 
     def testEventWithoutEventTypeType(self):
-        portal = self.layer['portal']
-        urban = portal.urban
-        buildLicences = urban.buildlicences
-        LICENCE_ID = 'licence1'
-        login(portal, 'urbaneditor')
-        buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
-        licence = getattr(buildLicences, LICENCE_ID)
         #'avis-etude-incidence' can only be added if it is defined on the licence
-        licence.setImpactStudy(True)
-        createObject('UrbanEvent', 'avis-etude-incidence', licence)
+        self.licence.setImpactStudy(True)
+        createObject('UrbanEvent', 'avis-etude-incidence', self.licence)
 
     def testAcknowledgmentSearchByInterface(self):
-        portal = self.layer['portal']
-        urbanTool = getToolByName(portal, 'portal_urban')
-        urban = portal.urban
-        buildLicences = urban.buildlicences
+        urbanTool = getToolByName(self.portal, 'portal_urban')
         urbanConfig = urbanTool.buildlicence
-        LICENCE_ID = 'licence1'
-        login(portal, 'urbaneditor')
-        buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
-        licence = getattr(buildLicences, LICENCE_ID)
+        licence = self.licence
         eventTypes = urbanConfig.urbaneventtypes
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 0)
+        # there is already 7 events created on the licence
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 7)
         urbanEvent = createObject('UrbanEvent', 'accuse-de-reception', licence)
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 1)
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 8)
         self.failUnless(IAcknowledgmentEvent.providedBy(urbanEvent))
-        catalog = getToolByName(portal, 'portal_catalog')
-        interfaceName = interfaceToName(portal, IAcknowledgmentEvent)
+        catalog = getToolByName(self.portal, 'portal_catalog')
+        interfaceName = interfaceToName(self.portal, IAcknowledgmentEvent)
         eventTypes = catalog(object_provides=interfaceName,
                              sort_on='sortable_title')
-        self.assertEqual(len(eventTypes), 1)
+        # == 2 because there was an existing event 'accusé de réception' on the
+        # licence
+        self.assertEqual(len(eventTypes), 2)
 
     def testInquirySearchByInterface(self):
-        portal = self.layer['portal']
-        urban = portal.urban
-        buildLicences = urban.buildlicences
-        LICENCE_ID = 'licence1'
-        login(portal, 'urbaneditor')
-        buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
-        licence = getattr(buildLicences, LICENCE_ID)
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 0)
-        #we can add an 'enquete-publique' UrbanEventInquiry if an Inquiry is defined
-        #so define an investigationStart date on the licence, this correspond to a first
-        #available inquiry
-        date = DateTime()
-        licence.setInvestigationStart(date)
-        urbanEvent = createObject('UrbanEventInquiry', 'enquete-publique', licence)
+        licence = self.licence
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 7)
+        # no need to create an inquiry event, its already existing in the test
+        #licence
+        urbanEvent = licence.objectValues('UrbanEventInquiry')[0]
         self.failUnless(IInquiryEvent.providedBy(urbanEvent))
 
     def testOpinionRequestMarkerInterface(self):
-        portal = self.layer['portal']
-        urban = portal.urban
-        buildLicences = urban.buildlicences
-        LICENCE_ID = 'licence1'
-        login(portal, 'urbaneditor')
-        buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
-        licence = getattr(buildLicences, LICENCE_ID)
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 0)
-        licence.setInvestigationStart(DateTime('01/01/2011'))
-        # we can add a 'swde-opinion-request' UrbanEvent
-        # if and only if 'swde' has been set in solicitOpinionsTo list
-        opinions = ('belgacom', )
-        licence.setSolicitOpinionsTo(opinions)
-        urbanEvent = createObject('UrbanEvent', 'belgacom-opinion-request', licence)
+        licence = self.licence
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 7)
+        # no need to create an opinion request event, its already existing in
+        # the test licence
+        urbanEvent = licence.objectValues('UrbanEventOpinionRequest')[0]
         self.failUnless(IOpinionRequestEvent.providedBy(urbanEvent))
 
     def testAcknowledgmentEventTypeType(self):

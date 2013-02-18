@@ -243,7 +243,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         if brefs:
             #linkedInquiry may come from a UrbanEventInquiry or an UrbanEventOpinionRequest
             for bref in brefs:
-                if bref.portal_type == 'UrbanEventInquiry':
+                if bref and bref.portal_type == 'UrbanEventInquiry':
                     return bref
         else:
             return None

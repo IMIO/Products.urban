@@ -77,6 +77,8 @@ urbanEventTypes = {
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
+                                     {'id': "urb-rapp-service", 'title': "Rapport du Service"},
+                                     {'id': "urb-rapp-college", 'title': "Rapport du Collège"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
                     },

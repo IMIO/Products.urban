@@ -5,30 +5,17 @@ from zope.lifecycleevent import ObjectModifiedEvent
 from zope.lifecycleevent import ObjectRemovedEvent
 from plone.app.testing import login
 from Products.CMFCore.utils import getToolByName
-from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
-from Products.urban.setuphandlers import createLicence
+from Products.urban.testing import URBAN_TESTS_LICENCES
 
 
 class TestKeyEvent(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_FUNCTIONAL
+    layer = URBAN_TESTS_LICENCES
 
     def setUp(self):
         portal = self.layer['portal']
         self.portal_urban = portal.portal_urban
-        urban = portal.urban
-        self.buildLicences = urban.buildlicences
         login(portal, 'urbaneditor')
-        licence_data = {
-            'licenceSubject': 'Exemple Permis Urbanisme',
-            'contact_type': 'Applicant',
-            'contact_data':  {
-                'personTitle': 'masters', 'name1': 'Smith &', 'name2': 'Wesson',
-                'street': 'Rue du porc dans le yaourt', 'number': '42', 'zipcode': '5032',
-                'city': 'Couillet'
-            }
-        }
-        self.licence = createLicence(portal, 'BuildLicence', licence_data)
 
     def testCreateKeyEvent(self):
         portal = self.layer['portal']

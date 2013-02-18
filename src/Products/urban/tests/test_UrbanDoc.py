@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 import unittest
 from plone.app.testing import login
-from Products.urban.testing import URBAN_TESTS_LICENCES, URBAN_TESTS_PROFILE_FUNCTIONAL
+from Products.urban.testing import URBAN_TESTS_LICENCES
 from plone.testing.z2 import Browser
 from Products.CMFCore.utils import getToolByName
 

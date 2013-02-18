@@ -4,33 +4,22 @@ from time import sleep
 from zope import event
 from zope.component.interface import interfaceToName
 from plone.app.testing import login
-from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
+from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.interfaces import IAcknowledgmentEvent
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.event import ObjectEditedEvent
 from Products.urban.utils import getMd5Signature
-from Products.urban.setuphandlers import createLicence
 
 
 class TestUrbanEventTypes(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_FUNCTIONAL
+    layer = URBAN_TESTS_LICENCES
 
     def setUp(self):
         portal = self.layer['portal']
         self.portal_urban = portal.portal_urban
         self.portal_setup = portal.portal_setup
-        licence_data = {
-            'licenceSubject': 'Exemple Permis Urbanisme',
-            'contact_type': 'Applicant',
-            'contact_data':  {
-                'personTitle': 'masters', 'name1': 'Smith &', 'name2': 'Wesson',
-                'street': 'Rue du porc dans le yaourt', 'number': '42', 'zipcode': '5032',
-                'city': 'Couillet'
-            }
-        },
         login(portal, 'urbaneditor')
-        self.licence = createLicence(portal, 'BuildLicence', licence_data)
 
     def testLastKeyEventPropertyDefaultCase(self):
         portal = self.layer['portal']
