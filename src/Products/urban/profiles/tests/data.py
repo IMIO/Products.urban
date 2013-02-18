@@ -37,6 +37,7 @@ urbanEventTypes = {
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
+                                     {'id': "urb-accuse", 'title': "Accusé de réception"},
                                     ),
                     },
                     {
@@ -91,5 +92,13 @@ urbanEventTypes = {
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
                     },
+                    {
+                    'id': "debut-des-travaux",
+                    'title': "Début des travaux",
+                    'deadLineDelay': 15,
+                    'activatedFields': [],
+                    'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IWorkBeginningEvent',
+                    }
                    ),
                   }

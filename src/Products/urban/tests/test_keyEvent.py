@@ -3,12 +3,10 @@ import unittest
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 from zope.lifecycleevent import ObjectRemovedEvent
-from time import sleep
-from DateTime import DateTime
-from zope.component import createObject
 from plone.app.testing import login
 from Products.CMFCore.utils import getToolByName
 from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
+from Products.urban.setuphandlers import createLicence
 
 
 class TestKeyEvent(unittest.TestCase):
@@ -20,14 +18,20 @@ class TestKeyEvent(unittest.TestCase):
         self.portal_urban = portal.portal_urban
         urban = portal.urban
         self.buildLicences = urban.buildlicences
-        LICENCE_ID = 'licence1'
         login(portal, 'urbaneditor')
-        self.buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
-        self.buildLicence = getattr(self.buildLicences, LICENCE_ID)
+        licence_data = {
+            'licenceSubject': 'Exemple Permis Urbanisme',
+            'contact_type': 'Applicant',
+            'contact_data':  {
+                'personTitle': 'masters', 'name1': 'Smith &', 'name2': 'Wesson',
+                'street': 'Rue du porc dans le yaourt', 'number': '42', 'zipcode': '5032',
+                'city': 'Couillet'
+            }
+        }
+        self.licence = createLicence(portal, 'BuildLicence', licence_data)
 
     def testCreateKeyEvent(self):
         portal = self.layer['portal']
-        portal.urban.buildlicences.manage_delObjects('licence1')
         catalog = getToolByName(portal, 'portal_catalog')
         buildlicence = catalog(portal_type='BuildLicence')[0].getObject()
         buildlicence_brain = catalog(portal_type='BuildLicence')[0]
@@ -47,7 +51,6 @@ class TestKeyEvent(unittest.TestCase):
 
     def testDeleteKeyEvent(self):
         portal = self.layer['portal']
-        portal.urban.buildlicences.manage_delObjects('licence1')
         catalog = getToolByName(portal, 'portal_catalog')
         buildlicence = catalog(portal_type='BuildLicence')[0].getObject()
         old_index_value = catalog(portal_type='BuildLicence')[0].last_key_event
@@ -67,10 +70,8 @@ class TestKeyEvent(unittest.TestCase):
         these dates appears on the licence summary tab
         """
         portal = self.layer['portal']
-        portal.urban.buildlicences.manage_delObjects('licence1')
         catalog = getToolByName(portal, 'portal_catalog')
         buildlicence = catalog(portal_type='BuildLicence')[0].getObject()
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
         urban_event = buildlicence.objectValues('UrbanEvent')[-1]
         urban_event.setEventDate('18/09/1986')
         urban_event_type = urban_event.getUrbaneventtypes()
@@ -87,10 +88,8 @@ class TestKeyEvent(unittest.TestCase):
         these dates appears on the licence summary tab
         """
         portal = self.layer['portal']
-        portal.urban.buildlicences.manage_delObjects('licence1')
         catalog = getToolByName(portal, 'portal_catalog')
         buildlicence = catalog(portal_type='BuildLicence')[0].getObject()
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
         urban_event = buildlicence.objectValues('UrbanEvent')[-1]
         urban_event.setDecisionDate('18/09/1986')
         urban_event_type = urban_event.getUrbaneventtypes()
