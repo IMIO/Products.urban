@@ -4,7 +4,6 @@ from time import sleep
 from DateTime import DateTime
 from zope.component import createObject
 from plone.app.testing import login
-from Products.CMFCore.utils import getToolByName
 from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
 
 
@@ -50,7 +49,7 @@ class TestBuildLicence(unittest.TestCase):
         self.buildLicence.setInvestigationStart(DateTime('01/01/2011'))
         self.buildLicence.setSolicitOpinionsTo(opinions)
         opinionRequest = createObject('UrbanEvent',
-                'belgacom-opinion-request', self.buildLicence)
+                                      'belgacom-opinion-request', self.buildLicence)
 
         self.assertEqual(self.buildLicence.getAllOpinionRequests(), [opinionRequest])
 
@@ -77,21 +76,21 @@ class TestBuildLicence(unittest.TestCase):
 
     def testGetCurrentFolderManager(self):
         #1 link login on treatment agent
-        at = getattr(self.portal_urban.buildlicence.foldermanagers,'foldermanager1')
+        at = getattr(self.portal_urban.buildlicence.foldermanagers, 'foldermanager1')
         at.setPloneUserId('urbaneditor')
         #2 create an empty buildlicence
         LICENCE_ID = 'licence2'
         self.buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
         buildLicence2 = getattr(self.buildLicences, LICENCE_ID)
-        buildLicence2.setFoldermanagers(self.portal_urban.getCurrentFolderManager(buildLicence2,initials=False))
+        buildLicence2.setFoldermanagers(self.portal_urban.getCurrentFolderManager(initials=False))
         #3 check if agent treatment exist
-        self.assertEqual(buildLicence2.getFoldermanagers()[0].getPloneUserId(),'urbaneditor')
+        self.assertEqual(buildLicence2.getFoldermanagers()[0].getPloneUserId(), 'urbaneditor')
         at.setPloneUserId('urbanreader')
         LICENCE_ID = 'licence3'
         self.buildLicences.invokeFactory('BuildLicence', LICENCE_ID)
         buildLicence3 = getattr(self.buildLicences, LICENCE_ID)
-        buildLicence3.setFoldermanagers(self.portal_urban.getCurrentFolderManager(buildLicence3,initials=False))
-        self.assertEqual(len(buildLicence3.getFoldermanagers()),0)
+        buildLicence3.setFoldermanagers(self.portal_urban.getCurrentFolderManager(initials=False))
+        self.assertEqual(len(buildLicence3.getFoldermanagers()), 0)
 
     def testGetAllAdvicesWithoutOpinionRequest(self):
         self.assertEqual(self.buildLicence.getAllAdvices(), [])

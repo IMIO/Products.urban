@@ -124,7 +124,7 @@ default_values = {
 
     'foldermakers': [
         'OrganisationTerm',
-        {'id': "service-pop", 'title': u"Service population", 'description': u'<p>1, Rue xxx<br />xxxx Commune</p>'},
+        {'id': "belgacom", 'title': u"Belgacom", 'description': u'<p>60, Rue Marie Henriette<br />5000 Namur</p>'},
     ],
 
     'investigationarticles': [

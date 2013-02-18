@@ -7,6 +7,28 @@ urbanEventTypes = {
                    'buildlicence':
                    (
                     {
+                    'id': "depot-de-la-demande",
+                    'title': "Dépôt de la demande (récépissé - article 115)",
+                    'eventDateLabel': "Date de dépôt",
+                    'activatedFields': [],
+                    'deadLineDelay': 15,
+                    'isKeyEvent': True,
+                    'keyDates': ('eventDate',),
+                    'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+                    },
+                    {
+                    'id': "dossier-incomplet",
+                    'title': "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
+                    'activatedFields': [],
+                    'deadLineDelay': 15,
+                    'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+                    'isKeyEvent': True,
+                    'keyDates': ('eventDate',),
+                    'podTemplates': (
+                                    ),
+                    },
+                    {
                     'id': "accuse-de-reception",
                     'title': "Accusé de réception (dossier complet - article 116 § 1)",
                     'activatedFields': ['transmitDate'],
