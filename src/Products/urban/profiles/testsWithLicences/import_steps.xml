@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<import-steps>
+
+ <import-step
+    id="urban-addTestLicences"
+    handler="Products.urban.setuphandlers.addDemoLicences"
+    title="Add dummy licences with generated events and documents for tests purpose"
+    version="2013-01-04T11:30:41.455297">
+   Create tests licences
+ </import-step>
+
+</import-steps>

@@ -9,7 +9,6 @@ from plone.app.testing.interfaces import TEST_USER_NAME
 from plone.app.testing.interfaces import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import (IUrbanEventType, IAcknowledgmentEvent, IOpinionRequestEvent, IInquiryEvent)
-from Products.urban.testing import URBAN_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
 
 
@@ -93,9 +92,9 @@ class TestInstall(unittest.TestCase):
         licence.setInvestigationStart(DateTime('01/01/2011'))
         # we can add a 'swde-opinion-request' UrbanEvent
         # if and only if 'swde' has been set in solicitOpinionsTo list
-        opinions = ('service-pop', )
+        opinions = ('belgacom', )
         licence.setSolicitOpinionsTo(opinions)
-        urbanEvent = createObject('UrbanEvent', 'service-pop-opinion-request', licence)
+        urbanEvent = createObject('UrbanEvent', 'belgacom-opinion-request', licence)
         self.failUnless(IOpinionRequestEvent.providedBy(urbanEvent))
 
     def testAcknowledgmentEventTypeType(self):
@@ -110,7 +109,7 @@ class TestInstall(unittest.TestCase):
 
 class TestContact(unittest.TestCase):
 
-    layer = URBAN_INTEGRATION
+    layer = URBAN_TESTS_PROFILE_INTEGRATION
 
     def setUp(self):
         self.portal = self.layer['portal']

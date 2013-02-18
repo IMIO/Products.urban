@@ -19,18 +19,14 @@ URBAN_TESTS_PROFILE_DEFAULT = PloneWithPackageLayer(
     name="URBAN_TESTS_PROFILE_DEFAULT")
 
 
-class UrbanTestLayer(Layer):
+class UrbanTestLayer(IntegrationTesting):
 
     def setUp(self):
         with helpers.ploneSite() as portal:
-            helpers.applyProfile(portal, 'Products.urban:tests')
+            helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
 
-URBAN_TESTS_PROFILE = UrbanTestLayer(
-    bases=(URBAN_TESTS_PROFILE_DEFAULT, ),
-    name="URBAN_TESTS_PROFILE")
-
-URBAN_INTEGRATION = IntegrationTesting(
-    bases=(URBAN_TESTS_PROFILE_DEFAULT,), name="URBAN_INTEGRATION")
+URBAN_TESTS_LICENCES = UrbanTestLayer(
+    bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_LICENCES")
 
 URBAN_TESTS_PROFILE_INTEGRATION = IntegrationTesting(
     bases=(URBAN_TESTS_PROFILE_DEFAULT,), name="URBAN_TESTS_PROFILE_INTEGRATION")

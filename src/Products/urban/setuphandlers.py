@@ -674,7 +674,7 @@ def addGlobalFolders(context):
         conditions = getattr(tool, "exploitationconditions")
     #add the exploitation conditions subfolders
     for folder_name in ['i_and_s_conditions', 'integralconditions', 'sectorialconditions']:
-        if not hasattr(tool, folder_name):
+        if not hasattr(conditions, folder_name):
             createFolderWithDefaultValues(conditions, folder_name, site, content_portal_type='UrbanVocabularyTerm')
     if not hasattr(tool, "additional_layers"):
         createFolderWithDefaultValues(tool, 'additional_layers', site, content_portal_type='UrbanVocabularyTerm')
@@ -1049,48 +1049,15 @@ def addDemoLicences(context):
     if context.readDataFile('urban_demo_marker.txt') is None:
         return
 
-    site = context.getSite()
-    available_licence_types = {
-        'BuildLicence': {
-            'licenceSubject': "Exemple Permis Urbanisme",
-            'contact_type': 'Applicant',
-            'contact_data':  {
-                'personTitle': 'masters', 'name1': 'Smith &', 'name2': 'Wesson',
-                'street': 'Rue du porc dans le yaourt', 'number': '42', 'zipcode': '5032',
-                'city': 'Couillet'
-            },
-        },
-        'ParcelOutLicence': {
-            'licenceSubject': "Exemple Permis d'urbanisation",
-            'contact_type': 'Applicant',
-        },
-        'Declaration': {
-            'licenceSubject': "Exemple Déclaration",
-            'contact_type': 'Applicant',
-        },
-        'Division': {
-            'licenceSubject': 'Exemple Division',
-            'contact_type': 'Proprietary',
-        },
-        'UrbanCertificateOne': {
-            'licenceSubject': 'Exemple Certificat Urbanisme 1',
-            'contact_type': 'Proprietary',
-        },
-        'UrbanCertificateTwo': {
-            'licenceSubject': 'Exemple Certificat Urbanisme 2',
-            'contact_type': 'Proprietary',
-        },
-        'NotaryLetter': {
-            'licenceSubject': 'Exemple Lettre de notaire',
-            'contact_type': 'Proprietary',
-        },
-        'MiscDemand': {
-            'licenceSubject': 'Exemple Demande diverse',
-            'contact_type': 'Applicant',
-        },
-    }
+    profile_name = context._profile_path.split('/')[-1]
+    module_name = 'Products.urban.profiles.%s.licences_data' % profile_name
+    attribute = 'licences_data'
+    module = __import__(module_name, fromlist=[attribute])
+    licences_data = getattr(module, attribute)
 
-    for licence_type, values in available_licence_types.iteritems():
+    site = context.getSite()
+
+    for licence_type, values in licences_data.iteritems():
         createLicence(site, licence_type, values)
 
 

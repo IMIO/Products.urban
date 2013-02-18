@@ -87,6 +87,14 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       for="Products.urban.interfaces.IUrbanTool"
   />
+  <genericsetup:registerProfile
+      name="testsWithLicences"
+      title="urban-testsWithLicences"
+      directory="profiles/testsWithLicences"
+      description="Tests Extension profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.urban.interfaces.IUrbanTool"
+  />
   <!-- ##/code-section profiles.zcml-bottom -->
 
 </configure>

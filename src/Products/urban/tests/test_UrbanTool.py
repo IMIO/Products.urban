@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
 import unittest
-from time import sleep
-from DateTime import DateTime
-from zope.component import createObject
-from plone.app.testing import login
-from Products.CMFCore.utils import getToolByName
-from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL, URBAN_INTEGRATION
+from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL, URBAN_TESTS_PROFILE_INTEGRATION
 
 
 class TestBuildLicence(unittest.TestCase):
 
     layer = URBAN_TESTS_PROFILE_FUNCTIONAL
-    layer = URBAN_INTEGRATION
+    layer = URBAN_TESTS_PROFILE_INTEGRATION
 
     def setUp(self):
         portal = self.layer['portal']
