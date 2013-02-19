@@ -29,6 +29,14 @@ urbanEventTypes = {
                                     ),
                     },
                     {
+                    'id': "recepisse-art15-complement",
+                    'title': "Récépissé d'un complément à une demande de permis (article 115)",
+                    'activatedFields': [],
+                    'deadLineDelay': 15,
+                    'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+                    },
+                    {
                     'id': "accuse-de-reception",
                     'title': "Accusé de réception (dossier complet - article 116 § 1)",
                     'activatedFields': ['transmitDate'],
@@ -83,6 +91,16 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
                     },
                     {
+                    'id': "transmis-2eme-dossier-rw",
+                    'title': "Transmis 2eme dossier RW",
+                    'eventDateLabel': "Date de transmis",
+                    'activatedFields': ['decisionDate', 'decision', 'receiptDate'],
+                    'deadLineDelay': 15,
+                    'podTemplates': (
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
+                    },
+                    {
                     'id': "delivrance-du-permis-octroi-ou-refus",
                     'title': "Délivrance du permis (octroi ou refus)",
                     'activatedFields': ['decisionDate', 'decision'],
@@ -101,6 +119,15 @@ urbanEventTypes = {
                     'activatedFields': [],
                     'podTemplates': (),
                     'eventTypeType': 'Products.urban.interfaces.IWorkBeginningEvent',
-                    }
+                    },
+                    {
+                    'id': "prorogation",
+                    'title': "Prorogation du permis",
+                    'deadLineDelay': 15,
+                    'activatedFields': ['decisionDate', 'decision', 'receiptDate', ],
+                    'podTemplates': (
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.IProrogationEvent',
+                    },
                    ),
                   }
