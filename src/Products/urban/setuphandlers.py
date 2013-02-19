@@ -556,7 +556,7 @@ def setDefaultApplicationSecurity(context):
     #licence folder : "urban_readers" can read and "urban_editors" can edit...
     for folder_name in licencesfolder_names:
         if hasattr(app_folder, folder_name):
-            folder = getattr(app_folder, "buildlicences")
+            folder = getattr(app_folder, folder_name)
             #we add a property usefull for portal_urban.getUrbanConfig
             try:
                 #we try in case we apply the profile again...

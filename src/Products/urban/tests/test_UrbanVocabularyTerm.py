@@ -4,6 +4,7 @@ from zope.i18n import translate
 from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
 
+
 class TestUrbanVocabularyTerm(unittest.TestCase):
 
     layer = URBAN_TESTS_PROFILE_FUNCTIONAL
@@ -15,12 +16,13 @@ class TestUrbanVocabularyTerm(unittest.TestCase):
         self.urbancertificateones = urban.urbancertificateones
         LICENCE_ID = 'licence1'
         login(portal, 'urbaneditor')
+        #import ipdb; ipdb.set_trace()
         self.urbancertificateones.invokeFactory('UrbanCertificateOne', LICENCE_ID)
         self.certificate = getattr(self.urbancertificateones, LICENCE_ID)
         #set language to 'fr' as we do some translations above
         ltool = portal.portal_languages
         defaultLanguage = 'fr'
-        supportedLanguages = ['en','fr']
+        supportedLanguages = ['en', 'fr']
         ltool.manage_setLanguageSettings(defaultLanguage, supportedLanguages, setUseCombinedLanguageCodes=False)
         #this needs to be done in tests for the language to be taken into account...
         ltool.setLanguageBindings()

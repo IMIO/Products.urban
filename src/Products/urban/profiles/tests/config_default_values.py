@@ -97,6 +97,8 @@ default_values = {
         {'id': "schema-developpement-espace-regional",
         'title': u"Option particulière du schéma de développement de l'espace régional",
         'description': "<p>fait l'objet d'une option particulière du schéma de développement de l'espace régional, à savoir ...;</p>"},
+        {'id': "situe-en-zone", 'title': u"Situé en Zone [...]",
+        'description': "<p>est situé en [[python: object.getValueForTemplate('folderZone'),]] au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"},
     ],
 
     'roadspecificfeatures': [

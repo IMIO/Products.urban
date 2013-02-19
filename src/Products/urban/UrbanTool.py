@@ -1365,6 +1365,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                     res = res.encode('utf8')
             else:
                 res = NULL_VALUE
+            if type(res) == tuple:
+                res = res[0]
+            if type(res) == unicode:
+                res = res.encode()
             renderedDescription = re.sub(re.escape(expr.group()), res, renderedDescription)
         return renderedDescription
 
