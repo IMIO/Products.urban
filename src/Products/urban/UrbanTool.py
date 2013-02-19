@@ -373,20 +373,21 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         response.redirect(urbanEventObj.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
 
     security.declarePublic('getVocabularyDefaultValue')
-    def getVocabularyDefaultValue(self, vocabulary_name, context, in_urban_config):
+    def getVocabularyDefaultValue(self, vocabulary_name, context, in_urban_config, multivalued=False):
         """
          Return the first vocabulary term marked as default value of the vocabulary named vocabulary_name
         """
         #search in an urbanConfig or in the tool
+        empty_value = multivalued and [] or ''
         if in_urban_config:
             config_folder = getattr(self, self.getUrbanConfig(context).getId())
             if not hasattr(config_folder, vocabulary_name):
-                return ['']
+                return empty_value
             voc_folder = getattr(config_folder, vocabulary_name)
         else:
             voc_folder = getattr(self, vocabulary_name)
         default_values = [voc_term.id for voc_term in voc_folder.listFolderContents() if voc_term.getIsDefaultValue()]
-        return default_values and default_values or ['']
+        return default_values and default_values or empty_value
 
     security.declarePublic('getTextDefaultValue')
     def getTextDefaultValue(self, fieldname, context):

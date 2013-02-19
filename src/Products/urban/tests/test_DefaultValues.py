@@ -32,7 +32,7 @@ class TestDefaultValues(unittest.TestCase):
         newlicence = buildlicences.newlicence
         #any configurable selection field should be empty by default
         self.assertEqual(True, not newlicence.getWorkType())
-        self.assertEqual([''], newlicence.getFolderCategory())
+        self.assertEqual('', newlicence.getFolderCategory())
         self.assertEqual(True, not newlicence.getMissingParts())
 
 

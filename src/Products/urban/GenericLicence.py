@@ -672,7 +672,9 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
                 context = frame_record[0]. f_locals['instance']
         vocabulary_name = field.vocabulary.path
         in_urban_config = field.vocabulary.inUrbanConfig
-        return urban_tool.getVocabularyDefaultValue(vocabulary_name=vocabulary_name, context=context, in_urban_config=in_urban_config)
+        return urban_tool.getVocabularyDefaultValue(vocabulary_name=vocabulary_name, context=context, in_urban_config=in_urban_config,
+                                                    multivalued=field.multiValued)
+
 
     security.declarePublic('getDefaultText')
     def getDefaultText(self):
@@ -900,7 +902,8 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
                                                   title=eventType.Title(), urbaneventtypes=(eventType,))
             newUrbanEventObj=getattr(self, newUrbanEventId)
             newUrbanEventObj.processForm()
-        return self.REQUEST.RESPONSE.redirect(self.absolute_url()+'/view?#fieldsetlegend-urban_events')
+        return self.REQUEST.RESPONSE.redirect(self.absolute_url() + '/view?#fieldsetlegend-urban_events')
+
 
     security.declarePublic('getAllAdvices')
     def getAllAdvices(self):
