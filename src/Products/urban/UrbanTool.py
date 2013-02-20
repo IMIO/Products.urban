@@ -20,7 +20,7 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from Products.urban.config import URBAN_TYPES, PROJECTNAME, EMPTY_VOCAB_VALUE
+from Products.urban.config import URBAN_TYPES, PROJECTNAME, EMPTY_VOCAB_VALUE, NULL_VALUE
 
 
 from Products.CMFCore.utils import UniqueObject
@@ -974,7 +974,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
           Used for referencebrowser_popup overrided in urban
         """
-        if at_obj.__module__== "Products.Archetypes.Schema":
+        if at_obj.__module__ == "Products.Archetypes.Schema":
             #we have a schema here
             return at_obj[fieldRealName]
         else:
