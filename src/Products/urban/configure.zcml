@@ -106,6 +106,10 @@
   <adapter name="last_key_event" factory=".indexes.genericlicence_lastkeyevent" />
   <adapter name="folder_manager" factory=".indexes.genericlicence_foldermanager" />
 
+  <interface interface=".interfaces.IUrbanCertificateOne" />
+  <interface interface=".interfaces.IUrbanCertificateTwo" />
+  <interface interface=".interfaces.INotaryLetter" />
+  <interface interface=".interfaces.IEnvClassThree" />
   <!-- ##/code-section configure.zcml.header -->
 
   <i18n:registerTranslations directory="locales" />

@@ -11,21 +11,27 @@ from Products.urban import UrbanMessage as _
 class IProprietary(Interface):
     """Marker interface for .Proprietary.Proprietary
     """
+
+
 class INotary(Interface):
     """Marker interface for .Notary.Notary
     """
+
+
 class IApplicant(Interface):
     """Marker interface for .Applicant
     """
+
+
 class IArchitect(Interface):
     """Marker interface for .Architect.Architect
     """
 
 CONTACT_INTERFACES = {
-    'Applicant' : IApplicant,
-    'Architect' : IArchitect,
-#    'Notary' : INotary,  # to be taken into account if notary.py is removed
-#    'Proprietary' : IProprietary, # to be taken into account if proprietary.py is removed
+    'Applicant': IApplicant,
+    'Architect': IArchitect,
+    # 'Notary' : INotary,  # to be taken into account if notary.py is removed
+    # 'Proprietary' : IProprietary, # to be taken into account if proprietary.py is removed
 }
 
 ##/code-section HEAD
@@ -184,10 +190,12 @@ class ILicenceContainer(Interface):
     Marker interface for a folder containing Licences
     """
 
+
 class IEventTypeType(IInterface):
     """
     Basic event type
     """
+
 
 class ITechnicalServiceOpinionRequestEvent(Interface):
     __doc__ = _("""ITechnicalServiceOpinionRequest type marker interface""")
@@ -199,6 +207,7 @@ class IOpinionRequestEvent(Interface):
 
 class IWalloonRegionPrimoEvent(Interface):
     __doc__ = _("""IWalloonRegionPrimo type marker interface""")
+
 
 class IWalloonRegionOpinionRequestEvent(Interface):
     __doc__ = _("""IWalloonRegionOpinionRequest type marker interface""")
@@ -257,5 +266,18 @@ class IUrbanBase(Interface):
     """
 
 
+class IUrbanCertificateOne(Interface):
+    """Marker interface for UrbanCertificateOne
+    """
+
+
+class INotaryLetter(Interface):
+    """Marker interface for EnvClassThree
+    """
+
+
+class IEnvClassThree(Interface):
+    """Marker interface for EnvClassThree
+    """
 
 ##/code-section FOOT
