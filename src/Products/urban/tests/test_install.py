@@ -41,10 +41,10 @@ class TestInstall(unittest.TestCase):
         urbanConfig = urbanTool.buildlicence
         licence = self.licence
         eventTypes = urbanConfig.urbaneventtypes
-        # there is already 7 events created on the licence
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 7)
+        # there is already 10 events created on the licence
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 10)
         urbanEvent = createObject('UrbanEvent', 'accuse-de-reception', licence)
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 8)
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 11)
         self.failUnless(IAcknowledgmentEvent.providedBy(urbanEvent))
         catalog = getToolByName(self.portal, 'portal_catalog')
         interfaceName = interfaceToName(self.portal, IAcknowledgmentEvent)
@@ -56,7 +56,7 @@ class TestInstall(unittest.TestCase):
 
     def testInquirySearchByInterface(self):
         licence = self.licence
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 7)
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 10)
         # no need to create an inquiry event, its already existing in the test
         #licence
         urbanEvent = licence.objectValues('UrbanEventInquiry')[0]
@@ -64,7 +64,7 @@ class TestInstall(unittest.TestCase):
 
     def testOpinionRequestMarkerInterface(self):
         licence = self.licence
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 7)
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 10)
         # no need to create an opinion request event, its already existing in
         # the test licence
         urbanEvent = licence.objectValues('UrbanEventOpinionRequest')[0]
