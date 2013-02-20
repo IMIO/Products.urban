@@ -4,7 +4,7 @@
 #
 # Copyright (c) 2013 by CommunesPlone
 # Generator: ArchGenXML Version 2.6
-#            http://plone.org/products/archgenxml
+#            http: //plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
 #
@@ -20,7 +20,7 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from Products.urban.config import *
+from Products.urban.config import URBAN_TYPES, PROJECTNAME, EMPTY_VOCAB_VALUE
 
 
 from Products.CMFCore.utils import UniqueObject
@@ -32,7 +32,8 @@ logger = logging.getLogger('urban: UrbanTool')
 import appy.pod.renderer
 import psycopg2
 import psycopg2.extras
-import os, time
+import os
+import time
 import re
 #from urlparse import urlparse
 from DateTime import DateTime
@@ -40,7 +41,6 @@ from StringIO import StringIO
 from AccessControl import getSecurityManager
 from Acquisition import aq_base
 from zope.i18n import translate
-from plone.memoize import ram
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.Expression import Expression, createExprContext
@@ -224,15 +224,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     # XXX constant put on the class to ensure it is close to the method that uses
     # it
     portal_types_per_event_type_type = {
-        'Products.urban.interfaces.IInquiryEvent':'UrbanEventInquiry',
-        'Products.urban.interfaces.IOpinionRequestEvent':'UrbanEventOpinionRequest',
-        }
+        'Products.urban.interfaces.IInquiryEvent': 'UrbanEventInquiry',
+        'Products.urban.interfaces.IOpinionRequestEvent': 'UrbanEventOpinionRequest',
+    }
     ##/code-section class-header
 
 
     # tool-constructors have no id argument, the id is fixed
     def __init__(self, id=None):
-        OrderedBaseFolder.__init__(self,'portal_urban')
+        OrderedBaseFolder.__init__(self, 'portal_urban')
         self.setTitle('Urban configuration')
 
         ##code-section constructor-footer #fill in your manual code here
@@ -272,66 +272,65 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         urbanEventType.checkCreationInLicence(licence)
 
         eventTypeType = urbanEventType.getEventTypeType()
-        portal_type = self.portal_types_per_event_type_type.get(eventTypeType,
-                "UrbanEvent")
+        portal_type = self.portal_types_per_event_type_type.get(eventTypeType, "UrbanEvent")
 
-        newUrbanEventId= licence.invokeFactory(portal_type,
-                id=self.generateUniqueId(portal_type),
-                title=urbanEventType.Title(),
-                urbaneventtypes=(urbanEventType,))
-        newUrbanEventObj=getattr(licence, newUrbanEventId)
-        return self.REQUEST.RESPONSE.redirect(newUrbanEventObj.absolute_url()
-                + '/edit')
+        newUrbanEventId = licence.invokeFactory(
+            portal_type,
+            id=self.generateUniqueId(portal_type),
+            title=urbanEventType.Title(),
+            urbaneventtypes=(urbanEventType, )
+        )
+        newUrbanEventObj = getattr(licence, newUrbanEventId)
+        return self.REQUEST.RESPONSE.redirect(newUrbanEventObj.absolute_url() + '/edit')
 
     security.declarePublic('createUrbanDoc')
     def createUrbanDoc(self, urban_template_uid, urban_event_uid):
         """
           Create an element in an UrbanEvent
         """
-        urbanTemplate=self.uid_catalog(UID=urban_template_uid)[0]
-        urbanTemplateObj=urbanTemplate.getObject()
-        urbanEvent=self.uid_catalog(UID=urban_event_uid)[0]
-        urbanEventObj=urbanEvent.getObject()
-        licenceFolder=urbanEventObj.getParentNode()
+        urbanTemplate = self.uid_catalog(UID=urban_template_uid)[0]
+        urbanTemplateObj = urbanTemplate.getObject()
+        urbanEvent = self.uid_catalog(UID=urban_event_uid)[0]
+        urbanEventObj = urbanEvent.getObject()
+        licenceFolder = urbanEventObj.getParentNode()
         fileType = self.getEditionOutputFormat()
         tempFileName = '%s/%s_%f.%s' % (
-            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),fileType)
+            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(), fileType)
         temp_file_names = {}
         try:
-            applicantobj=licenceFolder.getApplicants()[0]
+            applicantobj = licenceFolder.getApplicants()[0]
         except:
             applicantobj = None
-        portal_url=getToolByName(self,'portal_url')
-        brain=self.portal_catalog(path=portal_url.getPortalPath()+'/'+'/'.join(portal_url.getRelativeContentPath(licenceFolder)),id='depot-de-la-demande')
+        portal_url = getToolByName(self, 'portal_url')
+        brain = self.portal_catalog(path=portal_url.getPortalPath() + '/' + '/'.join(portal_url.getRelativeContentPath(licenceFolder)), id='depot-de-la-demande')
         try:
             recepisseobj = brain[0].getObject()
         except:
-            recepisseobj=None
-        brain=self.portal_catalog(path=portal_url.getPortalPath()+'/'+'/'.join(portal_url.getRelativeContentPath(licenceFolder)),id='premier-passage-au-college-communal')
+            recepisseobj = None
+        brain = self.portal_catalog(path=portal_url.getPortalPath() + '/' + '/'.join(portal_url.getRelativeContentPath(licenceFolder)), id='premier-passage-au-college-communal')
         try:
-            collegesubmissionobj= brain[0].getObject()
+            collegesubmissionobj = brain[0].getObject()
         except:
-            collegesubmissionobj=None
+            collegesubmissionobj = None
         global_templates = getattr(self, 'globaltemplates')
         #in the global_templates, only some of these templates must be taken into account
         auto_imported_template_ids = ['header.odt', 'footer.odt', 'reference.odt', 'signatures.odt']
         for generic_template in GLOBAL_TEMPLATES:
             #do only import necessary templates if exists...
-            if not generic_template['id'] in auto_imported_template_ids or \
-               not hasattr(aq_base(global_templates), generic_template['id']):
+            if not generic_template['id'] in auto_imported_template_ids or not hasattr(aq_base(global_templates), generic_template['id']):
                 continue
             template = getattr(global_templates, generic_template['id'])
             if template and template.size:
                 template = StringIO(template)
-                temp_file_name= '%s/%s_%f.%s' % (getOsTempFolder(), urbanTemplateObj._at_uid, time.time(),'odt')
+                temp_file_name = '%s/%s_%f.%s' % (getOsTempFolder(), urbanTemplateObj._at_uid, time.time(), 'odt')
                 #remove the '.odt' suffix so terms like "header" can be used in the templates instead of "header.odt"
-                temp_file_names[generic_template['id'][:-4]] = temp_file_name
+                temp_file_names[generic_template['id'][: -4]] = temp_file_name
                 #we render the template so pod instructions into the generic sub-templates are rendered too
                 renderer = appy.pod.renderer.Renderer(template,
-                                                      {'self': licenceFolder, 'urbanEventObj':urbanEventObj,
-                                                       'applicantobj':applicantobj, 'recepisseobj':recepisseobj,
-                                                       'tool':self,
-                                                       'collegesubmissionobj':collegesubmissionobj,},
+                                                      {'self': licenceFolder, 'urbanEventObj': urbanEventObj,
+                                                       'applicantobj': applicantobj, 'recepisseobj': recepisseobj,
+                                                       'tool': self,
+                                                       'collegesubmissionobj': collegesubmissionobj, },
                                                       temp_file_name, pythonWithUnoPath=self.getUnoEnabledPython())
                 renderer.run()
         #now that sub-templates are rendered, we can use them in the main pod template and render the entire document
@@ -339,10 +338,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         templateStyles = getattr(global_templates, 'styles.odt', None)
         if templateStyles and templateStyles.size:
             templateStyles = StringIO(templateStyles)
-        dict_arg = {'self': licenceFolder, 'urbanEventObj':urbanEventObj,'applicantobj':applicantobj,
-                    'recepisseobj':recepisseobj,'collegesubmissionobj':collegesubmissionobj, 'tool': self}
+        dict_arg = {'self': licenceFolder, 'urbanEventObj': urbanEventObj, 'applicantobj': applicantobj,
+                    'recepisseobj': recepisseobj, 'collegesubmissionobj': collegesubmissionobj, 'tool': self}
         dict_arg.update(temp_file_names)
-        renderer = appy.pod.renderer.Renderer( StringIO(urbanTemplateObj), dict_arg,
+        renderer = appy.pod.renderer.Renderer(StringIO(urbanTemplateObj), dict_arg,
                                               tempFileName, pythonWithUnoPath=self.getUnoEnabledPython())
         renderer.run()
         # Tell the browser that the resulting page contains ODT
@@ -356,21 +355,21 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         os.remove(tempFileName)
         #now we need to generate an available id for the new file
         #the id of the object have to be the same id as the file contained
-        #see http://dev.communesplone.org/trac/ticket/2532
+        #see http: //dev.communesplone.org/trac/ticket/2532
         urbanTemplateObjId = os.path.splitext(urbanTemplateObj.getId())[0]
-        proposedId = urbanTemplateObjId + '.%s' %fileType
+        proposedId = urbanTemplateObjId + '.%s' % fileType
         i = 1
         while hasattr(aq_base(urbanEventObj), proposedId):
             proposedId = '%s-%d.odt' % (urbanTemplateObjId, i)
             i = i + 1
-        newUrbanDoc=urbanEventObj.invokeFactory("UrbanDoc",id=proposedId,title=urbanTemplateObj.Title(),content_type=GENERATED_DOCUMENT_FORMATS[fileType],file=doc)
-        newUrbanDoc=getattr(urbanEventObj, newUrbanDoc)
+        newUrbanDoc = urbanEventObj.invokeFactory("UrbanDoc", id=proposedId, title=urbanTemplateObj.Title(), content_type=GENERATED_DOCUMENT_FORMATS[fileType], file=doc)
+        newUrbanDoc = getattr(urbanEventObj, newUrbanDoc)
         newUrbanDoc.setFilename(proposedId)
         newUrbanDoc.setFormat(GENERATED_DOCUMENT_FORMATS[fileType])
         newUrbanDoc._at_rename_after_creation = False
         newUrbanDoc.processForm()
-        self.REQUEST.set('doc_uid',newUrbanDoc.UID())
-        response.redirect(urbanEventObj.absolute_url()+'?doc_uid='+newUrbanDoc.UID())
+        self.REQUEST.set('doc_uid', newUrbanDoc.UID())
+        response.redirect(urbanEventObj.absolute_url() + '?doc_uid=' + newUrbanDoc.UID())
 
     security.declarePublic('getVocabularyDefaultValue')
     def getVocabularyDefaultValue(self, vocabulary_name, context, in_urban_config, multivalued=False):
@@ -397,7 +396,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         #search in an urbanConfig or in the tool
         licence_config = getattr(self, self.getUrbanConfig(context).getId())
         for config in licence_config.getTextDefaultValues():
-            if config.has_key('fieldname') and config['fieldname'] == fieldname:
+            if 'fieldname' in config and config['fieldname'] == fieldname:
                 return config['text']
         return ''
 
@@ -407,9 +406,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
         """
-        brains = self.listVocabularyBrains(vocToReturn, context, vocType,
-                sort_on, inUrbanConfig, allowedStates, with_empty_value)
-        res=[]
+        brains = self.listVocabularyBrains(vocToReturn, context, vocType, sort_on, inUrbanConfig, allowedStates, with_empty_value)
+        res = []
         if with_empty_value and brains and len(brains) > 1:
             #we add an empty vocab value of type "choose a value" at the beginning of the list
             #except if there is only one value in the list...
@@ -450,7 +448,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                               sort_on="getObjPositionInParent", allowedStates=['enabled'], with_empty_value=False):
         brains = self.listVocabularyBrains(vocToReturn, context, vocType=vocType, inUrbanConfig=inUrbanConfig, sort_on=sort_on,
                                            allowedStates=allowedStates, with_empty_value=with_empty_value)
-        res={}
+        res = {}
         for brain in brains:
             res[getattr(brain, id_to_use)] = brain.getObject()
         return res
@@ -498,11 +496,11 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
            Return the possible divisions
         """
-        result = self.queryDB("SELECT da,divname FROM da;")
+        result = self.queryDB("SELECT da, divname FROM da;")
         if not result:
             return ((DB_QUERY_ERROR, DB_QUERY_ERROR), )
         if all:
-            result = [{'da':'', 'divname': translate('all_divisions', 'urban', context=self.REQUEST)}] + result
+            result = [{'da': '', 'divname': translate('all_divisions', 'urban', context=self.REQUEST)}] + result
         return result
 
     security.declarePublic('queryParcels')
@@ -512,10 +510,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
          Return the concerned parcels
         """
         query_string = browseold and \
-                       "SELECT distinct prca, prcc, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
-                        FROM pas left join da on da.da = pas.da" or \
-                       "SELECT capa.da as division, divname, prc, section, radical, exposant, bis, puissance, pe as proprietary, sl1 as location \
-                        FROM map left join capa on map.capakey=capa.capakey left join da on capa.da = da.da "
+            "SELECT distinct prca, prcc, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
+            FROM pas left join da on da.da = pas.da" or \
+            "SELECT capa.da as division, divname, prc, section, radical, exposant, bis, puissance, pe as proprietary, sl1 as location \
+            FROM map left join capa on map.capakey=capa.capakey left join da on capa.da = da.da "
         conditions = []
         division != 0 and conditions.append("%s.da= %s" % (browseold and 'pas' or 'capa', division))
         (section or not fuzzy) and conditions.append("section %s" % (not section and 'is NULL' or "= '%s'" % section))
@@ -547,14 +545,14 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if type(self.dbc) == psycopg2._psycopg.connection:
             try:
                 dict_cur = self.dbc.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-                dict_cur.execute(query_string+';')
+                dict_cur.execute(query_string + ';')
                 for row in dict_cur.fetchall():
-                    result=result+[dict(row)]
+                    result = result + [dict(row)]
             except psycopg2.ProgrammingError:
-                result=[]
+                result = []
                 pass
             self.dbc.close()
-            delattr(self,'dbc')
+            delattr(self, 'dbc')
         else:
             ptool = getToolByName(self, "plone_utils")
             ptool.addPortalMessage(_(u"db_connection_error", mapping={u'error': self.dbc}), type="error")
@@ -592,18 +590,18 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
            Create the PortionOut with given parameters...
         """
-        if bis=='0':
-            bis=''
-        if len(bis)==1:
-            bis='0'+bis
-        if puissance=='0':
-            puissance=''
+        if bis == '0':
+            bis = ''
+        if len(bis) == 1:
+            bis = '0' + bis
+        if puissance == '0':
+            puissance = ''
         newParcelId = path.invokeFactory("PortionOut", id=self.generateUniqueId('PortionOut'), divisionCode=division, division=division, section=section,
                                          radical=radical, bis=bis, exposant=exposant, puissance=puissance, partie=partie, outdated=old)
         newParcel = getattr(path, newParcelId)
         newParcel._renameAfterCreation()
         newParcel.at_post_create_script()
-        self.REQUEST.RESPONSE.redirect(path.absolute_url()+'/view')
+        self.REQUEST.RESPONSE.redirect(path.absolute_url() + '/view')
 
     security.declarePublic('getParcelsFromTopic')
     def getParcelsFromTopic(self, topicName):
@@ -614,7 +612,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         except AttributeError:
             return None
 
-        parcels=[]
+        parcels = []
         for topicItem in topic.queryCatalog():
             topicItemObj = topicItem.getObject()
             if topicItemObj.meta_type == 'BuildLicence':
@@ -632,20 +630,20 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         import urllib2
         import cgi
         method = self.REQUEST["REQUEST_METHOD"]
-        #allowedHosts = ['10.211.55.10:8080']
+        #allowedHosts = ['10.211.55.10: 8080']
         allowedHosts = self.getWebServerHost()
 
         if method == "POST":
             qs = self.REQUEST["QUERY_STRING"]
             d = cgi.parse_qs(qs)
-            if d.has_key("url"):
+            if "url" in d:
                 url = d["url"][0]
             else:
-                self.REQUEST.RESPONSE.setHeader('Content-Type',"text/plain")
+                self.REQUEST.RESPONSE.setHeader('Content-Type', "text/plain")
                 return "Illegal request."
         else:
             fs = cgi.FieldStorage()
-            url = fs.getvalue('url', "http://www.urban%s.com"%self.getNISNum())
+            url = fs.getvalue('url', "http: //www.urban%s.com" % self.getNISNum())
 
         try:
             host = url.split("/")[2]
@@ -653,10 +651,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 print "Status: 502 Bad Gateway"
                 print "Content-Type: text/plain"
                 print
-                print "This proxy does not allow you to access that location (%s)." % (host,)
+                print "This proxy does not allow you to access that location (%s)." % (host, )
                 print
 
-            elif url.startswith("http://") or url.startswith("https://"):
+            elif url.startswith("http: //") or url.startswith("https: //"):
                 if method == "POST":
                     #length = int(self.REQUEST["CONTENT_LENGTH"])
                     headers = {"Content-Type": self.REQUEST["CONTENT_TYPE"]}
@@ -669,27 +667,27 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
                 # print content type header
                 i = y.info()
-                if i.has_key("Content-Type"):
-                    self.REQUEST.RESPONSE.setHeader('Content-Type',i["Content-Type"])
+                if "Content-Type" in i:
+                    self.REQUEST.RESPONSE.setHeader('Content-Type', i["Content-Type"])
                 else:
-                    self.REQUEST.RESPONSE.setHeader('Content-Type',"text/plain")
+                    self.REQUEST.RESPONSE.setHeader('Content-Type', "text/plain")
 
                 data = y.read()
 
                 y.close()
                 return data
             else:
-                self.REQUEST.RESPONSE.setHeader('Content-Type',"text/plain")
+                self.REQUEST.RESPONSE.setHeader('Content-Type', "text/plain")
                 return "Illegal request."
 
         except Exception, E:
-            self.REQUEST.RESPONSE.setHeader('Content-Type',"text/plain")
-            return "Some unexpected error occurred. Error text was:", E
+            self.REQUEST.RESPONSE.setHeader('Content-Type', "text/plain")
+            return "Some unexpected error occurred. Error text was: ", E
 
     security.declarePublic('GetListOfCapaKeyBuffer')
     def GetListOfCapaKeyBuffer(self, parcelleKey, bufferWidth=50):
         """
-             Get List of Capakey around a parcell (ex:92088C0335/00D000)
+             Get List of Capakey around a parcell (ex: 92088C0335/00D000)
         """
         qry = """SELECT capakey
                 FROM capa
@@ -702,23 +700,23 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                         WHERE capa.capakey LIKE '%s'
                         ) AS sample
                    )
-                )""" % (bufferWidth,parcelleKey)
+                )""" % (bufferWidth, parcelleKey)
 
         try:
             results = self.queryDB(qry)
         except:
-            results=[]
+            results = []
         idlist = []
         for res in results:
-            idlist.append("capakey='" + res["capakey"]+"'")
+            idlist.append("capakey='" + res["capakey"] + "'")
         return " OR ".join(idlist)
 
     security.declarePublic('GetWKTGeomOfBufferParcel')
     def GetWKTGeomOfBufferParcel(self, parcelleKey, bufferWidth=50):
         """
-            Get the Geom (in WKT) of the the buffer (ex:92088C0335/00D000)
+            Get the Geom (in WKT) of the the buffer (ex: 92088C0335/00D000)
         """
-        qry = "SELECT astext(ST_BUFFER(the_geom,%s)) AS geom FROM capa WHERE capakey LIKE '%s'" % (bufferWidth,parcelleKey)
+        qry = "SELECT astext(ST_BUFFER(the_geom, %s)) AS geom FROM capa WHERE capakey LIKE '%s'" % (bufferWidth, parcelleKey)
         try:
             results = self.queryDB(qry)
         except:
@@ -783,25 +781,25 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def generatePrintMap(self, cqlquery, cqlquery2, zoneExtent=None):
         """
         """
-        bound_names={}
-        args={}
-        kw={}
+        bound_names = {}
+        args = {}
+        kw = {}
         bound_names['tool'] = self
         bound_names['zoneExtent'] = zoneExtent
         bound_names['cqlquery'] = cqlquery
         bound_names['cqlquery2'] = cqlquery2
         return self.printmap._exec(bound_names=bound_names, args=args, kw=kw)
 
-    def generateMapJS(self, context, cqlquery, cqlquery2,parcelBufferGeom='', zoneExtent=None):
+    def generateMapJS(self, context, cqlquery, cqlquery2, parcelBufferGeom='', zoneExtent=None):
         """
           Return a generated JS file based on the cql query
         """
         #if we do not have a display zone, we return the default mapExtent
         if not zoneExtent:
             zoneExtent = self.getMapExtent()
-        bound_names={}
-        args={}
-        kw={}
+        bound_names = {}
+        args = {}
+        kw = {}
         bound_names['tool'] = self
         bound_names['context'] = context
         bound_names['zoneExtent'] = zoneExtent
@@ -814,7 +812,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     security.declarePublic('generateUrbainXML')
     def generateUrbainXML(self, datefrom, dateto, list_only):
 
-        def reverseDate (date):
+        def reverseDate(date):
             split = date.split('/')
             for i in range(len(split)):
                 if len(split[i]) == 1:
@@ -822,7 +820,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             split.reverse()
             return '/'.join(split)
 
-        def check (condition, error_message):
+        def check(condition, error_message):
             if not condition:
                 error.append(error_message)
             return condition
@@ -831,9 +829,12 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         dateto = reverseDate(dateto)
         catalog = getToolByName(self, 'portal_catalog')
         pw = getToolByName(self, 'portal_workflow')
-        results = catalog.searchResults(getDecisionDate = {'query' : (DateTime(datefrom),DateTime(dateto)), 'range' : 'minmax'},
-                  object_provides='Products.urban.interfaces.ITheLicenceEvent', portal_type='UrbanEvent')
-        results = [brain.getObject() for brain in results if brain.getObject().aq_parent.portal_type in ['BuildLicence',]]
+        results = catalog.searchResults(
+            getDecisionDate={'query': (DateTime(datefrom), DateTime(dateto)), 'range': 'minmax'},
+            object_provides='Products.urban.interfaces.ITheLicenceEvent',
+            portal_type='UrbanEvent'
+        )
+        results = [brain.getObject() for brain in results if brain.getObject().aq_parent.portal_type in ['BuildLicence', ]]
         xml = []
         error = []
         html_list = []
@@ -841,18 +842,21 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         xml.append('<dataroot>')
         xml.append('  <E_220_herkomst>')
         xml.append('    <E_220_NIS_Gem>%s</E_220_NIS_Gem>' % self.getNISNum())
-        xml.append('    <E_220_Periode_van>%s</E_220_Periode_van>' % datefrom.replace("/",""))
-        xml.append('    <E_220_Periode_tot>%s</E_220_Periode_tot>' % dateto.replace("/",""))
+        xml.append('    <E_220_Periode_van>%s</E_220_Periode_van>' % datefrom.replace("/", ""))
+        xml.append('    <E_220_Periode_tot>%s</E_220_Periode_tot>' % dateto.replace("/", ""))
         xml.append('    <E_220_ICT>COM</E_220_ICT>')
         xml.append('  </E_220_herkomst>')
         html_list.append('<HTML><TABLE>')
         for eventObj in results:
-            licenceObj=eventObj.getParentNode()
-            applicantObj= licenceObj.getApplicants() and licenceObj.getApplicants()[0] or None
+            licenceObj = eventObj.getParentNode()
+            applicantObj = licenceObj.getApplicants() and licenceObj.getApplicants()[0] or None
             architects = licenceObj.getField('architects') and licenceObj.getArchitects() or []
-            if (pw.getInfoFor(licenceObj,'review_state')=='accepted'):
-                html_list.append('<TR><TD>%s  %s</TD><TD>%s</TD></TR>' \
-                % (str(licenceObj.getReference()), licenceObj.title.encode('iso-8859-1'), str(eventObj.getDecisionDate())))
+            if pw.getInfoFor(licenceObj, 'review_state') == 'accepted':
+                html_list.append(
+                    '<TR><TD>%s  %s</TD><TD>%s</TD></TR>'
+                    % (str(licenceObj.getReference()), licenceObj.title.encode('iso-8859-1'),
+                    str(eventObj.getDecisionDate()))
+                )
                 xml.append('  <Item220>')
                 xml.append('      <E_220_Ref_Toel>%s</E_220_Ref_Toel>' % str(licenceObj.getReference()))
                 parcels = licenceObj.getParcels()
@@ -868,18 +872,18 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                     xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street.getStreetName()).decode('iso-8859-1').encode('iso-8859-1'))
                 if number:
                     xml.append('      <E_220_huisnr>%s</E_220_huisnr>' % number)
-                worktype=licenceObj.getWorkType() and licenceObj.getWorkType()[0] or ''
-                work_types=UrbanVocabulary('folderbuildworktypes').getAllVocTerms(licenceObj)
+                worktype = licenceObj.getWorkType() and licenceObj.getWorkType()[0] or ''
+                work_types = UrbanVocabulary('folderbuildworktypes').getAllVocTerms(licenceObj)
                 worktype_map = {}
                 for k, v in work_types.iteritems():
                     worktype_map[k] = v.getExtraValue()
-                xml_worktype=''
-                if check(worktype in worktype_map.keys(),'unknown worktype %s on licence %s' % (worktype ,str(licenceObj.getReference()))):
-                    xml_worktype=worktype_map[worktype]
+                xml_worktype = ''
+                if check(worktype in worktype_map.keys(), 'unknown worktype %s on licence %s' % (worktype, str(licenceObj.getReference()))):
+                    xml_worktype = worktype_map[worktype]
                 xml.append('      <E_220_Typ>%s</E_220_Typ>' % xml_worktype)
                 xml.append('      <E_220_Werk>%s</E_220_Werk>' % licenceObj.licenceSubject.encode('iso-8859-1'))
                 strDecisionDate = str(eventObj.getDecisionDate())
-                xml.append('      <E_220_Datum_Verg>%s%s%s</E_220_Datum_Verg>' %(strDecisionDate[0:4], strDecisionDate[5:7], strDecisionDate[8:10]))
+                xml.append('      <E_220_Datum_Verg>%s%s%s</E_220_Datum_Verg>' % (strDecisionDate[0: 4], strDecisionDate[5: 7], strDecisionDate[8: 10]))
                 xml.append('      <E_220_Instan>COM</E_220_Instan>')
                 xml.append('      <PERSOON>')
                 xml.append('        <naam>%s %s</naam>' % (applicantObj.getName1().decode('iso-8859-1').encode('iso-8859-1'), applicantObj.getName2().decode('iso-8859-1').encode('iso-8859-1')))
@@ -891,11 +895,11 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 xml.append('      </PERSOON>')
                 if architects:
                     architectObj = architects[0]
-                    list_architects_terms=["NON REQUIS","lui-meme","Eux-memes","elle-meme","lui-meme","lui-même","lui-meme ","Lui-meme","A COMPLETER "]
+                    list_architects_terms = ["NON REQUIS", "lui-meme", "Eux-memes", "elle-meme", "lui-meme", "lui-même", "lui-meme ", "Lui-meme", "A COMPLETER "]
                     if architectObj.getName1() in list_architects_terms:
                         xml.append('      <PERSOON>')
-                        xml.append('        <naam>%s %s</naam>' \
-                        % (applicantObj.getName1().encode('iso-8859-1'), applicantObj.name2.encode('iso-8859-1')))
+                        xml.append('        <naam>%s %s</naam>'
+                                   % (applicantObj.getName1().encode('iso-8859-1'), applicantObj.name2.encode('iso-8859-1')))
                         xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().encode('iso-8859-1'))
                         xml.append('        <huisnr>%s</huisnr>' % applicantObj.getNumber())
                         xml.append('        <postcode>%s</postcode>' % applicantObj.getZipcode())
@@ -904,8 +908,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                         xml.append('      </PERSOON>')
                     else:
                         xml.append('      <PERSOON>')
-                        xml.append('        <naam>%s %s</naam>' \
-                        % (architectObj.getName1().encode('iso-8859-1'), architectObj.name2.encode('iso-8859-1')))
+                        xml.append('        <naam>%s %s</naam>'
+                                   % (architectObj.getName1().encode('iso-8859-1'), architectObj.name2.encode('iso-8859-1')))
                         xml.append('        <straatnaam>%s</straatnaam>' % architectObj.getStreet().decode('iso-8859-1').encode('iso-8859-1'))
                         xml.append('        <huisnr>%s</huisnr>' % architectObj.getNumber())
                         xml.append('        <postcode>%s</postcode>' % architectObj.getZipcode())
@@ -915,19 +919,19 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 for prc in parcels:
                     xml.append('      <PERCELEN>')
                     try:
-                        strRadical='%04d'%float(prc.getRadical())
+                        strRadical = '%04d' % float(prc.getRadical())
                     except:
-                        strRadical='0000'
+                        strRadical = '0000'
                     try:
-                        strPuissance='%03d'%float(prc.getPuissance())
+                        strPuissance = '%03d' % float(prc.getPuissance())
                     except:
-                        strPuissance='000'
+                        strPuissance = '000'
                     try:
-                        strBis='%02d'%float(prc.getBis())
+                        strBis = '%02d' % float(prc.getBis())
                     except:
-                        strBis='00'
-                    xml.append('        <E_220_percid>%s_%s_%s_%s_%s_%s</E_220_percid>' \
-                    % (prc.getDivisionCode(), prc.getSection(), strRadical, prc.getExposant(), strPuissance, strBis))
+                        strBis = '00'
+                    xml.append('        <E_220_percid>%s_%s_%s_%s_%s_%s</E_220_percid>'
+                               % (prc.getDivisionCode(), prc.getSection(), strRadical, prc.getExposant(), strPuissance, strBis))
                     xml.append('        <kadgemnr>%s</kadgemnr>' % prc.getDivisionCode())
                     xml.append('        <sectie>%s</sectie>' % prc.getSection())
                     xml.append('        <grondnr>%s</grondnr>' % prc.getRadical())
@@ -943,14 +947,14 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         xml.append('</dataroot>')
         if list_only:
             output = StringIO()
-            output.write(unicode('\n'.join(html_list).replace("&","&amp;"),'iso-8859-1').encode('iso-8859-1'))
+            output.write(unicode('\n'.join(html_list).replace("&", "&amp;"), 'iso-8859-1').encode('iso-8859-1'))
             return output.getvalue()
         else:
             if error != []:
                 return 'Error in these licences: \n%s' % '\n'.join(error)
             else:
                 output = StringIO()
-                output.write(unicode('\n'.join(xml).replace("&","&amp;"),'iso-8859-1').encode('iso-8859-1'))
+                output.write(unicode('\n'.join(xml).replace("&", "&amp;"), 'iso-8859-1').encode('iso-8859-1'))
                 return output.getvalue()
 
     security.declarePublic('getReferenceBrowserSearchAtObj')
@@ -995,12 +999,12 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
         #evaluate the numerotationTALExpression and pass it obj, lastValue and self
         data = {
-                'obj': obj,
-                'tool': self,
-                'numerotation': str(lastValue),
-                'portal': self.aq_inner.aq_parent,
-                'date': DateTime(),
-               }
+            'obj': obj,
+            'tool': self,
+            'numerotation': str(lastValue),
+            'portal': self.aq_inner.aq_parent,
+            'date': DateTime(),
+        }
         data.update(kwargs)
         res = ''
         try:
@@ -1034,36 +1038,36 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         zoneExtent = None
         parcels = obj.getParcels()
-        cqlquery=''
+        cqlquery = ''
         if parcels:
             #if we have parcels, display them on a map...
             #generate the 'selectedpo' layer filter based on contained parcels
             for parcel in parcels:
-                if cqlquery !='':
-                    cqlquery=cqlquery + " or "
-                cqlquery=cqlquery+"(section='"+parcel.getSection()+"' and radical="+parcel.getRadical()
+                if cqlquery != '':
+                    cqlquery = cqlquery + " or "
+                cqlquery = cqlquery + "(section='" + parcel.getSection() + "' and radical=" + parcel.getRadical()
                 if parcel.getBis() != '':
-                    cqlquery=cqlquery+" and bis="+parcel.getBis()
+                    cqlquery = cqlquery + " and bis=" + parcel.getBis()
                 if parcel.getExposant() != '':
-                    cqlquery=cqlquery+" and exposant='"+parcel.getExposant()+"'"
+                    cqlquery = cqlquery + " and exposant='" + parcel.getExposant() + "'"
                 else:
-                    cqlquery=cqlquery+" and exposant is NULL"
+                    cqlquery = cqlquery + " and exposant is NULL"
                 if parcel.getPuissance() != '':
-                    cqlquery=cqlquery+" and puissance="+parcel.getPuissance()
+                    cqlquery = cqlquery + " and puissance=" + parcel.getPuissance()
                 else:
-                    cqlquery=cqlquery+" and puissance=0"
-                cqlquery=cqlquery+")"
-            cqlquery = '((da = '+parcel.getDivisionCode()+') and ('+cqlquery+'))'
+                    cqlquery = cqlquery + " and puissance=0"
+                cqlquery = cqlquery + ")"
+            cqlquery = '((da = ' + parcel.getDivisionCode() + ') and (' + cqlquery + '))'
             #calculate the zone to display
-            strsql = 'SELECT Xmin(selectedpos.extent),Ymin(selectedpos.extent),Xmax(selectedpos.extent), Ymax(selectedpos.extent) FROM (SELECT Extent(the_geom) FROM capa WHERE '+cqlquery+') AS selectedpos'
+            strsql = 'SELECT Xmin(selectedpos.extent), Ymin(selectedpos.extent), Xmax(selectedpos.extent), Ymax(selectedpos.extent) FROM (SELECT Extent(the_geom) FROM capa WHERE ' + cqlquery + ') AS selectedpos'
             result = self.queryDB(query_string=strsql)[0]
             try:
-                zoneExtent = "%s,%s,%s,%s" % (result['xmin'],result['ymin'],result['xmax'],result['ymax'])
+                zoneExtent = "%s, %s, %s, %s" % (result['xmin'], result['ymin'], result['xmax'], result['ymax'])
             except:
                 zoneExtent = ""
 
         #return the generated JS code
-        return self.generateMapJS(self, cqlquery,'','', zoneExtent)
+        return self.generateMapJS(self, cqlquery, '', '', zoneExtent)
 
     security.declarePublic('generateStatsINS')
     def generateStatsINS(self, datefrom, dateto):
@@ -1071,21 +1075,21 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         if (len(datefrom) != 10) or (len(dateto) != 10):
             return 'Date incorrecte'
-        datesplited=datefrom.split('/')
-        datefrom=datesplited[2]+'/'+datesplited[1]+'/'+datesplited[0]
-        datesplited=dateto.split('/')
-        dateto=datesplited[2]+'/'+datesplited[1]+'/'+datesplited[0]
+        datesplited = datefrom.split('/')
+        datefrom = datesplited[2] + '/' + datesplited[1] + '/' + datesplited[0]
+        datesplited = dateto.split('/')
+        dateto = datesplited[2] + '/' + datesplited[1] + '/' + datesplited[0]
         global_templates = getattr(self, 'globaltemplates')
-        templateObj=getattr(global_templates, 'statsins.odt')
+        templateObj = getattr(global_templates, 'statsins.odt')
         catalog = getToolByName(self, 'portal_catalog')
-        results = catalog.searchResults(getBeginDate = {'query' : (DateTime(datefrom),DateTime(dateto)), 'range' : 'minmax'}, id='debut-des-travaux',portal_type = 'UrbanEvent')
-        folders=[]
+        results = catalog.searchResults(getBeginDate={'query': (DateTime(datefrom), DateTime(dateto)), 'range': 'minmax'}, id='debut-des-travaux', portal_type='UrbanEvent')
+        folders = []
         for result in results:
-            objResult=result.getObject()
-            folderobj=objResult.aq_inner.aq_parent
+            objResult = result.getObject()
+            folderobj = objResult.aq_inner.aq_parent
             if folderobj.getUsage() != 'not_applicable':
                 folders.append(folderobj)
-        tempFileName =  tempFileName = '%s/%s_%f.%s' % (getOsTempFolder(), 'statsins', time.time(),'.odt')
+        tempFileName = '%s/%s_%f.%s' % (getOsTempFolder(), 'statsins', time.time(), '.odt')
         renderer = appy.pod.renderer.Renderer(StringIO(templateObj), {'self': self, 'folders': folders}, tempFileName)
         renderer.run()
         response = self.REQUEST.RESPONSE
@@ -1125,7 +1129,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 if event.getEventDate() > lastDate:
                     lastDate = event.getEventDate()
                     rightEvent = event
-                elif rightEvent == None:
+                elif rightEvent is None:
                     rightEvent = event
         return rightEvent
 
@@ -1163,7 +1167,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         #update the last reference in the configuration
         config = self.getUrbanConfig(obj)
-        value =  config.getNumerotation()
+        value = config.getNumerotation()
         if not str(value).isdigit():
             value = '0'
         else:
@@ -1204,7 +1208,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return cityName
         else:
             prefix = 'de '
-            vowels = ('a', 'e', 'i', 'o', 'u', 'y',)
+            vowels = ('a', 'e', 'i', 'o', 'u', 'y', )
             for v in vowels:
                 if cityName.lower().startswith(v):
                     prefix = "d'"
@@ -1231,19 +1235,19 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 #translate the month
                 #msgids already exist in the 'plonelocales' domain
                 monthMappings = {
-                        '01': 'jan',
-                        '02': 'feb',
-                        '03': 'mar',
-                        '04': 'apr',
-                        '05': 'may',
-                        '06': 'jun',
-                        '07': 'jul',
-                        '08': 'aug',
-                        '09': 'sep',
-                        '10': 'oct',
-                        '11': 'nov',
-                        '12': 'dec',
-                       }
+                    '01': 'jan',
+                    '02': 'feb',
+                    '03': 'mar',
+                    '04': 'apr',
+                    '05': 'may',
+                    '06': 'jun',
+                    '07': 'jul',
+                    '08': 'aug',
+                    '09': 'sep',
+                    '10': 'oct',
+                    '11': 'nov',
+                    '12': 'dec',
+                }
                 monthmsgid = "month_%s" % monthMappings[month]
                 translatedMonth = translate(monthmsgid, 'plonelocales', context=self.REQUEST).encode('utf8').lower()
             if long_format:
@@ -1262,10 +1266,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         portal_catalog = getToolByName(self, 'portal_catalog')
         if specificSearch == 'searchUrbanEvents':
             #search the existing urbanEvents
-            queryString = {'object_provides':'Products.urban.interfaces.IUrbanEvent',
-                           'path':'/'.join(context.getPhysicalPath()),
-                           'sort_on':'getObjPositionInParent',
-                           'sort_order':'reverse',}
+            queryString = {'object_provides': 'Products.urban.interfaces.IUrbanEvent',
+                           'path': '/'.join(context.getPhysicalPath()),
+                           'sort_on': 'getObjPositionInParent',
+                           'sort_order': 'reverse', }
         elif specificSearch == 'searchPortionOuts':
             #search the existing parcels
             #we can search existing parcels on a licence (directly contained)
@@ -1274,29 +1278,29 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             #or on an UrbanEventInquiry where parcels are contained in RecipientCadastre
             else:
                 depth = 2
-            queryString = {'portal_type':'PortionOut',
-                           'path':{'query': '/'.join(context.getPhysicalPath()), 'depth': depth},
-                            'sort_on':'getObjPositionInParent'}
+            queryString = {'portal_type': 'PortionOut',
+                           'path': {'query': '/'.join(context.getPhysicalPath()), 'depth': depth},
+                           'sort_on': 'getObjPositionInParent'}
         elif specificSearch == 'searchClaimants':
             #search the existing claimants
-            queryString = {'portal_type':'Claimant',
-                           'path':'/'.join(context.getPhysicalPath()),
-                           'sort_on':'getObjPositionInParent'}
+            queryString = {'portal_type': 'Claimant',
+                           'path': '/'.join(context.getPhysicalPath()),
+                           'sort_on': 'getObjPositionInParent'}
         elif specificSearch == 'searchRecipients':
             #search the existing recipients
-            queryString = {'portal_type':'RecipientCadastre',
-                           'path':'/'.join(context.getPhysicalPath()),
-                           'sort_on':'getObjPositionInParent'}
+            queryString = {'portal_type': 'RecipientCadastre',
+                           'path': '/'.join(context.getPhysicalPath()),
+                           'sort_on': 'getObjPositionInParent'}
         elif specificSearch == 'searchLinkedDocuments':
             #search the existing recipients
-            queryString = {'portal_type':'UrbanDoc',
-                           'path':'/'.join(context.getPhysicalPath()),
-                           'sort_on':'created'}
+            queryString = {'portal_type': 'UrbanDoc',
+                           'path': '/'.join(context.getPhysicalPath()),
+                           'sort_on': 'created'}
         elif specificSearch == 'searchLinkedAnnexes':
             #search the existing recipients
-            queryString = {'portal_type':'File',
-                           'path':'/'.join(context.getPhysicalPath()),
-                           'sort_on':'created'}
+            queryString = {'portal_type': 'File',
+                           'path': '/'.join(context.getPhysicalPath()),
+                           'sort_on': 'created'}
 
         #update queryString with given kwargs
         queryString.update(kwargs)
@@ -1320,13 +1324,14 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         #the max text length to show, in number of characters
         maxLength = 50
+
         def checkMaxLength(text):
             '''Check if we need to format the text if it is too long.'''
             utext = unicode(text, 'utf-8')
             isTooLarge = False
             if maxLength and len(utext) > maxLength:
                 isTooLarge = True
-                return isTooLarge, utext[:maxLength].encode('utf-8') + '...'
+                return isTooLarge, utext[: maxLength].encode('utf-8') + '...'
             return isTooLarge, utext.encode('utf-8')
         #to be sure that we only have text (usefull for HTML) we get the raw value
         return checkMaxLength(getattr(context, 'getRaw' + fieldName[0].capitalize() + fieldName[1:])())
@@ -1379,9 +1384,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             context.restrictedTraverse('@@schedule')
         except AttributeError:
             return False
-        #the schedule is available at the root of the application and for now, in the buildlicences related views
-        if (context.getLayout() == 'urban_view' and not context.getProperty('urbanConfigId')) or \
-           context.getProperty('urbanConfigId') == 'buildlicence' or context.portal_type == 'BuildLicence':
+        #the schedule is available at the root of the application, any licence folder and any licence
+        if context.getLayout() == 'urban_view' or context.getProperty('urbanConfigId') or context.portal_type in URBAN_TYPES:
             return True
         return False
 
@@ -1394,8 +1398,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
           Returns the domain name of the pylonsHost attribute
         """
         #res = urlparse(self.getPylonsHost()) #getPylonsHost doesn't contain a valid url beginning with http
-        #return '%s://%s'%(res.scheme, res.netloc)
-        return '/'.join(self.getPylonsHost().split('/')[:3]) #don't use os.path!
+        #return '%s: //%s'%(res.scheme, res.netloc)
+        return '/'.join(self.getPylonsHost().split('/')[:3])  # don't use os.path!
 
 
 
