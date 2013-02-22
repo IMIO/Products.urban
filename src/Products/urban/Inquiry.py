@@ -25,7 +25,6 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from profilehooks import profile
 from plone.memoize.instance import memoize
-import inspect
 from zope.i18n import translate
 from OFS.ObjectManager import BeforeDeleteException
 from Products.CMFCore.utils import getToolByName
@@ -187,36 +186,20 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
     # Manually created methods
 
     security.declarePublic('getDefaultValue')
-    #@profile
-    def getDefaultValue(self):
+    def getDefaultValue(self, context=None, field=None):
+        if not context or not field:
+            return ['']
         urban_tool = getToolByName(self, 'portal_urban')
-        field_and_context = self.getFieldAndContext()
-        field = field_and_context[0]
-        context = field_and_context[1]
         vocabulary_name = field.vocabulary.path
         in_urban_config = field.vocabulary.inUrbanConfig
         return urban_tool.getVocabularyDefaultValue(vocabulary_name=vocabulary_name, context=context, in_urban_config=in_urban_config)
 
     security.declarePublic('getDefaultText')
-    #@profile
-    def getDefaultText(self):
-        """
-         Return the default text of a rich text field
-        """
+    def getDefaultText(self, context=None, field=None, html=False):
+        if not context or not field:
+            return ""
         urban_tool = getToolByName(self, 'portal_urban')
-        field_and_context = self.getFieldAndContext()
-        field = field_and_context[0]
-        context = field_and_context[1]
-        return urban_tool.getTextDefaultValue(field.getName(), context)
-
-    @memoize
-    def getFieldAndContext(self):
-        for frame_record in inspect.stack():
-            if frame_record[3] == 'getDefault':
-                field = frame_record[0].f_locals['self']
-                context = frame_record[0].f_locals['instance']
-                return (field, context)
-
+        return urban_tool.getTextDefaultValue(field.getName(), context, html=html)
 
     security.declarePublic('validate_investigationStart')
     def validate_investigationStart(self, value):

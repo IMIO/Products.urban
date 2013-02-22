@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+from Products.CMFCore.utils import getToolByName
+
+
 def beforeDelete(ob, event):
     """
       Check that we can delete this inquiry...
@@ -8,6 +12,7 @@ def beforeDelete(ob, event):
     #XXX been removed here...  We use manage_beforeDelete...
     #if ob.getLinkedUrbanEventInquiry():
     #    raise BeforeDeleteException, "You can not..."
+
 
 def afterDelete(ob, event):
     """
@@ -25,6 +30,7 @@ def afterDelete(ob, event):
         inquiry.setTitle(inquiry.generateInquiryTitle())
         inquiry.reindexObject(idxs=('title',))
 
+
 def setGeneratedTitle(ob, event):
     """
       Set my title
@@ -35,3 +41,36 @@ def setGeneratedTitle(ob, event):
         return
     ob.setTitle(ob.generateInquiryTitle())
     ob.reindexObject(idxs=('title',))
+
+
+def setDefaultValuesEvent(inquiry, event):
+    """
+     set default values on inquiry fields
+    """
+    if inquiry.checkCreationFlag():
+        _setDefaultFolderManagers(inquiry)
+        _setDefaultSelectValues(inquiry)
+        _setDefaultTextValues(inquiry)
+
+
+def _setDefaultSelectValues(inquiry):
+    select_fields = [field for field in inquiry.schema.fields() if field.default_method == 'getDefaultValue']
+    for field in select_fields:
+        default_value = inquiry. getDefaultValue(inquiry, field)
+        field_mutator = getattr(inquiry, field.mutator)
+        field_mutator(default_value)
+
+
+def _setDefaultTextValues(inquiry):
+    select_fields = [field for field in inquiry.schema.fields() if field.default_method == 'getDefaultText']
+    for field in select_fields:
+        is_html = field.default_content_type == 'text/html'
+        default_value = inquiry. getDefaultText(inquiry, field, is_html)
+        field_mutator = getattr(inquiry, field.mutator)
+        field_mutator(default_value)
+    return
+
+
+def _setDefaultFolderManagers(inquiry):
+    tool = getToolByName(inquiry, 'portal_urban')
+    inquiry.setFoldermanagers(tool.getCurrentFolderManager(initials=False))

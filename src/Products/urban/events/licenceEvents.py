@@ -2,10 +2,37 @@
 from Products.CMFCore.utils import getToolByName
 
 
-def setDefaultFolderManagersEvent(licence, event):
+def setDefaultValuesEvent(licence, event):
+    """
+     set default values on licence fields
+    """
     if licence.checkCreationFlag():
-        tool = getToolByName(licence, 'portal_urban')
-        licence.setFoldermanagers(tool.getCurrentFolderManager(initials=False))
+        _setDefaultFolderManagers(licence)
+        _setDefaultSelectValues(licence)
+        _setDefaultTextValues(licence)
+
+
+def _setDefaultSelectValues(licence):
+    select_fields = [field for field in licence.schema.fields() if field.default_method == 'getDefaultValue']
+    for field in select_fields:
+        default_value = licence. getDefaultValue(licence, field)
+        field_mutator = getattr(licence, field.mutator)
+        field_mutator(default_value)
+
+
+def _setDefaultTextValues(licence):
+    select_fields = [field for field in licence.schema.fields() if field.default_method == 'getDefaultText']
+    for field in select_fields:
+        is_html = field.default_content_type == 'text/html'
+        default_value = licence. getDefaultText(licence, field, is_html)
+        field_mutator = getattr(licence, field.mutator)
+        field_mutator(default_value)
+    return
+
+
+def _setDefaultFolderManagers(licence):
+    tool = getToolByName(licence, 'portal_urban')
+    licence.setFoldermanagers(tool.getCurrentFolderManager(initials=False))
 
 
 def postCreationActions(licence, event):

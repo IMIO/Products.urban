@@ -16,6 +16,9 @@
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".contactEvents.setInterface" />
   <subscriber for="..interfaces.IInquiry
+                   Products.Archetypes.interfaces.IEditBegunEvent"
+              handler=".inquiryEvents.setDefaultValuesEvent"/>
+  <subscriber for="..interfaces.IInquiry
                    OFS.interfaces.IObjectWillBeRemovedEvent"
               handler=".inquiryEvents.beforeDelete" />
   <subscriber for="..interfaces.IInquiry
@@ -26,28 +29,28 @@
               handler=".inquiryEvents.setGeneratedTitle" />
   <subscriber for="..interfaces.IGenericLicence
                    Products.Archetypes.interfaces.IEditBegunEvent"
-                   handler=".licenceEvents.setDefaultFolderManagersEvent"/>
+              handler=".licenceEvents.setDefaultValuesEvent"/>
   <subscriber for="..interfaces.IGenericLicence
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
-                   handler=".licenceEvents.postCreationActions"/>
+              handler=".licenceEvents.postCreationActions"/>
   <subscriber for="..interfaces.IGenericLicence
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
-                   handler=".licenceEvents.updateLicenceTitle"/>
+              handler=".licenceEvents.updateLicenceTitle"/>
   <subscriber for="..interfaces.IPortionOut
                    zope.app.container.interfaces.IObjectRemovedEvent"
-                   handler=".portionOutEvents.onDelete" />
+              handler=".portionOutEvents.onDelete" />
   <subscriber for="..interfaces.IPortionOut
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
-                   handler=".portionOutEvents.setValidParcel" />
+               handler=".portionOutEvents.setValidParcel" />
   <subscriber for="..interfaces.IPortionOut
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
-                   handler=".portionOutEvents.setDivisionCode" />
+              handler=".portionOutEvents.setDivisionCode" />
   <subscriber for="..interfaces.IPortionOut
                    Products.Archetypes.interfaces.IObjectEditedEvent"
-                   handler=".portionOutEvents.setValidParcel" />
+              handler=".portionOutEvents.setValidParcel" />
   <subscriber for="..interfaces.IPortionOut
                    Products.Archetypes.interfaces.IObjectEditedEvent"
-                   handler=".portionOutEvents.setDivisionCode" />
+              handler=".portionOutEvents.setDivisionCode" />
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setEventTypeType"/>

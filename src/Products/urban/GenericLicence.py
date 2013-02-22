@@ -27,7 +27,6 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 import warnings
-import inspect
 from zope.i18n import translate
 from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.Column import Column
@@ -660,33 +659,20 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
     # Manually created methods
 
     security.declarePublic('getDefaultValue')
-    def getDefaultValue(self):
-        """
-         Return the vocabulary default value(s) of a field
-        """
+    def getDefaultValue(self, context=None, field=None):
+        if not context or not field:
+            return ['']
         urban_tool = getToolByName(self, 'portal_urban')
-        field = context = None
-        for frame_record in inspect.stack():
-            if frame_record[3] == 'getDefault':
-                field = frame_record[0].f_locals['self']
-                context = frame_record[0]. f_locals['instance']
         vocabulary_name = field.vocabulary.path
         in_urban_config = field.vocabulary.inUrbanConfig
         return urban_tool.getVocabularyDefaultValue(vocabulary_name=vocabulary_name, context=context, in_urban_config=in_urban_config,
                                                     multivalued=field.multiValued)
 
-
     security.declarePublic('getDefaultText')
-    def getDefaultText(self):
-        """
-         Return the default text of a rich text field
-        """
+    def getDefaultText(self, context=None, field=None, html=False):
+        if not context or not field:
+            return ""
         urban_tool = getToolByName(self, 'portal_urban')
-        field = context = None
-        for frame_record in inspect.stack():
-            if frame_record[3] == 'getDefault':
-                field = frame_record[0].f_locals['self']
-                context = frame_record[0]. f_locals['instance']
         return urban_tool.getTextDefaultValue(field.getName(), context)
 
     def divideList (self, divider, list):
