@@ -4,7 +4,7 @@
 #
 # Copyright (c) 2013 by CommunesPlone
 # Generator: ArchGenXML Version 2.6
-#            http: //plone.org/products/archgenxml
+#            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
 #
@@ -20,12 +20,12 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from Products.urban.config import URBAN_TYPES, PROJECTNAME, EMPTY_VOCAB_VALUE, NULL_VALUE
+from Products.urban.config import *
 
 
 from Products.CMFCore.utils import UniqueObject
 
-
+    
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -232,9 +232,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
     # tool-constructors have no id argument, the id is fixed
     def __init__(self, id=None):
-        OrderedBaseFolder.__init__(self, 'portal_urban')
+        OrderedBaseFolder.__init__(self,'portal_urban')
         self.setTitle('Urban configuration')
-
+        
         ##code-section constructor-footer #fill in your manual code here
         ##/code-section constructor-footer
 
@@ -242,7 +242,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     # tool should not appear in portal_catalog
     def at_post_edit_script(self):
         self.unindexObject()
-
+        
         ##code-section post-edit-method-footer #fill in your manual code here
         self.checkDBConnection()
         ##/code-section post-edit-method-footer

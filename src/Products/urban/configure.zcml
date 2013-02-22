@@ -102,6 +102,7 @@
     factory=".subtypes.urbandoc.UrbanDocExtender" />
 
   <adapter name="parcelInfosIndex" factory=".indexes.genericlicence_parcelinfoindex" />
+  <adapter name="parcelInfosIndex" factory=".indexes.parcellingterm_parcelinfoindex" />
   <adapter name="StreetsUID" factory=".indexes.genericlicence_streetsuid" />
   <adapter name="last_key_event" factory=".indexes.genericlicence_lastkeyevent" />
   <adapter name="folder_manager" factory=".indexes.genericlicence_foldermanager" />

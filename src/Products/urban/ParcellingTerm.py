@@ -96,13 +96,13 @@ schema = Schema((
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-ParcellingTerm_schema = BaseSchema.copy() + \
+ParcellingTerm_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class ParcellingTerm(BaseContent, BrowserDefaultMixin):
+class ParcellingTerm(BaseFolder, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -141,9 +141,24 @@ class ParcellingTerm(BaseContent, BrowserDefaultMixin):
         """
            Update the title to set a clearly identify the buildlicence
         """
-        title = "%s (%s - %s - %s - %s)" % (self.getLabel(), self.getSubdividerName(), self.toLocalizedTime(self.getAuthorizationDate()).encode('utf8'), self.toLocalizedTime(self.getApprovalDate()).encode('utf8'), self.getNumberOfParcels())
+        parcel_baserefs = list(set(['"%s %s %s"' % (prc.getDivision(), prc.getSection(), prc.getRadical()) for prc in self.getParcels()]))
+        if parcel_baserefs:
+            refs = parcel_baserefs[0]
+            for ref in parcel_baserefs[1:]:
+                refs = '%s, %s' % (refs, ref)
+        title = "%s (%s - %s - %s" % (self.getLabel(), self.getSubdividerName(), self.toLocalizedTime(self.getAuthorizationDate()).encode('utf8'), self.toLocalizedTime(self.getApprovalDate()).encode('utf8'))
+        if refs:
+            title = '%s - %s' % (title, refs)
+        title = '%s)' % title
         self.setTitle(str(title))
         self.reindexObject()
+
+    security.declarePublic('getParcels')
+    def getParcels(self):
+        """
+           Return the list of parcels (portionOut) for the Licence
+        """
+        return self.objectValues('PortionOut')
 
 
 

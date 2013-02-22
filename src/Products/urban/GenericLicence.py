@@ -868,7 +868,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             newUrbanEventObj.processForm()
         return self.REQUEST.RESPONSE.redirect(self.absolute_url() + '/view?#fieldsetlegend-urban_events')
 
-
     security.declarePublic('getAllAdvices')
     def getAllAdvices(self):
         """

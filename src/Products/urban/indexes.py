@@ -16,7 +16,7 @@ __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
 from plone.indexer import indexer
-from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IGenericLicence, IParcellingTerm
 
 
 class UrbanIndexes:
@@ -62,8 +62,23 @@ def genericlicence_parcelinfoindex(object):
         for parcel in object.getParcels():
             parcelsInfos.append(parcel.getIndexValue())
     except:
-       pass
+        pass
     return parcelsInfos
+
+
+@indexer(IParcellingTerm)
+def parcellingterm_parcelinfoindex(object):
+    """
+    Indexes some informations about the parcels of a parcelling term
+    """
+    parcelsInfos = []
+    try:
+        for parcel in object.getParcels():
+            parcelsInfos.append(parcel.getIndexValue())
+    except:
+        pass
+    return parcelsInfos
+
 
 @indexer(IGenericLicence)
 def genericlicence_streetsuid(object):
@@ -72,12 +87,14 @@ def genericlicence_streetsuid(object):
         streets.append(location['street'])
     return streets
 
+
 @indexer(IGenericLicence)
 def genericlicence_lastkeyevent(object):
     for event in reversed(object.getUrbanEvents()):
         event_type = event.getUrbaneventtypes()
         if event_type.getIsKeyEvent():
             return "%s,  %s" % (event.getEventDate().strftime("%d/%m/%y"), event_type.Title())
+
 
 @indexer(IGenericLicence)
 def genericlicence_foldermanager(object):
