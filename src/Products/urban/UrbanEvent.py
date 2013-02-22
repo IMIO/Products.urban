@@ -337,7 +337,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
                 while (i<len(name)) and (name[i] != '&'):
                     i=i+1
                 if name[i]=='&':
-                    toreturn=toreturn+' OU '
+                    toreturn=toreturn+' - M. '
                     i=i+1
                 while (i<len(name)) and (name[i] != ','):
                     nom2=nom2+name[i]
@@ -357,7 +357,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
                 toreturn=toreturn+nom2
         else:
             toreturn=name
-        return toreturn
+        return 'M. %s' % toreturn
 
     security.declarePublic('initMap')
     def initMap(self):
