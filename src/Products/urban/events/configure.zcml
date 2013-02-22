@@ -25,8 +25,14 @@
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".inquiryEvents.setGeneratedTitle" />
   <subscriber for="..interfaces.IGenericLicence
-                   Products.Archetypes.event.IEditBegunEvent"
+                   Products.Archetypes.interfaces.IEditBegunEvent"
                    handler=".licenceEvents.setDefaultFolderManagersEvent"/>
+  <subscriber for="..interfaces.IGenericLicence
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+                   handler=".licenceEvents.postCreationActions"/>
+  <subscriber for="..interfaces.IGenericLicence
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+                   handler=".licenceEvents.updateLicenceTitle"/>
   <subscriber for="..interfaces.IPortionOut
                    zope.app.container.interfaces.IObjectRemovedEvent"
                    handler=".portionOutEvents.onDelete" />

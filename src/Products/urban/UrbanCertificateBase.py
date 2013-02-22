@@ -27,19 +27,16 @@ from Products.urban.config import *
 from zope.i18n import translate
 from Products.CMFCore.utils import getToolByName
 from Products.DataGridField.DataGridField import FixedRow
-from Products.DataGridField.LinesColumn import LinesColumn
 from Products.DataGridField.CheckboxColumn import CheckboxColumn
-from Products.DataGridField.Column import Column
 from Products.DataGridField.FixedColumn import FixedColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
-from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from DateTime import DateTime
 
 optional_fields = ['specificFeatures', 'roadSpecificFeatures', 'locationSpecificFeatures',
-                   'customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks',]
+                   'customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks']
 ##/code-section module-header
 
 schema = Schema((
@@ -173,8 +170,8 @@ del UrbanCertificateBase_schema['annoncedDelayDetails']
 #remove the impactStudy field for UrbanCertificates
 del UrbanCertificateBase_schema['impactStudy']
 #hide the solicit opinions to fields for UrbanCertificateOne
-UrbanCertificateBase_schema['solicitRoadOpinionsTo'].widget.visible=False
-UrbanCertificateBase_schema['solicitLocationOpinionsTo'].widget.visible=False
+UrbanCertificateBase_schema['solicitRoadOpinionsTo'].widget.visible = False
+UrbanCertificateBase_schema['solicitLocationOpinionsTo'].widget.visible = False
 ##/code-section after-schema
 
 class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
@@ -246,31 +243,9 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         rootPath = '/'.join(portal.getPhysicalPath())
         folderManagersPath = '/portal_urban/%s/foldermanagers' % self.getPortalTypeName().lower()
         dict = {}
-        dict['path'] = {'query':'%s%s' % (rootPath, folderManagersPath)}
+        dict['path'] = {'query': '%s%s' % (rootPath, folderManagersPath)}
         dict['sort_on'] = 'sortable_title'
         return dict
-
-    security.declarePublic('at_post_create_script')
-    def at_post_create_script(self):
-        """
-           Post create hook...
-           XXX This should be replaced by a zope event...
-        """
-        tool = getToolByName(self,'portal_urban')
-        #update the last reference in the configuration
-        tool.incrementNumerotation(self)
-        #there is no need for other users than Managers to List folder contents
-        #set this permission here if we use the simple_publication_workflow...
-        self.manage_permission('List folder contents', ['Manager', ], acquire=0)
-        self.updateTitle()
-
-    security.declarePublic('at_post_edit_script')
-    def at_post_edit_script(self):
-        """
-           Post edit hook...
-           XXX This should be replaced by a zope event...
-        """
-        self.updateTitle()
 
     security.declarePublic('getSpecificFeaturesRows')
     def getSpecificFeaturesRows(self):
@@ -292,12 +267,12 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         portal_urban = getToolByName(self, 'portal_urban')
         vocname = '%sspecificfeatures' % location
         vocterms = [brain.getObject() for brain in portal_urban.listVocabularyBrains(vocToReturn=vocname, context=self)]
-        return [FixedRow(keyColumn = 'value', initialData={
-                                        'check':vocterm.getIsDefaultValue() and '1' or '',
-                                        'id':vocterm.id,
-                                        'value':vocterm.Title(),
-                                        'text':vocterm.Description(),
-                                        })
+        return [FixedRow(keyColumn='value', initialData={
+                'check': vocterm.getIsDefaultValue() and '1' or '',
+                'id': vocterm.id,
+                'value': vocterm.Title(),
+                'text': vocterm.Description(),
+                })
                 for vocterm in vocterms]
 
     security.declarePublic('updateTitle')

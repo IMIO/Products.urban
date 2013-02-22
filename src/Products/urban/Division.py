@@ -99,21 +99,6 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     # Manually created methods
 
-    security.declarePublic('at_post_create_script')
-    def at_post_create_script(self):
-        """
-           Post create hook...
-           XXX This should be replaced by a zope event...
-        """
-        super(GenericLicence).__thisclass__.at_post_create_script(self)
-
-    def at_post_edit_script(self):
-        """
-           Post edit hook...
-           XXX This should be replaced by a zope event...
-        """
-        super(GenericLicence).__thisclass__.at_post_edit_script(self)
-
     security.declarePublic('updateTitle')
     def updateTitle(self):
         """

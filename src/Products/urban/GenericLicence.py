@@ -813,28 +813,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             urban_event = None
         return urban_event
 
-    security.declarePublic('at_post_create_script')
-    def at_post_create_script(self):
-        """
-           Post create hook...
-           XXX This should be replaced by a zope event...
-        """
-        tool = getToolByName(self,'portal_urban')
-        #increment the numerotation in the tool
-        tool.incrementNumerotation(self)
-        #there is no need for other users than Managers to List folder contents
-        #set this permission here if we use the simple_publication_workflow...
-        self.manage_permission('List folder contents', ['Manager', ], acquire=0)
-        self.updateTitle()
-
-    security.declarePublic('at_post_edit_script')
-    def at_post_edit_script(self):
-        """
-           Post edit hook...
-           XXX This should be replaced by a zope event...
-        """
-        self.updateTitle()
-
     security.declarePublic('updateTitle')
     def updateTitle(self):
         """
