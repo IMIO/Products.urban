@@ -218,7 +218,7 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
                         if len(brains) > 0:
                             newrecipient=brains[0].getObject()
                             newrecipient.setTitle(newrecipient.Title()+' & '+rspe['pe'])
-                            newrecipient.setName(newrecipient.getName()+' OU '+context.parseCadastreName(rspe['pe']))
+                            newrecipient.setName(newrecipient.getName()+' - '+context.parseCadastreName(rspe['pe']))
                             newrecipient.reindexObject()
                         else:
                             newrecipientname = context.invokeFactory("RecipientCadastre",id=context.generateUniqueId('RecipientCadastre'),title=rspe['pe'],name=context.parseCadastreName(rspe['pe']),adr1=rspe['adr1'],adr2=rspe['adr2'],street=context.parseCadastreStreet(rspe['adr2']),daa=rspe['daa'])
