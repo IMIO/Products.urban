@@ -128,22 +128,6 @@ class ParcelOutLicence(BaseFolder, BuildLicence, BrowserDefaultMixin):
         dict['sort_on'] = 'sortable_title'
         return dict
 
-    security.declarePublic('at_post_create_script')
-    def at_post_create_script(self):
-        """
-           Post create hook...
-           XXX This should be replaced by a zope event...
-        """
-        super(BuildLicence).__thisclass__.at_post_create_script(self)
-
-    security.declarePublic('at_post_edit_script')
-    def at_post_edit_script(self):
-        """
-           Post create hook...
-           XXX This should be replaced by a zope event...
-        """
-        super(BuildLicence).__thisclass__.at_post_edit_script(self)
-
     def getLastDeposit(self):
         return self._getLastEvent(interfaces.IDepositEvent)
 
