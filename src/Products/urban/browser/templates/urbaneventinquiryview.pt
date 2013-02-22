@@ -12,7 +12,7 @@
 <body>
 <div metal:fill-slot="main">
 <metal:main_macro define-macro="main">
-<metal:body define-macro="body_macro" tal:define="useTabbing python: context.portal_urban.getUseTabbing();
+<metal:body define-macro="body_macro" tal:define="useTabbing python: True;
                                                   member context/@@plone_portal_state/member;
                                                   recipients context/getRecipients;
                                                   linkedUrbanEventType view/getUrbaneventtypes;
