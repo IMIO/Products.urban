@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
 
 
 def beforeDelete(ob, event):
@@ -47,8 +46,11 @@ def setDefaultValuesEvent(inquiry, event):
     """
      set default values on inquiry fields
     """
+    #be sure we are on a real Inquiry as some other types heritate from
+    #Inquiry and so implements the IInquiry interface
+    if not inquiry.portal_type == 'Inquiry':
+        return
     if inquiry.checkCreationFlag():
-        _setDefaultFolderManagers(inquiry)
         _setDefaultSelectValues(inquiry)
         _setDefaultTextValues(inquiry)
 
@@ -56,7 +58,8 @@ def setDefaultValuesEvent(inquiry, event):
 def _setDefaultSelectValues(inquiry):
     select_fields = [field for field in inquiry.schema.fields() if field.default_method == 'getDefaultValue']
     for field in select_fields:
-        default_value = inquiry. getDefaultValue(inquiry, field)
+        licence = inquiry.aq_inner.aq_parent
+        default_value = inquiry.getDefaultValue(licence, field)
         field_mutator = getattr(inquiry, field.mutator)
         field_mutator(default_value)
 
@@ -65,12 +68,7 @@ def _setDefaultTextValues(inquiry):
     select_fields = [field for field in inquiry.schema.fields() if field.default_method == 'getDefaultText']
     for field in select_fields:
         is_html = field.default_content_type == 'text/html'
-        default_value = inquiry. getDefaultText(inquiry, field, is_html)
+        licence = inquiry.aq_inner.aq_parent
+        default_value = inquiry.getDefaultText(licence, field, is_html)
         field_mutator = getattr(inquiry, field.mutator)
         field_mutator(default_value)
-    return
-
-
-def _setDefaultFolderManagers(inquiry):
-    tool = getToolByName(inquiry, 'portal_urban')
-    inquiry.setFoldermanagers(tool.getCurrentFolderManager(initials=False))
