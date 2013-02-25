@@ -11,9 +11,3 @@ class ParcellingTermView(BrowserView):
         super(BrowserView, self).__init__(context, request)
         self.context = context
         self.request = request
-
-
-class ParcellingTermMacros(BrowserView):
-    """
-      This manage the macros of ParcellingTerm
-    """
