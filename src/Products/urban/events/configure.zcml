@@ -84,5 +84,11 @@
   <subscriber for="..interfaces.IEnvironmentBase
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".environmentLicenceEvents.setExploitationConditions"/>
+  <subscriber for="..interfaces.IPortionOut
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".parcelEvents.updateParcellingTitle" />
+  <subscriber for="..interfaces.IParcellingTerm
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".parcellingtermEvents.updateTitle" />
 
 </configure>

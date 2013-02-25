@@ -9,6 +9,8 @@ Added options bar to licences listing (#5476, #5250).
 Use events rather than archetype built-in default method system to fill licence fields with default values
 because of performance issues (#5423)
 
+Parcels can be added on ParcellingTerm objects. Now, parcellingterm objects can be found by parcel references (#5537)
+
 
 1.1.6
 -----

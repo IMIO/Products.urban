@@ -121,27 +121,13 @@ class ParcellingTerm(BaseFolder, BrowserDefaultMixin):
 
     # Manually created methods
 
-    security.declarePublic('at_post_create_script')
-    def at_post_create_script(self):
-        """
-           Post create hook...
-           XXX This should be replaced by a zope event...
-        """
-        self.updateTitle()
-
-    def at_post_edit_script(self):
-        """
-           Post edit hook...
-           XXX This should be replaced by a zope event...
-        """
-        self.updateTitle()
-
     security.declarePublic('updateTitle')
     def updateTitle(self):
         """
            Update the title to set a clearly identify the buildlicence
         """
         parcel_baserefs = list(set(['"%s %s %s"' % (prc.getDivision(), prc.getSection(), prc.getRadical()) for prc in self.getParcels()]))
+        refs = ''
         if parcel_baserefs:
             refs = parcel_baserefs[0]
             for ref in parcel_baserefs[1:]:
@@ -159,8 +145,6 @@ class ParcellingTerm(BaseFolder, BrowserDefaultMixin):
            Return the list of parcels (portionOut) for the Licence
         """
         return self.objectValues('PortionOut')
-
-
 
 registerType(ParcellingTerm, PROJECTNAME)
 # end of class ParcellingTerm
