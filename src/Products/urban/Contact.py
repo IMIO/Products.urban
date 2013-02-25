@@ -31,21 +31,24 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.validation.interfaces.IValidator import IValidator
 from Products.validation import validation
 
+
 class BelgianNationalRegValidator:
     #Validate a belgian national register number
     implements(IValidator)
+
     def __init__(self, name):
         self.name = name
+
     def __call__(self, value, *args, **kwargs):
         #the eID card number is 11 number long, we only accept number and '-' and '.'
         #we test that we only have got numbers and '-' and '.'
         len_value = len(value)
 
-        clean_value =  ''.join([c for c in value if c in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9','-','.')])
+        clean_value = ''.join([c for c in value if c in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '.')])
         if len_value != len(clean_value):
             return "This field only accept numbers, indents or points !"
 
-        clean_value =  ''.join([c for c in value if c in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9',)])
+        clean_value = ''.join([c for c in value if c in ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9',)])
 
         #we check that there are 11 numbers left
         if len(clean_value) != 11:
@@ -55,7 +58,7 @@ class BelgianNationalRegValidator:
         last_part = int(clean_value[9:11])
 
         #the two last digits is the result of 97 les the modulo by 97 of the 10 first digits
-        if last_part != (97 - (first_part%97)):
+        if last_part != (97 - (first_part % 97)):
             return "This National Register number is not valid !"
 
         return True
@@ -64,37 +67,44 @@ validation.register(BelgianNationalRegValidator('isBelgianNR'))
 
 slave_fields_address = (
     # if isSameAddressAsWorks, hide the address related fields
-    {'name': 'street',
-     'action': 'show',
-     'hide_values': (False, ),
+    {
+        'name': 'street',
+        'action': 'show',
+        'hide_values': (False, ),
     },
-    {'name': 'number',
-     'action': 'show',
-     'hide_values': (False, ),
+    {
+        'name': 'number',
+        'action': 'show',
+        'hide_values': (False, ),
     },
-    {'name': 'zipcode',
-     'action': 'show',
-     'hide_values': (False, ),
+    {
+        'name': 'zipcode',
+        'action': 'show',
+        'hide_values': (False, ),
     },
-    {'name': 'city',
-     'action': 'show',
-     'hide_values': (False, ),
+    {
+        'name': 'city',
+        'action': 'show',
+        'hide_values': (False, ),
     },
-    {'name': 'country',
-     'action': 'show',
-     'hide_values': (False, ),
+    {
+        'name': 'country',
+        'action': 'show',
+        'hide_values': (False, ),
     },
-    {'name': 'showWorkLocationsAddress',
-     'action': 'show',
-     'hide_values': (True, ),
+    {
+        'name': 'showWorkLocationsAddress',
+        'action': 'show',
+        'hide_values': (True, ),
     },
 )
 
 slave_fields_representedby = (
     # applicant is either represented by a society or by another contact but not both at the same time
-    {'name': 'representedBy',
-     'action': 'show',
-     'hide_values': (False, ),
+    {
+        'name': 'representedBy',
+        'action': 'show',
+        'hide_values': (False, ),
     },
 )
 
@@ -314,28 +324,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
         else:
             return "%s %s %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2())
 
-    security.declarePublic('at_post_create_script')
-    def at_post_create_script(self):
-        """
-           Post create hook...
-           XXX This should be replaced by a zope event...
-        """
-        self.at_post_edit_script()
-
-    security.declarePublic('at_post_edit_script')
-    def at_post_edit_script(self):
-        """
-           Post edit hook...
-           XXX This should be replaced by a zope event...
-           As the applicant names appear in the parent title, we update it...
-        """
-        #only update parent's title if an applicant or a proprietary is added
-        if not self.portal_type in ['Applicant', 'Proprietary', ]:
-            return
-        parent = self.getParentNode()
-        if parent.portal_type in ["Declaration", "BuildLicence", "ParcelOutLicence", "UrbanCertificateOne", "UrbanCertificateTwo", "NotaryLetter", "EnvClassThree", "Division", "MiscDemand", ]:
-            parent.at_post_edit_script()
-
     security.declarePublic('getSignaletic')
     def getSignaletic(self, short=False, withaddress=False, linebyline=False):
         """
@@ -352,16 +340,17 @@ class Contact(BaseContent, BrowserDefaultMixin):
             addressSignaletic = self.getAddress(linebyline=linebyline)
             if not linebyline:
                 mapping = dict(name=nameSignaletic.decode('utf8'),
-                        address=addressSignaletic.decode('utf8'))
-                result = translate(u'residing',
+                               address=addressSignaletic.decode('utf8'))
+                result = translate(
+                    u'residing',
                     domain=u'urban',
-                    mapping=mapping, context=self.REQUEST)
+                    mapping=mapping, context=self.REQUEST
+                )
                 return result.encode('utf8')
             else:
                 #remove the <p></p> from adressSignaletic
                 addressSignaletic = addressSignaletic[3:-4]
-                return '<p>%s<br />%s</p>' % (nameSignaletic,
-                    addressSignaletic)
+                return '<p>%s<br />%s</p>' % (nameSignaletic, addressSignaletic)
 
     def _getNameSignaletic(self, short, linebyline):
         title = self.getPersonTitleValue(short, extra=False)
@@ -370,17 +359,17 @@ class Contact(BaseContent, BrowserDefaultMixin):
         nameSignaletic = '%s %s' % (title, namepart)
         if len(self.getRepresentedBy()) > 0 or self.getRepresentedBySociety():
             person_title = self.getPersonTitle(theObject=True)
-            representatives =  self.getRepresentedBySociety() and self.getSociety() or self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
+            representatives = self.getRepresentedBySociety() and self.getSociety() or self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
             gender = multiplicity = ''
             represented = 'représenté'
             if person_title:
                 gender = person_title.getGender()
                 multiplicity = person_title.getMultiplicity()
-                if gender == 'male' and multiplicity == 'plural' :
+                if gender == 'male' and multiplicity == 'plural':
                     represented = 'représentés'
-                elif gender == 'female' and multiplicity == 'single' :
+                elif gender == 'female' and multiplicity == 'single':
                     represented = 'représentée'
-                elif gender == 'female' and multiplicity == 'plural' :
+                elif gender == 'female' and multiplicity == 'plural':
                     represented = 'représentées'
             nameSignaletic = '%s %s %s par %s' % (title, namepart, represented, representatives)
         if linebyline:
@@ -482,7 +471,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         if hasattr(tool.persons_titles, self.getField('personTitle').get(self)):
             #XXX remove this when everybody will use the Plone4 version (aka Sambreville and La Bruyere)
             try:
-               return getattr(tool.persons_titles, self.getField('personTitle').get(self)).getAbbreviation()
+                return getattr(tool.persons_titles, self.getField('personTitle').get(self)).getAbbreviation()
             except AttributeError:
                 #for old instances, persons_titles are UrbanVocabularyTerms and have no abbreviation...
                 #we used the no more existing termKeyStr attribute... that is removed in a migration step

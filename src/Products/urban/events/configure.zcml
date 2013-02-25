@@ -15,6 +15,9 @@
   <subscriber for="..interfaces.IContact
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".contactEvents.setInterface" />
+  <subscriber for="..interfaces.IContact
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".contactEvents.updateLicenceTitle" />
   <subscriber for="..interfaces.IInquiry
                    Products.Archetypes.interfaces.IEditBegunEvent"
               handler=".inquiryEvents.setDefaultValuesEvent"/>

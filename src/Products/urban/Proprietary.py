@@ -60,27 +60,6 @@ class Proprietary(BaseContent, Contact, BrowserDefaultMixin):
 
     # Manually created methods
 
-    security.declarePublic('at_post_create_script')
-    def at_post_create_script(self):
-        """
-           Post create hook...
-           XXX This should be replaced by a zope event...
-        """
-        self.at_post_edit_script()
-
-    security.declarePublic('at_post_edit_script')
-    def at_post_edit_script(self):
-        """
-           Post edit hook...
-           XXX This should be replaced by a zope event...
-           As the applicant names appear in the parent title, we update it...
-        """
-        parent = self.getParentNode()
-        if parent.portal_type == 'Division':
-            parent.at_post_edit_script()
-
-
-
 registerType(Proprietary, PROJECTNAME)
 # end of class Proprietary
 
