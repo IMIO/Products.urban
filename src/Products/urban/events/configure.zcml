@@ -28,13 +28,13 @@
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".inquiryEvents.setGeneratedTitle" />
   <subscriber for="..interfaces.IGenericLicence
-                   Products.Archetypes.interfaces.IEditBegunEvent"
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".licenceEvents.setDefaultValuesEvent"/>
   <subscriber for="..interfaces.IGenericLicence
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".licenceEvents.postCreationActions"/>
   <subscriber for="..interfaces.IGenericLicence
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+                   zope.lifecycleevent.IObjectModifiedEvent"
               handler=".licenceEvents.updateLicenceTitle"/>
   <subscriber for="..interfaces.IPortionOut
                    zope.app.container.interfaces.IObjectRemovedEvent"
