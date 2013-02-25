@@ -903,7 +903,6 @@ def addApplicationFolders(context):
         newFolderid = newFolder.invokeFactory("Folder", id="parcellings", title=_("parcellings_folder_title", 'urban', context=site.REQUEST))
         newSubFolder = getattr(newFolder, newFolderid)
         setFolderAllowedTypes(newSubFolder, 'ParcellingTerm')
-        newSubFolder.setConstrainTypesMode(1)
         newSubFolder.setLayout('parcellings_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add ParcellingTerm', ['Manager', 'Editor', ], acquire=0)
