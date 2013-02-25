@@ -31,7 +31,7 @@
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
                    handler=".licenceEvents.postCreationActions"/>
   <subscriber for="..interfaces.IGenericLicence
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
                    handler=".licenceEvents.updateLicenceTitle"/>
   <subscriber for="..interfaces.IPortionOut
                    zope.app.container.interfaces.IObjectRemovedEvent"
