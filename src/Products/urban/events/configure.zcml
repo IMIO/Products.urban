@@ -28,7 +28,7 @@
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".inquiryEvents.setGeneratedTitle" />
   <subscriber for="..interfaces.IGenericLicence
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+                   Products.Archetypes.interfaces.IEditBegunEvent"
               handler=".licenceEvents.setDefaultValuesEvent"/>
   <subscriber for="..interfaces.IGenericLicence
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
