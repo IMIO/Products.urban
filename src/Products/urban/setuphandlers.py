@@ -904,6 +904,7 @@ def addApplicationFolders(context):
         newSubFolder = getattr(newFolder, newFolderid)
         setFolderAllowedTypes(newSubFolder, 'ParcellingTerm')
         newSubFolder.setConstrainTypesMode(1)
+        newSubFolder.setLayout('parcellings_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add ParcellingTerm', ['Manager', 'Editor', ], acquire=0)
 
