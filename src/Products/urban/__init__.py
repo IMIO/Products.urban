@@ -84,7 +84,6 @@ def initialize(context):
     """initialize product (called by zope)"""
     ##code-section custom-init-top #fill in your manual code here
     import Notary
-    import Proprietary
     # next line to be removed when migration #1283 is done
     import Architect
     ##/code-section custom-init-top
