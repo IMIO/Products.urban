@@ -3,6 +3,7 @@ from Products.urban.browser.licenceview import LicenceView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
+
 class EnvClassThreeView(LicenceView):
     """
       This manage the view of EnvClassThree
@@ -18,6 +19,19 @@ class EnvClassThreeView(LicenceView):
             plone_utils.addPortalMessage(_('warning_add_a_proprietary'), type="warning")
         if self.hasOutdatedParcels():
             plone_utils.addPortalMessage(_('warning_outdated_parcel'), type="warning")
+
+    def getInquiriesForDisplay(self):
+        """
+          Returns the inquiries to display on the buildlicence_view
+          This will move to the buildlicenceview when it will exist...
+        """
+        context = aq_inner(self.context)
+        inquiries = context.getInquiries()
+        if not inquiries:
+            #we want to display at least the informations about the inquiry
+            #defined on the licence even if no data have been entered
+            inquiries.append(context)
+        return inquiries
 
     def getRubrics(self):
         """
@@ -37,7 +51,7 @@ class EnvClassThreeView(LicenceView):
         sorted_conditions = dict([(val, [],) for val in order])
         for cond in conditions:
             val = cond.getExtraValue()
-            sorted_conditions[val].append({'type':val, 'url':cond.absolute_url(), 'title':cond.Title()})
+            sorted_conditions[val].append({'type': val, 'url': cond.absolute_url(), 'title': cond.Title()})
         sort = []
         for val in order:
             sort.extend(sorted_conditions[val])
@@ -58,6 +72,7 @@ class EnvClassThreeView(LicenceView):
         context = aq_inner(self.context)
         sup_conditions = context.getAdditionalLegalConditions()
         return self._sortConditions(sup_conditions)
+
 
 class EnvClassThreeMacros(LicenceView):
     """

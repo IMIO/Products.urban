@@ -109,16 +109,16 @@
       <td tal:condition="python: not (min_conditions or sup_conditions)" valign="top">
        <span class="discreet" i18n:translate="content_none">None</span>
       </td>
-      <td tal:condition="python: min_conditions or sup_conditions">
+      <td id="urban-minimum-conditions" tal:condition="python: min_conditions or sup_conditions">
        <ul>
         <tal:rubric repeat="cond min_conditions">
          <li><span tal:content="python: '%s :' % cond['type']">condition type</span>
-             <a tal:attributes="href python: cond['url']" tal:content="python: cond['title']"></a>
+             <a tal:attributes="href python: cond['url']; class python: 'link-overlay'" tal:content="python: cond['title']"></a>
         </tal:rubric>
         <hr tal:condition="sup_conditions">
         <tal:rubric repeat="cond sup_conditions">
          <li><span tal:content="python: '%s :' % cond['type']">condition type</span>
-             <a tal:attributes="href python: cond['url']" tal:content="python: cond['title']"></a>
+             <a tal:attributes="href python: cond['url']; class python: 'link-overlay'" tal:content="python: cond['title']"></a>
         </tal:rubric>
        </ul>
       </td>

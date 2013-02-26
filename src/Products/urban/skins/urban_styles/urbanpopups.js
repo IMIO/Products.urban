@@ -13,6 +13,10 @@ jQuery(function($){
        subtype: 'ajax',
    });
 
+    // Long text popup
+    $('#urban-minimum-conditions a').prepOverlay({
+       subtype: 'ajax',
+   });
     // parcel history popup
     $('#urban-parcel-related-licences a').prepOverlay({
        subtype: 'ajax',
