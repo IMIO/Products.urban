@@ -146,6 +146,8 @@ class ParcellingTerm(BaseFolder, BrowserDefaultMixin):
         """
         return self.objectValues('PortionOut')
 
+
+
 registerType(ParcellingTerm, PROJECTNAME)
 # end of class ParcellingTerm
 

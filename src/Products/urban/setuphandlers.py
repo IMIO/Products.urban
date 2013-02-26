@@ -16,8 +16,11 @@ __docformat__ = 'plaintext'
 
 import logging
 logger = logging.getLogger('urban: setuphandlers')
+from Products.urban.config import PROJECTNAME
 from Products.urban.config import DEPENDENCIES
+import os
 from Products.CMFCore.utils import getToolByName
+import transaction
 ##code-section HEAD
 from Acquisition import aq_base
 from Products.CMFPlone.utils import base_hasattr
@@ -38,18 +41,12 @@ from Products.urban.utils import generatePassword
 from datetime import date
 ##/code-section HEAD
 
-
 def isNoturbanProfile(context):
     return context.readDataFile("urban_marker.txt") is None
 
-
 def setupHideToolsFromNavigation(context):
-    """
-     hide tools
-    """
-    if isNoturbanProfile(context):
-        return
-
+    """hide tools"""
+    if isNoturbanProfile(context): return
     # uncatalog tools
     site = context.getSite()
     toolnames = ['portal_urban']
@@ -58,7 +55,7 @@ def setupHideToolsFromNavigation(context):
     if navtreeProperties.hasProperty('idsNotToList'):
         for toolname in toolnames:
             try:
-                site[toolname].unindexObject()
+                portal[toolname].unindexObject()
             except:
                 pass
             current = list(navtreeProperties.getProperty('idsNotToList') or [])
@@ -68,33 +65,18 @@ def setupHideToolsFromNavigation(context):
                 navtreeProperties.manage_changeProperties(**kwargs)
 
 
+
 def updateRoleMappings(context):
     """after workflow changed update the roles mapping. this is like pressing
     the button 'Update Security Setting' and portal_workflow"""
-    if context.readDataFile('urban_extra_marker.txt') is None:
-        return
+    if isNoturbanProfile(context): return
     wft = getToolByName(context.getSite(), 'portal_workflow')
     wft.updateRoleMappings()
-
 
 def postInstall(context):
     """Called as at the end of the setup process. """
     # the right place for your custom code
 
-    if isNoturbanProfile(context):
-        return
-
-    corePostInstall(context, refresh=False)
-    extraPostInstall(context, refresh=False)
-    site = context.getSite()
-    #refresh catalog after all these objects have been added...
-    logger.info("Refresh portal_catalog : starting...")
-    site.portal_catalog.refreshCatalog(clear=True)
-    logger.info("Refresh portal_catalog : Done!")
-
-
-def corePostInstall(context, refresh=True):
-    # all installation custom code required for tests
     if isNoturbanProfile(context):
         return
 
@@ -135,12 +117,10 @@ def corePostInstall(context, refresh=True):
     }
     alreadyRegTypes.update(typesToRegister)
     factory_tool.manage_setPortalFactoryTypes(listOfTypeIds=alreadyRegTypes)
-
     #to be removed after deletion of class Architect
     architect_type = site.portal_types.Architect
     architect_type.content_meta_type = "Contact"
     architect_type.factory = "addContact"
-
     logger.info("setUrbanConfigWFPolicy : starting...")
     setUrbanConfigWFPolicy(context)
     logger.info("setUrbanConfigWFPolicy : Done")
@@ -161,18 +141,22 @@ def corePostInstall(context, refresh=True):
     logger.info("adaptDefaultPortal : starting...")
     adaptDefaultPortal(context)
     logger.info("adaptDefaultPortal : Done")
-    if refresh:
-        #refresh catalog after all these objects have been added...
-        logger.info("Refresh portal_catalog : starting...")
-        site.portal_catalog.refreshCatalog(clear=True)
-        logger.info("Refresh portal_catalog : Done!")
+    #refresh catalog after all these objects have been added...
+    logger.info("Refresh portal_catalog : starting...")
+    site.portal_catalog.refreshCatalog(clear=True)
+    logger.info("Refresh portal_catalog : Done!")
+
+
+##code-section FOOT
+def _(msgid, domain, context):
+    translation_domain = queryUtility(ITranslationDomain, domain)
+    return translation_domain.translate(msgid, target_language='fr', default='')
 
 
 def extraPostInstall(context, refresh=True):
     # all installation custom code not required for tests
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
-
     site = context.getSite()
     logger.info("addUrbanConfigs : starting...")
     addUrbanConfigs(context)
@@ -197,12 +181,6 @@ def extraPostInstall(context, refresh=True):
         logger.info("Refresh portal_catalog : starting...")
         site.portal_catalog.refreshCatalog(clear=True)
         logger.info("Refresh portal_catalog : Done!")
-
-
-##code-section FOOT
-def _(msgid, domain, context):
-    translation_domain = queryUtility(ITranslationDomain, domain)
-    return translation_domain.translate(msgid, target_language='fr', default='')
 
 
 def setUrbanConfigWFPolicy(context):
