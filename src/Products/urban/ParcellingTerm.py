@@ -132,9 +132,19 @@ class ParcellingTerm(BaseFolder, BrowserDefaultMixin):
             refs = parcel_baserefs[0]
             for ref in parcel_baserefs[1:]:
                 refs = '%s, %s' % (refs, ref)
-        title = "%s (%s - %s - %s" % (self.getLabel(), self.getSubdividerName(), self.toLocalizedTime(self.getAuthorizationDate()).encode('utf8'), self.toLocalizedTime(self.getApprovalDate()).encode('utf8'))
+        title = "%s (%s" % (self.getLabel(), self.getSubdividerName())
+
+        auth_date = self.getAuthorizationDate()
+        if auth_date:
+            title = '%s - %s' % (title, self.toLocalizedTime(auth_date).encode('utf8'))
+
+        approval_date = self.getApprovalDate()
+        if approval_date:
+            title = '%s - %s' % (title, self.toLocalizedTime(approval_date).encode('utf8'))
+
         if refs:
             title = '%s - %s' % (title, refs)
+
         title = '%s)' % title
         self.setTitle(str(title))
         self.reindexObject()
