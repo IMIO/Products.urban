@@ -20,8 +20,10 @@
 
 <metal:use_body use-macro="body_macro" />
 
-<fieldset><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
+<fieldset style="margin-right:49%;"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
+ <div>
   <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
+ </div>
 </fieldset>
 
 <div tal:replace="structure provider:plone.belowcontentbody" />
