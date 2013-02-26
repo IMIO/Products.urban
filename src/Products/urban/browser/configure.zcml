@@ -302,15 +302,6 @@
      permission="zope2.View"
   />
 
-  <!--browser:page
-     for="Products.urban.interfaces.IParcellingTerm"
-     name="parcellingtermmacros"
-     class=".parcellingtermview.ParcellingTermMacros"
-     template="templates/parcellingtermmacros.pt"
-     permission="zope2.View"
-  /-->
-
-
   <browser:page
      for="*"
      name="urbansearchview"
