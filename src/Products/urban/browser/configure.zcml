@@ -303,6 +303,14 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="fieldeditoverlay"
+     class=".fieldoverlay_edit.FieldEditView"
+     template="templates/fieldoverlay_edit.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="*"
      name="urbansearchview"
      class=".urbansearchview.UrbanSearchView"

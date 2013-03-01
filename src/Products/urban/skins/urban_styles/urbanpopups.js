@@ -21,4 +21,8 @@ jQuery(function($){
     $('#urban-parcel-related-licences a').prepOverlay({
        subtype: 'ajax',
    });
+    // CU1/CU2/NotaryLetter specific features popup
+    $('#urban-specificfeatures-field a').prepOverlay({
+       subtype: 'ajax',
+    });
 });
