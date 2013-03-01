@@ -378,7 +378,6 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         for foldermaker in foldermakers:
             toreturn = toreturn + '%' + foldermaker.getAddressCSV()
         toreturn = toreturn + '</CSV>'
-        #import ipdb; ipdb.set_trace()
         return toreturn
 
 
