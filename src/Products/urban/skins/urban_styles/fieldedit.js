@@ -3,10 +3,10 @@ function getField() {
             here = jq(this)
             field_id = here.attr('class');
             oldcontent = jq('#archetypes-fieldname-' + field_id);
-            newcontent = oldcontent.clone();
 
             // use this trick to get fields hidden by master select widget
-            if ( newcontent.hasClass('refreshed')){
+            if (oldcontent.hasClass('refreshed')){
+                newcontent = oldcontent.clone();
                 // copy/paste the 'select' property manually since the clone method is bugged ..
                 var selects = oldcontent.find("select");
                 jq(selects).each(function(i) {
