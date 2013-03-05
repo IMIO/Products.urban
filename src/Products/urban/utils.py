@@ -6,6 +6,7 @@ import string
 import hashlib
 from HTMLParser import HTMLParser
 
+
 def moveElementAfter(object_to_move, container, attr_name, attr_value_to_match):
     new_position = container.getObjectPosition(object_to_move.getId())
     contents = container.objectValues()
@@ -17,24 +18,28 @@ def moveElementAfter(object_to_move, container, attr_name, attr_value_to_match):
             container.moveObjectToPosition(object_to_move.getId(), new_position)
             return
 
+
 def generatePassword(length):
     return ''.join(random.choice(string.ascii_letters + string.digits) for x in range(length))
+
 
 def getMd5Signature(data):
     md5 = hashlib.md5(data)
     return md5.hexdigest()
 
+
 def getOsTempFolder():
     tmp = '/tmp'
     if os.path.exists(tmp) and os.path.isdir(tmp):
         res = tmp
-    elif os.environ.has_key('TMP'):
+    elif 'TMP' in os.environ:
         res = os.environ['TMP']
-    elif os.environ.has_key('TEMP'):
+    elif 'TEMP' in os.environ:
         res = os.environ['TEMP']
     else:
         raise "Sorry, I can't find a temp folder on your machine."
     return res
+
 
 def setOptionalAttributes(schema, optional_fields):
     """
@@ -44,7 +49,8 @@ def setOptionalAttributes(schema, optional_fields):
         field = schema.get(fieldname)
         if field is not None:
             setattr(field, 'optional', True)
-            field.widget.setCondition("python: here.attributeIsUsed('%s')"%fieldname)
+            field.widget.setCondition("python: here.attributeIsUsed('%s')" % fieldname)
+
 
 def setSchemataForInquiry(schema):
     """
@@ -56,8 +62,6 @@ def setSchemataForInquiry(schema):
     inquiryFields = inquiryFields[2:]
     for inquiryField in inquiryFields:
         schema[inquiryField.getName()].schemata = 'urban_investigation_and_advices'
-
-from HTMLParser import HTMLParser
 
 
 #class and function to strip a text from all its HTML tags
@@ -72,6 +76,7 @@ class MLStripper(HTMLParser):
 
     def get_data(self):
         return ''.join(self.fed)
+
 
 def strip_tags(html):
     s = MLStripper()
@@ -94,7 +99,6 @@ class ParcelHistoric:
                 checked[key] = i
         return [parcel for parcel in parcel_historics if parcel]
 
-
     def __init__(self, highlight=False, prc='', prca='', prcc='', **refs):
         self.highlight = highlight
         self.parents = self.diffPrc(prca, prc) and [prca] or []
@@ -102,7 +106,7 @@ class ParcelHistoric:
         self.prc = prc
         self.proprietary = refs.get('proprietary', '')
         self.location = refs.get('location', '')
-        self.divname = self.division = self.section = self.radical = self.bis =  self.exposant =  self.puissance = ''
+        self.divname = self.division = self.section = self.radical = self.bis = self.exposant = self.puissance = ''
         self.refs = ['divname', 'division', 'section', 'radical', 'bis', 'exposant', 'puissance']
         self.setRefs(**refs)
 
@@ -113,7 +117,7 @@ class ParcelHistoric:
         return self.__str__()
 
     def buildRelativesChain(self, urban_tool, link_name):
-        o_link_name  = link_name == 'parents' and 'childs' or 'parents'
+        o_link_name = link_name == 'parents' and 'childs' or 'parents'
         link = link_name == 'parents' and 'prca' or 'prcc'
         o_link = link == 'prca' and 'prcc' or 'prca'
         division = self.division
@@ -121,7 +125,7 @@ class ParcelHistoric:
         for prc in getattr(self, link_name):
             section = prc[0]
             prcb1 = prc[1:]
-            prcb1 = '%s%s%s' % (prcb1[:-3], ' '.join(['' for i in range(12-len(prcb1))]), prcb1[-3:])
+            prcb1 = '%s%s%s' % (prcb1[:-3], ' '.join(['' for i in range(12 - len(prcb1))]), prcb1[-3:])
             query_string = "SELECT distinct %s, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
                             FROM pas left join da on da.da = pas.da \
                             WHERE pas.da = %s and section = '%s' and pas.prcb1 = '%s' and pas.%s IS NOT NULL" % (link, division, section, prcb1, o_link)
@@ -143,7 +147,7 @@ class ParcelHistoric:
         return [node.getSearchRef() for node in all_nodes]
 
     def getAllNodes(self, directions=['childs', 'parents'], nodes={}, distance=0):
-        nodes[self.key()] = {'node':self, 'distance':distance}
+        nodes[self.key()] = {'node': self, 'distance': distance}
         for direction in directions:
             dist = direction == 'childs' and distance + 1 or distance - 1
             for relative in self.getRelatives(direction):
@@ -167,10 +171,10 @@ class ParcelHistoric:
             parcel_infos = parcel.getParcelAsDictionary()
             parcel_infos['level'] = level
             if link == 'childs':
-                if level !=0 or result == []:
+                if level != 0 or result == []:
                     result.append(parcel_infos)
             for relative in getattr(parcel, link):
-                next_level = link=='parents' and level-1 or level+1
+                next_level = link == 'parents' and level - 1 or level + 1
                 buildResult(relative, result, next_level, link)
             if link == 'parents':
                 result.append(parcel_infos)
@@ -186,12 +190,12 @@ class ParcelHistoric:
 
     def mergeRelatives(self, other, link_names=['parents', 'childs']):
         for link_name in link_names:
-            existing_relatives= [str(p) for p in getattr(self, link_name)]
+            existing_relatives = [str(p) for p in getattr(self, link_name)]
             relatives = [relative for relative in getattr(other, link_name) if str(relative) not in existing_relatives]
             self.addRelatives(link_name, relatives)
 
     def diffPrc(self, prc_ac, prc):
-        return prc_ac and prc_ac.replace(' ','')[1:] != prc.replace(' ','') or False
+        return prc_ac and prc_ac.replace(' ', '')[1:] != prc.replace(' ', '') or False
 
     def setRefs(self, **kwargs):
         for ref in self.refs:
@@ -203,5 +207,5 @@ class ParcelHistoric:
 
     def addRelatives(self, name, relatives):
         class_attr = getattr(self, name, None)
-        if class_attr != None:
+        if class_attr is not None:
             class_attr.extend(relatives)
