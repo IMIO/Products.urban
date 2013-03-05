@@ -138,6 +138,7 @@ class ParcelHistoric:
         return ','.join([val and str(val) or '' for val in [self.division, self.section, self.radical, self.bis, self.exposant, self.puissance, '0']])
 
     def getAllSearchRefs(self):
+        all_nodes = {}
         all_nodes = [n['node'] for n in self.getAllNodes(nodes=all_nodes).values()]
         return [node.getSearchRef() for node in all_nodes]
 
