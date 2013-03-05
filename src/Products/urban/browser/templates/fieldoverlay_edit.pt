@@ -7,13 +7,7 @@
 <metal:main fill-slot="main">
 
 <metal:main_macro define-macro="main"
-       tal:define="portal_type python:context.getPortalTypeName().lower().replace(' ', '_');
-                   base_macros context/base/macros;
-                   view_template python:'%s_view' % portal_type;
-                   view_macros python:path('context/%s/macros|nothing' % view_template);
-                   body_macro view_macros/body | body_macro | base_macros/body;
-                   folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
-                   errors python:request.get('errors', {})">
+       tal:define="errors python:request.get('errors', {})">
 
     <script type="text/javascript"
             charset="iso-8859-1"
@@ -26,8 +20,8 @@
             <!--
              Use the widget macro in edit mode for the first load (in case the field is hidden in the form by a master
              select widget)
-             Then use the js getField method for any reload to always be sure to render the selected values as they
-             really are in the edit form.
+             Then use the js getField method for any reload to be sure to always render the values as they
+             are selected in the edit form.
              The trick is to mark html tag with 'refreshed' class to check if its the first load or not
              (see getField method)
             -->
