@@ -32,6 +32,7 @@ from Products.DataGridField.FixedColumn import FixedColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.UrbanDataGridColumns.FormFocusColumn import FormFocusColumn
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from DateTime import DateTime
 
@@ -64,7 +65,7 @@ schema = Schema((
     DataGridField(
         name='specificFeatures',
         widget=DataGridWidget(
-            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'value' : FixedColumn('Value'), 'text' : TextAreaColumn('Text', rows=1, cols=50)},
+            columns= {'id' : FormFocusColumn('id'), 'check' : CheckboxColumn('Select'), 'value' : FixedColumn('Value'), 'text' : TextAreaColumn('Text', rows=1, cols=50)},
             label='Specificfeatures',
             label_msgid='urban_label_specificFeatures',
             i18n_domain='urban',
@@ -80,7 +81,7 @@ schema = Schema((
     DataGridField(
         name='roadSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'value' : FixedColumn('Value'), 'text' : TextAreaColumn('Text', rows=1, cols=50)},
+            columns= {'id' : FormFocusColumn('id'), 'check' : CheckboxColumn('Select'), 'value' : FixedColumn('Value'), 'text' : TextAreaColumn('Text', rows=1, cols=50)},
             label='Roadspecificfeatures',
             label_msgid='urban_label_roadSpecificFeatures',
             i18n_domain='urban',
@@ -96,7 +97,7 @@ schema = Schema((
     DataGridField(
         name='locationSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'value' : FixedColumn('Value'), 'text' : TextAreaColumn('Text', rows=1, cols=50)},
+            columns= {'id' : FormFocusColumn('id'), 'check' : CheckboxColumn('Select'), 'value' : FixedColumn('Value'), 'text' : TextAreaColumn('Text', rows=1, cols=50)},
             label='Locationspecificfeatures',
             label_msgid='urban_label_locationSpecificFeatures',
             i18n_domain='urban',
@@ -123,7 +124,7 @@ schema = Schema((
     DataGridField(
         name='townshipSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'id' : FixedColumn('id', visible=False), 'check' : CheckboxColumn('Select'), 'value' : FixedColumn('Value'), 'text' : TextAreaColumn('Text', rows=1, cols=50)},
+            columns= {'id' : FormFocusColumn('id'), 'check' : CheckboxColumn('Select'), 'value' : FixedColumn('Value'), 'text' : TextAreaColumn('Text', rows=1, cols=50)},
             label='Townshipspecificfeatures',
             label_msgid='urban_label_townshipSpecificFeatures',
             i18n_domain='urban',

@@ -147,6 +147,7 @@ def postInstall(context):
     logger.info("Refresh portal_catalog : Done!")
 
 
+
 ##code-section FOOT
 def _(msgid, domain, context):
     translation_domain = queryUtility(ITranslationDomain, domain)

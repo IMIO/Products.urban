@@ -14,9 +14,9 @@ class FieldEditView(BrowserView):
 
     def getFieldIds(self):
         licence_config = self.context.getLicenceConfig()
-        specificfeatures = licence_config.specificfeatures
-        row_number = int(self.request['arg']) - 1
-        spf_id = self.context.getSpecificFeatures()[row_number]['id']
+        vocname = self.request['vocname']
+        specificfeatures = getattr(licence_config, vocname)
+        spf_id = self.request['spf_id']
         vocterm = getattr(specificfeatures, spf_id)
         fields = vocterm.extraValue.encode()
         if fields:
