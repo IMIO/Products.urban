@@ -21,7 +21,9 @@ i18n:domain="plone">
                           config python: getattr(config, voc_foldername);
                           vocterm python: getattr(config, cell_value)"
               tal:condition="python: vocterm.extraValue">
-              <a class="link-overlay" tal:attributes="href string:@@fieldeditoverlay?spf_id=${cell_value}&vocname=${voc_foldername}">*</a>
+              <a class="link-overlay" tal:attributes="href string:@@fieldeditoverlay?spf_id=${cell_value}&vocname=${voc_foldername}">
+                  <img src=# tal:attributes="src string:${portal_url}/edit.gif"/>
+              </a>
         </span>
     </metal:edit_cell_macro>
 
