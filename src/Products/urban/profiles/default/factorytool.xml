@@ -37,5 +37,6 @@
   <type portal_type="UrbanDoc"/>
   <type portal_type="EnvironmentBase"/>
   <type portal_type="EnvironmentRubricTerm"/>
+  <type portal_type="SpecificFeatureTerm"/>
  </factorytypes>
 </object>

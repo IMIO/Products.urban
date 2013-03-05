@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2013-02-05 08:51+0000\n"
+"POT-Creation-Date: 2013-03-05 14:29+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -2326,6 +2326,11 @@ msgstr "Code de route régionale"
 #: Contact.py
 msgid "urban_label_registrationNumber"
 msgstr "Numéro de matricule"
+
+#. Default: "Relatedfields"
+#: SpecificFeatureTerm.py
+msgid "urban_label_relatedFields"
+msgstr "Champs liés"
 
 #. Default: "Representedby"
 #: Contact.py

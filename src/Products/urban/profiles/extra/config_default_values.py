@@ -235,7 +235,7 @@ default_values = {
     ],
 
     'specificfeatures': [
-        'UrbanVocabularyTerm',
+        'SpecificFeatureTerm',
         {'id': "schema-developpement-espace-regional",
         'title': u"Option particulière du schéma de développement de l'espace régional",
         'description': "<p>fait l'objet d'une option particulière du schéma de développement de l'espace régional, à savoir ...;</p>"},
@@ -299,7 +299,7 @@ default_values = {
     ],
 
     'roadspecificfeatures': [
-        'UrbanVocabularyTerm',
+        'SpecificFeatureTerm',
         {'id': "raccordable-egout", 'title': u"Raccordable à l'égout",
         'description': "<p>est actuellement raccordable à l'égout selon les normes fixées par le Service Technique Communal;</p>"},
         {'id': "raccordable-egout-prevision", 'title': u"Raccordable à l'égout (prévision),",
@@ -312,7 +312,7 @@ default_values = {
     ],
 
     'locationspecificfeatures': [
-        'UrbanVocabularyTerm',
+        'SpecificFeatureTerm',
         {'id': "schema-developpement-espace-regional",
         'title': u"Option particulière du schéma de développement de l'espace régional",
         'description': "<p>fait l'objet d'une option particulière du schéma de développement de l'espace régional, à savoir ...;</p>"},
@@ -365,7 +365,7 @@ default_values = {
     ],
 
     'townshipspecificfeatures': [
-        'UrbanVocabularyTerm',
+        'SpecificFeatureTerm',
         {'id': "zone-a-risque", 'title': u"Se trouve dans une zone à risque", 'description': "<p>se trouve dans une zone à risque (faible moyen élevé}, dans la cartographie Aléa d'inondation par débordement de cours d'eau - dressée dans le cadre du plan P.L.U.I.E.S et annexée à l'arrêté du Gouvernement Wallon, adopté en date du 13 juillet 2008;</p>"},
         {'id': "insalubrite", 'title': u"Est frappé d'un Arrêté d'insalubrité", 'description': "<p>est frappé d'un Arrêté d'insalubrité OU d'un permis de location datant du [...] - Le futur acquéreur est invité à prendre contact avec le Service Logement Salubrité (tél. : [...]}, pour de plus amples informations;</p>"},
         {'id': "infraction-urbanistique", 'title': u"Infraction urbanistique", 'description': "<p>fait l'objet d'une infraction urbanistique reconnue par notre Administration communale portant sur [...];</p>"},

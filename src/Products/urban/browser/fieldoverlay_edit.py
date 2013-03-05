@@ -18,7 +18,4 @@ class FieldEditView(BrowserView):
         specificfeatures = getattr(licence_config, vocname)
         spf_id = self.request['spf_id']
         vocterm = getattr(specificfeatures, spf_id)
-        fields = vocterm.extraValue.encode()
-        if fields:
-            return fields.split('|')
-        return []
+        return vocterm.getRelatedFields()[:-1]

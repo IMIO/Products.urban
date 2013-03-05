@@ -184,6 +184,10 @@ class IEnvironmentRubricTerm(Interface):
     """Marker interface for .EnvironmentRubricTerm.EnvironmentRubricTerm
     """
 
+class ISpecificFeatureTerm(Interface):
+    """Marker interface for .SpecificFeatureTerm.SpecificFeatureTerm
+    """
+
 ##code-section FOOT
 class ILicenceContainer(Interface):
     """

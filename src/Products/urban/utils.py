@@ -7,6 +7,27 @@ import hashlib
 from HTMLParser import HTMLParser
 
 
+def getLicenceSchema(licencetype):
+    licence_modules = {
+        'buildlicence': 'BuildLicence',
+        'parceloutlicence': 'ParcelOutLicence',
+        'declaration': 'Declaration',
+        'division': 'Division',
+        'urbancertificateone': 'UrbanCertificateBase',
+        'urbancertificatetwo': 'UrbanCertificateTwo',
+        'notaryletter': 'UrbanCertificateBase',
+        'envclassthree': 'EnvironmentBase',
+        'miscdemand': 'MiscDemand',
+    }
+    licence_type = licencetype.lower()
+    if licence_type not in licence_modules.keys():
+        return None
+    module_name = 'Products.urban.%s' % licence_modules[licence_type]
+    attribute = "%s_schema" % licence_modules[licence_type]
+    module = __import__(module_name, fromlist=[attribute])
+    return getattr(module, attribute)
+
+
 def moveElementAfter(object_to_move, container, attr_name, attr_value_to_match):
     new_position = container.getObjectPosition(object_to_move.getId())
     contents = container.objectValues()

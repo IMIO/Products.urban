@@ -33,9 +33,7 @@ from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from Products.DataGridField.DataGridField import FixedRow
 from Products.DataGridField.FixedColumn import FixedColumn
 from Products.DataGridField.CheckboxColumn import CheckboxColumn
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.validators.validator import isTextFieldConfiguredValidator
-from Products.validation import V_REQUIRED
+from Products.urban.utils import getLicenceSchema
 ##/code-section module-header
 
 schema = Schema((
@@ -163,9 +161,9 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_investigation_and_advices':'(enq) ',
             'urban_description':'',
         }
-        if not self._getSchema(self.licence_portal_type):
+        if not getLicenceSchema(self.licence_portal_type):
             return DisplayList()
-        for field in self._getSchema(self.licence_portal_type).fields():
+        for field in getLicenceSchema(self.licence_portal_type).fields():
             if hasattr(field, 'optional'):
                 tab = field.schemata
                 if field.schemata in abr.keys():
@@ -225,38 +223,18 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         #we have to know from where the method has been called in order to know which text
         #fields to propose to be "default valued"
         licence_type = self.licence_portal_type
-        licence_schema = self._getSchema(licence_type)
+        licence_schema = getLicenceSchemaSchema(licence_type)
         abr = {
-            'urban_peb':'(peb) ',
-            'urban_location':'(urb) ',
-            'urban_road':'(voi) ',
-            'urban_investigation_and_advices':'(enq) ',
-            'urban_description':'',
+            'urban_peb': '(peb) ',
+            'urban_location': '(urb) ',
+            'urban_road': '(voi) ',
+            'urban_investigation_and_advices': '(enq) ',
+            'urban_description': '',
         }
         available_fields = [field for field in licence_schema.fields() if field.getType() == 'Products.Archetypes.Field.TextField' and field.getName() != 'rights']
-        vocabulary_fields = [(field.getName(), '%s %s' % (translate(field.widget.label_msgid,'urban', context=self.REQUEST), abr[field.schemata])) for field in available_fields]
+        vocabulary_fields = [(field.getName(), '%s %s' % (translate(field.widget.label_msgid, 'urban', context=self.REQUEST), abr[field.schemata])) for field in available_fields]
         #return a vocabulary containing the names of all the text fields of the schema
-        return DisplayList(sorted(vocabulary_fields, key=lambda name:name[1]))
-
-    def _getSchema(self, licencetype):
-        licence_modules = {
-            'buildlicence' : 'BuildLicence',
-            'parceloutlicence' : 'ParcelOutLicence',
-            'declaration' : 'Declaration',
-            'division' : 'Division',
-            'urbancertificateone' : 'UrbanCertificateBase',
-            'urbancertificatetwo' : 'UrbanCertificateTwo',
-            'notaryletter' : 'UrbanCertificateBase',
-            'envclassthree' : 'EnvironmentBase',
-            'miscdemand' : 'MiscDemand',
-        }
-        licence_type = licencetype.lower()
-        if licence_type not in licence_modules.keys():
-            return None
-        module_name = 'Products.urban.%s' % licence_modules[licence_type]
-        attribute = "%s_schema" % licence_modules[licence_type]
-        module = __import__(module_name, fromlist=[attribute])
-        return getattr(module, attribute)
+        return DisplayList(sorted(vocabulary_fields, key=lambda name: name[1]))
 
 
 

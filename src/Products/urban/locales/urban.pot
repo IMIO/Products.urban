@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-02-05 08:51+0000\n"
+"POT-Creation-Date: 2013-03-05 14:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,9 +49,6 @@ msgid "Claimant data"
 msgstr ""
 
 msgid "Close"
-msgstr ""
-
-msgid "creation date"
 msgstr ""
 
 msgid "Declaration"
@@ -427,6 +424,9 @@ msgid "country_folder_title"
 msgstr ""
 
 msgid "create"
+msgstr ""
+
+msgid "creation date"
 msgstr ""
 
 msgid "date_day_01"
@@ -1040,9 +1040,6 @@ msgstr ""
 msgid "proprietaries"
 msgstr ""
 
-msgid "reverse_order"
-msgstr ""
-
 #. Default: "RCU"
 #: setuphandlers.py
 msgid "rcu_folder_title"
@@ -1063,6 +1060,9 @@ msgstr ""
 #. Default: "${name} residing at ${address}"
 #: Contact.py
 msgid "residing"
+msgstr ""
+
+msgid "reverse_order"
 msgstr ""
 
 msgid "road_adaptation_create"
@@ -1185,6 +1185,7 @@ msgstr ""
 msgid "urban-demo"
 msgstr ""
 
+# extension profile
 msgid "urban-extra"
 msgstr ""
 
@@ -1195,10 +1196,6 @@ msgid "urban-migrations"
 msgstr ""
 
 msgid "urban-sambreville"
-msgstr ""
-
-# extension profile
-msgid "urban-extra"
 msgstr ""
 
 #. Default: Set the number of days the alert will be shown before the deadline delay
@@ -2326,6 +2323,11 @@ msgstr ""
 #. Default: "Registrationnumber"
 #: Contact.py
 msgid "urban_label_registrationNumber"
+msgstr ""
+
+#. Default: "Relatedfields"
+#: SpecificFeatureTerm.py
+msgid "urban_label_relatedFields"
 msgstr ""
 
 #. Default: "Representedby"

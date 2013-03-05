@@ -127,6 +127,7 @@ def initialize(context):
     import UrbanDoc
     import EnvironmentBase
     import EnvironmentRubricTerm
+    import SpecificFeatureTerm
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

@@ -61,6 +61,9 @@
   <type type_id="RecipientCadastre">
    <bound-workflow workflow_id="activation_workflow" />
   </type>
+  <type type_id="SpecificFeatureTerm">
+   <bound-workflow workflow_id="activation_workflow" />
+  </type>
   <type type_id="Street">
    <bound-workflow workflow_id="activation_workflow" />
   </type>
