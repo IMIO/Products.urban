@@ -1195,7 +1195,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                     return fm
         #if we are here, the current user is using the application without being
         #a foldermanager, like 'admin' for example
-        return ''
+        if initials:
+            return ''
+        return None
 
     security.declarePublic('getCityName')
     def getCityName(self, prefixed=False):

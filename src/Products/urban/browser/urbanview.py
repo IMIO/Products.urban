@@ -4,12 +4,12 @@ from Products.CMFPlone.PloneBatch import Batch
 from Products.CMFCore.utils import getToolByName
 from Products.urban.config import URBAN_TYPES
 
+
 class UrbanView(BrowserView):
     """
       This manage the view of urban
     """
     def isUrbanManager(self):
-        from Products.CMFCore.utils import getToolByName
         context = aq_inner(self.context)
         member = context.restrictedTraverse('@@plone_portal_state').member()
         return member.has_role('Manager') or member.has_role('Editor', getToolByName(context, 'portal_urban'))
@@ -24,11 +24,11 @@ class UrbanView(BrowserView):
         sort_order = request.get('reverse_order', 'descending')
 
         queryString = {
-                'portal_type':URBAN_TYPES,
-                'path':'/'.join(context.getPhysicalPath()),
-                'sort_on':sort,
-                'sort_order':sort_order,
-                }
+            'portal_type': URBAN_TYPES,
+            'path': '/'.join(context.getPhysicalPath()),
+            'sort_on': sort,
+            'sort_order': sort_order,
+        }
         if foldermanager:
             queryString['folder_manager'] = foldermanager
         if state:
@@ -53,8 +53,9 @@ class UrbanView(BrowserView):
         context = aq_inner(self.context)
         catalog = getToolByName(context, 'portal_catalog')
         urban_tool = getToolByName(context, 'portal_urban')
-        current_foldermanager = urban_tool.getCurrentFolderManager(initials=False)
-        return [(brain.UID, brain.Title.split('(')[0]) for brain in catalog(portal_type='FolderManager') if brain.UID != current_foldermanager.UID()]
+        currentfoldermanager = urban_tool.getCurrentFolderManager(initials=False)
+        currentfoldermanager_uid = currentfoldermanager and currentfoldermanager.UID() or ''
+        return [(brain.UID, brain.Title.split('(')[0]) for brain in catalog(portal_type='FolderManager') if brain.UID != currentfoldermanager_uid]
 
     def amIFolderManager(self):
         """
@@ -74,6 +75,7 @@ class UrbanView(BrowserView):
         """
         """
         return ['20', '30', '50', '100']
+
 
 class UrbanViewMacros(BrowserView):
     """
