@@ -1,9 +1,9 @@
 from AccessControl import ClassSecurityInfo
 from App.class_init import InitializeClass
-from Products.DataGridField.FixedColumn import FixedColumn
+from Products.DataGridField.Column import Column
 
 
-class FormFocusColumn(FixedColumn):
+class FormFocusColumn(Column):
     """
      On view mode, doesnt display anything.
 
@@ -17,7 +17,7 @@ class FormFocusColumn(FixedColumn):
 
             @param hide Hide column from displaying
         """
-        FixedColumn.__init__(self, label, default, label_msgid)
+        Column.__init__(self, label, default, label_msgid)
         self.visible = visible
 
     security.declarePublic('getMacro')
@@ -27,4 +27,4 @@ class FormFocusColumn(FixedColumn):
 
 
 # Initializes class security
-InitializeClass(FixedColumn)
+InitializeClass(FormFocusColumn)
