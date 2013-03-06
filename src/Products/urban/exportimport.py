@@ -1,10 +1,116 @@
 # -*- coding: utf-8 -*-
+from Products.GenericSetup.utils import exportObjects
+from Products.GenericSetup.utils import importObjects
+from Products.GenericSetup.utils import XMLAdapterBase
+
+from Products.urban.interfaces import IUrbanTool
+
 from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import moveElementAfter
 from Products.urban.utils import getMd5Signature
 from Products.urban.events.filesEvents import updateTemplateStylesEvent
 import logging
 logger = logging.getLogger('urban: setuphandlers')
+
+
+class UrbanToolXMLAdapter(XMLAdapterBase):
+
+    __used_for__ = IUrbanTool
+
+    _LOGGER_ID = 'portal_urban'
+
+    name = 'portal_urban'
+
+    boolean_fields = ['isDecentralized', 'generateSingletonDocuments']
+    integer_fields = ['openOfficePort']
+    string_fields = [
+        'NISNum',
+        'cityName',
+        'sqlHost',
+        'sqlName',
+        'sqlUser',
+        'sqlPassword',
+        'webServerHost',
+        'pylonsHost',
+        'mapExtent',
+        'unoEnabledPython',
+        'editionOutputFormat',
+    ]
+
+    def _exportNode(self):
+        """Export the object as a DOM node"""
+
+        node = self._extractProperties()
+        self._logger.info('Urban tool exported.')
+
+        return node
+
+    def _importNode(self, node):
+        """Import the object from the DOM node"""
+
+        if self.environ.shouldPurge():
+            self._purgeProperties()
+
+        self._initProperties(node)
+
+        self._logger.info('Urban tool imported.')
+
+    def _purgeProperties(self):
+        self.context.supported_langs = ['en']
+
+    def _initProperties(self, node):
+        for child in node.childNodes:
+            if child.nodeName in self.boolean_fields:
+                value = self._convertToBoolean(child.getAttribute('value'))
+                setattr(self.context, child.nodeName, value)
+            elif child.nodeName in self.integer_fields:
+                value = int(child.getAttribute('value'))
+                setattr(self.context, child.nodeName, value)
+            elif child.nodeName in self.string_fields:
+                value = child.getAttribute('value')
+                setattr(self.context, child.nodeName, value)
+
+    def _extractProperties(self):
+        node = self._doc.createElement('object')
+
+        for field in self.boolean_fields:
+            child = self._doc.createElement(field)
+            child.setAttribute('value', str(bool(getattr(self.context, field))))
+            node.appendChild(child)
+
+        for field in self.integer_fields:
+            child = self._doc.createElement(field)
+            child.setAttribute('value', str(getattr(self.context, field)))
+            node.appendChild(child)
+
+        for field in self.string_fields:
+            child = self._doc.createElement(field)
+            child.setAttribute('value', getattr(self.context, field))
+            node.appendChild(child)
+
+        return node
+
+
+def importUrbanTool(context):
+    """Import Urban tool settings from an XML file.
+    """
+    site = context.getSite()
+    tool = getToolByName(site, 'portal_urban')
+
+    importObjects(tool, '', context)
+
+
+def exportUrbanTool(context):
+    """Export Urban tool settings as an XML file.
+    """
+    site = context.getSite()
+    tool = getToolByName(site, 'portal_urban', None)
+    if tool is None:
+        logger = context.getLogger('portal_urban')
+        logger.info('Nothing to export.')
+        return
+
+    exportObjects(tool, '', context)
 
 
 def loga(msg, type="info", gslog=None):
