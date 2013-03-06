@@ -66,7 +66,7 @@ schema = Schema((
             label_msgid='urban_label_claimsText',
             i18n_domain='urban',
         ),
-        default='getDefaultText',
+        default_method='getDefaultText',
         default_output_type='text/html',
         optional= True,
     ),
@@ -146,7 +146,7 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
         """
           Return the claimants for this UrbanEventInquiry
         """
-        return self.listFolderContents({'portal_type': 'Claimant',})
+        return self.listFolderContents({'portal_type': 'Claimant'})
 
     security.declarePublic('getMultipleClaimantsCSV')
     def getMultipleClaimantsCSV(self):
@@ -157,8 +157,8 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
         toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for claimant in claimants:
             toreturn = toreturn + '%' + claimant.getPersonTitleValue() + '|' + claimant.getName1() + '|' +\
-                    claimant.getName2() + '|' + claimant.getNumber() + ', ' + claimant.getStreet() + '|' +\
-                    claimant.getZipcode() + ' ' + claimant.getCity()
+                claimant.getName2() + '|' + claimant.getNumber() + ', ' + claimant.getStreet() + '|' +\
+                claimant.getZipcode() + ' ' + claimant.getCity()
         toreturn = toreturn + '</CSV>'
         return toreturn
 
@@ -174,7 +174,7 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
             #only take active RecipientCadastre paths into account
             activeRecipients = self.getRecipients(theObjects=False, onlyActive=True)
             paths = [activeRecipient.getPath() for activeRecipient in activeRecipients]
-            params = {'path':{'query': paths, 'depth':2},}
+            params = {'path': {'query': paths, 'depth': 2}}
             return tool.queryCatalog(batch=False, context=self, specificSearch='searchPortionOuts', theObjects=True, **params)
         else:
             return tool.queryCatalog(batch=False, context=self, specificSearch='searchPortionOuts', theObjects=True)
