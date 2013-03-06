@@ -236,146 +236,339 @@ default_values = {
 
     'specificfeatures': [
         'SpecificFeatureTerm',
-        {'id': "schema-developpement-espace-regional",
-        'title': u"Option particulière du schéma de développement de l'espace régional",
-        'description': "<p>fait l'objet d'une option particulière du schéma de développement de l'espace régional, à savoir ...;</p>"},
-        {'id': "situe-en-zone", 'title': u"Situé en Zone [...]",
-        'description': "<p>est situé en [[python: object.getValueForTemplate('folderZone'),]] au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"},
-        {'id': "plan-de-secteur", 'title': u"Plan de secteur",
-        'description': "<p>est situé - dans un périmètre ... - en [[python: object.getValueForTemplate('folderZone'),]] au projet - de révision du - de - plan de secteur de ... adopté par ... du ...;</p>"},
-        {'id': "plan-communal-ammenagement",
-        'title': u"En Plan Communal d'Aménagement",
-        'description': "<p>est situé en [[python: object.getValueForTemplate('folderZone'),]] dans le périmètre du plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: '/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]] et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"},
-        {'id': "plan-communal-ammenagement-revision",
-        'title': u"En Plan Communal d'Aménagement (révision),",
-        'description': "<p>est situé en [[python: object.getValueForTemplate('folderZone'),]] dans le périmètre du projet - de révision du - de - plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: '/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]];</p>"},
-        {'id': "perimetre-lotissement",
-        'title': u"Dans un lot dans le périmètre d'un lotissement",
-        'description': "<p>est situé sur le(s}, lot(s) n° [[python: object.getValueForTemplate('subdivisionDetails')]] dans le périmètre du lotissement [[python: object.getValueForTemplate('parcellings', subfield='label')]]non périmé autorisé du [[python: '/'.join(object.getValueForTemplate('parcellings', subfield='authorizationDate').split()[0].split('/')[::-1]) ]];</p>"},
-        {'id': "ssc", 'title': u"Schéma de structure communal",
-        'description': "<p> est situé en [[python: object.getValueForTemplate('SSC'),]] au schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>"},
-        {'id': "ssc-revision", 'title': u"Schéma de structure communal (révision),",
-        'description': "<p> est situé en [[python: object.getValueForTemplate('SSC'),]] au projet de - révision du - de - schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>"},
-        {'id': "rcu", 'title': u"Règlement communal d'urbanisme",
-        'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement régional d'urbanisme [[python: object.getValueForTemplate('folderZone'}, ]] est applicable;</p>"},
-        {'id': "rcu-approuve", 'title': u"Règlement communal d'urbanisme (approuvé),",
-        'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue'),]] est applicable;</p>"},
-        {'id': "rcu-revision", 'title': u"Règlement communal d'urbanisme (révision),",
-        'description': "<p>est situé sur le territoire ou la partie du territoire communal visé(e}, par le projet - de révision du - de - règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue')]] est applicable;</p>"},
-        {'id': "rcu-approuve-provisoirement",
-        'title': u"Règlement communal d'urbanisme (approuvé provisoirement),",
-        'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé provisoirement par [[python: ', '.join(object.getValuesForTemplate('RCU', subfield='extraValue'},) ]] est applicable;</p>"},
-        {'id': "rcu-unite-paysagere-urbaine",
-        'title': u"Règlement communal d'urbanisme (Unité paysagère urbaine),",
-        'description': "<p>est situé en unité paysagère urbaine de bâtisse en ordre continu Art.15 au règlement communal d'urbanisme en vigueur;</p>"},
-        {'id': "natura-2000", 'title': u"Site Natura 2000",
-        'description': "<p>est situé dans le périmètre d'un site Natura 2000 visé par l'article 1bis alinéa unique 18° de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que de la faune et de la flore sauvages;</p>"},
-        {'id': "natura-2000-art6",
-        'title': u"Natura 2000 (article 6 de la loi du 12 juillet 1973),",
-        'description': "<p>est situé dans le périmètre d'un territoire désigné en vertu de l'article 6 de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que de la faune et de la flore sauvages;</p>"},
-        {'id': "zone-prise-eau", 'title': u"Zone de prise d'eau",
-        'description': "<p>est situé dans une zone de prise d'eau, de prévention ou de surveillance au sens du décret du 30 avril 1990 relatif à la protection et l'exploitation des eaux souterraines et des eaux potabilisables modifié la dernière fois par le décret du 15 avril 1999 relatif au cycle de l'eau et instituant une société publique de gestion de l'eau;</p>"},
-        {'id': "plan-expropriation", 'title': u"Plan d'expropriation",
-        'description': "<p> est situé dans les limites d'un plan d'expropriation approuvé par ... du ... ; le pouvoir expropriant est : ...;</p>"},
-        {'id': "droit-de-preemption", 'title': u"Droit de préemption",
-        'description': "<p>est situé dans un périmètre d'application du droit de préemption arrêté par ... du ...; le(s}, bénéficiaires(s) du droit de préemption est (sont) : ...;</p>"},
-        {'id': "perimetre-site-desaffecte", 'title': u"Périmètre site désaffecté",
-        'description': "<p>est situé dans le périmètre du site d'activité économique désaffecté suivant : ...;</p>"},
-        {'id': "revitalisation-urbaine", 'title': u"Revitalisation urbaine",
-        'description': "<p>est situé dans un périmètre de revitalisation urbaine;</p>"},
-        {'id': "renovation-urbaine", 'title': u"Rénovation urbaine",
-        'description': "<p>est situé dans un périmètre de rénovation urbaine;</p>"},
-        {'id': "classe", 'title': u"Classé (article 196 du CWATUPE),",
-        'description': "<p>est - inscrit sur la liste de sauvegarde visée à l'article 193 - classé en application de l'article 196 - situé dans une zone de protection visée à l'article 209 - localisé dans un site repris à l'inventaire des sites archéologiques visés à l'article 233 - du Code précité;</p>"},
-        {'id': "raccordable-egout", 'title': u"Raccordable à l'égout",
-        'description': "<p>est actuellement raccordable à l'égout selon les normes fixées par le Service Technique Communal;</p>"},
-        {'id': "raccordable-egout-prevision", 'title': u"Raccordable à l'égout (prévision),",
-        'description': "<p>sera raccordable à l'égout selon les prévisions actuelles;</p>"},
-        {'id': "zone-faiblement-habitee",
-        'title': u"Zone faiblement habitée (épuration individuelle),",
-        'description': "<p>est situé dans une des zones faiblement habitée qui ne seront pas pourvue d'égout et qui feront l'objet d'une épuration individuelle;</p>"},
-        {'id': "voirie-suffisamment-equipee", 'title': u"Voirie suffisamment équipée",
-        'description': "<p>bénéficie d'un accès à une voirie suffisamment équipée en eau, électricité, pourvue d'un revêtement solide et d'une largeur suffisante compte tenu de la situation des lieux;</p>"},
+        {
+            'id': "schema-developpement-espace-regional",
+            'title': u"Option particulière du schéma de développement de l'espace régional",
+            'description': "<p>fait l'objet d'une option particulière du schéma de développement de l'espace régional, à savoir ...;</p>"
+        },
+        {
+            'id': "situe-en-zone",
+            'title': u"Situé en Zone [...]",
+            'description': "<p>est situé en [[python: object.getValueForTemplate('folderZone'),]] au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a pas cessé de produire ses effets pour le bien précité;</p>",
+            'relatedFields': ['folderZone', '']
+        },
+        {
+            'id': "plan-de-secteur",
+            'title': u"Plan de secteur",
+            'description': "<p>est situé - dans un périmètre ... - en [[python: object.getValueForTemplate('folderZone'),]] au projet - de révision du - de - plan de secteur de ... adopté par ... du ...;</p>",
+            'relatedFields': ['folderZone', '']
+        },
+        {
+            'id': "plan-communal-ammenagement",
+            'title': u"En Plan Communal d'Aménagement",
+            'description': "<p>est situé en [[python: object.getValueForTemplate('folderZone'),]] dans le périmètre du plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: '/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]] et qui n'a pas cessé de produire ses effets pour le bien précité;</p>",
+            'relatedFields': ['folderZone', 'isInPCA', 'pca', '']
+        },
+        {
+            'id': "plan-communal-ammenagement-revision",
+            'title': u"En Plan Communal d'Aménagement (révision),",
+            'description': "<p>est situé en [[python: object.getValueForTemplate('folderZone'),]] dans le périmètre du projet - de révision du - de - plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: '/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]];</p>",
+            'relatedFields': ['folderZone', 'isInPCA', 'pca', '']
+        },
+        {
+            'id': "perimetre-lotissement",
+            'title': u"Dans un lot dans le périmètre d'un lotissement",
+            'description': "<p>est situé sur le(s}, lot(s) n° [[python: object.getValueForTemplate('subdivisionDetails')]] dans le périmètre du lotissement [[python: object.getValueForTemplate('parcellings', subfield='label')]]non périmé autorisé du [[python: '/'.join(object.getValueForTemplate('parcellings', subfield='authorizationDate').split()[0].split('/')[::-1]) ]];</p>",
+        },
+        {
+            'id': "ssc",
+            'title': u"Schéma de structure communal",
+            'description': "<p> est situé en [[python: object.getValueForTemplate('SSC'),]] au schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>",
+            'relatedFields': ['SSC', '']
+        },
+        {
+            'id': "ssc-revision",
+            'title': u"Schéma de structure communal (révision),",
+            'description': "<p> est situé en [[python: object.getValueForTemplate('SSC'),]] au projet de - révision du - de - schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>",
+            'relatedFields': ['SSC', '']
+        },
+        {
+            'id': "rcu",
+            'title': u"Règlement communal d'urbanisme",
+            'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement régional d'urbanisme [[python: object.getValueForTemplate('folderZone'}, ]] est applicable;</p>",
+            'relatedFields': ['RCU', '']
+        },
+        {
+            'id': "rcu-approuve",
+            'title': u"Règlement communal d'urbanisme (approuvé),",
+            'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue'),]] est applicable;</p>",
+            'relatedFields': ['RCU', '']
+        },
+        {
+            'id': "rcu-revision",
+            'title': u"Règlement communal d'urbanisme (révision),",
+            'description': "<p>est situé sur le territoire ou la partie du territoire communal visé(e}, par le projet - de révision du - de - règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue')]] est applicable;</p>",
+            'relatedFields': ['RCU', '']
+        },
+        {
+            'id': "rcu-approuve-provisoirement",
+            'title': u"Règlement communal d'urbanisme (approuvé provisoirement),",
+            'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé provisoirement par [[python: ', '.join(object.getValuesForTemplate('RCU', subfield='extraValue'},) ]] est applicable;</p>",
+            'relatedFields': ['RCU', '']
+        },
+        {
+            'id': "rcu-unite-paysagere-urbaine",
+            'title': u"Règlement communal d'urbanisme (Unité paysagère urbaine),",
+            'description': "<p>est situé en unité paysagère urbaine de bâtisse en ordre continu Art.15 au règlement communal d'urbanisme en vigueur;</p>",
+        },
+        {
+            'id': "natura-2000",
+            'title': u"Site Natura 2000",
+            'description': "<p>est situé dans le périmètre d'un site Natura 2000 visé par l'article 1bis alinéa unique 18° de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que de la faune et de la flore sauvages;</p>",
+        },
+        {
+            'id': "natura-2000-art6",
+            'title': u"Natura 2000 (article 6 de la loi du 12 juillet 1973),",
+            'description': "<p>est situé dans le périmètre d'un territoire désigné en vertu de l'article 6 de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que de la faune et de la flore sauvages;</p>",
+        },
+        {
+            'id': "zone-prise-eau",
+            'title': u"Zone de prise d'eau",
+            'description': "<p>est situé dans une zone de prise d'eau, de prévention ou de surveillance au sens du décret du 30 avril 1990 relatif à la protection et l'exploitation des eaux souterraines et des eaux potabilisables modifié la dernière fois par le décret du 15 avril 1999 relatif au cycle de l'eau et instituant une société publique de gestion de l'eau;</p>",
+        },
+        {
+            'id': "plan-expropriation",
+            'title': u"Plan d'expropriation",
+            'description': "<p> est situé dans les limites d'un plan d'expropriation approuvé par ... du ... ; le pouvoir expropriant est : ...;</p>",
+        },
+        {
+            'id': "droit-de-preemption",
+            'title': u"Droit de préemption",
+            'description': "<p>est situé dans un périmètre d'application du droit de préemption arrêté par ... du ...; le(s}, bénéficiaires(s) du droit de préemption est (sont) : ...;</p>",
+        },
+        {
+            'id': "perimetre-site-desaffecte",
+            'title': u"Périmètre site désaffecté",
+            'description': "<p>est situé dans le périmètre du site d'activité économique désaffecté suivant : ...;</p>",
+        },
+        {
+            'id': "revitalisation-urbaine",
+            'title': u"Revitalisation urbaine",
+            'description': "<p>est situé dans un périmètre de revitalisation urbaine;</p>",
+        },
+        {
+            'id': "renovation-urbaine",
+            'title': u"Rénovation urbaine",
+            'description': "<p>est situé dans un périmètre de rénovation urbaine;</p>",
+        },
+        {
+            'id': "classe",
+            'title': u"Classé (article 196 du CWATUPE),",
+            'description': "<p>est - inscrit sur la liste de sauvegarde visée à l'article 193 - classé en application de l'article 196 - situé dans une zone de protection visée à l'article 209 - localisé dans un site repris à l'inventaire des sites archéologiques visés à l'article 233 - du Code précité;</p>",
+        },
+        {
+            'id': "raccordable-egout",
+            'title': u"Raccordable à l'égout",
+            'description': "<p>est actuellement raccordable à l'égout selon les normes fixées par le Service Technique Communal;</p>",
+        },
+        {
+            'id': "raccordable-egout-prevision",
+            'title': u"Raccordable à l'égout (prévision),",
+            'description': "<p>sera raccordable à l'égout selon les prévisions actuelles;</p>",
+        },
+        {
+            'id': "zone-faiblement-habitee",
+            'title': u"Zone faiblement habitée (épuration individuelle),",
+            'description': "<p>est situé dans une des zones faiblement habitée qui ne seront pas pourvue d'égout et qui feront l'objet d'une épuration individuelle;</p>",
+        },
+        {
+            'id': "voirie-suffisamment-equipee",
+            'title': u"Voirie suffisamment équipée",
+            'description': "<p>bénéficie d'un accès à une voirie suffisamment équipée en eau, électricité, pourvue d'un revêtement solide et d'une largeur suffisante compte tenu de la situation des lieux;</p>",
+        },
     ],
 
     'roadspecificfeatures': [
         'SpecificFeatureTerm',
-        {'id': "raccordable-egout", 'title': u"Raccordable à l'égout",
-        'description': "<p>est actuellement raccordable à l'égout selon les normes fixées par le Service Technique Communal;</p>"},
-        {'id': "raccordable-egout-prevision", 'title': u"Raccordable à l'égout (prévision),",
-        'description': "<p>sera raccordable àl'égout selon les prévisions actuelles;</p>"},
-        {'id': "zone-faiblement-habitee",
-        'title': u"Zone faiblement habitée (épuration individuelle),",
-        'description': "<p>est situé dans une des zones faiblement habitée qui ne seront pas pourvue d'égout et qui feront l'objet d'une épuration individuelle;</p>"},
-        {'id': "voirie-suffisamment-equipee", 'title': u"Voirie suffisamment équipée",
-        'description': "<p>bénéficie d'un accès à une voirie suffisamment équipée en eau, électricité, pourvue d'un revêtement solide et d'une largeur suffisante compte tenu de la situation des lieux;</p>"},
+        {
+            'id': "raccordable-egout",
+            'title': u"Raccordable à l'égout",
+            'description': "<p>est actuellement raccordable à l'égout selon les normes fixées par le Service Technique Communal;</p>",
+        },
+        {
+            'id': "raccordable-egout-prevision",
+            'title': u"Raccordable à l'égout (prévision),",
+            'description': "<p>sera raccordable àl'égout selon les prévisions actuelles;</p>",
+        },
+        {
+            'id': "zone-faiblement-habitee",
+            'title': u"Zone faiblement habitée (épuration individuelle),",
+            'description': "<p>est situé dans une des zones faiblement habitée qui ne seront pas pourvue d'égout et qui feront l'objet d'une épuration individuelle;</p>",
+        },
+        {
+            'id': "voirie-suffisamment-equipee",
+            'title': u"Voirie suffisamment équipée",
+            'description': "<p>bénéficie d'un accès à une voirie suffisamment équipée en eau, électricité, pourvue d'un revêtement solide et d'une largeur suffisante compte tenu de la situation des lieux;</p>",
+        },
     ],
 
     'locationspecificfeatures': [
         'SpecificFeatureTerm',
-        {'id': "schema-developpement-espace-regional",
-        'title': u"Option particulière du schéma de développement de l'espace régional",
-        'description': "<p>fait l'objet d'une option particulière du schéma de développement de l'espace régional, à savoir ...;</p>"},
-        {'id': "situe-en-zone", 'title': u"Situé en Zone [...]",
-        'description': "<p>est situé en [[python: object.getValueForTemplate('folderZone'),]] au plan de secteur de ... adopté par ... du ... et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"},
-        {'id': "plan-de-secteur", 'title': u"Plan de secteur",
-        'description': "<p>est situé - dans un périmètre ... - en [[python: object.getValueForTemplate('folderZone'),]] au projet - de révision du - de - plan de secteur de ... adopté par ... du ...;</p>"},
-        {'id': "plan-communal-ammenagement",
-        'title': u"En Plan Communal d'Aménagement",
-        'description': "<p>est situé en [[python: object.getValueForTemplate('folderZone'),]] dans le périmètre du plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: '/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]] et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"},
-        {'id': "plan-communal-ammenagement-revision",
-        'title': u"En Plan Communal d'Aménagement (révision),",
-        'description': "<p>est situé en [[python: object.getValueForTemplate('folderZone'),]] dans le périmètre du projet - de révision du - de - plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: '/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]];</p>"},
-        {'id': "perimetre-lotissement",
-        'title': u"Dans un lot dans le périmètre d'un lotissement",
-        'description': "<p>est situé sur le(s}, lot(s) n° [[python: object.getValueForTemplate('subdivisionDetails')]] dans le périmètre du lotissement [[python: object.getValueForTemplate('parcellings', subfield='label')]]non périmé autorisé du [[python: '/'.join(object.getValueForTemplate('parcellings', subfield='authorizationDate').split()[0].split('/')[::-1]) ]];</p>"},
-        {'id': "ssc", 'title': u"Schéma de structure communal",
-        'description': "<p> est situé en [[python: object.getValueForTemplate('SSC'),]] au schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>"},
-        {'id': "ssc-revision", 'title': u"Schéma de structure communal (révision),",
-        'description': "<p> est situé en [[python: object.getValueForTemplate('SSC'),]] au projet de - révision du - de - schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>"},
-        {'id': "rcu", 'title': u"Règlement communal d'urbanisme",
-        'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement régional d'urbanisme [[python: object.getValueForTemplate('folderZone'}, ]] est applicable;</p>"},
-        {'id': "rcu-approuve", 'title': u"Règlement communal d'urbanisme (approuvé),",
-        'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue'),]] est applicable;</p>"},
-        {'id': "rcu-revision", 'title': u"Règlement communal d'urbanisme (révision),",
-        'description': "<p>est situé sur le territoire ou la partie du territoire communal visé(e}, par le projet - de révision du - de - règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue')]] est applicable;</p>"},
-        {'id': "rcu-approuve-provisoirement",
-        'title': u"Règlement communal d'urbanisme (approuvé provisoirement),",
-        'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé provisoirement par [[python: ', '.join(object.getValuesForTemplate('RCU', subfield='extraValue'},) ]] est applicable;</p>"},
-        {'id': "rcu-unite-paysagere-urbaine",
-        'title': u"Règlement communal d'urbanisme (Unité paysagère urbaine),",
-        'description': "<p>est situé en unité paysagère urbaine de bâtisse en ordre continu Art.15 au règlement communal d'urbanisme en vigueur;</p>"},
-        {'id': "natura-2000", 'title': u"Site Natura 2000",
-        'description': "<p>est situé dans le périmètre d'un site Natura 2000 visé par l'article 1bis alinéa unique 18° de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que de la faune et de la flore sauvages;</p>"},
-        {'id': "natura-2000-art6",
-        'title': u"Natura 2000 (article 6 de la loi du 12 juillet 1973),",
-        'description': "<p>est situé dans le périmètre d'un territoire désigné en vertu de l'article 6 de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que de la faune et de la flore sauvages;</p>"},
-        {'id': "zone-prise-eau", 'title': u"Zone de prise d'eau",
-        'description': "<p>est situé dans une zone de prise d'eau, de prévention ou de surveillance au sens du décret du 30 avril 1990 relatif à la protection et l'exploitation des eaux souterraines et des eaux potabilisables modifié la dernière fois par le décret du 15 avril 1999 relatif au cycle de l'eau et instituant une société publique de gestion de l'eau;</p>"},
-        {'id': "plan-expropriation", 'title': u"Plan d'expropriation",
-        'description': "<p> est situé dans les limites d'un plan d'expropriation approuvé par ... du ... ; le pouvoir expropriant est : ...;</p>"},
-        {'id': "droit-de-preemption", 'title': u"Droit de préemption",
-        'description': "<p>est situé dans un périmètre d'application du droit de préemption arrêté par ... du ...; le(s}, bénéficiaires(s) du droit de préemption est (sont) : ...;</p>"},
-        {'id': "perimetre-site-desaffecte", 'title': u"Périmètre site désaffecté",
-        'description': "<p>est situé dans le périmètre du site d'activité économique désaffecté suivant : ...;</p>"},
-        {'id': "revitalisation-urbaine", 'title': u"Revitalisation urbaine",
-        'description': "<p>est situé dans un périmètre de revitalisation urbaine;</p>"},
-        {'id': "classe", 'title': u"Classé (article 196 du CWATUPE),",
-        'description': "<p>est - inscrit sur la liste de sauvegarde visée à l'article 193 - classé en application de l'article 196 - situé dans une zone de protection visée à l'article 209 - localisé dans un site repris à l'inventaire des sites archéologiques visés à l'article 233 - du Code précité;</p>"},
+        {
+            'id': "schema-developpement-espace-regional",
+            'title': u"Option particulière du schéma de développement de l'espace régional",
+            'description': "<p>fait l'objet d'une option particulière du schéma de développement de l'espace régional, à savoir ...;</p>",
+        },
+        {
+            'id': "situe-en-zone",
+            'title': u"Situé en Zone [...]",
+            'description': "<p>est situé en [[python: object.getValueForTemplate('folderZone'),]] au plan de secteur de ... adopté par ... du ... et qui n'a pas cessé de produire ses effets pour le bien précité;</p>",
+            'relatedFields': ['folderZone', '']
+        },
+        {
+            'id': "plan-de-secteur",
+            'title': u"Plan de secteur",
+            'description': "<p>est situé - dans un périmètre ... - en [[python: object.getValueForTemplate('folderZone'),]] au projet - de révision du - de - plan de secteur de ... adopté par ... du ...;</p>",
+            'relatedFields': ['folderZone', '']
+        },
+        {
+            'id': "plan-communal-ammenagement",
+            'title': u"En Plan Communal d'Aménagement",
+            'description': "<p>est situé en [[python: object.getValueForTemplate('folderZone'),]] dans le périmètre du plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: '/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]] et qui n'a pas cessé de produire ses effets pour le bien précité;</p>",
+            'relatedFields': ['folderZone', 'isInPCA', 'pca', '']
+        },
+        {
+            'id': "plan-communal-ammenagement-revision",
+            'title': u"En Plan Communal d'Aménagement (révision),",
+            'description': "<p>est situé en [[python: object.getValueForTemplate('folderZone'),]] dans le périmètre du projet - de révision du - de - plan communal d'aménagement [[python: object.getValueForTemplate('pca', subfield='label')]] approuvé par [[python: object.getValueForTemplate('pca', subfield='decreeType')]] du [[python: '/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]];</p>",
+            'relatedFields': ['folderZone', 'isInPCA', 'pca', '']
+        },
+        {
+            'id': "perimetre-lotissement",
+            'title': u"Dans un lot dans le périmètre d'un lotissement",
+            'description': "<p>est situé sur le(s}, lot(s) n° [[python: object.getValueForTemplate('subdivisionDetails')]] dans le périmètre du lotissement [[python: object.getValueForTemplate('parcellings', subfield='label')]]non périmé autorisé du [[python: '/'.join(object.getValueForTemplate('parcellings', subfield='authorizationDate').split()[0].split('/')[::-1]) ]];</p>",
+        },
+        {
+            'id': "ssc",
+            'title': u"Schéma de structure communal",
+            'description': "<p> est situé en [[python: object.getValueForTemplate('SSC'),]] au schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>",
+            'relatedFields': ['SSC', '']
+        },
+        {
+            'id': "ssc-revision",
+            'title': u"Schéma de structure communal (révision),",
+            'description': "<p> est situé en [[python: object.getValueForTemplate('SSC'),]] au projet de - révision du - de - schéma de structure communal adopté par [[python: object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>",
+            'relatedFields': ['SSC', '']
+        },
+        {
+            'id': "rcu",
+            'title': u"Règlement communal d'urbanisme",
+            'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement régional d'urbanisme [[python: object.getValueForTemplate('folderZone'}, ]] est applicable;</p>",
+            'relatedFields': ['RCU', '']
+        },
+        {
+            'id': "rcu-approuve",
+            'title': u"Règlement communal d'urbanisme (approuvé),",
+            'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue'),]] est applicable;</p>",
+            'relatedFields': ['RCU', '']
+        },
+        {
+            'id': "rcu-revision",
+            'title': u"Règlement communal d'urbanisme (révision),",
+            'description': "<p>est situé sur le territoire ou la partie du territoire communal visé(e}, par le projet - de révision du - de - règlement communal d'urbanisme approuvé par [[python: object.getValueForTemplate('RCU', subfield='extraValue')]] est applicable;</p>",
+            'relatedFields': ['RCU', '']
+        },
+        {
+            'id': "rcu-approuve-provisoirement",
+            'title': u"Règlement communal d'urbanisme (approuvé provisoirement),",
+            'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé provisoirement par [[python: ', '.join(object.getValuesForTemplate('RCU', subfield='extraValue'},) ]] est applicable;</p>",
+            'relatedFields': ['RCU', '']
+        },
+        {
+            'id': "rcu-unite-paysagere-urbaine",
+            'title': u"Règlement communal d'urbanisme (Unité paysagère urbaine),",
+            'description': "<p>est situé en unité paysagère urbaine de bâtisse en ordre continu Art.15 au règlement communal d'urbanisme en vigueur;</p>",
+        },
+        {
+            'id': "natura-2000",
+            'title': u"Site Natura 2000",
+            'description': "<p>est situé dans le périmètre d'un site Natura 2000 visé par l'article 1bis alinéa unique 18° de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que de la faune et de la flore sauvages;</p>",
+        },
+        {
+            'id': "natura-2000-art6",
+            'title': u"Natura 2000 (article 6 de la loi du 12 juillet 1973),",
+            'description': "<p>est situé dans le périmètre d'un territoire désigné en vertu de l'article 6 de la loi du 12 juillet 1973 sur la conservation de la nature, modifié par le décret du 6 décembre 2001 relatif à la conservation des sites Natura 2000 ainsi que de la faune et de la flore sauvages;</p>",
+        },
+        {
+            'id': "zone-prise-eau",
+            'title': u"Zone de prise d'eau",
+            'description': "<p>est situé dans une zone de prise d'eau, de prévention ou de surveillance au sens du décret du 30 avril 1990 relatif à la protection et l'exploitation des eaux souterraines et des eaux potabilisables modifié la dernière fois par le décret du 15 avril 1999 relatif au cycle de l'eau et instituant une société publique de gestion de l'eau;</p>",
+        },
+        {
+            'id': "plan-expropriation",
+            'title': u"Plan d'expropriation",
+            'description': "<p> est situé dans les limites d'un plan d'expropriation approuvé par ... du ... ; le pouvoir expropriant est : ...;</p>",
+        },
+        {
+            'id': "droit-de-preemption",
+            'title': u"Droit de préemption",
+            'description': "<p>est situé dans un périmètre d'application du droit de préemption arrêté par ... du ...; le(s}, bénéficiaires(s) du droit de préemption est (sont) : ...;</p>",
+        },
+        {
+            'id': "perimetre-site-desaffecte",
+            'title': u"Périmètre site désaffecté",
+            'description': "<p>est situé dans le périmètre du site d'activité économique désaffecté suivant : ...;</p>",
+        },
+        {
+            'id': "revitalisation-urbaine",
+            'title': u"Revitalisation urbaine",
+            'description': "<p>est situé dans un périmètre de revitalisation urbaine;</p>",
+        },
+        {
+            'id': "classe",
+            'title': u"Classé (article 196 du CWATUPE),",
+            'description': "<p>est - inscrit sur la liste de sauvegarde visée à l'article 193 - classé en application de l'article 196 - situé dans une zone de protection visée à l'article 209 - localisé dans un site repris à l'inventaire des sites archéologiques visés à l'article 233 - du Code précité;</p>"
+        },
     ],
 
     'townshipspecificfeatures': [
         'SpecificFeatureTerm',
-        {'id': "zone-a-risque", 'title': u"Se trouve dans une zone à risque", 'description': "<p>se trouve dans une zone à risque (faible moyen élevé}, dans la cartographie Aléa d'inondation par débordement de cours d'eau - dressée dans le cadre du plan P.L.U.I.E.S et annexée à l'arrêté du Gouvernement Wallon, adopté en date du 13 juillet 2008;</p>"},
-        {'id': "insalubrite", 'title': u"Est frappé d'un Arrêté d'insalubrité", 'description': "<p>est frappé d'un Arrêté d'insalubrité OU d'un permis de location datant du [...] - Le futur acquéreur est invité à prendre contact avec le Service Logement Salubrité (tél. : [...]}, pour de plus amples informations;</p>"},
-        {'id': "infraction-urbanistique", 'title': u"Infraction urbanistique", 'description': "<p>fait l'objet d'une infraction urbanistique reconnue par notre Administration communale portant sur [...];</p>"},
-        {'id': "cu1", 'title': u"Certificat d'Urbanisme 1 dans les deux ans", 'description': "<p>a fait l'objet, dans les deux dernières années, d'un Certificat d'Urbanisme n°1 datant du [...] et portant la référence [...];</p>"},
-        {'id': "permis-urbanisme", 'title': u"Permis d'Urbanisme depuis 1976", 'description': "<p>a fait l'objet depuis 1976 d'un permis d'urbanisme daté de [...] pour [...] - REFUS/ACCEPTE - Réf.: [...];</p>"},
-        {'id': "reconnaissance-economique", 'title': u"Périmètre de reconnaissance économique", 'description': "<p>est repris dans un périmètre de reconnaissance économique;</p>"},
-        {'id': "site-seveso", 'title': u"A moins de 2000m d'un site SEVESO", 'description': "<p>est situé à moins de 2000m d'un site classé SEVESO à savoir [...];</p>"},
-        {'id': "gestion-des-sols", 'title': u"Gestion des sols", 'description': "<p>état des sols, nous ne sommes pas en mesure de déterminer si le bien est ou pas inscrit dans la banque de données au sens de l'article 10 du décret du 5 décembre 2008 relatif à la gestion des sols (Décret du 05 décembre 2008, art.89, al.2},</p>"},
-        {'id': "galeries-minieres", 'title': u"Galeries minières", 'description': "<p>est situé dans une région traversée par de nombreuses galeries minières et nous ne sommes pas en mesure de déterminer l'état de celle-ci, veuillez donc prendre vos renseignements auprès du SPW - Département de l'Environnement et de l'Eau - "
-        "Direction des risques industriels, géologique et miniers - Cellules sous-sol/géologique - Avenue Prince de Liège, 15 à 5100 Jambes;  Le bien est situé sur une zone de consultation en liaison avec les gisements et puits de mine;</p>"},
+        {
+            'id': "zone-a-risque",
+            'title': u"Se trouve dans une zone à risque",
+            'description': "<p>se trouve dans une zone à risque (faible moyen élevé}, dans la cartographie Aléa d'inondation par débordement de cours d'eau - dressée dans le cadre du plan P.L.U.I.E.S et annexée à l'arrêté du Gouvernement Wallon, adopté en date du 13 juillet 2008;</p>",
+            'relatedFields': ['floodingLevel', '']
+        },
+        {
+            'id': "insalubrite",
+            'title': u"Est frappé d'un Arrêté d'insalubrité",
+            'description': "<p>est frappé d'un Arrêté d'insalubrité OU d'un permis de location datant du [...] - Le futur acquéreur est invité à prendre contact avec le Service Logement Salubrité (tél. : [...]}, pour de plus amples informations;</p>",
+        },
+        {
+            'id': "infraction-urbanistique",
+            'title': u"Infraction urbanistique",
+            'description': "<p>fait l'objet d'une infraction urbanistique reconnue par notre Administration communale portant sur [...];</p>",
+        },
+        {
+            'id': "cu1",
+            'title': u"Certificat d'Urbanisme 1 dans les deux ans",
+            'description': "<p>a fait l'objet, dans les deux dernières années, d'un Certificat d'Urbanisme n°1 datant du [...] et portant la référence [...];</p>",
+        },
+        {
+            'id': "permis-urbanisme",
+            'title': u"Permis d'Urbanisme depuis 1976",
+            'description': "<p>a fait l'objet depuis 1976 d'un permis d'urbanisme daté de [...] pour [...] - REFUS/ACCEPTE - Réf.: [...];</p>",
+        },
+        {
+            'id': "reconnaissance-economique",
+            'title': u"Périmètre de reconnaissance économique",
+            'description': "<p>est repris dans un périmètre de reconnaissance économique;</p>",
+        },
+        {
+            'id': "site-seveso",
+            'title': u"A moins de 2000m d'un site SEVESO",
+            'description': "<p>est situé à moins de 2000m d'un site classé SEVESO à savoir [...];</p>",
+        },
+        {
+            'id': "gestion-des-sols",
+            'title': u"Gestion des sols",
+            'description': "<p>état des sols, nous ne sommes pas en mesure de déterminer si le bien est ou pas inscrit dans la banque de données au sens de l'article 10 du décret du 5 décembre 2008 relatif à la gestion des sols (Décret du 05 décembre 2008, art.89, al.2},</p>",
+        },
+        {
+            'id': "galeries-minieres",
+            'title': u"Galeries minières",
+            'description': "<p>est situé dans une région traversée par de nombreuses galeries minières et nous ne sommes pas en mesure de déterminer l'état de celle-ci, veuillez donc prendre vos renseignements auprès du SPW - Département de l'Environnement et de l'Eau - Direction des risques industriels, géologique et miniers - Cellules sous-sol/géologique - Avenue Prince de Liège, 15 à 5100 Jambes;  Le bien est situé sur une zone de consultation en liaison avec les gisements et puits de mine;</p>",
+        },
     ],
 
     'opinionstoaskifworks': [
