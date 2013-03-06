@@ -66,7 +66,7 @@ schema = Schema((
             label_msgid='urban_label_claimsText',
             i18n_domain='urban',
         ),
-        default=claimsTextDefaultValue,
+        default='getDefaultText',
         default_output_type='text/html',
         optional= True,
     ),

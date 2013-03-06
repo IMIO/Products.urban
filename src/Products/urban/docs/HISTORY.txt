@@ -7,9 +7,14 @@ History
 Added options bar to licences listing (#5476, #5250).
 
 Use events rather than archetype built-in default method system to fill licence fields with default values
-because of performance issues (#5423)
+because of performance issues (#5423).
 
-Parcels can be added on ParcellingTerm objects. Now, parcellingterm objects can be found by parcel references (#5537)
+Parcels can be added on ParcellingTerm objects. Now, parcellingterm objects can be found by parcel references (#5537).
+
+A helper popup is now available on specific features datagrid to edit related fields without navigating through the
+edit form (#5576).
+
+Default text can be defined for urban event text fields as well (#5508).
 
 
 1.1.6

@@ -87,7 +87,7 @@ schema = Schema((
     DataGridField(
         name='textDefaultValues',
         widget=DataGridWidget(
-            columns={'fieldname' : SelectColumn('FieldName', 'getVoc'), 'text' : TextAreaColumn('Text', rows=6, cols=60)},
+            columns={'fieldname' : SelectColumn('FieldName', 'listTextFields'), 'text' : TextAreaColumn('Text', rows=6, cols=60)},
             label='Textdefaultvalues',
             label_msgid='urban_label_textDefaultValues',
             i18n_domain='urban',
@@ -219,11 +219,12 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         portal_url = getToolByName( self, 'portal_url' )
         return portal_url() + '/' + icon
 
-    def getVoc(self):
+    security.declarePublic('listTextFields')
+    def listTextFields(self):
         #we have to know from where the method has been called in order to know which text
         #fields to propose to be "default valued"
         licence_type = self.licence_portal_type
-        licence_schema = getLicenceSchemaSchema(licence_type)
+        licence_schema = getLicenceSchema(licence_type)
         abr = {
             'urban_peb': '(peb) ',
             'urban_location': '(urb) ',

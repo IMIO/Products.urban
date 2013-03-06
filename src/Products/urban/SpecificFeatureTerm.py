@@ -69,6 +69,8 @@ class SpecificFeatureTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin)
 
     # Methods
 
+    # Manually created methods
+
     security.declarePublic('hasRelatedFields')
     def hasRelatedFields(self):
         """
@@ -93,6 +95,7 @@ class SpecificFeatureTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin)
         vocabulary_fields = [(field.getName(), translate(field.widget.label_msgid, 'urban', context=self.REQUEST)) for field in available_fields]
         #return a vocabulary containing the names of all the text fields of the schema
         return DisplayList(sorted(vocabulary_fields, key=lambda name: name[1]))
+
 
 
 registerType(SpecificFeatureTerm, PROJECTNAME)

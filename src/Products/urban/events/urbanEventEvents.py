@@ -3,6 +3,24 @@ from zope.interface import alsoProvides
 from zope.component.interface import getInterface
 from Products.CMFCore.utils import getToolByName
 
+
+def setDefaultValuesEvent(urbanevent, event):
+    """
+     set default values on urban event fields
+    """
+    if urbanevent.checkCreationFlag():
+        _setDefaultTextValues(urbanevent)
+
+
+def _setDefaultTextValues(licence):
+    select_fields = [field for field in licence.schema.fields() if field.default_method == 'getDefaultText']
+    for field in select_fields:
+        is_html = field.default_content_type == 'text/html'
+        default_value = licence.getDefaultText(licence, field, is_html)
+        field_mutator = getattr(licence, field.mutator)
+        field_mutator(default_value)
+
+
 def setEventTypeType(urbanEvent, event):
     urbanEventType = urbanEvent.getUrbaneventtypes()
     urbanEventTypeType = urbanEventType.getEventTypeType()

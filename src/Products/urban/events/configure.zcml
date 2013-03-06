@@ -55,6 +55,9 @@
                    Products.Archetypes.interfaces.IObjectEditedEvent"
               handler=".portionOutEvents.setDivisionCode" />
   <subscriber for="..interfaces.IUrbanEvent
+                   Products.Archetypes.interfaces.IEditBegunEvent"
+              handler=".urbanEventEvents.setDefaultValuesEvent"/>
+  <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setEventTypeType"/>
   <subscriber for="..interfaces.IUrbanEvent

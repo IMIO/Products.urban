@@ -389,15 +389,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return default_values and default_values or empty_value
 
     security.declarePublic('getTextDefaultValue')
-    def getTextDefaultValue(self, fieldname, context, html=False):
+    def getTextDefaultValue(self, fieldname, context, html=False, config=None):
         """
-         Return the first vocabulary term marked as default value of the vocabulary named vocabulary_name
+         Return the default text of the field (if it exists)
         """
-        #search in an urbanConfig or in the tool
-        licence_config = getattr(self, self.getUrbanConfig(context).getId())
-        for config in licence_config.getTextDefaultValues():
-            if 'fieldname' in config and config['fieldname'] == fieldname:
-                return config['text']
+        if not config:
+            config = getattr(self, self.getUrbanConfig(context).getId())
+        for prop in config.getTextDefaultValues():
+            if 'fieldname' in prop and prop['fieldname'] == fieldname:
+                return prop['text']
         return html and '<p></p>' or ''
 
     security.declarePublic('listVocabulary')

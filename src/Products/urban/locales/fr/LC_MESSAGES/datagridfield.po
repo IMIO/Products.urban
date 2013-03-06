@@ -38,9 +38,6 @@ msgstr "Equipements de la voirie au droit du bien"
 msgid "Select"
 msgstr "+"
 
-msgid "id"
-msgstr "?"
-
 msgid "Start date"
 msgstr "Date du début de l'enquête"
 
@@ -49,4 +46,7 @@ msgstr "Rue"
 
 msgid "Text"
 msgstr "Texte"
+
+msgid "id"
+msgstr " "
 

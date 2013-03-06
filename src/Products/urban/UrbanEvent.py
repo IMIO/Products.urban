@@ -123,6 +123,7 @@ schema = Schema((
             label_msgid='urban_label_decisionText',
             i18n_domain='urban',
         ),
+        default_method='getDefaultText',
         default_output_type='text/html',
         optional= True,
     ),
@@ -157,6 +158,7 @@ schema = Schema((
             label_msgid='urban_label_opinionText',
             i18n_domain='urban',
         ),
+        default_method='getDefaultText',
         default_output_type='text/html',
         optional=True,
     ),
@@ -232,6 +234,13 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     # Methods
 
     # Manually created methods
+
+    security.declarePublic('getDefaultText')
+    def getDefaultText(self, context=None, field=None, html=False):
+        if not context or not field:
+            return ""
+        urban_tool = getToolByName(self, 'portal_urban')
+        return urban_tool.getTextDefaultValue(field.getName(), context, html=html, config=self.getUrbaneventtypes())
 
     def getDefaultTime(self):
         return DateTime()
