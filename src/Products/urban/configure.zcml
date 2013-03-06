@@ -107,6 +107,13 @@
   <adapter name="last_key_event" factory=".indexes.genericlicence_lastkeyevent" />
   <adapter name="folder_manager" factory=".indexes.genericlicence_foldermanager" />
 
+  <adapter
+      factory=".exportimport.UrbanToolXMLAdapter"
+      provides="Products.GenericSetup.interfaces.IBody"
+      for=".interfaces.IUrbanTool
+           Products.GenericSetup.interfaces.ISetupEnviron"
+      />
+
   <interface interface=".interfaces.IUrbanCertificateOne" />
   <interface interface=".interfaces.IUrbanCertificateTwo" />
   <interface interface=".interfaces.INotaryLetter" />
