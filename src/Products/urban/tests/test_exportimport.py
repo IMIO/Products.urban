@@ -1,11 +1,115 @@
 # -*- coding: utf-8 -*-
 import unittest2 as unittest
+from plone.app.testing import setRoles
+from plone.app.testing.interfaces import TEST_USER_ID
 from plone.app.testing import login
-from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
+from Products.CMFPlone.utils import base_hasattr
+from Products.CMFCore.utils import getToolByName
 from Products.urban.Extensions.imports import createStreet
-from Products.CMFPlone.utils import base_hasattr 
+from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
 
-class TestImports(unittest.TestCase):
+from StringIO import StringIO
+import tarfile
+import os
+
+
+class TestUrbanToolExportImport(unittest.TestCase):
+
+    layer = URBAN_TESTS_PROFILE_INTEGRATION
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        tool = getToolByName(self.portal, 'portal_urban')
+        tool_values = {
+            'isDecentralized': False,
+            'generateSingletonDocuments': True,
+            'openOfficePort': 2002,
+            'NISNum': '',
+            'cityName': '',
+            'sqlHost': '',
+            'sqlName': '',
+            'sqlUser': '',
+            'sqlPassword': '',
+            'webServerHost': '',
+            'pylonsHost': '',
+            'mapExtent': '',
+            'unoEnabledPython': '',
+            'editionOutputFormat': '',
+        }
+        #fill the tool attrributes with dummy values
+        for field_name, value in tool_values.iteritems():
+            field = tool.getField(field_name)
+            mutator = field.getMutator(tool)
+            if value is '':
+                value = 'old %s' % field_name
+            mutator(value)
+
+        self.portal_urban = tool
+        self.portal_setup = getToolByName(self.portal, 'portal_setup')
+
+    def testExport(self):
+        """
+         Verify correctness of the generic setup export of urban tool attributes
+        """
+        export = self.portal_setup.runExportStep('urbantool')
+        try:
+            tar_file = tarfile.open(mode='r', fileobj=StringIO(export['tarball']))
+            tar_file.extractall()
+            xml = open('portal_urban.xml', 'r')
+        except:
+            self.fail()
+        expected_xml = [
+            '<?xml version="1.0"?>\n',
+            '<object>\n',
+            ' <isDecentralized value="False"/>\n',
+            ' <generateSingletonDocuments value="True"/>\n',
+            ' <openOfficePort value="2002"/>\n',
+            ' <NISNum value="old NISNum"/>\n',
+            ' <cityName value="old cityName"/>\n',
+            ' <sqlHost value="old sqlHost"/>\n',
+            ' <sqlName value="old sqlName"/>\n',
+            ' <sqlUser value="old sqlUser"/>\n',
+            ' <sqlPassword value="old sqlPassword"/>\n',
+            ' <webServerHost value="old webServerHost"/>\n',
+            ' <pylonsHost value="old pylonsHost"/>\n',
+            ' <mapExtent value="old mapExtent"/>\n',
+            ' <unoEnabledPython value="old unoEnabledPython"/>\n',
+            ' <editionOutputFormat value="old editionOutputFormat"/>\n',
+            '</object>\n'
+        ]
+        xml_lines = xml.readlines()
+        self.failUnless(len(xml_lines) is len(expected_xml))
+        self.failUnless(all([expected_xml[i] == line for i, line in enumerate(xml_lines)]))
+
+    def testImport(self):
+        """
+         Verify correctness of the generic setup import of urban tool attributes
+        """
+        urban_xml_content = [
+            '<?xml version="1.0"?>\n',
+            '<object>\n',
+            ' <isDecentralized value="True"/>\n',
+            ' <generateSingletonDocuments value="False"/>\n',
+            ' <openOfficePort value="9999"/>\n',
+            ' <NISNum value="new NISNum"/>\n',
+            ' <cityName value="new cityName"/>\n',
+            ' <sqlHost value="new sqlHost"/>\n',
+            ' <sqlName value="new sqlName"/>\n',
+            ' <sqlUser value="new sqlUser"/>\n',
+            ' <sqlPassword value="new sqlPassword"/>\n',
+            ' <webServerHost value="new webServerHost"/>\n',
+            ' <pylonsHost value="new pylonsHost"/>\n',
+            ' <mapExtent value="new mapExtent"/>\n',
+            ' <unoEnabledPython value="new unoEnabledPython"/>\n',
+            ' <editionOutputFormat value="new editionOutputFormat"/>\n',
+            '</object>\n'
+        ]
+        import ipdb; ipdb.set_trace()
+        self.portal_setup.runImportStepFromProfile('profile-Products.urban:default', 'urbantool')
+
+
+class TestStreetImports(unittest.TestCase):
 
     layer = URBAN_TESTS_PROFILE_INTEGRATION
 
@@ -75,7 +179,7 @@ class TestImports(unittest.TestCase):
         self.failUnless(base_hasattr(awans, 'rue-de-bruxelles1'))
         rue6 = getattr(awans, 'rue-de-bruxelles1')
         self.assertEquals(self.wtool.getInfoFor(rue6, 'review_state'), 'enabled')
-        self.assertEquals(self.wtool.getInfoFor(rue5, 'review_state'), 'disabled') #previous street has been disabled
+        self.assertEquals(self.wtool.getInfoFor(rue5, 'review_state'), 'disabled')  # previous street has been disabled
 
         ##create a new street, without regional road first and after with one
         createStreet(self.utool, 'Awans', 4340, '5000', "Rue de Namur", 7020320, "2010/09/07", None, '', ex_streets)
@@ -89,4 +193,4 @@ class TestImports(unittest.TestCase):
         self.failUnless(base_hasattr(awans, 'rue-de-namur1'))
         rue8 = getattr(awans, 'rue-de-namur1')
         self.assertEquals(self.wtool.getInfoFor(rue8, 'review_state'), 'disabled')
-        self.assertEquals(self.wtool.getInfoFor(rue7, 'review_state'), 'enabled') #previous street is unchanged
+        self.assertEquals(self.wtool.getInfoFor(rue7, 'review_state'), 'enabled')  # previous street is unchanged
