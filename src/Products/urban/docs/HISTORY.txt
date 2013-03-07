@@ -16,6 +16,9 @@ edit form (#5576).
 
 Default text can be defined for urban event text fields as well (#5508).
 
+bugfixes:
+- Folder search by parcel reference is now working with lowercase inputs.
+
 
 1.1.6
 -----

@@ -12,6 +12,7 @@ from Products.urban.utils import ParcelHistoric
 from Products.urban.UrbanTool import DB_QUERY_ERROR
 from Products.ZCTextIndex.ParseTree import ParseError
 
+
 class UrbanSearchView(BrowserView):
     """
       This manage the view of UrbanSearch
@@ -24,7 +25,6 @@ class UrbanSearchView(BrowserView):
         if not self.enoughSearchCriterias(self.request):
             plone_utils = getToolByName(context, 'plone_utils')
             plone_utils.addPortalMessage(translate('warning_enter_search_criteria'), type="warning")
-
 
     def AvailableStreets(self):
         context = aq_inner(self.context)
@@ -57,20 +57,25 @@ class UrbanSearchView(BrowserView):
         if type(key_to_match) == list:
             return dict([(key, request.get(key, '')) for key in key_to_match])
         request = aq_inner(self.request)
-        return {key_to_match:request.get(key_to_match, '')}
+        return {key_to_match: request.get(key_to_match, '')}
+
+    def getParcelRefArguments(self, arg_list):
+        args = self.getArgument(arg_list)
+        to_upper = ['section', 'radical', 'bis', 'exposant', 'puissance']
+        return dict([(k, k in to_upper and v.upper() or v) for k, v in args.iteritems()])
 
     def getStreetInterfaces(self):
         interfaces = [
-                'Products.urban.interfaces.IStreet',
-                'Products.urban.interfaces.ILocality',
-                ]
+            'Products.urban.interfaces.IStreet',
+            'Products.urban.interfaces.ILocality',
+        ]
         return ','.join(interfaces)
 
     def enoughSearchCriterias(self, request):
         """
         """
         if request.get('search_by', '') == 'parcel':
-            args_name = ['division','section', 'radical', 'bis', 'exposant', 'puissance']
+            args_name = ['division', 'section', 'radical', 'bis', 'exposant', 'puissance']
             valid_args = [request.get(name) for name in args_name if request.get(name)]
             return len(valid_args) > 2
         return True
@@ -83,11 +88,11 @@ class UrbanSearchView(BrowserView):
         search_by = request.get('search_by', '')
         foldertypes = request.get('foldertypes', [])
         arguments = {
-                        'street':self.getArgument('street'),
-                        'folderref':self.getArgument('folderref'),
-                        'name':self.getArgument(['name', 'contacttypes']),
-                        'parcel':self.getArgument(['division','section', 'radical', 'bis', 'exposant', 'puissance', 'partie', 'browseoldparcels']),
-                    }
+            'street': self.getArgument('street'),
+            'folderref': self.getArgument('folderref'),
+            'name': self.getArgument(['name', 'contacttypes']),
+            'parcel': self.getParcelRefArguments(['division', 'section', 'radical', 'bis', 'exposant', 'puissance', 'partie', 'browseoldparcels']),
+        }
         if search_by == 'street':
             res = self.searchByStreet(foldertypes, **arguments.get(search_by, []))
         elif search_by == 'folderref':
@@ -183,6 +188,7 @@ class UrbanSearchView(BrowserView):
             for ref in parcel.getAllSearchRefs():
                 parcel_infos.add(ref)
         return catalogTool(portal_type=foldertypes, parcelInfosIndex=list(parcel_infos))
+
 
 class UrbanSearchMacros(BrowserView):
     """
