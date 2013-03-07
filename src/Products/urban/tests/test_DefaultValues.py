@@ -5,6 +5,7 @@ from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
 from Products.CMFCore.utils import getToolByName
 from Products.urban.config import URBAN_TYPES
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban import UrbanEventInquiry
 from zope.event import notify
 from Products.Archetypes.event import EditBegunEvent
 
@@ -110,8 +111,7 @@ class TestDefaultValues(unittest.TestCase):
         self.assertEquals(default_text, newlicence.Description())
 
     def testDefaultTextMethodIsDefinedForEachTextField(self):
-        #each field with a configurable listing (<=> has a UrbanVocabulary defined as its vocabulary) should
-        #have the 'getDefaultValue' method defined on it, else the default value system wont work
+        #each text field  should have the 'getDefaultText' method defined on it, else the default value system wont work
         site = self.site
         catalog = getToolByName(site, 'portal_catalog')
         test_licences = [brain.getObject() for brain in catalog(portal_type=URBAN_TYPES)]
@@ -119,3 +119,55 @@ class TestDefaultValues(unittest.TestCase):
             for field in licence.schema.fields():
                 if hasattr(field, 'defaut_content_type') and field.default_content_type.startswith('text'):
                     self.assertEquals(field.default_method, 'getDefaultText')
+
+
+class TestEventDefaultValues(unittest.TestCase):
+
+    layer = URBAN_TESTS_PROFILE_FUNCTIONAL
+
+    def setUp(self):
+        portal = self.layer['portal']
+        self.portal_urban = portal.portal_urban
+        self.site = portal
+        login(portal, 'urbanmanager')
+        #create a licence
+        buildlicences = portal.urban.buildlicences
+        buildlicences.invokeFactory('BuildLicence', id='newlicence', title='blabla')
+        buildlicence = buildlicences.newlicence
+        self.licence = buildlicence
+
+    def createEvent(self, licence, event_type):
+        self.portal_urban.createUrbanEvent(licence.UID(), event_type.UID())
+        urban_event = licence.objectValues('UrbanEvent')[-1]
+        #simulate edition event to trigger default value system
+        notify(EditBegunEvent(urban_event))
+        return urban_event
+
+    """
+    Tests for the text default values
+    """
+    def testNoTextDefaultValuesConfigured(self):
+        #create a new event 'rappor du college'
+        #text field 'decisionText' should be empty by default
+        eventtypes = self.portal_urban.buildlicence.urbaneventtypes
+        event_type = getattr(eventtypes, 'rapport-du-college')
+        event = self.createEvent(self.licence, event_type)
+        decision_text = event.getDecisionText()
+        self.failUnless(decision_text == '')
+
+    def testTextValueConfigured(self):
+        eventtypes = self.portal_urban.buildlicence.urbaneventtypes
+        event_type = getattr(eventtypes, 'rapport-du-college')
+        # set a a default text for the field 'decsionText'
+        default_text = '<p>Kill bill!</p>'
+        event_type.setTextDefaultValues([{'text': default_text, 'fieldname': 'decisionText'}])
+        # the created event should have this text in its field 'decisionText'
+        event = self.createEvent(self.licence, event_type)
+        decision_text = event.getDecisionText()
+        self.failUnless(decision_text == default_text)
+
+    def testDefaultTextMethodIsDefinedForEachTextField(self):
+        #each text field  should have the 'getDefaultText' method defined on it, else the default value system wont work
+        for field in UrbanEventInquiry.UrbanEventInquiry_schema.fields():
+            if hasattr(field, 'defaut_content_type') and field.default_content_type.startswith('text'):
+                self.assertEquals(field.default_method, 'getDefaultText')
