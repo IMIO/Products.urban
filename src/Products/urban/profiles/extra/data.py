@@ -187,7 +187,7 @@ urbanEventTypes = {
                                      {'id': "urb-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
-                    'textDefaultValues': [{'text': default_texts['claimsTextDefaultValue'], 'fieldname': 'claimsText'}],
+                    'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
                     },
                     {
                     'id': "config-opinion-request",
@@ -570,7 +570,7 @@ urbanEventTypes = {
                                      {'id': "cu2-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
-                    'textDefaultValues': [{'text': default_texts['claimsTextDefaultValue'], 'fieldname': 'claimsText'}],
+                    'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
                     },
                     {
                     'id': "config-opinion-request",
@@ -890,7 +890,7 @@ urbanEventTypes = {
                                      {'id': "lot-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
-                    'textDefaultValues': [{'text': default_texts['claimsTextDefaultValue'], 'fieldname': 'claimsText'}],
+                    'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
                     },
                     {
                     'id': "config-opinion-request",
