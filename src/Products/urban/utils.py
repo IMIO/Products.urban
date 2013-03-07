@@ -221,6 +221,8 @@ class ParcelHistoric:
     def setRefs(self, **kwargs):
         for ref in self.refs:
             val = kwargs.get(ref, '') and str(kwargs[ref]) or ''
+            if val not in['divname', 'division']:
+                val = val.upper()
             setattr(self, ref, val)
 
     def getRelatives(self, name):
