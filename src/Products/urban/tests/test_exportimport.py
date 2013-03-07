@@ -105,7 +105,6 @@ class TestUrbanToolExportImport(unittest.TestCase):
             ' <editionOutputFormat value="new editionOutputFormat"/>\n',
             '</object>\n'
         ]
-        import ipdb; ipdb.set_trace()
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:default', 'urbantool')
 
 
