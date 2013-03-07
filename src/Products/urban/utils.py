@@ -137,13 +137,13 @@ class ParcelHistoric:
     def key(self):
         return self.__str__()
 
-    def buildRelativesChain(self, urban_tool, link_name):
-        o_link_name = link_name == 'parents' and 'childs' or 'parents'
-        link = link_name == 'parents' and 'prca' or 'prcc'
+    def buildRelativesChain(self, urban_tool, relationship):
+        o_relationship = relationship == 'parents' and 'childs' or 'parents'
+        link = relationship == 'parents' and 'prca' or 'prcc'
         o_link = link == 'prca' and 'prcc' or 'prca'
         division = self.division
         relatives_chain = []
-        for prc in getattr(self, link_name):
+        for prc in getattr(self, relationship):
             section = prc[0]
             prcb1 = prc[1:]
             prcb1 = '%s%s%s' % (prcb1[:-3], ' '.join(['' for i in range(12 - len(prcb1))]), prcb1[-3:])
@@ -154,10 +154,10 @@ class ParcelHistoric:
             relatives = [ParcelHistoric(**r) for r in records]
             if relatives:
                 relative = ParcelHistoric.mergeDuplicate(relatives)[0]
-                relative.buildRelativesChain(urban_tool, link_name)
-                relative.addRelatives(o_link_name, [self])
+                relative.buildRelativesChain(urban_tool, relationship)
+                relative.addRelatives(o_relationship, [self])
                 relatives_chain.append(relative)
-        setattr(self, link_name, relatives_chain)
+        setattr(self, relationship, relatives_chain)
 
     def getSearchRef(self):
         return ','.join([val and str(val) or '' for val in [self.division, self.section, self.radical, self.bis, self.exposant, self.puissance, '0']])
@@ -188,32 +188,32 @@ class ParcelHistoric:
         return infos
 
     def getHistoricForDisplay(self):
-        def buildResult(parcel, result, level=0, link='parents'):
+        def buildResult(parcel, result, level=0, relationship='parents'):
             parcel_infos = parcel.getParcelAsDictionary()
             parcel_infos['level'] = level
-            if link == 'childs':
+            if relationship == 'childs':
                 if level != 0 or result == []:
                     result.append(parcel_infos)
-            for relative in getattr(parcel, link):
-                next_level = link == 'parents' and level - 1 or level + 1
-                buildResult(relative, result, next_level, link)
-            if link == 'parents':
+            for relative in getattr(parcel, relationship):
+                next_level = relationship == 'parents' and level - 1 or level + 1
+                buildResult(relative, result, next_level, relationship)
+            if relationship == 'parents':
                 result.append(parcel_infos)
             old = parcel.childs and True or False
             parcel_infos['old'] = old
         to_return = []
-        buildResult(self, to_return, link='parents')
-        buildResult(self, to_return, link='childs')
+        buildResult(self, to_return, relationship='parents')
+        buildResult(self, to_return, relationship='childs')
         min_lvl = abs(min([prc['level'] for prc in to_return]))
         for parcel in to_return:
             parcel['level'] = parcel['level'] + min_lvl
         return to_return
 
-    def mergeRelatives(self, other, link_names=['parents', 'childs']):
-        for link_name in link_names:
-            existing_relatives = [str(p) for p in getattr(self, link_name)]
-            relatives = [relative for relative in getattr(other, link_name) if str(relative) not in existing_relatives]
-            self.addRelatives(link_name, relatives)
+    def mergeRelatives(self, other, relationships=['parents', 'childs']):
+        for relationship in relationships:
+            existing_relatives = [str(p) for p in getattr(self, relationship)]
+            relatives = [relative for relative in getattr(other, relationship) if str(relative) not in existing_relatives]
+            self.addRelatives(relationship, relatives)
 
     def diffPrc(self, prc_ac, prc):
         return prc_ac and prc_ac.replace(' ', '')[1:] != prc.replace(' ', '') or False
@@ -225,10 +225,10 @@ class ParcelHistoric:
                 val = val.upper()
             setattr(self, ref, val)
 
-    def getRelatives(self, name):
-        return getattr(self, '%s' % name, [])
+    def getRelatives(self, relationship):
+        return getattr(self, relationship)
 
-    def addRelatives(self, name, relatives):
-        class_attr = getattr(self, name, None)
-        if class_attr is not None:
-            class_attr.extend(relatives)
+    def addRelatives(self, relationship, new_relatives):
+        relatives = getattr(self, relationship, None)
+        if relatives:
+            relatives.extend(new_relatives)
