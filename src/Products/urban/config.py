@@ -170,8 +170,8 @@ PPNC_LAYERS = {
 #ppnc6: 176533,18317 : 270345,70426
 
 DefaultTexts = {
-        'BuildLicence':{
-        'equipmentAndRoadRequirements' :
+        'BuildLicence': {
+        'equipmentAndRoadRequirements':
         """
         <p>1. Aucun descendant d’eaux pluviales ne pourra faire saillie sur le domaine public.  Ils seront intégrés dans la maçonnerie de façade.  Ils seront munis d’un dauphin en fonte d’une hauteur de 1 mètre à partir du sol.  Ils seront raccordés au réseau privatif du bâtiment car aucun rejet d’eaux pluviales sur le domaine public n’est autorisé. Cette donnée technique n’est d’application que si le projet prévoit des descendants d’eaux pluviales en façade à rue.</p>
         <p>2. Reprise de l’extension du réseau d’égouttage sur le réseau existant du bâtiment.</p>
@@ -193,7 +193,8 @@ DefaultTexts = {
         <p><b>(**) A.G.W. du 3 mars 2005 relatif au livre II du Code de l’Environnement contenant le Code de l’Eau (M.B. 12/04/2005 – err.21/06/2005), modifié par A.G.W. le 06 décembre 2006 (MB 17.01.2007) relatif au règlement général d’assainissement des eaux urbaines résiduaires.</b></p>
         """
         ,
-        'technicalRemarks' : """
+        'technicalRemarks':
+        """
         <p>1. Les portes (de garage ou autres) et les fenêtres ne peuvent en s’ouvrant faire saillie sur le domaine public.</p>
         <p>2. La Ville de Mons impose de signifier à l’entreprise engagée et au demandeur pour le présent permis de réaliser le nettoyage du trottoir et de la voirie vu que les travaux de XXXX engendreront de la poussière, des débris de briques, …  En cas de non application d’un tel système, la Ville de Mons se réserve le droit de sanctionner l’entreprise engagée et le demandeur par le biais de tous les recours légaux en la matière.</p>
         <p>3. Si le présent permis nécessite une occupation (même partielle) du domaine public, l’entreprise engagée devra introduire au préalable une demande d’ordonnance de police auprès du Service « Réglementation de Police » pour être autorisée à occuper le domaine public nécessaire à l’emprise du chantier.</p>
@@ -206,20 +207,6 @@ DefaultTexts = {
         }
 }
 
-claimsTextDefaultValue = """
-Considérant que xxx réclamations écrites ont été introduites au cours de l'enquête émanant des riverains (xxx lettres identiques et xxx lettres individuelles);
-Considérant que xxx réclamations orales ont été consignées dans le registre;
-Considérant que ces réclamations portent principalement sur :
-    * ...
-    * ...
-    * ...
-Attendu qu'une réunion de clôture d'enquête à été organisée le xxx dans les bureaux du service de l'urbanisme de la Commune de Mons, conformément aux dispositions de l'article 340 du Code modifié;
-Considérant qu'aucune personnes ne s'est présentée lors de cette réunion pour faire opposition;
-Considérant que xxx personnes se sont présentées à cette réunion et ont émis les réclamations suivantes :
-    * ...
-    * ...
-    * ...
-"""
 
 NULL_VALUE = "..."
 ##/code-section config-bottom

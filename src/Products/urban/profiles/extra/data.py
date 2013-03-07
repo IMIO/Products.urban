@@ -3,6 +3,24 @@ from Products.urban.config import GLOBAL_TEMPLATES
 
 globalTemplates = GLOBAL_TEMPLATES
 
+default_texts = {
+    'claimsTextDefaultValue':
+    """
+    <p>Considérant que xxx réclamations écrites ont été introduites au cours de l'enquête émanant des riverains (xxx lettres identiques et xxx lettres individuelles);</p>
+    <p>Considérant que xxx réclamations orales ont été consignées dans le registre;</p>
+    <p>Considérant que ces réclamations portent principalement sur :</p>
+    <p>* ...</p>
+    <p>* ...</p>
+    <p>* ...</p>
+    <p>Attendu qu'une réunion de clôture d'enquête à été organisée le xxx dans les bureaux du service de l'urbanisme de la Commune de Mons, conformément aux dispositions de l'article 340 du Code modifié;</p>
+    <p>Considérant qu'aucune personnes ne s'est présentée lors de cette réunion pour faire opposition;</p>
+    <p>Considérant que xxx personnes se sont présentées à cette réunion et ont émis les réclamations suivantes :</p>
+    <p>* ...</p>
+    <p>* ...</p>
+    <p>* ...</p>
+    """
+}
+
 urbanEventTypes = {
                    'buildlicence':
                    (
@@ -169,6 +187,7 @@ urbanEventTypes = {
                                      {'id': "urb-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+                    'textDefaultValues': [{'text': default_texts['claimsTextDefaultValue'], 'fieldname': 'claimsText'}],
                     },
                     {
                     'id': "config-opinion-request",
@@ -551,6 +570,7 @@ urbanEventTypes = {
                                      {'id': "cu2-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+                    'textDefaultValues': [{'text': default_texts['claimsTextDefaultValue'], 'fieldname': 'claimsText'}],
                     },
                     {
                     'id': "config-opinion-request",
@@ -870,6 +890,7 @@ urbanEventTypes = {
                                      {'id': "lot-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+                    'textDefaultValues': [{'text': default_texts['claimsTextDefaultValue'], 'fieldname': 'claimsText'}],
                     },
                     {
                     'id': "config-opinion-request",
@@ -984,3 +1005,4 @@ urbanEventTypes = {
                     },
                    ),
                   }
+

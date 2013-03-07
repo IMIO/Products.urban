@@ -3,6 +3,13 @@ from Products.urban.config import GLOBAL_TEMPLATES
 
 globalTemplates = GLOBAL_TEMPLATES
 
+default_texts = {
+    'claimsTextDefaultValue':
+    """
+    <p>Je réclame le port obligatoire de la mini jupe à l'unif</p>
+    """
+}
+
 urbanEventTypes = {
                    'buildlicence':
                    (
@@ -68,6 +75,7 @@ urbanEventTypes = {
                     'podTemplates': (
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+                    'textDefaultValues': [{'text': default_texts['claimsTextDefaultValue'], 'fieldname': 'claimsText'}],
                     },
                     {
                     'id': "config-opinion-request",
