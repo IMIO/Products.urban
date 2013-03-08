@@ -24,6 +24,12 @@
   <include package="communesplone.iconified_document_actions"/>
   <include package="Products.CMFPlacefulWorkflow"/>
 
+
+  <permission
+    id="urban.viewurbanmap"
+    title="Products.urban: ViewUrbanMap"
+    />
+    
   <include package=".events" />
   <include package=".browser" />
 

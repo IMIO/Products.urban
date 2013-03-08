@@ -3,5 +3,9 @@
   <roles>
     <role name="UrbanMapReader"/>
   </roles>
-  <permissions/>
+  <permissions>
+      <permission name="Products.urban: ViewUrbanMap" acquire="True">
+        <role name="UrbanMapReader"/>
+      </permission>
+  </permissions>
 </rolemap>
