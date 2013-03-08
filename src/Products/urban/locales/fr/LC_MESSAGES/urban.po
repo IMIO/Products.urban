@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2013-03-08 13:24+0000\n"
+"POT-Creation-Date: 2013-03-08 14:52+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1540,6 +1540,11 @@ msgstr "Catégorie"
 #: PcaTerm.py
 msgid "urban_label_changes"
 msgstr "Modifications"
+
+#. Default: "Changesdescription"
+#: ParcellingTerm.py
+msgid "urban_label_changesDescription"
+msgstr "Modifications du lotissement"
 
 #. Default: "City"
 #: Contact.py

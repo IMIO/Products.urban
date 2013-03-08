@@ -89,6 +89,16 @@ schema = Schema((
         required=True,
         validators=('isInt',),
     ),
+    TextField(
+        name='changesDescription',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Changesdescription',
+            label_msgid='urban_label_changesDescription',
+            i18n_domain='urban',
+        ),
+        default_output_type='text/html',
+    ),
 
 ),
 )
