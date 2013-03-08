@@ -71,7 +71,7 @@ class UrbanBase(object):
         for applicant in applicants:
             #if the signaletic is not empty, we are adding several applicants
             if signaletic:
-                signaletic += ' %s '% translate('and', 'urban', context=self.REQUEST).encode('utf8')
+                signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
             signaletic += applicant.getSignaletic(withaddress=withaddress)
         return signaletic
 
@@ -131,7 +131,6 @@ class UrbanBase(object):
             signaletic += contact.getSignaletic(withaddress=withaddress)
         return signaletic
 
-
     security.declarePublic('getArchitectsSignaletic')
     def getArchitectsSignaletic(self, withaddress=False):
         """
@@ -179,7 +178,7 @@ class UrbanBase(object):
         signaletic = ''
         for wl in self.getWorkLocations():
             #wl is a dict with street as the street obj uid and number as the number in the street
-            street = catalog(UID = wl['street'])[0].getObject()
+            street = catalog(UID=wl['street'])[0].getObject()
             city = street.getParentNode()
             if street.getPortalTypeName() == 'Locality':
                 streetName = street.getLocalityName()
@@ -203,16 +202,16 @@ class UrbanBase(object):
           Returns a small string representing the licence type
         """
         licenceTypes = {
-                        'BuildLicence': 'PU',
-                        'ParcelOutLicence': 'PL',
-                        'UrbanCertificateOne': 'CU1',
-                        'UrbanCertificateBase': 'CU1',
-                        'UrbanCertificateTwo': 'CU2',
-                        'EnvClassThree': 'DE',
-                        'Declaration': 'Decl',
-                        'Division': 'Div',
-                        'MiscDemand': 'DD',
-                       }
+            'BuildLicence': 'PU',
+            'ParcelOutLicence': 'PL',
+            'UrbanCertificateOne': 'CU1',
+            'UrbanCertificateBase': 'CU1',
+            'UrbanCertificateTwo': 'CU2',
+            'EnvClassThree': 'DE',
+            'Declaration': 'Decl',
+            'Division': 'Div',
+            'MiscDemand': 'DD',
+        }
         if "notaryletter" in self.id:
             return 'Not'
         try:
@@ -245,8 +244,8 @@ class UrbanBase(object):
         toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for applicant in applicants:
             toreturn = toreturn + '%' + applicant.getPersonTitleValue() + '|' + applicant.getName1() + \
-                    '|' + applicant.getName2() + '|' + applicant.getNumber() + ', ' + \
-                    applicant.getStreet() + '|' + applicant.getZipcode() + ' ' + applicant.getCity()
+                       '|' + applicant.getName2() + '|' + applicant.getNumber() + ', ' + \
+                       applicant.getStreet() + '|' + applicant.getZipcode() + ' ' + applicant.getCity()
         toreturn = toreturn + '</CSV>'
         return toreturn
     getMultipleApplicants = getMultipleApplicantsCSV
@@ -369,7 +368,7 @@ class UrbanBase(object):
         """
           Return every contained UrbanEvents (of any type)...
         """
-        return self.listFolderContents({'portal_type': ('UrbanEventInquiry', 'UrbanEvent', ),})
+        return self.listFolderContents({'portal_type': ('UrbanEventInquiry', 'UrbanEvent')})
 
     security.declarePublic('getInquiries')
     def getInquiries(self):
@@ -392,7 +391,7 @@ class UrbanBase(object):
         """
           Returns the existing UrbanEventInquiries
         """
-        return self.listFolderContents({'portal_type': 'UrbanEventInquiry',})
+        return self.listFolderContents({'portal_type': 'UrbanEventInquiry'})
 
     security.declarePublic('mayShowEditAction')
     def mayShowEditAction(self):
@@ -429,7 +428,7 @@ class UrbanBase(object):
           Return the display value of the given field
         """
         return ', '.join([result for result in self._getValuesForTemplate(field_name=field_name, obj=obj,
-                                               raw_value=raw_value, vocabulary=vocabulary, subfield_name=subfield)])
+                          raw_value=raw_value, vocabulary=vocabulary, subfield_name=subfield)])
 
     security.declarePublic('getValuesForTemplate')
     def getValuesForTemplate(self, field_name, obj=None, raw_value=None, vocabulary=None, subfield=None):
@@ -437,7 +436,7 @@ class UrbanBase(object):
           Return a list of the display values of the given field
         """
         return self._getValuesForTemplate(field_name=field_name, obj=obj, raw_value=raw_value,
-                                         vocabulary=vocabulary, subfield_name=subfield)
+                                          vocabulary=vocabulary, subfield_name=subfield)
 
     security.declarePublic('displayValuesFromVocForTemplate')
     def displayValuesFromVocForTemplate(self, raw_value, vocabulary, obj=None):
@@ -456,7 +455,7 @@ class UrbanBase(object):
         if subfield_name:
             field = obj.getField(field_name)
             if field.vocabulary:
-                keys =  type(field.getRaw(obj)) in (list, tuple) and field.getRaw(obj) or [field.getRaw(obj)]
+                keys = type(field.getRaw(obj)) in (list, tuple) and field.getRaw(obj) or [field.getRaw(obj)]
                 objs = [field.vocabulary.getAllVocTerms(obj).get(key, None) for key in keys]
             else:
                 catalog = getToolByName(self, 'portal_catalog')
@@ -464,7 +463,6 @@ class UrbanBase(object):
             field_name = subfield_name
             return [self.getValueForTemplate(field_name, obj_, raw_value, vocabulary) for obj_ in objs]
         return [res for res in self._getValueForTemplate(field_name, obj, raw_value, vocabulary)]
-
 
     def _getValueForTemplate(self, field_name='', obj=None, raw_value=None, vocabulary=None,):
         """
@@ -492,5 +490,5 @@ class UrbanBase(object):
         """
           List a given vocabulary from the config
         """
-        urbantool = getToolByName(self,'portal_urban')
+        urbantool = getToolByName(self, 'portal_urban')
         return urbantool.listVocabulary(voc_name, context=self, inUrbanConfig=inUrbanConfig)
