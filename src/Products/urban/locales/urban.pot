@@ -286,7 +286,7 @@ msgstr ""
 msgid "add_every_advices_descr"
 msgstr ""
 
-msgid "additonallayers_folder_title"
+msgid "additional_layers_folder_title"
 msgstr ""
 
 msgid "address_fieldset_legend"
