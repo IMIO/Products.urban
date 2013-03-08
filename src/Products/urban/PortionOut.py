@@ -162,7 +162,7 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         """
           Set a correct title if we use invokeFactory
         """
-        division = self.listDivisionNames().getValue(self.getDivision())
+        division = self.getDivisionName()
         section = self.getSection()
         radical = self.getRadical()
         bis = self.getBis()
@@ -208,6 +208,10 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         else:
             res.append('0')
         return ",".join(res)
+
+    security.declarePublic('listDivisionNames')
+    def getDivisionName(self):
+        return self.listDivisionNames().getValue(self.getDivision())
 
     security.declarePublic('listDivisionNames')
     def listDivisionNames(self):
