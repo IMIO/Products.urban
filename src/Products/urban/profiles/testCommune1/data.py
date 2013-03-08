@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+from Products.urban.config import GLOBAL_TEMPLATES
+
+globalTemplates = GLOBAL_TEMPLATES
+
 urbanEventTypes = {
                     'buildlicence':
                     (
