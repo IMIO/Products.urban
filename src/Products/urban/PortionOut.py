@@ -32,7 +32,7 @@ schema = Schema((
     StringField(
         name='divisionCode',
         widget=StringField._properties['widget'](
-            visible={'edit': 'hidden', 'view': 'visible'},
+            visible={'edit':'hidden', 'view':'visible'},
             label='Divisioncode',
             label_msgid='urban_label_divisionCode',
             i18n_domain='urban',
@@ -208,7 +208,7 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
             res.append('0')
         return ",".join(res)
 
-    security.declarePublic('listDivisionNames')
+    security.declarePublic('getDivisionName')
     def getDivisionName(self):
         return self.listDivisionNames().getValue(self.getDivision())
 
