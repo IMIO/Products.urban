@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-03-06 13:43+0000\n"
+"POT-Creation-Date: 2013-03-08 13:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -286,7 +286,7 @@ msgstr ""
 msgid "add_every_advices_descr"
 msgstr ""
 
-msgid "additonal_layers_folder_title"
+msgid "additonallayers_folder_title"
 msgstr ""
 
 msgid "address_fieldset_legend"
@@ -510,6 +510,9 @@ msgstr ""
 msgid "envclassthrees"
 msgstr ""
 
+msgid "equipmenttypes_folder_title"
+msgstr ""
+
 msgid "error_bis"
 msgstr ""
 
@@ -558,7 +561,7 @@ msgstr ""
 msgid "exploitationconditions_folder_title"
 msgstr ""
 
-msgid "external_decisions_folder_title"
+msgid "externaldecisions_folder_title"
 msgstr ""
 
 #. Default: "Far prevention area"
@@ -602,7 +605,7 @@ msgstr ""
 msgid "folder_events"
 msgstr ""
 
-msgid "folderbuildworktype_folder_title"
+msgid "folderbuildworktypes_folder_title"
 msgstr ""
 
 msgid "foldercategories_folder_title"
@@ -830,6 +833,12 @@ msgid "location_fdrequirement_decision"
 msgstr ""
 
 msgid "location_fdrequirement_opinion"
+msgstr ""
+
+msgid "locationspecificfeatures_folder_title"
+msgstr ""
+
+msgid "lotusages_folder_title"
 msgstr ""
 
 msgid "manage_architects"
@@ -1074,6 +1083,9 @@ msgstr ""
 msgid "road_adaptation_no"
 msgstr ""
 
+msgid "roadspecificfeatures_folder_title"
+msgstr ""
+
 msgid "rubrics_folder_title"
 msgstr ""
 
@@ -1102,6 +1114,9 @@ msgid "simple-map_title"
 msgstr ""
 
 msgid "sort_by"
+msgstr ""
+
+msgid "specificfeatures_folder_title"
 msgstr ""
 
 #. Default: "SSC"
@@ -1171,7 +1186,13 @@ msgstr ""
 msgid "topics"
 msgstr ""
 
+msgid "topics_folder_title"
+msgstr ""
+
 msgid "townshipfoldercategories_folder_title"
+msgstr ""
+
+msgid "townshipspecificfeatures_folder_title"
 msgstr ""
 
 #. Default: "UnoEnabledPython"

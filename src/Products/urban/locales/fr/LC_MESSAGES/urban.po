@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2013-03-06 13:43+0000\n"
+"POT-Creation-Date: 2013-03-08 13:24+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -287,7 +287,7 @@ msgstr "Ajouter un événement"
 msgid "add_every_advices_descr"
 msgstr "Ceci ajoutera automatiquement les avis suivants :"
 
-msgid "additonal_layers_folder_title"
+msgid "additonallayers_folder_title"
 msgstr "Configuration des couches supplémentaires"
 
 msgid "address_fieldset_legend"
@@ -511,6 +511,9 @@ msgstr "Paramètres des déclarations environnementales"
 msgid "envclassthrees"
 msgstr "Déclarations environnementales"
 
+msgid "equipmenttypes_folder_title"
+msgstr "Equipements de la voirie"
+
 msgid "error_bis"
 msgstr "Bis doit être un nombre compris entre 0 et 100 (ex: 42)"
 
@@ -559,7 +562,7 @@ msgstr "Documents liés à cet événement"
 msgid "exploitationconditions_folder_title"
 msgstr "Conditions d'exploitation"
 
-msgid "external_decisions_folder_title"
+msgid "externaldecisions_folder_title"
 msgstr "Décision des avis externes"
 
 #. Default: "Far prevention area"
@@ -603,7 +606,7 @@ msgstr "Avis du dossier"
 msgid "folder_events"
 msgstr "Evénements du dossier"
 
-msgid "folderbuildworktype_folder_title"
+msgid "folderbuildworktypes_folder_title"
 msgstr "Nature des demandes"
 
 msgid "foldercategories_folder_title"
@@ -832,6 +835,12 @@ msgstr "Décision"
 
 msgid "location_fdrequirement_opinion"
 msgstr "Avis"
+
+msgid "locationspecificfeatures_folder_title"
+msgstr "Particularités du bien (urbanisme)"
+
+msgid "lotusages_folder_title"
+msgstr "Destination"
 
 msgid "manage_architects"
 msgstr "Gérer les architectes"
@@ -1075,6 +1084,9 @@ msgstr "Oui, modification"
 msgid "road_adaptation_no"
 msgstr "Non"
 
+msgid "roadspecificfeatures_folder_title"
+msgstr "Particularités du bien (voirie)"
+
 msgid "rubrics_folder_title"
 msgstr "Rubriques"
 
@@ -1104,6 +1116,9 @@ msgstr "Carte simple"
 
 msgid "sort_by"
 msgstr "Trier par"
+
+msgid "specificfeatures_folder_title"
+msgstr "Particularités du bien"
 
 #. Default: "SSC"
 #: setuphandlers.py
@@ -1172,8 +1187,14 @@ msgstr "Liste des modèles définis dans la configuration"
 msgid "topics"
 msgstr "Recherches"
 
+msgid "topics_folder_title"
+msgstr "Recherches"
+
 msgid "townshipfoldercategories_folder_title"
 msgstr "Catégories de dossiers communales"
+
+msgid "townshipspecificfeatures_folder_title"
+msgstr "Particularités du bien communales"
 
 #. Default: "UnoEnabledPython"
 #: UrbanTool.py
