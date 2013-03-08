@@ -1,8 +1,7 @@
 #-*- coding: utf-8 -*-
 import unittest
-from urllib2 import HTTPError
-from plone.app.testing import login
-from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
+from plone.app.testing import login, quickInstallProduct
+from Products.urban.testing import URBAN_TESTS_LICENCES
 
 from plone.testing.z2 import Browser
 from Products.CMFCore.utils import getToolByName
@@ -11,17 +10,21 @@ from testfixtures import compare, StringComparison as S
 
 class TestTabsConfigView(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_FUNCTIONAL
+    layer = URBAN_TESTS_LICENCES
 
     def setUp(self):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
         self.catalog = getToolByName(self.portal, 'portal_catalog')
-        self.statsview = self.urban.restrictedTraverse('urbanstatsview')
+        self.buildlicence = self.urban.buildlicences.objectValues()[0]
+        quickInstallProduct(self.portal, 'Products.DataGridField')
+        quickInstallProduct(self.portal, 'Products.ATReferenceBrowserWidget')
+        quickInstallProduct(self.portal, 'Products.MasterSelectWidget')
+        quickInstallProduct(self.portal, 'collective.datagridcolumns')
         login(self.portal, 'urbanmanager')
         self.browser = Browser(self.portal)
         self.browserLogin('urbanmanager')
-        self.browser.open("%s%s" % (self.urban.absolute_url(), "/urbanstatsview"))
+        self.browser.handleErrors = False
 
     def browserLogin(self, user):
         self.browser.open(self.portal.absolute_url() + "/login_form")
@@ -38,28 +41,27 @@ class TestTabsConfigView(unittest.TestCase):
             licences = getattr(self.urban, '%ss' % licence_type.lower()).objectValues()
             if licences:
                 licence = licences[0]
-                try:
-                    self.browser.open(licence.absolute_url())
-                except HTTPError:
-                    self.fail()
-
+                self.browser.open(licence.absolute_url())
 
     def testTabsReordering(self):
         """
          Put location tab on first postion in the buildlicence tabs config
          then check that this order is respected on some buildlicence view
         """
+        buildlicence = self.buildlicence
+        # first the tab order should be: description -> road -> location-> ...
+        self.browser.open(buildlicence.absolute_url())
+        compare(S(".*fieldsetlegend-urban_description.*fieldsetlegend-urban_location.*"), self.browser.contents.replace('\n', ''))
+        # reorder the tabs in the config : location -> road -> description -> ...
         config = self.portal.portal_urban.buildlicence
         order = config.getTabsConfig()
         new_tab_order = [order[2]] + list(order[:2]) + list(order[3:])
         field = config.getField('tabsConfig')
         field.allow_delete = True
         config.setTabsConfig(new_tab_order)
+        #import ipdb; ipdb.set_trace()
         config.reindexObject()
         field.allow_delete = False
-        buildlicence = self.urban.buildlicences.objectValues()[0]
-        try:
-            self.browser.open(buildlicence.absolute_url())
-        except HTTPError:
-            self.fail()
+        # the order should change on the licence display
+        self.browser.open(buildlicence.absolute_url())
         compare(S(".*fieldsetlegend-urban_location.*fieldsetlegend-urban_description.*"), self.browser.contents.replace('\n', ''))

@@ -138,4 +138,26 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IProrogationEvent',
                     },
                    ),
+                   'parceloutlicence':
+                   (
+                    {
+                    'id': "config-opinion-request",
+                    'title': "*** Demande d'avis CONFIG ***",
+                    'activatedFields': [],
+                    'TALCondition': "python: False",
+                    'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+                    },
+                   ),
+                   'urbancertificatetwo':
+                   (
+                    {
+                    'id': "config-opinion-request",
+                    'title': "*** Demande d'avis CONFIG ***",
+                    'activatedFields': [],
+                    'TALCondition': "python: False",
+                    'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+                    },
+                   ),
                   }
