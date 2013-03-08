@@ -24,7 +24,6 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.Archetypes.utils import DisplayList
 ##/code-section module-header
 
@@ -33,7 +32,7 @@ schema = Schema((
     StringField(
         name='divisionCode',
         widget=StringField._properties['widget'](
-            visible={'edit':'hidden', 'view':'visible'},
+            visible={'edit': 'hidden', 'view': 'visible'},
             label='Divisioncode',
             label_msgid='urban_label_divisionCode',
             i18n_domain='urban',
@@ -168,10 +167,10 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         bis = self.getBis()
         exposant = self.getExposant()
         puissance = self.getPuissance()
-        generatedTitle= str(division) +' '+ str(section) +' '+ str(radical) +' '+ str(bis) +' '+ str(exposant) + ' ' + str(puissance)
-        generatedTitle=generatedTitle.strip()
+        generatedTitle = str(division) + ' ' + str(section) + ' ' + str(radical) + ' ' + str(bis) + ' ' + str(exposant) + ' ' + str(puissance)
+        generatedTitle = generatedTitle.strip()
         if self.getPartie():
-            generatedTitle=generatedTitle+' (partie)'
+            generatedTitle = generatedTitle + ' (partie)'
         self.setTitle(generatedTitle)
         self.reindexObject()
 
