@@ -24,6 +24,12 @@
   <include package="Products.CMFPlacefulWorkflow"/>
   <include package="collective.js.jqueryui"/>
 
+
+  <permission
+    id="urban.viewurbanmap"
+    title="Products.urban: ViewUrbanMap"
+    />
+    
   <include package=".events" />
   <include package=".browser" />
   <include package=".migration" />

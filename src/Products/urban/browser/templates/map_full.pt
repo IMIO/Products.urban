@@ -1,9 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
       i18n:domain="urban"
-      tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost;
-                  is_urban_user view/isUrbanUser"
-      >
+      tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
 
 <head>
     <metal:listing use-macro="here/@@map-macros/urbanMapCSS" />
@@ -49,12 +47,6 @@
         </style>
 </head>
 <body >
-
-<tal:unauthorized condition="python: not is_urban_user">
-You have to be logged and authenticated to view this page
-</tal:unauthorized>
-
-<tal:authorized condition="python: is_urban_user">
     <div id="loading-mask" style=""></div>
 	<div id="loading">
 	    <div class="loading-indicator">
@@ -70,7 +62,5 @@ You have to be logged and authenticated to view this page
   	   <metal:listing use-macro="here/@@map-macros/urbanMapScriptBase" />
   	   <metal:listing use-macro="here/@@map-macros/urbanFullMapScript" />
        <div id="urbanmapctn" style="width:100%; height:100%"></div>
-
-</tal:authorized>
 </body>
 </html>
