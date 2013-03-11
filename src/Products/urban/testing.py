@@ -26,7 +26,7 @@ URBAN_TESTS_PROFILE_FUNCTIONAL = FunctionalTesting(
     bases=(URBAN_TESTS_PROFILE_DEFAULT,), name="URBAN_TESTS_PROFILE_FUNCTIONAL")
 
 
-class UrbanTestLayer(IntegrationTesting):
+class UrbanLicencesLayer(IntegrationTesting):
     """
     Instanciate licences
 
@@ -37,5 +37,20 @@ class UrbanTestLayer(IntegrationTesting):
         with helpers.ploneSite() as portal:
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
 
-URBAN_TESTS_LICENCES = UrbanTestLayer(
+URBAN_TESTS_LICENCES = UrbanLicencesLayer(
     bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_LICENCES")
+
+
+class UrbanImportsLayer(IntegrationTesting):
+    """
+    Instanciate licences
+
+    Must collaborate with a layer that installs Plone and Urban
+    Useful for performances: Plone site is instanciated only once
+    """
+    def setUp(self):
+        with helpers.ploneSite() as portal:
+            helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
+
+URBAN_IMPORTS = UrbanImportsLayer(
+    bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_IMPORTS")

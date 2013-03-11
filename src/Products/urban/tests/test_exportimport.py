@@ -6,16 +6,15 @@ from plone.app.testing import login
 from Products.CMFPlone.utils import base_hasattr
 from Products.CMFCore.utils import getToolByName
 from Products.urban.Extensions.imports import createStreet
-from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
+from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION, URBAN_IMPORTS
 
 from StringIO import StringIO
 import tarfile
-import os
 
 
 class TestUrbanToolExportImport(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_INTEGRATION
+    layer = URBAN_IMPORTS
 
     def setUp(self):
         self.portal = self.layer['portal']
@@ -82,30 +81,11 @@ class TestUrbanToolExportImport(unittest.TestCase):
         self.failUnless(len(xml_lines) is len(expected_xml))
         self.failUnless(all([expected_xml[i] == line for i, line in enumerate(xml_lines)]))
 
-    def testImport(self):
+    def testImports(self):
         """
          Verify correctness of the generic setup import of urban tool attributes
         """
-        urban_xml_content = [
-            '<?xml version="1.0"?>\n',
-            '<object>\n',
-            ' <isDecentralized value="True"/>\n',
-            ' <generateSingletonDocuments value="False"/>\n',
-            ' <openOfficePort value="9999"/>\n',
-            ' <NISNum value="new NISNum"/>\n',
-            ' <cityName value="new cityName"/>\n',
-            ' <sqlHost value="new sqlHost"/>\n',
-            ' <sqlName value="new sqlName"/>\n',
-            ' <sqlUser value="new sqlUser"/>\n',
-            ' <sqlPassword value="new sqlPassword"/>\n',
-            ' <webServerHost value="new webServerHost"/>\n',
-            ' <pylonsHost value="new pylonsHost"/>\n',
-            ' <mapExtent value="new mapExtent"/>\n',
-            ' <unoEnabledPython value="new unoEnabledPython"/>\n',
-            ' <editionOutputFormat value="new editionOutputFormat"/>\n',
-            '</object>\n'
-        ]
-        self.portal_setup.runImportStepFromProfile('profile-Products.urban:default', 'urbantool')
+        self.failUnless(self.portal_urban.getNISNum() == 'old NISNum')
 
 
 class TestStreetImports(unittest.TestCase):
