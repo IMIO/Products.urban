@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<object>
+ <isDecentralized value="False"/>
+ <generateSingletonDocuments value="True"/>
+ <openOfficePort value="2002"/>
+ <NISNum value="old NISNum"/>
+ <cityName value="old cityName"/>
+ <sqlHost value="old sqlHost"/>
+ <sqlName value="old sqlName"/>
+ <sqlUser value="old sqlUser"/>
+ <sqlPassword value="old sqlPassword"/>
+ <webServerHost value="old webServerHost"/>
+ <pylonsHost value="old pylonsHost"/>
+ <mapExtent value="old mapExtent"/>
+ <unoEnabledPython value="old unoEnabledPython"/>
+ <editionOutputFormat value="old editionOutputFormat"/>
+</object>

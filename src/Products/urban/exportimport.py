@@ -2,6 +2,7 @@
 from Products.GenericSetup.utils import exportObjects
 from Products.GenericSetup.utils import importObjects
 from Products.GenericSetup.utils import XMLAdapterBase
+from Products.GenericSetup.interfaces import IFilesystemExporter
 
 from Products.urban.interfaces import IUrbanTool
 
@@ -89,6 +90,13 @@ class UrbanToolXMLAdapter(XMLAdapterBase):
             node.appendChild(child)
 
         return node
+
+
+def exportUrbanStructure(context):
+    site = context.getSite()
+    tool = getToolByName(site, 'portal_urban')
+
+    IFilesystemExporter(tool).export(context, 'portal_urban_structure', True)
 
 
 def importUrbanTool(context):

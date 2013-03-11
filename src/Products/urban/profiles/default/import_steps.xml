@@ -32,13 +32,6 @@
  </import-step>
 
 <!-- ##code-section ADDITIONALSTEPS -->
-
- <import-step id="urbantool" version="20070615-01"
-           handler="Products.urban.exportimport.importUrbanTool"
-           title="Urban Tool">
-  Import Urban settings.
- </import-step>
-
 <!-- ##/code-section ADDITIONALSTEPS -->
 
 </import-steps>
