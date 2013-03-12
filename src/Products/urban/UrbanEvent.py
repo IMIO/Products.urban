@@ -521,6 +521,16 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             res = getattr(tool.decisions, res)
         return res
 
+    security.declarePublic('getRenderedText')
+    def getRenderedText(self, fieldname=''):
+        """
+          Returns the decision value or the UrbanVocabularyTerm if theObject=True
+        """
+        tool = getToolByName(self, 'portal_urban')
+        field = self.getField(fieldname)
+        accessorname = field.accessor
+        text = getattr(self, accessorname)()
+        return tool.renderText(text=text, context=self)
 
 
 registerType(UrbanEvent, PROJECTNAME)
