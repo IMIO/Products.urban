@@ -29,13 +29,14 @@ from zope.i18n import translate
 
 schema = Schema((
 
-    StringField(
+    LinesField(
         name='relatedFields',
         widget=InAndOutWidget(
             label='Relatedfields',
             label_msgid='urban_label_relatedFields',
             i18n_domain='urban',
         ),
+        multiValued=1,
         vocabulary='listSpecificfeatureRelatedFields',
     ),
 
@@ -76,14 +77,14 @@ class SpecificFeatureTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin)
         """
          return a DisplayList of fields wich are marked as optional
         """
-        return self.getRelatedFields()[:-1]
+        return self.getRelatedFields()
 
     security.declarePublic('listSpecificfeatureRelatedFields')
     def listSpecificfeatureRelatedFields(self):
         """
          return a DisplayList of fields wich are marked as optional
         """
-        licence_type = self.aq_parent.licence_portal_type
+        licence_type = self.aq_parent.getLicencePortalType()
         licence_schema = getLicenceSchema(licence_type)
         available_fieldtypes = [
             'Products.Archetypes.Field.StringField',
@@ -91,7 +92,6 @@ class SpecificFeatureTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin)
             'Products.Archetypes.Field.BooleanField',
         ]
         available_fields = [field for field in licence_schema.fields() if field.getType() in available_fieldtypes and field.schemata.startswith('urban')]
-        #import ipdb; ipdb.set_trace()
         vocabulary_fields = [(field.getName(), translate(field.widget.label_msgid, 'urban', context=self.REQUEST)) for field in available_fields]
         #return a vocabulary containing the names of all the text fields of the schema
         return DisplayList(sorted(vocabulary_fields, key=lambda name: name[1]))

@@ -533,6 +533,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         return tool.renderText(text=text, context=self)
 
 
+
 registerType(UrbanEvent, PROJECTNAME)
 # end of class UrbanEvent
 

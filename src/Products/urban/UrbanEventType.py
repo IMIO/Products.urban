@@ -69,13 +69,14 @@ schema = Schema((
         ),
         required=True,
     ),
-    StringField(
+    LinesField(
         name='activatedFields',
         widget=InAndOutWidget(
             label='Activatedfields',
             label_msgid='urban_label_activatedFields',
             i18n_domain='urban',
         ),
+        multiValued=1,
         vocabulary='listOptionalFields',
     ),
     DataGridField(
@@ -234,8 +235,9 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
     security.declarePublic('listActivatedDates')
     def listActivatedDates(self):
         from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
+        activated_fields = type(self.getActivatedFields()) == str and [self.getActivatedFields()] or self.getActivatedFields()
         activated_date_fields = [(fieldname, translate("urban_label_" + fieldname, 'urban', default=fieldname, context=self.REQUEST))
-                                 for fieldname in self.getActivatedFields()
+                                 for fieldname in activated_fields
                                  if fieldname and UrbanEventInquiry_schema.get(fieldname).getType()=='Products.Archetypes.Field.DateTimeField']
         return DisplayList([('eventDate', self.getEventDateLabel().decode('utf-8'))] + activated_date_fields)
 
