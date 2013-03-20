@@ -97,7 +97,6 @@ class FolderManager(BaseContent, Contact, BrowserDefaultMixin):
     schema = FolderManager_schema
 
     ##code-section class-header #fill in your manual code here
-    del schema['title']
     archetype_name = 'FolderManager'
     ##/code-section class-header
 
