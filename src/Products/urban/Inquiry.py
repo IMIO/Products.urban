@@ -23,7 +23,6 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from profilehooks import profile
 from plone.memoize.instance import memoize
 from zope.i18n import translate
 from OFS.ObjectManager import BeforeDeleteException
@@ -249,7 +248,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
             #linkedInquiry may come from a UrbanEventInquiry or an UrbanEventOpinionRequest
             for bref in brefs:
                 if bref.portal_type == 'UrbanEventOpinionRequest':
-                    if bref.getLinkedOrganisationTermId() == organisation  and bref.getLinkedInquiry() == self:
+                    if bref.getLinkedOrganisationTermId() == organisation and bref.getLinkedInquiry() == self:
                         return bref
         return None
 
@@ -277,7 +276,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         """
         #we need to generate the title as the number of the inquiry is into it
         position = self._getSelfPosition()
-        return translate('inquiry_title_and_number', 'urban', mapping={'number': position+1}, context=self.REQUEST)
+        return translate('inquiry_title_and_number', 'urban', mapping={'number': position + 1}, context=self.REQUEST)
 
     def getLastInquiry(self):
         return self._getLastEvent(interfaces.IInquiryEvent)
@@ -333,7 +332,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         allOpinionsNoDup = {}
         for opinion in allOpinions:
             actor = opinion.getUrbaneventtypes().getId()
-            allOpinionsNoDup[actor]=opinion
+            allOpinionsNoDup[actor] = opinion
         return allOpinionsNoDup.values()
 
     def getAllOpinionRequests(self, organisation=""):
@@ -344,7 +343,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
                           'depth': 1},
                  'object_provides': IOpinionRequestEvent.__identifier__,
                  'sort_on': 'getObjPositionInParent',
-                 'id' : organisation.lower()}
+                 'id': organisation.lower()}
         return [brain.getObject() for brain in catalog(**query)]
 
     def getAllOpinionRequestsNoDup(self):
@@ -352,7 +351,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         allOpinionsNoDup = {}
         for opinion in allOpinions:
             actor = opinion.getUrbaneventtypes().getId()
-            allOpinionsNoDup[actor]=opinion
+            allOpinionsNoDup[actor] = opinion
         return allOpinionsNoDup.values()
 
     def getAllInquiries(self):
