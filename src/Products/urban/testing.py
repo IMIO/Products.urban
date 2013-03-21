@@ -43,14 +43,12 @@ URBAN_TESTS_LICENCES = UrbanLicencesLayer(
 
 class UrbanImportsLayer(IntegrationTesting):
     """
-    Instanciate licences
-
     Must collaborate with a layer that installs Plone and Urban
     Useful for performances: Plone site is instanciated only once
     """
     def setUp(self):
         with helpers.ploneSite() as portal:
-            helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
+            helpers.applyProfile(portal, 'Products.urban:tests-imports')
 
 URBAN_IMPORTS = UrbanImportsLayer(
     bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_IMPORTS")

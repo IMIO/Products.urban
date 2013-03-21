@@ -2,7 +2,6 @@
            xmlns:browser="http://namespaces.zope.org/browser"
            xmlns:five="http://namespaces.zope.org/five"
            xmlns:i18n="http://namespaces.zope.org/i18n"
-           xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
            i18n_domain="urban">
 
   <!-- ##code-section configure.zcml.header -->
@@ -113,34 +112,6 @@
   <adapter name="StreetsUID" factory=".indexes.genericlicence_streetsuid" />
   <adapter name="last_key_event" factory=".indexes.genericlicence_lastkeyevent" />
   <adapter name="folder_manager" factory=".indexes.genericlicence_foldermanager" />
-
-  <adapter
-      factory=".exportimport.UrbanToolXMLAdapter"
-      provides="Products.GenericSetup.interfaces.IBody"
-      for=".interfaces.IUrbanTool
-           Products.GenericSetup.interfaces.ISetupEnviron"
-      />
-
-  <genericsetup:exportStep
-      name="portal_urban"
-      title="Urban tool"
-      description="Export urban configuration"
-      handler=".exportimport.exportUrbanTool"
-      />
-
-  <genericsetup:importStep
-      name="portal_urban"
-      title="Urban tool"
-      description="Import urban configuration"
-      handler=".exportimport.importUrbanTool"
-      />
-
-  <genericsetup:exportStep
-      name="portal_urban_structure"
-      title="Urban tool subobjects"
-      description="Export urban subobjects configuration"
-      handler=".exportimport.exportUrbanStructure"
-      />
 
   <interface interface=".interfaces.IUrbanCertificateOne" />
   <interface interface=".interfaces.IUrbanCertificateTwo" />
