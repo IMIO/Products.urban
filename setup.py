@@ -49,6 +49,7 @@ setup(name='Products.urban',
           'communesplone.urban.schedule',
           'communesplone.iconified_document_actions',
           'Products.CMFPlacefulWorkflow',
+          'quintagroup.transmogrifier',
           'Products.ContentTypeValidator'],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',
