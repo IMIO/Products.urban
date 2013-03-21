@@ -1,91 +1,9 @@
 # -*- coding: utf-8 -*-
 import unittest2 as unittest
-from plone.app.testing import setRoles
-from plone.app.testing.interfaces import TEST_USER_ID
 from plone.app.testing import login
 from Products.CMFPlone.utils import base_hasattr
-from Products.CMFCore.utils import getToolByName
 from Products.urban.Extensions.imports import createStreet
-from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION, URBAN_IMPORTS
-
-from StringIO import StringIO
-import tarfile
-
-
-class TestUrbanToolExportImport(unittest.TestCase):
-
-    layer = URBAN_IMPORTS
-
-    def setUp(self):
-        self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        tool = getToolByName(self.portal, 'portal_urban')
-        tool_values = {
-            'isDecentralized': False,
-            'generateSingletonDocuments': True,
-            'openOfficePort': 2002,
-            'NISNum': '',
-            'cityName': '',
-            'sqlHost': '',
-            'sqlName': '',
-            'sqlUser': '',
-            'sqlPassword': '',
-            'webServerHost': '',
-            'pylonsHost': '',
-            'mapExtent': '',
-            'unoEnabledPython': '',
-            'editionOutputFormat': '',
-        }
-        #fill the tool attrributes with dummy values
-        for field_name, value in tool_values.iteritems():
-            field = tool.getField(field_name)
-            mutator = field.getMutator(tool)
-            if value is '':
-                value = 'old %s' % field_name
-            mutator(value)
-
-        self.portal_urban = tool
-        self.portal_setup = getToolByName(self.portal, 'portal_setup')
-
-    def testExport(self):
-        """
-         Verify correctness of the generic setup export of urban tool attributes
-        """
-        export = self.portal_setup.runExportStep('urbantool')
-        try:
-            tar_file = tarfile.open(mode='r', fileobj=StringIO(export['tarball']))
-            tar_file.extractall()
-            xml = open('portal_urban.xml', 'r')
-        except:
-            self.fail()
-        expected_xml = [
-            '<?xml version="1.0"?>\n',
-            '<object>\n',
-            ' <isDecentralized value="False"/>\n',
-            ' <generateSingletonDocuments value="True"/>\n',
-            ' <openOfficePort value="2002"/>\n',
-            ' <NISNum value="old NISNum"/>\n',
-            ' <cityName value="old cityName"/>\n',
-            ' <sqlHost value="old sqlHost"/>\n',
-            ' <sqlName value="old sqlName"/>\n',
-            ' <sqlUser value="old sqlUser"/>\n',
-            ' <sqlPassword value="old sqlPassword"/>\n',
-            ' <webServerHost value="old webServerHost"/>\n',
-            ' <pylonsHost value="old pylonsHost"/>\n',
-            ' <mapExtent value="old mapExtent"/>\n',
-            ' <unoEnabledPython value="old unoEnabledPython"/>\n',
-            ' <editionOutputFormat value="old editionOutputFormat"/>\n',
-            '</object>\n'
-        ]
-        xml_lines = xml.readlines()
-        self.failUnless(len(xml_lines) is len(expected_xml))
-        self.failUnless(all([expected_xml[i] == line for i, line in enumerate(xml_lines)]))
-
-    def testImports(self):
-        """
-         Verify correctness of the generic setup import of urban tool attributes
-        """
-        self.failUnless(self.portal_urban.getNISNum() == 'old NISNum')
+from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
 
 
 class TestStreetImports(unittest.TestCase):
