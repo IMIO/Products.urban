@@ -64,7 +64,8 @@ optional_fields = ['subdivisionDetails','missingParts','missingPartsDetails','fo
                    'folderCategoryTownship','protectedBuilding','protectedBuildingDetails', 'folderCategory',
                    'pash','pashDetails','catchmentArea', 'catchmentAreaDetails','equipmentAndRoadRequirements','technicalRemarks',
                    'pca','SSC','sscDetails','RCU','rcuDetails','floodingLevel','floodingLevelDetails','solicitRoadOpinionsTo',
-                   'areParcelsVerified','locationFloodingLevel', 'licenceSubject', 'referenceDGATLP', 'locationTechnicalRemarks']
+                   'areParcelsVerified','locationFloodingLevel', 'licenceSubject', 'referenceDGATLP', 'locationTechnicalRemarks',
+                   'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails']
 ##/code-section module-header
 
 schema = Schema((
@@ -179,32 +180,6 @@ schema = Schema((
         default_output_type='text/html',
         accessor="Description",
     ),
-    LinesField(
-        name='folderZone',
-        widget=MultiSelectionWidget(
-            size=10,
-            label='Folderzone',
-            label_msgid='urban_label_folderZone',
-            i18n_domain='urban',
-        ),
-        schemata='urban_location',
-        multiValued=True,
-        vocabulary=UrbanVocabulary('folderzones', inUrbanConfig=False),
-        default_method='getDefaultValue',
-    ),
-    TextField(
-        name='folderZoneDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
-            label='Folderzonedetails',
-            label_msgid='urban_label_folderZoneDetails',
-            i18n_domain='urban',
-        ),
-        default_content_type='text/plain',
-        default_method='getDefaultText',
-        schemata='urban_location',
-        default_output_type='text/html',
-    ),
     StringField(
         name='annoncedDelay',
         widget=SelectionWidget(
@@ -238,6 +213,32 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_description',
+    ),
+    LinesField(
+        name='roadMissingParts',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Roadmissingparts',
+            label_msgid='urban_label_roadMissingParts',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=True,
+        vocabulary=UrbanVocabulary('roadmissingparts'),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='roadMissingPartsDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Roadmissingpartsdetails',
+            label_msgid='urban_label_roadMissingPartsDetails',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        default_method='getDefaultText',
+        default_content_type='text/plain',
+        default_output_type='text/html',
     ),
     LinesField(
         name='roadType',
@@ -351,17 +352,6 @@ schema = Schema((
         schemata='urban_road',
         default_output_type='text/plain',
     ),
-    StringField(
-        name='locationFloodingLevel',
-        widget=SelectionWidget(
-            label='Locationfloodinglevel',
-            label_msgid='urban_label_locationFloodingLevel',
-            i18n_domain='urban',
-        ),
-        enforceVocabulary=True,
-        schemata='urban_location',
-        vocabulary='listFloodingLevels',
-    ),
     TextField(
         name='equipmentAndRoadRequirements',
         allowable_content_types=('text/html',),
@@ -387,6 +377,69 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_road',
         default_output_type='text/html',
+    ),
+    LinesField(
+        name='locationMissingParts',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Locationmissingparts',
+            label_msgid='urban_label_locationMissingParts',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=True,
+        vocabulary=UrbanVocabulary('locationmissingparts'),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='locationMissingPartsDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Locationmissingpartsdetails',
+            label_msgid='urban_label_locationMissingPartsDetails',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        default_method='getDefaultText',
+        default_content_type='text/plain',
+        default_output_type='text/html',
+    ),
+    LinesField(
+        name='folderZone',
+        widget=MultiSelectionWidget(
+            size=10,
+            label='Folderzone',
+            label_msgid='urban_label_folderZone',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=True,
+        vocabulary=UrbanVocabulary('folderzones', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='folderZoneDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Folderzonedetails',
+            label_msgid='urban_label_folderZoneDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/html',
+    ),
+    StringField(
+        name='locationFloodingLevel',
+        widget=SelectionWidget(
+            label='Locationfloodinglevel',
+            label_msgid='urban_label_locationFloodingLevel',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        schemata='urban_location',
+        vocabulary='listFloodingLevels',
     ),
     TextField(
         name='locationTechnicalRemarks',

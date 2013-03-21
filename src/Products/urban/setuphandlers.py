@@ -226,11 +226,12 @@ def createFolderDefaultValues(folder, objects_list, portal_type=''):
     """
     if not portal_type:
         portal_type = objects_list[0]
-    for obj in objects_list[1:]:
-        folder.invokeFactory(portal_type, **obj)
+    for obj in objects_list:
+        if type(obj) is dict:
+            folder.invokeFactory(portal_type, **obj)
 
 
-def createFolderWithDefaultValues(container, folder_id, site, default_objects=[], portal_type='Folder', content_portal_type=''):
+def createFolderWithDefaultValues(container, folder_id, site, default_objects=[], portal_type='Folder', content_portal_type='', licence_type=''):
     """
     """
     newFolderid = container.invokeFactory(portal_type, id=folder_id, title=_("%s_folder_title" % folder_id, 'urban', context=site.REQUEST))
@@ -239,6 +240,11 @@ def createFolderWithDefaultValues(container, folder_id, site, default_objects=[]
         if folder_id in default_objects:
             vocabulary_list = default_objects[folder_id]
             content_portal_type = vocabulary_list[0]
+            if licence_type:
+                if licence_type in vocabulary_list[1]:
+                    vocabulary_list = vocabulary_list[1][licence_type]
+                else:
+                    return
             setFolderAllowedTypes(newFolder, content_portal_type)
             createFolderDefaultValues(newFolder, vocabulary_list, content_portal_type)
     else:
@@ -266,7 +272,8 @@ def addUrbanConfigs(context):
         if not hasattr(aq_base(tool), licenceConfigId):
             configFolderid = tool.invokeFactory("LicenceConfig", id=licenceConfigId, title=_("%s_urbanconfig_title" % urban_type.lower(), 'urban', context=site.REQUEST))
             configFolder = getattr(tool, configFolderid)
-            configFolder.licence_portal_type = urban_type
+            # no mutator available because the field is defined with 'read only' property
+            configFolder.licencePortalType = urban_type
             configFolder.setUsedAttributes(configFolder.listUsedAttributes().keys())
             configFolder.reindexObject()
         else:
@@ -360,31 +367,14 @@ def addUrbanConfigs(context):
                 #now, we need to specify that the description's mimetype is 'text/html'
                 setHTMLContentType(newFolder, 'description')
 
-        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'EnvClassThree']:
-            if not hasattr(aq_base(configFolder), 'missingparts'):
-                #add "missingparts" folder
-                newFolderid = configFolder.invokeFactory("Folder", id="missingparts", title=_("missingparts_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                setFolderAllowedTypes(newFolder, 'UrbanVocabularyTerm')
-                if urban_type in ['BuildLicence', ]:
-                    #necessary documents for BuildLicences
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="form_demande", title=u"Formulaire de demande (annexe 20) en 2 exemplaires")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="plan_travaux", title=u"Plan des travaux en 4 exemplaires")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="attestation_archi", title=u"Attestation de l'architecte (annexe 21) en 2 exemplaires")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="attestation_ordre_archi", title=u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="photos", title=u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="notice_environnement", title=u"Notice d'évaluation préalable incidences environnement (annexe 1C) en 2 exemplaires")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="plan_secteur", title=u"Une copie du plan de secteur")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="isolation", title=u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="peb", title=u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires")
-                if urban_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', ]:
-                    #necessary documents for UrbanCertificates
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="form_demande", title=u"Formulaire de demande (formulaire 1A) en 3 exemplaires")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="extrait_cadastral", title=u"Extrait cadastral en 3 exemplaires")
-                if urban_type in ['EnvClassThree', ]:
-                    #necessary documents for environment licences
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="form_demande", title=u"Formulaire de demande en 4 exemplaires")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="plan", title=u"Plans")
+        if not hasattr(aq_base(configFolder), 'missingparts'):
+            createFolderWithDefaultValues(configFolder, 'missingparts', site, default_values, licence_type=urban_type)
+
+        if not hasattr(aq_base(configFolder), 'roadmissingparts'):
+            createFolderWithDefaultValues(configFolder, 'roadmissingparts', site, default_values, licence_type=urban_type)
+
+        if not hasattr(aq_base(configFolder), 'locationmissingparts'):
+            createFolderWithDefaultValues(configFolder, 'locationmissingparts', site, default_values, licence_type=urban_type)
 
         if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo', 'EnvClassThree']:
             if not hasattr(aq_base(configFolder), 'foldermakers'):

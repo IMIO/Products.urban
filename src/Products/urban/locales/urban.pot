@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-03-08 14:52+0000\n"
+"POT-Creation-Date: 2013-03-21 08:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1996,6 +1996,11 @@ msgstr ""
 msgid "urban_label_layers"
 msgstr ""
 
+#. Default: "Licenceportaltype"
+#: LicenceConfig.py
+msgid "urban_label_licencePortalType"
+msgstr ""
+
 #. Default: "Licencesubject"
 #: GenericLicence.py
 msgid "urban_label_licenceSubject"
@@ -2050,6 +2055,16 @@ msgstr ""
 #. Default: "Locationfloodinglevel"
 #: GenericLicence.py
 msgid "urban_label_locationFloodingLevel"
+msgstr ""
+
+#. Default: "Locationmissingparts"
+#: GenericLicence.py
+msgid "urban_label_locationMissingParts"
+msgstr ""
+
+#. Default: "Locationmissingpartsdetails"
+#: GenericLicence.py
+msgid "urban_label_locationMissingPartsDetails"
 msgstr ""
 
 #. Default: "Locationspecificfeatures"
@@ -2399,6 +2414,16 @@ msgstr ""
 #. Default: "Roadmiscdescription"
 #: BuildLicence.py
 msgid "urban_label_roadMiscDescription"
+msgstr ""
+
+#. Default: "Roadmissingparts"
+#: GenericLicence.py
+msgid "urban_label_roadMissingParts"
+msgstr ""
+
+#. Default: "Roadmissingpartsdetails"
+#: GenericLicence.py
+msgid "urban_label_roadMissingPartsDetails"
 msgstr ""
 
 #. Default: "Roadmodification"

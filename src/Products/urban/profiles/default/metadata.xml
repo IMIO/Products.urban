@@ -3,7 +3,6 @@
   <version>1.1.7</version>
   <!-- ##code-section METADATA -->
   <dependencies>
-     <dependency>profile-Products.urban:default</dependency>
     <dependency>profile-Products.DataGridField:default</dependency>
     <dependency>profile-collective.datagridcolumns:default</dependency>
     <dependency>profile-Products.MasterSelectWidget:default</dependency>

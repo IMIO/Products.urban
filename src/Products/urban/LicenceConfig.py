@@ -38,6 +38,15 @@ from Products.urban.utils import getLicenceSchema
 
 schema = Schema((
 
+    StringField(
+        name='licencePortalType',
+        widget=StringField._properties['widget'](
+            label='Licenceportaltype',
+            label_msgid='urban_label_licencePortalType',
+            i18n_domain='urban',
+        ),
+        mode='r',
+    ),
     LinesField(
         name='usedAttributes',
         widget=MultiSelectionWidget(
@@ -126,6 +135,7 @@ LicenceConfig_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+LicenceConfig_schema['licencePortalType'].widget.visible = False
 ##/code-section after-schema
 
 class LicenceConfig(BaseFolder, BrowserDefaultMixin):
@@ -141,7 +151,6 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
     schema = LicenceConfig_schema
 
     ##code-section class-header #fill in your manual code here
-    licence_portal_type = ''  #must be set on creation
     ##/code-section class-header
 
     # Methods
@@ -161,9 +170,9 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_investigation_and_advices':'(enq) ',
             'urban_description':'',
         }
-        if not getLicenceSchema(self.licence_portal_type):
+        if not getLicenceSchema(self.getLicencePortalType()):
             return DisplayList()
-        for field in getLicenceSchema(self.licence_portal_type).fields():
+        for field in getLicenceSchema(self.getLicencePortalType()).fields():
             if hasattr(field, 'optional'):
                 tab = field.schemata
                 if field.schemata in abr.keys():
@@ -212,18 +221,18 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
     security.declarePublic('getIconURL')
     def getIconURL(self):
         portal_types = getToolByName(self, 'portal_types')
-        if self.licence_portal_type and hasattr(portal_types, self.licence_portal_type):
-            icon = "%s.png" % self.licence_portal_type
+        if self.getLicencePortalType() and hasattr(portal_types, self.getLicencePortalType()):
+            icon = "%s.png" % self.getLicencePortalType()
         else:
             icon = "LicenceConfig.png"
-        portal_url = getToolByName( self, 'portal_url' )
+        portal_url = getToolByName(self, 'portal_url' )
         return portal_url() + '/' + icon
 
     security.declarePublic('listTextFields')
     def listTextFields(self):
         #we have to know from where the method has been called in order to know which text
         #fields to propose to be "default valued"
-        licence_type = self.licence_portal_type
+        licence_type = self.getLicencePortalType()
         licence_schema = getLicenceSchema(licence_type)
         abr = {
             'urban_peb': '(peb) ',

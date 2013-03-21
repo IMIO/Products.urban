@@ -646,7 +646,7 @@ default_values = {
     ],
 
     'folderbuildworktypes': [
-'UrbanVocabularyTerm',
+        'UrbanVocabularyTerm',
         {'id': "ncmu", 'title': u"Nouvelle construction - Maison unifamiliale", 'extraValue': 'N_UNI'},
         {'id': "ncia", 'title': u"Nouvelle construction - Immeuble appartements", 'extraValue': 'N_APPART'},
         {'id': "nca", 'title': u"Nouvelle construction - Autres", 'extraValue': 'N_AUT'},
@@ -663,14 +663,14 @@ default_values = {
     ],
 
     'inadmissibilityreasons': [
-'UrbanVocabularyTerm',
+        'UrbanVocabularyTerm',
         {'id': "missing_parts", 'title': u"Pièces/renseignements manquants"},
         {'id': "no_deposit_receipt", 'title': u"Le dossier n'a pas été déposé contre récipissé"},
         {'id': "no_recommanded_deposit", 'title': u"Le dossier n'a pas été envoyé par recommandé"},
     ],
 
     'applicationreasons': [
-'UrbanVocabularyTerm',
+        'UrbanVocabularyTerm',
         {'id': "new_business", 'title': u"Mise en activité d'un établissement nouveau"},
         {'id': "class_change", 'title': u"Maintien en activité d'un établissement qui vient d'être rangé en classe 3 suite à une modification de la liste des installations et activités classées"},
         {'id': "licence_expiration", 'title': u"Maintien en activité d’un établissement dont la durée de validité de la déclaration est arrivée à expiration"},
@@ -679,4 +679,90 @@ default_values = {
         {'id': "location_move", 'title': u"Déplacement de l’établissement"},
     ],
 
+    'missingparts': [
+        'UrbanVocabularyTerm',
+        {
+            'BuildLicence': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
+                {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
+                {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+                {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+                {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+                {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable inc'id'ences environnement (annexe 1C) en 2 exemplaires"},
+                {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
+                {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+                {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
+            ],
+            'UrbanCertificateOne': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
+                {'id': "extrait_cadastral", 'title': u"Extrait cadastral en 3 exemplaires"},
+            ],
+            'UrbanCertificateTwo': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
+                {'id': "extrait_cadastral", 'title': u"Extrait cadastral en 3 exemplaires"},
+            ],
+            'EnvClassThree': [
+                {'id': "form_demande", 'title': u"Formulaire de demande en 4 exemplaires"},
+                {'id': "plan", 'title': u"Plans"},
+            ],
+        },
+    ],
+
+    'roadmissingparts': [
+        'UrbanVocabularyTerm',
+        {
+            'BuildLicence': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
+                {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
+                {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+                {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+                {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+                {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable inc'id'ences environnement (annexe 1C) en 2 exemplaires"},
+                {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
+                {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+                {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
+            ],
+            'UrbanCertificateOne': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
+                {'id': "extrait_cadastral", 'title': u"Extrait cadastral en 3 exemplaires"},
+            ],
+            'UrbanCertificateTwo': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
+                {'id': "extrait_cadastral", 'title': u"Extrait cadastral en 3 exemplaires"},
+            ],
+            'EnvClassThree': [
+                {'id': "form_demande", 'title': u"Formulaire de demande en 4 exemplaires"},
+                {'id': "plan", 'title': u"Plans"},
+            ],
+        },
+    ],
+
+    'locationmissingparts': [
+        'UrbanVocabularyTerm',
+        {
+            'BuildLicence': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
+                {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
+                {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+                {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+                {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+                {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable inc'id'ences environnement (annexe 1C) en 2 exemplaires"},
+                {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
+                {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+                {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
+            ],
+            'UrbanCertificateOne': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
+                {'id': "extrait_cadastral", 'title': u"Extrait cadastral en 3 exemplaires"},
+            ],
+            'UrbanCertificateTwo': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
+                {'id': "extrait_cadastral", 'title': u"Extrait cadastral en 3 exemplaires"},
+            ],
+            'EnvClassThree': [
+                {'id': "form_demande", 'title': u"Formulaire de demande en 4 exemplaires"},
+                {'id': "plan", 'title': u"Plans"},
+            ],
+        },
+    ],
 }

@@ -28,6 +28,8 @@ def migrateToUrban117(context):
     migrateInquiryDefaultText(context)
     # specific feature vocabulary terms have their own type (SpecificFeatureTerm)
     migrateSpecificFeatureTerms(context)
+    # licence_portal_type is now an AT field on the LicenceConfig schema
+    migrateLicenceConfigPortalType(context)
 
     # finish with reinstalling urban and adding the templates
     logger.info("starting to reinstall urban...")
@@ -144,5 +146,25 @@ def migrateSpecificFeatureTerms(context):
         walker.__class__.additionalQuery = {}
     #enable linkintegrity checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
+
+    logger.info("migration step done!")
+
+
+def migrateLicenceConfigPortalType(context):
+    """
+     The field 'licence_portal_type' is now a real schema field rather than a normal class attribute
+    """
+    logger = logging.getLogger('urban: migrate SpecificFeatureTerm ->')
+    logger.info("starting migration step")
+
+    catalog = getToolByName(context, 'portal_catalog')
+    licenceconfigs = catalog(portal_type='LicenceConfig')
+
+    for licenceconfig in licenceconfigs:
+        if hasattr(licenceconfig, 'licence_portal_type'):
+            portal_type = licenceconfig.licence_portal_type
+            licenceconfig.licencePortalType = portal_type
+            delattr(licenceconfig, 'licence_portal_type')
+            logger.info("Migrated licence_portal_type attr from licence config %s" % licenceconfig)
 
     logger.info("migration step done!")

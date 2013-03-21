@@ -151,13 +151,68 @@ default_values = {
     ],
 
     'inadmissibilityreasons': [
-'UrbanVocabularyTerm',
+        'UrbanVocabularyTerm',
         {'id': "missing_parts", 'title': u"Pièces/renseignements manquants"},
     ],
 
     'applicationreasons': [
-'UrbanVocabularyTerm',
+        'UrbanVocabularyTerm',
         {'id': "new_business", 'title': u"Mise en activité d'un établissement nouveau"},
     ],
 
+    'missingparts': [
+        'UrbanVocabularyTerm',
+        {
+            'BuildLicence': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
+                {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
+                {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+            ],
+            'UrbanCertificateOne': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
+            ],
+            'UrbanCertificateTwo': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
+            ],
+            'EnvClassThree': [
+                {'id': "form_demande", 'title': u"Formulaire de demande en 4 exemplaires"},
+            ],
+        },
+    ],
+
+    'roadmissingparts': [
+        'UrbanVocabularyTerm',
+        {
+            'BuildLicence': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
+            ],
+            'UrbanCertificateOne': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
+            ],
+            'UrbanCertificateTwo': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
+            ],
+            'EnvClassThree': [
+                {'id': "form_demande", 'title': u"Formulaire de demande en 4 exemplaires"},
+            ],
+        },
+    ],
+
+    'locationmissingparts': [
+        'UrbanVocabularyTerm',
+        {
+            'BuildLicence': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
+            ],
+            'UrbanCertificateOne': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
+            ],
+            'UrbanCertificateTwo': [
+                {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
+            ],
+            'EnvClassThree': [
+                {'id': "form_demande", 'title': u"Formulaire de demande en 4 exemplaires"},
+            ],
+        },
+    ],
 }

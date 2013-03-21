@@ -140,6 +140,18 @@
 
 <div metal:define-macro="roadMacro" i18n:domain="urban">
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+ <tr tal:condition="python: 'roadMissingParts' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_roadMissingParts">Missing parts</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('roadMissingParts', mode='view')" /></td>
+ </tr>
+ <tr tal:condition="python: 'roadMissingPartsDetails' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_roadMissingPartsDetails">Missing parts details</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><tal:block replace="structure context/getRoadMissingPartsDetails" />
+    <span tal:condition="not: context/getRoadMissingPartsDetails" class="discreet" i18n:translate="content_none">None</span>
+  </td>
+ </tr>
  <tr tal:condition="python: 'roadType' in usedAttributes">
   <td valign="top" width="200"><b><span i18n:translate="urban_label_roadType">Road type</span>:</b></td>
   <td width="2%"></td>
@@ -235,6 +247,18 @@
 
 <div metal:define-macro="locationMacro" i18n:domain="urban">
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+ <tr tal:condition="python: 'locationMissingParts' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_locationMissingParts">Missing parts</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('locationMissingParts', mode='view')" /></td>
+ </tr>
+ <tr tal:condition="python: 'locationMissingPartsDetails' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_locationMissingPartsDetails">Missing parts details</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><tal:block replace="structure context/getLocationMissingPartsDetails" />
+    <span tal:condition="not: context/getLocationMissingPartsDetails" class="discreet" i18n:translate="content_none">None</span>
+  </td>
+ </tr>
  <tr tal:condition="python: 'folderZone' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_folderZone">Folder zone</span>:</b></td>
   <td width="2%"></td>
