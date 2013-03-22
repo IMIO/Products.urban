@@ -54,6 +54,14 @@
   />
 
   <browser:page
+     for="Products.ATContentTypes.interfaces.IATBTreeFolder"
+     name="urban-macros"
+     class=".urbanview.UrbanViewMacros"
+     template="templates/urbanmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="*"
      name="map"
      class=".mapview.MapView"
