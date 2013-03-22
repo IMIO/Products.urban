@@ -160,7 +160,8 @@ def migrateLicenceConfigPortalType(context):
     catalog = getToolByName(context, 'portal_catalog')
     licenceconfigs = catalog(portal_type='LicenceConfig')
 
-    for licenceconfig in licenceconfigs:
+    for brain in licenceconfigs:
+        licenceconfig = brain.getObject()
         if hasattr(licenceconfig, 'licence_portal_type'):
             portal_type = licenceconfig.licence_portal_type
             licenceconfig.licencePortalType = portal_type
