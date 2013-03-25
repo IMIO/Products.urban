@@ -60,7 +60,7 @@ def updateTemplate(context, container, template, new_content, position_after='',
     #if theres an existing template with the same id
     if old_template:
         #if not in the correct profile -> no changes
-        if profile_name != old_template.getProperty("profileName") != 'tests':
+        if profile_name != old_template.getProperty("profileName") != 'extra':
             status.append('no changes')
         #if in the correct profile but old template has been customised or has the same content than the new one -> no changes
         elif profile_name == old_template.getProperty("profileName"):

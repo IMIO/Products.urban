@@ -30,6 +30,9 @@ def migrateToUrban117(context):
     migrateSpecificFeatureTerms(context)
     # licence_portal_type is now an AT field on the LicenceConfig schema
     migrateLicenceConfigPortalType(context)
+    # document template are now in the profile 'extra', change the property on
+    # them so the template update is done correctly
+    migrateTemplateProfileProperty(context)
 
     # finish with reinstalling urban and adding the templates
     logger.info("starting to reinstall urban...")
@@ -167,5 +170,27 @@ def migrateLicenceConfigPortalType(context):
             licenceconfig.licencePortalType = portal_type
             delattr(licenceconfig, 'licence_portal_type')
             logger.info("Migrated licence_portal_type attr from licence config %s" % licenceconfig)
+
+    logger.info("migration step done!")
+
+
+def migrateTemplateProfileProperty(context):
+    """
+     The profile for default templates is now the profile 'extra'
+    """
+    urban_tool = getToolByName(context, 'portal_urban')
+    logger = logging.getLogger('urban: migrate SpecificFeatureTerm ->')
+    logger.info("starting migration step")
+
+    catalog = getToolByName(context, 'portal_catalog')
+
+    tool_path = '/'.join(urban_tool.getPhysicalPath())
+    templates = catalog(portal_type='UrbanDoc', path={'query': tool_path, 'depth': 4})
+
+    for brain in templates:
+        template = brain.getObject()
+        if template.getProperty('profileName', None) == 'tests':
+            template.manage_changeProperties({'profileName': 'extra'})
+            logger.info("Migrated profileName property of template %s" % template.id)
 
     logger.info("migration step done!")
