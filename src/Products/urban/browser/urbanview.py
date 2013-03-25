@@ -51,11 +51,11 @@ class UrbanView(BrowserView):
           Returns the available folder managers
         """
         context = aq_inner(self.context)
-        catalog = getToolByName(context, 'portal_catalog')
         urban_tool = getToolByName(context, 'portal_urban')
         currentfoldermanager = urban_tool.getCurrentFolderManager(initials=False)
         currentfoldermanager_uid = currentfoldermanager and currentfoldermanager.UID() or ''
-        return [(brain.UID, brain.Title.split('(')[0]) for brain in catalog(portal_type='FolderManager') if brain.UID != currentfoldermanager_uid]
+        foldermanagers = urban_tool.foldermanagers.objectValues()
+        return [(fm.UID(), fm.Title().split('(')[0]) for fm in foldermanagers if fm.UID() != currentfoldermanager_uid]
 
     def amIFolderManager(self):
         """
