@@ -180,7 +180,7 @@ def migrateTemplateProfileProperty(context):
      The profile for default templates is now the profile 'extra'
     """
     urban_tool = getToolByName(context, 'portal_urban')
-    logger = logging.getLogger('urban: migrate SpecificFeatureTerm ->')
+    logger = logging.getLogger('urban: migrate templates profile property->')
     logger.info("starting migration step")
 
     catalog = getToolByName(context, 'portal_catalog')
@@ -204,7 +204,7 @@ def migrateContactOrder(context):
      This step sort these contacts by alphabetical orders.
     """
     urban_tool = getToolByName(context, 'portal_urban')
-    logger = logging.getLogger('urban: migrate SpecificFeatureTerm ->')
+    logger = logging.getLogger('urban: migrate Contact order->')
     logger.info("starting migration step")
 
     catalog = getToolByName(context, 'portal_catalog')
@@ -223,7 +223,7 @@ def migrateContactOrder(context):
             name = contact.getName1() + contact.getName2()
             for j in range(i):
                 other_name = contacts[j].getName1() + contacts[j].getName2()
-                if name < other_name:
+                if name.lower() < other_name.lower():
                     contacts.insert(j, contacts.pop(i))
                     logger.info("Reordering contact %s in folder %s" % (contact.id, container.id))
                     break
