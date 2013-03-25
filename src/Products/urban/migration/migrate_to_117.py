@@ -33,6 +33,8 @@ def migrateToUrban117(context):
     # document template are now in the profile 'extra', change the property on
     # them so the template update is done correctly
     migrateTemplateProfileProperty(context)
+    #sort contacts by alphabetical order
+    migrateContactOrder(context)
 
     # finish with reinstalling urban and adding the templates
     logger.info("starting to reinstall urban...")
@@ -191,5 +193,42 @@ def migrateTemplateProfileProperty(context):
         if template.getProperty('profileName', None) == 'tests':
             template.manage_changeProperties({'profileName': 'extra'})
             logger.info("Migrated profileName property of template %s" % template.id)
+
+    logger.info("migration step done!")
+
+
+def migrateContactOrder(context):
+    """
+     Contacts (notaries, architects, geometricians, foldermanagers) are now sorted
+     by alphabetical order when created and modified.
+     This step sort these contacts by alphabetical orders.
+    """
+    urban_tool = getToolByName(context, 'portal_urban')
+    logger = logging.getLogger('urban: migrate SpecificFeatureTerm ->')
+    logger.info("starting migration step")
+
+    catalog = getToolByName(context, 'portal_catalog')
+    to_migrate = [
+        'urban/notaries',
+        'urban/architects',
+        'urban/geometricians',
+        'portal_urban/foldermanagers',
+    ]
+    for location in to_migrate:
+        path = '%s/%s' % ('/'.join(urban_tool.getPhysicalPath()[:-1]), location)
+        container = catalog(path={'query': path, 'depth': 0})[0].getObject()
+        contact_brains = catalog(path={'query': path, 'depth': 1})
+        contacts = [brain.getObject() for brain in contact_brains]
+        for i, contact in enumerate(contacts):
+            name = contact.getName1() + contact.getName2()
+            for j in range(i):
+                other_name = contacts[j].getName1() + contacts[j].getName2()
+                if name < other_name:
+                    contacts.insert(j, contacts.pop(i))
+                    logger.info("Reordering contact %s in folder %s" % (contact.id, container.id))
+                    break
+
+        for i, contact in enumerate(contacts):
+            container.moveObjectToPosition(contact.getId(), i)
 
     logger.info("migration step done!")
