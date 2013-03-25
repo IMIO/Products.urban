@@ -13,10 +13,24 @@ def setInterface(contact, event):
 
 
 def updateLicenceTitle(contact, event):
-        #only update parent's title if an applicant or a proprietary is added
-        if not contact.portal_type in ['Applicant', 'Proprietary', ]:
+    #only update parent's title if an applicant or a proprietary is added
+    if not contact.portal_type in ['Applicant', 'Proprietary', ]:
+        return
+    parent = contact.aq_inner.aq_parent
+    if parent.portal_type in URBAN_TYPES:
+        event = ObjectModifiedEvent(parent)
+        notify(event)
+
+
+def positionByAlphabeticalOrder(contact, event):
+    if not contact.portal_type in ['Notary', 'Architect', 'Geometrician', 'FolderManager']:
+        return
+    container = contact.aq_inner.aq_parent
+    name = contact.getName1() + contact.getName2()
+    for other_contact in container.objectValues():
+        other_name = other_contact.getName1() + other_contact.getName2()
+        if name < other_name:
+            new_position = container.getObjectPosition(other_contact.getId())
+            container.moveObjectToPosition(contact.getId(), new_position)
             return
-        parent = contact.aq_inner.aq_parent
-        if parent.portal_type in URBAN_TYPES:
-            event = ObjectModifiedEvent(parent)
-            notify(event)
+    container.moveObjectsToBottom(contact.getId())

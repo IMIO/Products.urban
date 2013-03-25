@@ -18,6 +18,9 @@
   <subscriber for="..interfaces.IContact
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".contactEvents.updateLicenceTitle" />
+  <subscriber for="..interfaces.IContact
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".contactEvents.positionByAlphabeticalOrder" />
   <subscriber for="..interfaces.IInquiry
                    Products.Archetypes.interfaces.IEditBegunEvent"
               handler=".inquiryEvents.setDefaultValuesEvent"/>
