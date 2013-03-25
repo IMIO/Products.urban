@@ -29,7 +29,7 @@ def positionByAlphabeticalOrder(contact, event):
     name = contact.getName1() + contact.getName2()
     for other_contact in container.objectValues():
         other_name = other_contact.getName1() + other_contact.getName2()
-        if name < other_name:
+        if name.lower() < other_name.lower():
             new_position = container.getObjectPosition(other_contact.getId())
             container.moveObjectToPosition(contact.getId(), new_position)
             return
