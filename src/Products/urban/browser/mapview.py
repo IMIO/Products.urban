@@ -18,6 +18,11 @@ class MapView(BrowserView):
         if not self.context.getApplicants():
             plone_utils.addPortalMessage(_('warning_add_an_applicant'), type="warning")
 
+    def isUsingTabbing(self):
+        context = aq_inner(self.context)
+        portal_urban = getToolByName(context, 'portal_urban')
+        return portal_urban.getUrbanConfig(context).getUseTabbingForDisplay()
+
     def getListCapaKey(self):
         """
            Return the list of capaKeys for each parcel
