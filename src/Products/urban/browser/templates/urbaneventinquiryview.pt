@@ -73,7 +73,7 @@
                            batch python: tool.queryCatalog(batch=True, specificSearch='searchLinkedDocuments', context=context, theObjects=False, batchlen=50);
                            showedCols python: ('Title',);
                            showActions python: True;">
-          <metal:listing use-macro="here/urban_macros/macros/listing" />
+          <metal:listing use-macro="context/@@listingmacro/listing" />
           </div>
         </fieldset>
 
@@ -89,7 +89,7 @@
                            batch python: tool.queryCatalog(batch=True, specificSearch='searchLinkedAnnexes', context=context, theObjects=False, batchlen=50);
                            showedCols python: ('Title', 'created', 'Creator', );
                            showActions python: True;">
-          <metal:listing use-macro="here/urban_macros/macros/listing" />
+          <metal:listing use-macro="context/@@listingmacro/listing" />
           </div>
          </fieldset>
         </td>
@@ -129,7 +129,7 @@
                    showedCols python: ('Title', );
                    colsLabels python: {'Title': 'claimant_data'};
                    showActions python: True;">
-  <metal:listing use-macro="here/urban_macros/macros/listing" />
+  <metal:listing use-macro="context/@@listingmacro/listing" />
   </div>
 </div>
 </dd>
@@ -165,7 +165,7 @@
                      batch python: Batch(recipients, 50, b_start);
                      showedCols python: ('name', 'adr1', 'street',);
                      showActions python: True;">
-     <metal:listing use-macro="here/urban_macros/macros/listing" />
+     <metal:listing use-macro="context/@@listingmacro/listing" />
     </div>
 </tal:recipients>
 <tal:block condition="python: context.REQUEST.get('doc_uid') != None">

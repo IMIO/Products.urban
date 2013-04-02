@@ -107,9 +107,9 @@
  <tbody tal:condition="brains">
          <div tal:define="tool python: context.portal_urban;
                           batch python: brains;
-                          showedCols python: ('Title', 'created', 'Creator', );
+                          showedCols python: ('Title', 'parcelInfosIndex', 'created', 'Creator', );
                           showActions python: True;">
-         <metal:listing use-macro="here/urban_macros/macros/listing" />
+         <metal:listing use-macro="context/@@listingmacro/listing" />
          </div>
  </tbody>
 </table>

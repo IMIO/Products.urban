@@ -54,7 +54,7 @@
     </tr>
     </thead>
     </table>
-    <div metal:use-macro="here/urban_macros/macros/listing" />
+    <div metal:use-macro="context/@@listingmacro/listing" />
 </tal:block>
 
 <tal:carto condition="recipients">

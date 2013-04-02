@@ -63,6 +63,14 @@
 
   <browser:page
      for="*"
+     name="listingmacro"
+     class=".listingmacro.ListingMacro"
+     template="templates/listingmacro.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
      name="map"
      class=".mapview.MapView"
      template="templates/map.pt"
