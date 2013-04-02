@@ -1,0 +1,154 @@
+<!-- This macro need to receive a topic -->
+<!--We can receive parameters here:
+boolean 'showActions' specify if we show the actions column
+list 'colsLabels' specify the labels to use in the column.  If nothing is received, we use the elements from showedCols.  This attribute is usefull to rename some labels
+list 'showedCols' specify a list of indexes we want to display if these indexes have been defined in the topic/customViewFields-->
+<div metal:define-macro="listing" i18n:domain="plone">
+<tal:topiccontents define="showActions showActions|nothing;
+                           colsLabels colsLabels|nothing;
+                           colsLabels python: colsLabels and colsLabels or {};
+                           showedCols showedCols|topic/getCustomViewFields;
+                           isALot isALot|nothing;
+                           isAParcel isAParcel|nothing;
+                           isAnEquipment isAnEquipment|nothing;">
+
+    <tal:listing condition="batch">
+    <a style='text-align: right' href="#"
+        tal:condition="nocall: here/asPDF|nothing"
+        tal:attributes="href string:${here_url}/asPDF/atct_topic_pdf_template/atct_topic_pdf"
+        i18n:translate="label_download_as_pdf"
+        i18n:domain="atcontenttypes">
+        Download PDF
+    </a>
+    <tal:custom>
+
+        <table class="listing"
+                summary="Content listing"
+                cellpadding="0" cellspacing="0" width="100%"
+                i18n:attributes="summary summary_content_listing;">
+                <thead i18n:domain="urban">
+                <tr>
+                    <tal:block repeat="field showedCols">
+                     <th i18n:domain="urban" tal:content="python: 'label_colname_' + (colsLabels.has_key(field) and colsLabels[field] or field)" i18n:translate=""/>
+                    </tal:block>
+                    <th tal:condition="isALot" i18n:domain="urban" i18n:translate="parcels">
+                      Parcels
+                    </th>
+                    <th tal:condition="isAnEquipment" i18n:domain="urban" i18n:translate="launchdate">
+                      Launch date
+                    </th>
+                    <th tal:condition="isAParcel" i18n:domain="urban" i18n:translate="parcelLinkedLicences">
+                      Parcel linked licences
+                    </th>
+                    <th style="text-align: right" tal:condition="showActions" i18n:domain="urban" i18n:translate="actions">
+                      Actions
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tal:brain tal:repeat="obj batch">
+                <tr tal:define="oddrow repeat/obj/odd;"
+                    tal:attributes="class python: oddrow and 'even' or 'odd'">
+                    <tal:fields repeat="field showedCols"
+                                define="url obj/getURL|obj/absolute_url;
+                                        obj_type obj/portal_type;
+                                        obj_typeinfo python: here.portal_types.getTypeInfo(obj_type);
+                                        obj_icon python:plone_view.getIcon(obj);
+                                        obj_wf_state obj/review_state|python: context.portal_workflow.getInfoFor(obj, 'review_state', '');
+                                        member context/@@plone_portal_state/member;
+                                        ploneview nocall: context/@@plone;
+                                        normalizeString nocall:ploneview/normalizeString;
+                                        obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);
+                                        obj_contenttype_class python:'contenttype-' + obj_type.lower();
+                                        title_or_id obj/pretty_title_or_id">
+                    <tal:block condition="python: field in showedCols" define="value python: getattr(obj, field, None)">
+                        <td tal:condition="python: field not in ['Title', 'Creator', 'name', 'street', ]">
+                            <span tal:replace="structure python: here.formatCatalogMetadata(value, long_format=False)">Field value</span>
+                        </td>
+                        <tal:comment replace="nothing">special case for field 'name' where we display the 'title' that is the name reworked just above</tal:comment>
+                        <td tal:condition="python: field == 'name'">
+                         <span tal:attributes="class python: obj_wf_state_class + ' ' + obj_contenttype_class" tal:content="obj/getName">Name</span>
+                         <br /><span tal:content="obj/Title" class="discreet">Name reworked</span>
+                        </td>
+                        <tal:comment replace="nothing">special case for field 'street' where we display the 'adr2' that is the 'streetname' reworked just above</tal:comment>
+                        <td tal:condition="python: field == 'street'">
+                         <span tal:content="obj/getStreet">Street</span>
+                         <br /><span tal:content="obj/getAdr2" class="discreet">Street name reworked</span>
+                        </td>
+                        <td tal:condition="python: field == 'Creator'">
+                         <span tal:content="python: context.portal_membership.getMemberInfo(value) and context.portal_membership.getMemberInfo(value)['fullname'] or value">Creator fullname</span>
+                        </td>
+                        <td tal:condition="python: field == 'Title'"
+                            tal:attributes="class python: isAParcel and obj.getObject().getCSSClass() or ''">
+                                <span tal:define="global url python: ((obj.portal_type == 'File'  or obj.portal_type == 'UrbanDoc')
+                                                                           and obj.portal_properties.site_properties.ext_editor) and url + '/external_edit' or url" />
+                            <a href="#" tal:attributes="href url;
+                                                        class python: obj_wf_state_class + ' ' + obj_contenttype_class"
+                                        tal:content="title_or_id" />
+
+                            <tal:block condition="python: obj.portal_type in ['UrbanEvent', 'UrbanEventInquiry', 'UrbanEventOpinionRequest']">
+                             <tal:block define="object obj/getObject;
+                                                suffix python: member.has_permission('Modify portal content', object) and '/external_edit' or ''"
+                                                repeat="doc object/getDocuments">
+                              <br /><a href="#" class="discreet" style="margin-left:20px" tal:content="doc/Title" tal:attributes="href python: doc.absolute_url() + suffix">Document</a>
+                             </tal:block>
+                            </tal:block>
+                            <tal:comment replace="nothing">Show more values for applicants.  This could be the case for other contacts???</tal:comment>
+                            <tal:applicant condition="python: obj.meta_type == 'Contact'"
+                                           define="obj python: hasattr(obj, 'getObject') and obj.getObject() or obj">
+                             <div metal:use-macro="here/urban_macros/macros/displayAddress" />
+                             </tal:applicant>
+                             <span tal:define="last_key_event python: getattr(obj, 'last_key_event', None)">
+                               <span tal:condition="python: last_key_event and last_key_event != 'None'" >
+                                  <br/><span class="discreet" tal:content="last_key_event">Last key Event</span>
+                               </span>
+                             </span>
+                     </td>
+                     <td tal:condition="isAParcel"
+                         tal:define="parcel_history python: obj.portal_type == 'PortionOut' and obj.getObject().hasRelatedLicences();
+                                     parcel_id python: obj.id">
+                         <span tal:condition="parcel_history" id="urban-parcel-related-licences">
+                             <a class="link-overlay" href="@@parcelrecordsview"
+                                tal:attributes="href python: context.absolute_url() + '/@@parcelrecordsview?id=' + parcel_id" i18n:translate="">
+                               <img  src="linkedfolders.png" class="urban-linkedfolders-icon"/>
+                             </a>
+                         </span>
+                         <span tal:condition="not:parcel_history">-</span>
+                     </td>
+
+                    </tal:block>
+                    </tal:fields>
+                <td tal:condition="isALot">
+                    <tal:block repeat="parcel python: obj.getObject().getParcels()">
+                        <span tal:content="parcel/Title" /><br>
+                    </tal:block>
+                </td>
+                <td tal:condition="isAnEquipment">
+                    <span tal:content="python: obj.getLaunchDate()" />
+                </td>
+                <td tal:condition="showActions"
+                        tal:define="thisObject python: hasattr(obj, 'getObject') and obj.getObject() or obj;
+                                    needExternalEdition python: ((obj.portal_type == 'File' or obj.portal_type == 'UrbanDoc')
+                                                                      and obj.portal_properties.site_properties.ext_editor) and  True or False">
+                 <div metal:use-macro="here/urban_macros/macros/urbanActionsMacro" />
+                </td>
+                </tr>
+                </tal:brain>
+                </tbody>
+        </table>
+    </tal:custom>
+
+    </tal:listing>
+
+    <p class="discreet"
+        tal:condition="python: not batch"
+        i18n:domain="urban"
+        i18n:translate="urban_no_event_added">
+        There are currently no event for this element.
+    </p>
+
+    <!-- Navigation -->
+    <div metal:use-macro="here/batch_macros/macros/navigation" />
+
+   </tal:topiccontents>
+</div>
