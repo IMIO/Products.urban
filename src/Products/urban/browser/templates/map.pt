@@ -20,7 +20,7 @@
 <metal:main_macro define-macro="main">
     <metal:body define-macro="body_macro"
                 tal:define="applicants context/getApplicants|nothing;
-                            useTabbing python: context.portal_urban.getUseTabbing();
+                            useTabbing view/isUsingTabbing;
                             old_parcels view/getOldParcels" >
 
 <tal:block condition="parcels">
