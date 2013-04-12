@@ -21,6 +21,7 @@ class UrbanSearchView(BrowserView):
         super(BrowserView, self).__init__(context, request)
         self.context = context
         self.request = request
+
         self.tool = getToolByName(context, 'portal_urban')
         if not self.enoughSearchCriterias(self.request):
             plone_utils = getToolByName(context, 'plone_utils')

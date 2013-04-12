@@ -35,11 +35,8 @@
 
 <!-- Display the list of already added parcels -->
 <fieldset><legend i18n:translate="concerned_parcels">Concerned parcels</legend>
-<div style="width: 800px" tal:define="tool python: context.portal_urban;
-                 batch python: tool.queryCatalog(batch=True, specificSearch='searchPortionOuts', context=context, theObjects=False, batchlen=50);
-                 showActions python: True;
-                 showedCols python: ('Title',);">
- <metal:listing use-macro="context/@@listingmacro/listing" />
+ <div style="width: 800px">
+  <tal:listing content="structure view/renderParcelsListing" />
 </div>
 </fieldset>
 

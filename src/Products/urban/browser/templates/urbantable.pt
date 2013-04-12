@@ -4,6 +4,11 @@ boolean 'showActions' specify if we show the actions column
 list 'colsLabels' specify the labels to use in the column.  If nothing is received, we use the elements from showedCols.  This attribute is usefull to rename some labels
 list 'showedCols' specify a list of indexes we want to display if these indexes have been defined in the topic/customViewFields-->
 <div metal:define-macro="listing" i18n:domain="plone">
+<!--span tal:content="structure view/listing_macro/getListing"></span-->
+
+<!--                  OLD TEMPLATE                   -->
+
+
 <tal:topiccontents define="showActions showActions|nothing;
                            colsLabels colsLabels|nothing;
                            colsLabels python: colsLabels and colsLabels or {};
@@ -147,7 +152,6 @@ list 'showedCols' specify a list of indexes we want to display if these indexes 
         There are currently no event for this element.
     </p>
 
-    <!-- Navigation -->
     <div metal:use-macro="here/batch_macros/macros/navigation" />
 
    </tal:topiccontents>

@@ -121,12 +121,9 @@
          <legend i18n:domain="urban" i18n:translate="search-last-elements">Last elements</legend>
 
 
-         <div tal:define="sort python: urban_root and 'created' or 'sortable_title';
-                          batch python: view.getLicencesBatch(context=context, sort=sort);
-                          showedCols python: ('Title', 'created', 'Creator', );
-                          showActions python: True;">
+         <div>
           <metal:listing use-macro="context/@@urban-macros/filter_listing" />
-          <metal:listing use-macro="context/@@listingmacro/listing" />
+          <tal:listing content="structure view/renderLicenceListing" />
          </div>
          </fieldset>
 

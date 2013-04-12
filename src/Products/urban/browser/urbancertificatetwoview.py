@@ -8,7 +8,7 @@ class UrbanCertificateTwoView(UrbanCertificateBaseView):
       This manage the view of UrbanCertificateTwo
     """
     def __init__(self, context, request):
-        super(UrbanCertificateBaseView, self).__init__(context, request)
+        super(UrbanCertificateTwoView, self).__init__(context, request)
         self.context = context
         self.request = request
         plone_utils = getToolByName(context, 'plone_utils')

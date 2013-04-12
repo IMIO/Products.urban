@@ -24,20 +24,28 @@ table.filter_listing th {
 vertical-align: sub;
 }
 
+table.largetable{
+    width: 100%;
+}
+
+table.listing th.actionsheader{
+    text-align: right;
+}
+
 /* Color manual parcels in cyan and outdated parcels in orange*/
-table.listing tbody tr.odd td.outdated_parcel {
+table.listing tbody tr.odd span.outdated_parcel {
     background: none repeat scroll 0 0 orange;
 }
 
-table.listing tbody tr.even td.outdated_parcel {
+table.listing tbody tr.even span.outdated_parcel {
     background: none repeat scroll 0 0 orange;
 }
 
-table.listing tbody tr.odd td.manual_parcel {
+table.listing tbody tr.odd span.manual_parcel {
     background: none repeat scroll 0 0 cyan;
 }
 
-table.listing tbody tr.even td.manual_parcel {
+table.listing tbody tr.even span.manual_parcel {
     background: none repeat scroll 0 0 cyan;
 }
 

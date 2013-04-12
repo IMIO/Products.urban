@@ -2,6 +2,8 @@ from zope.i18n import translate
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from Products.urban.UrbanTool import DB_QUERY_ERROR
+from Products.urban.browser.urbantable import ParcelsTable
+
 
 class SearchParcelsView(BrowserView):
     """
@@ -18,11 +20,17 @@ class SearchParcelsView(BrowserView):
         #if the search was launched with no criteria, add a message
         if not self.searchHasCriteria(self.request):
             #we still not launched the search, everything is ok ;-)
-            if request.has_key('division') \
-               or request.has_key('location') \
-               or request.has_key('prcOwner'):
+            if 'division' in request or 'location' in request or 'prcOwner' in request:
                 plone_utils = getToolByName(context, 'plone_utils')
                 plone_utils.addPortalMessage(translate('warning_enter_search_criteria'), type="warning")
+
+    def renderParcelsListing(self):
+        parcels = self.context.getParcels()
+        if not parcels:
+            return ''
+        parcellisting = ParcelsTable(parcels, self.request)
+        parcellisting.update()
+        return parcellisting.render()
 
     def getDivisions(self):
         """
@@ -47,8 +55,7 @@ class SearchParcelsView(BrowserView):
         location = request.get('location', '')
         prcOwner = request.get('prcOwner', '')
         #the division is not enough
-        if (not division or (not section and not radical and not bis and not exposant and not puissance and not location and not prcOwner)) \
-           and not location and not prcOwner:
+        if (not division or (not section and not radical and not bis and not exposant and not puissance and not location and not prcOwner)) and not location and not prcOwner:
             return False
         else:
             return True

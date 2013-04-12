@@ -719,8 +719,8 @@ msgstr "Conditions intégrales"
 msgid "investigationarticles_folder_title"
 msgstr "Articles pour les enquêtes"
 
-msgid "label_colname_Creator"
-msgstr "Créateur"
+msgid "label_colname_foldermanager"
+msgstr "Agent traitant"
 
 msgid "label_colname_Title"
 msgstr "Titre"
@@ -742,6 +742,9 @@ msgstr "Coordonnées du réclamant"
 
 msgid "label_colname_created"
 msgstr "Créé le"
+
+msgid "label_colname_Creator"
+msgstr "Créateur"
 
 msgid "label_colname_eventDate"
 msgstr "Date clé"

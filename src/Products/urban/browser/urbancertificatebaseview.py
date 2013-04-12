@@ -6,7 +6,7 @@ class UrbanCertificateBaseView(LicenceView):
       This manage the view of UrbanCertificate and NotaryLetter Classes
     """
     def __init__(self, context, request):
-        super(LicenceView, self).__init__(context, request)
+        super(UrbanCertificateBaseView, self).__init__(context, request)
         self.context = context
         self.request = request
 

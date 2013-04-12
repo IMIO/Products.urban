@@ -3,12 +3,13 @@ from Products.urban.browser.licenceview import LicenceView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
+
 class BuildLicenceView(LicenceView):
     """
       This manage the view of BuildLicence
     """
     def __init__(self, context, request):
-        super(LicenceView, self).__init__(context, request)
+        super(BuildLicenceView, self).__init__(context, request)
         self.context = context
         self.request = request
         plone_utils = getToolByName(context, 'plone_utils')
@@ -18,7 +19,6 @@ class BuildLicenceView(LicenceView):
             plone_utils.addPortalMessage(_('warning_add_an_applicant'), type="warning")
         if self.hasOutdatedParcels():
             plone_utils.addPortalMessage(_('warning_outdated_parcel'), type="warning")
-
 
     def getInquiriesForDisplay(self):
         """
@@ -32,6 +32,7 @@ class BuildLicenceView(LicenceView):
             #defined on the licence even if no data have been entered
             inquiries.append(context)
         return inquiries
+
 
 class BuildLicenceMacros(LicenceView):
     """

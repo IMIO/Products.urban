@@ -54,8 +54,6 @@
              tal:attributes="selected python: previousvalue == 'sortable_title'">Title</option>
      <option value="created" i18n:translate='creation date'
              tal:attributes="selected python: previousvalue == 'created'">Creation date</option>
-     <option value="last_key_event" i18n:translate='last created event date'
-             tal:attributes="selected python: previousvalue == 'last_key_event'">Event creation date</option>
   </select>
         </th>
         <th>

@@ -175,13 +175,8 @@
   <p tal:condition="not: applicants" i18n:translate="warning_add_an_applicant">
    You must encode applicant(s)
   </p>
-  <div tal:define="Batch python:modules['Products.CMFPlone'].Batch;
-                   b_start request/b_start|python:0;
-                   batch python: Batch(applicants, 20, b_start);
-                   showedCols python: ('Title', );
-                   colsLabels python: {'Title': 'applicant_data'};
-                   showActions python: True;">
-   <metal:listing use-macro="context/@@listingmacro/listing" />
+  <div>
+   <tal:listing content="structure view/renderContactListing" />
   </div>
   <form tal:define="ctype python: context.portal_types.getTypeInfo('Applicant');
                     member context/@@plone_portal_state/member;"
@@ -200,13 +195,8 @@
   <p tal:condition="not: proprietaries" i18n:translate="warning_add_a_proprietary">
    You must encode proprietary(ies)
   </p>
-  <div tal:define="Batch python:modules['Products.CMFPlone'].Batch;
-                   b_start request/b_start|python:0;
-                   batch python: Batch(proprietaries, 20, b_start);
-                   showedCols python: ('Title', );
-                   colsLabels python: {'Title': 'proprietary_data'};
-                   showActions python: True;">
-   <metal:listing use-macro="context/@@listingmacro/listing" />
+  <div>
+   <tal:listing content="structure view/renderContactListing" />
   </div>
   <form tal:define="ctype python: context.portal_types.getTypeInfo('Proprietary');
                     member context/@@plone_portal_state/member;"
@@ -241,11 +231,8 @@
  </tr>
  <tr>
   <td>
-    <div tal:define="tool python: context.portal_urban;
-                     batch python: tool.queryCatalog(batch=True, specificSearch='searchUrbanEvents', context=context, theObjects=False, batchlen=50);
-                     showedCols python: ('Title', 'eventDate', );
-                     showActions python: True;">
-     <metal:listing use-macro="context/@@listingmacro/listing" />
+    <div>
+     <tal:listing content="structure view/renderEventsListing" />
     </div>
   </td>
  </tr>
@@ -318,21 +305,6 @@ can receive a "actionsToHide" list of actions not to display</tal:comment>
       <!-- Own management of the "delete" action -->
       <tal:delete_action condition="python: member.has_permission('Delete objects', thisObject)">
 
-        <!-- will be used for overlays
-
-
-    $('.urbanDelete').prepOverlay(
-        {
-            subtype: 'ajax',
-            filter: common_content_filter,
-            formselector: '#delete_confirmation',
-            noform: function(el) {return $.plonepopups.noformerrorshow(el, 'redirect');},
-            redirect: $.plonepopups.redirectbasehref,
-            closeselector: '[name=form.button.Cancel]',
-            width:'50%'
-        }
-        );   -->
-
         <a class="urbanDelete noPadding"
            tal:attributes="href python: thisObject.absolute_url() + '/delete_confirmation'">
             <!-- Icon -->
@@ -348,18 +320,12 @@ can receive a "actionsToHide" list of actions not to display</tal:comment>
  <table tal:define="member context/@@plone_portal_state/member;" cellspacing=0 cellpadding=0 width=100%>
   <tr>
    <td>
-    <div class="#" tal:define="parcels parcels|context/getParcels;
-                               upToDateParcel python:True"
+    <div class="#" tal:define="parcels parcels|context/getParcels"
                    tal:attributes="class python: test(parcels, 'field', 'field warning')">
     <div tal:condition="not: parcels" i18n:translate="warning_add_a_parcel">You must encode concerned parcel(s)
     </div>
-    <div tal:define="tool python: context.portal_urban;
-                     batch python: tool.queryCatalog(batch=True, specificSearch='searchPortionOuts', context=context, theObjects=False, batchlen=50);
-                     showActions python: True;
-                     isAParcel python: True;
-                     showedCols python: ('Title',);">
-     <br/>
-     <metal:listing use-macro="context/@@listingmacro/listing" />
+    <div>
+     <tal:listing content="structure view/renderParcelsListing" />
     </div>
     <table>
      <tr><td>

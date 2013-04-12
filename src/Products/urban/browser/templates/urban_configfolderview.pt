@@ -53,7 +53,8 @@
                          showedCols python: ('Title', );
                          colsLabels python: {'Title': view.getColumnLabel()};
                          showActions python: True;">
-         <metal:listing use-macro="context/@@listingmacro/listing" />
+         <tal:listing content="structure view/renderContactListing" />
+         <metal:listing use-macro="context/@@urbantable/listing" />
         </div>
 
     </metal:body>

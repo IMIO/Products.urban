@@ -1,43 +1,32 @@
 from Acquisition import aq_inner
 from Products.Five import BrowserView
-from Products.CMFPlone.PloneBatch import Batch
 from Products.CMFCore.utils import getToolByName
-from Products.urban.config import URBAN_TYPES
+from Products.urban.browser.urbantable import LicenceListingTable, AllLicencesListingTable
 
 
 class UrbanView(BrowserView):
     """
       This manage the view of urban
     """
+
+    def __init__(self, context, request):
+        super(BrowserView, self).__init__(context, request)
+        self.context = context
+        self.request = request
+
     def isUrbanManager(self):
         context = aq_inner(self.context)
         member = context.restrictedTraverse('@@plone_portal_state').member()
         return member.has_role('Manager') or member.has_role('Editor', getToolByName(context, 'portal_urban'))
 
-    def getLicencesBatch(self, context, sort='sortable_title', **kwargs):
-        catalog = getToolByName(context, 'portal_catalog')
-        request = aq_inner(self.request)
-        foldermanager = request.get('foldermanager', '')
-        state = request.get('review_state', '')
-        batchlen = int(request.get('batch_len', '') and request.get('batch_len') or self.listBatchSizes()[0])
-        sort = request.get('sort_by', sort) and request.get('sort_by') or sort
-        sort_order = request.get('reverse_order', 'descending')
-
-        queryString = {
-            'portal_type': URBAN_TYPES,
-            'path': '/'.join(context.getPhysicalPath()),
-            'sort_on': sort,
-            'sort_order': sort_order,
-        }
-        if foldermanager:
-            queryString['folder_manager'] = foldermanager
-        if state:
-            queryString['review_state'] = state
-        queryString.update(kwargs)
-        brains = catalog(queryString)
-        b_start = int(context.REQUEST.get('b_start', 0))
-        batch = Batch(brains, batchlen, b_start, orphan=0)
-        return batch
+    def renderLicenceListing(self):
+        context = aq_inner(self.context)
+        if context.getProperty('urbanConfigId'):
+            licencelisting = LicenceListingTable(self.context, self.request)
+        else:
+            licencelisting = AllLicencesListingTable(self.context, self.request)
+        licencelisting.update()
+        return '%s%s' % (licencelisting.render(), licencelisting.renderBatch())
 
     def getArgument(self, key_to_match):
         request = aq_inner(self.request)

@@ -220,14 +220,14 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
     security.declarePublic('hasRelatedLicences')
     def hasRelatedLicences(self, licence_type=''):
         catalog = getToolByName(self, 'portal_catalog')
-        licence = self.aq_parent
+        container = self.aq_parent
         parcel_infos = self.getIndexValue()
         brains = []
         if licence_type:
             brains = catalog(portal_type=licence_type, sort_limit=2, parcelInfosIndex=parcel_infos)
         else:
             brains = catalog(sort_limit=2, parcelInfosIndex=parcel_infos)
-        return len([brain for brain in brains if brain.id != licence.id]) > 0
+        return len([brain for brain in brains if brain.id != container.id]) > 0
 
     security.declarePublic('getRelatedLicences')
     def getRelatedLicences(self, licence_type=''):
