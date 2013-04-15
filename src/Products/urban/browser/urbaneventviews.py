@@ -4,7 +4,8 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.urban.Inquiry import Inquiry
 from Products.urban.browser.mapview import MapView
-from Products.urban.browser.urbantable import DocumentsTable, AnnexesTable
+from Products.urban.browser.urbantable import DocumentsTable, AnnexesTable, \
+        ClaimantsTable, RecipientsCadastreTable
 
 
 class UrbanEventView(BrowserView):
@@ -129,6 +130,21 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
     def getParcels(self):
         context = aq_inner(self.context)
         return context.getParcels()
+
+    def renderClaimantsListing(self):
+        if not self.context.getClaimants():
+            return ''
+        contactlisting = ClaimantsTable(self.context, self.request)
+        contactlisting.update()
+        return contactlisting.render()
+
+    def renderRecipientsCadastreListing(self):
+        recipients = self.context.getRecipients()
+        if not recipients:
+            return ''
+        contactlisting = RecipientsCadastreTable(recipients, self.request)
+        contactlisting.update()
+        return contactlisting.render()
 
     def getRecipients(self):
         context = aq_inner(self.context)

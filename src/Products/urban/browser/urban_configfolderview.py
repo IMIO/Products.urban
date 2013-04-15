@@ -4,7 +4,7 @@ from Products.Five import BrowserView
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PloneBatch import Batch
-from Products.urban.browser.urbantable import ContactTable
+from Products.urban.browser.urbantable import NotariesTable, ArchitectsTable, GeometriciansTable
 
 
 class UrbanConfigFolderView(BrowserView):
@@ -19,7 +19,13 @@ class UrbanConfigFolderView(BrowserView):
     def renderContactListing(self):
         if not self.context.objectValues():
             return ''
-        contactlisting = ContactTable(self.context, self.request)
+        contact_type = self.context.objectValues()[0].portal_type
+        tables = {
+            'Architect': ArchitectsTable,
+            'Notary': NotariesTable,
+            'Geometrician': GeometriciansTable,
+        }
+        contactlisting = tables[contact_type](self.context, self.request)
         contactlisting.update()
         return contactlisting.render()
 

@@ -48,13 +48,8 @@
 
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
-        <div tal:define="tool python: context.portal_urban;
-                         batch python: view.listObjects(batchlen=50);
-                         showedCols python: ('Title', );
-                         colsLabels python: {'Title': view.getColumnLabel()};
-                         showActions python: True;">
+       <div>
          <tal:listing content="structure view/renderContactListing" />
-         <metal:listing use-macro="context/@@urbantable/listing" />
         </div>
 
     </metal:body>

@@ -26,6 +26,37 @@ class IContactTable(IUrbanTable):
     """
 
 
+class INotariesTable(IUrbanTable):
+    """
+    Marker interface for a table displaying notaries
+    """
+
+
+class IGeometriciansTable(IUrbanTable):
+    """
+    Marker interface for a table displaying geometricians
+    """
+
+
+class IArchitectsTable(IUrbanTable):
+    """
+    Marker interface for a table displaying architects
+    """
+
+
+class IClaimantsTable(IUrbanTable):
+    """
+    Marker interface for a table displaying claimants
+    """
+
+
+class IRecipientsCadastreTable(Interface):
+    """
+    Marker interface for a table displaying recipients cadastre (peoples concerned
+    by the 50m radius inquiry)
+    """
+
+
 class IParcelsTable(IUrbanTable):
     """
     Marker interface for a table displaying parcels
@@ -59,6 +90,24 @@ class ITitleColumn(Interface):
 class IActionsColumn(Interface):
     """
     Marker interface for an Actions Column
+    """
+
+
+class INameColumn(Interface):
+    """
+    Marker interface for an Name Column
+    """
+
+
+class ILocalityColumn(Interface):
+    """
+    Marker interface for an Locality Column
+    """
+
+
+class IStreetColumn(Interface):
+    """
+    Marker interface for an Street Column
     """
 
 

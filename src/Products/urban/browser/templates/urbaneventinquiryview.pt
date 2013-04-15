@@ -69,11 +69,8 @@
         </td>
         <td width=65%>
         <fieldset><legend i18n:translate="event_linked_documents">Event linked documents</legend>
-          <div tal:define="tool python: context.portal_urban;
-                           batch python: tool.queryCatalog(batch=True, specificSearch='searchLinkedDocuments', context=context, theObjects=False, batchlen=50);
-                           showedCols python: ('Title',);
-                           showActions python: True;">
-          <metal:listing use-macro="context/@@listingmacro/listing" />
+          <div>
+            <tal:listing content="structure view/renderGeneratedDocumentsListing" />
           </div>
         </fieldset>
 
@@ -85,11 +82,8 @@
         </td>
         <td width=65%>
          <fieldset><legend i18n:translate="event_linked_annexes">Event linked annexes</legend>
-          <div tal:define="tool python: context.portal_urban;
-                           batch python: tool.queryCatalog(batch=True, specificSearch='searchLinkedAnnexes', context=context, theObjects=False, batchlen=50);
-                           showedCols python: ('Title', 'created', 'Creator', );
-                           showActions python: True;">
-          <metal:listing use-macro="context/@@listingmacro/listing" />
+          <div>
+            <tal:listing content="structure view/renderAnnexListing" />
           </div>
          </fieldset>
         </td>
@@ -122,14 +116,8 @@
    </tr>
   </thead>
  </table>
-  <div tal:define="tool python: context.portal_urban;
-                   Batch python:modules['Products.CMFPlone'].Batch;
-                   b_start request/b_start|python:0;
-                   batch python: Batch(claimants, 25, b_start);
-                   showedCols python: ('Title', );
-                   colsLabels python: {'Title': 'claimant_data'};
-                   showActions python: True;">
-  <metal:listing use-macro="context/@@listingmacro/listing" />
+  <div>
+    <tal:listing content="structure view/renderClaimantsListing" />
   </div>
 </div>
 </dd>
@@ -159,13 +147,8 @@
     </tr>
     </thead>
     </table>
-    <div tal:define="tool python: context.portal_urban;
-                     Batch python:modules['Products.CMFPlone'].Batch;
-                     b_start request/b_start|python:0;
-                     batch python: Batch(recipients, 50, b_start);
-                     showedCols python: ('name', 'adr1', 'street',);
-                     showActions python: True;">
-     <metal:listing use-macro="context/@@listingmacro/listing" />
+    <div>
+       <tal:listing content="structure view/renderRecipientsCadastreListing" />
     </div>
 </tal:recipients>
 <tal:block condition="python: context.REQUEST.get('doc_uid') != None">
