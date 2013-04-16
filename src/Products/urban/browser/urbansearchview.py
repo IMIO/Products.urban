@@ -2,14 +2,18 @@
 
 from zope.i18n import translate
 from Acquisition import aq_inner
+
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from Products.CMFPlone import PloneMessageFactory as msg
 from Products.CMFPlone.PloneBatch import Batch
+
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import URBAN_TYPES
 from Products.urban.utils import ParcelHistoric
 from Products.urban.UrbanTool import DB_QUERY_ERROR
+from Products.urban.browser.urbantable import SearchResultTable
+
 from Products.ZCTextIndex.ParseTree import ParseError
 
 
@@ -80,6 +84,17 @@ class UrbanSearchView(BrowserView):
             valid_args = [request.get(name) for name in args_name if request.get(name)]
             return len(valid_args) > 2
         return True
+
+    def renderSearchResultListing(self):
+        """
+         render the html table displaying the search result
+        """
+        search_result = self.searchLicence()
+        if not search_result:
+            return ''
+        licencelisting = SearchResultTable(search_result, self.request)
+        licencelisting.update()
+        return '%s%s' % (licencelisting.render(), licencelisting.renderBatch())
 
     def searchLicence(self):
         """

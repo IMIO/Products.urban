@@ -417,14 +417,6 @@
      permission="zope2.View"
   />
 
-  <browser:page
-     for="*"
-     name="urbantable"
-     class=".urbantable.OldListingMacro"
-     template="templates/urbantable.pt"
-     permission="zope2.View"
-  />
-
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
@@ -586,6 +578,24 @@
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.interfaces.ILicenceListingTable"
+     factory=".column.FoldermanagerColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="foldermanagerColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.interfaces.ISearchResultTable"
+     factory=".column.CreationDateColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="creationdateColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.interfaces.ISearchResultTable"
      factory=".column.FoldermanagerColumn"
      provides="z3c.table.interfaces.IColumn"
      name="foldermanagerColumn"

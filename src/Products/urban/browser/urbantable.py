@@ -2,7 +2,6 @@
 
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
-from Products.Five import BrowserView
 from Products.ZCatalog.interfaces import ICatalogBrain
 from plone.memoize import instance
 
@@ -15,13 +14,8 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.browser.interfaces import \
     ILicenceListingTable, IContactTable, IParcelsTable, \
     IEventsTable, IDocumentsTable, IAnnexesTable, \
-    INotariesTable, IArchitectsTable, IGeometriciansTable, IClaimantsTable, IRecipientsCadastreTable
-
-
-class OldListingMacro(BrowserView):
-    """
-    TO DELETE
-    """
+    INotariesTable, IArchitectsTable, IGeometriciansTable, IClaimantsTable, \
+    IRecipientsCadastreTable, ISearchResultTable
 
 
 class UrbanTable(Table):
@@ -66,6 +60,16 @@ class AllLicencesListingTable(LicenceListingTable):
      Licence listing for urban main page, we sort on creation date rather than title
     """
     sortOn = 'table-creationdateColumn-1'
+
+
+class SearchResultTable(UrbanTable, SequenceTable):
+    """
+    """
+    implements(ISearchResultTable)
+
+    cssClasses = {'table': 'listing largetable'}
+    sortOrder = 'descending'
+    batchSize = 20
 
 
 class ContactTable(UrbanTable):
