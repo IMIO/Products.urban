@@ -46,30 +46,30 @@
   </select>
         </th>
         <th>
-  <select tal:define="name python: 'sort_by';
-                      previousvalue python: view.getArgument(name)"
+  <select tal:define="name python: 'table-sortOn';
+                      previousvalue python: view.getArgument(name, default='1')"
           tal:attributes="name name">
-     <option value="" i18n:translate="sort_by">All</option>
-     <option value="sortable_title" i18n:translate='urban_label_title'
-             tal:attributes="selected python: previousvalue == 'sortable_title'">Title</option>
-     <option value="created" i18n:translate='creation date'
-             tal:attributes="selected python: previousvalue == 'created'">Creation date</option>
+     <option tal:attributes="value view/getDefaultSort" i18n:translate="sort_by">All</option>
+     <option value="table-titleColumn-0" i18n:translate='urban_label_title'
+             tal:attributes="selected python: previousvalue == 'table-titleColumn-0'">Title</option>
+     <option value="table-creationdateColumn-1" i18n:translate='creation date'
+             tal:attributes="selected python: previousvalue == 'table-creationdateColumn-1'">Creation date</option>
   </select>
         </th>
         <th>
-  <select tal:define="name python: 'batch_len';
+  <select tal:define="name python: 'table-batchSize';
                       values view/listBatchSizes;
                       previousvalue python: view.getArgument(name)"
           tal:attributes="name name">
-     <option value="" i18n:translate="elements_by_page">show</option>
+     <option tal:attributes="value python: values[0]" i18n:translate="elements_by_page">show</option>
      <option tal:attributes="value val; selected python: previousvalue == val"
              tal:repeat="val values" tal:content="val">size</option>
  </select>
   <!--span i18n:translate="elements_by_page" class="">batch len</span-->
         </th>
         <th>
- <input type="checkbox" name="reverse_order" value="ascending" class="discreet"
-        tal:attributes="checked python: view.getArgument('reverse_order') == 'ascending'">
+ <input type="checkbox" name="table-sortOrder" value="ascending" class="discreet"
+        tal:attributes="checked python: view.getArgument('table-sortOrder') == 'ascending'">
  <span i18n:translate='reverse_order' class="">reverse</span>
 </th>
     </thead>

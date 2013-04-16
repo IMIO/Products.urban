@@ -28,12 +28,19 @@ class UrbanView(BrowserView):
         licencelisting.update()
         return '%s%s' % (licencelisting.render(), licencelisting.renderBatch())
 
-    def getArgument(self, key_to_match):
+    def getDefaultSort(self):
+        context = aq_inner(self.context)
+        if context.getProperty('urbanConfigId'):
+            return 'table-titleColumn-0'
+        else:
+            return 'table-creationdateColumn-1'
+
+    def getArgument(self, key_to_match, default=''):
         request = aq_inner(self.request)
         if type(key_to_match) == list:
             return dict([(key, request.get(key, '')) for key in key_to_match])
         request = aq_inner(self.request)
-        return request.get(key_to_match, '')
+        return request.get(key_to_match, default)
 
     def listFolderManagers(self):
         """

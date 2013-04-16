@@ -297,8 +297,10 @@ class CreationDateColumn(Column):
         return obj.creation_date.strftime('%d/%m/%Y')
 
     def getSortKey(self, item):
-        obj = self.table.getObject(item)
-        return obj.creation_date
+        if ICatalogBrain.providedBy(item):
+            return item.CreationDate
+        else:
+            return item.getObject().creation_date
 
 
 class CreatorColumn(Column):
@@ -318,8 +320,10 @@ class CreatorColumn(Column):
         return ''.join(sorted(obj.listCreators()))
 
     def getSortKey(self, item):
-        obj = self.table.getObject(item)
-        return sorted(obj.listCreators())
+        if ICatalogBrain.providedBy(item):
+            return item.listCreators
+        else:
+            return item.getObject.listCreators()
 
 
 class FoldermanagerColumn(Column):

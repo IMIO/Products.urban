@@ -106,7 +106,7 @@
  <!-- Display the results body -->
  <tbody tal:condition="brains">
          <div>
-          <tal:listing content="structure view/renderSearchResultListing" />
+          <tal:listing content="structure python: view.renderSearchResultListing(brains)" />
          </div>
  </tbody>
 </table>

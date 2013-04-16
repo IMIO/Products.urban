@@ -85,11 +85,10 @@ class UrbanSearchView(BrowserView):
             return len(valid_args) > 2
         return True
 
-    def renderSearchResultListing(self):
+    def renderSearchResultListing(self, search_result):
         """
          render the html table displaying the search result
         """
-        search_result = self.searchLicence()
         if not search_result:
             return ''
         licencelisting = SearchResultTable(search_result, self.request)
