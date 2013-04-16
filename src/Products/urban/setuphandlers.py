@@ -856,7 +856,7 @@ def addApplicationFolders(context):
         setFolderAllowedTypes(newSubFolder, 'Geometrician')
         newSubFolder.setLayout('geometricians_folderview')
         #manage the 'Add' permissions...
-        newSubFolder.manage_permission('urban: Add Geometrician', ['Manager', 'Editor', ], acquire=0)
+        newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
 
     #add a folder that will contains notaries
     if not hasattr(newFolder, "notaries"):

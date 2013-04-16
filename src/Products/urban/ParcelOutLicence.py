@@ -20,11 +20,10 @@ import interfaces
 from Products.urban.BuildLicence import BuildLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import setOptionalAttributes
 ##/code-section module-header
@@ -50,7 +49,7 @@ schema = Schema((
             show_indexes=1,
             show_index_selector=1,
             available_indexes={'Title':'Nom'},
-            base_query="geometriciansBaseQuery",
+            base_query='geometriciansBaseQuery',
             wild_card_search=True,
             show_results_without_query=True,
             label='Geometricians',
@@ -101,7 +100,7 @@ class ParcelOutLicence(BaseFolder, BuildLicence, BrowserDefaultMixin):
 
     ##code-section class-header #fill in your manual code here
     archetype_name = 'ParcelOutLicence'
-    schemata_order = ['urban_description', 'urban_road', 'urban_location',\
+    schemata_order = ['urban_description', 'urban_road', 'urban_location',
                       'urban_investigation_and_advices']
     ##/code-section class-header
 
@@ -124,7 +123,7 @@ class ParcelOutLicence(BaseFolder, BuildLicence, BrowserDefaultMixin):
         portal = getToolByName(self, 'portal_url').getPortalObject()
         rootPath = '/'.join(portal.getPhysicalPath())
         dict = {}
-        dict['path'] = {'query':'%s/urban/geometricians' % (rootPath), 'depth':1}
+        dict['path'] = {'query': '%s/urban/geometricians' % rootPath, 'depth': 1}
         dict['sort_on'] = 'sortable_title'
         return dict
 
