@@ -19,8 +19,6 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="ParcelOutLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Geometrician"
-         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="FolderManager"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanVocabularyTerm"
@@ -83,6 +81,8 @@
  <object name="Architect"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Claimant"
+         meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="Geometrician"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Notary"
          meta_type="Factory-based Type Information with dynamic views"/>

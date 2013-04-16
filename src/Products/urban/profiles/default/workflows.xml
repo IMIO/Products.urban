@@ -31,9 +31,6 @@
   <type type_id="GenericLicence">
    <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
-  <type type_id="Geometrician">
-   <bound-workflow workflow_id="activation_workflow" />
-  </type>
   <type type_id="Layer">
    <bound-workflow workflow_id="activation_workflow" />
   </type>
@@ -106,6 +103,9 @@
 </type>
 <type type_id="EnvClassThree">
   <bound-workflow workflow_id="urban_licence_workflow" />
+</type>
+<type type_id="Geometrician">
+   <bound-workflow workflow_id="activation_workflow" />
 </type>
 <type type_id="Inquiry">
   <bound-workflow workflow_id="" />
