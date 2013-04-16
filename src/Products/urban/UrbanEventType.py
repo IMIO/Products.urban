@@ -164,7 +164,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         'index.html' : '(Default)',
         'properties' : 'base_metadata',
         'sharing'    : '',
-        }
+    }
     ##/code-section class-header
 
     # Methods
