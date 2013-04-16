@@ -27,6 +27,12 @@ class IArchitect(Interface):
     """Marker interface for .Architect.Architect
     """
 
+
+class IGeometrician(Interface):
+    """Marker interface for .Geometrician.Geometrician
+    """
+
+
 CONTACT_INTERFACES = {
     'Applicant': IApplicant,
     'Architect': IArchitect,
@@ -70,10 +76,6 @@ class IBuildLicence(Interface):
 
 class IParcelOutLicence(Interface):
     """Marker interface for .ParcelOutLicence.ParcelOutLicence
-    """
-
-class IGeometrician(Interface):
-    """Marker interface for .Geometrician.Geometrician
     """
 
 class IFolderManager(Interface):
