@@ -99,7 +99,6 @@ def initialize(context):
     import Recipient
     import BuildLicence
     import ParcelOutLicence
-    import Geometrician
     import FolderManager
     import UrbanVocabularyTerm
     import PortionOut

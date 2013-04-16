@@ -42,7 +42,6 @@ ADD_CONTENT_PERMISSIONS = {
     'Recipient': 'urban: Add Recipient',
     'BuildLicence': 'urban: Add BuildLicence',
     'ParcelOutLicence': 'urban: Add ParcelOutLicence',
-    'Geometrician': 'urban: Add Geometrician',
     'FolderManager': 'urban: Add FolderManager',
     'UrbanVocabularyTerm': 'urban: Add UrbanVocabularyTerm',
     'PortionOut': 'urban: Add PortionOut',
@@ -81,7 +80,6 @@ setDefaultRoles('urban: Add UrbanEventType', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Recipient', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add BuildLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add ParcelOutLicence', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Geometrician', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add FolderManager', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanVocabularyTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PortionOut', ("Manager", "Contributor"))
