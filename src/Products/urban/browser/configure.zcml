@@ -661,15 +661,6 @@
   />
 
   <adapter
-     for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.interfaces.IUrbanTable
-          Products.urban.browser.interfaces.IActionsColumn"
-     factory=".column.ActionsColumnHeader"
-     provides="z3c.table.interfaces.IColumnHeader"
-  />
-
-  <adapter
      for="Products.ZCatalog.interfaces.ICatalogBrain"
      factory=".tablevalue.BrainForUrbanTable"
      provides="Products.urban.browser.interfaces.IItemForUrbanTable"

@@ -28,20 +28,22 @@ class LicenceView(BrowserView):
         context = aq_inner(self.context)
         return getToolByName(context, 'portal_urban')
 
+    def renderListing(self, table):
+        table.update()
+        return table.render()
+
     def renderContactListing(self):
         if not self.context.getApplicants():
             return ''
-        contactlisting = ContactTable(self.context, self.request)
-        contactlisting.update()
-        return contactlisting.render()
+        contacttable = ContactTable(self.context, self.request)
+        return self.renderListing(contacttable)
 
     def renderParcelsListing(self):
         parcels = self.context.getParcels()
         if not parcels:
             return ''
-        parcellisting = ParcelsTable(parcels, self.request)
-        parcellisting.update()
-        return parcellisting.render()
+        parceltable = ParcelsTable(parcels, self.request)
+        return self.renderListing(parceltable)
 
     def renderEventsListing(self):
         catalog = getToolByName(self.context, 'portal_catalog')
@@ -54,11 +56,8 @@ class LicenceView(BrowserView):
         events = catalog(queryString)
         if not events:
             return ''
-        eventlisting = EventsTable(events, self.request)
-        eventlisting.update()
-        # batching will be for later
-        # return '%s%s' % (eventlisting.render(), eventlisting.renderBatch())
-        return eventlisting.render()
+        eventtable = EventsTable(events, self.request)
+        return self.renderListing(eventtable)
 
     def getLicenceConfig(self):
         context = aq_inner(self.context)

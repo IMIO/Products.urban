@@ -1,6 +1,5 @@
 ## -*- coding: utf-8 -*-
 
-from Products.ZCatalog.interfaces import ICatalogBrain
 from DateTime import DateTime
 
 from z3c.table.column import Column, GetAttrColumn
@@ -14,7 +13,12 @@ from Products.urban.browser.interfaces import ITitleColumn, IActionsColumn, \
     ILocalityColumn, IStreetColumn, IUrbanColumn, ITitleCell, IActionsCell
 
 
-class EventDateColumn(Column):
+class UrbanColumn(Column):
+    """ base class for a column that expect a ItemForUrbanTable item  """
+    implements(IUrbanColumn)
+
+
+class EventDateColumn(UrbanColumn):
     """
      Implement a column showing the urban event main date
     """
@@ -62,10 +66,10 @@ class RelatedLicencesColumn(Column):
             return cell
 
 
-class TitleColumn(Column):
+class TitleColumn(UrbanColumn):
     """
     """
-    implements(ITitleColumn, IUrbanColumn)
+    implements(ITitleColumn)
 
     header = 'label_colname_Title'
     weight = 1
@@ -101,85 +105,68 @@ class TitleColumn(Column):
         return urbanlist_item.Title()
 
 
-class LicenceTitleColumnHeader():
+class TitleColumnHeader():
     """ return the right label to display in Title Column header """
     implements(IColumnHeader)
 
     def __init__(self, context, request, table, column):
         self.request = request
+        self.label = ''
 
     def update(self):
-        pass
+        """ to be implemented """
 
     def render(self):
-        return translate('label_colname_Title', 'urban', context=self.request)
+        return translate(self.label, 'urban', context=self.request)
 
 
-class ContactTitleColumnHeader():
+class LicenceTitleColumnHeader(TitleColumnHeader):
     """ return the right label to display in Title Column header """
-    implements(IColumnHeader)
-
-    def __init__(self, context, request, table, column):
-        self.request = request
 
     def update(self):
-        pass
+        self.label = 'label_colname_Title'
 
 
-class ApplicantTitleColumnHeader(ContactTitleColumnHeader):
-    """ return the right label to display in Title Column header """
+class ApplicantTitleColumnHeader(TitleColumnHeader):
 
-    def render(self):
-        label = 'label_colname_applicant_data'
-        return translate(label, 'urban', context=self.request)
+    def update(self):
+        self.label = 'label_colname_applicant_data'
 
 
-class ProprietaryTitleColumnHeader(ContactTitleColumnHeader):
-    """ return the right label to display in Title Column header """
+class ProprietaryTitleColumnHeader(TitleColumnHeader):
 
-    def render(self):
-        label = 'label_colname_proprietary_data'
-        return translate(label, 'urban', context=self.request)
+    def update(self):
+        self.label = 'label_colname_proprietary_data'
 
 
-class NotaryTitleColumnHeader(ContactTitleColumnHeader):
-    """ return the right label to display in Title Column header """
+class NotaryTitleColumnHeader(TitleColumnHeader):
 
-    def render(self):
-        label = 'label_colname_notary_data'
-        return translate(label, 'urban', context=self.request)
+    def update(self):
+        self.label = 'label_colname_notary_data'
 
 
-class ArchitectTitleColumnHeader(ContactTitleColumnHeader):
-    """ return the right label to display in Title Column header """
+class ArchitectTitleColumnHeader(TitleColumnHeader):
 
-    def render(self):
-        label = 'label_colname_architect_data'
-        return translate(label, 'urban', context=self.request)
+    def update(self):
+        self.label = 'label_colname_architect_data'
 
 
-class GeometricianTitleColumnHeader(ContactTitleColumnHeader):
-    """ return the right label to display in Title Column header """
+class GeometricianTitleColumnHeader(TitleColumnHeader):
 
-    def render(self):
-        label = 'label_colname_geometrician_data'
-        return translate(label, 'urban', context=self.request)
+    def update(self):
+        self.label = 'label_colname_geometrician_data'
 
 
-class ClaimantTitleColumnHeader(ContactTitleColumnHeader):
-    """ return the right label to display in Title Column header """
+class ClaimantTitleColumnHeader(TitleColumnHeader):
 
-    def render(self):
-        label = 'label_colname_claimant_data'
-        return translate(label, 'urban', context=self.request)
+    def update(self):
+        self.label = 'label_colname_claimant_data'
 
 
-class RecipientCadastreTitleColumnHeader(ContactTitleColumnHeader):
-    """ return the right label to display in Title Column header """
+class RecipientCadastreTitleColumnHeader(TitleColumnHeader):
 
-    def render(self):
-        label = 'label_colname_name'
-        return translate(label, 'urban', context=self.request)
+    def update(self):
+        self.label = 'label_colname_name'
 
 
 class TitleDisplay():
@@ -344,10 +331,7 @@ class CreatorColumn(Column):
         return ''.join(sorted(obj.listCreators()))
 
     def getSortKey(self, urbanlist_item):
-        if ICatalogBrain.providedBy(urbanlist_item):
-            return urbanlist_item.listCreators
-        else:
-            return urbanlist_item.getObject.listCreators()
+        return urbanlist_item.getObject.listCreators()
 
 
 class FoldermanagerColumn(Column):
@@ -368,13 +352,18 @@ class FoldermanagerColumn(Column):
         return ', '.join([fm.getSignaletic(short=True) for fm in foldermanagers])
 
 
-class ActionsColumn(Column):
+class ActionsColumn(UrbanColumn):
     """
     """
-    implements(IActionsColumn, IUrbanColumn)
+    implements(IActionsColumn)
 
     weight = 100
     cssClasses = {'th': 'actionsheader'}
+    header = 'actions'
+
+    # we got to override the renderHeadCell method, because we got to give the right domain name for translation
+    def renderHeadCell(self):
+        return translate(self.header, 'urban', context=self.request)
 
     def renderCell(self, urbanlist_item):
         item = urbanlist_item.getObject()
@@ -425,20 +414,6 @@ class ActionsColumn(Column):
             action_links.append('</div>')
             action_links = ''.join(action_links)
         return action_links
-
-
-class ActionsColumnHeader():
-    """ return the right label to display in Actions Column header """
-    implements(IColumnHeader)
-
-    def __init__(self, context, request, table, column):
-        self.request = request
-
-    def update(self):
-        pass
-
-    def render(self):
-        return translate('actions', 'urban', context=self.request)
 
 
 class LocalityColumn(GetAttrColumn):
