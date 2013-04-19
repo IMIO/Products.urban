@@ -1,8 +1,20 @@
 History
 =======
 
-1.1.7 (unreleased)
+1.1.8 (unreleased)
 ------------------
+
+Turned all urban listings into z3c tables.
+
+Added more columns on search result listing (#5535).
+
+bugfixes:
+- Create the correct link for UrbanDoc in the urban events when the licence is not
+  in 'edit' state anymore.
+
+
+1.1.7
+-----
 
 Added options bar to licences listing (#5476, #5250).
 
