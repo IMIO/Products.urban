@@ -122,7 +122,6 @@ class ContactTable(UrbanTable):
     implements(IContactTable)
 
     cssClasses = {'table': 'listing largetable'}
-    batchSize = 20
 
 
 class NotariesTable(ContactTable):
@@ -133,6 +132,8 @@ class NotariesTable(ContactTable):
     """
     implements(INotariesTable)
 
+    batchSize = 20
+
 
 class GeometriciansTable(ContactTable):
     """
@@ -142,6 +143,8 @@ class GeometriciansTable(ContactTable):
     """
     implements(IGeometriciansTable)
 
+    batchSize = 20
+
 
 class ArchitectsTable(ContactTable):
     """
@@ -150,6 +153,8 @@ class ArchitectsTable(ContactTable):
      the correct translation for column headers
     """
     implements(IArchitectsTable)
+
+    batchSize = 20
 
 
 class ClaimantsTable(ContactTable):
@@ -161,17 +166,11 @@ class ClaimantsTable(ContactTable):
     implements(IClaimantsTable)
 
 
-class RecipientsCadastreTable(SequenceTable):
+class RecipientsCadastreTable(UrbanTable, SequenceTable):
     """  """
     implements(IRecipientsCadastreTable)
 
     cssClasses = {'table': 'listing largetable'}
-
-    @instance.memoize
-    def getObject(self, item):
-        if ICatalogBrain.providedBy(item):
-            return item.getObject()
-        return item
 
 
 class ParcelsTable(UrbanTable, SequenceTable):

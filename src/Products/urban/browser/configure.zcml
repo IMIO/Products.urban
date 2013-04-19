@@ -491,6 +491,15 @@
 
   <adapter
      for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.interfaces.IRecipientsCadastreTable
+          Products.urban.browser.interfaces.ITitleColumn"
+     factory=".column.RecipientCadastreTitleColumnHeader"
+     provides="z3c.table.interfaces.IColumnHeader"
+  />
+
+  <adapter
+     for="zope.interface.Interface
           Products.urban.browser.interfaces.ITitleColumn
           Products.urban.browser.interfaces.IItemForUrbanTable
           Products.urban.interfaces.IGenericLicence"
@@ -531,6 +540,15 @@
           Products.urban.browser.interfaces.IItemForUrbanTable
           Products.urban.interfaces.IUrbanDoc"
      factory=".column.DocumentTitleDisplay"
+     provides="Products.urban.browser.interfaces.ITitleCell"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          Products.urban.browser.interfaces.ITitleColumn
+          Products.urban.browser.interfaces.IItemForUrbanTable
+          Products.urban.interfaces.IRecipientCadastre"
+     factory=".column.RecipientCadastreTitleDisplay"
      provides="Products.urban.browser.interfaces.ITitleCell"
   />
 
@@ -604,15 +622,6 @@
      factory=".column.FoldermanagerColumn"
      provides="z3c.table.interfaces.IColumn"
      name="foldermanagerColumn"
-  />
-
-  <adapter
-     for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.interfaces.IRecipientsCadastreTable"
-     factory=".column.NameColumn"
-     provides="z3c.table.interfaces.IColumn"
-     name="nameColumn"
   />
 
   <adapter

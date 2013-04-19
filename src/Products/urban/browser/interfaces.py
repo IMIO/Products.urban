@@ -87,7 +87,7 @@ class IClaimantsTable(IUrbanTable):
     """
 
 
-class IRecipientsCadastreTable(Interface):
+class IRecipientsCadastreTable(IUrbanTable):
     """
     Marker interface for a table displaying recipients cadastre (peoples concerned
     by the 50m radius inquiry)

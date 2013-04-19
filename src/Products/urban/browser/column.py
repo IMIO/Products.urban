@@ -1,6 +1,5 @@
 ## -*- coding: utf-8 -*-
 
-from Products.CMFCore.utils import getToolByName
 from Products.ZCatalog.interfaces import ICatalogBrain
 from DateTime import DateTime
 
@@ -12,8 +11,7 @@ from zope.interface import implements
 from zope.i18n import translate
 
 from Products.urban.browser.interfaces import ITitleColumn, IActionsColumn, \
-    INameColumn, ILocalityColumn, IStreetColumn, IUrbanColumn, \
-    ITitleCell, IActionsCell
+    ILocalityColumn, IStreetColumn, IUrbanColumn, ITitleCell, IActionsCell
 
 
 class EventDateColumn(Column):
@@ -263,7 +261,7 @@ class EventTitleDisplay(TitleDisplay):
         return '%s%s' % (title, documents)
 
 
-class DocumentTitleDisplay (TitleDisplay):
+class DocumentTitleDisplay(TitleDisplay):
     """ Adapts an event to a TitleCell """
 
     def render(self):
@@ -273,6 +271,27 @@ class DocumentTitleDisplay (TitleDisplay):
         url = '%s%s' % (doc.absolute_url(), suffix)
         css_class = 'contenttype-%s' % doc.portal_type.lower()
         title = '<a href="%s" class="%s">%s</a>' % (url, css_class, title)
+        return title
+
+
+class RecipientCadastreTitleDisplay(TitleDisplay):
+    """ Adapts an event to a TitleCell """
+
+    def render(self):
+        recipient = self.obj
+        urbanlist_item = self.urbanlist_item
+
+        portal_type = recipient.portal_type.lower()
+        state = urbanlist_item.getState()
+        css_class = 'contenttype-%s state-%s' % (portal_type, state)
+        title = recipient.getName()
+        title = '<span class="%s">%s</span>' % (css_class, title)
+
+        secondary_title = recipient.Title()
+        secondary_title = '<span class="discreet">%s</span>' % secondary_title
+
+        title = '%s<br />%s' % (title, secondary_title)
+
         return title
 
 
@@ -422,28 +441,6 @@ class ActionsColumnHeader():
         return translate('actions', 'urban', context=self.request)
 
 
-class NameColumn(Column):
-    """  """
-    implements(INameColumn)
-
-    header = 'label_colname_name'
-    weight = 10
-
-    # we got to override the renderHeadCell method, because we got to give the right domain name for translation
-    def renderHeadCell(self):
-        """Header cell content."""
-        return translate(self.header, 'urban', context=self.request)
-
-    def renderCell(self, recipient):
-        portal_workflow = getToolByName(recipient, 'portal_workflow')
-        url = recipient.absolute_url()
-        name = recipient.getName()
-        state = portal_workflow.getInfoFor(recipient, 'review_state', '')
-        css_class = 'contenttype-%s state-%s' % (recipient.portal_type.lower(), state)
-        name = '<a href="%s" class="%s">%s</a>' % (url, css_class, name)
-        return name
-
-
 class LocalityColumn(GetAttrColumn):
     """  """
     implements(ILocalityColumn)
@@ -458,7 +455,7 @@ class LocalityColumn(GetAttrColumn):
         return translate(self.header, 'urban', context=self.request)
 
 
-class StreetColumn(GetAttrColumn):
+class StreetColumn(Column):
     """  """
     implements(IStreetColumn)
 
@@ -470,3 +467,11 @@ class StreetColumn(GetAttrColumn):
     def renderHeadCell(self):
         """Header cell content."""
         return translate(self.header, 'urban', context=self.request)
+
+    def renderCell(self, recipient):
+
+        street = '<span>%s</span>' % recipient.getStreet()
+        secondary_street = '<span class="discreet">%s</span>' % recipient.getAdr2()
+        street = '%s<br />%s' % (street, secondary_street)
+
+        return street.decode('utf-8')
