@@ -154,6 +154,18 @@ class IStreetColumn(Interface):
     """
 
 
+class IAddressColumn(Interface):
+    """
+    Marker interface for a licence worklocation Column
+    """
+
+
+class IParcelReferencesColumn(Interface):
+    """
+    Marker interface for a licence worklocation Column
+    """
+
+
 class ICell(Interface):
     """
     Interface that describes a table cell behaviour

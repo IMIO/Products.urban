@@ -719,11 +719,14 @@ msgstr "Conditions intégrales"
 msgid "investigationarticles_folder_title"
 msgstr "Articles pour les enquêtes"
 
-msgid "label_colname_foldermanager"
-msgstr "Agent traitant"
+msgid "label_colname_Creator"
+msgstr "Créateur"
 
 msgid "label_colname_Title"
 msgstr "Titre"
+
+msgid "label_colname_address"
+msgstr "Adresse"
 
 msgid "label_colname_adr1"
 msgstr "Localité"
@@ -743,11 +746,11 @@ msgstr "Coordonnées du réclamant"
 msgid "label_colname_created"
 msgstr "Créé le"
 
-msgid "label_colname_Creator"
-msgstr "Créateur"
-
 msgid "label_colname_eventDate"
 msgstr "Date clé"
+
+msgid "label_colname_foldermanager"
+msgstr "Agent traitant"
 
 msgid "label_colname_geometrician_data"
 msgstr "Coordonnées du géomètre"
@@ -769,6 +772,9 @@ msgstr "Coordonnées du notaire"
 
 msgid "label_colname_parcellingterm_data"
 msgstr "Lotissements"
+
+msgid "label_colname_parcelrefs"
+msgstr "Référence cadastrale"
 
 msgid "label_colname_proprietary_data"
 msgstr "Coordonnées du propriétaire"
@@ -839,6 +845,9 @@ msgstr "Décision"
 msgid "location_fdrequirement_opinion"
 msgstr "Avis"
 
+msgid "locationmissingparts_folder_title"
+msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes (Fiche Urbanisme)"
+
 msgid "locationspecificfeatures_folder_title"
 msgstr "Particularités du bien (urbanisme)"
 
@@ -872,12 +881,6 @@ msgstr "Divers"
 
 msgid "missingparts_folder_title"
 msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes"
-
-msgid "roadmissingparts_folder_title"
-msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes (Fiche Voirie)"
-
-msgid "locationmissingparts_folder_title"
-msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes (Fiche Urbanisme)"
 
 #. Default: "Plural"
 #: PersonTitleTerm.py
@@ -1092,6 +1095,9 @@ msgstr "Oui, modification"
 
 msgid "road_adaptation_no"
 msgstr "Non"
+
+msgid "roadmissingparts_folder_title"
+msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes (Fiche Voirie)"
 
 msgid "roadspecificfeatures_folder_title"
 msgstr "Particularités du bien (voirie)"

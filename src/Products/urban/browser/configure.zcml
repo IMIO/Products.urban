@@ -645,10 +645,19 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.interfaces.IRecipientsCadastreTable"
-     factory=".column.ActionsColumn"
+          Products.urban.browser.interfaces.ISearchResultTable"
+     factory=".column.AddressColumn"
      provides="z3c.table.interfaces.IColumn"
-     name="actionsColumn"
+     name="addressColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.interfaces.ISearchResultTable"
+     factory=".column.ParcelReferencesColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="parcelreferencesColumn"
   />
 
   <adapter
@@ -659,6 +668,8 @@
      provides="z3c.table.interfaces.IColumn"
      name="actionsColumn"
   />
+
+  <!-- table values adapter -->
 
   <adapter
      for="Products.ZCatalog.interfaces.ICatalogBrain"
@@ -671,6 +682,7 @@
      factory=".tablevalue.ObjectForUrbanTable"
      provides="Products.urban.browser.interfaces.IItemForUrbanTable"
   />
+
 
   <adapter
      for="zope.interface.Interface
@@ -695,6 +707,8 @@
      factory=".tablevalue.ValuesForLicenceListing"
      provides="z3c.table.interfaces.IValues"
   />
+
+  <!-- table values adapters end -->
 
 </configure>
 

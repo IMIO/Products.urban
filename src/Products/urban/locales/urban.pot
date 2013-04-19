@@ -730,6 +730,9 @@ msgstr ""
 msgid "label_colname_adr2"
 msgstr ""
 
+msgid "label_colname_address"
+msgstr ""
+
 msgid "label_colname_applicant_data"
 msgstr ""
 
@@ -743,6 +746,9 @@ msgid "label_colname_created"
 msgstr ""
 
 msgid "label_colname_eventDate"
+msgstr ""
+
+msgid "label_colname_foldermanager"
 msgstr ""
 
 msgid "label_colname_geometrician_data"
@@ -764,6 +770,9 @@ msgid "label_colname_notary_data"
 msgstr ""
 
 msgid "label_colname_parcellingterm_data"
+msgstr ""
+
+msgid "label_colname_parcelrefs"
 msgstr ""
 
 msgid "label_colname_proprietary_data"
@@ -833,6 +842,9 @@ msgid "location_fdrequirement_decision"
 msgstr ""
 
 msgid "location_fdrequirement_opinion"
+msgstr ""
+
+msgid "locationmissingparts_folder_title"
 msgstr ""
 
 msgid "locationspecificfeatures_folder_title"
@@ -1084,6 +1096,9 @@ msgid "road_adaptation_no"
 msgstr ""
 
 msgid "roadspecificfeatures_folder_title"
+msgstr ""
+
+msgid "roadmissingparts_folder_title"
 msgstr ""
 
 msgid "rubrics_folder_title"

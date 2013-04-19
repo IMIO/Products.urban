@@ -10,12 +10,18 @@ from zope.interface import implements
 from zope.i18n import translate
 
 from Products.urban.browser.interfaces import ITitleColumn, IActionsColumn, \
-    ILocalityColumn, IStreetColumn, IUrbanColumn, ITitleCell, IActionsCell
+    ILocalityColumn, IStreetColumn, IUrbanColumn, IAddressColumn, IParcelReferencesColumn, \
+    ITitleCell, IActionsCell
 
 
 class UrbanColumn(Column):
     """ base class for a column that expect a ItemForUrbanTable item  """
     implements(IUrbanColumn)
+
+    # we got to override the renderHeadCell method, because we got to give the right domain name for translation
+    def renderHeadCell(self):
+        """Header cell content."""
+        return translate(self.header, 'urban', context=self.request)
 
 
 class EventDateColumn(UrbanColumn):
@@ -25,11 +31,6 @@ class EventDateColumn(UrbanColumn):
 
     header = 'label_colname_eventDate'
     weight = 20
-
-    # we got to override the renderHeadCell method, because we got to give the right domain name for translation
-    def renderHeadCell(self):
-        """Header cell content."""
-        return translate(self.header, 'urban', context=self.request)
 
     def renderCell(self, urbanlist_item):
         event = urbanlist_item.getObject()
@@ -114,7 +115,7 @@ class TitleColumnHeader():
         self.label = ''
 
     def update(self):
-        """ to be implemented """
+        """ to implement"""
 
     def render(self):
         return translate(self.label, 'urban', context=self.request)
@@ -361,10 +362,6 @@ class ActionsColumn(UrbanColumn):
     cssClasses = {'th': 'actionsheader'}
     header = 'actions'
 
-    # we got to override the renderHeadCell method, because we got to give the right domain name for translation
-    def renderHeadCell(self):
-        return translate(self.header, 'urban', context=self.request)
-
     def renderCell(self, urbanlist_item):
         item = urbanlist_item.getObject()
         adapter = queryMultiAdapter((self.context, self.request, urbanlist_item, item), IActionsCell)
@@ -450,3 +447,45 @@ class StreetColumn(Column):
         street = '%s<br />%s' % (street, secondary_street)
 
         return street.decode('utf-8')
+
+
+class AddressColumn(UrbanColumn):
+    """ display licence address in SearchResultTable """
+    implements(IAddressColumn)
+
+    header = 'label_colname_address'
+    weight = 2
+
+    def renderCell(self, urbanlist_item):
+        licence = urbanlist_item.getObject()
+        addresses = licence.getWorkLocationSignaletic()
+
+        address_render = []
+        for address in addresses.split(' et '):
+            render = '<span>%s</span>' % address
+            address_render.append(render)
+
+        address_render = '<br />'.join(address_render)
+
+        return address_render
+
+
+class ParcelReferencesColumn(UrbanColumn):
+    """ display licence parcel references in SearchResultTable """
+    implements(IParcelReferencesColumn)
+
+    header = 'label_colname_parcelrefs'
+    weight = 6
+
+    def renderCell(self, urbanlist_item):
+        licence = urbanlist_item.getObject()
+        parcels = licence.getParcels()
+
+        parcel_render = []
+        for parcel in parcels:
+            render = '<span>%s</span>' % parcel.Title()
+            parcel_render.append(render)
+
+        parcel_render = '<br />'.join(parcel_render)
+
+        return parcel_render
