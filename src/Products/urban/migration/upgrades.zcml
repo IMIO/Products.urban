@@ -35,4 +35,12 @@
         handler=".migrate_to_117.migrateToUrban117"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Upgrade urban to 1.1.8"
+        description="urban upgrade step"
+        source="1.1.7"
+        destination="1.1.8"
+        handler=".migrate_to_118.migrateToUrban118"
+        profile="Products.urban:default" />
+
 </configure>
