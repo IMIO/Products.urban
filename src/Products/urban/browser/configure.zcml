@@ -491,7 +491,8 @@
 
   <adapter
      for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.interfaces.ITitleColumn
+          Products.urban.browser.interfaces.IItemForUrbanTable
           Products.urban.interfaces.IGenericLicence"
      factory=".column.LicenceTitleDisplay"
      provides="Products.urban.browser.interfaces.ITitleCell"
@@ -499,7 +500,8 @@
 
   <adapter
      for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.interfaces.ITitleColumn
+          Products.urban.browser.interfaces.IItemForUrbanTable
           Products.urban.interfaces.IPortionOut"
      factory=".column.ParcelTitleDisplay"
      provides="Products.urban.browser.interfaces.ITitleCell"
@@ -507,7 +509,8 @@
 
   <adapter
      for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.interfaces.ITitleColumn
+          Products.urban.browser.interfaces.IItemForUrbanTable
           Products.urban.interfaces.IContact"
      factory=".column.ContacTitleDisplay"
      provides="Products.urban.browser.interfaces.ITitleCell"
@@ -515,7 +518,8 @@
 
   <adapter
      for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.interfaces.ITitleColumn
+          Products.urban.browser.interfaces.IItemForUrbanTable
           Products.urban.interfaces.IUrbanEvent"
      factory=".column.EventTitleDisplay"
      provides="Products.urban.browser.interfaces.ITitleCell"
@@ -523,7 +527,8 @@
 
   <adapter
      for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.interfaces.ITitleColumn
+          Products.urban.browser.interfaces.IItemForUrbanTable
           Products.urban.interfaces.IUrbanDoc"
      factory=".column.DocumentTitleDisplay"
      provides="Products.urban.browser.interfaces.ITitleCell"
@@ -551,7 +556,7 @@
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.interfaces.ILicenceListingTable"
-     factory=".column.CreationDateColumn"
+     factory=".column.BrainCreationDateColumn"
      provides="z3c.table.interfaces.IColumn"
      name="creationdateColumn"
   />
@@ -560,7 +565,7 @@
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.interfaces.IDocumentsTable"
-     factory=".column.CreationDateColumn"
+     factory=".column.ObjectCreationDateColumn"
      provides="z3c.table.interfaces.IColumn"
      name="creationdateColumn"
   />
@@ -587,7 +592,7 @@
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.interfaces.ISearchResultTable"
-     factory=".column.CreationDateColumn"
+     factory=".column.BrainCreationDateColumn"
      provides="z3c.table.interfaces.IColumn"
      name="creationdateColumn"
   />
@@ -656,10 +661,30 @@
   />
 
   <adapter
+     for="Products.ZCatalog.interfaces.ICatalogBrain"
+     factory=".tablevalue.BrainForUrbanTable"
+     provides="Products.urban.browser.interfaces.IItemForUrbanTable"
+  />
+
+  <adapter
+     for="Products.Archetypes.interfaces.IBaseObject"
+     factory=".tablevalue.ObjectForUrbanTable"
+     provides="Products.urban.browser.interfaces.IItemForUrbanTable"
+  />
+
+  <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.interfaces.IContactTable"
-     factory=".urbantable.ValuesForContactListing"
+     factory=".tablevalue.ValuesForContactListing"
+     provides="z3c.table.interfaces.IValues"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.interfaces.IParcellingsTable"
+     factory=".tablevalue.ValuesForParcellingListing"
      provides="z3c.table.interfaces.IValues"
   />
 
@@ -667,7 +692,7 @@
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.interfaces.ILicenceListingTable"
-     factory=".urbantable.ValuesForLicenceListing"
+     factory=".tablevalue.ValuesForLicenceListing"
      provides="z3c.table.interfaces.IValues"
   />
 

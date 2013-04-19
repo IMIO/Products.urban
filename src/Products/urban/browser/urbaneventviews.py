@@ -4,8 +4,9 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.urban.Inquiry import Inquiry
 from Products.urban.browser.mapview import MapView
+from Products.urban.browser.tablevalue import BrainForUrbanTable, ObjectForUrbanTable
 from Products.urban.browser.urbantable import DocumentsTable, AnnexesTable, \
-        ClaimantsTable, RecipientsCadastreTable
+    ClaimantsTable, RecipientsCadastreTable
 
 
 class UrbanEventView(BrowserView):
@@ -53,6 +54,7 @@ class UrbanEventView(BrowserView):
         documents = event.getDocuments()
         if not documents:
             return ''
+
         documentlisting = DocumentsTable(documents, self.request)
         documentlisting.update()
         return documentlisting.render()

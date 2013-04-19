@@ -49,7 +49,7 @@
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
        <div>
-         <tal:listing content="structure view/renderContactListing" />
+         <tal:listing content="structure view/renderListing" />
         </div>
 
     </metal:body>

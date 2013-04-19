@@ -1,10 +1,6 @@
 ## -*- coding: utf-8 -*-
 
 from Products.Five import BrowserView
-from Acquisition import aq_inner
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.PloneBatch import Batch
-from Products.urban.browser.urbantable import NotariesTable, ArchitectsTable, GeometriciansTable
 
 
 class UrbanConfigFolderView(BrowserView):
@@ -16,27 +12,14 @@ class UrbanConfigFolderView(BrowserView):
         self.context = context
         self.request = request
 
-    def renderContactListing(self):
+    def renderObjectListing(self, table):
         if not self.context.objectValues():
             return ''
-        contact_type = self.context.objectValues()[0].portal_type
-        tables = {
-            'Architect': ArchitectsTable,
-            'Notary': NotariesTable,
-            'Geometrician': GeometriciansTable,
-        }
-        contactlisting = tables[contact_type](self.context, self.request)
-        contactlisting.update()
-        return contactlisting.render()
+        listing = table(self.context, self.request)
+        listing.update()
+        listing_render = listing.render()
+        batch_render = listing.renderBatch()
+        return '%s%s' % (listing_render, batch_render)
 
-    def listObjects(self, portal_type, context=None, batchlen=50):
-        context = context and context or aq_inner(self.context)
-        portal_catalog = getToolByName(context, 'portal_catalog')
-        query_string = {
-            'portal_type': portal_type,
-            'path': '/'.join(context.getPhysicalPath()),
-            'sort_on': 'getObjPositionInParent',
-        }
-        res = portal_catalog(query_string)
-        b_start = context.REQUEST.get('b_start', 0)
-        return Batch(res, batchlen, int(b_start), orphan=0)
+    def getCSSClass(self):
+        return ''
