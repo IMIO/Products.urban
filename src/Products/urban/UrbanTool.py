@@ -909,7 +909,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                     else:
                         xml.append('      <PERSOON>')
                         xml.append('        <naam>%s %s</naam>'
-                                   % (architectObj.getName1().encode('iso-8859-1'), architectObj.name2.encode('iso-8859-1')))
+                                   % (architectObj.getName1().decode('iso-8859-1').encode('iso-8859-1'), architectObj.getName2().decode('iso-8859-1').encode('iso-8859-1')))
                         xml.append('        <straatnaam>%s</straatnaam>' % architectObj.getStreet().decode('iso-8859-1').encode('iso-8859-1'))
                         xml.append('        <huisnr>%s</huisnr>' % architectObj.getNumber())
                         xml.append('        <postcode>%s</postcode>' % architectObj.getZipcode())
