@@ -1035,6 +1035,7 @@ def createLicence(site, licence_type, data):
     """
     urban_tool = site.portal_urban
     urban_folder = site.urban
+    catalog = getToolByName(site, 'portal_catalog')
 
     def getDummyValueForField(field, licence):
         if field.getName() in ['contributors', 'creators', 'language',
@@ -1061,7 +1062,6 @@ def createLicence(site, licence_type, data):
                     ref_folder = getattr(ref_folder, directory)
                 return [ref_folder.objectValues()[0]]
             elif field.widget.base_query:
-                catalog = getToolByName(licence, 'portal_catalog')
                 query = getattr(licence, field.widget.base_query)
                 brains = catalog(query())
                 if brains:
@@ -1097,7 +1097,11 @@ def createLicence(site, licence_type, data):
         if field_name in data.keys():
             mutator(data[field_name])
         elif field_name not in ['id', 'reference', 'contributors', 'creators', 'language', ]:
-            field_value = getDummyValueForField(field, licence)
+            field_value = None
+            if field_name == 'workLocations':
+                field_value = ({'number': '42', 'street': catalog(portal_type='Street')[0].UID},)
+            elif field_name != 'folderCategory' or field.vocabulary.getDisplayList(licence):
+                field_value = getDummyValueForField(field, licence)
             if field_value:
                 mutator(field_value)
     licence.processForm()
@@ -1114,14 +1118,16 @@ def createLicence(site, licence_type, data):
     licence.at_post_create_script()
     # add a dummy portion out
     portionout_data = {
-        'divisionCode': '[code XX]', 'division': '[division XX]', 'section': '[section XX]', 'radical': '[radical XX]',
-        'bis': '[bis XX]', 'exposant': '[exposant XX]', 'puissance': '[puissance XX]', 'partie': False
+        'divisionCode': '63020', 'division': '63020', 'section': 'A', 'radical': '84',
+        'exposant': 'C', 'partie': False
     }
     if 'portionout_data' in data:
         portionout_data = data['portionout_data']
     portionout_id = licence.invokeFactory('PortionOut', id=site.generateUniqueId('parcelle'), **portionout_data)
     portionout = getattr(licence, portionout_id)
-    portionout._renameAfterCreation()
+    #portionout._renameAfterCreation()
+    portionout.updateTitle()
+    portionout.reindexObject()
     licence.reindexObject(idxs=['parcelInfosIndex'])
     #generate all the urban events
     logger.info('   test %s --> create all the events' % licence_type)
