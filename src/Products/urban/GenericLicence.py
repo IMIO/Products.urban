@@ -117,7 +117,7 @@ schema = Schema((
         name='workLocations',
         schemata="urban_description",
         widget=DataGridWidget(
-            columns={'number' : Column("Number"), 'street' : ReferenceColumn("Street", surf_site=False, object_provides=('Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',))},
+            columns={'number': Column("Number"), 'street': ReferenceColumn("Street", surf_site=False, object_provides=('Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',))},
             helper_js=('datagridwidget.js', 'datagridautocomplete.js'),
             label='Worklocations',
             label_msgid='urban_label_workLocations',
@@ -269,7 +269,7 @@ schema = Schema((
         name='roadEquipments',
         schemata='urban_road',
         widget=DataGridWidget(
-            columns={'road_equipment' : SelectColumn("Road equipments", UrbanVocabulary('folderroadequipments', inUrbanConfig=False)), 'road_equipment_details' : Column("Road equipment details"),},
+            columns={'road_equipment': SelectColumn("Road equipments", UrbanVocabulary('folderroadequipments', inUrbanConfig=False)), 'road_equipment_details' : Column("Road equipment details"),},
             label='Roadequipments',
             label_msgid='urban_label_roadEquipments',
             i18n_domain='urban',
@@ -486,7 +486,7 @@ schema = Schema((
         ),
         schemata='urban_road',
         multiValued=1,
-        vocabulary=UrbanVocabulary('foldermakers', vocType="OrganisationTerm"),
+        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType"),
         default_method='getDefaultValue',
     ),
     BooleanField(
@@ -603,7 +603,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=1,
-        vocabulary=UrbanVocabulary('foldermakers', vocType="OrganisationTerm"),
+        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType"),
         default_method='getDefaultValue',
     ),
     StringField(

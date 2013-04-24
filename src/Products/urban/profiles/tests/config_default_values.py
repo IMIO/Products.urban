@@ -120,7 +120,7 @@ default_values = {
     ],
 
     'opinionstoaskifworks': [
-        'OrganisationTerm',
+        'UrbanVocabularyTerm',
         {'id': "ores-gaz-electricite", 'title': u"ORES - Gaz-Electricité", 'description': u"<p>Adresse</p>"},
     ],
 

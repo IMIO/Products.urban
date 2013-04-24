@@ -1022,7 +1022,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         urbanConfig = self.getUrbanConfig(context=None, urbanConfigId=urbanConfigId)
         cat = getToolByName(self, 'portal_catalog')
         path = '/'.join(urbanConfig.getPhysicalPath())
-        brains = cat(path=path, sort_on='getObjPositionInParent', meta_type=['UrbanEventType'], review_state="enabled")
+        brains = cat(path=path, sort_on='getObjPositionInParent', meta_type=['UrbanEventType', 'OpinionRequestEventType'], review_state="enabled")
         res = []
         #now evaluate the TAL condition for every brain
         for brain in brains:

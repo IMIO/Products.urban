@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-03-21 08:21+0000\n"
+"POT-Creation-Date: 2013-04-24 10:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -724,13 +724,13 @@ msgstr ""
 msgid "label_colname_Title"
 msgstr ""
 
+msgid "label_colname_address"
+msgstr ""
+
 msgid "label_colname_adr1"
 msgstr ""
 
 msgid "label_colname_adr2"
-msgstr ""
-
-msgid "label_colname_address"
 msgstr ""
 
 msgid "label_colname_applicant_data"
@@ -1095,10 +1095,10 @@ msgstr ""
 msgid "road_adaptation_no"
 msgstr ""
 
-msgid "roadspecificfeatures_folder_title"
+msgid "roadmissingparts_folder_title"
 msgstr ""
 
-msgid "roadmissingparts_folder_title"
+msgid "roadspecificfeatures_folder_title"
 msgstr ""
 
 msgid "rubrics_folder_title"
@@ -1336,11 +1336,6 @@ msgstr ""
 #. Default: "Equipmenttype"
 #: Equipment.py
 msgid "urban_label_EquipmentType"
-msgstr ""
-
-#. Default: "Linkedopinionrequestevent"
-#: LinkedOpinionRequestEvent.py
-msgid "urban_label_LinkedOpinionRequestEvent"
 msgstr ""
 
 #. Default: "MiscDemandnumerotation"

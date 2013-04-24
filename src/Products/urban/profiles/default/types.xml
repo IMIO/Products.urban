@@ -61,8 +61,6 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanEventOpinionRequest"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="OrganisationTerm"
-         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="MiscDemand"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanConfigurationValue"

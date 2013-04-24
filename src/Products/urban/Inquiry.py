@@ -23,7 +23,6 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from plone.memoize.instance import memoize
 from zope.i18n import translate
 from OFS.ObjectManager import BeforeDeleteException
 from Products.CMFCore.utils import getToolByName
@@ -125,7 +124,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         multiValued=1,
-        vocabulary=UrbanVocabulary('foldermakers', vocType="OrganisationTerm"),
+        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType"),
         default_method='getDefaultValue',
     ),
     IntegerField(
@@ -371,8 +370,8 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
           Returns a formatted version of the folder maker address to be used in POD templates
         """
         urban_tool = getToolByName(self, 'portal_urban')
-        foldermakers_config = urban_tool.getUrbanConfig(self).foldermakers
-        foldermakers = [fm for fm in foldermakers_config.objectValues() if fm.id in self.getSolicitOpinionsTo()]
+        foldermakers_config = urban_tool.getUrbanConfig(self).urbaneventtypes
+        foldermakers = [fm for fm in foldermakers_config.objectValues('OpinionRequestEventType') if fm.id in self.getSolicitOpinionsTo()]
         toreturn = '<CSV>Nom|Description|AdresseLigne1|AdresseLigne2'
         for foldermaker in foldermakers:
             toreturn = toreturn + '%' + foldermaker.getAddressCSV()

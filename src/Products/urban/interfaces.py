@@ -162,10 +162,6 @@ class IUrbanEventOpinionRequest(Interface):
     """Marker interface for .UrbanEventOpinionRequest.UrbanEventOpinionRequest
     """
 
-class IOrganisationTerm(Interface):
-    """Marker interface for .OrganisationTerm.OrganisationTerm
-    """
-
 class IMiscDemand(Interface):
     """Marker interface for .MiscDemand.MiscDemand
     """
