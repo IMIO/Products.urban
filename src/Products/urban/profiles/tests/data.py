@@ -89,7 +89,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'sncb',
                     'title': "Demande d'avis (SNCB)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -100,7 +100,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'belgacom',
                     'title': "Demande d'avis (Belgacom)",
                     'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
@@ -174,7 +174,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'sncb',
                     'title': "Demande d'avis (SNCB)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -185,7 +185,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'belgacom',
                     'title': "Demande d'avis (Belgacom)",
                     'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
@@ -207,7 +207,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'sncb',
                     'title': "Demande d'avis (SNCB)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -218,7 +218,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'belgacom',
                     'title': "Demande d'avis (Belgacom)",
                     'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',

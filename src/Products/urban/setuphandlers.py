@@ -285,7 +285,7 @@ def addUrbanConfigs(context):
         if not hasattr(aq_base(configFolder), 'urbaneventtypes'):
             newFolderid = configFolder.invokeFactory("Folder", id="urbaneventtypes", title=_("urbaneventtypes_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
-            setFolderAllowedTypes(newFolder, ['UrbanEventType', 'AskOpinionEventType'])
+            setFolderAllowedTypes(newFolder, ['UrbanEventType', 'OpinionRequestEventType'])
 
         #add TownshipFolderCategories folder
         if not hasattr(aq_base(configFolder), 'townshipfoldercategories'):
