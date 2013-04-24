@@ -1,5 +1,18 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.config import GLOBAL_TEMPLATES
+
+globalTemplates = GLOBAL_TEMPLATES
+
+default_texts = {
+    'claimsTextDefaultValue':
+    """
+    <p>Je réclame le port obligatoire de la mini jupe à l'unif</p>
+    """
+}
+
+
+
 urbanEventTypes = {
                    'buildlicence':
                    (
