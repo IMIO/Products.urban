@@ -3,6 +3,8 @@
 from Products.CMFCore.utils import getToolByName
 import logging
 
+from Acquisition import aq_parent
+
 from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
@@ -23,9 +25,10 @@ def migrateToUrban118(context):
     logger.info("starting migration steps")
     # geometricians are now a portal_type of class Contact
     migrateGeometriciansMetaType(context)
+    # we merge organisationRequest vocabulary terms into their linked UrbanEventType
+    migrateOrganisationTerms(context)
 
-    # finish with reinstalling urban and adding the templates
-    logger.info("starting to reinstall urban...")
+    logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
     setup_tool = getToolByName(context, 'portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-extraPostInstall')
@@ -48,8 +51,8 @@ class GeometricianMetaTypeMigrator(object, InplaceATFolderMigrator):
 
 def migrateGeometriciansMetaType(context):
     """
-     The voc used for the specific features has now its own type : SpecificFeatureTerm
-     We have to migrate the UrbanVocabularyTerm used for the specific features to this new Type
+     Now, Geometrician class inherits from Contact class.
+     We have to migrate geometrician objects meta_type.
     """
     logger = logging.getLogger('urban: migrate Geometricians meta_type ->')
     logger.info("starting migration step")
@@ -65,6 +68,72 @@ def migrateGeometriciansMetaType(context):
     folder_path = '/'.join(geometricians_folder.getPhysicalPath())
     walker = migrator.walker(portal, migrator, query={'path': folder_path}, callBefore=contentmigrationLogger, logger=logger, purl=portal.portal_url)
     walker.go()
+
+    # we need to reset the class variable to avoid using current query in next use of CustomQueryWalker
+    walker.__class__.additionalQuery = {}
+    #enable linkintegrity checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
+
+    logger.info("migration step done!")
+
+
+class OrganisationTermMigrator(object, InplaceATFolderMigrator):
+    """
+    """
+    walker = CustomQueryWalker
+    src_meta_type = "UrbanEventType"
+    src_portal_type = "UrbanEventType"
+    dst_meta_type = "OpinionRequestEventType"
+    dst_portal_type = "OpinionRequestEventType"
+
+    def __init__(self, *args, **kwargs):
+        InplaceATFolderMigrator.__init__(self, *args, **kwargs)
+
+
+def migrateOrganisationTerms(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate organisationTerm into OpinionRequestEventType ->')
+    logger.info("starting migration step")
+
+    migrator = OrganisationTermMigrator
+    portal_url = getToolByName(context, 'portal_url')
+    portal = portal_url.getPortalObject()
+    catalog = getToolByName(portal, 'portal_catalog')
+    #to avoid link integrity problems, disable checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
+
+    # gather the uids of the UrbanEventType to migrate, for this we just follow
+    # the referenced UrbanEventType of each OrganisationTerm
+    organisationterm_brains = catalog(portal_type='OrganisationTerm')
+    organisationterms = [brain.getObject() for brain in organisationterm_brains]
+    temp = []
+    for term in organisationterms:
+        linked_eventtype = term.getLinkedOpinionRequestEvent()
+        if linked_eventtype:
+            temp.append((term, linked_eventtype.UID()))
+    uids_to_migrate = dict(temp).values()
+
+    # Run the walker to migrate portal_type
+    walker = migrator.walker(portal, migrator, query={'UID': uids_to_migrate}, callBefore=contentmigrationLogger, logger=logger, purl=portal.portal_url)
+    walker.go()
+
+    # update the new AskOpionEventType with the values of their old corresponding organistion term
+    for term in organisationterms:
+        event = term.getLinkedOpinionRequestEvent()
+        if event:
+            event.setDescription(term.Description())
+            event.setExtraValue(term.getExtraValue())
+            event.reindexObject()
+            logger.info("migrated UrbanEventType %s" % event.id)
+
+    # Eventually remove the foldermakers folder from urban config
+    portal_urban = portal.portal_urban
+    folder_path = '/'.join(portal_urban.getPhysicalPath())
+    foldermaker_brains = catalog(portal_type='Folder', id='foldermakers', path={'query': folder_path, 'depth': 2})
+    foldermakers = dict([(aq_parent(brain.getObject()), brain.id) for brain in foldermaker_brains])
+    for parent_folder, foldermakers_id in foldermakers.iteritems():
+        parent_folder.manage_delObjects(foldermakers_id)
 
     # we need to reset the class variable to avoid using current query in next use of CustomQueryWalker
     walker.__class__.additionalQuery = {}

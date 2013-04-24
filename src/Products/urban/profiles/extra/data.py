@@ -198,7 +198,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': "service-pop",
                     'title': "Demande d'avis (Service population)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -209,7 +209,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'spw-dgo1',
                     'title': "Demande d'avis (SPW-DGO1)",
                     'description': '<p>Direction Générale opérationnelle<br />Département du réseau de Namur et du Luxembourg<br />District 131.12 - SPY<br />37, Route de Saussin<br />5190 Spy</p>',
@@ -220,7 +220,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'dgrne',
                     'title': "Demande d'avis (DGRNE)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -231,7 +231,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'dnf',
                     'title': "Demande d'avis (DNF)",
                     'description': '<p>39, Avenue Reine Astrid<br />5000 Namur</p>',
@@ -242,7 +242,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'stp',
                     'title': "Demande d'avis (Service Technique Provincial)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -253,7 +253,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'pi',
                     'title': "Demande d'avis (Prévention Incendie)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -264,7 +264,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'bec',
                     'title': "Demande d'avis (Bureau d'études communal)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -275,7 +275,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'svp',
                     'title': "Demande d'avis (Service Voyer Principal)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -286,7 +286,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'agriculture',
                     'title': "Demande d'avis (Agriculture)",
                     'description': '<p>Direction Générale opérationnelle<br />Agriculture, Ressources naturelles et Environnement<br />Service extérieur de Wavre<br />4, Avenue Pasteur<br />1300 Wavre</p>',
@@ -297,7 +297,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'pn',
                     'title': "Demande d'avis (Parc Naturel)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -308,7 +308,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'crmsf',
                     'title': "Demande d'avis (Commission Royale des Monuments, Sites et Fouilles)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -319,7 +319,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'swde',
                     'title': "Demande d'avis (SWDE)",
                     'description': '<p>14, Rue Joseph Saintraint<br />5000 Namur</p>',
@@ -330,7 +330,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'ccatm',
                     'title': "Demande d'avis (CCATM)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -341,7 +341,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'inasep',
                     'title': "Demande d'avis (INASEP)",
                     'description': '<p>1b, Rue des Viaux<br />5100 Naninne</p>',
@@ -352,7 +352,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'belgacom',
                     'title': "Demande d'avis (Belgacom)",
                     'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
@@ -363,7 +363,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'spge',
                     'title': "Demande d'avis (SPGE)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -374,7 +374,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'cibe',
                     'title': "Demande d'avis (CIBE/Vivaqua)",
                     'description': '<p>70, Rue aux Laines<br />1000 Bruxelles</p>',
@@ -385,7 +385,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'sncb',
                     'title': "Demande d'avis (SNCB)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -396,7 +396,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'infrabel',
                     'title': "Demande d'avis (Infrabel)",
                     'description': '<p>Infrastructure ferroviaire<br />2/003, Place des Guillemins<br />4000 Liège</p>',
@@ -407,7 +407,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'voo',
                     'title': "Demande d'avis (VOO)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -801,7 +801,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': "service-pop",
                     'title': "Demande d'avis (Service population)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -812,7 +812,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'spw-dgo1',
                     'title': "Demande d'avis (SPW-DGO1)",
                     'description': '<p>Direction Générale opérationnelle<br />Département du réseau de Namur et du Luxembourg<br />District 131.12 - SPY<br />37, Route de Saussin<br />5190 Spy</p>',
@@ -823,7 +823,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'dgrne',
                     'title': "Demande d'avis (DGRNE)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -834,7 +834,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'dnf',
                     'title': "Demande d'avis (DNF)",
                     'description': '<p>39, Avenue Reine Astrid<br />5000 Namur</p>',
@@ -845,7 +845,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'stp',
                     'title': "Demande d'avis (Service Technique Provincial)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -856,7 +856,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'pi',
                     'title': "Demande d'avis (Prévention Incendie)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -867,7 +867,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'bec',
                     'title': "Demande d'avis (Bureau d'études communal)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -878,7 +878,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'svp',
                     'title': "Demande d'avis (Service Voyer Principal)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -889,7 +889,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'agriculture',
                     'title': "Demande d'avis (Agriculture)",
                     'description': '<p>Direction Générale opérationnelle<br />Agriculture, Ressources naturelles et Environnement<br />Service extérieur de Wavre<br />4, Avenue Pasteur<br />1300 Wavre</p>',
@@ -900,7 +900,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'pn',
                     'title': "Demande d'avis (Parc Naturel)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -911,7 +911,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'crmsf',
                     'title': "Demande d'avis (Commission Royale des Monuments, Sites et Fouilles)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -922,7 +922,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'swde',
                     'title': "Demande d'avis (SWDE)",
                     'description': '<p>14, Rue Joseph Saintraint<br />5000 Namur</p>',
@@ -933,7 +933,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'ccatm',
                     'title': "Demande d'avis (CCATM)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -944,7 +944,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'inasep',
                     'title': "Demande d'avis (INASEP)",
                     'description': '<p>1b, Rue des Viaux<br />5100 Naninne</p>',
@@ -955,7 +955,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'belgacom',
                     'title': "Demande d'avis (Belgacom)",
                     'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
@@ -966,7 +966,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'spge',
                     'title': "Demande d'avis (SPGE)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -977,7 +977,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'cibe',
                     'title': "Demande d'avis (CIBE/Vivaqua)",
                     'description': '<p>70, Rue aux Laines<br />1000 Bruxelles</p>',
@@ -988,7 +988,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'sncb',
                     'title': "Demande d'avis (SNCB)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -999,7 +999,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'infrabel',
                     'title': "Demande d'avis (Infrabel)",
                     'description': '<p>Infrastructure ferroviaire<br />2/003, Place des Guillemins<br />4000 Liège</p>',
@@ -1010,7 +1010,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'voo',
                     'title': "Demande d'avis (VOO)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1154,7 +1154,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': "service-pop",
                     'title': "Demande d'avis (Service population)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1165,7 +1165,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'spw-dgo1',
                     'title': "Demande d'avis (SPW-DGO1)",
                     'description': '<p>Direction Générale opérationnelle<br />Département du réseau de Namur et du Luxembourg<br />District 131.12 - SPY<br />37, Route de Saussin<br />5190 Spy</p>',
@@ -1176,7 +1176,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'dgrne',
                     'title': "Demande d'avis (DGRNE)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1187,7 +1187,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'dnf',
                     'title': "Demande d'avis (DNF)",
                     'description': '<p>39, Avenue Reine Astrid<br />5000 Namur</p>',
@@ -1198,7 +1198,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'stp',
                     'title': "Demande d'avis (Service Technique Provincial)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1209,7 +1209,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'pi',
                     'title': "Demande d'avis (Prévention Incendie)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1220,7 +1220,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'bec',
                     'title': "Demande d'avis (Bureau d'études communal)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1231,7 +1231,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'svp',
                     'title': "Demande d'avis (Service Voyer Principal)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1242,7 +1242,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'agriculture',
                     'title': "Demande d'avis (Agriculture)",
                     'description': '<p>Direction Générale opérationnelle<br />Agriculture, Ressources naturelles et Environnement<br />Service extérieur de Wavre<br />4, Avenue Pasteur<br />1300 Wavre</p>',
@@ -1253,7 +1253,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'pn',
                     'title': "Demande d'avis (Parc Naturel)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1264,7 +1264,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'crmsf',
                     'title': "Demande d'avis (Commission Royale des Monuments, Sites et Fouilles)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1275,7 +1275,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'swde',
                     'title': "Demande d'avis (SWDE)",
                     'description': '<p>14, Rue Joseph Saintraint<br />5000 Namur</p>',
@@ -1286,7 +1286,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'ccatm',
                     'title': "Demande d'avis (CCATM)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1297,7 +1297,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'inasep',
                     'title': "Demande d'avis (INASEP)",
                     'description': '<p>1b, Rue des Viaux<br />5100 Naninne</p>',
@@ -1308,7 +1308,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'belgacom',
                     'title': "Demande d'avis (Belgacom)",
                     'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
@@ -1319,7 +1319,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'spge',
                     'title': "Demande d'avis (SPGE)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1330,7 +1330,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'cibe',
                     'title': "Demande d'avis (CIBE/Vivaqua)",
                     'description': '<p>70, Rue aux Laines<br />1000 Bruxelles</p>',
@@ -1341,7 +1341,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'sncb',
                     'title': "Demande d'avis (SNCB)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1352,7 +1352,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'infrabel',
                     'title': "Demande d'avis (Infrabel)",
                     'description': '<p>Infrastructure ferroviaire<br />2/003, Place des Guillemins<br />4000 Liège</p>',
@@ -1363,7 +1363,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'voo',
                     'title': "Demande d'avis (VOO)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1560,7 +1560,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': "service-pop",
                     'title': "Demande d'avis (Service population)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1571,7 +1571,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'spw-dgo1',
                     'title': "Demande d'avis (SPW-DGO1)",
                     'description': '<p>Direction Générale opérationnelle<br />Département du réseau de Namur et du Luxembourg<br />District 131.12 - SPY<br />37, Route de Saussin<br />5190 Spy</p>',
@@ -1582,7 +1582,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'dgrne',
                     'title': "Demande d'avis (DGRNE)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1593,7 +1593,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'dnf',
                     'title': "Demande d'avis (DNF)",
                     'description': '<p>39, Avenue Reine Astrid<br />5000 Namur</p>',
@@ -1604,7 +1604,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'stp',
                     'title': "Demande d'avis (Service Technique Provincial)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1615,7 +1615,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'pi',
                     'title': "Demande d'avis (Prévention Incendie)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1626,7 +1626,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'bec',
                     'title': "Demande d'avis (Bureau d'études communal)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1637,7 +1637,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'svp',
                     'title': "Demande d'avis (Service Voyer Principal)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1648,7 +1648,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'agriculture',
                     'title': "Demande d'avis (Agriculture)",
                     'description': '<p>Direction Générale opérationnelle<br />Agriculture, Ressources naturelles et Environnement<br />Service extérieur de Wavre<br />4, Avenue Pasteur<br />1300 Wavre</p>',
@@ -1659,7 +1659,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'pn',
                     'title': "Demande d'avis (Parc Naturel)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1670,7 +1670,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'crmsf',
                     'title': "Demande d'avis (Commission Royale des Monuments, Sites et Fouilles)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1681,7 +1681,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'swde',
                     'title': "Demande d'avis (SWDE)",
                     'description': '<p>14, Rue Joseph Saintraint<br />5000 Namur</p>',
@@ -1692,7 +1692,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'ccatm',
                     'title': "Demande d'avis (CCATM)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1703,7 +1703,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'inasep',
                     'title': "Demande d'avis (INASEP)",
                     'description': '<p>1b, Rue des Viaux<br />5100 Naninne</p>',
@@ -1714,7 +1714,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'belgacom',
                     'title': "Demande d'avis (Belgacom)",
                     'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
@@ -1725,7 +1725,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'spge',
                     'title': "Demande d'avis (SPGE)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1736,7 +1736,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'cibe',
                     'title': "Demande d'avis (CIBE/Vivaqua)",
                     'description': '<p>70, Rue aux Laines<br />1000 Bruxelles</p>',
@@ -1747,7 +1747,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'sncb',
                     'title': "Demande d'avis (SNCB)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
@@ -1758,7 +1758,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'infrabel',
                     'title': "Demande d'avis (Infrabel)",
                     'description': '<p>Infrastructure ferroviaire<br />2/003, Place des Guillemins<br />4000 Liège</p>',
@@ -1769,7 +1769,7 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
-                    'portal_type': 'AskOpinionEventType',
+                    'portal_type': 'OpinionRequestEventType',
                     'id': 'voo',
                     'title': "Demande d'avis (VOO)",
                     'description': '<p>1, Rue xxx<br />xxxx Commune</p>',

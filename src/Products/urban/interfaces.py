@@ -190,6 +190,10 @@ class ISpecificFeatureTerm(Interface):
     """Marker interface for .SpecificFeatureTerm.SpecificFeatureTerm
     """
 
+class IOpinionRequestEventType(Interface):
+    """Marker interface for .OpinionRequestEventType.OpinionRequestEventType
+    """
+
 ##code-section FOOT
 class ILicenceContainer(Interface):
     """

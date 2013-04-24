@@ -40,6 +40,9 @@
   <type type_id="MiscDemand">
    <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
+  <type type_id="OpinionRequestEventType">
+   <bound-workflow workflow_id="activation_workflow" />
+  </type>
   <type type_id="OrganisationTerm">
    <bound-workflow workflow_id="activation_workflow" />
   </type>

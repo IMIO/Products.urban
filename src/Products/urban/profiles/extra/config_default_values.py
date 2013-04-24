@@ -572,7 +572,7 @@ default_values = {
     ],
 
     'opinionstoaskifworks': [
-        'OrganisationTerm',
+        'UrbanVocabularyTerm',
         {'id': "ores-gaz-electricite", 'title': u"ORES - Gaz-Electricité", 'description': u"<p>Adresse</p>"},
         {'id': "ores-eclairage-public", 'title': u"ORES - Service Eclairage public", 'description': u"<p>Adresse</p>"},
         {'id': "belgacom", 'title': u"Belgacom", 'description': u"<p>Adresse</p>"},
