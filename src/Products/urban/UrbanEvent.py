@@ -187,7 +187,7 @@ schema = Schema((
             label_msgid='urban_label_urbaneventtypes',
             i18n_domain='urban',
         ),
-        allowed_types=('UrbanEventType', 'AskOpinionEventType'),
+        allowed_types=('UrbanEventType', 'OpinionRequestEventType'),
         multiValued=0,
         relationship='UrbanEventType',
     ),
