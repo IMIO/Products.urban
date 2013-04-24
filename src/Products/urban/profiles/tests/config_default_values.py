@@ -124,12 +124,6 @@ default_values = {
         {'id': "ores-gaz-electricite", 'title': u"ORES - Gaz-Electricité", 'description': u"<p>Adresse</p>"},
     ],
 
-    'foldermakers': [
-        'OrganisationTerm',
-        {'id': "sncb", 'title': u"SNCB", 'description': u'<p>1, Rue xxx<br />xxxx Commune</p>'},
-        {'id': "belgacom", 'title': u"Belgacom", 'description': u'<p>60, Rue Marie Henriette<br />5000 Namur</p>'},
-    ],
-
     'investigationarticles': [
         'UrbanVocabularyTerm',
         {'id': "330-1", 'title': u"330 1° - « [...] bâtiments dont la hauteur est d'au moins quatre niveaux ou douze mètres sous corniche et [...] »", 'description': "<p>« la construction ou la reconstruction de bâtiments dont la hauteur est d'au moins quatre niveaux ou douze mètres sous corniche et dépasse de trois mètres ou plus la moyenne des hauteurs sous corniche des bâtiments situés dans la même rue jusqu'à cinquante mètres de part et d'autre de la construction projetée ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions »</p>", 'extraValue': "330 1°"},

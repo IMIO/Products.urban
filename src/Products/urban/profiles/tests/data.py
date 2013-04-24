@@ -1,14 +1,4 @@
 # -*- coding: utf-8 -*-
-from Products.urban.config import GLOBAL_TEMPLATES
-
-globalTemplates = GLOBAL_TEMPLATES
-
-default_texts = {
-    'claimsTextDefaultValue':
-    """
-    <p>Je réclame le port obligatoire de la mini jupe à l'unif</p>
-    """
-}
 
 urbanEventTypes = {
                    'buildlicence':
@@ -86,6 +76,28 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
+                    'portal_type': 'AskOpinionEventType',
+                    'id': 'sncb',
+                    'title': "Demande d'avis (SNCB)",
+                    'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+                    'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'externalDecision', ],
+                    'deadLineDelay': 15,
+                    'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
+                    'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+                    },
+                    {
+                    'portal_type': 'AskOpinionEventType',
+                    'id': 'belgacom',
+                    'title': "Demande d'avis (Belgacom)",
+                    'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
+                    'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'externalDecision', ],
+                    'deadLineDelay': 15,
+                    'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
+                    'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+                    },
+                    {
                     'id': "rapport-du-college",
                     'title': "Rapport du Collège",
                     'activatedFields': ['decisionDate', 'decision', 'decisionText'],
@@ -148,6 +160,28 @@ urbanEventTypes = {
                     'podTemplates': (),
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
+                    {
+                    'portal_type': 'AskOpinionEventType',
+                    'id': 'sncb',
+                    'title': "Demande d'avis (SNCB)",
+                    'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+                    'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'externalDecision', ],
+                    'deadLineDelay': 15,
+                    'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
+                    'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+                    },
+                    {
+                    'portal_type': 'AskOpinionEventType',
+                    'id': 'belgacom',
+                    'title': "Demande d'avis (Belgacom)",
+                    'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
+                    'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'externalDecision', ],
+                    'deadLineDelay': 15,
+                    'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
+                    'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+                    },
                    ),
                    'urbancertificatetwo':
                    (
@@ -156,6 +190,28 @@ urbanEventTypes = {
                     'title': "*** Demande d'avis CONFIG ***",
                     'activatedFields': [],
                     'TALCondition': "python: False",
+                    'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+                    },
+                    {
+                    'portal_type': 'AskOpinionEventType',
+                    'id': 'sncb',
+                    'title': "Demande d'avis (SNCB)",
+                    'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+                    'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'externalDecision', ],
+                    'deadLineDelay': 15,
+                    'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
+                    'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+                    },
+                    {
+                    'portal_type': 'AskOpinionEventType',
+                    'id': 'belgacom',
+                    'title': "Demande d'avis (Belgacom)",
+                    'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
+                    'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'externalDecision', ],
+                    'deadLineDelay': 15,
+                    'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
                     'podTemplates': (),
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },

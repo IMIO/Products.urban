@@ -285,7 +285,7 @@ def addUrbanConfigs(context):
         if not hasattr(aq_base(configFolder), 'urbaneventtypes'):
             newFolderid = configFolder.invokeFactory("Folder", id="urbaneventtypes", title=_("urbaneventtypes_folder_title", 'urban', context=site.REQUEST))
             newFolder = getattr(configFolder, newFolderid)
-            setFolderAllowedTypes(newFolder, 'UrbanEventType')
+            setFolderAllowedTypes(newFolder, ['UrbanEventType', 'AskOpinionEventType'])
 
         #add TownshipFolderCategories folder
         if not hasattr(aq_base(configFolder), 'townshipfoldercategories'):
@@ -375,12 +375,6 @@ def addUrbanConfigs(context):
 
         if not hasattr(aq_base(configFolder), 'locationmissingparts'):
             createFolderWithDefaultValues(configFolder, 'locationmissingparts', site, default_values, licence_type=urban_type)
-
-        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo', 'EnvClassThree']:
-            if not hasattr(aq_base(configFolder), 'foldermakers'):
-                newFolder = createFolderWithDefaultValues(configFolder, 'foldermakers', site, default_values)
-                #now, we need to specify that the description's mimetype is 'text/html'
-                setHTMLContentType(newFolder, 'description')
 
         if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo']:
             if not hasattr(aq_base(configFolder), 'investigationarticles'):
@@ -987,12 +981,8 @@ def addEventTypesAndTemplates(context):
     """
     site = context.getSite()
     tool = site.portal_urban
-    #add global templates, default UrbanEventTypes and their templates for documents generation
+    # add global templates, default UrbanEventTypes and their templates for documents generation
     updateAllUrbanTemplates(context)
-    #add OpinionRequest UrbanEventTypes by notifying the creation of their corresponding OrganisationTerm
-    for licence_type in ['BuildLicence', 'UrbanCertificateTwo', 'ParcelOutLicence', 'EnvClassThree']:
-        for organisation_term in getattr(tool, licence_type.lower()).foldermakers.objectValues():
-            event.notify(ObjectInitializedEvent(organisation_term))
 
 
 def setDefaultValues(context):

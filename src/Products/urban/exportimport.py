@@ -1,17 +1,10 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
-from quintagroup.transmogrifier.sitewalker import SiteWalkerSection
 from Products.urban.utils import moveElementAfter
 from Products.urban.utils import getMd5Signature
 from Products.urban.events.filesEvents import updateTemplateStylesEvent
 import logging
 logger = logging.getLogger('urban: setuphandlers')
-
-
-def exportUrbanStructure(context):
-    site = context.getSite()
-    tool = getToolByName(site, 'portal_urban')
-    return
 
 
 def loga(msg, type="info", gslog=None):
@@ -182,7 +175,8 @@ def addUrbanEventTypes(context):
             if folderEvent:
                 newUet = folderEvent
             else:
-                newUetId = uetFolder.invokeFactory("UrbanEventType", **uet)
+                portal_type = uet.get('portal_type', 'UrbanEventType')
+                newUetId = uetFolder.invokeFactory(portal_type, **uet)
                 newUet = getattr(uetFolder, newUetId)
                 if last_urbaneventype_id:
                     moveElementAfter(newUet, uetFolder, 'id', last_urbaneventype_id)
