@@ -63,6 +63,7 @@ ADD_CONTENT_PERMISSIONS = {
     'Inquiry': 'urban: Add Inquiry',
     'UrbanEventInquiry': 'urban: Add UrbanEvent',
     'UrbanEventOpinionRequest': 'urban: Add UrbanEventOpinionRequest',
+    'OrganisationTerm': 'urban: Add OrganisationTerm',
     'MiscDemand': 'urban: Add MiscDemand',
     'UrbanConfigurationValue': 'urban: Add UrbanConfigurationValue',
     'UrbanDoc': 'urban: Add UrbanDoc',
@@ -100,6 +101,7 @@ setDefaultRoles('urban: Add LicenceConfig', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PersonTitleTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Inquiry', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanEventOpinionRequest', ('Manager', 'Owner', 'Contributor'))
+setDefaultRoles('urban: Add OrganisationTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanConfigurationValue',  ('Manager', ))
 setDefaultRoles('urban: Add UrbanDoc', ("Manager", "Contributor"))

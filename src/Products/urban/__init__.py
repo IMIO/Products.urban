@@ -120,6 +120,7 @@ def initialize(context):
     import Inquiry
     import UrbanEventInquiry
     import UrbanEventOpinionRequest
+    import OrganisationTerm
     import MiscDemand
     import UrbanConfigurationValue
     import UrbanDoc

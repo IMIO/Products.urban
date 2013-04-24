@@ -269,7 +269,7 @@ schema = Schema((
         name='roadEquipments',
         schemata='urban_road',
         widget=DataGridWidget(
-            columns={'road_equipment': SelectColumn("Road equipments", UrbanVocabulary('folderroadequipments', inUrbanConfig=False)), 'road_equipment_details' : Column("Road equipment details"),},
+            columns={'road_equipment': SelectColumn("Road equipments", UrbanVocabulary('folderroadequipments', inUrbanConfig=False)), 'road_equipment_details': Column("Road equipment details"),},
             label='Roadequipments',
             label_msgid='urban_label_roadEquipments',
             i18n_domain='urban',
@@ -486,7 +486,7 @@ schema = Schema((
         ),
         schemata='urban_road',
         multiValued=1,
-        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType"),
+        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
         default_method='getDefaultValue',
     ),
     BooleanField(
@@ -603,7 +603,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=1,
-        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType"),
+        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
         default_method='getDefaultValue',
     ),
     StringField(

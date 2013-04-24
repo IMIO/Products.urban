@@ -124,7 +124,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         multiValued=1,
-        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType"),
+        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
         default_method='getDefaultValue',
     ),
     IntegerField(

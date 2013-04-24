@@ -30,6 +30,7 @@
   <type portal_type="Inquiry"/>
   <type portal_type="UrbanEventInquiry"/>
   <type portal_type="UrbanEventOpinionRequest"/>
+  <type portal_type="OrganisationTerm"/>
   <type portal_type="MiscDemand"/>
   <type portal_type="UrbanConfigurationValue"/>
   <type portal_type="UrbanDoc"/>

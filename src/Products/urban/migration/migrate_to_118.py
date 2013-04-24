@@ -118,22 +118,36 @@ def migrateOrganisationTerms(context):
     walker = migrator.walker(portal, migrator, query={'UID': uids_to_migrate}, callBefore=contentmigrationLogger, logger=logger, purl=portal.portal_url)
     walker.go()
 
-    # update the new AskOpionEventType with the values of their old corresponding organistion term
+    # update the new OpinionRequestEventType with the values of their old corresponding organistion term
     for term in organisationterms:
         event = term.getLinkedOpinionRequestEvent()
         if event:
             event.setDescription(term.Description())
-            event.setExtraValue(term.getExtraValue())
+            event.setExtraValue(term.Title())
             event.reindexObject()
+            event_id = event.getId()
+            if event_id.endswith('-opinion-request'):
+                event_id = event_id.replace('-opinion-request', '')
+                event.setId(event_id)
             logger.info("migrated UrbanEventType %s" % event.id)
 
-    # Eventually remove the foldermakers folder from urban config
+    # set OpinionRequestEventType in the allowed_types of urbaneventtypes folders
     portal_urban = portal.portal_urban
     folder_path = '/'.join(portal_urban.getPhysicalPath())
+    eventtypesfolder_brains = catalog(portal_type='Folder', id='urbaneventtypes', path={'query': folder_path, 'depth': 2})
+    eventtypesfolders = [brain.getObject() for brain in eventtypesfolder_brains]
+    for eventtypesfolder in eventtypesfolders:
+        portal_types = ['UrbanEventType', 'OpinionRequestEventType']
+        eventtypesfolder.setLocallyAllowedTypes(portal_types)
+        eventtypesfolder.setImmediatelyAddableTypes(portal_types)
+        logger.info("migrated urbaneventtypes config folder")
+
+    # Eventually remove the foldermakers folder from urban config
     foldermaker_brains = catalog(portal_type='Folder', id='foldermakers', path={'query': folder_path, 'depth': 2})
     foldermakers = dict([(aq_parent(brain.getObject()), brain.id) for brain in foldermaker_brains])
     for parent_folder, foldermakers_id in foldermakers.iteritems():
         parent_folder.manage_delObjects(foldermakers_id)
+        logger.info("removed %s foldermakers config folder" % parent_folder)
 
     # we need to reset the class variable to avoid using current query in next use of CustomQueryWalker
     walker.__class__.additionalQuery = {}

@@ -14,6 +14,7 @@
  <property name="filter_content_types">False</property>
  <property name="allowed_content_types">
    <element value="UrbanDoc"/>
+   <element value="UrbanDoc"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">base_view</property>
