@@ -1117,8 +1117,9 @@ def createLicence(site, licence_type, data):
     # call post script
     licence.at_post_create_script()
     # add a dummy portion out
+    division_code = division = str(urban_tool.findDivisions(all=False)[0]['da'])
     portionout_data = {
-        'divisionCode': '63020', 'division': '63020', 'section': 'A', 'radical': '84',
+        'divisionCode': division_code, 'division': division, 'section': 'A', 'radical': '84',
         'exposant': 'C', 'partie': False
     }
     if 'portionout_data' in data:

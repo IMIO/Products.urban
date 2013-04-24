@@ -25,6 +25,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.utils import DisplayList
+from Products.urban.UrbanTool import DB_QUERY_ERROR
 ##/code-section module-header
 
 schema = Schema((
@@ -215,7 +216,10 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
     security.declarePublic('listDivisionNames')
     def listDivisionNames(self):
         urban_tool = getToolByName(self, 'portal_urban')
-        return DisplayList([(str(div['da']), div['divname']) for div in urban_tool.findDivisions(all=False)])
+        divisions = urban_tool.findDivisions(all=False)
+        if DB_QUERY_ERROR in divisions[0]:
+            return DisplayList(divisions)
+        return DisplayList([(str(div['da']), div['divname']) for div in divisions])
 
     security.declarePublic('hasRelatedLicences')
     def hasRelatedLicences(self, licence_type=''):
