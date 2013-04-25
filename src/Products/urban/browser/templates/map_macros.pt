@@ -45,6 +45,7 @@
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.TreePanel.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.WMSCapabilitiesWindow.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.WMCReader.js'%staticPylonsHost"></script>
+    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.LayerStore.js'%staticPylonsHost"></script>
 </div>
 
 <div metal:define-macro="urbanMapScript" tal:define="staticPylonsHost context/portal_urban/getStaticPylonsHost">
@@ -52,6 +53,7 @@
 	</script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/urban-layout.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/urban-map.js'%staticPylonsHost"></script>
+    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.LayerStore.js'%staticPylonsHost"></script>
 </div>
 
 <div metal:define-macro="urbanFullMapScript" tal:define="staticPylonsHost context/portal_urban/getStaticPylonsHost">
@@ -59,5 +61,4 @@
 	</script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/main-layout.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/main-map.js'%staticPylonsHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.LayerStore.js'%staticPylonsHost"></script>
 </div>
