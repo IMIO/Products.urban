@@ -640,7 +640,11 @@ def addGlobalFolders(context):
         if not hasattr(conditions, folder_name):
             createFolderWithDefaultValues(conditions, folder_name, site, content_portal_type='UrbanVocabularyTerm')
     if not hasattr(tool, "additional_layers"):
-        createFolderWithDefaultValues(tool, 'additional_layers', site, content_portal_type='UrbanVocabularyTerm')
+        additional_layers_id = tool.invokeFactory("Folder", id="additional_layers", title=_("additonal_layers_folder_title", 'urban', context=site.REQUEST))
+        additional_layers = getattr(tool, additional_layers_id)
+        additional_layers.setConstrainTypesMode(1)
+        additional_layers.setLocallyAllowedTypes(['Layer'])
+        additional_layers.setImmediatelyAddableTypes(['Layer'])
 
     folder_names = ['persons_titles', 'persons_grades', 'country', 'decisions', 'externaldecisions']
     for folder_name in folder_names:
@@ -1192,7 +1196,7 @@ def setupExtra(context):
 
     if not hasattr(portal_urban, "additional_layers"):
         logger.warning("No 'additonal_layers' folder found in portal_urban, we create it.")
-        additional_layers_id = portal_urban.invokeFactory("Folder", id="additional_layers", title=_("additonal_layers_folder_title", 'urban', context=portal.REQUEST, default="Additional layers"))
+        additional_layers_id = portal_urban.invokeFactory("Folder", id="additional_layers", title=_("additonal_layers_folder_title", 'urban', context=portal.REQUEST))
         additional_layers = getattr(portal_urban, additional_layers_id)
         additional_layers.setConstrainTypesMode(1)
         additional_layers.setLocallyAllowedTypes(['Layer'])
