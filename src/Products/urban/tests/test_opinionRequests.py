@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest
 from zope import event
-from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Archetypes.event import EditBegunEvent
+from Products.CMFCore.utils import getToolByName
 from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL, URBAN_TESTS_LICENCES
 
@@ -16,40 +16,12 @@ class TestOpinionRequest (unittest.TestCase):
         self.portal_urban = portal.portal_urban
         login(portal, 'urbanmanager')
 
-    def testCreateOrganisationTerm(self):
+    def testCreateOpinionRequestEventType(self):
         tool = self.portal_urban
-        foldermakers_folder = tool.buildlicence.foldermakers
-        term_id = foldermakers_folder.invokeFactory('OrganisationTerm', id='voodoo', title='Vood00', description='gni')
-        term = getattr(foldermakers_folder, term_id, 'NOT FOUND RHAAAAAAAAAAAAAAAAAAAAAA!!!!')
-        self.failUnless(term in foldermakers_folder.objectValues())
-
-    def testCreateLinkedUrbanEventType(self):
-        #when adding a new OrganisationTerm, a corresponding UrbanEventType 'opinion request' should be created as well
-        #and linked to it
-        tool = self.portal_urban
-        foldermakers_folder = tool.buildlicence.foldermakers
-        term_id = foldermakers_folder.invokeFactory('OrganisationTerm', id='voodoo', title='Vood00', description='gni')
-        term = getattr(tool.buildlicence.foldermakers, term_id)
-        event.notify(ObjectInitializedEvent(term))
-        self.failUnless(term.getLinkedOpinionRequestEvent() in tool.buildlicence.urbaneventtypes.objectValues())
-
-    def testCreatedLinkedUrbanEventTypeIsWellOrdered(self):
-        #when a linked UrbanEventType 'opinion request' is created, it should be positioned right after
-        #the last UrbanEventType 'opinion request' previously added
-
-        tool = self.portal_urban
-        foldermakers_folder = tool.buildlicence.foldermakers
-        #create an OrganisationTerm and notify it to automatically create a linked UrbanEventType 'opinion request'
-        term_id = foldermakers_folder.invokeFactory('OrganisationTerm', id='voodoo', title='Vood00', description='gni')
-        term = getattr(tool.buildlicence.foldermakers, term_id)
-        event.notify(ObjectInitializedEvent(term))
-
-        urbaneventtypes = tool.buildlicence.urbaneventtypes
-        created_urbaneventtype = term.getLinkedOpinionRequestEvent()
-        position = urbaneventtypes.getObjectPosition(created_urbaneventtype.id)
-        self.failUnless(urbaneventtypes.objectValues()[position - 1].getEventTypeType() == created_urbaneventtype.getEventTypeType())
-        if len(urbaneventtypes.objectValues()) > position + 1:
-            self.failUnless(urbaneventtypes.objectValues()[position + 1].getEventTypeType() != created_urbaneventtype.getEventTypeType())
+        urbaneventtypes_folder = tool.buildlicence.urbaneventtypes
+        term_id = urbaneventtypes_folder.invokeFactory('OpinionRequestEventType', id='voodoo', title='Vood00', description='gni')
+        term = getattr(urbaneventtypes_folder, term_id, 'NOT FOUND RHAAAAAAAAAAAAAAAAAAAAAA!!!!')
+        self.failUnless(term in urbaneventtypes_folder.objectValues())
 
 
 class TestOpinionRequestOnLicence (unittest.TestCase):
@@ -60,6 +32,22 @@ class TestOpinionRequestOnLicence (unittest.TestCase):
         portal = self.layer['portal']
         self.licence = portal.urban.buildlicences.objectValues()[0]
         login(portal, 'urbanmanager')
+
+    def testNewOpinioneventtypeAppearsInFieldVocabulary(self):
+        # when adding a new OpinionRequestEventType, its extraValue shouldbe
+        # used as the display value in the vocabulary of solicitOpinions field
+        # of buildlicences
+        tool = getToolByName(self.licence, 'portal_urban')
+        urbaneventtypes_folder = tool.buildlicence.urbaneventtypes
+
+        term_id = urbaneventtypes_folder.invokeFactory('OpinionRequestEventType', id='voodoo', title="Demande d'avis (Vood00)", extraValue='Vood00')
+        term = getattr(tool.buildlicence.urbaneventtypes, term_id)
+        expected_voc_term = (term_id, term.getExtraValue())
+
+        solicitOpinions_field = self.licence.getField('solicitOpinionsTo')
+        field_voc = solicitOpinions_field.vocabulary.getDisplayList(self.licence)
+
+        self.failUnless(expected_voc_term in field_voc.items())
 
     def testInquiryWithOpinionRequestIsLinkedToItsUrbanEventOpinionRequest(self):
         #if there is an inquiry with an opinion request and that its corresponding UrbanEventOpinionRequest

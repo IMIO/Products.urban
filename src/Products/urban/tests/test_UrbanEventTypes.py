@@ -53,9 +53,9 @@ class TestUrbanEventTypes(unittest.TestCase):
         for uet in self.portal_urban.buildlicence.urbaneventtypes.objectValues():
             uet.setIsKeyEvent(False)
             event.notify(ObjectEditedEvent(uet))
-        urban_event_type_b = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'belgacom-opinion-request', None)
+        urban_event_type_b = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'belgacom', None)
         buildlicence_brain = catalog(portal_type='BuildLicence')[0]
-        #set 'service-pop-opinion-request' as a key event, buildlicence last_key_event index should not change
+        #set 'belgacom' as a key event, buildlicence last_key_event index should not change
         #as the corresponding urbanEvent has never been created in this buildlicence
         urban_event_type_b.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_b))

@@ -4,7 +4,9 @@ History
 1.1.8 (unreleased)
 ------------------
 
-Turned all urban listings into z3c tables.
+Converted all urban listings into z3c tables.
+
+Simplified the opinion request configuration system (#5711).
 
 Added more columns on search result listing (#5535).
 

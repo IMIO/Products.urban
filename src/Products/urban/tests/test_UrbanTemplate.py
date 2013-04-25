@@ -64,18 +64,11 @@ class TestUrbanTemplates(unittest.TestCase):
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune2', 'urban-Commune2UpdateTemplates')
         self.assertEqual(my_file_odt.modified(), my_update_file_datetime)
 
-        # modify the value of property profilename (testCommune1) by (tests) and launch test profile : replace template
-        my_file_odt.manage_changeProperties({"profileName": 'tests'})
+        # modify the value of property profilename (testCommune1) by (extra) and launch test profile : replace template
+        my_file_odt.manage_changeProperties({"profileName": 'extra'})
         my_update_file_datetime = my_file_odt.modified()  # warning, date have changed by manage_changeProperties
         sleep(1)
         self.portal_setup.runImportStepFromProfile('profile-Products.urban:tests', 'urban-updateAllUrbanTemplates')
-        self.assertNotEqual(my_file_odt.modified(), my_update_file_datetime)
-
-        # modify the value of property md5Modified and update template test by profil testCommune1 : replace template
-        #   because the template profile is 'test' so we override it
-        my_file_odt.manage_changeProperties({"md5Modified": 'aaaaaaa'})
-        my_update_file_datetime = my_file_odt.modified()  # warning, date have changed by manage_changeProperties
-        self.portal_setup.runImportStepFromProfile('profile-Products.urban:testCommune1', 'urban-Commune1UpdateTemplates')
         self.assertNotEqual(my_file_odt.modified(), my_update_file_datetime)
 
         # change the value of property md5Modified, set the value of property profileName to testCommune1 and update template test
