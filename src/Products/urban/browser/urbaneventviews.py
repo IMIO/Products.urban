@@ -4,7 +4,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.urban.Inquiry import Inquiry
 from Products.urban.browser.mapview import MapView
-from Products.urban.browser.tablevalue import BrainForUrbanTable, ObjectForUrbanTable
 from Products.urban.browser.urbantable import DocumentsTable, AnnexesTable, \
     ClaimantsTable, RecipientsCadastreTable
 
@@ -97,7 +96,7 @@ class UrbanEventView(BrowserView):
     def _generateDocumentHref(self, context, template):
         """
         """
-        return "%s/createUrbanDoc?urban_template_uid = %s&urban_event_uid = %s" % (context.absolute_url(), template.UID(), context.UID())
+        return "%s/createUrbanDoc?urban_template_uid=%s&urban_event_uid=%s" % (context.absolute_url(), template.UID(), context.UID())
 
     def getUrbaneventtypes(self):
         """
