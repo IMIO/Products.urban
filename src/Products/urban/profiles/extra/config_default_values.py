@@ -583,6 +583,28 @@ default_values = {
         {'id': "voo", 'title': u"Voo", 'description': u"<p>Adresse</p>"},
     ],
 
+    'basement': [
+        'UrbanVocabularyTerm',
+        {'id': "zone-carriere", 'title': u"Le bien est situé à environ 50 m d'une zone de consultation en liaison avec les carrières souterraines"},
+        {'id': "zone-karstique", 'title': u"Le bien est situé à environ 50 m d'une zone de consultation en liaison avec les phénomènes karstiques"},
+        {'id': "zone-gisement-et-puit", 'title': u"Le bien est situé à environ 50 m d'une zone de consultation en liaison avec les gisements et puits de mine"},
+        {'id': "zone-miniere", 'title': u"Le bien est situé à environ 50 m d'une zone de consultation en liaison avec les minières de fer"},
+    ],
+
+    'zip': [
+        'UrbanVocabularyTerm',
+        {'id': "type-1", 'title': u"Type 1"},
+        {'id': "type-2", 'title': u"Type 2"},
+        {'id': "type-3", 'title': u"Type 3"},
+    ],
+
+    'noteworthytrees': [
+        'UrbanVocabularyTerm',
+        {'id': "arbres", 'title': u"Arbres remarquables"},
+        {'id': "alignement", 'title': u"Alignement d'arbres ou de haies remarquables "},
+        {'id': "haies", 'title': u"Zone Haie remarquable"},
+    ],
+
     'investigationarticles': [
         'UrbanVocabularyTerm',
         {'id': "330-1", 'title': u"330 1° - « [...] bâtiments dont la hauteur est d'au moins quatre niveaux ou douze mètres sous corniche et [...] »", 'description': "<p>« la construction ou la reconstruction de bâtiments dont la hauteur est d'au moins quatre niveaux ou douze mètres sous corniche et dépasse de trois mètres ou plus la moyenne des hauteurs sous corniche des bâtiments situés dans la même rue jusqu'à cinquante mètres de part et d'autre de la construction projetée ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions »</p>", 'extraValue': "330 1°"},
