@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-04-24 13:31+0000\n"
+"POT-Creation-Date: 2013-04-29 08:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -327,6 +327,9 @@ msgid "articles_folder_title"
 msgstr ""
 
 msgid "at_hour"
+msgstr ""
+
+msgid "basement_folder_title"
 msgstr ""
 
 msgid "buildings_layer_title"
@@ -939,6 +942,9 @@ msgstr ""
 msgid "notaryletters"
 msgstr ""
 
+msgid "noteworthytrees_folder_title"
+msgstr ""
+
 msgid "number_of_claimants"
 msgstr ""
 
@@ -1398,6 +1404,11 @@ msgstr ""
 msgid "urban_label_WMSUrl"
 msgstr ""
 
+#. Default: "Zip"
+#: UrbanCertificateBase.py
+msgid "urban_label_ZIP"
+msgstr ""
+
 #. Default: "Abbreviation"
 #: PersonTitleTerm.py
 msgid "urban_label_abbreviation"
@@ -1500,6 +1511,11 @@ msgstr ""
 #. Default: "Baselayer"
 #: Layer.py
 msgid "urban_label_baseLayer"
+msgstr ""
+
+#. Default: "Basement"
+#: UrbanCertificateBase.py
+msgid "urban_label_basement"
 msgstr ""
 
 #. Default: "Bestaddresscode"
@@ -2171,6 +2187,11 @@ msgstr ""
 msgid "urban_label_notaryContact"
 msgstr ""
 
+#. Default: "Noteworthytrees"
+#: UrbanCertificateBase.py
+msgid "urban_label_noteworthyTrees"
+msgstr ""
+
 #. Default: "Number"
 #: Contact.py
 #: PcaTerm.py
@@ -2294,6 +2315,11 @@ msgstr ""
 #. Default: "Plone user id"
 #: FolderManager.py
 msgid "urban_label_ploneUserId"
+msgstr ""
+
+#. Default: "Pollution"
+#: UrbanCertificateBase.py
+msgid "urban_label_pollution"
 msgstr ""
 
 msgid "urban_label_portionOuts"
@@ -2948,5 +2974,8 @@ msgid "warning_outdated_parcel"
 msgstr ""
 
 msgid "work_location"
+msgstr ""
+
+msgid "zip_folder_title"
 msgstr ""
 

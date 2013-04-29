@@ -367,6 +367,18 @@ def addUrbanConfigs(context):
                 #now, we need to specify that the description's mimetype is 'text/html'
                 setHTMLContentType(newFolder, 'description')
 
+            #we add the basement folder
+            if not hasattr(aq_base(configFolder), 'basement'):
+                createFolderWithDefaultValues(configFolder, 'basement', site, default_values)
+
+            #we add the zip folder
+            if not hasattr(aq_base(configFolder), 'zip'):
+                createFolderWithDefaultValues(configFolder, 'zip', site, default_values)
+
+            #we add the noteworthytrees folder
+            if not hasattr(aq_base(configFolder), 'noteworthytrees'):
+                createFolderWithDefaultValues(configFolder, 'noteworthytrees', site, default_values)
+
         if not hasattr(aq_base(configFolder), 'missingparts'):
             createFolderWithDefaultValues(configFolder, 'missingparts', site, default_values, licence_type=urban_type)
 

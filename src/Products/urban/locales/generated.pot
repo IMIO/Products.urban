@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Apr 24 15:27:38 2013\n"
-"PO-Revision-Date: Wed Apr 24 15:27:38 2013\n"
+"POT-Creation-Date: Fri Apr 26 08:44:47 2013\n"
+"PO-Revision-Date: Fri Apr 26 08:44:47 2013\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -147,6 +147,11 @@ msgstr ""
 msgid "urban_label_WMSUrl"
 msgstr ""
 
+#. Default: "Zip"
+#: UrbanCertificateBase.py
+msgid "urban_label_ZIP"
+msgstr ""
+
 #. Default: "Abbreviation"
 #: PersonTitleTerm.py
 msgid "urban_label_abbreviation"
@@ -241,6 +246,11 @@ msgstr ""
 #. Default: "Baselayer"
 #: Layer.py
 msgid "urban_label_baseLayer"
+msgstr ""
+
+#. Default: "Basement"
+#: UrbanCertificateBase.py
+msgid "urban_label_basement"
 msgstr ""
 
 #. Default: "Bestaddresskey"
@@ -758,6 +768,11 @@ msgstr ""
 msgid "urban_label_notaryContact"
 msgstr ""
 
+#. Default: "Noteworthytrees"
+#: UrbanCertificateBase.py
+msgid "urban_label_noteworthyTrees"
+msgstr ""
+
 #. Default: "Number"
 #: Contact.py
 #: EnvironmentRubricTerm.py
@@ -853,6 +868,11 @@ msgstr ""
 #. Default: "Ploneuserid"
 #: FolderManager.py
 msgid "urban_label_ploneUserId"
+msgstr ""
+
+#. Default: "Pollution"
+#: UrbanCertificateBase.py
+msgid "urban_label_pollution"
 msgstr ""
 
 #. Default: "Protectedbuilding"

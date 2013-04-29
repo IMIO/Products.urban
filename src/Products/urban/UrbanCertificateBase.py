@@ -37,7 +37,8 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 from DateTime import DateTime
 
 optional_fields = ['specificFeatures', 'roadSpecificFeatures', 'locationSpecificFeatures',
-                   'customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks']
+                   'customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks',
+                   'basement', 'ZIP', 'noteworthyTrees', 'pollution']
 ##/code-section module-header
 
 schema = Schema((
@@ -148,6 +149,55 @@ schema = Schema((
         schemata='urban_description',
         multiValued=1,
         vocabulary=UrbanVocabulary('opinionstoaskifworks'),
+        default_method='getDefaultValue',
+    ),
+    LinesField(
+        name='basement',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Basement',
+            label_msgid='urban_label_basement',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=True,
+        vocabulary=UrbanVocabulary('basement'),
+        default_method='getDefaultValue',
+    ),
+    BooleanField(
+        name='pollution',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Pollution',
+            label_msgid='urban_label_pollution',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+    ),
+    LinesField(
+        name='ZIP',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Zip',
+            label_msgid='urban_label_ZIP',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=True,
+        vocabulary=UrbanVocabulary('zip'),
+        default_method='getDefaultValue',
+    ),
+    LinesField(
+        name='noteworthyTrees',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Noteworthytrees',
+            label_msgid='urban_label_noteworthyTrees',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=True,
+        vocabulary=UrbanVocabulary('noteworthytrees'),
         default_method='getDefaultValue',
     ),
 
@@ -424,7 +474,11 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('notaryContact', after='workLocations')
     schema.moveField('foldermanagers', after='notaryContact')
     schema.moveField('description', after='opinionsToAskIfWorks')
-    schema.moveField('folderCategoryTownship', after='RCU')
+    schema.moveField('basement', after='RCU')
+    schema.moveField('ZIP', after='basement')
+    schema.moveField('noteworthyTrees', after='ZIP')
+    schema.moveField('pollution', after='noteworthyTrees')
+    schema.moveField('folderCategoryTownship', after='pollution')
     return schema
 
 finalizeSchema(UrbanCertificateBase_schema)

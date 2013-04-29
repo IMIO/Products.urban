@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2013-04-24 13:31+0000\n"
+"POT-Creation-Date: 2013-04-29 08:18+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -329,6 +329,9 @@ msgstr "Articles"
 
 msgid "at_hour"
 msgstr "à ${hour}"
+
+msgid "basement_folder_title"
+msgstr "Sous-sol"
 
 msgid "buildings_layer_title"
 msgstr "Couche bâtiments"
@@ -940,6 +943,9 @@ msgstr "Paramètres des Lettres de notaire"
 msgid "notaryletters"
 msgstr "Lettres de notaire"
 
+msgid "noteworthytrees_folder_title"
+msgstr "Arbres et haies remarquables"
+
 msgid "number_of_claimants"
 msgstr "Nombre de réclamants"
 
@@ -1341,7 +1347,7 @@ msgstr "Type d'équipement"
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"
-msgstr ""
+msgstr "Événement de deamnde d'avis lié"
 
 #. Default: "MiscDemandnumerotation"
 #: UrbanTool.py
@@ -1398,6 +1404,11 @@ msgstr "Numérotation des certificats d'urbanisme n°2"
 #: Layer.py
 msgid "urban_label_WMSUrl"
 msgstr "Adresse WMS (url)"
+
+#. Default: "Zip"
+#: UrbanCertificateBase.py
+msgid "urban_label_ZIP"
+msgstr "Zone d'initiative privilégiée"
 
 #. Default: "Abbreviation"
 #: PersonTitleTerm.py
@@ -1501,6 +1512,11 @@ msgstr "Date d'autorisation"
 #: Layer.py
 msgid "urban_label_baseLayer"
 msgstr "Couche de base (BaseLayer)?"
+
+#. Default: "Basement"
+#: UrbanCertificateBase.py
+msgid "urban_label_basement"
+msgstr "Sous-sol"
 
 #. Default: "Bestaddresscode"
 #: Street.py
@@ -2173,6 +2189,11 @@ msgstr "N° de registre national"
 msgid "urban_label_notaryContact"
 msgstr "Notaire(s)"
 
+#. Default: "Noteworthytrees"
+#: UrbanCertificateBase.py
+msgid "urban_label_noteworthyTrees"
+msgstr "Arbres et haies remarquables"
+
 #. Default: "Number"
 #: Contact.py
 #: PcaTerm.py
@@ -2297,6 +2318,11 @@ msgstr "Téléphone"
 #: FolderManager.py
 msgid "urban_label_ploneUserId"
 msgstr "Identifiant de l'utilisateur Plone lié"
+
+#. Default: "Pollution"
+#: UrbanCertificateBase.py
+msgid "urban_label_pollution"
+msgstr "Situé en zone polluée"
 
 msgid "urban_label_portionOuts"
 msgstr "Parcelles"
@@ -2953,4 +2979,7 @@ msgstr "Attention, la référence cadastrale n'est plus à jour!"
 
 msgid "work_location"
 msgstr "Lieu des travaux"
+
+msgid "zip_folder_title"
+msgstr "Zone d'initiative privilégiée"
 

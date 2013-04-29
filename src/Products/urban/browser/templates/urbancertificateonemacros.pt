@@ -312,6 +312,26 @@
   <td width="2%"></td>
   <td valign="top"><metal:myfield use-macro="python:here.widget('rcuDetails', mode='view')" /></td>
  </tr>
+ <tr tal:condition="python: 'basement' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_basement">RCU</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('basement', mode='view')" /></td>
+ </tr>
+ <tr tal:condition="python: 'ZIP' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_ZIP">RCU</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('ZIP', mode='view')" /></td>
+ </tr>
+ <tr tal:condition="python: 'noteworthyTrees' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_noteworthyTrees">RCU</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('noteworthyTrees', mode='view')" /></td>
+ </tr>
+ <tr tal:condition="python: 'pollution' in usedAttributes">
+  <td valign="top"><b><span i18n:translate="urban_label_pollution">RCU</span>:</b></td>
+  <td width="2%"></td>
+  <td valign="top"><metal:myfield use-macro="python:here.widget('pollution', mode='view')" /></td>
+ </tr>
  <tr tal:condition="python: 'locationSpecificFeatures' in usedAttributes"
      tal:define="specificfeatures python: view.getSpecificFeatures(subtype='location')">
   <td valign="top"><b><span i18n:translate="urban_label_locationSpecificFeatures">Location specific features</span>:</b></td>
@@ -326,11 +346,6 @@
      </tr>
    </table>
   </td>
- </tr>
- <tr tal:condition="python: 'locationDgrneUnderground' in usedAttributes">
-  <td valign="top"><b><span i18n:translate="urban_label_locationDgrneUnderground">DGRNE Underground</span>:</b></td>
-  <td width="2%"></td>
-  <td valign="top"><metal:myfield use-macro="python:here.widget('locationDgrneUnderground', mode='view')" /></td>
  </tr>
  <tr tal:condition="python: 'locationTechnicalAdvice' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_locationTechnicalAdvice">Location technical advice</span>:</b></td>
