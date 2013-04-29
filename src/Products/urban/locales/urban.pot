@@ -51,6 +51,9 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+msgid "Create proprietary/applicant"
+msgstr ""
+
 msgid "Declaration"
 msgstr ""
 

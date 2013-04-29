@@ -52,6 +52,9 @@ msgstr "Coordonnées du réclamant"
 msgid "Close"
 msgstr "Clôturer le permis"
 
+msgid "Create proprietary/applicant"
+msgstr "Créer le(s) demandeur(s)/propriétaire(s)"
+
 msgid "Declaration"
 msgstr "Déclaration"
 
