@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.Five import BrowserView
+from Products.urban.browser.urbantable import ParcelsTable
 
 
 class ParcellingTermView(BrowserView):
@@ -11,3 +12,10 @@ class ParcellingTermView(BrowserView):
         super(BrowserView, self).__init__(context, request)
         self.context = context
         self.request = request
+
+    def renderParcelsListing(self):
+        parcels = self.context.getParcels()
+        if not parcels:
+            return ''
+        parceltable = ParcelsTable(parcels, self.request)
+        return self.renderListing(parceltable)

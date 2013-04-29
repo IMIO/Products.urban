@@ -3,6 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from Products.urban.UrbanTool import DB_QUERY_ERROR
 from Products.urban.browser.urbantable import ParcelsTable
+from Products.urban.interfaces import IGenericLicence
 
 
 class SearchParcelsView(BrowserView):
@@ -23,6 +24,9 @@ class SearchParcelsView(BrowserView):
             if 'division' in request or 'location' in request or 'prcOwner' in request:
                 plone_utils = getToolByName(context, 'plone_utils')
                 plone_utils.addPortalMessage(translate('warning_enter_search_criteria'), type="warning")
+
+    def contextIsLicence(self):
+        return IGenericLicence.providedBy(self.context)
 
     def renderParcelsListing(self):
         parcels = self.context.getParcels()

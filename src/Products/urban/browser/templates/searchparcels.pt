@@ -205,12 +205,16 @@
    <td>
     <span tal:content="python: res['divname']"/>
     <span tal:content="python: res['prc']"/>
-    <span i18n:translate="" tal:condition="python: res.has_key('old') and res['old']">(Attention!! ancien nom de parcelle)</span><br>
-    <span tal:condition="python: res.has_key('location')" tal:content="python: res['location']"/><br>
-    <span tal:condition="python: res.has_key('proprietary')" tal:content="python: res['proprietary']"/><br>
+    <span i18n:translate="" tal:condition="python: 'old' in res and res['old']">(Attention!! ancien nom de parcelle)</span><br>
+    <span tal:condition="python: 'location' in res" tal:content="python: res['location']"/><br>
+    <span tal:condition="python: 'proprietary' in res" tal:content="python: res['proprietary']"/><br>
    </td>
    <td>
     <form i18n:domain="urban" name="quickAddParcel" tal:attributes="action python: context.absolute_url() + '/addPortionOutScript'" action="#" method="post">
+      <tal:create_owner condition="python: view.contextIsLicence() and 'proprietary' in res">
+         <input type="checkbox" name="owner" value="#" tal:attributes="value python: res['proprietary']"/>
+         <span i18n:translate=""> Create proprietary/applicant</span><br />
+      </tal:create_owner>
       <input type="hidden" name="division" value="#" tal:attributes="value python: res['division']" />
       <input type="hidden" name="section" value="#" tal:attributes="value python: res['section']" />
       <input type="hidden" name="radical" value="#" tal:attributes="value python: res['radical']" />
