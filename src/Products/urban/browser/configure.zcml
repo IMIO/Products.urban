@@ -683,6 +683,13 @@
      provides="Products.urban.browser.interfaces.IItemForUrbanTable"
   />
 
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.interfaces.IUrbanTable"
+     factory=".tablevalue.ValuesForUrbanListing"
+     provides="z3c.table.interfaces.IValues"
+  />
 
   <adapter
      for="zope.interface.Interface

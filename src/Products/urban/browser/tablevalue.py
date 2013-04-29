@@ -7,6 +7,7 @@ from plone.memoize import instance
 from z3c.table.value import ValuesMixin
 
 from zope.interface import implements
+from zope.component import queryAdapter
 
 from Products.urban.config import URBAN_TYPES
 from Products.urban.browser.interfaces import IItemForUrbanTable, IBrainForUrbanTable
@@ -20,6 +21,9 @@ class ItemForUrbanTable():
     def __init__(self, value):
         self.value = value
 
+    def __getattr__(self, attr_name):
+        return getattr(self.value, attr_name)
+
     @instance.memoize
     def getTool(self, toolname=''):
         context = self.getObject()
@@ -30,16 +34,16 @@ class ItemForUrbanTable():
         return self.value
 
     def getObject(self):
-        """ to override """
+        """ to implement """
 
     def getPortalType(self):
         return self.value.portal_type
 
     def getURL(self):
-        """ to override """
+        """ to implement """
 
     def getState(self):
-        """ to override """
+        """ to implement """
 
     def getWorkflowTransitions(self):
         portal_workflow = self.getTool('portal_workflow')
@@ -106,7 +110,6 @@ class ObjectForUrbanTable(ItemForUrbanTable):
     """
     """
 
-    @instance.memoize
     def getObject(self):
         return self.value
 
@@ -124,11 +127,23 @@ class ObjectForUrbanTable(ItemForUrbanTable):
         return state
 
 
-class ValuesForContactListing(ValuesMixin):
-    """  return contact values from the context """
+class ValuesForUrbanListing(ValuesMixin):
+    """ """
 
     @property
     def values(self):
+        items = self.getItems()
+        wrapped_items = [queryAdapter(item, IItemForUrbanTable) for item in items]
+        return wrapped_items
+
+    def getItems(self):
+        return self.context
+
+
+class ValuesForContactListing(ValuesForUrbanListing):
+    """  return contact values from the context """
+
+    def getItems(self):
         context = self.context
         catalog = getToolByName(context, 'portal_catalog')
         query_string = {
@@ -142,11 +157,10 @@ class ValuesForContactListing(ValuesMixin):
         return contact_brains
 
 
-class ValuesForParcellingListing(ValuesMixin):
+class ValuesForParcellingListing(ValuesForUrbanListing):
     """  return parcelling values from the context """
 
-    @property
-    def values(self):
+    def getItems(self):
         context = self.context
         catalog = getToolByName(context, 'portal_catalog')
         query_string = {
@@ -160,11 +174,10 @@ class ValuesForParcellingListing(ValuesMixin):
         return contact_brains
 
 
-class ValuesForLicenceListing(ValuesMixin):
+class ValuesForLicenceListing(ValuesForUrbanListing):
     """ return licence values from the context  """
 
-    @property
-    def values(self):
+    def getItems(self):
         licence_brains = self.queryLicences()
         return licence_brains
 
