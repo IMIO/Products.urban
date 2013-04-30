@@ -10,7 +10,7 @@ from zope.interface import implements
 from zope.component import queryAdapter
 
 from Products.urban.config import URBAN_TYPES
-from Products.urban.browser.interfaces import IItemForUrbanTable, IBrainForUrbanTable
+from Products.urban.browser.interfaces import IItemForUrbanTable, IBrainForUrbanTable, IObjectForUrbanTable
 
 
 class ItemForUrbanTable():
@@ -109,6 +109,7 @@ class BrainForUrbanTable(ItemForUrbanTable):
 class ObjectForUrbanTable(ItemForUrbanTable):
     """
     """
+    implements(IObjectForUrbanTable)
 
     def getObject(self):
         return self.value

@@ -18,4 +18,6 @@ class ParcellingTermView(BrowserView):
         if not parcels:
             return ''
         parceltable = ParcelsTable(parcels, self.request)
-        return self.renderListing(parceltable)
+        parceltable.update()
+        render = parceltable.render()
+        return render

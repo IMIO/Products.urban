@@ -39,6 +39,10 @@ class IBrainForUrbanTable(IItemForUrbanTable):
     """Marker interface for a brain listing that will be used in urban z3c tables"""
 
 
+class IObjectForUrbanTable(IItemForUrbanTable):
+    """Marker interface for an object listing that will be used in urban z3c tables"""
+
+
 class ISearchResultTable(IUrbanTable):
     """
     Marker interface for a search result table

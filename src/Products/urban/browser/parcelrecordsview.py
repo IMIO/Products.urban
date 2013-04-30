@@ -3,6 +3,7 @@ from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
+
 class ParcelRecordsView(BrowserView):
     """
       This manage the view of the popup showing the licences related to some parcels
@@ -23,8 +24,16 @@ class ParcelRecordsView(BrowserView):
         catalog = getToolByName(context, 'portal_catalog')
         parcel = getattr(context, self.parcel_id)
         parcel_infos = parcel.getIndexValue()
-        base_url = getToolByName(context, 'portal_url').getPortalObject().absolute_url()
-        return [{'title':brain.Title,
-            'url':'%s/%s' % (base_url, '/'.join(brain.getPath().split('/')[2:])),
-                 'class':'state-%s contenttype-%s' % (brain.review_state, brain.portal_type.lower())}
-                for brain in catalog(parcelInfosIndex=parcel_infos, sort_on='sortable_title') if brain.id != context.id]
+
+        related_brains = catalog(parcelInfosIndex=parcel_infos, sort_on='sortable_title')
+
+        related_items = []
+        for brain in related_brains:
+            if brain.id != context.id:
+                item_infos = {
+                    'title': brain.Title,
+                    'url': brain.getURL(),
+                    'class': 'state-%s contenttype-%s' % (brain.review_state, brain.portal_type.lower())
+                }
+                related_items.append(item_infos)
+        return related_items
