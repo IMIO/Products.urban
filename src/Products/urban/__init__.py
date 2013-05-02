@@ -110,8 +110,6 @@ def initialize(context):
     import City
     import UrbanCertificateBase
     import UrbanCertificateTwo
-    import Equipment
-    import Lot
     import Division
     import UrbanDelay
     import Locality

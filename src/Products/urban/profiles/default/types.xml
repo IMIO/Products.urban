@@ -41,10 +41,6 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanCertificateTwo"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Equipment"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Lot"
-         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Division"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanDelay"

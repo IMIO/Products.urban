@@ -52,7 +52,7 @@ from Products.urban.utils import ParcelHistoric
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS
 from Products.urban.config import GLOBAL_TEMPLATES
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.interfaces import IUrbanCertificateBase
+from Products.urban.interfaces import IUrbanCertificateBase, IUrbanVocabularyTerm
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 DB_QUERY_ERROR = "Programming error in query"
@@ -402,7 +402,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return html and '<p></p>' or ''
 
     security.declarePublic('listVocabulary')
-    def listVocabulary(self, vocToReturn, context, vocType=["UrbanVocabularyTerm", "OrganisationTerm"], id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False):
+    def listVocabulary(self, vocToReturn, context, vocType=["UrbanVocabularyTerm", "OrganisationTerm"], id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False, with_numbering=True):
         """
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
@@ -424,6 +424,11 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             #special case for 'Title' encoding
             if value_to_use == 'Title':
                 value = value.decode('utf-8')
+            if with_numbering:
+                vocterm = brain.getObject()
+                if IUrbanVocabularyTerm.providedBy(vocterm):
+                    numbering = vocterm.getNumbering() and '%s - ' % vocterm.getNumbering() or ''
+                    value = '%s%s' % (numbering, value)
             #display a special value for elements that are disabled in the configuration
             if brain.review_state == 'disabled':
                 value = '~~ %s ~~' % value

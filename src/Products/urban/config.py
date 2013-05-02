@@ -53,8 +53,6 @@ ADD_CONTENT_PERMISSIONS = {
     'City': 'urban: Add City',
     'UrbanCertificateBase': 'urban: Add UrbanCertificateBase',
     'UrbanCertificateTwo': 'urban: Add UrbanCertificateTwo',
-    'Equipment': 'urban: Add Equipment',
-    'Lot': 'urban: Add Lot',
     'Division': 'urban: Add Division',
     'UrbanDelay': 'urban: Add UrbanDelay',
     'Locality': 'urban: Add Locality',
@@ -92,8 +90,6 @@ setDefaultRoles('urban: Add PcaTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add City', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanCertificateBase', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanCertificateTwo', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Equipment', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Lot', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Division', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanDelay', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Locality', ("Manager", "Contributor"))

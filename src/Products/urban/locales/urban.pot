@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-04-29 08:18+0000\n"
+"POT-Creation-Date: 2013-05-02 08:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1304,6 +1304,11 @@ msgstr ""
 msgid "urban_help_locationDgrneUnderground"
 msgstr ""
 
+#. Default: "Use this field to add a custom numbering that will be shown in edit forms but not on document render."
+#: UrbanVocabularyTerm.py
+msgid "urban_help_numbering"
+msgstr ""
+
 #. Default: "If checked, an additional paragraph will be added in the licence document"
 #: BuildLicence.py
 msgid "urban_help_roadDgrneUnderground"
@@ -1340,11 +1345,6 @@ msgstr ""
 #. Default: "Environmentaldeclarationnumerotation"
 #: UrbanTool.py
 msgid "urban_label_EnvClassThreeNumerotation"
-msgstr ""
-
-#. Default: "Equipmenttype"
-#: Equipment.py
-msgid "urban_label_EquipmentType"
 msgstr ""
 
 #. Default: "Linkedopinionrequestevent"
@@ -2015,11 +2015,6 @@ msgstr ""
 msgid "urban_label_label"
 msgstr ""
 
-#. Default: "Launchdate"
-#: Equipment.py
-msgid "urban_label_launchDate"
-msgstr ""
-
 #. Default: "Layerformat"
 #: Layer.py
 msgid "urban_label_layerFormat"
@@ -2126,11 +2121,6 @@ msgstr ""
 msgid "urban_label_locationTechnicalRemarks"
 msgstr ""
 
-#. Default: "Usage"
-#: Lot.py
-msgid "urban_label_lotusage"
-msgstr ""
-
 #. Default: "Manageablelicences"
 #: FolderManager.py
 msgid "urban_label_manageableLicences"
@@ -2204,6 +2194,11 @@ msgstr ""
 #. Default: "Numberofparcels"
 #: ParcellingTerm.py
 msgid "urban_label_numberOfParcels"
+msgstr ""
+
+#. Default: "Numbering"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_numbering"
 msgstr ""
 
 #. Default: "Numerotation"
@@ -2633,11 +2628,6 @@ msgstr ""
 #. Default: "Subjects"
 #: EnvClassThree.py
 msgid "urban_label_subjects"
-msgstr ""
-
-#. Default: "Surface"
-#: Lot.py
-msgid "urban_label_surface"
 msgstr ""
 
 #. Default: "Tabsconfig"

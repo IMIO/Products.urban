@@ -680,6 +680,8 @@
 
   <!-- table values adapter -->
 
+  <!-- the next two adapters wrap any item used in an UrbanTable into an adapter
+       with memoized helper methods that compute informations to display about the item -->
   <adapter
      for="Products.ZCatalog.interfaces.ICatalogBrain"
      factory=".tablevalue.BrainForUrbanTable"

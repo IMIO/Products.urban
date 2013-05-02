@@ -14,7 +14,6 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = 'plaintext'
 
 from zope.component.interface import interfaceToName
-from plone.memoize import instance
 from AccessControl import ClassSecurityInfo
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.public import DisplayList
@@ -33,7 +32,6 @@ class UrbanBase(object):
     implements(interfaces.IUrbanBase)
 
     security.declarePublic('getLicenceConfig')
-    #@instance.memoize
     def getLicenceConfig(self):
         """
         """
@@ -469,14 +467,14 @@ class UrbanBase(object):
           Return the display value of the given field
         """
         obj = obj and obj or self
+        field_object = obj.getField(field_name)
         if not vocabulary:
-            displaylist = obj.Vocabulary(field_name)[0]
+            displaylist = field_object.vocabulary.getDisplayListForTemplate(obj)
         else:
             displaylist = DisplayList(vocabulary)
         if raw_value:
             field_value = raw_value
         else:
-            field_object = obj.getField(field_name)
             field_accessor = field_object.getAccessor(obj)
             field_value = field_accessor()
         if not field_value:
@@ -491,4 +489,4 @@ class UrbanBase(object):
           List a given vocabulary from the config
         """
         urbantool = getToolByName(self, 'portal_urban')
-        return urbantool.listVocabulary(voc_name, context=self, inUrbanConfig=inUrbanConfig)
+        return urbantool.listVocabulary(voc_name, context=self, inUrbanConfig=inUrbanConfig, with_numbering=False)

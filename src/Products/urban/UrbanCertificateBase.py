@@ -317,14 +317,22 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def _getSpecificFeaturesRows(self, location=''):
         portal_urban = getToolByName(self, 'portal_urban')
         vocname = '%sspecificfeatures' % location
-        vocterms = [brain.getObject() for brain in portal_urban.listVocabularyBrains(vocToReturn=vocname,  vocType=['SpecificFeatureTerm'], context=self)]
-        return [FixedRow(keyColumn='value', initialData={
+        vocterms = [brain.getObject() for brain in portal_urban.listVocabularyBrains(vocToReturn=vocname, vocType=['SpecificFeatureTerm'], context=self)]
+
+        rows = []
+        for vocterm in vocterms:
+            numbering = vocterm.getNumbering() and '%s - ' % vocterm.getNumbering() or ''
+            value = '%s%s' % (numbering, vocterm.Title())
+            row_data = {
                 'check': vocterm.getIsDefaultValue() and '1' or '',
                 'id': vocterm.id,
-                'value': vocterm.Title(),
+                'value': value,
                 'text': vocterm.Description(),
-                })
-                for vocterm in vocterms]
+            }
+            row = FixedRow(keyColumn='id', initialData=row_data)
+            rows.append(row)
+
+        return rows
 
     security.declarePublic('updateTitle')
     def updateTitle(self):

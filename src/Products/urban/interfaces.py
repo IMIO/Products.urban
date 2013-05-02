@@ -122,14 +122,6 @@ class IUrbanCertificateTwo(Interface):
     """Marker interface for .UrbanCertificateTwo.UrbanCertificateTwo
     """
 
-class IEquipment(Interface):
-    """Marker interface for .Equipment.Equipment
-    """
-
-class ILot(Interface):
-    """Marker interface for .Lot.Lot
-    """
-
 class IDivision(Interface):
     """Marker interface for .Division.Division
     """

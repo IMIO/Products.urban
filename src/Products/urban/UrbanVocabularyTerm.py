@@ -48,6 +48,16 @@ schema = Schema((
         accessor="Description",
     ),
     StringField(
+        name='numbering',
+        widget=StringField._properties['widget'](
+            description="Use this field to add a custom numbering that will be shown in edit forms but not on document render.",
+            label='Numbering',
+            label_msgid='urban_label_numbering',
+            description_msgid='urban_help_numbering',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
         name='extraValue',
         widget=StringField._properties['widget'](
             description="This field is made to store extra value if needed.",
@@ -142,6 +152,13 @@ class UrbanVocabulary(object):
         result = DisplayList(portal_urban.listVocabulary(self.path,
             content_instance, vocType=self.vocType, id_to_use=self.id_to_use, value_to_use=self.value_to_use, sort_on=self.sort_on,\
             inUrbanConfig=self.inUrbanConfig, allowedStates=self.allowedStates, with_empty_value=self.with_empty_value))
+        return result
+
+    def getDisplayListForTemplate(self, content_instance):
+        portal_urban = getToolByName(content_instance, 'portal_urban')
+        result = DisplayList(portal_urban.listVocabulary(self.path,
+            content_instance, vocType=self.vocType, id_to_use=self.id_to_use, value_to_use=self.value_to_use, sort_on=self.sort_on,\
+            inUrbanConfig=self.inUrbanConfig, allowedStates=self.allowedStates, with_empty_value=self.with_empty_value, with_numbering=False))
         return result
 
     def getObjectsSet(self, content_instance, values):

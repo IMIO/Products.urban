@@ -20,8 +20,6 @@
   <type portal_type="City"/>
   <type portal_type="UrbanCertificateBase"/>
   <type portal_type="UrbanCertificateTwo"/>
-  <type portal_type="Equipment"/>
-  <type portal_type="Lot"/>
   <type portal_type="Division"/>
   <type portal_type="UrbanDelay"/>
   <type portal_type="Locality"/>

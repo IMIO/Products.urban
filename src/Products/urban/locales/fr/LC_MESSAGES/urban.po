@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2013-04-29 08:18+0000\n"
+"POT-Creation-Date: 2013-05-02 08:51+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1304,6 +1304,11 @@ msgstr "Entrez le format (mimetype) de la couche, par exemple 'image/jpeg' ou 'i
 msgid "urban_help_locationDgrneUnderground"
 msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
 
+#. Default: "Use this field to add a custom numbering that will be shown in edit forms but not on document render."
+#: UrbanVocabularyTerm.py
+msgid "urban_help_numbering"
+msgstr "Utilisez ce champ pour numéroter de manière personnalisée les termes de vocabulaire. La numérotation apprait dans les formulaires mais pas dans les doucments générés."
+
 #. Default: "If checked, an additional paragraph will be added in the licence document"
 #: BuildLicence.py
 msgid "urban_help_roadDgrneUnderground"
@@ -1341,11 +1346,6 @@ msgstr "Numérotation des divisions"
 #: UrbanTool.py
 msgid "urban_label_EnvClassThreeNumerotation"
 msgstr "Numérotation des déclarations environnementales"
-
-#. Default: "Equipmenttype"
-#: Equipment.py
-msgid "urban_label_EquipmentType"
-msgstr "Type d'équipement"
 
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
@@ -2017,11 +2017,6 @@ msgstr "Dates clés"
 msgid "urban_label_label"
 msgstr "Libellé"
 
-#. Default: "Launchdate"
-#: Equipment.py
-msgid "urban_label_launchDate"
-msgstr "Date de mise en service"
-
 #. Default: "Layerformat"
 #: Layer.py
 msgid "urban_label_layerFormat"
@@ -2128,11 +2123,6 @@ msgstr "Conditions d'octroi du permis"
 msgid "urban_label_locationTechnicalRemarks"
 msgstr "Remarques techniques (Fiche Urbanisme)"
 
-#. Default: "Usage"
-#: Lot.py
-msgid "urban_label_lotusage"
-msgstr "Destination"
-
 #. Default: "Manageablelicences"
 #: FolderManager.py
 msgid "urban_label_manageableLicences"
@@ -2207,6 +2197,11 @@ msgstr "Numéro"
 #: ParcellingTerm.py
 msgid "urban_label_numberOfParcels"
 msgstr "Nombre de lots"
+
+#. Default: "Numbering"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_numbering"
+msgstr "Numérotation"
 
 #. Default: "Numerotation"
 #: LicenceConfig.py
@@ -2636,11 +2631,6 @@ msgstr "Détails sur le lotissement"
 #: EnvClassThree.py
 msgid "urban_label_subjects"
 msgstr "Rubriques"
-
-#. Default: "Surface"
-#: Lot.py
-msgid "urban_label_surface"
-msgstr "Surface"
 
 #. Default: "Tabsconfig"
 #: LicenceConfig.py
