@@ -329,7 +329,9 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
           Returns the contact base signaletic : title and names
         """
-        nameSignaletic = self._getNameSignaletic(short, linebyline)
+        urban_tool = getToolByName(self, 'portal_urban')
+        invertnames = urban_tool.getInvertAddressNames()
+        nameSignaletic = self._getNameSignaletic(short, linebyline, invertnames=invertnames)
         if not withaddress:
             if not linebyline:
                 return nameSignaletic
@@ -352,10 +354,13 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 addressSignaletic = addressSignaletic[3:-4]
                 return '<p>%s<br />%s</p>' % (nameSignaletic, addressSignaletic)
 
-    def _getNameSignaletic(self, short, linebyline):
+    def _getNameSignaletic(self, short, linebyline, invertnames=False):
         title = self.getPersonTitleValue(short, extra=False)
         namedefined = self.getName1() or self.getName2()
-        namepart = namedefined and '%s %s' % (self.getName1(), self.getName2()) or self.getSociety()
+        names = '%s %s' % (self.getName1(), self.getName2())
+        if invertnames and linebyline:
+            names = '%s %s' % (self.getName2(), self.getName1())
+        namepart = namedefined and names or self.getSociety()
         nameSignaletic = '%s %s' % (title, namepart)
         if len(self.getRepresentedBy()) > 0 or self.getRepresentedBySociety():
             person_title = self.getPersonTitle(theObject=True)

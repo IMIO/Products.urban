@@ -26,7 +26,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-
+    
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -93,7 +93,7 @@ schema = Schema((
     DataGridField(
         name='divisionsRenaming',
         widget=DataGridWidget(
-            columns={'division': FixedColumn('Division', visible=False), 'name': FixedColumn('Name'), 'alternative_name': Column('Alternative Name')},
+            columns={'division': FixedColumn('Division'), 'alternative_name': Column('Name')},
             label='Divisionsrenaming',
             label_msgid='urban_label_divisionsRenaming',
             i18n_domain='urban',
@@ -103,7 +103,7 @@ schema = Schema((
         allow_insert=False,
         allow_reorder=False,
         allow_oddeven=True,
-        columns=('division', 'name', 'alternative_name',),
+        columns=('division', 'alternative_name',),
     ),
     BooleanField(
         name='isDecentralized',
@@ -215,6 +215,15 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    BooleanField(
+        name='invertAddressNames',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Invertaddressnames',
+            label_msgid='urban_label_invertAddressNames',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )
@@ -254,7 +263,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def __init__(self, id=None):
         OrderedBaseFolder.__init__(self,'portal_urban')
         self.setTitle('Urban configuration')
-
+        
         ##code-section constructor-footer #fill in your manual code here
         ##/code-section constructor-footer
 
@@ -262,7 +271,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     # tool should not appear in portal_catalog
     def at_post_edit_script(self):
         self.unindexObject()
-
+        
         ##code-section post-edit-method-footer #fill in your manual code here
         self.checkDBConnection()
         ##/code-section post-edit-method-footer

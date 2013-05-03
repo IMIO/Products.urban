@@ -13,7 +13,9 @@ Added more columns on search result listing (#5535).
 Vocabulary term now have a the possibility to have a custom numbering that will only be displayed in forms but
 not in generated documents (#5408).
 
-Added the possibility to use an alternative name for divisions in generated documents (#5507).
+An alternative name of divisions can be configured for generated documents (#5507).
+
+Address names of mailing documents can now be inverted (#4763).
 
 bugfixes:
 - Create the correct link for UrbanDoc in the urban events when the licence is not
