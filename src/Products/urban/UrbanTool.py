@@ -93,7 +93,7 @@ schema = Schema((
     DataGridField(
         name='divisionsRenaming',
         widget=DataGridWidget(
-            columns={'division': FixedColumn('Division'), 'alternative_name': Column('Name')},
+            columns={'division': FixedColumn('Division', visible=False), 'name': FixedColumn('Name'), 'alternative_name': Column('Alternative Name')},
             label='Divisionsrenaming',
             label_msgid='urban_label_divisionsRenaming',
             i18n_domain='urban',
@@ -103,7 +103,7 @@ schema = Schema((
         allow_insert=False,
         allow_reorder=False,
         allow_oddeven=True,
-        columns=('division', 'alternative_name',),
+        columns=('division', 'name', 'alternative_name',),
     ),
     BooleanField(
         name='isDecentralized',
