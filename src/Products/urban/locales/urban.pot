@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-05-02 08:51+0000\n"
+"POT-Creation-Date: 2013-05-03 08:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1718,6 +1718,11 @@ msgstr ""
 #. Default: "Divisionsubject"
 #: Division.py
 msgid "urban_label_divisionSubject"
+msgstr ""
+
+#. Default: "Divisionsrenaming"
+#: UrbanTool.py
+msgid "urban_label_divisionsRenaming"
 msgstr ""
 
 #. Default: "Editionoutputformat"

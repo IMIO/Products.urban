@@ -10,6 +10,11 @@ Simplified the opinion request configuration system (#5711).
 
 Added more columns on search result listing (#5535).
 
+Vocabulary term now have a the possibility to have a custom numbering that will only be displayed in forms but
+not in generated documents (#5408).
+
+Added the possibility to use an alternative name for divisions in generated documents (#5507).
+
 bugfixes:
 - Create the correct link for UrbanDoc in the urban events when the licence is not
   in 'edit' state anymore.

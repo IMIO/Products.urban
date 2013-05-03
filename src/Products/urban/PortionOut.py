@@ -213,13 +213,22 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
     def getDivisionName(self):
         return self.listDivisionNames().getValue(self.getDivision())
 
+    security.declarePublic('getDivisionAlternativeName')
+    def getDivisionAlternativeName(self):
+        return self.listDivisionAlternativeNames().getValue(self.getDivision())
+
+    security.declarePublic('listDivisionAlternativeNames')
+    def listDivisionAlternativeNames(self):
+        return self._listDivisionNames(name='alternative_name')
+
     security.declarePublic('listDivisionNames')
     def listDivisionNames(self):
+        return self._listDivisionNames(name='name')
+
+    def _listDivisionNames(self, name='name'):
         urban_tool = getToolByName(self, 'portal_urban')
-        divisions = urban_tool.findDivisions(all=False)
-        if DB_QUERY_ERROR in divisions[0]:
-            return DisplayList(divisions)
-        return DisplayList([(str(div['da']), div['divname']) for div in divisions])
+        divisions = urban_tool.getDivisionsRenaming()
+        return DisplayList([(div['division'], div[name]) for div in divisions])
 
     security.declarePublic('hasRelatedLicences')
     def hasRelatedLicences(self, licence_type=''):

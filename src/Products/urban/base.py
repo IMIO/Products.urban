@@ -317,14 +317,14 @@ class UrbanBase(object):
             elif not isFirst:
                 toreturn += ', '
             elif isFirst:
-                first_div = portionOutObj.getDivisionName()
-                toreturn += '%s ' % portionOutObj.getDivisionName()
+                first_div = portionOutObj.getDivisionAlternativeName()
+                toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
                 first_section = portionOutObj.getSection()
                 toreturn += 'section %s' % portionOutObj.getSection()
                 toreturn += ' n° '
             else:
-                if first_div != portionOutObj.getDivisionName():
-                    toreturn += '%s ' % portionOutObj.getDivisionName()
+                if first_div != portionOutObj.getDivisionAlternativeName():
+                    toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
                 if first_section != portionOutObj.getSection():
                     toreturn += 'section %s ' % portionOutObj.getSection()
             toreturn += ' %s' % portionOutObj.getRadical()

@@ -63,17 +63,17 @@ schema = Schema((
     DataGridField(
         name='tabsConfig',
         widget=DataGridWidget(
-            columns= {'display' : CheckboxColumn('Display'), 'value' : FixedColumn('Value'), 'display_name' : Column('Name')},
+            columns={'display': CheckboxColumn('Display'), 'value': FixedColumn('Value'), 'display_name': Column('Name')},
             label='Tabsconfig',
             label_msgid='urban_label_tabsConfig',
             i18n_domain='urban',
         ),
-        allow_delete= False,
+        allow_delete=False,
         fixed_rows='getTabsConfigRows',
-        allow_insert= False,
-        allow_reorder= True,
-        allow_oddeven= True,
-        columns= ('display', 'value', 'display_name',),
+        allow_insert=False,
+        allow_reorder=True,
+        allow_oddeven=True,
+        columns=('display', 'value', 'display_name',),
     ),
     BooleanField(
         name='useTabbingForDisplay',

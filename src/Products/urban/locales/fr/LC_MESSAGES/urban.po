@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2013-05-02 08:51+0000\n"
+"POT-Creation-Date: 2013-05-03 08:05+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1720,6 +1720,11 @@ msgstr "Code division"
 #: Division.py
 msgid "urban_label_divisionSubject"
 msgstr "Objet"
+
+#. Default: "Divisionsrenaming"
+#: UrbanTool.py
+msgid "urban_label_divisionsRenaming"
+msgstr "Nom alternatif des divisions pour la génération des documents"
 
 #. Default: "Editionoutputformat"
 #: UrbanTool.py

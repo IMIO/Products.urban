@@ -20,6 +20,7 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.DataGridField import DataGridField, DataGridWidget
 from Products.urban.config import *
 
 
@@ -47,6 +48,9 @@ from Products.CMFCore.Expression import Expression, createExprContext
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFPlone.PloneBatch import Batch
 from Products.PageTemplates.Expressions import getEngine
+from Products.DataGridField.Column import Column
+from Products.DataGridField.DataGridField import FixedRow
+from Products.DataGridField.FixedColumn import FixedColumn
 from Products.urban.utils import getOsTempFolder
 from Products.urban.utils import ParcelHistoric
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS
@@ -85,6 +89,21 @@ schema = Schema((
             label_msgid='urban_label_cityName',
             i18n_domain='urban',
         ),
+    ),
+    DataGridField(
+        name='divisionsRenaming',
+        widget=DataGridWidget(
+            columns={'division': FixedColumn('Division', visible=False), 'name': FixedColumn('Name'), 'alternative_name': Column('Alternative Name')},
+            label='Divisionsrenaming',
+            label_msgid='urban_label_divisionsRenaming',
+            i18n_domain='urban',
+        ),
+        allow_delete=True,
+        fixed_rows='getDivisionsConfigRows',
+        allow_insert=False,
+        allow_reorder=False,
+        allow_oddeven=True,
+        columns=('division', 'name', 'alternative_name',),
     ),
     BooleanField(
         name='isDecentralized',
@@ -258,6 +277,20 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
           Post creation hook
         """
         self.checkDBConnection()
+
+    security.declarePublic('getDivisionsConfigRows')
+    def getDivisionsConfigRows(self):
+        """
+        """
+        divisions = self.findDivisions(all=False)
+        rows = []
+        if DB_QUERY_ERROR not in divisions[0].values():
+            for division in divisions:
+                division_id = str(division['da'])
+                name = division['divname']
+                row = FixedRow(keyColumn='division', initialData={'division': division_id, 'name': name, 'alternative_name': name})
+                rows.append(row)
+        return rows
 
     security.declarePublic('createUrbanEvent')
     def createUrbanEvent(self, licence_uid, urban_event_type_uid):
