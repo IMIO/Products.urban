@@ -6,9 +6,78 @@ from Products.urban.scripts.odtsearch import searchInTextElements
 import cgi
 import zipfile
 import xml.dom.minidom
+import psycopg2
 
 
-class testInvertNamesOfMailAddress(unittest.TestCase):
+class TestDivisionsRenaming(unittest.TestCase):
+    """
+     Names inversion in contact signaletic should occurs only if the option is set and only
+     when we call the signaletic line by line (case where its used in the mail address)
+    """
+
+    layer = URBAN_TESTS_LICENCES
+
+    def setUp(self):
+        portal = self.layer['portal']
+        self.portal = portal
+        self.buildlicence = portal.urban.buildlicences.objectValues()[0]
+
+        portal_urban = portal.portal_urban
+
+        #set the connection to the test cadatsral DB
+        portal_urban.setSqlHost('localhost')
+        portal_urban.setSqlName('urb_fleron')
+        portal_urban.setSqlUser('urb_fleron')
+        portal_urban.setSqlPassword('urb_fleron')
+        self.portal_urban = portal_urban
+
+        # set the test parcel division
+        parcel = self.buildlicence.getParcels()[0]
+        self.division = str(portal_urban.findDivisions(all=False)[0]['da'])
+        parcel.setDivision(self.division)
+        self.parcel = parcel
+
+        login(portal, 'urbaneditor')
+
+    def testDBConnection(self):
+        """
+         We should at least have a connection to a test DB in order
+         to run the remaining tests correctly
+        """
+        connection = self.portal_urban.getDBConnection()
+        self.failUnless(type(connection) == psycopg2._psycopg.connection)
+
+    def testNoDivisionRenaming(self):
+        licence = self.buildlicence
+        division = self.division
+        portal_urban = self.portal_urban
+
+        expected_division_name = [line['name'] for line in portal_urban.getDivisionsRenaming() if line['division'] == division]
+        expected_division_name = expected_division_name[0]
+
+        self.failUnless(expected_division_name in licence.getPortionOutsText())
+
+    def testDivisionRenaming(self):
+        licence = self.buildlicence
+        division = self.division
+        portal_urban = self.portal_urban
+
+        alternative_name = 'bla'
+        # so far we did not configured anything
+        self.failIf(alternative_name in licence.getPortionOutsText())
+
+        # configure an alternative name for the division
+        new_config = list(portal_urban.getDivisionsRenaming())
+        for line in new_config:
+            if line['division'] == division:
+                line['alternative_name'] = alternative_name
+                break
+        portal_urban.setDivisionsRenaming(new_config)
+
+        self.failUnless(alternative_name in licence.getPortionOutsText())
+
+
+class TestInvertNamesOfMailAddress(unittest.TestCase):
     """
      Names inversion in contact signaletic should occurs only if the option is set and only
      when we call the signaletic line by line (case where its used in the mail address)
@@ -23,7 +92,7 @@ class testInvertNamesOfMailAddress(unittest.TestCase):
         self.portal_urban = portal.portal_urban
         login(portal, 'urbaneditor')
 
-    def testDefaultBavior(self):
+    def testNameNotInvertedForAddressMailing(self):
         contacts = self.buildlicence.getApplicants()
         for contact in contacts:
             # by default, should be name1 followed by name 2 in all cases
