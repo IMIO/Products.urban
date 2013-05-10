@@ -126,6 +126,8 @@ class ParcelHistoric:
         self.childs = self.diffPrc(prcc, prc) and [prcc] or []
         self.prc = prc
         self.proprietary = refs.get('proprietary', '')
+        self.proprietary_city = refs.get('proprietary_city', '')
+        self.proprietary_street = refs.get('proprietary_street', '')
         self.location = refs.get('location', '')
         self.divname = self.division = self.section = self.radical = self.bis = self.exposant = self.puissance = ''
         self.refs = ['divname', 'division', 'section', 'radical', 'bis', 'exposant', 'puissance']
@@ -183,6 +185,8 @@ class ParcelHistoric:
             infos['prc'] = self.prc
         if self.proprietary:
             infos['proprietary'] = self.proprietary
+            infos['proprietary_city'] = self.proprietary_city
+            infos['proprietary_street'] = self.proprietary_street
         if self.location:
             infos['location'] = self.location
         return infos
@@ -211,7 +215,7 @@ class ParcelHistoric:
 
     def mergeRelatives(self, other, relationships=['parents', 'childs']):
         for relationship in relationships:
-            existing_relatives = [str(p) for p in getattr(self, relationship)]
+            existing_relatives = [str(relative) for relative in getattr(self, relationship)]
             relatives = [relative for relative in getattr(other, relationship) if str(relative) not in existing_relatives]
             self.addRelatives(relationship, relatives)
 

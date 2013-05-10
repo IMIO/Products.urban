@@ -1,4 +1,4 @@
-<div metal:define-macro="descriptionMacro" i18n:domain="urban">
+<div metal:define-macro="description_macro" i18n:domain="urban">
  <table cellspacing=0 cellpadding=0 width=100%>
  <tr>
   <td valign="top" width=49%>
@@ -76,7 +76,7 @@
  </table>
 </div>
 
-<div metal:define-macro="roadMacro" i18n:domain="urban">
+<div metal:define-macro="road_macro" i18n:domain="urban">
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
  <tr tal:condition="python: 'roadType' in usedAttributes">
   <td valign="top" width="200"><b><span i18n:translate="urban_label_roadType">Road type</span>:</b></td>
@@ -151,7 +151,7 @@
 </table>
 </div>
 
-<div metal:define-macro="locationMacro" i18n:domain="urban">
+<div metal:define-macro="location_macro" i18n:domain="urban">
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
  <tr tal:condition="python: 'folderZone' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_folderZone">Folder zone</span>:</b></td>

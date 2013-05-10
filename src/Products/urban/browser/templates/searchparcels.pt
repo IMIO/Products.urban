@@ -212,7 +212,9 @@
    <td>
     <form i18n:domain="urban" name="quickAddParcel" tal:attributes="action python: context.absolute_url() + '/addPortionOutScript'" action="#" method="post">
       <tal:create_owner condition="python: view.contextIsLicence() and 'proprietary' in res">
-         <input type="checkbox" name="owner" value="#" tal:attributes="value python: res['proprietary']"/>
+         <input type="checkbox" name="proprietary" value="#" tal:attributes="value python: res['proprietary']"/>
+         <input type="hidden" name="proprietary_city" value="#" tal:attributes="value python: res.get('proprietary_city', '')" />
+         <input type="hidden" name="proprietary_street" value="#" tal:attributes="value python: res.get('proprietary_street', '')" />
          <span i18n:translate=""> Create proprietary/applicant</span><br />
       </tal:create_owner>
       <input type="hidden" name="division" value="#" tal:attributes="value python: res['division']" />
@@ -223,6 +225,7 @@
       <input type="hidden" name="puissance" value="#" tal:attributes="value python: res['puissance']" />
       <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
       <input type="hidden" name="old" value="#" tal:attributes="value python: res.get('old', False)"/>
+      <input type="hidden" name="location" value="#" tal:attributes="value python: res.get('location', '')" />
       <input type="submit" class="context" id="parcel" value="Add this parcel" i18n:attributes="value" />
     </form>
 

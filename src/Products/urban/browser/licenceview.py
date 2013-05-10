@@ -28,6 +28,42 @@ class LicenceView(BrowserView):
         context = aq_inner(self.context)
         return getToolByName(context, 'portal_urban')
 
+    @view.memoize
+    def getMember(self):
+        context = aq_inner(self.context)
+        return context.restrictedTraverse('@@plone_portal_state/member')()
+
+    def getUrbanEventTypes(self):
+        licence = aq_inner(self.context)
+        config_id = licence.portal_type.lower()
+        portal_urban = self.getPortalUrban()
+
+        eventtypes = portal_urban.listEventTypes(licence, urbanConfigId=config_id)
+        return eventtypes
+
+    def canAddUrbanEvent(self):
+        licence = aq_inner(self.context)
+        member = self.getMember()
+
+        eventtypes = self.getUrbanEventTypes()
+        has_permission = member.has_permission('urban: Add UrbanEvent', licence)
+        return eventtypes and has_permission
+
+    def canAddAllAdvices(self):
+        licence = aq_inner(self.context)
+        member = self.getMember()
+
+        all_advices = licence.getAllAdvices()
+        has_permission = member.has_permission('urban: Add UrbanEvent', licence)
+        return all_advices and has_permission
+
+    def getAdviceTitles(self):
+        licence = aq_inner(self.context)
+        all_advices = licence.getAllAdvices()
+        advice_titles = [advice.Title() for advice in all_advices]
+        advice_titles = ', '.join(advice_titles)
+        return advice_titles
+
     def renderListing(self, table):
         table.update()
         return table.render()
@@ -66,16 +102,18 @@ class LicenceView(BrowserView):
     def getTabMacro(self, tab):
         context = aq_inner(self.context)
         portal_type = context.portal_type.lower()
-        if tab in ['description', 'road', 'location', 'peb']:
-            return context.unrestrictedTraverse('@@%s-macros/%sMacro' % (portal_type, tab))
-        else:
-            url_tool = getToolByName(context, 'portal_url')
-            site = url_tool.getPortalObject()
-            urban_macros = site.urban_macros
-            if tab == 'investigation_and_advices':
-                return urban_macros.macros['urbanInquiriesMacro']
-            else:
-                return urban_macros.macros['urbanEventsMacro']
+        macro_name = '%s_macro' % tab
+        # try to find the macro in the macro specifical to the licence
+        localmacros_view = '@@%s-macros' % portal_type
+        try:
+            macro = context.unrestrictedTraverse('%s/%s' % (localmacros_view, macro_name))
+        except:
+            macro = None
+        # else we use the default one
+        if not macro:
+            globalmacros_view = '@@licencemacros'
+            macro = context.unrestrictedTraverse('%s/%s' % (globalmacros_view, macro_name))
+        return macro
 
     def getTabs(self):
         return self.getLicenceConfig().getActiveTabs()

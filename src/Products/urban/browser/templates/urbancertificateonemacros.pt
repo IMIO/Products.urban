@@ -1,4 +1,4 @@
-<div metal:define-macro="descriptionMacro" i18n:domain="urban">
+<div metal:define-macro="description_macro" i18n:domain="urban">
  <table cellspacing=0 cellpadding=0 width=100%>
  <tr>
   <td valign="top" width=49%>
@@ -123,7 +123,7 @@
  </table>
 </div>
 
-<div metal:define-macro="roadMacro" i18n:domain="urban">
+<div metal:define-macro="road_macro" i18n:domain="urban">
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
  <tr tal:condition="python: 'roadMissingParts' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_roadMissingParts">Missing parts</span>:</b></td>
@@ -225,7 +225,7 @@
 </table>
 </div>
 
-<div metal:define-macro="locationMacro" i18n:domain="urban">
+<div metal:define-macro="location_macro" i18n:domain="urban">
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
  <tr tal:condition="python: 'locationMissingParts' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_locationMissingParts">Missing parts</span>:</b></td>

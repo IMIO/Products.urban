@@ -94,6 +94,14 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="licencemacros"
+     class=".licenceview.LicenceMacros"
+     template="templates/licencemacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IBuildLicence"
      name="buildlicenceview"
      class=".buildlicenceview.BuildLicenceView"

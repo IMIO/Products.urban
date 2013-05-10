@@ -26,7 +26,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-    
+
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -263,7 +263,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def __init__(self, id=None):
         OrderedBaseFolder.__init__(self,'portal_urban')
         self.setTitle('Urban configuration')
-        
+
         ##code-section constructor-footer #fill in your manual code here
         ##/code-section constructor-footer
 
@@ -271,7 +271,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     # tool should not appear in portal_catalog
     def at_post_edit_script(self):
         self.unindexObject()
-        
+
         ##code-section post-edit-method-footer #fill in your manual code here
         self.checkDBConnection()
         ##/code-section post-edit-method-footer
@@ -560,7 +560,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         query_string = browseold and \
             "SELECT distinct prca, prcc, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
             FROM pas left join da on da.da = pas.da" or \
-            "SELECT capa.da as division, divname, prc, section, radical, exposant, bis, puissance, pe as proprietary, sl1 as location \
+            "SELECT capa.da as division, divname, prc, section, radical, exposant, bis, puissance, pe as proprietary, \
+            adr1 as proprietary_city, adr2 as proprietary_street, sl1 as location \
             FROM map left join capa on map.capakey=capa.capakey left join da on capa.da = da.da "
         conditions = []
         division != 0 and conditions.append("%s.da= %s" % (browseold and 'pas' or 'capa', division))
@@ -633,27 +634,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         else:
             return False
 
-    security.declarePublic('createApplicant')
-    def createApplicant(self, licence, owner):
-        """
-           Create the PortionOut with given parameters...
-        """
-        contact_type = 'Applicant'
-        if IUrbanCertificateBase.providedBy(licence):
-            contact_type = 'Proprietary'
-
-        contacts = owner.split('&')
-        for contact in contacts:
-            names = contact.split(',')
-            contact_info = {'isSameAddressAsWorks': True, 'name1': names[0]}
-            if len(names) > 1:
-                contact_info['name2'] = names[1].split()[0].capitalize()
-            licence.invokeFactory(contact_type, id=self.generateUniqueId(contact_type), **contact_info)
-
-        licence.updateTitle()
-
     security.declarePublic('createPortionOut')
-    def createPortionOut(self, path, division, section, radical, bis, exposant, puissance, partie, old=False):
+    def createPortionOut(self, container, division, section, radical, bis, exposant, puissance, partie, outdated=False):
         """
            Create the PortionOut with given parameters...
         """
@@ -663,12 +645,13 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             bis = '0' + bis
         if puissance == '0':
             puissance = ''
-        newParcelId = path.invokeFactory("PortionOut", id=self.generateUniqueId('PortionOut'), divisionCode=division, division=division, section=section,
-                                         radical=radical, bis=bis, exposant=exposant, puissance=puissance, partie=partie, outdated=old)
-        newParcel = getattr(path, newParcelId)
+        newParcelId = container.invokeFactory("PortionOut", id=self.generateUniqueId('PortionOut'), divisionCode=division,
+                                              division=division, section=section, radical=radical, bis=bis, exposant=exposant,
+                                              puissance=puissance, partie=partie, outdated=outdated)
+        newParcel = getattr(container, newParcelId)
         newParcel._renameAfterCreation()
         newParcel.at_post_create_script()
-        self.REQUEST.RESPONSE.redirect(path.absolute_url() + '/view')
+        self.REQUEST.RESPONSE.redirect(container.absolute_url() + '/view')
 
     security.declarePublic('getParcelsFromTopic')
     def getParcelsFromTopic(self, topicName):
