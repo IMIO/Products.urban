@@ -138,12 +138,15 @@ def addUrbanEventTypes(context):
     """
       Helper method for easily adding urbanEventTypes
     """
+    if context.readDataFile('urban_extra_marker.txt') is None:
+        return
     #add some UrbanEventTypes...
     #get the urbanEventTypes dict from the profile
     #get the name of the profile by taking the last part of the _profile_path
     profile_name = context._profile_path.split('/')[-1]
     module_name = 'Products.urban.profiles.%s.data' % profile_name
     attribute = 'urbanEventTypes'
+    import ipdb; ipdb.set_trace()
     module = __import__(module_name, fromlist=[attribute])
     urbanEventTypes = getattr(module, attribute)
 
