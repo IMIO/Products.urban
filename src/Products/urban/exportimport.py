@@ -146,7 +146,6 @@ def addUrbanEventTypes(context):
     profile_name = context._profile_path.split('/')[-1]
     module_name = 'Products.urban.profiles.%s.data' % profile_name
     attribute = 'urbanEventTypes'
-    import ipdb; ipdb.set_trace()
     module = __import__(module_name, fromlist=[attribute])
     urbanEventTypes = getattr(module, attribute)
 
