@@ -278,6 +278,8 @@ def addUrbanConfigs(context):
             configFolder.reindexObject()
         else:
             configFolder = getattr(tool, licenceConfigId)
+            configFolder.licencePortalType = urban_type
+            configFolder.reindexObject()
 
         #we just created the urbanConfig, proceed with other parameters...
         #parameters for every LicenceConfigs
