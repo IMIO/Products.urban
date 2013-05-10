@@ -8,6 +8,8 @@ from Acquisition import aq_parent
 from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
+from Products.urban.config import URBAN_TYPES
+
 logger = logging.getLogger('urban: migrations')
 
 
@@ -31,7 +33,6 @@ def migrateToUrban118(context):
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
     setup_tool = getToolByName(context, 'portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-extraPostInstall')
     logger.info("reinstalling urban done!")
     logger.info("migration done!")
 
@@ -127,8 +128,12 @@ def migrateOrganisationTerms(context):
             event.reindexObject()
             event_id = event.getId()
             if event_id.endswith('-opinion-request'):
-                event_id = event_id.replace('-opinion-request', '')
-                event.setId(event_id)
+                new_event_id = event_id.replace('-opinion-request', '')
+                parent = aq_parent(event)
+                try:
+                    parent.manage_renameObject(event_id, new_event_id)
+                except:
+                    pass
             logger.info("migrated UrbanEventType %s" % event.id)
 
     # set OpinionRequestEventType in the allowed_types of urbaneventtypes folders

@@ -40,7 +40,7 @@ def migrateToUrban117(context):
     logger.info("starting to reinstall urban...")
     setup_tool = getToolByName(context, 'portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-extraPostInstall')
+    # setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-extraPostInstall')
     logger.info("reinstalling urban done!")
     logger.info("migration done!")
 
