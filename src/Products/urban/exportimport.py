@@ -138,6 +138,8 @@ def addUrbanEventTypes(context):
     """
       Helper method for easily adding urbanEventTypes
     """
+    if context.readDataFile('urban_extra_marker.txt') is None:
+        return
     #add some UrbanEventTypes...
     #get the urbanEventTypes dict from the profile
     #get the name of the profile by taking the last part of the _profile_path
