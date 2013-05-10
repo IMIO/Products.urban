@@ -9,8 +9,8 @@ setup(name='Products.urban',
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
-        "Programming Language :: Python",
-        ],
+          "Programming Language :: Python",
+      ],
       keywords='',
       author='',
       author_email='',
@@ -23,11 +23,14 @@ setup(name='Products.urban',
       include_package_data=True,
       zip_safe=False,
       extras_require=dict(
-            test=['unittest2', 'zope.testing', 'plone.testing',
-                  'testfixtures',
-                  'plone.app.testing','communesplone.urban.schedule','communesplone.iconified_document_actions'],
-            templates=['Genshi',
-                  ]),
+          test=[
+              'unittest2', 'zope.testing', 'plone.testing',
+              'testfixtures',
+              'plone.app.testing', 'communesplone.urban.schedule', 'communesplone.iconified_document_actions'
+          ],
+          templates=[
+              'Genshi',
+          ]),
       install_requires=[
           'setuptools',
           'appy',
@@ -50,9 +53,12 @@ setup(name='Products.urban',
           'communesplone.iconified_document_actions',
           'Products.CMFPlacefulWorkflow',
           'quintagroup.transmogrifier',
-          'Products.ContentTypeValidator'],
+          'plone.z3ctable',
+          'Products.ContentTypeValidator',
+          'python-Levenshtein',
+      ],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',
-                'templates_per_site = Products.urban.templates:per_site']
+          'templates_per_site = Products.urban.templates:per_site']
       },
       )
