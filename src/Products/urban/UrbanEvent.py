@@ -332,10 +332,10 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
                 i=i+1
             if i<len(name):
                 i=i+1
-            while (i<len(name)) and (name[i] != ' '):
+            while (i<len(name)) and (name[i] not in ['&', ' ']):
                 prenom1=prenom1+name[i]
                 i=i+1
-            if i<len(name):
+            if i<len(name) and name[i] != '&':
                 i=i+1
             toreturn=prenom1
             if prenom1!='':
