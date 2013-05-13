@@ -468,6 +468,7 @@ class AddressColumn(UrbanColumn):
             address_render.append(render)
 
         address_render = '<br />'.join(address_render)
+        address_render = address_render.decode('utf-8')
 
         return address_render
 
