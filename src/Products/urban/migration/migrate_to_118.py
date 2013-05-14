@@ -134,7 +134,6 @@ def migrateOrganisationTerms(context):
                     parent.manage_renameObject(event_id, new_event_id)
                 except:
                     event.setTALCondition("python: here.mayAddOpinionRequestEvent('%s')" % event_id)
-                    pass
             logger.info("migrated UrbanEventType %s" % event.id)
 
     # set OpinionRequestEventType in the allowed_types of urbaneventtypes folders
