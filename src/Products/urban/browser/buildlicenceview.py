@@ -23,7 +23,6 @@ class BuildLicenceView(LicenceView):
     def getInquiriesForDisplay(self):
         """
           Returns the inquiries to display on the buildlicence_view
-          This will move to the buildlicenceview when it will exist...
         """
         context = aq_inner(self.context)
         inquiries = context.getInquiries()

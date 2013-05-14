@@ -76,8 +76,6 @@ del MiscDemand_schema['annoncedDelayDetails']
 del MiscDemand_schema['impactStudy']
 del MiscDemand_schema['referenceDGATLP']
 MiscDemand_schema['folderCategory'].widget.label_msgid='urban_label_category'
-MiscDemand_schema['solicitRoadOpinionsTo'].widget.visible=False
-MiscDemand_schema['solicitLocationOpinionsTo'].widget.visible=False
 MiscDemand_schema['missingParts'].widget.visible=False
 MiscDemand_schema['missingPartsDetails'].widget.visible=False
 ##/code-section after-schema
