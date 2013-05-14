@@ -1490,6 +1490,17 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
+                    'portal_type': 'OpinionRequestEventType',
+                    'id': 'belgacom',
+                    'title': "Demande d'avis (Service interne XXX)",
+                    'extraValue': "Service interne XXX",
+                    'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
+                    'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'externalDecision', ],
+                    'deadLineDelay': 15,
+                    'podTemplates': (),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+                    },
+                    {
                     'id': 'deliberation-college',
                     'title': "Délibération collège",
                     'activatedFields': ['decision',],

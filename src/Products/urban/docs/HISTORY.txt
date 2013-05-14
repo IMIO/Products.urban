@@ -1,8 +1,14 @@
 History
 =======
 
-1.1.8 (unreleased)
+1.1.9 (unreleased)
 ------------------
+
+Opinion request fields are now active for MiscDemand licences (#5933)
+
+
+1.1.8
+-----
 
 Converted all urban listings into z3c tables.
 
