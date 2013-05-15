@@ -60,4 +60,5 @@
 	</script>        
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/main-layout.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/main-map.js'%staticPylonsHost"></script>
+    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.LayerStore.js'%staticPylonsHost"></script>
 </div>
