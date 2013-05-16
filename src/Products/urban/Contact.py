@@ -383,6 +383,26 @@ class Contact(BaseContent, BrowserDefaultMixin):
         else:
             return nameSignaletic
 
+    security.declarePublic('isPlural')
+    def isPlural(self):
+        """
+        """
+        is_plural = self.getMultiplicity() == 'plural'
+        return is_plural
+
+    security.declarePublic('getMultiplicity')
+    def getMultiplicity(self):
+        """
+          Returns the contact person title multiplicity
+        """
+        person_title = self.getPersonTitle()
+        if person_title:
+            person_title_field = self.getField('personTitle')
+            title_vocabulary = person_title_field.vocabulary
+            person_title = title_vocabulary.getAllVocTerms(self)[person_title]
+            return person_title.getMultiplicity()
+        return None
+
     security.declarePublic('getAddress')
     def getAddress(self, linebyline=False):
         """
