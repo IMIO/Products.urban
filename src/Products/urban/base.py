@@ -468,7 +468,7 @@ class UrbanBase(object):
         """
         obj = obj and obj or self
         field_object = obj.getField(field_name)
-        if not vocabulary:
+        if not vocabulary and field_object.vocabulary:
             displaylist = field_object.vocabulary.getDisplayListForTemplate(obj)
         else:
             displaylist = DisplayList(vocabulary)
