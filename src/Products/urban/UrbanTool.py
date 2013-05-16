@@ -373,6 +373,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                                                       {'self': licenceFolder, 'urbanEventObj': urbanEventObj,
                                                        'applicantobj': applicantobj, 'recepisseobj': recepisseobj,
                                                        'tool': self,
+                                                       'template': urbanTemplateObj,
                                                        'collegesubmissionobj': collegesubmissionobj, },
                                                       temp_file_name, pythonWithUnoPath=self.getUnoEnabledPython())
                 renderer.run()
@@ -382,7 +383,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if templateStyles and templateStyles.size:
             templateStyles = StringIO(templateStyles)
         dict_arg = {'self': licenceFolder, 'urbanEventObj': urbanEventObj, 'applicantobj': applicantobj,
-                    'recepisseobj': recepisseobj, 'collegesubmissionobj': collegesubmissionobj, 'tool': self}
+                    'recepisseobj': recepisseobj, 'collegesubmissionobj': collegesubmissionobj, 'tool': self,
+                    'template': urbanTemplateObj}
         dict_arg.update(temp_file_names)
         renderer = appy.pod.renderer.Renderer(StringIO(urbanTemplateObj), dict_arg,
                                               tempFileName, pythonWithUnoPath=self.getUnoEnabledPython())
