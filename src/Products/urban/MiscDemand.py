@@ -18,6 +18,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
 from Products.urban.GenericLicence import GenericLicence
+from Products.urban.Inquiry import Inquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -68,6 +69,7 @@ setOptionalAttributes(schema, optional_fields)
 
 MiscDemand_schema = BaseFolderSchema.copy() + \
     getattr(GenericLicence, 'schema', Schema(())).copy() + \
+    getattr(Inquiry, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
@@ -80,7 +82,7 @@ MiscDemand_schema['missingParts'].widget.visible=False
 MiscDemand_schema['missingPartsDetails'].widget.visible=False
 ##/code-section after-schema
 
-class MiscDemand(BaseFolder, GenericLicence, BrowserDefaultMixin):
+class MiscDemand(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
