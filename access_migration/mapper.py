@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Products.CMFPlone.utils import normalizeString
 from Products.CMFCore.utils import getToolByName
 import subprocess
 import inspect
@@ -8,6 +7,8 @@ import csv
 #
 # Mappers
 #
+
+
 class BaseMapper(object):
 
     def __init__(self, db_name, table_name, site):
@@ -21,7 +22,7 @@ class BaseMapper(object):
         return self._query(query, withheader=True).next()
 
     def _query(self, query, withheader=False):
-        table = subprocess.Popen(['mdb-sql', self.db_name, '-p', '-d', ';'], stdin= subprocess.PIPE, stdout=subprocess.PIPE)
+        table = subprocess.Popen(['mdb-sql', self.db_name, '-p', '-d', ';'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         temp = open('temp', 'w')
         pos = withheader and 1 or 2
         temp.write('\n'.join(table.communicate(query)[0].split('\n')[pos:-2]))
@@ -56,7 +57,8 @@ class Mapper(BaseMapper):
 
     def getData(self, cellname, line=''):
         line = line and line or self.line
-        return line[self.sources[cellname]]
+        data = line[self.sources[cellname]]
+        return data
 
     def map(self, line, **kwargs):
         self.line = line
@@ -125,17 +127,21 @@ class SecondaryTableMapper(Mapper):
 #
 #Loggers
 #
+
+
 def log(migration_object, message, data={}):
     factory_stack = _getLocals('createPloneObjects')['stack']
     migrator_locals = _getLocals('migrate')
     migrator = migrator_locals['self']
     migrator.log(migrator_locals, migration_object, message, factory_stack, data)
 
+
 def logError(migration_object, message, data={}):
     factory_stack = _getLocals('createPloneObjects')['stack']
     migrator_locals = _getLocals('migrate')
     migrator = migrator_locals['self']
     migrator.logError(migrator_locals, migration_object, message, factory_stack, data)
+
 
 def _getLocals(fun_name):
     stack = inspect.stack()

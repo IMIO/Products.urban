@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-from Products.urban.Extensions.access_migration.mapper import log, logError
+from Products.urban.Extensions.access_migration import mapper
 from Products.CMFPlone.utils import normalizeString
 
 #
 # Factories
 #
+
+
 class BaseFactory(object):
 
     def __init__(self, site, portal_type=''):
@@ -24,7 +26,7 @@ class BaseFactory(object):
         return [obj]
 
     def logError(self, msg, data={}):
-        logError(self, msg, data)
+        mapper.logError(self, msg, data)
 
     def getCreationPlace(self, **kwargs):
         return None
@@ -46,4 +48,3 @@ class MultiObjectsFactory(BaseFactory):
                 args['id'] = self.getDefaultId(place, **args)
             objs.append(super(MultiObjectsFactory, self).create(place, **args)[0])
         return objs
-
