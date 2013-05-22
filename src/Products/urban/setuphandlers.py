@@ -593,6 +593,9 @@ def addGlobalFolders(context):
         ),
     )
 
+    types_tool = getToolByName(site, 'portal_types')
+    topictype = types_tool.get('Topic')
+    topictype.global_allow = True
     if not hasattr(tool, "topics"):
         topicsFolder = createFolderWithDefaultValues(tool, 'topics', site, content_portal_type='Topic')
     else:

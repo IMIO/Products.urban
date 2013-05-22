@@ -1490,6 +1490,14 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
+                    'id': "config-opinion-request",
+                    'title': "*** Demande d'avis CONFIG ***",
+                    'activatedFields': [],
+                    'TALCondition': "python: False",
+                    'podTemplates': ({'id': "lot-avis", 'title': "Courrier de demande d'avis"},),
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+                    },
+                    {
                     'portal_type': 'OpinionRequestEventType',
                     'id': 'belgacom',
                     'title': "Demande d'avis (Service interne XXX)",
