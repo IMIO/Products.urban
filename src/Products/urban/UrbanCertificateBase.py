@@ -148,7 +148,7 @@ schema = Schema((
         ),
         schemata='urban_description',
         multiValued=1,
-        vocabulary=UrbanVocabulary('opinionstoaskifworks'),
+        vocabulary=UrbanVocabulary('opinionstoaskifworks', vocType='OrganisationTerm'),
         default_method='getDefaultValue',
     ),
     LinesField(
