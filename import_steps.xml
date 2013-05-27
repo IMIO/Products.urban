@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<import-steps>
+
+ <import-step
+    id="urban-monsAIHMMigration"
+    handler="Products.urban.profiles.monsAIHM.import.importMonsAIHM"
+    title="AIHM import for Mons"
+    version="2013-01-04T11:30:41.455297">
+  AIHM import for Mons
+ </import-step>
+
+</import-steps>
