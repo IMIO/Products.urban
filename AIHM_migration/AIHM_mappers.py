@@ -112,7 +112,8 @@ class ReferenceMapper(PostCreationMapper):
 
 class ArchitectMapper(PostCreationMapper):
     def mapArchitects(self, line, plone_object, **kwargs):
-        fullname = self.getData('NomArchitecte').split()
+        archi_name = self.getData('NomArchitecte')
+        fullname = cleanAndSplitWord(archi_name)
         if not fullname:
             return []
         noisy_words = ['monsieur', 'madame', 'architecte', '&', ',', '.']
@@ -131,8 +132,11 @@ class GeometricianMapper(PostCreationMapper):
             if word not in ['géometre', 'géomètre']:
                 return
         name = self.getData('Nom')
+        name = cleanAndSplitWord(name)
         firstname = self.getData('Prenom')
-        geometrician = self.catalog(portal_type='Geometrician', Title=[name, firstname])
+        firstname = cleanAndSplitWord(firstname)
+        names = name + firstname
+        geometrician = self.catalog(portal_type='Geometrician', Title=names)
         if not geometrician:
             geometrician = self.catalog(portal_type='Geometrician', Title=name)
         if len(geometrician) == 1:
@@ -145,7 +149,7 @@ class GeometricianMapper(PostCreationMapper):
 class NotaryMapper(PostCreationMapper):
     def mapNotarycontact(self, line, plone_object, **kwargs):
         title = self.getData('Titre').lower()
-        if title and Titre_map[title] not in ['master', 'masters']:
+        if title not in Titre_map or Titre_map[title] not in ['master', 'masters']:
             return
         name = self.getData('Nom')
         firstname = self.getData('Prenom')
@@ -303,7 +307,7 @@ class ParcelFactory(MultiObjectsFactory):
                 found = searchview.findParcel(browseoldparcels=True, **args)
             if len(found) == 1:
                 args['divisionCode'] = args['division']
-                args['division'] = found[0]['divname']
+                args['division'] = args['division']
                 found_parcels[index] = args
             else:
                 not_found_parcels[index] = args

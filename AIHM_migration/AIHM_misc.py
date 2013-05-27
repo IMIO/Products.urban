@@ -55,7 +55,10 @@ Titre_map = {
     'm et mme.': 'madam_and_mister',
     'm. et mme.': 'madam_and_mister',
     'notaire': 'master',
+    'monsieur le notaire': 'master',
     'notaires': 'masters',
+    'ma\xc3\xaetre': 'master',
+    'ma\xc3\xaetres': 'masters',
 }
 
 country_map = {

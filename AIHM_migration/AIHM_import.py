@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from Products.urban.Extensions.AIHM_mapping import OBJECTS_STRUCTURE, fields_mapping
-from Products.urban.Extensions.mappers import Migrator
-import csv
-import os
+from Products.urban.Extensions.AIHM_migration.AIHM_mapping import OBJECTS_STRUCTURE, fields_mapping
+from Products.urban.Extensions.access_migration.migrator import AccessMigrator as Migrator
+from Products.urban.Extensions.access_migration.migrator import picklesErrorLog
 
 
-AIHM_FILENAME = 'urbanisme.csv'
+AIHM_FILENAME = 'export.csv'
+
 
 def importAIHM(self):
 
@@ -35,11 +35,12 @@ def importAIHM(self):
     path = './aihm_migration'
     AIHM_migrator = Migrator(context, db_name, table_name, OBJECTS_STRUCTURE, fields_mapping, path)
 
-    aihm_file = open('temp_1', 'w')
-    aihm_file.write(context.aihm_test.raw)
-    aihm_file = open('temp_1', 'r')
+    # aihm_file = open('temp_1', 'w')
+    # aihm_file.write(context.aihm_test.raw)
+    aihm_file = open(path + '/' + AIHM_FILENAME, 'r')
 
     AIHM_migrator.migrate(aihm_file, key='CLEF')
     errors = AIHM_migrator.sorted_errors
+    picklesErrorLog(errors, name='aihm error log', where=path)
     print errors.keys()
     import ipdb; ipdb.set_trace()
