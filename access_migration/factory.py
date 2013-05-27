@@ -17,7 +17,11 @@ class BaseFactory(object):
         portal_type = 'portal_type' in kwargs.keys() and kwargs['portal_type'] or self.getPortalType(place, **kwargs)
         container = place and place or self.getCreationPlace(**kwargs)
         if 'id' in kwargs.keys():
-            object_id = container.invokeFactory(portal_type, **kwargs)
+            kwargs['id'] = kwargs['id'].strip('_')
+            try:
+                object_id = container.invokeFactory(portal_type, **kwargs)
+            except:
+                import ipdb; ipdb.set_trace()
         else:
             proposed_id = self.getDefaultId(**kwargs)
             object_id = container.invokeFactory(portal_type, id=proposed_id, **kwargs)

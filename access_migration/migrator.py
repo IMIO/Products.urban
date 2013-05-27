@@ -3,6 +3,22 @@ from Products.urban.Extensions.access_migration.mapper import PostCreationMapper
 from Products.CMFCore.utils import getToolByName
 import csv
 import os
+import pickle
+
+
+def picklesErrorLog(errors, filename='error log', where='.'):
+    current_directory = os.getcwd()
+    os.chdir(where)
+    i = 1
+    new_filename = filename
+    while filename in os.listdir('.'):
+        i = i + 1
+        new_filename = '%s - %i' % (filename, i)
+    errors_export = open(new_filename, 'w')
+    os.chdir(current_directory)
+    pickle.dump(errors, errors_export)
+    print 'error log "%s" pickled in : %s' % (new_filename, os.getcwd())
+    return new_filename
 
 
 #
@@ -41,7 +57,7 @@ class AccessMigrator(object):
             self.factories = self._setFactories(object_names, mapping)
             self.mappers = self._setMappersForAllObjects(db_name, table_name, object_names, mapping)
             self.allowed_containers = dict([(name, mapping[name]['allowed_containers']) for name in object_names
-                if 'allowed_containers' in mapping[name].keys()])
+                                            if 'allowed_containers' in mapping[name].keys()])
         finally:
             os.chdir(current_directory)
 
@@ -59,6 +75,7 @@ class AccessMigrator(object):
             for line in lines:
                 self.createPloneObjects(self.object_structure, line)
                 self.current_line += 1
+                print "PROCESSING LINE %i" % self.current_line
         finally:
             os.chdir(current_directory)
 
