@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-from Products.urban.Extensions.access_migration.mapper import log, logError
+from Products.urban.Extensions.access_migration import mapper
 from Products.CMFPlone.utils import normalizeString
 
 #
 # Factories
 #
+
+
 class BaseFactory(object):
 
     def __init__(self, site, portal_type=''):
@@ -15,7 +17,11 @@ class BaseFactory(object):
         portal_type = 'portal_type' in kwargs.keys() and kwargs['portal_type'] or self.getPortalType(place, **kwargs)
         container = place and place or self.getCreationPlace(**kwargs)
         if 'id' in kwargs.keys():
-            object_id = container.invokeFactory(portal_type, **kwargs)
+            kwargs['id'] = kwargs['id'].strip('_')
+            try:
+                object_id = container.invokeFactory(portal_type, **kwargs)
+            except:
+                import ipdb; ipdb.set_trace()
         else:
             proposed_id = self.getDefaultId(**kwargs)
             object_id = container.invokeFactory(portal_type, id=proposed_id, **kwargs)
@@ -24,7 +30,7 @@ class BaseFactory(object):
         return [obj]
 
     def logError(self, msg, data={}):
-        logError(self, msg, data)
+        mapper.logError(self, msg, data)
 
     def getCreationPlace(self, **kwargs):
         return None
@@ -46,4 +52,3 @@ class MultiObjectsFactory(BaseFactory):
                 args['id'] = self.getDefaultId(place, **args)
             objs.append(super(MultiObjectsFactory, self).create(place, **args)[0])
         return objs
-

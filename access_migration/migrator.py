@@ -1,16 +1,45 @@
 # -*- coding: utf-8 -*-
 from Products.urban.Extensions.access_migration.mapper import PostCreationMapper
-from Products.CMFPlone.utils import normalizeString
 from Products.CMFCore.utils import getToolByName
-import subprocess
-import inspect
 import csv
 import os
+import pickle
+
+
+def picklesErrorLog(errors, filename='error log', where='.'):
+    current_directory = os.getcwd()
+    os.chdir(where)
+    i = 1
+    new_filename = filename
+    while filename in os.listdir('.'):
+        i = i + 1
+        new_filename = '%s - %i' % (filename, i)
+    errors_export = open(new_filename, 'w')
+    os.chdir(current_directory)
+    pickle.dump(errors, errors_export)
+    print 'error log "%s" pickled in : %s' % (new_filename, os.getcwd())
+    return new_filename
+
 
 #
 #Migrator
 #
+
+
 class AccessMigrator(object):
+    """
+    expect:
+        context: a plone object context to work with
+        db_name: the .mdb filename to query
+        table_name: the main table in the data base (the one that will be used as 'central node' to recover licences)
+        object_structure: a data structure  that represent how objects are contained into each other
+                          eg: a licence contains applicants , parcel, and events
+                          see AIHM_mapping.OBJECTS_STRUCTURE as example
+        mapping: a dict describing the relation between the database table cells and the field of the plone objects
+                 that will be created
+
+    call "migrate" to launch the migration
+    """
 
     def __init__(self, context, db_name, table_name, object_structure, mapping, path='.',):
         current_directory = os.getcwd()
@@ -18,6 +47,7 @@ class AccessMigrator(object):
         self.errors = {}
         self.sorted_errors = {}
         self.key = ''
+        self.current_line = 1
         try:
             os.chdir(path)
             self.migration_directory = path
@@ -25,21 +55,27 @@ class AccessMigrator(object):
             self.site = getToolByName(context, 'portal_url').getPortalObject()
             object_names = self._flatten(object_structure)
             self.factories = self._setFactories(object_names, mapping)
-            self.mappers = self._setAllMappers(db_name, table_name, object_names, mapping)
+            self.mappers = self._setMappersForAllObjects(db_name, table_name, object_names, mapping)
             self.allowed_containers = dict([(name, mapping[name]['allowed_containers']) for name in object_names
                                             if 'allowed_containers' in mapping[name].keys()])
         finally:
             os.chdir(current_directory)
 
-    def migrate(self, csvfile, key=''):
+    def migrate(self, csvfile=None, key=''):
+        """
+         if no csv file
+        """
         current_directory = os.getcwd()
         self.key = key
         try:
             os.chdir(self.migration_directory)
             lines = csv.reader(csvfile)
             self.header = lines.next()
+            self.current_line += 1
             for line in lines:
                 self.createPloneObjects(self.object_structure, line)
+                self.current_line += 1
+                print "PROCESSING LINE %i" % self.current_line
         finally:
             os.chdir(current_directory)
 
@@ -47,8 +83,9 @@ class AccessMigrator(object):
         for obj_name, subobjects in node:
             factory_args = {}
             container = stack and stack[-1] or None
-            if not container or obj_name not in self.allowed_containers.keys() \
-               or (obj_name in self.allowed_containers.keys() and container.portal_type in self.allowed_containers[obj_name]):
+            unknown_container = obj_name not in self.allowed_containers.keys()
+            allowed_container = obj_name in self.allowed_containers.keys() and container.portal_type in self.allowed_containers[obj_name]
+            if not container or unknown_container or allowed_container:
                 #collect all the data(s) that will be passed to the factory
                 for mapper in self.mappers[obj_name]['pre']:
                     factory_args.update(mapper.map(line, container=container))
@@ -67,13 +104,13 @@ class AccessMigrator(object):
     def logError(self, migrator_locals, location, message, factory_stack, data):
         line_num = int(migrator_locals['lines'].line_num)
         key = self.getData(migrator_locals['line'], self.key)
-        migration_step= str(location).split()[0].split('.')[-1]
-        stack_display = '\n'.join(['%sid: %s Title: %s' % (''.join(['    ' for i in range(factory_stack.index(obj))]), obj.id, obj.Title()) for obj in factory_stack ])
-        msg = 'line %s ( key %s)\n\
+        migration_step = str(location).split()[0].split('.')[-1]
+        stack_display = '\n'.join(['%sid: %s Title: %s' % (''.join(['    ' for i in range(factory_stack.index(obj))]), obj.id, obj.Title()) for obj in factory_stack])
+        msg = 'line %s (or +- %s, key %s)\n\
  migration substep: %s\n\
  error message: %s\n\
  data: %s\n\
- plone containers stack:\n  %s\n' % (line_num, key, migration_step, message, data, stack_display)
+ plone containers stack:\n  %s\n' % (self.current_line, line_num, key, migration_step, message, data, stack_display)
         print msg
         if line_num not in self.errors.keys():
             self.errors[line_num] = []
@@ -85,9 +122,9 @@ class AccessMigrator(object):
     def log(self, migrator_locals, location, message, factory_stack, data):
         pass
 
-
     def getData(self, line, cellname):
-        return line[self.header.index(cellname)]
+        data = line[self.header.index(cellname)]
+        return data
 
     def _setFactories(self, object_names, mappings):
         factories = {}
@@ -98,18 +135,18 @@ class AccessMigrator(object):
             factories[name] = factory_class(self.site, **args)
         return factories
 
-    def _setAllMappers(self, db, table, object_names, mappings):
+    def _setMappersForAllObjects(self, db, table, object_names, mappings):
         all_mappers = {}
         for name in object_names:
             mapping = mappings[name]['mappers']
-            all_mappers[name] = self._setMappers(db, table, mapping)
+            all_mappers[name] = self._setMappersForObject(db, table, mapping)
         return all_mappers
 
-    def _setMappers(self, db, table, mapping):
+    def _setMappersForObject(self, db, table, mapping):
         mappers = {
-                'pre':[],
-                'post':[],
-                }
+            'pre': [],
+            'post': [],
+        }
         for mapper_class, mapper_args in mapping.iteritems():
             #initialize the mapper
             mapper = mapper_class(db, table, self.site, mapper_args)
@@ -127,4 +164,3 @@ class AccessMigrator(object):
         order = []
         recursiveTraverse(tree, order)
         return order
-
