@@ -2,9 +2,9 @@
 from Products.urban.profiles.dataMigration.AIHM_migration.AIHM_import import importAIHM
 
 
-def importMonsAIHM(context):
-    """ Just calls the default AIHM import from Mons AIHM profile """
-    if context.readDataFile('mons_aihm_marker.txt') is None:
+def importLalouviereAIHM(context):
+    """ Just calls the default AIHM import from La Louvière AIHM profile """
+    if context.readDataFile('lalouviere_aihm_marker.txt') is None:
         return
 
     importAIHM(context)

@@ -2,11 +2,11 @@
 <import-steps>
 
  <import-step
-    id="urban-monsAIHMMigration"
-    handler="Products.urban.profiles.monsAIHM.import.importMonsAIHM"
-    title="AIHM import for Mons"
+    id="urban-lalouviereAIHMMigration"
+    handler="Products.urban.profiles.lalouviereAIHM.import.importLalouviereAIHM"
+    title="AIHM import for La Louvière"
     version="2013-01-04T11:30:41.455297">
-  AIHM import for Mons
+  AIHM import for La Louvière
  </import-step>
 
 </import-steps>
