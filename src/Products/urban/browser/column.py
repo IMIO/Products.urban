@@ -34,7 +34,8 @@ class EventDateColumn(UrbanColumn):
 
     def renderCell(self, urbanlist_item):
         event = urbanlist_item.getObject()
-        date = event.getEventDate().strftime('%d/%m/%Y')
+        date = event.getEventDate()
+        date = date and date.strftime('%d/%m/%Y') or 'no date defined'
         return date
 
     def getSortKey(self, urbanlist_item):
