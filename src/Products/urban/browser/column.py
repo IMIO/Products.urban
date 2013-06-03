@@ -491,5 +491,6 @@ class ParcelReferencesColumn(UrbanColumn):
             parcel_render.append(render)
 
         parcel_render = '<br />'.join(parcel_render)
+        parcel_render = parcel_render.decode('utf-8')
 
         return parcel_render
