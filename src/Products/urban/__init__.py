@@ -86,6 +86,7 @@ def initialize(context):
     import Notary
     # next line to be removed when migration #1283 is done
     import Architect
+    import Geometrician
     ##/code-section custom-init-top
 
     # imports packages and types for registration
