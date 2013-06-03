@@ -3,6 +3,8 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Acquisition import aq_inner, aq_base
 from Products.urban.interfaces import IInquiry
+from Products.urban.browser.urbantable import ParcelsTable
+
 
 class MapView(BrowserView):
     """
@@ -22,6 +24,14 @@ class MapView(BrowserView):
         context = aq_inner(self.context)
         portal_urban = getToolByName(context, 'portal_urban')
         return portal_urban.getUrbanConfig(context).getUseTabbingForDisplay()
+
+    def renderParcelsListing(self):
+        parcels = self.context.getParcels()
+        if not parcels:
+            return ''
+        parceltable = ParcelsTable(parcels, self.request)
+        parceltable.update()
+        return parceltable.render()
 
     def getListCapaKey(self):
         """
@@ -100,7 +110,6 @@ class MapView(BrowserView):
 
     def getOldParcels(self):
         context = aq_inner(self.context)
-        urban_tool = getToolByName(context, 'portal_urban')
         return [parcel.getHistoric().getHistoricForDisplay() for parcel in context.getParcels() if parcel.getOutdated()]
 
     def getParcels(self):
@@ -109,6 +118,7 @@ class MapView(BrowserView):
         if request.get('show_old_parcel'):
             return True
         return [parcel for parcel in context.getParcels() if parcel.getIsOfficialParcel() and not parcel.getOutdated()]
+
 
 class FullMapView(MapView):
     """
@@ -119,7 +129,6 @@ class FullMapView(MapView):
 
     def isUrbanUser(self):
         context = aq_inner(self.context)
-        portal_groups = getToolByName(context, 'portal_groups')
         member = context.restrictedTraverse('@@plone_portal_state').member()
         is_map_user = member.has_role('UrbanMapReader')
         is_manager = member.has_role('Manager')
