@@ -34,6 +34,8 @@ def makeContext(pif):
         nis = dbuser = dbpwd = pghost = pylonhost = ''
         inifilename = os.path.join(
                 os.path.abspath(path), 'config', '%s.ini' % dbname)
+        if not os.path.exists(inifilename):
+            continue
         for line in retLines(inifilename):
             line = line.strip('\n')
             if nisre.match(line):
