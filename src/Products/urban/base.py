@@ -470,8 +470,10 @@ class UrbanBase(object):
         field_object = obj.getField(field_name)
         if not vocabulary and field_object.vocabulary:
             displaylist = field_object.vocabulary.getDisplayListForTemplate(obj)
-        else:
+        elif vocabulary:
             displaylist = DisplayList(vocabulary)
+        else:
+            displaylist = None
         if raw_value:
             field_value = raw_value
         else:
@@ -480,7 +482,8 @@ class UrbanBase(object):
         if not field_value:
             return ''
         if type(field_value) not in (list, tuple):
-            return [obj.displayValue(displaylist, field_value)]
+            val = displaylist and obj.displayValue(displaylist, field_value) or field_value
+            return [val]
         return [obj.displayValue(displaylist, value) for value in field_value]
 
     security.declarePublic('listVocabularyForTemplate')
