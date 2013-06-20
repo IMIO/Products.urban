@@ -18,7 +18,7 @@
 <h1 class="documentFirstHeading" i18n:translate="urban_search_descr">Search licences</h1>
 
 <tal:comment replace="nothing">Back to the build licence...</tal:comment>
-<metal:listing use-macro="here/urban_macros/macros/goBackToMacro" />
+<metal:listing use-macro="here/@@globalmacros/goBackToMacro" />
 
 <fieldset><legend><strong i18n:translate="urban_search_parameters">Enter your parameters for the search</strong></legend>
  <form action="" method="get" id="search"

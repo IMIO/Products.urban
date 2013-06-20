@@ -3,6 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from Products.urban.config import URBAN_TYPES
 
+
 class ContactView(BrowserView):
     """
       This manage the view of every Contacts :
@@ -41,10 +42,10 @@ class ContactView(BrowserView):
         res = False
         #we can show the link back to the reference if we are on an URBAN_TYPES
         #or on an UrbanEventInquiry (Claimants)
-        allowed_parent_types = URBAN_TYPES + ['UrbanEventInquiry',]
+        allowed_parent_types = URBAN_TYPES + ['UrbanEventInquiry']
         if context.aq_inner.aq_parent.portal_type in allowed_parent_types:
             res = True
-        elif context.REQUEST.has_key('came_from_licence_uid'):
+        elif 'came_from_licence_uid' in context.REQUEST:
             came_from_licence_uid = context.REQUEST.get('came_from_licence_uid', None)
             #check if we really have a 'came_from_licence_uid'
             if came_from_licence_uid:
@@ -70,3 +71,9 @@ class ContactView(BrowserView):
         if not context.portal_type == 'Claimant':
             return False
         return True
+
+
+class ContactMacros(BrowserView):
+    """
+      This manage the macros of BuildLicence
+    """

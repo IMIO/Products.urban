@@ -13,7 +13,7 @@
                        border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
                        dummy python:request.set(border, 1);">
 
-      <metal:listing use-macro="here/urban_macros/macros/editLicenceMacro" />
+      <metal:listing use-macro="here/@@licencemacros/editLicenceMacro" />
 </metal:widgets>
 </metal:base_body>
 </div>

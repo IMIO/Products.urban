@@ -54,6 +54,15 @@
   />
 
   <browser:page
+     for="*"
+     name="globalmacros"
+     class=".globalmacros.GlobalMacros"
+     template="templates/globalmacros.pt"
+     permission="zope2.View"
+  />
+
+
+  <browser:page
      for="Products.ATContentTypes.interfaces.IATBTreeFolder"
      name="urban-macros"
      class=".urbanview.UrbanViewMacros"
@@ -90,6 +99,14 @@
      name="contactview"
      class=".contactview.ContactView"
      template="templates/contactview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IContact"
+     name="contactmacros"
+     class=".contactview.ContactMacros"
+     template="templates/contactmacros.pt"
      permission="zope2.View"
   />
 
