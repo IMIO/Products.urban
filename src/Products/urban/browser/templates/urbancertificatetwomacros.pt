@@ -3,7 +3,7 @@
  <tr>
   <td valign="top" width=49%>
    <fieldset><legend i18n:translate="proprietaries">Proprietary(ies)</legend>
-    <div metal:use-macro="here/urban_macros/macros/urbanProprietariesMacro" />
+    <div metal:use-macro="here/@@licencemacros/urbanProprietariesMacro" />
    </fieldset>
   </td>
   <td width="1%"></td>
@@ -68,12 +68,12 @@
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_notaryContact">Notary</span>:</b></td>
       <td width="2%"></td>
-      <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanNotariesMacro" /></td>
+      <td valign="top"><div metal:use-macro="here/@@licencemacros/urbanNotariesMacro" /></td>
      </tr>
      <tr>
       <td valign="top"><b><span i18n:translate="urban_label_foldermanagers">Treating agent</span>:</b></td>
       <td width="2%"></td>
-      <td valign="top"><div metal:use-macro="here/urban_macros/macros/urbanFolderManagerMacro" /></td>
+      <td valign="top"><div metal:use-macro="here/@@licencemacros/urbanFolderManagerMacro" /></td>
      </tr>
      <tr tal:condition="python: 'folderCategory' in usedAttributes">
       <td valign="top"><b><span i18n:translate="urban_label_folderCategory">Folder category</span>:</b></td>
@@ -106,7 +106,7 @@
       <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
    </fieldset>
    <fieldset><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
-    <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
+    <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
    </fieldset>
   </td>
  </tr>
@@ -394,6 +394,6 @@
  </tr>
 </table>
 <fieldset tal:condition="useTabbing"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
- <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
+ <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
 </fieldset>
 </div>

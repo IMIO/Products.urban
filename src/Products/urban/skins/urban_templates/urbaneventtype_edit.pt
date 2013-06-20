@@ -9,7 +9,7 @@
 
 <metal:widgets fill-slot="widgets">
 
- <metal:edit use-macro="here/urban_macros/macros/editUrbaneventtypeMacro" />
+ <metal:edit use-macro="here/@@globalmacros/editUrbaneventtypeMacro" />
 
 </metal:widgets>
 </metal:base_body>

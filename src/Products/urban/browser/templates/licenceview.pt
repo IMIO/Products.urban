@@ -11,7 +11,7 @@
                             tabs view/getTabs;
                             usedAttributes python: view.getLicenceConfig().getUsedAttributes();">
 
-<metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />
+<metal:titleWithIcon use-macro="here/@@globalmacros/titleWithIcon" />
 
 <div id="urbanViewWithTabbing" tal:condition="useTabbing">
 

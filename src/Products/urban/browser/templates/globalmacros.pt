@@ -1,0 +1,107 @@
+
+<div metal:define-macro="goBackToMacro" i18n:domain="urban">
+<br />
+<a class="no_underline" href="#"
+   tal:define="tool python: context.portal_urban"
+   tal:attributes="href python: context.portal_type in tool.getUrbanTypes() and context.absolute_url() or '%s#fieldsetlegend-urban_events' % context.aq_inner.aq_parent.absolute_url()"><img src="goback.png" />&nbsp;<span i18n:translate="go_back">Go back</span></a>
+</div>
+
+
+<metal:titleWithIcon define-macro="titleWithIcon">
+ <div tal:replace="structure provider:plone.abovecontenttitle" />
+ <h1 class="documentFirstHeading">
+  <img src="#" tal:attributes="src string:${context/@@plone_portal_state/portal_url}/${context/portal_type}.png" />
+  <span tal:replace="here/Title" tal:omit-tag="">Title</span>
+ </h1>
+</metal:titleWithIcon>
+
+
+<div metal:define-macro="urbanParcelsMacro" i18n:domain='urban'>
+ <table tal:define="member context/@@plone_portal_state/member;" cellspacing=0 cellpadding=0 width=100%>
+  <tr>
+   <td>
+    <div class="#" tal:define="parcels parcels|context/getParcels"
+                   tal:attributes="class python: parcels and 'field' or 'field warning'">
+    <div tal:condition="not: parcels" i18n:translate="warning_add_a_parcel">You must encode concerned parcel(s)
+    </div>
+    <div>
+     <tal:listing content="structure view/renderParcelsListing" />
+    </div>
+    <table>
+     <tr><td>
+     <form tal:condition="python: member.has_permission('urban: Add PortionOut', context)" name="quickAdd"
+           tal:attributes="action python: context.absolute_url() + '/searchparcels'" action="searchparcels" method="post">
+      <input type="submit" class="contenttype-portionout button-portionout" id="addPortionOut" value="search_parcels" i18n:attributes="value" />
+     </form>
+     </td><td width="2%"></td><td>
+     <form tal:condition="python: member.has_permission('urban: Add PortionOut', context)" name="manualQuickAdd"
+           tal:attributes="action python: context.absolute_url() + '/createObject?type_name=PortionOut'" action="searchparcels" method="post">
+      <input type="submit" class="contenttype-portionout button-portionout" id="manualAddPortionOut" value="manual_parcel" i18n:attributes="value" />
+     </form>
+     </td></tr>
+    </table>
+   </div>
+  </td>
+ </tr>
+ </table>
+</div>
+
+
+<metal:edit define-macro="editDefaultMacro"
+               tal:define="member context/@@plone_portal_state/member;
+                       border python: member.has_role('Manager') and 'enable_border' or 'disable_border';
+                       dummy python:request.set(border, 1);
+                       putils context/plone_utils;">
+
+      <tal:fieldsets repeat="fieldset python: ['default',]">
+        <fieldset class="urbanEditWithTabbing" tal:define="fieldsetid python:putils.normalizeString(fieldset)"
+                tal:attributes="id string:fieldset-${fieldsetid}">
+          <legend id="#"
+                  tal:content="python: view.getTranslatedSchemaLabel(fieldset)"
+                  tal:attributes="id string:fieldsetlegend-${fieldsetid}"
+                  i18n:translate="" />
+          <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=True)">
+           <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
+          </tal:fields>
+        </fieldset>
+      </tal:fieldsets>
+</metal:edit>
+
+
+<metal:edit define-macro="editUrbaneventtypeMacro"
+               tal:define="member context/@@plone_portal_state/member;
+                       border python: member.has_role('Manager') or 'enable_border' and 'disable_border';
+                       dummy python:request.set(border, 1);
+                       putils context/plone_utils;">
+
+      <tal:fieldsets repeat="fieldset python: ['default',]">
+        <fieldset class="urbanEditWithTabbing" tal:define="fieldsetid python:putils.normalizeString(fieldset)"
+                tal:attributes="id string:fieldset-${fieldsetid}">
+          <legend id="#"
+                  tal:content="python: view.getTranslatedSchemaLabel(fieldset)"
+                  tal:attributes="id string:fieldsetlegend-${fieldsetid}"
+                  i18n:translate="" />
+
+        <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=True)">
+
+        <tal:keyevent condition="python: fieldName in ['isKeyEvent', 'keyDates',]"
+                 define="fieldName field/getName">
+           <tal:manage_keyevent condition="python: fieldName == 'isKeyEvent'">
+             <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
+              <legend i18n:translate="pca_fieldset_legend">Is key event</legend>
+               <metal:fieldMacro use-macro="python:here.widget('isKeyEvent', mode='edit')" />
+               <metal:fieldMacro use-macro="python:here.widget('keyDates', mode='edit')" />
+             </fieldset>
+           </tal:manage_keyevent>
+         </tal:keyevent>
+
+          <tal:default condition="python: fieldName not in ['isKeyEvent', 'keyDates',]"
+                 define="fieldName field/getName">
+           <metal:fieldMacro use-macro="python:here.widget(fieldName, mode='edit')" />
+         </tal:default>
+        </tal:fields>
+        </fieldset>
+      </tal:fieldsets>
+</metal:edit>
+
+

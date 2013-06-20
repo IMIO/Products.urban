@@ -31,7 +31,7 @@
 <h1 class="documentFirstHeading" i18n:translate="search_parcels"></h1>
 
 <tal:comment replace="nothing">Go back...</tal:comment>
-<metal:listing use-macro="here/urban_macros/macros/goBackToMacro" />
+<metal:listing use-macro="here/@@globalmacros/goBackToMacro" />
 
 <!-- Display the list of already added parcels -->
 <fieldset><legend i18n:translate="concerned_parcels">Concerned parcels</legend>

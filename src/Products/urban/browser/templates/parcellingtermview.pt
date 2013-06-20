@@ -16,13 +16,13 @@
                    folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
                    errors python:request.get('errors', {})">
 
-<!--metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" /-->
+<!--metal:titleWithIcon use-macro="here/@@globalmacros/titleWithIcon" /-->
 
 <metal:use_body use-macro="body_macro" />
 
 <fieldset style="margin-right:49%;"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
  <div>
-  <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
+  <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
  </div>
 </fieldset>
 

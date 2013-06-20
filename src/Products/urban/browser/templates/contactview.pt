@@ -8,7 +8,7 @@
 <metal:main_macro define-macro="main">
     <metal:body define-macro="body_macro">
 
-<metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />
+<metal:titleWithIcon use-macro="here/@@globalmacros/titleWithIcon" />
 
 <div tal:replace="structure provider:plone.belowcontenttitle" />
 <!-- Back to the build licence... -->

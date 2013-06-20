@@ -27,10 +27,10 @@
 <metal:listing use-macro="here/@@map-macros/urbanMapScriptBase" />
 <metal:listing use-macro="here/@@map-macros/urbanMapScript" />
 </tal:block>
-<metal:titleWithIcon use-macro="here/urban_macros/macros/titleWithIcon" />
+<metal:titleWithIcon use-macro="here/@@globalmacros/titleWithIcon" />
 
   <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
-   <div metal:use-macro="here/urban_macros/macros/urbanParcelsMacro" />
+   <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
   </fieldset>
 
   <tal:block condition="old_parcels">

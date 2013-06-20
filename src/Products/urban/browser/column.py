@@ -369,7 +369,7 @@ class ActionsColumn(UrbanColumn):
         item = urbanlist_item.getObject()
         adapter = queryMultiAdapter((self.context, self.request, urbanlist_item, item), IActionsCell)
         if adapter:
-            actions = adapter.render()
+            action_links = adapter.render()
         else:
             base_url = urbanlist_item.getTool('portal_url')()
             object_url = urbanlist_item.getURL()
