@@ -330,10 +330,10 @@ class CreatorColumn(Column):
         return translate(self.header, 'urban', context=self.request)
 
     def renderCell(self, obj):
-        return ''.join(sorted(obj.listCreators()))
+        return ''.join(sorted(obj.listCreators))
 
     def getSortKey(self, urbanlist_item):
-        return urbanlist_item.getObject.listCreators()
+        return urbanlist_item.getObject.listCreators
 
 
 class FoldermanagerColumn(Column):
