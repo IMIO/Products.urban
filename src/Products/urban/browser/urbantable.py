@@ -157,8 +157,11 @@ class DocumentsTable(UrbanTable, SequenceTable):
     cssClasses = {'table': 'listing largetable'}
 
 
-class AnnexesTable(DocumentsTable):
+class AnnexesTable(UrbanTable, SequenceTable):
     """
      Documents and annexes use (almost) the same listing tables
     """
     implements(IAnnexesTable)
+
+    sortOn = 'table-creationdateColumn-1'
+    cssClasses = {'table': 'listing largetable'}
