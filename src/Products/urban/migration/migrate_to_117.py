@@ -140,13 +140,14 @@ def migrateSpecificFeatureTerms(context):
     for licence_name in licences:
         licence_config = getattr(urban_tool, licence_name)
         for foldername in foldernames:
-            folder = getattr(licence_config, foldername)
-            # we have to change the allowed content types on this folder
-            folder.setLocallyAllowedTypes('SpecificFeatureTerm')
-            folder.setImmediatelyAddableTypes('SpecificFeatureTerm')
-            folder_path = '/'.join(folder.getPhysicalPath())
-            walker = migrator.walker(portal, migrator, query={'path': folder_path}, callBefore=contentmigrationLogger, logger=logger, purl=portal.portal_url)
-            walker.go()
+            folder = getattr(licence_config, foldername, None)
+            if folder:
+                # we have to change the allowed content types on this folder
+                folder.setLocallyAllowedTypes('SpecificFeatureTerm')
+                folder.setImmediatelyAddableTypes('SpecificFeatureTerm')
+                folder_path = '/'.join(folder.getPhysicalPath())
+                walker = migrator.walker(portal, migrator, query={'path': folder_path}, callBefore=contentmigrationLogger, logger=logger, purl=portal.portal_url)
+                walker.go()
         # we need to reset the class variable to avoid using current query in next use of CustomQueryWalker
         walker.__class__.additionalQuery = {}
     #enable linkintegrity checks
