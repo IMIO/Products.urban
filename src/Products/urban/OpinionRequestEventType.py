@@ -35,7 +35,7 @@ schema = Schema((
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-OpinionRequestEventType_schema = BaseSchema.copy() + \
+OpinionRequestEventType_schema = OrderedBaseFolderSchema.copy() + \
     getattr(UrbanEventType, 'schema', Schema(())).copy() + \
     getattr(UrbanVocabularyTerm, 'schema', Schema(())).copy() + \
     schema.copy()
@@ -43,7 +43,7 @@ OpinionRequestEventType_schema = BaseSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class OpinionRequestEventType(BaseContent, UrbanEventType, UrbanVocabularyTerm, BrowserDefaultMixin):
+class OpinionRequestEventType(OrderedBaseFolder, UrbanEventType, UrbanVocabularyTerm, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
