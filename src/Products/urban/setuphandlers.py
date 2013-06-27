@@ -1221,6 +1221,9 @@ def setupExtra(context):
     else:
         additional_layers = portal_urban.additional_layers
 
+    if not base_hasattr(additional_layers, 'orthophoto2009'):
+        additional_layers.invokeFactory("Layer", id="orthophoto2009", title=u"Orthophoto2009", WMSUrl="http://geowebcache1.communesplone.be/geoserver/gwc/service/wms", layers='rw-2009-2010', SRS="ESPG:31370", baseLayer=True, layerFormat="image/jpeg", visibility=False)
+
     if not hasattr(aq_base(additional_layers), 'ppnc'):
         additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://geoservercommon.communesplone.be/geoserver/gwc/service/wms", layers='PPNC', SRS="ESPG:31370", baseLayer=True, layerFormat="image/jpeg", visibility=False)
     """
