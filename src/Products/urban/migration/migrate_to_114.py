@@ -10,8 +10,6 @@ def migrateToUrban114(context):
     """
      Launch every migration steps for the version 1.1.4
     """
-    if isNoturbanMigrationsProfile(context): return
-
     #add the role 'contributor' to the urban_editors group
     migrateUrbanEditorRoles(context)
     #change voc terms used for the CU1 CU2 and notary letter specific features
@@ -69,7 +67,6 @@ def migrateWorkTypes(context):
     """
     Make sure the value(s) of the field workType are in a list
     """
-    if isNoturbanMigrationsProfile(context): return
 
     site = getToolByName(context, 'portal_url').getPortalObject()
     catalog = site.portal_catalog
