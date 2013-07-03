@@ -24,6 +24,10 @@ table.filter_listing th {
 vertical-align: sub;
 }
 
+.icons-on table.listing td {
+    line-height: 1.5em;
+}
+
 table.largetable{
     width: 100%;
 }
