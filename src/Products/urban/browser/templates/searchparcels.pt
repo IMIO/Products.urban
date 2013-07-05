@@ -14,11 +14,11 @@
 <div metal:fill-slot="main">
 <!-- définition des variables -->
 <div tal:define="division request/division | nothing;
-                 section request/section | nothing;
-                 radical request/radical | nothing;
-                 bis request/bis | nothing;
-                 exposant request/exposant | nothing;
-                 puissance request/puissance | nothing;
+                 section python: request.get('section', '').upper();
+                 radical python: request.get('radical', '').upper();
+                 bis python: request.get('bis', '').upper();
+                 exposant python: request.get('exposant', '').upper();
+                 puissance python: request.get('puissance', '').upper();
                  partie request/partie | nothing;
                  location request/location | nothing;
                  prcOwner request/prcOwner | nothing;
