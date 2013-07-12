@@ -1,0 +1,32 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<body>
+<metal:main fill-slot="main">
+<metal:main_macro define-macro="main">
+    <metal:body define-macro="body_macro"
+                tal:define="tabs view/getTabs;">
+
+<metal:titleWithIcon use-macro="here/@@globalmacros/titleWithIcon" />
+
+
+<dl class="formTabs enableFormTabbing">
+<tal:tab_loop repeat="tab tabs">
+    <dt class="formTab" tal:attributes="id python: 'fieldsetlegend-urban_%s' % tab">
+        <span tal:content="python: tab">Tab name</span>
+    </dt>
+    <dd  tal:define="macro python: view.getTabMacro(tab)" tal:attributes="id python: 'fieldset-urban_%s' % tab">
+         <metal:listing use-macro="macro" />
+    </dd>
+</tal:tab_loop>
+
+<div tal:replace="structure provider:plone.belowcontentbody" />
+
+</metal:body>
+</metal:main_macro>
+</metal:main>
+</body>
+</html>

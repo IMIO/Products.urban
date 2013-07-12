@@ -26,7 +26,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-
+    
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -80,6 +80,7 @@ schema = Schema((
             label_msgid='urban_label_NISNum',
             i18n_domain='urban',
         ),
+        schemata='admin_settings',
     ),
     StringField(
         name='cityName',
@@ -89,6 +90,7 @@ schema = Schema((
             label_msgid='urban_label_cityName',
             i18n_domain='urban',
         ),
+        schemata='public_settings',
     ),
     DataGridField(
         name='divisionsRenaming',
@@ -98,11 +100,12 @@ schema = Schema((
             label_msgid='urban_label_divisionsRenaming',
             i18n_domain='urban',
         ),
-        allow_delete=True,
         fixed_rows='getDivisionsConfigRows',
         allow_insert=False,
         allow_reorder=False,
         allow_oddeven=True,
+        allow_delete=True,
+        schemata='public_settings',
         columns=('division', 'name', 'alternative_name',),
     ),
     BooleanField(
@@ -113,6 +116,7 @@ schema = Schema((
             label_msgid='urban_label_isDecentralized',
             i18n_domain='urban',
         ),
+        schemata='public_settings',
     ),
     StringField(
         name='sqlHost',
@@ -121,6 +125,7 @@ schema = Schema((
             label_msgid='urban_label_sqlHost',
             i18n_domain='urban',
         ),
+        schemata='admin_settings',
     ),
     StringField(
         name='sqlName',
@@ -130,6 +135,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         required=True,
+        schemata='admin_settings',
     ),
     StringField(
         name='sqlUser',
@@ -138,6 +144,7 @@ schema = Schema((
             label_msgid='urban_label_sqlUser',
             i18n_domain='urban',
         ),
+        schemata='admin_settings',
     ),
     StringField(
         name='sqlPassword',
@@ -146,6 +153,7 @@ schema = Schema((
             label_msgid='urban_label_sqlPassword',
             i18n_domain='urban',
         ),
+        schemata='admin_settings',
     ),
     StringField(
         name='webServerHost',
@@ -154,6 +162,7 @@ schema = Schema((
             label_msgid='urban_label_webServerHost',
             i18n_domain='urban',
         ),
+        schemata='admin_settings',
     ),
     StringField(
         name='pylonsHost',
@@ -162,6 +171,7 @@ schema = Schema((
             label_msgid='urban_label_pylonsHost',
             i18n_domain='urban',
         ),
+        schemata='admin_settings',
     ),
     StringField(
         name='mapExtent',
@@ -172,6 +182,7 @@ schema = Schema((
             label_msgid='urban_label_mapExtent',
             i18n_domain='urban',
         ),
+        schemata='admin_settings',
     ),
     StringField(
         name='unoEnabledPython',
@@ -183,6 +194,7 @@ schema = Schema((
             label_msgid='urban_label_unoEnabledPython',
             i18n_domain='urban',
         ),
+        schemata='admin_settings',
     ),
     IntegerField(
         name='openOfficePort',
@@ -194,6 +206,7 @@ schema = Schema((
             label_msgid='urban_label_openOfficePort',
             i18n_domain='urban',
         ),
+        schemata='admin_settings',
     ),
     StringField(
         name='editionOutputFormat',
@@ -204,6 +217,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         enforceVocabulary=True,
+        schemata='public_settings',
         vocabulary=GENERATED_DOCUMENT_FORMATS.keys(),
     ),
     BooleanField(
@@ -214,6 +228,7 @@ schema = Schema((
             label_msgid='urban_label_generateSingletonDocuments',
             i18n_domain='urban',
         ),
+        schemata='public_settings',
     ),
     BooleanField(
         name='invertAddressNames',
@@ -223,6 +238,7 @@ schema = Schema((
             label_msgid='urban_label_invertAddressNames',
             i18n_domain='urban',
         ),
+        schemata='public_settings',
     ),
 
 ),
@@ -263,7 +279,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def __init__(self, id=None):
         OrderedBaseFolder.__init__(self,'portal_urban')
         self.setTitle('Urban configuration')
-
+        
         ##code-section constructor-footer #fill in your manual code here
         ##/code-section constructor-footer
 
@@ -271,7 +287,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     # tool should not appear in portal_catalog
     def at_post_edit_script(self):
         self.unindexObject()
-
+        
         ##code-section post-edit-method-footer #fill in your manual code here
         self.checkDBConnection()
         ##/code-section post-edit-method-footer
@@ -1558,6 +1574,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             if  (rec['radicalavant'] != 0) and not ( (rec['sectionavant']==section) and (rec['radicalavant']==radical) and (rec['exposantavant']==exposant) and (rec['bisavant']==bis) and (rec['puissanceavant']==puissance) ) :
                 toreturn=toreturn+self.findParcelHistoric(division,rec['sectionavant'],str(rec['radicalavant']),str(rec['bisavant']),rec['exposantavant'],str(rec['puissanceavant']))
         return toreturn
+
+
 
 registerType(UrbanTool, PROJECTNAME)
 # end of class UrbanTool

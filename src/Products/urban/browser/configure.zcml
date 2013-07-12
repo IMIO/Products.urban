@@ -95,6 +95,22 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IUrbanTool"
+     name="urbanconfigview"
+     class=".urbanconfigview.UrbanConfigView"
+     template="templates/urbanconfigview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanTool"
+     name="urbanconfigmacros"
+     class=".urbanconfigview.UrbanConfigMacros"
+     template="templates/urbanconfigmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IContact"
      name="contactview"
      class=".contactview.ContactView"
