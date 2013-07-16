@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from plone.memoize import view
 from Products.Five import BrowserView
 from Acquisition import aq_inner
-from Products.CMFCore.utils import getToolByName
 
 
 class UrbanConfigView(BrowserView):
@@ -14,16 +12,6 @@ class UrbanConfigView(BrowserView):
         super(UrbanConfigView, self).__init__(context, request)
         self.context = context
         self.request = request
-
-    @view.memoize
-    def getCatalog(self):
-        context = aq_inner(self.context)
-        return getToolByName(context, 'portal_catalog')
-
-    @view.memoize
-    def getMember(self):
-        context = aq_inner(self.context)
-        return context.restrictedTraverse('@@plone_portal_state/member')()
 
     def getTabMacro(self, tab):
         context = aq_inner(self.context)

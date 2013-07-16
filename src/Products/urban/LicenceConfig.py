@@ -57,6 +57,7 @@ schema = Schema((
             label_msgid='urban_label_usedAttributes',
             i18n_domain='urban',
         ),
+        schemata='public_settings',
         multiValued=True,
         vocabulary='listUsedAttributes',
     ),
@@ -68,11 +69,12 @@ schema = Schema((
             label_msgid='urban_label_tabsConfig',
             i18n_domain='urban',
         ),
-        allow_delete=False,
         fixed_rows='getTabsConfigRows',
         allow_insert=False,
         allow_reorder=True,
         allow_oddeven=True,
+        allow_delete=False,
+        schemata='public_settings',
         columns=('display', 'value', 'display_name',),
     ),
     BooleanField(
@@ -83,6 +85,7 @@ schema = Schema((
             label_msgid='urban_label_useTabbingForDisplay',
             i18n_domain='urban',
         ),
+        schemata='public_settings',
     ),
     BooleanField(
         name='useTabbingForEdit',
@@ -92,16 +95,18 @@ schema = Schema((
             label_msgid='urban_label_useTabbingForEdit',
             i18n_domain='urban',
         ),
+        schemata='public_settings',
     ),
     DataGridField(
         name='textDefaultValues',
+        allow_oddeven=True,
         widget=DataGridWidget(
             columns={'fieldname' : SelectColumn('FieldName', 'listTextFields'), 'text' : TextAreaColumn('Text', rows=6, cols=60)},
             label='Textdefaultvalues',
             label_msgid='urban_label_textDefaultValues',
             i18n_domain='urban',
         ),
-        allow_oddeven=True,
+        schemata='public_settings',
         columns=('fieldname', 'text'),
         validators=('isTextFieldConfigured',),
     ),
@@ -114,6 +119,7 @@ schema = Schema((
             label_msgid='urban_label_referenceTALExpression',
             i18n_domain='urban',
         ),
+        schemata='public_settings',
     ),
     StringField(
         name='numerotation',
@@ -123,6 +129,7 @@ schema = Schema((
             label_msgid='urban_label_numerotation',
             i18n_domain='urban',
         ),
+        schemata='public_settings',
     ),
 
 ),
@@ -136,6 +143,10 @@ LicenceConfig_schema = BaseFolderSchema.copy() + \
 
 ##code-section after-schema #fill in your manual code here
 LicenceConfig_schema['licencePortalType'].widget.visible = False
+for f in LicenceConfig_schema.filterFields(schemata='default'):
+    f.widget.visible = {"edit": "invisible"}
+for f in LicenceConfig_schema.filterFields(schemata='metadata'):
+    f.widget.visible = {"edit": "invisible"}
 ##/code-section after-schema
 
 class LicenceConfig(BaseFolder, BrowserDefaultMixin):

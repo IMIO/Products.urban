@@ -111,6 +111,22 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.ILicenceConfig"
+     name="licenceconfigview"
+     class=".licenceconfigview.LicenceConfigView"
+     template="templates/urbanconfigview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.ILicenceConfig"
+     name="licenceconfigmacros"
+     class=".licenceconfigview.LicenceConfigMacros"
+     template="templates/urbanconfigmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IContact"
      name="contactview"
      class=".contactview.ContactView"

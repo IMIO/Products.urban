@@ -579,11 +579,14 @@ msgstr "Zone de prévention éloignée"
 msgid "fieldsetlegend-urban_admin_settings"
 msgstr "Paramètres avancés"
 
+msgid "fieldsetlegend-urban_events"
+msgstr "Événements"
+
 msgid "fieldsetlegend-urban_licences_config"
-msgstr "Paramètres par procédure"
+msgstr "Paramètres des procédures"
 
 msgid "fieldsetlegend-urban_public_settings"
-msgstr "Options et modèles"
+msgstr "Options"
 
 msgid "fieldsetlegend-urban_vocabulary_folders"
 msgstr "Vocabulaires"

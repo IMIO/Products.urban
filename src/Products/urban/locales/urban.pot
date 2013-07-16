@@ -582,6 +582,9 @@ msgstr ""
 msgid "fieldsetlegend-urban_admin_settings"
 msgstr ""
 
+msgid "fieldsetlegend-urban_events"
+msgstr ""
+
 #. Default: "Far prevention area"
 #: GenericLicence.py
 msgid "far_prevention_area"
