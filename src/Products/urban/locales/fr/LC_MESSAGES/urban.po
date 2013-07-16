@@ -576,6 +576,18 @@ msgstr "Décision des avis externes"
 msgid "far_prevention_area"
 msgstr "Zone de prévention éloignée"
 
+msgid "fieldsetlegend-urban_admin_settings"
+msgstr "Paramètres avancés"
+
+msgid "fieldsetlegend-urban_licences_config"
+msgstr "Paramètres par procédure"
+
+msgid "fieldsetlegend-urban_public_settings"
+msgstr "Options et modèles"
+
+msgid "fieldsetlegend-urban_vocabulary_folders"
+msgstr "Vocabulaires"
+
 #. Default: "Secure, fast and sure, <a href='http://www.getfirefox.com'>Firefox</a> is free and easy to install."
 #: firefox.pt
 msgid "firefox_viewlet_descr"

@@ -570,6 +570,18 @@ msgstr ""
 msgid "externaldecisions_folder_title"
 msgstr ""
 
+msgid "fieldsetlegend-urban_public_settings"
+msgstr ""
+
+msgid "fieldsetlegend-urban_licences_config"
+msgstr ""
+
+msgid "fieldsetlegend-urban_vocabulary_folders"
+msgstr ""
+
+msgid "fieldsetlegend-urban_admin_settings"
+msgstr ""
+
 #. Default: "Far prevention area"
 #: GenericLicence.py
 msgid "far_prevention_area"

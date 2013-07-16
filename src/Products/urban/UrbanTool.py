@@ -44,6 +44,7 @@ from Acquisition import aq_base
 from zope.i18n import translate
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore import permissions
 from Products.CMFCore.Expression import Expression, createExprContext
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFPlone.PloneBatch import Batch
@@ -81,6 +82,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='admin_settings',
+        write_permission=permissions.ManagePortal,
     ),
     StringField(
         name='cityName',
@@ -126,6 +128,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='admin_settings',
+        write_permission=permissions.ManagePortal,
     ),
     StringField(
         name='sqlName',
@@ -136,6 +139,7 @@ schema = Schema((
         ),
         required=True,
         schemata='admin_settings',
+        write_permission=permissions.ManagePortal,
     ),
     StringField(
         name='sqlUser',
@@ -145,6 +149,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='admin_settings',
+        write_permission=permissions.ManagePortal,
     ),
     StringField(
         name='sqlPassword',
@@ -154,6 +159,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='admin_settings',
+        write_permission=permissions.ManagePortal,
     ),
     StringField(
         name='webServerHost',
@@ -163,6 +169,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='admin_settings',
+        write_permission=permissions.ManagePortal,
     ),
     StringField(
         name='pylonsHost',
@@ -172,6 +179,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='admin_settings',
+        write_permission=permissions.ManagePortal,
     ),
     StringField(
         name='mapExtent',
@@ -183,6 +191,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='admin_settings',
+        write_permission=permissions.ManagePortal,
     ),
     StringField(
         name='unoEnabledPython',
@@ -195,6 +204,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='admin_settings',
+        write_permission=permissions.ManagePortal,
     ),
     IntegerField(
         name='openOfficePort',
@@ -207,6 +217,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='admin_settings',
+        write_permission=permissions.ManagePortal,
     ),
     StringField(
         name='editionOutputFormat',
@@ -251,6 +262,10 @@ UrbanTool_schema = OrderedBaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+for f in UrbanTool_schema.filterFields(schemata='default'):
+    f.widget.visible = {"edit": "invisible"}
+for f in UrbanTool_schema.filterFields(schemata='metadata'):
+    f.widget.visible = {"edit": "invisible"}
 ##/code-section after-schema
 
 class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):

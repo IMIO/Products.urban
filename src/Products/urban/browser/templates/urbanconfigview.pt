@@ -15,8 +15,9 @@
 
 <dl class="formTabs enableFormTabbing">
 <tal:tab_loop repeat="tab tabs">
-    <dt class="formTab" tal:attributes="id python: 'fieldsetlegend-urban_%s' % tab">
-        <span tal:content="python: tab">Tab name</span>
+    <dt class="formTab" tal:define="tab_id  python: 'fieldsetlegend-urban_%s' % tab"
+                        tal:attributes="id tab_id">
+        <span tal:content="tab_id" i18n:translate="">Tab name</span>
     </dt>
     <dd  tal:define="macro python: view.getTabMacro(tab)" tal:attributes="id python: 'fieldset-urban_%s' % tab">
          <metal:listing use-macro="macro" />
