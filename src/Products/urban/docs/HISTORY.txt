@@ -6,6 +6,8 @@ History
 
 Opinion request fields are now active for MiscDemand licences (#5933)
 
+Added custom view for urban config and licence configs (#5892)
+
 
 1.1.8
 -----
