@@ -26,7 +26,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-    
+
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -294,7 +294,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def __init__(self, id=None):
         OrderedBaseFolder.__init__(self,'portal_urban')
         self.setTitle('Urban configuration')
-        
+
         ##code-section constructor-footer #fill in your manual code here
         ##/code-section constructor-footer
 
@@ -302,7 +302,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     # tool should not appear in portal_catalog
     def at_post_edit_script(self):
         self.unindexObject()
-        
+
         ##code-section post-edit-method-footer #fill in your manual code here
         self.checkDBConnection()
         ##/code-section post-edit-method-footer
@@ -597,7 +597,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             adr1 as proprietary_city, adr2 as proprietary_street, sl1 as location \
             FROM map left join capa on map.capakey=capa.capakey left join da on capa.da = da.da "
         conditions = []
-        division != 0 and conditions.append("%s.da= %s" % (browseold and 'pas' or 'capa', division))
+        division and conditions.append("%s.da= %s" % (browseold and 'pas' or 'capa', division))
         (section or not fuzzy) and conditions.append("section %s" % (not section and 'is NULL' or "= '%s'" % section))
         (radical or not fuzzy) and conditions.append("radical = %s" % (radical and radical or '0'))
         (bis or not fuzzy) and conditions.append("bis = %s" % (bis and bis or '0'))
