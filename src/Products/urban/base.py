@@ -483,7 +483,9 @@ class UrbanBase(object):
             return ''
         if type(field_value) not in (list, tuple):
             val = displaylist and obj.displayValue(displaylist, field_value) or field_value
-            return [str(val)]
+            if type(val) not in [str, unicode]:
+                val = str(val)
+            return [val]
         return [obj.displayValue(displaylist, value) for value in field_value]
 
     security.declarePublic('listVocabularyForTemplate')
