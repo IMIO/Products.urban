@@ -226,8 +226,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
             except Exception, e:
                 logger.warn("The condition '%s' defined for element at '%s' is wrong!  Message is : %s" % (TALCondition, obj.absolute_url(), e))
                 res = False
-        # no check for event creation permssion for AIHM import
-        return True
+        return res
 
     def checkCreationInLicence(self, obj):
         if not self.canBeCreatedInLicence(obj):
