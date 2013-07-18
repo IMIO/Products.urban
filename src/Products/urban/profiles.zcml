@@ -79,6 +79,22 @@
       description="Demo Extension profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
   />
+  <genericsetup:registerProfile
+      name="dataMigration"
+      title="urban-dataMigration"
+      directory="profiles/dataMigration"
+      description="General data migration Extension profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.urban.interfaces.IUrbanTool"
+  />
+  <genericsetup:registerProfile
+      name="lalouviereAIHM"
+      title="urban-lalouviereAIHM"
+      directory="profiles/lalouviereAIHM"
+      description="Lalouviere AIHM data migration Extension profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.urban.interfaces.IUrbanTool"
+  />
   <!-- ##/code-section profiles.zcml-bottom -->
 
 </configure>
