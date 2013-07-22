@@ -166,6 +166,19 @@ class TestEventDefaultValues(unittest.TestCase):
         decision_text = event.getDecisionText()
         self.failUnless(decision_text == default_text)
 
+    def testTextValueConfiguredWithPythonExpression(self):
+        eventtypes = self.portal_urban.buildlicence.urbaneventtypes
+        event_type = getattr(eventtypes, 'rapport-du-college')
+        # set a a default text for the field 'decsionText'
+        default_text = '<p>Kill [[python: folder.Title()]] and [[python: object.getId()]] </p>'
+        event_type.setTextDefaultValues([{'text': default_text, 'fieldname': 'decisionText'}])
+        # the created event should have this text in its field 'decisionText'
+        event = self.createEvent(self.licence, event_type)
+        decision_text = event.getDecisionText()
+
+        expected_text = '<p>Kill %s and %s </p>' % (self.licence.Title(), event.getId())
+        self.failUnless(decision_text == expected_text)
+
     def testDefaultTextMethodIsDefinedForEachTextField(self):
         #each text field  should have the 'getDefaultText' method defined on it, else the default value system wont work
         for field in UrbanEventInquiry.UrbanEventInquiry_schema.fields():
