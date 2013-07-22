@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2013-05-03 08:53+0000\n"
+"POT-Creation-Date: 2013-07-22 13:57+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -2777,6 +2777,11 @@ msgstr "Types d'événements"
 
 msgid "urban_label_usage"
 msgstr "Statistiques INS"
+
+#. Default: "Useplonemeetingwsclient"
+#: UrbanTool.py
+msgid "urban_label_usePloneMeetingWSClient"
+msgstr "Utiliser le lien PloneMeeting plutôt que les documents de délibération du collège"
 
 #. Default: "Usetabbingfordisplay"
 #: LicenceConfig.py

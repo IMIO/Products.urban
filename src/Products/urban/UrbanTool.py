@@ -251,6 +251,16 @@ schema = Schema((
         ),
         schemata='public_settings',
     ),
+    BooleanField(
+        name='usePloneMeetingWSClient',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Useplonemeetingwsclient',
+            label_msgid='urban_label_usePloneMeetingWSClient',
+            i18n_domain='urban',
+        ),
+        schemata='public_settings',
+    ),
 
 ),
 )

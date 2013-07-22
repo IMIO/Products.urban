@@ -488,7 +488,11 @@ urbanEventTypes = {
                                      {'id': "urb-decision-octroi-rw", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
                                      {'id': "urb-decision-transmis-reclamants", 'title': "Décision du permis (transmis aux réclamants)"},
                                      {'id': "urb-decision-stats-mod3", 'title': "Statistiques modèle 3"},
-                                     {'id': "urb-decision-formulaire-a", 'title': "Annexe 30 - Formulaire A"},
+                                     {
+                                         'id': "urb-decision-formulaire-a",
+                                         'title': "Annexe 30 - Formulaire A",
+                                         'TALCondition': "python: portal.portal_urban.getUsePloneMeetingWSClient()"
+                                     },
                                      {'id': "urb-decision-egout-travaux", 'title': "Demande de raccordement aux égouts avec travaux (formulaire à remplir par le demandeur)"},
                                      {'id': "urb-decision-frais", 'title': "Ventilation des frais"},
                                      {'id': "urb-debut-travaux", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
@@ -1095,7 +1099,11 @@ urbanEventTypes = {
                                      {'id': "cu2-decision-octroi-rw", 'title': "Octroi du certificat (lettre à l'Urbanisme)"},
                                      {'id': "cu2-decision-transmis-reclamants", 'title': "Décision du certificat (transmis aux réclamants)"},
                                      {'id': "cu2-decision-frais", 'title': "Ventilation des frais"},
-                                     {'id': "cu2-decision-deliberation-college", 'title': "Delibération du collège d'octroi du certificat"},
+                                     {
+                                         'id': "cu2-decision-deliberation-college",
+                                         'title': "Delibération du collège d'octroi du certificat",
+                                         'TALCondition': "python: portal.portal_urban.getUsePloneMeetingWSClient()"
+                                     },
                                      {'id': "cu2-certif", 'title': "Certificat d'urbanisme 2 (annexe 35 formulaire II B)"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
@@ -1928,7 +1936,11 @@ urbanEventTypes = {
                                      {'id': "lot-decision-octroi-dem", 'title': "Octroi du permis (lettre au demandeur)"},
                                      {'id': "lot-decision-octroi-rw", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
                                      {'id': "lot-decision-transmis-reclamants", 'title': "Décision du permis (transmis aux réclamants)"},
-                                     {'id': "lot-decision-formulaire-b", 'title': "Annexe 31 - Formulaire B"},
+                                     {
+                                         'id': "lot-decision-formulaire-b",
+                                         'title': "Annexe 31 - Formulaire B",
+                                         'TALCondition': "python: portal.portal_urban.getUsePloneMeetingWSClient()"
+                                     },
                                      {'id': "lot-decision-frais", 'title': "Ventilation des frais"},
                                      {'id': "lot-decision-deliberation-college", 'title': "Delibération du collège d'octroi du permis"},
                                     ),

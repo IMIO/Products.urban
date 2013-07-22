@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-05-03 08:53+0000\n"
+"POT-Creation-Date: 2013-07-22 13:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -570,13 +570,9 @@ msgstr ""
 msgid "externaldecisions_folder_title"
 msgstr ""
 
-msgid "fieldsetlegend-urban_public_settings"
-msgstr ""
-
-msgid "fieldsetlegend-urban_licences_config"
-msgstr ""
-
-msgid "fieldsetlegend-urban_vocabulary_folders"
+#. Default: "Far prevention area"
+#: GenericLicence.py
+msgid "far_prevention_area"
 msgstr ""
 
 msgid "fieldsetlegend-urban_admin_settings"
@@ -585,9 +581,13 @@ msgstr ""
 msgid "fieldsetlegend-urban_events"
 msgstr ""
 
-#. Default: "Far prevention area"
-#: GenericLicence.py
-msgid "far_prevention_area"
+msgid "fieldsetlegend-urban_licences_config"
+msgstr ""
+
+msgid "fieldsetlegend-urban_public_settings"
+msgstr ""
+
+msgid "fieldsetlegend-urban_vocabulary_folders"
 msgstr ""
 
 #. Default: "Secure, fast and sure, <a href='http://www.getfirefox.com'>Firefox</a> is free and easy to install."
@@ -2773,6 +2773,11 @@ msgid "urban_label_urbaneventtypes"
 msgstr ""
 
 msgid "urban_label_usage"
+msgstr ""
+
+#. Default: "Useplonemeetingwsclient"
+#: UrbanTool.py
+msgid "urban_label_usePloneMeetingWSClient"
 msgstr ""
 
 #. Default: "Usetabbingfordisplay"

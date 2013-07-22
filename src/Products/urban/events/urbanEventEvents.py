@@ -12,13 +12,18 @@ def setDefaultValuesEvent(urbanevent, event):
         _setDefaultTextValues(urbanevent)
 
 
-def _setDefaultTextValues(licence):
-    select_fields = [field for field in licence.schema.fields() if field.default_method == 'getDefaultText']
+def _setDefaultTextValues(urbanevent):
+
+    portal_urban = getToolByName(urbanevent, 'portal_urban')
+
+    select_fields = [field for field in urbanevent.schema.fields() if field.default_method == 'getDefaultText']
+
     for field in select_fields:
         is_html = field.default_content_type == 'text/html'
-        default_value = licence.getDefaultText(licence, field, is_html)
-        field_mutator = getattr(licence, field.mutator)
-        field_mutator(default_value)
+        default_text = urbanevent.getDefaultText(urbanevent, field, is_html)
+        rendered_text = portal_urban.renderText(default_text, urbanevent)
+        field_mutator = getattr(urbanevent, field.mutator)
+        field_mutator(rendered_text)
 
 
 def setEventTypeType(urbanEvent, event):
@@ -35,6 +40,7 @@ def setCreationDate(urbanEvent, event):
     urbanEvent.setCreationDate(urbanEvent.getEventDate())
     urbanEvent.reindexObject(['created'])
 
+
 def generateSingletonDocument(urbanEvent, event):
     urban_tool = getToolByName(urbanEvent, 'portal_urban')
     if not urban_tool.getGenerateSingletonDocuments():
@@ -42,6 +48,7 @@ def generateSingletonDocument(urbanEvent, event):
     templates = urbanEvent.getTemplates()
     if len(templates) == 1:
         urban_tool.createUrbanDoc(templates[0].UID(), urbanEvent.UID())
+
 
 def updateKeyEvent(urbanEvent, event):
     event_type = urbanEvent.getUrbaneventtypes()
