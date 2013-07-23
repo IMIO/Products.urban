@@ -25,7 +25,8 @@
              enabled="True"
              expression="context/showEditTabbing"
              id="urbanedittabbing.js"
-             inline="False"/>
+             inline="False"
+             insert-after="form_tabbing.js"/>
 
  <javascript cacheable="True"
              compression="safe"

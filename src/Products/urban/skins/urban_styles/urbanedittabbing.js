@@ -27,10 +27,11 @@ var ploneFormTabbing = {
 (function($) {
 
 ploneFormTabbing._buildTabs = function(container, legends) {
-    var threshold = legends.length > 6;
+    var legends_length = legends.length;
+    var threshold = legends_length > 6;
     var panel_ids, tab_ids = [], tabs = '';
 
-    for (var i=0; i < legends.length; i++) {
+    for (i=0; i < legends_length; i+= 1) {
         var className, tab, legend = legends[i], lid = legend.id;
         tab_ids[i] = '#' + lid;
 
@@ -72,7 +73,10 @@ ploneFormTabbing._buildTabs = function(container, legends) {
         }
 
         tabs += tab;
-        $(legend).hide();
+        // don't use .hide() for ie6/7/8 support
+        $(legend).css({'visibility': 'hidden', 'font-size': '0',
+                       'padding': '0', 'height': '0',
+                       'width': '0', 'line-height': '0'});
     }
 
     tab_ids = tab_ids.join(',');
@@ -81,9 +85,9 @@ ploneFormTabbing._buildTabs = function(container, legends) {
     if (threshold) {
         tabs = $('<select class="formTabs">'+tabs+'</select>');
         tabs.change(function(){
-        	var selected = $(this).attr('value');
-        	jq('#'+selected).click();
-        })
+            var selected = $(this).attr('value');
+            $(this).parent().find('option#'+selected).click();
+        });
     } else {
         tabs = $('<ul class="formTabs">'+tabs+'</ul>');
     }
@@ -114,7 +118,7 @@ ploneFormTabbing.initializeForm = function() {
 
 
     // The fieldset.current hidden may change, but is not content
-    $(this).find('input[name="fieldset.current"]').addClass('noUnloadProtection');
+    $(this).find('input[name="fieldset"]').addClass('noUnloadProtection');
 
     $(this).find('.formPanel:has(div.field span.required)').each(function() {
         var id = this.id.replace(/^fieldset-/, "#fieldsetlegend-");
@@ -172,11 +176,10 @@ $.fn.ploneTabInit = function(pbo) {
         item.find("dl.enableFormTabbing").each(ploneFormTabbing.initializeDL);
 
         //Select tab if it's part of the URL or designated in a hidden input
-        var targetPane = item.find('.enableFormTabbing input[name="fieldset.current"]').val() || window.location.hash;
+        var targetPane = item.find('.enableFormTabbing input[name="fieldset"]').val() || window.location.hash;
         if (targetPane) {
-            item.find(".enableFormTabbing .formTab a[href='" +
-             targetPane.replace("'", "").replace(/^#fieldset-/, "#fieldsetlegend-") +
-             "']").click();
+            item.find(".enableFormTabbing .formTabs " +
+             targetPane.replace("'", "").replace(/^#fieldset-/, "#fieldsetlegend-")).click();
         }
     });
 };

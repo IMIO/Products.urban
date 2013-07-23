@@ -13,7 +13,7 @@
 
 <metal:titleWithIcon use-macro="here/@@globalmacros/titleWithIcon" />
 
-<div id="urbanViewWithTabbing" tal:condition="useTabbing">
+<tal:showtabbing condition="useTabbing">
 
 <dl class="formTabs enableFormTabbing">
 <tal:tab_loop repeat="tab tabs">
@@ -30,10 +30,10 @@
  <metal:events use-macro="here/@@licencemacros/urbanEventsMacro" />
  <metal:advices use-macro="here/@@licencemacros/urbanAdvicesEventsMacro" />
 </dd>
-</div>
+</tal:showtabbing>
 
 
-<div tal:condition="not: useTabbing">
+<tal:notabbing condition="not: useTabbing">
 <tal:tab_loop repeat="tab tabs">
   <fieldset tal:define="macro python: view.getTabMacro(tab['value'])">
     <strong><legend tal:content="python: tab['display_name']">Description</legend></strong>
@@ -45,7 +45,7 @@
  <metal:events use-macro="here/@@licencemacros/urbanEventsMacro" />
  <metal:advices use-macro="here/@@licencemacros/urbanAdvicesEventsMacro" />
 </fieldset>
-</div>
+</tal:notabbing>
 
 <div tal:replace="structure provider:plone.belowcontentbody" />
 
