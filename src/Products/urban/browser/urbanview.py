@@ -31,9 +31,9 @@ class UrbanView(BrowserView):
     def getDefaultSort(self):
         context = aq_inner(self.context)
         if context.getProperty('urbanConfigId'):
-            return 'table-titleColumn-0'
+            return 'sortable_title'
         else:
-            return 'table-creationdateColumn-1'
+            return 'created'
 
     def getArgument(self, key_to_match, default=''):
         request = aq_inner(self.request)

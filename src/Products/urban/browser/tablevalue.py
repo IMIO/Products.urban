@@ -208,6 +208,13 @@ class ValuesForLicenceListing(ValuesForUrbanListing):
             query_string['review_state'] = state
 
         query_string.update(kwargs)
+
+        # update catalog query with criterias found in the request
+        for key in request.keys():
+            value = request.get(key)
+            if key in query_string and value:
+                query_string[key] = value
+
         licence_brains = catalog(query_string)
         return licence_brains
 
