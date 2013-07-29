@@ -10,7 +10,8 @@ from Products.urban.browser.interfaces import \
     ILicenceListingTable, IContactTable, IParcelsTable, \
     IEventsTable, IDocumentsTable, IAnnexesTable, \
     INotariesTable, IArchitectsTable, IGeometriciansTable, IClaimantsTable, \
-    IRecipientsCadastreTable, ISearchResultTable, IParcellingsTable, IUrbanColumn
+    IRecipientsCadastreTable, ISearchResultTable, IParcellingsTable, \
+    IUrbanColumn, IAllLicencesListingTable
 
 
 def getSortMethod(idx):
@@ -40,6 +41,8 @@ class UrbanTable(Table):
     batchProviderName = 'plonebatch'
     startBatchingAt = 0
 
+    # override setUpRows: use a Lazymap rather than a comprehension list for
+    # performance issues (see #6444)
     def setUpRows(self):
         return LazyMap(self.setUpRow, self.values)
 
@@ -52,13 +55,14 @@ class LicenceListingTable(UrbanTable):
     cssClasses = {'table': 'listing largetable'}
     sortOrder = 'descending'
     batchSize = 20
+    sortOn = None
 
 
 class AllLicencesListingTable(LicenceListingTable):
     """
      Licence listing for urban main page, we sort on creation date rather than title
     """
-    sortOn = None
+    implements(IAllLicencesListingTable)
 
 
 class SearchResultTable(UrbanTable, SequenceTable):

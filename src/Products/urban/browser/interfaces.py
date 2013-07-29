@@ -51,7 +51,13 @@ class ISearchResultTable(IUrbanTable):
 
 class ILicenceListingTable(IUrbanTable):
     """
-    Marker interface for a search result table
+    Marker interface for a specific licence display table
+    """
+
+
+class IAllLicencesListingTable(IUrbanTable):
+    """
+    Marker interface for a all licences display table
     """
 
 
