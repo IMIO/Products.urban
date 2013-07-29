@@ -9,6 +9,8 @@ from z3c.table.value import ValuesMixin
 from zope.interface import implements
 from zope.component import queryAdapter
 
+from Products.ZCatalog.Lazy import LazyMap
+
 from Products.urban.config import URBAN_TYPES
 from Products.urban.browser.interfaces import IItemForUrbanTable, IBrainForUrbanTable, IObjectForUrbanTable
 
@@ -133,8 +135,11 @@ class ValuesForUrbanListing(ValuesMixin):
 
     @property
     def values(self):
+        def wrap(item):
+            return queryAdapter(item, IItemForUrbanTable)
+
         items = self.getItems()
-        wrapped_items = [queryAdapter(item, IItemForUrbanTable) for item in items]
+        wrapped_items = LazyMap(wrap, items)
         return wrapped_items
 
     def getItems(self):
@@ -190,6 +195,8 @@ class ValuesForLicenceListing(ValuesForUrbanListing):
         queryString = {
             'portal_type': URBAN_TYPES,
             'path': '/'.join(context.getPhysicalPath()),
+            'sort_on': 'created',
+            'sort_order': 'descending',
         }
 
         foldermanager = request.get('foldermanager', '')

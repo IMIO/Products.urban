@@ -313,8 +313,7 @@ class BrainCreationDateColumn(CreationDateColumn):
         return date.strftime('%d/%m/%Y')
 
     def getSortKey(self, brain):
-        date = DateTime(brain.CreationDate)
-        return date
+        return brain.CreationDate
 
 
 class CreatorColumn(Column):
