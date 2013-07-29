@@ -801,6 +801,13 @@
      provides="z3c.table.interfaces.IValues"
   />
 
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.interfaces.IAllLicencesListingTable"
+     factory=".tablevalue.ValuesForAllLicencesListing"
+     provides="z3c.table.interfaces.IValues"
+  />
   <!-- table values adapters end -->
 
 </configure>

@@ -192,21 +192,28 @@ class ValuesForLicenceListing(ValuesForUrbanListing):
         request = aq_inner(self.request)
         catalog = getToolByName(context, 'portal_catalog')
 
-        queryString = {
+        query_string = {
             'portal_type': URBAN_TYPES,
             'path': '/'.join(context.getPhysicalPath()),
-            'sort_on': 'created',
+            'sort_on': 'sortable_title',
             'sort_order': 'descending',
         }
 
         foldermanager = request.get('foldermanager', '')
         if foldermanager:
-            queryString['folder_manager'] = foldermanager
+            query_string['folder_manager'] = foldermanager
 
         state = request.get('review_state', '')
         if state:
-            queryString['review_state'] = state
+            query_string['review_state'] = state
 
-        queryString.update(kwargs)
-        licence_brains = catalog(queryString)
+        query_string.update(kwargs)
+        licence_brains = catalog(query_string)
         return licence_brains
+
+
+class ValuesForAllLicencesListing(ValuesForLicenceListing):
+
+    def queryLicences(self):
+        query_string = {'sort_on': 'created'}
+        return super(ValuesForAllLicencesListing, self).queryLicences(**query_string)
