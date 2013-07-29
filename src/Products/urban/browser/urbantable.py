@@ -4,6 +4,8 @@ from z3c.table.table import Table, SequenceTable
 
 from zope.interface import implements
 
+from Products.ZCatalog.Lazy import LazyMap
+
 from Products.urban.browser.interfaces import \
     ILicenceListingTable, IContactTable, IParcelsTable, \
     IEventsTable, IDocumentsTable, IAnnexesTable, \
@@ -38,6 +40,9 @@ class UrbanTable(Table):
     batchProviderName = 'plonebatch'
     startBatchingAt = 0
 
+    def setUpRows(self):
+        return LazyMap(self.setUpRow, self.values)
+
 
 class LicenceListingTable(UrbanTable):
     """
@@ -53,7 +58,7 @@ class AllLicencesListingTable(LicenceListingTable):
     """
      Licence listing for urban main page, we sort on creation date rather than title
     """
-    sortOn = 'table-creationdateColumn-1'
+    sortOn = None
 
 
 class SearchResultTable(UrbanTable, SequenceTable):
