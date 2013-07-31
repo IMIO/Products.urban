@@ -282,4 +282,9 @@ class IEnvClassThree(Interface):
     """Marker interface for EnvClassThree
     """
 
+
+class IContactFolder(Interface):
+    """Marker interface for folders containing contacts
+    """
+
 ##/code-section FOOT

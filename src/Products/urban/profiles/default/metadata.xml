@@ -12,7 +12,6 @@
     <dependency>profile-communesplone.iconified_document_actions:default</dependency>
     <dependency>profile-plone.app.referenceintegrity:default</dependency>
     <dependency>profile-Products.CMFPlacefulWorkflow:CMFPlacefulWorkflow</dependency>
-    <dependency>profile-quintagroup.transmogrifier:default</dependency>
   </dependencies>
   <!-- ##/code-section METADATA -->
 </metadata>

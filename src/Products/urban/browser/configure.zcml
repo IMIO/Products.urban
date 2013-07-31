@@ -454,7 +454,7 @@
   <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
      name="parcellings_folderview"
-     class=".parcellings_folderview.ParcellingsFolderView"
+     class=".urban_configfolderview.ParcellingsFolderView"
      template="templates/urban_configfolderview.pt"
      permission="zope2.View"
   />
@@ -462,7 +462,7 @@
   <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
      name="geometricians_folderview"
-     class=".geometricians_folderview.GeometriciansFolderView"
+     class=".urban_configfolderview.GeometriciansFolderView"
      template="templates/urban_configfolderview.pt"
      permission="zope2.View"
   />
@@ -470,7 +470,7 @@
   <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
      name="notaries_folderview"
-     class=".notaries_folderview.NotariesFolderView"
+     class=".urban_configfolderview.NotariesFolderView"
      template="templates/urban_configfolderview.pt"
      permission="zope2.View"
   />
@@ -478,9 +478,17 @@
   <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
      name="architects_folderview"
-     class=".architects_folderview.ArchitectsFolderView"
+     class=".urban_configfolderview.ArchitectsFolderView"
      template="templates/urban_configfolderview.pt"
      permission="zope2.View"
+  />
+
+  <browser:page
+      for="Products.urban.interfaces.IContactFolder"
+      name="getemails"
+      class=".urban_configfolderview.ContactsFolderView"
+      attribute="getEmails"
+      permission="zope2.View"
   />
 
   <adapter

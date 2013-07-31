@@ -57,7 +57,7 @@ from Products.urban.utils import ParcelHistoric
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS
 from Products.urban.config import GLOBAL_TEMPLATES
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.interfaces import IUrbanCertificateBase, IUrbanVocabularyTerm
+from Products.urban.interfaces import IUrbanVocabularyTerm, IContactFolder
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 DB_QUERY_ERROR = "Programming error in query"
@@ -1483,6 +1483,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if context.getLayout() == 'urban_view' or context.getProperty('urbanConfigId') or context.portal_type in URBAN_TYPES:
             return True
         return False
+
+    def isContactFolder(self, folder):
+        return IContactFolder.providedBy(folder)
 
     def _pylonsHostChange(method, self):
         return self.getPylonsHost()
