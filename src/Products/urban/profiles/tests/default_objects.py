@@ -3,12 +3,12 @@
 default_objects = {
     'notaries': [
         'Notary',
-        {'id': "notary1", 'name1': "NotaryName1", 'name2': "NotarySurname1"},
+        {'id': "notary1", 'name1': "NotaryName1", 'name2': "NotarySurname1", 'email': 'maitre.duchnoque@notaire.be'},
     ],
 
     'geometricians': [
         'Geometrician',
-        {'id': "geometrician1", 'name1': "GeometricianName1", 'name2': "GeometricianSurname1"},
+        {'id': "geometrician1", 'name1': "GeometricianName1", 'name2': "GeometricianSurname1", 'email': 'geo.trouvetout@geometre.be'},
     ],
 
     'parcellings': [

@@ -3,9 +3,9 @@
 default_objects = {
     'notaries': [
         'Notary',
-        {'id': "notary1", 'name1': "NotaryName1", 'name2': "NotarySurname1"},
-        {'id': "notary2", 'name1': "NotaryName2", 'name2': "NotarySurname2"},
-        {'id': "notary3", 'name1': "NotaryName3", 'name2': "NotarySurname3"},
+        {'id': "notary1", 'name1': "NotaryName1", 'name2': "NotarySurname1", 'email': 'maitre.duchnoque@imio.be'},
+        {'id': "notary2", 'name1': "NotaryName2", 'name2': "NotarySurname2", 'email': 'kawabounga@gmail.com'},
+        {'id': "notary3", 'name1': "NotaryName3", 'name2': "NotarySurname3", 'email': 'nono.robot@notaire.be'},
     ],
 
     'geometricians': [

@@ -28,8 +28,8 @@ from Products.urban.config import TOPIC_TYPE
 from Products.urban.config import DefaultTexts
 from zExceptions import BadRequest
 from Products.urban.config import URBAN_TYPES
-from Products.urban.interfaces import ILicenceContainer
-from zope.interface import alsoProvides
+from Products.urban.interfaces import ILicenceContainer, IContactFolder
+from zope.interface import alsoProvides, directlyProvides
 from zope.component import queryUtility
 from zope.i18n.interfaces import ITranslationDomain
 from zope import event
@@ -553,6 +553,8 @@ def setDefaultApplicationSecurity(context):
             folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
             folder.manage_addLocalRoles("urban_readers", ("Reader", ))
             folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
+            # mark them with IContactFolder interface use some view methods, like 'getemails', on it
+            directlyProvides(folder, IContactFolder)
 
 
 def addGlobalFolders(context):
