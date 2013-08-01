@@ -221,3 +221,60 @@ class TestUrbanDocuments(unittest.TestCase):
         self.assertEqual(len(all_templates), len(urban_event.getTemplates()))
         for i in range(len(all_templates)):
             self.assertEqual(all_templates[i].Title(), urban_event.getTemplates()[i].Title())
+
+
+class TestTemplateMethods(unittest.TestCase):
+
+    layer = URBAN_TESTS_LICENCES
+
+    def setUp(self):
+        portal = self.layer['portal']
+        self.portal_urban = portal.portal_urban
+        login(portal, 'urbaneditor')
+
+        licence_folders = [
+            'buildlicences',
+            'parceloutlicences',
+            'divisions',
+            'notaryletters',
+            'urbancertificateones',
+            'urbancertificatetwos',
+            'declarations',
+            'miscdemands',
+        ]
+
+        urban_folder = portal.urban
+        licences = [getattr(urban_folder, lf).objectValues()[0] for lf in licence_folders]
+        self.licences = licences
+
+        field_exceptions = {
+            'workLocations': 'getWorkLocationSignaletic',
+            'architects': 'getArchitectsSignaletic',
+            'geometricians': 'getGeometriciansSignaletic',
+            'notaryContact': 'getNotariesSignaletic',
+            'foldermanagers': 'getFolderManagersSignaletic',
+            # datagrid
+            'roadEquipments': 'Title',
+        }
+        self.field_exceptions = field_exceptions
+
+    def testGetValueForTemplate(self):
+        for licence in self.licences:
+            self._testGVFTforLicence(licence)
+
+    def _testGVFTforLicence(self, licence):
+        fields = licence.schema.fields()
+        field_names = [f.getName() for f in fields if f.schemata not in ['default', 'metadata']]
+
+        for fieldname in field_names:
+            try:
+                if fieldname not in self.field_exceptions:
+                    display_value = licence.getValueForTemplate(fieldname)
+                    print '%s %s' % (fieldname, display_value)
+                else:
+                    method_name = self.field_exceptions[fieldname]
+                    template_helpermethod = getattr(licence, method_name)
+                    template_helpermethod()
+            except:
+                print '\n%s\n%s' % (licence, fieldname)
+                self.fail()
