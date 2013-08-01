@@ -46,7 +46,7 @@ class ContactsFolderView(UrbanConfigFolderView):
         emails = '; '.join(raw_emails)
         emails = emails.replace(',', ' ')
 
-        self.request.response.setHeader('Content-type', 'text/csv;charset=utf-8')
+        self.request.response.setHeader('Content-type', 'text/plain;charset=utf-8')
         self.request.response.setHeader('Content-Disposition', "attachment; filename=%s_emails.txt" % context.id)
         self.request.response.setHeader('Content-Length', str(len(emails)))
         return emails
