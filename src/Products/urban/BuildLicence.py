@@ -24,7 +24,6 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from zope.i18n import translate as _
 from Products.CMFCore.utils import getToolByName
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
@@ -300,12 +299,11 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
           This vocabulary for field roadAdaptation returns a list of
           road adaptations : no, yes modify, yes create
         """
-        lst=[
-             ['no', _('road_adaptation_no', 'urban', context=self.REQUEST)],
-             ['modify', _('road_adaptation_modify', 'urban', context=self.REQUEST)],
-             ['create', _('road_adaptation_create', 'urban', context=self.REQUEST)],
-              ]
-        vocab = [(elt[0], elt[1]) for elt in lst]
+        vocab = (
+            ('no', 'road_adaptation_no'),
+            ('modify', 'road_adaptation_modify'),
+            ('create', 'road_adaptation_create'),
+        )
         return DisplayList(tuple(vocab))
 
     security.declarePublic('listUsages')
@@ -314,12 +312,11 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
           This vocabulary for field usage returns a list of
           building usage : for habitation, not for habitation
         """
-        lst=[
-             ['for_habitation', _('usage_for_habitation', 'urban', context=self.REQUEST)],
-             ['not_for_habitation', _('usage_not_for_habitation', 'urban', context=self.REQUEST)],
-             ['not_applicable', _('usage_not_applicable', 'urban', context=self.REQUEST)],
-              ]
-        vocab = [(elt[0], elt[1]) for elt in lst]
+        vocab = (
+             ('for_habitation', 'usage_for_habitation'),
+             ('not_for_habitation', 'usage_not_for_habitation'),
+             ('not_applicable', 'usage_not_applicable'),
+              )
         return DisplayList(tuple(vocab))
 
     # Manually created methods
@@ -329,11 +326,10 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
         """
           This vocabulary for field requirementsFromFD returns this list: decision, opinion
         """
-        lst=[
-             ['opinion', _('location_fdrequirement_opinion', 'urban', context=self.REQUEST)],
-             ['decision', _('location_fdrequirement_decision', 'urban', context=self.REQUEST)],
-              ]
-        vocab = [(elt[0], elt[1]) for elt in lst]
+        vocab = (
+             ('opinion', 'location_fdrequirement_opinion'),
+             ('decision','location_fdrequirement_decision'),
+              )
         return DisplayList(tuple(vocab))
 
     security.declarePublic('askFD')

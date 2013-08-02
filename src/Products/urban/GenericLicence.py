@@ -778,17 +778,14 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
           catchment areas : close prevention area, far prevention area,
           supervision area or outside catchment
         """
-        lst=[
-             ['close', translate('close_prevention_area', 'urban', context=self.REQUEST)],
-             ['far', translate('far_prevention_area', 'urban', context=self.REQUEST)],
-             ['supervision', translate('supervision_area', 'urban', context=self.REQUEST)],
-             ['ouside', translate('outside_catchment', 'urban', context=self.REQUEST)],
-            ]
+        vocab = (
+            ('close', 'close_prevention_area'),
+            ('far', 'far_prevention_area'),
+            ('supervision', 'supervision_area'),
+            ('ouside', 'outside_catchment'),
+        )
 
-        vocab = []
-        for elt in lst:
-            vocab.append((elt[0], elt[1]))
-        return DisplayList(tuple(vocab))
+        return DisplayList(vocab)
 
     security.declarePublic('listFloodingLevels')
     def listFloodingLevels(self):
@@ -796,20 +793,16 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
           This vocabulary for field floodingLevel returns a list of
           flooding levels : no risk, low risk, moderated risk, high risk
         """
-        lst=[
-             ['no', translate('flooding_level_no', 'urban', context=self.REQUEST)],
-             ['low', translate('flooding_level_low', 'urban', context=self.REQUEST)],
-             ['moderate', translate('flooding_level_moderate', 'urban', context=self.REQUEST)],
-             ['high', translate('flooding_level_high', 'urban', context=self.REQUEST)],
-            ]
+        vocab = (
+            #we add an empty vocab value of type "choose a value"
+            ('',  EMPTY_VOCAB_VALUE),
+            ('no', 'flooding_level_no'),
+            ('low', 'flooding_level_low'),
+            ('moderate', 'flooding_level_moderate'),
+            ('high', 'flooding_level_high'),
+        )
 
-        vocab = []
-        #we add an empty vocab value of type "choose a value"
-        val = translate('urban', EMPTY_VOCAB_VALUE, context=self, default=EMPTY_VOCAB_VALUE)
-        vocab.append(('', val))
-        for elt in lst:
-            vocab.append((elt[0], elt[1]))
-        return DisplayList(tuple(vocab))
+        return DisplayList(vocab)
 
     security.declarePublic('foldermanagersBaseQuery')
     def foldermanagersBaseQuery(self):
