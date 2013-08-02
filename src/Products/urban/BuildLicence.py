@@ -304,7 +304,7 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
             ('modify', 'road_adaptation_modify'),
             ('create', 'road_adaptation_create'),
         )
-        return DisplayList(tuple(vocab))
+        return DisplayList(vocab)
 
     security.declarePublic('listUsages')
     def listUsages(self):
@@ -313,11 +313,11 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
           building usage : for habitation, not for habitation
         """
         vocab = (
-             ('for_habitation', 'usage_for_habitation'),
-             ('not_for_habitation', 'usage_not_for_habitation'),
-             ('not_applicable', 'usage_not_applicable'),
-              )
-        return DisplayList(tuple(vocab))
+            ('for_habitation', 'usage_for_habitation'),
+            ('not_for_habitation', 'usage_not_for_habitation'),
+            ('not_applicable', 'usage_not_applicable'),
+        )
+        return DisplayList(vocab)
 
     # Manually created methods
 
@@ -327,10 +327,10 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
           This vocabulary for field requirementsFromFD returns this list: decision, opinion
         """
         vocab = (
-             ('opinion', 'location_fdrequirement_opinion'),
-             ('decision','location_fdrequirement_decision'),
-              )
-        return DisplayList(tuple(vocab))
+            ('opinion', 'location_fdrequirement_opinion'),
+            ('decision', 'location_fdrequirement_decision'),
+        )
+        return DisplayList(vocab)
 
     security.declarePublic('askFD')
     def askFD(self):
