@@ -269,8 +269,7 @@ class TestTemplateMethods(unittest.TestCase):
         for fieldname in field_names:
             try:
                 if fieldname not in self.field_exceptions:
-                    display_value = licence.getValueForTemplate(fieldname)
-                    print '%s %s' % (fieldname, display_value)
+                    licence.displayValueOfField(fieldname)
                 else:
                     method_name = self.field_exceptions[fieldname]
                     template_helpermethod = getattr(licence, method_name)

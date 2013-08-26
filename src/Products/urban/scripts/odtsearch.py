@@ -6,7 +6,6 @@ import os
 import sys
 import zipfile
 import xml.dom.minidom
-import argparse
 
 ALLOWED_ARCHIVE_EXTENSIONS = ('.odt')
 
@@ -58,22 +57,21 @@ def searchAndReplaceOneODT(filename, findexpr, replace_expr=None, destination=No
     if zip_file:
         content_file = openOdtContent(zip_file, verbosity)
         odt_content = content_file.read()
-    if odt_content:
 
+    if odt_content:
         #search...
         xml_tree = xml.dom.minidom.parseString(odt_content)
         searchresult = searchInOneOdt(xml_tree, filename, findexpr, ignorecase, verbosity)
         #...and replace
-        if dochanges:
+        if replace_expr and searchresult:
             newcontent = getNewOdtContent(xml_tree, searchresult, replace_expr, verbosity)
-            new_archive = createNewOdt(zip_file, newcontent, 'test-result.odt', verbosity)
+            createNewOdt(zip_file, newcontent, 'test-result.odt', verbosity)
         return searchresult
 
 
 def createNewOdt(old_odt, newcontent, new_odt_name, verbosity):
     new_odt = openZip(new_odt_name, 'a', verbosity)
     for name in old_odt.namelist():
-        #import pdb; pdb.set_trace()
         temp_content = old_odt.read(name)
         temp_file = open('.temp-odtsearch', 'w')
         temp_file.write(temp_content)
@@ -247,20 +245,24 @@ def displaySearchSummary(searchresult, filenames, findexpr, replace_expr, verbos
 ################################################################
 #parsing arguments code
 ################################################################
+req_version = (2, 7)
+cur_version = sys.version_info
 
-def parseArguments():
-    parser = argparse.ArgumentParser(description='Search and replace in comments and input fields of .odt files')
-    parser.add_argument('findexpr', action='append')
-    parser.add_argument('-r', '--replace')
-    parser.add_argument('-i', '--ignorecase', action='store_true')
-    parser.add_argument('filenames', nargs='+')
-    return parser.parse_args()
+if cur_version >= req_version:
+    import argparse
 
+    def parseArguments():
+        parser = argparse.ArgumentParser(description='Search and replace in comments and input fields of .odt files')
+        parser.add_argument('findexpr', action='append')
+        parser.add_argument('-r', '--replace')
+        parser.add_argument('-i', '--ignorecase', action='store_true')
+        parser.add_argument('filenames', nargs='+')
+        return parser.parse_args()
 
-def main():
-    arguments = parseArguments()
-    arguments = vars(arguments)
-    searchAndReplaceAllODT(**arguments)
+    def main():
+        arguments = parseArguments()
+        arguments = vars(arguments)
+        searchAndReplaceAllODT(**arguments)
 
-if __name__ == "__main__":
-    main()
+    if __name__ == "__main__":
+        main()
