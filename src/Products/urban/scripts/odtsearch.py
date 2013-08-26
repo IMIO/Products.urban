@@ -129,13 +129,14 @@ def searchInOneOdt(xml_tree, filename, findexpr, ignorecase, verbosity):
 def searchInTextElements(elements, filename, element_type, findexpr, verbosity=0, ignorecase=False, firstfound=True):
     text_lines = []
     node_groups = [reachTextNodeLevel(element) for element in elements]
+    flags = ignorecase and re.I or 0
     i = 1
     for node_group in node_groups:
         for node in node_group:
             if node.nodeType == node.TEXT_NODE:
                 text = node.data
                 for expr in findexpr:
-                    matches = re.finditer(expr, text)
+                    matches = re.finditer(expr, text, flags=flags)
                     match_indexes = [{'start':match.start(), 'end':match.end()} for match in matches]
                     if match_indexes:
                         if firstfound:
@@ -258,7 +259,8 @@ def parseArguments():
 
 def main():
     arguments = parseArguments()
-    searchAndReplaceAllODT(**vars(arguments))
+    arguments = vars(arguments)
+    searchAndReplaceAllODT(**arguments)
 
 if __name__ == "__main__":
     main()
