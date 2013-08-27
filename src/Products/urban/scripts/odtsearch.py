@@ -5,6 +5,7 @@ import re
 import os
 import sys
 import zipfile
+import mimetypes
 import xml.dom.minidom
 
 ALLOWED_ARCHIVE_EXTENSIONS = ('.odt')
@@ -31,19 +32,25 @@ def searchAndReplaceAllODT(filenames, findexpr, replace, destination=None, docha
                 print k, v
 
     result = {}
-    for filename in filenames:
-        searchresult = searchAndReplaceOneODT(
-            filename=filename,
-            findexpr=findexpr,
-            replace_expr=replace,
-            destination=destination,
-            dochanges=dochanges,
-            ignorecase=ignorecase,
-            verbosity=verbosity
-        )
-        if searchresult:
-            result[filename] = searchresult
+
+    recursiveSearchAndReplaceAllODT(filenames, findexpr, replace, result, destination, dochanges, ignorecase, verbosity)
+
     displaySearchSummary(result, filenames, findexpr, replace, verbosity)
+
+
+def recursiveSearchAndReplaceAllODT(filenames, findexpr, replace, result, destination=None, dochanges=False, ignorecase=False, verbosity=0, startingdir='.'):
+    """
+     recursive call of the search over file folders
+    """
+    for filename in filenames:
+        if mimetypes.guess_type(filename)[0] == 'application/vnd.oasis.opendocument.text':
+            searchresult = searchAndReplaceOneODT(filename, findexpr, replace, destination, dochanges, ignorecase, verbosity)
+            if searchresult:
+                result[filename] = searchresult
+        elif os.path.isdir(filename):
+            new_startingdir = filename
+            new_filenames = ['%s/%s' % (new_startingdir, filename) for filename in os.listdir(new_startingdir)]
+            recursiveSearchAndReplaceAllODT(new_filenames, findexpr, replace, result, destination, dochanges, ignorecase, verbosity, new_startingdir)
 
 
 def searchAndReplaceOneODT(filename, findexpr, replace_expr=None, destination=None, dochanges=False, ignorecase=False, verbosity=0):
