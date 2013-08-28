@@ -49,7 +49,9 @@ def recursiveSearchAndReplaceAllODT(filenames, findexpr, replace, result, destin
                 result[filename] = searchresult
         elif os.path.isdir(filename):
             new_startingdir = filename
-            new_filenames = ['%s/%s' % (new_startingdir, filename) for filename in os.listdir(new_startingdir)]
+            if not new_startingdir.endswith('/'):
+                new_startingdir = '%s/' % new_startingdir
+            new_filenames = ['%s%s' % (new_startingdir, filename) for filename in os.listdir(new_startingdir)]
             recursiveSearchAndReplaceAllODT(new_filenames, findexpr, replace, result, destination, dochanges, ignorecase, verbosity, new_startingdir)
 
 
