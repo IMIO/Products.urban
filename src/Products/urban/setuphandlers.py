@@ -1169,6 +1169,11 @@ def createLicence(site, licence_type, data):
     return licence
 
 
+def configurePMWSClientForUrban(context):
+    """ set some default values for pm.wsclient """
+    import ipdb; ipdb.set_trace()
+
+
 def setupExtra(context):
     if context.readDataFile('urban_extra_marker.txt') is None:
         return

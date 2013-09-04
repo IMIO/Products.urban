@@ -55,6 +55,13 @@
       description="Demo Extension profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
   />
+  <genericsetup:registerProfile
+      name="pmwsclient"
+      title="urban-pm-wsclient"
+      directory="profiles/pm-wsclient"
+      description="Profile for pm.wsclient in urban"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+  />
   <!-- ##/code-section profiles.zcml-bottom -->
 
 </configure>
