@@ -233,6 +233,30 @@ class UrbanBase(object):
             return tool.formatDate(depositEvent.getEventDate())
         return translate('warning_no_deposit_date', 'urban', context=self.REQUEST).encode('utf8')
 
+    security.declarePublic('hasSingleApplicant')
+    def hasSingleApplicant(self):
+        """
+            return true or false depending if the licence has several applicants or if the multiplicity
+            of the applicant is plural
+        """
+        applicants = self.objectValues('Contact')  # applicant can also be proprietaries..
+        if len(applicants) <= 1:
+            applicant = applicants[0]
+            field = applicant.getField('personTitle')
+            titles = field.vocabulary.getAllVocTerms(applicant)
+            title = titles[applicant.getPersonTitle()]
+            if title.getMultiplicity() == 'single':
+                return True
+        return False
+
+    security.declarePublic('hasMultipleApplicants')
+    def hasMultipleApplicants(self):
+        """
+            return true or false depending if the licence has several applicants or if the multiplicity
+            of the applicant is plural
+        """
+        return not self.hasSingleApplicant()
+
     security.declarePublic('getMultipleApplicantsCSV')
     def getMultipleApplicantsCSV(self):
         """
