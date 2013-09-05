@@ -95,6 +95,13 @@
   />
 
   <browser:page
+     for="*"
+     name="pm.wsclient"
+     class=".pm-wsclientview.PMWSClientView"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IUrbanTool"
      name="urbanconfigview"
      class=".urbanconfigview.UrbanConfigView"
