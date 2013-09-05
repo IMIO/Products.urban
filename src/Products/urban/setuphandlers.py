@@ -1171,14 +1171,69 @@ def createLicence(site, licence_type, data):
 
 def configurePMWSClientForUrban(context):
     """ set some default values for pm.wsclient """
-    import ipdb; ipdb.set_trace()
+    if context.readDataFile('urban_pm-wsclient_marker.txt') is None:
+        return
 
+    site = context.getSite()
+
+    registry = getToolByName(site, 'portal_registry')
+
+    view = site.restrictedTraverse('@@ws4pmclient-settings')
+    connected = view._soap_connectToPloneMeeting()
+    if not connected:
+        registry['imio.pm.wsclient.browser.settings.IWS4PMClientSettings.pm_username'] = u'siteadmin'
+
+        locality_name = registry.getPhysicalPath()[-2]
+        pm_url = u'http://%s-pm.imio.be/ws4pm.wsdl' % locality_name
+        registry['imio.pm.wsclient.browser.settings.IWS4PMClientSettings.pm_url'] = pm_url
+
+    #we need to be connected to plonemeeting, else it will cause issues to display the config form
+    if not connected:
+        return 'you must set the plonemeeting user first'
+
+    field_mappings = [
+        {
+            'expression': u'python:context.Title().upper()',
+            'field_name': u'title'
+        },
+        {
+            'expression': u'context/Title',
+            'field_name': u'description'
+        },
+        {
+            'expression': u'context/getDecisionText',
+            'field_name': u'decision'
+        }
+    ]
+
+    # validation on vocabulary cannot be done since we are not connected to plone meeting yet
+    # dirty trick to skip validation
+    from zope.schema._field import AbstractCollection
+    old_validate = AbstractCollection._validate
+
+    def _validate(self, value):
+        return
+    AbstractCollection._validate = _validate
+    # dirty trick to skip validation end
+    registry['imio.pm.wsclient.browser.settings.IWS4PMClientSettings.field_mappings'] = field_mappings
+
+    action_condition = [
+        {
+            'pm_meeting_config_id': u'meeting-config-college',
+            'condition': u'context/pm.wsclient/isDecisionCollegeEvent',
+            'permissions': 'SOAP Client Send'
+        }
+    ]
+    registry['imio.pm.wsclient.browser.settings.IWS4PMClientSettings.generated_actions'] = action_condition
+    #restore validation
+    AbstractCollection._validate = old_validate
 
 def setupExtra(context):
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
 
     portal = context.getSite()
+
     #Setting the user password policy
     if portal.validate_email:
         portal.validate_email = False
