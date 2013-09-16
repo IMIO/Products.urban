@@ -39,6 +39,7 @@ from Products.CMFPlacefulWorkflow.PlacefulWorkflowTool import WorkflowPolicyConf
 from exportimport import updateAllUrbanTemplates
 from Products.urban.utils import generatePassword
 from datetime import date
+import pickle
 ##/code-section HEAD
 
 def isNoturbanProfile(context):
@@ -423,25 +424,28 @@ def addUrbanConfigs(context):
 
 
 def addRubricValues(context, class_type, config_folder):
-    categories = [
-        "01   AGRICULTURE, DETENTION D'ANIMAUX, SERVICES ANNEXES",
-        "02   SYLVICULTURE, EXPLOITATION FORESTIÈRE, SERVICES ANNEXES",
-        "05   PÊCHE, AQUACULTURE",
-        "10   EXTRACTION DE HOUILLE, DE LIGNITE ET DE TOURBE",
-        "11   EXTRACTION D'HYDROCARBURES, SERVICES ANNEXES",
-        "13   EXTRACTION DE MINERAIS MÉTALLIQUES ",
-        "14   AUTRES INDUSTRIES EXTRACTIVES",
-        "15   INDUSTRIES AGRO-ALIMENTAIRES",
-        "16   INDUSTRIE DU TABAC",
-        "17   INDUSTRIE TEXTILE",
-    ]
+
+    pickled_dgrne_slurp = context.openDataFile('slurped_dgrne.pickle')
+    dgrne_slurp = pickle.load(pickled_dgrne_slurp)
+
+    categories = dgrne_slurp['main_rubrics']
+
+    rubric_terms = dgrne_slurp['rubric_terms']
 
     for category in categories:
-        newFolderid = config_folder.invokeFactory("Folder", id=category.split()[0], title=category)
+        newFolderid = config_folder.invokeFactory("Folder", **category)
         newFolder = getattr(config_folder, newFolderid)
         newFolder.setConstrainTypesMode(1)
         newFolder.setLocallyAllowedTypes(['EnvironmentRubricTerm'])
         newFolder.setImmediatelyAddableTypes(['EnvironmentRubricTerm'])
+
+        category_id = category['id']
+        rubrics = dict([rb for rb in rubric_terms.items() if rb[0].startswith(category_id)])
+        sorted_rubrics = [rubrics[r_id] for r_id in sorted(rubrics)]
+
+        for rubric in sorted_rubrics:
+            newFolder.invokeFactory('EnvironmentRubricTerm', **rubric)
+
     return
 
 
