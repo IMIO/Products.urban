@@ -18,6 +18,8 @@ Added configuration step for pm.wsclient (#6400).
 
 Added rubrics and conditions config values for environment procedures (#5027).
 
+Fixed search on parcel historic (#6681).
+
 
 1.1.8
 -----
