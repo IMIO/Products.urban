@@ -219,7 +219,8 @@ class ParcelHistoric:
         for relationship in relationships:
             existing_relatives = [str(relative) for relative in getattr(self, relationship)]
             relatives = [relative for relative in getattr(other, relationship) if str(relative) not in existing_relatives]
-            self.addRelatives(relationship, relatives)
+            relatives_field = getattr(self, relationship, None)
+            relatives_field.extend(relatives)
 
     def diffPrc(self, prc_ac, prc):
         return prc_ac and prc_ac.replace(' ', '')[1:] != prc.replace(' ', '') or False
