@@ -22,6 +22,7 @@ def getRubricsHTMLpages(rubric_ids):
 
 def extractRubricsTerm(rubric_ids):
     print 'slurping rubrics...'
+
     html_pages = getRubricsHTMLpages(rubric_ids)
 
     rubrics = {}
@@ -156,8 +157,18 @@ def buildMappingAndExtractAllConditions(rubric_terms):
     return conditions, mapping
 
 
-def doALot():
+def pickleResult(slurped):
+    """ save the result on the file system """
 
+    slurp_filename = 'slurped_dgrne.pickle'
+    dgrne_slurp = open(slurp_filename, 'w')
+    pickle.dump(slurped, dgrne_slurp)
+
+    print 'pickled result in %s' % slurp_filename
+
+
+def slurp():
+    """ """
     # will be used to create config folders for Rubrics
     main_rubrics = extractRubricsFolders()
 
@@ -166,7 +177,7 @@ def doALot():
     rubric_terms = extractRubricsTerm(rubric_ids)
 
     # get the ci/ca and the mapping between rubrics and conditions
-    conditions, mapping = buildMappingAndExtractAllConditions(rubric_terms)
+    mapping, conditions = buildMappingAndExtractAllConditions(rubric_terms)
 
     print 'slurping done!'
 
@@ -177,15 +188,11 @@ def doALot():
         'mapping': mapping,
     }
 
-    slurp_filename = 'slurped_dgrne.pickle'
-    dgrne_slurp = open(slurp_filename, 'w')
-    pickle.dump(slurped, dgrne_slurp)
-
-    print 'pickled result in %s' % slurp_filename
+    pickleResult(slurped)
 
 
 def main():
-    doALot()
+    slurp()
 
 if __name__ == "__main__":
     main()
