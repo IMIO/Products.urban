@@ -160,12 +160,12 @@ def extraPostInstall(context, refresh=True):
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
     site = context.getSite()
-    logger.info("addUrbanConfigs : starting...")
-    addUrbanConfigs(context)
-    logger.info("addUrbanConfigs : Done")
     logger.info("addGlobalFolders : starting...")
     addGlobalFolders(context)
     logger.info("addGlobalFolders : Done")
+    logger.info("addUrbanConfigs : starting...")
+    addUrbanConfigs(context)
+    logger.info("addUrbanConfigs : Done")
     logger.info("addDefaultObjects : starting...")
     addDefaultObjects(context)
     logger.info("addDefaultObjects : Done")
@@ -412,12 +412,32 @@ def addUrbanConfigs(context):
             #migration step will use it too
             addPEBCategories(context, configFolder)
 
-        if urban_type in ['EnvClassThree', ]:
+        if urban_type == 'EnvClassOne':
             if not hasattr(aq_base(configFolder), 'rubrics'):
                 newFolderid = configFolder.invokeFactory("Folder", id="rubrics", title=_("rubrics_folder_title", 'urban', context=site.REQUEST))
                 newFolder = getattr(configFolder, newFolderid)
                 setFolderAllowedTypes(newFolder, 'Folder')
-                addRubricValues(context, 3, newFolder)
+                addRubricValues(context, ['1', ''], newFolder)
+
+            if not hasattr(aq_base(configFolder), 'inadmissibilityreasons'):
+                createFolderWithDefaultValues(configFolder, 'inadmissibilityreasons', site, default_values)
+
+        if urban_type == 'EnvClassTwo':
+            if not hasattr(aq_base(configFolder), 'rubrics'):
+                newFolderid = configFolder.invokeFactory("Folder", id="rubrics", title=_("rubrics_folder_title", 'urban', context=site.REQUEST))
+                newFolder = getattr(configFolder, newFolderid)
+                setFolderAllowedTypes(newFolder, 'Folder')
+                addRubricValues(context, ['2', ''], newFolder)
+
+            if not hasattr(aq_base(configFolder), 'inadmissibilityreasons'):
+                createFolderWithDefaultValues(configFolder, 'inadmissibilityreasons', site, default_values)
+
+        if urban_type == 'EnvClassThree':
+            if not hasattr(aq_base(configFolder), 'rubrics'):
+                newFolderid = configFolder.invokeFactory("Folder", id="rubrics", title=_("rubrics_folder_title", 'urban', context=site.REQUEST))
+                newFolder = getattr(configFolder, newFolderid)
+                setFolderAllowedTypes(newFolder, 'Folder')
+                addRubricValues(context, ['3', ''], newFolder)
 
             if not hasattr(aq_base(configFolder), 'inadmissibilityreasons'):
                 createFolderWithDefaultValues(configFolder, 'inadmissibilityreasons', site, default_values)
@@ -425,28 +445,71 @@ def addUrbanConfigs(context):
 
 def addRubricValues(context, class_type, config_folder):
 
+    site = context.getSite()
+    catalog = getToolByName(site, 'portal_catalog')
     pickled_dgrne_slurp = context.openDataFile('slurped_dgrne.pickle')
     dgrne_slurp = pickle.load(pickled_dgrne_slurp)
 
     categories = dgrne_slurp['main_rubrics']
-
     rubric_terms = dgrne_slurp['rubric_terms']
+    mapping = dgrne_slurp['mapping']
 
     for category in categories:
-        newFolderid = config_folder.invokeFactory("Folder", **category)
-        newFolder = getattr(config_folder, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['EnvironmentRubricTerm'])
-        newFolder.setImmediatelyAddableTypes(['EnvironmentRubricTerm'])
+        newfolder_id = config_folder.invokeFactory("Folder", **category)
+        newfolder = getattr(config_folder, newfolder_id)
+        newfolder.setConstrainTypesMode(1)
+        newfolder.setLocallyAllowedTypes(['EnvironmentRubricTerm'])
+        newfolder.setImmediatelyAddableTypes(['EnvironmentRubricTerm'])
 
         category_id = category['id']
-        rubrics = dict([rb for rb in rubric_terms.items() if rb[0].startswith(category_id)])
+
+        rubrics = {}
+        for r_id, rubric in rubric_terms.iteritems():
+            # we add the rubric if it fits the category folder and if the
+            # classtype match the licence class number
+            if r_id.startswith(category_id) and rubric['extraValue'] in class_type:
+                rubrics[r_id] = rubric
         sorted_rubrics = [rubrics[r_id] for r_id in sorted(rubrics)]
 
         for rubric in sorted_rubrics:
-            newFolder.invokeFactory('EnvironmentRubricTerm', **rubric)
+            rubric_id = newfolder.invokeFactory('EnvironmentRubricTerm', **rubric)
 
-    return
+            bound_condition = mapping[rubric['id']]
+            if bound_condition:
+                condition_type = bound_condition['type'].replace('/', '_').replace('-', '_')
+                condition_id = bound_condition['id']
+                condition_path = '/'.join(site.portal_urban.exploitationconditions.getPhysicalPath())
+                condition_path = '%s/%s' % (condition_path, condition_type)
+                condition = catalog(id=condition_id, path={'query': condition_path, 'depth': 1})[0]
+                condition_uid = condition.getObject().UID()
+
+                rubric = getattr(newfolder, rubric_id)
+                rubric.setExploitationCondition(condition_uid)
+
+
+def addExploitationConditions(context, config_folder):
+    """ add sectorial and integral conditions vocabulary terms """
+
+    site = context.getSite()
+    pickled_dgrne_slurp = context.openDataFile('slurped_dgrne.pickle')
+    dgrne_slurp = pickle.load(pickled_dgrne_slurp)
+
+    all_conditions = dgrne_slurp['conditions']
+
+    for condition_type, conditions in all_conditions.iteritems():
+        newfolder_id = condition_type.replace('/', '_').replace('-', '_')
+        config_folder.invokeFactory('Folder', id=newfolder_id, title=_("%s_folder_title" % newfolder_id, 'urban', context=site.REQUEST))
+        newfolder = getattr(config_folder, newfolder_id)
+        setFolderAllowedTypes(newfolder, 'UrbanVocabularyTerm')
+
+        sorted_conditions = [conditions[c_id] for c_id in sorted(conditions)]
+
+        for condition in sorted_conditions:
+            condition_id = newfolder.invokeFactory('UrbanVocabularyTerm', extraValue=condition_type, **condition)
+            vocterm = getattr(newfolder, condition_id)
+            field = vocterm.getField('description')
+            field.setContentType(vocterm, 'text/html')
+            vocterm.setDescription(condition['description'])
 
 
 def addPEBCategories(context, configFolder):
@@ -659,9 +722,8 @@ def addGlobalFolders(context):
     else:
         conditions = getattr(tool, "exploitationconditions")
     #add the exploitation conditions subfolders
-    for folder_name in ['i_and_s_conditions', 'integralconditions', 'sectorialconditions']:
-        if not hasattr(conditions, folder_name):
-            createFolderWithDefaultValues(conditions, folder_name, site, content_portal_type='UrbanVocabularyTerm')
+    addExploitationConditions(context, conditions)
+
     if not hasattr(tool, "additional_layers"):
         additional_layers_id = tool.invokeFactory("Folder", id="additional_layers", title=_("additonal_layers_folder_title", 'urban', context=site.REQUEST))
         additional_layers = getattr(tool, additional_layers_id)
