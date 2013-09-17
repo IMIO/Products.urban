@@ -147,8 +147,10 @@ class ParcelHistoric:
         relatives_chain = []
         for prc in getattr(self, relationship):
             section = prc[0]
-            prcb1 = prc[1:]
-            prcb1 = '%s%s%s' % (prcb1[:-3], ' '.join(['' for i in range(12 - len(prcb1))]), prcb1[-3:])
+            radical_bis = prc[1:8]
+            exposant = len(prc) > 8 and prc[8] or ''
+            puissance = len(prc) > 11 and prc[9:12] or '   '
+            prcb1 = '%s%s%s' % (radical_bis, puissance, exposant)
             query_string = "SELECT distinct %s, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
                             FROM pas left join da on da.da = pas.da \
                             WHERE pas.da = %s and section = '%s' and pas.prcb1 = '%s' and pas.%s IS NOT NULL" % (link, division, section, prcb1, o_link)
@@ -217,7 +219,8 @@ class ParcelHistoric:
         for relationship in relationships:
             existing_relatives = [str(relative) for relative in getattr(self, relationship)]
             relatives = [relative for relative in getattr(other, relationship) if str(relative) not in existing_relatives]
-            self.addRelatives(relationship, relatives)
+            relatives_field = getattr(self, relationship, None)
+            relatives_field.extend(relatives)
 
     def diffPrc(self, prc_ac, prc):
         return prc_ac and prc_ac.replace(' ', '')[1:] != prc.replace(' ', '') or False
