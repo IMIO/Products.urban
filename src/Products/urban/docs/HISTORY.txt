@@ -16,6 +16,8 @@ Python expression can now be used in urbanEvent default text (#6406).
 
 Added configuration step for pm.wsclient (#6400).
 
+Added rubrics and conditions config values for environment procedures (#5027).
+
 
 1.1.8
 -----
