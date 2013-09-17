@@ -41,17 +41,19 @@ class EnvClassThreeView(LicenceView):
         catalog = getToolByName(context, 'portal_catalog')
         rubric_uids = context.getField('rubrics').getRaw(context)
         rubric_brains = catalog(UID=rubric_uids)
-        return ['<p>%s</p>%s' % (brain.Title.split(':')[0], brain.Description) for brain in rubric_brains]
+        rubrics = [brain.getObject() for brain in rubric_brains]
+        rubrics_display = ['<p>%s</p>%s' % (rub.getNumber(), rub.Description()) for rub in rubrics]
+        return rubrics_display
 
     def _sortConditions(self, conditions):
         """
-        sort exploitation conditions in this order: CI & CS, CI, CS
+        sort exploitation conditions in this order: CI/CS, CI, CS
         """
-        order = ['CI & CS', 'CI', 'CS']
+        order = ['CI/CS', 'CI', 'CS', 'CS-Eau']
         sorted_conditions = dict([(val, [],) for val in order])
         for cond in conditions:
             val = cond.getExtraValue()
-            sorted_conditions[val].append({'type': val, 'url': cond.absolute_url(), 'title': cond.Title()})
+            sorted_conditions[val].append({'type': val, 'url': cond.absolute_url() + '/description/getRaw', 'title': cond.Title()})
         sort = []
         for val in order:
             sort.extend(sorted_conditions[val])

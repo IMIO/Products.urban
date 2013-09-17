@@ -46,6 +46,18 @@ msgstr "Coordonnées de l'architecte"
 msgid "BuildLicence"
 msgstr "Permis d'urbanisme"
 
+msgid "CI_CS_folder_title"
+msgstr "Conditions intégrales et sectorielles"
+
+msgid "CI_folder_title"
+msgstr "Conditions intégrales"
+
+msgid "CS_Eau_folder_title"
+msgstr "Conditions sectorielles Eau"
+
+msgid "CS_folder_title"
+msgstr "Conditions sectorielles"
+
 msgid "Claimant data"
 msgstr "Coordonnées du réclamant"
 
@@ -713,9 +725,6 @@ msgstr "Vous ne pouvez pas effectuer de recherche pour l'instant car une erreur 
 msgid "help_search_parcels"
 msgstr "Choisissez une des 3 recherches ci-dessous.  Si vous savez exactement ce que vous cherchez, vous pouvez croiser les critères de recherche (encoder l'adresse et le nom du propriétaire par exemple)"
 
-msgid "i_and_s_conditions_folder_title"
-msgstr "Conditions intégrales & sectorielles"
-
 msgid "inadmissibilityreasons_folder_title"
 msgstr "Motifs d'irrecevabilité"
 
@@ -733,9 +742,6 @@ msgstr "Enquête n°${number}"
 
 msgid "inquiry_to"
 msgstr "au"
-
-msgid "integralconditions_folder_title"
-msgstr "Conditions intégrales"
 
 msgid "investigationarticles_folder_title"
 msgstr "Articles pour les enquêtes"
@@ -1146,9 +1152,6 @@ msgstr "Recherche dynamique des documents liés à un événement"
 
 msgid "searchlots"
 msgstr "Les lots"
-
-msgid "sectorialconditions_folder_title"
-msgstr "Conditions sectorielles"
 
 msgid "simple-map_title"
 msgstr "Carte simple"

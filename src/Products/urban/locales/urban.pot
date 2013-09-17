@@ -45,6 +45,18 @@ msgstr ""
 msgid "BuildLicence"
 msgstr ""
 
+msgid "CI_folder_title"
+msgstr ""
+
+msgid "CI_CS_folder_title"
+msgstr ""
+
+msgid "CS_folder_title"
+msgstr ""
+
+msgid "CS_Eau_folder_title"
+msgstr ""
+
 msgid "Claimant data"
 msgstr ""
 
@@ -712,9 +724,6 @@ msgstr ""
 msgid "help_search_parcels"
 msgstr ""
 
-msgid "i_and_s_conditions_folder_title"
-msgstr ""
-
 msgid "inadmissibilityreasons_folder_title"
 msgstr ""
 
@@ -731,9 +740,6 @@ msgid "inquiry_title_and_number"
 msgstr ""
 
 msgid "inquiry_to"
-msgstr ""
-
-msgid "integralconditions_folder_title"
 msgstr ""
 
 msgid "investigationarticles_folder_title"
@@ -1144,9 +1150,6 @@ msgid "searchlinkeddocuments"
 msgstr ""
 
 msgid "searchlots"
-msgstr ""
-
-msgid "sectorialconditions_folder_title"
 msgstr ""
 
 msgid "simple-map_title"
