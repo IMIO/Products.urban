@@ -82,7 +82,7 @@ def extractRubricsFolders():
     return folders
 
 
-def extractCondition(rubric, condition_id, condition_type):
+def extractCondition(condition_id, condition_type):
 
     if not condition_id or condition_type == 'Non':
         return
@@ -151,7 +151,7 @@ def buildMappingAndExtractAllConditions(rubric_terms):
             condition = conditions[condition_type][condition_id]
         # new condition to extract !
         else:
-            condition = extractCondition(rubric, condition_id, condition_type)
+            condition = extractCondition(condition_id, condition_type)
             conditions[condition_type][condition_id] = condition
 
         to_map = condition_type != u'Non' and {'type': condition_type, 'id': condition_id} or None
