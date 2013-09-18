@@ -14,6 +14,9 @@ import pickle
 import bs4
 
 
+encoding = "iso-8859-1"
+
+
 def getRubricsHTMLpages(rubric_ids):
     base_url = 'http://environnement.wallonie.be/cgi/dgrne/aerw/pe/rubri/chx_rub_liste.idc?d12='
     rubrics_html = [urllib2.urlopen('%s%s' % (base_url, rubric_id)).read() for rubric_id in rubric_ids]
@@ -29,7 +32,7 @@ def extractRubricsTerm(rubric_ids):
 
     for html_page in html_pages:
         body = re.search('\<body.*\</body>', html_page, re.IGNORECASE + re.DOTALL)
-        rubrics_soup = bs4.BeautifulSoup(body.group(), from_encoding="iso-8859-1")
+        rubrics_soup = bs4.BeautifulSoup(body.group(), from_encoding=encoding)
         table = rubrics_soup.find_all('table')[-1]
         rows = table.find_all('tr')[1:]
         for row in rows:
@@ -71,7 +74,7 @@ def extractRubricsFolders():
     form = re.search('\<form.*\</form>', rubriques_html, re.IGNORECASE + re.DOTALL)
     form = form.group()
 
-    rubrics_soup = bs4.BeautifulSoup(form)
+    rubrics_soup = bs4.BeautifulSoup(form, from_encoding=encoding)
 
     options = rubrics_soup.form.find_all('option')
     folders = [{'id': opt.attrs['value'], 'title': opt.text} for opt in options]
@@ -115,7 +118,7 @@ def extractConditionIntegraltext(condition_soup):
     fulltext_page = urllib2.urlopen(fulltext_link).read()
     body = re.search('\<body.*\</body>', fulltext_page, re.IGNORECASE + re.DOTALL)
 
-    fulltext = bs4.BeautifulSoup(body.group(), from_encoding="iso-8859-1")
+    fulltext = bs4.BeautifulSoup(body.group(), from_encoding=encoding)
     fulltext = str(fulltext)
 
     return fulltext
@@ -126,7 +129,7 @@ def getConditionSoup(condition_id):
     condition_page = urllib2.urlopen('%s%s' % (base_url, condition_id)).read()
     body = re.search('\<body.*\</body>', condition_page, re.IGNORECASE + re.DOTALL)
 
-    condition_soup = bs4.BeautifulSoup(body.group())
+    condition_soup = bs4.BeautifulSoup(body.group(), from_encoding=encoding)
 
     return condition_soup
 
@@ -154,7 +157,7 @@ def buildMappingAndExtractAllConditions(rubric_terms):
         to_map = condition_type != u'Non' and {'type': condition_type, 'id': condition_id} or None
         mapping[rubric_id] = to_map
 
-    return conditions, mapping
+    return mapping, conditions
 
 
 def pickleResult(slurped):
