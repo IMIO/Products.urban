@@ -4,6 +4,7 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.urban.browser.urbansearchview import UrbanSearchView
 from Products.urban.utils import ParcelHistoric
+from Products.urban.interfaces import IGenericLicence
 
 
 class ParcelsInfo(UrbanSearchView):
@@ -15,8 +16,6 @@ class ParcelsInfo(UrbanSearchView):
         """
           Find licences with parcel paramaters
         """
-        foldertypes = ['BuildLicence', 'Declaration', 'ParcelOutLicence', 'MiscDemand', 'Division', 'ParcelOutLicence']
-
         if not self.enoughSearchCriterias(self.context.REQUEST):
             return []
         catalogTool = getToolByName(self, 'portal_catalog')
@@ -27,7 +26,7 @@ class ParcelsInfo(UrbanSearchView):
         for parcel in parcels_historic:
             for ref in parcel.getAllSearchRefs():
                 parcel_infos.add(ref)
-        return catalogTool(portal_type=foldertypes, parcelInfosIndex=list(parcel_infos))
+        return catalogTool(object_provides=IGenericLicence.__identifier__, parcelInfosIndex=list(parcel_infos))
 
     def getParcelInfos(self, capakey):
         parcelInfos = {}
