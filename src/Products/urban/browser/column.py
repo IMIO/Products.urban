@@ -57,15 +57,19 @@ class RelatedLicencesColumn(Column):
         return translate(self.header, 'urban', context=self.request)
 
     def renderCell(self, parcel):
+        url = parcel.aq_parent.absolute_url()
+        id = parcel.getId()
+        img = '<img  src="linkedhistoricfolders.png" class="urban-linkedfolders-icon"/>'
+        link = '<a class="link-overlay" href="%s/@@parcelhistoricrecordsview?id=%s">%s</a>' % (url, id, img)
+        cell = '&nbsp;<span id="urban-parcel-historic-related-licences">%s</span>' % link
         if not parcel.hasRelatedLicences():
-            return '-'
+            cell = '<span>-</span>%s' % cell
         else:
-            url = parcel.aq_parent.absolute_url()
-            id = parcel.getId()
             img = '<img  src="linkedfolders.png" class="urban-linkedfolders-icon"/>'
             link = '<a class="link-overlay" href="%s/@@parcelrecordsview?id=%s">%s</a>' % (url, id, img)
-            cell = '<span id="urban-parcel-related-licences">%s</span' % link
-            return cell
+            span = '<span id="urban-parcel-related-licences">%s</span>' % link
+            cell = '%s%s' % (span, cell)
+        return cell
 
 
 class TitleColumn(UrbanColumn):

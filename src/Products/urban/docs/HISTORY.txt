@@ -20,6 +20,8 @@ Added rubrics and conditions config values for environment procedures (#5027).
 
 Fixed search on parcel historic (#6681).
 
+Added popup to see all licences related to a parcel historic (#5858).
+
 
 1.1.8
 -----
