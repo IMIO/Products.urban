@@ -200,7 +200,7 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         res.append(self.getDivisionCode())
         res.append(self.getSection())
         res.append(self.getRadical())
-        res.append(self.getBis())
+        res.append(self.getBis().lstrip('0'))
         res.append(self.getExposant())
         res.append(self.getPuissance())
         if self.getPartie():
