@@ -10,14 +10,41 @@
 <metal:main fill-slot="main">
 <metal:main_macro define-macro="main">
     <metal:body define-macro="body_macro">
-    <div i18n:translate="parcel_linked_folders">
-            Dossiers liés à la parcelle:
-    </div>
-    <div tal:repeat="licence_info view/getRelatedLicencesOfParcel">
-            <a class="link-overlay"
-               tal:attributes="href python: licence_info['url']; class python: licence_info['class']"
-               tal:content="python: licence_info['title']" i18n:translate="">lien vers les anciens permis</a>
-    </div>
+
+    <tal:display define="tmp view/getRelatedLicencesOfParcel;
+                         licences python: tmp[0];
+                         parcel_historic python: tmp[1]">
+
+       <span tal:condition="parcel_historic">
+          <div> Historique de la parcelle: </div>
+          <div tal:repeat="parcel parcel_historic/getHistoricForDisplay">
+             <tal:block define="oddrow repeat/parcel/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
+                <span tal:replace="structure python: '&nbsp;'*parcel['level']*3" tal:condition="python: parcel['level']"/>
+                <span fcolor="#FF0000" tal:attributes="style python: parcel['highlight'] and 'background-color:orange' or ''">
+                <span tal:content="python: parcel['divname']"/>
+                   <span tal:content="python: str(parcel['prc'])"></span>
+                </span>
+             </tal:block>
+          </div>
+          <br />
+       </span>
+
+       <tal:no_result condition="python: not licences">
+          <div i18n:translate="parcel_linked_folders">
+               Aucun dossier lié à la parcelle
+          </div>
+       </tal:no_result>
+       <tal:result condition="licences">
+          <div i18n:translate="parcel_linked_folders">
+                  Dossiers liés à la parcelle:
+          </div>
+          <div tal:repeat="licence_info licences">
+                  <a class="link-overlay"
+                     tal:attributes="href python: licence_info['url']; class python: licence_info['class']"
+                     tal:content="python: licence_info['title']" i18n:translate="">lien vers les anciens permis</a>
+          </div>
+       </tal:result>
+    </tal:display>
 
 </metal:body>
 </metal:main_macro>

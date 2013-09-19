@@ -23,7 +23,7 @@ class ParcelRecordsView(BrowserView):
           Returns the licences related to a parcel
         """
         context = aq_inner(self.context)
-        related_brains = self.searchRelatedLicences()
+        related_brains, parcel_historic = self.searchRelatedLicences()
         related_items = []
         for brain in related_brains:
             if brain.id != context.id:
@@ -33,7 +33,7 @@ class ParcelRecordsView(BrowserView):
                     'class': 'state-%s contenttype-%s' % (brain.review_state, brain.portal_type.lower())
                 }
                 related_items.append(item_infos)
-        return related_items
+        return related_items, parcel_historic
 
     def searchRelatedLicences(self):
         """
@@ -46,7 +46,10 @@ class ParcelRecordsView(BrowserView):
 
         related_brains = catalog(object_provides=IGenericLicence.__identifier__, parcelInfosIndex=parcel_infos, sort_on='sortable_title')
 
-        return related_brains
+        return related_brains, None
+
+    def getParcelHistoric(self):
+        return []
 
 
 class ParcelHistoricRecordsView(ParcelRecordsView):
@@ -74,4 +77,4 @@ class ParcelHistoricRecordsView(ParcelRecordsView):
 
         related_brains = catalog(object_provides=IGenericLicence.__identifier__, parcelInfosIndex=list(parcel_infos), sort_on='sortable_title')
 
-        return related_brains
+        return related_brains, parcels_historic[0]
