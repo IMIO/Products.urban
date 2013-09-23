@@ -95,6 +95,9 @@ msgstr "Parcelle(s) trouvée(s)"
 msgid "Geometrician data"
 msgstr "Coordonnées du géomètre"
 
+msgid "History of the parcel and related licences"
+msgstr "Historique de la parcelle et dossiers liés"
+
 #. Default: "Acknowledgement"
 msgid "IAcknowledgment type marker interface"
 msgstr "Accusé de réception"
@@ -164,6 +167,9 @@ msgstr "Carte"
 msgid "MiscDemand"
 msgstr "Demande diverse"
 
+msgid "No related licences"
+msgstr "Aucun dossier lié"
+
 msgid "Notary data"
 msgstr "Coordonnées du notaire"
 
@@ -181,6 +187,9 @@ msgstr "Coordonnées du propriétaire"
 
 msgid "Public inquiry"
 msgstr "Enquête publique"
+
+msgid "Related licences"
+msgstr "Dossiers liés à la parcelle"
 
 msgid "Remove selected street"
 msgstr "Enlever la rue sélectionnée"

@@ -370,7 +370,7 @@
      for="Products.urban.interfaces.IGenericLicence"
      name="parcelhistoricrecordsview"
      class=".parcelrecordsview.ParcelHistoricRecordsView"
-     template="templates/parcelrecordsview.pt"
+     template="templates/parcelhistoricrecordsview.pt"
      permission="zope2.View"
   />
 

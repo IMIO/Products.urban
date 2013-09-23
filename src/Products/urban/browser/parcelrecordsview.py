@@ -22,10 +22,14 @@ class ParcelRecordsView(BrowserView):
         """
           Returns the licences related to a parcel
         """
+        licence_brains = self.searchRelatedLicences()
+        to_display = self.getDisplayForRelatedLicences(licence_brains)
+        return to_display
+
+    def getDisplayForRelatedLicences(self, licence_brains):
         context = aq_inner(self.context)
-        related_brains, parcel_historic = self.searchRelatedLicences()
         related_items = []
-        for brain in related_brains:
+        for brain in licence_brains:
             if brain.id != context.id:
                 item_infos = {
                     'title': brain.Title,
@@ -33,7 +37,7 @@ class ParcelRecordsView(BrowserView):
                     'class': 'state-%s contenttype-%s' % (brain.review_state, brain.portal_type.lower())
                 }
                 related_items.append(item_infos)
-        return related_items, parcel_historic
+        return related_items
 
     def searchRelatedLicences(self):
         """
@@ -46,7 +50,7 @@ class ParcelRecordsView(BrowserView):
 
         related_brains = catalog(object_provides=IGenericLicence.__identifier__, parcelInfosIndex=parcel_infos, sort_on='sortable_title')
 
-        return related_brains, None
+        return related_brains
 
     def getParcelHistoric(self):
         return []
@@ -56,6 +60,15 @@ class ParcelHistoricRecordsView(ParcelRecordsView):
     """
      Search for licences related to the parcel historic of the current licence
     """
+
+    def getRelatedLicencesOfParcel(self):
+        """
+          Returns the licences related to a parcel
+        """
+        licence_brains, parcel_historic = self.searchRelatedLicences()
+        to_display = self.getDisplay(parcel_historic, licence_brains)
+        return to_display
+
     def searchRelatedLicences(self):
         """
           Returns the licences related to a parcel
@@ -71,10 +84,21 @@ class ParcelHistoricRecordsView(ParcelRecordsView):
             parcel.getDivision(), parcel.getSection(), parcel.getRadical(), parcel.getBis(), parcel.getExposant(), parcel.getPuissance(),
             historic=True, fuzzy=False, browseold=True
         )
-        for parcel in parcels_historic:
-            for ref in parcel.getAllSearchRefs():
-                parcel_infos.add(ref)
+        parcels_historic = parcels_historic[0]
+        for ref in parcels_historic.getAllIndexableRefs():
+            parcel_infos.add(ref)
 
         related_brains = catalog(object_provides=IGenericLicence.__identifier__, parcelInfosIndex=list(parcel_infos), sort_on='sortable_title')
 
-        return related_brains, parcels_historic[0]
+        return related_brains, parcels_historic
+
+    def getDisplay(self, parcels_historic, related_brains):
+        display = parcels_historic.listHistoric()
+        for line in display:
+            parcel = line.pop('parcel')
+            infos = parcel.getParcelAsDictionary()
+            line.update(infos)
+            licences = [brain for brain in related_brains if parcel.getIndexableRef() in brain.parcelInfosIndex]
+            line['licences'] = self.getDisplayForRelatedLicences(licences)
+
+        return display

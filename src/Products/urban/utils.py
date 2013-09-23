@@ -163,13 +163,13 @@ class ParcelHistoric:
                 relatives_chain.append(relative)
         setattr(self, relationship, relatives_chain)
 
-    def getSearchRef(self):
+    def getIndexableRef(self):
         return ','.join([val and str(val) or '' for val in [self.division, self.section, self.radical, self.bis, self.exposant, self.puissance, '0']])
 
-    def getAllSearchRefs(self):
+    def getAllIndexableRefs(self):
         all_nodes = {}
         all_nodes = [n['node'] for n in self.getAllNodes(nodes=all_nodes).values()]
-        return [node.getSearchRef() for node in all_nodes]
+        return [node.getIndexableRef() for node in all_nodes]
 
     def getAllNodes(self, directions=['childs', 'parents'], nodes={}, distance=0):
         nodes[self.key()] = {'node': self, 'distance': distance}
@@ -183,6 +183,7 @@ class ParcelHistoric:
     def getParcelAsDictionary(self):
         infos = dict([(ref, getattr(self, ref)) for ref in self.refs])
         infos['highlight'] = self.highlight
+        infos['old'] = self.childs and True or False
         if self.prc:
             infos['prc'] = self.prc
         if self.proprietary:
@@ -194,8 +195,16 @@ class ParcelHistoric:
         return infos
 
     def getHistoricForDisplay(self):
+        display = self.listHistoric()
+        for line in display:
+            parcel = line.pop('parcel')
+            parcel_display = parcel.getParcelAsDictionary()
+            line.update(parcel_display)
+        return display
+
+    def listHistoric(self):
         def buildResult(parcel, result, level=0, relationship='parents'):
-            parcel_infos = parcel.getParcelAsDictionary()
+            parcel_infos = {'parcel': parcel}
             parcel_infos['level'] = level
             if relationship == 'childs':
                 if level != 0 or result == []:
@@ -205,8 +214,6 @@ class ParcelHistoric:
                 buildResult(relative, result, next_level, relationship)
             if relationship == 'parents':
                 result.append(parcel_infos)
-            old = parcel.childs and True or False
-            parcel_infos['old'] = old
         to_return = []
         buildResult(self, to_return, relationship='parents')
         buildResult(self, to_return, relationship='childs')

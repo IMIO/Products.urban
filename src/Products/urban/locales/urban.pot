@@ -163,6 +163,9 @@ msgstr ""
 msgid "MiscDemand"
 msgstr ""
 
+msgid "No related licences"
+msgstr ""
+
 msgid "Notary data"
 msgstr ""
 
@@ -182,6 +185,9 @@ msgid "Public inquiry"
 msgstr ""
 
 msgid "Remove selected street"
+msgstr ""
+
+msgid "Related licences"
 msgstr ""
 
 msgid "Reopen"
@@ -722,6 +728,9 @@ msgstr ""
 
 #. Default: "Choose one of the following forms to search for parcels.  You can cumulate criteria if you exactly know what you are looking for"
 msgid "help_search_parcels"
+msgstr ""
+
+msgid "History of the parcel and related licences"
 msgstr ""
 
 msgid "inadmissibilityreasons_folder_title"

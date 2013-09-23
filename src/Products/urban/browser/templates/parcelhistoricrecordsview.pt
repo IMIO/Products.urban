@@ -1,0 +1,49 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<head>
+</head>
+
+<body>
+<metal:main fill-slot="main">
+<metal:main_macro define-macro="main">
+    <metal:body define-macro="body_macro">
+
+    <tal:display define="parcel_historic view/getRelatedLicencesOfParcel">
+
+       <table tal:condition="parcel_historic">
+          <h1 i18n:translate="">History of the parcel and related licences</h1>
+          <tr tal:repeat="parcel parcel_historic">
+             <td tal:define="oddrow repeat/parcel/odd;
+                                licences python:parcel.get('licences', None)"
+                  tal:attributes="class python: oddrow and 'even' or 'odd'">
+                <span tal:replace="structure python: '&nbsp;.&nbsp;'*parcel['level']" tal:condition="python: parcel['level']"/>
+                <b><span fcolor="#FF0000" tal:attributes="style python: parcel['highlight'] and 'background-color:yellow' or ''">
+                   <span tal:content="python: parcel['divname']"/>
+                   <span tal:content="python: str(parcel['prc'])"/>
+                </span></b>
+                <tal:licences condition="licences" define="last_ref repeat/parcel/end;
+                                                           start python: last_ref and '&nbsp;'*3 or '&nbsp;.&nbsp;'">
+                   <div tal:repeat="licence licences">
+                      <span tal:replace="structure python: start+'&nbsp;'*3*(parcel['level']-1)" tal:condition="python: parcel['level']"/>
+                      <a class="link-overlay"
+                         tal:attributes="href python: licence['url']; class python: licence['class']"
+                         tal:content="python: licence['title']" i18n:translate="">lien vers les anciens permis</a>
+                   </div>
+                </tal:licences>
+                <div tal:condition="not: repeat/parcel/end" tal:content="structure python: '&nbsp;.'"/>
+             </td>
+          </tr>
+          <br />
+       </table>
+    </tal:display>
+
+</metal:body>
+</metal:main_macro>
+</metal:main>
+</body>
+</html>

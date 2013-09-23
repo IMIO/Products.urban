@@ -21,10 +21,10 @@ class ParcelsInfo(UrbanSearchView):
         catalogTool = getToolByName(self, 'portal_catalog')
         parcel_infos = set()
         arg_index = ParcelHistoric(division=division, section=section, radical=radical, bis=bis, exposant=exposant, puissance=puissance)
-        parcel_infos.add(arg_index.getSearchRef())
+        parcel_infos.add(arg_index.getIndexableRef())
         parcels_historic = self.tool.queryParcels(division, section, radical, bis, exposant, puissance, historic=True, fuzzy=False, browseold=True)
         for parcel in parcels_historic:
-            for ref in parcel.getAllSearchRefs():
+            for ref in parcel.getAllIndexableRefs():
                 parcel_infos.add(ref)
         return catalogTool(object_provides=IGenericLicence.__identifier__, parcelInfosIndex=list(parcel_infos))
 
