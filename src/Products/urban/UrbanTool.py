@@ -619,7 +619,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if conditions:
             query_string = '%s WHERE %s' % (query_string, ' and '.join(conditions))
         records = self.queryDB(query_string)
-        parcels = [ParcelHistoric(highlight=True, **r) for r in records]
+        parcels = [ParcelHistoric(**r) for r in records]
         parcels = ParcelHistoric.mergeDuplicate(parcels)
         if historic:
             for i, parcel in enumerate(parcels):
