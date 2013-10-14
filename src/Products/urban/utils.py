@@ -120,10 +120,9 @@ class ParcelHistoric:
                 checked[key] = i
         return [parcel for parcel in parcel_historics if parcel]
 
-    def __init__(self, highlight=False, prc='', prca='', prcc='', **refs):
-        self.highlight = highlight
-        self.parents = self.diffPrc(prca, prc) and [prca] or []
-        self.childs = self.diffPrc(prcc, prc) and [prcc] or []
+    def __init__(self, prc='', prca='', prcc='', **refs):
+        self.parents = prca and [prca] or []  # self.diffPrc(prca, prc) and [prca] or []
+        self.childs = prcc and [prcc] or []  # self.diffPrc(prcc, prc) and [prcc] or []
         self.prc = prc
         self.proprietary = refs.get('proprietary', '')
         self.proprietary_city = refs.get('proprietary_city', '')
@@ -139,13 +138,20 @@ class ParcelHistoric:
     def key(self):
         return self.__str__()
 
-    def buildRelativesChain(self, urban_tool, relationship):
+    def buildRelativesChain(self, urban_tool, relationship, all_nodes=None):
+        if all_nodes is None:
+            all_nodes = {}
+
         o_relationship = relationship == 'parents' and 'childs' or 'parents'
         link = relationship == 'parents' and 'prca' or 'prcc'
         o_link = link == 'prca' and 'prcc' or 'prca'
         division = self.division
+        relation = self.getRelatives(relationship)
+
+        self.clearShortcuts(relationship, urban_tool, link, division)
+
         relatives_chain = []
-        for prc in getattr(self, relationship):
+        for prc in relation:
             section = prc[0]
             radical_bis = prc[1:8]
             exposant = len(prc) > 8 and prc[8] or ''
@@ -154,14 +160,47 @@ class ParcelHistoric:
             query_string = "SELECT distinct %s, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
                             FROM pas left join da on da.da = pas.da \
                             WHERE pas.da = %s and section = '%s' and pas.prcb1 = '%s' and pas.%s IS NOT NULL" % (link, division, section, prcb1, o_link)
+
             records = urban_tool.queryDB(query_string)
+
             relatives = [ParcelHistoric(**r) for r in records]
+
             if relatives:
                 relative = ParcelHistoric.mergeDuplicate(relatives)[0]
-                relative.buildRelativesChain(urban_tool, relationship)
+                relative_ref = str(relative)
+                if relative_ref in all_nodes:
+                    relative = all_nodes[relative_ref]
+                else:
+                    relative.buildRelativesChain(urban_tool, relationship, all_nodes)
+                    all_nodes[relative_ref] = relative
                 relative.addRelatives(o_relationship, [self])
                 relatives_chain.append(relative)
         setattr(self, relationship, relatives_chain)
+
+    def clearShortcuts(self, relationship, urban_tool, link, division):
+        relation = self.getRelatives(relationship)
+        shortcut = [relation.pop(relation.index(ref)) for ref in relation if not self.diffPrc(ref)]
+        ref = shortcut and shortcut[0] or None
+        if shortcut:
+            section = ref[0]
+            radical_bis = ref[1:8]
+            exposant = len(ref) > 8 and ref[8] or ''
+            puissance = len(ref) > 11 and ref[9:12] or '   '
+            prcb1 = '%s%s%s' % (radical_bis, puissance, exposant)
+            query_string = "SELECT distinct %s, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
+                            FROM pas left join da on da.da = pas.da \
+                            WHERE pas.da = %s and section = '%s' and pas.prcb1 = '%s' and pas.%s != '%s'" \
+                            % (link, division, section, prcb1, link, ref)
+
+            records = urban_tool.queryDB(query_string)
+
+            relatives = [ParcelHistoric(**r) for r in records]
+
+            if relatives:
+                relative = ParcelHistoric.mergeDuplicate(relatives)[0]
+                for new_relative in relative.getRelatives(relationship):
+                    if new_relative not in relation:
+                        relation.append(new_relative)
 
     def getIndexableRef(self):
         return ','.join([val and str(val) or '' for val in [self.division, self.section, self.radical, self.bis, self.exposant, self.puissance, '0']])
@@ -182,7 +221,6 @@ class ParcelHistoric:
 
     def getParcelAsDictionary(self):
         infos = dict([(ref, getattr(self, ref)) for ref in self.refs])
-        infos['highlight'] = self.highlight
         infos['old'] = self.childs and True or False
         if self.prc:
             infos['prc'] = self.prc
@@ -195,13 +233,47 @@ class ParcelHistoric:
         return infos
 
     def getHistoricForDisplay(self):
-        display = self.listHistoric()
-        for line in display:
-            parcel = line.pop('parcel')
-            parcel_display = parcel.getParcelAsDictionary()
-            line.update(parcel_display)
+        display = []
+        historic = self.listHistoric()
+        delta = abs(min(historic.keys()))
+        historic = sorted(list(historic.iteritems()))
+        for level, parcels in historic:
+            for parcel in parcels:
+                parcel_display = parcel.getParcelAsDictionary()
+                parcel_display['level'] = delta + level
+                parcel_display['highlight'] = (level == 0)
+                display.append(parcel_display)
         return display
 
+    def listHistoric(self):
+        def buildLevel(result, relationship, level=0):
+            if relationship == 'parents':
+                previous_level = level + 1
+                next_level = level - 1
+            else:
+                previous_level = level - 1
+                next_level = level + 1
+
+            previousparcels = result[previous_level]
+
+            level_parcels = set()
+
+            for p_parcel in previousparcels:
+                for parcel in p_parcel.getRelatives(relationship):
+                    level_parcels.add(parcel)
+
+            level_parcels = list(level_parcels)
+
+            if level_parcels:
+                result[level] = level_parcels
+                buildLevel(result, relationship, next_level)
+
+        result = {0: [self]}
+        buildLevel(result, 'parents', level=-1)
+        buildLevel(result, 'childs', level=1)
+        return result
+
+    """
     def listHistoric(self):
         def buildResult(parcel, result, level=0, relationship='parents'):
             parcel_infos = {'parcel': parcel}
@@ -221,6 +293,7 @@ class ParcelHistoric:
         for parcel in to_return:
             parcel['level'] = parcel['level'] + min_lvl
         return to_return
+    """
 
     def mergeRelatives(self, other, relationships=['parents', 'childs']):
         for relationship in relationships:
@@ -228,8 +301,13 @@ class ParcelHistoric:
             relatives = [relative for relative in getattr(other, relationship) if str(relative) not in existing_relatives]
             self.addRelatives(relationship, relatives)
 
-    def diffPrc(self, prc_ac, prc):
-        return prc_ac and prc_ac.replace(' ', '')[1:] != prc.replace(' ', '') or False
+    def diffPrc(self, prc_ac):
+        radical_bis = prc_ac[1:8]
+        exposant = len(prc_ac) > 8 and prc_ac[8] or ''
+        puissance = len(prc_ac) > 11 and prc_ac[9:12] or '   '
+        to_compare = '%s%s%s' % (radical_bis, puissance, exposant)
+        is_different = to_compare.replace(' ', '') != self.prc.replace(' ', '')
+        return is_different
 
     def setRefs(self, **kwargs):
         for ref in self.refs:

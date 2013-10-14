@@ -93,12 +93,20 @@ class ParcelHistoricRecordsView(ParcelRecordsView):
         return related_brains, parcels_historic
 
     def getDisplay(self, parcels_historic, related_brains):
-        display = parcels_historic.listHistoric()
-        for line in display:
-            parcel = line.pop('parcel')
-            infos = parcel.getParcelAsDictionary()
-            line.update(infos)
-            licences = [brain for brain in related_brains if parcel.getIndexableRef() in brain.parcelInfosIndex]
-            line['licences'] = self.getDisplayForRelatedLicences(licences)
+        historic = parcels_historic.listHistoric()
+        to_return = []
+        sorted_keys = sorted(historic.keys())
+        delta = abs(min(sorted_keys))
 
-        return display
+        for level in sorted_keys:
+            lines = []
+            for parcel in historic[level]:
+                line = {'parcel': parcel, 'level': level + delta, 'highlight': False}
+                if level == 0:
+                    line['highlight'] = True
+                licences = [brain for brain in related_brains if parcel.getIndexableRef() in brain.parcelInfosIndex]
+                line['licences'] = self.getDisplayForRelatedLicences(licences)
+                lines.append(line)
+            to_return.append(lines)
+
+        return to_return
