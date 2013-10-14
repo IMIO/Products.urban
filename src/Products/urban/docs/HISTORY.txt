@@ -1,8 +1,14 @@
 History
 =======
 
-1.1.9 (unreleased)
-------------------
+1.1.10
+------
+
+Added search on parcel Historic and fixed search on old parcels (#6681).
+
+
+1.1.9
+-----
 
 Opinion request fields are now active for MiscDemand licences (#5933).
 
