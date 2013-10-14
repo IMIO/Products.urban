@@ -1,7 +1,7 @@
 History
 =======
 
-1.1.10
+1.2.0
 ------
 
 Added search on parcel Historic and fixed search on old parcels (#6681).
