@@ -175,9 +175,9 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
             activeRecipients = self.getRecipients(theObjects=False, onlyActive=True)
             paths = [activeRecipient.getPath() for activeRecipient in activeRecipients]
             params = {'path': {'query': paths, 'depth': 2}}
-            return tool.queryCatalog(batch=False, context=self, specificSearch='searchPortionOuts', theObjects=True, **params)
+            return tool.catalog(batch=False, context=self, specificSearch='searchPortionOuts', theObjects=True, **params)
         else:
-            return tool.queryCatalog(batch=False, context=self, specificSearch='searchPortionOuts', theObjects=True)
+            return tool.catalog(batch=False, context=self, specificSearch='searchPortionOuts', theObjects=True)
 
         return parcels
 

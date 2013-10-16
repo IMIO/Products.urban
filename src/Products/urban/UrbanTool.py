@@ -1352,8 +1352,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 return "%s %s %s" % (translatedDay, translatedMonth, year)
         return ''
 
-    security.declarePublic('queryCatalog')
-    def queryCatalog(self, batch, context, specificSearch, theObjects=False, batchlen=20, **kwargs):
+    security.declarePublic('catalog')
+    def catalog(self, batch, context, specificSearch, theObjects=False, batchlen=20, **kwargs):
         """
           This method is used in the templates to display content in listing tables
           If some kwargs are received, they will update the defined querystring of the specificSearch
