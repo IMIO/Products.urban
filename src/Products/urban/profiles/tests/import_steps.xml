@@ -14,6 +14,7 @@
     handler="Products.urban.setuphandlers.addUrbanConfigs"
     title="Add local config folders with test values"
     version="2013-01-04T11:30:41.455297">
+   <dependency step="urban-addGlobalFolders"/>
    Add local config folders with test values
  </import-step>
 
