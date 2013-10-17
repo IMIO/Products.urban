@@ -498,18 +498,19 @@ def addExploitationConditions(context, config_folder):
 
     for condition_type, conditions in all_conditions.iteritems():
         newfolder_id = condition_type.replace('/', '_').replace('-', '_')
-        config_folder.invokeFactory('Folder', id=newfolder_id, title=_("%s_folder_title" % newfolder_id, 'urban', context=site.REQUEST))
-        newfolder = getattr(config_folder, newfolder_id)
-        setFolderAllowedTypes(newfolder, 'UrbanVocabularyTerm')
+        if not hasattr(config_folder, newfolder_id):
+            config_folder.invokeFactory('Folder', id=newfolder_id, title=_("%s_folder_title" % newfolder_id, 'urban', context=site.REQUEST))
+            newfolder = getattr(config_folder, newfolder_id)
+            setFolderAllowedTypes(newfolder, 'UrbanVocabularyTerm')
 
-        sorted_conditions = [conditions[c_id] for c_id in sorted(conditions)]
+            sorted_conditions = [conditions[c_id] for c_id in sorted(conditions)]
 
-        for condition in sorted_conditions:
-            condition_id = newfolder.invokeFactory('UrbanVocabularyTerm', extraValue=condition_type, **condition)
-            vocterm = getattr(newfolder, condition_id)
-            field = vocterm.getField('description')
-            field.setContentType(vocterm, 'text/html')
-            vocterm.setDescription(condition['description'])
+            for condition in sorted_conditions:
+                condition_id = newfolder.invokeFactory('UrbanVocabularyTerm', extraValue=condition_type, **condition)
+                vocterm = getattr(newfolder, condition_id)
+                field = vocterm.getField('description')
+                field.setContentType(vocterm, 'text/html')
+                vocterm.setDescription(condition['description'])
 
 
 def addPEBCategories(context, configFolder):
