@@ -3,7 +3,7 @@
 # File: OpinionRequestEventType.py
 #
 # Copyright (c) 2013 by CommunesPlone
-# Generator: ArchGenXML Version 2.6
+# Generator: ArchGenXML Version 2.7
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -47,7 +47,6 @@ class OpinionRequestEventType(OrderedBaseFolder, UrbanEventType, UrbanVocabulary
     """
     """
     security = ClassSecurityInfo()
-
     implements(interfaces.IOpinionRequestEventType)
 
     meta_type = 'OpinionRequestEventType'

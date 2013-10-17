@@ -3,7 +3,7 @@
 # File: UrbanTool.py
 #
 # Copyright (c) 2013 by CommunesPlone
-# Generator: ArchGenXML Version 2.6
+# Generator: ArchGenXML Version 2.7
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -21,12 +21,15 @@ import interfaces
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
+
 from Products.urban.config import *
 
 
 from Products.CMFCore.utils import UniqueObject
 
-
+    
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -282,7 +285,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
-
     implements(interfaces.IUrbanTool)
 
     meta_type = 'UrbanTool'
@@ -1499,7 +1501,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         #return '%s: //%s'%(res.scheme, res.netloc)
         return '/'.join(self.getPylonsHost().split('/')[:3])  # don't use os.path!
 
-    security.declarePublic('getParcelInfos')
 
 
 registerType(UrbanTool, PROJECTNAME)

@@ -8,88 +8,94 @@
 <!-- ##/code-section workflowobjects -->
  <bindings>
   <type type_id="BuildLicence">
-   <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="Declaration">
-   <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="Division">
-   <bound-workflow workflow_id="urbandivision_workflow" />
+     <bound-workflow workflow_id="urbandivision_workflow" />
+     <bound-workflow workflow_id="urbandivision_workflow" />
   </type>
   <type type_id="Dummy">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="EnvironmentBase">
-   <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="urban_licence_workflow" />
+  </type>
+  <type type_id="EnvironmentLicence">
+     <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="EnvironmentRubricTerm">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="FolderManager">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="GenericLicence">
-   <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="Layer">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="Locality">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="MiscDemand">
-   <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="OpinionRequestEventType">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="OrganisationTerm">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="ParcelOutLicence">
-   <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="ParcellingTerm">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="PcaTerm">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="PersonTitleTerm">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="RecipientCadastre">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="SpecificFeatureTerm">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="Street">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="UrbanCertificateBase">
-   <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="UrbanCertificateTwo">
-   <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="UrbanDelay">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="UrbanEvent">
-   <bound-workflow workflow_id="urbanevent_workflow" />
+     <bound-workflow workflow_id="urbanevent_workflow" />
+     <bound-workflow workflow_id="urbanevent_workflow" />
   </type>
   <type type_id="UrbanEventInquiry">
-   <bound-workflow workflow_id="urbanevent_workflow" />
+     <bound-workflow workflow_id="urbanevent_workflow" />
   </type>
   <type type_id="UrbanEventOpinionRequest">
-   <bound-workflow workflow_id="urbanevent_workflow" />
+     <bound-workflow workflow_id="urbanevent_workflow" />
   </type>
   <type type_id="UrbanEventType">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="UrbanVocabularyTerm">
-   <bound-workflow workflow_id="activation_workflow" />
+     <bound-workflow workflow_id="activation_workflow" />
   </type>
 <!-- ##code-section workflowbindings -->
 <type type_id="Applicant">

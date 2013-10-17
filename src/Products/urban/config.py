@@ -3,7 +3,7 @@
 # File: urban.py
 #
 # Copyright (c) 2013 by CommunesPlone
-# Generator: ArchGenXML Version 2.6
+# Generator: ArchGenXML Version 2.7
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -69,6 +69,7 @@ ADD_CONTENT_PERMISSIONS = {
     'EnvironmentRubricTerm': 'urban: Add EnvironmentRubricTerm',
     'SpecificFeatureTerm': 'urban: Add SpecificFeatureTerm',
     'OpinionRequestEventType': 'urban: Add OpinionRequestEventType',
+    'EnvironmentLicence': 'urban: Add EnvironmentLicence',
 }
 
 setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
@@ -105,6 +106,7 @@ setDefaultRoles('urban: Add EnvironmentBase', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvironmentRubricTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add SpecificFeatureTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add OpinionRequestEventType', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add EnvironmentLicence', ("Manager", "Contributor"))
 
 product_globals = globals()
 

@@ -3,7 +3,7 @@
 # File: UrbanCertificateBase.py
 #
 # Copyright (c) 2013 by CommunesPlone
-# Generator: ArchGenXML Version 2.6
+# Generator: ArchGenXML Version 2.7
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -21,6 +21,9 @@ from Products.urban.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
+
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -229,7 +232,6 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
-
     implements(interfaces.IUrbanCertificateBase)
 
     meta_type = 'UrbanCertificateBase'

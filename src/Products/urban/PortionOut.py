@@ -3,7 +3,7 @@
 # File: PortionOut.py
 #
 # Copyright (c) 2013 by CommunesPlone
-# Generator: ArchGenXML Version 2.6
+# Generator: ArchGenXML Version 2.7
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -143,7 +143,6 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
-
     implements(interfaces.IPortionOut)
 
     meta_type = 'PortionOut'

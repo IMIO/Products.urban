@@ -3,7 +3,7 @@
 # File: urban.py
 #
 # Copyright (c) 2013 by CommunesPlone
-# Generator: ArchGenXML Version 2.6
+# Generator: ArchGenXML Version 2.7
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -43,7 +43,7 @@ logger.debug('Installing Product')
 
 import os
 import os.path
-from Globals import package_home
+from App.Common import package_home
 import Products.CMFPlone.interfaces
 from Products.Archetypes import listTypes
 from Products.Archetypes.atapi import *
@@ -127,6 +127,7 @@ def initialize(context):
     import EnvironmentRubricTerm
     import SpecificFeatureTerm
     import OpinionRequestEventType
+    import EnvironmentLicence
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

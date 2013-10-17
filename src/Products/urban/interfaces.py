@@ -186,6 +186,10 @@ class IOpinionRequestEventType(Interface):
     """Marker interface for .OpinionRequestEventType.OpinionRequestEventType
     """
 
+class IEnvironmentLicence(Interface):
+    """Marker interface for .EnvironmentLicence.EnvironmentLicence
+    """
+
 ##code-section FOOT
 class ILicenceContainer(Interface):
     """

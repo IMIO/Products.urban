@@ -36,5 +36,6 @@
   <type portal_type="EnvironmentRubricTerm"/>
   <type portal_type="SpecificFeatureTerm"/>
   <type portal_type="OpinionRequestEventType"/>
+  <type portal_type="EnvironmentLicence"/>
  </factorytypes>
 </object>

@@ -3,7 +3,7 @@
 # File: GenericLicence.py
 #
 # Copyright (c) 2013 by CommunesPlone
-# Generator: ArchGenXML Version 2.6
+# Generator: ArchGenXML Version 2.7
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -20,9 +20,11 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from Products.DataGridField import DataGridField, DataGridWidget
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
+
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -691,7 +693,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
-
     implements(interfaces.IGenericLicence)
 
     meta_type = 'GenericLicence'
@@ -832,12 +833,11 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         self.createApplicantFromParcel(parcel_street=parcel_street, **proprietary_data)
         self.createParcel(parcel_data)
 
-    security.declarePublic('createParcel')
+    security.declarePublic('createParcelAndProprietary')
     def createParcel(self, parcel_data):
         portal_urban = getToolByName(self, 'portal_urban')
         portal_urban.createPortionOut(container=self, **parcel_data)
 
-    security.declarePublic('createApplicant')
     def createApplicantFromParcel(self, proprietary, proprietary_city, proprietary_street, parcel_street):
         """
            Create the PortionOut with given parameters...

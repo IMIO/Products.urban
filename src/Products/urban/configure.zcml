@@ -128,7 +128,7 @@
   <include file="generatedsubscribers.zcml"/>
 
 
-  <!-- ##code-section configure.zcml -->
-  <!-- ##/code-section configure.zcml -->
+  <!-- ##code-section configure.zcml.core -->
+  <!-- ##/code-section configure.zcml.core -->
 
 </configure>
