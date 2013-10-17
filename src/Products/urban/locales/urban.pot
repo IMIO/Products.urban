@@ -78,6 +78,9 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+msgid "EnvClassOne"
+msgstr ""
+
 #. Default: "Déclaration environnementale"
 msgid "EnvClassThree"
 msgstr ""

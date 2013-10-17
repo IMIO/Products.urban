@@ -79,6 +79,9 @@ msgstr "Division"
 msgid "Edit"
 msgstr "Modifier le permis"
 
+msgid "EnvClassOne"
+msgstr "Permis d'environnement classe 1"
+
 #. Default: "Déclaration environnementale"
 msgid "EnvClassThree"
 msgstr "Déclaration environnementale"

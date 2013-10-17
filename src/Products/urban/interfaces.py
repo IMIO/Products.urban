@@ -32,7 +32,6 @@ class IGeometrician(Interface):
     """Marker interface for .Geometrician.Geometrician
     """
 
-
 CONTACT_INTERFACES = {
     'Applicant': IApplicant,
     'Architect': IArchitect,
@@ -284,6 +283,10 @@ class INotaryLetter(Interface):
 
 class IEnvClassThree(Interface):
     """Marker interface for EnvClassThree
+    """
+
+class IEnvCLassOne(Interface):
+    """Marker interface for .EnvClassOne
     """
 
 
