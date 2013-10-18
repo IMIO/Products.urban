@@ -219,17 +219,18 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         types = {
                 'buildlicence': full_tabs_config,
                 'parceloutlicence': inquiry_tabs_config,
-                'declaration': minimum_tabs_config,
-                'division': minimum_tabs_config,
-                'urbancertificateone': minimum_tabs_config,
                 'urbancertificatetwo': inquiry_tabs_config,
-                'notaryletter': minimum_tabs_config,
                 'envclassthree': inquiry_tabs_config,
-                'miscdemand': minimum_tabs_config,
                 }
         licence_type = self.id
-        return [FixedRow(keyColumn = 'value', initialData={'display':'1', 'value':tabname, 'display_name':default_names[tabname]})
-                for tabname in types[licence_type]]
+
+        def makeRow(tabname):
+            return FixedRow(
+                keyColumn = 'value',
+                initialData = {'display':'1', 'value':tabname, 'display_name':default_names[tabname]},
+            )
+
+        return [makeRow(tabName) for tabname in types.get(licence_type, minimum_tabs_config)]
 
     security.declarePublic('getIconURL')
     def getIconURL(self):
