@@ -230,7 +230,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
                 initialData = {'display':'1', 'value':tabname, 'display_name':default_names[tabname]},
             )
 
-        return [makeRow(tabName) for tabname in types.get(licence_type, minimum_tabs_config)]
+        return [makeRow(tabname) for tabname in types.get(licence_type, minimum_tabs_config)]
 
     security.declarePublic('getIconURL')
     def getIconURL(self):
