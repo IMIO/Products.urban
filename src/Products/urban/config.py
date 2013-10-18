@@ -134,7 +134,7 @@ ADDITIONAL_LAYERS_FOLDER="additional_layers"
 
 #a list where first element is the meetingConfigId and the second, the meta_type name
 URBAN_TYPES = ['BuildLicence','ParcelOutLicence','Declaration', 'Division', 'UrbanCertificateOne', 'UrbanCertificateTwo',
-               'NotaryLetter', 'MiscDemand', 'EnvClassThree']
+               'NotaryLetter', 'MiscDemand', 'EnvClassThree', 'EnvClassOne']
 
 #the different templates used to structure a document
 GLOBAL_TEMPLATES = [
