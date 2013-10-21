@@ -273,28 +273,6 @@ class ParcelHistoric:
         buildLevel(result, 'childs', level=1)
         return result
 
-    """
-    def listHistoric(self):
-        def buildResult(parcel, result, level=0, relationship='parents'):
-            parcel_infos = {'parcel': parcel}
-            parcel_infos['level'] = level
-            if relationship == 'childs':
-                if level != 0 or result == []:
-                    result.append(parcel_infos)
-            for relative in getattr(parcel, relationship):
-                next_level = relationship == 'parents' and level - 1 or level + 1
-                buildResult(relative, result, next_level, relationship)
-            if relationship == 'parents':
-                result.append(parcel_infos)
-        to_return = []
-        buildResult(self, to_return, relationship='parents')
-        buildResult(self, to_return, relationship='childs')
-        min_lvl = abs(min([prc['level'] for prc in to_return]))
-        for parcel in to_return:
-            parcel['level'] = parcel['level'] + min_lvl
-        return to_return
-    """
-
     def mergeRelatives(self, other, relationships=['parents', 'childs']):
         for relationship in relationships:
             existing_relatives = [str(relative) for relative in getattr(self, relationship)]
