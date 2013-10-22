@@ -517,6 +517,9 @@ msgstr "Date de clôture"
 msgid "elements_by_page"
 msgstr "Résultats/page"
 
+msgid "envclassone_urbanconfig_title"
+msgstr "Paramètres des Permis d'environnement classe 1"
+
 msgid "envclassthree_searchacceptedlicences"
 msgstr "déclarations environnementales acceptées"
 
