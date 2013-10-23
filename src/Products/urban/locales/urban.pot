@@ -540,6 +540,9 @@ msgstr ""
 msgid "envclassthrees"
 msgstr ""
 
+msgid "envclassones"
+msgstr ""
+
 msgid "equipmenttypes_folder_title"
 msgstr ""
 

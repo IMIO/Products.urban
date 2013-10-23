@@ -544,6 +544,9 @@ msgstr "Paramètres des déclarations environnementales"
 msgid "envclassthrees"
 msgstr "Déclarations environnementales"
 
+msgid "envclassones"
+msgstr "Permis d'environnement classe 1"
+
 msgid "equipmenttypes_folder_title"
 msgstr "Equipements de la voirie"
 
