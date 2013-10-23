@@ -39,7 +39,7 @@
   <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
      name="urban_root_view"
-     class=".urbanview.UrbanView"
+     class=".urbanview.UrbanRootView"
      template="templates/urban_root_view.pt"
      permission="zope2.View"
   />

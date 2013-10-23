@@ -2,6 +2,7 @@ from Acquisition import aq_inner
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.urban.browser.urbantable import LicenceListingTable, AllLicencesListingTable
+from Products.urban.config import ORDERED_URBAN_TYPES
 
 
 class UrbanView(BrowserView):
@@ -71,6 +72,20 @@ class UrbanView(BrowserView):
         """
         """
         return ['20', '30', '50', '100']
+
+
+class UrbanRootView(UrbanView):
+    """
+      This manage the view of urban root folder
+    """
+
+    def __init__(self, context, request):
+        super(BrowserView, self).__init__(context, request)
+        self.context = context
+        self.request = request
+
+    def getLicenceTypes(self):
+        return ORDERED_URBAN_TYPES
 
 
 class UrbanViewMacros(BrowserView):

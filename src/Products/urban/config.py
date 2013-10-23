@@ -136,6 +136,13 @@ ADDITIONAL_LAYERS_FOLDER="additional_layers"
 URBAN_TYPES = ['BuildLicence','ParcelOutLicence','Declaration', 'Division', 'UrbanCertificateOne', 'UrbanCertificateTwo',
                'NotaryLetter', 'MiscDemand', 'EnvClassThree', 'EnvClassOne']
 
+#currently matches the content of URBAN_TYPES, the order of this list impacts the order
+# of content types links in urban_root_view
+ORDERED_URBAN_TYPES = [
+    'BuildLicence', 'ParcelOutLicence', 'Declaration', 'Division',
+    'UrbanCertificateOne', 'UrbanCertificateTwo',
+    'NotaryLetter', 'EnvClassThree', 'EnvClassOne', 'MiscDemand'
+]
 #the different templates used to structure a document
 GLOBAL_TEMPLATES = [
                     {'id':'header.odt', 'title':'Fichier d\'en-tête pour les modèles de document'},
