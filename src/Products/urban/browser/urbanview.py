@@ -111,7 +111,7 @@ class UrbanRootView(UrbanView):
         href = getLicenceFolder(self.context, licencetype).absolute_url()
         folder_id = getLicenceFolderId(licencetype)
         link_content = translate(_(folder_id), context=self.request)
-        link_template = u'<a class="{klass}" href={href}">{link_content}</a>'
+        link_template = u'<a class="{klass}" href="{href}">{link_content}</a>'
         link = link_template.format(
             klass=klass,
             href=href,
