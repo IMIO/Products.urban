@@ -79,6 +79,11 @@
                             tal:attributes="href python: context.absolute_url() + '/envclassthrees/createObject?type_name=EnvClassThree'">
                    <img class="urban-add-icon" src="icon_add.gif" />
                  </a><br/>
+                 <a class="contenttype-envclassone" href="envclassones" i18n:translate="envclassones">Environmental declarations</a>
+                 <a href="" tal:condition="python: 'EnvClassOne' in [t.id for t in getattr(context, 'envclassones').allowedContentTypes()]"
+                            tal:attributes="href python: context.absolute_url() + '/envclassones/createObject?type_name=EnvClassOne'">
+                   <img class="urban-add-icon" src="icon_add.gif" />
+                 </a><br/>
                  <a class="contenttype-miscdemand" href="miscdemands" i18n:translate="miscdemands">Miscellaneous Demands</a>
                  <a href="" tal:condition="python: 'MiscDemand' in [t.id for t in getattr(context, 'miscdemands').allowedContentTypes()]"
                             tal:attributes="href python: context.absolute_url() + '/miscdemands/createObject?type_name=MiscDemand'">
