@@ -124,7 +124,7 @@ class UrbanRootView(UrbanView):
             return ''
         href = self.getLicenceCreationURL(licencetype)
         link_template = (
-            u'<a href={href}" id="create-{licencetype}-link">'
+            u'<a href="{href}" id="create-{licencetype}-link">'
             u'<img class="urban-add-icon" src="icon_add.gif" /></a>'
         )
         link = link_template.format(
