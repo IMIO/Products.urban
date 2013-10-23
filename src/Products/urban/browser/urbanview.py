@@ -1,8 +1,12 @@
 from Acquisition import aq_inner
+from zope.i18n import translate
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
+from Products.urban import UrbanMessage as _
 from Products.urban.browser.urbantable import LicenceListingTable, AllLicencesListingTable
 from Products.urban.config import ORDERED_URBAN_TYPES
+from Products.urban.utils import getLicenceFolderId
+from Products.urban.utils import getLicenceFolder
 
 
 class UrbanView(BrowserView):
@@ -86,6 +90,42 @@ class UrbanRootView(UrbanView):
 
     def getLicenceTypes(self):
         return ORDERED_URBAN_TYPES
+
+    def getLicenceCreationURL(self, licencetype):
+        context = aq_inner(self.context)
+        base_url = context.absolute_url()
+        folder_id = getLicenceFolderId(licencetype)
+        url = '{base_url}/{folder_id}/createObject?type_name={licencetype}'.format(
+            base_url=base_url, folder_id=folder_id, licencetype=licencetype)
+        return url
+
+    def mayAddLicence(self, licencetype):
+        licence_folder = getLicenceFolder(self.context, licencetype)
+        return licencetype in [t.id for t in licence_folder.allowedContentTypes()]
+
+    def getLinkClass(self, licencetype):
+        return "contenttype-{}".format(licencetype.lower())
+
+    def getLicenceFolderLink(self, licencetype):
+        klass = self.getLinkClass(licencetype)
+        href = getLicenceFolder(self.context, licencetype).absolute_url()
+        folder_id = getLicenceFolderId(licencetype)
+        link_content = translate(_(folder_id), context=self.request)
+        link_template = u'<a class="{klass}" href={href}">{link_content}</a>'
+        link = link_template.format(
+            klass=klass,
+            href=href,
+            link_content=link_content,
+        )
+        return link
+
+    def getLicenceCreationLink(self, licencetype):
+        if not self.mayAddLicence(licencetype):
+            return ''
+        href = self.getLicenceCreationURL(licencetype)
+        link_template = u'<a href={href}"><img class="urban-add-icon" src="icon_add.gif" /></a>'
+        link = link_template.format(href=href)
+        return link
 
 
 class UrbanViewMacros(BrowserView):

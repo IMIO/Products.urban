@@ -6,6 +6,8 @@ import string
 import hashlib
 from HTMLParser import HTMLParser
 
+from Products.CMFCore.utils import getToolByName
+
 
 def getLicenceSchema(licencetype):
     licence_modules = {
@@ -301,3 +303,16 @@ class ParcelHistoric:
         relatives = getattr(self, relationship, None)
         if relatives is not None:
             relatives.extend(new_relatives)
+
+
+def getLicenceFolderId(licencetype):
+    return '{}s'.format(licencetype.lower())
+
+
+def getLicenceFolder(context, licencetype):
+    portal_url = getToolByName(context, 'portal_url')
+    portal = portal_url.getPortalObject()
+    urban = portal.urban
+    folder_id = getLicenceFolderId(licencetype)
+    licence_folder = getattr(urban, folder_id)
+    return licence_folder

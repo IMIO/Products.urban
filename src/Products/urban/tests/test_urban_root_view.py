@@ -1,6 +1,8 @@
 #-*- coding: utf-8 -*-
 import unittest
 from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
+from Products.urban.config import ORDERED_URBAN_TYPES
+from Products.urban.utils import getLicenceFolder
 from plone.testing.z2 import Browser
 
 
@@ -24,3 +26,6 @@ class TestConfig(unittest.TestCase):
     def test_urban_root_view_is_default_view(self):
         self.browser.open(self.urban.absolute_url())
         self.assertTrue('content-shortcuts' in self.browser.contents)
+        for licencetype in ORDERED_URBAN_TYPES:
+            folder_url = getLicenceFolder(self.urban, licencetype).absolute_url()
+            self.assertTrue(folder_url in self.browser.contents)

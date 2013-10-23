@@ -39,18 +39,10 @@
         <table width=100% i18n:domain="urban" id='content-shortcuts'>
             <tr valign=top>
                 <td width=34% valign=top>
-                 <tal:licence-folders-shortcuts repeat="licencetype view/getLicenceTypes">
-                     <tal:var define="licencetype_lower licencetype/lower;
-                                      licencetypes string:${licencetype_lower}s">
-                        <a tal:attributes="class string:contenttype-${licencetype_lower};
-                                href licencetypes"
-                           tal:content="licencetypes"
-                           i18n:translate="">Build licences</a>
-                        <a href="" tal:condition="python: licencetype in [t.id for t in getattr(context, licencetypes).allowedContentTypes()]"
-                                tal:attributes="href string:${context/absolute_url}/${licencetypes}/createObject?type_name=${licencetype}">
-                        <img class="urban-add-icon" src="icon_add.gif" />
-                        </a><br/>
-                    </tal:var>
+                        <tal:licence-folders-shortcuts repeat="licencetype view/getLicenceTypes">
+                        <a tal:replace="structure python:view.getLicenceFolderLink(licencetype)" />
+                        <a tal:replace="structure python:view.getLicenceCreationLink(licencetype)" />
+                        <br/>
                  </tal:licence-folders-shortcuts>
                 <td width=33%>
                  <img src="../link_icon.gif" /> <a href="fullmap" i18n:translate="urban_fullmap_descr">Full map</a><br/>
