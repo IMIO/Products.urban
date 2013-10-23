@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 import unittest
 from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
+from Products.urban.utils import getLicenceFolder
 from plone.testing.z2 import Browser
 
 
@@ -47,8 +48,19 @@ class TestEnvClassOne(unittest.TestCase):
 
     def test_envclassone_licence_folder_link_in_urban_default_view(self):
         self.browser.open(self.urban.absolute_url())
-        link = self.browser.getLink(url="envclassones")
+        folder_url = getLicenceFolder(self.urban, 'EnvClassOne').absolute_url()
+        link = self.browser.getLink(url=folder_url)
         self.assertEqual(link.text, "Permis d'environnement classe 1")
         link.click()
         contents = self.browser.contents
         self.assertTrue("Permis d'environnement classe 1" in contents)
+
+    def test_add_envclassone_in_urban_default_view(self):
+        self.browser.open(self.urban.absolute_url())
+        contents = self.browser.contents
+        import ipdb; ipdb.set_trace()
+        self.assertTrue("create-EnvClassOne-link" in contents)
+        link = self.browser.getLink(id="create-EnvClassOne-link")
+        link.click()
+        contents = self.browser.contents
+        self.assertTrue("Ajouter Permis d'environnement classe 1" in contents)
