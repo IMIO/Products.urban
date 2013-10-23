@@ -38,6 +38,14 @@
 
   <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
+     name="urban_root_view"
+     class=".urbanview.UrbanView"
+     template="templates/urban_root_view.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATFolder"
      name="urban-macros"
      class=".urbanview.UrbanViewMacros"
      template="templates/urbanmacros.pt"
