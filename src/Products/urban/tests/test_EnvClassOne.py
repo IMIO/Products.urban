@@ -32,10 +32,7 @@ class TestEnvClassOne(unittest.TestCase):
         msg = 'envclassone config folder is not visible in urban config'
         self.browser.open(self.portal_urban.absolute_url())
         contents = self.browser.contents
-        self.assertTrue(
-            contents.find('Permis d\'environnement classe 1') != -1,
-            msg,
-        )
+        self.assertTrue("Permis d'environnement classe 1" in contents, msg)
 
     def test_envclassone_folder_exist(self):
         msg = 'envclassones folder not created'
@@ -52,3 +49,6 @@ class TestEnvClassOne(unittest.TestCase):
         self.browser.open(self.urban.absolute_url())
         link = self.browser.getLink(url="envclassones")
         self.assertEqual(link.text, "Permis d'environnement classe 1")
+        link.click()
+        contents = self.browser.contents
+        self.assertTrue("Permis d'environnement classe 1" in contents)
