@@ -58,9 +58,8 @@ class TestEnvClassOne(unittest.TestCase):
     def test_add_envclassone_in_urban_default_view(self):
         self.browser.open(self.urban.absolute_url())
         contents = self.browser.contents
-        import ipdb; ipdb.set_trace()
         self.assertTrue("create-EnvClassOne-link" in contents)
         link = self.browser.getLink(id="create-EnvClassOne-link")
         link.click()
         contents = self.browser.contents
-        self.assertTrue("Ajouter Permis d'environnement classe 1" in contents)
+        self.assertTrue("Ajouter un permis d'environnement classe 1" in contents)

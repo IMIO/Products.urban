@@ -7,6 +7,7 @@ import hashlib
 from HTMLParser import HTMLParser
 
 from Products.CMFCore.utils import getToolByName
+from Products.urban.config import URBAN_TYPES
 
 
 def getLicenceSchema(licencetype):
@@ -307,6 +308,10 @@ class ParcelHistoric:
 
 def getLicenceFolderId(licencetype):
     return '{}s'.format(licencetype.lower())
+
+
+def getAllLicenceFolderIds():
+    return [getLicenceFolderId(licencetype) for licencetype in URBAN_TYPES]
 
 
 def getLicenceFolder(context, licencetype):

@@ -28,6 +28,8 @@ from Products.urban.config import TOPIC_TYPE
 from Products.urban.config import DefaultTexts
 from zExceptions import BadRequest
 from Products.urban.config import URBAN_TYPES
+from Products.urban.utils import getAllLicenceFolderIds
+from Products.urban.utils import getLicenceFolderId
 from Products.urban.interfaces import ILicenceContainer, IContactFolder
 from zope.interface import alsoProvides, directlyProvides
 from zope.component import queryUtility
@@ -594,10 +596,8 @@ def setDefaultApplicationSecurity(context):
         #hide the 'Properties' tab to other roles than 'Manager'
         app_folder.manage_permission('Manage properties', ['Manager', ], acquire=0)
 
-    licencesfolder_names = [
-        'buildlicences', 'parceloutlicences', 'declarations', 'divisions', 'urbancertificateones',
-        'urbancertificatetwos', 'notaryletters', 'envclassthrees', 'miscdemands'
-    ]
+    licencesfolder_names = getAllLicenceFolderIds()
+
     #licence folder : "urban_readers" can read and "urban_editors" can edit...
     for folder_name in licencesfolder_names:
         if hasattr(app_folder, folder_name):
@@ -908,7 +908,11 @@ def addApplicationFolders(context):
 
     for urban_type in URBAN_TYPES:
         if not hasattr(newFolder, urban_type.lower() + 's'):
-            newFolderid = newFolder.invokeFactory("Folder", id=urban_type.lower() + 's', title=_(urban_type.lower() + 's', 'urban', context=site.REQUEST))
+            licence_folder_id = getLicenceFolderId(urban_type)
+            newFolderid = newFolder.invokeFactory(
+                "Folder", id=licence_folder_id,
+                title=_('add_{}'.format(urban_type), 'urban', context=site.REQUEST)
+            )
             newSubFolder = getattr(newFolder, newFolderid)
             alsoProvides(newSubFolder, ILicenceContainer)
             setFolderAllowedTypes(newSubFolder, urban_type)
@@ -923,6 +927,8 @@ def addApplicationFolders(context):
                     newSubFolder.manage_permission('urban: Add UrbanCertificateBase', ['Manager', 'Editor', ], acquire=0)
                 if urban_type in ['EnvClassThree', ]:
                     newSubFolder.manage_permission('urban: Add EnvironmentBase', ['Manager', 'Editor', ], acquire=0)
+                if urban_type in ['EnvClassOne', 'EnvClassTwo']:
+                    newSubFolder.manage_permission('urban: Add EnvironmentLicence', ['Manager', 'Editor', ], acquire=0)
 
     #add a folder that will contains architects
     if not hasattr(newFolder, "architects"):

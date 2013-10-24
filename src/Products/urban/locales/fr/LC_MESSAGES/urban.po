@@ -254,6 +254,9 @@ msgstr "Ajouter une déclaration"
 msgid "add_Division"
 msgstr "Ajouter une division"
 
+msgid "add_EnvClassOne"
+msgstr "Ajouter un permis d'environnement classe 1"
+
 msgid "add_EnvClassThree"
 msgstr "Ajouter une déclaration environnementale"
 
