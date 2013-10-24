@@ -53,7 +53,7 @@ class TestEnvClassOne(unittest.TestCase):
         self.assertEqual(link.text, "Permis d'environnement classe 1")
         link.click()
         contents = self.browser.contents
-        self.assertTrue("Permis d'environnement classe 1" in contents)
+        self.assertTrue("Ajouter un permis d'environnement classe 1" in contents)
 
     def test_add_envclassone_in_urban_default_view(self):
         self.browser.open(self.urban.absolute_url())
@@ -62,4 +62,4 @@ class TestEnvClassOne(unittest.TestCase):
         link = self.browser.getLink(id="create-EnvClassOne-link")
         link.click()
         contents = self.browser.contents
-        self.assertTrue("Ajouter un permis d'environnement classe 1" in contents)
+        self.assertTrue("Ajouter Permis d'environnement classe 1" in contents)

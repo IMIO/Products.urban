@@ -112,6 +112,7 @@ def postInstall(context):
         'UrbanCertificateOne': 1,
         'UrbanCertificateTwo': 1,
         'EnvClassThree': 1,
+        'EnvClassOne': 1,
         'NotaryLetter': 1,
         'Notary': 1,
         'Proprietary': 1,
