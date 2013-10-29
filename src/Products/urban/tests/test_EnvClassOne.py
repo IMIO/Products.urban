@@ -87,6 +87,6 @@ class TestEnvClassOneInstance(unittest.TestCase):
     def test_envclassone_licence_view(self):
         msg = 'EnvClassOne view is not registered'
         try:
-            self.urban.envclassones.restrictedTravers('/envclassoneview')
+            self.urban.envclassones.restrictedTraverse('envclassoneview')
         except AttributeError:
             self.fail(msg=msg)
