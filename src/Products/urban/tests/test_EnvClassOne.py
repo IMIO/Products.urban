@@ -73,6 +73,7 @@ class TestEnvClassOneInstance(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
+        self.licence = self.urban.envclassones.objectValues()[0]
         self.browser = Browser(self.portal)
 
     def browserLogin(self, user):
@@ -87,6 +88,6 @@ class TestEnvClassOneInstance(unittest.TestCase):
     def test_envclassone_licence_view(self):
         msg = 'EnvClassOne view is not registered'
         try:
-            self.urban.envclassones.restrictedTraverse('envclassoneview')
+            self.licence.restrictedTraverse('envclassoneview')
         except AttributeError:
             self.fail(msg=msg)
