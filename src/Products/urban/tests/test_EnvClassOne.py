@@ -1,11 +1,12 @@
 #-*- coding: utf-8 -*-
 import unittest
 from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
+from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.utils import getLicenceFolder
 from plone.testing.z2 import Browser
 
 
-class TestEnvClassOne(unittest.TestCase):
+class TestEnvClassOneInstall(unittest.TestCase):
 
     layer = URBAN_TESTS_PROFILE_INTEGRATION
 
@@ -63,3 +64,22 @@ class TestEnvClassOne(unittest.TestCase):
         link.click()
         contents = self.browser.contents
         self.assertTrue("Ajouter Permis d'environnement classe 1" in contents)
+
+
+class TestEnvClassOneInstance(unittest.TestCase):
+
+    layer = URBAN_TESTS_LICENCES
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+        self.browser = Browser(self.portal)
+
+    def browserLogin(self, user):
+        self.browser.open(self.portal.absolute_url() + "/login_form")
+        self.browser.getControl(name='__ac_name').value = user
+        self.browser.getControl(name='__ac_password').value = user
+        self.browser.getControl(name='submit').click()
+
+    def test_envclassone_licence_exists(self):
+        self.assertTrue(len(self.urban.envclassones.objectIds()) > 0)

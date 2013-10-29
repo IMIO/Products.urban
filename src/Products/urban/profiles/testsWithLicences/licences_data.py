@@ -38,4 +38,8 @@ licences_data = {
         'licenceSubject': 'Exemple Demande diverse',
         'contact_type': 'Applicant',
     },
+    'EnvClassOne': {
+        'licenceSubject': 'Exemple Permis d\'environnement classe 1',
+        'contact_type': 'Applicant',
+    },
 }
