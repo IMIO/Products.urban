@@ -86,7 +86,7 @@ class TestEnvClassOneInstance(unittest.TestCase):
     def test_envclassone_licence_exists(self):
         self.assertTrue(len(self.urban.envclassones.objectIds()) > 0)
 
-    def test_envclassone_licence_view(self):
+    def test_envclassone_view_is_registred(self):
         msg = 'EnvClassOne view is not registered'
         try:
             self.licence.restrictedTraverse('envclassoneview')
@@ -94,8 +94,8 @@ class TestEnvClassOneInstance(unittest.TestCase):
             self.fail(msg=msg)
 
     def test_envclassone_view(self):
-	try:
-	    self.browser.open(self.licence.absolute_url())
-	    # raise AssertionError("No Unauthorized risen:" + url)
-	except urllib2.HTTPError,  e:
-	    self.fail(msg="Got HTTP response code:" + str(e.code))
+        try:
+            self.browser.open(self.licence.absolute_url())
+            # raise AssertionError("No Unauthorized risen:" + url)
+        except urllib2.HTTPError,  e:
+            self.fail(msg="Got HTTP response code:" + str(e.code))
