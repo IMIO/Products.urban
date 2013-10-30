@@ -1,0 +1,13 @@
+<div metal:define-macro="description_macro" i18n:domain="urban"> 
+</div>
+
+<div metal:define-macro="road_macro" i18n:domain="urban">
+</div>
+
+<div metal:define-macro="location_macro" i18n:domain="urban">
+</div>
+
+
+<div metal:define-macro="urbanInquiriesMacro" i18n:domain="urban">
+</div>
+

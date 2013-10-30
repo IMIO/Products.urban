@@ -10,7 +10,7 @@
  <property name="content_meta_type">EnvironmentLicence</property>
  <property name="product">urban</property>
  <property name="factory">addEnvironmentLicence</property>
- <property name="immediate_view">inquiryview</property>
+ <property name="immediate_view">envclassoneview</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">False</property>
  <property name="allowed_content_types">
@@ -22,14 +22,14 @@
    <element value="PortionOut"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">inquiryview</property>
+ <property name="default_view">envclassoneview</property>
  <property name="view_methods">
-  <element value="inquiryview"/>
+  <element value="envclassoneview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="index.html" to="(dynamic view)"/>
- <alias from="view" to="(selected layout)"/>
+ <alias from="view" to="envclassoneview"/>
  <alias from="edit" to="base_edit"/>
  <action title="View"
          action_id="view"

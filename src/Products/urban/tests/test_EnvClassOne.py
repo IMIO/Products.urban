@@ -4,6 +4,7 @@ from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.utils import getLicenceFolder
 from plone.testing.z2 import Browser
+import urllib2
 
 
 class TestEnvClassOneInstall(unittest.TestCase):
@@ -91,3 +92,10 @@ class TestEnvClassOneInstance(unittest.TestCase):
             self.licence.restrictedTraverse('envclassoneview')
         except AttributeError:
             self.fail(msg=msg)
+
+    def test_envclassone_view(self):
+	try:
+	    self.browser.open(self.licence.absolute_url())
+	    # raise AssertionError("No Unauthorized risen:" + url)
+	except urllib2.HTTPError,  e:
+	    self.fail(msg="Got HTTP response code:" + str(e.code))
