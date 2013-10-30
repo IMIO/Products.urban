@@ -6,44 +6,16 @@
     handler="Products.urban.setuphandlers.addGlobalFolders"
     title="Add global config folders with test values"
     version="2013-01-04T11:30:41.455297">
-   Add global config folders with test values
+   Add global config folders
  </import-step>
 
  <import-step
-    id="urban-addUrbanConfigs"
-    handler="Products.urban.setuphandlers.addUrbanConfigs"
-    title="Add local config folders with test values"
+    id="urban-addUrbanConfigFolders"
+    handler="Products.urban.setuphandlers.addUrbanConfigFolders"
+    title="Add local config folders without any test values"
     version="2013-01-04T11:30:41.455297">
    <dependency step="urban-addGlobalFolders"/>
-   Add local config folders with test values
+   Add local config folders
  </import-step>
 
- <import-step
-    id="urban-addDefaultObjects"
-    handler="Products.urban.setuphandlers.addDefaultObjects"
-    title="Add some objects for test purpose"
-    version="2008-10-15T15:00:00.00000">
-   <dependency step="urban-addGlobalFolders"/>
- Add default config values for test purpose
- </import-step>
-
- <import-step
-    id="urban-addEventTypesAndTemplates"
-    handler="Products.urban.setuphandlers.addEventTypesAndTemplates"
-    title="Add event types and templates for test purpose"
-    version="2008-10-15T15:00:00.00000">
-   <dependency step="urban-addGlobalFolders"/>
-   <dependency step="urban-addUrbanConfigs"/>
- Add events and templates for test purpose
- </import-step>
-
- <import-step
-    id="urban-updateAllUrbanTemplates"
-    handler="Products.urban.exportimport.updateAllUrbanTemplates"
-    title="Update all the templates (generic templates and urbanEventTypes templates) and create urbanEventTypes"
-    version="2008-10-15T15:00:00.00000">
-   <dependency step="urban-addEventTypesAndTemplates"/>
-  USE THIS TO UPDATE ALL TEMPLATES
- </import-step>
-
-</import-steps>
+ </import-steps>

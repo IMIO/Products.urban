@@ -8,7 +8,7 @@ from plone.app.testing.interfaces import TEST_USER_NAME
 from plone.app.testing.interfaces import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import (IUrbanEventType, IAcknowledgmentEvent, IOpinionRequestEvent, IInquiryEvent)
-from Products.urban.testing import URBAN_TESTS_LICENCES, URBAN_TESTS_PROFILE_INTEGRATION
+from Products.urban.testing import URBAN_TESTS_LICENCES, URBAN_TESTS_CONFIG
 
 
 class TestInstall(unittest.TestCase):
@@ -82,7 +82,7 @@ class TestInstall(unittest.TestCase):
 
 class TestContact(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_INTEGRATION
+    layer = URBAN_TESTS_CONFIG
 
     def setUp(self):
         self.portal = self.layer['portal']

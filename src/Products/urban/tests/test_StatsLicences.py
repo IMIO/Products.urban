@@ -31,7 +31,7 @@ class TestLicenceStatsView(unittest.TestCase):
     def testStatsViewDisplay(self):
         #check that the stats view is simply available
         self.browser.open(self.urban.absolute_url() + '/urbanstatsview')
-        compare(S("(?s).*Licences statistics.*"), self.browser.contents)
+        compare(S("(?s).*Statistiques des dossiers.*"), self.browser.contents)
 
     def testStatsViewEmptyResult(self):
         #check the display result when no licences fall under stats criteria

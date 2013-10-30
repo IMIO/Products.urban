@@ -131,6 +131,12 @@ def postInstall(context):
     logger.info("addApplicationFolders : starting...")
     addApplicationFolders(context)
     logger.info("addApplicationFolders : Done")
+    logger.info("addGlobalFolders : starting...")
+    addGlobalFolders(context)
+    logger.info("addGlobalFolders : Done")
+    logger.info("addUrbanConfigFolders : starting...")
+    addUrbanConfigFolders(context)
+    logger.info("addUrbanConfigFolders : Done")
     #install the urbanskin if available
     #urbanskin should be installed before the call of 'adaptDefaultPortal'
     logger.info("installUrbanskin : starting...")
@@ -163,12 +169,9 @@ def extraPostInstall(context, refresh=True):
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
     site = context.getSite()
-    logger.info("addGlobalFolders : starting...")
-    addGlobalFolders(context)
-    logger.info("addGlobalFolders : Done")
-    logger.info("addUrbanConfigs : starting...")
-    addUrbanConfigs(context)
-    logger.info("addUrbanConfigs : Done")
+    logger.info("addUrbanVocabularies : starting...")
+    addUrbanVocabularies(context)
+    logger.info("addUrbanVocabularies : Done")
     logger.info("addDefaultObjects : starting...")
     addDefaultObjects(context)
     logger.info("addDefaultObjects : Done")
@@ -232,10 +235,11 @@ def createFolderDefaultValues(folder, objects_list, portal_type=''):
         portal_type = objects_list[0]
     for obj in objects_list:
         if type(obj) is dict:
-            folder.invokeFactory(portal_type, **obj)
+            if obj['id'] not in folder.objectIds():
+                folder.invokeFactory(portal_type, **obj)
 
 
-def createFolderWithDefaultValues(container, folder_id, site, default_objects=[], portal_type='Folder', content_portal_type='', licence_type=''):
+def createFolderWithDefaultValues(container, folder_id, site, default_objects=[], portal_type='Folder', content_portal_type=''):
     """
     """
     newFolderid = container.invokeFactory(portal_type, id=folder_id, title=_("%s_folder_title" % folder_id, 'urban', context=site.REQUEST))
@@ -244,11 +248,6 @@ def createFolderWithDefaultValues(container, folder_id, site, default_objects=[]
         if folder_id in default_objects:
             vocabulary_list = default_objects[folder_id]
             content_portal_type = vocabulary_list[0]
-            if licence_type:
-                if licence_type in vocabulary_list[1]:
-                    vocabulary_list = vocabulary_list[1][licence_type]
-                else:
-                    return
             setFolderAllowedTypes(newFolder, content_portal_type)
             createFolderDefaultValues(newFolder, vocabulary_list, content_portal_type)
     else:
@@ -256,11 +255,46 @@ def createFolderWithDefaultValues(container, folder_id, site, default_objects=[]
     return newFolder
 
 
-def addUrbanConfigs(context):
+def createVocabularyFolder(container, folder_id, site, allowedtypes='UrbanVocabularyTerm', foldertype='Folder'):
+    if folder_id not in container.objectIds():
+        new_folder_id = container.invokeFactory(foldertype, id=folder_id, title=_("%s_folder_title" % folder_id, 'urban', context=site.REQUEST))
+        new_folder = getattr(container, new_folder_id)
+        setFolderAllowedTypes(new_folder, allowedtypes)
+    else:
+        new_folder = getattr(container, folder_id)
+    return new_folder
+
+
+def createVocabularyFolders(container, vocabularies, site):
+    for vocname, voc in vocabularies.iteritems():
+        allowedtypes = voc[0]
+        createVocabularyFolder(container, vocname, site, allowedtypes)
+
+
+def getSharedVocabularies(urban_type, licence_vocabularies):
+    shared_vocs = licence_vocabularies.get('shared_vocabularies')
+    vocabularies_to_return = {}
+    for voc_name, voc in shared_vocs.iteritems():
+        urban_types = voc[1]
+        if urban_type in urban_types:
+            voc_type = voc[0]
+            voc_terms = voc[2:]
+            vocabulary = [voc_type] + voc_terms
+            vocabularies_to_return[voc_name] = vocabulary
+    return vocabularies_to_return
+
+
+def createVocabularies(container, vocabularies):
+    for voc_name, vocabulary in vocabularies.iteritems():
+        voc_folder = getattr(container, voc_name)
+        createFolderDefaultValues(voc_folder, vocabulary)
+
+
+def addUrbanConfigFolders(context):
     """
       Add the different urban configs
     """
-    if context.readDataFile('urban_extra_marker.txt') is None:
+    if context.readDataFile('urban_marker.txt') is None:
         return
     site = context.getSite()
     tool = getToolByName(site, 'portal_urban')
@@ -274,176 +308,76 @@ def addUrbanConfigs(context):
     for urban_type in URBAN_TYPES:
         licenceConfigId = urban_type.lower()
         if not hasattr(aq_base(tool), licenceConfigId):
-            configFolderid = tool.invokeFactory("LicenceConfig", id=licenceConfigId, title=_("%s_urbanconfig_title" % urban_type.lower(), 'urban', context=site.REQUEST))
-            configFolder = getattr(tool, configFolderid)
+            config_folder_id = tool.invokeFactory("LicenceConfig", id=licenceConfigId, title=_("%s_urbanconfig_title" % urban_type.lower(), 'urban', context=site.REQUEST))
+            config_folder = getattr(tool, config_folder_id)
             # no mutator available because the field is defined with 'read only' property
-            configFolder.licencePortalType = urban_type
-            configFolder.setUsedAttributes(configFolder.listUsedAttributes().keys())
-            configFolder.reindexObject()
+            config_folder.licencePortalType = urban_type
+            config_folder.setUsedAttributes(config_folder.listUsedAttributes().keys())
+            config_folder.reindexObject()
         else:
-            configFolder = getattr(tool, licenceConfigId)
-            configFolder.licencePortalType = urban_type
-            configFolder.reindexObject()
+            config_folder = getattr(tool, licenceConfigId)
+            config_folder.licencePortalType = urban_type
+            config_folder.reindexObject()
 
         #we just created the urbanConfig, proceed with other parameters...
         #parameters for every LicenceConfigs
         #add UrbanEventTypes folder
-        if not hasattr(aq_base(configFolder), 'urbaneventtypes'):
-            newFolderid = configFolder.invokeFactory("Folder", id="urbaneventtypes", title=_("urbaneventtypes_folder_title", 'urban', context=site.REQUEST))
-            newFolder = getattr(configFolder, newFolderid)
+        if not hasattr(aq_base(config_folder), 'urbaneventtypes'):
+            newFolderid = config_folder.invokeFactory("Folder", id="urbaneventtypes", title=_("urbaneventtypes_folder_title", 'urban', context=site.REQUEST))
+            newFolder = getattr(config_folder, newFolderid)
             setFolderAllowedTypes(newFolder, ['UrbanEventType', 'OpinionRequestEventType'])
 
-        #add TownshipFolderCategories folder
-        if not hasattr(aq_base(configFolder), 'townshipfoldercategories'):
-            createFolderWithDefaultValues(configFolder, 'townshipfoldercategories', site, default_values)
+        licence_vocabularies = default_values.get(urban_type, {})
+        createVocabularyFolders(container=config_folder, vocabularies=licence_vocabularies, site=site)
 
-        #add FolderCategories folder
-        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'Declaration', 'Division', 'MiscDemand']:
-            if not hasattr(aq_base(configFolder), 'foldercategories'):
-                newFolderid = configFolder.invokeFactory("Folder", id="foldercategories", title=_("foldercategories_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                newFolder.setConstrainTypesMode(1)
-                newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-                newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-                if urban_type in ['BuildLicence']:
-                    #categories for BuildLicences
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="uap", title=u"UAP (permis d'urbanisme avec avis préalable du FD)")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="udc", title=u"UDC (permis dans PCA, RCU, LOTISSEMENT, parfois avec demande de dérogation)")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="upp", title=u"UPP (petit permis délivré directement par le Collège)")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="pu", title=u"PU (demande de PERMIS UNIQUE)")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="art127", title=u"UCP (article 127)")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="inconnu", title=u"Inconnue")
-                elif urban_type in ['ParcelOutLicence']:
-                    #categories for ParcelOutLicences
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="lap", title=u"LAP (permis de lotir avec avis préalable du FD)")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="lapm", title=u"LAP/M (modification du permis de lotir avec avis du FD)")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="ldc", title=u"LDC (permis de lotir dans un PCA, lotissement ou en décentralisation)")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="ldcm", title=u"LDC/M (modification du permis de lotir dans un PCA, RCU, LOTISSEMENT)")
-                    #categories for UrbanCertificateOnes
-                elif urban_type in ['UrbanCertificateOne']:
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="cu1", title=u"CU1 (certificat d'urbanisme 1)")
-                    #categories for UrbanCertificateTwos
-                elif urban_type in ['UrbanCertificateTwo']:
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="cu2", title=u"CU2 (certificat d'urbanisme 2)")
-                    #categories for Declarations
-                elif urban_type in ['Declaration']:
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="dup", title=u"DUP (Déclaration Urbanistique Préalable)")
-                    #categories for Divisions
-                elif urban_type in ['Division']:
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="dup", title=u"DIV (Division notariale)")
-                    #categories for MiscDemands
-                elif urban_type in ['MiscDemand']:
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="apct", title=u"Avis préalable construction ou transformation")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="appu", title=u"Avis préalable permis d'urbanisation")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="apd", title=u"Avis préalable de division")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="dre", title=u"Demande de raccordement à l'égout")
-                    newFolder.invokeFactory("UrbanVocabularyTerm", id="div", title=u"Divers")
+        shared_vocabularies = getSharedVocabularies(urban_type, default_values)
+        createVocabularyFolders(container=config_folder, vocabularies=shared_vocabularies, site=site)
 
-        if urban_type in ['Declaration', ]:
-            #add "Articles" folder
-            if not hasattr(aq_base(configFolder), 'articles'):
-                createFolderWithDefaultValues(configFolder, 'articles', site, default_values)
 
-        if urban_type == 'ParcelOutLicence':
-            if not hasattr(aq_base(configFolder), 'lotusages'):
-                createFolderWithDefaultValues(configFolder, 'lotusages', site, default_values)
+def addUrbanVocabularies(context):
+    """ Add the vocabularyTerm objects """
+    if context.readDataFile('urban_extra_marker.txt') is None:
+        return
+    site = context.getSite()
+    tool = getToolByName(site, 'portal_urban')
 
-            if not hasattr(aq_base(configFolder), 'equipmenttypes'):
-                createFolderWithDefaultValues(configFolder, 'equipmenttypes', site, default_values)
+    profile_name = context._profile_path.split('/')[-1]
+    module_name = 'Products.urban.profiles.%s.config_default_values' % profile_name
+    attribute = 'default_values'
+    module = __import__(module_name, fromlist=[attribute])
+    default_values = getattr(module, attribute)
+    vocabularies_with_HTML_description = getattr(module, 'vocabularies_with_HTML_description')
 
-        if urban_type in ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter']:
-            #we add the specific features folder
-            if not hasattr(aq_base(configFolder), 'specificfeatures'):
-                newFolder = createFolderWithDefaultValues(configFolder, 'specificfeatures', site, default_values)
-                setHTMLContentType(newFolder, 'description')
+    global_vocabularies = default_values['global']
+    createVocabularies(container=tool, vocabularies=global_vocabularies)
 
-            if not hasattr(aq_base(configFolder), 'roadspecificfeatures'):
-                createFolderWithDefaultValues(configFolder, 'roadspecificfeatures', site, default_values)
+    conditions = getattr(tool, "exploitationconditions")
+    #add the exploitation conditions subfolders
+    addExploitationConditions(context, conditions)
 
-            if not hasattr(aq_base(configFolder), 'locationspecificfeatures'):
-                createFolderWithDefaultValues(configFolder, 'locationspecificfeatures', site, default_values)
+    for urban_type in URBAN_TYPES:
+        licenceConfigId = urban_type.lower()
+        config_folder = getattr(tool, licenceConfigId)
 
-            #we add the custom township specific features folder
-            if not hasattr(aq_base(configFolder), 'townshipspecificfeatures'):
-                createFolderWithDefaultValues(configFolder, 'townshipspecificfeatures', site, default_values)
+        licence_vocabularies = default_values.get(urban_type, {})
+        createVocabularies(container=config_folder, vocabularies=licence_vocabularies)
 
-            if not hasattr(aq_base(configFolder), 'opinionstoaskifworks'):
-                #add "Ask opinions to in case of works" folder
-                newFolder = createFolderWithDefaultValues(configFolder, 'opinionstoaskifworks', site, default_values)
-                #now, we need to specify that the description's mimetype is 'text/html'
-                setHTMLContentType(newFolder, 'description')
+        shared_vocabularies = getSharedVocabularies(urban_type, default_values)
+        createVocabularies(container=config_folder, vocabularies=shared_vocabularies)
 
-            #we add the basement folder
-            if not hasattr(aq_base(configFolder), 'basement'):
-                createFolderWithDefaultValues(configFolder, 'basement', site, default_values)
+        for voc_folder_id in config_folder.objectIds():
+            if voc_folder_id in vocabularies_with_HTML_description:
+                voc_folder = getattr(config_folder, voc_folder_id)
+                setHTMLContentType(voc_folder, 'description')
 
-            #we add the zip folder
-            if not hasattr(aq_base(configFolder), 'zip'):
-                createFolderWithDefaultValues(configFolder, 'zip', site, default_values)
-
-            #we add the noteworthytrees folder
-            if not hasattr(aq_base(configFolder), 'noteworthytrees'):
-                createFolderWithDefaultValues(configFolder, 'noteworthytrees', site, default_values)
-
-        if not hasattr(aq_base(configFolder), 'missingparts'):
-            createFolderWithDefaultValues(configFolder, 'missingparts', site, default_values, licence_type=urban_type)
-
-        if not hasattr(aq_base(configFolder), 'roadmissingparts'):
-            createFolderWithDefaultValues(configFolder, 'roadmissingparts', site, default_values, licence_type=urban_type)
-
-        if not hasattr(aq_base(configFolder), 'locationmissingparts'):
-            createFolderWithDefaultValues(configFolder, 'locationmissingparts', site, default_values, licence_type=urban_type)
-
-        if urban_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo']:
-            if not hasattr(aq_base(configFolder), 'investigationarticles'):
-                newFolder = createFolderWithDefaultValues(configFolder, 'investigationarticles', site, default_values)
-                #now, we need to specify that the description's mimetype is 'text/html'
-                setHTMLContentType(newFolder, 'description')
-
-            if not hasattr(aq_base(configFolder), 'folderdelays'):
-                createFolderWithDefaultValues(configFolder, 'folderdelays', site, default_values)
-
-            if not hasattr(aq_base(configFolder), 'derogations'):
-                createFolderWithDefaultValues(configFolder, 'derogations', site, default_values)
-
-            if not hasattr(aq_base(configFolder), 'folderbuildworktypes'):
-                createFolderWithDefaultValues(configFolder, 'folderbuildworktypes', site, default_values)
-
-        if urban_type in ['BuildLicence', ]:
-            #add PEB categories folder
-            #this is done by a method because the migrateToUrban115
-            #migration step will use it too
-            addPEBCategories(context, configFolder)
-
-        if urban_type == 'EnvClassOne':
-            if not hasattr(aq_base(configFolder), 'rubrics'):
-                newFolderid = configFolder.invokeFactory("Folder", id="rubrics", title=_("rubrics_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                setFolderAllowedTypes(newFolder, 'Folder')
-                addRubricValues(context, ['1', ''], newFolder)
-
-            if not hasattr(aq_base(configFolder), 'inadmissibilityreasons'):
-                createFolderWithDefaultValues(configFolder, 'inadmissibilityreasons', site, default_values)
-
-        if urban_type == 'EnvClassTwo':
-            if not hasattr(aq_base(configFolder), 'rubrics'):
-                newFolderid = configFolder.invokeFactory("Folder", id="rubrics", title=_("rubrics_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                setFolderAllowedTypes(newFolder, 'Folder')
-                addRubricValues(context, ['2', ''], newFolder)
-
-            if not hasattr(aq_base(configFolder), 'inadmissibilityreasons'):
-                createFolderWithDefaultValues(configFolder, 'inadmissibilityreasons', site, default_values)
-
-        if urban_type == 'EnvClassThree':
-            if not hasattr(aq_base(configFolder), 'rubrics'):
-                newFolderid = configFolder.invokeFactory("Folder", id="rubrics", title=_("rubrics_folder_title", 'urban', context=site.REQUEST))
-                newFolder = getattr(configFolder, newFolderid)
-                setFolderAllowedTypes(newFolder, 'Folder')
-                addRubricValues(context, ['3', ''], newFolder)
-
-            if not hasattr(aq_base(configFolder), 'inadmissibilityreasons'):
-                createFolderWithDefaultValues(configFolder, 'inadmissibilityreasons', site, default_values)
+        if urban_type in ['EnvClassOne', 'EnvClassTwo', 'EnvClassThree']:
+            rubric_folder = getattr(config_folder, 'rubrics')
+            mapping = {
+                'EnvClassOne': '1',
+                'EnvClassTwo': '2',
+                'EnvClassThree': '3',
+            }
+            addRubricValues(context, [mapping[urban_type], ''], rubric_folder)
 
 
 def addRubricValues(context, class_type, config_folder):
@@ -458,6 +392,8 @@ def addRubricValues(context, class_type, config_folder):
     mapping = dgrne_slurp['mapping']
 
     for category in categories:
+        if category['id'] in config_folder.objectIds():
+            continue
         newfolder_id = config_folder.invokeFactory("Folder", **category)
         newfolder = getattr(config_folder, newfolder_id)
         newfolder.setConstrainTypesMode(1)
@@ -514,23 +450,6 @@ def addExploitationConditions(context, config_folder):
                 field = vocterm.getField('description')
                 field.setContentType(vocterm, 'text/html')
                 vocterm.setDescription(condition['description'])
-
-
-def addPEBCategories(context, configFolder):
-    """
-      This method add default PEB categories
-    """
-    site = hasattr(context, 'getSite') and context.getSite() or getToolByName(context, 'portal_url').getPortalObject()
-    if not hasattr(aq_base(configFolder), 'pebcategories'):
-        newFolderid = configFolder.invokeFactory("Folder", id="pebcategories", title=_("pebcategories_folder_title", 'urban', context=site.REQUEST))
-        newFolder = getattr(configFolder, newFolderid)
-        newFolder.setConstrainTypesMode(1)
-        newFolder.setLocallyAllowedTypes(['UrbanVocabularyTerm'])
-        newFolder.setImmediatelyAddableTypes(['UrbanVocabularyTerm'])
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="not_applicable", title=_('peb_not_applicable', 'urban', context=site.REQUEST))
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="complete_process", title=_('peb_complete_process', 'urban', context=site.REQUEST))
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="form1_process", title=_('peb_form1_process', 'urban', context=site.REQUEST))
-        newFolder.invokeFactory("UrbanVocabularyTerm", id="form2_process", title=_('peb_form2_process', 'urban', context=site.REQUEST))
 
 
 def addUrbanGroups(context):
@@ -630,7 +549,7 @@ def addGlobalFolders(context):
     """
     Add folders with properties used by several licence types
     """
-    if context.readDataFile('urban_extra_marker.txt') is None:
+    if context.readDataFile('urban_marker.txt') is None:
         return
     site = context.getSite()
     tool = site.portal_urban
@@ -704,27 +623,8 @@ def addGlobalFolders(context):
         topic.setCustomViewFields(topicViewFields)
         topic.reindexObject()
 
-    if not hasattr(tool, "globaltemplates"):
-        createFolderWithDefaultValues(tool, 'globaltemplates', site, content_portal_type='UrbanDoc')
-
-    if not hasattr(tool, "foldermanagers"):
-        createFolderWithDefaultValues(tool, 'foldermanagers', site, content_portal_type='FolderManager')
-
-    if not hasattr(tool, "streets"):
-        createFolderWithDefaultValues(tool, 'streets', site, default_values, content_portal_type='City')
-
-    folder_names = ['pcas', 'pashs', 'folderroadtypes', 'folderprotectedbuildings',
-                    'folderroadequipments', 'folderroadcoatings', 'folderzones', 'rcu', 'ssc']
-    for folder_name in folder_names:
-        if not hasattr(tool, folder_name):
-            createFolderWithDefaultValues(tool, folder_name, site, default_values)
-
-    if not hasattr(tool, "exploitationconditions"):
-        conditions = createFolderWithDefaultValues(tool, 'exploitationconditions', site, content_portal_type='Folder')
-    else:
-        conditions = getattr(tool, "exploitationconditions")
-    #add the exploitation conditions subfolders
-    addExploitationConditions(context, conditions)
+    vocabularies = default_values['global']
+    createVocabularyFolders(container=tool, vocabularies=vocabularies, site=site)
 
     if not hasattr(tool, "additional_layers"):
         additional_layers_id = tool.invokeFactory("Folder", id="additional_layers", title=_("additonal_layers_folder_title", 'urban', context=site.REQUEST))
@@ -732,11 +632,6 @@ def addGlobalFolders(context):
         additional_layers.setConstrainTypesMode(1)
         additional_layers.setLocallyAllowedTypes(['Layer'])
         additional_layers.setImmediatelyAddableTypes(['Layer'])
-
-    folder_names = ['persons_titles', 'persons_grades', 'country', 'decisions', 'externaldecisions']
-    for folder_name in folder_names:
-        if not hasattr(tool, folder_name):
-            createFolderWithDefaultValues(tool, folder_name, site, default_values)
 
 
 def addUrbanConfigsTopics(context):

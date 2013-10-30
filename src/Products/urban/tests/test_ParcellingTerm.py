@@ -2,12 +2,12 @@
 import unittest2 as unittest
 from Products.CMFCore.utils import getToolByName
 from plone.app.testing import login
-from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
+from Products.urban.testing import URBAN_TESTS_CONFIG
 
 
 class TestParcellingTerm(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_INTEGRATION
+    layer = URBAN_TESTS_CONFIG
 
     def setUp(self):
         portal = self.layer['portal']
