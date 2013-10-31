@@ -98,3 +98,6 @@ class TestEnvClassOneInstance(unittest.TestCase):
             self.browser.open(self.licence.absolute_url())
         except urllib2.HTTPError,  e:
             self.fail(msg="Got HTTP response code:" + str(e.code))
+
+    def test_envclassone_has_attribute_scene_and_surroundings_description(self):
+        self.assertTrue(hasattr(self.licence, 'scene_and_surroundings_description'))
