@@ -96,6 +96,5 @@ class TestEnvClassOneInstance(unittest.TestCase):
     def test_envclassone_view(self):
         try:
             self.browser.open(self.licence.absolute_url())
-            # raise AssertionError("No Unauthorized risen:" + url)
         except urllib2.HTTPError,  e:
             self.fail(msg="Got HTTP response code:" + str(e.code))
