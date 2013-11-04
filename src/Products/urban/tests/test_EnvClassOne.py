@@ -99,5 +99,5 @@ class TestEnvClassOneInstance(unittest.TestCase):
         except urllib2.HTTPError,  e:
             self.fail(msg="Got HTTP response code:" + str(e.code))
 
-    def test_envclassone_has_attribute_areaDescription(self):
-        self.assertTrue(hasattr(self.licence, 'areaDescription'))
+    def test_envclassone_has_attribute_areaDescriptionText(self):
+        self.assertTrue(hasattr(self.licence, 'areaDescriptionText'))
