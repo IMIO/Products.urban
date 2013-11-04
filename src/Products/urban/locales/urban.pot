@@ -1583,6 +1583,11 @@ msgstr ""
 
 #. Default: "Businessdescription"
 #: EnvironmentBase.py
+msgid "urban_label_areaDescription"
+msgstr ""
+
+#. Default: "Businessdescription"
+#: EnvironmentBase.py
 msgid "urban_label_businessDescription"
 msgstr ""
 

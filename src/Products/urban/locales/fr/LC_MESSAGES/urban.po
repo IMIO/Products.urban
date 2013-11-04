@@ -1581,6 +1581,11 @@ msgstr "Bis"
 msgid "urban_label_box"
 msgstr "Boîte"
 
+#. Default: "Areadescription"
+#: EnvironmentLicence.py
+msgid "urban_label_areaDescription"
+msgstr "Description des lieux et des abords du projet"
+
 #. Default: "Businessdescription"
 #: EnvironmentBase.py
 msgid "urban_label_businessDescription"
