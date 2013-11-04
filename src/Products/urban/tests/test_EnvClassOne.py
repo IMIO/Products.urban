@@ -110,3 +110,9 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.browser.open(self.licence.absolute_url())
         contents = self.browser.contents
         self.assertTrue("Description des lieux et des abords du projet" in contents)
+
+    def test_envclassone_edit(self):
+        self.browser.open(self.licence.absolute_url() + '/edit')
+        contents = self.browser.contents
+        import ipdb; ipdb.set_trace()
+        self.assertTrue('Voirie' in contents)
