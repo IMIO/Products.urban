@@ -56,6 +56,8 @@ setup(name='Products.urban',
           'plone.z3ctable',
           'Products.ContentTypeValidator',
           'python-Levenshtein',
+          'profilehooks',
+          'plone.api',  # to remove once we use a plone version including plone.api
       ],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',
