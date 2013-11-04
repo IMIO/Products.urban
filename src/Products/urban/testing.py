@@ -26,7 +26,25 @@ URBAN_TESTS_PROFILE_FUNCTIONAL = FunctionalTesting(
     bases=(URBAN_TESTS_PROFILE_DEFAULT,), name="URBAN_TESTS_PROFILE_FUNCTIONAL")
 
 
-class UrbanConfigLayer(IntegrationTesting):
+class UrbanWithUsersLayer(IntegrationTesting):
+    """
+    Instanciate test users
+
+    Must collaborate with a layer that installs Plone and Urban
+    Useful for performances: Plone site is instanciated only once
+    """
+    def setUp(self):
+        super(UrbanWithUsersLayer, self).setUp()
+        with helpers.ploneSite() as portal:
+            from Products.urban.setuphandlers import addTestUsers
+            addTestUsers(portal)
+
+
+URBAN_TESTS_INTEGRATION = UrbanWithUsersLayer(
+    bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_INTEGRATION")
+
+
+class UrbanConfigLayer(UrbanWithUsersLayer):
     """
     Instanciate urban config
 
@@ -39,6 +57,23 @@ class UrbanConfigLayer(IntegrationTesting):
 
 URBAN_TESTS_CONFIG = UrbanConfigLayer(
     bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_CONFIG")
+
+
+class UrbanEnvclassOneLayer(UrbanWithUsersLayer):
+    """
+    Instanciate a EnvClassOne test licence
+
+    Must collaborate with a layer that installs Plone and Urban
+    Useful for performances: Plone site is instanciated only once
+    """
+    def setUp(self):
+        super(UrbanEnvclassOneLayer, self).setUp()
+        with helpers.ploneSite() as portal:
+            helpers.login(portal, 'urbaneditor')
+            portal.urban.envclassones.invokeFactory('EnvClassOne', id='test_licence_envclassone')
+
+URBAN_TESTS_ENVCLASSONE = UrbanEnvclassOneLayer(
+    bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_ENVCLASSONE")
 
 
 class UrbanLicencesLayer(UrbanConfigLayer):

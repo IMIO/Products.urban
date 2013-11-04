@@ -1,15 +1,17 @@
 #-*- coding: utf-8 -*-
-import unittest
-from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
-from Products.urban.testing import URBAN_TESTS_LICENCES
+from Products.urban.testing import URBAN_TESTS_ENVCLASSONE
+from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.utils import getLicenceFolder
+
 from plone.testing.z2 import Browser
+
+import unittest
 import urllib2
 
 
 class TestEnvClassOneInstall(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_INTEGRATION
+    layer = URBAN_TESTS_INTEGRATION
 
     def setUp(self):
         self.portal = self.layer['portal']
@@ -69,13 +71,15 @@ class TestEnvClassOneInstall(unittest.TestCase):
 
 class TestEnvClassOneInstance(unittest.TestCase):
 
-    layer = URBAN_TESTS_LICENCES
+    layer = URBAN_TESTS_ENVCLASSONE
 
     def setUp(self):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
-        self.licence = self.urban.envclassones.objectValues()[0]
+        envclassone_folder = self.urban.envclassones
+        self.licence = getattr(envclassone_folder, 'test_licence_envclassone')
         self.browser = Browser(self.portal)
+        self.browserLogin('urbaneditor')
 
     def browserLogin(self, user):
         self.browser.open(self.portal.absolute_url() + "/login_form")
@@ -86,7 +90,7 @@ class TestEnvClassOneInstance(unittest.TestCase):
     def test_envclassone_licence_exists(self):
         self.assertTrue(len(self.urban.envclassones.objectIds()) > 0)
 
-    def test_envclassone_view_is_registred(self):
+    def test_envclassone_view_is_registered(self):
         msg = 'EnvClassOne view is not registered'
         try:
             self.licence.restrictedTraverse('envclassoneview')

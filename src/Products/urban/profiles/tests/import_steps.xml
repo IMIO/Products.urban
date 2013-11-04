@@ -1,21 +1,4 @@
 <?xml version="1.0"?>
 <import-steps>
 
- <import-step
-    id="urban-addGlobalFolders"
-    handler="Products.urban.setuphandlers.addGlobalFolders"
-    title="Add global config folders with test values"
-    version="2013-01-04T11:30:41.455297">
-   Add global config folders
- </import-step>
-
- <import-step
-    id="urban-addUrbanConfigFolders"
-    handler="Products.urban.setuphandlers.addUrbanConfigFolders"
-    title="Add local config folders without any test values"
-    version="2013-01-04T11:30:41.455297">
-   <dependency step="urban-addGlobalFolders"/>
-   Add local config folders
- </import-step>
-
  </import-steps>

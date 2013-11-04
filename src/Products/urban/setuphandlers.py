@@ -870,8 +870,7 @@ def addApplicationFolders(context):
             newFolder.invokeFactory("Link", id=search_link[0], title=_('urban_%s_descr' % search_link[0], 'urban', context=site.REQUEST), remoteUrl=search_link[1])
 
 
-def addTestUsers(context):
-    site = context.getSite()
+def addTestUsers(site):
     is_mountpoint = len(site.absolute_url_path().split('/')) > 2
     try:
         password = 'urbanmanager'
@@ -918,7 +917,7 @@ def addDefaultObjects(context):
     #add some users, some architects and some foldermanagers...
     #add 3 users, one as manager, one as reader and one as editor...
     site = context.getSite()
-    addTestUsers(context)
+    addTestUsers(site)
         #add some architects...
     urbanFolder = getattr(site, "urban")
     notFolder = getattr(urbanFolder, "architects")
