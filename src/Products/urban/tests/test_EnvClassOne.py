@@ -105,3 +105,8 @@ class TestEnvClassOneInstance(unittest.TestCase):
 
     def test_envclassone_has_attribute_areaDescriptionText(self):
         self.assertTrue(hasattr(self.licence, 'areaDescriptionText'))
+
+    def test_envclassone_areaDescription_is_visible(self):
+        self.browser.open(self.licence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("areaDescription" in contents)
