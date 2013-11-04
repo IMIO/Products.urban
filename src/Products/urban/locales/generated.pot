@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Oct 16 16:44:36 2013\n"
-"PO-Revision-Date: Wed Oct 16 16:44:36 2013\n"
+"POT-Creation-Date: Mon Nov  4 10:09:32 2013\n"
+"PO-Revision-Date: Mon Nov  4 10:09:32 2013\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -226,6 +226,11 @@ msgstr ""
 #. Default: "Areparcelsverified"
 #: GenericLicence.py
 msgid "urban_label_areParcelsVerified"
+msgstr ""
+
+#. Default: "Areadescriptiontext"
+#: EnvironmentLicence.py
+msgid "urban_label_areaDescriptionText"
 msgstr ""
 
 #. Default: "Article"
