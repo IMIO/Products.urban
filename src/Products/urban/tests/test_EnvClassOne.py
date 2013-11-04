@@ -77,7 +77,7 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
         envclassone_folder = self.urban.envclassones
-        self.licence = getattr(envclassone_folder, 'test_licence_envclassone')
+        self.licence = envclassone_folder.objectValues()[0]
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
 
