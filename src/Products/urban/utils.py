@@ -6,24 +6,17 @@ import string
 import hashlib
 from HTMLParser import HTMLParser
 
+from plone import api
+
 
 def getLicenceSchema(licencetype):
-    licence_modules = {
-        'buildlicence': 'BuildLicence',
-        'parceloutlicence': 'ParcelOutLicence',
-        'declaration': 'Declaration',
-        'division': 'Division',
-        'urbancertificateone': 'UrbanCertificateBase',
-        'urbancertificatetwo': 'UrbanCertificateTwo',
-        'notaryletter': 'UrbanCertificateBase',
-        'envclassthree': 'EnvironmentBase',
-        'miscdemand': 'MiscDemand',
-    }
-    licence_type = licencetype.lower()
-    if licence_type not in licence_modules.keys():
+    if licencetype not in URBAN_TYPES:
         return None
-    module_name = 'Products.urban.%s' % licence_modules[licence_type]
-    attribute = "%s_schema" % licence_modules[licence_type]
+    types_tool = api.portal.get_tool('portal_types')
+    type_info = types_tool.getTypeInfo(licencetype)
+    metatype = type_info.getProperty('content_meta_type')
+    module_name = 'Products.urban.%s' % metatype
+    attribute = "%s_schema" % metatype
     module = __import__(module_name, fromlist=[attribute])
     return getattr(module, attribute)
 

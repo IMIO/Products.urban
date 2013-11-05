@@ -26,6 +26,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import setOptionalAttributes
+from Products.urban.utils import setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 optional_fields = ['subdivisionDetails','missingParts','missingPartsDetails','folderZoneDetails','folderZone',
@@ -80,6 +81,8 @@ del MiscDemand_schema['referenceDGATLP']
 MiscDemand_schema['folderCategory'].widget.label_msgid='urban_label_category'
 MiscDemand_schema['missingParts'].widget.visible=False
 MiscDemand_schema['missingPartsDetails'].widget.visible=False
+#put the the fields coming from Inquiry in a specific schemata
+setSchemataForInquiry(MiscDemand_schema)
 ##/code-section after-schema
 
 class MiscDemand(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
