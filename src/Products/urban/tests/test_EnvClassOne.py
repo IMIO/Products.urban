@@ -39,6 +39,14 @@ class TestEnvClassOneInstall(unittest.TestCase):
         contents = self.browser.contents
         self.assertTrue("Permis d'environnement classe 1" in contents, msg)
 
+    def test_envclassone_config_folder_is_editable(self):
+        msg = 'envclassone config folder is not editable properly'
+        self.browserLogin('urbanmanager')
+        edit_url = '%s/edit' % self.portal_urban.envclassone.absolute_url()
+        self.browser.open(edit_url)
+        contents = self.browser.contents
+        self.assertTrue("Champs optionnels utilisés" in contents, msg)
+
     def test_envclassone_folder_exist(self):
         msg = 'envclassones folder not created'
         self.assertTrue('envclassones' in self.urban.objectIds(), msg)
@@ -119,7 +127,6 @@ class TestEnvClassOneInstance(unittest.TestCase):
     def test_envclassone_edit(self):
         self.browser.open(self.licence.absolute_url() + '/edit')
         contents = self.browser.contents
-        import ipdb; ipdb.set_trace()
         self.assertTrue('Voirie' in contents)
 
     def test_envclassone_has_attribute_hasConfidentialDatas(self):
