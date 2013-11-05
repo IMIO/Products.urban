@@ -121,3 +121,6 @@ class TestEnvClassOneInstance(unittest.TestCase):
         contents = self.browser.contents
         import ipdb; ipdb.set_trace()
         self.assertTrue('Voirie' in contents)
+
+    def test_envclassone_has_attribute_hasConfidentialDatas(self):
+        self.assertTrue(hasattr(self.licence, 'hasConfidentialDatas'))
