@@ -109,6 +109,11 @@ class TestEnvClassOneInstance(unittest.TestCase):
     def test_envclassone_areaDescription_is_visible(self):
         self.browser.open(self.licence.absolute_url())
         contents = self.browser.contents
+        self.assertTrue("areaDescription" in contents)
+
+    def test_envclassone_areaDescription_is_translated(self):
+        self.browser.open(self.licence.absolute_url())
+        contents = self.browser.contents
         self.assertTrue("Description des lieux et des abords du projet" in contents)
 
     def test_envclassone_edit(self):
