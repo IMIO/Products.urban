@@ -6,6 +6,8 @@ import string
 import hashlib
 from HTMLParser import HTMLParser
 
+from Products.CMFCore.utils import getToolByName
+from Products.urban import URBAN_TYPES
 from plone import api
 
 
