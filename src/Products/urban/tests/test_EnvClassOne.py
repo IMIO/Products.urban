@@ -40,12 +40,12 @@ class TestEnvClassOneInstall(unittest.TestCase):
         self.assertTrue("Permis d'environnement classe 1" in contents, msg)
 
     def test_envclassone_config_folder_is_editable(self):
-        msg = 'envclassone config folder is not editable properly'
         self.browserLogin('urbanmanager')
-        edit_url = '%s/edit' % self.portal_urban.envclassone.absolute_url()
-        self.browser.open(edit_url)
-        contents = self.browser.contents
-        self.assertTrue("Champs optionnels utilisés" in contents, msg)
+        try:
+            edit_url = self.portal_urban.envclassone.absolute_url() + '/edit'
+            self.browser.open(edit_url)
+        except urllib2.HTTPError,  e:
+            self.fail(msg="Got HTTP response code:" + str(e.code))
 
     def test_envclassone_folder_exist(self):
         msg = 'envclassones folder not created'
@@ -111,6 +111,13 @@ class TestEnvClassOneInstance(unittest.TestCase):
         except urllib2.HTTPError,  e:
             self.fail(msg="Got HTTP response code:" + str(e.code))
 
+    def test_envclassone_edit(self):
+        self.browser.open(self.licence.absolute_url() + '/edit')
+        contents = self.browser.contents
+        self.assertTrue('Voirie' in contents)
+        self.assertTrue('Métadonnées' not in contents)
+        self.assertTrue('Données' not in contents)
+
     def test_envclassone_has_attribute_areaDescriptionText(self):
         self.assertTrue(hasattr(self.licence, 'areaDescriptionText'))
 
@@ -123,13 +130,6 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.browser.open(self.licence.absolute_url())
         contents = self.browser.contents
         self.assertTrue("Description des lieux et des abords du projet" in contents)
-
-    def test_envclassone_edit(self):
-        self.browser.open(self.licence.absolute_url() + '/edit')
-        contents = self.browser.contents
-        self.assertTrue('Voirie' in contents)
-        self.assertTrue('Métadonnées' not in contents)
-        self.assertTrue('Données' not in contents)
 
     def test_envclassone_has_attribute_hasConfidentialDatas(self):
         self.assertTrue(hasattr(self.licence, 'hasConfidentialDatas'))
