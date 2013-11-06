@@ -42,7 +42,11 @@ msgstr ""
 msgid "Architect data"
 msgstr ""
 
-#. Default: "Area description"
+#. Default: "Areadescriptiontext"
+#: EnvironmentLicence.py
+msgid "urban_label_areaDescriptionText"
+msgstr ""
+
 #: EnvironmentLicence.py
 msgid "urban_label_areaDescription"
 msgstr ""

@@ -41,6 +41,16 @@ schema = Schema((
         default_content_type='text/html',
         default_output_type='text/html',
     ),
+    BooleanField(
+        name='hasConfidentialData',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Hasconfidentialdata',
+            label_msgid='urban_label_hasConfidentialData',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+    ),
 
 ),
 )

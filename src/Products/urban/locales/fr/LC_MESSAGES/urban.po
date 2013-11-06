@@ -43,9 +43,9 @@ msgstr "Coordonnées du demandeur"
 msgid "Architect data"
 msgstr "Coordonnées de l'architecte"
 
-#. Default: "Area description"
+#. Default: "Areadescriptiontext"
 #: EnvironmentLicence.py
-msgid "urban_label_areaDescription"
+msgid "urban_label_areaDescriptionText"
 msgstr "Description des lieux et des abords du projet"
 
 msgid "BuildLicence"
