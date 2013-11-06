@@ -110,6 +110,9 @@
 <type type_id="Contact">
   <bound-workflow workflow_id="" />
 </type>
+<type type_id="EnvClassOne">
+  <bound-workflow workflow_id="urban_licence_workflow" />
+</type>
 <type type_id="EnvClassThree">
   <bound-workflow workflow_id="urban_licence_workflow" />
 </type>
