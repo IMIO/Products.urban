@@ -144,3 +144,8 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.browser.open(self.licence.absolute_url())
         contents = self.browser.contents
         self.assertTrue("hasConfidentialData" in contents)
+
+    def test_envclassone_hasConfidentialData_is_translated(self):
+        self.browser.open(self.licence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("La demande contient des données confidentielles" in contents)

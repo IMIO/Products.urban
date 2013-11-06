@@ -1933,6 +1933,11 @@ msgstr ""
 msgid "urban_label_hasAdditionalConditions"
 msgstr ""
 
+#. Default: "Hasconfidentialdata"
+#: EnvironmentLicence.py
+msgid "urban_label_hasConfidentialData"
+msgstr ""
+
 #. Default: "Impactstudy"
 #: GenericLicence.py
 msgid "urban_label_impactStudy"

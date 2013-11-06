@@ -1931,6 +1931,11 @@ msgstr "Grade"
 msgid "urban_label_hasAdditionalConditions"
 msgstr "Des conditions complémentaires sont requises"
 
+#. Default: "Hasconfidentialdata"
+#: EnvironmentLicence.py
+msgid "urban_label_hasConfidentialData"
+msgstr "La demande contient des données confidentielles" 
+
 #. Default: "Impactstudy"
 #: GenericLicence.py
 msgid "urban_label_impactStudy"
