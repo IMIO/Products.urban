@@ -3,6 +3,7 @@ from Products.urban.testing import URBAN_TESTS_ENVCLASSONE
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.utils import getLicenceFolder
 
+from plone import api
 from plone.testing.z2 import Browser
 
 import unittest
@@ -75,6 +76,11 @@ class TestEnvClassOneInstall(unittest.TestCase):
         link.click()
         contents = self.browser.contents
         self.assertTrue("Ajouter Permis d'environnement classe 1" in contents)
+
+    def test_EnvClassOne_is_under_licence_workflow(self):
+        workflow_tool = api.portal.get_tool('portal_workflow')
+        envclassone_workflow = workflow_tool.getChainForPortalType('EnvClassOne')
+        self.assertTrue('urban_licence_workflow' in envclassone_workflow)
 
 
 class TestEnvClassOneInstance(unittest.TestCase):
