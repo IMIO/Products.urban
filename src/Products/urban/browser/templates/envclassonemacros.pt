@@ -71,13 +71,18 @@
        <span tal:condition="not: context/getBusinessDescription" class="discreet" i18n:translate="content_none">None</span>
       </td>
      </tr>
-     <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_areaDescription">Area description</span>:</b></td>
+     <tr tal:condition="python: 'areaDescriptionText' in usedAttributes">
+      <td valign="top"><b><span i18n:translate="urban_label_areaDescriptionText">Area description</span>:</b></td>
       <td width="2%"></td>
       <td valign="top">
        <metal:myfield use-macro="python:here.widget('areaDescriptionText', mode='view')" />
        <span tal:condition="not: context/getAreaDescriptionText" class="discreet" i18n:translate="content_none">None</span>
       </td>
+     </tr>
+     <tr tal:condition="python: 'hasConfidentialData' in usedAttributes">
+      <td valign="top"><b><span i18n:translate="urban_label_hasConfidentialData">Has Confidential Data</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('hasConfidentialData', mode='view')" /></td>
      </tr>
     <!--tr tal:define="rubrics view/getRubrics">
       <td valign="top"><b><span i18n:translate="urban_label_rubrics">Rubrics</span>:</b></td>

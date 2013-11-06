@@ -131,5 +131,10 @@ class TestEnvClassOneInstance(unittest.TestCase):
         contents = self.browser.contents
         self.assertTrue("Description des lieux et des abords du projet" in contents)
 
-    def test_envclassone_has_attribute_hasConfidentialDatas(self):
-        self.assertTrue(hasattr(self.licence, 'hasConfidentialDatas'))
+    def test_envclassone_has_attribute_hasConfidentialData(self):
+        self.assertTrue(hasattr(self.licence, 'hasConfidentialData'))
+
+    def test_envclassone_hasConfidentialData_is_visible(self):
+        self.browser.open(self.licence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("hasConfidentialData" in contents)
