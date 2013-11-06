@@ -29,16 +29,15 @@ schema = Schema((
 
     TextField(
         name='areaDescriptionText',
-        allowable_content_types=('text/plain', 'text/structured', 'text/html', 'application/msword',),
-        allowed_content_types=('text/html',),
+        allowable_content_types=('text/html',),
         widget=RichWidget(
             label='Areadescriptiontext',
             label_msgid='urban_label_areaDescriptionText',
             i18n_domain='urban',
         ),
-        schemata='urban_description',
-        default_method='getDefaultText',
         default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_description',
         default_output_type='text/html',
     ),
     BooleanField(
