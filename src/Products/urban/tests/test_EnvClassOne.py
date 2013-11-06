@@ -128,6 +128,8 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.browser.open(self.licence.absolute_url() + '/edit')
         contents = self.browser.contents
         self.assertTrue('Voirie' in contents)
+        self.assertTrue('Métadonnées' not in contents)
+        self.assertTrue('Données' not in contents)
 
     def test_envclassone_has_attribute_hasConfidentialDatas(self):
         self.assertTrue(hasattr(self.licence, 'hasConfidentialDatas'))
