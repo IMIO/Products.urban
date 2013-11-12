@@ -53,6 +53,16 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
+    BooleanField(
+        name='isTemporary',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Istemporary',
+            label_msgid='urban_label_isTemporary',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+    ),
 
 ),
 )

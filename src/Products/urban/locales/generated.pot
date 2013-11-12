@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Nov  6 11:11:21 2013\n"
-"PO-Revision-Date: Wed Nov  6 11:11:21 2013\n"
+"POT-Creation-Date: Tue Nov 12 09:59:11 2013\n"
+"PO-Revision-Date: Tue Nov 12 09:59:11 2013\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -632,6 +632,11 @@ msgstr ""
 #. Default: "Issameaddressasworks"
 #: Contact.py
 msgid "urban_label_isSameAddressAsWorks"
+msgstr ""
+
+#. Default: "Istemporary"
+#: EnvironmentLicence.py
+msgid "urban_label_isTemporary"
 msgstr ""
 
 #. Default: "Keydates"
