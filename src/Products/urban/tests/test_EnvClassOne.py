@@ -163,3 +163,14 @@ class TestEnvClassOneInstance(unittest.TestCase):
 
     def test_envclassone_has_attribute_isTemporaryProject(self):
         self.assertTrue(hasattr(self.licence, 'isTemporaryProject'))
+
+    def test_envclassone_isTemporaryProject_is_visible(self):
+        self.browser.open(self.licence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("isTemporaryProject" in contents)
+
+    def test_envclassone_isTemporaryProject_is_visible_in_edit(self):
+        edit_url = '{}/edit'.format(self.licence.absolute_url())
+        self.browser.open(edit_url)
+        contents = self.browser.contents
+        self.assertTrue("isTemporaryProject" in contents)
