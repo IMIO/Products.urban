@@ -4,6 +4,7 @@ from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.utils import getLicenceFolder
 
 from plone import api
+from plone.app.testing import login
 from plone.testing.z2 import Browser
 
 import unittest
@@ -106,6 +107,7 @@ class TestEnvClassOneInstance(unittest.TestCase):
 
     def test_envclassone_view_is_registered(self):
         msg = 'EnvClassOne view is not registered'
+        login(self.portal, 'urbaneditor')
         try:
             self.licence.restrictedTraverse('envclassoneview')
         except AttributeError:
@@ -134,6 +136,12 @@ class TestEnvClassOneInstance(unittest.TestCase):
 
     def test_envclassone_areaDescription_is_translated(self):
         self.browser.open(self.licence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("Description des lieux et des abords du projet" in contents)
+
+    def test_envclassone_areaDescription_is_visible_in_edit(self):
+        edit_url = '{}/edit'.format(self.licence.absolute_url())
+        self.browser.open(edit_url)
         contents = self.browser.contents
         self.assertTrue("Description des lieux et des abords du projet" in contents)
 

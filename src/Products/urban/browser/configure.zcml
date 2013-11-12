@@ -286,7 +286,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IEnvironmentBase"
+     for="Products.urban.interfaces.IEnvironmentLicence"
      name="envclassoneview"
      class=".envclassoneview.EnvClassOneView"
      template="templates/licenceview.pt"
