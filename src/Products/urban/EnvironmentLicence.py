@@ -54,11 +54,11 @@ schema = Schema((
         schemata='urban_description',
     ),
     BooleanField(
-        name='isTemporary',
+        name='isTemporaryProject',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Istemporary',
-            label_msgid='urban_label_isTemporary',
+            label='Istemporaryproject',
+            label_msgid='urban_label_isTemporaryProject',
             i18n_domain='urban',
         ),
         schemata='urban_description',

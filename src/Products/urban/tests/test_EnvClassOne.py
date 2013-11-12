@@ -161,5 +161,5 @@ class TestEnvClassOneInstance(unittest.TestCase):
         contents = self.browser.contents
         self.assertTrue("La demande contient des données confidentielles" in contents)
 
-    def test_envclassone_has_attribute_isTemporary(self):
-        self.assertTrue(hasattr(self.licence, 'isTemporary'))
+    def test_envclassone_has_attribute_isTemporaryProject(self):
+        self.assertTrue(hasattr(self.licence, 'isTemporaryProject'))
