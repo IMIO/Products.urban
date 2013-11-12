@@ -2071,6 +2071,11 @@ msgstr "Adresse identique à l'adresse du bien?"
 msgid "urban_label_isSupplementary"
 msgstr "Supplémentaire?"
 
+#. Default: "Istemporaryproject"
+#: EnvironmentLicence.py
+msgid "urban_label_isTemporaryProject"
+msgstr "Le projet est temporaire"
+
 #. Default: "Keydates"
 #: UrbanEventType.py
 msgid "urban_label_keyDates"

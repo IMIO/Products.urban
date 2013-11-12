@@ -2068,6 +2068,11 @@ msgstr ""
 msgid "urban_label_isSameAddressAsWorks"
 msgstr ""
 
+#. Default: "Istemporaryproject"
+#: EnvironmentLicence.py
+msgid "urban_label_isTemporaryProject"
+msgstr ""
+
 #. Default: "Issupplementary"
 #: WorkLocation.py
 msgid "urban_label_isSupplementary"
