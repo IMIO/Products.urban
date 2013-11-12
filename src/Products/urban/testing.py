@@ -59,23 +59,6 @@ URBAN_TESTS_CONFIG = UrbanConfigLayer(
     bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_CONFIG")
 
 
-class UrbanEnvclassOneLayer(UrbanWithUsersLayer):
-    """
-    Instanciate a EnvClassOne test licence
-
-    Must collaborate with a layer that installs Plone and Urban
-    Useful for performances: Plone site is instanciated only once
-    """
-    def setUp(self):
-        super(UrbanEnvclassOneLayer, self).setUp()
-        with helpers.ploneSite() as portal:
-            helpers.login(portal, 'urbaneditor')
-            portal.urban.envclassones.invokeFactory('EnvClassOne', id='test_licence_envclassone')
-
-URBAN_TESTS_ENVCLASSONE = UrbanEnvclassOneLayer(
-    bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_ENVCLASSONE")
-
-
 class UrbanLicencesLayer(UrbanConfigLayer):
     """
     Instanciate licences

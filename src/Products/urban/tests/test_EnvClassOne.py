@@ -1,5 +1,4 @@
 #-*- coding: utf-8 -*-
-from Products.urban.testing import URBAN_TESTS_ENVCLASSONE
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.utils import getLicenceFolder
 
@@ -7,6 +6,7 @@ from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 
+import transaction
 import unittest
 import urllib2
 
@@ -86,13 +86,21 @@ class TestEnvClassOneInstall(unittest.TestCase):
 
 class TestEnvClassOneInstance(unittest.TestCase):
 
-    layer = URBAN_TESTS_ENVCLASSONE
+    layer = URBAN_TESTS_INTEGRATION
 
     def setUp(self):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
+
+        # create a test EnvClassOne licence
+        login(self.portal, 'urbaneditor')
         envclassone_folder = self.urban.envclassones
-        self.licence = envclassone_folder.objectValues()[0]
+        testlicence_id = 'test_envclassone'
+        if testlicence_id not in envclassone_folder.objectIds():
+            envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
+            transaction.commit()
+        self.licence = getattr(envclassone_folder, testlicence_id)
+
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
 
@@ -149,11 +157,6 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.assertTrue(hasattr(self.licence, 'hasConfidentialData'))
 
     def test_envclassone_hasConfidentialData_is_visible(self):
-        self.browser.open(self.licence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("hasConfidentialData" in contents)
-
-    def test_envclassone_hasConfidentialData_is_translated(self):
         self.browser.open(self.licence.absolute_url())
         contents = self.browser.contents
         self.assertTrue("La demande contient des données confidentielles" in contents)
