@@ -2053,6 +2053,11 @@ msgstr ""
 msgid "urban_label_isKeyEvent"
 msgstr ""
 
+#. Default: "Ismobileproject"
+#: EnvironmentLicence.py
+msgid "urban_label_isMobileProject"
+msgstr ""
+
 #. Default: "Ismodification"
 #: ParcelOutLicence.py
 msgid "urban_label_isModification"

@@ -89,6 +89,11 @@
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('isTemporaryProject', mode='view')" /></td>
      </tr>
+     <tr tal:condition="python: 'isMobileProject' in usedAttributes">
+      <td valign="top"><b><span i18n:translate="urban_label_isMobileProject">Is Mobile Project</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('isMobileProject', mode='view')" /></td>
+     </tr>
     <!--tr tal:define="rubrics view/getRubrics">
       <td valign="top"><b><span i18n:translate="urban_label_rubrics">Rubrics</span>:</b></td>
       <td width="2%"></td>

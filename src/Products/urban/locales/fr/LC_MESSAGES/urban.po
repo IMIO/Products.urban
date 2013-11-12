@@ -2051,6 +2051,11 @@ msgstr "Le bien se situe dans un lotissement"
 msgid "urban_label_isKeyEvent"
 msgstr "Événement clé"
 
+#. Default: "Ismobileproject"
+#: EnvironmentLicence.py
+msgid "urban_label_isMobileProject"
+msgstr "Le projet est mobile"
+
 #. Default: "Ismodification"
 #: ParcelOutLicence.py
 msgid "urban_label_isModification"

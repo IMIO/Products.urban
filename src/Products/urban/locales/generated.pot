@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Tue Nov 12 10:12:54 2013\n"
-"PO-Revision-Date: Tue Nov 12 10:12:54 2013\n"
+"POT-Creation-Date: Tue Nov 12 13:55:54 2013\n"
+"PO-Revision-Date: Tue Nov 12 13:55:54 2013\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -604,6 +604,11 @@ msgstr ""
 msgid "urban_label_isDefaultValue"
 msgstr ""
 
+#. Default: "Isessayproject"
+#: EnvironmentLicence.py
+msgid "urban_label_isEssayProject"
+msgstr ""
+
 #. Default: "Isinpca"
 #: GenericLicence.py
 msgid "urban_label_isInPCA"
@@ -617,6 +622,11 @@ msgstr ""
 #. Default: "Iskeyevent"
 #: UrbanEventType.py
 msgid "urban_label_isKeyEvent"
+msgstr ""
+
+#. Default: "Ismobileproject"
+#: EnvironmentLicence.py
+msgid "urban_label_isMobileProject"
 msgstr ""
 
 #. Default: "Ismodification"

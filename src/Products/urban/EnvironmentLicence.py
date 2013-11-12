@@ -25,7 +25,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.urban.utils import setOptionalAttributes
 
-optional_fields =['areaDescriptionText', 'hasConfidentialData', 'isTemporaryProject']
+optional_fields =['areaDescriptionText', 'hasConfidentialData', 'isTemporaryProject','isMobileProject']
 ##/code-section module-header
 
 schema = Schema((
@@ -59,6 +59,26 @@ schema = Schema((
         widget=BooleanField._properties['widget'](
             label='Istemporaryproject',
             label_msgid='urban_label_isTemporaryProject',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+    ),
+    BooleanField(
+        name='isEssayProject',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Isessayproject',
+            label_msgid='urban_label_isEssayProject',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+    ),
+    BooleanField(
+        name='isMobileProject',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Ismobileproject',
+            label_msgid='urban_label_isMobileProject',
             i18n_domain='urban',
         ),
         schemata='urban_description',
