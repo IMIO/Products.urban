@@ -1481,7 +1481,7 @@ msgstr "Conditions d'exploitations complémentaires"
 #. Default: "Additionallegalconditions"
 #: EnvironmentBase.py
 msgid "urban_label_additionalLegalConditions"
-msgstr "Condtions intégrales et sectorielles supplémentaires"
+msgstr "Conditions intégrales et sectorielles supplémentaires"
 
 #. Default: "Adr1"
 #: RecipientCadastre.py
