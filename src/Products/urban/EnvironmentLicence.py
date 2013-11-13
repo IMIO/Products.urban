@@ -118,5 +118,16 @@ registerType(EnvironmentLicence, PROJECTNAME)
 # end of class EnvironmentLicence
 
 ##code-section module-footer #fill in your manual code here
-##/code-section module-footer
+def finalizeSchema(schema, folderish=False, moveDiscussion=True):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('areaDescriptionText', after='missingPartsDetails')
+    schema.moveField('hasConfidentialData', after='areaDescriptionText')
+    schema.moveField('isTemporaryProject', after='hasConfidentialData')
+    schema.moveField('isEssayProject', after='isTemporaryProject')
+    schema.moveField('isMobileProject', after='isEssayProject')
+    schema.moveField('isMobileProject', before='additionalLegalConditions')
 
+finalizeSchema(EnvironmentLicence_schema)
+##/code-section module-footer

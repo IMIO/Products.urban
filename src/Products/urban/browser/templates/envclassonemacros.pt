@@ -75,34 +75,6 @@
        <span tal:condition="not: context/getBusinessDescription" class="discreet" i18n:translate="content_none">None</span>
       </td>
      </tr>
-     <tr tal:condition="python: 'areaDescriptionText' in usedAttributes">
-      <td valign="top"><b><span i18n:translate="urban_label_areaDescriptionText">Area description</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top">
-       <metal:myfield use-macro="python:here.widget('areaDescriptionText', mode='view')" />
-       <span tal:condition="not: context/getAreaDescriptionText" class="discreet" i18n:translate="content_none">None</span>
-      </td>
-     </tr>
-     <tr tal:condition="python: 'hasConfidentialData' in usedAttributes">
-      <td valign="top"><b><span i18n:translate="urban_label_hasConfidentialData">Has Confidential Data</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('hasConfidentialData', mode='view')" /></td>
-     </tr>
-     <tr tal:condition="python: 'isTemporaryProject' in usedAttributes">
-      <td valign="top"><b><span i18n:translate="urban_label_isTemporaryProject">Is Temporary Project</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('isTemporaryProject', mode='view')" /></td>
-     </tr>
-     <tr tal:condition="python: 'isEssayProject' in usedAttributes">
-      <td valign="top"><b><span i18n:translate="urban_label_isEssayProject">Is Essay Project</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('isEssayProject', mode='view')" /></td>
-     </tr>
-     <tr tal:condition="python: 'isMobileProject' in usedAttributes">
-      <td valign="top"><b><span i18n:translate="urban_label_isMobileProject">Is Mobile Project</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('isMobileProject', mode='view')" /></td>
-     </tr>
     <!--tr tal:define="rubrics view/getRubrics">
       <td valign="top"><b><span i18n:translate="urban_label_rubrics">Rubrics</span>:</b></td>
       <td width="2%"></td>
@@ -133,6 +105,34 @@
       <td valign="top"><b><span i18n:translate="urban_label_missingParts">Missing parts</span>:</b></td>
       <td width="2%"></td>
       <td valign="top"><metal:myfield use-macro="python:here.widget('missingParts', mode='view')" /></td>
+     </tr>
+     <tr tal:condition="python: 'areaDescriptionText' in usedAttributes">
+      <td valign="top"><b><span i18n:translate="urban_label_areaDescriptionText">Area description</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top">
+       <metal:myfield use-macro="python:here.widget('areaDescriptionText', mode='view')" />
+       <span tal:condition="not: context/getAreaDescriptionText" class="discreet" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr tal:condition="python: 'hasConfidentialData' in usedAttributes">
+      <td valign="top"><b><span i18n:translate="urban_label_hasConfidentialData">Has Confidential Data</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('hasConfidentialData', mode='view')" /></td>
+     </tr>
+     <tr tal:condition="python: 'isTemporaryProject' in usedAttributes">
+      <td valign="top"><b><span i18n:translate="urban_label_isTemporaryProject">Is Temporary Project</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('isTemporaryProject', mode='view')" /></td>
+     </tr>
+     <tr tal:condition="python: 'isEssayProject' in usedAttributes">
+      <td valign="top"><b><span i18n:translate="urban_label_isEssayProject">Is Essay Project</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('isEssayProject', mode='view')" /></td>
+     </tr>
+     <tr tal:condition="python: 'isMobileProject' in usedAttributes">
+      <td valign="top"><b><span i18n:translate="urban_label_isMobileProject">Is Mobile Project</span>:</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('isMobileProject', mode='view')" /></td>
      </tr>
      <!--tr tal:define="min_conditions view/getMinimumConditions;
                      sup_conditions view/getAdditionalConditions">
