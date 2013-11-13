@@ -21,9 +21,3 @@ class MiscDemandView(LicenceView):
 
     def getMacroViewName(self):
         return 'miscdemand-macros'
-
-
-class MiscDemandMacros(LicenceView):
-    """
-      This manage the macros of Declaration
-    """

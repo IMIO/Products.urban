@@ -203,9 +203,3 @@ class UrbanSearchView(BrowserView):
             for ref in parcel.getAllIndexableRefs():
                 parcel_infos.add(ref)
         return catalogTool(portal_type=foldertypes, parcelInfosIndex=list(parcel_infos))
-
-
-class UrbanSearchMacros(BrowserView):
-    """
-      This manage the macros of UrbanSearch
-    """

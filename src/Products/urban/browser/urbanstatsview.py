@@ -101,8 +101,3 @@ class UrbanStatsView(BrowserView):
             for licence_state in arguments['licence_state']:
                 matrix_line[licence_state] = 0
         return matrix
-
-class UrbanStatsMacros(BrowserView):
-    """
-      This manage the macros of UrbanStats
-    """

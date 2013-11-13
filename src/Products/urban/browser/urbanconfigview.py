@@ -39,9 +39,3 @@ class UrbanConfigView(BrowserView):
         other_folders = self.getAdminFolders() + self.getMiscConfigFolders()
         folders = [folder for folder in context.objectValues('ATFolder') if folder not in other_folders]
         return folders
-
-
-class UrbanConfigMacros(BrowserView):
-    """
-      This manage the macros of UrbanConfig
-    """

@@ -12,9 +12,3 @@ class EnvClassOneView(LicenceView):
 
     def getMacroViewName(self):
         return 'envclassone-macros'
-
-
-class EnvClassOneMacros(LicenceView):
-    """
-      This manage the macros of EnvClassOne
-    """

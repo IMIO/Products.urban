@@ -21,9 +21,3 @@ class DivisionView(LicenceView):
 
     def getMacroViewName(self):
         return 'division-macros'
-
-
-class DivisionMacros(LicenceView):
-    """
-      This manage the macros of Division
-    """

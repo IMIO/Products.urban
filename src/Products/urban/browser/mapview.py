@@ -133,9 +133,3 @@ class FullMapView(MapView):
         is_map_user = member.has_role('UrbanMapReader')
         is_manager = member.has_role('Manager')
         return is_map_user or is_manager
-
-
-class MapMacros(BrowserView):
-    """
-      This manage the macros of Map
-    """

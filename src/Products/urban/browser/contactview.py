@@ -71,9 +71,3 @@ class ContactView(BrowserView):
         if not context.portal_type == 'Claimant':
             return False
         return True
-
-
-class ContactMacros(BrowserView):
-    """
-      This manage the macros of BuildLicence
-    """

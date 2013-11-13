@@ -132,9 +132,3 @@ class UrbanRootView(UrbanView):
             licencetype=licencetype,
         )
         return link
-
-
-class UrbanViewMacros(BrowserView):
-    """
-      This manage the macros of urban view
-    """

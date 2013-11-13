@@ -77,9 +77,3 @@ class EnvClassThreeView(LicenceView):
 
     def getMacroViewName(self):
         return 'envclassthree-macros'
-
-
-class EnvClassThreeMacros(LicenceView):
-    """
-      This manage the macros of EnvClassThree
-    """

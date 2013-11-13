@@ -47,7 +47,6 @@
   <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
      name="urban-macros"
-     class=".urbanview.UrbanViewMacros"
      template="templates/urbanmacros.pt"
      permission="zope2.View"
   />
@@ -64,7 +63,6 @@
   <browser:page
      for="*"
      name="globalmacros"
-     class=".globalmacros.GlobalMacros"
      template="templates/globalmacros.pt"
      permission="zope2.View"
   />
@@ -73,7 +71,6 @@
   <browser:page
      for="Products.ATContentTypes.interfaces.IATBTreeFolder"
      name="urban-macros"
-     class=".urbanview.UrbanViewMacros"
      template="templates/urbanmacros.pt"
      permission="zope2.View"
   />
@@ -97,7 +94,6 @@
   <browser:page
      for="*"
      name="map-macros"
-     class=".mapview.MapMacros"
      template="templates/map_macros.pt"
      permission="zope2.View"
   />
@@ -120,7 +116,6 @@
   <browser:page
      for="Products.urban.interfaces.IUrbanTool"
      name="urbanconfigmacros"
-     class=".urbanconfigview.UrbanConfigMacros"
      template="templates/urbanconfigmacros.pt"
      permission="zope2.View"
   />
@@ -136,7 +131,6 @@
   <browser:page
      for="Products.urban.interfaces.ILicenceConfig"
      name="licenceconfigmacros"
-     class=".licenceconfigview.LicenceConfigMacros"
      template="templates/urbanconfigmacros.pt"
      permission="zope2.View"
   />
@@ -152,7 +146,6 @@
   <browser:page
      for="Products.urban.interfaces.IContact"
      name="contactmacros"
-     class=".contactview.ContactMacros"
      template="templates/contactmacros.pt"
      permission="zope2.View"
   />
@@ -205,7 +198,6 @@
   <browser:page
      name="parceloutlicence-macros"
      for="Products.urban.interfaces.IParcelOutLicence"
-     class=".parceloutlicenceview.ParcelOutLicenceMacros"
      template="templates/parceloutlicencemacros.pt"
      permission="zope2.View"
   />
@@ -221,7 +213,6 @@
   <browser:page
      name="declaration-macros"
      for="Products.urban.interfaces.IDeclaration"
-     class=".declarationview.DeclarationMacros"
      template="templates/declarationmacros.pt"
      permission="zope2.View"
   />
@@ -237,7 +228,6 @@
   <browser:page
      name="urbancertificateone-macros"
      for="Products.urban.interfaces.IUrbanCertificateBase"
-     class=".urbancertificateoneview.UrbanCertificateOneMacros"
      template="templates/urbancertificateonemacros.pt"
      permission="zope2.View"
   />
@@ -253,7 +243,6 @@
   <browser:page
      name="urbancertificatetwo-macros"
      for="Products.urban.interfaces.IUrbanCertificateBase"
-     class=".urbancertificatetwoview.UrbanCertificateTwoMacros"
      template="templates/urbancertificatetwomacros.pt"
      permission="zope2.View"
   />
@@ -269,7 +258,6 @@
   <browser:page
      name="notaryletter-macros"
      for="Products.urban.interfaces.IUrbanCertificateBase"
-     class=".notaryletterview.NotaryLetterMacros"
      template="templates/notarylettermacros.pt"
      permission="zope2.View"
   />
@@ -285,7 +273,6 @@
   <browser:page
      name="division-macros"
      for="Products.urban.interfaces.IDivision"
-     class=".divisionview.DivisionMacros"
      template="templates/divisionmacros.pt"
      permission="zope2.View"
   />
@@ -301,7 +288,6 @@
   <browser:page
      name="envclassthree-macros"
      for="Products.urban.interfaces.IEnvironmentBase"
-     class=".envclassthreeview.EnvClassThreeMacros"
      template="templates/envclassthreemacros.pt"
      permission="zope2.View"
   />
@@ -317,7 +303,6 @@
   <browser:page
      name="envclassone-macros"
      for="Products.urban.interfaces.IEnvironmentBase"
-     class=".envclassoneview.EnvClassOneMacros"
      template="templates/envclassonemacros.pt"
      permission="zope2.View"
   />
@@ -333,7 +318,6 @@
   <browser:page
      name="miscdemand-macros"
      for="Products.urban.interfaces.IMiscDemand"
-     class=".miscdemandview.MiscDemandMacros"
      template="templates/miscdemandmacros.pt"
      permission="zope2.View"
   />
@@ -358,7 +342,6 @@
   <browser:page
      name="urbanevent-macros"
      for="Products.urban.interfaces.IUrbanEvent"
-     class=".urbaneventviews.UrbanEventMacros"
      template="templates/urbaneventmacros.pt"
      permission="zope2.View"
   />
@@ -455,7 +438,6 @@
   <browser:page
      name="urbansearch-macros"
      for="*"
-     class=".urbansearchview.UrbanSearchMacros"
      template="templates/urbansearchmacros.pt"
      permission="zope2.View"
   />
@@ -479,7 +461,6 @@
   <browser:page
      name="urbanstats-macros"
      for="*"
-     class=".urbanstatsview.UrbanStatsMacros"
      template="templates/urbanstatsmacros.pt"
      permission="zope2.View"
   />

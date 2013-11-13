@@ -21,9 +21,3 @@ class NotaryLetterView(UrbanCertificateBaseView):
 
     def getMacroViewName(self):
         return 'notaryletter-macros'
-
-
-class NotaryLetterMacros(UrbanCertificateBaseView):
-    """
-      This manage the macros of NotaryLetter
-    """

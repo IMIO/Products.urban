@@ -106,12 +106,6 @@ class UrbanEventView(BrowserView):
         return context.getUrbaneventtypes()
 
 
-class UrbanEventMacros(BrowserView):
-    """
-      This manage the macros of BuildLicence
-    """
-
-
 class UrbanEventInquiryView(UrbanEventView, MapView):
     """
       This manage the view of UrbanEventInquiry

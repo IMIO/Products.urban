@@ -36,9 +36,3 @@ class LicenceConfigView(BrowserView):
         context = aq_inner(self.context)
         eventtypes_folder = getattr(context, 'urbaneventtypes')
         return [eventtypes_folder]
-
-
-class LicenceConfigMacros(BrowserView):
-    """
-      This manage the macros of LicenceConfig
-    """

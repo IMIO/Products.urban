@@ -21,9 +21,3 @@ class ParcelOutLicenceView(BuildLicenceView):
 
     def getMacroViewName(self):
         return 'parceloutlicence-macros'
-
-
-class ParcelOutLicenceMacros(BuildLicenceView):
-    """
-      This manage the macros of ParcelOutLicence
-    """

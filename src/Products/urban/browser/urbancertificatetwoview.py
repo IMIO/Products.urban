@@ -35,9 +35,3 @@ class UrbanCertificateTwoView(UrbanCertificateBaseView):
 
     def getMacroViewName(self):
         return 'urbancertificatetwo-macros'
-
-
-class UrbanCertificateTwoMacros(UrbanCertificateBaseView):
-    """
-      This manage the macros of UrbanCertificateTwo
-    """

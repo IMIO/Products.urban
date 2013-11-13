@@ -21,9 +21,3 @@ class DeclarationView(LicenceView):
 
     def getMacroViewName(self):
         return 'declaration-macros'
-
-
-class DeclarationMacros(LicenceView):
-    """
-      This manage the macros of Declaration
-    """
