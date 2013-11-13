@@ -2,56 +2,14 @@
     <div metal:use-macro="here/@@licencetabs-macros/investigation_and_advices_macro" />
 </metal:inquiry>
 
-<div metal:define-macro="description_macro" i18n:domain="urban">
- <table cellspacing=0 cellpadding=0 width=100%>
- <tr>
-  <td valign="top" width=49%>
-   <fieldset><legend i18n:translate="applicants">Applicant(s)</legend>
-    <div metal:use-macro="here/@@licencemacros/urbanApplicantsMacro" />
-   </fieldset>
-  </td>
-  <td width="1%"></td>
-  <td valign="top" width=50%>
-   <fieldset><legend i18n:translate="urban_description_key_dates_legend">Key dates</legend>
-    <table tal:define="keyDates view/getKeyDates;
-                       inquiryDates view/getInquiryDates"
-           class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
-     <tr tal:repeat="date keyDates">
-      <td valign="top"><b><span tal:content="python: date['label']">Receipt date</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top" tal:define="date_value python: date['date']">
-       <a href="#" tal:condition="date_value" tal:attributes="href python: date['url']" tal:content="python: date_value">Content</a>
-       <span class="discreet" tal:condition="not: date_value" i18n:translate="content_none">None</span>
-      </td>
-     </tr>
-     <tal:inquiries repeat="inquiry inquiryDates">
-     <tr>
-       <td valign="top"><b><span i18n:translate="urban_investigationStart">from <span i18n:name="number" tal:content="repeat/inquiry/number"/></span>:</b></td>
-       <td width="2%"></td>
-       <td valign="top" tal:define="start_date python: inquiry['start_date'];
-                                    url python: inquiry['url']">
-         <a href="#" tal:condition="python: start_date and url" tal:attributes="href url" tal:content="python: start_date">Content</a>
-         <span tal:condition="python: start_date and not url" tal:content="python: start_date">end date</span>
-         <span tal:condition="not: start_date" class="discreet" i18n:translate="content_none">None</span>
-       </td>
-     </tr>
-     <tr>
-       <td valign="top"><b><span i18n:translate="urban_label_investigationEnd">to</span>:</b></td>
-       <td width="2%"></td>
-       <td valign="top" tal:define="end_date python: inquiry['end_date'];
-                                    url python: inquiry['url']">
-         <a href="#" tal:condition="python: end_date and url" tal:attributes="href url" tal:content="python: end_date">Content</a>
-         <span tal:condition="python: end_date and not url" tal:content="python: end_date">end date</span>
-         <span tal:condition="not: end_date" class="discreet" i18n:translate="content_none">None</span>
-       </td>
-     </tr>
-     </tal:inquiries>
-    </table>
-   </fieldset>
-  </td>
-  </tr>
- <tr>
-  <td valign="top" width=50%>
+<metal:description define-macro="description_macro" i18n:domain="urban">
+ <div metal:use-macro="here/@@licencetabs-macros/description_macro">
+
+  <fieldset metal:fill-slot="representatives"><legend i18n:translate="urban_label_architects">Architect(s)</legend>
+      <div metal:use-macro="here/@@licencemacros/urbanArchitectsMacro" />
+  </fieldset>
+
+  <td metal:fill-slot="detail_slot" valign="top" width=50%>
    <fieldset><legend i18n:translate="legend_details">Details</legend>
     <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
      <tr tal:condition="python: 'licenceSubject' in usedAttributes">
@@ -125,24 +83,10 @@
     </table>
    </fieldset>
   </td>
-  <td width="1%"></td>
-  <td valign="top" width=49%>
-   <fieldset tal:define="workLocations context/getWorkLocations"><legend i18n:translate="urban_label_workLocations">Work locations</legend>
-      <div tal:condition="workLocations"><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
-      <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
-   </fieldset>
-   <fieldset><legend i18n:translate="urban_label_architects">Architect(s)</legend>
-    <div metal:use-macro="here/@@licencemacros/urbanArchitectsMacro" />
-   </fieldset>
-   <fieldset><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
-    <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
-   </fieldset>
-  </td>
- </tr>
- </table>
-</div>
+ </div>
+</metal:description>
 
-<div metal:define-macro="road_macro" i18n:domain="urban">
+<metal:road define-macro="road_macro" i18n:domain="urban">
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
  <tr tal:condition="python: 'roadMissingParts' in usedAttributes">
   <td valign="top"><b><span i18n:translate="urban_label_roadMissingParts">Missing parts</span>:</b></td>
@@ -247,7 +191,7 @@
   <td valign="top"><metal:myfield use-macro="python:here.widget('roadTechnicalAdvice', mode='view')" /><span tal:condition="not: context/getRoadTechnicalAdvice" class="discreet" i18n:translate="content_none">None</span></td>
  </tr>
 </table>
-</div>
+</metal:road>
 
 <div metal:define-macro="location_macro" i18n:domain="urban">
  <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
