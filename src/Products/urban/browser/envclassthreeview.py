@@ -75,6 +75,9 @@ class EnvClassThreeView(LicenceView):
         sup_conditions = context.getAdditionalLegalConditions()
         return self._sortConditions(sup_conditions)
 
+    def getMacroViewName(self):
+        return 'envclassthree-macros'
+
 
 class EnvClassThreeMacros(LicenceView):
     """

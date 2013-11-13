@@ -1,4 +1,3 @@
-from Acquisition import aq_inner
 from Products.urban.browser.licenceview import LicenceView
 
 
@@ -11,8 +10,11 @@ class EnvClassOneView(LicenceView):
         self.context = context
         self.request = request
 
+    def getMacroViewName(self):
+        return 'envclassone-macros'
+
 
 class EnvClassOneMacros(LicenceView):
-	"""
-	  This manage the macros of EnvClassOne
-	"""
+    """
+      This manage the macros of EnvClassOne
+    """

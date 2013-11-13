@@ -160,8 +160,22 @@
   <browser:page
      for="Products.urban.interfaces.IGenericLicence"
      name="licencemacros"
-     class=".licenceview.LicenceMacros"
      template="templates/licencemacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="licencetabs-macros"
+     template="templates/licencetabsmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="licencemainmacro"
+     class=".licenceview.LicenceView"
+     template="templates/licenceview.pt"
      permission="zope2.View"
   />
 
@@ -169,14 +183,13 @@
      for="Products.urban.interfaces.IBuildLicence"
      name="buildlicenceview"
      class=".buildlicenceview.BuildLicenceView"
-     template="templates/licenceview.pt"
+     template="templates/buildlicenceview.pt"
      permission="zope2.View"
   />
 
   <browser:page
      name="buildlicence-macros"
      for="Products.urban.interfaces.IBuildLicence"
-     class=".buildlicenceview.BuildLicenceMacros"
      template="templates/buildlicencemacros.pt"
      permission="zope2.View"
   />
@@ -185,7 +198,7 @@
      for="Products.urban.interfaces.IParcelOutLicence"
      name="parceloutlicenceview"
      class=".parceloutlicenceview.ParcelOutLicenceView"
-     template="templates/licenceview.pt"
+     template="templates/parceloutlicenceview.pt"
      permission="zope2.View"
   />
 
@@ -201,7 +214,7 @@
      for="Products.urban.interfaces.IDeclaration"
      name="declarationview"
      class=".declarationview.DeclarationView"
-     template="templates/licenceview.pt"
+     template="templates/declarationview.pt"
      permission="zope2.View"
   />
 
@@ -217,7 +230,7 @@
      for="Products.urban.interfaces.IUrbanCertificateBase"
      name="urbancertificateoneview"
      class=".urbancertificateoneview.UrbanCertificateOneView"
-     template="templates/licenceview.pt"
+     template="templates/urbancertificateoneview.pt"
      permission="zope2.View"
   />
 
@@ -233,7 +246,7 @@
      for="Products.urban.interfaces.IUrbanCertificateBase"
      name="urbancertificatetwoview"
      class=".urbancertificatetwoview.UrbanCertificateTwoView"
-     template="templates/licenceview.pt"
+     template="templates/urbancertificatetwoview.pt"
      permission="zope2.View"
   />
 
@@ -249,7 +262,7 @@
      for="Products.urban.interfaces.IUrbanCertificateBase"
      name="notaryletterview"
      class=".notaryletterview.NotaryLetterView"
-     template="templates/licenceview.pt"
+     template="templates/notaryletterview.pt"
      permission="zope2.View"
   />
 
@@ -265,7 +278,7 @@
      for="Products.urban.interfaces.IDivision"
      name="divisionview"
      class=".divisionview.DivisionView"
-     template="templates/licenceview.pt"
+     template="templates/divisionview.pt"
      permission="zope2.View"
   />
 
@@ -281,23 +294,7 @@
      for="Products.urban.interfaces.IEnvironmentBase"
      name="envclassthreeview"
      class=".envclassthreeview.EnvClassThreeView"
-     template="templates/licenceview.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="Products.urban.interfaces.IEnvironmentLicence"
-     name="envclassoneview"
-     class=".envclassoneview.EnvClassOneView"
-     template="templates/licenceview.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     name="envclassone-macros"
-     for="Products.urban.interfaces.IEnvironmentBase"
-     class=".envclassoneview.EnvClassOneMacros"
-     template="templates/envclassonemacros.pt"
+     template="templates/envclassthreeview.pt"
      permission="zope2.View"
   />
 
@@ -309,11 +306,27 @@
      permission="zope2.View"
   />
 
+  <browser:page
+     for="Products.urban.interfaces.IEnvironmentLicence"
+     name="envclassoneview"
+     class=".envclassoneview.EnvClassOneView"
+     template="templates/envclassoneview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="envclassone-macros"
+     for="Products.urban.interfaces.IEnvironmentBase"
+     class=".envclassoneview.EnvClassOneMacros"
+     template="templates/envclassonemacros.pt"
+     permission="zope2.View"
+  />
+
    <browser:page
      for="Products.urban.interfaces.IMiscDemand"
      name="miscdemandview"
      class=".miscdemandview.MiscDemandView"
-     template="templates/licenceview.pt"
+     template="templates/miscdemandview.pt"
      permission="zope2.View"
   />
 

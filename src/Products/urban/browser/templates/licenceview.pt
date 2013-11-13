@@ -7,9 +7,9 @@
     <metal:main fill-slot="main">
       <metal:main_macro define-macro="main">
         <metal:body define-macro="body_macro"
-                      tal:define="useTabbing python: view.getLicenceConfig().getUseTabbingForDisplay();
+                      tal:define="useTabbing view/getUseTabbing;
                                   tabs view/getTabs;
-                                  usedAttributes python: view.getLicenceConfig().getUsedAttributes();">
+                                  usedAttributes view/getUsedAttributes">
 
           <metal:titleWithIcon use-macro="here/@@globalmacros/titleWithIcon" />
 
@@ -29,8 +29,8 @@
               <span>Events</span>
             </dt>
             <dd id="fieldset-urban_events">
-              <metal:events use-macro="here/@@licencemacros/urbanEventsMacro" />
-              <metal:advices use-macro="here/@@licencemacros/urbanAdvicesEventsMacro" />
+              <metal:events use-macro="here/@@licencetabs-macros/urbanEventsMacro" />
+              <metal:advices use-macro="here/@@licencetabs-macros/urbanAdvicesEventsMacro" />
             </dd>
 
           </tal:showtabbing>
@@ -45,8 +45,8 @@
             </tal:tab_loop>
 
             <fieldset><strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_events">Events</legend></strong>
-              <metal:events use-macro="here/@@licencemacros/urbanEventsMacro" />
-              <metal:advices use-macro="here/@@licencemacros/urbanAdvicesEventsMacro" />
+              <metal:events use-macro="here/@@licencetabs-macros/urbanEventsMacro" />
+              <metal:advices use-macro="here/@@licencetabs-macros/urbanAdvicesEventsMacro" />
             </fieldset>
           </tal:notabbing>
 

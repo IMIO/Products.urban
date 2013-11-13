@@ -3,6 +3,7 @@ from Products.urban.browser.urbancertificatebaseview import UrbanCertificateBase
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
+
 class UrbanCertificateTwoView(UrbanCertificateBaseView):
     """
       This manage the view of UrbanCertificateTwo
@@ -31,6 +32,10 @@ class UrbanCertificateTwoView(UrbanCertificateBaseView):
             #defined on the licence even if no data have been entered
             inquiries.append(context)
         return inquiries
+
+    def getMacroViewName(self):
+        return 'urbancertificatetwo-macros'
+
 
 class UrbanCertificateTwoMacros(UrbanCertificateBaseView):
     """

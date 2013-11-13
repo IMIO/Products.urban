@@ -32,8 +32,5 @@ class BuildLicenceView(LicenceView):
             inquiries.append(context)
         return inquiries
 
-
-class BuildLicenceMacros(LicenceView):
-    """
-      This manage the macros of BuildLicence
-    """
+    def getMacroViewName(self):
+        return 'buildlicence-macros'

@@ -1,7 +1,7 @@
-from Acquisition import aq_inner
 from Products.urban.browser.licenceview import LicenceView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
+
 
 class DivisionView(LicenceView):
     """
@@ -18,6 +18,10 @@ class DivisionView(LicenceView):
             plone_utils.addPortalMessage(_('warning_add_a_proprietary'), type="warning")
         if self.hasOutdatedParcels():
             plone_utils.addPortalMessage(_('warning_outdated_parcel'), type="warning")
+
+    def getMacroViewName(self):
+        return 'division-macros'
+
 
 class DivisionMacros(LicenceView):
     """

@@ -1,3 +1,7 @@
+<metal:inquiry define-macro="investigation_and_advices_macro" i18n:domain="urban">
+    <div metal:use-macro="here/@@licencetabs-macros/investigation_and_advices_macro" />
+</metal:inquiry>
+
 <div metal:define-macro="description_macro" i18n:domain="urban">
  <table cellspacing=0 cellpadding=0 width=100%>
  <tr>

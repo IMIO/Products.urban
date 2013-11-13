@@ -1,7 +1,7 @@
-from Acquisition import aq_inner
 from Products.urban.browser.urbancertificatebaseview import UrbanCertificateBaseView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
+
 
 class UrbanCertificateOneView(UrbanCertificateBaseView):
     """
@@ -18,6 +18,10 @@ class UrbanCertificateOneView(UrbanCertificateBaseView):
             plone_utils.addPortalMessage(_('warning_add_an_applicant'), type="warning")
         if self.hasOutdatedParcels():
             plone_utils.addPortalMessage(_('warning_outdated_parcel'), type="warning")
+
+    def getMacroViewName(self):
+        return 'urbancertificateone-macros'
+
 
 class UrbanCertificateOneMacros(UrbanCertificateBaseView):
     """

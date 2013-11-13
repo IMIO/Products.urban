@@ -33,6 +33,13 @@ class LicenceView(BrowserView):
         context = aq_inner(self.context)
         return context.restrictedTraverse('@@plone_portal_state/member')()
 
+    def getLicenceMainTemplateMacro(self):
+        """
+        """
+        context = aq_inner(self.context)
+        main_template_macro = context.unrestrictedTraverse('licencemainmacro/main')
+        return main_template_macro
+
     def getUrbanEventTypes(self):
         licence = aq_inner(self.context)
         config_id = licence.portal_type.lower()
@@ -101,22 +108,22 @@ class LicenceView(BrowserView):
 
     def getTabMacro(self, tab):
         context = aq_inner(self.context)
-        portal_type = context.portal_type.lower()
         macro_name = '%s_macro' % tab
-        # try to find the macro in the macro specifical to the licence
-        localmacros_view = '@@%s-macros' % portal_type
-        try:
-            macro = context.unrestrictedTraverse('%s/%s' % (localmacros_view, macro_name))
-        except:
-            macro = None
-        # else we use the default one
-        if not macro:
-            globalmacros_view = '@@licencemacros'
-            macro = context.unrestrictedTraverse('%s/%s' % (globalmacros_view, macro_name))
+        macros_view = self.getMacroViewName()
+        macro = context.unrestrictedTraverse('%s/%s' % (macros_view, macro_name))
         return macro
+
+    def getMacroViewName(self):
+        return 'licencetabs-macros'
 
     def getTabs(self):
         return self.getLicenceConfig().getActiveTabs()
+
+    def getUseTabbing(self):
+        return self.getLicenceConfig().getUseTabbingForDisplay()
+
+    def getUsedAttributes(self):
+        return self.getLicenceConfig().getUsedAttributes()
 
     def hasOutdatedParcels(self):
         context = aq_inner(self.context)
@@ -180,9 +187,3 @@ class LicenceView(BrowserView):
                 'url': inquiry_event and inquiry_event[0].absolute_url() or None,
             })
         return inquirydates
-
-
-class LicenceMacros(BrowserView):
-    """
-      This manage the macros of BuildLicence
-    """
