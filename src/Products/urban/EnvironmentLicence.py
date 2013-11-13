@@ -25,7 +25,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.urban.utils import setOptionalAttributes
 
-optional_fields =['areaDescriptionText', 'hasConfidentialData', 'isTemporaryProject','isMobileProject']
+optional_fields =['areaDescriptionText', 'hasConfidentialData', 'isTemporaryProject', 'isEssayProject', 'isMobileProject']
 ##/code-section module-header
 
 schema = Schema((
@@ -83,7 +83,6 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
-
 ),
 )
 

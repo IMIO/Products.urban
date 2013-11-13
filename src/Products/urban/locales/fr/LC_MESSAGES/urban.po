@@ -1391,6 +1391,9 @@ msgstr "Numérotation des divisions"
 msgid "urban_label_EnvClassThreeNumerotation"
 msgstr "Numérotation des déclarations environnementales"
 
+msgid "urban_label_isEssayProject"
+msgstr "Le projet est d'essai"
+
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"

@@ -175,6 +175,25 @@ class TestEnvClassOneInstance(unittest.TestCase):
         contents = self.browser.contents
         self.assertTrue("Le projet est temporaire" in contents)
 
+    def test_envclassone_has_attribute_isEssayProject(self):
+        self.assertTrue(hasattr(self.licence, 'isEssayProject'))
+
+    def test_envclassone_isEssayProject_is_visible(self):
+        self.browser.open(self.licence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("isEssayProject" in contents)
+
+    def test_envclassone_isEssayProject_is_translated(self):
+        self.browser.open(self.licence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("Le projet est d'essai" in contents)
+
+    def test_envclassone_isEssayProject_is_visible_in_edit(self):
+        edit_url = '{}/edit'.format(self.licence.absolute_url())
+        self.browser.open(edit_url)
+        contents = self.browser.contents
+        self.assertTrue("isEssayProject" in contents)
+
     def test_envclassone_has_attribute_isMobileProject(self):
         self.assertTrue(hasattr(self.licence, 'isMobileProject'))
 
