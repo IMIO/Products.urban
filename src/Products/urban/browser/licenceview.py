@@ -209,3 +209,6 @@ class LicenceView(BrowserView):
 
     def getLocationFields(self):
         return self.getSchemataFields(schemata='urban_location')
+
+    def getInquiryFields(self):
+        return self.getSchemataFields(schemata='urban_investigation_and_advices')

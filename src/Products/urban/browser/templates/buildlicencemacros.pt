@@ -1,7 +1,3 @@
-<metal:inquiry define-macro="investigation_and_advices_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/investigation_and_advices_macro" />
-</metal:inquiry>
-
 <metal:description define-macro="description_macro" i18n:domain="urban">
  <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
 
@@ -100,3 +96,8 @@
     <metal:parent_call use-macro="here/@@licencetabs-macros/peb_macro">
     </metal:parent_call>
 </div>
+
+<metal:inquiry define-macro="investigation_and_advices_macro" i18n:domain="urban">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/investigation_and_advices_macro" />
+</metal:inquiry>
+
