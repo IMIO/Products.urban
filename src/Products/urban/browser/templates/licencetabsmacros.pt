@@ -69,15 +69,73 @@
 
 
 <div metal:define-macro="road_macro" i18n:domain="urban">
+    <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+        <tr tal:repeat="fieldname view/getRoadFields">
+            <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
+            <td width="2%"></td>
+            <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" /></td>
+        </tr>
+    </table>
 </div>
 
 
 <div metal:define-macro="location_macro" i18n:domain="urban">
+    <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+           tal:define="exclude python: ['isInPCA', 'pca', 'isInSubdivision', 'parcellings', 'subdivisionDetails']" >
+
+        <tr tal:repeat="fieldname view/getLocationFields">
+
+            <tal:normal_field condition="python: fieldname not in exclude">
+                <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
+                <td width="2%"></td>
+                <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" /></td>
+            </tal:normal_field>
+
+            <tal:subdivision condition="python: fieldname == 'isInSubdivision'">
+                <td valign="top"><b><span i18n:translate="urban_label_isInSubdivision">In subdivision?</span>:</b></td>
+                <td width="2%"></td>
+                <td width="49%" valign="top" valign="top" tal:define="isInSubdivision context/getIsInSubdivision">
+                    <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='view')" />
+                    <tal:isInSubdivision condition="isInSubdivision">
+                        <br />
+                        <metal:myfield use-macro="python:here.widget('parcellings', mode='view')" />
+                        <br />
+                        <tal:block replace="structure context/getSubdivisionDetails" />
+                    </tal:isInSubdivision>
+                </td>
+            </tal:subdivision>
+
+            <tal:pca condition="python: fieldname == 'isInPCA'">
+                <td valign="top"><b><span i18n:translate="urban_label_isInPCA">In PCA?</span>:</b></td>
+                <td width="2%"></td>
+                <td valign="top" tal:define="isInPCA context/getIsInPCA">
+                    <metal:myfield use-macro="python:here.widget('isInPCA', mode='view')" />
+                    <tal:isInPCA condition="isInPCA">
+                        <br />
+                        <metal:myfield use-macro="python:here.widget('pca', mode='view')" />
+                    </tal:isInPCA>
+                </td>
+            </tal:pca>
+
+        </tr>
+    </table>
+
+    <fieldset tal:condition="useTabbing"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
+        <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
+    </fieldset>
 </div>
 
 
 <div metal:define-macro="peb_macro" i18n:domain="urban">
+    <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+        <tr tal:repeat="fieldname view/getPebFields">
+            <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
+            <td width="2%"></td>
+            <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" /></td>
+        </tr>
+    </table>
 </div>
+
 
 <div metal:define-macro="investigation_and_advices_macro" i18n:domain="urban"
      tal:define="ctype python: context.portal_types.getTypeInfo('Inquiry');
@@ -86,7 +144,7 @@
     <fieldset tal:repeat="inquiry inquiries">
         <legend>
             <span class="contenttype-inquiry" i18n:translate="inquiry_title_and_number">
-                Inquiry 
+                Inquiry
                 <span i18n:name="number" tal:content="repeat/inquiry/number"></span>
             </span>
         </legend>
@@ -191,22 +249,22 @@
                                             </a>
                                         </td>
                                         <td tal:define="eventDate opinion/getEventDate">
-                                            <span class="#" 
+                                            <span class="#"
                                                   tal:attributes="class python: eventDate and 'plain' or 'discreet'"
-                                                  tal:content="python: eventDate and tool.formatDate(eventDate, translatemonth=False) or 'content_none'" 
+                                                  tal:content="python: eventDate and tool.formatDate(eventDate, translatemonth=False) or 'content_none'"
                                                   i18n:translate="">None
                                             </span>
                                         </td>
                                         <td tal:define="receiptDate opinion/getReceiptDate">
-                                            <span class="#" 
-                                                  tal:attributes="class python: receiptDate and 'plain' or 'discreet'" 
-                                                  tal:content="python: receiptDate and tool.formatDate(receiptDate, translatemonth=False) or 'content_none'" 
+                                            <span class="#"
+                                                  tal:attributes="class python: receiptDate and 'plain' or 'discreet'"
+                                                  tal:content="python: receiptDate and tool.formatDate(receiptDate, translatemonth=False) or 'content_none'"
                                                   i18n:translate="">None
                                             </span>
                                         </td>
                                         <td tal:define="adviceAgreementLevel opinion/getAdviceAgreementLevel">
                                             <span class="#"
-                                                  tal:attributes="class python: adviceAgreementLevel and 'plain' or 'discreet'" 
+                                                  tal:attributes="class python: adviceAgreementLevel and 'plain' or 'discreet'"
                                                   tal:content="python: adviceAgreementLevel and adviceAgreementLevel or 'content_none'"
                                                   i18n:translate="">None
                                             </span>
@@ -238,9 +296,9 @@
            <tr>
                <td valign="top"><b><span i18n:translate="urban_linked_urbaneventinquiry">Linked urban event inquiry</span>:</b></td>
                <td width="2%"></td>
-               <td valign="top" 
+               <td valign="top"
                    tal:define="linkedUrbanEventInquiry python: inquiry.getLinkedUrbanEventInquiry();">
-                   <a tal:condition="python: linkedUrbanEventInquiry" 
+                   <a tal:condition="python: linkedUrbanEventInquiry"
                       href="#" tal:attributes="href python:linkedUrbanEventInquiry.absolute_url()"
                       i18n:translate="urban_link_to_the_linked_urbaneventinquiry">
                           Click here to access the linked urban event inquiry
@@ -254,7 +312,7 @@
     </fieldset>
     <br />
     <form tal:condition="python: member.has_permission('urban: Add Inquiry', context)"
-          i18n:domain="urban" name="quickAdd" 
+          i18n:domain="urban" name="quickAdd"
           tal:attributes="action python: context.absolute_url() + '/createObject'"
           action="createObject" method="post">
         <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />

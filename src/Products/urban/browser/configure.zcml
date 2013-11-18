@@ -160,6 +160,7 @@
   <browser:page
      for="Products.urban.interfaces.IGenericLicence"
      name="licencetabs-macros"
+     class=".licenceview.LicenceView"
      template="templates/licencetabsmacros.pt"
      permission="zope2.View"
   />

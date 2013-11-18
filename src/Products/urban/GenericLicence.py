@@ -45,32 +45,37 @@ from Products.urban.interfaces import IUrbanCertificateBase
 
 slave_fields_subdivision = (
     # if in subdivision, display a textarea the fill some details
-    {'name': 'subdivisionDetails',
-     'action': 'show',
-     'hide_values': (True, ),
+    {
+        'name': 'subdivisionDetails',
+        'action': 'show',
+        'hide_values': (True, ),
     },
-    {'name': 'parcellings',
-     'action': 'show',
-     'hide_values': (True, ),
+    {
+        'name': 'parcellings',
+        'action': 'show',
+        'hide_values': (True, ),
     },
 )
 
-slave_fields_pca= (
+slave_fields_pca = (
     # if in a pca, display a selectbox
-    {'name': 'pca',
-     'action': 'show',
-     'hide_values': (True, ),
+    {
+        'name': 'pca',
+        'action': 'show',
+        'hide_values': (True, ),
     },
 )
 
-optional_fields = ['subdivisionDetails','missingParts','missingPartsDetails','folderZoneDetails','folderZone',
-                   'derogationDetails','isInPCA','annoncedDelayDetails','roadType','roadCoating','roadEquipments',
-                   'investigationDetails','investigationReasons','isInSubdivision', 'solicitLocationOpinionsTo',
-                   'folderCategoryTownship','protectedBuilding','protectedBuildingDetails', 'folderCategory',
-                   'pash','pashDetails','catchmentArea', 'catchmentAreaDetails','equipmentAndRoadRequirements','technicalRemarks',
-                   'pca','SSC','sscDetails','RCU','rcuDetails','floodingLevel','floodingLevelDetails','solicitRoadOpinionsTo',
-                   'areParcelsVerified','locationFloodingLevel', 'licenceSubject', 'referenceDGATLP', 'locationTechnicalRemarks',
-                   'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails']
+optional_fields = [
+    'subdivisionDetails', 'missingParts', 'missingPartsDetails', 'folderZoneDetails', 'folderZone',
+    'derogationDetails', 'isInPCA', 'annoncedDelayDetails', 'roadType', 'roadCoating', 'roadEquipments',
+    'investigationDetails', 'investigationReasons', 'isInSubdivision', 'solicitLocationOpinionsTo',
+    'folderCategoryTownship', 'protectedBuilding', 'protectedBuildingDetails', 'folderCategory',
+    'pash', 'pashDetails', 'catchmentArea', 'catchmentAreaDetails', 'equipmentAndRoadRequirements', 'technicalRemarks',
+    'SSC', 'sscDetails', 'RCU', 'rcuDetails', 'floodingLevel', 'floodingLevelDetails', 'solicitRoadOpinionsTo',
+    'areParcelsVerified', 'locationFloodingLevel', 'licenceSubject', 'referenceDGATLP', 'locationTechnicalRemarks',
+    'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails'
+]
 ##/code-section module-header
 
 schema = Schema((

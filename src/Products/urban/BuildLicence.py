@@ -431,6 +431,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('investigationOralReclamationNumber', after='solicitOpinionsTo')
     schema.moveField('investigationWriteReclamationNumber', after='investigationOralReclamationNumber')
     schema.moveField('requirementFromFD', after='locationDgrneUnderground')
+    schema.moveField('townshipCouncilFolder', after='roadCoating')
     return schema
 
 finalizeSchema(BuildLicence_schema)

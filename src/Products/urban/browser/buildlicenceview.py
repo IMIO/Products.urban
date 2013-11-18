@@ -34,3 +34,6 @@ class BuildLicenceView(LicenceView):
 
     def getMacroViewName(self):
         return 'buildlicence-macros'
+
+    def getPebFields(self):
+        return self.getSchemataFields(schemata='urban_peb')

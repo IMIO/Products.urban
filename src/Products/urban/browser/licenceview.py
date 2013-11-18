@@ -108,9 +108,9 @@ class LicenceView(BrowserView):
 
     def getTabMacro(self, tab):
         context = aq_inner(self.context)
-        macro_name = '%s_macro' % tab
+        macro_name = '{}_macro'.format(tab)
         macros_view = self.getMacroViewName()
-        macro = context.unrestrictedTraverse('%s/%s' % (macros_view, macro_name))
+        macro = context.unrestrictedTraverse('{view}/{macro}'.format(view=macros_view, macro=macro_name))
         return macro
 
     def getMacroViewName(self):
@@ -187,3 +187,25 @@ class LicenceView(BrowserView):
                 'url': inquiry_event and inquiry_event[0].absolute_url() or None,
             })
         return inquirydates
+
+    def getSchemataFields(self, schemata=''):
+        def isDisplayable(field):
+            if hasattr(field, 'optional') and field.optional and field.getName() not in displayed_fields:
+                return False
+            return True
+
+        displayed_fields = self.getUsedAttributes()
+        context = aq_inner(self.context)
+        schema = context.__class__.schema
+        fields = [field.getName() for field in schema.getSchemataFields(schemata) if isDisplayable(field)]
+
+        return fields
+
+    def getDescriptionFields(self):
+        return self.getSchemataFields(schemata='urban_description')
+
+    def getRoadFields(self):
+        return self.getSchemataFields(schemata='urban_road')
+
+    def getLocationFields(self):
+        return self.getSchemataFields(schemata='urban_location')
