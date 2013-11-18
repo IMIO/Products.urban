@@ -70,11 +70,16 @@
 
 <div metal:define-macro="road_macro" i18n:domain="urban">
     <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
-        <tr tal:repeat="fieldname view/getRoadFields">
-            <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
-            <td width="2%"></td>
-            <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" /></td>
-        </tr>
+        <tal:loop repeat="field view/getRoadFields">
+            <tr tal:define="fieldname field/getName;
+                            nullvalue python: field.get(context) == ''">
+                <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
+                <td width="2%"></td>
+                <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
+                    <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+                </td>
+            </tr>
+        </tal:loop>
     </table>
 </div>
 
@@ -83,41 +88,45 @@
     <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
            tal:define="exclude python: ['isInPCA', 'pca', 'isInSubdivision', 'parcellings', 'subdivisionDetails']" >
 
-        <tr tal:repeat="fieldname view/getLocationFields">
+        <tal:loop repeat="field view/getLocationFields">
+            <tr tal:define="fieldname field/getName;
+                            nullvalue python: field.get(context) == ''">
 
-            <tal:normal_field condition="python: fieldname not in exclude">
-                <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
-                <td width="2%"></td>
-                <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" /></td>
-            </tal:normal_field>
+                <tal:normal_field condition="python: fieldname not in exclude">
+                    <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
+                    <td width="2%"></td>
+                    <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
+                        <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+                    </td>
+                </tal:normal_field>
 
-            <tal:subdivision condition="python: fieldname == 'isInSubdivision'">
-                <td valign="top"><b><span i18n:translate="urban_label_isInSubdivision">In subdivision?</span>:</b></td>
-                <td width="2%"></td>
-                <td width="49%" valign="top" valign="top" tal:define="isInSubdivision context/getIsInSubdivision">
-                    <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='view')" />
-                    <tal:isInSubdivision condition="isInSubdivision">
-                        <br />
-                        <metal:myfield use-macro="python:here.widget('parcellings', mode='view')" />
-                        <br />
-                        <tal:block replace="structure context/getSubdivisionDetails" />
-                    </tal:isInSubdivision>
-                </td>
-            </tal:subdivision>
+                <tal:subdivision condition="python: fieldname == 'isInSubdivision'">
+                    <td valign="top"><b><span i18n:translate="urban_label_isInSubdivision">In subdivision?</span>:</b></td>
+                    <td width="2%"></td>
+                    <td width="49%" valign="top" valign="top" tal:define="isInSubdivision context/getIsInSubdivision">
+                        <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='view')" />
+                        <tal:isInSubdivision condition="isInSubdivision">
+                            <br />
+                            <metal:myfield use-macro="python:here.widget('parcellings', mode='view')" />
+                            <br />
+                            <tal:block replace="structure context/getSubdivisionDetails" />
+                        </tal:isInSubdivision>
+                    </td>
+                </tal:subdivision>
 
-            <tal:pca condition="python: fieldname == 'isInPCA'">
-                <td valign="top"><b><span i18n:translate="urban_label_isInPCA">In PCA?</span>:</b></td>
-                <td width="2%"></td>
-                <td valign="top" tal:define="isInPCA context/getIsInPCA">
-                    <metal:myfield use-macro="python:here.widget('isInPCA', mode='view')" />
-                    <tal:isInPCA condition="isInPCA">
-                        <br />
-                        <metal:myfield use-macro="python:here.widget('pca', mode='view')" />
-                    </tal:isInPCA>
-                </td>
-            </tal:pca>
-
-        </tr>
+                <tal:pca condition="python: fieldname == 'isInPCA'">
+                    <td valign="top"><b><span i18n:translate="urban_label_isInPCA">In PCA?</span>:</b></td>
+                    <td width="2%"></td>
+                    <td valign="top" tal:define="isInPCA context/getIsInPCA">
+                        <metal:myfield use-macro="python:here.widget('isInPCA', mode='view')" />
+                        <tal:isInPCA condition="isInPCA">
+                            <br />
+                            <metal:myfield use-macro="python:here.widget('pca', mode='view')" />
+                        </tal:isInPCA>
+                    </td>
+                </tal:pca>
+            </tr>
+        </tal:loop>
     </table>
 
     <fieldset tal:condition="useTabbing"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
@@ -128,11 +137,16 @@
 
 <div metal:define-macro="peb_macro" i18n:domain="urban">
     <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
-        <tr tal:repeat="fieldname view/getPebFields">
-            <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
-            <td width="2%"></td>
-            <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" /></td>
-        </tr>
+        <tal:loop repeat="field view/getPebFields">
+            <tr tal:define="fieldname field/getName;
+                            nullvalue python: field.get(context) == ''">
+                <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
+                <td width="2%"></td>
+                <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
+                    <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+                </td>
+            </tr>
+        </tal:loop>
     </table>
 </div>
 

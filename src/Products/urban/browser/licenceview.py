@@ -197,7 +197,7 @@ class LicenceView(BrowserView):
         displayed_fields = self.getUsedAttributes()
         context = aq_inner(self.context)
         schema = context.__class__.schema
-        fields = [field.getName() for field in schema.getSchemataFields(schemata) if isDisplayable(field)]
+        fields = [field for field in schema.getSchemataFields(schemata) if isDisplayable(field)]
 
         return fields
 
