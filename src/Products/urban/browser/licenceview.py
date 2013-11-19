@@ -188,9 +188,11 @@ class LicenceView(BrowserView):
             })
         return inquirydates
 
-    def getSchemataFields(self, schemata=''):
+    def getSchemataFields(self, schemata='', exclude=[]):
         def isDisplayable(field):
             if hasattr(field, 'optional') and field.optional and field.getName() not in displayed_fields:
+                return False
+            if field.getName() in exclude:
                 return False
             return True
 
@@ -201,14 +203,14 @@ class LicenceView(BrowserView):
 
         return fields
 
-    def getDescriptionFields(self):
-        return self.getSchemataFields(schemata='urban_description')
+    def getDescriptionFields(self, exclude=[]):
+        return self.getSchemataFields('urban_description', exclude)
 
-    def getRoadFields(self):
-        return self.getSchemataFields(schemata='urban_road')
+    def getRoadFields(self, exclude=[]):
+        return self.getSchemataFields('urban_road', exclude)
 
-    def getLocationFields(self):
-        return self.getSchemataFields(schemata='urban_location')
+    def getLocationFields(self, exclude=[]):
+        return self.getSchemataFields('urban_location', exclude)
 
-    def getInquiryFields(self):
-        return self.getSchemataFields(schemata='urban_investigation_and_advices')
+    def getInquiryFields(self, exclude=[]):
+        return self.getSchemataFields('urban_investigation_and_advices', exclude)

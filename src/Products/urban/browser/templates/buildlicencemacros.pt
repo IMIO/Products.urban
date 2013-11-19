@@ -17,15 +17,15 @@
     </metal:parent_call>
 </metal:road>
 
-<div metal:define-macro="location_macro" i18n:domain="urban">
+<metal:location define-macro="location_macro" i18n:domain="urban">
     <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro">
     </metal:parent_call>
-</div>
+</metal:location>
 
-<div metal:define-macro="peb_macro" i18n:domain="urban">
+<metal:peb define-macro="peb_macro" i18n:domain="urban">
     <metal:parent_call use-macro="here/@@licencetabs-macros/peb_macro">
     </metal:parent_call>
-</div>
+</metal:peb>
 
 <metal:inquiry define-macro="investigation_and_advices_macro" i18n:domain="urban">
     <metal:parent_call use-macro="here/@@licencetabs-macros/investigation_and_advices_macro" />

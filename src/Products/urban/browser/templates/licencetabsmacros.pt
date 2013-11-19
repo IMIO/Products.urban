@@ -52,18 +52,25 @@
             <td valign="top" width=50%>
                 <fieldset><legend i18n:translate="legend_details">Details</legend>
                     <table metal:define-slot="detail_slot" class="no-style-table" cellspacing=0 cellpadding=0 width=100%
-                           tal:define="default_exclude python: ['workLocations', 'architects', 'geometricians', 'notaries', 'foldermanagers'];
-                                       exclude exclude|default_exclude">
-                        <tal:loop repeat="field view/getDescriptionFields">
-                            <tr tal:define="fieldname field/getName;
-                                            nullvalue python: field.get(context) == ''">
+                           tal:define="default_custom python: ['foldermanagers'];
+                                       default_exclude python: ['title', 'workLocations', 'architects', 'geometricians', 'notaries'];
+                                       custom custom | default_custom;
+                                       exclude exclude | default_exclude">
 
-                                <tal:normal_field condition="python: fieldname not in exclude">
+                        <tal:loop repeat="field python: view.getDescriptionFields(exclude)">
+                            <tr tal:define="fieldname field/getName;
+                                            nullvalue python: field.get(context) == '';
+                                            simpletext python: field.type == 'text' and getattr(field, 'default_content_type', '') == 'text/plain'">
+
+                                <tal:normal_field condition="python: fieldname not in custom">
                                     <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
                                     <td width="2%"></td>
-                                    <td valign="top">
+                                    <td valign="top" tal:condition="not: simpletext">
                                         <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
                                         <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+                                    </td>
+                                    <td valign="top" tal:condition="simpletext">
+                                        <tal:text replace="structure python: field.get(context)" />
                                     </td>
                                 </tal:normal_field>
 
@@ -73,8 +80,8 @@
                                     <td valign="top"><div metal:use-macro="here/@@licencemacros/urbanFolderManagerMacro" /></td>
                                 </tal:foldermanagers>
 
-                                <metal:special_fields define-slot="special_fields">
-                                </metal:special_fields>
+                                <metal:custom_fields define-slot="custom_fields">
+                                </metal:custom_fields>
 
                             </tr>
                         </tal:loop>
@@ -102,11 +109,16 @@
     <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
         <tal:loop repeat="field view/getRoadFields">
             <tr tal:define="fieldname field/getName;
-                            nullvalue python: field.get(context) == ''">
+                            nullvalue python: field.get(context) == '';
+                            simpletext python: field.type == 'text' and getattr(field, 'default_content_type', '') == 'text/plain'">
                 <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
                 <td width="2%"></td>
-                <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
+                <td valign="top" tal:condition="not: simpletext">
+                    <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
                     <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+                </td>
+                <td valign="top" tal:condition="simpletext">
+                    <tal:text replace="structure python: field.get(context)" />
                 </td>
             </tr>
         </tal:loop>
@@ -120,14 +132,18 @@
 
         <tal:loop repeat="field view/getLocationFields">
             <tr tal:define="fieldname field/getName;
-                            nullvalue python: field.get(context) == ''">
+                            nullvalue python: field.get(context) == '';
+                            simpletext python: field.type == 'text' and getattr(field, 'default_content_type', '') == 'text/plain'">
 
                 <tal:normal_field condition="python: fieldname not in exclude">
                     <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
                     <td width="2%"></td>
-                    <td valign="top">
+                    <td valign="top" tal:condition="not: simpletext">
                         <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
                         <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+                    </td>
+                    <td valign="top" tal:condition="simpletext">
+                        <tal:text replace="structure python: field.get(context)" />
                     </td>
                 </tal:normal_field>
 
