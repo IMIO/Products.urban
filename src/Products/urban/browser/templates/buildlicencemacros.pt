@@ -1,85 +1,15 @@
 <metal:description define-macro="description_macro" i18n:domain="urban">
- <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
 
-  <fieldset metal:fill-slot="representatives"><legend i18n:translate="urban_label_architects">Architect(s)</legend>
-      <div metal:use-macro="here/@@licencemacros/urbanArchitectsMacro" />
-  </fieldset>
+    <!--tal:vars define="exclude python:[]"-->
+        <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
 
-  <td metal:fill-slot="detail_slot" valign="top" width=50%>
-   <fieldset><legend i18n:translate="legend_details">Details</legend>
-    <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
-     <tr tal:condition="python: 'licenceSubject' in usedAttributes">
-      <td valign="top"><b><span i18n:translate="urban_label_licenceSubject">Licence subject</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('licenceSubject', mode='view')" /></td>
-     </tr>
-     <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_reference">Reference</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('reference', mode='view')" /></td>
-     </tr>
-     <tr tal:condition="python: 'referenceDGATLP' in usedAttributes">
-      <td valign="top"><b><span i18n:translate="urban_label_referenceDGATLP">DGATLP reference</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('referenceDGATLP', mode='view')" /><span tal:condition="not: context/getReferenceDGATLP" class="discreet" i18n:translate="content_none">None</span></td>
-     </tr>
-     <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_foldermanagers">Treating agent</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><div metal:use-macro="here/@@licencemacros/urbanFolderManagerMacro" /></td>
-     </tr>
-     <tr tal:condition="python: 'folderCategory' in usedAttributes">
-      <td valign="top"><b><span i18n:translate="urban_label_folderCategory">Folder category</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('folderCategory', mode='view')" /></td>
-     </tr>
-     <tr tal:condition="python: 'workType' in usedAttributes">
-      <td valign="top"><b><span i18n:translate="urban_label_workType">Work type</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('workType', mode='view')" /></td>
-     </tr>
-     <tr tal:condition="python: 'missingParts' in usedAttributes">
-      <td valign="top"><b><span i18n:translate="urban_label_missingParts">Missing parts</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('missingParts', mode='view')" /></td>
-     </tr>
-     <tr tal:condition="python: 'missingPartsDetails' in usedAttributes">
-      <td valign="top"><b><span i18n:translate="urban_label_missingPartsDetails">Missing parts details</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><tal:block replace="structure context/getMissingPartsDetails" /><span tal:condition="not: context/getMissingPartsDetails" class="discreet" i18n:translate="content_none">None</span></td>
-     </tr>
-     <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_annoncedDelay">Deadline delay</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('annoncedDelay', mode='view')" /></td>
-     </tr>
-     <tr tal:condition="python: 'annoncedDelayDetails' in usedAttributes">
-      <td valign="top"><b><span i18n:translate="urban_label_annoncedDelayDetails">Deadline delay details</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top" tal:define="annoncedDelayDetails context/getAnnoncedDelayDetails"><tal:block replace="structure context/getAnnoncedDelayDetails" /><span tal:condition="not: annoncedDelayDetails" class="discreet" i18n:translate="content_none">None</span></td>
-     </tr>
-     <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_impactStudy">Impact study</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('impactStudy', mode='view')" /></td>
-     </tr>
-     <!--tr>
-      <td valign="top"><b><span i18n:translate="urban_label_usage">Usage</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top"><metal:myfield use-macro="python:here.widget('usage', mode='view')" /></td>
-     </tr-->
-     <tr>
-      <td valign="top"><b><span i18n:translate="urban_label_description">Description</span>:</b></td>
-      <td width="2%"></td>
-      <td valign="top">
-       <metal:myfield use-macro="python:here.widget('description', mode='view')" />
-       <span tal:condition="not: context/Description" class="discreet" i18n:translate="content_none">None</span>
-      </td>
-     </tr>
-    </table>
-   </fieldset>
-  </td>
- </metal:parent_call>
+            <fieldset metal:fill-slot="representatives"><legend i18n:translate="urban_label_architects">Architect(s)</legend>
+                <div metal:use-macro="here/@@licencemacros/urbanArchitectsMacro" />
+            </fieldset>
+
+        </metal:parent_call>
+    <!--/tal:vars-->
+
 </metal:description>
 
 <metal:road define-macro="road_macro" i18n:domain="urban">

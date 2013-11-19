@@ -49,7 +49,37 @@
             </td>
         </tr>
         <tr>
-            <td metal:define-slot="detail_slot">
+            <td valign="top" width=50%>
+                <fieldset><legend i18n:translate="legend_details">Details</legend>
+                    <table metal:define-slot="detail_slot" class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+                           tal:define="default_exclude python: ['workLocations', 'architects', 'geometricians', 'notaries', 'foldermanagers'];
+                                       exclude exclude|default_exclude">
+                        <tal:loop repeat="field view/getDescriptionFields">
+                            <tr tal:define="fieldname field/getName;
+                                            nullvalue python: field.get(context) == ''">
+
+                                <tal:normal_field condition="python: fieldname not in exclude">
+                                    <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
+                                    <td width="2%"></td>
+                                    <td valign="top">
+                                        <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
+                                        <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+                                    </td>
+                                </tal:normal_field>
+
+                                <tal:foldermanagers condition="python: fieldname == 'foldermanagers'">
+                                    <td valign="top"><b><span i18n:translate="urban_label_foldermanagers">Treating agent</span>:</b></td>
+                                    <td width="2%"></td>
+                                    <td valign="top"><div metal:use-macro="here/@@licencemacros/urbanFolderManagerMacro" /></td>
+                                </tal:foldermanagers>
+
+                                <metal:special_fields define-slot="special_fields">
+                                </metal:special_fields>
+
+                            </tr>
+                        </tal:loop>
+                    </table>
+                </fieldset>
             </td>
             <td width="1%"></td>
             <td metal:define-slot="address_and_parcels_slot" valign="top" width=49%>
@@ -95,7 +125,8 @@
                 <tal:normal_field condition="python: fieldname not in exclude">
                     <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
                     <td width="2%"></td>
-                    <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
+                    <td valign="top">
+                        <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
                         <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
                     </td>
                 </tal:normal_field>
