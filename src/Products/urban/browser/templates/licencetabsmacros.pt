@@ -53,7 +53,7 @@
                 <fieldset><legend i18n:translate="legend_details">Details</legend>
                     <table metal:define-slot="detail_slot" class="no-style-table" cellspacing=0 cellpadding=0 width=100%
                            tal:define="default_custom python: ['foldermanagers'];
-                                       default_exclude python: ['title', 'workLocations', 'architects', 'geometricians', 'notaries'];
+                                       default_exclude python: ['title', 'workLocations', 'architects', 'geometricians', 'notaryContact'];
                                        custom custom | default_custom;
                                        exclude exclude | default_exclude">
 
