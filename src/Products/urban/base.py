@@ -404,7 +404,7 @@ class UrbanBase(object):
         inquiryObjects = self.objectValues('Inquiry')
         #the inquiry on the licence is activated if we have a
         #investigationStart date or if we have extra Inquiry objects
-        if len(inquiryObjects) or self.getInvestigationStart():
+        if len(inquiryObjects) or (hasattr(self.schema, 'investigationStart') and self.getInvestigationStart()):
             res.append(self)
         return res + inquiryObjects
 
