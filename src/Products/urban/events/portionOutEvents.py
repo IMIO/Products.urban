@@ -1,10 +1,12 @@
 from Products.CMFCore.utils import getToolByName
 
+
 def onDelete(parcel, event):
     """
       Reindex licence of this parcel after deletion.
     """
     parcel.aq_inner.aq_parent.reindexObject(idxs=["parcelInfosIndex"])
+
 
 def setValidParcel(parcel, event):
     """
@@ -12,9 +14,19 @@ def setValidParcel(parcel, event):
      and set its "isvalidparcel" attribute accordingly.
     """
     urban_tool = getToolByName(parcel, 'portal_urban')
-    ref_names = ['division', 'section', 'radical', 'bis', 'exposant', 'puissance']
-    references = dict([(name, getattr(parcel,'get%s' % name.capitalize())()) for name in ref_names])
-    exists_in_DB = urban_tool.queryParcels(browseold=True, fuzzy=False, **references) and True or False
+    references = {
+        'division': parcel.getDivisionCode(),
+        'section': parcel.getSection(),
+        'radical': parcel.getRadical(),
+        'bis': parcel.getBis(),
+        'exposant': parcel.getExposant(),
+        'puissance': parcel.getPuissance(),
+    }
+    exists_in_DB = urban_tool.queryParcels(
+        browseold=True,
+        fuzzy=False,
+        **references
+    ) and True or False
     parcel.setIsOfficialParcel(exists_in_DB)
     if exists_in_DB:
         if not urban_tool.queryParcels(fuzzy=False, **references):
@@ -24,6 +36,7 @@ def setValidParcel(parcel, event):
     else:
         parcel.setIsOfficialParcel(False)
     parcel.reindexObject()
+
 
 def setDivisionCode(parcel, event):
     """

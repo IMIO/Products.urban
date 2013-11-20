@@ -4,6 +4,7 @@ from Products.Five import BrowserView
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 
+
 class ParcelsConsistencyView(BrowserView):
     """
       This manage methods of the view to check if urban PortionOut are consitent with the data
@@ -24,20 +25,26 @@ class ParcelsConsistencyView(BrowserView):
         portal_workflow = getToolByName(context, 'portal_workflow')
         parcelbrains = catalog(portal_type='PortionOut')
         result = {
-                    'critical_outdated_parcels' :[],
-                    'outdated_parcels' :[],
-                }
-        ref_names = ['division', 'section', 'radical', 'bis', 'exposant', 'puissance']
+            'critical_outdated_parcels': [],
+            'outdated_parcels': [],
+        }
         for brain in parcelbrains:
             parcel = brain.getObject()
             if parcel.getIsOfficialParcel() and parcel.getDivisionCode() and parcel.getSection():
-                references = dict([(name, getattr(parcel,'get%s' % name.capitalize())()) for name in ref_names])
+                references = {
+                    'division': parcel.getDivisionCode(),
+                    'section': parcel.getSection(),
+                    'radical': parcel.getRadical(),
+                    'bis': parcel.getBis(),
+                    'exposant': parcel.getExposant(),
+                    'puissance': parcel.getPuissance(),
+                }
                 outdated = not urban_tool.queryParcels(fuzzy=False, **references)
             else:
                 outdated = False
             parcel.setOutdated(outdated)
             licence = parcel.aq_inner.aq_parent
-            infos = {'parcel':brain.Title, 'licence title':licence.Title(), 'licence path': licence.absolute_url()}
+            infos = {'parcel': brain.Title, 'licence title': licence.Title(), 'licence path': licence.absolute_url()}
             if outdated or not parcel.getIsOfficialParcel():
                 if portal_workflow.getInfoFor(licence, 'review_state') == 'in_progress':
                     result['critical_outdated_parcels'].append(infos)

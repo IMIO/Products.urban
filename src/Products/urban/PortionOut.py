@@ -269,7 +269,7 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         """
         if self.getIsOfficialParcel():
             urban_tool = getToolByName(self, 'portal_urban')
-            historic = urban_tool.queryParcels(self.getDivision(), self.getSection(), self.getRadical(), self.getBis(), self.getExposant(), self.getPuissance(),
+            historic = urban_tool.queryParcels(self.getDivisionCode(), self.getSection(), self.getRadical(), self.getBis(), self.getExposant(), self.getPuissance(),
                                                historic=True, fuzzy=False, browseold=self.getOutdated())
             return historic[0]
         return None
