@@ -81,7 +81,7 @@ class ParcelHistoricRecordsView(ParcelRecordsView):
 
         parcel_infos.add(parcel.getIndexValue())
         parcels_historic = portal_urban.queryParcels(
-            parcel.getDivision(), parcel.getSection(), parcel.getRadical(), parcel.getBis(), parcel.getExposant(), parcel.getPuissance(),
+            parcel.getDivisionCode(), parcel.getSection(), parcel.getRadical(), parcel.getBis(), parcel.getExposant(), parcel.getPuissance(),
             historic=True, fuzzy=False, browseold=True
         )
         parcels_historic = parcels_historic[0]
