@@ -249,6 +249,9 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
 
     # Manually created methods
 
+    def getLastCollegeReport(self):
+        return self._getLastEvent(interfaces.ICollegeReportEvent)
+
     security.declarePublic('getAdditionalLayers')
     def getAdditionalLayers(self):
         """
