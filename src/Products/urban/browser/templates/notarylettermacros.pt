@@ -11,33 +11,7 @@
             </fieldset>
 
             <fieldset metal:fill-slot="custom_left_fieldset"><legend i18n:translate="legend_specific_features">Specific features</legend>
-                <table tal:define="specificfeatures_types python: ['', 'custom', 'township',]"
-                        class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
-                    <tal:specificfeatures repeat="subtype specificfeatures_types ">
-                        <tr tal:condition="python: '%s%specificFeatures' % (subtype, subtype and 'S' or 's') in usedAttributes"
-                            tal:define="specificfeatures python: view.getSpecificFeatures(subtype=subtype);
-                                        translation python: 'urban_label_%s%specificFeatures' % (subtype, subtype and 'S' or 's')">
-                            <td valign="top"><b><span   i18n:translate="" tal:content="translation">Specific features</span>:</b></td>
-                            <td width="2%"></td>
-                            <td tal:condition="not: specificfeatures" >
-                                <span class="discreet" i18n:translate="content_none">None</span>
-                            </td>
-                            <td tal:condition="specificfeatures">
-                                <table>
-                                    <tr tal:repeat="specificfeature specificfeatures">
-                                        <td tal:content="specificfeature">Specific feature</td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td width="2%"></td>
-                        </tr>
-                    </tal:specificfeatures>
-                    <tr tal:condition="python: 'opinionsToAskIfWorks' in usedAttributes">
-                        <td valign="top"><b><span i18n:translate="urban_label_opinionsToAskIfWorks">Opinions to ask in case of works</span>:</b></td>
-                        <td width="2%"></td>
-                        <td valign="top"><metal:myfield use-macro="python:here.widget('opinionsToAskIfWorks', mode='view')" /></td>
-                    </tr>
-                </table>
+                <metal:spf_fieldset use-macro="here/@@fielddisplay-macros/spf_fieldset" />
             </fieldset>
         </metal:parent_call>
     </tal:vars>
@@ -48,27 +22,7 @@
 <metal:road define-macro="road_macro" i18n:domain="urban">
 
     <tal:vars define="custom python:['roadSpecificFeatures'];">
-        <metal:parent_call use-macro="here/@@licencetabs-macros/road_macro">
-            <tr metal:fill-slot="custom_fields"
-                tal:condition="python: 'roadSpecificFeatures' in usedAttributes"
-                tal:define="specificfeatures python: view.getSpecificFeatures(subtype='road')">
-                <td valign="top">
-                    <b><span i18n:translate="urban_label_roadSpecificFeatures">Specific features (road)</span>:</b>
-                </td>
-                <td width="2%"></td>
-                <td tal:condition="not: specificfeatures" >
-                    <span class="discreet" i18n:translate="content_none">None</span>
-                </td>
-                <td tal:condition="specificfeatures">
-                    <table>
-                        <tr tal:repeat="specificfeature specificfeatures">
-                            <td tal:content="specificfeature">Specific feature</td>
-                        </tr>
-                    </table>
-                </td>
-                <td width="2%"></td>
-            </tr>
-        </metal:parent_call>
+        <metal:parent_call use-macro="here/@@licencetabs-macros/road_macro" />
     </tal:vars>
 
 </metal:road>
@@ -76,28 +30,8 @@
 
 <metal:location define-macro="location_macro" i18n:domain="urban">
 
-    <tal:vars define="custom python:['locationSpecificFeatures', 'isInPCA', 'pca', 'isInSubdivision', 'parcellings', 'subdivisionDetails'];">
-        <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro">
-            <tr metal:fill-slot="custom_fields"
-                tal:condition="python: 'locationSpecificFeatures' in usedAttributes"
-                tal:define="specificfeatures python: view.getSpecificFeatures(subtype='location')">
-                <td valign="top">
-                    <b><span i18n:translate="urban_label_locationSpecificFeatures">Specific features (location)</span>:</b>
-                </td>
-                <td width="2%"></td>
-                <td tal:condition="not: specificfeatures" >
-                    <span class="discreet" i18n:translate="content_none">None</span>
-                </td>
-                <td tal:condition="specificfeatures">
-                    <table>
-                        <tr tal:repeat="specificfeature specificfeatures">
-                            <td tal:content="specificfeature">Specific feature</td>
-                        </tr>
-                    </table>
-                </td>
-                <td width="2%"></td>
-            </tr>
-        </metal:parent_call>
+    <tal:vars define="custom python:['locationSpecificFeatures'];">
+        <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro" />
     </tal:vars>
 
 </metal:location>

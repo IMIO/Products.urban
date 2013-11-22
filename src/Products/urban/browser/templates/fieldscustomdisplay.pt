@@ -31,3 +31,59 @@
         </tal:isInPCA>
     </td>
 </metal:pca>
+
+
+<metal:spf_display define-macro="spf_display">
+    <td width="2%"></td>
+    <td tal:condition="not: specificfeatures" >
+        <span class="discreet" i18n:translate="content_none">None</span>
+    </td>
+    <td tal:condition="specificfeatures">
+        <table>
+            <tr tal:repeat="specificfeature specificfeatures">
+                <td tal:content="specificfeature">Specific feature</td>
+            </tr>
+        </table>
+    </td>
+    <td width="2%"></td>
+</metal:spf_display>
+
+
+<metal:road_spf define-macro="roadSpecificFeatures">
+    <tal:vars define="specificfeatures python: view.getSpecificFeatures(subtype='road')">
+        <td valign="top">
+            <b><span i18n:translate="urban_label_roadSpecificFeatures">Specific features (road)</span>:</b>
+        </td>
+        <metal:spf_display use-macro="here/@@fielddisplay-macros/spf_display" />
+    </tal:vars>
+</metal:road_spf>
+
+
+<metal:location_spf define-macro="locationSpecificFeatures">
+    <tal:vars define="specificfeatures python: view.getSpecificFeatures(subtype='location')">
+        <td valign="top">
+            <b><span i18n:translate="urban_label_locationSpecificFeatures">Specific features (location)</span>:</b>
+        </td>
+        <metal:spf_display use-macro="here/@@fielddisplay-macros/spf_display" />
+    </tal:vars>
+</metal:location_spf>
+
+
+<metal:spf_fieldset define-macro="spf_fieldset">
+    <table tal:define="specificfeatures_types python: ['', 'custom', 'township',]"
+            class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+        <tal:specificfeatures repeat="subtype specificfeatures_types ">
+            <tr tal:condition="python: '%s%specificFeatures' % (subtype, subtype and 'S' or 's') in usedAttributes"
+                tal:define="specificfeatures python: view.getSpecificFeatures(subtype=subtype);
+                            translation python: 'urban_label_%s%specificFeatures' % (subtype, subtype and 'S' or 's')">
+                <td valign="top"><b><span   i18n:translate="" tal:content="translation">Specific features</span>:</b></td>
+                <metal:spf_display use-macro="here/@@fielddisplay-macros/spf_display" />
+            </tr>
+        </tal:specificfeatures>
+        <tr tal:condition="python: 'opinionsToAskIfWorks' in usedAttributes">
+            <td valign="top"><b><span i18n:translate="urban_label_opinionsToAskIfWorks">Opinions to ask in case of works</span>:</b></td>
+            <td width="2%"></td>
+            <td valign="top"><metal:myfield use-macro="python:here.widget('opinionsToAskIfWorks', mode='view')" /></td>
+        </tr>
+    </table>
+</metal:spf_fieldset>
