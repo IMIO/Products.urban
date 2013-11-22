@@ -1,0 +1,33 @@
+<metal:foldermanagers define-macro="foldermanagers">
+    <td valign="top"><b><span i18n:translate="urban_label_foldermanagers">Treating agent</span>:</b></td>
+    <td width="2%"></td>
+    <td valign="top"><div metal:use-macro="here/@@licencemacros/urbanFolderManagerMacro" /></td>
+</metal:foldermanagers>
+
+
+<metal:subdivision define-macro="isInSubdivision">
+    <td valign="top"><b><span i18n:translate="urban_label_isInSubdivision">In subdivision?</span>:</b></td>
+    <td width="2%"></td>
+    <td width="49%" valign="top" valign="top" tal:define="isInSubdivision context/getIsInSubdivision">
+        <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='view')" />
+        <tal:isInSubdivision condition="isInSubdivision">
+            <br />
+            <metal:myfield use-macro="python:here.widget('parcellings', mode='view')" />
+            <br />
+            <tal:block replace="structure context/getSubdivisionDetails" />
+        </tal:isInSubdivision>
+    </td>
+</metal:subdivision>
+
+
+<metal:pca define-macro="isInPCA">
+    <td valign="top"><b><span i18n:translate="urban_label_isInPCA">In PCA?</span>:</b></td>
+    <td width="2%"></td>
+    <td valign="top" tal:define="isInPCA context/getIsInPCA">
+        <metal:myfield use-macro="python:here.widget('isInPCA', mode='view')" />
+        <tal:isInPCA condition="isInPCA">
+            <br />
+            <metal:myfield use-macro="python:here.widget('pca', mode='view')" />
+        </tal:isInPCA>
+    </td>
+</metal:pca>
