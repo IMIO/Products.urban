@@ -1,3 +1,18 @@
+<metal:field_display define-macro="field_display">
+    <tal:vars define="simpletext python: False">
+    <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
+    <td width="2%"></td>
+    <td valign="top" tal:condition="not: simpletext">
+        <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
+        <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+    </td>
+    <td valign="top" tal:condition="simpletext">
+        <tal:text replace="structure python: field.get(context)" />
+    </td>
+    </tal:vars>
+</metal:field_display>
+
+
 <div metal:define-macro="description_macro" i18n:domain="urban">
     <table cellspacing=0 cellpadding=0 width=100%>
         <tr>
@@ -63,15 +78,7 @@
                                             simpletext python: field.type == 'text' and getattr(field, 'default_content_type', '') == 'text/plain'">
 
                                 <tal:normal_field condition="python: fieldname not in custom">
-                                    <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
-                                    <td width="2%"></td>
-                                    <td valign="top" tal:condition="not: simpletext">
-                                        <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
-                                        <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
-                                    </td>
-                                    <td valign="top" tal:condition="simpletext">
-                                        <tal:text replace="structure python: field.get(context)" />
-                                    </td>
+                                    <metal:field_display use-macro="here/licencetabs-macros/field_display" />
                                 </tal:normal_field>
 
                                 <tal:foldermanagers condition="python: fieldname == 'foldermanagers'">
@@ -81,10 +88,6 @@
                                 </tal:foldermanagers>
                             </tr>
                         </tal:loop>
-
-                        <metal:custom_fields define-slot="custom_fields">
-                        </metal:custom_fields>
-
                     </table>
                 </fieldset>
                 <metal:custom_left_fieldset define-slot="custom_left_fieldset">
@@ -119,15 +122,7 @@
                             simpletext python: field.type == 'text' and getattr(field, 'default_content_type', '') == 'text/plain'">
 
                 <tal:normal_field condition="python: fieldname not in custom">
-                    <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
-                    <td width="2%"></td>
-                    <td valign="top" tal:condition="not: simpletext">
-                        <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
-                        <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
-                    </td>
-                    <td valign="top" tal:condition="simpletext">
-                        <tal:text replace="structure python: field.get(context)" />
-                    </td>
+                    <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
                 </tal:normal_field>
             </tr>
         </tal:loop>
@@ -150,15 +145,7 @@
                             simpletext python: field.type == 'text' and getattr(field, 'default_content_type', '') == 'text/plain'">
 
                 <tal:normal_field condition="python: fieldname not in custom">
-                    <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
-                    <td width="2%"></td>
-                    <td valign="top" tal:condition="not: simpletext">
-                        <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
-                        <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
-                    </td>
-                    <td valign="top" tal:condition="simpletext">
-                        <tal:text replace="structure python: field.get(context)" />
-                    </td>
+                    <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
                 </tal:normal_field>
 
                 <tal:subdivision condition="python: fieldname == 'isInSubdivision'">
@@ -204,12 +191,9 @@
     <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
         <tal:loop repeat="field view/getPebFields">
             <tr tal:define="fieldname field/getName;
-                            nullvalue python: field.get(context) == ''">
-                <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
-                <td width="2%"></td>
-                <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
-                    <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
-                </td>
+                            nullvalue python: field.get(context) == '';
+                            simpletext python: field.type == 'text' and getattr(field, 'default_content_type', '') == 'text/plain'">
+                <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
             </tr>
         </tal:loop>
     </table>
