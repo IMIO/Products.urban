@@ -406,7 +406,7 @@ class UrbanBase(object):
         #investigationStart date or if we have extra Inquiry objects
         if len(inquiryObjects) or (hasattr(self.schema, 'investigationStart') and self.getInvestigationStart()):
             res.append(self)
-        return res + inquiryObjects
+        return res + list(inquiryObjects)
 
     security.declarePublic('getUrbanEventInquiries')
     def getUrbanEventInquiries(self):

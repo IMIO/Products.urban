@@ -1,13 +1,15 @@
 <metal:field_display define-macro="field_display">
     <tr tal:define="fieldname field/getName;
-                    nullvalue python: field.get(context) == '';
+                    nullvalue python: field.get(context) == '' or field.get(context) == ();
                     simpletext python: field.type == 'text' and getattr(field, 'default_content_type', '') == 'text/plain'">
 
         <tal:normal_field condition="python: fieldname not in custom">
             <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
             <td width="2%"></td>
             <td valign="top" tal:condition="not: simpletext">
-                <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
+                <tal:non_null_value condition="not: nullvalue">
+                    <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
+                </tal:non_null_value>
                 <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
             </td>
             <td valign="top" tal:condition="simpletext">
@@ -98,7 +100,7 @@
             <td metal:define-slot="address_and_parcels_slot" valign="top" width=49%>
                 <fieldset tal:define="workLocations context/getWorkLocations"><legend i18n:translate="urban_label_workLocations">Work locations</legend>
                     <div tal:condition="workLocations"><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
-                        <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
+                    <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
                 </fieldset>
 
                 <metal:representatives define-slot="representatives">
