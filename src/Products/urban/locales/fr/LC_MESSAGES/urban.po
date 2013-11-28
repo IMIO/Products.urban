@@ -1597,15 +1597,15 @@ msgstr "Description des lieux et des abords du projet"
 #. Default: "Businessdescription"
 #: EnvironmentBase.py
 msgid "urban_label_businessDescription"
-msgstr "Description de l'établissement"
+msgstr "Description de l'exploitation"
 
 msgid "urban_label_businessLocation"
-msgstr "Adresse de l'établissement"
+msgstr "Adresse de l'exploitation"
 
 #. Default: "Businessoldlocation"
 #: EnvironmentBase.py
 msgid "urban_label_businessOldLocation"
-msgstr "Ancienne adresse de l'établissement"
+msgstr "Ancienne adresse de l'exploitation"
 
 #. Default: "Catchmentarea"
 #: GenericLicence.py
@@ -1862,7 +1862,7 @@ msgstr "Filtre"
 #. Default: "Finality"
 #: EnvClassThree.py
 msgid "urban_label_finality"
-msgstr "Nature de l'établissement"
+msgstr "Nature de l'exploitation"
 
 #. Default: "Floodinglevel"
 #: GenericLicence.py
