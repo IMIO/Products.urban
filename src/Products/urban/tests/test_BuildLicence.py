@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
-import unittest
-from time import sleep
 from DateTime import DateTime
-from zope.component import createObject
-from plone.app.testing import login
+from Products.urban.utils import getLicenceFolder
+from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_LICENCES
+
+from plone.app.testing import login
+from plone.testing.z2 import Browser
+from time import sleep
+from zope.component import createObject
+
+import transaction
+import unittest
 
 
 class TestBuildLicence(unittest.TestCase):
@@ -131,3 +137,145 @@ class TestBuildLicence(unittest.TestCase):
         buildlicence.setInvestigationStart(startDate)
         buildlicence.createAllAdvices()
         self.assertEqual(len(buildlicence.getAllOpinionRequests()), 2)
+
+
+class TestBuildLicenceFields(unittest.TestCase):
+
+    layer = URBAN_TESTS_INTEGRATION
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+
+        # create a test EnvClassOne licence
+        login(self.portal, 'urbaneditor')
+        self.licences = []
+        for content_type in ['BuildLicence', 'ParcelOutLicence']:
+            licence_folder = getLicenceFolder(self.urban, content_type)
+            testlicence_id = 'test_{}'.format(content_type)
+            if testlicence_id not in licence_folder.objectIds():
+                licence_folder.invokeFactory(content_type, id=testlicence_id)
+                transaction.commit()
+            test_licence = getattr(licence_folder, testlicence_id)
+            self.licences.append(test_licence)
+        self.test_buildlicence = self.licences[0]
+
+        self.browser = Browser(self.portal)
+        self.browserLogin('urbaneditor')
+
+    def browserLogin(self, user):
+        self.browser.open(self.portal.absolute_url() + "/login_form")
+        self.browser.getControl(name='__ac_name').value = user
+        self.browser.getControl(name='__ac_password').value = user
+        self.browser.getControl(name='submit').click()
+
+    def test_has_attribute_workType(self):
+        field_name = 'workType'
+        for licence in self.licences:
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(hasattr(licence, field_name), msg)
+
+    def test_workType_is_visible(self):
+        for licence in self.licences:
+            msg = "field 'workType' not visible on {}".format(licence.getPortalTypeName())
+            self.browser.open(licence.absolute_url())
+            contents = self.browser.contents
+            self.assertTrue("<span>Nature des travaux</span>:" in contents, msg)
+
+    def test_has_attribute_usage(self):
+        field_name = 'usage'
+        msg = "field '{}' not on class BuildLicence".format(field_name)
+        self.assertTrue(hasattr(self.test_buildlicence, field_name), msg)
+
+    def test_usage_is_visible(self):
+        msg = "field 'usage' not visible on BuildLicence"
+        self.browser.open(self.test_buildlicence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("<span>Statistiques INS</span>:" in contents, msg)
+
+    def test_has_attribute_annoncedDelay(self):
+        field_name = 'annoncedDelay'
+        for licence in self.licences:
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(hasattr(licence, field_name), msg)
+
+    def test_annoncedDelay_is_visible(self):
+        for licence in self.licences:
+            msg = "field 'annoncedDelay' not visible on {}".format(licence.getPortalTypeName())
+            self.browser.open(licence.absolute_url())
+            contents = self.browser.contents
+            self.assertTrue("<span>Délai annoncé</span>:" in contents, msg)
+
+    def test_has_attribute_annoncedDelayDetails(self):
+        field_name = 'annoncedDelayDetails'
+        for licence in self.licences:
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(hasattr(licence, field_name), msg)
+
+    def test_annoncedDelayDetails_is_visible(self):
+        for licence in self.licences:
+            msg = "field 'annoncedDelayDetails' not visible on {}".format(licence.getPortalTypeName())
+            self.browser.open(licence.absolute_url())
+            contents = self.browser.contents
+            self.assertTrue("<span>Détails concernant le délai annoncé</span>:" in contents, msg)
+
+    def test_has_attribute_townshipCouncilFolder(self):
+        field_name = 'townshipCouncilFolder'
+        for licence in self.licences:
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(hasattr(licence, field_name), msg)
+
+    def test_townshipCouncilFolder_is_visible(self):
+        for licence in self.licences:
+            msg = "field 'townshipCouncilFolder' not visible on {}".format(licence.getPortalTypeName())
+            self.browser.open(licence.absolute_url())
+            contents = self.browser.contents
+            self.assertTrue("<span>Dossier \"Conseil Communal\"</span>:" in contents, msg)
+
+    def test_has_attribute_impactStudy(self):
+        field_name = 'impactStudy'
+        for licence in self.licences:
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(hasattr(licence, field_name), msg)
+
+    def test_impactStudy_is_visible(self):
+        for licence in self.licences:
+            msg = "field 'impactStudy' not visible on {}".format(licence.getPortalTypeName())
+            self.browser.open(licence.absolute_url())
+            contents = self.browser.contents
+            self.assertTrue("<span>Etude d'incidence?</span>:" in contents, msg)
+
+    def test_has_attribute_implantation(self):
+        field_name = 'implantation'
+        for licence in self.licences:
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(hasattr(licence, field_name), msg)
+
+    def test_implantation_is_visible(self):
+        for licence in self.licences:
+            msg = "field 'implantation' not visible on {}".format(licence.getPortalTypeName())
+            self.browser.open(licence.absolute_url())
+            contents = self.browser.contents
+            self.assertTrue("<span>Implantation (art. 137)</span>:" in contents, msg)
+
+    def test_has_attribute_pebType(self):
+        field_name = 'pebType'
+        msg = "field '{}' not on class BuildLicence".format(field_name)
+        self.assertTrue(hasattr(self.test_buildlicence, field_name), msg)
+
+    def test_pebType_is_visible(self):
+        msg = "field 'pebType' not visible on BuildLicence"
+        self.browser.open(self.test_buildlicence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("<span>Type de PEB</span>:" in contents, msg)
+
+    def test_has_attribute_pebDetails(self):
+        field_name = 'pebDetails'
+        msg = "field '{}' not on class BuildLicence".format(field_name)
+        self.assertTrue(hasattr(self.test_buildlicence, field_name), msg)
+
+    def test_pebDetails_is_visible(self):
+        msg = "field 'pebDetails' not visible on BuildLicence"
+        self.browser.open(self.test_buildlicence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("<span>Détails concernant le PEB</span>:" in contents, msg)
