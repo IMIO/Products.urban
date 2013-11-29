@@ -40,11 +40,110 @@ class TestGenericLicenceFields(unittest.TestCase):
         self.browser.getControl(name='submit').click()
 
     def test_has_attribute_licenceSubject(self):
+        field_name = 'licenceSubject'
         for licence in self.licences:
-            self.assertTrue(hasattr(licence, 'licenceSubject'))
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(hasattr(licence, field_name), msg)
 
     def test_licenceSubject_is_visible(self):
         for licence in self.licences:
+            msg = "field 'object' not visible on {}".format(licence.getPortalTypeName())
             self.browser.open(licence.absolute_url())
             contents = self.browser.contents
-            self.assertTrue("<span>Objet</span>:" in contents)
+            self.assertTrue("<span>Objet</span>:" in contents, msg)
+
+    def test_has_attribute_reference(self):
+        field_name = 'reference'
+        for licence in self.licences:
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(hasattr(licence, field_name), msg)
+
+    def test_reference_is_visible(self):
+        for licence in self.licences:
+            msg = "field 'reference' not visible on {}".format(licence.getPortalTypeName())
+            self.browser.open(licence.absolute_url())
+            contents = self.browser.contents
+            self.assertTrue("<span>Référence</span>:" in contents, msg)
+
+    def test_has_attribute_referenceDGATLP(self):
+        field_name = 'referenceDGATLP'
+        for licence in self.licences:
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(hasattr(licence, field_name), msg)
+
+    def test_referenceDGATLP_is_visible(self):
+        for licence in self.licences:
+            msg = "field 'referenceDGATLP' not visible on {}".format(licence.getPortalTypeName())
+            self.browser.open(licence.absolute_url())
+            contents = self.browser.contents
+            self.assertTrue("<span>Référence DGO4</span>:" in contents, msg)
+
+    def test_has_attribute_workLocations(self):
+        field_name = 'workLocations'
+        for licence in self.licences:
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(hasattr(licence, field_name), msg)
+
+    def test_workLocations_is_visible(self):
+        for licence in self.licences:
+            msg = "field 'workLocations' not visible on {}".format(licence.getPortalTypeName())
+            self.browser.open(licence.absolute_url())
+            contents = self.browser.contents
+            worklocation_is_visible = \
+                "Adresse(s) des travaux" in contents \
+                or \
+                "Adresse de l'exploitation" in contents
+
+            self.assertTrue(worklocation_is_visible, msg)
+
+    def test_has_attribute_folderCategory(self):
+        field_name = 'folderCategory'
+        for licence in self.licences:
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(hasattr(licence, field_name), msg)
+
+    def test_folderCategory_is_visible(self):
+        for licence in self.licences:
+            msg = "field 'folderCategory' not visible on {}".format(licence.getPortalTypeName())
+            self.browser.open(licence.absolute_url())
+            contents = self.browser.contents
+            self.assertTrue("<span>Catégorie du dossier RW</span>:" in contents, msg)
+
+    def test_has_attribute_missingParts(self):
+        field_name = 'missingParts'
+        for licence in self.licences:
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(hasattr(licence, field_name), msg)
+
+    def test_missingParts(self):
+        for licence in self.licences:
+            msg = "field 'missingParts' not visible on {}".format(licence.getPortalTypeName())
+            self.browser.open(licence.absolute_url())
+            contents = self.browser.contents
+            self.assertTrue("<span>Pièces manquantes</span>:" in contents, msg)
+
+    def test_has_attribute_missingPartsDetails(self):
+        field_name = 'missingPartsDetails'
+        for licence in self.licences:
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(hasattr(licence, field_name), msg)
+
+    def test_missingPartsDetails(self):
+        for licence in self.licences:
+            msg = "field 'missingPartsDetails' not visible on {}".format(licence.getPortalTypeName())
+            self.browser.open(licence.absolute_url())
+            contents = self.browser.contents
+            self.assertTrue("<span>Détails concernant les pièces manquantes</span>:" in contents, msg)
+
+    def test_has_attribute_description(self):
+        field_name = 'description'
+        for licence in self.licences:
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(hasattr(licence, field_name), msg)
+
+    def test_description(self):
+        for licence in self.licences:
+            msg = "field 'description' not visible on {}".format(licence.getPortalTypeName())
+            self.browser.open(licence.absolute_url())
+            contents = self.browser.contents
+            self.assertTrue("<span>Observations</span>:" in contents, msg)
