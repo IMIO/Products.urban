@@ -242,8 +242,6 @@ UrbanCertificateBase_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 UrbanCertificateBase_schema['title'].required = False
 UrbanCertificateBase_schema['title'].widget.visible = False
-#remove the impactStudy field for UrbanCertificates
-del UrbanCertificateBase_schema['impactStudy']
 #hide the solicit opinions to fields for UrbanCertificateOne
 UrbanCertificateBase_schema['solicitRoadOpinionsTo'].widget.visible = False
 UrbanCertificateBase_schema['solicitLocationOpinionsTo'].widget.visible = False

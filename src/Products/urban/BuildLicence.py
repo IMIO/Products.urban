@@ -99,6 +99,16 @@ schema = Schema((
         schemata='urban_road',
     ),
     BooleanField(
+        name='impactStudy',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Impactstudy',
+            label_msgid='urban_label_impactStudy',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+    ),
+    BooleanField(
         name='implantation',
         default=False,
         widget=BooleanField._properties['widget'](
@@ -458,6 +468,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('townshipCouncilFolder', after='roadCoating')
     schema.moveField('annoncedDelay', after='missingPartsDetails')
     schema.moveField('annoncedDelayDetails', after='annoncedDelay')
+    schema.moveField('impactStudy', after='annoncedDelayDetails')
     return schema
 
 finalizeSchema(BuildLicence_schema)

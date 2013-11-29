@@ -66,8 +66,6 @@ Division_schema = BaseFolderSchema.copy() + \
 Division_schema['title'].searchable = True
 Division_schema['title'].required = False
 Division_schema['title'].widget.visible = False
-#remove the impactStudy field for Divisons
-del Division_schema['impactStudy']
 #hide the solicit opinions to fields for Divisons
 Division_schema['solicitRoadOpinionsTo'].widget.visible=False
 Division_schema['solicitLocationOpinionsTo'].widget.visible=False

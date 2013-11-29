@@ -218,8 +218,6 @@ EnvironmentBase_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 EnvironmentBase_schema['title'].required = False
 EnvironmentBase_schema['title'].widget.visible = False
-#remove the impactStudy field for Environments
-del EnvironmentBase_schema['impactStudy']
 setSchemataForInquiry(EnvironmentBase_schema)
 def hidesInquiryFields(schema):
     for field in schema.filterFields(isMetadata=False):

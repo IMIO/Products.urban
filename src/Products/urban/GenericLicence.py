@@ -190,16 +190,6 @@ schema = Schema((
         default_output_type='text/html',
         accessor="Description",
     ),
-    BooleanField(
-        name='impactStudy',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label='Impactstudy',
-            label_msgid='urban_label_impactStudy',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-    ),
     LinesField(
         name='roadMissingParts',
         widget=MultiSelectionWidget(

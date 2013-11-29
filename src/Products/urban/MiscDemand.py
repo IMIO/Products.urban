@@ -68,7 +68,6 @@ MiscDemand_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-del MiscDemand_schema['impactStudy']
 MiscDemand_schema['folderCategory'].widget.label_msgid='urban_label_category'
 MiscDemand_schema['missingParts'].widget.visible=False
 MiscDemand_schema['missingPartsDetails'].widget.visible=False
