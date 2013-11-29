@@ -96,6 +96,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('foldermanagers', after='notaryContact')
     schema.moveField('description', after='opinionsToAskIfWorks')
     schema.moveField('folderCategoryTownship', after='RCU')
+    schema.moveField('annoncedDelay', after='missingPartsDetails')
+    schema.moveField('annoncedDelayDetails', after='annoncedDelay')
     return schema
 
 finalizeSchema(UrbanCertificateTwo_schema)

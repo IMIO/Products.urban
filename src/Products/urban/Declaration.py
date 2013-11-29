@@ -75,9 +75,6 @@ Declaration_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 Declaration_schema['title'].required = False
 Declaration_schema['title'].widget.visible = False
-#remove the annoncedDelays for UrbanCertificates
-del Declaration_schema['annoncedDelay']
-del Declaration_schema['annoncedDelayDetails']
 #remove the impactStudy field for UrbanCertificates
 del Declaration_schema['impactStudy']
 #hide the solicit opinions to fields for UrbanCertificateOne

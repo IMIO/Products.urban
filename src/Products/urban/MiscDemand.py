@@ -29,13 +29,7 @@ from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
-optional_fields = ['subdivisionDetails','missingParts','missingPartsDetails','folderZoneDetails','folderZone',
-                   'derogationDetails','isInPCA','annoncedDelayDetails','roadType','roadCoating','roadEquipments',
-                   'investigationDetails','investigationReasons','isInSubdivision', 'solicitLocationOpinionsTo',
-                   'folderCategoryTownship','protectedBuilding','protectedBuildingDetails',
-                   'pash','pashDetails','catchmentArea', 'catchmentAreaDetails','equipmentAndRoadRequirements','technicalRemarks',
-                   'pca','SSC','sscDetails','RCU','rcuDetails','floodingLevel','floodingLevelDetails','solicitRoadOpinionsTo',
-                   'areParcelsVerified', 'locationFloodingLevel', 'architects']
+optional_fields = ['architects',]
 ##/code-section module-header
 
 schema = Schema((
@@ -74,10 +68,7 @@ MiscDemand_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-del MiscDemand_schema['annoncedDelay']
-del MiscDemand_schema['annoncedDelayDetails']
 del MiscDemand_schema['impactStudy']
-del MiscDemand_schema['referenceDGATLP']
 MiscDemand_schema['folderCategory'].widget.label_msgid='urban_label_category'
 MiscDemand_schema['missingParts'].widget.visible=False
 MiscDemand_schema['missingPartsDetails'].widget.visible=False

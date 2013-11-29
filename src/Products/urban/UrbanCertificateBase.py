@@ -203,6 +203,30 @@ schema = Schema((
         vocabulary=UrbanVocabulary('noteworthytrees'),
         default_method='getDefaultValue',
     ),
+    StringField(
+        name='annoncedDelay',
+        widget=SelectionWidget(
+            label='Annonceddelay',
+            label_msgid='urban_label_annoncedDelay',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='annoncedDelayDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Annonceddelaydetails',
+            label_msgid='urban_label_annoncedDelayDetails',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        default_method='getDefaultText',
+        default_content_type='text/plain',
+        default_output_type='text/html',
+    ),
 
 ),
 )
@@ -218,9 +242,6 @@ UrbanCertificateBase_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 UrbanCertificateBase_schema['title'].required = False
 UrbanCertificateBase_schema['title'].widget.visible = False
-#remove the annoncedDelays for UrbanCertificates
-del UrbanCertificateBase_schema['annoncedDelay']
-del UrbanCertificateBase_schema['annoncedDelayDetails']
 #remove the impactStudy field for UrbanCertificates
 del UrbanCertificateBase_schema['impactStudy']
 #hide the solicit opinions to fields for UrbanCertificateOne

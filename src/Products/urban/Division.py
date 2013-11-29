@@ -66,9 +66,6 @@ Division_schema = BaseFolderSchema.copy() + \
 Division_schema['title'].searchable = True
 Division_schema['title'].required = False
 Division_schema['title'].widget.visible = False
-#remove the annoncedDelays for Divisons
-del Division_schema['annoncedDelay']
-del Division_schema['annoncedDelayDetails']
 #remove the impactStudy field for Divisons
 del Division_schema['impactStudy']
 #hide the solicit opinions to fields for Divisons

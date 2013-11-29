@@ -62,6 +62,30 @@ schema = Schema((
         schemata='urban_description',
         vocabulary='listUsages',
     ),
+    StringField(
+        name='annoncedDelay',
+        widget=SelectionWidget(
+            label='Annonceddelay',
+            label_msgid='urban_label_annoncedDelay',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='annoncedDelayDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Annonceddelaydetails',
+            label_msgid='urban_label_annoncedDelayDetails',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        default_method='getDefaultText',
+        default_content_type='text/plain',
+        default_output_type='text/html',
+    ),
     BooleanField(
         name='townshipCouncilFolder',
         default=False,
@@ -432,6 +456,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('investigationWriteReclamationNumber', after='investigationOralReclamationNumber')
     schema.moveField('requirementFromFD', after='locationDgrneUnderground')
     schema.moveField('townshipCouncilFolder', after='roadCoating')
+    schema.moveField('annoncedDelay', after='missingPartsDetails')
+    schema.moveField('annoncedDelayDetails', after='annoncedDelay')
     return schema
 
 finalizeSchema(BuildLicence_schema)

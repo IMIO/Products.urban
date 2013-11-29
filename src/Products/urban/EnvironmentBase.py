@@ -218,9 +218,6 @@ EnvironmentBase_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 EnvironmentBase_schema['title'].required = False
 EnvironmentBase_schema['title'].widget.visible = False
-#remove the annoncedDelays for Environments
-del EnvironmentBase_schema['annoncedDelay']
-del EnvironmentBase_schema['annoncedDelayDetails']
 #remove the impactStudy field for Environments
 del EnvironmentBase_schema['impactStudy']
 setSchemataForInquiry(EnvironmentBase_schema)

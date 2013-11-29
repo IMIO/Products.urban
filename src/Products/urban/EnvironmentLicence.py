@@ -83,6 +83,7 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
+
 ),
 )
 
@@ -131,3 +132,4 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
 
 finalizeSchema(EnvironmentLicence_schema)
 ##/code-section module-footer
+
