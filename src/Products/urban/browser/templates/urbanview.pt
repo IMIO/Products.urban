@@ -3,62 +3,57 @@
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="plone">
 
-<body>
+    <body>
 
-<div metal:fill-slot="top_slot">
-<metal:block metal:use-macro="here/global_defines/macros/defines" />
-<div tal:define="member context/@@plone_portal_state/member;
-                 dummy python:request.set((member.has_permission('Manage portal', here) and 'enable_border' or 'disable_border'), 1);" />
-</div>
+        <div metal:fill-slot="top_slot">
+            <metal:block metal:use-macro="here/global_defines/macros/defines" />
+            <div tal:define="member context/@@plone_portal_state/member;
+                             dummy python:request.set((member.has_permission('Manage portal', here) and 'enable_border' or 'disable_border'), 1);" />
+        </div>
 
-<div metal:fill-slot="main">
-<metal:main_macro define-macro="main">
-    <metal:body define-macro="body_macro"
-                tal:define="kssClassesView context/@@kss_field_decorator_view;
-                            getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
-                            isAnon context/@@plone_portal_state/anonymous;
-                            portal_url context/@@plone_portal_state/portal_url;
-                            isUrbanManager view/isUrbanManager">
+        <div metal:fill-slot="main">
+            <metal:main_macro define-macro="main">
+                <metal:body define-macro="body_macro"
+                            tal:define="kssClassesView context/@@kss_field_decorator_view;
+                                        getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
+                                        isAnon context/@@plone_portal_state/anonymous;
+                                        portal_url context/@@plone_portal_state/portal_url;
+                                        isUrbanManager view/isUrbanManager">
 
-        <div tal:replace="structure provider:plone.abovecontenttitle" />
+                    <div tal:replace="structure provider:plone.abovecontenttitle" />
+        
+                    <h1 class="documentFirstHeading">
+                        <metal:field use-macro="python:here.widget('title', mode='view')">
+                            Title
+                        </metal:field>
+                        <tal:addable_types define="acts context/allowedContentTypes" repeat="act acts" i18n:domain="urban">
+                           <a href="#" tal:attributes="href python: context.absolute_url() + '/createObject?type_name=' + act.id">
+                               <img class="urban-add-icon-big" src="#" tal:attributes="src string:${portal_url}/icon_add_big.png" />
+                           </a>
+                        </tal:addable_types>
+                    </h1>
 
-        <h1 class="documentFirstHeading">
-            <metal:field use-macro="python:here.widget('title', mode='view')">
-            Title
-            </metal:field>
-              <tal:addable_types define="acts context/allowedContentTypes" repeat="act acts" i18n:domain="urban">
-               <a href="#" tal:attributes="href python: context.absolute_url() + '/createObject?type_name=' + act.id">
-                <img class="urban-add-icon-big" src="#" tal:attributes="src string:${portal_url}/icon_add_big.png" />
-               </a>
-              </tal:addable_types>
-        </h1>
+                    <!--div tal:replace="structure provider:plone.belowcontenttitle" /-->
+        
+                    <p class="documentDescription">
+                        <metal:field use-macro="python:here.widget('description', mode='view')">
+                            Description
+                        </metal:field>
+                    </p>
 
-        <!--div tal:replace="structure provider:plone.belowcontenttitle" /-->
+                    <div tal:replace="structure provider:plone.abovecontentbody" />
 
-        <p class="documentDescription">
-            <metal:field use-macro="python:here.widget('description', mode='view')">
-            Description
-            </metal:field>
-        </p>
+                    <fieldset style="margin: 0" tal:define="tool python: getattr(context, 'portal_urban');">
+                        <legend i18n:domain="urban" i18n:translate="search-last-elements">Last elements</legend>
+                        <div>
+                            <metal:listing use-macro="context/@@urban-macros/filter_listing" />
+                            <tal:listing content="structure view/renderLicenceListing" />
+                        </div>
+                    </fieldset>
 
-        <div tal:replace="structure provider:plone.abovecontentbody" />
-
-        <fieldset style="margin: 0" tal:define="tool python: getattr(context, 'portal_urban');">
-         <legend i18n:domain="urban" i18n:translate="search-last-elements">Last elements</legend>
-
-
-         <div>
-          <metal:listing use-macro="context/@@urban-macros/filter_listing" />
-          <tal:listing content="structure view/renderLicenceListing" />
-         </div>
-         </fieldset>
-
-    </metal:body>
-    <div tal:replace="structure provider:plone.belowcontentbody" />
-
-</metal:main_macro>
-
-</div>
-
-</body>
+                </metal:body>
+                <div tal:replace="structure provider:plone.belowcontentbody" />
+            </metal:main_macro>
+        </div>
+    </body>
 </html>

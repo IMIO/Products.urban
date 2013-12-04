@@ -58,6 +58,8 @@ setup(name='Products.urban',
           'python-Levenshtein',
           'profilehooks',
           'plone.api',  # to remove once we use a plone version including plone.api
+          'imio.actionspanel',
+          'plonetheme.imioapps',
       ],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',

@@ -5,271 +5,55 @@
 /* <dtml-with base_properties> (do not remove this :) */
 /* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
 
-table.filter_listing th {
-    background: none repeat scroll 0 0 #DDDDDD;
-    border-color: #E7E7E7;
-    border-image: none;
-    border-style: solid solid none;
-    border-width: 0.1em;
-    color: #666666;
-    text-align: left;
-    padding: 0.3em 0.5em;
-    vertical-align: center;
-}
-
-table.filter_listing th {
-}
-
-.listing img, .listing input {
-vertical-align: sub;
-}
-
-.icons-on table.listing td {
-    line-height: 1.5em;
-}
-
-table.largetable{
-    width: 100%;
-}
-
-table.listing th.actionsheader{
-    text-align: right;
-}
-
-/* Color manual parcels in cyan and outdated parcels in orange*/
-table.listing tbody tr.odd span.outdated_parcel {
-    background: none repeat scroll 0 0 orange;
-}
-
-table.listing tbody tr.even span.outdated_parcel {
-    background: none repeat scroll 0 0 orange;
-}
-
-table.listing tbody tr.odd span.manual_parcel {
-    background: none repeat scroll 0 0 cyan;
-}
-
-table.listing tbody tr.even span.manual_parcel {
-    background: none repeat scroll 0 0 cyan;
-}
-
-/* align the add button of datagrid widgets on the left */
-#datagridwidget-add-button {
- float: left;
- margin-bottom: 1.5em;
-}
-/* hide the column that will receive the street */
-#title_workLocations_new, #title_workLocations_1, #title_workLocations_2, #title_workLocations_3, #title_workLocations_4 {
- border: 0;
-
-}
-
-/* this hide the input appearance while editing the street name */
-#workLocationStreet_label {
-border: 0;
-background: transparent;
-cursor: default;
-}
-
-div.warning {
-/* Class for error indication in forms */
-background-color: #fd7;
-border: 1px solid #d80;
-padding: 0.5em;
-margin: 0 0 1em 0;
-}
-
 /* Colors on states */
 .state-in_progress {
 color: #EA6619 !important;
-}
-
-#plone-contentmenu-workflow .state-in_progress {
-    border-radius: 0.5em 0.5em 0.5em 0.5em;
-    padding: 0 0.5em;
-    background-color: #EA6619;
-    border: 0.1em solid #EA6619;
-    color: White !important;
-}
-
-.state-closed {
-color: grey !important;
-}
-
-#plone-contentmenu-workflow .state-closed {
-    border-radius: 0.5em 0.5em 0.5em 0.5em;
-    padding: 0 0.5em;
-    background-color: grey;
-    border: 0.1em solid grey;
-    color: White !important;
 }
 
 .state-enabled {
 color: green !important;
 }
 
-#plone-contentmenu-workflow .state-enabled {
-    border-radius: 0.5em 0.5em 0.5em 0.5em;
-    padding: 0 0.5em;
-    background-color: green;
-    border: 0.1em solid green;
-    color: White !important;
+.state-closed {
+color: grey !important;
 }
 
 .state-disabled {
 color: red !important;
 }
 
-#plone-contentmenu-workflow .state-disabled {
-    border-radius: 0.5em 0.5em 0.5em 0.5em;
-    padding: 0 0.5em;
-    background-color: red;
-    border: 0.1em solid red;
-    color: White !important;
-}
-
 .state-accepted {
 color: green !important;
-}
-
-#plone-contentmenu-workflow .state-accepted {
-    border-radius: 0.5em 0.5em 0.5em 0.5em;
-    padding: 0 0.5em;
-    background-color: green;
-    border: 0.1em solid green;
-    color: White !important;
 }
 
 .state-retired {
 color: grey !important;
 }
 
-#plone-contentmenu-workflow .state-retired {
-    border-radius: 0.5em 0.5em 0.5em 0.5em;
-    padding: 0 0.5em;
-    background-color: grey;
-    border: 0.1em solid grey;
-    color: White !important;
-}
-
 .state-incomplete {
 color: black !important;
-}
-
-#plone-contentmenu-workflow .state-incomplete {
-    border-radius: 0.5em 0.5em 0.5em 0.5em;
-    padding: 0 0.5em;
-    background-color: black;
-    border: 0.1em solid black;
-    color: White !important;
 }
 
 .state-refused {
 color: red !important;
 }
 
-#plone-contentmenu-workflow .state-refused {
-    border-radius: 0.5em 0.5em 0.5em 0.5em;
-    padding: 0 0.5em;
-    background-color: red;
-    border: 0.1em solid red;
-    color: White !important;
+.icons-on #visual-portal-wrapper table.listing td {
+    line-height: 1.3em;
 }
 
-.imageInput {
-    border-width: 0px;
-    background: none;
+.icons-on #visual-portal-wrapper table.listing td a {
+    font-size: 105%;
 }
 
-.noPadding {
-    padding-right: 0em !important;
-    padding-left: 0em !important;
-    padding-top: 0em !important;
-    padding-bottom: 0em !important;
+/* Color manual parcels in cyan and outdated parcels in orange*/
+table.listing tbody tr span.outdated_parcel {
+    background: none repeat scroll 0 0 orange;
 }
 
-.ptButton {
-    background: &dtml-globalBackgroundColor; url(&dtml-portal_url;/linkOpaque.gif) 5px 1px no-repeat;
-    cursor: pointer;
-    font-size: &dtml-fontSmallSize;;
-    padding: 1px 1px 1px 12px;
-    text-transform: &dtml-textTransform;;
-    /* overflow: visible; IE produces ugly results with this */
+table.listing tbody tr span.manual_parcel {
+    background: none repeat scroll 0 0 cyan;
 }
-
-legend {
-  background-color: transparent;
-}
-
-ul.formTabs {
-margin-bottom: 0 !important;
-}
-
-.standalone {
-color: red;
-}
-
-/* remove the outline around the edit.gif image in the form tabbing */
-.urban-edit-tabbing{
-outline: none !important;
-}
-
-/* should go back to Products.DataGridField */
-a.datagridwidget-add-button, a.datagridwidget-add-button:hover {
-    background-position: 5px 5px !important;
-    padding-right: 5px !important;
-}
-
-table[id^="datagridwidget-table"] {
-    border: 1px grey solid;
-    margin-bottom: 0.5em !important;
-}
-
-#datagridwidget-table-workLocations {
-    width: 600px !important;
-}
-
-#datagridwidget-table-businessOldLocation {
-    width: 600px !important;
-}
-
-table[id^="datagridwidget-table-"] THEAD TH {
-    padding-left: 0.5em;
-    background-color: #DDDDDD;
-    font-weight: bold !important;
-}
-
-#datagridwidget-table-roadEquipments {
-    width: 100% !important;
-}
-
-#datagridwidget-table-roadEquipments .datagridwidget-column-1 {
-    width: 400px;
-}
-
-.urban-linkedfolders-icon {
-position: relative;
-}
-
-.urban-add-icon {
-position: absolute;
-padding-top: 3px;
-}
-
-.urban-add-icon-big {
-position: absolute;
-padding-top: 3px;
-}
-
-.urban-licence-schedule {
-float: right;
-margin-top: -2em;
-}
-
-.urban-document-already-created {
-background-color: #75AD0A;
-}
-
 
 /* display the right icon from the urban-sprite */
 /* if you adapt something here, adapt the relevant contenttype-xxx class here under */
@@ -321,87 +105,12 @@ background-color: #75AD0A;
     padding-left: 20px !important;
 }
 
-/* styles for buttons used with specific content_type icon */
-INPUT.button-applicant,
-INPUT.button-architect,
-INPUT.button-buildlicence,
-INPUT.button-declaration,
-INPUT.button-miscdemand,
-INPUT.button-division,
-INPUT.button-envclassthree,
-INPUT.button-geometrician,
-INPUT.button-inquiry,
-INPUT.button-notary,
-INPUT.button-notaryletter,
-INPUT.button-parceloutlicence,
-INPUT.button-portionout,
-INPUT.button-proprietary,
-INPUT.button-street,
-INPUT.button-urbancertificateone,
-INPUT.button-urbancertificatetwo,
-INPUT.button-urbanevent,
-INPUT.button-urbaneventinquiry,
-INPUT.button-urbanschedule
-{
-    padding-bottom: 0.1em;
-    padding-top: 0.1em;
-    border-color: buttonface;
-    -moz-border-radius: 0.4em 0.4em 0.4em 0.4em;
-    -webkit-border-radius: 0.4em 0.4em 0.4em 0.4em;
-    border-radius: 0.4em 0.4em 0.4em 0.4em;
-    background-color: ThreeDFace !important;
-    margin-bottom: 0.3em;
+.licence-column {
+    float: left;
+    margin: 5px;
 }
 
-/* background position for image on buttons */
-/* if you adapt something here, adapt the relevant contenttype-xxx class here above */
-.button-applicant {background-position: 3px -213px !important;}
-.button-architect {background-position: 3px -213px !important;}
-.button-buildlicence {background-position: 3px 1px !important;}
-.button-declaration {background-position: 3px -431px !important;}
-.button-division {background-position: 3px -646px !important;}
-.button-envclassthree {background-position: 3px -862px !important;}
-.button-foldermanager {background-position: 3px -213px !important;}
-.button-geometrician {background-position: 3px -213px !important;}
-.button-inquiry {background-position: 3px -1079px !important;}
-.button-notary {background-position: 3px -213px !important;}
-.button-notaryletter {background-position: 3px -1294px !important;}
-.button-parceloutlicence {background-position: 3px -1511px !important;}
-.button-portionout {background-position: 3px -1726px !important;}
-.button-proprietary {background-position: 3px -213px !important;}
-.button-street {background-position: 3px -1944px !important;}
-.button-urbancertificateone {background-position: 3px -2158px !important;}
-.button-urbancertificatetwo {background-position: 3px -2374px !important;}
-.button-urbanevent {background-position: 3px -2590px !important;}
-.button-urbaneventinquiry {background-position: 3px -2590px !important;}
-.button-urbaneventopinionrequest {background-position: 3px -2590px !important;}
-
-.button-urbanschedule {
-    background-image: url(schedule.png);
-    background-position: 3px 1px;
-    background-repeat: no-repeat;
-    padding-left: 20px !important;
+#content .licence-column fieldset{
+    line-height: 1.5em;
 }
-
-.templates-types-events {
-    padding-left: 1em;
-}
-
-.templates-types-events h3{
-    color: #75AD0A;
-}
-
-.templates-types-events h4, .templates-types-events ul{
-    padding-left: 1em;
-}
-
-
-table[id$=ecificFeatures] td{
-   vertical-align: middle;
-}
-
-table[id$=ecificFeatures] tr.odd{
-   background-color: lightgray;
-}
-
 /* </dtml-with> */

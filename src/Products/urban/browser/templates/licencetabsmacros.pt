@@ -28,120 +28,128 @@
 
 
 <div metal:define-macro="description_macro" i18n:domain="urban">
-    <table cellspacing=0 cellpadding=0 width=100%>
-        <tr>
-            <td metal:define-slot="applicant_slot" valign="top" width=49%>
-                <fieldset><legend i18n:translate="applicants">Applicant(s)</legend>
-                    <div metal:use-macro="here/@@licencemacros/urbanApplicantsMacro" />
-                </fieldset>
-            </td>
-            <td width="1%"></td>
-            <td metal:define-slot="keydates_slot" valign="top" width=50%>
-                <fieldset><legend i18n:translate="urban_description_key_dates_legend">Key dates</legend>
-                    <table tal:define="keyDates view/getKeyDates;
-                                       inquiryDates view/getInquiryDates"
-                           class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
-                        <tr tal:repeat="date keyDates">
-                            <td valign="top"><b><span tal:content="python: date['label']">Receipt date</span>:</b></td>
-                            <td width="2%"></td>
-                            <td valign="top" tal:define="date_value python: date['date']">
-                                <a href="#" tal:condition="date_value" tal:attributes="href python: date['url']" tal:content="python: date_value">Content</a>
-                                <span class="discreet" tal:condition="not: date_value" i18n:translate="content_none">None</span>
-                            </td>
-                        </tr>
-                        <tal:inquiries repeat="inquiry inquiryDates">
-                        <tr>
-                            <td valign="top">
-                                <b><span i18n:translate="urban_investigationStart">from <span i18n:name="number" tal:content="repeat/inquiry/number"/></span>:</b>
-                            </td>
-                            <td width="2%"></td>
-                            <td valign="top" tal:define="start_date python: inquiry['start_date'];
-                                                         url python: inquiry['url']">
-                                <a href="#" tal:condition="python: start_date and url" tal:attributes="href url" tal:content="python: start_date">Content</a>
-                                <span tal:condition="python: start_date and not url" tal:content="python: start_date">end date</span>
-                                <span tal:condition="not: start_date" class="discreet" i18n:translate="content_none">None</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td valign="top"><b><span i18n:translate="urban_label_investigationEnd">to</span>:</b></td>
-                            <td width="2%"></td>
-                            <td valign="top" tal:define="end_date python: inquiry['end_date'];
-                                                         url python: inquiry['url']">
-                                <a href="#" tal:condition="python: end_date and url" tal:attributes="href url" tal:content="python: end_date">Content</a>
-                                <span tal:condition="python: end_date and not url" tal:content="python: end_date">end date</span>
-                                <span tal:condition="not: end_date" class="discreet" i18n:translate="content_none">None</span>
-                            </td>
-                        </tr>
-                        </tal:inquiries>
-                    </table>
-                </fieldset>
-            </td>
-        </tr>
-        <tr>
-            <td valign="top" width=50%>
-                <fieldset><legend i18n:translate="legend_details">Details</legend>
-                    <table metal:define-slot="detail_slot" class="no-style-table" cellspacing=0 cellpadding=0 width=100%
-                           tal:define="default_custom python: ['foldermanagers'];
-                                       default_exclude python: ['title', 'workLocations', 'architects', 'geometricians', 'notaryContact'];
-                                       custom custom | python: []; custom python: custom + default_custom;
-                                       exclude exclude | default_exclude">
+    <div class="licence-column" style="width: 47%">
 
-                        <tal:loop repeat="field python: view.getDescriptionFields(exclude)">
-                            <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
-                        </tal:loop>
-                    </table>
-                </fieldset>
+        <metal:applicants define-slot="applicant_slot">
+            <fieldset>
+                <legend i18n:translate="applicants">Applicant(s)</legend>
+                <div metal:use-macro="here/@@licencemacros/urbanApplicantsMacro" />
+            </fieldset>
+        </metal:applicants>
 
-                <metal:custom_left_fieldset define-slot="custom_left_fieldset">
-                </metal:custom_left_fieldset>
+        <fieldset>
+            <legend i18n:translate="legend_details">Details</legend>
+            <table metal:define-slot="detail_slot" class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+                   tal:define="default_custom python: ['foldermanagers'];
+                               default_exclude python: ['title', 'workLocations', 'architects', 'geometricians', 'notaryContact'];
+                               custom custom | python: []; custom python: custom + default_custom;
+                               exclude exclude | default_exclude">
 
-            </td>
-            <td width="1%"></td>
-            <td metal:define-slot="address_and_parcels_slot" valign="top" width=49%>
-                <fieldset tal:define="workLocations context/getWorkLocations"><legend i18n:translate="urban_label_workLocations">Work locations</legend>
-                    <div tal:condition="workLocations"><metal:myfield use-macro="python:here.widget('workLocations', mode='view')" /></div>
-                    <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
-                </fieldset>
+                <tal:loop repeat="field python: view.getDescriptionFields(exclude)">
+                    <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+                </tal:loop>
+            </table>
+        </fieldset>
 
-                <metal:representatives define-slot="representatives">
-                </metal:representatives>
+        <metal:custom_left_fieldset define-slot="custom_left_fieldset">
+        </metal:custom_left_fieldset>
 
-                <fieldset><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
-                    <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
-                </fieldset>
-            </td>
-        </tr>
-    </table>
+    </div>
+ 
+    <div class="licence-column" style="width: 47%">
+
+        <fieldset class="licence-right-fieldset">
+            <legend i18n:translate="urban_description_key_dates_legend">Key dates</legend>
+            <table tal:define="keyDates view/getKeyDates;
+                               inquiryDates view/getInquiryDates"
+                   class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+                <tr tal:repeat="date keyDates">
+                    <td valign="top"><b><span tal:content="python: date['label']">Receipt date</span>:</b></td>
+                    <td width="2%"></td>
+                    <td valign="top" tal:define="date_value python: date['date']">
+                        <a href="#" tal:condition="date_value" tal:attributes="href python: date['url']" tal:content="python: date_value">Content</a>
+                        <span class="discreet" tal:condition="not: date_value" i18n:translate="content_none">None</span>
+                    </td>
+                </tr>
+                <tal:inquiries repeat="inquiry inquiryDates">
+                <tr>
+                    <td valign="top">
+                        <b><span i18n:translate="urban_investigationStart">from <span i18n:name="number" tal:content="repeat/inquiry/number"/></span>:</b>
+                    </td>
+                    <td width="2%"></td>
+                    <td valign="top" tal:define="start_date python: inquiry['start_date'];
+                                                 url python: inquiry['url']">
+                        <a href="#" tal:condition="python: start_date and url" tal:attributes="href url" tal:content="python: start_date">Content</a>
+                        <span tal:condition="python: start_date and not url" tal:content="python: start_date">end date</span>
+                        <span tal:condition="not: start_date" class="discreet" i18n:translate="content_none">None</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top"><b><span i18n:translate="urban_label_investigationEnd">to</span>:</b></td>
+                    <td width="2%"></td>
+                    <td valign="top" tal:define="end_date python: inquiry['end_date'];
+                                                 url python: inquiry['url']">
+                        <a href="#" tal:condition="python: end_date and url" tal:attributes="href url" tal:content="python: end_date">Content</a>
+                        <span tal:condition="python: end_date and not url" tal:content="python: end_date">end date</span>
+                        <span tal:condition="not: end_date" class="discreet" i18n:translate="content_none">None</span>
+                    </td>
+                </tr>
+                </tal:inquiries>
+            </table>
+        </fieldset>
+
+        <fieldset tal:define="workLocations context/getWorkLocations">
+            <legend i18n:translate="urban_label_workLocations">Work locations</legend>
+            <div tal:condition="workLocations">
+                <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" />
+            </div>
+            <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
+        </fieldset>
+
+        <metal:representatives define-slot="representatives">
+        </metal:representatives>
+
+        <fieldset>
+            <legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
+            <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
+        </fieldset>
+    </div>
 </div>
 
 
-<div metal:define-macro="road_macro" i18n:domain="urban">
-    <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
-           tal:define="default_custom python: [];
-                       custom custom | python: []; custom python: custom + default_custom">
+<div class="licence-column" metal:define-macro="road_macro" i18n:domain="urban">
+    <fieldset>
+        <legend i18n:translate="legend_details">Details parcel(s)</legend>
+        <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+               tal:define="default_custom python: [];
+                           custom custom | python: []; custom python: custom + default_custom">
 
-        <tal:loop repeat="field view/getRoadFields">
-            <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
-        </tal:loop>
+            <tal:loop repeat="field view/getRoadFields">
+                <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+            </tal:loop>
 
-    </table>
+        </table>
+    </fieldset>
 </div>
 
 
-<div metal:define-macro="location_macro" i18n:domain="urban">
-    <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
-           tal:define="default_custom python: ['isInPCA', 'isInSubdivision'];
-                       default_exclude python: [
-                           'title', 'workLocations', 'architects', 'geometricians', 'notaryContact',
-                           'pca', 'parcellings', 'subdivisionDetails'
-                       ];
-                       custom custom | python: []; custom python: custom + default_custom;
-                       exclude exclude | default_exclude">
+<div class="licence-column" metal:define-macro="location_macro" i18n:domain="urban">
+    <fieldset>
+        <legend i18n:translate="legend_details">Details parcel(s)</legend>
+        <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+               tal:define="default_custom python: ['isInPCA', 'isInSubdivision'];
+                           default_exclude python: [
+                               'title', 'workLocations', 'architects', 'geometricians', 'notaryContact',
+                               'pca', 'parcellings', 'subdivisionDetails'
+                           ];
+                           custom custom | python: []; custom python: custom + default_custom;
+                           exclude exclude | default_exclude">
 
-        <tal:loop repeat="field python: view.getLocationFields(exclude)">
-            <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
-        </tal:loop>
-    </table>
+            <tal:loop repeat="field python: view.getLocationFields(exclude)">
+                <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+            </tal:loop>
+        </table>
+    </fieldset>
 
     <fieldset tal:condition="useTabbing"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
         <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
@@ -149,20 +157,23 @@
 </div>
 
 
-<div metal:define-macro="peb_macro" i18n:domain="urban">
-    <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
-           tal:define="default_custom python: [];
-                       custom custom | python: []; custom python: custom + default_custom">
+<div class="licence-column" metal:define-macro="peb_macro" i18n:domain="urban">
+    <fieldset>
+        <legend i18n:translate="legend_details">Details parcel(s)</legend>
+        <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+               tal:define="default_custom python: [];
+                           custom custom | python: []; custom python: custom + default_custom">
 
-        <tal:loop repeat="field view/getPebFields">
-            <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
-        </tal:loop>
+            <tal:loop repeat="field view/getPebFields">
+                <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+            </tal:loop>
 
-    </table>
+        </table>
+    </fieldset>
 </div>
 
 
-<div metal:define-macro="investigation_and_advices_macro" i18n:domain="urban"
+<div class="licence-column" metal:define-macro="investigation_and_advices_macro" i18n:domain="urban"
      tal:define="ctype python: context.portal_types.getTypeInfo('Inquiry');
                  inquiries view/getInquiriesForDisplay;
                  member context/@@plone_portal_state/member;">
@@ -304,39 +315,33 @@
 </div>
 
 
-<div metal:define-macro="urbanEventsMacro" i18n:domain="urban">
-    <table cellspacing=0 cellpadding=0 width=100%>
-        <tr>
-            <td tal:define="eventTypes view/getUrbanEventTypes">
-                <form action="createUrbanEvent" method="POST"
-                      tal:condition="view/canAddUrbanEvent">
-                    <input type='hidden' name="urban_folder_uid" tal:attributes="value here/UID" value=''>
-                        <select name="urban_event_type_uid">
-                            <tal:loopEventType repeat="eventType eventTypes">
-                                <option tal:attributes="value eventType/UID" value='' tal:content="eventType/Title">
-                                </option>
-                            </tal:loopEventType>
-                        </select>
-                    <input class="urbanButton contenttype-urbanevent button-urbanevent" type="submit" i18n:attributes="value" value="Add an event">
-                </form>
-                <p class="discreet" tal:condition="not: eventTypes" i18n:translate="urban_no_eventtype_defined">
-                    No event type is defined in the configuration for this element
-                </p>
-                <br />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div>
-                    <tal:listing content="structure view/renderEventsListing" />
-                </div>
-            </td>
-        </tr>
-    </table>
+<div class="licence-column" metal:define-macro="urbanEventsMacro" i18n:domain="urban">
+    <tal:bla define="eventTypes view/getUrbanEventTypes">
+        <!--legend i18n:translate="urban_create_events">Create event</legend-->
+        <form action="createUrbanEvent" method="POST"
+              tal:condition="view/canAddUrbanEvent">
+            <input type='hidden' name="urban_folder_uid" tal:attributes="value here/UID" value=''>
+                <select name="urban_event_type_uid">
+                    <tal:loopEventType repeat="eventType eventTypes">
+                        <option tal:attributes="value eventType/UID" value='' tal:content="eventType/Title">
+                        </option>
+                    </tal:loopEventType>
+                </select>
+            <input class="urbanButton contenttype-urbanevent button-urbanevent" type="submit" i18n:attributes="value" value="Add an event">
+        </form>
+        <p class="discreet" tal:condition="not: eventTypes" i18n:translate="urban_no_eventtype_defined">
+            No event type is defined in the configuration for this element
+        </p>
+    </tal:bla>
+    <!--/fieldset-->
+    <fieldset>
+        <legend i18n:translate="urban_events">Events</legend>
+        <tal:listing content="structure view/renderEventsListing" />
+    </fieldset>
 </div>
 
 
-<div metal:define-macro="urbanAdvicesEventsMacro" i18n:domain="urban">
+<div class="licence-column" metal:define-macro="urbanAdvicesEventsMacro" i18n:domain="urban">
     <div tal:condition="view/canAddAllAdvices" >
         <fieldset>
             <legend i18n:translate="folder_advice">Folder advices</legend>

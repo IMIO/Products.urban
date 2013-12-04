@@ -875,5 +875,18 @@
   />
   <!-- table values adapters end -->
 
-</configure>
+  <configure package="imio.actionspanel">
 
+    <browser:viewlet
+       name="imio.actionspanel"
+       for="Products.urban.interfaces.IUrbanEvent"
+       manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+       class=".browser.viewlets.ActionsPanelViewlet"
+       template="browser/actions_panel_viewlet.pt"
+       permission="zope2.View"
+     />
+
+  </configure>
+
+</configure>
