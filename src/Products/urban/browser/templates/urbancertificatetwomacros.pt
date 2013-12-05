@@ -6,6 +6,11 @@
                              ];">
         <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
 
+            <fieldset metal:fill-slot="applicant_slot">
+                <legend i18n:translate="proprietaries">Proprietary(ies)</legend>
+                <div metal:use-macro="here/@@licencemacros/urbanProprietariesMacro" />
+            </fieldset>
+
             <fieldset metal:fill-slot="representatives"><legend i18n:translate="urban_label_notaryContact">Notary(ies)</legend>
                 <div metal:use-macro="here/@@licencemacros/urbanNotariesMacro" />
             </fieldset>
