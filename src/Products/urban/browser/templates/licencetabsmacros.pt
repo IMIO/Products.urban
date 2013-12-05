@@ -310,7 +310,7 @@
           tal:attributes="action python: context.absolute_url() + '/createObject'"
           action="createObject" method="post">
         <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
-        <input type="submit" class="contenttype-inquiry button-inquiry" id="event" value="add_an_inquiry" i18n:attributes="value" />
+        <input type="submit" class="context apButton contenttype-inquiry" id="event" value="add_an_inquiry" i18n:attributes="value" />
     </form>
 </div>
 
@@ -327,7 +327,7 @@
                         </option>
                     </tal:loopEventType>
                 </select>
-            <input class="urbanButton contenttype-urbanevent button-urbanevent" type="submit" i18n:attributes="value" value="Add an event">
+            <input class="context apButton contenttype-urbanevent" type="submit" i18n:attributes="value" value="Add an event">
         </form>
         <p class="discreet" tal:condition="not: eventTypes" i18n:translate="urban_no_eventtype_defined">
             No event type is defined in the configuration for this element

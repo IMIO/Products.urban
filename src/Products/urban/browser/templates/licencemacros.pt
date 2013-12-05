@@ -71,7 +71,7 @@
         tal:attributes="action python: context.absolute_url() + '/createObject'"
         i18n:domain="urban" name="quickAdd"  action="createObject" method="post">
   <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
-  <input type="submit" class="urbanButton contenttype-applicant button-applicant" id="add-applicant" value="add_an_applicant" i18n:attributes="value" />
+  <input type="submit" class="context apButton contenttype-applicant" id="add-applicant" value="add_an_applicant" i18n:attributes="value" />
   </form>
  </div>
 </metal:applicants>
@@ -92,7 +92,7 @@
         tal:attributes="action python: context.absolute_url() + '/createObject'"
         i18n:domain="urban" name="quickAdd"  action="createObject" method="post">
   <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
-  <input type="submit" class="urbanButton contenttype-proprietary button-proprietary" id="add-proprietary" value="add_a_proprietary" i18n:attributes="value" />
+  <input type="submit" class="context apButton contenttype-proprietar" id="add-proprietary" value="add_a_proprietary" i18n:attributes="value" />
   </form>
  </div>
 </metal:proprietaries>
