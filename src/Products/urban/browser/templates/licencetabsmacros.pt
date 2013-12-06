@@ -31,10 +31,7 @@
     <div class="licence-column" style="width: 47%">
 
         <metal:applicants define-slot="applicant_slot">
-            <fieldset>
-                <legend i18n:translate="applicants">Applicant(s)</legend>
-                <div metal:use-macro="here/@@licencemacros/urbanApplicantsMacro" />
-            </fieldset>
+            <metal:applicants_macro use-macro="here/@@licencemacros/urbanApplicantsMacro" />
         </metal:applicants>
 
         <fieldset>
@@ -98,7 +95,8 @@
             </table>
         </fieldset>
 
-        <fieldset tal:define="workLocations context/getWorkLocations">
+        <fieldset metal:define-slot="worklocations"
+                  tal:define="workLocations context/getWorkLocations">
             <legend i18n:translate="urban_label_workLocations">Work locations</legend>
             <div tal:condition="workLocations">
                 <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" />
