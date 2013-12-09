@@ -41,6 +41,7 @@ from DateTime import DateTime
 from StringIO import StringIO
 from AccessControl import getSecurityManager
 from Acquisition import aq_base
+from plone import api
 from zope.i18n import translate
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFCore.utils import getToolByName
@@ -1449,11 +1450,18 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
           If renderToNull is True, the found expressions will not be rendered but
           replaced by the nullValue defined below
         """
-        portal = getToolByName(self, 'portal_url').getPortalObject()
         renderedDescription = text
         for expr in re.finditer('\[\[(.*?)\]\]', text):
             if not renderToNull:
-                ctx = createExprContext(context.getParentNode(), portal, context)
+                data = {
+                    'self': context.aq_parent,
+                    'object': context,
+                    'event': context,
+                    'context': context,
+                    'tool': self,
+                    'portal': api.portal.getSite(),
+                }
+                ctx = getEngine().getContext(data)
                 try:
                     #expr.groups()[0] is the expr without the [[]]
                     res = Expression(expr.groups()[0])(ctx)
@@ -1469,7 +1477,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             if type(res) == tuple:
                 res = res[0]
             if type(res) == unicode:
-                res = res.encode()
+                res = res.encode('utf8')
             renderedDescription = re.sub(re.escape(expr.group()), res, renderedDescription)
         return renderedDescription
 
