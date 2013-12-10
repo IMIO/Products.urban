@@ -11,7 +11,7 @@
     </head>
 
     <body>
-        <div metal:fill-slot="content-core">
+        <metal:core fill-slot="content-core">
             <metal:main_macro define-macro="main">
                 <metal:body define-macro="body_macro" tal:define="linkedUrbanEventType view/getUrbaneventtypes;
                                                                   member context/@@plone_portal_state/member;">
@@ -19,33 +19,35 @@
                     <tal:comment replace="nothing">Go back...</tal:comment>
                     <metal:listing use-macro="here/@@globalmacros/goBackToMacro" />
 
-                    <table width=100%>
-                        <tr valign="top">
-                            <td width=35%>
+                    <table>
+                        <tr>
+                            <td colspan="3">
                                 <metal:listing use-macro="context/@@urbanevent-macros/urbanEventDataMacro" />
-                                <metal:listing use-macro="context/@@urbanevent-macros/urbanEventGenerateDocumentMacro" />
-                            </td>
-                            <td width=65%>
-                                <fieldset><legend i18n:translate="event_linked_documents">Event linked documents</legend>
-                                    <div>
-                                        <tal:listing content="structure view/renderGeneratedDocumentsListing" />
-                                    </div>
-                                </fieldset>
                             </td>
                         </tr>
-                        <tr valign="top">
-                            <td width=35%>
-                                <metal:listing use-macro="context/@@urbanevent-macros/urbanEventAddAnnexMacro" />
+
+                        <tr>
+                            <td valign="top">
+                                <metal:listing use-macro="context/@@urbanevent-macros/urbanEventGenerateDocumentMacro" />
                             </td>
-                            <td width=65%>
-                                <fieldset><legend i18n:translate="event_linked_annexes">Event linked annexes</legend>
-                                   <div>
-                                       <tal:listing content="structure view/renderAnnexListing" />
-                                   </div>
+                            <td width="1%"></td>
+                            <td>
+                                <fieldset>
+                                    <legend i18n:translate="event_linked_documents">Event linked documents</legend>
+                                    <tal:listing content="structure view/renderGeneratedDocumentsListing" />
+                                </fieldset>
+
+                                <fieldset>
+                                   <legend i18n:translate="event_linked_annexes">Event linked annexes</legend>
+                                   <tal:listing content="structure view/renderAnnexListing" />
+                                   <metal:listing use-macro="context/@@urbanevent-macros/urbanEventAddAnnexMacro" />
                                 </fieldset>
                             </td>
                         </tr>
                     </table>
+
+
+                    <div class="visualClear" ></div>
 
                     <tal:block condition="python: context.REQUEST.get('doc_uid') != None">
                         <tal:block define="docObj python:context.uid_catalog(UID=context.REQUEST.get('doc_uid'))[0]">
@@ -55,6 +57,6 @@
 
                 </metal:body>
             </metal:main_macro>
-        </div>
+        </metal:core>
     </body>
 </html>

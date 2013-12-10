@@ -13,7 +13,7 @@
 
                     <metal:titleWithIcon use-macro="here/@@globalmacros/titleWithIcon" />
 
-                    <tal:showtabbing condition="useTabbing">
+                    <div id="urbanViewWithTabbing" tal:condition="useTabbing">
 
                         <dl class="formTabs enableFormTabbing">
                         <tal:tab_loop repeat="tab tabs">
@@ -33,7 +33,7 @@
                             <metal:advices use-macro="here/@@licencetabs-macros/urbanAdvicesEventsMacro" />
                         </dd>
 
-                    </tal:showtabbing>
+                    </div>
 
 
                     <tal:notabbing condition="not: useTabbing">

@@ -28,7 +28,7 @@
 
 
 <div metal:define-macro="description_macro" i18n:domain="urban">
-    <div class="licence-column" style="width: 47%">
+    <div class="licence-column">
 
         <metal:applicants define-slot="applicant_slot">
             <metal:applicants_macro use-macro="here/@@licencemacros/urbanApplicantsMacro" />
@@ -53,7 +53,7 @@
 
     </div>
  
-    <div class="licence-column" style="width: 47%">
+    <div class="licence-column">
 
         <fieldset class="licence-right-fieldset">
             <legend i18n:translate="urban_description_key_dates_legend">Key dates</legend>

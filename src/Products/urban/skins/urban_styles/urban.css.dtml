@@ -5,8 +5,9 @@
 /* <dtml-with base_properties> (do not remove this :) */
 /* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
 
-.apButton {
+input[type=button], input[type=submit] {
      background-position: 3px 3px;
+     box-shadow: 1px 1px 3px grey;
 }
 
 /* Colors on states */
@@ -43,7 +44,7 @@ color: red !important;
 }
 
 .icons-on #visual-portal-wrapper table.listing td {
-    line-height: 1.3em;
+    line-height: 1.4em;
 }
 
 .icons-on #visual-portal-wrapper table.listing td a {
@@ -108,12 +109,88 @@ table.listing tbody tr span.manual_parcel {
     background-repeat: no-repeat;
 }
 
+#urbanViewWithTabbing .enableFormTabbing {
+    border-color: #DDDDDD;
+    border-style: none solid solid !important;
+    border-width: 4px !important;
+    margin-top: -1em;
+}
+
+table[id^="datagridwidget-table"] {
+    border: 1px grey solid;
+    margin-bottom: 0.5em !important;
+}
+
+table[id^="datagridwidget-table-"] THEAD TH {
+    padding-left: 0.5em;
+    background-color: #DDDDDD;
+    font-weight: bold !important;
+}
+
+/* should go back to Products.DataGridField */
+a.datagridwidget-add-button, a.datagridwidget-add-button:hover {
+    background-position: 5px 5px !important;
+    padding-right: 5px !important;
+}
+
+/* align the add button of datagrid widgets on the left */
+#datagridwidget-add-button {
+ float: left;
+ margin-bottom: 1.5em;
+}
+
+#datagridwidget-table-workLocations {
+    width: 600px !important;
+}
+
+#datagridwidget-table-businessOldLocation {
+    width: 600px !important;
+}
+
+#datagridwidget-table-roadEquipments {
+    width: 100% !important;
+}
+
+#datagridwidget-table-roadEquipments .datagridwidget-column-1 {
+    width: 400px;
+}
+
+table[id$=ecificFeatures] td{
+   vertical-align: middle;
+}
+
+table[id$=ecificFeatures] tr.odd{
+   background-color: lightgray;
+}
 .licence-column {
     float: left;
     margin: 5px;
 }
 
-#content .licence-column fieldset{
+.formPanel{
+    display: inline-block;
+}
+
+#content .event-column {
+    float: left;
+    margin: 5px;
+}
+
+#content div form fieldset {
+    border-color: #DDDDDD !important;
+    border-style: none solid solid !important;
+    border-width: 4px !important;
+    margin-top: 0;
+    padding-top: 0.5em;
+    border-radius: 0px;
+    display: block;
+}
+
+label {
+    font-weight: normal;
+}
+
+#content div fieldset{
     line-height: 1.5em;
 }
 /* </dtml-with> */
