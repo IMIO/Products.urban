@@ -29,8 +29,10 @@
                             <span>Events</span>
                         </dt>
                         <dd id="fieldset-urban_events">
-                            <metal:events use-macro="here/@@licencetabs-macros/urbanEventsMacro" />
-                            <metal:advices use-macro="here/@@licencetabs-macros/urbanAdvicesEventsMacro" />
+                            <div class="licence-column">
+                                <metal:events use-macro="here/@@licencetabs-macros/urbanEventsMacro" />
+                                <metal:advices use-macro="here/@@licencetabs-macros/urbanAdvicesEventsMacro" />
+                            </div>
                         </dd>
 
                     </div>

@@ -64,7 +64,7 @@ table.listing tbody tr span.manual_parcel {
 .icons-on .contenttype-architect {background: no-repeat transparent 0px -213px url(urban-sprite.png);}
 .icons-on .contenttype-buildlicence {background: no-repeat transparent 0px 1px url(urban-sprite.png);}
 .icons-on .contenttype-declaration {background: no-repeat transparent 0px -431px url(urban-sprite.png);}
-.icons-on .contenttype-miscdemand {background: no-repeat transparent url(urban-sprite.png);}
+.icons-on .contenttype-miscdemand {background: no-repeat transparent url(MiscDemand.png);}
 .icons-on .contenttype-division {background: no-repeat transparent 0px -646px url(urban-sprite.png);}
 .icons-on .contenttype-envclassthree {background: no-repeat transparent 0px -862px url(urban-sprite.png);}
 .icons-on .contenttype-foldermanager {background: no-repeat transparent 0px -213px url(urban-sprite.png);}

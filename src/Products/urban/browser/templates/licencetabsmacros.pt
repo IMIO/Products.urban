@@ -52,7 +52,7 @@
         </metal:custom_left_fieldset>
 
     </div>
- 
+
     <div class="licence-column">
 
         <fieldset class="licence-right-fieldset">
@@ -313,8 +313,8 @@
 </div>
 
 
-<div class="licence-column" metal:define-macro="urbanEventsMacro" i18n:domain="urban">
-    <tal:bla define="eventTypes view/getUrbanEventTypes">
+<metal:events define-macro="urbanEventsMacro" i18n:domain="urban">
+    <tal:add_events define="eventTypes view/getUrbanEventTypes">
         <!--legend i18n:translate="urban_create_events">Create event</legend-->
         <form action="createUrbanEvent" method="POST"
               tal:condition="view/canAddUrbanEvent">
@@ -330,16 +330,16 @@
         <p class="discreet" tal:condition="not: eventTypes" i18n:translate="urban_no_eventtype_defined">
             No event type is defined in the configuration for this element
         </p>
-    </tal:bla>
+    </tal:add_events>
     <!--/fieldset-->
     <fieldset>
         <legend i18n:translate="urban_events">Events</legend>
         <tal:listing content="structure view/renderEventsListing" />
     </fieldset>
-</div>
+</metal:events>
 
 
-<div class="licence-column" metal:define-macro="urbanAdvicesEventsMacro" i18n:domain="urban">
+<metal:add_all_advices define-macro="urbanAdvicesEventsMacro" i18n:domain="urban">
     <div tal:condition="view/canAddAllAdvices" >
         <fieldset>
             <legend i18n:translate="folder_advice">Folder advices</legend>
@@ -347,7 +347,7 @@
                 <tr>
                     <td>
                         <form action="createAllAdvices" method="POST">
-                            <input class="urbanButton contenttype-urbanevent button-urbanevent" type="submit" value="Add all advices"
+                            <input class="context" type="submit" value="Add all advices"
                                    i18n:attributes="value">
                         </form>
                         <div class="discreet">
@@ -359,4 +359,4 @@
             </table>
         </fieldset>
      </div>
-</div>
+</metal:add_all_advices>
