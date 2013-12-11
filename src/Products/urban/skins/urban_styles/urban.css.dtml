@@ -169,6 +169,7 @@ table[id$=ecificFeatures] tr.odd{
 
 .formPanel{
     display: inline-block;
+    line-height: 1.5em;
 }
 
 #content .event-column {
@@ -190,12 +191,16 @@ label {
     font-weight: normal;
 }
 
-#content div fieldset{
+#content div fieldset, #licenceconfig-base-edit {
     line-height: 1.5em;
 }
 
 .urban-document-already-created {
 background-color: #75AD0A;
+}
+
+#portaltab-urban {
+    visibility: hidden;
 }
 
 /* </dtml-with> */
