@@ -53,7 +53,7 @@
 
     </div>
 
-    <div class="licence-column" style="max-width: 38%">
+    <div class="licence-column">
 
         <fieldset>
             <legend i18n:translate="urban_description_key_dates_legend">Key dates</legend>
