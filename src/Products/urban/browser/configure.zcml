@@ -887,6 +887,15 @@
        permission="zope2.View"
      />
 
+    <browser:page
+        for="Products.urban.interfaces.IUrbanEvent"
+        name="actions_panel"
+        class="Products.urban.browser.event_actionspanel.EventActionsPanelView"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        template="browser/actions_panel.pt"
+        allowed_attributes="render"
+        permission="zope2.View" />
+
   </configure>
 
 </configure>
