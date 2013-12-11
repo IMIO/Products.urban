@@ -5,7 +5,7 @@
 
         <tal:normal_field condition="python: fieldname not in custom">
             <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
-            <td width="2%"></td>
+            <td width="10px"></td>
             <td valign="top" tal:condition="not: simpletext">
                 <tal:non_null_value condition="not: nullvalue">
                     <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
@@ -28,7 +28,7 @@
 
 
 <div metal:define-macro="description_macro" i18n:domain="urban">
-    <div class="licence-column">
+    <div class="licence-column" style="max-width: 58%">
 
         <metal:applicants define-slot="applicant_slot">
             <metal:applicants_macro use-macro="here/@@licencemacros/urbanApplicantsMacro" />
@@ -53,16 +53,16 @@
 
     </div>
 
-    <div class="licence-column">
+    <div class="licence-column" style="max-width: 38%">
 
-        <fieldset class="licence-right-fieldset">
+        <fieldset>
             <legend i18n:translate="urban_description_key_dates_legend">Key dates</legend>
             <table tal:define="keyDates view/getKeyDates;
                                inquiryDates view/getInquiryDates"
                    class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
                 <tr tal:repeat="date keyDates">
                     <td valign="top"><b><span tal:content="python: date['label']">Receipt date</span>:</b></td>
-                    <td width="2%"></td>
+                    <td width="10px"></td>
                     <td valign="top" tal:define="date_value python: date['date']">
                         <a href="#" tal:condition="date_value" tal:attributes="href python: date['url']" tal:content="python: date_value">Content</a>
                         <span class="discreet" tal:condition="not: date_value" i18n:translate="content_none">None</span>
@@ -73,7 +73,7 @@
                     <td valign="top">
                         <b><span i18n:translate="urban_investigationStart">from <span i18n:name="number" tal:content="repeat/inquiry/number"/></span>:</b>
                     </td>
-                    <td width="2%"></td>
+                    <td width="10px"></td>
                     <td valign="top" tal:define="start_date python: inquiry['start_date'];
                                                  url python: inquiry['url']">
                         <a href="#" tal:condition="python: start_date and url" tal:attributes="href url" tal:content="python: start_date">Content</a>
@@ -83,7 +83,7 @@
                 </tr>
                 <tr>
                     <td valign="top"><b><span i18n:translate="urban_label_investigationEnd">to</span>:</b></td>
-                    <td width="2%"></td>
+                    <td width="10px"></td>
                     <td valign="top" tal:define="end_date python: inquiry['end_date'];
                                                  url python: inquiry['url']">
                         <a href="#" tal:condition="python: end_date and url" tal:attributes="href url" tal:content="python: end_date">Content</a>
@@ -220,7 +220,7 @@
 
                     <tal:normal_field condition="python: fieldname not in exclude">
                         <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
-                        <td width="2%"></td>
+                        <td width="10px"></td>
                         <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
                             <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
                         </td>
@@ -228,7 +228,7 @@
 
                     <tal:opinions condition="python: fieldname == 'solicitOpinionsTo'">
                         <td valign="top"><b><span i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</span>:</b></td>
-                        <td width="2%"></td>
+                        <td width="10px"></td>
                         <td tal:define="opinionIds inquiry/getSolicitOpinionsTo" style="padding-top: 1em;">
                             <table tal:condition="opinionIds" cellspacing="0" cellpadding="0" width="100%" class="listing">
                                 <thead>
@@ -287,7 +287,7 @@
            <tal:comment replace="nothing">Link to the UrbanEventInquiry if exists</tal:comment>
            <tr>
                <td valign="top"><b><span i18n:translate="urban_linked_urbaneventinquiry">Linked urban event inquiry</span>:</b></td>
-               <td width="2%"></td>
+               <td width="10px"></td>
                <td valign="top"
                    tal:define="linkedUrbanEventInquiry python: inquiry.getLinkedUrbanEventInquiry();">
                    <a tal:condition="python: linkedUrbanEventInquiry"

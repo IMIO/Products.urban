@@ -1,13 +1,13 @@
 <metal:foldermanagers define-macro="foldermanagers">
     <td valign="top"><b><span i18n:translate="urban_label_foldermanagers">Treating agent</span>:</b></td>
-    <td width="2%"></td>
+    <td width="10px"></td>
     <td valign="top"><div metal:use-macro="here/@@licencemacros/urbanFolderManagerMacro" /></td>
 </metal:foldermanagers>
 
 
 <metal:subdivision define-macro="isInSubdivision">
     <td valign="top"><b><span i18n:translate="urban_label_isInSubdivision">In subdivision?</span>:</b></td>
-    <td width="2%"></td>
+    <td width="10px"></td>
     <td width="49%" valign="top" valign="top" tal:define="isInSubdivision context/getIsInSubdivision">
         <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='view')" />
         <tal:isInSubdivision condition="isInSubdivision">
@@ -22,7 +22,7 @@
 
 <metal:pca define-macro="isInPCA">
     <td valign="top"><b><span i18n:translate="urban_label_isInPCA">In PCA?</span>:</b></td>
-    <td width="2%"></td>
+    <td width="10px"></td>
     <td valign="top" tal:define="isInPCA context/getIsInPCA">
         <metal:myfield use-macro="python:here.widget('isInPCA', mode='view')" />
         <tal:isInPCA condition="isInPCA">
@@ -34,7 +34,7 @@
 
 
 <metal:spf_display define-macro="spf_display">
-    <td width="2%"></td>
+    <td width="10px"></td>
     <td tal:condition="not: specificfeatures" >
         <span class="discreet" i18n:translate="content_none">None</span>
     </td>
@@ -45,7 +45,7 @@
             </tr>
         </table>
     </td>
-    <td width="2%"></td>
+    <td width="10px"></td>
 </metal:spf_display>
 
 
@@ -82,7 +82,7 @@
         </tal:specificfeatures>
         <tr tal:condition="python: 'opinionsToAskIfWorks' in usedAttributes">
             <td valign="top"><b><span i18n:translate="urban_label_opinionsToAskIfWorks">Opinions to ask in case of works</span>:</b></td>
-            <td width="2%"></td>
+            <td width="10px"></td>
             <td valign="top"><metal:myfield use-macro="python:here.widget('opinionsToAskIfWorks', mode='view')" /></td>
         </tr>
     </table>
@@ -92,7 +92,7 @@
 <metal:rubrics define-macro="rubrics">
     <tal:vars define="rubrics view/getRubrics">
         <td valign="top"><b><span i18n:translate="urban_label_rubrics">Rubrics</span>:</b></td>
-        <td width="2%"></td>
+        <td width="10px"></td>
         <td tal:condition="not: rubrics" >
             <span class="discreet" i18n:translate="content_none">None</span>
         </td>
@@ -111,7 +111,7 @@
     <tal:vars define="min_conditions view/getMinimumConditions;
                       sup_conditions view/getAdditionalConditions">
         <td valign="top"><b><span i18n:translate="urban_label_minimumLegalConditions">Exploitation conditions</span>:</b></td>
-        <td width="2%"></td>
+        <td width="10px"></td>
         <td tal:condition="python: not (min_conditions or sup_conditions)" valign="top">
             <span class="discreet" i18n:translate="content_none">None</span>
         </td>
@@ -142,7 +142,7 @@
                  </span>:
             </b>
         </td>
-        <td width="2%"></td>
+        <td width="10px"></td>
         <td valign="top" id="urban-additional-conditions"
             tal:condition="hasAdditionalConditions"
             tal:define="infos python: context.portal_urban.getTextToShow(context, field);
