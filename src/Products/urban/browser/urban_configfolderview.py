@@ -12,7 +12,7 @@ class UrbanConfigFolderView(BrowserView):
       This manage methods common in all config folders view out of the portal_urban
     """
     def __init__(self, context, request):
-        super(BrowserView, self).__init__(context, request)
+        super(UrbanConfigFolderView, self).__init__(context, request)
         self.context = context
         self.request = request
 
@@ -26,7 +26,7 @@ class UrbanConfigFolderView(BrowserView):
         return '%s%s' % (listing_render, batch_render)
 
     def getCSSClass(self):
-        return ''
+        return 'context'
 
 
 class ParcellingsFolderView(UrbanConfigFolderView):
@@ -60,7 +60,8 @@ class ArchitectsFolderView(ContactsFolderView):
         return self.renderObjectListing(ArchitectsTable)
 
     def getCSSClass(self):
-        return 'contenttype-architect button-architect'
+        base_css = super(ArchitectsFolderView, self).getCSSClass()
+        return '{} contenttype-architect'.format(base_css)
 
 
 class GeometriciansFolderView(ContactsFolderView):
@@ -71,7 +72,8 @@ class GeometriciansFolderView(ContactsFolderView):
         return self.renderObjectListing(GeometriciansTable)
 
     def getCSSClass(self):
-        return 'contenttype-geometrician button-geometrician'
+        base_css = super(GeometriciansFolderView, self).getCSSClass()
+        return '{} contenttype-geometrician'.format(base_css)
 
 
 class NotariesFolderView(ContactsFolderView):
@@ -82,4 +84,5 @@ class NotariesFolderView(ContactsFolderView):
         return self.renderObjectListing(NotariesTable)
 
     def getCSSClass(self):
-        return 'contenttype-notary button-notary'
+        base_css = super(NotariesFolderView, self).getCSSClass()
+        return '{} contenttype-notary'.format(base_css)

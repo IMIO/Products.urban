@@ -19,7 +19,7 @@
 <form action="genstatsins" method="GET">
 <span i18n:translate="label_from">From</span> : <input type="text" name="datefrom">
 <span i18n:translate="label_to">To</span> : <input type="text" name="dateto">
-<br /><br /><input class="searchButton" type="submit" value="label_export" i18n:attributes="value" />
+<br /><br /><input class="context" type="submit" value="label_export" i18n:attributes="value" />
 
 </form>
 

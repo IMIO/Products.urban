@@ -152,7 +152,7 @@
    <td>
  </tr>
 </table><br/>
-<input class="searchButton" type="submit" value="Search" i18n:attributes="value" />
+<input class="context" type="submit" value="Search" i18n:attributes="value" />
 </form>
 
 <!-- Display results -->
@@ -241,7 +241,7 @@
       <input type="hidden" name="divname" value="#" tal:attributes="value python: res['divname']" />
       <input type="hidden" name="prca" value="#" tal:attributes="value python: res['prc']" />
       <input type="hidden" name="old" value="#" tal:attributes="value python: res.get('old', False)"/>
-      <input type="submit" class="searchButton" id="parcel" value="Rechercher les autres noms" i18n:attributes="value" />
+      <input type="submit" class="context" id="parcel" value="Rechercher les autres noms" i18n:attributes="value" />
     </form>
    </td>
   </tr>

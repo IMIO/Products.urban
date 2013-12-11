@@ -12,7 +12,7 @@
 
 <form action="" method="GET">
     <input type="hidden" name="check" value="yes"/>
-    <input class="searchButton" type="submit" value="Check parcels" i18n:attributes="value" />
+    <input class="context" type="submit" value="Check parcels" i18n:attributes="value" />
 </form>
 <br/>
 <tal:result condition="result">

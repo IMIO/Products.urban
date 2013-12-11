@@ -96,7 +96,7 @@
 </table>
 </fieldset>
  <fieldset>
-  <input class="searchButton" type="submit" value="Statistics" name="Statistics" i18n:attributes="value">
+  <input class="context" type="submit" value="Statistics" name="Statistics" i18n:attributes="value">
  </fieldset>
 </form>
 

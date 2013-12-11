@@ -24,7 +24,7 @@
 <span i18n:translate="label_to">To</span> : <input type="text" name="dateto"><br>
 <input type="checkbox" name="list_only" value=1>
 <label for="list_only" i18n:translate="label_list_only">Only display the list</label>
-<br /><br /><input class="searchButton" type="submit" value="label_export" i18n:attributes="value" />
+<br /><br /><input class="context" type="submit" value="label_export" i18n:attributes="value" />
 
 </form>
 

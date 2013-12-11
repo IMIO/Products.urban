@@ -80,7 +80,7 @@
  </dl>
  </div>
  <br />
- <input class="searchButton" type="submit" value="Search" name="Search" i18n:attributes="value">
+ <input class="context" type="submit" value="Search" name="Search" i18n:attributes="value">
  <br />
  <br />
 </form>
