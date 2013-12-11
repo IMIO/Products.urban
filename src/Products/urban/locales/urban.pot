@@ -1161,6 +1161,15 @@ msgstr ""
 msgid "roadspecificfeatures_folder_title"
 msgstr ""
 
+msgid "root-licences"
+msgstr ""
+
+msgid "root-stats-search"
+msgstr ""
+
+msgid "root-configuration"
+msgstr ""
+
 msgid "rubrics_folder_title"
 msgstr ""
 

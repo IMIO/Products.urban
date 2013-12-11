@@ -43,11 +43,6 @@ msgstr "Coordonnées du demandeur"
 msgid "Architect data"
 msgstr "Coordonnées de l'architecte"
 
-#. Default: "Areadescriptiontext"
-#: EnvironmentLicence.py
-msgid "urban_label_areaDescriptionText"
-msgstr "Description des lieux et des abords du projet"
-
 msgid "BuildLicence"
 msgstr "Permis d'urbanisme"
 
@@ -528,6 +523,9 @@ msgstr "Résultats/page"
 msgid "envclassone_urbanconfig_title"
 msgstr "Paramètres des Permis d'environnement classe 1"
 
+msgid "envclassones"
+msgstr "Permis d'environnement classe 1"
+
 msgid "envclassthree_searchacceptedlicences"
 msgstr "déclarations environnementales acceptées"
 
@@ -551,9 +549,6 @@ msgstr "Paramètres des déclarations environnementales"
 
 msgid "envclassthrees"
 msgstr "Déclarations environnementales"
-
-msgid "envclassones"
-msgstr "Permis d'environnement classe 1"
 
 msgid "equipmenttypes_folder_title"
 msgstr "Equipements de la voirie"
@@ -1158,6 +1153,15 @@ msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes (Fiche
 msgid "roadspecificfeatures_folder_title"
 msgstr "Particularités du bien (voirie)"
 
+msgid "root-configuration"
+msgstr "Configuration"
+
+msgid "root-licences"
+msgstr "Procédures"
+
+msgid "root-stats-search"
+msgstr "Outils"
+
 msgid "rubrics_folder_title"
 msgstr "Rubriques"
 
@@ -1391,9 +1395,6 @@ msgstr "Numérotation des divisions"
 msgid "urban_label_EnvClassThreeNumerotation"
 msgstr "Numérotation des déclarations environnementales"
 
-msgid "urban_label_isEssayProject"
-msgstr "Le projet est d'essai"
-
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"
@@ -1543,6 +1544,17 @@ msgstr "Architecte(s)"
 msgid "urban_label_areParcelsVerified"
 msgstr "Les parcelles ont été vérifiées?"
 
+#. Default: "Businessdescription"
+#: EnvironmentBase.py
+#, fuzzy
+msgid "urban_label_areaDescription"
+msgstr "Description des lieux et des abords du projet"
+
+#. Default: "Areadescriptiontext"
+#: EnvironmentLicence.py
+msgid "urban_label_areaDescriptionText"
+msgstr "Description des lieux et des abords du projet"
+
 #. Default: "Article"
 #: Declaration.py
 msgid "urban_label_article"
@@ -1588,11 +1600,6 @@ msgstr "Bis"
 #: Contact.py
 msgid "urban_label_box"
 msgstr "Boîte"
-
-#. Default: "Areadescription"
-#: EnvironmentLicence.py
-msgid "urban_label_areaDescription"
-msgstr "Description des lieux et des abords du projet"
 
 #. Default: "Businessdescription"
 #: EnvironmentBase.py
@@ -1937,7 +1944,7 @@ msgstr "Des conditions complémentaires sont requises"
 #. Default: "Hasconfidentialdata"
 #: EnvironmentLicence.py
 msgid "urban_label_hasConfidentialData"
-msgstr "La demande contient des données confidentielles" 
+msgstr "La demande contient des données confidentielles"
 
 #. Default: "Impactstudy"
 #: GenericLicence.py
@@ -2038,6 +2045,9 @@ msgstr "Commune décentralisée?"
 #: UrbanVocabularyTerm.py
 msgid "urban_label_isDefaultValue"
 msgstr "Est une valeur par défaut"
+
+msgid "urban_label_isEssayProject"
+msgstr "Le projet est d'essai"
 
 #. Default: "Isinpca"
 #: BuildLicence.py
