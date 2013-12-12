@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.2.0'
+version = '1.3.0'
 
 setup(name='Products.urban',
       version=version,
@@ -59,7 +59,7 @@ setup(name='Products.urban',
           'profilehooks',
           'plone.api',  # to remove once we use a plone version including plone.api
           'imio.actionspanel',
-          'plonetheme.imioapps',
+          'http://svn.communesplone.org/svn/communesplone/plonetheme.imioapps/
       ],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',
