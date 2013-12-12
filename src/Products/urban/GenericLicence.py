@@ -43,6 +43,8 @@ from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.interfaces import IUrbanCertificateBase
 
+from plone import api
+
 slave_fields_subdivision = (
     # if in subdivision, display a textarea the fill some details
     {
@@ -703,14 +705,35 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         urban_tool = getToolByName(self, 'portal_urban')
         return urban_tool.getTextDefaultValue(field.getName(), context)
 
-    def divideList (self, divider, list):
+    security.declarePublic('createUrbanEvent')
+    def createUrbanEvent(self, urban_event_type_uid):
+        """ Create urban event in this licence """
+        uid_catalog = api.portal.get_tool('uid_catalog')
+        urban_tool = api.portal.get_tool('portal_urban')
+
+        event_type = uid_catalog(UID=urban_event_type_uid)[0].getObject()
+        event_type.checkCreationInLicence(self)
+
+        eventTypeType = event_type.getEventTypeType()
+        portal_type = urban_tool.portal_types_per_event_type_type.get(eventTypeType, "UrbanEvent")
+
+        urban_event_id = self.invokeFactory(
+            portal_type,
+            id=urban_tool.generateUniqueId(portal_type),
+            title=event_type.Title(),
+            urbaneventtypes=(event_type, )
+        )
+        urban_event = getattr(self, urban_event_id)
+        return urban_event
+
+    def divideList(self, divider, list):
         res = []
-        part = len(list)/divider
-        remain = len(list)%divider
+        part = len(list) / divider
+        remain = len(list) % divider
         for i in range(part):
-            res.append(list[i*divider:(i+1)*divider])
+            res.append(list[i * divider: (i + 1) * divider])
         if remain > 0:
-            res.append(list[divider*part:divider*part+remain])
+            res.append(list[divider * part: divider * part + remain])
         return tuple(res)
 
     def templateRoadEquipments(self, tup):

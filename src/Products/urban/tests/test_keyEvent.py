@@ -29,7 +29,7 @@ class TestKeyEvent(unittest.TestCase):
         urban_event_type.setIsKeyEvent(True)
         buildlicence_brain = catalog(portal_type='BuildLicence')[0]
         #we add an urbanEvent of type UET, the index last_key_event of the licence should be updated
-        self.portal_urban.createUrbanEvent(buildlicence.UID(), urban_event_type.UID())
+        buildlicence.createUrbanEvent(urban_event_type.UID())
         urban_event = buildlicence.objectValues('UrbanEvent')[-1]
         event = ObjectModifiedEvent(urban_event)
         notify(event)

@@ -345,30 +345,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 rows.append(row)
         return rows
 
+    """
     security.declarePublic('createUrbanEvent')
     def createUrbanEvent(self, licence_uid, urban_event_type_uid):
-        """
-           Create an urbanEvent on a licence
-           XXX this method should be moved to the BuildLicence class
-        """
-        uid_catalog = getToolByName(self, 'uid_catalog')
-        # the licence where the UrbanEvent is created
+        import ipdb; ipdb.set_trace()
+        uid_catalog = api.portal.get_tool('uid_catalog')
         licence = uid_catalog(UID=licence_uid)[0].getObject()
-
-        urbanEventType = uid_catalog(UID=urban_event_type_uid)[0].getObject()
-        urbanEventType.checkCreationInLicence(licence)
-
-        eventTypeType = urbanEventType.getEventTypeType()
-        portal_type = self.portal_types_per_event_type_type.get(eventTypeType, "UrbanEvent")
-
-        newUrbanEventId = licence.invokeFactory(
-            portal_type,
-            id=self.generateUniqueId(portal_type),
-            title=urbanEventType.Title(),
-            urbaneventtypes=(urbanEventType, )
-        )
-        newUrbanEventObj = getattr(licence, newUrbanEventId)
-        return self.REQUEST.RESPONSE.redirect(newUrbanEventObj.absolute_url() + '/edit')
+        urban_event = licence._createUrbanEvent(urban_event_type_uid)
+        return self.REQUEST.RESPONSE.redirect(urban_event.absolute_url() + '/edit')
+    """
 
     security.declarePublic('createUrbanDoc')
     def createUrbanDoc(self, urban_template_uid, urban_event_uid):

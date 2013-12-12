@@ -137,7 +137,7 @@ class TestEventDefaultValues(unittest.TestCase):
         self.licence = buildlicence
 
     def createEvent(self, licence, event_type):
-        self.portal_urban.createUrbanEvent(licence.UID(), event_type.UID())
+        licence.createUrbanEvent(event_type.UID())
         urban_event = licence.objectValues('UrbanEvent')[-1]
         #simulate edition event to trigger default value system
         notify(EditBegunEvent(urban_event))

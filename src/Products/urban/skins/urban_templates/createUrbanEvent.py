@@ -5,6 +5,6 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=urban_event_type_uid='',urban_folder_uid=''
+##parameters=urban_event_type_uid=''
 ##
-return context.portal_urban.createUrbanEvent(urban_folder_uid, urban_event_type_uid)
+return  self.REQUEST.RESPONSE.redirect(context.createUrbanEvent(urban_event_type_uid).absolute_url() + '/edit')
