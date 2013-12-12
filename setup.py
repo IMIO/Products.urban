@@ -59,7 +59,7 @@ setup(name='Products.urban',
           'profilehooks',
           'plone.api',  # to remove once we use a plone version including plone.api
           'imio.actionspanel',
-          'http://svn.communesplone.org/svn/communesplone/plonetheme.imioapps/
+          'plonetheme.imioapps',
       ],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',
