@@ -1115,7 +1115,7 @@ def createLicence(site, licence_type, data):
     logger.info('   test %s --> create all the events' % licence_type)
     eventtype_uids = [brain.UID for brain in urban_tool.listEventTypes(licence, urbanConfigId=licence_type.lower())]
     for event_type_uid in eventtype_uids:
-        urban_tool.createUrbanEvent(licence.UID(), event_type_uid)
+        licence.createUrbanEvent(event_type_uid)
     #fill each event with dummy data and generate all its documents
     logger.info('   test %s --> generate all the documents' % licence_type)
     for urban_event in licence.objectValues(['UrbanEvent', 'UrbanEventInquiry', 'UrbanEventOpinionRequest']):
