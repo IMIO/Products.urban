@@ -190,6 +190,31 @@ schema = Schema((
         multiValued=0,
         relationship='UrbanEventType',
     ),
+    TextField(
+        name='pmTitle',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Pmtitle',
+            label_msgid='urban_label_pmTitle',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        default_output_type='text/html',
+        optional=True,
+    ),
+    TextField(
+        name='pmDescription',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Pmdescription',
+            label_msgid='urban_label_pmDescription',
+            i18n_domain='urban',
+        ),
+        default_method='getDefaultText',
+        default_output_type='text/html',
+        optional=True,
+    ),
 
 ),
 )

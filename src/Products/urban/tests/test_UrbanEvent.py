@@ -6,7 +6,7 @@ from plone.testing.z2 import Browser
 from zope.component import createObject
 
 from Products.urban.testing import URBAN_TESTS_LICENCES
-from Products.urban.testing import URBAN_TESTS_INTEGRATION
+from Products.urban.testing import URBAN_TESTS_CONFIG
 
 import transaction
 import unittest
@@ -41,25 +41,37 @@ class TestUrbanEvent(unittest.TestCase):
 
 class TestUrbanEventInstance(unittest.TestCase):
 
-    layer = URBAN_TESTS_INTEGRATION
+    layer = URBAN_TESTS_CONFIG
 
     def setUp(self):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
 
-        # create a test BuildLicence , then a test UrbanEvent in it
+        # create a test BuildLicence
         login(self.portal, 'urbaneditor')
-        envclassone_folder = self.urban.envclassones
+        buildlicence_folder = self.urban.buildlicences
         testlicence_id = 'test_buildlicence'
-        if testlicence_id not in envclassone_folder.objectIds():
-            envclassone_folder.invokeFactory('BuildLicence', id=testlicence_id)
-            transaction.commit()
-        licence = getattr(envclassone_folder, testlicence_id)
+        if testlicence_id not in buildlicence_folder.objectIds():
+            buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
+        licence = getattr(buildlicence_folder, testlicence_id)
         # create a test UrbanEvent in test_buildlicence
         catalog = api.portal.get_tool('portal_catalog')
         event_type_brain = catalog(portal_type='UrbanEventType', id='prorogation')[0]
-        event_type = event_type_brain.getObject()
-        licence.createUrbanEvent(event_type.UID())
+        self.event_type = event_type_brain.getObject()
+        self.urban_event = licence.createUrbanEvent(self.event_type.UID())
+        transaction.commit()
 
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
+
+    def browserLogin(self, user):
+        self.browser.open(self.portal.absolute_url() + "/login_form")
+        self.browser.getControl(name='__ac_name').value = user
+        self.browser.getControl(name='__ac_password').value = user
+        self.browser.getControl(name='submit').click()
+
+    def test_urbanevent_has_attribute_pmTitle(self):
+        self.assertTrue(hasattr(self.urban_event, 'pmTitle'))
+
+    def test_urbanevent_has_attribute_pmDescription(self):
+        self.assertTrue(hasattr(self.urban_event, 'pmDescription'))

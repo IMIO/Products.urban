@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-07-22 13:57+0000\n"
+"POT-Creation-Date: 2013-12-12 07:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,28 +42,19 @@ msgstr ""
 msgid "Architect data"
 msgstr ""
 
-#. Default: "Areadescriptiontext"
-#: EnvironmentLicence.py
-msgid "urban_label_areaDescriptionText"
-msgstr ""
-
-#: EnvironmentLicence.py
-msgid "urban_label_areaDescription"
-msgstr ""
-
 msgid "BuildLicence"
-msgstr ""
-
-msgid "CI_folder_title"
 msgstr ""
 
 msgid "CI_CS_folder_title"
 msgstr ""
 
-msgid "CS_folder_title"
+msgid "CI_folder_title"
 msgstr ""
 
 msgid "CS_Eau_folder_title"
+msgstr ""
+
+msgid "CS_folder_title"
 msgstr ""
 
 msgid "Claimant data"
@@ -104,6 +95,9 @@ msgid "Found parcel(s)"
 msgstr ""
 
 msgid "Geometrician data"
+msgstr ""
+
+msgid "History of the parcel and related licences"
 msgstr ""
 
 #. Default: "Acknowledgement"
@@ -196,10 +190,10 @@ msgstr ""
 msgid "Public inquiry"
 msgstr ""
 
-msgid "Remove selected street"
+msgid "Related licences"
 msgstr ""
 
-msgid "Related licences"
+msgid "Remove selected street"
 msgstr ""
 
 msgid "Reopen"
@@ -528,6 +522,9 @@ msgstr ""
 msgid "envclassone_urbanconfig_title"
 msgstr ""
 
+msgid "envclassones"
+msgstr ""
+
 msgid "envclassthree_searchacceptedlicences"
 msgstr ""
 
@@ -550,9 +547,6 @@ msgid "envclassthree_urbanconfig_title"
 msgstr ""
 
 msgid "envclassthrees"
-msgstr ""
-
-msgid "envclassones"
 msgstr ""
 
 msgid "equipmenttypes_folder_title"
@@ -749,9 +743,6 @@ msgstr ""
 
 #. Default: "Choose one of the following forms to search for parcels.  You can cumulate criteria if you exactly know what you are looking for"
 msgid "help_search_parcels"
-msgstr ""
-
-msgid "History of the parcel and related licences"
 msgstr ""
 
 msgid "inadmissibilityreasons_folder_title"
@@ -1161,13 +1152,13 @@ msgstr ""
 msgid "roadspecificfeatures_folder_title"
 msgstr ""
 
+msgid "root-configuration"
+msgstr ""
+
 msgid "root-licences"
 msgstr ""
 
 msgid "root-stats-search"
-msgstr ""
-
-msgid "root-configuration"
 msgstr ""
 
 msgid "rubrics_folder_title"
@@ -1409,9 +1400,6 @@ msgstr ""
 msgid "urban_label_LinkedOpinionRequestEvent"
 msgstr ""
 
-msgid "urban_label_isEssayProject"
-msgstr ""
-
 #. Default: "MiscDemandnumerotation"
 #: UrbanTool.py
 msgid "urban_label_MiscDemandNumerotation"
@@ -1556,6 +1544,16 @@ msgstr ""
 msgid "urban_label_areParcelsVerified"
 msgstr ""
 
+#. Default: "Businessdescription"
+#: EnvironmentBase.py
+msgid "urban_label_areaDescription"
+msgstr ""
+
+#. Default: "Areadescriptiontext"
+#: EnvironmentLicence.py
+msgid "urban_label_areaDescriptionText"
+msgstr ""
+
 #. Default: "Article"
 #: Declaration.py
 msgid "urban_label_article"
@@ -1600,11 +1598,6 @@ msgstr ""
 #: Address.py
 #: Contact.py
 msgid "urban_label_box"
-msgstr ""
-
-#. Default: "Businessdescription"
-#: EnvironmentBase.py
-msgid "urban_label_areaDescription"
 msgstr ""
 
 #. Default: "Businessdescription"
@@ -2050,6 +2043,9 @@ msgstr ""
 msgid "urban_label_isDefaultValue"
 msgstr ""
 
+msgid "urban_label_isEssayProject"
+msgstr ""
+
 #. Default: "Isinpca"
 #: BuildLicence.py
 msgid "urban_label_isInPCA"
@@ -2085,14 +2081,14 @@ msgstr ""
 msgid "urban_label_isSameAddressAsWorks"
 msgstr ""
 
-#. Default: "Istemporaryproject"
-#: EnvironmentLicence.py
-msgid "urban_label_isTemporaryProject"
-msgstr ""
-
 #. Default: "Issupplementary"
 #: WorkLocation.py
 msgid "urban_label_isSupplementary"
+msgstr ""
+
+#. Default: "Istemporaryproject"
+#: EnvironmentLicence.py
+msgid "urban_label_isTemporaryProject"
 msgstr ""
 
 #. Default: "Keydates"
@@ -2403,6 +2399,16 @@ msgstr ""
 #. Default: "Plone user id"
 #: FolderManager.py
 msgid "urban_label_ploneUserId"
+msgstr ""
+
+#. Default: "Pmdescription"
+#: UrbanEvent.py
+msgid "urban_label_pmDescription"
+msgstr ""
+
+#. Default: "Pmtitle"
+#: UrbanEvent.py
+msgid "urban_label_pmTitle"
 msgstr ""
 
 #. Default: "Pollution"
