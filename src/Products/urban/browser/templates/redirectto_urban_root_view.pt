@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<head>
+</head>
+
+<body>
+<metal:main fill-slot="main">
+  <metal:main_macro define-macro="main">
+    <metal:body define-macro="body_macro" tal:define="isAnon context/@@plone_portal_state/anonymous;">
+
+     <tal:comment replace="nothing">Logged in users are redirected to the application</tal:comment>
+     <tal:notIsAnon condition="not: isAnon">
+       <span tal:define="dummy python: context.REQUEST.RESPONSE.redirect(context.absolute_url() + '/urban')">Redirection to urban</span>
+     </tal:notIsAnon>
+     <tal:comment replace="nothing">Anonymous see the front-page</tal:comment>
+     <tal:isAnon condition="isAnon">
+      <tal:frontpage condition="python: hasattr(context, 'front-page')">
+       <tal:block define="frontpage python: getattr(context, 'front-page');">
+        <h1 tal:content="frontpage/Title">Front page title</h1>
+        <div class="documentDescription" tal:content="frontpage/Description" />
+        <div tal:replace="structure frontpage/getText" />
+       </tal:block>
+      </tal:frontpage>
+     </tal:isAnon>
+
+    </metal:body>
+  </metal:main_macro>
+</metal:main>
+</body>
+</html>

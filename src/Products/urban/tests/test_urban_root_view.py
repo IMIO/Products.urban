@@ -29,3 +29,6 @@ class TestConfig(unittest.TestCase):
         for licencetype in ORDERED_URBAN_TYPES:
             folder_url = getLicenceFolder(self.urban, licencetype).absolute_url()
             self.assertTrue(folder_url in self.browser.contents)
+
+    def test_site_view_redirects_to_urban_root(self):
+        self.assertTrue(self.portal.layout == 'redirectto_urban_root_view')
