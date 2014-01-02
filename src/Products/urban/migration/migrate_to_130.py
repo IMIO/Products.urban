@@ -39,5 +39,7 @@ def migrateUrbanRootView(context):
 
     portal = api.portal.getSite()
 
+    portal.setLayout('redirectto_urban_root_view')
+
     urban_root = portal.urban
     urban_root.setLayout('urban_root_view')
