@@ -89,7 +89,9 @@ class UrbanRootView(UrbanView):
         self.request = request
 
     def getLicenceTypes(self):
-        return ORDERED_URBAN_TYPES
+        #Environment class one licence are under dev..
+        dev_types = ['EnvClassOne']
+        return [l_type for l_type in ORDERED_URBAN_TYPES if l_type not in dev_types]
 
     def getLicenceCreationURL(self, licencetype):
         context = aq_inner(self.context)
