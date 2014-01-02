@@ -28,14 +28,14 @@ class TestBuildLicence(unittest.TestCase):
         # verify that the licence title update correctly when we add or remove applicants/proprietaries
         #on the licence
         licence = self.buildlicence
-        self.assertTrue(licence.Title() == 'PU/2013/1/ - Exemple Permis Urbanisme -  Smith & Wesson')
+        self.assertTrue(licence.Title() == 'PU/2014/1/ - Exemple Permis Urbanisme -  Smith & Wesson')
         #remove the applicant
         applicant_id = licence.objectValues('Contact')[0].id
         licence.manage_delObjects([applicant_id])
-        self.assertTrue(licence.Title() == 'PU/2013/1/ - Exemple Permis Urbanisme - no_applicant_defined')
+        self.assertTrue(licence.Title() == 'PU/2014/1/ - Exemple Permis Urbanisme - no_applicant_defined')
         #add an applicant back
         licence. invokeFactory('Applicant', 'new_applicant', name1='Quentin', name2='Tinchimiloupète')
-        self.assertTrue(licence.Title() == 'PU/2013/1/ - Exemple Permis Urbanisme -  Quentin Tinchimiloupète')
+        self.assertTrue(licence.Title() == 'PU/2014/1/ - Exemple Permis Urbanisme -  Quentin Tinchimiloupète')
 
     def testGetLastEventWithoutEvent(self):
         buildlicences = self.portal.urban.buildlicences
