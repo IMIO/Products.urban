@@ -137,11 +137,6 @@ def postInstall(context):
     logger.info("addUrbanConfigFolders : starting...")
     addUrbanConfigFolders(context)
     logger.info("addUrbanConfigFolders : Done")
-    #install the urbanskin if available
-    #urbanskin should be installed before the call of 'adaptDefaultPortal'
-    logger.info("installUrbanskin : starting...")
-    installUrbanskin(context)
-    logger.info("installUrbanskin : Done")
     logger.info("setDefaultApplicationSecurity : starting...")
     setDefaultApplicationSecurity(context)
     logger.info("setDefaultApplicationSecurity : Done")
@@ -736,18 +731,6 @@ def addUrbanConfigsTopics(context):
                 topic.reindexObject()
 
 
-def installUrbanskin(context):
-    """
-       Install Products.urbanskin if available
-    """
-    site = context.getSite()
-    try:
-        site.portal_setup.runAllImportStepsFromProfile('profile-Products.urbanskin:default')
-        logger.info("installUrbanskin : Done")
-    except KeyError:
-        logger.info("installUrbanskin : Products.urbanskin not found, skin not installed!")
-
-
 def adaptDefaultPortal(context):
     """
        Adapt some properties of the portal
@@ -794,6 +777,9 @@ def addApplicationFolders(context):
     Add the application folders like 'urban' and 'architects'
     """
     site = context.getSite()
+
+    #change the layout of the Plone site
+    site.setLayout('redirectto_urban_root_view')
 
     if not hasattr(aq_base(site), "urban"):
         newFolderid = site.invokeFactory("Folder", id="urban", title=_("urban", 'urban', context=site.REQUEST))
