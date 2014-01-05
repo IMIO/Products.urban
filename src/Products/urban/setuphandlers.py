@@ -793,7 +793,7 @@ def addApplicationFolders(context):
             licence_folder_id = getLicenceFolderId(urban_type)
             newFolderid = newFolder.invokeFactory(
                 "Folder", id=licence_folder_id,
-                title=_('add_{}'.format(urban_type), 'urban', context=site.REQUEST)
+                title=_('add_%s' % urban_type, 'urban', context=site.REQUEST)
             )
             newSubFolder = getattr(newFolder, newFolderid)
             alsoProvides(newSubFolder, ILicenceContainer)

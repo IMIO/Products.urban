@@ -61,7 +61,7 @@ class ArchitectsFolderView(ContactsFolderView):
 
     def getCSSClass(self):
         base_css = super(ArchitectsFolderView, self).getCSSClass()
-        return '{} contenttype-architect'.format(base_css)
+        return '%s contenttype-architect' % (base_css)
 
 
 class GeometriciansFolderView(ContactsFolderView):
@@ -73,7 +73,7 @@ class GeometriciansFolderView(ContactsFolderView):
 
     def getCSSClass(self):
         base_css = super(GeometriciansFolderView, self).getCSSClass()
-        return '{} contenttype-geometrician'.format(base_css)
+        return '%s contenttype-geometrician' % (base_css)
 
 
 class NotariesFolderView(ContactsFolderView):
@@ -85,4 +85,4 @@ class NotariesFolderView(ContactsFolderView):
 
     def getCSSClass(self):
         base_css = super(NotariesFolderView, self).getCSSClass()
-        return '{} contenttype-notary'.format(base_css)
+        return '%s contenttype-notary' % (base_css)

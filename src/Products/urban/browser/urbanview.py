@@ -97,8 +97,7 @@ class UrbanRootView(UrbanView):
         context = aq_inner(self.context)
         base_url = context.absolute_url()
         folder_id = getLicenceFolderId(licencetype)
-        url = '{base_url}/{folder_id}/createObject?type_name={licencetype}'.format(
-            base_url=base_url, folder_id=folder_id, licencetype=licencetype)
+        url = '%s/%s/createObject?type_name=%s' % (base_url, folder_id, licencetype)
         return url
 
     def mayAddLicence(self, licencetype):
@@ -106,31 +105,19 @@ class UrbanRootView(UrbanView):
         return licencetype in [t.id for t in licence_folder.allowedContentTypes()]
 
     def getLinkClass(self, licencetype):
-        return "contenttype-{}".format(licencetype.lower())
+        return "contenttype-%s" % licencetype.lower()
 
     def getLicenceFolderLink(self, licencetype):
         klass = self.getLinkClass(licencetype)
         href = getLicenceFolder(self.context, licencetype).absolute_url()
         folder_id = getLicenceFolderId(licencetype)
         link_content = translate(_(folder_id), context=self.request)
-        link_template = u'<a class="{klass}" href="{href}">{link_content}</a>'
-        link = link_template.format(
-            klass=klass,
-            href=href,
-            link_content=link_content,
-        )
+        link = u'<a class="%s" href="%s">%s</a>' % (klass, href, link_content)
         return link
 
     def getLicenceCreationLink(self, licencetype):
         if not self.mayAddLicence(licencetype):
             return ''
         href = self.getLicenceCreationURL(licencetype)
-        link_template = (
-            u'<a href="{href}" id="create-{licencetype}-link">'
-            u'<img class="urban-add-icon" src="icon_add.gif" /></a>'
-        )
-        link = link_template.format(
-            href=href,
-            licencetype=licencetype,
-        )
+        link = '<a href="%s" id="create-%s-link"><img class="urban-add-icon" src="icon_add.gif" /></a>' % (href, licencetype)
         return link
