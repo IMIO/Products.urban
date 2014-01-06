@@ -300,7 +300,7 @@ class ParcelHistoric:
 
 
 def getLicenceFolderId(licencetype):
-    return '%ss' % licencetype.lower()
+    return '{}s'.format(licencetype.lower())
 
 
 def getAllLicenceFolderIds():

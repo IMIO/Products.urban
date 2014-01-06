@@ -108,9 +108,9 @@ class LicenceView(BrowserView):
 
     def getTabMacro(self, tab):
         context = aq_inner(self.context)
-        macro_name = '%s_macro' % tab
+        macro_name = '{}_macro'.format(tab)
         macros_view = self.getMacroViewName()
-        macro = context.unrestrictedTraverse('%s/%s' % (macros_view, macro_name))
+        macro = context.unrestrictedTraverse('{view}/{macro}'.format(view=macros_view, macro=macro_name))
         return macro
 
     def getMacroViewName(self):
