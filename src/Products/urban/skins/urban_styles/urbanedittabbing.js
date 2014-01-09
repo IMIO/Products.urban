@@ -66,7 +66,7 @@ ploneFormTabbing._buildTabs = function(container, legends) {
             /* display the edit icon only if we are not already editing the element... */
             tab += $(legend).text()+'</span>';
             if ((window.location.href.search("/edit") == -1) && (lid != 'fieldsetlegend-urban_events')) {
-                gni = window.location.href;
+                gni = window.location.pathname;
                 gni = gni.replace('/view', '')
                 tab += '&nbsp;&nbsp;<img class="urban-edit-tabbing"'+
                        'onclick="javascript:window.location=gni+&quot;/edit#'+
