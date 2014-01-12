@@ -113,7 +113,10 @@ table.listing tbody tr span.manual_parcel {
     border-color: #DDDDDD;
     border-style: none solid solid !important;
     border-width: 4px !important;
-    margin-top: -1em;
+}
+
+dl.enableFormTabbing dd {
+    padding-top: 0em;
 }
 
 table[id^="datagridwidget-table"] {
