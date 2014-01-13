@@ -1,10 +1,10 @@
 # archgenxml generated POT File
-# Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>, 2013.
+# Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Dec 11 12:02:39 2013\n"
-"PO-Revision-Date: Wed Dec 11 12:02:39 2013\n"
+"POT-Creation-Date: Mon Jan 13 11:15:40 2014\n"
+"PO-Revision-Date: Mon Jan 13 11:15:40 2014\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -786,6 +786,16 @@ msgstr ""
 #. Default: "Nationalregister"
 #: Contact.py
 msgid "urban_label_nationalRegister"
+msgstr ""
+
+#. Default: "Natura2000"
+#: EnvironmentBase.py
+msgid "urban_label_natura2000"
+msgstr ""
+
+#. Default: "Natura2000details"
+#: EnvironmentBase.py
+msgid "urban_label_natura2000Details"
 msgstr ""
 
 #. Default: "Notarycontact"

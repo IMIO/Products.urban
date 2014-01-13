@@ -40,13 +40,21 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 optional_fields =['inadmissibilityReasons', 'roadTechnicalAdvice', 'locationTechnicalAdvice',
                   'additionalLegalConditions']
 
-slave_fields_additionalconditions= (
-    {'name': 'additionalConditions',
-     'action': 'show',
-     'hide_values': (True, ),
+slave_fields_additionalconditions = (
+    {
+        'name': 'additionalConditions',
+        'action': 'show',
+        'hide_values': (True, ),
     },
 )
 
+slave_fields_natura2000Details = (
+    {
+        'name': 'natura2000Details',
+        'action': 'show',
+        'hide_values': (True, ),
+    },
+)
 ##/code-section module-header
 
 schema = Schema((
@@ -109,6 +117,30 @@ schema = Schema((
         allow_oddeven=True,
         columns=('number', 'street'),
         validators=('isValidStreetName',),
+    ),
+    BooleanField(
+        name='natura2000',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_natura2000Details,
+            label='Natura2000',
+            label_msgid='urban_label_natura2000',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+    ),
+    TextField(
+        name='natura2000Details',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Natura2000details',
+            label_msgid='urban_label_natura2000Details',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_description',
+        default_output_type='text/html',
     ),
     LinesField(
         name='inadmissibilityReasons',
