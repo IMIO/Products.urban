@@ -345,16 +345,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 rows.append(row)
         return rows
 
-    """
-    security.declarePublic('createUrbanEvent')
-    def createUrbanEvent(self, licence_uid, urban_event_type_uid):
-        import ipdb; ipdb.set_trace()
-        uid_catalog = api.portal.get_tool('uid_catalog')
-        licence = uid_catalog(UID=licence_uid)[0].getObject()
-        urban_event = licence._createUrbanEvent(urban_event_type_uid)
-        return self.REQUEST.RESPONSE.redirect(urban_event.absolute_url() + '/edit')
-    """
-
     security.declarePublic('createUrbanDoc')
     def createUrbanDoc(self, urban_template_uid, urban_event_uid):
         """
