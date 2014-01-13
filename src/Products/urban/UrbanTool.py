@@ -2,7 +2,7 @@
 #
 # File: UrbanTool.py
 #
-# Copyright (c) 2013 by CommunesPlone
+# Copyright (c) 2014 by CommunesPlone
 # Generator: ArchGenXML Version 2.7
 #            http://plone.org/products/archgenxml
 #
@@ -29,7 +29,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-
+    
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
