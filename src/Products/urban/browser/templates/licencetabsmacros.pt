@@ -138,7 +138,7 @@
                tal:define="default_custom python: ['isInPCA', 'isInSubdivision'];
                            default_exclude python: [
                                'title', 'workLocations', 'architects', 'geometricians', 'notaryContact',
-                               'pca', 'parcellings', 'subdivisionDetails'
+                               'pca', 'pcaDetails', 'parcellings', 'subdivisionDetails'
                            ];
                            custom custom | python: []; custom python: custom + default_custom;
                            exclude exclude | default_exclude">

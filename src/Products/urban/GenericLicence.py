@@ -66,16 +66,21 @@ slave_fields_pca = (
         'action': 'show',
         'hide_values': (True, ),
     },
+    {
+        'name': 'pcaDetails',
+        'action': 'show',
+        'hide_values': (True, ),
+    },
 )
 
 optional_fields = [
     'subdivisionDetails', 'missingParts', 'missingPartsDetails', 'folderZoneDetails', 'folderZone',
-    'derogationDetails', 'isInPCA', 'annoncedDelayDetails', 'roadType', 'roadCoating', 'roadEquipments',
-    'investigationDetails', 'investigationReasons', 'isInSubdivision', 'solicitLocationOpinionsTo',
+    'isInPCA', 'annoncedDelayDetails', 'roadType', 'roadCoating', 'roadEquipments',
+    'isInSubdivision', 'solicitLocationOpinionsTo', 'technicalRemarks', 'locationTechnicalRemarks',
     'folderCategoryTownship', 'protectedBuilding', 'protectedBuildingDetails', 'folderCategory',
-    'pash', 'pashDetails', 'catchmentArea', 'catchmentAreaDetails', 'equipmentAndRoadRequirements', 'technicalRemarks',
+    'pash', 'pashDetails', 'catchmentArea', 'catchmentAreaDetails', 'equipmentAndRoadRequirements',
     'SSC', 'sscDetails', 'RCU', 'rcuDetails', 'floodingLevel', 'floodingLevelDetails', 'solicitRoadOpinionsTo',
-    'areParcelsVerified', 'locationFloodingLevel', 'licenceSubject', 'referenceDGATLP', 'locationTechnicalRemarks',
+    'areParcelsVerified', 'locationFloodingLevel', 'licenceSubject', 'referenceDGATLP',
     'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails'
 ]
 ##/code-section module-header
@@ -408,30 +413,6 @@ schema = Schema((
         schemata='urban_location',
         default_output_type='text/html',
     ),
-    StringField(
-        name='locationFloodingLevel',
-        widget=SelectionWidget(
-            label='Locationfloodinglevel',
-            label_msgid='urban_label_locationFloodingLevel',
-            i18n_domain='urban',
-        ),
-        enforceVocabulary=True,
-        schemata='urban_location',
-        vocabulary='listFloodingLevels',
-    ),
-    TextField(
-        name='locationTechnicalRemarks',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label='Locationtechnicalremarks',
-            label_msgid='urban_label_locationTechnicalRemarks',
-            i18n_domain='urban',
-        ),
-        default_content_type='text/html',
-        default_method='getDefaultText',
-        schemata='urban_location',
-        default_output_type='text/html',
-    ),
     BooleanField(
         name='isInPCA',
         default=False,
@@ -454,18 +435,18 @@ schema = Schema((
         vocabulary=UrbanVocabulary('pcas', vocType="PcaTerm", inUrbanConfig=False),
         default_method='getDefaultValue',
     ),
-    LinesField(
-        name='solicitRoadOpinionsTo',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label='Solicitroadopinionsto',
-            label_msgid='urban_label_solicitRoadOpinionsTo',
+    TextField(
+        name='pcaDetails',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Pcadetails',
+            label_msgid='urban_label_pcaDetails',
             i18n_domain='urban',
         ),
-        schemata='urban_road',
-        multiValued=1,
-        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
-        default_method='getDefaultValue',
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/html',
     ),
     BooleanField(
         name='isInSubdivision',
@@ -492,6 +473,43 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_location',
         default_output_type='text/html',
+    ),
+    StringField(
+        name='locationFloodingLevel',
+        widget=SelectionWidget(
+            label='Locationfloodinglevel',
+            label_msgid='urban_label_locationFloodingLevel',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        schemata='urban_location',
+        vocabulary='listFloodingLevels',
+    ),
+    TextField(
+        name='locationTechnicalRemarks',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Locationtechnicalremarks',
+            label_msgid='urban_label_locationTechnicalRemarks',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/html',
+    ),
+    LinesField(
+        name='solicitRoadOpinionsTo',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Solicitroadopinionsto',
+            label_msgid='urban_label_solicitRoadOpinionsTo',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
+        default_method='getDefaultValue',
     ),
     LinesField(
         name='protectedBuilding',

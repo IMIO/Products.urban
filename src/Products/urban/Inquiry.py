@@ -29,8 +29,9 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
 
-optional_fields = ['derogationDetails', 'investigationDetails',
-                   'investigationReasons',]
+optional_fields = [
+    'derogationDetails', 'investigationDetails', 'investigationReasons',
+]
 ##/code-section module-header
 
 schema = Schema((

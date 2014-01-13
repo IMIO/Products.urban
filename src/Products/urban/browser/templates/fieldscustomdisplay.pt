@@ -28,6 +28,8 @@
         <tal:isInPCA condition="isInPCA">
             <br />
             <metal:myfield use-macro="python:here.widget('pca', mode='view')" />
+            <br />
+            <tal:block replace="structure context/getPcaDetails" />
         </tal:isInPCA>
     </td>
 </metal:pca>
