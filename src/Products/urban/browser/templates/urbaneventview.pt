@@ -31,7 +31,7 @@
                                 <metal:listing use-macro="context/@@urbanevent-macros/urbanEventGenerateDocumentMacro" />
                             </td>
                             <td width="1%"></td>
-                            <td>
+                            <td valign="top">
                                 <fieldset>
                                     <legend i18n:translate="event_linked_documents">Event linked documents</legend>
                                     <tal:listing content="structure view/renderGeneratedDocumentsListing" />
