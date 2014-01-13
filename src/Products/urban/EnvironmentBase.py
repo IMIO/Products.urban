@@ -37,8 +37,10 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
-optional_fields =['inadmissibilityReasons', 'roadTechnicalAdvice', 'locationTechnicalAdvice',
-                  'additionalLegalConditions']
+optional_fields = [
+    'inadmissibilityReasons', 'roadTechnicalAdvice', 'locationTechnicalAdvice',
+    'additionalLegalConditions'
+]
 
 slave_fields_additionalconditions = (
     {
@@ -48,7 +50,7 @@ slave_fields_additionalconditions = (
     },
 )
 
-slave_fields_natura2000Details = (
+slave_fields_natura2000 = (
     {
         'name': 'natura2000Details',
         'action': 'show',
@@ -122,7 +124,7 @@ schema = Schema((
         name='natura2000',
         default=False,
         widget=MasterBooleanWidget(
-            slave_fields=slave_fields_natura2000Details,
+            slave_fields=slave_fields_natura2000,
             label='Natura2000',
             label_msgid='urban_label_natura2000',
             i18n_domain='urban',
