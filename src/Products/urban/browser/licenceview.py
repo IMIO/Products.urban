@@ -140,6 +140,7 @@ class LicenceView(BrowserView):
         ordered_dates = []
         key_dates = {}
         dates = {}
+
         # search in the config for all the Key urbaneventtypes and their key dates
         for eventtype in config.urbaneventtypes.objectValues():
             if eventtype.getIsKeyEvent():
@@ -148,21 +149,30 @@ class LicenceView(BrowserView):
                 ordered_dates.append((eventtype.UID(), eventtype.getKeyDates()))
                 key_dates[eventtype.UID()] = keydates
                 dates[eventtype.UID()] = dict([(date[0], {
-                    'date':None,
+                    'dates': [],
                     'label': date[0] == 'eventDate' and eventtype.Title() or '%s (%s)' % (eventtype.Title().decode('utf8'), date[1])
                 }) for date in keydates])
+
         # now check each event to see if its a key Event, if yes, we gather the key date values found on this event
         linked_eventtype_field = UrbanEventInquiry_schema.get('urbaneventtypes')
-        for event_brain in catalog(path={'query': '/'.join(context.getPhysicalPath())}, object_provides=IUrbanEvent.__identifier__, sort_on='created', sort_order='descending'):
+        event_brains = catalog(
+            path={'query': '/'.join(context.getPhysicalPath())},
+            object_provides=IUrbanEvent.__identifier__,
+            sort_on='created',
+            sort_order='ascending'
+        )
+
+        for event_brain in event_brains:
             event = event_brain.getObject()
             eventtype_uid = linked_eventtype_field.getRaw(event)
             if eventtype_uid in dates.keys() and not dates[eventtype_uid].get('url', ''):
                 for date in key_dates[eventtype_uid]:
                     date_value = getattr(event, date[0])
-                    dates[eventtype_uid][date[0]].update({
+                    dates[eventtype_uid][date[0]]['dates'].append({
                         'url': event_brain.getPath(),
                         'date':  date_value and urban_tool.formatDate(date_value, translatemonth=False) or None,
                     })
+
         # flatten the result to a list before returning it
         dates_list = []
         for uid, date_names in ordered_dates:

@@ -60,37 +60,51 @@
             <table tal:define="keyDates view/getKeyDates;
                                inquiryDates view/getInquiryDates"
                    class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
-                <tr tal:repeat="date keyDates">
-                    <td valign="top"><b><span tal:content="python: date['label']">Receipt date</span>:</b></td>
-                    <td width="10px"></td>
-                    <td valign="top" tal:define="date_value python: date['date']">
-                        <a href="#" tal:condition="date_value" tal:attributes="href python: date['url']" tal:content="python: date_value">Content</a>
-                        <span class="discreet" tal:condition="not: date_value" i18n:translate="content_none">None</span>
-                    </td>
-                </tr>
+                <tal:key_dates repeat="key_dates keyDates">
+                    <tal:vars define="dates python: key_dates['dates'];
+                                      first_date python: dates and dates[0] or None;
+                                      dates python: dates and dates[1:] or [];
+                                      label python: key_dates['label']">
+                        <tr>
+                            <td valign="top"><b><span tal:content="python: key_dates['label']">Receipt date</span>:</b></td>
+                            <td width="10px"></td>
+                            <td valign="top" tal:define="date_value python: first_date and first_date['date']">
+                                <a href="#" tal:condition="date_value" tal:attributes="href python: first_date['url']" tal:content="python: date_value">Content</a>
+                                <span class="discreet" tal:condition="not: date_value" i18n:translate="content_none">None</span>
+                            </td>
+                        </tr>
+                        <tr tal:repeat="date dates">
+                            <td></td><td></td>
+                            <td valign="top" tal:define="date_value python: date['date']">
+                                <a href="#" tal:condition="date_value" tal:attributes="href python: date['url']" tal:content="python: date_value">Content</a>
+                                <span class="discreet" tal:condition="not: date_value" i18n:translate="content_none">None</span>
+                            </td>
+                        </tr>
+                    </tal:vars>
+                </tal:key_dates>
                 <tal:inquiries repeat="inquiry inquiryDates">
-                <tr>
-                    <td valign="top">
-                        <b><span i18n:translate="urban_investigationStart">from <span i18n:name="number" tal:content="repeat/inquiry/number"/></span>:</b>
-                    </td>
-                    <td width="10px"></td>
-                    <td valign="top" tal:define="start_date python: inquiry['start_date'];
-                                                 url python: inquiry['url']">
-                        <a href="#" tal:condition="python: start_date and url" tal:attributes="href url" tal:content="python: start_date">Content</a>
-                        <span tal:condition="python: start_date and not url" tal:content="python: start_date">end date</span>
-                        <span tal:condition="not: start_date" class="discreet" i18n:translate="content_none">None</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td valign="top"><b><span i18n:translate="urban_label_investigationEnd">to</span>:</b></td>
-                    <td width="10px"></td>
-                    <td valign="top" tal:define="end_date python: inquiry['end_date'];
-                                                 url python: inquiry['url']">
-                        <a href="#" tal:condition="python: end_date and url" tal:attributes="href url" tal:content="python: end_date">Content</a>
-                        <span tal:condition="python: end_date and not url" tal:content="python: end_date">end date</span>
-                        <span tal:condition="not: end_date" class="discreet" i18n:translate="content_none">None</span>
-                    </td>
-                </tr>
+                    <tr>
+                        <td valign="top">
+                            <b><span i18n:translate="urban_investigationStart">from <span i18n:name="number" tal:content="repeat/inquiry/number"/></span>:</b>
+                        </td>
+                        <td width="10px"></td>
+                        <td valign="top" tal:define="start_date python: inquiry['start_date'];
+                                                     url python: inquiry['url']">
+                            <a href="#" tal:condition="python: start_date and url" tal:attributes="href url" tal:content="python: start_date">Content</a>
+                            <span tal:condition="python: start_date and not url" tal:content="python: start_date">end date</span>
+                            <span tal:condition="not: start_date" class="discreet" i18n:translate="content_none">None</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top"><b><span i18n:translate="urban_label_investigationEnd">to</span>:</b></td>
+                        <td width="10px"></td>
+                        <td valign="top" tal:define="end_date python: inquiry['end_date'];
+                                                     url python: inquiry['url']">
+                            <a href="#" tal:condition="python: end_date and url" tal:attributes="href url" tal:content="python: end_date">Content</a>
+                            <span tal:condition="python: end_date and not url" tal:content="python: end_date">end date</span>
+                            <span tal:condition="not: end_date" class="discreet" i18n:translate="content_none">None</span>
+                        </td>
+                    </tr>
                 </tal:inquiries>
             </table>
         </fieldset>
