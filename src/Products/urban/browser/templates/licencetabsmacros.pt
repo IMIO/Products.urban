@@ -237,6 +237,7 @@
                                         <th i18n:translate="urban_label_eventDate">Date</th>
                                         <th i18n:translate="urban_label_receiptDate">Receipt date</th>
                                         <th i18n:translate="urban_label_adviceAgreementLevel">Advice agreement level</th>
+                                        <th i18n:translate="urban_label_externalDecision">Advice</th>
                                     </tr>
                                 </thead>
                                 <tbody tal:define="tool python: context.portal_urban">
@@ -266,6 +267,13 @@
                                                     <span class="#"
                                                           tal:attributes="class python: adviceAgreementLevel and 'plain' or 'discreet'"
                                                           tal:content="python: adviceAgreementLevel and adviceAgreementLevel or 'content_none'"
+                                                          i18n:translate="">None
+                                                    </span>
+                                                </td>
+                                                <td tal:define="advice opinion/getExternalDecision">
+                                                    <span class="#"
+                                                          tal:attributes="class python: advice and 'plain' or 'discreet'"
+                                                          tal:content="python: advice and advice or 'content_none'"
                                                           i18n:translate="">None
                                                     </span>
                                                 </td>
