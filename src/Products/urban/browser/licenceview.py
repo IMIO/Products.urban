@@ -194,6 +194,8 @@ class LicenceView(BrowserView):
                 return False
             if field.getName() in exclude:
                 return False
+            if not field.widget.visible:
+                return False
             return True
 
         displayed_fields = self.getUsedAttributes()

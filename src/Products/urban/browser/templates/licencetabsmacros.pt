@@ -270,7 +270,7 @@
                                                           i18n:translate="">None
                                                     </span>
                                                 </td>
-                                                <td tal:define="advice opinion/getExternalDecision">
+                                                <td tal:define="advice python: here.getValueForTemplate('externalDecision', obj=opinion)">
                                                     <span class="#"
                                                           tal:attributes="class python: advice and 'plain' or 'discreet'"
                                                           tal:content="python: advice and advice or 'content_none'"
@@ -280,6 +280,7 @@
                                             </tal:anEventIsLinked>
                                             <tal:noEventIsLinked condition="python: opinion is None">
                                                 <td tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">Opinion request</td>
+                                                <td><span class="discreet" i18n:translate="content_none">None</span></td>
                                                 <td><span class="discreet" i18n:translate="content_none">None</span></td>
                                                 <td><span class="discreet" i18n:translate="content_none">None</span></td>
                                                 <td><span class="discreet" i18n:translate="content_none">None</span></td>
