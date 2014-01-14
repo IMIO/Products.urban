@@ -177,21 +177,29 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         """
         res = []
         abr = {
-            'urban_peb':'(peb) ',
-            'urban_location':'(urb) ',
-            'urban_road':'(voi) ',
-            'urban_investigation_and_advices':'(enq) ',
-            'urban_description':'',
+            'urban_peb': '(peb) ',
+            'urban_location': '(urb) ',
+            'urban_road': '(voi) ',
+            'urban_investigation_and_advices': '(enq) ',
+            'urban_description': '',
         }
         if not getLicenceSchema(self.getLicencePortalType()):
             return DisplayList()
         for field in getLicenceSchema(self.getLicencePortalType()).fields():
             if hasattr(field, 'optional'):
                 tab = field.schemata
-                if field.schemata in abr.keys():
-                   tab = abr[tab]
-                res.append((field.getName(), "%s%s" %(tab,
-                    self.utranslate(field.widget.label_msgid, domain=field.widget.i18n_domain, default=field.widget.label))))
+                if field.schemata in abr.keys() and field.widget.visible:
+                    tab = abr[tab]
+                    res.append(
+                        (
+                            field.getName(),
+                            "%s%s" % (tab, self.utranslate(
+                                field.widget.label_msgid,
+                                domain=field.widget.i18n_domain,
+                                default=field.widget.label)
+                            )
+                        )
+                    )
         return DisplayList(tuple(res)).sortedByValue()
 
     security.declarePublic('getActiveTabs')
