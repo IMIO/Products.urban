@@ -36,6 +36,14 @@
       />
 
   <browser:page
+     for="*"
+     name="schedule"
+     class=".scheduleview.ScheduleView"
+     template="templates/scheduleview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
      name="urban_view"
      class=".urbanview.UrbanView"

@@ -26,7 +26,7 @@ setup(name='Products.urban',
           test=[
               'unittest2', 'zope.testing', 'plone.testing',
               'testfixtures',
-              'plone.app.testing', 'communesplone.urban.schedule', 'communesplone.iconified_document_actions'
+              'plone.app.testing', 'communesplone.iconified_document_actions'
           ],
           templates=[
               'Genshi',
@@ -49,7 +49,6 @@ setup(name='Products.urban',
           'plone.app.referenceintegrity',
           'psycopg2',
           'testfixtures',
-          'communesplone.urban.schedule',
           'communesplone.iconified_document_actions',
           'Products.CMFPlacefulWorkflow',
           'quintagroup.transmogrifier',

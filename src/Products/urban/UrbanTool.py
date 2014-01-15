@@ -29,7 +29,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-    
+
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -1457,17 +1457,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 res = res.encode('utf8')
             renderedDescription = re.sub(re.escape(expr.group()), res, renderedDescription)
         return renderedDescription
-
-    security.declarePublic('isScheduleAvailable')
-    def isScheduleAvailable(self, context):
-        try:
-            context.restrictedTraverse('@@schedule')
-        except AttributeError:
-            return False
-        #the schedule is available at the root of the application, any licence folder and any licence
-        if context.getLayout() == 'urban_view' or context.getProperty('urbanConfigId') or context.portal_type in URBAN_TYPES:
-            return True
-        return False
 
     def isContactFolder(self, folder):
         return IContactFolder.providedBy(folder)

@@ -34,20 +34,6 @@
  </object>
  <object name="document_actions" meta_type="CMF Action Category">
   <property name="title"></property>
-  <object name="urban_schedule" meta_type="CMF Action" i18n:domain="urban">
-   <property name="title" i18n:translate="">Schedule</property>
-   <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:$object_url/schedule</property>
-   <property name="icon_expr">string:$portal_url/schedule.png</property>
-   <property name="available_expr">python: context.portal_urban.isScheduleAvailable(context)</property>
-   <property name="permissions">
-    <element value="View"/>
-   </property>
-   <property name="visible">True</property>
-  </object>
- </object>
- <object name="document_actions" meta_type="CMF Action Category">
-  <property name="title"></property>
   <object name="urban_templates" meta_type="CMF Action" i18n:domain="urban">
    <property name="title" i18n:translate="templates_summary_title">Templates summary</property>
    <property name="description" i18n:translate=""></property>
