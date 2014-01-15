@@ -93,8 +93,7 @@ class TestKeyEvent(unittest.TestCase):
 
     def testEventDateAsKeyDate(self):
         """
-        test the method that returns all the key dates found on created urbanEvents
-        these dates appears on the licence summary tab
+        Check if a key eventDate appears correctly on the licenceview
         """
         buildlicence = self.licence
         date = '18/09/1986'
@@ -111,8 +110,7 @@ class TestKeyEvent(unittest.TestCase):
 
     def testOptionalDateAsKeyDate(self):
         """
-        test the method that returns all the key dates found on created urbanEvents
-        these dates appears on the licence summary tab
+        Check if and optionnal date set as key date appears correctly on the licenceview
         """
         buildlicence = self.licence
         date = '18/09/1986'
