@@ -97,17 +97,17 @@ class TestKeyEvent(unittest.TestCase):
         these dates appears on the licence summary tab
         """
         buildlicence = self.licence
+        date = '18/09/1986'
+        # so far the date shoud not appear
+        self.browser.open(buildlicence.absolute_url())
+        self.assertTrue(date not in self.browser.contents)
 
-        urban_event = self.urban_event
-        urban_event.setEventDate('18/09/1986')
-        urban_event_type = urban_event.getUrbaneventtypes()
-        urban_event_type.setIsKeyEvent(True)
-        urban_event_type.setKeyDates(('eventDate',))
-        view = buildlicence.restrictedTraverse('@@buildlicenceview')
-        dates = view.getKeyDates()
+        self.urban_event.setEventDate(date)
+        transaction.commit()
 
-        self.assertEqual(dates[2]['dates'][0]['date'], 'Sep 18, 1986')
-        self.assertEqual(dates[2]['label'], urban_event.Title())
+        self.browser.open(buildlicence.absolute_url())
+
+        self.assertTrue(date in self.browser.contents)
 
     def testOptionalDateAsKeyDate(self):
         """
@@ -115,19 +115,20 @@ class TestKeyEvent(unittest.TestCase):
         these dates appears on the licence summary tab
         """
         buildlicence = self.licence
+        date = '18/09/1986'
+        # so far the date shoud not appear
+        self.browser.open(buildlicence.absolute_url())
+        self.assertTrue(date not in self.browser.contents)
 
-        urban_event = self.urban_event
-        urban_event.setDecisionDate('18/09/1986')
-        urban_event_type = urban_event.getUrbaneventtypes()
-        urban_event_type.setIsKeyEvent(True)
-        urban_event_type.setKeyDates(('decisionDate',))
-        view = buildlicence.restrictedTraverse('@@buildlicenceview')
-        dates = view.getKeyDates()
+        self.event_type.setKeyDates(('decisionDate',))
+        self.urban_event.setDecisionDate(date)
+        transaction.commit()
 
-        self.assertEqual(dates[2]['dates'][0]['date'], 'Sep 18, 1986')
-        self.failUnless(urban_event.Title().decode('utf8') in dates[2]['label'])
+        self.browser.open(buildlicence.absolute_url())
 
-    def testMultipleKeyDates(self):
+        self.assertTrue(date in self.browser.contents)
+
+    def testMultipleKeyDatesDisplay(self):
         """
         If a a key event is created several time, each key date should appears on the
         description tab
@@ -135,6 +136,11 @@ class TestKeyEvent(unittest.TestCase):
         buildlicence = self.licence
         date_1 = '18/09/1986'
         date_2 = '18/09/2006'
+
+        self.browser.open(buildlicence.absolute_url())
+        #so far the dates shouldnt appears
+        self.assertTrue(date_1 not in self.browser.contents)
+        self.assertTrue(date_2 not in self.browser.contents)
 
         buildlicence.createUrbanEvent(self.event_type.UID())
         urban_event = buildlicence.objectValues()[-1]
