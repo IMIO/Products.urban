@@ -66,7 +66,7 @@ class TestKeyEvent(unittest.TestCase):
         urban_event_type.setKeyDates(('eventDate',))
         view = buildlicence.restrictedTraverse('@@buildlicenceview')
         dates = view.getKeyDates()
-        self.assertEqual(dates[-1]['date'], 'Sep 18, 1986')
+        self.assertEqual(dates[-1]['dates'][0]['date'], 'Sep 18, 1986')
         self.assertEqual(dates[-1]['label'], urban_event.Title())
 
     def testOptionalDateAsKeyDate(self):
@@ -84,5 +84,5 @@ class TestKeyEvent(unittest.TestCase):
         urban_event_type.setKeyDates(('decisionDate',))
         view = buildlicence.restrictedTraverse('@@buildlicenceview')
         dates = view.getKeyDates()
-        self.assertEqual(dates[-1]['date'], 'Sep 18, 1986')
+        self.assertEqual(dates[-1]['dates'][0]['date'], 'Sep 18, 1986')
         self.failUnless(urban_event.Title().decode('utf8') in dates[-1]['label'])
