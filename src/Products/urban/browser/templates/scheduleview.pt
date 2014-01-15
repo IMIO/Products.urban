@@ -2,4 +2,11 @@
       lang="en"
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="urban">
+    <body>
+        <metal:main fill-slot="main">
+            <tal:loop repeat="brain view/getLicencesInProgress">
+                <div tal:content="brain/Title"></div>
+            </tal:loop>
+        </metal:main>
+    </body>
 </html>
