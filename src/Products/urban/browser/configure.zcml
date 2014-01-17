@@ -46,6 +46,14 @@
      permission="zope2.View"
   />
 
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IScheduleListingTable"
+     factory=".scheduleview.ValuesForScheduleListing"
+     provides="z3c.table.interfaces.IValues"
+  />
+
   <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
      name="urban_view"

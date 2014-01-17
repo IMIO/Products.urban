@@ -10,6 +10,10 @@ input[type=button], input[type=submit] {
      box-shadow: 1px 1px 3px grey;
 }
 
+#content, #portal-columns, div.portletAssignments {
+line-height: 1.5em;
+}
+
 /* Colors on states */
 .state-in_progress {
 color: #EA6619 !important;

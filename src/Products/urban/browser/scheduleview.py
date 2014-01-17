@@ -55,23 +55,30 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
 
     def getLateUrbanEvents(self, **kwargs):
         form_datas = self.context.form.extractData()
-        licences = form_datas[0].get('licences')
+        licences = form_datas[0].get('licences', []) or []
 
         events = {}
 
         for licence in licences:
             events[licence] = self.getLateEventsOfSpecificLicence(licence)
 
+        event_brains = []
+        for brains in events.values():
+            event_brains.extend(brains)
+
+        return event_brains
+
     def getLateEventsOfSpecificLicence(self, licence_type):
         """ """
         catalog = api.portal.get_tool('portal_catalog')
         site = api.portal.getSite()
+        site_path = '/'.join(site.getPhysicalPath())
         folder = getLicenceFolderId(licence_type)
 
-        path = '{site}/urban/{folder}'.format(site=site, folder=folder)
+        path = '{site_path}/urban/{folder}'.format(site_path=site_path, folder=folder)
 
         query_string = {
-            'object_provides': IUrbanEvent,
+            'object_provides': IUrbanEvent.__identifier__,
             'review_state': 'in_progress',
             'path': {'query': path},
         }
@@ -113,4 +120,5 @@ class ScheduleForm(form.Form):
 
     @button.buttonAndHandler(u'Ok')
     def handleApply(self, action):
-        pass
+        data, errors = self.extractData()
+        self.status = "Thank you very much!"

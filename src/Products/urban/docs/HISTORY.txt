@@ -43,6 +43,10 @@ Fixed search on parcel historic (#6681).
 
 Added popup to see all licences related to a parcel historic (#5858).
 
+Generate mailing lists from contacts folder (architects, notaries, geometrcicians) (#6378).
+
+Adds pm.wsclient dependency.
+
 
 1.1.8
 -----
