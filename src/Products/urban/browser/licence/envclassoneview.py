@@ -1,4 +1,4 @@
-from Products.urban.browser.licenceview import LicenceView
+from Products.urban.browser.licence.licenceview import LicenceView
 
 
 class EnvClassOneView(LicenceView):

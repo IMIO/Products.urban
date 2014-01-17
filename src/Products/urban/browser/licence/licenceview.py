@@ -6,7 +6,7 @@ from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
 from Products.urban.interfaces import IUrbanEvent
-from Products.urban.browser.urbantable import ContactTable, ParcelsTable, EventsTable
+from Products.urban.browser.table.urbantable import ContactTable, ParcelsTable, EventsTable
 
 
 class LicenceView(BrowserView):

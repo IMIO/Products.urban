@@ -12,7 +12,9 @@ from zope.component import queryAdapter
 from Products.ZCatalog.Lazy import LazyMap
 
 from Products.urban.config import URBAN_TYPES
-from Products.urban.browser.interfaces import IItemForUrbanTable, IBrainForUrbanTable, IObjectForUrbanTable
+from Products.urban.browser.table.interfaces import IItemForUrbanTable
+from Products.urban.browser.table.interfaces import IBrainForUrbanTable
+from Products.urban.browser.table.interfaces import IObjectForUrbanTable
 
 
 class ItemForUrbanTable():

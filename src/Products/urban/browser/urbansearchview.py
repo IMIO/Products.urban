@@ -12,7 +12,7 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import URBAN_TYPES
 from Products.urban.utils import ParcelHistoric
 from Products.urban.UrbanTool import DB_QUERY_ERROR
-from Products.urban.browser.urbantable import SearchResultTable
+from Products.urban.browser.table.urbantable import SearchResultTable
 
 from Products.ZCTextIndex.ParseTree import ParseError
 

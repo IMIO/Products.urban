@@ -6,12 +6,21 @@ from zope.interface import implements
 
 from Products.ZCatalog.Lazy import LazyMap
 
-from Products.urban.browser.interfaces import \
-    ILicenceListingTable, IContactTable, IParcelsTable, \
-    IEventsTable, IDocumentsTable, IAnnexesTable, \
-    INotariesTable, IArchitectsTable, IGeometriciansTable, IClaimantsTable, \
-    IRecipientsCadastreTable, ISearchResultTable, IParcellingsTable, \
-    IUrbanColumn, IAllLicencesListingTable, IScheduleListingTable
+from Products.urban.browser.table.interfaces import ILicenceListingTable, \
+    IContactTable, \
+    IParcelsTable, \
+    IEventsTable, \
+    IDocumentsTable, \
+    IAnnexesTable, \
+    INotariesTable, \
+    IArchitectsTable, \
+    IGeometriciansTable, \
+    IClaimantsTable, \
+    IRecipientsCadastreTable, \
+    ISearchResultTable, IParcellingsTable, \
+    IUrbanColumn, \
+    IAllLicencesListingTable, \
+    IScheduleListingTable
 
 
 def getSortMethod(idx):

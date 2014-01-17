@@ -9,9 +9,15 @@ from zope.component import queryMultiAdapter
 from zope.interface import implements
 from zope.i18n import translate
 
-from Products.urban.browser.interfaces import ITitleColumn, IActionsColumn, \
-    ILocalityColumn, IStreetColumn, IUrbanColumn, IAddressColumn, IParcelReferencesColumn, \
-    ITitleCell, IActionsCell
+from Products.urban.browser.table.interfaces import ITitleColumn, \
+    IActionsColumn, \
+    ILocalityColumn, \
+    IStreetColumn, \
+    IUrbanColumn, \
+    IAddressColumn, \
+    IParcelReferencesColumn, \
+    ITitleCell, \
+    IActionsCell
 
 
 class UrbanColumn(Column):
@@ -103,7 +109,7 @@ class TitleColumn(UrbanColumn):
         title = urbanlist_item.Title()
 
         title_words = title.split()
-        for split in range(len(title_words)/15):
+        for split in range(len(title_words) / 15):
             title_words.insert(15 * (split + 1), '<br />')
         title = ' '.join(title_words)
 

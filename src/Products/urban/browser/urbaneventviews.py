@@ -4,8 +4,10 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.urban.Inquiry import Inquiry
 from Products.urban.browser.mapview import MapView
-from Products.urban.browser.urbantable import DocumentsTable, AnnexesTable, \
-    ClaimantsTable, RecipientsCadastreTable
+from Products.urban.browser.table.urbantable import DocumentsTable
+from Products.urban.browser.table.urbantable import AnnexesTable
+from Products.urban.browser.table.urbantable import ClaimantsTable
+from Products.urban.browser.table.urbantable import RecipientsCadastreTable
 
 
 class UrbanEventView(BrowserView):

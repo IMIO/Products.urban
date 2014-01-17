@@ -3,7 +3,8 @@ from zope.i18n import translate
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.urban import UrbanMessage as _
-from Products.urban.browser.urbantable import LicenceListingTable, AllLicencesListingTable
+from Products.urban.browser.table.urbantable import LicenceListingTable
+from Products.urban.browser.table.urbantable import AllLicencesListingTable
 from Products.urban.config import ORDERED_URBAN_TYPES
 from Products.urban.utils import getLicenceFolderId
 from Products.urban.utils import getLicenceFolder

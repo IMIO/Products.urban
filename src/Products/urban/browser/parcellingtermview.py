@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.Five import BrowserView
-from Products.urban.browser.urbantable import ParcelsTable
+from Products.urban.browser.table.urbantable import ParcelsTable
 
 
 class ParcellingTermView(BrowserView):

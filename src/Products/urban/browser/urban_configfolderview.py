@@ -3,8 +3,10 @@
 from Acquisition import aq_inner
 
 from Products.Five import BrowserView
-from Products.urban.browser.urbantable import GeometriciansTable, NotariesTable, \
-    ParcellingsTable, ArchitectsTable
+from Products.urban.browser.table.urbantable import GeometriciansTable
+from Products.urban.browser.table.urbantable import NotariesTable
+from Products.urban.browser.table.urbantable import ArchitectsTable
+from Products.urban.browser.table.urbantable import ParcellingsTable
 
 
 class UrbanConfigFolderView(BrowserView):

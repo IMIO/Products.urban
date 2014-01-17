@@ -3,8 +3,8 @@
 from Products.Five import BrowserView
 
 from Products.urban import UrbanMessage as _
-from Products.urban.browser.tablevalue import ValuesForUrbanListing
-from Products.urban.browser.urbantable import ScheduleListingTable
+from Products.urban.browser.table.tablevalue import ValuesForUrbanListing
+from Products.urban.browser.table.urbantable import ScheduleListingTable
 from Products.urban.config import ORDERED_URBAN_TYPES
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import getLicenceFolderId

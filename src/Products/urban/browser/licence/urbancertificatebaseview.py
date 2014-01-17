@@ -1,5 +1,6 @@
 from Acquisition import aq_inner
-from Products.urban.browser.licenceview import LicenceView
+from Products.urban.browser.licence.licenceview import LicenceView
+
 
 class UrbanCertificateBaseView(LicenceView):
     """
@@ -14,7 +15,8 @@ class UrbanCertificateBaseView(LicenceView):
         context = aq_inner(self.context)
         accessor = getattr(context, 'get%sSpecificFeatures' % subtype.capitalize())
         specific_features = accessor()
-        return [spf['value'] for spf in specific_features if not spf.has_key('check') or spf['check']]
+        return [spf['value'] for spf in specific_features if not 'check' in spf or spf['check']]
+
 
 class UrbanCertificateBaseMacros(LicenceView):
     """

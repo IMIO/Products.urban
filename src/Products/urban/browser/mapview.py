@@ -3,7 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Acquisition import aq_inner, aq_base
 from Products.urban.interfaces import IInquiry
-from Products.urban.browser.urbantable import ParcelsTable
+from Products.urban.browser.table.urbantable import ParcelsTable
 
 
 class MapView(BrowserView):

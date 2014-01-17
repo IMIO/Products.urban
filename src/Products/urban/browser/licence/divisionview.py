@@ -1,4 +1,4 @@
-from Products.urban.browser.licenceview import LicenceView
+from Products.urban.browser.licence.licenceview import LicenceView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
