@@ -55,6 +55,12 @@ class ILicenceListingTable(IUrbanTable):
     """
 
 
+class IScheduleListingTable(IUrbanTable):
+    """
+    Marker interface for schedule display table
+    """
+
+
 class IAllLicencesListingTable(IUrbanTable):
     """
     Marker interface for a all licences display table

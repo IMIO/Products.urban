@@ -11,7 +11,7 @@ from Products.urban.browser.interfaces import \
     IEventsTable, IDocumentsTable, IAnnexesTable, \
     INotariesTable, IArchitectsTable, IGeometriciansTable, IClaimantsTable, \
     IRecipientsCadastreTable, ISearchResultTable, IParcellingsTable, \
-    IUrbanColumn, IAllLicencesListingTable
+    IUrbanColumn, IAllLicencesListingTable, IScheduleListingTable
 
 
 def getSortMethod(idx):
@@ -45,6 +45,18 @@ class UrbanTable(Table):
     # performance issues (see #6444)
     def setUpRows(self):
         return LazyMap(self.setUpRow, self.values)
+
+
+class ScheduleListingTable(UrbanTable):
+    """
+    Licence listing for schedule
+    """
+    implements(IScheduleListingTable)
+
+    cssClasses = {'table': 'listing largetable'}
+    sortOrder = 'descending'
+    batchSize = 20
+    sortOn = None
 
 
 class LicenceListingTable(UrbanTable):

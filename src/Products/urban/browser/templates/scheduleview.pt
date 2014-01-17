@@ -4,9 +4,12 @@
       i18n:domain="urban">
     <body>
         <metal:main fill-slot="main">
-            <tal:loop repeat="brain view/getLicencesInProgress">
-                <div tal:content="brain/Title"></div>
-            </tal:loop>
+            <tal:form define="form nocall:view/form">
+                <tal:with-form-as-view define="view nocall:form">
+                    <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
+                </tal:with-form-as-view>
+            </tal:form>
+            <tal:listing content="structure view/renderScheduleListing" />
         </metal:main>
     </body>
 </html>

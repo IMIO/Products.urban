@@ -1,10 +1,25 @@
 # -*- coding: utf-8 -*-
 
 from Products.Five import BrowserView
-from Products.urban.interfaces import IGenericLicence
-#from Products.urban.browser.urbantable import ScheduleTable
+
+from Products.urban import UrbanMessage as _
+from Products.urban.browser.tablevalue import ValuesForUrbanListing
+from Products.urban.browser.urbantable import ScheduleListingTable
+from Products.urban.config import ORDERED_URBAN_TYPES
+from Products.urban.interfaces import IUrbanEvent
+from Products.urban.utils import getLicenceFolderId
 
 from plone import api
+
+from z3c.form import button
+from z3c.form import field
+from z3c.form import form
+from z3c.form.browser.checkbox import CheckBoxFieldWidget
+
+from zope import schema
+from zope.interface import Interface
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 
 class ScheduleView(BrowserView):
@@ -16,11 +31,86 @@ class ScheduleView(BrowserView):
         self.context = context
         self.request = request
 
-    def getLicencesInProgress(self):
-        catalog = api.portal.get_tool('portal_catalog')
-        licences_in_progress = catalog(
-            object_provides=IGenericLicence.__identifier__,
-            review_state='in_progress',
+        self.form = ScheduleForm(self.context, self.request)
+        self.form.update()
+
+        self.schedulelisting = ScheduleListingTable(self, self.request)
+        self.schedulelisting.update()
+
+    def renderScheduleListing(self):
+        self.schedulelisting.update()
+
+        return u'{listing}{batch}'.format(
+            listing=self.schedulelisting.render(),
+            batch=self.schedulelisting.renderBatch(),
         )
 
-        return licences_in_progress
+
+class ValuesForScheduleListing(ValuesForUrbanListing):
+    """ return licence values from the context  """
+
+    def getItems(self):
+        licence_brains = self.getLateUrbanEvents()
+        return licence_brains
+
+    def getLateUrbanEvents(self, **kwargs):
+        form_datas = self.context.form.extractData()
+        licences = form_datas[0].get('licences')
+
+        events = {}
+
+        for licence in licences:
+            events[licence] = self.getLateEventsOfSpecificLicence(licence)
+
+    def getLateEventsOfSpecificLicence(self, licence_type):
+        """ """
+        catalog = api.portal.get_tool('portal_catalog')
+        site = api.portal.getSite()
+        folder = getLicenceFolderId(licence_type)
+
+        path = '{site}/urban/{folder}'.format(site=site, folder=folder)
+
+        query_string = {
+            'object_provides': IUrbanEvent,
+            'review_state': 'in_progress',
+            'path': {'query': path},
+        }
+
+        event_brains = catalog(query_string)
+
+        return event_brains
+
+
+def licenceTypesVocabulary():
+    terms = [SimpleTerm(licence, licence, _(licence))
+             for licence in ORDERED_URBAN_TYPES]
+
+    vocabulary = SimpleVocabulary(terms)
+    return vocabulary
+
+
+class IScheduleForm(Interface):
+    """ Define form fields """
+
+    licences = schema.List(
+        title=u"Licence type",
+        required=False,
+        value_type=schema.Choice(source=licenceTypesVocabulary()),
+    )
+
+
+class ScheduleForm(form.Form):
+    """
+    """
+
+    schema = IScheduleForm
+    ignoreContext = True
+
+    description = u"Schedule"
+
+    fields = field.Fields(IScheduleForm)
+    fields['licences'].widgetFactory = CheckBoxFieldWidget
+
+    @button.buttonAndHandler(u'Ok')
+    def handleApply(self, action):
+        pass
