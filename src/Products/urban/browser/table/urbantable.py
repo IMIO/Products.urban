@@ -56,11 +56,10 @@ class UrbanTable(Table):
         return LazyMap(self.setUpRow, self.values)
 
 
-class ScheduleListingTable(UrbanTable):
+class LicenceListingTable(UrbanTable):
     """
-    Licence listing for schedule
     """
-    implements(IScheduleListingTable)
+    implements(ILicenceListingTable)
 
     cssClasses = {'table': 'listing largetable'}
     sortOrder = 'descending'
@@ -68,10 +67,11 @@ class ScheduleListingTable(UrbanTable):
     sortOn = None
 
 
-class LicenceListingTable(UrbanTable):
+class ScheduleListingTable(UrbanTable):
     """
+    Licence listing for schedule
     """
-    implements(ILicenceListingTable)
+    implements(IScheduleListingTable)
 
     cssClasses = {'table': 'listing largetable'}
     sortOrder = 'descending'

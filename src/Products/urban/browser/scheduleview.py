@@ -21,6 +21,7 @@ from z3c.form import form
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 
 from zope import schema
+from zope.i18n import translate
 from zope.interface import Interface
 from zope.interface import implements
 from zope.schema.vocabulary import SimpleTerm
@@ -68,8 +69,33 @@ class ItemForScheduleListing(BrainForUrbanTable):
         event = self.getEvent().getObject()
         event_type = event.getUrbaneventtypes()
         deadline_delay = event_type.getDeadLineDelay()
-        delay = DateTime() - (event.getEventDate() + deadline_delay)
+        event_date = event.getEventDate()
+        if event_date is None:
+            return u'<span style="font-size:200%">\u221e</span>'
+        delay = DateTime() - (event_date + deadline_delay)
         return int(delay)
+
+    def getEventDates(self):
+        def formatDate(date):
+            if date is None:
+                return '<span class="discreet">N.C.</span>'
+            return date.strftime('%d/%m/%Y')
+
+        event = self.getEvent().getObject()
+        event_date = formatDate(event.getEventDate())
+        event_type = event.getUrbaneventtypes()
+        request = api.portal.getRequest()
+
+        dates = [{'date_label': event_type.getEventDateLabel(), 'date': event_date}]
+
+        for fieldname in event_type.getActivatedFields():
+            field = event.getField(fieldname)
+            if field.type == 'datetime':
+                date = formatDate(field.get(event))
+                date_label = translate(_(field.widget.label_msgid), 'urban', context=request)
+                dates.append({'date_label': date_label, 'date': date})
+
+        return dates
 
 
 class IEventAndLicenceWrapper(Interface):

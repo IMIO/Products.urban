@@ -544,19 +544,19 @@ class TimeDelayColumn(UrbanColumn):
     implements(ITimeDelayColumn)
 
     header = u'label_colname_time_delay'
-    weight = -2
+    weight = -10
 
     def renderCell(self, schedule_item):
         delay = schedule_item.getEventTimeDelay()
-        cell = '<div style="text-align:center">{delay}</div>'.format(delay=delay)
+        cell = u'<div style="text-align:center">{delay}</div>'.format(delay=delay)
         return cell
 
 
-class LateEventTitleColumn(TitleColumn):
+class ScheduleEventTitleColumn(TitleColumn):
     """ """
 
     header = u'label_colname_event_title'
-    weight = -1
+    weight = -5
 
     def renderCell(self, schedule_item):
         event = schedule_item.getEvent()
@@ -565,3 +565,23 @@ class LateEventTitleColumn(TitleColumn):
 
     def renderHeadCell(self):
         return translate(self.header, 'urban', context=self.request)
+
+
+class ScheduleEventDatesColumn(UrbanColumn):
+    """ Used in schedule view to display all the dates of an event"""
+
+    header = u'label_colname_event_dates'
+    weight = -4
+
+    def renderCell(self, schedule_item):
+        dates = schedule_item.getEventDates()
+
+        if len(dates) == 1:
+            date = dates[0]
+            if date['date_label'] == 'Date':
+                return u'<div>{date}</div>'.format(**date)
+
+        dateline = u'<div>{date_label}: {date}</div>'
+        cell = u''.join([dateline.format(**date) for date in dates])
+
+        return cell

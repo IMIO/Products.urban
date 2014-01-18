@@ -797,6 +797,9 @@ msgstr "Créé le"
 msgid "label_colname_eventDate"
 msgstr "Date clé"
 
+msgid "label_colname_event_dates"
+msgstr "Dates"
+
 msgid "label_colname_event_title"
 msgstr "Événement"
 
@@ -843,7 +846,7 @@ msgid "label_colname_street"
 msgstr "Rue"
 
 msgid "label_colname_time_delay"
-msgstr "Délai de retard"
+msgstr "Retard (jours)"
 
 msgid "label_colname_transmitDate"
 msgstr "Date d'envoi"

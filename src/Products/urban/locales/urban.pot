@@ -796,6 +796,9 @@ msgstr ""
 msgid "label_colname_eventDate"
 msgstr ""
 
+msgid "label_colname_event_dates"
+msgstr ""
+
 msgid "label_colname_event_title"
 msgstr ""
 

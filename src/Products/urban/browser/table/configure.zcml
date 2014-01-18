@@ -17,7 +17,7 @@
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IScheduleListingTable"
-     factory=".column.LateEventTitleColumn"
+     factory=".column.ScheduleEventTitleColumn"
      provides="z3c.table.interfaces.IColumn"
      name="lateEventtitleColumn"
   />
@@ -250,6 +250,15 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IScheduleListingTable"
+     factory=".column.FoldermanagerColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="foldermanagerColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IRecipientsCadastreTable"
      factory=".column.LocalityColumn"
      provides="z3c.table.interfaces.IColumn"
@@ -298,7 +307,16 @@
           Products.urban.browser.table.interfaces.IScheduleListingTable"
      factory=".column.TimeDelayColumn"
      provides="z3c.table.interfaces.IColumn"
-     name="actionsColumn"
+     name="timeDelayColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IScheduleListingTable"
+     factory=".column.ScheduleEventDatesColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="eventDatesColumn"
   />
 
   <!-- table values adapter -->
