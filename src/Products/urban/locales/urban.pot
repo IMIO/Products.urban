@@ -163,6 +163,9 @@ msgstr ""
 msgid "Licence state"
 msgstr ""
 
+msgid "Licence types"
+msgstr ""
+
 msgid "Map"
 msgstr ""
 
@@ -222,6 +225,12 @@ msgid "See more..."
 msgstr ""
 
 msgid "Show this parcel on map"
+msgstr ""
+
+msgid "Sort by licence type"
+msgstr ""
+
+msgid "Sort results by licence type first, then by delay time"
 msgstr ""
 
 #. Default: "Certificat d'urbanisme 1"

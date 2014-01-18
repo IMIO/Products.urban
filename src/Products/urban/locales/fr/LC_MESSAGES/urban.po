@@ -164,6 +164,9 @@ msgstr "Début des travaux"
 msgid "Licence state"
 msgstr "Etat du permis"
 
+msgid "Licence types"
+msgstr "Type de permis"
+
 msgid "Map"
 msgstr "Carte"
 
@@ -224,6 +227,12 @@ msgstr "Voir tout..."
 
 msgid "Show this parcel on map"
 msgstr "Montrer sur la carte"
+
+msgid "Sort by licence type"
+msgstr "Trier par type de permis"
+
+msgid "Sort results by licence type first, then by delay time"
+msgstr "Trie les résultats d'abord par type de permis, puis par délai de retard."
 
 #. Default: "Certificat d'urbanisme 1"
 msgid "UrbanCertificateOne"

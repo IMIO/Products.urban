@@ -131,8 +131,9 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
         return events
 
     def getLateUrbanEvents(self, **kwargs):
-        form_datas = self.context.form.extractData()
-        licences = form_datas[0].get('licences', []) or []
+        form_datas = self.context.form.extractData()[0]
+        licences = form_datas.get('licences') or []
+        sort_by_delay = not form_datas.get('sort_by_licence')
 
         sorted_events = []
 
@@ -142,7 +143,8 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
             events.sort(key=lambda event: -event.delay)
             sorted_events.extend(events)
 
-        sorted_events.sort(key=lambda event: -event.delay)
+        if sort_by_delay:
+            sorted_events.sort(key=lambda event: -event.delay)
 
         return sorted_events
 
@@ -181,9 +183,14 @@ class IScheduleForm(Interface):
     """ Define form fields """
 
     licences = schema.List(
-        title=u"Licence type",
+        title=_(u"Licence types"),
         required=False,
         value_type=schema.Choice(source=licenceTypesVocabulary()),
+    )
+    sort_by_licence = schema.Bool(
+        title=_(u"Sort by licence type"),
+        description=_(u"Sort results by licence type first, then by delay time"),
+        required=False,
     )
 
 
