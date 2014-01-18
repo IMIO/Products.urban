@@ -54,6 +54,12 @@
      provides="z3c.table.interfaces.IValues"
   />
 
+  <adapter
+     for="Products.urban.browser.scheduleview.IEventAndLicenceWrapper"
+     factory=".scheduleview.ItemForScheduleListing"
+     provides="Products.urban.browser.table.interfaces.IItemForUrbanTable"
+  />
+
   <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
      name="urban_view"

@@ -182,6 +182,12 @@ class IParcelReferencesColumn(Interface):
     """
 
 
+class ITimeDelayColumn(Interface):
+    """
+    Marker interface for a schedule delay Column
+    """
+
+
 class ICell(Interface):
     """
     Interface that describes a table cell behaviour

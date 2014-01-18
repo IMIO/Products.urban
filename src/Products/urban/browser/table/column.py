@@ -17,7 +17,8 @@ from Products.urban.browser.table.interfaces import ITitleColumn, \
     IAddressColumn, \
     IParcelReferencesColumn, \
     ITitleCell, \
-    IActionsCell
+    IActionsCell, \
+    ITimeDelayColumn
 
 
 class UrbanColumn(Column):
@@ -149,6 +150,13 @@ class LicenceTitleColumnHeader(TitleColumnHeader):
 
     def update(self):
         self.label = 'label_colname_Title'
+
+
+class ScheduleLicenceTitleColumnHeader(TitleColumnHeader):
+    """ return the right label to display in Title Column header """
+
+    def update(self):
+        self.label = 'label_colname_licence'
 
 
 class ApplicantTitleColumnHeader(TitleColumnHeader):
@@ -529,3 +537,31 @@ class ParcelReferencesColumn(UrbanColumn):
         parcel_render = parcel_render.decode('utf-8')
 
         return parcel_render
+
+
+class TimeDelayColumn(UrbanColumn):
+    """ Display the time delay of an urban event """
+    implements(ITimeDelayColumn)
+
+    header = u'label_colname_time_delay'
+    weight = -2
+
+    def renderCell(self, schedule_item):
+        delay = schedule_item.getEventTimeDelay()
+        cell = '<div style="text-align:center">{delay}</div>'.format(delay=delay)
+        return cell
+
+
+class LateEventTitleColumn(TitleColumn):
+    """ """
+
+    header = u'label_colname_event_title'
+    weight = -1
+
+    def renderCell(self, schedule_item):
+        event = schedule_item.getEvent()
+        title = self.renderTitleLink(event)
+        return title.decode('utf-8')
+
+    def renderHeadCell(self):
+        return translate(self.header, 'urban', context=self.request)

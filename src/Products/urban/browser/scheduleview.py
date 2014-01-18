@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 
+from DateTime import DateTime
+
 from Products.Five import BrowserView
 
 from Products.urban import UrbanMessage as _
+from Products.urban.browser.table.tablevalue import BrainForUrbanTable
 from Products.urban.browser.table.tablevalue import ValuesForUrbanListing
 from Products.urban.browser.table.urbantable import ScheduleListingTable
 from Products.urban.config import ORDERED_URBAN_TYPES
 from Products.urban.interfaces import IUrbanEvent
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.utils import getLicenceFolderId
 
 from plone import api
@@ -18,6 +22,7 @@ from z3c.form.browser.checkbox import CheckBoxFieldWidget
 
 from zope import schema
 from zope.interface import Interface
+from zope.interface import implements
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -46,12 +51,52 @@ class ScheduleView(BrowserView):
         )
 
 
+class ItemForScheduleListing(BrainForUrbanTable):
+    """ """
+
+    def __init__(self, event):
+        self.value = event.licence
+        self.event = BrainForUrbanTable(event.event)
+
+    def getEvent(self):
+        return self.event
+
+    def getLicence(self):
+        return self.licence
+
+    def getEventTimeDelay(self):
+        event = self.getEvent().getObject()
+        event_type = event.getUrbaneventtypes()
+        deadline_delay = event_type.getDeadLineDelay()
+        delay = DateTime() - (event.getEventDate() + deadline_delay)
+        return int(delay)
+
+
+class IEventAndLicenceWrapper(Interface):
+    """ """
+
+
+class EventAndLicenceWrapper(BrainForUrbanTable):
+    """ wrapper for couple event/licence """
+    implements(IEventAndLicenceWrapper)
+
+    def __init__(self, event):
+        catalog = api.portal.get_tool('portal_catalog')
+        licence_path = '/'.join(event.getPath().split('/')[:-1])
+        licence_brains = catalog(
+            path={'query': licence_path},
+            object_provides=IGenericLicence.__identifier__,
+        )
+        self.licence = licence_brains[0]
+        self.event = event
+
+
 class ValuesForScheduleListing(ValuesForUrbanListing):
-    """ return licence values from the context  """
+    """ return late event/licence values from form query """
 
     def getItems(self):
-        licence_brains = self.getLateUrbanEvents()
-        return licence_brains
+        events = [EventAndLicenceWrapper(event) for event in self.getLateUrbanEvents()]
+        return events
 
     def getLateUrbanEvents(self, **kwargs):
         form_datas = self.context.form.extractData()
@@ -121,4 +166,3 @@ class ScheduleForm(form.Form):
     @button.buttonAndHandler(u'Ok')
     def handleApply(self, action):
         data, errors = self.extractData()
-        self.status = "Thank you very much!"
