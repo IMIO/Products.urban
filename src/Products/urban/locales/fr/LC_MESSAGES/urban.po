@@ -819,7 +819,7 @@ msgid "label_colname_getParcelsForDisplay"
 msgstr "Parcelle(s)"
 
 msgid "label_colname_licence"
-msgstr "Permis"
+msgstr "Dossier"
 
 msgid "label_colname_name"
 msgstr "Nom(s)"

@@ -6,6 +6,7 @@ from Products.Five import BrowserView
 
 from Products.urban import UrbanMessage as _
 from Products.urban.browser.table.tablevalue import BrainForUrbanTable
+from Products.urban.browser.table.tablevalue import ObjectForUrbanTable
 from Products.urban.browser.table.tablevalue import ValuesForUrbanListing
 from Products.urban.browser.table.urbantable import ScheduleListingTable
 from Products.urban.config import ORDERED_URBAN_TYPES
@@ -55,25 +56,19 @@ class ScheduleView(BrowserView):
 class ItemForScheduleListing(BrainForUrbanTable):
     """ """
 
-    def __init__(self, event):
-        self.value = event.licence
-        self.event = BrainForUrbanTable(event.event)
+    def __init__(self, schedule_item):
+        self.value = schedule_item.licence
+        self.event = ObjectForUrbanTable(schedule_item.event)
+        self.delay = schedule_item.delay
 
     def getEvent(self):
         return self.event
 
     def getLicence(self):
-        return self.licence
+        return self.value
 
     def getEventTimeDelay(self):
-        event = self.getEvent().getObject()
-        event_type = event.getUrbaneventtypes()
-        deadline_delay = event_type.getDeadLineDelay()
-        event_date = event.getEventDate()
-        if event_date is None:
-            return u'<span style="font-size:200%">\u221e</span>'
-        delay = DateTime() - (event_date + deadline_delay)
-        return int(delay)
+        return self.delay
 
     def getEventDates(self):
         def formatDate(date):
@@ -98,13 +93,13 @@ class ItemForScheduleListing(BrainForUrbanTable):
         return dates
 
 
-class IEventAndLicenceWrapper(Interface):
+class IScheduleItemWrapper(Interface):
     """ """
 
 
-class EventAndLicenceWrapper(BrainForUrbanTable):
+class ScheduleItemWrapper(BrainForUrbanTable):
     """ wrapper for couple event/licence """
-    implements(IEventAndLicenceWrapper)
+    implements(IScheduleItemWrapper)
 
     def __init__(self, event):
         catalog = api.portal.get_tool('portal_catalog')
@@ -114,32 +109,47 @@ class EventAndLicenceWrapper(BrainForUrbanTable):
             object_provides=IGenericLicence.__identifier__,
         )
         self.licence = licence_brains[0]
-        self.event = event
+        self.event = event.getObject()
+        self.delay = self._computeDelay(event)
+
+    def _computeDelay(self, event):
+        event = self.event
+        event_type = event.getUrbaneventtypes()
+        deadline_delay = event_type.getDeadLineDelay()
+        event_date = event.getEventDate()
+        if event_date is None:
+            return 9999
+        delay = DateTime() - (event_date + deadline_delay)
+        return int(delay)
 
 
 class ValuesForScheduleListing(ValuesForUrbanListing):
     """ return late event/licence values from form query """
 
     def getItems(self):
-        events = [EventAndLicenceWrapper(event) for event in self.getLateUrbanEvents()]
+        events = self.getLateUrbanEvents()
         return events
 
     def getLateUrbanEvents(self, **kwargs):
         form_datas = self.context.form.extractData()
         licences = form_datas[0].get('licences', []) or []
 
-        events = {}
+        sorted_events = []
 
         for licence in licences:
-            events[licence] = self.getLateEventsOfSpecificLicence(licence)
+            event_brains = self.getUrbanEventsOfLicence(licence)
+            events = [ScheduleItemWrapper(event) for event in event_brains]
+            events.sort(key=lambda event: -event.delay)
+            sorted_events.extend(events)
 
-        event_brains = []
-        for brains in events.values():
-            event_brains.extend(brains)
+        sorted_events.sort(key=lambda event: -event.delay)
 
-        return event_brains
+        return sorted_events
 
-    def getLateEventsOfSpecificLicence(self, licence_type):
+    def sortEventsByDelay(events):
+        pass
+
+    def getUrbanEventsOfLicence(self, licence_type):
         """ """
         catalog = api.portal.get_tool('portal_catalog')
         site = api.portal.getSite()

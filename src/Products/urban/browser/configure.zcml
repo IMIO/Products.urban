@@ -55,7 +55,7 @@
   />
 
   <adapter
-     for="Products.urban.browser.scheduleview.IEventAndLicenceWrapper"
+     for="Products.urban.browser.scheduleview.IScheduleItemWrapper"
      factory=".scheduleview.ItemForScheduleListing"
      provides="Products.urban.browser.table.interfaces.IItemForUrbanTable"
   />

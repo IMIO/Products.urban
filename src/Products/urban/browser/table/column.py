@@ -548,7 +548,10 @@ class TimeDelayColumn(UrbanColumn):
 
     def renderCell(self, schedule_item):
         delay = schedule_item.getEventTimeDelay()
-        cell = u'<div style="text-align:center">{delay}</div>'.format(delay=delay)
+        if delay == 9999:
+            cell = u'<div style="font-size:200%; text-align:center">\u221e</div>'
+        else:
+            cell = u'<div style="text-align:center">{delay}</div>'.format(delay=delay)
         return cell
 
 
