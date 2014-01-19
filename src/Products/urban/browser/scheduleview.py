@@ -24,7 +24,6 @@ from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from zope import schema
 from zope.i18n import translate
 from zope.interface import Interface
-from zope.interface import implements
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -51,124 +50,6 @@ class ScheduleView(BrowserView):
             listing=self.schedulelisting.render(),
             batch=self.schedulelisting.renderBatch(),
         )
-
-
-class ItemForScheduleListing(BrainForUrbanTable):
-    """ """
-
-    def __init__(self, schedule_item):
-        self.value = schedule_item.licence
-        self.event = ObjectForUrbanTable(schedule_item.event)
-        self.delay = schedule_item.delay
-
-    def getEvent(self):
-        return self.event
-
-    def getLicence(self):
-        return self.value
-
-    def getEventTimeDelay(self):
-        return self.delay
-
-    def getEventDates(self):
-        def formatDate(date):
-            if date is None:
-                return '<span class="discreet">N.C.</span>'
-            return date.strftime('%d/%m/%Y')
-
-        event = self.getEvent().getObject()
-        event_date = formatDate(event.getEventDate())
-        event_type = event.getUrbaneventtypes()
-        request = api.portal.getRequest()
-
-        dates = [{'date_label': event_type.getEventDateLabel(), 'date': event_date}]
-
-        for fieldname in event_type.getActivatedFields():
-            field = event.getField(fieldname)
-            if field.type == 'datetime':
-                date = formatDate(field.get(event))
-                date_label = translate(_(field.widget.label_msgid), 'urban', context=request)
-                dates.append({'date_label': date_label, 'date': date})
-
-        return dates
-
-
-class IScheduleItemWrapper(Interface):
-    """ """
-
-
-class ScheduleItemWrapper(BrainForUrbanTable):
-    """ wrapper for couple event/licence """
-    implements(IScheduleItemWrapper)
-
-    def __init__(self, event):
-        catalog = api.portal.get_tool('portal_catalog')
-        licence_path = '/'.join(event.getPath().split('/')[:-1])
-        licence_brains = catalog(
-            path={'query': licence_path},
-            object_provides=IGenericLicence.__identifier__,
-        )
-        self.licence = licence_brains[0]
-        self.event = event.getObject()
-        self.delay = self._computeDelay(event)
-
-    def _computeDelay(self, event):
-        event = self.event
-        event_type = event.getUrbaneventtypes()
-        deadline_delay = event_type.getDeadLineDelay()
-        event_date = event.getEventDate()
-        if event_date is None:
-            return 9999
-        delay = DateTime() - (event_date + deadline_delay)
-        return int(delay)
-
-
-class ValuesForScheduleListing(ValuesForUrbanListing):
-    """ return late event/licence values from form query """
-
-    def getItems(self):
-        events = self.getLateUrbanEvents()
-        return events
-
-    def getLateUrbanEvents(self, **kwargs):
-        form_datas = self.context.form.extractData()[0]
-        licences = form_datas.get('licences') or []
-        sort_by_delay = not form_datas.get('sort_by_licence')
-
-        sorted_events = []
-
-        for licence in licences:
-            event_brains = self.getUrbanEventsOfLicence(licence)
-            events = [ScheduleItemWrapper(event) for event in event_brains]
-            events.sort(key=lambda event: -event.delay)
-            sorted_events.extend(events)
-
-        if sort_by_delay:
-            sorted_events.sort(key=lambda event: -event.delay)
-
-        return sorted_events
-
-    def sortEventsByDelay(events):
-        pass
-
-    def getUrbanEventsOfLicence(self, licence_type):
-        """ """
-        catalog = api.portal.get_tool('portal_catalog')
-        site = api.portal.getSite()
-        site_path = '/'.join(site.getPhysicalPath())
-        folder = getLicenceFolderId(licence_type)
-
-        path = '{site_path}/urban/{folder}'.format(site_path=site_path, folder=folder)
-
-        query_string = {
-            'object_provides': IUrbanEvent.__identifier__,
-            'review_state': 'in_progress',
-            'path': {'query': path},
-        }
-
-        event_brains = catalog(query_string)
-
-        return event_brains
 
 
 def licenceTypesVocabulary():
@@ -209,3 +90,109 @@ class ScheduleForm(form.Form):
     @button.buttonAndHandler(u'Ok')
     def handleApply(self, action):
         data, errors = self.extractData()
+
+
+class ValuesForScheduleListing(ValuesForUrbanListing):
+    """
+    Find events in progress matching form criterias.
+    Compute their time delay values wrap them and sort them
+    so they can be rendered in the schedule result listing.
+    """
+
+    @property
+    def values(self):
+        events = self.getUrbanEventsToList()
+        return events
+
+    def getUrbanEventsToList(self, **kwargs):
+        form_datas = self.context.form.extractData()[0]
+        licences = form_datas.get('licences') or []
+        sort_by_delay = not form_datas.get('sort_by_licence')
+
+        sorted_events = []
+
+        for licence in licences:
+            event_brains = self.getUrbanEventsOfLicence(licence)
+            events = [ItemForScheduleListing(event) for event in event_brains]
+            events.sort(key=lambda event: -event.delay)
+            sorted_events.extend(events)
+
+        if sort_by_delay:
+            sorted_events.sort(key=lambda event: -event.delay)
+
+        return sorted_events
+
+    def getUrbanEventsOfLicence(self, licence_type):
+        catalog = api.portal.get_tool('portal_catalog')
+        site = api.portal.getSite()
+        site_path = '/'.join(site.getPhysicalPath())
+        folder = getLicenceFolderId(licence_type)
+
+        path = '{site_path}/urban/{folder}'.format(site_path=site_path, folder=folder)
+
+        query_string = {
+            'object_provides': IUrbanEvent.__identifier__,
+            'review_state': 'in_progress',
+            'path': {'query': path},
+        }
+
+        event_brains = catalog(query_string)
+
+        return event_brains
+
+
+class ItemForScheduleListing(BrainForUrbanTable):
+    """ wrapper for couple event/licence """
+
+    def __init__(self, event):
+        catalog = api.portal.get_tool('portal_catalog')
+        licence_path = '/'.join(event.getPath().split('/')[:-1])
+        licence_brains = catalog(
+            path={'query': licence_path},
+            object_provides=IGenericLicence.__identifier__,
+        )
+        self.licence = licence_brains[0]
+        self.value = self.licence
+        self.event = ObjectForUrbanTable(event.getObject())
+        self.delay = self._computeDelay(event)
+
+    def _computeDelay(self, event):
+        event = self.event
+        event_type = event.getUrbaneventtypes()
+        deadline_delay = event_type.getDeadLineDelay()
+        event_date = event.getEventDate()
+        if event_date is None:
+            return 9999
+        delay = DateTime() - (event_date + deadline_delay)
+        return int(delay)
+
+    def getEvent(self):
+        return self.event
+
+    def getLicence(self):
+        return self.value
+
+    def getEventTimeDelay(self):
+        return self.delay
+
+    def getEventDates(self):
+        def formatDate(date):
+            if date is None:
+                return '<span class="discreet">N.C.</span>'
+            return date.strftime('%d/%m/%Y')
+
+        event = self.getEvent().getObject()
+        event_date = formatDate(event.getEventDate())
+        event_type = event.getUrbaneventtypes()
+        request = api.portal.getRequest()
+
+        dates = [{'date_label': event_type.getEventDateLabel(), 'date': event_date}]
+
+        for fieldname in event_type.getActivatedFields():
+            field = event.getField(fieldname)
+            if field.type == 'datetime':
+                date = formatDate(field.get(event))
+                date_label = translate(_(field.widget.label_msgid), 'urban', context=request)
+                dates.append({'date_label': date_label, 'date': date})
+
+        return dates

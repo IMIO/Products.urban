@@ -9,7 +9,7 @@
                     <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
                 </tal:with-form-as-view>
             </tal:form>
-            <tal:listing content="structure view/renderScheduleListing" />
+            <tal:listing content="structure view/renderScheduleListing"/>
         </metal:main>
     </body>
 </html>
