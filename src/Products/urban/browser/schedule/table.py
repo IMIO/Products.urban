@@ -107,20 +107,13 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
 
     def getUrbanEventsToList(self, **kwargs):
         form_datas = self.context.form.extractData()[0]
-        licences = []
-        for form_input, data in form_datas.iteritems():
-            if form_input.startswith('events_'):
-                null_value = data and len(data) == 1 and data[0]['event'] is None
-                if data is None or not null_value:
-                    licence_type = form_input.split('_')[1]
-                    licences.append(licence_type)
 
         sort_by_delay = not form_datas.get('sort_by_licence')
 
         sorted_events = []
 
-        for licence in licences:
-            event_brains = self.getUrbanEventsOfLicence(licence)
+        for licence, data in self.extractLicenceDatas(form_datas):
+            event_brains = self.getUrbanEventsOfLicence(licence, data)
             events = [ItemForScheduleListing(event) for event in event_brains]
             events.sort(key=lambda event: -event.delay)
             sorted_events.extend(events)
@@ -130,8 +123,23 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
 
         return sorted_events
 
-    def getUrbanEventsOfLicence(self, licence_type):
+    def extractLicenceDatas(self, datas):
+        licences = []
+        for form_input, data in datas.iteritems():
+            if form_input.startswith('events_'):
+                null_value = data and len(data) == 1 and data[0]['event'] is None
+                data = data is None and [{'event': 'all'}] or data
+                if not null_value:
+                    licence_type = form_input.split('_')[1]
+                    data = [row['event'] for row in data]
+                    licences.append((licence_type, data))
+
+        return licences
+
+    def getUrbanEventsOfLicence(self, licence_type, event_uids):
         catalog = api.portal.get_tool('portal_catalog')
+        ref_catalog = api.portal.get_tool('reference_catalog')
+
         site = api.portal.getSite()
         site_path = '/'.join(site.getPhysicalPath())
         folder = getLicenceFolderId(licence_type)
@@ -146,7 +154,19 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
 
         event_brains = catalog(query_string)
 
-        return event_brains
+        to_return = []
+
+        for brain in event_brains:
+            relations = ref_catalog(sourceUID=brain.UID, relationship='UrbanEventType')
+            if relations:
+                eventtype_uid = relations[0].targetUID
+                # eventtype 'schedulability' (means deadlinedelay > 0) is
+                # indexed on the 'last_key_event' index
+                schedulable = catalog(UID=eventtype_uid, last_key_event='schedulable')
+                if schedulable and ('all' in event_uids or eventtype_uid in event_uids):
+                    to_return.append(brain)
+
+        return to_return
 
 
 class ItemForScheduleListing(BrainForUrbanTable):

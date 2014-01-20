@@ -214,4 +214,8 @@ background-color: #75AD0A;
     display:none;
 }
 
+div[id^=formfield-form-widgets-events] .datagridwidget-table-view{
+    width: 10%;
+}
+
 /* </dtml-with> */

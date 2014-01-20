@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 from Products.urban import UrbanMessage as _
-from Products.urban.config import ORDERED_URBAN_TYPES
 
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield.registry import DictRow
-
-from plone import api
 
 from z3c.form import button
 from z3c.form import field
@@ -14,103 +11,6 @@ from z3c.form.interfaces import HIDDEN_MODE
 
 from zope import schema
 from zope.interface import Interface
-from zope.interface import implements
-from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleTerm
-from zope.schema.vocabulary import SimpleVocabulary
-
-
-def licenceTypesVocabulary():
-    terms = [SimpleTerm(licence, licence, _(licence))
-             for licence in ORDERED_URBAN_TYPES]
-
-    vocabulary = SimpleVocabulary(terms)
-    return vocabulary
-
-
-def getSchedulableEventsVocabulary(context, licence_type):
-    urban_config = api.portal.get_tool('portal_urban')
-    licence_config = urban_config.get(licence_type, None)
-
-    terms = [SimpleTerm('all', 'all', _(u'All'))]
-    if licence_config:
-        terms.append(SimpleTerm('all_opinions', 'all_opinions', _(u'All opinion requests')))
-        for event_type in licence_config.urbaneventtypes.objectValues():
-            if event_type.getDeadLineDelay() > 0:
-                title = event_type.Title()
-                title = len(title) > 40 and '{title}...'.format(title=title[:39]) or title
-                terms.append(SimpleTerm(
-                    event_type.id,
-                    event_type.id,
-                    title
-                ))
-
-    vocabulary = SimpleVocabulary(terms)
-    return vocabulary
-
-
-class buildlicenceEventsVocabulary():
-    implements(IVocabularyFactory)
-
-    def __call__(self, context):
-        return getSchedulableEventsVocabulary(context, 'buildlicence')
-buildlicenceEventsVocabularyFactory = buildlicenceEventsVocabulary()
-
-
-class parceloutlicenceEventsVocabulary():
-    implements(IVocabularyFactory)
-
-    def __call__(self, context):
-        return getSchedulableEventsVocabulary(context, 'parceloutlicence')
-parceloutlicenceEventsVocabularyFactory = parceloutlicenceEventsVocabulary()
-
-
-class declarationEventsVocabulary():
-    implements(IVocabularyFactory)
-
-    def __call__(self, context):
-        return getSchedulableEventsVocabulary(context, 'declaration')
-declarationEventsVocabularyFactory = declarationEventsVocabulary()
-
-
-class divisionEventsVocabulary():
-    implements(IVocabularyFactory)
-
-    def __call__(self, context):
-        return getSchedulableEventsVocabulary(context, 'division')
-divisionEventsVocabularyFactory = divisionEventsVocabulary()
-
-
-class urbancertificateoneEventsVocabulary():
-    implements(IVocabularyFactory)
-
-    def __call__(self, context):
-        return getSchedulableEventsVocabulary(context, 'urbancertificateone')
-urbancertificateoneEventsVocabularyFactory = urbancertificateoneEventsVocabulary()
-
-
-class urbancertificatetwoEventsVocabulary():
-    implements(IVocabularyFactory)
-
-    def __call__(self, context):
-        return getSchedulableEventsVocabulary(context, 'urbancertificatetwo')
-urbancertificatetwoEventsVocabularyFactory = urbancertificatetwoEventsVocabulary()
-
-
-class notaryletterEventsVocabulary():
-    implements(IVocabularyFactory)
-
-    def __call__(self, context):
-        return getSchedulableEventsVocabulary(context, 'notaryletter')
-notaryletterEventsVocabularyFactory = notaryletterEventsVocabulary()
-
-
-class envclassthreeEventsVocabulary():
-    implements(IVocabularyFactory)
-
-    def __call__(self, context):
-        return getSchedulableEventsVocabulary(context, 'envclassthree')
-envclassthreeEventsVocabularyFactory = envclassthreeEventsVocabulary()
 
 
 class IBuildlicenceEventsRow(Interface):

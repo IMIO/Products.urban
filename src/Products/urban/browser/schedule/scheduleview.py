@@ -1,24 +1,37 @@
 # -*- coding: utf-8 -*-
-from Products.Five import BrowserView
-
 from Products.urban.browser.schedule.form import ScheduleForm
 from Products.urban.browser.schedule.table import ScheduleListingTable
 
+from five import grok
 
-class ScheduleView(BrowserView):
+from plone.z3cform.z2 import switch_on
+
+from zope.app.pagetemplate.viewpagetemplatefile import ViewPageTemplateFile
+from zope.interface import Interface
+
+grok.templatedir('templates')
+
+
+class ScheduleView(grok.View):
     """
       This manages urban schedule view
     """
-    def __init__(self, context, request):
-        super(ScheduleView, self).__init__(context, request)
-        self.context = context
-        self.request = request
+    grok.context(Interface)
+    grok.name('schedule')
+    grok.require('zope2.View')
+
+    template = ViewPageTemplateFile('templates/scheduleview.pt')
+
+    def update(self):
+        switch_on(self)
 
         self.form = ScheduleForm(self.context, self.request)
         self.form.update()
 
         self.schedulelisting = ScheduleListingTable(self, self.request)
         self.schedulelisting.update()
+
+        super(ScheduleView, self).update()
 
     def renderScheduleListing(self):
         self.schedulelisting.update()

@@ -1,16 +1,18 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="urban">
 
-  <browser:page
+  <!--browser:page
      for="*"
      name="schedule"
      class=".scheduleview.ScheduleView"
      template="scheduleview.pt"
      permission="zope2.View"
-  />
+  /-->
+  <grok:grok package=".scheduleview"/>
 
   <adapter
      for="zope.interface.Interface
@@ -76,49 +78,49 @@
 
   <utility
     provides="zope.schema.interfaces.IVocabularyFactory"
-    component=".form.buildlicenceEventsVocabularyFactory"
+    component=".vocabulary.buildlicenceEventsVocabularyFactory"
     name="urban.buildlicence_schedulable_events"
   />
 
   <utility
     provides="zope.schema.interfaces.IVocabularyFactory"
-    component=".form.parceloutlicenceEventsVocabularyFactory"
+    component=".vocabulary.parceloutlicenceEventsVocabularyFactory"
     name="urban.parceloutlicence_schedulable_events"
   />
 
   <utility
     provides="zope.schema.interfaces.IVocabularyFactory"
-    component=".form.declarationEventsVocabularyFactory"
+    component=".vocabulary.declarationEventsVocabularyFactory"
     name="urban.declaration_schedulable_events"
   />
 
   <utility
     provides="zope.schema.interfaces.IVocabularyFactory"
-    component=".form.divisionEventsVocabularyFactory"
+    component=".vocabulary.divisionEventsVocabularyFactory"
     name="urban.division_schedulable_events"
   />
 
   <utility
     provides="zope.schema.interfaces.IVocabularyFactory"
-    component=".form.urbancertificateoneEventsVocabularyFactory"
+    component=".vocabulary.urbancertificateoneEventsVocabularyFactory"
     name="urban.urbancertificateone_schedulable_events"
   />
 
   <utility
     provides="zope.schema.interfaces.IVocabularyFactory"
-    component=".form.urbancertificatetwoEventsVocabularyFactory"
+    component=".vocabulary.urbancertificatetwoEventsVocabularyFactory"
     name="urban.urbancertificatetwo_schedulable_events"
   />
 
   <utility
     provides="zope.schema.interfaces.IVocabularyFactory"
-    component=".form.notaryletterEventsVocabularyFactory"
+    component=".vocabulary.notaryletterEventsVocabularyFactory"
     name="urban.notaryletter_schedulable_events"
   />
 
   <utility
     provides="zope.schema.interfaces.IVocabularyFactory"
-    component=".form.envclassthreeEventsVocabularyFactory"
+    component=".vocabulary.envclassthreeEventsVocabularyFactory"
     name="urban.envclassthree_schedulable_events"
   />
 

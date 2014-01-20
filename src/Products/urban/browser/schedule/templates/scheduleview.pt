@@ -7,13 +7,13 @@
             <table>
                 <tr>
                     <td style="vertical-align:top"
-                         tal:define="form nocall:view/form">
+                        tal:define="form nocall:view/form">
                         <tal:with-form-as-view define="view nocall:form">
                             <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
                         </tal:with-form-as-view>
                     </td>
                     <td style="vertical-align:top">
-                        <tal:listing content="structure view/renderScheduleListing"/>
+                        <tal:listing content="structure view/renderScheduleListing" />
                     </td>
                 </tr>
             </table>

@@ -16,7 +16,9 @@ __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
 from plone.indexer import indexer
-from Products.urban.interfaces import IGenericLicence, IParcellingTerm
+from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IParcellingTerm
+from Products.urban.interfaces import IUrbanEventType
 
 
 class UrbanIndexes:
@@ -94,6 +96,18 @@ def genericlicence_lastkeyevent(object):
         event_type = event.getUrbaneventtypes()
         if event_type.getIsKeyEvent():
             return "%s,  %s" % (event.getEventDate().strftime("%d/%m/%y"), event_type.Title())
+
+
+# !!!!
+# We use this index to know if an event is schedulable or not.
+# Since it's not used for UrbanEventType, we use this one rather
+# than define a new index
+# !!!!
+@indexer(IUrbanEventType)
+def urbaneventtype_lastkeyevent(object):
+    if object.getDeadLineDelay():
+        return 'schedulable'
+    return ''
 
 
 @indexer(IGenericLicence)
