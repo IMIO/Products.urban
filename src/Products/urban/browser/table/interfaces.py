@@ -54,13 +54,6 @@ class ILicenceListingTable(IUrbanTable):
     Marker interface for a specific licence display table
     """
 
-
-class IScheduleListingTable(IUrbanTable):
-    """
-    Marker interface for schedule display table
-    """
-
-
 class IAllLicencesListingTable(IUrbanTable):
     """
     Marker interface for a all licences display table
@@ -179,12 +172,6 @@ class IAddressColumn(Interface):
 class IParcelReferencesColumn(Interface):
     """
     Marker interface for a licence worklocation Column
-    """
-
-
-class ITimeDelayColumn(Interface):
-    """
-    Marker interface for a schedule delay Column
     """
 
 

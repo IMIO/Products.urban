@@ -1,0 +1,74 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="urban">
+
+  <browser:page
+     for="*"
+     name="schedule"
+     class=".scheduleview.ScheduleView"
+     template="scheduleview.pt"
+     permission="zope2.View"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTable
+          Products.urban.browser.table.interfaces.ITitleColumn"
+     factory=".table.ScheduleLicenceTitleColumnHeader"
+     provides="z3c.table.interfaces.IColumnHeader"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+     factory=".table.ScheduleEventTitleColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="lateEventtitleColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+     factory=".table.TimeDelayColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="timeDelayColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+     factory=".table.ScheduleEventDatesColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="eventDatesColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+     factory="..table.column.FoldermanagerColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="foldermanagerColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+     factory=".table.ValuesForScheduleListing"
+     provides="z3c.table.interfaces.IValues"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".form.buildlicenceEventsVocabularyFactory"
+    name="urban.buildlicence_schedulable_events"
+  />
+
+</configure>

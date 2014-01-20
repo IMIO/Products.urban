@@ -1,101 +1,101 @@
 # -*- coding: utf-8 -*-
-
 from DateTime import DateTime
 
-from Products.Five import BrowserView
-
 from Products.urban import UrbanMessage as _
+from Products.urban.browser.schedule.interfaces import IScheduleListingTable
+from Products.urban.browser.schedule.interfaces import ITimeDelayColumn
+from Products.urban.browser.table.column import TitleColumn
+from Products.urban.browser.table.column import TitleColumnHeader
+from Products.urban.browser.table.column import UrbanColumn
 from Products.urban.browser.table.tablevalue import BrainForUrbanTable
 from Products.urban.browser.table.tablevalue import ObjectForUrbanTable
 from Products.urban.browser.table.tablevalue import ValuesForUrbanListing
-from Products.urban.browser.table.urbantable import ScheduleListingTable
-from Products.urban.config import ORDERED_URBAN_TYPES
+from Products.urban.browser.table.urbantable import UrbanTable
+
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.utils import getLicenceFolderId
 
 from plone import api
 
-from z3c.form import button
-from z3c.form import field
-from z3c.form import form
-from z3c.form.browser.checkbox import CheckBoxFieldWidget
-
-from zope import schema
 from zope.i18n import translate
-from zope.interface import Interface
-from zope.schema.vocabulary import SimpleTerm
-from zope.schema.vocabulary import SimpleVocabulary
+from zope.interface import implements
 
 
-class ScheduleView(BrowserView):
+class ScheduleListingTable(UrbanTable):
     """
-      This manages urban schedule view
+    Licence listing for schedule
     """
-    def __init__(self, context, request):
-        super(ScheduleView, self).__init__(context, request)
-        self.context = context
-        self.request = request
+    implements(IScheduleListingTable)
 
-        self.form = ScheduleForm(self.context, self.request)
-        self.form.update()
-
-        self.schedulelisting = ScheduleListingTable(self, self.request)
-        self.schedulelisting.update()
-
-    def renderScheduleListing(self):
-        self.schedulelisting.update()
-
-        return u'{listing}{batch}'.format(
-            listing=self.schedulelisting.render(),
-            batch=self.schedulelisting.renderBatch(),
-        )
+    cssClasses = {'table': 'listing largetable'}
+    sortOrder = 'descending'
+    batchSize = 20
+    sortOn = None
 
 
-def licenceTypesVocabulary():
-    terms = [SimpleTerm(licence, licence, _(licence))
-             for licence in ORDERED_URBAN_TYPES]
+class ScheduleLicenceTitleColumnHeader(TitleColumnHeader):
+    """ return the right label to display in Title Column header """
 
-    vocabulary = SimpleVocabulary(terms)
-    return vocabulary
-
-
-class IScheduleForm(Interface):
-    """ Define form fields """
-
-    licences = schema.List(
-        title=_(u"Licence types"),
-        required=False,
-        value_type=schema.Choice(source=licenceTypesVocabulary()),
-    )
-    sort_by_licence = schema.Bool(
-        title=_(u"Sort by licence type"),
-        description=_(u"Sort results by licence type first, then by delay time"),
-        required=False,
-    )
+    def update(self):
+        self.label = 'label_colname_licence'
 
 
-class ScheduleForm(form.Form):
-    """
-    """
+class TimeDelayColumn(UrbanColumn):
+    """ Display the time delay of an urban event """
+    implements(ITimeDelayColumn)
 
-    schema = IScheduleForm
-    ignoreContext = True
+    header = u'label_colname_time_delay'
+    weight = -10
 
-    description = u"Schedule"
+    def renderCell(self, schedule_item):
+        delay = schedule_item.getEventTimeDelay()
+        if delay == 9999:
+            cell = u'<div style="font-size:200%; text-align:center">\u221e</div>'
+        else:
+            cell = u'<div style="text-align:center">{delay}</div>'.format(delay=delay)
+        return cell
 
-    fields = field.Fields(IScheduleForm)
-    fields['licences'].widgetFactory = CheckBoxFieldWidget
 
-    @button.buttonAndHandler(u'Ok')
-    def handleApply(self, action):
-        data, errors = self.extractData()
+class ScheduleEventTitleColumn(TitleColumn):
+    """ """
+
+    header = u'label_colname_event_title'
+    weight = -5
+
+    def renderCell(self, schedule_item):
+        event = schedule_item.getEvent()
+        title = self.renderTitleLink(event)
+        return title.decode('utf-8')
+
+    def renderHeadCell(self):
+        return translate(self.header, 'urban', context=self.request)
+
+
+class ScheduleEventDatesColumn(UrbanColumn):
+    """ Used in schedule view to display all the dates of an event"""
+
+    header = u'label_colname_event_dates'
+    weight = -4
+
+    def renderCell(self, schedule_item):
+        dates = schedule_item.getEventDates()
+
+        if len(dates) == 1:
+            date = dates[0]
+            if date['date_label'] == 'Date':
+                return u'<div>{date}</div>'.format(**date)
+
+        dateline = u'<div>{date_label}: {date}</div>'
+        cell = u''.join([dateline.format(**date) for date in dates])
+
+        return cell
 
 
 class ValuesForScheduleListing(ValuesForUrbanListing):
     """
     Find events in progress matching form criterias.
-    Compute their time delay values wrap them and sort them
+    Compute their time delay values, wrap them and sort them
     so they can be rendered in the schedule result listing.
     """
 
@@ -170,7 +170,7 @@ class ItemForScheduleListing(BrainForUrbanTable):
         return self.event
 
     def getLicence(self):
-        return self.value
+        return self.licence
 
     def getEventTimeDelay(self):
         return self.delay
@@ -181,7 +181,7 @@ class ItemForScheduleListing(BrainForUrbanTable):
                 return '<span class="discreet">N.C.</span>'
             return date.strftime('%d/%m/%Y')
 
-        event = self.getEvent().getObject()
+        event = self.event
         event_date = formatDate(event.getEventDate())
         event_type = event.getUrbaneventtypes()
         request = api.portal.getRequest()

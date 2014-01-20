@@ -6,6 +6,7 @@
 
   <include package=".licence" />
   <include package=".table" />
+  <include package=".schedule" />
 
   <browser:page
       for="*"
@@ -38,21 +39,6 @@
       template="firefox.pt"
       />
 
-  <browser:page
-     for="*"
-     name="schedule"
-     class=".scheduleview.ScheduleView"
-     template="templates/scheduleview.pt"
-     permission="zope2.View"
-  />
-
-  <adapter
-     for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.table.interfaces.IScheduleListingTable"
-     factory=".scheduleview.ValuesForScheduleListing"
-     provides="z3c.table.interfaces.IValues"
-  />
 
   <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"

@@ -19,8 +19,7 @@ from Products.urban.browser.table.interfaces import ILicenceListingTable, \
     IRecipientsCadastreTable, \
     ISearchResultTable, IParcellingsTable, \
     IUrbanColumn, \
-    IAllLicencesListingTable, \
-    IScheduleListingTable
+    IAllLicencesListingTable
 
 
 def getSortMethod(idx):
@@ -60,18 +59,6 @@ class LicenceListingTable(UrbanTable):
     """
     """
     implements(ILicenceListingTable)
-
-    cssClasses = {'table': 'listing largetable'}
-    sortOrder = 'descending'
-    batchSize = 20
-    sortOn = None
-
-
-class ScheduleListingTable(UrbanTable):
-    """
-    Licence listing for schedule
-    """
-    implements(IScheduleListingTable)
 
     cssClasses = {'table': 'listing largetable'}
     sortOrder = 'descending'

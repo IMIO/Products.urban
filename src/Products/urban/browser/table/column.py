@@ -17,8 +17,7 @@ from Products.urban.browser.table.interfaces import ITitleColumn, \
     IAddressColumn, \
     IParcelReferencesColumn, \
     ITitleCell, \
-    IActionsCell, \
-    ITimeDelayColumn
+    IActionsCell
 
 
 class UrbanColumn(Column):
@@ -150,13 +149,6 @@ class LicenceTitleColumnHeader(TitleColumnHeader):
 
     def update(self):
         self.label = 'label_colname_Title'
-
-
-class ScheduleLicenceTitleColumnHeader(TitleColumnHeader):
-    """ return the right label to display in Title Column header """
-
-    def update(self):
-        self.label = 'label_colname_licence'
 
 
 class ApplicantTitleColumnHeader(TitleColumnHeader):
@@ -537,54 +529,3 @@ class ParcelReferencesColumn(UrbanColumn):
         parcel_render = parcel_render.decode('utf-8')
 
         return parcel_render
-
-
-class TimeDelayColumn(UrbanColumn):
-    """ Display the time delay of an urban event """
-    implements(ITimeDelayColumn)
-
-    header = u'label_colname_time_delay'
-    weight = -10
-
-    def renderCell(self, schedule_item):
-        delay = schedule_item.getEventTimeDelay()
-        if delay == 9999:
-            cell = u'<div style="font-size:200%; text-align:center">\u221e</div>'
-        else:
-            cell = u'<div style="text-align:center">{delay}</div>'.format(delay=delay)
-        return cell
-
-
-class ScheduleEventTitleColumn(TitleColumn):
-    """ """
-
-    header = u'label_colname_event_title'
-    weight = -5
-
-    def renderCell(self, schedule_item):
-        event = schedule_item.getEvent()
-        title = self.renderTitleLink(event)
-        return title.decode('utf-8')
-
-    def renderHeadCell(self):
-        return translate(self.header, 'urban', context=self.request)
-
-
-class ScheduleEventDatesColumn(UrbanColumn):
-    """ Used in schedule view to display all the dates of an event"""
-
-    header = u'label_colname_event_dates'
-    weight = -4
-
-    def renderCell(self, schedule_item):
-        dates = schedule_item.getEventDates()
-
-        if len(dates) == 1:
-            date = dates[0]
-            if date['date_label'] == 'Date':
-                return u'<div>{date}</div>'.format(**date)
-
-        dateline = u'<div>{date_label}: {date}</div>'
-        cell = u''.join([dateline.format(**date) for date in dates])
-
-        return cell
