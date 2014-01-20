@@ -210,4 +210,8 @@ background-color: #75AD0A;
     visibility: hidden;
 }
 
+.schedule-hide-form-input{
+    display:none;
+}
+
 /* </dtml-with> */
