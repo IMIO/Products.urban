@@ -71,4 +71,46 @@
     name="urban.buildlicence_schedulable_events"
   />
 
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".form.parceloutlicenceEventsVocabularyFactory"
+    name="urban.parceloutlicence_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".form.declarationEventsVocabularyFactory"
+    name="urban.declaration_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".form.divisionEventsVocabularyFactory"
+    name="urban.division_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".form.urbancertificateoneEventsVocabularyFactory"
+    name="urban.urbancertificateone_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".form.urbancertificatetwoEventsVocabularyFactory"
+    name="urban.urbancertificatetwo_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".form.notaryletterEventsVocabularyFactory"
+    name="urban.notaryletter_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".form.envclassthreeEventsVocabularyFactory"
+    name="urban.envclassthree_schedulable_events"
+  />
+
 </configure>

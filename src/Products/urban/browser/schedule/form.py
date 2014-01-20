@@ -10,7 +10,6 @@ from plone import api
 from z3c.form import button
 from z3c.form import field
 from z3c.form import form
-from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.interfaces import HIDDEN_MODE
 
 from zope import schema
@@ -33,14 +32,17 @@ def getSchedulableEventsVocabulary(context, licence_type):
     urban_config = api.portal.get_tool('portal_urban')
     licence_config = urban_config.get(licence_type, None)
 
-    terms = []
+    terms = [SimpleTerm('all', 'all', _(u'All'))]
     if licence_config:
+        terms.append(SimpleTerm('all_opinions', 'all_opinions', _(u'All opinion requests')))
         for event_type in licence_config.urbaneventtypes.objectValues():
             if event_type.getDeadLineDelay() > 0:
+                title = event_type.Title()
+                title = len(title) > 40 and '{title}...'.format(title=title[:39]) or title
                 terms.append(SimpleTerm(
                     event_type.id,
                     event_type.id,
-                    event_type.Title()
+                    title
                 ))
 
     vocabulary = SimpleVocabulary(terms)
@@ -55,26 +57,190 @@ class buildlicenceEventsVocabulary():
 buildlicenceEventsVocabularyFactory = buildlicenceEventsVocabulary()
 
 
+class parceloutlicenceEventsVocabulary():
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        return getSchedulableEventsVocabulary(context, 'parceloutlicence')
+parceloutlicenceEventsVocabularyFactory = parceloutlicenceEventsVocabulary()
+
+
+class declarationEventsVocabulary():
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        return getSchedulableEventsVocabulary(context, 'declaration')
+declarationEventsVocabularyFactory = declarationEventsVocabulary()
+
+
+class divisionEventsVocabulary():
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        return getSchedulableEventsVocabulary(context, 'division')
+divisionEventsVocabularyFactory = divisionEventsVocabulary()
+
+
+class urbancertificateoneEventsVocabulary():
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        return getSchedulableEventsVocabulary(context, 'urbancertificateone')
+urbancertificateoneEventsVocabularyFactory = urbancertificateoneEventsVocabulary()
+
+
+class urbancertificatetwoEventsVocabulary():
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        return getSchedulableEventsVocabulary(context, 'urbancertificatetwo')
+urbancertificatetwoEventsVocabularyFactory = urbancertificatetwoEventsVocabulary()
+
+
+class notaryletterEventsVocabulary():
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        return getSchedulableEventsVocabulary(context, 'notaryletter')
+notaryletterEventsVocabularyFactory = notaryletterEventsVocabulary()
+
+
+class envclassthreeEventsVocabulary():
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        return getSchedulableEventsVocabulary(context, 'envclassthree')
+envclassthreeEventsVocabularyFactory = envclassthreeEventsVocabulary()
+
+
 class IBuildlicenceEventsRow(Interface):
-    local_userid = schema.Choice(
+    event = schema.Choice(
         required=False,
+        default='all',
         vocabulary='urban.buildlicence_schedulable_events',
+    )
+
+
+class IParcelOutLicenceEventsRow(Interface):
+    event = schema.Choice(
+        required=False,
+        default='all',
+        vocabulary='urban.parceloutlicence_schedulable_events',
+    )
+
+
+class IDeclarationEventsRow(Interface):
+    event = schema.Choice(
+        required=False,
+        default='all',
+        vocabulary='urban.declaration_schedulable_events',
+    )
+
+
+class IDivisionEventsRow(Interface):
+    event = schema.Choice(
+        required=False,
+        default='all',
+        vocabulary='urban.division_schedulable_events',
+    )
+
+
+class IUrbanCertificateOneEventsRow(Interface):
+    event = schema.Choice(
+        required=False,
+        default='all',
+        vocabulary='urban.urbancertificateone_schedulable_events',
+    )
+
+
+class IUrbanCertificateTwoEventsRow(Interface):
+    event = schema.Choice(
+        required=False,
+        default='all',
+        vocabulary='urban.urbancertificatetwo_schedulable_events',
+    )
+
+
+class INotaryLetterEventsRow(Interface):
+    event = schema.Choice(
+        required=False,
+        default='all',
+        vocabulary='urban.notaryletter_schedulable_events',
+    )
+
+
+class IEnvClassThreeEventsRow(Interface):
+    event = schema.Choice(
+        required=False,
+        default='all',
+        vocabulary='urban.envclassthree_schedulable_events',
     )
 
 
 class IScheduleForm(Interface):
     """ Define form fields """
 
-    licences = schema.List(
-        title=_(u"Licence types"),
-        required=False,
-        value_type=schema.Choice(source=licenceTypesVocabulary()),
-    )
-    buildlicence_events = schema.List(
-        title=_(u"Buildlicence"),
+    events_buildlicence = schema.List(
+        title=_(u"BuildLicence"),
         required=False,
         value_type=DictRow(
             schema=IBuildlicenceEventsRow,
+            required=False
+        ),
+    )
+    events_parceloutlicence = schema.List(
+        title=_(u"ParcelOutLicence"),
+        required=False,
+        value_type=DictRow(
+            schema=IParcelOutLicenceEventsRow,
+            required=False
+        ),
+    )
+    events_declaration = schema.List(
+        title=_(u"Declaration"),
+        required=False,
+        value_type=DictRow(
+            schema=IDeclarationEventsRow,
+            required=False
+        ),
+    )
+    events_division = schema.List(
+        title=_(u"Division"),
+        required=False,
+        value_type=DictRow(
+            schema=IDivisionEventsRow,
+            required=False
+        ),
+    )
+    events_urbancertificateone = schema.List(
+        title=_(u"UrbanCertificateOne"),
+        required=False,
+        value_type=DictRow(
+            schema=IUrbanCertificateOneEventsRow,
+            required=False
+        ),
+    )
+    events_urbancertificatetwo = schema.List(
+        title=_(u"UrbanCertificateTwo"),
+        required=False,
+        value_type=DictRow(
+            schema=IUrbanCertificateTwoEventsRow,
+            required=False
+        ),
+    )
+    events_notaryletter = schema.List(
+        title=_(u"NotaryLetter"),
+        required=False,
+        value_type=DictRow(
+            schema=INotaryLetterEventsRow,
+            required=False
+        ),
+    )
+    events_envclassthree = schema.List(
+        title=_(u"EnvClassThree"),
+        required=False,
+        value_type=DictRow(
+            schema=IEnvClassThreeEventsRow,
             required=False
         ),
     )
@@ -94,9 +260,17 @@ class ScheduleForm(form.Form):
 
     description = u"Schedule"
 
+    #template = Zope3PageTemplateFile("custom-form-template.pt")
+
     fields = field.Fields(IScheduleForm)
-    fields['licences'].widgetFactory = CheckBoxFieldWidget
-    fields['buildlicence_events'].widgetFactory = DataGridFieldFactory
+    fields['events_buildlicence'].widgetFactory = DataGridFieldFactory
+    fields['events_parceloutlicence'].widgetFactory = DataGridFieldFactory
+    fields['events_declaration'].widgetFactory = DataGridFieldFactory
+    fields['events_division'].widgetFactory = DataGridFieldFactory
+    fields['events_urbancertificateone'].widgetFactory = DataGridFieldFactory
+    fields['events_urbancertificatetwo'].widgetFactory = DataGridFieldFactory
+    fields['events_notaryletter'].widgetFactory = DataGridFieldFactory
+    fields['events_envclassthree'].widgetFactory = DataGridFieldFactory
 
     @button.buttonAndHandler(u'Ok')
     def handleApply(self, action):
