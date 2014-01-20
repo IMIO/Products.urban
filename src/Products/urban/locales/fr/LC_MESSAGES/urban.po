@@ -37,6 +37,9 @@ msgstr "Ajouter cette parcelle"
 msgid "All"
 msgstr "Tous"
 
+msgid "All opinion requests"
+msgstr "Toutes les demandes d'avis"
+
 msgid "Applicant data"
 msgstr "Coordonnées du demandeur"
 

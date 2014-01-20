@@ -10,7 +10,6 @@ from Products.urban.browser.table.column import UrbanColumn
 from Products.urban.browser.table.tablevalue import BrainForUrbanTable
 from Products.urban.browser.table.tablevalue import ObjectForUrbanTable
 from Products.urban.browser.table.tablevalue import ValuesForUrbanListing
-from Products.urban.browser.table.urbantable import UrbanTable
 
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IGenericLicence
@@ -18,11 +17,13 @@ from Products.urban.utils import getLicenceFolderId
 
 from plone import api
 
+from z3c.table.table import Table
+
 from zope.i18n import translate
 from zope.interface import implements
 
 
-class ScheduleListingTable(UrbanTable):
+class ScheduleListingTable(Table):
     """
     Licence listing for schedule
     """
@@ -106,7 +107,14 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
 
     def getUrbanEventsToList(self, **kwargs):
         form_datas = self.context.form.extractData()[0]
-        licences = form_datas.get('licences') or []
+        licences = []
+        for form_input, data in form_datas.iteritems():
+            if form_input.startswith('events_'):
+                null_value = data and len(data) == 1 and data[0]['event'] is None
+                if data is None or not null_value:
+                    licence_type = form_input.split('_')[1]
+                    licences.append(licence_type)
+
         sort_by_delay = not form_datas.get('sort_by_licence')
 
         sorted_events = []

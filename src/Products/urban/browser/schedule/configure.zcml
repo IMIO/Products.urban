@@ -15,6 +15,15 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+     factory="..table.column.TitleColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="titleColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.schedule.interfaces.IScheduleListingTable
           Products.urban.browser.table.interfaces.ITitleColumn"
      factory=".table.ScheduleLicenceTitleColumnHeader"

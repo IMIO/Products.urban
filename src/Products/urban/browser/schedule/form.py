@@ -116,7 +116,6 @@ envclassthreeEventsVocabularyFactory = envclassthreeEventsVocabulary()
 class IBuildlicenceEventsRow(Interface):
     event = schema.Choice(
         required=False,
-        default='all',
         vocabulary='urban.buildlicence_schedulable_events',
     )
 
@@ -124,7 +123,6 @@ class IBuildlicenceEventsRow(Interface):
 class IParcelOutLicenceEventsRow(Interface):
     event = schema.Choice(
         required=False,
-        default='all',
         vocabulary='urban.parceloutlicence_schedulable_events',
     )
 
@@ -132,7 +130,6 @@ class IParcelOutLicenceEventsRow(Interface):
 class IDeclarationEventsRow(Interface):
     event = schema.Choice(
         required=False,
-        default='all',
         vocabulary='urban.declaration_schedulable_events',
     )
 
@@ -140,7 +137,6 @@ class IDeclarationEventsRow(Interface):
 class IDivisionEventsRow(Interface):
     event = schema.Choice(
         required=False,
-        default='all',
         vocabulary='urban.division_schedulable_events',
     )
 
@@ -148,7 +144,6 @@ class IDivisionEventsRow(Interface):
 class IUrbanCertificateOneEventsRow(Interface):
     event = schema.Choice(
         required=False,
-        default='all',
         vocabulary='urban.urbancertificateone_schedulable_events',
     )
 
@@ -156,7 +151,6 @@ class IUrbanCertificateOneEventsRow(Interface):
 class IUrbanCertificateTwoEventsRow(Interface):
     event = schema.Choice(
         required=False,
-        default='all',
         vocabulary='urban.urbancertificatetwo_schedulable_events',
     )
 
@@ -164,7 +158,6 @@ class IUrbanCertificateTwoEventsRow(Interface):
 class INotaryLetterEventsRow(Interface):
     event = schema.Choice(
         required=False,
-        default='all',
         vocabulary='urban.notaryletter_schedulable_events',
     )
 
@@ -172,7 +165,6 @@ class INotaryLetterEventsRow(Interface):
 class IEnvClassThreeEventsRow(Interface):
     event = schema.Choice(
         required=False,
-        default='all',
         vocabulary='urban.envclassthree_schedulable_events',
     )
 
@@ -182,6 +174,7 @@ class IScheduleForm(Interface):
 
     events_buildlicence = schema.List(
         title=_(u"BuildLicence"),
+        default=[{'event': 'all'}],
         required=False,
         value_type=DictRow(
             schema=IBuildlicenceEventsRow,
@@ -190,6 +183,7 @@ class IScheduleForm(Interface):
     )
     events_parceloutlicence = schema.List(
         title=_(u"ParcelOutLicence"),
+        default=[{'event': 'all'}],
         required=False,
         value_type=DictRow(
             schema=IParcelOutLicenceEventsRow,
@@ -198,6 +192,7 @@ class IScheduleForm(Interface):
     )
     events_declaration = schema.List(
         title=_(u"Declaration"),
+        default=[{'event': 'all'}],
         required=False,
         value_type=DictRow(
             schema=IDeclarationEventsRow,
@@ -206,6 +201,7 @@ class IScheduleForm(Interface):
     )
     events_division = schema.List(
         title=_(u"Division"),
+        default=[{'event': 'all'}],
         required=False,
         value_type=DictRow(
             schema=IDivisionEventsRow,
@@ -214,6 +210,7 @@ class IScheduleForm(Interface):
     )
     events_urbancertificateone = schema.List(
         title=_(u"UrbanCertificateOne"),
+        default=[{'event': 'all'}],
         required=False,
         value_type=DictRow(
             schema=IUrbanCertificateOneEventsRow,
@@ -222,6 +219,7 @@ class IScheduleForm(Interface):
     )
     events_urbancertificatetwo = schema.List(
         title=_(u"UrbanCertificateTwo"),
+        default=[{'event': 'all'}],
         required=False,
         value_type=DictRow(
             schema=IUrbanCertificateTwoEventsRow,
@@ -230,6 +228,7 @@ class IScheduleForm(Interface):
     )
     events_notaryletter = schema.List(
         title=_(u"NotaryLetter"),
+        default=[{'event': 'all'}],
         required=False,
         value_type=DictRow(
             schema=INotaryLetterEventsRow,
@@ -238,6 +237,7 @@ class IScheduleForm(Interface):
     )
     events_envclassthree = schema.List(
         title=_(u"EnvClassThree"),
+        default=[{'event': 'all'}],
         required=False,
         value_type=DictRow(
             schema=IEnvClassThreeEventsRow,
@@ -246,9 +246,15 @@ class IScheduleForm(Interface):
     )
     sort_by_licence = schema.Bool(
         title=_(u"Sort by licence type"),
-        description=_(u"Sort results by licence type first, then by delay time"),
+        # description=_(u"Sort results by licence type first, then by delay time"),
         required=False,
     )
+
+
+datagrid_field_names = [
+    'events_buildlicence', 'events_parceloutlicence', 'events_declaration', 'events_division',
+    'events_notaryletter', 'events_urbancertificateone', 'events_urbancertificatetwo', 'events_envclassthree'
+]
 
 
 class ScheduleForm(form.Form):
@@ -263,14 +269,8 @@ class ScheduleForm(form.Form):
     #template = Zope3PageTemplateFile("custom-form-template.pt")
 
     fields = field.Fields(IScheduleForm)
-    fields['events_buildlicence'].widgetFactory = DataGridFieldFactory
-    fields['events_parceloutlicence'].widgetFactory = DataGridFieldFactory
-    fields['events_declaration'].widgetFactory = DataGridFieldFactory
-    fields['events_division'].widgetFactory = DataGridFieldFactory
-    fields['events_urbancertificateone'].widgetFactory = DataGridFieldFactory
-    fields['events_urbancertificatetwo'].widgetFactory = DataGridFieldFactory
-    fields['events_notaryletter'].widgetFactory = DataGridFieldFactory
-    fields['events_envclassthree'].widgetFactory = DataGridFieldFactory
+    for field_name in datagrid_field_names:
+        fields[field_name].widgetFactory = DataGridFieldFactory
 
     @button.buttonAndHandler(u'Ok')
     def handleApply(self, action):
@@ -278,6 +278,10 @@ class ScheduleForm(form.Form):
 
     def updateWidgets(self):
         super(ScheduleForm, self).updateWidgets()
+
+        for field_name in datagrid_field_names:
+            self.widgets[field_name].auto_append = False
+
         #self.hideDataGridWidget('buildlicence_events')
 
     def hideDataGridWidget(self, licence_type):

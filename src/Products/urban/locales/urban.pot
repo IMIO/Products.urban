@@ -36,6 +36,9 @@ msgstr ""
 msgid "All"
 msgstr ""
 
+msgid "All opinion requests"
+msgstr ""
+
 msgid "Applicant data"
 msgstr ""
 
