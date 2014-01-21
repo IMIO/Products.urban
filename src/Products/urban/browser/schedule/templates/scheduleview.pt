@@ -8,12 +8,20 @@
                 <tr>
                     <td style="vertical-align:top"
                         tal:define="form nocall:view/form">
-                        <tal:with-form-as-view define="view nocall:form">
-                            <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
-                        </tal:with-form-as-view>
+                        <fieldset>
+                            <legend i18n:translate="">Filter</legend>
+                            <tal:with-form-as-view define="view nocall:form">
+                                <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
+                            </tal:with-form-as-view>
+                        </fieldset>
                     </td>
+                    <td style="width: 10px"></td>
                     <td style="vertical-align:top">
-                        <tal:listing content="structure view/renderScheduleListing" />
+                        <fieldset>
+                            <legend i18n:translate="">Ongoing events</legend>
+                            <tal:listing content="structure view/schedulelisting/render" />
+                            <tal:batch content="structure view/schedulelisting/renderBatch" />
+                        </fieldset>
                     </td>
                 </tr>
             </table>

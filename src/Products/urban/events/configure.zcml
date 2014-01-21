@@ -39,6 +39,9 @@
   <subscriber for="..interfaces.IGenericLicence
                    zope.lifecycleevent.IObjectModifiedEvent"
               handler=".licenceEvents.updateLicenceTitle"/>
+  <subscriber for="..interfaces.IGenericLicence
+                   zope.lifecycleevent.IObjectModifiedEvent"
+              handler=".licenceEvents.updateEventsFoldermanager"/>
   <subscriber for="..interfaces.IPortionOut
                    zope.app.container.interfaces.IObjectRemovedEvent"
               handler=".portionOutEvents.onDelete" />

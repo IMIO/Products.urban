@@ -72,6 +72,15 @@ class IEnvClassThreeEventsRow(Interface):
 class IScheduleForm(Interface):
     """ Define form fields """
 
+    foldermanager = schema.Choice(
+        title=_(u"FolderManager"),
+        required=False,
+        vocabulary='urban.folder_managers',
+    )
+    sort_by_licence = schema.Bool(
+        title=_(u"Sort by licence type"),
+        required=False,
+    )
     events_buildlicence = schema.List(
         title=_(u"BuildLicence"),
         default=[{'event': 'all'}],
@@ -144,11 +153,6 @@ class IScheduleForm(Interface):
             required=False
         ),
     )
-    sort_by_licence = schema.Bool(
-        title=_(u"Sort by licence type"),
-        # description=_(u"Sort results by licence type first, then by delay time"),
-        required=False,
-    )
 
 
 datagrid_field_names = [
@@ -163,10 +167,6 @@ class ScheduleForm(form.Form):
 
     schema = IScheduleForm
     ignoreContext = True
-
-    description = u"Schedule"
-
-    #template = Zope3PageTemplateFile("custom-form-template.pt")
 
     fields = field.Fields(IScheduleForm)
     for field_name in datagrid_field_names:
@@ -184,9 +184,9 @@ class ScheduleForm(form.Form):
 
         #self.hideDataGridWidget('buildlicence_events')
 
-    def hideDataGridWidget(self, licence_type):
-        data_grid = self.widgets[licence_type]
+    def hideDataGridWidget(self, field_name):
+        data_grid = self.widgets[field_name]
         data_grid.mode = HIDDEN_MODE
-        add_line_widget = data_grid.widgets(-2)
-        old_klass = add_line_widget.klass
-        add_line_widget.klass = '{old_klass} schedule-hide-form-input'.format(old_klass)
+        add_line_widget = data_grid.widgets[-2]
+        css_classes = add_line_widget.klass
+        add_line_widget.klass = '{} {}'.format(css_classes, 'schedule-hide-form-input')

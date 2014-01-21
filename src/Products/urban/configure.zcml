@@ -116,6 +116,7 @@
   <adapter name="last_key_event" factory=".indexes.genericlicence_lastkeyevent" />
   <adapter name="last_key_event" factory=".indexes.urbaneventtype_lastkeyevent" />
   <adapter name="folder_manager" factory=".indexes.genericlicence_foldermanager" />
+  <adapter name="folder_manager" factory=".indexes.urbanevent_foldermanager" />
 
   <interface interface=".interfaces.IUrbanCertificateOne" />
   <interface interface=".interfaces.IUrbanCertificateTwo" />

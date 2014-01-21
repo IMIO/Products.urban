@@ -36,6 +36,9 @@ msgstr ""
 msgid "All"
 msgstr ""
 
+msgid "All events"
+msgstr ""
+
 msgid "All opinion requests"
 msgstr ""
 
@@ -89,6 +92,9 @@ msgid "EnvClassThree"
 msgstr ""
 
 msgid "Filter"
+msgstr ""
+
+msgid "FolderManager"
 msgstr ""
 
 msgid "Found folder(s)"
@@ -182,6 +188,9 @@ msgid "Notary data"
 msgstr ""
 
 msgid "NotaryLetter"
+msgstr ""
+
+msgid "Ongoing events"
 msgstr ""
 
 msgid "Parcel"

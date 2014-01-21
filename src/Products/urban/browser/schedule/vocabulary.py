@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Products.urban import UrbanMessage as _
-from Products.urban.config import ORDERED_URBAN_TYPES
 from Products.urban.interfaces import IUrbanEventType
+from Products.urban.interfaces import IFolderManager
 
 from plone import api
 
@@ -11,12 +11,50 @@ from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 
-def licenceTypesVocabulary():
-    terms = [SimpleTerm(licence, licence, _(licence))
-             for licence in ORDERED_URBAN_TYPES]
+class folderManagersVocabulary():
+    implements(IVocabularyFactory)
 
-    vocabulary = SimpleVocabulary(terms)
-    return vocabulary
+    def __call__(self, context):
+        current_fm, foldermanagers = self.listFolderManagers(context)
+
+        terms = []
+
+        if current_fm:
+            cfm_term = SimpleTerm(
+                current_fm.UID(),
+                current_fm.UID(),
+                current_fm.Title().split('(')[0],
+            )
+            terms.append(cfm_term)
+
+        terms.append(SimpleTerm('all', 'all', _('All')))
+
+        for foldermanager in foldermanagers:
+            fm_term = SimpleTerm(
+                foldermanager.UID,
+                foldermanager.UID,
+                foldermanager.Title.split('(')[0],
+            )
+            terms.append(fm_term)
+
+        vocabulary = SimpleVocabulary(terms)
+        return vocabulary
+
+    def listFolderManagers(self, context):
+        """
+          Returns the available folder managers
+        """
+        urban_tool = api.portal.get_tool('portal_urban')
+        catalog = api.portal.get_tool('portal_catalog')
+
+        current_foldermanager = urban_tool.getCurrentFolderManager(initials=False)
+        current_foldermanager_uid = current_foldermanager and current_foldermanager.UID() or ''
+        foldermanagers = catalog(object_provides=IFolderManager.__identifier__)
+        foldermanagers = [manager for manager in foldermanagers if manager.UID != current_foldermanager_uid]
+
+        return current_foldermanager, foldermanagers
+
+folderManagersVocabularyFactory = folderManagersVocabulary()
 
 
 def getSchedulableEventsVocabulary(context, licence_type):
@@ -24,7 +62,7 @@ def getSchedulableEventsVocabulary(context, licence_type):
     catalog = api.portal.get_tool('portal_catalog')
     licence_config = urban_config.get(licence_type, None)
 
-    terms = [SimpleTerm('all', 'all', _(u'All'))]
+    terms = [SimpleTerm('all', 'all', _(u'All events'))]
     if licence_config:
         terms.append(SimpleTerm('all_opinions', 'all_opinions', _(u'All opinion requests')))
         eventtype_brains = catalog(

@@ -18,6 +18,7 @@ from AccessControl import ClassSecurityInfo
 from plone.indexer import indexer
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IParcellingTerm
+from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IUrbanEventType
 
 
@@ -113,3 +114,8 @@ def urbaneventtype_lastkeyevent(object):
 @indexer(IGenericLicence)
 def genericlicence_foldermanager(object):
     return [foldermanager.UID() for foldermanager in object.getFoldermanagers()]
+
+
+@indexer(IUrbanEvent)
+def urbanevent_foldermanager(object):
+    return [foldermanager.UID() for foldermanager in object.aq_parent.getFoldermanagers()]

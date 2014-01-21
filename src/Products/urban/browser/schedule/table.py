@@ -107,13 +107,13 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
 
     def getUrbanEventsToList(self, **kwargs):
         form_datas = self.context.form.extractData()[0]
-
+        foldermanager = form_datas.get('foldermanager')
         sort_by_delay = not form_datas.get('sort_by_licence')
 
         sorted_events = []
 
         for licence, data in self.extractLicenceDatas(form_datas):
-            event_brains = self.getUrbanEventsOfLicence(licence, data)
+            event_brains = self.getUrbanEventsOfLicence(licence, data, foldermanager)
             events = [ItemForScheduleListing(event) for event in event_brains]
             events.sort(key=lambda event: -event.delay)
             sorted_events.extend(events)
@@ -136,7 +136,7 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
 
         return licences
 
-    def getUrbanEventsOfLicence(self, licence_type, event_uids):
+    def getUrbanEventsOfLicence(self, licence_type, event_uids, foldermanager):
         catalog = api.portal.get_tool('portal_catalog')
         ref_catalog = api.portal.get_tool('reference_catalog')
 
@@ -151,6 +151,9 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
             'review_state': 'in_progress',
             'path': {'query': path},
         }
+
+        if foldermanager not in ['', 'all']:
+            query_string['folder_manager'] = foldermanager
 
         event_brains = catalog(query_string)
 

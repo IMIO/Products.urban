@@ -48,6 +48,13 @@ def updateLicenceTitle(licence, event):
     licence.reindexObject()
 
 
+def updateEventsFoldermanager(licence, event):
+    events = licence.objectValues('UrbanEvent')
+    events += licence.objectValues('OpinionRequestEven')
+    for urban_event in events:
+        urban_event.reindexObject(idxs=['folder_manager'])
+
+
 def _setManagerPermissionOnLicence(licence):
     #there is no need for other users than Managers to List folder contents
     #set this permission here if we use the simple_publication_workflow...

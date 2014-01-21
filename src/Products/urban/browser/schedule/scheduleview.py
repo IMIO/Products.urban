@@ -32,11 +32,3 @@ class ScheduleView(grok.View):
         self.schedulelisting.update()
 
         super(ScheduleView, self).update()
-
-    def renderScheduleListing(self):
-        self.schedulelisting.update()
-
-        return u'{listing}{batch}'.format(
-            listing=self.schedulelisting.render(),
-            batch=self.schedulelisting.renderBatch(),
-        )

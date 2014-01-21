@@ -37,6 +37,9 @@ msgstr "Ajouter cette parcelle"
 msgid "All"
 msgstr "Tous"
 
+msgid "All events"
+msgstr "Tous les événements"
+
 msgid "All opinion requests"
 msgstr "Toutes les demandes d'avis"
 
@@ -91,6 +94,9 @@ msgstr "Déclaration environnementale"
 
 msgid "Filter"
 msgstr "Filtrer"
+
+msgid "FolderManager"
+msgstr "Agent traitant"
 
 msgid "Found folder(s)"
 msgstr "Dossier(s) trouvé(s)"
@@ -184,6 +190,9 @@ msgstr "Coordonnées du notaire"
 
 msgid "NotaryLetter"
 msgstr "Lettre de notaire"
+
+msgid "Ongoing events"
+msgstr "Événements en cours"
 
 msgid "Parcel"
 msgstr "Parcelle"
