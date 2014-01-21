@@ -152,7 +152,7 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
             'path': {'query': path},
         }
 
-        if foldermanager not in ['', 'all']:
+        if foldermanager and foldermanager != 'all':
             query_string['folder_manager'] = foldermanager
 
         event_brains = catalog(query_string)
