@@ -75,6 +75,7 @@ class IScheduleForm(Interface):
     foldermanager = schema.Choice(
         title=_(u"FolderManager"),
         required=False,
+        default ='me',
         vocabulary='urban.folder_managers',
     )
     sort_by_licence = schema.Bool(

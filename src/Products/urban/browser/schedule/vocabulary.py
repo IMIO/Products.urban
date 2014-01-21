@@ -21,8 +21,8 @@ class folderManagersVocabulary():
 
         if current_fm:
             cfm_term = SimpleTerm(
-                current_fm.UID(),
-                current_fm.UID(),
+                'me',
+                'me',
                 current_fm.Title().split('(')[0],
             )
             terms.append(cfm_term)

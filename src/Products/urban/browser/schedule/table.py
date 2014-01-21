@@ -152,8 +152,13 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
             'path': {'query': path},
         }
 
-        if foldermanager and foldermanager != 'all':
-            query_string['folder_manager'] = foldermanager
+        if foldermanager != 'all':
+            if foldermanager == 'me' or not foldermanager:
+                tool = api.portal.get_tool('portal_urban')
+                current_fm = tool.getCurrentFolderManager(initials=False)
+                foldermanager = current_fm and current_fm.UID() or None
+            if foldermanager:
+                query_string['folder_manager'] = foldermanager
 
         event_brains = catalog(query_string)
 
