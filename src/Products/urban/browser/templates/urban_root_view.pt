@@ -21,7 +21,8 @@
                                         isUrbanManager view/isUrbanManager">
     
                     <div tal:replace="structure provider:plone.abovecontenttitle" />
-    
+                    <table><tr>
+                    <td style="vertical-align:top"> 
                     <!--div tal:replace="structure provider:plone.belowcontenttitle" /-->
                     <div style="float:left; margin:5px"> 
                         <fieldset style="width:250px" tal:define="tool python: getattr(context, 'portal_urban');">
@@ -54,7 +55,9 @@
                             </div>
                         </fieldset>
                     </div> 
+                    </td> 
     
+                    <td style="vertical-align:top"> 
                     <!--div tal:replace="structure provider:plone.abovecontentbody" /-->
                     <div style="float: left; margin: 5px"> 
                     <fieldset tal:define="tool python: getattr(context, 'portal_urban');">
@@ -66,6 +69,8 @@
                        </div>
                     </fieldset>
                     </div> 
+                    </td> 
+                    </tr></table>
     
                 </metal:body>
                 <!--div tal:replace="structure provider:plone.belowcontentbody" /-->
