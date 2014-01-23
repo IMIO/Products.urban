@@ -815,6 +815,9 @@ msgstr "Coordonnées du réclamant"
 msgid "label_colname_created"
 msgstr "Créé le"
 
+msgid "label_colname_delay_term"
+msgstr "Date limite"
+
 msgid "label_colname_eventDate"
 msgstr "Date clé"
 

@@ -2,6 +2,7 @@
 from DateTime import DateTime
 
 from Products.urban import UrbanMessage as _
+from Products.urban.browser.schedule.interfaces import IDelayTerm
 from Products.urban.browser.schedule.interfaces import IScheduleListingTable
 from Products.urban.browser.schedule.interfaces import ITimeDelayColumn
 from Products.urban.browser.table.column import TitleColumn
@@ -69,6 +70,20 @@ class TimeDelayColumn(UrbanColumn):
             cell = u'<div class="{css}" style="font-size:200%; text-align:center">\u221e</div>'.format(css=css_class)
         else:
             cell = u'<div class="{css}" style="text-align:center">{delay}</div>'.format(delay=delay, css=css_class)
+
+        return cell
+
+
+class DelayTerm(UrbanColumn):
+    """ """
+    implements(IDelayTerm)
+
+    header = u'label_colname_delay_term'
+    weight = -9
+
+    def renderCell(self, schedule_item):
+        delay_term = schedule_item.getDelayTerm()
+        cell = u'<span style="text-align:center">{date}</span>'.format(date=delay_term)
         return cell
 
 
@@ -204,7 +219,7 @@ class ItemForScheduleListing(BrainForUrbanTable):
         self.licence = licence_brains[0]
         self.value = self.licence
         self.event = ObjectForUrbanTable(event.getObject())
-        self.delay, self.close_delay = self._computeDelay(event)
+        self.delay, self.delay_term, self.close_delay = self._computeDelay(event)
 
     def _computeDelay(self, event):
         event = self.event
@@ -213,10 +228,13 @@ class ItemForScheduleListing(BrainForUrbanTable):
         alert_delay = event_type.getAlertDelay()
         event_date = event.getEventDate()
         if event_date is None:
-            return 9999, False
-        delay = DateTime() - (event_date + deadline_delay)
+            return 9999, None, False
+
+        delay_term = event_date + deadline_delay
+        delay = DateTime() - delay_term
         close_delay = -alert_delay < delay < 0
-        return int(delay), close_delay
+
+        return int(delay), delay_term, close_delay
 
     def getEvent(self):
         return self.event
@@ -226,6 +244,11 @@ class ItemForScheduleListing(BrainForUrbanTable):
 
     def getEventTimeDelay(self):
         return self.delay
+
+    def getDelayTerm(self):
+        if self.delay_term is None:
+            return '<span class="discreet">N.C.</span>'
+        return self.delay_term.strftime('%d/%m/%Y')
 
     def isDelayGettingClose(self):
         return self.close_delay

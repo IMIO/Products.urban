@@ -47,10 +47,19 @@
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+     factory=".table.DelayTerm"
+     provides="z3c.table.interfaces.IColumn"
+     name="delayTermColumn"
+  />
+
+  <!--adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
      factory=".table.ScheduleEventDatesColumn"
      provides="z3c.table.interfaces.IColumn"
      name="eventDatesColumn"
-  />
+  /-->
 
   <adapter
      for="zope.interface.Interface

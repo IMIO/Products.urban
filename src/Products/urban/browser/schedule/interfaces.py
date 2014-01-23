@@ -12,3 +12,9 @@ class ITimeDelayColumn(Interface):
     """
     Marker interface for a schedule delay Column
     """
+
+
+class IDelayTerm(Interface):
+    """
+    Marker interface for a maximum deadline Column
+    """

@@ -814,6 +814,9 @@ msgstr ""
 msgid "label_colname_created"
 msgstr ""
 
+msgid "label_colname_delay_term"
+msgstr ""
+
 msgid "label_colname_eventDate"
 msgstr ""
 
