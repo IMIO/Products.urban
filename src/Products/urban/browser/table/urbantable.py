@@ -47,7 +47,7 @@ class UrbanTable(Table):
     """
 
     batchProviderName = 'plonebatch'
-    startBatchingAt = 0
+    startBatchingAt = 20
 
     # override setUpRows: use a Lazymap rather than a comprehension list for
     # performance issues (see #6444)

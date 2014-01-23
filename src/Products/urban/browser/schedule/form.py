@@ -75,7 +75,7 @@ class IScheduleForm(Interface):
     foldermanager = schema.Choice(
         title=_(u"FolderManager"),
         required=False,
-        default ='me',
+        default='me',
         vocabulary='urban.folder_managers',
     )
     sort_by_licence = schema.Bool(
@@ -168,6 +168,7 @@ class ScheduleForm(form.Form):
 
     schema = IScheduleForm
     ignoreContext = True
+    method = "get"
 
     fields = field.Fields(IScheduleForm)
     for field_name in datagrid_field_names:

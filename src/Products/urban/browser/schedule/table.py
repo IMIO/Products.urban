@@ -31,8 +31,15 @@ class ScheduleListingTable(Table):
 
     cssClasses = {'table': 'listing largetable'}
     sortOrder = 'descending'
-    batchSize = 20
     sortOn = None
+
+    startBatchingAt = 15
+    batchSize = 15
+    batchProviderName = 'plonebatch'
+
+    # add  __name__ to table to avoid traversal error
+    # in OFS.absoluteurl. __str__
+    __name__ = ''
 
 
 class ScheduleLicenceTitleColumnHeader(TitleColumnHeader):
@@ -222,13 +229,19 @@ class ItemForScheduleListing(BrainForUrbanTable):
         event_type = event.getUrbaneventtypes()
         request = api.portal.getRequest()
 
-        dates = [{'date_label': event_type.getEventDateLabel(), 'date': event_date}]
+        dates = [{
+            'date_label': event_type.getEventDateLabel().decode('utf-8'),
+            'date': event_date
+        }]
 
         for fieldname in event_type.getActivatedFields():
             field = event.getField(fieldname)
-            if field.type == 'datetime':
+            if field and field.type == 'datetime':
                 date = formatDate(field.get(event))
-                date_label = translate(_(field.widget.label_msgid), 'urban', context=request)
+                date_label = translate(
+                    _(field.widget.label_msgid),
+                    'urban', context=request
+                )
                 dates.append({'date_label': date_label, 'date': date})
 
         return dates

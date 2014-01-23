@@ -22,6 +22,13 @@ class ScheduleView(grok.View):
 
     template = ViewPageTemplateFile('templates/scheduleview.pt')
 
+    def refreshBatch(self, batch_start):
+        # switch_on(self)
+        self.schedulelisting.batchStart = batch_start
+        self.schedulelisting.update()
+
+        super(ScheduleView, self).update()
+
     def update(self):
         switch_on(self)
 

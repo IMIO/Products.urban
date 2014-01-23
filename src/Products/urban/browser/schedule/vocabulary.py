@@ -69,6 +69,7 @@ def getSchedulableEventsVocabulary(context, licence_type):
             object_provides=IUrbanEventType.__identifier__,
             path={'query': '/'.join(licence_config.getPhysicalPath()), 'depth': 2},
             last_key_event='schedulable',
+            review_state='enabled',
         )
         for event_type in eventtype_brains:
             title = event_type.Title
