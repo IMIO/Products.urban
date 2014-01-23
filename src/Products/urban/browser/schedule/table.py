@@ -58,10 +58,17 @@ class TimeDelayColumn(UrbanColumn):
 
     def renderCell(self, schedule_item):
         delay = schedule_item.getEventTimeDelay()
+        close_delay = schedule_item.isDelayGettingClose()
+        css_class = 'ontime-event-delay'
+        if delay <= 0 and close_delay:
+            css_class = 'warning-event-delay'
+        if delay > 0:
+            css_class = 'late-event-delay'
         if delay == 9999:
-            cell = u'<div style="font-size:200%; text-align:center">\u221e</div>'
+            css_class = 'undefined-event-delay'
+            cell = u'<div class="{css}" style="font-size:200%; text-align:center">\u221e</div>'.format(css=css_class)
         else:
-            cell = u'<div style="text-align:center">{delay}</div>'.format(delay=delay)
+            cell = u'<div class="{css}" style="text-align:center">{delay}</div>'.format(delay=delay, css=css_class)
         return cell
 
 
@@ -197,17 +204,19 @@ class ItemForScheduleListing(BrainForUrbanTable):
         self.licence = licence_brains[0]
         self.value = self.licence
         self.event = ObjectForUrbanTable(event.getObject())
-        self.delay = self._computeDelay(event)
+        self.delay, self.close_delay = self._computeDelay(event)
 
     def _computeDelay(self, event):
         event = self.event
         event_type = event.getUrbaneventtypes()
         deadline_delay = event_type.getDeadLineDelay()
+        alert_delay = event_type.getAlertDelay()
         event_date = event.getEventDate()
         if event_date is None:
-            return 9999
+            return 9999, False
         delay = DateTime() - (event_date + deadline_delay)
-        return int(delay)
+        close_delay = -alert_delay < delay < 0
+        return int(delay), close_delay
 
     def getEvent(self):
         return self.event
@@ -217,6 +226,9 @@ class ItemForScheduleListing(BrainForUrbanTable):
 
     def getEventTimeDelay(self):
         return self.delay
+
+    def isDelayGettingClose(self):
+        return self.close_delay
 
     def getEventDates(self):
         def formatDate(date):

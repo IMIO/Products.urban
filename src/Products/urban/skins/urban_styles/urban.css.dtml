@@ -218,4 +218,23 @@ div[id^=formfield-form-widgets-events] .datagridwidget-table-view{
     width: 10%;
 }
 
+.undefined-event-delay{
+    color: purple;
+    font-weight: bold;
+}
+
+.late-event-delay{
+    color: red;
+    font-weight: bold;
+}
+
+.warning-event-delay{
+    color: orange;
+    font-weight: bold;
+}
+
+.ontime-event-delay{
+    color: green;
+}
+
 /* </dtml-with> */
