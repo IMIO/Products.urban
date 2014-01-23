@@ -61,9 +61,9 @@ class TimeDelayColumn(UrbanColumn):
         delay = schedule_item.getEventTimeDelay()
         close_delay = schedule_item.isDelayGettingClose()
         css_class = 'ontime-event-delay'
-        if delay <= 0 and close_delay:
+        if delay < 0 and close_delay:
             css_class = 'warning-event-delay'
-        if delay > 0:
+        if delay >= 0:
             css_class = 'late-event-delay'
         if delay == 9999:
             css_class = 'undefined-event-delay'
@@ -83,7 +83,11 @@ class DelayTerm(UrbanColumn):
 
     def renderCell(self, schedule_item):
         delay_term = schedule_item.getDelayTerm()
-        cell = u'<span style="text-align:center">{date}</span>'.format(date=delay_term)
+        if delay_term is None:
+            return '<div style="text-align:center" class="discreet">N.C.</div>'
+
+        delay_term = delay_term.strftime('%d/%m/%Y')
+        cell = u'<div style="text-align:center">{date}</div>'.format(date=delay_term)
         return cell
 
 
@@ -246,9 +250,7 @@ class ItemForScheduleListing(BrainForUrbanTable):
         return self.delay
 
     def getDelayTerm(self):
-        if self.delay_term is None:
-            return '<span class="discreet">N.C.</span>'
-        return self.delay_term.strftime('%d/%m/%Y')
+        return self.delay_term
 
     def isDelayGettingClose(self):
         return self.close_delay
