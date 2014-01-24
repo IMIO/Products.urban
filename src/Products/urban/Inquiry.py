@@ -31,6 +31,7 @@ from Products.urban.utils import setOptionalAttributes
 
 optional_fields = [
     'derogationDetails', 'investigationDetails', 'investigationReasons',
+    'investigationArticlesText', 'investigationArticles'
 ]
 ##/code-section module-header
 
@@ -71,6 +72,18 @@ schema = Schema((
         multiValued=True,
         vocabulary=UrbanVocabulary('investigationarticles'),
         default_method='getDefaultValue',
+    ),
+    TextField(
+        name='investigationArticlesText',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Investigationarticlestext',
+            label_msgid='urban_label_investigationArticlesText',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        default_output_type='text/html',
     ),
     DateTimeField(
         name='investigationStart',

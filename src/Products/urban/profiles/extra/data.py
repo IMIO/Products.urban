@@ -17,6 +17,23 @@ default_texts = {
         "<p>* ...</p>",
         "<p>* ...</p>",
         "<p>* ...</p>",
+    ],
+
+    'investigationArticlesTextDefaultValue': [
+        "<p>« la construction ou la reconstruction de bâtiments dont la hauteur est d'au moins quatre niveaux ou douze mètres sous corniche et dépasse de trois mètres ou plus la moyenne des hauteurs sous corniche des bâtiments situés dans la même rue jusqu'à cinquante mètres de part et d'autre de la construction projetée ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions »</p>"
+        "<p>« la construction ou la reconstruction de bâtiments dont la profondeur, mesurée à partir de l'alignement ou du front de bâtisse lorsque les constructions voisines ne sont pas implantées sur l'alignement, est supérieure à 15 mètres et dépasse de plus de 4 mètres les bâtiments situés sur les parcelles contiguës (AGW du 23 décembre 1998, art 1er), la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions »</p>"
+        "<p>« la construction, la reconstruction d'un magasin ou la modification de la destination d'un bâtiment en magasin dont la surface nette de vente est supérieure à 400 m² ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions »</p>"
+        "<p>« la construction, la reconstruction de bureaux ou la modification de la destination d'un bâtiment en bureaux dont la superficie des planchers est supérieure à 650 m² ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions »</p>"
+        "<p>« la construction, la reconstruction ou la modification de la destination d'un bâtiment en atelier, entrepôt ou hall de stockage à caractère non agricole dont la superficie des planchers est supérieure à 400 m² ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions »</p>"
+        "<p>« l'utilisation habituelle d'un terrain pour le dépôt d'un ou plusieurs véhicules usagés, de mitrailles, de matériaux ou de déchets »</p>"
+        "<p>« les demandes de permis de lotir ou de permis d'urbanisme relatives à des constructions groupées visées à l'article 126 qui portent sur une superficie de 2 hectares et plus »</p>"
+        "<p>« les demandes de permis de lotir ou de permis d'urbanisme relatives à des constructions groupées visées à l'article 126 qui peuvent comporter un ou plusieurs bâtiments visés aux 1°, 2°, 3°, 4° et 5° »</p>"
+        "<p>« les demandes de permis de lotir ou de permis d'urbanisme visées à l'article 128 »</p>"
+        "<p>« les demandes de permis de lotir visées à l'article 97 »</p>"
+        "<p>« les demandes de permis de lotir ou de permis d'urbanisme impliquant l'application des articles 110 à 113 »</p>"
+        "<p>« les demandes de permis de lotir et les demandes de permis d'urbanisme relatives à la construction, la reconstruction ou la transformation d'un bâtiment qui se rapportent à des biens immobiliers inscrits sur la liste de sauvegarde, classés, situés dans une zone de protection visée à l'article 205 (lire article 209) ou localisés dans un site mentionné à l'atlas visé à l'article 215 (lire article 233) »</p>"
+        "<p>« les voiries publiques de la Région classées en réseau interurbain (RESI) par l'arrêté ministériel du 11 août 1994 »</p>"
+        "<p>« Dès le lendemain du jour où il est en possession de l'accusé de réception et jusqu'au jour de la clôture de l'enquête publique, le demandeur est tenu d'afficher sur le terrain faisant l'objet de la demande : 2° dans les cas visés à l'article 330, 1° à 5°, et 12°, ou lorsque la dérogation porte sur le gabarit d'un bâtiment, une vue axonométrique du projet et des bâtiments contigus »</p>"
     ]
 }
 
@@ -187,7 +204,10 @@ urbanEventTypes = {
                                      {'id': "urb-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
-                    'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
+                    'textDefaultValues': (
+                        {'text': '\n'.join(default_texts['investigationArticlesTextDefaultValue']), 'fieldname': 'investigationArticlesText'},
+                        {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
+                    ),
                     },
                     {
                     'id': "config-opinion-request",
