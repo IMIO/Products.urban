@@ -235,11 +235,10 @@ class ItemForScheduleListing(BrainForUrbanTable):
         event = self.event
         event_type = event.getUrbaneventtypes()
         alert_delay = event_type.getAlertDelay()
-        event_date = event.getEventDate()
-        if event_date is None:
+        delay_term = self._computeDelayTerm(event, event_type)
+        if delay_term is None:
             return 9999, None, False
 
-        delay_term = self._computeDelayTerm(event, event_type)
         delay = DateTime() - delay_term
         close_delay = -alert_delay < delay < 0
 
@@ -252,10 +251,14 @@ class ItemForScheduleListing(BrainForUrbanTable):
         deadline_delay = event_type.getDeadLineDelay()
         event_date = event.getEventDate()
 
-        deadline = deadline_delay + event_date
+        if event_date:
+            deadline = deadline_delay + event_date
+        else:
+            deadline = None
 
         if TALformula:
             data = {
+                'self': event_type,
                 'event': event,
                 'licence': self.licence.getObject(),
             }
@@ -264,7 +267,7 @@ class ItemForScheduleListing(BrainForUrbanTable):
                 deadline = Expression(TALformula)(ctx)
             except Exception, e:
                 logger.warn("The formula delay '%s' defined for event type '%s' is wrong!  Message is : %s" % (TALformula, event_type.absolute_url(), e))
-                return deadline
+                return None
         return deadline
 
     def getEvent(self):
