@@ -106,7 +106,7 @@ def genericlicence_lastkeyevent(object):
 # !!!!
 @indexer(IUrbanEventType)
 def urbaneventtype_lastkeyevent(object):
-    if object.getDeadLineDelay():
+    if object.getDeadLineDelay() > 0:
         return 'schedulable'
     return ''
 

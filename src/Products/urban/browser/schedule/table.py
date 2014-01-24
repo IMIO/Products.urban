@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from DateTime import DateTime
 
+from Products.CMFCore.Expression import Expression
+from Products.PageTemplates.Expressions import getEngine
+
 from Products.urban import UrbanMessage as _
 from Products.urban.browser.schedule.interfaces import IDelayTerm
 from Products.urban.browser.schedule.interfaces import IScheduleListingTable
@@ -15,6 +18,9 @@ from Products.urban.browser.table.tablevalue import ValuesForUrbanListing
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.utils import getLicenceFolderId
+
+import logging
+logger = logging.getLogger('urban: Schedule')
 
 from plone import api
 
@@ -228,17 +234,38 @@ class ItemForScheduleListing(BrainForUrbanTable):
     def _computeDelay(self, event):
         event = self.event
         event_type = event.getUrbaneventtypes()
-        deadline_delay = event_type.getDeadLineDelay()
         alert_delay = event_type.getAlertDelay()
         event_date = event.getEventDate()
         if event_date is None:
             return 9999, None, False
 
-        delay_term = event_date + deadline_delay
+        delay_term = self._computeDelayTerm(event, event_type)
         delay = DateTime() - delay_term
         close_delay = -alert_delay < delay < 0
 
         return int(delay), delay_term, close_delay
+
+    def _computeDelayTerm(self, event, event_type):
+
+        TALformula = event_type.getDelayComputation().strip()
+
+        deadline_delay = event_type.getDeadLineDelay()
+        event_date = event.getEventDate()
+
+        deadline = deadline_delay + event_date
+
+        if TALformula:
+            data = {
+                'event': event,
+                'licence': self.licence.getObject(),
+            }
+            ctx = getEngine().getContext(data)
+            try:
+                deadline = Expression(TALformula)(ctx)
+            except Exception, e:
+                logger.warn("The formula delay '%s' defined for event type '%s' is wrong!  Message is : %s" % (TALformula, event_type.absolute_url(), e))
+                return deadline
+        return deadline
 
     def getEvent(self):
         return self.event

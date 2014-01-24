@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Jan 13 12:07:40 2014\n"
-"PO-Revision-Date: Mon Jan 13 12:07:40 2014\n"
+"POT-Creation-Date: Fri Jan 24 09:01:07 2014\n"
+"PO-Revision-Date: Fri Jan 24 09:01:07 2014\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,11 @@ msgstr ""
 #. Default: "Enter the different kind of spelling for this locality"
 #: Locality.py
 msgid "alsocalled_descr"
+msgstr ""
+
+#. Default: "Enter a TAL condition that defines the delay calculation. The parameters event and licence are available."
+#: UrbanDelay.py
+msgid "delay_computation_descr"
 msgstr ""
 
 #. Default: "OpenOfficePort"
@@ -368,6 +373,11 @@ msgstr ""
 #. Default: "Decreetype"
 #: PcaTerm.py
 msgid "urban_label_decreeType"
+msgstr ""
+
+#. Default: "Delaycomputation"
+#: UrbanDelay.py
+msgid "urban_label_delayComputation"
 msgstr ""
 
 #. Default: "Derogation"

@@ -49,6 +49,17 @@ schema = Schema((
         ),
         validators=('isInt',),
     ),
+    StringField(
+        name='delayComputation',
+        widget=StringField._properties['widget'](
+            size=100,
+            description="Enter a TAL condition that defines the delay calculation. The parameters event and licence are available.",
+            description_msgid="delay_computation_descr",
+            label='Delaycomputation',
+            label_msgid='urban_label_delayComputation',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )
