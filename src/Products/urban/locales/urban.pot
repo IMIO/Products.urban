@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-01-13 10:56+0000\n"
+"POT-Creation-Date: 2014-01-24 10:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -521,6 +521,11 @@ msgstr ""
 
 # portlet_urban
 msgid "default_map"
+msgstr ""
+
+#. Default: "Enter a TAL condition that defines the delay calculation. The parameters event and licence are available."
+#: UrbanDelay.py
+msgid "delay_computation_descr"
 msgstr ""
 
 msgid "derogations_folder_title"
@@ -1781,6 +1786,11 @@ msgid "urban_label_decreeType"
 msgstr ""
 
 msgid "urban_label_defaultRecipient"
+msgstr ""
+
+#. Default: "Delaycomputation"
+#: UrbanDelay.py
+msgid "urban_label_delayComputation"
 msgstr ""
 
 #. Default: "Derogation"

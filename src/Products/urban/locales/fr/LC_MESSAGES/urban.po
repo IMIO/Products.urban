@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2014-01-13 10:56+0000\n"
+"POT-Creation-Date: 2014-01-24 10:01+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -523,6 +523,11 @@ msgstr "Arrêté Royal"
 # portlet_urban
 msgid "default_map"
 msgstr "Voir la carte entière"
+
+#. Default: "Enter a TAL condition that defines the delay calculation. The parameters event and licence are available."
+#: UrbanDelay.py
+msgid "delay_computation_descr"
+msgstr "Entrez une expression TAL qui renvoie une DATE (DateTime object) du délai maximum. Les paramètres 'event' et 'licence' sont disponibles."
 
 msgid "derogations_folder_title"
 msgstr "Dérogations"
@@ -1783,6 +1788,11 @@ msgstr "Type de décret"
 
 msgid "urban_label_defaultRecipient"
 msgstr "Destinataire par défaut"
+
+#. Default: "Delaycomputation"
+#: UrbanDelay.py
+msgid "urban_label_delayComputation"
+msgstr "Calcul de la date limite"
 
 #. Default: "Derogation"
 #: GenericLicence.py
