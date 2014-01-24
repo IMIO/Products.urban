@@ -82,11 +82,6 @@
                 <metal:spf_display use-macro="here/@@fielddisplay-macros/spf_display" />
             </tr>
         </tal:specificfeatures>
-        <tr tal:condition="python: 'opinionsToAskIfWorks' in usedAttributes">
-            <td valign="top"><b><span i18n:translate="urban_label_opinionsToAskIfWorks">Opinions to ask in case of works</span>:</b></td>
-            <td width="10px"></td>
-            <td valign="top"><metal:myfield use-macro="python:here.widget('opinionsToAskIfWorks', mode='view')" /></td>
-        </tr>
     </table>
 </metal:spf_fieldset>
 
