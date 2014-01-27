@@ -156,12 +156,6 @@ class IScheduleForm(Interface):
     )
 
 
-datagrid_field_names = [
-    'events_buildlicence', 'events_parceloutlicence', 'events_declaration', 'events_division',
-    'events_notaryletter', 'events_urbancertificateone', 'events_urbancertificatetwo', 'events_envclassthree'
-]
-
-
 class ScheduleForm(form.Form):
     """
     """
@@ -169,6 +163,13 @@ class ScheduleForm(form.Form):
     schema = IScheduleForm
     ignoreContext = True
     method = "get"
+
+    datagrid_field_names = [
+        'events_buildlicence', 'events_parceloutlicence',
+        'events_declaration', 'events_division',
+        'events_notaryletter', 'events_urbancertificateone',
+        'events_urbancertificatetwo', 'events_envclassthree'
+    ]
 
     fields = field.Fields(IScheduleForm)
     for field_name in datagrid_field_names:
@@ -181,7 +182,7 @@ class ScheduleForm(form.Form):
     def updateWidgets(self):
         super(ScheduleForm, self).updateWidgets()
 
-        for field_name in datagrid_field_names:
+        for field_name in self.datagrid_field_names:
             self.widgets[field_name].auto_append = False
 
         #self.hideDataGridWidget('buildlicence_events')
