@@ -210,7 +210,10 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
                 # eventtype 'schedulability' (means deadlinedelay > 0) is
                 # indexed on the 'last_key_event' index
                 schedulable = catalog(UID=eventtype_uid, last_key_event='schedulable')
-                if schedulable and ('all' in event_uids or eventtype_uid in event_uids):
+                all_events = eventtype_uid in event_uids
+                selected_event = 'all' in event_uids
+                all_opinions_request = 'all_opinions' in event_uids and brain.portal_type == 'UrbanEventOpinionRequest'
+                if schedulable and (all_events or selected_event or all_opinions_request):
                     to_return.append(brain)
 
         return to_return
