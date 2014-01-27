@@ -49,7 +49,10 @@ class folderManagersVocabulary():
 
         current_foldermanager = urban_tool.getCurrentFolderManager(initials=False)
         current_foldermanager_uid = current_foldermanager and current_foldermanager.UID() or ''
-        foldermanagers = catalog(object_provides=IFolderManager.__identifier__)
+        foldermanagers = catalog(
+            object_provides=IFolderManager.__identifier__,
+            sort_on='sortable_title',
+        )
         foldermanagers = [manager for manager in foldermanagers if manager.UID != current_foldermanager_uid]
 
         return current_foldermanager, foldermanagers
