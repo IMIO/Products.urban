@@ -2030,7 +2030,7 @@ msgstr "Article(s) de l'enquête"
 #. Default: "Investigationarticlestext"
 #: Inquiry.py
 msgid "urban_label_investigationArticlesText"
-msgstr "Article(s) de l'enquête"
+msgstr "Article(s) de l'enquête (texte)"
 
 #. Default: "Investigationdetails"
 #: GenericLicence.py
