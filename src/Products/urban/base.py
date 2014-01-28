@@ -15,9 +15,9 @@ __docformat__ = 'plaintext'
 
 from zope.component.interface import interfaceToName
 from AccessControl import ClassSecurityInfo
-from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.public import DisplayList
 
+from plone import api
 from zope.i18n import translate
 from zope.interface import implements
 import interfaces
@@ -35,7 +35,7 @@ class UrbanBase(object):
     def getLicenceConfig(self):
         """
         """
-        portal_urban = getToolByName(self, 'portal_urban')
+        portal_urban = api.portal.get_tool('portal_urban')
         config = getattr(portal_urban, self.portal_type.lower(), None)
         return config
 
@@ -172,7 +172,7 @@ class UrbanBase(object):
         """
           Returns a string reprensenting the different worklocations
         """
-        catalog = getToolByName(self, "uid_catalog")
+        catalog = api.portal.get_tool("uid_catalog")
         signaletic = ''
         for wl in self.getWorkLocations():
             #wl is a dict with street as the street obj uid and number as the number in the street
@@ -225,11 +225,11 @@ class UrbanBase(object):
         """
           Returns the date the folder was brought to the urbanism service
         """
-        tool = getToolByName(self, 'portal_urban')
+        tool = api.portal.get_tool('portal_urban')
         #get the event called 'depot-de-la-demande' and returns the linked eventDate
         depositEvent = tool.getEventByEventTypeId(self, 'depot-de-la-demande')
         if depositEvent:
-            tool = getToolByName(self, 'portal_urban')
+            tool = api.portal.get_tool('portal_urban')
             return tool.formatDate(depositEvent.getEventDate())
         return translate('warning_no_deposit_date', 'urban', context=self.REQUEST).encode('utf8')
 
@@ -318,7 +318,7 @@ class UrbanBase(object):
         """
           Returns a term object for a given term folder
         """
-        tool = getToolByName(self, 'portal_urban')
+        tool = api.portal.get_tool('portal_urban')
         urbanConfig = tool.getUrbanConfig(self)
         termFolderObj = getattr(urbanConfig, termFolder)
         return getattr(termFolderObj, termId)
@@ -360,7 +360,7 @@ class UrbanBase(object):
         return toreturn
 
     def _getAllEvents(self,  eventInterface=None):
-        catalog = getToolByName(self, 'portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
         currentPath = '/'.join(self.getPhysicalPath())
         query = {'path': {'query': currentPath,
                           'depth': 1},
@@ -382,7 +382,7 @@ class UrbanBase(object):
         """
           Is the attribute named as param name used in this LicenceConfig ?
         """
-        licenceConfig = getToolByName(self, 'portal_urban').getUrbanConfig(self, urbanConfigId=self.portal_type)
+        licenceConfig = api.portal.get_tool('portal_urban').getUrbanConfig(self, urbanConfigId=self.portal_type)
         return (name in licenceConfig.getUsedAttributes())
 
     security.declarePublic('getUrbanEvents')
@@ -404,7 +404,7 @@ class UrbanBase(object):
         inquiryObjects = self.objectValues('Inquiry')
         #the inquiry on the licence is activated if we have a
         #investigationStart date or if we have extra Inquiry objects
-        if len(inquiryObjects) or (hasattr(self.schema, 'investigationStart') and self.getInvestigationStart()):
+        if len(inquiryObjects) or ('investigationStart' in self.schema and self.getInvestigationStart()):
             res.append(self)
         return res + list(inquiryObjects)
 
@@ -425,7 +425,7 @@ class UrbanBase(object):
         #do the test in 2 if to avoid getting the tool if not necessary
         if self.restrictedTraverse(selfPhysPath + '/@@plone_lock_info/is_locked_for_current_user')():
             return False
-        tool = getToolByName(self, 'portal_urban')
+        tool = api.portal.get_tool('portal_urban')
         if tool.getUrbanConfig(self).getUseTabbingForDisplay():
             return False
         return True
@@ -472,7 +472,7 @@ class UrbanBase(object):
                 keys = type(field.getRaw(obj)) in (list, tuple) and field.getRaw(obj) or [field.getRaw(obj)]
                 objs = [field.vocabulary.getAllVocTerms(obj).get(key, None) for key in keys]
             else:
-                catalog = getToolByName(self, 'portal_catalog')
+                catalog = api.portal.get_tool('portal_catalog')
                 objs = [obj_.getObject() for obj_ in catalog(UID=field.getRaw(obj))]
             field_name = subfield_name
             return [self.getValueForTemplate(field_name, obj_) for obj_ in objs]
@@ -530,10 +530,17 @@ class UrbanBase(object):
 
     security.declarePublic('listVocabularyForTemplate')
     def listVocabularyForTemplate(self, fieldname, obj=None):
-        """
-          List a given vocabulary from the config
-        """
         obj = obj or self
         field = obj.getField(fieldname)
         vocabulary = field.vocabulary
-        return vocabulary.getAllVocTerms(obj)
+        terms = vocabulary.getAllVocTerms(obj).values()
+        return terms
+
+    security.declarePublic('listVocabularyFromConfig')
+    def listVocabularyFromConfig(self, voc_name, inUrbanConfig=True):
+        """
+          List a given vocabulary from the config
+        """
+        urban_tool = api.portal.get_tool('portal_urban')
+        vocabulary = urban_tool.listVocabulary(voc_name, context=self, inUrbanConfig=inUrbanConfig, with_numbering=False)
+        return vocabulary
