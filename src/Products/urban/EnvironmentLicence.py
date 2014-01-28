@@ -129,6 +129,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('isEssayProject', after='isTemporaryProject')
     schema.moveField('isMobileProject', after='isEssayProject')
     schema.moveField('isMobileProject', before='additionalLegalConditions')
+    schema.moveField('description', after='additionalConditions')
 
 finalizeSchema(EnvironmentLicence_schema)
 ##/code-section module-footer

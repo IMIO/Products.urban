@@ -109,5 +109,13 @@ registerType(MiscDemand, PROJECTNAME)
 # end of class MiscDemand
 
 ##code-section module-footer #fill in your manual code here
+def finalizeSchema(schema, folderish=False, moveDiscussion=True):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('description', after='architects')
+    return schema
+
+finalizeSchema(MiscDemand_schema)
 ##/code-section module-footer
 
