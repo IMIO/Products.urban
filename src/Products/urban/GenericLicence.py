@@ -42,6 +42,7 @@ from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.interfaces import IUrbanCertificateBase
+from Products.urban import UrbanMessage as _
 
 from plone import api
 
@@ -792,10 +793,10 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
           supervision area or outside catchment
         """
         vocab = (
-            ('close', 'close_prevention_area'),
-            ('far', 'far_prevention_area'),
-            ('supervision', 'supervision_area'),
-            ('ouside', 'outside_catchment'),
+            ('close', translate(_('close_prevention_area'), context=self.REQUEST)),
+            ('far', translate(_('far_prevention_area'), context=self.REQUEST)),
+            ('supervision', translate(_('supervision_area'), context=self.REQUEST)),
+            ('ouside', translate(_('outside_catchment'), context=self.REQUEST)),
         )
 
         return DisplayList(vocab)
@@ -808,11 +809,11 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         """
         vocab = (
             #we add an empty vocab value of type "choose a value"
-            ('',  EMPTY_VOCAB_VALUE),
-            ('no', 'flooding_level_no'),
-            ('low', 'flooding_level_low'),
-            ('moderate', 'flooding_level_moderate'),
-            ('high', 'flooding_level_high'),
+            ('',  translate(_(EMPTY_VOCAB_VALUE), context=self.REQUEST)),
+            ('no', translate(_('flooding_level_no'), context=self.REQUEST)),
+            ('low', translate(_('flooding_level_low'), context=self.REQUEST)),
+            ('moderate', translate(_('flooding_level_moderate'), context=self.REQUEST)),
+            ('high', translate(_('flooding_level_high'), context=self.REQUEST)),
         )
 
         return DisplayList(vocab)
