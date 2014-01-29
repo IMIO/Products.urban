@@ -33,6 +33,7 @@ from Products.urban.utils import getLicenceFolderId
 from Products.urban.interfaces import ILicenceContainer, IContactFolder
 from zope.interface import alsoProvides, directlyProvides
 from zope.component import queryUtility
+from zope.component.interface import getInterface
 from zope.i18n.interfaces import ITranslationDomain
 from zope import event
 from Products.Archetypes.event import ObjectInitializedEvent
@@ -788,12 +789,17 @@ def addApplicationFolders(context):
     else:
         newFolder = getattr(site, 'urban')
 
+    # Set INavigationRoot interface on urban folder so its considered as the root folder
+    # in the navigation breadcrumb.
+    navigationRootInterface = getInterface('', 'plone.app.layout.navigation.interfaces.INavigationRoot')
+    alsoProvides(site.urban, navigationRootInterface)
+
     for urban_type in URBAN_TYPES:
         if not hasattr(newFolder, urban_type.lower() + 's'):
             licence_folder_id = getLicenceFolderId(urban_type)
             newFolderid = newFolder.invokeFactory(
                 "Folder", id=licence_folder_id,
-                title=_('add_{}'.format(urban_type), 'urban', context=site.REQUEST)
+                title=_(urban_type, 'urban', context=site.REQUEST)
             )
             newSubFolder = getattr(newFolder, newFolderid)
             alsoProvides(newSubFolder, ILicenceContainer)
