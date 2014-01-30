@@ -105,7 +105,7 @@ class UrbanRootView(UrbanView):
         return licencetype in [t.id for t in licence_folder.allowedContentTypes()]
 
     def getLinkClass(self, licencetype):
-        return "contenttype-{}".format(licencetype.lower())
+        return "content-shortcuts contenttype-{}".format(licencetype.lower())
 
     def getLicenceFolderLink(self, licencetype):
         klass = self.getLinkClass(licencetype)
