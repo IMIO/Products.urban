@@ -74,13 +74,6 @@ Declaration_schema = BaseFolderSchema.copy() + \
 
 ##code-section after-schema #fill in your manual code here
 Declaration_schema['title'].required = False
-Declaration_schema['title'].widget.visible = False
-#hide the solicit opinions to fields for UrbanCertificateOne
-Declaration_schema['solicitRoadOpinionsTo'].widget.visible=False
-Declaration_schema['solicitLocationOpinionsTo'].widget.visible=False
-#no need for missing parts as if it is not complete, it is decided not receivable
-Declaration_schema['missingParts'].widget.visible=False
-Declaration_schema['missingPartsDetails'].widget.visible=False
 ##/code-section after-schema
 
 class Declaration(BaseFolder, GenericLicence, BrowserDefaultMixin):

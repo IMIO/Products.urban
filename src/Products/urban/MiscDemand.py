@@ -68,9 +68,6 @@ MiscDemand_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-MiscDemand_schema['folderCategory'].widget.label_msgid='urban_label_category'
-MiscDemand_schema['missingParts'].widget.visible=False
-MiscDemand_schema['missingPartsDetails'].widget.visible=False
 #put the the fields coming from Inquiry in a specific schemata
 setSchemataForInquiry(MiscDemand_schema)
 ##/code-section after-schema

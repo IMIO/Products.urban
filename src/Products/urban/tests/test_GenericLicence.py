@@ -43,7 +43,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'licenceSubject'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_licenceSubject_is_visible(self):
         for licence in self.licences:
@@ -56,7 +56,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'reference'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_reference_is_visible(self):
         for licence in self.licences:
@@ -69,7 +69,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'referenceDGATLP'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_referenceDGATLP_is_visible(self):
         for licence in self.licences:
@@ -82,7 +82,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'workLocations'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_workLocations_is_visible(self):
         for licence in self.licences:
@@ -100,7 +100,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'folderCategory'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_folderCategory_is_visible(self):
         for licence in self.licences:
@@ -113,7 +113,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'missingParts'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_missingParts(self):
         for licence in self.licences:
@@ -126,7 +126,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'missingPartsDetails'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_missingPartsDetails(self):
         for licence in self.licences:
@@ -139,7 +139,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'description'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_description(self):
         for licence in self.licences:
@@ -152,7 +152,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'roadMissingParts'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_roadMissingParts(self):
         for licence in self.licences:
@@ -165,7 +165,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'roadMissingPartsDetails'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_roadMissingPartsDetails(self):
         for licence in self.licences:
@@ -178,7 +178,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'roadType'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_roadType(self):
         for licence in self.licences:
@@ -191,7 +191,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'roadCoating'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_roadCoating(self):
         for licence in self.licences:
@@ -204,7 +204,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'roadEquipments'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_roadEquipments(self):
         for licence in self.licences:
@@ -217,7 +217,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'pash'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_pash(self):
         for licence in self.licences:
@@ -230,7 +230,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'pashDetails'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_pashDetails(self):
         for licence in self.licences:
@@ -243,7 +243,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'catchmentArea'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_catchmentArea(self):
         for licence in self.licences:
@@ -256,7 +256,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'catchmentAreaDetails'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_catchmentAreaDetails(self):
         for licence in self.licences:
@@ -269,7 +269,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'floodingLevel'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_floodingLevel(self):
         for licence in self.licences:
@@ -282,7 +282,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'floodingLevelDetails'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_floodingLevelDetails(self):
         for licence in self.licences:
@@ -295,7 +295,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'equipmentAndRoadRequirements'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_equipmentAndRoadRequirements(self):
         for licence in self.licences:
@@ -308,7 +308,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'technicalRemarks'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_technicalRemarks(self):
         for licence in self.licences:
@@ -321,7 +321,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'locationMissingParts'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_locationMissingParts(self):
         for licence in self.licences:
@@ -334,7 +334,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'locationMissingPartsDetails'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_locationMissingPartsDetails(self):
         for licence in self.licences:
@@ -347,7 +347,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'folderZone'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_folderZone(self):
         for licence in self.licences:
@@ -360,7 +360,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'folderZoneDetails'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_folderZoneDetails(self):
         for licence in self.licences:
@@ -373,7 +373,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'locationFloodingLevel'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_locationFloodingLevel(self):
         for licence in self.licences:
@@ -386,7 +386,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'locationTechnicalRemarks'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_locationTechnicalRemarks(self):
         for licence in self.licences:
@@ -399,7 +399,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'isInPCA'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_isInPCA(self):
         for licence in self.licences:
@@ -412,7 +412,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'pca'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_pca(self):
         for licence in self.licences:
@@ -425,7 +425,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'solicitRoadOpinionsTo'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_solicitRoadOpinionsTo(self):
         for licence in self.licences:
@@ -438,7 +438,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'isInSubdivision'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_isInSubdivision(self):
         for licence in self.licences:
@@ -451,7 +451,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'subdivisionDetails'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_subdivisionDetails(self):
         for licence in self.licences:
@@ -464,7 +464,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'protectedBuilding'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_protectedBuilding(self):
         for licence in self.licences:
@@ -477,7 +477,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'protectedBuildingDetails'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_protectedBuildingDetails(self):
         for licence in self.licences:
@@ -490,7 +490,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'SSC'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_SSC(self):
         for licence in self.licences:
@@ -503,7 +503,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'sscDetails'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_sscDetails(self):
         for licence in self.licences:
@@ -516,7 +516,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'RCU'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_RCU(self):
         for licence in self.licences:
@@ -529,7 +529,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'rcuDetails'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_rcuDetails(self):
         for licence in self.licences:
@@ -542,7 +542,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'solicitLocationOpinionsTo'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_solicitLocationOpinionsTo(self):
         for licence in self.licences:
@@ -555,7 +555,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'folderCategoryTownship'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_folderCategoryTownship(self):
         for licence in self.licences:
@@ -568,7 +568,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'areParcelsVerified'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_areParcelsVerified(self):
         for licence in self.licences:
@@ -581,7 +581,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'foldermanagers'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_foldermanagers(self):
         for licence in self.licences:
@@ -594,7 +594,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         field_name = 'parcellings'
         for licence in self.licences:
             msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(hasattr(licence, field_name), msg)
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_parcellings(self):
         for licence in self.licences:

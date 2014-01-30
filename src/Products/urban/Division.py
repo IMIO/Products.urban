@@ -63,15 +63,7 @@ Division_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-Division_schema['title'].searchable = True
 Division_schema['title'].required = False
-Division_schema['title'].widget.visible = False
-#hide the solicit opinions to fields for Divisons
-Division_schema['solicitRoadOpinionsTo'].widget.visible=False
-Division_schema['solicitLocationOpinionsTo'].widget.visible=False
-#no need for missing parts as if it is not complete, it is decided not receivable
-Division_schema['missingParts'].widget.visible=False
-Division_schema['missingPartsDetails'].widget.visible=False
 ##/code-section after-schema
 
 class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
