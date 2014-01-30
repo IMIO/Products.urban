@@ -2,12 +2,12 @@
 import unittest
 from Products.urban.BuildLicence import BuildLicence
 from Products.urban.interfaces import IBuildLicence, IGenericLicence
-from Products.urban.testing import URBAN_Z2
+from Products.urban.testing import URBAN_TESTS_PROFILE_DEFAULT
 
 
 class TestInterfaces(unittest.TestCase):
 
-    layer = URBAN_Z2
+    layer = URBAN_TESTS_PROFILE_DEFAULT
 
     def testGenericLicenceInterface(self):
         buildLicence = BuildLicence('build1')

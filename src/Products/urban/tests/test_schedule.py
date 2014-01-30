@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.urban.testing import URBAN_TESTS_LICENCES
 
 from plone import api
 from plone.app.testing import login
@@ -11,7 +11,7 @@ import unittest
 
 class TestScheduleView(unittest.TestCase):
 
-    layer = URBAN_TESTS_CONFIG
+    layer = URBAN_TESTS_LICENCES
 
     def setUp(self):
         portal = self.layer['portal']
@@ -30,14 +30,36 @@ class TestScheduleView(unittest.TestCase):
         self.browser.getControl(name='__ac_password').value = user
         self.browser.getControl(name='submit').click()
 
-    def testScheduleViewDisplay(self):
+    def testi_schedule_view_display(self):
         """
          Tests schedule view is not broken
         """
         schedule_url = '{base_url}/schedule'.format(base_url=self.urban.absolute_url())
         self.browser.open(schedule_url)
 
-    def testEventTypeSchedulabilityIndexing(self):
+    def test_UrbanEvent_foldermanager_indexing(self):
+        """
+         Since we have to filter results by foldermanager, the foldermanager of a licence
+         will be indexed on all its urban event
+        """
+        catalog = api.portal.get_tool('portal_catalog')
+        licence = self.urban.buildlicences.objectValues()[-1]
+        event = licence.objectValues('UrbanEvent')[0]
+        opinionrequest_event = licence.objectValues('UrbanEventOpinionRequest')[0]
+        foldermanagers = self.portal_urban.foldermanagers
+        foldermanager = foldermanagers.objectValues()[0]
+
+        event_brain = catalog(UID=event.UID())[0]
+        self.assertTrue(foldermanager.UID() in event_brain.folder_manager)
+
+        opinionevent_brain = catalog(UID=opinionrequest_event.UID())[0]
+        self.assertTrue(foldermanager.UID() in opinionevent_brain.folder_manager)
+
+    def test_UrbanEvent_foldermanager_reindexing_when_updating_foldermanager_on_licence(self):
+        """
+        """
+
+    def test_EventType_schedulability_indexing(self):
         """
          Tests that once the deadlineDelay of an UrbanEventType is set > 0
          then the index 'last_key_event' is set to 'schedulable'.

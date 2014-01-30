@@ -175,7 +175,12 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
 
         return licences
 
-    def getUrbanEventsOfLicence(self, licence_type, event_uids, foldermanager):
+    def findSchedulableUrbanEvents(self, licence_type, eventtype_uids, foldermanager='all'):
+        """
+         Input: a licence_type, eventtypes uids  and a foldermanager
+         Returns all the UrbanEvent brains having their eventtype in eventtype_uids
+         in the licence folder 'licence_type'.
+        """
         catalog = api.portal.get_tool('portal_catalog')
         ref_catalog = api.portal.get_tool('reference_catalog')
 
@@ -210,9 +215,9 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
                 # eventtype 'schedulability' (means deadlinedelay > 0) is
                 # indexed on the 'last_key_event' index
                 schedulable = catalog(UID=eventtype_uid, last_key_event='schedulable')
-                all_events = eventtype_uid in event_uids
-                selected_event = 'all' in event_uids
-                all_opinions_request = 'all_opinions' in event_uids and brain.portal_type == 'UrbanEventOpinionRequest'
+                all_events = eventtype_uid in eventtype_uids
+                selected_event = 'all' in eventtype_uids
+                all_opinions_request = 'all_opinions' in eventtype_uids and brain.portal_type == 'UrbanEventOpinionRequest'
                 if schedulable and (all_events or selected_event or all_opinions_request):
                     to_return.append(brain)
 

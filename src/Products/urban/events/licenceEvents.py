@@ -50,7 +50,7 @@ def updateLicenceTitle(licence, event):
 
 def updateEventsFoldermanager(licence, event):
     events = licence.objectValues('UrbanEvent')
-    events += licence.objectValues('OpinionRequestEven')
+    events += licence.objectValues('UrbanEventOpinionRequest')
     for urban_event in events:
         urban_event.reindexObject(idxs=['folder_manager'])
 
