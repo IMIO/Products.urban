@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 
+from Products.Archetypes.event import ObjectEditedEvent
+
 from Products.urban.testing import URBAN_TESTS_LICENCES
 
 from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
+
+from zope import event
 
 import unittest
 
@@ -44,12 +48,12 @@ class TestScheduleView(unittest.TestCase):
         """
         catalog = api.portal.get_tool('portal_catalog')
         licence = self.urban.buildlicences.objectValues()[-1]
-        event = licence.objectValues('UrbanEvent')[0]
+        urban_event = licence.objectValues('UrbanEvent')[0]
         opinionrequest_event = licence.objectValues('UrbanEventOpinionRequest')[0]
         foldermanagers = self.portal_urban.foldermanagers
         foldermanager = foldermanagers.objectValues()[0]
 
-        event_brain = catalog(UID=event.UID())[0]
+        event_brain = catalog(UID=urban_event.UID())[0]
         self.assertTrue(foldermanager.UID() in event_brain.folder_manager)
 
         opinionevent_brain = catalog(UID=opinionrequest_event.UID())[0]
@@ -58,6 +62,23 @@ class TestScheduleView(unittest.TestCase):
     def test_UrbanEvent_foldermanager_reindexing_when_updating_foldermanager_on_licence(self):
         """
         """
+        catalog = api.portal.get_tool('portal_catalog')
+        licence = self.urban.buildlicences.objectValues()[-1]
+        urban_event = licence.objectValues('UrbanEvent')[0]
+        opinionrequest_event = licence.objectValues('UrbanEventOpinionRequest')[0]
+        foldermanagers = self.portal_urban.foldermanagers
+        new_foldermanager_id = foldermanagers.invokeFactory('FolderManager', id='fm_1')
+
+        new_foldermanager = getattr(foldermanagers, new_foldermanager_id)
+
+        licence.setFoldermanagers([new_foldermanager.UID()])
+        event.notify(ObjectEditedEvent(licence))
+
+        event_brain = catalog(UID=urban_event.UID())[0]
+        self.assertTrue(new_foldermanager.UID() in event_brain.folder_manager)
+
+        opinionevent_brain = catalog(UID=opinionrequest_event.UID())[0]
+        self.assertTrue(new_foldermanager.UID() in opinionevent_brain.folder_manager)
 
     def test_EventType_schedulability_indexing(self):
         """

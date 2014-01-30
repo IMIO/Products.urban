@@ -152,7 +152,7 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
         sorted_events = []
 
         for licence, data in self.extractLicenceDatas(form_datas):
-            event_brains = self.getUrbanEventsOfLicence(licence, data, foldermanager)
+            event_brains = self.findSchedulableUrbanEvents(licence, data, foldermanager)
             events = [ItemForScheduleListing(event) for event in event_brains]
             events.sort(key=lambda event: -event.delay)
             sorted_events.extend(events)
