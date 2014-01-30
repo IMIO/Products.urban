@@ -163,6 +163,11 @@ class TestBuildLicenceFields(unittest.TestCase):
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
 
+    def tearDown(self):
+        self.urban.buildlicences.manage_delObjects(self.licences[0].id)
+        self.urban.parceloutlicences.manage_delObjects(self.licences[1].id)
+        transaction.commit()
+
     def browserLogin(self, user):
         self.browser.open(self.portal.absolute_url() + "/login_form")
         self.browser.getControl(name='__ac_name').value = user
