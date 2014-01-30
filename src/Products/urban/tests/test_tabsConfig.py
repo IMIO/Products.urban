@@ -4,8 +4,10 @@ from plone.app.testing import login, quickInstallProduct
 from Products.urban.testing import URBAN_TESTS_LICENCES
 
 from plone.testing.z2 import Browser
-from Products.CMFCore.utils import getToolByName
+
 from testfixtures import compare, StringComparison as S
+
+import transaction
 
 
 class TestTabsConfigView(unittest.TestCase):
@@ -15,12 +17,14 @@ class TestTabsConfigView(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
-        self.catalog = getToolByName(self.portal, 'portal_catalog')
         self.buildlicence = self.urban.buildlicences.objectValues()[0]
+
+        #isntall datagridfield so we can edit the tabs config
         quickInstallProduct(self.portal, 'Products.DataGridField')
         quickInstallProduct(self.portal, 'Products.ATReferenceBrowserWidget')
         quickInstallProduct(self.portal, 'Products.MasterSelectWidget')
         quickInstallProduct(self.portal, 'collective.datagridcolumns')
+
         login(self.portal, 'urbanmanager')
         self.browser = Browser(self.portal)
         self.browserLogin('urbanmanager')
@@ -59,9 +63,10 @@ class TestTabsConfigView(unittest.TestCase):
         field = config.getField('tabsConfig')
         field.allow_delete = True
         config.setTabsConfig(new_tab_order)
-        #import ipdb; ipdb.set_trace()
         config.reindexObject()
         field.allow_delete = False
+        transaction.commit()
+
         # the order should change on the licence display
         self.browser.open(buildlicence.absolute_url())
         compare(S(".*fieldsetlegend-urban_location.*fieldsetlegend-urban_description.*"), self.browser.contents.replace('\n', ''))
