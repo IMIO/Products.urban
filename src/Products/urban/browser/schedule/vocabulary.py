@@ -62,18 +62,14 @@ folderManagersVocabularyFactory = folderManagersVocabulary()
 
 def getSchedulableEventsVocabulary(context, licence_type):
     urban_config = api.portal.get_tool('portal_urban')
-    catalog = api.portal.get_tool('portal_catalog')
     licence_config = urban_config.get(licence_type, None)
 
     terms = [SimpleTerm('all', 'all', _(u'All events'))]
     if licence_config:
         terms.append(SimpleTerm('all_opinions', 'all_opinions', _(u'All opinion requests')))
-        eventtype_brains = catalog(
-            object_provides=IUrbanEventType.__identifier__,
-            path={'query': '/'.join(licence_config.getPhysicalPath()), 'depth': 2},
-            last_key_event='schedulable',
-            review_state='enabled',
-        )
+
+        eventtype_brains = _getAllSchedulableEventTypes(licence_config)
+
         for event_type in eventtype_brains:
             title = event_type.Title
             short_title = len(title) > 40 and '{title}...'.format(title=title[:39]) or title
@@ -85,6 +81,18 @@ def getSchedulableEventsVocabulary(context, licence_type):
 
     vocabulary = SimpleVocabulary(terms)
     return vocabulary
+
+
+def _getAllSchedulableEventTypes(licence_config):
+    catalog = api.portal.get_tool('portal_catalog')
+    eventtype_brains = catalog(
+        object_provides=IUrbanEventType.__identifier__,
+        path={'query': '/'.join(licence_config.getPhysicalPath()), 'depth': 2},
+        last_key_event='schedulable',
+        review_state='enabled',
+    )
+
+    return eventtype_brains
 
 
 class buildlicenceEventsVocabulary():
