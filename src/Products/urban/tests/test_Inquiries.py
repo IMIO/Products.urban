@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-import unittest
 from DateTime import DateTime
 from OFS.ObjectManager import BeforeDeleteException
-from zope.component import createObject
-from plone.app.testing import login
+
 from Products.urban.testing import URBAN_TESTS_CONFIG
+
+from plone.app.testing import login
+from zope.component import createObject
+
+import unittest
 
 
 class TestBuildLicenceInquiries(unittest.TestCase):

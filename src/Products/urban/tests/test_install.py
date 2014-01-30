@@ -19,7 +19,7 @@ class TestInstall(unittest.TestCase):
         portal = self.layer['portal']
         self.portal = portal
         login(portal, 'urbaneditor')
-        self.licence = portal.urban.buildlicences.objectValues()[0]
+        self.licence = portal.urban.buildlicences.objectValues()[-1]
 
     def testReinstall(self):
         quickInstallProduct(self.portal, 'Products.urban')

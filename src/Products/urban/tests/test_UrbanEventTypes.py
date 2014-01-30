@@ -23,7 +23,7 @@ class TestUrbanEventTypes(unittest.TestCase):
         portal = self.layer['portal']
         catalog = getToolByName(portal, 'portal_catalog')
         urban_event_type_a = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'rapport-du-college', None)
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        buildlicence_brain = catalog(portal_type='BuildLicence')[-1]
         #by defaut, key events are enabled, and the index in the catalog should not be empty
         self.assertEqual(urban_event_type_a.getIsKeyEvent(), True)
         self.failUnless(buildlicence_brain.last_key_event is not None)
@@ -35,11 +35,11 @@ class TestUrbanEventTypes(unittest.TestCase):
             uet.setIsKeyEvent(False)
             event.notify(ObjectEditedEvent(uet))
         urban_event_type_a = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'rapport-du-college', None)
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        buildlicence_brain = catalog(portal_type='BuildLicence')[-1]
         #set 'rapport-du-college' as a key event, buildlicence index should be updated
         urban_event_type_a.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_a))
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        buildlicence_brain = catalog(portal_type='BuildLicence')[-1]
         self.assertEqual(buildlicence_brain.last_key_event.split(',  ')[1], urban_event_type_a.Title())
 
     def testSetLastKeyEventPropertyWithNoExistingEventCreated(self):
@@ -54,12 +54,12 @@ class TestUrbanEventTypes(unittest.TestCase):
             uet.setIsKeyEvent(False)
             event.notify(ObjectEditedEvent(uet))
         urban_event_type_b = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'belgacom', None)
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        buildlicence_brain = catalog(portal_type='BuildLicence')[-1]
         #set 'belgacom' as a key event, buildlicence last_key_event index should not change
         #as the corresponding urbanEvent has never been created in this buildlicence
         urban_event_type_b.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_b))
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        buildlicence_brain = catalog(portal_type='BuildLicence')[-1]
         self.assertEqual(buildlicence_brain.last_key_event, None)
 
     def testOrderInKeyEventsWhenActivatingLastKeyEventProperty(self):
@@ -75,7 +75,7 @@ class TestUrbanEventTypes(unittest.TestCase):
             event.notify(ObjectEditedEvent(uet))
         urban_event_type_a = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'rapport-du-college', None)
         urban_event_type_c = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'depot-de-la-demande', None)
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        buildlicence_brain = catalog(portal_type='BuildLicence')[-1]
         #set 'rapport-du-college' as a key event, buildlicence index should be updated
         urban_event_type_a.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_a))
@@ -83,13 +83,13 @@ class TestUrbanEventTypes(unittest.TestCase):
         #'rapport-du-college' is still the most recent keyEvent created
         urban_event_type_c.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_c))
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        buildlicence_brain = catalog(portal_type='BuildLicence')[-1]
         self.assertEqual(buildlicence_brain.last_key_event.split(',  ')[1], urban_event_type_a.Title())
         #set 'rapport-du-college' back as a normal urbanEvenType, buildlicence last_key_event index should be
         #updated as 'depot-de-la-demande' becomes now the most recent key urban event created
         urban_event_type_a.setIsKeyEvent(False)
         event.notify(ObjectEditedEvent(urban_event_type_a))
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        buildlicence_brain = catalog(portal_type='BuildLicence')[-1]
         self.assertEqual(buildlicence_brain.last_key_event.split(',  ')[1], urban_event_type_c.Title())
 
     def testUrbanTemplateIsUnderActivationWF(self):

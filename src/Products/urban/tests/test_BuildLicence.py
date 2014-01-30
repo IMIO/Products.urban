@@ -20,7 +20,7 @@ class TestBuildLicence(unittest.TestCase):
     def setUp(self):
         portal = self.layer['portal']
         self.portal = portal
-        self.buildlicence = portal.urban.buildlicences.objectValues()[0]
+        self.buildlicence = portal.urban.buildlicences.objectValues()[-1]
         self.portal_urban = portal.portal_urban
         login(portal, 'urbaneditor')
 

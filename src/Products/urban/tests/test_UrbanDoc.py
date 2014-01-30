@@ -33,7 +33,7 @@ class TestUrbanDoc(unittest.TestCase):
     def testTALConditionHidden(self):
         #check that the TAL condition of urbanDoc is hidden for generated documents
         # retrieve the event 'accusé de réception'
-        licence = self.portal.urban.buildlicences.objectValues()[0]
+        licence = self.portal.urban.buildlicences.objectValues()[-1]
         events = licence.objectValues('UrbanEvent')
         event = [event for event in events if event.Title().startswith('Accus')][0]
         doc = event.objectValues()[0]
