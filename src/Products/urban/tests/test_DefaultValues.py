@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 from plone.app.testing import login
+from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
 from Products.CMFCore.utils import getToolByName
 from Products.urban.config import URBAN_TYPES
@@ -12,7 +13,7 @@ from Products.Archetypes.event import EditBegunEvent
 
 class TestDefaultValues(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_FUNCTIONAL
+    layer = URBAN_TESTS_CONFIG
 
     def setUp(self):
         portal = self.layer['portal']
@@ -38,17 +39,17 @@ class TestDefaultValues(unittest.TestCase):
         newlicence = self.createNewLicence()
         #any configurable selection field should be empty by default
         self.assertEqual(True, not newlicence.getWorkType())
-        self.assertEqual('', newlicence.getFolderCategory())
+        self.assertEqual((), newlicence.getMissingParts())
         self.assertEqual(True, not newlicence.getMissingParts())
 
     def testSingleSelectionFieldWithOneDefaultValue(self):
         #configure a default value for the field 'folder category'
-        vocabulary_term = self.portal_urban.buildlicence.foldercategories.objectValues()[0]
+        vocabulary_term = self.portal_urban.buildlicence.missingparts.objectValues()[0]
         vocabulary_term.setIsDefaultValue(True)
         #create a new buildlicence
         newlicence = self.createNewLicence()
         #the value of folderCategory should be the one marked as default value
-        self.assertEqual([vocabulary_term.id], newlicence.getFolderCategory())
+        self.assertEqual((vocabulary_term.id,), newlicence.getMissingParts())
 
     def testMultiSelectionFieldWithOneDefaultValue(self):
         #configure a default value for the field 'missing parts'
@@ -61,14 +62,14 @@ class TestDefaultValues(unittest.TestCase):
 
     def testSingleSelectionFieldWithMultipleDefaultValues(self):
         #configure a default value for the field 'folder category'
-        vocabulary_term_1 = self.portal_urban.buildlicence.foldercategories.objectValues()[0]
+        vocabulary_term_1 = self.portal_urban.buildlicence.missingparts.objectValues()[0]
         vocabulary_term_1.setIsDefaultValue(True)
-        vocabulary_term_2 = self.portal_urban.buildlicence.foldercategories.objectValues()[2]
+        vocabulary_term_2 = self.portal_urban.buildlicence.missingparts.objectValues()[2]
         vocabulary_term_2.setIsDefaultValue(True)
         #create a new buildlicence
         newlicence = self.createNewLicence()
         #the value of folderCategory should be the one marked as default value
-        self.assertEqual([vocabulary_term_1.id, vocabulary_term_2.id], newlicence.getFolderCategory())
+        self.assertEqual((vocabulary_term_1.id, vocabulary_term_2.id), newlicence.getMissingParts())
 
     def testMultiSelectionFieldWithMultiplesDefaultValues(self):
         #configure a default value for the field 'missing parts'
@@ -170,7 +171,7 @@ class TestEventDefaultValues(unittest.TestCase):
         eventtypes = self.portal_urban.buildlicence.urbaneventtypes
         event_type = getattr(eventtypes, 'rapport-du-college')
         # set a a default text for the field 'decsionText'
-        default_text = '<p>Kill [[python: folder.Title()]] and [[python: object.getId()]] </p>'
+        default_text = '<p>Kill [[python: self.Title()]] and [[python: object.getId()]] </p>'
         event_type.setTextDefaultValues([{'text': default_text, 'fieldname': 'decisionText'}])
         # the created event should have this text in its field 'decisionText'
         event = self.createEvent(self.licence, event_type)
