@@ -244,7 +244,7 @@ class TestTemplateMethods(unittest.TestCase):
         ]
 
         urban_folder = portal.urban
-        licences = [getattr(urban_folder, lf).objectValues()[0] for lf in licence_folders]
+        licences = [getattr(urban_folder, lf).objectValues()[-1] for lf in licence_folders]
         self.licences = licences
 
         field_exceptions = {
@@ -269,7 +269,7 @@ class TestTemplateMethods(unittest.TestCase):
         for fieldname in field_names:
             try:
                 if fieldname not in self.field_exceptions:
-                    licence.displayValueOfField(fieldname)
+                    licence.getValueForTemplate(fieldname)
                 else:
                     method_name = self.field_exceptions[fieldname]
                     template_helpermethod = getattr(licence, method_name)
