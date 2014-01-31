@@ -40,7 +40,7 @@ class TestScheduleView(unittest.TestCase):
         self.browser.getControl(name='__ac_password').value = user
         self.browser.getControl(name='submit').click()
 
-    def testi_schedule_view_display(self):
+    def test_schedule_view_display(self):
         """
          Tests schedule view is not broken
         """
@@ -233,7 +233,7 @@ class TestScheduleView(unittest.TestCase):
                     self.assertTrue(event not in events_found)
 
     def test_default_delay_computation(self):
-        """ Test the delay to display are computed correctly """
+        """ Test the delay and the deadline date to display are computed correctly. """
         scheduleview = self.scheduleview
         scheduleview.update()
         table = scheduleview.schedulelisting
@@ -252,3 +252,28 @@ class TestScheduleView(unittest.TestCase):
 
             self.assertTrue(result.delay == expected_delay)
             self.assertTrue(result.delay_term == expected_delayterm)
+
+    def test_delay_computation_with_custom_delay(self):
+        """
+         Test the delay and the deadline date to display are computed correctly
+         when using the custom delay computation on an UrbanEventType.
+        """
+        scheduleview = self.scheduleview
+        scheduleview.update()
+        table = scheduleview.schedulelisting
+        result = table.values[0]
+        event = result.event
+        eventtype = event.getUrbaneventtypes()
+
+        # Set the delayComputation to a correct TAL expression.
+        TAL_computation = 'python: event.getEventDate() + 4242'
+        eventtype.setDelayComputation(TAL_computation)
+        event_date = event.getEventDate()
+        expected_delay = int(DateTime() - (4242 + event_date))
+
+        scheduleview.update()
+        # with 4242 days allowed to complete the event, it should be the last
+        # in the schedule result list ;-)
+        result = table.values[-1]
+
+        self.assertTrue(result.delay == expected_delay)
