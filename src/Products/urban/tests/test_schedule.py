@@ -232,6 +232,22 @@ class TestScheduleView(unittest.TestCase):
                 else:
                     self.assertTrue(event not in events_found)
 
+    def test_resuts_ordering_by_lateness(self):
+        """
+        """
+        scheduleview = self.scheduleview
+        scheduleview.update()
+        table = scheduleview.schedulelisting
+        results = table.values
+
+        delays = [result.delay for result in results]
+        delays.reverse()
+
+        # we need events with different deadlines to be sure the list is sorted correctly
+        self.assertTrue(len(delays) > 4 and delays[0] != delays[-1])
+
+        self.assertTrue(delays == sorted(delays))
+
     def test_default_delay_computation(self):
         """ Test the delay and the deadline date to display are computed correctly. """
         scheduleview = self.scheduleview
