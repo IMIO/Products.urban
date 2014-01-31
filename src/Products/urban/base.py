@@ -143,30 +143,6 @@ class UrbanBase(object):
         """
         return self.getContactsSignaletic(self.getGeometricians(), withaddress=withaddress)
 
-    security.declarePublic('submittedBy')
-    def submittedBy(self):
-        """
-          Returns a formatted string with data about people that submitted
-          3 cases :
-          - the applicant submitted the request for himself
-          - a notary submitted the request for the applicant
-          - a notary submitted the request for himself
-        """
-        if self.getPortalTypeName() in ('UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter'):
-            who = self.getWhoSubmitted()
-            if who == 'both':
-                #a notary submitted the request for an applicant
-                return translate('request_submitted_by_both', 'urban', context=self.REQUEST, mapping={'notary': unicode(self.getNotariesSignaletic(), 'utf8'), 'applicant': unicode(self.getApplicantsSignaletic(), 'utf8')}).encode('utf8')
-            elif who == 'applicant':
-                #an applicant submitted the request for himself
-                return translate('request_submitted_by_applicant', 'urban', context=self.REQUEST, mapping={'applicant': unicode(self.getApplicantsSignaletic(), 'utf-8')}).encode('utf8')
-            elif who == 'notary':
-                #a notary submitted the request without an applicant (??? possible ???)
-                return translate('request_submitted_by_notary', 'urban', context=self.REQUEST, mapping={'notary': unicode(self.getNotariesSignaletic(), 'utf-8')}).encode('utf8')
-            return ''
-        elif self.getType() == 'ParceOutLicence':
-            return 'test'
-
     security.declarePublic('getWorkLocationSignaletic')
     def getWorkLocationSignaletic(self):
         """
