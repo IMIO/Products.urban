@@ -10,7 +10,7 @@ from plone.testing.z2 import Browser
 
 from z3c.table.interfaces import IValues
 
-from zope import event
+from zope.event import notify
 from zope.component import getMultiAdapter
 
 import unittest
@@ -76,7 +76,7 @@ class TestScheduleView(unittest.TestCase):
         new_foldermanager = getattr(foldermanagers, new_foldermanager_id)
 
         licence.setFoldermanagers([new_foldermanager.UID()])
-        event.notify(ObjectEditedEvent(licence))
+        notify(ObjectEditedEvent(licence))
 
         event_brain = catalog(UID=urban_event.UID())[0]
         self.assertTrue(new_foldermanager.UID() in event_brain.folder_manager)
@@ -177,6 +177,10 @@ class TestScheduleView(unittest.TestCase):
         licence_type = 'buildlicence'
         foldermanager = 'all'
 
+        # make sure we have at least one result to find
+        licence = self.urban.buildlicences.objectValues()[0]
+        licence.createUrbanEvent(eventtype_uids[0])
+
         event_brains = schedule_values.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager)
         events_found = [brain.getObject() for brain in event_brains]
 
@@ -186,6 +190,41 @@ class TestScheduleView(unittest.TestCase):
                 eventtype = event.getUrbaneventtypes()
                 # completeness: each event with the desired type MUST be in the result
                 if eventtype in eventtypes_restriction:
+                    self.assertTrue(event in events_found)
+                # soundness: our result only includes correct results
+                else:
+                    self.assertTrue(event not in events_found)
+
+    def test_findSchedulableUrbanEvents_foldermanager_filter(self):
+        """
+         Restrict the search to a FolderManager.
+         Check that every event returned is in a licence handled by the given foldermanager
+         and that our result is complete.
+        """
+        scheduleview = self.scheduleview
+        scheduleview.update()
+        table = scheduleview.schedulelisting
+        schedule_values = getMultiAdapter((self.portal, self.portal.REQUEST, table), IValues)
+
+        # restrict the search to a specific foldermanager
+        foldermanager = self.portal_urban.foldermanagers.objectValues()[0]
+        foldermanager_uid = foldermanager.UID()
+        eventtype_uids = ['all']
+        licence_type = 'buildlicence'
+
+        # make sure we have at least one result to find
+        licence = self.urban.buildlicences.objectValues()[-1]
+        licence.setFoldermanagers(foldermanager_uid)
+        notify(ObjectEditedEvent(licence))
+
+        event_brains = schedule_values.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager_uid)
+        events_found = [brain.getObject() for brain in event_brains]
+
+        # check soundness and completeness
+        for licence in self.urban.buildlicences.objectValues():
+            for event in licence.objectValues(['UrbanEvent', 'UrbanEventOpinionRequest']):
+                # completeness: each event in a licence with the desired foldermanager MUST be in the results
+                if foldermanager in licence.getFoldermanagers():
                     self.assertTrue(event in events_found)
                 # soundness: our result only includes correct results
                 else:
