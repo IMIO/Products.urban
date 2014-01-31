@@ -233,8 +233,8 @@ class TestScheduleView(unittest.TestCase):
                     self.assertTrue(event not in events_found)
 
     def test_resuts_ordering_by_lateness(self):
-        """
-        """
+        """ By default events should be sorted by delay lateness """
+
         scheduleview = self.scheduleview
         scheduleview.update()
         table = scheduleview.schedulelisting
@@ -250,6 +250,7 @@ class TestScheduleView(unittest.TestCase):
 
     def test_default_delay_computation(self):
         """ Test the delay and the deadline date to display are computed correctly. """
+
         scheduleview = self.scheduleview
         scheduleview.update()
         table = scheduleview.schedulelisting
