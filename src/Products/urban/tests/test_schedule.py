@@ -8,7 +8,10 @@ from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 
+from z3c.table.interfaces import IValues
+
 from zope import event
+from zope.component import getMultiAdapter
 
 import unittest
 
@@ -41,7 +44,7 @@ class TestScheduleView(unittest.TestCase):
         schedule_url = '{base_url}/schedule'.format(base_url=self.urban.absolute_url())
         self.browser.open(schedule_url)
 
-    def test_UrbanEvent_foldermanager_indexing(self):
+    def test_UrbanEvent_foldermanager_index(self):
         """
          Since we have to filter results by foldermanager, the foldermanager of a licence
          will be indexed on all its urban event
@@ -59,7 +62,7 @@ class TestScheduleView(unittest.TestCase):
         opinionevent_brain = catalog(UID=opinionrequest_event.UID())[0]
         self.assertTrue(foldermanager.UID() in opinionevent_brain.folder_manager)
 
-    def test_UrbanEvent_foldermanager_reindexing_when_updating_foldermanager_on_licence(self):
+    def test_UrbanEvent_foldermanager_reindex_when_updating_foldermanager_on_licence(self):
         """
         """
         catalog = api.portal.get_tool('portal_catalog')
@@ -80,7 +83,7 @@ class TestScheduleView(unittest.TestCase):
         opinionevent_brain = catalog(UID=opinionrequest_event.UID())[0]
         self.assertTrue(new_foldermanager.UID() in opinionevent_brain.folder_manager)
 
-    def test_EventType_schedulability_indexing(self):
+    def test_EventType_schedulability_index(self):
         """
          Tests that once the deadlineDelay of an UrbanEventType is set > 0
          then the index 'last_key_event' is set to 'schedulable'.
@@ -102,7 +105,7 @@ class TestScheduleView(unittest.TestCase):
 
         self.assertTrue(eventtype_brain.last_key_event == '')
 
-    def testGetAllSchedulabeEventTypes(self):
+    def test_GetAllSchedulabeEventTypes(self):
         """
          This methods should return all the UrbanEventType with a deadlineDelay > 0
          of a licence config.
@@ -121,7 +124,42 @@ class TestScheduleView(unittest.TestCase):
         self.assertTrue(len(_getAllSchedulableEventTypes(licence_config)) == 0)
 
         for event_type in eventtypes_folder.objectValues():
-            event_type.setDeadLineDelay(10)
+            event_type.setDeadLineDelay(42)
             event_type.reindexObject()
 
         self.assertTrue(len(_getAllSchedulableEventTypes(licence_config)) == len(eventtypes_folder.objectValues()))
+
+    def test_findSchedulableUrbanEvents_results_schedulability(self):
+        """
+         Check that every event returned by findSchedulableUrbanEvents is schedulable
+        """
+        scheduleview = self.portal.restrictedTraverse('schedule')
+        scheduleview.update()
+        table = scheduleview.schedulelisting
+        schedule_values = getMultiAdapter((self.portal, self.portal.REQUEST, table), IValues)
+
+        licence_type = 'buildlicence'
+        eventtype_uids = ['all']
+        foldermanager = 'all'
+
+        event_brains = schedule_values.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager)
+        # we must have results..
+        self.assertTrue(len(event_brains) > 0)
+
+        for brain in event_brains:
+            event = brain.getObject()
+            eventtype = event.getUrbaneventtypes()
+
+            # we check that the eventype of each returned event is 'schedulable'
+            self.assertTrue(eventtype.getDeadLineDelay() > 0)
+
+        # disable schedulability of every eventtype of buildlicence
+        licence_config = self.portal_urban.buildlicence
+        eventtypes_folder = licence_config.urbaneventtypes
+        for event_type in eventtypes_folder.objectValues():
+            event_type.setDeadLineDelay(0)
+            event_type.reindexObject()
+
+        event_brains = schedule_values.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager)
+        # we shouldnt have any result anymore
+        self.assertTrue(len(event_brains) == 0)

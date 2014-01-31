@@ -179,7 +179,8 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
         """
          Input: a licence_type, eventtypes uids  and a foldermanager
          Returns all the UrbanEvent brains having their eventtype in eventtype_uids
-         in the licence folder 'licence_type'.
+         such as the parent licence portal_type is  'licence_type' and that licence
+         foldermanager is 'foldermanager'.
         """
         catalog = api.portal.get_tool('portal_catalog')
         ref_catalog = api.portal.get_tool('reference_catalog')
