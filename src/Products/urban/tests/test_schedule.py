@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from DateTime import DateTime
+
 from Products.Archetypes.event import ObjectEditedEvent
 
 from Products.urban.testing import URBAN_TESTS_LICENCES
@@ -177,7 +179,7 @@ class TestScheduleView(unittest.TestCase):
         licence_type = 'buildlicence'
         foldermanager = 'all'
 
-        # make sure we have at least one result to find
+        # make sure to find at least one result
         licence = self.urban.buildlicences.objectValues()[0]
         licence.createUrbanEvent(eventtype_uids[0])
 
@@ -212,7 +214,7 @@ class TestScheduleView(unittest.TestCase):
         eventtype_uids = ['all']
         licence_type = 'buildlicence'
 
-        # make sure we have at least one result to find
+        # make sure to find at least one result
         licence = self.urban.buildlicences.objectValues()[-1]
         licence.setFoldermanagers(foldermanager_uid)
         notify(ObjectEditedEvent(licence))
@@ -229,3 +231,24 @@ class TestScheduleView(unittest.TestCase):
                 # soundness: our result only includes correct results
                 else:
                     self.assertTrue(event not in events_found)
+
+    def test_default_delay_computation(self):
+        """ Test the delay to display are computed correctly """
+        scheduleview = self.scheduleview
+        scheduleview.update()
+        table = scheduleview.schedulelisting
+        results = table.values
+
+        # make sure we have computation delays to verify
+        self.assertTrue(len(results) > 0)
+
+        for result in results:
+            event = result.event
+            eventtype = event.getUrbaneventtypes()
+            event_date = event.getEventDate()
+            deadline_delay = eventtype.getDeadLineDelay()
+            expected_delay = int(DateTime() - (deadline_delay + event_date))
+            expected_delayterm = event_date + deadline_delay
+
+            self.assertTrue(result.delay == expected_delay)
+            self.assertTrue(result.delay_term == expected_delayterm)
