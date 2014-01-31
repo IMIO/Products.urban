@@ -235,8 +235,10 @@ class TestScheduleView(unittest.TestCase):
         # check soundness and completeness
         for licence in self.urban.buildlicences.objectValues():
             for event in licence.objectValues(['UrbanEvent', 'UrbanEventOpinionRequest']):
-                # completeness: each event in a licence with the desired foldermanager MUST be in the results
-                if foldermanager in licence.getFoldermanagers():
+                eventtype = event.getUrbaneventtypes()
+                schedulable = eventtype.getDeadLineDelay() > 0
+                # completeness: each schedulabe event in a licence with the desired foldermanager MUST be in the results
+                if schedulable and foldermanager in licence.getFoldermanagers():
                     self.assertTrue(event in events_found)
                 # soundness: our result only includes correct results
                 else:

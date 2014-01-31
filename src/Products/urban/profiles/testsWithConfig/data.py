@@ -116,7 +116,7 @@ urbanEventTypes = {
                     'id': "rapport-du-college",
                     'title': "Rapport du Collège",
                     'activatedFields': ['decisionDate', 'decision', 'decisionText'],
-                    'deadLineDelay': 15,
+                    'deadLineDelay': 0,
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -130,7 +130,7 @@ urbanEventTypes = {
                     'title': "Transmis 2eme dossier RW",
                     'eventDateLabel': "Date de transmis",
                     'activatedFields': ['decisionDate', 'decision', 'receiptDate'],
-                    'deadLineDelay': 15,
+                    'deadLineDelay': 0,
                     'podTemplates': (
                                     ),
                     'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
@@ -150,7 +150,7 @@ urbanEventTypes = {
                     {
                     'id': "debut-des-travaux",
                     'title': "Début des travaux",
-                    'deadLineDelay': 15,
+                    'deadLineDelay': 0,
                     'activatedFields': [],
                     'podTemplates': (),
                     'eventTypeType': 'Products.urban.interfaces.IWorkBeginningEvent',
