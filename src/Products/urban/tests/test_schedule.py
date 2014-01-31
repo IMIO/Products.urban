@@ -86,6 +86,16 @@ class TestScheduleView(unittest.TestCase):
         opinionevent_brain = catalog(UID=opinionrequest_event.UID())[0]
         self.assertTrue(new_foldermanager.UID() in opinionevent_brain.folder_manager)
 
+    def test_UrbanEventType_has_attribute_deadLineDelay(self):
+        catalog = api.portal.get_tool('portal_catalog')
+        eventtype = catalog(portal_type='UrbanEventType')[0].getObject()
+        self.assertTrue(hasattr(eventtype, 'deadLineDelay'))
+
+    def test_UrbanEventType_has_attribute_alertDelay(self):
+        catalog = api.portal.get_tool('portal_catalog')
+        eventtype = catalog(portal_type='UrbanEventType')[0].getObject()
+        self.assertTrue(hasattr(eventtype, 'alertDelay'))
+
     def test_EventType_schedulability_index(self):
         """
          Tests that once the deadlineDelay of an UrbanEventType is set > 0
@@ -247,6 +257,11 @@ class TestScheduleView(unittest.TestCase):
         self.assertTrue(len(delays) > 4 and delays[0] != delays[-1])
 
         self.assertTrue(delays == sorted(delays))
+
+    def test_UrbanEventType_has_attribute_delayComputation(self):
+        catalog = api.portal.get_tool('portal_catalog')
+        eventtype = catalog(portal_type='UrbanEventType')[0].getObject()
+        self.assertTrue(hasattr(eventtype, 'delayComputation'))
 
     def test_default_delay_computation(self):
         """ Test the delay and the deadline date to display are computed correctly. """
