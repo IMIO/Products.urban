@@ -157,3 +157,36 @@ class TestScheduleView(unittest.TestCase):
                 # soundness: our result only includes correct results (schedulable events)
                 else:
                     self.assertTrue(event not in events_found)
+
+    def test_findSchedulableUrbanEvents_eventtype_filter(self):
+        """
+         Restrict the search to some eventtypes.
+         Check that every event returned is of the given eventtype and that our result
+         is complete.
+        """
+        scheduleview = self.scheduleview
+        scheduleview.update()
+        table = scheduleview.schedulelisting
+        schedule_values = getMultiAdapter((self.portal, self.portal.REQUEST, table), IValues)
+
+        # restrict the search to only two types of events
+        eventtypes_folder = self.portal_urban.buildlicence.urbaneventtypes
+        eventtypes_restriction = eventtypes_folder.objectValues()[:2]
+
+        eventtype_uids = [eventtype.UID() for eventtype in eventtypes_restriction]
+        licence_type = 'buildlicence'
+        foldermanager = 'all'
+
+        event_brains = schedule_values.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager)
+        events_found = [brain.getObject() for brain in event_brains]
+
+        # check soundness and completeness
+        for licence in self.urban.buildlicences.objectValues():
+            for event in licence.objectValues(['UrbanEvent', 'UrbanEventOpinionRequest']):
+                eventtype = event.getUrbaneventtypes()
+                # completeness: each event with the desired type MUST be in the result
+                if eventtype in eventtypes_restriction:
+                    self.assertTrue(event in events_found)
+                # soundness: our result only includes correct results
+                else:
+                    self.assertTrue(event not in events_found)
