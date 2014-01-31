@@ -25,6 +25,7 @@ class TestScheduleView(unittest.TestCase):
         self.portal = portal
         self.urban = portal.urban
         self.portal_urban = portal.portal_urban
+        self.scheduleview = portal.restrictedTraverse('schedule')
 
         login(portal, 'urbanmanager')
         self.browser = Browser(self.portal)
@@ -132,8 +133,9 @@ class TestScheduleView(unittest.TestCase):
     def test_findSchedulableUrbanEvents_results_schedulability(self):
         """
          Check that every event returned by findSchedulableUrbanEvents is schedulable
+         and that our result is complete.
         """
-        scheduleview = self.portal.restrictedTraverse('schedule')
+        scheduleview = self.scheduleview
         scheduleview.update()
         table = scheduleview.schedulelisting
         schedule_values = getMultiAdapter((self.portal, self.portal.REQUEST, table), IValues)
@@ -143,23 +145,15 @@ class TestScheduleView(unittest.TestCase):
         foldermanager = 'all'
 
         event_brains = schedule_values.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager)
-        # we must have results..
-        self.assertTrue(len(event_brains) > 0)
+        events_found = [brain.getObject() for brain in event_brains]
 
-        for brain in event_brains:
-            event = brain.getObject()
-            eventtype = event.getUrbaneventtypes()
-
-            # we check that the eventype of each returned event is 'schedulable'
-            self.assertTrue(eventtype.getDeadLineDelay() > 0)
-
-        # disable schedulability of every eventtype of buildlicence
-        licence_config = self.portal_urban.buildlicence
-        eventtypes_folder = licence_config.urbaneventtypes
-        for event_type in eventtypes_folder.objectValues():
-            event_type.setDeadLineDelay(0)
-            event_type.reindexObject()
-
-        event_brains = schedule_values.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager)
-        # we shouldnt have any result anymore
-        self.assertTrue(len(event_brains) == 0)
+        # check soundness and completeness
+        for licence in self.urban.buildlicences.objectValues():
+            for event in licence.objectValues(['UrbanEvent', 'UrbanEventOpinionRequest']):
+                eventtype = event.getUrbaneventtypes()
+                # completeness: each schedulable event MUST be in the result
+                if eventtype.getDeadLineDelay() > 0:
+                    self.assertTrue(event in events_found)
+                # soundness: our result only includes correct results (schedulable events)
+                else:
+                    self.assertTrue(event not in events_found)
