@@ -232,7 +232,7 @@ class TestScheduleView(unittest.TestCase):
                 else:
                     self.assertTrue(event not in events_found)
 
-    def test_resuts_ordering_by_lateness(self):
+    def test_resuts_ordered_by_lateness(self):
         """ By default events should be sorted by delay lateness """
 
         scheduleview = self.scheduleview
@@ -270,7 +270,7 @@ class TestScheduleView(unittest.TestCase):
             self.assertTrue(result.delay == expected_delay)
             self.assertTrue(result.delay_term == expected_delayterm)
 
-    def test_delay_computation_with_custom_delay(self):
+    def test_custom_delay_computation(self):
         """
          Test the delay and the deadline date to display are computed correctly
          when using the custom delay computation on an UrbanEventType.
@@ -292,5 +292,27 @@ class TestScheduleView(unittest.TestCase):
         # with 4242 days allowed to complete the event, it should be the last
         # in the schedule result list ;-)
         result = table.values[-1]
+
+        self.assertTrue(result.delay == expected_delay)
+
+    def test_custom_delay_computation_with_wrong_TAL_expression(self):
+        """
+         If the tal expression to compute delay is incorrect, delay should be
+         infinite (9999).
+        """
+        scheduleview = self.scheduleview
+        scheduleview.update()
+        table = scheduleview.schedulelisting
+        result = table.values[0]
+        event = result.event
+        eventtype = event.getUrbaneventtypes()
+
+        # set the delayComputation with a wrong TAL expression
+        TAL_computation = 'trololo'
+        eventtype.setDelayComputation(TAL_computation)
+        expected_delay = 9999
+
+        scheduleview.update()
+        result = table.values[0]
 
         self.assertTrue(result.delay == expected_delay)
