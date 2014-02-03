@@ -1172,26 +1172,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         htmlcode = htmlcode.replace("<p", "<p class='%s'" % classname)
         return htmlcode
 
-    security.declarePublic('getEventByEventTypeId')
-    def getEventByEventTypeId(self, obj, eventId):
-        """
-          Return an event corresponding to the passed id
-          The passed id is the eventType id the event is linked to
-          If more than one event is linked to to same eventType, the last
-          created event is returned
-        """
-        rightEvent = None
-        #we keep the newest element if several exist
-        lastDate = DateTime('1901/01/01')
-        for event in obj.objectValues('UrbanEvent'):
-            if event.getUrbaneventtypes().id == eventId:
-                if event.getEventDate() > lastDate:
-                    lastDate = event.getEventDate()
-                    rightEvent = event
-                elif rightEvent is None:
-                    rightEvent = event
-        return rightEvent
-
     security.declarePublic('validate_unoEnabledPython')
     def validate_unoEnabledPython(self, value):
         """

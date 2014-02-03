@@ -596,11 +596,6 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getTechnicalRemarks()
             folder.getReference()
         </FieldCode>        
     </Item>
-    <Item name="Date octroi du permis délivré">
-        <FieldCode>
-            self.toLocalizedTime(self.getEventByEventTypeId(folder, 'delivrance-du-permis-octroi-ou-refus').decisionDate,long_format=False)
-        </FieldCode>        
-    </Item>
     <Item name="Rue des travaux">
         <FieldCode>
             folder.getWorkLocationStreet()
@@ -624,11 +619,6 @@ from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getTechnicalRemarks()
     <Item name="Parcelles">
         <FieldCode>
             folder.getPortionOutsText()
-        </FieldCode>        
-    </Item>
-    <Item name="Date de début des travaux">
-        <FieldCode>
-            self.toLocalizedTime(self.getEventByEventTypeId(folder, 'debut-des-travaux').eventDate,long_format=False)
         </FieldCode>        
     </Item>
 </Object>

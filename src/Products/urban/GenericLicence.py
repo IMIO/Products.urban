@@ -910,21 +910,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         common_numbers = list(set(numbers_a).intersection(set(numbers_b)))
         return common_numbers
 
-    security.declarePublic('getEventById')
-    def getEventById(self, eventId):
-        """
-          Return an event with the passed id
-          This method is duplicated from UrbanTool but is kept here for backward compatibility
-        """
-        warnings.warn("The use of GenericLicence.getEventById is deprecated, "
-                      "please use UrbanTool.getEventByEventTypeId.",
-                      DeprecationWarning, 1)
-        try:
-            urban_event = getattr(self, eventId)
-        except AttributeError:
-            urban_event = None
-        return urban_event
-
     security.declarePublic('updateTitle')
     def updateTitle(self):
         """
