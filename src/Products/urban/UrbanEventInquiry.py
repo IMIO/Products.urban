@@ -168,9 +168,10 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
           We can specify here that we only want active parcels because we can deactivate some proprietaries
         """
         catalog = api.portal.get_tool('portal_catalog')
+        urban_tool = api.portal.get_tool('portal_urban')
         queryString = {
             'portal_type': 'PortionOut',
-            'path': {'query': '/'.join(context.getPhysicalPath()), 'depth': 2},
+            'path': {'query': '/'.join(urban_tool.getPhysicalPath()), 'depth': 2},
             'sort_on': 'getObjPositionInParent'
         }
         if onlyActive:

@@ -76,13 +76,13 @@
                                        </fieldset>
                                </tr>
                                <tr>
-                                    <td valign="top">
+                                    <td valign="top" rowspan="2">
                                         <metal:listing use-macro="context/@@urbanevent-macros/urbanEventGenerateDocumentMacro" />
                                     </td>
 
                                     <td style="width: 1%"></td>
 
-                                    <td width=65%>
+                                    <td valign="top" width=65%>
                                         <fieldset>
                                             <legend i18n:translate="event_linked_documents">Event linked documents</legend>
                                             <div>
@@ -94,9 +94,7 @@
                                 <tr valign="top">
                                     <td></td>
 
-                                    <td style="width: 1%"></td>
-
-                                    <td width=65%>
+                                    <td valign="top" width=65%>
                                         <fieldset>
                                             <legend i18n:translate="event_linked_annexes">Event linked annexes</legend>
                                             <div>
