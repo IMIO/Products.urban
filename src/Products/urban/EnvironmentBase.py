@@ -160,7 +160,6 @@ schema = Schema((
     ReferenceField(
         name='minimumLegalConditions',
         widget=ReferenceBrowserWidget(
-            visible=False,
             label='Minimumlegalconditions',
             label_msgid='urban_label_minimumLegalConditions',
             i18n_domain='urban',
