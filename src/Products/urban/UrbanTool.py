@@ -29,7 +29,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-    
+
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -529,18 +529,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         sm = getSecurityManager()
         return sm.checkPermission(permission, obj)
-
-    security.declarePublic('getGlobalSearchTopic')
-    def getGlobalSearchTopic(self):
-        """
-           Return the global search topic
-        """
-        try:
-            topics = getattr(self, 'topics')
-            globalSearch = getattr(topics, 'globalsearch')
-        except AttributeError:
-            return 0
-        return globalSearch
 
     security.declarePublic('getDBConnection')
     def getDBConnection(self, connection_string=None):
