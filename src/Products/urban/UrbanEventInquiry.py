@@ -25,9 +25,9 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from OFS.ObjectManager import BeforeDeleteException
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from plone import api
 ##/code-section module-header
 
 schema = Schema((
@@ -167,15 +167,20 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
           Parcels in this container are created while calculating the "rayon de 50m"
           We can specify here that we only want active parcels because we can deactivate some proprietaries
         """
-        tool = getToolByName(self, 'portal_urban')
+        catalog = api.portal.get_tool('portal_catalog')
+        queryString = {
+            'portal_type': 'PortionOut',
+            'path': {'query': '/'.join(context.getPhysicalPath()), 'depth': 2},
+            'sort_on': 'getObjPositionInParent'
+        }
         if onlyActive:
             #only take active RecipientCadastre paths into account
             activeRecipients = self.getRecipients(theObjects=False, onlyActive=True)
             paths = [activeRecipient.getPath() for activeRecipient in activeRecipients]
-            params = {'path': {'query': paths, 'depth': 2}}
-            return tool.catalog(batch=False, context=self, specificSearch='searchPortionOuts', theObjects=True, **params)
-        else:
-            return tool.catalog(batch=False, context=self, specificSearch='searchPortionOuts', theObjects=True)
+            queryString.update({'path': {'query': paths, 'depth': 2}})
+
+        parcel_brains = catalog(**queryString)
+        parcels = [brain.getObject() for brain in parcel_brains]
 
         return parcels
 
