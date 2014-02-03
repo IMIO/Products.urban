@@ -24,7 +24,6 @@ import transaction
 ##code-section HEAD
 from Acquisition import aq_base
 from Products.CMFPlone.utils import base_hasattr
-from Products.urban.config import TOPIC_TYPE
 from Products.urban.config import DefaultTexts
 from zExceptions import BadRequest
 from Products.urban.config import URBAN_TYPES
@@ -174,12 +173,6 @@ def extraPostInstall(context, refresh=True):
     logger.info("addEventTypesAndTemplates : starting...")
     addEventTypesAndTemplates(context)
     logger.info("addEventTypesAndTemplates : Done")
-    logger.info("addUrbanConfigsTopics : starting...")
-    addUrbanConfigsTopics(context)
-    logger.info("addUrbanConfigsTopics : Done")
-    logger.info("addLicencesCollection: starting...")
-    addLicencesCollection(context)
-    logger.info("addLicencesCollection : Done")
     if refresh:
         #refresh catalog after all these objects have been added...
         logger.info("Refresh portal_catalog : starting...")
@@ -467,20 +460,6 @@ def addUrbanGroups(context):
     site.portal_groups.addGroup("urban_map_readers", title="Urban Map Readers")
     site.portal_groups.setRolesForGroup('urban_map_readers', ('UrbanMapReader', ))
 
-
-def addLicencesCollection(context):
-    """
-        Add a collection in urban folder, regrouping all licences
-    """
-    coll_id = 'licences-collection'
-    site = context.getSite()
-    if not base_hasattr(site.urban, coll_id):
-        site.urban.invokeFactory("Topic", id=coll_id)
-        topic = getattr(site.urban, coll_id)
-        type_crit = topic.addCriterion('Type', 'ATPortalTypeCriterion')
-        type_crit.setValue(URBAN_TYPES)
-
-
 def setDefaultApplicationSecurity(context):
     """
        Set sharing on differents folders to access the application
@@ -556,69 +535,6 @@ def addGlobalFolders(context):
     module = __import__(module_name, fromlist=[attribute])
     default_values = getattr(module, attribute)
 
-    #add global topics
-    #a criterion can have 4 values if necessary
-    topicsInfo = (
-        # Lots
-        (
-            'searchlots',
-            (
-                ('Type', 'ATPortalTypeCriterion', ['Lot', ], ''),
-                ('path', 'ATPathCriterion', '', False),
-            ),
-            None, ['Title', 'Creator']
-        ),
-        # Equipments
-        (
-            'searchequipments',
-            (
-                ('Type', 'ATPortalTypeCriterion', ['Equipment', ], ''),
-                ('path', 'ATPathCriterion', '', False),
-            ),
-            None, ['Title', 'Creator']
-        ),
-    )
-
-    types_tool = getToolByName(site, 'portal_types')
-    topictype = types_tool.get('Topic')
-    topictype.global_allow = True
-    if not hasattr(tool, "topics"):
-        topicsFolder = createFolderWithDefaultValues(tool, 'topics', site, content_portal_type='Topic')
-    else:
-        topicsFolder = getattr(tool, "topics")
-    for topicId, topicCriteria, stateValues, topicViewFields in topicsInfo:
-        if hasattr(topicsFolder, topicId):
-            continue
-        topicsFolder.invokeFactory('Topic', topicId)
-        topic = getattr(topicsFolder, topicId)
-        topic.setExcludeFromNav(True)
-        topic.setTitle(topicId)
-        for criterionName, criterionType, criterionValue, criterionExtraValue in topicCriteria:
-            criterion = topic.addCriterion(field=criterionName, criterion_type=criterionType)
-            criterion.setValue(criterionValue)
-            #define if the ATPathCriterion must search into subfolders
-            if criterionType == 'ATPathCriterion':
-                criterion.setRecurse(criterionExtraValue)
-            #add a property defining if the topic is relative to a BuildLicence or a ParcelOutLicence or a PortionOut
-            if criterionType == 'ATPortalTypeCriterion':
-                topic.manage_addProperty(TOPIC_TYPE, criterionValue, 'string')
-        #add a review_state criterion if needed...
-        if stateValues:
-            stateCriterion = topic.addCriterion(field='review_state', criterion_type='ATListCriterion')
-            stateCriterion.setValue(stateValues)
-        topic.setTitle(_(topicId, 'urban', context=site.REQUEST))
-        topic.setLimitNumber(True)
-        topic.setItemCount(20)
-        #set the sort criterion as reversed
-        if topicId in ['searcharchitects', 'searchgeometricians', 'searchnotaries', ]:
-            #these topics are used for showing things
-            topic.setSortCriterion('sortable_title', False)
-        else:
-            topic.setSortCriterion('created', True)
-        topic.setCustomView(True)
-        topic.setCustomViewFields(topicViewFields)
-        topic.reindexObject()
-
     vocabularies = default_values['global']
     createVocabularyFolders(container=tool, vocabularies=vocabularies, site=site)
 
@@ -628,109 +544,6 @@ def addGlobalFolders(context):
         additional_layers.setConstrainTypesMode(1)
         additional_layers.setLocallyAllowedTypes(['Layer'])
         additional_layers.setImmediatelyAddableTypes(['Layer'])
-
-
-def addUrbanConfigsTopics(context):
-    """
-      Add the default topics of every urbanConfig
-    """
-    site = context.getSite()
-    tool = site.portal_urban
-
-    for urban_type in URBAN_TYPES:
-        if not hasattr(tool, urban_type.lower()):
-            continue
-        urbanConfig = getattr(tool, urban_type.lower())
-        topicsInfo = (
-            #this will be used in the urban_view
-            # Portlet search "every licences"
-            (
-                'searchalllicences',
-                (
-                    ('Type', 'ATPortalTypeCriterion', urban_type),
-                    ('path', 'ATPathCriterion', ''),
-                ),
-                None, ['Title', 'CreationDate', 'Creator']
-            ),
-            # Portlet search "in_progress licences"
-            (
-                'searchinprogresslicences',
-                (
-                    ('Type', 'ATPortalTypeCriterion', urban_type),
-                    ('path', 'ATPathCriterion', ''),
-                ),
-                ('in_progress', ), ['Title', 'CreationDate', 'Creator']
-            ),
-            # Portlet search "retired licences"
-            (
-                'searchretiredlicences',
-                (
-                    ('Type', 'ATPortalTypeCriterion', urban_type),
-                    ('path', 'ATPathCriterion', ''),
-                ),
-                ('retired', ),
-                ['Title', 'CreationDate', 'Creator']
-            ),
-            # Portlet search "incomplete licences"
-            (
-                'searchincompletelicences',
-                (
-                    ('Type', 'ATPortalTypeCriterion', urban_type),
-                    ('path', 'ATPathCriterion', ''),
-                ),
-                ('incomplete', ), ['Title', 'CreationDate', 'Creator']
-            ),
-            # Portlet search "accepted licences"
-            (
-                'searchacceptedlicences',
-                (
-                    ('Type', 'ATPortalTypeCriterion', urban_type),
-                    ('path', 'ATPathCriterion', ''),
-                ),
-                ('accepted', ), ['Title', 'CreationDate', 'Creator']
-            ),
-            # Portlet search "refused licences"
-            (
-                'searchrefusedlicences',
-                (
-                    ('Type', 'ATPortalTypeCriterion', urban_type),
-                    ('path', 'ATPathCriterion', ''),
-                ),
-                ('refused', ), ['Title', 'CreationDate', 'Creator']
-            ),
-        )
-        if not "topics" in urbanConfig.objectIds():
-            topicsFolderId = urbanConfig.invokeFactory("Folder", id="topics", title=_("topics", 'urban', context=site.REQUEST))
-            topicsFolder = getattr(urbanConfig, topicsFolderId)
-            #restrict the addable types to "ATTopic"
-            #Add these searches by meeting config
-            topicsFolder.setConstrainTypesMode(1)
-            topicsFolder.setLocallyAllowedTypes(['Topic'])
-            topicsFolder.setImmediatelyAddableTypes(['Topic'])
-            for topicId, topicCriteria, stateValues, topicViewFields in topicsInfo:
-                topicsFolder.invokeFactory('Topic', topicId)
-                topic = getattr(topicsFolder, topicId)
-                topic.setExcludeFromNav(True)
-                topic.setTitle(topicId)
-                for criterionName, criterionType, criterionValue in topicCriteria:
-                    criterion = topic.addCriterion(field=criterionName, criterion_type=criterionType)
-                    criterion.setValue([criterionValue])
-                    #add a property defining if the topic is relative to a BuildLicence or a ParcelOutLicence or a PortionOut
-                    if criterionType == 'ATPortalTypeCriterion':
-                        topic.manage_addProperty(TOPIC_TYPE, criterionValue, 'string')
-                #add a review_state criterion if needed...
-                if stateValues:
-                    stateCriterion = topic.addCriterion(field='review_state', criterion_type='ATListCriterion')
-                    stateCriterion.setValue(stateValues)
-                topic.setTitle(_("%s_%s" % (urban_type.lower(), topicId), 'urban', context=site.REQUEST))
-                topic.setLimitNumber(True)
-                topic.setItemCount(20)
-                #set the sort criterion as reversed
-                topic.setSortCriterion('created', True)
-                topic.setCustomView(True)
-                topic.setCustomViewFields(topicViewFields)
-                topic.reindexObject()
-
 
 def adaptDefaultPortal(context):
     """

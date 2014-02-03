@@ -124,8 +124,6 @@ JAVASCRIPTS = []
 
 #Add an empty value in vocabulary display proposing to choose a value and returning an error if not changed
 ADD_EMPTY_VOCAB_VALUE = True
-#topics
-TOPIC_TYPE = "urban_topic_type"
 #dependencies
 DEPENDENCIES = []
 #name of the folder created in a licence that will contain additional

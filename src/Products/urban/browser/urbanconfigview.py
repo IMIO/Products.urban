@@ -30,7 +30,7 @@ class UrbanConfigView(BrowserView):
 
     def getMiscConfigFolders(self):
         context = aq_inner(self.context)
-        names = ['globaltemplates', 'foldermanagers', 'streets', 'topics']
+        names = ['globaltemplates', 'foldermanagers', 'streets']
         folders = [folder for folder in context.objectValues('ATFolder') if folder.id in names]
         return folders
 
