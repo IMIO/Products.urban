@@ -134,7 +134,7 @@ def searchOneODT(filename, findexpr, ignorecase=False):
     if odt_content:
         #search...
         xml_tree = xml.dom.minidom.parseString(odt_content)
-        searchresult = searchInOneOdt(xml_tree, filename, findexpr)
+        searchresult = searchInOneOdt(xml_tree, filename, findexpr, ignorecase)
 
         return searchresult
 
@@ -204,7 +204,7 @@ def getNewOdtContent(xml_tree, searchresult, replace_expr):
     return xml_tree.toxml('utf-8')
 
 
-def searchInOneOdt(xml_tree, filename, findexpr):
+def searchInOneOdt(xml_tree, filename, findexpr, ignorecase=False):
     if verbosity > 2:
         print "searching text content of '%s'" % filename
     #the two xml tags we want to browse are 'office:annotation' and 'text:text-input', since its the only place
@@ -212,13 +212,27 @@ def searchInOneOdt(xml_tree, filename, findexpr):
     result = []
     firstfound = True
     annotations = [node.getElementsByTagName('text:p') for node in xml_tree.getElementsByTagName('office:annotation')]
-    result = searchInTextElements(elements=annotations, filename=filename, element_type='commentaire',
-                                  findexpr=findexpr)
+
+    result = searchInTextElements(
+        elements=annotations,
+        filename=filename,
+        element_type='commentaire',
+        findexpr=findexpr,
+        ignorecase=ignorecase
+    )
     if result:
         firstfound = False
     expressions = xml_tree.getElementsByTagName('text:text-input')
-    result.extend(searchInTextElements(elements=expressions, filename=filename, element_type='champ de saisie',
-                                       findexpr=findexpr, firstfound=firstfound))
+    result.extend(
+        searchInTextElements(
+            elements=expressions,
+            filename=filename,
+            element_type='champ de saisie',
+            findexpr=findexpr,
+            firstfound=firstfound,
+            ignorecase=ignorecase
+        )
+    )
     return result
 
 
