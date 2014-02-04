@@ -263,19 +263,6 @@ class UrbanBase(object):
         toreturn = toreturn + '</CSV>'
         return toreturn
 
-    security.declarePublic('getMultipleRealSubmittersCSV')
-    def getMultipleRealSubmittersCSV(self):
-        """
-          Find who really submitted the request...
-        """
-        who = self.getWhoSubmitted()
-        if who in ['notary', 'both']:
-            return self.getMultipleNotariesCSV()
-        elif who == 'applicant':
-            return self.getMultipleApplicantsCSV()
-        else:
-            return ''
-
     security.declarePublic('getTerm')
     def getTerm(self, termFolder, termId):
         """

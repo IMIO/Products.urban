@@ -262,59 +262,6 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     # Manually created methods
 
-    security.declarePublic('getWhoSubmitted')
-    def getWhoSubmitted(self):
-        """
-          This method will find who submitted the request
-        """
-        #either the notary for an applicant, either the applicant, either a notary
-        applicants = self.getApplicants()
-        notaries = self.getNotaryContact()
-        if notaries and applicants:
-            #a notary submitted the request for the applicant
-            return 'both'
-        elif applicants:
-            #an applicant submitted the request, without a notary
-            return 'applicant'
-        elif notaries:
-            #a notary alone submitted the request (rare...)
-            return 'notary'
-        else:
-            return ''
-
-    security.declarePublic('getRealSubmitters')
-    def getRealSubmitters(self, signaletic=False):
-        """
-          This method will return the real submitters depending on getWhoSubmitted
-          We could return the objects or their signaletic
-        """
-        who = self.getWhoSubmitted()
-        if who == 'both' or who == 'notary':
-            if signaletic:
-                return self.getNotariesSignaletic()
-            else:
-                return self.getNotaryContact()
-        elif who == 'applicant':
-            if signaletic:
-                return self.getApplicantsSignaletic()
-            else:
-                return self.getApplicants()
-        else:
-            return ''
-
-    security.declarePublic('getSelectableFolderManagersBaseQuery')
-    def getSelectableFolderManagersBaseQuery(self):
-        """
-          Return the folder were are stored folder managers
-        """
-        portal = getToolByName(self, 'portal_url').getPortalObject()
-        rootPath = '/'.join(portal.getPhysicalPath())
-        folderManagersPath = '/portal_urban/%s/foldermanagers' % self.getPortalTypeName().lower()
-        dict = {}
-        dict['path'] = {'query': '%s%s' % (rootPath, folderManagersPath)}
-        dict['sort_on'] = 'sortable_title'
-        return dict
-
     security.declarePublic('getSpecificFeaturesRows')
     def getSpecificFeaturesRows(self):
         return self._getSpecificFeaturesRows()
