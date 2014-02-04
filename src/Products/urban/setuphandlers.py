@@ -228,22 +228,6 @@ def createFolderDefaultValues(folder, objects_list, portal_type=''):
                 folder.invokeFactory(portal_type, **obj)
 
 
-def createFolderWithDefaultValues(container, folder_id, site, default_objects=[], portal_type='Folder', content_portal_type=''):
-    """
-    """
-    newFolderid = container.invokeFactory(portal_type, id=folder_id, title=_("%s_folder_title" % folder_id, 'urban', context=site.REQUEST))
-    newFolder = getattr(container, newFolderid)
-    if not content_portal_type:
-        if folder_id in default_objects:
-            vocabulary_list = default_objects[folder_id]
-            content_portal_type = vocabulary_list[0]
-            setFolderAllowedTypes(newFolder, content_portal_type)
-            createFolderDefaultValues(newFolder, vocabulary_list, content_portal_type)
-    else:
-        setFolderAllowedTypes(newFolder, content_portal_type)
-    return newFolder
-
-
 def createVocabularyFolder(container, folder_id, site, allowedtypes='UrbanVocabularyTerm', foldertype='Folder'):
     if folder_id not in container.objectIds():
         new_folder_id = container.invokeFactory(foldertype, id=folder_id, title=_("%s_folder_title" % folder_id, 'urban', context=site.REQUEST))
