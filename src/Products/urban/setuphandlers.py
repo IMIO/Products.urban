@@ -667,14 +667,6 @@ def addApplicationFolders(context):
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add ParcellingTerm', ['Manager', 'Editor', ], acquire=0)
 
-    #add default links to searches
-    search_links = [('searchbyparcel', 'urban_searchbyparcel'), ('searchbyapplicant', 'urban_searchbyapplicant?foldertypes=BuildLicence&foldertypes=Declaration&foldertypes=ParcelOutLicence'), ('searchbystreet', 'urban_searchbystreet?foldertypes=BuildLicence&foldertypes=Declaration&foldertypes=ParcelOutLicence'), ]
-    for search_link in search_links:
-        if not hasattr(newFolder, search_link[0]):
-            #add a link and translate his title
-            newFolder.invokeFactory("Link", id=search_link[0], title=_('urban_%s_descr' % search_link[0], 'urban', context=site.REQUEST), remoteUrl=search_link[1])
-
-
 def addTestUsers(site):
     is_mountpoint = len(site.absolute_url_path().split('/')) > 2
     try:
