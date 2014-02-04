@@ -13,7 +13,7 @@ ALLOWED_ARCHIVE_EXTENSIONS = ('.odt')
 verbosity = 0
 
 
-def searchODTs(filenames, findexpr, replace, destination=None, dochanges=False, ignorecase=False, recursive=False):
+def searchODTs(filenames, findexpr, replace=None, destination=None, dochanges=False, ignorecase=False, recursive=False):
     """
      Search for appyPOD code pattern 'findexpr' in the 'annotations' and 'text input' zones of all the odt files 'filenames'
      Replace the matches by 'replace' if 'dochanges' is True
@@ -48,7 +48,7 @@ def searchODTs(filenames, findexpr, replace, destination=None, dochanges=False, 
         else:
             searchAllODT(filenames, result, search_args)
 
-    displaySearchSummary(result, filenames, findexpr, replace)
+    return result
 
 
 def recursiveSearchAndReplaceAllODT(filenames, result, search_args):
@@ -357,14 +357,14 @@ def openOdtContent(zip_file):
         return odt_content
 
 
-def displaySearchSummary(searchresult, filenames, findexpr, replace_expr):
+def getSearchSummaryDisplay(searchresult, filenames, findexpr, replace_expr):
     out = []
     total_matches = 0
-    if verbosity or len(searchresult) > 1:
+    if verbosity > 0 or len(searchresult) > 1:
         out.append("%i file" % len(searchresult))
         if len(searchresult) > 1:
             out.append('s')
-    if verbosity:
+    if verbosity > 0:
         result_filenames = searchresult.keys()
         result_filenames.sort()
         per_file_detail = []
@@ -382,13 +382,13 @@ def displaySearchSummary(searchresult, filenames, findexpr, replace_expr):
         out.append(" : \n%s\n" % '\n'.join(per_file_detail))
     elif len(searchresult) > 1:
         out.append(', ')
-    if not verbosity:
+    if verbosity < 1:
         for fileresults in searchresult.values():
             for fileresult in fileresults:
                 total_matches = total_matches + len(fileresult['matches'])
     out.append("%i matches" % total_matches)
 
-    print(''.join(out))
+    return ''.join(out)
 
 
 ################################################################
@@ -412,7 +412,9 @@ if cur_version >= req_version:
     def main():
         arguments = parseArguments()
         arguments = vars(arguments)
-        searchODTs(**arguments)
+        results = searchODTs(**arguments)
+        result_display = getSearchSummaryDisplay(results, **arguments)
+        print result_display
 
     if __name__ == "__main__":
         main()
