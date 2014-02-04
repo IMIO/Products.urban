@@ -10,76 +10,165 @@ import xml.dom.minidom
 
 ALLOWED_ARCHIVE_EXTENSIONS = ('.odt')
 
+verbosity = 0
 
-def searchAndReplaceAllODT(filenames, findexpr, replace, destination=None, dochanges=False, ignorecase=False, verbosity=0):
+
+def searchODTs(filenames, findexpr, replace, destination=None, dochanges=False, ignorecase=False, recursive=False):
     """
      Search for appyPOD code pattern 'findexpr' in the 'annotations' and 'text input' zones of all the odt files 'filenames'
      Replace the matches by 'replace' if 'dochanges' is True
      Create new files in folder 'destination 'rather than modify original files if 'destination' is given
     """
-    args = {
-        'files   :': filenames,
-        'find    :': findexpr,
-        'replace :': replace,
-        'destination :': destination,
-        'do changes': dochanges,
-        'ignore case': ignorecase,
-        'verbosity :': verbosity
+
+    result = {}
+    search_args = {
+        'findexpr': findexpr,
+        'ignorecase': ignorecase,
     }
+    if replace:
+        new_searchargs = {
+            'replace': replace,
+            'destination': destination,
+        }
+        search_args.updpate(new_searchargs)
+
     if verbosity > 2:
-        for k, v in args.iteritems():
+        for k, v in search_args.iteritems():
             if v:
                 print k, v
 
-    result = {}
+    if dochanges:
+        if recursive:
+            recursiveSearchAndReplaceAllODT(filenames, result, search_args)
+        else:
+            searchAndReplaceAllODT(filenames, result, search_args)
+    else:
+        if recursive:
+            recursiveSearchAllODT(filenames, result, search_args)
+        else:
+            searchAllODT(filenames, result, search_args)
 
-    recursiveSearchAndReplaceAllODT(filenames, findexpr, replace, result, destination, dochanges, ignorecase, verbosity)
-
-    displaySearchSummary(result, filenames, findexpr, replace, verbosity)
+    displaySearchSummary(result, filenames, findexpr, replace)
 
 
-def recursiveSearchAndReplaceAllODT(filenames, findexpr, replace, result, destination=None, dochanges=False, ignorecase=False, verbosity=0, startingdir='.'):
+def recursiveSearchAndReplaceAllODT(filenames, result, search_args):
+    """  recursive call of the search over file folders """
+
+    odt_files, directories = separateDirectoryAndODTfilenames(filenames)
+
+    searchAndReplaceInODTFiles(odt_files, result, search_args)
+
+    for directory in directories:
+        files = getFilesOfDirectory(directory)
+        recursiveSearchAndReplaceAllODT(files, result, search_args)
+
+
+def searchAndReplaceAllODT(filenames, result, search_args):
     """
      recursive call of the search over file folders
     """
-    for filename in filenames:
-        if mimetypes.guess_type(filename)[0] == 'application/vnd.oasis.opendocument.text':
-            searchresult = searchAndReplaceOneODT(filename, findexpr, replace, destination, dochanges, ignorecase, verbosity)
-            if searchresult:
-                result[filename] = searchresult
-        elif os.path.isdir(filename):
-            new_startingdir = filename
-            if not new_startingdir.endswith('/'):
-                new_startingdir = '%s/' % new_startingdir
-            new_filenames = ['%s%s' % (new_startingdir, filename) for filename in os.listdir(new_startingdir)]
-            recursiveSearchAndReplaceAllODT(new_filenames, findexpr, replace, result, destination, dochanges, ignorecase, verbosity, new_startingdir)
+    odt_files, directories = separateDirectoryAndODTfilenames(filenames)
+    searchAndReplaceAllODT(odt_files, result, search_args)
+
+    for directory in directories:
+        searchAndReplaceODTFilesOfDirectory(directory, result, search_args)
 
 
-def searchAndReplaceOneODT(filename, findexpr, replace_expr=None, destination=None, dochanges=False, ignorecase=False, verbosity=0):
+def recursiveSearchAllODT(filenames, result, search_args):
+    """ Search pattern 'findexpr' in odt files matching each regex path/name in 'filenames' """
+
+    odt_files, directories = separateDirectoryAndODTfilenames(filenames)
+
+    searchInODTFiles(odt_files, result, search_args)
+
+    for directory in directories:
+        files = getFilesOfDirectory(directory)
+        recursiveSearchAllODT(files, result, search_args)
+
+
+def searchAllODT(filenames, result, search_args):
+    """ Search pattern 'findexpr' in odt files matching each regex path/name in 'filenames' """
+
+    odt_files, directories = separateDirectoryAndODTfilenames(filenames)
+    searchInODTFiles(odt_files, result, search_args)
+
+    for directory in directories:
+        searchODTFilesOfDirectory(directory, result, search_args)
+
+
+def searchAndReplaceODTFilesOfDirectory(directory, result, search_args):
+    odt_files = getODTFilesOfDirectory(directory)
+    searchAndReplaceInODTFiles(odt_files, result, search_args)
+
+
+def searchODTFilesOfDirectory(directory, result, search_args):
+    odt_files = getODTFilesOfDirectory(directory)
+    searchInODTFiles(odt_files, result, search_args)
+
+
+def searchAndReplaceInODTFiles(odt_files, result, search_args):
+    for odt_file in odt_files:
+        searchresult = searchAndReplaceOneODT(odt_file, **search_args)
+        if searchresult:
+            result[odt_file] = searchresult
+
+
+def searchInODTFiles(odt_files, result, search_args):
+    for odt_file in odt_files:
+        searchresult = searchOneODT(odt_file, **search_args)
+        if searchresult:
+            result[odt_file] = searchresult
+
+
+def searchOneODT(filename, findexpr, ignorecase=False):
     """
      Search for appyPOD code pattern 'findexpr' in the 'annotations' and 'text input' zones of odt file 'file_name'
-     Replace the matches by 'replace_expr' if 'dochanges' is True
-     Create a new file in folder 'destination' rather than modify the original file if 'destination' is given
     """
-    zip_file = openZip(filename, 'r', verbosity)
+    zip_file = openZip(filename, 'r')
     odt_content = None
     if zip_file:
-        content_file = openOdtContent(zip_file, verbosity)
+        content_file = openOdtContent(zip_file)
         odt_content = content_file.read()
+        zip_file.close()
 
     if odt_content:
         #search...
         xml_tree = xml.dom.minidom.parseString(odt_content)
-        searchresult = searchInOneOdt(xml_tree, filename, findexpr, ignorecase, verbosity)
-        #...and replace
-        if replace_expr and searchresult:
-            newcontent = getNewOdtContent(xml_tree, searchresult, replace_expr, verbosity)
-            createNewOdt(zip_file, newcontent, 'test-result.odt', verbosity)
+        searchresult = searchInOneOdt(xml_tree, filename, findexpr)
+
         return searchresult
 
 
-def createNewOdt(old_odt, newcontent, new_odt_name, verbosity):
-    new_odt = openZip(new_odt_name, 'a', verbosity)
+def searchAndReplaceOneODT(filename, findexpr, replace_expr=None, destination=None, ignorecase=False):
+    """
+     Search for appyPOD code pattern 'findexpr' in the 'annotations' and 'text input' zones of odt file 'file_name'
+     Replace the matches by 'replace_expr'
+     Create a new file in folder 'destination' rather than modify the original file if 'destination' is given
+    """
+
+    searchresult = searchOneODT(filename, findexpr, ignorecase)
+    return searchresult
+
+    """
+    zip_file = openZip(filename, 'r')
+    odt_content = None
+    if zip_file:
+        content_file = openOdtContent(zip_file)
+        odt_content = content_file.read()
+        xml_tree = xml.dom.minidom.parseString(odt_content)
+        searchresult = searchOneODT(filename, findexpr, ignorecase)
+
+        if searchresult:
+            newcontent = getNewOdtContent(xml_tree, searchresult, replace_expr)
+            createNewOdt(zip_file, newcontent, 'test-result.odt')
+
+        zip_file.close()
+        return searchresult
+    """
+
+
+def createNewOdt(old_odt, newcontent, new_odt_name):
+    new_odt = openZip(new_odt_name, 'a')
     for name in old_odt.namelist():
         temp_content = old_odt.read(name)
         temp_file = open('.temp-odtsearch', 'w')
@@ -98,7 +187,7 @@ def createNewOdt(old_odt, newcontent, new_odt_name, verbosity):
     return new_odt
 
 
-def getNewOdtContent(xml_tree, searchresult, replace_expr, verbosity):
+def getNewOdtContent(xml_tree, searchresult, replace_expr):
     for result in searchresult:
         line = result['XMLnode'].data
         replaced = []
@@ -115,7 +204,7 @@ def getNewOdtContent(xml_tree, searchresult, replace_expr, verbosity):
     return xml_tree.toxml('utf-8')
 
 
-def searchInOneOdt(xml_tree, filename, findexpr, ignorecase, verbosity):
+def searchInOneOdt(xml_tree, filename, findexpr):
     if verbosity > 2:
         print "searching text content of '%s'" % filename
     #the two xml tags we want to browse are 'office:annotation' and 'text:text-input', since its the only place
@@ -124,16 +213,16 @@ def searchInOneOdt(xml_tree, filename, findexpr, ignorecase, verbosity):
     firstfound = True
     annotations = [node.getElementsByTagName('text:p') for node in xml_tree.getElementsByTagName('office:annotation')]
     result = searchInTextElements(elements=annotations, filename=filename, element_type='commentaire',
-                                  findexpr=findexpr, ignorecase=ignorecase, verbosity=verbosity)
+                                  findexpr=findexpr)
     if result:
         firstfound = False
     expressions = xml_tree.getElementsByTagName('text:text-input')
     result.extend(searchInTextElements(elements=expressions, filename=filename, element_type='champ de saisie',
-                                       findexpr=findexpr, firstfound=firstfound, ignorecase=ignorecase, verbosity=verbosity))
+                                       findexpr=findexpr, firstfound=firstfound))
     return result
 
 
-def searchInTextElements(elements, filename, element_type, findexpr, verbosity=0, ignorecase=False, firstfound=True):
+def searchInTextElements(elements, filename, element_type, findexpr, firstfound=True, ignorecase=False):
     text_lines = []
     node_groups = [reachTextNodeLevel(element) for element in elements]
     flags = ignorecase and re.I or 0
@@ -153,12 +242,49 @@ def searchInTextElements(elements, filename, element_type, findexpr, verbosity=0
                         text_lines.append({'expr': expr, 'matches': match_indexes, 'XMLnode': node})
                         if verbosity >= 0:
                             for match in match_indexes:
-                                printMatch(text,  match['start'], match['end'], findexpr, '%s %i' % (element_type, i), verbosity)
+                                printMatch(text,  match['start'], match['end'], findexpr, '%s %i' % (element_type, i))
         i = i + 1
     return text_lines
 
 
-def printMatch(text, start, end, findexpr, textzone, verbosity):
+def directoryPath(directory_name):
+    if not directory_name.endswith('/'):
+        directory_name = '{}/'.format(directory_name)
+    return directory_name
+
+
+def separateDirectoryAndODTfilenames(filenames):
+    odt_files = []
+    directories = []
+
+    for filename in filenames:
+        if isDirectory(filename):
+            directories.append(directoryPath(filename))
+        elif isODTFile(filename):
+            odt_files.append(filename)
+
+    return odt_files, directories
+
+
+def getODTFilesOfDirectory(directory):
+    odt_files = [directory + filename for filename in os.listdir(directory) if isODTFile(filename)]
+    return odt_files
+
+
+def getFilesOfDirectory(directory):
+    filenames = [directory + filename for filename in os.listdir(directory)]
+    return filenames
+
+
+def isODTFile(filename):
+    return mimetypes.guess_type(filename)[0] == 'application/vnd.oasis.opendocument.text'
+
+
+def isDirectory(filename):
+    return os.path.isdir(filename)
+
+
+def printMatch(text, start, end, findexpr, textzone):
     display_line = ['', '', '']
     d_start = 0
     if verbosity < 2 and start > 100:
@@ -193,7 +319,7 @@ def reachTextNodeLevel(node):
     return recursiveReachTextNodeLevel(node, [])
 
 
-def openZip(filename, mode, verbosity):
+def openZip(filename, mode):
     if verbosity > 2:
         print "opening archive file '%s'" % filename
     try:
@@ -205,7 +331,7 @@ def openZip(filename, mode, verbosity):
         return zip_file
 
 
-def openOdtContent(zip_file, verbosity):
+def openOdtContent(zip_file):
     if verbosity > 2:
         print "opening text content of '%s'" % zip_file.filename
     try:
@@ -217,7 +343,7 @@ def openOdtContent(zip_file, verbosity):
         return odt_content
 
 
-def displaySearchSummary(searchresult, filenames, findexpr, replace_expr, verbosity):
+def displaySearchSummary(searchresult, filenames, findexpr, replace_expr):
     out = []
     total_matches = 0
     if verbosity or len(searchresult) > 1:
@@ -263,15 +389,16 @@ if cur_version >= req_version:
     def parseArguments():
         parser = argparse.ArgumentParser(description='Search and replace in comments and input fields of .odt files')
         parser.add_argument('findexpr', action='append')
-        parser.add_argument('-r', '--replace')
+        parser.add_argument('--replace')
         parser.add_argument('-i', '--ignorecase', action='store_true')
+        parser.add_argument('-r', '--recursive', action='store_true')
         parser.add_argument('filenames', nargs='+')
         return parser.parse_args()
 
     def main():
         arguments = parseArguments()
         arguments = vars(arguments)
-        searchAndReplaceAllODT(**arguments)
+        searchODTs(**arguments)
 
     if __name__ == "__main__":
         main()
