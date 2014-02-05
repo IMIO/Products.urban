@@ -48,6 +48,9 @@ class TestSearchView(unittest.TestCase):
         search_url = '{base_url}/urbansearchview'.format(base_url=self.urban.absolute_url())
         self.browser.open(search_url)
 
+        self.assertTrue('contenttype-buildlicence state-in_progress' not in self.browser.contents)
+        self.assertTrue('contenttype-division state-in_progress' not in self.browser.contents)
+
         search_form = self.browser.getForm('search')
         search_form.submit()
 
