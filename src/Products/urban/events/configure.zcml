@@ -9,6 +9,15 @@
   <subscriber for="..interfaces.IApplicant
                    zope.app.container.interfaces.IObjectRemovedEvent"
               handler=".applicantEvents.onDelete" />
+  <subscriber for="..interfaces.IApplicant
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".applicantEvents.reindexLicenceApplicantInfos" />
+  <subscriber for="..interfaces.IProprietary
+                   zope.app.container.interfaces.IObjectRemovedEvent"
+              handler=".applicantEvents.onDelete" />
+  <subscriber for="..interfaces.IProprietary
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".applicantEvents.reindexLicenceApplicantInfos" />
   <subscriber for="..interfaces.IContact
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".contactEvents.setInterface" />

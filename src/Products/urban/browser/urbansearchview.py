@@ -101,7 +101,7 @@ class UrbanSearchView(BrowserView):
         """
         request = aq_inner(self.request)
         search_by = request.get('search_by', '')
-        foldertypes = request.get('foldertypes', [])
+        licencetypes = request.get('foldertypes', [])
         arguments = {
             'street': self.getArgument('street'),
             'folderref': self.getArgument('folderref'),
@@ -109,19 +109,19 @@ class UrbanSearchView(BrowserView):
             'parcel': self.getParcelRefArguments(['division', 'section', 'radical', 'bis', 'exposant', 'puissance', 'partie', 'browseoldparcels']),
         }
         if search_by == 'street':
-            res = self.searchByStreet(foldertypes, **arguments.get(search_by, []))
+            res = self.searchByStreet(licencetypes, **arguments.get(search_by, []))
         elif search_by == 'folderref':
-            res = self.searchByFolderReference(foldertypes, **arguments.get(search_by, []))
+            res = self.searchByFolderReference(licencetypes, **arguments.get(search_by, []))
         elif search_by == 'name':
-            res = self.searchByName(foldertypes, **arguments.get(search_by, []))
+            res = self.searchByName(licencetypes, **arguments.get(search_by, []))
         elif search_by == 'parcel':
-            res = self.searchByParcel(foldertypes, **arguments.get(search_by, []))
+            res = self.searchByParcel(licencetypes, **arguments.get(search_by, []))
         else:
             return None
         batch = Batch(res, len(res), 0, orphan=0)
         return batch
 
-    def searchByName(self, foldertypes, name, contacttypes):
+    def searchByName(self, licencetypes, name, contacttypes):
         """
           Find licences by name and by contact categories
         """
@@ -131,16 +131,16 @@ class UrbanSearchView(BrowserView):
         result = []
         for contacttype in contacttypes:
             if contacttype == 'Applicant':
-                sub_result = self.searchByApplicantName(foldertypes, name)
+                sub_result = self.searchByApplicantName(licencetypes, name)
             else:
-                sub_result = self.searchByContactName(foldertypes, name, contacttype)
+                sub_result = self.searchByContactName(licencetypes, name, contacttype)
             for brain in sub_result:
                 if brain.UID not in result_uids:
                     result_uids.add(brain.UID)
                     result.append(brain)
         return result
 
-    def searchByContactName(self, foldertypes, name, contact_type):
+    def searchByContactName(self, licencetypes, name, contact_type):
         """
           Find licences by contact type and by name
         """
@@ -155,15 +155,15 @@ class UrbanSearchView(BrowserView):
             pass
         for contact in contacts:
             licence_ids.extend([ref.getId() for ref in contact.getBRefs()])
-        return catalogTool(portal_type=foldertypes, id=licence_ids)
+        return catalogTool(portal_type=licencetypes, id=licence_ids)
 
-    def searchByApplicantName(self, foldertypes, applicant_infos_index):
+    def searchByApplicantName(self, licencetypes, applicant_infos_index):
         """
           Find licences with applicant paramaters
         """
         catalogTool = getToolByName(self, 'portal_catalog')
         try:
-            res = catalogTool(portal_type=foldertypes, applicantInfosIndex=applicant_infos_index)
+            res = catalogTool(portal_type=licencetypes, applicantInfosIndex=applicant_infos_index)
             return res
         except ParseError:
             #in case something like '*' is entered, ZCTextIndex raises an error...
@@ -171,23 +171,23 @@ class UrbanSearchView(BrowserView):
             ptool.addPortalMessage(msg(u"please_enter_more_letters"), type="info")
             return res
 
-    def searchByStreet(self, foldertypes, street):
+    def searchByStreet(self, licencetypes, street):
         """
           Find licences with location paramaters
         """
         catalogTool = getToolByName(self, 'portal_catalog')
         street = street.replace('(', ' ').replace(')', ' ')
         street_uids = [brain.UID for brain in catalogTool(portal_type='Street', Title=street)]
-        return catalogTool(portal_type=foldertypes, StreetsUID=street_uids)
+        return catalogTool(portal_type=licencetypes, StreetsUID=street_uids)
 
-    def searchByFolderReference(self, foldertypes, folderref):
+    def searchByFolderReference(self, licencetypes, folderref):
         """
           Find licences by name and by contact categories
         """
         catalogTool = getToolByName(self, 'portal_catalog')
-        return catalogTool(portal_type=foldertypes, getReference=folderref)
+        return catalogTool(portal_type=licencetypes, getReference=folderref)
 
-    def searchByParcel(self, foldertypes, division, section, radical, bis, exposant, puissance, partie, browseoldparcels=False):
+    def searchByParcel(self, licencetypes, division, section, radical, bis, exposant, puissance, partie, browseoldparcels=False):
         """
           Find licences with parcel paramaters
         """
@@ -202,4 +202,4 @@ class UrbanSearchView(BrowserView):
         for parcel in parcels_historic:
             for ref in parcel.getAllIndexableRefs():
                 parcel_infos.add(ref)
-        return catalogTool(portal_type=foldertypes, parcelInfosIndex=list(parcel_infos))
+        return catalogTool(portal_type=licencetypes, parcelInfosIndex=list(parcel_infos))
