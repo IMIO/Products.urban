@@ -74,6 +74,7 @@ class TestSearchView(unittest.TestCase):
 
     def test_searchByName(self):
         """ """
+
         licence_types = ['BuildLicence', 'Division', 'MiscDemand']
         contact_types = ['Applicant', 'Notary', 'Architect', 'Geometrician']
 
@@ -112,6 +113,8 @@ class TestSearchView(unittest.TestCase):
         self.assertTrue(self.miscdemand in search_result)
 
     def test_searchByName_contacttype_filter(self):
+        """ """
+
         licence_types = ['BuildLicence', 'Division', 'MiscDemand']
 
         # we only search for Applicant and Architect contacts
@@ -155,6 +158,8 @@ class TestSearchView(unittest.TestCase):
         self.assertTrue(self.division not in search_result)
 
     def test_searchByFolderReference(self):
+        """ """
+
         licence_types = ['BuildLicence', 'Division', 'MiscDemand']
 
         reference = 'trololo lvl 77'
@@ -176,4 +181,34 @@ class TestSearchView(unittest.TestCase):
         self.assertTrue(self.buildlicence in search_result)
         self.assertTrue(self.division in search_result)
         # we did not change the miscdemand
+        self.assertTrue(self.miscdemand not in search_result)
+
+    def test_searchByStreet(self):
+        """ """
+
+        licence_types = ['BuildLicence', 'Division', 'MiscDemand']
+
+        portal_urban = api.portal.get_tool('portal_urban')
+        streets_folder = portal_urban.streets.city1
+        street_id = streets_folder.invokeFactory('Street', id="yolo_street", streetName='YOLO SWAG Street')
+        street = getattr(streets_folder, street_id)
+
+        search_result = self.searchview.searchByStreet(licence_types, street.Title())
+
+        # so far we should not find anything..
+        self.assertTrue(not search_result)
+
+        new_location = ({'street': street.UID(), 'number': '42'},)
+        self.buildlicence.setWorkLocations(new_location)
+        self.buildlicence.reindexObject()
+        self.division.setWorkLocations(new_location)
+        self.division.reindexObject()
+
+        search_result = self.searchview.searchByStreet(licence_types, street.Title())
+        search_result = [brain.getObject() for brain in search_result]
+
+        self.assertTrue(len(search_result) == 2)
+        self.assertTrue(self.buildlicence in search_result)
+        self.assertTrue(self.division in search_result)
+        # we did not change the miscdemand street adress
         self.assertTrue(self.miscdemand not in search_result)

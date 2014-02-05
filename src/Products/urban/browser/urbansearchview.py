@@ -3,7 +3,6 @@
 from zope.i18n import translate
 from Acquisition import aq_inner
 
-from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from Products.CMFPlone import PloneMessageFactory as msg
 from Products.CMFPlone.PloneBatch import Batch
@@ -16,6 +15,8 @@ from Products.urban.browser.table.urbantable import SearchResultTable
 
 from Products.ZCTextIndex.ParseTree import ParseError
 
+from plone import api
+
 
 class UrbanSearchView(BrowserView):
     """
@@ -26,9 +27,9 @@ class UrbanSearchView(BrowserView):
         self.context = context
         self.request = request
 
-        self.tool = getToolByName(context, 'portal_urban')
+        self.tool = api.portal.get_tool('portal_urban')
         if not self.enoughSearchCriterias(self.request):
-            plone_utils = getToolByName(context, 'plone_utils')
+            plone_utils = api.portal.get_tool('plone_utils')
             plone_utils.addPortalMessage(translate('warning_enter_search_criteria'), type="warning")
 
     def AvailableStreets(self):
@@ -49,8 +50,7 @@ class UrbanSearchView(BrowserView):
           If we had a problem getting the divisions, we return nothing so the
           search form is not displayed
         """
-        context = aq_inner(self.context)
-        tool = getToolByName(context, 'portal_urban')
+        tool = api.portal.get_tool('portal_urban')
         divisions = tool.findDivisions(all=False)
         #check that we correctly received divisions
         if DB_QUERY_ERROR in str(divisions):
@@ -144,13 +144,13 @@ class UrbanSearchView(BrowserView):
         """
           Find licences by contact type and by name
         """
-        catalogTool = getToolByName(self, 'portal_catalog')
+        catalogTool = api.portal.get_tool('portal_catalog')
         contacts = licence_ids = []
         try:
             contacts = [brain.getObject() for brain in catalogTool(portal_type=contact_type, SearchableText=name)]
         except ParseError:
             #in case something like '*' is entered, ZCTextIndex raises an error...
-            ptool = getToolByName(self, "plone_utils")
+            ptool = api.portal.get_tool("plone_utils")
             ptool.addPortalMessage(msg(u"please_enter_more_letters"), type="info")
             pass
         for contact in contacts:
@@ -161,13 +161,13 @@ class UrbanSearchView(BrowserView):
         """
           Find licences with applicant paramaters
         """
-        catalogTool = getToolByName(self, 'portal_catalog')
+        catalogTool = api.portal.get_tool('portal_catalog')
         try:
             res = catalogTool(portal_type=licencetypes, applicantInfosIndex=applicant_infos_index)
             return res
         except ParseError:
             #in case something like '*' is entered, ZCTextIndex raises an error...
-            ptool = getToolByName(self, "plone_utils")
+            ptool = api.portal.get_tool("plone_utils")
             ptool.addPortalMessage(msg(u"please_enter_more_letters"), type="info")
             return res
 
@@ -175,7 +175,7 @@ class UrbanSearchView(BrowserView):
         """
           Find licences with location paramaters
         """
-        catalogTool = getToolByName(self, 'portal_catalog')
+        catalogTool = api.portal.get_tool('portal_catalog')
         street = street.replace('(', ' ').replace(')', ' ')
         street_uids = [brain.UID for brain in catalogTool(portal_type='Street', Title=street)]
         return catalogTool(portal_type=licencetypes, StreetsUID=street_uids)
@@ -184,7 +184,7 @@ class UrbanSearchView(BrowserView):
         """
           Find licences by name and by contact categories
         """
-        catalogTool = getToolByName(self, 'portal_catalog')
+        catalogTool = api.portal.get_tool('portal_catalog')
         return catalogTool(portal_type=licencetypes, getReference=folderref)
 
     def searchByParcel(self, licencetypes, division, section, radical, bis, exposant, puissance, partie, browseoldparcels=False):
@@ -194,7 +194,7 @@ class UrbanSearchView(BrowserView):
 
         if not self.enoughSearchCriterias(self.context.REQUEST):
             return []
-        catalogTool = getToolByName(self, 'portal_catalog')
+        catalogTool = api.portal.get_tool('portal_catalog')
         parcel_infos = set()
         arg_index = ParcelHistoric(division=division, section=section, radical=radical, bis=bis, exposant=exposant, puissance=puissance)
         parcel_infos.add(arg_index.getIndexableRef())
