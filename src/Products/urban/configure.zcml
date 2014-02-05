@@ -24,6 +24,7 @@
   <include package="Products.CMFPlacefulWorkflow"/>
   <include package="collective.js.jqueryui"/>
   <include package="plonetheme.imioapps"/>
+  <include package="imio.actionspanel"/>
   <include package="collective.z3cform.datagridfield"/>
 
 
