@@ -43,6 +43,19 @@ class TestSearchView(unittest.TestCase):
         search_url = '{base_url}/urbansearchview'.format(base_url=self.urban.absolute_url())
         self.browser.open(search_url)
 
+    def test_search_view_result_display(self):
+        """ Just push the search button and see if it display results correctly """
+        search_url = '{base_url}/urbansearchview'.format(base_url=self.urban.absolute_url())
+        self.browser.open(search_url)
+
+        search_form = self.browser.getForm('search')
+        search_form.submit()
+
+        self.assertTrue('contenttype-buildlicence state-in_progress' in self.browser.contents)
+        self.assertTrue('contenttype-division state-in_progress' in self.browser.contents)
+        self.assertTrue('contenttype-notaryletter state-in_progress' in self.browser.contents)
+        self.assertTrue('contenttype-parceloutlicence state-in_progress' in self.browser.contents)
+
     def test_reindex_applicantInfos_when_applicant_is_modified(self):
         """ """
 
