@@ -110,3 +110,70 @@ class TestSearchView(unittest.TestCase):
         self.assertTrue(self.buildlicence in search_result)
         self.assertTrue(self.division in search_result)
         self.assertTrue(self.miscdemand in search_result)
+
+    def test_searchByName_contacttype_filter(self):
+        licence_types = ['BuildLicence', 'Division', 'MiscDemand']
+
+        # we only search for Applicant and Architect contacts
+        contact_types = ['Applicant', 'Architect']
+
+        firstname = 'Lazarus'
+        lastname = 'McDeathSinger'
+
+        search_result = self.searchview.searchByName(licence_types, firstname, contact_types)
+
+        # so far we should not find anything..
+        self.assertTrue(not search_result)
+
+        # change names of different contacts on different licences
+        architect = self.buildlicence.getArchitects()[0]
+        architect.setName1(firstname)
+        architect.setName2(lastname)
+        architect.reindexObject()
+
+        notary = self.division.getNotaryContact()[0]
+        notary.setName1(firstname)
+        notary.setName2(lastname)
+        notary.reindexObject()
+
+        applicant = self.miscdemand.getApplicants()[0]
+        applicant.setName1(firstname)
+        applicant.setName2(lastname)
+        applicant.reindexObject()
+        event = ObjectModifiedEvent(applicant)
+        notify(event)
+
+        search_result = self.searchview.searchByName(licence_types, firstname, contact_types)
+        search_result = [brain.getObject() for brain in search_result]
+
+        # we should find the buildlicence (Architect contact)  and the
+        # miscdemand (Applicant contact)
+        self.assertTrue(len(search_result) == 2)
+        self.assertTrue(self.buildlicence in search_result)
+        self.assertTrue(self.miscdemand in search_result)
+        # .. but not the division (Notary contact)
+        self.assertTrue(self.division not in search_result)
+
+    def test_searchByFolderReference(self):
+        licence_types = ['BuildLicence', 'Division', 'MiscDemand']
+
+        reference = 'trololo lvl 77'
+
+        search_result = self.searchview.searchByFolderReference(licence_types, reference)
+
+        # so far we should not find anything..
+        self.assertTrue(not search_result)
+
+        self.buildlicence.setReference(reference)
+        self.buildlicence.reindexObject()
+        self.division.setReference(reference)
+        self.division.reindexObject()
+
+        search_result = self.searchview.searchByFolderReference(licence_types, reference)
+        search_result = [brain.getObject() for brain in search_result]
+
+        self.assertTrue(len(search_result) == 2)
+        self.assertTrue(self.buildlicence in search_result)
+        self.assertTrue(self.division in search_result)
+        # we did not change the miscdemand
+        self.assertTrue(self.miscdemand not in search_result)
