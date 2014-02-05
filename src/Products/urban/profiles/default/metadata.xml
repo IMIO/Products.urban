@@ -12,6 +12,7 @@
     <dependency>profile-plone.app.referenceintegrity:default</dependency>
     <dependency>profile-Products.CMFPlacefulWorkflow:CMFPlacefulWorkflow</dependency>
     <dependency>profile-plonetheme.imioapps:default</dependency>
+    <dependency>profile-imio.actionspanel:default</dependency>
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
   </dependencies>
   <!-- ##/code-section METADATA -->
