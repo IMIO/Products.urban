@@ -147,7 +147,7 @@ a.datagridwidget-add-button, a.datagridwidget-add-button:hover {
 }
 
 #datagridwidget-table-servitudesListing .datagridwidget-column-1 {
-    width: 50px;
+    width: 150px;
 }
 
 #datagridwidget-table-servitudesListing .datagridwidget-column-2 {

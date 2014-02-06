@@ -29,6 +29,12 @@ msgstr "Champ"
 msgid "Number"
 msgstr "Numéro"
 
+msgid "ParcelLabel"
+msgstr "N° parcelle (plan)"
+
+msgid "ParcelReference"
+msgstr "Référence cadastrale"
+
 msgid "Road equipment details"
 msgstr "Détails concernant les équipements"
 
@@ -37,6 +43,12 @@ msgstr "Equipements de la voirie au droit du bien"
 
 msgid "Select"
 msgstr "+"
+
+msgid "ServitudeConstraints"
+msgstr "Contraintes induites"
+
+msgid "ServitudeDescription"
+msgstr "Nature des servitudes et autres droits"
 
 msgid "Start date"
 msgstr "Date du début de l'enquête"

@@ -14,6 +14,18 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: datagridfield\n"
 
+msgid "ServitudeConstraints"
+msgstr ""
+
+msgid "ServitudeDescription"
+msgstr ""
+
+msgid "ParcelLabel"
+msgstr ""
+
+msgid "ParcelReference"
+msgstr ""
+
 msgid "Road equipments"
 msgstr ""
 
