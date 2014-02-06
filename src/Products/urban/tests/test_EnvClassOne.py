@@ -135,7 +135,7 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.assertTrue('Données' not in contents)
 
     def test_envclassone_has_attribute_areaDescriptionText(self):
-        self.assertTrue(hasattr(self.licence, 'areaDescriptionText'))
+        self.assertTrue(self.licence.getField('areaDescriptionText'))
 
     def test_envclassone_areaDescription_is_visible(self):
         self.browser.open(self.licence.absolute_url())
@@ -149,7 +149,7 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.assertTrue("Description des lieux et des abords du projet" in contents)
 
     def test_envclassone_has_attribute_hasConfidentialData(self):
-        self.assertTrue(hasattr(self.licence, 'hasConfidentialData'))
+        self.assertTrue(self.licence.getField('hasConfidentialData'))
 
     def test_envclassone_hasConfidentialData_is_visible(self):
         self.browser.open(self.licence.absolute_url())
@@ -157,7 +157,7 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.assertTrue("La demande contient des données confidentielles" in contents)
 
     def test_envclassone_has_attribute_isTemporaryProject(self):
-        self.assertTrue(hasattr(self.licence, 'isTemporaryProject'))
+        self.assertTrue(self.licence.getField('isTemporaryProject'))
 
     def test_envclassone_isTemporaryProject_is_visible(self):
         self.browser.open(self.licence.absolute_url())
@@ -171,7 +171,7 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.assertTrue("Le projet est temporaire" in contents)
 
     def test_envclassone_has_attribute_isEssayProject(self):
-        self.assertTrue(hasattr(self.licence, 'isEssayProject'))
+        self.assertTrue(self.licence.getField('isEssayProject'))
 
     def test_envclassone_isEssayProject_is_visible(self):
         self.browser.open(self.licence.absolute_url())
@@ -190,7 +190,7 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.assertTrue("isEssayProject" in contents)
 
     def test_envclassone_has_attribute_isMobileProject(self):
-        self.assertTrue(hasattr(self.licence, 'isMobileProject'))
+        self.assertTrue(self.licence.getField('isMobileProject'))
 
     def test_envclassone_isMobileProject_is_visible(self):
         self.browser.open(self.licence.absolute_url())
@@ -202,3 +202,17 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.browser.open(edit_url)
         contents = self.browser.contents
         self.assertTrue("Le projet est mobile" in contents)
+
+    def test_envclassone_has_attribute_servitudesListing(self):
+        self.assertTrue(self.licence.getField('servitudesListing'))
+
+    def test_envclassone_servitudesListing_is_visible(self):
+        self.browser.open(self.licence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("Existence de servitudes et autres droits" in contents)
+
+    def test_envclassone_servitudesListing_is_visible_in_edit(self):
+        edit_url = '{}/edit'.format(self.licence.absolute_url())
+        self.browser.open(edit_url)
+        contents = self.browser.contents
+        self.assertTrue("Existence de servitudes et autres droits" in contents)

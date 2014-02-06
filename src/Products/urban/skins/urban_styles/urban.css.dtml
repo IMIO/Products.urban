@@ -146,6 +146,14 @@ a.datagridwidget-add-button, a.datagridwidget-add-button:hover {
  margin-bottom: 1.5em;
 }
 
+#datagridwidget-table-servitudesListing .datagridwidget-column-1 {
+    width: 50px;
+}
+
+#datagridwidget-table-servitudesListing .datagridwidget-column-2 {
+    width: 150px;
+}
+
 #datagridwidget-table-workLocations {
     width: 600px !important;
 }

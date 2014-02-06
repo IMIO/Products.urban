@@ -29,7 +29,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-
+    
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -1380,6 +1380,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         #res = urlparse(self.getPylonsHost()) #getPylonsHost doesn't contain a valid url beginning with http
         #return '%s: //%s'%(res.scheme, res.netloc)
         return '/'.join(self.getPylonsHost().split('/')[:3])  # don't use os.path!
+
 
 
 registerType(UrbanTool, PROJECTNAME)

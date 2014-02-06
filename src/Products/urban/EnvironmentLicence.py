@@ -20,10 +20,16 @@ import interfaces
 from Products.urban.EnvironmentBase import EnvironmentBase
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.DataGridField import DataGridField, DataGridWidget
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
+
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.urban.utils import setOptionalAttributes
+
+from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 
 optional_fields =['areaDescriptionText', 'hasConfidentialData', 'isTemporaryProject', 'isEssayProject', 'isMobileProject']
 ##/code-section module-header
@@ -83,6 +89,18 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
+    DataGridField(
+        name='servitudesListing',
+        allow_oddeven=True,
+        widget=DataGridWidget(
+            columns={'parcel_number': Column('ParcelNumber'), 'parcel_reference': SelectColumn('ParcelReference', 'listLicenceParcels'), 'description': TextAreaColumn('Description'), 'constraints': TextAreaColumn('Constraints')},
+            label='Servitudeslisting',
+            label_msgid='urban_label_servitudesListing',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        columns=('parcel_number', 'parcel_reference', 'description', 'constraints'),
+    ),
 
 ),
 )
@@ -91,14 +109,14 @@ schema = Schema((
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
-EnvironmentLicence_schema = BaseSchema.copy() + \
+EnvironmentLicence_schema = BaseFolderSchema.copy() + \
     getattr(EnvironmentBase, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class EnvironmentLicence(BaseContent, EnvironmentBase, BrowserDefaultMixin):
+class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -113,6 +131,14 @@ class EnvironmentLicence(BaseContent, EnvironmentBase, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
+
+    # Manually created methods
+
+    security.declarePublic('listLicenceParcels')
+    def listLicenceParcels(self):
+        parcels = self.objectValues('PortionOut')
+        vocabulary = [(parcel.UID(), parcel.Title()) for parcel in parcels]
+        return DisplayList(sorted(vocabulary, key=lambda name: name[1]))
 
 
 registerType(EnvironmentLicence, PROJECTNAME)
