@@ -1,7 +1,10 @@
-from Products.urban.browser.licence.licenceview import LicenceView
+from Products.urban.browser.licence.licenceview import EnvironmentLicenceView
+from Products.CMFPlone import PloneMessageFactory as _
+
+from plone import api
 
 
-class EnvClassOneView(LicenceView):
+class EnvClassOneView(EnvironmentLicenceView):
     """
       This manage the view of EnvClassOne
     """
@@ -9,6 +12,13 @@ class EnvClassOneView(LicenceView):
         super(EnvClassOneView, self).__init__(context, request)
         self.context = context
         self.request = request
+        plone_utils = api.portal.get_tool('plone_utils')
+        if not self.context.getParcels():
+            plone_utils.addPortalMessage(_('warning_add_a_parcel'), type="warning")
+        if not self.context.getApplicants():
+            plone_utils.addPortalMessage(_('warning_add_a_proprietary'), type="warning")
+        if self.hasOutdatedParcels():
+            plone_utils.addPortalMessage(_('warning_outdated_parcel'), type="warning")
 
     def getMacroViewName(self):
         return 'envclassone-macros'
