@@ -833,7 +833,8 @@ def createLicence(site, licence_type, data):
             for column_name in field.columns:
                 column = field.widget.columns[column_name]
                 if str(type(column)) == "<class 'Products.DataGridField.SelectColumn.SelectColumn'>":
-                    dummy_value[column_name] = column.getVocabulary(licence)[0]
+                    vocabulary = column.getVocabulary(licence)
+                    dummy_value[column_name] = vocabulary and vocabulary[0] or ('none', 'none')
                 elif str(type(column)) == "<class 'Products.DataGridField.Column.Column'>":
                     dummy_value[column_name] = '[%s XXX]' % column_name
             return tuple([dummy_value])
