@@ -27,7 +27,10 @@ from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.utils import setOptionalAttributes
+
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
@@ -37,6 +40,23 @@ optional_fields =['areaDescriptionText', 'hasConfidentialData', 'isTemporaryProj
 
 schema = Schema((
 
+    ReferenceField(
+        name='previousLicences',
+        widget=ReferenceBrowserWidget(
+            allow_browse=False,
+            allow_search=False,
+            show_results_without_query=True,
+            wild_card_search=True,
+            base_query='previouslicencesBaseQuery',
+            label='Previouslicences',
+            label_msgid='urban_label_previousLicences',
+            i18n_domain='urban',
+        ),
+        allowed_types=('EnvClassThree', 'EnvClassTwo', 'EnvClassOne'),
+        schemata='urban_description',
+        multiValued=True,
+        relationship='previousLicences',
+    ),
     TextField(
         name='areaDescriptionText',
         allowable_content_types=('text/html',),
@@ -172,6 +192,10 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         parcels = self.objectValues('PortionOut')
         vocabulary = [(parcel.UID(), parcel.Title()) for parcel in parcels]
         return DisplayList(sorted(vocabulary, key=lambda name: name[1]))
+
+    security.declarePublic('previouslicencesBaseQuery')
+    def previouslicencesBaseQuery(self):
+        return {'object_provides': IEnvironmentBase.__identifier__}
 
 
 
