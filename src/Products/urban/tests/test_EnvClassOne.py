@@ -203,16 +203,30 @@ class TestEnvClassOneInstance(unittest.TestCase):
         contents = self.browser.contents
         self.assertTrue("Le projet est mobile" in contents)
 
-    def test_envclassone_has_attribute_servitudesListing(self):
-        self.assertTrue(self.licence.getField('servitudesListing'))
+    def test_envclassone_has_attribute_environmentImpactStudy(self):
+        self.assertTrue(self.licence.getField('environmentImpactStudy'))
 
-    def test_envclassone_servitudesListing_is_visible(self):
+    def test_envclassone_environmentImpactStudy_is_visible(self):
         self.browser.open(self.licence.absolute_url())
         contents = self.browser.contents
-        self.assertTrue("Existence de servitudes et autres droits" in contents)
+        self.assertTrue("Étude d'incidences sur l'environnement" in contents)
 
-    def test_envclassone_servitudesListing_is_visible_in_edit(self):
+    def test_envclassone_environmentImpactStudy_is_visible_in_edit(self):
         edit_url = '{}/edit'.format(self.licence.absolute_url())
         self.browser.open(edit_url)
         contents = self.browser.contents
-        self.assertTrue("Existence de servitudes et autres droits" in contents)
+        self.assertTrue("Étude d'incidences sur l'environnement" in contents)
+
+    def test_envclassone_has_attribute_seveso(self):
+        self.assertTrue(self.licence.getField('seveso'))
+
+    def test_envclassone_seveso_is_visible(self):
+        self.browser.open(self.licence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("Établissement SEVESO" in contents)
+
+    def test_envclassone_seveso_is_visible_in_edit(self):
+        edit_url = '{}/edit'.format(self.licence.absolute_url())
+        self.browser.open(edit_url)
+        contents = self.browser.contents
+        self.assertTrue("Établissement SEVESO" in contents)
