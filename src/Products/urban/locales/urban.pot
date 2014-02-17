@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-02-17 10:31+0000\n"
+"POT-Creation-Date: 2014-02-17 15:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2498,6 +2498,11 @@ msgstr ""
 #. Default: "Portionsouts"
 #: GenericLicence.py
 msgid "urban_label_portionsouts"
+msgstr ""
+
+#. Default: "Previouslicences"
+#: EnvironmentLicence.py
+msgid "urban_label_previousLicences"
 msgstr ""
 
 #. Default: "Protectedbuilding"

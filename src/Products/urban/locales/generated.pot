@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Feb 17 11:19:55 2014\n"
-"PO-Revision-Date: Mon Feb 17 11:19:55 2014\n"
+"POT-Creation-Date: Mon Feb 17 15:19:58 2014\n"
+"PO-Revision-Date: Mon Feb 17 15:19:58 2014\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -954,6 +954,11 @@ msgstr ""
 #. Default: "Pollution"
 #: UrbanCertificateBase.py
 msgid "urban_label_pollution"
+msgstr ""
+
+#. Default: "Previouslicences"
+#: EnvironmentLicence.py
+msgid "urban_label_previousLicences"
 msgstr ""
 
 #. Default: "Protectedbuilding"
