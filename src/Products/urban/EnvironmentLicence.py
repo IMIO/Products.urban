@@ -29,6 +29,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.urban.utils import setOptionalAttributes
 
+from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 
 optional_fields =['areaDescriptionText', 'hasConfidentialData', 'isTemporaryProject', 'isEssayProject', 'isMobileProject']
@@ -60,6 +61,18 @@ schema = Schema((
         ),
         schemata='urban_description',
         columns=('parcel_number', 'parcel_reference', 'description', 'constraints'),
+    ),
+    DataGridField(
+        name='publicRoadModifications',
+        allow_oddeven=True,
+        widget=DataGridWidget(
+            columns={'street': ReferenceColumn("Street", surf_site=False, object_provides=('Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',)), 'modification': TextAreaColumn('Modification'), 'justification': TextAreaColumn('Justification')},
+            label='Publicroadmodifications',
+            label_msgid='urban_label_publicRoadModifications',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        columns=('street', 'modification', 'justification'),
     ),
     BooleanField(
         name='hasConfidentialData',
