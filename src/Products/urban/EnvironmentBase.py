@@ -93,6 +93,34 @@ schema = Schema((
         multiValued=True,
         relationship="rubric",
     ),
+    ReferenceField(
+        name='minimumLegalConditions',
+        widget=ReferenceBrowserWidget(
+            label='Minimumlegalconditions',
+            label_msgid='urban_label_minimumLegalConditions',
+            i18n_domain='urban',
+        ),
+        schemata="urban_description",
+        multiValued=True,
+        relationship='minimumconditions',
+    ),
+    ReferenceField(
+        name='additionalLegalConditions',
+        widget=ReferenceBrowserWidget(
+            allow_browse=True,
+            allow_search=True,
+            default_search_index='Title',
+            startup_directory='portal_urban/exploitationconditions',
+            restrict_browsing_to_startup_directory=True,
+            wild_card_search=True,
+            label='Additionallegalconditions',
+            label_msgid='urban_label_additionalLegalConditions',
+            i18n_domain='urban',
+        ),
+        schemata="urban_description",
+        multiValued=True,
+        relationship='additionalconditions',
+    ),
     LinesField(
         name='applicationReasons',
         widget=MultiSelectionWidget(
@@ -156,34 +184,6 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary(path='inadmissibilityreasons', sort_on='getObjPositionInParent'),
         default_method='getDefaultValue',
-    ),
-    ReferenceField(
-        name='minimumLegalConditions',
-        widget=ReferenceBrowserWidget(
-            label='Minimumlegalconditions',
-            label_msgid='urban_label_minimumLegalConditions',
-            i18n_domain='urban',
-        ),
-        schemata="urban_description",
-        multiValued=True,
-        relationship='minimumconditions',
-    ),
-    ReferenceField(
-        name='additionalLegalConditions',
-        widget=ReferenceBrowserWidget(
-            allow_browse=True,
-            allow_search=True,
-            default_search_index='Title',
-            startup_directory='portal_urban/exploitationconditions',
-            restrict_browsing_to_startup_directory=True,
-            wild_card_search=True,
-            label='Additionallegalconditions',
-            label_msgid='urban_label_additionalLegalConditions',
-            i18n_domain='urban',
-        ),
-        schemata="urban_description",
-        multiValued=True,
-        relationship='additionalconditions',
     ),
     BooleanField(
         name='hasAdditionalConditions',
@@ -346,7 +346,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
        Finalizes the type schema to alter some fields
     """
-    schema.moveField('foldermanagers', after='workLocations')
+    schema.moveField('businessOldLocation', after='workLocations')
+    schema.moveField('foldermanagers', after='businessOldLocation')
     schema.moveField('businessDescription', after='folderCategory')
     schema.moveField('rubrics', after='businessDescription')
     schema.moveField('missingParts', after='inadmissibilityReasons')

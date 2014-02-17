@@ -49,6 +49,18 @@ schema = Schema((
         schemata='urban_description',
         default_output_type='text/html',
     ),
+    DataGridField(
+        name='servitudesListing',
+        allow_oddeven=True,
+        widget=DataGridWidget(
+            columns={'parcel_number': Column('ParcelLabel'), 'parcel_reference': SelectColumn('ParcelReference', 'listLicenceParcels'), 'description': TextAreaColumn('ServitudeDescription'), 'constraints': TextAreaColumn('ServitudeConstraints')},
+            label='Servitudeslisting',
+            label_msgid='urban_label_servitudesListing',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        columns=('parcel_number', 'parcel_reference', 'description', 'constraints'),
+    ),
     BooleanField(
         name='hasConfidentialData',
         default=False,
@@ -89,17 +101,25 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
-    DataGridField(
-        name='servitudesListing',
-        allow_oddeven=True,
-        widget=DataGridWidget(
-            columns={'parcel_number': Column('ParcelLabel'), 'parcel_reference': SelectColumn('ParcelReference', 'listLicenceParcels'), 'description': TextAreaColumn('ServitudeDescription'), 'constraints': TextAreaColumn('ServitudeConstraints')},
-            label='Servitudeslisting',
-            label_msgid='urban_label_servitudesListing',
+    BooleanField(
+        name='hasEnvironmentImpactStudy',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Hasenvironmentimpactstudy',
+            label_msgid='urban_label_hasEnvironmentImpactStudy',
             i18n_domain='urban',
         ),
         schemata='urban_description',
-        columns=('parcel_number', 'parcel_reference', 'description', 'constraints'),
+    ),
+    BooleanField(
+        name='isSeveso',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Isseveso',
+            label_msgid='urban_label_isSeveso',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
     ),
 
 ),
@@ -141,6 +161,7 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         return DisplayList(sorted(vocabulary, key=lambda name: name[1]))
 
 
+
 registerType(EnvironmentLicence, PROJECTNAME)
 # end of class EnvironmentLicence
 
@@ -150,11 +171,10 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
        Finalizes the type schema to alter some fields
     """
     schema.moveField('areaDescriptionText', after='missingPartsDetails')
-    schema.moveField('hasConfidentialData', after='areaDescriptionText')
-    schema.moveField('isTemporaryProject', after='hasConfidentialData')
-    schema.moveField('isEssayProject', after='isTemporaryProject')
-    schema.moveField('isMobileProject', after='isEssayProject')
-    schema.moveField('isMobileProject', before='additionalLegalConditions')
+    schema.moveField('natura2000', after='isSeveso')
+    schema.moveField('natura2000Details', after='natura2000')
+    schema.moveField('hasAdditionalConditions', after='natura2000Details')
+    schema.moveField('additionalConditions', after='hasAdditionalConditions')
     schema.moveField('description', after='additionalConditions')
 
 finalizeSchema(EnvironmentLicence_schema)

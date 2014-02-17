@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-02-06 10:34+0000\n"
+"POT-Creation-Date: 2014-02-17 08:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1989,6 +1989,11 @@ msgstr ""
 msgid "urban_label_hasConfidentialData"
 msgstr ""
 
+#. Default: "Hasenvironmentimpactstudy"
+#: EnvironmentLicence.py
+msgid "urban_label_hasEnvironmentImpactStudy"
+msgstr ""
+
 #. Default: "Impactstudy"
 #: GenericLicence.py
 msgid "urban_label_impactStudy"
@@ -2130,6 +2135,11 @@ msgstr ""
 #. Default: "Issameaddressasworks"
 #: Contact.py
 msgid "urban_label_isSameAddressAsWorks"
+msgstr ""
+
+#. Default: "Isseveso"
+#: EnvironmentLicence.py
+msgid "urban_label_isSeveso"
 msgstr ""
 
 #. Default: "Issupplementary"
