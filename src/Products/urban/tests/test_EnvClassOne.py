@@ -244,3 +244,17 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.browser.open(edit_url)
         contents = self.browser.contents
         self.assertTrue("Modifications souhaitées au tracé et à l'équipement des voiries publiques" in contents)
+
+    def test_envclassone_has_attribute_previousLicences(self):
+        self.assertTrue(self.licence.getField('previousLicences'))
+
+    def test_envclassone_previousLicences_is_visible(self):
+        self.browser.open(self.licence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("Permissions, enregistrements et déclarations existantes" in contents)
+
+    def test_envclassone_previousLicences_is_visible_in_edit(self):
+        edit_url = '{}/edit'.format(self.licence.absolute_url())
+        self.browser.open(edit_url)
+        contents = self.browser.contents
+        self.assertTrue("Permissions, enregistrements et déclarations existantes" in contents)
