@@ -262,6 +262,9 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     # Manually created methods
 
+    def attributeIsUsed(self, name):
+        return True
+
     security.declarePublic('getSpecificFeaturesRows')
     def getSpecificFeaturesRows(self):
         return self._getSpecificFeaturesRows()
