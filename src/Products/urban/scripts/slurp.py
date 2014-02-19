@@ -111,12 +111,9 @@ def extractConditionTitle(condition_soup):
 def extractConditionIntegraltext(condition_soup):
     table = condition_soup.find_all('table')[1]
     # sometimes the link to the full text is not available...
-    try:
-        fulltext_link = table.find_all('tr')[3].a.attrs['href']
-    except:
-        return ''
+    fulltext_link = table.find_all('tr')[3].a.attrs['href']
     fulltext_page = urllib2.urlopen(fulltext_link).read()
-    body = re.search('\<body.*\</body>', fulltext_page, re.IGNORECASE + re.DOTALL)
+    body = re.search('(\<body.*)\</html>', fulltext_page, re.IGNORECASE + re.DOTALL)
 
     fulltext = bs4.BeautifulSoup(body.group(), from_encoding=encoding)
     fulltext = str(fulltext)

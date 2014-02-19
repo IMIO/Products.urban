@@ -365,15 +365,17 @@ def addRubricValues(context, class_type, config_folder):
     mapping = dgrne_slurp['mapping']
 
     for category in categories:
-        if category['id'] in config_folder.objectIds():
-            continue
-        newfolder_id = config_folder.invokeFactory("Folder", **category)
-        newfolder = getattr(config_folder, newfolder_id)
-        newfolder.setConstrainTypesMode(1)
-        newfolder.setLocallyAllowedTypes(['EnvironmentRubricTerm'])
-        newfolder.setImmediatelyAddableTypes(['EnvironmentRubricTerm'])
 
         category_id = category['id']
+
+        if category_id in config_folder.objectIds():
+            rubric_folder = getattr(config_folder, category_id)
+        else:
+            rubricfolder_id = config_folder.invokeFactory("Folder", **category)
+            rubric_folder = getattr(config_folder, rubricfolder_id)
+            rubric_folder.setConstrainTypesMode(1)
+            rubric_folder.setLocallyAllowedTypes(['EnvironmentRubricTerm'])
+            rubric_folder.setImmediatelyAddableTypes(['EnvironmentRubricTerm'])
 
         rubrics = {}
         for r_id, rubric in rubric_terms.iteritems():
@@ -384,9 +386,19 @@ def addRubricValues(context, class_type, config_folder):
         sorted_rubrics = [rubrics[r_id] for r_id in sorted(rubrics)]
 
         for rubric in sorted_rubrics:
-            rubric_id = newfolder.invokeFactory('EnvironmentRubricTerm', **rubric)
 
-            bound_condition = mapping[rubric['id']]
+            rubric_id = rubric['id']
+            if rubric_id not in rubric_folder:
+                rubric_id = rubric_folder.invokeFactory('EnvironmentRubricTerm', **rubric)
+            else:
+                old_rubric = getattr(rubric_folder, rubric_id)
+                rubric.pop('id')
+                for fieldname, newvalue in rubric.iteritems():
+                    field = old_rubric.getField(fieldname)
+                    mutator = field.getMutator(old_rubric)
+                    mutator(newvalue)
+
+            bound_condition = mapping[rubric_id]
             if bound_condition:
                 condition_type = bound_condition['type'].replace('/', '_').replace('-', '_')
                 condition_id = bound_condition['id']
@@ -395,7 +407,7 @@ def addRubricValues(context, class_type, config_folder):
                 condition = catalog(id=condition_id, path={'query': condition_path, 'depth': 1})[0]
                 condition_uid = condition.getObject().UID()
 
-                rubric = getattr(newfolder, rubric_id)
+                rubric = getattr(rubric_folder, rubric_id)
                 rubric.setExploitationCondition(condition_uid)
 
 
@@ -409,20 +421,36 @@ def addExploitationConditions(context, config_folder):
     all_conditions = dgrne_slurp['conditions']
 
     for condition_type, conditions in all_conditions.iteritems():
-        newfolder_id = condition_type.replace('/', '_').replace('-', '_')
-        if not hasattr(config_folder, newfolder_id):
-            config_folder.invokeFactory('Folder', id=newfolder_id, title=_("%s_folder_title" % newfolder_id, 'urban', context=site.REQUEST))
-            newfolder = getattr(config_folder, newfolder_id)
-            setFolderAllowedTypes(newfolder, 'UrbanVocabularyTerm')
+        conditionsfolder_id = condition_type.replace('/', '_').replace('-', '_')
+        if conditionsfolder_id not in config_folder.objectIds():
+            config_folder.invokeFactory(
+                'Folder',
+                id=conditionsfolder_id,
+                title=_("%s_folder_title" % conditionsfolder_id, 'urban', context=site.REQUEST)
+            )
+            conditions_folder = getattr(config_folder, conditionsfolder_id)
+            setFolderAllowedTypes(conditions_folder, 'UrbanVocabularyTerm')
+        else:
+            conditions_folder = getattr(config_folder, conditionsfolder_id)
 
-            sorted_conditions = [conditions[c_id] for c_id in sorted(conditions)]
+        sorted_conditions = [conditions[c_id] for c_id in sorted(conditions)]
 
-            for condition in sorted_conditions:
-                condition_id = newfolder.invokeFactory('UrbanVocabularyTerm', extraValue=condition_type, **condition)
-                vocterm = getattr(newfolder, condition_id)
+        for condition in sorted_conditions:
+            condition_id = condition['id']
+            if condition_id not in conditions_folder:
+                condition_id = conditions_folder.invokeFactory('UrbanVocabularyTerm', extraValue=condition_type, **condition)
+                vocterm = getattr(conditions_folder, condition_id)
                 field = vocterm.getField('description')
                 field.setContentType(vocterm, 'text/html')
                 vocterm.setDescription(condition['description'])
+            else:
+                old_condition = getattr(conditions_folder, condition_id)
+                condition.pop('id')
+                for fieldname, newvalue in condition.iteritems():
+                    field = old_condition.getField(fieldname)
+                    mutator = field.getMutator(old_condition)
+                    mutator(newvalue)
+
 
 
 def addUrbanGroups(context):
