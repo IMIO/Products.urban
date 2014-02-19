@@ -15,7 +15,7 @@
        define-macro="editLicenceFieldsWithTabbingMacro"
        i18n:domain="urban"
        tal:define="putils context/plone_utils;
-                   tabs_config context/getTabs">
+                   tabs_config view/getTabs">
 
     <tal:fieldsets repeat="tab_config tabs_config">
         <tal:tab define="fieldset python: 'urban_%s' % tab_config['value'];
@@ -80,7 +80,7 @@
 
 <div metal:define-macro="editLicenceFieldsNoTabbingMacro"
      tal:define="putils context/plone_utils;
-                 tabs_config context/getTabs">
+                 tabs_config view/getTabs">
     <tal:fieldsets repeat="tab_config tabs_config">
         <tal:tab define="fieldset python: 'urban_%s' % tab_config['value'];
                          display_name python: tab_config['display_name']">
