@@ -9,11 +9,11 @@
 
 <metal:widgets fill-slot="widgets"
            tal:define="global body_onload string: init();
-                       member context/@@plone_portal_state/member; 
+                       member context/@@plone_portal_state/member;
                        border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
                        dummy python:request.set(border, 1);">
 
-      <metal:listing use-macro="here/@@licencemacros/editLicenceMacro" />
+      <metal:listing use-macro="here/@@licenceedit/editLicenceMacro" />
 </metal:widgets>
 </metal:base_body>
 </div>

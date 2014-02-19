@@ -13,6 +13,14 @@
 
   <browser:page
      for="Products.urban.interfaces.IGenericLicence"
+     name="licenceedit"
+     class=".licenceedit.LicenceEditView"
+     template="templates/licenceedit.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
      name="fielddisplay-macros"
      template="templates/fieldscustomdisplay.pt"
      permission="zope2.View"
