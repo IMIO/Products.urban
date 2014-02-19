@@ -14,15 +14,30 @@ class LicenceEditView(BrowserView):
         self.context = context
         self.request = request
 
+    def getLicenceConfig(self):
+        context = aq_inner(self.context)
+        return context.getLicenceConfig()
+
     def getTabs(self):
         return self.getLicenceConfig().getActiveTabs()
 
-    def getTabMacro(self, tab):
+    def getEditFieldsMacro(self):
+        macro_name = 'editLicenceFieldsMacro'
+        return self.getMacro(macro_name)
+
+    def getEditFieldsWithoutTabbingMacro(self):
+        macro_name = 'editLicenceFieldsNoTabbingMacro'
+        return self.getMacro(macro_name)
+
+    def getEditFieldsWithTabbingMacro(self):
+        macro_name = 'editLicenceFieldsWithTabbingMacro'
+        return self.getMacro(macro_name)
+
+    def getMacro(self, macro_name):
         context = aq_inner(self.context)
-        macro_name = '{}_macro'.format(tab)
         macros_view = self.getMacroViewName()
         macro = context.unrestrictedTraverse('{view}/{macro}'.format(view=macros_view, macro=macro_name))
         return macro
 
     def getMacroViewName(self):
-        return 'licencetabs-macros'
+        return 'licenceedit'

@@ -1,16 +1,12 @@
 <metal:editLicenceMacro define-macro="editLicenceMacro" i18n:domain="urban"
                         tal:define="useTabbing python: context.portal_urban.getUrbanConfig(context).getUseTabbingForEdit();
-                                    view python: context.restrictedTraverse('licenceedit');">
+                                    view python: context.restrictedTraverse('urbancertificatebase_edit');">
     <div tal:condition="not: useTabbing">
-        <tal:edit_macro define="edit_macro view/getEditFieldsWithoutTabbingMacro">
-            <metal:listing use-macro="edit_macro" />
-        </tal:edit_macro>
+        <metal:listing use-macro="view/getEditFieldsWithoutTabbingMacro" />
     </div>
 
     <tal:with_tabbing condition="useTabbing">
-        <tal:edit_macro define="edit_macro view/getEditFieldsWithTabbingMacro">
-            <metal:listing use-macro="edit_macro" />
-        </tal:edit_macro>
+        <metal:listing use-macro="view/getEditFieldsWithTabbingMacro" />
     </tal:with_tabbing>
 </metal:editLicenceMacro>
 
@@ -42,8 +38,10 @@
 
 
 <div metal:define-macro="editLicenceFieldsMacro" i18n:domain="urban">
-    <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=False)">
-        <tal:block define="fieldName field/getName">
+    <tal:fields repeat="field python:view.getFields(schematas[fieldset])">
+        <tal:block define="visible python: field['visible'];
+                           field  python: field['field'];
+                           fieldName field/getName">
 
             <tal:comment replace="nothing">Display a fieldset around the 'isInPca' and 'Pca' fields</tal:comment>
             <tal:pca condition="python: fieldName in ['isInPCA', 'pca', 'pcaDetails']">
@@ -77,7 +75,9 @@
                                      'isInPCA', 'pca', 'pcaDetails', 'isInSubdivision',
                                      'parcellings', 'subdivisionDetails', 'minimumLegalConditions'
                                   ]">
-                <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
+                <div tal:attributes="hidden python: not visible or None">
+                    <metal:fieldMacro use-macro="python:here.widget(fieldName, mode='edit')" />
+                </div>
             </tal:other>
         </tal:block>
     </tal:fields>

@@ -20,6 +20,14 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IUrbanCertificateBase"
+     name="urbancertificatebase_edit"
+     class=".urbancertificatebaseedit.UrbanCertificateBaseEditView"
+     template="templates/urbancertificatebase_edit.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IGenericLicence"
      name="fielddisplay-macros"
      template="templates/fieldscustomdisplay.pt"
