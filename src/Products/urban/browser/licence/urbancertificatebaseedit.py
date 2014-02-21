@@ -25,6 +25,6 @@ class UrbanCertificateBaseEditView(LicenceEditView):
             if field.writeable(self.context, debug=False):
                 portal_urban = api.portal.get_tool('portal_urban')
                 licence_config = portal_urban.getUrbanConfig(self, urbanConfigId=self.context.portal_type)
-                visible = field.getName() in licence_config.getUsedAttributes()
+                visible = field.getName() in licence_config.getUsedAttributes() or not field.widget.condition
                 fields.append({'field': field, 'visible': visible})
         return fields
