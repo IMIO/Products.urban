@@ -76,7 +76,7 @@ slave_fields_pca = (
 
 optional_fields = [
     'subdivisionDetails', 'missingParts', 'missingPartsDetails', 'folderZoneDetails', 'folderZone',
-    'isInPCA', 'annoncedDelayDetails', 'roadType', 'roadCoating', 'roadEquipments',
+    'isInPCA', 'roadType', 'roadCoating', 'roadEquipments',
     'isInSubdivision', 'solicitLocationOpinionsTo', 'technicalRemarks', 'locationTechnicalRemarks',
     'folderCategoryTownship', 'protectedBuilding', 'protectedBuildingDetails', 'folderCategory',
     'pash', 'pashDetails', 'catchmentArea', 'catchmentAreaDetails', 'equipmentAndRoadRequirements',

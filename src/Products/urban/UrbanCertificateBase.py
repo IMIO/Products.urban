@@ -41,7 +41,7 @@ from DateTime import DateTime
 
 optional_fields = ['specificFeatures', 'roadSpecificFeatures', 'locationSpecificFeatures',
                    'customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks',
-                   'basement', 'ZIP', 'noteworthyTrees', 'pollution']
+                   'basement', 'ZIP', 'noteworthyTrees', 'pollution', 'annoncedDelay', 'annoncedDelayDetails']
 ##/code-section module-header
 
 schema = Schema((
