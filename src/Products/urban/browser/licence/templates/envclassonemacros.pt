@@ -1,8 +1,11 @@
 <metal:description define-macro="description_macro" i18n:domain="urban">
 
-    <tal:vars define="exclude python:['title', 'workLocations', 'businessOldLocation',
-                                  'additionalLegalConditions', 'additionalConditions'];
-                      custom python:['rubrics', 'minimumLegalConditions', 'hasAdditionalConditions'];">
+    <tal:vars define="exclude python:[
+                          'title', 'workLocations', 'businessOldLocation',
+                          'additionalLegalConditions', 'additionalConditions',
+                          'additionalPreviousLicences'
+                      ];
+                      custom python:['rubrics', 'minimumLegalConditions', 'hasAdditionalConditions', 'previousLicences'];">
         <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
             <metal:worklocations fill-slot="worklocations">
 

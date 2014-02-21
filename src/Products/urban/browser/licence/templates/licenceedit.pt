@@ -74,7 +74,7 @@
             </tal:subdivision>
 
             <tal:other condition="not: python: fieldName in [
-                                     'isInPCA', 'pca', 'pcaDetails', 'isInSubdivision',
+                                     'isInPCA', 'pca', 'pcaDetails', 'isInSubdivision', 'previousLicences',
                                      'parcellings', 'subdivisionDetails', 'minimumLegalConditions'
                                   ]">
                 <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />

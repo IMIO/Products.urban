@@ -43,11 +43,6 @@ schema = Schema((
     ReferenceField(
         name='previousLicences',
         widget=ReferenceBrowserWidget(
-            allow_browse=False,
-            allow_search=False,
-            show_results_without_query=True,
-            wild_card_search=True,
-            base_query='previouslicencesBaseQuery',
             label='Previouslicences',
             label_msgid='urban_label_previousLicences',
             i18n_domain='urban',
@@ -56,6 +51,23 @@ schema = Schema((
         schemata='urban_description',
         multiValued=True,
         relationship='previousLicences',
+    ),
+    ReferenceField(
+        name='additionalPreviousLicences',
+        widget=ReferenceBrowserWidget(
+            allow_browse=False,
+            allow_search=False,
+            show_results_without_query=True,
+            wild_card_search=True,
+            base_query='previouslicencesBaseQuery',
+            label='Additionalpreviouslicences',
+            label_msgid='urban_label_additionalPreviousLicences',
+            i18n_domain='urban',
+        ),
+        allowed_types=('EnvClassThree', 'EnvClassTwo', 'EnvClassOne'),
+        schemata='urban_description',
+        multiValued=True,
+        relationship='additionalPreviousLicences',
     ),
     TextField(
         name='areaDescriptionText',

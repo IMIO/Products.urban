@@ -6,102 +6,143 @@
   <subscriber for="..interfaces.IUrbanEventOpinionRequest
                    Products.Archetypes.event.IEditBegunEvent"
               handler=".opinionRequestEvents.setDefaultLinkedInquiry" />
+
   <subscriber for="..interfaces.IApplicant
                    zope.app.container.interfaces.IObjectRemovedEvent"
               handler=".applicantEvents.onDelete" />
+
   <subscriber for="..interfaces.IApplicant
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".applicantEvents.reindexLicenceApplicantInfos" />
+
   <subscriber for="..interfaces.IProprietary
                    zope.app.container.interfaces.IObjectRemovedEvent"
               handler=".applicantEvents.onDelete" />
+
   <subscriber for="..interfaces.IProprietary
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".applicantEvents.reindexLicenceApplicantInfos" />
+
   <subscriber for="..interfaces.IContact
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".contactEvents.setInterface" />
+
   <subscriber for="..interfaces.IContact
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".contactEvents.updateLicenceTitle" />
+
   <subscriber for="..interfaces.IContact
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".contactEvents.positionByAlphabeticalOrder" />
+
   <subscriber for="..interfaces.IInquiry
                    Products.Archetypes.interfaces.IEditBegunEvent"
               handler=".inquiryEvents.setDefaultValuesEvent"/>
+
   <subscriber for="..interfaces.IInquiry
                    OFS.interfaces.IObjectWillBeRemovedEvent"
               handler=".inquiryEvents.beforeDelete" />
+
   <subscriber for="..interfaces.IInquiry
                    zope.app.container.interfaces.IObjectRemovedEvent"
               handler=".inquiryEvents.afterDelete" />
+
   <subscriber for="..interfaces.IInquiry
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".inquiryEvents.setGeneratedTitle" />
+
   <subscriber for="..interfaces.IGenericLicence
                    Products.Archetypes.interfaces.IEditBegunEvent"
               handler=".licenceEvents.setDefaultValuesEvent"/>
+
   <subscriber for="..interfaces.IGenericLicence
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".licenceEvents.postCreationActions"/>
+
   <subscriber for="..interfaces.IGenericLicence
                    zope.lifecycleevent.IObjectModifiedEvent"
               handler=".licenceEvents.updateLicenceTitle"/>
+
   <subscriber for="..interfaces.IGenericLicence
                    zope.lifecycleevent.IObjectModifiedEvent"
               handler=".licenceEvents.updateEventsFoldermanager"/>
+
   <subscriber for="..interfaces.IPortionOut
                    zope.app.container.interfaces.IObjectRemovedEvent"
               handler=".portionOutEvents.onDelete" />
+
   <subscriber for="..interfaces.IPortionOut
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
                handler=".portionOutEvents.setValidParcel" />
+
   <subscriber for="..interfaces.IPortionOut
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".portionOutEvents.setDivisionCode" />
+
   <subscriber for="..interfaces.IPortionOut
                    Products.Archetypes.interfaces.IObjectEditedEvent"
               handler=".portionOutEvents.setValidParcel" />
+
   <subscriber for="..interfaces.IPortionOut
                    Products.Archetypes.interfaces.IObjectEditedEvent"
               handler=".portionOutEvents.setDivisionCode" />
+
+  <subscriber for="..interfaces.IPortionOut
+                   zope.lifecycleevent.IObjectCreatedEvent"
+              handler=".portionOutEvents.setEnvironmentLicencePreviousLicencesField" />
+
+  <subscriber for="..interfaces.IPortionOut
+                   zope.app.container.interfaces.IObjectRemovedEvent"
+              handler=".portionOutEvents.setEnvironmentLicencePreviousLicencesField" />
+
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IEditBegunEvent"
               handler=".urbanEventEvents.setDefaultValuesEvent"/>
+
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setEventTypeType"/>
+
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setCreationDate"/>
+
   <subscriber for="..interfaces.IUrbanEvent
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".urbanEventEvents.generateSingletonDocument"/>
+
   <subscriber for="..interfaces.IUrbanEvent
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventEvents.updateKeyEvent"/>
+
   <subscriber for="..interfaces.IUrbanEvent
                    zope.lifecycleevent.interfaces.IObjectRemovedEvent"
               handler=".urbanEventEvents.updateKeyEvent" />
+
   <subscriber for="..interfaces.IUrbanEventInquiry
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".urbanEventInquiryEvents.setLinkedInquiry" />
+
   <subscriber for="..interfaces.IUrbanDoc
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".filesEvents.updateAllTemplatesStylesEvent" />
+
   <subscriber for="..interfaces.IUrbanEventType
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventTypesEvents.updateKeyEvent" />
+
   <subscriber for="..interfaces.IEnvironmentRubricTerm
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".rubricTermEvents.updateTitle" />
+
   <subscriber for="..interfaces.IEnvironmentBase
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".environmentLicenceEvents.setExploitationConditions"/>
+
   <subscriber for="..interfaces.IPortionOut
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".parcelEvents.updateParcellingTitle" />
+
   <subscriber for="..interfaces.IParcellingTerm
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".parcellingtermEvents.updateTitle" />

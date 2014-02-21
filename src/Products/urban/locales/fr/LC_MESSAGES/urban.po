@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2014-02-17 15:00+0000\n"
+"POT-Creation-Date: 2014-02-21 13:44+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1524,6 +1524,11 @@ msgstr "Conditions d'exploitations complémentaires"
 #: EnvironmentBase.py
 msgid "urban_label_additionalLegalConditions"
 msgstr "Conditions intégrales et sectorielles supplémentaires"
+
+#. Default: "Additionalpreviouslicences"
+#: EnvironmentLicence.py
+msgid "urban_label_additionalPreviousLicences"
+msgstr "Permissions, enregistrements et déclarations existantes supplémentaires"
 
 #. Default: "Adr1"
 #: RecipientCadastre.py
