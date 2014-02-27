@@ -71,7 +71,7 @@ class TimeDelayColumn(UrbanColumn):
             css_class = 'warning-event-delay'
         if delay >= 0:
             css_class = 'late-event-delay'
-        if delay == 9999:
+        if delay == 999999:
             css_class = 'undefined-event-delay'
             cell = u'<div class="{css}" style="font-size:200%; text-align:center">\u221e</div>'.format(css=css_class)
         else:
@@ -246,7 +246,7 @@ class ItemForScheduleListing(BrainForUrbanTable):
         alert_delay = event_type.getAlertDelay()
         delay_term = self._computeDelayTerm(event, event_type)
         if delay_term is None:
-            return 9999, None, False
+            return 999999, None, False
 
         delay = DateTime() - delay_term
         close_delay = -alert_delay < delay < 0
