@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2014-02-21 13:44+0000\n"
+"POT-Creation-Date: 2014-03-03 15:20+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -2965,6 +2965,11 @@ msgstr "Utiliser les onglets supplémentaires pour l'édition"
 #: LicenceConfig.py
 msgid "urban_label_usedAttributes"
 msgstr "Champs optionnels utilisés"
+
+#. Default: "Validityduration"
+#: EnvironmentLicence.py
+msgid "urban_label_validityDuration"
+msgstr "Durée de validité du permis"
 
 #. Default: "Visibility"
 #: Layer.py
