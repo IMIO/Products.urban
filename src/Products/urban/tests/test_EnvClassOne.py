@@ -258,3 +258,20 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.browser.open(edit_url)
         contents = self.browser.contents
         self.assertTrue("Permissions, enregistrements et déclarations existantes" in contents)
+
+    def test_envclassone_has_attribute_validityDuration(self):
+        self.assertTrue(self.licence.getField('validityDuration'))
+
+    def test_envclassone_validityDuration_is_visible_in_edit(self):
+        edit_url = '{}/edit'.format(self.licence.absolute_url())
+        self.browser.open(edit_url)
+        contents = self.browser.contents
+        self.assertTrue("Durée de validité du permis" in contents)
+
+    def test_envclassone_has_attribute_expirationTermDate(self):
+        self.assertTrue(self.licence.getField('expirationTermDate'))
+
+    def test_envclassone_previousLicences_is_visible(self):
+        self.browser.open(self.licence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("Permis valable jusqu'au" in contents)
