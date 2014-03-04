@@ -319,14 +319,6 @@ class UrbanBase(object):
         if events:
             return events[-1]
 
-    security.declarePublic('attributeIsUsed')
-    def attributeIsUsed(self, name):
-        """
-          Is the attribute named as param name used in this LicenceConfig ?
-        """
-        licenceConfig = api.portal.get_tool('portal_urban').getUrbanConfig(self, urbanConfigId=self.portal_type)
-        return (name in licenceConfig.getUsedAttributes())
-
     security.declarePublic('getUrbanEvents')
     def getUrbanEvents(self):
         """

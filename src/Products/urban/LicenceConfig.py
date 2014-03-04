@@ -30,13 +30,14 @@ from Products.urban.config import *
 from Products.CMFCore.utils import getToolByName
 from zope.i18n import translate
 from Products.Archetypes.public import DisplayList
-from Products.DataGridField.Column import Column
-from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from Products.DataGridField.DataGridField import FixedRow
 from Products.DataGridField.FixedColumn import FixedColumn
 from Products.DataGridField.CheckboxColumn import CheckboxColumn
 from Products.urban.utils import getLicenceSchema
+from zope.interface import Interface
+from Products.PageTemplates.Expressions import getEngine
+from Products.CMFCore.Expression import Expression
 ##/code-section module-header
 
 schema = Schema((
@@ -170,6 +171,19 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
 
     # Manually created methods
 
+    security.declarePublic('getEventTypesByInterface')
+    def getEventTypesByInterface(self, interface):
+        """
+          Return all the UrbanEventTypes having interface 'interface'
+          in their eventTypeType field
+        """
+        if issubclass(interface, Interface):
+            interface = interface.__identifier__
+
+        eventtypes = self.urbaneventtypes.objectValues()
+        to_return = [uet for uet in eventtypes if interface in uet.getEventTypeType()]
+        return to_return
+
     security.declarePrivate('listUsedAttributes')
     def listUsedAttributes(self):
         """
@@ -201,6 +215,34 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
                         )
                     )
         return DisplayList(tuple(res)).sortedByValue()
+
+    def generateReference(self, licence, **kwargs):
+        """
+         Generates a reference based on the numerotationTALExpression
+        """
+        #we get a field like UrbanCertificateBaseNumerotation on self
+        #to get the last numerotation for this kind of licence
+        lastValue = self.getNumerotation()
+        if str(lastValue).isdigit():
+            lastValue = int(lastValue)
+            lastValue = lastValue + 1
+
+        #evaluate the numerotationTALExpression and pass it obj, lastValue and self
+        data = {
+            'obj': licence,
+            'tool': api.portal.get_tool('portal_catalog'),
+            'numerotation': str(lastValue),
+            'portal': api.portal.getSite(),
+            'date': DateTime(),
+        }
+        data.update(kwargs)
+        res = ''
+        try:
+            ctx = getEngine().getContext(data)
+            res = Expression(self.getReferenceTALExpression())(ctx)
+        except Exception:
+            logger.warn('The defined TAL expression about numerotation in portal_urban is wrong!')
+        return res
 
     security.declarePublic('getActiveTabs')
     def getActiveTabs(self):
