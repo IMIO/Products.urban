@@ -38,6 +38,8 @@ from Products.urban.utils import getLicenceSchema
 from zope.interface import Interface
 from Products.PageTemplates.Expressions import getEngine
 from Products.CMFCore.Expression import Expression
+from plone import api
+from DateTime import DateTime
 ##/code-section module-header
 
 schema = Schema((
@@ -241,7 +243,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             ctx = getEngine().getContext(data)
             res = Expression(self.getReferenceTALExpression())(ctx)
         except Exception:
-            logger.warn('The defined TAL expression about numerotation in portal_urban is wrong!')
+            pass
         return res
 
     security.declarePublic('getActiveTabs')
