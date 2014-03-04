@@ -327,7 +327,7 @@ class TestScheduleView(unittest.TestCase):
         # set the delayComputation with a wrong TAL expression
         TAL_computation = 'trololo'
         eventtype.setDelayComputation(TAL_computation)
-        expected_delay = 9999
+        expected_delay = 999999
 
         scheduleview.update()
         result = table.values[0]
