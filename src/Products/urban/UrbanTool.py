@@ -29,7 +29,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-    
+
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -1040,38 +1040,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return at_obj.Schema()[fieldRealName]
 
     security.declarePublic('generateReference')
-    def generateReference(self, obj, **kwargs):
-        """
-         Generates a reference based on the numerotationTALExpression
-        """
-        #we get a field like UrbanCertificateBaseNumerotation on self
-        #to get the last numerotation for this kind of licence
-        licence_config = self.getUrbanConfig(obj)
-        if not licence_config:
-            return ''
-        lastValue = '0'
-        #get the last value
-        lastValue = licence_config.getNumerotation()
-        if str(lastValue).isdigit():
-            lastValue = int(lastValue)
-            lastValue = lastValue + 1
-
-        #evaluate the numerotationTALExpression and pass it obj, lastValue and self
-        data = {
-            'obj': obj,
-            'tool': self,
-            'numerotation': str(lastValue),
-            'portal': self.aq_inner.aq_parent,
-            'date': DateTime(),
-        }
-        data.update(kwargs)
-        res = ''
-        try:
-            ctx = getEngine().getContext(data)
-            res = Expression(licence_config.getReferenceTALExpression())(ctx)
-        except Exception:
-            logger.warn('The defined TAL expression about numerotation in portal_urban is wrong!')
-        return res
 
     security.declarePublic('listEventTypes')
     def listEventTypes(self, context, urbanConfigId):
@@ -1197,24 +1165,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             if os.system('%s -c "import uno"' % value):
                 return NOT_UNO_ENABLED_PYTHON % value
         return
-
-    security.declarePublic('incrementNumerotation')
-    def incrementNumerotation(self, obj):
-        """
-          Increment the numerotation linked to the type of licence 'obj'
-          The numerotation in the configuration is a string that contains an integer
-        """
-        #update the last reference in the configuration
-        config = self.getUrbanConfig(obj)
-        value = config.getNumerotation()
-        if not str(value).isdigit():
-            value = '0'
-        else:
-            value = int(value)
-            value = value + 1
-        #set the new value
-        config.setNumerotation(value)
-        self.reindexObject()
 
     security.declarePublic('getCurrentFolderManager')
     def getCurrentFolderManager(self, initials=True):

@@ -62,7 +62,15 @@ def _setManagerPermissionOnLicence(licence):
 
 
 def _checkNumerotation(licence):
-    tool = getToolByName(licence, 'portal_urban')
+    config = licence.getUrbanConfig()
     #increment the numerotation in the tool only if its the one that has been generated
-    if tool.generateReference(licence) == licence.getReference():
-        tool.incrementNumerotation(licence)
+    if config.generateReference(licence) == licence.getReference():
+        value = config.getNumerotation()
+        if not str(value).isdigit():
+            value = '0'
+        else:
+            value = int(value)
+            value = value + 1
+        #set the new value
+        config.setNumerotation(value)
+        config.reindexObject()

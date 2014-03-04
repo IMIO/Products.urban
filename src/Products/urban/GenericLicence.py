@@ -28,13 +28,9 @@ from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-import warnings
 import re
 import Levenshtein
 from zope.i18n import translate
-from Products.CMFCore.utils import getToolByName
-from Products.DataGridField.Column import Column
-from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban.indexes import UrbanIndexes
@@ -702,8 +698,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         """
           Returns the reference for the new element
         """
-        tool = getToolByName(self, 'portal_urban')
-        return tool.generateReference(self)
+        return self.getUrbanConfig().generateReference(self)
 
     # Manually created methods
 
@@ -711,18 +706,42 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
     def getDefaultValue(self, context=None, field=None):
         if not context or not field:
             return ['']
-        urban_tool = getToolByName(self, 'portal_urban')
+
+        urban_tool = api.portal.get_tool('portal_urban')
         vocabulary_name = field.vocabulary.path
         in_urban_config = field.vocabulary.inUrbanConfig
-        return urban_tool.getVocabularyDefaultValue(vocabulary_name=vocabulary_name, context=context, in_urban_config=in_urban_config,
-                                                    multivalued=field.multiValued)
+
+        default_value = urban_tool.getVocabularyDefaultValue(
+            vocabulary_name=vocabulary_name,
+            context=context,
+            in_urban_config=in_urban_config,
+            multivalued=field.multiValued
+        )
+        return default_value
 
     security.declarePublic('getDefaultText')
     def getDefaultText(self, context=None, field=None, html=False):
         if not context or not field:
             return ""
-        urban_tool = getToolByName(self, 'portal_urban')
+        urban_tool = api.portal.get_tool('portal_urban')
         return urban_tool.getTextDefaultValue(field.getName(), context)
+
+    security.declarePublic('getUrbanConfig')
+    def getUrbanConfig(self):
+        licencetype = self.portal_type
+        config_id = licencetype.lower()
+        portal_urban = api.portal.get_tool('portal_urban')
+
+        config_folder = getattr(portal_urban, config_id)
+        return config_folder
+
+    security.declarePublic('attributeIsUsed')
+    def attributeIsUsed(self, name):
+        """
+          Is the attribute named as param name used in this LicenceConfig ?
+        """
+        licenceConfig = self.getUrbanConfig()
+        return (name in licenceConfig.getUsedAttributes())
 
     security.declarePublic('createUrbanEvent')
     def createUrbanEvent(self, urban_event_type_uid):
@@ -764,7 +783,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
     def templateRoadEquipmentDetail(self, tup):
         res = {}
         for pair in tup:
-            res[pair['road_equipment']]=pair['road_equipment_details']
+            res[pair['road_equipment']] = pair['road_equipment_details']
         return res
 
     def templateAllOpinions(self):
@@ -822,9 +841,9 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
     def foldermanagersBaseQuery(self):
         """
         """
-        portal = getToolByName(self, 'portal_url').getPortalObject()
+        portal = api.portal.get_tool('portal_url').getPortalObject()
         rootPath = '/'.join(portal.getPhysicalPath())
-        urban_tool = getToolByName(self, 'portal_urban')
+        urban_tool = api.portal.get_tool('portal_urban')
         ids =  []
         for foldermanager in urban_tool.foldermanagers.objectValues():
             if self.getPortalTypeName() in foldermanager.getManageableLicences():
@@ -848,7 +867,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
 
     security.declarePublic('createParcelAndProprietary')
     def createParcel(self, parcel_data):
-        portal_urban = getToolByName(self, 'portal_urban')
+        portal_urban = api.portal.get_tool('portal_urban')
         portal_urban.createPortionOut(container=self, **parcel_data)
 
     def createApplicantFromParcel(self, proprietary, proprietary_city, proprietary_street, parcel_street):
@@ -930,7 +949,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         """
         res = self.getField('annoncedDelay').get(self)
         if res and theObject:
-            tool = getToolByName(self, 'portal_urban')
+            tool = api.portal.get_tool('portal_urban')
             urbanConfig = self.getLicenceConfig()
             res = getattr(urbanConfig.folderdelays, res)
         return res
@@ -942,7 +961,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         """
         res = self.getField('pca').get(self)
         if res and theObject:
-            tool = getToolByName(self, 'portal_urban')
+            tool = api.portal.get_tool('portal_urban')
             urbanConfig = self.getLicenceConfig()
             res = getattr(urbanConfig.pcas, res)
         return res
@@ -966,7 +985,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         """
           Create all urbanEvent corresponding to advice on a licence
         """
-        urban_tool = getToolByName(self, 'portal_urban')
+        urban_tool = api.portal.get_tool('portal_urban')
         listEventTypes = self.getAllAdvices()
         for eventType in listEventTypes:
             eventType.checkCreationInLicence(self)
@@ -984,7 +1003,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         """
           Returns all UrbanEvents corresponding to advice on a licence
         """
-        tool = getToolByName(self, 'portal_urban')
+        tool = api.portal.get_tool('portal_urban')
         urbanConfig = self.getLicenceConfig()
         listEventTypes = tool.listEventTypes(self,urbanConfig.id)
         res = []
@@ -1000,7 +1019,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         """
         Tells if the licence contains an urbanEvent named 'title'
         """
-        catalog = getToolByName(self, 'portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
         if catalog(portal_type='UrbanEvent', path=self.absolute_url_path(), Title=title):
             return True
         return False

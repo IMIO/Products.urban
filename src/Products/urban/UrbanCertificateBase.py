@@ -262,9 +262,6 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     # Manually created methods
 
-    def attributeIsUsed(self, name):
-        return True
-
     security.declarePublic('getSpecificFeaturesRows')
     def getSpecificFeaturesRows(self):
         return self._getSpecificFeaturesRows()
@@ -336,8 +333,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         res = self.getField('opinionsToAskIfWorks').get(self)
         if res and theObjects:
-            tool = getToolByName(self, 'portal_urban')
-            urbanConfig = tool.getUrbanConfig(self)
+            urbanConfig = self.getUrbanConfig()
             opinionsToAskIfWorksConfigFolder = urbanConfig.opinionstoaskifworks
             elts = res
             res = []

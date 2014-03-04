@@ -1,5 +1,5 @@
 <metal:editLicenceMacro define-macro="editLicenceMacro" i18n:domain="urban"
-                        tal:define="useTabbing python: context.portal_urban.getUrbanConfig(context).getUseTabbingForEdit();
+                        tal:define="useTabbing python: context.getUrbanConfig().getUseTabbingForEdit();
                                     view python: context.restrictedTraverse('urbancertificatebase_edit');">
     <div tal:condition="not: useTabbing">
         <metal:listing use-macro="view/getEditFieldsWithoutTabbingMacro" />

@@ -2,8 +2,6 @@
 
 from Products.urban.browser.licence.licenceedit import LicenceEditView
 
-from plone import api
-
 
 class UrbanCertificateBaseEditView(LicenceEditView):
     """
@@ -23,8 +21,7 @@ class UrbanCertificateBaseEditView(LicenceEditView):
         fields = []
         for field in schemata.fields():
             if field.writeable(self.context, debug=False):
-                portal_urban = api.portal.get_tool('portal_urban')
-                licence_config = portal_urban.getUrbanConfig(self, urbanConfigId=self.context.portal_type)
+                licence_config = self.context.getUrbanConfig()
                 visible = field.getName() in licence_config.getUsedAttributes() or not field.widget.condition
                 fields.append({'field': field, 'visible': visible})
         return fields
