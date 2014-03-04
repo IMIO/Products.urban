@@ -68,6 +68,9 @@ def setEnvironmentLicencePreviousLicencesField(parcel, event):
             parcel.getDivisionCode(), parcel.getSection(), parcel.getRadical(), parcel.getBis(), parcel.getExposant(), parcel.getPuissance(),
             historic=True, fuzzy=False, browseold=True
         )
+        if not parcels_historic:
+            break
+
         parcels_historic = parcels_historic[0]
         for ref in parcels_historic.getAllIndexableRefs():
             parcel_infos.add(ref)

@@ -250,6 +250,14 @@ class IInquiryEvent(Interface):
     __doc__ = _("""IInquiry type marker interface""")
 
 
+class ILicenceDeliveryEvent(Interface):
+    __doc__ = _("""ILicenceDelivery type marker interface""")
+
+
+class ILicenceExpirationEvent(Interface):
+    __doc__ = _("""ILicenceExpiration type marker interface""")
+
+
 class ICollegeReportEvent(Interface):
     __doc__ = _("""ICollegeReport type marker interface""")
 

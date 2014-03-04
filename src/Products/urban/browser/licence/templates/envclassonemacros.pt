@@ -3,9 +3,12 @@
     <tal:vars define="exclude python:[
                           'title', 'workLocations', 'businessOldLocation',
                           'additionalLegalConditions', 'additionalConditions',
-                          'additionalPreviousLicences'
+                          'additionalPreviousLicences',
                       ];
-                      custom python:['rubrics', 'minimumLegalConditions', 'hasAdditionalConditions', 'previousLicences'];">
+                      custom python:[
+                          'rubrics', 'minimumLegalConditions', 'hasAdditionalConditions',
+                          'previousLicences', 'validityDuration',
+                      ];">
         <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
             <metal:worklocations fill-slot="worklocations">
 

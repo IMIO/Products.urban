@@ -22,3 +22,6 @@ class EnvClassOneView(EnvironmentLicenceView):
 
     def getMacroViewName(self):
         return 'envclassone-macros'
+
+    def getExpirationDate(self):
+        return None

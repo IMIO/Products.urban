@@ -199,3 +199,23 @@
         </td>
     </tal:vars>
 </metal:previous_licences>
+
+
+<metal:validity_duration define-macro="validityDuration">
+    <tal:vars define="expiration_date view/getExpirationDate;">
+        <td valign="top">
+            <b>
+                 <span i18n:translate="urban_label_validityDuration">
+                    Expiration date
+                 </span>:
+            </b>
+        </td>
+        <td width="10px"></td>
+        <td valign="top"
+            tal:condition="python: expiration_date">
+        </td>
+        <td tal:condition="python: not expiration_date">
+            <span class="discreet" i18n:translate="content_none">None</span>
+        </td>
+    </tal:vars>
+</metal:validity_duration>

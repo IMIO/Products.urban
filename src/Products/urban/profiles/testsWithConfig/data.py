@@ -235,4 +235,29 @@ urbanEventTypes = {
                     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                    ),
+                   'envclassone':
+                   (
+                    {
+                    'id': "decision",
+                    'title': "Décision (octroi ou refus)",
+                    'activatedFields': ['decisionDate', 'decision'],
+                    'eventDateLabel': "Date de notification",
+                    'isKeyEvent': True,
+                    'keyDates': ('eventDate',),
+                    'podTemplates': (
+                                    ),
+                    'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
+                    },
+                    {
+                    'id': "expiration",
+                    'title': "Valide jusqu'au",
+                    'eventDateLabel': "Date de validité",
+                    'isKeyEvent': True,
+                    'keyDates': ('eventDate',),
+                    'podTemplates': (
+                                    ),
+                    'TALCondition': "python: False",
+                    'eventTypeType': 'Products.urban.interfaces.ILicenceExpirationEvent',
+                    },
+                   ),
                   }

@@ -1,5 +1,9 @@
 #-*- coding: utf-8 -*-
+
+from DateTime import DateTime
+
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
+from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban.utils import getLicenceFolder
 
 from plone import api
@@ -268,10 +272,48 @@ class TestEnvClassOneInstance(unittest.TestCase):
         contents = self.browser.contents
         self.assertTrue("Durée de validité du permis" in contents)
 
-    def test_envclassone_has_attribute_expirationTermDate(self):
-        self.assertTrue(self.licence.getField('expirationTermDate'))
-
-    def test_envclassone_previousLicences_is_visible(self):
+    def test_envclassone_validityDuration_is_visible(self):
         self.browser.open(self.licence.absolute_url())
         contents = self.browser.contents
-        self.assertTrue("Permis valable jusqu'au" in contents)
+        self.assertTrue("Durée de validité du permis" in contents)
+
+
+class TestEnvClassOneEvents(unittest.TestCase):
+
+    layer = URBAN_TESTS_CONFIG
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+
+        # create a test EnvClassOne licence
+        login(self.portal, 'urbaneditor')
+        envclassone_folder = self.urban.envclassones
+        testlicence_id = 'test_envclassone'
+        if testlicence_id not in envclassone_folder.objectIds():
+            envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
+        self.licence = getattr(envclassone_folder, testlicence_id)
+
+    def test_create_ExpirationEvent_when_notificationDate_is_set(self):
+        """
+         When the notification date of the decision event is set,
+         an ExpirationEvent should be created automatically
+        """
+        from Products.urban.interfaces import ILicenceDeliveryEvent
+        from Products.urban.interfaces import ILicenceExpirationEvent
+        licence = self.licence
+
+        # so far no event created
+        self.assertEqual(licence.objectValues('UrbanEvent'), [])
+
+        config = self.licence.getUrbanConfig()
+        decision_eventtype = config.getEventTypesByInterface(ILicenceDeliveryEvent)[0]
+
+        decision_event = licence.createUrbanEvent(decision_eventtype.UID())
+        decision_event.processForm()
+        decision_event.setEventDate(DateTime() + 42)
+        decision_event.processForm()
+
+        # an event providing ILicenceExpirationEvent should be created
+        expiration_event = licence._getLastEvent(ILicenceExpirationEvent)
+        self.assertTrue(expiration_event)

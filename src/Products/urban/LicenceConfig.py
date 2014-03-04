@@ -232,7 +232,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         #evaluate the numerotationTALExpression and pass it obj, lastValue and self
         data = {
             'obj': licence,
-            'tool': api.portal.get_tool('portal_catalog'),
+            'tool': api.portal.get_tool('portal_urban'),
             'numerotation': str(lastValue),
             'portal': api.portal.getSite(),
             'date': DateTime(),
