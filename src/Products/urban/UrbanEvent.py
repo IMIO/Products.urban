@@ -449,35 +449,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         """
         return self.listFolderContents(contentFilter={"portal_type" : "UrbanDoc"})
 
-    def getBeginDate(self):
-        """
-          Return the beginDate of the UrbanEvent
-        """
-        return self.getEventDate()
-
-    def getEndDate(self):
-        """
-          Return the endDate of the UrbanEvent
-        """
-        urbanEventType = self.getUrbaneventtypes()
-        beginDate = self.getBeginDate()
-        #get the linked UrbanEventType
-        if not urbanEventType or not beginDate:
-            return None
-
-        #get de deadLineDelay
-        deadLineDelay = urbanEventType.getDeadLineDelay()
-        #if there is no delay, we return the beginDate...
-        if not deadLineDelay:
-            return self.getBeginDate()
-
-        #check if we have an integer as deadLineDelay
-        if not str(deadLineDelay).isdigit():
-            return self.getBeginDate()
-
-        endDate = beginDate + deadLineDelay
-        return endDate
-
     security.declarePublic('RecipientsCadastreCSV')
     def RecipientsCadastreCSV(self):
         """
