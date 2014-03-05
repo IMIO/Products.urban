@@ -2966,9 +2966,9 @@ msgstr "Utiliser les onglets supplémentaires pour l'édition"
 msgid "urban_label_usedAttributes"
 msgstr "Champs optionnels utilisés"
 
-#. Default: "Validityduration"
+#. Default: "Validitydelay"
 #: EnvironmentLicence.py
-msgid "urban_label_validityDuration"
+msgid "urban_label_validityDelay"
 msgstr "Durée de validité du permis"
 
 #. Default: "Visibility"

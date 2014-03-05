@@ -167,11 +167,11 @@ schema = Schema((
         schemata='urban_description',
     ),
     IntegerField(
-        name='validityDuration',
+        name='validityDelay',
         default=20,
         widget=IntegerField._properties['widget'](
-            label='Validityduration',
-            label_msgid='urban_label_validityDuration',
+            label='Validitydelay',
+            label_msgid='urban_label_validityDelay',
             i18n_domain='urban',
         ),
         schemata='urban_description',
@@ -234,7 +234,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('natura2000Details', after='natura2000')
     schema.moveField('hasAdditionalConditions', after='natura2000Details')
     schema.moveField('additionalConditions', after='hasAdditionalConditions')
-    schema.moveField('description', after='validityDuration')
+    schema.moveField('description', after='validityDelay')
 
 finalizeSchema(EnvironmentLicence_schema)
 ##/code-section module-footer

@@ -201,11 +201,11 @@
 </metal:previous_licences>
 
 
-<metal:validity_duration define-macro="validityDuration">
+<metal:validity_duration define-macro="validityDelay">
     <tal:vars define="expiration_date view/getExpirationDate;">
         <td valign="top">
             <b>
-                 <span i18n:translate="urban_label_validityDuration">
+                 <span i18n:translate="urban_label_validityDelay">
                     Expiration date
                  </span>:
             </b>

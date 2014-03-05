@@ -1296,9 +1296,9 @@ msgstr ""
 msgid "urban_label_usedAttributes"
 msgstr ""
 
-#. Default: "Validityduration"
+#. Default: "Validitydelay"
 #: EnvironmentLicence.py
-msgid "urban_label_validityDuration"
+msgid "urban_label_validityDelay"
 msgstr ""
 
 #. Default: "Visibility"

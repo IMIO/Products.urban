@@ -10,6 +10,9 @@ from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
+
 import transaction
 import unittest
 import urllib2
@@ -263,16 +266,16 @@ class TestEnvClassOneInstance(unittest.TestCase):
         contents = self.browser.contents
         self.assertTrue("Permissions, enregistrements et déclarations existantes" in contents)
 
-    def test_envclassone_has_attribute_validityDuration(self):
-        self.assertTrue(self.licence.getField('validityDuration'))
+    def test_envclassone_has_attribute_validityDelay(self):
+        self.assertTrue(self.licence.getField('validityDelay'))
 
-    def test_envclassone_validityDuration_is_visible_in_edit(self):
+    def test_envclassone_validityDelay_is_visible_in_edit(self):
         edit_url = '{}/edit'.format(self.licence.absolute_url())
         self.browser.open(edit_url)
         contents = self.browser.contents
         self.assertTrue("Durée de validité du permis" in contents)
 
-    def test_envclassone_validityDuration_is_visible(self):
+    def test_envclassone_validityDelay_is_visible(self):
         self.browser.open(self.licence.absolute_url())
         contents = self.browser.contents
         self.assertTrue("Durée de validité du permis" in contents)
@@ -294,6 +297,10 @@ class TestEnvClassOneEvents(unittest.TestCase):
             envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
         self.licence = getattr(envclassone_folder, testlicence_id)
 
+    def tearDown(self):
+        for event in self.licence.objectValues('UrbanEvent'):
+            api.content.delete(event)
+
     def test_create_ExpirationEvent_when_notificationDate_is_set(self):
         """
          When the notification date of the decision event is set,
@@ -311,9 +318,73 @@ class TestEnvClassOneEvents(unittest.TestCase):
 
         decision_event = licence.createUrbanEvent(decision_eventtype.UID())
         decision_event.processForm()
-        decision_event.setEventDate(DateTime() + 42)
-        decision_event.processForm()
+        zopeevent = ObjectModifiedEvent(decision_event)
+        notify(zopeevent)
 
         # an event providing ILicenceExpirationEvent should be created
         expiration_event = licence._getLastEvent(ILicenceExpirationEvent)
         self.assertTrue(expiration_event)
+
+    def test_expirationDate_is_computed_correctly(self):
+        """
+         Expiration date = notification date + validity delay (in years).
+        """
+        from Products.urban.interfaces import ILicenceDeliveryEvent
+        from Products.urban.interfaces import ILicenceExpirationEvent
+        licence = self.licence
+        validity_delay = 15
+        licence.setValidityDelay(validity_delay)
+
+        config = self.licence.getUrbanConfig()
+        decision_eventtype = config.getEventTypesByInterface(ILicenceDeliveryEvent)[0]
+        decision_event = licence.createUrbanEvent(decision_eventtype.UID())
+        decision_event.processForm()
+        zopeevent = ObjectModifiedEvent(decision_event)
+        notify(zopeevent)
+
+        notification_date = decision_event.getEventDate()
+        expected_expiration_year = validity_delay + notification_date.year()
+        expiration_event = licence._getLastEvent(ILicenceExpirationEvent)
+        expiration_date = expiration_event.getEventDate()
+
+        self.assertEqual(expiration_date.year(), expected_expiration_year)
+        self.assertEqual(expiration_date.month(), notification_date.month())
+        self.assertEqual(expiration_date.day(), notification_date.day())
+
+    def test_expirationDate_is_updated_when_notification_date_change(self):
+        """
+         When the notification date of the decision event is set,
+         an ExpirationEvent should be created automatically
+        """
+        from Products.urban.interfaces import ILicenceDeliveryEvent
+        from Products.urban.interfaces import ILicenceExpirationEvent
+        licence = self.licence
+        licence.setValidityDelay(0)
+
+        config = self.licence.getUrbanConfig()
+        decision_eventtype = config.getEventTypesByInterface(ILicenceDeliveryEvent)[0]
+
+        decision_event = licence.createUrbanEvent(decision_eventtype.UID())
+        decision_event.processForm()
+        zopeevent = ObjectModifiedEvent(decision_event)
+        notify(zopeevent)
+        notification_date = decision_event.getEventDate()
+
+        expiration_event = licence._getLastEvent(ILicenceExpirationEvent)
+        expiration_date = expiration_event.getEventDate()
+
+        self.assertEqual(expiration_date.year(), notification_date.year())
+        self.assertEqual(expiration_date.month(), notification_date.month())
+        self.assertEqual(expiration_date.day(), notification_date.day())
+
+        # change the notification date
+        new_notification_date = DateTime() + 4242
+        decision_event.setEventDate(new_notification_date)
+        zopeevent = ObjectModifiedEvent(decision_event)
+        notify(zopeevent)
+
+        expiration_date = expiration_event.getEventDate()
+        # the expiration date should have changed accordingly
+        self.assertEqual(expiration_date.year(), new_notification_date.year())
+        self.assertEqual(expiration_date.month(), new_notification_date.month())
+        self.assertEqual(expiration_date.day(), new_notification_date.day())

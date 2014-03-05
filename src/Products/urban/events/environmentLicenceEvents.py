@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from DateTime import DateTime
+
 from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import ILicenceExpirationEvent
 
@@ -36,13 +38,7 @@ def createLicenceExpirationEvent(decision_event, event):
     notification_date = decision_event.getEventDate()
 
     if notification_date:
-        years = licence.getValidityDuration()
-        expiration_date = notification_date + years * 365
-        while expiration_date.month() < notification_date.month():
-            expiration_date += 1
-        while expiration_date.day() < notification_date.day():
-            expiration_date += 1
-
+        expiration_date = _computeExpirationate(licence, notification_date)
         if not expiration_event:
             config = licence.getUrbanConfig()
             expiration_eventtype = config.getEventTypesByInterface(ILicenceExpirationEvent)[0]
@@ -63,3 +59,21 @@ def createLicenceExpirationEvent(decision_event, event):
     else:
         if expiration_event:
             expiration_event.setEventDate(None)
+
+
+def _computeExpirationate(licence, notification_date):
+    """
+     Expiration date = notification_date + years valueDelay
+    """
+    expiration_year = notification_date.year() + licence.getValidityDelay()
+    expiration_month = notification_date.month()
+    expiration_day = notification_date.day()
+
+    expiration_date = DateTime(
+        '{year}/{month}/{day}'.format(
+            day=expiration_day,
+            month=expiration_month,
+            year=expiration_year,
+        )
+    )
+    return expiration_date
