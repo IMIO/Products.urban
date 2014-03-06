@@ -1167,14 +1167,14 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 return NOT_UNO_ENABLED_PYTHON % value
         return
 
-    security.declarePublic('getCurrentFolderManager')
-    def getCurrentFolderManagerInitials():
+    security.declarePublic('getCurrentFolderManagerInitials')
+    def getCurrentFolderManagerInitials(self):
         """
           Returns the current FolderManager initials or object
         """
         foldermanager = getCurrentFolderManager()
         if foldermanager:
-            return fm.getInitials()
+            return foldermanager.getInitials()
         return ''
 
     security.declarePublic('getCityName')

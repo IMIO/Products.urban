@@ -21,7 +21,7 @@ def getCurrentFolderManager():
     current_user_id = api.user.get_current().getId()
     for foldermanager in foldermanagers.objectValues('FolderManager'):
         if foldermanager.getPloneUserId() == current_user_id:
-            return fm
+            return foldermanager
     return None
 
 
