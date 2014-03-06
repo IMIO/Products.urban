@@ -15,7 +15,7 @@ def contentmigrationLogger(oldObject, **kwargs):
     return True
 
 
-def migrateToUrban130(context):
+def migrateToUrban160(context):
     """
      Launch every migration steps for the version 1.6.0
     """
