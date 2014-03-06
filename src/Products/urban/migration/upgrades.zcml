@@ -4,14 +4,6 @@
     i18n_domain="urban">
 
     <gs:upgradeStep
-        title="Upgrade urban to 1.1.8"
-        description="urban upgrade step"
-        source="1.1.7"
-        destination="1.1.8"
-        handler=".migrate_to_118.migrateToUrban118"
-        profile="Products.urban:default" />
-
-    <gs:upgradeStep
         title="Upgrade urban to 1.1.9"
         description="urban upgrade step"
         source="1.1.8"
@@ -33,6 +25,14 @@
         source="1.2.0"
         destination="1.3.0"
         handler=".migrate_to_130.migrateToUrban130"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Upgrade urban to 1.6.0"
+        description="urban upgrade step"
+        source="1.3.0"
+        destination="1.6.0"
+        handler=".migrate_to_160.migrateToUrban160"
         profile="Products.urban:default" />
 
 </configure>

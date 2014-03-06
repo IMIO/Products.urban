@@ -6,6 +6,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban.browser.table.urbantable import LicenceListingTable
 from Products.urban.browser.table.urbantable import AllLicencesListingTable
 from Products.urban.config import ORDERED_URBAN_TYPES
+from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import getLicenceFolderId
 from Products.urban.utils import getLicenceFolder
 
@@ -54,18 +55,19 @@ class UrbanView(BrowserView):
         """
         context = aq_inner(self.context)
         urban_tool = getToolByName(context, 'portal_urban')
-        currentfoldermanager = urban_tool.getCurrentFolderManager(initials=False)
+        currentfoldermanager = getCurrentFolderManager()
         currentfoldermanager_uid = currentfoldermanager and currentfoldermanager.UID() or ''
         foldermanagers = urban_tool.foldermanagers.objectValues()
-        return [(fm.UID(), fm.Title().split('(')[0]) for fm in foldermanagers if fm.UID() != currentfoldermanager_uid]
+
+        foldermanagers = [(fm.UID(), fm.Title().split('(')[0]) for fm in foldermanagers if fm.UID() != currentfoldermanager_uid]
+
+        return foldermanagers
 
     def amIFolderManager(self):
         """
-         return the folder manager bound to the current plone id user if it exists
+         Return the folder manager bound to the current plone id user if it exists
         """
-        context = aq_inner(self.context)
-        urban_tool = getToolByName(context, 'portal_urban')
-        return urban_tool.getCurrentFolderManager(initials=False)
+        return getCurrentFolderManager()
 
     def listAvailableStates(self):
         """

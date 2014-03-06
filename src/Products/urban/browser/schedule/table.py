@@ -17,6 +17,7 @@ from Products.urban.browser.table.tablevalue import ValuesForUrbanListing
 
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import getLicenceFolderId
 
 import logging
@@ -199,8 +200,7 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
 
         if foldermanager != 'all':
             if foldermanager == 'me' or not foldermanager:
-                tool = api.portal.get_tool('portal_urban')
-                current_fm = tool.getCurrentFolderManager(initials=False)
+                current_fm = getCurrentFolderManager()
                 foldermanager = current_fm and current_fm.UID() or None
             if foldermanager:
                 query_string['folder_manager'] = foldermanager

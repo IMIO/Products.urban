@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
+from Products.urban.utils import getCurrentFolderManager
 
 
 def setDefaultValuesEvent(licence, event):
@@ -30,8 +30,7 @@ def _setDefaultTextValues(licence):
 
 
 def _setDefaultFolderManagers(licence):
-    tool = getToolByName(licence, 'portal_urban')
-    licence.setFoldermanagers(tool.getCurrentFolderManager(initials=False))
+    licence.setFoldermanagers(getCurrentFolderManager())
 
 
 def postCreationActions(licence, event):

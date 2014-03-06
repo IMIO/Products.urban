@@ -12,6 +12,19 @@ from Products.urban.config import URBAN_TYPES
 from plone import api
 
 
+def getCurrentFolderManager():
+    """
+     Returns the current FolderManager initials or object
+    """
+    portal_urban = api.portal.get_tool('portal_urban')
+    foldermanagers = portal_urban.foldermanagers
+    current_user_id = api.user.get_current().getId()
+    for foldermanager in foldermanagers.objectValues('FolderManager'):
+        if foldermanager.getPloneUserId() == current_user_id:
+            return fm
+    return None
+
+
 def getLicenceSchema(licencetype):
     if licencetype not in URBAN_TYPES:
         return None

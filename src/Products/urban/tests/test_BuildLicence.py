@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from DateTime import DateTime
+from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import getLicenceFolder
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_LICENCES
@@ -96,14 +97,14 @@ class TestBuildLicence(unittest.TestCase):
         LICENCE_ID = 'licence2'
         buildlicences.invokeFactory('BuildLicence', LICENCE_ID)
         buildLicence2 = getattr(buildlicences, LICENCE_ID)
-        buildLicence2.setFoldermanagers(self.portal_urban.getCurrentFolderManager(initials=False))
+        buildLicence2.setFoldermanagers(getCurrentFolderManager())
         #3 check if agent treatment exist
         self.assertEqual(buildLicence2.getFoldermanagers()[0].getPloneUserId(), 'urbaneditor')
         at.setPloneUserId('urbanreader')
         LICENCE_ID = 'licence3'
         buildlicences.invokeFactory('BuildLicence', LICENCE_ID)
         buildLicence3 = getattr(buildlicences, LICENCE_ID)
-        buildLicence3.setFoldermanagers(self.portal_urban.getCurrentFolderManager(initials=False))
+        buildLicence3.setFoldermanagers(getCurrentFolderManager())
         self.assertEqual(len(buildLicence3.getFoldermanagers()), 0)
 
     def testGetAllAdvicesWithoutOpinionRequest(self):

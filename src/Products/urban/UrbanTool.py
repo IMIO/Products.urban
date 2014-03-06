@@ -58,6 +58,7 @@ from Products.DataGridField.DataGridField import FixedRow
 from Products.DataGridField.FixedColumn import FixedColumn
 from Products.urban.utils import getOsTempFolder
 from Products.urban.utils import ParcelHistoric
+from Products.urban.utils import getCurrentFolderManager
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS
 from Products.urban.config import GLOBAL_TEMPLATES
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
@@ -1167,26 +1168,14 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return
 
     security.declarePublic('getCurrentFolderManager')
-    def getCurrentFolderManager(self, initials=True):
+    def getCurrentFolderManagerInitials():
         """
           Returns the current FolderManager initials or object
         """
-        #the current FolderManager is based on the current Plone User and the
-        #ploneUserId defined on the folderManagers for the 'obj' kind of licence
-        folderManagersFolder = self.foldermanagers
-        pm = getToolByName(self, 'portal_membership')
-        currentPloneUserId = pm.getAuthenticatedMember().getId()
-        for fm in folderManagersFolder.objectValues('FolderManager'):
-            if fm.getPloneUserId() == currentPloneUserId:
-                if initials:
-                    return fm.getInitials()
-                else:
-                    return fm
-        #if we are here, the current user is using the application without being
-        #a foldermanager, like 'admin' for example
-        if initials:
-            return ''
-        return None
+        foldermanager = getCurrentFolderManager()
+        if foldermanager:
+            return fm.getInitials()
+        return ''
 
     security.declarePublic('getCityName')
     def getCityName(self, prefixed=False):

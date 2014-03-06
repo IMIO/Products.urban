@@ -2,6 +2,7 @@
 from Products.urban import UrbanMessage as _
 from Products.urban.interfaces import IUrbanEventType
 from Products.urban.interfaces import IFolderManager
+from Products.urban.utils import getCurrentFolderManager
 
 from plone import api
 
@@ -44,10 +45,9 @@ class folderManagersVocabulary():
         """
           Returns the available folder managers
         """
-        urban_tool = api.portal.get_tool('portal_urban')
         catalog = api.portal.get_tool('portal_catalog')
 
-        current_foldermanager = urban_tool.getCurrentFolderManager(initials=False)
+        current_foldermanager = getCurrentFolderManager()
         current_foldermanager_uid = current_foldermanager and current_foldermanager.UID() or ''
         foldermanagers = catalog(
             object_provides=IFolderManager.__identifier__,
