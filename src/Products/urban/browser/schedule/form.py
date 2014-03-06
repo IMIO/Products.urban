@@ -183,13 +183,5 @@ class ScheduleForm(form.Form):
         super(ScheduleForm, self).updateWidgets()
 
         for field_name in self.datagrid_field_names:
-            self.widgets[field_name].auto_append = False
-
-        #self.hideDataGridWidget('buildlicence_events')
-
-    def hideDataGridWidget(self, field_name):
-        data_grid = self.widgets[field_name]
-        data_grid.mode = HIDDEN_MODE
-        add_line_widget = data_grid.widgets[-2]
-        css_classes = add_line_widget.klass
-        add_line_widget.klass = '{} {}'.format(css_classes, 'schedule-hide-form-input')
+            if field_name in self.widgets:
+                self.widgets[field_name].auto_append = False
