@@ -139,11 +139,6 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
 
     @property
     def values(self):
-        events = self.getUrbanEventsToList()
-        return events
-
-    def getUrbanEventsToList(self, **kwargs):
-
         scheduleview = self.context
         if scheduleview.isSearchFormSubmittted():
             events = scheduleview.searchScheduledEvents()
