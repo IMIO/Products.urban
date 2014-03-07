@@ -73,9 +73,18 @@
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.schedule.interfaces.IScheduleListingTable"
-     factory="..table.column.FoldermanagerColumn"
+     factory=".table.AllScheduledEventsOfLicenceColumn"
      provides="z3c.table.interfaces.IColumn"
      name="foldermanagerColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+     factory="..table.column.FoldermanagerColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="allscheduledeventsColumn"
   />
 
   <!-- adapter for the default values in the licence events form inputs -->

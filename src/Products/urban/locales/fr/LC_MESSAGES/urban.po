@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2014-03-03 15:20+0000\n"
+"POT-Creation-Date: 2014-03-05 08:00+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -78,6 +78,9 @@ msgstr "Déclaration"
 
 msgid "Delete"
 msgstr "Supprimer le permis"
+
+msgid "Display each licence only once"
+msgstr "Afficher chaque dossier une seule fois"
 
 msgid "Division"
 msgstr "Division"
@@ -807,6 +810,9 @@ msgstr "Localité"
 
 msgid "label_colname_adr2"
 msgstr "Rue et numéro"
+
+msgid "label_colname_all_scheduled_events"
+msgstr " "
 
 msgid "label_colname_applicant_data"
 msgstr "Coordonnées du demandeur"

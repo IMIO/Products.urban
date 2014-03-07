@@ -38,10 +38,6 @@ class ScheduleListingTableForLicence(Table):
     sortOrder = 'descending'
     sortOn = None
 
-    startBatchingAt = 15
-    batchSize = 15
-    batchProviderName = 'plonebatch'
-
     # add  __name__ to table to avoid traversal error
     # in OFS.absoluteurl. __str__
     __name__ = ''
@@ -53,17 +49,9 @@ class ScheduleListingTable(ScheduleListingTableForLicence):
     """
     implements(IScheduleListingTable)
 
-    cssClasses = {'table': 'listing largetable'}
-    sortOrder = 'descending'
-    sortOn = None
-
     startBatchingAt = 15
     batchSize = 15
     batchProviderName = 'plonebatch'
-
-    # add  __name__ to table to avoid traversal error
-    # in OFS.absoluteurl. __str__
-    __name__ = ''
 
 
 class ScheduleLicenceTitleColumnHeader(TitleColumnHeader):
@@ -145,6 +133,22 @@ class ScheduleEventDatesColumn(UrbanColumn):
 
         dateline = u'<div>{date_label}: {date}</div>'
         cell = u''.join([dateline.format(**date) for date in dates])
+
+        return cell
+
+
+class AllScheduledEventsOfLicenceColumn(UrbanColumn):
+    """ Propose a link to show all the scheduled events of the licence in a popup. """
+
+    header = u'label_colname_all_scheduled_events'
+    weight = 10
+
+    def renderCell(self, schedule_item):
+        url = schedule_item.licence.getURL()
+
+        img = '<img src="schedule.png" class="urban-linkedfolders-icon"/>'
+        link = '<a class="link-overlay" href="{url}/@@licenceschedulelisting">{img}</a>'.format(url=url, img=img)
+        cell = '<div style="text-align:center" id="urban-parcel-historic-related-licences">{link}</div>'.format(link=link)
 
         return cell
 

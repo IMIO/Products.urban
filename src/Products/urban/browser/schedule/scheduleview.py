@@ -106,6 +106,7 @@ class ScheduleView(grok.View):
         form_datas = self.form.extractData()[0]
         foldermanager_uid = form_datas.get('foldermanager')
         sort_by_delay = not form_datas.get('sort_by_licence')
+        no_duplicated_licences = form_datas.get('no_duplicated_licences')
 
         sorted_events = []
 
@@ -114,6 +115,15 @@ class ScheduleView(grok.View):
             events = [ItemForScheduleListing(event) for event in event_brains]
             events.sort(key=lambda event: -event.delay)
             sorted_events.extend(events)
+
+        if no_duplicated_licences:
+            licences_found = set()
+            tmp = []
+            for event in sorted_events:
+                if event.licence.UID not in licences_found:
+                    tmp.append(event)
+                    licences_found.add(event.licence.UID)
+            sorted_events = tmp
 
         if sort_by_delay:
             sorted_events.sort(key=lambda event: -event.delay)
@@ -189,7 +199,7 @@ class EventsListingForLicenceView(BrowserView):
     def renderScheduledEventsListing(self):
         listing = ScheduleListingTableForLicence(self, self.request)
         listing.update()
-        listing_html = u'{}{}'.format(listing.render(), listing.renderBatch())
+        listing_html = u'{}'.format(listing.render())
         return listing_html
 
     def values(self):
