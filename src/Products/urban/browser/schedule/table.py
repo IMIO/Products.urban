@@ -14,7 +14,6 @@ from Products.urban.browser.table.column import TitleColumnHeader
 from Products.urban.browser.table.column import UrbanColumn
 from Products.urban.browser.table.tablevalue import BrainForUrbanTable
 from Products.urban.browser.table.tablevalue import ObjectForUrbanTable
-from Products.urban.browser.table.tablevalue import ValuesForUrbanListing
 
 from Products.urban.interfaces import IGenericLicence
 
@@ -148,23 +147,6 @@ class ScheduleEventDatesColumn(UrbanColumn):
         cell = u''.join([dateline.format(**date) for date in dates])
 
         return cell
-
-
-class ValuesForScheduleListing(ValuesForUrbanListing):
-    """
-    Find events in progress matching form criterias.
-    Compute their time delay values, wrap them and sort them
-    so they can be rendered in the schedule result listing.
-    """
-
-    @property
-    def values(self):
-        scheduleview = self.context
-        if scheduleview.isSearchFormSubmittted():
-            events = scheduleview.searchScheduledEvents()
-        else:
-            events = scheduleview.getDefaultScheduledEvents()
-        return events
 
 
 class ItemForScheduleListing(BrainForUrbanTable):

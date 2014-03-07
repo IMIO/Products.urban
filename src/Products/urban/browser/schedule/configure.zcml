@@ -78,14 +78,6 @@
      name="foldermanagerColumn"
   />
 
-  <adapter
-     for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
-     factory=".table.ValuesForScheduleListing"
-     provides="z3c.table.interfaces.IValues"
-  />
-
   <!-- adapter for the default values in the licence events form inputs -->
   <adapter
      for="zope.interface.Interface

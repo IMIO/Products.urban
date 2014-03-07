@@ -79,13 +79,20 @@ class ScheduleView(grok.View):
 
         return form_is_submitted
 
+    def values(self):
+        if self.isSearchFormSubmittted():
+            events = self.searchScheduledEvents()
+        else:
+            events = self.getDefaultScheduledEvents()
+        return events
+
     def getDefaultScheduledEvents(self):
         foldermanager = getCurrentFolderManager()
+        events = []
 
         if not foldermanager:
-            return []
+            return events
 
-        events = []
         licence_types = foldermanager.getManageableLicences()
         for licence_type in licence_types:
             event_brains = self.findSchedulableUrbanEvents(licence_type, ['all'], foldermanager.UID())
