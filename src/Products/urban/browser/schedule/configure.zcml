@@ -78,6 +78,18 @@
      provides="z3c.table.interfaces.IValues"
   />
 
+  <!-- adapter for the default values in the licence events form inputs -->
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          z3c.form.interfaces.IForm
+          Products.urban.browser.schedule.interfaces.IScheduleEventField
+          collective.z3cform.datagridfield.interfaces.IDataGridField"
+     factory=".form.defaultValueForLicenceEventField"
+     provides="z3c.form.interfaces.IValue"
+     name="default"
+  />
+
   <utility
     provides="zope.schema.interfaces.IVocabularyFactory"
     component=".vocabulary.folderManagersVocabularyFactory"

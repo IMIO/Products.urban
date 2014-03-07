@@ -18,3 +18,10 @@ class IDelayTerm(Interface):
     """
     Marker interface for a maximum deadline Column
     """
+
+
+class IScheduleEventField(Interface):
+    """
+    Marker interface for all the 'licence events' form fields.
+    Useful for the default values adapter of these fields.
+    """

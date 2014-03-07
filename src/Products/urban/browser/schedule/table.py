@@ -15,10 +15,7 @@ from Products.urban.browser.table.tablevalue import BrainForUrbanTable
 from Products.urban.browser.table.tablevalue import ObjectForUrbanTable
 from Products.urban.browser.table.tablevalue import ValuesForUrbanListing
 
-from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IGenericLicence
-from Products.urban.utils import getCurrentFolderManager
-from Products.urban.utils import getLicenceFolderId
 
 import logging
 logger = logging.getLogger('urban: Schedule')
@@ -146,83 +143,13 @@ class ValuesForScheduleListing(ValuesForUrbanListing):
         return events
 
     def getUrbanEventsToList(self, **kwargs):
-        form_datas = self.context.form.extractData()[0]
-        foldermanager = form_datas.get('foldermanager')
-        sort_by_delay = not form_datas.get('sort_by_licence')
 
-        sorted_events = []
-
-        for licence, data in self.extractLicenceDatas(form_datas):
-            event_brains = self.findSchedulableUrbanEvents(licence, data, foldermanager)
-            events = [ItemForScheduleListing(event) for event in event_brains]
-            events.sort(key=lambda event: -event.delay)
-            sorted_events.extend(events)
-
-        if sort_by_delay:
-            sorted_events.sort(key=lambda event: -event.delay)
-
-        return sorted_events
-
-    def extractLicenceDatas(self, datas):
-        licences = []
-        for form_input, data in datas.iteritems():
-            if form_input.startswith('events_'):
-                null_value = data and len(data) == 1 and data[0]['event'] is None
-                data = data is None and [{'event': 'all'}] or data
-                if not null_value:
-                    licence_type = form_input.split('_')[1]
-                    data = [row['event'] for row in data]
-                    licences.append((licence_type, data))
-
-        return licences
-
-    def findSchedulableUrbanEvents(self, licence_type, eventtype_uids, foldermanager='all'):
-        """
-         Input: a licence_type, eventtypes uids  and a foldermanager
-         Returns all the UrbanEvent brains having their eventtype in eventtype_uids
-         such as the parent licence portal_type is  'licence_type' and that licence
-         foldermanager is 'foldermanager'.
-        """
-        catalog = api.portal.get_tool('portal_catalog')
-        ref_catalog = api.portal.get_tool('reference_catalog')
-
-        site = api.portal.getSite()
-        site_path = '/'.join(site.getPhysicalPath())
-        folder = getLicenceFolderId(licence_type)
-
-        path = '{site_path}/urban/{folder}'.format(site_path=site_path, folder=folder)
-
-        query_string = {
-            'object_provides': IUrbanEvent.__identifier__,
-            'review_state': 'in_progress',
-            'path': {'query': path},
-        }
-
-        if foldermanager != 'all':
-            if foldermanager == 'me' or not foldermanager:
-                current_fm = getCurrentFolderManager()
-                foldermanager = current_fm and current_fm.UID() or None
-            if foldermanager:
-                query_string['folder_manager'] = foldermanager
-
-        event_brains = catalog(query_string)
-
-        to_return = []
-
-        for brain in event_brains:
-            relations = ref_catalog(sourceUID=brain.UID, relationship='UrbanEventType')
-            if relations:
-                eventtype_uid = relations[0].targetUID
-                # eventtype 'schedulability' (means deadlinedelay > 0) is
-                # indexed on the 'last_key_event' index
-                schedulable = catalog(UID=eventtype_uid, last_key_event='schedulable')
-                all_events = eventtype_uid in eventtype_uids
-                selected_event = 'all' in eventtype_uids
-                all_opinions_request = 'all_opinions' in eventtype_uids and brain.portal_type == 'UrbanEventOpinionRequest'
-                if schedulable and (all_events or selected_event or all_opinions_request):
-                    to_return.append(brain)
-
-        return to_return
+        scheduleview = self.context
+        if scheduleview.isSearchFormSubmittted():
+            events = scheduleview.searchScheduledEvents()
+        else:
+            events = scheduleview.getDefaultScheduledEvents()
+        return events
 
 
 class ItemForScheduleListing(BrainForUrbanTable):
