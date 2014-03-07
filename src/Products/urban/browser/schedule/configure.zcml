@@ -7,6 +7,14 @@
 
   <grok:grok package=".scheduleview"/>
 
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="licenceschedulelisting"
+     class=".scheduleview.EventsListingForLicenceView"
+     template="templates/licenceschedulelisting.pt"
+     permission="zope2.View"
+  />
+
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
@@ -28,7 +36,7 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+          Products.urban.browser.schedule.interfaces.IScheduleListingTableForLicence"
      factory=".table.ScheduleEventTitleColumn"
      provides="z3c.table.interfaces.IColumn"
      name="lateEventtitleColumn"
@@ -37,7 +45,7 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+          Products.urban.browser.schedule.interfaces.IScheduleListingTableForLicence"
      factory=".table.TimeDelayColumn"
      provides="z3c.table.interfaces.IColumn"
      name="timeDelayColumn"
@@ -46,7 +54,7 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+          Products.urban.browser.schedule.interfaces.IScheduleListingTableForLicence"
      factory=".table.DelayTerm"
      provides="z3c.table.interfaces.IColumn"
      name="delayTermColumn"

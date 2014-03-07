@@ -7,6 +7,7 @@ from Products.PageTemplates.Expressions import getEngine
 from Products.urban import UrbanMessage as _
 from Products.urban.browser.schedule.interfaces import IDelayTerm
 from Products.urban.browser.schedule.interfaces import IScheduleListingTable
+from Products.urban.browser.schedule.interfaces import IScheduleListingTableForLicence
 from Products.urban.browser.schedule.interfaces import ITimeDelayColumn
 from Products.urban.browser.table.column import TitleColumn
 from Products.urban.browser.table.column import TitleColumnHeader
@@ -28,9 +29,28 @@ from zope.i18n import translate
 from zope.interface import implements
 
 
-class ScheduleListingTable(Table):
+class ScheduleListingTableForLicence(Table):
     """
-    Licence listing for schedule
+    Events listing for schedule view on licence
+    """
+    implements(IScheduleListingTableForLicence)
+
+    cssClasses = {'table': 'listing largetable'}
+    sortOrder = 'descending'
+    sortOn = None
+
+    startBatchingAt = 15
+    batchSize = 15
+    batchProviderName = 'plonebatch'
+
+    # add  __name__ to table to avoid traversal error
+    # in OFS.absoluteurl. __str__
+    __name__ = ''
+
+
+class ScheduleListingTable(ScheduleListingTableForLicence):
+    """
+    Licence listing for global schedule
     """
     implements(IScheduleListingTable)
 

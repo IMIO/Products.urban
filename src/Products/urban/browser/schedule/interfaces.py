@@ -4,7 +4,13 @@ from zope.interface import Interface
 
 class IScheduleListingTable(Interface):
     """
-    Marker interface for schedule display table
+    Marker interface for general schedule display table
+    """
+
+
+class IScheduleListingTableForLicence(Interface):
+    """
+    Marker interface for events schedule display table on a licence
     """
 
 

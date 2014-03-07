@@ -10,10 +10,7 @@ from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 
-from z3c.table.interfaces import IValues
-
 from zope.event import notify
-from zope.component import getMultiAdapter
 
 import unittest
 
@@ -149,14 +146,12 @@ class TestScheduleView(unittest.TestCase):
         """
         scheduleview = self.scheduleview
         scheduleview.update()
-        table = scheduleview.schedulelisting
-        schedule_values = getMultiAdapter((self.portal, self.portal.REQUEST, table), IValues)
 
         licence_type = 'buildlicence'
         eventtype_uids = ['all']
         foldermanager = 'all'
 
-        event_brains = schedule_values.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager)
+        event_brains = scheduleview.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager)
         events_found = [brain.getObject() for brain in event_brains]
 
         # check soundness and completeness
@@ -178,8 +173,6 @@ class TestScheduleView(unittest.TestCase):
         """
         scheduleview = self.scheduleview
         scheduleview.update()
-        table = scheduleview.schedulelisting
-        schedule_values = getMultiAdapter((self.portal, self.portal.REQUEST, table), IValues)
 
         # restrict the search to only two types of events
         eventtypes_folder = self.portal_urban.buildlicence.urbaneventtypes
@@ -193,7 +186,7 @@ class TestScheduleView(unittest.TestCase):
         licence = self.urban.buildlicences.objectValues()[0]
         licence.createUrbanEvent(eventtype_uids[0])
 
-        event_brains = schedule_values.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager)
+        event_brains = scheduleview.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager)
         events_found = [brain.getObject() for brain in event_brains]
 
         # check soundness and completeness
@@ -215,8 +208,6 @@ class TestScheduleView(unittest.TestCase):
         """
         scheduleview = self.scheduleview
         scheduleview.update()
-        table = scheduleview.schedulelisting
-        schedule_values = getMultiAdapter((self.portal, self.portal.REQUEST, table), IValues)
 
         # restrict the search to a specific foldermanager
         foldermanager = self.portal_urban.foldermanagers.objectValues()[0]
@@ -229,7 +220,7 @@ class TestScheduleView(unittest.TestCase):
         licence.setFoldermanagers(foldermanager_uid)
         notify(ObjectEditedEvent(licence))
 
-        event_brains = schedule_values.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager_uid)
+        event_brains = scheduleview.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager_uid)
         events_found = [brain.getObject() for brain in event_brains]
 
         # check soundness and completeness
@@ -244,7 +235,7 @@ class TestScheduleView(unittest.TestCase):
                 else:
                     self.assertTrue(event not in events_found)
 
-    def test_resuts_ordered_by_lateness(self):
+    def test_default_resuts_ordered_by_lateness(self):
         """ By default events should be sorted by delay lateness """
 
         scheduleview = self.scheduleview
@@ -259,6 +250,43 @@ class TestScheduleView(unittest.TestCase):
         self.assertTrue(len(delays) > 4 and delays[0] != delays[-1])
 
         self.assertTrue(delays == sorted(delays))
+
+    def test_no_default_result_displayed_when_current_user_is_not_urban_foldermanager(self):
+        """
+         The default results should be the licences of of the current user.
+         If the current user is not an urban foldermanager, no result should be displayed
+        """
+        login(self.portal, 'urbaneditor')
+        self.browserLogin('urbaneditor')
+
+        scheduleview = self.scheduleview
+        scheduleview.update()
+        table = scheduleview.schedulelisting
+        results = table.values
+
+        self.assertTrue(len(results) == 0)
+
+    def test_licences_in_default_result_only_belongs_to_current_foldermanager(self):
+        """
+         The licences listed in the default result should always belongs to the
+         current urban foldermanager
+        """
+        from Products.urban.utils import getCurrentFolderManager
+
+        scheduleview = self.scheduleview
+        scheduleview.update()
+        table = scheduleview.schedulelisting
+
+        results = table.values
+        current_foldermanager = getCurrentFolderManager()
+
+        # we need results to be be able to prove our statement..
+        self.assertTrue(len(results) > 0)
+
+        for result in results:
+            licence = result.licence.getObject()
+            licence_foldermanagers = licence.getFoldermanagers()
+            self.assertTrue(current_foldermanager in licence_foldermanagers)
 
     def test_UrbanEventType_has_attribute_delayComputation(self):
         catalog = api.portal.get_tool('portal_catalog')

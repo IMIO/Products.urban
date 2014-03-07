@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+
+from Products.Five import BrowserView
+
 from Products.urban.browser.schedule.form import ScheduleForm
 from Products.urban.browser.schedule.table import ItemForScheduleListing
 from Products.urban.browser.schedule.table import ScheduleListingTable
+from Products.urban.browser.schedule.table import ScheduleListingTableForLicence
 
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import getCurrentFolderManager
@@ -163,5 +167,48 @@ class ScheduleView(grok.View):
                 all_opinions_request = 'all_opinions' in eventtype_uids and brain.portal_type == 'UrbanEventOpinionRequest'
                 if schedulable and (all_events or selected_event or all_opinions_request):
                     to_return.append(brain)
+
+        return to_return
+
+
+class EventsListingForLicenceView(BrowserView):
+    """ """
+
+    def __init__(self, context, request):
+        super(EventsListingForLicenceView, self).__init__(context, request)
+        self.context = context
+        self.request = request
+
+    def renderScheduledEventsListing(self):
+        listing = ScheduleListingTableForLicence(self, self.request)
+        listing.update()
+        listing_html = u'{}{}'.format(listing.render(), listing.renderBatch())
+        return listing_html
+
+    def values(self):
+        """ """
+        catalog = api.portal.get_tool('portal_catalog')
+        ref_catalog = api.portal.get_tool('reference_catalog')
+        licence = self.context
+
+        event_brains = catalog(
+            object_provides=IUrbanEvent.__identifier__,
+            review_state='in_progress',
+            path={'query': '/'.join(licence.getPhysicalPath())},
+        )
+
+        to_return = []
+
+        for brain in event_brains:
+            relations = ref_catalog(sourceUID=brain.UID, relationship='UrbanEventType')
+            if relations:
+                eventtype_uid = relations[0].targetUID
+                # eventtype 'schedulability' (means deadlinedelay > 0) is
+                # indexed on the 'last_key_event' index
+                schedulable = catalog(UID=eventtype_uid, last_key_event='schedulable')
+                if schedulable:
+                    to_return.append(brain)
+
+        to_return = [ItemForScheduleListing(event) for event in to_return]
 
         return to_return

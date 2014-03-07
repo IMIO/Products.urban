@@ -83,6 +83,10 @@ class IScheduleForm(Interface):
         default='me',
         vocabulary='urban.folder_managers',
     )
+    no_duplicated_licences = schema.Bool(
+        title=_(u"Display each licence only once"),
+        required=False,
+    )
     sort_by_licence = schema.Bool(
         title=_(u"Sort by licence type"),
         required=False,
