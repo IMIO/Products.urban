@@ -80,7 +80,7 @@ msgid "Delete"
 msgstr "Supprimer le permis"
 
 msgid "Display each licence only once"
-msgstr "Afficher chaque dossier une seule fois"
+msgstr "N'afficher chaque dossier qu'une seule fois"
 
 msgid "Division"
 msgstr "Division"
