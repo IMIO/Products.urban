@@ -22,7 +22,7 @@ develop-eggs: bin/python bootstrap.py
 docs: docs/html/index.html
 
 docs/html/index.html: README.rst docs/*.rst docs/urban/*.rst bin/sphinx-build
-	bin/sphinx-build docs docs/html
+	bin/sphinx-build -W docs docs/html
 	@touch $@
 	@echo "Documentation was generated at '$@'."
 

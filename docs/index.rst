@@ -1,15 +1,21 @@
 .. include:: ../README.rst
 
 
-Urban documentation
-=======================
+Pour commencer
+==============
+
+
+Manuel utilisateur complet
+==========================
 
 .. toctree::
     :maxdepth: 2
 
+    urban/index.rst
 
-Indices and tables
-==================
+
+Index and recherches
+====================
 
 * :ref:`genindex`
 * :ref:`search`
