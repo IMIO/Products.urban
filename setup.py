@@ -60,6 +60,7 @@ setup(name='Products.urban',
           'plone.api',  # to remove once we use a plone version including plone.api
           'imio.actionspanel',
           'plonetheme.imioapps',
+          'Sphinx',
       ],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',

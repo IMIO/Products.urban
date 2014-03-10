@@ -9,7 +9,7 @@ extras = src/Products/urban/scripts/config/extras.py.tmpl
 
 .PHONY: test instance cleanall portals
 
-all: test
+all: test docs
 
 bin/python:
 	virtualenv-2.7 --no-setuptools --no-site-packages .
@@ -18,6 +18,16 @@ develop-eggs: bin/python bootstrap.py
 	bin/python ez_setup.py
 	bin/easy_install -U "distribute==0.6.49"
 	./bin/python bootstrap.py -v 2.1.0
+
+docs: docs/html/index.html
+
+docs/html/index.html: README.rst docs/*.rst docs/urban/*.rst bin/sphinx-build
+	bin/sphinx-build docs docs/html
+	@touch $@
+	@echo "Documentation was generated at '$@'."
+
+bin/sphinx-build: .installed.cfg
+	@touch $@
 
 bin/buildout: develop-eggs
 
