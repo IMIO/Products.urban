@@ -1182,7 +1182,7 @@ urbanEventTypes = {
             'deadLineDelay': 40,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "env3-recepisse", 'title': "Récepissé de la déclaration"},),
+            'podTemplates': ({'id': "env1-recepisse", 'title': "Récepissé de la déclaration"},),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
         {
