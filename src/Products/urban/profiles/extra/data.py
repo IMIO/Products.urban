@@ -1193,7 +1193,15 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': ({'id': "env1-transmis-demande-ft", 'title': "Lettre de transmis au FT"},),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+        },
+        {
+            'id': "dossier-incomplet",
+            'title': "Dossier incomplet",
+            'activatedFields': [],
+            'deadLineDelay': 20,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
         },
         {
             'id': "decision",
