@@ -115,8 +115,8 @@
                                   tal:define="ctype python: context.portal_types.getTypeInfo('Claimant');
                                               member context/@@plone_portal_state/member;"
                                   i18n:domain="urban"
-                                  name="quickAdd" tal:attributes="action python: context.absolute_url() + '/createObject'"
-                                  action="createObject" method="post">
+                                  tal:attributes="action python: context.absolute_url() + '/createObject'"
+                                  name="quickAdd" method="post">
                                 <img src="#" title="#" tal:attributes="src python: ctype.getIconExprObject(); title ctype/description"
                                       i18n:attributes="title" />
                                 <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
@@ -144,8 +144,8 @@
                         <dd id="fieldset-urbaneventinquiry_recipients">
                             <tal:block condition="python: member.has_permission('Modify portal content', context)
                                                           and linkedUrbanEventType.getEventTypeType() == 'Products.urban.interfaces.IInquiryEvent'">
-                                <form action="addInvestigationPO">
-                                    <input type="submit" class="context"
+                                <form tal:attributes="action context/absolute_url" method="post">
+                                    <input type="submit" class="context" name="find_recipients_cadastre"
                                            tal:attributes="value string:Rechercher les propriétaires situés dans un rayon de 50m" />
                                 </form>
                             </tal:block>
@@ -167,7 +167,7 @@
                             </tal:recipients>
                             <tal:block condition="python: member.has_permission('Modify portal content', context)
                                                           and linkedUrbanEventType.getEventTypeType() == 'Products.urban.interfaces.IInquiryEvent'">
-                                <form name="quickAdd" action="createRecipientCadatsre" method="post"
+                                <form name="quickAdd" method="post"
                                       tal:condition="python: member.has_permission('urban: Add RecipientCadastre', context)"
                                       tal:attributes="action python: context.absolute_url() + '/createObject?type_name=RecipientCadastre'">
                                     <input type="submit" id="event" value="Add recipientcadastre manually" class="context"

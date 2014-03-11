@@ -124,6 +124,11 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
         if self.hasPOWithoutAddress():
             plone_utils.addPortalMessage(_('There are parcel owners without any address found! Desactivate them!'), type="warning")
 
+    def __call__(self):
+        if 'find_recipients_cadastre' in self.request.form:
+            return self.getInvestigationPOs()
+        return self.index()
+
     def getParcels(self):
         context = aq_inner(self.context)
         return context.getParcels()
