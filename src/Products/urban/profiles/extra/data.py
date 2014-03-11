@@ -1186,6 +1186,16 @@ urbanEventTypes = {
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
         {
+            'id': "envoi-demande-FT",
+            'title': "Envoi de la demande au FT",
+            'activatedFields': [],
+            'deadLineDelay': 20,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': ({'id': "env1-transmis-demande-ft", 'title': "Lettre de transmis au FT"},),
+            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+        },
+        {
             'id': "decision",
             'title': "Décision (octroi ou refus)",
             'activatedFields': ['decisionDate', 'decision'],
