@@ -732,7 +732,8 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         config_id = licencetype.lower()
         portal_urban = api.portal.get_tool('portal_urban')
 
-        config_folder = getattr(portal_urban, config_id)
+        config_folder = portal_urban.getUrbanConfig(self)
+
         return config_folder
 
     security.declarePublic('attributeIsUsed')
