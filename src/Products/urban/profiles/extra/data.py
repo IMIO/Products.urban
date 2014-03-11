@@ -1192,7 +1192,7 @@ urbanEventTypes = {
             'deadLineDelay': 20,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "env1-transmis-demande-ft", 'title': "Lettre de transmis au FT"},),
+            'podTemplates': ({'id': "env1-transmis-demande-ft", 'title': "Transmis de la demande au FT"},),
         },
         {
             'id': "dossier-incomplet",
@@ -1218,16 +1218,26 @@ urbanEventTypes = {
             'activatedFields': [],
             'deadLineDelay': 20,
             'isKeyEvent': False,
-            'podTemplates': ({'id': "env1-transmis-complement-ft"}),
+            'podTemplates': ({'id': "env1-transmis-complement-ft", 'title': "Transmis d'un complément au FT"},),
         },
         {
             'id': "dossier-irrecevable",
-            'title': "Dossier incomplet",
+            'title': "Dossier irrecevable",
             'activatedFields': [],
             'deadLineDelay': 0,
-            'isKeyEvent': False,
+            'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
+        },
+        {
+            'id': "dossier-complet-recevable",
+            'title': "Dossier complet et recevable",
+            'activatedFields': [],
+            'deadLineDelay': 110,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
         },
         {
             'id': "decision",
@@ -1236,8 +1246,7 @@ urbanEventTypes = {
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': (
-            ),
+            'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
         },
         {
@@ -1246,8 +1255,7 @@ urbanEventTypes = {
             'eventDateLabel': "Date de validité",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': (
-            ),
+            'podTemplates': (),
             'TALCondition': "python: False",
             'eventTypeType': 'Products.urban.interfaces.ILicenceExpirationEvent',
         },
