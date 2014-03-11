@@ -1214,11 +1214,20 @@ urbanEventTypes = {
         },
         {
             'id': "envoi-complement-FT",
-            'title': "Récépissé d'un complément",
+            'title': "Envoi d'un complément au FT",
             'activatedFields': [],
             'deadLineDelay': 20,
             'isKeyEvent': False,
             'podTemplates': ({'id': "env1-transmis-complement-ft"}),
+        },
+        {
+            'id': "dossier-irrecevable",
+            'title': "Dossier incomplet",
+            'activatedFields': [],
+            'deadLineDelay': 0,
+            'isKeyEvent': False,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
         },
         {
             'id': "decision",
