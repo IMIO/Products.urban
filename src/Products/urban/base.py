@@ -173,6 +173,7 @@ class UrbanBase(object):
             'UrbanCertificateOne': 'CU1',
             'UrbanCertificateBase': 'CU1',
             'UrbanCertificateTwo': 'CU2',
+            'EnvClassOne': 'PE1',
             'EnvClassThree': 'DE',
             'Declaration': 'Decl',
             'Division': 'Div',
