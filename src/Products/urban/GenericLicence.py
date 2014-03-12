@@ -28,8 +28,6 @@ from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-import re
-import Levenshtein
 from zope.i18n import translate
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
@@ -37,7 +35,6 @@ from Products.urban.indexes import UrbanIndexes
 from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.interfaces import IUrbanCertificateBase
 from Products.urban import UrbanMessage as _
 
 from plone import api
@@ -859,76 +856,6 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
            Return the list of parcels (portionOut) for the Licence
         """
         return self.objectValues('PortionOut')
-
-    security.declarePublic('createParcelAndProprietary')
-    def createParcelAndProprietary(self, parcel_data, proprietary_data):
-        parcel_street = parcel_data.pop('location')
-        self.createApplicantFromParcel(parcel_street=parcel_street, **proprietary_data)
-        self.createParcel(parcel_data)
-
-    security.declarePublic('createParcelAndProprietary')
-    def createParcel(self, parcel_data):
-        portal_urban = api.portal.get_tool('portal_urban')
-        portal_urban.createPortionOut(container=self, **parcel_data)
-
-    def createApplicantFromParcel(self, proprietary, proprietary_city, proprietary_street, parcel_street):
-        """
-           Create the PortionOut with given parameters...
-        """
-        contact_type = 'Applicant'
-        if IUrbanCertificateBase.providedBy(self):
-            contact_type = 'Proprietary'
-
-        # need: parcel street, proprietary street
-        street_and_number = self.extractStreetAndNumber(proprietary_street)
-        person_street = street_and_number['street']
-        person_number = street_and_number['number']
-
-        street_and_number = self.extractStreetAndNumber(parcel_street)
-        parcel_street = street_and_number['street']
-        parcel_number = street_and_number['number']
-
-        # compare parcel street to proprietary street
-        # if they are the same, means fuzzy match on street name and EXACT match on number
-        same_street = Levenshtein.ratio(person_street, parcel_street) > 0.8
-        same_number = self.haveSameNumbers(person_number, parcel_number)
-        same_address = same_street and same_number
-        city = proprietary_city.split()
-        zipcode = city[0]
-        city = ' '.join(city[1:])
-
-        contacts = proprietary.split('&')
-        for contact in contacts:
-            names = contact.split(',')
-            contact_info = {
-                'isSameAddressAsWorks': same_address,
-                'name1': names[0],
-                'zipcode': zipcode,
-                'city': city,
-                'street': person_street,
-                'number': person_number,
-            }
-            if len(names) > 1:
-                contact_info['name2'] = names[1].split()[0].capitalize()
-            self.invokeFactory(contact_type, id=self.generateUniqueId(contact_type), **contact_info)
-
-        self.updateTitle()
-
-    def extractStreetAndNumber(self, address):
-        address_words = address.split()
-        number = address_words[-1]
-        if re.match('\d', number) and number.lower() != '1er':
-            street = ' '.join(address_words[0:-1])
-            return {'street': street, 'number': number}
-        else:
-            return {'street': address, 'number': ''}
-
-    def haveSameNumbers(self, num_a, num_b):
-        match_expr = '\d+'
-        numbers_a = re.findall(match_expr, num_a)
-        numbers_b = re.findall(match_expr, num_b)
-        common_numbers = list(set(numbers_a).intersection(set(numbers_b)))
-        return common_numbers
 
     security.declarePublic('updateTitle')
     def updateTitle(self):

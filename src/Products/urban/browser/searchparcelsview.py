@@ -1,9 +1,18 @@
-from zope.i18n import translate
 from Products.CMFCore.utils import getToolByName
+
 from Products.Five import BrowserView
+
 from Products.urban.UrbanTool import DB_QUERY_ERROR
 from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IUrbanCertificateBase
+
+from plone import api
+
+from zope.i18n import translate
+
+import Levenshtein
+import re
 
 
 class SearchParcelsView(BrowserView):
@@ -24,6 +33,33 @@ class SearchParcelsView(BrowserView):
             if 'division' in request or 'location' in request or 'prcOwner' in request:
                 plone_utils = getToolByName(context, 'plone_utils')
                 plone_utils.addPortalMessage(translate('warning_enter_search_criteria'), type="warning")
+
+    def __call__(self):
+        if 'add_parcel' in self.request.form:
+            parcel_data = {
+                'division': self.request.get('division', None),
+                'section': self.request.get('section', None),
+                'radical': self.request.get('radical', None),
+                'bis': self.request.get('bis', None),
+                'exposant': self.request.get('exposant', None),
+                'puissance': self.request.get('puissance', None),
+                'partie': self.request.get('partie', None),
+                'outdated': self.request.get('old', False),
+            }
+            if 'proprietary' in self.request.form:
+                proprietary_data = {
+                    'proprietary': self.request.get('proprietary', None),
+                    'proprietary_city': self.request.get('proprietary_city', None),
+                    'proprietary_address': self.request.get('proprietary_street', None),
+                }
+                parcel_data['location'] = self.request.get('location')
+                self.createParcelAndProprietary(parcel_data, proprietary_data)
+            else:
+                self.createParcel(parcel_data)
+
+            return self.request.response.redirect(self.context.absolute_url())
+
+        return self.index()
 
     def contextIsLicence(self):
         return IGenericLicence.providedBy(self.context)
@@ -90,3 +126,72 @@ class SearchParcelsView(BrowserView):
         """
         parcel = self.tool.queryParcels(division, section, radical, bis, exposant, puissance, historic=True, browseold=True, fuzzy=False)[0]
         return parcel.getHistoricForDisplay()
+
+    def createParcelAndProprietary(self, parcel_data, proprietary_data):
+        parcel_address = parcel_data.pop('location')
+        self.createApplicantFromParcel(parcel_address=parcel_address, **proprietary_data)
+        self.createParcel(parcel_data)
+
+    def createParcel(self, parcel_data):
+        portal_urban = api.portal.get_tool('portal_urban')
+        portal_urban.createPortionOut(container=self.context, **parcel_data)
+
+    def createApplicantFromParcel(self, proprietary, proprietary_city, proprietary_address, parcel_address):
+        """
+           Create the PortionOut with given parameters...
+        """
+        contact_type = 'Applicant'
+        if IUrbanCertificateBase.providedBy(self):
+            contact_type = 'Proprietary'
+
+        container = self.context
+        same_address = self._areSameAdresses(proprietary_address, parcel_address)
+        city = proprietary_city.split()
+        zipcode = city[0]
+        city = ' '.join(city[1:])
+        person_street, person_number = self._extractStreetAndNumber(proprietary_address)
+
+        contacts = proprietary.split('&')
+        for contact in contacts:
+            names = contact.split(',')
+            contact_info = {
+                'isSameAddressAsWorks': same_address,
+                'name1': names[0],
+                'zipcode': zipcode,
+                'city': city,
+                'street': person_street,
+                'number': person_number,
+            }
+            if len(names) > 1:
+                contact_info['name2'] = names[1].split()[0].capitalize()
+            container.invokeFactory(contact_type, id=container.generateUniqueId(contact_type), **contact_info)
+
+        container.updateTitle()
+
+    def _extractStreetAndNumber(self, address):
+        address_words = address.split()
+        number = address_words[-1]
+        if re.match('\d', number) and number.lower() != '1er':
+            street = ' '.join(address_words[0:-1])
+            return (street, number)
+        else:
+            return (address, '')
+
+    def _areSameAdresses(self, address_a, address_b):
+        """
+         Addresses are the same if fuzzy match on street name and EXACT match on number
+        """
+        street_a, number_a = self._extractStreetAndNumber(address_a)
+        street_b, number_b = self._extractStreetAndNumber(address_b)
+
+        same_street = Levenshtein.ratio(street_a, street_b) > 0.8
+        same_number = self._haveSameNumbers(number_a, number_b)
+
+        return same_street and same_number
+
+    def _haveSameNumbers(self, num_a, num_b):
+        match_expr = '\d+'
+        numbers_a = re.findall(match_expr, num_a)
+        numbers_b = re.findall(match_expr, num_b)
+        common_numbers = list(set(numbers_a).intersection(set(numbers_b)))
+        return common_numbers
