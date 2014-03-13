@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+
 from zope.interface import alsoProvides
+from zope.component import createObject
 from zope.component.interface import getInterface
-from Products.CMFCore.utils import getToolByName
+
+from plone import api
 
 
 def setDefaultValuesEvent(urbanevent, event):
@@ -14,7 +17,7 @@ def setDefaultValuesEvent(urbanevent, event):
 
 def _setDefaultTextValues(urbanevent):
 
-    portal_urban = getToolByName(urbanevent, 'portal_urban')
+    portal_urban = api.portal.get_tool('portal_urban')
 
     select_fields = [field for field in urbanevent.schema.fields() if field.default_method == 'getDefaultText']
 
@@ -41,13 +44,14 @@ def setCreationDate(urbanEvent, event):
     urbanEvent.reindexObject(['created'])
 
 
-def generateSingletonDocument(urbanEvent, event):
-    urban_tool = getToolByName(urbanEvent, 'portal_urban')
+def generateSingletonDocument(urban_event, event):
+    urban_tool = api.portal.get_tool('portal_urban')
     if not urban_tool.getGenerateSingletonDocuments():
         return
-    templates = urbanEvent.getTemplates()
+    templates = urban_event.getTemplates()
     if len(templates) == 1:
-        urban_tool.createUrbanDoc(templates[0].UID(), urbanEvent.UID())
+        odt_template = templates[0]
+        createObject('GeneratedUrbanDoc', urban_event, odt_template)
 
 
 def updateKeyEvent(urbanEvent, event):

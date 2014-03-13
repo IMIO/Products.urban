@@ -32,6 +32,7 @@ from Products.urban.utils import getLicenceFolderId
 from Products.urban.interfaces import ILicenceContainer, IContactFolder
 from zope.interface import alsoProvides, directlyProvides
 from zope.component import queryUtility
+from zope.component import createObject
 from zope.component.interface import getInterface
 from zope.i18n.interfaces import ITranslationDomain
 from zope import event
@@ -943,7 +944,7 @@ def createLicence(site, licence_type, data):
         #generate the documents
         if not urban_event.objectValues():
             for template in urban_event.getTemplates():
-                urban_tool.createUrbanDoc(template.UID(), urban_event.UID())
+                createObject('GeneratedUrbanDoc', urban_event, template)
     return licence
 
 

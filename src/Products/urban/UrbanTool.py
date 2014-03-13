@@ -43,24 +43,20 @@ import re
 from DateTime import DateTime
 from StringIO import StringIO
 from AccessControl import getSecurityManager
-from Acquisition import aq_base
 from plone import api
 from zope.i18n import translate
 from Products.CMFPlone import PloneMessageFactory as _
-from Products.CMFCore.utils import getToolByName
 from Products.CMFCore import permissions
-from Products.CMFCore.Expression import Expression, createExprContext
+from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.Expression import Expression
 from Products.CMFPlone.i18nl10n import ulocalized_time
-from Products.CMFPlone.PloneBatch import Batch
 from Products.PageTemplates.Expressions import getEngine
-from Products.DataGridField.Column import Column
 from Products.DataGridField.DataGridField import FixedRow
 from Products.DataGridField.FixedColumn import FixedColumn
 from Products.urban.utils import getOsTempFolder
 from Products.urban.utils import ParcelHistoric
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS
-from Products.urban.config import GLOBAL_TEMPLATES
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.interfaces import IUrbanVocabularyTerm, IContactFolder
 
@@ -346,95 +342,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 rows.append(row)
         return rows
 
-    security.declarePublic('createUrbanDoc')
-    def createUrbanDoc(self, urban_template_uid, urban_event_uid):
-        """
-          Create an element in an UrbanEvent
-        """
-        urbanTemplate = self.uid_catalog(UID=urban_template_uid)[0]
-        urbanTemplateObj = urbanTemplate.getObject()
-        urbanEvent = self.uid_catalog(UID=urban_event_uid)[0]
-        urbanEventObj = urbanEvent.getObject()
-        licenceFolder = urbanEventObj.getParentNode()
-        fileType = self.getEditionOutputFormat()
-        tempFileName = '%s/%s_%f.%s' % (
-            getOsTempFolder(), urbanTemplateObj._at_uid, time.time(), fileType)
-        temp_file_names = {}
-        try:
-            applicantobj = licenceFolder.getApplicants()[0]
-        except:
-            applicantobj = None
-        portal_url = getToolByName(self, 'portal_url')
-        brain = self.portal_catalog(path=portal_url.getPortalPath() + '/' + '/'.join(portal_url.getRelativeContentPath(licenceFolder)), id='depot-de-la-demande')
-        try:
-            recepisseobj = brain[0].getObject()
-        except:
-            recepisseobj = None
-        brain = self.portal_catalog(path=portal_url.getPortalPath() + '/' + '/'.join(portal_url.getRelativeContentPath(licenceFolder)), id='premier-passage-au-college-communal')
-        try:
-            collegesubmissionobj = brain[0].getObject()
-        except:
-            collegesubmissionobj = None
-        global_templates = getattr(self, 'globaltemplates')
-        #in the global_templates, only some of these templates must be taken into account
-        auto_imported_template_ids = ['header.odt', 'footer.odt', 'reference.odt', 'signatures.odt']
-        for generic_template in GLOBAL_TEMPLATES:
-            #do only import necessary templates if exists...
-            if not generic_template['id'] in auto_imported_template_ids or not hasattr(aq_base(global_templates), generic_template['id']):
-                continue
-            template = getattr(global_templates, generic_template['id'])
-            if template and template.size:
-                template = StringIO(template)
-                temp_file_name = '%s/%s_%f.%s' % (getOsTempFolder(), urbanTemplateObj._at_uid, time.time(), 'odt')
-                #remove the '.odt' suffix so terms like "header" can be used in the templates instead of "header.odt"
-                temp_file_names[generic_template['id'][: -4]] = temp_file_name
-                #we render the template so pod instructions into the generic sub-templates are rendered too
-                renderer = appy.pod.renderer.Renderer(template,
-                                                      {'self': licenceFolder, 'urbanEventObj': urbanEventObj,
-                                                       'applicantobj': applicantobj, 'recepisseobj': recepisseobj,
-                                                       'tool': self,
-                                                       'template': urbanTemplateObj,
-                                                       'collegesubmissionobj': collegesubmissionobj, },
-                                                      temp_file_name, pythonWithUnoPath=self.getUnoEnabledPython())
-                renderer.run()
-        #now that sub-templates are rendered, we can use them in the main pod template and render the entire document
-        #we prepare the styles template
-        templateStyles = getattr(global_templates, 'styles.odt', None)
-        if templateStyles and templateStyles.size:
-            templateStyles = StringIO(templateStyles)
-        dict_arg = {'self': licenceFolder, 'urbanEventObj': urbanEventObj, 'applicantobj': applicantobj,
-                    'recepisseobj': recepisseobj, 'collegesubmissionobj': collegesubmissionobj, 'tool': self,
-                    'template': urbanTemplateObj}
-        dict_arg.update(temp_file_names)
-        renderer = appy.pod.renderer.Renderer(StringIO(urbanTemplateObj), dict_arg,
-                                              tempFileName, pythonWithUnoPath=self.getUnoEnabledPython())
-        renderer.run()
-        # Tell the browser that the resulting page contains ODT
-        response = self.REQUEST.RESPONSE
-        response.setHeader('Content-type', 'application/%s' % fileType)
-        response.setHeader('Content-disposition', 'inline;filename="%s.%s"' % (self.id, fileType))
-        # Returns the doc and removes the temp file
-        f = open(tempFileName, 'rb')
-        doc = f.read()
-        f.close()
-        os.remove(tempFileName)
-        #now we need to generate an available id for the new file
-        #the id of the object have to be the same id as the file contained
-        #see http: //dev.communesplone.org/trac/ticket/2532
-        urbanTemplateObjId = os.path.splitext(urbanTemplateObj.getId())[0]
-        proposedId = urbanTemplateObjId + '.%s' % fileType
-        i = 1
-        while hasattr(aq_base(urbanEventObj), proposedId):
-            proposedId = '%s-%d.odt' % (urbanTemplateObjId, i)
-            i = i + 1
-        newUrbanDoc = urbanEventObj.invokeFactory("UrbanDoc", id=proposedId, title=urbanTemplateObj.Title(), content_type=GENERATED_DOCUMENT_FORMATS[fileType], file=doc)
-        newUrbanDoc = getattr(urbanEventObj, newUrbanDoc)
-        newUrbanDoc.setFilename(proposedId)
-        newUrbanDoc.setFormat(GENERATED_DOCUMENT_FORMATS[fileType])
-        newUrbanDoc._at_rename_after_creation = False
-        newUrbanDoc.processForm()
-        self.REQUEST.set('doc_uid', newUrbanDoc.UID())
-        response.redirect(urbanEventObj.absolute_url() + '?doc_uid=' + newUrbanDoc.UID())
 
     security.declarePublic('getVocabularyDefaultValue')
     def getVocabularyDefaultValue(self, vocabulary_name, context, in_urban_config, multivalued=False):

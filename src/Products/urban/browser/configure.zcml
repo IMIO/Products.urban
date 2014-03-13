@@ -172,6 +172,13 @@
 
   <browser:page
      for="Products.urban.interfaces.IUrbanEvent"
+     name="createurbandoc"
+     class=".factory.CreateUrbanDoc"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
      name="urbaneventview"
      class=".urbaneventviews.UrbanEventView"
      template="templates/urbaneventview.pt"

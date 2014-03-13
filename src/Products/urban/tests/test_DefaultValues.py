@@ -2,7 +2,6 @@
 import unittest
 from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_CONFIG
-from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
 from Products.CMFCore.utils import getToolByName
 from Products.urban.config import URBAN_TYPES
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
@@ -124,7 +123,7 @@ class TestDefaultValues(unittest.TestCase):
 
 class TestEventDefaultValues(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_FUNCTIONAL
+    layer = URBAN_TESTS_CONFIG
 
     def setUp(self):
         portal = self.layer['portal']
@@ -178,7 +177,7 @@ class TestEventDefaultValues(unittest.TestCase):
         decision_text = event.getDecisionText()
 
         expected_text = '<p>Kill %s and %s </p>' % (self.licence.Title(), event.getId())
-        self.failUnless(decision_text == expected_text)
+        self.assertTrue(decision_text == expected_text)
 
     def testDefaultTextMethodIsDefinedForEachTextField(self):
         #each text field  should have the 'getDefaultText' method defined on it, else the default value system wont work

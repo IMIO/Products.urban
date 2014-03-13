@@ -98,7 +98,7 @@ class UrbanEventView(BrowserView):
     def _generateDocumentHref(self, context, template):
         """
         """
-        return "%s/createUrbanDoc?urban_template_uid=%s&urban_event_uid=%s" % (context.absolute_url(), template.UID(), context.UID())
+        return "%s/createurbandoc?template_uid=%s" % (context.absolute_url(), template.UID())
 
     def getUrbaneventtypes(self):
         """
