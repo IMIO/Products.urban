@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import unittest2 as unittest
-from zope.component import createObject
 from zope.component.interface import interfaceToName
 from plone.app.testing import quickInstallProduct, login
 from plone.app.testing import setRoles
@@ -34,7 +33,7 @@ class TestInstall(unittest.TestCase):
     def testEventWithoutEventTypeType(self):
         #'avis-etude-incidence' can only be added if it is defined on the licence
         self.licence.setImpactStudy(True)
-        createObject('UrbanEvent', 'avis-etude-incidence', self.licence)
+        self.licence.createUrbanEvent('avis-etude-incidence')
 
     def testAcknowledgmentSearchByInterface(self):
         urbanTool = getToolByName(self.portal, 'portal_urban')
@@ -43,7 +42,7 @@ class TestInstall(unittest.TestCase):
         eventTypes = urbanConfig.urbaneventtypes
         # there is already 10 events created on the licence
         self.assertEqual(len(licence.objectValues('UrbanEvent')), 10)
-        urbanEvent = createObject('UrbanEvent', 'accuse-de-reception', licence)
+        urbanEvent = licence.createUrbanEvent('accuse-de-reception')
         self.assertEqual(len(licence.objectValues('UrbanEvent')), 11)
         self.failUnless(IAcknowledgmentEvent.providedBy(urbanEvent))
         catalog = getToolByName(self.portal, 'portal_catalog')

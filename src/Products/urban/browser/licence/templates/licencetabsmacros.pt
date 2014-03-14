@@ -339,7 +339,7 @@
 <metal:events define-macro="urbanEventsMacro" i18n:domain="urban">
     <tal:add_events define="eventTypes view/getUrbanEventTypes">
         <!--legend i18n:translate="urban_create_events">Create event</legend-->
-        <form action="create_urban_event" method="POST"
+        <form action="create_urbanevent" method="POST"
               tal:condition="view/canAddUrbanEvent">
                 <input type='hidden' name="urban_folder_uid" tal:attributes="value here/UID" value=''>
                 <select name="urban_event_type_uid">

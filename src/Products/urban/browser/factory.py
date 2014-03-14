@@ -26,8 +26,23 @@ class UrbanObjectBaseFactory(BrowserView):
         return self.request.response.redirect(self.context.absolute_url())
 
 
+class CreateUrbanEvent(UrbanObjectBaseFactory):
+
+    def create(self):
+        uid_catalog = api.portal.get_tool('uid_catalog')
+        eventtype_uid = self.request.form['urban_event_type_uid']
+        eventtype_brain = uid_catalog(UID=eventtype_uid)[0]
+        eventtype = eventtype_brain.getObject()
+
+        urban_event = createObject('UrbanEvent', self.context, eventtype)
+
+        return urban_event
+
+    def redirect(self, urban_event):
+        return self.request.response.redirect(urban_event.absolute_url() + '/edit')
+
+
 class CreateUrbanDoc(UrbanObjectBaseFactory):
-    """ """
 
     def create(self):
         template_uid = self.request.form['template_uid']

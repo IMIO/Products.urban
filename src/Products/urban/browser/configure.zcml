@@ -172,7 +172,7 @@
 
   <browser:page
      for="Products.urban.interfaces.IUrbanEvent"
-     name="createurbandoc"
+     name="create_urbandoc"
      class=".factory.CreateUrbanDoc"
      permission="zope2.View"
   />
@@ -229,6 +229,13 @@
      name="parcelrecordsview"
      class=".parcelrecordsview.ParcelRecordsView"
      template="templates/parcelrecordsview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="create_urbanevent"
+     class=".factory.CreateUrbanEvent"
      permission="zope2.View"
   />
 

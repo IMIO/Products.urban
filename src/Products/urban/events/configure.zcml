@@ -96,7 +96,7 @@
               handler=".portionOutEvents.setEnvironmentLicencePreviousLicencesField" />
 
   <subscriber for="..interfaces.IUrbanEvent
-                   Products.Archetypes.interfaces.IEditBegunEvent"
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setDefaultValuesEvent"/>
 
   <subscriber for="..interfaces.IUrbanEvent

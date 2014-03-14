@@ -29,7 +29,7 @@ class TestUrbanDoc(unittest.TestCase):
         self.catalog = api.portal.get_tool('portal_catalog')
         event_type_brain = self.catalog(portal_type='UrbanEventType', id='accuse-de-reception')[0]
         self.event_type = event_type_brain.getObject()
-        self.urban_event = self.licence.createUrbanEvent(self.event_type.UID())
+        self.urban_event = self.licence.createUrbanEvent(self.event_type)
         self.urbandoc_model = getattr(self.event_type, 'urb-accuse.odt')
         transaction.commit()
 

@@ -316,7 +316,7 @@ class TestEnvClassOneEvents(unittest.TestCase):
         config = self.licence.getUrbanConfig()
         decision_eventtype = config.getEventTypesByInterface(ILicenceDeliveryEvent)[0]
 
-        decision_event = licence.createUrbanEvent(decision_eventtype.UID())
+        decision_event = licence.createUrbanEvent(decision_eventtype)
         decision_event.processForm()
         zopeevent = ObjectModifiedEvent(decision_event)
         notify(zopeevent)
@@ -337,7 +337,7 @@ class TestEnvClassOneEvents(unittest.TestCase):
 
         config = self.licence.getUrbanConfig()
         decision_eventtype = config.getEventTypesByInterface(ILicenceDeliveryEvent)[0]
-        decision_event = licence.createUrbanEvent(decision_eventtype.UID())
+        decision_event = licence.createUrbanEvent(decision_eventtype)
         decision_event.processForm()
         zopeevent = ObjectModifiedEvent(decision_event)
         notify(zopeevent)
@@ -364,7 +364,7 @@ class TestEnvClassOneEvents(unittest.TestCase):
         config = self.licence.getUrbanConfig()
         decision_eventtype = config.getEventTypesByInterface(ILicenceDeliveryEvent)[0]
 
-        decision_event = licence.createUrbanEvent(decision_eventtype.UID())
+        decision_event = licence.createUrbanEvent(decision_eventtype)
         decision_event.processForm()
         zopeevent = ObjectModifiedEvent(decision_event)
         notify(zopeevent)

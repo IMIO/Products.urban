@@ -18,46 +18,29 @@ class UrbanEventFactory(grok.GlobalUtility):
     grok.implements(IFactory)
     grok.name('UrbanEvent')
 
-    def __call__(self, eventType, licence, **kwargs):
-        urbanTool = api.portal.get_tool('portal_urban')
-        urbanConfig = urbanTool.buildlicence
-        eventTypes = urbanConfig.urbaneventtypes
-        eventtypetype = getattr(eventTypes, eventType)
-        eventtypetype.checkCreationInLicence(licence)
-        urbanEventId = urbanTool.generateUniqueId('UrbanEvent')
-        licence.invokeFactory("UrbanEvent",
-                              id=urbanEventId,
-                              title=eventtypetype.Title(),
-                              urbaneventtypes=(eventtypetype,),
-                              **kwargs)
-        urbanEvent = getattr(licence, urbanEventId)
-        urbanEvent._at_rename_after_creation = False
-        urbanEvent.processForm()
+    def __call__(self, licence, event_type, **kwargs):
+        portal_urban = api.portal.get_tool('portal_urban')
 
-        return urbanEvent
+        if type(event_type) is str:
+            eventtypes = licence.getUrbanConfig().urbaneventtypes
+            event_type = getattr(eventtypes, event_type, None)
 
+        event_type.checkCreationInLicence(licence)
+        eventtype_type = event_type.getEventTypeType()
+        portal_type = portal_urban.portal_types_per_event_type_type.get(eventtype_type, "UrbanEvent")
 
-class UrbanEventOpinionRequestFactory(grok.GlobalUtility):
-    grok.implements(IFactory)
-    grok.name('UrbanEventOpinionRequest')
+        urban_event_id = licence.invokeFactory(
+            portal_type,
+            id=portal_urban.generateUniqueId(portal_type),
+            title=event_type.Title(),
+            urbaneventtypes=(event_type,),
+            **kwargs
+        )
+        urban_event = getattr(licence, urban_event_id)
+        urban_event._at_rename_after_creation = False
+        urban_event.processForm()
 
-    def __call__(self, eventType, licence, **kwargs):
-        urbanTool = api.portal.get_tool('portal_urban')
-        urbanConfig = urbanTool.buildlicence
-        eventTypes = urbanConfig.urbaneventtypes
-        eventtypetype = getattr(eventTypes, eventType)
-        eventtypetype.checkCreationInLicence(licence)
-        urbanEventId = urbanTool.generateUniqueId('UrbanEvent')
-        licence.invokeFactory("UrbanEventOpinionRequest",
-                              id=urbanEventId,
-                              title=eventtypetype.Title(),
-                              urbaneventtypes=(eventtypetype,),
-                              **kwargs)
-        urbanEvent = getattr(licence, urbanEventId)
-        urbanEvent._at_rename_after_creation = False
-        urbanEvent.processForm()
-
-        return urbanEvent
+        return urban_event
 
 
 class UrbanEventInquiryFactory(grok.GlobalUtility):

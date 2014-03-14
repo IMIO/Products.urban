@@ -8,7 +8,6 @@ from Products.urban.testing import URBAN_TESTS_CONFIG
 from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
-from zope.component import createObject
 
 import transaction
 import unittest
@@ -28,15 +27,15 @@ class TestUrbanEvent(unittest.TestCase):
 
         #if the option is not selected, no document should be generated at all
         self.portal_urban.setGenerateSingletonDocuments(False)
-        createdEvent = createObject('UrbanEvent', 'accuse-de-reception', self.licence)
+        createdEvent = self.licence.createUrbanEvent('accuse-de-reception')
         self.failUnless(len(createdEvent.objectValues()) == 0)
 
         #now check the behaviour when the option is selected
         self.portal_urban.setGenerateSingletonDocuments(True)
-        createdEvent = createObject('UrbanEvent', 'accuse-de-reception', self.licence)
+        createdEvent = self.licence.createUrbanEvent('accuse-de-reception')
         #if the urbanEvent can generate a single document, this document should be generated
         self.failUnless(len(createdEvent.objectValues()) == 1)
-        createdEvent = createObject('UrbanEvent', 'rapport-du-college', self.licence)
+        createdEvent = self.licence.createUrbanEvent('rapport-du-college')
         #if the urbanEvent can generate more than one document, no document should be generated at all
         self.failUnless(len(createdEvent.objectValues()) == 0)
 
@@ -61,7 +60,7 @@ class TestUrbanEventInstance(unittest.TestCase):
         catalog = api.portal.get_tool('portal_catalog')
         event_type_brain = catalog(portal_type='UrbanEventType', id='prorogation')[0]
         self.event_type = event_type_brain.getObject()
-        self.urban_event = licence.createUrbanEvent(self.event_type.UID())
+        self.urban_event = licence.createUrbanEvent(self.event_type)
         transaction.commit()
 
         self.browser = Browser(self.portal)
@@ -102,7 +101,7 @@ class TestUrbanEventInquiryView(unittest.TestCase):
         catalog = api.portal.get_tool('portal_catalog')
         event_type_brain = catalog(portal_type='UrbanEventType', id='enquete-publique')[0]
         self.event_type = event_type_brain.getObject()
-        self.inquiry = licence.createUrbanEvent(self.event_type.UID())
+        self.inquiry = licence.createUrbanEvent(self.event_type)
         self.view = self.inquiry.restrictedTraverse('urbaneventinquiryview')
         transaction.commit()
 

@@ -32,7 +32,7 @@ class TestKeyEvent(unittest.TestCase):
         self.catalog = api.portal.get_tool('portal_catalog')
         event_type_brain = self.catalog(portal_type='UrbanEventType', id='accuse-de-reception')[0]
         self.event_type = event_type_brain.getObject()
-        self.urban_event = self.licence.createUrbanEvent(self.event_type.UID())
+        self.urban_event = self.licence.createUrbanEvent(self.event_type)
         transaction.commit()
 
         self.browser = Browser(self.portal)
@@ -61,7 +61,7 @@ class TestKeyEvent(unittest.TestCase):
         urban_event_type.setIsKeyEvent(True)
 
         #we add an urbanEvent of type UET, the index last_key_event of the licence should be updated
-        buildlicence.createUrbanEvent(urban_event_type.UID())
+        buildlicence.createUrbanEvent(urban_event_type)
         urban_event = buildlicence.objectValues('UrbanEvent')[-1]
         event = ObjectModifiedEvent(urban_event)
         notify(event)
@@ -75,7 +75,7 @@ class TestKeyEvent(unittest.TestCase):
 
         old_index_value = catalog(portal_type='BuildLicence')[0].last_key_event
         event_type = self.catalog(portal_type='UrbanEventType', id='depot-de-la-demande')[0].getObject()
-        buildlicence.createUrbanEvent(event_type.UID())
+        buildlicence.createUrbanEvent(event_type)
         urban_event = buildlicence.objectValues()[1]
         event = ObjectModifiedEvent(urban_event)
         notify(event)
@@ -140,11 +140,11 @@ class TestKeyEvent(unittest.TestCase):
         self.assertTrue(date_1 not in self.browser.contents)
         self.assertTrue(date_2 not in self.browser.contents)
 
-        buildlicence.createUrbanEvent(self.event_type.UID())
+        buildlicence.createUrbanEvent(self.event_type)
         urban_event = buildlicence.objectValues()[-1]
         urban_event.setEventDate(date_1)
 
-        buildlicence.createUrbanEvent(self.event_type.UID())
+        buildlicence.createUrbanEvent(self.event_type)
         urban_event = buildlicence.objectValues()[-1]
         urban_event.setEventDate(date_2)
 

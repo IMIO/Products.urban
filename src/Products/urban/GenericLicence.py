@@ -37,6 +37,8 @@ from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban import UrbanMessage as _
 
+from zope.component import createObject
+
 from plone import api
 
 slave_fields_subdivision = (
@@ -742,24 +744,8 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         return (name in licenceConfig.getUsedAttributes())
 
     security.declarePublic('createUrbanEvent')
-    def createUrbanEvent(self, urban_event_type_uid):
-        """ Create urban event in this licence """
-        uid_catalog = api.portal.get_tool('uid_catalog')
-        urban_tool = api.portal.get_tool('portal_urban')
-
-        event_type = uid_catalog(UID=urban_event_type_uid)[0].getObject()
-        event_type.checkCreationInLicence(self)
-
-        eventTypeType = event_type.getEventTypeType()
-        portal_type = urban_tool.portal_types_per_event_type_type.get(eventTypeType, "UrbanEvent")
-
-        urban_event_id = self.invokeFactory(
-            portal_type,
-            id=urban_tool.generateUniqueId(portal_type),
-            title=event_type.Title(),
-            urbaneventtypes=(event_type, )
-        )
-        urban_event = getattr(self, urban_event_id)
+    def createUrbanEvent(self, urban_event_type, **kwargs):
+        urban_event = createObject('UrbanEvent', self, urban_event_type, **kwargs)
         return urban_event
 
     def divideList(self, divider, list):

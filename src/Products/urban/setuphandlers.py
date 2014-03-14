@@ -924,9 +924,9 @@ def createLicence(site, licence_type, data):
     licence.reindexObject(idxs=['parcelInfosIndex'])
     #generate all the urban events
     logger.info('   test %s --> create all the events' % licence_type)
-    eventtype_uids = [brain.UID for brain in urban_tool.listEventTypes(licence, urbanConfigId=licence_type.lower())]
-    for event_type_uid in eventtype_uids:
-        licence.createUrbanEvent(event_type_uid)
+    eventtypes = [brain.getObject() for brain in urban_tool.listEventTypes(licence, urbanConfigId=licence_type.lower())]
+    for event_type in eventtypes:
+        licence.createUrbanEvent(event_type)
     #fill each event with dummy data and generate all its documents
     logger.info('   test %s --> generate all the documents' % licence_type)
     for urban_event in licence.objectValues(['UrbanEvent', 'UrbanEventInquiry', 'UrbanEventOpinionRequest']):

@@ -184,7 +184,7 @@ class TestScheduleView(unittest.TestCase):
 
         # make sure to find at least one result
         licence = self.urban.buildlicences.objectValues()[0]
-        licence.createUrbanEvent(eventtype_uids[0])
+        licence.createUrbanEvent(eventtypes_restriction[0])
 
         event_brains = scheduleview.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager)
         events_found = [brain.getObject() for brain in event_brains]

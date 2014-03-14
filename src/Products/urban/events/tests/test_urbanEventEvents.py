@@ -18,5 +18,5 @@ class TestEventDateEvents(unittest.TestCase):
         self.buildLicence = getattr(buildLicences, LICENCE_ID)
 
     def testCreationDate(self):
-        event = createObject('UrbanEvent', 'depot-de-la-demande', self.buildLicence)
+        event = createObject('UrbanEvent', self.buildLicence, 'depot-de-la-demande')
         self.assertEqual(event.created(), event.getEventDate())

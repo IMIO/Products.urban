@@ -11,8 +11,7 @@ def setDefaultValuesEvent(urbanevent, event):
     """
      set default values on urban event fields
     """
-    if urbanevent.checkCreationFlag():
-        _setDefaultTextValues(urbanevent)
+    _setDefaultTextValues(urbanevent)
 
 
 def _setDefaultTextValues(urbanevent):

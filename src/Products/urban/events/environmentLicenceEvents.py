@@ -47,7 +47,7 @@ def createLicenceExpirationEvent(decision_event, event):
             TAL_expr = expiration_eventtype.getTALCondition()
             expiration_eventtype.setTALCondition('python: True')
 
-            expiration_event = licence.createUrbanEvent(expiration_eventtype.UID())
+            expiration_event = licence.createUrbanEvent(expiration_eventtype)
             directlyProvides(expiration_event, ILicenceExpirationEvent)
 
             # ...then set it back to its previous value

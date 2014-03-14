@@ -8,7 +8,6 @@ from Products.urban.testing import URBAN_TESTS_LICENCES
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 from time import sleep
-from zope.component import createObject
 
 import transaction
 import unittest
@@ -47,15 +46,15 @@ class TestBuildLicence(unittest.TestCase):
 
     def testGetLastEventWithOneEvent(self):
         buildlicence = self.buildlicence
-        createdEvent = createObject('UrbanEvent', 'depot-de-la-demande', buildlicence)
+        createdEvent = buildlicence.createUrbanEvent('depot-de-la-demande')
         event = buildlicence._getLastEvent()
         self.assertEqual(createdEvent, event)
         self.failUnless(event is not None)
 
     def testGetLastEventWithMoreThanOneEvent(self):
         buildlicence = self.buildlicence
-        createObject('UrbanEvent', 'depot-de-la-demande', buildlicence, description='A')
-        ev2 = createObject('UrbanEvent', 'depot-de-la-demande', buildlicence, description='B')
+        buildlicence.createUrbanEvent('depot-de-la-demande', description='A')
+        ev2 = buildlicence.createUrbanEvent('depot-de-la-demande', description='B')
         sleep(1)
         event = buildlicence._getLastEvent()
         self.failUnless(event is not None)
@@ -69,11 +68,11 @@ class TestBuildLicence(unittest.TestCase):
 
     def testGetLastDeposit(self):
         buildlicence = self.buildlicence
-        createObject('UrbanEvent', 'dossier-incomplet', buildlicence, description='A')
+        buildlicence.createUrbanEvent('dossier-incomplet', description='A')
         sleep(1)
-        createObject('UrbanEvent', 'depot-de-la-demande', buildlicence, description='B')
+        buildlicence.createUrbanEvent('depot-de-la-demande', description='B')
         sleep(1)
-        ev3 = createObject('UrbanEvent', 'depot-de-la-demande', buildlicence, description='C')
+        ev3 = buildlicence.createUrbanEvent('depot-de-la-demande', description='C')
         sleep(1)
         event = buildlicence.getLastDeposit()
         self.assertEqual(event.Description(), 'C')
@@ -81,9 +80,9 @@ class TestBuildLicence(unittest.TestCase):
 
     def testGetAcknowledgement(self):
         buildlicence = self.buildlicence
-        createObject('UrbanEvent', 'dossier-incomplet', buildlicence, description='A')
-        ev2 = createObject('UrbanEvent', 'accuse-de-reception', buildlicence, description='B')
-        createObject('UrbanEvent', 'depot-de-la-demande', buildlicence, description='C')
+        buildlicence.createUrbanEvent('dossier-incomplet', description='A')
+        ev2 = buildlicence.createUrbanEvent('accuse-de-reception', description='B')
+        buildlicence.createUrbanEvent('depot-de-la-demande', description='C')
         event = buildlicence.getLastAcknowledgment()
         self.assertEqual(event.Description(), 'B')
         self.assertEqual(event, ev2)

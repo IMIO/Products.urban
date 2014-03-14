@@ -122,6 +122,9 @@ class TestDefaultValues(unittest.TestCase):
 
 
 class TestEventDefaultValues(unittest.TestCase):
+    """
+    Tests for the text default values
+    """
 
     layer = URBAN_TESTS_CONFIG
 
@@ -136,22 +139,10 @@ class TestEventDefaultValues(unittest.TestCase):
         buildlicence = buildlicences.newlicence
         self.licence = buildlicence
 
-    def createEvent(self, licence, event_type):
-        licence.createUrbanEvent(event_type.UID())
-        urban_event = licence.objectValues('UrbanEvent')[-1]
-        #simulate edition event to trigger default value system
-        notify(EditBegunEvent(urban_event))
-        return urban_event
-
-    """
-    Tests for the text default values
-    """
     def testNoTextDefaultValuesConfigured(self):
         #create a new event 'rappor du college'
         #text field 'decisionText' should be empty by default
-        eventtypes = self.portal_urban.buildlicence.urbaneventtypes
-        event_type = getattr(eventtypes, 'rapport-du-college')
-        event = self.createEvent(self.licence, event_type)
+        event = self.licence.createUrbanEvent('rapport-du-college')
         decision_text = event.getDecisionText()
         self.failUnless(decision_text == '')
 
@@ -162,7 +153,7 @@ class TestEventDefaultValues(unittest.TestCase):
         default_text = '<p>Kill bill!</p>'
         event_type.setTextDefaultValues([{'text': default_text, 'fieldname': 'decisionText'}])
         # the created event should have this text in its field 'decisionText'
-        event = self.createEvent(self.licence, event_type)
+        event = self.licence.createUrbanEvent(event_type)
         decision_text = event.getDecisionText()
         self.failUnless(decision_text == default_text)
 
@@ -173,7 +164,7 @@ class TestEventDefaultValues(unittest.TestCase):
         default_text = '<p>Kill [[python: self.Title()]] and [[python: object.getId()]] </p>'
         event_type.setTextDefaultValues([{'text': default_text, 'fieldname': 'decisionText'}])
         # the created event should have this text in its field 'decisionText'
-        event = self.createEvent(self.licence, event_type)
+        event = self.licence.createUrbanEvent(event_type)
         decision_text = event.getDecisionText()
 
         expected_text = '<p>Kill %s and %s </p>' % (self.licence.Title(), event.getId())
