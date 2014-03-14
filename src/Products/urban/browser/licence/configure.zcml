@@ -5,6 +5,13 @@
     i18n_domain="urban">
 
   <browser:page
+     for="zope.interface.Interface"
+     name="showEditTabbing"
+     class=".licenceview.ShowEditTabbing"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IGenericLicence"
      name="licencemacros"
      template="templates/licencemacros.pt"

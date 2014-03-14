@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from plone.memoize import view
-from Products.Five import BrowserView
 from Acquisition import aq_inner
-from Products.CMFCore.utils import getToolByName
+
+from Products.Five import BrowserView
+
 from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
-from Products.urban.interfaces import IUrbanEvent
 from Products.urban.browser.table.urbantable import ContactTable, ParcelsTable, EventsTable
+from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IUrbanEvent
+
+from plone import api
+from plone.memoize import view
 
 
 class LicenceView(BrowserView):
@@ -17,16 +21,6 @@ class LicenceView(BrowserView):
         super(LicenceView, self).__init__(context, request)
         self.context = context
         self.request = request
-
-    @view.memoize
-    def getCatalog(self):
-        context = aq_inner(self.context)
-        return getToolByName(context, 'portal_catalog')
-
-    @view.memoize
-    def getPortalUrban(self):
-        context = aq_inner(self.context)
-        return getToolByName(context, 'portal_urban')
 
     @view.memoize
     def getMember(self):
@@ -43,7 +37,7 @@ class LicenceView(BrowserView):
     def getUrbanEventTypes(self):
         licence = aq_inner(self.context)
         config_id = licence.portal_type.lower()
-        portal_urban = self.getPortalUrban()
+        portal_urban = api.portal.get_tool('portal_urban')
 
         eventtypes = portal_urban.listEventTypes(licence, urbanConfigId=config_id)
         return eventtypes
@@ -89,7 +83,7 @@ class LicenceView(BrowserView):
         return self.renderListing(parceltable)
 
     def renderEventsListing(self):
-        catalog = getToolByName(self.context, 'portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
         queryString = {
             'object_provides': 'Products.urban.interfaces.IUrbanEvent',
             'path': '/'.join(self.context.getPhysicalPath()),
@@ -127,15 +121,15 @@ class LicenceView(BrowserView):
 
     def hasOutdatedParcels(self):
         context = aq_inner(self.context)
-        portal_workflow = getToolByName(self, 'portal_workflow')
+        portal_workflow = api.portal.get_tool('portal_workflow')
         if portal_workflow.getInfoFor(self.context, 'review_state') in ['accepted', 'refused']:
             return False
         return any([not parcel.getIsOfficialParcel for parcel in context.listFolderContents(contentFilter={"portal_type": "PortionOut"})])
 
     def getKeyDates(self):
         context = aq_inner(self.context)
-        catalog = self.getCatalog()
-        urban_tool = self.getPortalUrban()
+        catalog = api.portal.get_tool('portal_catalog')
+        urban_tool = api.portal.get_tool('portal_urban')
         config = context.getLicenceConfig()
         ordered_dates = []
         key_dates = {}
@@ -185,7 +179,7 @@ class LicenceView(BrowserView):
           return the start/end dates of each inquiry and a link to its corresponding urbanEventInquiry (if it exists)
         """
         context = aq_inner(self.context)
-        urban_tool = self.getPortalUrban()
+        urban_tool = api.portal.get_tool('portal_urban')
         inquirydates = []
         for inquiry in context.getInquiries():
             start_date = inquiry.getInvestigationStart()
@@ -269,7 +263,7 @@ class EnvironmentLicenceView(LicenceView):
         display the rubrics number, their class and then the text
         """
         context = aq_inner(self.context)
-        catalog = getToolByName(context, 'portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
         rubric_uids = context.getField('rubrics').getRaw(context)
         rubric_brains = catalog(UID=rubric_uids)
         rubrics = [brain.getObject() for brain in rubric_brains]
@@ -305,3 +299,19 @@ class EnvironmentLicenceView(LicenceView):
         context = aq_inner(self.context)
         sup_conditions = context.getAdditionalLegalConditions()
         return self._sortConditions(sup_conditions)
+
+
+class ShowEditTabbing(BrowserView):
+    """ call this view to see if a licence should display the tabbing with edit icons """
+
+    def __call__(self):
+
+        # this view is registered for any kind of content (because fuck you thats why)
+        # we do the check if we are a licence inside the call
+        if not IGenericLicence.providedBy(self.context):
+            return
+
+        member = api.user.get_current()
+        licence = self.context
+        show_tabbing = member.has_permission('Modify portal content', licence)
+        return show_tabbing
