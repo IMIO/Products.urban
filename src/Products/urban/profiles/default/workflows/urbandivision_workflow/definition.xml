@@ -202,7 +202,7 @@
              i18n:attributes="title">
   <action url="" category="workflow" i18n:translate="">accept</action>
   <guard>
-   <guard-permission>Review portal content</guard-permission>
+    <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
  <transition transition_id="nonapplicable"
@@ -214,7 +214,7 @@
              i18n:attributes="title">
   <action url="" category="workflow" i18n:translate="">nonapplicable</action>
   <guard>
-   <guard-permission>Review portal content</guard-permission>
+    <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
  <transition transition_id="reopen"
@@ -226,7 +226,7 @@
              i18n:attributes="title">
   <action url="" category="workflow" i18n:translate="">reopen</action>
   <guard>
-   <guard-permission>Review portal content</guard-permission>
+    <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
  <variable variable_id="action" for_catalog="False"
@@ -236,7 +236,6 @@
    <expression>transition/getId|nothing</expression>
   </default>
   <guard>
-   <guard-permission>Review portal content</guard-permission>
   </guard>
  </variable>
  <variable variable_id="actor" for_catalog="False"
