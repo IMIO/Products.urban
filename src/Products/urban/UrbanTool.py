@@ -536,21 +536,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         except psycopg2.OperationalError, e:
             ptool.addPortalMessage(_(u"db_connection_error", mapping={u'error': unicode(e.__str__(), 'utf-8')}), type='error')
 
-    security.declarePublic('mayAccessUrban')
-    def mayAccessUrban(self):
-        """
-          Test if the currently logged in user can access the application
-        """
-        portal = getToolByName(self, 'portal_url').getPortalObject()
-        sm = getSecurityManager()
-
-        #we could access this method with a script with a Manager proxy role so
-        #check that the current user is not an Anonymous user too...
-        if sm.checkPermission('View', getattr(portal, 'urban')) and portal.portal_membership.getAuthenticatedMember().getId():
-            return True
-        else:
-            return False
-
     security.declarePublic('createPortionOut')
     def createPortionOut(self, container, division, section, radical, bis, exposant, puissance, partie, outdated=False):
         """

@@ -10,7 +10,7 @@
    <property name="url_expr">string:$portal_url/urban</property>
    <property name="icon_expr"></property>
    <property
-            name="available_expr">python: portal.mayAccessUrban()</property>
+            name="available_expr">context/@@mayAccessUrban</property>
    <property name="permissions">
     <element value="View"/>
    </property>

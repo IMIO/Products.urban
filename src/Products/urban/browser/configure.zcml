@@ -39,6 +39,12 @@
       template="firefox.pt"
       />
 
+  <browser:page
+     for="*"
+     name="mayAccessUrban"
+     class=".urbanview.MayAccessUrban"
+     permission="zope2.View"
+  />
 
   <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"

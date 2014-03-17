@@ -1,7 +1,12 @@
+# -*- coding: utf-8 -*-
+
+from AccessControl import getSecurityManager
 from Acquisition import aq_inner
-from zope.i18n import translate
-from Products.Five import BrowserView
+
 from Products.CMFCore.utils import getToolByName
+
+from Products.Five import BrowserView
+
 from Products.urban import UrbanMessage as _
 from Products.urban.browser.table.urbantable import LicenceListingTable
 from Products.urban.browser.table.urbantable import AllLicencesListingTable
@@ -9,6 +14,10 @@ from Products.urban.config import ORDERED_URBAN_TYPES
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import getLicenceFolderId
 from Products.urban.utils import getLicenceFolder
+
+from plone import api
+
+from zope.i18n import translate
 
 
 class UrbanView(BrowserView):
@@ -135,3 +144,19 @@ class UrbanRootView(UrbanView):
             licencetype=licencetype,
         )
         return link
+
+
+class MayAccessUrban(BrowserView):
+    """
+     This view is is used in the python expresssion to evaluate the display
+     of 'portal_tabs' actions (see profiles/default/actions.xml)
+    """
+
+    def __call__(self):
+        """
+          Test if the current user can acess urban view
+        """
+        portal = api.portal.getSite()
+        sm = getSecurityManager()
+
+        return sm.checkPermission('View', getattr(portal, 'urban'))
