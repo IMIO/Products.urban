@@ -29,7 +29,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-
+    
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -340,7 +340,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 row = FixedRow(keyColumn='division', initialData={'division': division_id, 'name': name, 'alternative_name': name})
                 rows.append(row)
         return rows
-
 
     security.declarePublic('getVocabularyDefaultValue')
     def getVocabularyDefaultValue(self, vocabulary_name, context, in_urban_config, multivalued=False):
@@ -783,8 +782,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         else:
             return at_obj.Schema()[fieldRealName]
 
-    security.declarePublic('generateReference')
-
     security.declarePublic('listEventTypes')
     def listEventTypes(self, context, urbanConfigId):
         """
@@ -1062,6 +1059,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         #res = urlparse(self.getPylonsHost()) #getPylonsHost doesn't contain a valid url beginning with http
         #return '%s: //%s'%(res.scheme, res.netloc)
         return '/'.join(self.getPylonsHost().split('/')[:3])  # don't use os.path!
+
 
 
 registerType(UrbanTool, PROJECTNAME)
