@@ -69,6 +69,13 @@
      permission="zope2.View"
   />
 
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATFolder"
+     name="urbainxml"
+     class=".urbain_220.UrbainXMLExport"
+     permission="zope2.View"
+  />
+
   <!-- Old migrated instances use an ATBTreeFolder to store the licences... -->
   <browser:page
      for="Products.ATContentTypes.interfaces.IATBTreeFolder"
