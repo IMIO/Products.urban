@@ -382,6 +382,7 @@
              i18n:attributes="title">
   <action url="" category="workflow" i18n:translate="">accept</action>
   <guard>
+   <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
  <transition transition_id="isincomplete"
@@ -393,6 +394,7 @@
              i18n:attributes="title">
   <action url="" category="workflow" i18n:translate="">isincomplete</action>
   <guard>
+   <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
  <transition transition_id="refuse"
@@ -404,6 +406,7 @@
              i18n:attributes="title">
   <action url="" category="workflow" i18n:translate="">refuse</action>
   <guard>
+   <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
  <transition transition_id="reopen"
@@ -415,6 +418,7 @@
              i18n:attributes="title">
   <action url="" category="workflow" i18n:translate="">reopen</action>
   <guard>
+   <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
  <transition transition_id="retire"
@@ -426,6 +430,7 @@
              i18n:attributes="title">
   <action url="" category="workflow" i18n:translate="">retire</action>
   <guard>
+   <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
  <variable variable_id="action" for_catalog="False"
