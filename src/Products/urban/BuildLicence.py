@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.Inquiry import Inquiry
+from Products.urban.content.Inquiry import Inquiry
 from Products.urban.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 

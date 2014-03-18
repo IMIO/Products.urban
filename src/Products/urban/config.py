@@ -35,78 +35,78 @@ DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"
 setDefaultRoles(DEFAULT_ADD_CONTENT_PERMISSION, ('Manager', 'Owner', 'Contributor'))
 ADD_CONTENT_PERMISSIONS = {
     'GenericLicence': 'urban: Add GenericLicence',
-    'Contact': 'urban: Add Contact',
-    'Street': 'urban: Add Street',
-    'UrbanEvent': 'urban: Add UrbanEvent',
-    'UrbanEventType': 'urban: Add UrbanEventType',
     'Recipient': 'urban: Add Recipient',
     'BuildLicence': 'urban: Add BuildLicence',
     'ParcelOutLicence': 'urban: Add ParcelOutLicence',
-    'FolderManager': 'urban: Add FolderManager',
-    'UrbanVocabularyTerm': 'urban: Add UrbanVocabularyTerm',
-    'PortionOut': 'urban: Add PortionOut',
-    'RecipientCadastre': 'urban: Add RecipientCadastre',
     'Layer': 'urban: Add Layer',
     'Declaration': 'urban: Add Declaration',
-    'ParcellingTerm': 'urban: Add ParcellingTerm',
-    'PcaTerm': 'urban: Add PcaTerm',
-    'City': 'urban: Add City',
     'UrbanCertificateBase': 'urban: Add UrbanCertificateBase',
     'UrbanCertificateTwo': 'urban: Add UrbanCertificateTwo',
     'Division': 'urban: Add Division',
-    'UrbanDelay': 'urban: Add UrbanDelay',
-    'Locality': 'urban: Add Locality',
-    'LicenceConfig': 'urban: Add LicenceConfig',
-    'PersonTitleTerm': 'urban: Add PersonTitleTerm',
-    'Inquiry': 'urban: Add Inquiry',
-    'UrbanEventInquiry': 'urban: Add UrbanEvent',
-    'UrbanEventOpinionRequest': 'urban: Add UrbanEventOpinionRequest',
-    'OrganisationTerm': 'urban: Add OrganisationTerm',
     'MiscDemand': 'urban: Add MiscDemand',
-    'UrbanConfigurationValue': 'urban: Add UrbanConfigurationValue',
-    'UrbanDoc': 'urban: Add UrbanDoc',
     'EnvironmentBase': 'urban: Add EnvironmentBase',
-    'EnvironmentRubricTerm': 'urban: Add EnvironmentRubricTerm',
-    'SpecificFeatureTerm': 'urban: Add SpecificFeatureTerm',
-    'OpinionRequestEventType': 'urban: Add OpinionRequestEventType',
     'EnvironmentLicence': 'urban: Add EnvironmentLicence',
+    'PortionOut': 'urban: Add PortionOut',
+    'RecipientCadastre': 'urban: Add RecipientCadastre',
+    'UrbanEvent': 'urban: Add UrbanEvent',
+    'UrbanEventOpinionRequest': 'urban: Add UrbanEventOpinionRequest',
+    'UrbanEventInquiry': 'urban: Add UrbanEvent',
+    'UrbanDoc': 'urban: Add UrbanDoc',
+    'ParcellingTerm': 'urban: Add ParcellingTerm',
+    'Inquiry': 'urban: Add Inquiry',
+    'Contact': 'urban: Add Contact',
+    'PersonTitleTerm': 'urban: Add PersonTitleTerm',
+    'UrbanEventType': 'urban: Add UrbanEventType',
+    'OpinionRequestEventType': 'urban: Add OpinionRequestEventType',
+    'UrbanDelay': 'urban: Add UrbanDelay',
+    'UrbanVocabularyTerm': 'urban: Add UrbanVocabularyTerm',
+    'SpecificFeatureTerm': 'urban: Add SpecificFeatureTerm',
+    'UrbanConfigurationValue': 'urban: Add UrbanConfigurationValue',
+    'OrganisationTerm': 'urban: Add OrganisationTerm',
+    'PcaTerm': 'urban: Add PcaTerm',
+    'FolderManager': 'urban: Add FolderManager',
+    'LicenceConfig': 'urban: Add LicenceConfig',
+    'City': 'urban: Add City',
+    'Locality': 'urban: Add Locality',
+    'Street': 'urban: Add Street',
+    'EnvironmentRubricTerm': 'urban: Add EnvironmentRubricTerm',
 }
 
 setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Contact', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Street', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add UrbanEvent', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add UrbanEventType', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Recipient', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add BuildLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add ParcelOutLicence', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add FolderManager', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add UrbanVocabularyTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add PortionOut', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add RecipientCadastre', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Layer', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Declaration', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add ParcellingTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add PcaTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add City', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanCertificateBase', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanCertificateTwo', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Division', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add UrbanDelay', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Locality', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add LicenceConfig', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add PersonTitleTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Inquiry', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add UrbanEventOpinionRequest', ('Manager', 'Owner', 'Contributor'))
-setDefaultRoles('urban: Add OrganisationTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add UrbanConfigurationValue',  ('Manager', ))
-setDefaultRoles('urban: Add UrbanDoc', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvironmentBase', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add EnvironmentRubricTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add SpecificFeatureTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add OpinionRequestEventType', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvironmentLicence', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add PortionOut', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add RecipientCadastre', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add UrbanEvent', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add UrbanEventOpinionRequest', ('Manager', 'Owner', 'Contributor'))
+setDefaultRoles('urban: Add UrbanDoc', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add ParcellingTerm', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Inquiry', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Contact', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add PersonTitleTerm', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add UrbanEventType', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add OpinionRequestEventType', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add UrbanDelay', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add UrbanVocabularyTerm', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add SpecificFeatureTerm', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add UrbanConfigurationValue',  ('Manager', ))
+setDefaultRoles('urban: Add OrganisationTerm', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add PcaTerm', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add FolderManager', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add LicenceConfig', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add City', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Locality', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Street', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add EnvironmentRubricTerm', ("Manager", "Contributor"))
 
 product_globals = globals()
 

@@ -90,47 +90,24 @@ def initialize(context):
     ##/code-section custom-init-top
 
     # imports packages and types for registration
+    import content
+    import config
 
     import GenericLicence
-    import Contact
-    import UrbanTool
-    import Street
-    import UrbanEvent
-    import UrbanEventType
     import Recipient
     import BuildLicence
     import ParcelOutLicence
-    import FolderManager
-    import UrbanVocabularyTerm
-    import PortionOut
-    import RecipientCadastre
     import Layer
     import Declaration
-    import ParcellingTerm
-    import PcaTerm
-    import City
     import UrbanCertificateBase
     import UrbanCertificateTwo
     import Division
-    import UrbanDelay
-    import Locality
-    import LicenceConfig
-    import PersonTitleTerm
-    import Inquiry
-    import UrbanEventInquiry
-    import UrbanEventOpinionRequest
-    import OrganisationTerm
     import MiscDemand
-    import UrbanConfigurationValue
-    import UrbanDoc
     import EnvironmentBase
-    import EnvironmentRubricTerm
-    import SpecificFeatureTerm
-    import OpinionRequestEventType
     import EnvironmentLicence
 
     # Initialize portal tools
-    tools = [UrbanTool.UrbanTool]
+    tools = [config.UrbanTool.UrbanTool]
     ToolInit( PROJECTNAME +' Tools',
                 tools = tools,
                 icon='tool.gif'

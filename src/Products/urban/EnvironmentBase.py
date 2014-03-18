@@ -18,7 +18,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
 from Products.urban.GenericLicence import GenericLicence
-from Products.urban.Inquiry import Inquiry
+from Products.urban.content.Inquiry import Inquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget

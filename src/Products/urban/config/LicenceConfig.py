@@ -1,0 +1,161 @@
+# -*- coding: utf-8 -*-
+#
+# File: LicenceConfig.py
+#
+# Copyright (c) 2014 by CommunesPlone
+# Generator: ArchGenXML Version 2.7
+#            http://plone.org/products/archgenxml
+#
+# GNU General Public License (GPL)
+#
+
+__author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
+<stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
+__docformat__ = 'plaintext'
+
+from AccessControl import ClassSecurityInfo
+from Products.Archetypes.atapi import *
+from zope.interface import implements
+import interfaces
+
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+
+from Products.DataGridField import DataGridField, DataGridWidget
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
+
+from Products.urban.config import *
+
+##code-section module-header #fill in your manual code here
+##/code-section module-header
+
+schema = Schema((
+
+    StringField(
+        name='licencePortalType',
+        widget=StringField._properties['widget'](
+            label='Licenceportaltype',
+            label_msgid='urban_label_licencePortalType',
+            i18n_domain='urban',
+        ),
+        mode='r',
+    ),
+    LinesField(
+        name='usedAttributes',
+        widget=MultiSelectionWidget(
+            description="Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL",
+            description_msgid="urban_descr_usedAttributes",
+            size=10,
+            label='Usedattributes',
+            label_msgid='urban_label_usedAttributes',
+            i18n_domain='urban',
+        ),
+        schemata='public_settings',
+        multiValued=True,
+        vocabulary='listUsedAttributes',
+    ),
+    DataGridField(
+        name='tabsConfig',
+        widget=DataGridWidget(
+            columns={'display': CheckboxColumn('Display'), 'value': FixedColumn('Value'), 'display_name': Column('Name')},
+            label='Tabsconfig',
+            label_msgid='urban_label_tabsConfig',
+            i18n_domain='urban',
+        ),
+        fixed_rows='getTabsConfigRows',
+        allow_insert=False,
+        allow_reorder=True,
+        allow_oddeven=True,
+        allow_delete=False,
+        schemata='public_settings',
+        columns=('display', 'value', 'display_name',),
+    ),
+    BooleanField(
+        name='useTabbingForDisplay',
+        default=True,
+        widget=BooleanField._properties['widget'](
+            label='Usetabbingfordisplay',
+            label_msgid='urban_label_useTabbingForDisplay',
+            i18n_domain='urban',
+        ),
+        schemata='public_settings',
+    ),
+    BooleanField(
+        name='useTabbingForEdit',
+        default=True,
+        widget=BooleanField._properties['widget'](
+            label='Usetabbingforedit',
+            label_msgid='urban_label_useTabbingForEdit',
+            i18n_domain='urban',
+        ),
+        schemata='public_settings',
+    ),
+    DataGridField(
+        name='textDefaultValues',
+        allow_oddeven=True,
+        widget=DataGridWidget(
+            columns={'fieldname' : SelectColumn('FieldName', 'listTextFields'), 'text' : TextAreaColumn('Text', rows=6, cols=60)},
+            label='Textdefaultvalues',
+            label_msgid='urban_label_textDefaultValues',
+            i18n_domain='urban',
+        ),
+        schemata='public_settings',
+        columns=('fieldname', 'text'),
+        validators=('isTextFieldConfigured',),
+    ),
+    StringField(
+        name='referenceTALExpression',
+        default="python: obj.getLicenceTypeAcronym() + '/' + date.strftime('%Y') + '/' + numerotation + '/' + tool.getCurrentFolderManagerInitials()",
+        widget=StringField._properties['widget'](
+            size=100,
+            label='Referencetalexpression',
+            label_msgid='urban_label_referenceTALExpression',
+            i18n_domain='urban',
+        ),
+        schemata='public_settings',
+    ),
+    StringField(
+        name='numerotation',
+        default=0,
+        widget=StringField._properties['widget'](
+            label='Numerotation',
+            label_msgid='urban_label_numerotation',
+            i18n_domain='urban',
+        ),
+        schemata='public_settings',
+    ),
+
+),
+)
+
+##code-section after-local-schema #fill in your manual code here
+##/code-section after-local-schema
+
+LicenceConfig_schema = BaseFolderSchema.copy() + \
+    schema.copy()
+
+##code-section after-schema #fill in your manual code here
+##/code-section after-schema
+
+class LicenceConfig(BaseFolder, BrowserDefaultMixin):
+    """
+    """
+    security = ClassSecurityInfo()
+    implements(interfaces.ILicenceConfig)
+
+    meta_type = 'LicenceConfig'
+    _at_rename_after_creation = True
+
+    schema = LicenceConfig_schema
+
+    ##code-section class-header #fill in your manual code here
+    ##/code-section class-header
+
+    # Methods
+
+registerType(LicenceConfig, PROJECTNAME)
+# end of class LicenceConfig
+
+##code-section module-footer #fill in your manual code here
+##/code-section module-footer
+
