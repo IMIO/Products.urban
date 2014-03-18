@@ -73,6 +73,8 @@ RecipientCadastre_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+RecipientCadastre_schema['title'].widget.visible = False
+RecipientCadastre_schema['adr2'].widget.visible = False
 ##/code-section after-schema
 
 class RecipientCadastre(BaseFolder, BrowserDefaultMixin):
@@ -90,6 +92,28 @@ class RecipientCadastre(BaseFolder, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
+
+    # Manually created methods
+
+    def getParcels(self):
+        """
+          Return contained Parcels...
+        """
+        return self.objectValues("PortionOut")
+
+    def getParcelsForDisplay(self):
+        """
+          Return contained Parcels for being displayed...
+        """
+        res = []
+        for parcel in self.getParcels():
+            res.append(parcel.Title())
+        return '<br />'.join(res)
+
+    def getRecipientAddress(self):
+        return self.getAdr1()+' '+self.getAdr2()
+
+
 
 registerType(RecipientCadastre, PROJECTNAME)
 # end of class RecipientCadastre

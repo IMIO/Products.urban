@@ -17,13 +17,14 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.content.UrbanEvent import UrbanEvent
+from Products.urban.UrbanEvent import UrbanEvent
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.CMFCore.utils import getToolByName
 ##/code-section module-header
 
 schema = Schema((
@@ -69,6 +70,37 @@ class UrbanEventOpinionRequest(UrbanEvent, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
+
+    # Manually created methods
+
+    security.declarePublic('getTemplates')
+    def getTemplates(self):
+        """
+          Returns contained templates (File)
+        """
+        wf_tool = getToolByName(self, 'portal_workflow')
+        if len(self.getUrbaneventtypes().listFolderContents({'portal_type': 'UrbanDoc'})):
+            return [template for template in self.getUrbaneventtypes().listFolderContents({'portal_type': 'UrbanDoc'})
+                    if wf_tool.getInfoFor(template, 'review_state') == 'enabled']
+        urbantool = getToolByName(self,'portal_urban')
+        opinionrequest_config = getattr(getattr(urbantool, self.aq_parent.portal_type.lower()).urbaneventtypes, "config-opinion-request")
+        return opinionrequest_config.listFolderContents({'portal_type': 'UrbanDoc'})
+
+    security.declarePublic('getLinkedOrganisationTerm')
+    def getLinkedOrganisationTerm(self):
+        """
+          Returns of the term that is linked to the linked UrbanEventType
+        """
+        return self.getUrbaneventtypes()
+
+    security.declarePublic('getLinkedOrganisationTermId')
+    def getLinkedOrganisationTermId(self):
+        """
+          Returns the id of the term that is linked to the linked UrbanEventType
+        """
+        return self.getUrbaneventtypes().getId()
+
+
 
 registerType(UrbanEventOpinionRequest, PROJECTNAME)
 # end of class UrbanEventOpinionRequest

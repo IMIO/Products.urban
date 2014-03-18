@@ -128,6 +128,45 @@ class ParcellingTerm(BaseFolder, BrowserDefaultMixin):
 
     # Methods
 
+    # Manually created methods
+
+    security.declarePublic('updateTitle')
+    def updateTitle(self):
+        """
+           Update the title to set a clearly identify the buildlicence
+        """
+        parcel_baserefs = list(set(['"%s %s %s"' % (prc.getDivision(), prc.getSection(), prc.getRadical()) for prc in self.getParcels()]))
+        refs = ''
+        if parcel_baserefs:
+            refs = parcel_baserefs[0]
+            for ref in parcel_baserefs[1:]:
+                refs = '%s, %s' % (refs, ref)
+        title = "%s (%s" % (self.getLabel(), self.getSubdividerName())
+
+        auth_date = self.getAuthorizationDate()
+        if auth_date:
+            title = '%s - %s' % (title, self.toLocalizedTime(auth_date).encode('utf8'))
+
+        approval_date = self.getApprovalDate()
+        if approval_date:
+            title = '%s - %s' % (title, self.toLocalizedTime(approval_date).encode('utf8'))
+
+        if refs:
+            title = '%s - %s' % (title, refs)
+
+        title = '%s)' % title
+        self.setTitle(str(title))
+        self.reindexObject()
+
+    security.declarePublic('getParcels')
+    def getParcels(self):
+        """
+           Return the list of parcels (portionOut) for the Licence
+        """
+        return self.objectValues('PortionOut')
+
+
+
 registerType(ParcellingTerm, PROJECTNAME)
 # end of class ParcellingTerm
 
