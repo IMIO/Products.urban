@@ -17,8 +17,8 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.UrbanEventType import UrbanEventType
-from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
+from Products.urban.config.UrbanVocabularyTerm import UrbanVocabularyTerm
+from Products.urban.config.UrbanEventType import UrbanEventType
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -36,14 +36,14 @@ schema = Schema((
 ##/code-section after-local-schema
 
 OpinionRequestEventType_schema = OrderedBaseFolderSchema.copy() + \
-    getattr(UrbanEventType, 'schema', Schema(())).copy() + \
     getattr(UrbanVocabularyTerm, 'schema', Schema(())).copy() + \
+    getattr(UrbanEventType, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class OpinionRequestEventType(OrderedBaseFolder, UrbanEventType, UrbanVocabularyTerm, BrowserDefaultMixin):
+class OpinionRequestEventType(OrderedBaseFolder, UrbanVocabularyTerm, UrbanEventType, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
