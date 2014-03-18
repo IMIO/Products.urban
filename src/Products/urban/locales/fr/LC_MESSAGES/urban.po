@@ -1006,7 +1006,7 @@ msgid "not_permitted_to_add_annex"
 msgstr "Vous ne pouvez pas ajouter d'annexe"
 
 msgid "not_permitted_to_add_urbanevent"
-msgstr "Vous ne pouvez pas générer d'événement"
+msgstr "Vous ne pouvez pas générer de documents"
 
 msgid "notaries_folder_title"
 msgstr "Notaires"
