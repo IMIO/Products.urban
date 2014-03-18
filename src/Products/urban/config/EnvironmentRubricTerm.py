@@ -17,12 +17,15 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.config.UrbanVocabularyTerm import UrbanVocabularyTerm
+from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.CMFCore.utils import getToolByName
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.urban.utils import strip_tags
 ##/code-section module-header
 
 schema = Schema((
@@ -79,6 +82,25 @@ class EnvironmentRubricTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixi
     ##/code-section class-header
 
     # Methods
+
+    # Manually created methods
+
+    def getClass(self):
+        return self.getExtraValue()
+
+    def updateTitle(self):
+        class_number = self.getClass()
+        rubric_number = self.getNumber()
+        description = strip_tags(self.Description())
+        new_title =  "classe %s,  %s : %s" % (class_number, rubric_number, description)
+        self.setTitle(new_title)
+        self.reindexObject(idxs=('Title', 'SearchableText', 'sortable_title', ))
+
+    def getExploitationConditionsPath(self):
+        portal_urban = getToolByName(self, 'portal_urban')
+        return '/'.join(portal_urban.exploitationconditions.getPhysicalPath())
+
+
 
 registerType(EnvironmentRubricTerm, PROJECTNAME)
 # end of class EnvironmentRubricTerm

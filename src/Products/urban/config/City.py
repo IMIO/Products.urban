@@ -66,6 +66,7 @@ class City(BaseFolder, BrowserDefaultMixin):
 
     # Methods
 
+
 registerType(City, PROJECTNAME)
 # end of class City
 

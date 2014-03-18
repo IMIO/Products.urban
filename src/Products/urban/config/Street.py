@@ -23,6 +23,8 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Acquisition import aq_inner, aq_parent
+from Products.CMFCore import permissions
 ##/code-section module-header
 
 schema = Schema((
@@ -104,6 +106,7 @@ Street_schema = BaseSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+del Street_schema['title']
 ##/code-section after-schema
 
 class Street(BaseContent, BrowserDefaultMixin):
@@ -121,6 +124,33 @@ class Street(BaseContent, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
+
+    # Manually created methods
+
+    security.declarePublic('Title')
+    def Title(self):
+        """
+           Update the title to clearly identify the street in the city
+        """
+        #format is "streetName (cityZipeCode - cityTitle)"
+        city = self.getParentNode()
+        title = "%s (%s - %s)" % (self.getStreetName(), city.getZipCode(), city.Title())
+        return str(title)
+
+    security.declareProtected(permissions.View, 'SearchableText')
+    def SearchableText(self):
+        """
+          Override to take Title into account
+        """
+        return self.Title()
+
+    def getCity(self):
+        """
+          Returns the city
+        """
+        return aq_parent(aq_inner(self))
+
+
 
 registerType(Street, PROJECTNAME)
 # end of class Street

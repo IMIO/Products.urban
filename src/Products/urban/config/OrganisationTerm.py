@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.config.UrbanVocabularyTerm import UrbanVocabularyTerm
+from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
@@ -69,6 +69,7 @@ class OrganisationTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
+
 
 registerType(OrganisationTerm, PROJECTNAME)
 # end of class OrganisationTerm

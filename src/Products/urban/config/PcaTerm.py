@@ -17,12 +17,13 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.config.UrbanConfigurationValue import UrbanConfigurationValue
+from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from zope.i18n import translate as _
 ##/code-section module-header
 
 schema = Schema((
@@ -129,8 +130,34 @@ class PcaTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMixin):
     security.declarePublic('listDecreeTypes')
     def listDecreeTypes(self):
         """
+          Return a list of decree types
         """
-        pass
+        lst=[
+             ['royal', _('decree_type_royal', 'urban', context=self.REQUEST)],
+             ['departmental', _('decree_type_departmental', 'urban', context=self.REQUEST)],
+              ]
+        vocab = []
+        for elt in lst:
+            vocab.append((elt[0], elt[1]))
+        return DisplayList(tuple(vocab))
+
+    # Manually created methods
+
+    security.declarePublic('Title')
+    def Title(self):
+        """
+           Override the Title method to display several data
+        """
+        label = self.getLabel()
+        number = self.getNumber()
+        date = self.toLocalizedTime(self.getDecreeDate()).encode('utf8')
+        decree_type = self.displayValue(self.Vocabulary('decreeType')[0],
+                self.getDecreeType()).encode('utf8')
+        result = "%s (%s - %s - %s)" % (
+            label, number, date, decree_type)
+        return result
+
+
 
 registerType(PcaTerm, PROJECTNAME)
 # end of class PcaTerm

@@ -17,8 +17,8 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.config.UrbanVocabularyTerm import UrbanVocabularyTerm
-from Products.urban.config.UrbanEventType import UrbanEventType
+from Products.urban.UrbanEventType import UrbanEventType
+from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -36,14 +36,14 @@ schema = Schema((
 ##/code-section after-local-schema
 
 OpinionRequestEventType_schema = OrderedBaseFolderSchema.copy() + \
-    getattr(UrbanVocabularyTerm, 'schema', Schema(())).copy() + \
     getattr(UrbanEventType, 'schema', Schema(())).copy() + \
+    getattr(UrbanVocabularyTerm, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class OpinionRequestEventType(OrderedBaseFolder, UrbanVocabularyTerm, UrbanEventType, BrowserDefaultMixin):
+class OpinionRequestEventType(OrderedBaseFolder, UrbanEventType, UrbanVocabularyTerm, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -58,6 +58,18 @@ class OpinionRequestEventType(OrderedBaseFolder, UrbanVocabularyTerm, UrbanEvent
     ##/code-section class-header
 
     # Methods
+
+    # Manually created methods
+
+    security.declarePublic('getAddressCSV')
+    def getAddressCSV(self):
+        name = self.Title()
+        lines = self.Description()[3:-4].split('<br />')
+        description = lines[:-2]
+        address = lines[-2:]
+        return '%s|%s|%s|%s' % (name, ' '.join(description), address[0], address[1])
+
+
 
 registerType(OpinionRequestEventType, PROJECTNAME)
 # end of class OpinionRequestEventType

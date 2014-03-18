@@ -65,6 +65,7 @@ class UrbanConfigurationValue(BaseContent, BrowserDefaultMixin):
 
     # Methods
 
+
 registerType(UrbanConfigurationValue, PROJECTNAME)
 # end of class UrbanConfigurationValue
 

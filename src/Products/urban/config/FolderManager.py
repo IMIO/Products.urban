@@ -23,6 +23,10 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Contact import Contact
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from zope.i18n import translate
+from Products.urban.config import URBAN_TYPES
 ##/code-section module-header
 
 schema = Schema((
@@ -76,6 +80,8 @@ FolderManager_schema = Contact.schema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+FolderManager_schema.moveField('initials', before='street')
+FolderManager_schema.moveField('grade', before='street')
 ##/code-section after-schema
 
 class FolderManager(BaseContent, Contact, BrowserDefaultMixin):
@@ -90,9 +96,28 @@ class FolderManager(BaseContent, Contact, BrowserDefaultMixin):
     schema = FolderManager_schema
 
     ##code-section class-header #fill in your manual code here
+    archetype_name = 'FolderManager'
     ##/code-section class-header
 
     # Methods
+
+    # Manually created methods
+
+    security.declarePublic('Title')
+    def Title(self):
+        """
+          Return a correctly formatted title
+        """
+        return "%s %s (%s)" % (self.getName1(), self.getName2(), self.displayValue(self.Vocabulary('grade')[0], self.getGrade()).encode('utf8'))
+
+    security.declarePublic('listLicenceTypes')
+    def listLicenceTypes(self):
+        """
+          Return all the licence types manageable
+        """
+        return URBAN_TYPES
+
+
 
 registerType(FolderManager, PROJECTNAME)
 # end of class FolderManager
