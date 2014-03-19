@@ -26,7 +26,9 @@ from Products.urban.config import *
 from zope.i18n import translate
 from OFS.ObjectManager import BeforeDeleteException
 from Products.CMFCore.utils import getToolByName
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+
+from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.cfg import interfaces as event_interfaces
 from Products.urban.utils import setOptionalAttributes
 
 optional_fields = [
@@ -291,13 +293,13 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         return translate('inquiry_title_and_number', 'urban', mapping={'number': position + 1}, context=self.REQUEST)
 
     def getLastInquiry(self):
-        return self._getLastEvent(interfaces.IInquiryEvent)
+        return self._getLastEvent(event_interfaces.IInquiryEvent)
 
     def getLastOpinionRequest(self):
-        return self._getLastEvent(interfaces.IOpinionRequestEvent)
+        return self._getLastEvent(event_interfaces.IOpinionRequestEvent)
 
     def getAllTechnicalServiceOpinionRequests(self):
-        return self._getAllEvents(interfaces.ITechnicalServiceOpinionRequestEvent)
+        return self._getAllEvents(event_interfaces.ITechnicalServiceOpinionRequestEvent)
 
     security.declarePublic('getSolicitOpinionValue')
     def getSolicitOpinionValue(self, opinionId):
@@ -349,7 +351,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
 
     def getAllOpinionRequests(self, organisation=""):
         if organisation == "":
-            return self._getAllEvents(interfaces.IOpinionRequestEvent)
+            return self._getAllEvents(event_interfaces.IOpinionRequestEvent)
         catalog = getToolByName(self, 'portal_catalog')
         query = {'path': {'query': self.absolute_url_path(),
                           'depth': 1},
@@ -367,7 +369,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         return allOpinionsNoDup.values()
 
     def getAllInquiries(self):
-        return self._getAllEvents(interfaces.IInquiryEvent)
+        return self._getAllEvents(event_interfaces.IInquiryEvent)
 
     def getAllClaimsTexts(self):
         claimsTexts = []

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# File: OrganisationTerm.py
+# File: OpinionRequestEventType.py
 #
 # Copyright (c) 2014 by CommunesPlone
 # Generator: ArchGenXML Version 2.7
@@ -17,10 +17,10 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.config.UrbanVocabularyTerm import UrbanVocabularyTerm
+from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabularyTerm
+from Products.urban.cfg.UrbanEventType import UrbanEventType
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -28,18 +28,6 @@ from Products.urban.config import *
 
 schema = Schema((
 
-    ReferenceField(
-        name='LinkedOpinionRequestEvent',
-        widget=ReferenceBrowserWidget(
-            label='Linkedopinionrequestevent',
-            label_msgid='urban_label_LinkedOpinionRequestEvent',
-            i18n_domain='urban',
-        ),
-        allowed_types=('UrbanEventType', 'OpinionRequestEventType'),
-        multiValued=0,
-        relationship='LinkedOpinionRequestEvent',
-        write_permission="Manage portal",
-    ),
 
 ),
 )
@@ -47,32 +35,44 @@ schema = Schema((
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-OrganisationTerm_schema = BaseSchema.copy() + \
+OpinionRequestEventType_schema = OrderedBaseFolderSchema.copy() + \
     getattr(UrbanVocabularyTerm, 'schema', Schema(())).copy() + \
+    getattr(UrbanEventType, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class OrganisationTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin):
+class OpinionRequestEventType(OrderedBaseFolder, UrbanVocabularyTerm, UrbanEventType, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
-    implements(interfaces.IOrganisationTerm)
+    implements(interfaces.IOpinionRequestEventType)
 
-    meta_type = 'OrganisationTerm'
+    meta_type = 'OpinionRequestEventType'
     _at_rename_after_creation = True
 
-    schema = OrganisationTerm_schema
+    schema = OpinionRequestEventType_schema
 
     ##code-section class-header #fill in your manual code here
     ##/code-section class-header
 
     # Methods
 
+    # Manually created methods
 
-registerType(OrganisationTerm, PROJECTNAME)
-# end of class OrganisationTerm
+    security.declarePublic('getAddressCSV')
+    def getAddressCSV(self):
+        name = self.Title()
+        lines = self.Description()[3:-4].split('<br />')
+        description = lines[:-2]
+        address = lines[-2:]
+        return '%s|%s|%s|%s' % (name, ' '.join(description), address[0], address[1])
+
+
+
+registerType(OpinionRequestEventType, PROJECTNAME)
+# end of class OpinionRequestEventType
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer

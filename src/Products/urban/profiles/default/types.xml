@@ -3,8 +3,6 @@
         meta_type="Plone Types Tool">
  <object name="GenericLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Recipient"
-         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="BuildLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="ParcelOutLicence"

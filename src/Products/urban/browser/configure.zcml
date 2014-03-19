@@ -24,7 +24,7 @@
   />
 
   <browser:page
-      for="Products.urban.interfaces.IUrbanTool"
+      for="Products.urban.cfg.interfaces.IUrbanTool"
       name="getProxy"
       class=".views.ProxyController"
       attribute="getProxy"
@@ -131,7 +131,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IUrbanTool"
+     for="Products.urban.cfg.interfaces.IUrbanTool"
      name="urbanconfigview"
      class=".urbanconfigview.UrbanConfigView"
      template="templates/urbanconfigview.pt"
@@ -139,14 +139,14 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IUrbanTool"
+     for="Products.urban.cfg.interfaces.IUrbanTool"
      name="urbanconfigmacros"
      template="templates/urbanconfigmacros.pt"
      permission="zope2.View"
   />
 
   <browser:page
-     for="Products.urban.interfaces.ILicenceConfig"
+     for="Products.urban.cfg.interfaces.ILicenceConfig"
      name="licenceconfigview"
      class=".licenceconfigview.LicenceConfigView"
      template="templates/urbanconfigview.pt"
@@ -154,14 +154,14 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.ILicenceConfig"
+     for="Products.urban.cfg.interfaces.ILicenceConfig"
      name="licenceconfigmacros"
      template="templates/urbanconfigmacros.pt"
      permission="zope2.View"
   />
 
   <browser:page
-     for="Products.urban.interfaces.IContact"
+     for="Products.urban.content.interfaces.IContact"
      name="contactview"
      class=".contactview.ContactView"
      template="templates/contactview.pt"
@@ -169,14 +169,14 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IContact"
+     for="Products.urban.content.interfaces.IContact"
      name="contactmacros"
      template="templates/contactmacros.pt"
      permission="zope2.View"
   />
 
   <browser:page
-     for="Products.urban.interfaces.IUrbanEventInquiry"
+     for="Products.urban.content.interfaces.IUrbanEventInquiry"
      name="urbaneventinquiryview"
      class=".urbaneventviews.UrbanEventInquiryView"
      template="templates/urbaneventinquiryview.pt"
@@ -184,14 +184,14 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IUrbanEvent"
+     for="Products.urban.content.interfaces.IUrbanEvent"
      name="create_urbandoc"
      class=".factory.CreateUrbanDoc"
      permission="zope2.View"
   />
 
   <browser:page
-     for="Products.urban.interfaces.IUrbanEvent"
+     for="Products.urban.content.interfaces.IUrbanEvent"
      name="urbaneventview"
      class=".urbaneventviews.UrbanEventView"
      template="templates/urbaneventview.pt"
@@ -200,13 +200,13 @@
 
   <browser:page
      name="urbanevent-macros"
-     for="Products.urban.interfaces.IUrbanEvent"
+     for="Products.urban.content.interfaces.IUrbanEvent"
      template="templates/urbaneventmacros.pt"
      permission="zope2.View"
   />
 
   <browser:page
-     for="Products.urban.interfaces.IUrbanDoc"
+     for="Products.urban.content.interfaces.IUrbanDoc"
      name="urbandocview"
      class=".urbandocview.UrbanDocView"
      template="templates/urbandocview.pt"
@@ -214,7 +214,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IInquiry"
+     for="Products.urban.content.interfaces.IInquiry"
      name="inquiryview"
      class=".inquiryview.InquiryView"
      template="templates/inquiryview.pt"
@@ -222,7 +222,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IUrbanEvent"
+     for="Products.urban.content.interfaces.IUrbanEvent"
      name="longtextview"
      class=".longtextview.LongTextView"
      template="templates/longtextview.pt"
@@ -262,7 +262,7 @@
 
   <!-- register the parcel recordview for parcellingterms as well since they can now contains parcels object -->
   <browser:page
-     for="Products.urban.interfaces.IParcellingTerm"
+     for="Products.urban.content.interfaces.IParcellingTerm"
      name="parcelrecordsview"
      class=".parcelrecordsview.ParcelRecordsView"
      template="templates/parcelrecordsview.pt"
@@ -270,7 +270,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IParcellingTerm"
+     for="Products.urban.content.interfaces.IParcellingTerm"
      name="parcelhistoricrecordsview"
      class=".parcelrecordsview.ParcelHistoricRecordsView"
      template="templates/parcelrecordsview.pt"
@@ -278,7 +278,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IParcellingTerm"
+     for="Products.urban.content.interfaces.IParcellingTerm"
      name="parcellingtermview"
      class=".parcellingtermview.ParcellingTermView"
      template="templates/parcellingtermview.pt"
@@ -340,7 +340,7 @@
   />
 
   <browser:page
-      for="Products.urban.interfaces.IUrbanTool"
+      for="Products.urban.cfg.interfaces.IUrbanTool"
       name="templatessum"
       class=".views.TemplatesSummary"
       template="templates/templatessummary.pt"
@@ -348,7 +348,7 @@
       />
 
   <browser:page
-      for="Products.urban.interfaces.IUrbanTool"
+      for="Products.urban.cfg.interfaces.IUrbanTool"
       name="parcelsconsistency"
       class=".parcelsconsistencyview.ParcelsConsistencyView"
       template="templates/parcelsconsistencyview.pt"
@@ -399,7 +399,7 @@
 
     <browser:viewlet
        name="imio.actionspanel"
-       for="Products.urban.interfaces.IUrbanEvent"
+       for="Products.urban.content.interfaces.IUrbanEvent"
        manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
        class=".browser.viewlets.ActionsPanelViewlet"
@@ -408,7 +408,7 @@
      />
 
     <browser:page
-        for="Products.urban.interfaces.IUrbanEvent"
+        for="Products.urban.content.interfaces.IUrbanEvent"
         name="actions_panel"
         class="Products.urban.browser.event_actionspanel.EventActionsPanelView"
         layer="imio.actionspanel.interfaces.IActionsPanelLayer"

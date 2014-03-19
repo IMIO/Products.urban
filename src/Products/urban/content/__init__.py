@@ -30,6 +30,10 @@ __docformat__ = 'plaintext'
 
 
 ##code-section init-module-header #fill in your manual code here
+import Notary
+# next line to be removed when migration #1283 is done
+import Architect
+import Geometrician
 ##/code-section init-module-header
 
 

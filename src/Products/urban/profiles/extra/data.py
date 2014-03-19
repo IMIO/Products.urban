@@ -60,7 +60,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': ({'id': "urb-recepisse", 'title': "Récépissé de la demande (article 115)"},),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IDepositEvent',
         },
         {
             'id': "avis-etude-incidence",
@@ -78,7 +78,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': ({'id': "urb-recepisse-art115-complement", 'title': "Récépissé d'un complément à une demande de permis (article 115)"},),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IMissingPartDepositEvent',
         },
         {
             'id': "recepisse-article-116",
@@ -86,7 +86,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': ({'id': "urb-recepisse-art116", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
-            'eventTypeType': 'Products.urban.interfaces.IModificationDepositEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IModificationDepositEvent',
         },
         {
             'id': "fiche-technique-voirie",
@@ -97,7 +97,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "urb-avis-technique-voirie", 'title': "Avis technique voirie"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ITechnicalServiceOpinionRequestEvent',
         },
         {
             'id': "fiche-technique-energie",
@@ -108,7 +108,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "urb-avis-technique-energie", 'title': "Avis technique énergie"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ITechnicalServiceOpinionRequestEvent',
         },
         {
             'id': "fiche-technique-urbanisme",
@@ -119,14 +119,14 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "urb-avis-technique-urbanisme", 'title': "Avis technique urbanisme"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ITechnicalServiceOpinionRequestEvent',
         },
         {
             'id': "dossier-incomplet",
             'title': "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IMissingPartEvent',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -139,7 +139,7 @@ urbanEventTypes = {
             'title': "Accusé de réception (dossier complet - article 116 § 1)",
             'activatedFields': ['transmitDate'],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IAcknowledgmentEvent',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -178,7 +178,7 @@ urbanEventTypes = {
                 {'id': "urb-envoi-premier-dossier-art127-rw", 'title': "Lettre d'envoi du dossier (article 127) à la RW"},
                 {'id': "urb-envoi-premier-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IWalloonRegionPrimoEvent',
         },
         {
             'id': "enquete-publique",
@@ -202,7 +202,7 @@ urbanEventTypes = {
                 {'id': "urb-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "urb-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IInquiryEvent',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['investigationArticlesTextDefaultValue']), 'fieldname': 'investigationArticlesText'},
                 {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
@@ -214,7 +214,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "urb-avis", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -226,7 +226,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('service-pop')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -238,7 +238,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spw-dgo1')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -250,7 +250,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dgrne')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -262,7 +262,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dnf')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -274,7 +274,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('stp')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -286,7 +286,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pi')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -298,7 +298,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('bec')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -310,7 +310,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('svp')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -322,7 +322,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('agriculture')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -334,7 +334,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pn')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -346,7 +346,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('crmsf')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -358,7 +358,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('swde')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -370,7 +370,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('ccatm')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -382,7 +382,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('inasep')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -394,7 +394,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -406,7 +406,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spge')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -418,7 +418,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('cibe')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -430,7 +430,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -442,7 +442,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('infrabel')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -454,7 +454,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('voo')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'id': "rapport-du-college",
@@ -467,7 +467,7 @@ urbanEventTypes = {
                 {'id': "urb-rapp-service", 'title': "Rapport du Service"},
                 {'id': "urb-rapp-college", 'title': "Rapport du Collège"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ICollegeReportEvent',
         },
         {
             'id': "transmis-2eme-dossier-rw",
@@ -480,7 +480,7 @@ urbanEventTypes = {
                 {'id': "urb-envoi-second-dossier-demandeur", 'title': "Information au demandeur envoi second dossier"},
                 {'id': "urb-envoi-premier-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IWalloonRegionOpinionRequestEvent',
         },
         {
             'id': "passage-conseil-communal",
@@ -492,7 +492,7 @@ urbanEventTypes = {
                 {'id': "urb-conseil-delib-communale-creation", 'title': "Délibération du conseil communal (ouverture de voirie)"},
                 {'id': "urb-conseil-delib-communale-modif", 'title': "Délibération du conseil communal (modification de voirie)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICommunalCouncilEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ICommunalCouncilEvent',
         },
         {
             'id': "delivrance-du-permis-octroi-ou-refus",
@@ -517,7 +517,7 @@ urbanEventTypes = {
                 {'id': "urb-debut-travaux", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
                 {'id': "urb-decision-deliberation-college", 'title': "Delibération du collège d'octroi du permis"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ITheLicenceEvent',
         },
         {
             'id': "fiche-recap",
@@ -570,7 +570,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IWorkBeginningEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IWorkBeginningEvent',
         },
         {
             'id': "fin-des-travaux",
@@ -600,7 +600,7 @@ urbanEventTypes = {
                 {'id': "urb-prorogation-transmis-accept", 'title': "Acceptation de prorogation (lettre au demandeur)"},
                 {'id': "urb-prorogation-transmis-accept-fd", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IProrogationEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IProrogationEvent',
         },
         {
             'id': "suspension-du-permis",
@@ -682,7 +682,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "decl-recepisse", 'title': "Récepissé de la déclaration"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IDepositEvent',
         },
         {
             'id': 'avis-technique',
@@ -705,7 +705,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': 'decl-delib-college', 'title': "Délibération collège"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ICollegeReportEvent',
         },
         {
             'id': "transmis-decision",
@@ -719,7 +719,7 @@ urbanEventTypes = {
                 {'id': "decl-transmis-decision-fd", 'title': "Transmis décision au FD"},
                 {'id': "decl-transmis-decision-demandeur", 'title': "Transmis décision au demandeur"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ITheLicenceEvent',
         },
     ),
     'urbancertificateone': (
@@ -733,7 +733,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "cu1-recepisse", 'title': "Récépissé de la demande"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IDepositEvent',
         },
         {
             'id': "fiche-technique-voirie",
@@ -744,7 +744,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "cu1-avis-technique-voirie", 'title': "Avis technique voirie"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ITechnicalServiceOpinionRequestEvent',
         },
         {
             'id': "fiche-technique-urbanisme",
@@ -755,7 +755,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "cu1-avis-technique-urbanisme", 'title': "Avis technique urbanisme"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ITechnicalServiceOpinionRequestEvent',
         },
         {
             'id': "transmis-dossier-rw",
@@ -766,7 +766,7 @@ urbanEventTypes = {
                 {'id': "cu1-envoi-dossier-rw", 'title': "Lettre d'envoi du dossier à la RW"},
                 {'id': "cu1-envoi-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IWalloonRegionPrimoEvent',
         },
         {
             'id': "octroi-cu1",
@@ -781,7 +781,7 @@ urbanEventTypes = {
                 {'id': "cu1-demande-paiement", 'title': "Demande de paiement"},
                 {'id': "cu1-rappel-demande-paiement", 'title': "Rappel paiement"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ITheLicenceEvent',
         },
     ),
     'urbancertificatetwo': (
@@ -795,14 +795,14 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "cu2-recepisse", 'title': "Récépissé de la demande"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IDepositEvent',
         },
         {
             'id': "dossier-incomplet",
             'title': "Dossier incomplet (avec listing des pièces manquantes)",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IMissingPartEvent',
             'podTemplates': (
                 {'id': "cu2-dossier-incomplet-demandeur", 'title': "Dossier incomplet (lettre demandeur)"},
             ),
@@ -829,7 +829,7 @@ urbanEventTypes = {
                 {'id': "cu2-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "cu2-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IInquiryEvent',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
         },
         {
@@ -838,7 +838,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "cu2-avis", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -850,7 +850,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('service-pop')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -862,7 +862,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spw-dgo1')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -874,7 +874,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dgrne')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -886,7 +886,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dnf')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -898,7 +898,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('stp')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -910,7 +910,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pi')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -922,7 +922,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('bec')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -934,7 +934,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('svp')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -946,7 +946,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('agriculture')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -958,7 +958,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pn')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -970,7 +970,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('crmsf')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -982,7 +982,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('swde')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -994,7 +994,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('ccatm')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1006,7 +1006,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('inasep')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1018,7 +1018,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1030,7 +1030,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spge')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1042,7 +1042,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('cibe')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1054,7 +1054,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1066,7 +1066,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('infrabel')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1078,7 +1078,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('voo')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'id': "rapport-du-college",
@@ -1089,7 +1089,7 @@ urbanEventTypes = {
                 {'id': "cu2-rapp-service", 'title': "Rapport du Service"},
                 {'id': "cu2-rapp-college", 'title': "Rapport du Collège"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ICollegeReportEvent',
         },
         {
             'id': "transmis-dossier-rw",
@@ -1100,7 +1100,7 @@ urbanEventTypes = {
                 {'id': "cu2-envoi-dossier-rw", 'title': "Lettre d'envoi du dossier à la RW"},
                 {'id': "cu2-envoi-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IWalloonRegionPrimoEvent',
         },
         {
             'id': "octroi-cu2",
@@ -1122,7 +1122,7 @@ urbanEventTypes = {
                 },
                 {'id': "cu2-certif", 'title': "Certificat d'urbanisme 2 (annexe 35 formulaire II B)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ITheLicenceEvent',
         },
     ),
     'division': (
@@ -1134,7 +1134,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': ({'id': "div-recepisse", 'title': "Récépissé de la demande"},),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IDepositEvent',
         },
         {
             'id': "decision-octroi-refus",
@@ -1159,7 +1159,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IDepositEvent',
         },
         {
             'id': "octroi-lettre-notaire",
@@ -1171,7 +1171,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "not-lettre-information-notariale", 'title': "Lettre d'information notariale (annexe 49 formulaire III)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ITheLicenceEvent',
         },
     ),
     'envclassone': (
@@ -1183,7 +1183,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': ({'id': "env1-recepisse", 'title': "Récepissé de la déclaration"},),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IDepositEvent',
         },
         {
             'id': "envoi-demande-FT",
@@ -1210,7 +1210,7 @@ urbanEventTypes = {
             'deadLineDelay': 3,
             'isKeyEvent': False,
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IMissingPartDepositEvent',
         },
         {
             'id': "envoi-complement-FT",
@@ -1237,7 +1237,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IAcknowledgmentEvent',
         },
         {
             'id': "enquete-publique",
@@ -1249,7 +1249,7 @@ urbanEventTypes = {
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IInquiryEvent',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
         },
         {
@@ -1260,7 +1260,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ILicenceDeliveryEvent',
         },
         {
             'id': "expiration",
@@ -1270,7 +1270,7 @@ urbanEventTypes = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'TALCondition': "python: False",
-            'eventTypeType': 'Products.urban.interfaces.ILicenceExpirationEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ILicenceExpirationEvent',
         },
     ),
     'envclassthree': (
@@ -1282,7 +1282,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': ({'id': "env3-recepisse", 'title': "Récepissé de la déclaration"},),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IDepositEvent',
         },
         {
             'id': "refus-de-la-demande",
@@ -1303,7 +1303,7 @@ urbanEventTypes = {
                 {'id': "env3-demande-recevable-fdft", 'title': "Déclaration recevable sans conditions complémentaires (lettre au FD/FT)"},
                 {'id': "env3-demande-paiement", 'title': "Demande de paiement"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IAcknowledgmentEvent',
         },
         {
             'id': "config-opinion-request",
@@ -1311,7 +1311,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "env3-avis", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1323,7 +1323,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('service-pop')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1335,7 +1335,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spw-dgo1')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1347,7 +1347,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dgrne')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1359,7 +1359,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dnf')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1371,7 +1371,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('stp')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1383,7 +1383,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pi')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1395,7 +1395,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('bec')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1407,7 +1407,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('svp')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1419,7 +1419,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('agriculture')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1431,7 +1431,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pn')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1443,7 +1443,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('crmsf')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1455,7 +1455,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('swde')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1467,7 +1467,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('ccatm')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1479,7 +1479,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('inasep')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1491,7 +1491,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1503,7 +1503,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spge')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1515,7 +1515,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('cibe')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1527,7 +1527,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1539,7 +1539,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('infrabel')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1551,7 +1551,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('voo')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'id': "acceptation-de-la-demande-cond",
@@ -1564,7 +1564,7 @@ urbanEventTypes = {
                 {'id': "env3-demande-recevable-cond-fdft", 'title': "Déclaration recevable avec conditions complémentaires (lettre au FD/FT)"},
                 {'id': "env3-demande-paiement", 'title': "Demande de paiement"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IAcknowledgmentEvent',
         },
         {
             'id': "rapport-au-college",
@@ -1616,7 +1616,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "miscdemand-recepisse", 'title': "Récepissé de la demande"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IDepositEvent',
         },
         {
             'id': "config-opinion-request",
@@ -1624,7 +1624,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "lot-avis", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1635,7 +1635,7 @@ urbanEventTypes = {
             'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'externalDecision', ],
             'deadLineDelay': 15,
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'id': 'deliberation-college',
@@ -1648,7 +1648,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': 'miscdemand-delib-college', 'title': "Délibération collège"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ICollegeReportEvent',
         },
         {
             'id': "transmis-decision",
@@ -1661,7 +1661,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "miscdemand-transmis-decision-demandeur", 'title': "Transmis décision au demandeur"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ITheLicenceEvent',
         },
     ),
     'parceloutlicence': (
@@ -1673,7 +1673,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': ({'id': "lot-recepisse", 'title': "Récépissé de la demande (article 115)"},),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IDepositEvent',
         },
         {
             'id': "avis-etude-incidence",
@@ -1692,7 +1692,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IMissingPartEvent',
             'podTemplates': (
                 {'id': "lot-dossier-incomplet-demandeur", 'title': "Dossier incomplet (lettre demandeur)"},
             ),
@@ -1704,7 +1704,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IAcknowledgmentEvent',
             'podTemplates': (
                 {'id': "lot-accuse", 'title': "Accusé de réception"},
                 {'id': "lot-accuse-demande-paiement", 'title': "Demande de paiement"},
@@ -1731,7 +1731,7 @@ urbanEventTypes = {
                 {'id': "lot-envoi-premier-dossier-art127-rw", 'title': "Lettre d'envoi du dossier (article 127) à la RW"},
                 {'id': "lot-envoi-premier-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IWalloonRegionPrimoEvent',
         },
         {
             'id': "enquete-publique",
@@ -1755,7 +1755,7 @@ urbanEventTypes = {
                 {'id': "lot-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "lot-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IInquiryEvent',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
         },
         {
@@ -1764,7 +1764,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "lot-avis", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1776,7 +1776,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('service-pop')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1788,7 +1788,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spw-dgo1')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1800,7 +1800,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dgrne')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1812,7 +1812,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dnf')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1824,7 +1824,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('stp')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1836,7 +1836,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pi')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1848,7 +1848,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('bec')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1860,7 +1860,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('svp')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1872,7 +1872,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('agriculture')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1884,7 +1884,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pn')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1896,7 +1896,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('crmsf')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1908,7 +1908,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('swde')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1920,7 +1920,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('ccatm')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1932,7 +1932,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('inasep')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1944,7 +1944,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1956,7 +1956,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spge')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1968,7 +1968,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('cibe')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1980,7 +1980,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1992,7 +1992,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('infrabel')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2004,7 +2004,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('voo')",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
         },
         {
             'id': "rapport-du-college",
@@ -2017,7 +2017,7 @@ urbanEventTypes = {
                 {'id': "lot-rapp-service", 'title': "Rapport du Service"},
                 {'id': "lot-rapp-college", 'title': "Rapport du Collège"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ICollegeReportEvent',
         },
         {
             'id': "transmis-2eme-dossier-rw",
@@ -2030,7 +2030,7 @@ urbanEventTypes = {
                 {'id': "lot-envoi-second-dossier-demandeur", 'title': "Information au demandeur envoi second dossier"},
                 {'id': "lot-envoi-premier-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.IWalloonRegionOpinionRequestEvent',
         },
         {
             'id': "passage-conseil-communal",
@@ -2042,7 +2042,7 @@ urbanEventTypes = {
                 {'id': "lot-conseil-delib-communale-creation", 'title': "Délibération du conseil communal (ouverture de voirie)"},
                 {'id': "lot-conseil-delib-communale-modif", 'title': "Délibération du conseil communal (modification de voirie)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICommunalCouncilEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ICommunalCouncilEvent',
         },
         {
             'id': "delivrance-du-permis-octroi-ou-refus",
@@ -2064,7 +2064,7 @@ urbanEventTypes = {
                 {'id': "lot-decision-frais", 'title': "Ventilation des frais"},
                 {'id': "lot-decision-deliberation-college", 'title': "Delibération du collège d'octroi du permis"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': 'Products.urban.cfg.interfaces.ITheLicenceEvent',
         },
         {
             'id': "suspension-du-permis",

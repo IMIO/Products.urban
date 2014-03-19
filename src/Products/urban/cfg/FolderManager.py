@@ -23,8 +23,8 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Contact import Contact
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.content.Contact import Contact
 from zope.i18n import translate
 from Products.urban.config import URBAN_TYPES
 ##/code-section module-header

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Products.urban import UrbanMessage as _
-from Products.urban.interfaces import IUrbanEventType
-from Products.urban.interfaces import IFolderManager
+from Products.urban.cfg.interfaces import IUrbanEventType
+from Products.urban.cfg.interfaces import IFolderManager
 from Products.urban.utils import getCurrentFolderManager
 
 from plone import api

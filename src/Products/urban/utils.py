@@ -88,7 +88,7 @@ def setSchemataForInquiry(schema):
     """
       Put the the fields coming from Inquiry in a specific schemata
     """
-    from Products.urban.Inquiry import Inquiry
+    from Products.urban.content.Inquiry import Inquiry
     inquiryFields = Inquiry.schema.filterFields(isMetadata=False)
     #do not take the 2 first fields into account, this is 'id' and 'title'
     inquiryFields = inquiryFields[2:]

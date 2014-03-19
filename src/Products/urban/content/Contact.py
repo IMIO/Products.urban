@@ -27,7 +27,7 @@ import cgi
 from zope.i18n import translate
 from Products.CMFCore.utils import getToolByName
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
 from Products.validation.interfaces.IValidator import IValidator
 from Products.validation import validation
 

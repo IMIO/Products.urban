@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <tool-setup>
  <required tool_id="portal_urban"
-           class="Products.urban.UrbanTool.UrbanTool"/>
+           class="Products.urban.cfg.UrbanTool.UrbanTool"/>
 
  <!-- ##code-section toolset.xml -->
  <!-- ##/code-section toolset.xml -->

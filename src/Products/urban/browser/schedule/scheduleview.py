@@ -7,7 +7,7 @@ from Products.urban.browser.schedule.table import ItemForScheduleListing
 from Products.urban.browser.schedule.table import ScheduleListingTable
 from Products.urban.browser.schedule.table import ScheduleListingTableForLicence
 
-from Products.urban.interfaces import IUrbanEvent
+from Products.urban.content.interfaces import IUrbanEvent
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import getLicenceFolderId
 

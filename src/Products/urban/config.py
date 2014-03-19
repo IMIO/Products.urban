@@ -35,7 +35,6 @@ DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"
 setDefaultRoles(DEFAULT_ADD_CONTENT_PERMISSION, ('Manager', 'Owner', 'Contributor'))
 ADD_CONTENT_PERMISSIONS = {
     'GenericLicence': 'urban: Add GenericLicence',
-    'Recipient': 'urban: Add Recipient',
     'BuildLicence': 'urban: Add BuildLicence',
     'ParcelOutLicence': 'urban: Add ParcelOutLicence',
     'Layer': 'urban: Add Layer',
@@ -73,7 +72,6 @@ ADD_CONTENT_PERMISSIONS = {
 }
 
 setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Recipient', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add BuildLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add ParcelOutLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Layer', ("Manager", "Contributor"))

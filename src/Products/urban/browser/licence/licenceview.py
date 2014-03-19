@@ -4,10 +4,12 @@ from Acquisition import aq_inner
 
 from Products.Five import BrowserView
 
-from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
-from Products.urban.browser.table.urbantable import ContactTable, ParcelsTable, EventsTable
+from Products.urban.browser.table.urbantable import ContactTable
+from Products.urban.browser.table.urbantable import EventsTable
+from Products.urban.browser.table.urbantable import ParcelsTable
+from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
+from Products.urban.content.interfaces import IUrbanEvent
 from Products.urban.interfaces import IGenericLicence
-from Products.urban.interfaces import IUrbanEvent
 
 from plone import api
 from plone.memoize import view

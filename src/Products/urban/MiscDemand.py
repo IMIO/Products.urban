@@ -27,7 +27,7 @@ from Products.urban.config import *
 from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForInquiry
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 optional_fields = ['architects',]
 ##/code-section module-header

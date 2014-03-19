@@ -3,7 +3,7 @@
 from DateTime import DateTime
 
 from Products.urban.interfaces import IEnvironmentLicence
-from Products.urban.interfaces import ILicenceExpirationEvent
+from Products.urban.cfg.interfaces import ILicenceExpirationEvent
 
 from plone import api
 

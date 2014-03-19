@@ -2,7 +2,7 @@ from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Acquisition import aq_inner, aq_base
-from Products.urban.interfaces import IInquiry
+from Products.urban.content.interfaces import IInquiry
 from Products.urban.browser.table.urbantable import ParcelsTable
 
 

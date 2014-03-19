@@ -9,8 +9,8 @@ from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.interfaces import IVocabularyFactory
 from Products.urban.config import EMPTY_VOCAB_VALUE
-from Products.urban.interfaces import IEventTypeType
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.cfg.interfaces import IEventTypeType
+from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
 
 
 class EventTypeType(grok.GlobalUtility):

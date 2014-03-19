@@ -25,7 +25,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.utils import DisplayList
-from Products.urban.UrbanTool import DB_QUERY_ERROR
+from Products.urban.cfg.UrbanTool import DB_QUERY_ERROR
 ##/code-section module-header
 
 schema = Schema((

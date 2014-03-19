@@ -3,6 +3,20 @@
 from zope.interface import Interface
 
 ##code-section HEAD
+class INotary(Interface):
+    """Marker interface for .Notary.Notary
+    """
+
+
+class IArchitect(Interface):
+    """Marker interface for .Architect.Architect
+    """
+
+
+class IGeometrician(Interface):
+    """Marker interface for .Geometrician.Geometrician
+    """
+
 ##/code-section HEAD
 
 class IPortionOut(Interface):

@@ -39,7 +39,7 @@ class TestEnvClassOneInstall(unittest.TestCase):
         msg = 'envclassone config folder not created'
         self.assertTrue('envclassone' in self.portal_urban.objectIds(), msg)
         envclassone = self.portal_urban.envclassone
-        from Products.urban.LicenceConfig import LicenceConfig
+        from Products.urban.cfg.LicenceConfig import LicenceConfig
         self.assertTrue(isinstance(envclassone, LicenceConfig))
 
     def test_envclassone_config_folder_is_visible(self):
@@ -306,8 +306,8 @@ class TestEnvClassOneEvents(unittest.TestCase):
          When the notification date of the decision event is set,
          an ExpirationEvent should be created automatically
         """
-        from Products.urban.interfaces import ILicenceDeliveryEvent
-        from Products.urban.interfaces import ILicenceExpirationEvent
+        from Products.urban.cfg.interfaces import ILicenceDeliveryEvent
+        from Products.urban.cfg.interfaces import ILicenceExpirationEvent
         licence = self.licence
 
         # so far no event created
@@ -329,8 +329,8 @@ class TestEnvClassOneEvents(unittest.TestCase):
         """
          Expiration date = notification date + validity delay (in years).
         """
-        from Products.urban.interfaces import ILicenceDeliveryEvent
-        from Products.urban.interfaces import ILicenceExpirationEvent
+        from Products.urban.cfg.interfaces import ILicenceDeliveryEvent
+        from Products.urban.cfg.interfaces import ILicenceExpirationEvent
         licence = self.licence
         validity_delay = 15
         licence.setValidityDelay(validity_delay)
@@ -356,8 +356,8 @@ class TestEnvClassOneEvents(unittest.TestCase):
          When the notification date of the decision event is set,
          an ExpirationEvent should be created automatically
         """
-        from Products.urban.interfaces import ILicenceDeliveryEvent
-        from Products.urban.interfaces import ILicenceExpirationEvent
+        from Products.urban.cfg.interfaces import ILicenceDeliveryEvent
+        from Products.urban.cfg.interfaces import ILicenceExpirationEvent
         licence = self.licence
         licence.setValidityDelay(0)
 

@@ -98,7 +98,7 @@
      for="zope.interface.Interface
           Products.urban.browser.table.interfaces.ITitleColumn
           Products.urban.browser.table.interfaces.IItemForUrbanTable
-          Products.urban.interfaces.IPortionOut"
+          Products.urban.content.interfaces.IPortionOut"
      factory=".column.ParcelTitleDisplay"
      provides="Products.urban.browser.table.interfaces.ITitleCell"
   />
@@ -107,7 +107,7 @@
      for="zope.interface.Interface
           Products.urban.browser.table.interfaces.ITitleColumn
           Products.urban.browser.table.interfaces.IItemForUrbanTable
-          Products.urban.interfaces.IContact"
+          Products.urban.content.interfaces.IContact"
      factory=".column.ContacTitleDisplay"
      provides="Products.urban.browser.table.interfaces.ITitleCell"
   />
@@ -116,7 +116,7 @@
      for="zope.interface.Interface
           Products.urban.browser.table.interfaces.ITitleColumn
           Products.urban.browser.table.interfaces.IItemForUrbanTable
-          Products.urban.interfaces.IUrbanEvent"
+          Products.urban.content.interfaces.IUrbanEvent"
      factory=".column.EventTitleDisplay"
      provides="Products.urban.browser.table.interfaces.ITitleCell"
   />
@@ -125,7 +125,7 @@
      for="zope.interface.Interface
           Products.urban.browser.table.interfaces.ITitleColumn
           Products.urban.browser.table.interfaces.IItemForUrbanTable
-          Products.urban.interfaces.IUrbanDoc"
+          Products.urban.content.interfaces.IUrbanDoc"
      factory=".column.DocumentTitleDisplay"
      provides="Products.urban.browser.table.interfaces.ITitleCell"
   />
@@ -134,7 +134,7 @@
      for="zope.interface.Interface
           Products.urban.browser.table.interfaces.ITitleColumn
           Products.urban.browser.table.interfaces.IItemForUrbanTable
-          Products.urban.interfaces.IRecipientCadastre"
+          Products.urban.content.interfaces.IRecipientCadastre"
      factory=".column.RecipientCadastreTitleDisplay"
      provides="Products.urban.browser.table.interfaces.ITitleCell"
   />

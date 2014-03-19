@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# File: config.py
+# File: cfg.py
 #
 # Copyright (c) 2014 by CommunesPlone
 # Generator: ArchGenXML Version 2.7

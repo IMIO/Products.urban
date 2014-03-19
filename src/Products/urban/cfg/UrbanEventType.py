@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.config.UrbanDelay import UrbanDelay
+from Products.urban.cfg.UrbanDelay import UrbanDelay
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget
@@ -35,7 +35,7 @@ from zope.i18n import translate
 from Products.CMFCore.Expression import Expression
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.public import DisplayList
-from Products.DataGridField.SelectColumn import SelectColumn
+from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from Products.PageTemplates.Expressions import getEngine
 
@@ -236,7 +236,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
 
     security.declarePublic('listActivatedDates')
     def listActivatedDates(self):
-        from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
+
         activated_fields = type(self.getActivatedFields()) == str and [self.getActivatedFields()] or self.getActivatedFields()
         activated_date_fields = [(fieldname, translate("urban_label_" + fieldname, 'urban', default=fieldname, context=self.REQUEST))
                                  for fieldname in activated_fields

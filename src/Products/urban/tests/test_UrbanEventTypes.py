@@ -5,7 +5,7 @@ from zope.component.interface import interfaceToName
 from plone import api
 from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_LICENCES
-from Products.urban.interfaces import IAcknowledgmentEvent
+from Products.urban.cfg.interfaces import IAcknowledgmentEvent
 from Products.Archetypes.event import ObjectEditedEvent
 
 

@@ -27,7 +27,7 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from zope.i18n import translate
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
 ##/code-section module-header
 

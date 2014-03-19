@@ -33,7 +33,7 @@ from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
