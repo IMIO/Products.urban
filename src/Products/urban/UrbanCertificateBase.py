@@ -34,7 +34,7 @@ from Products.DataGridField.CheckboxColumn import CheckboxColumn
 from Products.DataGridField.FixedColumn import FixedColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from Products.urban.utils import setOptionalAttributes
-from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.UrbanDataGridColumns.FormFocusColumn import FormFocusColumn
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from DateTime import DateTime

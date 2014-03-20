@@ -57,8 +57,7 @@ from Products.urban.utils import getOsTempFolder
 from Products.urban.utils import ParcelHistoric
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS
-from Products.urban.cfg.interfaces import IUrbanVocabularyTerm
-from Products.urban.interfaces import IContactFolder
+from Products.urban.interfaces import IUrbanVocabularyTerm, IContactFolder
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 DB_QUERY_ERROR = "Programming error in query"
@@ -294,8 +293,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     # XXX constant put on the class to ensure it is close to the method that uses
     # it
     portal_types_per_event_type_type = {
-        'Products.urban.cfg.interfaces.IInquiryEvent': 'UrbanEventInquiry',
-        'Products.urban.cfg.interfaces.IOpinionRequestEvent': 'UrbanEventOpinionRequest',
+        'Products.urban.interfaces.IInquiryEvent': 'UrbanEventInquiry',
+        'Products.urban.interfaces.IOpinionRequestEvent': 'UrbanEventOpinionRequest',
     }
     ##/code-section class-header
 

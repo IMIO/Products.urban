@@ -83,26 +83,54 @@ validation.register(isNotDuplicatedReferenceValidator('isNotDuplicatedReference'
 def initialize(context):
     """initialize product (called by zope)"""
     ##code-section custom-init-top #fill in your manual code here
+    import Notary
+    # next line to be removed when migration #1283 is done
+    import Architect
+    import Geometrician
     ##/code-section custom-init-top
 
     # imports packages and types for registration
-    import content
-    import cfg
 
     import GenericLicence
+    import Contact
+    import UrbanTool
+    import Street
+    import UrbanEvent
+    import UrbanEventType
+    import Recipient
     import BuildLicence
     import ParcelOutLicence
+    import FolderManager
+    import UrbanVocabularyTerm
+    import PortionOut
+    import RecipientCadastre
     import Layer
     import Declaration
+    import ParcellingTerm
+    import PcaTerm
+    import City
     import UrbanCertificateBase
     import UrbanCertificateTwo
     import Division
+    import UrbanDelay
+    import Locality
+    import LicenceConfig
+    import PersonTitleTerm
+    import Inquiry
+    import UrbanEventInquiry
+    import UrbanEventOpinionRequest
+    import OrganisationTerm
     import MiscDemand
+    import UrbanConfigurationValue
+    import UrbanDoc
     import EnvironmentBase
+    import EnvironmentRubricTerm
+    import SpecificFeatureTerm
+    import OpinionRequestEventType
     import EnvironmentLicence
 
     # Initialize portal tools
-    tools = [cfg.UrbanTool.UrbanTool]
+    tools = [UrbanTool.UrbanTool]
     ToolInit( PROJECTNAME +' Tools',
                 tools = tools,
                 icon='tool.gif'

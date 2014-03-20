@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import unittest
 from plone.app.testing import login
-from Products.CMFCore.utils import getToolByName
 from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.CMFCore.utils import getToolByName
 from Products.urban.config import URBAN_TYPES
-from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.content import UrbanEventInquiry
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban import UrbanEventInquiry
 from zope.event import notify
 from Products.Archetypes.event import EditBegunEvent
 

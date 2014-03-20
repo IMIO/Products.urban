@@ -25,14 +25,14 @@ urbanEventTypes = {
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IDepositEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
                     },
                     {
                     'id': "dossier-incomplet",
                     'title': "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
                     'activatedFields': [],
                     'deadLineDelay': 15,
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IMissingPartEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -44,14 +44,14 @@ urbanEventTypes = {
                     'activatedFields': [],
                     'deadLineDelay': 25,
                     'podTemplates': (),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IMissingPartDepositEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
                     },
                     {
                     'id': "accuse-de-reception",
                     'title': "Accusé de réception (dossier complet - article 116 § 1)",
                     'activatedFields': ['transmitDate'],
                     'deadLineDelay': 30,
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IAcknowledgmentEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
                     'isKeyEvent': True,
                     'keyDates': ('eventDate',),
                     'podTemplates': (
@@ -77,7 +77,7 @@ urbanEventTypes = {
                     'specialFunctionUrl': "addInvestigationPO",
                     'podTemplates': (
                                     ),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IInquiryEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
                     'textDefaultValues': [{'text': default_texts['claimsTextDefaultValue'], 'fieldname': 'claimsText'}],
                     },
                     {
@@ -86,7 +86,7 @@ urbanEventTypes = {
                     'activatedFields': [],
                     'TALCondition': "python: False",
                     'podTemplates': ({'id': "urb-avis", 'title': "Courrier de demande d'avis"},),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'portal_type': 'OpinionRequestEventType',
@@ -98,7 +98,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
                     'podTemplates': (),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'portal_type': 'OpinionRequestEventType',
@@ -110,7 +110,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
                     'podTemplates': (),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'id': "rapport-du-college",
@@ -123,7 +123,7 @@ urbanEventTypes = {
                                      {'id': "urb-rapp-service", 'title': "Rapport du Service"},
                                      {'id': "urb-rapp-college", 'title': "Rapport du Collège"},
                                     ),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.ICollegeReportEvent',
+                    'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
                     },
                     {
                     'id': "transmis-2eme-dossier-rw",
@@ -133,7 +133,7 @@ urbanEventTypes = {
                     'deadLineDelay': 0,
                     'podTemplates': (
                                     ),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IWalloonRegionOpinionRequestEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
                     },
                     {
                     'id': "delivrance-du-permis-octroi-ou-refus",
@@ -145,7 +145,7 @@ urbanEventTypes = {
                     'keyDates': ('eventDate',),
                     'podTemplates': (
                                     ),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.ITheLicenceEvent',
+                    'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
                     },
                     {
                     'id': "debut-des-travaux",
@@ -153,7 +153,7 @@ urbanEventTypes = {
                     'deadLineDelay': 0,
                     'activatedFields': [],
                     'podTemplates': (),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IWorkBeginningEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IWorkBeginningEvent',
                     },
                     {
                     'id': "prorogation",
@@ -162,7 +162,7 @@ urbanEventTypes = {
                     'activatedFields': ['decisionDate', 'decision', 'receiptDate', ],
                     'podTemplates': (
                                     ),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IProrogationEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IProrogationEvent',
                     },
                    ),
                    'parceloutlicence':
@@ -173,7 +173,7 @@ urbanEventTypes = {
                     'activatedFields': [],
                     'TALCondition': "python: False",
                     'podTemplates': (),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'portal_type': 'OpinionRequestEventType',
@@ -185,7 +185,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
                     'podTemplates': (),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'portal_type': 'OpinionRequestEventType',
@@ -197,7 +197,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
                     'podTemplates': (),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                    ),
                    'urbancertificatetwo':
@@ -208,7 +208,7 @@ urbanEventTypes = {
                     'activatedFields': [],
                     'TALCondition': "python: False",
                     'podTemplates': (),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'portal_type': 'OpinionRequestEventType',
@@ -220,7 +220,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
                     'podTemplates': (),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                     {
                     'portal_type': 'OpinionRequestEventType',
@@ -232,7 +232,7 @@ urbanEventTypes = {
                     'deadLineDelay': 15,
                     'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
                     'podTemplates': (),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.IOpinionRequestEvent',
+                    'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
                     },
                    ),
                    'envclassone':
@@ -246,7 +246,7 @@ urbanEventTypes = {
                     'keyDates': ('eventDate',),
                     'podTemplates': (
                                     ),
-                    'eventTypeType': 'Products.urban.cfg.interfaces.ILicenceDeliveryEvent',
+                    'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
                     },
                     {
                     'id': "expiration",
@@ -257,7 +257,7 @@ urbanEventTypes = {
                     'podTemplates': (
                                     ),
                     'TALCondition': "python: False",
-                    'eventTypeType': 'Products.urban.cfg.interfaces.ILicenceExpirationEvent',
+                    'eventTypeType': 'Products.urban.interfaces.ILicenceExpirationEvent',
                     },
                    ),
                   }

@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.content.Inquiry import Inquiry
+from Products.urban.Inquiry import Inquiry
 from Products.urban.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
@@ -27,11 +27,8 @@ from Products.urban.config import *
 from Products.CMFCore.utils import getToolByName
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
     ReferenceBrowserWidget
-
 from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
-from Products.urban.cfg import interfaces as event_interfaces
-from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
-
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from dateutil.relativedelta import relativedelta
 
 optional_fields = ['implantation','roadAdaptation','pebDetails', 'requirementFromFD',
@@ -375,43 +372,43 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
         return self.getFolderCategory() in ['udc', 'uap', 'cu2', 'lap', 'lapm']
 
     def getLastDeposit(self):
-        return self._getLastEvent(event_interfaces.IDepositEvent)
+        return self._getLastEvent(interfaces.IDepositEvent)
 
     def getLastMissingPart(self):
-        return self._getLastEvent(event_interfaces.IMissingPartEvent)
+        return self._getLastEvent(interfaces.IMissingPartEvent)
 
     def getLastMissingPartDeposit(self):
-        return self._getLastEvent(event_interfaces.IMissingPartDepositEvent)
+        return self._getLastEvent(interfaces.IMissingPartDepositEvent)
 
     def getLastWalloonRegionPrimo(self):
-        return self._getLastEvent(event_interfaces.IWalloonRegionPrimoEvent)
+        return self._getLastEvent(interfaces.IWalloonRegionPrimoEvent)
 
     def getLastWalloonRegionOpinionRequest(self):
-        return self._getLastEvent(event_interfaces.IWalloonRegionOpinionRequestEvent)
+        return self._getLastEvent(interfaces.IWalloonRegionOpinionRequestEvent)
 
     def getLastAcknowledgment(self):
-        return self._getLastEvent(event_interfaces.IAcknowledgmentEvent)
+        return self._getLastEvent(interfaces.IAcknowledgmentEvent)
 
     def getLastCommunalCouncil(self):
-        return self._getLastEvent(event_interfaces.ICommunalCouncilEvent)
+        return self._getLastEvent(interfaces.ICommunalCouncilEvent)
 
     def getLastCollegeReport(self):
-        return self._getLastEvent(event_interfaces.ICollegeReportEvent)
+        return self._getLastEvent(interfaces.ICollegeReportEvent)
 
     def getLastTheLicence(self):
-        return self._getLastEvent(event_interfaces.ITheLicenceEvent)
+        return self._getLastEvent(interfaces.ITheLicenceEvent)
 
     def getLastWorkBeginning(self):
-        return self._getLastEvent(event_interfaces.IWorkBeginningEvent)
+        return self._getLastEvent(interfaces.IWorkBeginningEvent)
 
     def getLastProrogation(self):
-        return self._getLastEvent(event_interfaces.IProrogationEvent)
+        return self._getLastEvent(interfaces.IProrogationEvent)
 
     def getAllMissingPartDeposits(self):
-        return self._getAllEvents(event_interfaces.IMissingPartDepositEvent)
+        return self._getAllEvents(interfaces.IMissingPartDepositEvent)
 
     def getAllTechnicalServiceOpinionRequests(self):
-        return self._getAllEvents(event_interfaces.ITechnicalServiceOpinionRequestEvent)
+        return self._getAllEvents(interfaces.ITechnicalServiceOpinionRequestEvent)
 
     def getProrogatedToDate(self):
         """

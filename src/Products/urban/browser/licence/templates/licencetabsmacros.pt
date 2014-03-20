@@ -326,15 +326,13 @@
         </table>
     </fieldset>
     <br />
-    <metal:custom_add_inquiry define-slot="custom_add_inquiry">
-        <form tal:condition="python: member.has_permission('urban: Add Inquiry', context)"
-              i18n:domain="urban" name="quickAdd"
-              tal:attributes="action python: context.absolute_url() + '/createObject'"
-              action="createObject" method="post">
-            <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
-            <input type="submit" class="context apButton contenttype-inquiry" id="event" value="add_an_inquiry" i18n:attributes="value" />
-        </form>
-    </metal:custom_add_inquiry>
+    <form tal:condition="python: member.has_permission('urban: Add Inquiry', context)"
+          i18n:domain="urban" name="quickAdd"
+          tal:attributes="action python: context.absolute_url() + '/createObject'"
+          action="createObject" method="post">
+        <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+        <input type="submit" class="context apButton contenttype-inquiry" id="event" value="add_an_inquiry" i18n:attributes="value" />
+    </form>
 </div>
 
 

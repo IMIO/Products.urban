@@ -17,7 +17,6 @@
    <element value="Applicant"/>
    <element value="UrbanEventOpinionRequest"/>
    <element value="Applicant"/>
-   <element value="Inquiry"/>
    <element value="UrbanEvent"/>
    <element value="File"/>
    <element value="PortionOut"/>

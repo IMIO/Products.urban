@@ -6,10 +6,7 @@ from plone.app.testing import setRoles
 from plone.app.testing.interfaces import TEST_USER_NAME
 from plone.app.testing.interfaces import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
-from Products.urban.cfg.interfaces import IAcknowledgmentEvent
-from Products.urban.cfg.interfaces import IInquiryEvent
-from Products.urban.cfg.interfaces import IOpinionRequestEvent
-from Products.urban.cfg.interfaces import IUrbanEventType
+from Products.urban.interfaces import (IUrbanEventType, IAcknowledgmentEvent, IOpinionRequestEvent, IInquiryEvent)
 from Products.urban.testing import URBAN_TESTS_LICENCES, URBAN_TESTS_CONFIG
 
 
@@ -78,7 +75,8 @@ class TestInstall(unittest.TestCase):
         eventTypes = urban.buildlicence.urbaneventtypes
         accuse = getattr(eventTypes, 'accuse-de-reception')
         eventTypeType = accuse.getEventTypeType()
-        self.assertEqual(eventTypeType, 'Products.urban.cfg.interfaces.IAcknowledgmentEvent')
+        self.assertEqual(eventTypeType,
+                         'Products.urban.interfaces.IAcknowledgmentEvent')
 
 
 class TestContact(unittest.TestCase):

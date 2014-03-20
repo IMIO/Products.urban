@@ -2,7 +2,7 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.Five import BrowserView
 
-from Products.urban.cfg.UrbanTool import DB_QUERY_ERROR
+from Products.urban.UrbanTool import DB_QUERY_ERROR
 from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanCertificateBase

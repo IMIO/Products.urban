@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 #
-# File: Notary.py
+# File: Recipient.py
 #
-# Copyright (c) 2010 by CommunesPlone
-# Generator: ArchGenXML Version 2.4.1
+# Copyright (c) 2014 by CommunesPlone
+# Generator: ArchGenXML Version 2.7
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -23,7 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.urban.content.Contact import Contact
+from Contact import Contact
 ##/code-section module-header
 
 schema = Schema((
@@ -35,32 +35,39 @@ schema = Schema((
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-Notary_schema = Contact.schema.copy() + \
+Recipient_schema = Contact.schema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class Notary(BaseContent, Contact, BrowserDefaultMixin):
+class Recipient(BaseContent, Contact, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
+    implements(interfaces.IRecipient)
 
-    implements(interfaces.INotary)
-
-    meta_type = 'Notary'
+    meta_type = 'Recipient'
     _at_rename_after_creation = True
 
-    schema = Notary_schema
+    schema = Recipient_schema
 
     ##code-section class-header #fill in your manual code here
+    del schema['title']
     ##/code-section class-header
 
     # Methods
 
+    # Manually created methods
 
-registerType(Notary, PROJECTNAME)
-# end of class Notary
+    def Title(self):
+        return self.getName1() + " " + self.getName2()
+
+
+
+registerType(Recipient, PROJECTNAME)
+# end of class Recipient
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
+

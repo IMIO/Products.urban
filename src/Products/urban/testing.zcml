@@ -10,7 +10,7 @@
         directory="profiles/tests"
         description="Tests Extension profile for urban."
         provides="Products.GenericSetup.interfaces.EXTENSION"
-        for="Products.urban.cfg.interfaces.IUrbanTool"
+        for="Products.urban.interfaces.IUrbanTool"
     />
 
     <genericsetup:registerProfile
@@ -18,7 +18,7 @@
         title="urban-tests-imports"
         directory="profiles/tests-imports"
         provides="Products.GenericSetup.interfaces.EXTENSION"
-        for="Products.urban.cfg.interfaces.IUrbanTool"
+        for="Products.urban.interfaces.IUrbanTool"
     />
 
     <genericsetup:registerProfile
@@ -26,7 +26,7 @@
         title="urban-testsWithConfig"
         directory="profiles/testsWithConfig"
         provides="Products.GenericSetup.interfaces.EXTENSION"
-        for="Products.urban.cfg.interfaces.IUrbanTool"
+        for="Products.urban.interfaces.IUrbanTool"
     />
 
     <genericsetup:registerProfile
@@ -34,7 +34,7 @@
         title="urban-testsWithLicences"
         directory="profiles/testsWithLicences"
         provides="Products.GenericSetup.interfaces.EXTENSION"
-        for="Products.urban.cfg.interfaces.IUrbanTool"
+        for="Products.urban.interfaces.IUrbanTool"
     />
 
 </configure>

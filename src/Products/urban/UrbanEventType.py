@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.cfg.UrbanDelay import UrbanDelay
+from Products.urban.UrbanDelay import UrbanDelay
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget
@@ -35,7 +35,7 @@ from zope.i18n import translate
 from Products.CMFCore.Expression import Expression
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.public import DisplayList
-from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
+from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from Products.PageTemplates.Expressions import getEngine
 
@@ -176,7 +176,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         """
          return a DisplayList of fields wich are marked as optional
         """
-        from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
+        from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
         lst = []
         for field in UrbanEventInquiry_schema.fields():
             try:
@@ -193,7 +193,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
     def listTextFields(self):
         #we have to know from where the method has been called in order to know which text
         #fields to propose to be "default valued"
-        from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
+        from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
         urbanevent_fields = UrbanEventInquiry_schema.fields()
         blacklist = ['rights', 'description']
         available_fields = [field for field in urbanevent_fields if field.getType() == 'Products.Archetypes.Field.TextField' and field.getName() not in blacklist]
@@ -236,7 +236,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
 
     security.declarePublic('listActivatedDates')
     def listActivatedDates(self):
-
+        from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
         activated_fields = type(self.getActivatedFields()) == str and [self.getActivatedFields()] or self.getActivatedFields()
         activated_date_fields = [(fieldname, translate("urban_label_" + fieldname, 'urban', default=fieldname, context=self.REQUEST))
                                  for fieldname in activated_fields

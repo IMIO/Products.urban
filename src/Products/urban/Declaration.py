@@ -26,7 +26,7 @@ from Products.urban.config import *
 from Products.CMFCore.utils import getToolByName
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.urban.utils import setOptionalAttributes
-from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 optional_fields = ['linkedCU2s']
 ##/code-section module-header

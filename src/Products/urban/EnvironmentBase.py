@@ -18,7 +18,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
 from Products.urban.GenericLicence import GenericLicence
-from Products.urban.content.Inquiry import Inquiry
+from Products.urban.Inquiry import Inquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget
@@ -33,7 +33,7 @@ from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
-from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
@@ -252,10 +252,11 @@ EnvironmentBase_schema = BaseFolderSchema.copy() + \
 EnvironmentBase_schema['title'].required = False
 EnvironmentBase_schema['title'].widget.visible = False
 setSchemataForInquiry(EnvironmentBase_schema)
-# hide Inquiry fields but 'solicitOpinionsTo'
-for field in EnvironmentBase_schema.filterFields(isMetadata=False):
-    if field.schemata == 'urban_investigation_and_advices' and field.getName() != 'solicitOpinionsTo':
-        field.widget.visible = False
+def hidesInquiryFields(schema):
+    for field in schema.filterFields(isMetadata=False):
+        if field.schemata == 'urban_investigation_and_advices' and field.getName() != 'solicitOpinionsTo':
+            field.widget.visible = False
+hidesInquiryFields(EnvironmentBase_schema)
 ##/code-section after-schema
 
 class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):

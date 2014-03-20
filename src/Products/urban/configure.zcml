@@ -33,12 +33,79 @@
     title="Products.urban: ViewUrbanMap"
     />
     
-  <include package=".cfg" />
   <include package=".events" />
   <include package=".browser" />
   <include package=".migration" />
 
   <include file="grok.zcml" />
+
+  <interface
+    interface=".interfaces.ICommunalCouncilEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ITechnicalServiceOpinionRequestEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IOpinionRequestEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IWalloonRegionOpinionRequestEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IWalloonRegionPrimoEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IAcknowledgmentEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ICollegeReportEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IModificationDepositEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IDepositEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IMissingPartEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IMissingPartDepositEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IWorkBeginningEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ILicenceDeliveryEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ILicenceExpirationEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IInquiryEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ITheLicenceEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IProrogationEvent"
+    type=".interfaces.IEventTypeType"/>
 
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware
@@ -49,11 +116,11 @@
 
   <adapter
     name=".subtypes.urbandoc"
-    for=".content.interfaces.IUrbanDoc"
+    for=".interfaces.IUrbanDoc"
     factory=".subtypes.urbandoc.UrbanDocExtender" />
 
   <adapter
-    for="Products.urban.content.interfaces.IUrbanEvent"
+    for="Products.urban.interfaces.IUrbanEvent"
     factory=".appy_pod.UrbanEventAppyContext"
     provides=".appy_pod.IAppyContext"
   />

@@ -17,6 +17,9 @@
      <bound-workflow workflow_id="urbandivision_workflow" />
      <bound-workflow workflow_id="urbandivision_workflow" />
   </type>
+  <type type_id="Dummy">
+     <bound-workflow workflow_id="activation_workflow" />
+  </type>
   <type type_id="EnvironmentBase">
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
@@ -74,9 +77,6 @@
   </type>
   <type type_id="UrbanCertificateTwo">
      <bound-workflow workflow_id="urban_licence_workflow" />
-  </type>
-  <type type_id="UrbanConfigurationValue">
-     <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="UrbanDelay">
      <bound-workflow workflow_id="activation_workflow" />

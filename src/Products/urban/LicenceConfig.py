@@ -273,7 +273,6 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
                 'parceloutlicence': inquiry_tabs_config,
                 'urbancertificatetwo': inquiry_tabs_config,
                 'envclassthree': inquiry_tabs_config,
-                'envclassone': inquiry_tabs_config,
                 }
         licence_type = self.id
 

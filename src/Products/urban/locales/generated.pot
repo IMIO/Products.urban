@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Mar 19 11:13:06 2014\n"
-"PO-Revision-Date: Wed Mar 19 11:13:06 2014\n"
+"POT-Creation-Date: Mon Mar  3 16:00:17 2014\n"
+"PO-Revision-Date: Mon Mar  3 16:00:17 2014\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -17,57 +17,57 @@ msgstr ""
 "Domain: urban\n"
 
 #. Default: "Enter the different kind of spelling for this locality"
-#: cfg/Locality.py
+#: Locality.py
 msgid "alsocalled_descr"
 msgstr ""
 
 #. Default: "Enter a TAL condition that defines the delay calculation. The parameters event and licence are available."
-#: cfg/UrbanDelay.py
+#: UrbanDelay.py
 msgid "delay_computation_descr"
 msgstr ""
 
 #. Default: "OpenOfficePort"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "open_office_port"
 msgstr ""
 
 #. Default: "When adding manually a new street, please let the default value"
-#: cfg/Street.py
+#: Street.py
 msgid "street_best_address_key_descr"
 msgstr ""
 
 #. Default: "Expiration date. Keep empty for valid streets. Fill in for history."
-#: cfg/Street.py
+#: Street.py
 msgid "street_end_date_descr"
 msgstr ""
 
 #. Default: "Encoding date by default"
-#: cfg/Street.py
+#: Street.py
 msgid "street_start_date_descr"
 msgstr ""
 
 #. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here' and 'member' are available"
-#: cfg/UrbanEventType.py
+#: UrbanEventType.py
 msgid "tal_condition_descr"
 msgstr ""
 
 #. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here', 'event', and 'licence'' are available"
-#: content/UrbanDoc.py
+#: UrbanDoc.py
 msgid "tal_condition_urbandoc_descr"
 msgstr ""
 
 #. Default: "UnoEnabledPython"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "uno_enabled_python"
 msgstr ""
 
 #. Default: "Set the number of days the alert will be shown before the deadline delay"
-#: cfg/UrbanDelay.py
+#: UrbanDelay.py
 msgid "urban_alertdelay_descr"
 msgstr ""
 
 #. Default: "Enter the 4 coordinates of the map, each coordinate separated by a comma."
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_descr_mapExtent"
 msgstr ""
 
@@ -77,17 +77,17 @@ msgid "urban_descr_subdivisionDetails"
 msgstr ""
 
 #. Default: "Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL"
-#: cfg/LicenceConfig.py
+#: LicenceConfig.py
 msgid "urban_descr_usedAttributes"
 msgstr ""
 
 #. Default: "If this field is used, you can insert special expressions between [[]] that will be rendered.  This can be something like \"My text [[object/getMyAttribute]] end of the text\".  Object is the licence the term is used in."
-#: cfg/UrbanVocabularyTerm.py
+#: UrbanVocabularyTerm.py
 msgid "urban_help_description"
 msgstr ""
 
 #. Default: "This field is made to store extra value if needed."
-#: cfg/UrbanVocabularyTerm.py
+#: UrbanVocabularyTerm.py
 msgid "urban_help_extraValue"
 msgstr ""
 
@@ -102,7 +102,7 @@ msgid "urban_help_locationDgrneUnderground"
 msgstr ""
 
 #. Default: "Use this field to add a custom numbering that will be shown in edit forms but not on document render."
-#: cfg/UrbanVocabularyTerm.py
+#: UrbanVocabularyTerm.py
 msgid "urban_help_numbering"
 msgstr ""
 
@@ -117,12 +117,12 @@ msgid "urban_help_townshipCouncilFolder"
 msgstr ""
 
 #. Default: "Linkedopinionrequestevent"
-#: cfg/LinkedOpinionRequestEvent.py
+#: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"
 msgstr ""
 
 #. Default: "Nisnum"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_NISNum"
 msgstr ""
 
@@ -142,8 +142,8 @@ msgid "urban_label_SSC"
 msgstr ""
 
 #. Default: "Talcondition"
-#: cfg/UrbanEventType.py
-#: content/UrbanDoc.py
+#: UrbanDoc.py
+#: UrbanEventType.py
 msgid "urban_label_TALCondition"
 msgstr ""
 
@@ -158,12 +158,12 @@ msgid "urban_label_ZIP"
 msgstr ""
 
 #. Default: "Abbreviation"
-#: cfg/PersonTitleTerm.py
+#: PersonTitleTerm.py
 msgid "urban_label_abbreviation"
 msgstr ""
 
 #. Default: "Activatedfields"
-#: cfg/UrbanEventType.py
+#: UrbanEventType.py
 msgid "urban_label_activatedFields"
 msgstr ""
 
@@ -183,27 +183,27 @@ msgid "urban_label_additionalPreviousLicences"
 msgstr ""
 
 #. Default: "Adr1"
-#: content/RecipientCadastre.py
+#: RecipientCadastre.py
 msgid "urban_label_adr1"
 msgstr ""
 
 #. Default: "Adr2"
-#: content/RecipientCadastre.py
+#: RecipientCadastre.py
 msgid "urban_label_adr2"
 msgstr ""
 
 #. Default: "Adviceagreementlevel"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_adviceAgreementLevel"
 msgstr ""
 
 #. Default: "Alertdelay"
-#: cfg/UrbanDelay.py
+#: UrbanDelay.py
 msgid "urban_label_alertDelay"
 msgstr ""
 
 #. Default: "Alsocalled"
-#: cfg/Locality.py
+#: Locality.py
 msgid "urban_label_alsoCalled"
 msgstr ""
 
@@ -225,7 +225,7 @@ msgid "urban_label_applicationReasons"
 msgstr ""
 
 #. Default: "Approvaldate"
-#: content/ParcellingTerm.py
+#: ParcellingTerm.py
 msgid "urban_label_approvalDate"
 msgstr ""
 
@@ -251,12 +251,12 @@ msgid "urban_label_article"
 msgstr ""
 
 #. Default: "Auditiondate"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_auditionDate"
 msgstr ""
 
 #. Default: "Authorizationdate"
-#: content/ParcellingTerm.py
+#: ParcellingTerm.py
 msgid "urban_label_authorizationDate"
 msgstr ""
 
@@ -271,12 +271,12 @@ msgid "urban_label_basement"
 msgstr ""
 
 #. Default: "Bestaddresskey"
-#: cfg/Street.py
+#: Street.py
 msgid "urban_label_bestAddressKey"
 msgstr ""
 
 #. Default: "Bis"
-#: content/PortionOut.py
+#: PortionOut.py
 msgid "urban_label_bis"
 msgstr ""
 
@@ -301,47 +301,47 @@ msgid "urban_label_catchmentAreaDetails"
 msgstr ""
 
 #. Default: "Changes"
-#: cfg/PcaTerm.py
+#: PcaTerm.py
 msgid "urban_label_changes"
 msgstr ""
 
 #. Default: "Changesdescription"
-#: content/ParcellingTerm.py
+#: ParcellingTerm.py
 msgid "urban_label_changesDescription"
 msgstr ""
 
 #. Default: "City"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_city"
 msgstr ""
 
 #. Default: "Cityname"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_cityName"
 msgstr ""
 
 #. Default: "Claimingtext"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_claimingText"
 msgstr ""
 
 #. Default: "Claimsdate"
-#: content/UrbanEventInquiry.py
+#: UrbanEventInquiry.py
 msgid "urban_label_claimsDate"
 msgstr ""
 
 #. Default: "Claimstext"
-#: content/UrbanEventInquiry.py
+#: UrbanEventInquiry.py
 msgid "urban_label_claimsText"
 msgstr ""
 
 #. Default: "Comment"
-#: cfg/PcaTerm.py
+#: PcaTerm.py
 msgid "urban_label_comment"
 msgstr ""
 
 #. Default: "Country"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_country"
 msgstr ""
 
@@ -351,83 +351,83 @@ msgid "urban_label_customSpecificFeatures"
 msgstr ""
 
 #. Default: "Deadlinedelay"
-#: cfg/UrbanDelay.py
+#: UrbanDelay.py
 msgid "urban_label_deadLineDelay"
 msgstr ""
 
 #. Default: "Decision"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_decision"
 msgstr ""
 
 #. Default: "Decisiondate"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_decisionDate"
 msgstr ""
 
 #. Default: "Decisiontext"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_decisionText"
 msgstr ""
 
 #. Default: "Decreedate"
-#: cfg/PcaTerm.py
+#: PcaTerm.py
 msgid "urban_label_decreeDate"
 msgstr ""
 
 #. Default: "Decreetype"
-#: cfg/PcaTerm.py
+#: PcaTerm.py
 msgid "urban_label_decreeType"
 msgstr ""
 
 #. Default: "Delaycomputation"
-#: cfg/UrbanDelay.py
+#: UrbanDelay.py
 msgid "urban_label_delayComputation"
 msgstr ""
 
 #. Default: "Derogation"
-#: content/Inquiry.py
+#: Inquiry.py
 msgid "urban_label_derogation"
 msgstr ""
 
 #. Default: "Derogationdetails"
-#: content/Inquiry.py
+#: Inquiry.py
 msgid "urban_label_derogationDetails"
 msgstr ""
 
 #. Default: "Description"
 #: GenericLicence.py
-#: cfg/UrbanVocabularyTerm.py
+#: UrbanVocabularyTerm.py
 msgid "urban_label_description"
 msgstr ""
 
 #. Default: "Division"
-#: content/PortionOut.py
+#: PortionOut.py
 msgid "urban_label_division"
 msgstr ""
 
 #. Default: "Divisioncode"
-#: content/PortionOut.py
+#: PortionOut.py
 msgid "urban_label_divisionCode"
 msgstr ""
 
 #. Default: "Divisionsrenaming"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_divisionsRenaming"
 msgstr ""
 
 #. Default: "Editionoutputformat"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_editionOutputFormat"
 msgstr ""
 
 #. Default: "Email"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_email"
 msgstr ""
 
 #. Default: "Enddate"
-#: cfg/Street.py
+#: Street.py
 msgid "urban_label_endDate"
 msgstr ""
 
@@ -437,52 +437,52 @@ msgid "urban_label_equipmentAndRoadRequirements"
 msgstr ""
 
 #. Default: "Eventdate"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_eventDate"
 msgstr ""
 
 #. Default: "Eventdatelabel"
-#: cfg/UrbanEventType.py
+#: UrbanEventType.py
 msgid "urban_label_eventDateLabel"
 msgstr ""
 
 #. Default: "Destinataire"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_eventRecipient"
 msgstr ""
 
 #. Default: "Eventtypetype"
-#: cfg/UrbanEventType.py
+#: UrbanEventType.py
 msgid "urban_label_eventTypeType"
 msgstr ""
 
 #. Default: "Explanationsdate"
-#: content/UrbanEventInquiry.py
+#: UrbanEventInquiry.py
 msgid "urban_label_explanationsDate"
 msgstr ""
 
 #. Default: "Exploitationcondition"
-#: cfg/EnvironmentRubricTerm.py
+#: EnvironmentRubricTerm.py
 msgid "urban_label_exploitationCondition"
 msgstr ""
 
 #. Default: "Exposant"
-#: content/PortionOut.py
+#: PortionOut.py
 msgid "urban_label_exposant"
 msgstr ""
 
 #. Default: "Externaldecision"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_externalDecision"
 msgstr ""
 
 #. Default: "Extravalue"
-#: cfg/UrbanVocabularyTerm.py
+#: UrbanVocabularyTerm.py
 msgid "urban_label_extraValue"
 msgstr ""
 
 #. Default: "Fax"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_fax"
 msgstr ""
 
@@ -522,12 +522,12 @@ msgid "urban_label_foldermanagers"
 msgstr ""
 
 #. Default: "Gender"
-#: cfg/PersonTitleTerm.py
+#: PersonTitleTerm.py
 msgid "urban_label_gender"
 msgstr ""
 
 #. Default: "Generatesingletondocuments"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_generateSingletonDocuments"
 msgstr ""
 
@@ -537,7 +537,7 @@ msgid "urban_label_geometricians"
 msgstr ""
 
 #. Default: "Grade"
-#: cfg/FolderManager.py
+#: FolderManager.py
 msgid "urban_label_grade"
 msgstr ""
 
@@ -572,62 +572,62 @@ msgid "urban_label_inadmissibilityReasons"
 msgstr ""
 
 #. Default: "Initials"
-#: cfg/FolderManager.py
+#: FolderManager.py
 msgid "urban_label_initials"
 msgstr ""
 
 #. Default: "Invertaddressnames"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_invertAddressNames"
 msgstr ""
 
 #. Default: "Investigationarticles"
-#: content/Inquiry.py
+#: Inquiry.py
 msgid "urban_label_investigationArticles"
 msgstr ""
 
 #. Default: "Investigationarticlestext"
-#: content/Inquiry.py
+#: Inquiry.py
 msgid "urban_label_investigationArticlesText"
 msgstr ""
 
 #. Default: "Investigationdetails"
-#: content/Inquiry.py
+#: Inquiry.py
 msgid "urban_label_investigationDetails"
 msgstr ""
 
 #. Default: "Investigationend"
-#: content/Inquiry.py
+#: Inquiry.py
 msgid "urban_label_investigationEnd"
 msgstr ""
 
 #. Default: "Investigationoralreclamationnumber"
-#: content/Inquiry.py
+#: Inquiry.py
 msgid "urban_label_investigationOralReclamationNumber"
 msgstr ""
 
 #. Default: "Investigationreasons"
-#: content/Inquiry.py
+#: Inquiry.py
 msgid "urban_label_investigationReasons"
 msgstr ""
 
 #. Default: "Investigationstart"
-#: content/Inquiry.py
+#: Inquiry.py
 msgid "urban_label_investigationStart"
 msgstr ""
 
 #. Default: "Investigationwritereclamationnumber"
-#: content/Inquiry.py
+#: Inquiry.py
 msgid "urban_label_investigationWriteReclamationNumber"
 msgstr ""
 
 #. Default: "Isdecentralized"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_isDecentralized"
 msgstr ""
 
 #. Default: "Isdefaultvalue"
-#: cfg/UrbanConfigurationValue.py
+#: UrbanConfigurationValue.py
 msgid "urban_label_isDefaultValue"
 msgstr ""
 
@@ -647,7 +647,7 @@ msgid "urban_label_isInSubdivision"
 msgstr ""
 
 #. Default: "Iskeyevent"
-#: cfg/UrbanEventType.py
+#: UrbanEventType.py
 msgid "urban_label_isKeyEvent"
 msgstr ""
 
@@ -662,12 +662,12 @@ msgid "urban_label_isModification"
 msgstr ""
 
 #. Default: "Isofficialparcel"
-#: content/PortionOut.py
+#: PortionOut.py
 msgid "urban_label_isOfficialParcel"
 msgstr ""
 
 #. Default: "Issameaddressasworks"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_isSameAddressAsWorks"
 msgstr ""
 
@@ -682,13 +682,13 @@ msgid "urban_label_isTemporaryProject"
 msgstr ""
 
 #. Default: "Keydates"
-#: cfg/UrbanEventType.py
+#: UrbanEventType.py
 msgid "urban_label_keyDates"
 msgstr ""
 
 #. Default: "Label"
-#: cfg/PcaTerm.py
-#: content/ParcellingTerm.py
+#: ParcellingTerm.py
+#: PcaTerm.py
 msgid "urban_label_label"
 msgstr ""
 
@@ -703,7 +703,7 @@ msgid "urban_label_layers"
 msgstr ""
 
 #. Default: "Licenceportaltype"
-#: cfg/LicenceConfig.py
+#: LicenceConfig.py
 msgid "urban_label_licencePortalType"
 msgstr ""
 
@@ -718,12 +718,12 @@ msgid "urban_label_linkedCU2s"
 msgstr ""
 
 #. Default: "Linkedinquiry"
-#: content/linkedInquiry.py
+#: linkedInquiry.py
 msgid "urban_label_linkedInquiry"
 msgstr ""
 
 #. Default: "Localityname"
-#: cfg/Locality.py
+#: Locality.py
 msgid "urban_label_localityName"
 msgstr ""
 
@@ -769,12 +769,12 @@ msgid "urban_label_locationTechnicalRemarks"
 msgstr ""
 
 #. Default: "Manageablelicences"
-#: cfg/FolderManager.py
+#: FolderManager.py
 msgid "urban_label_manageableLicences"
 msgstr ""
 
 #. Default: "Mapextent"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_mapExtent"
 msgstr ""
 
@@ -794,27 +794,27 @@ msgid "urban_label_missingPartsDetails"
 msgstr ""
 
 #. Default: "Multiplicity"
-#: cfg/PersonTitleTerm.py
+#: PersonTitleTerm.py
 msgid "urban_label_multiplicity"
 msgstr ""
 
 #. Default: "Name"
-#: content/RecipientCadastre.py
+#: RecipientCadastre.py
 msgid "urban_label_name"
 msgstr ""
 
 #. Default: "Name1"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_name1"
 msgstr ""
 
 #. Default: "Name2"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_name2"
 msgstr ""
 
 #. Default: "Nationalregister"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_nationalRegister"
 msgstr ""
 
@@ -840,34 +840,34 @@ msgid "urban_label_noteworthyTrees"
 msgstr ""
 
 #. Default: "Number"
-#: cfg/EnvironmentRubricTerm.py
-#: cfg/PcaTerm.py
-#: content/Contact.py
+#: Contact.py
+#: EnvironmentRubricTerm.py
+#: PcaTerm.py
 msgid "urban_label_number"
 msgstr ""
 
 #. Default: "Numberofparcels"
-#: content/ParcellingTerm.py
+#: ParcellingTerm.py
 msgid "urban_label_numberOfParcels"
 msgstr ""
 
 #. Default: "Numbering"
-#: cfg/UrbanVocabularyTerm.py
+#: UrbanVocabularyTerm.py
 msgid "urban_label_numbering"
 msgstr ""
 
 #. Default: "Numerotation"
-#: cfg/LicenceConfig.py
+#: LicenceConfig.py
 msgid "urban_label_numerotation"
 msgstr ""
 
 #. Default: "Openofficeport"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_openOfficePort"
 msgstr ""
 
 #. Default: "Opiniontext"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_opinionText"
 msgstr ""
 
@@ -877,7 +877,7 @@ msgid "urban_label_opinionsToAskIfWorks"
 msgstr ""
 
 #. Default: "Outdated"
-#: content/PortionOut.py
+#: PortionOut.py
 msgid "urban_label_outdated"
 msgstr ""
 
@@ -887,7 +887,7 @@ msgid "urban_label_parcellings"
 msgstr ""
 
 #. Default: "Partie"
-#: content/PortionOut.py
+#: PortionOut.py
 msgid "urban_label_partie"
 msgstr ""
 
@@ -932,27 +932,27 @@ msgid "urban_label_pebType"
 msgstr ""
 
 #. Default: "Persontitle"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_personTitle"
 msgstr ""
 
 #. Default: "Phone"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_phone"
 msgstr ""
 
 #. Default: "Ploneuserid"
-#: cfg/FolderManager.py
+#: FolderManager.py
 msgid "urban_label_ploneUserId"
 msgstr ""
 
 #. Default: "Pmdescription"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_pmDescription"
 msgstr ""
 
 #. Default: "Pmtitle"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_pmTitle"
 msgstr ""
 
@@ -982,12 +982,12 @@ msgid "urban_label_publicRoadModifications"
 msgstr ""
 
 #. Default: "Puissance"
-#: content/PortionOut.py
+#: PortionOut.py
 msgid "urban_label_puissance"
 msgstr ""
 
 #. Default: "Pylonshost"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_pylonsHost"
 msgstr ""
 
@@ -997,7 +997,7 @@ msgid "urban_label_queryable"
 msgstr ""
 
 #. Default: "Radical"
-#: content/PortionOut.py
+#: PortionOut.py
 msgid "urban_label_radical"
 msgstr ""
 
@@ -1007,12 +1007,12 @@ msgid "urban_label_rcuDetails"
 msgstr ""
 
 #. Default: "Receiptdate"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_receiptDate"
 msgstr ""
 
 #. Default: "Receiveddocumentreference"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_receivedDocumentReference"
 msgstr ""
 
@@ -1027,32 +1027,32 @@ msgid "urban_label_referenceDGATLP"
 msgstr ""
 
 #. Default: "Referencetalexpression"
-#: cfg/LicenceConfig.py
+#: LicenceConfig.py
 msgid "urban_label_referenceTALExpression"
 msgstr ""
 
 #. Default: "Regionalroad"
-#: cfg/Street.py
+#: Street.py
 msgid "urban_label_regionalRoad"
 msgstr ""
 
 #. Default: "Registrationnumber"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_registrationNumber"
 msgstr ""
 
 #. Default: "Relatedfields"
-#: cfg/SpecificFeatureTerm.py
+#: SpecificFeatureTerm.py
 msgid "urban_label_relatedFields"
 msgstr ""
 
 #. Default: "Representedby"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_representedBy"
 msgstr ""
 
 #. Default: "Representedbysociety"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_representedBySociety"
 msgstr ""
 
@@ -1118,7 +1118,7 @@ msgid "urban_label_rubrics"
 msgstr ""
 
 #. Default: "Section"
-#: content/PortionOut.py
+#: PortionOut.py
 msgid "urban_label_section"
 msgstr ""
 
@@ -1128,12 +1128,12 @@ msgid "urban_label_servitudesListing"
 msgstr ""
 
 #. Default: "Showtitle"
-#: cfg/UrbanEventType.py
+#: UrbanEventType.py
 msgid "urban_label_showTitle"
 msgstr ""
 
 #. Default: "Society"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_society"
 msgstr ""
 
@@ -1143,7 +1143,7 @@ msgid "urban_label_solicitLocationOpinionsTo"
 msgstr ""
 
 #. Default: "Solicitopinionsto"
-#: content/Inquiry.py
+#: Inquiry.py
 msgid "urban_label_solicitOpinionsTo"
 msgstr ""
 
@@ -1158,22 +1158,22 @@ msgid "urban_label_specificFeatures"
 msgstr ""
 
 #. Default: "Sqlhost"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_sqlHost"
 msgstr ""
 
 #. Default: "Sqlname"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_sqlName"
 msgstr ""
 
 #. Default: "Sqlpassword"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_sqlPassword"
 msgstr ""
 
 #. Default: "Sqluser"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_sqlUser"
 msgstr ""
 
@@ -1183,23 +1183,23 @@ msgid "urban_label_sscDetails"
 msgstr ""
 
 #. Default: "Startdate"
-#: cfg/Street.py
+#: Street.py
 msgid "urban_label_startDate"
 msgstr ""
 
 #. Default: "Street"
-#: content/Contact.py
-#: content/RecipientCadastre.py
+#: Contact.py
+#: RecipientCadastre.py
 msgid "urban_label_street"
 msgstr ""
 
 #. Default: "Streetcode"
-#: cfg/Street.py
+#: Street.py
 msgid "urban_label_streetCode"
 msgstr ""
 
 #. Default: "Streetname"
-#: cfg/Street.py
+#: Street.py
 msgid "urban_label_streetName"
 msgstr ""
 
@@ -1209,7 +1209,7 @@ msgid "urban_label_styles"
 msgstr ""
 
 #. Default: "Subdividername"
-#: content/ParcellingTerm.py
+#: ParcellingTerm.py
 msgid "urban_label_subdividerName"
 msgstr ""
 
@@ -1219,7 +1219,7 @@ msgid "urban_label_subdivisionDetails"
 msgstr ""
 
 #. Default: "Tabsconfig"
-#: cfg/LicenceConfig.py
+#: LicenceConfig.py
 msgid "urban_label_tabsConfig"
 msgstr ""
 
@@ -1229,15 +1229,15 @@ msgid "urban_label_technicalRemarks"
 msgstr ""
 
 #. Default: "Textdefaultvalues"
-#: cfg/LicenceConfig.py
-#: cfg/UrbanEventType.py
+#: LicenceConfig.py
+#: UrbanEventType.py
 msgid "urban_label_textDefaultValues"
 msgstr ""
 
 #. Default: "Title"
 #: GenericLicence.py
-#: cfg/PcaTerm.py
-#: cfg/UrbanTool.py
+#: ParcellingTerm.py
+#: PcaTerm.py
 msgid "urban_label_title"
 msgstr ""
 
@@ -1252,7 +1252,7 @@ msgid "urban_label_townshipSpecificFeatures"
 msgstr ""
 
 #. Default: "Transmitdate"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_transmitDate"
 msgstr ""
 
@@ -1262,12 +1262,12 @@ msgid "urban_label_transparency"
 msgstr ""
 
 #. Default: "Path of a UNO-enabled Python interpreter (ie /usr/bin/python)"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_unoEnabledPython"
 msgstr ""
 
 #. Default: "Urbaneventtypes"
-#: content/UrbanEvent.py
+#: UrbanEvent.py
 msgid "urban_label_urbaneventtypes"
 msgstr ""
 
@@ -1277,22 +1277,22 @@ msgid "urban_label_usage"
 msgstr ""
 
 #. Default: "Useplonemeetingwsclient"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_usePloneMeetingWSClient"
 msgstr ""
 
 #. Default: "Usetabbingfordisplay"
-#: cfg/LicenceConfig.py
+#: LicenceConfig.py
 msgid "urban_label_useTabbingForDisplay"
 msgstr ""
 
 #. Default: "Usetabbingforedit"
-#: cfg/LicenceConfig.py
+#: LicenceConfig.py
 msgid "urban_label_useTabbingForEdit"
 msgstr ""
 
 #. Default: "Usedattributes"
-#: cfg/LicenceConfig.py
+#: LicenceConfig.py
 msgid "urban_label_usedAttributes"
 msgstr ""
 
@@ -1307,7 +1307,7 @@ msgid "urban_label_visibility"
 msgstr ""
 
 #. Default: "Webserverhost"
-#: cfg/UrbanTool.py
+#: UrbanTool.py
 msgid "urban_label_webServerHost"
 msgstr ""
 
@@ -1322,12 +1322,12 @@ msgid "urban_label_workType"
 msgstr ""
 
 #. Default: "Zipcode"
-#: cfg/City.py
+#: City.py
 msgid "urban_label_zipCode"
 msgstr ""
 
 #. Default: "Zipcode"
-#: content/Contact.py
+#: Contact.py
 msgid "urban_label_zipcode"
 msgstr ""
 

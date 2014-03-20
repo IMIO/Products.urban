@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.content.UrbanEvent import UrbanEvent
+from Products.urban.UrbanEvent import UrbanEvent
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget

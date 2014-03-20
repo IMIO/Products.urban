@@ -189,8 +189,6 @@ EnvironmentLicence_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-for field in EnvironmentLicence_schema.filterFields(isMetadata=False):
-    field.widget.visible = True
 ##/code-section after-schema
 
 class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):

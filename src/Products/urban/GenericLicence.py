@@ -34,7 +34,7 @@ from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban.indexes import UrbanIndexes
 from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
-from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban import UrbanMessage as _
 
 from zope.component import createObject
@@ -924,7 +924,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
         for listEventType in listEventTypes:
             obj = listEventType.getObject()
             #an advice corresponding to IOpinionRequestEvent
-            if obj.eventTypeType == 'Products.urban.cfg.interfaces.IOpinionRequestEvent':
+            if obj.eventTypeType == 'Products.urban.interfaces.IOpinionRequestEvent':
                 res.append(obj)
         return res
 

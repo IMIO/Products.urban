@@ -4,7 +4,7 @@ from time import sleep
 from zope.component.interface import interfaceToName
 from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_LICENCES, URBAN_TESTS_CONFIG
-from Products.urban.cfg.interfaces import IAcknowledgmentEvent
+from Products.urban.interfaces import IAcknowledgmentEvent
 from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import getMd5Signature
 

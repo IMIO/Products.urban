@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #
-# File: Geometrician.py
+# File: Architect.py
 #
-# Copyright (c) 2013 by CommunesPlone
+# Copyright (c) 2011 by CommunesPlone
 # Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
@@ -23,19 +23,11 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.urban.content.Contact import Contact
+from Contact import Contact
 ##/code-section module-header
 
 schema = Schema((
 
-    IntegerField(
-        name='nationalRegister',
-        widget=IntegerField._properties['widget'](
-            label='Nationalregister',
-            label_msgid='urban_label_nationalRegister',
-            i18n_domain='urban',
-        ),
-    ),
 
 ),
 )
@@ -43,32 +35,32 @@ schema = Schema((
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-Geometrician_schema = Contact.schema.copy() + \
+Architect_schema = Contact.schema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class Geometrician(BaseContent, Contact, BrowserDefaultMixin):
+class Architect(BaseContent, Contact, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
 
-    implements(interfaces.IGeometrician)
+    implements(interfaces.IArchitect)
 
-    meta_type = 'Geometrician'
+    meta_type = 'Architect'
     _at_rename_after_creation = True
 
-    schema = Geometrician_schema
+    schema = Architect_schema
 
     ##code-section class-header #fill in your manual code here
     del schema['title']
-    archetype_name = 'Geometrician'
+    archetype_name = 'Architect'
     aliases = {
-        '(Default)'  : 'Geometrician_view',
+        '(Default)'  : 'Architect_view',
         'view'       : '(Default)',
         'index.html' : '(Default)',
-        'edit'       : 'Geometrician_edit',
+        'edit'       : 'Architect_edit',
         'properties' : 'base_metadata',
         'sharing'    : '',
         }
@@ -83,9 +75,8 @@ class Geometrician(BaseContent, Contact, BrowserDefaultMixin):
 
 
 
-registerType(Geometrician, PROJECTNAME)
-# end of class Geometrician
+registerType(Architect, PROJECTNAME)
+# end of class Architect
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

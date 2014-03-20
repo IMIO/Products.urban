@@ -3,8 +3,7 @@
 from Products.Five import BrowserView
 from Acquisition import aq_inner
 
-from Products.urban.cfg.interfaces import ITheLicenceEvent
-from Products.urban.cfg.interfaces import ICommunalCouncilEvent
+from Products.urban.interfaces import ITheLicenceEvent, ICommunalCouncilEvent
 
 
 class PMWSClientView(BrowserView):

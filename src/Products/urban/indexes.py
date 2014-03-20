@@ -17,9 +17,9 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from plone.indexer import indexer
 from Products.urban.interfaces import IGenericLicence
-from Products.urban.content.interfaces import IParcellingTerm
-from Products.urban.content.interfaces import IUrbanEvent
-from Products.urban.cfg.interfaces import IUrbanEventType
+from Products.urban.interfaces import IParcellingTerm
+from Products.urban.interfaces import IUrbanEvent
+from Products.urban.interfaces import IUrbanEventType
 
 
 class UrbanIndexes:

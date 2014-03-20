@@ -5,7 +5,7 @@ from StringIO import StringIO
 
 from Products.Five import BrowserView
 
-from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 from plone import api
 

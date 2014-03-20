@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.content.UrbanEvent import UrbanEvent
+from Products.urban.UrbanEvent import UrbanEvent
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
@@ -26,7 +26,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from OFS.ObjectManager import BeforeDeleteException
 from Products.CMFPlone import PloneMessageFactory as _
-from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from plone import api
 ##/code-section module-header
 

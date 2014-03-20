@@ -30,7 +30,7 @@
       directory="profiles/migrations"
       description="Migrations profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      for="Products.urban.cfg.interfaces.IUrbanTool"
+      for="Products.urban.interfaces.IUrbanTool"
   />
   <genericsetup:registerProfile
       name="testCommune1"
@@ -38,7 +38,7 @@
       directory="profiles/testCommune1"
       description="Test Extension profile for testing urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      for="Products.urban.cfg.interfaces.IUrbanTool"
+      for="Products.urban.interfaces.IUrbanTool"
   />
   <genericsetup:registerProfile
       name="testCommune2"
@@ -46,7 +46,7 @@
       directory="profiles/testCommune2"
       description="Test Extension profile for testing urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      for="Products.urban.cfg.interfaces.IUrbanTool"
+      for="Products.urban.interfaces.IUrbanTool"
   />
   <genericsetup:registerProfile
       name="demo"

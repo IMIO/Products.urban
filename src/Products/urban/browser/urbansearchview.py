@@ -7,10 +7,10 @@ from Products.Five import BrowserView
 from Products.CMFPlone import PloneMessageFactory as msg
 from Products.CMFPlone.PloneBatch import Batch
 
-from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import URBAN_TYPES
 from Products.urban.utils import ParcelHistoric
-from Products.urban.cfg.UrbanTool import DB_QUERY_ERROR
+from Products.urban.UrbanTool import DB_QUERY_ERROR
 from Products.urban.browser.table.urbantable import SearchResultTable
 
 from Products.ZCTextIndex.ParseTree import ParseError

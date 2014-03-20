@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 #
-# File: OrganisationTerm.py
+# File: Geometrician.py
 #
-# Copyright (c) 2014 by CommunesPlone
-# Generator: ArchGenXML Version 2.7
+# Copyright (c) 2013 by CommunesPlone
+# Generator: ArchGenXML Version 2.6
 #            http://plone.org/products/archgenxml
 #
 # GNU General Public License (GPL)
@@ -17,28 +17,24 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.cfg.UrbanVocabularyTerm import UrbanVocabularyTerm
+
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
-from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Contact import Contact
 ##/code-section module-header
 
 schema = Schema((
 
-    ReferenceField(
-        name='LinkedOpinionRequestEvent',
-        widget=ReferenceBrowserWidget(
-            label='Linkedopinionrequestevent',
-            label_msgid='urban_label_LinkedOpinionRequestEvent',
+    IntegerField(
+        name='nationalRegister',
+        widget=IntegerField._properties['widget'](
+            label='Nationalregister',
+            label_msgid='urban_label_nationalRegister',
             i18n_domain='urban',
         ),
-        allowed_types=('UrbanEventType', 'OpinionRequestEventType'),
-        multiValued=0,
-        relationship='LinkedOpinionRequestEvent',
-        write_permission="Manage portal",
     ),
 
 ),
@@ -47,32 +43,48 @@ schema = Schema((
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-OrganisationTerm_schema = BaseSchema.copy() + \
-    getattr(UrbanVocabularyTerm, 'schema', Schema(())).copy() + \
+Geometrician_schema = Contact.schema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class OrganisationTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin):
+class Geometrician(BaseContent, Contact, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
-    implements(interfaces.IOrganisationTerm)
 
-    meta_type = 'OrganisationTerm'
+    implements(interfaces.IGeometrician)
+
+    meta_type = 'Geometrician'
     _at_rename_after_creation = True
 
-    schema = OrganisationTerm_schema
+    schema = Geometrician_schema
 
     ##code-section class-header #fill in your manual code here
+    del schema['title']
+    archetype_name = 'Geometrician'
+    aliases = {
+        '(Default)'  : 'Geometrician_view',
+        'view'       : '(Default)',
+        'index.html' : '(Default)',
+        'edit'       : 'Geometrician_edit',
+        'properties' : 'base_metadata',
+        'sharing'    : '',
+        }
     ##/code-section class-header
 
     # Methods
 
+    # Manually created methods
 
-registerType(OrganisationTerm, PROJECTNAME)
-# end of class OrganisationTerm
+    def Title(self):
+        return self.getName1() + " " + self.getName2()
+
+
+
+registerType(Geometrician, PROJECTNAME)
+# end of class Geometrician
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
