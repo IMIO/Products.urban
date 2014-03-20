@@ -5,6 +5,8 @@ from zope.interface import Interface
 ##code-section HEAD
 from Products.urban.content.interfaces import IArchitect
 
+from Products.urban.cfg import interfaces as cfg_interfaces
+IUrbanTool = cfg_interfaces.IUrbanTool
 
 class IProprietary(Interface):
     """Marker interface for .Proprietary.Proprietary

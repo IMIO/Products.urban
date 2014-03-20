@@ -176,7 +176,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         """
          return a DisplayList of fields wich are marked as optional
         """
-        from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
+        from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
         lst = []
         for field in UrbanEventInquiry_schema.fields():
             try:
@@ -193,7 +193,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
     def listTextFields(self):
         #we have to know from where the method has been called in order to know which text
         #fields to propose to be "default valued"
-        from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
+        from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
         urbanevent_fields = UrbanEventInquiry_schema.fields()
         blacklist = ['rights', 'description']
         available_fields = [field for field in urbanevent_fields if field.getType() == 'Products.Archetypes.Field.TextField' and field.getName() not in blacklist]
