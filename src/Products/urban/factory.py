@@ -38,7 +38,6 @@ class UrbanEventFactory(grok.GlobalUtility):
         )
         urban_event = getattr(licence, urban_event_id)
         urban_event._at_rename_after_creation = False
-        urban_event.processForm()
 
         return urban_event
 

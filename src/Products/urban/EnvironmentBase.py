@@ -252,11 +252,10 @@ EnvironmentBase_schema = BaseFolderSchema.copy() + \
 EnvironmentBase_schema['title'].required = False
 EnvironmentBase_schema['title'].widget.visible = False
 setSchemataForInquiry(EnvironmentBase_schema)
-def hidesInquiryFields(schema):
-    for field in schema.filterFields(isMetadata=False):
-        if field.schemata == 'urban_investigation_and_advices' and field.getName() != 'solicitOpinionsTo':
-            field.widget.visible = False
-hidesInquiryFields(EnvironmentBase_schema)
+# hide Inquiry fields but 'solicitOpinionsTo'
+for field in EnvironmentBase_schema.filterFields(isMetadata=False):
+    if field.schemata == 'urban_investigation_and_advices' and field.getName() != 'solicitOpinionsTo':
+        field.widget.visible = False
 ##/code-section after-schema
 
 class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):

@@ -11,10 +11,12 @@
  <property name="product">urban</property>
  <property name="factory">addEnvironmentLicence</property>
  <property name="immediate_view">inquiryview</property>
- <property name="global_allow">True</property>
+ <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
    <element value="Applicant"/>
+   <element value="Inquiry"/>
+   <element value="UrbanEventInquiry"/>
    <element value="UrbanEventOpinionRequest"/>
    <element value="Applicant"/>
    <element value="UrbanEvent"/>

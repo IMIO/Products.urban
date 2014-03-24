@@ -257,29 +257,30 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
     def getTabsConfigRows(self):
         """
         """
-        default_names ={
-                'description':'Récapitulatif',
-                'road':'Voirie',
-                'location':'Urbanisme',
-                'investigation_and_advices':'Enquêtes et avis',
-                'peb':'PEB',
-                }
+        default_names = {
+            'description': 'Récapitulatif',
+            'road': 'Voirie',
+            'location': 'Urbanisme',
+            'investigation_and_advices': 'Enquêtes et avis',
+            'peb': 'PEB',
+        }
         minimum_tabs_config = ['description', 'road', 'location']
         inquiry_tabs_config = ['description', 'road', 'location', 'investigation_and_advices']
         full_tabs_config = ['description', 'road', 'location', 'investigation_and_advices', 'peb']
 
         types = {
-                'buildlicence': full_tabs_config,
-                'parceloutlicence': inquiry_tabs_config,
-                'urbancertificatetwo': inquiry_tabs_config,
-                'envclassthree': inquiry_tabs_config,
-                }
+            'buildlicence': full_tabs_config,
+            'parceloutlicence': inquiry_tabs_config,
+            'urbancertificatetwo': inquiry_tabs_config,
+            'envclassthree': inquiry_tabs_config,
+            'envclassone': inquiry_tabs_config,
+        }
         licence_type = self.id
 
         def makeRow(tabname):
             return FixedRow(
-                keyColumn = 'value',
-                initialData = {'display':'1', 'value':tabname, 'display_name':default_names[tabname]},
+                keyColumn='value',
+                initialData={'display': '1', 'value': tabname, 'display_name': default_names[tabname]},
             )
 
         return [makeRow(tabname) for tabname in types.get(licence_type, minimum_tabs_config)]
