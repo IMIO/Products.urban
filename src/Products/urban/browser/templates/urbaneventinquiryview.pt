@@ -146,7 +146,8 @@
                                                           and linkedUrbanEventType.getEventTypeType() == 'Products.urban.interfaces.IInquiryEvent'">
                                 <form tal:attributes="action context/absolute_url" method="post">
                                     <input type="submit" class="context" name="find_recipients_cadastre"
-                                           tal:attributes="value string:Rechercher les propriétaires situés dans un rayon de 50m" />
+                                    tal:attributes="value python:'Rechercher les propriétaires situés dans un rayon de {radius}m'.format(
+                                                                 radius=view.getInquiryRadius())" />
                                 </form>
                             </tal:block>
                             <br />

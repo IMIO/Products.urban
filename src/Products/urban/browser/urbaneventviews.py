@@ -126,7 +126,8 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
 
     def __call__(self):
         if 'find_recipients_cadastre' in self.request.form:
-            return self.getInvestigationPOs()
+            radius = self.getInquiryRadius()
+            return self.getInvestigationPOs(radius)
         return self.index()
 
     def getParcels(self):
@@ -204,7 +205,7 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
             else:
                 return linkedInquiry.Title()
 
-    def getInvestigationPOs(self):
+    def getInvestigationPOs(self, radius=50):
         """
           Search the parcels in a radius of 50 meters...
         """
@@ -233,7 +234,7 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
                 strfilter = strfilter + " and puissance = " + portionOutObj.getPuissance()
             strfilter = strfilter + ")"
 
-        strsql = strsql + strfilter + "), 50), capa.the_geom);"
+        strsql = strsql + strfilter + "), {radius}), capa.the_geom);".format(radius=radius)
         print strsql
         rsportionouts = tool.queryDB(query_string=strsql)
         for rsportionout in rsportionouts:
@@ -274,3 +275,8 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
                     #create the PortionOut using the createPortionOut method...
                     context.portal_urban.createPortionOut(container=newrecipient, division=divisioncode, section=section, radical=radical, bis=bis, exposant=exposant, puissance=puissance, partie=False)
         return context.REQUEST.RESPONSE.redirect(context.absolute_url() + '/#fieldsetlegend-urbaneventinquiry_recipients')
+
+    def getInquiryRadius(self):
+        if self.context.getHasEnvironmentImpactStudy():
+            return 200
+        return 50
