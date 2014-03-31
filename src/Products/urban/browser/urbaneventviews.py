@@ -277,6 +277,8 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
         return context.REQUEST.RESPONSE.redirect(context.absolute_url() + '/#fieldsetlegend-urbaneventinquiry_recipients')
 
     def getInquiryRadius(self):
-        if self.context.getHasEnvironmentImpactStudy():
-            return 200
+        licence = self.context.aq_parent
+        if hasattr(licence, 'hasEnvironmentImpactStudy'):
+            if licence.getHasEnvironmentImpactStudy():
+                return 200
         return 50
