@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>1.5.0</version>
+  <version>1.6.0</version>
   <!-- ##code-section METADATA -->
   <dependencies>
     <dependency>profile-Products.DataGridField:default</dependency>
