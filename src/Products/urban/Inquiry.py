@@ -31,7 +31,7 @@ from Products.urban.utils import setOptionalAttributes
 
 optional_fields = [
     'derogationDetails', 'investigationDetails', 'investigationReasons',
-    'investigationArticlesText', 'investigationArticles'
+    'investigationArticlesText', 'investigationArticles', 'demandDisplay',
 ]
 ##/code-section module-header
 
@@ -84,6 +84,16 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         default_output_type='text/html',
+    ),
+    DateTimeField(
+        name='demandDisplay',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            format="%d/%m/%Y",
+            label='Demanddisplay',
+            label_msgid='urban_label_demandDisplay',
+            i18n_domain='urban',
+        ),
     ),
     DateTimeField(
         name='investigationStart',

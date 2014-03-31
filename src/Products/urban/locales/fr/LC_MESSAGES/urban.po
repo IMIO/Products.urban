@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2014-03-05 08:00+0000\n"
+"POT-Creation-Date: 2014-03-31 11:45+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1442,6 +1442,11 @@ msgstr "Numérotation des divisions"
 msgid "urban_label_EnvClassThreeNumerotation"
 msgstr "Numérotation des déclarations environnementales"
 
+#. Default: "Ftsolicitopinionsto"
+#: UrbanEvent.py
+msgid "urban_label_FTsolicitOpinionsTo"
+msgstr "Avis sollicités par le FT"
+
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"
@@ -1804,6 +1809,11 @@ msgstr "Destinataire par défaut"
 #: UrbanDelay.py
 msgid "urban_label_delayComputation"
 msgstr "Calcul de la date limite"
+
+#. Default: "Demanddisplay"
+#: Inquiry.py
+msgid "urban_label_demandDisplay"
+msgstr "Date d'affichage de la demande"
 
 #. Default: "Derogation"
 #: GenericLicence.py

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-03-05 08:00+0000\n"
+"POT-Creation-Date: 2014-03-31 11:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1442,6 +1442,11 @@ msgstr ""
 msgid "urban_label_EnvClassThreeNumerotation"
 msgstr ""
 
+#. Default: "Ftsolicitopinionsto"
+#: UrbanEvent.py
+msgid "urban_label_FTsolicitOpinionsTo"
+msgstr ""
+
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"
@@ -1802,6 +1807,11 @@ msgstr ""
 #. Default: "Delaycomputation"
 #: UrbanDelay.py
 msgid "urban_label_delayComputation"
+msgstr ""
+
+#. Default: "Demanddisplay"
+#: Inquiry.py
+msgid "urban_label_demandDisplay"
 msgstr ""
 
 #. Default: "Derogation"

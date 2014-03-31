@@ -1248,6 +1248,11 @@ urbanEventTypes = {
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
+                {'id': 'env1-enq-avis', 'title': "Avis d'enquête publique"},
+                {'id': "env1-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},
+                {'id': "env1-enq-transmis-FT", 'title': "Transmis de l'avis d'enquête au FT"},
+                {'id': "env1-enq-transmis-college", 'title': "Transmis de l'avis d'enquête au Collège"},
+                {'id': "env1-enq-ordre-mission", 'title': "Ordre de mission"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
@@ -1499,6 +1504,20 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('voo')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+        },
+        {
+            'id': "envoi-enquete-ft",
+            'title': "Envoi de l'enquête publique au FT",
+            'activatedFields': ['FTsolicitOpinionsTo'],
+            'deadLineDelay': 10,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+#                {'id': "env1-college-report-FT", 'title': "Avis du collège (FT)"},
+#                {'id': "env1-college-report-impetrants", 'title': "Avis du collège (Impétrants)"},
+#                {'id': "env1-inquiry-report-FT", 'title': "Synthèse de l'enquête publique (FT)"},
+#                {'id': "env1-inquiry-report-impetrants", 'title': "Synthèse de l'enquête publique (Impétrants)"},
+            ),
         },
         {
             'id': "decision",
