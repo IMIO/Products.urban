@@ -88,7 +88,7 @@ class TestUrbanTemplates(unittest.TestCase):
         my_file_odt = getattr(my_accuse_folder, 'urb-accuse.odt', None)
         self.assertNotEqual(my_file_odt, None)
         my_update_file_datetime = my_file_odt.modified()
-        my_header_odt = getattr(self.portal_urban.globaltemplates, 'header.odt', None)
+        my_header_odt = getattr(self.portal_urban.globaltemplates.urbantemplates, 'header.odt', None)
         self.assertNotEqual(my_header_odt, None)
         my_update_header_datetime = my_header_odt.modified()
         portal = self.layer['portal']
