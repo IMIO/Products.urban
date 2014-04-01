@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Mar 31 13:38:41 2014\n"
-"PO-Revision-Date: Mon Mar 31 13:38:41 2014\n"
+"POT-Creation-Date: Tue Apr  1 14:29:44 2014\n"
+"PO-Revision-Date: Tue Apr  1 14:29:44 2014\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -131,6 +131,16 @@ msgstr ""
 msgid "urban_label_NISNum"
 msgstr ""
 
+#. Default: "Prenu"
+#: GenericLicence.py
+msgid "urban_label_PRenU"
+msgstr ""
+
+#. Default: "Prevu"
+#: GenericLicence.py
+msgid "urban_label_PRevU"
+msgstr ""
+
 #. Default: "Rcu"
 #: GenericLicence.py
 msgid "urban_label_RCU"
@@ -200,6 +210,16 @@ msgstr ""
 #. Default: "Adviceagreementlevel"
 #: UrbanEvent.py
 msgid "urban_label_adviceAgreementLevel"
+msgstr ""
+
+#. Default: "Airportnoisezone"
+#: GenericLicence.py
+msgid "urban_label_airportNoiseZone"
+msgstr ""
+
+#. Default: "Airportnoisezonedetails"
+#: GenericLicence.py
+msgid "urban_label_airportNoiseZoneDetails"
 msgstr ""
 
 #. Default: "Alertdelay"
@@ -971,9 +991,19 @@ msgstr ""
 msgid "urban_label_pollution"
 msgstr ""
 
+#. Default: "Prenudetails"
+#: GenericLicence.py
+msgid "urban_label_prenuDetails"
+msgstr ""
+
 #. Default: "Previouslicences"
 #: EnvironmentLicence.py
 msgid "urban_label_previousLicences"
+msgstr ""
+
+#. Default: "Prevudetails"
+#: GenericLicence.py
+msgid "urban_label_prevuDetails"
 msgstr ""
 
 #. Default: "Protectedbuilding"

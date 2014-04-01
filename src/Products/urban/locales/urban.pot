@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-03-31 11:45+0000\n"
+"POT-Creation-Date: 2014-04-01 12:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -354,6 +354,9 @@ msgstr ""
 #. Default: "Respect charges"
 #: UrbanEvent.py
 msgid "agreementlevel_respect_charges"
+msgstr ""
+
+msgid "airportnoisezone_folder_title"
 msgstr ""
 
 msgid "all_divisions"
@@ -1159,6 +1162,12 @@ msgstr ""
 msgid "portal_urban"
 msgstr ""
 
+msgid "prenu_folder_title"
+msgstr ""
+
+msgid "prevu_folder_title"
+msgstr ""
+
 msgid "proprietaries"
 msgstr ""
 
@@ -1470,6 +1479,16 @@ msgstr ""
 msgid "urban_label_NotaryLetterNumerotation"
 msgstr ""
 
+#. Default: "Prenu"
+#: GenericLicence.py
+msgid "urban_label_PRenU"
+msgstr ""
+
+#. Default: "Prevu"
+#: GenericLicence.py
+msgid "urban_label_PRevU"
+msgstr ""
+
 #. Default: "Parceloutlicencenumerotation"
 #: UrbanTool.py
 msgid "urban_label_ParcelOutLicenceNumerotation"
@@ -1557,6 +1576,16 @@ msgstr ""
 #. Default: "Adviceagreementlevel"
 #: UrbanEvent.py
 msgid "urban_label_adviceAgreementLevel"
+msgstr ""
+
+#. Default: "Airportnoisezone"
+#: GenericLicence.py
+msgid "urban_label_airportNoiseZone"
+msgstr ""
+
+#. Default: "Airportnoisezonedetails"
+#: GenericLicence.py
+msgid "urban_label_airportNoiseZoneDetails"
 msgstr ""
 
 #. Default: "Alertdelay"
@@ -2524,9 +2553,19 @@ msgstr ""
 msgid "urban_label_portionsouts"
 msgstr ""
 
+#. Default: "Prenudetails"
+#: GenericLicence.py
+msgid "urban_label_prenuDetails"
+msgstr ""
+
 #. Default: "Previouslicences"
 #: EnvironmentLicence.py
 msgid "urban_label_previousLicences"
+msgstr ""
+
+#. Default: "Prevudetails"
+#: GenericLicence.py
+msgid "urban_label_prevuDetails"
 msgstr ""
 
 #. Default: "Protectedbuilding"

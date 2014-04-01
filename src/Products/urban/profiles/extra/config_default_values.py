@@ -815,6 +815,28 @@ default_values = {
             {'id': "ssc-activites-economiques-tertiaires", 'title': u"Zone d'activités économiques tertiaires"},
         ],
 
+        'prenu': [
+            'UrbanVocabularyTerm',
+            {'id': "xxx", 'title': u"Revitalisation urbaine de XXX"},
+            {'id': "yyy", 'title': u"Revitalisation urbaine de YYY"},
+            {'id': "zzz", 'title': u"Revitalisation urbaine de ZZZ"},
+        ],
+
+        'prevu': [
+            'UrbanVocabularyTerm',
+            {'id': "xxx", 'title': u"Rénovation urbaine de XXX"},
+            {'id': "yyy", 'title': u"Rénovation urbaine de YYY"},
+            {'id': "zzz", 'title': u"Rénovation urbaine de ZZZ"},
+        ],
+
+        'airportnoisezone': [
+            'UrbanVocabularyTerm',
+            {'id': "zone-expo-a", 'title': u"Zone A au plan d'Exposition au bruit"},
+            {'id': "zone-devel-a", 'title': u"Zone A au plan de Développement à Long Terme"},
+            {'id': "zone-expo-b", 'title': u"Zone B au plan d'Exposition au bruit"},
+            {'id': "zone-devel-b", 'title': u"Zone B au plan de Développement à Long Terme"},
+        ],
+
         'persons_titles': [
             'PersonTitleTerm',
             {'id': "notitle", 'title': u"", 'extraValue': "Madame, Monsieur", 'abbreviation': "", 'gender': "male", 'multiplicity': "single"},

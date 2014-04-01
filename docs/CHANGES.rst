@@ -3,12 +3,19 @@
 Changes
 =======
 
-1.6.0 (unreleased)
-------------------
+
+1.6.0
+-----
 
 - Use sphinx to generate documentation
 
 - Add global templates for enviroment licences (#7821).
+
+- Add field "Périmètre de Rénovation urbaine"
+
+- Add field "Périmètre de Revitalisation urbaine"
+
+- Add field "Zones de bruit de l'aéroport"
 
 1.5.0
 -----

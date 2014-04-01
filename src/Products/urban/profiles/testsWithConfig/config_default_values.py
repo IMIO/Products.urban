@@ -302,6 +302,21 @@ default_values = {
             {'id': "ssc-centre-ville", 'title': u"Zone d'habitat urbain de centre-ville"},
         ],
 
+        'prenu': [
+            'UrbanVocabularyTerm',
+            {'id': "xxx", 'title': u"Revitalisation urbaine de XXX"},
+        ],
+
+        'prevu': [
+            'UrbanVocabularyTerm',
+            {'id': "xxx", 'title': u"Rénovation urbaine de XXX"},
+        ],
+
+        'airportnoisezone': [
+            'UrbanVocabularyTerm',
+            {'id': "zone-expo-a", 'title': u"Zone A au plan d'Exposition au bruit"},
+        ],
+
         'persons_titles': [
             'PersonTitleTerm',
             {'id': "master", 'title': u"Maître", 'extraValue': "Maître", 'abbreviation': "Me", 'gender': "male", 'multiplicity': "single"},

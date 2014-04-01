@@ -77,7 +77,8 @@ optional_fields = [
     'pash', 'pashDetails', 'catchmentArea', 'catchmentAreaDetails', 'equipmentAndRoadRequirements',
     'SSC', 'sscDetails', 'RCU', 'rcuDetails', 'floodingLevel', 'floodingLevelDetails', 'solicitRoadOpinionsTo',
     'areParcelsVerified', 'locationFloodingLevel', 'licenceSubject', 'referenceDGATLP',
-    'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails'
+    'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails',
+    'PRevU', 'prevuDetails', 'PRenU', 'prenuDetails', 'airportNoiseZone', 'airportNoiseZoneDetails',
 ]
 ##/code-section module-header
 
@@ -586,6 +587,84 @@ schema = Schema((
         default_output_type='text/plain',
     ),
     LinesField(
+        name='PRenU',
+        widget=MultiSelectionWidget(
+            size= 5,
+            label='Prenu',
+            label_msgid='urban_label_PRenU',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('prenu', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='prenuDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Prenudetails',
+            label_msgid='urban_label_prenuDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
+    ),
+    LinesField(
+        name='PRevU',
+        widget=MultiSelectionWidget(
+            size= 5,
+            label='Prevu',
+            label_msgid='urban_label_PRevU',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('prevu', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='prevuDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Prevudetails',
+            label_msgid='urban_label_prevuDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
+    ),
+    LinesField(
+        name='airportNoiseZone',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Airportnoisezone',
+            label_msgid='urban_label_airportNoiseZone',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('airportnoisezone', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='airportNoiseZoneDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Airportnoisezonedetails',
+            label_msgid='urban_label_airportNoiseZoneDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
+    ),
+    LinesField(
         name='solicitLocationOpinionsTo',
         widget=MultiSelectionWidget(
             format='checkbox',
@@ -594,7 +673,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_location',
-        multiValued=1,
+        multiValued=True,
         vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
         default_method='getDefaultValue',
     ),

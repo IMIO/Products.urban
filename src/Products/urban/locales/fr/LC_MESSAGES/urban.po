@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2014-03-31 11:45+0000\n"
+"POT-Creation-Date: 2014-04-01 12:10+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -356,6 +356,9 @@ msgstr "Prendre connaissance de l'avis"
 #: UrbanEvent.py
 msgid "agreementlevel_respect_charges"
 msgstr "Respecter les impositions de l'avis"
+
+msgid "airportnoisezone_folder_title"
+msgstr "Zones de bruit de l'aéroport"
 
 msgid "all_divisions"
 msgstr "Toutes les divisions"
@@ -1160,6 +1163,12 @@ msgstr "Monsieur"
 msgid "portal_urban"
 msgstr "Configuration de 'urban'"
 
+msgid "prenu_folder_title"
+msgstr "Périmètre de Rénovation Urbaine"
+
+msgid "prevu_folder_title"
+msgstr "Périmètre de Revitalisation Urbaine"
+
 msgid "proprietaries"
 msgstr "Propriétaire(s)"
 
@@ -1471,6 +1480,16 @@ msgstr "Numéro NIS"
 msgid "urban_label_NotaryLetterNumerotation"
 msgstr "Numérotation des lettres de notaire"
 
+#. Default: "Prenu"
+#: GenericLicence.py
+msgid "urban_label_PRenU"
+msgstr "Périmètre de Rénovation Urbaine"
+
+#. Default: "Prevu"
+#: GenericLicence.py
+msgid "urban_label_PRevU"
+msgstr "Périmètre de Revitalisation Urbaine"
+
 #. Default: "Parceloutlicencenumerotation"
 #: UrbanTool.py
 msgid "urban_label_ParcelOutLicenceNumerotation"
@@ -1558,6 +1577,16 @@ msgstr "Rue et numéro (cadastre)"
 #: UrbanEvent.py
 msgid "urban_label_adviceAgreementLevel"
 msgstr "Niveau de l'avis"
+
+#. Default: "Airportnoisezone"
+#: GenericLicence.py
+msgid "urban_label_airportNoiseZone"
+msgstr "Zones de bruit de l'aéroport"
+
+#. Default: "Airportnoisezonedetails"
+#: GenericLicence.py
+msgid "urban_label_airportNoiseZoneDetails"
+msgstr "Détails concernant les zones de bruit de l'aéroport"
 
 #. Default: "Alertdelay"
 #: UrbanDelay.py
@@ -2527,10 +2556,20 @@ msgstr "Parcelles"
 msgid "urban_label_portionsouts"
 msgstr "Parcelles"
 
+#. Default: "Prenudetails"
+#: GenericLicence.py
+msgid "urban_label_prenuDetails"
+msgstr "Détails concernant le Périmètre de Rénovation Urbaine"
+
 #. Default: "Previouslicences"
 #: EnvironmentLicence.py
 msgid "urban_label_previousLicences"
 msgstr "Permissions, enregistrements et déclarations existantes"
+
+#. Default: "Prevudetails"
+#: GenericLicence.py
+msgid "urban_label_prevuDetails"
+msgstr "Détails concernant le Périmètre de Revitalisation Urbaine"
 
 #. Default: "Protectedbuilding"
 #: GenericLicence.py
