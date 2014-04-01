@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 from Products.urban.config import URBAN_TYPES
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
-from Products.urban.utils import getLicenceFolder
+from Products.urban import utils
 
 from plone.app.testing import login
 from plone.testing.z2 import Browser
@@ -22,7 +22,7 @@ class TestGenericLicenceFields(unittest.TestCase):
         login(self.portal, 'urbaneditor')
         self.licences = []
         for content_type in URBAN_TYPES:
-            licence_folder = getLicenceFolder(self.urban, content_type)
+            licence_folder = utils.getLicenceFolder(content_type)
             testlicence_id = 'test_{}'.format(content_type)
             if testlicence_id not in licence_folder.objectIds():
                 licence_folder.invokeFactory(content_type, id=testlicence_id)

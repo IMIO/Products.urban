@@ -11,9 +11,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban.browser.table.urbantable import LicenceListingTable
 from Products.urban.browser.table.urbantable import AllLicencesListingTable
 from Products.urban.config import ORDERED_URBAN_TYPES
-from Products.urban.utils import getCurrentFolderManager
-from Products.urban.utils import getLicenceFolderId
-from Products.urban.utils import getLicenceFolder
+from Products.urban import utils
 
 from plone import api
 
@@ -64,7 +62,7 @@ class UrbanView(BrowserView):
         """
         context = aq_inner(self.context)
         urban_tool = getToolByName(context, 'portal_urban')
-        currentfoldermanager = getCurrentFolderManager()
+        currentfoldermanager = utils.getCurrentFolderManager()
         currentfoldermanager_uid = currentfoldermanager and currentfoldermanager.UID() or ''
         foldermanagers = urban_tool.foldermanagers.objectValues()
 
@@ -76,7 +74,7 @@ class UrbanView(BrowserView):
         """
          Return the folder manager bound to the current plone id user if it exists
         """
-        return getCurrentFolderManager()
+        return utils.getCurrentFolderManager()
 
     def listAvailableStates(self):
         """
@@ -106,13 +104,13 @@ class UrbanRootView(UrbanView):
     def getLicenceCreationURL(self, licencetype):
         context = aq_inner(self.context)
         base_url = context.absolute_url()
-        folder_id = getLicenceFolderId(licencetype)
+        folder_id = utils.getLicenceFolderId(licencetype)
         url = '{base_url}/{folder_id}/createObject?type_name={licencetype}'.format(
             base_url=base_url, folder_id=folder_id, licencetype=licencetype)
         return url
 
     def mayAddLicence(self, licencetype):
-        licence_folder = getLicenceFolder(self.context, licencetype)
+        licence_folder = utils.getLicenceFolder(licencetype)
         return licencetype in [t.id for t in licence_folder.allowedContentTypes()]
 
     def getLinkClass(self, licencetype):
@@ -120,8 +118,8 @@ class UrbanRootView(UrbanView):
 
     def getLicenceFolderLink(self, licencetype):
         klass = self.getLinkClass(licencetype)
-        href = getLicenceFolder(self.context, licencetype).absolute_url()
-        folder_id = getLicenceFolderId(licencetype)
+        href = utils.getLicenceFolder(licencetype).absolute_url()
+        folder_id = utils.getLicenceFolderId(licencetype)
         link_content = translate(_(folder_id), context=self.request)
         link_template = u'<a class="{klass}" href="{href}">{link_content}</a>'
         link = link_template.format(

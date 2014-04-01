@@ -3,7 +3,6 @@
 from Acquisition import aq_base
 from HTMLParser import HTMLParser
 
-from Products.CMFCore.utils import getToolByName
 from Products.urban.config import URBAN_TYPES
 
 from plone import api
@@ -322,9 +321,8 @@ def getAllLicenceFolderIds():
     return [getLicenceFolderId(licencetype) for licencetype in URBAN_TYPES]
 
 
-def getLicenceFolder(context, licencetype):
-    portal_url = getToolByName(context, 'portal_url')
-    portal = portal_url.getPortalObject()
+def getLicenceFolder(licencetype):
+    portal = api.portal.getSite()
     urban = portal.urban
     folder_id = getLicenceFolderId(licencetype)
     licence_folder = getattr(urban, folder_id)

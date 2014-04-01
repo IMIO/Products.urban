@@ -4,7 +4,7 @@ from DateTime import DateTime
 
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_CONFIG
-from Products.urban.utils import getLicenceFolder
+from Products.urban import utils
 
 from plone import api
 from plone.app.testing import login
@@ -53,7 +53,7 @@ class TestEnvClassOneInstall(unittest.TestCase):
         try:
             edit_url = self.portal_urban.envclassone.absolute_url() + '/edit'
             self.browser.open(edit_url)
-        except urllib2.HTTPError,  e:
+        except urllib2.HTTPError, e:
             self.fail(msg="Got HTTP response code:" + str(e.code))
 
     def test_envclassone_folder_exist(self):
@@ -69,7 +69,7 @@ class TestEnvClassOneInstall(unittest.TestCase):
 
     def test_envclassone_licence_folder_link_in_urban_default_view(self):
         self.browser.open(self.urban.absolute_url())
-        folder_url = getLicenceFolder(self.urban, 'EnvClassOne').absolute_url()
+        folder_url = utils.getLicenceFolder('EnvClassOne').absolute_url()
         link = self.browser.getLink(url=folder_url)
         self.assertEqual(link.text, "Permis d'environnement classe 1")
         link.click()

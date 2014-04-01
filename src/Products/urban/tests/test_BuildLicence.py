@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from DateTime import DateTime
-from Products.urban.utils import getCurrentFolderManager
-from Products.urban.utils import getLicenceFolder
+from Products.urban import utils
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_LICENCES
 
@@ -96,14 +95,14 @@ class TestBuildLicence(unittest.TestCase):
         LICENCE_ID = 'licence2'
         buildlicences.invokeFactory('BuildLicence', LICENCE_ID)
         buildLicence2 = getattr(buildlicences, LICENCE_ID)
-        buildLicence2.setFoldermanagers(getCurrentFolderManager())
+        buildLicence2.setFoldermanagers(utils.getCurrentFolderManager())
         #3 check if agent treatment exist
         self.assertEqual(buildLicence2.getFoldermanagers()[0].getPloneUserId(), 'urbaneditor')
         at.setPloneUserId('urbanreader')
         LICENCE_ID = 'licence3'
         buildlicences.invokeFactory('BuildLicence', LICENCE_ID)
         buildLicence3 = getattr(buildlicences, LICENCE_ID)
-        buildLicence3.setFoldermanagers(getCurrentFolderManager())
+        buildLicence3.setFoldermanagers(utils.getCurrentFolderManager())
         self.assertEqual(len(buildLicence3.getFoldermanagers()), 0)
 
     def testGetAllAdvicesWithoutOpinionRequest(self):
@@ -151,7 +150,7 @@ class TestBuildLicenceFields(unittest.TestCase):
         login(self.portal, 'urbaneditor')
         self.licences = []
         for content_type in ['BuildLicence', 'ParcelOutLicence']:
-            licence_folder = getLicenceFolder(self.urban, content_type)
+            licence_folder = utils.getLicenceFolder(content_type)
             testlicence_id = 'test_{}'.format(content_type)
             if testlicence_id not in licence_folder.objectIds():
                 licence_folder.invokeFactory(content_type, id=testlicence_id)

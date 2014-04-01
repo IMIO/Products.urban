@@ -745,6 +745,9 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
 
     security.declarePublic('createUrbanEvent')
     def createUrbanEvent(self, urban_event_type, **kwargs):
+        """
+         urban_event_type can either be an id or the object
+        """
         urban_event = createObject('UrbanEvent', self, urban_event_type, **kwargs)
         return urban_event
 
