@@ -99,7 +99,7 @@ class UrbanRootView(UrbanView):
         self.request = request
 
     def getLicenceTypes(self):
-        return ORDERED_URBAN_TYPES
+        return [urban_type for urban_type in ORDERED_URBAN_TYPES if urban_type != 'EnvClassOne']
 
     def getLicenceCreationURL(self, licencetype):
         context = aq_inner(self.context)
