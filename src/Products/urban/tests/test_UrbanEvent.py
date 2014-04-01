@@ -4,6 +4,7 @@ from DateTime import DateTime
 
 from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.urban import utils
 
 from plone import api
 from plone.app.testing import login
@@ -86,27 +87,28 @@ class TestUrbanEventInquiryView(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
-
-        # create a test BuildLicence
         login(self.portal, 'urbaneditor')
-        buildlicence_folder = self.urban.buildlicences
-        testlicence_id = 'test_buildlicence'
-        if testlicence_id not in buildlicence_folder.objectIds():
-            buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
-        licence = getattr(buildlicence_folder, testlicence_id)
-        self.licence = licence
-        licence.setInvestigationStart(DateTime())
-
-        # create a test UrbanEventInquiry in test_buildlicence
-        catalog = api.portal.get_tool('portal_catalog')
-        event_type_brain = catalog(portal_type='UrbanEventType', id='enquete-publique')[0]
-        self.event_type = event_type_brain.getObject()
-        self.inquiry = licence.createUrbanEvent(self.event_type)
-        self.view = self.inquiry.restrictedTraverse('urbaneventinquiryview')
-        transaction.commit()
 
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
+
+    def _create_test_licence_with_inquiry(self, portal_type):
+        licence_folder = utils.getLicenceFolder(portal_type)
+        testlicence_id = 'test_{}'.format(portal_type.lower())
+        if testlicence_id not in licence_folder.objectIds():
+            licence_folder.invokeFactory(portal_type, id=testlicence_id)
+        licence = getattr(licence_folder, testlicence_id)
+        licence.setInvestigationStart(DateTime())
+
+        # create a test UrbanEventInquiry in test_licence
+        inquiry = licence.objectValues('UrbanEventInquiry')
+        if not inquiry:
+            inquiry = licence.createUrbanEvent('enquete-publique')
+            transaction.commit()
+        else:
+            inquiry = inquiry[0]
+
+        return licence, inquiry
 
     def browserLogin(self, user):
         self.browser.open(self.portal.absolute_url() + "/login_form")
@@ -114,6 +116,26 @@ class TestUrbanEventInquiryView(unittest.TestCase):
         self.browser.getControl(name='__ac_password').value = user
         self.browser.getControl(name='submit').click()
 
-    def test_UrbanEventInquiry_view_display(self):
+    def test_Buildicence_UrbanEventInquiry_view_display(self):
         """ Test UrbanEventInquiry view is not broken """
-        self.browser.open(self.inquiry.absolute_url())
+        buildlicence, inquiry = self._create_test_licence_with_inquiry('BuildLicence')
+        self.browser.open(inquiry.absolute_url())
+
+    def test_EnvClassOne_UrbanEventInquiry_view_display(self):
+        """ Test UrbanEventInquiry view is not broken """
+        envclassone, inquiry = self._create_test_licence_with_inquiry('EnvClassOne')
+        self.browser.open(inquiry.absolute_url())
+
+    def test_200m_radius_when_EnvironmentImpactStudy(self):
+        envclassone, inquiry = self._create_test_licence_with_inquiry('EnvClassOne')
+
+        self.browser.open(inquiry.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("dans un rayon de 50m" in contents)
+
+        envclassone.setHasEnvironmentImpactStudy(True)
+        transaction.commit()
+
+        self.browser.open(inquiry.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("dans un rayon de 200m" in contents)
