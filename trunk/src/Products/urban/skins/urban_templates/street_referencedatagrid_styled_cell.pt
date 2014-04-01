@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone">
+<body>
+    <!-- VIEW -->
+    <metal:view_cell_macro define-macro="view_cell">                
+      <div tal:content="cell_value" />
+    </metal:view_cell_macro>
+
+<!-- XXX this macro is used by the 'title' column on the workLocation field
+     we just added the 'readonly' value here above -->
+
+    <!-- EDIT -->
+    <metal:edit_cell_macro define-macro="edit_cell">
+       <input style="width: 100%" name="myfield.name:records"
+	      tal:define="attribs python:column_definition.getAttributes(column, rows);"
+              tal:attributes="name string:${fieldName}.${column}:records;
+                          id string:${column}_${fieldId};
+                          value cell_value;
+			  class python:attribs['class'];
+			  onblur python:attribs['onblur'];
+			  onfocus python:attribs['onfocus'];
+			  default_value python:attribs['default'];
+			  "
+	   type="text" readonly />
+    </metal:edit_cell_macro>
+    
+   <!-- EMPTY EDIT -->
+    <metal:edit_empty_cell_macro define-macro="edit_empty_cell">
+       <input style="width: 100%" name="myfield.name:records" 
+                       tal:attributes="name string:${fieldName}.${column}:records;
+                                       id string:${column}_${fieldId};
+                                       value python: column_definition.getDefault(here);
+                                       onchange eventHandler;
+                                       "
+                       type="text" readonly />
+    </metal:edit_empty_cell_macro>
+    
+</body>
+</html>

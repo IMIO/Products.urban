@@ -1,0 +1,7 @@
+<div align="center" tal:condition="view/show" i18n:domain="urban" id="portal-firefox" style="border-style: solid; border-color: red" >
+<tal:block i18n:translate="firefox_viewlet_title">This application works better with Firefox</tal:block>
+<br /><br />
+<tal:block i18n:translate="firefox_viewlet_descr">Secure, fast and sure, <a href="http://www.getfirefox.com">Firefox</a> is free and easy to install.</tal:block>
+<br /><br />
+<a href="http://www.getfirefox.com"><img tal:define="portal_url context/@@plone_portal_state/portal_url" tal:attributes="src string:${portal_url}/viewlet-firefox.png" src="viewlet-firefox.png" /></a>
+</div>

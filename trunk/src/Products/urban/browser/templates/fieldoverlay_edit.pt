@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<body>
+<metal:main fill-slot="main">
+
+<metal:main_macro define-macro="main"
+       tal:define="errors python:request.get('errors', {})">
+
+    <script type="text/javascript"
+            charset="iso-8859-1"
+            tal:attributes="src string:$portal_url/fieldeditoverlay.js">
+    </script>
+
+<tal:fieldedit define="field_ids view/getFieldIds">
+    <tal:allow_edit condition="field_ids">
+        <tal:loop repeat="field_id field_ids">
+            <!--
+             Use the widget macro in edit mode for the first load (in case the field is hidden in the form by a master
+             select widget)
+             Then use the js getField method for any reload to be sure to always render the values as they
+             are selected in the edit form.
+             The trick is to mark html tag with 'refreshed' class to check if its the first load or not
+             (see getField method)
+            -->
+            <div tal:attributes="id python: 'fieldtoreplace_%s' % field_id; class field_id">
+                 <metal:fieldMacro use-macro="python:here.widget(field_id, mode='edit')" />
+            </div>
+            <script type="text/javascript" charset="iso-8859-1">
+                    getField();
+            </script>
+        </tal:loop>
+        <div>
+            <input type="button" value="Ok"
+                   tal:attributes="onclick python: 'javascript:updateField(\'%s\')' % '|'.join(field_ids) "
+                   i18n:attributes="value label_cancel;" />
+            <input type="button" value="Cancel"
+                   onclick="javascript:closePopup();"
+                   i18n:attributes="value label_cancel;" />
+        </div>
+    </tal:allow_edit>
+</tal:fieldedit>
+
+</metal:main_macro>
+</metal:main>
+</body>
+</html>

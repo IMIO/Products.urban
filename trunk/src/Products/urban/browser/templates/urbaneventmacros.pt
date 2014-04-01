@@ -1,0 +1,93 @@
+<fieldset metal:define-macro="urbanEventDataMacro" i18n:domain="urban" height="100%">
+    <legend i18n:translate="event_data">Event data</legend>
+    <table class="no-style-table">
+        <tr valign="top">
+            <td>
+                <strong tal:content="python: context.eventDateLabel()">Event date label</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
+            </td>
+            <tal:manage_show_nc_if_needed define="value python: getattr(context, 'eventDate')">
+                <td tal:condition="value">
+                    <metal:myfield use-macro="python: context.widget('eventDate', mode='view')" />
+                </td>
+                <td tal:condition="not: value">
+                    <span tal:condition="not: value" class="discreet" i18n:translate="content_none">None</span>
+                </td>
+                </tal:manage_show_nc_if_needed>
+            </tr>
+            <tal:evtfield repeat="field fields" define="evtdata view/getData;
+                                                        context python: evtdata[0];
+                                                        fields python: evtdata[1];">
+            <tr valign="top">
+                <td>
+                    <strong i18n:translate="" tal:content="python: 'urban_label_' + field">Optional field label</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <tal:manage_show_nc_if_needed define="value python: getattr(context, field)">
+                    <td tal:condition="value">
+                        <tal:no_long_text condition="python: not 'Text' in field">
+                            <metal:myfield use-macro="python: context.widget(field, mode='view')" />
+                        </tal:no_long_text>
+                        <!-- For long text, just show the first words and add a link to see the entire text -->
+                        <tal:long_text condition="python: 'Text' in field">
+                            <tal:block define="infos python: context.portal_urban.getTextToShow(context, field);
+                                               isTooLong python: infos[0];
+                                               textToShow python: infos[1];">
+                                <span tal:condition="isTooLong" id="urban-claims-text">
+                                    <span tal:replace="structure textToShow">Content...</span>
+                                    <br />
+                                    <a class="link-overlay" href="@@longtextview"
+                                       tal:attributes="href python: context.absolute_url() + '/@@longtextview?field=' + field"
+                                       i18n:translate="">See more...
+                                    </a>
+                                </span>
+                                <tal:block condition="not: isTooLong">
+                                    <metal:myfield use-macro="python: context.widget(field, mode='view')" />
+                                </tal:block>
+                            </tal:block>
+                        </tal:long_text>
+                    </td>
+                    <td tal:condition="not: value">
+                        <span tal:condition="not: value" class="discreet" i18n:translate="content_none">None</span>
+                    </td>
+                </tal:manage_show_nc_if_needed>
+            </tr>
+        </tal:evtfield>
+    </table>
+</fieldset>
+
+<fieldset metal:define-macro="urbanEventGenerateDocumentMacro" i18n:domain="urban"
+          tal:define="templates_list view/getListOfTemplatesToGenerate;
+          mayAddUrbanEvent view/mayAddUrbanEvent">
+    <legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend>
+    <tal:templates_link condition="python: mayAddUrbanEvent and templates_list">
+        <table>
+            <tal:loopEventType repeat="template templates_list">
+                <tr>
+                    <td tal:attributes="class python: template['class']">&nbsp</td><td>&nbsp</td>
+                    <td>
+                        <a href="#" tal:attributes="href python: template['href'];"
+                                    tal:content="python: template['title']">Template Title
+                        </a>
+                        <br/>
+                    </td>
+                </tr>
+            </tal:loopEventType>
+        </table>
+    </tal:templates_link>
+    <tal:no_templateObjs condition="not: templates_list">
+        <p class="discreet" i18n:translate="no_document_to_generate">No document to generate</p>
+    </tal:no_templateObjs>
+    <tal:not_may_add_urbanevent condition="not: mayAddUrbanEvent">
+        <p class="discreet" i18n:translate="not_permitted_to_add_urbanevent">You can not add an UrbanEvent</p>
+    </tal:not_may_add_urbanevent>
+</fieldset>
+
+<metal:add_annex define-macro="urbanEventAddAnnexMacro" i18n:domain="urban"
+                 tal:define="mayAddAnnex view/mayAddAnnex">
+    <form tal:condition="mayAddAnnex" name="quickAdd" action="createObject" method="post">
+        <input name="type_name" value="File" type="hidden">
+        <input i18n:attributes="value" class="context apButton" id="event" value="add_an_annex" type="submit">
+    </form>
+    <tal:not_may_add_annex condition="not: mayAddAnnex">
+        <p class="discreet" i18n:translate="not_permitted_to_add_annex">You can not add an annex</p>
+    </tal:not_may_add_annex>
+</metal:add_annex>

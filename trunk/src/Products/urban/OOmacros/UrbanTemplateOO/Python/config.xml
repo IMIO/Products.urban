@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+<Object name="Misc">
+     <Item name="Commune">
+        <FieldCode>
+            tool.getCityName(prefixed=True) 
+        </FieldCode>
+     </Item>
+     <Item name="Date de prorogation">
+        <FieldCode>
+            self.getProrogatedToDate() 
+        </FieldCode>
+     </Item>
+</Object>
+<Object name="Demandeur">
+     <Item name="Signalétique">
+        <FieldCode>
+            self.getApplicantsSignaletic() 
+        </FieldCode>
+    </Item>
+    <Item name="Signalétique (avec adresse)">
+        <FieldCode>
+            self.getApplicantsSignaletic(withaddress=True) 
+        </FieldCode>
+    </Item>
+    <Item name="Titre">
+        <FieldCode>
+            applicantobj.getPersonTitleValue()
+        </FieldCode>
+    </Item>
+    <Item name="Nom">
+        <FieldCode>
+            applicantobj.getName1()
+        </FieldCode>        
+    </Item>
+    <Item name="Prénom">
+        <FieldCode>
+            applicantobj.getName2()
+        </FieldCode>        
+    </Item>
+    <Item name="Rue">
+        <FieldCode>
+            applicantobj.getStreet()
+        </FieldCode>        
+    </Item>
+    <Item name="Numéro">
+        <FieldCode>
+            applicantobj.getNumber()
+        </FieldCode>        
+    </Item>
+    <Item name="CP">
+        <FieldCode>
+            applicantobj.getZipcode()
+        </FieldCode>        
+    </Item>
+    <Item name="Localité">
+        <FieldCode>
+            applicantobj.getCity()
+        </FieldCode>        
+    </Item>
+    <Item name="Téléphone">
+        <FieldCode>
+            applicantobj.getPhone()
+        </FieldCode>        
+    </Item>
+    <Item name="Fax">
+        <FieldCode>
+            applicantobj.getFax()
+        </FieldCode>        
+    </Item>
+    <Item name="Email">
+        <FieldCode>
+            applicantobj.getEmail()
+        </FieldCode>        
+    </Item>
+</Object>
+
+<Object name="Architecte">
+    <Item name="Signalétique">
+        <FieldCode>
+            self.getArchitectsSignaletic()
+        </FieldCode>
+    </Item>
+    <Item name="Signalétique (avec adresse)">
+        <FieldCode>
+            self.getArchitectsSignaletic(withaddress=True)
+        </FieldCode>
+    </Item>
+    <Item name="Titre">
+        <FieldCode>
+            self.getValueForTemplate('personTitle', obj=self.getArchitects()[0])
+        </FieldCode>
+    </Item>
+    <Item name="Nom">
+        <FieldCode>
+            self.getArchitects()[0].getName1()
+        </FieldCode>        
+    </Item>
+    <Item name="Prénom">
+        <FieldCode>
+            self.getArchitects()[0].getName2()
+        </FieldCode>        
+    </Item>
+    <Item name="Rue">
+        <FieldCode>
+            self.getArchitects()[0].getStreet()
+        </FieldCode>        
+    </Item>
+    <Item name="Numéro">
+        <FieldCode>
+            self.getArchitects()[0].getNumber()
+        </FieldCode>        
+    </Item>
+    <Item name="CP">
+        <FieldCode>
+            self.getArchitects()[0].getZipcode()
+        </FieldCode>        
+    </Item>
+    <Item name="Localité">
+        <FieldCode>
+            self.getArchitects()[0].getCity()
+        </FieldCode>        
+    </Item>
+    <Item name="Téléphone">
+        <FieldCode>
+            self.getArchitects()[0].getPhone()
+        </FieldCode>        
+    </Item>
+    <Item name="Fax">
+        <FieldCode>
+            self.getArchitects()[0].getFax()
+        </FieldCode>        
+    </Item>
+    <Item name="Email">
+        <FieldCode>
+            self.getArchitects()[0].getEmail()
+        </FieldCode>        
+    </Item>
+</Object>
+
+<Object name="Notaire">
+    <Item name="Signalétique">
+        <FieldCode>
+            self.getNotariesSignaletic() 
+        </FieldCode>
+    </Item>
+    <Item name="Signalétique (avec adresse)">
+        <FieldCode>
+            self.getNotariesSignaletic(withaddress=True) 
+        </FieldCode>
+    </Item>
+    <Item name="Titre">
+        <FieldCode>
+            self.getValueForTemplate('personTitle', obj=self.getNotaryContact()[0])
+        </FieldCode>
+    </Item>
+    <Item name="Nom">
+        <FieldCode>
+            self.getNotaryContact()[0].getName1()
+        </FieldCode>        
+    </Item>
+    <Item name="Prénom">
+        <FieldCode>
+            self.getNoNotaryContact()[0].getName2()
+        </FieldCode>        
+    </Item>
+    <Item name="Rue">
+        <FieldCode>
+            self.getNoNotaryContact()[0].getStreet()
+        </FieldCode>        
+    </Item>
+    <Item name="Numéro">
+        <FieldCode>
+            self.getNoNotaryContact()[0].getNumber()
+        </FieldCode>        
+    </Item>
+    <Item name="CP">
+        <FieldCode>
+            self.getNoNotaryContact()[0].getZipcode()
+        </FieldCode>        
+    </Item>
+    <Item name="Localité">
+        <FieldCode>
+            self.getNoNotaryContact()[0].getCity()
+        </FieldCode>        
+    </Item>
+    <Item name="Téléphone">
+        <FieldCode>
+            self.getNoNotaryContact()[0].getPhone()
+        </FieldCode>        
+    </Item>
+    <Item name="Fax">
+        <FieldCode>
+            self.getNoNotaryContact()[0].getFax()
+        </FieldCode>        
+    </Item>
+    <Item name="Email">
+        <FieldCode>
+            self.getNoNotaryContact()[0].getEmail()
+        </FieldCode>        
+    </Item>
+</Object>
+ 
+ <Object name="Agent traitant">    
+    <Item name="Signalétique">
+        <AnnotationCode>
+            do text 
+from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getFolderManagersSignaletic()))
+        </AnnotationCode>        
+    </Item>
+    <Item name="Signalétique (avec n° tel)">
+        <AnnotationCode>
+            do text 
+from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getFolderManagersSignaletic((withTel=True)))
+        </AnnotationCode>        
+    </Item>
+    <Item name="Nom">
+        <FieldCode>
+            self.getFoldermanagers()[0].getName1()
+        </FieldCode>        
+    </Item>
+    <Item name="Prénom">
+        <FieldCode>
+            self.getFoldermanagers()[0].getName2()
+        </FieldCode>        
+    </Item>
+    <Item name="Téléphone">
+        <FieldCode>
+            self.getFoldermanagers()[0].getPhone()
+        </FieldCode>        
+    </Item>
+    <Item name="Fax">
+        <FieldCode>
+            self.getFoldermanagers()[0].getFax() 
+        </FieldCode>        
+    </Item>
+    <Item name="Email">
+        <FieldCode>
+            self.getFoldermanagers()[0].getEmail() 
+        </FieldCode>        
+    </Item>
+    <Item name="Initials">
+        <FieldCode>
+            self.getFoldermanagers()[0].getInitials()
+        </FieldCode>        
+    </Item>
+    <Item name="Grade">
+        <FieldCode>
+            self.getValueForTemplate('grade', obj=self.getFoldermanagers()[0])
+        </FieldCode>        
+    </Item>
+</Object>
+ 
+ 
+ <Object name="Evénement">    
+    <Item name="Date">
+        <FieldCode>
+            urbanEventObj.getFormattedDate() 
+        </FieldCode>        
+    </Item>
+    <Item name="Date (délivré le)">
+        <FieldCode>
+            urbanEventObj.getFormattedDate(forDelivery=True) 
+        </FieldCode>        
+    </Item>
+    <Item name="Date (préfixée par la commune)">
+        <FieldCode>
+            urbanEventObj.getFormattedDate(withCityNamePrefix=True) 
+        </FieldCode>        
+    </Item>
+    <Item name="Date de réception">
+        <FieldCode>
+            tool.formatDate(urbanEventObj.getReceiptDate()) 
+        </FieldCode>        
+    </Item>
+    <Item name="Date de la décision">
+        <FieldCode>
+            tool.formatDate(urbanEventObj.getDecisionDate()) 
+        </FieldCode>        
+    </Item>
+    <Item name="Décision">
+        <FieldCode>
+            self.getValueForTemplate('decision', obj=urbanEventObj)
+        </FieldCode>        
+    </Item>
+</Object>
+ 
+ <Object name="Enquête">    
+    <Item name="Date de début">
+        <FieldCode>
+            tool.formatDate(self.getInvestigationStart()) 
+        </FieldCode>        
+    </Item>
+    <Item name="Date de fin">
+        <FieldCode>
+            tool.formatDate(self.getInvestigationEnd()) 
+        </FieldCode>        
+    </Item>
+    <Item name="Date réclamations">
+        <FieldCode>
+            tool.formatDate(urbanEventObj.getClaimsDate()) 
+        </FieldCode>        
+    </Item>
+    <Item name="Date explications">
+        <FieldCode>
+            tool.formatDate(urbanEventObj.getExplanationsDate()) 
+        </FieldCode>        
+    </Item>    
+    <Item name="Articles de l'enquête">
+        <FieldCode>
+           self.getValueForTemplate('investigationArticles', obj=urbanEventObj.getLinkedInquiry()) 
+        </FieldCode>        
+    </Item>    
+    <Item name="Texte des réclamations (enquête)">
+        <AnnotationCode>
+            do text
+from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getLastInquiry().getClaimsText(withaddress=True,linebyline=True)))
+        </AnnotationCode>        
+    </Item>
+    <Item name="Texte des réclamations (réclamants)">
+        <AnnotationCode>
+            do text if urbanEventObj.getClaimants()
+from xhtml(urbanEventObj.getClaimsText())
+        </AnnotationCode>        
+    </Item>
+  
+</Object>
+ 
+ <Object name="Permis de bâtir">    
+    <Item name="Référence">
+        <FieldCode>
+            self.getReference()
+        </FieldCode>        
+    </Item>
+    <Item name="RéférenceDGATLP">
+        <FieldCode>
+            self.getReferenceDGATLP()
+        </FieldCode>        
+    </Item>
+    <Item name="Adresse des travaux">
+        <FieldCode>
+            self.getWorkLocationSignaletic() 
+        </FieldCode>        
+    </Item>
+    <Item name="Rue des travaux">
+        <FieldCode>
+            self.getWorkLocationStreet()
+        </FieldCode>        
+    </Item>
+    <Item name="Numero de maison des travaux">
+        <FieldCode>
+            self.getWorkLocationHouseNumber()
+        </FieldCode>        
+    </Item>
+    <Item name="CP des travaux">
+        <FieldCode>
+            self.getWorkLocationZipCode()
+        </FieldCode>        
+    </Item>
+    <Item name="Localité des travaux">
+        <FieldCode>
+            self.getWorkLocationCity()
+        </FieldCode>        
+    </Item>
+    <Item name="Parcelles">
+        <FieldCode>
+            self.getPortionOutsText() 
+        </FieldCode>        
+    </Item>
+    <Item name="Référence du lotissement">
+        <FieldCode>
+            self.getSubdivisionDetails() 
+        </FieldCode>        
+    </Item>
+    <Item name="Schéma de structure communale">
+        <FieldCode>
+            self.getSSC() 
+        </FieldCode>        
+    </Item>
+    <Item name="Réglement communal d'urbanisme">
+        <FieldCode>
+            self.getRCU() 
+        </FieldCode>        
+    </Item>
+    <Item name="Zonage au plan de secteur">
+        <FieldCode>
+            self.getValueForTemplate('folderZone')
+        </FieldCode>        
+    </Item>
+    <Item name="Avis">
+        <FieldCode>
+            Opinions
+        </FieldCode>        
+    </Item>
+    <Item name="Objet du permis">
+        <FieldCode>
+            self.getLicenceSubject() 
+        </FieldCode>        
+    </Item>
+    <Item name="Nature des travaux">
+        <FieldCode>
+            self.getWorkType() 
+        </FieldCode>        
+    </Item>
+    <Item name="Délai de réponse annoncé">
+        <FieldCode>
+            self.getAnnoncedDelay() 
+        </FieldCode>        
+    </Item>
+    <Item name="Type de revêtement">
+        <FieldCode>
+            self.getValueForTemplate('roadCoating') 
+        </FieldCode>        
+    </Item>
+    <Item name="Demande de dérogation">
+        <FieldCode>
+            self.getValueForTemplate('derogation')
+        </FieldCode>        
+    </Item>
+    <Item name="Remarques techniques (fiche urbanisme)">
+        <AnnotationCode>
+            do text
+from xhtml(self.portal_urban.decorateHTML('UrbanBody', self.getLocationTechnicalRemarks()))
+        </AnnotationCode>        
+    </Item>
+    <Item name="Décision">
+        <FieldCode>
+            self.getLastTheLicence().getDecision()
+        </FieldCode>        
+    </Item>
+    <Item name="Date du récépissé de la demande">
+        <FieldCode>
+            tool.formatDate(self.getLastDeposit().getEventDate())
+        </FieldCode>        
+    </Item>
+    <Item name="Date de l'accusé de réception de la demande">
+        <FieldCode>
+            tool.formatDate(self.getLastAcknowledgment().getEventDate())
+        </FieldCode>        
+    </Item>
+    <Item name="Date du dernier rapport de collège">
+        <FieldCode>
+            tool.formatDate(self.getLastCollegeReport().getEventDate())
+        </FieldCode>        
+    </Item>
+    <Item name="Prescriptions techniques relatives à la voirie et aux équipements">
+        <AnnotationCode>
+            do text
+from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getEquipmentAndRoadRequirements()))
+        </AnnotationCode>        
+    </Item>
+    <Item name="Remarques techniques">
+        <AnnotationCode>
+            do text
+from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getTechnicalRemarks()))
+        </AnnotationCode>        
+    </Item>
+     <Item name="Date dossier incomplet">
+        <FieldCode>
+            tool.formatDate(self.getLastMissingPart().getEventDate())
+        </FieldCode>
+     </Item>
+     <Item name="Date d'émission des demandes d'avis">
+        <FieldCode>
+            tool.formatDate(self.getLastOpinionRequest().getEventDate())
+        </FieldCode>
+     </Item>
+     <Item name="Date de transmis des demandes d'avis">
+        <FieldCode>
+            tool.formatDate(self.getLastOpinionRequest().getTransmitDate())
+        </FieldCode>
+     </Item>
+     <Item name="Date de notification">
+        <FieldCode>
+            tool.formatDate(self.getLastTheLicence().getEventDate())
+        </FieldCode>
+     </Item>
+     <Item name="Date de dernier envoi RW">
+        <FieldCode>
+            tool.formatDate(self.getLastWalloonRegionOpinionRequest().getEventDate())
+        </FieldCode>
+     </Item>
+     
+</Object>
+
+<Object name="Déclaration">    
+    <Item name="Référence">
+        <FieldCode>
+            self.getReference()
+        </FieldCode>        
+    </Item>
+    <Item name="Rue des travaux">
+        <FieldCode>
+            self.getWorkLocationStreet()
+        </FieldCode>        
+    </Item>
+    <Item name="Numero de maison des travaux">
+        <FieldCode>
+            self.getWorkLocationHouseNumber()
+        </FieldCode>        
+    </Item>
+    <Item name="CP des travaux">
+        <FieldCode>
+            self.getWorkLocationZipCode()
+        </FieldCode>        
+    </Item>
+    <Item name="Localité des travaux">
+        <FieldCode>
+            self.getWorkLocationCity()
+        </FieldCode>        
+    </Item>
+    <Item name="Parcelles">
+        <FieldCode>
+            self.getPortionOutsText()
+        </FieldCode>        
+    </Item>
+    <Item name="Objet de la déclaration">
+        <FieldCode>
+            self.getDeclarationSubject()
+        </FieldCode>        
+    </Item>
+    <Item name="Article CWATUPE">
+        <FieldCode>
+            self.getValuesForTemplate('article', subfield='extraValue')
+        </FieldCode>        
+    </Item>    
+    <Item name="Texte(s) de l'article">
+        <FieldCode>
+           self.getValuesForTemplate('article')
+        </FieldCode>        
+    </Item>    
+
+</Object>
+ 
+ <Object name="Bien">    
+    <Item name="Rue des travaux">
+        <FieldCode>
+            self.getWorkLocationStreet()
+        </FieldCode>        
+    </Item>
+    <Item name="Numero de maison des travaux">
+        <FieldCode>
+            self.getWorkLocationHouseNumber()
+        </FieldCode>        
+    </Item>
+    <Item name="CP des travaux">
+        <FieldCode>
+            self.getWorkLocationZipCode()
+        </FieldCode>        
+    </Item>
+    <Item name="Localité des travaux">
+        <FieldCode>
+            self.getWorkLocationCity()
+        </FieldCode>        
+    </Item>
+    <Item name="Parcelles">
+        <FieldCode>
+            self.getPortionOutsText()
+        </FieldCode>        
+    </Item>
+</Object>
+ 
+ <Object name="Statistiques INS">    
+    <Item name="Boucle documents">
+        <AnnotationCode>
+            do section for folder in folders
+        </AnnotationCode>        
+    </Item>
+    <Item name="Condition modèle I">
+        <AnnotationCode>
+            do text if folder.getUsage()=='usage_for_habitation'
+        </AnnotationCode>        
+    </Item>
+    <Item name="Condition modèle II">
+        <AnnotationCode>
+            do text if folder.getUsage()=='usage_not_for_habitation'
+        </AnnotationCode>        
+    </Item>    
+    <Item name="Titre">
+        <FieldCode>
+            self.getValueForTemplate('personTitle', obj=folder.getApplicants()[0])
+        </FieldCode>
+    </Item>
+    <Item name="Nom du demandeur">
+        <FieldCode>
+            folder.getApplicants()[0].getName1() 
+        </FieldCode>        
+    </Item>
+    <Item name="Prénom du demandeur">
+        <FieldCode>
+            folder.getApplicants()[0].getName2() 
+        </FieldCode>        
+    </Item>
+    <Item name="Référence">
+        <FieldCode>
+            folder.getReference()
+        </FieldCode>        
+    </Item>
+    <Item name="Rue des travaux">
+        <FieldCode>
+            folder.getWorkLocationStreet()
+        </FieldCode>        
+    </Item>
+    <Item name="Numero de maison des travaux">
+        <FieldCode>
+            folder.getWorkLocationHouseNumber()
+        </FieldCode>        
+    </Item>
+    <Item name="CP des travaux">
+        <FieldCode>
+            folder.getWorkLocationZipCode()
+        </FieldCode>        
+    </Item>
+    <Item name="Localité des travaux">
+        <FieldCode>
+            folder.getWorkLocationCity()
+        </FieldCode>        
+    </Item>
+    <Item name="Parcelles">
+        <FieldCode>
+            folder.getPortionOutsText()
+        </FieldCode>        
+    </Item>
+</Object>
+
+<Object name="Boucles">
+    <Item name="Articles de l'enquête">
+        <AnnotationCode>
+            do section- for article in self.getInvestigationArticles()
+        </AnnotationCode>
+        <AnnotationCode>
+            do text
+from xhtml(self.portal_urban.decorateHTML('UrbanBody',self.getTerm('investigationarticles', article).getFormattedDescription()))
+        </AnnotationCode>
+    </Item>
+    <Item name="Demandes d'avis">
+        <AnnotationCode>
+            do section- for opinion in self.getAllOpinionRequestsNoDup()
+        </AnnotationCode>
+    </Item>
+    <Item name="Demandes d'avis (services techniques)">
+        <AnnotationCode>
+            do section- for opinion in self.getAllTechnicalServiceOpinionRequestsNoDup()
+        </AnnotationCode>
+    </Item>
+
+</Object> 
+</Config>

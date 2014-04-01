@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<import-steps>
+
+<!--import-step
+    id="urban-addDefaultObjects"
+    handler="Products.urban.setuphandlers.addDefaultObjects"
+    title="Add some objects for test purpose"
+    version="2008-10-15T15:00:00.00000">
+ Add default config values for test purpose
+ </import-step-->
+
+ <import-step
+    id="urban-addTestLicences"
+    handler="Products.urban.setuphandlers.addDemoLicences"
+    title="Add dummy licences with generated events and documents for tests purpose"
+    version="2013-01-04T11:30:41.455297">
+   <dependency step="urban-addDefaultObjects"/>
+   Create tests licences
+ </import-step>
+
+</import-steps>

@@ -1,0 +1,164 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:i18n="http://namespaces.zope.org/i18n"
+           i18n_domain="urban">
+
+  <!-- ##code-section configure.zcml.header -->
+  <!-- exclude can be removed when five.grok does the exclude -->
+  <exclude package="zope.contentprovider" />
+  <include package="Products.Five"/>
+  <include package="five.grok"/>
+  <include package="Products.GenericSetup" file="meta.zcml"/>
+  <include package="Products.GenericSetup"/>
+  <include package="Products.DataGridField"/>
+  <include package="Products.CMFCore" file="meta.zcml"/>
+  <include package="plone.app.portlets" file="meta.zcml" />
+  <include package="Products.Archetypes"/>
+  <include package="Products.MasterSelectWidget"/>
+  <include package="collective.externaleditor"/>
+  <include package="collective.datagridcolumns"/>
+  <include package="plone.app.referenceintegrity"/>
+  <include package="plone.z3ctable"/>
+  <include package="communesplone.iconified_document_actions"/>
+  <include package="Products.CMFPlacefulWorkflow"/>
+  <include package="collective.js.jqueryui"/>
+  <include package="plonetheme.imioapps"/>
+  <include package="imio.actionspanel"/>
+  <include package="collective.z3cform.datagridfield"/>
+
+
+  <permission
+    id="urban.viewurbanmap"
+    title="Products.urban: ViewUrbanMap"
+    />
+    
+  <include package=".events" />
+  <include package=".browser" />
+  <include package=".migration" />
+
+  <include file="grok.zcml" />
+
+  <interface
+    interface=".interfaces.ICommunalCouncilEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ITechnicalServiceOpinionRequestEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IOpinionRequestEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IWalloonRegionOpinionRequestEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IWalloonRegionPrimoEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IAcknowledgmentEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ICollegeReportEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IModificationDepositEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IDepositEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IMissingPartEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IMissingPartDepositEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IWorkBeginningEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ILicenceDeliveryEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ILicenceExpirationEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IInquiryEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ITheLicenceEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IProrogationEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <adapter
+    for="Products.CMFCore.interfaces.ICatalogAware
+        Products.Archetypes.interfaces.IUIDCatalog"
+    factory="plone.indexer.wrapper.IndexableObjectWrapper"
+    provides="plone.indexer.interfaces.IIndexableObject"
+  />
+
+  <adapter
+    name=".subtypes.urbandoc"
+    for=".interfaces.IUrbanDoc"
+    factory=".subtypes.urbandoc.UrbanDocExtender" />
+
+  <adapter
+    for="Products.urban.interfaces.IUrbanEvent"
+    factory=".appy_pod.UrbanEventAppyContext"
+    provides=".appy_pod.IAppyContext"
+  />
+
+  <adapter
+    for="Products.urban.interfaces.IGenericLicence"
+    factory=".appy_pod.UrbanLicenceGlobalTemplate"
+    provides=".appy_pod.IGlobalTemplates"
+  />
+
+  <adapter
+    for="Products.urban.interfaces.IEnvironmentBase"
+    factory=".appy_pod.EnvironmentLicenceGlobalTemplates"
+    provides=".appy_pod.IGlobalTemplates"
+  />
+
+  <adapter name="parcelInfosIndex" factory=".indexes.genericlicence_parcelinfoindex" />
+  <adapter name="parcelInfosIndex" factory=".indexes.parcellingterm_parcelinfoindex" />
+  <adapter name="StreetsUID" factory=".indexes.genericlicence_streetsuid" />
+  <adapter name="last_key_event" factory=".indexes.genericlicence_lastkeyevent" />
+  <adapter name="last_key_event" factory=".indexes.urbaneventtype_lastkeyevent" />
+  <adapter name="folder_manager" factory=".indexes.genericlicence_foldermanager" />
+  <adapter name="folder_manager" factory=".indexes.urbanevent_foldermanager" />
+
+  <interface interface=".interfaces.IUrbanCertificateOne" />
+  <interface interface=".interfaces.IUrbanCertificateTwo" />
+  <interface interface=".interfaces.INotaryLetter" />
+  <interface interface=".interfaces.IEnvClassThree" />
+  <!-- ##/code-section configure.zcml.header -->
+
+  <i18n:registerTranslations directory="locales" />
+
+  <include file="profiles.zcml" />
+
+  <include file="generatedsubscribers.zcml"/>
+
+
+  <!-- ##code-section configure.zcml.core -->
+  <!-- ##/code-section configure.zcml.core -->
+
+</configure>

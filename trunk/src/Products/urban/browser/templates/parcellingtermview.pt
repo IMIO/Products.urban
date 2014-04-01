@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<body>
+
+<metal:contentcore fill-slot="content-core">
+
+<metal:contentcore_macro define-macro="content-core"
+       tal:define="portal_type python:context.getPortalTypeName().lower().replace(' ', '_');
+                   base_macros context/base/macros;
+                   view_template python:'%s_view' % portal_type;
+                   view_macros python:path('context/%s/macros|nothing' % view_template);
+                   body_macro view_macros/body | body_macro | base_macros/body;
+                   folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
+                   errors python:request.get('errors', {})">
+
+<!--metal:titleWithIcon use-macro="here/@@globalmacros/titleWithIcon" /-->
+
+<metal:use_body use-macro="body_macro" />
+
+<fieldset style="margin-right:49%;"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
+ <div>
+  <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
+ </div>
+</fieldset>
+
+<div tal:replace="structure provider:plone.belowcontentbody" />
+
+</metal:contentcore_macro>
+</metal:contentcore>
+</body>
+</html>

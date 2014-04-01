@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<import-steps>
+
+ <import-step
+    id="pm.wsclient-setUrbandefaultConfig"
+    handler="Products.urban.setuphandlers.configurePMWSClientForUrban"
+    title="Set some default values in pm.wsclient config"
+    version="2012-06-15T15:00:00.00000">
+  Set some default values in pm.wsclient config
+ </import-step>
+
+</import-steps>

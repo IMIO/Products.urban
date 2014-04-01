@@ -1,0 +1,161 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<body>
+<metal:main fill-slot="main">
+<metal:main_macro define-macro="main">
+    <metal:body define-macro="body_macro">
+
+<metal:titleWithIcon use-macro="here/@@globalmacros/titleWithIcon" />
+
+<div tal:replace="structure provider:plone.belowcontenttitle" />
+<!-- Back to the build licence... -->
+<br />
+<tal:block condition="view/showLinkToLinkedLicence">
+<a class="no_underline" href="#" tal:attributes="href view/getLinkToLinkedLicence"><img src="goback.png" />&nbsp;<span i18n:translate="go_back">Go back...</span></a>
+</tal:block>
+
+<fieldset><b><legend tal:content="view/getContactLegendValue" i18n:translate="">Contact data</legend></b>
+    <table class="no-style-table" cellpadding=0 cellspacing=0>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_personTitle">personTitle</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top">
+       <metal:myfield use-macro="python:here.widget('personTitle', mode='view')" />
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_name1">name1</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="name1 context/getName1">
+       <metal:myfield use-macro="python:here.widget('name1', mode='view')" />
+       <span class="discreet" tal:condition="not: name1" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_name2">name2</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="name2 context/getName2">
+       <metal:myfield use-macro="python:here.widget('name2', mode='view')" />
+       <span class="discreet" tal:condition="not: name2" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_society">Society</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="society context/getSociety">
+       <metal:myfield use-macro="python:here.widget('society', mode='view')" />
+       <span class="discreet" tal:condition="not: society" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr tal:condition="python: here.portal_type == 'Applicant' or here.portal_type == 'Proprietary'">
+      <td valign="top"><b><span i18n:translate="urban_label_isSameAddressAsWorks">Is the applicant address the same address as the works?</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top"><metal:myfield use-macro="python:here.widget('isSameAddressAsWorks', mode='view')" /></td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_street">Street</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="street context/getStreet">
+       <metal:myfield use-macro="python:here.widget('street', mode='view')" />
+       <span class="discreet" tal:condition="not: street" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_number">Number</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="number context/getNumber">
+       <metal:myfield use-macro="python:here.widget('number', mode='view')" />
+       <span class="discreet" tal:condition="not: number" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_zipcode">Zip code</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="zipcode context/getZipcode">
+       <metal:myfield use-macro="python:here.widget('zipcode', mode='view')" />
+       <span class="discreet" tal:condition="not: zipcode" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_city">City</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="city context/getCity">
+       <metal:myfield use-macro="python:here.widget('city', mode='view')" />
+       <span class="discreet" tal:condition="not: city" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_country">Country</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="country context/getCountry">
+       <metal:myfield use-macro="python:here.widget('country', mode='view')" />
+       <span class="discreet" tal:condition="not: country" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_email">Email</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="email context/getEmail">
+       <metal:myfield use-macro="python:here.widget('email', mode='view')" />
+       <span class="discreet" tal:condition="not: email" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_phone">Phone</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="phone context/getPhone">
+       <metal:myfield use-macro="python:here.widget('phone', mode='view')" />
+       <span class="discreet" tal:condition="not: phone" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_fax">Fax</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="fax context/getFax">
+       <metal:myfield use-macro="python:here.widget('fax', mode='view')" />
+       <span class="discreet" tal:condition="not: fax" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr tal:condition="python: here.portal_type == 'Architect'">
+      <td valign="top"><b><span i18n:translate="urban_label_registrationNumber">Registration number</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="registrationNumber context/getRegistrationNumber">
+       <metal:myfield use-macro="python:here.widget('registrationNumber', mode='view')" />
+       <span class="discreet" tal:condition="not: registrationNumber" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr>
+      <td valign="top"><b><span i18n:translate="urban_label_nationalRegister">National register</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="nationalRegister context/getNationalRegister">
+       <metal:myfield use-macro="python:here.widget('nationalRegister', mode='view')" />
+       <span class="discreet" tal:condition="not: nationalRegister" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr tal:condition="context/showRepresentedByField">
+      <td valign="top"><b><span i18n:translate="urban_label_representedBy">Represented by</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="representedBy context/getRepresentedBy">
+       <metal:myfield use-macro="python:here.widget('representedBy', mode='view')" />
+       <span class="discreet" tal:condition="not: representedBy" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+     <tr tal:condition="view/showClaimingTextField">
+      <td valign="top"><b><span i18n:translate="urban_label_claimingText">Claiming text</span> :</b></td>
+      <td width="2%"></td>
+      <td valign="top" tal:define="claimingText context/getClaimingText">
+       <metal:myfield use-macro="python:here.widget('claimingText', mode='view')" />
+       <span class="discreet" tal:condition="not: claimingText" i18n:translate="content_none">None</span>
+      </td>
+     </tr>
+    </table>
+</fieldset>
+
+</metal:body>
+</metal:main_macro>
+</metal:main>
+</body>
+</html>

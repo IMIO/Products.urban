@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<import-steps>
+
+ <import-step
+    id="urban-addUrbanVocabularies"
+    handler="Products.urban.setuphandlers.addUrbanVocabularies"
+    title="Add vocabulary test values to local config folder"
+    version="2013-01-04T11:30:41.455297">
+   Add local config folders with test values
+ </import-step>
+
+ <import-step
+    id="urban-addDefaultObjects"
+    handler="Products.urban.setuphandlers.addDefaultObjects"
+    title="Add some objects for test purpose"
+    version="2008-10-15T15:00:00.00000">
+ Add default config values for test purpose
+ </import-step>
+
+ <import-step
+    id="urban-addEventTypesAndTemplates"
+    handler="Products.urban.setuphandlers.addEventTypesAndTemplates"
+    title="Add event types and templates for test purpose"
+    version="2008-10-15T15:00:00.00000">
+ Add events and templates for test purpose
+ </import-step>
+
+ <import-step
+    id="urban-updateAllUrbanTemplates"
+    handler="Products.urban.exportimport.updateAllUrbanTemplates"
+    title="Update all the templates (generic templates and urbanEventTypes templates) and create urbanEventTypes"
+    version="2008-10-15T15:00:00.00000">
+   <dependency step="urban-addEventTypesAndTemplates"/>
+  USE THIS TO UPDATE ALL TEMPLATES
+ </import-step>
+
+</import-steps>

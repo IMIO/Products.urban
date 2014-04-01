@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<object name="portal_controlpanel"
+        meta_type="Plone Control Panel Tool"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        i18n:domain="urban">
+
+ <configlet title="UrbanTool"
+            action_id="UrbanTool"
+            appId="urban"
+            category="Products"
+            condition_expr=""
+            url_expr="string:${portal_url}/portal_urban/view"
+            visible="True"
+            i18n:attributes="title">
+  <permission>Manage portal</permission>
+ </configlet>
+
+ <!-- ##code-section controlpanel.xml -->
+ <!-- ##/code-section controlpanel.xml -->
+
+ </object>

@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:tal="http://xml.zope.org/namespaces/tal"
+xmlns:metal="http://xml.zope.org/namespaces/metal"
+xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+i18n:domain="plone">
+
+
+  <!-- View/edit radio button choice cells -->
+
+<body>
+    <!-- VIEW -->
+    <metal:view_cell_macro define-macro="view_cell">
+        <div/>
+    </metal:view_cell_macro>
+
+    <!-- EDIT -->
+    <metal:edit_cell_macro define-macro="edit_cell">
+
+        <input tal:attributes="name string:${fieldName}.${column}:records;
+                               id string:${column}_${fieldId};
+                               value cell_value;"
+               type="hidden" />
+
+        <span id=urban-specificfeatures-field
+              tal:define="config context/getLicenceConfig;
+                         voc_foldername python: field.getName().lower();
+                         voc_folder python: getattr(config, voc_foldername);
+                         spf_term python: getattr(voc_folder, cell_value)"
+              tal:condition="python: spf_term.hasRelatedFields()" >
+              <a class="link-overlay" tal:attributes="href string:@@fieldeditoverlay?spf_id=${cell_value}&vocname=${voc_foldername}">
+                  <img src=# tal:attributes="src string:${portal_url}/edit.gif"/>
+              </a>
+        </span>
+    </metal:edit_cell_macro>
+
+    <!-- EMPTY EDIT -->
+    <metal:edit_cell_macro define-macro="edit_empty_cell">
+        <div/>
+    </metal:edit_cell_macro>
+</body>
+
+</html>

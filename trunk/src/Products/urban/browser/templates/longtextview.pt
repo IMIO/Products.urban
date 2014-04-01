@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<head>
+</head>
+
+<body>
+<metal:main fill-slot="main">
+<metal:main_macro define-macro="main">
+    <metal:body define-macro="body_macro">
+
+    <tal:content replace="structure view/getFieldText">Content</tal:content>
+
+</metal:body>
+</metal:main_macro>
+</metal:main>
+</body>
+</html>

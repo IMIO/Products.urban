@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+<body>
+<metal:main fill-slot="main">
+<metal:main_macro define-macro="main">
+<metal:body define-macro="body_macro" 
+            tal:define="globaltemplates view/getGlobalTemplates;
+                        unused python:globaltemplates.pop(0);
+                        eventstemplates view/getEventsTemplates;
+                        portal context/@@plone_portal_state/portal;
+                        editicon python:'%s/%s'%(portal.absolute_url(), view.editicon);
+                        editlink view/editlink;">
+
+<h1 i18n:translate="templates_summary_title">Templates summary</h1>
+<span i18n:translate="templates_summary_count">Total template's number: <span i18n:name="tot" tal:replace="view/tot_count"/>. Modified template's number: <span i18n:name="mod" tal:replace="view/mod_count"/>. </span>
+<img src="warning.png" /><span i18n:translate="templates_summary_modified"> = Template has been modified.</span>
+<h2 i18n:translate="globaltemplates_folder_title">Global templates</h2>
+<p tal:condition="not:globaltemplates" i18n:translate="">No template.</p>
+<ul tal:condition="globaltemplates">
+    <li tal:repeat="dic globaltemplates">
+        <a tal:attributes="href python:'%s/%s'%(dic['o'].absolute_url(), editlink)"><img tal:attributes="src editicon"/></a>
+        <a tal:attributes="href python:'%s/view'%dic['o'].absolute_url()" tal:content="dic/o/Title" />
+        <img tal:condition="dic/s" tal:attributes="src dic/s" />
+    </li>
+</ul>
+<h2 i18n:translate="templates_events_title">Events templates</h2>
+<div class="templates-types-events" tal:condition="eventstemplates" tal:repeat="types eventstemplates">
+    <h3 i18n:translate="" tal:content="python: types.pop(0)">Type</h3>
+    <tal:events tal:repeat="events types">
+        <tal:templ tal:condition="python: len(events) > 1">
+            <h4 tal:content="python:events.pop(0)">Event</h4>
+            <ul tal:condition="events">
+                <li tal:repeat="dic events">
+                    <a tal:attributes="href python:'%s/%s'%(dic['o'].absolute_url(), editlink)"><img tal:attributes="src editicon"/></a>
+                    <a tal:attributes="href python:'%s/view'%dic['o'].absolute_url()" tal:content="python:dic['o'].Title()" />
+                    <img tal:condition="dic/s" tal:attributes="src dic/s" />
+                </li>
+            </ul>
+        </tal:templ>
+    </tal:events>
+</div>
+</metal:body>
+</metal:main_macro>
+</metal:main>
+</body>
+</html>

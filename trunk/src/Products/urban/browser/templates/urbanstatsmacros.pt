@@ -1,0 +1,46 @@
+<div metal:define-macro="statslisting" i18n:domain="plone">
+    <tal:listing condition="table">
+        <table class="listing"
+                summary="Content listing"
+                cellpadding="0" cellspacing="0"
+                i18n:attributes="summary summary_content_listing;">
+                <thead i18n:domain="urban">
+                <tr>
+                  <th>
+                    <strong i18n:translate="">Types de permis \ États</strong>
+                  </th>
+                  <th tal:repeat="licence_state python:type(licence_states) == list and licence_states or [licence_states]">
+                     <div tal:content="licence_state" i18n:domain="plone" i18n:translate=""></div>
+                  </th>
+                  <th tal:condition="python: type(licence_states) == list">
+                     <strong>Total</strong>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr tal:repeat="licence_type python: type(licence_types) == list and licence_types or [licence_types]">
+                  <td>
+                    <div tal:content="licence_type" i18n:domain="plone" i18n:translate=""></div>
+                  </td>
+                  <td tal:repeat="licence_state python: type(licence_states) == list and licence_states or [licence_states]"
+                      tal:content="python: table[licence_type][licence_state]">
+                  </td>
+                  <td tal:condition="python: type(licence_states) == list">
+                    <strong tal:content="python: table[licence_type]['sum']"></strong>
+                  </td>
+               </tr>
+               <tr>
+                 <th>
+                    <strong>Total</strong>
+                 </th>
+                 <td tal:repeat="licence_state python:type(licence_states) == list and licence_states or [licence_states]">
+                   <strong tal:content="python: table['sum'][licence_state]"></strong>
+                 </td>
+                 <td tal:condition="python: type(licence_states) == list">
+                   <strong tal:content="python: table['sum']['sum']"></strong>
+                 </td>
+               </tr>
+               </tbody>
+        </table>
+    </tal:listing>
+</div>

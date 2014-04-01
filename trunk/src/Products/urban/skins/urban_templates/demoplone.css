@@ -1,0 +1,62 @@
+#map2 {
+	      width: 800px;
+                height: 600px;
+	    }
+            #render2 {
+                width: 800px;
+                height: 600px;
+		margin-bottom: 50px;
+            }
+            #wrapper {
+                width: 800px;
+            }
+            #location {
+                float: right;
+            }
+	
+
+	     .zoomin {
+          background-image:url(mfbase/mapfish/img/icon_zoomin.png) !important;
+          height:20px !important;
+          width:20px !important;
+        }
+        .zoomout {
+          background-image:url(mfbase/mapfish/img/icon_zoomout.png) !important;
+          height:20px !important;
+          width:20px !important;
+        }
+        .zoomfull {
+          background-image:url(mfbase/mapfish/img/icon_zoomfull.png) !important;
+          height:20px !important;
+          width:20px !important;
+        }
+        .pan {
+          background-image:url(mfbase/mapfish/img/icon_pan.png) !important;
+          height:20px !important;
+          width:20px !important;
+        }
+        .drawpoint {
+          background-image:url(mfbase/mapfish/img/draw_point_off.png) !important;
+          height:20px !important;
+          width:20px !important;
+        }
+        .drawline {
+          background-image:url(mfbase/mapfish/img/draw_line_off.png) !important;
+          height:20px !important;
+          width:20px !important;
+        }
+        .drawpolygon {
+          background-image:url(mfbase/mapfish/img/draw_polygon_off.png) !important;
+          height:20px !important;
+          width:20px !important;
+        }
+        .next {
+            background-image:url(mfbase/mapfish/img/resultset_next.png) !important;
+            height:20px !important;
+            width:20px !important;
+        }
+        .back {
+            background-image:url(mfbase/mapfish/img/resultset_previous.png) !important;
+            height:20px !important;
+            width:20px !important;
+        }

@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+    <body>
+        <metal:main fill-slot="main">
+            <table>
+                <tr>
+                    <td style="vertical-align:top"
+                        tal:define="form nocall:view/form">
+                        <fieldset>
+                            <legend i18n:translate="">Filter</legend>
+                            <tal:with-form-as-view define="view nocall:form">
+                                <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
+                            </tal:with-form-as-view>
+                        </fieldset>
+                    </td>
+                    <td style="width: 10px"></td>
+                    <td style="vertical-align:top">
+                        <fieldset>
+                            <legend i18n:translate="">Ongoing events</legend>
+                            <tal:listing content="structure view/schedulelisting/render" />
+                            <tal:batch content="structure view/schedulelisting/renderBatch" />
+                        </fieldset>
+                    </td>
+                </tr>
+            </table>
+        </metal:main>
+    </body>
+</html>

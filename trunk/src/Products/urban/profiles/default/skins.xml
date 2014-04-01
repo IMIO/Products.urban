@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<object name="portal_skins"
+        meta_type="Plone Skins Tool"
+        allow_any="False"
+        cookie_persistence="False"
+        request_varname="plone_skin">
+
+ <object name="urban_images"
+         meta_type="Filesystem Directory View"
+         directory="urban/skins/urban_images"/>
+ <object name="urban_plone"
+         meta_type="Filesystem Directory View"
+         directory="urban/skins/urban_plone"/>
+ <object name="urban_styles"
+         meta_type="Filesystem Directory View"
+         directory="urban/skins/urban_styles"/>
+ <object name="urban_templates"
+         meta_type="Filesystem Directory View"
+         directory="urban/skins/urban_templates"/>
+ 
+ <skin-path name="*">
+  <layer insert-after="custom" 
+         name="urban_images"/>
+  <layer insert-after="custom" 
+         name="urban_plone"/>
+  <layer insert-after="custom" 
+         name="urban_styles"/>
+  <layer insert-after="custom" 
+         name="urban_templates"/>
+ </skin-path>
+
+</object>

@@ -1,0 +1,51 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+<head>
+</head>
+
+<body>
+<metal:main fill-slot="main">
+<metal:main_macro define-macro="main">
+    <metal:body define-macro="body_macro">
+
+    <tal:display define="parcel_historic view/getRelatedLicencesOfParcel">
+
+       <span tal:condition="parcel_historic">
+          <h1 i18n:translate="">History of the parcel and related licences</h1>
+          <div tal:repeat="level parcel_historic">
+             <span>
+             <span tal:content="python: '---'*level[0]['level']"/>
+             <span >
+                <div tal:repeat="line level">
+                   <tal:level define="parcel python: line['parcel'];
+                                      licences python: line['licences'];
+                                      highlight python: line['highlight']">
+                      <b><span fcolor="#FF0000" tal:attributes="style python: highlight and 'background-color:yellow' or ''">
+                         <span tal:content="python: str(parcel)"/>
+                      </span></b>
+                      <tal:licences condition="licences">
+                         <div tal:repeat="licence licences">
+                            <a class="link-overlay"
+                               tal:attributes="href python: licence['url']; class python: licence['class']"
+                               tal:content="python: licence['title']" i18n:translate="">lien vers les anciens permis</a>
+                         </div>
+                      </tal:licences>
+                   </tal:level>
+                </div>
+             </span>
+             </span>
+          </div>
+          <br />
+       </span>
+    </tal:display>
+
+    </metal:body>
+</metal:main_macro>
+</metal:main>
+</body>
+</html>

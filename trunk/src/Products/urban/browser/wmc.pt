@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewContext version="1.0.0" id="mum2_ogc_workshop"  xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.opengis.net/context" xsi:schemaLocation="http://www.opengis.net/context http://schemas.opengis.net/context/1.0.0/context.xsd">
+<General>
+  <Window width="70%" height="500"/>
+  <BoundingBox SRS="EPSG:31370" tal:attributes="minx view/minx; miny view/miny; maxx view/maxx; maxy view/maxy;"/>
+  <Title>Urbanmap WMS</Title>
+  <KeywordList></KeywordList>
+  <Abstract></Abstract>
+</General>
+<LayerList>
+  <Layer tal:repeat="layer view/getLayers" tal:attributes="hidden layer/hidden; queryable layer/queryable">
+    <Server service="WMS" version="1.1.0" title="Geoserver">
+      <OnlineResource xlink:type="simple" tal:attributes="xlink:href layer/url"/>
+    </Server>
+    <Name tal:content="layer/name">urban12345:capa</Name>
+    <Title tal:content="layer/title">Parcellaire</Title>
+    <Abstract></Abstract>
+    <SRS  tal:content="layer/srs">EPSG:31370</SRS>
+    <FormatList>
+      <Format current="1" tal:content="layer/format">image/png</Format>
+    </FormatList>
+    <StyleList>
+      <Style current="1">
+        <Name tal:content="layer/style"></Name>
+        <Title tal:content="layer/style"></Title>
+      </Style>
+    </StyleList>
+      <Extension>
+        <ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+        <ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+        <ol:transparent xmlns:ol="http://openlayers.org/context"  tal:content="layer/transparency">true</ol:transparent>
+      </Extension>
+   </Layer>
+ </LayerList>
+</ViewContext>

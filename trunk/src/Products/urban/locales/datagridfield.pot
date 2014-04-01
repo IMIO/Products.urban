@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-04-28 11:35+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: datagridfield\n"
+
+msgid "ServitudeConstraints"
+msgstr ""
+
+msgid "ServitudeDescription"
+msgstr ""
+
+msgid "ParcelLabel"
+msgstr ""
+
+msgid "ParcelReference"
+msgstr ""
+
+msgid "Road equipments"
+msgstr ""
+
+msgid "Road equipment details"
+msgstr ""
+
+msgid "Start date"
+msgstr ""
+
+msgid "End date"
+msgstr ""
+
+msgid "Number"
+msgstr ""
+
+msgid "Street"
+msgstr ""
+
+msgid "Feature"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "FieldName"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "id"
+msgstr ""
+
+msgid "Detail"
+msgstr ""
+

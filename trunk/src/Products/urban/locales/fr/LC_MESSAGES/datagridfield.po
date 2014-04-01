@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-04-28 11:35+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: fr\n"
+"Language-Name: French\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: datagridfield\n"
+
+msgid "Detail"
+msgstr "Détail"
+
+msgid "End date"
+msgstr "Date de fin de l'enquête"
+
+msgid "Feature"
+msgstr "Description de la particularité diverse"
+
+msgid "FieldName"
+msgstr "Champ"
+
+msgid "Number"
+msgstr "Numéro"
+
+msgid "ParcelLabel"
+msgstr "N° parcelle (plan)"
+
+msgid "ParcelReference"
+msgstr "Référence cadastrale"
+
+msgid "Road equipment details"
+msgstr "Détails concernant les équipements"
+
+msgid "Road equipments"
+msgstr "Equipements de la voirie au droit du bien"
+
+msgid "Select"
+msgstr "+"
+
+msgid "ServitudeConstraints"
+msgstr "Contraintes induites"
+
+msgid "ServitudeDescription"
+msgstr "Nature des servitudes et autres droits"
+
+msgid "Start date"
+msgstr "Date du début de l'enquête"
+
+msgid "Street"
+msgstr "Rue"
+
+msgid "Text"
+msgstr "Texte"
+
+msgid "id"
+msgstr " "
+

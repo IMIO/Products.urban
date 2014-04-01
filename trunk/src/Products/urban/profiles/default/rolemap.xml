@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<rolemap>
+  <roles>
+    <role name="UrbanMapReader"/>
+  </roles>
+  <permissions>
+      <permission name="Products.urban: ViewUrbanMap" acquire="True">
+        <role name="UrbanMapReader"/>
+      </permission>
+  </permissions>
+</rolemap>
