@@ -579,6 +579,9 @@ msgstr "Paramètres des déclarations environnementales"
 msgid "envclassthrees"
 msgstr "Déclarations environnementales"
 
+msgid "environmenttemplates_folder_title"
+msgstr "modèles des procédures d'environnement"
+
 msgid "equipmenttypes_folder_title"
 msgstr "Equipements de la voirie"
 
@@ -3157,6 +3160,9 @@ msgstr "Certificats d'urbanisme 2"
 
 msgid "urbaneventtypes_folder_title"
 msgstr "Types d'évènements"
+
+msgid "urbantemplates_folder_title"
+msgstr "modèles des procédures d'urbanisme"
 
 msgid "usage_for_habitation"
 msgstr "Modèle I: Bâtiment(s) destiné(s) exclusivement ou principalement à l'habitation"

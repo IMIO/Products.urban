@@ -578,6 +578,9 @@ msgstr ""
 msgid "envclassthrees"
 msgstr ""
 
+msgid "environmenttemplates_folder_title"
+msgstr ""
+
 msgid "equipmenttypes_folder_title"
 msgstr ""
 
@@ -3152,6 +3155,9 @@ msgid "urbancertificatetwos"
 msgstr ""
 
 msgid "urbaneventtypes_folder_title"
+msgstr ""
+
+msgid "urbantemplates_folder_title"
 msgstr ""
 
 msgid "usage_for_habitation"

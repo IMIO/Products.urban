@@ -551,6 +551,28 @@ def addGlobalFolders(context):
     vocabularies = default_values['global']
     createVocabularyFolders(container=tool, vocabularies=vocabularies, site=site)
 
+    if not hasattr(tool, "globaltemplates"):
+        templates_id = tool.invokeFactory("Folder", id="globaltemplates", title=_("globaltemplates_folder_title", 'urban', context=site.REQUEST))
+        templates = getattr(tool, templates_id)
+        templates.setConstrainTypesMode(1)
+        templates.setLocallyAllowedTypes(['UrbanDoc', 'Folder'])
+        templates.setImmediatelyAddableTypes(['UrbanDoc', 'Folder'])
+
+    folder = tool.globaltemplates
+    if not hasattr(folder, "urbantemplates"):
+        templates_id = folder.invokeFactory("Folder", id="urbantemplates", title=_("urbantemplates_folder_title", 'urban', context=site.REQUEST))
+        templates = getattr(folder, templates_id)
+        templates.setConstrainTypesMode(1)
+        templates.setLocallyAllowedTypes(['UrbanDoc'])
+        templates.setImmediatelyAddableTypes(['UrbanDoc'])
+
+    if not hasattr(folder, "environmenttemplates"):
+        templates_id = folder.invokeFactory("Folder", id="environmenttemplates", title=_("environmenttemplates_folder_title", 'urban', context=site.REQUEST))
+        templates = getattr(folder, templates_id)
+        templates.setConstrainTypesMode(1)
+        templates.setLocallyAllowedTypes(['UrbanDoc'])
+        templates.setImmediatelyAddableTypes(['UrbanDoc'])
+
     if not hasattr(tool, "additional_layers"):
         additional_layers_id = tool.invokeFactory("Folder", id="additional_layers", title=_("additonal_layers_folder_title", 'urban', context=site.REQUEST))
         additional_layers = getattr(tool, additional_layers_id)

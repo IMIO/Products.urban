@@ -125,6 +125,18 @@
     provides=".appy_pod.IAppyContext"
   />
 
+  <adapter
+    for="Products.urban.interfaces.IGenericLicence"
+    factory=".appy_pod.UrbanLicenceGlobalTemplate"
+    provides=".appy_pod.IGlobalTemplates"
+  />
+
+  <adapter
+    for="Products.urban.interfaces.IEnvironmentBase"
+    factory=".appy_pod.EnvironmentLicenceGlobalTemplates"
+    provides=".appy_pod.IGlobalTemplates"
+  />
+
   <adapter name="parcelInfosIndex" factory=".indexes.genericlicence_parcelinfoindex" />
   <adapter name="parcelInfosIndex" factory=".indexes.parcellingterm_parcelinfoindex" />
   <adapter name="StreetsUID" factory=".indexes.genericlicence_streetsuid" />

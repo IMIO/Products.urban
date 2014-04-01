@@ -112,7 +112,7 @@ def addGlobalTemplates(context):
     module_name = 'Products.urban.profiles.%s.data' % profile_name
     attribute = 'globalTemplates'
     module = __import__(module_name, fromlist=[attribute])
-    globalTemplates = getattr(module, attribute)
+    global_templates = getattr(module, attribute)
 
     reload_globals = False
     replace_mod_globals = False
@@ -127,10 +127,17 @@ def addGlobalTemplates(context):
     gslogger = context.getLogger('addGlobalTemplates')
     tool = getToolByName(site, 'portal_urban')
     templates_folder = getattr(tool, 'globaltemplates')
-    template_log = updateTemplates(context, templates_folder, globalTemplates, replace_mod=replace_mod_globals, reload=reload_globals)
+    template_log = updateTemplates(context, templates_folder, global_templates['.'], replace_mod=replace_mod_globals, reload=reload_globals)
     for status in template_log:
         if status[1] != 'no changes':
             log.append(loga("'global templates', template='%s' => %s" % (status[0], status[1]), gslog=gslogger))
+
+    for subfolder_id in ['urbantemplates', 'environmenttemplates']:
+        templates_subfolder = getattr(templates_folder, subfolder_id)
+        template_log = updateTemplates(context, templates_subfolder, global_templates[subfolder_id], replace_mod=replace_mod_globals, reload=reload_globals)
+        for status in template_log:
+            if status[1] != 'no changes':
+                log.append(loga("'%s global templates', template='%s' => %s" % (subfolder_id, status[0], status[1]), gslog=gslogger))
     return '\n'.join(log)
 
 

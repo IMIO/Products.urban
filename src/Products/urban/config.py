@@ -142,14 +142,24 @@ ORDERED_URBAN_TYPES = [
     'NotaryLetter', 'EnvClassThree', 'EnvClassOne', 'MiscDemand'
 ]
 #the different templates used to structure a document
-GLOBAL_TEMPLATES = [
-                    {'id':'header.odt', 'title':'Fichier d\'en-tête pour les modèles de document'},
-                    {'id':'footer.odt', 'title':'Fichier de pied de page pour les modèles de document'},
-                    {'id':'reference.odt', 'title':'Fichier gérant la zone \'Référence\' pour les modèles de document'},
-                    {'id':'signatures.odt', 'title':'Fichier gérant les signatures pour les modèles de document'},
-                    {'id':'statsins.odt', 'title':'Fichier modèle pour les statistiques INS'},
-                    {'id':'styles.odt', 'title':'Fichier gérant les styles communs aux différents modèles de document'},
-                   ]
+GLOBAL_TEMPLATES = {
+    '.': [
+        {'id':'statsins.odt', 'title':'Fichier modèle pour les statistiques INS'},
+        {'id':'styles.odt', 'title':'Fichier gérant les styles communs aux différents modèles de document'},
+    ],
+    'urbantemplates': [
+        {'id':'header.odt', 'title':'Fichier d\'en-tête pour les modèles de document'},
+        {'id':'footer.odt', 'title':'Fichier de pied de page pour les modèles de document'},
+        {'id':'reference.odt', 'title':'Fichier gérant la zone \'Référence\' pour les modèles de document'},
+        {'id':'signatures.odt', 'title':'Fichier gérant les signatures pour les modèles de document'},
+    ],
+    'environmenttemplates': [
+        {'id':'header.odt', 'title':'Fichier d\'en-tête pour les modèles de document'},
+        {'id':'footer.odt', 'title':'Fichier de pied de page pour les modèles de document'},
+        {'id':'reference.odt', 'title':'Fichier gérant la zone \'Référence\' pour les modèles de document'},
+        {'id':'signatures.odt', 'title':'Fichier gérant les signatures pour les modèles de document'},
+    ],
+}
 #the different formats proposed for generating document
 GENERATED_DOCUMENT_FORMATS = {'odt':'application/vnd.oasis.opendocument.text' ,'doc':'application/msword'}
 #empty value used for listboxes

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import getOsTempFolder
 
 from StringIO import StringIO
@@ -31,31 +32,27 @@ def generateUrbanDocFile(container, odt_template, appy_context=None):
     temp_filename = '%s/%s_%f.%s' % (getOsTempFolder(), odt_template._at_uid, time.time(), file_type)
     temp_file_names = {}
 
-    global_templates = getattr(portal_urban, 'globaltemplates')
-    auto_imported_template_ids = ['header.odt', 'footer.odt', 'reference.odt', 'signatures.odt']
-    for template_id in auto_imported_template_ids:
-        #do only import necessary templates if exists...
-        template = getattr(global_templates, template_id)
-        if not template or not template.size:
-            continue
-        template = StringIO(template)
-        temp_file_name = '%s/%s_%f.%s' % (getOsTempFolder(), odt_template._at_uid, time.time(), 'odt')
-        #remove the '.odt' suffix so terms like "header" can be used in the templates instead of "header.odt"
-        temp_file_names[os.path.splitext(template_id)[0]] = temp_file_name
-        #we render the template so pod instructions into the generic sub-templates are rendered too
-        renderer = appy.pod.renderer.Renderer(
-            template,
-            appy_context,
-            temp_file_name,
-            pythonWithUnoPath=portal_urban.getUnoEnabledPython()
-        )
-        renderer.run()
+    global_templates = getGlobalTemplates(container)
+
+    if global_templates:
+        for template_id in global_templates.objectIds():
+            template = getattr(global_templates, template_id)
+            if not template or not template.size:
+                continue
+            template = StringIO(template)
+            temp_file_name = '%s/%s_%f.%s' % (getOsTempFolder(), odt_template._at_uid, time.time(), 'odt')
+            #remove the '.odt' suffix so terms like "header" can be used in the templates instead of "header.odt"
+            temp_file_names[os.path.splitext(template_id)[0]] = temp_file_name
+            #we render the template so pod instructions into the generic sub-templates are rendered too
+            renderer = appy.pod.renderer.Renderer(
+                template,
+                appy_context,
+                temp_file_name,
+                pythonWithUnoPath=portal_urban.getUnoEnabledPython()
+            )
+            renderer.run()
 
     #now that sub-templates are rendered, we can use them in the main pod template and render the entire document
-    #we prepare the styles template
-    styles_template = getattr(global_templates, 'styles.odt', None)
-    if styles_template and styles_template.size:
-        styles_template = StringIO(styles_template)
     appy_context.update(temp_file_names)
     renderer = appy.pod.renderer.Renderer(
         StringIO(odt_template),
@@ -72,6 +69,13 @@ def generateUrbanDocFile(container, odt_template, appy_context=None):
     os.remove(temp_filename)
 
     return doc
+
+
+def getGlobalTemplates(context):
+    if IUrbanEvent.providedBy(context):
+        licence = context.aq_parent
+        return queryAdapter(licence, IGlobalTemplates).get()
+    return None
 
 
 class IAppyContext(Interface):
@@ -99,3 +103,33 @@ class UrbanEventAppyContext:
 
     def get(self):
         return self.appy_context
+
+
+class IGlobalTemplates(Interface):
+
+    def get():
+        """ Return the folder containing global pod templates for the adapted object """
+
+
+class UrbanLicenceGlobalTemplate:
+    implements(IGlobalTemplates)
+
+    def __init__(self, licence):
+        """ """
+
+    def get(self):
+        portal_urban = api.portal.get_tool('portal_urban')
+        global_templates = portal_urban.globaltemplates.urbantemplates
+        return global_templates
+
+
+class EnvironmentLicenceGlobalTemplates:
+    implements(IGlobalTemplates)
+
+    def __init__(self, licence):
+        """ """
+
+    def get(self):
+        portal_urban = api.portal.get_tool('portal_urban')
+        global_templates = portal_urban.globaltemplates.environmenttemplates
+        return global_templates

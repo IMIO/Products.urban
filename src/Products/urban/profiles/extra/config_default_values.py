@@ -867,7 +867,7 @@ default_values = {
             {'id': "favorable-defaut", 'title': u"Réputé favorable par défaut"},
         ],
 
-         'exploitationconditions': [
+        'exploitationconditions': [
             'Folder',
         ],
 
@@ -877,10 +877,6 @@ default_values = {
 
         'streets': [
             'City',
-        ],
-
-        'globaltemplates': [
-            'UrbanDoc',
         ],
     },
 }

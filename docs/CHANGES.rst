@@ -8,6 +8,8 @@ Changes
 
 - Use sphinx to generate documentation
 
+- Add global templates for enviroment licences (#7821).
+
 1.5.0
 -----
 
