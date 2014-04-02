@@ -35,6 +35,7 @@ schema = Schema((
             label_msgid='urban_label_deadLineDelay',
             i18n_domain='urban',
         ),
+        required=True,
         validators=('isInt',),
     ),
     IntegerField(
@@ -47,6 +48,7 @@ schema = Schema((
             label_msgid='urban_label_alertDelay',
             i18n_domain='urban',
         ),
+        required=True,
         validators=('isInt',),
     ),
     StringField(
