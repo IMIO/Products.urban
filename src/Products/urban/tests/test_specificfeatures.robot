@@ -9,28 +9,53 @@ Suite Setup  Suite Setup
 Suite Teardown  Close all browsers
 
 Test Setup  Test Setup
-Test Teardown  Test Teardown
 
 *** Variables ***
 
 ${CU1_FOLDER_PATH}  /plone/urban/urbancertificateones
 ${CU1_FOLDER_URL}  ${PLONE_URL}/urban/urbancertificateones
 ${CU1_ID}  test-urbancertificateone
+${specific_feature}  schema-developpement-espace-regional
+${field_id_1}  isInPCA
+${field_id_2}  pca
+${field_id_3}  locationFloodingLevel
 
 *** Test Cases ***
 
 Test fieldeditoverlay button is visible when configured
     Edit tab  location
     Scroll browser to field  locationSpecificFeatures
-    Page Should Not Contain Link  fieldeditoverlay-schema-developpement-espace-regional
-    Configure specificfeature item  schema-developpement-espace-regional
-    Set related fields  pca  isInPCA  locationFloodingLevel
+    Page Should Not Contain Link  fieldeditoverlay-${specific_feature}
+    Configure specificfeature item  ${specific_feature}
+    Set related fields  ${field_id_1}
     Save changes
     Go to CU1
     Edit tab  location
     Scroll browser to field  locationSpecificFeatures
-    Page Should Contain Link  fieldeditoverlay-schema-developpement-espace-regional
-    Cancel edit
+    Page Should Contain Link  fieldeditoverlay-${specific_feature}
+
+
+Test fieldeditoverlay popup when clicking button
+    Configure specificfeature item  ${specific_feature}
+    Set related fields  ${field_id_1}
+    Save changes
+    Go to CU1
+    Edit tab  location
+    Scroll browser to field  locationSpecificFeatures
+    Click Link  fieldeditoverlay-${specific_feature}
+    Page Should Contain Element  css=div.spf_edit_schortcut
+
+
+Test configured fields are visible in the popup
+    Configure specificfeature item  ${specific_feature}
+    Set related fields  ${field_id_1}  ${field_id_2}
+    Save changes
+    Go to CU1
+    Edit tab  location
+    Scroll browser to field  locationSpecificFeatures
+    Click Link  fieldeditoverlay-${specific_feature}
+    Fields are in popup  ${field_id_1}  ${field_id_2}
+    Fields are not in popup  ${field_id_3}
 
 
 *** Keywords ***
@@ -42,9 +67,6 @@ Suite Setup
 Test Setup
     Create CU1
 
-Test Teardown
-    Delete CU1
-
 Create CU1
     Create content  type=UrbanCertificateOne  id=${CU1_ID}  container=${CU1_FOLDER_PATH}
     Go to CU1
@@ -54,9 +76,6 @@ Delete CU1
 
 Edit
     Click Image  edit.gif
-
-Cancel edit
-    Click Button  form.button.cancel
 
 Edit tab
     [Arguments]  ${tab_name}
@@ -101,3 +120,21 @@ Scroll browser to
     [Arguments]  ${element_id}
 
     Execute Javascript  document.getElementById('${element_id}').scrollIntoView()
+
+
+Fields are in popup
+    [Arguments]  @{field_ids}
+
+    Fields appear in popup X times  ${field_ids}  1
+
+Fields are not in popup
+    [Arguments]  @{field_ids}
+
+    Fields appear in popup X times  ${field_ids}  0
+
+Fields appear in popup X times
+    [Arguments]  ${field_id}  ${X}
+
+    :FOR  ${field_id}  IN  @{field_ids}
+    \    Xpath Should Match X Times  //div[@class="spf_edit_schortcut"]//div[@id="archetypes-fieldname-${field_id}"]  ${X}
+
