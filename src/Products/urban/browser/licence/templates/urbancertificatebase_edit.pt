@@ -1,40 +1,7 @@
 <metal:editLicenceMacro define-macro="editLicenceMacro" i18n:domain="urban"
-                        tal:define="useTabbing python: context.getUrbanConfig().getUseTabbingForEdit();
-                                    view python: context.restrictedTraverse('urbancertificatebase_edit');">
-    <div tal:condition="not: useTabbing">
-        <metal:listing use-macro="view/getEditFieldsWithoutTabbingMacro" />
-    </div>
-
-    <tal:with_tabbing condition="useTabbing">
-        <metal:listing use-macro="view/getEditFieldsWithTabbingMacro" />
-    </tal:with_tabbing>
+                        tal:define="view_name python:'urbancertificatebase_edit';">
+    <metal:edit use-macro="here/@@licenceedit/editLicenceMacro" />
 </metal:editLicenceMacro>
-
-
-<metal:editLicenceFieldsWithTabbingMacro
-       define-macro="editLicenceFieldsWithTabbingMacro"
-       i18n:domain="urban"
-       tal:define="putils context/plone_utils;
-                   tabs_config view/getTabs">
-
-    <tal:fieldsets repeat="tab_config tabs_config">
-        <tal:tab define="fieldset python: 'urban_%s' % tab_config['value'];
-                         display_name python: tab_config['display_name']">
-            <fieldset class="urbanEditWithTabbing"
-                      tal:define="fieldsetid python:putils.normalizeString(fieldset)"
-                      tal:attributes="id string:fieldset-${fieldsetid}">
-                <legend id="#"
-                        tal:content="display_name"
-                        tal:attributes="id string:fieldsetlegend-${fieldsetid}"
-                        i18n:translate="" />
-                <tal:edit_macro define="edit_macro view/getEditFieldsMacro">
-                    <metal:listing use-macro="edit_macro" />
-                </tal:edit_macro>
-            </fieldset>
-        </tal:tab>
-    </tal:fieldsets>
-
-</metal:editLicenceFieldsWithTabbingMacro>
 
 
 <div metal:define-macro="editLicenceFieldsMacro" i18n:domain="urban">
@@ -85,23 +52,4 @@
             </tal:other>
         </tal:block>
     </tal:fields>
-</div>
-
-
-<div metal:define-macro="editLicenceFieldsNoTabbingMacro"
-     tal:define="putils context/plone_utils;
-                 tabs_config view/getTabs">
-    <tal:fieldsets repeat="tab_config tabs_config">
-        <tal:tab define="fieldset python: 'urban_%s' % tab_config['value'];
-                         display_name python: tab_config['display_name']">
-            <fieldset tal:define="fieldsetid python:putils.normalizeString(fieldset)">
-                <legend tal:content="display_name"
-                        tal:attributes="id string:fieldsetlegend-${fieldsetid}"
-                        i18n:translate="" />
-                <tal:edit_macro define="edit_macro view/getEditFieldsMacro">
-                    <metal:listing use-macro="edit_macro" />
-                </tal:edit_macro>
-            </fieldset>
-        </tal:tab>
-    </tal:fieldsets>
 </div>

@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
-from plone.app.testing import PloneWithPackageLayer, IntegrationTesting, FunctionalTesting, helpers
+from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
+from plone.app.testing import IntegrationTesting
+from plone.app.testing import FunctionalTesting
+from plone.app.testing import PloneWithPackageLayer
+from plone.app.testing import helpers
+
+from plone.testing import z2
+
 import Products.urban
 
 
@@ -59,7 +66,6 @@ class UrbanLicencesLayer(UrbanConfigLayer):
     Useful for performances: Plone site is instanciated only once
     """
     def setUp(self):
-        super(UrbanLicencesLayer, self).setUp()
         with helpers.ploneSite() as portal:
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
 
@@ -78,3 +84,46 @@ class UrbanImportsLayer(IntegrationTesting):
 
 URBAN_IMPORTS = UrbanImportsLayer(
     bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_IMPORTS")
+
+
+class UrbanWithUsersFunctionalLayer(FunctionalTesting):
+    """
+    Instanciate test users
+
+    Must collaborate with a layer that installs Plone and Urban
+    Useful for performances: Plone site is instanciated only once
+    """
+    def setUp(self):
+        with helpers.ploneSite() as portal:
+            from Products.urban.setuphandlers import addTestUsers
+            addTestUsers(portal)
+
+
+URBAN_TESTS_FUNCTIONAL = UrbanWithUsersLayer(
+    bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_FUNCTIONAL")
+
+
+class UrbanConfigFunctionalLayer(UrbanWithUsersFunctionalLayer):
+    """
+    Instanciate urban config
+
+    Must collaborate with a layer that installs Plone and Urban
+    Useful for performances: Plone site is instanciated only once
+    """
+    def setUp(self):
+        with helpers.ploneSite() as portal:
+            helpers.applyProfile(portal, 'Products.urban:testsWithConfig')
+
+
+URBAN_TESTS_CONFIG_FUNCTIONAL = UrbanConfigLayer(
+    bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_CONFIG_FUNCTIONAL")
+
+
+URBAN_TEST_ROBOT = UrbanConfigFunctionalLayer(
+    bases=(
+        URBAN_TESTS_PROFILE_DEFAULT,
+        REMOTE_LIBRARY_BUNDLE_FIXTURE,
+        z2.ZSERVER_FIXTURE
+    ),
+    name="URBAN_ROBOT"
+)

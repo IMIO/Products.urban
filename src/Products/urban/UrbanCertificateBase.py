@@ -262,6 +262,16 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     # Manually created methods
 
+    security.declarePublic('attributeIsUsed')
+    def attributeIsUsed(self, name):
+        """
+         Override the GenericLicence attributeIsUsed method to always return true.
+         This is because we want to delegate the display of the field to licence edit view
+         and not to archetype so we can hide the widget in a <div hidden=True> tag.
+         This is needed for the specificFeature edit shortcut.
+        """
+        return True
+
     security.declarePublic('getSpecificFeaturesRows')
     def getSpecificFeaturesRows(self):
         return self._getSpecificFeaturesRows()

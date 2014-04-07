@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from Acquisition import aq_inner
+
 from Products.urban.browser.licence.licenceedit import LicenceEditView
 
 
@@ -12,8 +14,12 @@ class UrbanCertificateBaseEditView(LicenceEditView):
         self.context = context
         self.request = request
 
-    def getMacroViewName(self):
-        return 'urbancertificatebase_edit'
+    def getEditFieldsMacro(self):
+        context = aq_inner(self.context)
+        macro_name = 'editLicenceFieldsMacro'
+        macros_view = 'urbancertificatebase_edit'
+        macro = context.unrestrictedTraverse('{view}/{macro}'.format(view=macros_view, macro=macro_name))
+        return macro
 
     def getFields(self, schemata):
         """Returns a list of editable fields for the given instance
