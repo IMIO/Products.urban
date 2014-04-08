@@ -70,9 +70,6 @@ Test selected values in edit form are also selected in popup
 # so far nothing should be selected
     ${popup_field_id_1}  Get field overlay XPath  ${field_id_1}
     Checkbox Should Not Be Selected  xpath=${popup_field_id_1}/input
-    ${popup_field_id_2}  Get field overlay XPath  ${field_id_2}
-#    ${field_2_selection}  Get Selected List Value  xpath=${popup_field_id_2}/select
-#    Should Be Equal  ${field_2_selection}  \
     ${popup_field_id_3}  Get field overlay XPath  ${field_id_3}
     ${field_3_selection}  Get Selected List Value  xpath=${popup_field_id_3}/select
     Should Be Equal  ${field_3_selection}  \
@@ -95,12 +92,9 @@ Test selected values in edit form are also selected in popup
     Scroll browser to field  locationSpecificFeatures
     Click Link  fieldeditoverlay-${specific_feature}
     ${popup_field_id_1}  Get field overlay XPath  ${field_id_1}
-    Debug
     Checkbox Should Be Selected  xpath=${popup_field_id_1}/input
     ${popup_field_id_2}  Get field overlay XPath  ${field_id_2}
-    Debug
     ${field_2_selection}  Get Selected List Values  xpath=${popup_field_id_2}/select
-    Debug
     ${expected_list_2}  Create List  zh
     Should Be Equal  ${field_2_selection}  ${expected_list_2}
     ${popup_field_id_3}  Get field overlay XPath  ${field_id_3}
