@@ -17,7 +17,7 @@ ${CU1_FOLDER_URL}  ${PLONE_URL}/urban/urbancertificateones
 ${CU1_ID}  test-urbancertificateone
 ${specific_feature}  schema-developpement-espace-regional
 ${field_id_1}  isInPCA
-${field_id_2}  pca
+${field_id_2}  folderZone
 ${field_id_3}  locationFloodingLevel
 
 *** Test Cases ***
@@ -58,6 +58,56 @@ Test configured fields are visible in the popup
     Fields are not in popup  ${field_id_3}
 
 
+Test selected values in edit form are also selected in popup
+    Configure specificfeature item  ${specific_feature}
+    Set related fields  ${field_id_1}  ${field_id_2}  ${field_id_3}
+    Save changes
+    Go to CU1
+    Edit tab  location
+    Scroll browser to field  locationSpecificFeatures
+    Click Link  fieldeditoverlay-${specific_feature}
+#
+# so far nothing should be selected
+    ${popup_field_id_1}  Get field overlay XPath  ${field_id_1}
+    Checkbox Should Not Be Selected  xpath=${popup_field_id_1}/input
+    ${popup_field_id_2}  Get field overlay XPath  ${field_id_2}
+#    ${field_2_selection}  Get Selected List Value  xpath=${popup_field_id_2}/select
+#    Should Be Equal  ${field_2_selection}  \
+    ${popup_field_id_3}  Get field overlay XPath  ${field_id_3}
+    ${field_3_selection}  Get Selected List Value  xpath=${popup_field_id_3}/select
+    Should Be Equal  ${field_3_selection}  \
+    Click button  Cancel
+#
+# select values for these fields
+    Scroll browser to field  ${field_id_1}
+    ${field_id_1_xpath}  Get field XPath  ${field_id_1}
+    Select Checkbox  xpath=${field_id_1_xpath}/input
+    Scroll browser to field  ${field_id_2}
+    ${field_id_2_xpath}  Get field XPath  ${field_id_2}
+    Select From List By Value  xpath=${field_id_2_xpath}/select  zh
+    Scroll browser to field  ${field_id_3}
+    ${field_id_3_xpath}  Get field XPath  ${field_id_3}
+    Select From List By Value  xpath=${field_id_3_xpath}/select  moderate
+    Save changes
+#
+# now these values should be selected in the fields of the popup as well
+    Edit tab  location
+    Scroll browser to field  locationSpecificFeatures
+    Click Link  fieldeditoverlay-${specific_feature}
+    ${popup_field_id_1}  Get field overlay XPath  ${field_id_1}
+    Debug
+    Checkbox Should Be Selected  xpath=${popup_field_id_1}/input
+    ${popup_field_id_2}  Get field overlay XPath  ${field_id_2}
+    Debug
+    ${field_2_selection}  Get Selected List Values  xpath=${popup_field_id_2}/select
+    Debug
+    ${expected_list_2}  Create List  zh
+    Should Be Equal  ${field_2_selection}  ${expected_list_2}
+    ${popup_field_id_3}  Get field overlay XPath  ${field_id_3}
+    ${field_3_selection}  Get Selected List Value  xpath=${popup_field_id_3}/select
+    Should Be Equal  ${field_3_selection}  moderate
+
+
 *** Keywords ***
 
 Suite Setup
@@ -70,6 +120,13 @@ Test Setup
 Create CU1
     Create content  type=UrbanCertificateOne  id=${CU1_ID}  container=${CU1_FOLDER_PATH}
     Go to CU1
+    Edit
+# set foldermanager
+    ${foldermanager_xpath}  Get field XPath  foldermanagers
+    Click element  xpath=${foldermanager_xpath}//input[@class="searchButton addreference"]
+    Click element  xpath= //div[@id="atrb_foldermanagers"]//table//input
+    Click element  xpath= //div[@id="atrb_foldermanagers"]//div[@class="close"]
+    Save changes
 
 Delete CU1
     Delete content  uid_or_path=${CU1_FOLDER_PATH}/${CU1_ID}
@@ -136,5 +193,14 @@ Fields appear in popup X times
     [Arguments]  ${field_id}  ${X}
 
     :FOR  ${field_id}  IN  @{field_ids}
-    \    Xpath Should Match X Times  //div[@class="spf_edit_schortcut"]//div[@id="archetypes-fieldname-${field_id}"]  ${X}
+    \    ${field_xpath} =  Get field overlay XPath  ${field_id}
+    \    Xpath Should Match X Times  ${field_xpath}  ${X}
+
+Get field XPath
+    [Arguments]  ${field_id}
+    [Return]  //div[@id="archetypes-fieldname-${field_id}"]
+
+Get field overlay XPath
+    [Arguments]  ${field_id}
+    [Return]  //div[@class="spf_edit_schortcut"]//div[@id="archetypes-fieldname-${field_id}"]
 
