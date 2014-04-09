@@ -102,6 +102,42 @@ Test selected values in edit form are also selected in popup
     Should Be Equal  ${field_3_selection}  moderate
 
 
+Test form fields are updated when values are selected in the popup
+    Configure specificfeature item  ${specific_feature}
+    Set related fields  ${field_id_1}  ${field_id_2}  ${field_id_3}
+    Save changes
+    Go to CU1
+    Edit tab  location
+#
+# so far nothing should be selected
+    ${xpath_id_1}  Get field XPath  ${field_id_1}
+    Checkbox Should Not Be Selected  xpath=${xpath_id_1}/input
+    ${xpath_id_3}  Get field XPath  ${field_id_3}
+    ${field_3_selection}  Get Selected List Value  xpath=${xpath_id_3}/select
+    Should Be Equal  ${field_3_selection}  \
+#
+# select values on popup fields and click "Ok"
+    Scroll browser to field  locationSpecificFeatures
+    Click Link  fieldeditoverlay-${specific_feature}
+    ${popup_id_1_xpath}  Get field overlay XPath  ${field_id_1}
+    Select Checkbox  xpath=${popup_id_1_xpath}/input
+    ${popup_id_2_xpath}  Get field overlay XPath  ${field_id_2}
+    Select From List By Value  xpath=${popup_id_2_xpath}/select  zh
+    ${popup_id_3_xpath}  Get field overlay XPath  ${field_id_3}
+    Select From List By Value  xpath=${popup_id_3_xpath}/select  moderate
+    Click button  Ok
+#
+# now these values should be selected in the edit form as well
+    Checkbox Should Be Selected  xpath=${xpath_id_1}/input
+    ${xpath_id_2}  Get field XPath  ${field_id_2}
+    ${field_2_selection}  Get Selected List Values  xpath=${xpath_id_2}/select
+    ${expected_list_2}  Create List  zh
+    Should Be Equal  ${field_2_selection}  ${expected_list_2}
+    ${field_3_selection}  Get Selected List Value  xpath=${xpath_id_3}/select
+    Should Be Equal  ${field_3_selection}  moderate
+
+
+
 *** Keywords ***
 
 Suite Setup
