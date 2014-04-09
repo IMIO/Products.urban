@@ -46,8 +46,13 @@ def createLicenceExpirationEvent(decision_event, event):
             # set the tal condition to true for creating the expiration event
             TAL_expr = expiration_eventtype.getTALCondition()
             expiration_eventtype.setTALCondition('python: True')
-
-            expiration_event = licence.createUrbanEvent(expiration_eventtype)
+            expiration_event_id = licence.invokeFactory(
+                'UrbanEvent',
+                id='urbantevent.{}'.format(str(DateTime().millis())),
+                title=expiration_eventtype.Title(),
+                urbaneventtypes=(expiration_eventtype,),
+            )
+            expiration_event = getattr(licence, expiration_event_id)
             directlyProvides(expiration_event, ILicenceExpirationEvent)
 
             # ...then set it back to its previous value

@@ -1526,7 +1526,10 @@ urbanEventTypes = {
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': (),
+            'podTemplates': (
+                {'id': "env1-transmis-decision", 'title': "Transmis de la décision (demandeur)"},
+                {'id': "env1-transmis-decision-FT", 'title': "Transmis de la décision (FT)"},
+            ),
             'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
         },
         {
