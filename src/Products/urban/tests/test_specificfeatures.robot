@@ -135,8 +135,25 @@ Test form fields are updated when values are selected in the popup
     Should Be Equal  ${field_2_selection}  ${expected_list_2}
     ${field_3_selection}  Get Selected List Value  xpath=${xpath_id_3}/select
     Should Be Equal  ${field_3_selection}  moderate
+    Cancel changes
 
 
+Test field hidden in the edit form still appears in the popup
+    Configure specificfeature item  ${specific_feature}
+    Set related fields  ${field_id_1}  ${field_id_2}  ${field_id_3}
+    Save changes
+#
+# hide fields from the edit form
+    Configure procedure  urbancertificateone
+    Hide fields  ${field_id_1}  ${field_id_2}  ${field_id_3}
+    Save changes
+
+    Go to CU1
+    Edit tab  location
+    Scroll browser to field  locationSpecificFeatures
+    Click Link  fieldeditoverlay-${specific_feature}
+    Debug
+    Fields are in popup  ${field_id_1}  ${field_id_2}  ${field_id_3}
 
 *** Keywords ***
 
@@ -182,6 +199,18 @@ Go to tab
     Scroll browser to  fieldsetlegend-urban_${tab_name}
     Click link  fieldsetlegend-urban_${tab_name}
 
+Configure procedure
+    [Arguments]  ${licence_type}
+
+    Go to  ${PLONE_URL}/portal_urban/${licence_type}/edit
+
+Hide fields
+    [Arguments]  @{field_ids}
+
+    Scroll browser to field  usedAttributes
+    :FOR  ${field_id}  IN  @{field_ids}
+    \    Unselect From List By Value  usedAttributes  ${field_id}
+
 Configure specificfeature item
     [Arguments]  ${specificfeature_id}
 
@@ -197,6 +226,9 @@ Set related fields
 
 Save changes
     Click Button  form.button.save
+
+Cancel changes
+    Click Button  form.button.cancel
 
 Scroll browser to field
     [Arguments]  ${field_name}
