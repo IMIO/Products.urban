@@ -152,7 +152,6 @@ Test field hidden in the edit form still appears in the popup
     Edit tab  location
     Scroll browser to field  locationSpecificFeatures
     Click Link  fieldeditoverlay-${specific_feature}
-    Debug
     Fields are in popup  ${field_id_1}  ${field_id_2}  ${field_id_3}
 
 *** Keywords ***
