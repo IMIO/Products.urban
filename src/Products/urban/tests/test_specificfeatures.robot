@@ -86,7 +86,7 @@ Test selected values in edit form are also selected in popup
     ${field_id_3_xpath}  Get field XPath  ${field_id_3}
     Select From List By Value  xpath=${field_id_3_xpath}/select  moderate
     Save changes
-#
+
 # now these values should be selected in the fields of the popup as well
     Edit tab  location
     Scroll browser to field  locationSpecificFeatures
@@ -108,14 +108,14 @@ Test form fields are updated when values are selected in the popup
     Save changes
     Go to CU1
     Edit tab  location
-#
+
 # so far nothing should be selected
     ${xpath_id_1}  Get field XPath  ${field_id_1}
     Checkbox Should Not Be Selected  xpath=${xpath_id_1}/input
     ${xpath_id_3}  Get field XPath  ${field_id_3}
     ${field_3_selection}  Get Selected List Value  xpath=${xpath_id_3}/select
     Should Be Equal  ${field_3_selection}  \
-#
+
 # select values on popup fields and click "Ok"
     Scroll browser to field  locationSpecificFeatures
     Click Link  fieldeditoverlay-${specific_feature}
@@ -126,7 +126,7 @@ Test form fields are updated when values are selected in the popup
     ${popup_id_3_xpath}  Get field overlay XPath  ${field_id_3}
     Select From List By Value  xpath=${popup_id_3_xpath}/select  moderate
     Click button  Ok
-#
+
 # now these values should be selected in the edit form as well
     Checkbox Should Be Selected  xpath=${xpath_id_1}/input
     ${xpath_id_2}  Get field XPath  ${field_id_2}
@@ -142,7 +142,7 @@ Test field hidden in the edit form still appears in the popup
     Configure specificfeature item  ${specific_feature}
     Set related fields  ${field_id_1}  ${field_id_2}  ${field_id_3}
     Save changes
-#
+
 # hide fields from the edit form
     Configure procedure  urbancertificateone
     Hide fields  ${field_id_1}  ${field_id_2}  ${field_id_3}
