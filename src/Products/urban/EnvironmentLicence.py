@@ -28,6 +28,7 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.urban.interfaces import IEnvironmentBase
+from Products.urban.interfaces import ILicenceDeliveryEvent
 from Products.urban.utils import setOptionalAttributes
 
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
@@ -220,6 +221,9 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     security.declarePublic('previouslicencesBaseQuery')
     def previouslicencesBaseQuery(self):
         return {'object_provides': IEnvironmentBase.__identifier__}
+
+    def getLastLicenceDelivery(self):
+        return self._getLastEvent(ILicenceDeliveryEvent)
 
 
 

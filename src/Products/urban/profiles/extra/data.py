@@ -1542,6 +1542,19 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'eventTypeType': 'Products.urban.interfaces.ILicenceExpirationEvent',
         },
+        {
+            'id': "affichage-decision",
+            'title': "Affichage de la décision",
+            'eventDateLabel': "Date d'affichage",
+            'activatedFields': ['transmitDate'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "env1-affiche-decision", 'title': "Affiche"},
+                {'id': "env1-affichage-mission", 'title': "Demande de mission"},
+                {'id': "env1-certificat-decision", 'title': "Certificat d'affichage"},
+            ),
+        },
     ),
     'envclassthree': (
         {
