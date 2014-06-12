@@ -262,6 +262,7 @@ class EventTitleDisplay(TitleDisplay):
         title = self.column.renderTitleLink(self.urbanlist_item)
 
         suffix = self.urbanlist_item.canBeEdited() and '/external_edit' or ''
+
         documents = []
         for doc in event.getDocuments():
             doc_title = doc.Title()
@@ -269,7 +270,16 @@ class EventTitleDisplay(TitleDisplay):
             doc_link = '<br /><a href="%s" class="discreet" style="margin-left:20px">%s</a>' % (doc_link, doc_title)
             documents.append(doc_link)
         documents = ''.join(documents)
-        return '%s%s' % (title, documents)
+
+        annexes = []
+        for annex in event.getAnnexes():
+            annex_title = annex.Title()
+            annex_link = '%s%s' % (annex.absolute_url(), suffix)
+            annex_link = '<br /><a href="%s" class="discreet" style="margin-left:20px">%s</a>' % (annex_link, annex_title)
+            annexes.append(annex_link)
+        annexes = ''.join(annexes)
+
+        return '%s%s%s' % (title, documents, annexes)
 
 
 class DocumentTitleDisplay(TitleDisplay):
