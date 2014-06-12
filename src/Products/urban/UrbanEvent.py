@@ -459,7 +459,13 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         """
           Return the documents (File) of the UrbanEvent
         """
-        return self.listFolderContents(contentFilter={"portal_type" : "UrbanDoc"})
+        return self.listFolderContents(contentFilter={"portal_type": "UrbanDoc"})
+
+    def getAnnexes(self):
+        """
+          Return the annexes (File) of the UrbanEvent
+        """
+        return self.listFolderContents(contentFilter={"portal_type": "File"})
 
     security.declarePublic('RecipientsCadastreCSV')
     def RecipientsCadastreCSV(self):
