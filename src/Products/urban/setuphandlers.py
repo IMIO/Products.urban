@@ -557,6 +557,11 @@ def addGlobalFolders(context):
         templates.setConstrainTypesMode(1)
         templates.setLocallyAllowedTypes(['UrbanDoc', 'Folder'])
         templates.setImmediatelyAddableTypes(['UrbanDoc', 'Folder'])
+    else:
+        templates = getattr(tool, 'globaltemplates')
+        templates.setConstrainTypesMode(1)
+        templates.setLocallyAllowedTypes(['UrbanDoc', 'Folder'])
+        templates.setImmediatelyAddableTypes(['UrbanDoc', 'Folder'])
 
     folder = tool.globaltemplates
     if not hasattr(folder, "urbantemplates"):
