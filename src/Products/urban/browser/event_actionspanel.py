@@ -10,6 +10,5 @@ class EventActionsPanelView(ActionsPanelView):
         # portal_actions.object_buttons action ids to keep
         # if you define some here, only these actions will be kept
         self.ACCEPTABLE_ACTIONS = (
-            'delete',
             'plonemeeting_wsclient_action_1',
         )
