@@ -6,6 +6,7 @@ from Acquisition import aq_base
 from zExceptions import BadRequest
 from re import search
 from re import finditer
+from plone import api
 
 #utilities
 def check_role(self, role='Manager', context=None):
@@ -86,8 +87,9 @@ def createStreet(self, city, zipcode, streetcode, streetname, bestAddresskey=0, 
                             out.append("&nbsp;&nbsp;... existing: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s', state '%s', <a href='%s'>url</a>"%(city, streetname, streetdic['streetCode'], streetdic['bestAddressKey'], streetdic['regionalRoad'], streetdic['startDate'], streetdic['endDate'], streetdic['state'], streetdic['obj'].absolute_url()))
                         elif not regionalroad and streetdic['regionalRoad']:
                             diff_reg_road = True
-                            if streetdic['state'] == 'enabled':
-                                wtool.doActionFor(streetdic['obj'], 'disable')
+                            if api.content.get_state(streetdic['obj']) == 'enabled':
+				api.content.transition(obj=streetdic['obj'], transition='disable')
+                                #wtool.doActionFor(streetdic['obj'], 'disable')
                                 out.append("! Disabled existing record because <> reg road: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s', state '%s', <a href='%s'>url</a>"%(city, streetname, streetdic['streetCode'], streetdic['bestAddressKey'], streetdic['regionalRoad'], streetdic['startDate'], streetdic['endDate'], streetdic['state'], streetdic['obj'].absolute_url()))
                                 out.append("&nbsp;&nbsp;... Current record: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'"%(city, streetname, streetcode, bestAddresskey, regionalroad, startdate, enddate))
                     #if we haven't found a different reg road case, we report an error
