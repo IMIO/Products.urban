@@ -208,7 +208,7 @@ def import_streets_fromdb(self, cityName='', password=''):
     out += ret
 
     #every informations about the db connection are public...
-    connection_string = "dbname='bestaddress' host='villesetcommunes.all2all.org' user='bestaddressreader' password='%s'" % password
+    connection_string = "dbname='bestaddress' host='10.9.200.11' user='bestaddressreader' password='%s'" % password
 #    connection_string = "dbname='bestaddress' host='localhost' user='bestaddressreader' password='%s'" % password
     query_string = "SELECT * from urban_addresses WHERE commune='%s' order by short_entity" % cityName
     results = tool.queryDB(query_string, connection_string)
