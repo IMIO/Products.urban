@@ -20,10 +20,17 @@ class UrbanEventFactory(grok.GlobalUtility):
 
     def __call__(self, licence, event_type, **kwargs):
         portal_urban = api.portal.get_tool('portal_urban')
+        catalog = api.portal.get_tool('portal_catalog')
 
+        #is event_type and UID?
+        if type(event_type) is str:
+            brains = catalog(UID=event_type)
+            event_type = brains and brains[0].getObject() or event_type
+
+        #is event_type and id?
         if type(event_type) is str:
             eventtypes = licence.getUrbanConfig().urbaneventtypes
-            event_type = getattr(eventtypes, event_type, None)
+            event_type = getattr(eventtypes, event_type, event_type)
 
         event_type.checkCreationInLicence(licence)
         eventtype_type = event_type.getEventTypeType()
