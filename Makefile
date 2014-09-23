@@ -12,12 +12,10 @@ extras = src/Products/urban/scripts/config/extras.py.tmpl
 all: test docs
 
 bin/python:
-	virtualenv-2.7 --no-setuptools --no-site-packages .
+	virtualenv-2.7 .
 
 develop-eggs: bin/python bootstrap.py
-	bin/python ez_setup.py
-	bin/easy_install -U "distribute==0.6.49"
-	./bin/python bootstrap.py -v 2.1.0
+	./bin/python bootstrap.py
 
 docs: docs/html/index.html
 
@@ -63,7 +61,7 @@ instance: bin/instance
 	bin/instance fg
 
 cleanall:
-	rm -fr bin develop-eggs downloads eggs parts .installed.cfg
+	rm -fr bin develop-eggs downloads eggs parts .installed.cfg devel
 
 portals: versions.cfg buildout.cfg plonesites.cfg portals.cfg bin/buildout setup.py mount_points.conf
 	./bin/buildout -Nvt 5 -c portals.cfg
