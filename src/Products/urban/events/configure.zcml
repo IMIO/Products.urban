@@ -8,7 +8,7 @@
               handler=".opinionRequestEvents.setDefaultLinkedInquiry" />
 
   <subscriber for="..interfaces.IApplicant
-                   zope.app.container.interfaces.IObjectRemovedEvent"
+                   zope.container.interfaces.IObjectRemovedEvent"
               handler=".applicantEvents.onDelete" />
 
   <subscriber for="..interfaces.IApplicant
@@ -16,7 +16,7 @@
               handler=".applicantEvents.reindexLicenceApplicantInfos" />
 
   <subscriber for="..interfaces.IProprietary
-                   zope.app.container.interfaces.IObjectRemovedEvent"
+                   zope.container.interfaces.IObjectRemovedEvent"
               handler=".applicantEvents.onDelete" />
 
   <subscriber for="..interfaces.IProprietary
@@ -44,7 +44,7 @@
               handler=".inquiryEvents.beforeDelete" />
 
   <subscriber for="..interfaces.IInquiry
-                   zope.app.container.interfaces.IObjectRemovedEvent"
+                   zope.container.interfaces.IObjectRemovedEvent"
               handler=".inquiryEvents.afterDelete" />
 
   <subscriber for="..interfaces.IInquiry
@@ -68,7 +68,7 @@
               handler=".licenceEvents.updateEventsFoldermanager"/>
 
   <subscriber for="..interfaces.IPortionOut
-                   zope.app.container.interfaces.IObjectRemovedEvent"
+                   zope.container.interfaces.IObjectRemovedEvent"
               handler=".portionOutEvents.onDelete" />
 
   <subscriber for="..interfaces.IPortionOut
@@ -92,7 +92,7 @@
               handler=".portionOutEvents.setEnvironmentLicencePreviousLicencesField" />
 
   <subscriber for="..interfaces.IPortionOut
-                   zope.app.container.interfaces.IObjectRemovedEvent"
+                   zope.container.interfaces.IObjectRemovedEvent"
               handler=".portionOutEvents.setEnvironmentLicencePreviousLicencesField" />
 
   <subscriber for="..interfaces.IUrbanEvent
