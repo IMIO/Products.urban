@@ -896,6 +896,7 @@ class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
             #we add an empty vocab value of type "choose a value"
             ('',  translate(_(EMPTY_VOCAB_VALUE), context=self.REQUEST)),
             ('no', translate(_('flooding_level_no'), context=self.REQUEST)),
+            ('very low', translate(_('flooding_level_verylow'), context=self.REQUEST)),
             ('low', translate(_('flooding_level_low'), context=self.REQUEST)),
             ('moderate', translate(_('flooding_level_moderate'), context=self.REQUEST)),
             ('high', translate(_('flooding_level_high'), context=self.REQUEST)),

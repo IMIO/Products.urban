@@ -688,6 +688,9 @@ msgstr ""
 msgid "flooding_level_no"
 msgstr ""
 
+msgid "flooding_level_verylow"
+msgstr ""
+
 msgid "folder_advice"
 msgstr ""
 
