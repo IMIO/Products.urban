@@ -183,7 +183,7 @@ msgid "Map"
 msgstr "Carte"
 
 msgid "MiscDemand"
-msgstr "Demande diverse"
+msgstr "Demandes diverses"
 
 msgid "No related licences"
 msgstr "Aucun dossier lié"
@@ -1991,7 +1991,7 @@ msgstr "Catégorie du dossier RW"
 #. Default: "Foldercategorytownship"
 #: GenericLicence.py
 msgid "urban_label_folderCategoryTownship"
-msgstr "Catégorie du dossier communale"
+msgstr "Catégorie du dossier communal"
 
 msgid "urban_label_folderManager"
 msgstr "Agent(s) traitant(s)"
