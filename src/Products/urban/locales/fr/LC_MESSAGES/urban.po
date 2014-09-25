@@ -689,6 +689,9 @@ msgstr "Risque modéré"
 msgid "flooding_level_no"
 msgstr "Non"
 
+msgid "flooding_level_verylow"
+msgstr "Risque très faible"
+
 msgid "folder_advice"
 msgstr "Avis du dossier"
 
