@@ -17,7 +17,7 @@ from plone import api
 
 from plone.z3cform.z2 import switch_on
 
-from zope.app.pagetemplate.viewpagetemplatefile import ViewPageTemplateFile
+from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 from zope.interface import Interface
 
 grok.templatedir('templates')
