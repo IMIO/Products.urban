@@ -61,6 +61,7 @@ setup(name='Products.urban',
           'imio.actionspanel',
           'plonetheme.imioapps',
           'Sphinx',
+          'plone.namedfile',  # ugly fix because TinyMce needs it but didnt declared it in its setup dependencies
       ],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',
