@@ -38,7 +38,7 @@ class UrbanEventFactory(grok.GlobalUtility):
 
         urban_event_id = licence.invokeFactory(
             portal_type,
-            id=portal_urban.generateUniqueId(portal_type),
+            id=kwargs.pop('id', None) or portal_urban.generateUniqueId(portal_type),
             title=event_type.Title(),
             urbaneventtypes=(event_type,),
             **kwargs
