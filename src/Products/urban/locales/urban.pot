@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-04-01 12:10+0000\n"
+"POT-Creation-Date: 2014-11-20 13:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1565,7 +1565,7 @@ msgstr ""
 msgid "urban_label_additionalPreviousLicences"
 msgstr ""
 
-# 
+#
 #. Default: "Adr1"
 #: RecipientCadastre.py
 msgid "urban_label_adr1"
@@ -2496,6 +2496,11 @@ msgstr ""
 #. Default: "Pcadetails"
 #: GenericLicence.py
 msgid "urban_label_pcaDetails"
+msgstr ""
+
+#. Default: "Pcazone"
+#: GenericLicence.py
+msgid "urban_label_pcaZone"
 msgstr ""
 
 #. Default: "Pebdetails"

@@ -720,6 +720,50 @@ default_values = {
             {'id': "pca3", 'label': u"Plan communal d'aménagement 3", 'number': '3', 'decreeDate': "2001/12/13", 'decreeType': "departmental"},
         ],
 
+        'pcazones': [
+            'UrbanVocabularyTerm',
+            {
+                'id': "zone-de-construction-d-habitation-fermee",
+                'title': u"Zone de construction d'habitation fermée"
+            },
+            {
+                'id': "zone-de-construction-d-habitation-semi-ouverte",
+                'title': u"Zone de construction d'habitation semi ouverte"
+            },
+            {
+                'id': "zone-de-construction-d-habitation-ouverte",
+                'title': u"Zone de construction d'habitation ouverte"
+            },
+            {
+                'id': "zone-de-construction-en-annexe",
+                'title': u"Zone de construction en annexe"
+            },
+            {
+                'id': "zone-de-recul",
+                'title': u"Zone de recul"
+            },
+            {
+                'id': "zone-artisanale",
+                'title': u"Zone artisanale"
+            },
+            {
+                'id': "zone-de-voirie",
+                'title': u"Zone de voirie"
+            },
+            {
+                'id': "zone-affectee-a-l-eau",
+                'title': u"Zone affectée à l'eau"
+            },
+            {
+                'id': "zone-de-construction-a-destination-publique-indifferenciee",
+                'title': u"Zone de construction à destination publique indifférenciée"
+            },
+            {
+                'id': "zone-agricole-indiferenciee",
+                'title': u"Zone agricole indiférenciée"
+            },
+        ],
+
         'pashs': [
             'UrbanVocabularyTerm',
             {'id': "zone-epuration-collective", 'title': u"Zone d'assainissement collectif"},

@@ -67,11 +67,16 @@ slave_fields_pca = (
         'action': 'show',
         'hide_values': (True, ),
     },
+    {
+        'name': 'pcaZone',
+        'action': 'show',
+        'hide_values': (True, ),
+    },
 )
 
 optional_fields = [
     'subdivisionDetails', 'missingParts', 'missingPartsDetails', 'folderZoneDetails', 'folderZone',
-    'isInPCA', 'roadType', 'roadCoating', 'roadEquipments',
+    'isInPCA', 'roadType', 'roadCoating', 'roadEquipments', 'pcaZone',
     'isInSubdivision', 'solicitLocationOpinionsTo', 'technicalRemarks', 'locationTechnicalRemarks',
     'folderCategoryTownship', 'protectedBuilding', 'protectedBuildingDetails', 'folderCategory',
     'pash', 'pashDetails', 'catchmentArea', 'catchmentAreaDetails', 'equipmentAndRoadRequirements',
@@ -444,6 +449,19 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_location',
         default_output_type='text/html',
+    ),
+    LinesField(
+        name='pcaZone',
+        widget=MultiSelectionWidget(
+            size=10,
+            label='Pcazone',
+            label_msgid='urban_label_pcaZone',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=True,
+        vocabulary=UrbanVocabulary('pcazones', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     BooleanField(
         name='isInSubdivision',
