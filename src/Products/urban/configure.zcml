@@ -20,7 +20,8 @@
   <include package="collective.datagridcolumns"/>
   <include package="plone.app.referenceintegrity"/>
   <include package="plone.z3ctable"/>
-  <include package="collective.iconifieddocumentactions"/>
+  <!--include package="collective.iconifieddocumentactions"/-->
+  <include package="communesplone.iconified_document_actions"/>
   <include package="Products.CMFPlacefulWorkflow"/>
   <include package="collective.js.jqueryui"/>
   <include package="plonetheme.imioapps"/>
