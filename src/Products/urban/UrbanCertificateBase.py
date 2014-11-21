@@ -390,24 +390,6 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
                     res.append("<p>%s</p>" % "<br />".join(csf['feature']))
         return res
 
-    security.declarePublic('getProprietaries')
-    def getProprietaries(self):
-        """
-           Return the list of proprietaries for the certificate
-        """
-        res = []
-        for obj in self.objectValues('Contact'):
-            if obj.portal_type == 'Proprietary':
-                res.append(obj)
-        return res
-
-    security.declarePublic('getApplicants')
-    def getApplicants(self):
-        """
-           Return the list of proprietaries for the certificate
-        """
-        return self.getProprietaries()
-
     security.declarePublic('getBuildlicencesOfTheParcels')
     def getBuildlicencesOfTheParcels(self):
         limit_date = DateTime('1977/01/01')

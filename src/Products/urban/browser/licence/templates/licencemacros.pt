@@ -66,7 +66,7 @@
         <p tal:condition="not: applicants" i18n:translate="warning_add_an_applicant">
             You must encode applicant(s)
         </p>
-        <tal:listing content="structure view/renderContactListing" />
+        <tal:listing content="structure view/renderApplicantListing" />
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Applicant');
                          member context/@@plone_portal_state/member;"
               tal:condition="python: member.has_permission('urban: Add Contact', context)"
@@ -87,7 +87,7 @@
             You must encode proprietary(ies)
         </p>
         <div>
-            <tal:listing content="structure view/renderContactListing" />
+            <tal:listing content="structure view/renderProprietaryListing" />
         </div>
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Proprietary');
                           member context/@@plone_portal_state/member;"

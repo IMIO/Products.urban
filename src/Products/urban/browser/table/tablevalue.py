@@ -148,21 +148,20 @@ class ValuesForUrbanListing(ValuesMixin):
         return self.context
 
 
-class ValuesForContactListing(ValuesForUrbanListing):
+class ValuesForApplicantListing(ValuesForUrbanListing):
     """  return contact values from the context """
 
     def getItems(self):
-        context = self.context
-        catalog = getToolByName(context, 'portal_catalog')
-        query_string = {
-            'meta_type': 'Contact',
-            'path': {
-                'query': '/'.join(context.getPhysicalPath()),
-                'depth': 1,
-            },
-        }
-        contact_brains = catalog(query_string)
-        return contact_brains
+        applicants = self.context.getApplicants()
+        return applicants
+
+
+class ValuesForProprietariesListing(ValuesForUrbanListing):
+    """  return contact values from the context """
+
+    def getItems(self):
+        proprietaries = self.context.getProprietaries()
+        return proprietaries
 
 
 class ValuesForParcellingListing(ValuesForUrbanListing):

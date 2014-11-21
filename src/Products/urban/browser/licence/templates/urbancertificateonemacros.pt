@@ -8,6 +8,7 @@
 
             <metal:proprietaries fill-slot="applicant_slot">
                 <metal:proprietaries_macro use-macro="here/@@licencemacros/urbanProprietariesMacro" />
+                <metal:applicants_macro use-macro="here/@@licencemacros/urbanApplicantsMacro" />
             </metal:proprietaries>
 
             <metal:representatives fill-slot="representatives">

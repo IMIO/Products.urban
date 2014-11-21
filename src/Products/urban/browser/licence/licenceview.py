@@ -5,7 +5,10 @@ from Acquisition import aq_inner
 from Products.Five import BrowserView
 
 from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
-from Products.urban.browser.table.urbantable import ContactTable, ParcelsTable, EventsTable
+from Products.urban.browser.table.urbantable import ApplicantTable
+from Products.urban.browser.table.urbantable import EventsTable
+from Products.urban.browser.table.urbantable import ParcelsTable
+from Products.urban.browser.table.urbantable import ProprietaryTable
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanEvent
 
@@ -69,10 +72,16 @@ class LicenceView(BrowserView):
         table.update()
         return table.render()
 
-    def renderContactListing(self):
+    def renderApplicantListing(self):
         if not self.context.getApplicants():
             return ''
-        contacttable = ContactTable(self.context, self.request)
+        contacttable = ApplicantTable(self.context, self.request)
+        return self.renderListing(contacttable)
+
+    def renderProprietaryListing(self):
+        if not self.context.getProprietaries():
+            return ''
+        contacttable = ProprietaryTable(self.context, self.request)
         return self.renderListing(contacttable)
 
     def renderParcelsListing(self):

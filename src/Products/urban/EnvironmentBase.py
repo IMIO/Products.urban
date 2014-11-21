@@ -293,17 +293,6 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         except AttributeError:
             return None
 
-    security.declarePublic('getProprietaries')
-    def getProprietaries(self):
-        """
-           Return the list of proprietaries for the certificate
-        """
-        res = []
-        for obj in self.objectValues('Contact'):
-            if obj.portal_type == 'Proprietary':
-                res.append(obj)
-        return res
-
     def getRubricsConfigPath(self):
         portal_urban = getToolByName(self, 'portal_urban')
         return '/'.join(portal_urban.envclassthree.rubrics.getPhysicalPath())[1:]

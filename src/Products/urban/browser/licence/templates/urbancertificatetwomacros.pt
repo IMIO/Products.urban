@@ -12,6 +12,7 @@
 
             <metal:representatives fill-slot="representatives">
                 <metal:representatives_macro use-macro="here/@@licencemacros/urbanNotariesMacro" />
+                <metal:applicants_macro use-macro="here/@@licencemacros/urbanApplicantsMacro" />
             </metal:representatives>
 
             <fieldset metal:fill-slot="custom_left_fieldset"><legend i18n:translate="legend_specific_features">Specific features</legend>

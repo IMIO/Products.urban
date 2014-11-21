@@ -122,26 +122,6 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastTheLicence(self):
         return self._getLastEvent(interfaces.ITheLicenceEvent)
 
-    security.declarePublic('getProprietaries')
-    def getProprietaries(self):
-        """
-           Return the list of proprietaries for the Division
-        """
-        res = []
-        for obj in self.objectValues('Contact'):
-            if obj.portal_type == 'Proprietary':
-                res.append(obj)
-        return res
-
-    security.declarePublic('getApplicants')
-    def getApplicants(self):
-        """
-          This method is only overrided to be used for the applicantInfosIndex
-          of indexes.UrbanIndexes
-        """
-        return self.getProprietaries()
-
-
 
 registerType(Division, PROJECTNAME)
 # end of class Division

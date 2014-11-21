@@ -43,13 +43,17 @@ class UrbanBase(object):
     def getApplicants(self):
         """
            Return the list of applicants for the Licence
-           XXX This method is overrided in Division.py
         """
-        res = []
-        for obj in self.objectValues('Contact'):
-            if obj.portal_type == 'Applicant':
-                res.append(obj)
-        return res
+        applicants = [app for app in self.objectValues('Contact') if app.portal_type == 'Applicant']
+        return applicants
+
+    security.declarePublic('getProprietaries')
+    def getProprietaries(self):
+        """
+           Return the list of proprietaries for the Licence
+        """
+        proprietaries = [pro for pro in self.objectValues('Contact') if pro.portal_type == 'Proprietary']
+        return proprietaries
 
     security.declarePublic('getApplicantsSignaletic')
     def getApplicantsSignaletic(self, withaddress=False):

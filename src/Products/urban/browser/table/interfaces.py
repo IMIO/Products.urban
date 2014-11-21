@@ -54,6 +54,7 @@ class ILicenceListingTable(IUrbanTable):
     Marker interface for a specific licence display table
     """
 
+
 class IAllLicencesListingTable(IUrbanTable):
     """
     Marker interface for a all licences display table
@@ -69,6 +70,18 @@ class IParcellingsTable(IUrbanTable):
 class IContactTable(IUrbanTable):
     """
     Marker interface for a table displaying contacts
+    """
+
+
+class IApplicantTable(IContactTable):
+    """
+    Marker interface for a table displaying applicants
+    """
+
+
+class IProprietaryTable(IContactTable):
+    """
+    Marker interface for a table displaying proprietaries
     """
 
 

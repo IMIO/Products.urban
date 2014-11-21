@@ -8,6 +8,8 @@ from Products.ZCatalog.Lazy import LazyMap
 
 from Products.urban.browser.table.interfaces import ILicenceListingTable, \
     IContactTable, \
+    IApplicantTable, \
+    IProprietaryTable, \
     IParcelsTable, \
     IEventsTable, \
     IDocumentsTable, \
@@ -95,6 +97,22 @@ class ContactTable(UrbanTable):
     """
     """
     implements(IContactTable)
+
+    cssClasses = {'table': 'listing largetable'}
+
+
+class ApplicantTable(ContactTable):
+    """
+    """
+    implements(IApplicantTable)
+
+    cssClasses = {'table': 'listing largetable'}
+
+
+class ProprietaryTable(ContactTable):
+    """
+    """
+    implements(IProprietaryTable)
 
     cssClasses = {'table': 'listing largetable'}
 

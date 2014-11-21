@@ -17,6 +17,7 @@
    <element value="PortionOut"/>
    <element value="UrbanEvent"/>
    <element value="WorkLocation"/>
+   <element value="Applicant"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">urbancertificateoneview</property>
