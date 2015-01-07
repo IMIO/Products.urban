@@ -2,7 +2,7 @@
 #
 # File: OrganisationTerm.py
 #
-# Copyright (c) 2014 by CommunesPlone
+# Copyright (c) 2015 by CommunesPlone
 # Generator: ArchGenXML Version 2.7
 #            http://plone.org/products/archgenxml
 #

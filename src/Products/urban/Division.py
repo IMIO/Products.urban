@@ -2,7 +2,7 @@
 #
 # File: Division.py
 #
-# Copyright (c) 2014 by CommunesPlone
+# Copyright (c) 2015 by CommunesPlone
 # Generator: ArchGenXML Version 2.7
 #            http://plone.org/products/archgenxml
 #
@@ -121,6 +121,7 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     def getLastTheLicence(self):
         return self._getLastEvent(interfaces.ITheLicenceEvent)
+
 
 
 registerType(Division, PROJECTNAME)
