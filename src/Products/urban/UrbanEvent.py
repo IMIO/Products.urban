@@ -441,20 +441,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         #return the generated JS code
         return self.portal_urban.generateMapJS(self, cqlquery, cqlquery2,'', zoneExtent)
 
-    def getInvestigationLetterFile(self):
-        """
-          Return the recipients of the UrbanEvent
-        """
-        portal_url=getToolByName(self,'portal_url')
-        docpath=portal_url.getPortalPath()+'/'+'/'.join(portal_url.getRelativeContentPath(self))
-        brain=self.portal_catalog(path=docpath+'/',Title='Lettre')
-        try:
-            print docpath+'/'+'\n'
-            print brain[0].getObject().Title()
-            return brain[0].getObject()
-        except:
-            return None
-
     def getDocuments(self):
         """
           Return the documents (File) of the UrbanEvent
@@ -532,18 +518,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             tool = getToolByName(self, 'portal_urban')
             res = getattr(tool.decisions, res)
         return res
-
-    security.declarePublic('getRenderedText')
-    def getRenderedText(self, fieldname=''):
-        """
-          Returns the decision value or the UrbanVocabularyTerm if theObject=True
-        """
-        tool = getToolByName(self, 'portal_urban')
-        field = self.getField(fieldname)
-        accessorname = field.accessor
-        text = getattr(self, accessorname)()
-        return tool.renderText(text=text, context=self)
-
 
 
 registerType(UrbanEvent, PROJECTNAME)
