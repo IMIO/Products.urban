@@ -1,10 +1,10 @@
 # archgenxml generated POT File
-# Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>, 2014.
+# Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Thu Nov 20 11:51:09 2014\n"
-"PO-Revision-Date: Thu Nov 20 11:51:09 2014\n"
+"POT-Creation-Date: Wed Jan  7 12:01:51 2015\n"
+"PO-Revision-Date: Wed Jan  7 12:01:51 2015\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -1104,6 +1104,16 @@ msgstr ""
 #. Default: "Requirementfromfd"
 #: BuildLicence.py
 msgid "urban_label_requirementFromFD"
+msgstr ""
+
+#. Default: "Rgbsr"
+#: GenericLicence.py
+msgid "urban_label_rgbsr"
+msgstr ""
+
+#. Default: "Rgbsrdetails"
+#: GenericLicence.py
+msgid "urban_label_rgbsrDetails"
 msgstr ""
 
 #. Default: "Roadadaptation"

@@ -2,7 +2,7 @@
 #
 # File: GenericLicence.py
 #
-# Copyright (c) 2014 by CommunesPlone
+# Copyright (c) 2015 by CommunesPlone
 # Generator: ArchGenXML Version 2.7
 #            http://plone.org/products/archgenxml
 #
@@ -649,6 +649,30 @@ schema = Schema((
         widget=TextAreaWidget(
             label='Prevudetails',
             label_msgid='urban_label_prevuDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
+    ),
+    StringField(
+        name='rgbsr',
+        widget=SelectionWidget(
+            label='Rgbsr',
+            label_msgid='urban_label_rgbsr',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        vocabulary=UrbanVocabulary('rgbsr', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='rgbsrDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Rgbsrdetails',
+            label_msgid='urban_label_rgbsrDetails',
             i18n_domain='urban',
         ),
         default_content_type='text/plain',
