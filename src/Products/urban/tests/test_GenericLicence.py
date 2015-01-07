@@ -562,7 +562,7 @@ class TestGenericLicenceFields(unittest.TestCase):
             msg = "field 'folderCategoryTownship' not visible on {}".format(licence.getPortalTypeName())
             self.browser.open(licence.absolute_url())
             contents = self.browser.contents
-            self.assertTrue("<span>Catégorie du dossier communale</span>:" in contents, msg)
+            self.assertTrue("<span>Catégorie du dossier communal</span>:" in contents, msg)
 
     def test_has_attribute_areParcelsVerified(self):
         field_name = 'areParcelsVerified'
