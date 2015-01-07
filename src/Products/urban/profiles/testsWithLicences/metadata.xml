@@ -3,5 +3,6 @@
   <version>1</version>
     <dependencies>
       <dependency>profile-Products.urban:tests</dependency>
+      <dependency>profile-Products.urban:testsWithConfig</dependency>
    </dependencies>
 </metadata>
