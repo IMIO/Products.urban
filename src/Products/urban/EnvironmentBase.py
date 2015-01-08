@@ -255,8 +255,9 @@ for field in EnvironmentBase_schema.filterFields(isMetadata=False):
     if field.schemata == 'urban_investigation_and_advices' and field.getName() != 'solicitOpinionsTo':
         field.widget.visible = False
 
-# change translation of field referenceDGATLP to "reference DGO3"
+# change translation of some fields
 EnvironmentBase_schema['referenceDGATLP'].widget.label_msgid = 'urban_label_referenceDGO3'
+EnvironmentBase_schema['workLocations'].widget.label_msgid = 'urban_label_situation'
 
 ##/code-section after-schema
 

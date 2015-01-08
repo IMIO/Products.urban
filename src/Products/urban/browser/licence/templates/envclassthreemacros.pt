@@ -7,7 +7,7 @@
             <metal:worklocations fill-slot="worklocations">
 
                 <fieldset tal:define="workLocations context/getWorkLocations">
-                    <legend i18n:translate="urban_label_businessLocation">Business location</legend>
+                    <legend i18n:translate="urban_label_situation">Situation</legend>
                     <div tal:condition="workLocations">
                         <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" />
                     </div>

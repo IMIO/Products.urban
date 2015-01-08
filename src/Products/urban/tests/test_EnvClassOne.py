@@ -141,152 +141,117 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.assertTrue('Métadonnées' not in contents)
         self.assertTrue('Données' not in contents)
 
+    def _is_field_visible(self, expected_fieldname):
+        self.browser.open(self.licence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue(expected_fieldname in contents)
+
+    def _is_field_visible_in_edit(self, expected_fieldname):
+        edit_url = '{}/edit'.format(self.licence.absolute_url())
+        self.browser.open(edit_url)
+        contents = self.browser.contents
+        self.assertTrue(expected_fieldname in contents)
+
     def test_envclassone_has_attribute_areaDescriptionText(self):
         self.assertTrue(self.licence.getField('areaDescriptionText'))
 
     def test_envclassone_areaDescription_is_visible(self):
-        self.browser.open(self.licence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("Description des lieux et des abords du projet" in contents)
+        self._is_field_visible("Description des lieux et des abords du projet")
 
     def test_envclassone_areaDescription_is_visible_in_edit(self):
-        edit_url = '{}/edit'.format(self.licence.absolute_url())
-        self.browser.open(edit_url)
-        contents = self.browser.contents
-        self.assertTrue("Description des lieux et des abords du projet" in contents)
+        self._is_field_visible_in_edit("Description des lieux et des abords du projet")
 
     def test_envclassone_has_attribute_hasConfidentialData(self):
         self.assertTrue(self.licence.getField('hasConfidentialData'))
 
     def test_envclassone_hasConfidentialData_is_visible(self):
-        self.browser.open(self.licence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("La demande contient des données confidentielles" in contents)
+        self._is_field_visible("La demande contient des données confidentielles")
 
     def test_envclassone_has_attribute_isTemporaryProject(self):
         self.assertTrue(self.licence.getField('isTemporaryProject'))
 
     def test_envclassone_isTemporaryProject_is_visible(self):
-        self.browser.open(self.licence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("Le projet est temporaire" in contents)
+        self._is_field_visible("Le projet est temporaire")
 
     def test_envclassone_isTemporaryProject_is_visible_in_edit(self):
-        edit_url = '{}/edit'.format(self.licence.absolute_url())
-        self.browser.open(edit_url)
-        contents = self.browser.contents
-        self.assertTrue("Le projet est temporaire" in contents)
+        self._is_field_visible_in_edit("Le projet est temporaire")
 
     def test_envclassone_has_attribute_isEssayProject(self):
         self.assertTrue(self.licence.getField('isEssayProject'))
 
-    def test_envclassone_isEssayProject_is_visible(self):
-        self.browser.open(self.licence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("isEssayProject" in contents)
-
     def test_envclassone_isEssayProject_is_translated(self):
-        self.browser.open(self.licence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("Le projet est d'essai" in contents)
+        self._is_field_visible("Le projet est d'essai")
 
     def test_envclassone_isEssayProject_is_visible_in_edit(self):
-        edit_url = '{}/edit'.format(self.licence.absolute_url())
-        self.browser.open(edit_url)
-        contents = self.browser.contents
-        self.assertTrue("isEssayProject" in contents)
+        self._is_field_visible_in_edit("Le projet est d'essai")
 
     def test_envclassone_has_attribute_isMobileProject(self):
         self.assertTrue(self.licence.getField('isMobileProject'))
 
     def test_envclassone_isMobileProject_is_visible(self):
-        self.browser.open(self.licence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("Le projet est mobile" in contents)
+        self._is_field_visible("Le projet est mobile")
 
     def test_envclassone_isMobileProject_is_visible_in_edit(self):
-        edit_url = '{}/edit'.format(self.licence.absolute_url())
-        self.browser.open(edit_url)
-        contents = self.browser.contents
-        self.assertTrue("Le projet est mobile" in contents)
+        self._is_field_visible_in_edit("Le projet est mobile")
 
     def test_envclassone_has_attribute_hasEnvironmentImpactStudy(self):
         self.assertTrue(self.licence.getField('hasEnvironmentImpactStudy'))
 
     def test_envclassone_hasEnvironmentImpactStudy_is_visible(self):
-        self.browser.open(self.licence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("Étude d'incidences sur l'environnement" in contents)
+        self._is_field_visible("Étude d'incidences sur l'environnement")
 
     def test_envclassone_hasEnvironmentImpactStudy_is_visible_in_edit(self):
-        edit_url = '{}/edit'.format(self.licence.absolute_url())
-        self.browser.open(edit_url)
-        contents = self.browser.contents
-        self.assertTrue("Étude d'incidences sur l'environnement" in contents)
+        self._is_field_visible_in_edit("Étude d'incidences sur l'environnement")
 
     def test_envclassone_has_attribute_isSeveso(self):
         self.assertTrue(self.licence.getField('isSeveso'))
 
     def test_envclassone_isSeveso_is_visible(self):
-        self.browser.open(self.licence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("Établissement SEVESO" in contents)
+        self._is_field_visible("Établissement SEVESO")
 
     def test_envclassone_isSeveso_is_visible_in_edit(self):
-        edit_url = '{}/edit'.format(self.licence.absolute_url())
-        self.browser.open(edit_url)
-        contents = self.browser.contents
-        self.assertTrue("Établissement SEVESO" in contents)
+        self._is_field_visible_in_edit("Établissement SEVESO")
 
     def test_envclassone_has_attribute_publicRoadModifications(self):
         self.assertTrue(self.licence.getField('publicRoadModifications'))
 
     def test_envclassone_publicRoadModifications_is_visible(self):
-        self.browser.open(self.licence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("Modifications souhaitées au tracé et à l'équipement des voiries publiques" in contents)
+        self._is_field_visible("Modifications souhaitées au tracé et à l'équipement des voiries publiques")
 
     def test_envclassone_publicRoadModifications_is_visible_in_edit(self):
-        edit_url = '{}/edit'.format(self.licence.absolute_url())
-        self.browser.open(edit_url)
-        contents = self.browser.contents
-        self.assertTrue("Modifications souhaitées au tracé et à l'équipement des voiries publiques" in contents)
+        self._is_field_visible_in_edit("Modifications souhaitées au tracé et à l'équipement des voiries publiques")
 
     def test_envclassone_has_attribute_previousLicences(self):
         self.assertTrue(self.licence.getField('previousLicences'))
 
     def test_envclassone_previousLicences_is_visible(self):
-        self.browser.open(self.licence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("Permissions, enregistrements et déclarations existantes" in contents)
+        self._is_field_visible("Permissions, enregistrements et déclarations existantes")
 
     def test_envclassone_previousLicences_is_visible_in_edit(self):
-        edit_url = '{}/edit'.format(self.licence.absolute_url())
-        self.browser.open(edit_url)
-        contents = self.browser.contents
-        self.assertTrue("Permissions, enregistrements et déclarations existantes" in contents)
+        self._is_field_visible_in_edit("Permissions, enregistrements et déclarations existantes")
 
     def test_envclassone_has_attribute_validityDelay(self):
         self.assertTrue(self.licence.getField('validityDelay'))
 
     def test_envclassone_validityDelay_is_visible_in_edit(self):
-        edit_url = '{}/edit'.format(self.licence.absolute_url())
-        self.browser.open(edit_url)
-        contents = self.browser.contents
-        self.assertTrue("Durée de validité du permis" in contents)
+        self._is_field_visible_in_edit("Durée de validité du permis")
 
     def test_envclassone_validityDelay_is_visible(self):
-        self.browser.open(self.licence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("Durée de validité du permis" in contents)
+        self._is_field_visible("Durée de validité du permis")
 
     def test_envclassone_referenceDGATLP_translation(self):
         """
         Field referenceDGATLP should be translated as 'reference DGO3'
         """
-        self.browser.open(self.licence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("Référence DGO3" in contents)
+        self._is_field_visible("Référence DGO3")
+        self._is_field_visible_in_edit("Référence DGO3")
+
+    def test_envclassone_workLocation_translation(self):
+        """
+        Field referenceDGATLP should be translated as 'reference DGO3'
+        """
+        self._is_field_visible("Situation")
+        self._is_field_visible_in_edit("Situation")
 
 
 class TestEnvClassOneEvents(unittest.TestCase):

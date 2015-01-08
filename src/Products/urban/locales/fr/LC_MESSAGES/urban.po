@@ -2792,6 +2792,9 @@ msgstr "Existence de servitudes et autres droits"
 msgid "urban_label_showTitle"
 msgstr "Edition du titre"
 
+msgid "urban_label_situation"
+msgstr "Situation"
+
 #. Default: "Society"
 #: Contact.py
 msgid "urban_label_society"

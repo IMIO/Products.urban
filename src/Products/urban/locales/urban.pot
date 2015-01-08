@@ -2789,6 +2789,9 @@ msgstr ""
 msgid "urban_label_showTitle"
 msgstr ""
 
+msgid "urban_label_situation"
+msgstr ""
+
 #. Default: "Society"
 #: Contact.py
 msgid "urban_label_society"
