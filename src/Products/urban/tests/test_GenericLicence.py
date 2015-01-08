@@ -76,7 +76,11 @@ class TestGenericLicenceFields(unittest.TestCase):
             msg = "field 'referenceDGATLP' not visible on {}".format(licence.getPortalTypeName())
             self.browser.open(licence.absolute_url())
             contents = self.browser.contents
-            self.assertTrue("<span>Référence DGO4</span>:" in contents, msg)
+            reference_is_visible = \
+                "<span>Référence DGO4</span>:" in contents \
+                or \
+                "<span>Référence DGO3</span>:" in contents
+            self.assertTrue(reference_is_visible, msg)
 
     def test_has_attribute_workLocations(self):
         field_name = 'workLocations'
@@ -92,7 +96,7 @@ class TestGenericLicenceFields(unittest.TestCase):
             worklocation_is_visible = \
                 "Adresse(s) des travaux" in contents \
                 or \
-                "Adresse de l'exploitation" in contents
+                "Situation" in contents
 
             self.assertTrue(worklocation_is_visible, msg)
 

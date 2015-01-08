@@ -239,6 +239,15 @@ class TestEnvClassOneInstance(unittest.TestCase):
     def test_envclassone_validityDelay_is_visible(self):
         self._is_field_visible("Durée de validité du permis")
 
+    def test_envclassone_has_attribute_authority(self):
+        self.assertTrue(self.licence.getField('authority'))
+
+    def test_envclassone_authority_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("Autorité compétente")
+
+    def test_envclassone_authority_is_visible(self):
+        self._is_field_visible("Autorité compétente")
+
     def test_envclassone_referenceDGATLP_translation(self):
         """
         Field referenceDGATLP should be translated as 'reference DGO3'
