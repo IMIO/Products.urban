@@ -2646,6 +2646,9 @@ msgstr "Référence"
 msgid "urban_label_referenceDGATLP"
 msgstr "Référence DGO4"
 
+msgid "urban_label_referenceDGO3"
+msgstr "Référence DGO3"
+
 #. Default: "Referencetalexpression"
 #: LicenceConfig.py
 msgid "urban_label_referenceTALExpression"

@@ -1,10 +1,11 @@
 <metal:field_display define-macro="field_display">
     <tr tal:define="fieldname field/getName;
+                    field_label field/widget/label_msgid;
                     nullvalue python: field.get(context) == '' or field.get(context) == ();
                     simpletext python: field.type == 'text' and getattr(field, 'default_content_type', '') == 'text/plain'">
 
         <tal:normal_field condition="python: fieldname not in custom">
-            <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
+            <td valign="top"><b><span tal:content="field_label" i18n:translate=""></span>:</b></td>
             <td width="10px"></td>
             <td valign="top" tal:condition="not: simpletext">
                 <tal:non_null_value condition="not: nullvalue">

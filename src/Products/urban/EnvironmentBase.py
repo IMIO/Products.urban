@@ -29,8 +29,6 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
-from Products.DataGridField.Column import Column
-from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
@@ -256,6 +254,10 @@ setSchemataForInquiry(EnvironmentBase_schema)
 for field in EnvironmentBase_schema.filterFields(isMetadata=False):
     if field.schemata == 'urban_investigation_and_advices' and field.getName() != 'solicitOpinionsTo':
         field.widget.visible = False
+
+# change translation of field referenceDGATLP to "reference DGO3"
+EnvironmentBase_schema['referenceDGATLP'].widget.label_msgid = 'urban_label_referenceDGO3'
+
 ##/code-section after-schema
 
 class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
@@ -323,7 +325,6 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
          Return all the integral & sectorial conditions,
         """
         return self._getConditions(restrict=['CI & CS'])
-
 
 
 registerType(EnvironmentBase, PROJECTNAME)
