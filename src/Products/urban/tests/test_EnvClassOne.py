@@ -280,6 +280,14 @@ class TestEnvClassOneInstance(unittest.TestCase):
         contents = self.browser.contents
         self.assertTrue("Durée de validité du permis" in contents)
 
+    def test_envclassone_referenceDGATLP_translation(self):
+        """
+        Field referenceDGATLP should be translated as 'reference DGO3'
+        """
+        self.browser.open(self.licence.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("Référence DGO3" in contents)
+
 
 class TestEnvClassOneEvents(unittest.TestCase):
 
