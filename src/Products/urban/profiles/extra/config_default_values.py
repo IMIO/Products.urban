@@ -268,6 +268,12 @@ default_values = {
             'UrbanVocabularyTerm', ['NotaryLetter', 'MiscDemand', 'Division', 'Declaration'],
         ],
 
+        'authority': [
+            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo'],
+            {'id': "college", 'title': u"Collège"},
+            {'id': "ft", 'title': u"Fonctionnaire technique"},
+        ],
+
         'inadmissibilityreasons': [
             'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'EnvClassThree'],
             {'id': "missing_parts", 'title': u"Pièces/renseignements manquants"},
@@ -871,6 +877,18 @@ default_values = {
             {'id': "xxx", 'title': u"Rénovation urbaine de XXX"},
             {'id': "yyy", 'title': u"Rénovation urbaine de YYY"},
             {'id': "zzz", 'title': u"Rénovation urbaine de ZZZ"},
+        ],
+
+        'rgbsr': [
+            'UrbanVocabularyTerm',
+            {'id': "limoneux-brabancon", 'title': u"du Plateau Limoneux Brabançon (art. 322-15 (lire « article 420 »));"},
+            {'id': "limoneux-hennuyer", 'title': u"du Plateau Limoneux Hennuyer (art. 322-15 (lire « article 420 »));"},
+            {'id': "hesbaye", 'title': u"de la Hesbaye (art. 322-17 (lire « article 422 »));"},
+            {'id': "herve", 'title': u"du Pays de Herve (art. 322-18 (lire « article 423 »));"},
+            {'id': "condroz", 'title': u"du Condroz (art. 322,-19 (lire « article 424 »));"},
+            {'id': "famenne", 'title': u"de la Fagne-Famenne (art. 322-2 (lire « article 425 »));"},
+            {'id': "ardenne", 'title': u"de l’Ardenne (art. 322-21 (lire « article 426 »));"},
+            {'id': "lorraine", 'title': u"de la Lorraine (art. 322-22 (lire « article 427 »));"},
         ],
 
         'airportnoisezone': [

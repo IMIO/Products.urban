@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2015-01-07 13:14+0000\n"
+"POT-Creation-Date: 2015-01-08 14:02+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1656,6 +1656,11 @@ msgstr "Article"
 #: UrbanEvent.py
 msgid "urban_label_auditionDate"
 msgstr "Date de la séance d'audition"
+
+#. Default: "Authority"
+#: EnvironmentLicence.py
+msgid "urban_label_authority"
+msgstr "Autorité compétente"
 
 #. Default: "Authorizationdate"
 #: ParcellingTerm.py

@@ -30,6 +30,7 @@ from Products.urban.config import *
 from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.interfaces import ILicenceDeliveryEvent
 from Products.urban.utils import setOptionalAttributes
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 
@@ -41,6 +42,17 @@ optional_fields =['areaDescriptionText', 'hasConfidentialData', 'isTemporaryProj
 
 schema = Schema((
 
+    StringField(
+        name='authority',
+        widget=SelectionWidget(
+            label='Authority',
+            label_msgid='urban_label_authority',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        vocabulary=UrbanVocabulary('authority', inUrbanConfig=True),
+        default_method='getDefaultValue',
+    ),
     ReferenceField(
         name='previousLicences',
         widget=ReferenceBrowserWidget(
@@ -235,6 +247,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
        Finalizes the type schema to alter some fields
     """
+    schema.moveField('authority', after='referenceDGATLP')
     schema.moveField('areaDescriptionText', after='missingPartsDetails')
     schema.moveField('natura2000', after='isSeveso')
     schema.moveField('natura2000Details', after='natura2000')

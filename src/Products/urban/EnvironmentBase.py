@@ -328,6 +328,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         return self._getConditions(restrict=['CI & CS'])
 
 
+
 registerType(EnvironmentBase, PROJECTNAME)
 # end of class EnvironmentBase
 
