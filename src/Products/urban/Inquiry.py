@@ -32,6 +32,7 @@ from Products.urban.utils import setOptionalAttributes
 optional_fields = [
     'derogationDetails', 'investigationDetails', 'investigationReasons',
     'investigationArticlesText', 'investigationArticles', 'demandDisplay',
+    'derogation', 'derogationDetails'
 ]
 ##/code-section module-header
 

@@ -70,6 +70,7 @@ ADD_CONTENT_PERMISSIONS = {
     'SpecificFeatureTerm': 'urban: Add SpecificFeatureTerm',
     'OpinionRequestEventType': 'urban: Add OpinionRequestEventType',
     'EnvironmentLicence': 'urban: Add EnvironmentLicence',
+    'EnvClassThree': 'urban: Add EnvClassThree',
 }
 
 setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
@@ -107,6 +108,7 @@ setDefaultRoles('urban: Add EnvironmentRubricTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add SpecificFeatureTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add OpinionRequestEventType', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvironmentLicence', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add EnvClassThree', ("Manager", "Contributor"))
 
 product_globals = globals()
 

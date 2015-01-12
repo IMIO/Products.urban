@@ -128,6 +128,7 @@ def initialize(context):
     import SpecificFeatureTerm
     import OpinionRequestEventType
     import EnvironmentLicence
+    import EnvClassThree
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

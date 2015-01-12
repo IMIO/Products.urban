@@ -170,8 +170,7 @@
 
 
 <metal:previous_licences define-macro="previousLicences">
-    <tal:vars define="previousLicences context/getPreviousLicences;
-                      additionalPreviousLicences context/getAdditionalPreviousLicences">
+    <tal:vars define="previousLicences context/getPreviousLicences">
         <td valign="top">
             <b>
                  <span i18n:translate="urban_label_previousLicences">
@@ -181,20 +180,15 @@
         </td>
         <td width="10px"></td>
         <td valign="top"
-            tal:condition="python: previousLicences or additionalPreviousLicences">
+            tal:condition="python: previousLicences">
             <ul>
                 <tal:licence repeat="licence previousLicences">
                     <li>
                     <a tal:attributes="href licence/absolute_url" tal:content="licence/Title"></a>
                 </tal:licence>
-                <hr tal:condition="additionalPreviousLicences">
-                <tal:licence repeat="licence additionalPreviousLicences">
-                    <li>
-                    <a tal:attributes="href licence/absolute_url" tal:content="licence/Title"></a>
-                </tal:licence>
             </ul>
         </td>
-        <td tal:condition="python: not previousLicences and not additionalPreviousLicences" >
+        <td tal:condition="python: not previousLicences" >
             <span class="discreet" i18n:translate="content_none">None</span>
         </td>
     </tal:vars>

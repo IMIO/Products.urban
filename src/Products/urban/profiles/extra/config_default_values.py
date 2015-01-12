@@ -289,6 +289,7 @@ default_values = {
             {'id': "restart_old_business", 'title': u"Remise en activité d’un établissement existant"},
             {'id': "transformation", 'title': u"Extension ou de la transformation d’un établissement ancien"},
             {'id': "location_move", 'title': u"Déplacement de l’établissement"},
+            {'id': "regularisation", 'title': u"Régularisation"},
         ],
         'specificfeatures': [
             'SpecificFeatureTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter'],

@@ -189,6 +189,10 @@ class IEnvironmentLicence(Interface):
     """Marker interface for .EnvironmentLicence.EnvironmentLicence
     """
 
+class IEnvClassThree(Interface):
+    """Marker interface for .EnvClassThree.EnvClassThree
+    """
+
 ##code-section FOOT
 class ILicenceContainer(Interface):
     """

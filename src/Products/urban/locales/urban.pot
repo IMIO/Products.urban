@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-01-08 14:02+0000\n"
+"POT-Creation-Date: 2015-01-12 10:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1641,11 +1641,6 @@ msgstr ""
 msgid "urban_label_areaDescription"
 msgstr ""
 
-#. Default: "Areadescriptiontext"
-#: EnvironmentLicence.py
-msgid "urban_label_areaDescriptionText"
-msgstr ""
-
 #. Default: "Article"
 #: Declaration.py
 msgid "urban_label_article"
@@ -1776,6 +1771,9 @@ msgstr ""
 #. Default: "Comments"
 #: Division.py
 msgid "urban_label_comments"
+msgstr ""
+
+msgid "urban_label_complement"
 msgstr ""
 
 msgid "urban_label_complete_parcel"
@@ -2045,11 +2043,6 @@ msgstr ""
 msgid "urban_label_hasAdditionalConditions"
 msgstr ""
 
-#. Default: "Hasconfidentialdata"
-#: EnvironmentLicence.py
-msgid "urban_label_hasConfidentialData"
-msgstr ""
-
 #. Default: "Hasenvironmentimpactstudy"
 #: EnvironmentLicence.py
 msgid "urban_label_hasEnvironmentImpactStudy"
@@ -2178,11 +2171,6 @@ msgstr ""
 msgid "urban_label_isKeyEvent"
 msgstr ""
 
-#. Default: "Ismobileproject"
-#: EnvironmentLicence.py
-msgid "urban_label_isMobileProject"
-msgstr ""
-
 #. Default: "Ismodification"
 #: ParcelOutLicence.py
 msgid "urban_label_isModification"
@@ -2206,11 +2194,6 @@ msgstr ""
 #. Default: "Issupplementary"
 #: WorkLocation.py
 msgid "urban_label_isSupplementary"
-msgstr ""
-
-#. Default: "Istemporaryproject"
-#: EnvironmentLicence.py
-msgid "urban_label_isTemporaryProject"
 msgstr ""
 
 #. Default: "Keydates"
@@ -2782,11 +2765,6 @@ msgstr ""
 #. Default: "Selectedfield"
 #: UrbanVocabularyTerm.py
 msgid "urban_label_selectedField"
-msgstr ""
-
-#. Default: "Servitudeslisting"
-#: EnvironmentLicence.py
-msgid "urban_label_servitudesListing"
 msgstr ""
 
 #. Default: "ShowTitle"

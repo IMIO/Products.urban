@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2015-01-08 14:02+0000\n"
+"POT-Creation-Date: 2015-01-12 10:11+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1642,11 +1642,6 @@ msgstr "Les parcelles ont été vérifiées?"
 msgid "urban_label_areaDescription"
 msgstr "Description des lieux et des abords du projet"
 
-#. Default: "Areadescriptiontext"
-#: EnvironmentLicence.py
-msgid "urban_label_areaDescriptionText"
-msgstr "Description des lieux et des abords du projet"
-
 #. Default: "Article"
 #: Declaration.py
 msgid "urban_label_article"
@@ -1778,6 +1773,9 @@ msgstr "Commentaire"
 #: Division.py
 msgid "urban_label_comments"
 msgstr "Commentaires"
+
+msgid "urban_label_complement"
+msgstr "Compléments"
 
 msgid "urban_label_complete_parcel"
 msgstr "Merci de renseigner le numéro complet de la parcelle recherchée"
@@ -2048,11 +2046,6 @@ msgstr "Grade"
 msgid "urban_label_hasAdditionalConditions"
 msgstr "Des conditions complémentaires sont requises"
 
-#. Default: "Hasconfidentialdata"
-#: EnvironmentLicence.py
-msgid "urban_label_hasConfidentialData"
-msgstr "La demande contient des données confidentielles"
-
 #. Default: "Hasenvironmentimpactstudy"
 #: EnvironmentLicence.py
 msgid "urban_label_hasEnvironmentImpactStudy"
@@ -2181,11 +2174,6 @@ msgstr "Le bien se situe dans un lotissement"
 msgid "urban_label_isKeyEvent"
 msgstr "Événement clé"
 
-#. Default: "Ismobileproject"
-#: EnvironmentLicence.py
-msgid "urban_label_isMobileProject"
-msgstr "Le projet est mobile"
-
 #. Default: "Ismodification"
 #: ParcelOutLicence.py
 msgid "urban_label_isModification"
@@ -2210,11 +2198,6 @@ msgstr "Établissement SEVESO"
 #: WorkLocation.py
 msgid "urban_label_isSupplementary"
 msgstr "Supplémentaire?"
-
-#. Default: "Istemporaryproject"
-#: EnvironmentLicence.py
-msgid "urban_label_isTemporaryProject"
-msgstr "Le projet est temporaire"
 
 #. Default: "Keydates"
 #: UrbanEventType.py
@@ -2786,11 +2769,6 @@ msgstr "Section"
 #: UrbanVocabularyTerm.py
 msgid "urban_label_selectedField"
 msgstr ""
-
-#. Default: "Servitudeslisting"
-#: EnvironmentLicence.py
-msgid "urban_label_servitudesListing"
-msgstr "Existence de servitudes et autres droits"
 
 #. Default: "ShowTitle"
 #: UrbanEventType.py

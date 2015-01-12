@@ -6,21 +6,27 @@
 
  <property name="title" i18n:translate="">EnvClassThree</property>
  <property name="description" i18n:translate=""></property>
- <property name="content_meta_type">EnvironmentBase</property>
+ <property name="icon_expr">string:${portal_url}/EnvClassThree.png</property>
+ <property name="content_meta_type">EnvClassThree</property>
  <property name="product">urban</property>
- <property name="factory">addEnvironmentBase</property>
+ <property name="factory">addEnvClassThree</property>
  <property name="immediate_view">envclassthreeview</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
-   <element value="Applicant"/>
-   <element value="PortionOut"/>
-   <element value="UrbanEvent"/>
    <element value="UrbanEventOpinionRequest"/>
+   <element value="Applicant"/>
+   <element value="UrbanEvent"/>
+   <element value="File"/>
+   <element value="PortionOut"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">envclassthreeview</property>
  <property name="view_methods">
+  <element value="folder_summary_view"/>
+  <element value="folder_tabular_view"/>
+  <element value="atct_album_view"/>
+  <element value="folder_listing"/>
   <element value="envclassthreeview"/>
  </property>
  <property name="default_view_fallback">False</property>
@@ -39,9 +45,11 @@
  <action title="Edit"
          action_id="edit"
          category="object"
-         condition_expr="python:context.mayShowEditAction()"
+         condition_expr="not:object/@@plone_lock_info/is_locked_for_current_user"
          url_expr="string:${object_url}/edit"
          visible="True">
   <permission value="Modify portal content"/>
  </action>
+<!-- ##code-section FOOT -->
+<!-- ##/code-section FOOT -->
 </object>

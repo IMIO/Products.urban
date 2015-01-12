@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Thu Jan  8 14:56:58 2015\n"
-"PO-Revision-Date: Thu Jan  8 14:56:58 2015\n"
+"POT-Creation-Date: Mon Jan 12 10:18:29 2015\n"
+"PO-Revision-Date: Mon Jan 12 10:18:29 2015\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -183,18 +183,13 @@ msgid "urban_label_activatedFields"
 msgstr ""
 
 #. Default: "Additionalconditions"
-#: EnvironmentBase.py
+#: EnvClassThree.py
 msgid "urban_label_additionalConditions"
 msgstr ""
 
 #. Default: "Additionallegalconditions"
 #: EnvironmentBase.py
 msgid "urban_label_additionalLegalConditions"
-msgstr ""
-
-#. Default: "Additionalpreviouslicences"
-#: EnvironmentLicence.py
-msgid "urban_label_additionalPreviousLicences"
 msgstr ""
 
 #. Default: "Adr1"
@@ -265,11 +260,6 @@ msgstr ""
 msgid "urban_label_areParcelsVerified"
 msgstr ""
 
-#. Default: "Areadescriptiontext"
-#: EnvironmentLicence.py
-msgid "urban_label_areaDescriptionText"
-msgstr ""
-
 #. Default: "Article"
 #: Declaration.py
 msgid "urban_label_article"
@@ -311,7 +301,7 @@ msgid "urban_label_bis"
 msgstr ""
 
 #. Default: "Businessdescription"
-#: EnvironmentBase.py
+#: EnvClassThree.py
 msgid "urban_label_businessDescription"
 msgstr ""
 
@@ -577,13 +567,8 @@ msgid "urban_label_grade"
 msgstr ""
 
 #. Default: "Hasadditionalconditions"
-#: EnvironmentBase.py
+#: EnvClassThree.py
 msgid "urban_label_hasAdditionalConditions"
-msgstr ""
-
-#. Default: "Hasconfidentialdata"
-#: EnvironmentLicence.py
-msgid "urban_label_hasConfidentialData"
 msgstr ""
 
 #. Default: "Hasenvironmentimpactstudy"
@@ -602,7 +587,7 @@ msgid "urban_label_implantation"
 msgstr ""
 
 #. Default: "Inadmissibilityreasons"
-#: EnvironmentBase.py
+#: EnvClassThree.py
 msgid "urban_label_inadmissibilityReasons"
 msgstr ""
 
@@ -666,11 +651,6 @@ msgstr ""
 msgid "urban_label_isDefaultValue"
 msgstr ""
 
-#. Default: "Isessayproject"
-#: EnvironmentLicence.py
-msgid "urban_label_isEssayProject"
-msgstr ""
-
 #. Default: "Isinpca"
 #: GenericLicence.py
 msgid "urban_label_isInPCA"
@@ -684,11 +664,6 @@ msgstr ""
 #. Default: "Iskeyevent"
 #: UrbanEventType.py
 msgid "urban_label_isKeyEvent"
-msgstr ""
-
-#. Default: "Ismobileproject"
-#: EnvironmentLicence.py
-msgid "urban_label_isMobileProject"
 msgstr ""
 
 #. Default: "Ismodification"
@@ -709,11 +684,6 @@ msgstr ""
 #. Default: "Isseveso"
 #: EnvironmentLicence.py
 msgid "urban_label_isSeveso"
-msgstr ""
-
-#. Default: "Istemporaryproject"
-#: EnvironmentLicence.py
-msgid "urban_label_isTemporaryProject"
 msgstr ""
 
 #. Default: "Keydates"
@@ -1180,11 +1150,6 @@ msgstr ""
 #. Default: "Section"
 #: PortionOut.py
 msgid "urban_label_section"
-msgstr ""
-
-#. Default: "Servitudeslisting"
-#: EnvironmentLicence.py
-msgid "urban_label_servitudesListing"
 msgstr ""
 
 #. Default: "Showtitle"

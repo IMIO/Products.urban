@@ -152,48 +152,6 @@ class TestEnvClassOneInstance(unittest.TestCase):
         contents = self.browser.contents
         self.assertTrue(expected_fieldname in contents)
 
-    def test_envclassone_has_attribute_areaDescriptionText(self):
-        self.assertTrue(self.licence.getField('areaDescriptionText'))
-
-    def test_envclassone_areaDescription_is_visible(self):
-        self._is_field_visible("Description des lieux et des abords du projet")
-
-    def test_envclassone_areaDescription_is_visible_in_edit(self):
-        self._is_field_visible_in_edit("Description des lieux et des abords du projet")
-
-    def test_envclassone_has_attribute_hasConfidentialData(self):
-        self.assertTrue(self.licence.getField('hasConfidentialData'))
-
-    def test_envclassone_hasConfidentialData_is_visible(self):
-        self._is_field_visible("La demande contient des données confidentielles")
-
-    def test_envclassone_has_attribute_isTemporaryProject(self):
-        self.assertTrue(self.licence.getField('isTemporaryProject'))
-
-    def test_envclassone_isTemporaryProject_is_visible(self):
-        self._is_field_visible("Le projet est temporaire")
-
-    def test_envclassone_isTemporaryProject_is_visible_in_edit(self):
-        self._is_field_visible_in_edit("Le projet est temporaire")
-
-    def test_envclassone_has_attribute_isEssayProject(self):
-        self.assertTrue(self.licence.getField('isEssayProject'))
-
-    def test_envclassone_isEssayProject_is_translated(self):
-        self._is_field_visible("Le projet est d'essai")
-
-    def test_envclassone_isEssayProject_is_visible_in_edit(self):
-        self._is_field_visible_in_edit("Le projet est d'essai")
-
-    def test_envclassone_has_attribute_isMobileProject(self):
-        self.assertTrue(self.licence.getField('isMobileProject'))
-
-    def test_envclassone_isMobileProject_is_visible(self):
-        self._is_field_visible("Le projet est mobile")
-
-    def test_envclassone_isMobileProject_is_visible_in_edit(self):
-        self._is_field_visible_in_edit("Le projet est mobile")
-
     def test_envclassone_has_attribute_hasEnvironmentImpactStudy(self):
         self.assertTrue(self.licence.getField('hasEnvironmentImpactStudy'))
 
@@ -226,9 +184,6 @@ class TestEnvClassOneInstance(unittest.TestCase):
 
     def test_envclassone_previousLicences_is_visible(self):
         self._is_field_visible("Permissions, enregistrements et déclarations existantes")
-
-    def test_envclassone_previousLicences_is_visible_in_edit(self):
-        self._is_field_visible_in_edit("Permissions, enregistrements et déclarations existantes")
 
     def test_envclassone_has_attribute_validityDelay(self):
         self.assertTrue(self.licence.getField('validityDelay'))

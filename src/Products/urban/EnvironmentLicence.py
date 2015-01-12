@@ -37,7 +37,7 @@ from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 
-optional_fields =['areaDescriptionText', 'hasConfidentialData', 'isTemporaryProject', 'isEssayProject', 'isMobileProject']
+optional_fields =[]
 ##/code-section module-header
 
 schema = Schema((
@@ -65,48 +65,6 @@ schema = Schema((
         multiValued=True,
         relationship='previousLicences',
     ),
-    ReferenceField(
-        name='additionalPreviousLicences',
-        widget=ReferenceBrowserWidget(
-            allow_browse=False,
-            allow_search=False,
-            show_results_without_query=True,
-            wild_card_search=True,
-            base_query='previouslicencesBaseQuery',
-            label='Additionalpreviouslicences',
-            label_msgid='urban_label_additionalPreviousLicences',
-            i18n_domain='urban',
-        ),
-        allowed_types=('EnvClassThree', 'EnvClassTwo', 'EnvClassOne'),
-        schemata='urban_description',
-        multiValued=True,
-        relationship='additionalPreviousLicences',
-    ),
-    TextField(
-        name='areaDescriptionText',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label='Areadescriptiontext',
-            label_msgid='urban_label_areaDescriptionText',
-            i18n_domain='urban',
-        ),
-        default_content_type='text/html',
-        default_method='getDefaultText',
-        schemata='urban_description',
-        default_output_type='text/html',
-    ),
-    DataGridField(
-        name='servitudesListing',
-        allow_oddeven=True,
-        widget=DataGridWidget(
-            columns={'parcel_number': Column('ParcelLabel'), 'parcel_reference': SelectColumn('ParcelReference', 'listLicenceParcels'), 'description': TextAreaColumn('ServitudeDescription'), 'constraints': TextAreaColumn('ServitudeConstraints')},
-            label='Servitudeslisting',
-            label_msgid='urban_label_servitudesListing',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-        columns=('parcel_number', 'parcel_reference', 'description', 'constraints'),
-    ),
     DataGridField(
         name='publicRoadModifications',
         allow_oddeven=True,
@@ -118,46 +76,6 @@ schema = Schema((
         ),
         schemata='urban_description',
         columns=('street', 'modification', 'justification'),
-    ),
-    BooleanField(
-        name='hasConfidentialData',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label='Hasconfidentialdata',
-            label_msgid='urban_label_hasConfidentialData',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-    ),
-    BooleanField(
-        name='isTemporaryProject',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label='Istemporaryproject',
-            label_msgid='urban_label_isTemporaryProject',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-    ),
-    BooleanField(
-        name='isEssayProject',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label='Isessayproject',
-            label_msgid='urban_label_isEssayProject',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-    ),
-    BooleanField(
-        name='isMobileProject',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label='Ismobileproject',
-            label_msgid='urban_label_isMobileProject',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
     ),
     BooleanField(
         name='hasEnvironmentImpactStudy',
@@ -204,6 +122,8 @@ EnvironmentLicence_schema = BaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 for field in EnvironmentLicence_schema.filterFields(isMetadata=False):
     field.widget.visible = True
+
+EnvironmentLicence_schema['roadMissingPartsDetails'].widget.label_msgid = 'urban_label_complement'
 ##/code-section after-schema
 
 class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
@@ -248,11 +168,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
        Finalizes the type schema to alter some fields
     """
     schema.moveField('authority', after='referenceDGATLP')
-    schema.moveField('areaDescriptionText', after='missingPartsDetails')
     schema.moveField('natura2000', after='isSeveso')
     schema.moveField('natura2000Details', after='natura2000')
-    schema.moveField('hasAdditionalConditions', after='natura2000Details')
-    schema.moveField('additionalConditions', after='hasAdditionalConditions')
     schema.moveField('description', after='validityDelay')
 
 finalizeSchema(EnvironmentLicence_schema)

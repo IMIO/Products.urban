@@ -31,6 +31,7 @@ class TestGenericLicenceFields(unittest.TestCase):
             self.licences.append(test_licence)
 
         self.browser = Browser(self.portal)
+        self.browser.handleErrors = False
         self.browserLogin('urbaneditor')
 
     def browserLogin(self, user):

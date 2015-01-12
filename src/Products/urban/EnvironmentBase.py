@@ -32,21 +32,12 @@ from Products.CMFCore.utils import getToolByName
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
 optional_fields = [
-    'inadmissibilityReasons', 'roadTechnicalAdvice', 'locationTechnicalAdvice',
-    'additionalLegalConditions'
+    'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalLegalConditions'
 ]
-
-slave_fields_additionalconditions = (
-    {
-        'name': 'additionalConditions',
-        'action': 'show',
-        'hide_values': (True, ),
-    },
-)
 
 slave_fields_natura2000 = (
     {
@@ -59,19 +50,6 @@ slave_fields_natura2000 = (
 
 schema = Schema((
 
-    TextField(
-        name='businessDescription',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label='Businessdescription',
-            label_msgid='urban_label_businessDescription',
-            i18n_domain='urban',
-        ),
-        default_content_type='text/html',
-        default_method='getDefaultText',
-        schemata='urban_description',
-        default_output_type='text/html',
-    ),
     ReferenceField(
         name='rubrics',
         widget=ReferenceBrowserWidget(
@@ -163,43 +141,6 @@ schema = Schema((
         widget=RichWidget(
             label='Natura2000details',
             label_msgid='urban_label_natura2000Details',
-            i18n_domain='urban',
-        ),
-        default_content_type='text/html',
-        default_method='getDefaultText',
-        schemata='urban_description',
-        default_output_type='text/html',
-    ),
-    LinesField(
-        name='inadmissibilityReasons',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label='Inadmissibilityreasons',
-            label_msgid='urban_label_inadmissibilityReasons',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-        multiValued=1,
-        vocabulary=UrbanVocabulary(path='inadmissibilityreasons', sort_on='getObjPositionInParent'),
-        default_method='getDefaultValue',
-    ),
-    BooleanField(
-        name='hasAdditionalConditions',
-        default=False,
-        widget=MasterBooleanWidget(
-            slave_fields=slave_fields_additionalconditions,
-            label='Hasadditionalconditions',
-            label_msgid='urban_label_hasAdditionalConditions',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-    ),
-    TextField(
-        name='additionalConditions',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label='Additionalconditions',
-            label_msgid='urban_label_additionalConditions',
             i18n_domain='urban',
         ),
         default_content_type='text/html',
@@ -339,11 +280,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField('businessOldLocation', after='workLocations')
     schema.moveField('foldermanagers', after='businessOldLocation')
-    schema.moveField('businessDescription', after='folderCategory')
-    schema.moveField('rubrics', after='businessDescription')
-    schema.moveField('missingParts', after='inadmissibilityReasons')
-    schema.moveField('missingPartsDetails', after='missingParts')
-    schema.moveField('description', after='additionalConditions')
+    schema.moveField('rubrics', after='folderCategory')
+    schema.moveField('description', after='additionalLegalConditions')
     return schema
 
 finalizeSchema(EnvironmentBase_schema)
