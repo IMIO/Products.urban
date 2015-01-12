@@ -177,7 +177,12 @@ class TestGenericLicenceFields(unittest.TestCase):
             msg = "field 'roadMissingPartsDetails' not visible on {}".format(licence.getPortalTypeName())
             self.browser.open(licence.absolute_url())
             contents = self.browser.contents
-            self.assertTrue("<span>Détails concernant les pièces manquantes (Fiche Voirie)</span>:" in contents, msg)
+            self.assertTrue(
+                "<span>Détails concernant les pièces manquantes (Fiche Voirie)</span>:"
+                or
+                "<span>Compléments</span>"
+                in contents, msg
+            )
 
     def test_has_attribute_roadType(self):
         field_name = 'roadType'
