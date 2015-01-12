@@ -1,12 +1,12 @@
 #-*- coding: utf-8 -*-
-import unittest
 from Products.urban.testing import URBAN_TESTS_PROFILE_INTEGRATION
+from Products.urban.tests.helpers import BrowserTestCase
 from Products.urban.config import ORDERED_URBAN_TYPES
 from Products.urban import utils
 from plone.testing.z2 import Browser
 
 
-class TestConfig(unittest.TestCase):
+class TestConfig(BrowserTestCase):
 
     layer = URBAN_TESTS_PROFILE_INTEGRATION
 
@@ -16,12 +16,6 @@ class TestConfig(unittest.TestCase):
         self.urban = self.portal.urban
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
-
-    def browserLogin(self, user):
-        self.browser.open(self.portal.absolute_url() + "/login_form")
-        self.browser.getControl(name='__ac_name').value = user
-        self.browser.getControl(name='__ac_password').value = user
-        self.browser.getControl(name='submit').click()
 
     def test_urban_root_view_is_default_view(self):
         self.browser.open(self.urban.absolute_url())

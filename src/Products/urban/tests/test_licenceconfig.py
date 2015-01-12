@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.urban.tests.helpers import BrowserTestCase
 
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 
-import unittest
 
-
-class TestLicenceConfig(unittest.TestCase):
+class TestLicenceConfig(BrowserTestCase):
 
     layer = URBAN_TESTS_CONFIG
 
@@ -22,12 +21,6 @@ class TestLicenceConfig(unittest.TestCase):
         self.browser = Browser(self.portal)
         self.browserLogin('urbanmanager')
         self.browser.handleErrors = False
-
-    def browserLogin(self, user):
-        self.browser.open(self.portal.absolute_url() + "/login_form")
-        self.browser.getControl(name='__ac_name').value = user
-        self.browser.getControl(name='__ac_password').value = user
-        self.browser.getControl(name='submit').click()
 
     def test_licenceconfig_view_display(self):
         """

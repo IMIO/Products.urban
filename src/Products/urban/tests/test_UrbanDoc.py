@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
-import unittest
 from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.urban.tests.helpers import BrowserTestCase
 
 from plone import api
 from plone.testing.z2 import Browser
@@ -9,7 +9,7 @@ from plone.testing.z2 import Browser
 import transaction
 
 
-class TestUrbanDoc(unittest.TestCase):
+class TestUrbanDoc(BrowserTestCase):
 
     layer = URBAN_TESTS_CONFIG
 
@@ -35,12 +35,6 @@ class TestUrbanDoc(unittest.TestCase):
 
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
-
-    def browserLogin(self, user):
-        self.browser.open(self.portal.absolute_url() + "/login_form")
-        self.browser.getControl(name='__ac_name').value = user
-        self.browser.getControl(name='__ac_password').value = user
-        self.browser.getControl(name='submit').click()
 
     def test_TALCondition_visible_on_document_templates(self):
         self.browser.open(self.urbandoc_model.absolute_url() + '/view')

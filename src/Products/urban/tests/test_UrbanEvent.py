@@ -4,6 +4,8 @@ from DateTime import DateTime
 
 from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.urban.tests.helpers import BrowserTestCase
+from Products.urban.tests.helpers import SchemaFieldsTestCase
 from Products.urban import utils
 
 from plone import api
@@ -41,7 +43,7 @@ class TestUrbanEvent(unittest.TestCase):
         self.failUnless(len(createdEvent.objectValues()) == 0)
 
 
-class TestUrbanEventInstance(unittest.TestCase):
+class TestUrbanEventInstance(SchemaFieldsTestCase):
 
     layer = URBAN_TESTS_CONFIG
 
@@ -67,12 +69,6 @@ class TestUrbanEventInstance(unittest.TestCase):
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
 
-    def browserLogin(self, user):
-        self.browser.open(self.portal.absolute_url() + "/login_form")
-        self.browser.getControl(name='__ac_name').value = user
-        self.browser.getControl(name='__ac_password').value = user
-        self.browser.getControl(name='submit').click()
-
     def test_urbanevent_has_attribute_pmTitle(self):
         self.assertTrue(hasattr(self.urban_event, 'pmTitle'))
 
@@ -80,7 +76,7 @@ class TestUrbanEventInstance(unittest.TestCase):
         self.assertTrue(hasattr(self.urban_event, 'pmDescription'))
 
 
-class TestUrbanEventInquiryView(unittest.TestCase):
+class TestUrbanEventInquiryView(BrowserTestCase):
 
     layer = URBAN_TESTS_CONFIG
 
@@ -109,12 +105,6 @@ class TestUrbanEventInquiryView(unittest.TestCase):
             inquiry = inquiry[0]
 
         return licence, inquiry
-
-    def browserLogin(self, user):
-        self.browser.open(self.portal.absolute_url() + "/login_form")
-        self.browser.getControl(name='__ac_name').value = user
-        self.browser.getControl(name='__ac_password').value = user
-        self.browser.getControl(name='submit').click()
 
     def test_Buildicence_UrbanEventInquiry_view_display(self):
         """ Test UrbanEventInquiry view is not broken """

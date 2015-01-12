@@ -3,6 +3,7 @@ from DateTime import DateTime
 from Products.urban import utils
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_LICENCES
+from Products.urban.tests.helpers import SchemaFieldsTestCase
 
 from plone.app.testing import login
 from plone.testing.z2 import Browser
@@ -138,7 +139,7 @@ class TestBuildLicence(unittest.TestCase):
         self.assertEqual(len(buildlicence.getAllOpinionRequests()), 2)
 
 
-class TestBuildLicenceFields(unittest.TestCase):
+class TestBuildLicenceFields(SchemaFieldsTestCase):
 
     layer = URBAN_TESTS_INTEGRATION
 
@@ -158,6 +159,7 @@ class TestBuildLicenceFields(unittest.TestCase):
             test_licence = getattr(licence_folder, testlicence_id)
             self.licences.append(test_licence)
         self.test_buildlicence = self.licences[0]
+        self.licence = self.test_buildlicence
 
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
@@ -166,12 +168,6 @@ class TestBuildLicenceFields(unittest.TestCase):
         self.urban.buildlicences.manage_delObjects(self.licences[0].id)
         self.urban.parceloutlicences.manage_delObjects(self.licences[1].id)
         transaction.commit()
-
-    def browserLogin(self, user):
-        self.browser.open(self.portal.absolute_url() + "/login_form")
-        self.browser.getControl(name='__ac_name').value = user
-        self.browser.getControl(name='__ac_password').value = user
-        self.browser.getControl(name='submit').click()
 
     def test_has_attribute_workType(self):
         field_name = 'workType'
@@ -182,9 +178,7 @@ class TestBuildLicenceFields(unittest.TestCase):
     def test_workType_is_visible(self):
         for licence in self.licences:
             msg = "field 'workType' not visible on {}".format(licence.getPortalTypeName())
-            self.browser.open(licence.absolute_url())
-            contents = self.browser.contents
-            self.assertTrue("<span>Nature des travaux</span>:" in contents, msg)
+            self._is_field_visible("<span>Nature des travaux</span>:", licence, msg)
 
     def test_has_attribute_usage(self):
         field_name = 'usage'
@@ -193,9 +187,7 @@ class TestBuildLicenceFields(unittest.TestCase):
 
     def test_usage_is_visible(self):
         msg = "field 'usage' not visible on BuildLicence"
-        self.browser.open(self.test_buildlicence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("<span>Statistiques INS</span>:" in contents, msg)
+        self._is_field_visible("<span>Statistiques INS</span>:", msg=msg)
 
     def test_has_attribute_annoncedDelay(self):
         field_name = 'annoncedDelay'
@@ -206,9 +198,7 @@ class TestBuildLicenceFields(unittest.TestCase):
     def test_annoncedDelay_is_visible(self):
         for licence in self.licences:
             msg = "field 'annoncedDelay' not visible on {}".format(licence.getPortalTypeName())
-            self.browser.open(licence.absolute_url())
-            contents = self.browser.contents
-            self.assertTrue("<span>Délai annoncé</span>:" in contents, msg)
+            self._is_field_visible("<span>Délai annoncé</span>:", licence, msg)
 
     def test_has_attribute_annoncedDelayDetails(self):
         field_name = 'annoncedDelayDetails'
@@ -219,9 +209,7 @@ class TestBuildLicenceFields(unittest.TestCase):
     def test_annoncedDelayDetails_is_visible(self):
         for licence in self.licences:
             msg = "field 'annoncedDelayDetails' not visible on {}".format(licence.getPortalTypeName())
-            self.browser.open(licence.absolute_url())
-            contents = self.browser.contents
-            self.assertTrue("<span>Détails concernant le délai annoncé</span>:" in contents, msg)
+            self._is_field_visible("<span>Détails concernant le délai annoncé</span>:", licence, msg)
 
     def test_has_attribute_townshipCouncilFolder(self):
         field_name = 'townshipCouncilFolder'
@@ -232,9 +220,7 @@ class TestBuildLicenceFields(unittest.TestCase):
     def test_townshipCouncilFolder_is_visible(self):
         for licence in self.licences:
             msg = "field 'townshipCouncilFolder' not visible on {}".format(licence.getPortalTypeName())
-            self.browser.open(licence.absolute_url())
-            contents = self.browser.contents
-            self.assertTrue("<span>Dossier \"Conseil Communal\"</span>:" in contents, msg)
+            self._is_field_visible("<span>Dossier \"Conseil Communal\"</span>:", licence, msg)
 
     def test_has_attribute_impactStudy(self):
         field_name = 'impactStudy'
@@ -245,9 +231,7 @@ class TestBuildLicenceFields(unittest.TestCase):
     def test_impactStudy_is_visible(self):
         for licence in self.licences:
             msg = "field 'impactStudy' not visible on {}".format(licence.getPortalTypeName())
-            self.browser.open(licence.absolute_url())
-            contents = self.browser.contents
-            self.assertTrue("<span>Etude d'incidence?</span>:" in contents, msg)
+            self._is_field_visible("<span>Etude d'incidence?</span>:", licence, msg)
 
     def test_has_attribute_implantation(self):
         field_name = 'implantation'
@@ -258,9 +242,7 @@ class TestBuildLicenceFields(unittest.TestCase):
     def test_implantation_is_visible(self):
         for licence in self.licences:
             msg = "field 'implantation' not visible on {}".format(licence.getPortalTypeName())
-            self.browser.open(licence.absolute_url())
-            contents = self.browser.contents
-            self.assertTrue("<span>Implantation (art. 137)</span>:" in contents, msg)
+            self._is_field_visible("<span>Implantation (art. 137)</span>:", licence, msg)
 
     def test_has_attribute_pebType(self):
         field_name = 'pebType'
@@ -269,9 +251,7 @@ class TestBuildLicenceFields(unittest.TestCase):
 
     def test_pebType_is_visible(self):
         msg = "field 'pebType' not visible on BuildLicence"
-        self.browser.open(self.test_buildlicence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("<span>Type de PEB</span>:" in contents, msg)
+        self._is_field_visible("<span>Type de PEB</span>:", msg=msg)
 
     def test_has_attribute_pebDetails(self):
         field_name = 'pebDetails'
@@ -280,6 +260,4 @@ class TestBuildLicenceFields(unittest.TestCase):
 
     def test_pebDetails_is_visible(self):
         msg = "field 'pebDetails' not visible on BuildLicence"
-        self.browser.open(self.test_buildlicence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("<span>Détails concernant le PEB</span>:" in contents, msg)
+        self._is_field_visible("<span>Détails concernant le PEB</span>:", msg=msg)

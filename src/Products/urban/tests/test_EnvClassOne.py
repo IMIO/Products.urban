@@ -4,6 +4,8 @@ from DateTime import DateTime
 
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.urban.tests.helpers import BrowserTestCase
+from Products.urban.tests.helpers import SchemaFieldsTestCase
 from Products.urban import utils
 
 from plone import api
@@ -18,7 +20,7 @@ import unittest
 import urllib2
 
 
-class TestEnvClassOneInstall(unittest.TestCase):
+class TestEnvClassOneInstall(BrowserTestCase):
 
     layer = URBAN_TESTS_INTEGRATION
 
@@ -28,12 +30,6 @@ class TestEnvClassOneInstall(unittest.TestCase):
         self.portal_urban = self.portal.portal_urban
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
-
-    def browserLogin(self, user):
-        self.browser.open(self.portal.absolute_url() + "/login_form")
-        self.browser.getControl(name='__ac_name').value = user
-        self.browser.getControl(name='__ac_password').value = user
-        self.browser.getControl(name='submit').click()
 
     def test_envclassone_config_folder_exists(self):
         msg = 'envclassone config folder not created'
@@ -91,7 +87,7 @@ class TestEnvClassOneInstall(unittest.TestCase):
         self.assertTrue('urban_licence_workflow' in envclassone_workflow)
 
 
-class TestEnvClassOneInstance(unittest.TestCase):
+class TestEnvClassOneInstance(SchemaFieldsTestCase):
 
     layer = URBAN_TESTS_INTEGRATION
 
@@ -110,12 +106,6 @@ class TestEnvClassOneInstance(unittest.TestCase):
 
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
-
-    def browserLogin(self, user):
-        self.browser.open(self.portal.absolute_url() + "/login_form")
-        self.browser.getControl(name='__ac_name').value = user
-        self.browser.getControl(name='__ac_password').value = user
-        self.browser.getControl(name='submit').click()
 
     def test_envclassone_licence_exists(self):
         self.assertTrue(len(self.urban.envclassones.objectIds()) > 0)
@@ -140,17 +130,6 @@ class TestEnvClassOneInstance(unittest.TestCase):
         self.assertTrue('Voirie' in contents)
         self.assertTrue('Métadonnées' not in contents)
         self.assertTrue('Données' not in contents)
-
-    def _is_field_visible(self, expected_fieldname):
-        self.browser.open(self.licence.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue(expected_fieldname in contents)
-
-    def _is_field_visible_in_edit(self, expected_fieldname):
-        edit_url = '{}/edit'.format(self.licence.absolute_url())
-        self.browser.open(edit_url)
-        contents = self.browser.contents
-        self.assertTrue(expected_fieldname in contents)
 
     def test_envclassone_has_attribute_hasEnvironmentImpactStudy(self):
         self.assertTrue(self.licence.getField('hasEnvironmentImpactStudy'))

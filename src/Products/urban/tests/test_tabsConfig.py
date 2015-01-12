@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
-import unittest
 from plone.app.testing import login, quickInstallProduct
 from Products.urban.testing import URBAN_TESTS_LICENCES
+from Products.urban.tests.helpers import BrowserTestCase
 
 from plone.testing.z2 import Browser
 
@@ -10,7 +10,7 @@ from testfixtures import compare, StringComparison as S
 import transaction
 
 
-class TestTabsConfigView(unittest.TestCase):
+class TestTabsConfigView(BrowserTestCase):
 
     layer = URBAN_TESTS_LICENCES
 
@@ -29,12 +29,6 @@ class TestTabsConfigView(unittest.TestCase):
         self.browser = Browser(self.portal)
         self.browserLogin('urbanmanager')
         self.browser.handleErrors = False
-
-    def browserLogin(self, user):
-        self.browser.open(self.portal.absolute_url() + "/login_form")
-        self.browser.getControl(name='__ac_name').value = user
-        self.browser.getControl(name='__ac_password').value = user
-        self.browser.getControl(name='submit').click()
 
     def testLicenceViewsDisplay(self):
         """

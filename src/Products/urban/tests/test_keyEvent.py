@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.urban.tests.helpers import BrowserTestCase
 
 from plone import api
 from plone.app.testing import login
@@ -10,10 +11,9 @@ from zope.lifecycleevent import ObjectModifiedEvent
 from zope.lifecycleevent import ObjectRemovedEvent
 
 import transaction
-import unittest
 
 
-class TestKeyEvent(unittest.TestCase):
+class TestKeyEvent(BrowserTestCase):
 
     layer = URBAN_TESTS_CONFIG
 
@@ -42,12 +42,6 @@ class TestKeyEvent(unittest.TestCase):
         ids_to_delete = [event.id for event in self.licence.objectValues()]
         self.licence.manage_delObjects(ids_to_delete)
         transaction.commit()
-
-    def browserLogin(self, user):
-        self.browser.open(self.portal.absolute_url() + "/login_form")
-        self.browser.getControl(name='__ac_name').value = user
-        self.browser.getControl(name='__ac_password').value = user
-        self.browser.getControl(name='submit').click()
 
     def testCreateKeyEvent(self):
         catalog = self.catalog

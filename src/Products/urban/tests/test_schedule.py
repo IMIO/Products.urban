@@ -5,6 +5,7 @@ from DateTime import DateTime
 from Products.Archetypes.event import ObjectEditedEvent
 
 from Products.urban.testing import URBAN_TESTS_LICENCES
+from Products.urban.tests.helpers import BrowserTestCase
 
 from plone import api
 from plone.app.testing import login
@@ -12,10 +13,8 @@ from plone.testing.z2 import Browser
 
 from zope.event import notify
 
-import unittest
 
-
-class TestScheduleView(unittest.TestCase):
+class TestScheduleView(BrowserTestCase):
 
     layer = URBAN_TESTS_LICENCES
 
@@ -30,12 +29,6 @@ class TestScheduleView(unittest.TestCase):
         self.browser = Browser(self.portal)
         self.browserLogin('urbanmanager')
         self.browser.handleErrors = False
-
-    def browserLogin(self, user):
-        self.browser.open(self.portal.absolute_url() + "/login_form")
-        self.browser.getControl(name='__ac_name').value = user
-        self.browser.getControl(name='__ac_password').value = user
-        self.browser.getControl(name='submit').click()
 
     def test_schedule_view_display(self):
         """

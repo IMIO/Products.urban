@@ -1,8 +1,8 @@
 #-*- coding: utf-8 -*-
-import unittest
 from plone.app.testing import login
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.testing import URBAN_TESTS_LICENCES
+from Products.urban.tests.helpers import BrowserTestCase
 
 from plone.testing.z2 import Browser
 from Products.CMFCore.utils import getToolByName
@@ -11,7 +11,7 @@ from testfixtures import compare, StringComparison as S
 from plone import api
 
 
-class TestLicenceStatsView(unittest.TestCase):
+class TestLicenceStatsView(BrowserTestCase):
 
     layer = URBAN_TESTS_LICENCES
 
@@ -24,12 +24,6 @@ class TestLicenceStatsView(unittest.TestCase):
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
         self.browser.open("%s%s" % (self.urban.absolute_url(), "/urbanstatsview"))
-
-    def browserLogin(self, user):
-        self.browser.open(self.portal.absolute_url() + "/login_form")
-        self.browser.getControl(name='__ac_name').value = user
-        self.browser.getControl(name='__ac_password').value = user
-        self.browser.getControl(name='submit').click()
 
     def testStatsViewDisplay(self):
         #check that the stats view is simply available
