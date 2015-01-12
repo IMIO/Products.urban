@@ -520,6 +520,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         return res
 
 
+
 registerType(UrbanEvent, PROJECTNAME)
 # end of class UrbanEvent
 
