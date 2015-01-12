@@ -25,15 +25,15 @@ class SchemaFieldsTestCase(BrowserTestCase):
 
     layer = URBAN_TESTS_INTEGRATION
 
-    def _is_field_visible(self, expected_fieldname, licence=None, msg=''):
-        licence = licence or self.licence
-        self.browser.open(licence.absolute_url())
+    def _is_field_visible(self, expected_fieldname, obj=None, msg=''):
+        obj = obj or self.licence
+        self.browser.open(obj.absolute_url())
         contents = self.browser.contents
         self.assertTrue(expected_fieldname in contents, msg)
 
-    def _is_field_visible_in_edit(self, expected_fieldname, licence=None, msg=''):
-        licence = licence or self.licence
-        edit_url = '{}/edit'.format(licence.absolute_url())
+    def _is_field_visible_in_edit(self, expected_fieldname, obj=None, msg=''):
+        obj = obj or self.licence
+        edit_url = '{}/edit'.format(obj.absolute_url())
         self.browser.open(edit_url)
         contents = self.browser.contents
         self.assertTrue(expected_fieldname in contents, msg)
