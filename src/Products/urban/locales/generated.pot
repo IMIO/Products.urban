@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Jan 12 10:18:29 2015\n"
-"PO-Revision-Date: Mon Jan 12 10:18:29 2015\n"
+"POT-Creation-Date: Mon Jan 12 11:54:44 2015\n"
+"PO-Revision-Date: Mon Jan 12 11:54:44 2015\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -290,6 +290,11 @@ msgstr ""
 msgid "urban_label_basement"
 msgstr ""
 
+#. Default: "Bcenumber"
+#: Corporation.py
+msgid "urban_label_bceNumber"
+msgstr ""
+
 #. Default: "Bestaddresskey"
 #: Street.py
 msgid "urban_label_bestAddressKey"
@@ -408,6 +413,11 @@ msgstr ""
 #. Default: "Demanddisplay"
 #: Inquiry.py
 msgid "urban_label_demandDisplay"
+msgstr ""
+
+#. Default: "Denomination"
+#: Corporation.py
+msgid "urban_label_denomination"
 msgstr ""
 
 #. Default: "Derogation"
@@ -705,6 +715,11 @@ msgstr ""
 #. Default: "Layers"
 #: Layer.py
 msgid "urban_label_layers"
+msgstr ""
+
+#. Default: "Legalform"
+#: Corporation.py
+msgid "urban_label_legalForm"
 msgstr ""
 
 #. Default: "Licenceportaltype"
@@ -1284,6 +1299,11 @@ msgstr ""
 #. Default: "Transparency"
 #: Layer.py
 msgid "urban_label_transparency"
+msgstr ""
+
+#. Default: "Tvanumber"
+#: Corporation.py
+msgid "urban_label_tvaNumber"
 msgstr ""
 
 #. Default: "Path of a UNO-enabled Python interpreter (ie /usr/bin/python)"
