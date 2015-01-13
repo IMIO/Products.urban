@@ -6,12 +6,12 @@
 
  <property name="title" i18n:translate="">Corporation</property>
  <property name="description" i18n:translate=""></property>
- <property name="icon_expr">string:${portal_url}/Corporation.png</property>
+ <property name="icon_expr">string:${portal_url}/Contact.png</property>
  <property name="content_meta_type">Corporation</property>
  <property name="product">urban</property>
  <property name="factory">addCorporation</property>
  <property name="immediate_view">base_view</property>
- <property name="global_allow">False</property>
+ <property name="global_allow">True</property>
  <property name="filter_content_types">False</property>
  <property name="allowed_content_types">
  </property>

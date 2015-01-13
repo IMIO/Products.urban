@@ -157,6 +157,10 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     def getLastLicenceDelivery(self):
         return self._getLastEvent(ILicenceDeliveryEvent)
 
+    def getCorporations(self):
+        corporations = [corp for corp in self.objectValues('Corporation')]
+        return corporations
+
 
 
 registerType(EnvironmentLicence, PROJECTNAME)

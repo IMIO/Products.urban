@@ -110,7 +110,7 @@ setDefaultRoles('urban: Add SpecificFeatureTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add OpinionRequestEventType', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvironmentLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvClassThree', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Corporation',  ('Manager', ))
+setDefaultRoles('urban: Add Corporation', ("Manager", "Contributor"))
 
 product_globals = globals()
 

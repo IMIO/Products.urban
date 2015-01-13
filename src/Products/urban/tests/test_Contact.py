@@ -169,3 +169,33 @@ class TestContactFields(SchemaFieldsTestCase):
 
     def test_contact_has_attribute_representedBy(self):
         self.assertTrue(self.contact.getField('representedBy'))
+
+
+class TestCorporationFields(SchemaFieldsTestCase):
+
+    layer = URBAN_TESTS_INTEGRATION
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+        self.portal_urban = self.portal.portal_urban
+
+        login(self.portal, 'urbaneditor')
+        envclassone_folder = self.urban.envclassones
+        testlicence_id = 'test_envclassone'
+        if testlicence_id not in envclassone_folder.objectIds():
+            envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
+            transaction.commit()
+        self.licence = getattr(envclassone_folder, testlicence_id)
+
+        corporation_id = 'test_corporation'
+        if corporation_id not in self.licence.objectIds():
+            self.licence.invokeFactory('Corporation', id=corporation_id)
+            transaction.commit()
+        self.corporation = getattr(self.licence, corporation_id)
+
+        self.browser = Browser(self.portal)
+        self.browserLogin('urbaneditor')
+
+    def test_corporation_has_attribute_denomination(self):
+        self.assertTrue(self.corporation.getField('denomination'))

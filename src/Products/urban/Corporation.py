@@ -89,6 +89,7 @@ class Corporation(BaseContent, Contact, BrowserDefaultMixin):
 
     # Methods
 
+
 registerType(Corporation, PROJECTNAME)
 # end of class Corporation
 

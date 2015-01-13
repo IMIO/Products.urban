@@ -193,6 +193,10 @@ class IEnvClassThree(Interface):
     """Marker interface for .EnvClassThree.EnvClassThree
     """
 
+class ICorporation(Interface):
+    """Marker interface for .Corporation.Corporation
+    """
+
 ##code-section FOOT
 class ILicenceContainer(Interface):
     """
