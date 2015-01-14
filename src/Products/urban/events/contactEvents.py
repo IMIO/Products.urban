@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from zope.interface import alsoProvides
 from Products.urban.interfaces import CONTACT_INTERFACES
+from Products.urban.config import APPLICANTS_TYPES
 from Products.urban.config import URBAN_TYPES
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
@@ -14,7 +15,7 @@ def setInterface(contact, event):
 
 def updateLicenceTitle(contact, event):
     #only update parent's title if an applicant or a proprietary is added
-    if not contact.portal_type in ['Applicant', 'Proprietary', ]:
+    if not contact.portal_type in APPLICANTS_TYPES:
         return
     parent = contact.aq_inner.aq_parent
     if parent.portal_type in URBAN_TYPES:
@@ -22,7 +23,7 @@ def updateLicenceTitle(contact, event):
         notify(event)
 
 
-def positionByAlphabeticalOrder(contact, event):
+def sortByAlphabeticalOrder(contact, event):
     if not contact.portal_type in ['Notary', 'Architect', 'Geometrician', 'FolderManager']:
         return
     container = contact.aq_inner.aq_parent

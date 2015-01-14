@@ -44,7 +44,7 @@ class UrbanBase(object):
         """
            Return the list of applicants for the Licence
         """
-        applicants = [app for app in self.objectValues('Contact') if app.portal_type == 'Applicant']
+        applicants = [app for app in self.objectValues('Applicant') if app.portal_type == 'Applicant']
         return applicants
 
     security.declarePublic('getProprietaries')
@@ -52,7 +52,7 @@ class UrbanBase(object):
         """
            Return the list of proprietaries for the Licence
         """
-        proprietaries = [pro for pro in self.objectValues('Contact') if pro.portal_type == 'Proprietary']
+        proprietaries = [pro for pro in self.objectValues('Applicant') if pro.portal_type == 'Proprietary']
         return proprietaries
 
     security.declarePublic('getApplicantsSignaletic')

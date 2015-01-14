@@ -9,6 +9,23 @@ class ContactView(BrowserView):
       This manage the view of every Contacts :
       Applicant, Architect, Geometrician, Notary
     """
+
+    def getFields(self, exclude=[]):
+        """
+        """
+        def isDisplayable(field):
+            if field.getName() in exclude:
+                return False
+            if not field.widget.visible:
+                return False
+            return True
+
+        context = aq_inner(self.context)
+        schema = context.__class__.schema
+        fields = [field for field in schema.getSchemataFields('default') if isDisplayable(field)]
+
+        return fields
+
     def getLinkToLinkedLicence(self):
         """
           Return a link to the licence if available
@@ -62,12 +79,3 @@ class ContactView(BrowserView):
         """
         context = aq_inner(self.context)
         return "%s data" % context.portal_type
-
-    def showClaimingTextField(self):
-        """
-          Only show the claimingText field if the current Contact is a Claimant (portal_type)
-        """
-        context = aq_inner(self.context)
-        if not context.portal_type == 'Claimant':
-            return False
-        return True

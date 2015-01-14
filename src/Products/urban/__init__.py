@@ -83,10 +83,6 @@ validation.register(isNotDuplicatedReferenceValidator('isNotDuplicatedReference'
 def initialize(context):
     """initialize product (called by zope)"""
     ##code-section custom-init-top #fill in your manual code here
-    import Notary
-    # next line to be removed when migration #1283 is done
-    import Architect
-    import Geometrician
     ##/code-section custom-init-top
 
     # imports packages and types for registration
@@ -130,6 +126,8 @@ def initialize(context):
     import EnvironmentLicence
     import EnvClassThree
     import Corporation
+    import Claimant
+    import Applicant
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

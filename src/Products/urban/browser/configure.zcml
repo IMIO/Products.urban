@@ -176,6 +176,14 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.ICorporation"
+     name="corporationview"
+     class=".contactview.ContactView"
+     template="templates/contactview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IUrbanEventInquiry"
      name="urbaneventinquiryview"
      class=".urbaneventviews.UrbanEventInquiryView"

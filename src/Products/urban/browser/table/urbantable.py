@@ -10,6 +10,7 @@ from Products.urban.browser.table.interfaces import ILicenceListingTable, \
     IContactTable, \
     IApplicantTable, \
     IProprietaryTable, \
+    ICorporationTable, \
     IParcelsTable, \
     IEventsTable, \
     IDocumentsTable, \
@@ -113,6 +114,14 @@ class ProprietaryTable(ContactTable):
     """
     """
     implements(IProprietaryTable)
+
+    cssClasses = {'table': 'listing largetable'}
+
+
+class CorporationTable(ContactTable):
+    """
+    """
+    implements(ICorporationTable)
 
     cssClasses = {'table': 'listing largetable'}
 

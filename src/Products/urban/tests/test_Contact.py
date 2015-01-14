@@ -1,12 +1,17 @@
 #-*- coding: utf-8 -*-
 
+from Products.urban.testing import URBAN_TESTS_FUNCTIONAL
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.tests.helpers import SchemaFieldsTestCase
 
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
+
 import transaction
+import unittest
 
 
 class TestContactFields(SchemaFieldsTestCase):
@@ -199,3 +204,48 @@ class TestCorporationFields(SchemaFieldsTestCase):
 
     def test_corporation_has_attribute_denomination(self):
         self.assertTrue(self.corporation.getField('denomination'))
+
+    def test_corporation_denomination_is_visible(self):
+        self._is_field_visible("Dénomination ou raison sociale", obj=self.corporation)
+
+    def test_corporation_denomination_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("Dénomination ou raison sociale", obj=self.corporation)
+
+
+class TestContactEvents(unittest.TestCase):
+    """
+    """
+
+    layer = URBAN_TESTS_FUNCTIONAL
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+
+        # create a test BuildLicence licence for Applicant contact
+        login(self.portal, 'urbaneditor')
+        buildlicence_folder = self.urban.buildlicences
+        testlicence_id = 'test_buildlicence'
+        if testlicence_id not in buildlicence_folder.objectIds():
+            buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
+        self.applicant_licence = getattr(buildlicence_folder, testlicence_id)
+
+        # create a test UrbanCertificateOne licence for Proprietary contact
+        login(self.portal, 'urbaneditor')
+        urbancertificateone_folder = self.urban.urbancertificateones
+        testlicence_id = 'test_urbancertificateone'
+        if testlicence_id not in urbancertificateone_folder.objectIds():
+            urbancertificateone_folder.invokeFactory('UrbanCertificateOne', id=testlicence_id)
+        self.proprietary_licence = getattr(urbancertificateone_folder, testlicence_id)
+
+        # create a test EnvClassOne licence for Corporation contact
+        login(self.portal, 'urbaneditor')
+        envclassone_folder = self.urban.envclassones
+        testlicence_id = 'test_envclassone'
+        if testlicence_id not in envclassone_folder.objectIds():
+            envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
+        self.corporation_licence = getattr(envclassone_folder, testlicence_id)
+
+    def test_licence_title_is_updated_when_contact_modified(self):
+        """
+        """

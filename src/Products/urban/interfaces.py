@@ -18,11 +18,6 @@ class INotary(Interface):
     """
 
 
-class IApplicant(Interface):
-    """Marker interface for .Applicant
-    """
-
-
 class IArchitect(Interface):
     """Marker interface for .Architect.Architect
     """
@@ -33,10 +28,10 @@ class IGeometrician(Interface):
     """
 
 CONTACT_INTERFACES = {
-    'Applicant': IApplicant,
     'Architect': IArchitect,
-    # 'Notary' : INotary,  # to be taken into account if notary.py is removed
-    # 'Proprietary' : IProprietary, # to be taken into account if proprietary.py is removed
+    'Geometrician': IGeometrician,
+    'Notary': INotary,  # to be taken into account if notary.py is removed
+    'Proprietary': IProprietary,  # to be taken into account if proprietary.py is removed
 }
 
 ##/code-section HEAD
@@ -195,6 +190,14 @@ class IEnvClassThree(Interface):
 
 class ICorporation(Interface):
     """Marker interface for .Corporation.Corporation
+    """
+
+class IClaimant(Interface):
+    """Marker interface for .Claimant.Claimant
+    """
+
+class IApplicant(Interface):
+    """Marker interface for .Applicant.Applicant
     """
 
 ##code-section FOOT

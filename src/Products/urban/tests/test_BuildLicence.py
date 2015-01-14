@@ -30,7 +30,7 @@ class TestBuildLicence(unittest.TestCase):
         licence = self.buildlicence
         self.assertTrue(licence.Title().endswith('1/ - Exemple Permis Urbanisme -  Smith & Wesson'))
         #remove the applicant
-        applicant_id = licence.objectValues('Contact')[0].id
+        applicant_id = licence.objectValues('Applicant')[0].id
         licence.manage_delObjects([applicant_id])
         self.assertTrue(licence.Title().endswith('1/ - Exemple Permis Urbanisme - no_applicant_defined'))
         #add an applicant back

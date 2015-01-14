@@ -6,6 +6,7 @@ from Products.Five import BrowserView
 
 from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
 from Products.urban.browser.table.urbantable import ApplicantTable
+from Products.urban.browser.table.urbantable import CorporationTable
 from Products.urban.browser.table.urbantable import EventsTable
 from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.browser.table.urbantable import ProprietaryTable
@@ -253,6 +254,12 @@ class EnvironmentLicenceView(LicenceView):
     """
     def __init__(self, context, request):
         super(EnvironmentLicenceView, self).__init__(context, request)
+
+    def renderCorporationListing(self):
+        if not self.context.getCorporations():
+            return ''
+        contacttable = CorporationTable(self.context, self.request)
+        return self.renderListing(contacttable)
 
     def getInquiriesForDisplay(self):
         """

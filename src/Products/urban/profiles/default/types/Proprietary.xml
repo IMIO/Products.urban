@@ -6,9 +6,9 @@
    
  <property name="title" i18n:translate="">Proprietary</property>
  <property name="description" i18n:translate=""></property>
- <property name="content_meta_type">Contact</property>
+ <property name="content_meta_type">Applicant</property>
  <property name="product">urban</property>
- <property name="factory">addContact</property>
+ <property name="factory">addApplicant</property>
  <property name="immediate_view">contactview</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">False</property>

@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.Contact import Contact
+from Products.urban.Applicant import Applicant
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -67,13 +67,13 @@ schema = Schema((
 ##/code-section after-local-schema
 
 Corporation_schema = BaseSchema.copy() + \
-    getattr(Contact, 'schema', Schema(())).copy() + \
+    getattr(Applicant, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class Corporation(BaseContent, Contact, BrowserDefaultMixin):
+class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

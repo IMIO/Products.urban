@@ -26,7 +26,6 @@ from Products.urban.config import *
 import cgi
 from zope.i18n import translate
 from Products.CMFCore.utils import getToolByName
-from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.validation.interfaces.IValidator import IValidator
 from Products.validation import validation
@@ -64,50 +63,6 @@ class BelgianNationalRegValidator:
         return True
 
 validation.register(BelgianNationalRegValidator('isBelgianNR'))
-
-slave_fields_address = (
-    # if isSameAddressAsWorks, hide the address related fields
-    {
-        'name': 'street',
-        'action': 'show',
-        'hide_values': (False, ),
-    },
-    {
-        'name': 'number',
-        'action': 'show',
-        'hide_values': (False, ),
-    },
-    {
-        'name': 'zipcode',
-        'action': 'show',
-        'hide_values': (False, ),
-    },
-    {
-        'name': 'city',
-        'action': 'show',
-        'hide_values': (False, ),
-    },
-    {
-        'name': 'country',
-        'action': 'show',
-        'hide_values': (False, ),
-    },
-    {
-        'name': 'showWorkLocationsAddress',
-        'action': 'show',
-        'hide_values': (True, ),
-    },
-)
-
-slave_fields_representedby = (
-    # applicant is either represented by a society or by another contact but not both at the same time
-    {
-        'name': 'representedBy',
-        'action': 'show',
-        'hide_values': (False, ),
-    },
-)
-
 ##/code-section module-header
 
 schema = Schema((
@@ -142,28 +97,6 @@ schema = Schema((
         widget=StringField._properties['widget'](
             label='Society',
             label_msgid='urban_label_society',
-            i18n_domain='urban',
-        ),
-    ),
-    BooleanField(
-        name='representedBySociety',
-        default=False,
-        widget=MasterBooleanWidget(
-            slave_fields=slave_fields_representedby,
-            condition="python: here.portal_type == 'Applicant' or here.portal_type == 'Proprietary'",
-            label='Representedbysociety',
-            label_msgid='urban_label_representedBySociety',
-            i18n_domain='urban',
-        ),
-    ),
-    BooleanField(
-        name='isSameAddressAsWorks',
-        default=False,
-        widget=MasterBooleanWidget(
-            slave_fields=slave_fields_address,
-            condition="python: here.portal_type == 'Applicant' or here.portal_type == 'Proprietary'",
-            label='Issameaddressasworks',
-            label_msgid='urban_label_isSameAddressAsWorks',
             i18n_domain='urban',
         ),
     ),
@@ -252,30 +185,6 @@ schema = Schema((
         ),
         validators=('isBelgianNR',),
     ),
-    LinesField(
-        name='representedBy',
-        widget=MultiSelectionWidget(
-            condition='python:here.showRepresentedByField()',
-            format='checkbox',
-            label='Representedby',
-            label_msgid='urban_label_representedBy',
-            i18n_domain='urban',
-        ),
-        enforceVocabulary=True,
-        multiValued=1,
-        vocabulary='listRepresentedBys',
-    ),
-    TextField(
-        name='claimingText',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            condition="python: here.portal_type == 'Claimant'",
-            label='Claimingtext',
-            label_msgid='urban_label_claimingText',
-            i18n_domain='urban',
-        ),
-        default_output_type='text/html',
-    ),
 
 ),
 )
@@ -316,8 +225,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
         if not self.getName1():
             return self.getSociety()
-        if self.getRepresentedBySociety():
-            return "%s %s %s repr. par %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2(), self.getSociety())
         elif self.getSociety():
             return "%s %s %s (%s)" % (self.getPersonTitle(short=True), self.getName1(), self.getName2(), self.getSociety())
         else:
@@ -361,21 +268,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
             names = '%s %s' % (self.getName2(), self.getName1())
         namepart = namedefined and names or self.getSociety()
         nameSignaletic = '%s %s' % (title, namepart)
-        if len(self.getRepresentedBy()) > 0 or self.getRepresentedBySociety():
-            person_title = self.getPersonTitle(theObject=True)
-            representatives = self.getRepresentedBySociety() and self.getSociety() or self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
-            gender = multiplicity = ''
-            represented = 'représenté'
-            if person_title:
-                gender = person_title.getGender()
-                multiplicity = person_title.getMultiplicity()
-                if gender == 'male' and multiplicity == 'plural':
-                    represented = 'représentés'
-                elif gender == 'female' and multiplicity == 'single':
-                    represented = 'représentée'
-                elif gender == 'female' and multiplicity == 'plural':
-                    represented = 'représentées'
-            nameSignaletic = '%s %s %s par %s' % (title, namepart, represented, representatives)
         if linebyline:
             #escape HTML special characters like HTML entities
             return cgi.escape(nameSignaletic)
@@ -428,53 +320,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
             zip = cgi.escape(zip)
             city = cgi.escape(city)
             return "<p>%s, %s<br />%s %s</p>" % (number, street, zip, city)
-
-    security.declarePublic('showRepresentedByField')
-    def showRepresentedByField(self):
-        """
-        Only show the representedBy field if the current Contact is an Applicant (portal_type)
-        and only for some URBAN_TYPES
-        """
-        parent = self.aq_inner.aq_parent
-        #if the Contact is just created, we are in portal_factory.The parent is a TempFolder
-        if parent.portal_type == 'TempFolder':
-            parent = parent.aq_parent.aq_parent
-        if not parent.portal_type in ['BuildLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'Division']:
-            return False
-        if self.getPortalTypeName() not in ['Applicant', 'Proprietary']:
-            return False
-        if hasattr(parent, 'getArchitects') and not parent.getArchitects():
-            return False
-        if hasattr(parent, 'getNotaryContact') and not parent.getNotaryContact():
-            return False
-        return True
-
-    security.declarePublic('getRepresentedBy')
-    def getRepresentedBy(self):
-        for contact_uid in self.getField('representedBy').getRaw(self):
-            if contact_uid not in self.listRepresentedBys().keys():
-                return ()
-        return self.getField('representedBy').getRaw(self)
-
-    security.declarePublic('listRepresentedBys')
-    def listRepresentedBys(self):
-        """
-          Returns the list of potential Contacts that could represent the current Contact
-          only if it is an "Applicant" as the field will be hidden by the condition on the field otherwise
-        """
-        #the potential representator are varying upon licence type
-        #moreover, as we are using ReferenceField, we can not use getattr...
-        potential_contacts = []
-        parent = self.aq_inner.aq_parent
-        if hasattr(parent, 'getNotaryContact'):
-            potential_contacts.extend(list(parent.getNotaryContact()))
-        if hasattr(parent, 'getGeometricians'):
-            potential_contacts.extend(list(parent.getGeometricians()))
-        if hasattr(parent, 'getArchitects'):
-            potential_contacts.extend(parent.getArchitects())
-
-        vocabulary = [(contact.UID(), contact.Title(),) for contact in potential_contacts]
-        return DisplayList(tuple(vocabulary))
 
     security.declarePublic('getPersonTitle')
     def getPersonTitle(self, short=False, theObject=False):

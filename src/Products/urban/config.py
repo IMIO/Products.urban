@@ -72,6 +72,8 @@ ADD_CONTENT_PERMISSIONS = {
     'EnvironmentLicence': 'urban: Add EnvironmentLicence',
     'EnvClassThree': 'urban: Add EnvClassThree',
     'Corporation': 'urban: Add Corporation',
+    'Claimant': 'urban: Add Claimant',
+    'Applicant': 'urban: Add Applicant',
 }
 
 setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
@@ -111,6 +113,8 @@ setDefaultRoles('urban: Add OpinionRequestEventType', ("Manager", "Contributor")
 setDefaultRoles('urban: Add EnvironmentLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvClassThree', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Corporation', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Claimant', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Applicant', ("Manager", "Contributor"))
 
 product_globals = globals()
 
@@ -145,6 +149,10 @@ ORDERED_URBAN_TYPES = [
     'UrbanCertificateOne', 'UrbanCertificateTwo',
     'NotaryLetter', 'EnvClassThree', 'EnvClassOne', 'MiscDemand'
 ]
+
+# all types that can be used as a licence applicant
+APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation']
+
 #the different templates used to structure a document
 GLOBAL_TEMPLATES = {
     '.': [

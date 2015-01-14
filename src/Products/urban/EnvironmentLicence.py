@@ -37,6 +37,8 @@ from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 
+from zope.i18n import translate
+
 optional_fields =[]
 ##/code-section module-header
 
@@ -143,6 +145,20 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     # Methods
 
     # Manually created methods
+
+    security.declarePublic('updateTitle')
+    def updateTitle(self):
+        """
+           Update the title to clearly identify the licence
+        """
+        applicants = self.getCorporations() or self.getApplicants()
+        if applicants:
+            applicantTitle = applicants[0].Title()
+        else:
+            applicantTitle = translate('no_applicant_defined', 'urban', context=self.REQUEST).encode('utf8')
+        title = "%s - %s - %s" % (self.getReference(), self.getLicenceSubject(), applicantTitle)
+        self.setTitle(title)
+        self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
 
     security.declarePublic('listLicenceParcels')
     def listLicenceParcels(self):

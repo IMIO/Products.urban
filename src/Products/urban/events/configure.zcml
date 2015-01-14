@@ -7,22 +7,6 @@
                    Products.Archetypes.event.IEditBegunEvent"
               handler=".opinionRequestEvents.setDefaultLinkedInquiry" />
 
-  <subscriber for="..interfaces.IApplicant
-                   zope.container.interfaces.IObjectRemovedEvent"
-              handler=".applicantEvents.onDelete" />
-
-  <subscriber for="..interfaces.IApplicant
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".applicantEvents.reindexLicenceApplicantInfos" />
-
-  <subscriber for="..interfaces.IProprietary
-                   zope.container.interfaces.IObjectRemovedEvent"
-              handler=".applicantEvents.onDelete" />
-
-  <subscriber for="..interfaces.IProprietary
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".applicantEvents.reindexLicenceApplicantInfos" />
-
   <subscriber for="..interfaces.IContact
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".contactEvents.setInterface" />
@@ -33,7 +17,7 @@
 
   <subscriber for="..interfaces.IContact
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".contactEvents.positionByAlphabeticalOrder" />
+              handler=".contactEvents.sortByAlphabeticalOrder" />
 
   <subscriber for="..interfaces.IInquiry
                    Products.Archetypes.interfaces.IEditBegunEvent"
