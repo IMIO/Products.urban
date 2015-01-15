@@ -8,6 +8,12 @@ class IUrbanTable(Interface):
     """
 
 
+class IFolderContentTable(IUrbanTable):
+    """
+    Marker interface for a table listing all objects of a folderish.
+    """
+
+
 class IItemForUrbanTable(Interface):
     """
     Wrapper for object/brains that will be displayed in Urban z3c tables

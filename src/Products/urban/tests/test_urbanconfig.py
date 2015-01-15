@@ -23,6 +23,30 @@ class TestUrbanConfig(BrowserTestCase):
 
     def test_urbanconfig_view_display(self):
         """
-         Tests search  view is not broken for whatsoever reason
+         Tests urban config view is not broken for whatsoever reason
         """
         self.browser.open(self.config.absolute_url())
+
+    def test_architects_config_view_display(self):
+        """
+         Tests architects folder view is not broken for whatsoever reason
+        """
+        self.browser.open(self.portal.urban.architects.absolute_url())
+
+    def test_notaries_config_view_display(self):
+        """
+         Tests notaries folder view is not broken for whatsoever reason
+        """
+        self.browser.open(self.portal.urban.notaries.absolute_url())
+
+    def test_geometricians_config_view_display(self):
+        """
+         Tests geometricians folder view is not broken for whatsoever reason
+        """
+        self.browser.open(self.portal.urban.geometricians.absolute_url())
+
+    def test_parcellings_config_view_display(self):
+        """
+         Tests parcellings view is not broken for whatsoever reason
+        """
+        self.browser.open(self.portal.urban.parcellings.absolute_url())

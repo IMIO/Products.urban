@@ -19,7 +19,7 @@ class UrbanConfigFolderView(BrowserView):
         self.request = request
 
     def renderObjectListing(self, table):
-        if not self.context.objectValues():
+        if not self.context.objectIds():
             return ''
         listing = table(self.context, self.request)
         listing.update()

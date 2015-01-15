@@ -334,8 +334,8 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.table.interfaces.IParcellingsTable"
-     factory=".tablevalue.ValuesForParcellingListing"
+          Products.urban.browser.table.interfaces.IFolderContentTable"
+     factory=".tablevalue.ValuesForFolderListing"
      provides="z3c.table.interfaces.IValues"
   />
 

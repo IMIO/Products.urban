@@ -7,22 +7,23 @@ from zope.interface import implements
 from Products.ZCatalog.Lazy import LazyMap
 
 from Products.urban.browser.table.interfaces import ILicenceListingTable, \
-    IContactTable, \
-    IApplicantTable, \
-    IProprietaryTable, \
-    ICorporationTable, \
-    IParcelsTable, \
-    IEventsTable, \
-    IDocumentsTable, \
-    IAnnexesTable, \
-    INotariesTable, \
-    IArchitectsTable, \
-    IGeometriciansTable, \
-    IClaimantsTable, \
-    IRecipientsCadastreTable, \
-    ISearchResultTable, IParcellingsTable, \
-    IUrbanColumn, \
-    IAllLicencesListingTable
+        IFolderContentTable, \
+        IContactTable, \
+        IApplicantTable, \
+        IProprietaryTable, \
+        ICorporationTable, \
+        IParcelsTable, \
+        IEventsTable, \
+        IDocumentsTable, \
+        IAnnexesTable, \
+        INotariesTable, \
+        IArchitectsTable, \
+        IGeometriciansTable, \
+        IClaimantsTable, \
+        IRecipientsCadastreTable, \
+        ISearchResultTable, IParcellingsTable, \
+        IUrbanColumn, \
+        IAllLicencesListingTable
 
 
 def getSortMethod(idx):
@@ -54,8 +55,14 @@ class UrbanTable(Table):
 
     # override setUpRows: use a Lazymap rather than a comprehension list for
     # performance issues (see #6444)
-    def setUpRows(self):
-        return LazyMap(self.setUpRow, self.values)
+    #def setUpRows(self):
+    #    return LazyMap(self.setUpRow, self.values)
+
+
+class FolderContentTable(UrbanTable):
+    """
+    """
+    implements(IFolderContentTable)
 
 
 class LicenceListingTable(UrbanTable):
@@ -86,7 +93,7 @@ class SearchResultTable(UrbanTable, SequenceTable):
     batchSize = 20
 
 
-class ParcellingsTable(UrbanTable):
+class ParcellingsTable(FolderContentTable):
     """ Table used to display parcellings"""
     implements(IParcellingsTable)
 
@@ -99,6 +106,7 @@ class ContactTable(UrbanTable):
     """
     implements(IContactTable)
 
+    sortOn = None
     cssClasses = {'table': 'listing largetable'}
 
 
@@ -126,7 +134,7 @@ class CorporationTable(ContactTable):
     cssClasses = {'table': 'listing largetable'}
 
 
-class NotariesTable(ContactTable):
+class NotariesTable(FolderContentTable, ContactTable):
     """
      Same as a ContactTable.
      We define our own class so we can implement a marker interface used to find
@@ -137,7 +145,7 @@ class NotariesTable(ContactTable):
     batchSize = 20
 
 
-class GeometriciansTable(ContactTable):
+class GeometriciansTable(FolderContentTable, ContactTable):
     """
      Same as a ContactTable.
      We define our own class so we can implement a marker interface used to find
@@ -148,7 +156,7 @@ class GeometriciansTable(ContactTable):
     batchSize = 20
 
 
-class ArchitectsTable(ContactTable):
+class ArchitectsTable(FolderContentTable, ContactTable):
     """
      Same as a ContactTable.
      We define our own class so we can implement a marker interface used to find

@@ -1,7 +1,6 @@
 ## -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
-from Products.CMFCore.utils import getToolByName
 from plone.memoize import instance
 
 from z3c.table.value import ValuesMixin
@@ -15,6 +14,8 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.browser.table.interfaces import IItemForUrbanTable
 from Products.urban.browser.table.interfaces import IBrainForUrbanTable
 from Products.urban.browser.table.interfaces import IObjectForUrbanTable
+
+from plone import api
 
 
 class ItemForUrbanTable():
@@ -30,8 +31,7 @@ class ItemForUrbanTable():
 
     @instance.memoize
     def getTool(self, toolname=''):
-        context = self.getObject()
-        tool = getToolByName(context, toolname)
+        tool = api.portal.get_tool(toolname)
         return tool
 
     def getRawValue(self):
@@ -172,14 +172,13 @@ class ValuesForCorporationsListing(ValuesForUrbanListing):
         return corporations
 
 
-class ValuesForParcellingListing(ValuesForUrbanListing):
-    """  return parcelling values from the context """
+class ValuesForFolderListing(ValuesForUrbanListing):
+    """  return values from the context """
 
     def getItems(self):
         context = self.context
-        catalog = getToolByName(context, 'portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
         query_string = {
-            'portal_type': 'ParcellingTerm',
             'path': {
                 'query': '/'.join(context.getPhysicalPath()),
                 'depth': 1,
@@ -199,7 +198,7 @@ class ValuesForLicenceListing(ValuesForUrbanListing):
     def queryLicences(self, **kwargs):
         context = aq_inner(self.context)
         request = aq_inner(self.request)
-        catalog = getToolByName(context, 'portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
 
         query_string = {
             'portal_type': URBAN_TYPES,
