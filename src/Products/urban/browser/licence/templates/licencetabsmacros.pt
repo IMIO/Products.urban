@@ -1,7 +1,8 @@
 <metal:field_display define-macro="field_display">
     <tr tal:define="fieldname field/getName;
                     field_label field/widget/label_msgid;
-                    nullvalue python: field.get(context) == '' or field.get(context) == ();
+                    value python: field.getAccessor(context)();
+                    nullvalue python: value == '' or value == ();
                     simpletext python: field.type == 'text' and getattr(field, 'default_content_type', '') == 'text/plain'">
 
         <tal:normal_field condition="python: fieldname not in custom">

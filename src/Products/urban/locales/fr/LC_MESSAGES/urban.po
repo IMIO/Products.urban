@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2015-01-12 10:11+0000\n"
+"POT-Creation-Date: 2015-01-13 10:31+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -316,8 +316,14 @@ msgstr "Ajouter une adresse"
 msgid "add_a_claimant"
 msgstr "Ajouter un réclamant"
 
+msgid "add_a_corporation"
+msgstr "Ajouter un demandeur (p. morale)"
+
 msgid "add_a_lot"
 msgstr "Ajouter un lot"
+
+msgid "add_a_physical_applicant"
+msgstr "Ajouter un demandeur"
 
 msgid "add_a_proprietary"
 msgstr "Ajouter un propriétaire"
@@ -831,6 +837,9 @@ msgstr "Coordonnées de l'architecte"
 
 msgid "label_colname_claimant_data"
 msgstr "Coordonnées du réclamant"
+
+msgid "label_colname_corporation_data"
+msgstr "Coordonnées du demandeur (p. morale)"
 
 msgid "label_colname_created"
 msgstr "Créé le"
@@ -1672,6 +1681,11 @@ msgstr "Couche de base (BaseLayer)?"
 msgid "urban_label_basement"
 msgstr "Sous-sol"
 
+#. Default: "Bcenumber"
+#: Corporation.py
+msgid "urban_label_bceNumber"
+msgstr "N° BCE"
+
 #. Default: "Bestaddresscode"
 #: Street.py
 msgid "urban_label_bestAddressCode"
@@ -1852,6 +1866,11 @@ msgstr "Calcul de la date limite"
 #: Inquiry.py
 msgid "urban_label_demandDisplay"
 msgstr "Date d'affichage de la demande"
+
+#. Default: "Denomination"
+#: Corporation.py
+msgid "urban_label_denomination"
+msgstr "Dénomination ou raison sociale"
 
 #. Default: "Derogation"
 #: GenericLicence.py
@@ -2218,6 +2237,11 @@ msgstr "Format"
 #: Layer.py
 msgid "urban_label_layers"
 msgstr "Couches (Layers)"
+
+#. Default: "Legalform"
+#: Corporation.py
+msgid "urban_label_legalForm"
+msgstr "Forme juridique"
 
 #. Default: "Licenceportaltype"
 #: LicenceConfig.py
@@ -2988,6 +3012,11 @@ msgstr "Transparence"
 #: Layer.py
 msgid "urban_label_transparent"
 msgstr "Transparent?"
+
+#. Default: "Tvanumber"
+#: Corporation.py
+msgid "urban_label_tvaNumber"
+msgstr "N° TVA"
 
 #. Default: "Type"
 msgid "urban_label_type"

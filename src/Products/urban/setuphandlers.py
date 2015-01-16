@@ -828,7 +828,7 @@ def addDemoLicences(context):
     """
     Create one dummy licence of each type, and generate all their associated events and documents.
     """
-    if context.readDataFile('urban_demo_marker.txt') is None:
+    if context.readDataFile('urban_licences_marker.txt') is None:
         return
 
     profile_name = context._profile_path.split('/')[-1]

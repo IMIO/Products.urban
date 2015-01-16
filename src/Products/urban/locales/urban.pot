@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-01-12 10:11+0000\n"
+"POT-Creation-Date: 2015-01-13 10:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -315,7 +315,13 @@ msgstr ""
 msgid "add_a_claimant"
 msgstr ""
 
+msgid "add_a_corporation"
+msgstr ""
+
 msgid "add_a_lot"
+msgstr ""
+
+msgid "add_a_physical_applicant"
 msgstr ""
 
 msgid "add_a_proprietary"
@@ -829,6 +835,9 @@ msgid "label_colname_architect_data"
 msgstr ""
 
 msgid "label_colname_claimant_data"
+msgstr ""
+
+msgid "label_colname_corporation_data"
 msgstr ""
 
 msgid "label_colname_created"
@@ -1671,6 +1680,11 @@ msgstr ""
 msgid "urban_label_basement"
 msgstr ""
 
+#. Default: "Bcenumber"
+#: Corporation.py
+msgid "urban_label_bceNumber"
+msgstr ""
+
 #. Default: "Bestaddresscode"
 #: Street.py
 msgid "urban_label_bestAddressCode"
@@ -1850,6 +1864,11 @@ msgstr ""
 #. Default: "Demanddisplay"
 #: Inquiry.py
 msgid "urban_label_demandDisplay"
+msgstr ""
+
+#. Default: "Denomination"
+#: Corporation.py
+msgid "urban_label_denomination"
 msgstr ""
 
 #. Default: "Derogation"
@@ -2214,6 +2233,11 @@ msgstr ""
 #. Default: "Layers"
 #: Layer.py
 msgid "urban_label_layers"
+msgstr ""
+
+#. Default: "Legalform"
+#: Corporation.py
+msgid "urban_label_legalForm"
 msgstr ""
 
 #. Default: "Licenceportaltype"
@@ -2983,6 +3007,11 @@ msgstr ""
 #. Default: "Transparent"
 #: Layer.py
 msgid "urban_label_transparent"
+msgstr ""
+
+#. Default: "Tvanumber"
+#: Corporation.py
+msgid "urban_label_tvaNumber"
 msgstr ""
 
 #. Default: "Type"

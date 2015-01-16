@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Jan 12 11:54:44 2015\n"
-"PO-Revision-Date: Mon Jan 12 11:54:44 2015\n"
+"POT-Creation-Date: Wed Jan 14 16:33:19 2015\n"
+"PO-Revision-Date: Wed Jan 14 16:33:19 2015\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -346,7 +346,7 @@ msgid "urban_label_cityName"
 msgstr ""
 
 #. Default: "Claimingtext"
-#: Contact.py
+#: Claimant.py
 msgid "urban_label_claimingText"
 msgstr ""
 
@@ -687,7 +687,7 @@ msgid "urban_label_isOfficialParcel"
 msgstr ""
 
 #. Default: "Issameaddressasworks"
-#: Contact.py
+#: Applicant.py
 msgid "urban_label_isSameAddressAsWorks"
 msgstr ""
 
@@ -1082,12 +1082,12 @@ msgid "urban_label_relatedFields"
 msgstr ""
 
 #. Default: "Representedby"
-#: Contact.py
+#: Applicant.py
 msgid "urban_label_representedBy"
 msgstr ""
 
 #. Default: "Representedbysociety"
-#: Contact.py
+#: Applicant.py
 msgid "urban_label_representedBySociety"
 msgstr ""
 

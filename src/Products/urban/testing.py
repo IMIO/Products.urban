@@ -99,7 +99,7 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
             addTestUsers(portal)
 
 
-URBAN_TESTS_FUNCTIONAL = UrbanWithUsersLayer(
+URBAN_TESTS_FUNCTIONAL = UrbanWithUsersFunctionalLayer(
     bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_FUNCTIONAL")
 
 
@@ -115,8 +115,23 @@ class UrbanConfigFunctionalLayer(UrbanWithUsersFunctionalLayer):
             helpers.applyProfile(portal, 'Products.urban:testsWithConfig')
 
 
-URBAN_TESTS_CONFIG_FUNCTIONAL = UrbanConfigLayer(
+URBAN_TESTS_CONFIG_FUNCTIONAL = UrbanConfigFunctionalLayer(
     bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_CONFIG_FUNCTIONAL")
+
+
+class UrbanLicencesFunctionalLayer(UrbanConfigFunctionalLayer):
+    """
+    Instanciate licences
+
+    Must collaborate with a layer that installs Plone and Urban
+    Useful for performances: Plone site is instanciated only once
+    """
+    def setUp(self):
+        with helpers.ploneSite() as portal:
+            helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
+
+URBAN_TESTS_LICENCES_FUNCTIONAL = UrbanLicencesFunctionalLayer(
+    bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_LICENCES_FUNCTIONAL")
 
 
 URBAN_TEST_ROBOT = UrbanConfigFunctionalLayer(

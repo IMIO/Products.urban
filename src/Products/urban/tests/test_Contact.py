@@ -1,14 +1,12 @@
 #-*- coding: utf-8 -*-
 
-from Products.urban.testing import URBAN_TESTS_FUNCTIONAL
+from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
+from Products.urban.tests.helpers import BrowserTestCase
 from Products.urban.tests.helpers import SchemaFieldsTestCase
 
 from plone.app.testing import login
 from plone.testing.z2 import Browser
-
-from zope.event import notify
-from zope.lifecycleevent import ObjectModifiedEvent
 
 import transaction
 import unittest
@@ -176,6 +174,149 @@ class TestContactFields(SchemaFieldsTestCase):
         self.assertTrue(self.contact.getField('representedBy'))
 
 
+class TestContactEvents(unittest.TestCase):
+    """
+    """
+
+    layer = URBAN_TESTS_LICENCES_FUNCTIONAL
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+
+        # create a test BuildLicence licence for Applicant contact
+        login(self.portal, 'urbaneditor')
+        buildlicence_folder = self.urban.buildlicences
+        testlicence_id = 'test_buildlicence'
+        if testlicence_id not in buildlicence_folder.objectIds():
+            buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
+        self.applicant_licence = getattr(buildlicence_folder, testlicence_id)
+
+        # create a test UrbanCertificateOne licence for Proprietary contact
+        login(self.portal, 'urbaneditor')
+        urbancertificateone_folder = self.urban.urbancertificateones
+        testlicence_id = 'test_urbancertificateone'
+        if testlicence_id not in urbancertificateone_folder.objectIds():
+            urbancertificateone_folder.invokeFactory('UrbanCertificateOne', id=testlicence_id)
+        self.proprietary_licence = getattr(urbancertificateone_folder, testlicence_id)
+
+        # create a test EnvClassOne licence for Corporation contact
+        login(self.portal, 'urbaneditor')
+        envclassone_folder = self.urban.envclassones
+        testlicence_id = 'test_envclassone'
+        if testlicence_id not in envclassone_folder.objectIds():
+            envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
+        self.corporation_licence = getattr(envclassone_folder, testlicence_id)
+
+    def test_licence_title_is_updated_when_contact_modified(self):
+        """
+        """
+
+
+class TestApplicantFields(SchemaFieldsTestCase):
+
+    layer = URBAN_TESTS_INTEGRATION
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+        self.portal_urban = self.portal.portal_urban
+
+        login(self.portal, 'urbaneditor')
+        buildlicence_folder = self.urban.buildlicences
+        testlicence_id = 'test_buildlicence'
+        if testlicence_id not in buildlicence_folder.objectIds():
+            buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
+            transaction.commit()
+        self.licence = getattr(buildlicence_folder, testlicence_id)
+
+        applicant_id = 'test_applicant'
+        if applicant_id not in self.licence.objectIds():
+            self.licence.invokeFactory('Applicant', id=applicant_id)
+            transaction.commit()
+        self.applicant = getattr(self.licence, applicant_id)
+
+        self.browser = Browser(self.portal)
+        self.browserLogin('urbaneditor')
+
+    def test_applicant_has_attribute_representedBySociety(self):
+        self.assertTrue(self.applicant.getField('representedBySociety'))
+
+    def test_applicant_representedBySociety_is_visible(self):
+        self._is_field_visible("Représenté par la société", obj=self.applicant)
+
+    def test_applicant_representedBySociety_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("Représenté par la société", obj=self.applicant)
+
+    def test_applicant_has_attribute_isSameAddressAsWorks(self):
+        self.assertTrue(self.applicant.getField('isSameAddressAsWorks'))
+
+    def test_applicant_isSameAddressAsWorks_is_visible(self):
+        self._is_field_visible("Adresse identique à l'adresse du bien", obj=self.applicant)
+
+    def test_applicant_isSameAddressAsWorks_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("Adresse identique à l'adresse du bien", obj=self.applicant)
+
+    def test_applicant_has_attribute_representedBy(self):
+        self.assertTrue(self.applicant.getField('representedBy'))
+
+    def test_applicant_representedBy_is_visible(self):
+        self._is_field_visible("Représenté par</span>", obj=self.applicant)
+
+    def test_applicant_representedBy_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("Représenté par", obj=self.applicant)
+
+
+class TestApplicantDisplay(BrowserTestCase):
+
+    layer = URBAN_TESTS_LICENCES_FUNCTIONAL
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+        self.portal_urban = self.portal.portal_urban
+
+        login(self.portal, 'urbaneditor')
+        self.licence = self.portal.urban.buildlicences.objectValues()[-1]
+        self.applicant = self.licence.getApplicants()[0]
+
+        self.browser = Browser(self.portal)
+        self.browserLogin('urbaneditor')
+
+    def test_address_display_when_sameAddressAsWorks_is_checked(self):
+        self.applicant.setStreet('Rue kikoulo')
+        self.applicant.setNumber('6969')
+        self.applicant.setZipcode('5000')
+        self.applicant.setCity('Namur')
+        transaction.commit()
+
+        address_fields = ['street', 'number', 'zipcode', 'city']
+
+        self.browser.open(self.applicant.absolute_url())
+        contents = self.browser.contents
+        for field_name in address_fields:
+            field = self.applicant.getField(field_name)
+            field_value = field.getAccessor(self.applicant)()
+            msg = "field '{}' value '{}' should have been displayed".format(
+                field_name, field_value
+            )
+            self.assertTrue(field_value in contents, msg)
+
+        self.applicant.setIsSameAddressAsWorks(True)
+        transaction.commit()
+
+        self.browser.open(self.applicant.absolute_url())
+        contents = self.browser.contents
+        licence_address = self.licence.getWorkLocationSignaletic()
+        for field_name in address_fields:
+            field = self.applicant.getField(field_name)
+            field_value = field.getAccessor(self.applicant)()
+            self.assertTrue(field_value in licence_address)
+            field_content = field.get(self.applicant)
+            self.assertTrue(field_value != field_content)
+            self.assertTrue(field_content not in contents)
+
+
 class TestCorporationFields(SchemaFieldsTestCase):
 
     layer = URBAN_TESTS_INTEGRATION
@@ -210,42 +351,3 @@ class TestCorporationFields(SchemaFieldsTestCase):
 
     def test_corporation_denomination_is_visible_in_edit(self):
         self._is_field_visible_in_edit("Dénomination ou raison sociale", obj=self.corporation)
-
-
-class TestContactEvents(unittest.TestCase):
-    """
-    """
-
-    layer = URBAN_TESTS_FUNCTIONAL
-
-    def setUp(self):
-        self.portal = self.layer['portal']
-        self.urban = self.portal.urban
-
-        # create a test BuildLicence licence for Applicant contact
-        login(self.portal, 'urbaneditor')
-        buildlicence_folder = self.urban.buildlicences
-        testlicence_id = 'test_buildlicence'
-        if testlicence_id not in buildlicence_folder.objectIds():
-            buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
-        self.applicant_licence = getattr(buildlicence_folder, testlicence_id)
-
-        # create a test UrbanCertificateOne licence for Proprietary contact
-        login(self.portal, 'urbaneditor')
-        urbancertificateone_folder = self.urban.urbancertificateones
-        testlicence_id = 'test_urbancertificateone'
-        if testlicence_id not in urbancertificateone_folder.objectIds():
-            urbancertificateone_folder.invokeFactory('UrbanCertificateOne', id=testlicence_id)
-        self.proprietary_licence = getattr(urbancertificateone_folder, testlicence_id)
-
-        # create a test EnvClassOne licence for Corporation contact
-        login(self.portal, 'urbaneditor')
-        envclassone_folder = self.urban.envclassones
-        testlicence_id = 'test_envclassone'
-        if testlicence_id not in envclassone_folder.objectIds():
-            envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
-        self.corporation_licence = getattr(envclassone_folder, testlicence_id)
-
-    def test_licence_title_is_updated_when_contact_modified(self):
-        """
-        """

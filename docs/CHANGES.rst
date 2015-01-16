@@ -3,6 +3,11 @@
 Changes
 =======
 
+1.7.0
+-----
+
+Add optional field RGBSR.
+
 
 1.6.0
 -----

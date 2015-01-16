@@ -35,4 +35,12 @@
         handler=".migrate_to_160.migrateToUrban160"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Upgrade urban to 1.7.0"
+        description="urban upgrade step"
+        source="1.6.0"
+        destination="1.7.0"
+        handler=".migrate_to_170.migrateToUrban170"
+        profile="Products.urban:default" />
+
 </configure>

@@ -25,6 +25,8 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
+from plone import api
+
 import cgi
 
 slave_fields_address = (
@@ -147,6 +149,86 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
         else:
             return "%s %s %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2())
 
+    security.declarePublic('getNumber')
+    def getNumber(self):
+        """
+          Overrides the 'number' field accessor
+        """
+        #special behaviour for the applicants if we mentionned that the applicant's address
+        #is the same as the works's address
+        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
+            #get the works address
+            licence = self.aq_inner.aq_parent
+            workLocations = licence.getWorkLocations()
+            if not workLocations:
+                return ''
+            else:
+                return workLocations[0]['number']
+        else:
+            return self.getField('number').get(self)
+
+    security.declarePublic('getZipcode')
+    def getZipcode(self):
+        """
+          Overrides the 'zipcode' field accessor
+        """
+        #special behaviour for the applicants if we mentionned that the applicant's address
+        #is the same as the works's address
+        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
+            #get the works address
+            street = self._getStreetFromLicence()
+            if not street:
+                return ''
+            return str(street.getCity().getZipCode())
+        else:
+            return self.getField('zipcode').get(self)
+
+    security.declarePublic('getCity')
+    def getCity(self):
+        """
+          Overrides the 'city' field accessor
+        """
+        #special behaviour for the applicants if we mentionned that the applicant's address
+        #is the same as the works's address
+        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
+            #get the works address
+            street = self._getStreetFromLicence()
+            if not street:
+                return ''
+            return street.getCity().Title()
+        else:
+            return self.getField('city').get(self)
+
+    def _getStreetFromLicence(self):
+        """
+          Get the street of the first workLocations on the licence
+          This is usefull if the address of self is the same as the address of the workLocation
+        """
+        licence = self.aq_inner.aq_parent
+        workLocations = licence.getWorkLocations()
+        if not workLocations:
+            return ''
+        else:
+            workLocationStreetUID = workLocations[0]['street']
+            uid_catalog = api.portal.get_tool('uid_catalog')
+            return uid_catalog(UID=workLocationStreetUID)[0].getObject()
+
+    security.declarePublic('getStreet')
+    def getStreet(self):
+        """
+          Overrides the 'street' field accessor
+        """
+        #special behaviour for the applicants if we mentionned that the applicant's address
+        #is the same as the works's address
+        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
+            #get the works address
+            street = self._getStreetFromLicence()
+            if not street:
+                return ''
+            return street.getStreetName()
+        else:
+            return self.getField('street').get(self)
+
     security.declarePublic('showRepresentedByField')
     def showRepresentedByField(self):
         """
@@ -222,12 +304,20 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
             return nameSignaletic
     ##/code-section class-header
 
-    # Methods
-
 
 registerType(Applicant, PROJECTNAME)
 # end of class Applicant
 
 ##code-section module-footer #fill in your manual code here
+
+
+def finalizeSchema(schema, folderish=False, moveDiscussion=True):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('representedBySociety', after='society')
+    schema.moveField('isSameAddressAsWorks', after='representedBySociety')
+
+finalizeSchema(Applicant_schema)
 ##/code-section module-footer
 

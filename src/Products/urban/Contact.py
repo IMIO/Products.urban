@@ -25,10 +25,11 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 import cgi
 from zope.i18n import translate
-from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.validation.interfaces.IValidator import IValidator
 from Products.validation import validation
+
+from plone import api
 
 
 class BelgianNationalRegValidator:
@@ -235,7 +236,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
           Returns the contact base signaletic : title and names
         """
-        urban_tool = getToolByName(self, 'portal_urban')
+        urban_tool = api.portal.get_tool('portal_urban')
         invertnames = urban_tool.getInvertAddressNames()
         nameSignaletic = self._getNameSignaletic(short, linebyline, invertnames=invertnames)
         if not withaddress:
@@ -331,12 +332,12 @@ class Contact(BaseContent, BrowserDefaultMixin):
         if not short:
             res = self.getField('personTitle').get(self)
             if res and theObject:
-                tool = getToolByName(self, 'portal_urban')
+                tool = api.portal.get_tool('portal_urban')
                 res = getattr(tool.persons_titles, res)
             return res
 
         #or the short one...
-        tool = getToolByName(self, 'portal_urban')
+        tool = api.portal.get_tool('portal_urban')
         if hasattr(tool.persons_titles, self.getField('personTitle').get(self)):
             #XXX remove this when everybody will use the Plone4 version (aka Sambreville and La Bruyere)
             try:
@@ -362,86 +363,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
             return self.displayValue(self.Vocabulary('personTitle')[0], personTitle).encode('UTF-8')
         else:
             return ''
-
-    security.declarePublic('getNumber')
-    def getNumber(self):
-        """
-          Overrides the 'number' field accessor
-        """
-        #special behaviour for the applicants if we mentionned that the applicant's address
-        #is the same as the works's address
-        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
-            #get the works address
-            licence = self.aq_inner.aq_parent
-            workLocations = licence.getWorkLocations()
-            if not workLocations:
-                return ''
-            else:
-                return workLocations[0]['number']
-        else:
-            return self.getField('number').get(self)
-
-    def _getStreetFromLicence(self):
-        """
-          Get the street of the first workLocations on the licence
-          This is usefull if the address of self is the same as the address of the workLocation
-        """
-        licence = self.aq_inner.aq_parent
-        workLocations = licence.getWorkLocations()
-        if not workLocations:
-            return ''
-        else:
-            workLocationStreetUID = workLocations[0]['street']
-            uid_catalog = getToolByName(self, 'uid_catalog')
-            return uid_catalog(UID=workLocationStreetUID)[0].getObject()
-
-    security.declarePublic('getStreet')
-    def getStreet(self):
-        """
-          Overrides the 'street' field accessor
-        """
-        #special behaviour for the applicants if we mentionned that the applicant's address
-        #is the same as the works's address
-        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
-            #get the works address
-            street = self._getStreetFromLicence()
-            if not street:
-                return ''
-            return street.getStreetName()
-        else:
-            return self.getField('street').get(self)
-
-    security.declarePublic('getZipcode')
-    def getZipcode(self):
-        """
-          Overrides the 'zipcode' field accessor
-        """
-        #special behaviour for the applicants if we mentionned that the applicant's address
-        #is the same as the works's address
-        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
-            #get the works address
-            street = self._getStreetFromLicence()
-            if not street:
-                return ''
-            return str(street.getCity().getZipCode())
-        else:
-            return self.getField('zipcode').get(self)
-
-    security.declarePublic('getCity')
-    def getCity(self):
-        """
-          Overrides the 'city' field accessor
-        """
-        #special behaviour for the applicants if we mentionned that the applicant's address
-        #is the same as the works's address
-        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
-            #get the works address
-            street = self._getStreetFromLicence()
-            if not street:
-                return ''
-            return street.getCity().Title()
-        else:
-            return self.getField('city').get(self)
 
 
 
