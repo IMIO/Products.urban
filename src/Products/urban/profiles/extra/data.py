@@ -1552,7 +1552,27 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "env1-affiche-decision", 'title': "Affiche"},
                 {'id': "env1-affichage-mission", 'title': "Demande de mission"},
-                {'id': "env1-certificat-decision", 'title': "Certificat d'affichage"},
+                {'id': "env1-certificat-decision", 'title': "Certificat d'affichage de la décision"},
+            ),
+        },
+        {
+            'id': "affichage-recours",
+            'title': "Recours",
+            'eventDateLabel': "Date d'affichage",
+            'activatedFields': ['transmitDate'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+        },
+        {
+            'id': "affichage-decision-recours",
+            'title': "Décision du recours",
+            'eventDateLabel': "Date d'affichage",
+            'activatedFields': ['decisionDate', 'transmitDate'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
             ),
         },
     ),

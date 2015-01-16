@@ -14,7 +14,7 @@ Add optional field RGBSR.
 
 - Use sphinx to generate documentation
 
-- Add global templates for enviroment licences (#7821).
+1.7.0 (2015-01-16)
 
 - Add field "Périmètre de Rénovation urbaine"
 
