@@ -14,6 +14,12 @@ Add optional field RGBSR.
 
 - Use sphinx to generate documentation
 
+1.7.1 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
 1.7.0 (2015-01-16)
 
 - Add field "Périmètre de Rénovation urbaine"
