@@ -27,6 +27,7 @@ setup(name='Products.urban',
               'unittest2', 'zope.testing', 'plone.testing',
               'testfixtures',
               'plone.app.testing',
+              'plone.app.robotframework[debug, test]',
           ],
           templates=[
               'Genshi',
