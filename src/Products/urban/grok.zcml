@@ -4,5 +4,6 @@
     i18n_domain="urban">
 
   <grok:grok package=".factory"/>
+  <grok:grok package=".vocabularies"/>
 
 </configure>
