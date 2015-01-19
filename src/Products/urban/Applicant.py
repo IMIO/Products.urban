@@ -140,12 +140,8 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
         """
            Generate the title...
         """
-        if not self.getName1():
-            return self.getSociety()
         if self.getRepresentedBySociety():
             return "%s %s %s repr. par %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2(), self.getSociety())
-        elif self.getSociety():
-            return "%s %s %s (%s)" % (self.getPersonTitle(short=True), self.getName1(), self.getName2(), self.getSociety())
         else:
             return "%s %s %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2())
 

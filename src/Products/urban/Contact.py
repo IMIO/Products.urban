@@ -224,9 +224,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
            Generate the title...
         """
-        if not self.getName1():
-            return self.getSociety()
-        elif self.getSociety():
+        if self.getSociety():
             return "%s %s %s (%s)" % (self.getPersonTitle(short=True), self.getName1(), self.getName2(), self.getSociety())
         else:
             return "%s %s %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2())
@@ -339,13 +337,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         #or the short one...
         tool = api.portal.get_tool('portal_urban')
         if hasattr(tool.persons_titles, self.getField('personTitle').get(self)):
-            #XXX remove this when everybody will use the Plone4 version (aka Sambreville and La Bruyere)
-            try:
-                return getattr(tool.persons_titles, self.getField('personTitle').get(self)).getAbbreviation()
-            except AttributeError:
-                #for old instances, persons_titles are UrbanVocabularyTerms and have no abbreviation...
-                #we used the no more existing termKeyStr attribute... that is removed in a migration step
-                return getattr(tool.persons_titles, self.getField('personTitle').get(self)).termKeyStr.encode('utf-8')
+            return getattr(tool.persons_titles, self.getField('personTitle').get(self)).getAbbreviation()
         else:
             return ''
 

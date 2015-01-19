@@ -8,6 +8,9 @@ from Products.urban.tests.helpers import SchemaFieldsTestCase
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
+
 import transaction
 import unittest
 
@@ -186,29 +189,8 @@ class TestContactEvents(unittest.TestCase):
 
         # create a test BuildLicence licence for Applicant contact
         login(self.portal, 'urbaneditor')
-        buildlicence_folder = self.urban.buildlicences
-        testlicence_id = 'test_buildlicence'
-        if testlicence_id not in buildlicence_folder.objectIds():
-            buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
-        self.applicant_licence = getattr(buildlicence_folder, testlicence_id)
 
-        # create a test UrbanCertificateOne licence for Proprietary contact
-        login(self.portal, 'urbaneditor')
-        urbancertificateone_folder = self.urban.urbancertificateones
-        testlicence_id = 'test_urbancertificateone'
-        if testlicence_id not in urbancertificateone_folder.objectIds():
-            urbancertificateone_folder.invokeFactory('UrbanCertificateOne', id=testlicence_id)
-        self.proprietary_licence = getattr(urbancertificateone_folder, testlicence_id)
-
-        # create a test EnvClassOne licence for Corporation contact
-        login(self.portal, 'urbaneditor')
-        envclassone_folder = self.urban.envclassones
-        testlicence_id = 'test_envclassone'
-        if testlicence_id not in envclassone_folder.objectIds():
-            envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
-        self.corporation_licence = getattr(envclassone_folder, testlicence_id)
-
-    def test_licence_title_is_updated_when_contact_modified(self):
+    def test_licence_title_is_updated_when_applicant_modified(self):
         """
         """
 
@@ -267,7 +249,7 @@ class TestApplicantFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("Représenté par", obj=self.applicant)
 
 
-class TestApplicantDisplay(BrowserTestCase):
+class TestApplicant(BrowserTestCase):
 
     layer = URBAN_TESTS_LICENCES_FUNCTIONAL
 
@@ -315,6 +297,30 @@ class TestApplicantDisplay(BrowserTestCase):
             field_content = field.get(self.applicant)
             self.assertTrue(field_value != field_content)
             self.assertTrue(field_content not in contents)
+
+    def test_applicant_Title(self):
+        self.applicant.setName1('Alastair')
+        self.applicant.setName2('Ballcocke')
+        self.assertTrue(self.applicant.Title() == ' Alastair Ballcocke')
+
+        self.applicant.setRepresentedBySociety(True)
+        self.applicant.setSociety('Fletcher, Fletcher & Fletcher')
+        self.assertTrue(self.applicant.Title() == ' Alastair Ballcocke repr. par Fletcher, Fletcher & Fletcher')
+
+    def test_licence_title_update_when_applicant_modified(self):
+        name_1 = 'Alastair'
+        name_2 = 'Ballcocke'
+
+        self.assertTrue(name_1 not in self.licence.Title())
+        self.assertTrue(name_2 not in self.licence.Title())
+
+        self.applicant.setName1(name_1)
+        self.applicant.setName2(name_2)
+        zopeevent = ObjectModifiedEvent(self.applicant)
+        notify(zopeevent)
+
+        self.assertTrue(name_1 in self.licence.Title())
+        self.assertTrue(name_2 in self.licence.Title())
 
 
 class TestCorporationFields(SchemaFieldsTestCase):
@@ -402,3 +408,35 @@ class TestCorporationFields(SchemaFieldsTestCase):
 
     def test_corporation_representedBySociety_is_hidden_in_edit(self):
         self._is_field_hidden_in_edit("Représenté par la société", obj=self.corporation)
+
+
+class TestCorporation(BrowserTestCase):
+
+    layer = URBAN_TESTS_LICENCES_FUNCTIONAL
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+        self.portal_urban = self.portal.portal_urban
+
+        login(self.portal, 'urbaneditor')
+        self.licence = self.portal.urban.envclassones.objectValues()[-1]
+        self.corporation = self.licence.getCorporations()[0]
+
+        self.browser = Browser(self.portal)
+        self.browserLogin('urbaneditor')
+
+    def test_corporation_Title(self):
+        self.corporation.setDenomination('Hyperion')
+        self.assertTrue(self.corporation.Title() == 'Hyperion')
+
+    def test_licence_title_update_when_corporation_modified(self):
+        company_name = 'Hyperion'
+
+        self.assertTrue(company_name not in self.licence.Title())
+
+        self.corporation.setDenomination(company_name)
+        zopeevent = ObjectModifiedEvent(self.corporation)
+        notify(zopeevent)
+
+        self.assertTrue(company_name in self.licence.Title())

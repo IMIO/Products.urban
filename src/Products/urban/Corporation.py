@@ -102,6 +102,13 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
 
     # Methods
 
+    security.declarePublic('Title')
+    def Title(self):
+        """
+        Generate the title...
+        """
+        return self.getDenomination()
+
 
 registerType(Corporation, PROJECTNAME)
 # end of class Corporation
@@ -111,7 +118,7 @@ registerType(Corporation, PROJECTNAME)
 
 def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
-       Finalizes the type schema to alter some fields
+    Finalizes the type schema to alter some fields
     """
     schema.moveField('denomination', before='personTitle')
     schema.moveField('legalForm', after='denomination')

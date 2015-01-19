@@ -40,6 +40,11 @@ licences_data = {
     },
     'EnvClassOne': {
         'licenceSubject': 'Exemple Permis d\'environnement classe 1',
-        'contact_type': 'Applicant',
+        'contact_type': 'Corporation',
+        'contact_data':  {
+            'denomination': 'Toha Heavy Industries',
+            'name1': 'Smith &',
+            'name2': 'Wesson',
+        },
     },
 }

@@ -78,7 +78,7 @@
     <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=False)">
         <tal:block define="fieldName field/getName;
                            addressFields python: ['isSameAddressAsWorks', 'street', 'number', 'zipcode', 'city', 'country'];
-                           representativeFields python: ['name1', 'name2']">
+                           representativeFields python: ['personRole', 'name1', 'name2']">
 
             <tal:address condition="python: fieldName in addressFields">
                 <tal:manage_address condition="python: fieldName == 'isSameAddressAsWorks'">
