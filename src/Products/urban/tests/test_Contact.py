@@ -426,6 +426,39 @@ class TestCorporation(BrowserTestCase):
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
 
+    def test_address_display_when_sameAddressAsWorks_is_checked(self):
+        self.corporation.setStreet('Rue kikoulo')
+        self.corporation.setNumber('6969')
+        self.corporation.setZipcode('5000')
+        self.corporation.setCity('Namur')
+        transaction.commit()
+
+        address_fields = ['street', 'number', 'zipcode', 'city']
+
+        self.browser.open(self.corporation.absolute_url())
+        contents = self.browser.contents
+        for field_name in address_fields:
+            field = self.corporation.getField(field_name)
+            field_value = field.getAccessor(self.corporation)()
+            msg = "field '{}' value '{}' should have been displayed".format(
+                field_name, field_value
+            )
+            self.assertTrue(field_value in contents, msg)
+
+        self.corporation.setIsSameAddressAsWorks(True)
+        transaction.commit()
+
+        self.browser.open(self.corporation.absolute_url())
+        contents = self.browser.contents
+        licence_address = self.licence.getWorkLocationSignaletic()
+        for field_name in address_fields:
+            field = self.corporation.getField(field_name)
+            field_value = field.getAccessor(self.corporation)()
+            self.assertTrue(field_value in licence_address)
+            field_content = field.get(self.corporation)
+            self.assertTrue(field_value != field_content)
+            self.assertTrue(field_content not in contents)
+
     def test_corporation_Title(self):
         self.corporation.setDenomination('Hyperion')
         self.assertTrue(self.corporation.Title() == 'Hyperion')
