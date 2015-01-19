@@ -351,3 +351,54 @@ class TestCorporationFields(SchemaFieldsTestCase):
 
     def test_corporation_denomination_is_visible_in_edit(self):
         self._is_field_visible_in_edit("Dénomination ou raison sociale", obj=self.corporation)
+
+    def test_corporation_has_attribute_personRole(self):
+        self.assertTrue(self.corporation.getField('personRole'))
+
+    def test_corporation_personRole_is_visible(self):
+        self._is_field_visible("Qualité", obj=self.corporation)
+
+    def test_corporation_personRole_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("Qualité", obj=self.corporation)
+
+    def test_corporation_has_attribute_tvaNumber(self):
+        self.assertTrue(self.corporation.getField('tvaNumber'))
+
+    def test_corporation_tvaNumber_is_visible(self):
+        self._is_field_visible("N° TVA", obj=self.corporation)
+
+    def test_corporation_tvaNumber_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("N° TVA", obj=self.corporation)
+
+    def test_corporation_has_attribute_bceNumber(self):
+        self.assertTrue(self.corporation.getField('bceNumber'))
+
+    def test_corporation_bceNumber_is_visible(self):
+        self._is_field_visible("N° BCE", obj=self.corporation)
+
+    def test_corporation_bceNumber_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("N° BCE", obj=self.corporation)
+
+    def test_corporation_personTitle_is_hidden(self):
+        self._is_field_hidden("Titre", obj=self.corporation)
+
+    def test_corporation_personTitle_is_hidden_in_edit(self):
+        self._is_field_hidden_in_edit("Tritre", obj=self.corporation)
+
+    def test_corporation_representedBy_is_hidden(self):
+        self._is_field_hidden("Représenté par", obj=self.corporation)
+
+    def test_corporation_representedBy_is_hidden_in_edit(self):
+        self._is_field_hidden_in_edit("Représenté par", obj=self.corporation)
+
+    def test_corporation_society_is_hidden(self):
+        self._is_field_hidden("Société", obj=self.corporation)
+
+    def test_corporation_society_is_hidden_in_edit(self):
+        self._is_field_hidden_in_edit("Société", obj=self.corporation)
+
+    def test_corporation_representedBySociety_is_hidden(self):
+        self._is_field_hidden("Représenté par la société", obj=self.corporation)
+
+    def test_corporation_representedBySociety_is_hidden_in_edit(self):
+        self._is_field_hidden_in_edit("Représenté par la société", obj=self.corporation)

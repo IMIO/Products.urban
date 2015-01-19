@@ -37,3 +37,16 @@ class SchemaFieldsTestCase(BrowserTestCase):
         self.browser.open(edit_url)
         contents = self.browser.contents
         self.assertTrue(expected_fieldname in contents, msg)
+
+    def _is_field_hidden(self, expected_fieldname, obj=None, msg=''):
+        obj = obj or self.licence
+        self.browser.open(obj.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue(expected_fieldname not in contents, msg)
+
+    def _is_field_hidden_in_edit(self, expected_fieldname, obj=None, msg=''):
+        obj = obj or self.licence
+        edit_url = '{}/edit'.format(obj.absolute_url())
+        self.browser.open(edit_url)
+        contents = self.browser.contents
+        self.assertTrue(expected_fieldname not in contents, msg)

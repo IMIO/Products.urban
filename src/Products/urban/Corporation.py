@@ -59,6 +59,14 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    StringField(
+        name='personRole',
+        widget=StringField._properties['widget'](
+            label='Personrole',
+            label_msgid='urban_label_personRole',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )
@@ -71,6 +79,11 @@ Corporation_schema = BaseSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+Corporation_schema['society'].widget.visible = False
+Corporation_schema['representedBySociety'].widget.visible = False
+Corporation_schema['representedBy'].widget.visible = False
+Corporation_schema['nationalRegister'].widget.visible = False
+Corporation_schema['personTitle'].widget.visible = False
 ##/code-section after-schema
 
 class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
@@ -94,5 +107,21 @@ registerType(Corporation, PROJECTNAME)
 # end of class Corporation
 
 ##code-section module-footer #fill in your manual code here
+
+
+def finalizeSchema(schema, folderish=False, moveDiscussion=True):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('denomination', before='personTitle')
+    schema.moveField('legalForm', after='denomination')
+    schema.moveField('tvaNumber', after='fax')
+    schema.moveField('bceNumber', after='tvaNumber')
+    schema.moveField('personTitle', after='bceNumber')
+    schema.moveField('personRole', after='personTitle')
+    schema.moveField('name1', after='personRole')
+    schema.moveField('name2', after='name1')
+
+finalizeSchema(Corporation_schema)
 ##/code-section module-footer
 

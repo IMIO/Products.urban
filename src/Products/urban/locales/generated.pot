@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Wed Jan 14 16:33:19 2015\n"
-"PO-Revision-Date: Wed Jan 14 16:33:19 2015\n"
+"POT-Creation-Date: Mon Jan 19 10:07:26 2015\n"
+"PO-Revision-Date: Mon Jan 19 10:07:26 2015\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -954,6 +954,11 @@ msgstr ""
 #. Default: "Pebtype"
 #: BuildLicence.py
 msgid "urban_label_pebType"
+msgstr ""
+
+#. Default: "Personrole"
+#: Corporation.py
+msgid "urban_label_personRole"
 msgstr ""
 
 #. Default: "Persontitle"

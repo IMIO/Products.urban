@@ -304,6 +304,179 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
             return nameSignaletic
     ##/code-section class-header
 
+    # Methods
+
+    # Manually created methods
+
+    security.declarePublic('Title')
+    def Title(self):
+        """
+           Generate the title...
+        """
+        if not self.getName1():
+            return self.getSociety()
+        if self.getRepresentedBySociety():
+            return "%s %s %s repr. par %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2(), self.getSociety())
+        elif self.getSociety():
+            return "%s %s %s (%s)" % (self.getPersonTitle(short=True), self.getName1(), self.getName2(), self.getSociety())
+        else:
+            return "%s %s %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2())
+
+    security.declarePublic('getNumber')
+    def getNumber(self):
+        """
+          Overrides the 'number' field accessor
+        """
+        #special behaviour for the applicants if we mentionned that the applicant's address
+        #is the same as the works's address
+        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
+            #get the works address
+            licence = self.aq_inner.aq_parent
+            workLocations = licence.getWorkLocations()
+            if not workLocations:
+                return ''
+            else:
+                return workLocations[0]['number']
+        else:
+            return self.getField('number').get(self)
+
+    security.declarePublic('getZipcode')
+    def getZipcode(self):
+        """
+          Overrides the 'zipcode' field accessor
+        """
+        #special behaviour for the applicants if we mentionned that the applicant's address
+        #is the same as the works's address
+        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
+            #get the works address
+            street = self._getStreetFromLicence()
+            if not street:
+                return ''
+            return str(street.getCity().getZipCode())
+        else:
+            return self.getField('zipcode').get(self)
+
+    security.declarePublic('getCity')
+    def getCity(self):
+        """
+          Overrides the 'city' field accessor
+        """
+        #special behaviour for the applicants if we mentionned that the applicant's address
+        #is the same as the works's address
+        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
+            #get the works address
+            street = self._getStreetFromLicence()
+            if not street:
+                return ''
+            return street.getCity().Title()
+        else:
+            return self.getField('city').get(self)
+
+    def _getStreetFromLicence(self):
+        """
+          Get the street of the first workLocations on the licence
+          This is usefull if the address of self is the same as the address of the workLocation
+        """
+        licence = self.aq_inner.aq_parent
+        workLocations = licence.getWorkLocations()
+        if not workLocations:
+            return ''
+        else:
+            workLocationStreetUID = workLocations[0]['street']
+            uid_catalog = api.portal.get_tool('uid_catalog')
+            return uid_catalog(UID=workLocationStreetUID)[0].getObject()
+
+    security.declarePublic('getStreet')
+    def getStreet(self):
+        """
+          Overrides the 'street' field accessor
+        """
+        #special behaviour for the applicants if we mentionned that the applicant's address
+        #is the same as the works's address
+        if (self.portal_type == "Applicant" or self.portal_type == "Proprietary") and self.getIsSameAddressAsWorks():
+            #get the works address
+            street = self._getStreetFromLicence()
+            if not street:
+                return ''
+            return street.getStreetName()
+        else:
+            return self.getField('street').get(self)
+
+    security.declarePublic('showRepresentedByField')
+    def showRepresentedByField(self):
+        """
+        Only show the representedBy field if the current Contact is an Applicant (portal_type)
+        and only for some URBAN_TYPES
+        """
+        parent = self.aq_inner.aq_parent
+        #if the Contact is just created, we are in portal_factory.The parent is a TempFolder
+        if parent.portal_type == 'TempFolder':
+            parent = parent.aq_parent.aq_parent
+        if not parent.portal_type in ['BuildLicence', 'UrbanCertificateOne', 'UrbanCertificateTwo', 'Division']:
+            return False
+        if hasattr(parent, 'getArchitects') and not parent.getArchitects():
+            return False
+        if hasattr(parent, 'getNotaryContact') and not parent.getNotaryContact():
+            return False
+        return True
+
+    security.declarePublic('getRepresentedBy')
+    def getRepresentedBy(self):
+        for contact_uid in self.getField('representedBy').getRaw(self):
+            if contact_uid not in self.listRepresentedBys().keys():
+                return ()
+        return self.getField('representedBy').getRaw(self)
+
+    security.declarePublic('listRepresentedBys')
+    def listRepresentedBys(self):
+        """
+          Returns the list of potential Contacts that could represent the current Contact
+          only if it is an "Applicant" as the field will be hidden by the condition on the field otherwise
+        """
+        #the potential representator are varying upon licence type
+        #moreover, as we are using ReferenceField, we can not use getattr...
+        potential_contacts = []
+        parent = self.aq_inner.aq_parent
+        if hasattr(parent, 'getNotaryContact'):
+            potential_contacts.extend(list(parent.getNotaryContact()))
+        if hasattr(parent, 'getGeometricians'):
+            potential_contacts.extend(list(parent.getGeometricians()))
+        if hasattr(parent, 'getArchitects'):
+            potential_contacts.extend(parent.getArchitects())
+
+        vocabulary = [(contact.UID(), contact.Title(),) for contact in potential_contacts]
+        return DisplayList(tuple(vocabulary))
+
+    def _getNameSignaletic(self, short, linebyline, invertnames=False):
+        title = self.getPersonTitleValue(short, extra=False)
+        namedefined = self.getName1() or self.getName2()
+        names = '%s %s' % (self.getName1(), self.getName2())
+        if invertnames and linebyline:
+            names = '%s %s' % (self.getName2(), self.getName1())
+        namepart = namedefined and names or self.getSociety()
+        nameSignaletic = '%s %s' % (title, namepart)
+        if len(self.getRepresentedBy()) > 0 or self.getRepresentedBySociety():
+            person_title = self.getPersonTitle(theObject=True)
+            representatives = self.getRepresentedBySociety() and self.getSociety() or self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
+            gender = multiplicity = ''
+            represented = 'représenté'
+            if person_title:
+                gender = person_title.getGender()
+                multiplicity = person_title.getMultiplicity()
+                if gender == 'male' and multiplicity == 'plural':
+                    represented = 'représentés'
+                elif gender == 'female' and multiplicity == 'single':
+                    represented = 'représentée'
+                elif gender == 'female' and multiplicity == 'plural':
+                    represented = 'représentées'
+            nameSignaletic = '%s %s %s par %s' % (title, namepart, represented, representatives)
+        if linebyline:
+            #escape HTML special characters like HTML entities
+            return cgi.escape(nameSignaletic)
+        else:
+            return nameSignaletic
+    ##/code-section class-header
+
 
 registerType(Applicant, PROJECTNAME)
 # end of class Applicant

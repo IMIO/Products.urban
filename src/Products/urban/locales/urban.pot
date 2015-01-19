@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-01-13 10:31+0000\n"
+"POT-Creation-Date: 2015-01-19 09:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -484,6 +484,9 @@ msgid "content_no_urbaneventinquiry"
 msgstr ""
 
 msgid "content_none"
+msgstr ""
+
+msgid "corporation_representative_fieldset_legend"
 msgstr ""
 
 msgid "country_folder_title"
@@ -2533,6 +2536,11 @@ msgstr ""
 #. Default: "Pebtype"
 #: BuildLicence.py
 msgid "urban_label_pebType"
+msgstr ""
+
+#. Default: "Personrole"
+#: Corporation.py
+msgid "urban_label_personRole"
 msgstr ""
 
 #. Default: "Persontitle"

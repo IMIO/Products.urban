@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2015-01-13 10:31+0000\n"
+"POT-Creation-Date: 2015-01-19 09:14+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -486,6 +486,9 @@ msgstr "Aucun événement n'est encore lié à cette enquête publique"
 
 msgid "content_none"
 msgstr "N.C."
+
+msgid "corporation_representative_fieldset_legend"
+msgstr "Personne dûment abilité à représenter la personne morale"
 
 msgid "country_folder_title"
 msgstr "Pays des personnes"
@@ -2537,6 +2540,11 @@ msgstr "Avis technique PEB"
 #: BuildLicence.py
 msgid "urban_label_pebType"
 msgstr "Type de PEB"
+
+#. Default: "Personrole"
+#: Corporation.py
+msgid "urban_label_personRole"
+msgstr "Qualité"
 
 #. Default: "Persontitle"
 #: Contact.py
