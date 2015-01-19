@@ -138,6 +138,8 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
 
     # Methods
 
+    # Manually created methods
+
     security.declarePublic('Title')
     def Title(self):
         """
@@ -302,7 +304,6 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
         else:
             return nameSignaletic
 
-    # Manually created methods
 
 
 registerType(Applicant, PROJECTNAME)

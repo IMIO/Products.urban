@@ -102,12 +102,15 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
 
     # Methods
 
+    # Manually created methods
+
     security.declarePublic('Title')
     def Title(self):
         """
         Generate the title...
         """
         return self.getDenomination()
+
 
 
 registerType(Corporation, PROJECTNAME)

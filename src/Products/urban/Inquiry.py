@@ -32,7 +32,7 @@ from Products.urban.utils import setOptionalAttributes
 optional_fields = [
     'derogationDetails', 'investigationDetails', 'investigationReasons',
     'investigationArticlesText', 'investigationArticles', 'demandDisplay',
-    'derogation', 'derogationDetails'
+    'derogation', 'derogationDetails', 'roadModificationSubject'
 ]
 ##/code-section module-header
 
@@ -134,6 +134,18 @@ schema = Schema((
         widget=RichWidget(
             label='Investigationreasons',
             label_msgid='urban_label_investigationReasons',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        default_output_type='text/html',
+    ),
+    TextField(
+        name='roadModificationSubject',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Roadmodificationsubject',
+            label_msgid='urban_label_roadModificationSubject',
             i18n_domain='urban',
         ),
         default_content_type='text/html',
