@@ -1532,10 +1532,23 @@ urbanEventTypes = {
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': (
             'TALCondition': "python: here.getAuthority() == 'college'",
+            'podTemplates': (
                 {'id': "env1-transmis-decision", 'title': "Transmis de la décision (demandeur)"},
                 {'id': "env1-transmis-decision-FT", 'title': "Transmis de la décision (FT)"},
+            ),
+            'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
+        },
+        {
+            'id': "decision-transmit-FT",
+            'title': "Information de la décision du FT",
+            'activatedFields': ['decisionDate', 'decision'],
+            'eventDateLabel': "Date de notification",
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'TALCondition': "python: here.getAuthority() == 'ft'",
+            'podTemplates': (
+                {'id': "env1-transmis-decision", 'title': "Transmis de la décision (demandeur)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
         },
