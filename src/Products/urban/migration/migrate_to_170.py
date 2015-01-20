@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from Products.CMFCore.utils import getToolByName
-
 from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
+
+from plone import api
 
 import logging
 
@@ -26,9 +26,11 @@ def migrateToUrban170(context):
     migrateApplicantMetaType(context)
     # migrate Proprietary type has now Applicant meta type
     migrateProprietaryMetaType(context)
+    # update EnvClassOne events
+    migrateEnvClassOneEventTypes(context)
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
-    setup_tool = getToolByName(context, 'portal_setup')
+    setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
     logger.info("reinstalling urban done!")
     logger.info("migration done!")
@@ -55,8 +57,7 @@ def migrateApplicantMetaType(context):
     logger.info("starting migration step")
 
     migrator = ApplicantMetaTypeMigrator
-    portal_url = getToolByName(context, 'portal_url')
-    portal = portal_url.getPortalObject()
+    portal = api.portal.get()
     #to avoid link integrity problems, disable checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
 
@@ -102,8 +103,7 @@ def migrateProprietaryMetaType(context):
     logger.info("starting migration step")
 
     migrator = ProprietaryMetaTypeMigrator
-    portal_url = getToolByName(context, 'portal_url')
-    portal = portal_url.getPortalObject()
+    portal = api.portal.get()
     #to avoid link integrity problems, disable checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
 
@@ -124,5 +124,23 @@ def migrateProprietaryMetaType(context):
     walker.__class__.additionalQuery = {}
     #enable linkintegrity checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
+
+    logger.info("migration step done!")
+
+
+def migrateEnvClassOneEventTypes(context):
+    """
+    Update EnvClassOne UrbanEventTypes.
+    """
+    logger = logging.getLogger('urban: udpate EnvClassOne UrbanEventTypes ->')
+    logger.info("starting migration step")
+
+    portal_urban = api.portal.get_tool('portal_urban')
+    eventtypes_folder = portal_urban.envclassone.urbaneventtypes
+    for obj in eventtypes_folder.objectValues():
+        api.content.delete(obj)
+
+    portal_setup = api.portal.get_tool('portal_setup')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-updateAllUrbanTemplates')
 
     logger.info("migration step done!")

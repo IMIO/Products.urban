@@ -1518,6 +1518,14 @@ urbanEventTypes = {
             ),
         },
         {
+            'id': "modified-blueprints",
+            'title': "Plans modificatifs",
+            'activatedFields': ['transmitDate'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+        },
+        {
             'id': "decision",
             'title': "Décision (octroi ou refus)",
             'activatedFields': ['decisionDate', 'decision'],
@@ -1560,8 +1568,7 @@ urbanEventTypes = {
             'activatedFields': ['transmitDate'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': (
-            ),
+            'podTemplates': (),
         },
         {
             'id': "affichage-decision-recours",

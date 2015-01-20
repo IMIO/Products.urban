@@ -237,10 +237,22 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
     security.declarePublic('listActivatedDates')
     def listActivatedDates(self):
         from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
-        activated_fields = type(self.getActivatedFields()) == str and [self.getActivatedFields()] or self.getActivatedFields()
-        activated_date_fields = [(fieldname, translate("urban_label_" + fieldname, 'urban', default=fieldname, context=self.REQUEST))
-                                 for fieldname in activated_fields
-                                 if fieldname and UrbanEventInquiry_schema.get(fieldname).getType()=='Products.Archetypes.Field.DateTimeField']
+
+        activated_fields = self.getActivatedFields()
+        activated_fields = type(activated_fields) == str and [activated_fields] or activated_fields
+        activated_date_fields = []
+        for fieldname in activated_fields:
+            try:
+                is_date_field = UrbanEventInquiry_schema.get(fieldname).getType() == 'Products.Archetypes.Field.DateTimeField'
+            except:
+                import ipdb; ipdb.set_trace()
+            if fieldname and is_date_field:
+                activated_date_fields.append(
+                    (
+                        fieldname,
+                        translate("urban_label_" + fieldname, 'urban', default=fieldname, context=self.REQUEST)
+                    )
+                )
         return DisplayList([('eventDate', self.getEventDateLabel().decode('utf-8'))] + activated_date_fields)
 
 
