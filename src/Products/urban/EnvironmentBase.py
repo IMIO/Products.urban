@@ -36,7 +36,8 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
 optional_fields = [
-    'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalLegalConditions'
+    'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalLegalConditions',
+    'businessOldLocation'
 ]
 
 slave_fields_natura2000 = (
