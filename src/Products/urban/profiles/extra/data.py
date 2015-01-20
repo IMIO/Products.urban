@@ -1508,7 +1508,6 @@ urbanEventTypes = {
         {
             'id': "envoi-enquete-ft",
             'title': "Envoi de l'enquête publique au FT",
-            'activatedFields': ['FTsolicitOpinionsTo'],
             'deadLineDelay': 10,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),

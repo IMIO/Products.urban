@@ -215,18 +215,6 @@ schema = Schema((
         default_output_type='text/html',
         optional=True,
     ),
-    LinesField(
-        name='FTsolicitOpinionsTo',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label='Ftsolicitopinionsto',
-            label_msgid='urban_label_FTsolicitOpinionsTo',
-            i18n_domain='urban',
-        ),
-        optional=True,
-        multiValued=1,
-        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
-    ),
 
 ),
 )

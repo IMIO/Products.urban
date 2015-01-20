@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Jan 19 15:53:27 2015\n"
-"PO-Revision-Date: Mon Jan 19 15:53:27 2015\n"
+"POT-Creation-Date: Tue Jan 20 10:00:52 2015\n"
+"PO-Revision-Date: Tue Jan 20 10:00:52 2015\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -114,11 +114,6 @@ msgstr ""
 #. Default: "If checked, an additional paragraph will be added in the licence document"
 #: BuildLicence.py
 msgid "urban_help_townshipCouncilFolder"
-msgstr ""
-
-#. Default: "Ftsolicitopinionsto"
-#: UrbanEvent.py
-msgid "urban_label_FTsolicitOpinionsTo"
 msgstr ""
 
 #. Default: "Linkedopinionrequestevent"
@@ -554,6 +549,11 @@ msgstr ""
 #. Default: "Foldermanagers"
 #: licenceFolderManagers.py
 msgid "urban_label_foldermanagers"
+msgstr ""
+
+#. Default: "Ftsolicitopinionsto"
+#: EnvironmentLicence.py
+msgid "urban_label_ftSolicitOpinionsTo"
 msgstr ""
 
 #. Default: "Gender"

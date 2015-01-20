@@ -182,6 +182,15 @@ class TestEnvClassOneInstance(SchemaFieldsTestCase):
     def test_envclassone_authority_is_visible(self):
         self._is_field_visible("Autorité compétente")
 
+    def test_envclassone_has_attribute_ftSolicitOpinionsTo(self):
+        self.assertTrue(self.licence.getField('ftSolicitOpinionsTo'))
+
+    def test_envclassone_ftSolicitOpinionsTo_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("")
+
+    def test_envclassone_ftSolicitOpinionsTo_is_visible(self):
+        self._is_field_visible("")
+
     def test_envclassone_referenceDGATLP_translation(self):
         """
         Field referenceDGATLP should be translated as 'reference DGO3'

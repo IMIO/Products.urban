@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2015-01-19 14:59+0000\n"
+"POT-Creation-Date: 2015-01-20 09:04+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -393,6 +393,9 @@ msgstr "Articles"
 msgid "at_hour"
 msgstr "à ${hour}"
 
+msgid "authority_folder_title"
+msgstr "Autorité compétente"
+
 msgid "basement_folder_title"
 msgstr "Sous-sol"
 
@@ -761,6 +764,9 @@ msgstr "<p>L'application intègre la gestion des permis d'urbanisme, d'urbanisat
 # title of the front-page
 msgid "front_page_title"
 msgstr "Gestion de l'Urbanisme"
+
+msgid "ftSolicitOpinionsTo_folder_title"
+msgstr "Instances sollicitées par le FT"
 
 #. Default: "Female"
 #: PersonTitleTerm.py
@@ -1469,11 +1475,6 @@ msgstr "Numérotation des divisions"
 msgid "urban_label_EnvClassThreeNumerotation"
 msgstr "Numérotation des déclarations environnementales"
 
-#. Default: "Ftsolicitopinionsto"
-#: UrbanEvent.py
-msgid "urban_label_FTsolicitOpinionsTo"
-msgstr "Avis sollicités par le FT"
-
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"
@@ -2042,6 +2043,11 @@ msgstr "Détails concernant le zonage"
 #: urbancertificatebase_foldermanager.py
 msgid "urban_label_foldermanagers"
 msgstr "Agent(s) traitant(s)"
+
+#. Default: "Ftsolicitopinionsto"
+#: EnvironmentLicence.py
+msgid "urban_label_ftSolicitOpinionsTo"
+msgstr "Instances sollicitées par le FT"
 
 #. Default: "Gender"
 #: PersonTitleTerm.py

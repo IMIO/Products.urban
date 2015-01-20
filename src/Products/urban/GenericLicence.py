@@ -664,7 +664,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_location',
-        vocabulary=UrbanVocabulary('rgbsr', inUrbanConfig=False),
+        vocabulary=UrbanVocabulary('rgbsr', inUrbanConfig=False, with_empty_value=True),
         default_method='getDefaultValue',
     ),
     TextField(

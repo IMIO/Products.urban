@@ -109,6 +109,19 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
+    LinesField(
+        name='ftSolicitOpinionsTo',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Ftsolicitopinionsto',
+            label_msgid='urban_label_ftSolicitOpinionsTo',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('ftSolicitOpinionsTo', inUrbanConfig=True),
+        default_method='getDefaultValue',
+    ),
 
 ),
 )
