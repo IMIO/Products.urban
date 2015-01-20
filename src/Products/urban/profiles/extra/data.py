@@ -1506,7 +1506,7 @@ urbanEventTypes = {
         },
         {
             'id': "envoi-enquete-ft",
-            'title': "Envoi de l'enquête publique au FT",
+            'title': "Envoi du procès verbal au FT",
             'deadLineDelay': 10,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
