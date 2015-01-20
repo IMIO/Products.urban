@@ -1533,6 +1533,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
+            'TALCondition': "python: here.getAuthority() == 'college'",
                 {'id': "env1-transmis-decision", 'title': "Transmis de la décision (demandeur)"},
                 {'id': "env1-transmis-decision-FT", 'title': "Transmis de la décision (FT)"},
             ),
