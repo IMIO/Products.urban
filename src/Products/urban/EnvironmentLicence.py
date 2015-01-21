@@ -173,7 +173,7 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     def getApplicants(self):
         """
         """
-        applicants = self.getCorporations() or self.getApplicants()
+        applicants = self.getCorporations() or super(EnvironmentLicence, self).getApplicants()
         return applicants
 
     security.declarePublic('getApplicantsSignaletic')
