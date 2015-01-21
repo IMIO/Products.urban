@@ -242,10 +242,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         activated_fields = type(activated_fields) == str and [activated_fields] or activated_fields
         activated_date_fields = []
         for fieldname in activated_fields:
-            try:
-                is_date_field = UrbanEventInquiry_schema.get(fieldname).getType() == 'Products.Archetypes.Field.DateTimeField'
-            except:
-                import ipdb; ipdb.set_trace()
+            is_date_field = UrbanEventInquiry_schema.get(fieldname).getType() == 'Products.Archetypes.Field.DateTimeField'
             if fieldname and is_date_field:
                 activated_date_fields.append(
                     (
