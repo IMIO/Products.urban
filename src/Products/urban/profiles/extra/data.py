@@ -1518,6 +1518,14 @@ urbanEventTypes = {
             ),
         },
         {
+            'id': "township-council",
+            'title': "Passage au conseil communal",
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'TALCondition': "python: here.getPublicRoadModifications()",
+            'podTemplates': (),
+        },
+        {
             'id': "modified-blueprints",
             'title': "Plans modificatifs",
             'activatedFields': ['transmitDate'],
