@@ -1255,7 +1255,7 @@ urbanEventTypes = {
             'TALCondition': "here/mayAddInquiryEvent",
             'podTemplates': (
                 {'id': 'env1-enq-avis', 'title': "Avis d'enquête publique"},
-                {'id': "env1-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},
+                {'id': "env1-enq-recommandes", 'title': "Recommandé aux propriétaires (étiquette Poste)"},
                 {'id': "env1-enq-transmis-FT", 'title': "Transmis de l'avis d'enquête au FT"},
                 {'id': "env1-enq-transmis-college", 'title': "Transmis de l'avis d'enquête au Collège"},
                 {'id': "env1-enq-ordre-mission", 'title': "Ordre de mission"},
@@ -1523,6 +1523,15 @@ urbanEventTypes = {
 #                {'id': "env1-inquiry-report-FT", 'title': "Synthèse de l'enquête publique (FT)"},
 #                {'id': "env1-inquiry-report-impetrants", 'title': "Synthèse de l'enquête publique (Impétrants)"},
             ),
+        },
+        {
+            'id': "pre-decision",
+            'title': "Avis préalable du collège",
+            'activatedFields': ['externalDecision'],
+            'eventDateLabel': "Date de l'avis",
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
         },
         {
             'id': "township-council",

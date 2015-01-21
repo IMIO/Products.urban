@@ -169,12 +169,19 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         inquiries.extend(list(other_inquiries))
         return inquiries
 
+    security.declarePublic('getApplicants')
+    def getApplicants(self):
+        """
+        """
+        applicants = self.getCorporations() or self.getApplicants()
+        return applicants
+
     security.declarePublic('getApplicantsSignaletic')
     def getApplicantsSignaletic(self, withaddress=False):
         """
           Returns a string representing the signaletic of every applicants
         """
-        applicants = self.getCorporations() or self.getApplicants()
+        applicants = self.getApplicants()
         signaletic = ''
         for applicant in applicants:
             #if the signaletic is not empty, we are adding several applicants
