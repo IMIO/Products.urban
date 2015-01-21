@@ -159,6 +159,20 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
 
     # Manually created methods
 
+    security.declarePublic('getApplicantsSignaletic')
+    def getApplicantsSignaletic(self, withaddress=False):
+        """
+          Returns a string representing the signaletic of every applicants
+        """
+        applicants = self.getCorporations() or self.getApplicants()
+        signaletic = ''
+        for applicant in applicants:
+            #if the signaletic is not empty, we are adding several applicants
+            if signaletic:
+                signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
+            signaletic += applicant.getSignaletic(withaddress=withaddress)
+        return signaletic
+
     security.declarePublic('updateTitle')
     def updateTitle(self):
         """

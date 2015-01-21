@@ -111,6 +111,14 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
         """
         return self.getDenomination()
 
+    def _getNameSignaletic(self, short, linebyline, invertnames=False):
+        nameSignaletic = self.getDenomination()
+        if linebyline:
+            #escape HTML special characters like HTML entities
+            return cgi.escape(nameSignaletic)
+        else:
+            return nameSignaletic
+
 
 
 registerType(Corporation, PROJECTNAME)

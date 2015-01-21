@@ -1209,7 +1209,9 @@ urbanEventTypes = {
             'activatedFields': [],
             'deadLineDelay': 3,
             'isKeyEvent': False,
-            'podTemplates': (),
+            'podTemplates': (
+                {'id': "env1-recepisse-complement", 'title': "Récépissé d'un complément"},
+            ),
             'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
         },
         {
@@ -1218,7 +1220,9 @@ urbanEventTypes = {
             'activatedFields': [],
             'deadLineDelay': 20,
             'isKeyEvent': False,
-            'podTemplates': ({'id': "env1-transmis-complement-ft", 'title': "Transmis d'un complément au FT"},),
+            'podTemplates': (
+                {'id': "env1-transmis-complement-ft", 'title': "Transmis d'un complément au FT"},
+            ),
         },
         {
             'id': "dossier-irrecevable",
