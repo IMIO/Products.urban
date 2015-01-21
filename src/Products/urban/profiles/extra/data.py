@@ -1252,6 +1252,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
+            'TALCondition': "here/mayAddInquiryEvent",
             'podTemplates': (
                 {'id': 'env1-enq-avis', 'title': "Avis d'enquête publique"},
                 {'id': "env1-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},

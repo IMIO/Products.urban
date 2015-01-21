@@ -339,13 +339,14 @@ class UrbanBase(object):
         #the first inquiry is the one defined on self itself
         #if a investigationStart is defined
         #and the others are extra Inquiry object added
-        res = []
-        inquiryObjects = self.objectValues('Inquiry')
+        all_inquiries = []
+        other_inquiries = self.objectValues('Inquiry')
         #the inquiry on the licence is activated if we have a
         #investigationStart date or if we have extra Inquiry objects
-        if len(inquiryObjects) or ('investigationStart' in self.schema and self.getInvestigationStart()):
-            res.append(self)
-        return res + list(inquiryObjects)
+        if other_inquiries or ('investigationStart' in self.schema and self.getInvestigationStart()):
+            all_inquiries.append(self)
+        all_inquiries.extend(list(other_inquiries))
+        return all_inquiries
 
     security.declarePublic('getUrbanEventInquiries')
     def getUrbanEventInquiries(self):

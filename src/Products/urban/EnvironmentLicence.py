@@ -159,6 +159,16 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
 
     # Manually created methods
 
+    security.declarePublic('getInquiries')
+    def getInquiries(self):
+        """
+        Inquiry is mandatory for environment licences.
+        """
+        inquiries = [self]
+        other_inquiries = self.objectValues('Inquiry')
+        inquiries.extend(list(other_inquiries))
+        return inquiries
+
     security.declarePublic('getApplicantsSignaletic')
     def getApplicantsSignaletic(self, withaddress=False):
         """

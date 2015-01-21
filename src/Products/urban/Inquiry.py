@@ -357,8 +357,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         #if we have only the inquiry defined on the licence and no start date is defined
         #it means that no inquiryEvent can be added because no inquiry is defined...
         #or if every UrbanEventInquiry have already been added
-        if (len(inquiries) == 1 and not self.getInvestigationStart()) or \
-           (len(urbanEventInquiries) >= len(inquiries)):
+        if len(urbanEventInquiries) >= len(inquiries):
             return False
         return True
 
