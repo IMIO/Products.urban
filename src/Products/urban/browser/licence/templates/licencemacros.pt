@@ -109,7 +109,6 @@
             You must encode applicant(s)
         </p>
         <tal:listing content="structure view/renderApplicantListing" />
-        <tal:listing content="structure view/renderCorporationListing" />
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Applicant');
                          member context/@@plone_portal_state/member;"
               tal:condition="python: member.has_permission('urban: Add Contact', context)"

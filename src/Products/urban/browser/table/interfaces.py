@@ -91,12 +91,6 @@ class IProprietaryTable(IContactTable):
     """
 
 
-class ICorporationTable(IContactTable):
-    """
-    Marker interface for a table displaying corporations
-    """
-
-
 class INotariesTable(IUrbanTable):
     """
     Marker interface for a table displaying notaries

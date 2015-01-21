@@ -163,12 +163,6 @@ class ProprietaryTitleColumnHeader(TitleColumnHeader):
         self.label = 'label_colname_proprietary_data'
 
 
-class CorporationTitleColumnHeader(TitleColumnHeader):
-
-    def update(self):
-        self.label = 'label_colname_corporation_data'
-
-
 class NotaryTitleColumnHeader(TitleColumnHeader):
 
     def update(self):

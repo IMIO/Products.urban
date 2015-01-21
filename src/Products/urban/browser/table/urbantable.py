@@ -11,7 +11,6 @@ from Products.urban.browser.table.interfaces import ILicenceListingTable, \
         IContactTable, \
         IApplicantTable, \
         IProprietaryTable, \
-        ICorporationTable, \
         IParcelsTable, \
         IEventsTable, \
         IDocumentsTable, \
@@ -55,8 +54,8 @@ class UrbanTable(Table):
 
     # override setUpRows: use a Lazymap rather than a comprehension list for
     # performance issues (see #6444)
-    #def setUpRows(self):
-    #    return LazyMap(self.setUpRow, self.values)
+    def setUpRows(self):
+        return LazyMap(self.setUpRow, self.values)
 
 
 class FolderContentTable(UrbanTable):
@@ -122,14 +121,6 @@ class ProprietaryTable(ContactTable):
     """
     """
     implements(IProprietaryTable)
-
-    cssClasses = {'table': 'listing largetable'}
-
-
-class CorporationTable(ContactTable):
-    """
-    """
-    implements(ICorporationTable)
 
     cssClasses = {'table': 'listing largetable'}
 
