@@ -1231,7 +1231,9 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': (),
+            'podTemplates': (
+                {'id': "env1-dossier-irrecevable-ft", 'title': "Transmis de l'irrecevabilité au FT"},
+            ),
         },
         {
             'id': "dossier-complet-recevable",
