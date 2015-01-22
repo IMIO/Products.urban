@@ -1573,6 +1573,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.getAuthority() == 'ft'",
             'podTemplates': (
                 {'id': "env1-transmis-decision", 'title': "Transmis de la décision (demandeur)"},
+                {'id': "env1-transmis-decision-impetrants-ft", 'title': "Transmis de la décision (Instances)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
         },

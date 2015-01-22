@@ -176,6 +176,25 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         applicants = self.getCorporations() or super(EnvironmentLicence, self).getApplicants()
         return applicants
 
+    security.declarePublic('getCorporations')
+    def getCorporations(self):
+        corporations = [corp for corp in self.objectValues('Corporation')]
+        return corporations
+
+    security.declarePublic('getFtSolicitOpinionsTo')
+    def getFtSolicitOpinionsTo(self, get_obj=False):
+        """
+        add 'get_obj' parameter returning the vocabulary objects if set to True
+        """
+
+        if not get_obj:
+            return self.ftSolicitOpinionsTo
+        else:
+            field = self.schema.get('ftSolicitOpinionsTo')
+            all_opinions = field.vocabulary.getAllVocTerms(self)
+            selected_opinions = tuple([all_opinions[selected] for selected in self.ftSolicitOpinionsTo])
+            return selected_opinions
+
     security.declarePublic('getApplicantsSignaletic')
     def getApplicantsSignaletic(self, withaddress=False):
         """
@@ -217,10 +236,32 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     def getLastLicenceDelivery(self):
         return self._getLastEvent(ILicenceDeliveryEvent)
 
-    def getCorporations(self):
-        corporations = [corp for corp in self.objectValues('Corporation')]
-        return corporations
+    security.declarePublic('getFTOpinionRequestAddresses')
+    def getFTOpinionRequestAddresses(self):
+        """
+          Returns a formatted version of the applicants to be used in POD templates
+        """
+        opinion_requests = self.getFtSolicitOpinionsTo(get_obj=True)
 
+        addresses = []
+        for opinion_request in opinion_requests:
+            name = opinion_request.Title()
+            lines = opinion_request.Description()[3:-4].split('<br />')
+            description = lines[:-2]
+            address = lines[-2:]
+            address = '%{name}|{description}|{street}|{city}'.format(
+                name=name,
+                description=' '.join(description),
+                street=address[0],
+                city=address[1]
+            )
+            addresses.append(address)
+        addresses = ''.join(addresses)
+
+        csv_adresses = '<CSV>Nom|Description|AdresseLigne1|AdresseLigne2{body}</CSV>'.format(
+            body=addresses
+        )
+        return csv_adresses
 
 
 registerType(EnvironmentLicence, PROJECTNAME)
