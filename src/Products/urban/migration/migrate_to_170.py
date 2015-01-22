@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from Acquisition import aq_base
+
 from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
@@ -156,7 +158,7 @@ def migrateDecisionsVocabulary(context):
     logger.info("starting migration step")
 
     portal_urban = api.portal.get_tool('portal_urban')
-    decisions_global_folder = getattr(portal_urban, 'decisions', None)
+    decisions_global_folder = getattr(aq_base(portal_urban), 'decisions', None)
 
     if not decisions_global_folder:
         logger.info("migration step done!")
@@ -168,9 +170,11 @@ def migrateDecisionsVocabulary(context):
         if licence_config.id == 'envclassone':
             continue
 
-        if hasattr(licence_config, 'decisions'):
+        if hasattr(aq_base(licence_config), 'decisions'):
             api.content.delete(obj=licence_config.decisions)
         api.content.copy(source=decisions_global_folder, target=licence_config)
+
+    api.content.delete(obj=decisions_global_folder)
 
     # this step will fill decisions values for envclassone config
     portal_setup = api.portal.get_tool('portal_setup')
