@@ -84,6 +84,7 @@ optional_fields = [
     'areParcelsVerified', 'locationFloodingLevel', 'licenceSubject', 'referenceDGATLP',
     'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails',
     'PRevU', 'prevuDetails', 'PRenU', 'prenuDetails', 'airportNoiseZone', 'airportNoiseZoneDetails',
+    'description',
 ]
 ##/code-section module-header
 
