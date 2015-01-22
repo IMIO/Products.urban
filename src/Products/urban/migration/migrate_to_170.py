@@ -28,6 +28,8 @@ def migrateToUrban170(context):
     migrateProprietaryMetaType(context)
     # update EnvClassOne events
     migrateEnvClassOneEventTypes(context)
+    # migrate decisions vocabulary
+    migrateDecisionsVocabulary(context)
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
     setup_tool = api.portal.get_tool('portal_setup')
@@ -142,5 +144,36 @@ def migrateEnvClassOneEventTypes(context):
 
     portal_setup = api.portal.get_tool('portal_setup')
     portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-updateAllUrbanTemplates')
+
+    logger.info("migration step done!")
+
+
+def migrateDecisionsVocabulary(context):
+    """
+    Decision vocabulary is now local for licence config.
+    """
+    logger = logging.getLogger('urban: migrate decision vocabulary ->')
+    logger.info("starting migration step")
+
+    portal_urban = api.portal.get_tool('portal_urban')
+    decisions_global_folder = getattr(portal_urban, 'decisions', None)
+
+    if not decisions_global_folder:
+        logger.info("migration step done!")
+        return
+
+    for licence_config in portal_urban.objectValues('LicenceConfig'):
+
+        # ignore envclassone as it should have different 'decisions' values
+        if licence_config.id == 'envclassone':
+            continue
+
+        if hasattr(licence_config, 'decisions'):
+            api.content.delete(obj=licence_config.decisions)
+        api.content.copy(source=decisions_global_folder, target=licence_config)
+
+    # this step will fill decisions values for envclassone config
+    portal_setup = api.portal.get_tool('portal_setup')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-extraPostInstall')
 
     logger.info("migration step done!")

@@ -112,7 +112,7 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         optional=True,
-        vocabulary=UrbanVocabulary('decisions', inUrbanConfig=False),
+        vocabulary=UrbanVocabulary('decisions', inUrbanConfig=True),
     ),
     TextField(
         name='decisionText',

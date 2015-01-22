@@ -147,6 +147,13 @@ default_values = {
         ],
     },
     'EnvClassOne': {
+
+        'decisions': [
+            'UrbanVocabularyTerm',
+            {'id': "octrois", 'title': u"Octrois", 'extraValue': "Recevable"},
+            {'id': "refus", 'title': u"Refus", 'extraValue': "Irrecevable"},
+        ],
+
         'ftSolicitOpinionsTo': [
             'UrbanVocabularyTerm',
             {
@@ -321,6 +328,15 @@ default_values = {
         ],
     },
     'shared_vocabularies': {
+
+        'decisions': [
+            'UrbanVocabularyTerm', [
+                'BuildLicence', 'ParcelOutLicence', 'Declaration', 'Division', 'NotaryLetter',
+                'UrbanCertificateOne', 'UrbanCertificateTwo', 'EnvClassThree', 'MiscDemand'
+            ],
+            {'id': "favorable", 'title': u"Favorable", 'extraValue': "Recevable"},
+            {'id': "defavorable", 'title': u"Défavorable", 'extraValue': "Irrecevable"},
+        ],
 
         'townshipfoldercategories': [
             'UrbanVocabularyTerm', URBAN_TYPES,
@@ -1031,12 +1047,6 @@ default_values = {
             {'id': 'france', 'title': "France"},
             {'id': 'luxembourg', 'title': "Luxembourg"},
             {'id': 'netherlands', 'title': "Pays Bas"},
-        ],
-
-        'decisions': [
-            'UrbanVocabularyTerm',
-            {'id': "favorable", 'title': u"Favorable", 'extraValue': "Recevable"},
-            {'id': "defavorable", 'title': u"Défavorable", 'extraValue': "Irrecevable"},
         ],
 
         'externaldecisions': [
