@@ -1134,6 +1134,9 @@ msgstr ""
 msgid "pcas_folder_title"
 msgstr ""
 
+msgid "pcaszone_folder_title"
+msgstr ""
+
 msgid "peb_complete_process"
 msgstr ""
 
@@ -1190,6 +1193,9 @@ msgid "prevu_folder_title"
 msgstr ""
 
 msgid "proprietaries"
+msgstr ""
+
+msgid "rgbsr_folder_title"
 msgstr ""
 
 #. Default: "RCU"

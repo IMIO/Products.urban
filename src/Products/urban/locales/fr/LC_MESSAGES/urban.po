@@ -1135,6 +1135,9 @@ msgstr "$decreeType du $decreeDate"
 msgid "pcas_folder_title"
 msgstr "Plan Communal d'Aménagement"
 
+msgid "pcaszone_folder_title"
+msgstr "Zone du plan communal d'Aménagement"
+
 msgid "peb_complete_process"
 msgstr "Procédure complète"
 
@@ -1220,6 +1223,9 @@ msgstr "${name} demeurant ${address}"
 
 msgid "reverse_order"
 msgstr "Inverser l'ordre"
+
+msgid "rgbsr_folder_title"
+msgstr "Réglement général sur les bâtisses en site rural"
 
 msgid "road_adaptation_create"
 msgstr "Oui, ouverture"
