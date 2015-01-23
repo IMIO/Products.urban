@@ -98,6 +98,13 @@ default_values = {
             {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
         ],
     },
+    'EnvClassOne': {
+
+        'decisions': [
+            'UrbanVocabularyTerm',
+            {'id': "octrois", 'title': u"Octrois", 'extraValue': "Recevable"},
+        ],
+    },
     'EnvClassThree': {
         'missingparts': [
             'UrbanVocabularyTerm',
@@ -149,6 +156,14 @@ default_values = {
 
         'rubrics': [
             'Folder', ['EnvClassOne', 'EnvClassTwo', 'EnvClassThree'],
+        ],
+
+        'decisions': [
+            'UrbanVocabularyTerm', [
+                'BuildLicence', 'ParcelOutLicence', 'Declaration', 'Division', 'NotaryLetter',
+                'UrbanCertificateOne', 'UrbanCertificateTwo', 'EnvClassThree', 'MiscDemand'
+            ],
+            {'id': "favorable", 'title': u"Favorable", 'extraValue': "Recevable"},
         ],
 
         'missingparts': [
@@ -330,11 +345,6 @@ default_values = {
         'country': [
             'UrbanVocabularyTerm',
             {'id': 'germany', 'title': "Allemagne"},
-        ],
-
-        'decisions': [
-            'UrbanVocabularyTerm',
-            {'id': "favorable", 'title': u"Favorable", 'extraValue': "Recevable"},
         ],
 
         'externaldecisions': [
