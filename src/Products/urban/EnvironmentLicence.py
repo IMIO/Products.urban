@@ -236,6 +236,9 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     def getLastLicenceDelivery(self):
         return self._getLastEvent(ILicenceDeliveryEvent)
 
+    def getLastMissingPart(self):
+        return self._getLastEvent(interfaces.IMissingPartEvent)
+
     security.declarePublic('getFTOpinionRequestAddresses')
     def getFTOpinionRequestAddresses(self):
         """

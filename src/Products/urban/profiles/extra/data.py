@@ -1202,6 +1202,7 @@ urbanEventTypes = {
             'isKeyEvent': False,
             'keyDates': ('eventDate',),
             'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
         },
         {
             'id': "recepisse-complement",
