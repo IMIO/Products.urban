@@ -1602,21 +1602,11 @@ urbanEventTypes = {
         {
             'id': "affichage-recours",
             'title': "Recours",
-            'eventDateLabel': "Date d'affichage",
-            'activatedFields': ['transmitDate'],
+            'eventDateLabel': "Date d'affichage du recours",
+            'activatedFields': ['recourseDecisionDisplayDate', 'recourseDecision'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
-        },
-        {
-            'id': "affichage-decision-recours",
-            'title': "Décision du recours",
-            'eventDateLabel': "Date d'affichage",
-            'activatedFields': ['decisionDate', 'transmitDate'],
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (
-            ),
         },
     ),
     'envclassthree': (

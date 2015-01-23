@@ -4,6 +4,10 @@
          meta_type="DateIndex">
     <indexed_attr value="getDecisionDate"/>
   </index>
+  <index name="getRecourseDecisionDisplayDate" 
+         meta_type="DateIndex">
+    <indexed_attr value="getRecourseDecisionDisplayDate"/>
+  </index>
 <!-- ##code-section FOOT -->
   <index name="getReference"
          meta_type="ZCTextIndex">

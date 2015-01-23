@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-01-20 09:04+0000\n"
+"POT-Creation-Date: 2015-01-23 10:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,9 +46,6 @@ msgid "Applicant data"
 msgstr ""
 
 msgid "Architect data"
-msgstr ""
-
-msgid "authority_folder_title"
 msgstr ""
 
 msgid "BuildLicence"
@@ -393,6 +390,9 @@ msgid "articles_folder_title"
 msgstr ""
 
 msgid "at_hour"
+msgstr ""
+
+msgid "authority_folder_title"
 msgstr ""
 
 msgid "basement_folder_title"
@@ -766,7 +766,7 @@ msgstr ""
 
 msgid "ftSolicitOpinionsTo_folder_title"
 msgstr ""
- 
+
 #. Default: "Female"
 #: PersonTitleTerm.py
 msgid "gender_female"
@@ -1198,6 +1198,9 @@ msgid "rcu_folder_title"
 msgstr ""
 
 msgid "recipients_folder_title"
+msgstr ""
+
+msgid "recoursedecisions_folder_title"
 msgstr ""
 
 msgid "request_submitted_by_applicant"
@@ -2655,6 +2658,16 @@ msgstr ""
 #. Default: "Recipients"
 #: LicenceEvent.py
 msgid "urban_label_recipients"
+msgstr ""
+
+#. Default: "Recoursedecision"
+#: UrbanEvent.py
+msgid "urban_label_recourseDecision"
+msgstr ""
+
+#. Default: "Recoursedecisiondisplaydate"
+#: UrbanEvent.py
+msgid "urban_label_recourseDecisionDisplayDate"
 msgstr ""
 
 #. Default: "Reference"

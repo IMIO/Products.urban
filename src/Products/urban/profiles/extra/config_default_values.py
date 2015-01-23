@@ -831,6 +831,13 @@ default_values = {
 
     },
     'global': {
+
+        'recoursedecisions': [
+            'UrbanVocabularyTerm',
+            {'id': "confirme", 'title': u"Confirmé"},
+            {'id': "infirme", 'title': u"Infirmé"},
+        ],
+
         'pcas': [
             'PcaTerm',
             {'id': "pca1", 'label': u"Plan communal d'aménagement 1", 'number': '1', 'decreeDate': "2009/01/01", 'decreeType': "royal"},

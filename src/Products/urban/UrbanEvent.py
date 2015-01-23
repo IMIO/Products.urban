@@ -126,6 +126,29 @@ schema = Schema((
         default_output_type='text/html',
         optional= True,
     ),
+    DateTimeField(
+        name='recourseDecisionDisplayDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            format="%d/%m/%Y",
+            starting_year=1960,
+            label='Recoursedecisiondisplaydate',
+            label_msgid='urban_label_recourseDecisionDisplayDate',
+            i18n_domain='urban',
+        ),
+        optional= True,
+    ),
+    StringField(
+        name='recourseDecision',
+        widget=SelectionWidget(
+            label='Recoursedecision',
+            label_msgid='urban_label_recourseDecision',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        optional=True,
+        vocabulary=UrbanVocabulary('recoursedecisions', inUrbanConfig=False),
+    ),
     StringField(
         name='adviceAgreementLevel',
         widget=SelectionWidget(

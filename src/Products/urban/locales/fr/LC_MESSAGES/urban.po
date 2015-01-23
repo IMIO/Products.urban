@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2015-01-20 09:04+0000\n"
+"POT-Creation-Date: 2015-01-23 10:31+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1200,6 +1200,9 @@ msgstr "RCU"
 
 msgid "recipients_folder_title"
 msgstr "Destinataires"
+
+msgid "recoursedecisions_folder_title"
+msgstr "Décisions d'un recours"
 
 msgid "request_submitted_by_applicant"
 msgstr "Dossier introduit par ${applicant}"
@@ -2659,6 +2662,16 @@ msgstr "Référence du document reçu"
 #: LicenceEvent.py
 msgid "urban_label_recipients"
 msgstr "Destinataires"
+
+#. Default: "Recoursedecision"
+#: UrbanEvent.py
+msgid "urban_label_recourseDecision"
+msgstr "Décision du recours"
+
+#. Default: "Recoursedecisiondisplaydate"
+#: UrbanEvent.py
+msgid "urban_label_recourseDecisionDisplayDate"
+msgstr "Date d'affichage de la décision du recours"
 
 #. Default: "Reference"
 #: Declaration.py

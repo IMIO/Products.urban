@@ -69,6 +69,48 @@ class TestUrbanEventInstance(SchemaFieldsTestCase):
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
 
+    def test_urbanevent_has_attribute_eventDate(self):
+        self.assertTrue(hasattr(self.urban_event, 'eventDate'))
+
+    def test_urbanevent_has_attribute_transmitDate(self):
+        self.assertTrue(hasattr(self.urban_event, 'transmitDate'))
+
+    def test_urbanevent_has_attribute_reiceptDate(self):
+        self.assertTrue(hasattr(self.urban_event, 'receiptDate'))
+
+    def test_urbanevent_has_attribute_reicevedDocumentReference(self):
+        self.assertTrue(hasattr(self.urban_event, 'receivedDocumentReference'))
+
+    def test_urbanevent_has_attribute_auditionDate(self):
+        self.assertTrue(hasattr(self.urban_event, 'auditionDate'))
+
+    def test_urbanevent_has_attribute_decisionDate(self):
+        self.assertTrue(hasattr(self.urban_event, 'decisionDate'))
+
+    def test_urbanevent_has_attribute_decision(self):
+        self.assertTrue(hasattr(self.urban_event, 'decision'))
+
+    def test_urbanevent_has_attribute_decisionText(self):
+        self.assertTrue(hasattr(self.urban_event, 'decisionText'))
+
+    def test_urbanevent_has_attribute_recourseDecisionDisplayDate(self):
+        self.assertTrue(hasattr(self.urban_event, 'recourseDecisionDisplayDate'))
+
+    def test_urbanevent_has_attribute_recourseDecision(self):
+        self.assertTrue(hasattr(self.urban_event, 'recourseDecision'))
+
+    def test_urbanevent_has_attribute_adviceAgreementlevel(self):
+        self.assertTrue(hasattr(self.urban_event, 'adviceAgreementLevel'))
+
+    def test_urbanevent_has_attribute_opinionText(self):
+        self.assertTrue(hasattr(self.urban_event, 'opinionText'))
+
+    def test_urbanevent_has_attribute_eventRecipient(self):
+        self.assertTrue(hasattr(self.urban_event, 'getEventRecipient'))
+
+    def test_urbanevent_has_attribute_urbaneventtypes(self):
+        self.assertTrue(hasattr(self.urban_event, 'getUrbaneventtypes'))
+
     def test_urbanevent_has_attribute_pmTitle(self):
         self.assertTrue(hasattr(self.urban_event, 'pmTitle'))
 

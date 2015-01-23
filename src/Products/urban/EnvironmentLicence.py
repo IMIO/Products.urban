@@ -264,6 +264,7 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         return csv_adresses
 
 
+
 registerType(EnvironmentLicence, PROJECTNAME)
 # end of class EnvironmentLicence
 
