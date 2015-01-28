@@ -199,15 +199,64 @@ class UrbanBase(object):
             return true or false depending if the licence has several applicants or if the multiplicity
             of the applicant is plural
         """
-        applicants = self.objectValues('Contact')  # applicant can also be proprietaries..
+        answer = False
+        applicants = self.getApplicants()  # applicant can also be proprietaries..
         if len(applicants) <= 1:
             applicant = applicants[0]
             field = applicant.getField('personTitle')
             titles = field.vocabulary.getAllVocTerms(applicant)
             title = titles[applicant.getPersonTitle()]
             if title.getMultiplicity() == 'single':
-                return True
-        return False
+                answer = True
+        return answer
+
+    def hasSingleMaleApplicant(self):
+        """
+            return true if the licence has a single male applicant
+        """
+        answer = False
+        applicants = self.getApplicants()  # applicant can also be proprietaries..
+        if len(applicants) <= 1:
+            applicant = applicants[0]
+            field = applicant.getField('personTitle')
+            titles = field.vocabulary.getAllVocTerms(applicant)
+            title = titles[applicant.getPersonTitle()]
+            if title.getMultiplicity() == 'single':
+                if title.getGender() == 'male':
+                    answer = True
+        return answer
+
+    def hasSingleFemaleApplicant(self):
+        """
+            return true if the licence has a single female applicant
+        """
+        answer = False
+        applicants = self.getApplicants()  # applicant can also be proprietaries..
+        if len(applicants) <= 1:
+            applicant = applicants[0]
+            field = applicant.getField('personTitle')
+            titles = field.vocabulary.getAllVocTerms(applicant)
+            title = titles[applicant.getPersonTitle()]
+            if title.getMultiplicity() == 'single':
+                if title.getGender() == 'female':
+                    answer = True
+        return answer
+
+    def hasMultipleFemaleApplicants(self):
+        """
+            return true if the licence has a multiple female applicants
+        """
+        answer = False
+        applicants = self.getApplicants()  # applicant can also be proprietaries..
+        if len(applicants) > 1:
+            answer = True
+            for applicant in applicants:
+                field = applicant.getField('personTitle')
+                titles = field.vocabulary.getAllVocTerms(applicant)
+                title = titles[applicant.getPersonTitle()]
+                if title.getGender() == 'male':
+                    answer = False
+        return answer
 
     security.declarePublic('hasMultipleApplicants')
     def hasMultipleApplicants(self):
