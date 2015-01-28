@@ -258,6 +258,22 @@ class UrbanBase(object):
                     answer = False
         return answer
 
+    def hasMultipleMaleApplicants(self):
+        """
+            return true if the licence has a multiple male applicants
+        """
+        answer = False
+        applicants = self.getApplicants()  # applicant can also be proprietaries..
+        if len(applicants) > 1:
+            answer = True
+            for applicant in applicants:
+                field = applicant.getField('personTitle')
+                titles = field.vocabulary.getAllVocTerms(applicant)
+                title = titles[applicant.getPersonTitle()]
+                if title.getGender() == 'female':
+                    answer = False
+        return answer
+
     security.declarePublic('hasMultipleApplicants')
     def hasMultipleApplicants(self):
         """
