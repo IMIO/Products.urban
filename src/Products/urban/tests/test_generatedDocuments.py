@@ -63,7 +63,7 @@ class TestDivisionsRenaming(unittest.TestCase):
         portal_urban = self.portal_urban
 
         alternative_name = 'bla'
-        # so far we did not configured anything
+        # so far we did not configure anything
         self.failIf(alternative_name in licence.getPortionOutsText())
 
         # configure an alternative name for the division
