@@ -135,6 +135,30 @@ class UrbanBase(object):
         """
         return self.getContactsSignaletic(self.getGeometricians(), withaddress=withaddress)
 
+    security.declarePublic('submittedBy')
+    def submittedBy(self):
+        """
+          Returns a formatted string with data about people that submitted
+          3 cases :
+          - the applicant submitted the request for himself
+          - a notary submitted the request for the applicant
+          - a notary submitted the request for himself
+        """
+        if self.getPortalTypeName() in ('UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter'):
+            who = self.getWhoSubmitted()
+            if who == 'both':
+                #a notary submitted the request for an applicant
+                return translate('request_submitted_by_both', 'urban', context=self.REQUEST, mapping={'notary': unicode(self.getNotariesSignaletic(), 'utf8'), 'applicant': unicode(self.getApplicantsSignaletic(), 'utf8')}).encode('utf8')
+            elif who == 'applicant':
+                #an applicant submitted the request for himself
+                return translate('request_submitted_by_applicant', 'urban', context=self.REQUEST, mapping={'applicant': unicode(self.getApplicantsSignaletic(), 'utf-8')}).encode('utf8')
+            elif who == 'notary':
+                #a notary submitted the request without an applicant (??? possible ???)
+                return translate('request_submitted_by_notary', 'urban', context=self.REQUEST, mapping={'notary': unicode(self.getNotariesSignaletic(), 'utf-8')}).encode('utf8')
+            return ''
+        elif self.getType() == 'ParceOutLicence':
+            return 'test'
+
     security.declarePublic('getWorkLocationSignaletic')
     def getWorkLocationSignaletic(self):
         """
@@ -188,6 +212,19 @@ class UrbanBase(object):
             #the portal_type is not set yet at factory time, try to find it
             portal_type = self.REQUEST['__factory__info__']['stack'][0]
             return licenceTypes[portal_type]
+
+    security.declarePublic('getDepositDate')
+    def getDepositDate(self):
+        """
+          Returns the date the folder was brought to the urbanism service
+        """
+        tool = api.portal.get_tool('portal_urban')
+        #get the event called 'depot-de-la-demande' and returns the linked eventDate
+        depositEvent = self.getLastDeposit()
+        if depositEvent:
+            tool = api.portal.get_tool('portal_urban')
+            return tool.formatDate(depositEvent.getEventDate())
+        return translate('warning_no_deposit_date', 'urban', context=self.REQUEST).encode('utf8')
 
     security.declarePublic('hasSingleApplicant')
     def hasSingleApplicant(self):
@@ -255,6 +292,19 @@ class UrbanBase(object):
                     notary.getZipcode() + ' ' + notary.getCity()
         toreturn = toreturn + '</CSV>'
         return toreturn
+
+    security.declarePublic('getMultipleRealSubmittersCSV')
+    def getMultipleRealSubmittersCSV(self):
+        """
+          Find who really submitted the request...
+        """
+        who = self.getWhoSubmitted()
+        if who in ['notary', 'both']:
+            return self.getMultipleNotariesCSV()
+        elif who == 'applicant':
+            return self.getMultipleApplicantsCSV()
+        else:
+            return ''
 
     security.declarePublic('getTerm')
     def getTerm(self, termFolder, termId):
