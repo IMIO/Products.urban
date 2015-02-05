@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-01-23 10:31+0000\n"
+"POT-Creation-Date: 2015-02-04 16:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -544,6 +544,9 @@ msgstr ""
 #. Default: "Enter a TAL condition that defines the delay calculation. The parameters event and licence are available."
 #: UrbanDelay.py
 msgid "delay_computation_descr"
+msgstr ""
+
+msgid "deposittype_folder_title"
 msgstr ""
 
 msgid "derogations_folder_title"
@@ -1195,9 +1198,6 @@ msgstr ""
 msgid "proprietaries"
 msgstr ""
 
-msgid "rgbsr_folder_title"
-msgstr ""
-
 #. Default: "RCU"
 #: setuphandlers.py
 msgid "rcu_folder_title"
@@ -1224,6 +1224,9 @@ msgid "residing"
 msgstr ""
 
 msgid "reverse_order"
+msgstr ""
+
+msgid "rgbsr_folder_title"
 msgstr ""
 
 msgid "road_adaptation_create"
@@ -1882,6 +1885,11 @@ msgstr ""
 #. Default: "Denomination"
 #: Corporation.py
 msgid "urban_label_denomination"
+msgstr ""
+
+#. Default: "Deposittype"
+#: UrbanEvent.py
+msgid "urban_label_depositType"
 msgstr ""
 
 #. Default: "Derogation"

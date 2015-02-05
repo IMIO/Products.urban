@@ -46,6 +46,17 @@ schema = Schema((
         ),
         default_method='getDefaultTime',
     ),
+    StringField(
+        name='depositType',
+        widget=SelectionWidget(
+            label='Deposittype',
+            label_msgid='urban_label_depositType',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        optional=True,
+        vocabulary=UrbanVocabulary('deposittype', inUrbanConfig=False),
+    ),
     DateTimeField(
         name='transmitDate',
         widget=DateTimeField._properties['widget'](

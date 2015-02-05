@@ -832,6 +832,12 @@ default_values = {
     },
     'global': {
 
+        'deposittype': [
+            'UrbanVocabularyTerm',
+            {'id': "recommande", 'title': u"Par recommandé postal"},
+            {'id': "surplace", 'title': u"Déposé à l'administration communale"},
+        ],
+
         'recoursedecisions': [
             'UrbanVocabularyTerm',
             {'id': "confirme", 'title': u"Confirmé"},

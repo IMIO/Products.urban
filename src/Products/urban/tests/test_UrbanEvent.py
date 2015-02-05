@@ -72,6 +72,9 @@ class TestUrbanEventInstance(SchemaFieldsTestCase):
     def test_urbanevent_has_attribute_eventDate(self):
         self.assertTrue(hasattr(self.urban_event, 'eventDate'))
 
+    def test_urbanevent_has_attribute_depositType(self):
+        self.assertTrue(hasattr(self.urban_event, 'depositType'))
+
     def test_urbanevent_has_attribute_transmitDate(self):
         self.assertTrue(hasattr(self.urban_event, 'transmitDate'))
 
