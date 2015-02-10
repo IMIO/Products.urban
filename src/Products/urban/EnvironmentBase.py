@@ -94,6 +94,7 @@ schema = Schema((
             label_msgid='urban_label_additionalLegalConditions',
             i18n_domain='urban',
         ),
+        allowed_types= ('UrbanVocabularyTerm',),
         schemata="urban_description",
         multiValued=True,
         relationship='additionalconditions',
