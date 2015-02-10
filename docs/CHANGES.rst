@@ -3,6 +3,16 @@
 Changes
 =======
 
+
+1.8.0 (unreleased)
+------------------
+
+- Add environment licence class one.
+
+- Bug fix: config folder are not allowed anymore to be selected as values 
+  for the field 'additionalLegalConditions'.
+
+
 1.7.0
 -----
 
@@ -15,24 +25,18 @@ Add field "deposit type" for UrbanEventi (#10263).
 
 - Use sphinx to generate documentation
 
-1.7.1 (unreleased)
-------------------
-
-- Nothing changed yet.
-
-
-1.7.0 (2015-01-16)
-
 - Add field "Périmètre de Rénovation urbaine"
 
 - Add field "Périmètre de Revitalisation urbaine"
 
 - Add field "Zones de bruit de l'aéroport"
 
+
 1.5.0
 -----
 
 - Update rubrics and integral/sectorial conditions vocabularies
+
 
 1.4.0
 -----
