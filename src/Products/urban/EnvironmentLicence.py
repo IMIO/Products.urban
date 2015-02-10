@@ -81,7 +81,7 @@ schema = Schema((
     ),
     BooleanField(
         name='hasEnvironmentImpactStudy',
-        default=False,
+        default=True,
         widget=BooleanField._properties['widget'](
             label='Hasenvironmentimpactstudy',
             label_msgid='urban_label_hasEnvironmentImpactStudy',

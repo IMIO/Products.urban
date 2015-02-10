@@ -150,7 +150,7 @@ default_values = {
 
         'decisions': [
             'UrbanVocabularyTerm',
-            {'id': "octrois", 'title': u"Octrois", 'extraValue': "Recevable"},
+            {'id': "octroi", 'title': u"Octroi", 'extraValue': "Recevable"},
             {'id': "refus", 'title': u"Refus", 'extraValue': "Irrecevable"},
         ],
 

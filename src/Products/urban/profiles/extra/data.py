@@ -1176,13 +1176,22 @@ urbanEventTypes = {
     ),
     'envclassone': (
         {
+            'id': "etude-dincidence",
+            'title': "Étude d'incidence",
+            'activatedFields': ['officeCoordinate'],
+            'eventDateLabel': 'Date de la RIP',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+        },
+        {
             'id': "depot-de-la-demande",
             'title': "Dépôt de la demande",
             'activatedFields': [],
             'deadLineDelay': 3,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "env1-recepisse", 'title': "Récepissé de la déclaration"},),
+            'podTemplates': ({'id': "env1-recepisse", 'title': "Récepissé du permis"},),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
         {
@@ -1258,7 +1267,7 @@ urbanEventTypes = {
                 {'id': 'env1-enq-avis', 'title': "Avis d'enquête publique"},
                 {'id': "env1-enq-recommandes", 'title': "Recommandé aux propriétaires (étiquette Poste)"},
                 {'id': "env1-enq-transmis-FT", 'title': "Transmis de l'avis d'enquête au FT"},
-                {'id': "env1-enq-transmis-college", 'title': "Transmis de l'avis d'enquête au Collège"},
+                {'id': "env1-enq-transmis-college", 'title': "Transmis de l'avis d'enquête aux propriétaires"},
                 {'id': "env1-enq-ordre-mission", 'title': "Ordre de mission"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
@@ -1561,6 +1570,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "env1-transmis-decision", 'title': "Transmis de la décision (demandeur)"},
                 {'id': "env1-transmis-decision-FT", 'title': "Transmis de la décision (FT)"},
+                {'id': "env1-transmis-decision-impetrants-ft", 'title': "Transmis de la décision (Instances)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
         },

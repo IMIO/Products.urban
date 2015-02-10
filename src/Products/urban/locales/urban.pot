@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-02-04 16:04+0000\n"
+"POT-Creation-Date: 2015-02-10 14:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2460,6 +2460,11 @@ msgstr ""
 #. Default: "Numerotation TAL expression"
 #: UrbanTool.py
 msgid "urban_label_numerotationTALExpression"
+msgstr ""
+
+#. Default: "Officecoordinate"
+#: UrbanEvent.py
+msgid "urban_label_officeCoordinate"
 msgstr ""
 
 #. Default: "Openofficeport"

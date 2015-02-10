@@ -249,6 +249,18 @@ schema = Schema((
         default_output_type='text/html',
         optional=True,
     ),
+    TextField(
+        name='officeCoordinate',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Officecoordinate',
+            label_msgid='urban_label_officeCoordinate',
+            i18n_domain='urban',
+        ),
+        default_method='getDefaultText',
+        default_output_type='text/html',
+        optional= True,
+    ),
 
 ),
 )
