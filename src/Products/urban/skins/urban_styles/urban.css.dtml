@@ -245,4 +245,13 @@ div[id^=formfield-form-widgets-events] .datagridwidget-table-view{
     color: green;
 }
 
+#content ul.urban-list{
+    margin-left: 0em;
+}
+
+#content ul.urban-list li{
+    list-style-type:none;
+    margin-bottom: 0em;
+}
+
 /* </dtml-with> */
