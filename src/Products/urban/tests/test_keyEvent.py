@@ -59,7 +59,7 @@ class TestKeyEvent(BrowserTestCase):
         urban_event = buildlicence.objectValues('UrbanEvent')[-1]
         event = ObjectModifiedEvent(urban_event)
         notify(event)
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        buildlicence_brain = catalog(portal_type='BuildLicence', id=buildlicence.id)[0]
 
         self.assertEqual(buildlicence_brain.last_key_event.split(',  ')[1], urban_event_type.Title())
 
@@ -73,7 +73,7 @@ class TestKeyEvent(BrowserTestCase):
         urban_event = buildlicence.objectValues()[1]
         event = ObjectModifiedEvent(urban_event)
         notify(event)
-        buildlicence_brain = catalog(portal_type='BuildLicence')[0]
+        buildlicence_brain = catalog(portal_type='BuildLicence', id=buildlicence.id)[0]
 
         self.assertTrue(buildlicence_brain.last_key_event != old_index_value)
 

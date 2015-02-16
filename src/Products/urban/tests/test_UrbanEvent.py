@@ -163,6 +163,8 @@ class TestUrbanEventInquiryView(BrowserTestCase):
 
     def test_200m_radius_when_EnvironmentImpactStudy(self):
         envclassone, inquiry = self._create_test_licence_with_inquiry('EnvClassOne')
+        envclassone.setHasEnvironmentImpactStudy(False)
+        transaction.commit()
 
         self.browser.open(inquiry.absolute_url())
         contents = self.browser.contents

@@ -1528,10 +1528,6 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-#                {'id': "env1-college-report-FT", 'title': "Avis du collège (FT)"},
-#                {'id': "env1-college-report-impetrants", 'title': "Avis du collège (Impétrants)"},
-#                {'id': "env1-inquiry-report-FT", 'title': "Synthèse de l'enquête publique (FT)"},
-#                {'id': "env1-inquiry-report-impetrants", 'title': "Synthèse de l'enquête publique (Impétrants)"},
             ),
         },
         {
@@ -1557,7 +1553,11 @@ urbanEventTypes = {
             'activatedFields': ['transmitDate'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': (),
+            'podTemplates': (
+                {'id': "env1-demande-plans-modificatifs", 'title': "Demande de plans modificatifs"},
+                {'id': "env1-transmis-demande-plans-modificatifs-ft.odt", 'title': "Transmis de la demande de plans modificatifs au FT"},
+                {'id': "env1-transmis-plans-modificatifs-ft", 'title': "Transmis de plans modificatifs au FT"},
+            ),
         },
         {
             'id': "decision",

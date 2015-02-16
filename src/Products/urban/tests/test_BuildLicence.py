@@ -178,7 +178,7 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
     def test_workType_is_visible(self):
         for licence in self.licences:
             msg = "field 'workType' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Nature des travaux</span>:", licence, msg)
+            self._is_field_visible("<span>Nature des travaux (liste 220)</span>:", licence, msg)
 
     def test_has_attribute_usage(self):
         field_name = 'usage'

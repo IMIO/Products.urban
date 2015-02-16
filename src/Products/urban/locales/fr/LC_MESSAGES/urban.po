@@ -3146,7 +3146,7 @@ msgstr "Adresse(s) des travaux"
 #. Default: "Worktype"
 #: BuildLicence.py
 msgid "urban_label_workType"
-msgstr "Nature des travaux"
+msgstr "Nature des travaux (liste 220)" 
 
 #: City.py
 msgid "urban_label_zipCode"
