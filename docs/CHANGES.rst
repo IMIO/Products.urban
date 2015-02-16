@@ -4,7 +4,7 @@ Changes
 =======
 
 
-1.8.0 (unreleased)
+1.8.0 (2015-02-16)
 ------------------
 
 - Add environment licence class one.
@@ -16,8 +16,9 @@ Changes
 1.7.0
 -----
 
-Add optional field RGBSR.
-Add field "deposit type" for UrbanEventi (#10263).
+- Add optional field RGBSR.
+
+- Add field "deposit type" for UrbanEventi (#10263).
 
 
 1.6.0
