@@ -137,6 +137,8 @@
     provides=".appy_pod.IGlobalTemplates"
   />
 
+  <adapter name="applicantInfosIndex" factory=".indexes.genericlicence_parcelinfoindex" />
+  <adapter name="applicantInfosIndex" factory=".indexes.environmentlicence_applicantinfoindex" />
   <adapter name="parcelInfosIndex" factory=".indexes.genericlicence_parcelinfoindex" />
   <adapter name="parcelInfosIndex" factory=".indexes.parcellingterm_parcelinfoindex" />
   <adapter name="StreetsUID" factory=".indexes.genericlicence_streetsuid" />

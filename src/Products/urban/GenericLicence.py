@@ -31,7 +31,6 @@ from Products.urban.config import *
 from zope.i18n import translate
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
-from Products.urban.indexes import UrbanIndexes
 from Products.urban.base import UrbanBase
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
@@ -798,7 +797,7 @@ GenericLicence_schema['title'].searchable = True
 GenericLicence_schema['title'].widget.visible = False
 ##/code-section after-schema
 
-class GenericLicence(BaseFolder, UrbanIndexes,  UrbanBase, BrowserDefaultMixin):
+class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

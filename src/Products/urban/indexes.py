@@ -14,33 +14,45 @@ Stephan GEULETTE <stephan.geulette@uvcw.be>,
 Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = 'plaintext'
 
-from AccessControl import ClassSecurityInfo
 from plone.indexer import indexer
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IParcellingTerm
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IUrbanEventType
 
 
-class UrbanIndexes:
+@indexer(IGenericLicence)
+def genericlicence_applicantinfoindex(object):
     """
-      This class manage indexes methods for urban objects
+        Return the informations to index about the applicants
     """
-    security = ClassSecurityInfo()
+    applicants_info = []
+    for applicant in object.getApplicants():
+        applicants_info.append(applicant.getName1())
+        applicants_info.append(applicant.getName2())
+        applicants_info.append(applicant.getSociety())
+        applicants_info.append(applicant.getNationalRegister())
+    return applicants_info
 
-    security.declarePublic('applicantInfosIndex')
 
-    def applicantInfosIndex(self):
-        """
-          Return the informations to index about the applicants
-        """
-        res = []
-        for applicant in self.getApplicants():
-            res.append(applicant.getName1())
-            res.append(applicant.getName2())
-            res.append(applicant.getSociety())
-            res.append(applicant.getNationalRegister())
-        return res
+@indexer(IEnvironmentLicence)
+def environmentlicence_applicantinfoindex(object):
+    """
+        Return the informations to index about the applicants
+    """
+    applicants_info = []
+    for applicant in object.getApplicants():
+        applicants_info.append(applicant.getName1())
+        applicants_info.append(applicant.getName2())
+        applicants_info.append(applicant.getSociety())
+        applicants_info.append(applicant.getNationalRegister())
+    for corporation in object.getCorporations():
+        applicants_info.append(applicant.getName1())
+        applicants_info.append(applicant.getName2())
+        applicants_info.append(applicant.getDenomination())
+        applicants_info.append(applicant.getBceNumber())
+    return applicants_info
 
 
 @indexer(IGenericLicence)
