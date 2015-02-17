@@ -7,7 +7,9 @@ Changes
 1.9.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add environment licence class two.
+
+- Use extra value for person title signaletic in mail address.
 
 
 1.8.0 (2015-02-16)
