@@ -186,6 +186,21 @@
   />
 
   <browser:page
+     name="envclasstwo-macros"
+     for="Products.urban.interfaces.IEnvironmentBase"
+     template="templates/envclasstwomacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IEnvironmentLicence"
+     name="envclasstwoview"
+     class=".envclasstwoview.EnvClassTwoView"
+     template="templates/envclasstwoview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      name="envclassone-macros"
      for="Products.urban.interfaces.IEnvironmentBase"
      template="templates/envclassonemacros.pt"

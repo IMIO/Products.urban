@@ -102,6 +102,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="EnvClassOne"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="EnvClassTwo"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanDoc"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanEventInquiry"

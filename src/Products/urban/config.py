@@ -136,18 +136,20 @@ ADD_EMPTY_VOCAB_VALUE = True
 DEPENDENCIES = []
 #name of the folder created in a licence that will contain additional
 #layers linked to the licence and used in the mapfile generation
-ADDITIONAL_LAYERS_FOLDER="additional_layers"
+ADDITIONAL_LAYERS_FOLDER = "additional_layers"
 
 #a list where first element is the meetingConfigId and the second, the meta_type name
-URBAN_TYPES = ['BuildLicence','ParcelOutLicence','Declaration', 'Division', 'UrbanCertificateOne', 'UrbanCertificateTwo',
-               'NotaryLetter', 'MiscDemand', 'EnvClassThree', 'EnvClassOne']
+URBAN_TYPES = [
+    'BuildLicence', 'ParcelOutLicence', 'Declaration', 'Division', 'UrbanCertificateOne', 'UrbanCertificateTwo',
+    'NotaryLetter', 'MiscDemand', 'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
+]
 
 #currently matches the content of URBAN_TYPES, the order of this list impacts the order
 # of content types links in urban_root_view
 ORDERED_URBAN_TYPES = [
     'BuildLicence', 'ParcelOutLicence', 'Declaration', 'Division',
-    'UrbanCertificateOne', 'UrbanCertificateTwo',
-    'NotaryLetter', 'EnvClassThree', 'EnvClassOne', 'MiscDemand'
+    'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter',
+    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'MiscDemand'
 ]
 
 # all types that can be used as a licence applicant
@@ -173,18 +175,18 @@ GLOBAL_TEMPLATES = {
     ],
 }
 #the different formats proposed for generating document
-GENERATED_DOCUMENT_FORMATS = {'odt':'application/vnd.oasis.opendocument.text' ,'doc':'application/msword'}
+GENERATED_DOCUMENT_FORMATS = {'odt': 'application/vnd.oasis.opendocument.text', 'doc': 'application/msword'}
 #empty value used for listboxes
 EMPTY_VOCAB_VALUE = 'choose_a_value'
 
 PPNC_LAYERS = {
-    'ppnc1' : {'xmin':40824, 'ymin':113446, 'xmax':139390, 'ymax':168195},
-    'ppnc2' : {'xmin':122374, 'ymin':116510, 'xmax':218186, 'ymax':169730},
-    'ppnc3' : {'xmin':202155, 'ymin':115165, 'xmax':302832, 'ymax':171088},
-    'ppnc4' : {'xmin':95175, 'ymin':64858, 'xmax':196930, 'ymax':121379},
-    'ppnc5' : {'xmin':191082, 'ymin':62858, 'xmax':300067, 'ymax':123394},
-    'ppnc6' : {'xmin':176533, 'ymin':18317, 'xmax':270345, 'ymax':70426},
-        }
+    'ppnc1': {'xmin': 40824, 'ymin': 113446, 'xmax': 139390, 'ymax': 168195},
+    'ppnc2': {'xmin': 122374, 'ymin': 116510, 'xmax': 218186, 'ymax': 169730},
+    'ppnc3': {'xmin': 202155, 'ymin': 115165, 'xmax': 302832, 'ymax': 171088},
+    'ppnc4': {'xmin': 95175, 'ymin': 64858, 'xmax': 196930, 'ymax': 121379},
+    'ppnc5': {'xmin': 191082, 'ymin': 62858, 'xmax': 300067, 'ymax': 123394},
+    'ppnc6': {'xmin': 176533, 'ymin': 18317, 'xmax': 270345, 'ymax': 70426},
+}
 #From Qgis
 #PPNC : 27303,15803 : 311226,173511
 #ppnc1: 40824,113446 : 139390,168195
@@ -195,7 +197,7 @@ PPNC_LAYERS = {
 #ppnc6: 176533,18317 : 270345,70426
 
 DefaultTexts = {
-        'BuildLicence': {
+    'BuildLicence': {
         'equipmentAndRoadRequirements':
         """
         <p>1. Aucun descendant d’eaux pluviales ne pourra faire saillie sur le domaine public.  Ils seront intégrés dans la maçonnerie de façade.  Ils seront munis d’un dauphin en fonte d’une hauteur de 1 mètre à partir du sol.  Ils seront raccordés au réseau privatif du bâtiment car aucun rejet d’eaux pluviales sur le domaine public n’est autorisé. Cette donnée technique n’est d’application que si le projet prévoit des descendants d’eaux pluviales en façade à rue.</p>
@@ -216,8 +218,7 @@ DefaultTexts = {
         <p>16. <span>La piscine doit être entretenue par filtre.  Le rejet des eaux excédentaires et des eaux de vidange se fera via une pompe dans le réseau existant de l’habitation privée jouxtant la piscine.</span></p>
         <p>17. Vu l’espace réduit pour un système de dispersion performant, une fosse à vidanger est une solution envisageable dans l’attente d’un raccord au futur égout public. Néanmoins, nous attirons l’attention du demandeur sur le principe de la fosse à vidanger. Cette solution est accordée à titre exceptionnelle. Le demandeur veillera à entretenir et à vidanger à fréquence régulière sa fosse. La Ville de Mons ne pourra être tenu responsable de toute négligence de la part du demandeur à l’encontre de la fosse à vidanger et de la citerne à eaux de pluies. Le demandeur prendra toutes les mesures utiles et nécessaires ainsi que toutes les précautions inhérentes à ce système d’égouttage</p>
         <p><b>(**) A.G.W. du 3 mars 2005 relatif au livre II du Code de l’Environnement contenant le Code de l’Eau (M.B. 12/04/2005 – err.21/06/2005), modifié par A.G.W. le 06 décembre 2006 (MB 17.01.2007) relatif au règlement général d’assainissement des eaux urbaines résiduaires.</b></p>
-        """
-        ,
+        """,
         'technicalRemarks':
         """
         <p>1. Les portes (de garage ou autres) et les fenêtres ne peuvent en s’ouvrant faire saillie sur le domaine public.</p>
@@ -228,8 +229,7 @@ DefaultTexts = {
         <p>6. La réfection ou la construction de trottoir, l’abaissement de bordures et le voûtement de fossé feront l’objet d’une demande d’autorisation séparée auprès de l’administration communale.  Ces travaux sont à charge du demandeur.</p>
         <p>7. Le seuil de portes restera dans l’alignement de la façade actuelle.  Il ne sera pas toléré de débordement sur le domaine public.</p>
         """
-        ,
-        }
+    }
 }
 
 

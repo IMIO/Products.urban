@@ -1,0 +1,315 @@
+#-*- coding: utf-8 -*-
+
+from DateTime import DateTime
+
+from Products.urban.testing import URBAN_TESTS_INTEGRATION
+from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.urban.tests.helpers import BrowserTestCase
+from Products.urban.tests.helpers import SchemaFieldsTestCase
+from Products.urban import utils
+
+from plone import api
+from plone.app.testing import login
+from plone.testing.z2 import Browser
+
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
+
+import transaction
+import unittest
+import urllib2
+
+
+class TestEnvClassTwoInstall(BrowserTestCase):
+
+    layer = URBAN_TESTS_INTEGRATION
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+        self.portal_urban = self.portal.portal_urban
+        self.browser = Browser(self.portal)
+        self.browserLogin('urbaneditor')
+
+    def test_envclasstwo_config_folder_exists(self):
+        msg = 'envclasstwo config folder not created'
+        self.assertTrue('envclasstwo' in self.portal_urban.objectIds(), msg)
+        envclasstwo = self.portal_urban.envclasstwo
+        from Products.urban.LicenceConfig import LicenceConfig
+        self.assertTrue(isinstance(envclasstwo, LicenceConfig))
+
+    def test_envclasstwo_config_folder_is_visible(self):
+        msg = 'envclasstwo config folder is not visible in urban config'
+        self.browser.open(self.portal_urban.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("Permis d'environnement classe 2" in contents, msg)
+
+    def test_envclasstwo_config_folder_is_editable(self):
+        self.browserLogin('urbanmanager')
+        try:
+            edit_url = self.portal_urban.envclasstwo.absolute_url() + '/edit'
+            self.browser.open(edit_url)
+        except urllib2.HTTPError, e:
+            self.fail(msg="Got HTTP response code:" + str(e.code))
+
+    def test_envclasstwo_folder_exist(self):
+        msg = 'envclasstwos folder not created'
+        self.assertTrue('envclasstwos' in self.urban.objectIds(), msg)
+
+    def test_envclasstwo_addable_types(self):
+        msg = 'cannot create EnvClassTwo in licence folder'
+        addable_types = self.urban.envclasstwos.immediatelyAddableTypes
+        self.assertTrue('EnvClassTwo' in addable_types, msg)
+        msg = 'can create an other content type in licence folder'
+        self.assertEqual(len(addable_types), 1, msg)
+
+    def test_envclasstwo_licence_folder_link_in_urban_default_view(self):
+        self.browser.open(self.urban.absolute_url())
+        folder_url = utils.getLicenceFolder('EnvClassTwo').absolute_url()
+        link = self.browser.getLink(url=folder_url)
+        self.assertEqual(link.text, "Permis d'environnement classe 2")
+        link.click()
+        contents = self.browser.contents
+        self.assertTrue("Permis d'environnement classe 2" in contents)
+
+    def test_add_envclasstwo_in_urban_default_view(self):
+        self.browser.open(self.urban.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("create-EnvClassTwo-link" in contents)
+        link = self.browser.getLink(id="create-EnvClassTwo-link")
+        link.click()
+        contents = self.browser.contents
+        self.assertTrue("Ajouter <span> Permis d'environnement classe 2" in contents)
+
+    def test_EnvClassTwo_is_under_licence_workflow(self):
+        workflow_tool = api.portal.get_tool('portal_workflow')
+        envclasstwo_workflow = workflow_tool.getChainForPortalType('EnvClassTwo')
+        self.assertTrue('urban_licence_workflow' in envclasstwo_workflow)
+
+
+class TestEnvClassTwoInstance(SchemaFieldsTestCase):
+
+    layer = URBAN_TESTS_INTEGRATION
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+
+        # create a test EnvClassTwo licence
+        login(self.portal, 'urbaneditor')
+        envclasstwo_folder = self.urban.envclasstwos
+        testlicence_id = 'test_envclasstwo'
+        if testlicence_id not in envclasstwo_folder.objectIds():
+            envclasstwo_folder.invokeFactory('EnvClassTwo', id=testlicence_id)
+            transaction.commit()
+        self.licence = getattr(envclasstwo_folder, testlicence_id)
+
+        self.browser = Browser(self.portal)
+        self.browserLogin('urbaneditor')
+
+    def test_envclasstwo_licence_exists(self):
+        self.assertTrue(len(self.urban.envclasstwos.objectIds()) > 0)
+
+    def test_envclasstwo_view_is_registered(self):
+        msg = 'EnvClassTwo view is not registered'
+        login(self.portal, 'urbaneditor')
+        try:
+            self.licence.restrictedTraverse('envclasstwoview')
+        except AttributeError:
+            self.fail(msg=msg)
+
+    def test_envclasstwo_view(self):
+        try:
+            self.browser.open(self.licence.absolute_url())
+        except urllib2.HTTPError,  e:
+            self.fail(msg="Got HTTP response code:" + str(e.code))
+
+    def test_envclasstwo_edit(self):
+        self.browser.open(self.licence.absolute_url() + '/edit')
+        contents = self.browser.contents
+        self.assertTrue('Voirie' in contents)
+        self.assertTrue('Métadonnées' not in contents)
+        self.assertTrue('Données' not in contents)
+
+    def test_envclasstwo_has_attribute_hasEnvironmentImpactStudy(self):
+        self.assertTrue(self.licence.getField('hasEnvironmentImpactStudy'))
+
+    def test_envclasstwo_hasEnvironmentImpactStudy_is_visible(self):
+        self._is_field_visible("Étude d'incidences sur l'environnement")
+
+    def test_envclasstwo_hasEnvironmentImpactStudy_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("Étude d'incidences sur l'environnement")
+
+    def test_envclasstwo_has_attribute_isSeveso(self):
+        self.assertTrue(self.licence.getField('isSeveso'))
+
+    def test_envclasstwo_isSeveso_is_visible(self):
+        self._is_field_visible("Établissement SEVESO")
+
+    def test_envclasstwo_isSeveso_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("Établissement SEVESO")
+
+    def test_envclasstwo_has_attribute_publicRoadModifications(self):
+        self.assertTrue(self.licence.getField('publicRoadModifications'))
+
+    def test_envclasstwo_publicRoadModifications_is_visible(self):
+        self._is_field_visible("Modifications souhaitées au tracé et à l'équipement des voiries publiques")
+
+    def test_envclasstwo_publicRoadModifications_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("Modifications souhaitées au tracé et à l'équipement des voiries publiques")
+
+    def test_envclasstwo_has_attribute_previousLicences(self):
+        self.assertTrue(self.licence.getField('previousLicences'))
+
+    def test_envclasstwo_previousLicences_is_visible(self):
+        self._is_field_visible("Permissions, enregistrements et déclarations existantes")
+
+    def test_envclasstwo_has_attribute_validityDelay(self):
+        self.assertTrue(self.licence.getField('validityDelay'))
+
+    def test_envclasstwo_validityDelay_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("Durée de validité du permis")
+
+    def test_envclasstwo_validityDelay_is_visible(self):
+        self._is_field_visible("Durée de validité du permis")
+
+    def test_envclasstwo_has_attribute_authority(self):
+        self.assertTrue(self.licence.getField('authority'))
+
+    def test_envclasstwo_authority_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("Autorité compétente")
+
+    def test_envclasstwo_authority_is_visible(self):
+        self._is_field_visible("Autorité compétente")
+
+    def test_envclasstwo_has_attribute_ftSolicitOpinionsTo(self):
+        self.assertTrue(self.licence.getField('ftSolicitOpinionsTo'))
+
+    def test_envclasstwo_ftSolicitOpinionsTo_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("")
+
+    def test_envclasstwo_ftSolicitOpinionsTo_is_visible(self):
+        self._is_field_visible("")
+
+    def test_envclasstwo_referenceDGATLP_translation(self):
+        """
+        Field referenceDGATLP should be translated as 'reference DGO3'
+        """
+        self._is_field_visible("Référence DGO3")
+        self._is_field_visible_in_edit("Référence DGO3")
+
+    def test_envclasstwo_workLocation_translation(self):
+        """
+        Field referenceDGATLP should be translated as 'reference DGO3'
+        """
+        self._is_field_visible("Situation")
+        self._is_field_visible_in_edit("Situation")
+
+
+class TestEnvClassTwoEvents(unittest.TestCase):
+
+    layer = URBAN_TESTS_CONFIG
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+
+        # create a test EnvClassTwo licence
+        login(self.portal, 'urbaneditor')
+        envclasstwo_folder = self.urban.envclasstwos
+        testlicence_id = 'test_envclasstwo'
+        if testlicence_id not in envclasstwo_folder.objectIds():
+            envclasstwo_folder.invokeFactory('EnvClassTwo', id=testlicence_id)
+        self.licence = getattr(envclasstwo_folder, testlicence_id)
+
+    def tearDown(self):
+        for event in self.licence.objectValues('UrbanEvent'):
+            api.content.delete(event)
+
+    def test_create_ExpirationEvent_when_notificationDate_is_set(self):
+        """
+         When the notification date of the decision event is set,
+         an ExpirationEvent should be created automatically
+        """
+        from Products.urban.interfaces import ILicenceDeliveryEvent
+        from Products.urban.interfaces import ILicenceExpirationEvent
+        licence = self.licence
+
+        # so far no event created
+        self.assertEqual(licence.objectValues('UrbanEvent'), [])
+
+        config = self.licence.getUrbanConfig()
+        decision_eventtype = config.getEventTypesByInterface(ILicenceDeliveryEvent)[0]
+
+        decision_event = licence.createUrbanEvent(decision_eventtype)
+        decision_event.processForm()
+        zopeevent = ObjectModifiedEvent(decision_event)
+        notify(zopeevent)
+
+        # an event providing ILicenceExpirationEvent should be created
+        expiration_event = licence._getLastEvent(ILicenceExpirationEvent)
+        self.assertTrue(expiration_event)
+
+    def test_expirationDate_is_computed_correctly(self):
+        """
+         Expiration date = notification date + validity delay (in years).
+        """
+        from Products.urban.interfaces import ILicenceDeliveryEvent
+        from Products.urban.interfaces import ILicenceExpirationEvent
+        licence = self.licence
+        validity_delay = 15
+        licence.setValidityDelay(validity_delay)
+
+        config = self.licence.getUrbanConfig()
+        decision_eventtype = config.getEventTypesByInterface(ILicenceDeliveryEvent)[0]
+        decision_event = licence.createUrbanEvent(decision_eventtype)
+        decision_event.processForm()
+        zopeevent = ObjectModifiedEvent(decision_event)
+        notify(zopeevent)
+
+        notification_date = decision_event.getEventDate()
+        expected_expiration_year = validity_delay + notification_date.year()
+        expiration_event = licence._getLastEvent(ILicenceExpirationEvent)
+        expiration_date = expiration_event.getEventDate()
+
+        self.assertEqual(expiration_date.year(), expected_expiration_year)
+        self.assertEqual(expiration_date.month(), notification_date.month())
+        self.assertEqual(expiration_date.day(), notification_date.day())
+
+    def test_expirationDate_is_updated_when_notification_date_change(self):
+        """
+         When the notification date of the decision event is set,
+         an ExpirationEvent should be created automatically
+        """
+        from Products.urban.interfaces import ILicenceDeliveryEvent
+        from Products.urban.interfaces import ILicenceExpirationEvent
+        licence = self.licence
+        licence.setValidityDelay(0)
+
+        config = self.licence.getUrbanConfig()
+        decision_eventtype = config.getEventTypesByInterface(ILicenceDeliveryEvent)[0]
+
+        decision_event = licence.createUrbanEvent(decision_eventtype)
+        decision_event.processForm()
+        zopeevent = ObjectModifiedEvent(decision_event)
+        notify(zopeevent)
+        notification_date = decision_event.getEventDate()
+
+        expiration_event = licence._getLastEvent(ILicenceExpirationEvent)
+        expiration_date = expiration_event.getEventDate()
+
+        self.assertEqual(expiration_date.year(), notification_date.year())
+        self.assertEqual(expiration_date.month(), notification_date.month())
+        self.assertEqual(expiration_date.day(), notification_date.day())
+
+        # change the notification date
+        new_notification_date = DateTime() + 4242
+        decision_event.setEventDate(new_notification_date)
+        zopeevent = ObjectModifiedEvent(decision_event)
+        notify(zopeevent)
+
+        expiration_date = expiration_event.getEventDate()
+        # the expiration date should have changed accordingly
+        self.assertEqual(expiration_date.year(), new_notification_date.year())
+        self.assertEqual(expiration_date.month(), new_notification_date.month())
+        self.assertEqual(expiration_date.day(), new_notification_date.day())

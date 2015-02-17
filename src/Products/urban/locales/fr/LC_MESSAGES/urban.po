@@ -95,6 +95,9 @@ msgstr "Permis d'environnement classe 1"
 msgid "EnvClassThree"
 msgstr "Déclaration environnementale"
 
+msgid "EnvClassTwo"
+msgstr "Permis d'environnement classe 2"
+
 msgid "Filter"
 msgstr "Filtrer"
 
@@ -283,6 +286,9 @@ msgstr "Ajouter un permis d'environnement classe 1"
 
 msgid "add_EnvClassThree"
 msgstr "Ajouter une déclaration environnementale"
+
+msgid "add_EnvClassTwo"
+msgstr "Ajouter un permis d'environnementale classe 2"
 
 # referencebrowser.pt
 msgid "add_Geometrician"
@@ -596,6 +602,12 @@ msgstr "Paramètres des déclarations environnementales"
 
 msgid "envclassthrees"
 msgstr "Déclarations environnementales"
+
+msgid "envclasstwo_urbanconfig_title"
+msgstr "Paramètres des Permis d'environnement classe 2"
+
+msgid "envclasstwos"
+msgstr "Permis d'environnement classe 2"
 
 msgid "environmenttemplates_folder_title"
 msgstr "modèles des procédures d'environnement"
@@ -3146,7 +3158,7 @@ msgstr "Adresse(s) des travaux"
 #. Default: "Worktype"
 #: BuildLicence.py
 msgid "urban_label_workType"
-msgstr "Nature des travaux (liste 220)" 
+msgstr "Nature des travaux (liste 220)"
 
 #: City.py
 msgid "urban_label_zipCode"

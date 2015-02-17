@@ -25,7 +25,7 @@
                     <td style="vertical-align:top">
                     <!--div tal:replace="structure provider:plone.belowcontenttitle" /-->
                     <div style="float:left; margin:5px">
-                        <fieldset style="width:250px" tal:define="tool python: getattr(context, 'portal_urban');">
+                        <fieldset style="width:260px" tal:define="tool python: getattr(context, 'portal_urban');">
                             <legend i18n:domain="urban" i18n:translate="root-licences">Licences</legend>
                             <ul class="urban-list">
                                 <li tal:repeat="licencetype view/getLicenceTypes">
@@ -35,7 +35,7 @@
                             </ul>
                         </fieldset>
 
-                        <fieldset style="width:250px" tal:define="tool python: getattr(context, 'portal_urban');">
+                        <fieldset style="width:260px" tal:define="tool python: getattr(context, 'portal_urban');">
                             <legend i18n:domain="urban" i18n:translate="root-stats-search">Tools</legend>
                             <ul class="urban-list">
                                 <li><img src="../schedule.png" /> <a href="schedule">Échéancier</a></li>
@@ -47,7 +47,7 @@
                             </ul>
                         </fieldset>
 
-                        <fieldset style="width:250px" tal:define="tool python: getattr(context, 'portal_urban');">
+                        <fieldset style="width:260px" tal:define="tool python: getattr(context, 'portal_urban');">
                             <legend i18n:domain="urban" i18n:translate="root-configuration">Configuration</legend>
                             <ul class="urban-list">
                                 <li><img src="../folder_icon.gif" /> <a href="architects" i18n:translate="manage_architects">Manage architects</a></li>

@@ -11,6 +11,7 @@ class BrowserTestCase(unittest.TestCase):
     """
 
     def browserLogin(self, user):
+        self.browser.handleErrors = False
         self.browser.open(self.portal.absolute_url() + "/login_form")
         self.browser.getControl(name='__ac_name').value = user
         self.browser.getControl(name='__ac_password').value = user

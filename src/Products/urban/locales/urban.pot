@@ -94,6 +94,9 @@ msgstr ""
 msgid "EnvClassThree"
 msgstr ""
 
+msgid "EnvClassTwo"
+msgstr ""
+
 msgid "Filter"
 msgstr ""
 
@@ -281,6 +284,9 @@ msgid "add_EnvClassOne"
 msgstr ""
 
 msgid "add_EnvClassThree"
+msgstr ""
+
+msgid "add_EnvClassTwo"
 msgstr ""
 
 # referencebrowser.pt
@@ -594,6 +600,12 @@ msgid "envclassthree_urbanconfig_title"
 msgstr ""
 
 msgid "envclassthrees"
+msgstr ""
+
+msgid "envclasstwo_urbanconfig_title"
+msgstr ""
+
+msgid "envclasstwos"
 msgstr ""
 
 msgid "environmenttemplates_folder_title"

@@ -146,106 +146,19 @@ default_values = {
             {'id': "extrait_cadastral", 'title': u"Extrait cadastral en 3 exemplaires"},
         ],
     },
-    'EnvClassOne': {
 
+    'EnvClassOne': {
         'decisions': [
             'UrbanVocabularyTerm',
             {'id': "octroi", 'title': u"Octroi", 'extraValue': "Recevable"},
             {'id': "refus", 'title': u"Refus", 'extraValue': "Irrecevable"},
         ],
-
-        'ftSolicitOpinionsTo': [
+    },
+    'EnvClassTwo': {
+        'decisions': [
             'UrbanVocabularyTerm',
-            {
-                'id': 'spw-dgo1',
-                'title': "SPW-DGO1",
-                'description': '<p>Direction Générale opérationnelle<br />Département du réseau de Namur et du Luxembourg<br />District 131.12 - SPY<br />37, Route de Saussin<br />5190 Spy</p>',
-            },
-            {
-                'id': 'dgrne',
-                'title': "DGRNE",
-                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
-            },
-            {
-                'id': 'dnf',
-                'title': "DNF",
-                'description': '<p>39, Avenue Reine Astrid<br />5000 Namur</p>',
-            },
-            {
-                'id': 'stp',
-                'title': "Service Technique Provincial",
-                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
-            },
-            {
-                'id': 'pi',
-                'title': "Prévention Incendie",
-                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
-            },
-            {
-                'id': 'svp',
-                'title': "Service Voyer Principal",
-                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
-            },
-            {
-                'id': 'agriculture',
-                'title': "Agriculture",
-                'description': '<p>Direction Générale opérationnelle<br />Agriculture, Ressources naturelles et Environnement<br />Service extérieur de Wavre<br />4, Avenue Pasteur<br />1300 Wavre</p>',
-            },
-            {
-                'id': 'pn',
-                'title': "Parc Naturel",
-                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
-            },
-            {
-                'id': 'crmsf',
-                'title': "Commission Royale des Monuments, Sites et Fouilles",
-                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
-            },
-            {
-                'id': 'swde',
-                'title': "SWDE",
-                'description': '<p>14, Rue Joseph Saintraint<br />5000 Namur</p>',
-            },
-            {
-                'id': 'ccatm',
-                'title': "CCATM",
-                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
-            },
-            {
-                'id': 'inasep',
-                'title': "INASEP",
-                'description': '<p>1b, Rue des Viaux<br />5100 Naninne</p>',
-            },
-            {
-                'id': 'belgacom',
-                'title': "Belgacom",
-                'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
-            },
-            {
-                'id': 'spge',
-                'title': "SPGE",
-                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
-            },
-            {
-                'id': 'cibe',
-                'title': "CIBE/Vivaqua",
-                'description': '<p>70, Rue aux Laines<br />1000 Bruxelles</p>',
-            },
-            {
-                'id': 'sncb',
-                'title': "SNCB",
-                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
-            },
-            {
-                'id': 'infrabel',
-                'title': "Infrabel",
-                'description': '<p>Infrastructure ferroviaire<br />2/003, Place des Guillemins<br />4000 Liège</p>',
-            },
-            {
-                'id': 'voo',
-                'title': "VOO",
-                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
-            },
+            {'id': "octroi", 'title': u"Octroi", 'extraValue': "Recevable"},
+            {'id': "refus", 'title': u"Refus", 'extraValue': "Irrecevable"},
         ],
     },
     'EnvClassThree': {
@@ -367,6 +280,99 @@ default_values = {
             'Folder', ['EnvClassOne', 'EnvClassTwo', 'EnvClassThree'],
         ],
 
+        'ftSolicitOpinionsTo': [
+            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo'],
+            {
+                'id': 'spw-dgo1',
+                'title': "SPW-DGO1",
+                'description': '<p>Direction Générale opérationnelle<br />Département du réseau de Namur et du Luxembourg<br />District 131.12 - SPY<br />37, Route de Saussin<br />5190 Spy</p>',
+            },
+            {
+                'id': 'dgrne',
+                'title': "DGRNE",
+                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+            },
+            {
+                'id': 'dnf',
+                'title': "DNF",
+                'description': '<p>39, Avenue Reine Astrid<br />5000 Namur</p>',
+            },
+            {
+                'id': 'stp',
+                'title': "Service Technique Provincial",
+                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+            },
+            {
+                'id': 'pi',
+                'title': "Prévention Incendie",
+                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+            },
+            {
+                'id': 'svp',
+                'title': "Service Voyer Principal",
+                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+            },
+            {
+                'id': 'agriculture',
+                'title': "Agriculture",
+                'description': '<p>Direction Générale opérationnelle<br />Agriculture, Ressources naturelles et Environnement<br />Service extérieur de Wavre<br />4, Avenue Pasteur<br />1300 Wavre</p>',
+            },
+            {
+                'id': 'pn',
+                'title': "Parc Naturel",
+                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+            },
+            {
+                'id': 'crmsf',
+                'title': "Commission Royale des Monuments, Sites et Fouilles",
+                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+            },
+            {
+                'id': 'swde',
+                'title': "SWDE",
+                'description': '<p>14, Rue Joseph Saintraint<br />5000 Namur</p>',
+            },
+            {
+                'id': 'ccatm',
+                'title': "CCATM",
+                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+            },
+            {
+                'id': 'inasep',
+                'title': "INASEP",
+                'description': '<p>1b, Rue des Viaux<br />5100 Naninne</p>',
+            },
+            {
+                'id': 'belgacom',
+                'title': "Belgacom",
+                'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
+            },
+            {
+                'id': 'spge',
+                'title': "SPGE",
+                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+            },
+            {
+                'id': 'cibe',
+                'title': "CIBE/Vivaqua",
+                'description': '<p>70, Rue aux Laines<br />1000 Bruxelles</p>',
+            },
+            {
+                'id': 'sncb',
+                'title': "SNCB",
+                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+            },
+            {
+                'id': 'infrabel',
+                'title': "Infrabel",
+                'description': '<p>Infrastructure ferroviaire<br />2/003, Place des Guillemins<br />4000 Liège</p>',
+            },
+            {
+                'id': 'voo',
+                'title': "VOO",
+                'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+            },
+        ],
         'missingparts': [
             'UrbanVocabularyTerm', ['NotaryLetter', 'MiscDemand', 'Division', 'Declaration'],
         ],

@@ -1,0 +1,54 @@
+<metal:description define-macro="description_macro" i18n:domain="urban">
+
+    <tal:vars define="exclude python:[
+                          'title', 'workLocations', 'businessOldLocation',
+                          'additionalLegalConditions', 'additionalConditions',
+                          'additionalPreviousLicences',
+                      ];
+                      custom python:[
+                          'rubrics', 'minimumLegalConditions', 'hasAdditionalConditions',
+                          'previousLicences', 'validityDelay',
+                      ];">
+        <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
+            <metal:applicants fill-slot="applicant_slot">
+                <metal:applicants_and_corporations_macro use-macro="here/@@licencemacros/urbanApplicantsAndCorporationsMacro" />
+            </metal:applicants>
+
+            <metal:worklocations fill-slot="worklocations">
+
+                <fieldset tal:define="workLocations context/getWorkLocations">
+                    <legend i18n:translate="urban_label_situation">Situation</legend>
+                    <div tal:condition="workLocations">
+                        <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" />
+                    </div>
+                    <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
+                </fieldset>
+
+                <fieldset tal:define="workLocations context/getBusinessOldLocation">
+                    <legend i18n:translate="urban_label_businessOldLocation">Old business location</legend>
+                    <div tal:condition="workLocations">
+                        <metal:myfield use-macro="python:here.widget('businessOldLocation', mode='view')" />
+                    </div>
+                    <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
+                </fieldset>
+
+            </metal:worklocations>
+        </metal:parent_call>
+    </tal:vars>
+
+</metal:description>
+
+
+<metal:road define-macro="road_macro" i18n:domain="urban">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/road_macro" />
+</metal:road>
+
+
+<metal:location define-macro="location_macro" i18n:domain="urban">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro" />
+</metal:location>
+
+
+<metal:inquiry define-macro="investigation_and_advices_macro" i18n:domain="urban">
+    <div metal:use-macro="here/@@licencetabs-macros/investigation_and_advices_macro" />
+</metal:inquiry>
