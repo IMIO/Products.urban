@@ -4,7 +4,7 @@ Changes
 =======
 
 
-1.9.0 (unreleased)
+1.9.0 (2015-02-17)
 ------------------
 
 - Add environment licence class two.
