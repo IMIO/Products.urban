@@ -27,7 +27,7 @@
          <input id="foldertypes" type="checkbox" name="foldertypes"
          tal:define="type_checked python:licence_type in foldertypes or False"
          tal:attributes="value licence_type;checked python: type_checked and 'checked' or ''" />
-  <label tal:content="licence_type" i18n:domain="plone" i18n:translate="">Licence type</label><br />
+  <label tal:content="licence_type" i18n:domain="urban" i18n:translate="">Licence type</label><br />
  </div>
  <br/>
  <a id="base_url" tal:attributes="href python: '%s/urbansearchview#fieldsetlegend-urban_searchby' % context.absolute_url()" ></a>

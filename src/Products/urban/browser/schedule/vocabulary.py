@@ -151,6 +151,22 @@ class notaryletterEventsVocabulary():
 notaryletterEventsVocabularyFactory = notaryletterEventsVocabulary()
 
 
+class envclassoneEventsVocabulary():
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        return getSchedulableEventsVocabulary(context, 'envclassone')
+envclassoneEventsVocabularyFactory = envclassoneEventsVocabulary()
+
+
+class envclasstwoEventsVocabulary():
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        return getSchedulableEventsVocabulary(context, 'envclasstwo')
+envclasstwoEventsVocabularyFactory = envclasstwoEventsVocabulary()
+
+
 class envclassthreeEventsVocabulary():
     implements(IVocabularyFactory)
 

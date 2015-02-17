@@ -149,6 +149,18 @@
 
   <utility
     provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".vocabulary.envclassoneEventsVocabularyFactory"
+    name="urban.envclassone_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".vocabulary.envclasstwoEventsVocabularyFactory"
+    name="urban.envclasstwo_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
     component=".vocabulary.envclassthreeEventsVocabularyFactory"
     name="urban.envclassthree_schedulable_events"
   />
