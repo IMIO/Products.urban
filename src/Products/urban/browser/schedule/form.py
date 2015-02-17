@@ -67,6 +67,20 @@ class INotaryLetterEventsRow(Interface):
     )
 
 
+class IEnvClassOneEventsRow(Interface):
+    event = schema.Choice(
+        required=False,
+        vocabulary='urban.envclassone_schedulable_events',
+    )
+
+
+class IEnvClassTwoEventsRow(Interface):
+    event = schema.Choice(
+        required=False,
+        vocabulary='urban.envclasstwo_schedulable_events',
+    )
+
+
 class IEnvClassThreeEventsRow(Interface):
     event = schema.Choice(
         required=False,
@@ -154,6 +168,24 @@ class IScheduleForm(Interface):
         ),
     )
     alsoProvides(events_notaryletter, IScheduleEventField)
+    events_envclassone = schema.List(
+        title=_(u"EnvClassOne"),
+        required=False,
+        value_type=DictRow(
+            schema=IEnvClassOneEventsRow,
+            required=False
+        ),
+    )
+    alsoProvides(events_envclassone, IScheduleEventField)
+    events_envclasstwo = schema.List(
+        title=_(u"EnvClassTwo"),
+        required=False,
+        value_type=DictRow(
+            schema=IEnvClassTwoEventsRow,
+            required=False
+        ),
+    )
+    alsoProvides(events_envclasstwo, IScheduleEventField)
     events_envclassthree = schema.List(
         title=_(u"EnvClassThree"),
         required=False,
@@ -177,7 +209,8 @@ class ScheduleForm(form.Form):
         'events_buildlicence', 'events_parceloutlicence',
         'events_declaration', 'events_division',
         'events_notaryletter', 'events_urbancertificateone',
-        'events_urbancertificatetwo', 'events_envclassthree'
+        'events_urbancertificatetwo', 'events_envclassone',
+        'events_envclasstwo', 'events_envclassthree'
     ]
 
     fields = field.Fields(IScheduleForm)
