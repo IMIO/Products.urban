@@ -276,7 +276,7 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
         return DisplayList(tuple(vocabulary))
 
     def _getNameSignaletic(self, short, linebyline, invertnames=False):
-        title = self.getPersonTitleValue(short, extra=False)
+        title = self.getPersonTitleValue(short, extra=linebyline)
         namedefined = self.getName1() or self.getName2()
         names = '%s %s' % (self.getName1(), self.getName2())
         if invertnames and linebyline:
