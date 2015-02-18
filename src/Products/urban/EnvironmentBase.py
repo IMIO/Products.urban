@@ -28,7 +28,6 @@ from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.CMFCore.utils import getToolByName
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
@@ -240,8 +239,8 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
             return None
 
     def getRubricsConfigPath(self):
-        portal_urban = getToolByName(self, 'portal_urban')
-        return '/'.join(portal_urban.envclassthree.rubrics.getPhysicalPath())[1:]
+        config_path = '/'.join(self.getLicenceConfig().rubrics.getPhysicalPath())[1:]
+        return config_path
 
     security.declarePrivate('_getConditions')
     def _getConditions(self, restrict=['CI & CS', 'CI', 'CS']):
