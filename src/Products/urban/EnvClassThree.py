@@ -64,18 +64,15 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
-    TextField(
+    FileField(
         name='additionalConditions',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
+        schemata='urban_description',
+        widget=FileField._properties['widget'](
             label='Additionalconditions',
             label_msgid='urban_label_additionalConditions',
             i18n_domain='urban',
         ),
-        default_content_type='text/html',
-        default_method='getDefaultText',
-        schemata='urban_description',
-        default_output_type='text/html',
+        storage=AnnotationStorage(),
     ),
     LinesField(
         name='inadmissibilityReasons',

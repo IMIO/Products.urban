@@ -141,26 +141,8 @@
         </td>
         <td width="10px"></td>
         <td valign="top" id="urban-additional-conditions"
-            tal:condition="hasAdditionalConditions"
-            tal:define="infos python: context.portal_urban.getTextToShow(context, field);
-                        isTooLong python: infos[0];
-                        textToShow python: infos[1];">
-            <tal:toolong condition="isTooLong">
-                <span tal:replace="structure textToShow">Content...</span>
-                <br />
-                <a class="link-overlay" href="@@longtextview"
-                   tal:attributes="href python: context.absolute_url() + '/@@longtextview?field=' + field"
-                   i18n:translate="">
-                    See more...
-                </a>
-            </tal:toolong>
-            <tal:nottoolong condition="not: isTooLong">
-                <metal:myfield use-macro="python: context.widget(field, mode='view')" />
-                <span tal:condition="not: context/getAdditionalConditions"
-                      class="discreet" i18n:translate="content_none">
-                    None
-                </span>
-            </tal:nottoolong>
+                tal:condition="hasAdditionalConditions">
+            <metal:myfield use-macro="python:here.widget('additionalConditions', mode='view')" />
         </td>
         <td valign="top" tal:condition="python: not hasAdditionalConditions">
             <span i18n:translate="label_no">No</span>
