@@ -7,7 +7,7 @@ Changes
 1.10.0 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Can add attachments directly on the licence (#10351).
 
 
 1.9.0 (2015-02-17)
