@@ -6,7 +6,9 @@ from Products.Five import BrowserView
 
 from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
 from Products.urban.browser.table.urbantable import ApplicantTable
+from Products.urban.browser.table.urbantable import AttachmentsTable
 from Products.urban.browser.table.urbantable import EventsTable
+from Products.urban.browser.table.urbantable import NestedAttachmentsTable
 from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.browser.table.urbantable import ProprietaryTable
 from Products.urban.interfaces import IGenericLicence
@@ -60,6 +62,50 @@ class LicenceView(BrowserView):
         all_advices = licence.getAllAdvices()
         has_permission = member.has_permission('urban: Add UrbanEvent', licence)
         return all_advices and has_permission
+
+    def mayAddAttachment(self):
+        context = aq_inner(self.context)
+        member = api.portal.get_tool('portal_membership').getAuthenticatedMember()
+        if member.has_permission('ATContentTypes: Add File', context):
+            return True
+        return False
+
+    def renderAttachmentsListing(self):
+        licence = aq_inner(self.context)
+        queryString = {
+            'portal_type': 'File',
+            'path': {
+                'query': '/'.join(licence.getPhysicalPath()),
+                'depth': 1,
+            },
+            'sort_on': 'created'
+        }
+        catalog = api.portal.get_tool('portal_catalog')
+        attachments = catalog(queryString)
+        if not attachments:
+            return ''
+        table = AttachmentsTable(attachments, self.request)
+        return self.renderListing(table)
+
+    def renderNestedAttachmentsListing(self):
+        licence = aq_inner(self.context)
+        path = '/'.join(licence.getPhysicalPath())
+        queryString = {
+            'portal_type': 'File',
+            'path': {
+                'query': path,
+                'depth': 2,
+            },
+            'sort_on': 'created'
+        }
+        catalog = api.portal.get_tool('portal_catalog')
+        attachments = catalog(queryString)
+        path_len = len(path.split('/'))
+        attachments = [a for a in attachments if len(a.getPath().split('/')) > path_len + 1]
+        if not attachments:
+            return ''
+        table = NestedAttachmentsTable(attachments, self.request)
+        return self.renderListing(table)
 
     def getAdviceTitles(self):
         licence = aq_inner(self.context)

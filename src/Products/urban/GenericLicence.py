@@ -960,6 +960,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         dict['id'] = ids
         return dict
 
+    security.declarePublic('getParcels')
     def getParcels(self):
         """
            Return the list of parcels (portionOut) for the Licence

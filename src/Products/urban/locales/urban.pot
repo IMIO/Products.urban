@@ -48,6 +48,9 @@ msgstr ""
 msgid "Architect data"
 msgstr ""
 
+msgid "Attachments"
+msgstr ""
+
 msgid "BuildLicence"
 msgstr ""
 
@@ -95,6 +98,12 @@ msgid "EnvClassThree"
 msgstr ""
 
 msgid "EnvClassTwo"
+msgstr ""
+
+msgid "Events"
+msgstr ""
+
+msgid "Events attachments"
 msgstr ""
 
 msgid "Filter"
@@ -334,7 +343,7 @@ msgid "add_a_proprietary"
 msgstr ""
 
 # urbanevent_view
-msgid "add_an_annex"
+msgid "add_an_attachment"
 msgstr ""
 
 msgid "add_an_applicant"
@@ -653,7 +662,7 @@ msgstr ""
 msgid "event_inquiry_recipients"
 msgstr ""
 
-msgid "event_linked_annexes"
+msgid "event_linked_attachments"
 msgstr ""
 
 msgid "event_linked_documents"
@@ -668,6 +677,9 @@ msgstr ""
 #. Default: "Far prevention area"
 #: GenericLicence.py
 msgid "far_prevention_area"
+msgstr ""
+
+msgid "fieldsetlegend-attachments"
 msgstr ""
 
 msgid "fieldsetlegend-urban_admin_settings"
@@ -909,6 +921,9 @@ msgstr ""
 msgid "label_colname_parcelrefs"
 msgstr ""
 
+msgid "label_colname_ParentLocation"
+msgstr ""
+
 msgid "label_colname_proprietary_data"
 msgstr ""
 
@@ -1043,7 +1058,7 @@ msgstr ""
 msgid "no_result"
 msgstr ""
 
-msgid "not_permitted_to_add_annex"
+msgid "not_permitted_to_add_aattachment"
 msgstr ""
 
 msgid "not_permitted_to_add_urbanevent"

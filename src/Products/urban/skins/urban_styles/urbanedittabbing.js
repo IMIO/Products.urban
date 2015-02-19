@@ -54,7 +54,9 @@ ploneFormTabbing._buildTabs = function(container, legends) {
             tab = '<li '+className
             /* XXX change by urban
              *  keep the last selected tab after edition */
-            if ((window.location.href.search("/edit") != -1) && (lid != 'fieldsetlegend-urban_events')) {
+            if ((window.location.href.search("/edit") != -1) &&
+               (lid != 'fieldsetlegend-urban_events') &&
+               (lid != 'fieldsetlegend-attachments')){
                 tab += ' onClick = "'+
                        'var search_form = document.getElementsByTagName(\'form\')[1];'+
                        'var action_url = search_form.getAttribute(\'action\');'+
@@ -65,13 +67,21 @@ ploneFormTabbing._buildTabs = function(container, legends) {
             /* XXX change by urban */
             /* display the edit icon only if we are not already editing the element... */
             tab += $(legend).text()+'</span>';
-            if ((window.location.href.search("/edit") == -1) && (lid != 'fieldsetlegend-urban_events')) {
+            if ((window.location.href.search("/edit") == -1) &&
+               (lid != 'fieldsetlegend-urban_events') &&
+               (lid != 'fieldsetlegend-attachments')){
                 gni = window.location.pathname;
                 gni = gni.replace('/view', '')
                 tab += '&nbsp;&nbsp;<img class="urban-edit-tabbing"'+
                        'onclick="javascript:window.location=gni+&quot;/edit#'+
                        lid+
                        '&quot;" src="edit.gif"></a></li>'
+            } else if ((window.location.href.search("/edit") == -1) &&
+               (lid == 'fieldsetlegend-attachments')){
+                gni = window.location.pathname;
+                gni = gni.replace('/view', '')
+                tab += '&nbsp;&nbsp;<img class="urban-edit-tabbing"'+
+                       ' src="attachment.png"></a></li>'
             } else {
                 tab += '</a></li>'
             }

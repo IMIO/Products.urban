@@ -140,9 +140,15 @@ class IDocumentsTable(IUrbanTable):
     """
 
 
-class IAnnexesTable(IUrbanTable):
+class IAttachmentsTable (IUrbanTable):
     """
-    Marker interface for a table displaying annexes of an urban event
+    Marker interface for a table displaying attachments of an urban event
+    """
+
+
+class INestedAttachmentsTable (IAttachmentsTable):
+    """
+    Marker interface for a table displaying all attachments nested in licence events.
     """
 
 

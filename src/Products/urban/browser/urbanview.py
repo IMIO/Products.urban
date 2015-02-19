@@ -154,7 +154,7 @@ class MayAccessUrban(BrowserView):
         """
           Test if the current user can acess urban view
         """
-        portal = api.portal.getSite()
+        portal = api.portal.get()
         sm = getSecurityManager()
 
         return sm.checkPermission('View', getattr(portal, 'urban'))

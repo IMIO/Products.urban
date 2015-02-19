@@ -481,9 +481,9 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         """
         return self.listFolderContents(contentFilter={"portal_type": "UrbanDoc"})
 
-    def getAnnexes(self):
+    def getAttachments(self):
         """
-          Return the annexes (File) of the UrbanEvent
+          Return the attachments (File) of the UrbanEvent
         """
         return self.listFolderContents(contentFilter={"portal_type": "File"})
 

@@ -77,7 +77,7 @@ class ItemForUrbanTable():
         actions = {}
 
         if self.canBeEdited():
-            external_edition = obj.portal_type in ['File', 'UrbanDoc'] and portal_properties.site_properties.ext_editor
+            external_edition = obj.portal_type in ['UrbanDoc'] and portal_properties.site_properties.ext_editor
             edit_action = external_edition and 'external_edit' or 'edit'
             actions['edit'] = edit_action
 

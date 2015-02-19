@@ -272,7 +272,7 @@ class EventTitleDisplay(TitleDisplay):
         documents = ''.join(documents)
 
         annexes = []
-        for annex in event.getAnnexes():
+        for annex in event.getAttachments():
             annex_title = annex.Title()
             annex_link = '%s%s' % (annex.absolute_url(), suffix)
             annex_link = '<br /><a href="%s" class="discreet" style="margin-left:20px">%s</a>' % (annex_link, annex_title)
@@ -379,6 +379,22 @@ class BrainCreatorColumn(CreatorColumn):
 
     def getSortKey(self, urbanlist_item):
         return urbanlist_item.getObject.listCreators()
+
+
+class ParentLocationColumn(UrbanColumn):
+    """ """
+
+    header = u'label_colname_ParentLocation'
+    weight = 25
+
+    def renderCell(self, obj):
+        obj = obj.getObject()
+        parent = obj.aq_parent
+        link = '<a href="{url}">{title}</a>'.format(
+            url=parent.absolute_url(),
+            title=parent.Title(),
+        )
+        return link.decode('utf-8')
 
 
 class FoldermanagerColumn(Column):

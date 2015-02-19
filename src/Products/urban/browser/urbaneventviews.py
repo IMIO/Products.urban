@@ -1,13 +1,14 @@
 from Acquisition import aq_inner
 from Products.Five import BrowserView
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.urban.Inquiry import Inquiry
 from Products.urban.browser.mapview import MapView
 from Products.urban.browser.table.urbantable import DocumentsTable
-from Products.urban.browser.table.urbantable import AnnexesTable
+from Products.urban.browser.table.urbantable import AttachmentsTable
 from Products.urban.browser.table.urbantable import ClaimantsTable
 from Products.urban.browser.table.urbantable import RecipientsCadastreTable
+
+from plone import api
 
 
 class UrbanEventView(BrowserView):
@@ -35,17 +36,17 @@ class UrbanEventView(BrowserView):
           Return True if the current user may add an UrbanEvent
         """
         context = aq_inner(self.context)
-        member = getToolByName(context, 'portal_membership').getAuthenticatedMember()
+        member = api.portal.get_tool('portal_membership').getAuthenticatedMember()
         if member.has_permission('ATContentTypes: Add File', context):
             return True
         return False
 
-    def mayAddAnnex(self):
+    def mayAddAttachment(self):
         """
-          Return True if the current user may add an Annex (File)
+          Return True if the current user may add an attachment (File)
         """
         context = aq_inner(self.context)
-        member = getToolByName(context, 'portal_membership').getAuthenticatedMember()
+        member = api.portal.get_tool('portal_membership').getAuthenticatedMember()
         if member.has_permission('ATContentTypes: Add File', context):
             return True
         return False
@@ -60,20 +61,20 @@ class UrbanEventView(BrowserView):
         documentlisting.update()
         return documentlisting.render()
 
-    def renderAnnexListing(self):
+    def renderAttachmentsListing(self):
         event = aq_inner(self.context)
         queryString = {
             'portal_type': 'File',
             'path': '/'.join(event.getPhysicalPath()),
             'sort_on': 'created'
         }
-        catalog = getToolByName(event, 'portal_catalog')
-        annexes = catalog(queryString)
-        if not annexes:
+        catalog = api.portal.get_tool('portal_catalog')
+        attachments = catalog(queryString)
+        if not attachments:
             return ''
-        annexlisting = AnnexesTable(annexes, self.request)
-        annexlisting.update()
-        return annexlisting.render()
+        table = AttachmentsTable(attachments, self.request)
+        table.update()
+        return table.render()
 
     def getListOfTemplatesToGenerate(self):
         """
@@ -117,7 +118,7 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
         super(BrowserView, self).__init__(context, request)
         self.context = context
         self.request = request
-        plone_utils = getToolByName(context, 'plone_utils')
+        plone_utils = api.portal.get_tool('plone_utils')
         self.linkedInquiry = self.context.getLinkedInquiry()
         if not self.linkedInquiry:
             plone_utils.addPortalMessage(_('This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !'), type="error")
@@ -217,8 +218,8 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
             context.manage_delObjects([recipient.getId() for recipient in recipients if recipient.Title()])
 
         #then we can go...
-        tool = getToolByName(context, 'portal_urban')
-        portal_url = getToolByName(context, 'portal_url')
+        tool = api.portal.get_tool('portal_urban')
+        portal_url = api.portal.get_tool('portal_url')
         event_path = portal_url.getPortalPath() + '/' + '/'.join(portal_url.getRelativeContentPath(context))
         strsql = "SELECT da, section, radical, exposant, bis, puissance, capakey FROM capa where intersects(buffer((select memgeomunion(the_geom) from capa where "
         strfilter = ''

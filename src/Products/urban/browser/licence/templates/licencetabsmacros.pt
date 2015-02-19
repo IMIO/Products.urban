@@ -340,6 +340,29 @@
 </div>
 
 
+<metal:events define-macro="urbanAttachmentsMacro" i18n:domain="urban">
+
+    <fieldset>
+        <legend i18n:translate="">Attachments</legend>
+        <tal:listing content="structure view/renderAttachmentsListing" />
+
+        <tal:add_attachment i18n:domain="urban"
+                            tal:define="mayAddAttachment view/mayAddAttachment">
+            <form tal:condition="mayAddAttachment" name="quickAdd" action="createObject" method="post">
+                <input name="type_name" value="File" type="hidden">
+                <input i18n:attributes="value" class="context apButton" id="event" value="add_an_attachment" type="submit">
+            </form>
+        </tal:add_attachment>
+    </fieldset>
+
+    <fieldset>
+        <legend i18n:translate="">Events attachments</legend>
+        <tal:listing content="structure view/renderNestedAttachmentsListing" />
+    </fieldset>
+
+</metal:events>
+
+
 <metal:events define-macro="urbanEventsMacro" i18n:domain="urban">
     <tal:add_events define="eventTypes view/getUrbanEventTypes">
         <!--legend i18n:translate="urban_create_events">Create event</legend-->
@@ -360,7 +383,7 @@
     </tal:add_events>
     <!--/fieldset-->
     <fieldset>
-        <legend i18n:translate="urban_events">Events</legend>
+        <legend i18n:translate="">Events</legend>
         <tal:listing content="structure view/renderEventsListing" />
     </fieldset>
 </metal:events>

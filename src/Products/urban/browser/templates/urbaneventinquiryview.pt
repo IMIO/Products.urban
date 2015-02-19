@@ -96,10 +96,10 @@
 
                                     <td valign="top" width=65%>
                                         <fieldset>
-                                            <legend i18n:translate="event_linked_annexes">Event linked annexes</legend>
+                                            <legend i18n:translate="event_linked_attachments">Event linked attachments</legend>
                                             <div>
-                                                <tal:listing content="structure view/renderAnnexListing" />
-                                                <metal:listing use-macro="context/@@urbanevent-macros/urbanEventAddAnnexMacro" />
+                                                <tal:listing content="structure view/renderAttachmentsListing" />
+                                                <metal:listing use-macro="context/@@urbanevent-macros/urbanEventAddAttachmentMacro" />
                                             </div>
                                         </fieldset>
                                     </td>

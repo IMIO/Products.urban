@@ -49,6 +49,9 @@ msgstr "Coordonnées du demandeur"
 msgid "Architect data"
 msgstr "Coordonnées de l'architecte"
 
+msgid "Attachments"
+msgstr "Pièces jointes"
+
 msgid "BuildLicence"
 msgstr "Permis d'urbanisme"
 
@@ -97,6 +100,12 @@ msgstr "Déclaration environnementale"
 
 msgid "EnvClassTwo"
 msgstr "Permis d'environnement classe 2"
+
+msgid "Events"
+msgstr "Événements"
+
+msgid "Events attachments"
+msgstr "Pièces jointes des événements"
 
 msgid "Filter"
 msgstr "Filtrer"
@@ -334,12 +343,12 @@ msgstr "Ajouter un demandeur"
 msgid "add_a_proprietary"
 msgstr "Ajouter un propriétaire"
 
-# urbanevent_view
-msgid "add_an_annex"
-msgstr "Ajouter une annexe"
-
 msgid "add_an_applicant"
 msgstr "Ajouter un demandeur"
+
+# urbanevent_view
+msgid "add_an_attachment"
+msgstr "Ajouter une pièce jointe"
 
 msgid "add_an_equipment"
 msgstr "Ajouter une charge imposée"
@@ -654,8 +663,8 @@ msgstr "Récapitulatif"
 msgid "event_inquiry_recipients"
 msgstr "Propriétaires concernés"
 
-msgid "event_linked_annexes"
-msgstr "Annexes liées à cet événement"
+msgid "event_linked_attachments"
+msgstr "Pièces jointes de l'événement"
 
 msgid "event_linked_documents"
 msgstr "Documents liés à cet événement"
@@ -670,6 +679,9 @@ msgstr "Décision des avis externes"
 #: GenericLicence.py
 msgid "far_prevention_area"
 msgstr "Zone de prévention éloignée"
+
+msgid "fieldsetlegend-attachments"
+msgstr "Pièces jointes"
 
 msgid "fieldsetlegend-urban_admin_settings"
 msgstr "Paramètres avancés"
@@ -837,6 +849,9 @@ msgstr "Articles pour les enquêtes"
 
 msgid "label_colname_Creator"
 msgstr "Créateur"
+
+msgid "label_colname_ParentLocation"
+msgstr "Emplacement"
 
 msgid "label_colname_Title"
 msgstr "Titre"
@@ -1044,8 +1059,8 @@ msgstr "Aucun propriétaire?"
 msgid "no_result"
 msgstr "La recherche n'a pas fourni de résultat."
 
-msgid "not_permitted_to_add_annex"
-msgstr "Vous ne pouvez pas ajouter d'annexe"
+msgid "not_permitted_to_add_aattachment"
+msgstr "Vous ne pouvez pas ajouter de pièces jointes"
 
 msgid "not_permitted_to_add_urbanevent"
 msgstr "Vous ne pouvez pas générer de documents"

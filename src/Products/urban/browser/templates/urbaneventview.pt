@@ -38,9 +38,9 @@
                                 </fieldset>
 
                                 <fieldset>
-                                   <legend i18n:translate="event_linked_annexes">Event linked annexes</legend>
-                                   <tal:listing content="structure view/renderAnnexListing" />
-                                   <metal:listing use-macro="context/@@urbanevent-macros/urbanEventAddAnnexMacro" />
+                                   <legend i18n:translate="event_linked_attachments">Event linked attachments</legend>
+                                   <tal:listing content="structure view/renderAttachmentsListing" />
+                                   <metal:listing use-macro="context/@@urbanevent-macros/urbanEventAddAttachmentMacro" />
                                 </fieldset>
                             </td>
                         </tr>

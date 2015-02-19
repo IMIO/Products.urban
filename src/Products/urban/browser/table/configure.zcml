@@ -187,7 +187,7 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.table.interfaces.IAnnexesTable"
+          Products.urban.browser.table.interfaces.IAttachmentsTable"
      factory=".column.BrainCreationDateColumn"
      provides="z3c.table.interfaces.IColumn"
      name="creationdateColumn"
@@ -196,10 +196,19 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.table.interfaces.IAnnexesTable"
+          Products.urban.browser.table.interfaces.IAttachmentsTable"
      factory=".column.BrainCreatorColumn"
      provides="z3c.table.interfaces.IColumn"
      name="creatorColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.INestedAttachmentsTable"
+     factory=".column.ParentLocationColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="parentlocationColumn"
   />
 
   <adapter

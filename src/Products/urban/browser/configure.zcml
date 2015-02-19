@@ -388,6 +388,13 @@
   />
 
   <browser:page
+     for="Products.ATContentTypes.interfaces.IATFile"
+     name="attachment_view"
+     class=".attachment_view.AttachmentView"
+     permission="zope2.View"
+  />
+
+  <browser:page
       for="Products.urban.interfaces.IContactFolder"
       name="getemails"
       class=".urban_configfolderview.ContactsFolderView"

@@ -81,13 +81,13 @@
     </tal:not_may_add_urbanevent>
 </fieldset>
 
-<metal:add_annex define-macro="urbanEventAddAnnexMacro" i18n:domain="urban"
-                 tal:define="mayAddAnnex view/mayAddAnnex">
-    <form tal:condition="mayAddAnnex" name="quickAdd" action="createObject" method="post">
+<metal:add_attachment define-macro="urbanEventAddAttachmentMacro" i18n:domain="urban"
+                 tal:define="mayAddAttachment view/mayAddAttachment">
+    <form tal:condition="mayAddAttachment" name="quickAdd" action="createObject" method="post">
         <input name="type_name" value="File" type="hidden">
-        <input i18n:attributes="value" class="context apButton" id="event" value="add_an_annex" type="submit">
+        <input i18n:attributes="value" class="context apButton" id="event" value="add_an_attachment" type="submit">
     </form>
-    <tal:not_may_add_annex condition="not: mayAddAnnex">
-        <p class="discreet" i18n:translate="not_permitted_to_add_annex">You can not add an annex</p>
-    </tal:not_may_add_annex>
-</metal:add_annex>
+    <tal:not_may_add_attachment condition="not: mayAddAttachment">
+        <p class="discreet" i18n:translate="not_permitted_to_add_attachment">You can not add an attachment</p>
+    </tal:not_may_add_attachment>
+</metal:add_attachment>

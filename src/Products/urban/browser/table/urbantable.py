@@ -7,22 +7,23 @@ from zope.interface import implements
 from Products.ZCatalog.Lazy import LazyMap
 
 from Products.urban.browser.table.interfaces import ILicenceListingTable, \
-        IFolderContentTable, \
-        IContactTable, \
-        IApplicantTable, \
-        IProprietaryTable, \
-        IParcelsTable, \
-        IEventsTable, \
-        IDocumentsTable, \
-        IAnnexesTable, \
-        INotariesTable, \
-        IArchitectsTable, \
-        IGeometriciansTable, \
-        IClaimantsTable, \
-        IRecipientsCadastreTable, \
-        ISearchResultTable, IParcellingsTable, \
-        IUrbanColumn, \
-        IAllLicencesListingTable
+    IFolderContentTable, \
+    IContactTable, \
+    IApplicantTable, \
+    IProprietaryTable, \
+    IParcelsTable, \
+    IEventsTable, \
+    IDocumentsTable, \
+    IAttachmentsTable, \
+    INestedAttachmentsTable, \
+    INotariesTable, \
+    IArchitectsTable, \
+    IGeometriciansTable, \
+    IClaimantsTable, \
+    IRecipientsCadastreTable, \
+    ISearchResultTable, IParcellingsTable, \
+    IUrbanColumn, \
+    IAllLicencesListingTable
 
 
 def getSortMethod(idx):
@@ -200,11 +201,21 @@ class DocumentsTable(UrbanTable, SequenceTable):
     cssClasses = {'table': 'listing largetable'}
 
 
-class AnnexesTable(UrbanTable, SequenceTable):
+class AttachmentsTable(UrbanTable, SequenceTable):
     """
-     Documents and annexes use (almost) the same listing tables
+    Documents and annexes use (almost) the same listing tables.
     """
-    implements(IAnnexesTable)
+    implements(IAttachmentsTable)
+
+    sortOn = 'table-creationdateColumn-1'
+    cssClasses = {'table': 'listing largetable'}
+
+
+class NestedAttachmentsTable(UrbanTable, SequenceTable):
+    """
+    Render nested attachments from subfolders.
+    """
+    implements(INestedAttachmentsTable)
 
     sortOn = 'table-creationdateColumn-1'
     cssClasses = {'table': 'listing largetable'}

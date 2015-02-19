@@ -25,6 +25,15 @@
                             </dd>
                         </tal:tab_loop>
 
+                        <dt class="formTab" id="fieldsetlegend-attachments" i18n:domain="urban">
+                            <span i18n:translate="">Attachments</span>
+                        </dt>
+                        <dd id="fieldset-attachments">
+                            <div class="licence-column">
+                                <metal:events use-macro="here/@@licencetabs-macros/urbanAttachmentsMacro" />
+                            </div>
+                        </dd>
+
                         <dt class="formTab" id="fieldsetlegend-urban_events" i18n:domain="plone" i18n:translate="label_schema_urban_events">
                             <span>Events</span>
                         </dt>
