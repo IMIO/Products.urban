@@ -99,13 +99,18 @@ class TestEnvClassOneInstance(SchemaFieldsTestCase):
         login(self.portal, 'urbaneditor')
         envclassone_folder = self.urban.envclassones
         testlicence_id = 'test_envclassone'
-        if testlicence_id not in envclassone_folder.objectIds():
-            envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
-            transaction.commit()
+        envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
+        transaction.commit()
         self.licence = getattr(envclassone_folder, testlicence_id)
 
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
+
+    def tearDown(self):
+        if self.licence.wl_isLocked():
+            self.licence.wl_clearLocks()
+        api.content.delete(self.licence)
+        transaction.commit()
 
     def test_envclassone_licence_exists(self):
         self.assertTrue(len(self.urban.envclassones.objectIds()) > 0)
@@ -218,13 +223,12 @@ class TestEnvClassOneEvents(unittest.TestCase):
         login(self.portal, 'urbaneditor')
         envclassone_folder = self.urban.envclassones
         testlicence_id = 'test_envclassone'
-        if testlicence_id not in envclassone_folder.objectIds():
-            envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
+        envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
         self.licence = getattr(envclassone_folder, testlicence_id)
 
     def tearDown(self):
-        for event in self.licence.objectValues('UrbanEvent'):
-            api.content.delete(event)
+        api.content.delete(self.licence)
+        transaction.commit()
 
     def test_create_ExpirationEvent_when_notificationDate_is_set(self):
         """

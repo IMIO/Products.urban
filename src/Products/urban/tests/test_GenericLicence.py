@@ -4,6 +4,7 @@ from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.tests.helpers import SchemaFieldsTestCase
 from Products.urban import utils
 
+from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 
@@ -18,21 +19,23 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
 
-        # create a test EnvClassOne licence
         login(self.portal, 'urbaneditor')
         self.licences = []
         for content_type in URBAN_TYPES:
             licence_folder = utils.getLicenceFolder(content_type)
-            testlicence_id = 'test_{}'.format(content_type)
-            if testlicence_id not in licence_folder.objectIds():
-                licence_folder.invokeFactory(content_type, id=testlicence_id)
-                transaction.commit()
+            testlicence_id = 'test_{}'.format(content_type.lower())
+            licence_folder.invokeFactory(content_type, id=testlicence_id)
             test_licence = getattr(licence_folder, testlicence_id)
             self.licences.append(test_licence)
+        transaction.commit()
 
         self.browser = Browser(self.portal)
-        self.browser.handleErrors = False
         self.browserLogin('urbaneditor')
+
+    def tearDown(self):
+        for licence in self.licences:
+            api.content.delete(licence)
+            transaction.commit()
 
     def test_has_attribute_licenceSubject(self):
         field_name = 'licenceSubject'

@@ -2,9 +2,10 @@
 from DateTime import DateTime
 from Products.urban import utils
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
-from Products.urban.testing import URBAN_TESTS_LICENCES
+from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
 from Products.urban.tests.helpers import SchemaFieldsTestCase
 
+from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 from time import sleep
@@ -15,12 +16,12 @@ import unittest
 
 class TestBuildLicence(unittest.TestCase):
 
-    layer = URBAN_TESTS_LICENCES
+    layer = URBAN_TESTS_LICENCES_FUNCTIONAL
 
     def setUp(self):
         portal = self.layer['portal']
         self.portal = portal
-        self.buildlicence = portal.urban.buildlicences.objectValues()[-1]
+        self.buildlicence = portal.urban.buildlicences.objectValues()[0]
         self.portal_urban = portal.portal_urban
         login(portal, 'urbaneditor')
 
@@ -28,13 +29,13 @@ class TestBuildLicence(unittest.TestCase):
         # verify that the licence title update correctly when we add or remove applicants/proprietaries
         #on the licence
         licence = self.buildlicence
-        self.assertTrue(licence.Title().endswith('1/ - Exemple Permis Urbanisme -  Smith & Wesson'))
+        self.assertTrue(licence.Title().endswith('1/ - Exemple Permis Urbanisme - Mes Smith & Wesson'))
         #remove the applicant
         applicant_id = licence.objectValues('Applicant')[0].id
         licence.manage_delObjects([applicant_id])
         self.assertTrue(licence.Title().endswith('1/ - Exemple Permis Urbanisme - no_applicant_defined'))
         #add an applicant back
-        licence. invokeFactory('Applicant', 'new_applicant', name1='Quentin', name2='Tinchimiloupète')
+        licence.invokeFactory('Applicant', 'new_applicant', name1='Quentin', name2='Tinchimiloupète')
         self.assertTrue(licence.Title().endswith('1/ - Exemple Permis Urbanisme -  Quentin Tinchimiloupète'))
 
     def testGetLastEventWithoutEvent(self):
@@ -152,10 +153,9 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
         self.licences = []
         for content_type in ['BuildLicence', 'ParcelOutLicence']:
             licence_folder = utils.getLicenceFolder(content_type)
-            testlicence_id = 'test_{}'.format(content_type)
-            if testlicence_id not in licence_folder.objectIds():
-                licence_folder.invokeFactory(content_type, id=testlicence_id)
-                transaction.commit()
+            testlicence_id = 'test_{}'.format(content_type.lower())
+            licence_folder.invokeFactory(content_type, id=testlicence_id)
+            transaction.commit()
             test_licence = getattr(licence_folder, testlicence_id)
             self.licences.append(test_licence)
         self.test_buildlicence = self.licences[0]
@@ -165,9 +165,9 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
         self.browserLogin('urbaneditor')
 
     def tearDown(self):
-        self.urban.buildlicences.manage_delObjects(self.licences[0].id)
-        self.urban.parceloutlicences.manage_delObjects(self.licences[1].id)
-        transaction.commit()
+        for licence in self.licences:
+            api.content.delete(licence)
+            transaction.commit()
 
     def test_has_attribute_workType(self):
         field_name = 'workType'

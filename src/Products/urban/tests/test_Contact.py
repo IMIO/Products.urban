@@ -5,6 +5,7 @@ from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.tests.helpers import BrowserTestCase
 from Products.urban.tests.helpers import SchemaFieldsTestCase
 
+from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 
@@ -27,19 +28,20 @@ class TestContactFields(SchemaFieldsTestCase):
         login(self.portal, 'urbaneditor')
         buildlicence_folder = self.urban.buildlicences
         testlicence_id = 'test_buildlicence'
-        if testlicence_id not in buildlicence_folder.objectIds():
-            buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
-            transaction.commit()
+        buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
         self.licence = getattr(buildlicence_folder, testlicence_id)
 
         contact_id = 'test_contact'
-        if contact_id not in self.licence.objectIds():
-            self.licence.invokeFactory('Applicant', id=contact_id)
-            transaction.commit()
+        self.licence.invokeFactory('Applicant', id=contact_id)
+        transaction.commit()
         self.contact = getattr(self.licence, contact_id)
 
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
+
+    def tearDown(self):
+        api.content.delete(self.licence)
+        transaction.commit()
 
     def test_contact_has_attribute_personTitle(self):
         self.assertTrue(self.contact.getField('personTitle'))
@@ -207,19 +209,20 @@ class TestApplicantFields(SchemaFieldsTestCase):
         login(self.portal, 'urbaneditor')
         buildlicence_folder = self.urban.buildlicences
         testlicence_id = 'test_buildlicence'
-        if testlicence_id not in buildlicence_folder.objectIds():
-            buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
-            transaction.commit()
+        buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
         self.licence = getattr(buildlicence_folder, testlicence_id)
 
         applicant_id = 'test_applicant'
-        if applicant_id not in self.licence.objectIds():
-            self.licence.invokeFactory('Applicant', id=applicant_id)
-            transaction.commit()
+        self.licence.invokeFactory('Applicant', id=applicant_id)
+        transaction.commit()
         self.applicant = getattr(self.licence, applicant_id)
 
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
+
+    def tearDown(self):
+        api.content.delete(self.licence)
+        transaction.commit()
 
     def test_applicant_has_attribute_representedBySociety(self):
         self.assertTrue(self.applicant.getField('representedBySociety'))
@@ -301,11 +304,11 @@ class TestApplicant(BrowserTestCase):
     def test_applicant_Title(self):
         self.applicant.setName1('Alastair')
         self.applicant.setName2('Ballcocke')
-        self.assertTrue(self.applicant.Title() == ' Alastair Ballcocke')
+        self.assertTrue(self.applicant.Title() == 'Mes Alastair Ballcocke')
 
         self.applicant.setRepresentedBySociety(True)
         self.applicant.setSociety('Fletcher, Fletcher & Fletcher')
-        self.assertTrue(self.applicant.Title() == ' Alastair Ballcocke repr. par Fletcher, Fletcher & Fletcher')
+        self.assertTrue(self.applicant.Title() == 'Mes Alastair Ballcocke repr. par Fletcher, Fletcher & Fletcher')
 
     def test_licence_title_update_when_applicant_modified(self):
         name_1 = 'Alastair'
@@ -335,19 +338,20 @@ class TestCorporationFields(SchemaFieldsTestCase):
         login(self.portal, 'urbaneditor')
         envclassone_folder = self.urban.envclassones
         testlicence_id = 'test_envclassone'
-        if testlicence_id not in envclassone_folder.objectIds():
-            envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
-            transaction.commit()
+        envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
         self.licence = getattr(envclassone_folder, testlicence_id)
 
         corporation_id = 'test_corporation'
-        if corporation_id not in self.licence.objectIds():
-            self.licence.invokeFactory('Corporation', id=corporation_id)
-            transaction.commit()
+        self.licence.invokeFactory('Corporation', id=corporation_id)
+        transaction.commit()
         self.corporation = getattr(self.licence, corporation_id)
 
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
+
+    def tearDown(self):
+        api.content.delete(self.licence)
+        transaction.commit()
 
     def test_corporation_has_attribute_denomination(self):
         self.assertTrue(self.corporation.getField('denomination'))

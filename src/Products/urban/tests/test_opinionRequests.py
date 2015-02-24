@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
-import unittest
-from zope import event
+
+from Acquisition import aq_base
+
 from Products.Archetypes.event import EditBegunEvent
 from Products.CMFCore.utils import getToolByName
-from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL, URBAN_TESTS_LICENCES
+
+from plone.app.testing import login
+
+from zope import event
+
+import unittest
 
 
 class TestOpinionRequest (unittest.TestCase):
@@ -58,6 +64,7 @@ class TestOpinionRequestOnLicence (unittest.TestCase):
         for content in licence.objectValues():
             if content.portal_type == 'UrbanEventOpinionRequest':
                 UrbanEventOpinionRequest = content
+                aq_base(UrbanEventOpinionRequest)._at_creation_flag = True
                 break
         event.notify(EditBegunEvent(UrbanEventOpinionRequest))
         self.failUnless(licence.getLinkedUrbanEventOpinionRequest('belgacom') == UrbanEventOpinionRequest)

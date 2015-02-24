@@ -873,7 +873,14 @@ def createLicence(site, licence_type, data):
                 ref_folder = site
                 for directory in field.widget.startup_directory.split('/'):
                     ref_folder = getattr(ref_folder, directory)
-                return [ref_folder.objectValues()[0]]
+                query = {
+                    'path': '/'.join(ref_folder.getPhysicalPath()),
+                }
+                if field.allowed_types:
+                    query['portal_type'] = field.allowed_types
+                brains = catalog(**query)
+                if brains:
+                    return [brains[0].getObject()]
             elif field.widget.base_query:
                 query = getattr(licence, field.widget.base_query)
                 brains = catalog(query())
@@ -1089,33 +1096,6 @@ def setupExtra(context):
 
     if not hasattr(aq_base(additional_layers), 'ppnc'):
         additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://geoservercommon.communesplone.be/geoserver/gwc/service/wms", layers='PPNC', SRS="ESPG:31370", baseLayer=True, layerFormat="image/jpeg", visibility=False)
-    """
-        if portal_urban.getMapExtent():
-            (xmin, ymin, xmax, ymax) = portal_urban.getMapExtent().split(', ')
-            already_ppnc = False
-            layers = PPNC_LAYERS.keys()
-            layers.sort()
-            for layer in layers:
-                request = "SELECT Intersects(MakeBox2D(MakePoint(%f, %f), MakePoint(%f, %f)), MakeBox2D(MakePoint(%d, %d), MakePoint(%d, %d))) as intersect ;"%(float(xmin), float(ymin), float(xmax), float(ymax), PPNC_LAYERS[layer]['xmin'], PPNC_LAYERS[layer]['ymin'], PPNC_LAYERS[layer]['xmax'], PPNC_LAYERS[layer]['ymax'])
-                dic = portal_urban.queryDB(request)
-                if dic and dic[0].has_key('intersect') and dic[0]['intersect']:
-                    if not already_ppnc:
-                        additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://cartopro1.wallonie.be/WMS/com.esri.wms.Esrimap/PPNC?", layers=layer, SRS="ESPG:31370", baseLayer=True, layerFormat="image/png")
-                        already_ppnc = True
-                        logger.info("Additional layer '%s' added with layer '%s'"%('ppnc', layer))
-                    else:
-                        logger.info("ALREADY found layer !")
-                        additional_layers.invokeFactory("Layer", id=layer, title=layer.upper(), WMSUrl="http://cartopro1.wallonie.be/WMS/com.esri.wms.Esrimap/PPNC?", layers=layer, SRS="ESPG:31370", baseLayer=True, layerFormat="image/png")
-                        additional_layers.ppnc.setTitle(additional_layers.ppnc.getLayers().upper())
-                        additional_layers.ppnc.reindexObject()
-                        logger.info("Additional layer '%s' added with layer '%s'"%(layer, layer))
-
-            if not hasattr(aq_base(additional_layers), 'ppnc'):
-                logger.error("Additional layer '%s' added WITHOUT specific layer because no ppnc intersection found"%'ppnc')
-                additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://cartopro1.wallonie.be/WMS/com.esri.wms.Esrimap/PPNC?", layers='ppnc', SRS="ESPG:31370", baseLayer=True, layerFormat="image/png")
-        else:
-            logger.error("Additional layer '%s' not added because the mapExtent is not defined in portal_urban"%'ppnc')
-    """
 #Layers order
 #PPNC
 #Parcelles

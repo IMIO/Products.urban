@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 import unittest2 as unittest
-from zope.component.interface import interfaceToName
+
+from Products.CMFCore.utils import getToolByName
+from Products.urban.interfaces import (IUrbanEventType, IAcknowledgmentEvent, IOpinionRequestEvent, IInquiryEvent)
+from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.urban.testing import URBAN_TESTS_LICENCES
+
+from plone import api
 from plone.app.testing import quickInstallProduct, login
 from plone.app.testing import setRoles
 from plone.app.testing.interfaces import TEST_USER_NAME
 from plone.app.testing.interfaces import TEST_USER_ID
-from Products.CMFCore.utils import getToolByName
-from Products.urban.interfaces import (IUrbanEventType, IAcknowledgmentEvent, IOpinionRequestEvent, IInquiryEvent)
-from Products.urban.testing import URBAN_TESTS_LICENCES, URBAN_TESTS_CONFIG
+
+from zope.component.interface import interfaceToName
 
 
 class TestInstall(unittest.TestCase):
@@ -196,3 +201,4 @@ class TestContact(unittest.TestCase):
         self.assertEquals(buildLicence.getApplicantsSignaletic(), u'Maître Robiné Hoodé'.encode('utf8'))
         self.assertEquals(buildLicence.getApplicantsSignaletic(withaddress=True),
                           u'Maître Robiné Hoodé demeurant 1, Sherwoodé'.encode('utf8'))
+        api.content.delete(buildLicence)

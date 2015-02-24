@@ -9,6 +9,7 @@ from plone import api
 
 import transaction
 
+
 class TestBase(unittest.TestCase):
 
     layer = URBAN_TESTS_CONFIG
@@ -23,19 +24,24 @@ class TestBase(unittest.TestCase):
         self.licences = []
         for content_type in URBAN_TYPES:
             licence_folder = utils.getLicenceFolder(content_type)
-            testlicence_id = 'test_{}'.format(content_type)
-            if testlicence_id not in licence_folder.objectIds():
-                licence_folder.invokeFactory(content_type, id=testlicence_id)
-                transaction.commit()
+            testlicence_id = 'test_{}'.format(content_type.lower())
+            licence_folder.invokeFactory(content_type, id=testlicence_id)
             test_licence = getattr(licence_folder, testlicence_id)
             self.licences.append(test_licence)
+        transaction.commit()
+
+    def tearDown(self):
+        for licence in self.licences:
+            api.content.delete(licence)
+            transaction.commit()
 
     def test_has_single_applicant(self):
         licence = self.licences[0]
         applicant = api.content.create(
-                type='Applicant',
-                id='fngaha',
-                container=licence)
+            type='Applicant',
+            id='fngaha',
+            container=licence
+        )
         applicant.setPersonTitle('mister')
         self.assertFalse(licence.hasMultipleApplicants())
         self.assertTrue(licence.hasSingleApplicant())
@@ -43,20 +49,23 @@ class TestBase(unittest.TestCase):
     def test_has_multiple_applicants(self):
         licence1 = self.licences[0]
         applicant1 = api.content.create(
-                type='Applicant',
-                id='fngaha',
-                container=licence1)
+            type='Applicant',
+            id='fngaha',
+            container=licence1
+        )
         applicant1.setPersonTitle('mister')
         applicant2 = api.content.create(
-                type='Applicant',
-                id='sdelcourt',
-                container=licence1)
+            type='Applicant',
+            id='sdelcourt',
+            container=licence1
+        )
         applicant2.setPersonTitle('mister')
         licence2 = self.licences[0]
         applicant = api.content.create(
-                type='Applicant',
-                id='test_couple_applicants',
-                container=licence2)
+            type='Applicant',
+            id='test_couple_applicants',
+            container=licence2
+        )
         applicant.setPersonTitle('madam_and_mister')
         self.assertFalse(licence1.hasSingleApplicant())
         self.assertTrue(licence1.hasMultipleApplicants())
@@ -66,9 +75,10 @@ class TestBase(unittest.TestCase):
     def test_has_single_male_applicant(self):
         licence = self.licences[0]
         applicant = api.content.create(
-                type='Applicant',
-                id='fngaha',
-                container=licence)
+            type='Applicant',
+            id='fngaha',
+            container=licence
+        )
         applicant.setPersonTitle('mister')
         self.assertFalse(licence.hasMultipleApplicants())
         self.assertTrue(licence.hasSingleMaleApplicant())
@@ -76,9 +86,10 @@ class TestBase(unittest.TestCase):
     def test_has_single_femal_applicant(self):
         licence = self.licences[0]
         applicant = api.content.create(
-                type='Applicant',
-                id='mgennart',
-                container=licence)
+            type='Applicant',
+            id='mgennart',
+            container=licence
+        )
         applicant.setPersonTitle('madam')
         self.assertFalse(licence.hasMultipleApplicants())
         self.assertTrue(licence.hasSingleFemaleApplicant())

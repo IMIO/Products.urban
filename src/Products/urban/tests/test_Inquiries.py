@@ -2,17 +2,19 @@
 from DateTime import DateTime
 from OFS.ObjectManager import BeforeDeleteException
 
-from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 
+from plone import api
 from plone.app.testing import login
 from zope.component import createObject
 
+import transaction
 import unittest
 
 
 class TestBuildLicenceInquiries(unittest.TestCase):
 
-    layer = URBAN_TESTS_CONFIG
+    layer = URBAN_TESTS_CONFIG_FUNCTIONAL
 
     def setUp(self):
         portal = self.layer['portal']
@@ -22,8 +24,7 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         login(portal, 'urbaneditor')
         buildlicence_folder = self.urban.buildlicences
         testlicence_id = 'test_buildlicence'
-        if testlicence_id not in buildlicence_folder.objectIds():
-            buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
+        buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
         self.licence = getattr(buildlicence_folder, testlicence_id)
 
         # set the inquiry start date
@@ -32,6 +33,7 @@ class TestBuildLicenceInquiries(unittest.TestCase):
 
         # create un inquiry event
         createObject('UrbanEventInquiry', 'enquete-publique', self.licence)
+        transaction.commit()
 
         login(portal, 'urbaneditor')
 
@@ -179,9 +181,9 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         #we can not delete the inquiry2 as urbanEventInquiry2 exists
         self.assertRaises(BeforeDeleteException, licence.manage_delObjects, inquiry2.id)
         #if we delete urbanEventInquiry2...
-        licence.manage_delObjects(urbanEventInquiry2.id)
+        api.content.delete(urbanEventInquiry2)
         #... then now we can remove the inquiry2
-        licence.manage_delObjects(inquiry2.id)
+        api.content.delete(inquiry2)
 
     def testCanNotDeleteUrbanEventInquiryIfNotTheLast(self):
         """
@@ -201,6 +203,6 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         self.assertRaises(BeforeDeleteException,
                           licence.manage_delObjects, urbanEventInquiry1.id)
         #removing UrbanEventInquiries by the last works
-        licence.manage_delObjects(urbanEventInquiry3.id)
-        licence.manage_delObjects(urbanEventInquiry2.id)
-        licence.manage_delObjects(urbanEventInquiry1.id)
+        api.content.delete(urbanEventInquiry3)
+        api.content.delete(urbanEventInquiry2)
+        api.content.delete(urbanEventInquiry1)

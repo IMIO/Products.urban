@@ -156,7 +156,7 @@ class TestDocuments(unittest.TestCase):
                     annotations = [node.getElementsByTagName('text:p') for node in xml_tree.getElementsByTagName('office:annotation')]
                     if annotations:
                         #stocker les logs d'erreurs trouvées
-                        result = searchInTextElements(annotations, document.getFilename(), 'commentaire', ["^(Error|Action).*$"], verbosity=-1)
+                        result = searchInTextElements(annotations, document.getFilename(), 'commentaire', ["^(Error|Action).*$"])
                         log.append([result, test_licence.Title(), event.Title(), document.Title()])
         #afficher toutes les erreurs trouvées (type de procédure->event->nom du doc->erreurs)
         if log:

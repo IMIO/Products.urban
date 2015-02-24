@@ -332,7 +332,10 @@ class EnvironmentLicenceView(LicenceView):
         order = ['CI/CS', 'CI', 'CS', 'CS-Eau']
         sorted_conditions = dict([(val, [],) for val in order])
         for cond in conditions:
-            val = cond.getExtraValue()
+            try:
+                val = cond.getExtraValue()
+            except:
+                import ipdb; ipdb.set_trace()
             sorted_conditions[val].append({'type': val, 'url': cond.absolute_url() + '/description/getRaw', 'title': cond.Title()})
         sort = []
         for val in order:

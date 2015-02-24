@@ -22,8 +22,7 @@ class TestUrbanDoc(BrowserTestCase):
         login(self.portal, 'urbaneditor')
         buildlicence_folder = self.urban.buildlicences
         testlicence_id = 'test_buildlicence'
-        if testlicence_id not in buildlicence_folder.objectIds():
-            buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
+        buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
         self.licence = getattr(buildlicence_folder, testlicence_id)
         # create a test UrbanEvent in test_buildlicence
         self.catalog = api.portal.get_tool('portal_catalog')
@@ -35,6 +34,10 @@ class TestUrbanDoc(BrowserTestCase):
 
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
+
+    def tearDown(self):
+        api.content.delete(self.licence)
+        transaction.commit()
 
     def test_TALCondition_visible_on_document_templates(self):
         self.browser.open(self.urbandoc_model.absolute_url() + '/view')

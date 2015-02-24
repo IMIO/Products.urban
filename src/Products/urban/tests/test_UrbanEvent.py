@@ -4,6 +4,7 @@ from DateTime import DateTime
 
 from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 from Products.urban.tests.helpers import BrowserTestCase
 from Products.urban.tests.helpers import SchemaFieldsTestCase
 from Products.urban import utils
@@ -55,19 +56,22 @@ class TestUrbanEventInstance(SchemaFieldsTestCase):
         login(self.portal, 'urbaneditor')
         buildlicence_folder = self.urban.buildlicences
         testlicence_id = 'test_buildlicence'
-        if testlicence_id not in buildlicence_folder.objectIds():
-            buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
-        licence = getattr(buildlicence_folder, testlicence_id)
+        buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
+        self.licence = getattr(buildlicence_folder, testlicence_id)
 
         # create a test UrbanEvent in test_buildlicence
         catalog = api.portal.get_tool('portal_catalog')
         event_type_brain = catalog(portal_type='UrbanEventType', id='prorogation')[0]
         self.event_type = event_type_brain.getObject()
-        self.urban_event = licence.createUrbanEvent(self.event_type)
+        self.urban_event = self.licence.createUrbanEvent(self.event_type)
         transaction.commit()
 
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
+
+    def tearDown(self):
+        api.content.delete(self.licence)
+        transaction.commit()
 
     def test_urbanevent_has_attribute_eventDate(self):
         self.assertTrue(hasattr(self.urban_event, 'eventDate'))
@@ -123,7 +127,7 @@ class TestUrbanEventInstance(SchemaFieldsTestCase):
 
 class TestUrbanEventInquiryView(BrowserTestCase):
 
-    layer = URBAN_TESTS_CONFIG
+    layer = URBAN_TESTS_CONFIG_FUNCTIONAL
 
     def setUp(self):
         self.portal = self.layer['portal']
@@ -136,8 +140,7 @@ class TestUrbanEventInquiryView(BrowserTestCase):
     def _create_test_licence_with_inquiry(self, portal_type):
         licence_folder = utils.getLicenceFolder(portal_type)
         testlicence_id = 'test_{}'.format(portal_type.lower())
-        if testlicence_id not in licence_folder.objectIds():
-            licence_folder.invokeFactory(portal_type, id=testlicence_id)
+        licence_folder.invokeFactory(portal_type, id=testlicence_id)
         licence = getattr(licence_folder, testlicence_id)
         licence.setInvestigationStart(DateTime())
 

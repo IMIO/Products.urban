@@ -25,8 +25,7 @@ class TestKeyEvent(BrowserTestCase):
         login(self.portal, 'urbaneditor')
         buildlicence_folder = self.urban.buildlicences
         testlicence_id = 'test_buildlicence'
-        if testlicence_id not in buildlicence_folder.objectIds():
-            buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
+        buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
         self.licence = getattr(buildlicence_folder, testlicence_id)
         # create a test UrbanEvent in test_buildlicence
         self.catalog = api.portal.get_tool('portal_catalog')
@@ -39,8 +38,7 @@ class TestKeyEvent(BrowserTestCase):
         self.browserLogin('urbaneditor')
 
     def tearDown(self):
-        ids_to_delete = [event.id for event in self.licence.objectValues()]
-        self.licence.manage_delObjects(ids_to_delete)
+        api.content.delete(self.licence)
         transaction.commit()
 
     def testCreateKeyEvent(self):

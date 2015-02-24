@@ -33,17 +33,23 @@ def extractRubricsTerm(rubric_ids):
     for html_page in html_pages:
         body = re.search('\<body.*\</body>', html_page, re.IGNORECASE + re.DOTALL)
         rubrics_soup = bs4.BeautifulSoup(body.group(), from_encoding=encoding)
-        table = rubrics_soup.find_all('table')[-1]
+        table = rubrics_soup.find_all('table')[2]
         rows = table.find_all('tr')[1:]
         for row in rows:
             rubric = extractOneRubricTerm(row)
-            rubrics[rubric['id']] = rubric
+            if rubric:
+                rubrics[rubric['id']] = rubric
 
     return rubrics
 
 
 def extractOneRubricTerm(row):
     columns = row.find_all('td')
+
+    if len(columns) < 5:
+        return None
+
+    columns = [col for col in columns if not col.text.strip().startswith(u"ATTENTION")]
 
     number = columns[1].text
     extraValue = columns[2].text
