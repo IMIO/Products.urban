@@ -4,13 +4,7 @@ Changes
 =======
 
 
-1.11.0 (unreleased)
--------------------
-
-- Nothing changed yet.
-
-
-1.10.0 (2015-02-19)
+1.10.0 (2015-02-24)
 -------------------
 
 - Can add attachments directly on the licence (#10351).
