@@ -242,14 +242,16 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         activated_fields = type(activated_fields) == str and [activated_fields] or activated_fields
         activated_date_fields = []
         for fieldname in activated_fields:
-            is_date_field = UrbanEventInquiry_schema.get(fieldname).getType() == 'Products.Archetypes.Field.DateTimeField'
-            if fieldname and is_date_field:
-                activated_date_fields.append(
-                    (
-                        fieldname,
-                        translate("urban_label_" + fieldname, 'urban', default=fieldname, context=self.REQUEST)
+            field = UrbanEventInquiry_schema.get(fieldname)
+            if field:
+    	        is_date_field = field.getType() == 'Products.Archetypes.Field.DateTimeField'
+                if is_date_field:
+                    activated_date_fields.append(
+                        (
+                            fieldname,
+                            translate("urban_label_" + fieldname, 'urban', default=fieldname, context=self.REQUEST)
+                        )
                     )
-                )
         return DisplayList([('eventDate', self.getEventDateLabel().decode('utf-8'))] + activated_date_fields)
 
 
