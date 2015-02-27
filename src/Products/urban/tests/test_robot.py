@@ -4,6 +4,7 @@ import robotsuite
 from Products.urban.testing import URBAN_TEST_ROBOT
 from plone.testing import layered
 
+
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTests([
