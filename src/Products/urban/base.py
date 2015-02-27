@@ -60,7 +60,7 @@ class UrbanBase(object):
         """
           Returns a string representing the signaletic of every applicants
         """
-        applicants = self.getApplicants()
+        applicants = self.getApplicants() or self.getProprietaries()
         signaletic = ''
         for applicant in applicants:
             #if the signaletic is not empty, we are adding several applicants
