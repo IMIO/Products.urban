@@ -13,7 +13,7 @@ ALLOWED_ARCHIVE_EXTENSIONS = ('.odt')
 verbosity = 0
 
 
-def searchODTs(filenames, findexpr, replace=None, destination=None, dochanges=False, ignorecase=False, recursive=False):
+def searchODTs(filenames, findexpr, replace, destination='tmp', ignorecase=False, recursive=False):
     """
      Search for appyPOD code pattern 'findexpr' in the 'annotations' and 'text input' zones of all the odt files 'filenames'
      Replace the matches by 'replace' if 'dochanges' is True
@@ -27,17 +27,17 @@ def searchODTs(filenames, findexpr, replace=None, destination=None, dochanges=Fa
     }
     if replace:
         new_searchargs = {
-            'replace': replace,
+            'replace_expr': replace,
             'destination': destination,
         }
-        search_args.updpate(new_searchargs)
+        search_args.update(new_searchargs)
 
     if verbosity > 2:
         for k, v in search_args.iteritems():
             if v:
                 print k, v
 
-    if dochanges:
+    if replace:
         if recursive:
             recursiveSearchAndReplaceAllODT(filenames, result, search_args)
         else:
@@ -48,7 +48,7 @@ def searchODTs(filenames, findexpr, replace=None, destination=None, dochanges=Fa
         else:
             searchAllODT(filenames, result, search_args)
 
-    return result
+    displaySearchSummary(result, filenames, findexpr, replace)
 
 
 def recursiveSearchAndReplaceAllODT(filenames, result, search_args):
@@ -115,7 +115,7 @@ def searchAndReplaceInODTFiles(odt_files, result, search_args):
 
 def searchInODTFiles(odt_files, result, search_args):
     for odt_file in odt_files:
-        searchresult = searchOneODT(odt_file, **search_args)
+        xml_tree, searchresult = searchOneODT(odt_file, **search_args)
         if searchresult:
             result[odt_file] = searchresult
 
@@ -136,7 +136,7 @@ def searchOneODT(filename, findexpr, ignorecase=False):
         xml_tree = xml.dom.minidom.parseString(odt_content)
         searchresult = searchInOneOdt(xml_tree, filename, findexpr, ignorecase)
 
-        return searchresult
+        return xml_tree, searchresult
 
 
 def searchAndReplaceOneODT(filename, findexpr, replace_expr=None, destination=None, ignorecase=False):
@@ -146,28 +146,18 @@ def searchAndReplaceOneODT(filename, findexpr, replace_expr=None, destination=No
      Create a new file in folder 'destination' rather than modify the original file if 'destination' is given
     """
 
-    searchresult = searchOneODT(filename, findexpr, ignorecase)
+    zip_file = openZip(filename, 'r')
+    xml_tree, searchresult = searchOneODT(filename, findexpr, ignorecase)
+
+    if searchresult:
+        newcontent = getNewOdtContent(xml_tree, searchresult, replace_expr)
+        createNewOdt(zip_file, newcontent, filename, destination)
+
+    zip_file.close()
     return searchresult
 
-    """
-    zip_file = openZip(filename, 'r')
-    odt_content = None
-    if zip_file:
-        content_file = openOdtContent(zip_file)
-        odt_content = content_file.read()
-        xml_tree = xml.dom.minidom.parseString(odt_content)
-        searchresult = searchOneODT(filename, findexpr, ignorecase)
 
-        if searchresult:
-            newcontent = getNewOdtContent(xml_tree, searchresult, replace_expr)
-            createNewOdt(zip_file, newcontent, 'test-result.odt')
-
-        zip_file.close()
-        return searchresult
-    """
-
-
-def createNewOdt(old_odt, newcontent, new_odt_name):
+def createNewOdt(old_odt, newcontent, new_odt_name, destination_folder):
     new_odt = openZip(new_odt_name, 'a')
     for name in old_odt.namelist():
         temp_content = old_odt.read(name)
@@ -357,14 +347,14 @@ def openOdtContent(zip_file):
         return odt_content
 
 
-def getSearchSummaryDisplay(searchresult, filenames, findexpr, replace_expr):
+def displaySearchSummary(searchresult, filenames, findexpr, replace_expr):
     out = []
     total_matches = 0
-    if verbosity > 0 or len(searchresult) > 1:
+    if verbosity or len(searchresult) > 1:
         out.append("%i file" % len(searchresult))
         if len(searchresult) > 1:
             out.append('s')
-    if verbosity > 0:
+    if verbosity:
         result_filenames = searchresult.keys()
         result_filenames.sort()
         per_file_detail = []
@@ -382,13 +372,13 @@ def getSearchSummaryDisplay(searchresult, filenames, findexpr, replace_expr):
         out.append(" : \n%s\n" % '\n'.join(per_file_detail))
     elif len(searchresult) > 1:
         out.append(', ')
-    if verbosity < 1:
+    if not verbosity:
         for fileresults in searchresult.values():
             for fileresult in fileresults:
                 total_matches = total_matches + len(fileresult['matches'])
     out.append("%i matches" % total_matches)
 
-    return ''.join(out)
+    print(''.join(out))
 
 
 ################################################################
@@ -412,9 +402,7 @@ if cur_version >= req_version:
     def main():
         arguments = parseArguments()
         arguments = vars(arguments)
-        results = searchODTs(**arguments)
-        result_display = getSearchSummaryDisplay(results, **arguments)
-        print result_display
+        searchODTs(**arguments)
 
     if __name__ == "__main__":
         main()
