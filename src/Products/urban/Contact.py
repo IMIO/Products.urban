@@ -257,7 +257,8 @@ class Contact(BaseContent, BrowserDefaultMixin):
             else:
                 #remove the <p></p> from adressSignaletic
                 addressSignaletic = addressSignaletic[3:-4]
-                return '<p>%s<br />%s</p>' % (nameSignaletic, addressSignaletic)
+                address = '<p>%s<br />%s</p>' % (nameSignaletic, addressSignaletic)
+                return address
 
     def _getNameSignaletic(self, short, linebyline, invertnames=False):
         title = self.getPersonTitleValue(short, extra=False)
@@ -266,7 +267,8 @@ class Contact(BaseContent, BrowserDefaultMixin):
         if invertnames and linebyline:
             names = '%s %s' % (self.getName2(), self.getName1())
         namepart = namedefined and names or self.getSociety()
-        nameSignaletic = '%s %s' % (title, namepart)
+        nameSignaletic = '%s %s' % (title, namepart.decode('utf8'))
+        nameSignaletic = nameSignaletic.encode('utf8')
         if linebyline:
             #escape HTML special characters like HTML entities
             return cgi.escape(nameSignaletic)
@@ -352,7 +354,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         elif extra:
             return personTitle.extraValue
         elif personTitle:
-            return self.displayValue(self.Vocabulary('personTitle')[0], personTitle).encode('UTF-8')
+            return self.displayValue(self.Vocabulary('personTitle')[0], personTitle)
         else:
             return ''
 
