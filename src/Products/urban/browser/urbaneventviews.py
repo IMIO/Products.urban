@@ -282,4 +282,7 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
         if hasattr(licence, 'hasEnvironmentImpactStudy'):
             if licence.getHasEnvironmentImpactStudy():
                 return 200
+        if hasattr(licence, 'impactStudy'):
+            if licence.getImpactStudy():
+                return 200
         return 50

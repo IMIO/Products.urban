@@ -179,3 +179,19 @@ class TestUrbanEventInquiryView(BrowserTestCase):
         self.browser.open(inquiry.absolute_url())
         contents = self.browser.contents
         self.assertTrue("dans un rayon de 200m" in contents)
+
+    def test_200m_radius_when_ImpactStudy(self):
+        envclassone, inquiry = self._create_test_licence_with_inquiry('BuildLicence')
+        envclassone.setImpactStudy(False)
+        transaction.commit()
+
+        self.browser.open(inquiry.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("dans un rayon de 50m" in contents)
+
+        envclassone.setImpactStudy(True)
+        transaction.commit()
+
+        self.browser.open(inquiry.absolute_url())
+        contents = self.browser.contents
+        self.assertTrue("dans un rayon de 200m" in contents)
