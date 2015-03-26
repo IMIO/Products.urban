@@ -5,24 +5,12 @@ import logging
 import mimetypes
 import os
 import os.path
+import tempfile
 import zipfile
 import time
 import re
 import sys
 import xml.dom.minidom
-
-
-def getOsTempFolder():
-    tmp = '/tmp'
-    if os.path.exists(tmp) and os.path.isdir(tmp):
-        res = tmp
-    elif os.environ.has_key('TMP'):
-        res = os.environ['TMP']
-    elif os.environ.has_key('TEMP'):
-        res = os.environ['TEMP']
-    else:
-        raise "Sorry, I can't find a temp folder on your machine."
-    return res
 
 
 def unzip(f, folder, odf=False):
@@ -106,7 +94,7 @@ def zip(f, folder, odf=False):
         zipFile.write(mimetypeFile, 'mimetype', zipfile.ZIP_STORED)
     for dir, dirnames, filenames in os.walk(folder):
         for name in filenames:
-            folderName = dir[len(folder)+1:]
+            folderName = dir[len(folder) + 1:]
             # For pev(_odf files, ignore file "mimetype" that was already inserted
             if odf and (folderName == '') and (name == 'mimetype'):
                 continue
@@ -186,7 +174,7 @@ def searchAndReplaceOneODT(filename, findexpr, replace_expr=None, destination=No
     """
 
     name = 'f%f' % time.time()
-    tempFolder = os.path.join(getOsTempFolder(), name)
+    tempFolder = os.path.join(tempfile.gettempdir(), name)
     os.mkdir(tempFolder)
     unzip(filename, tempFolder)
     zip_file = zipfile.ZipFile(filename)
@@ -197,7 +185,6 @@ def searchAndReplaceOneODT(filename, findexpr, replace_expr=None, destination=No
         createNewOdt(zip_file, newcontent, 'replace-' + filename, destination)
 
     zip(filename, tempFolder, odf=True)
-#    FolderDeleter.delete(tempFolder)
     return searchresult
 
 
