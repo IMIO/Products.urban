@@ -159,6 +159,12 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
 
     # Manually created methods
 
+    def rubrics_base_query(self):
+        if self.portal_type == 'EnvClassOne':
+            return {'extraValue': ['0', '1', '2', '3']}
+        elif self.portal_type == 'EnvClassTwo':
+            return {'extraValue': ['0', '2', '3']}
+
     security.declarePublic('getInquiries')
     def getInquiries(self):
         """
