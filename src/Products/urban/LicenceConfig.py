@@ -274,6 +274,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urbancertificatetwo': inquiry_tabs_config,
             'envclassthree': inquiry_tabs_config,
             'envclassone': inquiry_tabs_config,
+            'envclasstwo': inquiry_tabs_config,
         }
         licence_type = self.id
 
