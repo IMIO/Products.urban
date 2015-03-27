@@ -14,12 +14,15 @@ Stephan GEULETTE <stephan.geulette@uvcw.be>,
 Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = 'plaintext'
 
-from plone.indexer import indexer
+from Products.Archetypes.interfaces import IBaseFolder
+
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IParcellingTerm
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IUrbanEventType
+
+from plone.indexer import indexer
 
 
 @indexer(IGenericLicence)
@@ -131,3 +134,11 @@ def genericlicence_foldermanager(object):
 @indexer(IUrbanEvent)
 def urbanevent_foldermanager(object):
     return [foldermanager.UID() for foldermanager in object.aq_parent.getFoldermanagers()]
+
+
+@indexer(IBaseFolder)
+def rubricsfolders_extravalue(object):
+    if object.portal_type == 'Folder' and 'rubrics' in object.getPhysicalPath():
+        return ['0', '1', '2', '3']
+    else:
+        return ['']

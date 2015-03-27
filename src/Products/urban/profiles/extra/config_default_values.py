@@ -276,10 +276,6 @@ default_values = {
             {'id': "veranda", 'title': u"Véranda"},
         ],
 
-        'rubrics': [
-            'Folder', ['EnvClassOne', 'EnvClassTwo', 'EnvClassThree'],
-        ],
-
         'ftSolicitOpinionsTo': [
             'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo'],
             {
@@ -1074,6 +1070,10 @@ default_values = {
             {'id': "favorable-conditionnel", 'title': u"Favorable conditionnel"},
             {'id': "defavorable", 'title': u"Défavorable"},
             {'id': "favorable-defaut", 'title': u"Réputé favorable par défaut"},
+        ],
+
+        'rubrics': [
+            'Folder',
         ],
 
         'exploitationconditions': [

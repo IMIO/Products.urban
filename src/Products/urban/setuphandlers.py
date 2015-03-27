@@ -329,6 +329,10 @@ def addUrbanVocabularies(context):
     #add the exploitation conditions subfolders
     addExploitationConditions(context, conditions)
 
+    rubrics_folder = getattr(tool, "rubrics")
+    #add the rubrics subfolders
+    addRubricValues(context, rubrics_folder)
+
     for urban_type in URBAN_TYPES:
         licenceConfigId = urban_type.lower()
         config_folder = getattr(tool, licenceConfigId)
@@ -344,17 +348,8 @@ def addUrbanVocabularies(context):
                 voc_folder = getattr(config_folder, voc_folder_id)
                 setHTMLContentType(voc_folder, 'description')
 
-        if urban_type in ['EnvClassOne', 'EnvClassTwo', 'EnvClassThree']:
-            rubric_folder = getattr(config_folder, 'rubrics')
-            mapping = {
-                'EnvClassOne': '1',
-                'EnvClassTwo': '2',
-                'EnvClassThree': '3',
-            }
-            addRubricValues(context, [mapping[urban_type], ''], rubric_folder)
 
-
-def addRubricValues(context, class_type, config_folder):
+def addRubricValues(context, config_folder):
 
     site = context.getSite()
     catalog = getToolByName(site, 'portal_catalog')
@@ -382,7 +377,7 @@ def addRubricValues(context, class_type, config_folder):
         for r_id, rubric in rubric_terms.iteritems():
             # we add the rubric if it fits the category folder and if the
             # classtype match the licence class number
-            if r_id.startswith(category_id) and rubric['extraValue'] in class_type:
+            if r_id.startswith(category_id):
                 rubrics[r_id] = rubric
         sorted_rubrics = [rubrics[r_id] for r_id in sorted(rubrics)]
 

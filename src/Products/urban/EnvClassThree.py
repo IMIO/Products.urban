@@ -117,6 +117,10 @@ class EnvClassThree(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
 
     # Methods
 
+    # Manually created methods
+
+    def rubrics_base_query(self):
+        return {'extraValue': ['0', '3']}
 
 registerType(EnvClassThree, PROJECTNAME)
 # end of class EnvClassThree

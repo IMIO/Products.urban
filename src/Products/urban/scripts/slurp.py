@@ -62,7 +62,7 @@ def extractOneRubricTerm(row):
     rubric = {
         'id': number,
         'number': number,
-        'extraValue': extraValue,
+        'extraValue': extraValue or '0',
         'description': description,
         'condition_type': condition_type,
         'condition_id': condition_id,

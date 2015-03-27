@@ -56,10 +56,11 @@ schema = Schema((
             allow_search=True,
             allow_browse=True,
             force_close_on_insert=True,
-            startup_directory_method='getRubricsConfigPath',
+            startup_directory='portal_urban/rubrics',
             show_indexes=False,
             wild_card_search=True,
             restrict_browsing_to_startup_directory= True,
+            base_query='rubrics_base_query',
             label='Rubrics',
             label_msgid='urban_label_rubrics',
             i18n_domain='urban',
@@ -222,6 +223,10 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     # Methods
 
     # Manually created methods
+
+    def rubrics_base_query(self):
+        """ to be overriden """
+        return {}
 
     def getLastCollegeReport(self):
         return self._getLastEvent(interfaces.ICollegeReportEvent)
