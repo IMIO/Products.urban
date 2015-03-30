@@ -248,7 +248,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         return config_path
 
     security.declarePrivate('_getConditions')
-    def _getConditions(self, restrict=['CI & CS', 'CI', 'CS']):
+    def _getConditions(self, restrict=['CI/CS', 'CI', 'CS']):
         all_conditions = self.getMinimumLegalConditions()
         all_conditions.extend(self.getAdditionalLegalConditions())
         return [cond for cond in all_conditions if cond.getExtraValue() in restrict]
@@ -272,7 +272,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         """
          Return all the integral & sectorial conditions,
         """
-        return self._getConditions(restrict=['CI & CS'])
+        return self._getConditions(restrict=['CI/CS'])
 
 
 
