@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-02-10 14:00+0000\n"
+"POT-Creation-Date: 2015-03-30 08:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -342,11 +342,11 @@ msgstr ""
 msgid "add_a_proprietary"
 msgstr ""
 
-# urbanevent_view
-msgid "add_an_attachment"
+msgid "add_an_applicant"
 msgstr ""
 
-msgid "add_an_applicant"
+# urbanevent_view
+msgid "add_an_attachment"
 msgstr ""
 
 msgid "add_an_equipment"
@@ -849,6 +849,9 @@ msgstr ""
 msgid "label_colname_Creator"
 msgstr ""
 
+msgid "label_colname_ParentLocation"
+msgstr ""
+
 msgid "label_colname_Title"
 msgstr ""
 
@@ -919,9 +922,6 @@ msgid "label_colname_parcellingterm_data"
 msgstr ""
 
 msgid "label_colname_parcelrefs"
-msgstr ""
-
-msgid "label_colname_ParentLocation"
 msgstr ""
 
 msgid "label_colname_proprietary_data"
@@ -3027,6 +3027,11 @@ msgstr ""
 #. Default: "Templatestyles"
 #: UrbanTool.py
 msgid "urban_label_templateStyles"
+msgstr ""
+
+#. Default: "Temporaryexploitation"
+#: EnvClassTwo.py
+msgid "urban_label_temporaryExploitation"
 msgstr ""
 
 #. Default: "Termkey"

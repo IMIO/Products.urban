@@ -41,5 +41,7 @@
   <type portal_type="Corporation"/>
   <type portal_type="Claimant"/>
   <type portal_type="Applicant"/>
+  <type portal_type="EnvClassTwo"/>
+  <type portal_type="EnvClassOne"/>
  </factorytypes>
 </object>

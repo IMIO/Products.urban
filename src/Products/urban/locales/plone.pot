@@ -60,7 +60,13 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
+msgid "EnvClassOne"
+msgstr ""
+
 msgid "EnvClassThree"
+msgstr ""
+
+msgid "EnvClassTwo"
 msgstr ""
 
 msgid "FolderManager"

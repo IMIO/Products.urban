@@ -139,6 +139,7 @@ for field in EnvironmentLicence_schema.filterFields(isMetadata=False):
     field.widget.visible = True
 
 EnvironmentLicence_schema['roadMissingPartsDetails'].widget.label_msgid = 'urban_label_complement'
+EnvironmentLicence_schema['investigationDetails'].widget.label_msgid = 'urban_label_investigationSubject'
 ##/code-section after-schema
 
 class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
@@ -158,12 +159,6 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     # Methods
 
     # Manually created methods
-
-    def rubrics_base_query(self):
-        if self.portal_type == 'EnvClassOne':
-            return {'extraValue': ['0', '1', '2', '3']}
-        elif self.portal_type == 'EnvClassTwo':
-            return {'extraValue': ['0', '2', '3']}
 
     security.declarePublic('getInquiries')
     def getInquiries(self):

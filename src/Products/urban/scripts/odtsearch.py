@@ -109,7 +109,7 @@ def zip(f, folder, odf=False):
     zipFile.close()
 
 
-def searchODTs(filenames, findexpr, replace, destination='tmp', ignorecase=False, recursive=False):
+def searchODTs(filenames, findexpr, replace=None, destination='tmp', ignorecase=False, recursive=False):
     """
      Search for appyPOD code pattern 'findexpr' in the 'annotations' and 'text input' zones of all the odt files 'filenames'
      Replace the matches by 'replace'.
@@ -129,6 +129,8 @@ def searchODTs(filenames, findexpr, replace, destination='tmp', ignorecase=False
     searchAndReplaceAllODT(filenames, result, recursive, search_args)
 
     displaySearchSummary(result, filenames, findexpr, replace)
+
+    return result
 
 
 def searchAndReplaceAllODT(filenames, result, recursive_search, search_args):
