@@ -200,6 +200,14 @@ class IApplicant(Interface):
     """Marker interface for .Applicant.Applicant
     """
 
+class IEnvClassTwo(Interface):
+    """Marker interface for .EnvClassTwo.EnvClassTwo
+    """
+
+class IEnvClassOne(Interface):
+    """Marker interface for .EnvClassOne.EnvClassOne
+    """
+
 ##code-section FOOT
 class ILicenceContainer(Interface):
     """

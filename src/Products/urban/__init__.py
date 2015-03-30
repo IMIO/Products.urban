@@ -128,6 +128,8 @@ def initialize(context):
     import Corporation
     import Claimant
     import Applicant
+    import EnvClassTwo
+    import EnvClassOne
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

@@ -40,8 +40,14 @@ msgstr "Contact"
 msgid "Declaration"
 msgstr "Déclaration"
 
+msgid "EnvClassOne"
+msgstr "Permis d'environnement classe 1"
+
 msgid "EnvClassThree"
 msgstr "Déclaration environnementale"
+
+msgid "EnvClassTwo"
+msgstr "Permis d'environnement classe 2"
 
 msgid "EnvironmentRubricTerm"
 msgstr "Rubrique environnement"

@@ -74,6 +74,8 @@ ADD_CONTENT_PERMISSIONS = {
     'Corporation': 'urban: Add Corporation',
     'Claimant': 'urban: Add Claimant',
     'Applicant': 'urban: Add Applicant',
+    'EnvClassTwo': 'urban: Add EnvClassTwo',
+    'EnvClassOne': 'urban: Add EnvClassOne',
 }
 
 setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
@@ -115,6 +117,8 @@ setDefaultRoles('urban: Add EnvClassThree', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Corporation', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Claimant', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Applicant', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add EnvClassTwo', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add EnvClassOne', ("Manager", "Contributor"))
 
 product_globals = globals()
 

@@ -154,6 +154,15 @@ class TestEnvClassTwoInstance(SchemaFieldsTestCase):
     def test_envclasstwo_isSeveso_is_visible_in_edit(self):
         self._is_field_visible_in_edit("Établissement SEVESO")
 
+    def test_envclasstwo_has_attribute_temporaryExploitation(self):
+        self.assertTrue(self.licence.getField('temporaryExploitation'))
+
+    def test_envclasstwo_temporaryExploitation_is_visible(self):
+        self._is_field_visible("Établissement temporaire")
+
+    def test_envclasstwo_temporaryExploitation_is_visible_in_edit(self):
+        self._is_field_visible_in_edit("Établissement temporaire")
+
     def test_envclasstwo_has_attribute_publicRoadModifications(self):
         self.assertTrue(self.licence.getField('publicRoadModifications'))
 
