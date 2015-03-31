@@ -2195,6 +2195,9 @@ msgstr "Particularité(s), raison(s) de l'enquête"
 msgid "urban_label_investigationStart"
 msgstr "Enquête du"
 
+msgid "urban_label_investigationSubject"
+msgstr "Objet de l'enquête publique"
+
 #. Default: "Investigationwritereclamationnumber"
 #: UrbanCertificateTwo.py
 msgid "urban_label_investigationWriteReclamationNumber"

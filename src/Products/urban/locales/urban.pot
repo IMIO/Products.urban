@@ -1514,6 +1514,9 @@ msgstr ""
 msgid "urban_label_EnvClassThreeNumerotation"
 msgstr ""
 
+msgid "urban_label_investigationSubject"
+msgstr ""
+
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"
