@@ -3359,6 +3359,9 @@ msgstr "Attention, la référence cadastrale n'est plus à jour!"
 msgid "work_location"
 msgstr "Lieu des travaux"
 
+msgid "years"
+msgstr "ans"
+
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
 
