@@ -119,6 +119,9 @@ class EnvClassThree(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
 
     # Manually created methods
 
+    def getValidityDelay(self):
+        return 10
+
     def rubrics_base_query(self):
         return {'extraValue': ['0', '3']}
 
