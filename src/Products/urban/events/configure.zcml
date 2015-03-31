@@ -127,6 +127,10 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".environmentLicenceEvents.createLicenceExpirationEvent"/>
 
+  <subscriber for="..interfaces.IAcknowledgmentEvent
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".environmentLicenceEvents.createEnvClassThreeExpirationEvent"/>
+
   <subscriber for="..interfaces.IPortionOut
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".parcelEvents.updateParcellingTitle" />

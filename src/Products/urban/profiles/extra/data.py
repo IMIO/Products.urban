@@ -2397,6 +2397,16 @@ urbanEventTypes = {
                 },
             ),
         },
+        {
+            'id': "expiration",
+            'title': "Valide jusqu'au",
+            'eventDateLabel': "Date de validité",
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+            'TALCondition': "python: False",
+            'eventTypeType': 'Products.urban.interfaces.ILicenceExpirationEvent',
+        },
     ),
     'miscdemand': (
         {
