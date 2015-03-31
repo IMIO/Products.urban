@@ -178,19 +178,20 @@
 
 
 <metal:validity_duration define-macro="validityDelay">
-    <tal:vars define="expiration_date view/getExpirationDate;">
+    <tal:vars define="validity_delay context/getValidityDelay">
         <td valign="top">
             <b>
                  <span i18n:translate="urban_label_validityDelay">
-                    Expiration date
+                    Validity delay
                  </span>:
             </b>
         </td>
         <td width="10px"></td>
         <td valign="top"
-            tal:condition="python: expiration_date">
+            tal:condition="python: validity_delay">
+            <span tal:replace="validity_delay"></span> <span i18n:translate="">years</span>
         </td>
-        <td tal:condition="python: not expiration_date">
+        <td tal:condition="python: not validity_delay">
             <span class="discreet" i18n:translate="content_none">None</span>
         </td>
     </tal:vars>
