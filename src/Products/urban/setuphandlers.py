@@ -398,10 +398,9 @@ def addRubricValues(context, config_folder):
             if bound_condition:
                 condition_type = bound_condition['type'].replace('/', '_').replace('-', '_')
                 condition_id = bound_condition['id']
-                condition_path = '/'.join(site.portal_urban.exploitationconditions.getPhysicalPath())
-                condition_path = '%s/%s' % (condition_path, condition_type)
-                condition = catalog(id=condition_id, path={'query': condition_path, 'depth': 1})[0]
-                condition_uid = condition.getObject().UID()
+                conditions_folder = getattr(site.portal_urban.exploitationconditions, condition_type)
+                condition = getattr(conditions_folder, condition_id)
+                condition_uid = condition.UID()
 
                 rubric = getattr(rubric_folder, rubric_id)
                 rubric.setExploitationCondition(condition_uid)
