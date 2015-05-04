@@ -265,11 +265,11 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
         #moreover, as we are using ReferenceField, we can not use getattr...
         potential_contacts = []
         parent = self.aq_inner.aq_parent
-        if hasattr(parent, 'getNotaryContact'):
+        if 'notaryContact' in parent.schema:
             potential_contacts.extend(list(parent.getNotaryContact()))
-        if hasattr(parent, 'getGeometricians'):
+        if 'geometricians' in parent.schema:
             potential_contacts.extend(list(parent.getGeometricians()))
-        if hasattr(parent, 'getArchitects'):
+        if 'architects' in parent.schema:
             potential_contacts.extend(parent.getArchitects())
 
         vocabulary = [(contact.UID(), contact.Title(),) for contact in potential_contacts]
