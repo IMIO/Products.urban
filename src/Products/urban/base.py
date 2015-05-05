@@ -311,6 +311,24 @@ class UrbanBase(object):
                     answer = False
         return answer
 
+    def hasMixedApplicants(self):
+        """
+            return true if the licence has a mixed applicants
+        """
+        answer = False
+        applicants = self.getApplicants()  # applicant can also be proprietaries..
+        applicant0 = applicants[0]
+        field = applicant0.getField('personTitle')
+        titles = field.vocabulary.getAllVocTerms(applicant0)
+        title0 = titles[applicant0.getPersonTitle()]
+        gender0 = title0.getGender()
+        if len(applicants) > 1:
+            for applicant in applicants[1:]:
+                title = titles[applicant.getPersonTitle()]
+                if title.getGender() != gender0:
+                    answer = True
+        return answer
+
     security.declarePublic('hasMultipleApplicants')
     def hasMultipleApplicants(self):
         """
