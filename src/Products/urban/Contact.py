@@ -248,11 +248,30 @@ class Contact(BaseContent, BrowserDefaultMixin):
             if not linebyline:
                 mapping = dict(name=nameSignaletic.decode('utf8'),
                                address=addressSignaletic.decode('utf8'))
-                result = translate(
-                    u'residing',
-                    domain=u'urban',
-                    mapping=mapping, context=self.REQUEST
-                )
+                if self.isMasculineSingular():
+                    result = translate(
+                        u'masculine_singular_residing',
+                        domain=u'urban',
+                        mapping=mapping, context=self.REQUEST
+                    )
+                elif self.isFeminineSingular():
+                    result = translate(
+                        u'feminine_singular_residing',
+                        domain=u'urban',
+                        mapping=mapping, context=self.REQUEST
+                    )
+                elif self.isFemininePlural():
+                    result = translate(
+                        u'feminine_plural_residing',
+                        domain=u'urban',
+                        mapping=mapping, context=self.REQUEST
+                    )
+                else:
+                    result = translate(
+                        u'mixed_residing',
+                        domain=u'urban',
+                        mapping=mapping, context=self.REQUEST
+                    )
                 return result.encode('utf8')
             else:
                 #remove the <p></p> from adressSignaletic
@@ -358,7 +377,41 @@ class Contact(BaseContent, BrowserDefaultMixin):
         else:
             return ''
 
+    def isMasculineSingular(self):
+        """
+        """
+        answer = False
+        field = self.getField('personTitle')
+        titles = field.vocabulary.getAllVocTerms(self)
+        title = titles[self.getPersonTitle()]
+        if title.getMultiplicity() == 'single':
+            if title.getGender() == 'male':
+                answer = True
+        return answer
 
+    def isFeminineSingular(self):
+        """
+        """
+        answer = False
+        field = self.getField('personTitle')
+        titles = field.vocabulary.getAllVocTerms(self)
+        title = titles[self.getPersonTitle()]
+        if title.getMultiplicity() == 'single':
+            if title.getGender() == 'female':
+                answer = True
+        return answer
+
+    def isFemininePlural(self):
+        """
+        """
+        answer = False
+        field = self.getField('personTitle')
+        titles = field.vocabulary.getAllVocTerms(self)
+        title = titles[self.getPersonTitle()]
+        if title.getMultiplicity() == 'plural':
+            if title.getGender() == 'female':
+                answer = True
+        return answer
 
 registerType(Contact, PROJECTNAME)
 # end of class Contact

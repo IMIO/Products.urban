@@ -1248,8 +1248,23 @@ msgstr "Dossier introduit par ${notary}"
 
 #. Default: "${name} residing at ${address}"
 #: Contact.py
-msgid "residing"
-msgstr "${name} demeurant ${address}"
+msgid "masculine_singular_residing"
+msgstr "${name} domicilié ${address}"
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "feminine_singular_residing"
+msgstr "${name} domiciliée ${address}"
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "mixed_residing"
+msgstr "${name} domiciliés ${address}"
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "feminine_plural_residing"
+msgstr "${name} domiciliées ${address}"
 
 msgid "reverse_order"
 msgstr "Inverser l'ordre"
