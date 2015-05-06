@@ -1249,22 +1249,22 @@ msgstr "Dossier introduit par ${notary}"
 #. Default: "${name} residing at ${address}"
 #: Contact.py
 msgid "masculine_singular_residing"
-msgstr "${name} domicilié ${address}"
+msgstr "${name} domicilié à ${address}"
 
 #. Default: "${name} residing at ${address}"
 #: Contact.py
 msgid "feminine_singular_residing"
-msgstr "${name} domiciliée ${address}"
+msgstr "${name} domiciliée à ${address}"
 
 #. Default: "${name} residing at ${address}"
 #: Contact.py
 msgid "mixed_residing"
-msgstr "${name} domiciliés ${address}"
+msgstr "${name} domiciliés à ${address}"
 
 #. Default: "${name} residing at ${address}"
 #: Contact.py
 msgid "feminine_plural_residing"
-msgstr "${name} domiciliées ${address}"
+msgstr "${name} domiciliées à ${address}"
 
 msgid "reverse_order"
 msgstr "Inverser l'ordre"
