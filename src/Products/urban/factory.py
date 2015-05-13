@@ -18,7 +18,7 @@ class UrbanEventFactory(grok.GlobalUtility):
     grok.implements(IFactory)
     grok.name('UrbanEvent')
 
-    def __call__(self, licence, event_type, **kwargs):
+    def __call__(self, licence, event_type, id='', **kwargs):
         portal_urban = api.portal.get_tool('portal_urban')
         catalog = api.portal.get_tool('portal_catalog')
 
@@ -36,14 +36,9 @@ class UrbanEventFactory(grok.GlobalUtility):
         eventtype_type = event_type.getEventTypeType()
         portal_type = portal_urban.portal_types_per_event_type_type.get(eventtype_type, "UrbanEvent")
 
-        if kwargs and 'id' in kwargs:
-            proposed_id = kwargs.pop('id')
-        else:
-            proposed_id = portal_urban.generateUniqueId(portal_type),
-
         urban_event_id = licence.invokeFactory(
             portal_type,
-            id=proposed_id,
+            id=id or portal_urban.generateUniqueId(portal_type),
             title=event_type.Title(),
             urbaneventtypes=(event_type,),
             **kwargs
