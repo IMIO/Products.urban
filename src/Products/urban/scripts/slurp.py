@@ -3,7 +3,7 @@
 """
     call this script to return 4 dictionaries containing:
     - all rubrics big categories along with a textual description
-    - all environemnt rubrics, sort
+    - all environment rubrics, sort
     - all integral and sectorial conditions bound to these rubrics, sorted by type
     - a dictionnary representing the mapping bewteen the rubrics and conditions
 """
@@ -45,7 +45,6 @@ def extractRubricsTerm(rubric_ids):
 
 def extractOneRubricTerm(row):
     columns = row.find_all('td')
-
     if len(columns) < 5:
         return None
 
@@ -197,8 +196,5 @@ def slurp():
     pickleResult(slurped)
 
 
-def main():
-    slurp()
-
 if __name__ == "__main__":
-    main()
+    slurp()
