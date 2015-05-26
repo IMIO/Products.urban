@@ -38,7 +38,7 @@ Changes
 
 - Add optional field RGBSR.
 
-- Add field "deposit type" for UrbanEventi (#10263).
+- Add field "deposit type" for UrbanEvent (#10263).
 
 
 1.6.0
