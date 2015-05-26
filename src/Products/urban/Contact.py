@@ -413,6 +413,8 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 answer = True
         return answer
 
+
+
 registerType(Contact, PROJECTNAME)
 # end of class Contact
 
