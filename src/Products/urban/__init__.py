@@ -130,6 +130,7 @@ def initialize(context):
     import Applicant
     import EnvClassTwo
     import EnvClassOne
+    import Article127
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

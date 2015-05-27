@@ -270,6 +270,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
 
         types = {
             'buildlicence': full_tabs_config,
+            'article127': full_tabs_config,
             'parceloutlicence': inquiry_tabs_config,
             'urbancertificatetwo': inquiry_tabs_config,
             'envclassthree': inquiry_tabs_config,

@@ -87,6 +87,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="EnvClassOne"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="Article127"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <!-- ##code-section TYPES -->
  <object name="Applicant"
          meta_type="Factory-based Type Information with dynamic views"/>

@@ -7,6 +7,9 @@
 <!-- ##code-section workflowobjects -->
 <!-- ##/code-section workflowobjects -->
  <bindings>
+  <type type_id="Article127">
+     <bound-workflow workflow_id="urban_licence_workflow" />
+  </type>
   <type type_id="BuildLicence">
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>

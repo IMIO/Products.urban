@@ -43,5 +43,6 @@
   <type portal_type="Applicant"/>
   <type portal_type="EnvClassTwo"/>
   <type portal_type="EnvClassOne"/>
+  <type portal_type="Article127"/>
  </factorytypes>
 </object>

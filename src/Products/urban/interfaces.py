@@ -208,6 +208,10 @@ class IEnvClassOne(Interface):
     """Marker interface for .EnvClassOne.EnvClassOne
     """
 
+class IArticle127(Interface):
+    """Marker interface for .Article127.Article127
+    """
+
 ##code-section FOOT
 class ILicenceContainer(Interface):
     """

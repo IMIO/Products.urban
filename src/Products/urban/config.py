@@ -76,6 +76,7 @@ ADD_CONTENT_PERMISSIONS = {
     'Applicant': 'urban: Add Applicant',
     'EnvClassTwo': 'urban: Add EnvClassTwo',
     'EnvClassOne': 'urban: Add EnvClassOne',
+    'Article127': 'urban: Add Article127',
 }
 
 setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
@@ -119,6 +120,7 @@ setDefaultRoles('urban: Add Claimant', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Applicant', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvClassTwo', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvClassOne', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Article127', ("Manager", "Contributor"))
 
 product_globals = globals()
 
@@ -144,14 +146,14 @@ ADDITIONAL_LAYERS_FOLDER = "additional_layers"
 
 #a list where first element is the meetingConfigId and the second, the meta_type name
 URBAN_TYPES = [
-    'BuildLicence', 'ParcelOutLicence', 'Declaration', 'Division', 'UrbanCertificateOne', 'UrbanCertificateTwo',
-    'NotaryLetter', 'MiscDemand', 'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
+    'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'Division', 'UrbanCertificateOne',
+    'UrbanCertificateTwo', 'NotaryLetter', 'MiscDemand', 'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
 ]
 
 #currently matches the content of URBAN_TYPES, the order of this list impacts the order
 # of content types links in urban_root_view
 ORDERED_URBAN_TYPES = [
-    'BuildLicence', 'ParcelOutLicence', 'Declaration', 'Division',
+    'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'Division',
     'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter',
     'EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'MiscDemand'
 ]
@@ -191,14 +193,6 @@ PPNC_LAYERS = {
     'ppnc5': {'xmin': 191082, 'ymin': 62858, 'xmax': 300067, 'ymax': 123394},
     'ppnc6': {'xmin': 176533, 'ymin': 18317, 'xmax': 270345, 'ymax': 70426},
 }
-#From Qgis
-#PPNC : 27303,15803 : 311226,173511
-#ppnc1: 40824,113446 : 139390,168195
-#ppnc2: 122374,116510 : 218186,169730
-#ppnc3: 202155,115165 : 302832,171088
-#ppnc4: 95175,64858 : 196930,121379
-#ppnc5: 191082,62858 : 300067,123394
-#ppnc6: 176533,18317 : 270345,70426
 
 DefaultTexts = {
     'BuildLicence': {

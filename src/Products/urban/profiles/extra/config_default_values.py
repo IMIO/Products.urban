@@ -19,10 +19,57 @@ default_values = {
             {'id': "udc", 'title': u"UDC (permis dans PCA, 'RCU, 'LOTISSEMENT, 'parfois avec demande de dérogation)"},
             {'id': "upp", 'title': u"UPP (petit permis délivré directement par le Collège)"},
             {'id': "pu", 'title': u"PU (demande de PERMIS UNIQUE)"},
-            {'id': "art127", 'title': u"UCP (article 127)"},
             {'id': "inconnu", 'title': u"Inconnue"},
         ],
 
+        'missingparts': [
+            'UrbanVocabularyTerm',
+            {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
+            {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
+            {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+            {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable inc'id'ences environnement (annexe 1C) en 2 exemplaires"},
+            {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
+            {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+            {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
+        ],
+
+        'roadmissingparts': [
+            'UrbanVocabularyTerm',
+            {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
+            {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
+            {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+            {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable incid'ences environnement (annexe 1C) en 2 exemplaires"},
+            {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
+            {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+            {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
+        ],
+
+        'locationmissingparts': [
+            'UrbanVocabularyTerm',
+            {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
+            {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
+            {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+            {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable inc'id'ences environnement (annexe 1C) en 2 exemplaires"},
+            {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
+            {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+            {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
+        ],
+
+        'pebcategories': [
+            'UrbanVocabularyTerm',
+            {'id': "not_applicable", 'title': 'peb_not_applicable'},
+            {'id': "complete_process", 'title': 'peb_complete_process'},
+            {'id': "form1_process", 'title': 'peb_form1_process'},
+            {'id': "form2_process", 'title': 'peb_form2_process'},
+        ],
+    },
+    'Article127': {
         'missingparts': [
             'UrbanVocabularyTerm',
             {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
@@ -244,7 +291,7 @@ default_values = {
 
         'decisions': [
             'UrbanVocabularyTerm', [
-                'BuildLicence', 'ParcelOutLicence', 'Declaration', 'Division', 'NotaryLetter',
+                'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'Division', 'NotaryLetter',
                 'UrbanCertificateOne', 'UrbanCertificateTwo', 'EnvClassThree', 'MiscDemand'
             ],
             {'id': "favorable", 'title': u"Favorable", 'extraValue': "Recevable"},
@@ -777,7 +824,7 @@ default_values = {
         ],
 
         'investigationarticles': [
-            'UrbanVocabularyTerm', ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo'],
+            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'ParcelOutLicence', 'UrbanCertificateTwo'],
             {'id': "330-1", 'title': u"330 1° - « [...] bâtiments dont la hauteur est d'au moins quatre niveaux ou douze mètres sous corniche et [...] »", 'description': "<p>« la construction ou la reconstruction de bâtiments dont la hauteur est d'au moins quatre niveaux ou douze mètres sous corniche et dépasse de trois mètres ou plus la moyenne des hauteurs sous corniche des bâtiments situés dans la même rue jusqu'à cinquante mètres de part et d'autre de la construction projetée ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions »</p>", 'extraValue': "330 1°"},
             {'id': "330-2", 'title': u"330 2° - « [...] bâtiment dont la profondeur, mesurée [...] est supérieure à 15 mètres et dépasse de plus de 4 mètres les bâtiments [...] »", 'description': "<p>« la construction ou la reconstruction de bâtiments dont la profondeur, mesurée à partir de l'alignement ou du front de bâtisse lorsque les constructions voisines ne sont pas implantées sur l'alignement, est supérieure à 15 mètres et dépasse de plus de 4 mètres les bâtiments situés sur les parcelles contiguës (AGW du 23 décembre 1998, art 1er), la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions »</p>", 'extraValue': "330 2°"},
             {'id': "330-3", 'title': u"330 3° - « [...] un magasin [...] dont la surface nette de vente est supérieure à 400 m² [...] »", 'description': "<p>« la construction, la reconstruction d'un magasin ou la modification de la destination d'un bâtiment en magasin dont la surface nette de vente est supérieure à 400 m² ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions »</p>", 'extraValue': "330 3°"},
@@ -801,12 +848,11 @@ default_values = {
             {'id': "75j", 'title': u"75 jours", 'deadLineDelay': 75, 'alertDelay': 20},
             {'id': "115j", 'title': u"115 jours", 'deadLineDelay': 115, 'alertDelay': 20},
             {'id': "230j", 'title': u"230 jours", 'deadLineDelay': 230, 'alertDelay': 20},
-            {'id': "art127", 'title': u"Article 127", 'deadLineDelay': 0, 'alertDelay': 20},
             {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
         ],
 
         'derogations': [
-            'UrbanVocabularyTerm', ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo'],
+            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'ParcelOutLicence', 'UrbanCertificateTwo'],
             {'id': "dero-ps", 'title': u"au Plan de secteur"},
             {'id': "dero-pca", 'title': u"au Plan Communal d'Aménagement"},
             {'id': "dero-rru", 'title': u"au Règlement Régional d'Urbanisme"},
@@ -815,7 +861,7 @@ default_values = {
         ],
 
         'folderbuildworktypes': [
-            'UrbanVocabularyTerm', ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo'],
+            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'ParcelOutLicence', 'UrbanCertificateTwo'],
             {'id': "ncmu", 'title': u"Nouvelle construction - Maison unifamiliale", 'extraValue': 'N_UNI'},
             {'id': "ncia", 'title': u"Nouvelle construction - Immeuble appartements", 'extraValue': 'N_APPART'},
             {'id': "nca", 'title': u"Nouvelle construction - Autres", 'extraValue': 'N_AUT'},

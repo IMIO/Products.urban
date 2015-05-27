@@ -51,6 +51,9 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
+msgid "Article127"
+msgstr ""
+
 msgid "BuildLicence"
 msgstr ""
 
@@ -402,6 +405,12 @@ msgid "architects_folder_title"
 msgstr ""
 
 msgid "articles_folder_title"
+msgstr ""
+
+msgid "article127_urbanconfig_title"
+msgstr ""
+
+msgid "article127s"
 msgstr ""
 
 msgid "at_hour"

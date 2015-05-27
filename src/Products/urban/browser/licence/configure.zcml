@@ -73,6 +73,21 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IArticle127"
+     name="article127view"
+     class=".article127view.Article127View"
+     template="templates/article127view.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="article127-macros"
+     for="Products.urban.interfaces.IArticle127"
+     template="templates/article127macros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IParcelOutLicence"
      name="parceloutlicenceview"
      class=".parceloutlicenceview.ParcelOutLicenceView"
