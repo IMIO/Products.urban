@@ -317,11 +317,6 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
     schema = BuildLicence_schema
 
     ##code-section class-header #fill in your manual code here
-    schemata_order = ['urban_description', 'urban_road', 'urban_location',\
-                      'urban_investigation_and_advices', 'urban_peb']
-    #implements(interfacesToImplement)
-    archetype_name = 'BuildLicence'
-
     ##/code-section class-header
 
     # Methods
