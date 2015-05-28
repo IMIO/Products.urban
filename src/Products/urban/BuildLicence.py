@@ -421,7 +421,7 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
             #the prorogation gives one year more to the applicant
             tool = getToolByName(self, 'portal_urban')
             #relativedelta does not work with DateTime so use datetime
-            return tool.formatDate(lastTheLicenceDecisionDate.asdatetime() + relativedelta(years=+1))
+            return tool.formatDate(lastTheLicenceDecisionDate.asdatetime() + relativedelta(years=+3))
 
 
 
