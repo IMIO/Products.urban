@@ -1256,7 +1256,22 @@ msgstr ""
 
 #. Default: "${name} residing at ${address}"
 #: Contact.py
-msgid "residing"
+msgid "masculine_singular_residing"
+msgstr ""
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "feminine_singular_residing"
+msgstr ""
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "mixed_residing"
+msgstr ""
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "feminine_plural_residing"
 msgstr ""
 
 msgid "reverse_order"

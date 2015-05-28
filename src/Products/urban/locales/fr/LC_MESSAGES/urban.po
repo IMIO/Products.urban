@@ -405,11 +405,11 @@ msgstr "Motifs de la demande"
 msgid "architects_folder_title"
 msgstr "Architectes"
 
-msgid "article127s"
-msgstr "Articles 127"
-
 msgid "article127_urbanconfig_title"
 msgstr "Paramètres des Articles 127"
+
+msgid "article127s"
+msgstr "Articles 127"
 
 msgid "articles_folder_title"
 msgstr "Articles"
@@ -688,6 +688,16 @@ msgstr "Décision des avis externes"
 #: GenericLicence.py
 msgid "far_prevention_area"
 msgstr "Zone de prévention éloignée"
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "feminine_plural_residing"
+msgstr "${name} domiciliées à ${address}"
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "feminine_singular_residing"
+msgstr "${name} domiciliée à ${address}"
 
 msgid "fieldsetlegend-attachments"
 msgstr "Pièces jointes"
@@ -1034,6 +1044,11 @@ msgstr "Ajouter une parcelle à la main"
 msgid "map_configs_folder_title"
 msgstr "Configuration des cartes"
 
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "masculine_singular_residing"
+msgstr "${name} domicilié à ${address}"
+
 msgid "miscdemand_urbanconfig_title"
 msgstr "Paramètres des 'divers'"
 
@@ -1042,6 +1057,11 @@ msgstr "Divers"
 
 msgid "missingparts_folder_title"
 msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes"
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "mixed_residing"
+msgstr "${name} domiciliés à ${address}"
 
 #. Default: "Plural"
 #: PersonTitleTerm.py
@@ -1254,11 +1274,6 @@ msgstr "Dossier introduit par ${notary} pour ${applicant}"
 
 msgid "request_submitted_by_notary"
 msgstr "Dossier introduit par ${notary}"
-
-#. Default: "${name} residing at ${address}"
-#: Contact.py
-msgid "residing"
-msgstr ""
 
 msgid "reverse_order"
 msgstr "Inverser l'ordre"
