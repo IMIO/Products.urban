@@ -83,6 +83,7 @@ validation.register(isNotDuplicatedReferenceValidator('isNotDuplicatedReference'
 def initialize(context):
     """initialize product (called by zope)"""
     ##code-section custom-init-top #fill in your manual code here
+    import UrbanTemplate
     ##/code-section custom-init-top
 
     # imports packages and types for registration

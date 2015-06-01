@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-03-30 08:52+0000\n"
+"POT-Creation-Date: 2015-06-01 12:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,10 +48,10 @@ msgstr ""
 msgid "Architect data"
 msgstr ""
 
-msgid "Attachments"
+msgid "Article127"
 msgstr ""
 
-msgid "Article127"
+msgid "Attachments"
 msgstr ""
 
 msgid "BuildLicence"
@@ -404,13 +404,13 @@ msgstr ""
 msgid "architects_folder_title"
 msgstr ""
 
-msgid "articles_folder_title"
-msgstr ""
-
 msgid "article127_urbanconfig_title"
 msgstr ""
 
 msgid "article127s"
+msgstr ""
+
+msgid "articles_folder_title"
 msgstr ""
 
 msgid "at_hour"
@@ -686,6 +686,16 @@ msgstr ""
 #. Default: "Far prevention area"
 #: GenericLicence.py
 msgid "far_prevention_area"
+msgstr ""
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "feminine_plural_residing"
+msgstr ""
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "feminine_singular_residing"
 msgstr ""
 
 msgid "fieldsetlegend-attachments"
@@ -1033,6 +1043,11 @@ msgstr ""
 msgid "map_configs_folder_title"
 msgstr ""
 
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "masculine_singular_residing"
+msgstr ""
+
 msgid "miscdemand_urbanconfig_title"
 msgstr ""
 
@@ -1040,6 +1055,11 @@ msgid "miscdemands"
 msgstr ""
 
 msgid "missingparts_folder_title"
+msgstr ""
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "mixed_residing"
 msgstr ""
 
 #. Default: "Plural"
@@ -1254,26 +1274,6 @@ msgstr ""
 msgid "request_submitted_by_notary"
 msgstr ""
 
-#. Default: "${name} residing at ${address}"
-#: Contact.py
-msgid "masculine_singular_residing"
-msgstr ""
-
-#. Default: "${name} residing at ${address}"
-#: Contact.py
-msgid "feminine_singular_residing"
-msgstr ""
-
-#. Default: "${name} residing at ${address}"
-#: Contact.py
-msgid "mixed_residing"
-msgstr ""
-
-#. Default: "${name} residing at ${address}"
-#: Contact.py
-msgid "feminine_plural_residing"
-msgstr ""
-
 msgid "reverse_order"
 msgstr ""
 
@@ -1372,10 +1372,6 @@ msgstr ""
 msgid "tal_condition_descr"
 msgstr ""
 
-#. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here', 'event', and 'licence'' are available"
-#: UrbanDoc.py
-msgid "tal_condition_urbandoc_descr"
-msgstr ""
 
 #. Default: "Events templates"
 #: templatessummary.pt
@@ -1536,9 +1532,6 @@ msgstr ""
 #. Default: "Environmentaldeclarationnumerotation"
 #: UrbanTool.py
 msgid "urban_label_EnvClassThreeNumerotation"
-msgstr ""
-
-msgid "urban_label_investigationSubject"
 msgstr ""
 
 #. Default: "Linkedopinionrequestevent"
@@ -2217,6 +2210,9 @@ msgstr ""
 #: GenericLicence.py
 #: UrbanCertificateTwo.py
 msgid "urban_label_investigationStart"
+msgstr ""
+
+msgid "urban_label_investigationSubject"
 msgstr ""
 
 #. Default: "Investigationwritereclamationnumber"

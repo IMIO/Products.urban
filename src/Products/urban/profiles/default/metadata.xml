@@ -3,17 +3,18 @@
   <version>1.10.1</version>
   <!-- ##code-section METADATA -->
   <dependencies>
-    <dependency>profile-Products.DataGridField:default</dependency>
-    <dependency>profile-collective.datagridcolumns:default</dependency>
-    <dependency>profile-Products.MasterSelectWidget:default</dependency>
-    <dependency>profile-collective.externaleditor:default</dependency>
-    <dependency>profile-collective.js.jqueryui:default</dependency>
-    <dependency>profile-collective.iconifieddocumentactions:default</dependency>
-    <dependency>profile-plone.app.referenceintegrity:default</dependency>
     <dependency>profile-Products.CMFPlacefulWorkflow:CMFPlacefulWorkflow</dependency>
-    <dependency>profile-plonetheme.imioapps:default</dependency>
-    <dependency>profile-imio.actionspanel:default</dependency>
+    <dependency>profile-Products.DataGridField:default</dependency>
+    <dependency>profile-Products.MasterSelectWidget:default</dependency>
+    <dependency>profile-collective.datagridcolumns:default</dependency>
+    <dependency>profile-collective.documentgenerator:default</dependency>
+    <dependency>profile-collective.externaleditor:default</dependency>
+    <dependency>profile-collective.iconifieddocumentactions:default</dependency>
+    <dependency>profile-collective.js.jqueryui:default</dependency>
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
+    <dependency>profile-imio.actionspanel:default</dependency>
+    <dependency>profile-plone.app.referenceintegrity:default</dependency>
+    <dependency>profile-plonetheme.imioapps:default</dependency>
   </dependencies>
   <!-- ##/code-section METADATA -->
 </metadata>

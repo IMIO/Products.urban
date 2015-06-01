@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2015-03-30 08:52+0000\n"
+"POT-Creation-Date: 2015-06-01 12:27+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1372,11 +1372,6 @@ msgstr "Zone de surveillance"
 #: UrbanEventType.py
 msgid "tal_condition_descr"
 msgstr "Entrez une condition TAL.  Les variables 'here' et 'member' sont disponibles"
-
-#. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here', 'event', and 'licence'' are available"
-#: UrbanDoc.py
-msgid "tal_condition_urbandoc_descr"
-msgstr "Entrez une condition TAL.  Les variables 'here', 'event' et 'licence' sont disponibles"
 
 #. Default: "Events templates"
 #: templatessummary.pt

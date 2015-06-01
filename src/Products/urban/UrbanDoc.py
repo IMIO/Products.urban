@@ -35,17 +35,6 @@ logger = logging.getLogger('urban: UrbanDoc')
 
 schema = Schema((
 
-    StringField(
-        name='TALCondition',
-        widget=StringField._properties['widget'](
-            size=100,
-            description=""""Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here', 'event', and 'licence'' are available""",
-            description_msgid="tal_condition_urbandoc_descr",
-            label='Talcondition',
-            label_msgid='urban_label_TALCondition',
-            i18n_domain='urban',
-        ),
-    ),
 
 ),
 )
@@ -77,12 +66,11 @@ class UrbanDoc(ATBlob):
 
     # Manually created methods
 
-    def mayGenerateUrbanDoc(self, obj):
-        """
-        Creation condition
+    """
+    to move into PODConditiion code for UrbanTemplate
 
-        computed by evaluating the TAL expression stored in TALCondition field
-        """
+    def mayGenerateUrbanDoc(self, obj):
+
         res = True # At least for now
         # Check condition
         TALCondition = self.getTALCondition().strip()
@@ -105,6 +93,7 @@ class UrbanDoc(ATBlob):
                 logger.warn("The condition '%s' defined for element at '%s' is wrong!  Message is : %s" % (TALCondition, obj.absolute_url(), e))
                 res = False
         return res
+    """
 
 
 

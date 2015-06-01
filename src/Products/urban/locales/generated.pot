@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Mar 30 10:03:40 2015\n"
-"PO-Revision-Date: Mon Mar 30 10:03:40 2015\n"
+"POT-Creation-Date: Mon Jun  1 14:24:15 2015\n"
+"PO-Revision-Date: Mon Jun  1 14:24:15 2015\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -49,11 +49,6 @@ msgstr ""
 #. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here' and 'member' are available"
 #: UrbanEventType.py
 msgid "tal_condition_descr"
-msgstr ""
-
-#. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here', 'event', and 'licence'' are available"
-#: UrbanDoc.py
-msgid "tal_condition_urbandoc_descr"
 msgstr ""
 
 #. Default: "UnoEnabledPython"
@@ -152,7 +147,6 @@ msgid "urban_label_SSC"
 msgstr ""
 
 #. Default: "Talcondition"
-#: UrbanDoc.py
 #: UrbanEventType.py
 msgid "urban_label_TALCondition"
 msgstr ""

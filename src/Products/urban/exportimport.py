@@ -2,7 +2,9 @@
 from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import moveElementAfter
 from Products.urban.utils import getMd5Signature
-from Products.urban.events.filesEvents import updateTemplateStylesEvent
+
+from plone.namedfile.file import NamedBlobFile
+
 import logging
 logger = logging.getLogger('urban: setuphandlers')
 
@@ -77,8 +79,16 @@ def updateTemplate(context, container, template, new_content, position_after='',
         status.append('updated')
     #else create a new template
     else:
-        new_template_id = container.invokeFactory("UrbanDoc", id=new_template_id, title=template['title'], file=new_content,
-                                                  TALCondition=('TALCondition' in template) and template['TALCondition'] or '')
+        new_template_id = container.invokeFactory(
+            "UrbanTemplate",
+            id=new_template_id,
+            title=template['title'],
+            odt_file=NamedBlobFile(
+                data=new_content,
+                contentType='applications/odt',
+            ),
+            TALCondition=('TALCondition' in template) and template['TALCondition'] or ''
+        )
         new_template = getattr(container, new_template_id)
         status.append('created')
 
@@ -92,7 +102,8 @@ def updateTemplate(context, container, template, new_content, position_after='',
         container.moveObjectToPosition(new_template.getId(), 0)
     for property, value in {'profileName': profile_name, 'md5Loaded': new_md5_signature, 'md5Modified': new_md5_signature}.items():
         setProperty(new_template, property, value)
-    updateTemplateStylesEvent(new_template, None)
+    # to adapt !!!
+    # updateTemplateStylesEvent(new_template, None)
     new_template.reindexObject()
     return status
 

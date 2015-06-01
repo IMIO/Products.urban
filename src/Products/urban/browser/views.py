@@ -141,12 +141,12 @@ class TemplatesSummary(BrowserView):
         self.editicon = 'edit.gif'
         self.editlink = 'edit'
 
-    def getUrbanDoc(self, folder):
-        return folder.listFolderContents(contentFilter={'portal_type':['UrbanDoc']})
+    def getUrbanTemplate(self, folder):
+        return folder.listFolderContents(contentFilter={'portal_type': ['UrbanTemplate']})
 
     def getGlobalTemplates(self):
         templates = ['globaltemplates']
-        for templ in self.getUrbanDoc(self.tool.globaltemplates):
+        for templ in self.getUrbanTemplate(self.tool.globaltemplates):
             templates.append({'o':templ, 's':self.isModified(templ)})
             self.tot_count += 1
         if len(templates) > 1 and templates[1]['o'].externalEditorEnabled():
@@ -166,7 +166,7 @@ class TemplatesSummary(BrowserView):
             uetfolder = getattr(configFolder, 'urbaneventtypes')
             for obj in uetfolder.objectValues('UrbanEventType'):
                 templ_by_event = [obj.Title()]
-                for templ in self.getUrbanDoc(obj):
+                for templ in self.getUrbanTemplate(obj):
                     self.tot_count += 1
                     templ_by_event.append({'o':templ, 's':self.isModified(templ)})
                 templ_by_type.append(templ_by_event)
