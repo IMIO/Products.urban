@@ -7,32 +7,33 @@
   <!-- ##code-section configure.zcml.header -->
   <!-- exclude can be removed when five.grok does the exclude -->
   <exclude package="zope.contentprovider" />
-  <include package="Products.Five"/>
+  <include package="collective.datagridcolumns"/>
+  <include package="collective.externaleditor"/>
+  <include package="collective.iconifieddocumentactions"/>
+  <include package="collective.js.jqueryui"/>
+  <include package="collective.z3cform.datagridfield"/>
   <include package="five.grok"/>
+  <include package="imio.actionspanel"/>
+  <include package="Products.Archetypes"/>
+  <include package="Products.CMFPlacefulWorkflow"/>
+  <include package="Products.DataGridField"/>
+  <include package="Products.Five"/>
   <include package="Products.GenericSetup" file="meta.zcml"/>
   <include package="Products.GenericSetup"/>
-  <include package="Products.DataGridField"/>
   <include package="Products.CMFCore" file="meta.zcml"/>
-  <include package="plone.app.portlets" file="meta.zcml" />
-  <include package="Products.Archetypes"/>
   <include package="Products.MasterSelectWidget"/>
-  <include package="collective.externaleditor"/>
-  <include package="collective.datagridcolumns"/>
+  <include package="plone.app.dexterity" />
+  <include package="plone.app.portlets" file="meta.zcml" />
   <include package="plone.app.referenceintegrity"/>
   <include package="plone.z3ctable"/>
-  <include package="collective.iconifieddocumentactions"/>
-  <include package="Products.CMFPlacefulWorkflow"/>
-  <include package="collective.js.jqueryui"/>
   <include package="plonetheme.imioapps"/>
-  <include package="imio.actionspanel"/>
-  <include package="collective.z3cform.datagridfield"/>
 
 
   <permission
     id="urban.viewurbanmap"
     title="Products.urban: ViewUrbanMap"
     />
-    
+
   <include package=".events" />
   <include package=".browser" />
   <include package=".migration" />
@@ -116,7 +117,7 @@
 
   <adapter
     name=".subtypes.urbandoc"
-    for=".interfaces.IUrbanDoc"
+    for=".docgen.UrbanDoc.IUrbanDoc"
     factory=".subtypes.urbandoc.UrbanDocExtender" />
 
   <adapter
