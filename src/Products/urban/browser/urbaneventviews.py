@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from Acquisition import aq_inner
 from Products.Five import BrowserView
 from Products.CMFPlone import PloneMessageFactory as _
@@ -99,7 +101,11 @@ class UrbanEventView(BrowserView):
     def _generateDocumentHref(self, context, template):
         """
         """
-        return "%s/create_urbandoc?template_uid=%s" % (context.absolute_url(), template.UID())
+        link = "{base_url}/urban-document-generation?doc_uid={uid}".format(
+            base_url=context.absolute_url(),
+            uid=template.UID()
+        )
+        return link
 
     def getUrbaneventtypes(self):
         """

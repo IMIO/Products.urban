@@ -18,6 +18,11 @@
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>
  <property name="klass">Products.urban.docgen.UrbanTemplate.UrbanTemplate</property>
+ <property name="behaviors">
+  <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
+  <element value="plone.app.content.interfaces.INameFromTitle"/>
+  <element value="collective.behavior.talcondition.behavior.ITALCondition"/>
+ </property>
  <property name="schema">Products.urban.docgen.UrbanTemplate.IUrbanTemplate</property>
  <property name="schema_policy">dexterity</property>
  <alias from="(Default)" to="(dynamic view)"/>

@@ -34,6 +34,7 @@
     title="Products.urban: ViewUrbanMap"
     />
 
+  <include package=".docgen" />
   <include package=".events" />
   <include package=".browser" />
   <include package=".migration" />
@@ -113,29 +114,6 @@
         Products.Archetypes.interfaces.IUIDCatalog"
     factory="plone.indexer.wrapper.IndexableObjectWrapper"
     provides="plone.indexer.interfaces.IIndexableObject"
-  />
-
-  <adapter
-    name=".subtypes.urbandoc"
-    for=".docgen.UrbanDoc.IUrbanDoc"
-    factory=".subtypes.urbandoc.UrbanDocExtender" />
-
-  <adapter
-    for="Products.urban.interfaces.IUrbanEvent"
-    factory=".appy_pod.UrbanEventAppyContext"
-    provides=".appy_pod.IAppyContext"
-  />
-
-  <adapter
-    for="Products.urban.interfaces.IGenericLicence"
-    factory=".appy_pod.UrbanLicenceGlobalTemplate"
-    provides=".appy_pod.IGlobalTemplates"
-  />
-
-  <adapter
-    for="Products.urban.interfaces.IEnvironmentBase"
-    factory=".appy_pod.EnvironmentLicenceGlobalTemplates"
-    provides=".appy_pod.IGlobalTemplates"
   />
 
   <adapter name="applicantInfosIndex" factory=".indexes.genericlicence_applicantinfoindex" />
