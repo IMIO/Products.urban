@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+
 from Products.CMFCore.utils import getToolByName
+
+from Products.urban.scripts.odtsearch import searchOneODT
 from Products.urban.utils import moveElementAfter
 from Products.urban.utils import getMd5Signature
 
@@ -7,6 +10,9 @@ from plone.namedfile.file import NamedBlobFile
 
 import logging
 logger = logging.getLogger('urban: setuphandlers')
+
+
+AVAILABLE_SUBTEMPLATES = {}
 
 
 def loga(msg, type="info", gslog=None):
@@ -21,37 +27,31 @@ def loga(msg, type="info", gslog=None):
     return msg
 
 
-def updateTemplates(context, container, templates, starting_position='', reload=False, replace_mod=False):
+def updateTemplates(context, container, templates, starting_position=''):
     log = []
     position_after = starting_position
     for template in templates:
         template_id = template['id']
-        #in the case of GLOBAL_TEMPLATES, the id already ends with '.odt'
-        if not template_id.endswith('.odt'):
-            template_id = "%s.odt" % template_id
         filePath = '%s/templates/%s' % (context._profile_path, template_id)
         new_content = file(filePath, 'rb').read()
-        log.append(updateTemplate(context, container, template, new_content, position_after, reload=reload, replace_mod=replace_mod))
+        log.append(updateTemplate(context, container, template, new_content, position_after))
         #log[-1][0] is the id of the last template added
         position_after = log[-1][0]
     return log
 
 
-def updateTemplate(context, container, template, new_content, position_after='', reload=False, replace_mod=False):
+def updateTemplate(context, container, template, new_content, position_after=''):
     def setProperty(file, property_name, property_value):
         if property_name in file.propertyIds():
             file.manage_changeProperties({property_name: property_value})
         else:
             file.manage_addProperty(property_name, property_value, "string")
 
-    new_template_id = template['id']
-    #in the case of GLOBAL_TEMPLATES, the id already ends with '.odt'
-    if not new_template_id.endswith('.odt'):
-        new_template_id = "%s.odt" % new_template_id
+    template_id = template['id']
     profile_name = context._profile_path.split('/')[-1]
-    status = [new_template_id]
+    status = [template_id]
     new_md5_signature = getMd5Signature(new_content)
-    old_template = getattr(container, new_template_id, None)
+    old_template = getattr(container, template_id, None)
     #if theres an existing template with the same id
     if old_template:
         #if not in the correct profile -> no changes
@@ -62,12 +62,7 @@ def updateTemplate(context, container, template, new_content, position_after='',
             # Is the template different on the file system
             if new_md5_signature != old_template.getProperty("md5Loaded"):
                 # We will replace unless the template has been manually modified and we don't force replace
-                if not replace_mod and getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
-                    status.append('no update: the template has been modified')
-            # No change on the file system. Forcing ?
-            elif reload:
-                # We will replace unless the template has been manually modified and we don't force replace
-                if not replace_mod and getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
+                if getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
                     status.append('no update: the template has been modified')
             else:
                 status.append('no changes')
@@ -79,20 +74,22 @@ def updateTemplate(context, container, template, new_content, position_after='',
         status.append('updated')
     #else create a new template
     else:
-        new_template_id = container.invokeFactory(
-            "UrbanTemplate",
-            id=new_template_id,
-            title=template['title'],
+        portal_type = template.pop('portal_type', 'UrbanTemplate')
+        if portal_type == 'UrbanTemplate':
+            template['merge_templates'] = getDefaultSubTemplates(context, template_id)
+
+        template_id = container.invokeFactory(
+            portal_type,
             odt_file=NamedBlobFile(
                 data=new_content,
                 contentType='applications/odt',
             ),
-            TALCondition=('TALCondition' in template) and template['TALCondition'] or ''
+            **template
         )
-        new_template = getattr(container, new_template_id)
+        new_template = getattr(container, template_id)
         status.append('created')
 
-    new_template.setFilename(new_template_id)
+    new_template.setFilename(template_id)
     new_template.setFormat("application/vnd.oasis.opendocument.text")
 
     #to do to if we added/updated a new template: the position in the folder and set some properties
@@ -106,6 +103,34 @@ def updateTemplate(context, container, template, new_content, position_after='',
     # updateTemplateStylesEvent(new_template, None)
     new_template.reindexObject()
     return status
+
+
+def getDefaultSubTemplates(context, template_id):
+    file_path = '%s/templates/%s' % (context._profile_path, template_id)
+    tree, search_results = searchOneODT(file_path, ["from document\(at=(.*),"], silent=True)
+    category = template_id.startswith('env') and 'env' or 'urb'
+    available_subtemplates = availableSubTemplates(context)
+
+    subtemplates = []
+    for result in search_results:
+        subtemplate_name = result['match'][0].groups()[0]
+        subtemplate = available_subtemplates[category].get(subtemplate_name, None)
+        if subtemplate:
+            line = {'pod_context_name': subtemplate_name, 'template': subtemplate}
+            subtemplates.append(line)
+
+    return subtemplates
+
+
+def availableSubTemplates(context):
+    globaltemplates = context.getSite().portal_urban.globaltemplates
+    env_subtemplates = globaltemplates.environmenttemplates
+    urb_subtemplates = globaltemplates.urbantemplates
+    subtemplates = {
+        'urb': dict([(sub.id.split('.')[0], sub.UID()) for sub in urb_subtemplates.objectValues()]),
+        'env': dict([(sub.id.split('.')[0], sub.UID()) for sub in env_subtemplates.objectValues()]),
+    }
+    return subtemplates
 
 
 def updateAllUrbanTemplates(context):
@@ -125,27 +150,20 @@ def addGlobalTemplates(context):
     module = __import__(module_name, fromlist=[attribute])
     global_templates = getattr(module, attribute)
 
-    reload_globals = False
-    replace_mod_globals = False
     site = context.getSite()
-    # we check if the step is called by the external method urban_replace_templates, with the param replace_globals
-    if 'reload_globals' in site.REQUEST.form:
-        reload_globals = True
-    if 'replace_mod_globals' in site.REQUEST.form:
-        replace_mod_globals = True
 
     log = []
     gslogger = context.getLogger('addGlobalTemplates')
     tool = getToolByName(site, 'portal_urban')
     templates_folder = getattr(tool, 'globaltemplates')
-    template_log = updateTemplates(context, templates_folder, global_templates['.'], replace_mod=replace_mod_globals, reload=reload_globals)
+    template_log = updateTemplates(context, templates_folder, global_templates['.'])
     for status in template_log:
         if status[1] != 'no changes':
             log.append(loga("'global templates', template='%s' => %s" % (status[0], status[1]), gslog=gslogger))
 
     for subfolder_id in ['urbantemplates', 'environmenttemplates']:
         templates_subfolder = getattr(templates_folder, subfolder_id)
-        template_log = updateTemplates(context, templates_subfolder, global_templates[subfolder_id], replace_mod=replace_mod_globals, reload=reload_globals)
+        template_log = updateTemplates(context, templates_subfolder, global_templates[subfolder_id])
         for status in template_log:
             if status[1] != 'no changes':
                 log.append(loga("'%s global templates', template='%s' => %s" % (subfolder_id, status[0], status[1]), gslog=gslogger))
@@ -167,14 +185,7 @@ def addUrbanEventTypes(context):
     module = __import__(module_name, fromlist=[attribute])
     urbanEventTypes = getattr(module, attribute)
 
-    reload_events = False
-    replace_mod_events = False
     site = context.getSite()
-    # we check if the step is called by the external method urban_replace_templates, with the param replace_events
-    if 'reload_events' in site.REQUEST.form:
-        reload_events = True
-    if 'replace_mod_events' in site.REQUEST.form:
-        replace_mod_events = True
 
     log = []
     gslogger = context.getLogger('addUrbanEventTypes')
@@ -205,7 +216,7 @@ def addUrbanEventTypes(context):
                 log.append(loga("%s: event='%s' => %s" % (urbanConfigId, id, 'created'), gslog=gslogger))
             last_urbaneventype_id = id
             #add the Files in the UrbanEventType
-            template_log = updateTemplates(context, newUet, uet['podTemplates'], replace_mod=replace_mod_events, reload=reload_events)
+            template_log = updateTemplates(context, newUet, uet['podTemplates'])
             for status in template_log:
                 if status[1] != 'no changes':
                     log.append(loga("%s: evt='%s', template='%s' => %s" % (urbanConfigId, last_urbaneventype_id, status[0], status[1]), gslog=gslogger))

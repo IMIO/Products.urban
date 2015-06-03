@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<object name="UrbanTemplate" meta_type="Dexterity FTI" i18n:domain="collective.documentgenerator"
+<object name="UrbanTemplate" meta_type="Dexterity FTI" i18n:domain="Products.urban"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">UrbanTemplate</property>
  <property name="description" i18n:translate="">None</property>
@@ -17,8 +17,8 @@
  </property>
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>
- <property name="klass">Products.urban.UrbanTemplate.UrbanTemplate</property>
- <property name="schema">Products.urban.UrbanTemplate.IUrbanTemplate</property>
+ <property name="klass">Products.urban.docgen.UrbanTemplate.UrbanTemplate</property>
+ <property name="schema">Products.urban.docgen.UrbanTemplate.IUrbanTemplate</property>
  <property name="schema_policy">dexterity</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="@@edit"/>

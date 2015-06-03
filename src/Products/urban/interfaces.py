@@ -160,10 +160,6 @@ class IUrbanConfigurationValue(Interface):
     """Marker interface for .UrbanConfigurationValue.UrbanConfigurationValue
     """
 
-class IUrbanDoc(Interface):
-    """Marker interface for .UrbanDoc.UrbanDoc
-    """
-
 class IEnvironmentBase(Interface):
     """Marker interface for .EnvironmentBase.EnvironmentBase
     """

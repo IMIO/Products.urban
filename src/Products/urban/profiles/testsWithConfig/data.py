@@ -53,7 +53,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "urb-accuse", 'title': "Accusé de réception"},
+                {'id': "urb-accuse.odt", 'title': "Accusé de réception"},
             ),
         },
         {
@@ -81,7 +81,7 @@ urbanEventTypes = {
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': [],
             'TALCondition': "python: False",
-            'podTemplates': ({'id': "urb-avis", 'title': "Courrier de demande d'avis"},),
+            'podTemplates': ({'id': "urb-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
         },
         {
@@ -116,8 +116,8 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "urb-rapp-service", 'title': "Rapport du Service"},
-                {'id': "urb-rapp-college", 'title': "Rapport du Collège"},
+                {'id': "urb-rapp-service.odt", 'title': "Rapport du Service"},
+                {'id': "urb-rapp-college.odt", 'title': "Rapport du Collège"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
         },

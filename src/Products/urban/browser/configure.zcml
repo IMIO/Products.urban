@@ -206,7 +206,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IUrbanDoc"
+  for="Products.urban.docgen.UrbanDoc.IUrbanDoc"
      name="urbandocview"
      class=".urbandocview.UrbanDocView"
      template="templates/urbandocview.pt"

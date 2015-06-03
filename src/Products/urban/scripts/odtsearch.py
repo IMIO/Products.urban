@@ -149,7 +149,7 @@ def searchAndReplaceAllODT(filenames, result, recursive_search, search_args):
             searchAndReplaceAllODT(files, result, recursive_search, search_args)
 
 
-def searchOneODT(filename, findexpr, ignorecase=False):
+def searchOneODT(filename, findexpr, ignorecase=False, silent=False):
     """
      Search for appyPOD code pattern 'findexpr' in the 'annotations' and 'text input' zones of odt file 'file_name'
     """
@@ -158,12 +158,12 @@ def searchOneODT(filename, findexpr, ignorecase=False):
     if zip_file:
         content_file = openOdtContent(zip_file)
         odt_content = content_file.read()
-        zip_file.close()
+    zip_file.close()
 
     if odt_content:
         #search...
         xml_tree = xml.dom.minidom.parseString(odt_content)
-        searchresult = searchInOdtXMLContent(xml_tree, filename, findexpr, ignorecase)
+        searchresult = searchInOdtXMLContent(xml_tree, filename, findexpr, ignorecase, silent)
 
         return xml_tree, searchresult
 
@@ -178,15 +178,15 @@ def searchAndReplaceOneODT(filename, findexpr, replace_expr=None, destination=No
     name = 'f%f' % time.time()
     tempFolder = os.path.join(tempfile.gettempdir(), name)
     os.mkdir(tempFolder)
-    unzip(filename, tempFolder)
-    zip_file = zipfile.ZipFile(filename)
     xml_tree, searchresult = searchOneODT(filename, findexpr, ignorecase)
 
     if searchresult and replace_expr:
+        unzip(filename, tempFolder)
+        zip_file = zipfile.ZipFile(filename)
         newcontent = getNewOdtContent(xml_tree, searchresult, replace_expr)
         createNewOdt(zip_file, newcontent, 'replace-' + filename, destination)
+        zip(filename, tempFolder, odf=True)
 
-    zip(filename, tempFolder, odf=True)
     return searchresult
 
 
@@ -216,18 +216,18 @@ def getNewOdtContent(xml_tree, searchresult, replace_expr):
         replaced = []
         start = 0
         end = 0
-        for match in result['matches']:
-            end = match['start']
+        for match in result['match']:
+            end = match.start()
             replaced.append(line[start:end])
             replaced.append(replace_expr)
-            start = match['end']
+            start = match.end()
         replaced.append(line[start:])
         replaced = ''.join(replaced)
         result['XMLnode'].data = replaced
     return xml_tree.toxml('utf-8')
 
 
-def searchInOdtXMLContent(xml_tree, filename, findexpr, ignorecase=False):
+def searchInOdtXMLContent(xml_tree, filename, findexpr, ignorecase=False, silent=False):
     logging.debug("searching text content of '%s'" % filename)
     #the two xml tags we want to browse are 'office:annotation' and 'text:text-input', since its the only place
     #where appyPOD code can be written
@@ -239,7 +239,8 @@ def searchInOdtXMLContent(xml_tree, filename, findexpr, ignorecase=False):
         filename=filename,
         element_type='commentaire',
         findexpr=findexpr,
-        ignorecase=ignorecase
+        ignorecase=ignorecase,
+        silent=silent
     )
 
     expressions = xml_tree.getElementsByTagName('text:text-input')
@@ -250,13 +251,14 @@ def searchInOdtXMLContent(xml_tree, filename, findexpr, ignorecase=False):
             element_type='champ de saisie',
             findexpr=findexpr,
             firstfound=not bool(result),
-            ignorecase=ignorecase
+            ignorecase=ignorecase,
+            silent=silent
         )
     )
     return result
 
 
-def searchInTextElements(elements, filename, element_type, findexpr, firstfound=True, ignorecase=False):
+def searchInTextElements(elements, filename, element_type, findexpr, firstfound=True, ignorecase=False, silent=False):
     text_lines = []
     node_groups = [reachTextNodeLevel(element) for element in elements]
     flags = ignorecase and re.I or 0
@@ -266,15 +268,15 @@ def searchInTextElements(elements, filename, element_type, findexpr, firstfound=
             if node.nodeType == node.TEXT_NODE:
                 text = node.data
                 for expr in findexpr:
-                    matches = re.finditer(expr, text, flags=flags)
-                    match_indexes = [{'start':match.start(), 'end':match.end()} for match in matches]
-                    if match_indexes:
-                        if firstfound:
+                    matches = list(re.finditer(expr, text, flags=flags))
+                    if matches:
+                        if firstfound and not silent:
                             print filename
                             firstfound = False
-                        text_lines.append({'expr': expr, 'matches': match_indexes, 'XMLnode': node})
-                        for match in match_indexes:
-                            printMatch(text, match['start'], match['end'], findexpr, '%s %i' % (element_type, i))
+                        text_lines.append({'match': matches, 'XMLnode': node})
+                        if not silent:
+                            for match in matches:
+                                printMatch(text, match.start(), match.end(), findexpr, '%s %i' % (element_type, i))
         i = i + 1
     return text_lines
 
@@ -384,8 +386,8 @@ def displaySearchSummary(searchresult, filenames, findexpr, replace_expr):
         detail = "%s" % filename
         result = searchresult[filename]
         for subresult in result:
-            total_matches = total_matches + len(subresult['matches'])
-            nbr_matches = nbr_matches + len(subresult['matches'])
+            total_matches = total_matches + len(subresult['match'])
+            nbr_matches = nbr_matches + len(subresult['match'])
         detail = "%s : %i match" % (detail, nbr_matches)
         if nbr_matches > 1:
             detail = "%ses" % detail
