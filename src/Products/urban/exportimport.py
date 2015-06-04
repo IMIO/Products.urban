@@ -77,6 +77,7 @@ def updateTemplate(context, container, template, new_content, position_after='')
         portal_type = template.pop('portal_type', 'UrbanTemplate')
         if portal_type == 'UrbanTemplate':
             template['merge_templates'] = getDefaultSubTemplates(context, template_id)
+            template['style_template'] = getDefaultStyleTemplate(context)
 
         template_id = container.invokeFactory(
             portal_type,
@@ -105,13 +106,19 @@ def updateTemplate(context, container, template, new_content, position_after='')
     return status
 
 
+def getDefaultStyleTemplate(context):
+    style_template = getattr(context.getSite().portal_urban.globaltemplates, 'styles.odt')
+    return [style_template.UID()]
+
+
 def getDefaultSubTemplates(context, template_id):
     file_path = '%s/templates/%s' % (context._profile_path, template_id)
     tree, search_results = searchOneODT(file_path, ["from document\(at=(.*),"], silent=True)
     category = template_id.startswith('env') and 'env' or 'urb'
     available_subtemplates = availableSubTemplates(context)
 
-    subtemplates = []
+    footer_template = available_subtemplates[category].get('footer', None)
+    subtemplates = footer_template and [{'pod_context_name': 'footer', 'template': footer_template}] or []
     for result in search_results:
         subtemplate_name = result['match'][0].groups()[0]
         subtemplate = available_subtemplates[category].get(subtemplate_name, None)

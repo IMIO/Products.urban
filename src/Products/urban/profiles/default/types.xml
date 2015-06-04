@@ -112,8 +112,6 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanTemplate"
          meta_type="Dexterity FTI"/>
- <object name="UrbanDoc"
-         meta_type="Dexterity FTI"/>
  <object name="UrbanEventInquiry"
          meta_type="Factory-based Type Information with dynamic views"/>
  <!-- ##/code-section TYPES -->

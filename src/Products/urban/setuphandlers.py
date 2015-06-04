@@ -89,7 +89,7 @@ def postInstall(context):
     site.portal_memberdata.manage_changeProperties(ext_editor=True)
     site.portal_properties.site_properties.manage_changeProperties(
         typesUseViewActionInListings=(
-            'Image', 'File', 'UrbanDoc', 'UrbanTemplate', 'SubTemplate', 'StyleTemplate'
+            'Image', 'File', 'UrbanTemplate', 'SubTemplate', 'StyleTemplate'
         )
     )
     #for collective.externaleditor
@@ -97,8 +97,6 @@ def postInstall(context):
         from collective.externaleditor.browser.controlpanel import IExternalEditorSchema
         control_panel_adapter_obj = IExternalEditorSchema(site)
         control_panel_adapter_obj.ext_editor = True
-        if not 'UrbanDoc' in control_panel_adapter_obj.externaleditor_enabled_types:
-            control_panel_adapter_obj.externaleditor_enabled_types.append('UrbanDoc')
         if not 'UrbanTemplate' in control_panel_adapter_obj.externaleditor_enabled_types:
             control_panel_adapter_obj.externaleditor_enabled_types.append('UrbanTemplate')
         if not 'SubTemplate' in control_panel_adapter_obj.externaleditor_enabled_types:
@@ -947,7 +945,9 @@ def createLicence(site, licence_type, data):
         #generate the documents
         if not urban_event.objectValues():
             for template in urban_event.getTemplates():
-                createObject('GeneratedUrbanDoc', urban_event, template)
+                urban_event.REQUEST.set('doc_uid', template.UID())
+                generation_view = urban_event.restrictedTraverse('urban-document-generation')
+                generation_view.generate_persistent_doc()
     return licence
 
 

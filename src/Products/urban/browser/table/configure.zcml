@@ -125,7 +125,7 @@
      for="zope.interface.Interface
           Products.urban.browser.table.interfaces.ITitleColumn
           Products.urban.browser.table.interfaces.IItemForUrbanTable
-          Products.urban.docgen.UrbanDoc.IUrbanDoc"
+          Products.urban.interfaces.IUrbanDoc"
      factory=".column.DocumentTitleDisplay"
      provides="Products.urban.browser.table.interfaces.ITitleCell"
   />

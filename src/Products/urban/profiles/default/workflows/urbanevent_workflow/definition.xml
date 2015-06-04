@@ -14,7 +14,6 @@
  <permission>urban: Add RecipientCadastre</permission>
  <permission>Review portal content</permission>
  <permission>Modify view template</permission>
- <permission>urban: Add UrbanDoc</permission>
  <permission>Access contents information</permission>
  <state state_id="closed"
         title="closed"
@@ -120,11 +119,6 @@
    <permission-role>Reader</permission-role>
   </permission-map>
   <permission-map name="urban: Add RecipientCadastre"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Editor</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanDoc"
                   acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Editor</permission-role>

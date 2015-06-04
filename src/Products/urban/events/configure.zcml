@@ -107,10 +107,6 @@
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".urbanEventInquiryEvents.setLinkedInquiry" />
 
-  <!--subscriber for="Products.urban.UrbanTemplate.IUrbanTemplate
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".filesEvents.updateAllTemplatesStylesEvent" /-->
-
   <subscriber for="..interfaces.IUrbanEventType
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventTypesEvents.updateKeyEvent" />

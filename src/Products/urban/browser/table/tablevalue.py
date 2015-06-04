@@ -1,19 +1,21 @@
 ## -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
+
+from Products.urban.config import URBAN_TYPES
+from Products.urban.browser.table.interfaces import IItemForUrbanTable
+from Products.urban.browser.table.interfaces import IBrainForUrbanTable
+from Products.urban.browser.table.interfaces import IObjectForUrbanTable
+from Products.urban.interfaces import IUrbanDoc
+
+from Products.ZCatalog.Lazy import LazyMap
+
 from plone.memoize import instance
 
 from z3c.table.value import ValuesMixin
 
 from zope.interface import implements
 from zope.component import queryAdapter
-
-from Products.ZCatalog.Lazy import LazyMap
-
-from Products.urban.config import URBAN_TYPES
-from Products.urban.browser.table.interfaces import IItemForUrbanTable
-from Products.urban.browser.table.interfaces import IBrainForUrbanTable
-from Products.urban.browser.table.interfaces import IObjectForUrbanTable
 
 from plone import api
 
@@ -77,7 +79,7 @@ class ItemForUrbanTable():
         actions = {}
 
         if self.canBeEdited():
-            external_edition = obj.portal_type in ['UrbanDoc'] and portal_properties.site_properties.ext_editor
+            external_edition = IUrbanDoc.providedBy(obj) and obj.portal_type in portal_properties.site_properties.ext_editor
             edit_action = external_edition and 'external_edit' or 'edit'
             actions['edit'] = edit_action
 

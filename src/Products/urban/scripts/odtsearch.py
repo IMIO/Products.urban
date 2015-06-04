@@ -18,7 +18,7 @@ def unzip(f, folder, odf=False):
         Unzips file p_f into p_folder. p_f can be any anything accepted by the
         zipfile.ZipFile constructor. p_folder must exist.
         If p_odf is True, p_f is considered to be an odt or ods file and this
-        function will return a dict containing the     content of content.xml
+        function will return a dict containing the  content of content.xml
         and styles.xml from the zipped file.
     '''
     zipFile = zipfile.ZipFile(f)

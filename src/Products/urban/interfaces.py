@@ -312,13 +312,19 @@ class IEnvClassThree(Interface):
     """Marker interface for EnvClassThree
     """
 
+
 class IEnvCLassOne(Interface):
-    """Marker interface for .EnvClassOne
+    """Marker interface for EnvClassOne
     """
 
 
 class IContactFolder(Interface):
     """Marker interface for folders containing contacts
+    """
+
+
+class IUrbanDoc(Interface):
+    """Marker interface for generated document.
     """
 
 ##/code-section FOOT

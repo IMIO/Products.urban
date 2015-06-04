@@ -103,7 +103,7 @@ setDefaultRoles('urban: Add Locality', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add LicenceConfig', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PersonTitleTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Inquiry', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add UrbanEventOpinionRequest', ('Manager', 'Owner', 'Contributor'))
+setDefaultRoles('urban: Add UrbanEventOpinionRequest', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add OrganisationTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanConfigurationValue',  ('Manager', ))
@@ -162,8 +162,8 @@ APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation']
 #the different templates used to structure a document
 GLOBAL_TEMPLATES = {
     '.': [
-        {'id':'statsins.odt', 'title':'Fichier modèle pour les statistiques INS'},
         {'id':'styles.odt', 'portal_type': 'StyleTemplate', 'title':'Fichier gérant les styles communs aux différents modèles de document'},
+        {'id':'statsins.odt', 'title':'Fichier modèle pour les statistiques INS'},
     ],
     'urbantemplates': [
         {'id':'header.odt', 'portal_type': 'SubTemplate', 'title':'En-tête des modèles urbanisme'},
