@@ -109,7 +109,7 @@ def zip(f, folder, odf=False):
     zipFile.close()
 
 
-def searchODTs(filenames, findexpr, replace=None, destination='tmp', ignorecase=False, recursive=False):
+def searchODTs(filenames, findexpr, replace=None, destination='tmp', ignorecase=False, recursive=False, silent=False):
     """
      Search for appyPOD code pattern 'findexpr' in the 'annotations' and 'text input' zones of all the odt files 'filenames'
      Replace the matches by 'replace'.
@@ -122,13 +122,15 @@ def searchODTs(filenames, findexpr, replace=None, destination='tmp', ignorecase=
         'ignorecase': ignorecase,
         'replace_expr': replace,
         'destination': destination,
+        'silent': silent,
     }
 
     logging.debug('\n'.join(['%s, %s' % (k, v) for k, v in search_args.iteritems() if v]))
 
     searchAndReplaceAllODT(filenames, result, recursive, search_args)
 
-    displaySearchSummary(result, filenames, findexpr, replace)
+    if not silent:
+        print displaySearchSummary(result, filenames, findexpr, replace)
 
     return result
 
@@ -168,7 +170,7 @@ def searchOneODT(filename, findexpr, ignorecase=False, silent=False):
         return xml_tree, searchresult
 
 
-def searchAndReplaceOneODT(filename, findexpr, replace_expr=None, destination=None, ignorecase=False):
+def searchAndReplaceOneODT(filename, findexpr, replace_expr=None, destination=None, ignorecase=False, silent=False):
     """
      Search for appyPOD code pattern 'findexpr' in the 'annotations' and 'text input' zones of odt file 'file_name'
      Replace the matches by 'replace_expr'
@@ -178,7 +180,7 @@ def searchAndReplaceOneODT(filename, findexpr, replace_expr=None, destination=No
     name = 'f%f' % time.time()
     tempFolder = os.path.join(tempfile.gettempdir(), name)
     os.mkdir(tempFolder)
-    xml_tree, searchresult = searchOneODT(filename, findexpr, ignorecase)
+    xml_tree, searchresult = searchOneODT(filename, findexpr, ignorecase, silent)
 
     if searchresult and replace_expr:
         unzip(filename, tempFolder)
@@ -398,7 +400,7 @@ def displaySearchSummary(searchresult, filenames, findexpr, replace_expr):
         out.append(', ')
     out.append("%i matches" % total_matches)
 
-    print(''.join(out))
+    return ''.join(out)
 
 
 ################################################################
