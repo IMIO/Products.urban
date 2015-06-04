@@ -75,7 +75,7 @@ ploneFormTabbing._buildTabs = function(container, legends) {
                 tab += '&nbsp;&nbsp;<img class="urban-edit-tabbing"'+
                        'onclick="javascript:window.location=gni+&quot;/edit#'+
                        lid+
-                       '&quot;" src="edit.gif"></a></li>'
+                       '&quot;" src="edit.png"></a></li>'
             } else if ((window.location.href.search("/edit") == -1) &&
                (lid == 'fieldsetlegend-attachments')){
                 gni = window.location.pathname;
