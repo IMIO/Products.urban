@@ -27,23 +27,25 @@ from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
-from Products.CMFPlone import PloneMessageFactory as _
-import logging
-logger = logging.getLogger('urban: UrbanEventType')
-from zope.i18n import translate
+from Products.Archetypes.public import DisplayList
 from Products.CMFCore.Expression import Expression
 from Products.CMFCore.utils import getToolByName
-from Products.Archetypes.public import DisplayList
-from Products.DataGridField.SelectColumn import SelectColumn
-from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
+from Products.CMFPlone import PloneMessageFactory as _
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.PageTemplates.Expressions import getEngine
+from Products.urban.docgen.UrbanTemplate import IUrbanTemplate
+from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
+from zope.i18n import translate
 
-slave_fields_keyevent= (
+import logging
+logger = logging.getLogger('urban: UrbanEventType')
+
+slave_fields_keyevent = (
     # if in a keyEvent, display a selectbox
-    {'name': 'keyDates',
-     'action': 'show',
-     'hide_values': (True, ),
+    {
+        'name': 'keyDates',
+        'action': 'show',
+        'hide_values': (True,),
     },
 )
 
@@ -159,14 +161,6 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
     schema = UrbanEventType_schema
 
     ##code-section class-header #fill in your manual code here
-    aliases = {
-        '(Default)'  : 'base_view',
-        'view'       : '(Default)',
-        'edit'       : 'base_edit',
-        'index.html' : '(Default)',
-        'properties' : 'base_metadata',
-        'sharing'    : '',
-    }
     ##/code-section class-header
 
     # Methods
@@ -244,7 +238,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         for fieldname in activated_fields:
             field = UrbanEventInquiry_schema.get(fieldname)
             if field:
-    	        is_date_field = field.getType() == 'Products.Archetypes.Field.DateTimeField'
+                is_date_field = field.getType() == 'Products.Archetypes.Field.DateTimeField'
                 if is_date_field:
                     activated_date_fields.append(
                         (
@@ -253,6 +247,11 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
                         )
                     )
         return DisplayList([('eventDate', self.getEventDateLabel().decode('utf-8'))] + activated_date_fields)
+
+    security.declarePublic('getUrbanTemplates')
+    def getTemplates(self):
+        templates = [obj for obj in self.objectValues() if IUrbanTemplate.providedBy(obj)]
+        return templates
 
 
 

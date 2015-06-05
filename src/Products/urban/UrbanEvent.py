@@ -313,7 +313,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         """
           Returns contained templates (File)
         """
-        return [template for template in self.getUrbaneventtypes().objectValues()]
+        return self.getUrbaneventtypes().getTemplates()
 
     security.declarePublic('eventDateLabel')
     def eventDateLabel(self):

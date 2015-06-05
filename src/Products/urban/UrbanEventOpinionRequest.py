@@ -78,12 +78,13 @@ class UrbanEventOpinionRequest(UrbanEvent, BrowserDefaultMixin):
         """
           Returns contained templates (File)
         """
-        if len(self.getUrbaneventtypes().listFolderContents({'portal_type': 'UrbanTemplate'})):
-            return [template for template in self.getUrbaneventtypes().listFolderContents({'portal_type': 'UrbanTemplate'})
-                    if api.content.get_state(template) == 'enabled']
+        custom_templates = self.getUrbaneventtypes().getTemplates()
+        if custom_templates:
+            return custom_templates
+
         urbantool = api.portal.get_tool('portal_urban')
         opinionrequest_config = getattr(getattr(urbantool, self.aq_parent.portal_type.lower()).urbaneventtypes, "config-opinion-request")
-        return opinionrequest_config.listFolderContents({'portal_type': 'UrbanTemplate'})
+        return opinionrequest_config.getTemplates()
 
     security.declarePublic('getLinkedOrganisationTerm')
     def getLinkedOrganisationTerm(self):

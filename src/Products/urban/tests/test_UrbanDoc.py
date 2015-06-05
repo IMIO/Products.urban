@@ -16,13 +16,12 @@ class TestUrbanDoc(BrowserTestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
-        self.urban = self.portal.urban
         self.portal_urban = self.portal.portal_urban
         self.portal_urban.setGenerateSingletonDocuments(False)
 
         # create a test BuildLicence
         login(self.portal, 'urbaneditor')
-        buildlicence_folder = self.urban.buildlicences
+        buildlicence_folder = self.portal.urban.buildlicences
         testlicence_id = 'test_buildlicence'
         buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
         self.licence = getattr(buildlicence_folder, testlicence_id)
@@ -40,15 +39,6 @@ class TestUrbanDoc(BrowserTestCase):
     def tearDown(self):
         api.content.delete(self.licence)
         transaction.commit()
-
-    def test_generation_condition_with_disabled_state(self):
-        api.content.transition(self.urbandoc_model, 'disable')
-        may_generate_document = self.urbandoc_model.can_be_generated(self.licence)
-        self.assertTrue(not may_generate_document)
-
-    def test_generation_condition_with_enabled_state(self):
-        may_generate_document = self.urbandoc_model.can_be_generated(self.licence)
-        self.assertTrue(may_generate_document)
 
     def test_link_to_generate_document_is_hidden_with_disabled_state(self):
         api.content.transition(self.urbandoc_model, 'disable')

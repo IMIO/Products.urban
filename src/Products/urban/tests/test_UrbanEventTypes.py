@@ -103,6 +103,7 @@ class TestUrbanEventTypes(unittest.TestCase):
         portal = self.layer['portal']
         catalog = self.catalog
         wf_tool = api.portal.get_tool('portal_workflow')
+
         #Check that generated .odt files in urbanEvents are NOT under any wf policy
         interfaceName = interfaceToName(portal, IAcknowledgmentEvent)
         urban_event = catalog(object_provides=interfaceName)[0].getObject()
@@ -113,31 +114,3 @@ class TestUrbanEventTypes(unittest.TestCase):
         except Exception, error:
             exception_msg = "%s" % error
         self.assertEqual(exception_msg, "No workflow provides '${name}' information.")
-
-    def testListAvailableUrbanTemplates(self):
-        """
-        When a template is disabled in the config, it should be removed from the list of documents to generate.
-        When a template is (re)enabled, it should (re)appears in the list.
-        """
-        portal = self.layer['portal']
-        wf_tool = api.portal.get_tool('portal_workflow')
-        catalog = self.catalog
-        urban_event_type = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'accuse-de-reception', None)
-        all_templates = [obj for obj in urban_event_type.objectValues() if obj.portal_type == 'UrbanDoc']
-        folder_path = "%s/urban/buildlicences" % '/'.join(portal.getPhysicalPath())
-        urban_event = catalog(object_provides=interfaceToName(portal, IAcknowledgmentEvent), path={'query': folder_path, 'depth': 2})
-        urban_event = urban_event[0].getObject()
-        #by default all the templates should be enabled
-        self.assertEqual(len(all_templates), len(urban_event.getTemplates()))
-        for i in range(len(all_templates)):
-            self.assertEqual(all_templates[i].Title(), urban_event.getTemplates()[i].Title())
-        #disable the first template, the available doc list should contain one element less
-        wf_tool.doActionFor(all_templates[0], 'disable')
-        self.assertEqual(len(all_templates) - 1, len(urban_event.getTemplates()))
-        for i in range(len(all_templates) - 1):
-            self.assertEqual(all_templates[i + 1].Title(), urban_event.getTemplates()[i].Title())
-        #re-enable the first template, the available doc list should contain one element more
-        wf_tool.doActionFor(all_templates[0], 'enable')
-        self.assertEqual(len(all_templates), len(urban_event.getTemplates()))
-        for i in range(len(all_templates)):
-            self.assertEqual(all_templates[i].Title(), urban_event.getTemplates()[i].Title())
