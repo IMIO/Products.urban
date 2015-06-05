@@ -23,12 +23,16 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from DateTime import DateTime
+
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.CMFCore.utils import getToolByName
-from zope.i18n import translate
+
+from Products.urban.interfaces import IUrbanDoc
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
+
+from zope.i18n import translate
 ##/code-section module-header
 
 schema = Schema((
@@ -289,15 +293,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     schema = UrbanEvent_schema
 
     ##code-section class-header #fill in your manual code here
-    #implements(interfacesToImplement)
-    aliases = {
-        '(Default)'  : 'UrbanEvent_view',
-        'view'       : '(Default)',
-        'index.html' : '(Default)',
-        'edit'       : 'UrbanEvent_edit',
-        'properties' : 'base_metadata',
-        'sharing'    : '',
-        }
     ##/code-section class-header
 
     # Methods
@@ -477,7 +472,8 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         """
           Return the documents (File) of the UrbanEvent
         """
-        return self.listFolderContents(contentFilter={"portal_type": "UrbanDoc"})
+        documents = [obj for obj in self.objectValues() if IUrbanDoc.providedBy(obj)]
+        return documents
 
     def getAttachments(self):
         """
