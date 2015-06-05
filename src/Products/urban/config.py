@@ -162,20 +162,20 @@ APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation']
 #the different templates used to structure a document
 GLOBAL_TEMPLATES = {
     '.': [
-        {'id':'styles.odt', 'portal_type': 'StyleTemplate', 'title':'Fichier gérant les styles communs aux différents modèles de document'},
+        {'id':'styles.odt', 'portal_type': 'StyleTemplate', 'title':'Styles urban'},
         {'id':'statsins.odt', 'title':'Fichier modèle pour les statistiques INS'},
     ],
     'urbantemplates': [
-        {'id':'header.odt', 'portal_type': 'SubTemplate', 'title':'En-tête des modèles urbanisme'},
-        {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page des modèles urbanisme'},
-        {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' des modèles urbanisme'},
-        {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures des modèles urbanisme'},
+        {'id':'header.odt', 'portal_type': 'SubTemplate', 'title':'En-tête urbanisme'},
+        {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page urbanisme'},
+        {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' urbanisme'},
+        {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures urbanisme'},
     ],
     'environmenttemplates': [
-        {'id':'header.odt', 'portal_type': 'SubTemplate', 'title':'En-tête des modèles environnement'},
-        {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page des modèles environnement'},
-        {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' des modèles environnement'},
-        {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures des modèles environnement'},
+        {'id':'header.odt', 'portal_type': 'SubTemplate', 'title':'En-tête environnement'},
+        {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page environnement'},
+        {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' environnement'},
+        {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures environnement'},
     ],
 }
 #the different formats proposed for generating document
