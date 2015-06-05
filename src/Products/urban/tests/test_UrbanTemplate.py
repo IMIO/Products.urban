@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.testing import URBAN_TESTS_LICENCES, URBAN_TESTS_CONFIG
-from Products.urban.interfaces import IAcknowledgmentEvent
 
 from plone import api
 
 from plone.app.testing import login
-
-from zope.component.interface import interfaceToName
 
 import unittest
 
@@ -39,28 +36,6 @@ class TestUrbanTemplates(unittest.TestCase):
     def test_generation_condition_with_enabled_state(self):
         may_generate_document = self.urbandoc_model.can_be_generated(self.portal)
         self.assertTrue(may_generate_document)
-
-
-class TestUrbanDocuments(unittest.TestCase):
-
-    layer = URBAN_TESTS_LICENCES
-
-    def setUp(self):
-        portal = self.layer['portal']
-        self.portal_urban = portal.portal_urban
-        self.portal_setup = portal.portal_setup
-        login(portal, 'urbaneditor')
-
-    def testGeneratedDocumentIsNotUnderActivationWF(self):
-        portal = self.layer['portal']
-        catalog = api.portal.get_tool('portal_catalog')
-        wf_tool = api.portal_catalog('portal_workflow')
-        #Check that generated .odt files in urbanEvents are NOT under any wf policy
-        interfaceName = interfaceToName(portal, IAcknowledgmentEvent)
-        urban_event = catalog(object_provides=interfaceName)[0].getObject()
-        document = getattr(urban_event, 'urb-accuse.odt', None)
-        msg = 'No workflow expected for Generated documents'
-        self.assertTrue(wf_tool.getDefaultChainFor(document.portal_type) == (), msg)
 
 
 class TestTemplateMethods(unittest.TestCase):
