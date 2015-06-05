@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
+
 from plone.app.testing import login
-from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 from Products.urban.tests.helpers import BrowserTestCase
 
 from plone import api
@@ -11,12 +12,13 @@ import transaction
 
 class TestUrbanDoc(BrowserTestCase):
 
-    layer = URBAN_TESTS_CONFIG
+    layer = URBAN_TESTS_CONFIG_FUNCTIONAL
 
     def setUp(self):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
         self.portal_urban = self.portal.portal_urban
+        self.portal_urban.setGenerateSingletonDocuments(False)
 
         # create a test BuildLicence
         login(self.portal, 'urbaneditor')
@@ -39,33 +41,17 @@ class TestUrbanDoc(BrowserTestCase):
         api.content.delete(self.licence)
         transaction.commit()
 
-    def test_TALCondition_visible_on_document_templates(self):
-        self.browser.open(self.urbandoc_model.absolute_url() + '/view')
-        self.assertTrue('TALCondition' in self.browser.contents)
-
-    def test_TALCondition_hidden_on_generated_documents(self):
-        event = self.urban_event
-        generated_doc = event.objectValues('UrbanDoc')[0]
-        self.browser.open(generated_doc.absolute_url() + '/view')
-        self.assertTrue('TALCondition' not in self.browser.contents)
-
-    def test_mayGenerateUrbanDoc_with_false_TALcondition(self):
-        self.urbandoc_model.setTALCondition('python: False')
-        may_generate_document = self.urbandoc_model.mayGenerateUrbanDoc(self.licence)
+    def test_generation_condition_with_disabled_state(self):
+        api.content.transition(self.urbandoc_model, 'disable')
+        may_generate_document = self.urbandoc_model.can_be_generated(self.licence)
         self.assertTrue(not may_generate_document)
 
-    def test_mayGenerateUrbanDoc_with_true(self):
-        self.urbandoc_model.setTALCondition('python: True')
-        may_generate_document = self.urbandoc_model.mayGenerateUrbanDoc(self.licence)
+    def test_generation_condition_with_enabled_state(self):
+        may_generate_document = self.urbandoc_model.can_be_generated(self.licence)
         self.assertTrue(may_generate_document)
 
-    def test_link_to_generate_document_is_hidden_when_TALcondition_is_false(self):
-        self.urbandoc_model.setTALCondition('python: False')
-
-        # delete generated document (if any) to be sure to not confuse links to
-        # generate documents from the link of generated documents
-        document = self.urban_event.objectValues()[0]
-        api.content.delete(document)
+    def test_link_to_generate_document_is_hidden_with_disabled_state(self):
+        api.content.transition(self.urbandoc_model, 'disable')
         transaction.commit()
 
         self.browser.open(self.urban_event.absolute_url())
@@ -73,14 +59,7 @@ class TestUrbanDoc(BrowserTestCase):
 
         self.assertTrue(link not in self.browser.contents)
 
-    def test_link_to_generate_document_is_visible_when_TALcondition_is_true(self):
-        self.urbandoc_model.setTALCondition('python: True')
-
-        # delete generated document (if any) to be sure to not confuse links to
-        # generate documents from the link of generated documents
-        document = self.urban_event.objectValues()[0]
-        api.content.delete(document)
-        transaction.commit()
+    def test_link_to_generate_document_is_visible_with_enabled_state(self):
 
         self.browser.open(self.urban_event.absolute_url())
         link = '{title}</a>'.format(title=self.urbandoc_model.Title())

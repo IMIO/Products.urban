@@ -13,10 +13,10 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
     """
     """
 
-    def __call__(self):
-        persisted_doc = self.generate_persistent_doc()
+    def generate_persistent_doc(self):
+        persisted_doc = super(UrbanDocGenerationView, self).generate_persistent_doc()
         directlyProvides(persisted_doc, IUrbanDoc)
-        self.redirects(persisted_doc)
+        return persisted_doc
 
     def get_base_generation_context(self):
         """

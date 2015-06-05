@@ -11,4 +11,10 @@
         permission="zope2.View"
         />
 
+    <adapter
+      for="Products.urban.docgen.UrbanTemplate.IUrbanTemplate
+           zope.interface.Interface"
+      factory=".condition.UrbanTemplateCondition"
+    />
+
 </configure>
