@@ -107,6 +107,14 @@ def genericlicence_streetsuid(object):
 
 
 @indexer(IGenericLicence)
+def genericlicence_streetnumber(object):
+    numbers = []
+    for location in object.getWorkLocations():
+        numbers.append(location['number'])
+    return numbers
+
+
+@indexer(IGenericLicence)
 def genericlicence_lastkeyevent(object):
     for event in reversed(object.getUrbanEvents()):
         event_type = event.getUrbaneventtypes()

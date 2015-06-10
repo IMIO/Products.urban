@@ -76,6 +76,9 @@ class UrbanSearchView(BrowserView):
         ]
         return ','.join(interfaces)
 
+    def getAllowedStates(self):
+        return 'enabled'
+
     def enoughSearchCriterias(self, request):
         """
         """
@@ -103,7 +106,7 @@ class UrbanSearchView(BrowserView):
         search_by = request.get('search_by', '')
         licencetypes = request.get('foldertypes', [])
         arguments = {
-            'street': self.getArgument('street'),
+            'street': self.getArgument(['street', 'number']),
             'folderref': self.getArgument('folderref'),
             'name': self.getArgument(['name', 'contacttypes']),
             'parcel': self.getParcelRefArguments(['division', 'section', 'radical', 'bis', 'exposant', 'puissance', 'partie', 'browseoldparcels']),
@@ -171,14 +174,19 @@ class UrbanSearchView(BrowserView):
             ptool.addPortalMessage(msg(u"please_enter_more_letters"), type="info")
             return res
 
-    def searchByStreet(self, licencetypes, street):
+    def searchByStreet(self, licencetypes, street, number):
         """
           Find licences with location paramaters
         """
-        catalogTool = api.portal.get_tool('portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
         street = street.replace('(', ' ').replace(')', ' ')
-        street_uids = [brain.UID for brain in catalogTool(portal_type='Street', Title=street)]
-        return catalogTool(portal_type=licencetypes, StreetsUID=street_uids)
+        street_uids = [brain.UID for brain in catalog(portal_type='Street', Title=street)]
+        result = catalog(
+            portal_type=licencetypes,
+            StreetsUID=street_uids,
+            StreetNumber=number
+        )
+        return result
 
     def searchByFolderReference(self, licencetypes, folderref):
         """

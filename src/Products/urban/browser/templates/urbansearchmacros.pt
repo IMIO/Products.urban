@@ -1,5 +1,6 @@
 <div metal:define-macro="searchbystreetMacro" i18n:domain="urban"
       tal:define="last_encoded_street request/street|nothing;
+                  last_encoded_street_number request/number|nothing;
                   portal_url nocall:context/portal_url;
                   portal portal_url/getPortalObject;
                   js python: ['datagridautocomplete.js']">
@@ -10,9 +11,11 @@
               tal:attributes="src string:$portal_url/$item">
       </script>
      </tal:js>
+     <span class="datagridwidget-table-edit">
      <div style="display:none" class="edit_common"
           tal:attributes="data-context-call python: portal.absolute_url();
                           data-object-provides view/getStreetInterfaces;
+                          data-workflow-states view/getAllowedStates;
                           data-surf-site python: '';
                           data-search-site python: 'true';">
      </div>
@@ -21,6 +24,12 @@
             size="50"
             type="text"
             tal:attributes="value last_encoded_street" />
+     <span>n°:</span>
+     <input name="number"
+            size="5"
+            type="text"
+            tal:attributes="value last_encoded_street_number" />
+     </span>
 </div>
 
 

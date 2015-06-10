@@ -32,7 +32,7 @@
     id="urban.viewurbanmap"
     title="Products.urban: ViewUrbanMap"
     />
-    
+
   <include package=".events" />
   <include package=".browser" />
   <include package=".migration" />
@@ -142,6 +142,7 @@
   <adapter name="parcelInfosIndex" factory=".indexes.genericlicence_parcelinfoindex" />
   <adapter name="parcelInfosIndex" factory=".indexes.parcellingterm_parcelinfoindex" />
   <adapter name="StreetsUID" factory=".indexes.genericlicence_streetsuid" />
+  <adapter name="StreetNumber" factory=".indexes.genericlicence_streetnumber" />
   <adapter name="last_key_event" factory=".indexes.genericlicence_lastkeyevent" />
   <adapter name="last_key_event" factory=".indexes.urbaneventtype_lastkeyevent" />
   <adapter name="folder_manager" factory=".indexes.genericlicence_foldermanager" />
