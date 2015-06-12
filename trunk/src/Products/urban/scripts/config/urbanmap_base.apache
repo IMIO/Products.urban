@@ -1,0 +1,16 @@
+WSGIPythonHome #VIRTUALENVDIR#
+# Possible log values include: debug, info, notice, warn, error, crit, alert, emerg.
+
+<VirtualHost #SERVERIP#:80>
+    ServerName #APACHESERVER#
+    Options -Indexes
+    DocumentRoot #URBANMAPDIR#/urbanmap/public
+    <Directory #URBANMAPDIR#>
+    Order allow,deny
+    Allow from all
+    </Directory>
+    WSGIScriptAlias /xxx #URBANMAPWSGI#
+    ErrorLog #APACHEERRORLOG#
+    LogLevel error
+    CustomLog #APACHEACCESSLOG# combined
+</VirtualHost>

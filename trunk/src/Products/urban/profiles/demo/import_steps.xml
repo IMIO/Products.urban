@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<import-steps>
+<import-step
+            id="urban-addDemoLicences"
+            handler="Products.urban.setuphandlers.addDemoLicences"
+            title="Add a a dummy license of each type, then generate all its events and documents for demo purpose"
+            version="2011-09-15T15:00:00.00000">
+Add some objects for demo purpose
+</import-step>
+</import-steps>

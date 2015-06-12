@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+<div metal:fill-slot="top_slot">
+<metal:block metal:use-macro="here/global_defines/macros/defines" />
+<div tal:define="member context/@@plone_portal_state/member;
+                 dummy python:request.set(member.has_permission('Manage portal', here) and 'enable_border' or 'disable_border', 1)" />
+</div>
+
+<div metal:fill-slot="main">
+<metal:main_macro define-macro="main">
+    <metal:body define-macro="body_macro"
+                tal:define="kssClassesView context/@@kss_field_decorator_view;
+                            getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
+                            templateId template/getId;
+                            isAnon python: context.portal_membership.isAnonymousUser()">
+
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+        <h1 class="documentFirstHeading">
+            <metal:field use-macro="python:here.widget('title', mode='view')">
+            Title
+            </metal:field>
+        </h1>
+
+        <div tal:replace="structure provider:plone.belowcontenttitle" />
+
+        <p class="documentDescription">
+            <metal:field use-macro="python:here.widget('description', mode='view')">
+            Description
+            </metal:field>
+        </p>
+        <div class="field">
+        <tal:addable_types define="acts context/allowedContentTypes" repeat="act acts" i18n:domain="urban">
+        <form tal:condition="python: not isAnon" name="quickAdd"
+              tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post">
+          <input type="hidden" name="type_name" value="#" tal:attributes="value act/id" />
+          <input type="submit" id="event" value="#"
+                 tal:attributes="value python: 'add_' + act.id;
+                                 class view/getCSSClass"
+                 i18n:attributes="value" />
+         </form>
+        </tal:addable_types>
+        </div>
+
+        <div tal:replace="structure provider:plone.abovecontentbody" />
+
+        <div>
+         <tal:listing content="structure view/renderListing" />
+        </div>
+
+    </metal:body>
+    <div tal:replace="structure provider:plone.belowcontentbody" />
+
+</metal:main_macro>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,3 @@
+mister;Archi1Name;Archi1FirstName;Archi1Society;Archi1Street;Archi1Number;Archi1ZipCode;Archi1City;Archi1Email;Archi1Tel;Archi1Fax;00000000097
+mister;Archi2Name;Archi2FirstName;Archi2Society;Archi2Street;Archi2Number;Archi2ZipCode;Archi2City;Archi2Email;Archi2Tel;Archi2Fax;00000000097
+madam;Archi3Name;Archi3FirstName;Archi3Society;Archi3Street;Archi3Number;Archi3ZipCode;Archi3City;Archi3Email;Archi3Tel;Archi3Fax;00000000097

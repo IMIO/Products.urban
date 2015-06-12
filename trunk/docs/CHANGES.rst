@@ -1,0 +1,190 @@
+:orphan:
+
+Changes
+=======
+
+
+1.11.0 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+1.10.0 (2015-02-24)
+-------------------
+
+- Can add attachments directly on the licence (#10351).
+
+
+1.9.0 (2015-02-17)
+------------------
+
+- Add environment licence class two.
+
+- Use extra value for person title signaletic in mail address.
+
+
+1.8.0 (2015-02-16)
+------------------
+
+- Add environment licence class one.
+
+- Bug fix: config folder are not allowed anymore to be selected as values 
+  for the field 'additionalLegalConditions'.
+
+
+1.7.0
+-----
+
+- Add optional field RGBSR.
+
+- Add field "deposit type" for UrbanEvent (#10263).
+
+
+1.6.0
+-----
+
+- Use sphinx to generate documentation
+
+- Add field "Périmètre de Rénovation urbaine"
+
+- Add field "Périmètre de Revitalisation urbaine"
+
+- Add field "Zones de bruit de l'aéroport"
+
+
+1.5.0
+-----
+
+- Update rubrics and integral/sectorial conditions vocabularies
+
+
+1.4.0
+-----
+
+- Add schedule view
+
+
+1.3.0
+-----
+
+- Use plonetheme.imioapps as theme rather than urbasnkin
+
+- Add fields "pm Title" and "pm Description" on urban events to map the fields "Title"
+  and "Description" on plonemeeting items (#7147).
+
+- Add a richer context for python expression in urbanEvent default text.
+
+- Factorise all licence views through a new generic, extendable and customisable view (#6942).
+  The fields display order is now given by the licence class schemata and thus this order 
+  is always consistent between the edit form and the view form.
+
+
+1.2.0
+------
+
+- Added search on parcel Historic and fixed search on old parcels (#6681).
+
+
+1.1.9
+-----
+
+- Opinion request fields are now active for MiscDemand licences (#5933).
+
+- Added custom view for urban config and licence configs (#5892).
+
+- Fixed urban formtabbing for plone 4.2.5 (#6423).
+
+- Python expression can now be used in urbanEvent default text (#6406).
+
+- "Deliberation college" documents are now disabled when using pm.wsclient (#6407).
+
+- Added configuration step for pm.wsclient (#6400).
+
+- Added rubrics and conditions config values for environment procedures (#5027).
+
+- Fixed search on parcel historic (#6681).
+
+- Added popup to see all licences related to a parcel historic (#5858).
+
+- Generate mailing lists from contacts folder (architects, notaries, geometrcicians) (#6378).
+
+- Adds pm.wsclient dependency.
+
+
+1.1.8
+-----
+
+- Converted all urban listings into z3c tables.
+
+- Simplified the opinion request configuration system (#5711).
+
+- Added more columns on search result listing (#5535).
+
+- Vocabulary term now have a the possibility to have a custom numbering that will only be displayed in forms but
+  not in generated documents (#5408).
+
+- An alternative name of divisions can be configured for generated documents (#5507).
+
+- Address names of mailing documents can now be inverted (#4763).
+
+- [bugfix] Create the correct link for UrbanDoc in the urban events when the licence is not
+  in 'edit' state anymore.
+
+
+1.1.7
+-----
+
+- Added options bar to licences listing (#5476, #5250).
+
+- Use events rather than archetype built-in default method system to fill licence fields with default values
+  because of performance issues (#5423).
+
+- Parcels can be added on ParcellingTerm objects. Now, parcellingterm objects can be found by parcel references (#5537).
+
+- A helper popup is now available on specific features datagrid to edit related fields without navigating through the
+  edit form (#5576).
+
+- Default text can be defined for urban event text fields as well (#5508).
+
+bugfixes:
+- Folder search by parcel reference is now working with lowercase inputs.
+
+
+1.1.6
+-----
+
+- Added field Transparence on class Layer (#5197).
+
+- Added style 'UrbanAdress' used to customize style in the adress field of documents (#4764).
+
+- Added beta version of licence type 'Environmental Declaration'.
+
+- Use an autocomplete for the licence search by street (#5163).
+
+- Text of the specificFeatures fields are now editable within a licence (CU1, CU2, notaryletter) (#5280).
+
+- Added an optional field 'architects' on MiscDemand class (#5286).
+
+- Added field 'represented by society' on applicant/proprietary (#5282).
+
+- Now, the licence search works with old parcels references and also works with incomplete parcels references as well (#5099).
+
+- Urban editors can now add parcels manually (#5285).
+
+- Added validator on reference field to check that each reference is unique (#5430).
+
+- Show historic of old parcels on licences "map" tab and allow to show the location of their "children" (#4754).
+
+- Urban editors can now add parcel owner manually on inquiry events (#5289).
+
+- Added search by "folder reference" in urban folder search (#4878).
+
+- Licences tabs can be renamed and reordered (#5465).
+
+bugfixes:
+- UrbanEvent view doesnt crash anymore when a wrong TAL condition is defined on an UrbanDoc.
+- corrected template "accuse de reception d'une reclamation" (#5168, #5198).
+- corrected the display of the specificFeatures for notary letters.
+- The "50m area" used in inquiries doesnt crash anymore when finding parcel owner without address (#5376).
+- Added warning on inquiry event when parcel owners without adress are found (#5289).

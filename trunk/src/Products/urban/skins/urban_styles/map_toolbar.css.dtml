@@ -1,0 +1,67 @@
+/* <dtml-with base_properties> (do not remove this :) */
+/* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
+         
+    .smallmap {
+     width:800px;
+     height:600px;
+    }
+
+    .olControlPanel div { 
+          display:block;
+          width:  24px;
+          height: 24px;
+          margin: 5px;
+        }
+        
+        .olControlPanel .olControlNavigationItemActive { 
+          width:  22px;  
+          height: 22px;
+          background-image: url("&dtml-portal_url;/portal_skins/openlayers/theme/default/img/pan_on.png");
+        }
+        .olControlPanel .olControlNavigationItemInactive { 
+          width:  22px;  
+          height: 22px;
+          background-image: url("&dtml-portal_url;/portal_skins/openlayers/theme/default/img/pan_off.png");
+        }
+
+      
+
+        .olControlPanel .olControlMeasureDistanceItemActive { 
+          width:  22px;  
+          height: 22px;
+          background-image: url("&dtml-portal_url;/portal_skins/openlayers/theme/default/img/draw_line_on.png");
+        }
+        .olControlPanel .olControlMeasureDistanceItemInactive { 
+          width:  22px;  
+          height: 22px;
+          background-image: url("&dtml-portal_url;/portal_skins/openlayers/theme/default/img/draw_line_off.png");
+        }
+
+        .olControlPanel .olControlMeasureAreaItemActive { 
+          width:  22px;  
+          height: 22px;
+          background-image: url("&dtml-portal_url;/portal_skins/openlayers/theme/default/img/draw_polygon_on.png");
+        }
+        .olControlPanel .olControlMeasureAreaItemInactive { 
+          width:  22px;  
+          height: 22px;
+          background-image: url("&dtml-portal_url;/portal_skins/openlayers/theme/default/img/draw_polygon_off.png");
+        }
+
+        .olControlPanel .olControlGetFeatureItemActive { 
+          width:  22px;  
+          height: 22px;
+      border : 1px solid red;
+      background-repeat:no-repeat;
+      background-position:center;
+          background-image: url("&dtml-portal_url;/portal_skins/openlayers/theme/default/img/overview_replacement.gif");
+        }
+        .olControlPanel .olControlGetFeatureItemInactive { 
+          width:  22px;  
+          height: 22px;
+      background-repeat:no-repeat;
+      background-position:center;
+          background-image: url("&dtml-portal_url;/portal_skins/openlayers/theme/default/img/overview_replacement.gif");
+        }  
+
+/* </dtml-with> */

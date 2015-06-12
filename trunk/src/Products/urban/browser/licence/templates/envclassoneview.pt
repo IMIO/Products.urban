@@ -1,0 +1,14 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+  <body>
+    <metal:main fill-slot="main">
+      <tal:main_macro define="main_macro view/getLicenceMainTemplateMacro">
+        <metal:test use-macro="main_macro" />
+      </tal:main_macro>
+    </metal:main>
+  </body>
+</html>

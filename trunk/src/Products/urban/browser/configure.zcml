@@ -1,0 +1,428 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="urban">
+
+  <include package=".licence" />
+  <include package=".table" />
+  <include package=".schedule" />
+
+  <browser:page
+      for="*"
+      name="wmc"
+      class=".views.WMC"
+      attribute="wmc"
+      permission="zope2.Public"
+      />
+
+  <browser:page
+     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+     name="redirectto_urban_root_view"
+     template="templates/redirectto_urban_root_view.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+      for="Products.urban.interfaces.IUrbanTool"
+      name="getProxy"
+      class=".views.ProxyController"
+      attribute="getProxy"
+      permission="zope2.View"
+      />
+
+  <browser:viewlet
+      name="urban.firefox"
+      manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
+      class=".viewlets.FirefoxViewlet"
+      permission="zope2.View"
+      template="firefox.pt"
+      />
+
+  <browser:page
+     for="*"
+     name="mayAccessUrban"
+     class=".urbanview.MayAccessUrban"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATFolder"
+     name="urban_view"
+     class=".urbanview.UrbanView"
+     template="templates/urbanview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATFolder"
+     name="urban_root_view"
+     class=".urbanview.UrbanRootView"
+     template="templates/urban_root_view.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATFolder"
+     name="urban-macros"
+     template="templates/urbanmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATFolder"
+     name="urbainxml"
+     class=".urbain_220.UrbainXMLExport"
+     permission="zope2.View"
+  />
+
+  <!-- Old migrated instances use an ATBTreeFolder to store the licences... -->
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATBTreeFolder"
+     name="urban_view"
+     class=".urbanview.UrbanView"
+     template="templates/urbanview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="globalmacros"
+     template="templates/globalmacros.pt"
+     permission="zope2.View"
+  />
+
+
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATBTreeFolder"
+     name="urban-macros"
+     template="templates/urbanmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="map"
+     class=".mapview.MapView"
+     template="templates/map.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="fullmap"
+     class=".mapview.FullMapView"
+     template="templates/map_full.pt"
+     permission="urban.viewurbanmap"
+  />
+
+  <browser:page
+     for="*"
+     name="map-macros"
+     template="templates/map_macros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="pm.wsclient"
+     class=".pm-wsclientview.PMWSClientView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanTool"
+     name="urbanconfigview"
+     class=".urbanconfigview.UrbanConfigView"
+     template="templates/urbanconfigview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanTool"
+     name="urbanconfigmacros"
+     template="templates/urbanconfigmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.ILicenceConfig"
+     name="licenceconfigview"
+     class=".licenceconfigview.LicenceConfigView"
+     template="templates/urbanconfigview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.ILicenceConfig"
+     name="licenceconfigmacros"
+     template="templates/urbanconfigmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IContact"
+     name="contactview"
+     class=".contactview.ContactView"
+     template="templates/contactview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IContact"
+     name="contactmacros"
+     template="templates/contactmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEventInquiry"
+     name="urbaneventinquiryview"
+     class=".urbaneventviews.UrbanEventInquiryView"
+     template="templates/urbaneventinquiryview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="create_urbandoc"
+     class=".factory.CreateUrbanDoc"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="urbaneventview"
+     class=".urbaneventviews.UrbanEventView"
+     template="templates/urbaneventview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="urbanevent-macros"
+     for="Products.urban.interfaces.IUrbanEvent"
+     template="templates/urbaneventmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanDoc"
+     name="urbandocview"
+     class=".urbandocview.UrbanDocView"
+     template="templates/urbandocview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IInquiry"
+     name="inquiryview"
+     class=".inquiryview.InquiryView"
+     template="templates/inquiryview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="longtextview"
+     class=".longtextview.LongTextView"
+     template="templates/longtextview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="longtextview"
+     class=".longtextview.LongTextView"
+     template="templates/longtextview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="parcelrecordsview"
+     class=".parcelrecordsview.ParcelRecordsView"
+     template="templates/parcelrecordsview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="create_urbanevent"
+     class=".factory.CreateUrbanEvent"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="parcelhistoricrecordsview"
+     class=".parcelrecordsview.ParcelHistoricRecordsView"
+     template="templates/parcelhistoricrecordsview.pt"
+     permission="zope2.View"
+  />
+
+  <!-- register the parcel recordview for parcellingterms as well since they can now contains parcels object -->
+  <browser:page
+     for="Products.urban.interfaces.IParcellingTerm"
+     name="parcelrecordsview"
+     class=".parcelrecordsview.ParcelRecordsView"
+     template="templates/parcelrecordsview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IParcellingTerm"
+     name="parcelhistoricrecordsview"
+     class=".parcelrecordsview.ParcelHistoricRecordsView"
+     template="templates/parcelrecordsview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IParcellingTerm"
+     name="parcellingtermview"
+     class=".parcellingtermview.ParcellingTermView"
+     template="templates/parcellingtermview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="fieldeditoverlay"
+     class=".fieldoverlay_edit.FieldEditView"
+     template="templates/fieldoverlay_edit.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="urbansearchview"
+     class=".urbansearchview.UrbanSearchView"
+     template="templates/urbansearchview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="urbansearch-macros"
+     for="*"
+     template="templates/urbansearchmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="parcelsinfo"
+     class=".parcelsinfo.ParcelsInfo"
+     template="templates/parcelsinfo.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="urbanstatsview"
+     class=".urbanstatsview.UrbanStatsView"
+     template="templates/urbanstatsview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="urbanstats-macros"
+     for="*"
+     template="templates/urbanstatsmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="searchparcels"
+     class=".searchparcelsview.SearchParcelsView"
+     template="templates/searchparcels.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+      for="Products.urban.interfaces.IUrbanTool"
+      name="templatessum"
+      class=".views.TemplatesSummary"
+      template="templates/templatessummary.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      for="Products.urban.interfaces.IUrbanTool"
+      name="parcelsconsistency"
+      class=".parcelsconsistencyview.ParcelsConsistencyView"
+      template="templates/parcelsconsistencyview.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATFolder"
+     name="parcellings_folderview"
+     class=".urban_configfolderview.ParcellingsFolderView"
+     template="templates/urban_configfolderview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATFolder"
+     name="geometricians_folderview"
+     class=".urban_configfolderview.GeometriciansFolderView"
+     template="templates/urban_configfolderview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATFolder"
+     name="notaries_folderview"
+     class=".urban_configfolderview.NotariesFolderView"
+     template="templates/urban_configfolderview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATFolder"
+     name="architects_folderview"
+     class=".urban_configfolderview.ArchitectsFolderView"
+     template="templates/urban_configfolderview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATFile"
+     name="attachment_view"
+     class=".attachment_view.AttachmentView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+      for="Products.urban.interfaces.IContactFolder"
+      name="getemails"
+      class=".urban_configfolderview.ContactsFolderView"
+      attribute="getEmails"
+      permission="zope2.View"
+  />
+
+  <configure package="imio.actionspanel">
+
+    <browser:viewlet
+       name="imio.actionspanel"
+       for="Products.urban.interfaces.IUrbanEvent"
+       manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+       class=".browser.viewlets.ActionsPanelViewlet"
+       template="browser/actions_panel_viewlet.pt"
+       permission="zope2.View"
+     />
+
+    <browser:page
+        for="Products.urban.interfaces.IUrbanEvent"
+        name="actions_panel"
+        class="Products.urban.browser.event_actionspanel.EventActionsPanelView"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        template="browser/actions_panel.pt"
+        allowed_attributes="render"
+        permission="zope2.View" />
+
+  </configure>
+
+</configure>

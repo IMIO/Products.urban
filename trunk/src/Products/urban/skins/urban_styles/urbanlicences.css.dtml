@@ -1,0 +1,45 @@
+/*
+** urban licences style sheet
+*/
+
+/* <dtml-with base_properties> (do not remove this :) */
+/* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
+
+#plone-contentmenu-factories {
+  display: none !important;
+}
+
+#plone-contentmenu-actions {
+  display: none !important;
+}
+
+#map_page
+{
+        width:                  200px;
+        height:                 200px;
+
+        border-style:   solid;
+        border-width:   1px;
+
+        float:                  left;
+
+        margin:                 0px 5px 5px 0px;
+}
+
+#map
+{
+        width:                  500px;
+        height:                 500px;
+
+        border-style:   solid;
+        border-width:   1px;
+
+        margin:                 0px 5px 5px 0px;
+}
+
+#map-holder
+{
+        text-align:             center;
+}
+
+/* </dtml-with> */

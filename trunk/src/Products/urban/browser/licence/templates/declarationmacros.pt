@@ -1,0 +1,18 @@
+<metal:description define-macro="description_macro" i18n:domain="urban">
+
+    <!--tal:vars define="exclude python:[]"-->
+        <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
+        </metal:parent_call>
+    <!--/tal:vars-->
+
+</metal:description>
+
+<metal:road define-macro="road_macro" i18n:domain="urban">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/road_macro">
+    </metal:parent_call>
+</metal:road>
+
+<metal:location define-macro="location_macro" i18n:domain="urban">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro">
+    </metal:parent_call>
+</metal:location>

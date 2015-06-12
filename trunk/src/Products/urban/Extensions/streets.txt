@@ -1,0 +1,5 @@
+City1;1000;1;Street1
+City1;1000;2;Street2
+City2;1001;3;Street1
+City2;1001;4;Street2
+City2;1001;5;Street3

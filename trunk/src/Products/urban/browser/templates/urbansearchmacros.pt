@@ -1,0 +1,111 @@
+<div metal:define-macro="searchbystreetMacro" i18n:domain="urban"
+      tal:define="last_encoded_street request/street|nothing;
+                  last_encoded_street_number request/number|nothing;
+                  portal_url nocall:context/portal_url;
+                  portal portal_url/getPortalObject;
+                  js python: ['datagridautocomplete.js']">
+     <tal:js repeat="item js">
+      <script type="text/javascript"
+              charset="iso-8859-1"
+              tal:condition="python:exists('portal/%s' % item)"
+              tal:attributes="src string:$portal_url/$item">
+      </script>
+     </tal:js>
+     <span class="datagridwidget-table-edit">
+     <div style="display:none" class="edit_common"
+          tal:attributes="data-context-call python: portal.absolute_url();
+                          data-object-provides view/getStreetInterfaces;
+                          data-workflow-states view/getAllowedStates;
+                          data-surf-site python: '';
+                          data-search-site python: 'true';">
+     </div>
+     <input name="street"
+            class="dataGridAutocompleteColumn"
+            size="50"
+            type="text"
+            tal:attributes="value last_encoded_street" />
+     <span>n°:</span>
+     <input name="number"
+            size="5"
+            type="text"
+            tal:attributes="value last_encoded_street_number" />
+     </span>
+</div>
+
+
+<div metal:define-macro="searchbyfolderreferenceMacro" i18n:domain="urban"
+        tal:define="last_encoded_reference request/folderref|nothing">
+ <p align="left" class="discreet" i18n:translate="urban_label_searchbyfolderreference_descr">
+      Enter the folder reference. You can use '*' to define if you search on a partial word
+ </p>
+ <input size="50" type="text" name="folderref" tal:attributes="value python: last_encoded_reference">
+</div>
+
+
+<div metal:define-macro="searchbynameMacro" i18n:domain="urban"
+        tal:define="last_encoded_name request/name|nothing;
+                    contact_types view/getContactTypes;
+                    contacts_checked python: request.get('contacttypes', [])">
+ <input id="contacttypes" type="checkbox" name="contacttypes" value="Applicant"
+         tal:define="type_checked python: not contacts_checked or 'Applicant' in contacts_checked"
+         tal:attributes=" checked python: type_checked and 'checked' or ''" />
+                <label tal:content="python: 'Applicant'" i18n:domain="plone" i18n:translate="">Contact type</label>
+ <span tal:repeat="contact_type contact_types">
+                    <input id="contacttypes" type="checkbox" name="contacttypes"
+                     tal:define="type_checked python:contact_type in contacts_checked or ''"
+                      tal:attributes="value contact_type; checked python: type_checked and 'checked' or ''" />
+                <label tal:content="contact_type" i18n:domain="plone" i18n:translate="">Contact type</label>
+ </span>
+ <p align="left" class="discreet" i18n:translate="urban_label_searchbyname_descr">
+      Enter the name, the surname or the national register number.  You can use '*' to define if you search on a partial word
+ </p>
+ <input size="50" type="text" name="name" tal:attributes="value python: last_encoded_name">
+</div>
+
+<div metal:define-macro="searchbyparcelMacro" i18n:domain="urban">
+ <input type="hidden" name="search_arg" value="parcel"/>
+ <input type="hidden" name="search_arg" value="NO PARCEL VALUE SO FAR"/>
+ <span tal:define="division request/division|nothing;
+                 section request/section|nothing;
+                 radical request/radical|nothing;
+                 bis request/bis|nothing;
+                 exposant request/exposant|nothing;
+                 puissance request/puissance|nothing;
+                 partie request/partie|nothing;
+                 divisions view/getDivisions|nothing;
+                 browseoldparcels request/browseoldparcels|nothing">
+
+             <div class='discreet' i18n:translate="urban_label_complete_parcel">Please enter the complete parcel informations</div>
+             <table class="listing">
+              <thead>
+               <tr>
+                <th><strong i18n:translate="">Division</strong></th>
+                <th><strong i18n:translate="urban_label_section">Section</strong></th>
+                <th><strong i18n:translate="urban_label_radical">Radical</strong></th>
+                <th><strong i18n:translate="urban_label_bis">Bis</strong></th>
+                <th><strong i18n:translate="urban_label_exposant">Exposant</strong></th>
+                <th><strong i18n:translate="urban_label_puissance">Puissance</strong></th>
+                <th><strong i18n:translate="urban_label_partie">Partie</strong></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr align=center>
+                 <td>
+                 <select name="division" value="division">
+                    <tal:block repeat="div divisions">
+                        <option tal:attributes="selected python: str(div['da']) == division; value python: div['da'];" tal:content="python: div['divname']" />
+                    </tal:block>
+                 </select>
+                 </td>
+                 <td><input style="text-transform: uppercase" size="5" maxlength="1" type="text" name="section" tal:attributes="value section"></td>
+                 <td><input size="5" maxlength="4" type="text" name="radical" tal:attributes="value radical"></td>
+                 <td>/ <input size="4" maxlength="2" type="text" name="bis" tal:attributes="value bis"></td>
+                 <td><input style="text-transform: uppercase" size="5" maxlength="1" type="text" name="exposant" tal:attributes="value exposant"></td>
+                 <td><input size="5" type="text" name="puissance" maxlength="2" tal:attributes="value puissance"></td>
+                 <td><input type="checkbox" name="partie" tal:attributes="value partie"></td>
+                 </tr>
+             </table>
+             <input type="checkbox" name="browseoldparcels" value="1" checked="" tal:attributes="checked browseoldparcels"/>
+             <label i18n:translate="urban_browse_old_parcels">Browse old parcels (Only works with the parcel reference)</label>
+ </span>
+</div>

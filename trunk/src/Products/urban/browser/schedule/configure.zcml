@@ -1,0 +1,168 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:grok="http://namespaces.zope.org/grok"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="urban">
+
+  <grok:grok package=".scheduleview"/>
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="licenceschedulelisting"
+     class=".scheduleview.EventsListingForLicenceView"
+     template="templates/licenceschedulelisting.pt"
+     permission="zope2.View"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+     factory="..table.column.TitleColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="titleColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTable
+          Products.urban.browser.table.interfaces.ITitleColumn"
+     factory=".table.ScheduleLicenceTitleColumnHeader"
+     provides="z3c.table.interfaces.IColumnHeader"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTableForLicence"
+     factory=".table.ScheduleEventTitleColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="lateEventtitleColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTableForLicence"
+     factory=".table.TimeDelayColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="timeDelayColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTableForLicence"
+     factory=".table.DelayTerm"
+     provides="z3c.table.interfaces.IColumn"
+     name="delayTermColumn"
+  />
+
+  <!--adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+     factory=".table.ScheduleEventDatesColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="eventDatesColumn"
+  /-->
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+     factory=".table.AllScheduledEventsOfLicenceColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="foldermanagerColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.schedule.interfaces.IScheduleListingTable"
+     factory="..table.column.FoldermanagerColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="allscheduledeventsColumn"
+  />
+
+  <!-- adapter for the default values in the licence events form inputs -->
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          z3c.form.interfaces.IForm
+          Products.urban.browser.schedule.interfaces.IScheduleEventField
+          collective.z3cform.datagridfield.interfaces.IDataGridField"
+     factory=".form.defaultValueForLicenceEventField"
+     provides="z3c.form.interfaces.IValue"
+     name="default"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".vocabulary.folderManagersVocabularyFactory"
+    name="urban.folder_managers"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".vocabulary.buildlicenceEventsVocabularyFactory"
+    name="urban.buildlicence_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".vocabulary.parceloutlicenceEventsVocabularyFactory"
+    name="urban.parceloutlicence_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".vocabulary.declarationEventsVocabularyFactory"
+    name="urban.declaration_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".vocabulary.divisionEventsVocabularyFactory"
+    name="urban.division_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".vocabulary.urbancertificateoneEventsVocabularyFactory"
+    name="urban.urbancertificateone_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".vocabulary.urbancertificatetwoEventsVocabularyFactory"
+    name="urban.urbancertificatetwo_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".vocabulary.notaryletterEventsVocabularyFactory"
+    name="urban.notaryletter_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".vocabulary.envclassoneEventsVocabularyFactory"
+    name="urban.envclassone_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".vocabulary.envclasstwoEventsVocabularyFactory"
+    name="urban.envclasstwo_schedulable_events"
+  />
+
+  <utility
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    component=".vocabulary.envclassthreeEventsVocabularyFactory"
+    name="urban.envclassthree_schedulable_events"
+  />
+
+</configure>

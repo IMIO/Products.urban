@@ -1,0 +1,50 @@
+<registry>
+  <records interface="plone.app.referenceintegrity.interfaces.ISettings">
+    <value key="reference_types">
+        <element>licenceArchitects</element>
+        <element>licenceFolderManagers</element>
+        <element>licenceParcelling</element>
+        <element>notary</element>
+        <element>parcelOutGeometricians</element>
+        <element>recipients</element>
+        <element>referenceableVocabularyTerm</element>
+    </value>
+  </records>
+  <records interface="collective.js.jqueryui.controlpanel.IJQueryUIPlugins">
+      <value key="ui_core">False</value>
+      <value key="ui_widget">False</value>
+      <value key="ui_mouse">False</value>
+      <value key="ui_position">False</value>
+      <value key="ui_draggable">False</value>
+      <value key="ui_droppable">False</value>
+      <value key="ui_resizable">False</value>
+      <value key="ui_selectable">False</value>
+      <value key="ui_sortable">False</value>
+      <value key="ui_accordion">False</value>
+      <value key="ui_autocomplete">True</value>
+      <value key="ui_button">False</value>
+      <value key="ui_dialog">False</value>
+      <value key="ui_slider">False</value>
+      <value key="ui_tabs">False</value>
+      <value key="ui_datepicker">False</value>
+      <value key="ui_progressbar">False</value>
+      <value key="effects_core">False</value>
+      <value key="effects_blind">False</value>
+      <value key="effects_bounce">False</value>
+      <value key="effects_clip">False</value>
+      <value key="effects_drop">False</value>
+      <value key="effects_explode">False</value>
+      <value key="effects_fade">False</value>
+      <value key="effects_fold">False</value>
+      <value key="effects_highlight">False</value>
+      <value key="effects_pulsate">False</value>
+      <value key="effects_scale">False</value>
+      <value key="effects_shake">False</value>
+      <value key="effects_slide">False</value>
+      <value key="effects_transfer">False</value>
+    </records>
+    <records interface="collective.js.jqueryui.controlpanel.IJQueryUICSS">
+      <value key="css">True</value>
+      <value key="patch">True</value>
+    </records>
+</registry>

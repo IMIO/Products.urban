@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<object name="portal_actions" meta_type="Plone Actions Tool"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <action-provider name="portal_actions" />
+ <object name="portal_tabs" meta_type="CMF Action Category">
+  <property name="title"></property>
+  <object name="urban" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">urban</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$portal_url/urban</property>
+   <property name="icon_expr"></property>
+   <property
+            name="available_expr">context/@@mayAccessUrban</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+ </object>
+ <object name="object" meta_type="CMF Action Category">
+  <property name="title"></property>
+  <object name="urbanmap" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Map</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/map</property>
+   <property name="icon_expr"></property>
+   <property
+            name="available_expr">python: context.portal_type in context.portal_urban.getUrbanTypes()</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+ </object>
+ <object name="document_actions" meta_type="CMF Action Category">
+  <property name="title"></property>
+  <object name="urban_templates" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="templates_summary_title">Templates summary</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@templatessum</property>
+   <property name="icon_expr">string:$portal_url/warning.png</property>
+   <property name="available_expr">python: context.portal_type == 'UrbanTool'</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+  <object name="urban_parcelsconsistency" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="urban_check_parcelsconsistency">Check parcels consistency</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@parcelsconsistency</property>
+   <property name="icon_expr">string:$portal_url/PortionOut.png</property>
+   <property name="available_expr">python: context.portal_type == 'UrbanTool'</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+ </object>
+ <object name="document_actions" meta_type="CMF Action Category">
+  <property name="title"></property>
+  <object name="urban_licence_warnings" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Warnings</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@warnings</property>
+   <property name="icon_expr">string:$portal_url/warning.png</property>
+   <property name="available_expr">python: context.portal_type in context.portal_urban.getUrbanTypes()</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+ </object>
+ <object name="document_actions" meta_type="CMF Action Category">
+  <property name="title"></property>
+  <object name="urban_contact_emails" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Emails</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/getemails</property>
+   <property name="icon_expr">string:$portal_url/getemails.png</property>
+   <property name="available_expr">python: context.portal_urban.isContactFolder(context)</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+ </object>
+</object>

@@ -1,0 +1,128 @@
+
+<metal:field_display define-macro="field_display">
+    <tr tal:define="fieldname field/getName;
+                    field_label field/widget/label_msgid | python: '';
+                    value python: field.getAccessor(context)();
+                    nullvalue python: value == '' or value == ();
+                    simpletext python: field.type == 'text' and getattr(field, 'default_content_type', '') == 'text/plain'">
+
+        <tal:normal_field condition="python: fieldname not in custom">
+            <td valign="top"><b><span tal:content="field_label" i18n:translate=""></span>:</b></td>
+            <td width="10px"></td>
+            <td valign="top" tal:condition="not: simpletext">
+                <tal:non_null_value condition="not: nullvalue">
+                    <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
+                </tal:non_null_value>
+                <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+            </td>
+            <td valign="top" tal:condition="simpletext">
+                <tal:text replace="structure python: field.get(context)" />
+            </td>
+        </tal:normal_field>
+
+        <tal:custom_field condition="python: fieldname in custom">
+            <tal:get_macro define="field_display_macro python: context.unrestrictedTraverse('contact-macros/%s' % fieldname)">
+                <metal:field_display use-macro="field_display_macro" />
+            </tal:get_macro>
+        </tal:custom_field>
+
+    </tr>
+</metal:field_display>
+
+
+<div metal:define-macro="editContactMacro" i18n:domain="urban">
+    <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=False)">
+        <tal:block define="fieldName field/getName;
+                           addressFields python: ['isSameAddressAsWorks', 'street', 'number', 'zipcode', 'city', 'country']">
+
+            <tal:address condition="python: fieldName in addressFields">
+                <tal:manage_address condition="python: fieldName == 'isSameAddressAsWorks'">
+                    <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
+                        <legend i18n:translate="address_fieldset_legend">Address</legend>
+                        <metal:fieldMacro use-macro="python:here.widget('isSameAddressAsWorks', mode='edit')" />
+                        <tal:comment replace="nothing">If same address, show the readonly workLocations </tal:comment>
+                        <div class="discreet" id="archetypes-fieldname-showWorkLocationsAddress"
+                             tal:define="licence python: context.aq_inner.aq_parent;
+                                         workLocations licence/getWorkLocations">
+                            <tal:workLocationDefined tal:condition="workLocations">
+                                <tal:block define="brains python: context.uid_catalog(UID=workLocations[0]['street']);
+                                                   streetOrLocality python: brains and brains[0].getObject() or None" condition="streetOrLocality">
+                                    <span tal:replace="python: streetOrLocality.getStreetName() + ' ' + workLocations[0]['number']" /><br />
+                                    <span tal:define="city streetOrLocality/getCity" tal:replace="python: city.getZipCode() + ' ' + city.Title()" />
+                                </tal:block>
+                            </tal:workLocationDefined>
+                            <tal:noWorkLocationDefined tal:condition="not: workLocations">
+                                <span class="discreet" i18n:translate="contact_no_workslocation_defined">Warning, no address has been defined for the works location</span>
+                            </tal:noWorkLocationDefined>
+                        </div>
+                        <metal:fieldMacro use-macro="python:here.widget('street', mode='edit')" />
+                        <metal:fieldMacro use-macro="python:here.widget('number', mode='edit')" />
+                        <metal:fieldMacro use-macro="python:here.widget('zipcode', mode='edit')" />
+                        <metal:fieldMacro use-macro="python:here.widget('city', mode='edit')" />
+                        <metal:fieldMacro use-macro="python:here.widget('country', mode='edit')" />
+                    </fieldset>
+                </tal:manage_address>
+            </tal:address>
+
+            <tal:other condition="not: python: fieldName in addressFields">
+                <metal:widget define-slot="widget">
+                    <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
+                </metal:widget>
+            </tal:other>
+        </tal:block>
+    </tal:fields>
+</div>
+
+
+<div metal:define-macro="editCorporationMacro" i18n:domain="urban">
+    <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=False)">
+        <tal:block define="fieldName field/getName;
+                           addressFields python: ['isSameAddressAsWorks', 'street', 'number', 'zipcode', 'city', 'country'];
+                           representativeFields python: ['personRole', 'name1', 'name2']">
+
+            <tal:address condition="python: fieldName in addressFields">
+                <tal:manage_address condition="python: fieldName == 'isSameAddressAsWorks'">
+                    <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
+                        <legend i18n:translate="address_fieldset_legend">Address</legend>
+                        <metal:fieldMacro use-macro="python:here.widget('isSameAddressAsWorks', mode='edit')" />
+                        <tal:comment replace="nothing">If same address, show the readonly workLocations </tal:comment>
+                        <div class="discreet" id="archetypes-fieldname-showWorkLocationsAddress"
+                             tal:define="licence python: context.aq_inner.aq_parent;
+                                         workLocations licence/getWorkLocations">
+                            <tal:workLocationDefined tal:condition="workLocations">
+                                <tal:block define="brains python: context.uid_catalog(UID=workLocations[0]['street']);
+                                                   streetOrLocality python: brains and brains[0].getObject() or None" condition="streetOrLocality">
+                                    <span tal:replace="python: streetOrLocality.getStreetName() + ' ' + workLocations[0]['number']" /><br />
+                                    <span tal:define="city streetOrLocality/getCity" tal:replace="python: city.getZipCode() + ' ' + city.Title()" />
+                                </tal:block>
+                            </tal:workLocationDefined>
+                            <tal:noWorkLocationDefined tal:condition="not: workLocations">
+                                <span class="discreet" i18n:translate="contact_no_workslocation_defined">Warning, no address has been defined for the works location</span>
+                            </tal:noWorkLocationDefined>
+                        </div>
+                        <metal:fieldMacro use-macro="python:here.widget('street', mode='edit')" />
+                        <metal:fieldMacro use-macro="python:here.widget('number', mode='edit')" />
+                        <metal:fieldMacro use-macro="python:here.widget('zipcode', mode='edit')" />
+                        <metal:fieldMacro use-macro="python:here.widget('city', mode='edit')" />
+                        <metal:fieldMacro use-macro="python:here.widget('country', mode='edit')" />
+                    </fieldset>
+                </tal:manage_address>
+            </tal:address>
+
+            <tal:representative condition="python: fieldName == representativeFields[0]">
+                <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
+                    <legend i18n:translate="corporation_representative_fieldset_legend">Represented by</legend>
+                    <metal:fieldMacro use-macro="python:here.widget('personRole', mode='edit')" />
+                    <metal:fieldMacro use-macro="python:here.widget('name1', mode='edit')" />
+                    <metal:fieldMacro use-macro="python:here.widget('name2', mode='edit')" />
+                </fieldset>
+            </tal:representative>
+
+            <tal:other condition="not: python: fieldName in addressFields or fieldName in representativeFields">
+                <metal:widget define-slot="widget">
+                    <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
+                </metal:widget>
+            </tal:other>
+        </tal:block>
+    </tal:fields>
+</div>

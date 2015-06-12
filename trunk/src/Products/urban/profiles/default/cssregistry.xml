@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<object name="portal_css" meta_type="Stylesheets Registry">
+ <!-- EXAMPLE DEFINITION
+ <stylesheet title=""
+             cacheable="True"
+             compression="safe"
+             cookable="True"
+             enabled="1"
+             expression=""
+             id="myfancystyle.css"
+             media="all"
+             rel="stylesheet"
+             rendering="import"/>
+ -->
+
+ <!-- ##code-section cssregistry.xml -->
+ <stylesheet title="urban CSS"
+             cacheable="True"
+             compression="safe"
+             cookable="True"
+             enabled="1"
+             expression=""
+             id="urban.css"
+             media="all"
+             rel="stylesheet"
+             rendering="import"/>
+
+ <stylesheet title="urban licences CSS"
+             cacheable="True"
+             compression="safe"
+             cookable="True"
+             enabled="1"
+             expression="python: not context.restrictedTraverse('@@plone_portal_state').anonymous() and here.portal_type in context.portal_urban.getUrbanTypes() + ['UrbanEvent', 'UrbanEventInquiry', 'Applicant', 'Architect', 'Geometrician', 'FolderManager', 'Notary', 'PortionOut', ] and not member.has_role('Manager')"
+             id="urbanlicences.css"
+             media="all"
+             rel="stylesheet"
+             rendering="import"/>
+
+  <stylesheet title="urban_hide_columnone.css"
+             cacheable="True"
+             compression="safe"
+             cookable="True"
+             enabled="1"
+             expression="python: here.meta_type in ['BuildLicence', 'ParcelOutLicence', 'UrbanEvent', 'PortionOut', 'Contact', 'UrbanCertificateBase', 'UrbanCertificateTwo', 'Declaration', 'Division', 'EnvironmentBase', ]"
+             id="urban_hide_columnone.css"
+             media="all"
+             rel="stylesheet"
+             rendering="import"/>
+
+ <!-- ##/code-section cssregistry.xml -->
+</object>

@@ -1,0 +1,284 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-04-28 11:35+0000\n"
+"PO-Revision-Date: 2010-08-09 15:00+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+"Language-code: fr\n"
+"Language-name: French\n"
+"Preferred-encodings: utf-8\n"
+"X-is-fallback-for: fr-ca fr-be fr-fr\n"
+
+# content_types
+msgid "Applicant"
+msgstr "Demandeur"
+
+msgid "Architect"
+msgstr "Architecte"
+
+msgid "BuildLicence"
+msgstr "Permis d'urbanisme"
+
+msgid "City"
+msgstr "Localité"
+
+msgid "Claimant"
+msgstr "Réclamant"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Declaration"
+msgstr "Déclaration"
+
+msgid "EnvClassOne"
+msgstr "Permis d'environnement classe 1"
+
+msgid "EnvClassThree"
+msgstr "Déclaration environnementale"
+
+msgid "EnvClassTwo"
+msgstr "Permis d'environnement classe 2"
+
+msgid "EnvironmentRubricTerm"
+msgstr "Rubrique environnement"
+
+msgid "FolderManager"
+msgstr "Gestionnaire de dossier"
+
+msgid "Geometrician"
+msgstr "Géomètre"
+
+msgid "Inquiry"
+msgstr "Enquête publique"
+
+msgid "Locality"
+msgstr "Lieu-dit"
+
+msgid "MiscDemand"
+msgstr "Demande diverse"
+
+msgid "Notary"
+msgstr "Notaire"
+
+msgid "NotaryLetter"
+msgstr "Lettre de notaire"
+
+msgid "Nothing to show !!!"
+msgstr "Rien à afficher !!!"
+
+msgid "ParcelOutLicence"
+msgstr "Permis d'urbanisation"
+
+msgid "ParcellingTerm"
+msgstr "Lotissement"
+
+msgid "PcaTerm"
+msgstr "Plan Communal d'Aménagement"
+
+msgid "Please, select a street from the list below!"
+msgstr "Sélectionnez la rue à chercher s'il vous plaît!"
+
+msgid "Please, select at least one type to search on!"
+msgstr "Sélectionnez au moins un type de permis!"
+
+msgid "PortionOut"
+msgstr "Parcelle"
+
+msgid "Proprietary"
+msgstr "Propriétaire"
+
+msgid "Recipient"
+msgstr "Destinataire"
+
+msgid "RecipientCadastre"
+msgstr "Destinataire cadastre"
+
+msgid "Street"
+msgstr "Rue"
+
+msgid "The field does not exist !!!"
+msgstr "Le champ ${field} n'existe pas !!!"
+
+msgid "There are parcel owners without any address found! Desactivate them!"
+msgstr "Il existe des propriétaires concernés par l'enquête dont l'adresse n'a pas été trouvée! Il faut les désactiver! "
+
+msgid "This National Register number is not valid !"
+msgstr "Ce numéro de registre national n'est pas valide !"
+
+msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
+msgstr "Cet événement n'est plus lié à une enquête publique !  Définissez une nouvelle enquête publique sur le permis !"
+
+# validators
+msgid "This field only accept numbers, indents or points !"
+msgstr "Ce champ n'accepte que des chiffres, des tirets et des points !"
+
+msgid "UrbanCertificateOne"
+msgstr "Certificat d'urbanisme 1"
+
+msgid "UrbanCertificateTwo"
+msgstr "Certificat d'urbanisme 2"
+
+msgid "UrbanEvent"
+msgstr "Evénement du dossier"
+
+msgid "UrbanEventInquiry"
+msgstr "Evénement lié à une enquête publique"
+
+msgid "UrbanEventOpinionRequest"
+msgstr "Evénement lié à une demande d'avis"
+
+msgid "UrbanEventType"
+msgstr "Type d'événement du dossier"
+
+# control panel
+msgid "UrbanTool"
+msgstr "Configuration de 'urban'"
+
+msgid "UrbanVocabularyTerm"
+msgstr "Terme de vocabulaire urban"
+
+msgid "WorkLocation"
+msgstr "Adresse"
+
+msgid "You can not create this UrbanEvent !"
+msgstr "Vous ne pouvez pas créer cet événement !"
+
+msgid "You can not create this UrbanEventInquiry !"
+msgstr "Vous ne pouvez pas créer cet événement enquête publique !"
+
+msgid "Your National Register number must be 11 digits long !"
+msgstr "Votre numéro de registre national doit comporter 11 chiffres !"
+
+msgid "accept"
+msgstr "Accepter"
+
+msgid "accepted"
+msgstr "Accepté"
+
+msgid "cannot_remove_inquiry_linkedurbaneventinquiry"
+msgstr "Vous ne pouvez pas supprimer cette enquête car un événement 'Enquête publique' y est lié.  Supprimez d'abord l'événement lié.  <a href='${linkedurbaneventurl}'>Cliquez ici pour y accéder</a>"
+
+msgid "cannot_remove_urbaneventinquiry_notthelast"
+msgstr "Vous ne pouvez pas supprimer cet événement 'Enquête publique' car ce n'est pas le dernier.  Vous devez supprimer le ou les derniers événements 'Enquête publique' avant de pouvoir supprimer celui-ci.    <a href='${lasturbaneventinquiryurl}'>Cliquez ici pour accéder au dernier événement 'Enquête publique'</a>"
+
+msgid "close"
+msgstr "Clôturer"
+
+msgid "closed"
+msgstr "Clôturé"
+
+msgid "db_connection_error"
+msgstr "Une erreur est survenue lors de la connexion à la base de données.  Le message d'erreur est : '${error}'"
+
+# status messages...
+msgid "db_connection_successfull"
+msgstr "Connexion à la base de donnée réussie."
+
+msgid "db_not_connected_error"
+msgstr "Une erreur est survenue avec la base de données.  Contactez votre administrateur système.  La base de données ne semble pas connectée."
+
+msgid "disable"
+msgstr "Désactiver"
+
+msgid "disabled"
+msgstr "Désactivé"
+
+# actions
+msgid "edit"
+msgstr "Modifier le permis"
+
+msgid "enable"
+msgstr "Activer"
+
+msgid "enabled"
+msgstr "Activé"
+
+msgid "genericlicence_investigationstart_valdiation_error"
+msgstr "Un événement de type 'Enquête publique' est lié à cette enquête, vous devez donc définir une date valide.  Si vous souhaitez supprimer cette enquête, supprimez d'abord l'événement lié.  <a href='${linkedurbaneventurl}'>Cliquez ici pour y accéder</a>"
+
+# indexes/metadata
+msgid "getBeginDate"
+msgstr "Date de début"
+
+msgid "getEndDate"
+msgstr "Echéance"
+
+# states
+msgid "in_progress"
+msgstr "En cours"
+
+msgid "incomplete"
+msgstr "Incomplet"
+
+msgid "isincomplete"
+msgstr "Incomplet"
+
+msgid "label_schema_default"
+msgstr "Données"
+
+msgid "label_schema_urban_carto"
+msgstr "Cartographie"
+
+msgid "label_schema_urban_description"
+msgstr "Récapitulatif"
+
+msgid "label_schema_urban_details"
+msgstr "Détails"
+
+msgid "label_schema_urban_events"
+msgstr "Evénements du dossier"
+
+msgid "label_schema_urban_investigation_and_advices"
+msgstr "Enquêtes et avis"
+
+msgid "label_schema_urban_location"
+msgstr "Urbanisme"
+
+msgid "label_schema_urban_peb"
+msgstr "PEB"
+
+msgid "label_schema_urban_road"
+msgstr "Voirie"
+
+msgid "please_enter_more_letters"
+msgstr "Il est nécessaire que vous entriez plusieurs lettres pour effectuer la recherche"
+
+msgid "refuse"
+msgstr "Refuser"
+
+msgid "refused"
+msgstr "Refusé"
+
+msgid "reopen"
+msgstr "Réouvrir"
+
+# transitions
+msgid "retire"
+msgstr "Retirer"
+
+msgid "retired"
+msgstr "Retiré"
+
+# error messages...
+msgid "warning_add_a_parcel"
+msgstr "Veuillez renseigner la ou les parcelle(s) concernée(s)"
+
+msgid "warning_add_an_applicant"
+msgstr "Veuillez renseigner le ou les demandeur(s)"
+
+msgid "warning_enter_search_criteria"
+msgstr "Veuillez indiquer d'avantages de termes de recherche"
+
+msgid "workLocationStreet"
+msgstr "Rue"
+

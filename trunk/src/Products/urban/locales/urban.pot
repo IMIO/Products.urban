@@ -1,0 +1,3386 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2015-03-30 08:52+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8\n"
+"Domain: urban\n"
+
+msgid "Add a parcel"
+msgstr ""
+
+# street_referencedatagridwidget
+msgid "Add a work location"
+msgstr ""
+
+msgid "Add all advices"
+msgstr ""
+
+msgid "Add an event"
+msgstr ""
+
+msgid "Add recipientcadastre manually"
+msgstr ""
+
+msgid "Add this parcel"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "All events"
+msgstr ""
+
+msgid "All opinion requests"
+msgstr ""
+
+msgid "Applicant data"
+msgstr ""
+
+msgid "Architect data"
+msgstr ""
+
+msgid "Attachments"
+msgstr ""
+
+msgid "Article127"
+msgstr ""
+
+msgid "BuildLicence"
+msgstr ""
+
+msgid "CI_CS_folder_title"
+msgstr ""
+
+msgid "CI_folder_title"
+msgstr ""
+
+msgid "CS_Eau_folder_title"
+msgstr ""
+
+msgid "CS_folder_title"
+msgstr ""
+
+msgid "Claimant data"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Create proprietary/applicant"
+msgstr ""
+
+msgid "Declaration"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Display each licence only once"
+msgstr ""
+
+msgid "Division"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "EnvClassOne"
+msgstr ""
+
+#. Default: "Déclaration environnementale"
+msgid "EnvClassThree"
+msgstr ""
+
+msgid "EnvClassTwo"
+msgstr ""
+
+msgid "Events"
+msgstr ""
+
+msgid "Events attachments"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "FolderManager"
+msgstr ""
+
+msgid "Found folder(s)"
+msgstr ""
+
+msgid "Found parcel(s)"
+msgstr ""
+
+msgid "Geometrician data"
+msgstr ""
+
+msgid "History of the parcel and related licences"
+msgstr ""
+
+#. Default: "Acknowledgement"
+msgid "IAcknowledgment type marker interface"
+msgstr ""
+
+#. Default: "College report"
+msgid "ICollegeReport type marker interface"
+msgstr ""
+
+#. Default: "Communal council"
+msgid "ICommunalCouncil type marker interface"
+msgstr ""
+
+#. Default: "Request deposit"
+msgid "IDeposit type marker interface"
+msgstr ""
+
+#. Default: "Inquiry"
+msgid "IInquiry type marker interface"
+msgstr ""
+
+#. Default: "Missing part"
+msgid "IMissingPart type marker interface"
+msgstr ""
+
+#. Default: "Missing part deposit"
+msgid "IMissingPartDeposit type marker interface"
+msgstr ""
+
+#. Default: "Modification deposit"
+msgid "IModificationDeposit type marker interface"
+msgstr ""
+
+#. Default: "Opinion request"
+msgid "IOpinionRequest type marker interface"
+msgstr ""
+
+#. Default: "Prorogation"
+msgid "IProrogation type marker interface"
+msgstr ""
+
+#. Default: "Technical service opinion request"
+msgid "ITechnicalServiceOpinionRequest type marker interface"
+msgstr ""
+
+#. Default: "Licence delivery"
+msgid "ITheLicence type marker interface"
+msgstr ""
+
+#. Default: "Walloon region opinion request"
+msgid "IWalloonRegionOpinionRequest type marker interface"
+msgstr ""
+
+#. Default: "Walloon region primo"
+msgid "IWalloonRegionPrimo type marker interface"
+msgstr ""
+
+#. Default: "Work beginning"
+msgid "IWorkBeginning type marker interface"
+msgstr ""
+
+msgid "Licence state"
+msgstr ""
+
+msgid "Licence types"
+msgstr ""
+
+msgid "Map"
+msgstr ""
+
+msgid "MiscDemand"
+msgstr ""
+
+msgid "No related licences"
+msgstr ""
+
+msgid "Notary data"
+msgstr ""
+
+msgid "NotaryLetter"
+msgstr ""
+
+msgid "Ongoing events"
+msgstr ""
+
+msgid "Parcel"
+msgstr ""
+
+msgid "ParcelOutLicence"
+msgstr ""
+
+msgid "Proprietary data"
+msgstr ""
+
+msgid "Public inquiry"
+msgstr ""
+
+msgid "Related licences"
+msgstr ""
+
+msgid "Remove selected street"
+msgstr ""
+
+msgid "Reopen"
+msgstr ""
+
+msgid "Road"
+msgstr ""
+
+msgid "Road coating"
+msgstr ""
+
+msgid "Road equipments"
+msgstr ""
+
+msgid "Road type"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+# PortionOutSearch
+msgid "Search parcel(s)"
+msgstr ""
+
+msgid "See more..."
+msgstr ""
+
+msgid "Show this parcel on map"
+msgstr ""
+
+msgid "Sort by licence type"
+msgstr ""
+
+msgid "Sort results by licence type first, then by delay time"
+msgstr ""
+
+#. Default: "Certificat d'urbanisme 1"
+msgid "UrbanCertificateOne"
+msgstr ""
+
+#. Default: "Certificat d'urbanisme 2"
+msgid "UrbanCertificateTwo"
+msgstr ""
+
+# urban_actions
+msgid "View"
+msgstr ""
+
+msgid "actions"
+msgstr ""
+
+# referencebrowser.pt
+msgid "add_Architect"
+msgstr ""
+
+# urban_view
+msgid "add_BuildLicence"
+msgstr ""
+
+msgid "add_Declaration"
+msgstr ""
+
+msgid "add_Division"
+msgstr ""
+
+msgid "add_EnvClassOne"
+msgstr ""
+
+msgid "add_EnvClassThree"
+msgstr ""
+
+msgid "add_EnvClassTwo"
+msgstr ""
+
+# referencebrowser.pt
+msgid "add_Geometrician"
+msgstr ""
+
+msgid "add_MiscDemand"
+msgstr ""
+
+# notaries_folder_view
+msgid "add_Notary"
+msgstr ""
+
+msgid "add_NotaryLetter"
+msgstr ""
+
+msgid "add_ParcelOutLicence"
+msgstr ""
+
+msgid "add_ParcellingTerm"
+msgstr ""
+
+msgid "add_UrbanCertificateOne"
+msgstr ""
+
+msgid "add_UrbanCertificateTwo"
+msgstr ""
+
+msgid "add_WorkLocation"
+msgstr ""
+
+msgid "add_a_claimant"
+msgstr ""
+
+msgid "add_a_corporation"
+msgstr ""
+
+msgid "add_a_lot"
+msgstr ""
+
+msgid "add_a_physical_applicant"
+msgstr ""
+
+msgid "add_a_proprietary"
+msgstr ""
+
+msgid "add_an_applicant"
+msgstr ""
+
+# urbanevent_view
+msgid "add_an_attachment"
+msgstr ""
+
+msgid "add_an_equipment"
+msgstr ""
+
+msgid "add_an_inquiry"
+msgstr ""
+
+msgid "add_event"
+msgstr ""
+
+msgid "add_every_advices_descr"
+msgstr ""
+
+msgid "additional_layers_folder_title"
+msgstr ""
+
+msgid "address_fieldset_legend"
+msgstr ""
+
+#. Default: "Read advice"
+#: UrbanEvent.py
+msgid "agreementlevel_read_advice"
+msgstr ""
+
+#. Default: "Respect charges"
+#: UrbanEvent.py
+msgid "agreementlevel_respect_charges"
+msgstr ""
+
+msgid "airportnoisezone_folder_title"
+msgstr ""
+
+msgid "all_divisions"
+msgstr ""
+
+#. Default: "Enter the different kind of spelling for this locality"
+#: Locality.py
+msgid "alsocalled_descr"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
+# licence views
+msgid "applicants"
+msgstr ""
+
+msgid "applicationreasons_folder_title"
+msgstr ""
+
+msgid "architects_folder_title"
+msgstr ""
+
+msgid "articles_folder_title"
+msgstr ""
+
+msgid "article127_urbanconfig_title"
+msgstr ""
+
+msgid "article127s"
+msgstr ""
+
+msgid "at_hour"
+msgstr ""
+
+msgid "authority_folder_title"
+msgstr ""
+
+msgid "basement_folder_title"
+msgstr ""
+
+msgid "buildings_layer_title"
+msgstr ""
+
+msgid "buildlicence_searchacceptedlicences"
+msgstr ""
+
+msgid "buildlicence_searchalllicences"
+msgstr ""
+
+msgid "buildlicence_searchincompletelicences"
+msgstr ""
+
+msgid "buildlicence_searchinprogresslicences"
+msgstr ""
+
+msgid "buildlicence_searchrefusedlicences"
+msgstr ""
+
+msgid "buildlicence_searchretiredlicences"
+msgstr ""
+
+msgid "buildlicence_urbanconfig_title"
+msgstr ""
+
+msgid "buildlicences"
+msgstr ""
+
+msgid "cartography"
+msgstr ""
+
+msgid "cartography_map_descr"
+msgstr ""
+
+#. Default: "Select the specific features from the left box and drop them in the right box to select them"
+#: UrbanCertificateBase.py
+msgid "certificateone_locationspecificfeatures_descr"
+msgstr ""
+
+#. Default: "Select the specific features from the left box and drop them in the right box to select them"
+#: UrbanCertificateBase.py
+msgid "certificateone_roadspecificfeatures_descr"
+msgstr ""
+
+#. Default: "Select the specific features from the left box and drop them in the right box to select them"
+#: UrbanCertificateBase.py
+msgid "certificateone_specificfeatures_descr"
+msgstr ""
+
+#. Default: "Select the specific features from the left box and drop them in the right box to select them"
+#: UrbanCertificateBase.py
+msgid "certificateone_townshipspecificfeatures_descr"
+msgstr ""
+
+#. Default: "Choose a value"
+#: Contact.py
+msgid "choose_a_value"
+msgstr ""
+
+msgid "click_to_view_or_add"
+msgstr ""
+
+#. Default: "Close prevention area"
+#: GenericLicence.py
+msgid "close_prevention_area"
+msgstr ""
+
+# street_referencedatagridwidget
+msgid "colnameTitle"
+msgstr ""
+
+# street_referencedatagridwidget
+msgid "colnamenumero"
+msgstr ""
+
+msgid "concerned_parcels"
+msgstr ""
+
+msgid "contact_no_workslocation_defined"
+msgstr ""
+
+msgid "contact_recipients"
+msgstr ""
+
+#. Default: "Linked urban event inquiry"
+#: urban_macros.pt
+msgid "content_no_urbaneventinquiry"
+msgstr ""
+
+msgid "content_none"
+msgstr ""
+
+msgid "corporation_representative_fieldset_legend"
+msgstr ""
+
+msgid "country_folder_title"
+msgstr ""
+
+msgid "create"
+msgstr ""
+
+msgid "creation date"
+msgstr ""
+
+msgid "date_day_01"
+msgstr ""
+
+msgid "decisions_folder_title"
+msgstr ""
+
+msgid "declaration_searchacceptedlicences"
+msgstr ""
+
+msgid "declaration_searchalllicences"
+msgstr ""
+
+msgid "declaration_searchincompletelicences"
+msgstr ""
+
+msgid "declaration_searchinprogresslicences"
+msgstr ""
+
+msgid "declaration_searchrefusedlicences"
+msgstr ""
+
+msgid "declaration_searchretiredlicences"
+msgstr ""
+
+msgid "declaration_urbanconfig_title"
+msgstr ""
+
+msgid "declarations"
+msgstr ""
+
+msgid "decree_type_departmental"
+msgstr ""
+
+msgid "decree_type_royal"
+msgstr ""
+
+# portlet_urban
+msgid "default_map"
+msgstr ""
+
+#. Default: "Enter a TAL condition that defines the delay calculation. The parameters event and licence are available."
+#: UrbanDelay.py
+msgid "delay_computation_descr"
+msgstr ""
+
+msgid "deposittype_folder_title"
+msgstr ""
+
+msgid "derogations_folder_title"
+msgstr ""
+
+msgid "division_urbanconfig_title"
+msgstr ""
+
+msgid "divisions"
+msgstr ""
+
+#. Default: "Effective closing date"
+#: urban_macros.pt
+msgid "effective_closing_date"
+msgstr ""
+
+msgid "elements_by_page"
+msgstr ""
+
+msgid "envclassone_urbanconfig_title"
+msgstr ""
+
+msgid "envclassones"
+msgstr ""
+
+msgid "envclassthree_searchacceptedlicences"
+msgstr ""
+
+msgid "envclassthree_searchalllicences"
+msgstr ""
+
+msgid "envclassthree_searchincompletelicences"
+msgstr ""
+
+msgid "envclassthree_searchinprogresslicences"
+msgstr ""
+
+msgid "envclassthree_searchrefusedlicences"
+msgstr ""
+
+msgid "envclassthree_searchretiredlicences"
+msgstr ""
+
+msgid "envclassthree_urbanconfig_title"
+msgstr ""
+
+msgid "envclassthrees"
+msgstr ""
+
+msgid "envclasstwo_urbanconfig_title"
+msgstr ""
+
+msgid "envclasstwos"
+msgstr ""
+
+msgid "environmenttemplates_folder_title"
+msgstr ""
+
+msgid "equipmenttypes_folder_title"
+msgstr ""
+
+msgid "error_bis"
+msgstr ""
+
+msgid "error_exposant"
+msgstr ""
+
+msgid "error_in_expr_contact_admin"
+msgstr ""
+
+msgid "error_puissance"
+msgstr ""
+
+msgid "error_radical"
+msgstr ""
+
+msgid "error_reference"
+msgstr ""
+
+msgid "error_section"
+msgstr ""
+
+msgid "error_streetname"
+msgstr ""
+
+msgid "error_textcfg"
+msgstr ""
+
+msgid "event_data"
+msgstr ""
+
+msgid "event_inquiry_claimants"
+msgstr ""
+
+msgid "event_inquiry_documents"
+msgstr ""
+
+msgid "event_inquiry_recipients"
+msgstr ""
+
+msgid "event_linked_attachments"
+msgstr ""
+
+msgid "event_linked_documents"
+msgstr ""
+
+msgid "exploitationconditions_folder_title"
+msgstr ""
+
+msgid "externaldecisions_folder_title"
+msgstr ""
+
+#. Default: "Far prevention area"
+#: GenericLicence.py
+msgid "far_prevention_area"
+msgstr ""
+
+msgid "fieldsetlegend-attachments"
+msgstr ""
+
+msgid "fieldsetlegend-urban_admin_settings"
+msgstr ""
+
+msgid "fieldsetlegend-urban_events"
+msgstr ""
+
+msgid "fieldsetlegend-urban_licences_config"
+msgstr ""
+
+msgid "fieldsetlegend-urban_public_settings"
+msgstr ""
+
+msgid "fieldsetlegend-urban_vocabulary_folders"
+msgstr ""
+
+#. Default: "Secure, fast and sure, <a href='http://www.getfirefox.com'>Firefox</a> is free and easy to install."
+#: firefox.pt
+msgid "firefox_viewlet_descr"
+msgstr ""
+
+#. Default: "This application works better with Firefox."
+#: firefox.pt
+msgid "firefox_viewlet_title"
+msgstr ""
+
+#. Default: "High risk"
+#: GenericLicence.py
+msgid "flooding_level_high"
+msgstr ""
+
+#. Default: "Low risk"
+#: GenericLicence.py
+msgid "flooding_level_low"
+msgstr ""
+
+#. Default: "Moderate risk"
+#: GenericLicence.py
+msgid "flooding_level_moderate"
+msgstr ""
+
+#. Default: "No"
+#: GenericLicence.py
+msgid "flooding_level_no"
+msgstr ""
+
+msgid "flooding_level_verylow"
+msgstr ""
+
+msgid "folder_advice"
+msgstr ""
+
+msgid "folder_events"
+msgstr ""
+
+msgid "folderbuildworktypes_folder_title"
+msgstr ""
+
+msgid "foldercategories_folder_title"
+msgstr ""
+
+msgid "folderdelays_folder_title"
+msgstr ""
+
+msgid "folderdivisions_folder_title"
+msgstr ""
+
+msgid "foldermakers_folder_title"
+msgstr ""
+
+msgid "foldermanagers_folder_title"
+msgstr ""
+
+msgid "folderprotectedbuildings_folder_title"
+msgstr ""
+
+msgid "folderroadcoatings_folder_title"
+msgstr ""
+
+msgid "folderroadequipments_folder_title"
+msgstr ""
+
+msgid "folderroadtypes_folder_title"
+msgstr ""
+
+msgid "folderzones_folder_title"
+msgstr ""
+
+#. Default: "City issue on date"
+#: UrbanEvent.py
+msgid "formatted_date_for_delivery"
+msgstr ""
+
+#. Default: "City and date"
+#: UrbanEvent.py
+msgid "formatted_date_with_cityname"
+msgstr ""
+
+# this is an HTML content for the front-page
+msgid "front_page_descr"
+msgstr ""
+
+# this is an HTML content for the front-page
+msgid "front_page_text"
+msgstr ""
+
+# title of the front-page
+msgid "front_page_title"
+msgstr ""
+
+msgid "ftSolicitOpinionsTo_folder_title"
+msgstr ""
+
+#. Default: "Female"
+#: PersonTitleTerm.py
+msgid "gender_female"
+msgstr ""
+
+#. Default: "Male"
+#: PersonTitleTerm.py
+msgid "gender_male"
+msgstr ""
+
+# urbanevent_view
+msgid "generate_a_linked_doc"
+msgstr ""
+
+msgid "geometricians_folder_title"
+msgstr ""
+
+msgid "globaltemplates_folder_title"
+msgstr ""
+
+msgid "go_back"
+msgstr ""
+
+#. Default: "You can not search for parcels for now because there was a problem.  Please contact your system administrator and give him the red error message here above"
+msgid "help_search_connection_problem"
+msgstr ""
+
+#. Default: "Choose one of the following forms to search for parcels.  You can cumulate criteria if you exactly know what you are looking for"
+msgid "help_search_parcels"
+msgstr ""
+
+msgid "inadmissibilityreasons_folder_title"
+msgstr ""
+
+msgid "inquiry_data"
+msgstr ""
+
+msgid "inquiry_from"
+msgstr ""
+
+msgid "inquiry_item"
+msgstr ""
+
+msgid "inquiry_title_and_number"
+msgstr ""
+
+msgid "inquiry_to"
+msgstr ""
+
+msgid "investigationarticles_folder_title"
+msgstr ""
+
+msgid "label_colname_Creator"
+msgstr ""
+
+msgid "label_colname_ParentLocation"
+msgstr ""
+
+msgid "label_colname_Title"
+msgstr ""
+
+msgid "label_colname_address"
+msgstr ""
+
+msgid "label_colname_adr1"
+msgstr ""
+
+msgid "label_colname_adr2"
+msgstr ""
+
+msgid "label_colname_all_scheduled_events"
+msgstr ""
+
+msgid "label_colname_applicant_data"
+msgstr ""
+
+msgid "label_colname_architect_data"
+msgstr ""
+
+msgid "label_colname_claimant_data"
+msgstr ""
+
+msgid "label_colname_corporation_data"
+msgstr ""
+
+msgid "label_colname_created"
+msgstr ""
+
+msgid "label_colname_delay_term"
+msgstr ""
+
+msgid "label_colname_eventDate"
+msgstr ""
+
+msgid "label_colname_event_dates"
+msgstr ""
+
+msgid "label_colname_event_title"
+msgstr ""
+
+msgid "label_colname_foldermanager"
+msgstr ""
+
+msgid "label_colname_geometrician_data"
+msgstr ""
+
+msgid "label_colname_getBeginDate"
+msgstr ""
+
+msgid "label_colname_getEndDate"
+msgstr ""
+
+msgid "label_colname_getParcelsForDisplay"
+msgstr ""
+
+msgid "label_colname_licence"
+msgstr ""
+
+msgid "label_colname_name"
+msgstr ""
+
+msgid "label_colname_notary_data"
+msgstr ""
+
+msgid "label_colname_parcellingterm_data"
+msgstr ""
+
+msgid "label_colname_parcelrefs"
+msgstr ""
+
+msgid "label_colname_proprietary_data"
+msgstr ""
+
+msgid "label_colname_receiptDate"
+msgstr ""
+
+msgid "label_colname_recipient_data"
+msgstr ""
+
+msgid "label_colname_street"
+msgstr ""
+
+msgid "label_colname_time_delay"
+msgstr ""
+
+msgid "label_colname_transmitDate"
+msgstr ""
+
+msgid "label_edit"
+msgstr ""
+
+msgid "label_export"
+msgstr ""
+
+msgid "label_from"
+msgstr ""
+
+msgid "label_list_only"
+msgstr ""
+
+msgid "label_no"
+msgstr ""
+
+msgid "label_remove"
+msgstr ""
+
+msgid "label_select_street"
+msgstr ""
+
+msgid "label_to"
+msgstr ""
+
+msgid "last created event date"
+msgstr ""
+
+msgid "legend"
+msgstr ""
+
+msgid "legend_details"
+msgstr ""
+
+msgid "legend_equipments"
+msgstr ""
+
+msgid "legend_lots"
+msgstr ""
+
+msgid "legend_operation_address"
+msgstr ""
+
+msgid "legend_specific_features"
+msgstr ""
+
+msgid "locality_for_worklocation"
+msgstr ""
+
+msgid "location_fdrequirement_decision"
+msgstr ""
+
+msgid "location_fdrequirement_opinion"
+msgstr ""
+
+msgid "locationmissingparts_folder_title"
+msgstr ""
+
+msgid "locationspecificfeatures_folder_title"
+msgstr ""
+
+msgid "lotusages_folder_title"
+msgstr ""
+
+msgid "manage_architects"
+msgstr ""
+
+msgid "manage_geometricians"
+msgstr ""
+
+msgid "manage_notaries"
+msgstr ""
+
+msgid "manage_parcellings"
+msgstr ""
+
+msgid "manual_parcel"
+msgstr ""
+
+# config folders
+msgid "map_configs_folder_title"
+msgstr ""
+
+msgid "miscdemand_urbanconfig_title"
+msgstr ""
+
+msgid "miscdemands"
+msgstr ""
+
+msgid "missingparts_folder_title"
+msgstr ""
+
+#. Default: "Plural"
+#: PersonTitleTerm.py
+msgid "multiplicity_plural"
+msgstr ""
+
+#. Default: "Single"
+#: PersonTitleTerm.py
+msgid "multiplicity_single"
+msgstr ""
+
+msgid "no_applicant_defined"
+msgstr ""
+
+msgid "no_document_to_generate"
+msgstr ""
+
+msgid "no_notary_defined"
+msgstr ""
+
+msgid "no_proprietary_defined"
+msgstr ""
+
+msgid "no_result"
+msgstr ""
+
+msgid "not_permitted_to_add_aattachment"
+msgstr ""
+
+msgid "not_permitted_to_add_urbanevent"
+msgstr ""
+
+msgid "notaries_folder_title"
+msgstr ""
+
+msgid "notaryletter_searchacceptedlicences"
+msgstr ""
+
+msgid "notaryletter_searchalllicences"
+msgstr ""
+
+msgid "notaryletter_searchincompletelicences"
+msgstr ""
+
+msgid "notaryletter_searchinprogresslicences"
+msgstr ""
+
+msgid "notaryletter_searchrefusedlicences"
+msgstr ""
+
+msgid "notaryletter_searchretiredlicences"
+msgstr ""
+
+msgid "notaryletter_urbanconfig_title"
+msgstr ""
+
+msgid "notaryletters"
+msgstr ""
+
+msgid "noteworthytrees_folder_title"
+msgstr ""
+
+msgid "number_of_claimants"
+msgstr ""
+
+msgid "number_of_recipients"
+msgstr ""
+
+msgid "old_parcels_history"
+msgstr ""
+
+#. Default: "OpenOfficePort"
+#: UrbanTool.py
+msgid "open_office_port"
+msgstr ""
+
+msgid "opinionstoaskifworks_folder_title"
+msgstr ""
+
+msgid "outdated_parcels_in_use"
+msgstr ""
+
+#. Default: "Outside catchment"
+#: GenericLicence.py
+msgid "outside_catchment"
+msgstr ""
+
+msgid "parcelLinkedLicences"
+msgstr ""
+
+msgid "parcellings_folder_title"
+msgstr ""
+
+msgid "parceloutlicence_searchacceptedlicences"
+msgstr ""
+
+msgid "parceloutlicence_searchalllicences"
+msgstr ""
+
+msgid "parceloutlicence_searchincompletelicences"
+msgstr ""
+
+msgid "parceloutlicence_searchinprogresslicences"
+msgstr ""
+
+msgid "parceloutlicence_searchrefusedlicences"
+msgstr ""
+
+msgid "parceloutlicence_searchretiredlicences"
+msgstr ""
+
+msgid "parceloutlicence_urbanconfig_title"
+msgstr ""
+
+msgid "parceloutlicences"
+msgstr ""
+
+msgid "parcels_layer_title"
+msgstr ""
+
+msgid "pashs_folder_title"
+msgstr ""
+
+msgid "pca_fieldset_legend"
+msgstr ""
+
+msgid "pca_of"
+msgstr ""
+
+msgid "pcas_folder_title"
+msgstr ""
+
+msgid "pcaszone_folder_title"
+msgstr ""
+
+msgid "peb_complete_process"
+msgstr ""
+
+msgid "peb_form1_process"
+msgstr ""
+
+msgid "peb_form2_process"
+msgstr ""
+
+msgid "peb_not_applicable"
+msgstr ""
+
+msgid "pebcategories_folder_title"
+msgstr ""
+
+msgid "persons_grades_folder_title"
+msgstr ""
+
+msgid "persons_titles_folder_title"
+msgstr ""
+
+#. Default: "Madam"
+#: Contact.py
+msgid "persontitle_madam"
+msgstr ""
+
+#. Default: "Madam and Mister"
+#: Contact.py
+msgid "persontitle_madam_and_mister"
+msgstr ""
+
+#. Default: "Master"
+#: Contact.py
+msgid "persontitle_master"
+msgstr ""
+
+#. Default: "Miss"
+#: Contact.py
+msgid "persontitle_miss"
+msgstr ""
+
+#. Default: "Mister"
+#: Contact.py
+msgid "persontitle_mister"
+msgstr ""
+
+msgid "portal_urban"
+msgstr ""
+
+msgid "prenu_folder_title"
+msgstr ""
+
+msgid "prevu_folder_title"
+msgstr ""
+
+msgid "proprietaries"
+msgstr ""
+
+#. Default: "RCU"
+#: setuphandlers.py
+msgid "rcu_folder_title"
+msgstr ""
+
+msgid "recipients_folder_title"
+msgstr ""
+
+msgid "recoursedecisions_folder_title"
+msgstr ""
+
+msgid "request_submitted_by_applicant"
+msgstr ""
+
+msgid "request_submitted_by_both"
+msgstr ""
+
+msgid "request_submitted_by_notary"
+msgstr ""
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "masculine_singular_residing"
+msgstr ""
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "feminine_singular_residing"
+msgstr ""
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "mixed_residing"
+msgstr ""
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "feminine_plural_residing"
+msgstr ""
+
+msgid "reverse_order"
+msgstr ""
+
+msgid "rgbsr_folder_title"
+msgstr ""
+
+msgid "road_adaptation_create"
+msgstr ""
+
+msgid "road_adaptation_modify"
+msgstr ""
+
+msgid "road_adaptation_no"
+msgstr ""
+
+msgid "roadmissingparts_folder_title"
+msgstr ""
+
+msgid "roadspecificfeatures_folder_title"
+msgstr ""
+
+msgid "root-configuration"
+msgstr ""
+
+msgid "root-licences"
+msgstr ""
+
+msgid "root-stats-search"
+msgstr ""
+
+msgid "rubrics_folder_title"
+msgstr ""
+
+msgid "search-last-elements"
+msgstr ""
+
+msgid "search_parcels"
+msgstr ""
+
+msgid "searchbystreet_result"
+msgstr ""
+
+msgid "searchequipments"
+msgstr ""
+
+msgid "searchlinkeddocuments"
+msgstr ""
+
+msgid "searchlots"
+msgstr ""
+
+msgid "simple-map_title"
+msgstr ""
+
+msgid "sort_by"
+msgstr ""
+
+msgid "specificfeatures_folder_title"
+msgstr ""
+
+#. Default: "SSC"
+#: setuphandlers.py
+msgid "ssc_folder_title"
+msgstr ""
+
+#. Default: "When adding manually a new street, please let the default value"
+#: Street.py
+msgid "street_best_address_key_descr"
+msgstr ""
+
+#. Default: "Expiration date. Keep empty for valid streets. Fill in for history."
+#: Street.py
+msgid "street_end_date_descr"
+msgstr ""
+
+#. Default: "Encoding date by default"
+#: Street.py
+msgid "street_start_date_descr"
+msgstr ""
+
+#. Default: "Streets"
+#: setuphandlers.py
+msgid "streets_folder_title"
+msgstr ""
+
+msgid "subdivision_fieldset_legend"
+msgstr ""
+
+#. Default: "Supervision area"
+#: GenericLicence.py
+msgid "supervision_area"
+msgstr ""
+
+#. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here' and 'member' are available"
+#: UrbanEventType.py
+msgid "tal_condition_descr"
+msgstr ""
+
+#. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here', 'event', and 'licence'' are available"
+#: UrbanDoc.py
+msgid "tal_condition_urbandoc_descr"
+msgstr ""
+
+#. Default: "Events templates"
+#: templatessummary.pt
+msgid "templates_events_title"
+msgstr ""
+
+#. Default: "Total template's number: ${tot}. Modified template's number: ${mod}. "
+#: templatessummary.pt
+msgid "templates_summary_count"
+msgstr ""
+
+#. Default: " = template has been modified."
+#: templatessummary.pt
+msgid "templates_summary_modified"
+msgstr ""
+
+#. Default: "Templates summary"
+#: templatessummary.pt
+msgid "templates_summary_title"
+msgstr ""
+
+# topics
+msgid "topics"
+msgstr ""
+
+msgid "topics_folder_title"
+msgstr ""
+
+msgid "townshipfoldercategories_folder_title"
+msgstr ""
+
+msgid "townshipspecificfeatures_folder_title"
+msgstr ""
+
+#. Default: "UnoEnabledPython"
+#: UrbanTool.py
+msgid "uno_enabled_python"
+msgstr ""
+
+msgid "urban"
+msgstr ""
+
+msgid "urban-demo"
+msgstr ""
+
+# extension profile
+msgid "urban-extra"
+msgstr ""
+
+msgid "urban-labruyere"
+msgstr ""
+
+msgid "urban-migrations"
+msgstr ""
+
+msgid "urban-sambreville"
+msgstr ""
+
+#. Default: Set the number of days the alert will be shown before the deadline delay
+msgid "urban_alertdelay_descr"
+msgstr ""
+
+msgid "urban_browse_old_parcels"
+msgstr ""
+
+#. Default: "Enter the 4 coordinates of the map, each coordinate separated by a comma."
+#: UrbanTool.py
+msgid "urban_descr_mapExtent"
+msgstr ""
+
+#. Default: "Number of the lots, ..."
+#: BuildLicence.py
+msgid "urban_descr_subdivisionDetails"
+msgstr ""
+
+#. Default: "Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL"
+#: LicenceConfig.py
+msgid "urban_descr_usedAttributes"
+msgstr ""
+
+msgid "urban_description_key_dates_legend"
+msgstr ""
+
+msgid "urban_export_list220"
+msgstr ""
+
+msgid "urban_fullmap_descr"
+msgstr ""
+
+#. Default: "If this field is used, you can insert special expressions between [[]] that will be rendered.  This can be something like \"My text [[object/getMyAttribute]] end of the text\".  Object is the licence the term is used in."
+#: UrbanVocabularyTerm.py
+msgid "urban_help_description"
+msgstr ""
+
+#. Default: "This field is made to store extra value if needed."
+#: UrbanVocabularyTerm.py
+msgid "urban_help_extraValue"
+msgstr ""
+
+#. Default: "You will only enter dates here.  Further informations will be entered while describing the investigation"
+#: GenericLicence.py
+msgid "urban_help_investigations"
+msgstr ""
+
+#. Default: "You will only enter dates here.  Further informations will be entered while describing the investigation"
+#: GenericLicence.py
+msgid "urban_help_investigationsDates"
+msgstr ""
+
+#. Default: "Enter the layer image mimetype, for example 'image/jpeg' or 'image/png'"
+#: Layer.py
+msgid "urban_help_layerFormat"
+msgstr ""
+
+#. Default: "If checked, an additional paragraph will be added in the licence document"
+#: BuildLicence.py
+msgid "urban_help_locationDgrneUnderground"
+msgstr ""
+
+#. Default: "Use this field to add a custom numbering that will be shown in edit forms but not on document render."
+#: UrbanVocabularyTerm.py
+msgid "urban_help_numbering"
+msgstr ""
+
+#. Default: "If checked, an additional paragraph will be added in the licence document"
+#: BuildLicence.py
+msgid "urban_help_roadDgrneUnderground"
+msgstr ""
+
+#. Default: "urban_descr_termKey"
+#: UrbanVocabularyTerm.py
+msgid "urban_help_termKey"
+msgstr ""
+
+#. Default: "If checked, an additional paragraph will be added in the licence document"
+#: BuildLicence.py
+msgid "urban_help_townshipCouncilFolder"
+msgstr ""
+
+msgid "urban_investigationStart"
+msgstr ""
+
+#. Default: "Buildlicencenumerotation"
+#: UrbanTool.py
+msgid "urban_label_BuildLicenceNumerotation"
+msgstr ""
+
+#. Default: "Declarationnumerotation"
+#: UrbanTool.py
+msgid "urban_label_DeclarationNumerotation"
+msgstr ""
+
+#. Default: "Divisionnumerotation"
+#: UrbanTool.py
+msgid "urban_label_DivisionNumerotation"
+msgstr ""
+
+#. Default: "Environmentaldeclarationnumerotation"
+#: UrbanTool.py
+msgid "urban_label_EnvClassThreeNumerotation"
+msgstr ""
+
+msgid "urban_label_investigationSubject"
+msgstr ""
+
+#. Default: "Linkedopinionrequestevent"
+#: LinkedOpinionRequestEvent.py
+msgid "urban_label_LinkedOpinionRequestEvent"
+msgstr ""
+
+#. Default: "MiscDemandnumerotation"
+#: UrbanTool.py
+msgid "urban_label_MiscDemandNumerotation"
+msgstr ""
+
+#. Default: "Nisnum"
+#: UrbanTool.py
+msgid "urban_label_NISNum"
+msgstr ""
+
+#. Default: "Notaryletternumerotation"
+#: UrbanTool.py
+msgid "urban_label_NotaryLetterNumerotation"
+msgstr ""
+
+#. Default: "Prenu"
+#: GenericLicence.py
+msgid "urban_label_PRenU"
+msgstr ""
+
+#. Default: "Prevu"
+#: GenericLicence.py
+msgid "urban_label_PRevU"
+msgstr ""
+
+#. Default: "Parceloutlicencenumerotation"
+#: UrbanTool.py
+msgid "urban_label_ParcelOutLicenceNumerotation"
+msgstr ""
+
+#. Default: "Rcu"
+#: GenericLicence.py
+msgid "urban_label_RCU"
+msgstr ""
+
+#. Default: "Srs"
+#: Layer.py
+msgid "urban_label_SRS"
+msgstr ""
+
+#. Default: "Ssc"
+#: GenericLicence.py
+msgid "urban_label_SSC"
+msgstr ""
+
+#. Default: "Talcondition"
+#: UrbanEventType.py
+msgid "urban_label_TALCondition"
+msgstr ""
+
+#. Default: "Urbancertificateonenumerotation"
+#: UrbanTool.py
+msgid "urban_label_UrbanCertificateOneNumerotation"
+msgstr ""
+
+#. Default: "Urbancertificatetwonumerotation"
+#: UrbanTool.py
+msgid "urban_label_UrbanCertificateTwoNumerotation"
+msgstr ""
+
+#. Default: "Wmsurl"
+#: Layer.py
+msgid "urban_label_WMSUrl"
+msgstr ""
+
+#. Default: "Zip"
+#: UrbanCertificateBase.py
+msgid "urban_label_ZIP"
+msgstr ""
+
+#. Default: "Abbreviation"
+#: PersonTitleTerm.py
+msgid "urban_label_abbreviation"
+msgstr ""
+
+msgid "urban_label_acknowledgmentDate"
+msgstr ""
+
+#. Default: "Activatedfields"
+#: UrbanEventType.py
+msgid "urban_label_activatedFields"
+msgstr ""
+
+#. Default: "Additionalconditions"
+#: EnvironmentBase.py
+msgid "urban_label_additionalConditions"
+msgstr ""
+
+#. Default: "Additionallegalconditions"
+#: EnvironmentBase.py
+msgid "urban_label_additionalLegalConditions"
+msgstr ""
+
+#. Default: "Additionalpreviouslicences"
+#: EnvironmentLicence.py
+msgid "urban_label_additionalPreviousLicences"
+msgstr ""
+
+# 
+#. Default: "Adr1"
+#: RecipientCadastre.py
+msgid "urban_label_adr1"
+msgstr ""
+
+#. Default: "Adr2"
+#: RecipientCadastre.py
+msgid "urban_label_adr2"
+msgstr ""
+
+#. Default: "Adviceagreementlevel"
+#: UrbanEvent.py
+msgid "urban_label_adviceAgreementLevel"
+msgstr ""
+
+#. Default: "Airportnoisezone"
+#: GenericLicence.py
+msgid "urban_label_airportNoiseZone"
+msgstr ""
+
+#. Default: "Airportnoisezonedetails"
+#: GenericLicence.py
+msgid "urban_label_airportNoiseZoneDetails"
+msgstr ""
+
+#. Default: "Alertdelay"
+#: UrbanDelay.py
+msgid "urban_label_alertDelay"
+msgstr ""
+
+#. Default: "Alsocalled"
+#: Locality.py
+msgid "urban_label_alsoCalled"
+msgstr ""
+
+#. Default: "Annonceddelay"
+#: GenericLicence.py
+msgid "urban_label_annoncedDelay"
+msgstr ""
+
+#. Default: "Annonceddelaydetails"
+#: GenericLicence.py
+msgid "urban_label_annoncedDelayDetails"
+msgstr ""
+
+#. Default: "Applicants"
+#: GenericLicence.py
+msgid "urban_label_applicants"
+msgstr ""
+
+#. Default: "Applicationreasons"
+#: EnvironmentBase.py
+msgid "urban_label_applicationReasons"
+msgstr ""
+
+#. Default: "Approvaldate"
+#: ParcellingTerm.py
+msgid "urban_label_approvalDate"
+msgstr ""
+
+#. Default: "Architects"
+#: BuildLicence.py
+msgid "urban_label_architects"
+msgstr ""
+
+#. Default: "Areparcelsverified"
+#: GenericLicence.py
+msgid "urban_label_areParcelsVerified"
+msgstr ""
+
+#. Default: "Businessdescription"
+#: EnvironmentBase.py
+msgid "urban_label_areaDescription"
+msgstr ""
+
+#. Default: "Article"
+#: Declaration.py
+msgid "urban_label_article"
+msgstr ""
+
+#. Default: "Auditiondate"
+#: UrbanEvent.py
+msgid "urban_label_auditionDate"
+msgstr ""
+
+#. Default: "Authority"
+#: EnvironmentLicence.py
+msgid "urban_label_authority"
+msgstr ""
+
+#. Default: "Authorizationdate"
+#: ParcellingTerm.py
+msgid "urban_label_authorizationDate"
+msgstr ""
+
+#. Default: "Baselayer"
+#: Layer.py
+msgid "urban_label_baseLayer"
+msgstr ""
+
+#. Default: "Basement"
+#: UrbanCertificateBase.py
+msgid "urban_label_basement"
+msgstr ""
+
+#. Default: "Bcenumber"
+#: Corporation.py
+msgid "urban_label_bceNumber"
+msgstr ""
+
+#. Default: "Bestaddresscode"
+#: Street.py
+msgid "urban_label_bestAddressCode"
+msgstr ""
+
+#. Default: "Bestaddresskey"
+#: Street.py
+msgid "urban_label_bestAddressKey"
+msgstr ""
+
+#. Default: "Bis"
+#: PortionOut.py
+msgid "urban_label_bis"
+msgstr ""
+
+#. Default: "Box"
+#: Address.py
+#: Contact.py
+msgid "urban_label_box"
+msgstr ""
+
+#. Default: "Businessdescription"
+#: EnvironmentBase.py
+msgid "urban_label_businessDescription"
+msgstr ""
+
+msgid "urban_label_businessLocation"
+msgstr ""
+
+#. Default: "Businessoldlocation"
+#: EnvironmentBase.py
+msgid "urban_label_businessOldLocation"
+msgstr ""
+
+#. Default: "Catchmentarea"
+#: GenericLicence.py
+msgid "urban_label_catchmentArea"
+msgstr ""
+
+#. Default: "Catchmentareadetails"
+#: GenericLicence.py
+msgid "urban_label_catchmentAreaDetails"
+msgstr ""
+
+#. Default: "Category"
+#: MiscDemand.py
+msgid "urban_label_category"
+msgstr ""
+
+#. Default: "Changes"
+#: PcaTerm.py
+msgid "urban_label_changes"
+msgstr ""
+
+#. Default: "Changesdescription"
+#: ParcellingTerm.py
+msgid "urban_label_changesDescription"
+msgstr ""
+
+#. Default: "City"
+#: Contact.py
+msgid "urban_label_city"
+msgstr ""
+
+#. Default: "Cityname"
+#: UrbanTool.py
+msgid "urban_label_cityName"
+msgstr ""
+
+#. Default: "Claimingtext"
+#: Contact.py
+msgid "urban_label_claimingText"
+msgstr ""
+
+#. Default: "Claimsdate"
+#: UrbanEvent.py
+msgid "urban_label_claimsDate"
+msgstr ""
+
+#. Default: "Claimstext"
+#: UrbanEvent.py
+msgid "urban_label_claimsText"
+msgstr ""
+
+msgid "urban_label_collegeReportDecisionDate"
+msgstr ""
+
+#. Default: "Color"
+#: Layer.py
+msgid "urban_label_color"
+msgstr ""
+
+#. Default: "Comment"
+#: PcaTerm.py
+msgid "urban_label_comment"
+msgstr ""
+
+#. Default: "Comments"
+#: Division.py
+msgid "urban_label_comments"
+msgstr ""
+
+msgid "urban_label_complement"
+msgstr ""
+
+msgid "urban_label_complete_parcel"
+msgstr ""
+
+#. Default: "Concerned elements"
+#: parcelsinfo.py
+msgid "urban_label_concerned_elements"
+msgstr ""
+
+#. Default: "Country"
+#: Contact.py
+msgid "urban_label_country"
+msgstr ""
+
+#. Default: "Customspecificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_customSpecificFeatures"
+msgstr ""
+
+#. Default: "Data"
+#: Layer.py
+msgid "urban_label_data"
+msgstr ""
+
+#. Default: "Deadlinedelay"
+#: UrbanEventType.py
+msgid "urban_label_deadLineDelay"
+msgstr ""
+
+#. Default: "Decision"
+#: UrbanEvent.py
+msgid "urban_label_decision"
+msgstr ""
+
+#. Default: "Decisiondate"
+#: UrbanEvent.py
+msgid "urban_label_decisionDate"
+msgstr ""
+
+#. Default: "Decisionterm"
+#: Decision.py
+msgid "urban_label_decisionTerm"
+msgstr ""
+
+#. Default: "Decisiontext"
+#: UrbanEvent.py
+msgid "urban_label_decisionText"
+msgstr ""
+
+#. Default: "Decisions"
+#: LicenceEvent.py
+msgid "urban_label_decisions"
+msgstr ""
+
+#. Default: "Decreedate"
+#: PcaTerm.py
+msgid "urban_label_decreeDate"
+msgstr ""
+
+#. Default: "Decreetype"
+#: PcaTerm.py
+msgid "urban_label_decreeType"
+msgstr ""
+
+msgid "urban_label_defaultRecipient"
+msgstr ""
+
+#. Default: "Delaycomputation"
+#: UrbanDelay.py
+msgid "urban_label_delayComputation"
+msgstr ""
+
+#. Default: "Demanddisplay"
+#: Inquiry.py
+msgid "urban_label_demandDisplay"
+msgstr ""
+
+#. Default: "Denomination"
+#: Corporation.py
+msgid "urban_label_denomination"
+msgstr ""
+
+#. Default: "Deposittype"
+#: UrbanEvent.py
+msgid "urban_label_depositType"
+msgstr ""
+
+#. Default: "Derogation"
+#: GenericLicence.py
+msgid "urban_label_derogation"
+msgstr ""
+
+#. Default: "Derogationdetails"
+#: GenericLicence.py
+msgid "urban_label_derogationDetails"
+msgstr ""
+
+#. Default: "Description"
+#: Declaration.py
+#: GenericLicence.py
+msgid "urban_label_description"
+msgstr ""
+
+#. Default: "Division"
+#: PortionOut.py
+msgid "urban_label_division"
+msgstr ""
+
+#. Default: "Divisioncode"
+#: PortionOut.py
+msgid "urban_label_divisionCode"
+msgstr ""
+
+#. Default: "Divisionsubject"
+#: Division.py
+msgid "urban_label_divisionSubject"
+msgstr ""
+
+#. Default: "Divisionsrenaming"
+#: UrbanTool.py
+msgid "urban_label_divisionsRenaming"
+msgstr ""
+
+#. Default: "Editionoutputformat"
+#: UrbanTool.py
+msgid "urban_label_editionOutputFormat"
+msgstr ""
+
+#. Default: "Email"
+#: Contact.py
+msgid "urban_label_email"
+msgstr ""
+
+#. Default: "Enddate"
+#: Street.py
+msgid "urban_label_endDate"
+msgstr ""
+
+#. Default: "Equipmentandroadrequirements"
+#: GenericLicence.py
+msgid "urban_label_equipmentAndRoadRequirements"
+msgstr ""
+
+#. Default: "Eventdate"
+#: UrbanEvent.py
+msgid "urban_label_eventDate"
+msgstr ""
+
+#. Default: "Eventdatelabel"
+#: UrbanEventType.py
+msgid "urban_label_eventDateLabel"
+msgstr ""
+
+#. Default: "Destinataire"
+#: UrbanEvent.py
+msgid "urban_label_eventRecipient"
+msgstr ""
+
+#. Default: "Eventtypetype"
+#: UrbanEventType.py
+msgid "urban_label_eventTypeType"
+msgstr ""
+
+#. Default: "Explanationsdate"
+#: UrbanEvent.py
+msgid "urban_label_explanationsDate"
+msgstr ""
+
+#. Default: "Exploitationcondition"
+#: EnvironmentRubricTerm.py
+msgid "urban_label_exploitationCondition"
+msgstr ""
+
+#. Default: "Exponent"
+#: PortionsOut.py
+msgid "urban_label_exponent"
+msgstr ""
+
+#. Default: "Exposant"
+#: PortionOut.py
+msgid "urban_label_exposant"
+msgstr ""
+
+#. Default: "Externaldecision"
+#: UrbanEvent.py
+msgid "urban_label_externalDecision"
+msgstr ""
+
+#. Default: "Extravalue"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_extraValue"
+msgstr ""
+
+#. Default: "Fax"
+#: Contact.py
+msgid "urban_label_fax"
+msgstr ""
+
+#. Default: "Filter"
+#: Layer.py
+msgid "urban_label_filter"
+msgstr ""
+
+#. Default: "Finality"
+#: EnvClassThree.py
+msgid "urban_label_finality"
+msgstr ""
+
+#. Default: "Floodinglevel"
+#: GenericLicence.py
+msgid "urban_label_floodingLevel"
+msgstr ""
+
+#. Default: "Floodingleveldetails"
+#: GenericLicence.py
+msgid "urban_label_floodingLevelDetails"
+msgstr ""
+
+#. Default: "Foldercategory"
+#: GenericLicence.py
+msgid "urban_label_folderCategory"
+msgstr ""
+
+#. Default: "Foldercategorytownship"
+#: GenericLicence.py
+msgid "urban_label_folderCategoryTownship"
+msgstr ""
+
+msgid "urban_label_folderManager"
+msgstr ""
+
+#. Default: "Folderreference"
+#: GenericLicence.py
+msgid "urban_label_folderReference"
+msgstr ""
+
+#. Default: "Folderzone"
+#: GenericLicence.py
+msgid "urban_label_folderZone"
+msgstr ""
+
+#. Default: "Folderzonedetails"
+#: GenericLicence.py
+msgid "urban_label_folderZoneDetails"
+msgstr ""
+
+#. Default: "Foldermanagers"
+#: declarationFolderManagers.py
+#: licenceFolderManagers.py
+#: urbancertificatebase_foldermanager.py
+msgid "urban_label_foldermanagers"
+msgstr ""
+
+#. Default: "Ftsolicitopinionsto"
+#: EnvironmentLicence.py
+msgid "urban_label_ftSolicitOpinionsTo"
+msgstr ""
+
+#. Default: "Gender"
+#: PersonTitleTerm.py
+msgid "urban_label_gender"
+msgstr ""
+
+#. Default: "Generatesingletondocuments"
+#: UrbanTool.py
+msgid "urban_label_generateSingletonDocuments"
+msgstr ""
+
+#. Default: "Geometricians"
+#: parcelOutGeometricians.py
+msgid "urban_label_geometricians"
+msgstr ""
+
+#. Default: "Grade"
+#: FolderManager.py
+msgid "urban_label_grade"
+msgstr ""
+
+#. Default: "Hasadditionalconditions"
+#: EnvironmentBase.py
+msgid "urban_label_hasAdditionalConditions"
+msgstr ""
+
+#. Default: "Hasenvironmentimpactstudy"
+#: EnvironmentLicence.py
+msgid "urban_label_hasEnvironmentImpactStudy"
+msgstr ""
+
+#. Default: "Impactstudy"
+#: GenericLicence.py
+msgid "urban_label_impactStudy"
+msgstr ""
+
+#. Default: "Implantation"
+#: BuildLicence.py
+msgid "urban_label_implantation"
+msgstr ""
+
+#. Default: "Inadmissibilityreasons"
+#: EnvironmentBase.py
+msgid "urban_label_inadmissibilityReasons"
+msgstr ""
+
+#. Default: "Initials"
+#: FolderManager.py
+msgid "urban_label_initials"
+msgstr ""
+
+#. Default: "Invertaddressnames"
+#: UrbanTool.py
+msgid "urban_label_invertAddressNames"
+msgstr ""
+
+#. Default: "Investigationarticle"
+#: GenericLicence.py
+msgid "urban_label_investigationArticle"
+msgstr ""
+
+#. Default: "Investigationarticles"
+#: GenericLicence.py
+msgid "urban_label_investigationArticles"
+msgstr ""
+
+#. Default: "Investigationarticlestext"
+#: Inquiry.py
+msgid "urban_label_investigationArticlesText"
+msgstr ""
+
+#. Default: "Investigationdetails"
+#: GenericLicence.py
+msgid "urban_label_investigationDetails"
+msgstr ""
+
+#. Default: "Investigationend"
+#: GenericLicence.py
+#: UrbanCertificateTwo.py
+msgid "urban_label_investigationEnd"
+msgstr ""
+
+#. Default: "Investigationoralreclamationnumber"
+#: UrbanCertificateTwo.py
+msgid "urban_label_investigationOralReclamationNumber"
+msgstr ""
+
+#. Default: "Investigationpoint"
+#: GenericLicence.py
+msgid "urban_label_investigationPoint"
+msgstr ""
+
+#. Default: "Investigationreasons"
+#: GenericLicence.py
+msgid "urban_label_investigationReasons"
+msgstr ""
+
+#. Default: "Investigationstart"
+#: GenericLicence.py
+#: UrbanCertificateTwo.py
+msgid "urban_label_investigationStart"
+msgstr ""
+
+#. Default: "Investigationwritereclamationnumber"
+#: UrbanCertificateTwo.py
+msgid "urban_label_investigationWriteReclamationNumber"
+msgstr ""
+
+#. Default: "Investigations"
+#: GenericLicence.py
+msgid "urban_label_investigations"
+msgstr ""
+
+#. Default: "Investigationsdates"
+#: GenericLicence.py
+msgid "urban_label_investigationsDates"
+msgstr ""
+
+#. Default: "Isadecision"
+#: LicenceEventType.py
+msgid "urban_label_isADecision"
+msgstr ""
+
+msgid "urban_label_isAnOpinion"
+msgstr ""
+
+#. Default: "Isdecentralized"
+#: UrbanTool.py
+msgid "urban_label_isDecentralized"
+msgstr ""
+
+#. Default: "Isdefaultvalue"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_isDefaultValue"
+msgstr ""
+
+msgid "urban_label_isEssayProject"
+msgstr ""
+
+#. Default: "Isinpca"
+#: BuildLicence.py
+msgid "urban_label_isInPCA"
+msgstr ""
+
+#. Default: "Isinsubdivision"
+#: BuildLicence.py
+msgid "urban_label_isInSubdivision"
+msgstr ""
+
+#. Default: "Iskeyevent"
+#: UrbanEventType.py
+msgid "urban_label_isKeyEvent"
+msgstr ""
+
+#. Default: "Ismodification"
+#: ParcelOutLicence.py
+msgid "urban_label_isModification"
+msgstr ""
+
+#. Default: "Isofficialparcel"
+#: PortionOut.py
+msgid "urban_label_isOfficialParcel"
+msgstr ""
+
+#. Default: "Issameaddressasworks"
+#: Contact.py
+msgid "urban_label_isSameAddressAsWorks"
+msgstr ""
+
+#. Default: "Isseveso"
+#: EnvironmentLicence.py
+msgid "urban_label_isSeveso"
+msgstr ""
+
+#. Default: "Issupplementary"
+#: WorkLocation.py
+msgid "urban_label_isSupplementary"
+msgstr ""
+
+#. Default: "Keydates"
+#: UrbanEventType.py
+msgid "urban_label_keyDates"
+msgstr ""
+
+#. Default: "Label"
+#: ParcellingTerm.py
+msgid "urban_label_label"
+msgstr ""
+
+#. Default: "Layerformat"
+#: Layer.py
+msgid "urban_label_layerFormat"
+msgstr ""
+
+#. Default: "Layers"
+#: Layer.py
+msgid "urban_label_layers"
+msgstr ""
+
+#. Default: "Legalform"
+#: Corporation.py
+msgid "urban_label_legalForm"
+msgstr ""
+
+#. Default: "Licenceportaltype"
+#: LicenceConfig.py
+msgid "urban_label_licencePortalType"
+msgstr ""
+
+#. Default: "Licencesubject"
+#: GenericLicence.py
+msgid "urban_label_licenceSubject"
+msgstr ""
+
+#. Default: "Licenceeventdocs"
+#: LicenceEvent.py
+msgid "urban_label_licenceeventdocs"
+msgstr ""
+
+#. Default: "Licenceevents"
+#: GenericLicence.py
+msgid "urban_label_licenceevents"
+msgstr ""
+
+#. Default: "Licenceeventtypes"
+#: LicenceEvent.py
+msgid "urban_label_licenceeventtypes"
+msgstr ""
+
+#. Default: "Linkedcu2s"
+#: Declaration.py
+msgid "urban_label_linkedCU2s"
+msgstr ""
+
+#. Default: "Linkedinquiry"
+#: linkedInquiry.py
+msgid "urban_label_linkedInquiry"
+msgstr ""
+
+#. Default: "Linked inquiry"
+#: urbaneventinquiryview.pt
+msgid "urban_label_linked_inquiry"
+msgstr ""
+
+#. Default: "Locality"
+#: Address.py
+#: Contact.py
+msgid "urban_label_locality"
+msgstr ""
+
+#. Default: "Localityname"
+#: Locality.py
+msgid "urban_label_localityName"
+msgstr ""
+
+#. Default: "Locationdgrneunderground"
+#: BuildLicence.py
+msgid "urban_label_locationDgrneUnderground"
+msgstr ""
+
+#. Default: "Locationfloodinglevel"
+#: GenericLicence.py
+msgid "urban_label_locationFloodingLevel"
+msgstr ""
+
+#. Default: "Locationmissingparts"
+#: GenericLicence.py
+msgid "urban_label_locationMissingParts"
+msgstr ""
+
+#. Default: "Locationmissingpartsdetails"
+#: GenericLicence.py
+msgid "urban_label_locationMissingPartsDetails"
+msgstr ""
+
+#. Default: "Locationspecificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_locationSpecificFeatures"
+msgstr ""
+
+#. Default: "Locationspecificfeaturesdetail"
+#: UrbanCertificateBase.py
+msgid "urban_label_locationSpecificFeaturesDetail"
+msgstr ""
+
+#. Default: "Locationtechnicaladvice"
+#: BuildLicence.py
+msgid "urban_label_locationTechnicalAdvice"
+msgstr ""
+
+#. Default: "Locationtechnicalconditions"
+#: BuildLicence.py
+msgid "urban_label_locationTechnicalConditions"
+msgstr ""
+
+#. Default: "Locationtechnicalremarks"
+#: GenericLicence.py
+msgid "urban_label_locationTechnicalRemarks"
+msgstr ""
+
+#. Default: "Manageablelicences"
+#: FolderManager.py
+msgid "urban_label_manageableLicences"
+msgstr ""
+
+#. Default: "Mapextent"
+#: UrbanTool.py
+msgid "urban_label_mapExtent"
+msgstr ""
+
+#. Default: "Minimumlegalconditions"
+#: EnvironmentBase.py
+msgid "urban_label_minimumLegalConditions"
+msgstr ""
+
+msgid "urban_label_missingPartDate"
+msgstr ""
+
+#. Default: "Missingparts"
+#: GenericLicence.py
+msgid "urban_label_missingParts"
+msgstr ""
+
+#. Default: "Missingpartsdetails"
+#: GenericLicence.py
+msgid "urban_label_missingPartsDetails"
+msgstr ""
+
+#. Default: "Multiplicity"
+#: PersonTitleTerm.py
+msgid "urban_label_multiplicity"
+msgstr ""
+
+#. Default: "Name"
+#: RecipientCadastre.py
+msgid "urban_label_name"
+msgstr ""
+
+#. Default: "Name1"
+#: Contact.py
+msgid "urban_label_name1"
+msgstr ""
+
+#. Default: "Name2"
+#: Contact.py
+msgid "urban_label_name2"
+msgstr ""
+
+#. Default: "Nationalregister"
+#: Contact.py
+#: Geometrician.py
+msgid "urban_label_nationalRegister"
+msgstr ""
+
+#. Default: "Natura2000"
+#: EnvironmentBase.py
+msgid "urban_label_natura2000"
+msgstr ""
+
+#. Default: "Natura2000details"
+#: EnvironmentBase.py
+msgid "urban_label_natura2000Details"
+msgstr ""
+
+#. Default: "Notarycontact"
+#: UrbanCertificateBase.py
+msgid "urban_label_notaryContact"
+msgstr ""
+
+#. Default: "Noteworthytrees"
+#: UrbanCertificateBase.py
+msgid "urban_label_noteworthyTrees"
+msgstr ""
+
+#. Default: "Number"
+#: Contact.py
+#: PcaTerm.py
+msgid "urban_label_number"
+msgstr ""
+
+#. Default: "Numberofparcels"
+#: ParcellingTerm.py
+msgid "urban_label_numberOfParcels"
+msgstr ""
+
+#. Default: "Numbering"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_numbering"
+msgstr ""
+
+#. Default: "Numerotation"
+#: LicenceConfig.py
+msgid "urban_label_numerotation"
+msgstr ""
+
+#. Default: "Numerotation TAL expression"
+#: UrbanTool.py
+msgid "urban_label_numerotationTALExpression"
+msgstr ""
+
+#. Default: "Officecoordinate"
+#: UrbanEvent.py
+msgid "urban_label_officeCoordinate"
+msgstr ""
+
+#. Default: "Openofficeport"
+#: UrbanTool.py
+msgid "urban_label_openOfficePort"
+msgstr ""
+
+msgid "urban_label_opinionRequestsDate"
+msgstr ""
+
+msgid "urban_label_opinionRequestsTransmitDate"
+msgstr ""
+
+#. Default: "Opiniontext"
+#: UrbanEvent.py
+msgid "urban_label_opinionText"
+msgstr ""
+
+#. Default: "Opinionstoaskifworks"
+#: UrbanCertificateBase.py
+msgid "urban_label_opinionsToAskIfWorks"
+msgstr ""
+
+#. Default: "Outdated"
+#: PortionOut.py
+msgid "urban_label_outdated"
+msgstr ""
+
+#. Default: "Outlinecolor"
+#: Layer.py
+msgid "urban_label_outlineColor"
+msgstr ""
+
+# parcelsinfo.pt
+#. Default: "Propriétaire"
+msgid "urban_label_owner"
+msgstr ""
+
+#. Default: "Parcellings"
+#: licenceParcelling.py
+msgid "urban_label_parcellings"
+msgstr ""
+
+#. Default: "Parcels"
+#: GenericLicence.py
+msgid "urban_label_parcels"
+msgstr ""
+
+msgid "urban_label_parcelsLocations"
+msgstr ""
+
+#. Default: "Partie"
+#: PortionOut.py
+msgid "urban_label_partie"
+msgstr ""
+
+#. Default: "Pash"
+#: GenericLicence.py
+msgid "urban_label_pash"
+msgstr ""
+
+#. Default: "Pashdetails"
+#: GenericLicence.py
+msgid "urban_label_pashDetails"
+msgstr ""
+
+#. Default: "Pca"
+#: GenericLicence.py
+msgid "urban_label_pca"
+msgstr ""
+
+#. Default: "Pcadetails"
+#: GenericLicence.py
+msgid "urban_label_pcaDetails"
+msgstr ""
+
+#. Default: "Pcazone"
+#: GenericLicence.py
+msgid "urban_label_pcaZone"
+msgstr ""
+
+#. Default: "Pebdetails"
+#: BuildLicence.py
+msgid "urban_label_pebDetails"
+msgstr ""
+
+#. Default: "Pebstudy"
+#: BuildLicence.py
+msgid "urban_label_pebStudy"
+msgstr ""
+
+#. Default: "Pebtechnicaladvice"
+#: BuildLicence.py
+msgid "urban_label_pebTechnicalAdvice"
+msgstr ""
+
+#. Default: "Pebtype"
+#: BuildLicence.py
+msgid "urban_label_pebType"
+msgstr ""
+
+#. Default: "Personrole"
+#: Corporation.py
+msgid "urban_label_personRole"
+msgstr ""
+
+#. Default: "Persontitle"
+#: Contact.py
+msgid "urban_label_personTitle"
+msgstr ""
+
+#. Default: "Phone"
+#: Contact.py
+msgid "urban_label_phone"
+msgstr ""
+
+#. Default: "Plone user id"
+#: FolderManager.py
+msgid "urban_label_ploneUserId"
+msgstr ""
+
+#. Default: "Pmdescription"
+#: UrbanEvent.py
+msgid "urban_label_pmDescription"
+msgstr ""
+
+#. Default: "Pmtitle"
+#: UrbanEvent.py
+msgid "urban_label_pmTitle"
+msgstr ""
+
+#. Default: "Pollution"
+#: UrbanCertificateBase.py
+msgid "urban_label_pollution"
+msgstr ""
+
+msgid "urban_label_portionOuts"
+msgstr ""
+
+#. Default: "Portionsouts"
+#: GenericLicence.py
+msgid "urban_label_portionsouts"
+msgstr ""
+
+#. Default: "Prenudetails"
+#: GenericLicence.py
+msgid "urban_label_prenuDetails"
+msgstr ""
+
+#. Default: "Previouslicences"
+#: EnvironmentLicence.py
+msgid "urban_label_previousLicences"
+msgstr ""
+
+#. Default: "Prevudetails"
+#: GenericLicence.py
+msgid "urban_label_prevuDetails"
+msgstr ""
+
+#. Default: "Protectedbuilding"
+#: GenericLicence.py
+msgid "urban_label_protectedBuilding"
+msgstr ""
+
+#. Default: "Protectedbuildingdetails"
+#: GenericLicence.py
+msgid "urban_label_protectedBuildingDetails"
+msgstr ""
+
+#. Default: "Publicroadmodifications"
+#: EnvironmentLicence.py
+msgid "urban_label_publicRoadModifications"
+msgstr ""
+
+#. Default: "Puissance"
+#: PortionOut.py
+msgid "urban_label_puissance"
+msgstr ""
+
+#. Default: "Pylonshost"
+#: UrbanTool.py
+msgid "urban_label_pylonsHost"
+msgstr ""
+
+#. Default: "Queryable"
+#: Layer.py
+msgid "urban_label_queryable"
+msgstr ""
+
+#. Default: "Radical"
+#: PortionOut.py
+msgid "urban_label_radical"
+msgstr ""
+
+#. Default: "Rcudetails"
+#: GenericLicence.py
+msgid "urban_label_rcuDetails"
+msgstr ""
+
+#. Default: "Receiptdate"
+#: UrbanEvent.py
+msgid "urban_label_receiptDate"
+msgstr ""
+
+#. Default: "Receiveddocumentreference"
+#: UrbanEvent.py
+msgid "urban_label_receivedDocumentReference"
+msgstr ""
+
+#. Default: "Recipients"
+#: LicenceEvent.py
+msgid "urban_label_recipients"
+msgstr ""
+
+#. Default: "Recoursedecision"
+#: UrbanEvent.py
+msgid "urban_label_recourseDecision"
+msgstr ""
+
+#. Default: "Recoursedecisiondisplaydate"
+#: UrbanEvent.py
+msgid "urban_label_recourseDecisionDisplayDate"
+msgstr ""
+
+#. Default: "Reference"
+#: Declaration.py
+#: GenericLicence.py
+#: UrbanCertificateBase.py
+msgid "urban_label_reference"
+msgstr ""
+
+#. Default: "Referencedgatlp"
+#: GenericLicence.py
+msgid "urban_label_referenceDGATLP"
+msgstr ""
+
+msgid "urban_label_referenceDGO3"
+msgstr ""
+
+#. Default: "Referencetalexpression"
+#: LicenceConfig.py
+msgid "urban_label_referenceTALExpression"
+msgstr ""
+
+#. Default: "Regionalroad"
+#: Street.py
+msgid "urban_label_regionalRoad"
+msgstr ""
+
+#. Default: "Registrationnumber"
+#: Contact.py
+msgid "urban_label_registrationNumber"
+msgstr ""
+
+#. Default: "Relatedfields"
+#: SpecificFeatureTerm.py
+msgid "urban_label_relatedFields"
+msgstr ""
+
+#. Default: "Representedby"
+#: Contact.py
+msgid "urban_label_representedBy"
+msgstr ""
+
+#. Default: "Representedbysociety"
+#: Contact.py
+msgid "urban_label_representedBySociety"
+msgstr ""
+
+#. Default: "Requestedorganisation"
+#: UrbanEventOpinionRequest.py
+msgid "urban_label_requestedOrganisation"
+msgstr ""
+
+#. Default: "Requirementfromfd"
+#: BuildLicence.py
+msgid "urban_label_requirementFromFD"
+msgstr ""
+
+#. Default: "Rgbsr"
+#: GenericLicence.py
+msgid "urban_label_rgbsr"
+msgstr ""
+
+#. Default: "Rgbsrdetails"
+#: GenericLicence.py
+msgid "urban_label_rgbsrDetails"
+msgstr ""
+
+#. Default: "Roadadaptation"
+#: BuildLicence.py
+msgid "urban_label_roadAdaptation"
+msgstr ""
+
+#. Default: "Roadcoating"
+#: GenericLicence.py
+msgid "urban_label_roadCoating"
+msgstr ""
+
+#. Default: "Roaddgrneunderground"
+#: BuildLicence.py
+msgid "urban_label_roadDgrneUnderground"
+msgstr ""
+
+#. Default: "Roadequipments"
+#: GenericLicence.py
+msgid "urban_label_roadEquipments"
+msgstr ""
+
+#. Default: "Roadmiscdescription"
+#: BuildLicence.py
+msgid "urban_label_roadMiscDescription"
+msgstr ""
+
+#. Default: "Roadmissingparts"
+#: GenericLicence.py
+msgid "urban_label_roadMissingParts"
+msgstr ""
+
+#. Default: "Roadmissingpartsdetails"
+#: GenericLicence.py
+msgid "urban_label_roadMissingPartsDetails"
+msgstr ""
+
+#. Default: "Roadmodification"
+#: GenericLicence.py
+msgid "urban_label_roadModification"
+msgstr ""
+
+#. Default: "Roadmodificationsubject"
+#: Inquiry.py
+msgid "urban_label_roadModificationSubject"
+msgstr ""
+
+#. Default: "Roadspecificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_roadSpecificFeatures"
+msgstr ""
+
+#. Default: "Roadspecificfeaturesdetail"
+#: UrbanCertificateBase.py
+msgid "urban_label_roadSpecificFeaturesDetail"
+msgstr ""
+
+#. Default: "Roadtechnicaladvice"
+#: BuildLicence.py
+msgid "urban_label_roadTechnicalAdvice"
+msgstr ""
+
+#. Default: "Roadtype"
+#: GenericLicence.py
+msgid "urban_label_roadType"
+msgstr ""
+
+#. Default: "Rubrics"
+#: EnvironmentBase.py
+msgid "urban_label_rubrics"
+msgstr ""
+
+#. Default: "Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word"
+msgid "urban_label_searchbyfolderreference_descr"
+msgstr ""
+
+#. Default: "Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word"
+msgid "urban_label_searchbyname_descr"
+msgstr ""
+
+#. Default: "Section"
+#: PortionOut.py
+msgid "urban_label_section"
+msgstr ""
+
+#. Default: "Selectedfield"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_selectedField"
+msgstr ""
+
+#. Default: "ShowTitle"
+#: UrbanEventType.py
+msgid "urban_label_showTitle"
+msgstr ""
+
+msgid "urban_label_situation"
+msgstr ""
+
+#. Default: "Society"
+#: Contact.py
+msgid "urban_label_society"
+msgstr ""
+
+#. Default: "Solicitlocationopinionsto"
+#: GenericLicence.py
+msgid "urban_label_solicitLocationOpinionsTo"
+msgstr ""
+
+#. Default: "Solicitopinionsto"
+#: GenericLicence.py
+msgid "urban_label_solicitOpinionsTo"
+msgstr ""
+
+#. Default: "Solicitroadopinionsto"
+#: GenericLicence.py
+msgid "urban_label_solicitRoadOpinionsTo"
+msgstr ""
+
+#. Default: "Specialfunctionname"
+#: UrbanEventType.py
+msgid "urban_label_specialFunctionName"
+msgstr ""
+
+#. Default: "Specialfunctionurl"
+#: UrbanEventType.py
+msgid "urban_label_specialFunctionUrl"
+msgstr ""
+
+#. Default: "Specificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_specificFeatures"
+msgstr ""
+
+#. Default: "Specificfeaturesdetail"
+#: UrbanCertificateBase.py
+msgid "urban_label_specificFeaturesDetail"
+msgstr ""
+
+#. Default: "Sqlhost"
+#: UrbanTool.py
+msgid "urban_label_sqlHost"
+msgstr ""
+
+#. Default: "Sqlname"
+#: UrbanTool.py
+msgid "urban_label_sqlName"
+msgstr ""
+
+#. Default: "Sqlpassword"
+#: UrbanTool.py
+msgid "urban_label_sqlPassword"
+msgstr ""
+
+#. Default: "Sqluser"
+#: UrbanTool.py
+msgid "urban_label_sqlUser"
+msgstr ""
+
+#. Default: "Sscdetails"
+#: GenericLicence.py
+msgid "urban_label_sscDetails"
+msgstr ""
+
+#. Default: "Startdate"
+#: Street.py
+msgid "urban_label_startDate"
+msgstr ""
+
+#. Default: "Street"
+#: Contact.py
+#: RecipientCadastre.py
+msgid "urban_label_street"
+msgstr ""
+
+#. Default: "Streetcode"
+#: Street.py
+msgid "urban_label_streetCode"
+msgstr ""
+
+#. Default: "Streetname"
+#: Street.py
+msgid "urban_label_streetName"
+msgstr ""
+
+#. Default: "Streets"
+#: Contact.py
+#: GenericLicence.py
+msgid "urban_label_streets"
+msgstr ""
+
+#. Default: "Styles"
+#: Layer.py
+msgid "urban_label_styles"
+msgstr ""
+
+#. Default: "Subdividername"
+#: ParcellingTerm.py
+msgid "urban_label_subdividerName"
+msgstr ""
+
+#. Default: "Subdivisiondetails"
+#: BuildLicence.py
+msgid "urban_label_subdivisionDetails"
+msgstr ""
+
+#. Default: "Subjects"
+#: EnvClassThree.py
+msgid "urban_label_subjects"
+msgstr ""
+
+#. Default: "Tabsconfig"
+#: LicenceConfig.py
+msgid "urban_label_tabsConfig"
+msgstr ""
+
+#. Default: "Technicalremarks"
+#: GenericLicence.py
+msgid "urban_label_technicalRemarks"
+msgstr ""
+
+#. Default: "Templatefooter"
+#: UrbanTool.py
+msgid "urban_label_templateFooter"
+msgstr ""
+
+#. Default: "Templateheader"
+#: UrbanTool.py
+msgid "urban_label_templateHeader"
+msgstr ""
+
+#. Default: "Templatereference"
+#: UrbanTool.py
+msgid "urban_label_templateReference"
+msgstr ""
+
+#. Default: "Templatesignatures"
+#: UrbanTool.py
+msgid "urban_label_templateSignatures"
+msgstr ""
+
+#. Default: "Templatestatsins"
+#: UrbanTool.py
+msgid "urban_label_templateStatsINS"
+msgstr ""
+
+#. Default: "Templatestyles"
+#: UrbanTool.py
+msgid "urban_label_templateStyles"
+msgstr ""
+
+#. Default: "Temporaryexploitation"
+#: EnvClassTwo.py
+msgid "urban_label_temporaryExploitation"
+msgstr ""
+
+#. Default: "Termkey"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_termKey"
+msgstr ""
+
+#. Default: "Termkeystr"
+#: UrbanVocabularyTerm.py
+msgid "urban_label_termKeyStr"
+msgstr ""
+
+msgid "urban_label_termTitle"
+msgstr ""
+
+#. Default: "Textdefaultvalues"
+#: LicenceConfig.py
+msgid "urban_label_textDefaultValues"
+msgstr ""
+
+msgid "urban_label_theLicenceDate"
+msgstr ""
+
+#. Default: "Title"
+#: Declaration.py
+#: GenericLicence.py
+#: ParcellingTerm.py
+msgid "urban_label_title"
+msgstr ""
+
+#. Default: "Townshipcouncilfolder"
+#: BuildLicence.py
+msgid "urban_label_townshipCouncilFolder"
+msgstr ""
+
+#. Default: "Townshipspecificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_townshipSpecificFeatures"
+msgstr ""
+
+#. Default: "Townshipspecificfeaturesdetail"
+#: UrbanCertificateBase.py
+msgid "urban_label_townshipSpecificFeaturesDetail"
+msgstr ""
+
+#. Default: "Transmitdate"
+#: UrbanEvent.py
+msgid "urban_label_transmitDate"
+msgstr ""
+
+#. Default: "Transparency"
+#: Layer.py
+msgid "urban_label_transparency"
+msgstr ""
+
+#. Default: "Transparent"
+#: Layer.py
+msgid "urban_label_transparent"
+msgstr ""
+
+#. Default: "Tvanumber"
+#: Corporation.py
+msgid "urban_label_tvaNumber"
+msgstr ""
+
+#. Default: "Type"
+msgid "urban_label_type"
+msgstr ""
+
+#. Default: "Path of a UNO-enabled Python interpreter (ie /usr/bin/python)"
+#: UrbanTool.py
+msgid "urban_label_unoEnabledPython"
+msgstr ""
+
+#. Default: "Urbandelays"
+#: urbaneventtype_urbandelay.py
+msgid "urban_label_urbandelays"
+msgstr ""
+
+#. Default: "Urbaneventtypes"
+#: UrbanEventType.py
+msgid "urban_label_urbaneventtypes"
+msgstr ""
+
+msgid "urban_label_usage"
+msgstr ""
+
+#. Default: "Useplonemeetingwsclient"
+#: UrbanTool.py
+msgid "urban_label_usePloneMeetingWSClient"
+msgstr ""
+
+#. Default: "Usetabbingfordisplay"
+#: LicenceConfig.py
+msgid "urban_label_useTabbingForDisplay"
+msgstr ""
+
+#. Default: "Usetabbingforedit"
+#: LicenceConfig.py
+msgid "urban_label_useTabbingForEdit"
+msgstr ""
+
+#. Default: "Usedattributes"
+#: LicenceConfig.py
+msgid "urban_label_usedAttributes"
+msgstr ""
+
+#. Default: "Validitydelay"
+#: EnvironmentLicence.py
+msgid "urban_label_validityDelay"
+msgstr ""
+
+#. Default: "Visibility"
+#: Layer.py
+msgid "urban_label_visibility"
+msgstr ""
+
+msgid "urban_label_walloonRegionPrimoDate"
+msgstr ""
+
+#. Default: "Webserverhost"
+#: UrbanTool.py
+msgid "urban_label_webServerHost"
+msgstr ""
+
+#. Default: "Worklocationhousenumber"
+#: Declaration.py
+#: GenericLicence.py
+#: UrbanCertificateBase.py
+msgid "urban_label_workLocationHouseNumber"
+msgstr ""
+
+#. Default: "street"
+#: Declaration.py
+#: Division.py
+#: EnvClassThree.py
+msgid "urban_label_workLocations"
+msgstr ""
+
+#. Default: "Worktype"
+#: BuildLicence.py
+msgid "urban_label_workType"
+msgstr ""
+
+#: City.py
+msgid "urban_label_zipCode"
+msgstr ""
+
+#. Default: "Zipcode"
+#: Contact.py
+msgid "urban_label_zipcode"
+msgstr ""
+
+#. Default: "Linked urban event inquiry"
+#: urban_macros.pt
+msgid "urban_link_to_the_linked_urbaneventinquiry"
+msgstr ""
+
+msgid "urban_linked_inquiry_help"
+msgstr ""
+
+#. Default: "Linked urban event inquiry"
+#: urban_macros.pt
+msgid "urban_linked_urbaneventinquiry"
+msgstr ""
+
+#. Default: "There are currently no event added for this element"
+#: urban_macros.pt
+msgid "urban_no_event_added"
+msgstr ""
+
+#. Default: "No event type is defined in the configuration for this element"
+#: urban_macros.pt
+msgid "urban_no_eventtype_defined"
+msgstr ""
+
+msgid "urban_search_descr"
+msgstr ""
+
+msgid "urban_search_parameters"
+msgstr ""
+
+#. Default: "Cadastral reference"
+msgid "urban_search_parcel_by_cadastral_reference"
+msgstr ""
+
+#. Default: "Folder reference"
+msgid "urban_search_parcel_by_folder_reference"
+msgstr ""
+
+#. Default: "Location"
+msgid "urban_search_parcel_by_location"
+msgstr ""
+
+#. Default: "Name"
+msgid "urban_search_parcel_by_name"
+msgstr ""
+
+#. Default: "Proprietary"
+msgid "urban_search_parcel_by_proprietary"
+msgstr ""
+
+msgid "urban_search_result"
+msgstr ""
+
+msgid "urban_searches"
+msgstr ""
+
+msgid "urban_statistics"
+msgstr ""
+
+msgid "urban_statistics_ins"
+msgstr ""
+
+msgid "urban_stats_date"
+msgstr ""
+
+msgid "urban_stats_descr"
+msgstr ""
+
+msgid "urban_stats_from"
+msgstr ""
+
+msgid "urban_stats_state"
+msgstr ""
+
+msgid "urban_stats_to"
+msgstr ""
+
+msgid "urban_stats_type"
+msgstr ""
+
+msgid "urbancertificateone_searchacceptedlicences"
+msgstr ""
+
+msgid "urbancertificateone_searchalllicences"
+msgstr ""
+
+msgid "urbancertificateone_searchincompletelicences"
+msgstr ""
+
+msgid "urbancertificateone_searchinprogresslicences"
+msgstr ""
+
+msgid "urbancertificateone_searchrefusedlicences"
+msgstr ""
+
+msgid "urbancertificateone_searchretiredlicences"
+msgstr ""
+
+msgid "urbancertificateone_urbanconfig_title"
+msgstr ""
+
+msgid "urbancertificateones"
+msgstr ""
+
+msgid "urbancertificatetwo_searchacceptedlicences"
+msgstr ""
+
+msgid "urbancertificatetwo_searchalllicences"
+msgstr ""
+
+msgid "urbancertificatetwo_searchincompletelicences"
+msgstr ""
+
+msgid "urbancertificatetwo_searchinprogresslicences"
+msgstr ""
+
+msgid "urbancertificatetwo_searchrefusedlicences"
+msgstr ""
+
+msgid "urbancertificatetwo_searchretiredlicences"
+msgstr ""
+
+msgid "urbancertificatetwo_urbanconfig_title"
+msgstr ""
+
+msgid "urbancertificatetwos"
+msgstr ""
+
+msgid "urbaneventtypes_folder_title"
+msgstr ""
+
+msgid "urbantemplates_folder_title"
+msgstr ""
+
+msgid "usage_for_habitation"
+msgstr ""
+
+msgid "usage_not_applicable"
+msgstr ""
+
+msgid "usage_not_for_habitation"
+msgstr ""
+
+msgid "viewmap"
+msgstr ""
+
+msgid "warning_add_a_parcel"
+msgstr ""
+
+msgid "warning_add_a_proprietary"
+msgstr ""
+
+msgid "warning_add_an_applicant"
+msgstr ""
+
+#. Default: "!!!Warning, no deposit date found!!!"
+#: base.py
+msgid "warning_no_deposit_date"
+msgstr ""
+
+# error messages...
+msgid "warning_outdated_parcel"
+msgstr ""
+
+msgid "work_location"
+msgstr ""
+
+msgid "years"
+msgstr ""
+
+msgid "zip_folder_title"
+msgstr ""
+

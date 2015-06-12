@@ -1,0 +1,205 @@
+<script type="text/javascript">
+
+finderSelectItem = function(selector, title, image_preview, fieldid) {
+      image_preview = (typeof image_preview != "undefined") ? image_preview : false;
+      if (image_preview) selector = selector + '/image_preview' ;
+      addItem(selector, title, fieldid);
+      copyDataForSubmit(fieldid);   
+}
+
+function openFinder(url) {
+    var finder_window = window.open(url,"plone_finder","menubar=no, status=no, scrollbars=no, menubar=no, width=980, height=650, left=20, top=20");
+    finder_window.focus();
+}
+
+/* all these scripts are old and could be rewritten in jquery
+  (taken from orderedselectionlist widget) */
+
+function addItem(selector, title, name)
+  {
+  // shortcuts for selection fields
+  var tgt = document.getElementById(name+".to");
+  hasselector = 0;
+  for (var i = 0; i < tgt.length; i++) {
+      if (tgt.options[i].value == selector) {
+          hasselector = 1;
+          break;
+      }
+  }
+  if (!hasselector) {
+      temp = new Option(title, selector);
+      tgt.options[tgt.length] = temp;
+  } 
+}
+
+function swapFields(a, b)
+  {
+  // swap text
+  var temp = a.text;
+  a.text = b.text;
+  b.text = temp;
+  // swap value
+  temp = a.value;
+  a.value = b.value;
+  b.value = temp;
+  // swap selection
+  temp = a.selected;
+  a.selected = b.selected;
+  b.selected = temp;
+  }
+
+// move selected item in "to" selection one up
+function moveUp(name)
+  {
+  // shortcuts for selection field
+  var toSel = document.getElementById(name+".to");
+
+  if (toSel.selectedIndex == -1)
+      selectionError();
+  else if (toSel.options[0].selected)
+      alert("Cannot move further up!");
+  else for (var i = 0; i < toSel.length; i++)
+    if (toSel.options[i].selected)
+      {
+      swapFields(toSel.options[i-1], toSel.options[i]);
+      copyDataForSubmit(name);
+      }
+  }
+
+// move selected item in "to" selection one down
+function moveDown(name)
+  {
+    // shortcuts for selection field
+    var toSel = document.getElementById(name+".to");
+
+    if (toSel.selectedIndex == -1) {
+        selectionError();
+    } else if (toSel.options[toSel.length-1].selected) {
+        alert("Cannot move further down!");
+    } else {
+      for (var i = toSel.length-1; i >= 0; i--) {
+        if (toSel.options[i].selected) {
+          swapFields(toSel.options[i+1], toSel.options[i]);
+        }
+      }
+      copyDataForSubmit(name);
+    }
+  }
+
+function deleteEntry(name) {
+    var toSel = document.getElementById(name+".to");
+    // in a multiple selection list
+    // selectedIndex return the first selected option
+    while(toSel.selectedIndex!=-1) {
+        selected  = toSel.selectedIndex;
+        toSel.removeChild(toSel.options[selected]);
+    }
+    copyDataForSubmit(name);
+}
+
+// copy each item of "toSel" into one hidden input field
+function copyDataForSubmit(name)
+  {
+  // shortcuts for selection field and hidden data field
+  var toSel = document.getElementById(name+".to");
+  var toDataContainer = document.getElementById(name+".toDataContainer");
+
+  // delete all child nodes (--> complete content) of "toDataContainer" span
+  while (toDataContainer.hasChildNodes())
+      toDataContainer.removeChild(toDataContainer.firstChild);
+
+  // create new hidden input fields - one for each selection item of
+  // "to" selection
+  for (var i = 0; i < toSel.options.length; i++)
+    {
+    // create virtual node with suitable attributes
+    var newNode = document.createElement("input");
+    var newAttr = document.createAttribute("name");
+    newAttr.nodeValue = name;
+    newNode.setAttributeNode(newAttr);
+
+    newAttr = document.createAttribute("type");
+    newAttr.nodeValue = "hidden";
+    newNode.setAttributeNode(newAttr);
+
+    newAttr = document.createAttribute("value");
+    newAttr.nodeValue = toSel.options[i].value;
+    newNode.setAttributeNode(newAttr);
+
+    // actually append virtual node to DOM tree
+    toDataContainer.appendChild(newNode);
+    }
+  }
+
+// error message for missing selection
+function selectionError()
+  {alert("Must select something!")}
+
+</script>
+
+<table border="0" class="ordered-selection-field">
+  <tr>
+    <td>
+      <select id="to"
+              name="to"
+              size="10"
+              multiple=""
+              style="min-width: 150px;"
+              tal:attributes="name string:${view/name}.to;
+                              id string:${view/name}.to">
+        <option tal:repeat="entry view/selected"
+                tal:attributes="value entry/value"
+                tal:content="entry/text" i18n:translate=""/>
+      </select>
+      <input name="foo-empty-marker" type="hidden"
+        tal:attributes="name string:${view/name}-empty-marker"/>
+      <span id="toDataContainer"
+            tal:attributes="id string:${view/name}.toDataContainer">
+        <script type="text/javascript" tal:content="string:
+          copyDataForSubmit('${view/name}');">
+          // initial copying of field "field.to" --> "field"
+          copyDataForSubmit("<i tal:replace="${view/name}"/>");
+        </script>
+      </span>
+    </td>
+    <td>
+      <!--<button
+          name="upButton" type="button" value="▲"
+          onclick="javascript:moveUp()"
+          style="width: 20px; text-align: center; font-weight: bold; margin-bottom: 5px"
+          tal:attributes="onClick string:moveUp('${view/name}');
+                          title view/moveuplabel"
+          >▲</button>
+      <br />
+      <button
+          name="downButton" type="button" value="▼"
+          onclick="javascript:moveDown()"
+          style="width: 20px; text-align: center; font-weight: bold; margin-bottom: 5px"
+          tal:attributes="onClick string:moveDown('${view/name}');
+                          title view/movedownlabel"
+          >▼</button>
+      <br />-->
+      <button
+          name="addButton" type="button" value="+"
+          style="width: 100px; text-align: center; font-weight: bold; margin-bottom: 5px"
+          tal:attributes="onClick view/finderlink;
+                          title view/finderlabel"
+          >ajouter une rue</button>
+      <br />
+      <button
+          name="deleteButton" type="button" value="-"
+          onclick="javascript:moveDown()"
+          style="width: 100px; text-align: center; font-weight: bold; margin-bottom: 5px"
+          tal:attributes="onClick string:deleteEntry('${view/name}');
+                          title view/deleteentrylabel"
+          >retirer une rue</button>
+    </td>
+  </tr>
+</table>
+
+<div class="finderlink">
+  <a tal:attributes="href string:javascript:${view/finderlink}"
+     tal:content="view/finderlabel">
+     Browse for content
+  </a>
+</div>

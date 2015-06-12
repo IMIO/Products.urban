@@ -1,0 +1,495 @@
+
+<tal:defaults define="global default_map_width 800;
+                      global default_map_height 600;
+                      global default_units 'meters';" />
+<tal:defines define="map_name request/map_name|nothing;
+                     map_width request/width|nothing;
+                     map_height request/height|nothing;
+                     units request/units|default_units" >
+
+MAP
+  NAME <tal:block content="map_name" />
+  # Map image size
+  SIZE <tal:block content="map_width" /> <tal:block content="map_height" />
+  UNITS <tal:block content="units" />
+
+  EXTENT <tal:block content="python: portal_urban.getMapExtent().replace(',', ' ')">map extent values</block>
+  PROJECTION
+    'proj=lcc'
+    'lat_1=51.16666723333333'
+    'lat_2=49.8333339'
+    'lat_0=90'
+    'lon_0=4.367486666666666'
+    'x_0=150000.013'
+    'y_0=5400088.438'
+    'ellps=intl'
+    'towgs84=106.869,-52.2978,103.724,-0.33657,0.456955,-1.84218,1'
+    'units=m'
+    'no_defs'
+    ''
+  END
+
+  # Background color for the map canvas -- change as desired
+  #IMAGECOLOR 192 192 192
+  TRANSPARENT ON
+
+IMAGETYPE png24
+
+OUTPUTFORMAT
+  NAME png24
+  DRIVER "GD/PNG"
+  MIMETYPE "image/png"
+  IMAGEMODE RGB
+  EXTENSION "png"
+END
+
+  # Legend
+  LEGEND
+      IMAGECOLOR 255 255 255
+    STATUS ON
+    KEYSIZE 18 12
+    LABEL
+      TYPE BITMAP
+      SIZE MEDIUM
+      COLOR 0 0 89
+    END
+  END
+
+  # Web interface definition. Only the template parameter
+  # is required to display a map. See MapServer documentation
+  WEB
+    # Set IMAGEPATH to the path where MapServer should
+    # write its output.
+    IMAGEPATH '/tmp/'
+
+    # Set IMAGEURL to the url that points to IMAGEPATH
+    # as defined in your web server configuration
+    IMAGEURL '/tmp/'
+
+    # WMS server settings
+    METADATA
+      'wms_title'           '<tal:block content="map_name" />'
+      'wms_onlineresource'  'http://<tal:block replace="context/portal_urban/getWebServerHost" />/cgi-bin/mapserv?map=/var/www/mapfiles/carto.map&'
+      'wms_srs'             'EPSG:31300'
+      'wms_feature_info_mime_type' "application/vnd.ogc.gml"
+    END
+
+    #Scale range at which web interface will operate
+    # Template and header/footer settings
+    # Only the template parameter is required to display a map. See MapServer documentation
+  END
+
+        QUERYMAP
+            COLOR   255 0 0  # Colors of selected elements
+            STATUS  ON
+            STYLE   HILITE  # Display type, here colorisation
+        END
+
+  LAYER
+    NAME 'affect'
+    TYPE POLYGON
+    DATA '/var/www/carto/shapefiles/affect.shp'
+    METADATA
+      'wms_title' 'affect'
+      "wms_include_items" "all" 
+      "gml_include_items" "all"  
+    END
+    DUMP TRUE
+    TEMPLATE '*'
+
+    STATUS ON
+    TRANSPARENCY 100
+    PROJECTION
+    'proj=lcc'
+    'lat_1=51.16666723333333'
+    'lat_2=49.8333339'
+    'lat_0=90'
+    'lon_0=4.367486666666666'
+    'x_0=150000.013'
+    'y_0=5400088.438'
+    'ellps=intl'
+    'towgs84=106.869,-52.2978,103.724,-0.33657,0.456955,-1.84218,1'
+    'units=m'
+    'no_defs'
+    ''
+    END
+    CLASSITEM 'AFFECT'
+    CLASS
+      NAME 'AFFECT = A01' 
+      EXPRESSION 'A01' 
+      STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 220 158 255
+       END
+    END
+    CLASS
+      NAME 'AFFECT = A02' 
+      EXPRESSION 'A02' 
+      STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 201 90 149
+       END
+    END
+    CLASS
+      NAME 'AFFECT = D01' 
+      EXPRESSION 'D01' 
+      STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 160 217 255
+       END
+    END
+    CLASS
+      NAME 'AFFECT = E01' 
+      EXPRESSION 'E01' 
+      STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 0 0 255
+       END
+    END
+    CLASS
+      NAME 'AFFECT = H01' 
+      EXPRESSION 'H01' 
+      STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 255 0 0
+       END
+    END
+    CLASS
+      NAME 'AFFECT = H02' 
+      EXPRESSION 'H02' 
+      STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 255 0 0
+       END
+    END
+    CLASS
+      NAME 'AFFECT = L01' 
+      EXPRESSION 'L01' 
+      STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 255 170 0
+       END
+    END
+    CLASS
+      NAME 'AFFECT = P01' 
+      EXPRESSION 'P01' 
+      STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 175 234 255
+       END
+    END
+    CLASS
+      NAME 'AFFECT = R01' 
+      EXPRESSION 'R01' 
+      STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 255 255 0
+       END
+    END
+    CLASS
+      NAME 'AFFECT = R02' 
+      EXPRESSION 'R02' 
+      STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 85 170 0
+       END
+    END
+    CLASS
+      NAME 'AFFECT = R03' 
+      EXPRESSION 'R03' 
+      STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 170 255 127
+       END
+    END
+    CLASS
+      NAME 'N'
+      EXPRESSION 'R04' 
+      STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 119 255 235
+       END
+    END
+    CLASS
+      NAME 'P'
+      EXPRESSION 'R05' 
+      STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 205 255 130
+       END
+    END
+    CLASS
+      NAME 'AFFECT = X01' 
+      EXPRESSION 'X01' 
+      STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 215 0 222
+       END
+    END
+  END
+
+  LAYER
+    NAME 'lotLaBruyere'
+    TYPE POLYGON
+    DATA '/var/www/carto/shapefiles/lotLaBruyere.shp'
+    METADATA
+      'wms_title' 'lotLaBruyere'
+      "wms_include_items" "all" 
+    END
+    TEMPLATE '*'
+    STATUS ON
+    TRANSPARENCY 100
+    PROJECTION
+    'proj=lcc'
+    'lat_1=51.16666723333333'
+    'lat_2=49.8333339'
+    'lat_0=90'
+    'lon_0=4.367486666666666'
+    'x_0=150000.013'
+    'y_0=5400088.438'
+    'ellps=intl'
+    'towgs84=106.869,-52.2978,103.724,-0.33657,0.456955,-1.84218,1'
+    'units=m'
+    'no_defs'
+    ''
+    END
+    CLASS
+       NAME 'lotLaBruyere' 
+       STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 170 85 0
+       END
+    END
+  END
+
+  LAYER
+    NAME 'buildings'
+    TYPE POLYGON
+    CONNECTIONTYPE postgis
+    CONNECTION "host=localhost user='postgres' password='password' dbname='urbangis'"
+    DATA 'the_geom FROM buildings'
+    TEMPLATE '*'
+    DUMP TRUE
+    METADATA
+      'wms_title' 'buildings'
+      "wms_include_items" "all" 
+      "gml_include_items" "all" 
+    END
+    STATUS ON
+    TRANSPARENCY 100
+    PROJECTION
+    'proj=lcc'
+    'lat_1=51.16666723333333'
+    'lat_2=49.8333339'
+    'lat_0=90'
+    'lon_0=4.367486666666666'
+    'x_0=150000.013'
+    'y_0=5400088.438'
+    'ellps=intl'
+    'towgs84=106.869,-52.2978,103.724,-0.33657,0.456955,-1.84218,1'
+    'units=m'
+    'no_defs'
+    ''
+    END
+    CLASS
+       NAME 'buildings' 
+       STYLE
+         OUTLINECOLOR 0 0 0
+         COLOR 170 170 127
+       END
+    END
+  END
+
+  LAYER
+    NAME 'station'
+    TYPE POINT
+    DATA '/var/www/carto/shapefiles/station.shp'
+    METADATA
+      'wms_title' 'station'
+    END
+    TEMPLATE '*'
+    STATUS ON
+    TRANSPARENCY 100
+    PROJECTION
+    'proj=lcc'
+    'lat_1=51.16666723333333'
+    'lat_2=49.8333339'
+    'lat_0=90'
+    'lon_0=4.367486666666666'
+    'x_0=150000.013'
+    'y_0=5400088.438'
+    'ellps=intl'
+    'towgs84=106.869,-52.2978,103.724,-0.33657,0.456955,-1.84218,1'
+    'units=m'
+    'no_defs'
+    ''
+    END
+    CLASS
+       NAME 'station' 
+       STYLE
+     
+         OUTLINECOLOR 0 0 0
+         COLOR 20 18 53
+       END
+    END
+  END
+
+  LAYER
+    NAME 'restot'
+    TYPE LINE
+    DATA '/var/www/carto/shapefiles/restot.shp'
+    METADATA
+      'wms_title' 'restot'
+    END
+	TEMPLATE '*'
+    STATUS ON
+    TRANSPARENCY 100
+    PROJECTION
+    'proj=lcc'
+    'lat_1=51.16666723333333'
+    'lat_2=49.8333339'
+    'lat_0=90'
+    'lon_0=4.367486666666666'
+    'x_0=150000.013'
+    'y_0=5400088.438'
+    'ellps=intl'
+    'towgs84=106.869,-52.2978,103.724,-0.33657,0.456955,-1.84218,1'
+    'units=m'
+    'no_defs'
+    ''
+    END
+    CLASS
+       NAME 'restot' 
+       STYLE
+	 width 2
+         OUTLINECOLOR 85 170 127
+      
+       END
+    END
+  END
+
+
+  LAYER
+    NAME 'portionouts'
+    TYPE POLYGON
+    CONNECTIONTYPE postgis
+    CONNECTION "host=localhost user='postgres' password='password' dbname='urbangis'"
+    DATA 'the_geom FROM portionouts'
+	TEMPLATE '*'
+    DUMP TRUE
+    METADATA
+      'wms_title' 'portionouts'
+      "wms_include_items" "all" 
+      "gml_include_items" "all" 
+    END
+    STATUS ON
+    TRANSPARENCY 100
+    PROJECTION
+    'proj=lcc'
+    'lat_1=51.16666723333333'
+    'lat_2=49.8333339'
+    'lat_0=90'
+    'lon_0=4.367486666666666'
+    'x_0=150000.013'
+    'y_0=5400088.438'
+    'ellps=intl'
+    'towgs84=106.869,-52.2978,103.724,-0.33657,0.456955,-1.84218,1'
+    'units=m'
+    'no_defs'
+    ''
+    END
+    CLASS
+       NAME 'portionouts' 
+       STYLE
+         OUTLINECOLOR 0 0 0
+         ANTIALIAS true
+
+       END
+    END
+  END
+
+# EXEMPLE AVEC CLAUSE WHERE pour les permis en attentes
+#LAYER
+#    NAME 'Attentes'
+#    TYPE POLYGON
+#    CONNECTIONTYPE postgis
+#    CONNECTION "host=localhost user='postgres' password=password dbname='urbangis'"
+#    DATA 'f.the_geom FROM (SELECT p.* from portionouts p WHERE p.objet_id in (310,311)) as f USING UNIQUE gid serial USING SRID=-1'
+#    TEMPLATE '*'
+#    METADATA
+#      'wms_title' 'portionouts'
+#      "wms_include_items" "all" 
+#    END
+#    STATUS ON
+#    TRANSPARENCY 100
+#    PROJECTION
+#    'proj=lcc'
+#    'lat_1=51.16666723333333'
+#    'lat_2=49.8333339'
+#    'lat_0=90'
+#    'lon_0=4.367486666666666'
+#    'x_0=150000.013'
+#    'y_0=5400088.438'
+#    'ellps=intl'
+#    'towgs84=106.869,-52.2978,103.724,-0.33657,0.456955,-1.84218,1'
+#    'units=m'
+#    'no_defs'
+#    ''
+#    END
+#    CLASS
+#       NAME 'Permis en Attente' 
+#       STYLE
+#         OUTLINECOLOR 0 0 0
+#	 COLOR 240 112 3
+#       END
+#    END
+# END
+#
+  LAYER
+    NAME 'AleaLaBruyere'
+    TYPE POLYGON
+    DATA '/var/www/carto/shapefiles/AleaLaBruyere.shp'
+    METADATA
+      'wms_title' 'AleaLaBruyere'
+    END
+	TEMPLATE '*'
+    STATUS ON
+    TRANSPARENCY 75
+    PROJECTION
+    'proj=lcc'
+    'lat_1=51.16666723333333'
+    'lat_2=49.8333339'
+    'lat_0=90'
+    'lon_0=4.367486666666666'
+    'x_0=150000.013'
+    'y_0=5400088.438'
+    'ellps=intl'
+    'towgs84=106.869,-52.2978,103.724,-0.33657,0.456955,-1.84218,1'
+    'units=m'
+    'no_defs'
+    ''
+    END
+    CLASS
+       NAME 'AleaLaBruyere' 
+       STYLE
+       
+         OUTLINECOLOR 0 0 0
+         COLOR 0 170 255
+       END
+    END
+  END
+
+ 
+
+
+      #Circle symbol
+      SYMBOL
+        NAME 'CIRCLE'
+        TYPE ellipse
+        FILLED true
+        POINTS
+          1 1
+        END
+      END 
+END
+</tal:defines>

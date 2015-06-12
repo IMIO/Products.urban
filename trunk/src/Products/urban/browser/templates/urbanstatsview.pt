@@ -1,0 +1,123 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xml:lang="en" lang="en"
+      i18n:domain="urban"
+      metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="top_slot"
+             tal:define="dummy python:request.set('disable_border',1)" />
+
+<metal:js fill-slot="javascript_head_slot">
+   <script type="text/javascript" charset="iso-8859-1"
+           tal:attributes="src string:$portal_url/jscalendar/calendar_stripped.js">
+   </script>
+   <script type="text/javascript" charset="iso-8859-1"
+           tal:attributes="src string:$portal_url/jscalendar/calendar-en.js">
+   </script>
+</metal:js>
+<metal:css fill-slot="css_slot">
+   <style type="text/css" media="all"
+          tal:content="structure string:&lt;!-- @import url($portal_url/jscalendar/calendar-system.css); --&gt;">
+   </style>
+</metal:css>
+
+<body>
+
+<div metal:fill-slot="main"
+     tal:define="licence_types python: request.get('licence_types', view.getLicenceTypes());
+                 licence_states python: request.get('licence_states', ['accepted']);
+                 stats_arg request/stats_arg|nothing;
+                 previous_search_by request/search_by|nothing;
+                 all_licence_types view/getLicenceTypes;
+                 all_licence_states view/getWfStates">
+        <h1 class="documentFirstHeading" i18n:translate="urban_stats_descr">
+           Licences statistics
+        </h1>
+<form action="" method="get" id="stats_form">
+ <input type="hidden" name="stats_arg" value="1"/>
+ <fieldset><legend><strong i18n:translate="urban_search_parameters">Enter your parameters for the search</strong></legend>
+ <table>
+  <tr>
+    <td><strong i18n:translate="urban_stats_type">Licence Type</strong></td>
+    <td width="5%"></td>
+    <td><strong i18n:translate="urban_stats_state">Licence state</strong></td>
+  </tr>
+  <tr><td><br/></td></tr>
+  <tr>
+   <td valign="top">
+    <div tal:repeat="licence_type all_licence_types">
+         <input id="licence_types" type="checkbox" name="licence_types"
+                tal:define="type_checked python:licence_type in licence_types or False"
+                tal:attributes="value licence_type;checked python: type_checked and 'checked' or ''" />
+     <label tal:content="licence_type" i18n:domain="plone" i18n:translate="">Licence type</label><br />
+    </div>
+   </td>
+   <td></td>
+   <td valign="top">
+     <div tal:repeat="licence_state all_licence_states">
+         <input id="licence_states" type="checkbox" name="licence_states"
+                tal:define="state_checked python:licence_state in licence_states or False"
+                tal:attributes="value licence_state;checked python: state_checked and 'checked' or ''" />
+      <label tal:content="licence_state" i18n:domain="plone" i18n:translate="">Licence state</label><br />
+     </div>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td><br/><strong i18n:translate="urban_stats_date">Creation date </strong></td>
+  </tr>
+  <tr>
+    <td><div i18n:translate="urban_stats_from">From: </div>
+    <tal:to define="id python: 'from';
+                    inputname python: 'from';
+                    formname python: 'stats_form';
+                    show_hm python: 0;
+                    inputvalue request/from|view/getDefaultStartDate;">
+      <metal:box use-macro="here/calendar_macros/macros/calendarDatePickerBox|default">
+               <!-- a calendar, hopefully -->
+      </metal:box>
+    </tal:to>
+   </td>
+   <td width="5%"></td>
+   <td><div i18n:translate="urban_stats_to">To: </div>
+    <tal:to define="id python: 'to';
+                    inputname python: 'to';
+                    formname python: 'stats_form';
+                    show_hm python: 0;
+                    inputvalue request/to|view/getDefaultEndDate;">
+      <metal:box use-macro="here/calendar_macros/macros/calendarDatePickerBox|default">
+               <!-- a calendar, hopefully -->
+      </metal:box>
+    </tal:to>
+   </td>
+  </tr>
+</table>
+</fieldset>
+ <fieldset>
+  <input class="context" type="submit" value="Statistics" name="Statistics" i18n:attributes="value">
+ </fieldset>
+</form>
+
+<!-- Display results -->
+<tal:block_results condition="python: stats_arg">
+<tal:stats define="stats view/computeStatistics">
+<h1>Statistics results :</h1>
+<span tal:content="python: '%s dossiers créés entre le %s et le %s' %(stats['sum']['sum'].split()[0],
+                   view.getDisplayDate('from'), view.getDisplayDate('to'))">
+</span>
+<br/><br/>
+         <div tal:condition="python: stats['sum']['sum'] != '0'"
+              tal:define="tool python: context.portal_urban;
+                          stats view/computeStatistics;
+                          table python: stats;">
+         <metal:listing use-macro="context/@@urbanstats-macros/statslisting" />
+         </div>
+</tal:stats>
+</tal:block_results>
+
+</div>
+
+</body>
+</html>

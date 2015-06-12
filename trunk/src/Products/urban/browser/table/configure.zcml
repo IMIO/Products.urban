@@ -1,0 +1,359 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="urban">
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IUrbanTable"
+     factory=".column.TitleColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="titleColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.ILicenceListingTable
+          Products.urban.browser.table.interfaces.ITitleColumn"
+     factory=".column.LicenceTitleColumnHeader"
+     provides="z3c.table.interfaces.IColumnHeader"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IApplicantTable
+          Products.urban.browser.table.interfaces.ITitleColumn"
+     factory=".column.ApplicantTitleColumnHeader"
+     provides="z3c.table.interfaces.IColumnHeader"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IProprietaryTable
+          Products.urban.browser.table.interfaces.ITitleColumn"
+     factory=".column.ProprietaryTitleColumnHeader"
+     provides="z3c.table.interfaces.IColumnHeader"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.INotariesTable
+          Products.urban.browser.table.interfaces.ITitleColumn"
+     factory=".column.NotaryTitleColumnHeader"
+     provides="z3c.table.interfaces.IColumnHeader"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IGeometriciansTable
+          Products.urban.browser.table.interfaces.ITitleColumn"
+     factory=".column.GeometricianTitleColumnHeader"
+     provides="z3c.table.interfaces.IColumnHeader"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IArchitectsTable
+          Products.urban.browser.table.interfaces.ITitleColumn"
+     factory=".column.ArchitectTitleColumnHeader"
+     provides="z3c.table.interfaces.IColumnHeader"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IClaimantsTable
+          Products.urban.browser.table.interfaces.ITitleColumn"
+     factory=".column.ClaimantTitleColumnHeader"
+     provides="z3c.table.interfaces.IColumnHeader"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IRecipientsCadastreTable
+          Products.urban.browser.table.interfaces.ITitleColumn"
+     factory=".column.RecipientCadastreTitleColumnHeader"
+     provides="z3c.table.interfaces.IColumnHeader"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          Products.urban.browser.table.interfaces.ITitleColumn
+          Products.urban.browser.table.interfaces.IItemForUrbanTable
+          Products.urban.interfaces.IGenericLicence"
+     factory=".column.LicenceTitleDisplay"
+     provides="Products.urban.browser.table.interfaces.ITitleCell"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          Products.urban.browser.table.interfaces.ITitleColumn
+          Products.urban.browser.table.interfaces.IItemForUrbanTable
+          Products.urban.interfaces.IPortionOut"
+     factory=".column.ParcelTitleDisplay"
+     provides="Products.urban.browser.table.interfaces.ITitleCell"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          Products.urban.browser.table.interfaces.ITitleColumn
+          Products.urban.browser.table.interfaces.IItemForUrbanTable
+          Products.urban.interfaces.IContact"
+     factory=".column.ContacTitleDisplay"
+     provides="Products.urban.browser.table.interfaces.ITitleCell"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          Products.urban.browser.table.interfaces.ITitleColumn
+          Products.urban.browser.table.interfaces.IItemForUrbanTable
+          Products.urban.interfaces.IUrbanEvent"
+     factory=".column.EventTitleDisplay"
+     provides="Products.urban.browser.table.interfaces.ITitleCell"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          Products.urban.browser.table.interfaces.ITitleColumn
+          Products.urban.browser.table.interfaces.IItemForUrbanTable
+          Products.urban.interfaces.IUrbanDoc"
+     factory=".column.DocumentTitleDisplay"
+     provides="Products.urban.browser.table.interfaces.ITitleCell"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          Products.urban.browser.table.interfaces.ITitleColumn
+          Products.urban.browser.table.interfaces.IItemForUrbanTable
+          Products.urban.interfaces.IRecipientCadastre"
+     factory=".column.RecipientCadastreTitleDisplay"
+     provides="Products.urban.browser.table.interfaces.ITitleCell"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IEventsTable"
+     factory=".column.EventDateColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="eventdateColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IParcelsTable"
+     factory=".column.RelatedLicencesColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="relatedlicencesColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.ILicenceListingTable"
+     factory=".column.BrainCreationDateColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="creationdateColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IDocumentsTable"
+     factory=".column.ObjectCreationDateColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="creationdateColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IDocumentsTable"
+     factory=".column.ObjectCreatorColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="creatorColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IAttachmentsTable"
+     factory=".column.BrainCreationDateColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="creationdateColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IAttachmentsTable"
+     factory=".column.BrainCreatorColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="creatorColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.INestedAttachmentsTable"
+     factory=".column.ParentLocationColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="parentlocationColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.ILicenceListingTable"
+     factory=".column.FoldermanagerColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="foldermanagerColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.ISearchResultTable"
+     factory=".column.BrainCreationDateColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="creationdateColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.ISearchResultTable"
+     factory=".column.FoldermanagerColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="foldermanagerColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IRecipientsCadastreTable"
+     factory=".column.LocalityColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="localityColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IRecipientsCadastreTable"
+     factory=".column.StreetColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="streetColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.ISearchResultTable"
+     factory=".column.AddressColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="addressColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.ISearchResultTable"
+     factory=".column.ParcelReferencesColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="parcelreferencesColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IUrbanTable"
+     factory=".column.ActionsColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="actionsColumn"
+  />
+
+  <!-- table values adapter -->
+
+  <!-- the next two adapters wrap any item used in an UrbanTable into an adapter
+       with memoized helper methods that compute informations to display about the item -->
+  <adapter
+     for="Products.ZCatalog.interfaces.ICatalogBrain"
+     factory=".tablevalue.BrainForUrbanTable"
+     provides="Products.urban.browser.table.interfaces.IItemForUrbanTable"
+  />
+
+  <adapter
+     for="Products.Archetypes.interfaces.IBaseObject"
+     factory=".tablevalue.ObjectForUrbanTable"
+     provides="Products.urban.browser.table.interfaces.IItemForUrbanTable"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IUrbanTable"
+     factory=".tablevalue.ValuesForUrbanListing"
+     provides="z3c.table.interfaces.IValues"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IApplicantTable"
+     factory=".tablevalue.ValuesForApplicantListing"
+     provides="z3c.table.interfaces.IValues"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IProprietaryTable"
+     factory=".tablevalue.ValuesForProprietariesListing"
+     provides="z3c.table.interfaces.IValues"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IClaimantsTable"
+     factory=".tablevalue.ValuesForClaimantsListing"
+     provides="z3c.table.interfaces.IValues"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IFolderContentTable"
+     factory=".tablevalue.ValuesForFolderListing"
+     provides="z3c.table.interfaces.IValues"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.ILicenceListingTable"
+     factory=".tablevalue.ValuesForLicenceListing"
+     provides="z3c.table.interfaces.IValues"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IAllLicencesListingTable"
+     factory=".tablevalue.ValuesForAllLicencesListing"
+     provides="z3c.table.interfaces.IValues"
+  />
+  <!-- table values adapters end -->
+
+</configure>

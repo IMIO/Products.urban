@@ -1,0 +1,67 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="urban">
+
+  <include package="Products.GenericSetup" file="meta.zcml" />
+
+  <!-- ##code-section profiles.zcml-top #fill in your manual code here -->
+  <!-- ##/code-section profiles.zcml-top -->
+
+  <genericsetup:registerProfile
+      name="default"
+      title="urban"
+      directory="profiles/default"
+      description="Extension profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+  
+  <!-- ##code-section profiles.zcml-bottom #fill in your manual code here -->
+  <genericsetup:registerProfile
+      name="extra"
+      title="urban-extra"
+      directory="profiles/extra"
+      description="Extra Extension profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+  />
+  <genericsetup:registerProfile
+      name="migrations"
+      title="urban-migrations"
+      directory="profiles/migrations"
+      description="Migrations profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.urban.interfaces.IUrbanTool"
+  />
+  <genericsetup:registerProfile
+      name="testCommune1"
+      title="urban-testCommune1"
+      directory="profiles/testCommune1"
+      description="Test Extension profile for testing urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.urban.interfaces.IUrbanTool"
+  />
+  <genericsetup:registerProfile
+      name="testCommune2"
+      title="urban-testCommune2"
+      directory="profiles/testCommune2"
+      description="Test Extension profile for testing urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.urban.interfaces.IUrbanTool"
+  />
+  <genericsetup:registerProfile
+      name="demo"
+      title="urban-demo"
+      directory="profiles/demo"
+      description="Demo Extension profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+  />
+  <genericsetup:registerProfile
+      name="pmwsclient"
+      title="urban-pm-wsclient"
+      directory="profiles/pm-wsclient"
+      description="Profile for pm.wsclient in urban"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+  />
+  <!-- ##/code-section profiles.zcml-bottom -->
+
+</configure>

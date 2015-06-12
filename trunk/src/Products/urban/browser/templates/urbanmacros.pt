@@ -1,0 +1,81 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="urban">
+<body>
+
+<div metal:define-macro="filter_listing" >
+
+<metal:block metal:use-macro="here/global_defines/macros/defines" />
+
+
+<form name="input" action="" method="get">
+  <table class="filter_listing">
+    <thead>
+      <th>
+        <input type="submit" value="Filter" i18n:attributes="value">
+     </th>
+     <th>
+  <select tal:define="me view/amIFolderManager;
+                      name python: 'foldermanager';
+                      previousvalue python: view.getArgument(name)"
+          tal:attributes="name name">
+     <option value="" i18n:translate='urban_label_foldermanagers'>All</option>
+     <option value="" i18n:translate='All'>All</option>
+     <option tal:condition="me"
+             tal:attributes="value python: me.UID(); selected python: previousvalue == me.UID()"
+             tal:content="python: 'Moi (%s %s)' % (me.getName2(), me.getName1())">Me</option>
+     <option tal:repeat="foldermanager view/listFolderManagers"
+             tal:attributes="value python: foldermanager[0]; selected python: previousvalue == foldermanager[0]"
+             tal:content="python: foldermanager[1]">Folder manager</option>
+  </select>
+        </th>
+        <th>
+  <select tal:define="name python: 'review_state';
+                      previousvalue python: view.getArgument(name)"
+          tal:attributes="name name">
+     <option value="" i18n:translate='urban_stats_state'>All</option>
+     <option value="" i18n:translate='All'>All</option>
+     <option value="in_progress" i18n:domain="plone" i18n:translate="in_progress"
+             tal:attributes="selected python: previousvalue == 'in_progress'">In progress</option>
+     <option value="accepted" i18n:domain="plone" i18n:translate="accepted"
+             tal:attributes="selected python: previousvalue == 'accepted'">Accepted</option>
+     <option value="refused" i18n:domain="plone" i18n:translate="refused"
+             tal:attributes="selected python: previousvalue == 'refused'">Refused</option>
+     <option value="incomplete" i18n:domain="plone" i18n:translate="incomplete"
+             tal:attributes="selected python: previousvalue == 'incomplete'">In progress</option>
+  </select>
+        </th>
+        <th>
+  <select tal:define="name python: 'sort_on';
+                      previousvalue python: view.getArgument(name, default='1')"
+          tal:attributes="name name">
+     <option tal:attributes="value view/getDefaultSort" i18n:translate="sort_by">All</option>
+     <option value="sortable_title" i18n:translate='urban_label_title'
+             tal:attributes="selected python: previousvalue == 'sortable_title'">Title</option>
+     <option value="created" i18n:translate='creation date'
+             tal:attributes="selected python: previousvalue == 'created'">Creation date</option>
+  </select>
+        </th>
+        <th>
+  <select tal:define="name python: 'table-batchSize';
+                      values view/listBatchSizes;
+                      previousvalue python: view.getArgument(name)"
+          tal:attributes="name name">
+     <option tal:attributes="value python: values[0]" i18n:translate="elements_by_page">show</option>
+     <option tal:attributes="value val; selected python: previousvalue == val"
+             tal:repeat="val values" tal:content="val">size</option>
+ </select>
+  <!--span i18n:translate="elements_by_page" class="">batch len</span-->
+        </th>
+        <th>
+ <input type="checkbox" name="sort_order" value="ascending" class="discreet"
+        tal:attributes="checked python: view.getArgument('sort_order') == 'ascending'">
+ <span i18n:translate='reverse_order' class="">reverse</span>
+</th>
+    </thead>
+  </table>
+</form>
+
+</div>
+</body>
+</html>

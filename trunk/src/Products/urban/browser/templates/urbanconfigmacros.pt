@@ -1,0 +1,114 @@
+<div metal:define-macro="licences_config_macro" i18n:domain="urban">
+
+    <tal:filter define="contentFilter python: {'portal_type': 'LicenceConfig'}">
+
+        <metal:main_macro tal:define="
+            base_macros context/base/macros;
+            folderlisting_macro base_macros/folderlisting;
+            errors python:request.get('errors', {})">
+
+        <metal:use_body use-macro="folderlisting_macro" />
+
+      </metal:main_macro>
+
+    </tal:filter>
+</div>
+
+
+<div metal:define-macro="vocabulary_folders_macro" i18n:domain="urban">
+
+    <tal:filter define="folderContents view/getVocabularyFolders;
+                        contentFilter python: {'portal_type': 'LicenceConfig'}">
+
+        <metal:main_macro tal:define="
+            base_macros context/base/macros;
+            folderlisting_macro base_macros/folderlisting;
+            errors python:request.get('errors', {})">
+
+        <metal:use_body use-macro="folderlisting_macro" />
+
+      </metal:main_macro>
+
+    </tal:filter>
+</div>
+
+
+<div metal:define-macro="public_settings_macro" i18n:domain="urban">
+
+    <tal:fields tal:define="field_macro field_macro | context/widgets/field/macros/view"
+                tal:repeat="field python:context.Schema().filterFields(schemata='public_settings')">
+
+       <tal:if_visible define="purl nocall:context/portal_url;
+                               portal purl/getPortalObject;
+                               mode string:view;
+                               visState python:field.widget.isVisible(here, mode);
+                               visCondition python:field.widget.testCondition(None, portal, context);"
+                     condition="python:visState == 'visible' and visCondition">
+          <metal:use_field use-macro="field_macro" />
+       </tal:if_visible>
+    </tal:fields>
+
+    <tal:filter define="folderContents view/getMiscConfigFolders;
+                        contentFilter python: {'portal_type': 'LicenceConfig'}">
+
+        <metal:main_macro tal:define="
+            base_macros context/base/macros;
+            folderlisting_macro base_macros/folderlisting;
+            errors python:request.get('errors', {})">
+
+        <metal:use_body use-macro="folderlisting_macro" />
+
+      </metal:main_macro>
+
+    </tal:filter>
+
+</div>
+
+
+<div metal:define-macro="admin_settings_macro" i18n:domain="urban">
+
+    <tal:fields tal:define="field_macro field_macro | context/widgets/field/macros/view"
+                tal:repeat="field python:context.Schema().filterFields(schemata='admin_settings')">
+
+       <tal:if_visible define="purl nocall:context/portal_url;
+                               portal purl/getPortalObject;
+                               mode string:view;
+                               visState python:field.widget.isVisible(here, mode);
+                               visCondition python:field.widget.testCondition(None, portal, context);"
+                    condition="python:visState == 'visible' and visCondition">
+          <metal:use_field use-macro="field_macro" />
+       </tal:if_visible>
+    </tal:fields>
+
+    <tal:filter define="folderContents view/getAdminFolders;
+                        contentFilter python: {'portal_type': 'LicenceConfig'}">
+
+        <metal:main_macro tal:define="
+            base_macros context/base/macros;
+            folderlisting_macro base_macros/folderlisting;
+            errors python:request.get('errors', {})">
+
+        <metal:use_body use-macro="folderlisting_macro" />
+
+      </metal:main_macro>
+
+    </tal:filter>
+
+</div>
+
+
+<div metal:define-macro="events_macro" i18n:domain="urban">
+
+    <tal:filter define="folderContents view/getEventTypes">
+
+        <metal:main_macro tal:define="
+            base_macros context/base/macros;
+            folderlisting_macro base_macros/folderlisting;
+            errors python:request.get('errors', {})">
+
+           <metal:use_body use-macro="folderlisting_macro" />
+
+        </metal:main_macro>
+
+    </tal:filter>
+</div>
