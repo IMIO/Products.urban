@@ -536,7 +536,7 @@ class UrbanBase(object):
             val = translate(val, 'urban', context=self.REQUEST)
             val = translate(val, 'plone', context=self.REQUEST)
             return [val]
-        return [obj.displayValue(displaylist, value) for value in field_value]
+        return [value and obj.displayValue(displaylist, value) or '' for value in field_value]
 
     def _getFieldValue(self, fieldname, obj):
         def val(fieldname, obj):
