@@ -66,6 +66,7 @@ class UrbanBase(object):
             #if the signaletic is not empty, we are adding several applicants
             if signaletic:
                 signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
+            import ipdb; ipdb.set_trace()
             signaletic += applicant.getSignaletic(withaddress=withaddress)
         return signaletic
 
@@ -536,7 +537,7 @@ class UrbanBase(object):
             val = translate(val, 'urban', context=self.REQUEST)
             val = translate(val, 'plone', context=self.REQUEST)
             return [val]
-        return [obj.displayValue(displaylist, value) for value in field_value]
+        return [value and obj.displayValue(displaylist, value) or '' for value in field_value]
 
     def _getFieldValue(self, fieldname, obj):
         def val(fieldname, obj):
