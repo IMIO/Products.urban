@@ -30,13 +30,14 @@ def genericlicence_applicantinfoindex(object):
     """
         Return the informations to index about the applicants
     """
-    applicants_info = []
-    for applicant in object.getApplicants():
-        applicants_info.append(applicant.getName1())
-        applicants_info.append(applicant.getName2())
-        applicants_info.append(applicant.getSociety())
-        applicants_info.append(applicant.getNationalRegister())
-    return applicants_info
+    contacts_info = []
+    contacts = object.getApplicants() + object.getProprietaries()
+    for contact in contacts:
+        contacts_info.append(contact.getName1())
+        contacts_info.append(contact.getName2())
+        contacts_info.append(contact.getSociety())
+        contacts_info.append(contact.getNationalRegister())
+    return contacts_info
 
 
 @indexer(IEnvironmentLicence)
