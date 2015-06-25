@@ -59,6 +59,7 @@ class Article127(BaseFolder, BuildLicence, BrowserDefaultMixin):
 
     # Methods
 
+
 registerType(Article127, PROJECTNAME)
 # end of class Article127
 

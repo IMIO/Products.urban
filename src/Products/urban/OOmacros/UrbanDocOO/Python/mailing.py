@@ -6,7 +6,7 @@ from com.sun.star.text.ControlCharacter import PARAGRAPH_BREAK
 def Mailing(self):
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
-    desktop = smgr.createInstanceWithContext( "com.sun.star.frame.Desktop",ctx) 
+    desktop = smgr.createInstanceWithContext( "com.sun.star.frame.Desktop",ctx)
     sourceDoc = desktop.getCurrentComponent()
     sourceDocViewcursor = sourceDoc.getCurrentController().getViewCursor()
     sourceDocDispatcher = smgr.createInstanceWithContext("com.sun.star.frame.DispatchHelper", ctx)
@@ -33,18 +33,18 @@ def Mailing(self):
                 destinationDoc.replaceAll(replaceDesc)
             oCurseur = destinationDoc.getCurrentController().getViewCursor()
             Cible = oCurseur.getText()
-            Cible.insertControlCharacter(oCurseur, PARAGRAPH_BREAK, False) 
-            oCurseur.setPropertyValue('BreakType', PAGE_BEFORE) 
+            Cible.insertControlCharacter(oCurseur, PARAGRAPH_BREAK, False)
+            oCurseur.setPropertyValue('BreakType', PAGE_BEFORE)
 
 def ExtractionPlageTexteDelimite(sourceDoc):
     sourceDocSD = sourceDoc.createSearchDescriptor()
-    sourceDocSD.SearchString = "<CSV>.*</CSV>"
+    sourceDocSD.SearchString = "\[CSV\].*\[/CSV\]"
     sourceDocSD.SearchRegularExpression = True
     Plage = sourceDoc.findFirst( sourceDocSD )
     if Plage.String:
         toreturn=Plage.String
     else:
         toreturn=""
-    toreturn=toreturn.replace("<CSV>","")
-    toreturn=toreturn.replace("</CSV>","")
+    toreturn=toreturn.replace("[CSV]","")
+    toreturn=toreturn.replace("[/CSV]","")
     return toreturn
