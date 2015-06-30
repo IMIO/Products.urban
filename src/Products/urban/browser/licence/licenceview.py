@@ -290,7 +290,7 @@ class UrbanCertificateBaseView(LicenceView):
         context = aq_inner(self.context)
         accessor = getattr(context, 'get%sSpecificFeatures' % subtype.capitalize())
         specific_features = accessor()
-        return [spf['value'] for spf in specific_features if not 'check' in spf or spf['check']]
+        return [spf.get('value', spf['text']) for spf in specific_features if not 'check' in spf or spf['check']]
 
 
 class EnvironmentLicenceView(LicenceView):
@@ -332,10 +332,7 @@ class EnvironmentLicenceView(LicenceView):
         order = ['CI/CS', 'CI', 'CS', 'CS-Eau']
         sorted_conditions = dict([(val, [],) for val in order])
         for cond in conditions:
-            try:
-                val = cond.getExtraValue()
-            except:
-                import ipdb; ipdb.set_trace()
+            val = cond.getExtraValue()
             sorted_conditions[val].append({'type': val, 'url': cond.absolute_url() + '/description/getRaw', 'title': cond.Title()})
         sort = []
         for val in order:
