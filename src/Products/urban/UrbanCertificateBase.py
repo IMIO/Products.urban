@@ -440,7 +440,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
             #add customSpecificFeatures
             if location == '':
                 for csf in self.getCustomSpecificFeatures():
-                    res.append("<p>%s</p>" % "<br />".join(csf['feature']))
+                    res.append("<p>%s</p>" % csf['text'])
         return res
 
     security.declarePublic('getBuildlicencesOfTheParcels')
