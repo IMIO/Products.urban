@@ -288,16 +288,16 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
             person_title = self.getPersonTitle(theObject=True)
             representatives = self.getRepresentedBySociety() and self.getSociety() or self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
             gender = multiplicity = ''
-            represented = 'représenté'
+            represented = u'représenté'
             if person_title:
                 gender = person_title.getGender()
                 multiplicity = person_title.getMultiplicity()
                 if gender == 'male' and multiplicity == 'plural':
-                    represented = 'représentés'
+                    represented = u'représentés'
                 elif gender == 'female' and multiplicity == 'single':
-                    represented = 'représentée'
+                    represented = u'représentée'
                 elif gender == 'female' and multiplicity == 'plural':
-                    represented = 'représentées'
+                    represented = u'représentées'
             nameSignaletic = '%s %s %s par %s' % (title, namepart, represented, representatives)
         if linebyline:
             #escape HTML special characters like HTML entities
