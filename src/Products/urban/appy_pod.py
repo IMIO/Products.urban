@@ -92,12 +92,15 @@ class UrbanEventAppyContext:
         portal_urban = api.portal.get_tool('portal_urban')
         licence = urban_event.getParentNode()
         applicants = licence.getApplicants()
+        proprietaries = licence.getProprietaries()
         applicantobj = applicants and applicants[0] or None
+        proprietaryobj = proprietaries and proprietaries[0] or None
 
         self.appy_context = {
             'self': licence,
             'urbanEventObj': urban_event,
             'applicantobj': applicantobj,
+            'proprietaryobj': proprietaryobj,
             'tool': portal_urban
         }
 
