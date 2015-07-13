@@ -26,15 +26,27 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
+        ReferenceBrowserWidget
 from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from dateutil.relativedelta import relativedelta
+from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
 
-optional_fields = ['implantation','roadAdaptation','pebDetails', 'requirementFromFD',
-                   'roadTechnicalAdvice','locationTechnicalAdvice','locationTechnicalConditions',
-                   'pebTechnicalAdvice','locationDgrneUnderground', 'roadDgrneUnderground', 'workType',
-                   'townshipCouncilFolder', 'roadMiscDescription']
+optional_fields = [
+    'implantation', 'roadAdaptation', 'pebDetails', 'requirementFromFD',
+    'roadTechnicalAdvice', 'locationTechnicalAdvice', 'locationTechnicalConditions',
+    'pebTechnicalAdvice', 'locationDgrneUnderground', 'roadDgrneUnderground', 'workType',
+    'townshipCouncilFolder', 'roadMiscDescription', 'procedureChoice'
+]
+
+slave_fields_procedurechoice = (
+    {
+        'name': 'annoncedDelay',
+        'action': 'value',
+        'vocab_method': 'getProcedureDelays',
+        'control_param': 'procedure',
+    },
+)
 ##/code-section module-header
 
 schema = Schema((
@@ -286,6 +298,19 @@ schema = Schema((
         multiValued=1,
         relationship='licenceArchitects',
     ),
+    LinesField(
+        name='procedureChoice',
+        widget=MasterMultiSelectWidget(
+            slave_fields=slave_fields_procedurechoice,
+            format='checkbox',
+            label='Procedurechoice',
+            label_msgid='urban_label_procedureChoice',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        multiValued=1,
+        vocabulary='listProcedureChoices',
+    ),
 
 ),
 )
@@ -418,6 +443,27 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
             #relativedelta does not work with DateTime so use datetime
             return tool.formatDate(lastTheLicenceDecisionDate.asdatetime() + relativedelta(years=+3))
 
+    def listProcedureChoices(self):
+        vocab = (
+            ('opinions', 'Avis'),
+            ('inquiry', 'Enquête'),
+            ('FD', 'FD'),
+        )
+        return DisplayList(vocab)
+
+    def getProcedureDelays(self, opinions, inquiry, FD):
+        if opinions and (inquiry or FD):
+            return '115j'
+        elif not opinions and inquiry and FD:
+            return '115j'
+        elif opinions and not (inquiry or FD):
+            return '70j'
+        elif inquiry and not (opinions or FD):
+            return '70j'
+        elif FD and not (opinions or inquiry):
+            return '75j'
+        else:
+            return '30j'
 
 
 registerType(BuildLicence, PROJECTNAME)
@@ -425,7 +471,7 @@ registerType(BuildLicence, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 # Make sure the schema is correctly finalized
-def finalizeSchema(schema, folderish=False, moveDiscussion=True):
+def finalizeSchema(schema):
     """
        Finalizes the type schema to alter some fields
     """
@@ -443,6 +489,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('annoncedDelay', after='missingPartsDetails')
     schema.moveField('annoncedDelayDetails', after='annoncedDelay')
     schema.moveField('impactStudy', after='annoncedDelayDetails')
+    schema.moveField('procedureChoice', before='description')
     return schema
 
 finalizeSchema(BuildLicence_schema)

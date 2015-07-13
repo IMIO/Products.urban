@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Mon Mar 30 10:03:40 2015\n"
-"PO-Revision-Date: Mon Mar 30 10:03:40 2015\n"
+"POT-Creation-Date: Tue Jun 23 10:37:51 2015\n"
+"PO-Revision-Date: Tue Jun 23 10:37:51 2015\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -431,6 +431,7 @@ msgid "urban_label_derogationDetails"
 msgstr ""
 
 #. Default: "Description"
+#: EnvironmentBase.py
 #: GenericLicence.py
 #: UrbanVocabularyTerm.py
 msgid "urban_label_description"
@@ -1014,6 +1015,11 @@ msgstr ""
 #. Default: "Prevudetails"
 #: GenericLicence.py
 msgid "urban_label_prevuDetails"
+msgstr ""
+
+#. Default: "Procedurechoice"
+#: BuildLicence.py
+msgid "urban_label_procedureChoice"
 msgstr ""
 
 #. Default: "Protectedbuilding"
