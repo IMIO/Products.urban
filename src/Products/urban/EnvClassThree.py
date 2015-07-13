@@ -135,8 +135,14 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
        Finalizes the type schema to alter some fields
     """
+    schema.moveField('businessOldLocation', after='workLocations')
+    schema.moveField('foldermanagers', after='businessOldLocation')
+    schema.moveField('rubrics', after='folderCategory')
+    schema.moveField('description', after='additionalLegalConditions')
     schema.moveField('missingParts', after='inadmissibilityReasons')
     schema.moveField('missingPartsDetails', after='missingParts')
     return schema
+
+finalizeSchema(EnvClassThree_schema)
 ##/code-section module-footer
 

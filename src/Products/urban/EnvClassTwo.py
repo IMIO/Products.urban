@@ -79,10 +79,14 @@ registerType(EnvClassTwo, PROJECTNAME)
 # end of class EnvClassTwo
 
 ##code-section module-footer #fill in your manual code here
-def finalizeSchema(schema, folderish=False, moveDiscussion=True):
+def finalizeSchema(schema):
     """
        Finalizes the type schema to alter some fields
     """
+    schema.moveField('businessOldLocation', after='workLocations')
+    schema.moveField('foldermanagers', after='businessOldLocation')
+    schema.moveField('rubrics', after='folderCategory')
+    schema.moveField('description', after='additionalLegalConditions')
     schema.moveField('temporaryExploitation', after='natura2000Details')
     return schema
 

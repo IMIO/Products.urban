@@ -68,5 +68,16 @@ registerType(EnvClassOne, PROJECTNAME)
 # end of class EnvClassOne
 
 ##code-section module-footer #fill in your manual code here
+def finalizeSchema(schema):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('businessOldLocation', after='workLocations')
+    schema.moveField('foldermanagers', after='businessOldLocation')
+    schema.moveField('rubrics', after='folderCategory')
+    schema.moveField('description', after='additionalLegalConditions')
+    return schema
+
+finalizeSchema(EnvClassOne_schema)
 ##/code-section module-footer
 
