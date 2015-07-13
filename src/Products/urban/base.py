@@ -325,10 +325,10 @@ class UrbanBase(object):
         """
         organizations = [self.getField('solicitOpinionsTo').vocabulary.getAllVocTerms(self).get(key, None) for key in
         self.getSolicitOpinionsTo()]
-        toreturn = '<CSV>Description'
+        toreturn = '[CSV]Description'
         for organization in organizations:
             toreturn = toreturn + '%' + organization.Description()
-        toreturn = toreturn + '</CSV>'
+        toreturn = toreturn + '[CSV]'
         return toreturn
     getMultipleOrganization = getMultipleOrganizationCSV
 
@@ -338,12 +338,12 @@ class UrbanBase(object):
           Returns a formatted version of claimants to be used in POD templates
         """
         claimants = self._getLastEvent(interfaces.IUrbanEventInquiry).getClaimants()
-        toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
+        toreturn = '[CSV]Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for claimant in claimants:
             toreturn = toreturn + '%' + claimant.getPersonTitleValue() + '|' + claimant.getName1() + '|' +\
                     claimant.getName2() + '|' + claimant.getNumber() + ', ' + claimant.getStreet() + '|' + \
                     claimant.getZipcode() + ' ' + claimant.getCity()
-        toreturn = toreturn + '</CSV>'
+        toreturn = toreturn + '[/CSV]'
         return toreturn
 
     security.declarePublic('getMultipleArchitectsCSV')

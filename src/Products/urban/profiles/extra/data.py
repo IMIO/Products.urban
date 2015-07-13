@@ -493,6 +493,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "urb-decision-octroi-dem", 'title': "Octroi du permis (lettre au demandeur)"},
                 {'id': "urb-decision-octroi-rw", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
+                {'id': "urb-decision-octroi-avis", 'title': "Octroi du permis (lettre aux impétrants)"},
                 {'id': "urb-decision-transmis-reclamants", 'title': "Décision du permis (transmis aux réclamants)"},
                 {'id': "urb-decision-stats-mod3", 'title': "Statistiques modèle 3"},
                 {

@@ -262,7 +262,7 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
             addresses.append(address)
         addresses = ''.join(addresses)
 
-        csv_adresses = '<CSV>Nom|Description|AdresseLigne1|AdresseLigne2{body}</CSV>'.format(
+        csv_adresses = '[CSV]Nom|Description|AdresseLigne1|AdresseLigne2{body}[/CSV]'.format(
             body=addresses
         )
         return csv_adresses
