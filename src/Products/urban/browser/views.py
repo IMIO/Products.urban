@@ -138,7 +138,7 @@ class TemplatesSummary(BrowserView):
         self.tool = getToolByName(context, 'portal_urban')
         self.tot_count = 0
         self.mod_count = 0
-        self.editicon = 'edit.gif'
+        self.editicon = 'edit.png'
         self.editlink = 'edit'
 
     def getUrbanDoc(self, folder):
@@ -175,7 +175,7 @@ class TemplatesSummary(BrowserView):
 
     def isModified(self, template):
         if not template.hasProperty('md5Modified'):
-            return "question-mark.gif"
+            return "question-mark.png"
         if template.md5Modified != getMd5Signature(template.data):
             #template manually changed
             self.mod_count += 1

@@ -213,7 +213,7 @@
                                      isRTL python:portal.restrictedTraverse('@@plone_portal_state').is_rtl();
                                      parents request/PARENTS;
                                      nil python: parents.reverse();">
-                <img tal:attributes="src string:${here/portal_url}/logoIcon.gif"/>
+                <img tal:attributes="src string:${here/portal_url}/logoIcon.png"/>
                 <tal:if condition="not: restrict_browsing_to_startup_directory">
                     <a i18n:translate="tabs_home"
                        tal:attributes="href string:${portal/absolute_url}/${template/getId}?fieldName=${fieldName}&amp;fieldRealName=${fieldRealName}&amp;at_url=${at_url}">

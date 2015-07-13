@@ -461,13 +461,13 @@ class ActionsColumn(UrbanColumn):
 
             if 'edit' in actions:
                 action = actions['edit']
-                image = '<img src="%s/edit.gif" title="label_edit" i18n:attributes="title" />' % base_url
+                image = '<img src="%s/edit.png" title="label_edit" i18n:attributes="title" />' % base_url
                 edit_action = '<a class="noPadding" href="%s/%s">%s</a>' % (object_url, action, image)
                 action_links.append(edit_action)
 
             if 'delete' in actions:
                 action = actions['delete']
-                image = '<img src="%s/delete_icon.gif" title="label_edit" i18n:attributes="title" title="label_remove"\
+                image = '<img src="%s/delete_icon.png" title="label_edit" i18n:attributes="title" title="label_remove"\
                          style="cursor: pointer" onClick="javascript:confirmDeleteObject(this)"/>' % base_url
                 delete_action = '<a class="urbanDelete noPadding" href="%s/%s">%s</a>' % (object_url, action, image)
                 action_links.append(delete_action)

@@ -178,7 +178,7 @@ Delete CU1
     Delete content  uid_or_path=${CU1_FOLDER_PATH}/${CU1_ID}
 
 Edit
-    Click Image  edit.gif
+    Click Image  edit.png
 
 Edit tab
     [Arguments]  ${tab_name}

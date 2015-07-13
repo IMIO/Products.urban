@@ -211,7 +211,7 @@
                     <!-- Edit action -->
                     <tal:edit_action condition="python: member.has_permission('Modify portal content', inquiry)">
                         <a class="noPadding" tal:attributes="href python: inquiry.absolute_url() + '/edit'">
-                            <img src="#" tal:attributes="src string:${portal_url}/edit.gif" title="label_edit" i18n:attributes="title" />
+                            <img src="#" tal:attributes="src string:${portal_url}/edit.png" title="label_edit" i18n:attributes="title" />
                         </a>
                     </tal:edit_action>
 
@@ -220,7 +220,7 @@
                         <a class="urbanDelete noPadding"
                            tal:attributes="href python: inquiry.absolute_url() + '/delete_confirmation'">
                             <!-- Icon -->
-                            <img src="#" tal:attributes="src string:${portal_url}/delete_icon.gif" i18n:attributes="title" title="label_remove"
+                            <img src="#" tal:attributes="src string:${portal_url}/delete_icon.png" i18n:attributes="title" title="label_remove"
                                  onClick="javascript:confirmDeleteObject(this)" style="cursor:pointer"/>
                         </a>
                     </tal:delete_action>

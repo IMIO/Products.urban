@@ -30,7 +30,7 @@ i18n:domain="plone">
               <a class="link-overlay" 
                  tal:attributes="href string:@@fieldeditoverlay?spf_id=${cell_value}&vocname=${voc_foldername};
                                  id string:fieldeditoverlay-${cell_value}">
-                  <img src=# tal:attributes="src string:${portal_url}/edit.gif"/>
+                  <img src=# tal:attributes="src string:${portal_url}/edit.png"/>
               </a>
         </span>
     </metal:edit_cell_macro>
