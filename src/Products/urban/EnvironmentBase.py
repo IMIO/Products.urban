@@ -176,6 +176,20 @@ schema = Schema((
         schemata='urban_location',
         default_output_type='text/html',
     ),
+    TextField(
+        name='description',
+        widget=RichWidget(
+            label='Description',
+            label_msgid='urban_label_description',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_description',
+        default_method='getDefaultText',
+        default_output_type='text/html',
+        accessor="Description",
+    ),
 
 ),
 )

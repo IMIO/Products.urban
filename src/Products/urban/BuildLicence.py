@@ -301,8 +301,8 @@ schema = Schema((
     LinesField(
         name='procedureChoice',
         widget=MasterMultiSelectWidget(
-            slave_fields=slave_fields_procedurechoice,
             format='checkbox',
+            slave_fields=slave_fields_procedurechoice,
             label='Procedurechoice',
             label_msgid='urban_label_procedureChoice',
             i18n_domain='urban',
@@ -464,6 +464,7 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
             return '75j'
         else:
             return '30j'
+
 
 
 registerType(BuildLicence, PROJECTNAME)
