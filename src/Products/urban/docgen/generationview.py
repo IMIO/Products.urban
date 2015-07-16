@@ -6,7 +6,7 @@ from collective.documentgenerator.browser.generation_view import PersistentDocum
 
 from plone import api
 
-from zope.interface import directlyProvides
+from zope.interface import alsoProvides
 
 
 class UrbanDocGenerationView(PersistentDocumentGenerationView):
@@ -15,7 +15,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
 
     def generate_persistent_doc(self):
         persisted_doc = super(UrbanDocGenerationView, self).generate_persistent_doc()
-        directlyProvides(persisted_doc, IUrbanDoc)
+        alsoProvides(persisted_doc, IUrbanDoc)
         return persisted_doc
 
     def get_base_generation_context(self):
