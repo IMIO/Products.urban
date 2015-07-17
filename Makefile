@@ -4,7 +4,7 @@
 options =
 
 mountpoints = src/Products/urban/scripts/config/mount_points.conf
-plonesites = src/Products/urban/scripts/config/plonesites.cfg 
+plonesites = src/Products/urban/scripts/config/plonesites.cfg
 extras = src/Products/urban/scripts/config/extras.py.tmpl
 
 .PHONY: test instance cleanall portals
