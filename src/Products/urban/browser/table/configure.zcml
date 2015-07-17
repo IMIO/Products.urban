@@ -197,7 +197,7 @@
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IAttachmentsTable"
-     factory=".column.BrainCreatorColumn"
+     factory=".column.ObjectCreatorColumn"
      provides="z3c.table.interfaces.IColumn"
      name="creatorColumn"
   />

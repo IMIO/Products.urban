@@ -104,10 +104,11 @@ class LicenceView(BrowserView):
         path_len = len(path.split('/'))
         nested_attachments = []
         for brain in attachments:
-            is_not_doc = not IUrbanDoc.providedBy(brain.getObject())
+            attachment = brain.getObject()
+            is_not_doc = not IUrbanDoc.providedBy(attachment)
             is_nested = len(brain.getPath().split('/')) > path_len + 1
             if is_nested and is_not_doc:
-                nested_attachments.append(brain)
+                nested_attachments.append(attachment)
 
         if not nested_attachments:
             return ''
