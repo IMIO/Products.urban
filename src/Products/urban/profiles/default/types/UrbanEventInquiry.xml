@@ -19,7 +19,6 @@
    <element value="PortionOut"/>
    <element value="Claimant"/>
    <element value="File"/>
-   <element value="UrbanDoc"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">urbaneventinquiryview</property>

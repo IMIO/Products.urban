@@ -185,13 +185,6 @@
 
   <browser:page
      for="Products.urban.interfaces.IUrbanEvent"
-     name="create_urbandoc"
-     class=".factory.CreateUrbanDoc"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="Products.urban.interfaces.IUrbanEvent"
      name="urbaneventview"
      class=".urbaneventviews.UrbanEventView"
      template="templates/urbaneventview.pt"
@@ -202,14 +195,6 @@
      name="urbanevent-macros"
      for="Products.urban.interfaces.IUrbanEvent"
      template="templates/urbaneventmacros.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="Products.urban.interfaces.IUrbanDoc"
-     name="urbandocview"
-     class=".urbandocview.UrbanDocView"
-     template="templates/urbandocview.pt"
      permission="zope2.View"
   />
 

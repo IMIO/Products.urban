@@ -33,22 +33,6 @@
       for="Products.urban.interfaces.IUrbanTool"
   />
   <genericsetup:registerProfile
-      name="testCommune1"
-      title="urban-testCommune1"
-      directory="profiles/testCommune1"
-      description="Test Extension profile for testing urban."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      for="Products.urban.interfaces.IUrbanTool"
-  />
-  <genericsetup:registerProfile
-      name="testCommune2"
-      title="urban-testCommune2"
-      directory="profiles/testCommune2"
-      description="Test Extension profile for testing urban."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      for="Products.urban.interfaces.IUrbanTool"
-  />
-  <genericsetup:registerProfile
       name="demo"
       title="urban-demo"
       directory="profiles/demo"

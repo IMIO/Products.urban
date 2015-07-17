@@ -64,7 +64,6 @@ ADD_CONTENT_PERMISSIONS = {
     'OrganisationTerm': 'urban: Add OrganisationTerm',
     'MiscDemand': 'urban: Add MiscDemand',
     'UrbanConfigurationValue': 'urban: Add UrbanConfigurationValue',
-    'UrbanDoc': 'urban: Add UrbanDoc',
     'EnvironmentBase': 'urban: Add EnvironmentBase',
     'EnvironmentRubricTerm': 'urban: Add EnvironmentRubricTerm',
     'SpecificFeatureTerm': 'urban: Add SpecificFeatureTerm',
@@ -104,11 +103,10 @@ setDefaultRoles('urban: Add Locality', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add LicenceConfig', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PersonTitleTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Inquiry', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add UrbanEventOpinionRequest', ('Manager', 'Owner', 'Contributor'))
+setDefaultRoles('urban: Add UrbanEventOpinionRequest', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add OrganisationTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanConfigurationValue',  ('Manager', ))
-setDefaultRoles('urban: Add UrbanDoc', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvironmentBase', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvironmentRubricTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add SpecificFeatureTerm', ("Manager", "Contributor"))
@@ -164,20 +162,20 @@ APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation']
 #the different templates used to structure a document
 GLOBAL_TEMPLATES = {
     '.': [
+        {'id':'styles.odt', 'portal_type': 'StyleTemplate', 'title':'Styles urban'},
         {'id':'statsins.odt', 'title':'Fichier modèle pour les statistiques INS'},
-        {'id':'styles.odt', 'title':'Fichier gérant les styles communs aux différents modèles de document'},
     ],
     'urbantemplates': [
-        {'id':'header.odt', 'title':'Fichier d\'en-tête pour les modèles de document'},
-        {'id':'footer.odt', 'title':'Fichier de pied de page pour les modèles de document'},
-        {'id':'reference.odt', 'title':'Fichier gérant la zone \'Référence\' pour les modèles de document'},
-        {'id':'signatures.odt', 'title':'Fichier gérant les signatures pour les modèles de document'},
+        {'id':'header.odt', 'portal_type': 'SubTemplate', 'title':'En-tête urbanisme'},
+        {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page urbanisme'},
+        {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' urbanisme'},
+        {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures urbanisme'},
     ],
     'environmenttemplates': [
-        {'id':'header.odt', 'title':'Fichier d\'en-tête pour les modèles de document'},
-        {'id':'footer.odt', 'title':'Fichier de pied de page pour les modèles de document'},
-        {'id':'reference.odt', 'title':'Fichier gérant la zone \'Référence\' pour les modèles de document'},
-        {'id':'signatures.odt', 'title':'Fichier gérant les signatures pour les modèles de document'},
+        {'id':'header.odt', 'portal_type': 'SubTemplate', 'title':'En-tête environnement'},
+        {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page environnement'},
+        {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' environnement'},
+        {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures environnement'},
     ],
 }
 #the different formats proposed for generating document

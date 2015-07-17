@@ -376,7 +376,7 @@ default_values = {
         ],
 
         'globaltemplates': [
-            'UrbanDoc',
+            'UrbanTemplate',
         ],
     },
 }

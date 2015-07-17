@@ -38,7 +38,6 @@ from zope.i18n.interfaces import ITranslationDomain
 from zope import event
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Archetypes.event import EditBegunEvent
-from Products.CMFPlacefulWorkflow.PlacefulWorkflowTool import WorkflowPolicyConfig_id
 from exportimport import updateAllUrbanTemplates
 from Products.urban.utils import generatePassword
 from datetime import date
@@ -88,14 +87,22 @@ def postInstall(context):
     #we need external edition so make sure it is activated
     site.portal_properties.site_properties.manage_changeProperties(ext_editor=True)
     site.portal_memberdata.manage_changeProperties(ext_editor=True)
-    site.portal_properties.site_properties.manage_changeProperties(typesUseViewActionInListings=('Image', 'File', 'UrbanDoc'))
+    site.portal_properties.site_properties.manage_changeProperties(
+        typesUseViewActionInListings=(
+            'Image', 'File', 'UrbanTemplate', 'SubTemplate', 'StyleTemplate'
+        )
+    )
     #for collective.externaleditor
     try:
         from collective.externaleditor.browser.controlpanel import IExternalEditorSchema
         control_panel_adapter_obj = IExternalEditorSchema(site)
         control_panel_adapter_obj.ext_editor = True
-        if not 'UrbanDoc' in control_panel_adapter_obj.externaleditor_enabled_types:
-            control_panel_adapter_obj.externaleditor_enabled_types.append('UrbanDoc')
+        if not 'UrbanTemplate' in control_panel_adapter_obj.externaleditor_enabled_types:
+            control_panel_adapter_obj.externaleditor_enabled_types.append('UrbanTemplate')
+        if not 'SubTemplate' in control_panel_adapter_obj.externaleditor_enabled_types:
+            control_panel_adapter_obj.externaleditor_enabled_types.append('SubTemplate')
+        if not 'StyleTemplate' in control_panel_adapter_obj.externaleditor_enabled_types:
+            control_panel_adapter_obj.externaleditor_enabled_types.append('StyleTemplate')
     except:
         pass
 
@@ -126,9 +133,6 @@ def postInstall(context):
     architect_type = site.portal_types.Architect
     architect_type.content_meta_type = "Contact"
     architect_type.factory = "addContact"
-    logger.info("setUrbanConfigWFPolicy : starting...")
-    setUrbanConfigWFPolicy(context)
-    logger.info("setUrbanConfigWFPolicy : Done")
     logger.info("addApplicationFolders : starting...")
     addApplicationFolders(context)
     logger.info("addApplicationFolders : Done")
@@ -179,32 +183,6 @@ def extraPostInstall(context, refresh=True):
         logger.info("Refresh portal_catalog : starting...")
         site.portal_catalog.refreshCatalog(clear=True)
         logger.info("Refresh portal_catalog : Done!")
-
-
-def setUrbanConfigWFPolicy(context):
-    """
-      Define a local wf policy to allow to enable/disable urban templates documents in the config
-    """
-    site = context.getSite()
-    wf_tool = getToolByName(site, 'portal_workflow')
-    #create the local policy for the urban config
-    placefulwf_tool = getToolByName(site, 'portal_placeful_workflow')
-    if not hasattr(placefulwf_tool, 'urban_cfg_policy'):
-        placefulwf_tool.manage_addWorkflowPolicy('urban_cfg_policy',
-                                                 workflow_policy_type='default_workflow_policy (Simple Policy)',
-                                                 duplicate_id='empty')
-    policy = getattr(placefulwf_tool, 'urban_cfg_policy')
-    policy.setTitle('Urban config workflow policy')
-    policy.setChain('UrbanDoc', ('activation_workflow', ))
-    wf_tool.updateRoleMappings()
-
-    #set this local policy to the urban config folder
-    tool = getToolByName(site, 'portal_urban')
-    if not hasattr(tool, WorkflowPolicyConfig_id):
-        tool.manage_addProduct['CMFPlacefulWorkflow'].manage_addWorkflowPolicyConfig()
-        wf_policy_cfg = getattr(tool, WorkflowPolicyConfig_id)
-        wf_policy_cfg.setPolicyBelow('urban_cfg_policy')
-    wf_tool.updateRoleMappings()
 
 
 def setFolderAllowedTypes(folder, portal_types):
@@ -549,23 +527,23 @@ def addGlobalFolders(context):
         templates_id = tool.invokeFactory("Folder", id="globaltemplates", title=_("globaltemplates_folder_title", 'urban', context=site.REQUEST))
         templates = getattr(tool, templates_id)
         templates.setConstrainTypesMode(1)
-        templates.setLocallyAllowedTypes(['UrbanDoc', 'Folder'])
-        templates.setImmediatelyAddableTypes(['UrbanDoc', 'Folder'])
+        templates.setLocallyAllowedTypes(['UrbanTemplate', 'StyleTemplate', 'Folder'])
+        templates.setImmediatelyAddableTypes(['UrbanTemplate', 'StyleTemplate', 'Folder'])
 
     folder = tool.globaltemplates
     if not hasattr(folder, "urbantemplates"):
         templates_id = folder.invokeFactory("Folder", id="urbantemplates", title=_("urbantemplates_folder_title", 'urban', context=site.REQUEST))
         templates = getattr(folder, templates_id)
         templates.setConstrainTypesMode(1)
-        templates.setLocallyAllowedTypes(['UrbanDoc'])
-        templates.setImmediatelyAddableTypes(['UrbanDoc'])
+        templates.setLocallyAllowedTypes(['SubTemplate'])
+        templates.setImmediatelyAddableTypes(['SubTemplate'])
 
     if not hasattr(folder, "environmenttemplates"):
         templates_id = folder.invokeFactory("Folder", id="environmenttemplates", title=_("environmenttemplates_folder_title", 'urban', context=site.REQUEST))
         templates = getattr(folder, templates_id)
         templates.setConstrainTypesMode(1)
-        templates.setLocallyAllowedTypes(['UrbanDoc'])
-        templates.setImmediatelyAddableTypes(['UrbanDoc'])
+        templates.setLocallyAllowedTypes(['SubTemplate'])
+        templates.setImmediatelyAddableTypes(['SubTemplate'])
 
     if not hasattr(tool, "additional_layers"):
         additional_layers_id = tool.invokeFactory("Folder", id="additional_layers", title=_("additonal_layers_folder_title", 'urban', context=site.REQUEST))
@@ -967,7 +945,9 @@ def createLicence(site, licence_type, data):
         #generate the documents
         if not urban_event.objectValues():
             for template in urban_event.getTemplates():
-                createObject('GeneratedUrbanDoc', urban_event, template)
+                urban_event.REQUEST.set('doc_uid', template.UID())
+                generation_view = urban_event.restrictedTraverse('urban-document-generation')
+                generation_view.generate_persistent_doc()
     return licence
 
 

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from Acquisition import aq_base
 from HTMLParser import HTMLParser
 
 from Products.urban.config import URBAN_TYPES
@@ -327,16 +326,3 @@ def getLicenceFolder(licencetype):
     folder_id = getLicenceFolderId(licencetype)
     licence_folder = getattr(urban, folder_id)
     return licence_folder
-
-
-def generateAvailableId(container, proposed_id='', extension=''):
-    i = 1
-    available_id = extension and '{}.{}'.format(proposed_id, extension) or proposed_id
-    while hasattr(aq_base(container), available_id):
-        available_id = '{base_id}-{num}.{extension}'.format(
-            base_id=available_id,
-            num=str(i),
-            extension=extension
-        )
-        i = i + 1
-    return available_id

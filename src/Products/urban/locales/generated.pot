@@ -51,11 +51,6 @@ msgstr ""
 msgid "tal_condition_descr"
 msgstr ""
 
-#. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here', 'event', and 'licence'' are available"
-#: UrbanDoc.py
-msgid "tal_condition_urbandoc_descr"
-msgstr ""
-
 #. Default: "UnoEnabledPython"
 #: UrbanTool.py
 msgid "uno_enabled_python"
@@ -152,7 +147,6 @@ msgid "urban_label_SSC"
 msgstr ""
 
 #. Default: "Talcondition"
-#: UrbanDoc.py
 #: UrbanEventType.py
 msgid "urban_label_TALCondition"
 msgstr ""

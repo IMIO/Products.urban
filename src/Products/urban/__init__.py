@@ -118,7 +118,6 @@ def initialize(context):
     import OrganisationTerm
     import MiscDemand
     import UrbanConfigurationValue
-    import UrbanDoc
     import EnvironmentBase
     import EnvironmentRubricTerm
     import SpecificFeatureTerm

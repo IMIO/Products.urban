@@ -48,7 +48,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "urb-recepisse", 'title': "Récépissé de la demande (article 115)"},),
+            'podTemplates': ({'id': "urb-recepisse.odt", 'title': "Récépissé de la demande (article 115)"},),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
         {
@@ -58,7 +58,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.getImpactStudy()",
             'podTemplates': (
-                {'id': "urb-avis-etude-incidence", 'title': "Avis sur l'étude d'incidence"},
+                {'id': "urb-avis-etude-incidence.odt", 'title': "Avis sur l'étude d'incidence"},
             ),
         },
         {
@@ -66,7 +66,7 @@ urbanEventTypes = {
             'title': "Récépissé d'un complément à une demande de permis (article 115)",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'podTemplates': ({'id': "urb-recepisse-art115-complement", 'title': "Récépissé d'un complément à une demande de permis (article 115)"},),
+            'podTemplates': ({'id': "urb-recepisse-art115-complement.odt", 'title': "Récépissé d'un complément à une demande de permis (article 115)"},),
             'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
         },
         {
@@ -74,7 +74,7 @@ urbanEventTypes = {
             'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'podTemplates': ({'id': "urb-recepisse-art116", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
+            'podTemplates': ({'id': "urb-recepisse-art116.odt", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
             'eventTypeType': 'Products.urban.interfaces.IModificationDepositEvent',
         },
         {
@@ -84,7 +84,7 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'TALCondition': "",
             'podTemplates': (
-                {'id': "urb-avis-technique-voirie", 'title': "Avis technique voirie"},
+                {'id': "urb-avis-technique-voirie.odt", 'title': "Avis technique voirie"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
         },
@@ -95,7 +95,7 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'TALCondition': "",
             'podTemplates': (
-                {'id': "urb-avis-technique-energie", 'title': "Avis technique énergie"},
+                {'id': "urb-avis-technique-energie.odt", 'title': "Avis technique énergie"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
         },
@@ -106,7 +106,7 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'TALCondition': "",
             'podTemplates': (
-                {'id': "urb-avis-technique-urbanisme", 'title': "Avis technique urbanisme"},
+                {'id': "urb-avis-technique-urbanisme.odt", 'title': "Avis technique urbanisme"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
         },
@@ -119,8 +119,8 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "urb-dossier-incomplet-demandeur", 'title': "Dossier incomplet (lettre demandeur)"},
-                {'id': "urb-dossier-incomplet-archi", 'title': "Dossier incomplet (lettre architecte)"},
+                {'id': "urb-dossier-incomplet-demandeur.odt", 'title': "Dossier incomplet (lettre demandeur)"},
+                {'id': "urb-dossier-incomplet-archi.odt", 'title': "Dossier incomplet (lettre architecte)"},
             ),
         },
         {
@@ -132,8 +132,8 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "urb-accuse", 'title': "Accusé de réception"},
-                {'id': "urb-accuse-demande-paiement", 'title': "Demande de paiement"},
+                {'id': "urb-accuse.odt", 'title': "Accusé de réception"},
+                {'id': "urb-accuse-demande-paiement.odt", 'title': "Demande de paiement"},
             ),
         },
         {
@@ -141,7 +141,7 @@ urbanEventTypes = {
             'title': "Dossier irrecevable",
             'activatedFields': ['decisionDate'],
             'podTemplates': (
-                {'id': "urb-regularisation-delib-college-refus", 'title': "Délibération refus de régularisation PU"},
+                {'id': "urb-regularisation-delib-college-refus.odt", 'title': "Délibération refus de régularisation PU"},
             )
         },
         {
@@ -151,7 +151,7 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'TALCondition': "python: here.getLastAcknowledgment()",
             'podTemplates': (
-                {'id': "urb-demande-complements-art116-6", 'title': "Lettre au demandeur"},
+                {'id': "urb-demande-complements-art116-6.odt", 'title': "Lettre au demandeur"},
             ),
         },
         {
@@ -163,8 +163,8 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "urb-envoi-premier-dossier-rw", 'title': "Lettre d'envoi du premier dossier à la RW"},
-                {'id': "urb-envoi-premier-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
+                {'id': "urb-envoi-premier-dossier-rw.odt", 'title': "Lettre d'envoi du premier dossier à la RW"},
+                {'id': "urb-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
         },
@@ -177,18 +177,18 @@ urbanEventTypes = {
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
-                {'id': "urb-enq-avis-riverains-annexe26", 'title': "Avis enquête (annexe 26 - lettre riverains)"},
-                {'id': "urb-enq-certif-aff-annexe26", 'title': "Certificat d'affichage (annexe 26)"},
-                {'id': "urb-enq-copie-rw-annexe26", 'title': "Avis enquête (annexe 26 - copie RW)"},
-                {'id': "urb-enq-annexe25-dem", 'title': "Affiche (annexe 25 - lettre au demandeur)"},
-                {'id': "urb-enq-annexe25", 'title': "Affiche (annexe 25)"},
-                {'id': "urb-enq-ordre-mission", 'title': "Ordre de mission"},
-                {'id': "urb-enq-accuse-reclamation", 'title': "Accusé de réception d'une réclamation"},
-                {'id': "urb-enq-reunion-clot", 'title': "Réunion de clôture d'enquête"},
-                {'id': "urb-enq-pv-clot", 'title': "PV de clôture enquête"},
-                {'id': "urb-enq-frais", 'title': "Frais d'enquête"},
-                {'id': "urb-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},
-                {'id': "urb-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
+                {'id': "urb-enq-avis-riverains-annexe26.odt", 'title': "Avis enquête (annexe 26 - lettre riverains)"},
+                {'id': "urb-enq-certif-aff-annexe26.odt", 'title': "Certificat d'affichage (annexe 26)"},
+                {'id': "urb-enq-copie-rw-annexe26.odt", 'title': "Avis enquête (annexe 26 - copie RW)"},
+                {'id': "urb-enq-annexe25-dem.odt", 'title': "Affiche (annexe 25 - lettre au demandeur)"},
+                {'id': "urb-enq-annexe25.odt", 'title': "Affiche (annexe 25)"},
+                {'id': "urb-enq-ordre-mission.odt", 'title': "Ordre de mission"},
+                {'id': "urb-enq-accuse-reclamation.odt", 'title': "Accusé de réception d'une réclamation"},
+                {'id': "urb-enq-reunion-clot.odt", 'title': "Réunion de clôture d'enquête"},
+                {'id': "urb-enq-pv-clot.odt", 'title': "PV de clôture enquête"},
+                {'id': "urb-enq-frais.odt", 'title': "Frais d'enquête"},
+                {'id': "urb-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
+                {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
             'textDefaultValues': (
@@ -201,7 +201,7 @@ urbanEventTypes = {
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': [],
             'TALCondition': "python: False",
-            'podTemplates': ({'id': "urb-avis", 'title': "Courrier de demande d'avis"},),
+            'podTemplates': ({'id': "urb-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
         },
         {
@@ -452,8 +452,8 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "urb-rapp-service", 'title': "Rapport du Service"},
-                {'id': "urb-rapp-college", 'title': "Rapport du Collège"},
+                {'id': "urb-rapp-service.odt", 'title': "Rapport du Service"},
+                {'id': "urb-rapp-college.odt", 'title': "Rapport du Collège"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
         },
@@ -464,9 +464,9 @@ urbanEventTypes = {
             'activatedFields': ['decisionDate', 'decision', 'receiptDate'],
             'deadLineDelay': 15,
             'podTemplates': (
-                {'id': "urb-envoi-second-dossier-rw", 'title': "Lettre envoi deuxième dossier à la RW"},
-                {'id': "urb-envoi-second-dossier-demandeur", 'title': "Information au demandeur envoi second dossier"},
-                {'id': "urb-envoi-premier-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
+                {'id': "urb-envoi-second-dossier-rw.odt", 'title': "Lettre envoi deuxième dossier à la RW"},
+                {'id': "urb-envoi-second-dossier-demandeur.odt", 'title': "Information au demandeur envoi second dossier"},
+                {'id': "urb-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
         },
@@ -476,9 +476,9 @@ urbanEventTypes = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': (
-                {'id': "urb-conseil-delib-college", 'title': "Délibération passée au collège"},
-                {'id': "urb-conseil-delib-communale-creation", 'title': "Délibération du conseil communal (ouverture de voirie)"},
-                {'id': "urb-conseil-delib-communale-modif", 'title': "Délibération du conseil communal (modification de voirie)"},
+                {'id': "urb-conseil-delib-college.odt", 'title': "Délibération passée au collège"},
+                {'id': "urb-conseil-delib-communale-creation.odt", 'title': "Délibération du conseil communal (ouverture de voirie)"},
+                {'id': "urb-conseil-delib-communale-modif.odt", 'title': "Délibération du conseil communal (modification de voirie)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ICommunalCouncilEvent',
         },
@@ -497,14 +497,14 @@ urbanEventTypes = {
                 {'id': "urb-decision-transmis-reclamants", 'title': "Décision du permis (transmis aux réclamants)"},
                 {'id': "urb-decision-stats-mod3", 'title': "Statistiques modèle 3"},
                 {
-                    'id': "urb-decision-formulaire-a",
+                    'id': "urb-decision-formulaire-a.odt",
                     'title': "Annexe 30 - Formulaire A",
                     'TALCondition': "python: portal.portal_urban.getUsePloneMeetingWSClient()"
                 },
-                {'id': "urb-decision-egout-travaux", 'title': "Demande de raccordement aux égouts avec travaux (formulaire à remplir par le demandeur)"},
-                {'id': "urb-decision-frais", 'title': "Ventilation des frais"},
-                {'id': "urb-debut-travaux", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
-                {'id': "urb-decision-deliberation-college", 'title': "Delibération du collège d'octroi du permis"},
+                {'id': "urb-decision-egout-travaux.odt", 'title': "Demande de raccordement aux égouts avec travaux (formulaire à remplir par le demandeur)"},
+                {'id': "urb-decision-frais.odt", 'title': "Ventilation des frais"},
+                {'id': "urb-debut-travaux.odt", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
+                {'id': "urb-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
         },
@@ -514,7 +514,7 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'activatedFields': [],
             'podTemplates': (
-                {'id': "urb-fiche-recap", 'title': "Fiche récapitulative"},
+                {'id': "urb-fiche-recap.odt", 'title': "Fiche récapitulative"},
             ),
         },
         {
@@ -523,10 +523,10 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'activatedFields': ['decisionDate', ],
             'podTemplates': (
-                {'id': "urb-racc-egout-devis-egouttage", 'title': "Devis raccordement égouttage"},
-                {'id': "urb-racc-egout-delib-college-avec-traversee-voirie", 'title': "Délibération du Collège Communal AVEC traversée de voirie"},
-                {'id': "urb-racc-egout-delib-college-sans-traversee-voirie", 'title': "Délibération du Collège Communal SANS traversée de voirie"},
-                {'id': "urb-racc-egout-delib-college-lotissement", 'title': "Délibération du Collège raccordement égout dans un lotissement"},
+                {'id': "urb-racc-egout-devis-egouttage.odt", 'title': "Devis raccordement égouttage"},
+                {'id': "urb-racc-egout-delib-college-avec-traversee-voirie.odt", 'title': "Délibération du Collège Communal AVEC traversée de voirie"},
+                {'id': "urb-racc-egout-delib-college-sans-traversee-voirie.odt", 'title': "Délibération du Collège Communal SANS traversée de voirie"},
+                {'id': "urb-racc-egout-delib-college-lotissement.odt", 'title': "Délibération du Collège raccordement égout dans un lotissement"},
             ),
         },
         {
@@ -534,7 +534,7 @@ urbanEventTypes = {
             'title': "Avis technique PEB",
             'activatedFields': [],
             'deadLineDelay': 0,
-            'podTemplates': ({'id': "avis-technique-peb", 'title': "Avis technique PEB"},)
+            'podTemplates': ({'id': "avis-technique-peb.odt", 'title': "Avis technique PEB"},)
         },
 
         {
@@ -575,7 +575,7 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'TALCondition': "python: here.getPebType() == 'complete_process'",
             'podTemplates': (
-                {'id': "rapport-final-peb", 'title': "Rapport final PEB"},
+                {'id': "rapport-final-peb.odt", 'title': "Rapport final PEB"},
             ),
         },
         {
@@ -584,10 +584,10 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'activatedFields': ['decisionDate', 'decision', 'receiptDate', ],
             'podTemplates': (
-                {'id': "urb-prorogation", 'title': "Délibération du Collège Communal concernant la prorogation du permis"},
-                {'id': "urb-prorogation-transmis-refus", 'title': "Refus de prorogation (lettre au demandeur)"},
-                {'id': "urb-prorogation-transmis-accept", 'title': "Acceptation de prorogation (lettre au demandeur)"},
-                {'id': "urb-prorogation-transmis-accept-fd", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
+                {'id': "urb-prorogation.odt", 'title': "Délibération du Collège Communal concernant la prorogation du permis"},
+                {'id': "urb-prorogation-transmis-refus.odt", 'title': "Refus de prorogation (lettre au demandeur)"},
+                {'id': "urb-prorogation-transmis-accept.odt", 'title': "Acceptation de prorogation (lettre au demandeur)"},
+                {'id': "urb-prorogation-transmis-accept-fd.odt", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IProrogationEvent',
         },
@@ -597,9 +597,9 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (
-                {'id': "urb-suspension-retrait-refus-dem", 'title': "Retrait et refus du permis d'urbanisme (lettre au demandeur)"},
-                {'id': "urb-suspension-retrait-refus-rw", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW)"},
-                {'id': "urb-suspension-retrait-refus-rw-recours", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW - direction des recours)"},
+                {'id': "urb-suspension-retrait-refus-dem.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre au demandeur)"},
+                {'id': "urb-suspension-retrait-refus-rw.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW)"},
+                {'id': "urb-suspension-retrait-refus-rw-recours.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW - direction des recours)"},
             ),
         },
         {
@@ -608,8 +608,8 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'activatedFields': [],
             'podTemplates': (
-                {'id': "urb-enveloppes-dem", 'title': "Enveloppes demandeurs"},
-                {'id': "urb-enveloppes-archi", 'title': "Enveloppes architectes"},
+                {'id': "urb-enveloppes-dem.odt", 'title': "Enveloppes demandeurs"},
+                {'id': "urb-enveloppes-archi.odt", 'title': "Enveloppes architectes"},
             ),
         },
         {
@@ -617,28 +617,28 @@ urbanEventTypes = {
             'title': "Rappel implantation",
             'activatedFields': [],
             'deadLineDelay': 0,
-            'podTemplates': ({'id': "urb-rappel-implantation", 'title': "Rappel implantation"},),
+            'podTemplates': ({'id': "urb-rappel-implantation.odt", 'title': "Rappel implantation"},),
         },
         {
             'id': "rappel-decl-init-peb",
             'title': "Rappel déclaration initiale PEB",
             'activatedFields': [],
             'deadLineDelay': 0,
-            'podTemplates': ({'id': "urb-rappel-decl-init-peb", 'title': "Rappel déclaration initiale PEB"},),
+            'podTemplates': ({'id': "urb-rappel-decl-init-peb.odt", 'title': "Rappel déclaration initiale PEB"},),
         },
         {
             'id': "rappel-implantation-peb",
             'title': "Rappel implantation et PEB",
             'activatedFields': [],
             'deadLineDelay': 0,
-            'podTemplates': ({'id': "urb-rappel-implantation-peb", 'title': "Rappel implantation et PEB"},),
+            'podTemplates': ({'id': "urb-rappel-implantation-peb.odt", 'title': "Rappel implantation et PEB"},),
         },
         {
             'id': "demande-irrecevable-art159",
             'title': "Demande irrecevable (article 159 bis)",
             'activatedFields': [],
             'deadLineDelay': 0,
-            'podTemplates': ({'id': "urb-demande-irrecevable-art159", 'title': "Demande irrecevable (article 159 bis)"},),
+            'podTemplates': ({'id': "urb-demande-irrecevable-art159.odt", 'title': "Demande irrecevable (article 159 bis)"},),
         },
         {
             'id': "recours-decision-au-conseil-etat",
@@ -653,9 +653,9 @@ urbanEventTypes = {
             'activatedFields': ['transmitDate', 'decisionDate', 'decision'],
             'deadLineDelay': 0,
             'podTemplates': (
-                {'id': "urb-recours-GW-demandeur-vs-FD", 'title': "Recours du demandeur au GW contre décision du collège"},
-                {'id': "urb-recours-GW-ville-vs-FD", 'title': "Recours de la ville au GW contre décision du FD"},
-                {'id': "urb-recours-GW-transmis-decision-GW-PU", 'title': "Transmis au réclamant de la décision du GW concernant recours au GW"},
+                {'id': "urb-recours-GW-demandeur-vs-FD.odt", 'title': "Recours du demandeur au GW contre décision du collège"},
+                {'id': "urb-recours-GW-ville-vs-FD.odt", 'title': "Recours de la ville au GW contre décision du FD"},
+                {'id': "urb-recours-GW-transmis-decision-GW-PU.odt", 'title': "Transmis au réclamant de la décision du GW concernant recours au GW"},
             ),
         },
     ),
@@ -666,8 +666,8 @@ urbanEventTypes = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': (
-                {'id': "urb-procedure-erronee-art127", 'title': "Procédure erronée (article 127 - courrier au demandeur)"},
-                {'id': "urb-procedure-erronee-art127-rw", 'title': "Procédure erronée (article 127 - courrier à la RW)"},
+                {'id': "urb-procedure-erronee-art127.odt", 'title': "Procédure erronée (article 127 - courrier au demandeur)"},
+                {'id': "urb-procedure-erronee-art127-rw.odt", 'title': "Procédure erronée (article 127 - courrier à la RW)"},
             ),
         },
         {
@@ -678,7 +678,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "urb-recepisse", 'title': "Récépissé de la demande (article 115)"},),
+            'podTemplates': ({'id': "urb-recepisse.odt", 'title': "Récépissé de la demande (article 115)"},),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
         {
@@ -688,7 +688,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.getImpactStudy()",
             'podTemplates': (
-                {'id': "urb-avis-etude-incidence", 'title': "Avis sur l'étude d'incidence"},
+                {'id': "urb-avis-etude-incidence.odt", 'title': "Avis sur l'étude d'incidence"},
             ),
         },
         {
@@ -696,7 +696,7 @@ urbanEventTypes = {
             'title': "Récépissé d'un complément à une demande de permis (article 115)",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'podTemplates': ({'id': "urb-recepisse-art115-complement", 'title': "Récépissé d'un complément à une demande de permis (article 115)"},),
+            'podTemplates': ({'id': "urb-recepisse-art115-complement.odt", 'title': "Récépissé d'un complément à une demande de permis (article 115)"},),
             'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
         },
         {
@@ -704,7 +704,7 @@ urbanEventTypes = {
             'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'podTemplates': ({'id': "urb-recepisse-art116", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
+            'podTemplates': ({'id': "urb-recepisse-art116.odt", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
             'eventTypeType': 'Products.urban.interfaces.IModificationDepositEvent',
         },
         {
@@ -714,7 +714,7 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'TALCondition': "",
             'podTemplates': (
-                {'id': "urb-avis-technique-voirie", 'title': "Avis technique voirie"},
+                {'id': "urb-avis-technique-voirie.odt", 'title': "Avis technique voirie"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
         },
@@ -725,7 +725,7 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'TALCondition': "",
             'podTemplates': (
-                {'id': "urb-avis-technique-energie", 'title': "Avis technique énergie"},
+                {'id': "urb-avis-technique-energie.odt", 'title': "Avis technique énergie"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
         },
@@ -736,7 +736,7 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'TALCondition': "",
             'podTemplates': (
-                {'id': "urb-avis-technique-urbanisme", 'title': "Avis technique urbanisme"},
+                {'id': "urb-avis-technique-urbanisme.odt", 'title': "Avis technique urbanisme"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
         },
@@ -749,8 +749,8 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "urb-dossier-incomplet-demandeur", 'title': "Dossier incomplet (lettre demandeur)"},
-                {'id': "urb-dossier-incomplet-archi", 'title': "Dossier incomplet (lettre architecte)"},
+                {'id': "urb-dossier-incomplet-demandeur.odt", 'title': "Dossier incomplet (lettre demandeur)"},
+                {'id': "urb-dossier-incomplet-archi.odt", 'title': "Dossier incomplet (lettre architecte)"},
             ),
         },
         {
@@ -762,8 +762,8 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "urb-accuse", 'title': "Accusé de réception"},
-                {'id': "urb-accuse-demande-paiement", 'title': "Demande de paiement"},
+                {'id': "urb-accuse.odt", 'title': "Accusé de réception"},
+                {'id': "urb-accuse-demande-paiement.odt", 'title': "Demande de paiement"},
             ),
         },
         {
@@ -771,7 +771,7 @@ urbanEventTypes = {
             'title': "Dossier irrecevable",
             'activatedFields': ['decisionDate'],
             'podTemplates': (
-                {'id': "urb-regularisation-delib-college-refus", 'title': "Délibération refus de régularisation PU"},
+                {'id': "urb-regularisation-delib-college-refus.odt", 'title': "Délibération refus de régularisation PU"},
             )
         },
         {
@@ -781,7 +781,7 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'TALCondition': "python: here.getLastAcknowledgment()",
             'podTemplates': (
-                {'id': "urb-demande-complements-art116-6", 'title': "Lettre au demandeur"},
+                {'id': "urb-demande-complements-art116-6.odt", 'title': "Lettre au demandeur"},
             ),
         },
         {
@@ -793,8 +793,8 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "urb-envoi-premier-dossier-art127-rw", 'title': "Lettre d'envoi du dossier (article 127) à la RW"},
-                {'id': "urb-envoi-premier-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
+                {'id': "urb-envoi-premier-dossier-art127-rw.odt", 'title': "Lettre d'envoi du dossier (article 127) à la RW"},
+                {'id': "urb-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
         },
@@ -807,18 +807,18 @@ urbanEventTypes = {
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
-                {'id': "urb-enq-avis-riverains-annexe26", 'title': "Avis enquête (annexe 26 - lettre riverains)"},
-                {'id': "urb-enq-certif-aff-annexe26", 'title': "Certificat d'affichage (annexe 26)"},
-                {'id': "urb-enq-copie-rw-annexe26", 'title': "Avis enquête (annexe 26 - copie RW)"},
-                {'id': "urb-enq-annexe25-dem", 'title': "Affiche (annexe 25 - lettre au demandeur)"},
-                {'id': "urb-enq-annexe25", 'title': "Affiche (annexe 25)"},
-                {'id': "urb-enq-ordre-mission", 'title': "Ordre de mission"},
-                {'id': "urb-enq-accuse-reclamation", 'title': "Accusé de réception d'une réclamation"},
-                {'id': "urb-enq-reunion-clot", 'title': "Réunion de clôture d'enquête"},
-                {'id': "urb-enq-pv-clot", 'title': "PV de clôture enquête"},
-                {'id': "urb-enq-frais", 'title': "Frais d'enquête"},
-                {'id': "urb-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},
-                {'id': "urb-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
+                {'id': "urb-enq-avis-riverains-annexe26.odt", 'title': "Avis enquête (annexe 26 - lettre riverains)"},
+                {'id': "urb-enq-certif-aff-annexe26.odt", 'title': "Certificat d'affichage (annexe 26)"},
+                {'id': "urb-enq-copie-rw-annexe26.odt", 'title': "Avis enquête (annexe 26 - copie RW)"},
+                {'id': "urb-enq-annexe25-dem.odt", 'title': "Affiche (annexe 25 - lettre au demandeur)"},
+                {'id': "urb-enq-annexe25.odt", 'title': "Affiche (annexe 25)"},
+                {'id': "urb-enq-ordre-mission.odt", 'title': "Ordre de mission"},
+                {'id': "urb-enq-accuse-reclamation.odt", 'title': "Accusé de réception d'une réclamation"},
+                {'id': "urb-enq-reunion-clot.odt", 'title': "Réunion de clôture d'enquête"},
+                {'id': "urb-enq-pv-clot.odt", 'title': "PV de clôture enquête"},
+                {'id': "urb-enq-frais.odt", 'title': "Frais d'enquête"},
+                {'id': "urb-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
+                {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
             'textDefaultValues': (
@@ -831,7 +831,7 @@ urbanEventTypes = {
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': [],
             'TALCondition': "python: False",
-            'podTemplates': ({'id': "urb-avis", 'title': "Courrier de demande d'avis"},),
+            'podTemplates': ({'id': "urb-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
         },
         {
@@ -1082,8 +1082,8 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "urb-rapp-service", 'title': "Rapport du Service"},
-                {'id': "urb-rapp-college", 'title': "Rapport du Collège"},
+                {'id': "urb-rapp-service.odt", 'title': "Rapport du Service"},
+                {'id': "urb-rapp-college.odt", 'title': "Rapport du Collège"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
         },
@@ -1094,9 +1094,9 @@ urbanEventTypes = {
             'activatedFields': ['decisionDate', 'decision', 'receiptDate'],
             'deadLineDelay': 15,
             'podTemplates': (
-                {'id': "urb-envoi-second-dossier-rw", 'title': "Lettre envoi deuxième dossier à la RW"},
-                {'id': "urb-envoi-second-dossier-demandeur", 'title': "Information au demandeur envoi second dossier"},
-                {'id': "urb-envoi-premier-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
+                {'id': "urb-envoi-second-dossier-rw.odt", 'title': "Lettre envoi deuxième dossier à la RW"},
+                {'id': "urb-envoi-second-dossier-demandeur.odt", 'title': "Information au demandeur envoi second dossier"},
+                {'id': "urb-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
         },
@@ -1106,9 +1106,9 @@ urbanEventTypes = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': (
-                {'id': "urb-conseil-delib-college", 'title': "Délibération passée au collège"},
-                {'id': "urb-conseil-delib-communale-creation", 'title': "Délibération du conseil communal (ouverture de voirie)"},
-                {'id': "urb-conseil-delib-communale-modif", 'title': "Délibération du conseil communal (modification de voirie)"},
+                {'id': "urb-conseil-delib-college.odt", 'title': "Délibération passée au collège"},
+                {'id': "urb-conseil-delib-communale-creation.odt", 'title': "Délibération du conseil communal (ouverture de voirie)"},
+                {'id': "urb-conseil-delib-communale-modif.odt", 'title': "Délibération du conseil communal (modification de voirie)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ICommunalCouncilEvent',
         },
@@ -1121,19 +1121,19 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "urb-decision-octroi-dem", 'title': "Octroi du permis (lettre au demandeur)"},
-                {'id': "urb-decision-octroi-rw", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
-                {'id': "urb-decision-transmis-reclamants", 'title': "Décision du permis (transmis aux réclamants)"},
-                {'id': "urb-decision-stats-mod3", 'title': "Statistiques modèle 3"},
+                {'id': "urb-decision-octroi-dem.odt", 'title': "Octroi du permis (lettre au demandeur)"},
+                {'id': "urb-decision-octroi-rw.odt", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
+                {'id': "urb-decision-transmis-reclamants.odt", 'title': "Décision du permis (transmis aux réclamants)"},
+                {'id': "urb-decision-stats-mod3.odt", 'title': "Statistiques modèle 3"},
                 {
-                    'id': "urb-decision-formulaire-a",
+                    'id': "urb-decision-formulaire-a.odt",
                     'title': "Annexe 30 - Formulaire A",
                     'TALCondition': "python: portal.portal_urban.getUsePloneMeetingWSClient()"
                 },
-                {'id': "urb-decision-egout-travaux", 'title': "Demande de raccordement aux égouts avec travaux (formulaire à remplir par le demandeur)"},
-                {'id': "urb-decision-frais", 'title': "Ventilation des frais"},
-                {'id': "urb-debut-travaux", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
-                {'id': "urb-decision-deliberation-college", 'title': "Delibération du collège d'octroi du permis"},
+                {'id': "urb-decision-egout-travaux.odt", 'title': "Demande de raccordement aux égouts avec travaux (formulaire à remplir par le demandeur)"},
+                {'id': "urb-decision-frais.odt", 'title': "Ventilation des frais"},
+                {'id': "urb-debut-travaux.odt", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
+                {'id': "urb-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
         },
@@ -1143,7 +1143,7 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'activatedFields': [],
             'podTemplates': (
-                {'id': "urb-fiche-recap", 'title': "Fiche récapitulative"},
+                {'id': "urb-fiche-recap.odt", 'title': "Fiche récapitulative"},
             ),
         },
         {
@@ -1152,10 +1152,10 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'activatedFields': ['decisionDate', ],
             'podTemplates': (
-                {'id': "urb-racc-egout-devis-egouttage", 'title': "Devis raccordement égouttage"},
-                {'id': "urb-racc-egout-delib-college-avec-traversee-voirie", 'title': "Délibération du Collège Communal AVEC traversée de voirie"},
-                {'id': "urb-racc-egout-delib-college-sans-traversee-voirie", 'title': "Délibération du Collège Communal SANS traversée de voirie"},
-                {'id': "urb-racc-egout-delib-college-lotissement", 'title': "Délibération du Collège raccordement égout dans un lotissement"},
+                {'id': "urb-racc-egout-devis-egouttage.odt", 'title': "Devis raccordement égouttage"},
+                {'id': "urb-racc-egout-delib-college-avec-traversee-voirie.odt", 'title': "Délibération du Collège Communal AVEC traversée de voirie"},
+                {'id': "urb-racc-egout-delib-college-sans-traversee-voirie.odt", 'title': "Délibération du Collège Communal SANS traversée de voirie"},
+                {'id': "urb-racc-egout-delib-college-lotissement.odt", 'title': "Délibération du Collège raccordement égout dans un lotissement"},
             ),
         },
         {
@@ -1163,7 +1163,7 @@ urbanEventTypes = {
             'title': "Avis technique PEB",
             'activatedFields': [],
             'deadLineDelay': 0,
-            'podTemplates': ({'id': "avis-technique-peb", 'title': "Avis technique PEB"},)
+            'podTemplates': ({'id': "avis-technique-peb.odt", 'title': "Avis technique PEB"},)
         },
 
         {
@@ -1204,7 +1204,7 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'TALCondition': "python: here.getPebType() == 'complete_process'",
             'podTemplates': (
-                {'id': "rapport-final-peb", 'title': "Rapport final PEB"},
+                {'id': "rapport-final-peb.odt", 'title': "Rapport final PEB"},
             ),
         },
         {
@@ -1213,10 +1213,10 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'activatedFields': ['decisionDate', 'decision', 'receiptDate', ],
             'podTemplates': (
-                {'id': "urb-prorogation", 'title': "Délibération du Collège Communal concernant la prorogation du permis"},
-                {'id': "urb-prorogation-transmis-refus", 'title': "Refus de prorogation (lettre au demandeur)"},
-                {'id': "urb-prorogation-transmis-accept", 'title': "Acceptation de prorogation (lettre au demandeur)"},
-                {'id': "urb-prorogation-transmis-accept-fd", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
+                {'id': "urb-prorogation.odt", 'title': "Délibération du Collège Communal concernant la prorogation du permis"},
+                {'id': "urb-prorogation-transmis-refus.odt", 'title': "Refus de prorogation (lettre au demandeur)"},
+                {'id': "urb-prorogation-transmis-accept.odt", 'title': "Acceptation de prorogation (lettre au demandeur)"},
+                {'id': "urb-prorogation-transmis-accept-fd.odt", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IProrogationEvent',
         },
@@ -1226,9 +1226,9 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (
-                {'id': "urb-suspension-retrait-refus-dem", 'title': "Retrait et refus du permis d'urbanisme (lettre au demandeur)"},
-                {'id': "urb-suspension-retrait-refus-rw", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW)"},
-                {'id': "urb-suspension-retrait-refus-rw-recours", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW - direction des recours)"},
+                {'id': "urb-suspension-retrait-refus-dem.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre au demandeur)"},
+                {'id': "urb-suspension-retrait-refus-rw.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW)"},
+                {'id': "urb-suspension-retrait-refus-rw-recours.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW - direction des recours)"},
             ),
         },
         {
@@ -1237,8 +1237,8 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'activatedFields': [],
             'podTemplates': (
-                {'id': "urb-enveloppes-dem", 'title': "Enveloppes demandeurs"},
-                {'id': "urb-enveloppes-archi", 'title': "Enveloppes architectes"},
+                {'id': "urb-enveloppes-dem.odt", 'title': "Enveloppes demandeurs"},
+                {'id': "urb-enveloppes-archi.odt", 'title': "Enveloppes architectes"},
             ),
         },
         {
@@ -1246,28 +1246,28 @@ urbanEventTypes = {
             'title': "Rappel implantation",
             'activatedFields': [],
             'deadLineDelay': 0,
-            'podTemplates': ({'id': "urb-rappel-implantation", 'title': "Rappel implantation"},),
+            'podTemplates': ({'id': "urb-rappel-implantation.odt", 'title': "Rappel implantation"},),
         },
         {
             'id': "rappel-decl-init-peb",
             'title': "Rappel déclaration initiale PEB",
             'activatedFields': [],
             'deadLineDelay': 0,
-            'podTemplates': ({'id': "urb-rappel-decl-init-peb", 'title': "Rappel déclaration initiale PEB"},),
+            'podTemplates': ({'id': "urb-rappel-decl-init-peb.odt", 'title': "Rappel déclaration initiale PEB"},),
         },
         {
             'id': "rappel-implantation-peb",
             'title': "Rappel implantation et PEB",
             'activatedFields': [],
             'deadLineDelay': 0,
-            'podTemplates': ({'id': "urb-rappel-implantation-peb", 'title': "Rappel implantation et PEB"},),
+            'podTemplates': ({'id': "urb-rappel-implantation-peb.odt", 'title': "Rappel implantation et PEB"},),
         },
         {
             'id': "demande-irrecevable-art159",
             'title': "Demande irrecevable (article 159 bis)",
             'activatedFields': [],
             'deadLineDelay': 0,
-            'podTemplates': ({'id': "urb-demande-irrecevable-art159", 'title': "Demande irrecevable (article 159 bis)"},),
+            'podTemplates': ({'id': "urb-demande-irrecevable-art159.odt", 'title': "Demande irrecevable (article 159 bis)"},),
         },
         {
             'id': "recours-decision-au-conseil-etat",
@@ -1282,9 +1282,9 @@ urbanEventTypes = {
             'activatedFields': ['transmitDate', 'decisionDate', 'decision'],
             'deadLineDelay': 0,
             'podTemplates': (
-                {'id': "urb-recours-GW-demandeur-vs-FD", 'title': "Recours du demandeur au GW contre décision du collège"},
-                {'id': "urb-recours-GW-ville-vs-FD", 'title': "Recours de la ville au GW contre décision du FD"},
-                {'id': "urb-recours-GW-transmis-decision-FD-art127", 'title': "Transmis au réclamant de la décision du FD concernant recours au GW contre art 127"},
+                {'id': "urb-recours-GW-demandeur-vs-FD.odt", 'title': "Recours du demandeur au GW contre décision du collège"},
+                {'id': "urb-recours-GW-ville-vs-FD.odt", 'title': "Recours de la ville au GW contre décision du FD"},
+                {'id': "urb-recours-GW-transmis-decision-FD-art127.odt", 'title': "Transmis au réclamant de la décision du FD concernant recours au GW contre art 127"},
             ),
         },
     ),
@@ -1297,7 +1297,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "decl-recepisse", 'title': "Récepissé de la déclaration"},
+                {'id': "decl-recepisse.odt", 'title': "Récepissé de la déclaration"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
@@ -1308,7 +1308,7 @@ urbanEventTypes = {
             'eventDateLabel': "Date de retour souhaitée",
             'deadLineDelay': 15,
             'podTemplates': (
-                {'id': 'decl-avis-technique', 'title': "Avis technique urbanisme"},
+                {'id': "decl-avis-technique.odt", 'title': "Avis technique urbanisme"},
             ),
         },
         {
@@ -1320,7 +1320,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': 'decl-delib-college', 'title': "Délibération collège"},
+                {'id': "decl-delib-college.odt", 'title': "Délibération collège"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
         },
@@ -1333,8 +1333,8 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "decl-transmis-decision-fd", 'title': "Transmis décision au FD"},
-                {'id': "decl-transmis-decision-demandeur", 'title': "Transmis décision au demandeur"},
+                {'id': "decl-transmis-decision-fd.odt", 'title': "Transmis décision au FD"},
+                {'id': "decl-transmis-decision-demandeur.odt", 'title': "Transmis décision au demandeur"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
         },
@@ -1348,7 +1348,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "cu1-recepisse", 'title': "Récépissé de la demande"},
+                {'id': "cu1-recepisse.odt", 'title': "Récépissé de la demande"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
@@ -1359,7 +1359,7 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'TALCondition': "",
             'podTemplates': (
-                {'id': "cu1-avis-technique-voirie", 'title': "Avis technique voirie"},
+                {'id': "cu1-avis-technique-voirie.odt", 'title': "Avis technique voirie"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
         },
@@ -1370,7 +1370,7 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'TALCondition': "",
             'podTemplates': (
-                {'id': "cu1-avis-technique-urbanisme", 'title': "Avis technique urbanisme"},
+                {'id': "cu1-avis-technique-urbanisme.odt", 'title': "Avis technique urbanisme"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
         },
@@ -1380,8 +1380,8 @@ urbanEventTypes = {
             'activatedFields': ["decisionDate", "decision"],
             'deadLineDelay': 15,
             'podTemplates': (
-                {'id': "cu1-envoi-dossier-rw", 'title': "Lettre d'envoi du dossier à la RW"},
-                {'id': "cu1-envoi-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
+                {'id': "cu1-envoi-dossier-rw.odt", 'title': "Lettre d'envoi du dossier à la RW"},
+                {'id': "cu1-envoi-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
         },
@@ -1393,10 +1393,10 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "cu1-lettre-notaire", 'title': "Lettre au notaire (ou demandeur) (octroi)"},
-                {'id': "cu1-certif", 'title': "Certificat d'urbanisme 1 (annexe 35 formulaire I B)"},
-                {'id': "cu1-demande-paiement", 'title': "Demande de paiement"},
-                {'id': "cu1-rappel-demande-paiement", 'title': "Rappel paiement"},
+                {'id': "cu1-lettre-notaire.odt", 'title': "Lettre au notaire (ou demandeur) (octroi)"},
+                {'id': "cu1-certif.odt", 'title': "Certificat d'urbanisme 1 (annexe 35 formulaire I B)"},
+                {'id': "cu1-demande-paiement.odt", 'title': "Demande de paiement"},
+                {'id': "cu1-rappel-demande-paiement.odt", 'title': "Rappel paiement"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
         },
@@ -1410,7 +1410,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "cu2-recepisse", 'title': "Récépissé de la demande"},
+                {'id': "cu2-recepisse.odt", 'title': "Récépissé de la demande"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
@@ -1421,7 +1421,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
             'podTemplates': (
-                {'id': "cu2-dossier-incomplet-demandeur", 'title': "Dossier incomplet (lettre demandeur)"},
+                {'id': "cu2-dossier-incomplet-demandeur.odt", 'title': "Dossier incomplet (lettre demandeur)"},
             ),
         },
         {
@@ -1433,18 +1433,18 @@ urbanEventTypes = {
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
-                {'id': "cu2-enq-avis-riverains-annexe26", 'title': "Avis enquête (annexe 26 - lettre riverains)"},
-                {'id': "cu2-enq-certif-aff-annexe26", 'title': "Certificat d'affichage (annexe 26)"},
-                {'id': "cu2-enq-copie-rw-annexe26", 'title': "Avis enquête (annexe 26 - copie RW)"},
-                {'id': "cu2-enq-annexe25-dem", 'title': "Affiche (annexe 25 - lettre au demandeur)"},
-                {'id': "cu2-enq-annexe25", 'title': "Affiche (annexe 25)"},
-                {'id': "cu2-enq-ordre-mission", 'title': "Ordre de mission"},
-                {'id': "cu2-enq-accuse-reclamation", 'title': "Accusé de réception d'une réclamation"},
-                {'id': "cu2-enq-reunion-clot", 'title': "Réunion de clôture d'enquête"},
-                {'id': "cu2-enq-pv-clot", 'title': "PV de clôture enquête"},
-                {'id': "cu2-enq-frais", 'title': "Frais d'enquête"},
-                {'id': "cu2-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},
-                {'id': "cu2-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
+                {'id': "cu2-enq-avis-riverains-annexe26.odt", 'title': "Avis enquête (annexe 26 - lettre riverains)"},
+                {'id': "cu2-enq-certif-aff-annexe26.odt", 'title': "Certificat d'affichage (annexe 26)"},
+                {'id': "cu2-enq-copie-rw-annexe26.odt", 'title': "Avis enquête (annexe 26 - copie RW)"},
+                {'id': "cu2-enq-annexe25-dem.odt", 'title': "Affiche (annexe 25 - lettre au demandeur)"},
+                {'id': "cu2-enq-annexe25.odt", 'title': "Affiche (annexe 25)"},
+                {'id': "cu2-enq-ordre-mission.odt", 'title': "Ordre de mission"},
+                {'id': "cu2-enq-accuse-reclamation.odt", 'title': "Accusé de réception d'une réclamation"},
+                {'id': "cu2-enq-reunion-clot.odt", 'title': "Réunion de clôture d'enquête"},
+                {'id': "cu2-enq-pv-clot.odt", 'title': "PV de clôture enquête"},
+                {'id': "cu2-enq-frais.odt", 'title': "Frais d'enquête"},
+                {'id': "cu2-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
+                {'id': "cu2-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
@@ -1454,7 +1454,7 @@ urbanEventTypes = {
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': [],
             'TALCondition': "python: False",
-            'podTemplates': ({'id': "cu2-avis", 'title': "Courrier de demande d'avis"},),
+            'podTemplates': ({'id': "cu2-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
         },
         {
@@ -1703,8 +1703,8 @@ urbanEventTypes = {
             'activatedFields': ['decisionDate', 'decision', 'decisionText'],
             'deadLineDelay': 15,
             'podTemplates': (
-                {'id': "cu2-rapp-service", 'title': "Rapport du Service"},
-                {'id': "cu2-rapp-college", 'title': "Rapport du Collège"},
+                {'id': "cu2-rapp-service.odt", 'title': "Rapport du Service"},
+                {'id': "cu2-rapp-college.odt", 'title': "Rapport du Collège"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
         },
@@ -1714,8 +1714,8 @@ urbanEventTypes = {
             'activatedFields': ["decisionDate", "decision"],
             'deadLineDelay': 15,
             'podTemplates': (
-                {'id': "cu2-envoi-dossier-rw", 'title': "Lettre d'envoi du dossier à la RW"},
-                {'id': "cu2-envoi-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
+                {'id': "cu2-envoi-dossier-rw.odt", 'title': "Lettre d'envoi du dossier à la RW"},
+                {'id': "cu2-envoi-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
         },
@@ -1728,16 +1728,16 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "cu2-decision-octroi-dem", 'title': "Octroi du certificat (lettre au demandeur)"},
-                {'id': "cu2-decision-octroi-rw", 'title': "Octroi du certificat (lettre à l'Urbanisme)"},
-                {'id': "cu2-decision-transmis-reclamants", 'title': "Décision du certificat (transmis aux réclamants)"},
-                {'id': "cu2-decision-frais", 'title': "Ventilation des frais"},
+                {'id': "cu2-decision-octroi-dem.odt", 'title': "Octroi du certificat (lettre au demandeur)"},
+                {'id': "cu2-decision-octroi-rw.odt", 'title': "Octroi du certificat (lettre à l'Urbanisme)"},
+                {'id': "cu2-decision-transmis-reclamants.odt", 'title': "Décision du certificat (transmis aux réclamants)"},
+                {'id': "cu2-decision-frais.odt", 'title': "Ventilation des frais"},
                 {
-                    'id': "cu2-decision-deliberation-college",
+                    'id': "cu2-decision-deliberation-college.odt",
                     'title': "Delibération du collège d'octroi du certificat",
                     'TALCondition': "python: portal.portal_urban.getUsePloneMeetingWSClient()"
                 },
-                {'id': "cu2-certif", 'title': "Certificat d'urbanisme 2 (annexe 35 formulaire II B)"},
+                {'id': "cu2-certif.odt", 'title': "Certificat d'urbanisme 2 (annexe 35 formulaire II B)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
         },
@@ -1750,7 +1750,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "div-recepisse", 'title': "Récépissé de la demande"},),
+            'podTemplates': ({'id': "div-recepisse.odt", 'title': "Récépissé de la demande"},),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
         {
@@ -1761,9 +1761,9 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "div-decision", 'title': "Octroi/refus de la division"},
-                {'id': "div-decision-incomplet", 'title': "Dossier incomplet"},
-                {'id': "div-transmis-decision", 'title': "Octroi/refus de la division (transmis au notaire)"},
+                {'id': "div-decision.odt", 'title': "Octroi/refus de la division"},
+                {'id': "div-decision-incomplet.odt", 'title': "Dossier incomplet"},
+                {'id': "div-transmis-decision.odt", 'title': "Octroi/refus de la division (transmis au notaire)"},
             ),
         },
     ),
@@ -1786,7 +1786,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "not-lettre-information-notariale", 'title': "Lettre d'information notariale (annexe 49 formulaire III)"},
+                {'id': "not-lettre-information-notariale.odt", 'title': "Lettre d'information notariale (annexe 49 formulaire III)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
         },
@@ -1808,7 +1808,7 @@ urbanEventTypes = {
             'deadLineDelay': 3,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "env1-recepisse", 'title': "Récepissé du permis"},),
+            'podTemplates': ({'id': "env1-recepisse.odt", 'title': "Récepissé du permis"},),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
         {
@@ -1818,7 +1818,7 @@ urbanEventTypes = {
             'deadLineDelay': 20,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "env1-transmis-demande-ft", 'title': "Transmis de la demande au FT"},),
+            'podTemplates': ({'id': "env1-transmis-demande-ft.odt", 'title': "Transmis de la demande au FT"},),
         },
         {
             'id': "dossier-incomplet",
@@ -1837,7 +1837,7 @@ urbanEventTypes = {
             'deadLineDelay': 3,
             'isKeyEvent': False,
             'podTemplates': (
-                {'id': "env1-recepisse-complement", 'title': "Récépissé d'un complément"},
+                {'id': "env1-recepisse-complement.odt", 'title': "Récépissé d'un complément"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
         },
@@ -1848,7 +1848,7 @@ urbanEventTypes = {
             'deadLineDelay': 20,
             'isKeyEvent': False,
             'podTemplates': (
-                {'id': "env1-transmis-complement-ft", 'title': "Transmis d'un complément au FT"},
+                {'id': "env1-transmis-complement-ft.odt", 'title': "Transmis d'un complément au FT"},
             ),
         },
         {
@@ -1859,7 +1859,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "env1-dossier-irrecevable-ft", 'title': "Transmis de l'irrecevabilité au FT"},
+                {'id': "env1-dossier-irrecevable-ft.odt", 'title': "Transmis de l'irrecevabilité au FT"},
             ),
         },
         {
@@ -1881,11 +1881,11 @@ urbanEventTypes = {
             'specialFunctionUrl': "addInvestigationPO",
             'TALCondition': "here/mayAddInquiryEvent",
             'podTemplates': (
-                {'id': 'env1-enq-avis', 'title': "Avis d'enquête publique"},
-                {'id': "env1-enq-recommandes", 'title': "Recommandé aux propriétaires (étiquette Poste)"},
-                {'id': "env1-enq-transmis-FT", 'title': "Transmis de l'avis d'enquête au FT"},
-                {'id': "env1-enq-transmis-college", 'title': "Transmis de l'avis d'enquête aux propriétaires"},
-                {'id': "env1-enq-ordre-mission", 'title': "Ordre de mission"},
+                {'id': "env1-enq-avis.odt", 'title': "Avis d'enquête publique"},
+                {'id': "env1-enq-recommandes.odt", 'title': "Recommandé aux propriétaires (étiquette Poste)"},
+                {'id': "env1-enq-transmis-FT.odt", 'title': "Transmis de l'avis d'enquête au FT"},
+                {'id': "env1-enq-transmis-college.odt", 'title': "Transmis de l'avis d'enquête aux propriétaires"},
+                {'id': "env1-enq-ordre-mission.odt", 'title': "Ordre de mission"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
@@ -1895,7 +1895,7 @@ urbanEventTypes = {
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': [],
             'TALCondition': "python: False",
-            'podTemplates': ({'id': "env3-avis", 'title': "Courrier de demande d'avis"},),
+            'podTemplates': ({'id': "env3-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
         },
         {
@@ -2171,9 +2171,9 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "env1-demande-plans-modificatifs", 'title': "Demande de plans modificatifs"},
+                {'id': "env1-demande-plans-modificatifs.odt", 'title': "Demande de plans modificatifs"},
                 {'id': "env1-transmis-demande-plans-modificatifs-ft.odt", 'title': "Transmis de la demande de plans modificatifs au FT"},
-                {'id': "env1-transmis-plans-modificatifs-ft", 'title': "Transmis de plans modificatifs au FT"},
+                {'id': "env1-transmis-plans-modificatifs-ft.odt", 'title': "Transmis de plans modificatifs au FT"},
             ),
         },
         {
@@ -2185,9 +2185,9 @@ urbanEventTypes = {
             'keyDates': ('eventDate',),
             'TALCondition': "python: here.getAuthority() == 'college'",
             'podTemplates': (
-                {'id': "env1-transmis-decision", 'title': "Transmis de la décision (demandeur)"},
-                {'id': "env1-transmis-decision-FT", 'title': "Transmis de la décision (FT)"},
-                {'id': "env1-transmis-decision-impetrants-ft", 'title': "Transmis de la décision (Instances)"},
+                {'id': "env1-transmis-decision.odt", 'title': "Transmis de la décision (demandeur)"},
+                {'id': "env1-transmis-decision-FT.odt", 'title': "Transmis de la décision (FT)"},
+                {'id': "env1-transmis-decision-impetrants-ft.odt", 'title': "Transmis de la décision (Instances)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
         },
@@ -2200,8 +2200,8 @@ urbanEventTypes = {
             'keyDates': ('eventDate',),
             'TALCondition': "python: here.getAuthority() == 'ft'",
             'podTemplates': (
-                {'id': "env1-transmis-decision", 'title': "Transmis de la décision (demandeur)"},
-                {'id': "env1-transmis-decision-impetrants-ft", 'title': "Transmis de la décision (Instances)"},
+                {'id': "env1-transmis-decision.odt", 'title': "Transmis de la décision (demandeur)"},
+                {'id': "env1-transmis-decision-impetrants-ft.odt", 'title': "Transmis de la décision (Instances)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
         },
@@ -2222,9 +2222,9 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "env1-affiche-decision", 'title': "Affiche"},
-                {'id': "env1-affichage-mission", 'title': "Demande de mission"},
-                {'id': "env1-certificat-decision", 'title': "Certificat d'affichage de la décision"},
+                {'id': "env1-affiche-decision.odt", 'title': "Affiche"},
+                {'id': "env1-affichage-mission.odt", 'title': "Demande de mission"},
+                {'id': "env1-certificat-decision.odt", 'title': "Certificat d'affichage de la décision"},
             ),
         },
         {
@@ -2254,7 +2254,7 @@ urbanEventTypes = {
             'deadLineDelay': 3,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "env2-recepisse", 'title': "Récepissé du permis"},),
+            'podTemplates': ({'id': "env2-recepisse.odt", 'title': "Récepissé du permis"},),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
         {
@@ -2264,7 +2264,7 @@ urbanEventTypes = {
             'deadLineDelay': 20,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "env2-transmis-demande-ft", 'title': "Transmis de la demande au FT"},),
+            'podTemplates': ({'id': "env2-transmis-demande-ft.odt", 'title': "Transmis de la demande au FT"},),
         },
         {
             'id': "dossier-incomplet",
@@ -2283,7 +2283,7 @@ urbanEventTypes = {
             'deadLineDelay': 3,
             'isKeyEvent': False,
             'podTemplates': (
-                {'id': "env2-recepisse-complement", 'title': "Récépissé d'un complément"},
+                {'id': "env2-recepisse-complement.odt", 'title': "Récépissé d'un complément"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
         },
@@ -2294,7 +2294,7 @@ urbanEventTypes = {
             'deadLineDelay': 20,
             'isKeyEvent': False,
             'podTemplates': (
-                {'id': "env2-transmis-complement-ft", 'title': "Transmis d'un complément au FT"},
+                {'id': "env2-transmis-complement-ft.odt", 'title': "Transmis d'un complément au FT"},
             ),
         },
         {
@@ -2305,7 +2305,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "env2-dossier-irrecevable-ft", 'title': "Transmis de l'irrecevabilité au FT"},
+                {'id': "env2-dossier-irrecevable-ft.odt", 'title': "Transmis de l'irrecevabilité au FT"},
             ),
         },
         {
@@ -2327,11 +2327,11 @@ urbanEventTypes = {
             'specialFunctionUrl': "addInvestigationPO",
             'TALCondition': "here/mayAddInquiryEvent",
             'podTemplates': (
-                {'id': 'env2-enq-avis', 'title': "Avis d'enquête publique"},
-                {'id': "env2-enq-recommandes", 'title': "Recommandé aux propriétaires (étiquette Poste)"},
-                {'id': "env2-enq-transmis-FT", 'title': "Transmis de l'avis d'enquête au FT"},
-                {'id': "env2-enq-transmis-college", 'title': "Transmis de l'avis d'enquête aux propriétaires"},
-                {'id': "env2-enq-ordre-mission", 'title': "Ordre de mission"},
+                {'id': "env2-enq-avis.odt", 'title': "Avis d'enquête publique"},
+                {'id': "env2-enq-recommandes.odt", 'title': "Recommandé aux propriétaires (étiquette Poste)"},
+                {'id': "env2-enq-transmis-FT.odt", 'title': "Transmis de l'avis d'enquête au FT"},
+                {'id': "env2-enq-transmis-college.odt", 'title': "Transmis de l'avis d'enquête aux propriétaires"},
+                {'id': "env2-enq-ordre-mission.odt", 'title': "Ordre de mission"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
@@ -2341,7 +2341,7 @@ urbanEventTypes = {
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': [],
             'TALCondition': "python: False",
-            'podTemplates': ({'id': "env3-avis", 'title': "Courrier de demande d'avis"},),
+            'podTemplates': ({'id': "env3-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
         },
         {
@@ -2617,9 +2617,9 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "env2-demande-plans-modificatifs", 'title': "Demande de plans modificatifs"},
+                {'id': "env2-demande-plans-modificatifs.odt", 'title': "Demande de plans modificatifs"},
                 {'id': "env2-transmis-demande-plans-modificatifs-ft.odt", 'title': "Transmis de la demande de plans modificatifs au FT"},
-                {'id': "env2-transmis-plans-modificatifs-ft", 'title': "Transmis de plans modificatifs au FT"},
+                {'id': "env2-transmis-plans-modificatifs-ft.odt", 'title': "Transmis de plans modificatifs au FT"},
             ),
         },
         {
@@ -2631,9 +2631,9 @@ urbanEventTypes = {
             'keyDates': ('eventDate',),
             'TALCondition': "python: here.getAuthority() == 'college'",
             'podTemplates': (
-                {'id': "env2-transmis-decision", 'title': "Transmis de la décision (demandeur)"},
-                {'id': "env2-transmis-decision-FT", 'title': "Transmis de la décision (FT)"},
-                {'id': "env2-transmis-decision-impetrants-ft", 'title': "Transmis de la décision (Instances)"},
+                {'id': "env2-transmis-decision.odt", 'title': "Transmis de la décision (demandeur)"},
+                {'id': "env2-transmis-decision-FT.odt", 'title': "Transmis de la décision (FT)"},
+                {'id': "env2-transmis-decision-impetrants-ft.odt", 'title': "Transmis de la décision (Instances)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
         },
@@ -2646,8 +2646,8 @@ urbanEventTypes = {
             'keyDates': ('eventDate',),
             'TALCondition': "python: here.getAuthority() == 'ft'",
             'podTemplates': (
-                {'id': "env2-transmis-decision", 'title': "Transmis de la décision (demandeur)"},
-                {'id': "env2-transmis-decision-impetrants-ft", 'title': "Transmis de la décision (Instances)"},
+                {'id': "env2-transmis-decision.odt", 'title': "Transmis de la décision (demandeur)"},
+                {'id': "env2-transmis-decision-impetrants-ft.odt", 'title': "Transmis de la décision (Instances)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
         },
@@ -2668,9 +2668,9 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "env2-affiche-decision", 'title': "Affiche"},
-                {'id': "env2-affichage-mission", 'title': "Demande de mission"},
-                {'id': "env2-certificat-decision", 'title': "Certificat d'affichage de la décision"},
+                {'id': "env2-affiche-decision.odt", 'title': "Affiche"},
+                {'id': "env2-affichage-mission.odt", 'title': "Demande de mission"},
+                {'id': "env2-certificat-decision.odt", 'title': "Certificat d'affichage de la décision"},
             ),
         },
         {
@@ -2691,7 +2691,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "env3-recepisse", 'title': "Récepissé de la déclaration"},),
+            'podTemplates': ({'id': "env3-recepisse.odt", 'title': "Récepissé de la déclaration"},),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
         {
@@ -2700,7 +2700,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "env3-demande-irrecevable", 'title': "Demande irrecevable (lettre au demandeur)"},),
+            'podTemplates': ({'id': "env3-demande-irrecevable.odt", 'title': "Demande irrecevable (lettre au demandeur)"},),
         },
         {
             'id': "acceptation-de-la-demande",
@@ -2709,9 +2709,9 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "env3-demande-recevable", 'title': "Déclaration recevable sans conditions complémentaires (lettre au demandeur)"},
-                {'id': "env3-demande-recevable-fdft", 'title': "Déclaration recevable sans conditions complémentaires (lettre au FD/FT)"},
-                {'id': "env3-demande-paiement", 'title': "Demande de paiement"},
+                {'id': "env3-demande-recevable.odt", 'title': "Déclaration recevable sans conditions complémentaires (lettre au demandeur)"},
+                {'id': "env3-demande-recevable-fdft.odt", 'title': "Déclaration recevable sans conditions complémentaires (lettre au FD/FT)"},
+                {'id': "env3-demande-paiement.odt", 'title': "Demande de paiement"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
         },
@@ -2720,7 +2720,7 @@ urbanEventTypes = {
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': [],
             'TALCondition': "python: False",
-            'podTemplates': ({'id': "env3-avis", 'title': "Courrier de demande d'avis"},),
+            'podTemplates': ({'id': "env3-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
         },
         {
@@ -2970,9 +2970,9 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "env3-demande-recevable-cond", 'title': "Déclaration recevable avec conditions complémentaires (lettre au demandeur)"},
-                {'id': "env3-demande-recevable-cond-fdft", 'title': "Déclaration recevable avec conditions complémentaires (lettre au FD/FT)"},
-                {'id': "env3-demande-paiement", 'title': "Demande de paiement"},
+                {'id': "env3-demande-recevable-cond.odt", 'title': "Déclaration recevable avec conditions complémentaires (lettre au demandeur)"},
+                {'id': "env3-demande-recevable-cond-fdft.odt", 'title': "Déclaration recevable avec conditions complémentaires (lettre au FD/FT)"},
+                {'id': "env3-demande-paiement.odt", 'title': "Demande de paiement"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
         },
@@ -2982,7 +2982,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "env3-rapport-au-college", 'title': "Rapport au collège"},),
+            'podTemplates': ({'id': "env3-rapport-au-college.odt", 'title': "Rapport au collège"},),
         },
         {
             'id': "passage-college",
@@ -2993,23 +2993,23 @@ urbanEventTypes = {
             'keyDates': ('decisionDate',),
             'podTemplates': (
                 {
-                    'id': "env3-decision-college", 'title': "Décision du collège des conditions complémentaires",
+                    'id': "env3-decision-college.odt", 'title': "Décision du collège des conditions complémentaires",
                     'TALCondition': "python: licence.getHasAdditionalConditions()"
                 },
                 {
-                    'id': "env3-transmis-sans-conditions", 'title': "Transmis décision sans conditions complémentaires (lettre au demandeur)",
+                    'id': "env3-transmis-sans-conditions.odt", 'title': "Transmis décision sans conditions complémentaires (lettre au demandeur)",
                     'TALCondition': "python: not licence.getHasAdditionalConditions()"
                 },
                 {
-                    'id': "env3-transmis-conditions", 'title': "Transmis décision avec conditions complémentaires (lettre au demandeur)",
+                    'id': "env3-transmis-conditions.odt", 'title': "Transmis décision avec conditions complémentaires (lettre au demandeur)",
                     'TALCondition': "python: licence.getHasAdditionalConditions()"
                 },
                 {
-                    'id': "env3-transmis-sans-conditions-fdft", 'title': "Transmis décision sans conditions complémentaires (lettre au FD/FT)",
+                    'id': "env3-transmis-sans-conditions-fdft.odt", 'title': "Transmis décision sans conditions complémentaires (lettre au FD/FT)",
                     'TALCondition': "python: not licence.getHasAdditionalConditions()"
                 },
                 {
-                    'id': "env3-transmis-conditions-fdft", 'title': "Transmis décision avec conditions complémentaires (lettre au FD/FT)",
+                    'id': "env3-transmis-conditions-fdft.odt", 'title': "Transmis décision avec conditions complémentaires (lettre au FD/FT)",
                     'TALCondition': "python: licence.getHasAdditionalConditions()"
                 },
             ),
@@ -3034,7 +3034,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "miscdemand-recepisse", 'title': "Récepissé de la demande"},
+                {'id': "miscdemand-recepisse.odt", 'title': "Récepissé de la demande"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
@@ -3043,7 +3043,7 @@ urbanEventTypes = {
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': [],
             'TALCondition': "python: False",
-            'podTemplates': ({'id': "lot-avis", 'title': "Courrier de demande d'avis"},),
+            'podTemplates': ({'id': "lot-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
         },
         {
@@ -3066,7 +3066,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': 'miscdemand-delib-college', 'title': "Délibération collège"},
+                {'id': "miscdemand-delib-college.odt", 'title': "Délibération collège"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
         },
@@ -3079,7 +3079,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "miscdemand-transmis-decision-demandeur", 'title': "Transmis décision au demandeur"},
+                {'id': "miscdemand-transmis-decision-demandeur.odt", 'title': "Transmis décision au demandeur"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
         },
@@ -3092,7 +3092,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "lot-recepisse", 'title': "Récépissé de la demande (article 115)"},),
+            'podTemplates': ({'id': "lot-recepisse.odt", 'title': "Récépissé de la demande (article 115)"},),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
         {
@@ -3102,7 +3102,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'TALCondition': "python: here.getImpactStudy()",
             'podTemplates': (
-                {'id': "lot-avis-etude-incidence", 'title': "Avis sur l'étude d'incidence"},
+                {'id': "lot-avis-etude-incidence.odt", 'title': "Avis sur l'étude d'incidence"},
             ),
         },
         {
@@ -3114,7 +3114,7 @@ urbanEventTypes = {
             'keyDates': ('eventDate',),
             'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
             'podTemplates': (
-                {'id': "lot-dossier-incomplet-demandeur", 'title': "Dossier incomplet (lettre demandeur)"},
+                {'id': "lot-dossier-incomplet-demandeur.odt", 'title': "Dossier incomplet (lettre demandeur)"},
             ),
         },
         {
@@ -3126,8 +3126,8 @@ urbanEventTypes = {
             'keyDates': ('eventDate',),
             'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
             'podTemplates': (
-                {'id': "lot-accuse", 'title': "Accusé de réception"},
-                {'id': "lot-accuse-demande-paiement", 'title': "Demande de paiement"},
+                {'id': "lot-accuse.odt", 'title': "Accusé de réception"},
+                {'id': "lot-accuse-demande-paiement.odt", 'title': "Demande de paiement"},
             ),
         },
         {
@@ -3135,7 +3135,7 @@ urbanEventTypes = {
             'title': "Dossier irrecevable",
             'activatedFields': ['decisionDate'],
             'podTemplates': (
-                {'id': "lot-regularisation-delib-college-refus", 'title': "Délibération refus de régularisation PU"},
+                {'id': "lot-regularisation-delib-college-refus.odt", 'title': "Délibération refus de régularisation PU"},
             )
         },
         {
@@ -3147,9 +3147,9 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "lot-envoi-premier-dossier-rw", 'title': "Lettre d'envoi du premier dossier à la RW"},
-                {'id': "lot-envoi-premier-dossier-art127-rw", 'title': "Lettre d'envoi du dossier (article 127) à la RW"},
-                {'id': "lot-envoi-premier-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
+                {'id': "lot-envoi-premier-dossier-rw.odt", 'title': "Lettre d'envoi du premier dossier à la RW"},
+                {'id': "lot-envoi-premier-dossier-art127-rw.odt", 'title': "Lettre d'envoi du dossier (article 127) à la RW"},
+                {'id': "lot-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
         },
@@ -3162,18 +3162,18 @@ urbanEventTypes = {
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
-                {'id': "lot-enq-avis-riverains-annexe26", 'title': "Avis enquête (annexe 26 - lettre riverains)"},
-                {'id': "lot-enq-certif-aff-annexe26", 'title': "Certificat d'affichage (annexe 26)"},
-                {'id': "lot-enq-copie-rw-annexe26", 'title': "Avis enquête (annexe 26 - copie RW)"},
-                {'id': "lot-enq-annexe25-dem", 'title': "Affiche (annexe 25 - lettre au demandeur)"},
-                {'id': "lot-enq-annexe25", 'title': "Affiche (annexe 25)"},
-                {'id': "lot-enq-ordre-mission", 'title': "Ordre de mission"},
-                {'id': "lot-enq-accuse-reclamation", 'title': "Accusé de réception d'une réclamation"},
-                {'id': "lot-enq-reunion-clot", 'title': "Réunion de clôture d'enquête"},
-                {'id': "lot-enq-pv-clot", 'title': "PV de clôture enquête"},
-                {'id': "lot-enq-frais", 'title': "Frais d'enquête"},
-                {'id': "lot-enq-recommandes", 'title': "Recommandés aux riverains (étiquette Poste)"},
-                {'id': "lot-enq-art341-invit", 'title': "Invitation séance de réclamation (article 341)"},
+                {'id': "lot-enq-avis-riverains-annexe26.odt", 'title': "Avis enquête (annexe 26 - lettre riverains)"},
+                {'id': "lot-enq-certif-aff-annexe26.odt", 'title': "Certificat d'affichage (annexe 26)"},
+                {'id': "lot-enq-copie-rw-annexe26.odt", 'title': "Avis enquête (annexe 26 - copie RW)"},
+                {'id': "lot-enq-annexe25-dem.odt", 'title': "Affiche (annexe 25 - lettre au demandeur)"},
+                {'id': "lot-enq-annexe25.odt", 'title': "Affiche (annexe 25)"},
+                {'id': "lot-enq-ordre-mission.odt", 'title': "Ordre de mission"},
+                {'id': "lot-enq-accuse-reclamation.odt", 'title': "Accusé de réception d'une réclamation"},
+                {'id': "lot-enq-reunion-clot.odt", 'title': "Réunion de clôture d'enquête"},
+                {'id': "lot-enq-pv-clot.odt", 'title': "PV de clôture enquête"},
+                {'id': "lot-enq-frais.odt", 'title': "Frais d'enquête"},
+                {'id': "lot-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
+                {'id': "lot-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
@@ -3183,7 +3183,7 @@ urbanEventTypes = {
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': [],
             'TALCondition': "python: False",
-            'podTemplates': ({'id': "lot-avis", 'title': "Courrier de demande d'avis"},),
+            'podTemplates': ({'id': "lot-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
         },
         {
@@ -3434,8 +3434,8 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "lot-rapp-service", 'title': "Rapport du Service"},
-                {'id': "lot-rapp-college", 'title': "Rapport du Collège"},
+                {'id': "lot-rapp-service.odt", 'title': "Rapport du Service"},
+                {'id': "lot-rapp-college.odt", 'title': "Rapport du Collège"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
         },
@@ -3446,9 +3446,9 @@ urbanEventTypes = {
             'activatedFields': ['decisionDate', 'decision', 'receiptDate'],
             'deadLineDelay': 15,
             'podTemplates': (
-                {'id': "lot-envoi-second-dossier-rw", 'title': "Lettre envoi deuxième dossier à la RW"},
-                {'id': "lot-envoi-second-dossier-demandeur", 'title': "Information au demandeur envoi second dossier"},
-                {'id': "lot-envoi-premier-dossier-form-rw", 'title': "Formulaire d'envoi d'un dossier à la RW"},
+                {'id': "lot-envoi-second-dossier-rw.odt", 'title': "Lettre envoi deuxième dossier à la RW"},
+                {'id': "lot-envoi-second-dossier-demandeur.odt", 'title': "Information au demandeur envoi second dossier"},
+                {'id': "lot-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
         },
@@ -3458,9 +3458,9 @@ urbanEventTypes = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': (
-                {'id': "lot-conseil-delib-college", 'title': "Délibération passée au collège"},
-                {'id': "lot-conseil-delib-communale-creation", 'title': "Délibération du conseil communal (ouverture de voirie)"},
-                {'id': "lot-conseil-delib-communale-modif", 'title': "Délibération du conseil communal (modification de voirie)"},
+                {'id': "lot-conseil-delib-college.odt", 'title': "Délibération passée au collège"},
+                {'id': "lot-conseil-delib-communale-creation.odt", 'title': "Délibération du conseil communal (ouverture de voirie)"},
+                {'id': "lot-conseil-delib-communale-modif.odt", 'title': "Délibération du conseil communal (modification de voirie)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ICommunalCouncilEvent',
         },
@@ -3473,16 +3473,16 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "lot-decision-octroi-dem", 'title': "Octroi du permis (lettre au demandeur)"},
-                {'id': "lot-decision-octroi-rw", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
-                {'id': "lot-decision-transmis-reclamants", 'title': "Décision du permis (transmis aux réclamants)"},
+                {'id': "lot-decision-octroi-dem.odt", 'title': "Octroi du permis (lettre au demandeur)"},
+                {'id': "lot-decision-octroi-rw.odt", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
+                {'id': "lot-decision-transmis-reclamants.odt", 'title': "Décision du permis (transmis aux réclamants)"},
                 {
-                    'id': "lot-decision-formulaire-b",
+                    'id': "lot-decision-formulaire-b.odt",
                     'title': "Annexe 31 - Formulaire B",
                     'TALCondition': "python: portal.portal_urban.getUsePloneMeetingWSClient()"
                 },
-                {'id': "lot-decision-frais", 'title': "Ventilation des frais"},
-                {'id': "lot-decision-deliberation-college", 'title': "Delibération du collège d'octroi du permis"},
+                {'id': "lot-decision-frais.odt", 'title': "Ventilation des frais"},
+                {'id': "lot-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
         },
@@ -3492,9 +3492,9 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (
-                {'id': "lot-suspension-retrait-refus-dem", 'title': "Retrait et refus du permis d'urbanisme (lettre au demandeur)"},
-                {'id': "lot-suspension-retrait-refus-rw", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW)"},
-                {'id': "lot-suspension-retrait-refus-rw-recours", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW - direction des recours)"},
+                {'id': "lot-suspension-retrait-refus-dem.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre au demandeur)"},
+                {'id': "lot-suspension-retrait-refus-rw.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW)"},
+                {'id': "lot-suspension-retrait-refus-rw-recours.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW - direction des recours)"},
             ),
         },
         {
@@ -3503,8 +3503,8 @@ urbanEventTypes = {
             'deadLineDelay': 0,
             'activatedFields': [],
             'podTemplates': (
-                {'id': "urb-enveloppes-dem", 'title': "Enveloppes demandeurs"},
-                {'id': "lot-enveloppes-geo", 'title': "Enveloppes géomètres"},
+                {'id': "urb-enveloppes-dem.odt", 'title': "Enveloppes demandeurs"},
+                {'id': "lot-enveloppes-geo.odt", 'title': "Enveloppes géomètres"},
             ),
         },
         {
@@ -3527,10 +3527,10 @@ urbanEventTypes = {
             'activatedFields': ['transmitDate', 'decisionDate', 'decision'],
             'deadLineDelay': 0,
             'podTemplates': (
-                {'id': "lot-recours-GW-demandeur-vs-FD", 'title': "Recours du demandeur au GW contre décision du collège"},
-                {'id': "lot-recours-GW-ville-vs-FD", 'title': "Recours de la ville au GW contre décision du FD"},
-                {'id': "lot-recours-GW-transmis-decision-FD-art127", 'title': "Transmis au réclamant de la décision du FD concernant recours au GW contre art 127"},
-                {'id': "lot-recours-GW-transmis-decision-GW-PU", 'title': "Transmis au réclamant de la décision du GW concernant recours au GW"},
+                {'id': "lot-recours-GW-demandeur-vs-FD.odt", 'title': "Recours du demandeur au GW contre décision du collège"},
+                {'id': "lot-recours-GW-ville-vs-FD.odt", 'title': "Recours de la ville au GW contre décision du FD"},
+                {'id': "lot-recours-GW-transmis-decision-FD-art127.odt", 'title': "Transmis au réclamant de la décision du FD concernant recours au GW contre art 127"},
+                {'id': "lot-recours-GW-transmis-decision-GW-PU.odt", 'title': "Transmis au réclamant de la décision du GW concernant recours au GW"},
             ),
         },
     ),

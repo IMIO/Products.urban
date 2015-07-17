@@ -161,8 +161,8 @@
 <type type_id="UrbanCertificateOne">
   <bound-workflow workflow_id="urban_licence_workflow" />
 </type>
-<type type_id="UrbanDoc">
-  <bound-workflow workflow_id="" />
+<type type_id="UrbanTemplate">
+  <bound-workflow workflow_id="activation_workflow" />
 </type>
 <type type_id="UrbanEventInquiry">
  <bound-workflow workflow_id="urbanevent_workflow" />

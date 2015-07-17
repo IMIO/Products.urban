@@ -27,7 +27,7 @@ i18n:domain="plone">
                          voc_folder python: getattr(config, voc_foldername);
                          spf_term python: getattr(voc_folder, cell_value)"
               tal:condition="python: spf_term.hasRelatedFields()" >
-              <a class="link-overlay" 
+              <a class="link-overlay"
                  tal:attributes="href string:@@fieldeditoverlay?spf_id=${cell_value}&vocname=${voc_foldername};
                                  id string:fieldeditoverlay-${cell_value}">
                   <img src=# tal:attributes="src string:${portal_url}/edit.png"/>

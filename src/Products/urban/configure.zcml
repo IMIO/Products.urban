@@ -7,25 +7,27 @@
   <!-- ##code-section configure.zcml.header -->
   <!-- exclude can be removed when five.grok does the exclude -->
   <exclude package="zope.contentprovider" />
-  <include package="Products.Five"/>
+  <include package="collective.datagridcolumns"/>
+  <include package="collective.documentgenerator"/>
+  <include package="collective.externaleditor"/>
+  <include package="collective.iconifieddocumentactions"/>
+  <include package="collective.js.jqueryui"/>
+  <include package="collective.z3cform.datagridfield"/>
   <include package="five.grok"/>
+  <include package="imio.actionspanel"/>
+  <include package="Products.Archetypes"/>
+  <include package="Products.CMFPlacefulWorkflow"/>
+  <include package="Products.DataGridField"/>
+  <include package="Products.Five"/>
   <include package="Products.GenericSetup" file="meta.zcml"/>
   <include package="Products.GenericSetup"/>
-  <include package="Products.DataGridField"/>
   <include package="Products.CMFCore" file="meta.zcml"/>
-  <include package="plone.app.portlets" file="meta.zcml" />
-  <include package="Products.Archetypes"/>
   <include package="Products.MasterSelectWidget"/>
-  <include package="collective.externaleditor"/>
-  <include package="collective.datagridcolumns"/>
+  <include package="plone.app.dexterity" />
+  <include package="plone.app.portlets" file="meta.zcml" />
   <include package="plone.app.referenceintegrity"/>
   <include package="plone.z3ctable"/>
-  <include package="collective.iconifieddocumentactions"/>
-  <include package="Products.CMFPlacefulWorkflow"/>
-  <include package="collective.js.jqueryui"/>
   <include package="plonetheme.imioapps"/>
-  <include package="imio.actionspanel"/>
-  <include package="collective.z3cform.datagridfield"/>
 
 
   <permission
@@ -33,6 +35,7 @@
     title="Products.urban: ViewUrbanMap"
     />
 
+  <include package=".docgen" />
   <include package=".events" />
   <include package=".browser" />
   <include package=".migration" />
@@ -112,29 +115,6 @@
         Products.Archetypes.interfaces.IUIDCatalog"
     factory="plone.indexer.wrapper.IndexableObjectWrapper"
     provides="plone.indexer.interfaces.IIndexableObject"
-  />
-
-  <adapter
-    name=".subtypes.urbandoc"
-    for=".interfaces.IUrbanDoc"
-    factory=".subtypes.urbandoc.UrbanDocExtender" />
-
-  <adapter
-    for="Products.urban.interfaces.IUrbanEvent"
-    factory=".appy_pod.UrbanEventAppyContext"
-    provides=".appy_pod.IAppyContext"
-  />
-
-  <adapter
-    for="Products.urban.interfaces.IGenericLicence"
-    factory=".appy_pod.UrbanLicenceGlobalTemplate"
-    provides=".appy_pod.IGlobalTemplates"
-  />
-
-  <adapter
-    for="Products.urban.interfaces.IEnvironmentBase"
-    factory=".appy_pod.EnvironmentLicenceGlobalTemplates"
-    provides=".appy_pod.IGlobalTemplates"
   />
 
   <adapter name="applicantInfosIndex" factory=".indexes.genericlicence_applicantinfoindex" />

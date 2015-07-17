@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from zope.interface import alsoProvides
-from zope.component import createObject
 from zope.component.interface import getInterface
 
 from plone import api
@@ -47,10 +46,12 @@ def generateSingletonDocument(urban_event, event):
     urban_tool = api.portal.get_tool('portal_urban')
     if not urban_tool.getGenerateSingletonDocuments():
         return
+
     templates = urban_event.getTemplates()
     if len(templates) == 1:
-        odt_template = templates[0]
-        createObject('GeneratedUrbanDoc', urban_event, odt_template)
+        urban_event.REQUEST.set('doc_uid', templates[0].UID())
+        generation_view = urban_event.restrictedTraverse('urban-document-generation')
+        generation_view.generate_persistent_doc()
 
 
 def updateKeyEvent(urbanEvent, event):

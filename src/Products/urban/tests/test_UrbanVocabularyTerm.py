@@ -16,7 +16,6 @@ class TestUrbanVocabularyTerm(unittest.TestCase):
         self.urbancertificateones = urban.urbancertificateones
         LICENCE_ID = 'licence1'
         login(portal, 'urbaneditor')
-        #import ipdb; ipdb.set_trace()
         self.urbancertificateones.invokeFactory('UrbanCertificateOne', LICENCE_ID)
         self.certificate = getattr(self.urbancertificateones, LICENCE_ID)
         #set language to 'fr' as we do some translations above

@@ -23,12 +23,16 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from DateTime import DateTime
+
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.CMFCore.utils import getToolByName
-from zope.i18n import translate
+
+from Products.urban.interfaces import IUrbanDoc
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
+
+from zope.i18n import translate
 ##/code-section module-header
 
 schema = Schema((
@@ -289,15 +293,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     schema = UrbanEvent_schema
 
     ##code-section class-header #fill in your manual code here
-    #implements(interfacesToImplement)
-    aliases = {
-        '(Default)'  : 'UrbanEvent_view',
-        'view'       : '(Default)',
-        'index.html' : '(Default)',
-        'edit'       : 'UrbanEvent_edit',
-        'properties' : 'base_metadata',
-        'sharing'    : '',
-        }
     ##/code-section class-header
 
     # Methods
@@ -314,13 +309,12 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     def getDefaultTime(self):
         return DateTime()
 
+    security.declarePublic('getTemplates')
     def getTemplates(self):
         """
           Returns contained templates (File)
         """
-        wf_tool = getToolByName(self, 'portal_workflow')
-        return [template for template in self.getUrbaneventtypes().listFolderContents({'portal_type': 'UrbanDoc'})
-                if wf_tool.getInfoFor(template, 'review_state') == 'enabled']
+        return self.getUrbaneventtypes().getTemplates()
 
     security.declarePublic('eventDateLabel')
     def eventDateLabel(self):
@@ -475,17 +469,21 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         #return the generated JS code
         return self.portal_urban.generateMapJS(self, cqlquery, cqlquery2,'', zoneExtent)
 
+    security.declarePublic('getDocuments')
     def getDocuments(self):
         """
           Return the documents (File) of the UrbanEvent
         """
-        return self.listFolderContents(contentFilter={"portal_type": "UrbanDoc"})
+        documents = [obj for obj in self.objectValues() if IUrbanDoc.providedBy(obj)]
+        return documents
 
+    security.declarePublic('getAttachments')
     def getAttachments(self):
         """
           Return the attachments (File) of the UrbanEvent
         """
-        return self.listFolderContents(contentFilter={"portal_type": "File"})
+        attachments = [obj for obj in self.objectValues() if not IUrbanDoc.providedBy(obj)]
+        return attachments
 
     security.declarePublic('RecipientsCadastreCSV')
     def RecipientsCadastreCSV(self):

@@ -24,7 +24,7 @@ from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.CMFCore.utils import getToolByName
+from plone import api
 ##/code-section module-header
 
 schema = Schema((
@@ -78,13 +78,13 @@ class UrbanEventOpinionRequest(UrbanEvent, BrowserDefaultMixin):
         """
           Returns contained templates (File)
         """
-        wf_tool = getToolByName(self, 'portal_workflow')
-        if len(self.getUrbaneventtypes().listFolderContents({'portal_type': 'UrbanDoc'})):
-            return [template for template in self.getUrbaneventtypes().listFolderContents({'portal_type': 'UrbanDoc'})
-                    if wf_tool.getInfoFor(template, 'review_state') == 'enabled']
-        urbantool = getToolByName(self,'portal_urban')
+        custom_templates = self.getUrbaneventtypes().getTemplates()
+        if custom_templates:
+            return custom_templates
+
+        urbantool = api.portal.get_tool('portal_urban')
         opinionrequest_config = getattr(getattr(urbantool, self.aq_parent.portal_type.lower()).urbaneventtypes, "config-opinion-request")
-        return opinionrequest_config.listFolderContents({'portal_type': 'UrbanDoc'})
+        return opinionrequest_config.getTemplates()
 
     security.declarePublic('getLinkedOrganisationTerm')
     def getLinkedOrganisationTerm(self):

@@ -1373,11 +1373,6 @@ msgstr "Zone de surveillance"
 msgid "tal_condition_descr"
 msgstr "Entrez une condition TAL.  Les variables 'here' et 'member' sont disponibles"
 
-#. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here', 'event', and 'licence'' are available"
-#: UrbanDoc.py
-msgid "tal_condition_urbandoc_descr"
-msgstr "Entrez une condition TAL.  Les variables 'here', 'event' et 'licence' sont disponibles"
-
 #. Default: "Events templates"
 #: templatessummary.pt
 msgid "templates_events_title"

@@ -1,0 +1,20 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="Products.urban">
+
+    <browser:page
+        for="*"
+        name="urban-document-generation"
+        class="Products.urban.docgen.generationview.UrbanDocGenerationView"
+        permission="zope2.View"
+        />
+
+    <adapter
+      for="Products.urban.docgen.UrbanTemplate.IUrbanTemplate
+           zope.interface.Interface"
+      factory=".condition.UrbanTemplateCondition"
+    />
+
+</configure>

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from Acquisition import aq_inner
 from Products.Five import BrowserView
 from Products.CMFPlone import PloneMessageFactory as _
@@ -63,15 +65,10 @@ class UrbanEventView(BrowserView):
 
     def renderAttachmentsListing(self):
         event = aq_inner(self.context)
-        queryString = {
-            'portal_type': 'File',
-            'path': '/'.join(event.getPhysicalPath()),
-            'sort_on': 'created'
-        }
-        catalog = api.portal.get_tool('portal_catalog')
-        attachments = catalog(queryString)
+        attachments = event.getAttachments()
         if not attachments:
             return ''
+
         table = AttachmentsTable(attachments, self.request)
         table.update()
         return table.render()
@@ -88,7 +85,7 @@ class UrbanEventView(BrowserView):
             'class':'',
             'href':self._generateDocumentHref(context, template),
         }
-            for template in context.getTemplates() if template.mayGenerateUrbanDoc(context)]
+            for template in context.getTemplates() if template.can_be_generated(context)]
 
         for generated_doc in context.objectValues():
             for template in template_list:
@@ -99,7 +96,11 @@ class UrbanEventView(BrowserView):
     def _generateDocumentHref(self, context, template):
         """
         """
-        return "%s/create_urbandoc?template_uid=%s" % (context.absolute_url(), template.UID())
+        link = "{base_url}/urban-document-generation?doc_uid={uid}".format(
+            base_url=context.absolute_url(),
+            uid=template.UID()
+        )
+        return link
 
     def getUrbaneventtypes(self):
         """

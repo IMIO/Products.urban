@@ -12,6 +12,7 @@ from Products.urban.browser.table.urbantable import NestedAttachmentsTable
 from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.browser.table.urbantable import ProprietaryTable
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IUrbanDoc
 from Products.urban.interfaces import IUrbanEvent
 
 from plone import api
@@ -101,10 +102,16 @@ class LicenceView(BrowserView):
         catalog = api.portal.get_tool('portal_catalog')
         attachments = catalog(queryString)
         path_len = len(path.split('/'))
-        attachments = [a for a in attachments if len(a.getPath().split('/')) > path_len + 1]
-        if not attachments:
+        nested_attachments = []
+        for brain in attachments:
+            is_not_doc = not IUrbanDoc.providedBy(brain.getObject())
+            is_nested = len(brain.getPath().split('/')) > path_len + 1
+            if is_nested and is_not_doc:
+                nested_attachments.append(brain)
+
+        if not nested_attachments:
             return ''
-        table = NestedAttachmentsTable(attachments, self.request)
+        table = NestedAttachmentsTable(nested_attachments, self.request)
         return self.renderListing(table)
 
     def getAdviceTitles(self):
@@ -333,7 +340,13 @@ class EnvironmentLicenceView(LicenceView):
         sorted_conditions = dict([(val, [],) for val in order])
         for cond in conditions:
             val = cond.getExtraValue()
-            sorted_conditions[val].append({'type': val, 'url': cond.absolute_url() + '/description/getRaw', 'title': cond.Title()})
+            sorted_conditions[val].append(
+                {
+                    'type': val,
+                    'url': cond.absolute_url() + '/description/getRaw',
+                    'title': cond.Title()
+                }
+            )
         sort = []
         for val in order:
             sort.extend(sorted_conditions[val])
