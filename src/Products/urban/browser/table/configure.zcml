@@ -188,7 +188,7 @@
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IAttachmentsTable"
-     factory=".column.BrainCreationDateColumn"
+     factory=".column.ObjectCreationDateColumn"
      provides="z3c.table.interfaces.IColumn"
      name="creationdateColumn"
   />

@@ -65,15 +65,10 @@ class UrbanEventView(BrowserView):
 
     def renderAttachmentsListing(self):
         event = aq_inner(self.context)
-        queryString = {
-            'portal_type': 'File',
-            'path': '/'.join(event.getPhysicalPath()),
-            'sort_on': 'created'
-        }
-        catalog = api.portal.get_tool('portal_catalog')
-        attachments = catalog(queryString)
+        attachments = event.getAttachments()
         if not attachments:
             return ''
+
         table = AttachmentsTable(attachments, self.request)
         table.update()
         return table.render()

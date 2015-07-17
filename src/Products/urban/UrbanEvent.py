@@ -309,6 +309,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     def getDefaultTime(self):
         return DateTime()
 
+    security.declarePublic('getTemplates')
     def getTemplates(self):
         """
           Returns contained templates (File)
@@ -468,6 +469,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         #return the generated JS code
         return self.portal_urban.generateMapJS(self, cqlquery, cqlquery2,'', zoneExtent)
 
+    security.declarePublic('getDocuments')
     def getDocuments(self):
         """
           Return the documents (File) of the UrbanEvent
@@ -475,11 +477,13 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         documents = [obj for obj in self.objectValues() if IUrbanDoc.providedBy(obj)]
         return documents
 
+    security.declarePublic('getAttachments')
     def getAttachments(self):
         """
           Return the attachments (File) of the UrbanEvent
         """
-        return self.listFolderContents(contentFilter={"portal_type": "File"})
+        attachments = [obj for obj in self.objectValues() if not IUrbanDoc.providedBy(obj)]
+        return attachments
 
     security.declarePublic('RecipientsCadastreCSV')
     def RecipientsCadastreCSV(self):
