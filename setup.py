@@ -35,6 +35,7 @@ setup(name='Products.urban',
       install_requires=[
           'archetypes.referencebrowserwidget',
           'collective.z3cform.datagridfield>=0.15',
+          'collective.datagridcolumns',
           'collective.documentgenerator',
           'collective.externaleditor',
           'collective.iconifieddocumentactions',

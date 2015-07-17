@@ -491,11 +491,11 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "urb-decision-octroi-dem", 'title': "Octroi du permis (lettre au demandeur)"},
-                {'id': "urb-decision-octroi-rw", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
-                {'id': "urb-decision-octroi-avis", 'title': "Octroi du permis (lettre aux impétrants)"},
-                {'id': "urb-decision-transmis-reclamants", 'title': "Décision du permis (transmis aux réclamants)"},
-                {'id': "urb-decision-stats-mod3", 'title': "Statistiques modèle 3"},
+                {'id': "urb-decision-octroi-dem.odt", 'title': "Octroi du permis (lettre au demandeur)"},
+                {'id': "urb-decision-octroi-rw.odt", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
+                {'id': "urb-decision-octroi-avis.odt", 'title': "Octroi du permis (lettre aux impétrants)"},
+                {'id': "urb-decision-transmis-reclamants.odt", 'title': "Décision du permis (transmis aux réclamants)"},
+                {'id': "urb-decision-stats-mod3.odt", 'title': "Statistiques modèle 3"},
                 {
                     'id': "urb-decision-formulaire-a.odt",
                     'title': "Annexe 30 - Formulaire A",
