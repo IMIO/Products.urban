@@ -1468,7 +1468,7 @@ msgstr "This ce champ est utilisé, il peut contenir des expression entre [[]] q
 #. Default: "This field is made to store extra value if needed."
 #: UrbanVocabularyTerm.py
 msgid "urban_help_extraValue"
-msgstr "Ce champ permet de stocker une valeur suuplémentaire qui pourra par exemple être utilisée lors de la génération de documents"
+msgstr "Ce champ permet de stocker une valeur suplémentaire qui pourra par exemple être utilisée lors de la génération de documents"
 
 #. Default: "You will only enter dates here.  Further informations will be entered while describing the investigation"
 #: GenericLicence.py
