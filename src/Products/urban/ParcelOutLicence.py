@@ -26,6 +26,7 @@ from Products.urban.config import *
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import setOptionalAttributes
+from dateutil.relativedelta import relativedelta
 ##/code-section module-header
 
 schema = Schema((
@@ -162,6 +163,18 @@ class ParcelOutLicence(BaseFolder, BuildLicence, BrowserDefaultMixin):
     def getAllMissingPartDeposits(self):
         return self._getAllEvents(interfaces.IMissingPartDepositEvent)
 
+    def getProrogatedToDate(self, prorogation):
+        """
+          This method will calculate the 'prorogated to' date
+        """
+        lastTheLicenceDecisionDate = self.getLastTheLicence().getDecisionDate()
+        if not lastTheLicenceDecisionDate:
+            return ''
+        else:
+            #the prorogation gives one year more to the applicant
+            tool = getToolByName(self, 'portal_urban')
+            #relativedelta does not work with DateTime so use datetime
+            return tool.formatDate(lastTheLicenceDecisionDate.asdatetime() + relativedelta(years=+prorogation))
 
 
 registerType(ParcelOutLicence, PROJECTNAME)
