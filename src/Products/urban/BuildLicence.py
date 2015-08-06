@@ -44,7 +44,7 @@ slave_fields_procedurechoice = (
         'name': 'annoncedDelay',
         'action': 'value',
         'vocab_method': 'getProcedureDelays',
-        'control_param': 'procedure',
+        'control_param': 'values',
     },
 )
 ##/code-section module-header
@@ -451,7 +451,12 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
         )
         return DisplayList(vocab)
 
-    def getProcedureDelays(self, opinions, inquiry, FD):
+    def getProcedureDelays(self, *values):
+        selection = [v['val'] for v in values if v['selected']]
+        opinions = 'opinions' in selection
+        inquiry = 'inquiry' in selection
+        FD = 'FD' in selection
+
         if opinions and (inquiry or FD):
             return '115j'
         elif not opinions and inquiry and FD:
