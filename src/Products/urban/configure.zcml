@@ -42,6 +42,11 @@
 
   <include file="grok.zcml" />
 
+  <!-- needed to migrate UrbanDoc type, to remove in next release -->
+  <adapter name="plone.app.blob.subtypes.file"
+    for="Products.urban.interfaces.IUrbanDoc"
+    factory="plone.app.blob.subtypes.file.SchemaExtender" />
+
   <interface
     interface=".interfaces.ICommunalCouncilEvent"
     type=".interfaces.IEventTypeType"/>
