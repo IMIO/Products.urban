@@ -62,7 +62,7 @@ def updateTemplate(context, container, template, new_content, position_after='')
             # Is the template different on the file system
             if new_md5_signature != old_template.getProperty("md5Loaded"):
                 # We will replace unless the template has been manually modified and we don't force replace
-                if getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
+                if getMd5Signature(old_template.odt_file.data) != old_template.getProperty("md5Modified"):
                     status.append('no update: the template has been modified')
             else:
                 status.append('no changes')
