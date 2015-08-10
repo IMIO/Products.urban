@@ -3,9 +3,11 @@
 from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
+from Products.urban.config import GLOBAL_TEMPLATES
 from Products.urban.interfaces import IUrbanDoc
 
 from plone import api
+from plone.namedfile.file import NamedBlobFile
 
 from zope.interface import alsoProvides
 
@@ -27,7 +29,10 @@ def migrateToUrban1110(context):
     logger = logging.getLogger('urban: migrate to 1.11.0')
     logger.info("starting migration steps")
     #  migrate UrbanDoc to File type with an IUrbanDoc marker interface on it.
-    migrateUrbanDocType(context)
+    migrateGeneratedUrbanDocToATFile(context)
+    migrateUrbanDocToSubTemplate(context)
+    migrateUrbanDocToStyleTemplate(context)
+    migrateUrbanDocToUrbantemplate(context)
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
     setup_tool = api.portal.get_tool('portal_setup')
@@ -36,7 +41,7 @@ def migrateToUrban1110(context):
     logger.info("migration done!")
 
 
-class UrbanDocTypeMigrator(InplaceATFolderMigrator):
+class UrbanDocToATFileMigrator(InplaceATFolderMigrator):
     """
     """
     walker = CustomQueryWalker
@@ -53,14 +58,14 @@ class UrbanDocTypeMigrator(InplaceATFolderMigrator):
         alsoProvides(self.new, IUrbanDoc)
 
 
-def migrateUrbanDocType(context):
+def migrateGeneratedUrbanDocToATFile(context):
     """
     UrbanDoc type is now File.
     """
-    logger = logging.getLogger('urban: migrate UrbanDocs type ->')
+    logger = logging.getLogger('urban: migrate Generated UrbanDoc to ATFile type ->')
     logger.info("starting migration step")
 
-    migrator = UrbanDocTypeMigrator
+    migrator = UrbanDocToATFileMigrator
     portal = api.portal.get()
     #to avoid link integrity problems, disable checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
@@ -82,5 +87,146 @@ def migrateUrbanDocType(context):
     walker.__class__.additionalQuery = {}
     #enable linkintegrity checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
+
+    logger.info("migration step done!")
+
+
+def migrateUrbanDocToSubTemplate(context):
+    """
+    UrbanDoc global templates are now SubTemplate.
+    """
+    logger = logging.getLogger('urban: migrate UrbanDoc global templates to SubTemplate type ->')
+    logger.info("starting migration step")
+
+    portal_urban = api.portal.get_tool('portal_urban')
+    globaltemplates = portal_urban.globaltemplates
+
+    for folder in globaltemplates.objectValues('ATFolder'):
+        folder.setConstrainTypesMode(1)
+        folder.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate'])
+        folder.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate'])
+
+        for urbandoc in folder.objectValues('UrbanDoc'):
+            template_blob = urbandoc.getFile()
+            template_id = urbandoc.id
+            template_title = [t.get('title') for t in GLOBAL_TEMPLATES[folder.id] if t.get('id') == template_id][0]
+            urban_template_args = {
+                'type': 'SubTemplate',
+                'id': template_id,
+                'odt_file': NamedBlobFile(
+                    data=template_blob.data,
+                    contentType=template_blob.getContentType(),
+                    filename=template_blob.getFilename().decode('utf-8'),
+                ),
+                'title': template_title,
+                'container': folder,
+            }
+            api.content.delete(urbandoc)
+            api.content.create(**urban_template_args)
+            logger.info(
+                '{config} {template}'.format(
+                    config=folder.Title(),
+                    template=template_id
+                )
+            )
+
+    logger.info("migration step done!")
+
+
+def migrateUrbanDocToStyleTemplate(context):
+    """
+    UrbanDoc style templates are now StyleTemplate.
+    """
+    logger = logging.getLogger('urban: migrate UrbanDoc style template to SubTemplate type ->')
+    logger.info("starting migration step")
+
+    portal_urban = api.portal.get_tool('portal_urban')
+    globaltemplates = portal_urban.globaltemplates
+
+    styles_id = 'styles.odt'
+    if styles_id in globaltemplates.objectIds():
+        old_styles = globaltemplates.get(styles_id)
+        style_blob = old_styles.getFile()
+
+        for folder in globaltemplates.objectValues('ATFolder'):
+            folder.setConstrainTypesMode(1)
+            folder.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate'])
+            folder.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate'])
+
+            style_title = GLOBAL_TEMPLATES[folder.id][4]['title']
+            urban_style_args = {
+                'type': 'StyleTemplate',
+                'id': styles_id,
+                'odt_file': NamedBlobFile(
+                    data=style_blob.data,
+                    contentType=style_blob.getContentType(),
+                    filename=style_blob.getFilename().decode('utf-8'),
+                ),
+                'title': style_title,
+                'container': folder,
+            }
+            api.content.create(**urban_style_args)
+            logger.info(
+                '{config} {template}'.format(
+                    config=folder.Title(),
+                    template=style_title
+                )
+            )
+
+        api.content.delete(old_styles)
+
+    logger.info("migration step done!")
+
+
+def migrateUrbanDocToUrbantemplate(context):
+    """
+    UrbanDoc templates are now UrbanTemplate.
+    """
+    logger = logging.getLogger('urban: migrate UrbanDoc templates to UrbanTemplate type ->')
+    logger.info("starting migration step")
+
+    portal_urban = api.portal.get_tool('portal_urban')
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_configs = [brain.getObject() for brain in catalog(portal_type='LicenceConfig')]
+
+    for config in licence_configs:
+        events_folder = config.urbaneventtypes
+        environment_config = ['envclassone', 'envclasstwo', 'envclassthree']
+        globaltemplates_id = config.id in environment_config and 'environmenttemplates' or 'urbantemplates'
+        globaltemplates = getattr(portal_urban.globaltemplates, globaltemplates_id)
+
+        style_template = getattr(globaltemplates, 'styles.odt').UID()
+        subtemplates = []
+        for subtemplate in globaltemplates.listFolderContents({'portal_type': 'SubTemplate'}):
+            subtemplate_name = subtemplate.id.split('.')[0]
+            line = {'pod_context_name': subtemplate_name, 'template': subtemplate.UID()}
+            subtemplates.append(line)
+
+        for eventtype in events_folder.objectValues():
+            for urbandoc in eventtype.objectValues('UrbanDoc'):
+                template_blob = urbandoc.getFile()
+                template_id = urbandoc.id
+                urban_template_args = {
+                    'type': 'UrbanTemplate',
+                    'id':  template_id,
+                    'odt_file': NamedBlobFile(
+                        data=template_blob.data,
+                        contentType=template_blob.getContentType(),
+                        filename=template_blob.getFilename().decode('utf-8'),
+                    ),
+                    'title': urbandoc.Title(),
+                    'pod_portal_type': 'UrbanEvent',
+                    'style_template': style_template,
+                    'merge_templates': subtemplates,
+                    'container': eventtype,
+                }
+                api.content.delete(urbandoc)
+                api.content.create(**urban_template_args)
+                logger.info(
+                    '{config} {template}'.format(
+                        config=config.Title(),
+                        template=template_id
+                    )
+                )
 
     logger.info("migration step done!")
