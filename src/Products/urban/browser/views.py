@@ -196,7 +196,7 @@ class TemplatesSummary(BrowserView):
     def isModified(self, template):
         if not template.hasProperty('md5Modified'):
             return "question-mark.png"
-        if template.md5Modified != getMd5Signature(template.data):
+        if template.md5Modified != getMd5Signature(template.odt_file.data):
             #template manually changed
             self.mod_count += 1
             return "warning.png"

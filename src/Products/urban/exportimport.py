@@ -62,7 +62,7 @@ def updateTemplate(context, container, template, new_content, position_after='')
             # Is the template different on the file system
             if new_md5_signature != old_template.getProperty("md5Loaded"):
                 # We will replace unless the template has been manually modified and we don't force replace
-                if getMd5Signature(old_template.data) != old_template.getProperty("md5Modified"):
+                if getMd5Signature(old_template.odt_file.data) != old_template.getProperty("md5Modified"):
                     status.append('no update: the template has been modified')
             else:
                 status.append('no changes')
@@ -77,7 +77,7 @@ def updateTemplate(context, container, template, new_content, position_after='')
         portal_type = template.pop('portal_type', 'UrbanTemplate')
         if portal_type == 'UrbanTemplate':
             template['merge_templates'] = getDefaultSubTemplates(context, template_id)
-            template['style_template'] = getDefaultStyleTemplate(context)
+            template['style_template'] = getDefaultStyleTemplate(context, template_id)
 
         template_id = container.invokeFactory(
             portal_type,
@@ -106,8 +106,10 @@ def updateTemplate(context, container, template, new_content, position_after='')
     return status
 
 
-def getDefaultStyleTemplate(context):
-    style_template = getattr(context.getSite().portal_urban.globaltemplates, 'styles.odt')
+def getDefaultStyleTemplate(context, template_id):
+    globaltemplates = context.getSite().portal_urban.globaltemplates
+    folder_name = template_id.startswith('env') and 'environmenttemplates' or 'urbantemplates'
+    style_template = getattr(getattr(globaltemplates, folder_name), 'styles.odt')
     return [style_template.UID()]
 
 
@@ -163,10 +165,6 @@ def addGlobalTemplates(context):
     gslogger = context.getLogger('addGlobalTemplates')
     tool = getToolByName(site, 'portal_urban')
     templates_folder = getattr(tool, 'globaltemplates')
-    template_log = updateTemplates(context, templates_folder, global_templates['.'])
-    for status in template_log:
-        if status[1] != 'no changes':
-            log.append(loga("'global templates', template='%s' => %s" % (status[0], status[1]), gslog=gslogger))
 
     for subfolder_id in ['urbantemplates', 'environmenttemplates']:
         templates_subfolder = getattr(templates_folder, subfolder_id)
@@ -174,6 +172,12 @@ def addGlobalTemplates(context):
         for status in template_log:
             if status[1] != 'no changes':
                 log.append(loga("'%s global templates', template='%s' => %s" % (subfolder_id, status[0], status[1]), gslog=gslogger))
+
+    template_log = updateTemplates(context, templates_folder, global_templates['.'])
+    for status in template_log:
+        if status[1] != 'no changes':
+            log.append(loga("'global templates', template='%s' => %s" % (status[0], status[1]), gslog=gslogger))
+
     return '\n'.join(log)
 
 
