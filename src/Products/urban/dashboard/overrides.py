@@ -48,3 +48,6 @@ class RenderLicenceTermView(RenderTermView):
             licence_type=licence_type,
         )
         return link
+
+    def get_link_class(self, licence_type):
+        return "content-shortcuts contenttype-{}".format(licence_type.lower())

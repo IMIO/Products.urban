@@ -261,7 +261,11 @@ div[id^=formfield-form-widgets-events] .datagridwidget-table-view{
 }
 
 dl.portlet a:link, dl.portlet a:visited {
-    display: inline;
+    display: inline-block;
+}
+
+dl.portlet.portletWidgetCollection div.widget-portlet li {
+    line-height: 1.5em;
 }
 
 /* </dtml-with> */
