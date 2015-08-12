@@ -23,6 +23,7 @@ from Products.CMFCore.utils import getToolByName
 import transaction
 ##code-section HEAD
 from Acquisition import aq_base
+from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from Products.CMFPlone.utils import base_hasattr
 from Products.urban.config import DefaultTexts
 from zExceptions import BadRequest
@@ -138,9 +139,9 @@ def postInstall(context):
     logger.info("addApplicationFolders : starting...")
     addApplicationFolders(context)
     logger.info("addApplicationFolders : Done")
-    logger.info("addDashboardCollections : starting...")
-    addDashboardCollections(context)
-    logger.info("addDashboardCollections : Done")
+    logger.info("setupImioDashboard : starting...")
+    setupImioDashboard(context)
+    logger.info("setupImioDashboard : Done")
     logger.info("addGlobalFolders : starting...")
     addGlobalFolders(context)
     logger.info("addGlobalFolders : Done")
@@ -717,15 +718,17 @@ def addApplicationFolders(context):
         newSubFolder.manage_permission('urban: Add ParcellingTerm', ['Manager', 'Editor', ], acquire=0)
 
 
-def addDashboardCollections(context):
+def setupImioDashboard(context):
     """
-    Add DashboardCollection needed for faceted navigation.
+    Do everything needed to enable dashboard with faceted navigation
+    on urban folder.
     """
     site = context.getSite()
     urban_folder = getattr(site, 'urban')
 
     urban_folder.restrictedTraverse('@@faceted_subtyper').enable()
     urban_folder.restrictedTraverse('@@faceted_settings').toggle_left_column()
+    IFacetedLayout(urban_folder).update_layout('faceted-table-items')
     urban_folder.unrestrictedTraverse('@@faceted_exportimport').import_xml(
         import_file=open(os.path.dirname(__file__) + '/dashboard/faceted.xml')
     )
