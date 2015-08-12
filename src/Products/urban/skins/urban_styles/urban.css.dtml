@@ -260,4 +260,8 @@ div[id^=formfield-form-widgets-events] .datagridwidget-table-view{
     margin-bottom: 0em;
 }
 
+dl.portlet a:link, dl.portlet a:visited {
+    display: inline;
+}
+
 /* </dtml-with> */

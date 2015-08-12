@@ -1,0 +1,15 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           i18n_domain="urban">
+
+    <configure package="collective.eeafaceted.collectionwidget">
+        <browser:page
+            for="*"
+            name="render_collection_widget_term"
+            class="Products.urban.dashboard.overrides.RenderLicenceTermView"
+            template="browser/templates/term.pt"
+            permission="zope2.View"
+            />
+    </configure>
+
+</configure>

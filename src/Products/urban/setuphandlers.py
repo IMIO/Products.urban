@@ -437,7 +437,6 @@ def addExploitationConditions(context, config_folder):
                     mutator(newvalue)
 
 
-
 def addUrbanGroups(context):
     """
        Add a group of 'urban' application users...
@@ -456,6 +455,7 @@ def addUrbanGroups(context):
     #one with map Readers
     site.portal_groups.addGroup("urban_map_readers", title="Urban Map Readers")
     site.portal_groups.setRolesForGroup('urban_map_readers', ('UrbanMapReader', ))
+
 
 def setDefaultApplicationSecurity(context):
     """
@@ -579,6 +579,7 @@ def addGlobalFolders(context):
         additional_layers.setConstrainTypesMode(1)
         additional_layers.setLocallyAllowedTypes(['Layer'])
         additional_layers.setImmediatelyAddableTypes(['Layer'])
+
 
 def adaptDefaultPortal(context):
     """
@@ -736,7 +737,7 @@ def setupImioDashboard(context):
     for urban_type in URBAN_TYPES:
         urban_folder.invokeFactory(
             'DashboardCollection',
-            id='collection_{type}'.format(type=urban_type.lower()),
+            id='collection_%s' % urban_type.lower(),
             title=_(urban_type, 'urban'),
             query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': [urban_type]}],
             customViewFields=('pretty_link', 'CreationDate', 'actions'),
@@ -744,6 +745,7 @@ def setupImioDashboard(context):
             sort_reversed=True,
             b_size=30
         )
+
 
 def addTestUsers(site):
     is_mountpoint = len(site.absolute_url_path().split('/')) > 2
