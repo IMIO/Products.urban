@@ -632,7 +632,6 @@ def addApplicationFolders(context):
     if not hasattr(aq_base(site), "urban"):
         newFolderid = site.invokeFactory("Folder", id="urban", title=_("urban", 'urban'))
         newFolder = getattr(site, newFolderid)
-        newFolder.setLayout('urban_root_view')
     else:
         newFolder = getattr(site, 'urban')
 
@@ -724,6 +723,12 @@ def addDashboardCollections(context):
     """
     site = context.getSite()
     urban_folder = getattr(site, 'urban')
+
+    urban_folder.restrictedTraverse('@@faceted_subtyper').enable()
+    urban_folder.restrictedTraverse('@@faceted_settings').toggle_left_column()
+    urban_folder.unrestrictedTraverse('@@faceted_exportimport').import_xml(
+        import_file=open(os.path.dirname(__file__) + '/dashboard/faceted.xml')
+    )
 
     for urban_type in URBAN_TYPES:
         urban_folder.invokeFactory(

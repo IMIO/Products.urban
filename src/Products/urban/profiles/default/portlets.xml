@@ -4,6 +4,12 @@
 
     <dependency step="urban-postInstall"/>
 
+    <assignment name="licences"
+                category="context"
+                key="/"
+                manager="plone.leftcolumn"
+                type="imio.dashboard.FacetedCollectionPortlet" />
+
     <assignment remove="True"
                 name="navigation"
                 category="context"

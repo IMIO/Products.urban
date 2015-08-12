@@ -6,7 +6,6 @@
        (so any element applied on all themes register correctly)-->
   <dependencies>
     <dependency>profile-imio.actionspanel:default</dependency>
-    <dependency>profile-imio.dashboard:default</dependency>
     <dependency>profile-Products.CMFPlacefulWorkflow:CMFPlacefulWorkflow</dependency>
     <dependency>profile-Products.DataGridField:default</dependency>
     <dependency>profile-Products.MasterSelectWidget:default</dependency>
@@ -18,6 +17,7 @@
     <dependency>profile-collective.js.jqueryui:default</dependency>
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
     <dependency>profile-plone.app.referenceintegrity:default</dependency>
+    <dependency>profile-imio.dashboard:default</dependency>
   </dependencies>
   <!-- ##/code-section METADATA -->
 </metadata>
