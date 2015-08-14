@@ -10,6 +10,18 @@
                 manager="plone.leftcolumn"
                 type="imio.dashboard.FacetedCollectionPortlet" />
 
+    <assignment name="tools"
+                category="context"
+                key="/"
+                manager="plone.leftcolumn"
+                type="urban.portlet.urbantools" />
+
+    <assignment name="config"
+                category="context"
+                key="/"
+                manager="plone.leftcolumn"
+                type="urban.portlet.urbanconfig" />
+
     <assignment remove="True"
                 name="navigation"
                 category="context"

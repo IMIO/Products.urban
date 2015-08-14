@@ -1,0 +1,19 @@
+<dl class="portlet portlet_urbanconfig" i18n:domain="urban">
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <span class="tile" i18n:translate="root-configuration">Configuration</span>
+        <span class="portletTopRight"></span>
+    </dt>
+    <dd class="portletItem odd">
+        <ul class="urban-list">
+            <li><img src="../folder_icon.png" /> <a href="architects" i18n:translate="manage_architects">Manage architects</a></li>
+            <li><img src="../folder_icon.png" /> <a href="notaries" i18n:translate="manage_notaries">Manage notaries</a></li>
+            <li><img src="../folder_icon.png" /> <a href="geometricians" i18n:translate="manage_geometricians">Manage geometricians</a></li>
+            <li><img src="../folder_icon.png" /> <a href="parcellings" i18n:translate="manage_parcellings">Manage parcellings</a></li>
+            <li tal:condition="view/is_urban_manager">
+                <br />
+                <img src="../maintenance_icon.png" /> <a href="portal_urban" i18n:translate="portal_urban">Urban configuration</a>
+            </li>
+        </ul>
+    </dd>
+</dl>

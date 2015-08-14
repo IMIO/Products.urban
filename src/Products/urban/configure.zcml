@@ -35,6 +35,7 @@
     title="Products.urban: ViewUrbanMap"
     />
 
+  <include package=".dashboard" />
   <include package=".docgen" />
   <include package=".events" />
   <include package=".browser" />

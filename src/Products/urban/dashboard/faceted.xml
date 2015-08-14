@@ -43,7 +43,7 @@
    <property name="step">5</property>
    <property name="default">5</property>
   </criterion>
-  <criterion name="c1">
+  <criterion name="c2">
    <property name="widget">collection-link</property>
    <property name="title">Procédures</property>
    <property name="position">bottomcenter</property>
@@ -59,7 +59,7 @@
    <property name="sortreversed">0</property>
    <property name="default"></property>
   </criterion>
-  <criterion name="c2">
+  <criterion name="c1">
    <property name="widget">sorting</property>
    <property name="title">Tri</property>
    <property name="position">bottomcenter</property>

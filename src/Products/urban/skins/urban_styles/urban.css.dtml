@@ -71,20 +71,20 @@ table.listing tbody tr span.manual_parcel {
 .icons-on .contenttype-declaration {background: no-repeat transparent 0px -431px url(urban-sprite.png);}
 .icons-on .contenttype-miscdemand {background: no-repeat transparent url(MiscDemand.png);}
 .icons-on .contenttype-division {background: no-repeat transparent 0px -646px url(urban-sprite.png);}
-.icons-on .contenttype-envclassone {background: no-repeat transparent 0px -916px url(urban-sprite.png);}
-.icons-on .contenttype-envclasstwo {background: no-repeat transparent 0px -964px url(urban-sprite.png);}
-.icons-on .contenttype-envclassthree {background: no-repeat transparent 0px -860px url(urban-sprite.png);}
+.icons-on .contenttype-envclassone {background: no-repeat transparent 0px -919px url(urban-sprite.png);}
+.icons-on .contenttype-envclasstwo {background: no-repeat transparent 0px -967px url(urban-sprite.png);}
+.icons-on .contenttype-envclassthree {background: no-repeat transparent 0px -863px url(urban-sprite.png);}
 .icons-on .contenttype-foldermanager {background: no-repeat transparent 0px -213px url(urban-sprite.png);}
 .icons-on .contenttype-geometrician {background: no-repeat transparent 0px -213px url(urban-sprite.png);}
 .icons-on .contenttype-inquiry {background-image: url(Inquiry.png);}
 .icons-on .contenttype-notary {background: no-repeat transparent 0px -213px url(urban-sprite.png);}
-.icons-on .contenttype-notaryletter {background: no-repeat transparent 0px -1294px url(urban-sprite.png);}
+.icons-on .contenttype-notaryletter {background: no-repeat transparent 0px -1296px url(urban-sprite.png);}
 .icons-on .contenttype-parceloutlicence {background: no-repeat transparent 0px -1511px url(urban-sprite.png);}
 .icons-on .contenttype-portionout {background-image: url(PortionOut.png);}
 .icons-on .contenttype-proprietary {background: no-repeat transparent 0px -213px url(urban-sprite.png);}
 .icons-on .contenttype-street {background: no-repeat transparent 0px -1944px url(urban-sprite.png);}
-.icons-on .contenttype-urbancertificateone {background: no-repeat transparent 0px -2158px url(urban-sprite.png);}
-.icons-on .contenttype-urbancertificatetwo {background: no-repeat transparent 0px -2374px url(urban-sprite.png);}
+.icons-on .contenttype-urbancertificateone {background: no-repeat transparent 0px -2159px url(urban-sprite.png);}
+.icons-on .contenttype-urbancertificatetwo {background: no-repeat transparent 0px -2376px url(urban-sprite.png);}
 .icons-on .contenttype-urbanevent {background-image: url(UrbanEvent.png);}
 .icons-on .contenttype-urbaneventinquiry {background: no-repeat transparent 0px -2590px url(urban-sprite.png);}
 .icons-on .contenttype-urbaneventopinionrequest {background: no-repeat transparent 0px -2590px url(urban-sprite.png);}
@@ -251,6 +251,10 @@ div[id^=formfield-form-widgets-events] .datagridwidget-table-view{
     color: green;
 }
 
+ul.urban-list{
+    padding: 0.3em;
+}
+
 #content ul.urban-list{
     margin-left: 0em;
 }
@@ -265,7 +269,7 @@ dl.portlet a:link, dl.portlet a:visited {
 }
 
 dl.portlet.portletWidgetCollection div.widget-portlet li {
-    line-height: 1.5em;
+    line-height: 1.3em;
 }
 
 /* </dtml-with> */

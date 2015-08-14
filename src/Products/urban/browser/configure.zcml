@@ -8,6 +8,8 @@
   <include package=".table" />
   <include package=".schedule" />
 
+  <include file="portlets.zcml" />
+
   <browser:page
       for="*"
       name="wmc"

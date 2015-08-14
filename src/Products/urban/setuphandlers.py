@@ -23,26 +23,33 @@ from Products.CMFCore.utils import getToolByName
 import transaction
 ##code-section HEAD
 from Acquisition import aq_base
-from eea.facetednavigation.layout.interfaces import IFacetedLayout
+from Products.Archetypes.event import ObjectInitializedEvent
+from Products.Archetypes.event import EditBegunEvent
 from Products.CMFPlone.utils import base_hasattr
 from Products.urban.config import DefaultTexts
-from zExceptions import BadRequest
 from Products.urban.config import URBAN_TYPES
+from Products.urban.exportimport import updateAllUrbanTemplates
+from Products.urban.interfaces import IContactFolder
+from Products.urban.interfaces import ILicenceContainer
+from Products.urban.utils import generatePassword
 from Products.urban.utils import getAllLicenceFolderIds
 from Products.urban.utils import getLicenceFolderId
-from Products.urban.interfaces import ILicenceContainer, IContactFolder
+
+from datetime import date
+from eea.facetednavigation.layout.interfaces import IFacetedLayout
+from imio.dashboard.utils import _updateDefaultCollectionFor
+from plone import api
+from plone.portlets.interfaces import IPortletManager
+from plone.portlets.interfaces import ILocalPortletAssignmentManager
+from plone.portlets.constants import CONTEXT_CATEGORY
+from zExceptions import BadRequest
 from zope.interface import alsoProvides, directlyProvides
 from zope.component import queryUtility
 from zope.component.interface import getInterface
 from zope.i18n.interfaces import ITranslationDomain
 from zope import event
-from Products.Archetypes.event import ObjectInitializedEvent
-from Products.Archetypes.event import EditBegunEvent
-from exportimport import updateAllUrbanTemplates
-from Products.urban.utils import generatePassword
-from datetime import date
-
-from plone import api
+from zope.component import getMultiAdapter
+from zope.component import getUtility
 
 import pickle
 ##/code-section HEAD
@@ -666,6 +673,12 @@ def addApplicationFolders(context):
                 if urban_type in ['EnvClassOne', 'EnvClassTwo']:
                     newSubFolder.manage_permission('urban: Add EnvironmentLicence', ['Manager', 'Editor', ], acquire=0)
 
+        # disable portlets for licence folders
+        urban_folder = getattr(newFolder, urban_type.lower() + 's')
+        manager = getUtility(IPortletManager, name=u"plone.leftcolumn")
+        blacklist = getMultiAdapter((urban_folder, manager), ILocalPortletAssignmentManager)
+        blacklist.setBlacklistStatus(CONTEXT_CATEGORY, True)
+
     #add a folder that will contains architects
     if not hasattr(newFolder, "architects"):
         newFolderid = newFolder.invokeFactory(
@@ -734,17 +747,35 @@ def setupImioDashboard(context):
         import_file=open(os.path.dirname(__file__) + '/dashboard/faceted.xml')
     )
 
-    for urban_type in URBAN_TYPES:
-        urban_folder.invokeFactory(
+    all_licences_collection_id = 'collection_all_licences'
+    if all_licences_collection_id not in urban_folder.objectIds():
+        all_licences_collection_id = urban_folder.invokeFactory(
             'DashboardCollection',
-            id='collection_%s' % urban_type.lower(),
-            title=_(urban_type, 'urban'),
-            query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': [urban_type]}],
+            id=all_licences_collection_id,
+            title=_('All', 'urban'),
+            query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': [type for type in URBAN_TYPES]}],
             customViewFields=('pretty_link', 'CreationDate', 'actions'),
             sort_on=u'created',
             sort_reversed=True,
             b_size=30
         )
+
+    all_licences_collection = getattr(urban_folder, all_licences_collection_id)
+    _updateDefaultCollectionFor(urban_folder, all_licences_collection.UID())
+
+    for urban_type in URBAN_TYPES:
+        collection_id = 'collection_%s' % urban_type.lower()
+        if collection_id not in urban_folder.objectIds():
+            urban_folder.invokeFactory(
+                'DashboardCollection',
+                id=collection_id,
+                title=_(urban_type, 'urban'),
+                query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': [urban_type]}],
+                customViewFields=('pretty_link', 'CreationDate', 'actions'),
+                sort_on=u'created',
+                sort_reversed=True,
+                b_size=30
+            )
 
 
 def addTestUsers(site):
