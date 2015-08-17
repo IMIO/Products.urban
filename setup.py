@@ -63,6 +63,7 @@ setup(name='Products.urban',
           'setuptools',
           'testfixtures',
           'zope.app.container',
+          'collective.delaycalculator',
       ],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',

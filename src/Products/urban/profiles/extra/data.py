@@ -2226,6 +2226,7 @@ urbanEventTypes = {
                 {'id': "env1-affichage-mission.odt", 'title': "Demande de mission"},
                 {'id': "env1-certificat-decision.odt", 'title': "Certificat d'affichage de la décision"},
             ),
+            'eventTypeType': 'Products.urban.interfaces.IDisplayingTheDecisionEvent',
         },
         {
             'id': "affichage-recours",
@@ -2235,6 +2236,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
     ),
     'envclasstwo': (
@@ -2672,6 +2674,7 @@ urbanEventTypes = {
                 {'id': "env2-affichage-mission.odt", 'title': "Demande de mission"},
                 {'id': "env2-certificat-decision.odt", 'title': "Certificat d'affichage de la décision"},
             ),
+            'eventTypeType': 'Products.urban.interfaces.IDisplayingTheDecisionEvent',
         },
         {
             'id': "affichage-recours",

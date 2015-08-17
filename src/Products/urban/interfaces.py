@@ -285,6 +285,14 @@ class ITheLicenceEvent(Interface):
     __doc__ = _("""ITheLicence type marker interface""")
 
 
+class IDisplayingTheDecisionEvent(Interface):
+    __doc__ = _("""IDisplayingTheDecisionEvent type marker interface""")
+
+
+class IRecourseEvent(Interface):
+    __doc__ = _("""IRecourseEvent type marker interface""")
+
+
 class IWorkBeginningEvent(Interface):
     __doc__ = _("""IWorkBeginning type marker interface""")
 

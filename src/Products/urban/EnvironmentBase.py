@@ -14,6 +14,8 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
+from collective.delaycalculator import workday
+from datetime import date
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
@@ -248,6 +250,15 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     def getLastCollegeReport(self):
         return self._getLastEvent(interfaces.ICollegeReportEvent)
 
+    def getLastDisplayingTheDecision(self):
+        return self._getLastEvent(interfaces.IDisplayingTheDecisionEvent)
+
+    def getLastRecourse(self):
+        return self._getLastEvent(interfaces.IRecourseEvent)
+
+    def getLicenceExpirationDate(self):
+        return self._getLastEvent(interfaces.ILicenceExpirationEvent)
+
     security.declarePublic('getAdditionalLayers')
     def getAdditionalLayers(self):
         """
@@ -291,7 +302,9 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         """
         return self._getConditions(restrict=['CI/CS'])
 
-
+    security.declarePublic('getLicenceSEnforceableDate')
+    def getLicenceSEnforceableDate(self, displayDay, periodForAppeal):
+        return workday(date(displayDay.year(), displayDay.month(), displayDay.day()), periodForAppeal)
 
 registerType(EnvironmentBase, PROJECTNAME)
 # end of class EnvironmentBase
