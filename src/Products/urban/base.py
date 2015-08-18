@@ -17,6 +17,7 @@ from zope.component.interface import interfaceToName
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import DisplayList
 
+from Products.urban.utils import getCurrentFolderManager as currentFolderManager
 from plone import api
 from zope.i18n import translate
 from zope.interface import implements
@@ -124,6 +125,10 @@ class UrbanBase(object):
                 signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
             signaletic += contact.getSignaletic(withaddress=withaddress)
         return signaletic
+
+    security.declarePublic('getCurrentFolderManager')
+    def getCurrentFolderManager(self):
+        return currentFolderManager()
 
     security.declarePublic('getArchitectsSignaletic')
     def getArchitectsSignaletic(self, withaddress=False):
