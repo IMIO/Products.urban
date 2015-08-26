@@ -229,20 +229,6 @@ class ContacTitleDisplay(TitleDisplay):
         return title
 
 
-class LicenceTitleDisplay(TitleDisplay):
-    """ Adapts a licence to a TitleCell """
-
-    def render(self):
-        licence_brain = self.urbanlist_item.getRawValue()
-        title = self.column.renderTitleLink(self.urbanlist_item)
-
-        lastkeyevent = licence_brain.last_key_event
-        if lastkeyevent:
-            title = '%s<br/><span class="discreet">%s</span>' % (title, lastkeyevent)
-
-        return title
-
-
 class ParcelTitleDisplay(TitleDisplay):
     """ Adapts a parcel to a TitleCell """
 

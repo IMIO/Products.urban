@@ -3,10 +3,6 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone">
 
-    <!--adapter
-        for="plone.app.collection.interfaces.ICollection"
-        factory=".custom_columns.UrbanCustomViewFields"
-        provides=".interfaces.ICustomViewFieldsVocabulary"
-    /-->
+    <include file="columns.zcml" />
 
 </configure>

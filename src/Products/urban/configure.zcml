@@ -15,6 +15,7 @@
   <include package="collective.z3cform.datagridfield"/>
   <include package="five.grok"/>
   <include package="imio.actionspanel"/>
+  <include package="imio.dashboard"/>
   <include package="Products.Archetypes"/>
   <include package="Products.CMFPlacefulWorkflow"/>
   <include package="Products.DataGridField"/>

@@ -55,18 +55,6 @@ class ISearchResultTable(IUrbanTable):
     """
 
 
-class ILicenceListingTable(IUrbanTable):
-    """
-    Marker interface for a specific licence display table
-    """
-
-
-class IAllLicencesListingTable(IUrbanTable):
-    """
-    Marker interface for a all licences display table
-    """
-
-
 class IParcellingsTable(IUrbanTable):
     """
     Marker interface for a parcellings table

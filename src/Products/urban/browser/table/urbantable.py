@@ -1,29 +1,29 @@
 ## -*- coding: utf-8 -*-
 
-from z3c.table.table import Table, SequenceTable
+from z3c.table.table import Table
+from z3c.table.table import SequenceTable
 
 from zope.interface import implements
 
 from Products.ZCatalog.Lazy import LazyMap
 
-from Products.urban.browser.table.interfaces import ILicenceListingTable, \
-    IFolderContentTable, \
-    IContactTable, \
-    IApplicantTable, \
-    IProprietaryTable, \
-    IParcelsTable, \
-    IEventsTable, \
-    IDocumentsTable, \
-    IAttachmentsTable, \
-    INestedAttachmentsTable, \
-    INotariesTable, \
-    IArchitectsTable, \
-    IGeometriciansTable, \
-    IClaimantsTable, \
-    IRecipientsCadastreTable, \
-    ISearchResultTable, IParcellingsTable, \
-    IUrbanColumn, \
-    IAllLicencesListingTable
+from Products.urban.browser.table.interfaces import IApplicantTable
+from Products.urban.browser.table.interfaces import IArchitectsTable
+from Products.urban.browser.table.interfaces import IAttachmentsTable
+from Products.urban.browser.table.interfaces import IClaimantsTable
+from Products.urban.browser.table.interfaces import IContactTable
+from Products.urban.browser.table.interfaces import IDocumentsTable
+from Products.urban.browser.table.interfaces import IEventsTable
+from Products.urban.browser.table.interfaces import IFolderContentTable
+from Products.urban.browser.table.interfaces import IGeometriciansTable
+from Products.urban.browser.table.interfaces import INestedAttachmentsTable
+from Products.urban.browser.table.interfaces import INotariesTable
+from Products.urban.browser.table.interfaces import IParcellingsTable
+from Products.urban.browser.table.interfaces import IParcelsTable
+from Products.urban.browser.table.interfaces import IProprietaryTable
+from Products.urban.browser.table.interfaces import IRecipientsCadastreTable
+from Products.urban.browser.table.interfaces import ISearchResultTable
+from Products.urban.browser.table.interfaces import IUrbanColumn
 
 
 def getSortMethod(idx):
@@ -63,24 +63,6 @@ class FolderContentTable(UrbanTable):
     """
     """
     implements(IFolderContentTable)
-
-
-class LicenceListingTable(UrbanTable):
-    """
-    """
-    implements(ILicenceListingTable)
-
-    cssClasses = {'table': 'listing largetable'}
-    sortOrder = 'descending'
-    batchSize = 20
-    sortOn = None
-
-
-class AllLicencesListingTable(LicenceListingTable):
-    """
-     Licence listing for urban main page, we sort on creation date rather than title
-    """
-    implements(IAllLicencesListingTable)
 
 
 class SearchResultTable(UrbanTable, SequenceTable):

@@ -754,7 +754,7 @@ def setupImioDashboard(context):
             id=all_licences_collection_id,
             title=_('All', 'urban'),
             query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': [type for type in URBAN_TYPES]}],
-            customViewFields=('pretty_link', 'CreationDate', 'actions'),
+            customViewFields=('urban_title', 'CreationDate', 'folder_manager', 'actions'),
             sort_on=u'created',
             sort_reversed=True,
             b_size=30
@@ -771,7 +771,7 @@ def setupImioDashboard(context):
                 id=collection_id,
                 title=_(urban_type, 'urban'),
                 query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': [urban_type]}],
-                customViewFields=('pretty_link', 'CreationDate', 'actions'),
+                customViewFields=('urban_title', 'CreationDate', 'folder_manager', 'actions'),
                 sort_on=u'created',
                 sort_reversed=True,
                 b_size=30

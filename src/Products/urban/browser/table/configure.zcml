@@ -16,15 +16,6 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.table.interfaces.ILicenceListingTable
-          Products.urban.browser.table.interfaces.ITitleColumn"
-     factory=".column.LicenceTitleColumnHeader"
-     provides="z3c.table.interfaces.IColumnHeader"
-  />
-
-  <adapter
-     for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IApplicantTable
           Products.urban.browser.table.interfaces.ITitleColumn"
      factory=".column.ApplicantTitleColumnHeader"
@@ -83,15 +74,6 @@
           Products.urban.browser.table.interfaces.ITitleColumn"
      factory=".column.RecipientCadastreTitleColumnHeader"
      provides="z3c.table.interfaces.IColumnHeader"
-  />
-
-  <adapter
-     for="zope.interface.Interface
-          Products.urban.browser.table.interfaces.ITitleColumn
-          Products.urban.browser.table.interfaces.IItemForUrbanTable
-          Products.urban.interfaces.IGenericLicence"
-     factory=".column.LicenceTitleDisplay"
-     provides="Products.urban.browser.table.interfaces.ITitleCell"
   />
 
   <adapter
@@ -160,15 +142,6 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.table.interfaces.ILicenceListingTable"
-     factory=".column.BrainCreationDateColumn"
-     provides="z3c.table.interfaces.IColumn"
-     name="creationdateColumn"
-  />
-
-  <adapter
-     for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IDocumentsTable"
      factory=".column.ObjectCreationDateColumn"
      provides="z3c.table.interfaces.IColumn"
@@ -209,15 +182,6 @@
      factory=".column.ParentLocationColumn"
      provides="z3c.table.interfaces.IColumn"
      name="parentlocationColumn"
-  />
-
-  <adapter
-     for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.table.interfaces.ILicenceListingTable"
-     factory=".column.FoldermanagerColumn"
-     provides="z3c.table.interfaces.IColumn"
-     name="foldermanagerColumn"
   />
 
   <adapter
@@ -336,22 +300,6 @@
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IFolderContentTable"
      factory=".tablevalue.ValuesForFolderListing"
-     provides="z3c.table.interfaces.IValues"
-  />
-
-  <adapter
-     for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.table.interfaces.ILicenceListingTable"
-     factory=".tablevalue.ValuesForLicenceListing"
-     provides="z3c.table.interfaces.IValues"
-  />
-
-  <adapter
-     for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.table.interfaces.IAllLicencesListingTable"
-     factory=".tablevalue.ValuesForAllLicencesListing"
      provides="z3c.table.interfaces.IValues"
   />
   <!-- table values adapters end -->

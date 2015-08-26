@@ -7,13 +7,13 @@
    <property name="position">center</property>
    <property name="section">default</property>
    <property name="hidden">0</property>
-   <property name="count">0</property>
-   <property name="sortcountable">0</property>
-   <property name="hidezerocount">0</property>
+   <property name="count"></property>
+   <property name="sortcountable"></property>
+   <property name="hidezerocount"></property>
    <property name="index">folder_manager</property>
    <property name="vocabulary">urban.folder_managers</property>
    <property name="catalog"></property>
-   <property name="sortreversed">0</property>
+   <property name="sortreversed"></property>
    <property name="default"></property>
   </criterion>
   <criterion name="c3">
@@ -22,14 +22,14 @@
    <property name="position">center</property>
    <property name="section">default</property>
    <property name="hidden">0</property>
-   <property name="count">0</property>
-   <property name="sortcountable">0</property>
-   <property name="hidezerocount">0</property>
+   <property name="count"></property>
+   <property name="sortcountable"></property>
+   <property name="hidezerocount"></property>
    <property name="index">review_state</property>
    <property
       name="vocabulary">plone.app.vocabularies.WorkflowStates</property>
    <property name="catalog"></property>
-   <property name="sortreversed">0</property>
+   <property name="sortreversed"></property>
    <property name="default"></property>
   </criterion>
   <criterion name="c0">
@@ -49,15 +49,15 @@
    <property name="position">bottomcenter</property>
    <property name="section">default</property>
    <property name="hidden">1</property>
-   <property name="count">0</property>
-   <property name="sortcountable">0</property>
-   <property name="hidezerocount">0</property>
+   <property name="count"></property>
+   <property name="sortcountable"></property>
+   <property name="hidezerocount"></property>
    <property
       name="vocabulary">imio.dashboard.conditionawarecollectionvocabulary</property>
    <property name="hidealloption">1</property>
    <property name="maxitems"></property>
-   <property name="sortreversed">0</property>
-   <property name="default"></property>
+   <property name="sortreversed"></property>
+   <property name="default">31984c8fffa240129ac5bf631f80e50b</property>
   </criterion>
   <criterion name="c1">
    <property name="widget">sorting</property>
@@ -68,6 +68,17 @@
    <property
       name="vocabulary">eea.faceted.vocabularies.SortingCatalogIndexes</property>
    <property name="default">sortable_title</property>
+  </criterion>
+  <criterion name="c5">
+   <property name="widget">text</property>
+   <property name="title">Référence du dossier</property>
+   <property name="position">center</property>
+   <property name="section">advanced</property>
+   <property name="hidden">0</property>
+   <property name="index">getReference</property>
+   <property name="default"></property>
+   <property name="onlyallelements">0</property>
+   <property name="wildcard">0</property>
   </criterion>
  </criteria>
 </object>

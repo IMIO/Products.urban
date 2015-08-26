@@ -28,8 +28,6 @@ class folderManagersVocabulary():
             )
             terms.append(cfm_term)
 
-        terms.append(SimpleTerm('all', 'all', _('All')))
-
         for foldermanager in foldermanagers:
             fm_term = SimpleTerm(
                 foldermanager.UID,
