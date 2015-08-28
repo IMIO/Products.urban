@@ -3,8 +3,6 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone">
 
-    <include package=".widgets" />
-
-    <include file="columns.zcml" />
+    <include package=".autocomplete" />
 
 </configure>

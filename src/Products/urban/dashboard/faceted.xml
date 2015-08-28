@@ -1,6 +1,38 @@
 <?xml version="1.0"?>
 <object name="urban" meta_type="ATFolder">
  <criteria>
+  <criterion name="c4">
+   <property name="widget">autocomplete</property>
+   <property name="title">Rue</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">0</property>
+   <property name="index">StreetsUID</property>
+   <property name="default"></property>
+   <property name="onlyallelements">0</property>
+  </criterion>
+  <criterion name="c7">
+   <property name="widget">text</property>
+   <property name="title">N° de police</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">0</property>
+   <property name="index">StreetNumber</property>
+   <property name="default"></property>
+   <property name="onlyallelements">0</property>
+   <property name="wildcard">0</property>
+  </criterion>
+  <criterion name="c5">
+   <property name="widget">text</property>
+   <property name="title">Référence du dossier</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">0</property>
+   <property name="index">getReference</property>
+   <property name="default"></property>
+   <property name="onlyallelements"></property>
+   <property name="wildcard"></property>
+  </criterion>
   <criterion name="c6">
    <property name="widget">select</property>
    <property name="title">Agent traitant</property>
@@ -39,9 +71,9 @@
    <property name="section">default</property>
    <property name="hidden">0</property>
    <property name="start"></property>
-   <property name="end">20</property>
-   <property name="step">5</property>
-   <property name="default">5</property>
+   <property name="end">50</property>
+   <property name="step">10</property>
+   <property name="default">20</property>
   </criterion>
   <criterion name="c2">
    <property name="widget">collection-link</property>
@@ -57,7 +89,7 @@
    <property name="hidealloption">1</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
-   <property name="default">31984c8fffa240129ac5bf631f80e50b</property>
+   <property name="default">cfcbe295081445cc8ad3909627b59b12</property>
   </criterion>
   <criterion name="c1">
    <property name="widget">sorting</property>
@@ -68,17 +100,6 @@
    <property
       name="vocabulary">eea.faceted.vocabularies.SortingCatalogIndexes</property>
    <property name="default">sortable_title</property>
-  </criterion>
-  <criterion name="c5">
-   <property name="widget">text</property>
-   <property name="title">Référence du dossier</property>
-   <property name="position">center</property>
-   <property name="section">advanced</property>
-   <property name="hidden">0</property>
-   <property name="index">getReference</property>
-   <property name="default"></property>
-   <property name="onlyallelements">0</property>
-   <property name="wildcard">0</property>
   </criterion>
  </criteria>
 </object>

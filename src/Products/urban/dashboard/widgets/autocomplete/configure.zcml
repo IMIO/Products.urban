@@ -1,0 +1,30 @@
+<configure
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:faceted="http://namespaces.zope.org/faceted"
+  i18n_domain="urban">
+
+  <faceted:widget factory=".widget.AutocompleteSelectionWidget" />
+
+  <browser:resource
+    name="eea.facetednavigation.widgets.autocompleteselection.view.js"
+    file="./view.js"
+   />
+
+  <browser:resource
+    name="eea.facetednavigation.widgets.autocompleteselection.edit.js"
+    file="./edit.js"
+   />
+
+  <browser:resource
+    name="eea.facetednavigation.widgets.autocompleteselection.view.css"
+    file="./view.css"
+   />
+
+  <browser:page
+    for="*"
+    name="autocomplete-vocabulary-suggest"
+    class=".widget.AutocompleteVocabularySuggest"
+    permission="zope2.View"
+    />
+
+</configure>
