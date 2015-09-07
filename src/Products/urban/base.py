@@ -314,10 +314,11 @@ class UrbanBase(object):
           Returns a formatted version of the applicants to be used in POD templates
         """
         applicants = self.getApplicants()
-        toreturn = '[CSV]Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
+        toreturn = '[CSV]Titre|TitreR|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for applicant in applicants:
-            toreturn = toreturn + '%' + applicant.getPersonTitleValue() + '|' + applicant.getName1() + \
-                       '|' + applicant.getName2() + '|' + applicant.getNumber() + ', ' + \
+            toreturn = toreturn + '%' + applicant.getPersonTitleValue() + '|' + \
+                       applicant.getPersonTitleValue(reverse=True) + '|' + applicant.getName1() + '|' + \
+                       applicant.getName2() + '|' + applicant.getNumber() + ', ' + \
                        applicant.getStreet() + '|' + applicant.getZipcode() + ' ' + applicant.getCity()
         toreturn = toreturn + '[/CSV]'
         return toreturn

@@ -230,13 +230,13 @@ class Contact(BaseContent, BrowserDefaultMixin):
             return "%s %s %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2())
 
     security.declarePublic('getSignaletic')
-    def getSignaletic(self, short=False, withaddress=False, linebyline=False):
+    def getSignaletic(self, short=False, withaddress=False, linebyline=False, reverse=False):
         """
           Returns the contact base signaletic : title and names
         """
         urban_tool = api.portal.get_tool('portal_urban')
         invertnames = urban_tool.getInvertAddressNames()
-        nameSignaletic = self._getNameSignaletic(short, linebyline, invertnames=invertnames)
+        nameSignaletic = self._getNameSignaletic(short, linebyline, reverse, invertnames)
         if not withaddress:
             if not linebyline:
                 return nameSignaletic
@@ -279,8 +279,8 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 address = '<p>%s<br />%s</p>' % (nameSignaletic, addressSignaletic)
                 return address
 
-    def _getNameSignaletic(self, short, linebyline, invertnames=False):
-        title = self.getPersonTitleValue(short, extra=False)
+    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
+        title = self.getPersonTitleValue(short, False, reverse)
         namedefined = self.getName1() or self.getName2()
         names = '%s %s' % (self.getName1(), self.getName2())
         if invertnames and linebyline:
@@ -342,7 +342,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
             return "<p>%s, %s<br />%s %s</p>" % (number, street, zip, city)
 
     security.declarePublic('getPersonTitle')
-    def getPersonTitle(self, short=False, theObject=False):
+    def getPersonTitle(self, short=False, reverse=False, theObject=False):
         """
           Overrides the default personTitle accessor
           Returns the personTitle short version, so 'M' for 'Mister', ...
@@ -350,6 +350,8 @@ class Contact(BaseContent, BrowserDefaultMixin):
         #either we need the classic value
         if not short:
             res = self.getField('personTitle').get(self)
+            if reverse and res == 'madam_and_mister':
+                return 'Monsieur, Madame'
             if res and theObject:
                 tool = api.portal.get_tool('portal_urban')
                 res = getattr(tool.persons_titles, res)
@@ -363,12 +365,12 @@ class Contact(BaseContent, BrowserDefaultMixin):
             return ''
 
     security.declarePublic('getPersonTitleValue')
-    def getPersonTitleValue(self, short=False, extra=True):
+    def getPersonTitleValue(self, short=False, extra=True, reverse=False):
         """
           Returns the personTitle real value.  Usefull for being used in templates
         """
-        personTitle = self.getPersonTitle(short, theObject=extra)
-        if short:
+        personTitle = self.getPersonTitle(short, reverse, theObject=extra)
+        if short or personTitle == 'Monsieur, Madame':
             return personTitle
         elif extra:
             return personTitle.extraValue
