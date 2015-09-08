@@ -40,7 +40,7 @@ def migrateToUrban170(context):
     logger.info("migration done!")
 
 
-class ApplicantMetaTypeMigrator(object, InplaceATFolderMigrator):
+class ApplicantMetaTypeMigrator(InplaceATFolderMigrator):
     """
     """
     walker = CustomQueryWalker
@@ -86,7 +86,7 @@ def migrateApplicantMetaType(context):
     logger.info("migration step done!")
 
 
-class ProprietaryMetaTypeMigrator(object, InplaceATFolderMigrator):
+class ProprietaryMetaTypeMigrator(InplaceATFolderMigrator):
     """
     """
     walker = CustomQueryWalker
