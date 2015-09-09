@@ -1,0 +1,21 @@
+<configure
+  xmlns:browser="http://namespaces.zope.org/browser"
+  i18n_domain="urban">
+
+  <browser:view
+    for="*"
+    provides="eea.faceted.vocabularies.autocomplete.IAutocompleteSuggest"
+    name="sreets-autocomplete-suggest"
+    class=".autocomplete.UrbanStreetsSuggest"
+    permission="zope2.View"
+    />
+
+  <browser:view
+    for="*"
+    provides="eea.faceted.vocabularies.autocomplete.IAutocompleteSuggest"
+    name="cadastral-autocomplete-suggest"
+    class=".autocomplete.CadastralReferenceSuggest"
+    permission="zope2.View"
+    />
+
+</configure>

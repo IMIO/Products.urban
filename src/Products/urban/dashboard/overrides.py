@@ -9,8 +9,6 @@ from Products.urban import utils
 
 from collective.eeafaceted.collectionwidget.browser.views import RenderTermView
 
-from plone import api
-
 
 class RenderLicenceTermView(RenderTermView):
 
@@ -18,8 +16,7 @@ class RenderLicenceTermView(RenderTermView):
         self.term = term
         self.category = category
         self.widget = widget
-        catalog = api.portal.get_tool('portal_catalog')
-        self.collection = catalog(UID=term[0])[0].getObject()
+        self.collection = term.value
         # display the searchallmeetings as a selection list
         collection_id = self.collection.getId()
         for urban_type in URBAN_TYPES:

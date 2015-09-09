@@ -1,15 +1,31 @@
 <?xml version="1.0"?>
 <object name="urban" meta_type="ATFolder">
  <criteria>
-  <criterion name="c4">
-   <property name="widget">autocomplete</property>
-   <property name="title">Rue</property>
+  <criterion name="c1">
+   <property name="widget">sorting</property>
+   <property name="title">Tri</property>
    <property name="position">top</property>
-   <property name="section">advanced</property>
-   <property name="hidden">0</property>
-   <property name="index">StreetsUID</property>
-   <property name="default"></property>
-   <property name="onlyallelements">0</property>
+   <property name="section">default</property>
+   <property name="hidden">1</property>
+   <property
+      name="vocabulary">eea.faceted.vocabularies.SortingCatalogIndexes</property>
+   <property name="default">sortable_title</property>
+  </criterion>
+  <criterion name="c2">
+   <property name="widget">collection-link</property>
+   <property name="title">Procédures</property>
+   <property name="position">top</property>
+   <property name="section">default</property>
+   <property name="hidden">1</property>
+   <property name="count">0</property>
+   <property name="sortcountable">0</property>
+   <property name="hidezerocount">0</property>
+   <property
+      name="vocabulary">imio.dashboard.conditionawarecollectionvocabulary</property>
+   <property name="hidealloption">1</property>
+   <property name="maxitems"></property>
+   <property name="sortreversed">0</property>
+   <property name="default">ba90a4ce59fc480f9d8a3bd4ea76748d</property>
   </criterion>
   <criterion name="c7">
    <property name="widget">text</property>
@@ -19,8 +35,8 @@
    <property name="hidden">0</property>
    <property name="index">StreetNumber</property>
    <property name="default"></property>
-   <property name="onlyallelements">0</property>
-   <property name="wildcard">0</property>
+   <property name="onlyallelements"></property>
+   <property name="wildcard"></property>
   </criterion>
   <criterion name="c5">
    <property name="widget">text</property>
@@ -74,32 +90,6 @@
    <property name="end">50</property>
    <property name="step">10</property>
    <property name="default">20</property>
-  </criterion>
-  <criterion name="c2">
-   <property name="widget">collection-link</property>
-   <property name="title">Procédures</property>
-   <property name="position">bottomcenter</property>
-   <property name="section">default</property>
-   <property name="hidden">1</property>
-   <property name="count"></property>
-   <property name="sortcountable"></property>
-   <property name="hidezerocount"></property>
-   <property
-      name="vocabulary">imio.dashboard.conditionawarecollectionvocabulary</property>
-   <property name="hidealloption">1</property>
-   <property name="maxitems"></property>
-   <property name="sortreversed"></property>
-   <property name="default">cfcbe295081445cc8ad3909627b59b12</property>
-  </criterion>
-  <criterion name="c1">
-   <property name="widget">sorting</property>
-   <property name="title">Tri</property>
-   <property name="position">bottomcenter</property>
-   <property name="section">default</property>
-   <property name="hidden">1</property>
-   <property
-      name="vocabulary">eea.faceted.vocabularies.SortingCatalogIndexes</property>
-   <property name="default">sortable_title</property>
   </criterion>
  </criteria>
 </object>

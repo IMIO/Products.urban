@@ -4,13 +4,13 @@
                      widget python: view.widget;
                      wid python:widget.data.getId();">
           <li tal:define="
-            term_id python:term[0];
-            term_label python:term[1][0];
+            term_id python:term.token;
+            term_label python:term.title[0];
             term_label python:widget.translate(term_label);
-            redirect_to python:term[1][1];
+            redirect_to python:term.title[1];
             default_class python:term_id == widget.default and 'faceted-tag-selected' or '';"
             tal:attributes="
-            class python: not category[0] and default_class + ' no-category-tag' or default_class;
+            class python: not category and default_class + ' no-category-tag' or default_class;
             value python:term_id;
             title term_label;
             id string:${wid}${term_id};

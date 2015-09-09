@@ -19,6 +19,7 @@ from Products.Archetypes.interfaces import IBaseFolder
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IParcellingTerm
+from Products.urban.interfaces import IPortionOut
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IUrbanEventType
 
@@ -59,8 +60,8 @@ def environmentlicence_applicantinfoindex(object):
     return applicants_info
 
 
-@indexer(IGenericLicence)
-def genericlicence_parcelinfoindex(object):
+@indexer(IPortionOut)
+def parcelinfoindex(obj):
     """
     Indexes some informations about the parcels of 'self'
     It builds a list of parcels infos.  Parcels infos are :
@@ -76,27 +77,29 @@ def genericlicence_parcelinfoindex(object):
     This index is a ZCTextIndex based on the plone_lexicon so we
     are sure that indexed values are lowercase
     """
-    parcelsInfos = []
-    try:
-        for parcel in object.getParcels():
-            parcelsInfos.append(parcel.getIndexValue())
-    except:
-        pass
-    return parcelsInfos
+    return [obj.getIndexValue()]
+
+
+@indexer(IGenericLicence)
+def genericlicence_parcelinfoindex(obj):
+    """
+    Index parcels of a licence
+    """
+    parcels_infos = []
+    if hasattr(obj, 'getParcels'):
+        parcels_infos = list(set([p.getIndexValue() for p in obj.getParcels()]))
+    return parcels_infos
 
 
 @indexer(IParcellingTerm)
-def parcellingterm_parcelinfoindex(object):
+def parcellingterm_parcelinfoindex(obj):
     """
-    Indexes some informations about the parcels of a parcelling term
+    Index parcels of a parcelling term
     """
-    parcelsInfos = []
-    try:
-        for parcel in object.getParcels():
-            parcelsInfos.append(parcel.getIndexValue())
-    except:
-        pass
-    return parcelsInfos
+    parcels_infos = []
+    if hasattr(obj, 'getParcels'):
+        parcels_infos = list(set([p.getIndexValue() for p in obj.getParcels()]))
+    return parcels_infos
 
 
 @indexer(IGenericLicence)
