@@ -13,6 +13,14 @@
   <browser:view
     for="*"
     provides="eea.faceted.vocabularies.autocomplete.IAutocompleteSuggest"
+    name="reference-autocomplete-suggest"
+    class=".autocomplete.LicenceReferenceSuggest"
+    permission="zope2.View"
+    />
+
+  <browser:view
+    for="*"
+    provides="eea.faceted.vocabularies.autocomplete.IAutocompleteSuggest"
     name="cadastral-autocomplete-suggest"
     class=".autocomplete.CadastralReferenceSuggest"
     permission="zope2.View"
