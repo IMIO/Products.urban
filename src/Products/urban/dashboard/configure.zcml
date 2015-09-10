@@ -5,5 +5,6 @@
 
     <include file="autocomplete.zcml" />
     <include file="columns.zcml" />
+    <include file="vocabularies.zcml" />
 
 </configure>

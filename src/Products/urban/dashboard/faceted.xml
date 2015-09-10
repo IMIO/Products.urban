@@ -27,6 +27,17 @@
    <property name="sortreversed">0</property>
    <property name="default">ba90a4ce59fc480f9d8a3bd4ea76748d</property>
   </criterion>
+  <criterion name="c4">
+   <property name="widget">autocomplete</property>
+   <property name="title">Rue</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">0</property>
+   <property name="index">StreetsUID</property>
+   <property name="default"></property>
+   <property name="autocomplete_view">sreets-autocomplete-suggest</property>
+   <property name="onlyallelements">1</property>
+  </criterion>
   <criterion name="c7">
    <property name="widget">text</property>
    <property name="title">N° de police</property>
@@ -35,8 +46,8 @@
    <property name="hidden">0</property>
    <property name="index">StreetNumber</property>
    <property name="default"></property>
-   <property name="onlyallelements"></property>
-   <property name="wildcard"></property>
+   <property name="onlyallelements">1</property>
+   <property name="wildcard">0</property>
   </criterion>
   <criterion name="c5">
    <property name="widget">text</property>
@@ -46,8 +57,20 @@
    <property name="hidden">0</property>
    <property name="index">getReference</property>
    <property name="default"></property>
-   <property name="onlyallelements"></property>
-   <property name="wildcard"></property>
+   <property name="onlyallelements">1</property>
+   <property name="wildcard">0</property>
+  </criterion>
+  <criterion name="c8">
+   <property name="widget">autocomplete</property>
+   <property name="title">Référence cadastrale</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">0</property>
+   <property name="index">parcelInfosIndex</property>
+   <property name="default"></property>
+   <property
+      name="autocomplete_view">cadastral-autocomplete-suggest</property>
+   <property name="onlyallelements">1</property>
   </criterion>
   <criterion name="c6">
    <property name="widget">select</property>
@@ -70,14 +93,13 @@
    <property name="position">center</property>
    <property name="section">default</property>
    <property name="hidden">0</property>
-   <property name="count"></property>
-   <property name="sortcountable"></property>
-   <property name="hidezerocount"></property>
+   <property name="count">0</property>
+   <property name="sortcountable">0</property>
+   <property name="hidezerocount">0</property>
    <property name="index">review_state</property>
-   <property
-      name="vocabulary">plone.app.vocabularies.WorkflowStates</property>
+   <property name="vocabulary">urban.LicencesWorkflowStates</property>
    <property name="catalog"></property>
-   <property name="sortreversed"></property>
+   <property name="sortreversed">0</property>
    <property name="default"></property>
   </criterion>
   <criterion name="c0">
