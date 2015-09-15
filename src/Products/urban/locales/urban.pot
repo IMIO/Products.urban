@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-07-13 09:14+0000\n"
+"POT-Creation-Date: 2015-03-30 08:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,10 +48,10 @@ msgstr ""
 msgid "Architect data"
 msgstr ""
 
-msgid "Article127"
+msgid "Attachments"
 msgstr ""
 
-msgid "Attachments"
+msgid "Article127"
 msgstr ""
 
 msgid "BuildLicence"
@@ -1372,7 +1372,6 @@ msgstr ""
 msgid "tal_condition_descr"
 msgstr ""
 
-
 #. Default: "Events templates"
 #: templatessummary.pt
 msgid "templates_events_title"
@@ -1637,7 +1636,7 @@ msgstr ""
 msgid "urban_label_additionalPreviousLicences"
 msgstr ""
 
-# 
+#
 #. Default: "Adr1"
 #: RecipientCadastre.py
 msgid "urban_label_adr1"
@@ -1815,6 +1814,16 @@ msgstr ""
 #. Default: "Cityname"
 #: UrbanTool.py
 msgid "urban_label_cityName"
+msgstr ""
+
+#. Default: "Claimendsdate"
+#: UrbanEventInquiry.py
+msgid "urban_label_claimEndSDate"
+msgstr ""
+
+#. Default: "Claimstartsdate"
+#: UrbanEventInquiry.py
+msgid "urban_label_claimStartSDate"
 msgstr ""
 
 #. Default: "Claimingtext"
@@ -2015,9 +2024,14 @@ msgstr ""
 msgid "urban_label_eventTypeType"
 msgstr ""
 
-#. Default: "Explanationsdate"
-#: UrbanEvent.py
-msgid "urban_label_explanationsDate"
+#. Default: "Explanationendsdate"
+#: UrbanEventInquiry.py
+msgid "urban_label_explanationEndSDate"
+msgstr ""
+
+#. Default: "Explanationstartsdate"
+#: UrbanEventInquiry.py
+msgid "urban_label_explanationStartSDate"
 msgstr ""
 
 #. Default: "Exploitationcondition"
@@ -3316,26 +3330,6 @@ msgstr ""
 msgid "urbancertificateones"
 msgstr ""
 
-msgid "urbancertificatetwo_searchacceptedlicences"
-msgstr ""
-
-msgid "urbancertificatetwo_searchalllicences"
-msgstr ""
-
-msgid "urbancertificatetwo_searchincompletelicences"
-msgstr ""
-
-msgid "urbancertificatetwo_searchinprogresslicences"
-msgstr ""
-
-msgid "urbancertificatetwo_searchrefusedlicences"
-msgstr ""
-
-msgid "urbancertificatetwo_searchretiredlicences"
-msgstr ""
-
-msgid "urbancertificatetwo_urbanconfig_title"
-msgstr ""
 
 msgid "urbancertificatetwos"
 msgstr ""

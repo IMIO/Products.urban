@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Tue Jun 23 10:37:51 2015\n"
-"PO-Revision-Date: Tue Jun 23 10:37:51 2015\n"
+"POT-Creation-Date: Tue Sep 15 11:05:06 2015\n"
+"PO-Revision-Date: Tue Sep 15 11:05:06 2015\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -334,14 +334,19 @@ msgstr ""
 msgid "urban_label_cityName"
 msgstr ""
 
+#. Default: "Claimendsdate"
+#: UrbanEventInquiry.py
+msgid "urban_label_claimEndSDate"
+msgstr ""
+
+#. Default: "Claimstartsdate"
+#: UrbanEventInquiry.py
+msgid "urban_label_claimStartSDate"
+msgstr ""
+
 #. Default: "Claimingtext"
 #: Claimant.py
 msgid "urban_label_claimingText"
-msgstr ""
-
-#. Default: "Claimsdate"
-#: UrbanEventInquiry.py
-msgid "urban_label_claimsDate"
 msgstr ""
 
 #. Default: "Claimstext"
@@ -486,9 +491,14 @@ msgstr ""
 msgid "urban_label_eventTypeType"
 msgstr ""
 
-#. Default: "Explanationsdate"
+#. Default: "Explanationendsdate"
 #: UrbanEventInquiry.py
-msgid "urban_label_explanationsDate"
+msgid "urban_label_explanationEndSDate"
+msgstr ""
+
+#. Default: "Explanationstartsdate"
+#: UrbanEventInquiry.py
+msgid "urban_label_explanationStartSDate"
 msgstr ""
 
 #. Default: "Exploitationcondition"

@@ -33,25 +33,49 @@ from plone import api
 schema = Schema((
 
     DateTimeField(
-        name='explanationsDate',
+        name='explanationStartSDate',
         widget=DateTimeField._properties['widget'](
             show_hm=True,
-            condition="python:here.attributeIsUsed('explanationsDate')",
+            condition="python:here.attributeIsUsed('explanationStartSDate')",
             format="%d/%m/%Y %H:%M",
-            label='Explanationsdate',
-            label_msgid='urban_label_explanationsDate',
+            label='Explanationstartsdate',
+            label_msgid='urban_label_explanationStartSDate',
             i18n_domain='urban',
         ),
         optional=True,
     ),
     DateTimeField(
-        name='claimsDate',
+        name='explanationEndSDate',
         widget=DateTimeField._properties['widget'](
             show_hm=True,
-            condition="python:here.attributeIsUsed('claimsDate')",
+            condition="python:here.attributeIsUsed('explanationEndSDate')",
             format="%d/%m/%Y %H:%M",
-            label='Claimsdate',
-            label_msgid='urban_label_claimsDate',
+            label='Explanationendsdate',
+            label_msgid='urban_label_explanationEndSDate',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
+    DateTimeField(
+        name='claimStartSDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=True,
+            condition="python:here.attributeIsUsed('claimStartSDate')",
+            format="%d/%m/%Y %H:%M",
+            label='Claimstartsdate',
+            label_msgid='urban_label_claimStartSDate',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
+    DateTimeField(
+        name='claimEndSDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=True,
+            condition="python:here.attributeIsUsed('claimEndSDate')",
+            format="%d/%m/%Y%H",
+            label='Claimendsdate',
+            label_msgid='urban_label_claimEndSDate',
             i18n_domain='urban',
         ),
         optional=True,
