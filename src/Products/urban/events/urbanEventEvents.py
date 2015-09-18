@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.interfaces import ITheLicenceEvent
+
 from zope.interface import alsoProvides
 from zope.component.interface import getInterface
 
@@ -27,19 +29,19 @@ def _setDefaultTextValues(urbanevent):
         field_mutator(rendered_text)
 
 
-def setEventTypeType(urbanEvent, event):
-    urbanEventType = urbanEvent.getUrbaneventtypes()
-    urbanEventTypeType = urbanEventType.getEventTypeType()
-    if not urbanEventTypeType:
+def setEventTypeType(urban_event, event):
+    urban_eventType = urban_event.getUrbaneventtypes()
+    urban_eventTypeType = urban_eventType.getEventTypeType()
+    if not urban_eventTypeType:
         return
-    eventTypeTypeInterface = getInterface('', urbanEventTypeType)
-    alsoProvides(urbanEvent, eventTypeTypeInterface)
-    urbanEvent.reindexObject(['object_provides'])
+    eventTypeTypeInterface = getInterface('', urban_eventTypeType)
+    alsoProvides(urban_event, eventTypeTypeInterface)
+    urban_event.reindexObject(['object_provides'])
 
 
-def setCreationDate(urbanEvent, event):
-    urbanEvent.setCreationDate(urbanEvent.getEventDate())
-    urbanEvent.reindexObject(['created'])
+def setCreationDate(urban_event, event):
+    urban_event.setCreationDate(urban_event.getEventDate())
+    urban_event.reindexObject(['created'])
 
 
 def generateSingletonDocument(urban_event, event):
@@ -54,8 +56,14 @@ def generateSingletonDocument(urban_event, event):
         generation_view.generate_persistent_doc()
 
 
-def updateKeyEvent(urbanEvent, event):
-    event_type = urbanEvent.getUrbaneventtypes()
+def updateKeyEvent(urban_event, event):
+    event_type = urban_event.getUrbaneventtypes()
     if not event_type or event_type.getIsKeyEvent():
-        licence = urbanEvent.aq_inner.aq_parent
+        licence = urban_event.aq_inner.aq_parent
         licence.reindexObject(['last_key_event'])
+
+
+def updateDecisionDate(urban_event, event):
+    if ITheLicenceEvent.providedBy(urban_event):
+        licence = urban_event.aq_inner.aq_parent
+        licence.reindexObject(['getDecisionDate'])

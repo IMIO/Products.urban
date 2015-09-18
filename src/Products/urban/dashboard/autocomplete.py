@@ -12,14 +12,24 @@ from zope.interface import implements
 import json
 
 
-class ApplicantSuggest(BrowserView):
-    """ Autocomplete suggestions of licence references."""
+class SuggestView(BrowserView):
+    """ Autocomplete suggestions base class."""
 
     implements(IAutocompleteSuggest)
 
+    def __call__(self):
+        try:
+            return json.dumps(self.compute_suggestions())
+        except ParseError:
+            pass
+
+
+class ApplicantSuggest(SuggestView):
+    """ Autocomplete suggestions of licence applicants."""
+
     label = 'Demandeur(s)/propriétaire(s)'
 
-    def __call__(self):
+    def compute_suggestions(self):
         term = self.request.get('term')
         if not term:
             return
@@ -37,22 +47,16 @@ class ApplicantSuggest(BrowserView):
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(**kwargs)
 
-        try:
-            return json.dumps(
-                [{'label': b.Title, 'value': ' '.join(b.applicantInfosIndex)} for b in brains]
-            )
-        except ParseError:
-            pass
+        suggestions = [{'label': b.Title, 'value': ' '.join(b.applicantInfosIndex)} for b in brains]
+        return suggestions
 
 
-class UrbanStreetsSuggest(BrowserView):
+class UrbanStreetsSuggest(SuggestView):
     """ Autocomplete suggestions on urban streets."""
-
-    implements(IAutocompleteSuggest)
 
     label = 'Rues urban'
 
-    def __call__(self):
+    def compute_suggestions(self):
         term = self.request.get('term')
         if not term:
             return
@@ -72,22 +76,17 @@ class UrbanStreetsSuggest(BrowserView):
 
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(**kwargs)
-        try:
-            return json.dumps(
-                [{'label': b.Title, 'value': b.UID} for b in brains]
-            )
-        except ParseError:
-            pass
+
+        suggestions = [{'label': b.Title, 'value': b.UID} for b in brains]
+        return suggestions
 
 
-class LicenceReferenceSuggest(BrowserView):
+class LicenceReferenceSuggest(SuggestView):
     """ Autocomplete suggestions of licence references."""
-
-    implements(IAutocompleteSuggest)
 
     label = 'Référence des dossiers'
 
-    def __call__(self):
+    def compute_suggestions(self):
         term = self.request.get('term')
         if not term:
             return
@@ -105,22 +104,16 @@ class LicenceReferenceSuggest(BrowserView):
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(**kwargs)
 
-        try:
-            return json.dumps(
-                [{'label': b.getReference, 'value': b.getReference} for b in brains]
-            )
-        except ParseError:
-            pass
+        suggestions = [{'label': b.getReference, 'value': b.getReference} for b in brains]
+        return suggestions
 
 
-class CadastralReferenceSuggest(BrowserView):
+class CadastralReferenceSuggest(SuggestView):
     """ Autocomplete suggestions on cadastral references."""
-
-    implements(IAutocompleteSuggest)
 
     label = 'Parcelles urban'
 
-    def __call__(self):
+    def compute_suggestions(self):
         term = self.request.get('term')
         if not term:
             return
@@ -146,9 +139,5 @@ class CadastralReferenceSuggest(BrowserView):
             unique_info.add(parcel_reference)
             unique_brains.append(brain)
 
-        try:
-            return json.dumps(
-                [{'label': x.Title, 'value': x.parcelInfosIndex[0]} for x in unique_brains]
-            )
-        except ParseError:
-            pass
+        suggestions = [{'label': x.Title, 'value': x.parcelInfosIndex[0]} for x in unique_brains]
+        return suggestions
