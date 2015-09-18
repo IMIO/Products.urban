@@ -12,6 +12,39 @@ from zope.interface import implements
 import json
 
 
+class ApplicantSuggest(BrowserView):
+    """ Autocomplete suggestions of licence references."""
+
+    implements(IAutocompleteSuggest)
+
+    label = 'Demandeur(s)/propriétaire(s)'
+
+    def __call__(self):
+        term = self.request.get('term')
+        if not term:
+            return
+
+        terms = term.strip().split()
+
+        kwargs = {
+            'applicantInfosIndex': ' AND '.join(["%s*" % t for t in terms]),
+            'sort_on': 'sortable_title',
+            'sort_order': 'reverse',
+            'path': '/'.join(self.context.getPhysicalPath()),
+            'object_provides': 'Products.urban.interfaces.IApplicant',
+        }
+
+        catalog = api.portal.get_tool('portal_catalog')
+        brains = catalog(**kwargs)
+
+        try:
+            return json.dumps(
+                [{'label': b.Title, 'value': ' '.join(b.applicantInfosIndex)} for b in brains]
+            )
+        except ParseError:
+            pass
+
+
 class UrbanStreetsSuggest(BrowserView):
     """ Autocomplete suggestions on urban streets."""
 
@@ -60,14 +93,12 @@ class LicenceReferenceSuggest(BrowserView):
             return
 
         terms = term.strip().split()
-        portal = api.portal.get()
-        path = '/'.join(portal.urban.getPhysicalPath())
 
         kwargs = {
             'Title': ' AND '.join(["%s*" % t for t in terms]),
             'sort_on': 'sortable_title',
             'sort_order': 'reverse',
-            'path': path,
+            'path': '/'.join(self.context.getPhysicalPath()),
             'object_provides': 'Products.urban.interfaces.IGenericLicence',
         }
 
@@ -95,14 +126,12 @@ class CadastralReferenceSuggest(BrowserView):
             return
 
         terms = term.strip().split()
-        portal = api.portal.get()
-        path = '/'.join(portal.urban.getPhysicalPath())
 
         kwargs = {
             'Title': ' AND '.join(["%s*" % x for x in terms]),
             'sort_on': 'sortable_title',
             'sort_order': 'reverse',
-            'path': path,
+            'path': '/'.join(self.context.getPhysicalPath()),
             'object_provides': 'Products.urban.interfaces.IPortionOut',
         }
 

@@ -163,6 +163,9 @@ class ParcelsTable(UrbanTable, SequenceTable):
     implements(IParcelsTable)
 
     cssClasses = {'table': 'listing largetable'}
+    batchStart = 0
+    batchSize = 999
+    startBatchingAt = 999
 
 
 class EventsTable(UrbanTable, SequenceTable):

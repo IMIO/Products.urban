@@ -16,6 +16,7 @@ __docformat__ = 'plaintext'
 
 from Products.Archetypes.interfaces import IBaseFolder
 
+from Products.urban.interfaces import IApplicant
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IParcellingTerm
@@ -26,38 +27,50 @@ from Products.urban.interfaces import IUrbanEventType
 from plone.indexer import indexer
 
 
+@indexer(IApplicant)
+def applicant_applicantinfoindex(object):
+    """
+    Return the informations to index about the applicants
+    """
+    return _get_applicantsinfoindex(object)
+
+
 @indexer(IGenericLicence)
 def genericlicence_applicantinfoindex(object):
     """
-        Return the informations to index about the applicants
+    Return the informations to index about the applicants
     """
     contacts_info = []
     contacts = object.getApplicants() + object.getProprietaries()
     for contact in contacts:
-        contacts_info.append(contact.getName1())
-        contacts_info.append(contact.getName2())
-        contacts_info.append(contact.getSociety())
-        contacts_info.append(contact.getNationalRegister())
-    return contacts_info
+        contacts_info.extend(_get_applicantsinfoindex(contact))
+    return list(set(contacts_info))
 
 
 @indexer(IEnvironmentLicence)
 def environmentlicence_applicantinfoindex(object):
     """
-        Return the informations to index about the applicants
+    Return the informations to index about the applicants
     """
     applicants_info = []
     for applicant in object.getApplicants():
-        applicants_info.append(applicant.getName1())
-        applicants_info.append(applicant.getName2())
-        applicants_info.append(applicant.getSociety())
-        applicants_info.append(applicant.getNationalRegister())
+        applicants_info.extend(_get_applicantsinfoindex(applicant))
     for corporation in object.getCorporations():
         applicants_info.append(applicant.getName1())
         applicants_info.append(applicant.getName2())
         applicants_info.append(applicant.getDenomination())
         applicants_info.append(applicant.getBceNumber())
-    return applicants_info
+    return list(set(applicants_info))
+
+
+def _get_applicantsinfoindex(applicant):
+    applicants_info = [
+        applicant.getName1(),
+        applicant.getName2(),
+        applicant.getSociety(),
+        applicant.getNationalRegister(),
+    ]
+    return [info for info in applicants_info if info]
 
 
 @indexer(IPortionOut)
@@ -154,3 +167,10 @@ def rubricsfolders_extravalue(object):
         return ['0', '1', '2', '3']
     else:
         return ['']
+
+
+@indexer(IGenericLicence)
+def genericlicence_decisiondate(object):
+    decision_event = object.getLastTheLicence()
+    if decision_event:
+        return decision_event.getDecisionDate()
