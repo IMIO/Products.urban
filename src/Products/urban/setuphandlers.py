@@ -673,12 +673,6 @@ def addApplicationFolders(context):
                 if urban_type in ['EnvClassOne', 'EnvClassTwo']:
                     newSubFolder.manage_permission('urban: Add EnvironmentLicence', ['Manager', 'Editor', ], acquire=0)
 
-        # disable portlets for licence folders
-        urban_folder = getattr(newFolder, urban_type.lower() + 's')
-        manager = getUtility(IPortletManager, name=u"plone.leftcolumn")
-        blacklist = getMultiAdapter((urban_folder, manager), ILocalPortletAssignmentManager)
-        blacklist.setBlacklistStatus(CONTEXT_CATEGORY, True)
-
     #add a folder that will contains architects
     if not hasattr(newFolder, "architects"):
         newFolderid = newFolder.invokeFactory(
@@ -739,43 +733,61 @@ def setupImioDashboard(context):
     """
     site = context.getSite()
     urban_folder = getattr(site, 'urban')
-
-    urban_folder.restrictedTraverse('@@faceted_subtyper').enable()
-    urban_folder.restrictedTraverse('@@faceted_settings').toggle_left_column()
-    IFacetedLayout(urban_folder).update_layout('faceted-table-items')
-    urban_folder.unrestrictedTraverse('@@faceted_exportimport').import_xml(
-        import_file=open(os.path.dirname(__file__) + '/dashboard/faceted.xml')
-    )
+    _activate_dashboard_navigation(urban_folder, '/dashboard/faceted.xml')
 
     all_licences_collection_id = 'collection_all_licences'
     if all_licences_collection_id not in urban_folder.objectIds():
-        all_licences_collection_id = urban_folder.invokeFactory(
-            'DashboardCollection',
+        _create_dashboard_collection(
+            urban_folder,
             id=all_licences_collection_id,
             title=_('All', 'urban'),
-            query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': [type for type in URBAN_TYPES]}],
-            customViewFields=('urban_title', 'CreationDate', 'folder_manager', 'actions'),
-            sort_on=u'created',
-            sort_reversed=True,
-            b_size=30
+            filter_type=[type for type in URBAN_TYPES]
         )
 
+    urban_folder.moveObjectToPosition(all_licences_collection_id, 0)
     all_licences_collection = getattr(urban_folder, all_licences_collection_id)
     _updateDefaultCollectionFor(urban_folder, all_licences_collection.UID())
 
     for urban_type in URBAN_TYPES:
+        folder = getattr(urban_folder, urban_type.lower() + 's')
         collection_id = 'collection_%s' % urban_type.lower()
-        if collection_id not in urban_folder.objectIds():
-            urban_folder.invokeFactory(
-                'DashboardCollection',
+        _activate_dashboard_navigation(folder, '/dashboard/config/%s.xml' % urban_type)
+        if collection_id not in folder.objectIds():
+            setFolderAllowedTypes(folder, 'DashboardCollection')
+            _create_dashboard_collection(
+                folder,
                 id=collection_id,
                 title=_(urban_type, 'urban'),
-                query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': [urban_type]}],
-                customViewFields=('urban_title', 'CreationDate', 'folder_manager', 'actions'),
-                sort_on=u'created',
-                sort_reversed=True,
-                b_size=30
+                filter_type=[urban_type],
             )
+            setFolderAllowedTypes(folder, urban_type)
+
+
+def _create_dashboard_collection(container, id, title, filter_type):
+    collection_id = container.invokeFactory(
+        'DashboardCollection',
+        id=id,
+        title=title,
+        query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': filter_type}],
+        customViewFields=('urban_title', 'CreationDate', 'folder_manager', 'actions'),
+        sort_on=u'created',
+        sort_reversed=True,
+        b_size=30
+    )
+    collection = getattr(container, collection_id)
+    return collection
+
+
+def _activate_dashboard_navigation(context, config_path=''):
+    subtyper = context.restrictedTraverse('@@faceted_subtyper')
+    if subtyper.is_faceted:
+        return
+    subtyper.enable()
+    context.restrictedTraverse('@@faceted_settings').toggle_left_column()
+    IFacetedLayout(context).update_layout('faceted-table-items')
+    context.unrestrictedTraverse('@@faceted_exportimport').import_xml(
+        import_file=open(os.path.dirname(__file__) + config_path)
+    )
 
 
 def addTestUsers(site):

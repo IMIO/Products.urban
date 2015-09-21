@@ -28,3 +28,10 @@ class LicencesWorkflowStates(object):
 
         vocabulary = SimpleVocabulary(vocabulary_terms)
         return vocabulary
+
+
+class CollectionCategory(object):
+
+    def __call__(self, context, query=None):
+        # do not display any category
+        return SimpleVocabulary([])
