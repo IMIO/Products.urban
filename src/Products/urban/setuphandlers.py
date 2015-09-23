@@ -733,7 +733,7 @@ def setupImioDashboard(context):
     """
     site = context.getSite()
     urban_folder = getattr(site, 'urban')
-    _activate_dashboard_navigation(urban_folder, '/dashboard/faceted.xml')
+    _activate_dashboard_navigation(urban_folder, '/dashboard/config/all.xml')
 
     all_licences_collection_id = 'collection_all_licences'
     if all_licences_collection_id not in urban_folder.objectIds():

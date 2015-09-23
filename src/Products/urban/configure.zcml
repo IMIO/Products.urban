@@ -137,6 +137,7 @@
   <adapter name="folder_manager" factory=".indexes.genericlicence_foldermanager" />
   <adapter name="folder_manager" factory=".indexes.urbanevent_foldermanager" />
   <adapter name="extraValue" factory=".indexes.rubricsfolders_extravalue" />
+  <adapter name="representatives" factory=".indexes.genericlicence_representative" />
   <adapter name="getDecisionDate" factory=".indexes.genericlicence_decisiondate" />
 
   <interface interface=".interfaces.IUrbanCertificateOne" />

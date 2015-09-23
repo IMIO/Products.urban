@@ -34,4 +34,28 @@
     permission="zope2.View"
     />
 
+  <browser:view
+    for="*"
+    provides="eea.faceted.vocabularies.autocomplete.IAutocompleteSuggest"
+    name="architects-autocomplete-suggest"
+    class=".autocomplete.ArchitectSuggest"
+    permission="zope2.View"
+    />
+
+  <browser:view
+    for="*"
+    provides="eea.faceted.vocabularies.autocomplete.IAutocompleteSuggest"
+    name="geometricians-autocomplete-suggest"
+    class=".autocomplete.GeometricianSuggest"
+    permission="zope2.View"
+    />
+
+  <browser:view
+    for="*"
+    provides="eea.faceted.vocabularies.autocomplete.IAutocompleteSuggest"
+    name="notaries-autocomplete-suggest"
+    class=".autocomplete.NotarySuggest"
+    permission="zope2.View"
+    />
+
 </configure>

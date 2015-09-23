@@ -51,6 +51,63 @@ class ApplicantSuggest(SuggestView):
         return suggestions
 
 
+class RepresentativeSuggestView(SuggestView):
+    """
+    Base class for autocomplete suggestions of licence representatives
+    (architects, geometricians, notaries, ... ).
+    """
+
+    contact_type = ''  # to override
+
+    def compute_suggestions(self):
+        term = self.request.get('term')
+        if not term:
+            return
+
+        portal = api.portal.get()
+        terms = term.strip().split()
+
+        kwargs = {
+            'Title': ' AND '.join(["%s*" % t for t in terms]),
+            'sort_on': 'sortable_title',
+            'path': '/'.join(portal.urban.getPhysicalPath()),
+            'portal_type': self.contact_type,
+        }
+
+        catalog = api.portal.get_tool('portal_catalog')
+        brains = catalog(**kwargs)
+
+        suggestions = [{'label': b.Title, 'value': [b.UID]} for b in brains]
+        return suggestions
+
+
+class ArchitectSuggest(RepresentativeSuggestView):
+    """
+    Autocomplete suggestions of licence architects.
+    """
+
+    label = 'Architecte'
+    contact_type = 'Architect'
+
+
+class GeometricianSuggest(RepresentativeSuggestView):
+    """
+    Autocomplete suggestions of licence geometrician.
+    """
+
+    label = 'Géomètre'
+    contact_type = 'Geometrician'
+
+
+class NotarySuggest(RepresentativeSuggestView):
+    """
+    Autocomplete suggestions of licence notary.
+    """
+
+    label = 'Notaire'
+    contact_type = 'Notary'
+
+
 class UrbanStreetsSuggest(SuggestView):
     """ Autocomplete suggestions on urban streets."""
 

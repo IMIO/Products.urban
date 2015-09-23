@@ -85,6 +85,12 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     # Manually created methods
 
+    security.declarePublic('getRepresentatives')
+    def getRepresentatives(self):
+        """
+        """
+        return self.getNotaryContact()
+
     security.declarePublic('updateTitle')
     def updateTitle(self):
         """

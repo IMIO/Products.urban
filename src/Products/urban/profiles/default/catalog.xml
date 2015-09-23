@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_catalog" meta_type="Plone Catalog Tool">
-  <index name="getDecisionDate" 
+  <index name="getDecisionDate"
          meta_type="DateIndex">
     <indexed_attr value="getDecisionDate"/>
   </index>
@@ -21,6 +21,10 @@
     <indexed_attr value="folder_manager"/>
   </index>
   <column value="folder_manager"/>
+  <index name="representatives"
+           meta_type="KeywordIndex">
+    <indexed_attr value="representatives"/>
+  </index>
   <index name="last_key_event"
            meta_type="KeywordIndex">
     <indexed_attr value="last_key_event"/>

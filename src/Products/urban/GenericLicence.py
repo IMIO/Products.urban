@@ -813,6 +813,13 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
 
     # Methods
 
+    security.declarePublic('getRepresentatives')
+    def getRepresentatives(self):
+        """
+        To override per licence type
+        """
+        return []
+
     security.declarePublic('getDefaultReference')
     def getDefaultReference(self):
         """

@@ -91,6 +91,12 @@ class MiscDemand(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
 
     # Manually created methods
 
+    security.declarePublic('getRepresentatives')
+    def getRepresentatives(self):
+        """
+        """
+        return self.getArchitects()
+
     def getLastDeposit(self, use_catalog=True):
         return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
 

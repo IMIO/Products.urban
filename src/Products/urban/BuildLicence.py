@@ -346,6 +346,12 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
 
     # Methods
 
+    security.declarePublic('getRepresentatives')
+    def getRepresentatives(self):
+        """
+        """
+        return self.getArchitects()
+
     security.declarePublic('listRoadAdaptations')
     def listRoadAdaptations(self):
         """

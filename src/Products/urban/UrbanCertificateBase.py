@@ -262,6 +262,12 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     # Manually created methods
 
+    security.declarePublic('getRepresentatives')
+    def getRepresentatives(self):
+        """
+        """
+        return self.getNotaryContact()
+
     security.declarePublic('attributeIsUsed')
     def attributeIsUsed(self, name):
         """

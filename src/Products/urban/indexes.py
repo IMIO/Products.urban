@@ -170,7 +170,13 @@ def rubricsfolders_extravalue(object):
 
 
 @indexer(IGenericLicence)
-def genericlicence_decisiondate(object):
-    decision_event = object.getLastTheLicence(use_catalog=False)
+def genericlicence_representative(licence):
+    representatives_uids = [rep.UID() for rep in licence.getRepresentatives()]
+    return representatives_uids
+
+
+@indexer(IGenericLicence)
+def genericlicence_decisiondate(licence):
+    decision_event = licence.getLastTheLicence(use_catalog=False)
     if decision_event:
         return decision_event.getEventDate()
