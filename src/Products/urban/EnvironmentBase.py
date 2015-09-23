@@ -242,8 +242,8 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         """ to be overriden """
         return {}
 
-    def getLastCollegeReport(self):
-        return self._getLastEvent(interfaces.ICollegeReportEvent)
+    def getLastCollegeReport(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ICollegeReportEvent, use_catalog)
 
     security.declarePublic('getAdditionalLayers')
     def getAdditionalLayers(self):

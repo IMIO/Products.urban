@@ -171,6 +171,6 @@ def rubricsfolders_extravalue(object):
 
 @indexer(IGenericLicence)
 def genericlicence_decisiondate(object):
-    decision_event = object.getLastTheLicence()
+    decision_event = object.getLastTheLicence(use_catalog=False)
     if decision_event:
         return decision_event.getEventDate()

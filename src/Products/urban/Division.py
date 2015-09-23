@@ -113,14 +113,14 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
         self.setTitle(title)
         self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
 
-    def getLastDeposit(self):
-        return self._getLastEvent(interfaces.IDepositEvent)
+    def getLastDeposit(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
 
-    def getLastCollegeReport(self):
-        return self._getLastEvent(interfaces.ICollegeReportEvent)
+    def getLastCollegeReport(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ICollegeReportEvent, use_catalog)
 
-    def getLastTheLicence(self):
-        return self._getLastEvent(interfaces.ITheLicenceEvent)
+    def getLastTheLicence(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ITheLicenceEvent, use_catalog)
 
 
 

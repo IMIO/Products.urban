@@ -433,7 +433,16 @@ class UrbanBase(object):
             isFirst = False
         return toreturn
 
-    def _getAllEvents(self,  eventInterface=None):
+    def _getAllEvents(self,  eventInterface=None, use_catalog=True):
+        if use_catalog:
+            return self._getAllEventsByCatalog(eventInterface)
+        else:
+            return self._getAllEventsByObjectValues(eventInterface)
+
+    def _getAllEventsByObjectValues(self, eventInterface):
+        return [evt for evt in self.objectValues('UrbanEvent') if eventInterface.providedBy(evt)]
+
+    def _getAllEventsByCatalog(self, eventInterface):
         catalog = api.portal.get_tool('portal_catalog')
         currentPath = '/'.join(self.getPhysicalPath())
         query = {'path': {'query': currentPath,
@@ -446,8 +455,8 @@ class UrbanBase(object):
             query.pop('meta_type')
         return [brain.getObject() for brain in catalog(**query)]
 
-    def _getLastEvent(self, eventInterface=None):
-        events = self._getAllEvents(eventInterface)
+    def _getLastEvent(self, eventInterface=None, use_catalog=True):
+        events = self._getAllEvents(eventInterface, use_catalog)
         if events:
             return events[-1]
 

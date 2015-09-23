@@ -391,38 +391,38 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
         """
         return self.getFolderCategory() in ['udc', 'uap', 'cu2', 'lap', 'lapm']
 
-    def getLastDeposit(self):
-        return self._getLastEvent(interfaces.IDepositEvent)
+    def getLastDeposit(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
 
-    def getLastMissingPart(self):
-        return self._getLastEvent(interfaces.IMissingPartEvent)
+    def getLastMissingPart(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IMissingPartEvent, use_catalog)
 
-    def getLastMissingPartDeposit(self):
-        return self._getLastEvent(interfaces.IMissingPartDepositEvent)
+    def getLastMissingPartDeposit(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IMissingPartDepositEvent, use_catalog)
 
-    def getLastWalloonRegionPrimo(self):
-        return self._getLastEvent(interfaces.IWalloonRegionPrimoEvent)
+    def getLastWalloonRegionPrimo(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IWalloonRegionPrimoEvent, use_catalog)
 
-    def getLastWalloonRegionOpinionRequest(self):
-        return self._getLastEvent(interfaces.IWalloonRegionOpinionRequestEvent)
+    def getLastWalloonRegionOpinionRequest(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IWalloonRegionOpinionRequestEvent, use_catalog)
 
-    def getLastAcknowledgment(self):
-        return self._getLastEvent(interfaces.IAcknowledgmentEvent)
+    def getLastAcknowledgment(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IAcknowledgmentEvent, use_catalog)
 
-    def getLastCommunalCouncil(self):
-        return self._getLastEvent(interfaces.ICommunalCouncilEvent)
+    def getLastCommunalCouncil(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ICommunalCouncilEvent, use_catalog)
 
-    def getLastCollegeReport(self):
-        return self._getLastEvent(interfaces.ICollegeReportEvent)
+    def getLastCollegeReport(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ICollegeReportEvent, use_catalog)
 
-    def getLastTheLicence(self):
-        return self._getLastEvent(interfaces.ITheLicenceEvent)
+    def getLastTheLicence(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ITheLicenceEvent, use_catalog)
 
-    def getLastWorkBeginning(self):
-        return self._getLastEvent(interfaces.IWorkBeginningEvent)
+    def getLastWorkBeginning(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IWorkBeginningEvent, use_catalog)
 
-    def getLastProrogation(self):
-        return self._getLastEvent(interfaces.IProrogationEvent)
+    def getLastProrogation(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IProrogationEvent, use_catalog)
 
     def getAllMissingPartDeposits(self):
         return self._getAllEvents(interfaces.IMissingPartDepositEvent)
