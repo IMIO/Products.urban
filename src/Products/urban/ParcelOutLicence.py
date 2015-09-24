@@ -183,6 +183,7 @@ class ParcelOutLicence(BaseFolder, BuildLicence, BrowserDefaultMixin):
             return tool.formatDate(lastTheLicenceDecisionDate.asdatetime() + relativedelta(years=+prorogation))
 
 
+
 registerType(ParcelOutLicence, PROJECTNAME)
 # end of class ParcelOutLicence
 
