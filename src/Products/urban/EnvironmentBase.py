@@ -244,11 +244,11 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         """ to be overriden """
         return {}
 
-    def getLastDeposit(self):
-        return self._getLastEvent(interfaces.IDepositEvent)
+    def getLastDeposit(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
 
-    def getLastCollegeReport(self):
-        return self._getLastEvent(interfaces.ICollegeReportEvent)
+    def getLastCollegeReport(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ICollegeReportEvent, use_catalog)
 
     def getLastDisplayingTheDecision(self):
         return self._getLastEvent(interfaces.IDisplayingTheDecisionEvent)

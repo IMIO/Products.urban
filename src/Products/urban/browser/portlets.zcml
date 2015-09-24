@@ -1,0 +1,26 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="urban">
+
+    <include package="plone.app.portlets" />
+
+    <plone:portlet
+        name="urban.portlet.urbantools"
+        interface=".portlets.IUrbanToolsPortlet"
+        assignment=".portlets.ToolsAssignment"
+        renderer=".portlets.ToolsRenderer"
+        addview=".portlets.ToolsAddForm"
+        editview=".portlets.ToolsEditForm"
+    />
+
+    <plone:portlet
+        name="urban.portlet.urbanconfig"
+        interface=".portlets.IUrbanConfigPortlet"
+        assignment=".portlets.ConfigAssignment"
+        renderer=".portlets.ConfigRenderer"
+        addview=".portlets.ConfigAddForm"
+        editview=".portlets.ConfigEditForm"
+    />
+
+</configure>

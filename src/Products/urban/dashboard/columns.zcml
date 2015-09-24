@@ -1,0 +1,34 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="urban">
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          collective.eeafaceted.z3ctable.interfaces.IFacetedTable"
+     factory=".columns.FolderManagersColumn"
+     provides="collective.eeafaceted.z3ctable.interfaces.IFacetedColumn"
+     name="folder_manager"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          collective.eeafaceted.z3ctable.interfaces.IFacetedTable"
+     factory=".columns.FacetedTitleColumn"
+     provides="collective.eeafaceted.z3ctable.interfaces.IFacetedColumn"
+     name="urban_title"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          Products.urban.dashboard.columns.FacetedTitleColumn
+          Products.ZCatalog.interfaces.ICatalogBrain
+          Products.urban.interfaces.IGenericLicence"
+     factory=".columns.LicenceTitleDisplay"
+     provides="Products.urban.browser.table.interfaces.ITitleCell"
+  />
+
+</configure>

@@ -22,13 +22,11 @@ class folderManagersVocabulary():
 
         if current_fm:
             cfm_term = SimpleTerm(
-                'me',
-                'me',
+                current_fm.UID(),
+                current_fm.UID(),
                 current_fm.Title().split('(')[0],
             )
             terms.append(cfm_term)
-
-        terms.append(SimpleTerm('all', 'all', _('All')))
 
         for foldermanager in foldermanagers:
             fm_term = SimpleTerm(

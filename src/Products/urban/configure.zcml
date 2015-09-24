@@ -15,6 +15,7 @@
   <include package="collective.z3cform.datagridfield"/>
   <include package="five.grok"/>
   <include package="imio.actionspanel"/>
+  <include package="imio.dashboard"/>
   <include package="Products.Archetypes"/>
   <include package="Products.CMFPlacefulWorkflow"/>
   <include package="Products.DataGridField"/>
@@ -35,6 +36,7 @@
     title="Products.urban: ViewUrbanMap"
     />
 
+  <include package=".dashboard" />
   <include package=".docgen" />
   <include package=".events" />
   <include package=".browser" />
@@ -130,9 +132,11 @@
     provides="plone.indexer.interfaces.IIndexableObject"
   />
 
+  <adapter name="applicantInfosIndex" factory=".indexes.applicant_applicantinfoindex" />
   <adapter name="applicantInfosIndex" factory=".indexes.genericlicence_applicantinfoindex" />
   <adapter name="applicantInfosIndex" factory=".indexes.environmentlicence_applicantinfoindex" />
   <adapter name="parcelInfosIndex" factory=".indexes.genericlicence_parcelinfoindex" />
+  <adapter name="parcelInfosIndex" factory=".indexes.parcelinfoindex" />
   <adapter name="parcelInfosIndex" factory=".indexes.parcellingterm_parcelinfoindex" />
   <adapter name="StreetsUID" factory=".indexes.genericlicence_streetsuid" />
   <adapter name="StreetNumber" factory=".indexes.genericlicence_streetnumber" />
@@ -141,6 +145,8 @@
   <adapter name="folder_manager" factory=".indexes.genericlicence_foldermanager" />
   <adapter name="folder_manager" factory=".indexes.urbanevent_foldermanager" />
   <adapter name="extraValue" factory=".indexes.rubricsfolders_extravalue" />
+  <adapter name="representatives" factory=".indexes.genericlicence_representative" />
+  <adapter name="getDecisionDate" factory=".indexes.genericlicence_decisiondate" />
 
   <interface interface=".interfaces.IUrbanCertificateOne" />
   <interface interface=".interfaces.IUrbanCertificateTwo" />

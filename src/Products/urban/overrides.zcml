@@ -1,0 +1,21 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           i18n_domain="urban">
+
+    <configure package="collective.eeafaceted.collectionwidget">
+        <browser:page
+            for="*"
+            name="render_collection_widget_term"
+            class="Products.urban.dashboard.overrides.RenderLicenceTermView"
+            template="browser/templates/term.pt"
+            permission="zope2.View"
+            />
+
+        <utility
+           factory="Products.urban.dashboard.vocabularies.CollectionCategory"
+           name="collective.eeafaceted.collectionwidget.collectioncategoryvocabulary"
+           provides="zope.schema.interfaces.IVocabularyFactory"
+        />
+    </configure>
+
+</configure>

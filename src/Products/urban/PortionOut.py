@@ -25,6 +25,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.utils import DisplayList
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.UrbanTool import DB_QUERY_ERROR
 ##/code-section module-header
 
@@ -236,9 +237,18 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         parcel_infos = self.getIndexValue()
         brains = []
         if licence_type:
-            brains = catalog(portal_type=licence_type, sort_limit=2, parcelInfosIndex=parcel_infos)
+            brains = catalog(
+                portal_type=licence_type,
+                sort_limit=2,
+                parcelInfosIndex=parcel_infos,
+                object_provides=IGenericLicence.__identifier__
+            )
         else:
-            brains = catalog(sort_limit=2, parcelInfosIndex=parcel_infos)
+            brains = catalog(
+                sort_limit=2,
+                parcelInfosIndex=parcel_infos,
+                object_provides=IGenericLicence.__identifier__
+            )
         return len([brain for brain in brains if brain.id != container.id]) > 0
 
     security.declarePublic('getRelatedLicences')

@@ -1,0 +1,24 @@
+<tal:defines define="term view/term;
+                     category view/category;
+                     licence_type view/licence_type;
+                     widget python: view.widget;
+                     wid python:widget.data.getId();">
+          <li tal:define="
+            term_id python:term.token;
+            term_label python:term.title[0];
+            term_label python:widget.translate(term_label);
+            redirect_to python:term.title[1];
+            default_class python:term_id == widget.default and 'faceted-tag-selected' or '';"
+            tal:attributes="
+            class python: not category and default_class + ' no-category-tag' or default_class;
+            value python:term_id;
+            title term_label;
+            id string:${wid}${term_id};
+            data-kept-criteria python:widget.kept_criteria_as_json(term_id);">
+               <a href="javascript:;"
+                  tal:attributes="href python: not redirect_to and 'javascript:;;' or redirect_to;
+                                  class python: view.get_link_class(licence_type)"
+                  tal:content="term_label" />
+               <a tal:replace="structure python: view.get_add_licence_link(licence_type)" />
+          </li>
+</tal:defines>

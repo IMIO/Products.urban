@@ -16,51 +16,64 @@ __docformat__ = 'plaintext'
 
 from Products.Archetypes.interfaces import IBaseFolder
 
+from Products.urban.interfaces import IApplicant
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IParcellingTerm
+from Products.urban.interfaces import IPortionOut
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IUrbanEventType
 
 from plone.indexer import indexer
 
 
+@indexer(IApplicant)
+def applicant_applicantinfoindex(object):
+    """
+    Return the informations to index about the applicants
+    """
+    return _get_applicantsinfoindex(object)
+
+
 @indexer(IGenericLicence)
 def genericlicence_applicantinfoindex(object):
     """
-        Return the informations to index about the applicants
+    Return the informations to index about the applicants
     """
     contacts_info = []
     contacts = object.getApplicants() + object.getProprietaries()
     for contact in contacts:
-        contacts_info.append(contact.getName1())
-        contacts_info.append(contact.getName2())
-        contacts_info.append(contact.getSociety())
-        contacts_info.append(contact.getNationalRegister())
-    return contacts_info
+        contacts_info.extend(_get_applicantsinfoindex(contact))
+    return list(set(contacts_info))
 
 
 @indexer(IEnvironmentLicence)
 def environmentlicence_applicantinfoindex(object):
     """
-        Return the informations to index about the applicants
+    Return the informations to index about the applicants
     """
     applicants_info = []
     for applicant in object.getApplicants():
-        applicants_info.append(applicant.getName1())
-        applicants_info.append(applicant.getName2())
-        applicants_info.append(applicant.getSociety())
-        applicants_info.append(applicant.getNationalRegister())
-    for corporation in object.getCorporations():
-        applicants_info.append(applicant.getName1())
-        applicants_info.append(applicant.getName2())
+        applicants_info.extend(_get_applicantsinfoindex(applicant))
+    return list(set(applicants_info))
+
+
+def _get_applicantsinfoindex(applicant):
+    applicants_info = [
+        applicant.getName1(),
+        applicant.getName2(),
+        applicant.getSociety(),
+        applicant.getNationalRegister(),
+    ]
+    if hasattr(applicant, 'getDenomination'):
         applicants_info.append(applicant.getDenomination())
+    if hasattr(applicant, 'getBceNumber'):
         applicants_info.append(applicant.getBceNumber())
-    return applicants_info
+    return [info for info in applicants_info if info]
 
 
-@indexer(IGenericLicence)
-def genericlicence_parcelinfoindex(object):
+@indexer(IPortionOut)
+def parcelinfoindex(obj):
     """
     Indexes some informations about the parcels of 'self'
     It builds a list of parcels infos.  Parcels infos are :
@@ -76,27 +89,29 @@ def genericlicence_parcelinfoindex(object):
     This index is a ZCTextIndex based on the plone_lexicon so we
     are sure that indexed values are lowercase
     """
-    parcelsInfos = []
-    try:
-        for parcel in object.getParcels():
-            parcelsInfos.append(parcel.getIndexValue())
-    except:
-        pass
-    return parcelsInfos
+    return [obj.getIndexValue()]
+
+
+@indexer(IGenericLicence)
+def genericlicence_parcelinfoindex(obj):
+    """
+    Index parcels of a licence
+    """
+    parcels_infos = []
+    if hasattr(obj, 'getParcels'):
+        parcels_infos = list(set([p.getIndexValue() for p in obj.getParcels()]))
+    return parcels_infos
 
 
 @indexer(IParcellingTerm)
-def parcellingterm_parcelinfoindex(object):
+def parcellingterm_parcelinfoindex(obj):
     """
-    Indexes some informations about the parcels of a parcelling term
+    Index parcels of a parcelling term
     """
-    parcelsInfos = []
-    try:
-        for parcel in object.getParcels():
-            parcelsInfos.append(parcel.getIndexValue())
-    except:
-        pass
-    return parcelsInfos
+    parcels_infos = []
+    if hasattr(obj, 'getParcels'):
+        parcels_infos = list(set([p.getIndexValue() for p in obj.getParcels()]))
+    return parcels_infos
 
 
 @indexer(IGenericLicence)
@@ -151,3 +166,16 @@ def rubricsfolders_extravalue(object):
         return ['0', '1', '2', '3']
     else:
         return ['']
+
+
+@indexer(IGenericLicence)
+def genericlicence_representative(licence):
+    representatives_uids = [rep.UID() for rep in licence.getRepresentatives()]
+    return representatives_uids
+
+
+@indexer(IGenericLicence)
+def genericlicence_decisiondate(licence):
+    decision_event = licence.getLastTheLicence(use_catalog=False)
+    if decision_event:
+        return decision_event.getEventDate()

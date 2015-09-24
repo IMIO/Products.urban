@@ -1,0 +1,12 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="urban">
+
+    <!-- Licence worfklow states vocabulary -->
+    <utility
+        factory=".vocabularies.LicencesWorkflowStates"
+        name="urban.LicencesWorkflowStates"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+</configure>

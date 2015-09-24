@@ -8,6 +8,8 @@
   <include package=".table" />
   <include package=".schedule" />
 
+  <include file="portlets.zcml" />
+
   <browser:page
       for="*"
       name="wmc"
@@ -48,40 +50,8 @@
 
   <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
-     name="urban_view"
-     class=".urbanview.UrbanView"
-     template="templates/urbanview.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="Products.ATContentTypes.interfaces.IATFolder"
-     name="urban_root_view"
-     class=".urbanview.UrbanRootView"
-     template="templates/urban_root_view.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="Products.ATContentTypes.interfaces.IATFolder"
-     name="urban-macros"
-     template="templates/urbanmacros.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="Products.ATContentTypes.interfaces.IATFolder"
      name="urbainxml"
      class=".urbain_220.UrbainXMLExport"
-     permission="zope2.View"
-  />
-
-  <!-- Old migrated instances use an ATBTreeFolder to store the licences... -->
-  <browser:page
-     for="Products.ATContentTypes.interfaces.IATBTreeFolder"
-     name="urban_view"
-     class=".urbanview.UrbanView"
-     template="templates/urbanview.pt"
      permission="zope2.View"
   />
 
@@ -89,14 +59,6 @@
      for="*"
      name="globalmacros"
      template="templates/globalmacros.pt"
-     permission="zope2.View"
-  />
-
-
-  <browser:page
-     for="Products.ATContentTypes.interfaces.IATBTreeFolder"
-     name="urban-macros"
-     template="templates/urbanmacros.pt"
      permission="zope2.View"
   />
 
@@ -275,21 +237,6 @@
      name="fieldeditoverlay"
      class=".fieldoverlay_edit.FieldEditView"
      template="templates/fieldoverlay_edit.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="*"
-     name="urbansearchview"
-     class=".urbansearchview.UrbanSearchView"
-     template="templates/urbansearchview.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     name="urbansearch-macros"
-     for="*"
-     template="templates/urbansearchmacros.pt"
      permission="zope2.View"
   />
 

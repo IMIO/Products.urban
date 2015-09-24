@@ -23,24 +23,34 @@ from Products.CMFCore.utils import getToolByName
 import transaction
 ##code-section HEAD
 from Acquisition import aq_base
+from Products.Archetypes.event import ObjectInitializedEvent
+from Products.Archetypes.event import EditBegunEvent
 from Products.CMFPlone.utils import base_hasattr
 from Products.urban.config import DefaultTexts
-from zExceptions import BadRequest
 from Products.urban.config import URBAN_TYPES
+from Products.urban.exportimport import updateAllUrbanTemplates
+from Products.urban.interfaces import IContactFolder
+from Products.urban.interfaces import ILicenceContainer
+from Products.urban.utils import generatePassword
 from Products.urban.utils import getAllLicenceFolderIds
 from Products.urban.utils import getLicenceFolderId
-from Products.urban.interfaces import ILicenceContainer, IContactFolder
+
+from datetime import date
+from eea.facetednavigation.layout.interfaces import IFacetedLayout
+from imio.dashboard.utils import _updateDefaultCollectionFor
+from plone import api
+from plone.portlets.interfaces import IPortletManager
+from plone.portlets.interfaces import ILocalPortletAssignmentManager
+from plone.portlets.constants import CONTEXT_CATEGORY
+from zExceptions import BadRequest
 from zope.interface import alsoProvides, directlyProvides
 from zope.component import queryUtility
-from zope.component import createObject
 from zope.component.interface import getInterface
 from zope.i18n.interfaces import ITranslationDomain
 from zope import event
-from Products.Archetypes.event import ObjectInitializedEvent
-from Products.Archetypes.event import EditBegunEvent
-from exportimport import updateAllUrbanTemplates
-from Products.urban.utils import generatePassword
-from datetime import date
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+
 import pickle
 ##/code-section HEAD
 
@@ -53,7 +63,7 @@ def setupHideToolsFromNavigation(context):
     # uncatalog tools
     site = context.getSite()
     toolnames = ['portal_urban']
-    portalProperties = getToolByName(site, 'portal_properties')
+    portalProperties = api.portal.get_tool('portal_properties')
     navtreeProperties = getattr(portalProperties, 'navtree_properties')
     if navtreeProperties.hasProperty('idsNotToList'):
         for toolname in toolnames:
@@ -73,7 +83,7 @@ def updateRoleMappings(context):
     """after workflow changed update the roles mapping. this is like pressing
     the button 'Update Security Setting' and portal_workflow"""
     if isNoturbanProfile(context): return
-    wft = getToolByName(context.getSite(), 'portal_workflow')
+    wft = api.portal.get_tool('portal_workflow')
     wft.updateRoleMappings()
 
 def postInstall(context):
@@ -113,7 +123,7 @@ def postInstall(context):
             quick_installer.installProduct(dependency)
 
     #add our own portal_types to portal_factory
-    factory_tool = getToolByName(site, "portal_factory")
+    factory_tool = api.portal.get_tool('portal_factory')
     alreadyRegTypes = factory_tool.getFactoryTypes()
     typesToRegister = {
         'Architect': 1,
@@ -136,6 +146,9 @@ def postInstall(context):
     logger.info("addApplicationFolders : starting...")
     addApplicationFolders(context)
     logger.info("addApplicationFolders : Done")
+    logger.info("setupImioDashboard : starting...")
+    setupImioDashboard(context)
+    logger.info("setupImioDashboard : Done")
     logger.info("addGlobalFolders : starting...")
     addGlobalFolders(context)
     logger.info("addGlobalFolders : Done")
@@ -159,7 +172,7 @@ def postInstall(context):
 
 
 ##code-section FOOT
-def _(msgid, domain, context):
+def _(msgid, domain):
     translation_domain = queryUtility(ITranslationDomain, domain)
     return translation_domain.translate(msgid, target_language='fr', default='')
 
@@ -209,7 +222,7 @@ def createFolderDefaultValues(folder, objects_list, portal_type=''):
 
 def createVocabularyFolder(container, folder_id, site, allowedtypes='UrbanVocabularyTerm', foldertype='Folder'):
     if folder_id not in container.objectIds():
-        new_folder_id = container.invokeFactory(foldertype, id=folder_id, title=_("%s_folder_title" % folder_id, 'urban', context=site.REQUEST))
+        new_folder_id = container.invokeFactory(foldertype, id=folder_id, title=_("%s_folder_title" % folder_id, 'urban'))
         new_folder = getattr(container, new_folder_id)
         setFolderAllowedTypes(new_folder, allowedtypes)
     else:
@@ -249,7 +262,7 @@ def addUrbanConfigFolders(context):
     if context.readDataFile('urban_marker.txt') is None:
         return
     site = context.getSite()
-    tool = getToolByName(site, 'portal_urban')
+    tool = api.portal.get_tool('portal_urban')
 
     profile_name = context._profile_path.split('/')[-1]
     module_name = 'Products.urban.profiles.%s.config_default_values' % profile_name
@@ -260,7 +273,11 @@ def addUrbanConfigFolders(context):
     for urban_type in URBAN_TYPES:
         licenceConfigId = urban_type.lower()
         if not hasattr(aq_base(tool), licenceConfigId):
-            config_folder_id = tool.invokeFactory("LicenceConfig", id=licenceConfigId, title=_("%s_urbanconfig_title" % urban_type.lower(), 'urban', context=site.REQUEST))
+            config_folder_id = tool.invokeFactory(
+                "LicenceConfig",
+                id=licenceConfigId,
+                title=_("%s_urbanconfig_title" % urban_type.lower(), 'urban')
+            )
             config_folder = getattr(tool, config_folder_id)
             # no mutator available because the field is defined with 'read only' property
             config_folder.licencePortalType = urban_type
@@ -275,7 +292,11 @@ def addUrbanConfigFolders(context):
         #parameters for every LicenceConfigs
         #add UrbanEventTypes folder
         if not hasattr(aq_base(config_folder), 'urbaneventtypes'):
-            newFolderid = config_folder.invokeFactory("Folder", id="urbaneventtypes", title=_("urbaneventtypes_folder_title", 'urban', context=site.REQUEST))
+            newFolderid = config_folder.invokeFactory(
+                "Folder",
+                id="urbaneventtypes",
+                title=_("urbaneventtypes_folder_title", 'urban')
+            )
             newFolder = getattr(config_folder, newFolderid)
             setFolderAllowedTypes(newFolder, ['UrbanEventType', 'OpinionRequestEventType'])
 
@@ -290,8 +311,7 @@ def addUrbanVocabularies(context):
     """ Add the vocabularyTerm objects """
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
-    site = context.getSite()
-    tool = getToolByName(site, 'portal_urban')
+    tool = api.portal.get_tool('portal_urban')
 
     profile_name = context._profile_path.split('/')[-1]
     module_name = 'Products.urban.profiles.%s.config_default_values' % profile_name
@@ -330,7 +350,7 @@ def addUrbanVocabularies(context):
 def addRubricValues(context, config_folder):
 
     site = context.getSite()
-    catalog = getToolByName(site, 'portal_catalog')
+    catalog = api.portal.get_tool('portal_catalog')
     pickled_dgrne_slurp = context.openDataFile('slurped_dgrne.pickle')
     dgrne_slurp = pickle.load(pickled_dgrne_slurp)
 
@@ -387,7 +407,6 @@ def addRubricValues(context, config_folder):
 def addExploitationConditions(context, config_folder):
     """ add sectorial and integral conditions vocabulary terms """
 
-    site = context.getSite()
     pickled_dgrne_slurp = context.openDataFile('slurped_dgrne.pickle')
     dgrne_slurp = pickle.load(pickled_dgrne_slurp)
 
@@ -399,7 +418,7 @@ def addExploitationConditions(context, config_folder):
             config_folder.invokeFactory(
                 'Folder',
                 id=conditionsfolder_id,
-                title=_("%s_folder_title" % conditionsfolder_id, 'urban', context=site.REQUEST)
+                title=_("%s_folder_title" % conditionsfolder_id, 'urban')
             )
             conditions_folder = getattr(config_folder, conditionsfolder_id)
             setFolderAllowedTypes(conditions_folder, 'UrbanVocabularyTerm')
@@ -425,7 +444,6 @@ def addExploitationConditions(context, config_folder):
                     mutator(newvalue)
 
 
-
 def addUrbanGroups(context):
     """
        Add a group of 'urban' application users...
@@ -444,6 +462,7 @@ def addUrbanGroups(context):
     #one with map Readers
     site.portal_groups.addGroup("urban_map_readers", title="Urban Map Readers")
     site.portal_groups.setRolesForGroup('urban_map_readers', ('UrbanMapReader', ))
+
 
 def setDefaultApplicationSecurity(context):
     """
@@ -524,7 +543,11 @@ def addGlobalFolders(context):
     createVocabularyFolders(container=tool, vocabularies=vocabularies, site=site)
 
     if not hasattr(tool, "globaltemplates"):
-        templates_id = tool.invokeFactory("Folder", id="globaltemplates", title=_("globaltemplates_folder_title", 'urban', context=site.REQUEST))
+        templates_id = tool.invokeFactory(
+            "Folder",
+            id="globaltemplates",
+            title=_("globaltemplates_folder_title", 'urban')
+        )
         templates = getattr(tool, templates_id)
         templates.setConstrainTypesMode(1)
         templates.setLocallyAllowedTypes(['UrbanTemplate', 'StyleTemplate', 'Folder'])
@@ -532,25 +555,38 @@ def addGlobalFolders(context):
 
     folder = tool.globaltemplates
     if not hasattr(folder, "urbantemplates"):
-        templates_id = folder.invokeFactory("Folder", id="urbantemplates", title=_("urbantemplates_folder_title", 'urban', context=site.REQUEST))
+        templates_id = folder.invokeFactory(
+            "Folder",
+            id="urbantemplates",
+            title=_("urbantemplates_folder_title", 'urban')
+        )
         templates = getattr(folder, templates_id)
         templates.setConstrainTypesMode(1)
         templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate'])
         templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate'])
 
     if not hasattr(folder, "environmenttemplates"):
-        templates_id = folder.invokeFactory("Folder", id="environmenttemplates", title=_("environmenttemplates_folder_title", 'urban', context=site.REQUEST))
+        templates_id = folder.invokeFactory(
+            "Folder",
+            id="environmenttemplates",
+            title=_("environmenttemplates_folder_title", 'urban')
+        )
         templates = getattr(folder, templates_id)
         templates.setConstrainTypesMode(1)
         templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate'])
         templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate'])
 
     if not hasattr(tool, "additional_layers"):
-        additional_layers_id = tool.invokeFactory("Folder", id="additional_layers", title=_("additonal_layers_folder_title", 'urban', context=site.REQUEST))
+        additional_layers_id = tool.invokeFactory(
+            "Folder",
+            id="additional_layers",
+            title=_("additonal_layers_folder_title", 'urban')
+        )
         additional_layers = getattr(tool, additional_layers_id)
         additional_layers.setConstrainTypesMode(1)
         additional_layers.setLocallyAllowedTypes(['Layer'])
         additional_layers.setImmediatelyAddableTypes(['Layer'])
+
 
 def adaptDefaultPortal(context):
     """
@@ -574,9 +610,9 @@ def adaptDefaultPortal(context):
     #change the content of the front-page
     try:
         frontpage = getattr(site, 'front-page')
-        frontpage.setTitle(_("front_page_title", 'urban', context=site.REQUEST))
-        frontpage.setDescription(_("front_page_descr", 'urban', context=site.REQUEST))
-        frontpage.setText(_("front_page_text", 'urban', context=site.REQUEST), mimetype='text/html')
+        frontpage.setTitle(_("front_page_title", 'urban'))
+        frontpage.setDescription(_("front_page_descr", 'urban'))
+        frontpage.setText(_("front_page_text", 'urban'), mimetype='text/html')
         #remove the presentation mode
         frontpage.setPresentation(False)
         frontpage.reindexObject()
@@ -603,9 +639,8 @@ def addApplicationFolders(context):
     site.setLayout('redirectto_urban_root_view')
 
     if not hasattr(aq_base(site), "urban"):
-        newFolderid = site.invokeFactory("Folder", id="urban", title=_("urban", 'urban', context=site.REQUEST))
+        newFolderid = site.invokeFactory("Folder", id="urban", title=_("urban", 'urban'))
         newFolder = getattr(site, newFolderid)
-        newFolder.setLayout('urban_root_view')
     else:
         newFolder = getattr(site, 'urban')
 
@@ -619,13 +654,11 @@ def addApplicationFolders(context):
             licence_folder_id = getLicenceFolderId(urban_type)
             newFolderid = newFolder.invokeFactory(
                 "Folder", id=licence_folder_id,
-                title=_(urban_type, 'urban', context=site.REQUEST)
+                title=_(urban_type, 'urban')
             )
             newSubFolder = getattr(newFolder, newFolderid)
             alsoProvides(newSubFolder, ILicenceContainer)
             setFolderAllowedTypes(newSubFolder, urban_type)
-            #set the layout to "urban_view"
-            newSubFolder.setLayout('urban_view')
             #manage the 'Add' permissions...
             try:
                 newSubFolder.manage_permission('urban: Add %s' % urban_type, ['Manager', 'Editor', ], acquire=0)
@@ -640,7 +673,11 @@ def addApplicationFolders(context):
 
     #add a folder that will contains architects
     if not hasattr(newFolder, "architects"):
-        newFolderid = newFolder.invokeFactory("Folder", id="architects", title=_("architects_folder_title", 'urban', context=site.REQUEST))
+        newFolderid = newFolder.invokeFactory(
+            "Folder",
+            id="architects",
+            title=_("architects_folder_title", 'urban')
+        )
         newSubFolder = getattr(newFolder, newFolderid)
         setFolderAllowedTypes(newSubFolder, 'Architect')
         newSubFolder.setLayout('architects_folderview')
@@ -649,7 +686,11 @@ def addApplicationFolders(context):
 
     #add a folder that will contains geometricians
     if not hasattr(newFolder, "geometricians"):
-        newFolderid = newFolder.invokeFactory("Folder", id="geometricians", title=_("geometricians_folder_title", 'urban', context=site.REQUEST))
+        newFolderid = newFolder.invokeFactory(
+            "Folder",
+            id="geometricians",
+            title=_("geometricians_folder_title", 'urban')
+        )
         newSubFolder = getattr(newFolder, newFolderid)
         setFolderAllowedTypes(newSubFolder, 'Geometrician')
         newSubFolder.setLayout('geometricians_folderview')
@@ -658,7 +699,11 @@ def addApplicationFolders(context):
 
     #add a folder that will contains notaries
     if not hasattr(newFolder, "notaries"):
-        newFolderid = newFolder.invokeFactory("Folder", id="notaries", title=_("notaries_folder_title", 'urban', context=site.REQUEST))
+        newFolderid = newFolder.invokeFactory(
+            "Folder",
+            id="notaries",
+            title=_("notaries_folder_title", 'urban')
+        )
         newSubFolder = getattr(newFolder, newFolderid)
         setFolderAllowedTypes(newSubFolder, 'Notary')
         newSubFolder.setLayout('notaries_folderview')
@@ -667,12 +712,80 @@ def addApplicationFolders(context):
 
     #add a folder that will contains parcellings
     if not hasattr(newFolder, "parcellings"):
-        newFolderid = newFolder.invokeFactory("Folder", id="parcellings", title=_("parcellings_folder_title", 'urban', context=site.REQUEST))
+        newFolderid = newFolder.invokeFactory(
+            "Folder",
+            id="parcellings",
+            title=_("parcellings_folder_title", 'urban')
+        )
         newSubFolder = getattr(newFolder, newFolderid)
         setFolderAllowedTypes(newSubFolder, 'ParcellingTerm')
         newSubFolder.setLayout('parcellings_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add ParcellingTerm', ['Manager', 'Editor', ], acquire=0)
+
+
+def setupImioDashboard(context):
+    """
+    Enable dashboard with faceted navigation on urban folder.
+    """
+    site = context.getSite()
+    urban_folder = getattr(site, 'urban')
+    _activate_dashboard_navigation(urban_folder, '/dashboard/config/all.xml')
+
+    all_licences_collection_id = 'collection_all_licences'
+    if all_licences_collection_id not in urban_folder.objectIds():
+        _create_dashboard_collection(
+            urban_folder,
+            id=all_licences_collection_id,
+            title=_('All', 'urban'),
+            filter_type=[type for type in URBAN_TYPES]
+        )
+
+    urban_folder.moveObjectToPosition(all_licences_collection_id, 0)
+    all_licences_collection = getattr(urban_folder, all_licences_collection_id)
+    _updateDefaultCollectionFor(urban_folder, all_licences_collection.UID())
+
+    for urban_type in URBAN_TYPES:
+        folder = getattr(urban_folder, urban_type.lower() + 's')
+        _activate_dashboard_navigation(folder, '/dashboard/config/%s.xml' % urban_type)
+        collection_id = 'collection_%s' % urban_type.lower()
+        if collection_id not in folder.objectIds():
+            setFolderAllowedTypes(folder, 'DashboardCollection')
+            _create_dashboard_collection(
+                folder,
+                id=collection_id,
+                title=_(urban_type, 'urban'),
+                filter_type=[urban_type],
+            )
+            setFolderAllowedTypes(folder, urban_type)
+
+
+def _create_dashboard_collection(container, id, title, filter_type):
+    collection_id = container.invokeFactory(
+        'DashboardCollection',
+        id=id,
+        title=title,
+        query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': filter_type}],
+        customViewFields=('urban_title', 'CreationDate', 'folder_manager', 'actions'),
+        sort_on=u'created',
+        sort_reversed=True,
+        b_size=30
+    )
+    collection = getattr(container, collection_id)
+    return collection
+
+
+def _activate_dashboard_navigation(context, config_path=''):
+    subtyper = context.restrictedTraverse('@@faceted_subtyper')
+    if subtyper.is_faceted:
+        return
+    subtyper.enable()
+    context.restrictedTraverse('@@faceted_settings').toggle_left_column()
+    IFacetedLayout(context).update_layout('faceted-table-items')
+    context.unrestrictedTraverse('@@faceted_exportimport').import_xml(
+        import_file=open(os.path.dirname(__file__) + config_path)
+    )
+
 
 def addTestUsers(site):
     is_mountpoint = len(site.absolute_url_path().split('/')) > 2
@@ -820,7 +933,7 @@ def createLicence(site, licence_type, data):
     """
     urban_tool = site.portal_urban
     urban_folder = site.urban
-    catalog = getToolByName(site, 'portal_catalog')
+    catalog = api.portal.get_tool('portal_catalog')
 
     def getDummyValueForField(field, licence):
         if field.getName() in ['contributors', 'creators', 'language',
@@ -958,7 +1071,7 @@ def configurePMWSClientForUrban(context):
 
     site = context.getSite()
 
-    registry = getToolByName(site, 'portal_registry')
+    registry = api.portal.get_tool('portal_registry')
 
     view = site.restrictedTraverse('@@ws4pmclient-settings')
     connected = view._soap_connectToPloneMeeting()
@@ -1029,7 +1142,7 @@ def setupExtra(context):
         from Products.CPUtils.Extensions.utils import configure_ckeditor
         if not hasattr(portal.portal_properties, 'ckeditor_properties') or portal.portal_properties.site_properties.default_editor != 'CKeditor':
             configure_ckeditor(portal, custom='urban')
-            properties_tool = getToolByName(portal, 'portal_properties')
+            properties_tool = api.portal.get_tool('portal_properties')
             custom_menu_style = u"[\n/* Styles Urban */\n{ name : 'Urban Body'\t\t, element : 'p', attributes : { 'class' : 'UrbanBody' } }, \n{ name : 'Urban title'\t       , element : 'p', attributes : { 'class' : 'UrbanTitle' } }, \n{ name : 'Urabn title 2'\t, element : 'p', attributes : { 'class' : 'UrbanTitle2' } }, \n{ name : 'Urban title 3'\t, element : 'p', attributes : { 'class' : 'UrbanTitle3' } }, \n{ name : 'Urban address'\t, element : 'p', attributes : { 'class' : 'UrbanAddress' } }, \n{ name : 'Urban table'\t       , element : 'p', attributes : { 'class' : 'UrbanTable' } }, \n/* Block Styles */\n{ name : 'Grey Title'\t\t, element : 'h2', styles : { 'color' : '#888' } }, \n{ name : 'Grey Sub Title'\t, element : 'h3', styles : { 'color' : '#888' } }, \n{ name : 'Discreet bloc'\t, element : 'p', attributes : { 'class' : 'discreet' } }, \n/* Inline styles */\n{ name : 'Discreet text'\t, element : 'span', attributes : { 'class' : 'discreet' } }, \n{ name : 'Marker: Yellow'\t, element : 'span', styles : { 'background-color' : 'Yellow' } }, \n{ name : 'Typewriter'\t\t, element : 'tt' }, \n{ name : 'Computer Code'\t, element : 'code' }, \n{ name : 'Keyboard Phrase'\t, element : 'kbd' }, \n{ name : 'Sample Text'\t\t, element : 'samp' }, \n{ name : 'Variable'\t\t, element : 'var' }, \n{ name : 'Deleted Text'\t\t, element : 'del' }, \n{ name : 'Inserted Text'\t, element : 'ins' }, \n{ name : 'Cited Work'\t\t, element : 'cite' }, \n{ name : 'Inline Quotation'\t, element : 'q' }, \n{ name : 'Language: RTL'\t, element : 'span', attributes : { 'dir' : 'rtl' } }, \n{ name : 'Language: LTR'\t, element : 'span', attributes : { 'dir' : 'ltr' } }, \n/* Objects styles */\n{ name : 'Image on right'\t, element : 'img', attributes : { 'class' : 'image-right' } }, \n{ name : 'Image on left'\t, element : 'img', attributes : { 'class' : 'image-left' } }, \n{ name : 'Image centered'\t, element : 'img', attributes : { 'class' : 'image-inline' } }, \n{ name : 'Borderless Table'    , element : 'table', styles: { 'border-style': 'hidden', 'background-color' : '#E6E6FA' } }, \n{ name : 'Square Bulleted List', element : 'ul', styles : { 'list-style-type' : 'square' } }\n\n]\n"
             ckprops = properties_tool.ckeditor_properties
             ckprops.manage_changeProperties(menuStyles=custom_menu_style)
@@ -1040,7 +1153,7 @@ def setupExtra(context):
     #we add additional layers here because we take informations from portal_urban
     #that are set manually after install
     logger.info("Adding additional layers")
-    portal_urban = getToolByName(portal, 'portal_urban')
+    portal_urban = api.portal.get_tool('portal_urban')
     if not portal_urban:
         logger.error("Could not get the portal_urban tool!")
         return
@@ -1057,7 +1170,11 @@ def setupExtra(context):
 
     if not hasattr(portal_urban, "additional_layers"):
         logger.warning("No 'additonal_layers' folder found in portal_urban, we create it.")
-        additional_layers_id = portal_urban.invokeFactory("Folder", id="additional_layers", title=_("additonal_layers_folder_title", 'urban', context=portal.REQUEST))
+        additional_layers_id = portal_urban.invokeFactory(
+            "Folder",
+            id="additional_layers",
+            title=_("additonal_layers_folder_title", 'urban')
+        )
         additional_layers = getattr(portal_urban, additional_layers_id)
         additional_layers.setConstrainTypesMode(1)
         additional_layers.setLocallyAllowedTypes(['Layer'])

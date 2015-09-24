@@ -1,0 +1,10 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone">
+
+    <include file="autocomplete.zcml" />
+    <include file="columns.zcml" />
+    <include file="vocabularies.zcml" />
+
+</configure>

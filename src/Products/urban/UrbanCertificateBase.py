@@ -262,6 +262,12 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     # Manually created methods
 
+    security.declarePublic('getRepresentatives')
+    def getRepresentatives(self):
+        """
+        """
+        return self.getNotaryContact()
+
     security.declarePublic('attributeIsUsed')
     def attributeIsUsed(self, name):
         """
@@ -405,12 +411,12 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         return res
 
     security.declarePublic('getLastDeposit')
-    def getLastDeposit(self):
-        return self._getLastEvent(interfaces.IDepositEvent)
+    def getLastDeposit(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
 
     security.declarePublic('getLastTheLicence')
-    def getLastTheLicence(self):
-        return self._getLastEvent(interfaces.ITheLicenceEvent)
+    def getLastTheLicence(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ITheLicenceEvent, use_catalog)
 
     security.declarePublic('getSpecificFeaturesForTemplate')
     def getSpecificFeaturesForTemplate(self, where=[''], active_style='', inactive_style='striked'):

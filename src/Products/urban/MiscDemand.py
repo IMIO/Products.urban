@@ -91,14 +91,20 @@ class MiscDemand(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
 
     # Manually created methods
 
-    def getLastDeposit(self):
-        return self._getLastEvent(interfaces.IDepositEvent)
+    security.declarePublic('getRepresentatives')
+    def getRepresentatives(self):
+        """
+        """
+        return self.getArchitects()
 
-    def getLastCollegeReport(self):
-        return self._getLastEvent(interfaces.ICollegeReportEvent)
+    def getLastDeposit(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
 
-    def getLastTheLicence(self):
-        return self._getLastEvent(interfaces.ITheLicenceEvent)
+    def getLastCollegeReport(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ICollegeReportEvent, use_catalog)
+
+    def getLastTheLicence(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ITheLicenceEvent, use_catalog)
 
 
 
