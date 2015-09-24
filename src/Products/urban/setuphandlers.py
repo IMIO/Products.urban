@@ -659,8 +659,6 @@ def addApplicationFolders(context):
             newSubFolder = getattr(newFolder, newFolderid)
             alsoProvides(newSubFolder, ILicenceContainer)
             setFolderAllowedTypes(newSubFolder, urban_type)
-            #set the layout to "urban_view"
-            newSubFolder.setLayout('urban_view')
             #manage the 'Add' permissions...
             try:
                 newSubFolder.manage_permission('urban: Add %s' % urban_type, ['Manager', 'Editor', ], acquire=0)
