@@ -248,7 +248,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
                     )
         return DisplayList([('eventDate', self.getEventDateLabel().decode('utf-8'))] + activated_date_fields)
 
-    security.declarePublic('getUrbanTemplates')
+    security.declarePublic('getTemplates')
     def getTemplates(self):
         templates = [obj for obj in self.objectValues() if IUrbanTemplate.providedBy(obj)]
         return templates
