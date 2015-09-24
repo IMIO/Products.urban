@@ -14,8 +14,6 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
-from collective.delaycalculator import workday
-from datetime import date
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
@@ -30,7 +28,9 @@ from Products.DataGridField.SelectColumn import SelectColumn
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from collective.delaycalculator import workday
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
+from datetime import date
 from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
