@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2015-09-15 11:23+0000\n"
+"POT-Creation-Date: 2015-03-30 08:52+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -525,6 +525,9 @@ msgstr "Créer un document"
 
 msgid "creation date"
 msgstr "Date de création"
+
+msgid "dashboardtemplates_folder_title"
+msgstr "Modèles tableaux de bord"
 
 msgid "date_day_01"
 msgstr "1er"
@@ -1831,6 +1834,11 @@ msgstr "Date de debut de la séance de réclamations"
 #: Contact.py
 msgid "urban_label_claimingText"
 msgstr "Texte de la réclamation"
+
+#. Default: "Claimsdate"
+#: UrbanEvent.py
+msgid "urban_label_claimsDate"
+msgstr ""
 
 #. Default: "Claimstext"
 #: UrbanEvent.py
@@ -3328,27 +3336,6 @@ msgstr "Paramètres des Certificats d'urbanisme 1"
 
 msgid "urbancertificateones"
 msgstr "Certificats d'urbanisme 1"
-
-msgid "urbancertificatetwo_searchacceptedlicences"
-msgstr "certificats d'urbanisme 2 acceptés"
-
-msgid "urbancertificatetwo_searchalllicences"
-msgstr "tous les certificats d'urbanisme 2 "
-
-msgid "urbancertificatetwo_searchincompletelicences"
-msgstr "certificats d'urbanisme 2 incomplets"
-
-msgid "urbancertificatetwo_searchinprogresslicences"
-msgstr "certificats d'urbanisme 2 en cours"
-
-msgid "urbancertificatetwo_searchrefusedlicences"
-msgstr "certificats d'urbanisme 2 refusés"
-
-msgid "urbancertificatetwo_searchretiredlicences"
-msgstr "certificats d'urbanisme 2 retirés"
-
-msgid "urbancertificatetwo_urbanconfig_title"
-msgstr "Paramètres des Certificats d'urbanisme 2"
 
 msgid "urbancertificatetwos"
 msgstr "Certificats d'urbanisme 2"

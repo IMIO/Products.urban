@@ -1,0 +1,5 @@
+<configure
+  xmlns:browser="http://namespaces.zope.org/browser"
+  i18n_domain="urban">
+
+</configure>

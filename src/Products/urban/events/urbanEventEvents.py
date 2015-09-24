@@ -51,7 +51,7 @@ def generateSingletonDocument(urban_event, event):
 
     templates = urban_event.getTemplates()
     if len(templates) == 1:
-        urban_event.REQUEST.set('doc_uid', templates[0].UID())
+        urban_event.REQUEST.set('template_uid', templates[0].UID())
         generation_view = urban_event.restrictedTraverse('urban-document-generation')
         generation_view.generate_persistent_doc()
 

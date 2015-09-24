@@ -96,7 +96,7 @@ class UrbanEventView(BrowserView):
     def _generateDocumentHref(self, context, template):
         """
         """
-        link = "{base_url}/urban-document-generation?doc_uid={uid}".format(
+        link = "{base_url}/urban-document-generation?template_uid={uid}".format(
             base_url=context.absolute_url(),
             uid=template.UID()
         )

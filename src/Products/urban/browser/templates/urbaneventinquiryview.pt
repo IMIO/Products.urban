@@ -176,8 +176,8 @@
                                 </form>
                                 <p>&nbsp;</p>
                             </tal:block>
-                            <tal:block condition="python: context.REQUEST.get('doc_uid') != None">
-                                <tal:block define="docObj python:context.uid_catalog(UID=context.REQUEST.get('doc_uid'))[0]">
+                            <tal:block condition="python: context.REQUEST.get('template_uid') != None">
+                                <tal:block define="docObj python:context.uid_catalog(UID=context.REQUEST.get('template_uid'))[0]">
                                     <Script tal:content="python:'document.location = \''+docObj.getObject().absolute_url()+'/external_edit\';'" />
                                 </tal:block>
                             </tal:block>

@@ -542,6 +542,17 @@ def addGlobalFolders(context):
     vocabularies = default_values['global']
     createVocabularyFolders(container=tool, vocabularies=vocabularies, site=site)
 
+    if not hasattr(tool, "dashboardtemplates"):
+        templates_id = tool.invokeFactory(
+            "Folder",
+            id="dashboardtemplates",
+            title=_("dashboardtemplates_folder_title", 'urban')
+        )
+        templates = getattr(tool, templates_id)
+        templates.setConstrainTypesMode(1)
+        templates.setLocallyAllowedTypes(['UrbanTemplate'])
+        templates.setImmediatelyAddableTypes(['UrbanTemplate'])
+
     if not hasattr(tool, "globaltemplates"):
         templates_id = tool.invokeFactory(
             "Folder",
@@ -1058,7 +1069,7 @@ def createLicence(site, licence_type, data):
         #generate the documents
         if not urban_event.objectValues():
             for template in urban_event.getTemplates():
-                urban_event.REQUEST.set('doc_uid', template.UID())
+                urban_event.REQUEST.set('template_uid', template.UID())
                 generation_view = urban_event.restrictedTraverse('urban-document-generation')
                 generation_view.generate_persistent_doc()
     return licence

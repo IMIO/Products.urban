@@ -525,6 +525,9 @@ msgstr ""
 msgid "creation date"
 msgstr ""
 
+msgid "dashboardtemplates_folder_title"
+msgstr ""
+
 msgid "date_day_01"
 msgstr ""
 

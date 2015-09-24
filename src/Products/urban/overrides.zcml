@@ -18,4 +18,15 @@
         />
     </configure>
 
+    <configure package="imio.dashboard">
+        <browser:viewlet
+            for="OFS.interfaces.IItem"
+            name="document-generation-link"
+            manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+            class="Products.urban.dashboard.generationlinks.DashboardLinksViewlet"
+            layer="imio.dashboard.interfaces.IImioDashboardLayer"
+            permission="zope2.View"
+            />
+    </configure>
+
 </configure>
