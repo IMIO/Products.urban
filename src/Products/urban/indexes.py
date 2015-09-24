@@ -55,11 +55,6 @@ def environmentlicence_applicantinfoindex(object):
     applicants_info = []
     for applicant in object.getApplicants():
         applicants_info.extend(_get_applicantsinfoindex(applicant))
-    for corporation in object.getCorporations():
-        applicants_info.append(applicant.getName1())
-        applicants_info.append(applicant.getName2())
-        applicants_info.append(applicant.getDenomination())
-        applicants_info.append(applicant.getBceNumber())
     return list(set(applicants_info))
 
 
@@ -70,6 +65,10 @@ def _get_applicantsinfoindex(applicant):
         applicant.getSociety(),
         applicant.getNationalRegister(),
     ]
+    if hasattr(applicant, 'getDenomination'):
+        applicants_info.append(applicant.getDenomination())
+    if hasattr(applicant, 'getBceNumber'):
+        applicants_info.append(applicant.getBceNumber())
     return [info for info in applicants_info if info]
 
 

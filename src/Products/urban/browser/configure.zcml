@@ -273,21 +273,6 @@
   />
 
   <browser:page
-     for="*"
-     name="urbansearchview"
-     class=".urbansearchview.UrbanSearchView"
-     template="templates/urbansearchview.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     name="urbansearch-macros"
-     for="*"
-     template="templates/urbansearchmacros.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
      for="Products.urban.interfaces.IGenericLicence"
      name="parcelsinfo"
      class=".parcelsinfo.ParcelsInfo"

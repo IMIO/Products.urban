@@ -5,7 +5,9 @@
 
     <body>
         <metal:main fill-slot="main">
+
             <metal:main_macro define-macro="main">
+
                 <metal:body define-macro="body_macro"
                             tal:define="useTabbing view/getUseTabbing;
                                         tabs view/getTabs;

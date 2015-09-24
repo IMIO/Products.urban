@@ -21,12 +21,15 @@ from plone.memoize import view
 
 class LicenceView(BrowserView):
     """
-      This manage methods common in all licences view
+    Base class for licences browser views.
     """
     def __init__(self, context, request):
         super(LicenceView, self).__init__(context, request)
         self.context = context
         self.request = request
+        # disable portlets on licences
+        self.request.set('disable_plone.rightcolumn', 1)
+        self.request.set('disable_plone.leftcolumn', 1)
 
     @view.memoize
     def getMember(self):
