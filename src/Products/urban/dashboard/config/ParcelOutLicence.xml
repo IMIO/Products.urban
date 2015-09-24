@@ -25,7 +25,7 @@
    <property name="hidealloption">1</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
-   <property name="default">ba90a4ce59fc480f9d8a3bd4ea76748d</property>
+   <property name="default">91e961a142c54d3d8e2106e6c131e27a</property>
   </criterion>
   <criterion name="c10">
    <property name="widget">autocomplete</property>
