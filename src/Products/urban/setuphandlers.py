@@ -63,7 +63,7 @@ def setupHideToolsFromNavigation(context):
     # uncatalog tools
     site = context.getSite()
     toolnames = ['portal_urban']
-    portalProperties = api.portal.get_tool('portal_properties')
+    portalProperties = getToolByName(site, 'portal_properties')
     navtreeProperties = getattr(portalProperties, 'navtree_properties')
     if navtreeProperties.hasProperty('idsNotToList'):
         for toolname in toolnames:
@@ -83,7 +83,7 @@ def updateRoleMappings(context):
     """after workflow changed update the roles mapping. this is like pressing
     the button 'Update Security Setting' and portal_workflow"""
     if isNoturbanProfile(context): return
-    wft = api.portal.get_tool('portal_workflow')
+    wft = getToolByName(context.getSite(), 'portal_workflow')
     wft.updateRoleMappings()
 
 def postInstall(context):
