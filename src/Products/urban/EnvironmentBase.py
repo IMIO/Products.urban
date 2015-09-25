@@ -306,6 +306,8 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     def getLicenceSEnforceableDate(self, displayDay, periodForAppeal):
         return workday(date(displayDay.year(), displayDay.month(), displayDay.day()), periodForAppeal)
 
+
+
 registerType(EnvironmentBase, PROJECTNAME)
 # end of class EnvironmentBase
 
