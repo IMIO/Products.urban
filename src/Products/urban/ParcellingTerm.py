@@ -79,6 +79,14 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    StringField(
+        name='DGO4Reference',
+        widget=StringField._properties['widget'](
+            label='Dgo4reference',
+            label_msgid='urban_label_DGO4Reference',
+            i18n_domain='urban',
+        ),
+    ),
     IntegerField(
         name='numberOfParcels',
         widget=IntegerField._properties['widget'](

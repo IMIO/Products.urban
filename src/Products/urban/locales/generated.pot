@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: Tue Sep 15 11:05:06 2015\n"
-"PO-Revision-Date: Tue Sep 15 11:05:06 2015\n"
+"POT-Creation-Date: Fri Sep 25 08:30:07 2015\n"
+"PO-Revision-Date: Fri Sep 25 08:30:07 2015\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "MIME-Version: 1.0\n"
@@ -109,6 +109,11 @@ msgstr ""
 #. Default: "If checked, an additional paragraph will be added in the licence document"
 #: BuildLicence.py
 msgid "urban_help_townshipCouncilFolder"
+msgstr ""
+
+#. Default: "Dgo4reference"
+#: ParcellingTerm.py
+msgid "urban_label_DGO4Reference"
 msgstr ""
 
 #. Default: "Linkedopinionrequestevent"

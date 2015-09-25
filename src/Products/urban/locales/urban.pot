@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-03-30 08:52+0000\n"
+"POT-Creation-Date: 2015-09-25 06:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,10 +48,10 @@ msgstr ""
 msgid "Architect data"
 msgstr ""
 
-msgid "Attachments"
+msgid "Article127"
 msgstr ""
 
-msgid "Article127"
+msgid "Attachments"
 msgstr ""
 
 msgid "BuildLicence"
@@ -1521,6 +1521,11 @@ msgstr ""
 msgid "urban_label_BuildLicenceNumerotation"
 msgstr ""
 
+#. Default: "Dgo4reference"
+#: ParcellingTerm.py
+msgid "urban_label_DGO4Reference"
+msgstr ""
+
 #. Default: "Declarationnumerotation"
 #: UrbanTool.py
 msgid "urban_label_DeclarationNumerotation"
@@ -1639,7 +1644,7 @@ msgstr ""
 msgid "urban_label_additionalPreviousLicences"
 msgstr ""
 
-#
+# 
 #. Default: "Adr1"
 #: RecipientCadastre.py
 msgid "urban_label_adr1"
@@ -3332,7 +3337,6 @@ msgstr ""
 
 msgid "urbancertificateones"
 msgstr ""
-
 
 msgid "urbancertificatetwos"
 msgstr ""
