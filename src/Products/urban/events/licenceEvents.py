@@ -23,7 +23,7 @@ def _setDefaultSelectValues(licence):
 def _setDefaultTextValues(licence):
     select_fields = [field for field in licence.schema.fields() if field.default_method == 'getDefaultText']
     for field in select_fields:
-        is_html = field.default_content_type == 'text/html'
+        is_html = 'html' in field.default_content_type
         default_value = licence.getDefaultText(licence, field, is_html)
         field_mutator = getattr(licence, field.mutator)
         field_mutator(default_value)

@@ -22,7 +22,7 @@ def _setDefaultTextValues(urbanevent):
     select_fields = [field for field in urbanevent.schema.fields() if field.default_method == 'getDefaultText']
 
     for field in select_fields:
-        is_html = field.default_content_type == 'text/html'
+        is_html = 'html' in field.default_content_type
         default_text = urbanevent.getDefaultText(urbanevent, field, is_html)
         rendered_text = portal_urban.renderText(default_text, urbanevent)
         field_mutator = getattr(urbanevent, field.mutator)

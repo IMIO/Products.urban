@@ -851,7 +851,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         if not context or not field:
             return ""
         urban_tool = api.portal.get_tool('portal_urban')
-        return urban_tool.getTextDefaultValue(field.getName(), context)
+        return urban_tool.getTextDefaultValue(field.getName(), context, html)
 
     security.declarePublic('getUrbanConfig')
     def getUrbanConfig(self):

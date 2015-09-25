@@ -67,7 +67,7 @@ def _setDefaultSelectValues(inquiry):
 def _setDefaultTextValues(inquiry):
     select_fields = [field for field in inquiry.schema.fields() if field.default_method == 'getDefaultText']
     for field in select_fields:
-        is_html = field.default_content_type == 'text/html'
+        is_html = 'html' in field.default_content_type
         licence = inquiry.aq_inner.aq_parent
         default_value = inquiry.getDefaultText(licence, field, is_html)
         field_mutator = getattr(inquiry, field.mutator)
