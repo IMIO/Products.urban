@@ -550,8 +550,8 @@ def addGlobalFolders(context):
         )
         templates = getattr(tool, templates_id)
         templates.setConstrainTypesMode(1)
-        templates.setLocallyAllowedTypes(['UrbanTemplate'])
-        templates.setImmediatelyAddableTypes(['UrbanTemplate'])
+        templates.setLocallyAllowedTypes(['DashboardPODTemplate'])
+        templates.setImmediatelyAddableTypes(['DashboardPODTemplate'])
 
     if not hasattr(tool, "globaltemplates"):
         templates_id = tool.invokeFactory(
