@@ -13,7 +13,11 @@ import Products.urban
 URBAN_TESTS_PROFILE_DEFAULT = PloneWithPackageLayer(
     zcml_filename="testing.zcml",
     zcml_package=Products.urban,
-    additional_z2_products=('Products.urban', 'Products.CMFPlacefulWorkflow'),
+    additional_z2_products=(
+        'Products.urban',
+        'Products.CMFPlacefulWorkflow',
+        'imio.dashboard',
+    ),
     gs_profile_id='Products.urban:tests',
     name="URBAN_TESTS_PROFILE_DEFAULT")
 
