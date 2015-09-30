@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-25 06:31+0000\n"
+"POT-Creation-Date: 2015-09-25 08:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1644,7 +1644,7 @@ msgstr ""
 msgid "urban_label_additionalPreviousLicences"
 msgstr ""
 
-# 
+#
 #. Default: "Adr1"
 #: RecipientCadastre.py
 msgid "urban_label_adr1"
@@ -2819,6 +2819,11 @@ msgstr ""
 #. Default: "Requirementfromfd"
 #: BuildLicence.py
 msgid "urban_label_requirementFromFD"
+msgstr ""
+
+#. Default: "Reversetitle"
+#: PersonTitleTerm.py
+msgid "urban_label_reverseTitle"
 msgstr ""
 
 #. Default: "Rgbsr"

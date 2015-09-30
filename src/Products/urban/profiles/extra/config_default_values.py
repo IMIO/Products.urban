@@ -1074,16 +1074,26 @@ default_values = {
 
         'persons_titles': [
             'PersonTitleTerm',
-            {'id': "notitle", 'title': u"", 'extraValue': "Madame, Monsieur", 'abbreviation': "", 'gender': "male", 'multiplicity': "single"},
-            {'id': "madam", 'title': u"Madame", 'extraValue': "Madame", 'abbreviation': "Mme", 'gender': "female", 'multiplicity': "single"},
-            {'id': "miss", 'title': u"Mademoiselle", 'extraValue': "Mademoiselle", 'abbreviation': "Mlle", 'gender': "female", 'multiplicity': "single"},
-            {'id': "mister", 'title': u"Monsieur", 'extraValue': "Monsieur", 'abbreviation': "M", 'gender': "male", 'multiplicity': "single"},
-            {'id': "madam_and_mister", 'title': u"Monsieur et Madame", 'extraValue': "Madame, Monsieur", 'abbreviation': "M et Mme", 'gender': "male", 'multiplicity': "plural"},
-            {'id': "master", 'title': u"Maître", 'extraValue': "Maître", 'abbreviation': "Me", 'gender': "male", 'multiplicity': "single"},
-            {'id': "masters", 'title': u"Maîtres", 'extraValue': "Maitres", 'abbreviation': "Mes", 'gender': "male", 'multiplicity': "plural"},
-            {'id': "misters", 'title': u"Messieurs", 'extraValue': "Messieurs", 'abbreviation': "MM", 'gender': "male", 'multiplicity': "plural"},
-            {'id': "ladies", 'title': u"Mesdames", 'extraValue': "Mesdames", 'abbreviation': "Mmes", 'gender': "female", 'multiplicity': "plural"},
-            {'id': "consorts", 'title': u"Consorts", 'extraValue': "Consorts", 'abbreviation': "Crts", 'gender': "male", 'multiplicity': "plural"},
+            {'id': "notitle", 'title': u"", 'extraValue': "Madame, Monsieur", 'abbreviation': "", 'gender': "male",
+                'multiplicity': "single", 'reverseTitle': "Monsieur, Madame"},
+            {'id': "madam", 'title': u"Madame", 'extraValue': "Madame", 'abbreviation': "Mme", 'gender': "female",
+                'multiplicity': "single", 'reverseTitle': "Madame"},
+            {'id': "miss", 'title': u"Mademoiselle", 'extraValue': "Mademoiselle", 'abbreviation': "Mlle", 'gender':
+                "female", 'multiplicity': "single", 'reverseTitle': "Mademoiselle"},
+            {'id': "mister", 'title': u"Monsieur", 'extraValue': "Monsieur", 'abbreviation': "M", 'gender': "male",
+                'multiplicity': "single", 'reverseTitle': "Monsieur"},
+            {'id': "madam_and_mister", 'title': u"Monsieur et Madame", 'extraValue': "Madame, Monsieur", 'abbreviation':
+                "M et Mme", 'gender': "male", 'multiplicity': "plural", 'reverseTitle': "Madame et Monsieur"},
+            {'id': "master", 'title': u"Maître", 'extraValue': "Maître", 'abbreviation': "Me", 'gender': "male",
+                'multiplicity': "single", 'reverseTitle': "Maître"},
+            {'id': "masters", 'title': u"Maîtres", 'extraValue': "Maitres", 'abbreviation': "Mes", 'gender': "male",
+                'multiplicity': "plural", 'reverseTitle': "Maitres"},
+            {'id': "misters", 'title': u"Messieurs", 'extraValue': "Messieurs", 'abbreviation': "MM", 'gender': "male",
+                'multiplicity': "plural", 'reverseTitle': "Messieurs"},
+            {'id': "ladies", 'title': u"Mesdames", 'extraValue': "Mesdames", 'abbreviation': "Mmes", 'gender': "female",
+                'multiplicity': "plural", 'reverseTitle': "Mesdames"},
+            {'id': "consorts", 'title': u"Consorts", 'extraValue': "Consorts", 'abbreviation': "Crts", 'gender': "male",
+                'multiplicity': "plural", 'reverseTitle': "Consorts"},
         ],
 
         'persons_grades': [

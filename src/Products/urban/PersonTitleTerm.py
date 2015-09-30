@@ -54,6 +54,14 @@ schema = Schema((
         ),
         vocabulary='listMultiplicity',
     ),
+    StringField(
+        name='reverseTitle',
+        widget=StringField._properties['widget'](
+            label='Reversetitle',
+            label_msgid='urban_label_reverseTitle',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )

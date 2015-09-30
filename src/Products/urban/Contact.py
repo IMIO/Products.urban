@@ -348,17 +348,17 @@ class Contact(BaseContent, BrowserDefaultMixin):
           Returns the personTitle short version, so 'M' for 'Mister', ...
         """
         #either we need the classic value
+        tool = api.portal.get_tool('portal_urban')
         if not short:
             res = self.getField('personTitle').get(self)
-            if reverse and res == 'madam_and_mister':
-                return 'Monsieur, Madame'
+            if res and reverse:
+                return getattr(tool.persons_titles, res).getReverseTitle()
             if res and theObject:
                 tool = api.portal.get_tool('portal_urban')
                 res = getattr(tool.persons_titles, res)
             return res
 
         #or the short one...
-        tool = api.portal.get_tool('portal_urban')
         if hasattr(tool.persons_titles, self.getField('personTitle').get(self)):
             return getattr(tool.persons_titles, self.getField('personTitle').get(self)).getAbbreviation()
         else:
