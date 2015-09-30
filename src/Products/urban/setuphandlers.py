@@ -790,6 +790,8 @@ def setupImioDashboard(context):
                 filter_type=[urban_type],
             )
             setFolderAllowedTypes(folder, urban_type)
+        collection = getattr(folder, collection_id)
+        _updateDefaultCollectionFor(folder, collection.UID())
 
 
 def _create_dashboard_collection(container, id, title, filter_type):
