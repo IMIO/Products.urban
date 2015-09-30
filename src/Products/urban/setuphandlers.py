@@ -40,16 +40,17 @@ from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from imio.dashboard.utils import _updateDefaultCollectionFor
 from plone import api
 from plone.portlets.interfaces import IPortletManager
+from plone.portlets.interfaces import ILocalPortletAssignable
 from plone.portlets.interfaces import ILocalPortletAssignmentManager
-from plone.portlets.constants import CONTEXT_CATEGORY
+from plone.portlets.constants import CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_TYPE_CATEGORY
 from zExceptions import BadRequest
-from zope.interface import alsoProvides, directlyProvides
+from zope.interface import alsoProvides
+from zope.component import getMultiAdapter
+from zope.component import getUtilitiesFor
 from zope.component import queryUtility
 from zope.component.interface import getInterface
 from zope.i18n.interfaces import ITranslationDomain
 from zope import event
-from zope.component import getMultiAdapter
-from zope.component import getUtility
 
 import pickle
 ##/code-section HEAD
@@ -146,6 +147,9 @@ def postInstall(context):
     logger.info("addApplicationFolders : starting...")
     addApplicationFolders(context)
     logger.info("addApplicationFolders : Done")
+    logger.info("disablePortletsFromConfiguration : starting...")
+    disablePortletsFromConfiguration(context)
+    logger.info("disablePortletsFromConfiguration : Done")
     logger.info("setupImioDashboard : starting...")
     setupImioDashboard(context)
     logger.info("setupImioDashboard : Done")
@@ -521,7 +525,7 @@ def setDefaultApplicationSecurity(context):
             folder.manage_addLocalRoles("urban_readers", ("Reader", ))
             folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
             # mark them with IContactFolder interface use some view methods, like 'getemails', on it
-            directlyProvides(folder, IContactFolder)
+            alsoProvides(folder, IContactFolder)
 
 
 def addGlobalFolders(context):
@@ -734,6 +738,25 @@ def addApplicationFolders(context):
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add ParcellingTerm', ['Manager', 'Editor', ], acquire=0)
 
+
+def disablePortletsFromConfiguration(context):
+    """
+    Disable right and left portlets from urban config.
+    """
+    portal_urban = api.portal.get_tool('portal_urban')
+    alsoProvides(portal_urban, ILocalPortletAssignable)
+
+    for manager_name, src_manager in getUtilitiesFor(IPortletManager, context=portal_urban):
+        assignment_manager = getMultiAdapter(
+            (portal_urban, src_manager),
+            ILocalPortletAssignmentManager
+        )
+        assignment_manager.setBlacklistStatus(CONTEXT_CATEGORY, True)
+        for category in (GROUP_CATEGORY, CONTENT_TYPE_CATEGORY):
+            assignment_manager.setBlacklistStatus(
+                category,
+                assignment_manager.getBlacklistStatus(category)
+            )
 
 def setupImioDashboard(context):
     """
