@@ -104,4 +104,8 @@
       </tal:fieldsets>
 </metal:edit>
 
-
+<metal:hide_portlets define-macro="hide_portlets" i18n:domain="urban">
+  <tal:disable define="dummy python:request.set('disable_border',1);
+                       disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                       disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+</metal:hide_portlets>

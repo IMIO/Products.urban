@@ -5,10 +5,7 @@
 <body>
 
 <div metal:define-macro="topslot">
-
-  <tal:disable define="dummy python:request.set('disable_border',1);
-                       disable_column_one python:request.set('disable_plone.leftcolumn',1);
-                       disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+<metal:listing use-macro="here/@@globalmacros/hide_portlets" />
 </div>
 
 <div metal:define-macro="body">
