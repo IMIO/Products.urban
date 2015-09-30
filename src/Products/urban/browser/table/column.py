@@ -144,13 +144,6 @@ class TitleColumnHeader():
         return translate(self.label, 'urban', context=self.request)
 
 
-class LicenceTitleColumnHeader(TitleColumnHeader):
-    """ return the right label to display in Title Column header """
-
-    def update(self):
-        self.label = 'label_colname_Title'
-
-
 class ApplicantTitleColumnHeader(TitleColumnHeader):
 
     def update(self):
