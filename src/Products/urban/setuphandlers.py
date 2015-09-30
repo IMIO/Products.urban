@@ -60,7 +60,8 @@ def isNoturbanProfile(context):
 
 def setupHideToolsFromNavigation(context):
     """hide tools"""
-    if isNoturbanProfile(context): return
+    if isNoturbanProfile(context):
+        return
     # uncatalog tools
     site = context.getSite()
     toolnames = ['portal_urban']
@@ -140,10 +141,6 @@ def postInstall(context):
     }
     alreadyRegTypes.update(typesToRegister)
     factory_tool.manage_setPortalFactoryTypes(listOfTypeIds=alreadyRegTypes)
-    #to be removed after deletion of class Architect
-    architect_type = site.portal_types.Architect
-    architect_type.content_meta_type = "Contact"
-    architect_type.factory = "addContact"
     logger.info("addApplicationFolders : starting...")
     addApplicationFolders(context)
     logger.info("addApplicationFolders : Done")
@@ -757,6 +754,7 @@ def disablePortletsFromConfiguration(context):
                 category,
                 assignment_manager.getBlacklistStatus(category)
             )
+
 
 def setupImioDashboard(context):
     """

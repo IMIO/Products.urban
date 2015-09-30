@@ -17,6 +17,13 @@ class UrbanEventView(BrowserView):
     """
       This manage the view of UrbanEvent
     """
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+        # disable portlets
+        self.request.set('disable_plone.rightcolumn', 1)
+        self.request.set('disable_plone.leftcolumn', 1)
+
     def getData(self):
         """
           This will return data to display about the UrbanEvent
@@ -125,6 +132,9 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
             plone_utils.addPortalMessage(_('This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !'), type="error")
         if self.hasPOWithoutAddress():
             plone_utils.addPortalMessage(_('There are parcel owners without any address found! Desactivate them!'), type="warning")
+        # disable portlets
+        self.request.set('disable_plone.rightcolumn', 1)
+        self.request.set('disable_plone.leftcolumn', 1)
 
     def __call__(self):
         if 'find_recipients_cadastre' in self.request.form:

@@ -10,20 +10,20 @@
  <property name="content_meta_type">PortionOut</property>
  <property name="product">urban</property>
  <property name="factory">addPortionOut</property>
- <property name="immediate_view">base_view</property>
+ <property name="immediate_view">portionoutview</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">False</property>
  <property name="allowed_content_types">
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">base_view</property>
+ <property name="default_view">portionoutview</property>
  <property name="view_methods">
-  <element value="base_view"/>
+  <element value="portionoutview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="index.html" to="(dynamic view)"/>
- <alias from="view" to="(selected layout)"/>
+ <alias from="view" to="portionoutview"/>
  <alias from="edit" to="base_edit"/>
  <action title="View"
          action_id="view"

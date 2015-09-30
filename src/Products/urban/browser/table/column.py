@@ -343,11 +343,11 @@ class CreatorColumn(Column):
 class ObjectCreatorColumn(CreatorColumn):
     """   """
 
-    def renderCell(self, obj):
-        return ''.join(sorted(obj.listCreators()))
+    def renderCell(self, urbanlist_item):
+        return ''.join(sorted(urbanlist_item.getObject().listCreators()))
 
     def getSortKey(self, urbanlist_item):
-        return urbanlist_item.getObject.listCreators()
+        return urbanlist_item.getObject().listCreators()
 
 
 class BrainCreatorColumn(CreatorColumn):

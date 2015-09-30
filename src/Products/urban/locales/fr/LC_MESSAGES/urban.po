@@ -1249,6 +1249,9 @@ msgstr "Monsieur"
 msgid "portal_urban"
 msgstr "Configuration de 'urban'"
 
+msgid "portionout_details"
+msgstr "Détails de la référence cadastrale"
+
 msgid "prenu_folder_title"
 msgstr "Périmètre de Rénovation Urbaine"
 

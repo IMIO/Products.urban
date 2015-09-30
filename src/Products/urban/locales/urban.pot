@@ -1248,6 +1248,9 @@ msgstr ""
 msgid "portal_urban"
 msgstr ""
 
+msgid "portionout_details"
+msgstr ""
+
 msgid "prenu_folder_title"
 msgstr ""
 

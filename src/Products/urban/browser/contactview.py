@@ -9,6 +9,12 @@ class ContactView(BrowserView):
       This manage the view of every Contacts :
       Applicant, Architect, Geometrician, Notary
     """
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+        # disable portlets
+        self.request.set('disable_plone.rightcolumn', 1)
+        self.request.set('disable_plone.leftcolumn', 1)
 
     def getFields(self, exclude=[]):
         """
