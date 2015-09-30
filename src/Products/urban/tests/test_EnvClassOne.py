@@ -72,15 +72,6 @@ class TestEnvClassOneInstall(BrowserTestCase):
         contents = self.browser.contents
         self.assertTrue("Permis d'environnement classe 1" in contents)
 
-    def test_add_envclassone_in_urban_default_view(self):
-        self.browser.open(self.urban.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("create-EnvClassOne-link" in contents)
-        link = self.browser.getLink(id="create-EnvClassOne-link")
-        link.click()
-        contents = self.browser.contents
-        self.assertTrue("Ajouter Permis d'environnement classe 1" in contents)
-
     def test_EnvClassOne_is_under_licence_workflow(self):
         workflow_tool = api.portal.get_tool('portal_workflow')
         envclassone_workflow = workflow_tool.getChainForPortalType('EnvClassOne')

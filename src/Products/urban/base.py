@@ -571,7 +571,7 @@ class UrbanBase(object):
             return ''
 
         if type(field_value) not in (list, tuple):
-            val = displaylist and obj.displayValue(displaylist, field_value) or field_value
+            val = displaylist and obj.displayValue(displaylist, str(field_value)) or field_value
             if type(val) not in [str, unicode]:
                 val = str(val)
             if type(val) is str:

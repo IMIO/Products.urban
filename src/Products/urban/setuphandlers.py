@@ -1069,9 +1069,8 @@ def createLicence(site, licence_type, data):
         #generate the documents
         if not urban_event.objectValues():
             for template in urban_event.getTemplates():
-                urban_event.REQUEST.set('template_uid', template.UID())
                 generation_view = urban_event.restrictedTraverse('urban-document-generation')
-                generation_view.generate_persistent_doc()
+                generation_view.generate_persistent_doc(template, 'odt')
     return licence
 
 

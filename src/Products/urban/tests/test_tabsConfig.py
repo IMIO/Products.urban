@@ -17,7 +17,7 @@ class TestTabsConfigView(BrowserTestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
-        self.buildlicence = self.urban.buildlicences.objectValues()[0]
+        self.buildlicence = self.urban.buildlicences.objectValues('BuildLicence')[0]
 
         #isntall datagridfield so we can edit the tabs config
         quickInstallProduct(self.portal, 'Products.DataGridField')

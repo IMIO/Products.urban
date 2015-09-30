@@ -43,7 +43,7 @@ class TestScheduleView(BrowserTestCase):
          will be indexed on all its urban event
         """
         catalog = api.portal.get_tool('portal_catalog')
-        licence = self.urban.buildlicences.objectValues()[-1]
+        licence = self.urban.buildlicences.objectValues('BuildLicence')[-1]
         urban_event = licence.objectValues('UrbanEvent')[0]
         opinionrequest_event = licence.objectValues('UrbanEventOpinionRequest')[0]
         foldermanagers = self.portal_urban.foldermanagers
@@ -176,7 +176,7 @@ class TestScheduleView(BrowserTestCase):
         foldermanager = 'all'
 
         # make sure to find at least one result
-        licence = self.urban.buildlicences.objectValues()[0]
+        licence = self.urban.buildlicences.objectValues('BuildLicence')[0]
         licence.createUrbanEvent(eventtypes_restriction[0])
 
         event_brains = scheduleview.findSchedulableUrbanEvents(licence_type, eventtype_uids, foldermanager)

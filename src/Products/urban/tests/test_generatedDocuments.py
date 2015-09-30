@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-import unittest
+
 from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL, URBAN_TESTS_LICENCES
 from Products.urban.scripts.odtsearch import searchInTextElements
+
 import cgi
-import zipfile
+import unittest
 import xml.dom.minidom
-import psycopg2
+import zipfile
 
 
 class TestDivisionsRenaming(unittest.TestCase):
@@ -21,31 +22,27 @@ class TestDivisionsRenaming(unittest.TestCase):
         portal = self.layer['portal']
         self.portal = portal
         self.buildlicence = portal.urban.buildlicences.objectValues()[-1]
+        self.portal_urban = portal.portal_urban
 
-        portal_urban = portal.portal_urban
-
-        #set the connection to the test cadatsral DB
-        portal_urban.setSqlHost('localhost')
-        portal_urban.setSqlName('urb_fleron')
-        portal_urban.setSqlUser('urb_fleron')
-        portal_urban.setSqlPassword('urb_fleron')
-        self.portal_urban = portal_urban
+        # set dummy divisions
+        divisions = ['MyDivision', 'SecondDivision']
+        rows = []
+        for division in divisions:
+            row = {
+                'division': division.lower(),
+                'name': division,
+                'alternative_name': division
+            }
+            rows.append(row)
+        self.portal_urban.setDivisionsRenaming(rows)
 
         # set the test parcel division
         parcel = self.buildlicence.getParcels()[0]
-        self.division = str(portal_urban.findDivisions(all=False)[0]['da'])
+        self.division = 'mydivision'
         parcel.setDivision(self.division)
         self.parcel = parcel
 
         login(portal, 'urbaneditor')
-
-    def testDBConnection(self):
-        """
-         We should at least have a connection to a test DB in order
-         to run the remaining tests correctly
-        """
-        connection = self.portal_urban.getDBConnection()
-        self.failUnless(type(connection) == psycopg2._psycopg.connection)
 
     def testNoDivisionRenaming(self):
         licence = self.buildlicence
@@ -88,7 +85,7 @@ class TestInvertNamesOfMailAddress(unittest.TestCase):
     def setUp(self):
         portal = self.layer['portal']
         self.portal = portal
-        self.buildlicence = portal.urban.buildlicences.objectValues()[0]
+        self.buildlicence = portal.urban.buildlicences.objectValues('BuildLicence')[0]
         self.portal_urban = portal.portal_urban
         login(portal, 'urbaneditor')
 

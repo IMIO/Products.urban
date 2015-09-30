@@ -22,7 +22,7 @@ def _setDefaultTextValues(urbanevent):
     select_fields = [field for field in urbanevent.schema.fields() if field.default_method == 'getDefaultText']
 
     for field in select_fields:
-        is_html = 'html' in field.default_content_type
+        is_html = 'html' in str(field.default_content_type)
         default_text = urbanevent.getDefaultText(urbanevent, field, is_html)
         rendered_text = portal_urban.renderText(default_text, urbanevent)
         field_mutator = getattr(urbanevent, field.mutator)
@@ -51,9 +51,10 @@ def generateSingletonDocument(urban_event, event):
 
     templates = urban_event.getTemplates()
     if len(templates) == 1:
-        urban_event.REQUEST.set('template_uid', templates[0].UID())
+        pod_template = templates[0]
+        output_format = 'odt'
         generation_view = urban_event.restrictedTraverse('urban-document-generation')
-        generation_view.generate_persistent_doc()
+        generation_view.generate_persistent_doc(pod_template, output_format)
 
 
 def updateKeyEvent(urban_event, event):

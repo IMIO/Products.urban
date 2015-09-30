@@ -13,8 +13,11 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
     """
     """
 
-    def generate_persistent_doc(self):
-        persisted_doc = super(UrbanDocGenerationView, self).generate_persistent_doc()
+    def generate_persistent_doc(self, pod_template, output_format):
+        persisted_doc = super(UrbanDocGenerationView, self).generate_persistent_doc(
+            pod_template,
+            output_format
+        )
         alsoProvides(persisted_doc, IUrbanDoc)
         return persisted_doc
 

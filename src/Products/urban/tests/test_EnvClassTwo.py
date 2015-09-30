@@ -72,15 +72,6 @@ class TestEnvClassTwoInstall(BrowserTestCase):
         contents = self.browser.contents
         self.assertTrue("Permis d'environnement classe 2" in contents)
 
-    def test_add_envclasstwo_in_urban_default_view(self):
-        self.browser.open(self.urban.absolute_url())
-        contents = self.browser.contents
-        self.assertTrue("create-EnvClassTwo-link" in contents)
-        link = self.browser.getLink(id="create-EnvClassTwo-link")
-        link.click()
-        contents = self.browser.contents
-        self.assertTrue("Ajouter <span> Permis d'environnement classe 2" in contents)
-
     def test_EnvClassTwo_is_under_licence_workflow(self):
         workflow_tool = api.portal.get_tool('portal_workflow')
         envclasstwo_workflow = workflow_tool.getChainForPortalType('EnvClassTwo')

@@ -21,6 +21,7 @@ class TestUrbanTemplates(unittest.TestCase):
         self.catalog = api.portal.get_tool('portal_catalog')
         event_type = self.catalog(portal_type='UrbanEventType', id='accuse-de-reception')[0].getObject()
         self.urbandoc_model = getattr(event_type, 'urb-accuse.odt')
+        self.urbandoc_model.pod_portal_types = []
 
     def testUrbanTemplateIsUnderActivationWF(self):
         #Check that templates .odt files in urbanEventTypes are under activation wf policy
@@ -82,13 +83,9 @@ class TestTemplateMethods(unittest.TestCase):
         field_names = [f.getName() for f in fields if f.schemata not in ['default', 'metadata']]
 
         for fieldname in field_names:
-            try:
-                if fieldname not in self.field_exceptions:
-                    licence.getValueForTemplate(fieldname)
-                else:
-                    method_name = self.field_exceptions[fieldname]
-                    template_helpermethod = getattr(licence, method_name)
-                    template_helpermethod()
-            except:
-                print '\n%s\n%s' % (licence, fieldname)
-                self.fail()
+            if fieldname not in self.field_exceptions:
+                licence.getValueForTemplate(fieldname)
+            else:
+                method_name = self.field_exceptions[fieldname]
+                template_helpermethod = getattr(licence, method_name)
+                template_helpermethod()

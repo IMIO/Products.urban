@@ -36,7 +36,7 @@ class TestOpinionRequestOnLicence (unittest.TestCase):
 
     def setUp(self):
         portal = self.layer['portal']
-        self.licence = portal.urban.buildlicences.objectValues()[0]
+        self.licence = portal.urban.buildlicences.objectValues('BuildLicence')[0]
         login(portal, 'urbanmanager')
 
     def testNewOpinioneventtypeAppearsInFieldVocabulary(self):
