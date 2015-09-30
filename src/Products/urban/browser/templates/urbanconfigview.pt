@@ -14,7 +14,7 @@
 
             <dl class="formTabs enableFormTabbing">
             <tal:tab_loop repeat="tab tabs">
-              <dt class="formTab" tal:define="tab_id  python: 'fieldsetlegend-urban_%s' % tab"
+              <dt class="formTab" tal:define="tab_id python: 'fieldsetlegend-urban_%s' % tab"
                                   tal:attributes="id tab_id">
                 <span tal:content="tab_id" i18n:translate="">Tab name</span>
               </dt>
