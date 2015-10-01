@@ -64,8 +64,10 @@
                 <tr>
                     <td tal:attributes="class python: template['class']">&nbsp</td><td>&nbsp</td>
                     <td>
-                        <a href="#" tal:attributes="href python: template['href'];"
-                                    tal:content="python: template['title']">Template Title
+                        <a onclick="javascript:window.location=document.location.href;"
+                           target="_blank"
+                           href="#" tal:attributes="href python: template['href'];"
+                           tal:content="python: template['title']">Template Title
                         </a>
                         <br/>
                     </td>
