@@ -21,6 +21,11 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         alsoProvides(persisted_doc, IUrbanDoc)
         return persisted_doc
 
+    def get_generation_format(self):
+        portal_urban = api.portal.get_tool('portal_urban')
+        output_format = portal_urban.getEditionOutputFormat()
+        return output_format
+
     def get_base_generation_context(self):
         """
         Backward compatibility with code used in old urban templates.
