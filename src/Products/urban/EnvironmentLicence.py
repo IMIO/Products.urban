@@ -39,7 +39,9 @@ from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 
 from zope.i18n import translate
 
-optional_fields =[]
+optional_fields = [
+    'publicRoadModifications',
+]
 ##/code-section module-header
 
 schema = Schema((

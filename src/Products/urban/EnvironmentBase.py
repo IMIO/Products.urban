@@ -38,7 +38,7 @@ from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
 optional_fields = [
     'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalLegalConditions',
-    'businessOldLocation'
+    'businessOldLocation', 'applicationReasons',
 ]
 
 slave_fields_natura2000 = (
