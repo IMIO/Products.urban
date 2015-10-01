@@ -5,6 +5,7 @@ from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
 from Products.urban.config import GLOBAL_TEMPLATES
 from Products.urban.interfaces import IUrbanDoc
+from Products.urban.profiles.extra.config_default_values import default_values
 
 from plone import api
 from plone.namedfile.file import NamedBlobFile
@@ -33,6 +34,7 @@ def migrateToUrban1110(context):
     migrateUrbanDocToSubTemplate(context)
     migrateUrbanDocToStyleTemplate(context)
     migrateUrbanDocToUrbantemplate(context)
+    migratePersonTitleTerm(context)
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
     setup_tool = api.portal.get_tool('portal_setup')
@@ -230,3 +232,29 @@ def migrateUrbanDocToUrbantemplate(context):
                 )
 
     logger.info("migration step done!")
+
+def migratePersonTitleTerm(context):
+    """
+    toggle value from extraValue to reverseTitle
+    """
+    logger = logging.getLogger('urban: migrate personTitleTerm')
+    logger.info("starting migration step")
+
+    portal_urban = api.portal.get_tool('portal_urban')
+    personsTitleTerms = portal_urban.persons_titles.objectValues()
+
+    for personsTitleTerm in personsTitleTerms:
+        personsTitleTerm.reverseTitle = getReverseTitleValue(context, personsTitleTerm.id)
+
+    logger.info("migration step done!")
+
+def getReverseTitleValue(context, id):
+    """
+    Get reverseTitle from config
+    """
+    vocabularies = default_values['global']
+    persons_titles = vocabularies['persons_titles']
+    for persons_title in persons_titles[1:]:
+        if persons_title['id'] == id:
+            return persons_title['reverseTitle']
+    return ''
