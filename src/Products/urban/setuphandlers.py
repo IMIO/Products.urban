@@ -682,8 +682,7 @@ def addApplicationFolders(context):
                     newSubFolder.manage_permission('urban: Add EnvironmentBase', ['Manager', 'Editor', ], acquire=0)
                 if urban_type in ['EnvClassOne', 'EnvClassTwo']:
                     newSubFolder.manage_permission('urban: Add EnvironmentLicence', ['Manager', 'Editor', ], acquire=0)
-        licence_folder = getattr(newFolder, licence_folder_id)
-        newFolder.moveObjectsToBottom([licence_folder])
+        newFolder.moveObjectsToBottom([licence_folder_id])
 
     #add a folder that will contains architects
     if not hasattr(newFolder, "architects"):
@@ -697,8 +696,7 @@ def addApplicationFolders(context):
         newSubFolder.setLayout('architects_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
-    folder = getattr(newFolder, 'architects')
-    newFolder.moveObjectsToBottom([folder])
+    newFolder.moveObjectsToBottom(['architects'])
 
     #add a folder that will contains geometricians
     if not hasattr(newFolder, "geometricians"):
@@ -712,8 +710,7 @@ def addApplicationFolders(context):
         newSubFolder.setLayout('geometricians_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
-    folder = getattr(newFolder, 'geometricians')
-    newFolder.moveObjectsToBottom([folder])
+    newFolder.moveObjectsToBottom(['geometricians'])
 
     #add a folder that will contains notaries
     if not hasattr(newFolder, "notaries"):
@@ -727,8 +724,7 @@ def addApplicationFolders(context):
         newSubFolder.setLayout('notaries_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
-    folder = getattr(newFolder, 'notaries')
-    newFolder.moveObjectsToBottom([folder])
+    newFolder.moveObjectsToBottom(['notaries'])
 
     #add a folder that will contains parcellings
     if not hasattr(newFolder, "parcellings"):
@@ -742,8 +738,7 @@ def addApplicationFolders(context):
         newSubFolder.setLayout('parcellings_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add ParcellingTerm', ['Manager', 'Editor', ], acquire=0)
-    folder = getattr(newFolder, 'parcellings')
-    newFolder.moveObjectsToBottom([folder])
+    newFolder.moveObjectsToBottom(['parcellings'])
 
 
 def disablePortletsFromConfiguration(context):
@@ -783,8 +778,8 @@ def setupImioDashboard(context):
             filter_type=[type for type in URBAN_TYPES]
         )
 
+    urban_folder.moveObjectToPosition(all_licences_collection_id, 0)
     all_licences_collection = getattr(urban_folder, all_licences_collection_id)
-    urban_folder.moveObjectToPosition(all_licences_collection, 0)
     _updateDefaultCollectionFor(urban_folder, all_licences_collection.UID())
 
     for urban_type in URBAN_TYPES:
