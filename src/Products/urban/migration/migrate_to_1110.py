@@ -111,7 +111,8 @@ def migrateUrbanDocToSubTemplate(context):
         for urbandoc in folder.objectValues('UrbanDoc'):
             template_blob = urbandoc.getFile()
             template_id = urbandoc.id
-            template_title = [t.get('title') for t in GLOBAL_TEMPLATES[folder.id] if t.get('id') == template_id][0]
+            template_title = [t.get('title') for t in GLOBAL_TEMPLATES[folder.id] if t.get('id') == template_id]
+            template_title = template_title and template_title[0] or urbandoc.Title()
             urban_template_args = {
                 'type': 'SubTemplate',
                 'id': template_id,
@@ -233,6 +234,7 @@ def migrateUrbanDocToUrbantemplate(context):
 
     logger.info("migration step done!")
 
+
 def migratePersonTitleTerm(context):
     """
     toggle value from extraValue to reverseTitle
@@ -247,6 +249,7 @@ def migratePersonTitleTerm(context):
         personsTitleTerm.reverseTitle = getReverseTitleValue(context, personsTitleTerm.id)
 
     logger.info("migration step done!")
+
 
 def getReverseTitleValue(context, id):
     """
