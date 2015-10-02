@@ -698,7 +698,7 @@ def addApplicationFolders(context):
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
     folder = getattr(newFolder, 'architects')
-    newFolder.moveObjectToBottom(folder)
+    newFolder.moveObjectsToBottom([folder])
 
     #add a folder that will contains geometricians
     if not hasattr(newFolder, "geometricians"):
@@ -713,7 +713,7 @@ def addApplicationFolders(context):
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
     folder = getattr(newFolder, 'geometricians')
-    newFolder.moveObjectToBottom(folder)
+    newFolder.moveObjectsToBottom([folder])
 
     #add a folder that will contains notaries
     if not hasattr(newFolder, "notaries"):
@@ -728,7 +728,7 @@ def addApplicationFolders(context):
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
     folder = getattr(newFolder, 'notaries')
-    newFolder.moveObjectToBottom(folder)
+    newFolder.moveObjectsToBottom([folder])
 
     #add a folder that will contains parcellings
     if not hasattr(newFolder, "parcellings"):
@@ -743,7 +743,7 @@ def addApplicationFolders(context):
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add ParcellingTerm', ['Manager', 'Editor', ], acquire=0)
     folder = getattr(newFolder, 'parcellings')
-    newFolder.moveObjectToBottom(folder)
+    newFolder.moveObjectsToBottom([folder])
 
 
 def disablePortletsFromConfiguration(context):
