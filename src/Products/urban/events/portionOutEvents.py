@@ -2,8 +2,12 @@
 
 from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.interfaces import IEnvironmentLicence
+from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import ILicencePortionOut
 
 from plone import api
+
+from zope.component import alsoProvides
 
 
 def onDelete(parcel, event):
@@ -11,6 +15,15 @@ def onDelete(parcel, event):
       Reindex licence of this parcel after deletion.
     """
     parcel.aq_inner.aq_parent.reindexObject(idxs=["parcelInfosIndex"])
+
+
+def set_ILicencePortionOut_interface(parcel, event):
+    """
+    Mark PortionOut in licences with a specific marker interface.
+    """
+    container = parcel.aq_parent
+    if IGenericLicence.providedBy(container):
+        alsoProvides(parcel, ILicencePortionOut)
 
 
 def setValidParcel(parcel, event):

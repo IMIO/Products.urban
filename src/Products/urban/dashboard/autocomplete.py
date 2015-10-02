@@ -182,7 +182,7 @@ class CadastralReferenceSuggest(SuggestView):
             'sort_on': 'sortable_title',
             'sort_order': 'reverse',
             'path': '/'.join(self.context.getPhysicalPath()),
-            'object_provides': 'Products.urban.interfaces.IPortionOut',
+            'object_provides': 'Products.urban.interfaces.ILicencePortionOut',
         }
 
         catalog = api.portal.get_tool('portal_catalog')
