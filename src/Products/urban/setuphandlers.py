@@ -683,7 +683,7 @@ def addApplicationFolders(context):
                 if urban_type in ['EnvClassOne', 'EnvClassTwo']:
                     newSubFolder.manage_permission('urban: Add EnvironmentLicence', ['Manager', 'Editor', ], acquire=0)
         licence_folder = getattr(newFolder, licence_folder_id)
-        newFolder.moveObjectToBottom(licence_folder)
+        newFolder.moveObjectsToBottom([licence_folder])
 
     #add a folder that will contains architects
     if not hasattr(newFolder, "architects"):
