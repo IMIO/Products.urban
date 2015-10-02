@@ -1,4 +1,5 @@
-<dl class="portlet portlet_urbantools" i18n:domain="urban">
+<dl class="portlet portlet_urbantools" i18n:domain="urban"
+    tal:condition="view/available">
     <dt class="portletHeader">
         <span class="portletTopLeft"></span>
         <span class="tile" i18n:translate="root-stats-search">Tools</span>
