@@ -782,11 +782,9 @@ def setupImioDashboard(context):
             title=_('All', 'urban'),
             filter_type=[type for type in URBAN_TYPES]
         )
-    collection = getattr(urban_folder, all_licences_collection_id)
-    urban_folder.moveObjectToPosition(collection, 0)
 
-    urban_folder.moveObjectToPosition(all_licences_collection_id, 0)
     all_licences_collection = getattr(urban_folder, all_licences_collection_id)
+    urban_folder.moveObjectToPosition(all_licences_collection, 0)
     _updateDefaultCollectionFor(urban_folder, all_licences_collection.UID())
 
     for urban_type in URBAN_TYPES:
