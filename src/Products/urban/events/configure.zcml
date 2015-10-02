@@ -56,6 +56,10 @@
               handler=".portionOutEvents.onDelete" />
 
   <subscriber for="..interfaces.IPortionOut
+                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+               handler=".portionOutEvents.set_ILicencePortionOut_interface" />
+
+  <subscriber for="..interfaces.IPortionOut
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
                handler=".portionOutEvents.setValidParcel" />
 

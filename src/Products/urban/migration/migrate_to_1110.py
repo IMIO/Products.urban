@@ -4,13 +4,16 @@ from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
 from Products.urban.config import GLOBAL_TEMPLATES
+from Products.urban.interfaces import IPortionOut
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.profiles.extra.config_default_values import default_values
 
 from plone import api
 from plone.namedfile.file import NamedBlobFile
 
+from zope.event import notify
 from zope.interface import alsoProvides
+from zope.lifecycleevent import ObjectCreatedEvent
 
 import logging
 
@@ -35,6 +38,7 @@ def migrateToUrban1110(context):
     migrateUrbanDocToStyleTemplate(context)
     migrateUrbanDocToUrbantemplate(context)
     migratePersonTitleTerm(context)
+    migratePortionOut(context)
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
     setup_tool = api.portal.get_tool('portal_setup')
@@ -261,3 +265,18 @@ def getReverseTitleValue(context, id):
         if persons_title['id'] == id:
             return persons_title['reverseTitle']
     return ''
+
+
+def migratePortionOut(context):
+    """
+    Mark portion
+    """
+    logger = logging.getLogger('urban: migrate PortionOut')
+    logger.info("starting migration step")
+
+    catalog = api.portal.get_tool('portal_catalog')
+    portionout_brains = catalog(object_provides=IPortionOut.__identifier__)
+    for brain in portionout_brains:
+        notify(ObjectCreatedEvent(brain.getObject()))
+
+    logger.info("migration step done!")

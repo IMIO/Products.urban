@@ -335,4 +335,9 @@ class IUrbanDoc(Interface):
     """Marker interface for generated document.
     """
 
+
+class ILicencePortionOut(Interface):
+    """Marker interface for portionOut in a licence.
+    """
+
 ##/code-section FOOT
