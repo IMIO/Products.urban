@@ -25,6 +25,14 @@ class ToolsAssignment(base.Assignment):
 
 class ToolsRenderer(base.Renderer):
 
+    @property
+    def available(self):
+        if api.user.is_anonymous():
+            return False
+        roles = api.user.get_roles(user=api.user.get_current(), obj=self.context)
+        available = 'Manager' in roles or 'Editor' in roles
+        return available
+
     def render(self):
         return ViewPageTemplateFile('templates/portlet_urbantools.pt')(self)
 
@@ -56,6 +64,14 @@ class ConfigAssignment(base.Assignment):
 
 
 class ConfigRenderer(base.Renderer):
+
+    @property
+    def available(self):
+        if api.user.is_anonymous():
+            return False
+        roles = api.user.get_roles(user=api.user.get_current(), obj=self.context)
+        available = 'Manager' in roles or 'Editor' in roles
+        return available
 
     def render(self):
         return ViewPageTemplateFile('templates/portlet_urbanconfig.pt')(self)
