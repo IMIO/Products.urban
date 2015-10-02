@@ -661,9 +661,9 @@ def addApplicationFolders(context):
     navigationRootInterface = getInterface('', 'plone.app.layout.navigation.interfaces.INavigationRoot')
     alsoProvides(site.urban, navigationRootInterface)
 
-    for urban_type in URBAN_TYPES:
-        if not hasattr(newFolder, urban_type.lower() + 's'):
-            licence_folder_id = getLicenceFolderId(urban_type)
+    for i, urban_type in enumerate(URBAN_TYPES):
+        licence_folder_id = getLicenceFolderId(urban_type)
+        if not hasattr(newFolder, licence_folder_id):
             newFolderid = newFolder.invokeFactory(
                 "Folder", id=licence_folder_id,
                 title=_(urban_type, 'urban')
@@ -682,6 +682,8 @@ def addApplicationFolders(context):
                     newSubFolder.manage_permission('urban: Add EnvironmentBase', ['Manager', 'Editor', ], acquire=0)
                 if urban_type in ['EnvClassOne', 'EnvClassTwo']:
                     newSubFolder.manage_permission('urban: Add EnvironmentLicence', ['Manager', 'Editor', ], acquire=0)
+        licence_folder = getattr(newFolder, licence_folder_id)
+        newFolder.moveObjectToBottom(licence_folder)
 
     #add a folder that will contains architects
     if not hasattr(newFolder, "architects"):
@@ -695,6 +697,8 @@ def addApplicationFolders(context):
         newSubFolder.setLayout('architects_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
+    folder = getattr(newFolder, 'architects')
+    newFolder.moveObjectToBottom(folder)
 
     #add a folder that will contains geometricians
     if not hasattr(newFolder, "geometricians"):
@@ -708,6 +712,8 @@ def addApplicationFolders(context):
         newSubFolder.setLayout('geometricians_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
+    folder = getattr(newFolder, 'geometricians')
+    newFolder.moveObjectToBottom(folder)
 
     #add a folder that will contains notaries
     if not hasattr(newFolder, "notaries"):
@@ -721,6 +727,8 @@ def addApplicationFolders(context):
         newSubFolder.setLayout('notaries_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
+    folder = getattr(newFolder, 'notaries')
+    newFolder.moveObjectToBottom(folder)
 
     #add a folder that will contains parcellings
     if not hasattr(newFolder, "parcellings"):
@@ -734,6 +742,8 @@ def addApplicationFolders(context):
         newSubFolder.setLayout('parcellings_folderview')
         #manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add ParcellingTerm', ['Manager', 'Editor', ], acquire=0)
+    folder = getattr(newFolder, 'parcellings')
+    newFolder.moveObjectToBottom(folder)
 
 
 def disablePortletsFromConfiguration(context):
@@ -772,6 +782,8 @@ def setupImioDashboard(context):
             title=_('All', 'urban'),
             filter_type=[type for type in URBAN_TYPES]
         )
+    collection = getattr(urban_folder, all_licences_collection_id)
+    urban_folder.moveObjectToPosition(collection, 0)
 
     urban_folder.moveObjectToPosition(all_licences_collection_id, 0)
     all_licences_collection = getattr(urban_folder, all_licences_collection_id)
