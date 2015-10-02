@@ -7,7 +7,7 @@ from Products.urban.interfaces import ILicencePortionOut
 
 from plone import api
 
-from zope.component import alsoProvides
+from zope.interface import alsoProvides
 
 
 def onDelete(parcel, event):
