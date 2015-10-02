@@ -277,6 +277,13 @@ def migratePortionOut(context):
     catalog = api.portal.get_tool('portal_catalog')
     portionout_brains = catalog(object_provides=IPortionOut.__identifier__)
     for brain in portionout_brains:
-        notify(ObjectCreatedEvent(brain.getObject()))
+        portion_out = brain.getObject()
+        notify(ObjectCreatedEvent(portion_out))
+        logger.info(
+            '{licence} {portion_out}'.format(
+                licence=portion_out.aq_parent.Title(),
+                portion_out=portion_out.Title()
+            )
+        )
 
     logger.info("migration step done!")

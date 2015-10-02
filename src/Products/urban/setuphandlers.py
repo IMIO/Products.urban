@@ -790,6 +790,7 @@ def setupImioDashboard(context):
                 filter_type=[urban_type],
             )
             setFolderAllowedTypes(folder, urban_type)
+        folder.moveObjectToPosition(collection_id, 0)
         collection = getattr(folder, collection_id)
         _updateDefaultCollectionFor(folder, collection.UID())
 
