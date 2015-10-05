@@ -18,8 +18,10 @@ class SuggestView(BrowserView):
     implements(IAutocompleteSuggest)
 
     def __call__(self):
+        suggestions = [{'label': '', 'value': ''}]
         try:
-            return json.dumps(self.compute_suggestions())
+            suggestions.extend(self.compute_suggestions())
+            return json.dumps(suggestions)
         except ParseError:
             pass
 
