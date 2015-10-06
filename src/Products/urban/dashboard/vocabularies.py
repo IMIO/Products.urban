@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from imio.dashboard.vocabulary import ConditionAwareCollectionVocabulary
+
 from plone import api
+
+from Products.urban.config import URBAN_TYPES
 
 from zope.i18n import translate as _
 from zope.schema.vocabulary import SimpleTerm
@@ -28,6 +32,33 @@ class LicencesWorkflowStates(object):
 
         vocabulary = SimpleVocabulary(vocabulary_terms)
         return vocabulary
+
+
+class DashboardCollections(ConditionAwareCollectionVocabulary):
+
+    def _brains(self, context):
+        """ """
+        portal = api.portal.get()
+        urban_folder = portal.urban
+        brains = self.get_collection_brains(urban_folder)
+
+        for licence_type in URBAN_TYPES:
+            licence_folder = getattr(urban_folder, licence_type.lower() + 's')
+            brains.extend(self.get_collection_brains(licence_folder))
+
+        return brains
+
+    def get_collection_brains(self, folder):
+        catalog = api.portal.get_tool('portal_catalog')
+        brains = catalog(
+            path={
+                'query': '/'.join(folder.getPhysicalPath()),
+                'depth': 1
+            },
+            object_provides='plone.app.collection.interfaces.ICollection',
+            sort_on='getObjPositionInParent'
+        )
+        return list(brains)
 
 
 class CollectionCategory(object):
