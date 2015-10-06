@@ -13,11 +13,14 @@ import urllib2
 import logging
 logger = logging.getLogger('urban: Views')
 
+namespaces = {'ctx': "http://www.opengis.net/context"}
+
+ET.register_namespace('', 'http://www.opengis.net/context')
+ET.register_namespace('ol', 'http://openlayers.org/context')
+
 
 class WMC(BrowserView):
-#
-#        #return the generated JS code
-#        return self.generateMapJS(self, cqlquery, '', '', zoneExtent)
+
     def minx(self):
         return self.xmin
 
@@ -29,6 +32,31 @@ class WMC(BrowserView):
 
     def maxy(self):
         return self.ymax
+
+    def parseWMC(self, mapUrl):
+        url = mapUrl
+        conn = urllib2.urlopen(url, timeout=6)
+        swmc = ET.fromstring(conn.read())
+
+        bbox = swmc.find(".//ctx:BoundingBox", namespaces)
+        bbox.set('SRS', 'EPSG:31370')
+        bbox.set('minx', str(self.xmin))
+        bbox.set('miny', str(self.ymin))
+        bbox.set('maxx', str(self.xmax))
+        bbox.set('maxy', str(self.ymax))
+
+        for srs in swmc.findall(".//ctx:SRS", namespaces):
+            srs.text = "EPSG:31370"
+
+        for layer in swmc.findall(".//ctx:Layer", namespaces):
+            ext = ET.Element('Extension')
+            isBase = ET.SubElement(ext, '{http://openlayers.org/context}isBaseLayer')
+            isBase.text = "false"
+            transparent = ET.SubElement(ext, '{http://openlayers.org/context}transparent')
+            transparent.text = "true"
+            layer.append(ext)
+
+        return ET.tostring(swmc)
 
     def getLayers(self):
         tool = api.portal.get_tool("portal_urban")
@@ -71,22 +99,20 @@ class WMC(BrowserView):
         urbantool = api.portal.get_tool('portal_urban')
         context = aq_inner(self.context)
         if not hasattr(aq_base(context), "getParcels"):
-
             try:
                 extent = urbantool.getMapExtent().split(', ')
                 self.xmin = extent[0]
                 self.ymin = extent[1]
                 self.xmax = extent[2]
                 self.ymax = extent[3]
-                #zoneExtent = "%s, %s, %s, %s" % (result['xmin'], result['ymin'], result['xmax'], result['ymax'])
             except:
                 pass
         else:
             parcels = self.context.getParcels()
             cqlquery = ''
             if parcels:
-                #if we have parcels, display them on a map...
-                #generate the 'selectedpo' layer filter based on contained parcels
+                # if we have parcels, display them on a map...
+                # generate the 'selectedpo' layer filter based on contained parcels
                 for parcel in parcels:
                     if cqlquery != '':
                         cqlquery = cqlquery + " or "
@@ -111,12 +137,16 @@ class WMC(BrowserView):
                     self.ymin = result['ymin']
                     self.xmax = result['xmax']
                     self.ymax = result['ymax']
-                    #zoneExtent = "%s, %s, %s, %s" % (result['xmin'], result['ymin'], result['xmax'], result['ymax'])
                 except:
-                    #zoneExtent = ""
                     pass
-        self.tmpl = ViewPageTemplateFile("wmc.pt")
-        return self.tmpl(self)
+
+        geonodeMapUrl = urbantool.getMapUrl()
+        if geonodeMapUrl:
+            return self.parseWMC(geonodeMapUrl)
+
+        else:
+            self.tmpl = ViewPageTemplateFile("wmc.pt")
+            return self.tmpl(self)
 
 
 class ProxyController(BrowserView):
@@ -125,7 +155,7 @@ class ProxyController(BrowserView):
     def getProxy(self):
         try:
             url = self.request.get("url")
-            #infos = urlparse(url)
+            # infos = urlparse(url)
             params = self.request.form
 
             params.pop("url")
@@ -197,7 +227,7 @@ class TemplatesSummary(BrowserView):
         if not template.hasProperty('md5Modified'):
             return "question-mark.png"
         if template.md5Modified != getMd5Signature(template.odt_file.data):
-            #template manually changed
+            # template manually changed
             self.mod_count += 1
             return "warning.png"
         return None

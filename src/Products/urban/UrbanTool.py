@@ -194,6 +194,18 @@ schema = Schema((
         write_permission=permissions.ManagePortal,
     ),
     StringField(
+        name='mapUrl',
+        widget=StringField._properties['widget'](
+            description="Enter the url of the geonode map",
+            description_msgid="urban_descr_mapUrl",
+            label='Map Url',
+            label_msgid='urban_label_mapUrl',
+            i18n_domain='urban',
+        ),
+        schemata='admin_settings',
+        write_permission=permissions.ManagePortal,
+    ),
+    StringField(
         name='unoEnabledPython',
         default="/usr/bin/python",
         widget=StringField._properties['widget'](
