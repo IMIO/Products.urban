@@ -8,9 +8,10 @@ from Products.urban.utils import getMd5Signature
 
 from plone import api
 
+import logging
 import urllib
 import urllib2
-import logging
+import xml.etree.ElementTree as ET
 logger = logging.getLogger('urban: Views')
 
 namespaces = {'ctx': "http://www.opengis.net/context"}
