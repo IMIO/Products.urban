@@ -806,7 +806,7 @@ def _create_dashboard_collection(container, id, title, filter_type):
         id=id,
         title=title,
         query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': filter_type}],
-        customViewFields=('urban_title', 'CreationDate', 'folder_manager', 'actions', 'select_row'),
+        customViewFields=('sortable_title', 'CreationDate', 'folder_manager', 'actions', 'select_row'),
         sort_on=u'created',
         sort_reversed=True,
         b_size=30
