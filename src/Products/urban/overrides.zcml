@@ -18,4 +18,12 @@
         />
     </configure>
 
+    <configure package="imio.dashboard">
+        <utility
+           factory="Products.urban.dashboard.vocabularies.DashboardCollections"
+           name="imio.dashboard.conditionawarecollectionvocabulary"
+           provides="zope.schema.interfaces.IVocabularyFactory"
+        />
+    </configure>
+
 </configure>

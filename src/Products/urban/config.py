@@ -152,8 +152,8 @@ URBAN_TYPES = [
 # of content types links in urban_root_view
 ORDERED_URBAN_TYPES = [
     'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'Division',
-    'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter',
-    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'MiscDemand'
+    'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'MiscDemand',
+    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
 ]
 
 # all types that can be used as a licence applicant
