@@ -20,9 +20,9 @@ msgstr "Agent traitant"
 msgid "header_folder_manager"
 msgstr "Agent traitant"
 
-msgid "header_urban_title"
+msgid "header_sortable_title"
 msgstr "Titre"
 
-msgid "urban_title"
-msgstr "Titre (urban)"
+msgid "sortable_title"
+msgstr "Titre"
 

@@ -19,7 +19,7 @@
           collective.eeafaceted.z3ctable.interfaces.IFacetedTable"
      factory=".columns.FacetedTitleColumn"
      provides="collective.eeafaceted.z3ctable.interfaces.IFacetedColumn"
-     name="urban_title"
+     name="sortable_title"
   />
 
   <adapter

@@ -23,8 +23,8 @@ msgstr ""
 msgid "folder_manager"
 msgstr ""
 
-msgid "header_urban_title"
+msgid "header_sortable_title"
 msgstr ""
 
-msgid "urban_title"
+msgid "sortable_title"
 msgstr ""
