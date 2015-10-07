@@ -25,7 +25,17 @@
    <property name="hidealloption">1</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
-   <property name="default">c41c23c3ea6740659396cc69624c16ad</property>
+   <property name="default">5681a5887fe94dd18d651de49ac1361f</property>
+  </criterion>
+  <criterion name="c11">
+   <property name="widget">daterange</property>
+   <property name="title">Date de la décision</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">0</property>
+   <property name="index">getDecisionDate</property>
+   <property name="default"></property>
+   <property name="calYearRange">c-10:c+10</property>
   </criterion>
   <criterion name="c10">
    <property name="widget">autocomplete</property>

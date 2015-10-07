@@ -161,9 +161,7 @@ APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation']
 
 #the different templates used to structure a document
 GLOBAL_TEMPLATES = {
-    '.': [
-        {'id':'statsins.odt', 'title':'Fichier modèle pour les statistiques INS'},
-    ],
+    '.': [],
     'urbantemplates': [
         {'id':'header.odt', 'portal_type': 'SubTemplate', 'title':'En-tête urbanisme'},
         {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page urbanisme'},
@@ -177,6 +175,17 @@ GLOBAL_TEMPLATES = {
         {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' environnement'},
         {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures environnement'},
         {'id':'styles.odt', 'portal_type': 'StyleTemplate', 'title':'Styles environnement'},
+    ],
+}
+
+DASHBOARD_TEMPLATES = {
+    '.': [
+        {
+            'id':'statsins.odt',
+            'portal_type': 'DashboardPODTemplate',
+            'title':'Modèle pour les statistiques INS',
+
+        },
     ],
 }
 #the different formats proposed for generating document
