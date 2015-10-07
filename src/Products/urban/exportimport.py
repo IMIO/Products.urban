@@ -146,6 +146,7 @@ def updateAllUrbanTemplates(context):
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
     addGlobalTemplates(context)
+    addDashboardTemplates(context)
     addUrbanEventTypes(context)
 
 
@@ -177,6 +178,31 @@ def addGlobalTemplates(context):
     for status in template_log:
         if status[1] != 'no changes':
             log.append(loga("'global templates', template='%s' => %s" % (status[0], status[1]), gslog=gslogger))
+
+    return '\n'.join(log)
+
+
+def addDashboardTemplates(context):
+    """
+    Helper method to add/update dashboard templates at the root of urban config
+    """
+    profile_name = context._profile_path.split('/')[-1]
+    module_name = 'Products.urban.profiles.%s.data' % profile_name
+    attribute = 'dashboardTemplates'
+    module = __import__(module_name, fromlist=[attribute])
+    dashboard_templates = getattr(module, attribute)
+
+    site = context.getSite()
+
+    log = []
+    gslogger = context.getLogger('addDashboardTemplates')
+    tool = getToolByName(site, 'portal_urban')
+    templates_folder = getattr(tool, 'dashboardtemplates')
+
+    template_log = updateTemplates(context, templates_folder, dashboard_templates['.'])
+    for status in template_log:
+        if status[1] != 'no changes':
+            log.append(loga("'dashboard templates', template='%s' => %s" % (status[0], status[1]), gslog=gslogger))
 
     return '\n'.join(log)
 

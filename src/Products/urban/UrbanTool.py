@@ -29,7 +29,7 @@ from Products.urban.config import *
 
 from Products.CMFCore.utils import UniqueObject
 
-    
+
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
@@ -848,38 +848,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
         #return the generated JS code
         return self.generateMapJS(self, cqlquery, '', '', zoneExtent)
-
-    security.declarePublic('generateStatsINS')
-    def generateStatsINS(self, datefrom, dateto):
-        """
-        """
-        if (len(datefrom) != 10) or (len(dateto) != 10):
-            return 'Date incorrecte'
-        datesplited = datefrom.split('/')
-        datefrom = datesplited[2] + '/' + datesplited[1] + '/' + datesplited[0]
-        datesplited = dateto.split('/')
-        dateto = datesplited[2] + '/' + datesplited[1] + '/' + datesplited[0]
-        global_templates = getattr(self, 'globaltemplates')
-        templateObj = getattr(global_templates, 'statsins.odt')
-        catalog = getToolByName(self, 'portal_catalog')
-        results = catalog.searchResults(getBeginDate={'query': (DateTime(datefrom), DateTime(dateto)), 'range': 'minmax'}, id='debut-des-travaux', portal_type='UrbanEvent')
-        folders = []
-        for result in results:
-            objResult = result.getObject()
-            folderobj = objResult.aq_inner.aq_parent
-            if folderobj.getUsage() != 'not_applicable':
-                folders.append(folderobj)
-        tempFileName = '%s/%s_%f.%s' % (getOsTempFolder(), 'statsins', time.time(), '.odt')
-        renderer = appy.pod.renderer.Renderer(StringIO(templateObj), {'self': self, 'folders': folders}, tempFileName)
-        renderer.run()
-        response = self.REQUEST.RESPONSE
-        response.setHeader('Content-Type', 'applications/odt')
-        response.setHeader('Content-Disposition', 'inline;filename="statsins.odt"')
-        f = open(tempFileName, 'rb')
-        res = f.read()
-        f.close()
-        os.remove(tempFileName)
-        return res
 
     security.declarePublic('decorateHTML')
     def decorateHTML(self, classname, htmlcode):

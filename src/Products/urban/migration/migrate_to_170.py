@@ -140,6 +140,12 @@ def migrateEnvClassOneEventTypes(context):
     logger.info("starting migration step")
 
     portal_urban = api.portal.get_tool('portal_urban')
+
+    globaltemplates = portal_urban.globaltemplates
+    ins_id = 'statsins.odt'
+    if ins_id in globaltemplates.objectIds():
+        api.content.delete(getattr(globaltemplates, ins_id))
+
     eventtypes_folder = portal_urban.envclassone.urbaneventtypes
     for obj in eventtypes_folder.objectValues():
         api.content.delete(obj)
