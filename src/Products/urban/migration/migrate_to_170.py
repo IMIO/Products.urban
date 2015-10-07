@@ -157,6 +157,10 @@ def migrateDecisionsVocabulary(context):
     logger = logging.getLogger('urban: migrate decision vocabulary ->')
     logger.info("starting migration step")
 
+    #to avoid link integrity problems, disable checks
+    portal_properties = api.portal.get_tool('portal_properties')
+    portal_properties.site_properties.enable_link_integrity_checks = False
+
     portal_urban = api.portal.get_tool('portal_urban')
     decisions_global_folder = getattr(aq_base(portal_urban), 'decisions', None)
 
@@ -176,6 +180,8 @@ def migrateDecisionsVocabulary(context):
 
     api.content.delete(obj=decisions_global_folder)
 
+    #enable linkintegrity checks
+    portal_properties.site_properties.enable_link_integrity_checks = True
     # this step will fill decisions values for envclassone config
     portal_setup = api.portal.get_tool('portal_setup')
     portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-extraPostInstall')
