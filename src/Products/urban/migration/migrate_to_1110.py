@@ -37,6 +37,7 @@ def migrateToUrban1110(context):
     migrateUrbanDocToSubTemplate(context)
     migrateUrbanDocToStyleTemplate(context)
     migrateUrbanDocToUrbantemplate(context)
+    migrateStatsINSTemplate(context)
     migratePersonTitleTerm(context)
     migratePortionOut(context)
 
@@ -235,6 +236,24 @@ def migrateUrbanDocToUrbantemplate(context):
                         template=template_id
                     )
                 )
+
+    logger.info("migration step done!")
+
+
+def migrateStatsINSTemplate(context):
+    """
+    Stats INS template is now a DashboardTemplate.
+    """
+    logger = logging.getLogger('urban: migrate stats INS template->')
+    logger.info("starting migration step")
+
+    portal_urban = api.portal.get_tool('portal_urban')
+    globaltemplates = portal_urban.globaltemplates
+    ins_id = 'statsins.odt'
+    if ins_id in globaltemplates.objectIds():
+        api.content.delete(getattr(globaltemplates, ins_id))
+        portal_setup = api.portal.get_tool('portal_setup')
+        portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-updateAllUrbanTemplates')
 
     logger.info("migration step done!")
 
