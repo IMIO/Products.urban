@@ -183,7 +183,7 @@ DASHBOARD_TEMPLATES = {
         {
             'id':'statsins.odt',
             'portal_type': 'DashboardPODTemplate',
-            'title':'Modèle pour les statistiques INS',
+            'title':'Statistiques INS',
 
         },
     ],
