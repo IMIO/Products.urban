@@ -1,4 +1,3 @@
-from Products.CMFCore.utils import getToolByName
 
 from Products.Five import BrowserView
 
@@ -24,15 +23,19 @@ class SearchParcelsView(BrowserView):
         super(BrowserView, self).__init__(context, request)
         self.context = context
         self.request = request
-        self.tool = getToolByName(context, 'portal_urban')
+        # disable portlets
+        self.request.set('disable_plone.rightcolumn', 1)
+        self.request.set('disable_plone.leftcolumn', 1)
+
+        self.portal_urban = api.portal.get_tool('portal_urban')
         #this way, if portal_urban.findDivisions display a portal message
         #it will be displayed on the page
-        self.divisions = self.tool.findDivisions()
+        self.divisions = self.portal_urban.findDivisions()
         #if the search was launched with no criteria, add a message
         if not self.searchHasCriteria(self.request):
             #we still not launched the search, everything is ok ;-)
             if 'division' in request or 'location' in request or 'prcOwner' in request:
-                plone_utils = getToolByName(context, 'plone_utils')
+                plone_utils = api.portal.get_tool('plone_utils')
                 plone_utils.addPortalMessage(translate('warning_enter_search_criteria'), type="warning")
 
     def __call__(self):
@@ -109,11 +112,11 @@ class SearchParcelsView(BrowserView):
             return []
         if prc_history:
             return []
-        parcels = self.tool.queryParcels(division, section, radical, bis, exposant, puissance, location, prc_owner)
+        parcels = self.portal_urban.queryParcels(division, section, radical, bis, exposant, puissance, location, prc_owner)
         result = [prc.getParcelAsDictionary() for prc in parcels]
         already_found = set([str(prc) for prc in parcels])
         if browseoldparcels and not prc_history and not prc_owner:
-            old_parcels = self.tool.queryParcels(division, section, radical, bis, exposant, puissance, browseold=browseoldparcels)
+            old_parcels = self.portal_urban.queryParcels(division, section, radical, bis, exposant, puissance, browseold=browseoldparcels)
             for parcel in old_parcels:
                 if str(parcel) not in already_found:
                     dict_prc = parcel.getParcelAsDictionary()
@@ -125,7 +128,7 @@ class SearchParcelsView(BrowserView):
         """
         Return the concerned parcels
         """
-        parcel = self.tool.queryParcels(division, section, radical, bis, exposant, puissance, historic=True, browseold=True, fuzzy=False)[0]
+        parcel = self.portal_urban.queryParcels(division, section, radical, bis, exposant, puissance, historic=True, browseold=True, fuzzy=False)[0]
         return parcel.getHistoricForDisplay()
 
     def createParcelAndProprietary(self, parcel_data, proprietary_data):
