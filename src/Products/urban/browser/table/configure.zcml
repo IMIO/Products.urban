@@ -223,24 +223,6 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.table.interfaces.ISearchResultTable"
-     factory=".column.AddressColumn"
-     provides="z3c.table.interfaces.IColumn"
-     name="addressColumn"
-  />
-
-  <adapter
-     for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.table.interfaces.ISearchResultTable"
-     factory=".column.ParcelReferencesColumn"
-     provides="z3c.table.interfaces.IColumn"
-     name="parcelreferencesColumn"
-  />
-
-  <adapter
-     for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IUrbanTable"
      factory=".column.ActionsColumn"
      provides="z3c.table.interfaces.IColumn"
