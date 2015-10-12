@@ -68,3 +68,39 @@ class LicenceTitleDisplay(TitleDisplay):
             title = '%s<br/><span class="discreet">%s</span>' % (title, lastkeyevent)
 
         return title
+
+
+class AddressColumn(BaseColumn):
+    """ display licence address in SearchResultTable """
+
+    def renderCell(self, item):
+        licence = item.getObject()
+        addresses = licence.getWorkLocationSignaletic()
+
+        address_render = []
+        for address in addresses.split(' et '):
+            render = '<span>%s</span>' % address
+            address_render.append(render)
+
+        address_render = '<br />'.join(address_render)
+        address_render = address_render.decode('utf-8')
+
+        return address_render
+
+
+class ParcelReferencesColumn(BaseColumn):
+    """ display licence parcel references in SearchResultTable """
+
+    def renderCell(self, item):
+        licence = item.getObject()
+        parcels = licence.getParcels()
+
+        parcel_render = []
+        for parcel in parcels:
+            render = '<span>%s</span>' % parcel.Title()
+            parcel_render.append(render)
+
+        parcel_render = '<br />'.join(parcel_render)
+        parcel_render = parcel_render.decode('utf-8')
+
+        return parcel_render
