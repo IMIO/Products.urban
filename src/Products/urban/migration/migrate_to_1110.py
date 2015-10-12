@@ -214,6 +214,7 @@ def migrateUrbanDocToUrbantemplate(context):
             for urbandoc in eventtype.objectValues('UrbanDoc'):
                 template_blob = urbandoc.getFile()
                 template_id = urbandoc.id
+                template_state = api.content.get_state(urbandoc)
                 urban_template_args = {
                     'type': 'UrbanTemplate',
                     'id':  template_id,
@@ -229,7 +230,8 @@ def migrateUrbanDocToUrbantemplate(context):
                     'container': eventtype,
                 }
                 api.content.delete(urbandoc)
-                api.content.create(**urban_template_args)
+                new_template = api.content.create(**urban_template_args)
+                api.content.transition(obj=new_template, to_state=template_state)
                 logger.info(
                     '{config} {template}'.format(
                         config=config.Title(),
