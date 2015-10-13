@@ -169,7 +169,7 @@ class ScheduleView(grok.View):
             'path': {'query': path},
         }
 
-        if foldermanager_uid != 'all':
+        if foldermanager_uid != 'all' and foldermanager_uid is not None:
             if foldermanager_uid == 'me':
                 foldermanager_uid = getCurrentFolderManager().UID()
             query_string['folder_manager'] = foldermanager_uid
