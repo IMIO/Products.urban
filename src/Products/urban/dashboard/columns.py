@@ -73,6 +73,9 @@ class LicenceTitleDisplay(TitleDisplay):
 class AddressColumn(BaseColumn):
     """ display licence address in SearchResultTable """
 
+    # column not sortable
+    sort_index = -1
+
     def renderCell(self, item):
         licence = item.getObject()
         addresses = licence.getWorkLocationSignaletic()
@@ -90,6 +93,9 @@ class AddressColumn(BaseColumn):
 
 class ParcelReferencesColumn(BaseColumn):
     """ display licence parcel references in SearchResultTable """
+
+    # column not sortable
+    sort_index = -1
 
     def renderCell(self, item):
         licence = item.getObject()
