@@ -17,7 +17,13 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.eeafaceted.z3ctable\n"
 
+msgid "header_address_column"
+msgstr ""
+
 msgid "header_folder_manager"
+msgstr ""
+
+msgid "header_parcelreferences_column"
 msgstr ""
 
 msgid "folder_manager"

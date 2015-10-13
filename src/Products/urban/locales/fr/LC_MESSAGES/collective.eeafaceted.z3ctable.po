@@ -17,8 +17,14 @@ msgstr ""
 msgid "folder_manager"
 msgstr "Agent traitant"
 
+msgid "header_address_column"
+msgstr "Adresse"
+
 msgid "header_folder_manager"
 msgstr "Agent traitant"
+
+msgid "header_parcelreferences_column"
+msgstr "Ref. Cadastrale"
 
 msgid "header_sortable_title"
 msgstr "Titre"
