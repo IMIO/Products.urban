@@ -33,6 +33,12 @@ class ScheduleView(grok.View):
 
     template = ViewPageTemplateFile('templates/scheduleview.pt')
 
+    def __init__(self, context, request):
+        super(ScheduleView, self).__init__(context, request)
+        # disable portlets on licences
+        self.request.set('disable_plone.rightcolumn', 1)
+        self.request.set('disable_plone.leftcolumn', 1)
+
     def refreshBatch(self, batch_start):
         # switch_on(self)
         self.schedulelisting.batchStart = batch_start
