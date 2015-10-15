@@ -33,13 +33,13 @@ from plone import api
 schema = Schema((
 
     DateTimeField(
-        name='explanationStartSDate',
+        name='explanationsDate',
         widget=DateTimeField._properties['widget'](
             show_hm=True,
-            condition="python:here.attributeIsUsed('explanationStartSDate')",
+            condition="python:here.attributeIsUsed('explanationsDate')",
             format="%d/%m/%Y %H:%M",
             label='Explanationstartsdate',
-            label_msgid='urban_label_explanationStartSDate',
+            label_msgid='urban_label_explanationsDate',
             i18n_domain='urban',
         ),
         optional=True,

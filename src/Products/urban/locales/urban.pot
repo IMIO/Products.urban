@@ -2042,7 +2042,7 @@ msgstr ""
 
 #. Default: "Explanationstartsdate"
 #: UrbanEventInquiry.py
-msgid "urban_label_explanationStartSDate"
+msgid "urban_label_explanationsDate"
 msgstr ""
 
 #. Default: "Exploitationcondition"

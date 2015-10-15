@@ -2045,7 +2045,7 @@ msgstr "Date de fin de la séance d'explications"
 
 #. Default: "Explanationstartsdate"
 #: UrbanEventInquiry.py
-msgid "urban_label_explanationStartSDate"
+msgid "urban_label_explanationsDate"
 msgstr "Date de debut de la séance d'explications"
 
 #. Default: "Exploitationcondition"
