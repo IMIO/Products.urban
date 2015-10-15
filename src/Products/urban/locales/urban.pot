@@ -1810,6 +1810,11 @@ msgstr ""
 msgid "urban_label_claimsDate"
 msgstr ""
 
+#. Default: "Claimendsdate"
+#: UrbanEvent.py
+msgid "urban_label_claimEndSDate"
+msgstr ""
+
 #. Default: "Claimstext"
 #: UrbanEvent.py
 msgid "urban_label_claimsText"
@@ -2001,6 +2006,11 @@ msgstr ""
 #. Default: "Explanationsdate"
 #: UrbanEvent.py
 msgid "urban_label_explanationsDate"
+msgstr ""
+
+#. Default: "Explanationendsdate"
+#: UrbanEvent.py
+msgid "urban_label_explanationEndSDate"
 msgstr ""
 
 #. Default: "Exploitationcondition"

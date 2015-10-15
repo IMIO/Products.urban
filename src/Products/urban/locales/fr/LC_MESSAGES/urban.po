@@ -1806,7 +1806,12 @@ msgstr "Texte de la réclamation"
 #. Default: "Claimsdate"
 #: UrbanEvent.py
 msgid "urban_label_claimsDate"
-msgstr "Date de la séance de réclamations"
+msgstr "Date de début de la séance de réclamations"
+
+#. Default: "Claimendsdate"
+#: UrbanEvent.py
+msgid "urban_label_claimEndSDate"
+msgstr "Date de fin de la séance de réclamations"
 
 #. Default: "Claimstext"
 #: UrbanEvent.py
@@ -2001,7 +2006,12 @@ msgstr "Catégorie du type d'événement"
 #. Default: "Explanationsdate"
 #: UrbanEvent.py
 msgid "urban_label_explanationsDate"
-msgstr "Date de la séance d'explications"
+msgstr "Date de début de la séance d'explications"
+
+#. Default: "Explanationendsdate"
+#: UrbanEvent.py
+msgid "urban_label_explanationEndSDate"
+msgstr "Date de fin de la séance d'explications"
 
 #. Default: "Exploitationcondition"
 #: EnvironmentRubricTerm.py

@@ -45,6 +45,18 @@ schema = Schema((
         optional=True,
     ),
     DateTimeField(
+        name='explanationEndSDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=True,
+            condition="python:here.attributeIsUsed('explanationEndSDate')",
+            format="%d/%m/%Y%H",
+            label='Explanationendsdate',
+            label_msgid='urban_label_explanationEndSDate',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
+    DateTimeField(
         name='claimsDate',
         widget=DateTimeField._properties['widget'](
             show_hm=True,
@@ -52,6 +64,18 @@ schema = Schema((
             format="%d/%m/%Y%H",
             label='Claimsdate',
             label_msgid='urban_label_claimsDate',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
+    DateTimeField(
+        name='claimEndSDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=True,
+            condition="python:here.attributeIsUsed('claimEndSDate')",
+            format="%d/%m/%Y%H",
+            label='Claimendsdate',
+            label_msgid='urban_label_claimEndSDate',
             i18n_domain='urban',
         ),
         optional=True,
