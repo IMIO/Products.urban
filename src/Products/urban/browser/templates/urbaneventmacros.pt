@@ -21,7 +21,7 @@
                 <td>
                     <strong i18n:translate="" tal:content="python: 'urban_label_' + field">Optional field label</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
-                <tal:manage_show_nc_if_needed define="value python: getattr(context, field)">
+                <tal:manage_show_nc_if_needed define="value python: context.getField(field).getAccessor(context)()">
                     <td tal:condition="value">
                         <tal:no_long_text condition="python: not 'Text' in field">
                             <metal:myfield use-macro="python: context.widget(field, mode='view')" />
