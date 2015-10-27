@@ -11,6 +11,13 @@
         permission="zope2.View"
         />
 
+    <browser:page
+        for="*"
+        name="document-generation"
+        class="Products.urban.docgen.generationview.SimpleDocumentGenerationView"
+        permission="zope2.View"
+        />
+
     <adapter
       for="Products.urban.docgen.UrbanTemplate.IUrbanTemplate
            zope.interface.Interface"
