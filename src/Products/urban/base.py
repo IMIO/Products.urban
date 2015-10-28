@@ -163,6 +163,20 @@ class UrbanBase(object):
         elif self.getType() == 'ParceOutLicence':
             return 'test'
 
+    security.declarePublic('getWorkLocationCities')
+    def getWorkLocationCities(self):
+        """
+          Returns a string reprensenting the different worklocation's cities
+        """
+        catalog = api.portal.get_tool("uid_catalog")
+        cities = ''
+        for wl in self.getWorkLocations():
+            #wl is a dict with street as the street obj uid and number as the number in the street
+            street = catalog(UID=wl['street'])[0].getObject()
+            city = street.getParentNode()
+            cities += "%s " % (city.Title())
+        return cities
+
     security.declarePublic('getWorkLocationSignaletic')
     def getWorkLocationSignaletic(self):
         """
