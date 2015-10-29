@@ -48,7 +48,7 @@
         description="urban upgrade step"
         source="1.10.0"
         destination="1.11.0"
-        handler=".migrate_to_1110.migrateToUrban1110"
+        handler=".migrate_to_1110.migrate"
         profile="Products.urban:default" />
 
 </configure>

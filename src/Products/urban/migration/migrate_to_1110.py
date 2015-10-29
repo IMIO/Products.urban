@@ -7,6 +7,7 @@ from Products.urban.config import GLOBAL_TEMPLATES
 from Products.urban.interfaces import IPortionOut
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.setuphandlers import createFolderDefaultValues
 
 from plone import api
 from plone.namedfile.file import NamedBlobFile
@@ -26,20 +27,21 @@ def contentmigrationLogger(oldObject, **kwargs):
     return True
 
 
-def migrateToUrban1110(context):
+def migrate(context):
     """
      Launch every migration steps for the version 1.11.0
     """
     logger = logging.getLogger('urban: migrate to 1.11.0')
     logger.info("starting migration steps")
     #  migrate UrbanDoc to File type with an IUrbanDoc marker interface on it.
-    migrateGeneratedUrbanDocToATFile(context)
-    migrateUrbanDocToSubTemplate(context)
-    migrateUrbanDocToStyleTemplate(context)
-    migrateUrbanDocToUrbantemplate(context)
-    migrateStatsINSTemplate(context)
-    migratePersonTitleTerm(context)
-    migratePortionOut(context)
+    migrate_generated_UrbanDoc_to_ATFile(context)
+    migrate_UrbanDoc_to_SubTemplate(context)
+    migrate_UrbanDoc_to_StyleTemplate(context)
+    migrate_UrbanDoc_to_Urbantemplate(context)
+    migrate_statsINS_template(context)
+    migrate_PersonTitleTerm(context)
+    migrate_PortionOut(context)
+    migrate_worktypes(context)
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
     setup_tool = api.portal.get_tool('portal_setup')
@@ -65,7 +67,7 @@ class UrbanDocToATFileMigrator(InplaceATFolderMigrator):
         alsoProvides(self.new, IUrbanDoc)
 
 
-def migrateGeneratedUrbanDocToATFile(context):
+def migrate_generated_UrbanDoc_to_ATFile(context):
     """
     UrbanDoc type is now File.
     """
@@ -98,7 +100,7 @@ def migrateGeneratedUrbanDocToATFile(context):
     logger.info("migration step done!")
 
 
-def migrateUrbanDocToSubTemplate(context):
+def migrate_UrbanDoc_to_SubTemplate(context):
     """
     UrbanDoc global templates are now SubTemplate.
     """
@@ -141,7 +143,7 @@ def migrateUrbanDocToSubTemplate(context):
     logger.info("migration step done!")
 
 
-def migrateUrbanDocToStyleTemplate(context):
+def migrate_UrbanDoc_to_StyleTemplate(context):
     """
     UrbanDoc style templates are now StyleTemplate.
     """
@@ -186,7 +188,7 @@ def migrateUrbanDocToStyleTemplate(context):
     logger.info("migration step done!")
 
 
-def migrateUrbanDocToUrbantemplate(context):
+def migrate_UrbanDoc_to_Urbantemplate(context):
     """
     UrbanDoc templates are now UrbanTemplate.
     """
@@ -242,7 +244,7 @@ def migrateUrbanDocToUrbantemplate(context):
     logger.info("migration step done!")
 
 
-def migrateStatsINSTemplate(context):
+def migrate_statsINS_template(context):
     """
     Stats INS template is now a DashboardTemplate.
     """
@@ -260,7 +262,7 @@ def migrateStatsINSTemplate(context):
     logger.info("migration step done!")
 
 
-def migratePersonTitleTerm(context):
+def migrate_PersonTitleTerm(context):
     """
     toggle value from extraValue to reverseTitle
     """
@@ -271,12 +273,12 @@ def migratePersonTitleTerm(context):
     personsTitleTerms = portal_urban.persons_titles.objectValues()
 
     for personsTitleTerm in personsTitleTerms:
-        personsTitleTerm.reverseTitle = getReverseTitleValue(context, personsTitleTerm.id)
+        personsTitleTerm.reverseTitle = get_reverse_title(context, personsTitleTerm.id)
 
     logger.info("migration step done!")
 
 
-def getReverseTitleValue(context, id):
+def get_reverse_title(context, id):
     """
     Get reverseTitle from config
     """
@@ -288,7 +290,7 @@ def getReverseTitleValue(context, id):
     return ''
 
 
-def migratePortionOut(context):
+def migrate_PortionOut(context):
     """
     Mark portion
     """
@@ -308,3 +310,74 @@ def migratePortionOut(context):
         )
 
     logger.info("migration step done!")
+
+
+def migrate_worktypes(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate worktypes')
+    logger.info("starting migration step")
+
+    worktypes_info = default_values['shared_vocabularies']['folderbuildworktypes']
+
+    create_new_worktypes(worktypes_info)
+    migrate_licence_worktype(worktypes_info)
+    remove_old_worktypes(worktypes_info)
+
+    logger.info("migration step done!")
+
+
+def create_new_worktypes(worktypes_info):
+    urban_tool = api.portal.get_tool('portal_urban')
+    voc_portal_type = worktypes_info[0]
+    licence_types = worktypes_info[1]
+    new_worktypes = worktypes_info[2:]
+    licenceconfig_ids = [name.lower() for name in licence_types]
+
+    for licenceconfig_id in licenceconfig_ids:
+        licenceconfig = getattr(urban_tool, licenceconfig_id)
+        worktypes_folder = licenceconfig.folderbuildworktypes
+        createFolderDefaultValues(worktypes_folder, new_worktypes, voc_portal_type)
+
+
+def migrate_licence_worktype(worktypes_info):
+    licence_types = worktypes_info[1]
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_brains = catalog(portal_type=licence_types)
+    for brain in licence_brains:
+        licence = brain.getObject()
+        field = licence.getField('workType')
+        vocterms = field.vocabulary.getAllVocTerms(licence)
+        old_values = licence.getWorkType()
+        new_values = []
+        for old_worktype in old_values:
+            vocterm = vocterms[old_worktype]
+            if vocterm.getExtraValue() in vocterms.keys():
+                new_values.append(vocterm.getExtraValue())
+            else:
+                new_values.append(old_worktype)
+        licence.setWorkType(new_values)
+        logger.info('migrate worktype of {licence}'.format(licence=licence.Title()))
+
+
+def remove_old_worktypes(worktypes_info):
+    urban_tool = api.portal.get_tool('portal_urban')
+    licence_types = worktypes_info[1]
+    licenceconfig_ids = [name.lower() for name in licence_types]
+    new_worktypes = worktypes_info[2:]
+    new_worktype_ids = [wt['id'] for wt in new_worktypes]
+
+    to_delete = []
+    for licenceconfig_id in licenceconfig_ids:
+        licenceconfig = getattr(urban_tool, licenceconfig_id)
+        worktypes_folder = licenceconfig.folderbuildworktypes
+        for worktype in worktypes_folder.objectValues():
+            if worktype.id not in new_worktype_ids and worktype.getExtraValue() in new_worktype_ids:
+                to_delete.append(worktype)
+                logger.info(
+                    'delete old worktype {licenceconfig}/{worktype}'.format(
+                        licenceconfig=licenceconfig.Title(),
+                        worktype=worktype.Title()
+                    )
+                )
+    api.content.delete(objects=to_delete, check_linkintegrity=False)
