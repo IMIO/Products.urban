@@ -190,7 +190,7 @@ def addDashboardTemplates(context):
     module_name = 'Products.urban.profiles.%s.data' % profile_name
     attribute = 'dashboardTemplates'
     module = __import__(module_name, fromlist=[attribute])
-    dashboard_templates = getattr(module, attribute)
+    dashboard_templates = getattr(module, attribute).copy()
 
     site = context.getSite()
 
