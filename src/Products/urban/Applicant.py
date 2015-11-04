@@ -279,7 +279,7 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
         title = self.getPersonTitleValue(short, linebyline, reverse)
         namedefined = self.getName1() or self.getName2()
         names = '%s %s' % (self.getName1(), self.getName2())
-        if invertnames and linebyline:
+        if invertnames:
             names = '%s %s' % (self.getName2(), self.getName1())
         namepart = namedefined and names or self.getSociety()
         nameSignaletic = '%s %s' % (title, namepart.decode('utf8'))
