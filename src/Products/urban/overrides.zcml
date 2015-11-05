@@ -2,6 +2,24 @@
            xmlns:browser="http://namespaces.zope.org/browser"
            i18n_domain="urban">
 
+    <browser:viewlet
+        name="plone.contentactions"
+        for="*"
+        view="plone.app.layout.globals.interfaces.IViewView"
+        manager="plone.app.layout.viewlets.interfaces.IContentViews"
+        class="plone.app.layout.viewlets.common.ContentActionsViewlet"
+        permission="cmf.ManagePortal"
+        />
+
+    <browser:viewlet
+        name="plone.contentactions"
+        for="*"
+        view="plone.app.content.browser.interfaces.IFolderContentsView"
+        manager="plone.app.layout.viewlets.interfaces.IContentViews"
+        class="plone.app.layout.viewlets.common.ContentActionsViewlet"
+        permission="cmf.ManagePortal"
+        />
+
     <configure package="collective.eeafaceted.collectionwidget">
         <browser:page
             for="*"

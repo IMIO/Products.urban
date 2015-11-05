@@ -29,7 +29,14 @@ class ToolsRenderer(base.Renderer):
     def available(self):
         if api.user.is_anonymous():
             return False
-        roles = api.user.get_roles(user=api.user.get_current(), obj=self.context)
+
+        site = api.portal.get()
+        if self.context == site.urban:
+            context = self.context.buildlicences
+        else:
+            context = self.context
+
+        roles = api.user.get_roles(user=api.user.get_current(), obj=context)
         available = 'Manager' in roles or 'Editor' in roles
         return available
 
@@ -69,7 +76,14 @@ class ConfigRenderer(base.Renderer):
     def available(self):
         if api.user.is_anonymous():
             return False
-        roles = api.user.get_roles(user=api.user.get_current(), obj=self.context)
+
+        site = api.portal.get()
+        if self.context == site.urban:
+            context = self.context.buildlicences
+        else:
+            context = self.context
+
+        roles = api.user.get_roles(user=api.user.get_current(), obj=context)
         available = 'Manager' in roles or 'Editor' in roles
         return available
 
