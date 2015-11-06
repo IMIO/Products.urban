@@ -374,7 +374,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
            personTitle = self.displayValue(self.Vocabulary('personTitle')[0], personTitle)
         else:
             personTitle = personTitle.extraValue
-        import ipdb; ipdb.set_trace()
         return personTitle
 
     def isMasculineSingular(self):
