@@ -370,14 +370,12 @@ class Contact(BaseContent, BrowserDefaultMixin):
           Returns the personTitle real value.  Usefull for being used in templates
         """
         personTitle = self.getPersonTitle(short, reverse, theObject=extra)
-        if short or personTitle == 'Monsieur, Madame':
-            return personTitle
-        elif extra:
-            return personTitle.extraValue
-        elif personTitle:
-            return self.displayValue(self.Vocabulary('personTitle')[0], personTitle)
+        if type(personTitle) == str:
+           personTitle = self.displayValue(self.Vocabulary('personTitle')[0], personTitle)
         else:
-            return ''
+            personTitle = personTitle.extraValue
+        import ipdb; ipdb.set_trace()
+        return personTitle
 
     def isMasculineSingular(self):
         """
