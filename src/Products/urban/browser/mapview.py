@@ -14,6 +14,8 @@ class MapView(BrowserView):
         super(BrowserView, self).__init__(context, request)
         self.context = context
         self.request = request
+        self.request.set('disable_plone.rightcolumn', 1)
+        self.request.set('disable_plone.leftcolumn', 1)
         plone_utils = getToolByName(context, 'plone_utils')
         if not self.context.getParcels():
             plone_utils.addPortalMessage(_('warning_add_a_parcel'), type="warning")
