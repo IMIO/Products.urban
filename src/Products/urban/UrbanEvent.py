@@ -26,6 +26,7 @@ from Products.urban.config import *
 from DateTime import DateTime
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.ATContentTypes.interfaces.file import IATFile
 from Products.CMFCore.utils import getToolByName
 
 from Products.urban.interfaces import IUrbanDoc
@@ -482,7 +483,10 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         """
           Return the attachments (File) of the UrbanEvent
         """
-        attachments = [obj for obj in self.objectValues() if not IUrbanDoc.providedBy(obj)]
+        def is_attachment(obj):
+            return IATFile.providedBy(obj) and not IUrbanDoc.providedBy(obj)
+
+        attachments = [obj for obj in self.objectValues() if is_attachment(obj)]
         return attachments
 
     security.declarePublic('RecipientsCadastreCSV')
