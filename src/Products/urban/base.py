@@ -339,7 +339,7 @@ class UrbanBase(object):
     getMultipleApplicants = getMultipleApplicantsCSV
 
     security.declarePublic('getMultipleOrganizationCSV')
-    def getMultipleOrganizationCSV(self):
+    def getMultipleOrganizationsCSV(self):
         """
           Returns a formatted version of the organization to be used in POD templates
         """
@@ -355,9 +355,9 @@ class UrbanBase(object):
                     '|' + organization.getTypeAndStreetName_number_box() +\
                     '|' + organization.getPostcode_locality() +\
                     '|' + organization.getCountry()
-        toreturn = toreturn + '<CSV>'
+        toreturn = toreturn + '</CSV>'
         return toreturn
-    getMultipleOrganization = getMultipleOrganizationCSV
+    getMultipleOrganizations = getMultipleOrganizationsCSV
 
     security.declarePublic('getMultipleClaimantsCSV')
     def getMultipleClaimantsCSV(self):
