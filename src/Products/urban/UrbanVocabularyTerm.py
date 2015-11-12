@@ -102,6 +102,28 @@ class UrbanVocabularyTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMi
     # Manually created methods
 
     security.declarePublic('getFormattedDescription')
+    def getAddress(self):
+        """
+          get the address
+        """
+        address = ''
+        if self.getRecipientSName():
+            address += self.getRecipientSName()
+        if self.getFunction_department():
+            address += '\n' + self.getFunction_department()
+        if self.getOrganization():
+            address += '\n' + self.getOrganization()
+        if self.getDispatchSInformation():
+            address += '\n' + self.getDispatchSInformation()
+        if self.getTypeAndStreetName_number_box():
+            address += '\n' + self.getTypeAndStreetName_number_box()
+        if self.getPostcode_locality():
+            address += '\n' + self.getPostcode_locality()
+        if self.getCountry():
+            address += '\n' + self.getCountry()
+        return address
+
+    security.declarePublic('getFormattedDescription')
     def getFormattedDescription(self, linebyline=True, prefix=''):
         """
           This method can get the description in different formats
