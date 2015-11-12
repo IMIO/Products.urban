@@ -207,6 +207,7 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
             res.append('1')
         else:
             res.append('0')
+        res = [part or '' for part in res]
         return ",".join(res)
 
     security.declarePublic('getDivisionName')
