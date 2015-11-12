@@ -345,10 +345,17 @@ class UrbanBase(object):
         """
         organizations = [self.getField('solicitOpinionsTo').vocabulary.getAllVocTerms(self).get(key, None) for key in
         self.getSolicitOpinionsTo()]
-        toreturn = '[CSV]Description'
+        toreturn = '<CSV>recipientSName|function_department|organization|dispatchSInformation|' +\
+                'typeAndStreetName_number_box|postcode_locality|country'
         for organization in organizations:
-            toreturn = toreturn + '%' + organization.Description()
-        toreturn = toreturn + '[CSV]'
+            toreturn = toreturn + '%' + organization.getRecipientSName() +\
+                    '|' + organization.getFunction_department() +\
+                    '|' + organization.getOrganization() +\
+                    '|' + organization.getDispatchSInformation() +\
+                    '|' + organization.getTypeAndStreetName_number_box() +\
+                    '|' + organization.getPostcode_locality() +\
+                    '|' + organization.getCountry()
+        toreturn = toreturn + '<CSV>'
         return toreturn
     getMultipleOrganization = getMultipleOrganizationCSV
 
