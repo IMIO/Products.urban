@@ -1524,6 +1524,11 @@ msgstr "Enquête publique n°${number} du"
 msgid "urban_label_BuildLicenceNumerotation"
 msgstr "Numérotation des permis d'urbanisme"
 
+#. Default: "country"
+#: OpinionRequestEventType.py
+msgid "urban_label_country"
+msgstr "Pays"
+
 #. Default: "Dgo4reference"
 #: ParcellingTerm.py
 msgid "urban_label_DGO4Reference"
@@ -1534,6 +1539,11 @@ msgstr "Référence de la région wallone"
 msgid "urban_label_DeclarationNumerotation"
 msgstr "Numérotation des déclarations"
 
+#. Default: "dispatchSInformation"
+#: OpinionRequestEventType.py
+msgid "urban_label_dispatchSInformation"
+msgstr "Informations de dispatch"
+
 #. Default: "Divisionnumerotation"
 #: UrbanTool.py
 msgid "urban_label_DivisionNumerotation"
@@ -1543,6 +1553,11 @@ msgstr "Numérotation des divisions"
 #: UrbanTool.py
 msgid "urban_label_EnvClassThreeNumerotation"
 msgstr "Numérotation des déclarations environnementales"
+
+#. Default: "function_department"
+#: OpinionRequestEventType.py
+msgid "urban_label_function_department"
+msgstr "Fonction, Département"
 
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
@@ -1565,6 +1580,11 @@ msgstr "Numéro NIS"
 msgid "urban_label_NotaryLetterNumerotation"
 msgstr "Numérotation des lettres de notaire"
 
+#. Default: "organization"
+#: OpinionRequestEventType.py
+msgid "urban_label_organization"
+msgstr "Organisation"
+
 #. Default: "Prenu"
 #: GenericLicence.py
 msgid "urban_label_PRenU"
@@ -1580,10 +1600,20 @@ msgstr "Périmètre de Revitalisation Urbaine"
 msgid "urban_label_ParcelOutLicenceNumerotation"
 msgstr "Numérotation des permis d'urbanisation"
 
+#. Default: "postcode_locality"
+#: OpinionRequestEventType.py
+msgid "urban_label_postcode_locality"
+msgstr "Code postal et localité"
+
 #. Default: "Rcu"
 #: GenericLicence.py
 msgid "urban_label_RCU"
 msgstr "Règlement Communal d'Urbanisme (R.C.U.)"
+
+#. Default: "recipientSName"
+#: OpinionRequestEventType.py
+msgid "urban_label_recipientSName"
+msgstr "Nom du destinataire"
 
 #. Default: "Srs"
 #: Layer.py
@@ -1599,6 +1629,11 @@ msgstr "Schéma de Structure Communal (S.S.C.)"
 #: UrbanEventType.py
 msgid "urban_label_TALCondition"
 msgstr "Condition TAL"
+
+#. Default: "typeAndStreetName_number_box"
+#: OpinionRequestEventType.py
+msgid "urban_label_typeAndStreetName_number_box"
+msgstr "Type et nom de rue, numéro et boîte"
 
 #. Default: "Urbancertificateonenumerotation"
 #: UrbanTool.py
