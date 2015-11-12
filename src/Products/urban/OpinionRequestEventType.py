@@ -29,16 +29,71 @@ from Products.urban.config import *
 schema = Schema((
 
 
+    StringField(
+        name='recipientSName',
+        widget=StringField._properties['widget'](
+            label='Recipientsname',
+            label_msgid='urban_label_recipientSName',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='function_department',
+        widget=StringField._properties['widget'](
+            label='Function_department',
+            label_msgid='urban_label_function_department',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='organization',
+        widget=StringField._properties['widget'](
+            label='Organization',
+            label_msgid='urban_label_organization',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='dispatchSInformation',
+        widget=StringField._properties['widget'](
+            label='Dispatchsinformation',
+            label_msgid='urban_label_dispatchSInformation',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='typeAndStreetName_number_box',
+        widget=StringField._properties['widget'](
+            label='Typeandstreetname_number_box',
+            label_msgid='urban_label_typeAndStreetName_number_box',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='postcode_locality',
+        widget=StringField._properties['widget'](
+            label='Postcode_locality',
+            label_msgid='urban_label_postcode_locality',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='country',
+        widget=StringField._properties['widget'](
+            label='Country',
+            label_msgid='urban_label_country',
+            i18n_domain='urban',
+        ),
+    ),
 ),
 )
 
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-OpinionRequestEventType_schema = OrderedBaseFolderSchema.copy() + \
+OpinionRequestEventType_schema = OrderedBaseFolderSchema.copy() + schema.copy() + \
     getattr(UrbanEventType, 'schema', Schema(())).copy() + \
-    getattr(UrbanVocabularyTerm, 'schema', Schema(())).copy() + \
-    schema.copy()
+    getattr(UrbanVocabularyTerm, 'schema', Schema(())).copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
