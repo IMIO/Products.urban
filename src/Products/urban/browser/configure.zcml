@@ -241,14 +241,6 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
-     name="parcelsinfo"
-     class=".parcelsinfo.ParcelsInfo"
-     template="templates/parcelsinfo.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
      for="*"
      name="urbanstatsview"
      class=".urbanstatsview.UrbanStatsView"
