@@ -171,6 +171,9 @@ class ClaimantsTable(ContactTable):
 class RecipientsCadastreTable(UrbanTable, SequenceTable):
     """  """
     implements(IRecipientsCadastreTable)
+    batchStart = 0
+    batchSize = 999
+    startBatchingAt = 999
 
     cssClasses = {'table': 'listing largetable'}
 
@@ -179,6 +182,9 @@ class ParcelsTable(UrbanTable, SequenceTable):
     """
     """
     implements(IParcelsTable)
+    batchStart = 0
+    batchSize = 999
+    startBatchingAt = 999
 
     cssClasses = {'table': 'listing largetable'}
 
