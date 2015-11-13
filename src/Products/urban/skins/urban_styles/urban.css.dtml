@@ -272,4 +272,12 @@ dl.portlet.portletWidgetCollection div.widget-portlet li {
     line-height: 1.3em;
 }
 
+#urbain220-generation-view {
+    padding-right: 1em;
+    text-align: right;
+}
+
+#urbain220-generation-view ul.pod-template {
+    list-style: outside none none;
+}
 /* </dtml-with> */

@@ -7,6 +7,7 @@
   <include package=".licence" />
   <include package=".table" />
   <include package=".schedule" />
+  <include package=".viewlets" />
 
   <include file="portlets.zcml" />
 
@@ -45,13 +46,6 @@
      for="*"
      name="mayAccessUrban"
      class=".urbanview.MayAccessUrban"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="Products.ATContentTypes.interfaces.IATFolder"
-     name="urbainxml"
-     class=".urbain_220.UrbainXMLExport"
      permission="zope2.View"
   />
 

@@ -1,24 +1,76 @@
 # -*- coding: utf-8 -*-
 
 from DateTime import DateTime
-from StringIO import StringIO
 
 from Products.Five import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
+from StringIO import StringIO
+
+from eea.facetednavigation.interfaces import IFacetedNavigable
+
+from imio.dashboard.utils import getDashboardQueryResult
+from imio.dashboard.utils import getCriterionByIndex
+
 from plone import api
+from plone.app.layout.viewlets import ViewletBase
+
+import json
+
+
+class Urbain220Viewlet(ViewletBase):
+    """For displaying on dashboards."""
+
+    render = ViewPageTemplateFile('./templates/urbain_220.pt')
+
+    def available(self):
+        """
+        This viewlet is only visible on buildlicences faceted view if we queried by date.
+        """
+        buildlicences = self.context.id == 'buildlicences'
+        faceted_context = bool(IFacetedNavigable.providedBy(self.context))
+        return faceted_context and buildlicences and self.get_date_range()
+
+    def get_date_range(self):
+        """
+        Return the faceted query date range.
+        """
+        criterion = getCriterionByIndex(self.context, u'getDecisionDate')
+        decisiondate_id = '{}[]'.format(criterion.getId())
+        date_range = self.request.get(decisiondate_id, None)
+        return date_range
+
+    def get_links_info(self):
+        base_url = self.context.absolute_url()
+        output_format = 'xml'
+        url = '{base_url}/generate_urbain_220xml?output_format={output_format}'.format(
+            base_url=base_url,
+            output_format=output_format
+        )
+        link = {'link': url, 'title': 'Liste 220', 'output_format': output_format, 'template_uid': ''}
+        return [link]
 
 
 class UrbainXMLExport(BrowserView):
 
     def __call__(self):
-        datefrom = self.request.form['datefrom']
-        dateto = self.request.form['dateto']
-        list_only = self.request.form.get('list_only', False)
-        return self.generateUrbainXML(datefrom, dateto, list_only)
+        dateto, datefrom = self.get_date_range()
+        brains = getDashboardQueryResult(self.context)
+        return self.generateUrbainXML(brains, datefrom, dateto)
 
-    def generateUrbainXML(self, datefrom, dateto, list_only):
+    def get_date_range(self):
+        faceted_query = self.request.get('facetedQuery', None)
+        if faceted_query:
+            query = json.JSONDecoder().decode(faceted_query)
+            criterion = getCriterionByIndex(self.context, u'getDecisionDate')
+            decisiondate_id = criterion.getId()
+            date_range = query.get(decisiondate_id)
+            date_range = [DateTime(date) for date in date_range]
+            return date_range
+
+    def generateUrbainXML(self, licence_brains, datefrom, dateto):
 
         def reverseDate(date):
             split = date.split('/')
@@ -33,17 +85,9 @@ class UrbainXMLExport(BrowserView):
                 error.append(error_message)
             return condition
 
-        datefrom = reverseDate(datefrom)
-        dateto = reverseDate(dateto)
         portal_urban = api.portal.get_tool('portal_urban')
         catalog = api.portal.get_tool('portal_catalog')
-        pw = api.portal.get_tool('portal_workflow')
-        results = catalog.searchResults(
-            getDecisionDate={'query': (DateTime(datefrom), DateTime(dateto)), 'range': 'minmax'},
-            object_provides='Products.urban.interfaces.ITheLicenceEvent',
-            portal_type='UrbanEvent'
-        )
-        results = [brain.getObject() for brain in results if brain.getObject().aq_parent.portal_type in ['BuildLicence', ]]
+
         xml = []
         error = []
         html_list = []
@@ -51,47 +95,48 @@ class UrbainXMLExport(BrowserView):
         xml.append('<dataroot>')
         xml.append('  <E_220_herkomst>')
         xml.append('    <E_220_NIS_Gem>%s</E_220_NIS_Gem>' % portal_urban.getNISNum())
-        xml.append('    <E_220_Periode_van>%s</E_220_Periode_van>' % datefrom.replace("/", ""))
-        xml.append('    <E_220_Periode_tot>%s</E_220_Periode_tot>' % dateto.replace("/", ""))
+        xml.append('    <E_220_Periode_van>%s</E_220_Periode_van>' % datefrom.strftime('%d%m%Y'))
+        xml.append('    <E_220_Periode_tot>%s</E_220_Periode_tot>' % dateto.strftime('%d%m%Y'))
         xml.append('    <E_220_ICT>COM</E_220_ICT>')
         xml.append('  </E_220_herkomst>')
         html_list.append('<HTML><TABLE>')
-        for eventObj in results:
-            licenceObj = eventObj.getParentNode()
-            applicantObj = licenceObj.getApplicants() and licenceObj.getApplicants()[0] or None
-            architects = licenceObj.getField('architects') and licenceObj.getArchitects() or []
-            if pw.getInfoFor(licenceObj, 'review_state') == 'accepted':
+        for licence_brain in licence_brains:
+            licence = licence_brain.getObject()
+            decision_event = licence.getLastTheLicence()
+            applicantObj = licence.getApplicants() and licence.getApplicants()[0] or None
+            architects = licence.getField('architects') and licence.getArchitects() or []
+            if api.content.get_state(licence) == 'accepted':
                 html_list.append(
                     '<TR><TD>%s  %s</TD><TD>%s</TD></TR>'
-                    % (str(licenceObj.getReference()), licenceObj.title.encode('iso-8859-1'),
-                    str(eventObj.getDecisionDate()))
+                    % (str(licence.getReference()), licence.title.encode('iso-8859-1'),
+                    str(decision_event.getDecisionDate()))
                 )
                 xml.append('  <Item220>')
-                xml.append('      <E_220_Ref_Toel>%s</E_220_Ref_Toel>' % str(licenceObj.getReference()))
-                parcels = licenceObj.getParcels()
-                if check(parcels, 'no parcels found on licence %s' % str(licenceObj.getReference())):
+                xml.append('      <E_220_Ref_Toel>%s</E_220_Ref_Toel>' % str(licence.getReference()))
+                parcels = licence.getParcels()
+                if check(parcels, 'no parcels found on licence %s' % str(licence.getReference())):
                     xml.append('      <Doc_Afd>%s</Doc_Afd>' % parcels[0].getDivisionCode())
                 street = number = None
-                if licenceObj.getWorkLocations():
-                    number = licenceObj.getWorkLocations()[0]['number']
-                    street = catalog.searchResults(UID=licenceObj.getWorkLocations()[0]['street'])
-                if check(street, 'no street found on licence %s' % str(licenceObj.getReference())):
+                if licence.getWorkLocations():
+                    number = licence.getWorkLocations()[0]['number']
+                    street = catalog.searchResults(UID=licence.getWorkLocations()[0]['street'])
+                if check(street, 'no street found on licence %s' % str(licence.getReference())):
                     street = street[0].getObject()
                     xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street.getStreetCode()))
                     xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street.getStreetName()).decode('iso-8859-1').encode('iso-8859-1'))
                 if number:
                     xml.append('      <E_220_huisnr>%s</E_220_huisnr>' % number)
-                worktype = licenceObj.getWorkType() and licenceObj.getWorkType()[0] or ''
-                work_types = UrbanVocabulary('folderbuildworktypes').getAllVocTerms(licenceObj)
+                worktype = licence.getWorkType() and licence.getWorkType()[0] or ''
+                work_types = UrbanVocabulary('folderbuildworktypes').getAllVocTerms(licence)
                 worktype_map = {}
                 for k, v in work_types.iteritems():
                     worktype_map[k] = v.getExtraValue()
                 xml_worktype = ''
-                if check(worktype in worktype_map.keys(), 'unknown worktype %s on licence %s' % (worktype, str(licenceObj.getReference()))):
+                if check(worktype in worktype_map.keys(), 'unknown worktype %s on licence %s' % (worktype, str(licence.getReference()))):
                     xml_worktype = worktype_map[worktype]
                 xml.append('      <E_220_Typ>%s</E_220_Typ>' % xml_worktype)
-                xml.append('      <E_220_Werk>%s</E_220_Werk>' % licenceObj.licenceSubject.encode('iso-8859-1'))
-                strDecisionDate = str(eventObj.getDecisionDate())
+                xml.append('      <E_220_Werk>%s</E_220_Werk>' % licence.licenceSubject.encode('iso-8859-1'))
+                strDecisionDate = str(decision_event.getDecisionDate())
                 xml.append('      <E_220_Datum_Verg>%s%s%s</E_220_Datum_Verg>' % (strDecisionDate[0: 4], strDecisionDate[5: 7], strDecisionDate[8: 10]))
                 xml.append('      <E_220_Instan>COM</E_220_Instan>')
                 xml.append('      <PERSOON>')
@@ -154,14 +199,9 @@ class UrbainXMLExport(BrowserView):
                 xml.append('  </Item220>')
         html_list.append('</TABLE></HTML>')
         xml.append('</dataroot>')
-        if list_only:
-            output = StringIO()
-            output.write(unicode('\n'.join(html_list).replace("&", "&amp;"), 'iso-8859-1').encode('iso-8859-1'))
-            return output.getvalue()
+        if error != []:
+            return 'Error in these licences: \n%s' % '\n'.join(error)
         else:
-            if error != []:
-                return 'Error in these licences: \n%s' % '\n'.join(error)
-            else:
-                output = StringIO()
-                output.write(unicode('\n'.join(xml).replace("&", "&amp;"), 'iso-8859-1').encode('iso-8859-1'))
-                return output.getvalue()
+            output = StringIO()
+            output.write(unicode('\n'.join(xml).replace("&", "&amp;"), 'iso-8859-1').encode('iso-8859-1'))
+            return output.getvalue()
