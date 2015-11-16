@@ -432,44 +432,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             toreturn=name
         return 'M. %s' % toreturn
 
-    security.declarePublic('initMap')
-    def initMap(self):
-        """
-        """
-        tool=getToolByName(self,'portal_urban')
-        cqlquery2=''
-        cqlquery=''
-        zoneExtent = ''
-        if self.objectValues('RecipientCadastre'):
-            for portionOutObj in self.aq_inner.aq_parent.objectValues('PortionOut'):
-                if cqlquery2 !='':
-                    cqlquery2=cqlquery2 + " or "
-                cqlquery2=cqlquery2+"(section='"+portionOutObj.getSection()+"' and radical="+portionOutObj.getRadical()
-                if portionOutObj.getBis() != '':
-                    cqlquery2=cqlquery2+" and bis="+portionOutObj.getBis()
-                if portionOutObj.getExposant() != '':
-                    cqlquery2=cqlquery2+" and exposant='"+portionOutObj.getExposant()+"'"
-                if portionOutObj.getPuissance() != '':
-                    cqlquery2=cqlquery2+" and puissance="+portionOutObj.getPuissance()
-                cqlquery2=cqlquery2+")"
-            strsql = 'SELECT Xmin(selectedpos.extent),Ymin(selectedpos.extent),Xmax(selectedpos.extent), Ymax(selectedpos.extent) FROM (SELECT Extent(the_geom) FROM capa WHERE '+cqlquery2+') AS selectedpos'
-
-            try:
-                result = tool.queryDB(query_string=strsql)[0]
-                zoneExtent = "%s,%s,%s,%s" % (result['xmin']-100,result['ymin']-100,result['xmax']+100,result['ymax']+100)
-            except:
-                pass
-
-            strsql = "select distinct asText(buffer((select memgeomunion(the_geom) from capa where "+cqlquery2+"),50)) as bufferpolygon from capa;"
-            bufferpolygon=tool.queryDB(query_string=strsql)[0]['bufferpolygon']
-
-            cqlquery='intersects(the_geom,'+bufferpolygon+')'
-
-            #generate a Layer with these datas
-            #this layer will be used in the PageTemplate generating the mapfile
-        #return the generated JS code
-        return self.portal_urban.generateMapJS(self, cqlquery, cqlquery2,'', zoneExtent)
-
     security.declarePublic('getDocuments')
     def getDocuments(self):
         """

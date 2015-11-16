@@ -811,44 +811,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 res.append(brain)
         return res
 
-    security.declarePublic('initMap')
-    def initMap(self, obj):
-        """
-          Initialize the map on element
-        """
-        zoneExtent = None
-        parcels = obj.getParcels()
-        cqlquery = ''
-        if parcels:
-            #if we have parcels, display them on a map...
-            #generate the 'selectedpo' layer filter based on contained parcels
-            for parcel in parcels:
-                if cqlquery != '':
-                    cqlquery = cqlquery + " or "
-                cqlquery = cqlquery + "(section='" + parcel.getSection() + "' and radical=" + parcel.getRadical()
-                if parcel.getBis() != '':
-                    cqlquery = cqlquery + " and bis=" + parcel.getBis()
-                if parcel.getExposant() != '':
-                    cqlquery = cqlquery + " and exposant='" + parcel.getExposant() + "'"
-                else:
-                    cqlquery = cqlquery + " and exposant is NULL"
-                if parcel.getPuissance() != '':
-                    cqlquery = cqlquery + " and puissance=" + parcel.getPuissance()
-                else:
-                    cqlquery = cqlquery + " and puissance=0"
-                cqlquery = cqlquery + ")"
-            cqlquery = '((da = ' + parcel.getDivisionCode() + ') and (' + cqlquery + '))'
-            #calculate the zone to display
-            strsql = 'SELECT Xmin(selectedpos.extent), Ymin(selectedpos.extent), Xmax(selectedpos.extent), Ymax(selectedpos.extent) FROM (SELECT Extent(the_geom) FROM capa WHERE ' + cqlquery + ') AS selectedpos'
-            result = self.queryDB(query_string=strsql)[0]
-            try:
-                zoneExtent = "%s, %s, %s, %s" % (result['xmin'], result['ymin'], result['xmax'], result['ymax'])
-            except:
-                zoneExtent = ""
-
-        #return the generated JS code
-        return self.generateMapJS(self, cqlquery, '', '', zoneExtent)
-
     security.declarePublic('decorateHTML')
     def decorateHTML(self, classname, htmlcode):
         """
