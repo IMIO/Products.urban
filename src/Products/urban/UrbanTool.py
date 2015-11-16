@@ -33,15 +33,9 @@ from Products.CMFCore.utils import UniqueObject
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
-import appy.pod.renderer
 import psycopg2
 import psycopg2.extras
-import os
-import time
 import re
-#from urlparse import urlparse
-from DateTime import DateTime
-from StringIO import StringIO
 from AccessControl import getSecurityManager
 from plone import api
 from zope.i18n import translate
@@ -53,7 +47,6 @@ from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.PageTemplates.Expressions import getEngine
 from Products.DataGridField.DataGridField import FixedRow
 from Products.DataGridField.FixedColumn import FixedColumn
-from Products.urban.utils import getOsTempFolder
 from Products.urban.utils import ParcelHistoric
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS

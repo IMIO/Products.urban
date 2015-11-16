@@ -6,7 +6,6 @@ from Products.urban.config import URBAN_TYPES
 
 from plone import api
 
-import os
 import random
 import string
 import hashlib
@@ -56,19 +55,6 @@ def generatePassword(length):
 def getMd5Signature(data):
     md5 = hashlib.md5(data)
     return md5.hexdigest()
-
-
-def getOsTempFolder():
-    tmp = '/tmp'
-    if os.path.exists(tmp) and os.path.isdir(tmp):
-        res = tmp
-    elif 'TMP' in os.environ:
-        res = os.environ['TMP']
-    elif 'TEMP' in os.environ:
-        res = os.environ['TEMP']
-    else:
-        raise "Sorry, I can't find a temp folder on your machine."
-    return res
 
 
 def setOptionalAttributes(schema, optional_fields):
