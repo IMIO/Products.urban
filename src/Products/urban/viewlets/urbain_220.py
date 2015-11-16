@@ -70,6 +70,21 @@ class UrbainXMLExport(BrowserView):
             date_range = [DateTime(date) for date in date_range]
             return date_range
 
+    def _set_header_response(self):
+        """
+        Tell the browser that the resulting page contains ODT.
+        """
+        from_date, to_date = self.get_date_range()
+        response = self.request.RESPONSE
+        response.setHeader('Content-type', 'text/xml')
+        response.setHeader(
+            'Content-disposition',
+            u'attachment;filename="liste_220-{from_date}-{to_date}.xml"'.format(
+                from_date=from_date.strftime('%d_%m_%y'),
+                to_date=to_date.strftime('%d_%m_%y')
+            )
+        )
+
     def generateUrbainXML(self, licence_brains, datefrom, dateto):
 
         def reverseDate(date):
@@ -204,4 +219,5 @@ class UrbainXMLExport(BrowserView):
         else:
             output = StringIO()
             output.write(unicode('\n'.join(xml).replace("&", "&amp;"), 'iso-8859-1').encode('iso-8859-1'))
+            self._set_header_response()
             return output.getvalue()
