@@ -79,9 +79,9 @@ class UrbainXMLExport(BrowserView):
         response.setHeader('Content-type', 'text/xml')
         response.setHeader(
             'Content-disposition',
-            u'attachment;filename="liste_220-{from_date}-{to_date}.xml"'.format(
-                from_date=from_date.strftime('%d_%m_%y'),
-                to_date=to_date.strftime('%d_%m_%y')
+            u'attachment;filename="urbain_export-{from_date}-{to_date}.xml"'.format(
+                from_date=from_date.strftime('%d_%m_%Y'),
+                to_date=to_date.strftime('%d_%m_%Y')
             )
         )
 
