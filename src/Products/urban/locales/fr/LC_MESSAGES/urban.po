@@ -1868,20 +1868,15 @@ msgstr "Nom de la commune"
 msgid "urban_label_claimEndSDate"
 msgstr "Date de fin de la séance de réclamations"
 
-#. Default: "Claimstartsdate"
-#: UrbanEventInquiry.py
-msgid "urban_label_claimStartSDate"
-msgstr "Date de debut de la séance de réclamations"
-
 #. Default: "Claimingtext"
 #: Contact.py
 msgid "urban_label_claimingText"
 msgstr "Texte de la réclamation"
 
 #. Default: "Claimsdate"
-#: UrbanEvent.py
+#: UrbanEventInquiry.py
 msgid "urban_label_claimsDate"
-msgstr ""
+msgstr "Date de debut de la séance de réclamations"
 
 #. Default: "Claimstext"
 #: UrbanEvent.py
