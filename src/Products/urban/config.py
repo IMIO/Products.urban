@@ -24,9 +24,6 @@ __docformat__ = 'plaintext'
 # will be included (by importing) in this file if found.
 
 from Products.CMFCore.permissions import setDefaultRoles
-##code-section config-head #fill in your manual code here
-##/code-section config-head
-
 
 PROJECTNAME = "urban"
 
@@ -122,22 +119,6 @@ setDefaultRoles('urban: Add Article127', ("Manager", "Contributor"))
 
 product_globals = globals()
 
-# Dependencies of Products to be installed by quick-installer
-# override in custom configuration
-DEPENDENCIES = []
-
-# Dependend products - not quick-installed - used in testcase
-# override in custom configuration
-PRODUCT_DEPENDENCIES = []
-
-##code-section config-bottom #fill in your manual code here
-STYLESHEETS = []
-JAVASCRIPTS = []
-
-#Add an empty value in vocabulary display proposing to choose a value and returning an error if not changed
-ADD_EMPTY_VOCAB_VALUE = True
-#dependencies
-DEPENDENCIES = []
 #name of the folder created in a licence that will contain additional
 #layers linked to the licence and used in the mapfile generation
 ADDITIONAL_LAYERS_FOLDER = "additional_layers"
@@ -146,14 +127,6 @@ ADDITIONAL_LAYERS_FOLDER = "additional_layers"
 URBAN_TYPES = [
     'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'Division', 'UrbanCertificateOne',
     'UrbanCertificateTwo', 'NotaryLetter', 'MiscDemand', 'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
-]
-
-#currently matches the content of URBAN_TYPES, the order of this list impacts the order
-# of content types links in urban_root_view
-ORDERED_URBAN_TYPES = [
-    'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'Division',
-    'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'MiscDemand',
-    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
 ]
 
 # all types that can be used as a licence applicant
@@ -239,11 +212,3 @@ DefaultTexts = {
 
 
 NULL_VALUE = "..."
-##/code-section config-bottom
-
-
-# Load custom configuration not managed by archgenxml
-try:
-    from Products.urban.AppConfig import *
-except ImportError:
-    pass
