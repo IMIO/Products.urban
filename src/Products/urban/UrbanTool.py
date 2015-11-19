@@ -22,7 +22,6 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
-from Products.DataGridField.SelectColumn import SelectColumn
 
 from Products.urban.config import *
 
@@ -270,18 +269,15 @@ schema = Schema((
 ),
 )
 
-##code-section after-local-schema #fill in your manual code here
-##/code-section after-local-schema
 
 UrbanTool_schema = OrderedBaseFolderSchema.copy() + \
     schema.copy()
 
-##code-section after-schema #fill in your manual code here
 for f in UrbanTool_schema.filterFields(schemata='default'):
     f.widget.visible = {"edit": "invisible"}
 for f in UrbanTool_schema.filterFields(schemata='metadata'):
     f.widget.visible = {"edit": "invisible"}
-##/code-section after-schema
+
 
 class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     """
@@ -294,56 +290,46 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
     schema = UrbanTool_schema
 
-    ##code-section class-header #fill in your manual code here
-    # XXX constant put on the class to ensure it is close to the method that uses
-    # it
     portal_types_per_event_type_type = {
         'Products.urban.interfaces.IInquiryEvent': 'UrbanEventInquiry',
         'Products.urban.interfaces.IOpinionRequestEvent': 'UrbanEventOpinionRequest',
     }
-    ##/code-section class-header
 
-
-    # tool-constructors have no id argument, the id is fixed
     def __init__(self, id=None):
-        OrderedBaseFolder.__init__(self,'portal_urban')
+        OrderedBaseFolder.__init__(self, 'portal_urban')
         self.setTitle('Urban configuration')
-
-        ##code-section constructor-footer #fill in your manual code here
-        ##/code-section constructor-footer
-
 
     # tool should not appear in portal_catalog
     def at_post_edit_script(self):
         self.unindexObject()
 
         ##code-section post-edit-method-footer #fill in your manual code here
-        self.checkDBConnection()
+        from Products.urban.services import cadastre  # keep the import here as long connections settings are on portal_urban
+        cadastre.__init__()
+        cadastre.check_connection()
         ##/code-section post-edit-method-footer
-
-
-    # Methods
-
-    # Manually created methods
-
-    def at_post_create_script(self):
-        """
-          Post creation hook
-        """
-        self.checkDBConnection()
 
     security.declarePublic('getDivisionsConfigRows')
     def getDivisionsConfigRows(self):
         """
         """
-        divisions = self.findDivisions(all=False)
         rows = []
-        if DB_QUERY_ERROR not in divisions[0].values():
-            for division in divisions:
-                division_id = str(division['da'])
-                name = division['divname']
-                row = FixedRow(keyColumn='division', initialData={'division': division_id, 'name': name, 'alternative_name': name})
-                rows.append(row)
+        from Products.urban.services import cadastre  # keep the import here as long connections settings are on portal_urban
+        if not cadastre.can_connect():
+            return rows
+
+        for division in cadastre.get_all_divisions():
+            division_id = str(division[0])
+            name = division[1]
+            row = FixedRow(
+                keyColumn='division',
+                initialData={
+                    'division': division_id,
+                    'name': name,
+                    'alternative_name': name
+                }
+            )
+            rows.append(row)
         return rows
 
     security.declarePublic('getVocabularyDefaultValue')
@@ -442,34 +428,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return sm.checkPermission(permission, obj)
 
     security.declarePublic('getDBConnection')
-    def getDBConnection(self, connection_string=None):
-        """
-           Return the DB connection object
-           The passed connection string must contain :
-           dbname, user, host, password
-        """
-        try:
-            #if we do not receive a connection string, we take infos from the tool (self)
-            if not connection_string:
-                conn = psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (self.getSqlName(), self.getSqlUser(), self.getSqlHost(), self.getSqlPassword()))
-            else:
-                conn = psycopg2.connect(connection_string)
-            return conn
-        except psycopg2.OperationalError, error:
-            #if we could not connect, return the error
-            return error
-
-    security.declarePublic('findDivisions')
-    def findDivisions(self, all=True):
-        """
-           Return the possible divisions
-        """
-        result = self.queryDB("SELECT da, divname FROM da;")
-        if not result:
-            return ({'da': DB_QUERY_ERROR, 'divname': DB_QUERY_ERROR}, )
-        if all:
-            result = [{'da': '', 'divname': translate('all_divisions', 'urban', context=self.REQUEST)}] + result
-        return result
 
     security.declarePublic('queryParcels')
     def queryParcels(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None, location=None, prcowner=None,
@@ -527,17 +485,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             ptool.addPortalMessage(_(u"db_connection_error", mapping={u'error': self.dbc}), type="error")
         return result
 
-    def checkDBConnection(self):
-        """
-           Check if the provided parameters are OK
-        """
-        #build connection string
-        ptool = getToolByName(self, "plone_utils")
-        try:
-            psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (self.getSqlName(), self.getSqlUser(), self.getSqlHost(), self.getSqlPassword()))
-            ptool.addPortalMessage(_(u"db_connection_successfull"), type='info')
-        except psycopg2.OperationalError, e:
-            ptool.addPortalMessage(_(u"db_connection_error", mapping={u'error': unicode(e.__str__(), 'utf-8')}), type='error')
 
     security.declarePublic('createPortionOut')
     def createPortionOut(self, container, division, section, radical, bis, exposant, puissance, partie, outdated=False):
@@ -996,10 +943,4 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return '/'.join(self.getPylonsHost().split('/')[:3])  # don't use os.path!
 
 
-
 registerType(UrbanTool, PROJECTNAME)
-# end of class UrbanTool
-
-##code-section module-footer #fill in your manual code here
-##/code-section module-footer
-

@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from Products.CMFPlone import PloneMessageFactory as _
+
+from plone import api
+
 from sqlalchemy import create_engine
 from sqlalchemy import MetaData
 from sqlalchemy import Table
@@ -41,6 +45,26 @@ class Service(object):
         except Exception:
             return False
         return True
+
+    def check_connection(self):
+        """
+           Check if the provided parameters are OK
+        """
+        plone_utils = api.portal.get_tool('plone_utils')
+        try:
+            self.connect()
+            plone_utils.addPortalMessage(
+                _(u"db_connection_successfull"),
+                type='info'
+            )
+        except Exception, e:
+            plone_utils.addPortalMessage(
+                _(
+                    u"db_connection_error",
+                    mapping={u'error': unicode(e.__str__(), 'utf-8')}
+                ),
+                type='error'
+            )
 
     def get_table(self, table_name):
         table = Table(table_name, self.metadata, autoload=True)

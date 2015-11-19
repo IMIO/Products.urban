@@ -16,11 +16,8 @@ __docformat__ = 'plaintext'
 
 import logging
 logger = logging.getLogger('urban: setuphandlers')
-from Products.urban.config import PROJECTNAME
-from Products.urban.config import DEPENDENCIES
 import os
 from Products.CMFCore.utils import getToolByName
-import transaction
 ##code-section HEAD
 from Acquisition import aq_base
 from Products.Archetypes.event import ObjectInitializedEvent
@@ -70,7 +67,7 @@ def setupHideToolsFromNavigation(context):
     if navtreeProperties.hasProperty('idsNotToList'):
         for toolname in toolnames:
             try:
-                portal[toolname].unindexObject()
+                site[toolname].unindexObject()
             except:
                 pass
             current = list(navtreeProperties.getProperty('idsNotToList') or [])
@@ -84,7 +81,8 @@ def setupHideToolsFromNavigation(context):
 def updateRoleMappings(context):
     """after workflow changed update the roles mapping. this is like pressing
     the button 'Update Security Setting' and portal_workflow"""
-    if isNoturbanProfile(context): return
+    if isNoturbanProfile(context):
+        return
     wft = getToolByName(context.getSite(), 'portal_workflow')
     wft.updateRoleMappings()
 
@@ -117,12 +115,6 @@ def postInstall(context):
             control_panel_adapter_obj.externaleditor_enabled_types.append('StyleTemplate')
     except:
         pass
-
-    #install dependencies manually...
-    quick_installer = site.portal_quickinstaller
-    for dependency in DEPENDENCIES:
-        if not dependency in quick_installer.listInstalledProducts():
-            quick_installer.installProduct(dependency)
 
     #add our own portal_types to portal_factory
     factory_tool = api.portal.get_tool('portal_factory')
@@ -351,7 +343,6 @@ def addUrbanVocabularies(context):
 def addRubricValues(context, config_folder):
 
     site = context.getSite()
-    catalog = api.portal.get_tool('portal_catalog')
     pickled_dgrne_slurp = context.openDataFile('slurped_dgrne.pickle')
     dgrne_slurp = pickle.load(pickled_dgrne_slurp)
 
@@ -927,8 +918,6 @@ def addEventTypesAndTemplates(context):
     """
      Add default urban event types and their default document templates
     """
-    site = context.getSite()
-    tool = site.portal_urban
     # add global templates, default UrbanEventTypes and their templates for documents generation
     updateAllUrbanTemplates(context)
 
@@ -1063,7 +1052,8 @@ def createLicence(site, licence_type, data):
     # call post script
     licence.at_post_create_script()
     # add a dummy portion out
-    division_code = division = str(urban_tool.findDivisions(all=False)[0]['da'])
+    from Products.urban.services import cadastre  # keep the import here as long connections settings are on portal_urban
+    division_code = division = str(cadastre.get_all_divisions()[0][0])
     portionout_data = {
         'divisionCode': division_code, 'division': division, 'section': 'A', 'radical': '84',
         'exposant': 'C', 'partie': False

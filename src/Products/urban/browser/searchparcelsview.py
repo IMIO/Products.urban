@@ -1,7 +1,6 @@
 
 from Products.Five import BrowserView
 
-from Products.urban.UrbanTool import DB_QUERY_ERROR
 from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.interfaces import IDivision
 from Products.urban.interfaces import IGenericLicence
@@ -28,9 +27,8 @@ class SearchParcelsView(BrowserView):
         self.request.set('disable_plone.leftcolumn', 1)
 
         self.portal_urban = api.portal.get_tool('portal_urban')
-        #this way, if portal_urban.findDivisions display a portal message
-        #it will be displayed on the page
-        self.divisions = self.portal_urban.findDivisions()
+        #this way, get_all_divisions display a portal message if needed
+        self.divisions = self._init_divisions()
         #if the search was launched with no criteria, add a message
         if not self.searchHasCriteria(self.request):
             #we still not launched the search, everything is ok ;-)
@@ -65,6 +63,17 @@ class SearchParcelsView(BrowserView):
 
         return self.index()
 
+    def _init_divisions(self):
+        from Products.urban.services import cadastre  # keep the import here as long connections settings are on portal_urban
+        if not cadastre.check_connection():
+            return None
+
+        all_divisions = [('', translate('all_divisions', 'urban', context=self.request))]
+        for division in cadastre.get_all_divisions():
+            all_divisions.append(division)
+
+        return all_divisions
+
     def contextIsLicence(self):
         return IGenericLicence.providedBy(self.context)
 
@@ -82,9 +91,6 @@ class SearchParcelsView(BrowserView):
           If we had a problem getting the divisions, we return nothing so the
           search form is not displayed
         """
-        #check that we correctly received divisions
-        if DB_QUERY_ERROR in str(self.divisions):
-            return None
         return self.divisions
 
     def searchHasCriteria(self, request):

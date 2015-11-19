@@ -63,10 +63,10 @@
                                          <td>
                                              <label class="discreet" i18n:translate="urban_label_division">Division</label><br />
                                              <select name="division" value="division">
-                                                 <tal:block condition="python: not ('Programming error in query','Programming error in query') in divisions"
+                                                 <tal:block condition="python: type(divisions) is list"
                                                             repeat="div divisions">
-                                                     <option tal:attributes="selected python: str(div['da']) == division; value python: div['da'];"
-                                                             tal:content="python: div['divname']" />
+                                                     <option tal:attributes="selected python: str(div[0]) == division; value python: div[0];"
+                                                             tal:content="python: div[1]" />
                                                  </tal:block>
                                              </select>
                                          </td>
