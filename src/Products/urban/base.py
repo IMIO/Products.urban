@@ -346,8 +346,7 @@ class UrbanBase(object):
         """
         organizations = [self.getField('solicitOpinionsTo').vocabulary.getAllVocTerms(self).get(key, None) for key in
         self.getSolicitOpinionsTo()]
-        toreturn = '<CSV>recipientSName|function_department|organization|dispatchSInformation|' +\
-                'typeAndStreetName_number_box|postcode_locality|country'
+        toreturn = '<CSV>recipientSName|function_department|organization|dispatchSInformation|typeAndStreetName_number_box|postcode_locality|country'
         for organization in organizations:
             toreturn = toreturn + '%' + organization.getRecipientSName() +\
                     '|' + organization.getFunction_department() +\
@@ -366,12 +365,12 @@ class UrbanBase(object):
           Returns a formatted version of claimants to be used in POD templates
         """
         claimants = self._getLastEvent(interfaces.IUrbanEventInquiry).getClaimants()
-        toreturn = '[CSV]Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
+        toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for claimant in claimants:
             toreturn = toreturn + '%' + claimant.getPersonTitleValue() + '|' + claimant.getName1() + '|' +\
                     claimant.getName2() + '|' + claimant.getNumber() + ', ' + claimant.getStreet() + '|' + \
                     claimant.getZipcode() + ' ' + claimant.getCity()
-        toreturn = toreturn + '[/CSV]'
+        toreturn = toreturn + '</CSV>'
         return toreturn
 
     security.declarePublic('getMultipleArchitectsCSV')
@@ -380,12 +379,12 @@ class UrbanBase(object):
           Returns a formatted version of the architects to be used in POD templates
         """
         architects = self.getArchitects()
-        toreturn = '[CSV]Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
+        toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for architect in architects:
             toreturn = toreturn + '%' + architect.getPersonTitleValue() + '|' + architect.getName1() + '|' +\
                     architect.getName2() + '|' + architect.getNumber() + ', ' + architect.getStreet() + '|' + \
                     architect.getZipcode() + ' ' + architect.getCity()
-        toreturn = toreturn + '[/CSV]'
+        toreturn = toreturn + '</CSV>'
         return toreturn
 
     security.declarePublic('getMultipleNotariesCSV')
@@ -394,12 +393,12 @@ class UrbanBase(object):
           Returns a formatted version of the notaries to be used in POD templates
         """
         notaries = self.getNotaryContact()
-        toreturn = '[CSV]Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
+        toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for notary in notaries:
             toreturn = toreturn + '%' + notary.getPersonTitleValue() + '|' + notary.getName1() + '|' +\
                     notary.getName2() + '|' + notary.getNumber() + ', ' + notary.getStreet() + '|' +\
                     notary.getZipcode() + ' ' + notary.getCity()
-        toreturn = toreturn + '[/CSV]'
+        toreturn = toreturn + '</CSV>'
         return toreturn
 
     security.declarePublic('getMultipleRealSubmittersCSV')
