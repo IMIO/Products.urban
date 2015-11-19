@@ -448,7 +448,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         sm = getSecurityManager()
         return sm.checkPermission(permission, obj)
 
-    security.declarePublic('getDBConnection')
+    security.declarePublic('contains')
+    def contains(self, object_uid):
+        """
+        Tells if object with UID 'object_uid' is somewhere in portal_urban.
+        """
+        catalog = api.portal.get_tool('portal_catalog')
+        path = '/'.join(self.getPhysicalPath())
+        found = bool(len(catalog(UID=object_uid, path={'query': path})))
+        return found
     def getDBConnection(self, connection_string=None):
         """
            Return the DB connection object
