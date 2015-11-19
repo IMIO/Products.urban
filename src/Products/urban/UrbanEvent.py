@@ -457,7 +457,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
           Generates a fake CSV file used in POD templates
         """
         recipients=self.objectValues('RecipientCadastre')
-        toreturn='[CSV]TitreNomPrenom|AdresseLigne1|AdresseLigne2'
+        toreturn='<CSV>TitreNomPrenom|AdresseLigne1|AdresseLigne2'
         wft = getToolByName(self, 'portal_workflow')
         for recipient in recipients:
             #do not take "disabled" recipients into account
@@ -466,7 +466,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             street = recipient.getStreet() and recipient.getStreet() or ''
             address = recipient.getAdr1() and recipient.getAdr1() or ''
             toreturn=toreturn+'%'+recipient.getName()+'|'+street+'|'+address
-        toreturn=toreturn+'[/CSV]'
+        toreturn=toreturn+'</CSV>'
         return toreturn
 
     security.declarePublic('getFormattedDate')
