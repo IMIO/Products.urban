@@ -20,7 +20,7 @@ class LicenceActionsPanelView(ActionsPanelView):
     """
     def __init__(self, context, request):
         super(LicenceActionsPanelView, self).__init__(context, request)
-        self.ACCEPTABLE_ACTIONS = ('delete',)
+        self.IGNORABLE_ACTIONS = ('cut', 'paste', 'rename', 'copy')
 
 
 class ConfigValueActionsPanelView(ActionsPanelView):
