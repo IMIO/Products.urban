@@ -17,7 +17,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         """
         Override the call to:
          - mark the document with IUrbanDoc interface
-         - return the url of the generated doc
+         - return the url of the generated doc (to open it in external edit)
         """
         pod_template, output_format = self._get_base_args(template_uid, output_format)
 
