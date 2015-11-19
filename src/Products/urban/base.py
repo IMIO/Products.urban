@@ -355,8 +355,7 @@ class UrbanBase(object):
         """
         organizations = [self.getField('solicitOpinionsTo').vocabulary.getAllVocTerms(self).get(key, None) for key in
         self.getSolicitOpinionsTo()]
-        toreturn = '<CSV>recipientSName|function_department|organization|dispatchSInformation|' +\
-                'typeAndStreetName_number_box|postcode_locality|country'
+        toreturn = '<CSV>recipientSName|function_department|organization|dispatchSInformation|typeAndStreetName_number_box|postcode_locality|country'
         for organization in organizations:
             toreturn = toreturn + '%' + organization.getRecipientSName() +\
                     '|' + organization.getFunction_department() +\
@@ -371,17 +370,17 @@ class UrbanBase(object):
 
     security.declarePublic('getMultipleClaimantsCSV')
     def getMultipleClaimantsCSV(self):
-       """
-       Returns a formatted version of claimants to be used in POD templates
-       """
-       claimants = self._getLastEvent(interfaces.IUrbanEventInquiry).getClaimants()
-       toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
-       for claimant in claimants:
-           toreturn = toreturn + '%' + claimant.getPersonTitleValue() + '|' + claimant.getName1() + '|' +\
-           claimant.getName2() + '|' + claimant.getNumber() + ', ' + claimant.getStreet() + '|' + \
-           claimant.getZipcode() + ' ' + claimant.getCity()
-       toreturn = toreturn + '</CSV>'
-       return toreturn
+        """
+          Returns a formatted version of claimants to be used in POD templates
+        """
+        claimants = self._getLastEvent(interfaces.IUrbanEventInquiry).getClaimants()
+        toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
+        for claimant in claimants:
+            toreturn = toreturn + '%' + claimant.getPersonTitleValue() + '|' + claimant.getName1() + '|' +\
+                    claimant.getName2() + '|' + claimant.getNumber() + ', ' + claimant.getStreet() + '|' + \
+                    claimant.getZipcode() + ' ' + claimant.getCity()
+        toreturn = toreturn + '</CSV>'
+        return toreturn
 
     security.declarePublic('getMultipleArchitectsCSV')
     def getMultipleArchitectsCSV(self):
