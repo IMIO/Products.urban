@@ -427,7 +427,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         sm = getSecurityManager()
         return sm.checkPermission(permission, obj)
 
-    security.declarePublic('getDBConnection')
+    security.declarePublic('contains')
+    def contains(self, object_uid):
+        """
+        Tells if object with UID 'object_uid' is somewhere in portal_urban.
+        """
+        catalog = api.portal.get_tool('portal_catalog')
+        path = '/'.join(self.getPhysicalPath())
+        found = bool(len(catalog(UID=object_uid, path={'query': path})))
+        return found
 
     security.declarePublic('queryParcels')
     def queryParcels(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None, location=None, prcowner=None,
