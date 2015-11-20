@@ -753,6 +753,36 @@ msgstr "Non"
 msgid "flooding_level_verylow"
 msgstr "Risque très faible"
 
+#. Default: "Karstconstraints"
+#: GenericLicence.py
+msgid "urban_label_karstConstraints"
+msgstr "Contraintes karstiques"
+
+#. Default: "Karstconstraintsdetails"
+#: GenericLicence.py
+msgid "urban_label_karstConstraintsDetails"
+msgstr "Détails concernant les contraintes karstiques"
+
+#. Default: "No"
+#: GenericLicence.py
+msgid "karst_constraints_no"
+msgstr "Sans"
+
+#. Default: "Very low"
+#: GenericLicence.py
+msgid "karts_constraints_verylow"
+msgstr "Très faible"
+
+#. Default: "Low"
+#: GenericLicence.py
+msgid "karts_constraints_low"
+msgstr "Faible"
+
+#. Default: "High"
+#: GenericLicence.py
+msgid "karts_constraints_high"
+msgstr "Fort"
+
 msgid "folder_advice"
 msgstr "Avis du dossier"
 
