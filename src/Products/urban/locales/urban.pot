@@ -3424,3 +3424,33 @@ msgstr ""
 msgid "zip_folder_title"
 msgstr ""
 
+#. Default: "Karstconstraints"
+#: GenericLicence.py
+msgid "urban_label_karstConstraints"
+msgstr ""
+
+#. Default: "Karstconstraintsdetails"
+#: GenericLicence.py
+msgid "urban_label_karstConstraintsDetails"
+msgstr ""
+
+#. Default: "No"
+#: GenericLicence.py
+msgid "karst_constraints_no"
+msgstr ""
+
+#. Default: "Very low"
+#: GenericLicence.py
+msgid "karts_constraints_verylow"
+msgstr ""
+
+#. Default: "Low"
+#: GenericLicence.py
+msgid "karts_constraints_low"
+msgstr ""
+
+#. Default: "High"
+#: GenericLicence.py
+msgid "karts_constraints_high"
+msgstr ""
+
