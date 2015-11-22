@@ -1087,6 +1087,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     security.declarePublic('getAllAdvices')
     def getAllAdvices(self):
         """
+          XXX need to be refactor (do not work)
           Returns all UrbanEvents corresponding to advice on a licence
         """
         tool = api.portal.get_tool('portal_urban')
