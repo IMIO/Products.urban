@@ -101,7 +101,7 @@ class WMC(BrowserView):
         context = aq_inner(self.context)
         if not hasattr(aq_base(context), "getParcels"):
             try:
-                extent = urbantool.getMapExtent().split(', ')
+                extent = [coord.strip() for coord in urbantool.getMapExtent().split(',')]
                 self.xmin = extent[0]
                 self.ymin = extent[1]
                 self.xmax = extent[2]
