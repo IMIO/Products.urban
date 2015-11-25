@@ -476,7 +476,15 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
         else:
             return '30j'
 
-
+    def costCalculation(self, base_price= 0, FD_price=0, inquiry_price=0, opinions_price=0):
+        cost = base_price
+        if ('opinions' in self.getProcedureChoice()):
+            cost += opinions_price
+        if ('inquiry' in self.getProcedureChoice()):
+            cost += inquiry_price
+        if ('FD' in self.getProcedureChoice()):
+            cost += FD_price
+        return cost
 
 registerType(BuildLicence, PROJECTNAME)
 # end of class BuildLicence
