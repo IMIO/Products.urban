@@ -283,7 +283,6 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
             names = '%s %s' % (self.getName2(), self.getName1())
         namepart = namedefined and names or self.getSociety()
         nameSignaletic = '%s %s' % (title, namepart.decode('utf8'))
-        nameSignaletic = nameSignaletic.encode('utf8')
         if len(self.getRepresentedBy()) > 0 or self.getRepresentedBySociety():
             person_title = self.getPersonTitle(theObject=True)
             representatives = self.getRepresentedBySociety() and self.getSociety() or self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
@@ -298,7 +297,8 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
                     represented = u'représentée'
                 elif gender == 'female' and multiplicity == 'plural':
                     represented = u'représentées'
-            nameSignaletic = '%s %s %s par %s' % (title, namepart, represented, representatives)
+            nameSignaletic = '%s %s %s par %s' % (title, namepart.decode('utf8'), represented, representatives.decode('utf8'))
+        nameSignaletic = nameSignaletic.encode('utf8')
         if linebyline:
             #escape HTML special characters like HTML entities
             return cgi.escape(nameSignaletic)
