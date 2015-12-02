@@ -695,12 +695,12 @@ msgstr "Zone de prévention éloignée"
 #. Default: "${name} residing at ${address}"
 #: Contact.py
 msgid "feminine_plural_residing"
-msgstr "${name} domiciliées à ${address}"
+msgstr "${name}, domiciliées à ${address}"
 
 #. Default: "${name} residing at ${address}"
 #: Contact.py
 msgid "feminine_singular_residing"
-msgstr "${name} domiciliée à ${address}"
+msgstr "${name}, domiciliée à ${address}"
 
 msgid "fieldsetlegend-attachments"
 msgstr "Pièces jointes"
@@ -1080,7 +1080,7 @@ msgstr "Configuration des cartes"
 #. Default: "${name} residing at ${address}"
 #: Contact.py
 msgid "masculine_singular_residing"
-msgstr "${name} domicilié à ${address}"
+msgstr "${name}, domicilié à ${address}"
 
 msgid "miscdemand_urbanconfig_title"
 msgstr "Paramètres des 'divers'"
@@ -1094,7 +1094,7 @@ msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes"
 #. Default: "${name} residing at ${address}"
 #: Contact.py
 msgid "mixed_residing"
-msgstr "${name} domiciliés à ${address}"
+msgstr "${name}, domiciliés à ${address}"
 
 #. Default: "Plural"
 #: PersonTitleTerm.py
