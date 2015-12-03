@@ -112,7 +112,7 @@ class MapView(BrowserView):
 
     def getOldParcels(self):
         context = aq_inner(self.context)
-        return [parcel.getHistoric().getHistoricForDisplay() for parcel in context.getParcels() if parcel.getOutdated()]
+        return [parcel.get_historic().getHistoricForDisplay() for parcel in context.getParcels() if parcel.getOutdated()]
 
     def getParcels(self):
         context = aq_inner(self.context)

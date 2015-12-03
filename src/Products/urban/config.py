@@ -212,3 +212,5 @@ DefaultTexts = {
 
 
 NULL_VALUE = "..."
+
+URBAN_CFG_DIR = './var/urban'

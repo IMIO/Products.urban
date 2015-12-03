@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-25 08:58+0000\n"
+"POT-Creation-Date: 2015-11-19 09:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,6 +209,9 @@ msgid "NotaryLetter"
 msgstr ""
 
 msgid "Ongoing events"
+msgstr ""
+
+msgid "OpinionRequestEventType"
 msgstr ""
 
 msgid "Parcel"
@@ -1524,11 +1527,6 @@ msgstr ""
 msgid "urban_label_BuildLicenceNumerotation"
 msgstr ""
 
-#. Default: "country"
-#: OpinionRequestEventType.py
-msgid "urban_label_country"
-msgstr ""
-
 #. Default: "Dgo4reference"
 #: ParcellingTerm.py
 msgid "urban_label_DGO4Reference"
@@ -1539,19 +1537,9 @@ msgstr ""
 msgid "urban_label_DeclarationNumerotation"
 msgstr ""
 
-#. Default: "dispatchSInformation"
-#: OpinionRequestEventType.py
-msgid "urban_label_dispatchSInformation"
-msgstr ""
-
 #. Default: "Divisionnumerotation"
 #: UrbanTool.py
 msgid "urban_label_DivisionNumerotation"
-msgstr ""
-
-#. Default: "function_department"
-#: OpinionRequestEventType.py
-msgid "urban_label_function_department"
 msgstr ""
 
 #. Default: "Environmentaldeclarationnumerotation"
@@ -1579,11 +1567,6 @@ msgstr ""
 msgid "urban_label_NotaryLetterNumerotation"
 msgstr ""
 
-#. Default: "organization"
-#: OpinionRequestEventType.py
-msgid "urban_label_organization"
-msgstr ""
-
 #. Default: "Prenu"
 #: GenericLicence.py
 msgid "urban_label_PRenU"
@@ -1599,19 +1582,9 @@ msgstr ""
 msgid "urban_label_ParcelOutLicenceNumerotation"
 msgstr ""
 
-#. Default: "postcode_locality"
-#: OpinionRequestEventType.py
-msgid "urban_label_postcode_locality"
-msgstr ""
-
 #. Default: "Rcu"
 #: GenericLicence.py
 msgid "urban_label_RCU"
-msgstr ""
-
-#. Default: "recipientSName"
-#: OpinionRequestEventType.py
-msgid "urban_label_recipientSName"
 msgstr ""
 
 #. Default: "Srs"
@@ -1627,11 +1600,6 @@ msgstr ""
 #. Default: "Talcondition"
 #: UrbanEventType.py
 msgid "urban_label_TALCondition"
-msgstr ""
-
-#. Default: "typeAndStreetName_number_box"
-#: OpinionRequestEventType.py
-msgid "urban_label_typeAndStreetName_number_box"
 msgstr ""
 
 #. Default: "Urbancertificateonenumerotation"
@@ -2010,6 +1978,11 @@ msgstr ""
 msgid "urban_label_description"
 msgstr ""
 
+#. Default: "dispatchSInformation"
+#: OpinionRequestEventType.py
+msgid "urban_label_dispatchSInformation"
+msgstr ""
+
 #. Default: "Division"
 #: PortionOut.py
 msgid "urban_label_division"
@@ -2168,6 +2141,11 @@ msgstr ""
 #. Default: "Ftsolicitopinionsto"
 #: EnvironmentLicence.py
 msgid "urban_label_ftSolicitOpinionsTo"
+msgstr ""
+
+#. Default: "function_department"
+#: OpinionRequestEventType.py
+msgid "urban_label_function_department"
 msgstr ""
 
 #. Default: "Gender"
@@ -2598,6 +2576,11 @@ msgstr ""
 msgid "urban_label_opinionsToAskIfWorks"
 msgstr ""
 
+#. Default: "organization"
+#: OpinionRequestEventType.py
+msgid "urban_label_organization"
+msgstr ""
+
 #. Default: "Outdated"
 #: PortionOut.py
 msgid "urban_label_outdated"
@@ -2719,6 +2702,11 @@ msgstr ""
 msgid "urban_label_portionsouts"
 msgstr ""
 
+#. Default: "postcode_locality"
+#: OpinionRequestEventType.py
+msgid "urban_label_postcode_locality"
+msgstr ""
+
 #. Default: "Prenudetails"
 #: GenericLicence.py
 msgid "urban_label_prenuDetails"
@@ -2787,6 +2775,11 @@ msgstr ""
 #. Default: "Receiveddocumentreference"
 #: UrbanEvent.py
 msgid "urban_label_receivedDocumentReference"
+msgstr ""
+
+#. Default: "recipientSName"
+#: OpinionRequestEventType.py
+msgid "urban_label_recipientSName"
 msgstr ""
 
 #. Default: "Recipients"
@@ -3192,6 +3185,11 @@ msgstr ""
 
 #. Default: "Type"
 msgid "urban_label_type"
+msgstr ""
+
+#. Default: "typeAndStreetName_number_box"
+#: OpinionRequestEventType.py
+msgid "urban_label_typeAndStreetName_number_box"
 msgstr ""
 
 #. Default: "Path of a UNO-enabled Python interpreter (ie /usr/bin/python)"

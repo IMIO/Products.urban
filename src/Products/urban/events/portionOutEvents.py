@@ -4,6 +4,7 @@ from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import ILicencePortionOut
+from Products.urban.services import cadastre
 
 from plone import api
 
@@ -31,28 +32,16 @@ def setValidParcel(parcel, event):
      Check if the manually added parcel exists in he cadastral DB
      and set its "isvalidparcel" attribute accordingly.
     """
-    urban_tool = api.portal.get_tool('portal_urban')
-    references = {
-        'division': parcel.getDivisionCode(),
-        'section': parcel.getSection(),
-        'radical': parcel.getRadical(),
-        'bis': parcel.getBis(),
-        'exposant': parcel.getExposant(),
-        'puissance': parcel.getPuissance(),
-    }
-    exists_in_DB = urban_tool.queryParcels(
-        browseold=True,
-        fuzzy=False,
-        **references
-    ) and True or False
-    parcel.setIsOfficialParcel(exists_in_DB)
-    if exists_in_DB:
-        if not urban_tool.queryParcels(fuzzy=False, **references):
-            parcel.setOutdated(True)
-        else:
-            parcel.setOutdated(False)
-    else:
-        parcel.setIsOfficialParcel(False)
+
+    is_official = True
+    references = parcel.reference_as_dict()
+    try:
+        is_outdated = cadastre.is_outdated_parcel(**references)
+        parcel.setOutdated(is_outdated)
+    except cadastre.UnreferencedParcelError:
+        is_official = False
+
+    parcel.setIsOfficialParcel(is_official)
     parcel.reindexObject()
 
 
@@ -71,21 +60,19 @@ def setEnvironmentLicencePreviousLicencesField(parcel, event):
         return
 
     catalog = api.portal.get_tool('portal_catalog')
-    portal_urban = api.portal.get_tool('portal_urban')
     parcels = licence.objectValues('PortionOut')
     parcel_infos = set()
 
     for parcel in parcels:
         parcel_infos.add(parcel.getIndexValue())
-        parcels_historic = portal_urban.queryParcels(
-            parcel.getDivisionCode(), parcel.getSection(), parcel.getRadical(), parcel.getBis(), parcel.getExposant(), parcel.getPuissance(),
-            historic=True, fuzzy=False, browseold=True
-        )
-        if not parcels_historic:
+
+        references = parcel.reference_as_dict()
+        parcel_historic = cadastre.query_parcel_historic(**references)
+
+        if not parcel_historic:
             break
 
-        parcels_historic = parcels_historic[0]
-        for ref in parcels_historic.getAllIndexableRefs():
+        for ref in parcel_historic.getAllIndexableRefs():
             parcel_infos.add(ref)
 
     related_brains = catalog(

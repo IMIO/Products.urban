@@ -46,10 +46,10 @@ from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.PageTemplates.Expressions import getEngine
 from Products.DataGridField.DataGridField import FixedRow
 from Products.DataGridField.FixedColumn import FixedColumn
-from Products.urban.utils import ParcelHistoric
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS
 from Products.urban.interfaces import IUrbanVocabularyTerm, IContactFolder
+from Products.urban.services import cadastre
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 DB_QUERY_ERROR = "Programming error in query"
@@ -111,57 +111,6 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='public_settings',
-    ),
-    StringField(
-        name='sqlHost',
-        widget=StringField._properties['widget'](
-            label='Sqlhost',
-            label_msgid='urban_label_sqlHost',
-            i18n_domain='urban',
-        ),
-        schemata='admin_settings',
-        write_permission=permissions.ManagePortal,
-    ),
-    StringField(
-        name='sqlName',
-        widget=StringField._properties['widget'](
-            label='Sqlname',
-            label_msgid='urban_label_sqlName',
-            i18n_domain='urban',
-        ),
-        required=True,
-        schemata='admin_settings',
-        write_permission=permissions.ManagePortal,
-    ),
-    StringField(
-        name='sqlUser',
-        widget=StringField._properties['widget'](
-            label='Sqluser',
-            label_msgid='urban_label_sqlUser',
-            i18n_domain='urban',
-        ),
-        schemata='admin_settings',
-        write_permission=permissions.ManagePortal,
-    ),
-    StringField(
-        name='sqlPassword',
-        widget=PasswordWidget(
-            label='Sqlpassword',
-            label_msgid='urban_label_sqlPassword',
-            i18n_domain='urban',
-        ),
-        schemata='admin_settings',
-        write_permission=permissions.ManagePortal,
-    ),
-    StringField(
-        name='webServerHost',
-        widget=StringField._properties['widget'](
-            label='Webserverhost',
-            label_msgid='urban_label_webServerHost',
-            i18n_domain='urban',
-        ),
-        schemata='admin_settings',
-        write_permission=permissions.ManagePortal,
     ),
     StringField(
         name='pylonsHost',
@@ -303,18 +252,11 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def at_post_edit_script(self):
         self.unindexObject()
 
-        ##code-section post-edit-method-footer #fill in your manual code here
-        from Products.urban.services import cadastre  # keep the import here as long connections settings are on portal_urban
-        cadastre.__init__()
-        cadastre.check_connection()
-        ##/code-section post-edit-method-footer
-
     security.declarePublic('getDivisionsConfigRows')
     def getDivisionsConfigRows(self):
         """
         """
         rows = []
-        from Products.urban.services import cadastre  # keep the import here as long connections settings are on portal_urban
         if not cadastre.can_connect():
             return rows
 
@@ -436,39 +378,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         path = '/'.join(self.getPhysicalPath())
         found = bool(len(catalog(UID=object_uid, path={'query': path})))
         return found
-
-    security.declarePublic('queryParcels')
-    def queryParcels(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None, location=None, prcowner=None,
-                     browseold=False, historic=False, fuzzy=True):
-        """
-         Return the concerned parcels
-        """
-        query_string = browseold and \
-            "SELECT distinct prca, prcc, prcb1 as prc, da.divname, pas.da as division, section, radical, exposant, bis, puissance \
-            FROM pas left join da on da.da = pas.da" or \
-            "SELECT capa.da as division, divname, prc, section, radical, exposant, bis, puissance, pe as proprietary, \
-            adr1 as proprietary_city, adr2 as proprietary_street, sl1 as location \
-            FROM map left join capa on map.capakey=capa.capakey left join da on capa.da = da.da "
-        conditions = []
-        division and conditions.append("%s.da= %s" % (browseold and 'pas' or 'capa', division))
-        (section or not fuzzy) and conditions.append("section %s" % (not section and 'is NULL' or "= '%s'" % section))
-        (radical or not fuzzy) and conditions.append("radical = %s" % (radical and radical or '0'))
-        (bis or not fuzzy) and conditions.append("bis = %s" % (bis and bis or '0'))
-        (exposant or not fuzzy) and conditions.append("exposant %s" % (not exposant and 'is NULL' or "= '%s'" % exposant))
-        (puissance or not fuzzy) and conditions.append("puissance = %s" % (puissance and puissance or '0'))
-        if not browseold:
-            prcowner and conditions.append("pe ILIKE '%%%s%%'" % prcowner)
-            location and conditions.append("sl1 ILIKE '%%%s%%'" % location)
-        if conditions:
-            query_string = '%s WHERE %s' % (query_string, ' and '.join(conditions))
-        records = self.queryDB(query_string)
-        parcels = [ParcelHistoric(**r) for r in records]
-        parcels = ParcelHistoric.mergeDuplicate(parcels)
-        if historic:
-            for i, parcel in enumerate(parcels):
-                parcel.buildRelativesChain(self, 'parents')
-                parcel.buildRelativesChain(self, 'childs')
-        return parcels
 
     security.declarePublic('queryDB')
     def queryDB(self, query_string, connection_string=None):

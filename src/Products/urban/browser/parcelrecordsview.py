@@ -1,9 +1,10 @@
 from Acquisition import aq_inner
 from Products.Five import BrowserView
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
 from Products.urban.interfaces import IGenericLicence
+
+from plone import api
 
 
 class ParcelRecordsView(BrowserView):
@@ -15,7 +16,7 @@ class ParcelRecordsView(BrowserView):
         self.request = request
         self.parcel_id = self.request.get('id', None)
         if not self.parcel_id:
-            plone_utils = getToolByName(context, 'plone_utils')
+            plone_utils = api.portal.get_tool('plone_utils')
             plone_utils.addPortalMessage(_('Nothing to show !!!'), type="error")
 
     def getRelatedLicencesOfParcel(self):
@@ -44,7 +45,7 @@ class ParcelRecordsView(BrowserView):
           Do the search and return licence brains
         """
         context = aq_inner(self.context)
-        catalog = getToolByName(context, 'portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
         parcel = getattr(context, self.parcel_id)
         parcel_infos = parcel.getIndexValue()
 
@@ -74,23 +75,22 @@ class ParcelHistoricRecordsView(ParcelRecordsView):
           Returns the licences related to a parcel
         """
         context = aq_inner(self.context)
-        catalog = getToolByName(context, 'portal_catalog')
-        portal_urban = getToolByName(context, 'portal_urban')
+        catalog = api.portal.get_tool('portal_catalog')
         parcel = getattr(context, self.parcel_id)
         parcel_infos = set()
 
         parcel_infos.add(parcel.getIndexValue())
-        parcels_historic = portal_urban.queryParcels(
-            parcel.getDivisionCode(), parcel.getSection(), parcel.getRadical(), parcel.getBis(), parcel.getExposant(), parcel.getPuissance(),
-            historic=True, fuzzy=False, browseold=True
-        )
-        parcels_historic = parcels_historic[0]
-        for ref in parcels_historic.getAllIndexableRefs():
+        parcel_historic = parcel.get_historic()
+        for ref in parcel_historic.getAllIndexableRefs():
             parcel_infos.add(ref)
 
-        related_brains = catalog(object_provides=IGenericLicence.__identifier__, parcelInfosIndex=list(parcel_infos), sort_on='sortable_title')
+        related_brains = catalog(
+            object_provides=IGenericLicence.__identifier__,
+            parcelInfosIndex=list(parcel_infos),
+            sort_on='sortable_title'
+        )
 
-        return related_brains, parcels_historic
+        return related_brains, parcel_historic
 
     def getDisplay(self, parcels_historic, related_brains):
         historic = parcels_historic.listHistoric()

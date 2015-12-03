@@ -5,6 +5,8 @@ from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.interfaces import IDivision
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanCertificateBase
+from Products.urban.services import cadastre
+from Products.urban.services.cadastral import IGNORE
 
 from plone import api
 
@@ -30,9 +32,8 @@ class SearchParcelsView(BrowserView):
         #this way, get_all_divisions display a portal message if needed
         self.divisions = self._init_divisions()
         #if the search was launched with no criteria, add a message
-        if not self.searchHasCriteria(self.request):
-            #we still not launched the search, everything is ok ;-)
-            if 'division' in request or 'location' in request or 'prcOwner' in request:
+        if not self.has_enough_criterions(self.request):
+            if 'division' in request:
                 plone_utils = api.portal.get_tool('plone_utils')
                 plone_utils.addPortalMessage(translate('warning_enter_search_criteria'), type="warning")
 
@@ -64,7 +65,6 @@ class SearchParcelsView(BrowserView):
         return self.index()
 
     def _init_divisions(self):
-        from Products.urban.services import cadastre  # keep the import here as long connections settings are on portal_urban
         if not cadastre.check_connection():
             return None
 
@@ -85,57 +85,89 @@ class SearchParcelsView(BrowserView):
         parcellisting.update()
         return parcellisting.render()
 
-    def getDivisions(self):
-        """
-          Returns the existing divisions
-          If we had a problem getting the divisions, we return nothing so the
-          search form is not displayed
-        """
-        return self.divisions
+    def extract_search_criterions(self, request):
+        arguments = self.extract_parcel_reference_criterions(request)
+        if not request.get('browse_old_parcels', False):
+            arguments['location'] = request.get('location', '') or IGNORE
+            arguments['parcel_owner'] = request.get('parcel_owner', '') or IGNORE
 
-    def searchHasCriteria(self, request):
-        """
-        """
-        division = request.get('division', '')
-        section = request.get('section', '')
-        radical = request.get('radical', '')
-        bis = request.get('bis', '')
-        exposant = request.get('exposant', '')
-        puissance = request.get('puissance', '')
-        location = request.get('location', '')
-        prcOwner = request.get('prcOwner', '')
-        #the division is not enough
-        if (not division or (not section and not radical and not bis and not exposant and not puissance and not location and not prcOwner)) and not location and not prcOwner:
-            return False
-        else:
-            return True
+        return arguments
 
-    def findParcel(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None, location=None, prc_owner=None, prc_history=None, browseoldparcels=False):
+    def extract_parcel_reference_criterions(self, request):
+        arguments = {
+            'division': request.get('division', '') or IGNORE,
+            'section': request.get('section', '') or IGNORE,
+            'radical': request.get('radical', '') or IGNORE,
+            'bis': request.get('bis', '') or IGNORE,
+            'exposant': request.get('exposant', '') or IGNORE,
+            'puissance': request.get('puissance', '') or IGNORE,
+        }
+        return arguments
+
+    def extract_search_options(self, request):
+        arguments = {
+            'parcel_history': request.get('parcel_history', False),
+            'browse_old_parcels': request.get('browse_old_parcels', False),
+        }
+        return arguments
+
+    def has_enough_criterions(self, request):
         """
-           Return the concerned parcels
         """
-        if not self.searchHasCriteria(self.context.REQUEST):
+        criterions = self.extract_search_criterions(request)
+
+        division = criterions.pop('division')
+        location = criterions.pop('location', None)
+        parcel_owner = criterions.pop('parcel_owner', None)
+        misc_criterions = any(criterions.values())
+
+        enough = (division and misc_criterions) or location or parcel_owner
+        return enough
+
+    def search_parcels(self):
+        """
+        Return parcels macthing search criterions.
+        """
+        search_args = self.extract_search_criterions(self.request)
+        options = self.extract_search_options(self.request)
+
+        if not self.has_enough_criterions(self.request):
             return []
-        if prc_history:
+        if options.get('parcel_history'):
             return []
-        parcels = self.portal_urban.queryParcels(division, section, radical, bis, exposant, puissance, location, prc_owner)
-        result = [prc.getParcelAsDictionary() for prc in parcels]
-        already_found = set([str(prc) for prc in parcels])
-        if browseoldparcels and not prc_history and not prc_owner:
-            old_parcels = self.portal_urban.queryParcels(division, section, radical, bis, exposant, puissance, browseold=browseoldparcels)
-            for parcel in old_parcels:
-                if str(parcel) not in already_found:
-                    dict_prc = parcel.getParcelAsDictionary()
-                    dict_prc['old'] = True
-                    result.append(dict_prc)
-        return result
 
-    def findOldParcel(self, division=None, section=None, radical=None, bis=None, exposant=None, puissance=None, old=False):
+        query_result = cadastre.query_parcels(**search_args)
+
+        if options.get('browse_old_parcels'):
+            old_parcels = self.search_old_parcels(parcels_to_ignore=query_result)
+            query_result.extend(old_parcels)
+
+        return query_result
+
+    def search_old_parcels(self, parcels_to_ignore=[]):
+        """
+        Return old parcels macthing search criterions 'search_args'.
+        """
+        to_ignore = set([str(prc) for prc in parcels_to_ignore])
+        search_args = self.extract_search_criterions(self.request)
+
+        query_result = cadastre.query_old_parcels(**search_args)
+        search_result = []
+
+        for parcel in query_result:
+            if str(parcel) not in to_ignore:
+                setattr(parcel, 'old', True)
+                search_result.append(parcel)
+
+        return search_result
+
+    def search_historic_of_parcel(self):
         """
         Return the concerned parcels
         """
-        parcel = self.portal_urban.queryParcels(division, section, radical, bis, exposant, puissance, historic=True, browseold=True, fuzzy=False)[0]
-        return parcel.getHistoricForDisplay()
+        search_args = self.extract_parcel_reference_criterions(self.request)
+        parcel = cadastre.query_parcel_historic(**search_args)
+        return parcel.display()
 
     def createParcelAndProprietary(self, parcel_data, proprietary_data):
         parcel_address = parcel_data.pop('location')

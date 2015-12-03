@@ -17,8 +17,8 @@ class Service(object):
     Helper with sqlalchemy engine , metadata and session objects.
     """
 
-    def __init__(self, dialect, username, host, db_name, password=''):
-        self.engine = self._init_engine(dialect, username, host, db_name, password)
+    def __init__(self, dialect, user, host, db_name, password=''):
+        self.engine = self._init_engine(dialect, user, host, db_name, password)
         self.metadata = MetaData(self.engine)
         self.session = sessionmaker(self.engine)
 
@@ -65,6 +65,8 @@ class Service(object):
                 ),
                 type='error'
             )
+            return False
+        return True
 
     def get_table(self, table_name):
         table = Table(table_name, self.metadata, autoload=True)
@@ -72,15 +74,3 @@ class Service(object):
 
     def new_session(self):
         return self.session()
-
-
-class PostgresService(Service):
-
-    def __init__(self, username, host, db_name, password=''):
-        super(PostgresService, self).__init__(
-            'postgresql+psycopg2',
-            username,
-            host,
-            db_name,
-            password
-        )

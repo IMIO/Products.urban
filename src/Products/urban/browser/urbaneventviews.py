@@ -9,6 +9,7 @@ from Products.urban.browser.table.urbantable import DocumentsTable
 from Products.urban.browser.table.urbantable import AttachmentsTable
 from Products.urban.browser.table.urbantable import ClaimantsTable
 from Products.urban.browser.table.urbantable import RecipientsCadastreTable
+from Products.urban.services import cadastre
 
 from plone import api
 

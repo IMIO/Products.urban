@@ -24,10 +24,12 @@ from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Archetypes.event import EditBegunEvent
 from Products.CMFPlone.utils import base_hasattr
 from Products.urban.config import DefaultTexts
+from Products.urban.config import URBAN_CFG_DIR
 from Products.urban.config import URBAN_TYPES
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import ILicenceContainer
+from Products.urban.services import cadastre
 from Products.urban.utils import generatePassword
 from Products.urban.utils import getAllLicenceFolderIds
 from Products.urban.utils import getLicenceFolderId
@@ -175,6 +177,9 @@ def extraPostInstall(context, refresh=True):
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
     site = context.getSite()
+    logger.info("set_file_system_configuration : starting...")
+    set_file_system_configuration(context)
+    logger.info("set_file_system_configuration : Done")
     logger.info("addUrbanVocabularies : starting...")
     addUrbanVocabularies(context)
     logger.info("addUrbanVocabularies : Done")
@@ -298,6 +303,30 @@ def addUrbanConfigFolders(context):
 
         shared_vocabularies = getSharedVocabularies(urban_type, default_values)
         createVocabularyFolders(container=config_folder, vocabularies=shared_vocabularies, site=site)
+
+
+def set_file_system_configuration(context):
+    if context.readDataFile('urban_extra_marker.txt') is None:
+        return
+
+    if 'urban' not in os.listdir('./var'):
+        os.mkdir(URBAN_CFG_DIR)
+
+    for config_filename in context.listDirectory('cfg'):
+        if config_filename not in os.listdir(URBAN_CFG_DIR):
+            cfg_file = open(
+                '{path}/{filename}'.format(
+                    path=URBAN_CFG_DIR,
+                    filename=config_filename
+                ),
+                'w'
+            )
+            cfg_file.write(
+                context.readDataFile(
+                    'cfg/{}'.format(config_filename)
+                )
+            )
+            cfg_file.close()
 
 
 def addUrbanVocabularies(context):
@@ -1052,7 +1081,6 @@ def createLicence(site, licence_type, data):
     # call post script
     licence.at_post_create_script()
     # add a dummy portion out
-    from Products.urban.services import cadastre  # keep the import here as long connections settings are on portal_urban
     division_code = division = str(cadastre.get_all_divisions()[0][0])
     portionout_data = {
         'divisionCode': division_code, 'division': division, 'section': 'A', 'radical': '84',

@@ -26,7 +26,7 @@ from Products.urban.config import *
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.utils import DisplayList
 from Products.urban.interfaces import IGenericLicence
-from Products.urban.UrbanTool import DB_QUERY_ERROR
+from Products.urban.services import cadastre
 ##/code-section module-header
 
 schema = Schema((
@@ -34,7 +34,7 @@ schema = Schema((
     StringField(
         name='divisionCode',
         widget=StringField._properties['widget'](
-            visible={'edit':'hidden', 'view':'visible'},
+            visible={'edit': 'hidden', 'view': 'visible'},
             label='Divisioncode',
             label_msgid='urban_label_divisionCode',
             i18n_domain='urban',
@@ -110,7 +110,7 @@ schema = Schema((
         name='isOfficialParcel',
         default=True,
         widget=BooleanField._properties['widget'](
-            visible={'edit':'hidden', 'view':'visible'},
+            visible={'edit': 'hidden', 'view': 'visible'},
             label='Isofficialparcel',
             label_msgid='urban_label_isOfficialParcel',
             i18n_domain='urban',
@@ -120,7 +120,7 @@ schema = Schema((
         name='outdated',
         default=False,
         widget=BooleanField._properties['widget'](
-            visible={'edit':'hidden', 'view':'visible'},
+            visible={'edit': 'hidden', 'view': 'visible'},
             label='Outdated',
             label_msgid='urban_label_outdated',
             i18n_domain='urban',
@@ -195,6 +195,27 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         #after creation, reindex the parent so the parcelInfosIndex is OK
         self.aq_inner.aq_parent.reindexObject()
 
+    security.declarePublic('reference_as_dict')
+    def reference_as_dict(self, with_empty_values=False):
+        """
+        Return this parcel reference defined values as a dict.
+        By default only return parts of the reference with defined values.
+        If with_empty_values is set to True, also return empty values.
+        """
+        references = {
+            'division': self.getDivisionCode(),
+            'section': self.getSection(),
+            'radical': self.getRadical(),
+            'bis': self.getBis(),
+            'exposant': self.getExposant(),
+            'puissance': self.getPuissance(),
+        }
+        if not with_empty_values:
+            references = dict([(k, v) for k, v in references.iteritems() if v])
+
+        return references
+
+    security.declarePublic('getIndexValue')
     def getIndexValue(self):
         res = []
         res.append(self.getDivisionCode())
@@ -272,23 +293,14 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
             return 'manual_parcel'
         return ''
 
-    security.declarePublic('getHistoric')
-    def getHistoric(self):
+    security.declarePublic('get_historic')
+    def get_historic(self):
         """
          Return the "parcel historic" object of this parcel
         """
-        if self.getIsOfficialParcel():
-            urban_tool = getToolByName(self, 'portal_urban')
-            historic = urban_tool.queryParcels(self.getDivisionCode(), self.getSection(), self.getRadical(), self.getBis(), self.getExposant(), self.getPuissance(),
-                                               historic=True, fuzzy=False, browseold=self.getOutdated())
-            return historic[0]
-        return None
-
+        reference = self.reference_as_dict()
+        historic = cadastre.query_parcel_historic(**reference)
+        return historic
 
 
 registerType(PortionOut, PROJECTNAME)
-# end of class PortionOut
-
-##code-section module-footer #fill in your manual code here
-##/code-section module-footer
-

@@ -2,7 +2,10 @@
 
 from Products.Five import BrowserView
 from Acquisition import aq_inner
-from Products.CMFCore.utils import getToolByName
+
+from Products.urban.services import cadastre
+
+from plone import api
 
 
 class ParcelsConsistencyView(BrowserView):
@@ -16,37 +19,27 @@ class ParcelsConsistencyView(BrowserView):
         self.request = request
 
     def checkParcelsConsistency(self):
-        context = aq_inner(self.context)
         request = aq_inner(self.request)
         if request.get('check') != 'yes':
             return
-        catalog = getToolByName(context, 'portal_catalog')
-        urban_tool = getToolByName(context, 'portal_urban')
-        portal_workflow = getToolByName(context, 'portal_workflow')
+
+        catalog = api.portal.get_tool('portal_catalog')
         parcelbrains = catalog(portal_type='PortionOut')
         result = {
             'critical_outdated_parcels': [],
             'outdated_parcels': [],
         }
         for brain in parcelbrains:
+            outdated = False
             parcel = brain.getObject()
             if parcel.getIsOfficialParcel() and parcel.getDivisionCode() and parcel.getSection():
-                references = {
-                    'division': parcel.getDivisionCode(),
-                    'section': parcel.getSection(),
-                    'radical': parcel.getRadical(),
-                    'bis': parcel.getBis(),
-                    'exposant': parcel.getExposant(),
-                    'puissance': parcel.getPuissance(),
-                }
-                outdated = not urban_tool.queryParcels(fuzzy=False, **references)
-            else:
-                outdated = False
+                references = parcel.reference_as_dict()
+                outdated = cadastre.is_outdated_parcel(**references)
             parcel.setOutdated(outdated)
             licence = parcel.aq_inner.aq_parent
             infos = {'parcel': brain.Title, 'licence title': licence.Title(), 'licence path': licence.absolute_url()}
             if outdated or not parcel.getIsOfficialParcel():
-                if portal_workflow.getInfoFor(licence, 'review_state') == 'in_progress':
+                if api.content.get_state(licence) == 'in_progress':
                     result['critical_outdated_parcels'].append(infos)
                 else:
                     result['outdated_parcels'].append(infos)

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2015-09-25 08:58+0000\n"
+"POT-Creation-Date: 2015-11-19 09:14+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -211,6 +211,9 @@ msgstr "Lettre de notaire"
 
 msgid "Ongoing events"
 msgstr "Événements en cours"
+
+msgid "OpinionRequestEventType"
+msgstr "Type d'événement de demande d'avis"
 
 msgid "Parcel"
 msgstr "Parcelle"
@@ -1554,11 +1557,6 @@ msgstr "Enquête publique n°${number} du"
 msgid "urban_label_BuildLicenceNumerotation"
 msgstr "Numérotation des permis d'urbanisme"
 
-#. Default: "country"
-#: OpinionRequestEventType.py
-msgid "urban_label_country"
-msgstr "Pays"
-
 #. Default: "Dgo4reference"
 #: ParcellingTerm.py
 msgid "urban_label_DGO4Reference"
@@ -1569,11 +1567,6 @@ msgstr "Référence de la région wallone"
 msgid "urban_label_DeclarationNumerotation"
 msgstr "Numérotation des déclarations"
 
-#. Default: "dispatchSInformation"
-#: OpinionRequestEventType.py
-msgid "urban_label_dispatchSInformation"
-msgstr "Informations de dispatch"
-
 #. Default: "Divisionnumerotation"
 #: UrbanTool.py
 msgid "urban_label_DivisionNumerotation"
@@ -1583,11 +1576,6 @@ msgstr "Numérotation des divisions"
 #: UrbanTool.py
 msgid "urban_label_EnvClassThreeNumerotation"
 msgstr "Numérotation des déclarations environnementales"
-
-#. Default: "function_department"
-#: OpinionRequestEventType.py
-msgid "urban_label_function_department"
-msgstr "Fonction, Département"
 
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
@@ -1610,11 +1598,6 @@ msgstr "Numéro NIS"
 msgid "urban_label_NotaryLetterNumerotation"
 msgstr "Numérotation des lettres de notaire"
 
-#. Default: "organization"
-#: OpinionRequestEventType.py
-msgid "urban_label_organization"
-msgstr "Organisation"
-
 #. Default: "Prenu"
 #: GenericLicence.py
 msgid "urban_label_PRenU"
@@ -1630,20 +1613,10 @@ msgstr "Périmètre de Revitalisation Urbaine"
 msgid "urban_label_ParcelOutLicenceNumerotation"
 msgstr "Numérotation des permis d'urbanisation"
 
-#. Default: "postcode_locality"
-#: OpinionRequestEventType.py
-msgid "urban_label_postcode_locality"
-msgstr "Code postal et localité"
-
 #. Default: "Rcu"
 #: GenericLicence.py
 msgid "urban_label_RCU"
 msgstr "Règlement Communal d'Urbanisme (R.C.U.)"
-
-#. Default: "recipientSName"
-#: OpinionRequestEventType.py
-msgid "urban_label_recipientSName"
-msgstr "Nom du destinataire"
 
 #. Default: "Srs"
 #: Layer.py
@@ -1659,11 +1632,6 @@ msgstr "Schéma de Structure Communal (S.S.C.)"
 #: UrbanEventType.py
 msgid "urban_label_TALCondition"
 msgstr "Condition TAL"
-
-#. Default: "typeAndStreetName_number_box"
-#: OpinionRequestEventType.py
-msgid "urban_label_typeAndStreetName_number_box"
-msgstr "Type et nom de rue, numéro et boîte"
 
 #. Default: "Urbancertificateonenumerotation"
 #: UrbanTool.py
@@ -2041,6 +2009,11 @@ msgstr "Détails concernant les dérogations"
 msgid "urban_label_description"
 msgstr "Observations"
 
+#. Default: "dispatchSInformation"
+#: OpinionRequestEventType.py
+msgid "urban_label_dispatchSInformation"
+msgstr "Informations de dispatch"
+
 #. Default: "Division"
 #: PortionOut.py
 msgid "urban_label_division"
@@ -2202,6 +2175,11 @@ msgstr "Agent(s) traitant(s)"
 #: EnvironmentLicence.py
 msgid "urban_label_ftSolicitOpinionsTo"
 msgstr "Instances sollicitées par le FT"
+
+#. Default: "function_department"
+#: OpinionRequestEventType.py
+msgid "urban_label_function_department"
+msgstr "Fonction, Département"
 
 #. Default: "Gender"
 #: PersonTitleTerm.py
@@ -2631,6 +2609,11 @@ msgstr "Texte de l'avis"
 msgid "urban_label_opinionsToAskIfWorks"
 msgstr "Avis à demander en cas de travaux"
 
+#. Default: "organization"
+#: OpinionRequestEventType.py
+msgid "urban_label_organization"
+msgstr "Organisation"
+
 #. Default: "Outdated"
 #: PortionOut.py
 msgid "urban_label_outdated"
@@ -2752,6 +2735,11 @@ msgstr "Parcelles"
 msgid "urban_label_portionsouts"
 msgstr "Parcelles"
 
+#. Default: "postcode_locality"
+#: OpinionRequestEventType.py
+msgid "urban_label_postcode_locality"
+msgstr "Code postal et localité"
+
 #. Default: "Prenudetails"
 #: GenericLicence.py
 msgid "urban_label_prenuDetails"
@@ -2821,6 +2809,11 @@ msgstr "Date de réception"
 #: UrbanEvent.py
 msgid "urban_label_receivedDocumentReference"
 msgstr "Référence du document reçu"
+
+#. Default: "recipientSName"
+#: OpinionRequestEventType.py
+msgid "urban_label_recipientSName"
+msgstr "Nom du destinataire"
 
 #. Default: "Recipients"
 #: LicenceEvent.py
@@ -3227,6 +3220,11 @@ msgstr "N° TVA"
 #. Default: "Type"
 msgid "urban_label_type"
 msgstr "Type"
+
+#. Default: "typeAndStreetName_number_box"
+#: OpinionRequestEventType.py
+msgid "urban_label_typeAndStreetName_number_box"
+msgstr "Type et nom de rue, numéro et boîte"
 
 #. Default: "Path of a UNO-enabled Python interpreter (ie /usr/bin/python)"
 #: UrbanTool.py
