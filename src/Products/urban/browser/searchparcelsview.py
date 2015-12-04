@@ -167,7 +167,7 @@ class SearchParcelsView(BrowserView):
         """
         search_args = self.extract_parcel_reference_criterions(self.request)
         parcel = cadastre.query_parcel_historic(**search_args)
-        return parcel.display()
+        return parcel.table_display()
 
     def createParcelAndProprietary(self, parcel_data, proprietary_data):
         parcel_address = parcel_data.pop('location')

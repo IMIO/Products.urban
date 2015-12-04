@@ -107,7 +107,7 @@ class CadastreService(Service):
         # filter on parcel reference arguments
         query = self._filter(query, pas, division, section, radical, bis, exposant, puissance)
         try:
-            record = query.one()
+            record = query.distinct().one()
         except:
             return
         parcel = ParcelHistoric(**record._asdict())
@@ -133,18 +133,11 @@ class CadastreService(Service):
         """
         Return parcel historic of the parcel exactly matching criterias.
         """
-        if not self.is_official_parcel(division, section, radical, bis, exposant, puissance):
+        parcel = self.query_exact_parcel(division, section, radical, bis, exposant, puissance)
+        if not parcel:
             raise UnreferencedParcelError
 
-        historic = ParcelHistoric(
-            division=division,
-            section=section,
-            radical=radical,
-            bis=bis,
-            exposant=exposant,
-            puissance=puissance
-        )
-
+        historic = ParcelHistoric(divname=parcel.divname, **parcel.reference_as_dict())
         return historic
 
     def query_parent_parcels(self, division, section=None, radical='0', bis='0',
@@ -186,6 +179,7 @@ class CadastreService(Service):
         subquery = query_prcb1.subquery()
 
         # search a (sibling) parcel having the opposite sibling column value to 'parcel_key'
+        # ex: we search parent parcels having the current parcel as child
         parcel_key = compute_prc(division, section, radical, bis, exposant, puissance)
         query = self._base_query_parcels(pas, session)
         query = query.filter(opposite_sibling_column == parcel_key)
@@ -296,7 +290,8 @@ class Parcel(object):
     def __init__(self, **reference):
         self.division = self.section = self.radical = self.bis = self.exposant = self.puissance = ''
         self._reference_keys = ['division', 'section', 'radical', 'bis', 'exposant', 'puissance']
-        self.divname = reference.get('divname', '').encode('utf-8')
+        divname = reference.get('divname', '')
+        self.divname = type(divname) is unicode and divname.encode('utf-8') or divname
         self._init_reference(**reference)
 
     def _init_reference(self, **kwargs):
@@ -366,32 +361,44 @@ class ActualParcel(Parcel):
             setattr(self, ref, val)
 
 
-class BaseParcelHistory(Parcel):
+class BaseParcelHistoric(Parcel):
     """
-    Base class for parcel historic classes
+    Base class for parcel historic
     """
 
     def __init__(self, **refs):
-        super(BaseParcelHistory, self).__init__(**refs)
-        self.root = self
+        super(BaseParcelHistoric, self).__init__(**refs)
+        self.parent_node = None
+        self.branches = []
         self.level = 0
+        self.width = self._init_width()
+
+    def _init_width(self):
+        width = sum([node.width for node in self.branches]) or 1
+        return width
 
     @property
-    def highlight(self):
-        return self.level == 0
+    def root(self):
+        """
+        Return the root node of the this node tree
+        """
+        parent = self.parent_node
+        while parent:
+            parent = parent.parent_node
+        return parent
 
 
-class ParentParcel(BaseParcelHistory):
+class ParentParcel(BaseParcelHistoric):
     """
     Class to represent a parent parcel of a parcelHistoric.
     """
 
     def __init__(self, child_parcel, **refs):
         super(ParentParcel, self).__init__(**refs)
-        self.root = child_parcel
-        self.parents = []
+        self.parent_node = child_parcel
         self.level = child_parcel.level - 1
-        self._init_parents_historic()
+        self.branches = self._init_parents_historic()
+        self.width = self._init_width()
 
     def _init_parents_historic(self):
         """
@@ -401,22 +408,24 @@ class ParentParcel(BaseParcelHistory):
 
         reference = self.reference_as_dict()
         parcels = cadastre.query_parent_parcels(**reference)
-        for parcel in parcels:
-            parent = ParentParcel(child_parcel=self, **parcel._asdict())
-            self.parents.append(parent)
+        parents = [ParentParcel(child_parcel=self, **parcel._asdict()) for parcel in parcels]
+        return parents
+
+    def display(self):
+        return ' '.join(self.values(ignore=['division']))
 
 
-class ChildParcel(BaseParcelHistory):
+class ChildParcel(BaseParcelHistoric):
     """
     Class to represent a child parcel of a parcelHistoric.
     """
 
     def __init__(self, parent_parcel, **refs):
         super(ChildParcel, self).__init__(**refs)
-        self.root = parent_parcel
-        self.children = []
+        self.parent_node = parent_parcel
         self.level = parent_parcel.level + 1
-        self._init_children_historic()
+        self.branches = self._init_children_historic()
+        self.width = self._init_width()
 
     def _init_children_historic(self):
         """
@@ -426,9 +435,11 @@ class ChildParcel(BaseParcelHistory):
 
         reference = self.reference_as_dict()
         parcels = cadastre.query_child_parcels(**reference)
-        for parcel in parcels:
-            parent = ChildParcel(parent_parcel=self, **parcel._asdict())
-            self.children.append(parent)
+        children = [ChildParcel(parent_parcel=self, **parcel._asdict()) for parcel in parcels]
+        return children
+
+    def display(self):
+        return ' '.join(self.values(ignore=['division']))
 
 
 class ParcelHistoric(ParentParcel, ChildParcel):
@@ -437,45 +448,118 @@ class ParcelHistoric(ParentParcel, ChildParcel):
     """
 
     def __init__(self, **refs):
-        super(ParcelHistoric, self).__init__(child_parcel=self, parent_parcel=self, **refs)
+        super(ChildParcel, self).__init__(**refs)
         self.level = 0
-
-    def get_all_reference_indexes(self):
-        all_nodes = {}
-        all_nodes = [n['node'] for n in self.get_all_nodes(nodes=all_nodes).values()]
-        return [node.to_index() for node in all_nodes]
-
-    def get_all_nodes(self, directions=['children', 'parents'], nodes={}, distance=0):
-        nodes[self.key()] = {'node': self, 'distance': distance}
-        for direction in directions:
-            dist = direction == 'children' and distance + 1 or distance - 1
-            for relative in getattr(self, direction):
-                if str(relative) not in nodes.keys():
-                    relative.get_all_nodes(directions, nodes, dist)
-        return nodes
+        self.parents = self._init_parents_historic()
+        self.children = self._init_children_historic()
+        self.branches = self.parents + self.children
+        self.width = self._init_width()
 
     def display(self):
-        display = []
-        historic = self.list_historic()
-        historic = sorted(list(historic.iteritems()))
-        for level, parcels in historic:
-            for parcel in parcels:
-                display.append(parcel)
-        return display
+        return super(ChildParcel, self).display()
 
-    def list_historic(self):
-        def buildLevel(result, relationship, previousparcels):
-            parcels = set()
-            for p_parcel in previousparcels:
-                for parcel in getattr(p_parcel, relationship):
-                    parcels.add(parcel)
+    def get_all_reference_indexes(self):
+        """
+        List the reference index values of the parcel and all its siblings
+        """
+        indexes = [node.to_index() for node in self.all_nodes()]
+        return indexes
 
-            parcels = list(parcels)
-            if parcels:
-                result[parcels[0].level] = parcels
-                buildLevel(result, relationship, parcels)
+    def all_nodes(self):
+        return self._get_all_nodes([self])
 
-        result = {0: [self]}
-        buildLevel(result, 'parents', result[0])
-        buildLevel(result, 'children', result[0])
-        return result
+    def all_child_nodes(self):
+        return self._get_all_nodes(self.children)
+
+    def all_parent_nodes(self):
+        return self._get_all_nodes(self.parents)
+
+    def _get_all_nodes(self, subset=[]):
+        to_explore = list(subset)  # clone 'subset' to keep it unaltered
+        all_nodes = []
+        while to_explore:
+            next_node = to_explore.pop()
+            all_nodes.append(next_node)
+            for sub_node in next_node.branches:
+                to_explore.append(sub_node)
+        return all_nodes
+
+    def parents_by_level(self):
+        """
+        See _nodes_by_level.
+        """
+        return self._nodes_by_level(self.all_parent_nodes())
+
+    def children_by_level(self):
+        """
+        See _nodes_by_level.
+        """
+        return self._nodes_by_level(self.all_child_nodes())
+
+    def _nodes_by_level(self, nodes):
+        """
+        Transform a node list into a dict {x: [n1, n2], y[n3, ...], ...}
+        where x is a level and [n1, n2] are nodes of this level.
+        """
+        by_level = {}
+        for node in nodes:
+            if node.level in by_level.keys():
+                by_level[node.level].append(node)
+            else:
+                by_level[node.level] = [node]
+        return by_level
+
+    def table_display(self):
+        """
+        Return a matrix representing this tree.
+        To be used to easily build an htm table (set <td> colspan
+        to element.width)
+        """
+        class Blank(object):
+            def __init__(self, width=1):
+                self.width = width
+
+            def display(self):
+                return ' '
+
+        def recursive_build_table(table=[[]]):
+            """
+            Build tables lines by looking on elements of the previous line
+
+                         ...
+            newline      | . x . y ...
+            previous line| v w . u . . s |
+                         | m . . o . p q |
+                         |     b . c d   |
+            first line   |       a       |
+            """
+            previous_line = table[-1]
+            # base case: the last line is a single big Blank
+            if len(previous_line) == 1 and type(previous_line[0]) is Blank:
+                return table[:-1]
+
+            line = []
+            previous_content = None
+            for content in previous_line:
+                if type(content) is Blank:
+                    new_content = Blank(content.width)
+                else:
+                    branches = content.branches
+                    if branches:
+                        for branch in branches[:-1]:
+                            line.append(branch)
+                        new_content = branches[-1]
+                    else:
+                        new_content = Blank()
+                if type(new_content) is Blank and type(previous_content) is Blank:
+                    # merge contigous blanks
+                    previous_content.width += new_content.width
+                else:
+                    line.append(new_content)
+                    previous_content = new_content
+            # recursive call
+            table.append(line)
+            return recursive_build_table(table)
+
+        table = recursive_build_table([[self], list(self.parents)])
+        return table

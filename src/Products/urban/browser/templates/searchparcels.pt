@@ -171,49 +171,17 @@
                                                    oldparcels request/parcel_history | nothing"
                                    condition="python: results or oldparcels">
                             <br />
-                            <table class="listing" class="listing" width="100%" border="0" cellspacing="0">
+                            <table class="listing" class="listing" width="100%" border="0" cellspacing="0"
+                                   tal:condition="python: results">
                                 <thead>
                                     <tr>
-                                        <th colspan="2" i18n:translate="">
+                                        <th colspan=2 i18n:translate="">
                                             Found parcel(s)
                                         </th>
                                     </tr>
                                 </thead>
-                                <!-- Display 'no results' -->
-                                <tal:block condition="not: python:results or parcel_owner or location">
-                                    <tal:def define="resultsOldPrc view/search_historic_of_parcel">
-                                        <tr tal:condition="not: resultsOldPrc">
-                                            <td colspan=2 i18n:domain="atcontenttypes" i18n:translate="description_no_items_in_topic" class="discreet">No result found.</td>
-                                        </tr>
-                                        <tr tal:repeat="resold resultsOldPrc">
-                                            <tal:block define="oddrow repeat/resold/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
-                                                <td fcolor="#FF0000" tal:attributes="style python: resold.highlight and 'color:green' or ''">
-                                                    <span tal:replace="structure python: '&nbsp;'*resold.level*3" tal:condition="python: resold.level"/>
-                                                    <span tal:content="python: resold.divname"/>
-                                                    <span tal:content="python: str(resold.as_prca)"></span>
-                                                    <!--span i18n:translate="" tal:condition="python: resold.old">(Attention!! ancien nom de parcelle)</span-->
-                                                </td>
-                                            </tal:block>
-                                            <td>
-                                                <form i18n:domain="urban" name="quickAddParcel"
-                                                      tal:attributes="action string: ${context/absolute_url}/searchparcels" action="#" method="post">
-                                                    <input type="hidden" name="division" value="#" tal:attributes="value python: resold.division" />
-                                                    <input type="hidden" name="section" value="#" tal:attributes="value python: resold.section" />
-                                                    <input type="hidden" name="radical" value="#" tal:attributes="value python: resold.radical" />
-                                                    <input type="hidden" name="bis" value="#" tal:attributes="value python: resold.bis" />
-                                                    <input type="hidden" name="exposant" value="#" tal:attributes="value python: resold.exposant" />
-                                                    <input type="hidden" name="puissance" value="#" tal:attributes="value python: resold.puissance" />
-                                                    <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
-                                                    <!--input type="hidden" name="old" value="#"
-                                                           tal:attributes="value python: resold.get('old', False) or resold.get('level', False)"/-->
-                                                    <input type="submit" name="add_parcel" class="context" id="parcel" value="Add this parcel" i18n:attributes="value" />
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    </tal:def>
-                                </tal:block>
                                 <!-- Display the results body -->
-                                <tal:block tal:repeat="res results" tal:condition="python:results">
+                                <tal:block tal:repeat="res results">
                                     <tr>
                                         <td>
                                             <span tal:content="python: res.display()"/>
@@ -260,7 +228,45 @@
                                        </td>
                                    </tr>
                                </tal:block>
-                           </table>
+                            </table>
+                            <table class="listing" class="listing" border="0" cellspacing="0"
+                                   tal:condition="not: python:results or parcel_owner or location"
+                                   tal:define="table_result view/search_historic_of_parcel">
+                                <thead>
+                                    <tr>
+                                        <th i18n:translate="" tal:attributes="colspan python: table_result[0][0].width">
+                                            Found parcel(s)
+                                        </th>
+                                    </tr>
+                                </thead>
+                                    <tr tal:repeat="line_result table_result" style='text-align: center;'>
+                                        <!--tal:block define="oddrow repeat/resold/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'"-->
+                                        <tal:line repeat="resold line_result">
+                                            <td fcolor="#FF0000"
+                                                tal:attributes="style python: getattr(resold, 'level', None) == 0 and 'color:green' or '';
+                                                                colspan resold/width">
+                                                <span tal:content="resold/display"></span>
+                                                <!--span i18n:translate="" tal:condition="python: resold.old">(Attention!! ancien nom de parcelle)</span-->
+                                            </td>
+                                        <!--/tal:block-->
+                                        </tal:line>
+                                        <!--td>
+                                            <form i18n:domain="urban" name="quickAddParcel"
+                                                  tal:attributes="action string: ${context/absolute_url}/searchparcels" action="#" method="post">
+                                                <input type="hidden" name="division" value="#" tal:attributes="value python: resold.division" />
+                                                <input type="hidden" name="section" value="#" tal:attributes="value python: resold.section" />
+                                                <input type="hidden" name="radical" value="#" tal:attributes="value python: resold.radical" />
+                                                <input type="hidden" name="bis" value="#" tal:attributes="value python: resold.bis" />
+                                                <input type="hidden" name="exposant" value="#" tal:attributes="value python: resold.exposant" />
+                                                <input type="hidden" name="puissance" value="#" tal:attributes="value python: resold.puissance" />
+                                                <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
+                                                <input type="hidden" name="old" value="#"
+                                                       tal:attributes="value python: resold.get('old', False) or resold.get('level', False)"/>
+                                                <input type="submit" name="add_parcel" class="context" id="parcel" value="Add this parcel" i18n:attributes="value" />
+                                            </form>
+                                        </td-->
+                                    </tr>
+                            </table>
                        </tal:block>
                    </tal:searchIsEnabled>
                </fieldset>
