@@ -246,7 +246,7 @@
                                         <tal:line repeat="resold line_result">
                                             <td fcolor="#FF0000"
                                                 tal:attributes="style python: getattr(resold, 'level', None) == 0 and 'color:green' or '';
-                                                                colspan resold/width">
+                                                                colspan python: resold.width">
                                                 <span tal:content="resold/display"></span>
                                                 <!--span i18n:translate="" tal:condition="python: resold.old">(Attention!! ancien nom de parcelle)</span-->
                                             </td>

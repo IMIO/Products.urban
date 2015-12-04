@@ -561,11 +561,13 @@ class ParcelHistoric(ParentParcel, ChildParcel):
             table.append(line)
             return recursive_build_table(table)
 
-        table = [self]
-        if self.children:
-            table = recursive_build_table([table, list(self.children)])
-        table = table[::-1]
+        table = [[self]]
         if self.parents:
-            table = recursive_build_table([table, list(self.parents)])
+            table.append(list(self.parents))
+            table = recursive_build_table(table)
+        table = table[::-1]
+        if self.children:
+            table.append(list(self.children))
+            table = recursive_build_table(table)
 
         return table
