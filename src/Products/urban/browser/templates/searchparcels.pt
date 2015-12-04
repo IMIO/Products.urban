@@ -229,17 +229,19 @@
                                    </tr>
                                </tal:block>
                             </table>
+                       </tal:block>
+                        <tal:block define="oldparcels request/parcel_history | nothing"
+                                   condition="python: oldparcels">
                             <table class="listing" class="listing" border="0" cellspacing="0"
-                                   tal:condition="not: python:results or parcel_owner or location"
-                                   tal:define="table_result view/search_historic_of_parcel">
+                                   tal:define="historic view/search_historic_of_parcel">
                                 <thead>
                                     <tr>
-                                        <th i18n:translate="" tal:attributes="colspan python: table_result[0][0].width">
+                                        <th i18n:translate="" tal:attributes="colspan python: historic.width">
                                             Found parcel(s)
                                         </th>
                                     </tr>
                                 </thead>
-                                    <tr tal:repeat="line_result table_result" style='text-align: center;'>
+                                    <tr tal:repeat="line_result historic/table_display" style='text-align: center;'>
                                         <!--tal:block define="oddrow repeat/resold/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'"-->
                                         <tal:line repeat="resold line_result">
                                             <td fcolor="#FF0000"
