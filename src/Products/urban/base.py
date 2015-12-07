@@ -333,8 +333,8 @@ class UrbanBase(object):
         for applicant in applicants:
             toreturn = toreturn + '%' + applicant.getPersonTitleValue() + '|' + \
                        applicant.getPersonTitleValue(reverse=True) + '|' + applicant.getName1() + '|' + \
-                       applicant.getName2() + '|' + applicant.getNumber() + ', ' + \
-                       applicant.getStreet() + '|' + applicant.getZipcode() + ' ' + applicant.getCity()
+                       applicant.getName2() + '|' + applicant.getStreet() + ', ' + \
+                       applicant.getNumber() + '|' + applicant.getZipcode() + ' ' + applicant.getCity()
         toreturn = toreturn + '</CSV>'
         return toreturn
     getMultipleApplicants = getMultipleApplicantsCSV

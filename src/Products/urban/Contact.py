@@ -325,10 +325,10 @@ class Contact(BaseContent, BrowserDefaultMixin):
         city = self.getCity()
         if not linebyline:
             result = []
-            if number:
-                result.append("%s," % number)
             if street:
                 result.append(street)
+            if number:
+                result.append(", %s" % number)
             if zip:
                 result.append(zip)
             if city:
@@ -339,7 +339,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
             street = cgi.escape(street)
             zip = cgi.escape(zip)
             city = cgi.escape(city)
-            return "<p>%s, %s<br />%s %s</p>" % (number, street, zip, city)
+            return "<p>%s, %s<br />%s %s</p>" % (street, number, zip, city)
 
     security.declarePublic('getPersonTitle')
     def getPersonTitle(self, short=False, reverse=False, theObject=False):
