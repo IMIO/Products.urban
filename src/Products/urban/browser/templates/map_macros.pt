@@ -12,6 +12,8 @@
     <script type="text/javascript" tal:attributes="src python:'%s/lib/ext/Ext/ext-all.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/lib/openlayers/SingleFile.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/lib/geoext/script/GeoExt.js'%staticPylonsHost"></script>
+    <script type="text/javascript" tal:attributes="src python:'%s/lib/jsts/javascript.util.min.js"></script>
+    <script type="text/javascript" tal:attributes="src python:'%s/lib/jsts/jsts.min.js"></script>
 
         <!-- The script below will load the configuration of the application -->
     <script type="text/javascript" tal:attributes="src string:${pylonsHost}/config/index"></script>
@@ -33,7 +35,7 @@
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.ParamForm.js'%staticPylonsHost"></script>
 
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_util.js'%staticPylonsHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_waiter.js'%staticPylonsHost"></script>    
+    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_waiter.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_ows.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_managelayers.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_FeatureDataModel.js'%staticPylonsHost"></script>
