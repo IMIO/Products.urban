@@ -12,8 +12,8 @@
     <script type="text/javascript" tal:attributes="src python:'%s/lib/ext/Ext/ext-all.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/lib/openlayers/SingleFile.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/lib/geoext/script/GeoExt.js'%staticPylonsHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/lib/jsts/javascript.util.min.js"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/lib/jsts/jsts.min.js"></script>
+    <script type="text/javascript" tal:attributes="src python:'%s/lib/jsts/javascript.util.min.js'%staticPylonsHost"></script>
+    <script type="text/javascript" tal:attributes="src python:'%s/lib/jsts/jsts.min.js'%staticPylonsHost"></script>
 
         <!-- The script below will load the configuration of the application -->
     <script type="text/javascript" tal:attributes="src string:${pylonsHost}/config/index"></script>
