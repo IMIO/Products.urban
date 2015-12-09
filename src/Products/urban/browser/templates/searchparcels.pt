@@ -171,63 +171,64 @@
                                                    oldparcels request/parcel_history | nothing"
                                    condition="python: results or oldparcels">
                             <br />
-                            <table class="listing" class="listing" width="100%" border="0" cellspacing="0"
+                            <table class="listing" class="listing" border="0" cellspacing="0"
                                    tal:condition="python: results">
                                 <thead>
                                     <tr>
-                                        <th colspan=2 i18n:translate="">
+                                        <th colspan=3 i18n:translate="">
                                             Found parcel(s)
                                         </th>
                                     </tr>
                                 </thead>
                                 <!-- Display the results body -->
-                                <tal:block tal:repeat="res results">
+                                <tal:block tal:repeat="parcel results">
                                     <tr>
                                         <td>
-                                            <span tal:content="python: res.display()"/>
-                                            <span i18n:translate="" tal:condition="python: getattr(res, 'old', False)">(Attention!! ancien nom de parcelle)</span><br>
-                                            <span tal:condition="python: hasattr(res, 'location')" tal:content="python: res.location"/><br>
-                                            <span tal:condition="python: hasattr(res, 'proprietary')" tal:content="python: res.proprietary"/><br>
+                                            <img src="old.png" tal:condition="python: getattr(parcel, 'old', None)" style="padding-right:0.5em"/>
+                                            <span tal:content="python: parcel.display()"/><br>
+                                            <span tal:condition="python: hasattr(parcel, 'location')" tal:content="python: parcel.location"/><br>
+                                            <span tal:condition="python: hasattr(parcel, 'proprietary')" tal:content="python: parcel.proprietary"/><br>
                                         </td>
                                         <td>
                                             <form i18n:domain="urban" name="quickAddParcel" action="#" method="post"
                                                   tal:attributes="action string: ${context/absolute_url}/searchparcels">
-                                                <tal:create_owner condition="python: view.contextIsLicence() and hasattr(res, 'proprietary')">
-                                                    <input type="checkbox" name="proprietary" value="#" tal:attributes="value python: res.proprietary"/>
-                                                    <input type="hidden" name="proprietary_city" value="#" tal:attributes="value python: res.proprietary_city" />
+                                                <tal:create_owner condition="python: view.contextIsLicence() and hasattr(parcel, 'proprietary')">
+                                                    <input type="checkbox" name="proprietary" value="#" tal:attributes="value python: parcel.proprietary"/>
+                                                    <input type="hidden" name="proprietary_city" value="#" tal:attributes="value python: parcel.proprietary_city" />
                                                     <input type="hidden" name="proprietary_street" value="#"
-                                                           tal:attributes="value python: res.proprietary_street" />
-                                                    <span i18n:translate=""> Create proprietary/applicant</span><br />
+                                                           tal:attributes="value python: parcel.proprietary_street" />
+                                                    <img src="Proprietary.png"/>
                                                 </tal:create_owner>
-                                                <input type="hidden" name="division" value="#" tal:attributes="value python: res.division" />
-                                                <input type="hidden" name="section" value="#" tal:attributes="value python: res.section" />
-                                                <input type="hidden" name="radical" value="#" tal:attributes="value python: res.radical" />
-                                                <input type="hidden" name="bis" value="#" tal:attributes="value python: res.bis" />
-                                                <input type="hidden" name="exposant" value="#" tal:attributes="value python: res.exposant" />
-                                                <input type="hidden" name="puissance" value="#" tal:attributes="value python: res.puissance" />
+                                                <input type="hidden" name="division" value="#" tal:attributes="value python: parcel.division" />
+                                                <input type="hidden" name="section" value="#" tal:attributes="value python: parcel.section" />
+                                                <input type="hidden" name="radical" value="#" tal:attributes="value python: parcel.radical" />
+                                                <input type="hidden" name="bis" value="#" tal:attributes="value python: parcel.bis" />
+                                                <input type="hidden" name="exposant" value="#" tal:attributes="value python: parcel.exposant" />
+                                                <input type="hidden" name="puissance" value="#" tal:attributes="value python: parcel.puissance" />
                                                 <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
-                                                <input type="hidden" name="old" value="#" tal:attributes="value python: getattr(res, 'old', False)"/>
-                                                <input type="hidden" name="location" value="#" tal:attributes="value python: getattr(res, 'location', '')" />
-                                                <input type="submit" name="add_parcel" class="context" id="parcel" value="Add this parcel" i18n:attributes="value" />
+                                                <input type="hidden" name="old" value="#" tal:attributes="value python: getattr(parcel, 'old', False)"/>
+                                                <input type="hidden" name="location" value="#" tal:attributes="value python: getattr(parcel, 'location', '')" />
+                                                <input type="image" src="icon_add.gif" name="add_parcel" alt="Add this parcel"/>
                                             </form>
-
+                                        </td>
+                                        <td>
                                             <form i18n:domain="urban" name="findPrcHistory"
                                                   tal:attributes="action string:${context/absolute_url}/searchparcels" action="#" method="post">
-                                                <input type="hidden" name="division" value="#" tal:attributes="value python: res.division" />
-                                                <input type="hidden" name="section" value="#" tal:attributes="value python: res.section" />
-                                                <input type="hidden" name="radical" value="#" tal:attributes="value python: res.radical" />
-                                                <input type="hidden" name="bis" value="#" tal:attributes="value python: res.bis" />
-                                                <input type="hidden" name="exposant" value="#" tal:attributes="value python: res.exposant" />
-                                                <input type="hidden" name="puissance" value="#" tal:attributes="value python: res.puissance" />
+                                                <input type="hidden" name="division" value="#" tal:attributes="value python: parcel.division" />
+                                                <input type="hidden" name="section" value="#" tal:attributes="value python: parcel.section" />
+                                                <input type="hidden" name="radical" value="#" tal:attributes="value python: parcel.radical" />
+                                                <input type="hidden" name="bis" value="#" tal:attributes="value python: parcel.bis" />
+                                                <input type="hidden" name="exposant" value="#" tal:attributes="value python: parcel.exposant" />
+                                                <input type="hidden" name="puissance" value="#" tal:attributes="value python: parcel.puissance" />
                                                 <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
                                                 <input type="hidden" name="parcel_history" value="1"/>
-                                                <input type="hidden" name="divname" value="#" tal:attributes="value python: res.divname" />
-                                                <input type="hidden" name="old" value="#" tal:attributes="value python: getattr(res, 'old', False)"/>
-                                                <input type="submit" class="context" id="parcel" value="Rechercher les autres noms" i18n:attributes="value" />
+                                                <input type="hidden" name="divname" value="#" tal:attributes="value python: parcel.divname" />
+                                                <input type="hidden" name="old" value="#" tal:attributes="value python: getattr(parcel, 'old', False)"/>
+                                                <input type="image" src="parcelhistoric.png" alt="Rechercher les autres noms"/>
                                            </form>
-                                       </td>
-                                   </tr>
-                               </tal:block>
+                                        </td>
+                                    </tr>
+                                </tal:block>
                             </table>
                        </tal:block>
                         <tal:block define="oldparcels request/parcel_history | nothing"
@@ -237,36 +238,60 @@
                                 <thead>
                                     <tr>
                                         <th i18n:translate="" tal:attributes="colspan python: historic.width">
-                                            Found parcel(s)
+                                            Historique de la parcelle
                                         </th>
                                     </tr>
                                 </thead>
-                                    <tr tal:repeat="line_result historic/table_display" style='text-align: center;'>
+                                    <tr tal:repeat="line_result historic/table_display">
                                         <!--tal:block define="oddrow repeat/resold/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'"-->
-                                        <tal:line repeat="resold line_result">
+                                        <tal:line repeat="parcel line_result">
                                             <td fcolor="#FF0000"
-                                                tal:attributes="style python: getattr(resold, 'level', None) == 0 and 'color:green' or '';
-                                                                colspan python: resold.width">
-                                                <span tal:content="resold/display"></span>
-                                                <!--span i18n:translate="" tal:condition="python: resold.old">(Attention!! ancien nom de parcelle)</span-->
+                                                tal:define="old python: getattr(parcel, 'old', None);
+                                                            root python: getattr(parcel, 'level', None) == 0;
+                                                            center python: parcel.width > 1;
+                                                            is_parcel python: hasattr(parcel, 'division')"
+                                                tal:attributes="style python: root and 'color:green' or '';
+                                                                class  python: center and 'center-parcel' or 'left-parcel';
+                                                                colspan python: parcel.width">
+                                                <div class="parcel-name">
+                                                    <img tal:condition="old" src="old.png" style="padding-right: 0.5em"/>
+                                                    <span tal:attributes="class python: not old and 'leaf-parcel' or ''"
+                                                          tal:content="parcel/display"></span>
+                                                </div>
+                                                <tal:actions condition="is_parcel">
+                                                    <div class="parcel-action">
+                                                        <form i18n:domain="urban" name="findPrcHistory"
+                                                              tal:attributes="action string:${context/absolute_url}/searchparcels" action="#" method="post">
+                                                            <input type="hidden" name="division" value="#" tal:attributes="value python: parcel.division" />
+                                                            <input type="hidden" name="section" value="#" tal:attributes="value python: parcel.section" />
+                                                            <input type="hidden" name="radical" value="#" tal:attributes="value python: parcel.radical" />
+                                                            <input type="hidden" name="bis" value="#" tal:attributes="value python: parcel.bis" />
+                                                            <input type="hidden" name="exposant" value="#" tal:attributes="value python: parcel.exposant" />
+                                                            <input type="hidden" name="puissance" value="#" tal:attributes="value python: parcel.puissance" />
+                                                            <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
+                                                            <input type="hidden" name="parcel_history" value="1"/>
+                                                            <input type="hidden" name="divname" value="#" tal:attributes="value python: parcel.divname" />
+                                                            <input type="hidden" name="old" value="#" tal:attributes="value python: getattr(parcel, 'old', False)"/>
+                                                            <input type="image" src="parcelhistoric.png" alt="Rechercher les autres noms"/>
+                                                        </form>
+                                                    </div>
+                                                    <div class="parcel-action">
+                                                        <form i18n:domain="urban" name="quickAddParcel"
+                                                              tal:attributes="action string: ${context/absolute_url}/searchparcels" action="#" method="post">
+                                                            <input type="hidden" name="division" value="#" tal:attributes="value python: parcel.division" />
+                                                            <input type="hidden" name="section" value="#" tal:attributes="value python: parcel.section" />
+                                                            <input type="hidden" name="radical" value="#" tal:attributes="value python: parcel.radical" />
+                                                            <input type="hidden" name="bis" value="#" tal:attributes="value python: parcel.bis" />
+                                                            <input type="hidden" name="exposant" value="#" tal:attributes="value python: parcel.exposant" />
+                                                            <input type="hidden" name="puissance" value="#" tal:attributes="value python: parcel.puissance" />
+                                                            <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
+                                                            <input type="hidden" name="old" value="#" tal:attributes="value python: getattr(parcel, 'old', False)"/>
+                                                            <input type="image" src="icon_add.gif" name="add_parcel" alt="Add this parcel"/>
+                                                         </form>
+                                                    </div>
+                                                </tal:actions>
                                             </td>
-                                        <!--/tal:block-->
                                         </tal:line>
-                                        <!--td>
-                                            <form i18n:domain="urban" name="quickAddParcel"
-                                                  tal:attributes="action string: ${context/absolute_url}/searchparcels" action="#" method="post">
-                                                <input type="hidden" name="division" value="#" tal:attributes="value python: resold.division" />
-                                                <input type="hidden" name="section" value="#" tal:attributes="value python: resold.section" />
-                                                <input type="hidden" name="radical" value="#" tal:attributes="value python: resold.radical" />
-                                                <input type="hidden" name="bis" value="#" tal:attributes="value python: resold.bis" />
-                                                <input type="hidden" name="exposant" value="#" tal:attributes="value python: resold.exposant" />
-                                                <input type="hidden" name="puissance" value="#" tal:attributes="value python: resold.puissance" />
-                                                <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
-                                                <input type="hidden" name="old" value="#"
-                                                       tal:attributes="value python: resold.get('old', False) or resold.get('level', False)"/>
-                                                <input type="submit" name="add_parcel" class="context" id="parcel" value="Add this parcel" i18n:attributes="value" />
-                                            </form>
-                                        </td-->
                                     </tr>
                             </table>
                        </tal:block>

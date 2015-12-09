@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.services.base import Service
+from Products.urban.services.base import Session
 
 IGNORE = []
 
@@ -19,33 +20,35 @@ class CadastreService(Service):
         super(CadastreService, self).__init__(dialect, user, host, db_name, password)
 
         if self.can_connect():
-            self.da = self._init_table('da', column_names=['da', 'divname'])
-            self.pe = self._init_table('pe', column_names=['pe', 'adr1', 'adr2', 'daa'])
-            self.pas = self._init_table(
+            self._init_table('da', column_names=['da', 'divname'])
+            self._init_table('pe', column_names=['pe', 'adr1', 'adr2', 'daa'])
+            self._init_table(
                 'pas',
                 column_names=['da', 'section', 'radical', 'exposant', 'bis', 'puissance', 'prcb1', 'prcc', 'prca']
             )
-            self.capa = self._init_table(
+            self._init_table(
                 'capa',
                 column_names=['capakey', 'da', 'section', 'radical', 'exposant', 'bis', 'puissance']
             )
-            self.map_ = self._init_table(
+            self._init_table(
                 'map',
                 column_names=['capakey', 'prc', 'pe', 'adr1', 'adr2', 'sl1']
             )
             # self.prc = self._init_table('prc', column_names=['prc', '', '', '', '', ''])
 
-    def _init_table(self, table_name, column_names):
-        table = self.get_table(table_name)
-        for column_name in column_names:
-            setattr(table, column_name, table.columns[column_name])
+    def new_session(self):
+        session = CadastreSession(self)
+        return session
 
-        return table
+
+class CadastreSession(Session):
+    """
+    Implements all the sql queries in cadastre the DB with sqlalchemy methods
+    """
 
     def get_all_divisions(self):
         """Return all divisions records of da table"""
-        session = self.session()
-        query = session.query(self.da.da, self.da.divname)
+        query = self.session.query(self.tables.da.da, self.tables.da.divname)
         result = query.all()
 
         return result
@@ -55,9 +58,9 @@ class CadastreService(Service):
         """
         Tell if a reference exists in the cadastral DB (including old parcels).
         """
-        query = self._base_query_parcels(self.pas)
+        query = self._base_query_parcels(self.tables.pas)
         # filter on parcel reference arguments
-        query = self._filter(query, self.pas, division, section, radical, bis, exposant, puissance)
+        query = self._filter(query, self.tables.pas, division, section, radical, bis, exposant, puissance)
         records = query.all()
         return bool(records)
 
@@ -70,9 +73,9 @@ class CadastreService(Service):
         if not self.is_official_parcel(division, section, radical, bis, exposant, puissance):
             raise UnreferencedParcelError
 
-        query = self._base_query_parcels(self.capa)
+        query = self._base_query_parcels(self.tables.capa)
         # filter on parcel reference arguments
-        query = self._filter(query, self.capa, division, section, radical, bis, exposant, puissance)
+        query = self._filter(query, self.tables.capa, division, section, radical, bis, exposant, puissance)
         records = query.all()
         return bool(records)
 
@@ -84,16 +87,16 @@ class CadastreService(Service):
         """
         query = self._base_query_actual_parcels()
         # filter on parcel reference arguments
-        query = self._filter(query, self.capa, division, section, radical, bis, exposant, puissance)
+        query = self._filter(query, self.tables.capa, division, section, radical, bis, exposant, puissance)
 
         # filter on parcel location/proprietary name arguments
-        map_ = self.map_
+        map_ = self.tables.map
         if parcel_owner is not IGNORE:
             query = query.filter(map_.pe.like('%{}%'.format(parcel_owner)))
         if location is not IGNORE:
             query = query.filter(map_.sl1.like('%{}%'.format(location)))
 
-        records = query.all()
+        records = query.distinct().all()
         parcels = [ActualParcel(**record._asdict()) for record in records]
         return parcels
 
@@ -102,7 +105,7 @@ class CadastreService(Service):
         """
         Return the unique parcel exactly matching search criterias.
         """
-        pas = self.pas
+        pas = self.tables.pas
         query = self._base_query_parcels(pas)
         # filter on parcel reference arguments
         query = self._filter(query, pas, division, section, radical, bis, exposant, puissance)
@@ -110,7 +113,7 @@ class CadastreService(Service):
             record = query.distinct().one()
         except:
             return
-        parcel = ParcelHistoric(**record._asdict())
+        parcel = ParcelHistoric(session=self, **record._asdict())
         return parcel
 
     def query_old_parcels(self, division=IGNORE, section=IGNORE, radical=IGNORE, bis=IGNORE,
@@ -119,12 +122,12 @@ class CadastreService(Service):
         Return old parcels partially matching any defined criterias.
         Any argument with value IGNORE, will be ignored
         """
-        pas = self.pas
+        pas = self.tables.pas
         query = self._base_query_parcels(pas)
         # filter on parcel reference arguments
         query = self._filter(query, pas, division, section, radical, bis, exposant, puissance)
 
-        records = query.all()
+        records = query.distinct().all()
         parcels = [Parcel(**record._asdict()) for record in records]
         return parcels
 
@@ -137,7 +140,7 @@ class CadastreService(Service):
         if not parcel:
             raise UnreferencedParcelError
 
-        historic = ParcelHistoric(divname=parcel.divname, **parcel.reference_as_dict())
+        historic = ParcelHistoric(session=self, divname=parcel.divname, **parcel.reference_as_dict())
         return historic
 
     def query_parent_parcels(self, division, section=None, radical='0', bis='0',
@@ -168,20 +171,20 @@ class CadastreService(Service):
         sibling_key = prca => query parents parcels
         sibling_key = prcc => query for children parcels
         """
-        session = self.session()
-        pas = self.pas
+        pas = self.tables.pas
         opposite_key = sibling_key == 'prca' and 'prcc' or 'prca'
         opposite_sibling_column = getattr(pas, opposite_key)
 
         # get the prcb1 of current parcel in a subquery
-        query_prcb1 = session.query(pas.prcb1.label('current_parcel_id'))
+        query_prcb1 = self.session.query(pas.prcb1.label('current_parcel_id'))
         query_prcb1 = self._filter(query_prcb1, pas, division, section, radical, bis, exposant, puissance)
         subquery = query_prcb1.subquery()
 
         # search a (sibling) parcel having the opposite sibling column value to 'parcel_key'
         # ex: we search parent parcels having the current parcel as child
         parcel_key = compute_prc(division, section, radical, bis, exposant, puissance)
-        query = self._base_query_parcels(pas, session)
+        query = self._base_query_parcels(pas)
+        query = query.filter(pas.da == division)
         query = query.filter(opposite_sibling_column == parcel_key)
         # exclude the current parcel from the result
         query = query.filter(pas.prcb1 != subquery.c.current_parcel_id)
@@ -197,7 +200,7 @@ class CadastreService(Service):
 
     def _filter(self, query, table, division=IGNORE,  section=IGNORE, radical=IGNORE,
                 bis=IGNORE, exposant=IGNORE, puissance=IGNORE):
-        da = self.da
+        da = self.tables.da
         query = query.filter(da.da == division)
         query = section is IGNORE and query or query.filter(table.section == section)
         query = radical is IGNORE and query or query.filter(table.radical == radical,)
@@ -206,13 +209,12 @@ class CadastreService(Service):
         query = puissance is IGNORE and query or query.filter(table.puissance == puissance,)
         return query
 
-    def _base_query_parcels(self, table, session=None):
+    def _base_query_parcels(self, table):
         """
         """
-        session = session or self.session()
-        da = self.da
+        da = self.tables.da
         # columns to return
-        query = session.query(
+        query = self.session.query(
             da.divname,
             da.da.label('division'),
             table.section,
@@ -225,14 +227,14 @@ class CadastreService(Service):
         query = query.filter(da.da == table.da)
         return query
 
-    def _base_query_actual_parcels(self, session=None):
+    def _base_query_actual_parcels(self):
         """
         """
-        capa = self.capa
+        capa = self.tables.capa
         # parcel reference columns to return (section, division, radical, ...)
-        query = self._base_query_parcels(capa, session)
+        query = self._base_query_parcels(capa)
 
-        map_ = self.map_
+        map_ = self.tables.map
         # additional columns to return
         query = query.add_columns(
             capa.capakey,
@@ -366,12 +368,15 @@ class BaseParcelHistoric(Parcel):
     Base class for parcel historic
     """
 
-    def __init__(self, **refs):
-        super(BaseParcelHistoric, self).__init__(**refs)
+    def __init__(self, session=None, **refs):
+        super(BaseParcelHistoric, self).__init__(session=session, **refs)
+        from Products.urban.services import cadastre
+        self.session = session or cadastre.new_session()
         self.parent_node = None
         self.branches = []
         self.level = 0
         self.width = self._init_width()
+        self.old = False  # is an old parcel if it has children
 
     def _init_width(self):
         width = sum([node.width for node in self.branches]) or 1
@@ -393,22 +398,21 @@ class ParentParcel(BaseParcelHistoric):
     Class to represent a parent parcel of a parcelHistoric.
     """
 
-    def __init__(self, child_parcel, **refs):
-        super(ParentParcel, self).__init__(**refs)
+    def __init__(self, child_parcel, session=None, **refs):
+        super(ParentParcel, self).__init__(session=session, **refs)
         self.parent_node = child_parcel
         self.level = child_parcel.level - 1
         self.branches = self._init_parents_historic()
         self.width = self._init_width()
+        self.old = True  # a parent parcel is ALWAYS old
 
     def _init_parents_historic(self):
         """
         Recursively initialize the chain of all parents parcels
         """
-        from Products.urban.services import cadastre
-
         reference = self.reference_as_dict()
-        parcels = cadastre.query_parent_parcels(**reference)
-        parents = [ParentParcel(child_parcel=self, **parcel._asdict()) for parcel in parcels]
+        parcels = self.session.query_parent_parcels(**reference)
+        parents = [ParentParcel(child_parcel=self, session=self.session, **parcel._asdict()) for parcel in parcels]
         return parents
 
     def display(self):
@@ -420,22 +424,21 @@ class ChildParcel(BaseParcelHistoric):
     Class to represent a child parcel of a parcelHistoric.
     """
 
-    def __init__(self, parent_parcel, **refs):
-        super(ChildParcel, self).__init__(**refs)
+    def __init__(self, parent_parcel, session=None, **refs):
+        super(ChildParcel, self).__init__(session=session, **refs)
         self.parent_node = parent_parcel
         self.level = parent_parcel.level + 1
         self.branches = self._init_children_historic()
         self.width = self._init_width()
+        self.old = bool(self.branches)  # this parcel is old only if it has children
 
     def _init_children_historic(self):
         """
         Recursively initialize the chain of all children parcels
         """
-        from Products.urban.services import cadastre
-
         reference = self.reference_as_dict()
-        parcels = cadastre.query_child_parcels(**reference)
-        children = [ChildParcel(parent_parcel=self, **parcel._asdict()) for parcel in parcels]
+        parcels = self.session.query_child_parcels(**reference)
+        children = [ChildParcel(parent_parcel=self, session=self.session, **parcel._asdict()) for parcel in parcels]
         return children
 
     def display(self):
@@ -447,13 +450,16 @@ class ParcelHistoric(ParentParcel, ChildParcel):
     Class to represent a parcel query result and all its siblings (parents/childs)
     """
 
-    def __init__(self, **refs):
-        super(ChildParcel, self).__init__(**refs)
+    def __init__(self, session=None, **refs):
+        super(ChildParcel, self).__init__(session=session, **refs)
         self.level = 0
         self.parents = self._init_parents_historic()
         self.children = self._init_children_historic()
         self.branches = self.parents + self.children
-        self.width = self._init_width()
+        self.parents_width = sum([node.width for node in self.parents])
+        self.children_width = sum([node.width for node in self.children])
+        self.width = max(self.parents_width, self.children_width)
+        self.old = bool(self.children)  # this parcel is old only if it has children
 
     def display(self):
         return super(ChildParcel, self).display()
@@ -466,16 +472,10 @@ class ParcelHistoric(ParentParcel, ChildParcel):
         return indexes
 
     def all_nodes(self):
-        return self._get_all_nodes([self])
-
-    def all_child_nodes(self):
-        return self._get_all_nodes(self.children)
-
-    def all_parent_nodes(self):
-        return self._get_all_nodes(self.parents)
-
-    def _get_all_nodes(self, subset=[]):
-        to_explore = list(subset)  # clone 'subset' to keep it unaltered
+        """
+        Return a list of all nodes of this historic.
+        """
+        to_explore = list([self])
         all_nodes = []
         while to_explore:
             next_node = to_explore.pop()
@@ -484,36 +484,13 @@ class ParcelHistoric(ParentParcel, ChildParcel):
                 to_explore.append(sub_node)
         return all_nodes
 
-    def parents_by_level(self):
-        """
-        See _nodes_by_level.
-        """
-        return self._nodes_by_level(self.all_parent_nodes())
-
-    def children_by_level(self):
-        """
-        See _nodes_by_level.
-        """
-        return self._nodes_by_level(self.all_child_nodes())
-
-    def _nodes_by_level(self, nodes):
-        """
-        Transform a node list into a dict {x: [n1, n2], y[n3, ...], ...}
-        where x is a level and [n1, n2] are nodes of this level.
-        """
-        by_level = {}
-        for node in nodes:
-            if node.level in by_level.keys():
-                by_level[node.level].append(node)
-            else:
-                by_level[node.level] = [node]
-        return by_level
-
     def table_display(self):
         """
-        Return a matrix representing this tree.
-        To be used to easily build an htm table (set <td> colspan
-        to element.width)
+        Return nested lists representing this parcel tree to easily build
+        an html table:
+        - the whole nested list is a <table>
+        - each line is a <tr>
+        - each item of a line is a <td> (with colspan set to item.width)
         """
         class Blank(object):
             def __init__(self, width=1):
@@ -526,48 +503,51 @@ class ParcelHistoric(ParentParcel, ChildParcel):
             """
             Build tables lines by looking on elements of the previous line
 
-                         ...
-            newline      | . x . y ...
-            previous line| v w . u . . s |
-                         | m . . o . p q |
-                         |     b . c d   |
-            first line   |       a       |
+            first line    |       a       |
+                          |     b . c d   |
+                          | m . . o . p q |
+                          ...
+            previous line | v w . u . . s |
+            new line      | . x . y ...
             """
             previous_line = table[-1]
-            # base case: the last line is a single big Blank
-            if len(previous_line) == 1 and type(previous_line[0]) is Blank:
+            # base case: the last line is a single Blank or is empty
+            is_blank_line = len(previous_line) == 1 and type(previous_line[0]) is Blank
+            if not previous_line or is_blank_line:
                 return table[:-1]
 
             line = []
-            previous_content = None
-            for content in previous_line:
-                if type(content) is Blank:
-                    new_content = Blank(content.width)
+            for leaf in previous_line:
+                if isinstance(leaf, Parcel) and leaf.branches:
+                    for branch in leaf.branches:
+                        line.append(branch)
                 else:
-                    branches = content.branches
-                    if branches:
-                        for branch in branches[:-1]:
-                            line.append(branch)
-                        new_content = branches[-1]
+                    new_blank = Blank(leaf.width)
+                    # if left neighbour is also a blank, merge them
+                    if line and type(line[-1]) is Blank:
+                        line[-1].width += new_blank.width
                     else:
-                        new_content = Blank()
-                if type(new_content) is Blank and type(previous_content) is Blank:
-                    # merge contigous blanks
-                    previous_content.width += new_content.width
-                else:
-                    line.append(new_content)
-                    previous_content = new_content
+                        line.append(new_blank)
             # recursive call
             table.append(line)
             return recursive_build_table(table)
 
         table = [[self]]
-        if self.parents:
-            table.append(list(self.parents))
-            table = recursive_build_table(table)
-        table = table[::-1]
-        if self.children:
-            table.append(list(self.children))
-            table = recursive_build_table(table)
+        # build parents side of the table
+        width_delta = self.width - self.parents_width
+        parents = list(self.parents)
+        if width_delta:
+            parents.append(Blank(width_delta))
+        table.append(parents)
+        table = recursive_build_table(table)
 
+        table.reverse()
+
+        # build children side of the table
+        width_delta = self.width - self.children_width
+        children = list(self.children)
+        if width_delta:
+            children.append(Blank(width_delta))
+        table.append(children)
+        table = recursive_build_table(table)
         return table

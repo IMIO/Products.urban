@@ -38,7 +38,7 @@ class SearchParcelsView(BrowserView):
                 plone_utils.addPortalMessage(translate('warning_enter_search_criteria'), type="warning")
 
     def __call__(self):
-        if 'add_parcel' in self.request.form:
+        if 'add_parcel.x' in self.request.form:
             parcel_data = {
                 'division': self.request.get('division', None),
                 'section': self.request.get('section', None),
@@ -152,8 +152,8 @@ class SearchParcelsView(BrowserView):
         search_args = self.extract_search_criterions(self.request)
 
         query_result = cadastre.query_old_parcels(**search_args)
-        search_result = []
 
+        search_result = []
         for parcel in query_result:
             if str(parcel) not in to_ignore:
                 setattr(parcel, 'old', True)

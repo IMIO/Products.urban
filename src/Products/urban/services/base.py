@@ -12,15 +12,20 @@ from sqlalchemy.orm import sessionmaker
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 
 
+class Tables(object):
+    """
+    """
+
+
 class Service(object):
     """
-    Helper with sqlalchemy engine , metadata and session objects.
+    Helper with sqlalchemy engine, metadata and session objects.
     """
 
     def __init__(self, dialect, user, host, db_name, password=''):
         self.engine = self._init_engine(dialect, user, host, db_name, password)
         self.metadata = MetaData(self.engine)
-        self.session = sessionmaker(self.engine)
+        self.tables = Tables()  # use _init_table to set sqlalchemy table objects on it
 
     def _init_engine(self, dialect, username, host, db_name, password=''):
         engine = create_engine(
@@ -35,6 +40,22 @@ class Service(object):
         )
 
         return engine
+
+    def _init_table(self, table_name, column_names):
+        table = Table(table_name, self.metadata, autoload=True)
+        for column_name in column_names:
+            setattr(table, column_name, table.columns[column_name])
+        setattr(self.tables, table_name, table)
+
+    def __getattr__(self, attr_name):
+        """
+        Implicitely create a Session an try to delegate any query method
+        call to it.
+        """
+        session = self.new_session()
+        if hasattr(session, attr_name):
+            return getattr(session, attr_name)
+        return getattr(self, attr_name)
 
     def connect(self):
         return self.engine.connect()
@@ -68,9 +89,20 @@ class Service(object):
             return False
         return True
 
-    def get_table(self, table_name):
-        table = Table(table_name, self.metadata, autoload=True)
-        return table
-
     def new_session(self):
-        return self.session()
+        return Session(self)
+
+
+class Session(object):
+    """
+    Base class wrapping a sqlalchemy query session.
+    Group all query methods here.
+    """
+
+    def __init__(self, service):
+        self.service = service
+        self.tables = service.tables
+        self.session = sessionmaker(service.engine)()
+
+    def close(self):
+        self.session.close()

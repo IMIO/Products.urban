@@ -280,4 +280,29 @@ dl.portlet.portletWidgetCollection div.widget-portlet li {
 #urbain220-generation-view ul.pod-template {
     list-style: outside none none;
 }
+
+td.center-parcel{
+    text-align: center;
+}
+
+td.left-parcel{
+    text-align: left;
+}
+
+span.leaf-parcel{
+    padding-left: 1.9em;
+}
+
+td div.parcel-name {
+   display: inline-block;
+   padding-right: 0.5em;
+}
+
+td div.parcel-action {
+   display: inline-block;
+   float: right;
+   padding-left: 0.5em;
+   padding-top: 0.2em;
+   vertical-align: middle;
+}
 /* </dtml-with> */
