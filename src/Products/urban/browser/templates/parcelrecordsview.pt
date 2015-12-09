@@ -12,7 +12,7 @@
 <metal:main_macro define-macro="main">
     <metal:body define-macro="body_macro">
 
-    <tal:display define="licences view/getRelatedLicencesOfParcel">
+    <tal:display define="licences view/get_related_licences_of_parcel">
        <tal:no_result condition="python: not licences">
           <h1 i18n:translate="">No related licences</h1>
        </tal:no_result>

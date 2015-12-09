@@ -1,0 +1,16 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:i18n="http://namespaces.zope.org/i18n"
+           i18n_domain="urban">
+
+  <adapter
+    for="Products.urban.services.base.Service"
+    provides="Products.urban.services.interfaces.ISession"
+    factory="Products.urban.services.base.Session" />
+
+  <adapter
+    for="Products.urban.services.cadastral.CadastreService"
+    provides="Products.urban.services.interfaces.ISession"
+    factory="Products.urban.services.cadastral.CadastreSession" />
+
+</configure>

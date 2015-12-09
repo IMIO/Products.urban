@@ -19,28 +19,28 @@ class ParcelRecordsView(BrowserView):
             plone_utils = api.portal.get_tool('plone_utils')
             plone_utils.addPortalMessage(_('Nothing to show !!!'), type="error")
 
-    def getRelatedLicencesOfParcel(self):
+    def get_related_licences_of_parcel(self):
         """
           Returns the licences related to a parcel
         """
-        licence_brains = self.searchRelatedLicences()
-        to_display = self.getDisplayForRelatedLicences(licence_brains)
+        licence_brains = self.search_licences()
+        to_display = self.get_display(licence_brains)
         return to_display
 
-    def getDisplayForRelatedLicences(self, licence_brains):
+    def get_display(self, licence_brains):
         context = aq_inner(self.context)
         related_items = []
         for brain in licence_brains:
             if brain.id != context.id:
                 item_infos = {
-                    'title': brain.Title,
+                    'title': len(brain.Title) < 40 and brain.Title or '{}...'.format(brain.Title[:40]),
                     'url': brain.getURL(),
-                    'class': 'state-%s contenttype-%s' % (brain.review_state, brain.portal_type.lower())
+                    'class': 'state-{} contenttype-{}'.format(brain.review_state, brain.portal_type.lower())
                 }
                 related_items.append(item_infos)
         return related_items
 
-    def searchRelatedLicences(self):
+    def search_licences(self):
         """
           Do the search and return licence brains
         """
@@ -49,12 +49,13 @@ class ParcelRecordsView(BrowserView):
         parcel = getattr(context, self.parcel_id)
         parcel_infos = parcel.getIndexValue()
 
-        related_brains = catalog(object_provides=IGenericLicence.__identifier__, parcelInfosIndex=parcel_infos, sort_on='sortable_title')
+        related_brains = catalog(
+            object_provides=IGenericLicence.__identifier__,
+            parcelInfosIndex=parcel_infos,
+            sort_on='sortable_title'
+        )
 
         return related_brains
-
-    def getParcelHistoric(self):
-        return []
 
 
 class ParcelHistoricRecordsView(ParcelRecordsView):
@@ -62,15 +63,15 @@ class ParcelHistoricRecordsView(ParcelRecordsView):
      Search for licences related to the parcel historic of the current licence
     """
 
-    def getRelatedLicencesOfParcel(self):
+    def get_related_licences_of_parcel(self):
         """
           Returns the licences related to a parcel
         """
-        licence_brains, parcel_historic = self.searchRelatedLicences()
-        to_display = self.getDisplay(parcel_historic, licence_brains)
+        licence_brains, parcel_historic = self.search_licences()
+        to_display = self.get_display(parcel_historic, licence_brains)
         return to_display
 
-    def searchRelatedLicences(self):
+    def search_licences(self):
         """
           Returns the licences related to a parcel
         """
@@ -81,7 +82,7 @@ class ParcelHistoricRecordsView(ParcelRecordsView):
 
         parcel_infos.add(parcel.getIndexValue())
         parcel_historic = parcel.get_historic()
-        for ref in parcel_historic.getAllIndexableRefs():
+        for ref in parcel_historic.get_all_reference_indexes():
             parcel_infos.add(ref)
 
         related_brains = catalog(
@@ -92,21 +93,18 @@ class ParcelHistoricRecordsView(ParcelRecordsView):
 
         return related_brains, parcel_historic
 
-    def getDisplay(self, parcels_historic, related_brains):
-        historic = parcels_historic.listHistoric()
-        to_return = []
-        sorted_keys = sorted(historic.keys())
-        delta = abs(min(sorted_keys))
+    def get_display(self, parcels_historic, related_brains):
+        table = parcels_historic.table_display()
 
-        for level in sorted_keys:
-            lines = []
-            for parcel in historic[level]:
-                line = {'parcel': parcel, 'level': level + delta, 'highlight': False}
-                if level == 0:
-                    line['highlight'] = True
-                licences = [brain for brain in related_brains if parcel.getIndexableRef() in brain.parcelInfosIndex]
-                line['licences'] = self.getDisplayForRelatedLicences(licences)
-                lines.append(line)
-            to_return.append(lines)
-
-        return to_return
+        for line in table:
+            for element in line:
+                if not element.display():  # ignore blanks
+                    continue
+                parcel = element
+                licence_brains = []
+                for brain in related_brains:
+                    if parcel.to_index() in brain.parcelInfosIndex:
+                        licence_brains.append(brain)
+                licences = super(ParcelHistoricRecordsView, self).get_display(licence_brains)
+                setattr(parcel, 'licences', licences)
+        return table

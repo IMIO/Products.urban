@@ -493,7 +493,7 @@ class ParcelHistoric(ParentParcel, ChildParcel):
                 self.width = width
 
             def display(self):
-                return ' '
+                return ''
 
         def recursive_build_table(table=[[]]):
             """
