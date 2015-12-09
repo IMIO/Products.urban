@@ -36,10 +36,6 @@ class CadastreService(Service):
             )
             # self.prc = self._init_table('prc', column_names=['prc', '', '', '', '', ''])
 
-    def new_session(self):
-        session = CadastreSession(self)
-        return session
-
 
 class CadastreSession(Session):
     """

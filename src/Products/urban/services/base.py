@@ -2,12 +2,17 @@
 
 from Products.CMFPlone import PloneMessageFactory as _
 
+from Products.urban.services.interfaces import ISession
+
 from plone import api
 
 from sqlalchemy import create_engine
 from sqlalchemy import MetaData
 from sqlalchemy import Table
 from sqlalchemy.orm import sessionmaker
+
+from zope.component import getAdapter
+from zope.interface import implements
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 
@@ -55,7 +60,7 @@ class Service(object):
         session = self.new_session()
         if hasattr(session, attr_name):
             return getattr(session, attr_name)
-        return getattr(self, attr_name)
+        raise AttributeError
 
     def connect(self):
         return self.engine.connect()
@@ -90,7 +95,7 @@ class Service(object):
         return True
 
     def new_session(self):
-        return Session(self)
+        return getAdapter(self, ISession)
 
 
 class Session(object):
@@ -98,6 +103,7 @@ class Session(object):
     Base class wrapping a sqlalchemy query session.
     Group all query methods here.
     """
+    implements(ISession)
 
     def __init__(self, service):
         self.service = service

@@ -41,6 +41,7 @@
   <include package=".events" />
   <include package=".browser" />
   <include package=".migration" />
+  <include package=".services" />
   <include package=".viewlets" />
 
   <include file="grok.zcml" />
