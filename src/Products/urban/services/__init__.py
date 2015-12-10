@@ -3,14 +3,25 @@
 from ConfigParser import ConfigParser
 
 from Products.urban.config import URBAN_CFG_DIR
+from Products.urban.services.bestaddress import BestaddressService
 from Products.urban.services.cadastral import CadastreService
 
-connection_settings = {}
+
+parser = None
 try:
     parser = ConfigParser()
-    parser.read('{}/database.cfg'.format(URBAN_CFG_DIR))
-    connection_settings = dict(parser.items('cadastre'))
+    parser.read('{}/services.cfg'.format(URBAN_CFG_DIR))
 except:
     pass
 
-cadastre = CadastreService(**connection_settings)
+
+def get_connection_settings(service_name):
+    settings = {}
+    try:
+        settings = dict(parser.items(service_name))
+    except:
+        pass
+    return settings
+
+cadastre = CadastreService(**get_connection_settings('cadastre'))
+bestaddress = BestaddressService(**get_connection_settings('bestaddress'))

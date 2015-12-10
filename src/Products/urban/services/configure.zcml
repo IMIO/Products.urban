@@ -13,4 +13,9 @@
     provides="Products.urban.services.interfaces.ISession"
     factory="Products.urban.services.cadastral.CadastreSession" />
 
+  <adapter
+    for="Products.urban.services.bestaddress.BestaddressService"
+    provides="Products.urban.services.interfaces.ISession"
+    factory="Products.urban.services.bestaddress.BestaddressSession" />
+
 </configure>

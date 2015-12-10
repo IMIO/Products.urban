@@ -33,6 +33,9 @@ class Service(object):
         self.tables = Tables()  # use _init_table to set sqlalchemy table objects on it
 
     def _init_engine(self, dialect, username, host, db_name, password=''):
+        """
+        Initialize the connection.
+        """
         engine = create_engine(
             '{dialect}://{username}{password}@{host}/{db_name}'.format(
                 dialect=dialect,
@@ -46,7 +49,12 @@ class Service(object):
 
         return engine
 
-    def _init_table(self, table_name, column_names):
+    def _init_table(self, table_name, column_names=[]):
+        """
+        You have to explicitely declare tables (and columns) that will
+        be queried, do it with this method.
+        Each table is set as an attribute of self.tables .
+        """
         table = Table(table_name, self.metadata, autoload=True)
         for column_name in column_names:
             setattr(table, column_name, table.columns[column_name])
@@ -54,8 +62,8 @@ class Service(object):
 
     def __getattr__(self, attr_name):
         """
-        Implicitely create a Session an try to delegate any query method
-        call to it.
+        Try to delegate any query method to an implicetely created
+        session.
         """
         session = self.new_session()
         if hasattr(session, attr_name):
@@ -66,6 +74,9 @@ class Service(object):
         return self.engine.connect()
 
     def can_connect(self):
+        """
+        Check wheter connection is possible or not.
+        """
         try:
             self.connect()
         except Exception:
@@ -74,7 +85,8 @@ class Service(object):
 
     def check_connection(self):
         """
-           Check if the provided parameters are OK
+        Check if the provided parameters are OK and set warning
+        messages on the site depending on the result.
         """
         plone_utils = api.portal.get_tool('plone_utils')
         try:
@@ -95,6 +107,11 @@ class Service(object):
         return True
 
     def new_session(self):
+        """
+        Return a new query session.
+        To use when doing several queries to not waste the
+        sessions pool.
+        """
         return getAdapter(self, ISession)
 
 

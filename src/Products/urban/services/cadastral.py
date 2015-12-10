@@ -39,7 +39,7 @@ class CadastreService(Service):
 
 class CadastreSession(Session):
     """
-    Implements all the sql queries in cadastre the DB with sqlalchemy methods
+    Implements all the sql queries of cadastre DB with sqlalchemy methods
     """
 
     def get_all_divisions(self):
