@@ -23,9 +23,38 @@ __docformat__ = 'plaintext'
 # AppConfig.py in your product's root directory. The items in there
 # will be included (by importing) in this file if found.
 
+from ConfigParser import ConfigParser
+
 from Products.CMFCore.permissions import setDefaultRoles
 
 PROJECTNAME = "urban"
+
+URBAN_CFG_DIR = './var/urban'
+
+
+class ExternalConfig(object):
+    """
+    """
+    def __init__(self, config_name):
+        self.parser = None
+        self.sections = {}
+        try:
+            parser = ConfigParser()
+            parser.read('{}/{}.cfg'.format(URBAN_CFG_DIR, config_name))
+            self.parser = parser
+            for section in parser.sections():
+                self.sections[section] = dict(self.parser.items(section))
+        except:
+            pass
+
+    def __getattr__(self, attr_name):
+        return self.section(attr_name)
+
+    def section(self, section_name):
+        return self.sections.get(section_name, {})
+
+SERVICES = ExternalConfig('services')
+MAP = ExternalConfig('carto')
 
 # Permissions
 DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"
@@ -212,5 +241,3 @@ DefaultTexts = {
 
 
 NULL_VALUE = "..."
-
-URBAN_CFG_DIR = './var/urban'

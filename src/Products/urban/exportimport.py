@@ -69,7 +69,10 @@ def updateTemplate(context, container, template, new_content, position_after='')
         if len(status) == 2:
             return status
         # we can update the template
-        old_template.setFile(new_content)
+        old_template.odt_file = NamedBlobFile(
+            data=new_content,
+            contentType='applications/odt',
+        ),
         new_template = old_template
         status.append('updated')
     #else create a new template

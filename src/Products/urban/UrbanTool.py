@@ -379,30 +379,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         found = bool(len(catalog(UID=object_uid, path={'query': path})))
         return found
 
-    security.declarePublic('queryDB')
-    def queryDB(self, query_string, connection_string=None):
-        """
-           Execute a query and return the result
-        """
-        self.dbc = self.getDBConnection(connection_string)
-        result = []
-        if type(self.dbc) == psycopg2._psycopg.connection:
-            try:
-                dict_cur = self.dbc.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-                dict_cur.execute(query_string + ';')
-                for row in dict_cur.fetchall():
-                    result = result + [dict(row)]
-            except psycopg2.ProgrammingError:
-                result = []
-                pass
-            self.dbc.close()
-            delattr(self, 'dbc')
-        else:
-            ptool = getToolByName(self, "plone_utils")
-            ptool.addPortalMessage(_(u"db_connection_error", mapping={u'error': self.dbc}), type="error")
-        return result
-
-
     security.declarePublic('createPortionOut')
     def createPortionOut(self, container, division, section, radical, bis, exposant, puissance, partie, outdated=False):
         """

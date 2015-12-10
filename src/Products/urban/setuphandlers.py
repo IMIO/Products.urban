@@ -1221,9 +1221,8 @@ def setupExtra(context):
 
     #we add the map coordinates
     if not portal_urban.getMapExtent() or portal_urban.getMapExtent().count(', ') != 3:
-        dic = portal_urban.queryDB("SELECT (Xmin(ext.extent) ||', '|| Ymin(ext.extent)||', '|| Xmax(ext.extent)||', '|| Ymax(ext.extent)) as coord FROM (SELECT Extent(the_geom) FROM capa) AS ext;")
-        if dic and 'coord' in dic[0]:
-            portal_urban.setMapExtent(dic[0]['coord'])
+        coords = cadastre.query_map_coordinates()
+        portal_urban.setMapExtent(coords)
 
     if not hasattr(portal_urban, "additional_layers"):
         logger.warning("No 'additonal_layers' folder found in portal_urban, we create it.")

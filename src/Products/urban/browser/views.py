@@ -3,7 +3,7 @@ from Products.Five import BrowserView
 from Acquisition import aq_inner, aq_base
 from Products.CMFPlone.utils import safe_hasattr
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.urban.config import URBAN_TYPES
+from Products.urban import config
 from Products.urban.utils import getMd5Signature
 
 from plone import api
@@ -61,7 +61,7 @@ class WMC(BrowserView):
 
     def getLayers(self):
         tool = api.portal.get_tool("portal_urban")
-        defaulturl = 'http://' + tool.getWebServerHost() + '/geoserver/wms'
+        defaulturl = config.MAP.geoserver.get('wms')
         """
         Samples:
         layers = [
@@ -206,7 +206,7 @@ class TemplatesSummary(BrowserView):
     def getEventsTemplates(self):
         # return something like [[urban_type1, [uet1, {doc1}, {doc2}, ...], [uet2, {doc3}, ...], ...], [urban_type2, [], ...], ...]
         templates = []
-        for urban_type in URBAN_TYPES:
+        for urban_type in config.URBAN_TYPES:
             templ_by_type = [urban_type]
             licenceConfigId = urban_type.lower()
             if not safe_hasattr(self.tool, licenceConfigId):

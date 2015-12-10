@@ -28,7 +28,7 @@ class CadastreService(Service):
             )
             self._init_table(
                 'capa',
-                column_names=['capakey', 'da', 'section', 'radical', 'exposant', 'bis', 'puissance']
+                column_names=['capakey', 'da', 'section', 'radical', 'exposant', 'bis', 'puissance', 'the_geom']
             )
             self._init_table(
                 'map',
@@ -193,6 +193,23 @@ class CadastreSession(Session):
         """
         query = self._base_query_parcels()
         return query
+
+    def query_wmc(self, parcels):
+        """
+        """
+
+    def query_map_coordinates(self):
+        """
+        Query wmc map coordinates.
+        """
+        query = "SELECT (Xmin(ext.extent) ||', '|| Ymin(ext.extent)||', '|| Xmax(ext.extent)||', '|| Ymax(ext.extent)) as coord " \
+                "FROM (SELECT Extent(the_geom) FROM capa) AS ext;"
+        result = self.service.engine.execute(query)
+        try:
+            coordinates = result.first()[0]
+            return coordinates
+        except:
+            return ''
 
     def _filter(self, query, table, division=IGNORE,  section=IGNORE, radical=IGNORE,
                 bis=IGNORE, exposant=IGNORE, puissance=IGNORE):
