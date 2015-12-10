@@ -11,7 +11,8 @@ class BestaddressService(Service):
     def __init__(self, dialect, user, host, db_name, password=''):
         super(BestaddressService, self).__init__(dialect, user, host, db_name, password)
 
-        self._init_table('urban_addresses')
+        if self.can_connect():
+            self._init_table('urban_addresses')
 
 
 class BestaddressSession(Session):

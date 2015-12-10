@@ -452,9 +452,10 @@ class ParcelHistoric(ParentParcel, ChildParcel):
         self.parents = self._init_parents_historic()
         self.children = self._init_children_historic()
         self.branches = self.parents + self.children
-        self.parents_width = sum([node.width for node in self.parents])
-        self.children_width = sum([node.width for node in self.children])
-        self.width = max(self.parents_width, self.children_width)
+        self.width = max(
+            sum([n.width for n in self.parents]),
+            sum([n.width for n in self.children])
+        )
         self.old = bool(self.children)  # this parcel is old only if it has children
 
     def display(self):
@@ -529,21 +530,13 @@ class ParcelHistoric(ParentParcel, ChildParcel):
             return recursive_build_table(table)
 
         table = [[self]]
-        # build parents side of the table
-        width_delta = self.width - self.parents_width
-        parents = list(self.parents)
-        if width_delta:
-            parents.append(Blank(width_delta))
-        table.append(parents)
-        table = recursive_build_table(table)
+        for sibling in ['children', 'parents']:
+            siblings = list(getattr(self, sibling))
+            width_delta = self.width - sum([s.width for s in siblings])
+            if width_delta:
+                siblings.append(Blank(width_delta))
+            table.append(siblings)
+            table = recursive_build_table(table)
+            table.reverse()
 
-        table.reverse()
-
-        # build children side of the table
-        width_delta = self.width - self.children_width
-        children = list(self.children)
-        if width_delta:
-            children.append(Blank(width_delta))
-        table.append(children)
-        table = recursive_build_table(table)
         return table
