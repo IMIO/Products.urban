@@ -367,11 +367,11 @@ class Contact(BaseContent, BrowserDefaultMixin):
     security.declarePublic('getPersonTitleValue')
     def getPersonTitleValue(self, short=False, extra=True, reverse=False):
         """
-          Returns the personTitle real value.  Usefull for being used in templates
+          Returns the personTitle real value.  Useful for being used in templates
         """
         personTitle = self.getPersonTitle(short, reverse, theObject=extra)
         if type(personTitle) == str:
-           personTitle = self.displayValue(self.Vocabulary('personTitle')[0], personTitle)
+           personTitle = personTitle and self.displayValue(self.Vocabulary('personTitle')[0], personTitle)
         else:
             personTitle = personTitle.extraValue
         return personTitle
