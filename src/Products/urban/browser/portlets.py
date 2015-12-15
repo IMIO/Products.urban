@@ -37,7 +37,7 @@ class ToolsRenderer(base.Renderer):
             context = self.context
 
         roles = api.user.get_roles(user=api.user.get_current(), obj=context)
-        available = 'Manager' in roles or 'Editor' in roles
+        available = 'Manager' in roles or 'Editor' in roles or 'Reader' in roles
         return available
 
     def render(self):
