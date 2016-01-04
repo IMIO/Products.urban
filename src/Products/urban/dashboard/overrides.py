@@ -9,6 +9,8 @@ from Products.urban import utils
 
 from collective.eeafaceted.collectionwidget.browser.views import RenderTermView
 
+from plone import api
+
 
 class RenderLicenceTermView(RenderTermView):
 
@@ -35,6 +37,11 @@ class RenderLicenceTermView(RenderTermView):
 
     def get_add_licence_link(self, licence_type):
         """ """
+        member = api.user.get_current()
+        context = aq_inner(self.context)
+        if not member.has_permission('urban: Add {}'.format(licence_type), context):
+            return ''
+
         href = self.get_licence_creation_URL(licence_type)
         link_template = (
             u'<a href="{href}" id="create-{licence_type}-link">'
