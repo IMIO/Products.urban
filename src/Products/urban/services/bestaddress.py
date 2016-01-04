@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.services.base import Service
-from Products.urban.services.base import Session
+from Products.urban.services.base import SQLService
+from Products.urban.services.base import SQLSession
 
 
-class BestaddressService(Service):
+class BestaddressService(SQLService):
     """
     """
 
@@ -15,7 +15,7 @@ class BestaddressService(Service):
             self._init_table('urban_addresses')
 
 
-class BestaddressSession(Session):
+class BestaddressSession(SQLSession):
     """
     Implements all the sql queries of bestaddress DB with sqlalchemy methods
     """

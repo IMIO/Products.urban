@@ -2,7 +2,7 @@
 
 from Products.CMFPlone import PloneMessageFactory as _
 
-from Products.urban.services.interfaces import ISession
+from Products.urban.services.interfaces import ISQLSession
 
 from plone import api
 
@@ -17,12 +17,12 @@ from zope.interface import implements
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 
 
-class Tables(object):
+class SQLTables(object):
     """
     """
 
 
-class Service(object):
+class SQLService(object):
     """
     Helper with sqlalchemy engine, metadata and session objects.
     """
@@ -30,7 +30,7 @@ class Service(object):
     def __init__(self, dialect, user, host, db_name, password=''):
         self.engine = self._init_engine(dialect, user, host, db_name, password)
         self.metadata = MetaData(self.engine)
-        self.tables = Tables()  # use _init_table to set sqlalchemy table objects on it
+        self.tables = SQLTables()  # use _init_table to set sqlalchemy table objects on it
 
     def _init_engine(self, dialect, username, host, db_name, password=''):
         """
@@ -112,20 +112,26 @@ class Service(object):
         To use when doing several queries to not waste the
         sessions pool.
         """
-        return getAdapter(self, ISession)
+        return getAdapter(self, ISQLSession)
 
 
-class Session(object):
+class SQLSession(object):
     """
     Base class wrapping a sqlalchemy query session.
     Group all query methods here.
     """
-    implements(ISession)
+    implements(ISQLSession)
 
     def __init__(self, service):
         self.service = service
         self.tables = service.tables
         self.session = sessionmaker(service.engine)()
+
+    def execute(self, str_query):
+        """
+        Execute a raw query string.
+        """
+        return self.service.engine.execute(str_query)
 
     def close(self):
         self.session.close()

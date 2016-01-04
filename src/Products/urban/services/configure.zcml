@@ -4,18 +4,18 @@
            i18n_domain="urban">
 
   <adapter
-    for="Products.urban.services.base.Service"
-    provides="Products.urban.services.interfaces.ISession"
-    factory="Products.urban.services.base.Session" />
+    for="Products.urban.services.base.SQLService"
+    provides="Products.urban.services.interfaces.ISQLSession"
+    factory="Products.urban.services.base.SQLSession" />
 
   <adapter
     for="Products.urban.services.cadastral.CadastreService"
-    provides="Products.urban.services.interfaces.ISession"
+    provides="Products.urban.services.interfaces.ISQLSession"
     factory="Products.urban.services.cadastral.CadastreSession" />
 
   <adapter
     for="Products.urban.services.bestaddress.BestaddressService"
-    provides="Products.urban.services.interfaces.ISession"
+    provides="Products.urban.services.interfaces.ISQLSession"
     factory="Products.urban.services.bestaddress.BestaddressSession" />
 
 </configure>

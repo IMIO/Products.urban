@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.services.base import Service
-from Products.urban.services.base import Session
+from Products.urban.services.base import SQLService
+from Products.urban.services.base import SQLSession
+
+from sqlalchemy import and_
+from sqlalchemy import or_
+from sqlalchemy.sql.expression import func
 
 IGNORE = []
 
@@ -12,7 +16,7 @@ class UnreferencedParcelError(Exception):
     """
 
 
-class CadastreService(Service):
+class CadastreService(SQLService):
     """
     """
 
@@ -37,7 +41,7 @@ class CadastreService(Service):
             # self.prc = self._init_table('prc', column_names=['prc', '', '', '', '', ''])
 
 
-class CadastreSession(Session):
+class CadastreSession(SQLSession):
     """
     Implements all the sql queries of cadastre DB with sqlalchemy methods
     """
@@ -198,20 +202,67 @@ class CadastreSession(Session):
         """
         """
 
+    def normalize_coordinates(self, subquery):
+        """
+        'subquery' should be a sqlalchemy subquery of this type:
+        FROM capa SELECT Extent(the_geom) as coordinates WHERE ...
+        """
+        Extent = func.Extent
+        coordinates = subquery.c.coordinates
+        query = self.session.query(
+            func.Xmin(Extent(coordinates)),
+            func.Ymin(Extent(coordinates)),
+            func.Xmax(Extent(coordinates)),
+            func.Ymax(Extent(coordinates)),
+        )
+        result = query.first()
+
+        return result
+
     def query_map_coordinates(self):
         """
         Query wmc map coordinates.
-        """
         query = "SELECT (Xmin(ext.extent) ||', '|| Ymin(ext.extent)||', '|| Xmax(ext.extent)||', '|| Ymax(ext.extent)) as coord " \
                 "FROM (SELECT Extent(the_geom) FROM capa) AS ext;"
-        result = self.service.engine.execute(query)
+        """
+        query_geom = self.session.query(
+            func.Extent(self.tables.capa.the_geom).label('coordinates')
+        )
         try:
-            coordinates = result.first()[0]
-            return coordinates
+            coordinates = self.normalize_coordinates(query_geom.subquery())
         except:
-            return ''
+            coordinates = ['']
+        str_coordinates = ', '.join(coordinates)
+        return str_coordinates
 
-    def _filter(self, query, table, division=IGNORE,  section=IGNORE, radical=IGNORE,
+    def query_parcels_coordinates(self, parcels):
+        """
+        Query wmc coordinates of selected parcels.
+        """
+        capa = self.tables.capa
+        Extent = func.Extent
+
+        query_geom = self.session.query(Extent(capa.the_geom).label('coordinates'))
+        query_geom = query_geom.filter(capa.da == parcels[0].getDivisionCode())
+
+        parcel_filters = []
+        # boilerplate to filter on parcels refs.
+        # eg: (section=A AND radical=32 AND ...) OR (section=B AND radical=21 ...) OR (...)
+        for parcel in parcels:
+            parcel_ref = parcel.reference_as_dict()
+            parcel_ref.pop('division')  # filtering on division is done earlier
+            parcel_filters.append(
+                and_(
+                    *[getattr(capa, ref) == val for ref, val in parcel_ref.iteritems()]
+                )
+            )
+
+        query_geom = query_geom.filter(or_(*parcel_filters))
+        coordinates = self.normalize_coordinates(query_geom.subquery())
+
+        return coordinates
+
+    def _filter(self, query, table, division=IGNORE, section=IGNORE, radical=IGNORE,
                 bis=IGNORE, exposant=IGNORE, puissance=IGNORE):
         da = self.tables.da
         query = query.filter(da.da == division)
@@ -549,10 +600,10 @@ class ParcelHistoric(ParentParcel, ChildParcel):
         table = [[self]]
         for sibling in ['children', 'parents']:
             siblings = list(getattr(self, sibling))
+            table.append(siblings)
             width_delta = self.width - sum([s.width for s in siblings])
             if width_delta:
                 siblings.append(Blank(width_delta))
-            table.append(siblings)
             table = recursive_build_table(table)
             table.reverse()
 

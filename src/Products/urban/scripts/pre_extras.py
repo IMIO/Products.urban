@@ -1,7 +1,7 @@
 
 
 def configure_urban_site(portal, name='', nis='', pghost='localhost',
-        dbname='', dbuser='', dbpwd='', geohost='', pylonhost=''):
+        dbname='', dbuser='', dbpwd='', pylonhost=''):
     """
         creates an urban plone site
     """
@@ -38,8 +38,6 @@ def configure_urban_site(portal, name='', nis='', pghost='localhost',
         dbpwd = dbname
     if not pu.getSqlPassword():
         pu.setSqlPassword(dbpwd)
-    if geohost and not pu.getWebServerHost():
-        pu.setWebServerHost(geohost)
     if pylonhost and not pu.getPylonsHost():
         pu.setPylonsHost(pylonhost)
 

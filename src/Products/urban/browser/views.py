@@ -4,6 +4,8 @@ from Acquisition import aq_inner, aq_base
 from Products.CMFPlone.utils import safe_hasattr
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.urban import config
+from Products.urban.cartography import config as carto_config
+from Products.urban.services import cadastre
 from Products.urban.utils import getMd5Signature
 
 from plone import api
@@ -61,11 +63,11 @@ class WMC(BrowserView):
 
     def getLayers(self):
         tool = api.portal.get_tool("portal_urban")
-        defaulturl = config.MAP.geoserver.get('wms')
+        defaulturl = carto_config.geoserver.get('wms_url')
         """
         Samples:
         layers = [
-#                {'url' : defaulturl, 'srs':'EPSG:31370', 'title':'N° de parcelle', 'name' : 'urban'+tool.getNISNum()+':canu', 'format':'image/png', 'style':'ParcelsNum', 'hidden': 0},
+                {'url' : defaulturl, 'srs':'EPSG:31370', 'title':'N° de parcelle', 'name' : 'urban'+tool.getNISNum()+':canu', 'format':'image/png', 'style':'ParcelsNum', 'hidden': 0},
                 ]
         """
         layers = []
@@ -110,34 +112,13 @@ class WMC(BrowserView):
                 pass
         else:
             parcels = self.context.getParcels()
-            cqlquery = ''
             if parcels:
-                # if we have parcels, display them on a map...
-                # generate the 'selectedpo' layer filter based on contained parcels
-                for parcel in parcels:
-                    if cqlquery != '':
-                        cqlquery = cqlquery + " or "
-                    cqlquery = cqlquery + "(section='" + parcel.getSection() + "' and radical=" + parcel.getRadical()
-                    if parcel.getBis() != '':
-                        cqlquery = cqlquery + " and bis=" + parcel.getBis()
-                    if parcel.getExposant() != '':
-                        cqlquery = cqlquery + " and exposant='" + parcel.getExposant() + "'"
-                    else:
-                        cqlquery = cqlquery + " and exposant is NULL"
-                    if parcel.getPuissance() != '':
-                        cqlquery = cqlquery + " and puissance=" + parcel.getPuissance()
-                    else:
-                        cqlquery = cqlquery + " and puissance=0"
-                    cqlquery = cqlquery + ")"
-                cqlquery = '((da = ' + parcel.getDivisionCode() + ') and (' + cqlquery + '))'
-                #calculate the zone to display
-                strsql = 'SELECT Xmin(selectedpos.extent), Ymin(selectedpos.extent), Xmax(selectedpos.extent), Ymax(selectedpos.extent) FROM (SELECT Extent(the_geom) FROM capa WHERE ' + cqlquery + ') AS selectedpos'
-                result = urbantool.queryDB(query_string=strsql)[0]
+                result = cadastre.query_parcels_coordinates(parcels)
                 try:
-                    self.xmin = result['xmin']
-                    self.ymin = result['ymin']
-                    self.xmax = result['xmax']
-                    self.ymax = result['ymax']
+                    self.xmin = result[0]
+                    self.ymin = result[1]
+                    self.xmax = result[2]
+                    self.ymax = result[3]
                 except:
                     pass
 

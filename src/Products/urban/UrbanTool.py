@@ -32,13 +32,10 @@ from Products.CMFCore.utils import UniqueObject
 ##code-section module-header #fill in your manual code here
 import logging
 logger = logging.getLogger('urban: UrbanTool')
-import psycopg2
-import psycopg2.extras
 import re
 from AccessControl import getSecurityManager
 from plone import api
 from zope.i18n import translate
-from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFCore import permissions
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.Expression import Expression
@@ -49,6 +46,7 @@ from Products.DataGridField.FixedColumn import FixedColumn
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS
 from Products.urban.interfaces import IUrbanVocabularyTerm, IContactFolder
+from Products.urban.cartography import config as carto_config
 from Products.urban.services import cadastre
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
@@ -426,7 +424,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         import cgi
         method = self.REQUEST["REQUEST_METHOD"]
         #allowedHosts = ['10.211.55.10: 8080']
-        allowedHosts = self.getWebServerHost()
+        allowedHosts = carto_config.geoserver.get('host')
 
         if method == "POST":
             qs = self.REQUEST["QUERY_STRING"]
