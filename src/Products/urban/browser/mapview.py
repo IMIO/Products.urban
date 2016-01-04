@@ -1,9 +1,13 @@
-from Products.Five import BrowserView
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import PloneMessageFactory as _
+# -*- coding: utf-8 -*-
+
 from Acquisition import aq_inner, aq_base
+
+from Products.CMFPlone import PloneMessageFactory as _
+from Products.Five import BrowserView
 from Products.urban.interfaces import IInquiry
 from Products.urban.browser.table.urbantable import ParcelsTable
+
+from plone import api
 
 
 class MapView(BrowserView):
@@ -16,7 +20,7 @@ class MapView(BrowserView):
         self.request = request
         self.request.set('disable_plone.rightcolumn', 1)
         self.request.set('disable_plone.leftcolumn', 1)
-        plone_utils = getToolByName(context, 'plone_utils')
+        plone_utils = api.portal.get_tool('plone_utils')
         if not self.context.getParcels():
             plone_utils.addPortalMessage(_('warning_add_a_parcel'), type="warning")
         if not self.context.getApplicants():
@@ -24,7 +28,7 @@ class MapView(BrowserView):
 
     def isUsingTabbing(self):
         context = aq_inner(self.context)
-        portal_urban = getToolByName(context, 'portal_urban')
+        portal_urban = api.portal.get_tool('portal_urban')
         return portal_urban.getUrbanConfig(context).getUseTabbingForDisplay()
 
     def renderParcelsListing(self):
@@ -130,8 +134,7 @@ class FullMapView(MapView):
         super(MapView, self).__init__(context, request)
 
     def isUrbanUser(self):
-        context = aq_inner(self.context)
-        member = context.restrictedTraverse('@@plone_portal_state').member()
+        member = api.user.get_current()
         is_map_user = member.has_role('UrbanMapReader')
         is_manager = member.has_role('Manager')
         return is_map_user or is_manager
