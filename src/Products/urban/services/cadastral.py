@@ -222,8 +222,6 @@ class CadastreSession(SQLSession):
     def query_map_coordinates(self):
         """
         Query wmc map coordinates.
-        query = "SELECT (Xmin(ext.extent) ||', '|| Ymin(ext.extent)||', '|| Xmax(ext.extent)||', '|| Ymax(ext.extent)) as coord " \
-                "FROM (SELECT Extent(the_geom) FROM capa) AS ext;"
         """
         query_geom = self.session.query(
             func.Extent(self.tables.capa.the_geom).label('coordinates')
