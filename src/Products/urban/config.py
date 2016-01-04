@@ -53,8 +53,6 @@ class ExternalConfig(object):
     def section(self, section_name):
         return self.sections.get(section_name, {})
 
-SERVICES = ExternalConfig('services')
-MAP = ExternalConfig('carto')
 
 # Permissions
 DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"
