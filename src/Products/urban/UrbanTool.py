@@ -49,8 +49,6 @@ from Products.urban.interfaces import IUrbanVocabularyTerm, IContactFolder
 from Products.urban.cartography import config as carto_config
 from Products.urban.services import cadastre
 
-DB_NO_CONNECTION_ERROR = "No DB Connection"
-DB_QUERY_ERROR = "Programming error in query"
 ##/code-section module-header
 
 schema = Schema((
@@ -378,7 +376,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return found
 
     security.declarePublic('createPortionOut')
-    def createPortionOut(self, container, division, section, radical, bis, exposant, puissance, partie, outdated=False):
+    def createPortionOut(self, container, division, section='', radical='', bis='', exposant='', puissance='', partie='', outdated=False):
         """
            Create the PortionOut with given parameters...
         """
@@ -478,47 +476,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return "Some unexpected error occurred. Error text was: ", E
 
     security.declarePublic('GetListOfCapaKeyBuffer')
-    def GetListOfCapaKeyBuffer(self, parcelleKey, bufferWidth=50):
-        """
-             Get List of Capakey around a parcell (ex: 92088C0335/00D000)
-        """
-        qry = """SELECT capakey
-                FROM capa
-                WHERE st_intersects(
-                   capa.the_geom,
-                   (
-                   SELECT ST_BUFFER(sample.the_geom, %s)
-                   FROM (
-                        SELECT * FROM CAPA
-                        WHERE capa.capakey LIKE '%s'
-                        ) AS sample
-                   )
-                )""" % (bufferWidth, parcelleKey)
-
-        try:
-            results = self.queryDB(qry)
-        except:
-            results = []
-        idlist = []
-        for res in results:
-            idlist.append("capakey='" + res["capakey"] + "'")
-        return " OR ".join(idlist)
-
-    security.declarePublic('GetWKTGeomOfBufferParcel')
-    def GetWKTGeomOfBufferParcel(self, parcelleKey, bufferWidth=50):
-        """
-            Get the Geom (in WKT) of the the buffer (ex: 92088C0335/00D000)
-        """
-        qry = "SELECT astext(ST_BUFFER(the_geom, %s)) AS geom FROM capa WHERE capakey LIKE '%s'" % (bufferWidth, parcelleKey)
-        try:
-            results = self.queryDB(qry)
-        except:
-            results = ""
-
-        if(len(results) == 1):
-            return results[0]['geom']
-        else:
-            return ""
 
     security.declarePublic('getPortletTopics')
     def getPortletTopics(self, context):

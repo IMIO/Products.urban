@@ -26,6 +26,7 @@ class CadastreService(SQLService):
         if self.can_connect():
             self._init_table('da', column_names=['da', 'divname'])
             self._init_table('pe', column_names=['pe', 'adr1', 'adr2', 'daa'])
+            self._init_table('prc', column_names=['prc', 'daa', 'na1'])
             self._init_table(
                 'pas',
                 column_names=['da', 'section', 'radical', 'exposant', 'bis', 'puissance', 'prcb1', 'prcc', 'prca']
@@ -38,7 +39,6 @@ class CadastreService(SQLService):
                 'map',
                 column_names=['capakey', 'prc', 'pe', 'adr1', 'adr2', 'sl1']
             )
-            # self.prc = self._init_table('prc', column_names=['prc', '', '', '', '', ''])
 
 
 class CadastreSession(SQLSession):
@@ -138,7 +138,15 @@ class CadastreSession(SQLSession):
         """
         parcel = self.query_exact_parcel(division, section, radical, bis, exposant, puissance)
         if not parcel:
-            raise UnreferencedParcelError
+            str_parcel = '{} {} {} {} {} {}'.format(
+                division,
+                section,
+                radical,
+                bis,
+                exposant,
+                puissance
+            )
+            raise UnreferencedParcelError(str_parcel)
 
         historic = ParcelHistoric(session=self, divname=parcel.divname, **parcel.reference_as_dict())
         return historic
@@ -194,9 +202,49 @@ class CadastreSession(SQLSession):
 
     def query_parcels_in_radius(self, center_parcels, radius):
         """
+        Query parcels around 'center_parcels' in a radius of 'radius' m.
         """
-        query = self._base_query_parcels()
-        return query
+        capa = self.tables.capa
+
+        query_geom = self.session.query(func.memgeomunion(capa.the_geom).label('geo_union'))
+
+        parcel_filters = []
+        for parcel in center_parcels:
+            parcel_ref = parcel.reference_as_dict()
+            parcel_filters.append(
+                and_(
+                    capa.da == parcel_ref.pop('division'),
+                    *[getattr(capa, ref) == val for ref, val in parcel_ref.iteritems()]
+                )
+            )
+        query_geom = query_geom.filter(or_(*parcel_filters))
+        subquery = query_geom.subquery()
+
+        query = self._base_query_actual_parcels()
+        query = query.filter(
+            func.intersects(func.buffer(subquery.c.geo_union, radius), capa.the_geom)
+        )
+
+        records = query.all()
+        parcels_in_radius = [ActualParcel(**record._asdict()) for record in records]
+        return parcels_in_radius
+
+    def query_owners_of_parcel(self, division, section=None, radical='0', bis='0',
+                               exposant=None, puissance='0'):
+        """
+        Return estate owners of a given parcel.
+        """
+
+        pe = self.tables.pe
+        prc = self.tables.prc
+        prc_value = compute_prc(division, section, radical, bis, exposant, puissance)
+
+        query = self.session.query(pe.pe, pe.adr1, pe.adr2, pe.daa)
+        query = query.filter(pe.daa == prc.daa)
+        query = query.filter(prc.prc == prc_value)
+
+        result = query.all()
+        return result
 
     def query_wmc(self, parcels):
         """

@@ -220,7 +220,7 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
 
     def getInvestigationPOs(self, radius=50):
         """
-          Search the parcels in a radius of 50 meters...
+        Search the parcels in a radius of 50 meters...
         """
         #if we do the search again, we first delete old datas...
         #remove every RecipientCadastre
@@ -229,64 +229,48 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
         if recipients:
             context.manage_delObjects([recipient.getId() for recipient in recipients if recipient.Title()])
 
-        #then we can go...
-        tool = api.portal.get_tool('portal_urban')
         portal_url = api.portal.get_tool('portal_url')
         event_path = portal_url.getPortalPath() + '/' + '/'.join(portal_url.getRelativeContentPath(context))
-        strsql = "SELECT da, section, radical, exposant, bis, puissance, capakey FROM capa where intersects(buffer((select memgeomunion(the_geom) from capa where "
-        strfilter = ''
-        for portionOutObj in context.aq_inner.aq_parent.objectValues('PortionOut'):
-            if strfilter != '':
-                strfilter = strfilter + " or "
-            strfilter = strfilter + "(da = " + portionOutObj.getDivisionCode() + " and section = '" + portionOutObj.getSection() + "' and radical = " + portionOutObj.getRadical()
-            if portionOutObj.getBis() != '':
-                strfilter = strfilter + " and bis = " + portionOutObj.getBis()
-            if portionOutObj.getExposant() != '':
-                strfilter = strfilter + " and exposant = '" + portionOutObj.getExposant() + "'"
-            if portionOutObj.getPuissance() != '':
-                strfilter = strfilter + " and puissance = " + portionOutObj.getPuissance()
-            strfilter = strfilter + ")"
 
-        strsql = strsql + strfilter + "), {radius}), capa.the_geom);".format(radius=radius)
-        print strsql
-        rsportionouts = tool.queryDB(query_string=strsql)
-        for rsportionout in rsportionouts:
-            print rsportionout
-            divisioncode = str(rsportionout['da'])
-            section = rsportionout['section']
-            radical = str(rsportionout['radical'])
-            exposant = rsportionout['exposant']
-            bis = str(rsportionout['bis'])
-            puissance = str(rsportionout['puissance'])
-            if bis == '0':
-                bis = ''
-            if puissance == '0':
-                puissance = ''
-            #rspocads = tool.queryDB(query_string = "select * from map left join prc on map.prc = prc.prc where capakey LIKE '" + rsportionout['capakey'] + "'")
-            rspocads = tool.queryDB(query_string="select * from map where capakey = '" + rsportionout['capakey'] + "' order by pe")
-            for rspocad in rspocads:
-                print rspocad
-                rspes = tool.queryDB(query_string="select * from pe where daa = " + str(rspocad['daa']) + ";")
+        licence = context.aq_inner.aq_parent
+        neighbour_parcels = cadastre.query_parcels_in_radius(
+            center_parcels=licence.getParcels(),
+            radius=1
+        )
 
-                for rspe in rspes:
-                    print rspe
-                    #to avoid having several times the same Recipient (that could for example be on several parcels
-                    #we first look in portal_catalog where Recipients are catalogued
-                    brains = context.portal_catalog(portal_type="RecipientCadastre", path={'query': event_path, }, Title=str(rspe['pe']))
+        for rsportionout in neighbour_parcels:
+            rspes = cadastre.query_owners_of_parcel(**rsportionout.reference_as_dict())
+            for rspe in rspes:
+                print rspe.pe, rspe.adr1, rspe.adr2
+                #to avoid having several times the same Recipient (that could for example be on several parcels
+                #we first look in portal_catalog where Recipients are catalogued
+                brains = context.portal_catalog(portal_type="RecipientCadastre", path={'query': event_path, }, Title=str(rspe.pe))
+                if len(brains) > 0:
+                    newrecipient = brains[0].getObject()
+                else:
+                    brains = context.portal_catalog(
+                        portal_type="RecipientCadastre", path={'query': event_path, },
+                        getRecipientAddress=(str(rspe.adr1) + ' ' + str(rspe.adr2))
+                    )
                     if len(brains) > 0:
                         newrecipient = brains[0].getObject()
+                        newrecipient.setTitle(newrecipient.Title() + ' & ' + rspe.pe)
+                        newrecipient.setName(newrecipient.getName() + ' - ' + context.parseCadastreName(rspe.pe))
+                        newrecipient.reindexObject()
                     else:
-                        brains = context.portal_catalog(portal_type="RecipientCadastre", path={'query': event_path, }, getRecipientAddress=(str(rspe['adr1']) + ' ' + str(rspe['adr2'])))
-                        if len(brains) > 0:
-                            newrecipient = brains[0].getObject()
-                            newrecipient.setTitle(newrecipient.Title() + ' & ' + rspe['pe'])
-                            newrecipient.setName(newrecipient.getName() + ' - ' + context.parseCadastreName(rspe['pe']))
-                            newrecipient.reindexObject()
-                        else:
-                            newrecipientname = context.invokeFactory("RecipientCadastre", id=context.generateUniqueId('RecipientCadastre'), title=rspe['pe'], name=context.parseCadastreName(rspe['pe']), adr1=rspe['adr1'], adr2=rspe['adr2'], street=context.parseCadastreStreet(rspe['adr2']), daa=rspe['daa'])
-                            newrecipient = getattr(context, newrecipientname)
-                    #create the PortionOut using the createPortionOut method...
-                    context.portal_urban.createPortionOut(container=newrecipient, division=divisioncode, section=section, radical=radical, bis=bis, exposant=exposant, puissance=puissance, partie=False)
+                        newrecipientname = context.invokeFactory(
+                            "RecipientCadastre",
+                            id=context.generateUniqueId('RecipientCadastre'),
+                            title=rspe.pe,
+                            name=context.parseCadastreName(rspe.pe),
+                            adr1=rspe.adr1,
+                            adr2=rspe.adr2,
+                            street=context.parseCadastreStreet(rspe.adr2),
+                            daa=rspe.daa
+                        )
+                        newrecipient = getattr(context, newrecipientname)
+                #create the PortionOut using the createPortionOut method...
+                context.portal_urban.createPortionOut(container=newrecipient, **rsportionout.reference_as_dict())
         return context.REQUEST.RESPONSE.redirect(context.absolute_url() + '/#fieldsetlegend-urbaneventinquiry_recipients')
 
     def getInquiryRadius(self):
