@@ -33,9 +33,8 @@ class SearchParcelsView(BrowserView):
         self.divisions = self._init_divisions()
         #if the search was launched with no criteria, add a message
         if not self.has_enough_criterions(self.request):
-            if 'division' in request:
-                plone_utils = api.portal.get_tool('plone_utils')
-                plone_utils.addPortalMessage(translate('warning_enter_search_criteria'), type="warning")
+            plone_utils = api.portal.get_tool('plone_utils')
+            plone_utils.addPortalMessage(translate('warning_enter_search_criteria'), type="warning")
 
     def __call__(self):
         if 'add_parcel.x' in self.request.form:
@@ -115,7 +114,7 @@ class SearchParcelsView(BrowserView):
         """
         criterions = self.extract_search_criterions(request)
 
-        division = criterions.pop('division')
+        division = criterions.pop('division', None)
         location = criterions.pop('location', None)
         parcel_owner = criterions.pop('parcel_owner', None)
         criterions_values = criterions.values()
