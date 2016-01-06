@@ -220,7 +220,7 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
 
     def getInvestigationPOs(self, radius=50):
         """
-        Search the parcels in a radius of 50 meters...
+        Search parcel owners in a radius of 50 meters...
         """
         #if we do the search again, we first delete old datas...
         #remove every RecipientCadastre
@@ -235,7 +235,7 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
         licence = context.aq_inner.aq_parent
         neighbour_parcels = cadastre.query_parcels_in_radius(
             center_parcels=licence.getParcels(),
-            radius=1
+            radius=radius
         )
 
         for rsportionout in neighbour_parcels:
@@ -249,7 +249,7 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
                     newrecipient = brains[0].getObject()
                 else:
                     brains = context.portal_catalog(
-                        portal_type="RecipientCadastre", path={'query': event_path, },
+                        portal_type="RecipientCadastre", path={'query': event_path},
                         getRecipientAddress=(str(rspe.adr1) + ' ' + str(rspe.adr2))
                     )
                     if len(brains) > 0:
