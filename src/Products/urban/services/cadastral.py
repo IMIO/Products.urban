@@ -242,6 +242,9 @@ class CadastreSession(SQLSession):
         query = self.session.query(pe.pe, pe.adr1, pe.adr2, pe.daa)
         query = query.filter(pe.daa == prc.daa)
         query = query.filter(prc.prc == prc_value)
+        # daa = division followed by some number of length 5 so we can do divide
+        # it by 10^5 and match it with the division
+        query = query.filter(func.round(prc.daa / 100000) == division)
 
         result = query.all()
         return result
