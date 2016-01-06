@@ -94,14 +94,13 @@ class SearchParcelsView(BrowserView):
         return arguments
 
     def extract_parcel_reference_criterions(self, request):
-        arguments = {
-            'division': request.get('division', '') or IGNORE,
-            'section': request.get('section', '') or IGNORE,
-            'radical': request.get('radical', '') or IGNORE,
-            'bis': request.get('bis', '') or IGNORE,
-            'exposant': request.get('exposant', '') or IGNORE,
-            'puissance': request.get('puissance', '') or IGNORE,
-        }
+        refs = ['division', 'section', 'radical', 'bis', 'exposant', 'puissance']
+        arguments = {}
+        for ref in refs:
+            ref_value = request.get(ref, '')
+            if ref_value:
+                arguments[ref] = ref_value
+
         return arguments
 
     def extract_search_options(self, request):
@@ -169,10 +168,6 @@ class SearchParcelsView(BrowserView):
         Return the concerned parcels
         """
         search_args = self.extract_parcel_reference_criterions(self.request)
-        # clear IGNORE values to not overrides the default empty values of 'query_parcel_historic'
-        keys_to_clear = [key for key, val in search_args.iteritems() if val is IGNORE]
-        for key in keys_to_clear:
-            search_args.pop(key)
         historic = cadastre.query_parcel_historic(**search_args)
         return historic
 
