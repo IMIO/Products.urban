@@ -311,7 +311,7 @@ class CadastreSession(SQLSession):
     def _filter(self, query, table, division=IGNORE, section=IGNORE, radical=IGNORE,
                 bis=IGNORE, exposant=IGNORE, puissance=IGNORE):
         da = self.tables.da
-        query = query.filter(da.da == division)
+        query = division is IGNORE and query or query.filter(da.da == division)
         query = section is IGNORE and query or query.filter(table.section == section)
         query = radical is IGNORE and query or query.filter(table.radical == radical,)
         query = bis is IGNORE and query or query.filter(table.bis == bis,)
