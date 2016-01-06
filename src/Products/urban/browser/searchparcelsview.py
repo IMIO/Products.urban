@@ -119,9 +119,12 @@ class SearchParcelsView(BrowserView):
         division = criterions.pop('division')
         location = criterions.pop('location', None)
         parcel_owner = criterions.pop('parcel_owner', None)
-        misc_criterions = any(criterions.values())
+        criterions_values = criterions.values()
+        misc_criterions = any(criterions_values)
+        enough_misc_criterions = len([val for val in criterions_values if val]) > 1
 
-        enough = (division and misc_criterions) or location or parcel_owner
+        text_search = location or parcel_owner
+        enough = (division and misc_criterions) or enough_misc_criterions or text_search
         return enough
 
     def search_parcels(self):
@@ -166,6 +169,10 @@ class SearchParcelsView(BrowserView):
         Return the concerned parcels
         """
         search_args = self.extract_parcel_reference_criterions(self.request)
+        # clear IGNORE values to not overrides the default empty values of 'query_parcel_historic'
+        keys_to_clear = [key for key, val in search_args.iteritems() if val is IGNORE]
+        for key in keys_to_clear:
+            search_args.pop(key)
         historic = cadastre.query_parcel_historic(**search_args)
         return historic
 

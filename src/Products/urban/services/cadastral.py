@@ -313,10 +313,10 @@ class CadastreSession(SQLSession):
         da = self.tables.da
         query = division is IGNORE and query or query.filter(da.da == division)
         query = section is IGNORE and query or query.filter(table.section == section)
-        query = radical is IGNORE and query or query.filter(table.radical == radical,)
-        query = bis is IGNORE and query or query.filter(table.bis == bis,)
-        query = exposant is IGNORE and query or query.filter(table.exposant == exposant,)
-        query = puissance is IGNORE and query or query.filter(table.puissance == puissance,)
+        query = radical is IGNORE and query or query.filter(table.radical == radical)
+        query = bis is IGNORE and query or query.filter(table.bis == bis)
+        query = exposant is IGNORE and query or query.filter(table.exposant == exposant)
+        query = puissance is IGNORE and query or query.filter(table.puissance == puissance)
         return query
 
     def _base_query_parcels(self, table):
