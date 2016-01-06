@@ -287,6 +287,7 @@ td.center-parcel{
 
 td.left-parcel{
     text-align: left;
+    min-width: 10em;
 }
 
 span.leaf-parcel{
