@@ -643,6 +643,8 @@ if step in run_steps:
     std_cur.execute('CREATE UNIQUE INDEX topt_pk_idx ON ToPt USING btree  (gid);')
     std_cur.execute('CREATE INDEX cabuty_idx ON cabu (cabuty ASC NULLS LAST);')
     std_cur.execute('CREATE INDEX capaty_idx ON capa (capaty ASC NULLS LAST);')
+    std_cur.execute('CREATE INDEX pe_daa_idx ON pe using btree(daa);')
+    std_cur.execute('CREATE INDEX map_daa_idx ON map using btree(daa);')
 
     conn.commit()
 
