@@ -1,0 +1,59 @@
+<metal:block use-macro="here/global_defines/macros/defines" />
+
+<tal:block define="tmpcapakeys request/capakey|nothing; capakeys python: hasattr(tmpcapakeys, 'isalpha') and [tmpcapakeys,] or tmpcapakeys" repeat="capakey capakeys">
+
+<div tal:define="parcel python: view.get_parcel(capakey);
+                 normalizeString nocall:context/@@plone/normalizeString;
+				 wtool context/portal_workflow">
+      <dl class="collapsible expandedOnLoad" tal:condition="parcel">
+        <dt class="collapsibleHeader" tal:content="python:parcel.display()">name</dt>
+        <dd class="collapsibleContent">
+        <table border=0>
+            <tr>
+                <td><b><u i18n:translate="urban_label_owner">owner:</u></b> </td>
+                <td>
+                    <span tal:content="python:parcel.proprietary"/><br>
+                    <span tal:content="python:parcel.proprietary_city"/><br>
+                    <span tal:content="python:parcel.proprietary_street"/><br>
+                </td>
+            </tr>
+            <tr>
+                <td><b><u i18n:translate="urban_label_type">type:</u></b> </td>
+                <td>
+                    <span tal:content="python:parcel.usage"/><br>
+                </td>
+            </tr>
+        </table>
+        <table tal:define="brains python: view.licences_of_parcel(parcel)" class="listing" width=100% border=0 cellspacing=0>
+          <thead>
+             <tr>
+                <th><strong><span i18n:translate="urban_label_concerned_elements">Concerned elements</span> :</strong></th>
+             </tr>
+          </thead>
+          <!-- Display 'no results' -->
+          <tbody tal:condition="not: brains">
+             <tr>
+                <td i18n:domain="atcontenttypes" i18n:translate="description_no_items_in_topic" class="discreet">No result found.
+                </td>
+             </tr>
+          </tbody>
+          <!-- Display the results body -->
+          <tbody>
+             <tr tal:repeat="brain brains">
+                <td tal:define="oddrow repeat/brain/odd;
+                                obj python:brain.getObject();
+                                obj_wf_state obj/review_state|python: wtool.getInfoFor(obj, 'review_state', '');
+                                obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);" tal:attributes="class python: oddrow and 'even' or 'odd'">
+                  <img src="#" tal:attributes="src brain/getIcon" />
+                  <a href="#" tal:content="brain/Title" tal:attributes="href brain/getPath;class obj_wf_state_class">Result title</a>
+                  <p class="discreet"><span tal:content="structure brain/Description">Result description</span></p>
+               </td>
+             </tr>
+          </tbody>
+        </table>
+        </dd>
+      </dl>
+</div>
+
+
+</tal:block>

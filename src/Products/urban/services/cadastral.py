@@ -37,7 +37,7 @@ class CadastreService(SQLService):
             )
             self._init_table(
                 'map',
-                column_names=['capakey', 'prc', 'pe', 'adr1', 'adr2', 'sl1']
+                column_names=['capakey', 'prc', 'pe', 'adr1', 'adr2', 'sl1', 'na1']
             )
 
 
@@ -114,6 +114,19 @@ class CadastreSession(SQLSession):
         except:
             return
         parcel = ParcelHistoric(session=self, **record._asdict())
+        return parcel
+
+    def query_parcel_by_capakey(self, capakey):
+        """
+        Return the unique parcel exactly matching capakey 'capakey'.
+        """
+        query = self._base_query_actual_parcels()
+        query = query.filter(self.tables.map.capakey == capakey)
+        try:
+            record = query.distinct().one()
+        except:
+            return
+        parcel = ActualParcel(**record._asdict())
         return parcel
 
     def query_old_parcels(self, division=IGNORE, section=IGNORE, radical=IGNORE, bis=IGNORE,
@@ -354,7 +367,9 @@ class CadastreSession(SQLSession):
             map_.prc,
             map_.pe.label('proprietary'),
             map_.adr1.label('proprietary_city'),
-            map_.sl1.label('location')
+            map_.adr2.label('proprietary_street'),
+            map_.sl1.label('location'),
+            map_.na1.label('usage')
         )
         # join of capa and map
         query = query.filter(capa.capakey == map_.capakey)
@@ -464,7 +479,7 @@ class ActualParcel(Parcel):
         super(ActualParcel, self).__init__(**infos)
         self.capakey = capakey
         self.location = self.proprietary = self.proprietary_city = self.proprietary_street = ''
-        self._infos_keys = ['location', 'proprietary', 'proprietary_city', 'proprietary_street']
+        self._infos_keys = ['location', 'proprietary', 'proprietary_city', 'proprietary_street', 'usage']
         self._init_infos(**infos)
 
     def _init_infos(self, **kwargs):
