@@ -218,7 +218,7 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
             else:
                 return linkedInquiry.Title()
 
-    def getInvestigationPOs(self, radius=50):
+    def getInvestigationPOs(self, radius=0):
         """
         Search parcel owners in a radius of 50 meters...
         """
@@ -238,39 +238,39 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
             radius=radius
         )
 
-        for rsportionout in neighbour_parcels:
-            rspes = cadastre.query_owners_of_parcel(**rsportionout.reference_as_dict())
-            for rspe in rspes:
-                print rspe.pe, rspe.adr1, rspe.adr2
+        for parcel in neighbour_parcels:
+            owners = cadastre.query_owners_of_parcel(**parcel.reference_as_dict())
+            for owner in owners:
+                print owner.pe, owner.adr1, owner.adr2
                 #to avoid having several times the same Recipient (that could for example be on several parcels
                 #we first look in portal_catalog where Recipients are catalogued
-                brains = context.portal_catalog(portal_type="RecipientCadastre", path={'query': event_path, }, Title=str(rspe.pe))
+                brains = context.portal_catalog(portal_type="RecipientCadastre", path={'query': event_path, }, Title=str(owner.pe))
                 if len(brains) > 0:
                     newrecipient = brains[0].getObject()
                 else:
                     brains = context.portal_catalog(
                         portal_type="RecipientCadastre", path={'query': event_path},
-                        getRecipientAddress=(str(rspe.adr1) + ' ' + str(rspe.adr2))
+                        getRecipientAddress=(str(owner.adr1) + ' ' + str(owner.adr2))
                     )
                     if len(brains) > 0:
                         newrecipient = brains[0].getObject()
-                        newrecipient.setTitle(newrecipient.Title() + ' & ' + rspe.pe)
-                        newrecipient.setName(newrecipient.getName() + ' - ' + context.parseCadastreName(rspe.pe))
+                        newrecipient.setTitle(newrecipient.Title() + ' & ' + owner.pe)
+                        newrecipient.setName(newrecipient.getName() + ' - ' + context.parseCadastreName(owner.pe))
                         newrecipient.reindexObject()
                     else:
                         newrecipientname = context.invokeFactory(
                             "RecipientCadastre",
                             id=context.generateUniqueId('RecipientCadastre'),
-                            title=rspe.pe,
-                            name=context.parseCadastreName(rspe.pe),
-                            adr1=rspe.adr1,
-                            adr2=rspe.adr2,
-                            street=context.parseCadastreStreet(rspe.adr2),
-                            daa=rspe.daa
+                            title=owner.pe,
+                            name=context.parseCadastreName(owner.pe),
+                            adr1=owner.adr1,
+                            adr2=owner.adr2,
+                            street=context.parseCadastreStreet(owner.adr2),
+                            daa=owner.daa
                         )
                         newrecipient = getattr(context, newrecipientname)
                 #create the PortionOut using the createPortionOut method...
-                context.portal_urban.createPortionOut(container=newrecipient, **rsportionout.reference_as_dict())
+                context.portal_urban.createPortionOut(container=newrecipient, **parcel.reference_as_dict())
         return context.REQUEST.RESPONSE.redirect(context.absolute_url() + '/#fieldsetlegend-urbaneventinquiry_recipients')
 
     def getInquiryRadius(self):
