@@ -27,7 +27,7 @@ class SQLService(object):
     Helper with sqlalchemy engine, metadata and session objects.
     """
 
-    def __init__(self, dialect, user, host, db_name, password=''):
+    def __init__(self, dialect='postgresql+psycopg2', user='', host='', db_name='', password=''):
         self.engine = self._init_engine(dialect, user, host, db_name, password)
         self.metadata = MetaData(self.engine)
         self.tables = SQLTables()  # use _init_table to set sqlalchemy table objects on it

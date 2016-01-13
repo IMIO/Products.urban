@@ -5,7 +5,10 @@ from Products.urban.services.bestaddress import BestaddressService
 from Products.urban.services.cadastral import CadastreService
 
 
-config = ExternalConfig('services')
+try:
+    config = ExternalConfig('services')
+except:
+    config = {}
 
-cadastre = CadastreService(**config.cadastre)
-bestaddress = BestaddressService(**config.bestaddress)
+cadastre = CadastreService(**(config and config.cadastre))
+bestaddress = BestaddressService(**(config and config.bestaddress))

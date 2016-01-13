@@ -38,14 +38,11 @@ class ExternalConfig(object):
     def __init__(self, config_name):
         self.parser = None
         self.sections = {}
-        try:
-            parser = ConfigParser()
-            parser.read('{}/{}.cfg'.format(URBAN_CFG_DIR, config_name))
-            self.parser = parser
-            for section in parser.sections():
-                self.sections[section] = dict(self.parser.items(section))
-        except:
-            pass
+        parser = ConfigParser()
+        parser.read('{}/{}.cfg'.format(URBAN_CFG_DIR, config_name))
+        self.parser = parser
+        for section in parser.sections():
+            self.sections[section] = dict(self.parser.items(section))
 
     def __getattr__(self, attr_name):
         return self.section(attr_name)

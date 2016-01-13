@@ -20,7 +20,7 @@ class CadastreService(SQLService):
     """
     """
 
-    def __init__(self, dialect, user, host, db_name, password=''):
+    def __init__(self, dialect='postgresql+psycopg2', user='urb_xxx', host='', db_name='urb_xxx', password=''):
         super(CadastreService, self).__init__(dialect, user, host, db_name, password)
 
         if self.can_connect():

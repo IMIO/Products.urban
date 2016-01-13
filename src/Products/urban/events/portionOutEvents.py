@@ -66,6 +66,9 @@ def setEnvironmentLicencePreviousLicencesField(parcel, event):
     for parcel in parcels:
         parcel_infos.add(parcel.getIndexValue())
 
+        if not parcel.getIsOfficialParcel() or not parcel.getDivision():
+            break
+
         references = parcel.reference_as_dict()
         parcel_historic = cadastre.query_parcel_historic(**references)
 

@@ -1081,7 +1081,7 @@ def createLicence(site, licence_type, data):
     # call post script
     licence.at_post_create_script()
     # add a dummy portion out
-    division_code = division = str(cadastre.get_all_divisions()[0][0])
+    division_code = division = cadastre.can_connect() and str(cadastre.get_all_divisions()[0][0]) or ''
     portionout_data = {
         'divisionCode': division_code, 'division': division, 'section': 'A', 'radical': '84',
         'exposant': 'C', 'partie': False
