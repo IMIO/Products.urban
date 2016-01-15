@@ -14,7 +14,7 @@
   <browser:viewlet
       for="zope.interface.Interface"
       name="urbain220-link"
-      manager="collective.eeafaceted.z3ctable.interfaces.ITopManager"
+      manager="collective.eeafaceted.z3ctable.interfaces.ITopAboveNavManager"
       class="Products.urban.viewlets.urbain_220.Urbain220Viewlet"
       permission="zope2.View"
   />
