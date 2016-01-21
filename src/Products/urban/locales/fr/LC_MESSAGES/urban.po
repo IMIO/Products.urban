@@ -1861,6 +1861,11 @@ msgstr "Localité"
 msgid "urban_label_cityName"
 msgstr "Nom de la commune"
 
+#. Default: "Claimdate"
+#: Claimant.py
+msgid "urban_label_claimDate"
+msgstr "Date de la réclamation"
+
 #. Default: "Claimendsdate"
 #: UrbanEventInquiry.py
 msgid "urban_label_claimEndSDate"
