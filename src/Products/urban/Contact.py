@@ -328,9 +328,9 @@ class Contact(BaseContent, BrowserDefaultMixin):
             if street:
                 result.append(street)
             if number:
-                result.append(", %s" % number)
+                result.append(number)
             if zip:
-                result.append(zip)
+                result.append("à %s" % zip)
             if city:
                 result.append(city)
             return ' '.join(result)
