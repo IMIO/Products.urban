@@ -1015,6 +1015,12 @@ msgstr ""
 msgid "locality_for_worklocation"
 msgstr ""
 
+msgid "location_inside"
+msgstr ""
+
+msgid "location_near"
+msgstr ""
+
 msgid "location_fdrequirement_decision"
 msgstr ""
 
@@ -2408,6 +2414,11 @@ msgstr ""
 #. Default: "Localityname"
 #: Locality.py
 msgid "urban_label_localityName"
+msgstr ""
+
+#. Default: "Location"
+#: BuildLicence.py
+msgid "urban_label_location"
 msgstr ""
 
 #. Default: "Locationdgrneunderground"

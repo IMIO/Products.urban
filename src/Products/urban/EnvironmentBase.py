@@ -47,6 +47,11 @@ slave_fields_natura2000 = (
         'action': 'show',
         'hide_values': (True, ),
     },
+    {
+        'name': 'natura2000location',
+        'action': 'show',
+        'hide_values': (True, ),
+    },
 )
 ##/code-section module-header
 
@@ -138,6 +143,16 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_description',
+    ),
+    StringField(
+        name='natura2000location',
+        widget=SelectionWidget(
+            label='Natura2000location',
+            label_msgid='urban_label_location',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        vocabulary='listNatura2000Locations',
     ),
     TextField(
         name='natura2000Details',
@@ -239,6 +254,18 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     # Methods
 
     # Manually created methods
+
+    security.declarePublic('listNatura2000Locations')
+    def listNatura2000Locations(self):
+        """
+          This vocabulary for field location returns a list of
+          Natura2000 locations
+        """
+        vocab = (
+            ('inside', 'location_inside'),
+            ('near', 'location_near'),
+        )
+        return DisplayList(vocab)
 
     def rubrics_base_query(self):
         """ to be overriden """

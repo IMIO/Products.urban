@@ -1046,6 +1046,12 @@ msgstr "Particularité(s)"
 msgid "locality_for_worklocation"
 msgstr "au lieu-dit"
 
+msgid "location_inside"
+msgstr "à l'intérieur"
+
+msgid "location_near"
+msgstr "à proximité (500m)"
+
 msgid "location_fdrequirement_decision"
 msgstr "Décision"
 
@@ -2442,6 +2448,11 @@ msgstr "Localité"
 #: Locality.py
 msgid "urban_label_localityName"
 msgstr "Nom généralement constaté pour le lieu-dit"
+
+#. Default: "Location"
+#: BuildLicence.py
+msgid "urban_label_location"
+msgstr "Emplacement"
 
 #. Default: "Locationdgrneunderground"
 #: BuildLicence.py

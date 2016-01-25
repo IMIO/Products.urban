@@ -281,7 +281,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField('authority', after='referenceDGATLP')
     schema.moveField('natura2000', after='isSeveso')
-    schema.moveField('natura2000Details', after='natura2000')
+    schema.moveField('natura2000location', after='natura2000')
+    schema.moveField('natura2000Details', after='natura2000location')
     schema.moveField('description', after='validityDelay')
 
 finalizeSchema(EnvironmentLicence_schema)
