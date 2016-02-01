@@ -33,12 +33,15 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         portal_urban = api.portal.get_tool('portal_urban')
         licence = self.context.getParentNode()
         applicants = licence.getApplicants()
+        proprietaries = licence.getProprietaries()
         applicantobj = applicants and applicants[0] or None
+        proprietaryobj = proprietaries and proprietaries[0] or None
 
         generation_context = {
             'self': licence,
             'urbanEventObj': self.context,
             'applicantobj': applicantobj,
+            'proprietaryobj': proprietaryobj,
             'tool': portal_urban
         }
 
