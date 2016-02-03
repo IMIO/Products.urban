@@ -364,12 +364,14 @@ class UrbanBase(object):
         """
           Returns a formatted version of claimants to be used in POD templates
         """
+        tool = api.portal.get_tool('portal_urban')
         claimants = self._getLastEvent(interfaces.IUrbanEventInquiry).getClaimants()
-        toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
+        toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2|DateReclamation'
         for claimant in claimants:
             toreturn = toreturn + '%' + claimant.getPersonTitleValue() + '|' + claimant.getName1() + '|' +\
                     claimant.getName2() + '|' + claimant.getNumber() + ', ' + claimant.getStreet() + '|' + \
-                    claimant.getZipcode() + ' ' + claimant.getCity()
+                    claimant.getZipcode() + ' ' + claimant.getCity() + '|' +\
+                    tool.formatDate(claimant.getClaimDate()).decode('utf8')
         toreturn = toreturn + '</CSV>'
         return toreturn
 
