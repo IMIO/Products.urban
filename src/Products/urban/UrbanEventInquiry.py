@@ -170,20 +170,6 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
         """
         return self.listFolderContents({'portal_type': 'Claimant'})
 
-    security.declarePublic('getMultipleClaimantsCSV')
-    def getMultipleClaimantsCSV(self):
-        """
-          Returns a formatted version of the claimants to be used in POD templates
-        """
-        claimants = self.getClaimants()
-        toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
-        for claimant in claimants:
-            toreturn = toreturn + '%' + claimant.getPersonTitleValue() + '|' + claimant.getName1() + '|' +\
-                claimant.getName2() + '|' + claimant.getNumber() + ', ' + claimant.getStreet() + '|' +\
-                claimant.getZipcode() + ' ' + claimant.getCity()
-        toreturn = toreturn + '</CSV>'
-        return toreturn
-
     security.declarePublic('getParcels')
     def getParcels(self, onlyActive=False):
         """
