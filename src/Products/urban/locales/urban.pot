@@ -719,6 +719,9 @@ msgstr ""
 msgid "fieldsetlegend-urban_public_settings"
 msgstr ""
 
+msgid "fieldsetlegend-urban_schedule"
+msgstr ""
+
 msgid "fieldsetlegend-urban_vocabulary_folders"
 msgstr ""
 

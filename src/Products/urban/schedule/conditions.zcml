@@ -1,0 +1,12 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="Products.urban">
+
+    <adapter
+        for="Products.urban.interfaces.IArticle127"
+        provides="urban.schedule.interfaces.IStartCondition"
+        factory=".start_conditions.LicenceStartCondition"
+        name="urban.test_start_condition"
+    />
+
+</configure>

@@ -64,7 +64,7 @@ class IRecipient(Interface):
     """Marker interface for .Recipient.Recipient
     """
 
-class IBuildLicence(Interface):
+class IBuildLicence(IGenericLicence):
     """Marker interface for .BuildLicence.BuildLicence
     """
 
@@ -204,7 +204,7 @@ class IEnvClassOne(Interface):
     """Marker interface for .EnvClassOne.EnvClassOne
     """
 
-class IArticle127(Interface):
+class IArticle127(IGenericLicence):
     """Marker interface for .Article127.Article127
     """
 

@@ -21,7 +21,7 @@ class LicenceConfigView(BrowserView):
         return macro
 
     def getTabs(self):
-        return ['public_settings', 'vocabulary_folders', 'events']
+        return ['public_settings', 'vocabulary_folders', 'events', 'schedule']
 
     def getVocabularyFolders(self):
         context = aq_inner(self.context)
@@ -36,3 +36,8 @@ class LicenceConfigView(BrowserView):
         context = aq_inner(self.context)
         eventtypes_folder = getattr(context, 'urbaneventtypes')
         return [eventtypes_folder]
+
+    def getScheduleConfigs(self):
+        context = aq_inner(self.context)
+        schedule_folder = getattr(context, 'schedule')
+        return [schedule_folder]

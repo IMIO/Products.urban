@@ -1,0 +1,12 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="Products.urban">
+
+    <adapter
+        for="Products.urban.interfaces.IGenericLicence"
+        provides="urban.schedule.interfaces.IDueDate"
+        factory=".due_date.DepositDate"
+        name="urban.due_date.deposit_date"
+    />
+
+</configure>

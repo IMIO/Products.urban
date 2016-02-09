@@ -720,6 +720,9 @@ msgstr "Paramètres des procédures"
 msgid "fieldsetlegend-urban_public_settings"
 msgstr "Options"
 
+msgid "fieldsetlegend-urban_schedule"
+msgstr "Échéancier"
+
 msgid "fieldsetlegend-urban_vocabulary_folders"
 msgstr "Vocabulaires"
 
@@ -755,36 +758,6 @@ msgstr "Non"
 
 msgid "flooding_level_verylow"
 msgstr "Risque très faible"
-
-#. Default: "Karstconstraints"
-#: GenericLicence.py
-msgid "urban_label_karstConstraints"
-msgstr "Contraintes karstiques"
-
-#. Default: "Karstconstraintsdetails"
-#: GenericLicence.py
-msgid "urban_label_karstConstraintsDetails"
-msgstr "Détails concernant les contraintes karstiques"
-
-#. Default: "No"
-#: GenericLicence.py
-msgid "karst_constraints_no"
-msgstr "Sans"
-
-#. Default: "Very low"
-#: GenericLicence.py
-msgid "karts_constraints_verylow"
-msgstr "Très faible"
-
-#. Default: "Low"
-#: GenericLicence.py
-msgid "karts_constraints_low"
-msgstr "Faible"
-
-#. Default: "High"
-#: GenericLicence.py
-msgid "karts_constraints_high"
-msgstr "Fort"
 
 msgid "folder_advice"
 msgstr "Avis du dossier"
@@ -901,6 +874,26 @@ msgstr "au"
 
 msgid "investigationarticles_folder_title"
 msgstr "Articles pour les enquêtes"
+
+#. Default: "No"
+#: GenericLicence.py
+msgid "karst_constraints_no"
+msgstr "Sans"
+
+#. Default: "High"
+#: GenericLicence.py
+msgid "karts_constraints_high"
+msgstr "Fort"
+
+#. Default: "Low"
+#: GenericLicence.py
+msgid "karts_constraints_low"
+msgstr "Faible"
+
+#. Default: "Very low"
+#: GenericLicence.py
+msgid "karts_constraints_verylow"
+msgstr "Très faible"
 
 msgid "label_colname_Creator"
 msgstr "Créateur"
@@ -2373,6 +2366,16 @@ msgstr "Établissement SEVESO"
 msgid "urban_label_isSupplementary"
 msgstr "Supplémentaire?"
 
+#. Default: "Karstconstraints"
+#: GenericLicence.py
+msgid "urban_label_karstConstraints"
+msgstr "Contraintes karstiques"
+
+#. Default: "Karstconstraintsdetails"
+#: GenericLicence.py
+msgid "urban_label_karstConstraintsDetails"
+msgstr "Détails concernant les contraintes karstiques"
+
 #. Default: "Keydates"
 #: UrbanEventType.py
 msgid "urban_label_keyDates"
@@ -3477,4 +3480,3 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
-

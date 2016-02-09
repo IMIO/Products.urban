@@ -29,6 +29,7 @@
   <include package="plone.app.referenceintegrity"/>
   <include package="plone.z3ctable"/>
   <include package="plonetheme.imioapps"/>
+  <include package="urban.schedule"/>
 
 
   <permission
@@ -41,6 +42,7 @@
   <include package=".events" />
   <include package=".browser" />
   <include package=".migration" />
+  <include package=".schedule" />
   <include package=".services" />
   <include package=".viewlets" />
 

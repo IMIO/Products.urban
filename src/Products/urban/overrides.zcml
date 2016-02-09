@@ -44,4 +44,13 @@
         />
     </configure>
 
+    <configure package="urban.schedule">
+        <adapter
+           for="plone.dexterity.interfaces.IDexterityFTI"
+           factory="Products.urban.schedule.vocabulary.UrbanScheduledTypeVocabulary"
+           provides="urban.schedule.interfaces.IScheduledContentTypeVocabulary"
+           name="ScheduleConfig"
+        />
+    </configure>
+
 </configure>
