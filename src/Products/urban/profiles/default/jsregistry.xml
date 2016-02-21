@@ -35,6 +35,14 @@
              expression="not:context/showEditTabbing"
              id="form_tabbing.js"
              inline="False"/>
+
+ <javascript cacheable="True"
+             compression="safe"
+             cookable="True"
+             enabled="True"
+             expression=""
+             id="callview.js"
+             inline="False"/>
  <!-- ##/code-section jsregistry.xml -->
 
 </object>

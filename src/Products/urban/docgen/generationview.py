@@ -13,13 +13,18 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
     """
     """
 
-    def generate_persistent_doc(self, pod_template, output_format):
-        persisted_doc = super(UrbanDocGenerationView, self).generate_persistent_doc(
-            pod_template,
-            output_format
-        )
+    def __call__(self, template_uid='', output_format=''):
+        """
+        Override the call to:
+         - mark the document with IUrbanDoc interface
+         - return the url of the generated doc
+        """
+        pod_template, output_format = self._get_base_args(template_uid, output_format)
+
+        persisted_doc = self.generate_persistent_doc(pod_template, output_format)
         alsoProvides(persisted_doc, IUrbanDoc)
-        return persisted_doc
+
+        return persisted_doc.absolute_url()
 
     def get_generation_format(self):
         portal_urban = api.portal.get_tool('portal_urban')
