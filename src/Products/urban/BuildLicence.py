@@ -31,10 +31,21 @@ from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from dateutil.relativedelta import relativedelta
 
-optional_fields = ['implantation','roadAdaptation','pebDetails', 'requirementFromFD',
-                   'roadTechnicalAdvice','locationTechnicalAdvice','locationTechnicalConditions',
-                   'pebTechnicalAdvice','locationDgrneUnderground', 'roadDgrneUnderground', 'workType',
-                   'townshipCouncilFolder', 'roadMiscDescription']
+optional_fields = [
+    'implantation', 'roadAdaptation', 'pebDetails', 'requirementFromFD',
+    'roadTechnicalAdvice', 'locationTechnicalAdvice', 'locationTechnicalConditions',
+    'pebTechnicalAdvice', 'locationDgrneUnderground', 'roadDgrneUnderground', 'workType',
+    'townshipCouncilFolder', 'roadMiscDescription', 'procedureChoice', 'water'
+]
+
+slave_fields_procedurechoice = (
+    {
+        'name': 'annoncedDelay',
+        'action': 'value',
+        'vocab_method': 'getProcedureDelays',
+        'control_param': 'values',
+    },
+)
 ##/code-section module-header
 
 schema = Schema((
@@ -286,7 +297,26 @@ schema = Schema((
         multiValued=1,
         relationship='licenceArchitects',
     ),
-
+    BooleanField(
+        name='water',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Water',
+            label_msgid='urban_label_water',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+    ),
+    BooleanField(
+        name='electricity',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Electricity',
+            label_msgid='urban_label_electricity',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+    ),
 ),
 )
 
@@ -448,6 +478,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('annoncedDelay', after='missingPartsDetails')
     schema.moveField('annoncedDelayDetails', after='annoncedDelay')
     schema.moveField('impactStudy', after='annoncedDelayDetails')
+    schema.moveField('water', after='roadCoating')
+    schema.moveField('electricity', before='water')
     return schema
 
 finalizeSchema(BuildLicence_schema)
