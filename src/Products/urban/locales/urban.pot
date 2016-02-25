@@ -3476,3 +3476,10 @@ msgstr ""
 msgid "karts_constraints_high"
 msgstr ""
 
+#: BuildLicence.py
+msgid "urban_label_water"
+msgstr ""
+
+#: BuildLicence.py
+msgid "urban_label_electricity"
+msgstr ""
