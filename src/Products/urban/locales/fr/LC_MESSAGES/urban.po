@@ -3475,3 +3475,10 @@ msgstr "ans"
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
 
+#: BuildLicence.py
+msgid "urban_label_water"
+msgstr "Eau"
+
+#: BuildLicence.py
+msgid "urban_label_electricity"
+msgstr "Electricité"
