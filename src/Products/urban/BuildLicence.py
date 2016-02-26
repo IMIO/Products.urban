@@ -35,7 +35,7 @@ optional_fields = [
     'implantation', 'roadAdaptation', 'pebDetails', 'requirementFromFD',
     'roadTechnicalAdvice', 'locationTechnicalAdvice', 'locationTechnicalConditions',
     'pebTechnicalAdvice', 'locationDgrneUnderground', 'roadDgrneUnderground', 'workType',
-    'townshipCouncilFolder', 'roadMiscDescription', 'procedureChoice', 'water', 'Electricity'
+    'townshipCouncilFolder', 'roadMiscDescription', 'procedureChoice', 'water', 'electricity'
 ]
 
 slave_fields_procedurechoice = (
