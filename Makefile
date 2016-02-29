@@ -30,15 +30,15 @@ bin/sphinx-build: .installed.cfg
 bin/buildout: develop-eggs
 
 bin/test: versions.cfg buildout.cfg bin/buildout setup.py
-	./bin/buildout -vt 5
+	./bin/buildout -t 5
 	touch $@
 
 bin/instance: versions.cfg buildout.cfg bin/buildout setup.py
-	./bin/buildout -vt 5 install instance
+	./bin/buildout -t 5 install instance
 	touch $@
 
 bin/templates: setup.py buildout.cfg
-	./bin/buildout -vt 5 install templates
+	./bin/buildout -t 5 install templates
 	touch $@
 
 bin/templates_per_site: bin/templates
