@@ -48,6 +48,7 @@ setup(name='Products.urban',
           'Plone',
           'Products.CMFPlacefulWorkflow',
           'Products.ContentTypeValidator',
+          'Products.CPUtils',
           'Products.DataGridField',
           'Products.MasterSelectWidget',
           'plone.api',  # to remove once we use a plone version including plone.api
