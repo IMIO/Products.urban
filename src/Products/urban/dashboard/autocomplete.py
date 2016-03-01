@@ -44,6 +44,7 @@ class ApplicantSuggest(SuggestView):
             'sort_order': 'reverse',
             'path': '/'.join(self.context.getPhysicalPath()),
             'object_provides': 'Products.urban.interfaces.IApplicant',
+	    'sort_limit': 30,
         }
 
         catalog = api.portal.get_tool('portal_catalog')
@@ -131,6 +132,7 @@ class UrbanStreetsSuggest(SuggestView):
             'path': path,
             'object_provides': 'Products.urban.interfaces.IStreet',
             'review_state': 'enabled',
+            'sort_limit': 30,
         }
 
         catalog = api.portal.get_tool('portal_catalog')
@@ -158,6 +160,7 @@ class LicenceReferenceSuggest(SuggestView):
             'sort_order': 'reverse',
             'path': '/'.join(self.context.getPhysicalPath()),
             'object_provides': 'Products.urban.interfaces.IGenericLicence',
+            'sort_limit': 30,
         }
 
         catalog = api.portal.get_tool('portal_catalog')
@@ -185,6 +188,7 @@ class CadastralReferenceSuggest(SuggestView):
             'sort_order': 'reverse',
             'path': '/'.join(self.context.getPhysicalPath()),
             'object_provides': 'Products.urban.interfaces.ILicencePortionOut',
+            'sort_limit': 30,
         }
 
         catalog = api.portal.get_tool('portal_catalog')
