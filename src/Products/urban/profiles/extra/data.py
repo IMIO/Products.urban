@@ -597,7 +597,7 @@ urbanEventTypes = {
             'id': "suspension-du-permis",
             'title': "Suspension du permis",
             'deadLineDelay': 15,
-            'activatedFields': [],
+            'activatedFields': ['suspensionReason', 'suspensionEndDate'],
             'podTemplates': (
                 {'id': "urb-suspension-retrait-refus-dem.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre au demandeur)"},
                 {'id': "urb-suspension-retrait-refus-rw.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW)"},
@@ -1226,7 +1226,7 @@ urbanEventTypes = {
             'id': "suspension-du-permis",
             'title': "Suspension du permis",
             'deadLineDelay': 15,
-            'activatedFields': [],
+            'activatedFields': ['suspensionReason', 'suspensionEndDate'],
             'podTemplates': (
                 {'id': "urb-suspension-retrait-refus-dem.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre au demandeur)"},
                 {'id': "urb-suspension-retrait-refus-rw.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW)"},
@@ -3495,7 +3495,7 @@ urbanEventTypes = {
             'id': "suspension-du-permis",
             'title': "Suspension du permis",
             'deadLineDelay': 15,
-            'activatedFields': [],
+            'activatedFields': ['suspensionReason', 'suspensionEndDate'],
             'podTemplates': (
                 {'id': "lot-suspension-retrait-refus-dem.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre au demandeur)"},
                 {'id': "lot-suspension-retrait-refus-rw.odt", 'title': "Retrait et refus du permis d'urbanisme (lettre à la RW)"},

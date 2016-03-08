@@ -266,6 +266,30 @@ schema = Schema((
         default_output_type='text/html',
         optional= True,
     ),
+    TextField(
+        name='suspensionReason',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Suspensionreason',
+            label_msgid='urban_label_suspensionReason',
+            i18n_domain='urban',
+        ),
+        default_method='getDefaultText',
+        default_output_type='text/html',
+        optional=True,
+    ),
+    DateTimeField(
+        name='suspensionEndDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            format="%d/%m/%Y",
+            starting_year=1960,
+            label='suspensionEndDate',
+            label_msgid='urban_label_suspensionEndDate',
+            i18n_domain='urban',
+        ),
+        optional= True,
+    ),
 
 ),
 )

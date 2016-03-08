@@ -1247,6 +1247,12 @@ msgstr ""
 msgid "urban_label_specificFeatures"
 msgstr ""
 
+msgid "urban_label_suspensionEndDate"
+msgstr ""
+
+msgid "urban_label_suspensionReason"
+msgstr ""
+
 #. Default: "Sqlhost"
 #: UrbanTool.py
 msgid "urban_label_sqlHost"

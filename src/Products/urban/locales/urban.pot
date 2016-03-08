@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-11-19 09:14+0000\n"
+"POT-Creation-Date: 2016-03-08 08:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2067,6 +2067,11 @@ msgstr ""
 msgid "urban_label_explanationStartSDate"
 msgstr ""
 
+#. Default: "Explanationstartsdate"
+#: UrbanEventInquiry.py
+msgid "urban_label_explanationsDate"
+msgstr ""
+
 #. Default: "Exploitationcondition"
 #: EnvironmentRubricTerm.py
 msgid "urban_label_exploitationCondition"
@@ -3092,6 +3097,14 @@ msgstr ""
 #. Default: "Subjects"
 #: EnvClassThree.py
 msgid "urban_label_subjects"
+msgstr ""
+
+msgid "urban_label_suspensionEndDate"
+msgstr ""
+
+#. Default: "Specificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_suspensionReason"
 msgstr ""
 
 #. Default: "Tabsconfig"
