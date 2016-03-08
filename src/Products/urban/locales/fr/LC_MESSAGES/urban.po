@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2015-09-25 08:58+0000\n"
+"POT-Creation-Date: 2016-03-08 08:51+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -2116,6 +2116,11 @@ msgstr "Date de fin de la séance d'explications"
 
 #. Default: "Explanationstartsdate"
 #: UrbanEventInquiry.py
+msgid "urban_label_explanationStartSDate"
+msgstr ""
+
+#. Default: "Explanationstartsdate"
+#: UrbanEventInquiry.py
 msgid "urban_label_explanationsDate"
 msgstr "Date de debut de la séance d'explications"
 
@@ -3125,6 +3130,14 @@ msgstr "Détails sur le lotissement"
 #: EnvClassThree.py
 msgid "urban_label_subjects"
 msgstr "Rubriques"
+
+msgid "urban_label_suspensionEndDate"
+msgstr "Date de fin de suspension"
+
+#. Default: "Specificfeatures"
+#: UrbanCertificateBase.py
+msgid "urban_label_suspensionReason"
+msgstr "Raison de la suspension"
 
 #. Default: "Tabsconfig"
 #: LicenceConfig.py

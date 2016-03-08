@@ -148,14 +148,6 @@ URBAN_TYPES = [
     'UrbanCertificateTwo', 'NotaryLetter', 'MiscDemand', 'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
 ]
 
-#currently matches the content of URBAN_TYPES, the order of this list impacts the order
-# of content types links in urban_root_view
-ORDERED_URBAN_TYPES = [
-    'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'Division',
-    'UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'MiscDemand',
-    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
-]
-
 # all types that can be used as a licence applicant
 APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation']
 
@@ -184,7 +176,6 @@ DASHBOARD_TEMPLATES = {
             'id':'statsins.odt',
             'portal_type': 'DashboardPODTemplate',
             'title':'Statistiques INS',
-
         },
     ],
 }
