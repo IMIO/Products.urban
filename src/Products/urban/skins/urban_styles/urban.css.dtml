@@ -306,4 +306,16 @@ td div.parcel-action {
    padding-top: 0.2em;
    vertical-align: middle;
 }
+
+span.schedule_created {
+    background-color: #6AD7FC;
+}
+
+span.schedule_to_do {
+    background-color: yellow;
+}
+
+span.schedule_closed {
+    background-color: #75AD0A;
+}
 /* </dtml-with> */

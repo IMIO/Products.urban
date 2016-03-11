@@ -49,4 +49,13 @@
      provides="Products.urban.browser.table.interfaces.ITitleCell"
   />
 
+  <adapter
+     for="zope.interface.Interface
+          Products.urban.dashboard.columns.FacetedTitleColumn
+          Products.ZCatalog.interfaces.ICatalogBrain
+          urban.schedule.content.task.IAutomatedTask"
+     factory=".columns.TaskLicenceTitleDisplay"
+     provides="Products.urban.browser.table.interfaces.ITitleCell"
+  />
+
 </configure>

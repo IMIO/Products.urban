@@ -143,4 +143,12 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".parcellingtermEvents.updateTitle" />
 
+  <subscriber for="..interfaces.IUrbanEvent
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".urbanEventEvents.notifyLicence" />
+
+  <subscriber for="..interfaces.IUrbanEvent
+                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+              handler=".urbanEventEvents.notifyLicence" />
+
 </configure>

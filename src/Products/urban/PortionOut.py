@@ -162,7 +162,7 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         """
           Set a correct title if we use invokeFactory
         """
-        division = self.getDivisionName()
+        division = self.getDivisionName().encode('utf-8')
         section = self.getSection()
         radical = self.getRadical()
         bis = self.getBis()
@@ -250,7 +250,7 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
     def _listDivisionNames(self, name='name'):
         urban_tool = getToolByName(self, 'portal_urban')
         divisions = urban_tool.getDivisionsRenaming()
-        return DisplayList([(str(div['division']), str(div[name])) for div in divisions])
+        return DisplayList([(str(div['division']), unicode(div[name])) for div in divisions])
 
     security.declarePublic('hasRelatedLicences')
     def hasRelatedLicences(self, licence_type=''):

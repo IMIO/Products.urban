@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+from plone import api
+
 from Products.urban.browser.table.column import FoldermanagerColumn
 from Products.urban.browser.table.interfaces import ITitleCell
 from Products.urban.browser.table.interfaces import ITitleColumn
@@ -110,3 +112,28 @@ class ParcelReferencesColumn(BaseColumn):
         parcel_render = parcel_render.decode('utf-8')
 
         return parcel_render
+
+
+class ScheduleColumn(BaseColumn):
+    """
+    Base class for custom schedule columns.
+    """
+
+    # column not sortable
+    sort_index = -1
+
+    def query_licence(self, item):
+        catalog = api.portal.get_tool('portal_catalog')
+        task = item.getObject()
+        licence = task.get_container()
+        licence_brain = catalog(UID=licence.UID())[0]
+        return licence_brain
+
+
+class TaskLicenceTitleDisplay(TitleDisplay, ScheduleColumn):
+    """ Adapts a task to a LicenceTitleCell """
+
+    def render(self):
+        licence_brain = self.query_licence(self.brain)
+        title = self.column.renderTitleLink(licence_brain)
+        return title

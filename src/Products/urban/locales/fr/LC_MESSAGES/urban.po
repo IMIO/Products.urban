@@ -1039,17 +1039,17 @@ msgstr "Particularité(s)"
 msgid "locality_for_worklocation"
 msgstr "au lieu-dit"
 
-msgid "location_inside"
-msgstr "à l'intérieur"
-
-msgid "location_near"
-msgstr "à proximité (500m)"
-
 msgid "location_fdrequirement_decision"
 msgstr "Décision"
 
 msgid "location_fdrequirement_opinion"
 msgstr "Avis"
+
+msgid "location_inside"
+msgstr "à l'intérieur"
+
+msgid "location_near"
+msgstr "à proximité (500m)"
 
 msgid "locationmissingparts_folder_title"
 msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes (Fiche Urbanisme)"

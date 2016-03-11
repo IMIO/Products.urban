@@ -9,6 +9,5 @@ try:
     config = ExternalConfig('services')
 except:
     config = {}
-
 cadastre = CadastreService(**(config and config.cadastre))
 bestaddress = BestaddressService(**(config and config.bestaddress))

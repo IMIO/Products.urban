@@ -14,11 +14,26 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
+msgid "schedule.condition.analysis_done"
+msgstr "Retour service urbanisme fait"
+
+msgid "schedule.condition.folder_complete"
+msgstr "Accusé de réception fait."
+
+msgid "schedule.condition.has_inquiry"
+msgstr "Une enquête publique est définie"
+
+msgid "schedule.condition.inquiry_done"
+msgstr "Enquête terminée"
+
 msgid "urban.assign_folder_manager"
 msgstr "Gestionnaire du dossier"
+
+msgid "urban.due_date.acknowledgement_date"
+msgstr "Date d'accusé de réception du dossier"
 
 msgid "urban.due_date.deposit_date"
 msgstr "Date de dépôt ou de création du dossier"
 
-msgid "urban.test_start_condition"
-msgstr "Test Condition"
+msgid "urban.due_date.inquiry_end_date"
+msgstr "Date de fin de l'enquête publique"

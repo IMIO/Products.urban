@@ -27,9 +27,10 @@ from ConfigParser import ConfigParser
 
 from Products.CMFCore.permissions import setDefaultRoles
 
-PROJECTNAME = "urban"
+import os
 
-URBAN_CFG_DIR = './var/urban'
+PROJECTNAME = "urban"
+URBAN_CFG_DIR = '{}/../../var/urban'.format(os.environ['INSTANCE_HOME'])
 
 
 class ExternalConfig(object):

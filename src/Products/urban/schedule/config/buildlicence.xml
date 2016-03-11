@@ -3,18 +3,18 @@
  <criteria>
   <criterion name="c1">
    <property name="widget">collection-link</property>
-   <property name="title">Base collections</property>
+   <property name="title">Échéancier</property>
    <property name="position">top</property>
    <property name="section">default</property>
    <property name="hidden">1</property>
-   <property name="count"></property>
-   <property name="sortcountable"></property>
-   <property name="hidezerocount"></property>
+   <property name="count">0</property>
+   <property name="sortcountable">0</property>
+   <property name="hidezerocount">0</property>
    <property name="vocabulary">urban.schedule.collections</property>
    <property name="hidealloption">1</property>
    <property name="maxitems"></property>
-   <property name="sortreversed"></property>
-   <property name="default"></property>
+   <property name="sortreversed">0</property>
+   <property name="default">cf562c800e2e4a58bf3592a38d744aaa</property>
   </criterion>
   <criterion name="c0">
    <property name="widget">sorting</property>
@@ -44,8 +44,8 @@
    <property name="sortreversed"></property>
    <property name="default"></property>
   </criterion>
-  <criterion name="c11">
-   <property name="widget">select</property>
+  <criterion name="c6">
+   <property name="widget">radio</property>
    <property name="title">Étapes</property>
    <property name="position">center</property>
    <property name="section">default</property>
@@ -57,6 +57,8 @@
    <property
       name="vocabulary">configuration-da-c-cha-c-ances-permis-durbanisme</property>
    <property name="catalog"></property>
+   <property name="hidealloption">1</property>
+   <property name="maxitems"></property>
    <property name="sortreversed">0</property>
    <property name="default"></property>
   </criterion>
@@ -71,9 +73,27 @@
    <property name="onlyallelements">1</property>
    <property name="wildcard">1</property>
   </criterion>
+  <criterion name="c5">
+   <property name="widget">checkbox</property>
+   <property name="title">État de la tâche</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">0</property>
+   <property name="count">0</property>
+   <property name="sortcountable">0</property>
+   <property name="hidezerocount">0</property>
+   <property name="index">review_state</property>
+   <property name="operator">or</property>
+   <property name="operator_visible">0</property>
+   <property name="vocabulary">urban.schedule.task_simple_states</property>
+   <property name="catalog"></property>
+   <property name="maxitems"></property>
+   <property name="sortreversed">0</property>
+   <property name="default">to_do</property>
+  </criterion>
   <criterion name="c3">
    <property name="widget">resultsperpage</property>
-   <property name="title">Per page</property>
+   <property name="title">Résultats par page</property>
    <property name="position">center</property>
    <property name="section">default</property>
    <property name="hidden">0</property>

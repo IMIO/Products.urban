@@ -2,8 +2,10 @@
 
 from Products.urban.interfaces import ITheLicenceEvent
 
-from zope.interface import alsoProvides
 from zope.component.interface import getInterface
+from zope.interface import alsoProvides
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
 
 from plone import api
 
@@ -68,3 +70,11 @@ def updateDecisionDate(urban_event, event):
     if ITheLicenceEvent.providedBy(urban_event):
         licence = urban_event.aq_inner.aq_parent
         licence.reindexObject(['getDecisionDate'])
+
+
+def notifyLicence(urban_event, event):
+    """
+    Notify the licence of changes so schedule events triggers.
+    """
+    licence = urban_event.aq_parent
+    notify(ObjectModifiedEvent(licence))

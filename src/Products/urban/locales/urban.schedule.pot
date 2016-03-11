@@ -17,8 +17,23 @@ msgstr ""
 msgid "urban.assign_folder_manager"
 msgstr ""
 
+msgid "urban.due_date.acknowledgement_date"
+msgstr ""
+
 msgid "urban.due_date.deposit_date"
 msgstr ""
 
-msgid "urban.test_start_condition"
+msgid "urban.due_date.inquiry_end_date"
+msgstr ""
+
+msgid "schedule.condition.analysis_done"
+msgstr ""
+
+msgid "schedule.condition.folder_complete"
+msgstr ""
+
+msgid "schedule.condition.has_inquiry"
+msgstr ""
+
+msgid "schedule.condition.inquiry_done"
 msgstr ""

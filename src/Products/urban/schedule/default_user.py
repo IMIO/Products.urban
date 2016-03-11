@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from urban.schedule.content.task_user import AssignTaskUser
+from urban.schedule.content.logic import AssignTaskUser
 
 
 class LicenceFolderManager(AssignTaskUser):
@@ -9,7 +9,7 @@ class LicenceFolderManager(AssignTaskUser):
     to assign to its tasks (the licence folder manager).
     """
 
-    def user_id(self, **kwargs):
+    def user_id(self):
         licence = self.task_container
         folder_manager = licence.getFoldermanagers()[0]
         return folder_manager.getPloneUserId()
