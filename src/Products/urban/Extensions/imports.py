@@ -274,7 +274,7 @@ def import_streets_fromfile(self, filePath=None, separator=';'):
     for line in file.readlines():
         print "Importing street %d of %d" % (i, numberOfRecords)
         city, zipcode, streetcode, streetname = line.strip().split(separator)
-        ret = createStreet(self, city, zipcode, streetcode, streetname, ex_streets=ex_streets)
+        ret = createStreet(city, zipcode, streetcode, streetname, ex_streets=ex_streets)
         if ret:
             print '\n'.join(ret)
         i = i + 1
