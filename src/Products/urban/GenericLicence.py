@@ -313,16 +313,18 @@ schema = Schema((
         default_content_type='text/plain',
         default_output_type='text/plain',
     ),
-    StringField(
+    LinesField(
         name='karstConstraints',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
+            format='checkbox',
             label='Karstconstraints',
             label_msgid='urban_label_karstConstraints',
             i18n_domain='urban',
         ),
-        enforceVocabulary= True,
         schemata='urban_road',
-        vocabulary='listKarstConstraints',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('karst_constraints', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     TextField(
         name='karstConstraintsDetails',
@@ -946,23 +948,6 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
             ('far', translate(_('far_prevention_area'), context=self.REQUEST)),
             ('supervision', translate(_('supervision_area'), context=self.REQUEST)),
             ('ouside', translate(_('outside_catchment'), context=self.REQUEST)),
-        )
-
-        return DisplayList(vocab)
-
-    security.declarePublic('listKarstConstraints')
-    def listKarstConstraints(self):
-        """
-          This vocabulary for field karstConstraints returns a list of
-          karst constraints : no risk, low risk, moderated risk, high risk
-        """
-        vocab = (
-            #we add an empty vocab value of type "choose a value"
-            ('',  translate(_(EMPTY_VOCAB_VALUE), context=self.REQUEST)),
-            ('no', translate(_('karst_constraints_no'), context=self.REQUEST)),
-            ('very low', translate(_('karts_constraints_verylow'), context=self.REQUEST)),
-            ('low', translate(_('karts_constraints_low'), context=self.REQUEST)),
-            ('high', translate(_('karts_constraints_high'), context=self.REQUEST)),
         )
 
         return DisplayList(vocab)

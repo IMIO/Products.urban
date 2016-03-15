@@ -1219,6 +1219,9 @@ msgstr "Grades des personnes"
 msgid "persons_titles_folder_title"
 msgstr "Titres des personnes"
 
+msgid "karst_constraints"
+msgstr "Contraintes karstiques"
+
 #. Default: "Madam"
 #: Contact.py
 msgid "persontitle_madam"
