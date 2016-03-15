@@ -51,4 +51,12 @@
         handler=".migrate_to_1110.migrate"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Upgrade urban to 1.11.1"
+        description="urban upgrade step"
+        source="1.11.0"
+        destination="1.11.1"
+        handler=".migrate_to_1111.migrate"
+        profile="Products.urban:default" />
+
 </configure>
