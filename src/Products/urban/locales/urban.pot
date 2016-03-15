@@ -1232,6 +1232,9 @@ msgstr ""
 msgid "persons_titles_folder_title"
 msgstr ""
 
+msgid "karst_constraints"
+msgstr ""
+
 #. Default: "Madam"
 #: Contact.py
 msgid "persontitle_madam"
