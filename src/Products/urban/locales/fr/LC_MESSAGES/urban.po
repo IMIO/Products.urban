@@ -1253,8 +1253,11 @@ msgstr "Grades des personnes"
 msgid "persons_titles_folder_title"
 msgstr "Titres des personnes"
 
-msgid "karst_constraints"
+msgid "karst_constraints_folder_title"
 msgstr "Contraintes karstiques"
+
+msgid "concentrated_runoff_s_risk_folder_title"
+msgstr "Risque de ruissellement concentré"
 
 #. Default: "Madam"
 #: Contact.py
@@ -2383,6 +2386,16 @@ msgstr "Contraintes karstiques"
 #: GenericLicence.py
 msgid "urban_label_karstConstraintsDetails"
 msgstr "Détails concernant les contraintes karstiques"
+
+#. Default: "concentratedrunoffsrisks"
+#: GenericLicence.py
+msgid "urban_label_concentratedRunoffSRisk"
+msgstr "Risque de ruissellement concentré"
+
+#. Default: "concentratedrunoffsrisksdetails"
+#: GenericLicence.py
+msgid "urban_label_concentratedRunoffSRiskDetails"
+msgstr "Détails concerant le risque de ruissellement concentré"
 
 #. Default: "Keydates"
 #: UrbanEventType.py

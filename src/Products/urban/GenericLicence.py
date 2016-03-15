@@ -84,6 +84,7 @@ optional_fields = [
     'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails',
     'PRevU', 'prevuDetails', 'PRenU', 'prenuDetails', 'airportNoiseZone', 'airportNoiseZoneDetails',
     'description', 'rgbsr', 'rgbsrDetails', 'karstConstraints', 'karstConstraintsDetails',
+    'concentratedRunoffSRisks', 'concentratedRunoffSRisksDetails'
 ]
 ##/code-section module-header
 
@@ -332,6 +333,32 @@ schema = Schema((
         widget=TextAreaWidget(
             label='Karstconstraintsdetails',
             label_msgid='urban_label_karstConstraintsDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_road',
+        default_output_type='text/plain',
+    ),
+    LinesField(
+        name='concentratedRunoffSRisk',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='concentratedrunoffsrisk',
+            label_msgid='urban_label_concentratedRunoffSRisk',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('concentrated_runoff_s_risk', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='concentratedRunoffSRiskDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='concentratedrunoffsriskdetails',
+            label_msgid='urban_label_concentratedRunoffSRiskDetails',
             i18n_domain='urban',
         ),
         default_content_type='text/plain',

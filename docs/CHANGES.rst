@@ -4,7 +4,17 @@ Changes
 =======
 
 
-1.11.0 (unreleased)
+1.11.1 (unreleased)
+-------------------
+
+- Add generic concentratedRunoffSRisk and details optional fields
+  [fngaha]
+
+- Add generic karstConstraint field and details optional fields
+  [fngaha]
+
+
+1.11.0 (2015-10-01)
 -------------------
 
 - Nothing changed yet.
