@@ -1133,5 +1133,13 @@ default_values = {
         'streets': [
             'City',
         ],
+
+        'karst_constraints': [
+            'UrbanVocabularyTerm',
+            {'id': "no", 'title': u"Sans"},
+            {'id': "low", 'title': u"Faible"},
+            {'id': "moderate", 'title': u"Modéré"},
+            {'id': "high", 'title': u"Fort"},
+        ],
     },
 }

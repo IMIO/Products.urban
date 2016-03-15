@@ -313,6 +313,32 @@ schema = Schema((
         default_content_type='text/plain',
         default_output_type='text/plain',
     ),
+    LinesField(
+        name='karstConstraints',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Karstconstraints',
+            label_msgid='urban_label_karstConstraints',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('karst_constraints', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='karstConstraintsDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Karstconstraintsdetails',
+            label_msgid='urban_label_karstConstraintsDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_road',
+        default_output_type='text/plain',
+    ),
     StringField(
         name='floodingLevel',
         widget=SelectionWidget(
