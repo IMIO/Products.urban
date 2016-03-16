@@ -266,6 +266,8 @@ class LicenceView(BrowserView):
                 return False
             if not field.widget.visible:
                 return False
+            if not field.checkPermission('r', self.context):
+                return False
             return True
 
         displayed_fields = self.getUsedAttributes()
