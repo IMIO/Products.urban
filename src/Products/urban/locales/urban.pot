@@ -1855,9 +1855,9 @@ msgstr ""
 msgid "urban_label_claimEndSDate"
 msgstr ""
 
-#. Default: "Claimstartsdate"
+#. Default: "ClaimsDate"
 #: UrbanEventInquiry.py
-msgid "urban_label_claimStartSDate"
+msgid "urban_label_claimsDate"
 msgstr ""
 
 #. Default: "Claimingtext"
