@@ -47,7 +47,6 @@ from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.constants import CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_TYPE_CATEGORY
 
 from urban.schedule.utils import create_tasks_collection
-from urban.schedule.utils import get_all_schedule_configs
 from urban.schedule.utils import interface_to_tuple
 
 from zExceptions import BadRequest
@@ -195,9 +194,6 @@ def extraPostInstall(context, refresh=True):
     logger.info("addUrbanVocabularies : starting...")
     addUrbanVocabularies(context)
     logger.info("addUrbanVocabularies : Done")
-    logger.info("addScheduleConfig : starting...")
-    addScheduleConfig(context)
-    logger.info("addScheduleConfig : Done")
     logger.info("addDefaultObjects : starting...")
     addDefaultObjects(context)
     logger.info("addDefaultObjects : Done")
@@ -249,7 +245,7 @@ def createVocabularyFolders(container, vocabularies, site):
         createVocabularyFolder(container, vocname, site, allowedtypes)
 
 
-def createScheduleConfigs(container, portal_type):
+def createScheduleConfig(container, portal_type, id='schedule'):
     """
     Create empty schedule config folders for each licence type.
     """
@@ -259,7 +255,7 @@ def createScheduleConfigs(container, portal_type):
     if not hasattr(container, 'schedule'):
         type_info._constructInstance(
             container=container,
-            id='schedule',
+            id=id,
             title=u'{} {}'.format(
                 _('ScheduleConfig', 'urban.schedule'),
                 _(portal_type, 'urban')
@@ -500,31 +496,6 @@ def addExploitationConditions(context, config_folder):
                     field = old_condition.getField(fieldname)
                     mutator = field.getMutator(old_condition)
                     mutator(newvalue)
-
-
-def addScheduleConfig(context):
-    """
-    Add schedule config for each licence type.
-    """
-    if context.readDataFile('urban_extra_marker.txt') is None:
-        return
-
-    profile_name = context._profile_path.split('/')[-1]
-    module_name = 'Products.urban.profiles.%s.schedule_config' % profile_name
-    attribute = 'schedule_config'
-    module = __import__(module_name, fromlist=[attribute])
-    schedule_config = getattr(module, attribute)
-
-    portal_urban = api.portal.get_tool('portal_urban')
-    for urban_type in URBAN_TYPES:
-        licence_config_id = urban_type.lower()
-        if licence_config_id in schedule_config:
-            config_folder = getattr(portal_urban, licence_config_id)
-            schedule_folder = getattr(config_folder, 'schedule')
-            createFolderDefaultValues(
-                schedule_folder,
-                schedule_config[licence_config_id]
-            )
 
 
 def addUrbanGroups(context):
@@ -932,12 +903,14 @@ def setupSchedule(context):
     if 'schedules' not in mapping.keys():
         mapping['schedules'] = Assignment('schedules')
 
+    schedule_configs = []
     for urban_type in URBAN_TYPES:
         config_folder = getattr(portal_urban, urban_type.lower())
-        createScheduleConfigs(container=config_folder, portal_type=urban_type)
+        createScheduleConfig(container=config_folder, portal_type=urban_type)
+        schedule_configs.append(getattr(config_folder, 'schedule'))
 
     setFolderAllowedTypes(schedule_folder, 'Folder')
-    for schedule_config in get_all_schedule_configs():
+    for schedule_config in schedule_configs:
         folder_id = schedule_config.get_scheduled_portal_type().lower()
         collection_id = '{}_tasks'.format(folder_id)
         licence_name = _(schedule_config.get_scheduled_portal_type(), 'urban')

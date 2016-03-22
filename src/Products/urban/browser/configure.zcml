@@ -23,6 +23,7 @@
   <browser:page
      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
      name="redirectto_urban_root_view"
+      class=".urban_redirects.UrbanRedirectsView"
      template="templates/redirectto_urban_root_view.pt"
      permission="zope2.View"
   />

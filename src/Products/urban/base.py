@@ -528,7 +528,7 @@ class UrbanBase(object):
         """
         selfPhysPath = '/'.join(self.getPhysicalPath())
         #do the test in 2 if to avoid getting the tool if not necessary
-        if self.restrictedTraverse(selfPhysPath + '/@@plone_lock_info/is_locked_for_current_user')():
+        if self.unrestrictedTraverse(selfPhysPath + '/@@plone_lock_info/is_locked_for_current_user')():
             return False
         tool = api.portal.get_tool('portal_urban')
         if tool.getUrbanConfig(self).getUseTabbingForDisplay():

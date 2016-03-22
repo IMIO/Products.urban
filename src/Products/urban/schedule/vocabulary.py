@@ -11,6 +11,7 @@ from Products.urban.interfaces import IDivision
 from Products.urban.interfaces import IEnvClassOne
 from Products.urban.interfaces import IEnvClassThree
 from Products.urban.interfaces import IEnvClassTwo
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IMiscDemand
 from Products.urban.interfaces import INotaryLetter
 from Products.urban.interfaces import IParcelOutLicence
@@ -22,6 +23,7 @@ from urban.schedule.content.vocabulary import ScheduledContentTypeVocabulary
 from Products.urban import UrbanMessage
 
 URBAN_TYPES_INTERFACES = {
+    'GenericLicence': IGenericLicence,
     'BuildLicence': IBuildLicence,
     'Article127': IArticle127,
     'ParcelOutLicence': IParcelOutLicence,
