@@ -130,7 +130,10 @@ class UrbanStreetsSuggest(SuggestView):
             'sort_on': 'sortable_title',
             'sort_order': 'reverse',
             'path': path,
-            'object_provides': 'Products.urban.interfaces.IStreet',
+            'object_provides': [
+                'Products.urban.interfaces.IStreet',
+                'Products.urban.interfaces.ILocality'
+            ],
             'review_state': 'enabled',
             'sort_limit': 30,
         }
