@@ -5,12 +5,28 @@ from plone import api
 from urban.schedule.content.condition import Condition
 
 
+class DepositDoneCondition(Condition):
+    """
+    Licence folderComplete event is created.
+    """
+
+    def evaluate(self, task):
+        licence = self.task_container
+
+        deposit_done = False
+        deposit_event = licence.getLastDeposit()
+        if deposit_event:
+            deposit_done = api.content.get_state(deposit_event) == 'closed'
+
+        return deposit_done
+
+
 class FolderCompleteCondition(Condition):
     """
     Licence folderComplete event is created.
     """
 
-    def evaluate(self):
+    def evaluate(self, task):
         licence = self.task_container
 
         is_complete = False
@@ -26,7 +42,7 @@ class InquiryCondition(Condition):
     Licence has an inquiry start date and end date defined.
     """
 
-    def evaluate(self):
+    def evaluate(self, task):
         licence = self.task_container
 
         start_date = licence.getInvestigationStart()
@@ -41,7 +57,7 @@ class InquiryIsDone(Condition):
     Licence inquiry event is closed.
     """
 
-    def evaluate(self):
+    def evaluate(self, task):
         licence = self.task_container
 
         inquiry_done = False
@@ -57,7 +73,7 @@ class UrbanAnalysisDone(Condition):
     Licence 'fiche technique urbanisme' event is closed.
     """
 
-    def evaluate(self):
+    def evaluate(self, task):
         licence = self.task_container
         catalog = api.portal.get_tool('portal_catalog')
 

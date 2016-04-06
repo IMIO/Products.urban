@@ -17,6 +17,9 @@ msgstr ""
 msgid "schedule.condition.analysis_done"
 msgstr "Retour service urbanisme fait"
 
+msgid "schedule.condition.deposit_done"
+msgstr "Dépot du dossier fait"
+
 msgid "schedule.condition.folder_complete"
 msgstr "Accusé de réception fait."
 
@@ -29,11 +32,14 @@ msgstr "Enquête terminée"
 msgid "urban.assign_folder_manager"
 msgstr "Gestionnaire du dossier"
 
-msgid "urban.due_date.acknowledgement_date"
+msgid "urban.start_date.acknowledgement_date"
 msgstr "Date d'accusé de réception du dossier"
 
-msgid "urban.due_date.deposit_date"
-msgstr "Date de dépôt ou de création du dossier"
+msgid "urban.start_date.creation_date"
+msgstr "Date de création du dossier"
 
-msgid "urban.due_date.inquiry_end_date"
+msgid "urban.start_date.deposit_date"
+msgstr "Date de dépôt du dossier"
+
+msgid "urban.start_date.inquiry_end_date"
 msgstr "Date de fin de l'enquête publique"

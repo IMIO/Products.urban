@@ -2044,6 +2044,10 @@ msgstr "Nom alternatif des divisions pour la génération des documents"
 msgid "urban_label_editionOutputFormat"
 msgstr "Format de fichier des modèles générés"
 
+#: BuildLicence.py
+msgid "urban_label_electricity"
+msgstr "Electricité"
+
 #. Default: "Email"
 #: Contact.py
 msgid "urban_label_email"
@@ -3309,6 +3313,10 @@ msgstr "Visibilité?"
 msgid "urban_label_walloonRegionPrimoDate"
 msgstr "Date primo dossier"
 
+#: BuildLicence.py
+msgid "urban_label_water"
+msgstr "Eau"
+
 #. Default: "Webserverhost"
 #: UrbanTool.py
 msgid "urban_label_webServerHost"
@@ -3493,11 +3501,3 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
-
-#: BuildLicence.py
-msgid "urban_label_water"
-msgstr "Eau"
-
-#: BuildLicence.py
-msgid "urban_label_electricity"
-msgstr "Electricité"

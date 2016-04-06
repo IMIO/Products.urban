@@ -6,24 +6,32 @@
         for="Products.urban.interfaces.IGenericLicence
              urban.schedule.content.task.IAutomatedTask"
         provides="urban.schedule.interfaces.IStartDate"
-        factory=".due_date.DepositDate"
-        name="urban.due_date.deposit_date"
+        factory=".start_date.CreationDate"
+        name="urban.start_date.creation_date"
     />
 
     <adapter
         for="Products.urban.interfaces.IGenericLicence
              urban.schedule.content.task.IAutomatedTask"
         provides="urban.schedule.interfaces.IStartDate"
-        factory=".due_date.AcknowledgementDate"
-        name="urban.due_date.acknowledgement_date"
+        factory=".start_date.DepositDate"
+        name="urban.start_date.deposit_date"
     />
 
     <adapter
         for="Products.urban.interfaces.IGenericLicence
              urban.schedule.content.task.IAutomatedTask"
         provides="urban.schedule.interfaces.IStartDate"
-        factory=".due_date.InquriryEndDate"
-        name="urban.due_date.inquiry_end_date"
+        factory=".start_date.AcknowledgementDate"
+        name="urban.start_date.acknowledgement_date"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IGenericLicence
+             urban.schedule.content.task.IAutomatedTask"
+        provides="urban.schedule.interfaces.IStartDate"
+        factory=".start_date.InquriryEndDate"
+        name="urban.start_date.inquiry_end_date"
     />
 
 </configure>

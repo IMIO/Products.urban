@@ -38,7 +38,7 @@ def setValidParcel(parcel, event):
     try:
         is_outdated = cadastre.is_outdated_parcel(**references)
         parcel.setOutdated(is_outdated)
-    except cadastre.UnreferencedParcelError:
+    except:
         is_official = False
 
     parcel.setIsOfficialParcel(is_official)

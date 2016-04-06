@@ -3,6 +3,16 @@
 from urban.schedule.content.logic import StartDate
 
 
+class CreationDate(StartDate):
+    """
+    Returns the deposit date of the licence.
+    """
+
+    def start_date(self):
+        licence = self.task_container
+        return licence.creation_date
+
+
 class DepositDate(StartDate):
     """
     Returns the deposit date of the licence.
@@ -11,7 +21,7 @@ class DepositDate(StartDate):
     def start_date(self):
         licence = self.task_container
         deposit = licence.getLastDeposit()
-        deposit_date = deposit and deposit.getEventDate() or licence.creation_date
+        deposit_date = deposit and deposit.getEventDate() or None
         return deposit_date
 
 

@@ -30,5 +30,7 @@ class UrbanRedirectsView(BrowserView):
             group_ids = [g.id for g in user_groups]
             if 'survey_editors' in group_ids:
                 self.context.REQUEST.RESPONSE.redirect(portal.absolute_url() + '/urban/survey_schedule')
+            if 'opinions_editors' in group_ids:
+                self.context.REQUEST.RESPONSE.redirect(portal.absolute_url() + '/urban/opinions_schedule')
 
         return self.index()

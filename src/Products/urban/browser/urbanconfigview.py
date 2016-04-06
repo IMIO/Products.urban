@@ -20,7 +20,7 @@ class UrbanConfigView(BrowserView):
         return macro
 
     def getTabs(self):
-        return ['public_settings', 'licences_config', 'vocabulary_folders', 'admin_settings']
+        return ['public_settings', 'licences_config', 'vocabulary_folders', 'schedule', 'admin_settings']
 
     def getAdminFolders(self):
         context = aq_inner(self.context)
@@ -39,3 +39,9 @@ class UrbanConfigView(BrowserView):
         other_folders = self.getAdminFolders() + self.getMiscConfigFolders()
         folders = [folder for folder in context.objectValues('ATFolder') if folder not in other_folders]
         return folders
+
+    def getScheduleConfigs(self):
+        context = aq_inner(self.context)
+        survey_schedule = getattr(context, 'survey_schedule')
+        opinions_schedule = getattr(context, 'opinions_schedule')
+        return [survey_schedule, opinions_schedule]

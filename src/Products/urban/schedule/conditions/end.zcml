@@ -2,44 +2,28 @@
     xmlns="http://namespaces.zope.org/zope"
     i18n_domain="Products.urban">
 
-
-    <!-- folder complete conditions-->
-    <adapter
-        for="Products.urban.interfaces.IBuildLicence"
-        provides="urban.schedule.interfaces.ICreationCondition"
-        factory=".conditions.FolderCompleteCondition"
-        name="schedule.condition.folder_complete"
-    />
-
     <adapter
         for="Products.urban.interfaces.IBuildLicence
              urban.schedule.content.task.IAutomatedTask"
-        provides="urban.schedule.interfaces.IStartCondition"
-        factory=".conditions.FolderCompleteCondition"
-        name="schedule.condition.folder_complete"
+        provides="urban.schedule.interfaces.IEndCondition"
+        factory=".generic.DepositDoneCondition"
+        name="schedule.condition.deposit_done"
     />
 
     <adapter
         for="Products.urban.interfaces.IBuildLicence
              urban.schedule.content.task.IAutomatedTask"
         provides="urban.schedule.interfaces.IEndCondition"
-        factory=".conditions.FolderCompleteCondition"
+        factory=".generic.FolderCompleteCondition"
         name="schedule.condition.folder_complete"
     />
 
     <!-- inquiry conditions-->
     <adapter
-        for="Products.urban.interfaces.IBuildLicence"
-        provides="urban.schedule.interfaces.ICreationCondition"
-        factory=".conditions.InquiryCondition"
-        name="schedule.condition.has_inquiry"
-    />
-
-    <adapter
         for="Products.urban.interfaces.IBuildLicence
              urban.schedule.content.task.IAutomatedTask"
         provides="urban.schedule.interfaces.IEndCondition"
-        factory=".conditions.InquiryIsDone"
+        factory=".generic.InquiryIsDone"
         name="schedule.condition.inquiry_done"
     />
 
@@ -48,7 +32,7 @@
         for="Products.urban.interfaces.IBuildLicence
              urban.schedule.content.task.IAutomatedTask"
         provides="urban.schedule.interfaces.IEndCondition"
-        factory=".conditions.UrbanAnalysisDone"
+        factory=".generic.UrbanAnalysisDone"
         name="schedule.condition.analysis_done"
     />
 

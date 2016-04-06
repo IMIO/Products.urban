@@ -17,12 +17,14 @@ from Products.urban.interfaces import INotaryLetter
 from Products.urban.interfaces import IParcelOutLicence
 from Products.urban.interfaces import IUrbanCertificateOne
 from Products.urban.interfaces import IUrbanCertificateTwo
+from Products.urban.interfaces import IUrbanEventOpinionRequest
 
 from urban.schedule.content.vocabulary import ScheduledContentTypeVocabulary
 
 from Products.urban import UrbanMessage
 
 URBAN_TYPES_INTERFACES = {
+    'UrbanEventOpinionRequest': IUrbanEventOpinionRequest,
     'GenericLicence': IGenericLicence,
     'BuildLicence': IBuildLicence,
     'Article127': IArticle127,

@@ -14,19 +14,10 @@ msgstr ""
 "Preferred-Encodings: utf-8\n"
 "Domain: urban.schedule\n"
 
-msgid "urban.assign_folder_manager"
-msgstr ""
-
-msgid "urban.due_date.acknowledgement_date"
-msgstr ""
-
-msgid "urban.due_date.deposit_date"
-msgstr ""
-
-msgid "urban.due_date.inquiry_end_date"
-msgstr ""
-
 msgid "schedule.condition.analysis_done"
+msgstr ""
+
+msgid "schedule.condition.deposit_done"
 msgstr ""
 
 msgid "schedule.condition.folder_complete"
@@ -36,4 +27,19 @@ msgid "schedule.condition.has_inquiry"
 msgstr ""
 
 msgid "schedule.condition.inquiry_done"
+msgstr ""
+
+msgid "urban.assign_folder_manager"
+msgstr ""
+
+msgid "urban.start_date.acknowledgement_date"
+msgstr ""
+
+msgid "urban.start_date.creation_date"
+msgstr ""
+
+msgid "urban.start_date.deposit_date"
+msgstr ""
+
+msgid "urban.start_date.inquiry_end_date"
 msgstr ""

@@ -1,0 +1,9 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="Products.urban">
+
+    <include file="creation.zcml" />
+    <include file="start.zcml" />
+    <include file="end.zcml" />
+
+</configure>

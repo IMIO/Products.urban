@@ -162,7 +162,8 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         """
           Set a correct title if we use invokeFactory
         """
-        division = self.getDivisionName().encode('utf-8')
+        division = self.getDivisionName() or ''
+        division = division.encode('utf-8')
         section = self.getSection()
         radical = self.getRadical()
         bis = self.getBis()
