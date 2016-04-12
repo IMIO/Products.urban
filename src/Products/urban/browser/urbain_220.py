@@ -162,6 +162,9 @@ class UrbainXMLExport(BrowserView):
             if error != []:
                 return 'Error in these licences: \n%s' % '\n'.join(error)
             else:
+                site = api.portal.get()
+                response = site.REQUEST.RESPONSE
+                response.setHeader('Content-type', 'text/plain;;charset=iso-8859-1')
                 output = StringIO()
                 output.write(unicode('\n'.join(xml).replace("&", "&amp;"), 'iso-8859-1').encode('iso-8859-1'))
                 return output.getvalue()
