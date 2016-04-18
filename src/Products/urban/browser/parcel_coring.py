@@ -16,6 +16,9 @@ class ParcelCoringView(BrowserView):
         parcels = self.context.getOfficialParcels()
         parcels_wkt = cadastre.query_parcels_wkt(parcels)
 
-        coring_response = parcel_coring.get_coring(parcels_wkt, coring_type)
+        coring_response = parcel_coring.get_coring(
+            parcels_wkt,
+            self.request.get('st', coring_type)
+        )
 
         return coring_response.text
