@@ -17,6 +17,16 @@ from zope.interface import implements
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 
 
+class WebService(object):
+    """
+    """
+
+    def __init__(self, url, user='', password=''):
+        self.url = url
+        self.user = user
+        self.password = password
+
+
 class SQLTables(object):
     """
     """

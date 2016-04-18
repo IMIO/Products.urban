@@ -347,4 +347,11 @@
      permission="zope2.View"
   />
 
+  <browser:page
+     for="*"
+     name="parcelcoring"
+     class=".parcel_coring.ParcelCoringView"
+     permission="zope2.View"
+  />
+
 </configure>
