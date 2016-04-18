@@ -20,5 +20,11 @@ class ParcelCoringView(BrowserView):
             parcels_wkt,
             self.request.get('st', coring_type)
         )
+        if coring_response.status_code != 200:
+            msg = '<p>message:</p><p>{error}</p><p>polygon:</p><p>{polygon}</p>'.format(
+                error=coring_response.text,
+                polygon=parcels_wkt
+            )
+            return msg
 
         return coring_response.text
