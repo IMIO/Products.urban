@@ -829,6 +829,9 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
 
     meta_type = 'GenericLicence'
     _at_rename_after_creation = True
+    # block local roles acquisition and let the workflow handle that
+    __ac_local_roles_block__ = True
+
 
     schema = GenericLicence_schema
 
@@ -1014,6 +1017,14 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
            Return the list of parcels (portionOut) for the Licence
         """
         return self.objectValues('PortionOut')
+
+    security.declarePublic('getOfficialParcels')
+    def getOfficialParcels(self):
+        """
+           Return the list of parcels (portionOut) for the Licence
+        """
+        parcels = [prc for prc in self.getParcels() if prc.getIsOfficialParcel()]
+        return parcels
 
     security.declarePublic('updateTitle')
     def updateTitle(self):
