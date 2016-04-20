@@ -7,7 +7,14 @@ Changes
 1.11.0 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix codec in getMultipleClaimantsCSV (when use a claimant contat)
+  [fngaha]
+
+- Add generic concentratedRunoffSRisk and details optional fields
+  [fngaha]
+
+- Add generic karstConstraint field and details optional fields
+  [fngaha]
 
 
 1.10.0 (2015-02-24)
