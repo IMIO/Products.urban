@@ -4,24 +4,24 @@
 
     <adapter
         for="Products.urban.interfaces.IBuildLicence
-             urban.schedule.content.task.IAutomatedTask"
-        provides="urban.schedule.interfaces.IEndCondition"
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.DepositDoneCondition"
         name="schedule.condition.deposit_done"
     />
 
     <adapter
         for="Products.urban.interfaces.IBuildLicence
-             urban.schedule.content.task.IAutomatedTask"
-        provides="urban.schedule.interfaces.IEndCondition"
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.ProcedureChoiceDone"
         name="schedule.condition.procedure_choice_done"
     />
 
     <adapter
         for="Products.urban.interfaces.IBuildLicence
-             urban.schedule.content.task.IAutomatedTask"
-        provides="urban.schedule.interfaces.IEndCondition"
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.FolderCompleteCondition"
         name="schedule.condition.folder_complete"
     />
@@ -29,8 +29,8 @@
     <!-- inquiry conditions-->
     <adapter
         for="Products.urban.interfaces.IBuildLicence
-             urban.schedule.content.task.IAutomatedTask"
-        provides="urban.schedule.interfaces.IEndCondition"
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.InquiryIsDone"
         name="schedule.condition.inquiry_done"
     />
@@ -38,8 +38,8 @@
     <!-- analysis conditions-->
     <adapter
         for="Products.urban.interfaces.IBuildLicence
-             urban.schedule.content.task.IAutomatedTask"
-        provides="urban.schedule.interfaces.IEndCondition"
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.UrbanAnalysisDone"
         name="schedule.condition.analysis_done"
     />

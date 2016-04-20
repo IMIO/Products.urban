@@ -46,8 +46,8 @@ from plone.portlets.interfaces import ILocalPortletAssignmentManager
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.constants import CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_TYPE_CATEGORY
 
-from urban.schedule.utils import create_tasks_collection
-from urban.schedule.utils import interface_to_tuple
+from imio.schedule.utils import create_tasks_collection
+from imio.schedule.utils import interface_to_tuple
 
 from zExceptions import BadRequest
 from zope.interface import alsoProvides
@@ -257,7 +257,7 @@ def createScheduleConfig(container, portal_type, id='schedule'):
             container=container,
             id=id,
             title=u'{} {}'.format(
-                _('ScheduleConfig', 'urban.schedule'),
+                _('ScheduleConfig', 'imio.schedule'),
                 _(portal_type, 'urban')
             ),
             scheduled_contenttype=(

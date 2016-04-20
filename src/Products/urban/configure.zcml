@@ -29,7 +29,7 @@
   <include package="plone.app.referenceintegrity"/>
   <include package="plone.z3ctable"/>
   <include package="plonetheme.imioapps"/>
-  <include package="urban.schedule"/>
+  <include package="imio.schedule"/>
 
 
   <permission

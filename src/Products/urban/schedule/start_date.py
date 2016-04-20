@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from urban.schedule.content.logic import StartDate
+from imio.schedule.content.logic import StartDate
 
 
 class CreationDate(StartDate):

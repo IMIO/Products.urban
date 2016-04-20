@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from urban.schedule.content.logic import AssignTaskUser
+from imio.schedule.content.logic import AssignTaskUser
 
 
 class LicenceFolderManager(AssignTaskUser):

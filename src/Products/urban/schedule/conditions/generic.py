@@ -2,7 +2,7 @@
 
 from plone import api
 
-from urban.schedule.content.condition import Condition
+from imio.schedule.content.condition import Condition
 
 
 class DepositDoneCondition(Condition):

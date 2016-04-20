@@ -12,7 +12,7 @@ msgstr ""
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8\n"
-"Domain: urban.schedule\n"
+"Domain: imio.schedule\n"
 
 msgid "schedule.condition.analysis_done"
 msgstr ""

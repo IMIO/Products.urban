@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from urban.schedule.content.condition import StartCondition
+from imio.schedule.content.condition import StartCondition
 
 
 class LicenceStartCondition(StartCondition):

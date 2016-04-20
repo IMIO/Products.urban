@@ -19,7 +19,7 @@ from Products.urban.interfaces import IUrbanCertificateOne
 from Products.urban.interfaces import IUrbanCertificateTwo
 from Products.urban.interfaces import IUrbanEventOpinionRequest
 
-from urban.schedule.content.vocabulary import ScheduledContentTypeVocabulary
+from imio.schedule.content.vocabulary import ScheduledContentTypeVocabulary
 
 from Products.urban import UrbanMessage
 

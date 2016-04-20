@@ -6,8 +6,8 @@
     <!-- folder complete conditions-->
     <adapter
         for="Products.urban.interfaces.IBuildLicence
-             urban.schedule.content.task.IAutomatedTask"
-        provides="urban.schedule.interfaces.IStartCondition"
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
         factory=".generic.FolderCompleteCondition"
         name="schedule.condition.folder_complete"
     />

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from urban.schedule.content.task import IAutomatedTask
+from imio.schedule.content.task import IAutomatedTask
 
 from plone.indexer import indexer
 
