@@ -368,14 +368,14 @@ class UrbanBase(object):
         claimants = self._getLastEvent(interfaces.IUrbanEventInquiry).getClaimants()
         toreturn = '<CSV>Titre|TitreR|Nom|Prenom|AdresseLigne1|AdresseLigne2|DateReclamation'
         for claimant in claimants:
-            toreturn = toreturn + '%' + claimant.getPersonTitleValue() +\
-                    '|' + claimant.getPersonTitleValue(reverse=True) +\
-                    '|' + claimant.getName1() +\
-                    '|' + claimant.getName2() +\
-                    '|' + claimant.getNumber() +\
-                    ', ' + claimant.getStreet() +\
-                    '|' + claimant.getZipcode() +\
-                    ' ' + claimant.getCity() +\
+            toreturn = toreturn + '%' + claimant.getPersonTitleValue().decode('utf8') +\
+                    '|' + claimant.getPersonTitleValue(reverse=True).decode('utf8') +\
+                    '|' + claimant.getName1().decode('utf8') +\
+                    '|' + claimant.getName2().decode('utf8') +\
+                    '|' + claimant.getNumber().decode('utf8') +\
+                    ', ' + claimant.getStreet().decode('utf8') +\
+                    '|' + claimant.getZipcode().decode('utf8') +\
+                    ' ' + claimant.getCity().decode('utf8') +\
                     '|' + tool.formatDate(claimant.getClaimDate()).decode('utf8')
         toreturn = toreturn + '</CSV>'
         return toreturn

@@ -7,6 +7,9 @@ Changes
 1.11.1 (unreleased)
 -------------------
 
+- Fix codec in getMultipleClaimantsCSV (when use a claimant contat)
+  [fngaha]
+
 - Add generic concentratedRunoffSRisk and details optional fields
   [fngaha]
 
