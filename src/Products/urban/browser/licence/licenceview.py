@@ -289,6 +289,9 @@ class LicenceView(BrowserView):
     def getInquiryFields(self, exclude=[]):
         return self.getSchemataFields('urban_investigation_and_advices', exclude)
 
+    def get_state(self):
+        return api.content.get_state(self.context)
+
 
 class UrbanCertificateBaseView(LicenceView):
     """

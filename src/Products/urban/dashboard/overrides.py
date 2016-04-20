@@ -22,10 +22,16 @@ class RenderLicenceTermView(RenderTermView):
         # display the searchallmeetings as a selection list
         collection_id = self.collection.getId()
         for urban_type in URBAN_TYPES:
-            if collection_id in 'collection_%s' % urban_type.lower():
+            if urban_type.lower() in collection_id:
                 self.licence_type = urban_type
-                return ViewPageTemplateFile("templates/licence_term.pt")(self)
+                if self.is_schedule_context():
+                    return ViewPageTemplateFile("templates/schedule_licence_term.pt")(self)
+                else:
+                    return ViewPageTemplateFile("templates/licence_term.pt")(self)
         return self.index()
+
+    def is_schedule_context(self):
+        return 'schedule' in self.request.getURL()
 
     def get_licence_creation_URL(self, licence_type):
         context = aq_inner(self.context)

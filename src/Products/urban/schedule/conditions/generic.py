@@ -10,7 +10,7 @@ class DepositDoneCondition(Condition):
     Licence folderComplete event is created.
     """
 
-    def evaluate(self, task):
+    def evaluate(self):
         licence = self.task_container
 
         deposit_done = False
@@ -26,7 +26,7 @@ class FolderCompleteCondition(Condition):
     Licence folderComplete event is created.
     """
 
-    def evaluate(self, task):
+    def evaluate(self):
         licence = self.task_container
 
         is_complete = False
@@ -37,12 +37,22 @@ class FolderCompleteCondition(Condition):
         return is_complete
 
 
+class ProcedureChoiceDone(Condition):
+    """
+    Licence has some value selected in the field 'procedureChoice'.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        return licence.getProcedureChoice()
+
+
 class InquiryCondition(Condition):
     """
     Licence has an inquiry start date and end date defined.
     """
 
-    def evaluate(self, task):
+    def evaluate(self):
         licence = self.task_container
 
         start_date = licence.getInvestigationStart()
@@ -57,7 +67,7 @@ class InquiryIsDone(Condition):
     Licence inquiry event is closed.
     """
 
-    def evaluate(self, task):
+    def evaluate(self):
         licence = self.task_container
 
         inquiry_done = False
@@ -73,7 +83,7 @@ class UrbanAnalysisDone(Condition):
     Licence 'fiche technique urbanisme' event is closed.
     """
 
-    def evaluate(self, task):
+    def evaluate(self):
         licence = self.task_container
         catalog = api.portal.get_tool('portal_catalog')
 

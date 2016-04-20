@@ -14,6 +14,14 @@
         for="Products.urban.interfaces.IBuildLicence
              urban.schedule.content.task.IAutomatedTask"
         provides="urban.schedule.interfaces.IEndCondition"
+        factory=".generic.ProcedureChoiceDone"
+        name="schedule.condition.procedure_choice_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             urban.schedule.content.task.IAutomatedTask"
+        provides="urban.schedule.interfaces.IEndCondition"
         factory=".generic.FolderCompleteCondition"
         name="schedule.condition.folder_complete"
     />

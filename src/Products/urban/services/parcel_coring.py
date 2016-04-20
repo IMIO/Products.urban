@@ -9,7 +9,7 @@ class ParcelCoringService(WebService):
     """
     """
 
-    def __init__(self, url, coring_type, user='', password=''):
+    def __init__(self, url=None, coring_type=None, user='', password=''):
         super(ParcelCoringService, self).__init__(url, user, password)
         self.coring_type = coring_type
 

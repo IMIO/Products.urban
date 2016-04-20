@@ -29,6 +29,9 @@ msgstr ""
 msgid "schedule.condition.inquiry_done"
 msgstr ""
 
+msgid "schedule.condition.procedure_choice_done"
+msgstr ""
+
 msgid "urban.assign_folder_manager"
 msgstr ""
 

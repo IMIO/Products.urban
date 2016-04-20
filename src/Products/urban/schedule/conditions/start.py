@@ -8,5 +8,5 @@ class LicenceStartCondition(StartCondition):
     Test start condition.
     """
 
-    def evaluate(self, **kwargs):
+    def evaluate(self):
         return True

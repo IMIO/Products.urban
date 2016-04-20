@@ -5,7 +5,8 @@
 
     <!-- folder complete conditions-->
     <adapter
-        for="Products.urban.interfaces.IBuildLicence"
+        for="Products.urban.interfaces.IBuildLicence
+             urban.schedule.content.task_config.ITaskConfig"
         provides="urban.schedule.interfaces.ICreationCondition"
         factory=".generic.FolderCompleteCondition"
         name="schedule.condition.folder_complete"
@@ -13,7 +14,8 @@
 
     <!-- inquiry conditions-->
     <adapter
-        for="Products.urban.interfaces.IBuildLicence"
+        for="Products.urban.interfaces.IBuildLicence
+             urban.schedule.content.task_config.ITaskConfig"
         provides="urban.schedule.interfaces.ICreationCondition"
         factory=".generic.InquiryCondition"
         name="schedule.condition.has_inquiry"
