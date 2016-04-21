@@ -623,7 +623,9 @@ class UrbanBase(object):
 
     def _getVocabularyDisplayList(self, fieldname, obj):
         fieldname = type(fieldname) is str and fieldname or fieldname[0]
-        vocabulary = obj.getField(fieldname).vocabulary
+        vocabulary = getattr(obj.getField(fieldname), 'vocabulary', None)
+        if not vocabulary:
+            return None
         displaylist = None
         if hasattr(vocabulary, 'getDisplayListForTemplate'):
             displaylist = vocabulary.getDisplayListForTemplate(obj)
