@@ -7,6 +7,9 @@ Changes
 1.11.1 (unreleased)
 -------------------
 
+- Add generic  Natura2000 optional fields
+  [fngaha]
+
 - Fix codec in getMultipleClaimantsCSV (when use a claimant contat)
   [fngaha]
 

@@ -1195,5 +1195,11 @@ default_values = {
             {'id': "medium", 'title': u"Moyen, bassin versant afférent entre 9 et 18 Ha"},
             {'id': "high", 'title': u"Elevé, bassin versant afférent de plus de 18 Ha"},
         ],
+
+        'natura_2000': [
+            'UrbanVocabularyTerm',
+            {'id': "rumillies", 'title': u"Périmètre NATURA 2000 du Bas Follet (Rumillies)"},
+            {'id': "vaulx", 'title': u"Périmètre NATURA 2000 de la GRANDE MER (Vaulx)"},
+        ],
     },
 }

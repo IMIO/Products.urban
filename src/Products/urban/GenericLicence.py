@@ -84,7 +84,7 @@ optional_fields = [
     'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails',
     'PRevU', 'prevuDetails', 'PRenU', 'prenuDetails', 'airportNoiseZone', 'airportNoiseZoneDetails',
     'description', 'rgbsr', 'rgbsrDetails', 'karstConstraints', 'karstConstraintsDetails',
-    'concentratedRunoffSRisks', 'concentratedRunoffSRisksDetails'
+    'concentratedRunoffSRisks', 'concentratedRunoffSRisksDetails', ' Natura2000'
 ]
 ##/code-section module-header
 
@@ -365,6 +365,19 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_road',
         default_output_type='text/plain',
+    ),
+    LinesField(
+        name='natura2000',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='natura2000',
+            label_msgid='urban_label_natura2000',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('natura_2000', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     StringField(
         name='floodingLevel',
