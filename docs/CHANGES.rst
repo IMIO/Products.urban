@@ -7,6 +7,9 @@ Changes
 1.11.0 (unreleased)
 -------------------
 
+- Update askFD() method
+  [fngaha]
+
 - Fix codec in getMultipleClaimantsCSV (when use a claimant contat)
   [fngaha]
 
