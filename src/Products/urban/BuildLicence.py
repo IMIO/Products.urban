@@ -414,7 +414,7 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
     def askFD(self):
         """
         """
-        return self.getFolderCategory() in ['udc', 'uap', 'cu2', 'lap', 'lapm']
+        return 'FD' in self.getProcedureChoice()
 
     def getLastDeposit(self, use_catalog=True):
         return self._getLastEvent(interfaces.IDepositEvent, use_catalog)

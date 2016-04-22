@@ -7,7 +7,13 @@ Changes
 1.11.1 (unreleased)
 -------------------
 
-- Add generic  Natura2000 optional fields
+- Update askFD() method
+  [fngaha]
+
+- Add generic SEVESO optional fields
+  [fngaha]
+
+- Add generic Natura2000 optional fields
   [fngaha]
 
 - Fix codec in getMultipleClaimantsCSV (when use a claimant contat)
