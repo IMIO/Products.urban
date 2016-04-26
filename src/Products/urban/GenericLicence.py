@@ -862,13 +862,10 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
             return ['']
 
         urban_tool = api.portal.get_tool('portal_urban')
-        vocabulary_name = field.vocabulary.path
-        in_urban_config = field.vocabulary.inUrbanConfig
 
         default_value = urban_tool.getVocabularyDefaultValue(
-            vocabulary_name=vocabulary_name,
+            vocabulary=field.vocabulary,
             context=context,
-            in_urban_config=in_urban_config,
             multivalued=field.multiValued
         )
         return default_value
