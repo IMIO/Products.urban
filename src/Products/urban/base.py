@@ -525,6 +525,43 @@ class UrbanBase(object):
         """
         return self.listFolderContents({'portal_type': 'UrbanEventInquiry'})
 
+    security.declarePublic('getUrbanEventOpinionRequests')
+    def getUrbanEventOpinionRequests(self):
+        """
+          Return all UrbanEventOpinionRequests
+        """
+        return self.listFolderContents({'portal_type': ('UrbanEventOpinionRequest')})
+
+    security.declarePublic('getUrbanEventOpinionRequest')
+    def getUrbanEventOpinionRequest(self, title=''):
+        """
+          Return a specific title's UrbanEventOpinionRequest
+        """
+        i = 0
+        found = False
+        urbanEventOpinionRequest = None
+        urbanEventOpinionRequests = self.getUrbanEventOpinionRequests()
+        while i < len(urbanEventOpinionRequests) and not found:
+            if urbanEventOpinionRequests[i].Title() == title:
+                found = True
+                urbanEventOpinionRequest = urbanEventOpinionRequests[i]
+            i = i + 1
+        return urbanEventOpinionRequest
+
+    security.declarePublic('containsUrbanEventOpinionRequest')
+    def containsUrbanEventOpinionRequest(self, title=''):
+        """
+          find a specific title's UrbanEventOpinionRequest
+        """
+        i = 0
+        found = False
+        urbanEventOpinionRequests = self.getUrbanEventOpinionRequests()
+        while i < len(urbanEventOpinionRequests) and not found:
+            if urbanEventOpinionRequests[i].Title() == title:
+                found = True
+            i = i + 1
+        return found
+
     security.declarePublic('mayShowEditAction')
     def mayShowEditAction(self):
         """
