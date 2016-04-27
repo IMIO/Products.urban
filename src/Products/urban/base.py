@@ -13,6 +13,8 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = 'plaintext'
 
+from collective.delaycalculator import workday
+from datetime import date
 from zope.component.interface import interfaceToName
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import DisplayList
@@ -499,7 +501,7 @@ class UrbanBase(object):
         """
           Return every contained UrbanEvents (of any type)...
         """
-        return self.listFolderContents({'portal_type': ('UrbanEventInquiry', 'UrbanEvent')})
+        return self.listFolderContents({'portal_type': ('UrbanEventInquiry', 'UrbanEvent', 'UrbanEventOpinionRequest')})
 
     security.declarePublic('getInquiries')
     def getInquiries(self):
@@ -532,32 +534,32 @@ class UrbanBase(object):
         """
         return self.listFolderContents({'portal_type': ('UrbanEventOpinionRequest')})
 
-    security.declarePublic('getUrbanEventOpinionRequest')
-    def getUrbanEventOpinionRequest(self, title=''):
+    security.declarePublic('getUrbanEvent')
+    def getUrbanEvent(self, title=''):
         """
-          Return a specific title's UrbanEventOpinionRequest
+          Return a specific title's UrbanEvent
         """
         i = 0
         found = False
-        urbanEventOpinionRequest = None
-        urbanEventOpinionRequests = self.getUrbanEventOpinionRequests()
-        while i < len(urbanEventOpinionRequests) and not found:
-            if urbanEventOpinionRequests[i].Title() == title:
+        urbanEvent = None
+        urbanEvents = self.getUrbanEvents()
+        while i < len(urbanEvents) and not found:
+            if urbanEvents[i].Title() == title:
                 found = True
-                urbanEventOpinionRequest = urbanEventOpinionRequests[i]
+                urbanEvent = urbanEvents[i]
             i = i + 1
-        return urbanEventOpinionRequest
+        return urbanEvent
 
-    security.declarePublic('containsUrbanEventOpinionRequest')
-    def containsUrbanEventOpinionRequest(self, title=''):
+    security.declarePublic('containsUrbanEvent')
+    def containsUrbanEvent(self, title=''):
         """
-          find a specific title's UrbanEventOpinionRequest
+          find a specific title's UrbanEvent
         """
         i = 0
         found = False
-        urbanEventOpinionRequests = self.getUrbanEventOpinionRequests()
-        while i < len(urbanEventOpinionRequests) and not found:
-            if urbanEventOpinionRequests[i].Title() == title:
+        urbanEvents = self.getUrbanEvents()
+        while i < len(urbanEvents) and not found:
+            if urbanEvents[i].Title() == title:
                 found = True
             i = i + 1
         return found
@@ -691,3 +693,8 @@ class UrbanBase(object):
         urban_tool = api.portal.get_tool('portal_urban')
         vocabulary = urban_tool.listVocabulary(voc_name, context=self, inUrbanConfig=inUrbanConfig, with_numbering=False)
         return vocabulary
+
+    security.declarePublic('workday')
+    def workday(self, start_date, days=0, holidays=[], weekends=[], unavailable_weekdays=[]):
+        return workday(date(start_date.year(), start_date.month(), start_date.day()), days)
+
