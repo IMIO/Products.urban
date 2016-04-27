@@ -7,6 +7,12 @@ Changes
 1.11.0 (unreleased)
 -------------------
 
+- Add methods
+  getUrbanEventOpinionRequests
+  getUrbanEventOpinionRequest
+  containsUrbanEventOpinionRequest
+  [fngaha]
+
 - Update askFD() method
   [fngaha]
 
