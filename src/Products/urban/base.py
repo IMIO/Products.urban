@@ -698,5 +698,6 @@ class UrbanBase(object):
 
     security.declarePublic('workday')
     def workday(self, start_date, days=0, holidays=[], weekends=[], unavailable_weekdays=[]):
-        return workday(date(start_date.year(), start_date.month(), start_date.day()), days)
+        return workday(date(start_date.year(), start_date.month(), start_date.day()), days, holidays, weekends,
+                unavailable_weekdays)
 

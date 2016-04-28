@@ -6,6 +6,8 @@ Changes
 
 1.11.0 (unreleased)
 -------------------
+- Fix local workday's method"
+  [fngaha]
 
 - Add a workday method from collective.delaycalculator
   refactor getUrbanEvents by adding UrbanEventOpinionRequest
