@@ -175,8 +175,8 @@ schema = Schema((
     ),
     TextField(
         name='missingPartsDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label='Missingpartsdetails',
             label_msgid='urban_label_missingPartsDetails',
             i18n_domain='urban',
@@ -215,8 +215,8 @@ schema = Schema((
     ),
     TextField(
         name='roadMissingPartsDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label='Roadmissingpartsdetails',
             label_msgid='urban_label_roadMissingPartsDetails',
             i18n_domain='urban',
@@ -444,8 +444,8 @@ schema = Schema((
     ),
     TextField(
         name='locationMissingPartsDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label='Locationmissingpartsdetails',
             label_msgid='urban_label_locationMissingPartsDetails',
             i18n_domain='urban',
