@@ -6,6 +6,9 @@ Changes
 
 1.11.0 (unreleased)
 -------------------
+- use RichWidget for 'missingPartsDetails', 'roadMissingPartsDetails', 'locationMissingPartsDetails'
+  [fngaha]
+
 - Fix local workday's method"
   [fngaha]
 
@@ -53,7 +56,7 @@ Changes
 
 - Add environment licence class one.
 
-- Bug fix: config folder are not allowed anymore to be selected as values 
+- Bug fix: config folder are not allowed anymore to be selected as values
   for the field 'additionalLegalConditions'.
 
 
@@ -100,7 +103,7 @@ Changes
 - Add a richer context for python expression in urbanEvent default text.
 
 - Factorise all licence views through a new generic, extendable and customisable view (#6942).
-  The fields display order is now given by the licence class schemata and thus this order 
+  The fields display order is now given by the licence class schemata and thus this order
   is always consistent between the edit form and the view form.
 
 
