@@ -9,7 +9,7 @@
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".generic.FolderCompleteCondition"
-        name="schedule.condition.folder_complete"
+        name="urban.schedule.condition.folder_complete"
     />
 
     <!-- inquiry conditions-->
@@ -17,8 +17,8 @@
         for="Products.urban.interfaces.IBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".generic.InquiryCondition"
-        name="schedule.condition.has_inquiry"
+        factory=".creation.InquiryCondition"
+        name="urban.schedule.condition.has_inquiry"
     />
 
 </configure>

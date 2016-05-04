@@ -14,22 +14,25 @@ msgstr ""
 "Preferred-Encodings: utf-8\n"
 "Domain: imio.schedule\n"
 
-msgid "schedule.condition.analysis_done"
+msgid "urban.schedule.condition.acknowledgment_done"
 msgstr ""
 
-msgid "schedule.condition.deposit_done"
+msgid "urban.schedule.condition.analysis_done"
 msgstr ""
 
-msgid "schedule.condition.folder_complete"
+msgid "urban.schedule.condition.deposit_done"
 msgstr ""
 
-msgid "schedule.condition.has_inquiry"
+msgid "urban.schedule.condition.folder_complete"
 msgstr ""
 
-msgid "schedule.condition.inquiry_done"
+msgid "urban.schedule.condition.has_inquiry"
 msgstr ""
 
-msgid "schedule.condition.procedure_choice_done"
+msgid "urban.schedule.condition.inquiry_done"
+msgstr ""
+
+msgid "urban.schedule.condition.procedure_choice_done"
 msgstr ""
 
 msgid "urban.assign_folder_manager"

@@ -14,26 +14,29 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-msgid "schedule.condition.analysis_done"
-msgstr "Retour service urbanisme fait"
-
-msgid "schedule.condition.deposit_done"
-msgstr "Créer l'événement de dépôt du dossier et le clôturer"
-
-msgid "schedule.condition.folder_complete"
-msgstr "Accusé de réception fait."
-
-msgid "schedule.condition.has_inquiry"
-msgstr "Une enquête publique est définie"
-
-msgid "schedule.condition.inquiry_done"
-msgstr "Enquête terminée"
-
-msgid "schedule.condition.procedure_choice_done"
-msgstr "Sélectionner une ou plusieurs valeurs dans le champ 'Choix de la procédure'"
-
 msgid "urban.assign_folder_manager"
 msgstr "Gestionnaire du dossier"
+
+msgid "urban.schedule.condition.acknowledgment_done"
+msgstr "Créer l'événement d'accusé de réception et le clôturer"
+
+msgid "urban.schedule.condition.analysis_done"
+msgstr "Retour service urbanisme fait"
+
+msgid "urban.schedule.condition.deposit_done"
+msgstr "Créer l'événement de dépôt du dossier et le clôturer"
+
+msgid "urban.schedule.condition.folder_complete"
+msgstr "Accusé de réception fait."
+
+msgid "urban.schedule.condition.has_inquiry"
+msgstr "Une enquête publique est définie"
+
+msgid "urban.schedule.condition.inquiry_done"
+msgstr "Enquête terminée"
+
+msgid "urban.schedule.condition.procedure_choice_done"
+msgstr "Sélectionner une ou plusieurs valeurs dans le champ 'Choix de la procédure'"
 
 msgid "urban.start_date.acknowledgement_date"
 msgstr "Date d'accusé de réception du dossier"

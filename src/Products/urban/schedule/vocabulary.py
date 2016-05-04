@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from collective.eeafaceted.collectionwidget.vocabulary import CollectionVocabulary
-
-from plone import api
-
 from Products.urban.interfaces import IArticle127
 from Products.urban.interfaces import IBuildLicence
 from Products.urban.interfaces import IDeclaration
@@ -56,28 +52,3 @@ class UrbanScheduledTypeVocabulary(ScheduledContentTypeVocabulary):
 
     def get_message_factory(self):
         return UrbanMessage
-
-
-class ScheduleCollectionVocabulary(CollectionVocabulary):
-    """
-    Return vocabulary of base searchs for schedule faceted view.
-    """
-
-    def _brains(self, context):
-        """
-        Return all the DashboardCollections in the 'schedule' folder.
-        """
-        portal = api.portal.get()
-        schedule_folder = portal.urban.schedule
-        catalog = api.portal.get_tool('portal_catalog')
-        brains = catalog(
-            path={
-                'query': '/'.join(schedule_folder.getPhysicalPath()),
-                'depth': 2
-            },
-            object_provides='plone.app.collection.interfaces.ICollection',
-            sort_on='getObjPositionInParent'
-        )
-        return brains
-
-ScheduleCollectionVocabularyFactory = ScheduleCollectionVocabulary()

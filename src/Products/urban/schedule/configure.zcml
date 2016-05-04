@@ -6,6 +6,5 @@
 
     <include file="assign_principal.zcml" />
     <include file="start_date.zcml" />
-    <include file="vocabulary.zcml" />
 
 </configure>

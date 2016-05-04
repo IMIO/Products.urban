@@ -7,7 +7,7 @@
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.DepositDoneCondition"
-        name="schedule.condition.deposit_done"
+        name="urban.schedule.condition.deposit_done"
     />
 
     <adapter
@@ -15,7 +15,7 @@
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.ProcedureChoiceDone"
-        name="schedule.condition.procedure_choice_done"
+        name="urban.schedule.condition.procedure_choice_done"
     />
 
     <adapter
@@ -23,7 +23,16 @@
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.FolderCompleteCondition"
-        name="schedule.condition.folder_complete"
+        name="urban.schedule.condition.folder_complete"
+    />
+
+    <!-- acknowlegdment conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.AcknowledgmentDoneCondition"
+        name="urban.schedule.condition.acknowledgment_done"
     />
 
     <!-- inquiry conditions-->
@@ -31,8 +40,8 @@
         for="Products.urban.interfaces.IBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.InquiryIsDone"
-        name="schedule.condition.inquiry_done"
+        factory=".generic.InquiryDoneCondition"
+        name="urban.schedule.condition.inquiry_done"
     />
 
     <!-- analysis conditions-->
@@ -41,7 +50,7 @@
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.UrbanAnalysisDone"
-        name="schedule.condition.analysis_done"
+        name="urban.schedule.condition.analysis_done"
     />
 
 </configure>

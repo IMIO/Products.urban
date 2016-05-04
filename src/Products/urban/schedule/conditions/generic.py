@@ -47,37 +47,6 @@ class ProcedureChoiceDone(Condition):
         return licence.getProcedureChoice()
 
 
-class InquiryCondition(Condition):
-    """
-    Licence has an inquiry start date and end date defined.
-    """
-
-    def evaluate(self):
-        licence = self.task_container
-
-        start_date = licence.getInvestigationStart()
-        end_date = licence.getInvestigationEnd()
-        has_inquiry = start_date and end_date
-
-        return has_inquiry
-
-
-class InquiryIsDone(Condition):
-    """
-    Licence inquiry event is closed.
-    """
-
-    def evaluate(self):
-        licence = self.task_container
-
-        inquiry_done = False
-        inquiry_event = licence.getLastInquiry()
-        if inquiry_event:
-            inquiry_done = api.content.get_state(inquiry_event) == 'closed'
-
-        return inquiry_done
-
-
 class UrbanAnalysisDone(Condition):
     """
     Licence 'fiche technique urbanisme' event is closed.
@@ -97,3 +66,35 @@ class UrbanAnalysisDone(Condition):
             analysis_done = api.content.get_state(analysis_event) == 'closed'
 
         return analysis_done
+
+
+class AcknowledgmentDoneCondition(Condition):
+    """
+    Licence folderComplete event is created.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        acknowledgment_done = False
+        acknowledgment_event = licence.getLastAcknowledgment()
+        if acknowledgment_event:
+            acknowledgment_done = api.content.get_state(acknowledgment_event) == 'closed'
+
+        return acknowledgment_done
+
+
+class InquiryDoneCondition(Condition):
+    """
+    Licence inquiry event is closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        inquiry_done = False
+        inquiry_event = licence.getLastInquiry()
+        if inquiry_event:
+            inquiry_done = api.content.get_state(inquiry_event) == 'closed'
+
+        return inquiry_done
