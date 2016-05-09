@@ -6,6 +6,9 @@ Changes
 
 1.11.0 (unreleased)
 -------------------
+- remove the character 'à' in the address format
+  [fngaha]
+
 - use RichWidget for 'missingPartsDetails', 'roadMissingPartsDetails', 'locationMissingPartsDetails'
   [fngaha]
 
