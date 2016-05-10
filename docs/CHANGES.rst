@@ -6,6 +6,9 @@ Changes
 
 1.11.1 (unreleased)
 -------------------
+- Add getFirstDeposit and _getFirstEvent method
+  [fngaha]
+
 - remove the character 'à' in the address format
   [fngaha]
 
