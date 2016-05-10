@@ -416,6 +416,36 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
         """
         return 'FD' in self.getProcedureChoice()
 
+    def getFirstDeposit(self, use_catalog=True):
+        return self._getFirstEvent(interfaces.IDepositEvent, use_catalog)
+
+    def getLastDeposit(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
+
+    def getLastMissingPart(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IMissingPartEvent, use_catalog)
+
+    def getLastMissingPartDeposit(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IMissingPartDepositEvent, use_catalog)
+
+    def getLastWalloonRegionPrimo(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IWalloonRegionPrimoEvent, use_catalog)
+
+    def getLastWalloonRegionOpinionRequest(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IWalloonRegionOpinionRequestEvent, use_catalog)
+
+    def getLastAcknowledgment(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IAcknowledgmentEvent, use_catalog)
+
+    def getLastCommunalCouncil(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ICommunalCouncilEvent, use_catalog)
+
+    def getLastCollegeReport(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ICollegeReportEvent, use_catalog)
+
+    def getLastTheLicence(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ITheLicenceEvent, use_catalog)
+
     def getLastDeposit(self, use_catalog=True):
         return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
 

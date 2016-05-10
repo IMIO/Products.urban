@@ -496,6 +496,11 @@ class UrbanBase(object):
         if events:
             return events[-1]
 
+    def _getFirstEvent(self, eventInterface=None, use_catalog=True):
+        events = self._getAllEvents(eventInterface, use_catalog)
+        if events:
+            return events[0]
+
     security.declarePublic('getUrbanEvents')
     def getUrbanEvents(self):
         """
