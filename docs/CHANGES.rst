@@ -9,7 +9,7 @@ Changes
 - Add getFirstDeposit and _getFirstEvent method
   [fngaha]
 
-- remove the character 'à' in the address format
+- remove the character 'à' in the address signaletic
   [fngaha]
 
 - use RichWidget for 'missingPartsDetails', 'roadMissingPartsDetails', 'locationMissingPartsDetails'
