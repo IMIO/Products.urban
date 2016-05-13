@@ -326,3 +326,7 @@ def getLicenceFolder(licencetype):
     folder_id = getLicenceFolderId(licencetype)
     licence_folder = getattr(urban, folder_id)
     return licence_folder
+
+def removeItems(liste, items):
+    [liste.remove(i) for i in items]
+    return liste
