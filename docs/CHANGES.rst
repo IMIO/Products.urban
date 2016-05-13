@@ -6,6 +6,9 @@ Changes
 
 1.11.1 (unreleased)
 -------------------
+- Add removeItems utils and listSolicitOpinionsTo method
+  [fngaha]
+
 - Add getFirstDeposit and _getFirstEvent method
   [fngaha]
 

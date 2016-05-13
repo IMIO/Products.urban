@@ -20,6 +20,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import DisplayList
 
 from Products.urban.utils import getCurrentFolderManager as currentFolderManager
+from Products.urban.utils import removeItems
 from plone import api
 from zope.i18n import translate
 from zope.interface import implements
@@ -704,3 +705,6 @@ class UrbanBase(object):
         return workday(date(start_date.year(), start_date.month(), start_date.day()), days, holidays, weekends,
                 unavailable_weekdays)
 
+    security.declarePublic('listSolicitOpinionsTo')
+    def listSolicitOpinionsTo(self, unless=[]):
+        return removeItems(list(self.getValuesForTemplate('solicitOpinionsTo')), unless)
