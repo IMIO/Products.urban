@@ -6,6 +6,9 @@ Changes
 
 1.11.0 (unreleased)
 -------------------
+- Add getFirstAdministrativeSfolderManager method
+  [fngaha]
+
 - Add removeItems utils and listSolicitOpinionsTo method
   [fngaha]
 
