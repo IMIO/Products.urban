@@ -21,30 +21,46 @@ class DepositDoneCondition(Condition):
         return deposit_done
 
 
-class FolderCompleteCondition(Condition):
+class ComplementsAsked(Condition):
     """
-    Licence folderComplete event is created.
+    Licence MissingPart event is created and closed.
     """
 
     def evaluate(self):
         licence = self.task_container
 
-        is_complete = False
-        folder_complete_event = licence.getLastAcknowledgment()
-        if folder_complete_event:
-            is_complete = api.content.get_state(folder_complete_event) == 'closed'
+        complements_asked = False
+        missing_part_event = licence.getLastMissingPart()
+        if missing_part_event:
+            complements_asked = api.content.get_state(missing_part_event) == 'closed'
 
-        return is_complete
+        return complements_asked
+
+
+class ComplementsReceived(Condition):
+    """
+    Licence MissingPartDeposit event is created and closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        complements_received = False
+        deposit_part_event = licence.getLastMissingPartDeposit()
+        if deposit_part_event:
+            complements_received = api.content.get_state(deposit_part_event) == 'closed'
+
+        return complements_received
 
 
 class ProcedureChoiceDone(Condition):
     """
-    Licence has some value selected in the field 'procedureChoice'.
+    Licence has some value selected in the field 'folderCategory'.
     """
 
     def evaluate(self):
         licence = self.task_container
-        return licence.getProcedureChoice()
+        return licence.getFolderCategory()
 
 
 class UrbanAnalysisDone(Condition):
@@ -84,6 +100,28 @@ class AcknowledgmentDoneCondition(Condition):
         return acknowledgment_done
 
 
+class NoInquiryCondition(Condition):
+    """
+    Licence  has no inquiry selected on procedureChoice field.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        no_inquiry = 'inquiry' not in licence.getProcedureChoice()
+        return no_inquiry
+
+
+class InquiryEventCreatedCondition(Condition):
+    """
+    Licence inquiry event is created.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        created = licence.getLastInquiry() and True or False
+        return created
+
+
 class InquiryDoneCondition(Condition):
     """
     Licence inquiry event is closed.
@@ -98,3 +136,13 @@ class InquiryDoneCondition(Condition):
             inquiry_done = api.content.get_state(inquiry_event) == 'closed'
 
         return inquiry_done
+
+
+class HasOpinionRequests(Condition):
+    """
+    There are some values selected in the field sollicitOpinionsTo.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        return licence.getSolicitOpinionsTo()

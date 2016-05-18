@@ -42,6 +42,7 @@ class UrbanConfigView(BrowserView):
 
     def getScheduleConfigs(self):
         context = aq_inner(self.context)
+        return []
         survey_schedule = getattr(context, 'survey_schedule')
         opinions_schedule = getattr(context, 'opinions_schedule')
         return [survey_schedule, opinions_schedule]

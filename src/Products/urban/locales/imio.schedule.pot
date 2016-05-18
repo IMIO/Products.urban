@@ -20,6 +20,12 @@ msgstr ""
 msgid "urban.schedule.condition.analysis_done"
 msgstr ""
 
+msgid "urban.schedule.condition.complements_asked"
+msgstr ""
+
+msgid "urban.schedule.condition.complements_received"
+msgstr ""
+
 msgid "urban.schedule.condition.deposit_done"
 msgstr ""
 

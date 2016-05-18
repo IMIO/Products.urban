@@ -23,8 +23,14 @@ msgstr "Créer l'événement d'accusé de réception et le clôturer"
 msgid "urban.schedule.condition.analysis_done"
 msgstr "Retour service urbanisme fait"
 
+msgid "urban.schedule.condition.complements_asked"
+msgstr "Créer l'événement 'dossier incomplet' et le clôturer"
+
+msgid "urban.schedule.condition.complements_received"
+msgstr "Créer l'événement 'récépissé d'un complément' et le clôturer"
+
 msgid "urban.schedule.condition.deposit_done"
-msgstr "Créer l'événement de dépôt du dossier et le clôturer"
+msgstr "Créer l'événement de dépôt et le clôturer"
 
 msgid "urban.schedule.condition.folder_complete"
 msgstr "Accusé de réception fait."
@@ -36,7 +42,7 @@ msgid "urban.schedule.condition.inquiry_done"
 msgstr "Enquête terminée"
 
 msgid "urban.schedule.condition.procedure_choice_done"
-msgstr "Sélectionner une ou plusieurs valeurs dans le champ 'Choix de la procédure'"
+msgstr "Sélectionner une valeur dans le champ 'Catégorie du dossier RW'"
 
 msgid "urban.start_date.acknowledgement_date"
 msgstr "Date d'accusé de réception du dossier"

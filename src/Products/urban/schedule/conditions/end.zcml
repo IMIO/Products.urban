@@ -18,12 +18,21 @@
         name="urban.schedule.condition.procedure_choice_done"
     />
 
+    <!-- folder complete conditions-->
     <adapter
         for="Products.urban.interfaces.IBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.FolderCompleteCondition"
-        name="urban.schedule.condition.folder_complete"
+        factory=".generic.ComplementsAsked"
+        name="urban.schedule.condition.complements_asked"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.ComplementsReceived"
+        name="urban.schedule.condition.complements_received"
     />
 
     <!-- acknowlegdment conditions-->
@@ -36,6 +45,14 @@
     />
 
     <!-- inquiry conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.InquiryEventCreatedCondition"
+        name="urban.schedule.condition.inquiry_event_created"
+    />
+
     <adapter
         for="Products.urban.interfaces.IBuildLicence
              imio.schedule.content.task.IAutomatedTask"
