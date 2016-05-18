@@ -708,3 +708,15 @@ class UrbanBase(object):
     security.declarePublic('listSolicitOpinionsTo')
     def listSolicitOpinionsTo(self, unless=[]):
         return removeItems(list(self.getValuesForTemplate('solicitOpinionsTo')), unless)
+
+    security.declarePublic('getFirstAdministrativeSfolderManager')
+    def getFirstAdministrativeSfolderManager(self, administrativeVocabularyId='agent-administratif'):
+        FASFM = None
+        found = False
+        i = 0
+        while not found and i < len(self.getFoldermanagers()):
+            if self.getFoldermanagers()[i].getGrade() == administrativeVocabularyId:
+                found = True
+                FASFM = self.getFoldermanagers()[i]
+            i = i + 1
+        return FASFM
