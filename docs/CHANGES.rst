@@ -4,8 +4,11 @@ Changes
 =======
 
 
-1.11.1 (unreleased)
+1.11.0 (2015-10-01)
 -------------------
+- Fix concentratedRunoffSRisk and details optional fields
+  [fngaha]
+
 - Add generic concentratedRunoffSRisk and details optional fields
   [fngaha]
 
@@ -15,8 +18,6 @@ Changes
 - Add removeItems utils and listSolicitOpinionsTo method
   [fngaha]
 
-1.11.0 (2015-10-01)
--------------------
 - Add getFirstDeposit and _getFirstEvent method
   [fngaha]
 
