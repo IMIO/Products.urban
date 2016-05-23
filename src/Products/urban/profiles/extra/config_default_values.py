@@ -1188,5 +1188,12 @@ default_values = {
             {'id': "moderate", 'title': u"Modéré"},
             {'id': "high", 'title': u"Fort"},
         ],
+
+        'concentrated_runoff_s_risk': [
+            'UrbanVocabularyTerm',
+            {'id': "low", 'title': u"Faible, bassin versant afférent entre 1 et 9 Ha"},
+            {'id': "medium", 'title': u"Moyen, bassin versant afférent entre 9 et 18 Ha"},
+            {'id': "high", 'title': u"Elevé, bassin versant afférent de plus de 18 Ha"},
+        ],
     },
 }

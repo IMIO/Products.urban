@@ -1226,7 +1226,10 @@ msgstr ""
 msgid "persons_titles_folder_title"
 msgstr ""
 
-msgid "karst_constraints"
+msgid "karst_constraints_folder_title"
+msgstr ""
+
+msgid "concentrated_runoff_s_risk_folder_title"
 msgstr ""
 
 #. Default: "Madam"
@@ -3464,6 +3467,16 @@ msgstr ""
 #. Default: "Karstconstraintsdetails"
 #: GenericLicence.py
 msgid "urban_label_karstConstraintsDetails"
+msgstr ""
+
+#. Default: "concentratedrunoffsrisk"
+#: GenericLicence.py
+msgid "urban_label_concentratedRunoffSRisk"
+msgstr ""
+
+#. Default: "concentratedrunoffsriskdetails"
+#: GenericLicence.py
+msgid "urban_label_concentratedRunoffSRiskDetails"
 msgstr ""
 
 #. Default: "No"
