@@ -84,7 +84,7 @@ optional_fields = [
     'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails',
     'PRevU', 'prevuDetails', 'PRenU', 'prenuDetails', 'airportNoiseZone', 'airportNoiseZoneDetails',
     'description', 'rgbsr', 'rgbsrDetails', 'karstConstraints', 'karstConstraintsDetails',
-    'concentratedRunoffSRisks', 'concentratedRunoffSRisksDetails', ' Natura2000'
+    'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', ' Natura2000'
 ]
 ##/code-section module-header
 

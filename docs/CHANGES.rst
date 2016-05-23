@@ -6,6 +6,9 @@ Changes
 
 1.11.1 (unreleased)
 -------------------
+- Fix concentratedRunoffSRisk and details optional fields
+  [fngaha]
+
 - Add getFirstAdministrativeSfolderManager method
   [fngaha]
 
