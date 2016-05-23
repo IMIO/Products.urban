@@ -3479,6 +3479,11 @@ msgstr ""
 msgid "urban_label_concentratedRunoffSRiskDetails"
 msgstr ""
 
+#. Default: "sevesoSite"
+#: GenericLicence.py
+msgid "urban_label_sevesoSite"
+msgstr ""
+
 #. Default: "No"
 #: GenericLicence.py
 msgid "karst_constraints_no"

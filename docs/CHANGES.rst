@@ -6,6 +6,9 @@ Changes
 
 1.11.0 (2015-10-01)
 -------------------
+- Add generic SEVESO optional fields
+  [fngaha]
+
 - Fix concentratedRunoffSRisk and details optional fields
   [fngaha]
 
