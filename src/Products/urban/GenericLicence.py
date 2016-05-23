@@ -366,7 +366,6 @@ schema = Schema((
         schemata='urban_road',
         default_output_type='text/plain',
     ),
-<<<<<<< .courant
     LinesField(
         name='sevesoSite',
         widget=MultiSelectionWidget(
@@ -380,7 +379,6 @@ schema = Schema((
         vocabulary=UrbanVocabulary('seveso_site', inUrbanConfig=False),
         default_method='getDefaultValue',
     ),
-=======
     LinesField(
         name='natura2000',
         widget=MultiSelectionWidget(
@@ -394,7 +392,6 @@ schema = Schema((
         vocabulary=UrbanVocabulary('natura_2000', inUrbanConfig=False),
         default_method='getDefaultValue',
     ),
->>>>>>> .fusion-droit.r22668
     StringField(
         name='floodingLevel',
         widget=SelectionWidget(
