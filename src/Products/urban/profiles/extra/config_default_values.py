@@ -1206,5 +1206,10 @@ default_values = {
             {'id': "transmat", 'title': u"TRANSMAT DEPOT ANTOING (seuil bas)"},
         ],
 
+        'natura_2000': [
+            'UrbanVocabularyTerm',
+            {'id': "rumillies", 'title': u"Périmètre NATURA 2000 du Bas Follet (Rumillies)"},
+            {'id': "vaulx", 'title': u"Périmètre NATURA 2000 de la GRANDE MER (Vaulx)"},
+        ],
     },
 }

@@ -2416,6 +2416,11 @@ msgstr "Détails concerant le risque de ruissellement concentré"
 msgid "urban_label_sevesoSite"
 msgstr "Sites Seveso"
 
+#. Default: "natura2000"
+#: GenericLicence.py
+msgid "urban_label_natura2000"
+msgstr "Périmètre d'un site NATURA 2000 (ou proximité)"
+
 #. Default: "Keydates"
 #: UrbanEventType.py
 msgid "urban_label_keyDates"

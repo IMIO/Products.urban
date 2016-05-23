@@ -6,10 +6,15 @@ Changes
 
 1.11.0 (2015-10-01)
 -------------------
+- Add generic  Natura2000 optional fields
+  [fngaha]
+
 - Add generic SEVESO optional fields
   [fngaha]
 
 - Fix concentratedRunoffSRisk and details optional fields
+
+- Fix codec in getMultipleClaimantsCSV (when use a claimant contat)
   [fngaha]
 
 - Add generic concentratedRunoffSRisk and details optional fields

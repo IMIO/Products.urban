@@ -3484,6 +3484,11 @@ msgstr ""
 msgid "urban_label_sevesoSite"
 msgstr ""
 
+#. Default: "natura2000"
+#: GenericLicence.py
+msgid "urban_label_natura2000"
+msgstr ""
+
 #. Default: "No"
 #: GenericLicence.py
 msgid "karst_constraints_no"
