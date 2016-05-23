@@ -366,18 +366,18 @@ schema = Schema((
         schemata='urban_road',
         default_output_type='text/plain',
     ),
-    TextField(
+    LinesField(
         name='sevesoSite',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        widget=MultiSelectionWidget(
+            format='checkbox',
             label='sevesosite',
             label_msgid='urban_label_sevesoSite',
             i18n_domain='urban',
         ),
-        default_content_type='text/plain',
-        default_method='getDefaultText',
         schemata='urban_road',
-        default_output_type='text/plain',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('seveso_site', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     StringField(
         name='floodingLevel',
