@@ -30,6 +30,7 @@ def migrateToUrban170(context):
     migrateProprietaryMetaType(context)
     # update EnvClassOne events
     migrateEnvClassOneEventTypes(context)
+    """
     # migrate decisions vocabulary
     migrateDecisionsVocabulary(context)
 
@@ -37,6 +38,7 @@ def migrateToUrban170(context):
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
     logger.info("reinstalling urban done!")
+    """
     logger.info("migration done!")
 
 
@@ -150,8 +152,10 @@ def migrateEnvClassOneEventTypes(context):
     for obj in eventtypes_folder.objectValues():
         api.content.delete(obj)
 
+    """
     portal_setup = api.portal.get_tool('portal_setup')
     portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-updateAllUrbanTemplates')
+    """
 
     logger.info("migration step done!")
 
