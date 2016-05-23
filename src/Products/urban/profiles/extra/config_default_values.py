@@ -1196,6 +1196,16 @@ default_values = {
             {'id': "high", 'title': u"Elevé, bassin versant afférent de plus de 18 Ha"},
         ],
 
+        'seveso_site': [
+            'UrbanVocabularyTerm',
+            {'id': "exxonmobil", 'title': u"EXXONMOBIL PETROLEUM & CHEMICAL TOURNAI (Seuil bas)"},
+            {'id': "nyco", 'title': u"NYCO - STPC TOURNAI (Seuil bas)"},
+            {'id': "orica", 'title': u"ORICA - TITA NOBEL BELGIQUE S.A. TOURNAI (Seuil haut)"},
+            {'id': "univar", 'title': u"UNIVAR BELGIUM - QUARON TOURNAI (Seuil Haut)"},
+            {'id': "rynders", 'title': u"RYNDERS PETROLEUM BELGIUM ANTOING (seuil bas)"},
+            {'id': "transmat", 'title': u"TRANSMAT DEPOT ANTOING (seuil bas)"},
+        ],
+
         'natura_2000': [
             'UrbanVocabularyTerm',
             {'id': "rumillies", 'title': u"Périmètre NATURA 2000 du Bas Follet (Rumillies)"},

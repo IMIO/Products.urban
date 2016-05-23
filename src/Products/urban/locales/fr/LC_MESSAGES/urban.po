@@ -2397,6 +2397,11 @@ msgstr "Risque de ruissellement concentré"
 msgid "urban_label_concentratedRunoffSRiskDetails"
 msgstr "Détails concerant le risque de ruissellement concentré"
 
+#. Default: "sevesoSite"
+#: GenericLicence.py
+msgid "urban_label_sevesoSite"
+msgstr "Sites Seveso"
+
 #. Default: "natura2000"
 #: GenericLicence.py
 msgid "urban_label_natura2000"

@@ -6,6 +6,9 @@ Changes
 
 1.11.1 (unreleased)
 -------------------
+- Add generic SEVESO optional fields
+  [fngaha]
+
 - Fix concentratedRunoffSRisk and details optional fields
   [fngaha]
 
@@ -40,9 +43,6 @@ Changes
   [fngaha]
 
 - Update askFD() method
-  [fngaha]
-
-- Add generic SEVESO optional fields
   [fngaha]
 
 - Add generic Natura2000 optional fields

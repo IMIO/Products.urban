@@ -84,7 +84,7 @@ optional_fields = [
     'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails',
     'PRevU', 'prevuDetails', 'PRenU', 'prenuDetails', 'airportNoiseZone', 'airportNoiseZoneDetails',
     'description', 'rgbsr', 'rgbsrDetails', 'karstConstraints', 'karstConstraintsDetails',
-    'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', ' Natura2000'
+    'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', 'sevesoSite', 'natura2000'
 ]
 ##/code-section module-header
 
@@ -359,6 +359,19 @@ schema = Schema((
         widget=TextAreaWidget(
             label='concentratedrunoffsriskdetails',
             label_msgid='urban_label_concentratedRunoffSRiskDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_road',
+        default_output_type='text/plain',
+    ),
+    TextField(
+        name='sevesoSite',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='sevesosite',
+            label_msgid='urban_label_sevesoSite',
             i18n_domain='urban',
         ),
         default_content_type='text/plain',
