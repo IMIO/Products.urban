@@ -111,6 +111,19 @@ class NoInquiryCondition(Condition):
         return no_inquiry
 
 
+class InquiryDatesDefinedCondition(Condition):
+    """
+    Licence inquiry start and end dates are defined.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        start_date = licence.getInvestigationStart()
+        end_date = licence.getInvestigationEnd()
+        dates_defined = start_date and end_date
+        return dates_defined
+
+
 class InquiryEventCreatedCondition(Condition):
     """
     Licence inquiry event is created.
@@ -146,3 +159,35 @@ class HasOpinionRequests(Condition):
     def evaluate(self):
         licence = self.task_container
         return licence.getSolicitOpinionsTo()
+
+
+class OpinionRequestsEventsCreated(Condition):
+    """
+    Each opinion request event is created.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        for opinion in licence.getSolicitOpinionsTo():
+            if not licence.getOpinionRequests(organisation=opinion):
+                return False
+        return True
+
+
+class OpinionRequestsDone(Condition):
+    """
+    Each opinion request event has received an opinion.
+    <=> is on the state 'opinion_given'
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        or_events = licence.getOpinionRequests()
+
+        if len(or_events) != len(licence.getSolicitOpinionsTo()):
+            return False
+
+        for opinion in or_events:
+            if api.content.get_state(opinion) != 'opinion_given':
+                return False
+        return True

@@ -41,6 +41,9 @@ msgstr "Une enquête publique est définie"
 msgid "urban.schedule.condition.inquiry_done"
 msgstr "Enquête terminée"
 
+msgid "urban.schedule.condition.inquiry_event_created"
+msgstr "Créer l'événement d'enquête publique"
+
 msgid "urban.schedule.condition.procedure_choice_done"
 msgstr "Sélectionner une valeur dans le champ 'Catégorie du dossier RW'"
 

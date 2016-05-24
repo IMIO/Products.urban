@@ -5,6 +5,7 @@
     i18n_domain="urban">
 
   <include package=".actionspanel" />
+  <include package=".cron" />
   <include package=".licence" />
   <include package=".table" />
   <include package=".schedule" />

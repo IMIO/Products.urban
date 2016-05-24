@@ -2,6 +2,24 @@
 
 from imio.schedule.content.condition import CreationCondition
 
+from plone import api
+
+
+class AcknowledgmentDoneCondition(CreationCondition):
+    """
+    Licence folderComplete event is created.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        acknowledgment_done = False
+        acknowledgment_event = licence.getLastAcknowledgment()
+        if acknowledgment_event:
+            acknowledgment_done = api.content.get_state(acknowledgment_event) == 'closed'
+
+        return acknowledgment_done
+
 
 class WillHaveInquiry(CreationCondition):
     """

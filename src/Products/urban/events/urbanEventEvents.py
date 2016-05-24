@@ -56,7 +56,7 @@ def generateSingletonDocument(urban_event, event):
         pod_template = templates[0]
         output_format = 'odt'
         generation_view = urban_event.restrictedTraverse('urban-document-generation')
-        generation_view.generate_persistent_doc(pod_template, output_format)
+        generation_view(pod_template.UID(), output_format)
 
 
 def updateKeyEvent(urban_event, event):

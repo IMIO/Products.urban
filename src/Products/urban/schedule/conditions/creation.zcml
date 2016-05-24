@@ -2,6 +2,14 @@
     xmlns="http://namespaces.zope.org/zope"
     i18n_domain="Products.urban">
 
+    <!-- acknowlegdment conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.AcknowledgmentDoneCondition"
+        name="urban.schedule.condition.acknowledgment_done"
+    />
 
     <!-- inquiry conditions-->
     <adapter
