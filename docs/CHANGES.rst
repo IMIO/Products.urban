@@ -6,6 +6,10 @@ Changes
 
 1.11.1 (unreleased)
 -------------------
+- Refactor getFirstAdministrativeSfolderManager to getFirstGradeIdSfolderManager
+  The goal is to use one method to get any ids
+  [fngaha]
+
 - Add generic SEVESO optional fields
   [fngaha]
 
