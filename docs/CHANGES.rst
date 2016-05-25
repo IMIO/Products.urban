@@ -6,6 +6,10 @@ Changes
 
 1.11.0 (2015-10-01)
 -------------------
+- Refactor getFirstAdministrativeSfolderManager to getFirstGradeIdSfolderManager
+  The goal is to use one method to get any ids
+  [fngaha]
+
 - Add generic  Natura2000 optional fields
   [fngaha]
 
