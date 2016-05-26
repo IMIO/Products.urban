@@ -84,7 +84,7 @@ optional_fields = [
     'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails',
     'PRevU', 'prevuDetails', 'PRenU', 'prenuDetails', 'airportNoiseZone', 'airportNoiseZoneDetails',
     'description', 'rgbsr', 'rgbsrDetails', 'karstConstraints', 'karstConstraintsDetails',
-    'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', 'sevesoSite', 'natura2000'
+    'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', 'sevesoSite', 'natura_2000'
 ]
 ##/code-section module-header
 
@@ -380,11 +380,11 @@ schema = Schema((
         default_method='getDefaultValue',
     ),
     LinesField(
-        name='natura2000',
+        name='natura_2000',
         widget=MultiSelectionWidget(
             format='checkbox',
-            label='natura2000',
-            label_msgid='urban_label_natura2000',
+            label='natura_2000',
+            label_msgid='urban_label_natura_2000',
             i18n_domain='urban',
         ),
         schemata='urban_road',
