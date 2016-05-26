@@ -6,6 +6,9 @@ Changes
 
 1.11.0 (2015-10-01)
 -------------------
+- Refactor rename natura2000 field because of conflict name in thee
+  [fngaha]
+
 - Refactor getFirstAdministrativeSfolderManager to getFirstGradeIdSfolderManager
   The goal is to use one method to get any ids
   [fngaha]

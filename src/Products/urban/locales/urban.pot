@@ -3484,9 +3484,9 @@ msgstr ""
 msgid "urban_label_sevesoSite"
 msgstr ""
 
-#. Default: "natura2000"
+#. Default: "natura_2000"
 #: GenericLicence.py
-msgid "urban_label_natura2000"
+msgid "urban_label_natura_2000"
 msgstr ""
 
 #. Default: "No"
