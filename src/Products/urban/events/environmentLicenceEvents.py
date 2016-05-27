@@ -2,6 +2,8 @@
 
 from DateTime import DateTime
 
+from dateutil.relativedelta import relativedelta
+
 from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IEnvClassThree
 from Products.urban.interfaces import ILicenceExpirationEvent
@@ -103,15 +105,9 @@ def _compute_expiration_date(licence, notification_date):
     """
      Expiration date = notification_date + years valueDelay
     """
-    expiration_year = notification_date.year() + licence.getValidityDelay()
-    expiration_month = notification_date.month()
-    expiration_day = notification_date.day()
+    years = licence.getValidityDelay
+    expiration_date = notification_date.asdatetime()
+    expiration_date = expiration_date + relativedelta(days=7, years=years)
+    expiration_date = DateTime(str(expiration_date))
 
-    expiration_date = DateTime(
-        '{year}/{month}/{day}'.format(
-            day=expiration_day,
-            month=expiration_month,
-            year=expiration_year,
-        )
-    )
     return expiration_date
