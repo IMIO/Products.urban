@@ -328,5 +328,5 @@ def getLicenceFolder(licencetype):
     return licence_folder
 
 def removeItems(liste, items):
-    [liste.remove(i) for i in items]
+    [liste.remove(i) for i in items if liste.count(i)]
     return liste
