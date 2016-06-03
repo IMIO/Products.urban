@@ -6,6 +6,9 @@ Changes
 
 1.11.1 (unreleased)
 -------------------
+- improve removeItems utils
+  [fngaha]
+
 - Refactor rename natura2000 field because of conflict name in thee
   [fngaha]
 
