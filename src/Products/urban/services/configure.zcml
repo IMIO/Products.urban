@@ -5,19 +5,4 @@
 
   <include file="licences_export.zcml" />
 
-  <adapter
-    for="Products.urban.services.base.SQLService"
-    provides="Products.urban.services.interfaces.ISQLSession"
-    factory="Products.urban.services.base.SQLSession" />
-
-  <adapter
-    for="Products.urban.services.cadastral.CadastreService"
-    provides="Products.urban.services.interfaces.ISQLSession"
-    factory="Products.urban.services.cadastral.CadastreSession" />
-
-  <adapter
-    for="Products.urban.services.bestaddress.BestaddressService"
-    provides="Products.urban.services.interfaces.ISQLSession"
-    factory="Products.urban.services.bestaddress.BestaddressSession" />
-
 </configure>
