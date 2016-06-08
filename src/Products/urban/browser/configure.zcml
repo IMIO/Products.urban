@@ -13,6 +13,11 @@
 
   <include file="portlets.zcml" />
 
+  <browser:resourceDirectory
+      name="Products.urban"
+      directory="static"
+      />
+
   <browser:page
       for="*"
       name="wmc"

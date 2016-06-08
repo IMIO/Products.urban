@@ -5,6 +5,7 @@ from plone import api
 from Products.urban.browser.table.column import FoldermanagerColumn
 from Products.urban.browser.table.interfaces import ITitleCell
 from Products.urban.browser.table.interfaces import ITitleColumn
+from imio.dashboard.columns import ActionsColumn
 
 from collective.eeafaceted.z3ctable.columns import BaseColumn
 
@@ -154,3 +155,15 @@ class AssignedUserColumn(BaseColumn):
             )
 
         return assigned
+
+
+class TaskActionsColumn(ActionsColumn):
+    """Display actions for the task"""
+    params = {
+        'showHistory': False,
+        'showActions': False,
+        'showOwnDelete': False,
+        'showEdit': False,
+        'showTransitions': False,
+        'showChangeOwner': True,
+    }

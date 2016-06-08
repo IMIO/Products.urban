@@ -67,4 +67,13 @@
      name="assigned_user_column"
   />
 
+  <adapter
+    for="zope.interface.Interface
+         zope.publisher.interfaces.browser.IBrowserRequest
+         collective.eeafaceted.z3ctable.interfaces.IFacetedTable"
+    factory=".columns.TaskActionsColumn"
+    provides="collective.eeafaceted.z3ctable.interfaces.IFacetedColumn"
+    name="task_actions_column"
+    />
+
 </configure>

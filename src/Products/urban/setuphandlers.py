@@ -906,7 +906,8 @@ def setupSchedule(context):
             u'parcelreferences_column',
             u'assigned_user_column',
             u'status',
-            u'due_date'
+            u'due_date',
+            u'task_actions_column',
         )
         schedule_configs.append(schedule_config)
 
