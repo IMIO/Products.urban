@@ -91,8 +91,10 @@ class export_licences(UrbanExportMethod):
             licence_record['subject'] = licence.getLicenceSubject()
             licence_record['capakeys'] = [l.get_capakey() for l in licence.getOfficialParcels()]
             licence_record['applicants'] = self._applicant_records(licence)
-            licence_record['decision_date'] = str(licence.getLastTheLicence().getDecisionDate())
-            licence_record['decision'] = licence.getLastTheLicence().getDecision()
+            decision_event = hasattr(licence, 'getLastTheLicence') and licence.getLastTheLicence() or None
+            if decision_event:
+		licence_record['decision_date'] = str(decision_event.getDecisionDate())
+		licence_record['decision'] = decision_event.getDecision()
             licence_record['last_modification'] = str(brain.modified)
 
             licences_export.append(licence_record)

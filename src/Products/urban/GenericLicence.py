@@ -1050,6 +1050,14 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
         return self.objectValues('PortionOut')
 
+    security.declarePublic('getOfficialParcels')
+    def getOfficialParcels(self):
+        """
+           Return the list of parcels (portionOut) for the Licence
+        """
+        parcels = [prc for prc in self.getParcels() if prc.getIsOfficialParcel()]
+        return parcels
+
     security.declarePublic('updateTitle')
     def updateTitle(self):
         """
