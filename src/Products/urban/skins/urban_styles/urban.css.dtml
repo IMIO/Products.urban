@@ -70,6 +70,8 @@ table.listing tbody tr span.manual_parcel {
 .icons-on .contenttype-article127 {background: no-repeat transparent 0px -99px url(urban-sprite.png);}
 .icons-on .contenttype-declaration {background: no-repeat transparent 0px -431px url(urban-sprite.png);}
 .icons-on .contenttype-miscdemand {background: no-repeat transparent url(MiscDemand.png);}
+.icons-on .contenttype-preliminarynotice {background: no-repeat transparent url(PreliminaryNotice.png);}
+.icons-on .contenttype-patrimonycertificate {background: no-repeat transparent url(PatrimonyCertificate.png);}
 .icons-on .contenttype-division {background: no-repeat transparent 0px -646px url(urban-sprite.png);}
 .icons-on .contenttype-envclassone {background: no-repeat transparent 0px -919px url(urban-sprite.png);}
 .icons-on .contenttype-envclasstwo {background: no-repeat transparent 0px -967px url(urban-sprite.png);}
@@ -95,6 +97,8 @@ table.listing tbody tr span.manual_parcel {
 .icons-on .contenttype-article127,
 .icons-on .contenttype-declaration,
 .icons-on .contenttype-miscdemand,
+.icons-on .contenttype-preliminarynotice,
+.icons-on .contenttype-patrimonycertificate,
 .icons-on .contenttype-division,
 .icons-on .contenttype-envclassone,
 .icons-on .contenttype-envclasstwo,

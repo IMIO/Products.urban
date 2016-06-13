@@ -77,7 +77,9 @@ class export_licences(UrbanExportMethod):
             'object_provides': IGenericLicence.__identifier__
         }
 
-        self._check_args(query)
+        error = self._check_args(query)
+        if error:
+            return error
 
         licence_brains = catalog(**query)
 
@@ -87,12 +89,16 @@ class export_licences(UrbanExportMethod):
             licence = brain.getObject()
 
             licence_record['id'] = licence.getId()
+            licence_record['licence_type'] = licence.portal_type
             licence_record['reference'] = licence.getReference()
             licence_record['subject'] = licence.getLicenceSubject()
+            licence_record['state'] = api.content.get_state(licence)
             licence_record['capakeys'] = [l.get_capakey() for l in licence.getOfficialParcels()]
             licence_record['applicants'] = self._applicant_records(licence)
-            licence_record['decision_date'] = str(licence.getLastTheLicence().getDecisionDate())
-            licence_record['decision'] = licence.getLastTheLicence().getDecision()
+            decision_event = hasattr(licence, 'getLastTheLicence') and licence.getLastTheLicence() or None
+            if decision_event:
+                licence_record['decision_date'] = str(licence.getLastTheLicence().getDecisionDate())
+                licence_record['decision'] = licence.getLastTheLicence().getDecision()
             licence_record['last_modification'] = str(brain.modified)
 
             licences_export.append(licence_record)
@@ -127,7 +133,7 @@ class export_licences(UrbanExportMethod):
             query['portal_type'] = licence_type
 
             licence_state = self.request.get('licence_state', None)
-            available_states = _get_licence_states(licence_state)
+            available_states = _get_licence_states(licence_type)
             if licence_state and licence_state not in available_states:
                 msg = 'licence_state should be one of the following: %s' % ', '.join(available_states)
                 return msg

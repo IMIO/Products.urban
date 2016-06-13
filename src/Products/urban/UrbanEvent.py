@@ -200,6 +200,18 @@ schema = Schema((
         default_output_type='text/html',
         optional=True,
     ),
+    TextField(
+        name='analysis',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Analysisi',
+            label_msgid='urban_label_analysis',
+            i18n_domain='urban',
+        ),
+        default_method='getDefaultText',
+        default_output_type='text/html',
+        optional=True,
+    ),
     ReferenceField(
         name='eventRecipient',
         widget=ReferenceBrowserWidget(

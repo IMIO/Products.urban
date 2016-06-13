@@ -221,6 +221,12 @@ msgstr "Parcelle"
 msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
 
+msgid "PatrimonyCertificate"
+msgstr "Certificat de patrimoine"
+
+msgid "PreliminaryNotice"
+msgstr "Demande d'avis préalable"
+
 msgid "Proprietary data"
 msgstr "Coordonnées du propriétaire"
 

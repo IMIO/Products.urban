@@ -11,6 +11,8 @@ from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IMiscDemand
 from Products.urban.interfaces import INotaryLetter
 from Products.urban.interfaces import IParcelOutLicence
+from Products.urban.interfaces import IPatrimonyCertificate
+from Products.urban.interfaces import IPreliminaryNotice
 from Products.urban.interfaces import IUrbanCertificateOne
 from Products.urban.interfaces import IUrbanCertificateTwo
 from Products.urban.interfaces import IUrbanEventOpinionRequest
@@ -31,6 +33,8 @@ URBAN_TYPES_INTERFACES = {
     'UrbanCertificateTwo': IUrbanCertificateTwo,
     'NotaryLetter': INotaryLetter,
     'MiscDemand': IMiscDemand,
+    'PatrimonyCertificate': IPatrimonyCertificate,
+    'PreliminaryNotice': IPreliminaryNotice,
     'EnvClassOne': IEnvClassOne,
     'EnvClassTwo': IEnvClassTwo,
     'EnvClassThree': IEnvClassThree,

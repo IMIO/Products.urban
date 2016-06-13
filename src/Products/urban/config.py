@@ -56,91 +56,95 @@ class ExternalConfig(object):
 DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"
 setDefaultRoles(DEFAULT_ADD_CONTENT_PERMISSION, ('Manager', 'Owner', 'Contributor'))
 ADD_CONTENT_PERMISSIONS = {
-    'GenericLicence': 'urban: Add GenericLicence',
+    'Applicant': 'urban: Add Applicant',
+    'Article127': 'urban: Add Article127',
+    'BuildLicence': 'urban: Add BuildLicence',
     'Contact': 'urban: Add Contact',
+    'Corporation': 'urban: Add Corporation',
+    'City': 'urban: Add City',
+    'Claimant': 'urban: Add Claimant',
+    'Declaration': 'urban: Add Declaration',
+    'Division': 'urban: Add Division',
+    'EnvClassOne': 'urban: Add EnvClassOne',
+    'EnvClassThree': 'urban: Add EnvClassThree',
+    'EnvClassTwo': 'urban: Add EnvClassTwo',
+    'EnvironmentBase': 'urban: Add EnvironmentBase',
+    'EnvironmentLicence': 'urban: Add EnvironmentLicence',
+    'EnvironmentRubricTerm': 'urban: Add EnvironmentRubricTerm',
+    'FolderManager': 'urban: Add FolderManager',
+    'GenericLicence': 'urban: Add GenericLicence',
+    'Inquiry': 'urban: Add Inquiry',
+    'Layer': 'urban: Add Layer',
+    'LicenceConfig': 'urban: Add LicenceConfig',
+    'Locality': 'urban: Add Locality',
+    'MiscDemand': 'urban: Add MiscDemand',
+    'OpinionRequestEventType': 'urban: Add OpinionRequestEventType',
+    'OrganisationTerm': 'urban: Add OrganisationTerm',
+    'ParcellingTerm': 'urban: Add ParcellingTerm',
+    'ParcelOutLicence': 'urban: Add ParcelOutLicence',
+    'PatrimonyCertificate': 'urban: Add PatrimonyCertificate',
+    'PcaTerm': 'urban: Add PcaTerm',
+    'PersonTitleTerm': 'urban: Add PersonTitleTerm',
+    'PortionOut': 'urban: Add PortionOut',
+    'PreliminaryNotice': 'urban: Add PreliminaryNotice',
+    'Recipient': 'urban: Add Recipient',
+    'RecipientCadastre': 'urban: Add RecipientCadastre',
+    'SpecificFeatureTerm': 'urban: Add SpecificFeatureTerm',
     'Street': 'urban: Add Street',
     'UrbanEvent': 'urban: Add UrbanEvent',
+    'UrbanEventInquiry': 'urban: Add UrbanEvent',
     'UrbanEventType': 'urban: Add UrbanEventType',
-    'Recipient': 'urban: Add Recipient',
-    'BuildLicence': 'urban: Add BuildLicence',
-    'ParcelOutLicence': 'urban: Add ParcelOutLicence',
-    'FolderManager': 'urban: Add FolderManager',
     'UrbanVocabularyTerm': 'urban: Add UrbanVocabularyTerm',
-    'PortionOut': 'urban: Add PortionOut',
-    'RecipientCadastre': 'urban: Add RecipientCadastre',
-    'Layer': 'urban: Add Layer',
-    'Declaration': 'urban: Add Declaration',
-    'ParcellingTerm': 'urban: Add ParcellingTerm',
-    'PcaTerm': 'urban: Add PcaTerm',
-    'City': 'urban: Add City',
     'UrbanCertificateBase': 'urban: Add UrbanCertificateBase',
     'UrbanCertificateTwo': 'urban: Add UrbanCertificateTwo',
-    'Division': 'urban: Add Division',
     'UrbanDelay': 'urban: Add UrbanDelay',
-    'Locality': 'urban: Add Locality',
-    'LicenceConfig': 'urban: Add LicenceConfig',
-    'PersonTitleTerm': 'urban: Add PersonTitleTerm',
-    'Inquiry': 'urban: Add Inquiry',
-    'UrbanEventInquiry': 'urban: Add UrbanEvent',
     'UrbanEventOpinionRequest': 'urban: Add UrbanEventOpinionRequest',
-    'OrganisationTerm': 'urban: Add OrganisationTerm',
-    'MiscDemand': 'urban: Add MiscDemand',
     'UrbanConfigurationValue': 'urban: Add UrbanConfigurationValue',
-    'EnvironmentBase': 'urban: Add EnvironmentBase',
-    'EnvironmentRubricTerm': 'urban: Add EnvironmentRubricTerm',
-    'SpecificFeatureTerm': 'urban: Add SpecificFeatureTerm',
-    'OpinionRequestEventType': 'urban: Add OpinionRequestEventType',
-    'EnvironmentLicence': 'urban: Add EnvironmentLicence',
-    'EnvClassThree': 'urban: Add EnvClassThree',
-    'Corporation': 'urban: Add Corporation',
-    'Claimant': 'urban: Add Claimant',
-    'Applicant': 'urban: Add Applicant',
-    'EnvClassTwo': 'urban: Add EnvClassTwo',
-    'EnvClassOne': 'urban: Add EnvClassOne',
-    'Article127': 'urban: Add Article127',
 }
 
-setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Applicant', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Article127', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add BuildLicence', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add City', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Claimant', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Contact', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Corporation', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Declaration', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add EnvClassOne', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add EnvClassThree', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add EnvClassTwo', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add EnvironmentBase', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add EnvironmentLicence', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add EnvironmentRubricTerm', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Division', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add FolderManager', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Inquiry', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Layer', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add LicenceConfig', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Locality', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add OpinionRequestEventType', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add OrganisationTerm', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add ParcellingTerm', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add ParcelOutLicence', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add PatrimonyCertificate', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add PcaTerm', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add PersonTitleTerm', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add PortionOut', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add PreliminaryNotice', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Recipient', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add RecipientCadastre', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add SpecificFeatureTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Street', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanEvent', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanEventType', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Recipient', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add BuildLicence', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add ParcelOutLicence', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add FolderManager', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add UrbanVocabularyTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add PortionOut', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add RecipientCadastre', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Layer', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Declaration', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add ParcellingTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add PcaTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add City', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanCertificateBase', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanCertificateTwo', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Division', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanDelay', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Locality', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add LicenceConfig', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add PersonTitleTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Inquiry', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanEventOpinionRequest', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add OrganisationTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanConfigurationValue',  ('Manager', ))
-setDefaultRoles('urban: Add EnvironmentBase', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add EnvironmentRubricTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add SpecificFeatureTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add OpinionRequestEventType', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add EnvironmentLicence', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add EnvClassThree', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Corporation', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Claimant', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Applicant', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add EnvClassTwo', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add EnvClassOne', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Article127', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add UrbanVocabularyTerm', ("Manager", "Contributor"))
 
 product_globals = globals()
 
@@ -151,7 +155,8 @@ ADDITIONAL_LAYERS_FOLDER = "additional_layers"
 #a list where first element is the meetingConfigId and the second, the meta_type name
 URBAN_TYPES = [
     'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'Division', 'UrbanCertificateOne',
-    'UrbanCertificateTwo', 'NotaryLetter', 'MiscDemand', 'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
+    'UrbanCertificateTwo', 'NotaryLetter', 'MiscDemand', 'PreliminaryNotice', 'PatrimonyCertificate',
+    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
 ]
 
 # all types that can be used as a licence applicant
@@ -237,3 +242,22 @@ DefaultTexts = {
 
 
 NULL_VALUE = "..."
+
+
+def registerClasses():
+    '''ArchGenXML generated code does not register Archetype classes at the
+       right moment since model adaptations have been implemented. This method
+       allows to perform class registration at the right moment.'''
+    import Products.Archetypes
+    from Products.Archetypes.atapi import registerType
+    global ADD_CONTENT_PERMISSIONS
+    classNames = ADD_CONTENT_PERMISSIONS.keys()
+    for name in classNames:
+        exec 'import Products.urban.%s as module' % name
+        klass = None  # PEP8
+        exec 'klass = module.%s' % name
+        key = 'urban.%s' % name
+        if key in Products.Archetypes.ATToolModule._types:
+            # Unregister the class
+            del Products.Archetypes.ATToolModule._types[key]
+        registerType(klass, PROJECTNAME)

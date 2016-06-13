@@ -916,6 +916,7 @@ def setupSchedule(context):
         licence_name = _(schedule_config.get_scheduled_portal_type(), 'urban')
 
         if not hasattr(schedule_folder, folder_id):
+            setFolderAllowedTypes(schedule_folder, ['Folder'])
             schedule_folder.invokeFactory(
                 'Folder',
                 id=folder_id,

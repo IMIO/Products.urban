@@ -220,6 +220,12 @@ msgstr ""
 msgid "ParcelOutLicence"
 msgstr ""
 
+msgid "PatrimonyCertificate"
+msgstr ""
+
+msgid "PreliminaryNotice"
+msgstr ""
+
 msgid "Proprietary data"
 msgstr ""
 
