@@ -741,7 +741,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         renderedDescription = text
         for expr in re.finditer('\[\[(.*?)\]\]', text):
             if not renderToNull:
-                helper_view = context.aq_parent.unrestrictedTraverse('document_generation_helper_view')
+                helper_view = context.aq_parent.restrictedTraverse('document_generation_helper_view')
                 data = {
                     'self': helper_view.context,
                     'object': helper_view.real_context,
@@ -758,7 +758,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                     res = Expression(python_expr)(ctx)
                 except Exception, e:
                     logger.warn("The expression '%s' defined in the UrbanVocabularyTerm at '%s' is wrong! Returned error message is : %s" % (expr.group(), self.absolute_url(), e))
-                    res = translate('error_in_expr_contact_admin', 'urban', mapping={'expr': expr.group()}, context=self.REQUEST)
+                    res = translate('error_in_expr_contact_admin', 'urban', mapping={'expr': expr.group().decode('utf-8')}, context=self.REQUEST)
                 #replace the expression in the description by the result
                 #re work with utf8, not with unicode...
                 if isinstance(res, unicode):
