@@ -296,7 +296,8 @@ class LicenceView(BrowserView):
         shores = set()
         for p in self.context.getParcels():
             shore_field = p.getField('shore')
-            shores.add(shore_field.vocabulary.getValue(p.getShore()))
+            if p.getShore():
+                shores.add(shore_field.vocabulary.getValue(p.getShore()))
         return ', '.join(list(shores))
 
 

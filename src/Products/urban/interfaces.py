@@ -348,4 +348,7 @@ class ILicencePortionOut(Interface):
     """Marker interface for portionOut in a licence.
     """
 
+
+class IOptionalFields(Interface):
+    """ """
 ##/code-section FOOT

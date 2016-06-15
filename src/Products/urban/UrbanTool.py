@@ -741,18 +741,21 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         renderedDescription = text
         for expr in re.finditer('\[\[(.*?)\]\]', text):
             if not renderToNull:
+                helper_view = context.aq_parent.unrestrictedTraverse('document_generation_helper_view')
                 data = {
-                    'self': context.aq_parent,
-                    'object': context,
+                    'self': helper_view.context,
+                    'object': helper_view.real_context,
                     'event': context,
-                    'context': context,
+                    'context': helper_view.real_context,
                     'tool': self,
                     'portal': api.portal.getSite(),
+                    'view': helper_view,
                 }
                 ctx = getEngine().getContext(data)
                 try:
                     #expr.groups()[0] is the expr without the [[]]
-                    res = Expression(expr.groups()[0])(ctx)
+                    python_expr = 'python: {}'.format(expr.groups()[0])
+                    res = Expression(python_expr)(ctx)
                 except Exception, e:
                     logger.warn("The expression '%s' defined in the UrbanVocabularyTerm at '%s' is wrong! Returned error message is : %s" % (expr.group(), self.absolute_url(), e))
                     res = translate('error_in_expr_contact_admin', 'urban', mapping={'expr': expr.group()}, context=self.REQUEST)
