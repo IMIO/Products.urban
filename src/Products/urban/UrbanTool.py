@@ -271,20 +271,14 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return rows
 
     security.declarePublic('getVocabularyDefaultValue')
-    def getVocabularyDefaultValue(self, vocabulary_name, context, in_urban_config, multivalued=False):
+    def getVocabularyDefaultValue(self, vocabulary, context, multivalued=False):
         """
          Return the first vocabulary term marked as default value of the vocabulary named vocabulary_name
         """
         #search in an urbanConfig or in the tool
         empty_value = multivalued and [] or ''
-        if in_urban_config:
-            config_folder = getattr(self, self.getUrbanConfig(context).getId())
-            if not hasattr(config_folder, vocabulary_name):
-                return empty_value
-            voc_folder = getattr(config_folder, vocabulary_name)
-        else:
-            voc_folder = getattr(self, vocabulary_name)
-        default_values = [voc_term.id for voc_term in voc_folder.listFolderContents() if voc_term.getIsDefaultValue()]
+        voc_terms = vocabulary.getAllVocTerms(context).values()
+        default_values = [voc_term.id for voc_term in voc_terms if voc_term.getIsDefaultValue()]
         return default_values and default_values or empty_value
 
     security.declarePublic('getTextDefaultValue')
@@ -747,21 +741,24 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         renderedDescription = text
         for expr in re.finditer('\[\[(.*?)\]\]', text):
             if not renderToNull:
+                helper_view = context.aq_parent.restrictedTraverse('document_generation_helper_view')
                 data = {
-                    'self': context.aq_parent,
-                    'object': context,
+                    'self': helper_view.context,
+                    'object': helper_view.real_context,
                     'event': context,
-                    'context': context,
+                    'context': helper_view.real_context,
                     'tool': self,
                     'portal': api.portal.getSite(),
+                    'view': helper_view,
                 }
                 ctx = getEngine().getContext(data)
                 try:
                     #expr.groups()[0] is the expr without the [[]]
-                    res = Expression(expr.groups()[0])(ctx)
+                    python_expr = 'python: {}'.format(expr.groups()[0])
+                    res = Expression(python_expr)(ctx)
                 except Exception, e:
                     logger.warn("The expression '%s' defined in the UrbanVocabularyTerm at '%s' is wrong! Returned error message is : %s" % (expr.group(), self.absolute_url(), e))
-                    res = translate('error_in_expr_contact_admin', 'urban', mapping={'expr': expr.group()}, context=self.REQUEST)
+                    res = translate('error_in_expr_contact_admin', 'urban', mapping={'expr': expr.group().decode('utf-8')}, context=self.REQUEST)
                 #replace the expression in the description by the result
                 #re work with utf8, not with unicode...
                 if isinstance(res, unicode):

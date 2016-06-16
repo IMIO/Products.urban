@@ -118,6 +118,8 @@
                 <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" />
             </div>
             <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
+
+            <div tal:content="python: 'Rive: ' + view.get_shore()"></div>
         </fieldset>
 
         <metal:representatives define-slot="representatives">
@@ -126,6 +128,10 @@
         <fieldset>
             <legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
             <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
+            <form tal:condition="python: context.getParcels()" name="parcelcoring"
+                  tal:attributes="action python: context.absolute_url() + '/parcelcoring'" action="parcelcoring" method="get">
+                <input type="submit" class="context apButton contenttype-portionout" id="coring" value="parcel_coring" i18n:attributes="value" />
+            </form>
         </fieldset>
     </div>
 </div>

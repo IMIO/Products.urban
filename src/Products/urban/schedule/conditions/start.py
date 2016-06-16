@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from urban.schedule.content.condition import StartCondition
+from imio.schedule.content.condition import StartCondition
 
 
 class LicenceStartCondition(StartCondition):
@@ -8,5 +8,5 @@ class LicenceStartCondition(StartCondition):
     Test start condition.
     """
 
-    def evaluate(self, **kwargs):
+    def evaluate(self):
         return True

@@ -5,4 +5,7 @@
     <hidden manager="plone.belowcontenttitle" skinname="imioapps">
         <viewlet name="document-generation-link"/>
     </hidden>
+    <hidden manager="plone.belowcontentbody" skinname="imioapps">
+        <viewlet name="collective.task.list_tasks"/>
+    </hidden>
 </object>

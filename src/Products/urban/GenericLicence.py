@@ -14,6 +14,14 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
+
+from collective.faceted.task.interfaces import IFacetedTaskContainer
+
+from collective.task.behaviors import ITask
+
+from eea.facetednavigation.search.interfaces import ICollection
+from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
+
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
@@ -880,10 +888,18 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
-    implements(interfaces.IGenericLicence)
+    implements(
+        interfaces.IGenericLicence,
+        IFacetedTaskContainer,
+        ICollection,
+        IPossibleFacetedNavigable
+    )
 
     meta_type = 'GenericLicence'
     _at_rename_after_creation = True
+    # block local roles acquisition and let the workflow handle that
+    __ac_local_roles_block__ = True
+
 
     schema = GenericLicence_schema
 
@@ -914,13 +930,10 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
             return ['']
 
         urban_tool = api.portal.get_tool('portal_urban')
-        vocabulary_name = field.vocabulary.path
-        in_urban_config = field.vocabulary.inUrbanConfig
 
         default_value = urban_tool.getVocabularyDefaultValue(
-            vocabulary_name=vocabulary_name,
+            vocabulary=field.vocabulary,
             context=context,
-            in_urban_config=in_urban_config,
             multivalued=field.multiValued
         )
         return default_value
@@ -955,6 +968,23 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
         urban_event = createObject('UrbanEvent', self, urban_event_type, **kwargs)
         return urban_event
+
+    security.declarePublic('getRawQuery')
+    def getRawQuery(self):
+        """ """
+        query = [
+            {
+                'i': 'object_provides',
+                'o': 'plone.app.querystring.operation.selection.is',
+                'v': ITask.__identifier__
+            },
+            {
+                'i': 'path',
+                'o': 'plone.app.querystring.operation.string.relativePath',
+                'v': '.'
+            },
+        ]
+        return query
 
     def divideList(self, divider, list):
         res = []
@@ -1052,6 +1082,14 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
            Return the list of parcels (portionOut) for the Licence
         """
         return self.objectValues('PortionOut')
+
+    security.declarePublic('getOfficialParcels')
+    def getOfficialParcels(self):
+        """
+           Return the list of parcels (portionOut) for the Licence
+        """
+        parcels = [prc for prc in self.getParcels() if prc.getIsOfficialParcel()]
+        return parcels
 
     security.declarePublic('updateTitle')
     def updateTitle(self):

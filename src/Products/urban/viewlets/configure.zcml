@@ -4,6 +4,14 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="urban">
 
+  <browser:viewlet
+     name="plone.belowcontenttitle.workflowstate"
+     manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+     class=".workflow_state.WorkflowState"
+     for="Products.urban.interfaces.IGenericLicence"
+     permission="zope2.View"
+  />
+
   <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
      name="generate_urbain_220xml"

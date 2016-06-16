@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from Acquisition import aq_inner
 from Products.Five import BrowserView
 from Products.CMFPlone import PloneMessageFactory as _

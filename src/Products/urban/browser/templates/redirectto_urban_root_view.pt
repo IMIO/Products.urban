@@ -13,7 +13,7 @@
 
      <tal:comment replace="nothing">Logged in users are redirected to the application</tal:comment>
      <tal:notIsAnon condition="not: isAnon">
-       <span tal:define="dummy python: context.REQUEST.RESPONSE.redirect(context.absolute_url() + '/urban')">Redirection to urban</span>
+       <!--span tal:define="dummy python: context.REQUEST.RESPONSE.redirect(context.absolute_url() + '/urban')">Redirection to urban</span-->
      </tal:notIsAnon>
      <tal:comment replace="nothing">Anonymous see the front-page</tal:comment>
      <tal:isAnon condition="isAnon">

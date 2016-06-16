@@ -156,6 +156,14 @@ class IMiscDemand(Interface):
     """Marker interface for .MiscDemand.MiscDemand
     """
 
+class IPreliminaryNotice(Interface):
+    """Marker interface for .PreliminaryNotice.PreliminaryNotice
+    """
+
+class IPatrimonyCertificate(Interface):
+    """Marker interface for .PatrimonyCertificate.PatrimonyCertificate
+    """
+
 class IUrbanConfigurationValue(Interface):
     """Marker interface for .UrbanConfigurationValue.UrbanConfigurationValue
     """
@@ -340,4 +348,7 @@ class ILicencePortionOut(Interface):
     """Marker interface for portionOut in a licence.
     """
 
+
+class IOptionalFields(Interface):
+    """ """
 ##/code-section FOOT

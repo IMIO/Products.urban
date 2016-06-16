@@ -4,7 +4,7 @@
            i18n_domain="urban">
 
   <subscriber for="..interfaces.IUrbanEventOpinionRequest
-                   Products.Archetypes.event.IEditBegunEvent"
+                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".opinionRequestEvents.setDefaultLinkedInquiry" />
 
   <subscriber for="..interfaces.IContact
@@ -132,6 +132,10 @@
               handler=".environmentLicenceEvents.createLicenceExpirationEvent"/>
 
   <subscriber for="..interfaces.IAcknowledgmentEvent
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".environmentLicenceEvents.createEnvClassThreeExpirationEvent"/>
+
+  <subscriber for="..interfaces.ITheLicenceEvent
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".environmentLicenceEvents.createEnvClassThreeExpirationEvent"/>
 
