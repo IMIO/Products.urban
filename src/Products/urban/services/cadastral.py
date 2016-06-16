@@ -213,6 +213,28 @@ class CadastreSession(SQLSession):
         records = query.distinct().all()
         return records
 
+    def query_parcels_wkt(self, parcels):
+        """
+        Query polygon wkt format of the union of the parcels.
+        """
+        capa = self.tables.capa
+
+        query_geom = self.session.query(func.ST_AsText(func.memgeomunion(capa.the_geom).label('geo_union')))
+
+        parcel_filters = []
+        for parcel in parcels:
+            parcel_ref = parcel.reference_as_dict()
+            parcel_filters.append(
+                and_(
+                    capa.da == parcel_ref.pop('division'),
+                    *[getattr(capa, ref) == val for ref, val in parcel_ref.iteritems()]
+                )
+            )
+        query_geom = query_geom.filter(or_(*parcel_filters))
+        records = query_geom.all()
+        records = records and records[0][0] or records
+        return records
+
     def query_parcels_in_radius(self, center_parcels, radius):
         """
         Query parcels around 'center_parcels' in a radius of 'radius' m.

@@ -15,6 +15,25 @@
 
                     <metal:titleWithIcon use-macro="here/@@globalmacros/titleWithIcon" />
 
+                    <div class="action-bar">
+                        <div class="action-bar-text" i18n:domain="plone"
+                          tal:define="state view/get_state">
+                             <span i18n:translate="">State</span>:
+                             <span  tal:attributes="class python: 'urban_state_%s' % state.replace(' ', '')">
+                                 <tal:state content="state" i18n:translate=""/>
+                             </span>
+                         </div>
+                         <div class="urban_transitions">
+                             <span i18n:translate="" class="urban_transitions_text">Transitions:</span>
+                             <tal:actions content="structure here/transitions_panel" />
+                         </div>
+                         <div class="urban_actions">
+                             <span i18n:translate="" class="urban_transitions_text">Actions:</span>
+                             <tal:actions content="structure here/actions_panel" />
+                         </div>
+                         <div class="visualClear"></div>
+                     </div>
+
                     <div id="urbanViewWithTabbing" tal:condition="useTabbing">
 
                         <dl class="formTabs enableFormTabbing">

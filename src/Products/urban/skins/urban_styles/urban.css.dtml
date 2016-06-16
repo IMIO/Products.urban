@@ -70,6 +70,8 @@ table.listing tbody tr span.manual_parcel {
 .icons-on .contenttype-article127 {background: no-repeat transparent 0px -99px url(urban-sprite.png);}
 .icons-on .contenttype-declaration {background: no-repeat transparent 0px -431px url(urban-sprite.png);}
 .icons-on .contenttype-miscdemand {background: no-repeat transparent url(MiscDemand.png);}
+.icons-on .contenttype-preliminarynotice {background: no-repeat transparent url(PreliminaryNotice.png);}
+.icons-on .contenttype-patrimonycertificate {background: no-repeat transparent url(PatrimonyCertificate.png);}
 .icons-on .contenttype-division {background: no-repeat transparent 0px -646px url(urban-sprite.png);}
 .icons-on .contenttype-envclassone {background: no-repeat transparent 0px -919px url(urban-sprite.png);}
 .icons-on .contenttype-envclasstwo {background: no-repeat transparent 0px -967px url(urban-sprite.png);}
@@ -95,6 +97,8 @@ table.listing tbody tr span.manual_parcel {
 .icons-on .contenttype-article127,
 .icons-on .contenttype-declaration,
 .icons-on .contenttype-miscdemand,
+.icons-on .contenttype-preliminarynotice,
+.icons-on .contenttype-patrimonycertificate,
 .icons-on .contenttype-division,
 .icons-on .contenttype-envclassone,
 .icons-on .contenttype-envclasstwo,
@@ -264,7 +268,8 @@ ul.urban-list{
     margin-bottom: 0em;
 }
 
-dl.portlet a:link, dl.portlet a:visited {
+
+[id="portal-column-one"] dl.portlet a:link, [id="portal-column-one"] dl.portlet a:visited {
     display: inline-block;
 }
 
@@ -307,15 +312,51 @@ td div.parcel-action {
    vertical-align: middle;
 }
 
-span.schedule_created {
-    background-color: #6AD7FC;
+.action-bar{
+    width: auto;
+    background-color: #ddd;
+    border-radius: 0.5em;
+    padding: 0.4em;
+    padding-left: 1em;
+    margin-bottom: 0.4em;
 }
 
-span.schedule_to_do {
-    background-color: yellow;
+.action-bar .apButton{
+    height: auto;
 }
 
-span.schedule_closed {
-    background-color: #75AD0A;
+.action-bar-text{
+    font-weight:bold;
+    float: left;
+    padding-right: 2em;
+    padding-top: 0.25em;
+}
+
+.urban_transitions{
+    font-weight:bold;
+    float: left;
+    padding-right: 2em;
+}
+
+.urban_transitions_text{
+    font-weight:bold;
+    float: left;
+    padding-right: 0.2em;
+    padding-top: 0.25em;
+}
+
+/* Style notarydivision workflow states */
+.urban_actions{
+    font-weight:bold;
+    float: right;
+    padding-right: 2em;
+    height: 0em;
+}
+[class^=urban_state]{
+    border-radius: 0.5em;
+    padding: 0.2em;
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+    color: white;
 }
 /* </dtml-with> */

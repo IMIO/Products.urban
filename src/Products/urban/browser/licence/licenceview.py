@@ -266,6 +266,8 @@ class LicenceView(BrowserView):
                 return False
             if not field.widget.visible:
                 return False
+            if not field.checkPermission('r', self.context):
+                return False
             return True
 
         displayed_fields = self.getUsedAttributes()
@@ -286,6 +288,17 @@ class LicenceView(BrowserView):
 
     def getInquiryFields(self, exclude=[]):
         return self.getSchemataFields('urban_investigation_and_advices', exclude)
+
+    def get_state(self):
+        return api.content.get_state(self.context)
+
+    def get_shore(self):
+        shores = set()
+        for p in self.context.getParcels():
+            shore_field = p.getField('shore')
+            if p.getShore():
+                shores.add(shore_field.vocabulary.getValue(p.getShore()))
+        return ', '.join(list(shores))
 
 
 class UrbanCertificateBaseView(LicenceView):

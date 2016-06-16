@@ -1,0 +1,41 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="Products.urban">
+
+    <!-- folder complete conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.ComplementsAsked"
+        name="urban.schedule.condition.complements_asked"
+    />
+
+    <!-- acknowlegdment conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.AcknowledgmentDoneCondition"
+        name="urban.schedule.condition.acknowledgment_done"
+    />
+
+    <!-- inquiry conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.NoInquiryCondition"
+        name="urban.schedule.condition.no_inquiry"
+    />
+
+    <!-- opinion requests conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.HasOpinionRequests"
+        name="urban.schedule.condition.has_opinion_requests"
+    />
+
+</configure>

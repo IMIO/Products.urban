@@ -222,7 +222,7 @@
      permission="zope2.View"
   />
 
-   <browser:page
+  <browser:page
      for="Products.urban.interfaces.IMiscDemand"
      name="miscdemandview"
      class=".miscdemandview.MiscDemandView"
@@ -234,6 +234,36 @@
      name="miscdemand-macros"
      for="Products.urban.interfaces.IMiscDemand"
      template="templates/miscdemandmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IPreliminaryNotice"
+     name="preliminarynoticeview"
+     class=".preliminarynoticeview.PreliminaryNoticeView"
+     template="templates/preliminarynoticeview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="preliminarynotice-macros"
+     for="Products.urban.interfaces.IPreliminaryNotice"
+     template="templates/preliminarynoticemacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IPatrimonyCertificate"
+     name="patrimonycertificateview"
+     class=".patrimonycertificateview.PatrimonyCertificateView"
+     template="templates/patrimonycertificateview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="patrimonycertificate-macros"
+     for="Products.urban.interfaces.IPatrimonyCertificate"
+     template="templates/patrimonycertificatemacros.pt"
      permission="zope2.View"
   />
 

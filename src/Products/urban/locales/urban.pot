@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-03-08 08:51+0000\n"
+"POT-Creation-Date: 2016-05-23 07:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -218,6 +218,12 @@ msgid "Parcel"
 msgstr ""
 
 msgid "ParcelOutLicence"
+msgstr ""
+
+msgid "PatrimonyCertificate"
+msgstr ""
+
+msgid "PreliminaryNotice"
 msgstr ""
 
 msgid "Proprietary data"
@@ -874,6 +880,26 @@ msgstr ""
 msgid "investigationarticles_folder_title"
 msgstr ""
 
+#. Default: "No"
+#: GenericLicence.py
+msgid "karst_constraints_no"
+msgstr ""
+
+#. Default: "High"
+#: GenericLicence.py
+msgid "karts_constraints_high"
+msgstr ""
+
+#. Default: "Low"
+#: GenericLicence.py
+msgid "karts_constraints_low"
+msgstr ""
+
+#. Default: "Very low"
+#: GenericLicence.py
+msgid "karts_constraints_verylow"
+msgstr ""
+
 msgid "label_colname_Creator"
 msgstr ""
 
@@ -1018,16 +1044,16 @@ msgstr ""
 msgid "locality_for_worklocation"
 msgstr ""
 
-msgid "location_inside"
-msgstr ""
-
-msgid "location_near"
-msgstr ""
-
 msgid "location_fdrequirement_decision"
 msgstr ""
 
 msgid "location_fdrequirement_opinion"
+msgstr ""
+
+msgid "location_inside"
+msgstr ""
+
+msgid "location_near"
 msgstr ""
 
 msgid "locationmissingparts_folder_title"
@@ -2028,6 +2054,10 @@ msgstr ""
 msgid "urban_label_editionOutputFormat"
 msgstr ""
 
+#: BuildLicence.py
+msgid "urban_label_electricity"
+msgstr ""
+
 #. Default: "Email"
 #: Contact.py
 msgid "urban_label_email"
@@ -2352,6 +2382,16 @@ msgstr ""
 #. Default: "Issupplementary"
 #: WorkLocation.py
 msgid "urban_label_isSupplementary"
+msgstr ""
+
+#. Default: "Karstconstraints"
+#: GenericLicence.py
+msgid "urban_label_karstConstraints"
+msgstr ""
+
+#. Default: "Karstconstraintsdetails"
+#: GenericLicence.py
+msgid "urban_label_karstConstraintsDetails"
 msgstr ""
 
 #. Default: "Keydates"
@@ -3281,6 +3321,10 @@ msgstr ""
 msgid "urban_label_walloonRegionPrimoDate"
 msgstr ""
 
+#: BuildLicence.py
+msgid "urban_label_water"
+msgstr ""
+
 #. Default: "Webserverhost"
 #: UrbanTool.py
 msgid "urban_label_webServerHost"
@@ -3465,16 +3509,6 @@ msgstr ""
 msgid "zip_folder_title"
 msgstr ""
 
-#. Default: "Karstconstraints"
-#: GenericLicence.py
-msgid "urban_label_karstConstraints"
-msgstr ""
-
-#. Default: "Karstconstraintsdetails"
-#: GenericLicence.py
-msgid "urban_label_karstConstraintsDetails"
-msgstr ""
-
 #. Default: "concentratedrunoffsrisk"
 #: GenericLicence.py
 msgid "urban_label_concentratedRunoffSRisk"
@@ -3493,32 +3527,4 @@ msgstr ""
 #. Default: "natura_2000"
 #: GenericLicence.py
 msgid "urban_label_natura_2000"
-msgstr ""
-
-#. Default: "No"
-#: GenericLicence.py
-msgid "karst_constraints_no"
-msgstr ""
-
-#. Default: "Very low"
-#: GenericLicence.py
-msgid "karts_constraints_verylow"
-msgstr ""
-
-#. Default: "Low"
-#: GenericLicence.py
-msgid "karts_constraints_low"
-msgstr ""
-
-#. Default: "High"
-#: GenericLicence.py
-msgid "karts_constraints_high"
-msgstr ""
-
-#: BuildLicence.py
-msgid "urban_label_water"
-msgstr ""
-
-#: BuildLicence.py
-msgid "urban_label_electricity"
 msgstr ""

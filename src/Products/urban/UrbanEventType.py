@@ -25,6 +25,7 @@ from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 
 from Products.urban.config import *
+from Products.urban.interfaces import IOptionalFields
 
 ##code-section module-header #fill in your manual code here
 from Products.Archetypes.public import DisplayList
@@ -36,6 +37,8 @@ from Products.PageTemplates.Expressions import getEngine
 from Products.urban.docgen.UrbanTemplate import IUrbanTemplate
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from zope.i18n import translate
+
+from zope.component import queryAdapter
 
 import logging
 logger = logging.getLogger('urban: UrbanEventType')
@@ -172,9 +175,14 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         """
         from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
         lst = []
-        for field in UrbanEventInquiry_schema.fields():
+        fields = UrbanEventInquiry_schema.fields()
+        additional_fields = queryAdapter(self, IOptionalFields)
+        if additional_fields:
+            fields += additional_fields.get()
+
+        for field in fields:
             try:
-                if field.optional == True:
+                if field.optional:
                     lst.append((field.getName(), translate("urban_label_" + field.getName(), 'urban', default=field.getName(), context=self.REQUEST)))
             except AttributeError:
                 #most of time, the field has not the 'optional' attribute
@@ -189,6 +197,10 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         #fields to propose to be "default valued"
         from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
         urbanevent_fields = UrbanEventInquiry_schema.fields()
+        additional_fields = queryAdapter(self, IOptionalFields)
+        if additional_fields:
+            urbanevent_fields += additional_fields.get()
+
         blacklist = ['rights', 'description']
         available_fields = [field for field in urbanevent_fields if field.getType() == 'Products.Archetypes.Field.TextField' and field.getName() not in blacklist]
         vocabulary_fields = [(field.getName(), translate(field.widget.label_msgid, 'urban', context=self.REQUEST)) for field in available_fields]

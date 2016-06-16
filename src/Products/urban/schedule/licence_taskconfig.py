@@ -2,8 +2,8 @@
 
 from Products.urban.interfaces import IGenericLicence
 
-from urban.schedule.content.task import ConfigurableMacroTask
-from urban.schedule.content.task import ConfigurableTask
+from imio.schedule.content.task import ConfigurableMacroTask
+from imio.schedule.content.task import ConfigurableTask
 
 
 class BaseLicenceTask(object):

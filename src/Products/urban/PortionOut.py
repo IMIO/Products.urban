@@ -148,6 +148,8 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
 
     meta_type = 'PortionOut'
     _at_rename_after_creation = True
+    # block local roles acquisition and let the workflow handle that
+    __ac_local_roles_block__ = True
 
     schema = PortionOut_schema
 
@@ -162,7 +164,8 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         """
           Set a correct title if we use invokeFactory
         """
-        division = self.getDivisionName().encode('utf-8')
+        division = self.getDivisionName() or ''
+        division = division.encode('utf-8')
         section = self.getSection()
         radical = self.getRadical()
         bis = self.getBis()
@@ -301,6 +304,17 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         reference = self.reference_as_dict()
         historic = cadastre.query_parcel_historic(**reference)
         return historic
+
+    def get_capakey(self):
+        capakey = "%s%s%04d/%02d%s%03d" % (
+            self.getDivisionCode(),
+            self.getSection(),
+            int(self.getRadical()),
+            self.getBis() and int(self.getBis()) or 0,
+            self.getExposant() or '_',
+            self.getPuissance() and int(self.getPuissance()) or 0
+        )
+        return capakey
 
 
 registerType(PortionOut, PROJECTNAME)

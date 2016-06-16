@@ -5,12 +5,18 @@
     i18n_domain="urban">
 
   <include package=".actionspanel" />
+  <include package=".cron" />
   <include package=".licence" />
   <include package=".table" />
   <include package=".schedule" />
   <include package=".viewlets" />
 
   <include file="portlets.zcml" />
+
+  <browser:resourceDirectory
+      name="Products.urban"
+      directory="static"
+      />
 
   <browser:page
       for="*"
@@ -23,6 +29,7 @@
   <browser:page
      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
      name="redirectto_urban_root_view"
+      class=".urban_redirects.UrbanRedirectsView"
      template="templates/redirectto_urban_root_view.pt"
      permission="zope2.View"
   />
@@ -343,6 +350,13 @@
      for="Products.urban.interfaces.IPortionOut"
      name="portionoutmacros"
      template="templates/contactmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="parcelcoring"
+     class=".parcel_coring.ParcelCoringView"
      permission="zope2.View"
   />
 

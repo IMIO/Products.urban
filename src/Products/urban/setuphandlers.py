@@ -29,6 +29,7 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import ILicenceContainer
+from Products.urban.schedule.interfaces import IUrbanScheduleView
 from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
 from Products.urban.services import cadastre
 from Products.urban.utils import generatePassword
@@ -37,24 +38,21 @@ from Products.urban.utils import getLicenceFolderId
 
 from datetime import date
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
-from imio.dashboard.browser.facetedcollectionportlet import Assignment
 from imio.dashboard.utils import _updateDefaultCollectionFor
+
 from plone import api
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import ILocalPortletAssignable
 from plone.portlets.interfaces import ILocalPortletAssignmentManager
-from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.constants import CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_TYPE_CATEGORY
 
-from urban.schedule.utils import create_tasks_collection
-from urban.schedule.utils import get_all_schedule_configs
-from urban.schedule.utils import interface_to_tuple
+from imio.schedule.utils import interface_to_tuple
+from imio.schedule.utils import set_schedule_view
 
 from zExceptions import BadRequest
 from zope.interface import alsoProvides
 from zope.component import getMultiAdapter
 from zope.component import getUtilitiesFor
-from zope.component import getUtility
 from zope.component import queryUtility
 from zope.component.interface import getInterface
 from zope.i18n.interfaces import ITranslationDomain
@@ -195,9 +193,6 @@ def extraPostInstall(context, refresh=True):
     logger.info("addUrbanVocabularies : starting...")
     addUrbanVocabularies(context)
     logger.info("addUrbanVocabularies : Done")
-    logger.info("addScheduleConfig : starting...")
-    addScheduleConfig(context)
-    logger.info("addScheduleConfig : Done")
     logger.info("addDefaultObjects : starting...")
     addDefaultObjects(context)
     logger.info("addDefaultObjects : Done")
@@ -249,19 +244,19 @@ def createVocabularyFolders(container, vocabularies, site):
         createVocabularyFolder(container, vocname, site, allowedtypes)
 
 
-def createScheduleConfigs(container, portal_type):
+def createScheduleConfig(container, portal_type, id='schedule', title=''):
     """
     Create empty schedule config folders for each licence type.
     """
     portal_types = api.portal.get_tool('portal_types')
     type_info = portal_types.getTypeInfo('ScheduleConfig')
 
-    if not hasattr(container, 'schedule'):
+    if not hasattr(container, id):
         type_info._constructInstance(
             container=container,
-            id='schedule',
-            title=u'{} {}'.format(
-                _('ScheduleConfig', 'urban.schedule'),
+            id=id,
+            title=title or u'{} {}'.format(
+                _('ScheduleConfig', 'imio.schedule'),
                 _(portal_type, 'urban')
             ),
             scheduled_contenttype=(
@@ -269,6 +264,9 @@ def createScheduleConfigs(container, portal_type):
                 interface_to_tuple(URBAN_TYPES_INTERFACES[portal_type])
             ),
         )
+    schedule_config = getattr(container, id)
+    return schedule_config
+
 
 
 def getSharedVocabularies(urban_type, licence_vocabularies):
@@ -500,31 +498,6 @@ def addExploitationConditions(context, config_folder):
                     field = old_condition.getField(fieldname)
                     mutator = field.getMutator(old_condition)
                     mutator(newvalue)
-
-
-def addScheduleConfig(context):
-    """
-    Add schedule config for each licence type.
-    """
-    if context.readDataFile('urban_extra_marker.txt') is None:
-        return
-
-    profile_name = context._profile_path.split('/')[-1]
-    module_name = 'Products.urban.profiles.%s.schedule_config' % profile_name
-    attribute = 'schedule_config'
-    module = __import__(module_name, fromlist=[attribute])
-    schedule_config = getattr(module, attribute)
-
-    portal_urban = api.portal.get_tool('portal_urban')
-    for urban_type in URBAN_TYPES:
-        licence_config_id = urban_type.lower()
-        if licence_config_id in schedule_config:
-            config_folder = getattr(portal_urban, licence_config_id)
-            schedule_folder = getattr(config_folder, 'schedule')
-            createFolderDefaultValues(
-                schedule_folder,
-                schedule_config[licence_config_id]
-            )
 
 
 def addUrbanGroups(context):
@@ -921,61 +894,43 @@ def setupSchedule(context):
         urban_folder.invokeFactory('Folder', id='schedule')
     schedule_folder = getattr(urban_folder, 'schedule')
 
-    # block parent portlets
-    manager = getUtility(IPortletManager, name='plone.leftcolumn')
-    blacklist = getMultiAdapter((schedule_folder, manager), ILocalPortletAssignmentManager)
-    blacklist.setBlacklistStatus(CONTEXT_CATEGORY, True)
-
-    # assign collection portlet
-    manager = getUtility(IPortletManager, name='plone.leftcolumn', context=schedule_folder)
-    mapping = getMultiAdapter((schedule_folder, manager), IPortletAssignmentMapping)
-    if 'schedules' not in mapping.keys():
-        mapping['schedules'] = Assignment('schedules')
-
+    schedule_configs = []
     for urban_type in URBAN_TYPES:
         config_folder = getattr(portal_urban, urban_type.lower())
-        createScheduleConfigs(container=config_folder, portal_type=urban_type)
+        createScheduleConfig(container=config_folder, portal_type=urban_type)
+        schedule_config = getattr(config_folder, 'schedule')
+        schedule_config.dashboard_collection.customViewFields = (
+            u'sortable_title',
+            u'pretty_link',
+            u'address_column',
+            u'parcelreferences_column',
+            u'assigned_user_column',
+            u'status',
+            u'due_date',
+            u'task_actions_column',
+        )
+        schedule_configs.append(schedule_config)
 
-    setFolderAllowedTypes(schedule_folder, 'Folder')
-    for schedule_config in get_all_schedule_configs():
+    for schedule_config in schedule_configs:
         folder_id = schedule_config.get_scheduled_portal_type().lower()
-        collection_id = '{}_tasks'.format(folder_id)
         licence_name = _(schedule_config.get_scheduled_portal_type(), 'urban')
 
         if not hasattr(schedule_folder, folder_id):
+            setFolderAllowedTypes(schedule_folder, ['Folder'])
             schedule_folder.invokeFactory(
                 'Folder',
                 id=folder_id,
                 title=licence_name
             )
         collection_folder = getattr(schedule_folder, folder_id)
+        config_path = '{}/schedule/config/{}.xml'.format(
+            os.path.dirname(__file__),
+            folder_id
+        )
+        set_schedule_view(collection_folder, config_path, schedule_config)
 
-        config_path = '/schedule/config/{}.xml'.format(folder_id)
-        subtyper = collection_folder.restrictedTraverse('@@faceted_subtyper')
-        if not subtyper.is_faceted:
-            subtyper.enable()
-            collection_folder.restrictedTraverse('@@faceted_settings').toggle_left_column()
-            IFacetedLayout(collection_folder).update_layout('faceted-table-items')
-            collection_folder.unrestrictedTraverse('@@faceted_exportimport').import_xml(
-                import_file=open(os.path.dirname(__file__) + config_path)
-            )
-
-        if not hasattr(collection_folder, collection_id):
-            setFolderAllowedTypes(collection_folder, 'DashboardCollection')
-            create_tasks_collection(
-                schedule_config,
-                container=collection_folder,
-                id=collection_id,
-                title=licence_name
-            )
-            setFolderAllowedTypes(collection_folder, [])
     setFolderAllowedTypes(schedule_folder, [])
 
-    buildlicence_collection = schedule_folder.buildlicence.buildlicence_tasks
-    _updateDefaultCollectionFor(
-        schedule_folder.buildlicence,
-        buildlicence_collection.UID()
-    )
 
 
 def addTestUsers(site):

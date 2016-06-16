@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="Products.urban">
+
+    <adapter
+        for="Products.urban.interfaces.IGenericLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IDefaultTaskUser"
+        factory=".assign_principal.LicenceFolderManager"
+        name="urban.assign_folder_manager"
+    />
+
+</configure>

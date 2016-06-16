@@ -25,7 +25,7 @@
    <property name="hidealloption">1</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
-   <property name="default">ba90a4ce59fc480f9d8a3bd4ea76748d</property>
+   <property name="default">a7620e2c5c874a81b14f677a07e8331c</property>
   </criterion>
   <criterion name="c10">
    <property name="widget">autocomplete</property>
@@ -72,6 +72,24 @@
    <property
       name="autocomplete_view">cadastral-autocomplete-suggest</property>
    <property name="onlyallelements">1</property>
+  </criterion>
+  <criterion name="c9">
+   <property name="widget">checkbox</property>
+   <property name="title">Rive</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">0</property>
+   <property name="count">0</property>
+   <property name="sortcountable">0</property>
+   <property name="hidezerocount">0</property>
+   <property name="index">shore</property>
+   <property name="operator">or</property>
+   <property name="operator_visible">1</property>
+   <property name="vocabulary">liege.shore</property>
+   <property name="catalog"></property>
+   <property name="maxitems"></property>
+   <property name="sortreversed">0</property>
+   <property name="default"/>
   </criterion>
   <criterion name="c5">
    <property name="widget">autocomplete</property>

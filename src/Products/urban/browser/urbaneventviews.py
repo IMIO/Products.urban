@@ -41,6 +41,10 @@ class UrbanEventView(BrowserView):
             data[1].append(activatedField)
         return data
 
+    def isTextField(self, field_name):
+        field = self.context.getField(field_name)
+        return field.type == 'text'
+
     def mayAddUrbanEvent(self):
         """
           Return True if the current user may add an UrbanEvent

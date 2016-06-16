@@ -2,16 +2,9 @@
     xmlns="http://namespaces.zope.org/zope"
     i18n_domain="Products.urban">
 
-    <include file="conditions.zcml" />
-    <include file="due_date.zcml" />
-    <include file="vocabulary.zcml" />
+    <include package=".conditions" />
 
-    <adapter
-        for="Products.urban.interfaces.IGenericLicence
-             urban.schedule.content.task.IAutomatedTask"
-        provides="urban.schedule.interfaces.IDefaultTaskUser"
-        factory=".default_user.LicenceFolderManager"
-        name="urban.assign_folder_manager"
-    />
+    <include file="assign_principal.zcml" />
+    <include file="start_date.zcml" />
 
 </configure>

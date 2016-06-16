@@ -578,7 +578,7 @@ class UrbanBase(object):
         """
         selfPhysPath = '/'.join(self.getPhysicalPath())
         #do the test in 2 if to avoid getting the tool if not necessary
-        if self.restrictedTraverse(selfPhysPath + '/@@plone_lock_info/is_locked_for_current_user')():
+        if self.unrestrictedTraverse(selfPhysPath + '/@@plone_lock_info/is_locked_for_current_user')():
             return False
         tool = api.portal.get_tool('portal_urban')
         if tool.getUrbanConfig(self).getUseTabbingForDisplay():
@@ -673,7 +673,9 @@ class UrbanBase(object):
 
     def _getVocabularyDisplayList(self, fieldname, obj):
         fieldname = type(fieldname) is str and fieldname or fieldname[0]
-        vocabulary = obj.getField(fieldname).vocabulary
+        vocabulary = getattr(obj.getField(fieldname), 'vocabulary', None)
+        if not vocabulary:
+            return None
         displaylist = None
         if hasattr(vocabulary, 'getDisplayListForTemplate'):
             displaylist = vocabulary.getDisplayListForTemplate(obj)

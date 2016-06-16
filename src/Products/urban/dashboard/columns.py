@@ -5,6 +5,7 @@ from plone import api
 from Products.urban.browser.table.column import FoldermanagerColumn
 from Products.urban.browser.table.interfaces import ITitleCell
 from Products.urban.browser.table.interfaces import ITitleColumn
+from imio.dashboard.columns import ActionsColumn
 
 from collective.eeafaceted.z3ctable.columns import BaseColumn
 
@@ -79,8 +80,8 @@ class AddressColumn(BaseColumn):
     sort_index = -1
 
     def renderCell(self, item):
-        licence = item.getObject()
-        addresses = licence.getWorkLocationSignaletic()
+        task = item.getObject()
+        addresses = task.getWorkLocationSignaletic()
 
         address_render = []
         for address in addresses.split(' et '):
@@ -137,3 +138,32 @@ class TaskLicenceTitleDisplay(TitleDisplay, ScheduleColumn):
         licence_brain = self.query_licence(self.brain)
         title = self.column.renderTitleLink(licence_brain)
         return title
+
+
+class AssignedUserColumn(BaseColumn):
+    """ display licence address in SearchResultTable """
+
+    def renderCell(self, item):
+        user = item.assigned_user
+        group = item.assigned_group
+
+        assigned = user
+        if group:
+            assigned = '{user} ({group})'.format(
+                user=user,
+                group=group
+            )
+
+        return assigned
+
+
+class TaskActionsColumn(ActionsColumn):
+    """Display actions for the task"""
+    params = {
+        'showHistory': False,
+        'showActions': False,
+        'showOwnDelete': False,
+        'showEdit': False,
+        'showTransitions': False,
+        'showChangeOwner': True,
+    }

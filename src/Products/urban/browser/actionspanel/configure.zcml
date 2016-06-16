@@ -177,6 +177,26 @@
         allowed_attributes="render"
         permission="zope2.View" />
 
+    <browser:page
+      for="imio.schedule.content.task.AutomatedTask"
+      name="actions_panel"
+      class="Products.urban.browser.actionspanel.actionspanel.TaskActionsPanelView"
+      layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+      template="browser/actions_panel.pt"
+      allowed_attributes="render"
+      permission="zope2.View"
+      />
+
+    <browser:page
+      for="imio.schedule.content.task.AutomatedMacroTask"
+      name="actions_panel"
+      class="Products.urban.browser.actionspanel.actionspanel.TaskActionsPanelView"
+      layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+      template="browser/actions_panel.pt"
+      allowed_attributes="render"
+      permission="zope2.View"
+      />
+
   </configure>
 
 </configure>

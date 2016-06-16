@@ -55,7 +55,7 @@ class DashboardCollections(ConditionAwareCollectionVocabulary):
                 'query': '/'.join(folder.getPhysicalPath()),
                 'depth': 1
             },
-            object_provides='plone.app.collection.interfaces.ICollection',
+            object_provides='imio.dashboard.interfaces.IDashboardCollection',
             sort_on='getObjPositionInParent'
         )
         return list(brains)

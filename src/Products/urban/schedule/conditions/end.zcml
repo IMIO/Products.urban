@@ -1,0 +1,98 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="Products.urban">
+
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.DepositDoneCondition"
+        name="urban.schedule.condition.deposit_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.ProcedureChoiceDone"
+        name="urban.schedule.condition.procedure_choice_done"
+    />
+
+    <!-- folder complete conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.ComplementsAsked"
+        name="urban.schedule.condition.complements_asked"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.ComplementsReceived"
+        name="urban.schedule.condition.complements_received"
+    />
+
+    <!-- acknowlegdment conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.AcknowledgmentDoneCondition"
+        name="urban.schedule.condition.acknowledgment_done"
+    />
+
+    <!-- opinion requests conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.OpinionRequestsEventsCreated"
+        name="urban.schedule.condition.opinion_requests_created"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.OpinionRequestsDone"
+        name="urban.schedule.condition.opinion_requests_done"
+    />
+
+    <!-- inquiry conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.InquiryDatesDefinedCondition"
+        name="urban.schedule.condition.inquiry_dates_defined"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.InquiryEventCreatedCondition"
+        name="urban.schedule.condition.inquiry_event_created"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.InquiryDoneCondition"
+        name="urban.schedule.condition.inquiry_done"
+    />
+
+    <!-- analysis conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.UrbanAnalysisDone"
+        name="urban.schedule.condition.analysis_done"
+    />
+
+</configure>

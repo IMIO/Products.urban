@@ -44,11 +44,11 @@
         />
     </configure>
 
-    <configure package="urban.schedule">
+    <configure package="imio.schedule">
         <adapter
            for="plone.dexterity.interfaces.IDexterityFTI"
            factory="Products.urban.schedule.vocabulary.UrbanScheduledTypeVocabulary"
-           provides="urban.schedule.interfaces.IScheduledContentTypeVocabulary"
+           provides="imio.schedule.interfaces.IScheduledContentTypeVocabulary"
            name="ScheduleConfig"
         />
     </configure>

@@ -1,0 +1,60 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2015-11-19 09:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+msgid "urban.assign_folder_manager"
+msgstr "Gestionnaire du dossier"
+
+msgid "urban.schedule.condition.acknowledgment_done"
+msgstr "Créer l'événement d'accusé de réception et le clôturer"
+
+msgid "urban.schedule.condition.analysis_done"
+msgstr "Retour service urbanisme fait"
+
+msgid "urban.schedule.condition.complements_asked"
+msgstr "Créer l'événement 'dossier incomplet' et le clôturer"
+
+msgid "urban.schedule.condition.complements_received"
+msgstr "Créer l'événement 'récépissé d'un complément' et le clôturer"
+
+msgid "urban.schedule.condition.deposit_done"
+msgstr "Créer l'événement de dépôt et le clôturer"
+
+msgid "urban.schedule.condition.folder_complete"
+msgstr "Accusé de réception fait."
+
+msgid "urban.schedule.condition.has_inquiry"
+msgstr "Une enquête publique est définie"
+
+msgid "urban.schedule.condition.inquiry_done"
+msgstr "Enquête terminée"
+
+msgid "urban.schedule.condition.inquiry_event_created"
+msgstr "Créer l'événement d'enquête publique"
+
+msgid "urban.schedule.condition.procedure_choice_done"
+msgstr "Sélectionner une valeur dans le champ 'Catégorie du dossier RW'"
+
+msgid "urban.start_date.acknowledgement_date"
+msgstr "Date d'accusé de réception du dossier"
+
+msgid "urban.start_date.creation_date"
+msgstr "Date de création du dossier"
+
+msgid "urban.start_date.deposit_date"
+msgstr "Date de dépôt du dossier"
+
+msgid "urban.start_date.inquiry_end_date"
+msgstr "Date de fin de l'enquête publique"

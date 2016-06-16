@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2016-03-08 08:51+0000\n"
+"POT-Creation-Date: 2016-05-23 07:57+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -220,6 +220,12 @@ msgstr "Parcelle"
 
 msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
+
+msgid "PatrimonyCertificate"
+msgstr "Certificat de patrimoine"
+
+msgid "PreliminaryNotice"
+msgstr "Demande d'avis préalable"
 
 msgid "Proprietary data"
 msgstr "Coordonnées du propriétaire"
@@ -2050,6 +2056,10 @@ msgstr "Nom alternatif des divisions pour la génération des documents"
 msgid "urban_label_editionOutputFormat"
 msgstr "Format de fichier des modèles générés"
 
+#: BuildLicence.py
+msgid "urban_label_electricity"
+msgstr "Electricité"
+
 #. Default: "Email"
 #: Contact.py
 msgid "urban_label_email"
@@ -3335,6 +3345,10 @@ msgstr "Visibilité?"
 msgid "urban_label_walloonRegionPrimoDate"
 msgstr "Date primo dossier"
 
+#: BuildLicence.py
+msgid "urban_label_water"
+msgstr "Eau"
+
 #. Default: "Webserverhost"
 #: UrbanTool.py
 msgid "urban_label_webServerHost"
@@ -3519,11 +3533,3 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
-
-#: BuildLicence.py
-msgid "urban_label_water"
-msgstr "Eau"
-
-#: BuildLicence.py
-msgid "urban_label_electricity"
-msgstr "Electricité"

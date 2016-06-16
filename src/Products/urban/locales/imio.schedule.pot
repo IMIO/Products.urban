@@ -1,0 +1,60 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2015-11-19 09:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8\n"
+"Domain: imio.schedule\n"
+
+msgid "urban.schedule.condition.acknowledgment_done"
+msgstr ""
+
+msgid "urban.schedule.condition.analysis_done"
+msgstr ""
+
+msgid "urban.schedule.condition.complements_asked"
+msgstr ""
+
+msgid "urban.schedule.condition.complements_received"
+msgstr ""
+
+msgid "urban.schedule.condition.deposit_done"
+msgstr ""
+
+msgid "urban.schedule.condition.folder_complete"
+msgstr ""
+
+msgid "urban.schedule.condition.has_inquiry"
+msgstr ""
+
+msgid "urban.schedule.condition.inquiry_done"
+msgstr ""
+
+msgid "urban.schedule.condition.inquiry_event_created"
+msgstr ""
+
+msgid "urban.schedule.condition.procedure_choice_done"
+msgstr ""
+
+msgid "urban.assign_folder_manager"
+msgstr ""
+
+msgid "urban.start_date.acknowledgement_date"
+msgstr ""
+
+msgid "urban.start_date.creation_date"
+msgstr ""
+
+msgid "urban.start_date.deposit_date"
+msgstr ""
+
+msgid "urban.start_date.inquiry_end_date"
+msgstr ""

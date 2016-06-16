@@ -224,9 +224,13 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         if not context or not field:
             return ['']
         urban_tool = getToolByName(self, 'portal_urban')
-        vocabulary_name = field.vocabulary.path
-        in_urban_config = field.vocabulary.inUrbanConfig
-        return urban_tool.getVocabularyDefaultValue(vocabulary_name=vocabulary_name, context=context, in_urban_config=in_urban_config)
+
+        default_value = urban_tool.getVocabularyDefaultValue(
+            vocabulary=field.vocabulary,
+            context=context,
+            multivalued=field.multiValued
+        )
+        return default_value
 
     security.declarePublic('getDefaultText')
     def getDefaultText(self, context=None, field=None, html=False):

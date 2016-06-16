@@ -23,11 +23,11 @@
                 </td>
                 <tal:manage_show_nc_if_needed define="value python: context.getField(field).getAccessor(context)()">
                     <td tal:condition="value">
-                        <tal:no_long_text condition="python: not 'Text' in field">
+                        <tal:no_long_text condition="python: not view.isTextField(field)">
                             <metal:myfield use-macro="python: context.widget(field, mode='view')" />
                         </tal:no_long_text>
                         <!-- For long text, just show the first words and add a link to see the entire text -->
-                        <tal:long_text condition="python: 'Text' in field">
+                        <tal:long_text condition="python: view.isTextField(field)">
                             <tal:block define="infos python: context.portal_urban.getTextToShow(context, field);
                                                isTooLong python: infos[0];
                                                textToShow python: infos[1];">
