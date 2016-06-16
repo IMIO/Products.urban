@@ -13,11 +13,14 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = 'plaintext'
 
+from collective.delaycalculator import workday
+from datetime import date
 from zope.component.interface import interfaceToName
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import DisplayList
 
 from Products.urban.utils import getCurrentFolderManager as currentFolderManager
+from Products.urban.utils import removeItems
 from plone import api
 from zope.i18n import translate
 from zope.interface import implements
@@ -366,12 +369,17 @@ class UrbanBase(object):
         """
         tool = api.portal.get_tool('portal_urban')
         claimants = self._getLastEvent(interfaces.IUrbanEventInquiry).getClaimants()
-        toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2|DateReclamation'
+        toreturn = '<CSV>Titre|TitreR|Nom|Prenom|AdresseLigne1|AdresseLigne2|DateReclamation'
         for claimant in claimants:
-            toreturn = toreturn + '%' + claimant.getPersonTitleValue() + '|' + claimant.getName1() + '|' +\
-                    claimant.getName2() + '|' + claimant.getNumber() + ', ' + claimant.getStreet() + '|' + \
-                    claimant.getZipcode() + ' ' + claimant.getCity() + '|' +\
-                    tool.formatDate(claimant.getClaimDate()).decode('utf8')
+            toreturn = toreturn + '%' + claimant.getPersonTitleValue().decode('utf8') +\
+                    '|' + claimant.getPersonTitleValue(reverse=True).decode('utf8') +\
+                    '|' + claimant.getName1().decode('utf8') +\
+                    '|' + claimant.getName2().decode('utf8') +\
+                    '|' + claimant.getNumber().decode('utf8') +\
+                    ', ' + claimant.getStreet().decode('utf8') +\
+                    '|' + claimant.getZipcode().decode('utf8') +\
+                    ' ' + claimant.getCity().decode('utf8') +\
+                    '|' + tool.formatDate(claimant.getClaimDate()).decode('utf8')
         toreturn = toreturn + '</CSV>'
         return toreturn
 
@@ -489,12 +497,17 @@ class UrbanBase(object):
         if events:
             return events[-1]
 
+    def _getFirstEvent(self, eventInterface=None, use_catalog=True):
+        events = self._getAllEvents(eventInterface, use_catalog)
+        if events:
+            return events[0]
+
     security.declarePublic('getUrbanEvents')
     def getUrbanEvents(self):
         """
           Return every contained UrbanEvents (of any type)...
         """
-        return self.listFolderContents({'portal_type': ('UrbanEventInquiry', 'UrbanEvent')})
+        return self.listFolderContents({'portal_type': ('UrbanEventInquiry', 'UrbanEvent', 'UrbanEventOpinionRequest')})
 
     security.declarePublic('getInquiries')
     def getInquiries(self):
@@ -519,6 +532,43 @@ class UrbanBase(object):
           Returns the existing UrbanEventInquiries
         """
         return self.listFolderContents({'portal_type': 'UrbanEventInquiry'})
+
+    security.declarePublic('getUrbanEventOpinionRequests')
+    def getUrbanEventOpinionRequests(self):
+        """
+          Return all UrbanEventOpinionRequests
+        """
+        return self.listFolderContents({'portal_type': ('UrbanEventOpinionRequest')})
+
+    security.declarePublic('getUrbanEvent')
+    def getUrbanEvent(self, title=''):
+        """
+          Return a specific title's UrbanEvent
+        """
+        i = 0
+        found = False
+        urbanEvent = None
+        urbanEvents = self.getUrbanEvents()
+        while i < len(urbanEvents) and not found:
+            if urbanEvents[i].Title() == title:
+                found = True
+                urbanEvent = urbanEvents[i]
+            i = i + 1
+        return urbanEvent
+
+    security.declarePublic('containsUrbanEvent')
+    def containsUrbanEvent(self, title=''):
+        """
+          find a specific title's UrbanEvent
+        """
+        i = 0
+        found = False
+        urbanEvents = self.getUrbanEvents()
+        while i < len(urbanEvents) and not found:
+            if urbanEvents[i].Title() == title:
+                found = True
+            i = i + 1
+        return found
 
     security.declarePublic('mayShowEditAction')
     def mayShowEditAction(self):
@@ -651,3 +701,24 @@ class UrbanBase(object):
         urban_tool = api.portal.get_tool('portal_urban')
         vocabulary = urban_tool.listVocabulary(voc_name, context=self, inUrbanConfig=inUrbanConfig, with_numbering=False)
         return vocabulary
+
+    security.declarePublic('workday')
+    def workday(self, start_date, days=0, holidays=[], weekends=[], unavailable_weekdays=[]):
+        return workday(date(start_date.year(), start_date.month(), start_date.day()), days, holidays, weekends,
+                unavailable_weekdays)
+
+    security.declarePublic('listSolicitOpinionsTo')
+    def listSolicitOpinionsTo(self, unless=[]):
+        return removeItems(list(self.getValuesForTemplate('solicitOpinionsTo')), unless)
+
+    security.declarePublic('getFirstGradeIdSfolderManager')
+    def getFirstGradeIdSfolderManager(self, gradeId=''):
+        folderManager = None
+        found = False
+        i = 0
+        while not found and i < len(self.getFoldermanagers()):
+            if self.getFoldermanagers()[i].getGrade() == gradeId:
+                found = True
+                folderManager = self.getFoldermanagers()[i]
+            i = i + 1
+        return folderManager

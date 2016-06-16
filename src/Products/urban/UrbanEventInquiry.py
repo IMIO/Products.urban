@@ -57,13 +57,13 @@ schema = Schema((
         optional=True,
     ),
     DateTimeField(
-        name='claimStartSDate',
+        name='claimsDate',
         widget=DateTimeField._properties['widget'](
             show_hm=True,
-            condition="python:here.attributeIsUsed('claimStartSDate')",
+            condition="python:here.attributeIsUsed('claimsDate')",
             format="%d/%m/%Y %H:%M",
-            label='Claimstartsdate',
-            label_msgid='urban_label_claimStartSDate',
+            label='Claimsdate',
+            label_msgid='urban_label_claimsDate',
             i18n_domain='urban',
         ),
         optional=True,
@@ -73,7 +73,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=True,
             condition="python:here.attributeIsUsed('claimEndSDate')",
-            format="%d/%m/%Y%H",
+            format="%d/%m/%Y %H:%M",
             label='Claimendsdate',
             label_msgid='urban_label_claimEndSDate',
             i18n_domain='urban',

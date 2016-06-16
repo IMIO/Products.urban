@@ -1258,6 +1258,12 @@ msgstr ""
 msgid "persons_titles_folder_title"
 msgstr ""
 
+msgid "karst_constraints_folder_title"
+msgstr ""
+
+msgid "concentrated_runoff_s_risk_folder_title"
+msgstr ""
+
 #. Default: "Madam"
 #: Contact.py
 msgid "persontitle_madam"
@@ -1875,9 +1881,9 @@ msgstr ""
 msgid "urban_label_claimEndSDate"
 msgstr ""
 
-#. Default: "Claimstartsdate"
+#. Default: "ClaimsDate"
 #: UrbanEventInquiry.py
-msgid "urban_label_claimStartSDate"
+msgid "urban_label_claimsDate"
 msgstr ""
 
 #. Default: "Claimingtext"
@@ -3501,4 +3507,24 @@ msgid "years"
 msgstr ""
 
 msgid "zip_folder_title"
+msgstr ""
+
+#. Default: "concentratedrunoffsrisk"
+#: GenericLicence.py
+msgid "urban_label_concentratedRunoffSRisk"
+msgstr ""
+
+#. Default: "concentratedrunoffsriskdetails"
+#: GenericLicence.py
+msgid "urban_label_concentratedRunoffSRiskDetails"
+msgstr ""
+
+#. Default: "sevesoSite"
+#: GenericLicence.py
+msgid "urban_label_sevesoSite"
+msgstr ""
+
+#. Default: "natura_2000"
+#: GenericLicence.py
+msgid "urban_label_natura_2000"
 msgstr ""

@@ -92,6 +92,7 @@ optional_fields = [
     'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails',
     'PRevU', 'prevuDetails', 'PRenU', 'prenuDetails', 'airportNoiseZone', 'airportNoiseZoneDetails',
     'description', 'rgbsr', 'rgbsrDetails', 'karstConstraints', 'karstConstraintsDetails',
+    'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', 'sevesoSite', 'natura_2000'
 ]
 ##/code-section module-header
 
@@ -182,8 +183,8 @@ schema = Schema((
     ),
     TextField(
         name='missingPartsDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label='Missingpartsdetails',
             label_msgid='urban_label_missingPartsDetails',
             i18n_domain='urban',
@@ -222,8 +223,8 @@ schema = Schema((
     ),
     TextField(
         name='roadMissingPartsDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label='Roadmissingpartsdetails',
             label_msgid='urban_label_roadMissingPartsDetails',
             i18n_domain='urban',
@@ -321,16 +322,18 @@ schema = Schema((
         default_content_type='text/plain',
         default_output_type='text/plain',
     ),
-    StringField(
+    LinesField(
         name='karstConstraints',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
+            format='checkbox',
             label='Karstconstraints',
             label_msgid='urban_label_karstConstraints',
             i18n_domain='urban',
         ),
-        enforceVocabulary= True,
         schemata='urban_road',
-        vocabulary='listKarstConstraints',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('karst_constraints', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     TextField(
         name='karstConstraintsDetails',
@@ -344,6 +347,58 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_road',
         default_output_type='text/plain',
+    ),
+    LinesField(
+        name='concentratedRunoffSRisk',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='concentratedrunoffsrisk',
+            label_msgid='urban_label_concentratedRunoffSRisk',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('concentrated_runoff_s_risk', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='concentratedRunoffSRiskDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='concentratedrunoffsriskdetails',
+            label_msgid='urban_label_concentratedRunoffSRiskDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_road',
+        default_output_type='text/plain',
+    ),
+    LinesField(
+        name='sevesoSite',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='sevesosite',
+            label_msgid='urban_label_sevesoSite',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('seveso_site', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    LinesField(
+        name='natura_2000',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='natura_2000',
+            label_msgid='urban_label_natura_2000',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('natura_2000', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     StringField(
         name='floodingLevel',
@@ -410,8 +465,8 @@ schema = Schema((
     ),
     TextField(
         name='locationMissingPartsDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label='Locationmissingpartsdetails',
             label_msgid='urban_label_locationMissingPartsDetails',
             i18n_domain='urban',
@@ -983,23 +1038,6 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
             ('far', translate(_('far_prevention_area'), context=self.REQUEST)),
             ('supervision', translate(_('supervision_area'), context=self.REQUEST)),
             ('ouside', translate(_('outside_catchment'), context=self.REQUEST)),
-        )
-
-        return DisplayList(vocab)
-
-    security.declarePublic('listKarstConstraints')
-    def listKarstConstraints(self):
-        """
-          This vocabulary for field karstConstraints returns a list of
-          karst constraints : no risk, low risk, moderated risk, high risk
-        """
-        vocab = (
-            #we add an empty vocab value of type "choose a value"
-            ('',  translate(_(EMPTY_VOCAB_VALUE), context=self.REQUEST)),
-            ('no', translate(_('karst_constraints_no'), context=self.REQUEST)),
-            ('very low', translate(_('karts_constraints_verylow'), context=self.REQUEST)),
-            ('low', translate(_('karts_constraints_low'), context=self.REQUEST)),
-            ('high', translate(_('karts_constraints_high'), context=self.REQUEST)),
         )
 
         return DisplayList(vocab)

@@ -173,7 +173,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimStartSDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -803,7 +803,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimStartSDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -1429,7 +1429,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimStartSDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -1877,7 +1877,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimStartSDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
@@ -2325,7 +2325,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimStartSDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
@@ -3234,7 +3234,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimStartSDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",

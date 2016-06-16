@@ -704,12 +704,12 @@ msgstr "Zone de prévention éloignée"
 #. Default: "${name} residing at ${address}"
 #: Contact.py
 msgid "feminine_plural_residing"
-msgstr "${name}, domiciliées à ${address}"
+msgstr "${name}, domiciliées ${address}"
 
 #. Default: "${name} residing at ${address}"
 #: Contact.py
 msgid "feminine_singular_residing"
-msgstr "${name}, domiciliée à ${address}"
+msgstr "${name}, domiciliée ${address}"
 
 msgid "fieldsetlegend-attachments"
 msgstr "Pièces jointes"
@@ -1088,7 +1088,7 @@ msgstr "Configuration des cartes"
 #. Default: "${name} residing at ${address}"
 #: Contact.py
 msgid "masculine_singular_residing"
-msgstr "${name}, domicilié à ${address}"
+msgstr "${name}, domicilié ${address}"
 
 msgid "miscdemand_urbanconfig_title"
 msgstr "Paramètres des 'divers'"
@@ -1102,7 +1102,7 @@ msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes"
 #. Default: "${name} residing at ${address}"
 #: Contact.py
 msgid "mixed_residing"
-msgstr "${name}, domiciliés à ${address}"
+msgstr "${name}, domiciliés ${address}"
 
 #. Default: "Plural"
 #: PersonTitleTerm.py
@@ -1258,6 +1258,12 @@ msgstr "Grades des personnes"
 
 msgid "persons_titles_folder_title"
 msgstr "Titres des personnes"
+
+msgid "karst_constraints_folder_title"
+msgstr "Contraintes karstiques"
+
+msgid "concentrated_runoff_s_risk_folder_title"
+msgstr "Risque de ruissellement concentré"
 
 #. Default: "Madam"
 #: Contact.py
@@ -1869,16 +1875,16 @@ msgstr "Nom de la commune"
 #. Default: "Claimdate"
 #: Claimant.py
 msgid "urban_label_claimDate"
-msgstr "Date de la réclamation"
+msgstr "Date de réception"
 
 #. Default: "Claimendsdate"
 #: UrbanEventInquiry.py
 msgid "urban_label_claimEndSDate"
 msgstr "Date de fin de la séance de réclamations"
 
-#. Default: "Claimstartsdate"
+#. Default: "ClaimsDate"
 #: UrbanEventInquiry.py
-msgid "urban_label_claimStartSDate"
+msgid "urban_label_claimsDate"
 msgstr "Date de debut de la séance de réclamations"
 
 #. Default: "Claimingtext"
@@ -2390,6 +2396,26 @@ msgstr "Contraintes karstiques"
 #: GenericLicence.py
 msgid "urban_label_karstConstraintsDetails"
 msgstr "Détails concernant les contraintes karstiques"
+
+#. Default: "concentratedrunoffsrisks"
+#: GenericLicence.py
+msgid "urban_label_concentratedRunoffSRisk"
+msgstr "Risque de ruissellement concentré"
+
+#. Default: "concentratedrunoffsrisksdetails"
+#: GenericLicence.py
+msgid "urban_label_concentratedRunoffSRiskDetails"
+msgstr "Détails concerant le risque de ruissellement concentré"
+
+#. Default: "sevesoSite"
+#: GenericLicence.py
+msgid "urban_label_sevesoSite"
+msgstr "Sites Seveso"
+
+#. Default: "natura_2000"
+#: GenericLicence.py
+msgid "urban_label_natura_2000"
+msgstr "Périmètre d'un site NATURA 2000 (ou proximité)"
 
 #. Default: "Keydates"
 #: UrbanEventType.py
