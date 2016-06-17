@@ -2766,6 +2766,11 @@ msgstr "Titre"
 msgid "urban_label_phone"
 msgstr "Téléphone"
 
+#. Default: "Gsm"
+#: Contact.py
+msgid "urban_label_gsm"
+msgstr "Gsm"
+
 #. Default: "Plone user id"
 #: FolderManager.py
 msgid "urban_label_ploneUserId"

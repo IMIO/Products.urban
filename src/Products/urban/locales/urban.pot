@@ -2713,6 +2713,11 @@ msgstr ""
 msgid "urban_label_phone"
 msgstr ""
 
+#. Default: "Gsm"
+#: Contact.py
+msgid "urban_label_gsm"
+msgstr ""
+
 #. Default: "Plone user id"
 #: FolderManager.py
 msgid "urban_label_ploneUserId"
