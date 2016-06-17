@@ -26,6 +26,25 @@ class LicenceActionsPanelView(ActionsPanelView):
         self.IGNORABLE_ACTIONS = ('cut', 'paste', 'rename', 'copy')
 
 
+class LicenceTransitionsPanelView(ActionsPanelView):
+    """
+    Actions panel view of Licences.
+    """
+    def __init__(self, context, request):
+        super(LicenceTransitionsPanelView, self).__init__(context, request)
+
+        self.SECTIONS_TO_RENDER = ('renderTransitions',)
+
+    def _transitionsToConfirm(self):
+        portal_workflow = api.portal.get_tool('portal_workflow')
+        workflow = portal_workflow.getWorkflowsFor(self.context)[0]
+        transitions = workflow.transitions.objectIds()
+
+        to_confirm = dict([('BuildLicence.%s' % tr, 'simpleconfirm_view') for tr in transitions])
+
+        return to_confirm
+
+
 class ConfigValueActionsPanelView(ActionsPanelView):
     """
     Actions panel view of Licences.

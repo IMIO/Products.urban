@@ -4,6 +4,15 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="urban">
 
+  <browser:page
+      for="*"
+      name="simpleconfirm_view"
+      class=".confirm.UrbanConfirmTransitionView"
+      permission="zope2.View"
+      layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+      template="confirm.pt"
+  />
+
   <configure package="imio.actionspanel">
 
     <browser:viewlet
@@ -43,6 +52,16 @@
         template="browser/actions_panel.pt"
         allowed_attributes="render"
         permission="zope2.View" />
+
+    <browser:page
+        for="Products.urban.interfaces.IGenericLicence"
+        name="transitions_panel"
+        class="Products.urban.browser.actionspanel.LicenceTransitionsPanelView"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        template="browser/actions_panel.pt"
+        allowed_attributes="render"
+        permission="zope2.View"
+     />
 
     <browser:viewlet
        for="plone.app.folder.folder.IATUnifiedFolder"
