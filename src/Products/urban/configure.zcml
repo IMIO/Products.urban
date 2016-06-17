@@ -18,6 +18,7 @@
   <include package="imio.dashboard"/>
   <include package="Products.Archetypes"/>
   <include package="Products.CMFPlacefulWorkflow"/>
+  <include package="Products.cron4plone"/>
   <include package="Products.DataGridField"/>
   <include package="Products.Five"/>
   <include package="Products.GenericSetup" file="meta.zcml"/>
