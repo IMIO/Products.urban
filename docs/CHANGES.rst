@@ -6,6 +6,9 @@ Changes
 
 1.11.1 (unreleased)
 -------------------
+- add gsm field in contact
+  [fngaha]
+
 - improve removeItems utils
   [fngaha]
 
