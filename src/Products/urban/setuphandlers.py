@@ -29,7 +29,6 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import ILicenceContainer
-from Products.urban.schedule.interfaces import IUrbanScheduleView
 from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
 from Products.urban.services import cadastre
 from Products.urban.utils import generatePassword
@@ -135,6 +134,8 @@ def postInstall(context):
         'EnvClassThree': 1,
         'EnvClassOne': 1,
         'NotaryLetter': 1,
+        'PreliminaryNotice': 1,
+        'PatrimonyCertificate': 1,
         'Notary': 1,
         'Proprietary': 1,
         'Applicant': 1,

@@ -69,11 +69,17 @@
   <type type_id="ParcellingTerm">
      <bound-workflow workflow_id="activation_workflow" />
   </type>
+  <type type_id="PatrimonyCertificate">
+     <bound-workflow workflow_id="urban_licence_workflow" />
+  </type>
   <type type_id="PcaTerm">
      <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="PersonTitleTerm">
      <bound-workflow workflow_id="activation_workflow" />
+  </type>
+  <type type_id="PreliminaryNotice">
+     <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="RecipientCadastre">
      <bound-workflow workflow_id="activation_workflow" />

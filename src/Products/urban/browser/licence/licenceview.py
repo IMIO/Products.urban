@@ -187,8 +187,7 @@ class LicenceView(BrowserView):
 
     def hasOutdatedParcels(self):
         context = aq_inner(self.context)
-        portal_workflow = api.portal.get_tool('portal_workflow')
-        if portal_workflow.getInfoFor(self.context, 'review_state') in ['accepted', 'refused']:
+        if api.content.get_state(self.context) in ['accepted', 'refused']:
             return False
         return any([not parcel.getIsOfficialParcel for parcel in context.listFolderContents(contentFilter={"portal_type": "PortionOut"})])
 
