@@ -6,6 +6,9 @@ Changes
 
 1.11.0 (2015-10-01)
 -------------------
+- add gsm field in contact
+  [fngaha]
+
 - improve removeItems utils
   [fngaha]
 
