@@ -119,7 +119,6 @@
             </div>
             <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
 
-            <div tal:content="python: 'Rive: ' + view.get_shore()"></div>
         </fieldset>
 
         <metal:representatives define-slot="representatives">

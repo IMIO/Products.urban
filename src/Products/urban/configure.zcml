@@ -45,6 +45,7 @@
   <include package=".schedule" />
   <include package=".services" />
   <include package=".viewlets" />
+  <include package=".workflows" />
 
   <include file="grok.zcml" />
 
@@ -163,5 +164,9 @@
   <include file="profiles.zcml" />
 
   <include file="generatedsubscribers.zcml"/>
+
+
+  <!-- ##code-section configure.zcml.core -->
+  <!-- ##/code-section configure.zcml.core -->
 
 </configure>
