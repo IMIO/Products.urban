@@ -160,6 +160,14 @@ schema = Schema((
         ),
     ),
     StringField(
+        name='gsm',
+        widget=StringField._properties['widget'](
+            label='Gsm',
+            label_msgid='urban_label_gsm',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
         name='fax',
         widget=StringField._properties['widget'](
             label='Fax',
