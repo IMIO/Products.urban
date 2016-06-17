@@ -1,7 +1,8 @@
-archgenxml --cfg generate.conf urban.zargo
-#manage generated.pot
-cp ../i18n/generated.pot ../locales
-rm -rf ../i18n
+archgenxml --cfg generate.conf urban.zargo -o tmp
+
+# only keep workflows
+cp -rf tmp/profiles/default/workflows ../profiles/default
+rm -rf tmp
 
 #remove the content_icon defined for the different content_types
 for i in $( ls ../profiles/default/types); do

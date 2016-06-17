@@ -10,14 +10,8 @@
  <permission>Modify portal content</permission>
  <permission>Review portal content</permission>
  <permission>Delete objects</permission>
- <permission>urban: Add Contact</permission>
- <permission>urban: Add PortionOut</permission>
- <permission>urban: Add UrbanEvent</permission>
  <permission>Add portal content</permission>
  <permission>Modify view template</permission>
- <permission>urban: Add Layer</permission>
- <permission>urban: Add WorkLocation</permission>
- <permission>urban: Add Inquiry</permission>
  <permission>Access contents information</permission>
  <state state_id="accepted"
         title="accepted"
@@ -25,65 +19,45 @@
   <exit-transition transition_id="reopen"/>
   <permission-map name="Acces contents information"
                   acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Editor</permission-role>
    <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Access contents information"
                   acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Editor</permission-role>
    <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Add portal content"
                   acquired="False">
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Delete objects"
                   acquired="False">
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Modify portal content"
                   acquired="False">
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Modify view template"
                   acquired="False">
-   <permission-role>Manager</permission-role>
+   <permission-role>Manager
+Manager</permission-role>
   </permission-map>
   <permission-map name="Review portal content"
                   acquired="False">
+   <permission-role>Reviewer</permission-role>
    <permission-role>Manager</permission-role>
-   <permission-role>Editor</permission-role>
   </permission-map>
   <permission-map name="View"
                   acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Editor</permission-role>
    <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Contact"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Inquiry"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Layer"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add PortionOut"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEvent"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add WorkLocation"
-                  acquired="False">
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
@@ -99,14 +73,12 @@
    <permission-role>Reader</permission-role>
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
   </permission-map>
   <permission-map name="Access contents information"
                   acquired="False">
    <permission-role>Reader</permission-role>
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
   </permission-map>
   <permission-map name="Add portal content"
                   acquired="False">
@@ -117,13 +89,11 @@
                   acquired="False">
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
   </permission-map>
   <permission-map name="Modify portal content"
                   acquired="False">
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
   </permission-map>
   <permission-map name="Modify view template"
                   acquired="False">
@@ -131,44 +101,12 @@
   </permission-map>
   <permission-map name="Review portal content"
                   acquired="False">
-   <permission-role>Editor</permission-role>
+   <permission-role>Reviewer</permission-role>
    <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
   </permission-map>
   <permission-map name="View"
                   acquired="False">
    <permission-role>Reader</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Contact"
-                  acquired="False">
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Inquiry"
-                  acquired="False">
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Layer"
-                  acquired="False">
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add PortionOut"
-                  acquired="False">
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEvent"
-                  acquired="False">
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add WorkLocation"
-                  acquired="False">
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
@@ -191,49 +129,32 @@
   </permission-map>
   <permission-map name="Add portal content"
                   acquired="False">
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Delete objects"
                   acquired="False">
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify view template"
                   acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Review portal content"
                   acquired="False">
-   <permission-role>Editor</permission-role>
+   <permission-role>Reviewer</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="View"
                   acquired="False">
    <permission-role>Reader</permission-role>
    <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Contact"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Inquiry"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Layer"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add PortionOut"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEvent"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add WorkLocation"
-                  acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
@@ -255,14 +176,17 @@
   </permission-map>
   <permission-map name="Add portal content"
                   acquired="False">
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Delete objects"
                   acquired="False">
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Modify portal content"
                   acquired="False">
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Modify view template"
@@ -271,37 +195,13 @@
   </permission-map>
   <permission-map name="Review portal content"
                   acquired="False">
-   <permission-role>Editor</permission-role>
+   <permission-role>Reviewer</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="View"
                   acquired="False">
    <permission-role>Reader</permission-role>
    <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Contact"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Inquiry"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Layer"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add PortionOut"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEvent"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add WorkLocation"
-                  acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
@@ -323,14 +223,17 @@
   </permission-map>
   <permission-map name="Add portal content"
                   acquired="False">
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Delete objects"
                   acquired="False">
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Modify portal content"
                   acquired="False">
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Modify view template"
@@ -339,37 +242,13 @@
   </permission-map>
   <permission-map name="Review portal content"
                   acquired="False">
-   <permission-role>Editor</permission-role>
+   <permission-role>Reviewer</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="View"
                   acquired="False">
    <permission-role>Reader</permission-role>
    <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Contact"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Inquiry"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Layer"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add PortionOut"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEvent"
-                  acquired="False">
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add WorkLocation"
-                  acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
@@ -380,7 +259,7 @@
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="" icon="%(portal_url)s/accept.png"  category="workflow" i18n:translate="">accept</action>
+  <action url="" icon="%(portal_url)s/accept.png" category="workflow" i18n:translate="">accept</action>
   <guard>
     <guard-permission>Review portal content</guard-permission>
   </guard>

@@ -1,0 +1,13 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:i18n="http://namespaces.zope.org/i18n"
+           i18n_domain="urban">
+
+  <adapter
+     for="Products.urban.interfaces.IGenericLicence"
+     provides="borg.localrole.interfaces.ILocalRoleProvider"
+     factory=".licence_workflow.StateRolesMapping"
+     name="licence_local_roles"
+  />
+
+</configure>
