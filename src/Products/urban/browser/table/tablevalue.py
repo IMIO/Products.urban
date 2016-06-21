@@ -72,21 +72,8 @@ class ItemForUrbanTable():
         can_delete = member.has_permission('Delete objects', obj)
         return can_delete
 
-    def getActions(self):
-        portal_properties = self.getTool('portal_properties')
-
-        obj = self.getObject()
-        actions = {}
-
-        if self.canBeEdited():
-            external_edition = IUrbanDoc.providedBy(obj) and portal_properties.site_properties.ext_editor
-            edit_action = external_edition and 'external_edit' or 'edit'
-            actions['edit'] = edit_action
-
-        if self.canBeDeleted():
-            actions['delete'] = 'delete_confirmation'
-
-        return actions
+    def getPath(self):
+        """ to implements."""
 
 
 class BrainForUrbanTable(ItemForUrbanTable):
@@ -111,6 +98,9 @@ class BrainForUrbanTable(ItemForUrbanTable):
         state = self.value.review_state
         return state
 
+    def getPath(self):
+        return self.value.getPath()
+
 
 class ObjectForUrbanTable(ItemForUrbanTable):
     """
@@ -132,6 +122,10 @@ class ObjectForUrbanTable(ItemForUrbanTable):
         portal_workflow = self.getTool('portal_workflow')
         state = portal_workflow.getInfoFor(self.value, 'review_state', '')
         return state
+
+    def getPath(self):
+        path = '/'.join(self.value.getPhysicalPath())
+        return path
 
 
 class ValuesForUrbanListing(ValuesMixin):

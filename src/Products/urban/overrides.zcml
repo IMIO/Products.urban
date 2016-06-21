@@ -36,6 +36,17 @@
         />
     </configure>
 
+    <configure package="imio.actionspanel">
+        <browser:page
+           for="*"
+           name="actions_panel"
+           class="Products.urban.browser.actionspanel.actionspanel.UrbanDefaultActionsPanelView"
+           layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+           template="browser/actions_panel.pt"
+           permission="zope2.View"
+        />
+    </configure>
+
     <configure package="imio.dashboard">
         <utility
            factory="Products.urban.dashboard.vocabularies.DashboardCollections"
