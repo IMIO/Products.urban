@@ -40,5 +40,8 @@ class BuildLicenceView(LicenceView):
     def getMacroViewName(self):
         return 'buildlicence-macros'
 
+    def getHabitationFields(self, exclude=[]):
+        return self.getSchemataFields(schemata='urban_habitation', exclude=exclude)
+
     def getPebFields(self):
         return self.getSchemataFields(schemata='urban_peb')
