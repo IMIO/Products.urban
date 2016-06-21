@@ -365,6 +365,18 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
 
     # Methods
 
+    security.declarePublic('getApplicants')
+    def getApplicants(self):
+        """
+        """
+        applicants = self.getCorporations() or super(BuildLicence, self).getApplicants()
+        return applicants
+
+    security.declarePublic('getCorporations')
+    def getCorporations(self):
+        corporations = [corp for corp in self.objectValues('Corporation')]
+        return corporations
+
     security.declarePublic('listRoadAdaptations')
     def listRoadAdaptations(self):
         """
@@ -500,9 +512,9 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
 
     def listProcedureChoices(self):
         vocab = (
-            ('opinions', 'Avis'),
-            ('inquiry', 'Enquête'),
-            ('FD', 'FD'),
+            ('opinions', 'Avis de service'),
+            ('inquiry', 'Enquête publique'),
+            ('FD', 'Avis du fonctionnaire délégué'),
         )
         return DisplayList(vocab)
 
