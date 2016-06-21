@@ -506,6 +506,9 @@ msgstr "Rue ou lieu-dit"
 msgid "colnamenumero"
 msgstr "Numéro"
 
+msgid "concentrated_runoff_s_risk_folder_title"
+msgstr "Risque de ruissellement concentré"
+
 msgid "concerned_parcels"
 msgstr "Parcelle(s) concernée(s)"
 
@@ -880,6 +883,9 @@ msgstr "au"
 
 msgid "investigationarticles_folder_title"
 msgstr "Articles pour les enquêtes"
+
+msgid "karst_constraints_folder_title"
+msgstr "Contraintes karstiques"
 
 #. Default: "No"
 #: GenericLicence.py
@@ -1258,12 +1264,6 @@ msgstr "Grades des personnes"
 
 msgid "persons_titles_folder_title"
 msgstr "Titres des personnes"
-
-msgid "karst_constraints_folder_title"
-msgstr "Contraintes karstiques"
-
-msgid "concentrated_runoff_s_risk_folder_title"
-msgstr "Risque de ruissellement concentré"
 
 #. Default: "Madam"
 #: Contact.py
@@ -1682,6 +1682,12 @@ msgstr "Champ(s) activé(s)"
 msgid "urban_label_additionalConditions"
 msgstr "Conditions d'exploitations complémentaires"
 
+msgid "urban_label_additionalHabitationsAsked"
+msgstr "Nombre de logements demandés"
+
+msgid "urban_label_additionalHabitationsGiven"
+msgstr "Nombre de logements octroyés"
+
 #. Default: "Additionallegalconditions"
 #: EnvironmentBase.py
 msgid "urban_label_additionalLegalConditions"
@@ -1882,11 +1888,6 @@ msgstr "Date de réception"
 msgid "urban_label_claimEndSDate"
 msgstr "Date de fin de la séance de réclamations"
 
-#. Default: "ClaimsDate"
-#: UrbanEventInquiry.py
-msgid "urban_label_claimsDate"
-msgstr "Date de debut de la séance de réclamations"
-
 #. Default: "Claimingtext"
 #: Contact.py
 msgid "urban_label_claimingText"
@@ -1925,6 +1926,18 @@ msgstr "Compléments"
 
 msgid "urban_label_complete_parcel"
 msgstr "Merci de renseigner le numéro complet de la parcelle recherchée"
+
+#. Default: "concentratedrunoffsrisk"
+#: GenericLicence.py
+#, fuzzy
+msgid "urban_label_concentratedRunoffSRisk"
+msgstr "Risque de ruissellement concentré"
+
+#. Default: "concentratedrunoffsriskdetails"
+#: GenericLicence.py
+#, fuzzy
+msgid "urban_label_concentratedRunoffSRiskDetails"
+msgstr "Détails concerant le risque de ruissellement concentré"
 
 #. Default: "Concerned elements"
 #: parcelsinfo.py
@@ -2226,6 +2239,17 @@ msgstr "Géomètres"
 msgid "urban_label_grade"
 msgstr "Grade"
 
+#. Default: "Gsm"
+#: Contact.py
+msgid "urban_label_gsm"
+msgstr "Gsm"
+
+msgid "urban_label_habitationsAfterLicence"
+msgstr "Nombre total de logements après permis"
+
+msgid "urban_label_habitationsBeforeLicence"
+msgstr "Nombre total de logements avant permis"
+
 #. Default: "Hasadditionalconditions"
 #: EnvironmentBase.py
 msgid "urban_label_hasAdditionalConditions"
@@ -2397,26 +2421,6 @@ msgstr "Contraintes karstiques"
 msgid "urban_label_karstConstraintsDetails"
 msgstr "Détails concernant les contraintes karstiques"
 
-#. Default: "concentratedrunoffsrisks"
-#: GenericLicence.py
-msgid "urban_label_concentratedRunoffSRisk"
-msgstr "Risque de ruissellement concentré"
-
-#. Default: "concentratedrunoffsrisksdetails"
-#: GenericLicence.py
-msgid "urban_label_concentratedRunoffSRiskDetails"
-msgstr "Détails concerant le risque de ruissellement concentré"
-
-#. Default: "sevesoSite"
-#: GenericLicence.py
-msgid "urban_label_sevesoSite"
-msgstr "Sites Seveso"
-
-#. Default: "natura_2000"
-#: GenericLicence.py
-msgid "urban_label_natura_2000"
-msgstr "Périmètre d'un site NATURA 2000 (ou proximité)"
-
 #. Default: "Keydates"
 #: UrbanEventType.py
 msgid "urban_label_keyDates"
@@ -2553,6 +2557,9 @@ msgstr "Type de permis gérés"
 msgid "urban_label_mapExtent"
 msgstr "Coordonnées d'affichage de la carte"
 
+msgid "urban_label_mayNeedLocationLicence"
+msgstr "Possibilité de permis de location"
+
 #. Default: "Minimumlegalconditions"
 #: EnvironmentBase.py
 msgid "urban_label_minimumLegalConditions"
@@ -2606,6 +2613,14 @@ msgstr "Situé en Zone Natura 2000"
 #: EnvironmentBase.py
 msgid "urban_label_natura2000Details"
 msgstr "Détails concernant la zone Natura 2000"
+
+#. Default: "natura_2000"
+#: GenericLicence.py
+msgid "urban_label_natura_2000"
+msgstr "Périmètre d'un site NATURA 2000 (ou proximité)"
+
+msgid "urban_label_noApplication"
+msgstr "Non applicable"
 
 #. Default: "Notarycontact"
 #: UrbanCertificateBase.py
@@ -2766,11 +2781,6 @@ msgstr "Titre"
 #: Contact.py
 msgid "urban_label_phone"
 msgstr "Téléphone"
-
-#. Default: "Gsm"
-#: Contact.py
-msgid "urban_label_gsm"
-msgstr "Gsm"
 
 #. Default: "Plone user id"
 #: FolderManager.py
@@ -3052,6 +3062,14 @@ msgstr "Section"
 #: UrbanVocabularyTerm.py
 msgid "urban_label_selectedField"
 msgstr ""
+
+#. Default: "sevesoSite"
+#: GenericLicence.py
+msgid "urban_label_sevesoSite"
+msgstr "Sites Seveso"
+
+msgid "urban_label_shouldNumerotateBuilding"
+msgstr "Immeuble à sous numéroter"
 
 #. Default: "ShowTitle"
 #: UrbanEventType.py

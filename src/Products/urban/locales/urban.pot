@@ -1676,6 +1676,12 @@ msgstr ""
 msgid "urban_label_activatedFields"
 msgstr ""
 
+msgid "urban_label_additionalHabitationsAsked"
+msgstr ""
+
+msgid "urban_label_additionalHabitationsGiven"
+msgstr ""
+
 #. Default: "Additionalconditions"
 #: EnvironmentBase.py
 msgid "urban_label_additionalConditions"
@@ -2223,6 +2229,12 @@ msgstr ""
 msgid "urban_label_grade"
 msgstr ""
 
+msgid "urban_label_habitationsAfterLicence"
+msgstr ""
+
+msgid "urban_label_habitationsBeforeLicence"
+msgstr ""
+
 #. Default: "Hasadditionalconditions"
 #: EnvironmentBase.py
 msgid "urban_label_hasAdditionalConditions"
@@ -2530,6 +2542,9 @@ msgstr ""
 msgid "urban_label_mapExtent"
 msgstr ""
 
+msgid "urban_label_mayNeedLocationLicence"
+msgstr ""
+
 #. Default: "Minimumlegalconditions"
 #: EnvironmentBase.py
 msgid "urban_label_minimumLegalConditions"
@@ -2582,6 +2597,9 @@ msgstr ""
 #. Default: "Natura2000details"
 #: EnvironmentBase.py
 msgid "urban_label_natura2000Details"
+msgstr ""
+
+msgid "urban_label_noApplication"
 msgstr ""
 
 #. Default: "Notarycontact"
@@ -3028,6 +3046,9 @@ msgstr ""
 #. Default: "Selectedfield"
 #: UrbanVocabularyTerm.py
 msgid "urban_label_selectedField"
+msgstr ""
+
+msgid "urban_label_shouldNumerotateBuilding"
 msgstr ""
 
 #. Default: "ShowTitle"
