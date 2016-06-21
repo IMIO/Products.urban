@@ -35,6 +35,21 @@
 </metal:pca>
 
 
+<metal:habitation define-macro="noApplication">
+
+    <tal:not_applicable condition="context/getNoApplication">
+        <td valign="top"><b><span i18n:translate="urban_label_noApplication">Not applicable</span></b></td>
+    </tal:not_applicable>
+
+    <tal:applicable condition="not: context/getNoApplication">
+        <tal:loop repeat="field python: view.getHabitationFields(default_custom)">
+            <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+        </tal:loop>
+    </tal:applicable>
+
+</metal:habitation>
+
+
 <metal:spf_display define-macro="spf_display">
     <td width="10px"></td>
     <td tal:condition="not: specificfeatures" >

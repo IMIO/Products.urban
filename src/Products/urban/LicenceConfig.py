@@ -107,7 +107,7 @@ schema = Schema((
         name='textDefaultValues',
         allow_oddeven=True,
         widget=DataGridWidget(
-            columns={'fieldname' : SelectColumn('FieldName', 'listTextFields'), 'text' : TextAreaColumn('Text', rows=6, cols=60)},
+            columns={'fieldname': SelectColumn('FieldName', 'listTextFields'), 'text': TextAreaColumn('Text', rows=6, cols=60)},
             label='Textdefaultvalues',
             label_msgid='urban_label_textDefaultValues',
             i18n_domain='urban',
@@ -155,6 +155,7 @@ for f in LicenceConfig_schema.filterFields(schemata='metadata'):
     f.widget.visible = {"edit": "invisible"}
 ##/code-section after-schema
 
+
 class LicenceConfig(BaseFolder, BrowserDefaultMixin):
     """
     """
@@ -174,6 +175,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
     # Manually created methods
 
     security.declarePublic('getEventTypesByInterface')
+
     def getEventTypesByInterface(self, interface):
         """
           Return all the UrbanEventTypes having interface 'interface'
@@ -187,17 +189,19 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         return to_return
 
     security.declarePrivate('listUsedAttributes')
+
     def listUsedAttributes(self):
         """
           Return the available optional fields
         """
         res = []
         abr = {
-            'urban_peb': '(peb) ',
+            'urban_description': '(recap)',
             'urban_location': '(urb) ',
             'urban_road': '(voi) ',
             'urban_investigation_and_advices': '(enq) ',
-            'urban_description': '',
+            'urban_habitation': '(log) ',
+            'urban_peb': '(peb) ',
         }
         if not getLicenceSchema(self.getLicencePortalType()):
             return DisplayList()
@@ -247,6 +251,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         return res
 
     security.declarePublic('getActiveTabs')
+
     def getActiveTabs(self):
         """
           Return the tabs in use
@@ -254,6 +259,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         return [tab for tab in self.getTabsConfig() if tab['display']]
 
     security.declarePrivate('getTabsConfigRows')
+
     def getTabsConfigRows(self):
         """
         """
@@ -262,14 +268,16 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'road': 'Voirie',
             'location': 'Urbanisme',
             'investigation_and_advices': 'Enquêtes et avis',
+            'habitation': 'Logement',
             'peb': 'PEB',
         }
         minimum_tabs_config = ['description', 'road', 'location']
         inquiry_tabs_config = ['description', 'road', 'location', 'investigation_and_advices']
         full_tabs_config = ['description', 'road', 'location', 'investigation_and_advices', 'peb']
+        buildlicence_tabs_config = ['description', 'road', 'location', 'investigation_and_advices', 'habitation', 'peb']
 
         types = {
-            'buildlicence': full_tabs_config,
+            'buildlicence': buildlicence_tabs_config,
             'article127': full_tabs_config,
             'parceloutlicence': inquiry_tabs_config,
             'urbancertificatetwo': inquiry_tabs_config,
@@ -288,16 +296,18 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         return [makeRow(tabname) for tabname in types.get(licence_type, minimum_tabs_config)]
 
     security.declarePublic('getIconURL')
+
     def getIconURL(self):
         portal_types = getToolByName(self, 'portal_types')
         if self.getLicencePortalType() and hasattr(portal_types, self.getLicencePortalType()):
             icon = "%s.png" % self.getLicencePortalType()
         else:
             icon = "LicenceConfig.png"
-        portal_url = getToolByName(self, 'portal_url' )
+        portal_url = getToolByName(self, 'portal_url')
         return portal_url() + '/' + icon
 
     security.declarePublic('listTextFields')
+
     def listTextFields(self):
         #we have to know from where the method has been called in order to know which text
         #fields to propose to be "default valued"
@@ -314,7 +324,6 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         vocabulary_fields = [(field.getName(), '%s %s' % (translate(field.widget.label_msgid, 'urban', context=self.REQUEST), abr[field.schemata])) for field in available_fields]
         #return a vocabulary containing the names of all the text fields of the schema
         return DisplayList(sorted(vocabulary_fields, key=lambda name: name[1]))
-
 
 
 registerType(LicenceConfig, PROJECTNAME)
