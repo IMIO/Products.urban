@@ -25,8 +25,8 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-        ReferenceBrowserWidget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from dateutil.relativedelta import relativedelta
@@ -36,8 +36,49 @@ optional_fields = [
     'implantation', 'roadAdaptation', 'pebDetails', 'requirementFromFD',
     'roadTechnicalAdvice', 'locationTechnicalAdvice', 'locationTechnicalConditions',
     'pebTechnicalAdvice', 'locationDgrneUnderground', 'roadDgrneUnderground', 'workType',
-    'townshipCouncilFolder', 'roadMiscDescription', 'procedureChoice', 'water', 'electricity'
+    'townshipCouncilFolder', 'roadMiscDescription', 'procedureChoice', 'water', 'electricity',
+    'shouldNumerotateBuildings', 'habitationsAfterLicence', 'habitationsBeforeLicence',
+    'additionalHabitationsAsked', 'additionalHabitationsGiven', 'mayNeedLocationLicence'
 ]
+
+slave_fields_habitation = (
+    # if in a pca, display a selectbox
+    {
+        'name': 'shouldNumerotateBuildings',
+        'action': 'hide',
+        'hide_values': (True, ),
+    },
+    {
+        'name': 'habitationsBeforeLicence',
+        'action': 'hide',
+        'hide_values': (True, ),
+    },
+    {
+        'name': 'habitationsAfterLicence',
+        'action': 'hide',
+        'hide_values': (True, ),
+    },
+    {
+        'name': 'additionalHabitationsAsked',
+        'action': 'hide',
+        'hide_values': (True, ),
+    },
+    {
+        'name': 'additionalHabitationsGiven',
+        'action': 'hide',
+        'hide_values': (True, ),
+    },
+    {
+        'name': 'mayNeedLocationLicence',
+        'action': 'hide',
+        'hide_values': (True, ),
+    },
+    {
+        'name': 'habitationsBeforeLicence',
+        'action': 'hide',
+        'hide_values': (True, ),
+    },
+)
 
 slave_fields_procedurechoice = (
     {
@@ -144,7 +185,7 @@ schema = Schema((
     ),
     TextField(
         name='pebDetails',
-        allowable_content_types= ('text/plain',),
+        allowable_content_types=('text/plain',),
         widget=TextAreaWidget(
             label='Pebdetails',
             label_msgid='urban_label_pebDetails',
@@ -164,6 +205,77 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_peb',
+    ),
+    BooleanField(
+        name='noApplication',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_habitation,
+            label='Noapplication',
+            label_msgid='urban_label_noApplication',
+            i18n_domain='urban',
+        ),
+        schemata='urban_habitation',
+    ),
+    BooleanField(
+        name='shouldNumerotateBuildings',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Shouldnumerotatebuildings',
+            label_msgid='urban_label_shouldNumerotateBuilding',
+            i18n_domain='urban',
+        ),
+        schemata='urban_habitation',
+    ),
+    IntegerField(
+        name='habitationsBeforeLicence',
+        default=0,
+        widget=IntegerField._properties['widget'](
+            label='Habitationsbeforelicence',
+            label_msgid='urban_label_habitationsBeforeLicence',
+            i18n_domain='urban',
+        ),
+        schemata='urban_habitation',
+    ),
+    IntegerField(
+        name='additionalHabitationsAsked',
+        default=0,
+        widget=IntegerField._properties['widget'](
+            label='Additionalhabitationsasked',
+            label_msgid='urban_label_additionalHabitationsAsked',
+            i18n_domain='urban',
+        ),
+        schemata='urban_habitation',
+    ),
+    IntegerField(
+        name='additionalHabitationsGiven',
+        default=0,
+        widget=IntegerField._properties['widget'](
+            label='Additionalhabitationsgiven',
+            label_msgid='urban_label_additionalHabitationsGiven',
+            i18n_domain='urban',
+        ),
+        schemata='urban_habitation',
+    ),
+    IntegerField(
+        name='habitationsAfterLicence',
+        default=0,
+        widget=IntegerField._properties['widget'](
+            label='Habitationsafterlicence',
+            label_msgid='urban_label_habitationsAfterLicence',
+            i18n_domain='urban',
+        ),
+        schemata='urban_habitation',
+    ),
+    BooleanField(
+        name='mayNeedLocationLicence',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Mayneedlocationlicence',
+            label_msgid='urban_label_mayNeedLocationLicence',
+            i18n_domain='urban',
+        ),
+        schemata='urban_habitation',
     ),
     StringField(
         name='roadAdaptation',
@@ -285,7 +397,7 @@ schema = Schema((
             allow_browse=1,
             show_indexes=1,
             show_index_selector=1,
-            available_indexes={'Title':'Nom'},
+            available_indexes={'Title': 'Nom'},
             startup_directory="urban/architects",
             wild_card_search=True,
             restrict_browsing_to_startup_directory=1,
@@ -349,6 +461,7 @@ BuildLicence_schema['title'].required = False
 setSchemataForInquiry(BuildLicence_schema)
 ##/code-section after-schema
 
+
 class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
     """
     """
@@ -365,7 +478,22 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
 
     # Methods
 
+    security.declarePublic('getApplicants')
+
+    def getApplicants(self):
+        """
+        """
+        applicants = self.getCorporations() or super(BuildLicence, self).getApplicants()
+        return applicants
+
+    security.declarePublic('getCorporations')
+
+    def getCorporations(self):
+        corporations = [corp for corp in self.objectValues('Corporation')]
+        return corporations
+
     security.declarePublic('listRoadAdaptations')
+
     def listRoadAdaptations(self):
         """
           This vocabulary for field roadAdaptation returns a list of
@@ -379,6 +507,7 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
         return DisplayList(vocab)
 
     security.declarePublic('listUsages')
+
     def listUsages(self):
         """
           This vocabulary for field usage returns a list of
@@ -394,12 +523,14 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
     # Manually created methods
 
     security.declarePublic('getRepresentatives')
+
     def getRepresentatives(self):
         """
         """
         return self.getArchitects()
 
     security.declarePublic('listRequirementsFromFD')
+
     def listRequirementsFromFD(self):
         """
           This vocabulary for field requirementsFromFD returns this list: decision, opinion
@@ -411,6 +542,7 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
         return DisplayList(vocab)
 
     security.declarePublic('askFD')
+
     def askFD(self):
         """
         """
@@ -418,33 +550,6 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
 
     def getFirstDeposit(self, use_catalog=True):
         return self._getFirstEvent(interfaces.IDepositEvent, use_catalog)
-
-    def getLastDeposit(self, use_catalog=True):
-        return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
-
-    def getLastMissingPart(self, use_catalog=True):
-        return self._getLastEvent(interfaces.IMissingPartEvent, use_catalog)
-
-    def getLastMissingPartDeposit(self, use_catalog=True):
-        return self._getLastEvent(interfaces.IMissingPartDepositEvent, use_catalog)
-
-    def getLastWalloonRegionPrimo(self, use_catalog=True):
-        return self._getLastEvent(interfaces.IWalloonRegionPrimoEvent, use_catalog)
-
-    def getLastWalloonRegionOpinionRequest(self, use_catalog=True):
-        return self._getLastEvent(interfaces.IWalloonRegionOpinionRequestEvent, use_catalog)
-
-    def getLastAcknowledgment(self, use_catalog=True):
-        return self._getLastEvent(interfaces.IAcknowledgmentEvent, use_catalog)
-
-    def getLastCommunalCouncil(self, use_catalog=True):
-        return self._getLastEvent(interfaces.ICommunalCouncilEvent, use_catalog)
-
-    def getLastCollegeReport(self, use_catalog=True):
-        return self._getLastEvent(interfaces.ICollegeReportEvent, use_catalog)
-
-    def getLastTheLicence(self, use_catalog=True):
-        return self._getLastEvent(interfaces.ITheLicenceEvent, use_catalog)
 
     def getLastDeposit(self, use_catalog=True):
         return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
@@ -525,7 +630,7 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
         else:
             return '30j'
 
-    def costCalculation(self, base_price= 0, FD_price=0, inquiry_price=0, opinions_price=0):
+    def costCalculation(self, base_price=0, FD_price=0, inquiry_price=0, opinions_price=0):
         cost = base_price
         if ('opinions' in self.getProcedureChoice()):
             cost += opinions_price
@@ -540,6 +645,8 @@ registerType(BuildLicence, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 # Make sure the schema is correctly finalized
+
+
 def finalizeSchema(schema):
     """
        Finalizes the type schema to alter some fields

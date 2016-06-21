@@ -171,9 +171,30 @@
 </div>
 
 
+<div class="licence-column" metal:define-macro="habitation_macro" i18n:domain="urban">
+    <fieldset>
+        <legend i18n:translate="legend_details">Details</legend>
+        <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+               tal:define="default_custom python: ['noApplication',];
+                           default_exclude python: [
+                               'shouldNumerotateBuildings', 'habitationsBeforeLicence', 'habitationsAfterLicence',
+                               'additionalHabitationsAsked', 'additionalHabitationsGiven', 'mayNeedLocationLicence'
+                           ];
+                           custom custom | python: []; custom python: custom + default_custom;
+                           exclude exclude | default_exclude">
+
+            <tal:loop repeat="field python: view.getHabitationFields(exclude)">
+                <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+            </tal:loop>
+
+        </table>
+    </fieldset>
+</div>
+
+
 <div class="licence-column" metal:define-macro="peb_macro" i18n:domain="urban">
     <fieldset>
-        <legend i18n:translate="legend_details">Details parcel(s)</legend>
+        <legend i18n:translate="legend_details">Details</legend>
         <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
                tal:define="default_custom python: [];
                            custom custom | python: []; custom python: custom + default_custom">

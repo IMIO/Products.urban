@@ -22,6 +22,11 @@
     </metal:parent_call>
 </metal:location>
 
+<metal:peb define-macro="habitation_macro" i18n:domain="urban">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/habitation_macro">
+    </metal:parent_call>
+</metal:peb>
+
 <metal:peb define-macro="peb_macro" i18n:domain="urban">
     <metal:parent_call use-macro="here/@@licencetabs-macros/peb_macro">
     </metal:parent_call>
