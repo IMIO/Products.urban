@@ -2,6 +2,8 @@
 
 from DateTime import DateTime
 
+from plone import api
+
 from z3c.table.column import Column, GetAttrColumn
 from z3c.table.interfaces import IColumnHeader
 
@@ -14,10 +16,7 @@ from Products.urban.browser.table.interfaces import ITitleColumn, \
     ILocalityColumn, \
     IStreetColumn, \
     IUrbanColumn, \
-    IAddressColumn, \
-    IParcelReferencesColumn, \
-    ITitleCell, \
-    IActionsCell
+    ITitleCell
 
 
 class UrbanColumn(Column):
@@ -406,54 +405,9 @@ class ActionsColumn(UrbanColumn):
     header = 'actions'
 
     def renderCell(self, urbanlist_item):
-        item = urbanlist_item.getObject()
-        adapter = queryMultiAdapter((self.context, self.request, urbanlist_item, item), IActionsCell)
-        if adapter:
-            action_links = adapter.render()
-        else:
-            base_url = urbanlist_item.getTool('portal_url')()
-            object_url = urbanlist_item.getURL()
-
-            action_links = ['<div  align="right">']
-            # first render the workflow changes actions
-            transitions = urbanlist_item.getWorkflowTransitions()
-            for transition in transitions:
-                image_name = '%s.png' % transition['title']
-                translation = translate(transition['id'], 'plone', context=self.request)
-
-                if hasattr(item, image_name):
-                    input_icon = '<input type="image" src="%s/%s" title="%s" />' % (base_url, image_name, translation)
-                else:
-                    input_icon = '<input type="submit" value="%s" />' % translation
-
-                form_action = '%s/content_status_modify' % object_url
-                input_action = '<input type="hidden" name="workflow_action" value="%s" />' % transition['id']
-                camefrom = '%s?%s' % (self.request.get('ACTUAL_URL'), self.request.get('QUERY_STRING'))
-                input_camefrom = '<input type="hidden" name="came_from" value="%s" />' % camefrom
-
-                form = '<form style="display: inline" action="%s" i18n_domain="plone">%s%s%s</form>' % (form_action, input_action, input_camefrom, input_icon)
-
-                action_links.append(form)
-
-            # then add the edit actions
-            actions = urbanlist_item.getActions()
-
-            if 'edit' in actions:
-                action = actions['edit']
-                image = '<img src="%s/edit.png" title="label_edit" i18n:attributes="title" />' % base_url
-                edit_action = '<a class="noPadding" href="%s/%s">%s</a>' % (object_url, action, image)
-                action_links.append(edit_action)
-
-            if 'delete' in actions:
-                action = actions['delete']
-                image = '<img src="%s/delete_icon.png" title="label_edit" i18n:attributes="title" title="label_remove"\
-                         style="cursor: pointer" onClick="javascript:confirmDeleteObject(this)"/>' % base_url
-                delete_action = '<a class="urbanDelete noPadding" href="%s/%s">%s</a>' % (object_url, action, image)
-                action_links.append(delete_action)
-
-            action_links.append('</div>')
-            action_links = ''.join(action_links)
-        return action_links
+        path = urbanlist_item.getPath()
+        portal = api.portal.get()
+        return portal.unrestrictedTraverse('{}/actions_panel'.format(path))(showActions=True)
 
 
 class LocalityColumn(GetAttrColumn):

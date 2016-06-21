@@ -6,6 +6,18 @@ from plone import api
 from imio.actionspanel.browser.views import ActionsPanelView
 
 
+class UrbanDefaultActionsPanelView(ActionsPanelView):
+    """
+    By default only show workflow, edit, and delete actions
+    on urban objects.
+    """
+    def __init__(self, context, request):
+        super(UrbanDefaultActionsPanelView, self).__init__(context, request)
+
+        self.SECTIONS_TO_RENDER = ('renderTransitions', 'renderEdit', 'renderOwnDelete',)
+        self.IGNORABLE_ACTIONS = ('cut', 'paste', 'rename', 'copy')
+
+
 class EventActionsPanelView(ActionsPanelView):
     """
     Actions panel view of Urban Events.
@@ -22,7 +34,7 @@ class LicenceActionsPanelView(ActionsPanelView):
     def __init__(self, context, request):
         super(LicenceActionsPanelView, self).__init__(context, request)
 
-        self.SECTIONS_TO_RENDER = ('renderOwnDelete',)
+        self.SECTIONS_TO_RENDER = ('renderEdit', 'renderOwnDelete',)
         self.IGNORABLE_ACTIONS = ('cut', 'paste', 'rename', 'copy')
 
 

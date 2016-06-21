@@ -37,9 +37,6 @@ class IItemForUrbanTable(Interface):
     def getWorkflowTransitions(self):
         """ used in the Actions column """
 
-    def getActions(self):
-        """ used in the Actions column """
-
 
 class IBrainForUrbanTable(IItemForUrbanTable):
     """Marker interface for a brain listing that will be used in urban z3c tables"""
@@ -202,9 +199,3 @@ class ITitleCell(ICell):
     """
     def render():
         """ return the html rendering of Title Column cell """
-
-
-class IActionsCell(ICell):
-    """
-    Interface that describes TitleCell behaviour
-    """
