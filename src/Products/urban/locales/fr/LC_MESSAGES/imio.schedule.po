@@ -58,3 +58,4 @@ msgstr "Date de dépôt du dossier"
 
 msgid "urban.start_date.inquiry_end_date"
 msgstr "Date de fin de l'enquête publique"
+

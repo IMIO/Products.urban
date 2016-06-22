@@ -34,3 +34,6 @@ msgstr ""
 
 msgid "sortable_title"
 msgstr ""
+
+msgid "header_task_actions_column"
+msgstr ""
