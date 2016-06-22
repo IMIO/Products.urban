@@ -197,7 +197,7 @@
         permission="zope2.View" />
 
     <browser:page
-      for="imio.schedule.content.task.AutomatedTask"
+      for="imio.schedule.content.task.IAutomatedTask"
       name="actions_panel"
       class="Products.urban.browser.actionspanel.actionspanel.TaskActionsPanelView"
       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
@@ -207,7 +207,7 @@
       />
 
     <browser:page
-      for="imio.schedule.content.task.AutomatedMacroTask"
+      for="imio.schedule.content.task.IAutomatedMacroTask"
       name="actions_panel"
       class="Products.urban.browser.actionspanel.actionspanel.TaskActionsPanelView"
       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
