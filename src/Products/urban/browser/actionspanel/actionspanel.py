@@ -89,15 +89,15 @@ class TaskActionsPanelView(ActionsPanelView):
         self.showChangeOwner = showChangeOwner
 
         return super(TaskActionsPanelView, self).__call__(
-            useIcons=True,
-            showTransitions=False,
-            appendTypeNameToTransitionLabel=False,
-            showEdit=False,
-            showOwnDelete=False,
+            useIcons=useIcons,
+            showTransitions=showTransitions,
+            appendTypeNameToTransitionLabel=appendTypeNameToTransitionLabel,
+            showEdit=showEdit,
+            showOwnDelete=showOwnDelete,
             showActions=showActions,
             showAddContent=showAddContent,
-            showHistory=False,
-            showHistoryLastEventHasComments=False,
+            showHistory=showHistory,
+            showHistoryLastEventHasComments=showHistoryLastEventHasComments,
             **kwargs
         )
 
@@ -134,14 +134,14 @@ class FolderActionsPanelView(ActionsPanelView):
             showAddContent = True
 
         return super(FolderActionsPanelView, self).__call__(
-            useIcons=True,
-            showTransitions=False,
-            appendTypeNameToTransitionLabel=False,
-            showEdit=False,
-            showOwnDelete=False,
+            useIcons=useIcons,
+            showTransitions=showTransitions,
+            appendTypeNameToTransitionLabel=appendTypeNameToTransitionLabel,
+            showEdit=showEdit,
+            showOwnDelete=showOwnDelete,
             showActions=showActions,
             showAddContent=showAddContent,
-            showHistory=False,
-            showHistoryLastEventHasComments=False,
+            showHistory=showHistory,
+            showHistoryLastEventHasComments=showHistoryLastEventHasComments,
             **kwargs
         )
