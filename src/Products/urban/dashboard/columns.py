@@ -166,4 +166,5 @@ class TaskActionsColumn(ActionsColumn):
         'showEdit': False,
         'showTransitions': False,
         'showChangeOwner': True,
+        'useIcons': False,
     }

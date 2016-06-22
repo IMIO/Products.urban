@@ -26,7 +26,7 @@ var initialize_overlay = function() {
     };
 
     // Change owner popup
-    $('a.overlay-change-owner').prepOverlay({
+    $('input.overlay-change-owner').prepOverlay({
       subtype: 'ajax',
       filter: '#change-owner',
       cssclass: 'overlay-change-owner',
