@@ -357,6 +357,7 @@
      for="*"
      name="parcelcoring"
      class=".parcel_coring.ParcelCoringView"
+     template="templates/coring_update.pt"
      permission="zope2.View"
   />
 
