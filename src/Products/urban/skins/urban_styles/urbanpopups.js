@@ -9,6 +9,11 @@ jQuery(function($){
    });
 
     // Long text popup
+    $('#urban-coring a').prepOverlay({
+       subtype: 'ajax',
+   });
+
+    // Long text popup
     $('#urban-minimum-conditions a').prepOverlay({
        subtype: 'ajax',
    });

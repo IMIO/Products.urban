@@ -1,0 +1,11 @@
+<tal:vars define="result view/coring_result;
+                  status python: result[0];
+                  data python: result[1];
+                  error python: status != 200;">
+
+    <tal:error condition="error" replace="structure data"></tal:error >
+
+    <div tal:condition="not: error" tal:content="data">
+
+    </div>
+</tal:vars>
