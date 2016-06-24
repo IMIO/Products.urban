@@ -11,14 +11,16 @@ from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 
-class LicencesWorkflowStates(object):
+class WorkflowStatesVocabulary(object):
     """
-    List all states of urban licence workflow.
+    List all states of a given workflow 'workflow_name'.
     """
+
+    workflow_name = ''
 
     def __call__(self, context):
         wf_tool = api.portal.get_tool('portal_workflow')
-        licence_wf = wf_tool.get('urban_licence_workflow')
+        licence_wf = wf_tool.get(self.workflow_name)
 
         vocabulary_terms = []
         for state in licence_wf.states.objectValues():
@@ -26,12 +28,20 @@ class LicencesWorkflowStates(object):
                 SimpleTerm(
                     state.id,
                     state.id,
-                    _(state.id, 'plone', context.REQUEST)
+                    _(state.id, 'plone', context=context.REQUEST)
                 )
             )
 
-        vocabulary = SimpleVocabulary(vocabulary_terms)
+        vocabulary = SimpleVocabulary(sorted(vocabulary_terms, key=lambda term: term.title))
         return vocabulary
+
+
+class LicencesWorkflowStates(WorkflowStatesVocabulary):
+    """
+    List all states of urban licence workflow.
+    """
+
+    workflow_name = 'urban_licence_workflow'
 
 
 class DashboardCollections(ConditionAwareCollectionVocabulary):
