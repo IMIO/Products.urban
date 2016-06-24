@@ -17,24 +17,30 @@ class ParcelCoringView(BrowserView):
         if status != 200:
             return status, data
 
-#        fields_to_update = self.get_fields_to_update(coring_json=data)
+        fields_to_update = self.get_fields_to_update(coring_json=data)
 
-        return status, data
+        return status, fields_to_update
 
-#    def fields_to_update(self, coring_json):
-#        """
-#        """
-#        fields_to_update = []
-#        for layer in coring_json:
-#            field_name = self.get_fieldname(layer),
-#            line = {
-#                'field_name': field_name,
-#                'proposed_value': self.get_value(layer),
-#                'current_value': self.get_field_value(field_name),
-#            }
-#            fields_to_update.append(line)
+    def get_fields_to_update(self, coring_json):
+        """
+        """
+        fields_to_update = []
+        for layer in coring_json:
+            field_name, field_value = self.get_value_from_maplayer(layer)
+            urban_field = self.context.getField(field_name)
+            line = {
+                'field_name': field_name,
+                'proposed_value':  field_value,
+                'current_value': urban_field.get(self.context),
+            }
+            fields_to_update.append(line)
 
-#        return fields_to_update
+        return fields_to_update
+
+    def get_value_from_maplayer(self, layer):
+        """
+        """
+        import ipdb; ipdb.set_trace()
 
     def core(self, coring_type=None):
         """
