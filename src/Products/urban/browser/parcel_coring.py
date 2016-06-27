@@ -20,25 +20,16 @@ class ParcelCoringView(BrowserView):
         super(ParcelCoringView, self).__init__(context, request)
         self.catalog = api.portal.get_tool('portal_catalog')
         self.portal_urban = api.portal.get_tool('portal_urban')
+        self.helper = self.context.unrestrictedTraverse('@@document_generation_helper_view')
 
     def coring_result(self):
         """
         """
-#        status, data = self.core()
-#        if status != 200:
-#            return status, data
+        status, data = self.core()
+        if status != 200:
+            return status, data
 
-#        fields_to_update = self.get_fields_to_update(coring_json=data)
-        status, fields_to_update = (
-            200,
-            [{
-                'field_name': 'folderZone',
-                'field_name_label': 'urban_label_folderZone',
-                'proposed_display_value': 'Zone d\'activité économique industrielle',
-                'proposed_value': json.dumps(['zaei']),
-                'current_value': self.context.getFolderZone() or 'N.C.',
-            }]
-        )
+        fields_to_update = self.get_fields_to_update(coring_json=data)
 
         return status, fields_to_update
 
