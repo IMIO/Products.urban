@@ -1,11 +1,33 @@
 <tal:vars define="result view/coring_result;
                   status python: result[0];
                   data python: result[1];
-                  error python: status != 200;">
+                  error python: status != 200;"
+          i18n:domain="urban">
 
+    <h1 i18n:translate="">Coring</h1>
     <tal:error condition="error" replace="structure data"></tal:error >
 
-    <div tal:condition="not: error" tal:content="data">
-
-    </div>
+    <form method="POST"
+          tal:condition="not: error"
+          tal:attributes="action string:${context/absolute_url}/update_form;">
+        <table class="listing" style="width: 100%">
+            <thead>
+                <th>Champ</th>
+                <th>Ancienne valeur</th>
+                <th>Valeur proposée</th>
+                <th>Mettre à jour</th>
+            </thead>
+            <tr tal:repeat="field_to_update data">
+                <td tal:content="python: field_to_update.get('field_name_label')" i18n:translate=""></td>
+                <td tal:content="python: field_to_update.get('current_value')"></td>
+                <td tal:content="python: field_to_update.get('proposed_display_value')" i18n:translate=""></td>
+                <td style="text-align:center; width:6em">
+                    <input type="checkbox" value="" checked
+                           tal:attributes="value python: field_to_update.get('proposed_value');
+                                           name python: field_to_update.get('field_name')">
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit">
+    </form>
 </tal:vars>
