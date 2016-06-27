@@ -3,6 +3,8 @@
 from zope.pagetemplate.engine import TrustedAppPT
 from zope.pagetemplate.pagetemplate import PageTemplate
 
+from plone import api
+
 
 class DefaultTextRenderer(TrustedAppPT, PageTemplate):
     """
@@ -33,7 +35,8 @@ class DefaultTextRenderer(TrustedAppPT, PageTemplate):
             'context': self.real_licence,
             'event': self.event,
             'event_helper': self.event_helper,
-            'real_event': self.real_event
+            'real_event': self.real_event,
+            'tool': api.portal.get_tool('portal_urban'),
         }
         rval.update(self.pt_getEngine().getBaseNames())
         return rval
