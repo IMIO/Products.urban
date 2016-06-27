@@ -280,7 +280,8 @@ schema = Schema((
     StringField(
         name='roadAdaptation',
         default='no',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
+            format='checkbox',
             label='Roadadaptation',
             label_msgid='urban_label_roadAdaptation',
             i18n_domain='urban',
@@ -500,9 +501,9 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
           road adaptations : no, yes modify, yes create
         """
         vocab = (
-            ('no', 'road_adaptation_no'),
             ('modify', 'road_adaptation_modify'),
             ('create', 'road_adaptation_create'),
+            ('supress', 'road_adaptation_supress'),
         )
         return DisplayList(vocab)
 

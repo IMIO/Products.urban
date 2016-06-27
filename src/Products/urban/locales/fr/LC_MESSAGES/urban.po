@@ -1332,13 +1332,13 @@ msgid "rgbsr_folder_title"
 msgstr "Réglement général sur les bâtisses en site rural"
 
 msgid "road_adaptation_create"
-msgstr "Oui, ouverture"
+msgstr "Ouverture"
 
 msgid "road_adaptation_modify"
-msgstr "Oui, modification"
+msgstr "Modification"
 
-msgid "road_adaptation_no"
-msgstr "Non"
+msgid "road_adaptation_supress"
+msgstr "Supression"
 
 msgid "roadmissingparts_folder_title"
 msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes (Fiche Voirie)"
@@ -2978,7 +2978,7 @@ msgstr "Détails concernant le Règlement Général sur les Bâtisses en Site Ru
 #. Default: "Roadadaptation"
 #: BuildLicence.py
 msgid "urban_label_roadAdaptation"
-msgstr "Ouverture ou modification de la voirie"
+msgstr "Ouverture, modification, supression de la voirie"
 
 #. Default: "Roadcoating"
 #: GenericLicence.py
