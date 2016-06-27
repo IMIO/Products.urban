@@ -13,7 +13,7 @@
         <table class="listing" style="width: 100%">
             <thead>
                 <th>Champ</th>
-                <th>Ancienne valeur</th>
+                <th>Valeur actuelle</th>
                 <th>Valeur proposée</th>
                 <th>Mettre à jour</th>
             </thead>
