@@ -1336,7 +1336,7 @@ msgstr ""
 msgid "road_adaptation_modify"
 msgstr ""
 
-msgid "road_adaptation_no"
+msgid "road_adaptation_supress"
 msgstr ""
 
 msgid "roadmissingparts_folder_title"
