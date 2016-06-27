@@ -85,7 +85,7 @@ class ParcelCoringView(BrowserView):
                     with api.env.adopt_roles(['Manager']):
                         voc_folder.invokeFactory('UrbanVocabularyTerm', id=term_id, title=term_title)
             values.append(term_id)
-            display_values.append(voc_brains[0].Title)
+            display_values.append(term_title)
 
         return values, ', '.join(display_values)
 
