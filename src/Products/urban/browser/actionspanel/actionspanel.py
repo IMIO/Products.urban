@@ -90,10 +90,10 @@ class TaskActionsPanelView(ActionsPanelView):
 
         return super(TaskActionsPanelView, self).__call__(
             useIcons=useIcons,
-            showTransitions=showTransitions,
-            appendTypeNameToTransitionLabel=appendTypeNameToTransitionLabel,
-            showEdit=showEdit,
-            showOwnDelete=showOwnDelete,
+            showTransitions=False,
+            appendTypeNameToTransitionLabel=False,
+            showEdit=False,
+            showOwnDelete=False,
             showActions=showActions,
             showAddContent=showAddContent,
             showHistory=showHistory,
