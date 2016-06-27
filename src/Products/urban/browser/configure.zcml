@@ -361,4 +361,11 @@
      permission="zope2.View"
   />
 
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="update_form"
+     class=".parcel_coring.UpdateLicenceForm"
+     permission="zope2.View"
+  />
+
 </configure>

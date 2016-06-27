@@ -160,6 +160,7 @@ class AssignedUserColumn(BaseColumn):
 class TaskActionsColumn(ActionsColumn):
     """Display actions for the task"""
     params = {
+        'useIcons': False,
         'showHistory': False,
         'showActions': False,
         'showOwnDelete': False,
