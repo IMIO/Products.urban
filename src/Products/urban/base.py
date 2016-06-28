@@ -456,7 +456,7 @@ class UrbanBase(object):
                 toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
                 first_section = portionOutObj.getSection()
                 toreturn += 'section %s' % portionOutObj.getSection()
-                toreturn += ' n° '
+                toreturn += ' n° '.decode('utf8')
             else:
                 if first_div != portionOutObj.getDivisionAlternativeName():
                     toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
