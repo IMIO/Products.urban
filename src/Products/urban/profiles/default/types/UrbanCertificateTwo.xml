@@ -18,11 +18,10 @@
    <element value="UrbanEvent"/>
    <element value="UrbanEventInquiry"/>
    <element value="UrbanEventOpinionRequest"/>
+   <element value="UrbanEventCollege"/>
    <element value="Proprietary"/>
    <element value="Applicant"/>
-   <element value="UrbanEvent"/>
    <element value="File"/>
-   <element value="PortionOut"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">urbancertificatetwoview</property>

@@ -237,6 +237,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
     portal_types_per_event_type_type = {
         'Products.urban.interfaces.IInquiryEvent': 'UrbanEventInquiry',
+        'Products.urban.interfaces.ICollegeEvent': 'UrbanEventCollege',
         'Products.urban.interfaces.IOpinionRequestEvent': 'UrbanEventOpinionRequest',
     }
 

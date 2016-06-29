@@ -229,6 +229,9 @@ class IEventTypeType(IInterface):
     """
 
 
+class ICollegeEvent(Interface):
+    __doc__ = _("""ICollege type marker interface""")
+
 class ITechnicalServiceOpinionRequestEvent(Interface):
     __doc__ = _("""ITechnicalServiceOpinionRequest type marker interface""")
 
@@ -289,7 +292,7 @@ class ICollegeReportEvent(Interface):
     __doc__ = _("""ICollegeReport type marker interface""")
 
 
-class ITheLicenceEvent(Interface):
+class ITheLicenceEvent(ICollegeEvent):
     __doc__ = _("""ITheLicence type marker interface""")
 
 
