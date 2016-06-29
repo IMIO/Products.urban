@@ -20,14 +20,10 @@
    <element value="PortionOut"/>
    <element value="UrbanEvent"/>
    <element value="UrbanEventInquiry"/>
+   <element value="UrbanEventCollege"/>
    <element value="UrbanEventOpinionRequest"/>
-   <element value="UrbanEventOpinionRequest"/>
-   <element value="UrbanEventInquiry"/>
-   <element value="Applicant"/>
    <element value="Inquiry"/>
-   <element value="UrbanEvent"/>
    <element value="File"/>
-   <element value="PortionOut"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">article127view</property>

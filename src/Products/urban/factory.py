@@ -2,7 +2,11 @@
 
 from five import grok
 
+from imio.schedule.utils import tuple_to_interface
+
 from plone import api
+
+from Products.urban.interfaces import ICollegeEvent
 
 from zope.component import IFactory
 
@@ -28,6 +32,9 @@ class UrbanEventFactory(grok.GlobalUtility):
         event_type.checkCreationInLicence(licence)
         eventtype_type = event_type.getEventTypeType()
         portal_type = portal_urban.portal_types_per_event_type_type.get(eventtype_type, "UrbanEvent")
+        type_interface = tuple_to_interface(('.'.join(eventtype_type.split('.')[:-1]), eventtype_type.split('.')[-1]))
+        if issubclass(type_interface, ICollegeEvent):
+            portal_type = 'UrbanEventCollege'
 
         urban_event_id = licence.invokeFactory(
             portal_type,
