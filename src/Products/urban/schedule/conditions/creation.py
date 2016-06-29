@@ -54,3 +54,13 @@ class HasOpinionRequests(CreationCondition):
     def evaluate(self):
         licence = self.task_container
         return licence.getSolicitOpinionsTo()
+
+
+class HasFDOpinionRequest(CreationCondition):
+    """
+    'FD' is selected on the field 'procedureChoice'.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        return 'FD' in licence.getProcedureChoice()
