@@ -2677,7 +2677,7 @@ msgstr "Date de transmis des demandes d'avis"
 #. Default: "Opiniontext"
 #: UrbanEvent.py
 msgid "urban_label_opinionText"
-msgstr "Texte de l'avis"
+msgstr "Texte de l'avis/Conditions"
 
 #. Default: "Opinionstoaskifworks"
 #: UrbanCertificateBase.py
