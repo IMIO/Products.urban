@@ -354,4 +354,8 @@ class ILicencePortionOut(Interface):
 
 class IOptionalFields(Interface):
     """ """
+
+
+class IUrbanRootRedirects(Interface):
+    """ """
 ##/code-section FOOT
