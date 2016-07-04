@@ -154,9 +154,9 @@ ADDITIONAL_LAYERS_FOLDER = "additional_layers"
 
 #a list where first element is the meetingConfigId and the second, the meta_type name
 URBAN_TYPES = [
-    'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'Division', 'UrbanCertificateOne',
-    'UrbanCertificateTwo', 'NotaryLetter', 'MiscDemand', 'PreliminaryNotice', 'PatrimonyCertificate',
-    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
+    'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'UrbanCertificateOne',
+    'UrbanCertificateTwo', 'MiscDemand', 'PreliminaryNotice', 'PatrimonyCertificate',
+#    'NotaryLetter', 'Division', 'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
 ]
 
 # all types that can be used as a licence applicant
