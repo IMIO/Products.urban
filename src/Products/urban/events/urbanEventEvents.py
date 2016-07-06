@@ -52,9 +52,10 @@ def generateSingletonDocument(urban_event, event):
     templates = urban_event.getTemplates()
     if len(templates) == 1:
         pod_template = templates[0]
-        output_format = 'odt'
-        generation_view = urban_event.restrictedTraverse('urban-document-generation')
-        generation_view(pod_template.UID(), output_format)
+        if pod_template.can_be_generated(urban_event):
+            output_format = 'odt'
+            generation_view = urban_event.restrictedTraverse('urban-document-generation')
+            generation_view(pod_template.UID(), output_format)
 
 
 def updateKeyEvent(urban_event, event):
