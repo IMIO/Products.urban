@@ -4,4 +4,8 @@
 
   <adapter name="getReference" factory=".indexes.licence_reference_index" />
 
+  <adapter name="StreetsUID" factory=".indexes.licence_street_index" />
+
+  <adapter name="StreetNumber" factory=".indexes.licence_streetnumber_index" />
+
 </configure>
