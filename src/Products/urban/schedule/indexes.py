@@ -4,6 +4,7 @@ from imio.schedule.content.task import IAutomatedTask
 
 from plone.indexer import indexer
 
+from Products.urban.indexes import genericlicence_applicantinfoindex
 from Products.urban.indexes import genericlicence_streetsuid
 from Products.urban.indexes import genericlicence_streetnumber
 
@@ -39,3 +40,14 @@ def licence_streetnumber_index(task):
     licence = task.get_container()
     street_numbers = genericlicence_streetnumber(licence)
     return street_numbers
+
+
+@indexer(IAutomatedTask)
+def licence_applicant_index(task):
+    """
+    Index licence applicants on their tasks to be able
+    to query on it.
+    """
+    licence = task.get_container()
+    applicants = genericlicence_applicantinfoindex(licence)
+    return applicants
