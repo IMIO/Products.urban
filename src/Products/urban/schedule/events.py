@@ -10,7 +10,12 @@ def reindex_tasks(licence, event):
     Reindex some task indexes with licence values.
     """
     catalog = api.portal.get_tool('portal_catalog')
-    to_reindex = ('StreetsUID', 'getReference', 'StreetNumber ')
+    to_reindex = (
+        'getReference',
+        'StreetsUID',
+        'StreetNumber',
+        'applicantInfosIndex'
+    )
 
     tasks_brains = catalog(
         object_provides=IAutomatedTask.__identifier__,
