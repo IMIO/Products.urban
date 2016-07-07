@@ -44,7 +44,7 @@ schema = Schema((
             label_msgid='urban_label_notaryContact',
             i18n_domain='urban',
         ),
-        required=True,
+        required=False,
         schemata='urban_description',
         multiValued=True,
         relationship="notary",
