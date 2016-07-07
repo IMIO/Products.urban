@@ -208,7 +208,7 @@ schema = Schema((
     ),
     BooleanField(
         name='noApplication',
-        default=False,
+        default=True,
         widget=MasterBooleanWidget(
             slave_fields=slave_fields_habitation,
             label='Noapplication',
