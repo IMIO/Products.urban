@@ -363,4 +363,8 @@ td div.parcel-action {
 div.parcel-action{
     float: left;
 }
+
+#faceted-form .faceted-sections-buttons {
+    position: relative;
+}
 /* </dtml-with> */
