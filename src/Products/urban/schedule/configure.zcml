@@ -5,6 +5,8 @@
     <include package=".conditions" />
 
     <include file="assign_principal.zcml" />
+    <include file="events.zcml" />
+    <include file="indexes.zcml" />
     <include file="start_date.zcml" />
 
 </configure>
