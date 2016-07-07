@@ -115,18 +115,14 @@ def parcellingterm_parcelinfoindex(obj):
 
 
 @indexer(IGenericLicence)
-def genericlicence_streetsuid(object):
-    streets = []
-    for location in object.getWorkLocations():
-        streets.append(location['street'])
+def genericlicence_streetsuid(licence):
+    streets = [location['street'] for location in licence.getWorkLocations()]
     return streets
 
 
 @indexer(IGenericLicence)
-def genericlicence_streetnumber(object):
-    numbers = []
-    for location in object.getWorkLocations():
-        numbers.append(location['number'])
+def genericlicence_streetnumber(licence):
+    numbers = [location['number'] for location in licence.getWorkLocations()]
     return numbers
 
 
