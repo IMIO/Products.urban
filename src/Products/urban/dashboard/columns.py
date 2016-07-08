@@ -140,23 +140,6 @@ class TaskLicenceTitleDisplay(TitleDisplay, ScheduleColumn):
         return title
 
 
-class AssignedUserColumn(BaseColumn):
-    """ display licence address in SearchResultTable """
-
-    def renderCell(self, item):
-        user = item.assigned_user
-        group = item.assigned_group
-
-        assigned = user
-        if group:
-            assigned = '{user} ({group})'.format(
-                user=user,
-                group=group
-            )
-
-        return assigned
-
-
 class TaskActionsColumn(ActionsColumn):
     """Display actions for the task"""
     params = {
