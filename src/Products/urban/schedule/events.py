@@ -21,6 +21,7 @@ def reindex_tasks(licence, event):
         object_provides=IAutomatedTask.__identifier__,
         path={'query': '/'.join(licence.getPhysicalPath())}
     )
-    all_tasks = [brain.getObject() for brain in tasks_brains]
+    with api.env.adopt_roles(['Manager']):
+        all_tasks = [brain.getObject() for brain in tasks_brains]
     for task in all_tasks:
         task.reindexObject(idxs=to_reindex)
