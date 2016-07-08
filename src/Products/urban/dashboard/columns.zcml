@@ -59,15 +59,6 @@
   />
 
   <adapter
-     for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
-          collective.eeafaceted.z3ctable.interfaces.IFacetedTable"
-     factory=".columns.AssignedUserColumn"
-     provides="collective.eeafaceted.z3ctable.interfaces.IFacetedColumn"
-     name="assigned_user_column"
-  />
-
-  <adapter
     for="zope.interface.Interface
          zope.publisher.interfaces.browser.IBrowserRequest
          collective.eeafaceted.z3ctable.interfaces.IFacetedTable"
