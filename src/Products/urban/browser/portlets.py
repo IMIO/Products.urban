@@ -40,6 +40,11 @@ class ToolsRenderer(base.Renderer):
         available = 'Manager' in roles or 'Editor' in roles or 'Reader' in roles
         return available
 
+    def site_url(self):
+        portal = api.portal.get()
+        url = portal.absolute_url()
+        return url
+
     def render(self):
         return ViewPageTemplateFile('templates/portlet_urbantools.pt')(self)
 
