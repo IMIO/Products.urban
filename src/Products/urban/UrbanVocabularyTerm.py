@@ -23,13 +23,13 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from plone import api
+from plone.app.referenceintegrity.interfaces import IReferenceableVocabulary
+
 import re
 import logging
+
 logger = logging.getLogger('urban: UrbanVocabularyTerm')
-from zope.i18n import translate
-from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.Expression import Expression, createExprContext
-from plone.app.referenceintegrity.interfaces import IReferenceableVocabulary
 ##/code-section module-header
 
 schema = Schema((
@@ -144,7 +144,7 @@ class UrbanVocabularyTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMi
         """
           see renderText method of UrbanTool
         """
-        portal_urban = getToolByName(obj, 'portal_urban')
+        portal_urban = api.portal.get_tool('portal_urban')
         return portal_urban.renderText(text=self.Description(), context=obj, renderToNull=renderToNull)
 
 
@@ -169,14 +169,14 @@ class UrbanVocabulary(object):
         self.datagridfield_key = datagridfield_key
 
     def getDisplayList(self, content_instance):
-        portal_urban = getToolByName(content_instance, 'portal_urban')
+        portal_urban = api.portal.get_tool('portal_urban')
         result = DisplayList(portal_urban.listVocabulary(self.path,
             content_instance, vocType=self.vocType, id_to_use=self.id_to_use, value_to_use=self.value_to_use, sort_on=self.sort_on,\
             inUrbanConfig=self.inUrbanConfig, allowedStates=self.allowedStates, with_empty_value=self.with_empty_value))
         return result
 
     def getDisplayListForTemplate(self, content_instance):
-        portal_urban = getToolByName(content_instance, 'portal_urban')
+        portal_urban = api.portal.get_tool('portal_urban')
         result = DisplayList(portal_urban.listVocabulary(self.path,
             content_instance, vocType=self.vocType, id_to_use=self.id_to_use, value_to_use=self.value_to_use, sort_on=self.sort_on,\
             inUrbanConfig=self.inUrbanConfig, allowedStates=self.allowedStates, with_empty_value=self.with_empty_value, with_numbering=False))
@@ -196,9 +196,31 @@ class UrbanVocabulary(object):
         return result
 
     def getAllVocTerms(self, content_instance):
-        portal_urban = getToolByName(content_instance, 'portal_urban')
-        return  portal_urban.listVocabularyObjects(self.path, content_instance, sort_on=self.sort_on,\
-            id_to_use=self.id_to_use, vocType=self.vocType, inUrbanConfig=self.inUrbanConfig, allowedStates=self.allowedStates, with_empty_value=self.with_empty_value)
+        portal_urban = api.portal.get_tool('portal_urban')
+        voc_terms = portal_urban.listVocabularyObjects(
+            self.path,
+            content_instance,
+            sort_on=self.sort_on,
+            id_to_use=self.id_to_use,
+            vocType=self.vocType,
+            inUrbanConfig=self.inUrbanConfig,
+            allowedStates=self.allowedStates,
+            with_empty_value=self.with_empty_value
+        )
+        return voc_terms
+
+    def listAllVocTerms(self, content_instance):
+        portal_urban = api.portal.get_tool('portal_urban')
+        voc_brains = portal_urban.listVocabularyBrains(
+            self.path,
+            content_instance,
+            sort_on=self.sort_on,
+            vocType=self.vocType,
+            inUrbanConfig=self.inUrbanConfig,
+            allowedStates=self.allowedStates,
+        )
+        voc_terms = [brain.getObject() for brain in voc_brains]
+        return voc_terms
 
 
 ##/code-section module-footer
