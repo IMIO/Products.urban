@@ -246,15 +246,15 @@ schema = Schema((
     ),
     TextField(
         name='pmTitle',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
             label='Pmtitle',
             label_msgid='urban_label_pmTitle',
             i18n_domain='urban',
         ),
         default_method='getDefaultText',
-        default_content_type='text/html',
-        default_output_type='text/html',
+        default_content_type='text/plain',
+        default_output_type='text/plain',
         optional=True,
     ),
     TextField(
