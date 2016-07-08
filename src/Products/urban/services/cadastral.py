@@ -92,9 +92,9 @@ class CadastreSession(SQLSession):
         # filter on parcel location/proprietary name arguments
         map_ = self.tables.map
         if parcel_owner is not IGNORE:
-            query = query.filter(map_.pe.like('%{}%'.format(parcel_owner)))
+            query = query.filter(map_.pe.ilike('%{}%'.format(parcel_owner)))
         if location is not IGNORE:
-            query = query.filter(map_.sl1.like('%{}%'.format(location)))
+            query = query.filter(map_.sl1.ilike('%{}%'.format(location)))
 
         records = query.distinct().all()
         parcels = [ActualParcel(**record._asdict()) for record in records]
