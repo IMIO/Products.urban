@@ -11,6 +11,13 @@
         permission="zope2.View"
         />
 
+    <browser:page
+        for="Products.urban.interfaces.IUrbanEvent"
+        name="document_generation_helper_view"
+        class=".helper_view.UrbanDocGenerationHelperView"
+        permission="zope2.View"
+        />
+
     <adapter
       for="Products.urban.docgen.UrbanTemplate.IUrbanTemplate
            zope.interface.Interface"
