@@ -549,9 +549,6 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
         """
         return 'FD' in self.getProcedureChoice()
 
-    def getFirstDeposit(self, use_catalog=True):
-        return self._getFirstEvent(interfaces.IDepositEvent, use_catalog)
-
     def getLastDeposit(self, use_catalog=True):
         return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
 

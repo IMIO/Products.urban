@@ -175,3 +175,9 @@ def genericlicence_decisiondate(licence):
     decision_event = licence.getLastTheLicence(use_catalog=False)
     if decision_event:
         return decision_event.getEventDate()
+
+@indexer(IGenericLicence)
+def genericlicence_depositdate(licence):
+    deposit_event = licence.getFirstDeposit(use_catalog=False)
+    if deposit_event:
+        return deposit_event.getEventDate()
