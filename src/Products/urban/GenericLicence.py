@@ -1194,6 +1194,9 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
             limit_date = self.getLastDeposit().getEventDate() - 731
         return self.getLicenceOfTheParcels('UrbanCertificateTwo', limit_date)
 
+    def getFirstDeposit(self, use_catalog=True):
+        return self._getFirstEvent(interfaces.IDepositEvent, use_catalog)
+
 
 
 registerType(GenericLicence, PROJECTNAME)
