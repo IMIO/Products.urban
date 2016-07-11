@@ -1,10 +1,16 @@
 <?xml version="1.0"?>
 <object name="portal_catalog" meta_type="Plone Catalog Tool">
-  <index name="getDecisionDate" 
+  <index name="getDepositDate"
+         meta_type="DateIndex">
+    <indexed_attr value="getDepositDate"/>
+  </index>
+  <column value="getDepositDate"/>
+  <index name="getDecisionDate"
          meta_type="DateIndex">
     <indexed_attr value="getDecisionDate"/>
   </index>
-  <index name="getRecourseDecisionDisplayDate" 
+  <column value="getDecisionDate"/>
+  <index name="getRecourseDecisionDisplayDate"
          meta_type="DateIndex">
     <indexed_attr value="getRecourseDecisionDisplayDate"/>
   </index>
