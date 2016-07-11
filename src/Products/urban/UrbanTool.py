@@ -41,6 +41,7 @@ import time
 import re
 #from urlparse import urlparse
 from DateTime import DateTime
+from datetime import date as _date
 from StringIO import StringIO
 from AccessControl import getSecurityManager
 from plone import api
@@ -61,6 +62,8 @@ from Products.urban.interfaces import IUrbanVocabularyTerm, IContactFolder
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 DB_QUERY_ERROR = "Programming error in query"
+=======
+
 ##/code-section module-header
 
 schema = Schema((
@@ -918,7 +921,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return prefix + cityName
 
     security.declarePublic('formatDate')
-    def formatDate(self, date, translatemonth=True, long_format=False):
+    def formatDate(self, date=_date.today(), translatemonth=True, long_format=False):
         """
           Format the date for printing in pod templates
         """
