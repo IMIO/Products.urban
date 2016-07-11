@@ -49,6 +49,8 @@ from Products.urban.interfaces import IUrbanVocabularyTerm, IContactFolder
 from Products.urban.cartography import config as carto_config
 from Products.urban.services import cadastre
 
+from datetime import date as _date
+
 ##/code-section module-header
 
 schema = Schema((
@@ -661,7 +663,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return prefix + cityName
 
     security.declarePublic('formatDate')
-    def formatDate(self, date, translatemonth=True, long_format=False):
+    def formatDate(self, date=_date.today(), translatemonth=True, long_format=False):
         """
           Format the date for printing in pod templates
         """
