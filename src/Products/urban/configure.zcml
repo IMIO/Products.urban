@@ -148,6 +148,7 @@
   <adapter name="extraValue" factory=".indexes.rubricsfolders_extravalue" />
   <adapter name="representatives" factory=".indexes.genericlicence_representative" />
   <adapter name="getDecisionDate" factory=".indexes.genericlicence_decisiondate" />
+  <adapter name="getDepositDate" factory=".indexes.genericlicence_depositdate" />
 
   <interface interface=".interfaces.IUrbanCertificateOne" />
   <interface interface=".interfaces.IUrbanCertificateTwo" />
