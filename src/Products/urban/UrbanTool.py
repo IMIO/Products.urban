@@ -62,7 +62,7 @@ from Products.urban.interfaces import IUrbanVocabularyTerm, IContactFolder
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 DB_QUERY_ERROR = "Programming error in query"
-=======
+#=======
 
 ##/code-section module-header
 
