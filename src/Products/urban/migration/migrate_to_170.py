@@ -33,12 +33,12 @@ def migrateToUrban170(context):
     """
     # migrate decisions vocabulary
     migrateDecisionsVocabulary(context)
+    """
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
     logger.info("reinstalling urban done!")
-    """
     logger.info("migration done!")
 
 
