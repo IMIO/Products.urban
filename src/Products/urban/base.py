@@ -336,7 +336,7 @@ class UrbanBase(object):
         for applicant in applicants:
             toreturn = toreturn + '%' + applicant.getPersonTitleValue() + '|' + \
                        applicant.getPersonTitleValue(reverse=True) + '|' + applicant.getName1().decode('utf8') + '|' + \
-                       applicant.getName2().decode('utf8') + '|' + applicant.getStreet() + ', ' + \
+                       applicant.getName2().decode('utf8') + '|' + applicant.getStreet().decode('utf8') + ', ' + \
                        applicant.getNumber() + '|' + applicant.getZipcode() + ' ' + applicant.getCity().decode('utf8')
         toreturn = toreturn + '</CSV>'
         return toreturn
