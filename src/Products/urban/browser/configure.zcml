@@ -265,7 +265,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
+     for="*"
      name="parcelsinfo"
      class=".parcelsinfo.ParcelsInfo"
      template="templates/parcelsinfo.pt"
