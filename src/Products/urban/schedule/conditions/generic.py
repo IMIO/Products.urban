@@ -33,6 +33,8 @@ class ComplementsAsked(Condition):
         missing_part_event = licence.getLastMissingPart()
         if missing_part_event:
             complements_asked = api.content.get_state(missing_part_event) == 'closed'
+            recent = self.task.creation_date < missing_part_event.creation_date
+            complements_asked = complements_asked and recent
 
         return complements_asked
 
@@ -49,6 +51,8 @@ class ComplementsReceived(Condition):
         deposit_part_event = licence.getLastMissingPartDeposit()
         if deposit_part_event:
             complements_received = api.content.get_state(deposit_part_event) == 'closed'
+            recent = self.task.creation_date < deposit_part_event.creation_date
+            complements_received = complements_received and recent
 
         return complements_received
 
