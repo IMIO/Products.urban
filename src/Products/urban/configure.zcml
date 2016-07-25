@@ -38,6 +38,7 @@
     title="Products.urban: ViewUrbanMap"
     />
 
+  <include package=".collectionwidget" />
   <include package=".dashboard" />
   <include package=".docgen" />
   <include package=".events" />
