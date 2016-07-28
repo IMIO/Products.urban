@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from imio.schedule.interfaces import IScheduleView
+from zope.interface import Interface
 
 
-class IUrbanScheduleView(IScheduleView):
-    """Marker interface for folder with schedule view.
-    """
+class ICreateOpinionRequestsTask(Interface):
+    """ Marker interface for opinion requests creation task."""
+
+
+class ISendOpinionRequestsTask(Interface):
+    """ Marker interface for opinion requests sending task."""
+
+
+class IReceiveOpinionRequestsTask(Interface):
+    """ Marker interface for opinion requests reception task."""
