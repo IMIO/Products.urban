@@ -14,10 +14,12 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
-from Products.Archetypes.atapi import *
-from zope.interface import implements
-import interfaces
 
+from persistent.mapping import PersistentMapping
+
+from Products.Archetypes.atapi import *
+
+from Products.CMFCore.utils import UniqueObject
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget
@@ -25,8 +27,9 @@ from Products.DataGridField.Column import Column
 
 from Products.urban.config import *
 
+from zope.interface import implements
 
-from Products.CMFCore.utils import UniqueObject
+import interfaces
 
 
 ##code-section module-header #fill in your manual code here
@@ -52,6 +55,8 @@ from Products.urban.services import cadastre
 from datetime import date as _date
 
 ##/code-section module-header
+
+
 
 schema = Schema((
 
@@ -237,15 +242,17 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
     schema = UrbanTool_schema
 
-    portal_types_per_event_type_type = {
-        'Products.urban.interfaces.IInquiryEvent': 'UrbanEventInquiry',
-        'Products.urban.interfaces.ICollegeEvent': 'UrbanEventCollege',
-        'Products.urban.interfaces.IOpinionRequestEvent': 'UrbanEventOpinionRequest',
-    }
-
     def __init__(self, id=None):
         OrderedBaseFolder.__init__(self, 'portal_urban')
         self.setTitle('Urban configuration')
+
+        self.eventtype_portaltype_mapping = PersistentMapping(
+            {
+                'Products.urban.interfaces.IInquiryEvent': 'UrbanEventInquiry',
+                'Products.urban.interfaces.ICollegeEvent': 'UrbanEventCollege',
+                'Products.urban.interfaces.IOpinionRequestEvent': 'UrbanEventOpinionRequest',
+            }
+        )
 
     # tool should not appear in portal_catalog
     def at_post_edit_script(self):
