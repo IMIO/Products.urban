@@ -34,4 +34,3 @@ msgstr "Actions"
 
 msgid "sortable_title"
 msgstr "Titre"
-
