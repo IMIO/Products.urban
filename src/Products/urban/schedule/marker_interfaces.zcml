@@ -1,0 +1,17 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="urban">
+
+  <interface
+    interface=".interfaces.ICreateOpinionRequestsTask"
+    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+
+  <interface
+    interface=".interfaces.ISendOpinionRequestsTask"
+    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+
+  <interface
+    interface=".interfaces.IReceiveOpinionRequestsTask"
+    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+
+</configure>

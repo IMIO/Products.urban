@@ -29,6 +29,14 @@
         name="urban.schedule.condition.no_inquiry"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.InquiryDoneCondition"
+        name="urban.schedule.condition.inquiry_done"
+    />
+
     <!-- opinion requests conditions-->
     <adapter
         for="Products.urban.interfaces.IBuildLicence
@@ -36,6 +44,14 @@
         provides="imio.schedule.interfaces.IStartCondition"
         factory=".generic.HasOpinionRequests"
         name="urban.schedule.condition.has_opinion_requests"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.OpinionRequestsDone"
+        name="urban.schedule.condition.opinion_requests_done"
     />
 
 </configure>

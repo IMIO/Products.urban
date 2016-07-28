@@ -1,0 +1,43 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="urban">
+
+    <configure package="imio.schedule">
+
+      <browser:page
+         for="Products.urban.schedule.interfaces.ISendOpinionRequestsTask"
+         name="end_status"
+         class="Products.urban.schedule.task_completion.OpinionRequestSentStatus"
+         template="browser/templates/task_completion.pt"
+         permission="zope2.View"
+      />
+
+      <browser:page
+         for="Products.urban.schedule.interfaces.ISendOpinionRequestsTask"
+         name="simple_end_status"
+         class="Products.urban.schedule.task_completion.OpinionRequestSentStatus"
+         template="browser/templates/task_completion.pt"
+         permission="zope2.View"
+      />
+
+      <browser:page
+         for="Products.urban.schedule.interfaces.IReceiveOpinionRequestsTask"
+         name="end_status"
+         class="Products.urban.schedule.task_completion.OpinionRequestReceivedStatus"
+         template="browser/templates/task_completion.pt"
+         permission="zope2.View"
+      />
+
+      <browser:page
+         for="Products.urban.schedule.interfaces.IReceiveOpinionRequestsTask"
+         name="simple_end_status"
+         class="Products.urban.schedule.task_completion.OpinionRequestReceivedStatus"
+         template="browser/templates/task_completion.pt"
+         permission="zope2.View"
+      />
+
+    </configure>
+
+</configure>

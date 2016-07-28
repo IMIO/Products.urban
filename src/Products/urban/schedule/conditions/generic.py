@@ -194,4 +194,5 @@ class OpinionRequestsDone(Condition):
         for opinion in or_events:
             if api.content.get_state(opinion) != 'opinion_given':
                 return False
+
         return True
