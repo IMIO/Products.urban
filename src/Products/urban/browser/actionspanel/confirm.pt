@@ -17,19 +17,6 @@
     <h1 class="documentFirstHeading" tal:content="context/Title">Title</h1>
     <form id="confirmTransitionForm">
     <tal:warning condition="view/has_open_tasks">
-       <!--table class="listing task_status_table" tal:define="tasks view/get_created_tasks"
-              tal:condition="tasks"  i18n:domain="imio.schedule">
-           <th i18n:translate="">Created tasks</th>
-           <th i18n:translate="">To do</th>
-           <tr tal:repeat= "task_infos tasks">
-              <td>
-                 <span tal:content="python: task_infos[0].Title()"/>
-              </td>
-              <td tal:define="conditions_status python: task_infos[1]">
-                <div metal:use-macro="here/@@taskmacros/conditions_status_macro" />
-              </td>
-           </tr>
-        </table-->
         <br />
        <table class="listing task_status_table" tal:define="tasks view/get_started_tasks"
               tal:condition="tasks"  i18n:domain="imio.schedule">
@@ -39,7 +26,8 @@
               <td>
                  <span tal:content="python: task_infos[0].Title()"/>
               </td>
-              <td tal:define="conditions_status python: task_infos[1]">
+              <td tal:define="task_conditions python: task_infos[1];
+                              status python: False">
                 <div metal:use-macro="here/@@taskmacros/conditions_status_macro" />
               </td>
            </tr>
