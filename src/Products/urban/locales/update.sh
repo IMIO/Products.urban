@@ -1,11 +1,11 @@
-domain=urban
+#domain=urban
 
-i18ndude rebuild-pot --pot $domain.pot --create $domain  ../
+#i18ndude rebuild-pot --pot $domain.pot --create $domain  ../
 
-declare -a languages=("fr")
-for lang in "${languages[@]}"; do
-		mkdir -p $lang/LC_MESSAGES
-done
+#declare -a languages=("fr")
+#for lang in "${languages[@]}"; do
+#		mkdir -p $lang/LC_MESSAGES
+#done
 
 declare -a domains=("urban" "plone" "datagridfield" "collective.eeafaceted.z3ctable" "imio.schedule")
 
