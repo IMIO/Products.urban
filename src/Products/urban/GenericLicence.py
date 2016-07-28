@@ -1152,11 +1152,13 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         for eventType in listEventTypes:
             eventType.checkCreationInLicence(self)
             eventTypeType = eventType.getEventTypeType()
-            portal_type = urban_tool.portal_types_per_event_type_type.get(eventTypeType, "UrbanEvent")
+            portal_type = urban_tool.eventtype_portaltype_mapping.get(eventTypeType, "UrbanEvent")
 
-            newUrbanEventId= self.invokeFactory(portal_type, id=urban_tool.generateUniqueId(portal_type),
-                                                  title=eventType.Title(), urbaneventtypes=(eventType,))
-            newUrbanEventObj=getattr(self, newUrbanEventId)
+            newUrbanEventId = self.invokeFactory(
+                portal_type, id=urban_tool.generateUniqueId(portal_type),
+                title=eventType.Title(), urbaneventtypes=(eventType,)
+            )
+            newUrbanEventObj = getattr(self, newUrbanEventId)
             newUrbanEventObj.processForm()
         return self.REQUEST.RESPONSE.redirect(self.absolute_url() + '/view?#fieldsetlegend-urban_events')
 
