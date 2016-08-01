@@ -614,10 +614,10 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
         inquiry = 'inquiry' in selection
         FD = 'FD' in selection
 
-        if opinions and (inquiry or FD):
+        if (opinions or inquiry) and FD:
             return '115j'
-        elif not opinions and inquiry and FD:
-            return '115j'
+        elif opinions and inquiry and not FD:
+            return '70j'
         elif opinions and not (inquiry or FD):
             return '70j'
         elif inquiry and not (opinions or FD):
