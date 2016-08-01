@@ -384,6 +384,20 @@ class UrbanBase(object):
         toreturn = toreturn + '</CSV>'
         return toreturn
 
+    security.declarePublic('getMultipleArchitectsCSV')
+    def getMultipleGeometriciansCSV(self):
+        """
+          Returns a formatted version of the geometricians to be used in POD templates
+        """
+        geometricians = self.getGeometricians()
+        toreturn = '<CSV>Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
+        for geometrician in geometricians:
+            toreturn = toreturn + '%' + geometrician.getPersonTitleValue() + '|' + geometrician.getName1() + '|' +\
+                    geometrician.getName2() + '|' + geometrician.getNumber() + ', ' + geometrician.getStreet() + '|' + \
+                    geometrician.getZipcode() + ' ' + geometrician.getCity()
+        toreturn = toreturn + '</CSV>'
+        return toreturn
+
     security.declarePublic('getMultipleNotariesCSV')
     def getMultipleNotariesCSV(self):
         """
