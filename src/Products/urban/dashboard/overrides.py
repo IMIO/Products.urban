@@ -24,10 +24,7 @@ class RenderLicenceTermView(RenderTermView):
         for urban_type in URBAN_TYPES:
             if urban_type.lower() in collection_id:
                 self.licence_type = urban_type
-                if self.is_schedule_context():
-                    return ViewPageTemplateFile("templates/schedule_licence_term.pt")(self)
-                else:
-                    return ViewPageTemplateFile("templates/licence_term.pt")(self)
+                return ViewPageTemplateFile("templates/licence_term.pt")(self)
         return self.index()
 
     def is_schedule_context(self):
