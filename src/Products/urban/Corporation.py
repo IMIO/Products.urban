@@ -114,7 +114,7 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
         return self.getDenomination()
 
     def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
-        nameSignaletic = self.getDenomination()
+        nameSignaletic = '{} {}'.format(self.getLegalForm(), self.getDenomination())
         if linebyline:
             #escape HTML special characters like HTML entities
             return cgi.escape(nameSignaletic)
