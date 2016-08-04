@@ -256,30 +256,34 @@ class Contact(BaseContent, BrowserDefaultMixin):
             if not linebyline:
                 mapping = dict(name=nameSignaletic.decode('utf8'),
                                address=addressSignaletic.decode('utf8'))
-                if self.isMasculineSingular():
-                    result = translate(
-                        u'masculine_singular_residing',
-                        domain=u'urban',
-                        mapping=mapping, context=self.REQUEST
-                    )
-                elif self.isFeminineSingular():
-                    result = translate(
-                        u'feminine_singular_residing',
-                        domain=u'urban',
-                        mapping=mapping, context=self.REQUEST
-                    )
-                elif self.isFemininePlural():
-                    result = translate(
-                        u'feminine_plural_residing',
-                        domain=u'urban',
-                        mapping=mapping, context=self.REQUEST
-                    )
-                else:
-                    result = translate(
-                        u'mixed_residing',
-                        domain=u'urban',
-                        mapping=mapping, context=self.REQUEST
-                    )
+                result = "{} {}".format(
+                        nameSignaletic.decode('utf8'),
+                        addressSignaletic).decode('utf8')
+                if self.portal_type != 'Corporation':
+                    if self.isMasculineSingular():
+                        result = translate(
+                            u'masculine_singular_residing',
+                            domain=u'urban',
+                            mapping=mapping, context=self.REQUEST
+                        )
+                    elif self.isFeminineSingular():
+                        result = translate(
+                            u'feminine_singular_residing',
+                            domain=u'urban',
+                            mapping=mapping, context=self.REQUEST
+                        )
+                    elif self.isFemininePlural():
+                        result = translate(
+                            u'feminine_plural_residing',
+                            domain=u'urban',
+                            mapping=mapping, context=self.REQUEST
+                        )
+                    else:
+                        result = translate(
+                            u'mixed_residing',
+                            domain=u'urban',
+                            mapping=mapping, context=self.REQUEST
+                        )
                 return result.encode('utf8')
             else:
                 #remove the <p></p> from adressSignaletic
