@@ -375,7 +375,9 @@
 
     <fieldset>
         <legend i18n:translate="">Attachments</legend>
-        <tal:listing content="structure view/renderAttachmentsListing" />
+        <div class="clear">
+            <tal:listing content="structure view/renderAttachmentsListing" />
+        </div>
 
         <tal:add_attachment i18n:domain="urban"
                             tal:define="mayAddAttachment view/mayAddAttachment">
@@ -388,7 +390,9 @@
 
     <fieldset>
         <legend i18n:translate="">Events attachments</legend>
-        <tal:listing content="structure view/renderNestedAttachmentsListing" />
+        <div class="clear">
+            <tal:listing content="structure view/renderNestedAttachmentsListing" />
+        </div>
     </fieldset>
 
 </metal:events>
@@ -415,7 +419,9 @@
     <!--/fieldset-->
     <fieldset>
         <legend i18n:translate="">Events</legend>
-        <tal:listing content="structure view/renderEventsListing" />
+        <div class="clear">
+            <tal:listing content="structure view/renderEventsListing" />
+        </div>
     </fieldset>
 </metal:events>
 

@@ -34,13 +34,17 @@
                             <td valign="top">
                                 <fieldset>
                                     <legend i18n:translate="event_linked_documents">Event linked documents</legend>
-                                    <tal:listing content="structure view/renderGeneratedDocumentsListing" />
+                                    <div class="clear">
+                                        <tal:listing content="structure view/renderGeneratedDocumentsListing" />
+                                    </div>
                                 </fieldset>
 
                                 <fieldset>
-                                   <legend i18n:translate="event_linked_attachments">Event linked attachments</legend>
-                                   <tal:listing content="structure view/renderAttachmentsListing" />
-                                   <metal:listing use-macro="context/@@urbanevent-macros/urbanEventAddAttachmentMacro" />
+                                    <legend i18n:translate="event_linked_attachments">Event linked attachments</legend>
+                                    <div class="clear">
+                                        <tal:listing content="structure view/renderAttachmentsListing" />
+                                    </div>
+                                    <metal:listing use-macro="context/@@urbanevent-macros/urbanEventAddAttachmentMacro" />
                                 </fieldset>
                             </td>
                         </tr>

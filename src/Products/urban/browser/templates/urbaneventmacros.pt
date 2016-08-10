@@ -1,6 +1,6 @@
 <fieldset metal:define-macro="urbanEventDataMacro" i18n:domain="urban" height="100%">
     <legend i18n:translate="event_data">Event data</legend>
-    <table class="no-style-table">
+    <table class="no-style-table; clear">
         <tr valign="top">
             <td>
                 <strong tal:content="python: context.eventDateLabel()">Event date label</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
@@ -59,7 +59,7 @@
           mayAddUrbanEvent view/mayAddUrbanEvent">
     <legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend>
     <tal:templates_link condition="python: mayAddUrbanEvent and templates_list">
-        <table>
+        <table class="clear">
             <tal:loopEventType repeat="template templates_list">
                 <tr>
                     <td tal:attributes="class python: template['class']">&nbsp</td><td>&nbsp</td>

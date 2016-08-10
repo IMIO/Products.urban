@@ -21,14 +21,6 @@
         />
 
     <configure package="collective.eeafaceted.collectionwidget">
-        <browser:page
-            for="*"
-            name="render_collection_widget_term"
-            class="Products.urban.dashboard.overrides.RenderLicenceTermView"
-            template="browser/templates/term.pt"
-            permission="zope2.View"
-            />
-
         <utility
            factory="Products.urban.dashboard.vocabularies.CollectionCategory"
            name="collective.eeafaceted.collectionwidget.collectioncategoryvocabulary"
