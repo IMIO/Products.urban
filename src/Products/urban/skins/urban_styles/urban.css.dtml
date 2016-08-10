@@ -216,12 +216,8 @@ label {
     font-weight: normal;
 }
 
-#content div fieldset, #licenceconfig-base-edit {
-    line-height: 1.5em;
-}
-
 .urban-document-already-created {
-background-color: #75AD0A;
+    background-color: #75AD0A;
 }
 
 #portaltab-urban {
@@ -367,4 +363,9 @@ div.parcel-action{
 #faceted-form .faceted-sections-buttons {
     position: relative;
 }
+
+.clear {
+    clear: both;
+}
+
 /* </dtml-with> */

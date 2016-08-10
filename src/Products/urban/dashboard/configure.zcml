@@ -7,4 +7,14 @@
     <include file="columns.zcml" />
     <include file="vocabularies.zcml" />
 
+    <configure package="collective.eeafaceted.collectionwidget">
+        <browser:page
+            for="OFS.interfaces.IItem"
+            name="render_collection_widget_term"
+            class="Products.urban.dashboard.overrides.RenderLicenceTermView"
+            template="browser/templates/term.pt"
+            permission="zope2.View"
+            />
+    </configure>
+
 </configure>

@@ -19,7 +19,6 @@ class RenderLicenceTermView(RenderTermView):
         self.category = category
         self.widget = widget
         self.collection = term.value
-        # display the searchallmeetings as a selection list
         collection_id = self.collection.getId()
         for urban_type in URBAN_TYPES:
             if urban_type.lower() in collection_id:

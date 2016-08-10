@@ -24,8 +24,8 @@
          tal:attributes="class python: parcels and 'field' or 'field warning'">
          You must encode concerned parcel(s)
     </div>
-    <div>
-     <tal:listing content="structure view/renderParcelsListing" />
+    <div class="clear">
+        <tal:listing content="structure view/renderParcelsListing" />
     </div>
     <div class="parcel-action">
      <form tal:condition="python: member.has_permission('urban: Add PortionOut', context)" name="quickAdd"
