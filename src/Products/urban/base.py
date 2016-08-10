@@ -508,7 +508,7 @@ class UrbanBase(object):
         """
           Return every contained UrbanEvents (of any type)...
         """
-        return self.listFolderContents({'portal_type': ('UrbanEventInquiry', 'UrbanEvent', 'UrbanEventOpinionRequest')})
+        return self.objectValues('UrbanEvent')  # UrbanEvent is the meta_type
 
     security.declarePublic('getInquiries')
     def getInquiries(self):
