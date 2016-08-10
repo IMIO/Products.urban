@@ -176,6 +176,9 @@ class RecipientsCadastreTable(UrbanTable, SequenceTable):
     startBatchingAt = 999
 
     cssClasses = {'table': 'listing largetable'}
+    batchStart = 0
+    batchSize = 999
+    startBatchingAt = 999
 
 
 class ParcelsTable(UrbanTable, SequenceTable):
