@@ -527,7 +527,7 @@ msgid "content_none"
 msgstr "N.C."
 
 msgid "corporation_representative_fieldset_legend"
-msgstr "Personne dûment abilité à représenter la personne morale"
+msgstr "Personne dûment habilitée à représenter la personne morale"
 
 msgid "country_folder_title"
 msgstr "Pays des personnes"
