@@ -78,7 +78,7 @@
     <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=False)">
         <tal:block define="fieldName field/getName;
                            addressFields python: ['isSameAddressAsWorks', 'street', 'number', 'zipcode', 'city', 'country'];
-                           representativeFields python: ['personRole', 'name1', 'name2']">
+                           representativeFields python: ['personRole', 'name1', 'name2', 'personTitle']">
 
             <tal:address condition="python: fieldName in addressFields">
                 <tal:manage_address condition="python: fieldName == 'isSameAddressAsWorks'">
@@ -112,6 +112,7 @@
             <tal:representative condition="python: fieldName == representativeFields[0]">
                 <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
                     <legend i18n:translate="corporation_representative_fieldset_legend">Represented by</legend>
+                    <metal:fieldMacro use-macro="python:here.widget('personTitle', mode='edit')" />
                     <metal:fieldMacro use-macro="python:here.widget('personRole', mode='edit')" />
                     <metal:fieldMacro use-macro="python:here.widget('name1', mode='edit')" />
                     <metal:fieldMacro use-macro="python:here.widget('name2', mode='edit')" />
