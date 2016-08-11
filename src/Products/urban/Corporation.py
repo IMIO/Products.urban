@@ -85,7 +85,7 @@ Corporation_schema['society'].widget.visible = False
 Corporation_schema['representedBySociety'].widget.visible = False
 Corporation_schema['representedBy'].widget.visible = False
 Corporation_schema['nationalRegister'].widget.visible = False
-Corporation_schema['personTitle'].widget.visible = False
+#Corporation_schema['personTitle'].widget.visible = False
 ##/code-section after-schema
 
 class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
