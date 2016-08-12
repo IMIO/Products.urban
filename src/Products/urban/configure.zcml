@@ -16,6 +16,8 @@
   <include package="five.grok"/>
   <include package="imio.actionspanel"/>
   <include package="imio.dashboard"/>
+  <include package="imio.pm.wsclient"/>
+  <include package="imio.schedule"/>
   <include package="Products.Archetypes"/>
   <include package="Products.CMFPlacefulWorkflow"/>
   <include package="Products.cron4plone"/>
@@ -30,7 +32,6 @@
   <include package="plone.app.referenceintegrity"/>
   <include package="plone.z3ctable"/>
   <include package="plonetheme.imioapps"/>
-  <include package="imio.schedule"/>
 
 
   <permission
