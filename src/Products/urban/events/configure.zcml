@@ -155,4 +155,9 @@
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".urbanEventEvents.notifyLicence" />
 
+  <!-- do this to update schedule tasks when sending a college event to PM -->
+  <subscriber for="..interfaces.IUrbanEvent
+                   imio.pm.wsclient.interfaces.ISentToPMEvent"
+              handler=".urbanEventEvents.notifyLicence" />
+
 </configure>
