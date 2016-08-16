@@ -106,7 +106,7 @@ class AcknowledgmentDoneCondition(Condition):
 
 class NoInquiryCondition(Condition):
     """
-    Licence  has no inquiry selected on procedureChoice field.
+    Licence has no inquiry selected on procedureChoice field.
     """
 
     def evaluate(self):
