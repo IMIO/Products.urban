@@ -16,6 +16,14 @@ class ContactView(BrowserView):
         self.request.set('disable_plone.rightcolumn', 1)
         self.request.set('disable_plone.leftcolumn', 1)
 
+    def __call__(self):
+        context = aq_inner(self.context)
+        #either the parent is in URBAN_TYPES
+        parent = context.aq_inner.aq_parent
+        if parent.portal_type in URBAN_TYPES:
+            return self.request.RESPONSE.redirect(parent.absolute_url())
+        return super(ContactView, self).__call__()
+
     def getFields(self, exclude=[]):
         """
         """
