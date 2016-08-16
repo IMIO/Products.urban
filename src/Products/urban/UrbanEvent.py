@@ -256,6 +256,7 @@ schema = Schema((
         default_content_type='text/plain',
         default_output_type='text/plain',
         optional=True,
+        pm_text_field=True,
     ),
     TextField(
         name='pmDescription',
@@ -269,6 +270,7 @@ schema = Schema((
         default_content_type='text/html',
         default_output_type='text/html',
         optional=True,
+        pm_text_field=True,
     ),
     TextField(
         name='officeCoordinate',
