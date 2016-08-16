@@ -34,13 +34,13 @@ def migrate(context):
     logger = logging.getLogger('urban: migrate to 1.11.0')
     logger.info("starting migration steps")
     #  migrate UrbanDoc to File type with an IUrbanDoc marker interface on it.
-    migrate_generated_UrbanDoc_to_ATFile(context)
-    migrate_UrbanDoc_to_SubTemplate(context)
-    migrate_UrbanDoc_to_StyleTemplate(context)
-    migrate_UrbanDoc_to_Urbantemplate(context)
-    migrate_statsINS_template(context)
-    migrate_PersonTitleTerm(context)
-    migrate_PortionOut(context)
+    #migrate_generated_UrbanDoc_to_ATFile(context)
+    #migrate_UrbanDoc_to_SubTemplate(context)
+    #migrate_UrbanDoc_to_StyleTemplate(context)
+    #migrate_UrbanDoc_to_Urbantemplate(context)
+    #migrate_statsINS_template(context)
+    #migrate_PersonTitleTerm(context)
+    #migrate_PortionOut(context)
     migrate_worktypes(context)
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
@@ -347,6 +347,8 @@ def migrate_licence_worktype(worktypes_info):
     for brain in licence_brains:
         licence = brain.getObject()
         field = licence.getField('workType')
+        if not field:
+            continue
         vocterms = field.vocabulary.getAllVocTerms(licence)
         old_values = licence.getWorkType()
         new_values = []
