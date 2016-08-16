@@ -25,24 +25,52 @@ class UrbanEventView(BrowserView):
         self.request.set('disable_plone.rightcolumn', 1)
         self.request.set('disable_plone.leftcolumn', 1)
 
-    def getData(self):
+    def getActivatedFields(self):
         """
-          This will return data to display about the UrbanEvent
-          This returns a tuple where the element [0]
-          is an object and the element [1] is a list of attributes
-          Example : (context, [field1, field2, field3, ])
+        Return all the activated fields of this UrbanEvent
         """
         context = aq_inner(self.context)
         linkedUrbanEventType = context.getUrbaneventtypes()
-        data = (context, [], )
+        fields = []
         for activatedField in linkedUrbanEventType.getActivatedFields():
             if not activatedField:
                 continue  # in some case, there could be an empty value in activatedFields...
-            data[1].append(activatedField)
-        return data
+            field = context.getField(activatedField)
+            fields.append(field)
+        return fields
 
-    def isTextField(self, field_name):
-        field = self.context.getField(field_name)
+    def getFieldsToShow(self):
+        """
+        Return fields to display about the UrbanEvent
+        """
+        fields = [f for f in self.getActivatedFields() if not hasattr(f, 'pm_text_field')]
+        return fields
+
+    def getPmFields(self):
+        """
+        Return activated pm fields to build the pm summary
+        """
+        fields = [f for f in self.getActivatedFields() if hasattr(f, 'pm_text_field')]
+        return fields
+
+    def show_pm_summary(self):
+        """
+        """
+        return bool(self.getPmFields())
+
+    def empty_pm_summary(self):
+        """
+        """
+        fields = self.getPmFields()
+
+        for field in fields:
+            text = field.get(self.context)
+            if text:
+                return False
+
+        return True
+
+    def isTextField(self, field):
         return field.type == 'text'
 
     def mayAddUrbanEvent(self):
@@ -274,7 +302,8 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
                         )
                         newrecipient = getattr(context, newrecipientname)
                 #create the PortionOut using the createPortionOut method...
-                context.portal_urban.createPortionOut(container=newrecipient, **parcel.reference_as_dict())
+                with api.env.adopt_roles(['Manager']):
+                    context.portal_urban.createPortionOut(container=newrecipient, **parcel.reference_as_dict())
         return context.REQUEST.RESPONSE.redirect(context.absolute_url() + '/#fieldsetlegend-urbaneventinquiry_recipients')
 
     def getInquiryRadius(self):

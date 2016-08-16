@@ -17,6 +17,10 @@ jQuery(function($){
     $('#urban-minimum-conditions a').prepOverlay({
        subtype: 'ajax',
    });
+    // Pm summary
+    $('#pm-summary a').prepOverlay({
+       subtype: 'ajax',
+   });
     // parcel history popup
     $('#urban-parcel-related-licences a').prepOverlay({
        subtype: 'ajax',

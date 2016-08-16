@@ -178,6 +178,14 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="pmsummarytextview"
+     class=".longtextview.PmSummaryTextView"
+     template="templates/longtextview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IGenericLicence"
      name="longtextview"
      class=".longtextview.LongTextView"
