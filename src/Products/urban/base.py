@@ -240,19 +240,6 @@ class UrbanBase(object):
             portal_type = self.REQUEST['__factory__info__']['stack'][0]
             return licenceTypes[portal_type]
 
-    security.declarePublic('getDepositDate')
-    def getDepositDate(self):
-        """
-          Returns the date the folder was brought to the urbanism service
-        """
-        tool = api.portal.get_tool('portal_urban')
-        #get the event called 'depot-de-la-demande' and returns the linked eventDate
-        depositEvent = self.getLastDeposit()
-        if depositEvent:
-            tool = api.portal.get_tool('portal_urban')
-            return tool.formatDate(depositEvent.getEventDate())
-        return translate('warning_no_deposit_date', 'urban', context=self.REQUEST).encode('utf8')
-
     security.declarePublic('hasSingleApplicant')
     def hasSingleApplicant(self):
         """
