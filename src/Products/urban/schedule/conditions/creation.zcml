@@ -24,6 +24,14 @@
         for="Products.urban.interfaces.IBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.NoInquiryCondition"
+        name="urban.schedule.condition.no_inquiry"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.InquiryCondition"
         name="urban.schedule.condition.has_inquiry"
     />
@@ -35,6 +43,14 @@
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.HasOpinionRequests"
         name="urban.schedule.condition.has_opinion_requests"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.OpinionRequestsDone"
+        name="urban.schedule.condition.opinion_requests_done"
     />
 
     <!-- FD opinions conditions-->
