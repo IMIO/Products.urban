@@ -495,6 +495,12 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         attachments = [obj for obj in self.objectValues() if is_attachment(obj)]
         return attachments
 
+    def getRecipients(self):
+        """
+          Returns a list of recipients
+        """
+        return self.objectValues('RecipientCadastre')
+
     security.declarePublic('RecipientsCadastreCSV')
     def RecipientsCadastreCSV(self):
         """
