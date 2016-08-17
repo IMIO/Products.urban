@@ -10,6 +10,7 @@ class UrbanDoc2PloneMeeting(BrowserView):
     """
     def getAnnexes(self):
         documents = self.context.getAttachments()
+        documents.extend(self.context.getDocuments())
         annexes = []
         for doc in documents:
             annexes.append(
