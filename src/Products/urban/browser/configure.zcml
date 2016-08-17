@@ -162,6 +162,14 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="at_base_edit_view"
+     class=".urbaneventedit.UrbanEventEdit"
+     permission="cmf.ModifyPortalContent"
+     allowed_interface="Products.Archetypes.interfaces.IEditForm"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IInquiry"
      name="inquiryview"
      class=".inquiryview.InquiryView"
