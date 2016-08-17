@@ -9,7 +9,7 @@
 <fieldset metal:define-macro="urbanArchitectsMacro" i18n:domain="urban" tal:define="architects here/getArchitects">
     <legend i18n:translate="urban_label_architects">Architect(s)</legend>
     <tal:loop repeat="architect architects" tal:condition="architects">
-        <div class="#" tal:define="oddrow repeat/architect/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
+        <div class="#" tal:attributes="class python: 'clear'">
             <a href="#" tal:attributes="href python: architect.absolute_url() + '?came_from_licence_uid=' + context.UID()">
                 <span tal:replace="python: architect.getPersonTitle(short=True)" />
                 <span tal:replace="architect/getName1|nothing" />
@@ -27,7 +27,7 @@
 <fieldset metal:define-macro="urbanGeometriciansMacro" i18n:domain="urban" tal:define="geometricians here/getGeometricians">
     <legend i18n:translate="urban_label_geometricians">Geometrician(s)</legend>
     <tal:loop repeat="geometrician geometricians" tal:condition="geometricians">
-        <div class="#" tal:define="oddrow repeat/geometrician/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
+        <div class="#" tal:attributes="class python: 'clear'">
             <a href="#" tal:attributes="href python: geometrician.absolute_url() + '?came_from_licence_uid=' + context.UID()">
                 <span tal:replace="python: geometrician.getPersonTitle(short=True)" />
                 <span tal:replace="geometrician/getName1|nothing" />
@@ -44,7 +44,7 @@
 <fieldset metal:define-macro="urbanNotariesMacro" i18n:domain="urban" tal:define="notaries here/getNotaryContact">
     <legend i18n:translate="urban_label_notaryContact">Notary(ies)</legend>
     <tal:loop repeat="notary notaries">
-        <div class="#" tal:define="oddrow repeat/notary/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'">
+        <div class="#" tal:attributes="class python: 'clear'">
             <a href="#" tal:attributes="href python: notary.absolute_url() + '?came_from_licence_uid=' + context.UID()">
                 <span tal:replace="python: notary.getPersonTitle(short=True)" />
                 <span tal:replace="notary/getName1|nothing" />
