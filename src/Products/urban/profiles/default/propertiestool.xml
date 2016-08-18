@@ -2,5 +2,6 @@
 <object name="portal_properties" meta_type="Plone Properties Tool">
  <object name="site_properties" meta_type="Plone Property Sheet">
   <property name="default_language" type="string">fr</property>
+  <property name="calendar_future_years_available" type="int">50</property>
  </object>
 </object>
