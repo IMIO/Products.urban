@@ -1113,7 +1113,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         if res and theObject:
             tool = api.portal.get_tool('portal_urban')
             urbanConfig = self.getLicenceConfig()
-            res = getattr(urbanConfig.folderdelays, res.id)
+            res = getattr(urbanConfig.folderdelays, res)
         return res
 
     security.declarePublic('getPca')
@@ -1122,10 +1122,10 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
           Returns the pca value or the PcaTerm if theObject=True
         """
         res = self.getField('pca').get(self)
-        if res and theObject:
+        if type(res) is str and theObject:
             tool = api.portal.get_tool('portal_urban')
             urbanConfig = self.getLicenceConfig()
-            res = getattr(urbanConfig.pcas, res.id)
+            res = getattr(urbanConfig.pcas, res)
         return res
 
     security.declarePublic('getOpinionRequests')
