@@ -1113,7 +1113,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         if res and theObject:
             tool = api.portal.get_tool('portal_urban')
             urbanConfig = self.getLicenceConfig()
-            res = getattr(urbanConfig.folderdelays, res)
+            res = getattr(urbanConfig.folderdelays, res.id)
         return res
 
     security.declarePublic('getPca')
@@ -1125,7 +1125,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         if res and theObject:
             tool = api.portal.get_tool('portal_urban')
             urbanConfig = self.getLicenceConfig()
-            res = getattr(urbanConfig.pcas, res)
+            res = getattr(urbanConfig.pcas, res.id)
         return res
 
     security.declarePublic('getOpinionRequests')
