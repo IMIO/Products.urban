@@ -170,10 +170,7 @@ class LicenceView(BrowserView):
         context = aq_inner(self.context)
         macro_name = '{}_macro'.format(tab)
         macros_view = self.getMacroViewName()
-        try:
-            macro = context.unrestrictedTraverse('{view}/{macro}'.format(view=macros_view, macro=macro_name))
-        except:
-            import ipdb; ipdb.set_trace()
+        macro = context.unrestrictedTraverse('{view}/{macro}'.format(view=macros_view, macro=macro_name))
         return macro
 
     def getMacroViewName(self):
