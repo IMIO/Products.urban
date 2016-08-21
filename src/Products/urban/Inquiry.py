@@ -160,6 +160,7 @@ schema = Schema((
             label_msgid='urban_label_solicitOpinionsTo',
             i18n_domain='urban',
         ),
+        schemata='urban_advices',
         multiValued=1,
         vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
         default_method='getDefaultValue',

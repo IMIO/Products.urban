@@ -1563,6 +1563,9 @@ msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
 msgid "urban_investigationStart"
 msgstr "Enquête publique n°${number} du"
 
+msgid "urban_label_askingDate"
+msgstr "Date de demande"
+
 #. Default: "Buildlicencenumerotation"
 #: UrbanTool.py
 msgid "urban_label_BuildLicenceNumerotation"
@@ -2010,7 +2013,7 @@ msgstr "Calcul de la date limite"
 #. Default: "Demanddisplay"
 #: Inquiry.py
 msgid "urban_label_demandDisplay"
-msgstr "Date d'affichage de la demande"
+msgstr "Date de boutique urbaine"
 
 #. Default: "Denomination"
 #: Corporation.py
@@ -2025,7 +2028,7 @@ msgstr "Type de dépôt"
 #. Default: "Derogation"
 #: GenericLicence.py
 msgid "urban_label_derogation"
-msgstr "Demande de dérogation"
+msgstr "Dérogation"
 
 #. Default: "Derogationdetails"
 #: GenericLicence.py
@@ -2177,7 +2180,7 @@ msgstr "Détails concernant la zone inondable"
 #. Default: "Foldercategory"
 #: GenericLicence.py
 msgid "urban_label_folderCategory"
-msgstr "Catégorie du dossier RW"
+msgstr "Type de dossier"
 
 #. Default: "Foldercategorytownship"
 #: GenericLicence.py
@@ -2303,7 +2306,7 @@ msgstr "Article(s) de l'enquête (texte)"
 #. Default: "Investigationdetails"
 #: GenericLicence.py
 msgid "urban_label_investigationDetails"
-msgstr "Détails concernant l'enquête"
+msgstr "Observations sur l'enquête"
 
 #. Default: "Investigationend"
 #: GenericLicence.py
@@ -2324,7 +2327,7 @@ msgstr "Point"
 #. Default: "Investigationreasons"
 #: GenericLicence.py
 msgid "urban_label_investigationReasons"
-msgstr "Particularité(s), raison(s) de l'enquête"
+msgstr "Caractéristique du projet (annexe 25)"
 
 #. Default: "Investigationstart"
 #: GenericLicence.py
@@ -2545,7 +2548,7 @@ msgstr "Conditions d'octroi du permis"
 #. Default: "Locationtechnicalremarks"
 #: GenericLicence.py
 msgid "urban_label_locationTechnicalRemarks"
-msgstr "Remarques techniques (Fiche Urbanisme)"
+msgstr "Remarques techniques (Fiche analyse)"
 
 #. Default: "Manageablelicences"
 #: FolderManager.py
@@ -3092,7 +3095,7 @@ msgstr "Un avis sera solicité par l'urbanisme à"
 #. Default: "Solicitopinionsto"
 #: GenericLicence.py
 msgid "urban_label_solicitOpinionsTo"
-msgstr "Un avis sera sollicité à"
+msgstr "Avis sollicité(s)"
 
 #. Default: "Solicitroadopinionsto"
 #: GenericLicence.py

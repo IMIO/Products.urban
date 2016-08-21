@@ -1563,6 +1563,9 @@ msgstr ""
 msgid "urban_investigationStart"
 msgstr ""
 
+msgid "urban_label_askingDate"
+msgstr ""
+
 #. Default: "Buildlicencenumerotation"
 #: UrbanTool.py
 msgid "urban_label_BuildLicenceNumerotation"

@@ -134,7 +134,7 @@ setDefaultRoles('urban: Add PersonTitleTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PortionOut', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PreliminaryNotice', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Recipient', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add RecipientCadastre', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add RecipientCadastre', ("Manager", "Contributor", "Editor"))
 setDefaultRoles('urban: Add SpecificFeatureTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Street', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanEvent', ("Manager", "Contributor"))
@@ -156,7 +156,7 @@ ADDITIONAL_LAYERS_FOLDER = "additional_layers"
 URBAN_TYPES = [
     'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'UrbanCertificateOne',
     'UrbanCertificateTwo', 'MiscDemand', 'PreliminaryNotice', 'PatrimonyCertificate',
-    'NotaryLetter', 'Division', 'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
+    # 'NotaryLetter', 'Division', 'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
 ]
 
 # all types that can be used as a licence applicant
