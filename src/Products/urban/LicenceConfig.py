@@ -200,6 +200,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_location': '(urb) ',
             'urban_road': '(voi) ',
             'urban_inquiry': '(enq) ',
+            'urban_analysis': '(analyse) ',
             'urban_advices': '(avis) ',
             'urban_habitation': '(log) ',
             'urban_peb': '(peb) ',
