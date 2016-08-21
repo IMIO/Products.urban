@@ -31,6 +31,7 @@ from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from dateutil.relativedelta import relativedelta
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 
 optional_fields = [
     'implantation', 'roadAdaptation', 'pebDetails', 'requirementFromFD',
@@ -88,6 +89,15 @@ slave_fields_procedurechoice = (
         'control_param': 'values',
     },
 )
+
+slave_fields_composition = (
+    {
+        'name': 'missingParts',
+        'action': 'vocabulary',
+        'vocab_method': 'getCompositionMissingParts',
+        'control_param': 'composition',
+    },
+)
 ##/code-section module-header
 
 schema = Schema((
@@ -112,7 +122,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         required=True,
-        schemata='urban_description',
+        schemata='urban_analysis',
         vocabulary='listUsages',
     ),
     StringField(
@@ -122,7 +132,7 @@ schema = Schema((
             label_msgid='urban_label_annoncedDelay',
             i18n_domain='urban',
         ),
-        schemata='urban_description',
+        schemata='urban_analysis',
         vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
         default_method='getDefaultValue',
     ),
@@ -134,7 +144,7 @@ schema = Schema((
             label_msgid='urban_label_annoncedDelayDetails',
             i18n_domain='urban',
         ),
-        schemata='urban_description',
+        schemata='urban_analysis',
         default_method='getDefaultText',
         default_content_type='text/plain',
         default_output_type='text/html',
@@ -169,7 +179,7 @@ schema = Schema((
             label_msgid='urban_label_implantation',
             i18n_domain='urban',
         ),
-        schemata='urban_road',
+        schemata='urban_analysis',
     ),
     StringField(
         name='pebType',
@@ -349,7 +359,7 @@ schema = Schema((
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
-        schemata='urban_location',
+        schemata='urban_analysis',
         default_output_type='text/html',
     ),
     LinesField(
@@ -374,7 +384,7 @@ schema = Schema((
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
-        schemata='urban_location',
+        schemata='urban_analysis',
         default_output_type='text/html',
     ),
     TextField(
@@ -420,7 +430,7 @@ schema = Schema((
             label_msgid='urban_label_procedureChoice',
             i18n_domain='urban',
         ),
-        schemata='urban_description',
+        schemata='urban_analysis',
         multiValued=1,
         vocabulary='listProcedureChoices',
     ),
@@ -443,6 +453,21 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_road',
+    ),
+    StringField(
+        name='composition',
+        widget=MasterSelectWidget(
+            slave_fields=slave_fields_composition,
+            label='Composition',
+            label_msgid='urban_label_composition',
+            i18n_domain='urban',
+        ),
+        schemata='urban_analysis',
+        vocabulary=DisplayList((
+            ('285', 'Art. 285 - complet avec architecte'),
+            ('288', 'Art. 288 - simplifié avec architecte'),
+            ('291', 'Art. 291 - simplifié sans architecte'),
+        )),
     ),
 ),
 )
@@ -628,6 +653,16 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
         else:
             return '30j'
 
+    def getCompositionMissingParts(self, composition):
+        """
+        """
+        urban_voc = self.schema['missingParts'].vocabulary
+        all_terms = urban_voc.listAllVocTerms(self)
+
+        display_values = [(term.Title().decode('utf-8'), term.id) for term in all_terms if str(composition) in term.getExtraValue()]
+
+        return DisplayList(display_values)
+
     def costCalculation(self, base_price=0, FD_price=0, inquiry_price=0, opinions_price=0):
         cost = base_price
         if ('opinions' in self.getProcedureChoice()):
@@ -656,18 +691,18 @@ def finalizeSchema(schema):
     schema.moveField('parcellings', after='isInSubdivision')
     schema.moveField('description', after='usage')
     schema.moveField('roadMiscDescription', after='roadEquipments')
-    schema.moveField('folderCategoryTownship', after='locationTechnicalConditions')
+    schema.moveField('locationTechnicalRemarks', after='locationTechnicalConditions')
     schema.moveField('areParcelsVerified', after='folderCategoryTownship')
     schema.moveField('requirementFromFD', after='locationDgrneUnderground')
     schema.moveField('townshipCouncilFolder', after='roadCoating')
-    schema.moveField('annoncedDelay', after='missingPartsDetails')
     schema.moveField('annoncedDelayDetails', after='annoncedDelay')
     schema.moveField('impactStudy', after='annoncedDelayDetails')
     schema.moveField('procedureChoice', before='description')
     schema.moveField('water', after='roadCoating')
     schema.moveField('electricity', before='water')
+    schema.moveField('composition', before='missingParts')
+    schema['missingParts'].widget.format = None
     return schema
 
 finalizeSchema(BuildLicence_schema)
 ##/code-section module-footer
-

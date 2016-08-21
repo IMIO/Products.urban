@@ -170,7 +170,10 @@ class LicenceView(BrowserView):
         context = aq_inner(self.context)
         macro_name = '{}_macro'.format(tab)
         macros_view = self.getMacroViewName()
-        macro = context.unrestrictedTraverse('{view}/{macro}'.format(view=macros_view, macro=macro_name))
+        try:
+            macro = context.unrestrictedTraverse('{view}/{macro}'.format(view=macros_view, macro=macro_name))
+        except:
+            import ipdb; ipdb.set_trace()
         return macro
 
     def getMacroViewName(self):
@@ -261,6 +264,8 @@ class LicenceView(BrowserView):
         def isDisplayable(field):
             if hasattr(field, 'optional') and field.optional and field.getName() not in displayed_fields:
                 return False
+            if hasattr(field, 'edit_only') and field.edit_only:
+                return False
             if field.getName() in exclude:
                 return False
             if not field.widget.visible:
@@ -279,14 +284,20 @@ class LicenceView(BrowserView):
     def getDescriptionFields(self, exclude=[]):
         return self.getSchemataFields('urban_description', exclude)
 
+    def getAnalysisFields(self, exclude=[]):
+        return self.getSchemataFields('urban_analysis', exclude)
+
     def getRoadFields(self, exclude=[]):
         return self.getSchemataFields('urban_road', exclude)
 
     def getLocationFields(self, exclude=[]):
         return self.getSchemataFields('urban_location', exclude)
 
+    def getAdviceFields(self, exclude=[]):
+        return self.getSchemataFields('urban_advices', exclude)
+
     def getInquiryFields(self, exclude=[]):
-        return self.getSchemataFields('urban_investigation_and_advices', exclude)
+        return self.getSchemataFields('urban_inquiry', exclude)
 
     def get_state(self):
         return api.content.get_state(self.context)

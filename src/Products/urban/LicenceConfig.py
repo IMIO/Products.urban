@@ -199,7 +199,8 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_description': '(recap)',
             'urban_location': '(urb) ',
             'urban_road': '(voi) ',
-            'urban_investigation_and_advices': '(enq) ',
+            'urban_inquiry': '(enq) ',
+            'urban_advices': '(avis) ',
             'urban_habitation': '(log) ',
             'urban_peb': '(peb) ',
         }
@@ -265,16 +266,18 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         """
         default_names = {
             'description': 'Récapitulatif',
+            'advices': 'Avis',
+            'inquiry': 'Enquêtes',
+            'analysis': 'Analyse Urbanisme',
+            'location': 'Aspects légaux',
             'road': 'Voirie',
-            'location': 'Urbanisme',
-            'investigation_and_advices': 'Enquêtes et avis',
             'habitation': 'Logement',
             'peb': 'PEB',
         }
         minimum_tabs_config = ['description', 'road', 'location']
-        inquiry_tabs_config = ['description', 'road', 'location', 'investigation_and_advices']
-        full_tabs_config = ['description', 'road', 'location', 'investigation_and_advices', 'peb']
-        buildlicence_tabs_config = ['description', 'road', 'location', 'investigation_and_advices', 'habitation', 'peb']
+        inquiry_tabs_config = ['description', 'road', 'location', 'advices', 'inquiry']
+        full_tabs_config = ['description', 'advices', 'inquiry', 'location', 'road', 'peb']
+        buildlicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation', 'peb']
 
         types = {
             'buildlicence': buildlicence_tabs_config,
@@ -331,4 +334,3 @@ registerType(LicenceConfig, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

@@ -77,7 +77,8 @@ def setSchemataForInquiry(schema):
     #do not take the 2 first fields into account, this is 'id' and 'title'
     inquiryFields = inquiryFields[2:]
     for inquiryField in inquiryFields:
-        schema[inquiryField.getName()].schemata = 'urban_investigation_and_advices'
+        if schema[inquiryField.getName()].schemata == 'default':
+            schema[inquiryField.getName()].schemata = 'urban_inquiry'
 
 
 #class and function to strip a text from all its HTML tags
@@ -114,6 +115,7 @@ def getLicenceFolder(licencetype):
     folder_id = getLicenceFolderId(licencetype)
     licence_folder = getattr(urban, folder_id)
     return licence_folder
+
 
 def removeItems(liste, items):
     [liste.remove(i) for i in items if liste.count(i)]

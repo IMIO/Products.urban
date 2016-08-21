@@ -118,7 +118,6 @@ class FolderManager(BaseContent, Contact, BrowserDefaultMixin):
         return URBAN_TYPES
 
 
-
 registerType(FolderManager, PROJECTNAME)
 # end of class FolderManager
 

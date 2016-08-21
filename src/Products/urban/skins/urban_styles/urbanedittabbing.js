@@ -28,7 +28,7 @@ var ploneFormTabbing = {
 
 ploneFormTabbing._buildTabs = function(container, legends) {
     var legends_length = legends.length;
-    var threshold = legends_length > 8;
+    var threshold = legends_length > 10;
     var panel_ids, tab_ids = [], tabs = '';
 
     for (i=0; i < legends_length; i+= 1) {

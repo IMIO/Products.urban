@@ -32,9 +32,15 @@
 <div metal:define-macro="description_macro" i18n:domain="urban">
     <div class="licence-column" style="max-width: 58%">
 
-        <metal:applicants define-slot="applicant_slot">
-            <metal:applicants_macro use-macro="here/@@licencemacros/urbanApplicantsMacro" />
-        </metal:applicants>
+        <fieldset metal:define-slot="worklocations"
+                  tal:define="workLocations context/getWorkLocations">
+            <legend i18n:translate="urban_label_workLocations">Work locations</legend>
+            <div tal:condition="workLocations">
+                <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" />
+            </div>
+            <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
+
+        </fieldset>
 
         <fieldset>
             <legend i18n:translate="legend_details">Details</legend>
@@ -111,15 +117,9 @@
             </table>
         </fieldset>
 
-        <fieldset metal:define-slot="worklocations"
-                  tal:define="workLocations context/getWorkLocations">
-            <legend i18n:translate="urban_label_workLocations">Work locations</legend>
-            <div tal:condition="workLocations">
-                <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" />
-            </div>
-            <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
-
-        </fieldset>
+        <metal:applicants define-slot="applicant_slot">
+            <metal:applicants_macro use-macro="here/@@licencemacros/urbanApplicantsMacro" />
+        </metal:applicants>
 
         <metal:representatives define-slot="representatives">
         </metal:representatives>
@@ -138,6 +138,22 @@
             </div>
         </fieldset>
     </div>
+</div>
+
+
+<div class="licence-column" metal:define-macro="analysis_macro" i18n:domain="urban">
+    <fieldset>
+        <legend i18n:translate="legend_details"></legend>
+        <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+               tal:define="default_custom python: [];
+                           custom custom | python: []; custom python: custom + default_custom">
+
+            <tal:loop repeat="field view/getAnalysisFields">
+                <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+            </tal:loop>
+
+        </table>
+    </fieldset>
 </div>
 
 
@@ -218,7 +234,88 @@
 </div>
 
 
-<div class="licence-column" metal:define-macro="investigation_and_advices_macro" i18n:domain="urban"
+<div class="licence-column" metal:define-macro="advices_macro" i18n:domain="urban"
+     tal:define="ctype python: context.portal_types.getTypeInfo('Inquiry');
+                 inquiries view/getInquiriesForDisplay;
+                 member context/@@plone_portal_state/member;">
+    <fieldset tal:repeat="inquiry inquiries">
+        <legend i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</legend>
+        <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+               tal:define="exclude python: ['solicitOpinionsTo']" >
+            <tr tal:repeat="field view/getAdviceFields">
+                <tal:vars define="fieldname field/getName">
+
+                <tal:normal_field condition="python: fieldname not in exclude">
+                    <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
+                    <td width="10px"></td>
+                    <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
+                        <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+                    </td>
+                </tal:normal_field>
+
+                <tal:opinions condition="python: fieldname == 'solicitOpinionsTo'">
+                    <td tal:define="opinionIds inquiry/getSolicitOpinionsTo" style="padding-top: 1em;" colspan="3">
+                        <table tal:condition="opinionIds" cellspacing="0" cellpadding="0" width="100%" class="listing">
+                            <thead>
+                                <tr>
+                                    <th i18n:translate="urban_label_requestedOrganisation">Organisation</th>
+                                    <th i18n:translate="urban_label_askingDate">Asking Date</th>
+                                    <th i18n:translate="urban_label_receiptDate">Receipt date</th>
+                                    <th i18n:translate="urban_label_externalDecision">Advice</th>
+                                </tr>
+                            </thead>
+                            <tbody tal:define="tool python: context.portal_urban">
+                                <tr tal:repeat="opinionId opinionIds">
+                                    <tal:block define="opinion python: inquiry.getLinkedUrbanEventOpinionRequest(opinionId)">
+                                        <tal:anEventIsLinked condition="python: opinion is not None">
+                                            <td>
+                                                <a href="#" tal:attributes="href opinion/absolute_url" tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">
+                                                    Opinion request
+                                                </a>
+                                            </td>
+                                            <td tal:define="eventDate opinion/getEventDate">
+                                                <span class="#"
+                                                      tal:attributes="class python: eventDate and 'plain' or 'discreet'"
+                                                      tal:content="python: eventDate and tool.formatDate(eventDate, translatemonth=False) or 'content_none'"
+                                                      i18n:translate="">None
+                                                </span>
+                                            </td>
+                                            <td tal:define="receiptDate opinion/getReceiptDate">
+                                                <span class="#"
+                                                      tal:attributes="class python: receiptDate and 'plain' or 'discreet'"
+                                                      tal:content="python: receiptDate and tool.formatDate(receiptDate, translatemonth=False) or 'content_none'"
+                                                      i18n:translate="">None
+                                                </span>
+                                            </td>
+                                            <td tal:define="advice python: here.getValueForTemplate('externalDecision', obj=opinion)">
+                                                <span class="#"
+                                                      tal:attributes="class python: advice and 'plain' or 'discreet'"
+                                                      tal:content="python: advice and advice or 'content_none'"
+                                                      i18n:translate="">None
+                                                </span>
+                                            </td>
+                                        </tal:anEventIsLinked>
+                                        <tal:noEventIsLinked condition="python: opinion is None">
+                                            <td tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">Opinion request</td>
+                                            <td><span class="discreet" i18n:translate="content_none">None</span></td>
+                                            <td><span class="discreet" i18n:translate="content_none">None</span></td>
+                                            <td><span class="discreet" i18n:translate="content_none">None</span></td>
+                                        </tal:noEventIsLinked>
+                                    </tal:block>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tal:opinions>
+                </tal:vars>
+            </tr>
+        </table>
+    </fieldset>
+    <br />
+</div>
+
+
+<div class="licence-column" metal:define-macro="inquiry_macro" i18n:domain="urban"
      tal:define="ctype python: context.portal_types.getTypeInfo('Inquiry');
                  inquiries view/getInquiriesForDisplay;
                  member context/@@plone_portal_state/member;">
@@ -259,8 +356,7 @@
             </div>
         </tal:actions>
         <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
-               tal:define="exclude python: ['solicitOpinionsTo']" >
-
+               tal:define="exclude python: []" >
             <tal:loop repeat="field view/getInquiryFields">
                 <tr tal:define="fieldname field/getName;
                                 nullvalue python: field.get(context) == ''">
@@ -272,72 +368,6 @@
                             <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
                         </td>
                     </tal:normal_field>
-
-                    <tal:opinions condition="python: fieldname == 'solicitOpinionsTo'">
-                        <td valign="top"><b><span i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</span>:</b></td>
-                        <td width="10px"></td>
-                        <td tal:define="opinionIds inquiry/getSolicitOpinionsTo" style="padding-top: 1em;">
-                            <table tal:condition="opinionIds" cellspacing="0" cellpadding="0" width="100%" class="listing">
-                                <thead>
-                                    <tr>
-                                        <th i18n:translate="urban_label_requestedOrganisation">Organisation</th>
-                                        <th i18n:translate="urban_label_eventDate">Date</th>
-                                        <th i18n:translate="urban_label_receiptDate">Receipt date</th>
-                                        <th i18n:translate="urban_label_adviceAgreementLevel">Advice agreement level</th>
-                                        <th i18n:translate="urban_label_externalDecision">Advice</th>
-                                    </tr>
-                                </thead>
-                                <tbody tal:define="tool python: context.portal_urban">
-                                    <tr tal:repeat="opinionId opinionIds">
-                                        <tal:block define="opinion python: inquiry.getLinkedUrbanEventOpinionRequest(opinionId)">
-                                            <tal:anEventIsLinked condition="python: opinion is not None">
-                                                <td>
-                                                    <a href="#" tal:attributes="href opinion/absolute_url" tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">
-                                                        Opinion request
-                                                    </a>
-                                                </td>
-                                                <td tal:define="eventDate opinion/getEventDate">
-                                                    <span class="#"
-                                                          tal:attributes="class python: eventDate and 'plain' or 'discreet'"
-                                                          tal:content="python: eventDate and tool.formatDate(eventDate, translatemonth=False) or 'content_none'"
-                                                          i18n:translate="">None
-                                                    </span>
-                                                </td>
-                                                <td tal:define="receiptDate opinion/getReceiptDate">
-                                                    <span class="#"
-                                                          tal:attributes="class python: receiptDate and 'plain' or 'discreet'"
-                                                          tal:content="python: receiptDate and tool.formatDate(receiptDate, translatemonth=False) or 'content_none'"
-                                                          i18n:translate="">None
-                                                    </span>
-                                                </td>
-                                                <td tal:define="adviceAgreementLevel opinion/getAdviceAgreementLevel">
-                                                    <span class="#"
-                                                          tal:attributes="class python: adviceAgreementLevel and 'plain' or 'discreet'"
-                                                          tal:content="python: adviceAgreementLevel and adviceAgreementLevel or 'content_none'"
-                                                          i18n:translate="">None
-                                                    </span>
-                                                </td>
-                                                <td tal:define="advice python: here.getValueForTemplate('externalDecision', obj=opinion)">
-                                                    <span class="#"
-                                                          tal:attributes="class python: advice and 'plain' or 'discreet'"
-                                                          tal:content="python: advice and advice or 'content_none'"
-                                                          i18n:translate="">None
-                                                    </span>
-                                                </td>
-                                            </tal:anEventIsLinked>
-                                            <tal:noEventIsLinked condition="python: opinion is None">
-                                                <td tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">Opinion request</td>
-                                                <td><span class="discreet" i18n:translate="content_none">None</span></td>
-                                                <td><span class="discreet" i18n:translate="content_none">None</span></td>
-                                                <td><span class="discreet" i18n:translate="content_none">None</span></td>
-                                                <td><span class="discreet" i18n:translate="content_none">None</span></td>
-                                            </tal:noEventIsLinked>
-                                        </tal:block>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tal:opinions>
                 </tr>
            </tal:loop>
            <tal:comment replace="nothing">Link to the UrbanEventInquiry if exists</tal:comment>
