@@ -320,7 +320,9 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_peb': '(peb) ',
             'urban_location': '(urb) ',
             'urban_road': '(voi) ',
-            'urban_investigation_and_advices': '(enq) ',
+            'urban_inquiry': '(enq) ',
+            'urban_advices': '(avis) ',
+            'urban_analysis': '(analyse) ',
             'urban_description': '',
         }
         available_fields = [field for field in licence_schema.fields() if field.getType() == 'Products.Archetypes.Field.TextField' and field.getName() != 'rights']
