@@ -465,6 +465,7 @@ schema = Schema((
         ),
         schemata='urban_analysis',
         vocabulary=DisplayList((
+            ('', 'Non déterminée'),
             ('285', 'Art. 285 - complet avec architecte'),
             ('288', 'Art. 288 - simplifié avec architecte'),
             ('291', 'Art. 291 - simplifié sans architecte'),
