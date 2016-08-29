@@ -39,7 +39,8 @@ optional_fields = [
     'pebTechnicalAdvice', 'locationDgrneUnderground', 'roadDgrneUnderground', 'workType',
     'townshipCouncilFolder', 'roadMiscDescription', 'procedureChoice', 'water', 'electricity',
     'shouldNumerotateBuildings', 'habitationsAfterLicence', 'habitationsBeforeLicence',
-    'additionalHabitationsAsked', 'additionalHabitationsGiven', 'mayNeedLocationLicence'
+    'additionalHabitationsAsked', 'additionalHabitationsGiven', 'mayNeedLocationLicence',
+    'impactStudy'
 ]
 
 slave_fields_habitation = (
