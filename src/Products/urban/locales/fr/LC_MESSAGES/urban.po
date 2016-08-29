@@ -2013,7 +2013,7 @@ msgstr "Calcul de la date limite"
 #. Default: "Demanddisplay"
 #: Inquiry.py
 msgid "urban_label_demandDisplay"
-msgstr "Date de boutique urbaine"
+msgstr "Date de séance explication enquête"
 
 #. Default: "Denomination"
 #: Corporation.py
