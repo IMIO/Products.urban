@@ -1899,7 +1899,7 @@ msgstr "Texte de la réclamation"
 #. Default: "Claimsdate"
 #: UrbanEvent.py
 msgid "urban_label_claimsDate"
-msgstr ""
+msgstr "Date de début de la séance de réclamations"
 
 #. Default: "Claimstext"
 #: UrbanEvent.py
@@ -2120,7 +2120,7 @@ msgstr "Date de fin de la séance d'explications"
 #. Default: "Explanationstartsdate"
 #: UrbanEventInquiry.py
 msgid "urban_label_explanationStartSDate"
-msgstr ""
+msgstr "Date de début de la séance d'explications"
 
 #. Default: "Explanationstartsdate"
 #: UrbanEventInquiry.py
