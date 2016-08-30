@@ -11,8 +11,22 @@
         permission="zope2.View"
         />
 
+     <browser:page
+         for="Products.urban.interfaces.IUrbanEvent"
+         class=".helper_view.UrbanDocGenerationHelperView"
+         permission="zope2.View"
+         name="document_generation_helper_view"
+      />
+
     <browser:page
-        for="Products.urban.interfaces.IUrbanEvent"
+        for="Products.ATContentTypes.interfaces.IATFolder"
+        name="document_generation_helper_view"
+        class=".helper_view.UrbanDocGenerationHelperView"
+        permission="zope2.View"
+        />
+
+    <browser:page
+        for="Products.urban.interfaces.IGenericLicence"
         name="document_generation_helper_view"
         class=".helper_view.UrbanDocGenerationHelperView"
         permission="zope2.View"
