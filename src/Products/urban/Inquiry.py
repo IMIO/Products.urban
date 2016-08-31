@@ -357,7 +357,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
            We may add another if another is defined on the licence and so on
         """
         #first of all, we can add an InquiryEvent if an inquiry is defined on the licence at least
-        inquiries = self.getInquiries()
+        inquiries = self.getAllInquiries()
         urbanEventInquiries = self.getUrbanEventInquiries()
         #if we have only the inquiry defined on the licence and no start date is defined
         #it means that no inquiryEvent can be added because no inquiry is defined...
