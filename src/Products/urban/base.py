@@ -518,6 +518,21 @@ class UrbanBase(object):
         #the first inquiry is the one defined on self itself
         #if a investigationStart is defined
         #and the others are extra Inquiry object added
+        all_inquiries = []
+        other_inquiries = self.objectValues('Inquiry')
+        if other_inquiries or ('investigationStart' in self.schema and self.getInvestigationStart()):
+            all_inquiries.append(self)
+        all_inquiries.extend(list(other_inquiries))
+        return all_inquiries
+
+    security.declarePublic('getAllInquiries')
+    def getAllInquiries(self):
+        """
+          Returns the existing inquiries
+        """
+        #the first inquiry is the one defined on self itself
+        #if a investigationStart is defined
+        #and the others are extra Inquiry object added
         all_inquiries = [self]
         other_inquiries = self.objectValues('Inquiry')
         all_inquiries.extend(list(other_inquiries))
