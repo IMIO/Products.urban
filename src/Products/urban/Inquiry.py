@@ -393,12 +393,12 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
             allOpinionsNoDup[actor] = opinion
         return allOpinionsNoDup.values()
 
-    def getAllInquiries(self):
+    def getAllInquiryEvents(self):
         return self._getAllEvents(interfaces.IInquiryEvent)
 
     def getAllClaimsTexts(self):
         claimsTexts = []
-        for inquiry in self.getAllInquiries():
+        for inquiry in self.getAllInquiryEvents():
             text = inquiry.getClaimsText()
             if text is not "":
                 claimsTexts.append(text)
