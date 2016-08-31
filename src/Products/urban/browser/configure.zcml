@@ -8,7 +8,6 @@
   <include package=".cron" />
   <include package=".licence" />
   <include package=".table" />
-  <include package=".viewlets" />
 
   <include file="portlets.zcml" />
 
@@ -39,14 +38,6 @@
       class=".views.ProxyController"
       attribute="getProxy"
       permission="zope2.View"
-      />
-
-  <browser:viewlet
-      name="urban.firefox"
-      manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
-      class=".viewlets.FirefoxViewlet"
-      permission="zope2.View"
-      template="firefox.pt"
       />
 
   <browser:page

@@ -27,4 +27,12 @@
       permission="zope2.View"
   />
 
+  <browser:viewlet
+      name="urban.firefox"
+      manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
+      class=".firefox.FirefoxViewlet"
+      permission="zope2.View"
+      template="templates/firefox.pt"
+      />
+
 </configure>
