@@ -1376,6 +1376,9 @@ msgstr "Recherche dynamique des documents liés à un événement"
 msgid "searchlots"
 msgstr "Les lots"
 
+msgid "sewers_folder_title"
+msgstr "Réseau d'égouttage"
+
 msgid "simple-map_title"
 msgstr "Carte simple"
 
@@ -1562,9 +1565,6 @@ msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
 
 msgid "urban_investigationStart"
 msgstr "Enquête publique n°${number} du"
-
-msgid "urban_label_askingDate"
-msgstr "Date de demande"
 
 #. Default: "Buildlicencenumerotation"
 #: UrbanTool.py
@@ -1781,6 +1781,9 @@ msgstr "Description des lieux et des abords du projet"
 #: Declaration.py
 msgid "urban_label_article"
 msgstr "Article"
+
+msgid "urban_label_askingDate"
+msgstr "Date de demande"
 
 #. Default: "Auditiondate"
 #: UrbanEvent.py
@@ -2983,6 +2986,11 @@ msgstr "Détails concernant le Règlement Général sur les Bâtisses en Site Ru
 msgid "urban_label_roadAdaptation"
 msgstr "Ouverture, modification, supression de la voirie"
 
+#. Default: "Roadanalysis"
+#: GenericLicence.py
+msgid "urban_label_roadAnalysis"
+msgstr "Analyse technique voirie"
+
 #. Default: "Roadcoating"
 #: GenericLicence.py
 msgid "urban_label_roadCoating"
@@ -3070,6 +3078,16 @@ msgstr ""
 #: GenericLicence.py
 msgid "urban_label_sevesoSite"
 msgstr "Sites Seveso"
+
+#. Default: "Sewers"
+#: GenericLicence.py
+msgid "urban_label_sewers"
+msgstr "Réseau d'égouttage"
+
+#. Default: "Sewers"
+#: GenericLicence.py
+msgid "urban_label_sewersDetails"
+msgstr "Détails concernant le réseau d'égouttage"
 
 msgid "urban_label_shouldNumerotateBuilding"
 msgstr "Immeuble à sous numéroter"

@@ -1375,6 +1375,9 @@ msgstr ""
 msgid "searchlots"
 msgstr ""
 
+msgid "sewers_folder_title"
+msgstr ""
+
 msgid "simple-map_title"
 msgstr ""
 
@@ -2968,6 +2971,11 @@ msgstr ""
 msgid "urban_label_roadAdaptation"
 msgstr ""
 
+#. Default: "Roadanalysis"
+#: GenericLicence.py
+msgid "urban_label_roadAnalysis"
+msgstr ""
+
 #. Default: "Roadcoating"
 #: GenericLicence.py
 msgid "urban_label_roadCoating"
@@ -3049,6 +3057,16 @@ msgstr ""
 #. Default: "Selectedfield"
 #: UrbanVocabularyTerm.py
 msgid "urban_label_selectedField"
+msgstr ""
+
+#. Default: "Sewers"
+#: GenericLicence.py
+msgid "urban_label_sewers"
+msgstr ""
+
+#. Default: "Sewers"
+#: GenericLicence.py
+msgid "urban_label_sewersDetails"
 msgstr ""
 
 msgid "urban_label_shouldNumerotateBuilding"
