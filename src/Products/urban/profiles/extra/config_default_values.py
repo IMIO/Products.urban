@@ -841,6 +841,16 @@ default_values = {
             {'id': "334-2", 'title': u"334 2° - « Dès le lendemain du jour où il est en possession de l'accusé de réception et jusqu'au jour de la clôture de l'enquête publique [...]»", 'description': "<p>« Dès le lendemain du jour où il est en possession de l'accusé de réception et jusqu'au jour de la clôture de l'enquête publique, le demandeur est tenu d'afficher sur le terrain faisant l'objet de la demande : 2° dans les cas visés à l'article 330, 1° à 5°, et 12°, ou lorsque la dérogation porte sur le gabarit d'un bâtiment, une vue axonométrique du projet et des bâtiments contigus »</p>", 'extraValue': "334 2°"},
         ],
 
+        'roadanalysis': [
+            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'ParcelOutLicence', 'UrbanCertificateTwo'],
+            {'id': "deficient-equipment", 'title': u"Voire insuffisamment équipée"},
+            {'id': "transformation", 'title': u"Transformation sans nouveau raccordement à l'égout"},
+            {'id': "extension", 'title': u"Extension de réseau"},
+            {'id': "fallback-zone", 'title': u"Zone de recul supérieure à 5 m"},
+            {'id': "built-surface", 'title': u"Surface bâtie supérieure au 1/4 de la parcelle"},
+            {'id': "aide-opinion", 'title': u"Avis AIDE sollicité"},
+        ],
+
         'folderdelays': [
             'UrbanDelay', ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo'],
             {'id': "30j", 'title': u"30 jours", 'deadLineDelay': 30, 'alertDelay': 20},
@@ -985,6 +995,13 @@ default_values = {
             {'id': "zone-epuration-collective", 'title': u"Zone d'assainissement collectif"},
             {'id': "zone-transitoire", 'title': u"Zone d'assainissement transitoire"},
             {'id': "zone-epuration-individuelle", 'title': u"Zone d'assainissement individuel"},
+        ],
+
+        'sewers': [
+            'UrbanVocabularyTerm',
+            {'id': "unitaire", 'title': u"Unitaire"},
+            {'id': "separatoire", 'title': u"Séparatoire"},
+            {'id': "inexistant", 'title': u"Inexistant"},
         ],
 
         'folderroadtypes': [

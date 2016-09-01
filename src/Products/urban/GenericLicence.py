@@ -92,7 +92,8 @@ optional_fields = [
     'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails',
     'PRevU', 'prevuDetails', 'PRenU', 'prenuDetails', 'airportNoiseZone', 'airportNoiseZoneDetails',
     'description', 'rgbsr', 'rgbsrDetails', 'karstConstraints', 'karstConstraintsDetails',
-    'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', 'sevesoSite', 'natura_2000'
+    'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', 'sevesoSite', 'natura_2000', 'sewers',
+    'sewersDetails', 'roadAnalysis'
 ]
 ##/code-section module-header
 
@@ -270,6 +271,44 @@ schema = Schema((
         ),
         allow_oddeven=True,
         columns=("road_equipment", "road_equipment_details"),
+    ),
+    StringField(
+        name='sewers',
+        widget=SelectionWidget(
+            format='select',
+            label='Sewers',
+            label_msgid='urban_label_sewers',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        vocabulary=UrbanVocabulary('sewers', inUrbanConfig=False, with_empty_value=True),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='sewersDetails',
+        widget=RichWidget(
+            label='Sewersdetails',
+            label_msgid='urban_label_sewersDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_road',
+        default_method='getDefaultText',
+        default_output_type='text/html',
+    ),
+    LinesField(
+        name='roadAnalysis',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Roadanalysis',
+            label_msgid='urban_label_roadAnalysis',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('roadanalysis'),
+        default_method='getDefaultValue',
     ),
     LinesField(
         name='pash',
