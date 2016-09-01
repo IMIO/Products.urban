@@ -6,6 +6,9 @@ Changes
 
 1.11.1 (unreleased)
 -------------------
+- add get_work_location method to view
+  [fngaha]
+
 - add gsm field in contact
   [fngaha]
 

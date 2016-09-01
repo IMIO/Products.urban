@@ -4,6 +4,7 @@ from collective.documentgenerator.helper.archetypes import ATDocumentGenerationH
 from datetime import date as _date
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from zope.i18n import translate
+from plone import api
 
 
 class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
@@ -17,6 +18,31 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         raw_div = parcel_view.context.division
         division = raw_div and raw_div[raw_div.find('(') + 1:-1] or 'DIVISION INCONNUE'
         return division
+
+    def get_work_location(self, index):
+        """
+        return a dictionary containing all work locations informations
+        """
+        work_location = {
+                'bestAddressKey': '',
+                'streetCode': '',
+                'streetName': '',
+                'startDate': '',
+                'endDate': '',
+                'regionalRoad': '',
+                'number': '',
+        }
+        workLocation = self.context.getWorkLocations()[index]
+        catalog = api.portal.get_tool("uid_catalog")
+        street = catalog(UID=workLocation['street'])[0].getObject()
+        work_location['bestAddressKey'] = street.getBestAddressKey()
+        work_location['streetCode'] = street.getStreetCode()
+        work_location['streetName'] = street.getStreetName()
+        work_location['startDate'] = street.getStartDate()
+        work_location['endDate'] = street.getEndDate()
+        work_location['regionalRoad'] = street.getRegionalRoad()
+        work_location['number'] =  workLocation['number']
+        return work_location
 
     def formatDate(self, date=_date.today(), translatemonth=True, long_format=False):
         """
