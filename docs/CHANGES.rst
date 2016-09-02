@@ -6,6 +6,9 @@ Changes
 
 1.11.1 (unreleased)
 -------------------
+- add query_parcels_in_radius method to view
+  [fngaha]
+
 - add get_work_location method to view
   [fngaha]
 
