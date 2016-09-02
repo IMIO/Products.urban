@@ -2225,6 +2225,11 @@ msgstr "Instances sollicitées par le FT"
 msgid "urban_label_function_department"
 msgstr "Fonction, Département"
 
+#. Default: "Roadcoating"
+#: GenericLicence.py
+msgid "urban_label_futureRoadCoating"
+msgstr "Revêtement futur"
+
 #. Default: "Gender"
 #: PersonTitleTerm.py
 msgid "urban_label_gender"

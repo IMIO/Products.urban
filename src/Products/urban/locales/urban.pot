@@ -2215,6 +2215,11 @@ msgstr ""
 msgid "urban_label_function_department"
 msgstr ""
 
+#. Default: "Roadcoating"
+#: GenericLicence.py
+msgid "urban_label_futureRoadCoating"
+msgstr ""
+
 #. Default: "Gender"
 #: PersonTitleTerm.py
 msgid "urban_label_gender"
