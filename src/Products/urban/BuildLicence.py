@@ -696,11 +696,11 @@ def finalizeSchema(schema):
     schema.moveField('locationTechnicalRemarks', after='locationTechnicalConditions')
     schema.moveField('areParcelsVerified', after='folderCategoryTownship')
     schema.moveField('requirementFromFD', after='locationDgrneUnderground')
-    schema.moveField('townshipCouncilFolder', after='roadCoating')
+    schema.moveField('townshipCouncilFolder', after='futureRoadCoating')
     schema.moveField('annoncedDelayDetails', after='annoncedDelay')
     schema.moveField('impactStudy', after='annoncedDelayDetails')
     schema.moveField('procedureChoice', before='description')
-    schema.moveField('water', after='roadCoating')
+    schema.moveField('water', after='futureRoadCoating')
     schema.moveField('electricity', before='water')
     schema.moveField('composition', before='missingParts')
     schema['missingParts'].widget.format = None

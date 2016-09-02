@@ -93,7 +93,7 @@ optional_fields = [
     'PRevU', 'prevuDetails', 'PRenU', 'prenuDetails', 'airportNoiseZone', 'airportNoiseZoneDetails',
     'description', 'rgbsr', 'rgbsrDetails', 'karstConstraints', 'karstConstraintsDetails',
     'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', 'sevesoSite', 'natura_2000', 'sewers',
-    'sewersDetails', 'roadAnalysis'
+    'sewersDetails', 'roadAnalysis', 'futureRoadCoating'
 ]
 ##/code-section module-header
 
@@ -248,12 +248,37 @@ schema = Schema((
         vocabulary=UrbanVocabulary('folderroadtypes', inUrbanConfig=False, with_empty_value=False),
         default_method='getDefaultValue',
     ),
+    LinesField(
+        name='roadAnalysis',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Roadanalysis',
+            label_msgid='urban_label_roadAnalysis',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('roadanalysis'),
+        default_method='getDefaultValue',
+    ),
     StringField(
         name='roadCoating',
         widget=SelectionWidget(
             format='select',
             label='Roadcoating',
             label_msgid='urban_label_roadCoating',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        vocabulary=UrbanVocabulary('folderroadcoatings', inUrbanConfig=False, with_empty_value=True),
+        default_method='getDefaultValue',
+    ),
+    StringField(
+        name='futureRoadCoating',
+        widget=SelectionWidget(
+            format='select',
+            label='Futureroadcoating',
+            label_msgid='urban_label_futureRoadCoating',
             i18n_domain='urban',
         ),
         schemata='urban_road',
@@ -296,19 +321,6 @@ schema = Schema((
         schemata='urban_road',
         default_method='getDefaultText',
         default_output_type='text/html',
-    ),
-    LinesField(
-        name='roadAnalysis',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label='Roadanalysis',
-            label_msgid='urban_label_roadAnalysis',
-            i18n_domain='urban',
-        ),
-        schemata='urban_road',
-        multiValued=1,
-        vocabulary=UrbanVocabulary('roadanalysis'),
-        default_method='getDefaultValue',
     ),
     LinesField(
         name='pash',
