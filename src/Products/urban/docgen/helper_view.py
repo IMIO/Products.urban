@@ -5,6 +5,7 @@ from datetime import date as _date
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from zope.i18n import translate
 from plone import api
+from Products.urban.services import cadastre
 
 
 class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
@@ -84,3 +85,10 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             else:
                 return "%s %s %s" % (translatedDay, translatedMonth, year)
         return ''
+
+    def query_parcels_in_radius(self, radius='50'):
+        """
+        """
+        parcels = self.context.getOfficialParcels()
+        session = cadastre.new_session()
+        return session.query_parcels_in_radius(parcels, radius)
