@@ -40,7 +40,7 @@ optional_fields = [
     'townshipCouncilFolder', 'roadMiscDescription', 'procedureChoice', 'water', 'electricity',
     'shouldNumerotateBuildings', 'habitationsAfterLicence', 'habitationsBeforeLicence',
     'additionalHabitationsAsked', 'additionalHabitationsGiven', 'mayNeedLocationLicence',
-    'impactStudy'
+    'impactStudy', 'showExemptFDArticle'
 ]
 
 slave_fields_habitation = (
@@ -87,6 +87,12 @@ slave_fields_procedurechoice = (
         'name': 'annoncedDelay',
         'action': 'value',
         'vocab_method': 'getProcedureDelays',
+        'control_param': 'values',
+    },
+    {
+        'name': 'exemptFDArticle',
+        'action': 'show',
+        'toggle_method': 'showExemptFDArticle',
         'control_param': 'values',
     },
 )
@@ -433,7 +439,20 @@ schema = Schema((
         ),
         schemata='urban_analysis',
         multiValued=1,
+        default=('ukn',),
         vocabulary='listProcedureChoices',
+    ),
+    StringField(
+        name='exemptFDArticle',
+        widget=SelectionWidget(
+            format='select',
+            label='Exemptfdarticle',
+            label_msgid='urban_label_exemptFDArticle',
+            i18n_domain='urban',
+        ),
+        schemata='urban_analysis',
+        vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=True),
+        default_method='getDefaultValue',
     ),
     BooleanField(
         name='water',
@@ -630,7 +649,8 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
 
     def listProcedureChoices(self):
         vocab = (
-            ('opinions', 'Avis de service'),
+            ('ukn', 'Non determiné'),
+            ('opinions', 'Avis de service interne ou externe'),
             ('inquiry', 'Enquête publique'),
             ('FD', 'Avis du fonctionnaire délégué'),
         )
@@ -638,11 +658,14 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
 
     def getProcedureDelays(self, *values):
         selection = [v['val'] for v in values if v['selected']]
+        unknown = 'ukn' in selection
         opinions = 'opinions' in selection
         inquiry = 'inquiry' in selection
         FD = 'FD' in selection
 
-        if (opinions or inquiry) and FD:
+        if unknown:
+            return ''
+        elif (opinions or inquiry) and FD:
             return '115j'
         elif opinions and inquiry and not FD:
             return '70j'
@@ -654,6 +677,11 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
             return '75j'
         else:
             return '30j'
+
+    def showExemptFDArticle(self, *values):
+        selection = [v['val'] for v in values if v['selected']]
+        show = 'FD' not in selection and 'ukn' not in selection
+        return show
 
     def getCompositionMissingParts(self, composition):
         """
@@ -700,6 +728,7 @@ def finalizeSchema(schema):
     schema.moveField('annoncedDelayDetails', after='annoncedDelay')
     schema.moveField('impactStudy', after='annoncedDelayDetails')
     schema.moveField('procedureChoice', before='description')
+    schema.moveField('exemptFDArticle', after='procedureChoice')
     schema.moveField('water', after='futureRoadCoating')
     schema.moveField('electricity', before='water')
     schema.moveField('composition', before='missingParts')

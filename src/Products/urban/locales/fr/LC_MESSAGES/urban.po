@@ -693,6 +693,9 @@ msgstr "Pièces jointes de l'événement"
 msgid "event_linked_documents"
 msgstr "Documents liés à cet événement"
 
+msgid "exemptfdarticle_folder_title"
+msgstr "Article 107"
+
 msgid "exploitationconditions_folder_title"
 msgstr "Conditions d'exploitation"
 
@@ -1339,6 +1342,9 @@ msgstr "Modification"
 
 msgid "road_adaptation_supress"
 msgstr "Supression"
+
+msgid "roadanalysis_folder_title"
+msgstr "Analyse technique voirie"
 
 msgid "roadmissingparts_folder_title"
 msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes (Fiche Voirie)"
@@ -2114,6 +2120,9 @@ msgstr "Destinataire du document"
 #: UrbanEventType.py
 msgid "urban_label_eventTypeType"
 msgstr "Catégorie du type d'événement"
+
+msgid "urban_label_exemptFDArticle"
+msgstr "Article 107"
 
 #. Default: "Explanationendsdate"
 #: UrbanEventInquiry.py
