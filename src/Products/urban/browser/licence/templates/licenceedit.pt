@@ -23,9 +23,9 @@
        tal:define="putils context/plone_utils;
                    tabs_config view/getTabs">
 
-    <tal:fieldsets repeat="tab_config tabs_config">
-        <tal:tab define="fieldset python: 'urban_%s' % tab_config['value'];
-                         display_name python: tab_config['display_name']">
+    <tal:fieldsets repeat="tab tabs_config">
+        <tal:tab define="fieldset python: tab['id'];
+                         display_name python: tab['display_name']">
             <fieldset class="urbanEditWithTabbing"
                       tal:define="fieldsetid python:putils.normalizeString(fieldset)"
                       tal:attributes="id string:fieldset-${fieldsetid}">
