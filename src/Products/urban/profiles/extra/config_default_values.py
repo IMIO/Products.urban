@@ -29,7 +29,7 @@ default_values = {
             {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
             {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
             {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
-            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable inc'id'ences environnement (annexe 1C) en 2 exemplaires"},
+            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement (annexe 1C) en 2 exemplaires"},
             {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
             {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
             {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
@@ -67,6 +67,12 @@ default_values = {
             {'id': "complete_process", 'title': 'peb_complete_process'},
             {'id': "form1_process", 'title': 'peb_form1_process'},
             {'id': "form2_process", 'title': 'peb_form2_process'},
+        ],
+
+        'exemptfdarticle': [
+            'UrbanVocabularyTerm',
+            {'id': "145", 'title': 'alinéa 145'},
+            {'id': "232", 'title': 'alinéa 232'},
         ],
     },
     'Article127': {

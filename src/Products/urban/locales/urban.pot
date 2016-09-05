@@ -689,6 +689,9 @@ msgstr ""
 msgid "event_linked_documents"
 msgstr ""
 
+msgid "exemptfdarticle_folder_title"
+msgstr ""
+
 msgid "exploitationconditions_folder_title"
 msgstr ""
 
@@ -1337,6 +1340,9 @@ msgid "road_adaptation_modify"
 msgstr ""
 
 msgid "road_adaptation_supress"
+msgstr ""
+
+msgid "roadanalysis_folder_title"
 msgstr ""
 
 msgid "roadmissingparts_folder_title"
@@ -2103,6 +2109,9 @@ msgstr ""
 #. Default: "Eventtypetype"
 #: UrbanEventType.py
 msgid "urban_label_eventTypeType"
+msgstr ""
+
+msgid "urban_label_exemptFDArticle"
 msgstr ""
 
 #. Default: "Explanationendsdate"
