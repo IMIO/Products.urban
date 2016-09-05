@@ -19,7 +19,17 @@ class LicenceEditView(BrowserView):
         return context.getLicenceConfig()
 
     def getTabs(self):
-        return self.getLicenceConfig().getActiveTabs()
+        cfg = self.getLicenceConfig()
+        available_tabs = self.context.schema.getSchemataNames()
+        tabs = []
+        for active_tab in cfg.getActiveTabs():
+            tab = {
+                'id': 'urban_{}'.format(active_tab['value']),
+                'display_name': active_tab['display_name']
+            }
+            if tab['id'] in available_tabs:
+                tabs.append(tab)
+        return tabs
 
     def getEditFieldsMacro(self):
         macro_name = 'editLicenceFieldsMacro'
