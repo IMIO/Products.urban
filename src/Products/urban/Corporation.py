@@ -22,8 +22,6 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 
-import cgi
-
 ##code-section module-header #fill in your manual code here
 ##/code-section module-header
 
@@ -121,6 +119,20 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
         else:
             return nameSignaletic
 
+    def isMasculineSingular(self):
+        """
+        """
+        return True
+
+    def isFeminineSingular(self):
+        """
+        """
+        return False
+
+    def isFemininePlural(self):
+        """
+        """
+        return False
 
 
 registerType(Corporation, PROJECTNAME)
