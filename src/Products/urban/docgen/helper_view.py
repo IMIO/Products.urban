@@ -92,3 +92,13 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         parcels = self.context.getOfficialParcels()
         session = cadastre.new_session()
         return session.query_parcels_in_radius(parcels, radius)
+
+    def query_parcels_locations_in_radius(self, radius='50'):
+        """
+        """
+        parcels = self.context.getOfficialParcels()
+        session = cadastre.new_session()
+        parcels = session.query_parcels_in_radius(parcels, radius)
+        locations = [parcel.location for parcel in parcels]
+        locations.sort()
+        return locations
