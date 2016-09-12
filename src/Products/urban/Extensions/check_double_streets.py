@@ -30,7 +30,6 @@ def count():
     print "found {} streets with doubles for a total of {} streets referenced by {} licences".format(
         streets_with_doubles, total_of_double_streets, total_of_referenced_licences
     )
-    import ipdb; ipdb.set_trace()
 
 
 def str_cpm(string_1, string_2):
