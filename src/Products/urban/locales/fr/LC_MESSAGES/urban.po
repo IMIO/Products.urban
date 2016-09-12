@@ -669,6 +669,9 @@ msgstr "La référence existe déjà sur un autre permis"
 msgid "error_section"
 msgstr "La section doit être une seule lettre majuscule (ex: C)"
 
+msgid "error_signatureNumber"
+msgstr "Nombre de signature obligatoire"
+
 msgid "error_streetname"
 msgstr "Nom de rue invalide"
 
@@ -2285,6 +2288,11 @@ msgstr "Des conditions complémentaires sont requises"
 msgid "urban_label_hasEnvironmentImpactStudy"
 msgstr "Étude d'incidences sur l'environnement"
 
+#. Default: "HasPetition"
+#: Claimant.py
+msgid "urban_label_hasPetition"
+msgstr "Pétition"
+
 #. Default: "Impactstudy"
 #: GenericLicence.py
 msgid "urban_label_impactStudy"
@@ -3120,6 +3128,11 @@ msgstr "Immeuble à sous numéroter"
 #: UrbanEventType.py
 msgid "urban_label_showTitle"
 msgstr "Edition du titre"
+
+#. Default: "SignatureNumber"
+#: Claimant.py
+msgid "urban_label_signatureNumber"
+msgstr "Nombre de signature"
 
 msgid "urban_label_situation"
 msgstr "Situation"

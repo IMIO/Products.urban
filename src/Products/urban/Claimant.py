@@ -22,9 +22,22 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
+from zope.i18n import translate
+from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 ##/code-section module-header
+
+
+slave_fields_signature_number = (
+    # if petition ok : display signatures textfield
+    {
+        'name': 'signatureNumber',
+        'action': 'show',
+        'hide_values': (True, ),
+    },
+)
 
 schema = Schema((
 
@@ -67,6 +80,24 @@ schema = Schema((
         vocabulary='listClaimTypeChoices',
 
     ),
+    BooleanField(
+        name='hasPetition',
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_signature_number,
+            label='HasPetition',
+            label_msgid='urban_label_hasPetition',
+            i18n_domain='urban',
+        ),
+    ),
+    IntegerField(
+        name='signatureNumber',
+        widget=IntegerWidget(
+            label='signatureNumber',
+            label_msgid='urban_label_signatureNumber',
+            i18n_domain='urban',
+        ),
+        validators=('isInt', ),
+    ),
 
 ),
 )
@@ -96,6 +127,10 @@ class Claimant(BaseContent, Contact, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
+
+    def validate_signatureNumber(self, value):
+        if self['hasPetition'] and not value:
+            return translate(_('error_signatureNumber', default=u"Nombre de signature obligatoire"))
 
     def listClaimTypeChoices(self):
         vocab = (

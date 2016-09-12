@@ -665,6 +665,9 @@ msgstr ""
 msgid "error_section"
 msgstr ""
 
+msgid "error_signatureNumber"
+msgstr ""
+
 msgid "error_streetname"
 msgstr ""
 
@@ -1902,6 +1905,16 @@ msgstr ""
 #. Default: "ClaimType"
 #: Claimant.py
 msgid "urban_label_claimType"
+msgstr ""
+
+#. Default: "HasPetition"
+#: Claimant.py
+msgid "urban_label_hasPetition"
+msgstr ""
+
+#. Default: "SignatureNumber"
+#: Claimant.py
+msgid "urban_label_signatureNumber"
 msgstr ""
 
 #. Default: "Claimendsdate"
