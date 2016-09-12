@@ -1899,6 +1899,11 @@ msgstr ""
 msgid "urban_label_outOfTime"
 msgstr ""
 
+#. Default: "ClaimType"
+#: Claimant.py
+msgid "urban_label_claimType"
+msgstr ""
+
 #. Default: "Claimendsdate"
 #: UrbanEventInquiry.py
 msgid "urban_label_claimEndSDate"

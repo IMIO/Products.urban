@@ -21,6 +21,7 @@ from Products.urban.Contact import Contact
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 ##code-section module-header #fill in your manual code here
 ##/code-section module-header
@@ -55,6 +56,17 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    StringField(
+        name='claimType',
+        widget=SelectionWidget(
+            format='select',
+            label='ClaimType',
+            label_msgid='urban_label_claimType',
+            i18n_domain='urban',
+        ),
+        vocabulary='listClaimTypeChoices',
+
+    ),
 
 ),
 )
@@ -85,6 +97,12 @@ class Claimant(BaseContent, Contact, BrowserDefaultMixin):
 
     # Methods
 
+    def listClaimTypeChoices(self):
+        vocab = (
+            ('writedClaim', 'Ecrite'),
+            ('oralClaim', 'Orale'),
+        )
+        return DisplayList(vocab)
 
 registerType(Claimant, PROJECTNAME)
 # end of class Claimant
