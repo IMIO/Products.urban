@@ -47,6 +47,14 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    BooleanField(
+        name='outOfTime',
+        widget=BooleanWidget(
+            label='OutOfTime',
+            label_msgid='urban_label_outOfTime',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )
