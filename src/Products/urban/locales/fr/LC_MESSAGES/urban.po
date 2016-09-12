@@ -2709,6 +2709,11 @@ msgstr "Avis à demander en cas de travaux"
 msgid "urban_label_organization"
 msgstr "Organisation"
 
+#. Default: "OutOfTime"
+#: Claimant.py
+msgid "urban_label_outOfTime"
+msgstr "Hors délai"
+
 #. Default: "Outdated"
 #: PortionOut.py
 msgid "urban_label_outdated"
