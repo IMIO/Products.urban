@@ -64,6 +64,24 @@ class isNotDuplicatedReferenceValidator:
                             default=u"This reference has already been encoded"))
 
 
+class procedureChoiceValidator:
+    """
+    """
+    implements(IValidator)
+
+    def __init__(self, name):
+        self.name = name
+
+    def __call__(self, value, *args, **kwargs):
+        licence = kwargs['instance']
+        if 'ukn' in value and len(value) > 2:
+            return translate(
+                _('error_procedure_choice',
+                default=u"Cannot select 'unknown' with another value")
+            )
+        return True
+
+
 """
 Validators for parcel reference values, used in the case where the parcel is addded manually
 """
