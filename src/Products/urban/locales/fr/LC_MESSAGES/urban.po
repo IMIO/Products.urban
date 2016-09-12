@@ -1900,6 +1900,11 @@ msgstr "Date de réception"
 msgid "urban_label_claimEndSDate"
 msgstr "Date de fin de la séance de réclamations"
 
+#. Default: "ClaimType"
+#: Claimant.py
+msgid "urban_label_claimType"
+msgstr "Type de réclamation"
+
 #. Default: "Claimingtext"
 #: Contact.py
 msgid "urban_label_claimingText"
