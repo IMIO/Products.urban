@@ -1322,6 +1322,9 @@ msgstr "Destinataires"
 msgid "recoursedecisions_folder_title"
 msgstr "Décisions d'un recours"
 
+msgid "reparcelling_folder_title"
+msgstr "Périmètre de Remembrement"
+
 msgid "request_submitted_by_applicant"
 msgstr "Dossier introduit par ${applicant}"
 
@@ -2977,6 +2980,16 @@ msgstr "Numéro de matricule"
 #: SpecificFeatureTerm.py
 msgid "urban_label_relatedFields"
 msgstr "Champs liés"
+
+#. Default: "Reparcelling"
+#: GenericLicence.py
+msgid "urban_label_reparcelling"
+msgstr "Périmètre de Remembrement"
+
+#. Default: "Reparcellingdetails"
+#: GenericLicence.py
+msgid "urban_label_reparcellingDetails"
+msgstr "Détails concernant le Périmètre de Remembrement"
 
 #. Default: "Representedby"
 #: Contact.py
