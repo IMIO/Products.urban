@@ -430,6 +430,7 @@ schema = Schema((
     ),
     LinesField(
         name='procedureChoice',
+        default='ukn',
         widget=MasterMultiSelectWidget(
             format='checkbox',
             slave_fields=slave_fields_procedurechoice,
@@ -438,8 +439,8 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_analysis',
+        validators=('isValidProcedureChoice',),
         multiValued=1,
-        default=('ukn',),
         vocabulary='listProcedureChoices',
     ),
     StringField(
@@ -650,9 +651,9 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
     def listProcedureChoices(self):
         vocab = (
             ('ukn', 'Non determiné'),
-            ('opinions', 'Avis de service interne ou externe'),
-            ('inquiry', 'Enquête publique'),
-            ('FD', 'Avis du fonctionnaire délégué'),
+            ('opinions', 'Sollicitation d\'avis (instance ou service interne/externe)'),
+            ('inquiry', 'Instruction d\'une enquête publique'),
+            ('FD', 'Sollicitation du fonctionnaire délégué'),
         )
         return DisplayList(vocab)
 
