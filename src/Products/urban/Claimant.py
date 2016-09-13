@@ -41,26 +41,6 @@ slave_fields_signature_number = (
 
 schema = Schema((
 
-    TextField(
-        name='claimingText',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label='Claimingtext',
-            label_msgid='urban_label_claimingText',
-            i18n_domain='urban',
-        ),
-        default_output_type='text/html',
-    ),
-    DateTimeField(
-        name='claimDate',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            label='Claimdate',
-            label_msgid='urban_label_claimDate',
-            i18n_domain='urban',
-        ),
-    ),
     BooleanField(
         name='outOfTime',
         widget=BooleanWidget(
@@ -98,7 +78,26 @@ schema = Schema((
         ),
         validators=('isInt', ),
     ),
-
+    DateTimeField(
+        name='claimDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            format="%d/%m/%Y",
+            label='Claimdate',
+            label_msgid='urban_label_claimDate',
+            i18n_domain='urban',
+        ),
+    ),
+    TextField(
+        name='claimingText',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Claimingtext',
+            label_msgid='urban_label_claimingText',
+            i18n_domain='urban',
+        ),
+        default_output_type='text/html',
+    ),
 ),
 )
 
