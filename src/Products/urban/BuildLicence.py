@@ -95,6 +95,13 @@ slave_fields_procedurechoice = (
         'toggle_method': 'showExemptFDArticle',
         'control_param': 'values',
     },
+    {
+        'name': 'requirementFromFD',
+        'action': 'show',
+        'toggle_method': 'showRequirementFromFD',
+        'control_param': 'values',
+    },
+
 )
 
 slave_fields_composition = (
@@ -369,18 +376,6 @@ schema = Schema((
         schemata='urban_analysis',
         default_output_type='text/html',
     ),
-    LinesField(
-        name='requirementFromFD',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label='Requirementfromfd',
-            label_msgid='urban_label_requirementFromFD',
-            i18n_domain='urban',
-        ),
-        schemata='urban_location',
-        multiValued=1,
-        vocabulary='listRequirementsFromFD',
-    ),
     TextField(
         name='locationTechnicalConditions',
         allowable_content_types=('text/html',),
@@ -442,6 +437,18 @@ schema = Schema((
         validators=('isValidProcedureChoice',),
         multiValued=1,
         vocabulary='listProcedureChoices',
+    ),
+    LinesField(
+        name='requirementFromFD',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Requirementfromfd',
+            label_msgid='urban_label_requirementFromFD',
+            i18n_domain='urban',
+        ),
+        schemata='urban_analysis',
+        multiValued=1,
+        vocabulary='listRequirementsFromFD',
     ),
     StringField(
         name='exemptFDArticle',
@@ -684,6 +691,11 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
         show = 'FD' not in selection and 'ukn' not in selection
         return show
 
+    def showRequirementFromFD(self, *values):
+        selection = [v['val'] for v in values if v['selected']]
+        show = 'FD' in selection and 'ukn' not in selection
+        return show
+
     def getCompositionMissingParts(self, composition):
         """
         """
@@ -724,7 +736,7 @@ def finalizeSchema(schema):
     schema.moveField('roadMiscDescription', after='roadEquipments')
     schema.moveField('locationTechnicalRemarks', after='locationTechnicalConditions')
     schema.moveField('areParcelsVerified', after='folderCategoryTownship')
-    schema.moveField('requirementFromFD', after='locationDgrneUnderground')
+    schema.moveField('requirementFromFD', before='annoncedDelay')
     schema.moveField('townshipCouncilFolder', after='futureRoadCoating')
     schema.moveField('annoncedDelayDetails', after='annoncedDelay')
     schema.moveField('impactStudy', after='annoncedDelayDetails')
