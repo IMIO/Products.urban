@@ -65,6 +65,8 @@ from validators.validator import isTextFieldConfiguredValidator
 validation.register(isTextFieldConfiguredValidator('isTextFieldConfigured'))
 from validators.validator import isValidStreetNameValidator
 validation.register(isValidStreetNameValidator('isValidStreetName'))
+from validators.validator import procedureChoiceValidator
+validation.register(procedureChoiceValidator('isValidProcedureChoice'))
 from validators.validator import isValidSectionValidator
 validation.register(isValidSectionValidator('isValidSection'))
 from validators.validator import isValidRadicalValidator
