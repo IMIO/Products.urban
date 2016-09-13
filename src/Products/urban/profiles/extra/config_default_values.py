@@ -1112,6 +1112,13 @@ default_values = {
             {'id': "zzz", 'title': u"Rénovation urbaine de ZZZ"},
         ],
 
+        'reparcelling': [
+            'UrbanVocabularyTerm',
+            {'id': "xxx", 'title': u"Remembrement XXX"},
+            {'id': "yyy", 'title': u"Remembrement YYY"},
+            {'id': "zzz", 'title': u"Remembrement ZZZ"},
+        ],
+
         'rgbsr': [
             'UrbanVocabularyTerm',
             {'id': "limoneux-brabancon", 'title': u"du Plateau Limoneux Brabançon (art. 322-15 (lire « article 420 »));"},

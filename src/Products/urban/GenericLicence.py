@@ -794,6 +794,32 @@ schema = Schema((
         schemata='urban_location',
         default_output_type='text/plain',
     ),
+    LinesField(
+        name='reparcelling',
+        widget=MultiSelectionWidget(
+            size=5,
+            label='Prevu',
+            label_msgid='urban_label_reparcelling',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('reparcelling', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='reparcellingDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Reparcellingdetails',
+            label_msgid='urban_label_reparcellingDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
+    ),
     StringField(
         name='rgbsr',
         widget=SelectionWidget(

@@ -1307,6 +1307,9 @@ msgstr ""
 msgid "prevu_folder_title"
 msgstr ""
 
+msgid "reparcelling_folder_title"
+msgstr ""
+
 msgid "proprietaries"
 msgstr ""
 
@@ -2856,6 +2859,16 @@ msgstr ""
 #. Default: "Prevudetails"
 #: GenericLicence.py
 msgid "urban_label_prevuDetails"
+msgstr ""
+
+#. Default: "Reparcellingdetails"
+#: GenericLicence.py
+msgid "urban_label_reparcellingDetails"
+msgstr ""
+
+#. Default: "Reparcelling"
+#: GenericLicence.py
+msgid "urban_label_reparcelling"
 msgstr ""
 
 #. Default: "Procedurechoice"
