@@ -605,9 +605,9 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
     def listProcedureChoices(self):
         vocab = (
             ('ukn', 'Non determiné'),
-            ('opinions', 'Sollicitation du fonctionnaire délégué'),
-            ('inquiry', 'Sollicitation d\'avis (instance ou service interne/externe)'),
-            ('FD', 'Instruction d\'une enquête publique'),
+            ('FD', 'Sollicitation du fonctionnaire délégué'),
+            ('opinions', 'Sollicitation d\'avis (instance ou service interne/externe)'),
+            ('inquiry', 'Instruction d\'une enquête publique'),
         )
         return DisplayList(vocab)
 
