@@ -1228,18 +1228,14 @@ default_values = {
 
         'seveso_site': [
             'UrbanVocabularyTerm',
-            {'id': "exxonmobil", 'title': u"EXXONMOBIL PETROLEUM & CHEMICAL TOURNAI (Seuil bas)"},
-            {'id': "nyco", 'title': u"NYCO - STPC TOURNAI (Seuil bas)"},
-            {'id': "orica", 'title': u"ORICA - TITA NOBEL BELGIQUE S.A. TOURNAI (Seuil haut)"},
-            {'id': "univar", 'title': u"UNIVAR BELGIUM - QUARON TOURNAI (Seuil Haut)"},
-            {'id': "rynders", 'title': u"RYNDERS PETROLEUM BELGIUM ANTOING (seuil bas)"},
-            {'id': "transmat", 'title': u"TRANSMAT DEPOT ANTOING (seuil bas)"},
+            {'id': "seuil-bas", 'title': u"Seuil bas"},
+            {'id': "seuil-haut", 'title': u"Seuil haut"},
         ],
 
         'natura_2000': [
             'UrbanVocabularyTerm',
-            {'id': "rumillies", 'title': u"Périmètre NATURA 2000 du Bas Follet (Rumillies)"},
-            {'id': "vaulx", 'title': u"Périmètre NATURA 2000 de la GRANDE MER (Vaulx)"},
+            {'id': "xxx", 'title': u"Périmètre NATURA 2000 de XXX"},
+            {'id': "yyy", 'title': u"Périmètre NATURA 2000 de YYY"},
         ],
     },
 }
