@@ -33,6 +33,26 @@ from plone import api
 schema = Schema((
 
     DateTimeField(
+        name='investigationStart',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            format="%d/%m/%Y",
+            label='Investigationstart',
+            label_msgid='urban_label_investigationStart',
+            i18n_domain='urban',
+        ),
+    ),
+    DateTimeField(
+        name='investigationEnd',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            format="%d/%m/%Y",
+            label='Investigationend',
+            label_msgid='urban_label_investigationEnd',
+            i18n_domain='urban',
+        ),
+    ),
+    DateTimeField(
         name='explanationStartSDate',
         widget=DateTimeField._properties['widget'](
             show_hm=True,
@@ -105,7 +125,6 @@ schema = Schema((
         multiValued=0,
         relationship='linkedInquiry',
     ),
-
 ),
 )
 

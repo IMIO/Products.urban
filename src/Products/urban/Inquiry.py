@@ -96,26 +96,27 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
-    DateTimeField(
-        name='investigationStart',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            label='Investigationstart',
-            label_msgid='urban_label_investigationStart',
-            i18n_domain='urban',
-        ),
-    ),
-    DateTimeField(
-        name='investigationEnd',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            label='Investigationend',
-            label_msgid='urban_label_investigationEnd',
-            i18n_domain='urban',
-        ),
-    ),
+    # TODO to remove after testing the update script of migration
+    # DateTimeField(
+    #     name='investigationStart',
+    #     widget=DateTimeField._properties['widget'](
+    #         show_hm=False,
+    #         format="%d/%m/%Y",
+    #         label='Investigationstart',
+    #         label_msgid='urban_label_investigationStart',
+    #         i18n_domain='urban',
+    #     ),
+    # ),
+    # DateTimeField(
+    #     name='investigationEnd',
+    #     widget=DateTimeField._properties['widget'](
+    #         show_hm=False,
+    #         format="%d/%m/%Y",
+    #         label='Investigationend',
+    #         label_msgid='urban_label_investigationEnd',
+    #         i18n_domain='urban',
+    #     ),
+    # ),
     TextField(
         name='investigationDetails',
         allowable_content_types=('text/html',),
