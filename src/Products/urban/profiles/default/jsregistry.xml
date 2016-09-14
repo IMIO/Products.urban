@@ -23,8 +23,8 @@
              compression="safe"
              cookable="True"
              enabled="True"
-             expression="context/showEditTabbing"
-             id="urbanedittabbing.js"
+             expression=""
+             id="max_tabs_form.js"
              inline="False"
              insert-after="form_tabbing.js"/>
 
@@ -32,9 +32,10 @@
              compression="safe"
              cookable="True"
              enabled="True"
-             expression="not:context/showEditTabbing"
-             id="form_tabbing.js"
-             inline="False"/>
+             expression="context/showEditTabbing"
+             id="urbanedittabbing.js"
+             inline="False"
+             insert-after="max_tabs_form.js"/>
 
  <javascript cacheable="True"
              compression="safe"

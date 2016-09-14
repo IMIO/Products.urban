@@ -1,209 +1,87 @@
-/*
- * This is the code for the tabbed forms. It assumes the following markup:
- *
- * <form class="enableFormTabbing">
- *   <fieldset id="fieldset-[unique-id]">
- *     <legend id="fieldsetlegend-[same-id-as-above]">Title</legend>
- *   </fieldset>
- * </form>
- *
- * or the following
- *
- * <dl class="enableFormTabbing">
- *   <dt id="fieldsetlegend-[unique-id]">Title</dt>
- *   <dd id="fieldset-[same-id-as-above]">
- *   </dd>
- * </dl>
- *
- */
-
-
-var ploneFormTabbing = {
-        // standard jQueryTools configuration options for all form tabs
-        jqtConfig:{current:'selected'}
-    };
-
-
 (function($) {
+function parseTab(tab, lid, legend){
+    /* XXX change by urban
+     *  keep the last selected tab after edition */
+    if ((window.location.href.search("/edit") != -1) &&
+       (lid != 'fieldsetlegend-urban_events') &&
+       (lid != 'fieldsetlegend-attachments')){
+        tab += ' onClick = "'+
+               'var search_form = document.getElementsByTagName(\'form\')[1];'+
+               'var action_url = search_form.getAttribute(\'action\');'+
+               'action_url = action_url.substr(0, action_url.lastIndexOf(\'/base_edit\'));'+
+               'search_form.setAttribute(\'action\', action_url+\'/base_edit/#'+lid+'\')"';
+    }
+    tab += '><a id="'+lid+'" href="#'+lid+'"><span>';
+    /* XXX change by urban */
+    /* display the edit icon only if we are not already editing the element... */
+    tab += $(legend).text()+'</span>';
+    if ((window.location.href.search("/edit") == -1) &&
+       (lid != 'fieldsetlegend-urban_events') &&
+       (lid != 'fieldsetlegend-attachments')){
+        gni = window.location.pathname;
+        gni = gni.replace('/view', '');
+        tab += '&nbsp;&nbsp;<img class="urban-edit-tabbing"'+
+               'onclick="javascript:window.location=gni+&quot;/edit#'+
+               lid+
+               '&quot;" src="edit.png"></a></li>';
+    } else if ((window.location.href.search("/edit") == -1) &&
+       (lid == 'fieldsetlegend-attachments')){
+        tab += '&nbsp;&nbsp;<img class="urban-edit-tabbing"'+
+               ' src="attachment.png"></a></li>';
+    } else {
+        tab += '</a></li>';
+    }
+    return tab;
+}
+if(ploneFormTabbing){
+    ploneFormTabbing._buildTabs = function(container, legends) {
+        var threshold = legends.length > ploneFormTabbing.max_tabs;
+        var panel_ids, tab_ids = [], tabs = '';
 
-ploneFormTabbing._buildTabs = function(container, legends) {
-    var legends_length = legends.length;
-    var threshold = legends_length > 10;
-    var panel_ids, tab_ids = [], tabs = '';
+        for (var i=0; i < legends.length; i++) {
+            var className, tab, legend = legends[i], lid = legend.id;
+            tab_ids[i] = '#' + lid;
 
-    for (i=0; i < legends_length; i+= 1) {
-        var className, tab, legend = legends[i], lid = legend.id;
-        tab_ids[i] = '#' + lid;
+            switch (i) {
+                case (0):
+                    className = 'class="formTab firstFormTab"';
+                    break;
+                case (legends.length-1):
+                    className = 'class="formTab lastFormTab"';
+                    break;
+                default:
+                    className = 'class="formTab"';
+                    break;
+            }
 
-        switch (i) {
-            case (0):
-                className = 'class="formTab firstFormTab"';
-                break;
-            case (legends.length-1):
-                className = 'class="formTab lastFormTab"';
-                break;
-            default:
-                className = 'class="formTab"';
-                break;
+            if (threshold) {
+                tab = '<option '+className+' id="'+lid+'" value="'+lid+'">';
+                tab += $(legend).text()+'</option>';
+            } else {
+                tab = '<li '+className;
+                tab = parseTab(tab, lid, legend);
+            }
+
+            tabs += tab;
+            // don't use .hide() for ie6/7/8 support
+            $(legend).css({'visibility': 'hidden', 'font-size': '0',
+                           'padding': '0', 'height': '0',
+                           'width': '0', 'line-height': '0'});
         }
+
+        tab_ids = tab_ids.join(',');
+        panel_ids = tab_ids.replace(/#fieldsetlegend-/g, "#fieldset-");
 
         if (threshold) {
-            tab = '<option '+className+' id="'+lid+'" value="'+lid+'">';
-            tab += $(legend).text()+'</option>';
+            tabs = $('<select class="formTabs">'+tabs+'</select>');
+            tabs.change(function(){
+                var selected = $(this).attr('value');
+                $(this).parent().find('option#'+selected).click();
+            });
         } else {
-            tab = '<li '+className
-            /* XXX change by urban
-             *  keep the last selected tab after edition */
-            if ((window.location.href.search("/edit") != -1) &&
-               (lid != 'fieldsetlegend-urban_events') &&
-               (lid != 'fieldsetlegend-attachments')){
-                tab += ' onClick = "'+
-                       'var search_form = document.getElementsByTagName(\'form\')[1];'+
-                       'var action_url = search_form.getAttribute(\'action\');'+
-                       'action_url = action_url.substr(0, action_url.lastIndexOf(\'/base_edit\'));'+
-                       'search_form.setAttribute(\'action\', action_url+\'/base_edit/#'+lid+'\')"';
-            }
-            tab += '><a id="'+lid+'" href="#'+lid+'"><span>';
-            /* XXX change by urban */
-            /* display the edit icon only if we are not already editing the element... */
-            tab += $(legend).text()+'</span>';
-            if ((window.location.href.search("/edit") == -1) &&
-               (lid != 'fieldsetlegend-urban_events') &&
-               (lid != 'fieldsetlegend-attachments')){
-                gni = window.location.pathname;
-                gni = gni.replace('/view', '')
-                tab += '&nbsp;&nbsp;<img class="urban-edit-tabbing"'+
-                       'onclick="javascript:window.location=gni+&quot;/edit#'+
-                       lid+
-                       '&quot;" src="edit.png"></a></li>'
-            } else if ((window.location.href.search("/edit") == -1) &&
-               (lid == 'fieldsetlegend-attachments')){
-                gni = window.location.pathname;
-                gni = gni.replace('/view', '')
-                tab += '&nbsp;&nbsp;<img class="urban-edit-tabbing"'+
-                       ' src="attachment.png"></a></li>'
-            } else {
-                tab += '</a></li>'
-            }
+            tabs = $('<ul class="formTabs">'+tabs+'</ul>');
         }
-
-        tabs += tab;
-        // don't use .hide() for ie6/7/8 support
-        $(legend).css({'visibility': 'hidden', 'font-size': '0',
-                       'padding': '0', 'height': '0',
-                       'width': '0', 'line-height': '0'});
-    }
-
-    tab_ids = tab_ids.join(',');
-    panel_ids = tab_ids.replace(/#fieldsetlegend-/g, "#fieldset-");
-
-    if (threshold) {
-        tabs = $('<select class="formTabs">'+tabs+'</select>');
-        tabs.change(function(){
-            var selected = $(this).attr('value');
-            $(this).parent().find('option#'+selected).click();
-        });
-    } else {
-        tabs = $('<ul class="formTabs">'+tabs+'</ul>');
-    }
-
-    return tabs;
-};
-
-
-ploneFormTabbing.initializeDL = function() {
-    var ftabs = $(ploneFormTabbing._buildTabs(this, $(this).children('dt')));
-    var targets = $(this).children('dd');
-    $(this).before(ftabs);
-    targets.addClass('formPanel');
-    ftabs.tabs(targets, ploneFormTabbing.jqtConfig);
-};
-
-
-ploneFormTabbing.initializeForm = function() {
-    var jqForm = $(this);
-    var fieldsets = jqForm.children('fieldset');
-
-    if (!fieldsets.length) {return;}
-
-    var ftabs = ploneFormTabbing._buildTabs(
-        this, fieldsets.children('legend'));
-    $(this).prepend(ftabs);
-    fieldsets.addClass("formPanel");
-
-
-    // The fieldset.current hidden may change, but is not content
-    $(this).find('input[name="fieldset"]').addClass('noUnloadProtection');
-
-    $(this).find('.formPanel:has(div.field span.required)').each(function() {
-        var id = this.id.replace(/^fieldset-/, "#fieldsetlegend-");
-        $(id).addClass('required');
-    });
-
-    // set the initial tab
-    var initialIndex = 0;
-    var count = 0;
-    var found = false;
-    $(this).find('.formPanel').each(function() {
-        if (!found && $(this).find('div.field.error').length!=0) {
-            initialIndex = count;
-            found = true;
-        }
-        count += 1;
-    });
-
-    var tabSelector = 'ul.formTabs';
-    if ($(ftabs).is('select.formTabs')) {
-        tabSelector = 'select.formTabs';
-    }
-    var tabsConfig = $.extend({}, ploneFormTabbing.jqtConfig, {'initialIndex':initialIndex});
-    jqForm.children(tabSelector).tabs(
-        'form.enableFormTabbing fieldset.formPanel',
-        tabsConfig
-        );
-
-    // save selected tab on submit
-    jqForm.submit(function() {
-    	var selected;
-    	if(ftabs.find('a.selected').length>=1){
-    		selected = ftabs.find('a.selected').attr('href').replace(/^#fieldsetlegend-/, "#fieldset-");
-    	}
-    	else{
-    		selected = ftabs.attr('value').replace(/^fieldsetlegend-/,'#fieldset-');
-    	}
-        var fsInput = jqForm.find('input[name="fieldset.current"]');
-        if (selected && fsInput) {
-            fsInput.val(selected);
-        }
-    });
-
-    $("#archetypes-schemata-links").addClass('hiddenStructure');
-    $("div.formControls input[name='form.button.previous']," +
-      "div.formControls input[name='form.button.next']").remove();
-
-};
-
-$.fn.ploneTabInit = function(pbo) {
-    return this.each(function() {
-        var item = $(this);
-
-        item.find("form.enableFormTabbing,div.enableFormTabbing").each(ploneFormTabbing.initializeForm);
-        item.find("dl.enableFormTabbing").each(ploneFormTabbing.initializeDL);
-
-        //Select tab if it's part of the URL or designated in a hidden input
-        var targetPane = item.find('.enableFormTabbing input[name="fieldset"]').val() || window.location.hash;
-        if (targetPane) {
-            item.find(".enableFormTabbing .formTabs " +
-             targetPane.replace("'", "").replace(/^#fieldset-/, "#fieldsetlegend-")).click();
-        }
-    });
-};
-
-// initialize is a convenience function
-ploneFormTabbing.initialize = function() {
-    $('body').ploneTabInit();
-};
-
+        return tabs;
+    };
+}
 })(jQuery);
-
-jQuery(function(){ploneFormTabbing.initialize();});
