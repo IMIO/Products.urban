@@ -31,7 +31,7 @@ class UrbanEventView(BrowserView):
         """
         context = aq_inner(self.context)
         linkedUrbanEventType = context.getUrbaneventtypes()
-        fields = []
+        fields = [i for i in context.schema.fields() if i.schemata == 'default' and not hasattr(i, 'optional') and i.widget.visible and i.widget.visible['view'] == 'visible']
         for activatedField in linkedUrbanEventType.getActivatedFields():
             if not activatedField:
                 continue  # in some case, there could be an empty value in activatedFields...
