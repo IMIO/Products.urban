@@ -27,8 +27,13 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         return persisted_doc.absolute_url()
 
     def get_generation_format(self):
-        portal_urban = api.portal.get_tool('portal_urban')
-        output_format = portal_urban.getEditionOutputFormat()
+        pod_template = self.get_pod_template(self.get_pod_template_uid())
+        output_formats = pod_template.get_available_formats()
+        if len(output_formats) != 1:
+            portal_urban = api.portal.get_tool('portal_urban')
+            output_format = portal_urban.getEditionOutputFormat()
+        else:
+            output_format = output_formats[0]
         return output_format
 
     def get_base_generation_context(self):
