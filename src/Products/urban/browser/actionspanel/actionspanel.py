@@ -45,7 +45,14 @@ class LicenceTransitionsPanelView(ActionsPanelView):
     def __init__(self, context, request):
         super(LicenceTransitionsPanelView, self).__init__(context, request)
 
-        self.SECTIONS_TO_RENDER = ('renderTransitions',)
+        self.SECTIONS_TO_RENDER = ('renderTransitions', 'renderHistory',)
+
+    def __call__(self,
+                 **kwargs):
+        return super(LicenceTransitionsPanelView, self).__call__(
+            showHistory=True,
+            **kwargs
+        )
 
     def _transitionsToConfirm(self):
         portal_workflow = api.portal.get_tool('portal_workflow')
