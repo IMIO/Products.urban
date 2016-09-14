@@ -1,19 +1,6 @@
 <fieldset metal:define-macro="urbanEventDataMacro" i18n:domain="urban" height="100%">
     <legend i18n:translate="event_data">Event data</legend>
     <table class="no-style-table; clear">
-        <tr valign="top">
-            <td>
-                <strong tal:content="python: context.eventDateLabel()">Event date label</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
-            </td>
-            <tal:manage_show_nc_if_needed define="value python: getattr(context, 'eventDate')">
-                <td tal:condition="value">
-                    <metal:myfield use-macro="python: context.widget('eventDate', mode='view')" />
-                </td>
-                <td tal:condition="not: value">
-                    <span tal:condition="not: value" class="discreet" i18n:translate="content_none">None</span>
-                </td>
-                </tal:manage_show_nc_if_needed>
-        </tr>
         <tal:evtfield repeat="field fields" define="fields view/getFieldsToShow;">
             <tr valign="top" tal:define="field_name python: field.__name__">
                 <td>
