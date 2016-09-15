@@ -224,6 +224,8 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
         """
         return self.displayValue(UrbanVocabulary('investigationarticles', value_to_use="extraValue").getDisplayList(self), self.getLinkedInquiry().getInvestigationArticles())
 
+    def getKeyDate(self):
+        return self.getInvestigationStart()
 
 
 registerType(UrbanEventInquiry, PROJECTNAME)

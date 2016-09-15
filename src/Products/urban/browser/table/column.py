@@ -39,13 +39,13 @@ class EventDateColumn(UrbanColumn):
 
     def renderCell(self, urbanlist_item):
         event = urbanlist_item.getObject()
-        date = event.getInvestigationStart()
+        date = event.getKeyDate()
         date = date and date.strftime('%d/%m/%Y') or 'no date defined'
         return date
 
     def getSortKey(self, urbanlist_item):
         obj = urbanlist_item.getObject()
-        return obj.getInvestigationStart()
+        return obj.getKeyDate()
 
 
 class RelatedLicencesColumn(Column):
