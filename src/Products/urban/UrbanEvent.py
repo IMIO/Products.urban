@@ -351,6 +351,9 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         urban_tool = getToolByName(self, 'portal_urban')
         return urban_tool.getTextDefaultValue(field.getName(), context, html=html, config=self.getUrbaneventtypes())
 
+    def getKeyDate(self):
+        return self.getEventDate()
+
     def getDefaultTime(self):
         return DateTime()
 
