@@ -235,7 +235,7 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
           This will return a link to the inquiries on the linked licence
         """
         context = aq_inner(self.context)
-        return context.aq_inner.aq_parent.absolute_url() + '/#fieldsetlegend-urban_investigation_and_advices'
+        return context.aq_inner.aq_parent.absolute_url() + '/#fieldsetlegend-urban_inquiry'
 
     def getLinkedInquiryTitle(self):
         """
