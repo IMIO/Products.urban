@@ -148,6 +148,8 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
     _at_rename_after_creation = True
 
     schema = UrbanEventInquiry_schema
+    schema.widgets()['eventDate'].visible['edit'] = 'invisible'
+    schema.widgets()['eventDate'].visible['view'] = 'invisible'
 
     ##code-section class-header #fill in your manual code here
     ##/code-section class-header
