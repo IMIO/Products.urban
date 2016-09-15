@@ -67,4 +67,12 @@
         handler=".migrate_to_200.migrate"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Upgrade urban to 2.1"
+        description="urban upgrade step"
+        source="2.0"
+        destination="2.1"
+        handler=".migrate_to_210.migrate"
+        profile="Products.urban:default" />
+
 </configure>
