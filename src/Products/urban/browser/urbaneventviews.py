@@ -216,11 +216,8 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
             #this should not happen...
             return None
         inquiryData = (linkedInquiry, [])
-        #we want to display the fields corresponding to the Inquiry
-        #the linkedInquiry can be the licence itself or an Inquiry object
-        inquiryAttributes = Inquiry.schema.filterFields(isMetadata=False)
-        #do not take the 2 first fields into account, it is 'id' and 'title'
-        inquiryAttributes = inquiryAttributes[2:]
+        inquiryAttributes = linkedInquiry.schema.getSchemataFields('urban_inquiry')
+        inquiryAttributes = [i for i in inquiryAttributes if i.get(linkedInquiry)]
         for inquiryAttribute in inquiryAttributes:
             inquiryAttributeName = inquiryAttribute.getName()
             if inquiryAttributeName == "claimsText":
