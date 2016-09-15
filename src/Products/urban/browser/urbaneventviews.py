@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
+from Products.urban import utils
 from Products.Five import BrowserView
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.urban.Inquiry import Inquiry
 from Products.urban.browser.mapview import MapView
+from Products.urban.browser.licence.licenceview import LicenceView
 from Products.urban.browser.table.urbantable import DocumentsTable
 from Products.urban.browser.table.urbantable import AttachmentsTable
 from Products.urban.browser.table.urbantable import ClaimantsTable
@@ -150,7 +152,7 @@ class UrbanEventView(BrowserView):
         return context.getUrbaneventtypes()
 
 
-class UrbanEventInquiryView(UrbanEventView, MapView):
+class UrbanEventInquiryView(UrbanEventView, MapView, LicenceView):
     """
       This manage the view of UrbanEventInquiry
       It is based on the default UrbanEventView
@@ -216,8 +218,8 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
             #this should not happen...
             return None
         inquiryData = (linkedInquiry, [])
-        inquiryAttributes = linkedInquiry.schema.getSchemataFields('urban_inquiry')
-        inquiryAttributes = [i for i in inquiryAttributes if i.get(linkedInquiry)]
+        displayed_fields = self.getUsedAttributes()
+        inquiryAttributes = utils.getSchemataFields(linkedInquiry, displayed_fields, 'urban_inquiry')
         for inquiryAttribute in inquiryAttributes:
             inquiryAttributeName = inquiryAttribute.getName()
             if inquiryAttributeName == "claimsText":

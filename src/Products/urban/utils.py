@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from Acquisition import aq_inner
 from HTMLParser import HTMLParser
 
 from Products.urban.config import URBAN_TYPES
@@ -120,3 +121,24 @@ def getLicenceFolder(licencetype):
 def removeItems(liste, items):
     [liste.remove(i) for i in items if liste.count(i)]
     return liste
+
+
+def getSchemataFields(context, displayed_fields, schemata='', exclude=[]):
+    def isDisplayable(field):
+        if hasattr(field, 'optional') and field.optional and field.getName() not in displayed_fields:
+            return False
+        if hasattr(field, 'edit_only') and field.edit_only:
+            return False
+        if field.getName() in exclude:
+            return False
+        if not field.widget.visible:
+            return False
+        if not field.checkPermission('r', context):
+            return False
+        return True
+
+    context = aq_inner(context)
+    schema = context.__class__.schema
+    fields = [field for field in schema.getSchemataFields(schemata) if isDisplayable(field)]
+
+    return fields

@@ -4,6 +4,7 @@ from Acquisition import aq_inner
 
 from Products.Five import BrowserView
 
+from Products.urban import utils
 from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
 from Products.urban.browser.table.urbantable import ApplicantTable
 from Products.urban.browser.table.urbantable import AttachmentsTable
@@ -258,25 +259,8 @@ class LicenceView(BrowserView):
         return inquirydates
 
     def getSchemataFields(self, schemata='', exclude=[]):
-        def isDisplayable(field):
-            if hasattr(field, 'optional') and field.optional and field.getName() not in displayed_fields:
-                return False
-            if hasattr(field, 'edit_only') and field.edit_only:
-                return False
-            if field.getName() in exclude:
-                return False
-            if not field.widget.visible:
-                return False
-            if not field.checkPermission('r', self.context):
-                return False
-            return True
-
         displayed_fields = self.getUsedAttributes()
-        context = aq_inner(self.context)
-        schema = context.__class__.schema
-        fields = [field for field in schema.getSchemataFields(schemata) if isDisplayable(field)]
-
-        return fields
+        return utils.getSchemataFields(self.context, displayed_fields, schemata, exclude)
 
     def getDescriptionFields(self, exclude=[]):
         return self.getSchemataFields('urban_description', exclude)
@@ -294,9 +278,7 @@ class LicenceView(BrowserView):
         return self.getSchemataFields('urban_advices', exclude)
 
     def getInquiryFields(self, exclude=[]):
-        fields = self.getSchemataFields('urban_inquiry', exclude)
-        fields = [f for f in fields if f.get(self.context)]
-        return fields
+        return self.getSchemataFields('urban_inquiry', exclude)
 
     def get_state(self):
         return api.content.get_state(self.context)
