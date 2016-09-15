@@ -41,14 +41,6 @@ slave_fields_signature_number = (
 
 schema = Schema((
 
-    BooleanField(
-        name='outOfTime',
-        widget=BooleanWidget(
-            label='OutOfTime',
-            label_msgid='urban_label_outOfTime',
-            i18n_domain='urban',
-        ),
-    ),
     StringField(
         name='claimType',
         widget=SelectionWidget(
@@ -77,6 +69,14 @@ schema = Schema((
             i18n_domain='urban',
         ),
         validators=('isInt', ),
+    ),
+    BooleanField(
+        name='outOfTime',
+        widget=BooleanWidget(
+            label='OutOfTime',
+            label_msgid='urban_label_outOfTime',
+            i18n_domain='urban',
+        ),
     ),
     DateTimeField(
         name='claimDate',
