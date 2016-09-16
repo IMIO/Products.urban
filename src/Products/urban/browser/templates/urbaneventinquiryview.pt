@@ -25,10 +25,11 @@
                         <dl class="formTabs enableFormTabbing">
                         <dt class="formTab" id="fieldsetlegend-event_inquiry_documents" i18n:translate="event_inquiry_documents"><span>Description</span></dt>
                         <dd id="fieldset-event_inquiry_documents">
-                            <table width=100%>
-                                <tr valign="top">
+                            <table width="100%" style="margin-top:10px">
+                                <tr valign="top" >
                                     <td>
                                         <metal:listing use-macro="context/@@urbanevent-macros/urbanEventDataMacro" />
+                                        <metal:listing use-macro="context/@@urbanevent-macros/urbanEventGenerateDocumentMacro" />
                                     </td>
 
                                     <td style="width: 1%"></td>
@@ -74,34 +75,31 @@
                                                 </tal:evtfield>
                                             </table>
                                        </fieldset>
-                               </tr>
-                               <tr>
-                                    <td valign="top" rowspan="2">
-                                        <metal:listing use-macro="context/@@urbanevent-macros/urbanEventGenerateDocumentMacro" />
-                                    </td>
-
-                                    <td style="width: 1%"></td>
-
-                                    <td valign="top" width=65%>
-                                        <fieldset>
+                                       <fieldset tal:define="inqReclamationNumbers view/getInquiryReclamationNumbers" tal:condition="inqReclamationNumbers">
+                                            <legend>Total des réclamations par type</legend>
+                                            <div tal:define="inqOral python: inqReclamationNumbers[0];
+                                                               inqWrited python: inqReclamationNumbers[1];" style="margin-top:40px">
+                                                <div>
+                                                    <strong i18n:translate="" tal:content="python: 'urban_label_investigationOralReclamationNumber'">Optional field label</strong>:&nbsp;<strong><span tal:content="inqOral" /></strong>
+                                                </div>
+                                                <div>
+                                                    <strong i18n:translate="" tal:content="python: 'urban_label_investigationWriteReclamationNumber'">Optional field label</strong>:&nbsp;<strong><span tal:content="inqWrited" /></strong>
+                                                </div>
+                                            </div>
+                                       </fieldset>
+                                       <fieldset>
                                             <legend i18n:translate="event_linked_documents">Event linked documents</legend>
-                                            <div>
+                                            <div style="float:right;margin-top:10px">
                                                 <tal:listing content="structure view/renderGeneratedDocumentsListing" />
                                             </div>
-                                        </fieldset>
-                                    </td>
-                                </tr>
-                                <tr valign="top">
-                                    <td></td>
-
-                                    <td valign="top" width=65%>
-                                        <fieldset>
+                                       </fieldset>
+                                       <fieldset>
                                             <legend i18n:translate="event_linked_attachments">Event linked attachments</legend>
-                                            <div>
+                                            <div  style="float:right;margin-top:10px">
                                                 <tal:listing content="structure view/renderAttachmentsListing" />
                                                 <metal:listing use-macro="context/@@urbanevent-macros/urbanEventAddAttachmentMacro" />
                                             </div>
-                                        </fieldset>
+                                       </fieldset>
                                     </td>
                                 </tr>
                             </table>
@@ -124,7 +122,7 @@
                                 <br /><br />
                             </form>
                             <div tal:define="claimants context/getClaimants;">
-                                <table width=100% class="listing" style="margin-bottom: 0;">
+                                <table width="100%" class="listing" style="margin-bottom: 0;">
                                     <thead>
                                         <tr>
                                             <th colspan="4">
@@ -152,7 +150,7 @@
                             </tal:block>
                             <br />
                             <tal:recipients condition="recipients">
-                                <table width=100% class="listing" style="margin-bottom: 0;">
+                                <table width="100%" class="listing" style="margin-bottom: 0;">
                                     <thead>
                                         <tr>
                                             <th colspan="4">

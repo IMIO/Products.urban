@@ -227,7 +227,25 @@ class UrbanEventInquiryView(UrbanEventView, MapView, LicenceView):
                 #fields, we will display it in the "Claimants" part of the template
                 continue
             inquiryData[1].append(inquiryAttributeName)
+
         return inquiryData
+
+    def getInquiryReclamationNumbers(self):
+
+        inquiryReclamationNumbers = []
+        context = aq_inner(self.context)
+        totalOral = 0
+        totalWrite = 0
+        if context.getClaimants():
+            for claimant in context.getClaimants():
+                if claimant.getClaimType() == 'oralClaim':
+                    totalOral += 1
+                elif claimant.getClaimType() == 'writedClaim':
+                    totalWrite += 1
+
+        inquiryReclamationNumbers.append(totalOral)
+        inquiryReclamationNumbers.append(totalWrite)
+        return inquiryReclamationNumbers
 
     def getLinkToTheInquiries(self):
         """
