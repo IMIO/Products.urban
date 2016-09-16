@@ -131,7 +131,11 @@ class ParcelCoringView(BrowserView):
                 'proposed_value': json.dumps(proposed_value),
                 'current_value': urban_field.get(self.context) or 'N.C.',
             }
-            if tuple(proposed_value) != urban_field.get(self.context):
+            if isinstance(proposed_value[0], bool):
+                proposed_value = proposed_value[0]
+            else:
+                proposed_value = tuple(proposed_value)
+            if proposed_value != urban_field.get(self.context):
                 fields_to_update.append(line)
         return fields_to_update
 
