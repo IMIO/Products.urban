@@ -9,6 +9,75 @@ from plone import api
 
 import json
 
+MATCH_CORING = {'folderprotectedbuildings': {'coringids': [17, 20, 19, 16, 18],
+                                             'fieldname': 'protectedBuilding',
+                                             'valuetype': 'list',
+                                             },
+                'folerzones': {'coringids': [12, 2],
+                               'fieldname': 'folderZone',
+                               'valuetype': 'list',
+                               },
+                'PCA': {'coringids': [7],
+                        'fieldname': 'isInPCA',
+                        'valuetype': 'bool',
+                        },
+                'LOTISSEMENT': {'coringids': [8],
+                                'fieldname': 'isInSubdivision',
+                                'valuetype': 'bool',
+                                },
+                }
+
+
+class Coring(object):
+
+    def __init__(self, layer):
+        for l in layer:
+            setattr(self, l, layer[l])
+        self.catalog = api.portal.get_tool('portal_catalog')
+        self.portal_urban = api.portal.get_tool('portal_urban')
+        self.folderzone_folder = self.portal_urban.folderzones
+
+    @property
+    def type(self):
+        for key in MATCH_CORING:
+            if self.layer_id in MATCH_CORING[key]['coringids']:
+                return key
+
+    @property
+    def valuetype(self):
+        if self.type:
+            return MATCH_CORING[self.type]['valuetype']
+
+    @property
+    def fieldname(self):
+        if self.type:
+            return MATCH_CORING[self.type]['fieldname']
+
+    def getValues(self):
+        if self.valuetype == 'bool':
+            return self.fieldname, [True], 'Vrai'
+        voc_folder = self.portal_urban.get(self.type)
+        if not voc_folder:
+            return '', [], ''
+        folder_path = '/'.join(voc_folder.getPhysicalPath())
+        values = []
+        display_values = []
+        for layer_value in self.attributes:
+            layer_name = layer_value['attributes'].get('layerName')
+            if self.layer_id not in voc_folder.objectIds():
+                voc_brains = self.catalog(portal_type='UrbanVocabularyTerm', path={'query': folder_path, 'depth': 1})
+                voc_brains = [i for i in voc_brains if i.getObject()['coring_id'] == self.layer_id]
+                if len(voc_brains) == 1:
+                    values.append(voc_brains[0].id)
+                    display_values.append(voc_brains[0].Title)
+                    continue
+                else:
+                    with api.env.adopt_roles(['Manager']):
+                        voc_folder.invokeFactory('UrbanVocabularyTerm', id=self.layer_id, coring_id=self.layer_id, title=layer_name)
+            values.append(self.layer_id)
+            display_values.append(layer_name)
+        return self.fieldname, values, ', '.join(display_values)
+
 
 class ParcelCoringView(BrowserView):
     """
@@ -28,66 +97,43 @@ class ParcelCoringView(BrowserView):
         status, data = self.core()
         if status != 200:
             return status, data
-
         fields_to_update = self.get_fields_to_update(coring_json=data)
-
         return status, fields_to_update
 
     def get_fields_to_update(self, coring_json):
         """
         """
         fields_to_update = []
+        fields = {}
         for layer in coring_json:
-            field_name, proposed_value, display_value = self.get_value_from_maplayer(layer)
-            if field_name:
-                urban_field = self.context.getField(field_name)
-                line = {
-                    'field_name': field_name,
-                    'field_name_label': urban_field.widget.label_msgid,
-                    'proposed_display_value': display_value,
-                    'proposed_value': json.dumps(proposed_value),
-                    'current_value': urban_field.get(self.context) or 'N.C.',
-                }
+            if not layer.get('attributes'):
+                continue
+            layer = Coring(layer)
+            field_name, proposed_value, display_value = layer.getValues()
+            if not field_name:
+                continue
+            if field_name not in fields:
+                fields[field_name] = []
+            fields[field_name].append({'field_name': field_name,
+                                       'proposed_value': proposed_value,
+                                       'proposed_display_value': display_value})
+        for key in fields:
+            field = fields[key]
+            proposed_value = []
+            proposed_display_value = []
+            [proposed_value.extend(value['proposed_value']) for value in field]
+            [proposed_display_value.append(value['proposed_display_value']) for value in field]
+            urban_field = self.context.getField(key)
+            line = {
+                'field_name': key,
+                'field_name_label': urban_field.widget.label_msgid,
+                'proposed_display_value': ', '.join(proposed_display_value),
+                'proposed_value': json.dumps(proposed_value),
+                'current_value': urban_field.get(self.context) or 'N.C.',
+            }
+            if tuple(proposed_value) != urban_field.get(self.context):
                 fields_to_update.append(line)
-
         return fields_to_update
-
-    def get_value_from_maplayer(self, layer):
-        """
-        """
-        layer_name = layer['description']
-        if layer_name == u'SPW PDS Affectation':
-            folderzone_folder = self.portal_urban.folderzones
-            values, display_values = self.get_vocabulary_value(layer, voc_folder=folderzone_folder, id_key='AFFECT', title_key='value')
-            return 'folderZone', values, display_values
-
-        return None, None, None
-
-    def get_vocabulary_value(self, layer, voc_folder, id_key, title_key):
-        """
-        """
-        folder_path = '/'.join(voc_folder.getPhysicalPath())
-        values = []
-        display_values = []
-        for layer_value in layer['attributes']:
-            layer_value = layer_value['attributes']
-
-            term_id = layer_value.get(id_key)
-            term_title = layer_value.get(title_key)
-
-            if term_id not in voc_folder.objectIds():
-                voc_brains = self.catalog(portal_type='UrbanVocabularyTerm', Title=term_title, path={'query': folder_path, 'depth': 1})
-                if len(voc_brains) == 1:
-                    values.append(voc_brains[0].id)
-                    display_values.append(voc_brains[0].Title)
-                    continue
-                else:
-                    with api.env.adopt_roles(['Manager']):
-                        voc_folder.invokeFactory('UrbanVocabularyTerm', id=term_id, title=term_title)
-            values.append(term_id)
-            display_values.append(term_title)
-
-        return values, ', '.join(display_values)
 
     def core(self, coring_type=None):
         """
