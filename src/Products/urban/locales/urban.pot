@@ -3625,3 +3625,11 @@ msgstr ""
 #: GenericLicence.py
 msgid "urban_label_natura_2000"
 msgstr ""
+
+#: UrbanVocabularyTerm.py
+msgid "urban_label_coring_id"
+msgstr ""
+
+#: UrbanVocabularyTerm.py
+msgid "urban_help_coring_id"
+msgstr ""

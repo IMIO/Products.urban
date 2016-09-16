@@ -1525,6 +1525,10 @@ msgstr "Exportation liste 220"
 msgid "urban_fullmap_descr"
 msgstr "Carte"
 
+#: UrbanVocabularyTerm.py
+msgid "urban_help_coring_id"
+msgstr "Entrez l'identifiant lié au carotage"
+
 #. Default: "If this field is used, you can insert special expressions between [[]] that will be rendered.  This can be something like \"My text [[object/getMyAttribute]] end of the text\".  Object is the licence the term is used in."
 #: UrbanVocabularyTerm.py
 msgid "urban_help_description"
@@ -1966,6 +1970,10 @@ msgstr "Détails concerant le risque de ruissellement concentré"
 #: parcelsinfo.py
 msgid "urban_label_concerned_elements"
 msgstr "Eléments concernés"
+
+#: UrbanVocabularyTerm.py
+msgid "urban_label_coring_id"
+msgstr "Identification carotage"
 
 #. Default: "Country"
 #: Contact.py
@@ -3627,3 +3635,4 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+
