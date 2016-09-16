@@ -67,6 +67,16 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    StringField(
+        name='coring_id',
+        widget=StringField._properties['widget'](
+            description="This field is made to store the coring id.",
+            label='CoringId',
+            label_msgid='urban_label_coring_id',
+            description_msgid='urban_help_coring_id',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )
