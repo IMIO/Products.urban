@@ -116,7 +116,7 @@ schema = Schema((
     ReferenceField(
         name='linkedInquiry',
         widget=ReferenceBrowserWidget(
-            visible=False,
+            visible={'edit': 'invisible', 'view': 'invisible'},
             label='Linkedinquiry',
             label_msgid='urban_label_linkedInquiry',
             i18n_domain='urban',
@@ -136,6 +136,8 @@ UrbanEventInquiry_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+UrbanEventInquiry_schema['eventDate'].widget.visible['edit'] = 'invisible'
+UrbanEventInquiry_schema['eventDate'].widget.visible['view'] = 'invisible'
 ##/code-section after-schema
 
 class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
@@ -148,8 +150,6 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
     _at_rename_after_creation = True
 
     schema = UrbanEventInquiry_schema
-    schema.widgets()['eventDate'].visible['edit'] = 'invisible'
-    schema.widgets()['eventDate'].visible['view'] = 'invisible'
 
     ##code-section class-header #fill in your manual code here
     ##/code-section class-header
