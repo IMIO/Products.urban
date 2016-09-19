@@ -7,7 +7,7 @@
                     <strong i18n:translate="" tal:content="python: 'urban_label_' + field_name">Optional field label</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
                 <tal:manage_show_nc_if_needed define="value python: field.getAccessor(context)()">
-                    <td tal:condition="value">
+                    <td tal:condition="python: bool(value)">
                         <tal:no_long_text condition="python: not view.isTextField(field)">
                             <metal:myfield use-macro="python: context.widget(field_name, mode='view')" />
                         </tal:no_long_text>
@@ -30,7 +30,7 @@
                             </tal:block>
                         </tal:long_text>
                     </td>
-                    <td tal:condition="not: value">
+                    <td tal:condition="python: not bool(value)">
                         <span tal:condition="not: value" class="discreet" i18n:translate="content_none">None</span>
                     </td>
                 </tal:manage_show_nc_if_needed>

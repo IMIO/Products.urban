@@ -32,6 +32,7 @@ schema = Schema((
     ReferenceField(
         name='linkedInquiry',
         widget=ReferenceBrowserWidget(
+            visible={'edit': 'invisible', 'view': 'invisible'},
             label='Linkedinquiry',
             label_msgid='urban_label_linkedInquiry',
             i18n_domain='urban',
