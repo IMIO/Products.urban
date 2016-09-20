@@ -75,6 +75,23 @@ class LicenceView(BrowserView):
             return True
         return False
 
+    def getInquiryReclamationNumbers(self):
+
+        inquiryReclamationNumbers = []
+        context = aq_inner(self.context)
+        totalOral = 0
+        totalWrite = 0
+        if context.getClaimants():
+            for claimant in context.getClaimants():
+                if claimant.getClaimType() == 'oralClaim':
+                    totalOral += 1
+                elif claimant.getClaimType() == 'writedClaim':
+                    totalWrite += 1
+
+        inquiryReclamationNumbers.append(totalOral)
+        inquiryReclamationNumbers.append(totalWrite)
+        return inquiryReclamationNumbers
+
     def renderAttachmentsListing(self):
         licence = aq_inner(self.context)
         queryString = {

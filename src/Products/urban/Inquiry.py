@@ -261,6 +261,14 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         else:
             return None
 
+    security.declarePublic('getCustomInvestigationArticles')
+    def getCustomInvestigationArticles(self):
+        items = []
+        for article in self.getInvestigationArticles():
+            if self.displayValue(UrbanVocabulary('investigationarticles').getDisplayList(self), article):
+                items.append(self.displayValue(UrbanVocabulary('investigationarticles').getDisplayList(self), article))
+        return items
+
     security.declarePublic('getLinkedUrbanEventOpinionRequest')
     def getLinkedUrbanEventOpinionRequest(self, organisation):
         """

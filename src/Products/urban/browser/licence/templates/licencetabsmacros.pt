@@ -356,20 +356,13 @@
             </div>
         </tal:actions>
         <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
-               tal:define="exclude python: []" >
-            <tal:loop repeat="field view/getInquiryFields">
-                <tr tal:define="fieldname field/getName;
-                                nullvalue python: field.get(context) == ''">
+               tal:define="custom python: ['investigationArticles'];
+                           default_exclude python: [];
+                           exclude exclude | default_exclude">
 
-                    <tal:normal_field condition="python: fieldname not in exclude">
-                        <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
-                        <td width="10px"></td>
-                        <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
-                            <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
-                        </td>
-                    </tal:normal_field>
-                </tr>
-           </tal:loop>
+            <tal:loop repeat="field python: view.getInquiryFields(exclude)">
+                <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+            </tal:loop>
            <tal:comment replace="nothing">Link to the UrbanEventInquiry if exists</tal:comment>
            <tr>
                <td valign="top"><b><span i18n:translate="urban_linked_urbaneventinquiry">Linked urban event inquiry</span>:</b></td>
