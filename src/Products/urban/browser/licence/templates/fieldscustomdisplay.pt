@@ -35,6 +35,16 @@
 </metal:pca>
 
 
+<metal:investigationArticles define-macro="investigationArticles">
+
+    <tr tal:define="investigationArticles context/getCustomInvestigationArticles" tal:repeat="investigationArticle investigationArticles">
+        <td><tal:firstLabel condition="python:repeat['investigationArticle'].index == 0"><b><span i18n:translate="urban_label_investigationArticles">investigationArticles</span>:</b></tal:firstLabel></td>
+        <td width="10px"></td>
+        <td tal:content="investigationArticle">Specific feature</td>
+    </tr>
+
+</metal:investigationArticles>
+
 <metal:habitation define-macro="noApplication">
 
     <tal:not_applicable condition="context/getNoApplication">
