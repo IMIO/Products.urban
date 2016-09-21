@@ -483,6 +483,20 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         return not self.hasEventNamed(title)
 
+    security.declarePublic('getApplicantsSignaletic')
+    def getProprietariesSignaletic(self, withaddress=False):
+        """
+          Returns a string representing the signaletic of every proprietaries
+        """
+        proprietaries = self.getProprietaries()
+        signaletic = ''
+        for proprietary in proprietaries:
+            #if the signaletic is not empty, we are adding several applicants
+            if signaletic:
+                signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
+            signaletic += proprietary.getSignaletic(withaddress=withaddress)
+        return signaletic
+
 
 
 registerType(UrbanCertificateBase, PROJECTNAME)
