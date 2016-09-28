@@ -185,7 +185,7 @@ class RecipientCadastreTitleColumnHeader(TitleColumnHeader):
         self.label = 'label_colname_name'
 
 
-class TitleDisplay():
+class TitleDisplay(object):
     """ Base class for Title cell adapter """
     implements(ITitleCell)
 
