@@ -122,8 +122,9 @@ class InquiryDatesDefinedCondition(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        start_date = licence.getInvestigationStart()
-        end_date = licence.getInvestigationEnd()
+        inquiry = licence.getLastInquiry()
+        start_date = inquiry.getInvestigationStart()
+        end_date = inquiry.getInvestigationEnd()
         dates_defined = start_date and end_date
         return dates_defined
 

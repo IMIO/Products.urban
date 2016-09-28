@@ -56,5 +56,6 @@ class InquriryEndDate(StartDate):
 
     def start_date(self):
         licence = self.task_container
-        end_date = licence.getInvestigationEnd()
+        inquiry = licence.getLastInquiry()
+        end_date = inquiry.getInvestigationEnd()
         return end_date

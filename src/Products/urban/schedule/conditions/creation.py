@@ -50,9 +50,8 @@ class InquiryCondition(CreationCondition):
     def evaluate(self):
         licence = self.task_container
 
-        start_date = licence.getInvestigationStart()
-        end_date = licence.getInvestigationEnd()
-        has_inquiry = start_date and end_date
+        inquiry = licence.getLastInquiry()
+        has_inquiry = bool(inquiry)
 
         return has_inquiry
 
