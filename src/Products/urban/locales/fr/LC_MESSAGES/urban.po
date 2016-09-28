@@ -16,7 +16,7 @@ msgstr ""
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
 msgid "Add a parcel"
-msgstr "Ajouter une parcelle"
+msgstr "Ajouter"
 
 # street_referencedatagridwidget
 msgid "Add a work location"
@@ -1091,7 +1091,7 @@ msgid "manage_parcellings"
 msgstr "Gérer les lotissements"
 
 msgid "manual_parcel"
-msgstr "Ajouter une parcelle à la main"
+msgstr "Ajouter manuellement"
 
 # config folders
 msgid "map_configs_folder_title"
@@ -1374,7 +1374,7 @@ msgid "search-last-elements"
 msgstr "Derniers éléments"
 
 msgid "search_parcels"
-msgstr "Ajouter une parcelle"
+msgstr "Ajouter"
 
 msgid "searchbystreet_result"
 msgstr "Résultat de la recherche"
