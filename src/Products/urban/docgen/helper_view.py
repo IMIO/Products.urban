@@ -102,3 +102,25 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         locations = [parcel.location for parcel in parcels]
         locations.sort()
         return locations
+
+    def getRelatedLicencesOfParcel(self):
+        """
+          Returns the licences related to a parcel
+        """
+        licence = self.real_context.aq_parent
+        parcels = licence.getParcels()
+        relatedLicences = []
+        for parcel in parcels:
+            parcelRecordsView = licence.restrictedTraverse('parcelhistoricrecordsview')
+            parcelRecordsView.parcel_id = parcel.id
+            #relatedLicences += parcelRecordsView.getRelatedLicencesOfParcel()
+            relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
+        return relatedLicences
+
+    def contains_road_equipment(self, road_equipment):
+        roadEquipments = self.context.getRoadEquipments()
+        answer = False
+        for roadEquipment in roadEquipments:
+            if roadEquipment['road_equipment'] == road_equipment:
+                answer = True
+        return answer
