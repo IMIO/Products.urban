@@ -77,3 +77,42 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             else:
                 return "%s %s %s" % (translatedDay, translatedMonth, year)
         return ''
+
+    def query_parcels_in_radius(self, radius='50'):
+        """
+        """
+        parcels = self.context.getOfficialParcels()
+        session = cadastre.new_session()
+        return session.query_parcels_in_radius(parcels, radius)
+
+    def query_parcels_locations_in_radius(self, radius='50'):
+        """
+        """
+        parcels = self.context.getOfficialParcels()
+        session = cadastre.new_session()
+        parcels = session.query_parcels_in_radius(parcels, radius)
+        locations = [parcel.location for parcel in parcels]
+        locations.sort()
+        return locations
+
+    def getRelatedLicencesOfParcel(self):
+        """
+          Returns the licences related to a parcel
+        """
+        licence = self.real_context.aq_parent
+        parcels = licence.getParcels()
+        relatedLicences = []
+        for parcel in parcels:
+            parcelRecordsView = licence.restrictedTraverse('parcelhistoricrecordsview')
+            parcelRecordsView.parcel_id = parcel.id
+            #relatedLicences += parcelRecordsView.getRelatedLicencesOfParcel()
+            relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
+        return relatedLicences
+
+    def contains_road_equipment(self, road_equipment):
+        roadEquipments = self.context.getRoadEquipments()
+        answer = False
+        for roadEquipment in roadEquipments:
+            if roadEquipment['road_equipment'] == road_equipment:
+                answer = True
+        return answer
