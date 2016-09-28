@@ -253,7 +253,7 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
     def _listDivisionNames(self, name='name'):
         urban_tool = getToolByName(self, 'portal_urban')
         divisions = urban_tool.getDivisionsRenaming()
-        return DisplayList([(str(div['division']), unicode(div[name])) for div in divisions])
+        return DisplayList([(str(div['division']), unicode(div[name].decode('utf-8'))) for div in divisions])
 
     security.declarePublic('hasRelatedLicences')
     def hasRelatedLicences(self, licence_type=''):
