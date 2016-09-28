@@ -38,7 +38,7 @@
             <div tal:condition="workLocations">
                 <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" />
             </div>
-            <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
+            <div tal:condition="not: workLocations" class="discreet clear" i18n:translate="content_none">None</div>
 
         </fieldset>
 
