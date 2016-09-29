@@ -116,3 +116,27 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             if roadEquipment['road_equipment'] == road_equipment:
                 answer = True
         return answer
+
+    def getEvent(self, title=''):
+        """
+          Return a specific title's UrbanEvent
+        """
+        i = 0
+        found = False
+        opinionRequestsUrbanEvents = self.context.getUrbanEventOpinionRequests()
+        inquiryUrbanEvents = self.context.getUrbanEventInquiries()
+        urbanEvents = self.context.getUrbanEvents()
+        events = opinionRequestsUrbanEvents + inquiryUrbanEvents + urbanEvents
+        event = None
+        while i < len(events) and not found:
+            if events[i].Title() == title:
+                found = True
+                event = events[i]
+            i = i + 1
+        return event
+
+    def containsEvent(self, title=''):
+        """
+          find a specific title's UrbanEvent
+        """
+        return self.getEvent(title) != None
