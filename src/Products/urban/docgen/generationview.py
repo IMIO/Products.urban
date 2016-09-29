@@ -49,6 +49,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         proprietaryobj = proprietaries and proprietaries[0] or None
 
         generation_context = {
+            'this': licence,
             'self': licence_helper_view.context,
             'urbanEventObj': self.context,
             'applicantobj': applicantobj,
