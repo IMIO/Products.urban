@@ -94,8 +94,16 @@ class export_licences(UrbanExportMethod):
                 licence_record['reference'] = licence.getReference()
                 licence_record['subject'] = licence.getLicenceSubject()
                 licence_record['state'] = api.content.get_state(licence)
+                licence_record['addresses'] = []
+                for addr in licence.getWorkLocations():
+                    street_brains = catalog(UID=addr['street'])[0].Title
+                    if len(street_brains) != 1:
+                        continue
+                    street_name = street_brains[0].Title
+                    licence_record['addresses'].append({'street': street_name, 'number': addr['number']})
                 licence_record['capakeys'] = [l.get_capakey() for l in licence.getOfficialParcels()]
                 licence_record['applicants'] = self._applicant_records(licence)
+                licence_record['creation_date'] = str(licence.creation_date)
                 decision_event = hasattr(licence, 'getLastTheLicence') and licence.getLastTheLicence() or None
                 if decision_event:
                     licence_record['decision_date'] = str(decision_event.getDecisionDate())
