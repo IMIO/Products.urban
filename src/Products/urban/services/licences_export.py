@@ -96,7 +96,7 @@ class export_licences(UrbanExportMethod):
                 licence_record['state'] = api.content.get_state(licence)
                 licence_record['addresses'] = []
                 for addr in licence.getWorkLocations():
-                    street_brains = catalog(UID=addr['street'])[0].Title
+                    street_brains = catalog(UID=addr['street'])
                     if len(street_brains) != 1:
                         continue
                     street_name = street_brains[0].Title
