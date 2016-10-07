@@ -49,11 +49,6 @@
 </metal:location>
 
 
-<metal:inquiry define-macro="investigation_and_advices_macro" i18n:domain="urban">
-    <div metal:use-macro="here/@@licencetabs-macros/investigation_and_advices_macro" />
-</metal:inquiry>
-
-
 <metal:advices define-macro="advices_macro" i18n:domain="urban">
     <metal:parent_call use-macro="here/@@licencetabs-macros/advices_macro" />
 </metal:advices>
