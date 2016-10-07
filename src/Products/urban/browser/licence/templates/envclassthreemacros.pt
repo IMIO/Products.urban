@@ -33,25 +33,10 @@
     <metal:parent_call use-macro="here/@@licencetabs-macros/road_macro" />
 </metal:road>
 
-
 <metal:location define-macro="location_macro" i18n:domain="urban">
     <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro" />
 </metal:location>
 
-
-<metal:inquiry define-macro="investigation_and_advices_macro" i18n:domain="urban">
-    <div metal:use-macro="here/@@licencetabs-macros/investigation_and_advices_macro">
-        <metal:no_add_inquiry_form fill-slot="custom_add_inquiry">
-        </metal:no_add_inquiry_form>
-    </div>
-</metal:inquiry>
-
-
 <metal:advices define-macro="advices_macro" i18n:domain="urban">
     <metal:parent_call use-macro="here/@@licencetabs-macros/advices_macro" />
 </metal:advices>
-
-
-<metal:inquiry define-macro="inquiry_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/inquiry_macro" />
-</metal:inquiry>
