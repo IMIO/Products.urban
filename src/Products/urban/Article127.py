@@ -52,11 +52,6 @@ class Article127(BaseFolder, BuildLicence, BrowserDefaultMixin):
 
     schema = Article127_schema
 
-    ##code-section class-header #fill in your manual code here
-    schemata_order = ['urban_description', 'urban_road', 'urban_location',\
-                      'urban_investigation_and_advices', 'urban_peb']
-    ##/code-section class-header
-
     # Methods
 
 
