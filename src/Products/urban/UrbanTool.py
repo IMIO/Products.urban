@@ -250,6 +250,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             {
                 'Products.urban.interfaces.IInquiryEvent': 'UrbanEventInquiry',
                 'Products.urban.interfaces.ICollegeEvent': 'UrbanEventCollege',
+                'Products.urban.interfaces.ITheLicenceEvent': 'UrbanEventCollege',
                 'Products.urban.interfaces.IOpinionRequestEvent': 'UrbanEventOpinionRequest',
             }
         )
