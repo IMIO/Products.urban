@@ -14,9 +14,8 @@
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
-   <element value="Equipment"/>
    <element value="Applicant"/>
-   <element value="Lot"/>
+   <element value="Corporation"/>
    <element value="PortionOut"/>
    <element value="UrbanEvent"/>
    <element value="UrbanEventInquiry"/>
@@ -24,6 +23,7 @@
    <element value="UrbanEventCollege"/>
    <element value="Inquiry"/>
    <element value="File"/>
+   <element value="Task"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">parceloutlicenceview</property>
