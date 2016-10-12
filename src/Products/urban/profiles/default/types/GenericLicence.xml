@@ -17,6 +17,7 @@
    <element value="UrbanEvent"/>
    <element value="File"/>
    <element value="PortionOut"/>
+   <element value="task"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">folder_listing</property>

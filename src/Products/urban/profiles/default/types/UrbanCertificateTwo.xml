@@ -22,6 +22,7 @@
    <element value="Proprietary"/>
    <element value="Applicant"/>
    <element value="File"/>
+   <element value="task"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">urbancertificatetwoview</property>
