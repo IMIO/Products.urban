@@ -156,7 +156,7 @@ ADDITIONAL_LAYERS_FOLDER = "additional_layers"
 URBAN_TYPES = [
     'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'UrbanCertificateOne',
     'UrbanCertificateTwo', 'MiscDemand', 'PreliminaryNotice', 'PatrimonyCertificate',
-    # 'NotaryLetter', 'Division', 'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
+    'NotaryLetter', 'Division', 'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
 ]
 
 # all types that can be used as a licence applicant
