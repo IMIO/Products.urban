@@ -275,7 +275,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'habitation': 'Logement',
             'peb': 'PEB',
         }
-        minimum_tabs_config = ['description', 'location', 'road']
+        minimum_tabs_config = ['description', 'analysis', 'location', 'road']
         inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road']
         full_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'peb']
         buildlicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation', 'peb']

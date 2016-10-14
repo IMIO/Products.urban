@@ -238,7 +238,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IPreliminaryNotice"
+     for="Products.urban.interfaces.IMiscDemand"
      name="preliminarynoticeview"
      class=".preliminarynoticeview.PreliminaryNoticeView"
      template="templates/preliminarynoticeview.pt"
@@ -247,13 +247,13 @@
 
   <browser:page
      name="preliminarynotice-macros"
-     for="Products.urban.interfaces.IPreliminaryNotice"
+     for="Products.urban.interfaces.IMiscDemand"
      template="templates/preliminarynoticemacros.pt"
      permission="zope2.View"
   />
 
   <browser:page
-     for="Products.urban.interfaces.IPatrimonyCertificate"
+     for="Products.urban.interfaces.IMiscDemand"
      name="patrimonycertificateview"
      class=".patrimonycertificateview.PatrimonyCertificateView"
      template="templates/patrimonycertificateview.pt"
@@ -262,7 +262,7 @@
 
   <browser:page
      name="patrimonycertificate-macros"
-     for="Products.urban.interfaces.IPatrimonyCertificate"
+     for="Products.urban.interfaces.IMiscDemand"
      template="templates/patrimonycertificatemacros.pt"
      permission="zope2.View"
   />
