@@ -70,7 +70,13 @@ schema = Schema((
     DataGridField(
         name='specificFeatures',
         widget=DataGridWidget(
-            columns= {'id': FormFocusColumn('id'), 'check': CheckboxColumn('Select'), 'value': FixedColumn('Value'), 'text': TextAreaColumn('Text', rows=1, cols=50)},
+            columns= {
+                'id': FormFocusColumn('id'),
+                'check': CheckboxColumn('Select'),
+                'value': FixedColumn('Value'),
+                'text': TextAreaColumn('Text', rows=1, cols=50),
+                'defaultText': TextAreaColumn('Default Text', rows=1, cols=50),
+            },
             label='Specificfeatures',
             label_msgid='urban_label_specificFeatures',
             i18n_domain='urban',
@@ -81,7 +87,7 @@ schema = Schema((
         allow_oddeven= True,
         allow_delete= False,
         schemata='urban_description',
-        columns= ('id', 'check', 'value', 'text',),
+        columns= ('id', 'check', 'value', 'text', 'defaultText',),
     ),
     DataGridField(
         name='roadSpecificFeatures',
@@ -362,6 +368,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
                 'id': vocterm.id,
                 'value': value,
                 'text': vocterm.Description(),
+                'defaultText': vocterm.DefaultText(),
             }
             row = FixedRow(keyColumn='id', initialData=row_data)
             rows.append(row)
