@@ -29,6 +29,19 @@ from zope.i18n import translate
 
 schema = Schema((
 
+    TextField(
+        name='defaultText',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            description="""this is the default text used if the related specific feature's row is not checked.""",
+            label='DefaultText',
+            label_msgid='urban_label_defaultText',
+            description_msgid='urban_help_defaultText',
+            i18n_domain='urban',
+        ),
+        default_output_type='text/html',
+        accessor="DefaultText",
+    ),
     LinesField(
         name='relatedFields',
         widget=InAndOutWidget(
