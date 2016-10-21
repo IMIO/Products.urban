@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from Acquisition import aq_inner
 from collective.documentgenerator.helper.archetypes import ATDocumentGenerationHelperView
 from datetime import date as _date
+from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.i18nl10n import ulocalized_time
+from Products.urban.interfaces import IGenericLicence
 from zope.i18n import translate
 from plone import api
 
@@ -104,9 +107,8 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         relatedLicences = []
         for parcel in parcels:
             parcelRecordsView = licence.restrictedTraverse('parcelhistoricrecordsview')
-            parcelRecordsView.parcel_id = parcel.id
-            #relatedLicences += parcelRecordsView.getRelatedLicencesOfParcel()
-            relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
+            setattr(parcelRecordsView, parcel.id)
+            relatedLicences += parcelRecordsView.getRelatedLicencesOfParcel()
         return relatedLicences
 
     def contains_road_equipment(self, road_equipment):
@@ -119,7 +121,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
 
     def getEvent(self, title=''):
         """
-          Return a specific title's UrbanEvent
+        Return a specific title's UrbanEvent
         """
         i = 0
         found = False
@@ -137,6 +139,22 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
 
     def containsEvent(self, title=''):
         """
-          find a specific title's UrbanEvent
+        find a specific title's UrbanEvent
         """
         return self.getEvent(title) != None
+
+    def get_specific_features_text(self):
+        """
+        # Particularité(s) du bien
+        """
+        licence = self.real_context.aq_parent
+        specificFeatures = licence.getSpecificFeatures()
+        specific_features_text = []
+        for specificFeature in specificFeatures:
+            if specificFeature['check']:
+                if specificFeature['text']:
+                    specific_features_text.append(specificFeature['text'])
+            else:
+                if specificFeature['defaultText']:
+                    specific_features_text.append(specificFeature['defaultText'])
+        return specific_features_text
