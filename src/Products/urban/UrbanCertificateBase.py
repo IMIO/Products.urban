@@ -75,7 +75,7 @@ schema = Schema((
                 'check': CheckboxColumn('Select'),
                 'value': FixedColumn('Value'),
                 'text': TextAreaColumn('Text', rows=1, cols=50),
-                'defaultText': TextAreaColumn('Default Text', rows=1, cols=50),
+                'defaultText': TextAreaColumn('Texte par défaut', rows=1, cols=50),
             },
             label='Specificfeatures',
             label_msgid='urban_label_specificFeatures',
