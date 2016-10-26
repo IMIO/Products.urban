@@ -13,12 +13,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
     Urban implementation of document generation helper methods.
     """
 
-    def containsEvent(self, title=''):
-        """
-          find a specific title's UrbanEvent
-        """
-        return self.getEvent(title) != None
-
     def contains_road_equipment(self, road_equipment):
         roadEquipments = self.context.getRoadEquipments()
         answer = False
@@ -26,6 +20,12 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             if roadEquipment['road_equipment'] == road_equipment:
                 answer = True
         return answer
+
+    def containsEvent(self, title=''):
+        """
+          find a specific title's UrbanEvent
+        """
+        return self.getEvent(title) != None
 
     def format_date(self, date=_date.today(), translatemonth=True, long_format=False):
         """
@@ -67,38 +67,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             else:
                 return "%s %s %s" % (translatedDay, translatedMonth, year)
         return ''
-
-    def getEvent(self, title=''):
-        """
-          Return a specific title's UrbanEvent
-        """
-        i = 0
-        found = False
-        opinionRequestsUrbanEvents = self.context.getUrbanEventOpinionRequests()
-        inquiryUrbanEvents = self.context.getUrbanEventInquiries()
-        urbanEvents = self.context.getUrbanEvents()
-        events = opinionRequestsUrbanEvents + inquiryUrbanEvents + urbanEvents
-        event = None
-        while i < len(events) and not found:
-            if events[i].Title() == title:
-                found = True
-                event = events[i]
-            i = i + 1
-        return event
-
-    def get_related_licences_of_parcel(self):
-        """
-          Returns the licences related to a parcel
-        """
-        licence = self.real_context.aq_parent
-        parcels = licence.getParcels()
-        relatedLicences = []
-        for parcel in parcels:
-            parcelRecordsView = licence.restrictedTraverse('parcelhistoricrecordsview')
-            parcelRecordsView.parcel_id = parcel.id
-            #relatedLicences += parcelRecordsView.getRelatedLicencesOfParcel()
-            relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
-        return relatedLicences
 
     def get_applicant_dict(self, index):
         applicants = self.get_applicants()
@@ -169,6 +137,13 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         applicants = [app for app in licence.objectValues('Applicant') if app.portal_type == 'Applicant']
         return applicants
 
+    def get_applicants_list_dict(self):
+        applicants = self.get_applicants()
+        applicants_list_dict = []
+        for i in range(len(applicants)):
+            applicants_list_dict.append(self.get_applicant_dict(i))
+        return applicants_list_dict
+
     def get_applicants_names(self, separator=', ', reversed_name=True):
         applicants = self.get_applicants_list_dict()
         applicants_names = ""
@@ -194,13 +169,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                         resident
                 )
         return applicants_names_and_adress
-
-    def get_applicants_list_dict(self):
-        applicants = self.get_applicants()
-        applicants_list_dict = []
-        for i in range(len(applicants)):
-            applicants_list_dict.append(self.get_applicant_dict(i))
-        return applicants_list_dict
 
     def get_checked_specific_features_id_list(self):
         """
@@ -413,6 +381,20 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                     proprietary['city']
         return proprietary_names_and_adress
 
+    def get_related_licences_of_parcel(self):
+        """
+          Returns the licences related to a parcel
+        """
+        licence = self.real_context.aq_parent
+        parcels = licence.getParcels()
+        relatedLicences = []
+        for parcel in parcels:
+            parcelRecordsView = licence.restrictedTraverse('parcelhistoricrecordsview')
+            parcelRecordsView.parcel_id = parcel.id
+            #relatedLicences += parcelRecordsView.getRelatedLicencesOfParcel()
+            relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
+        return relatedLicences
+
     def get_street_dict(self, uid):
         street_dict = {
                 'bestAddressKey': '',
@@ -487,6 +469,24 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         for workLocation in workLocations[1:]:
             workLocation_signaletic += separator + self.get_work_location_signaletic(workLocation)
         return workLocation_signaletic
+
+    def getEvent(self, title=''):
+        """
+          Return a specific title's UrbanEvent
+        """
+        i = 0
+        found = False
+        opinionRequestsUrbanEvents = self.context.getUrbanEventOpinionRequests()
+        inquiryUrbanEvents = self.context.getUrbanEventInquiries()
+        urbanEvents = self.context.getUrbanEvents()
+        events = opinionRequestsUrbanEvents + inquiryUrbanEvents + urbanEvents
+        event = None
+        while i < len(events) and not found:
+            if events[i].Title() == title:
+                found = True
+                event = events[i]
+            i = i + 1
+        return event
 
     def query_parcels_in_radius(self, radius='50'):
         """
