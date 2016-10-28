@@ -225,23 +225,16 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         pca = licence.getField('pca').get(licence)
         urbanConfig = licence.getLicenceConfig()
         pca_config = urbanConfig.pcas
-        pcaTerm = getattr(pca_config, pca, '')
-        pca_dict = {
-                'title': '',
-                'label': '',
-                'number': '',
-                'decreeDate': '',
-                'decreeType': '',
-                'changes': '',
-                'comment': ''
-        }
-        pca_dict['title'] = pcaTerm.getTitle()
-        pca_dict['label'] = pcaTerm.getLabel()
-        pca_dict['number'] = pcaTerm.getNumber()
-        pca_dict['decreeDate'] = pcaTerm.getDecreeDate()
-        pca_dict['decreeType'] = pcaTerm.getDecreeDate()
-        pca_dict['changes'] = pcaTerm.getChanges()
-        pca_dict['comment'] = pcaTerm.getComment()
+        pca_dict = {}
+        if type(pca) == str:
+            pcaTerm = getattr(pca_config, pca, '')
+            pca_dict['title'] = pcaTerm.getTitle()
+            pca_dict['label'] = pcaTerm.getLabel()
+            pca_dict['number'] = pcaTerm.getNumber()
+            pca_dict['decreeDate'] = pcaTerm.getDecreeDate()
+            pca_dict['decreeType'] = pcaTerm.getDecreeDate()
+            pca_dict['changes'] = pcaTerm.getChanges()
+            pca_dict['comment'] = pcaTerm.getComment()
         return pca_dict
 
     def get_portion_outs_text(self, linebyline=False):
