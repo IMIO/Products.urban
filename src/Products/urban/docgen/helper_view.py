@@ -225,7 +225,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         pca = licence.getField('pca').get(licence)
         urbanConfig = licence.getLicenceConfig()
         pca_config = urbanConfig.pcas
-        pcaTerm = getattr(pca_config, pca)
+        pcaTerm = getattr(pca_config, pca, '')
         pca_dict = {
                 'title': '',
                 'label': '',
