@@ -41,6 +41,7 @@ schema = Schema((
             label_msgid='urban_label_investigationStart',
             i18n_domain='urban',
         ),
+        optional=True,
     ),
     DateTimeField(
         name='investigationEnd',
@@ -51,6 +52,7 @@ schema = Schema((
             label_msgid='urban_label_investigationEnd',
             i18n_domain='urban',
         ),
+        optional=True,
     ),
     DateTimeField(
         name='explanationStartSDate',
