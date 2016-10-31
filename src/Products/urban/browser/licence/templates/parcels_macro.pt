@@ -1,0 +1,15 @@
+<div metal:define-macro="parcels_macro" i18n:domain="urban">
+    <fieldset>
+        <legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
+        <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
+        <div id="urban-coring" class="parcel-action"
+             tal:condition="context/getOfficialParcels">
+            <a class="coring link-overlay"
+               tal:attributes="href python:context.absolute_url() + '/@@parcelcoring'">
+                <button class="context apButton">
+                    <img src="coring.png"/>
+                </button>
+            </a>
+        </div>
+    </fieldset>
+</div>

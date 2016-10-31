@@ -58,6 +58,20 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="worklocation-macro"
+     template="templates/worklocation_macro.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="parcels-macro"
+     template="templates/parcels_macro.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IBuildLicence"
      name="buildlicenceview"
      class=".buildlicenceview.BuildLicenceView"

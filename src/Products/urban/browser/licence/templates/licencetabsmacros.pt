@@ -32,14 +32,8 @@
 <div metal:define-macro="description_macro" i18n:domain="urban">
     <div class="licence-column" style="max-width: 58%">
 
-        <fieldset metal:define-slot="worklocations"
-                  tal:define="workLocations context/getWorkLocations">
-            <legend i18n:translate="urban_label_workLocations">Work locations</legend>
-            <div tal:condition="workLocations">
-                <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" />
-            </div>
-            <div tal:condition="not: workLocations" class="discreet clear" i18n:translate="content_none">None</div>
-
+        <fieldset metal:define-slot="worklocations">
+            <metal:worklocation use-macro="here/@@worklocation-macro/worklocations_macro" />
         </fieldset>
 
         <fieldset>
@@ -124,19 +118,9 @@
         <metal:representatives define-slot="representatives">
         </metal:representatives>
 
-        <fieldset metal:define-slot="parcels">
-            <legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
-            <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
-            <div id="urban-coring" class="parcel-action"
-                 tal:condition="context/getOfficialParcels">
-                <a class="coring link-overlay"
-                   tal:attributes="href python:context.absolute_url() + '/@@parcelcoring'">
-                    <button class="context apButton">
-                        <img src="coring.png"/>
-                    </button>
-                </a>
-            </div>
-        </fieldset>
+        <metal:parcels define-slot="parcels">
+            <metal:applicants_macro use-macro="here/@@parcels-macro/parcels_macro" />
+        </metal:parcels>
     </div>
 </div>
 
