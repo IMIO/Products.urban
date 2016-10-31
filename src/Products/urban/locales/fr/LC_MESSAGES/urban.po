@@ -1058,10 +1058,10 @@ msgid "locality_for_worklocation"
 msgstr "au lieu-dit"
 
 msgid "location_fdrequirement_decision"
-msgstr "Décision"
+msgstr "Avis conforme"
 
 msgid "location_fdrequirement_opinion"
-msgstr "Avis"
+msgstr "Avis simple"
 
 msgid "location_inside"
 msgstr "à l'intérieur"
