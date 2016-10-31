@@ -24,12 +24,10 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForInquiry
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
-optional_fields = ['architects',]
+optional_fields = ['architects']
 ##/code-section module-header
 
 schema = Schema((
@@ -72,6 +70,7 @@ MiscDemand_schema = BaseFolderSchema.copy() + \
 setSchemataForInquiry(MiscDemand_schema)
 ##/code-section after-schema
 
+
 class MiscDemand(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     """
     """
@@ -89,9 +88,22 @@ class MiscDemand(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
 
     # Methods
 
-    # Manually created methods
+    security.declarePublic('getApplicants')
+
+    def getApplicants(self):
+        """
+        """
+        applicants = self.getCorporations() or super(MiscDemand, self).getApplicants()
+        return applicants
+
+    security.declarePublic('getCorporations')
+
+    def getCorporations(self):
+        corporations = [corp for corp in self.objectValues('Corporation')]
+        return corporations
 
     security.declarePublic('getRepresentatives')
+
     def getRepresentatives(self):
         """
         """
@@ -107,9 +119,9 @@ class MiscDemand(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         return self._getLastEvent(interfaces.ITheLicenceEvent, use_catalog)
 
 
-
 registerType(MiscDemand, PROJECTNAME)
 # end of class MiscDemand
+
 
 ##code-section module-footer #fill in your manual code here
 def finalizeSchema(schema, folderish=False, moveDiscussion=True):
@@ -121,4 +133,3 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
 
 finalizeSchema(MiscDemand_schema)
 ##/code-section module-footer
-
