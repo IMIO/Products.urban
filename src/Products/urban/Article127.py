@@ -54,6 +54,14 @@ class Article127(BaseFolder, BuildLicence, BrowserDefaultMixin):
 
     # Methods
 
+    def listProcedureChoices(self):
+        vocab = (
+            ('ukn', 'Non determiné'),
+            ('opinions', 'Sollicitation d\'avis (instance ou service interne/externe)'),
+            ('inquiry', 'Instruction d\'une enquête publique'),
+        )
+        return DisplayList(vocab)
+
 
 registerType(Article127, PROJECTNAME)
 # end of class Article127

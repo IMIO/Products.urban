@@ -40,7 +40,7 @@ optional_fields = [
     'townshipCouncilFolder', 'roadMiscDescription', 'procedureChoice', 'water', 'electricity',
     'shouldNumerotateBuildings', 'habitationsAfterLicence', 'habitationsBeforeLicence',
     'additionalHabitationsAsked', 'additionalHabitationsGiven', 'mayNeedLocationLicence',
-    'impactStudy', 'showExemptFDArticle'
+    'impactStudy', 'exemptFDArticle'
 ]
 
 slave_fields_habitation = (
