@@ -491,12 +491,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_analysis',
-        vocabulary=DisplayList((
-            ('', 'Non déterminée'),
-            ('285', 'Art. 285 - complet avec architecte'),
-            ('288', 'Art. 288 - simplifié avec architecte'),
-            ('291', 'Art. 291 - simplifié sans architecte'),
-        )),
+        vocabulary='listCompositions',
     ),
 ),
 )
@@ -656,13 +651,22 @@ class BuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
             return tool.formatDate(lastTheLicenceDecisionDate.asdatetime() + relativedelta(years=+3))
 
     def listProcedureChoices(self):
-        vocab = (
+        vocabulary = (
             ('ukn', 'Non determiné'),
             ('opinions', 'Sollicitation d\'avis (instance ou service interne/externe)'),
             ('inquiry', 'Instruction d\'une enquête publique'),
             ('FD', 'Sollicitation du fonctionnaire délégué'),
         )
-        return DisplayList(vocab)
+        return DisplayList(vocabulary)
+
+    def listCompositions(self):
+        vocabulary = (
+            ('', 'Non déterminée'),
+            ('285', 'Art. 285 - complet avec architecte'),
+            ('288', 'Art. 288 - simplifié avec architecte'),
+            ('291', 'Art. 291 - simplifié sans architecte'),
+        )
+        return DisplayList(vocabulary)
 
     def getProcedureDelays(self, *values):
         selection = [v['val'] for v in values if v['selected']]
