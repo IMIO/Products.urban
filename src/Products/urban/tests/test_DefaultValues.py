@@ -144,7 +144,7 @@ class TestEventDefaultValues(unittest.TestCase):
         #text field 'decisionText' should be empty by default
         event = self.licence.createUrbanEvent('rapport-du-college')
         decision_text = event.getDecisionText()
-        self.failUnless(decision_text == '')
+        self.failUnless(decision_text == '<p></p>')
 
     def testTextValueConfigured(self):
         eventtypes = self.portal_urban.buildlicence.urbaneventtypes
@@ -161,7 +161,7 @@ class TestEventDefaultValues(unittest.TestCase):
         eventtypes = self.portal_urban.buildlicence.urbaneventtypes
         event_type = getattr(eventtypes, 'rapport-du-college')
         # set a a default text for the field 'decsionText'
-        default_text = '<p>Kill [[python: self.Title()]] and [[python: object.getId()]] </p>'
+        default_text = '<p>Kill <b tal:replace="self/Title"></b> and <b tal:replace="event/getId"></b> </p>'
         event_type.setTextDefaultValues([{'text': default_text, 'fieldname': 'decisionText'}])
         # the created event should have this text in its field 'decisionText'
         event = self.licence.createUrbanEvent(event_type)

@@ -128,9 +128,9 @@ class TestContact(unittest.TestCase):
         self.assertEquals(agent.getSignaletic(linebyline=True),
                           u'<p>Maître Robiné Hood</p>'.encode('utf8'))
         self.assertEquals(agent.getSignaletic(withaddress=True),
-                          u'Maître Robiné Hood domicilié à 1, Sherwood'.encode('utf8'))
+                          u'Maître Robiné Hood, domicilié 1 Sherwood'.encode('utf8'))
         self.assertEquals(agent.getSignaletic(withaddress=True, linebyline=True),
-                          u'<p>Maître Robiné Hood<br />1, <br /> Sherwood</p>'.encode('utf8'))
+                          u'<p>Maître Robiné Hood<br />, 1<br /> Sherwood</p>'.encode('utf8'))
 
     def test_name2GetSignaletic(self):
         login(self.portal, TEST_USER_NAME)
@@ -146,9 +146,9 @@ class TestContact(unittest.TestCase):
         self.assertEquals(agent.getSignaletic(linebyline=True),
                           u'<p>Maître Robin Hoodé</p>'.encode('utf8'))
         self.assertEquals(agent.getSignaletic(withaddress=True),
-                          u'Maître Robin Hoodé domicilié à 1, Sherwood'.encode('utf8'))
+                          u'Maître Robin Hoodé, domicilié 1 Sherwood'.encode('utf8'))
         self.assertEquals(agent.getSignaletic(withaddress=True, linebyline=True),
-                          u'<p>Maître Robin Hoodé<br />1, <br /> Sherwood</p>'.encode('utf8'))
+                          u'<p>Maître Robin Hoodé<br />, 1<br /> Sherwood</p>'.encode('utf8'))
 
     def test_personTitleGetSignaletic(self):
         login(self.portal, TEST_USER_NAME)
@@ -164,9 +164,9 @@ class TestContact(unittest.TestCase):
         self.assertEquals(agent.getSignaletic(linebyline=True),
                           u'<p>Maître Robin Hood</p>'.encode('utf8'))
         self.assertEquals(agent.getSignaletic(withaddress=True),
-                          u'Maître Robin Hood domicilié à 1, Sherwood'.encode('utf8'))
+                          u'Maître Robin Hood, domicilié 1 Sherwood'.encode('utf8'))
         self.assertEquals(agent.getSignaletic(withaddress=True, linebyline=True),
-                          u'<p>Maître Robin Hood<br />1, <br /> Sherwood</p>'.encode('utf8'))
+                          u'<p>Maître Robin Hood<br />, 1<br /> Sherwood</p>'.encode('utf8'))
 
     def test_cityGetSignaletic(self):
         login(self.portal, TEST_USER_NAME)
@@ -182,9 +182,9 @@ class TestContact(unittest.TestCase):
         self.assertEquals(agent.getSignaletic(linebyline=True),
                           u'<p>Maître Robin Hood</p>'.encode('utf8'))
         self.assertEquals(agent.getSignaletic(withaddress=True),
-                          u'Maître Robin Hood domicilié à 1, Sherwoodé'.encode('utf8'))
+                          u'Maître Robin Hood, domicilié 1 Sherwoodé'.encode('utf8'))
         self.assertEquals(agent.getSignaletic(withaddress=True, linebyline=True),
-                          u'<p>Maître Robin Hood<br />1, <br /> Sherwoodé</p>'.encode('utf8'))
+                          u'<p>Maître Robin Hood<br />, 1<br /> Sherwoodé</p>'.encode('utf8'))
 
     def test_getApplicantsSignaletic(self):
         login(self.portal, TEST_USER_NAME)
@@ -200,5 +200,5 @@ class TestContact(unittest.TestCase):
         buildLicence.REQUEST.set('HTTP_ACCEPT_LANGUAGE', 'fr')
         self.assertEquals(buildLicence.getApplicantsSignaletic(), u'Maître Robiné Hoodé'.encode('utf8'))
         self.assertEquals(buildLicence.getApplicantsSignaletic(withaddress=True),
-                          u'Maître Robiné Hoodé domicilié à 1, Sherwoodé'.encode('utf8'))
+                          u'Maître Robiné Hoodé, domicilié 1 Sherwoodé'.encode('utf8'))
         api.content.delete(buildLicence)

@@ -256,9 +256,10 @@ class Contact(BaseContent, BrowserDefaultMixin):
             if not linebyline:
                 mapping = dict(name=nameSignaletic.decode('utf8'),
                                address=addressSignaletic.decode('utf8'))
-                result = "{} {}".format(
-                        nameSignaletic.decode('utf8'),
-                        addressSignaletic).decode('utf8')
+                result = u"{} {}".format(
+                    nameSignaletic.decode('utf8'),
+                    addressSignaletic.decode('utf8')
+                )
                 if self.portal_type != 'Corporation':
                     if self.isMasculineSingular():
                         result = translate(
