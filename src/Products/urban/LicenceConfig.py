@@ -276,6 +276,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'peb': 'PEB',
         }
         minimum_tabs_config = ['description', 'analysis', 'location', 'road']
+        advice_tabs_config = ['description', 'advices', 'analysis', 'location', 'road']
         inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road']
         full_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'peb']
         buildlicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation', 'peb']
@@ -285,7 +286,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'article127': full_tabs_config,
             'parceloutlicence': inquiry_tabs_config,
             'urbancertificatetwo': inquiry_tabs_config,
-            'envclassthree': inquiry_tabs_config,
+            'envclassthree': advice_tabs_config,
             'envclassone': inquiry_tabs_config,
             'envclasstwo': inquiry_tabs_config,
         }

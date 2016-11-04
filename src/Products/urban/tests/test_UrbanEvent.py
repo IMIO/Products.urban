@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from DateTime import DateTime
-
 from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
@@ -142,7 +140,6 @@ class TestUrbanEventInquiryView(BrowserTestCase):
         testlicence_id = 'test_{}'.format(portal_type.lower())
         licence_folder.invokeFactory(portal_type, id=testlicence_id)
         licence = getattr(licence_folder, testlicence_id)
-        licence.setInvestigationStart(DateTime())
 
         # create a test UrbanEventInquiry in test_licence
         inquiry = licence.objectValues('UrbanEventInquiry')
