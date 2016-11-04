@@ -1956,13 +1956,11 @@ msgstr "Merci de renseigner le numéro complet de la parcelle recherchée"
 
 #. Default: "concentratedrunoffsrisk"
 #: GenericLicence.py
-#, fuzzy
 msgid "urban_label_concentratedRunoffSRisk"
 msgstr "Risque de ruissellement concentré"
 
 #. Default: "concentratedrunoffsriskdetails"
 #: GenericLicence.py
-#, fuzzy
 msgid "urban_label_concentratedRunoffSRiskDetails"
 msgstr "Détails concerant le risque de ruissellement concentré"
 
