@@ -389,12 +389,6 @@ class TestCorporationFields(SchemaFieldsTestCase):
     def test_corporation_bceNumber_is_visible_in_edit(self):
         self._is_field_visible_in_edit("N° BCE", obj=self.corporation)
 
-    def test_corporation_personTitle_is_hidden(self):
-        self._is_field_hidden("Titre", obj=self.corporation)
-
-    def test_corporation_personTitle_is_hidden_in_edit(self):
-        self._is_field_hidden_in_edit("Tritre", obj=self.corporation)
-
     def test_corporation_representedBy_is_hidden(self):
         self._is_field_hidden("Représenté par", obj=self.corporation)
 

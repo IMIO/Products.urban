@@ -223,20 +223,6 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         urban_tool = getToolByName(self, 'portal_urban')
         return urban_tool.getTextDefaultValue(field.getName(), context, html=html)
 
-    security.declarePublic('validate_investigationStart')
-    def validate_investigationStart(self, value):
-        """
-          Validate the investigationStart field
-          If we have an existing UrbanEventInquiry in self
-          we must define an investigationStart date
-        """
-        #if we have a linked UrbanEventInquiry, we must set a correct investigation start date
-        linkedUrbanEventInquiry = self.getLinkedUrbanEventInquiry()
-        if linkedUrbanEventInquiry and value is None:
-            return translate("genericlicence_investigationstart_valdiation_error", mapping={'linkedurbaneventurl': linkedUrbanEventInquiry.absolute_url()}, default="You must define a investigation start date because an UrbanEventInquiry exist.  If you want to remove the inquiry, please delete the linked UrbanEventInquiry first !")
-        else:
-            return
-
     security.declarePrivate('manage_beforeDelete')
     def manage_beforeDelete(self, item, container):
         """

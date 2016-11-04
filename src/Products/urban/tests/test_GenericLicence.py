@@ -103,7 +103,7 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_folderCategory_is_visible(self):
         for licence in self.licences:
             msg = "field 'folderCategory' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Catégorie du dossier RW</span>:", licence, msg)
+            self._is_field_visible("<span>Type de dossier</span>:", licence, msg)
 
     def test_has_attribute_missingParts(self):
         field_name = 'missingParts'

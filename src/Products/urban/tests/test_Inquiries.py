@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from DateTime import DateTime
 from OFS.ObjectManager import BeforeDeleteException
 
 from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
@@ -27,10 +26,6 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
         self.licence = getattr(buildlicence_folder, testlicence_id)
 
-        # set the inquiry start date
-        start_date = DateTime()
-        self.licence.setInvestigationStart(start_date)
-
         # create un inquiry event
         createObject('UrbanEventInquiry', 'enquete-publique', self.licence)
         transaction.commit()
@@ -54,15 +49,9 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         """
         licence = self.licence
         # by default, an inquiry is already defined defined on the licence
-        self.assertEqual(licence.getInquiries(), [licence, ])
+        self.assertEqual(licence.getInquiries(), [])
         # we can add extra inquiries by adding "Inquiry" objects
         inquiry = self._addInquiry()
-        self.assertEqual(licence.getInquiries(), [licence, inquiry])
-        # special case, if we remove the defined investigationStart
-        # date on the licence
-        #this is still considered as an Inquiry because an extra Inquiry exists
-        startDate = None
-        licence.setInvestigationStart(startDate)
         self.assertEqual(licence.getInquiries(), [licence, inquiry])
 
     def testGenericLicenceGetUrbanEventInquiries(self):
@@ -115,9 +104,6 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         #delete default inquiry event
         oldinquiry_id = licence.objectValues('UrbanEventInquiry')[0].id
         licence.manage_delObjects(oldinquiry_id)
-        #define an inquiry on the licence so we can add an UrbanEventInquiry
-        startDate = DateTime('01/01/2011')
-        licence.setInvestigationStart(startDate)
         #the buildLicence is finally the 'inquiry1'
         inquiry1 = licence
         #maybe no UrbanEventInquiry is linked
@@ -132,40 +118,6 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         self.assertEquals(inquiry2.getLinkedUrbanEventInquiry(), urbanEventInquiry2)
         #and test that getting the first linked inqury still works
         self.assertEquals(inquiry1.getLinkedUrbanEventInquiry(), urbanEventInquiry1)
-
-    def testCanNotDeleteFirstInquiryIfLinkedToUrbanEventInquiryValidator(self):
-        """
-          We can not remove an existing Inquiry if it is linked to an
-          UrbanEventInquiry
-          This is done in the user interface by the investigationStart
-          validator
-        """
-        licence = self.licence
-        #delete default inquiry event
-        oldinquiry_id = licence.objectValues('UrbanEventInquiry')[0].id
-        licence.manage_delObjects(oldinquiry_id)
-        # set startDate is None
-        startDate = None
-        licence.setInvestigationStart(startDate)
-        # no message is returned by the validator if no UrbanEventInquiry is
-        # defined
-        #no matter what is passed to the validator : None here...
-        self.assertEquals(licence.validate_investigationStart(startDate), None)
-        startDate = DateTime('01/01/2011')
-        #... or a date here
-        licence.setInvestigationStart(startDate)
-        self.assertEquals(licence.validate_investigationStart(startDate), None)
-        #add an UrbanEventInquiry
-        createObject('UrbanEventInquiry', 'enquete-publique', licence)
-        # now that an UrbanEventInquiry is linked to the inquiry, we can not
-        # remove the defined date
-        startDate = None
-        self.assertNotEquals(licence.validate_investigationStart(
-            startDate), None)
-        #but we can change the date
-        startDate = DateTime('01/02/2011')
-        self.assertEquals(licence.validate_investigationStart(
-            startDate), None)
 
     def testCanNotDeleteNextInquiriesIfLinked(self):
         """
