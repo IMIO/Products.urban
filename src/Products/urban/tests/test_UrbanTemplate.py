@@ -71,6 +71,11 @@ class TestTemplateMethods(unittest.TestCase):
             'foldermanagers': 'getFolderManagersSignaletic',
             # datagrid
             'roadEquipments': 'Title',
+            'specificFeatures': 'getSpecificFeaturesForTemplate',
+            'roadSpecificFeatures': 'getSpecificFeaturesForTemplate',
+            'locationSpecificFeatures': 'getSpecificFeaturesForTemplate',
+            'customSpecificFeatures': 'getSpecificFeaturesForTemplate',
+            'townshipSpecificFeatures': 'getSpecificFeaturesForTemplate',
         }
         self.field_exceptions = field_exceptions
 
