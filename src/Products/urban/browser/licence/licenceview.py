@@ -265,13 +265,14 @@ class LicenceView(BrowserView):
         urban_tool = api.portal.get_tool('portal_urban')
         inquirydates = []
         for inquiry in context.getInquiries():
-            start_date = inquiry.getInvestigationStart()
-            end_date = inquiry.getInvestigationEnd()
-            inquiry_event = [inq_event for inq_event in context.objectValues('UrbanEventInquiry') if inq_event.getLinkedInquiry() == inquiry]
+            event = [inq_event for inq_event in context.objectValues('UrbanEventInquiry') if inq_event.getLinkedInquiry() == inquiry]
+            event = event and event[0] or None
+            start_date = event and event.getInvestigationStart() or None
+            end_date = event and event.getInvestigationEnd() or None
             inquirydates.append({
                 'start_date': start_date and urban_tool.formatDate(start_date, translatemonth=False) or None,
                 'end_date': end_date and urban_tool.formatDate(end_date, translatemonth=False) or None,
-                'url': inquiry_event and inquiry_event[0].absolute_url() or None,
+                'url': event and event.absolute_url() or None,
             })
         return inquirydates
 
