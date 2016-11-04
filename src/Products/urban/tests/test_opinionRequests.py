@@ -2,7 +2,7 @@
 
 from Acquisition import aq_base
 
-from Products.Archetypes.event import EditBegunEvent
+from zope.lifecycleevent import ObjectCreatedEvent
 from Products.CMFCore.utils import getToolByName
 from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL, URBAN_TESTS_LICENCES
 
@@ -66,5 +66,6 @@ class TestOpinionRequestOnLicence (unittest.TestCase):
                 UrbanEventOpinionRequest = content
                 aq_base(UrbanEventOpinionRequest)._at_creation_flag = True
                 break
-        event.notify(EditBegunEvent(UrbanEventOpinionRequest))
+        event.notify(ObjectCreatedEvent(UrbanEventOpinionRequest))
+        import ipdb; ipdb.set_trace()
         self.failUnless(licence.getLinkedUrbanEventOpinionRequest('belgacom') == UrbanEventOpinionRequest)
