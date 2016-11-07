@@ -5,7 +5,6 @@ from datetime import date as _date
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from zope.i18n import translate
 from plone import api
-from Products.urban.services import cadastre
 
 
 class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
@@ -425,7 +424,8 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
 
     def get_work_location(self, index):
         """
-        return a dictionary containing all work locations informations
+        # Adresse(s) des travaux
+        return a dictionary containing specific work locations informations
         """
         work_location = {
                 'bestAddressKey': '',
@@ -450,7 +450,8 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
 
     def get_work_location_dict(self, index):
         """
-        return a dictionary containing all work locations informations
+        # Adresse(s) des travaux
+        return a dictionary containing specific work locations informations
         """
         licence = self.real_context
         workLocation = licence.getWorkLocations()[index]
@@ -459,11 +460,19 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         return work_location_dict
 
     def get_work_location_signaletic(self, workLocation):
+        """
+        # Adresse(s) des travaux
+        return a street name and number from a specific workLocation
+        """
         catalog = api.portal.get_tool("uid_catalog")
         street = catalog(UID=workLocation['street'])[0].getObject()
         return street.getStreetName() + ' ' +  workLocation['number']
 
     def get_work_locations_list_dict(self):
+        """
+        # Adresse(s) des travaux
+        return a list of work locations informations
+        """
         licence = self.real_context
         workLocations = licence.getWorkLocations()
         work_locations_list_dict = []
@@ -472,6 +481,10 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         return work_locations_list_dict
 
     def get_work_locations_signaletic(self, separator=', '):
+        """
+        # Adresse(s) des travaux
+        return all street name and number
+        """
         licence = self.real_context
         workLocations = licence.getWorkLocations()
         workLocation_signaletic = self.get_work_location_signaletic(workLocations[0])
@@ -496,21 +509,3 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                 event = events[i]
             i = i + 1
         return event
-
-    def query_parcels_in_radius(self, radius='50'):
-        """
-        """
-        parcels = self.context.getOfficialParcels()
-        session = cadastre.new_session()
-        return session.query_parcels_in_radius(parcels, radius)
-
-    def query_parcels_locations_in_radius(self, radius='50'):
-        """
-        """
-        parcels = self.context.getOfficialParcels()
-        session = cadastre.new_session()
-        parcels = session.query_parcels_in_radius(parcels, radius)
-        locations = [parcel.location for parcel in parcels]
-        locations.sort()
-        return locations
-
