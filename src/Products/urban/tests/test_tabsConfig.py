@@ -53,7 +53,7 @@ class TestTabsConfigView(BrowserTestCase):
         # reorder the tabs in the config : location -> road -> description -> ...
         config = self.portal.portal_urban.buildlicence
         order = config.getTabsConfig()
-        new_tab_order = [order[2]] + list(order[:2]) + list(order[3:])
+        new_tab_order = [order[4]] + list(order[:4]) + list(order[5:])
         field = config.getField('tabsConfig')
         field.allow_delete = True
         config.setTabsConfig(new_tab_order)

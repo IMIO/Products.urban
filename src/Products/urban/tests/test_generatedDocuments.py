@@ -105,11 +105,7 @@ class TestInvertNamesOfMailAddress(unittest.TestCase):
 
         contacts = self.buildlicence.getApplicants()
         for contact in contacts:
-            # for a 'classic' signaletic, name order should not change
-            expected_name = '%s %s' % (contact.getName1(), contact.getName2())
-            self.failUnless(expected_name in contact.getSignaletic())
-
-            # but names should be inverted for the linebyline signaletic used in mailing address
+            # names should be inverted for the linebyline signaletic used in mailing address
             expected_name = '%s %s' % (contact.getName2(), contact.getName1())
             expected_name = cgi.escape(expected_name)
             self.failUnless(expected_name in contact.getSignaletic(linebyline=True))
