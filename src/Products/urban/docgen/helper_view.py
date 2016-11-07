@@ -5,13 +5,18 @@ from datetime import date as _date
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from zope.i18n import translate
 from plone import api
+
 from Products.urban.services import cadastre
+from Products.urban.utils import getCurrentFolderManager
 
 
 class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
     """
     Urban implementation of document generation helper methods.
     """
+
+    def get_current_foldermanager(self):
+        return getCurrentFolderManager()
 
     def contains_road_equipment(self, road_equipment):
         roadEquipments = self.context.getRoadEquipments()
