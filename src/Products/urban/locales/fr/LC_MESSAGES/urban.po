@@ -2587,7 +2587,7 @@ msgstr "Conditions d'octroi du permis"
 #. Default: "Locationtechnicalremarks"
 #: GenericLicence.py
 msgid "urban_label_locationTechnicalRemarks"
-msgstr "Remarques techniques (Fiche analyse)"
+msgstr "Remarques techniques (Fiche Urbanisme)"
 
 #. Default: "Manageablelicences"
 #: FolderManager.py

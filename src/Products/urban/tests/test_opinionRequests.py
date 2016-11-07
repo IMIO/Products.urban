@@ -67,5 +67,4 @@ class TestOpinionRequestOnLicence (unittest.TestCase):
                 aq_base(UrbanEventOpinionRequest)._at_creation_flag = True
                 break
         event.notify(ObjectCreatedEvent(UrbanEventOpinionRequest))
-        import ipdb; ipdb.set_trace()
         self.failUnless(licence.getLinkedUrbanEventOpinionRequest('belgacom') == UrbanEventOpinionRequest)

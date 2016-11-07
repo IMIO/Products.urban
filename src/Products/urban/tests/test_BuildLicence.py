@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from DateTime import DateTime
 from Products.urban import utils
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
@@ -132,10 +131,8 @@ class TestBuildLicence(unittest.TestCase):
         buildlicences.invokeFactory('BuildLicence', LICENCE_ID)
         buildlicence = getattr(buildlicences, LICENCE_ID)
         #set opinion request to 'belgacom' and 'sncb'
-        startDate = DateTime('01/01/2011')
         opinions = ('sncb', 'belgacom')
         buildlicence.setSolicitOpinionsTo(opinions)
-        buildlicence.setInvestigationStart(startDate)
         buildlicence.createAllAdvices()
         self.assertEqual(len(buildlicence.getAllOpinionRequests()), 2)
 
