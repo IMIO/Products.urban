@@ -422,32 +422,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         street_dict['regionalRoad'] = street.getRegionalRoad()
         return street_dict
 
-    def get_work_location(self, index):
-        """
-        # Adresse(s) des travaux
-        return a dictionary containing specific work locations informations
-        """
-        work_location = {
-                'bestAddressKey': '',
-                'streetCode': '',
-                'streetName': '',
-                'startDate': '',
-                'endDate': '',
-                'regionalRoad': '',
-                'number': '',
-        }
-        workLocation = self.context.getWorkLocations()[index]
-        catalog = api.portal.get_tool("uid_catalog")
-        street = catalog(UID=workLocation['street'])[0].getObject()
-        work_location['bestAddressKey'] = street.getBestAddressKey()
-        work_location['streetCode'] = street.getStreetCode()
-        work_location['streetName'] = street.getStreetName()
-        work_location['startDate'] = street.getStartDate()
-        work_location['endDate'] = street.getEndDate()
-        work_location['regionalRoad'] = street.getRegionalRoad()
-        work_location['number'] =  workLocation['number']
-        return work_location
-
     def get_work_location_dict(self, index):
         """
         # Adresse(s) des travaux
@@ -455,8 +429,8 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         """
         licence = self.real_context
         workLocation = licence.getWorkLocations()[index]
-        street_dict = self.get_street_dict(workLocation['street'])
-        work_location_dict = street_dict.update({'number': workLocation['number']})
+        work_location_dict = self.get_street_dict(workLocation['street'])
+        work_location_dict.update({'number': workLocation['number']})
         return work_location_dict
 
     def get_work_location_signaletic(self, workLocation):
