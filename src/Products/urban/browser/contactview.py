@@ -20,7 +20,8 @@ class ContactView(BrowserView):
         context = aq_inner(self.context)
         #either the parent is in URBAN_TYPES
         parent = context.aq_inner.aq_parent
-        from_edit = self.request['HTTP_REFERER'] == self.context.absolute_url() + '/edit'
+        referer = self.request['HTTP_REFERER']
+        from_edit = 'portal_factory' in referer or referer == self.context.absolute_url() + '/edit'
         if parent.portal_type in URBAN_TYPES and from_edit:
             return self.request.RESPONSE.redirect(parent.absolute_url())
         return super(ContactView, self).__call__()
