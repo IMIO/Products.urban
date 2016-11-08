@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="Products.urban">
+
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.ICalculationDelay"
+        factory=".delay.AnnoncedDelay"
+        name="urban.schedule.delay.annonced_delay"
+    />
+
+</configure>
