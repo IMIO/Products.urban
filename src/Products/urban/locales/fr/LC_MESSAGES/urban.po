@@ -1969,6 +1969,9 @@ msgstr "Détails concerant le risque de ruissellement concentré"
 msgid "urban_label_concerned_elements"
 msgstr "Eléments concernés"
 
+msgid "urban_label_concertationDate"
+msgstr "Date de réunion de concertation"
+
 #: UrbanVocabularyTerm.py
 msgid "urban_label_coring_id"
 msgstr "Identification carotage"
@@ -3370,6 +3373,9 @@ msgstr "Détails"
 msgid "urban_label_transmitDate"
 msgstr "Date de transmis"
 
+msgid "urban_label_transmitToClaimantsDate"
+msgstr "Date de transmis aux réclamants"
+
 #. Default: "Transparency"
 #: Layer.py
 msgid "urban_label_transparency"
@@ -3633,4 +3639,3 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
-

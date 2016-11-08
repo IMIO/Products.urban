@@ -75,6 +75,18 @@ schema = Schema((
         optional=True,
     ),
     DateTimeField(
+        name='transmitToClaimantsDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            format="%d/%m/%Y",
+            starting_year=1960,
+            label='Transmittoclaimantsdate',
+            label_msgid='urban_label_transmitToClaimantsDate',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
+    DateTimeField(
         name='receiptDate',
         widget=DateTimeField._properties['widget'](
             show_hm=False,

@@ -58,7 +58,6 @@ schema = Schema((
         name='explanationStartSDate',
         widget=DateTimeField._properties['widget'](
             show_hm=True,
-            condition="python:here.attributeIsUsed('explanationStartSDate')",
             format="%d/%m/%Y %H:%M",
             label='Explanationstartsdate',
             label_msgid='urban_label_explanationStartSDate',
@@ -70,7 +69,6 @@ schema = Schema((
         name='explanationEndSDate',
         widget=DateTimeField._properties['widget'](
             show_hm=True,
-            condition="python:here.attributeIsUsed('explanationEndSDate')",
             format="%d/%m/%Y %H:%M",
             label='Explanationendsdate',
             label_msgid='urban_label_explanationEndSDate',
@@ -82,7 +80,6 @@ schema = Schema((
         name='claimsDate',
         widget=DateTimeField._properties['widget'](
             show_hm=True,
-            condition="python:here.attributeIsUsed('claimsDate')",
             format="%d/%m/%Y %H:%M",
             label='Claimsdate',
             label_msgid='urban_label_claimsDate',
@@ -94,7 +91,6 @@ schema = Schema((
         name='claimEndSDate',
         widget=DateTimeField._properties['widget'](
             show_hm=True,
-            condition="python:here.attributeIsUsed('claimEndSDate')",
             format="%d/%m/%Y %H:%M",
             label='Claimendsdate',
             label_msgid='urban_label_claimEndSDate',
@@ -106,14 +102,24 @@ schema = Schema((
         name='claimsText',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            condition="python:here.attributeIsUsed('claimsText')",
             label='Claimstext',
             label_msgid='urban_label_claimsText',
             i18n_domain='urban',
         ),
         default_method='getDefaultText',
         default_output_type='text/html',
-        optional= True,
+        optional=True,
+    ),
+    DateTimeField(
+        name='concertationDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            format="%d/%m/%Y",
+            label='Concertationdate',
+            label_msgid='urban_label_concertationDate',
+            i18n_domain='urban',
+        ),
+        optional=True,
     ),
     ReferenceField(
         name='linkedInquiry',

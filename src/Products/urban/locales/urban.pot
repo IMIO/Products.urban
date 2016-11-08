@@ -1900,6 +1900,9 @@ msgstr ""
 msgid "urban_label_claimDate"
 msgstr ""
 
+msgid "urban_label_concertationDate"
+msgstr ""
+
 #. Default: "OutOfTime"
 #: Claimant.py
 msgid "urban_label_outOfTime"
@@ -3341,6 +3344,9 @@ msgstr ""
 #. Default: "Transmitdate"
 #: UrbanEvent.py
 msgid "urban_label_transmitDate"
+msgstr ""
+
+msgid "urban_label_transmitToClaimantsDate"
 msgstr ""
 
 #. Default: "Transparency"
