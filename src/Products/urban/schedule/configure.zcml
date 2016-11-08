@@ -5,6 +5,7 @@
     <include package=".conditions" />
 
     <include file="assign_principal.zcml" />
+    <include file="delay.zcml" />
     <include file="events.zcml" />
     <include file="indexes.zcml" />
     <include file="marker_interfaces.zcml" />
