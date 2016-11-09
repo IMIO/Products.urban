@@ -2,6 +2,7 @@
 
 from imio.actionspanel.browser.transitions import ConfirmTransitionView
 
+from imio.schedule.config import STARTED
 from imio.schedule.utils import get_task_configs
 
 
@@ -45,6 +46,15 @@ class UrbanConfirmTransitionView(ConfirmTransitionView):
             matched, not_matched = task.end_conditions_status()
             if not not_matched:
                 continue
+
+            subtasks_open = False
+            for sub_task in task.get_subtasks():
+                if sub_task.get_status() == STARTED:
+                    subtasks_open = True
+                    break
+            if subtasks_open:
+                continue
+
             tasks.append((task, not_matched))
 
         return tasks

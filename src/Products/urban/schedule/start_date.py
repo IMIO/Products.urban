@@ -44,7 +44,7 @@ class AcknowledgmentDate(StartDate):
 
     def start_date(self):
         licence = self.task_container
-        ack = licence.getLastAcknowledgment()
+        ack = licence.getLastAcknowledgment(use_catalog=False)
         ack_date = ack and ack.getEventDate() or None
         return ack_date
 
@@ -56,6 +56,6 @@ class InquriryEndDate(StartDate):
 
     def start_date(self):
         licence = self.task_container
-        inquiry = licence.getLastInquiry()
+        inquiry = licence.getLastInquiry(use_catalog=False)
         end_date = inquiry.getInvestigationEnd()
         return end_date
