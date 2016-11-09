@@ -295,8 +295,8 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         position = self._getSelfPosition()
         return translate('inquiry_title_and_number', 'urban', mapping={'number': position + 1}, context=self.REQUEST)
 
-    def getLastInquiry(self):
-        return self._getLastEvent(interfaces.IInquiryEvent)
+    def getLastInquiry(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IInquiryEvent, use_catalog=use_catalog)
 
     def getLastOpinionRequest(self):
         return self._getLastEvent(interfaces.IOpinionRequestEvent)

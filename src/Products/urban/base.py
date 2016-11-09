@@ -478,7 +478,7 @@ class UrbanBase(object):
             return self._getAllEventsByObjectValues(eventInterface)
 
     def _getAllEventsByObjectValues(self, eventInterface):
-        return [evt for evt in self.objectValues('UrbanEvent') if eventInterface.providedBy(evt)]
+        return [evt for evt in self.objectValues() if eventInterface.providedBy(evt)]
 
     def _getAllEventsByCatalog(self, eventInterface):
         catalog = api.portal.get_tool('portal_catalog')
