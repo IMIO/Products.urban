@@ -34,13 +34,13 @@ def migrate(context):
     logger = logging.getLogger('urban: migrate to 1.11.0')
     logger.info("starting migration steps")
     #  migrate UrbanDoc to File type with an IUrbanDoc marker interface on it.
-    #migrate_generated_UrbanDoc_to_ATFile(context)
-    #migrate_UrbanDoc_to_SubTemplate(context)
-    #migrate_UrbanDoc_to_StyleTemplate(context)
-    #migrate_UrbanDoc_to_Urbantemplate(context)
-    #migrate_statsINS_template(context)
-    #migrate_PersonTitleTerm(context)
-    #migrate_PortionOut(context)
+    migrate_generated_UrbanDoc_to_ATFile(context)
+    migrate_UrbanDoc_to_SubTemplate(context)
+    migrate_UrbanDoc_to_StyleTemplate(context)
+    migrate_UrbanDoc_to_Urbantemplate(context)
+    migrate_statsINS_template(context)
+    migrate_PersonTitleTerm(context)
+    migrate_PortionOut(context)
     migrate_worktypes(context)
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
