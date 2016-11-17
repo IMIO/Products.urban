@@ -464,9 +464,12 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         return work_location_dict
 
     def get_work_location_signaletic(self, workLocation):
-        catalog = api.portal.get_tool("uid_catalog")
-        street = catalog(UID=workLocation['street'])[0].getObject()
-        return street.getStreetName() + ' ' +  workLocation['number']
+        work_location_signaletic = ''
+        if workLocation:
+            catalog = api.portal.get_tool("uid_catalog")
+            street = catalog(UID=workLocation['street'])[0].getObject()
+            work_location_signaletic = street.getStreetName() + ' ' +  workLocation['number']
+        return work_location_signaletic
 
     def get_work_locations_list_dict(self):
         licence = self.real_context
@@ -479,10 +482,12 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
     def get_work_locations_signaletic(self, separator=', '):
         licence = self.real_context
         workLocations = licence.getWorkLocations()
-        workLocation_signaletic = self.get_work_location_signaletic(workLocations[0])
-        for workLocation in workLocations[1:]:
-            workLocation_signaletic += separator + self.get_work_location_signaletic(workLocation)
-        return workLocation_signaletic
+        workLocations_signaletic = ''
+        if workLocations:
+            workLocations_signaletic = self.get_work_location_signaletic(workLocations[0])
+            for workLocation in workLocations[1:]:
+                workLocations_signaletic += separator + self.get_work_location_signaletic(workLocation)
+        return workLocations_signaletic
 
     def getEvent(self, title=''):
         """
