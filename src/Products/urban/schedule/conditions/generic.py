@@ -197,3 +197,13 @@ class OpinionRequestsDone(Condition):
                 return False
 
         return True
+
+
+class LicenceSuspension(Condition):
+    """
+    Licence is suspended.
+    """
+
+    def evaluate(self):
+        is_suspended = api.content.get_state(self.task_container) == 'suspension'
+        return is_suspended

@@ -95,4 +95,13 @@
         name="urban.schedule.condition.analysis_done"
     />
 
+    <!-- suspension conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.LicenceSuspension"
+        name="urban.schedule.condition.suspension"
+    />
+
 </configure>
