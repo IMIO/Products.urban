@@ -14,6 +14,9 @@ msgstr ""
 "Preferred-Encodings: utf-8\n"
 "Domain: imio.schedule\n"
 
+msgid "urban.schedule.condition.acknowledgment_created"
+msgstr ""
+
 msgid "urban.schedule.condition.acknowledgment_done"
 msgstr ""
 

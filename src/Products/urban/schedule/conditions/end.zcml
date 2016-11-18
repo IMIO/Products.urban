@@ -40,6 +40,14 @@
         for="Products.urban.interfaces.IBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.AcknowledgmentCreatedCondition"
+        name="urban.schedule.condition.acknowledgment_created"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.AcknowledgmentDoneCondition"
         name="urban.schedule.condition.acknowledgment_done"
     />
