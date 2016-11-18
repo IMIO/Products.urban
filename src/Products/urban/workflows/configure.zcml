@@ -10,4 +10,11 @@
      name="licence_local_roles"
   />
 
+ <!-- register suspension workflow adaptation -->
+ <utility
+      name="urban.wfadaptations.suspension"
+      provides="collective.wfadaptations.interfaces.IWorkflowAdaptation"
+      factory=".suspension.SuspensionWorkflowAdaptation"
+      />
+
 </configure>

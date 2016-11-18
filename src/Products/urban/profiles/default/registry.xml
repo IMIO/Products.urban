@@ -47,4 +47,13 @@
       <value key="css">True</value>
       <value key="patch">True</value>
     </records>
+    <record name="collective.wfadaptations.applied_adaptations">
+      <value>
+        <element>
+          <element key="adaptation">urban.wfadaptations.suspension</element>
+          <element key="parameters">{"resuming_state": "checking_completion", "suspender_groups": "Technical Editors;Technical Validators"}</element>
+          <element key="workflow">buildlicence_workflow</element>
+        </element>
+      </value>
+    </record>
 </registry>
