@@ -17,6 +17,9 @@ msgstr ""
 msgid "urban.assign_folder_manager"
 msgstr "Gestionnaire du dossier"
 
+msgid "urban.schedule.condition.acknowledgment_created"
+msgstr "Créer l'événement d'accusé de réception"
+
 msgid "urban.schedule.condition.acknowledgment_done"
 msgstr "Créer l'événement d'accusé de réception et le clôturer"
 

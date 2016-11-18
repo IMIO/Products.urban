@@ -88,9 +88,25 @@ class UrbanAnalysisDone(Condition):
         return analysis_done
 
 
+class AcknowledgmentCreatedCondition(Condition):
+    """
+    Licence acknowlegdment event is created but not closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        acknowledgment_created = False
+        acknowledgment_event = licence.getLastAcknowledgment()
+        if acknowledgment_event:
+            acknowledgment_created = api.content.get_state(acknowledgment_event) != 'closed'
+
+        return acknowledgment_created
+
+
 class AcknowledgmentDoneCondition(Condition):
     """
-    Licence folderComplete event is created.
+    Licence acknowlegdment event is closed.
     """
 
     def evaluate(self):
