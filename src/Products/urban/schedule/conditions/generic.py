@@ -152,7 +152,12 @@ class InquiryEventCreatedCondition(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        created = licence.getLastInquiry() and True or False
+
+        created = False
+        inquiry_event = licence.getLastInquiry()
+        if inquiry_event:
+            created = api.content.get_state(inquiry_event) != 'closed'
+
         return created
 
 
@@ -219,6 +224,8 @@ class LicenceSuspension(Condition):
     """
     Licence is suspended.
     """
+
+    display_status = False
 
     def evaluate(self):
         is_suspended = api.content.get_state(self.task_container) == 'suspension'
