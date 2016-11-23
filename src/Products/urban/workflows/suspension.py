@@ -67,15 +67,14 @@ class SuspensionWorkflowAdaptation(object):
         if 'suspend' not in workflow.transitions:
             workflow.transitions.addTransition('suspend')
         suspend_transition = workflow.transitions['suspend']
+        props = parameters.get('suspend_transition_guard', None)
 
         # update transition settings
         suspend_transition.setProperties(
             title=suspend_transition.id,
             new_state_id='suspension',
             actbox_name=suspend_transition.id,
-            props={
-                'guard_groups': parameters['suspender_groups']
-            }
+            props=props
         )
 
     def set_suspend_transition(self, workflow, **parameters):
