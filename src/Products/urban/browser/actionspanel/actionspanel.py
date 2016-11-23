@@ -59,7 +59,7 @@ class LicenceTransitionsPanelView(ActionsPanelView):
         workflow = portal_workflow.getWorkflowsFor(self.context)[0]
         transitions = workflow.transitions.objectIds()
 
-        to_confirm = dict([('BuildLicence.%s' % tr, 'simpleconfirm_view') for tr in transitions])
+        to_confirm = dict([('%s.%s' % (self.context.portal_type, tr), 'simpleconfirm_view') for tr in transitions])
 
         return to_confirm
 
