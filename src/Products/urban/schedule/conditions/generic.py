@@ -225,8 +225,6 @@ class LicenceSuspension(Condition):
     Licence is suspended.
     """
 
-    display_status = False
-
     def evaluate(self):
         is_suspended = api.content.get_state(self.task_container) == 'suspension'
         return is_suspended
