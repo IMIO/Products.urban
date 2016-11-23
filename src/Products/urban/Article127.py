@@ -18,6 +18,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
 from Products.urban.BaseBuildLicence import BaseBuildLicence
+from Products.urban.BuildLicence import finalizeSchema
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -63,37 +64,27 @@ class Article127(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
         )
         return DisplayList(vocab)
 
+    def getProcedureDelays(self, *values):
+        selection = [v['val'] for v in values if v['selected']]
+        unknown = 'ukn' in selection
+        opinions = 'opinions' in selection
+        inquiry = 'inquiry' in selection
+
+        if unknown:
+            return ''
+        elif opinions and inquiry:
+            return '60j'
+        elif opinions and not inquiry:
+            return '30j'
+        else:
+            return '30j'
+
 
 registerType(Article127, PROJECTNAME)
 # end of class Article127
 
 ##code-section module-footer #fill in your manual code here
 
-
-def finalizeSchema(schema, folderish=False, moveDiscussion=True):
-    """
-       Finalizes the type schema to alter some fields
-    """
-    schema.moveField('roadAdaptation', before='roadTechnicalAdvice')
-    schema.moveField('architects', after='workLocations')
-    schema.moveField('foldermanagers', after='architects')
-    schema.moveField('workType', after='folderCategory')
-    schema.moveField('parcellings', after='isInSubdivision')
-    schema.moveField('description', after='usage')
-    schema.moveField('roadMiscDescription', after='roadEquipments')
-    schema.moveField('folderCategoryTownship', after='locationTechnicalConditions')
-    schema.moveField('areParcelsVerified', after='folderCategoryTownship')
-    schema.moveField('requirementFromFD', after='locationDgrneUnderground')
-    schema.moveField('townshipCouncilFolder', after='roadCoating')
-    schema.moveField('annoncedDelay', after='missingPartsDetails')
-    schema.moveField('annoncedDelayDetails', after='annoncedDelay')
-    schema.moveField('impactStudy', after='annoncedDelayDetails')
-    schema.moveField('procedureChoice', before='description')
-    schema.moveField('exemptFDArticle', after='procedureChoice')
-    schema.moveField('water', after='futureRoadCoating')
-    schema.moveField('electricity', before='water')
-    schema.moveField('composition', before='missingParts')
-    return schema
-
+#finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
 finalizeSchema(Article127_schema)
 ##/code-section module-footer
