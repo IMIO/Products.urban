@@ -31,6 +31,28 @@ class WillHaveInquiry(CreationCondition):
         return 'inquiry' in licence.getProcedureChoice()
 
 
+class HasNewInquiryCondition(CreationCondition):
+    """
+    Licence has a new inquiry defined.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        inquiry_event = licence.getLastInquiry()  # Inquiry event
+        if inquiry_event:
+            inquiries = licence.getAllInquiries()  # Inquiries objects
+
+            # if the linked inquiry of the last inquiry event is not the last
+            # inquiry object means we have a new inquiry (but its event has not
+            # been created yet)
+            missing_inquiry_event = inquiry_event.getLinkedInquiry() != inquiries[-1]
+
+            return missing_inquiry_event
+
+        return False
+
+
 class NoInquiryCondition(CreationCondition):
     """
     Licence has no inquiry selected on procedureChoice field.
