@@ -50,6 +50,9 @@ msgstr ""
 msgid "urban.schedule.condition.procedure_choice_done"
 msgstr ""
 
+msgid "urban.schedule.condition.suspension"
+msgstr ""
+
 msgid "urban.assign_folder_manager"
 msgstr ""
 
