@@ -278,14 +278,13 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         minimum_tabs_config = ['description', 'analysis', 'location', 'road']
         advice_tabs_config = ['description', 'advices', 'analysis', 'location', 'road']
         inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road']
-        full_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'peb']
         buildlicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation', 'peb']
 
         types = {
             'buildlicence': buildlicence_tabs_config,
-            'article127': full_tabs_config,
+            'article127':  buildlicence_tabs_config,
             'parceloutlicence': inquiry_tabs_config,
-            'urbancertificatetwo': inquiry_tabs_config,
+            'urbancertificatetwo': ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation'],
             'envclassthree': advice_tabs_config,
             'envclassone': inquiry_tabs_config,
             'envclasstwo': inquiry_tabs_config,
