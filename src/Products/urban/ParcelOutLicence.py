@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.BuildLicence import BuildLicence
+from Products.urban.BaseBuildLicence import BaseBuildLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -68,12 +68,12 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
-from Products.urban.BuildLicence import optional_fields
+from Products.urban.BaseBuildLicence import optional_fields
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 ParcelOutLicence_schema = BaseFolderSchema.copy() + \
-    getattr(BuildLicence, 'schema', Schema(())).copy() + \
+    getattr(BaseBuildLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
@@ -87,7 +87,7 @@ del ParcelOutLicence_schema['architects']
 del ParcelOutLicence_schema['usage']
 ##/code-section after-schema
 
-class ParcelOutLicence(BaseFolder, BuildLicence, BrowserDefaultMixin):
+class ParcelOutLicence(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

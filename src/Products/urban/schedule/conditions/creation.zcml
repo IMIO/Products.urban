@@ -4,7 +4,7 @@
 
     <!-- acknowlegdment conditions-->
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.AcknowledgmentDoneCondition"
@@ -13,7 +13,7 @@
 
     <!-- inquiry conditions-->
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.WillHaveInquiry"
@@ -21,7 +21,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.NoInquiryCondition"
@@ -29,7 +29,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.InquiryCondition"
@@ -38,7 +38,7 @@
 
     <!-- opinion requests conditions-->
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.HasOpinionRequests"
@@ -46,7 +46,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.OpinionRequestsDone"
@@ -55,7 +55,7 @@
 
     <!-- FD opinions conditions-->
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.HasFDOpinionRequest"

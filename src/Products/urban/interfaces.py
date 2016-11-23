@@ -40,6 +40,10 @@ class IGenericLicence(Interface):
     """Marker interface for .GenericLicence.GenericLicence
     """
 
+class IBaseBuildLicence (IGenericLicence):
+    """Marker interface for .Article127.Article127
+    """
+
 class IContact(Interface):
     """Marker interface for .Contact.Contact
     """
@@ -64,11 +68,11 @@ class IRecipient(Interface):
     """Marker interface for .Recipient.Recipient
     """
 
-class IBuildLicence(IGenericLicence):
+class IBuildLicence(IBaseBuildLicence):
     """Marker interface for .BuildLicence.BuildLicence
     """
 
-class IParcelOutLicence(Interface):
+class IParcelOutLicence(IBaseBuildLicence):
     """Marker interface for .ParcelOutLicence.ParcelOutLicence
     """
 
@@ -212,7 +216,7 @@ class IEnvClassOne(Interface):
     """Marker interface for .EnvClassOne.EnvClassOne
     """
 
-class IArticle127(IGenericLicence):
+class IArticle127(IBaseBuildLicence):
     """Marker interface for .Article127.Article127
     """
 

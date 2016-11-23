@@ -3,7 +3,7 @@
     i18n_domain="Products.urban">
 
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.DepositDoneCondition"
@@ -11,7 +11,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.ProcedureChoiceDone"
@@ -20,7 +20,7 @@
 
     <!-- folder complete conditions-->
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.ComplementsAsked"
@@ -28,7 +28,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.ComplementsReceived"
@@ -37,7 +37,7 @@
 
     <!-- acknowlegdment conditions-->
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.AcknowledgmentCreatedCondition"
@@ -45,7 +45,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.AcknowledgmentDoneCondition"
@@ -54,7 +54,7 @@
 
     <!-- opinion requests conditions-->
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.OpinionRequestsEventsCreated"
@@ -62,7 +62,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.OpinionRequestsDone"
@@ -71,7 +71,7 @@
 
     <!-- inquiry conditions-->
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.InquiryDatesDefinedCondition"
@@ -79,7 +79,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.InquiryEventCreatedCondition"
@@ -87,7 +87,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.InquiryDoneCondition"
@@ -96,7 +96,7 @@
 
     <!-- analysis conditions-->
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.UrbanAnalysisDone"
@@ -105,7 +105,7 @@
 
     <!-- suspension conditions-->
     <adapter
-        for="Products.urban.interfaces.IBuildLicence
+        for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.LicenceSuspension"

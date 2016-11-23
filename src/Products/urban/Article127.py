@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.BuildLicence import BuildLicence
+from Products.urban.BaseBuildLicence import BaseBuildLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -35,13 +35,14 @@ schema = Schema((
 ##/code-section after-local-schema
 
 Article127_schema = BaseFolderSchema.copy() + \
-    getattr(BuildLicence, 'schema', Schema(())).copy() + \
+    getattr(BaseBuildLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
-class Article127(BaseFolder, BuildLicence, BrowserDefaultMixin):
+
+class Article127(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -87,8 +88,12 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('annoncedDelay', after='missingPartsDetails')
     schema.moveField('annoncedDelayDetails', after='annoncedDelay')
     schema.moveField('impactStudy', after='annoncedDelayDetails')
+    schema.moveField('procedureChoice', before='description')
+    schema.moveField('exemptFDArticle', after='procedureChoice')
+    schema.moveField('water', after='futureRoadCoating')
+    schema.moveField('electricity', before='water')
+    schema.moveField('composition', before='missingParts')
     return schema
 
 finalizeSchema(Article127_schema)
 ##/code-section module-footer
-
