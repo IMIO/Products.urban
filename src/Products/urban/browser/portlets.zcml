@@ -23,4 +23,13 @@
         editview=".portlets.ConfigEditForm"
     />
 
+    <plone:portlet
+        name="urban.portlet.scheduledlicences"
+        interface=".portlets.IUrbanScheduledLicencesPortlet"
+        assignment=".portlets.ScheduledLicencesAssignment"
+        renderer=".portlets.ScheduledLicencesRenderer"
+        addview=".portlets.ScheduledLicencesAddForm"
+        editview=".portlets.ScheduledLicencesEditForm"
+    />
+
 </configure>
