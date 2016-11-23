@@ -298,6 +298,9 @@ class LicenceView(BrowserView):
     def getInquiryFields(self, exclude=[]):
         return self.getSchemataFields('urban_inquiry', exclude)
 
+    def getHabitationFields(self, exclude=[]):
+        return self.getSchemataFields('urban_habitation', exclude)
+
     def get_state(self):
         return api.content.get_state(self.context)
 
