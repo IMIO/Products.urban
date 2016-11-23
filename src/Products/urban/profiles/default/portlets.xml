@@ -22,6 +22,18 @@
                 manager="plone.leftcolumn"
                 type="urban.portlet.urbanconfig" />
 
+    <assignment name="config"
+                category="context"
+                key="/urban/schedule"
+                manager="plone.leftcolumn"
+                type="urban.portlet.scheduledlicences" />
+
+    <assignment name="config"
+                category="context"
+                key="/urban/schedule"
+                manager="plone.leftcolumn"
+                type="imio.dashboard.FacetedCollectionPortlet" />
+
     <assignment remove="True"
                 name="navigation"
                 category="context"

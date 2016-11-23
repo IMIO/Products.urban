@@ -1,0 +1,20 @@
+<dl class="portlet portlet_scheduled_licences" i18n:domain="urban"
+    tal:condition="view/available">
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <span class="tile" i18n:translate="">Scheduled licences</span>
+        <span class="portletTopRight"></span>
+    </dt>
+    <dd class="portletItem odd">
+        <ul class="urban-list">
+            <li tal:repeat="licence_link view/scheduled_licences_links">
+                <a tal:define="href python:licence_link[0];
+                               class python:licence_link[1];
+                               content python:licence_link[2];"
+                   tal:attributes="href href; class class"
+                   tal:content="content"
+                   i18n:translate=""/>
+            </li>
+        </ul>
+    </dd>
+</dl>

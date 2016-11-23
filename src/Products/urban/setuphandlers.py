@@ -46,7 +46,7 @@ from plone.portlets.interfaces import ILocalPortletAssignmentManager
 from plone.portlets.constants import CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_TYPE_CATEGORY
 
 from imio.schedule.utils import interface_to_tuple
-from imio.schedule.utils import set_schedule_view
+from imio.schedule.utils import _set_faceted_view
 
 from zExceptions import BadRequest
 from zope.interface import alsoProvides
@@ -893,6 +893,10 @@ def setupSchedule(context):
 
     if not hasattr(urban_folder, 'schedule'):
         urban_folder.invokeFactory('Folder', id='schedule')
+        # block parents portlet
+        manager = queryUtility(IPortletManager, name='plone.leftcolumn')
+        blacklist = getMultiAdapter((urban_folder, manager), ILocalPortletAssignmentManager)
+        blacklist.setBlacklistStatus(CONTEXT_CATEGORY, True)
     schedule_folder = getattr(urban_folder, 'schedule')
 
     schedule_configs = []
@@ -923,12 +927,13 @@ def setupSchedule(context):
                 id=folder_id,
                 title=licence_name
             )
+
         collection_folder = getattr(schedule_folder, folder_id)
         config_path = '{}/schedule/config/{}.xml'.format(
             os.path.dirname(__file__),
             folder_id
         )
-        set_schedule_view(collection_folder, config_path, schedule_config)
+        _set_faceted_view(collection_folder, config_path, schedule_config)
 
     setFolderAllowedTypes(schedule_folder, [])
 
