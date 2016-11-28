@@ -41,7 +41,9 @@ class RenderLicenceTermView(RenderTermView):
         """ """
         member = api.user.get_current()
         context = aq_inner(self.context)
-        if not member.has_permission('urban: Add {}'.format(licence_type), context):
+        portal_types = api.portal.get_tool('portal_types')
+        meta_type = portal_types[licence_type].content_meta_type
+        if not member.has_permission('urban: Add {}'.format(meta_type), context):
             return ''
 
         href = self.get_licence_creation_URL(licence_type)
