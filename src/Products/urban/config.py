@@ -86,6 +86,7 @@ ADD_CONTENT_PERMISSIONS = {
     'PcaTerm': 'urban: Add PcaTerm',
     'PersonTitleTerm': 'urban: Add PersonTitleTerm',
     'PortionOut': 'urban: Add PortionOut',
+    'PreliminaryNotice': 'urban: Add PreliminaryNotice',
     'Recipient': 'urban: Add Recipient',
     'RecipientCadastre': 'urban: Add RecipientCadastre',
     'SpecificFeatureTerm': 'urban: Add SpecificFeatureTerm',
