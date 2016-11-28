@@ -68,6 +68,12 @@ default_values = {
             {'id': "form1_process", 'title': 'peb_form1_process'},
             {'id': "form2_process", 'title': 'peb_form2_process'},
         ],
+
+        'municipaltax': [
+            'UrbanVocabularyTerm',
+            {'id': "xxx", 'title': u"XXX"},
+            {'id': "yyy", 'title': u"YYY"},
+        ],
     },
     'Article127': {
         'missingparts': [
@@ -144,6 +150,12 @@ default_values = {
             {'id': "water", 'title': u"Eau"},
             {'id': "autre", 'title': u"Autre"},
         ],
+
+        'municipaltax': [
+            'UrbanVocabularyTerm',
+            {'id': "xxx", 'title': u"XXX"},
+            {'id': "yyy", 'title': u"YYY"},
+        ],
     },
     'UrbanCertificateOne': {
         'foldercategories': [
@@ -167,6 +179,12 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
             {'id': "extrait_cadastral", 'title': u"Extrait cadastral en 3 exemplaires"},
+        ],
+
+        'municipaltax': [
+            'UrbanVocabularyTerm',
+            {'id': "xxx", 'title': u"XXX"},
+            {'id': "yyy", 'title': u"YYY"},
         ],
     },
     'UrbanCertificateTwo': {
@@ -192,6 +210,12 @@ default_values = {
             {'id': "form_demande", 'title': u"Formulaire de demande (formulaire 1A) en 3 exemplaires"},
             {'id': "extrait_cadastral", 'title': u"Extrait cadastral en 3 exemplaires"},
         ],
+
+        'municipaltax': [
+            'UrbanVocabularyTerm',
+            {'id': "xxx", 'title': u"XXX"},
+            {'id': "yyy", 'title': u"YYY"},
+        ],
     },
 
     'EnvClassOne': {
@@ -206,6 +230,12 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "octroi", 'title': u"Octroi", 'extraValue': "Recevable"},
             {'id': "refus", 'title': u"Refus", 'extraValue': "Irrecevable"},
+        ],
+
+        'municipaltax': [
+            'UrbanVocabularyTerm',
+            {'id': "xxx", 'title': u"XXX"},
+            {'id': "yyy", 'title': u"YYY"},
         ],
     },
     'EnvClassThree': {
@@ -226,11 +256,23 @@ default_values = {
             {'id': "form_demande", 'title': u"Formulaire de demande en 4 exemplaires"},
             {'id': "plan", 'title': u"Plans"},
         ],
+
+        'municipaltax': [
+            'UrbanVocabularyTerm',
+            {'id': "xxx", 'title': u"XXX"},
+            {'id': "yyy", 'title': u"YYY"},
+        ],
     },
     'Division': {
         'foldercategories': [
             'UrbanVocabularyTerm',
             {'id': "dup", 'title': u"DIV (Division notariale)"},
+        ],
+
+        'municipaltax': [
+            'UrbanVocabularyTerm',
+            {'id': "xxx", 'title': u"XXX"},
+            {'id': "yyy", 'title': u"YYY"},
         ],
 
     },
@@ -242,6 +284,12 @@ default_values = {
             {'id': "apd", 'title': u"Avis préalable de division"},
             {'id': "dre", 'title': u"Demande de raccordement à l'égout"},
             {'id': "div", 'title': u"Divers"},
+        ],
+
+        'municipaltax': [
+            'UrbanVocabularyTerm',
+            {'id': "xxx", 'title': u"XXX"},
+            {'id': "yyy", 'title': u"YYY"},
         ],
 
     },
@@ -285,6 +333,12 @@ default_values = {
             'description': "« article 263 §1er 9° la culture de sapins de Noël pour une période ne dépassant pas douze ans; »"},
             {'id': "263_1_10", 'title': u"article 263 §1er 10° les miradors", 'extraValue': "263 §1er 10°",
             'description': "« article 263 §1er 10° dans la zone contiguë à la zone forestière, les miradors en bois visés à l’article 1er, § 1er, 9°, de la loi du 28 février 1882 sur la chasse; »"},
+        ],
+
+        'municipaltax': [
+            'UrbanVocabularyTerm',
+            {'id': "xxx", 'title': u"XXX"},
+            {'id': "yyy", 'title': u"YYY"},
         ],
     },
     'shared_vocabularies': {

@@ -1117,6 +1117,11 @@ msgstr "Pluriel"
 msgid "multiplicity_single"
 msgstr "Singulier"
 
+#. Default: "Taxe communale"
+#: GenericLicence.py
+msgid "urban_label_municipalTax"
+msgstr "Taxe communale"
+
 msgid "no_applicant_defined"
 msgstr "Aucun demandeur?"
 
@@ -2608,7 +2613,7 @@ msgstr "Prénom"
 #: Contact.py
 #: Geometrician.py
 msgid "urban_label_nationalRegister"
-msgstr "N° de registre national"
+msgstr "Numéro de registre national"
 
 #. Default: "Natura2000"
 #: EnvironmentBase.py

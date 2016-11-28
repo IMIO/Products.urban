@@ -6,6 +6,9 @@ Changes
 
 1.11.0 (2015-10-01)
 -------------------
+- add generic municipalTax field with config
+  [fngaha]
+
 - add get_work_location method to view
   [fngaha]
 

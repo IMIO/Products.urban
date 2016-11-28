@@ -84,7 +84,7 @@ optional_fields = [
     'roadMissingParts', 'roadMissingPartsDetails', 'locationMissingParts', 'locationMissingPartsDetails',
     'PRevU', 'prevuDetails', 'PRenU', 'prenuDetails', 'airportNoiseZone', 'airportNoiseZoneDetails',
     'description', 'rgbsr', 'rgbsrDetails', 'karstConstraints', 'karstConstraintsDetails',
-    'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', 'sevesoSite', 'natura_2000'
+    'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', 'sevesoSite', 'natura_2000', 'municipalTax'
 ]
 ##/code-section module-header
 
@@ -859,6 +859,18 @@ schema = Schema((
         schemata='urban_location',
         multiValued=False,
         relationship='licenceParcelling',
+    ),
+    StringField(
+        name='municipalTax',
+        widget=SelectionWidget(
+            format='select',
+            label='MunicipalTax',
+            label_msgid='urban_label_municipalTax',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        vocabulary=UrbanVocabulary('municipaltax', with_empty_value=True),
+        default_method='getDefaultValue',
     ),
 
 ),
