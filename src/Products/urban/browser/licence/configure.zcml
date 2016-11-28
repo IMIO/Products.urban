@@ -237,7 +237,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IMiscDemand"
+     for="Products.urban.interfaces.IPreliminaryNotice"
      name="preliminarynoticeview"
      class=".preliminarynoticeview.PreliminaryNoticeView"
      template="templates/preliminarynoticeview.pt"
@@ -246,7 +246,7 @@
 
   <browser:page
      name="preliminarynotice-macros"
-     for="Products.urban.interfaces.IMiscDemand"
+     for="Products.urban.interfaces.IPreliminaryNotice"
      template="templates/preliminarynoticemacros.pt"
      permission="zope2.View"
   />
