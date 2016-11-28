@@ -658,6 +658,28 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
         )
         return DisplayList(vocabulary)
 
+    def getProcedureDelays(self, *values):
+        selection = [v['val'] for v in values if v['selected']]
+        unknown = 'ukn' in selection
+        opinions = 'opinions' in selection
+        inquiry = 'inquiry' in selection
+        FD = 'FD' in selection
+
+        if unknown:
+            return ''
+        elif (opinions or inquiry) and FD:
+            return '115j'
+        elif opinions and inquiry and not FD:
+            return '70j'
+        elif opinions and not (inquiry or FD):
+            return '70j'
+        elif inquiry and not (opinions or FD):
+            return '70j'
+        elif FD and not (opinions or inquiry):
+            return '75j'
+        else:
+            return '30j'
+
     def listCompositions(self):
         vocabulary = (
             ('', 'Non déterminée'),
