@@ -72,7 +72,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IBuildLicence"
+     for="Products.urban.interfaces.IBaseBuildLicence"
      name="buildlicenceview"
      class=".buildlicenceview.BuildLicenceView"
      template="templates/buildlicenceview.pt"
@@ -81,23 +81,8 @@
 
   <browser:page
      name="buildlicence-macros"
-     for="Products.urban.interfaces.IBuildLicence"
+     for="Products.urban.interfaces.IBaseBuildLicence"
      template="templates/buildlicencemacros.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="Products.urban.interfaces.IArticle127"
-     name="article127view"
-     class=".article127view.Article127View"
-     template="templates/article127view.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     name="article127-macros"
-     for="Products.urban.interfaces.IArticle127"
-     template="templates/article127macros.pt"
      permission="zope2.View"
   />
 
@@ -147,7 +132,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IUrbanCertificateBase"
+     for="Products.urban.interfaces.IUrbanCertificateTwo"
      name="urbancertificatetwoview"
      class=".urbancertificatetwoview.UrbanCertificateTwoView"
      template="templates/urbancertificatetwoview.pt"
@@ -156,7 +141,7 @@
 
   <browser:page
      name="urbancertificatetwo-macros"
-     for="Products.urban.interfaces.IUrbanCertificateBase"
+     for="Products.urban.interfaces.IUrbanCertificateTwo"
      template="templates/urbancertificatetwomacros.pt"
      permission="zope2.View"
   />
