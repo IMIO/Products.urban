@@ -284,7 +284,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'buildlicence': buildlicence_tabs_config,
             'article127':  buildlicence_tabs_config,
             'parceloutlicence': inquiry_tabs_config,
-            'urbancertificatetwo': ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation'],
+            'urbancertificatetwo': buildlicence_tabs_config,
             'envclassthree': advice_tabs_config,
             'envclassone': inquiry_tabs_config,
             'envclasstwo': inquiry_tabs_config,
