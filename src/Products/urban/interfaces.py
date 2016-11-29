@@ -116,7 +116,7 @@ class IUrbanCertificateBase(Interface):
     """Marker interface for .UrbanCertificateBase.UrbanCertificateBase
     """
 
-class IUrbanCertificateTwo(Interface):
+class IUrbanCertificateTwo(IBaseBuildLicence):
     """Marker interface for .UrbanCertificateTwo.UrbanCertificateTwo
     """
 

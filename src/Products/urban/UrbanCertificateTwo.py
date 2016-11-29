@@ -17,21 +17,63 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.UrbanCertificateBase import UrbanCertificateBase
-from Products.urban.Inquiry import Inquiry
+from Products.urban.BaseBuildLicence import BaseBuildLicence
+from Products.urban.BuildLicence import finalizeSchema
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.urban.utils import setOptionalAttributes
 
-optional_fields = []
+
+optional_fields = ['geometricians', 'notaryContact']
 ##/code-section module-header
 
 schema = Schema((
-
-
+    ReferenceField(
+        name='geometricians',
+        widget=ReferenceBrowserWidget(
+            force_close_on_insert=1,
+            allow_search=1,
+            allow_browse=0,
+            show_indexes=1,
+            show_index_selector=1,
+            available_indexes={'Title': 'Nom'},
+            base_query='geometriciansBaseQuery',
+            wild_card_search=True,
+            show_results_without_query=True,
+            label='Geometricians',
+            label_msgid='urban_label_geometricians',
+            i18n_domain='urban',
+        ),
+        required=False,
+        schemata='urban_description',
+        multiValued=1,
+        relationship='parcelOutGeometricians',
+        allowed_types=('Geometrician',),
+    ),
+    ReferenceField(
+        name='notaryContact',
+        widget=ReferenceBrowserWidget(
+            allow_search=1,
+            allow_browse=1,
+            force_close_on_insert=1,
+            startup_directory='urban/notaries',
+            restrict_browsing_to_startup_directory=1,
+            popup_name='popup',
+            wild_card_search=True,
+            label='Notarycontact',
+            label_msgid='urban_label_notaryContact',
+            i18n_domain='urban',
+        ),
+        required=False,
+        schemata='urban_description',
+        multiValued=True,
+        relationship="notary",
+        allowed_types=('Notary',),
+    ),
 ),
 )
 
@@ -40,16 +82,15 @@ setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 UrbanCertificateTwo_schema = BaseFolderSchema.copy() + \
-    getattr(UrbanCertificateBase, 'schema', Schema(())).copy() + \
-    getattr(Inquiry, 'schema', Schema(())).copy() + \
+    getattr(BaseBuildLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 #put the the fields coming from Inquiry in a specific schemata
-setSchemataForInquiry(UrbanCertificateTwo_schema)
 ##/code-section after-schema
 
-class UrbanCertificateTwo(BaseFolder, UrbanCertificateBase, Inquiry, BrowserDefaultMixin):
+
+class UrbanCertificateTwo(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -61,45 +102,26 @@ class UrbanCertificateTwo(BaseFolder, UrbanCertificateBase, Inquiry, BrowserDefa
     schema = UrbanCertificateTwo_schema
 
     ##code-section class-header #fill in your manual code here
-    schemata_order = ['urban_description', 'urban_road', 'urban_location', \
-                      'urban_investigation_and_advices']
     ##/code-section class-header
 
     # Methods
-
-    # Manually created methods
-
-    def getLastDeposit(self, use_catalog=True):
-        return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
-
-    def getLastWalloonRegionPrimo(self, use_catalog=True):
-        return self._getLastEvent(interfaces.IWalloonRegionPrimoEvent, use_catalog)
-
-    def getLastCollegeReport(self, use_catalog=True):
-        return self._getLastEvent(interfaces.ICollegeReportEvent, use_catalog)
-
-    def getLastTheLicence(self, use_catalog=True):
-        return self._getLastEvent(interfaces.ITheLicenceEvent, use_catalog)
-
 
 
 registerType(UrbanCertificateTwo, PROJECTNAME)
 # end of class UrbanCertificateTwo
 
 ##code-section module-footer #fill in your manual code here
-def finalizeSchema(schema, folderish=False, moveDiscussion=True):
+
+#finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
+finalizeSchema(UrbanCertificateTwo_schema)
+
+
+def cu2FinalizeSchema(schema):
     """
        Finalizes the type schema to alter some fields
     """
-    schema.moveField('referenceDGATLP', after='reference')
-    schema.moveField('notaryContact', after='workLocations')
-    schema.moveField('foldermanagers', after='notaryContact')
-    schema.moveField('description', after='opinionsToAskIfWorks')
-    schema.moveField('folderCategoryTownship', after='RCU')
-    schema.moveField('annoncedDelay', after='missingPartsDetails')
-    schema.moveField('annoncedDelayDetails', after='annoncedDelay')
-    return schema
+    schema.moveField('geometricians', after='workLocations')
+    schema.moveField('notaryContact', after='geometricians')
 
-finalizeSchema(UrbanCertificateTwo_schema)
+cu2FinalizeSchema(UrbanCertificateTwo_schema)
 ##/code-section module-footer
-

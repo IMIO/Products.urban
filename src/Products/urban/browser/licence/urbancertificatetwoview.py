@@ -38,3 +38,6 @@ class UrbanCertificateTwoView(UrbanCertificateBaseView):
 
     def getMacroViewName(self):
         return 'urbancertificatetwo-macros'
+
+    def getPebFields(self):
+        return self.getSchemataFields(schemata='urban_peb')
