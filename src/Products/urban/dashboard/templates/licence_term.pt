@@ -15,10 +15,10 @@
             title term_label;
             id string:${wid}${term_id};
             data-kept-criteria python:widget.kept_criteria_as_json(term_id);">
-               <a tal:replace="structure python: view.get_add_licence_link(licence_type)" />
                <a href="javascript:;"
                   tal:attributes="href python: not redirect_to and 'javascript:;;' or redirect_to;
                                   class python: view.get_link_class(licence_type)"
                   tal:content="term_label" />
+               <a tal:replace="structure python: view.get_add_licence_link(licence_type)" />
           </li>
 </tal:defines>
