@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.browser.default_text import DefaultTextRenderer
+from Products.urban.interfaces import IEventTypeType
 from Products.urban.interfaces import ITheLicenceEvent
 
 from zope.component.interface import getInterface
@@ -39,8 +40,15 @@ def setEventTypeType(urban_event, event):
     urban_eventTypeType = urban_eventType.getEventTypeType()
     if not urban_eventTypeType:
         return
-    eventTypeTypeInterface = getInterface('', urban_eventTypeType)
-    alsoProvides(urban_event, eventTypeTypeInterface)
+
+    to_explore = set([getInterface('', urban_eventTypeType)])
+    while to_explore:
+        type_interface = to_explore.pop()
+        if IEventTypeType.providedBy(type_interface):
+            alsoProvides(urban_event, type_interface)
+            for base_interface in type_interface.getBases():
+                to_explore.add(base_interface)
+
     urban_event.reindexObject(['object_provides'])
 
 
