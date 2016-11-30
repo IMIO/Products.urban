@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
+
+from imio.schedule.utils import tuple_to_interface
+
 from HTMLParser import HTMLParser
 
 from Products.urban.config import URBAN_TYPES
@@ -142,3 +145,11 @@ def getSchemataFields(context, displayed_fields, schemata='', exclude=[]):
     fields = [field for field in schema.getSchemataFields(schemata) if isDisplayable(field)]
 
     return fields
+
+
+def get_interface_by_path(interface_path):
+    """
+    """
+    splitted_path = interface_path.split('.')
+    interface_tuple = ('.'.join(splitted_path[0:-1]), splitted_path[-1])
+    return tuple_to_interface(interface_tuple)

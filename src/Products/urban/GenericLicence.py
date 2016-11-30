@@ -40,7 +40,9 @@ from zope.i18n import translate
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban.base import UrbanBase
+from Products.urban.interfaces import IOpinionRequestEvent
 from Products.urban.utils import setOptionalAttributes
+from Products.urban.utils import get_interface_by_path
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban import UrbanMessage as _
 
@@ -1247,13 +1249,15 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
         tool = api.portal.get_tool('portal_urban')
         urbanConfig = self.getLicenceConfig()
-        listEventTypes = tool.listEventTypes(self,urbanConfig.id)
+        listEventTypes = tool.listEventTypes(self, urbanConfig.id)
         res = []
-        for listEventType in listEventTypes:
-            obj = listEventType.getObject()
-            #an advice corresponding to IOpinionRequestEvent
-            if obj.eventTypeType == 'Products.urban.interfaces.IOpinionRequestEvent':
-                res.append(obj)
+        for eventType in listEventTypes:
+            obj = eventType.getObject()
+            if obj.eventTypeType:
+                type_interface = get_interface_by_path(obj.eventTypeType)
+                #an advice corresponding to IOpinionRequestEvent
+                if type_interface.isOrExtends(IOpinionRequestEvent):
+                    res.append(obj)
         return res
 
     security.declarePublic('hasEventNamed')
