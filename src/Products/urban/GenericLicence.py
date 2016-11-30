@@ -1314,6 +1314,9 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     def getFirstDeposit(self, use_catalog=True):
         return self._getFirstEvent(interfaces.IDepositEvent, use_catalog)
 
+    def getLastSimpleCollege(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ISimpleCollegeEvent, use_catalog)
+
 
 
 registerType(GenericLicence, PROJECTNAME)

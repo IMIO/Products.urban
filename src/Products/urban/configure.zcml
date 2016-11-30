@@ -130,6 +130,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ISimpleCollegeEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IProrogationEvent"
     type=".interfaces.IEventTypeType"/>
 

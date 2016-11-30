@@ -248,8 +248,12 @@ class IWalloonRegionPrimoEvent(Interface):
     __doc__ = _("""IWalloonRegionPrimo type marker interface""")
 
 
-class IWalloonRegionOpinionRequestEvent(Interface):
+class IWalloonRegionOpinionRequestEvent(IOpinionRequestEvent):
     __doc__ = _("""IWalloonRegionOpinionRequest type marker interface""")
+
+
+class ISimpleCollegeEvent(Interface):
+    __doc__ = _("""ISimpleCollegeEvent type marker interface""")
 
 
 class IAcknowledgmentEvent(Interface):
