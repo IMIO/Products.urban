@@ -1,40 +1,37 @@
 <?xml version="1.0"?>
-<object name="MiscDemand"
+<object name="UrbanEventNotificationCollege"
         meta_type="Factory-based Type Information with dynamic views"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         i18n:domain="plone">
 
- <property name="title" i18n:translate="">MiscDemand</property>
+ <property name="title" i18n:translate="">UrbanEventNotificationCollege</property>
  <property name="description" i18n:translate=""></property>
- <property name="icon_expr">string:${portal_url}/MiscDemand.png</property>
- <property name="content_meta_type">MiscDemand</property>
+ <property name="icon_expr">string:${portal_url}/UrbanEventNotificationCollege.png</property>
+ <property name="content_meta_type">UrbanEvent</property>
  <property name="product">urban</property>
- <property name="factory">addMiscDemand</property>
- <property name="immediate_view">miscdemandview</property>
- <property name="global_allow">True</property>
+ <property name="factory">addUrbanEvent</property>
+ <property name="immediate_view">urbaneventview</property>
+ <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
-   <element value="Applicant"/>
-   <element value="UrbanEventOpinionRequest"/>
-   <element value="UrbanEventCollege"/>
-   <element value="UrbanEventNotificationCollege"/>
-   <element value="UrbanEvent"/>
-   <element value="File"/>
+   <element value="Recipient"/>
+   <element value="RecipientCadastre"/>
    <element value="PortionOut"/>
-   <element value="task"/>
+   <element value="Claimant"/>
+   <element value="File"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">miscdemandview</property>
+ <property name="default_view">urbaneventview</property>
  <property name="view_methods">
   <element value="folder_summary_view"/>
   <element value="folder_tabular_view"/>
   <element value="atct_album_view"/>
   <element value="folder_listing"/>
-  <element value="miscdemandview"/>
+  <element value="urbaneventview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
- <alias from="view" to="miscdemandview"/>
+ <alias from="view" to="urbaneventview"/>
  <alias from="edit" to="base_edit"/>
  <alias from="sharing" to="@@sharing"/>
  <action title="View"
@@ -48,7 +45,7 @@
  <action title="Edit"
          action_id="edit"
          category="object"
-         condition_expr="python:context.mayShowEditAction()"
+         condition_expr="not:object/@@plone_lock_info/is_locked_for_current_user"
          url_expr="string:${object_url}/edit"
          visible="True">
   <permission value="Modify portal content"/>
