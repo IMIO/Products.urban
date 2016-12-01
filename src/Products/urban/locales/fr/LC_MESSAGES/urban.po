@@ -1648,6 +1648,9 @@ msgstr "Numérotation des permis d'urbanisation"
 msgid "urban_label_RCU"
 msgstr "Règlement Communal d'Urbanisme (R.C.U.)"
 
+msgid "urban_label_SAR"
+msgstr "Périmètre d'un site d'activité économique désaffecté"
+
 #. Default: "Srs"
 #: Layer.py
 msgid "urban_label_SRS"
@@ -2115,6 +2118,12 @@ msgstr "E-mail"
 msgid "urban_label_endDate"
 msgstr "Date de fin d'utilisation"
 
+msgid "urban_label_enoughRoadEquipment"
+msgstr "Voirie suffisamment équipée"
+
+msgid "urban_label_enoughRoadEquipmentDetails"
+msgstr "Détails concernant l'équipement suffisant de la voirie"
+
 #. Default: "Equipmentandroadrequirements"
 #: GenericLicence.py
 msgid "urban_label_equipmentAndRoadRequirements"
@@ -2173,6 +2182,12 @@ msgstr "Exposant"
 #: PortionOut.py
 msgid "urban_label_exposant"
 msgstr "Exposant"
+
+msgid "urban_label_expropriation"
+msgstr "Plan d'expropriation"
+
+msgid "urban_label_expropriationDetails"
+msgstr "Détails concernant le plan d'expropriation"
 
 #. Default: "Externaldecision"
 #: UrbanEvent.py
@@ -2865,6 +2880,12 @@ msgstr "Parcelles"
 msgid "urban_label_postcode_locality"
 msgstr "Code postal et localité"
 
+msgid "urban_label_preemption"
+msgstr "Droit de préemption"
+
+msgid "urban_label_preemptionDetails"
+msgstr "Détails concernant le droit de préemption"
+
 #. Default: "Prenudetails"
 #: GenericLicence.py
 msgid "urban_label_prenuDetails"
@@ -3109,6 +3130,9 @@ msgstr "Type de voirie"
 #: EnvironmentBase.py
 msgid "urban_label_rubrics"
 msgstr "Rubrique(s)"
+
+msgid "urban_label_sarDetails"
+msgstr "Détails concernant le périmètre du site d'activité économique désaffecté"
 
 #. Default: "Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word"
 msgid "urban_label_searchbyfolderreference_descr"

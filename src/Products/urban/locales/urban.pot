@@ -1606,6 +1606,12 @@ msgstr ""
 msgid "urban_label_EnvClassThreeNumerotation"
 msgstr ""
 
+msgid "urban_label_expropriation"
+msgstr ""
+
+msgid "urban_label_expropriationDetails"
+msgstr ""
+
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"
@@ -1644,6 +1650,12 @@ msgstr ""
 #. Default: "Rcu"
 #: GenericLicence.py
 msgid "urban_label_RCU"
+msgstr ""
+
+msgid "urban_label_SAR"
+msgstr ""
+
+msgid "urban_label_sarDetails"
 msgstr ""
 
 #. Default: "Srs"
@@ -2113,6 +2125,12 @@ msgstr ""
 #. Default: "Enddate"
 #: Street.py
 msgid "urban_label_endDate"
+msgstr ""
+
+msgid "urban_label_enoughRoadEquipment"
+msgstr ""
+
+msgid "urban_label_enoughRoadEquipmentDetails"
 msgstr ""
 
 #. Default: "Equipmentandroadrequirements"
@@ -2809,6 +2827,12 @@ msgstr ""
 #. Default: "Phone"
 #: Contact.py
 msgid "urban_label_phone"
+msgstr ""
+
+msgid "urban_label_preemptionDetails"
+msgstr ""
+
+msgid "urban_label_preemption"
 msgstr ""
 
 #. Default: "Gsm"

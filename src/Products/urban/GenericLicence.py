@@ -95,7 +95,8 @@ optional_fields = [
     'PRevU', 'prevuDetails', 'PRenU', 'prenuDetails', 'airportNoiseZone', 'airportNoiseZoneDetails',
     'description', 'rgbsr', 'rgbsrDetails', 'karstConstraints', 'karstConstraintsDetails',
     'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', 'sevesoSite', 'natura_2000', 'sewers',
-    'sewersDetails', 'roadAnalysis', 'futureRoadCoating'
+    'sewersDetails', 'roadAnalysis', 'futureRoadCoating', 'expropriation', 'expropriationDetails',
+    'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails'
 ]
 ##/code-section module-header
 
@@ -108,7 +109,7 @@ schema = Schema((
             label_msgid='urban_label_title',
             i18n_domain='urban',
         ),
-        required= True,
+        required=True,
         schemata='urban_description',
         accessor="Title",
     ),
@@ -291,7 +292,7 @@ schema = Schema((
         name='roadEquipments',
         schemata='urban_road',
         widget=DataGridWidget(
-            columns={'road_equipment': SelectColumn("Road equipments", UrbanVocabulary('folderroadequipments', inUrbanConfig=False)), 'road_equipment_details': Column("Road equipment details"),},
+            columns={'road_equipment': SelectColumn("Road equipments", UrbanVocabulary('folderroadequipments', inUrbanConfig=False)), 'road_equipment_details': Column("Road equipment details")},
             label='Roadequipments',
             label_msgid='urban_label_roadEquipments',
             i18n_domain='urban',
@@ -460,7 +461,7 @@ schema = Schema((
             label_msgid='urban_label_floodingLevel',
             i18n_domain='urban',
         ),
-        enforceVocabulary= True,
+        enforceVocabulary=True,
         schemata='urban_road',
         vocabulary='listFloodingLevels',
     ),
@@ -640,6 +641,98 @@ schema = Schema((
         schemata='urban_location',
         vocabulary='listFloodingLevels',
     ),
+    BooleanField(
+        name='expropriation',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='expropriation',
+            label_msgid='urban_label_expropriation',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+    ),
+    TextField(
+        name='expropriationDetails',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Expropriationdetails',
+            label_msgid='urban_label_expropriationDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/html',
+    ),
+    BooleanField(
+        name='preemption',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='preemption',
+            label_msgid='urban_label_preemption',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+    ),
+    TextField(
+        name='preemptionDetails',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Preemptiondetails',
+            label_msgid='urban_label_preemptionDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/html',
+    ),
+    BooleanField(
+        name='SAR',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='sar',
+            label_msgid='urban_label_SAR',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+    ),
+    TextField(
+        name='sarDetails',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Sardetails',
+            label_msgid='urban_label_sarDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/html',
+    ),
+    BooleanField(
+        name='enoughRoadEquipment',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='enoughRoadEquipment',
+            label_msgid='urban_label_enoughRoadEquipment',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+    ),
+    TextField(
+        name='enoughRoadEquipmentDetails',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Enoughroadequipmentdetails',
+            label_msgid='urban_label_enoughRoadEquipmentDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/html',
+    ),
     TextField(
         name='locationTechnicalRemarks',
         allowable_content_types=('text/html',),
@@ -695,7 +788,7 @@ schema = Schema((
     LinesField(
         name='SSC',
         widget=MultiSelectionWidget(
-            size= 15,
+            size=15,
             label='Ssc',
             label_msgid='urban_label_SSC',
             i18n_domain='urban',
@@ -721,7 +814,7 @@ schema = Schema((
     LinesField(
         name='RCU',
         widget=MultiSelectionWidget(
-            size= 10,
+            size=10,
             label='Rcu',
             label_msgid='urban_label_RCU',
             i18n_domain='urban',
@@ -747,7 +840,7 @@ schema = Schema((
     LinesField(
         name='PRenU',
         widget=MultiSelectionWidget(
-            size= 5,
+            size=5,
             label='Prenu',
             label_msgid='urban_label_PRenU',
             i18n_domain='urban',
@@ -773,7 +866,7 @@ schema = Schema((
     LinesField(
         name='PRevU',
         widget=MultiSelectionWidget(
-            size= 5,
+            size=5,
             label='Prevu',
             label_msgid='urban_label_PRevU',
             i18n_domain='urban',
@@ -932,7 +1025,7 @@ schema = Schema((
             allow_search=True,
             allow_browse=True,
             show_indexes=True,
-            available_indexes={'Title':'Nom'},
+            available_indexes={'Title': 'Nom'},
             show_index_selector=True,
             wild_card_search=True,
             startup_directory="urban/parcellings",
@@ -963,6 +1056,7 @@ GenericLicence_schema['title'].searchable = True
 GenericLicence_schema['title'].widget.visible = False
 ##/code-section after-schema
 
+
 class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     """
     """
@@ -979,7 +1073,6 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     # block local roles acquisition and let the workflow handle that
     __ac_local_roles_block__ = True
 
-
     schema = GenericLicence_schema
 
     ##code-section class-header #fill in your manual code here
@@ -988,6 +1081,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     # Methods
 
     security.declarePublic('getDefaultReference')
+
     def getDefaultReference(self):
         """
           Returns the reference for the new element
@@ -997,6 +1091,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     # Manually created methods
 
     security.declarePublic('getRepresentatives')
+
     def getRepresentatives(self):
         """
         To override per licence type
@@ -1004,6 +1099,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return []
 
     security.declarePublic('getDefaultValue')
+
     def getDefaultValue(self, context=None, field=None):
         if not context or not field:
             return ['']
@@ -1018,6 +1114,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return default_value
 
     security.declarePublic('getDefaultText')
+
     def getDefaultText(self, context=None, field=None, html=False):
         if not context or not field:
             return ""
@@ -1025,6 +1122,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return urban_tool.getTextDefaultValue(field.getName(), context, html)
 
     security.declarePublic('getUrbanConfig')
+
     def getUrbanConfig(self):
         portal_urban = api.portal.get_tool('portal_urban')
 
@@ -1033,6 +1131,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return config_folder
 
     security.declarePublic('attributeIsUsed')
+
     def attributeIsUsed(self, name):
         """
           Is the attribute named as param name used in this LicenceConfig ?
@@ -1041,6 +1140,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return (name in licenceConfig.getUsedAttributes())
 
     security.declarePublic('createUrbanEvent')
+
     def createUrbanEvent(self, urban_event_type, **kwargs):
         """
          urban_event_type can either be an id, an uid or the object
@@ -1049,6 +1149,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return urban_event
 
     security.declarePublic('getRawQuery')
+
     def getRawQuery(self):
         """ """
         query = [
@@ -1106,6 +1207,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return tuple(all_opinions)
 
     security.declarePublic('listCatchmentAreas')
+
     def listCatchmentAreas(self):
         """
           This vocabulary for field catchmentArea returns a list of
@@ -1122,6 +1224,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return DisplayList(vocab)
 
     security.declarePublic('listFloodingLevels')
+
     def listFloodingLevels(self):
         """
           This vocabulary for field floodingLevel returns a list of
@@ -1140,22 +1243,24 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return DisplayList(vocab)
 
     security.declarePublic('foldermanagersBaseQuery')
+
     def foldermanagersBaseQuery(self):
         """
         """
         portal = api.portal.get_tool('portal_url').getPortalObject()
         rootPath = '/'.join(portal.getPhysicalPath())
         urban_tool = api.portal.get_tool('portal_urban')
-        ids =  []
+        ids = []
         for foldermanager in urban_tool.foldermanagers.objectValues():
             if self.getPortalTypeName() in foldermanager.getManageableLicences():
                 ids.append(foldermanager.getId())
         dict = {}
-        dict['path'] = {'query':'%s/portal_urban/foldermanagers' % (rootPath)}
+        dict['path'] = {'query': '%s/portal_urban/foldermanagers' % (rootPath)}
         dict['id'] = ids
         return dict
 
     security.declarePublic('getParcels')
+
     def getParcels(self):
         """
            Return the list of parcels (portionOut) for the Licence
@@ -1163,6 +1268,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return self.objectValues('PortionOut')
 
     security.declarePublic('getOfficialParcels')
+
     def getOfficialParcels(self):
         """
            Return the list of parcels (portionOut) for the Licence
@@ -1171,6 +1277,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return parcels
 
     security.declarePublic('updateTitle')
+
     def updateTitle(self):
         """
            Update the title to clearly identify the licence
@@ -1184,30 +1291,31 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
 
     security.declarePublic('getAnnoncedDelay')
+
     def getAnnoncedDelay(self, theObject=False):
         """
           Returns the annonced delay value or the UrbanDelay if theObject=True
         """
         res = self.getField('annoncedDelay').get(self)
         if res and theObject:
-            tool = api.portal.get_tool('portal_urban')
             urbanConfig = self.getLicenceConfig()
             res = getattr(urbanConfig.folderdelays, res)
         return res
 
     security.declarePublic('getPca')
+
     def getPca(self, theObject=False):
         """
           Returns the pca value or the PcaTerm if theObject=True
         """
         res = self.getField('pca').get(self)
         if type(res) is str and theObject:
-            tool = api.portal.get_tool('portal_urban')
             urbanConfig = self.getLicenceConfig()
             res = getattr(urbanConfig.pcas, res)
         return res
 
     security.declarePublic('getOpinionRequests')
+
     def getOpinionRequests(self, organisation=''):
         """
           Returns the existing opinion requests
@@ -1222,6 +1330,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return res
 
     security.declarePublic('createAllAdvices')
+
     def createAllAdvices(self):
         """
           Create all urbanEvent corresponding to advice on a licence
@@ -1242,6 +1351,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return self.REQUEST.RESPONSE.redirect(self.absolute_url() + '/view?#fieldsetlegend-urban_events')
 
     security.declarePublic('getAllAdvices')
+
     def getAllAdvices(self):
         """
           XXX need to be refactor (do not work)
@@ -1261,6 +1371,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return res
 
     security.declarePublic('hasEventNamed')
+
     def hasEventNamed(self, title):
         """
         Tells if the licence contains an urbanEvent named 'title'
@@ -1271,6 +1382,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return False
 
     security.declarePublic('hasNoEventNamed')
+
     def hasNoEventNamed(self, title):
         """
         Tells if the licence does not contain any urbanEvent named 'title'
@@ -1278,6 +1390,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return not self.hasEventNamed(title)
 
     security.declarePublic('getLicencesOfTheParcels')
+
     def getLicencesOfTheParcels(self, licence_type=''):
         history = []
         licence_uids = set([])
@@ -1301,6 +1414,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return licences
 
     security.declarePublic('getUrbanCertificateTwoOfTheParcels')
+
     def getUrbanCertificateTwoOfTheParcels(self, date=None):
         #cu2 cannot be older than 2 years
         if  self.getLastTheLicence():
@@ -1318,10 +1432,8 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return self._getLastEvent(interfaces.ISimpleCollegeEvent, use_catalog)
 
 
-
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-
