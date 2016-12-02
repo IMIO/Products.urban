@@ -387,20 +387,23 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
         return relatedLicences
 
-    def get_specific_features_text(self):
+     def get_specific_features_text(self):
         """
         # Particularité(s) du bien
         """
-        licence = self.real_context.aq_parent
-        specificFeatures = licence.getSpecificFeatures()
+        context = self.real_context.aq_parent
+        specificFeatures = context.getSpecificFeatures()
         specific_features_text = []
+        tool = getToolByName(self, 'portal_urban')
         for specificFeature in specificFeatures:
             if specificFeature['check']:
                 if specificFeature['text']:
-                    specific_features_text.append(specificFeature['text'])
+                    specific_feature_text = tool.renderText(text=specificFeature['text'], context=context)
+                    specific_features_text.append(specific_feature_text)
             else:
                 if specificFeature['defaultText']:
-                    specific_features_text.append(specificFeature['defaultText'])
+                    specific_feature_text = tool.renderText(text=specificFeature['defaultText'], context=context)
+                    specific_features_text.append(specific_feature_text)
         return specific_features_text
 
     def get_street_dict(self, uid):
