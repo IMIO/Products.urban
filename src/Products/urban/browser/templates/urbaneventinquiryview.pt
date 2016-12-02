@@ -80,10 +80,16 @@
                                             <div tal:define="inqOral python: inqReclamationNumbers[0];
                                                                inqWrited python: inqReclamationNumbers[1];" style="margin-top:40px">
                                                 <div>
-                                                    <strong i18n:translate="" tal:content="python: 'urban_label_investigationOralReclamationNumber'">Optional field label</strong>:&nbsp;<strong><span tal:content="inqOral" /></strong>
+                                                    <strong i18n:translate="" tal:content="python: 'urban_label_investigationOralReclamationNumber'">
+                                                        Optional field label
+                                                    </strong>:&nbsp;<strong>
+                                                    <span tal:content="inqOral" /></strong>
                                                 </div>
                                                 <div>
-                                                    <strong i18n:translate="" tal:content="python: 'urban_label_investigationWriteReclamationNumber'">Optional field label</strong>:&nbsp;<strong><span tal:content="inqWrited" /></strong>
+                                                    <strong i18n:translate="" tal:content="python: 'urban_label_investigationWriteReclamationNumber'">
+                                                        Optional field label
+                                                    </strong>:&nbsp;<strong>
+                                                    <span tal:content="inqWrited" /></strong>
                                                 </div>
                                             </div>
                                        </fieldset>
