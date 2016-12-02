@@ -387,7 +387,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
         return relatedLicences
 
-     def get_specific_features_text(self):
+    def get_specific_features_text(self):
         """
         # Particularité(s) du bien
         """
