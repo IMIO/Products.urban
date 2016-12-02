@@ -20,10 +20,14 @@ class UrbanEventEdit(Edit):
             name='ws4pmclient-settings'
         )
 
+        fields = [i for i in self.context.schema.fields() if i.schemata == 'default' and not hasattr(i, 'optional') and i.widget.visible and i.widget.visible['view'] == 'visible']
         linkedUrbanEventType = self.context.getUrbaneventtypes()
-        actived_fields = linkedUrbanEventType.getActivatedFields()
-        schemata_fields = schemata.editableFields(self.context, visible_only=True)
-        fields = [f for f in schemata_fields if f.getName() in actived_fields]
+
+        for activatedField in linkedUrbanEventType.getActivatedFields():
+            if not activatedField:
+                continue  # in some case, there could be an empty value in activatedFields...
+            field = self.context.getField(activatedField)
+            fields.append(field)
 
         if ws4pmSettings.checkAlreadySentToPloneMeeting(self.context):
             return [f for f in fields if not getattr(f, 'pm_text_field', False)]
