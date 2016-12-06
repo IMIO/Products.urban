@@ -246,15 +246,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         OrderedBaseFolder.__init__(self, 'portal_urban')
         self.setTitle('Urban configuration')
 
-        self.eventtype_portaltype_mapping = PersistentMapping(
-            {
-                'Products.urban.interfaces.IInquiryEvent': 'UrbanEventInquiry',
-                'Products.urban.interfaces.ICollegeEvent': 'UrbanEventCollege',
-                'Products.urban.interfaces.ITheLicenceEvent': 'UrbanEventCollege',
-                'Products.urban.interfaces.IOpinionRequestEvent': 'UrbanEventOpinionRequest',
-            }
-        )
-
     # tool should not appear in portal_catalog
     def at_post_edit_script(self):
         self.unindexObject()

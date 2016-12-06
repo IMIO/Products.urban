@@ -21,13 +21,13 @@ from Products.urban.UrbanDelay import UrbanDelay
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget
-from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 
 from Products.urban.config import *
 from Products.urban.interfaces import IOptionalFields
 
 ##code-section module-header #fill in your manual code here
+from plone import api
 from Products.Archetypes.public import DisplayList
 from Products.CMFCore.Expression import Expression
 from Products.CMFCore.utils import getToolByName
@@ -90,7 +90,7 @@ schema = Schema((
     DataGridField(
         name='textDefaultValues',
         widget=DataGridWidget(
-            columns={'fieldname' : SelectColumn('FieldName', 'listTextFields'), 'text' : TextAreaColumn('Text', rows=6, cols=60)},
+            columns={'fieldname': SelectColumn('FieldName', 'listTextFields'), 'text': TextAreaColumn('Text', rows=6, cols=60)},
             label='Textdefaultvalues',
             label_msgid='urban_label_textDefaultValues',
             i18n_domain='urban',
@@ -111,9 +111,19 @@ schema = Schema((
     StringField(
         name='eventTypeType',
         vocabulary_factory="eventTypeType",
+        default='UrbanEvent',
         widget=SelectionWidget(
             label='Eventtypetype',
             label_msgid='urban_label_eventTypeType',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='eventPortalType',
+        vocabulary="listEventPortalTypes",
+        widget=SelectionWidget(
+            label='Eventportaltype',
+            label_msgid='urban_label_eventPortalType',
             i18n_domain='urban',
         ),
     ),
@@ -152,6 +162,7 @@ UrbanEventType_schema = OrderedBaseFolderSchema.copy() + \
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
+
 class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
     """
     """
@@ -169,6 +180,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
     # Methods
 
     security.declarePublic('listOptionalFields')
+
     def listOptionalFields(self):
         """
          return a DisplayList of fields wich are marked as optional
@@ -192,6 +204,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
     # Manually created methods
 
     security.declarePublic('listTextFields')
+
     def listTextFields(self):
         #we have to know from where the method has been called in order to know which text
         #fields to propose to be "default valued"
@@ -208,13 +221,14 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         return DisplayList(sorted(vocabulary_fields, key=lambda name: name[1]))
 
     security.declarePublic('canBeCreatedInLicence')
+
     def canBeCreatedInLicence(self, obj):
         """
         Creation condition
 
         computed by evaluating the TAL expression stored in TALCondition field
         """
-        res = True # At least for now
+        res = True  # At least for now
         # Check condition
         TALCondition = self.getTALCondition().strip()
         if TALCondition:
@@ -241,6 +255,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
             raise ValueError(_("You can not create this UrbanEvent !"))
 
     security.declarePublic('listActivatedDates')
+
     def listActivatedDates(self):
         from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
 
@@ -269,10 +284,19 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         return to_return
 
     security.declarePublic('getTemplates')
+
     def getTemplates(self):
         templates = [obj for obj in self.objectValues() if IUrbanTemplate.providedBy(obj)]
         return templates
 
+    security.declarePublic('listEventPortalTypes')
+
+    def listEventPortalTypes(self):
+        portal_types = api.portal.get_tool('portal_types')
+        event_types = DisplayList(
+            [(k, _(k)) for k in portal_types.keys() if k.startswith('UrbanEvent') and not k.endswith('EventType')]
+        )
+        return event_types
 
 
 registerType(UrbanEventType, PROJECTNAME)
@@ -280,4 +304,3 @@ registerType(UrbanEventType, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-
