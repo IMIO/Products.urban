@@ -112,4 +112,21 @@
         name="urban.schedule.condition.suspension"
     />
 
+    <!-- fd decision conditions-->
+    <adapter
+        for="Products.urban.interfaces.IArticle127
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.FDDecisionEventCreatedCondition"
+        name="urban.schedule.condition.fd_decision_event_created"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IArticle127
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.FDDecisionEventDoneCondition"
+        name="urban.schedule.condition.fd_decision_received"
+    />
+
 </configure>

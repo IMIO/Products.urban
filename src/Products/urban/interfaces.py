@@ -248,20 +248,20 @@ class IWalloonRegionPrimoEvent(Interface):
     __doc__ = _("""IWalloonRegionPrimo type marker interface""")
 
 
-class IWalloonRegionOpinionRequestEvent(IOpinionRequestEvent):
+class IWalloonRegionOpinionRequestEvent(Interface):
     __doc__ = _("""IWalloonRegionOpinionRequest type marker interface""")
 
 
-class ISimpleCollegeEvent(Interface):
+class IWalloonRegionDecisionEvent(Interface):
+    __doc__ = _("""IWalloonRegionDecisionEvent type marker interface""")
+
+
+class ISimpleCollegeEvent(ICollegeEvent):
     __doc__ = _("""ISimpleCollegeEvent type marker interface""")
 
 
 class IAcknowledgmentEvent(Interface):
     __doc__ = _("""IAcknowledgment type marker interface""")
-
-
-class ICollegeReportEvent(Interface):
-    __doc__ = _("""ICollegeReport type marker interface""")
 
 
 class ICommunalCouncilEvent(Interface):
@@ -300,7 +300,11 @@ class ICollegeReportEvent(Interface):
     __doc__ = _("""ICollegeReport type marker interface""")
 
 
-class ITheLicenceEvent(ICollegeEvent):
+class ITheLicenceCollegeEvent(ICollegeEvent):
+    __doc__ = _("""ITheLicenceCollege type marker interface""")
+
+
+class ITheLicenceEvent(Interface):
     __doc__ = _("""ITheLicence type marker interface""")
 
 

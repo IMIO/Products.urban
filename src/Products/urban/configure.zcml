@@ -70,6 +70,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IWalloonRegionDecisionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IWalloonRegionOpinionRequestEvent"
     type=".interfaces.IEventTypeType"/>
 
