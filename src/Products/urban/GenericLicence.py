@@ -1339,8 +1339,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         listEventTypes = self.getAllAdvices()
         for eventType in listEventTypes:
             eventType.checkCreationInLicence(self)
-            eventTypeType = eventType.getEventTypeType()
-            portal_type = urban_tool.eventtype_portaltype_mapping.get(eventTypeType, "UrbanEvent")
+            portal_type = eventType.getEventPortalType() or 'UrbanEvent'
 
             newUrbanEventId = self.invokeFactory(
                 portal_type, id=urban_tool.generateUniqueId(portal_type),

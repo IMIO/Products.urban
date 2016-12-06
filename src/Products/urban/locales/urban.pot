@@ -175,6 +175,9 @@ msgstr ""
 msgid "ITheLicence type marker interface"
 msgstr ""
 
+msgid "IWalloonRegionDesisionEvent type marker interface"
+msgstr ""
+
 #. Default: "Walloon region opinion request"
 msgid "IWalloonRegionOpinionRequest type marker interface"
 msgstr ""

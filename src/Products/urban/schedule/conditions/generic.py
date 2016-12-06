@@ -228,3 +228,35 @@ class LicenceSuspension(Condition):
     def evaluate(self):
         is_suspended = api.content.get_state(self.task_container) == 'suspension'
         return is_suspended
+
+
+class FDDecisionEventCreatedCondition(Condition):
+    """
+    Licence fd decision event is created but not closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        fd_decision_created = False
+        fd_decision_event = licence.getLastWalloonRegionDecisionEvent()
+        if fd_decision_event:
+            fd_decision_created = api.content.get_state(fd_decision_event) != 'closed'
+
+        return fd_decision_created
+
+
+class FDDecisionEventDoneCondition(Condition):
+    """
+    Licence fd decision event is closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        fd_decision_done = False
+        fd_decision_event = licence.getLastWalloonRegionDecisionEvent()
+        if fd_decision_event:
+            fd_decision_done = api.content.get_state(fd_decision_event) == 'closed'
+
+        return fd_decision_done

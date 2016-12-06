@@ -176,6 +176,9 @@ msgstr "Demande d'avis du service technique"
 msgid "ITheLicence type marker interface"
 msgstr "Délivrance du permis/certificat/..."
 
+msgid "IWalloonRegionDesisionEvent type marker interface"
+msgstr "Décision de la région wallone"
+
 #. Default: "Walloon region opinion request"
 msgid "IWalloonRegionOpinionRequest type marker interface"
 msgstr "Demande d'avis à la région wallone"
