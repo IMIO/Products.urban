@@ -96,7 +96,7 @@ class ILayer(Interface):
     """Marker interface for .Layer.Layer
     """
 
-class IDeclaration(Interface):
+class IDeclaration(IGenericLicence):
     """Marker interface for .Declaration.Declaration
     """
 
@@ -160,11 +160,11 @@ class IMiscDemand(Interface):
     """Marker interface for .MiscDemand.MiscDemand
     """
 
-class IPreliminaryNotice(Interface):
+class IPreliminaryNotice(IGenericLicence):
     """Marker interface for .PreliminaryNotice.PreliminaryNotice
     """
 
-class IPatrimonyCertificate(Interface):
+class IPatrimonyCertificate(IGenericLicence):
     """Marker interface for .PatrimonyCertificate.PatrimonyCertificate
     """
 
@@ -329,7 +329,7 @@ class IUrbanBase(Interface):
     """
 
 
-class IUrbanCertificateOne(Interface):
+class IUrbanCertificateOne(IGenericLicence):
     """Marker interface for UrbanCertificateOne
     """
 
