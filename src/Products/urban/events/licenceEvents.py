@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+
 from Products.urban.utils import getCurrentFolderManager
+from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
+
+from zope.interface import alsoProvides
 
 
 def setDefaultValuesEvent(licence, event):
@@ -73,3 +77,12 @@ def _checkNumerotation(licence):
         #set the new value
         config.setNumerotation(value)
         config.reindexObject()
+
+
+def setMarkerInterface(licence, event):
+    """
+    """
+    portal_type = licence.portal_type
+    marker_interface = URBAN_TYPES_INTERFACES.get(portal_type, None)
+    if marker_interface and not marker_interface.providedBy(licence):
+        alsoProvides(licence, marker_interface)
