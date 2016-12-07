@@ -51,6 +51,10 @@
                    zope.lifecycleevent.IObjectModifiedEvent"
               handler=".licenceEvents.updateEventsFoldermanager"/>
 
+  <subscriber for="..interfaces.IGenericLicence
+                   zope.lifecycleevent.IObjectCreatedEvent"
+              handler=".licenceEvents.setMarkerInterface"/>
+
   <subscriber for="..interfaces.IPortionOut
                    zope.container.interfaces.IObjectRemovedEvent"
               handler=".portionOutEvents.onDelete" />
