@@ -487,3 +487,14 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                 event = events[i]
             i = i + 1
         return event
+
+
+class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
+    def get_work_location_dict(self, index, folder):
+        """
+        # Adresse(s) des travaux
+        return a dictionary containing specific work locations informations
+        """
+        view = folder.restrictedTraverse('document_generation_helper_view')
+        work_location_dict = view.get_work_location_dict(index)
+        return work_location_dict
