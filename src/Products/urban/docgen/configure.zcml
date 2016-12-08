@@ -21,7 +21,7 @@
     <browser:page
         for="Products.ATContentTypes.interfaces.IATFolder"
         name="document_generation_helper_view"
-        class=".helper_view.UrbanDocGenerationHelperView"
+        class=".helper_view.UrbanDocGenerationFacetedHelperView"
         permission="zope2.View"
         />
 
