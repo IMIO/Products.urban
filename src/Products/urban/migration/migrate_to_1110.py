@@ -170,7 +170,7 @@ def migrate_UrbanDoc_to_StyleTemplate(context):
                 'odt_file': NamedBlobFile(
                     data=style_blob.data,
                     contentType=style_blob.getContentType(),
-                    filename=(style_blob.getFilename() or style_id).decode('utf-8'),
+                    filename=(style_blob.getFilename() or styles_id).decode('utf-8'),
                 ),
                 'title': style_title,
                 'container': folder,
