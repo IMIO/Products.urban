@@ -170,7 +170,7 @@ def migrate_UrbanDoc_to_StyleTemplate(context):
                 'odt_file': NamedBlobFile(
                     data=style_blob.data,
                     contentType=style_blob.getContentType(),
-                    filename=style_blob.getFilename().decode('utf-8'),
+                    filename=(template_blob.getFilename() or template_id).decode('utf-8'),
                 ),
                 'title': style_title,
                 'container': folder,
@@ -223,7 +223,7 @@ def migrate_UrbanDoc_to_Urbantemplate(context):
                     'odt_file': NamedBlobFile(
                         data=template_blob.data,
                         contentType=template_blob.getContentType(),
-                        filename=template_blob.getFilename().decode('utf-8'),
+                        filename=(template_blob.getFilename() or template_id).decode('utf-8'),
                     ),
                     'title': urbandoc.Title(),
                     'pod_portal_type': 'UrbanEvent',
