@@ -126,7 +126,7 @@ def migrate_UrbanDoc_to_SubTemplate(context):
                 'odt_file': NamedBlobFile(
                     data=template_blob.data,
                     contentType=template_blob.getContentType(),
-                    filename=template_blob.getFilename().decode('utf-8'),
+                    filename=(template_blob.getFilename() or template_id).decode('utf-8'),
                 ),
                 'title': template_title,
                 'container': folder,
