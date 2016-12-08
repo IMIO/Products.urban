@@ -378,14 +378,13 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         """
           Returns the licences related to a parcel
         """
-        licence = self.real_context.aq_parent
-        parcels = licence.getParcels()
+        context = self.real_context.aq_parent
+        parcels = context.getParcels()
         relatedLicences = []
         for parcel in parcels:
-            parcelRecordsView = licence.restrictedTraverse('parcelhistoricrecordsview')
+            parcelRecordsView = context.restrictedTraverse('parcelhistoricrecordsview')
             parcelRecordsView.parcel_id = parcel.id
-            #relatedLicences += parcelRecordsView.getRelatedLicencesOfParcel()
-            relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
+            relatedLicences += parcelRecordsView.getRelatedLicencesOfParcel()
         return relatedLicences
 
     def get_specific_features_text(self):
