@@ -34,7 +34,7 @@ def migrate(context):
     logger = logging.getLogger('urban: migrate to 1.11.0')
     logger.info("starting migration steps")
     #  migrate UrbanDoc to File type with an IUrbanDoc marker interface on it.
-    migrate_generated_UrbanDoc_to_ATFile(context)
+    # migrate_generated_UrbanDoc_to_ATFile(context)
     migrate_UrbanDoc_to_SubTemplate(context)
     migrate_UrbanDoc_to_StyleTemplate(context)
     migrate_UrbanDoc_to_Urbantemplate(context)
@@ -170,7 +170,7 @@ def migrate_UrbanDoc_to_StyleTemplate(context):
                 'odt_file': NamedBlobFile(
                     data=style_blob.data,
                     contentType=style_blob.getContentType(),
-                    filename=(template_blob.getFilename() or template_id).decode('utf-8'),
+                    filename=(style_blob.getFilename() or template_id).decode('utf-8'),
                 ),
                 'title': style_title,
                 'container': folder,
