@@ -111,7 +111,8 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
         """
         Generate the title...
         """
-        return self.getDenomination()
+        title = '{}{}{}'.format(self.getLegalForm(), self.getLegalForm() and ' ' or '', self.getDenomination())
+        return title
 
     def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
         nameSignaletic = '{} {}'.format(self.getLegalForm(), self.getDenomination())
