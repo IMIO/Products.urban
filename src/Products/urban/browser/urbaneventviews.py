@@ -120,13 +120,17 @@ class UrbanEventView(BrowserView):
         corresponding link for document generation
         """
         context = aq_inner(self.context)
-        template_list = [{
-            'name':template.id.split('.')[0],
-            'title':template.Title(),
-            'class':'',
-            'href':self._generateDocumentHref(context, template),
-        }
-            for template in context.getTemplates() if template.can_be_generated(context)]
+        template_list = []
+        for template in context.getTemplates():
+            if template.can_be_generated(context):
+                template_list.append(
+                    {
+                        'name': template.id.split('.')[0],
+                        'title': template.Title(),
+                        'class': '',
+                        'href': self._generateDocumentHref(context, template),
+                    }
+                )
 
         for generated_doc in context.objectValues():
             for template in template_list:

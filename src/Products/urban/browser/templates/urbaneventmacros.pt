@@ -60,7 +60,7 @@
           tal:define="templates_list view/getListOfTemplatesToGenerate;
           mayAddUrbanEvent view/mayAddUrbanEvent">
     <legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend>
-    <tal:templates_link condition="python: mayAddUrbanEvent and templates_list">
+    <tal:templates_link condition="python: templates_list">
         <table class="clear">
             <tal:loopEventType repeat="template templates_list">
                 <tr>
@@ -80,9 +80,6 @@
     <tal:no_templateObjs condition="not: templates_list">
         <p class="discreet" i18n:translate="no_document_to_generate">No document to generate</p>
     </tal:no_templateObjs>
-    <tal:not_may_add_urbanevent condition="not: mayAddUrbanEvent">
-        <p class="discreet" i18n:translate="not_permitted_to_add_urbanevent">You can not add an UrbanEvent</p>
-    </tal:not_may_add_urbanevent>
 </fieldset>
 
 <metal:add_attachment define-macro="urbanEventAddAttachmentMacro" i18n:domain="urban"
