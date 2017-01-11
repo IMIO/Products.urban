@@ -271,7 +271,8 @@ class UrbanEventInquiryView(UrbanEventView, MapView):
                     print rspe
                     #to avoid having several times the same Recipient (that could for example be on several parcels
                     #we first look in portal_catalog where Recipients are catalogued
-                    brains = context.portal_catalog(portal_type="RecipientCadastre", path={'query': event_path, }, Title=str(rspe['pe']))
+                    owner_name = str(rspe['pe']).replace('(', '').replace(')', '')
+                    brains = context.portal_catalog(portal_type="RecipientCadastre", path={'query': event_path, }, Title=owner_name)
                     if len(brains) > 0:
                         newrecipient = brains[0].getObject()
                     else:
