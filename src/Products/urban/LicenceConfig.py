@@ -128,6 +128,16 @@ schema = Schema((
         schemata='public_settings',
     ),
     StringField(
+        name='numerotationSource',
+        widget=SelectionWidget(
+            label='Numerotation source',
+            label_msgid='urban_label_numerotationsource',
+            i18n_domain='urban',
+        ),
+        vocabulary='listLicenceConfigs',
+        schemata='public_settings',
+    ),
+    StringField(
         name='numerotation',
         default=0,
         widget=StringField._properties['widget'](
@@ -223,6 +233,37 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
                         )
                     )
         return DisplayList(tuple(res)).sortedByValue()
+
+    def listLicenceConfigs(self):
+        """
+        """
+        portal_urban = api.portal.get_tool('portal_urban')
+        res = [(c.id, c.Title()) for c in portal_urban.objectValues('LicenceConfig')]
+        return DisplayList(tuple(res)).sortedByValue()
+
+    security.declarePublic('getNumerotation')
+
+    def getNumerotation(self):
+        """
+        """
+        config_id = self.getNumerotationSource()
+        if config_id:
+            portal_urban = api.portal.get_tool('portal_urban')
+            config = getattr(portal_urban, config_id)
+            return config.numerotation
+        else:
+            return self.numerotation
+
+    def setNumerotation(self, new_numerotation):
+        """
+        """
+        config_id = self.getNumerotationSource()
+        if config_id:
+            portal_urban = api.portal.get_tool('portal_urban')
+            config = getattr(portal_urban, config_id)
+            config.numerotation = new_numerotation
+        else:
+            self.numerotation = new_numerotation
 
     def generateReference(self, licence, **kwargs):
         """
