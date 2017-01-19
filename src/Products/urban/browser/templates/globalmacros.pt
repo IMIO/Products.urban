@@ -1,6 +1,5 @@
 
-<div metal:define-macro="goBackToMacro" i18n:domain="urban">
-<br />
+<div metal:define-macro="goBackToMacro" i18n:domain="urban" class="action-bar-text">
 <a class="no_underline" href="#"
    tal:define="tool python: context.portal_urban"
    tal:attributes="href python: context.portal_type in tool.getUrbanTypes() and context.absolute_url() or '%s#fieldsetlegend-urban_events' % context.aq_inner.aq_parent.absolute_url()"><img src="goback.png" />&nbsp;<span i18n:translate="go_back">Go back</span></a>
