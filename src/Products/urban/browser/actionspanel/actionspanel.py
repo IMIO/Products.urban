@@ -24,6 +24,7 @@ class EventActionsPanelView(ActionsPanelView):
     """
     def __init__(self, context, request):
         super(EventActionsPanelView, self).__init__(context, request)
+        self.SECTIONS_TO_RENDER = ('renderEdit', 'renderOwnDelete',)
         self.ACCEPTABLE_ACTIONS = ('plonemeeting_wsclient_action_1',)
 
 
@@ -38,18 +39,18 @@ class LicenceActionsPanelView(ActionsPanelView):
         self.IGNORABLE_ACTIONS = ('cut', 'paste', 'rename', 'copy')
 
 
-class LicenceTransitionsPanelView(ActionsPanelView):
+class TransitionsPanelView(ActionsPanelView):
     """
     Actions panel view of Licences.
     """
     def __init__(self, context, request):
-        super(LicenceTransitionsPanelView, self).__init__(context, request)
+        super(TransitionsPanelView, self).__init__(context, request)
 
         self.SECTIONS_TO_RENDER = ('renderTransitions', 'renderHistory',)
 
     def __call__(self,
                  **kwargs):
-        return super(LicenceTransitionsPanelView, self).__call__(
+        return super(TransitionsPanelView, self).__call__(
             showHistory=True,
             **kwargs
         )

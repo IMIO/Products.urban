@@ -4,10 +4,10 @@ from Products.urban.browser.actionspanel.actionspanel import ConfigValueActionsP
 from Products.urban.browser.actionspanel.actionspanel import EventActionsPanelView
 from Products.urban.browser.actionspanel.actionspanel import FolderActionsPanelView
 from Products.urban.browser.actionspanel.actionspanel import LicenceActionsPanelView
-from Products.urban.browser.actionspanel.actionspanel import LicenceTransitionsPanelView
+from Products.urban.browser.actionspanel.actionspanel import TransitionsPanelView
 
 ConfigValueActionsPanelView
 EventActionsPanelView
 FolderActionsPanelView
 LicenceActionsPanelView
-LicenceTransitionsPanelView
+TransitionsPanelView

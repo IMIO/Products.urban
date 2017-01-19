@@ -154,6 +154,9 @@ class UrbanEventView(BrowserView):
         context = aq_inner(self.context)
         return context.getUrbaneventtypes()
 
+    def get_state(self):
+        return api.content.get_state(self.context)
+
 
 class UrbanEventInquiryView(UrbanEventView, MapView, LicenceView):
     """

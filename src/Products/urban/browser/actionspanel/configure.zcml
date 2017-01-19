@@ -34,6 +34,16 @@
         allowed_attributes="render"
         permission="zope2.View" />
 
+    <browser:page
+        for="Products.urban.interfaces.IUrbanEvent"
+        name="transitions_panel"
+        class="Products.urban.browser.actionspanel.TransitionsPanelView"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        template="browser/actions_panel.pt"
+        allowed_attributes="render"
+        permission="zope2.View"
+     />
+
     <browser:viewlet
        name="imio.actionspanel"
        for="Products.urban.interfaces.IGenericLicence"
@@ -56,7 +66,7 @@
     <browser:page
         for="Products.urban.interfaces.IGenericLicence"
         name="transitions_panel"
-        class="Products.urban.browser.actionspanel.LicenceTransitionsPanelView"
+        class="Products.urban.browser.actionspanel.TransitionsPanelView"
         layer="imio.actionspanel.interfaces.IActionsPanelLayer"
         template="browser/actions_panel.pt"
         allowed_attributes="render"
