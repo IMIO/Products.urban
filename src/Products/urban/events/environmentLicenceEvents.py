@@ -105,7 +105,7 @@ def _compute_expiration_date(licence, notification_date):
     """
      Expiration date = notification_date + years valueDelay
     """
-    years = licence.getValidityDelay
+    years = licence.getValidityDelay()
     expiration_date = notification_date.asdatetime()
     expiration_date = expiration_date + relativedelta(days=7, years=years)
     expiration_date = DateTime(str(expiration_date))
