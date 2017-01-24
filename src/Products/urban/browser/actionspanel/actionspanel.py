@@ -24,7 +24,7 @@ class EventActionsPanelView(ActionsPanelView):
     """
     def __init__(self, context, request):
         super(EventActionsPanelView, self).__init__(context, request)
-        self.SECTIONS_TO_RENDER = ('renderEdit', 'renderOwnDelete',)
+        self.SECTIONS_TO_RENDER = ('renderEdit', 'renderActions', 'renderOwnDelete',)
         self.ACCEPTABLE_ACTIONS = ('plonemeeting_wsclient_action_1',)
 
 
