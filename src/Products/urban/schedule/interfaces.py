@@ -3,6 +3,10 @@
 from zope.interface import Interface
 
 
+class ILicenceDeliveryTask(Interface):
+    """ Marker interface for the licence delivery task. """
+
+
 class ICreateOpinionRequestsTask(Interface):
     """ Marker interface for opinion requests creation task."""
 

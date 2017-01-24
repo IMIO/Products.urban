@@ -140,6 +140,17 @@ class TaskLicenceTitleDisplay(TitleDisplay, ScheduleColumn):
         return title
 
 
+class LicenceFinalDueDateColumn(BaseColumn):
+    """ Licence final due date column for schedule listings."""
+
+    def renderCell(self, item):
+        due_date = item.licence_final_duedate
+        if due_date.year == 9999:
+            return u'\u221E'
+
+        return due_date.strftime('%d/%m/%Y')
+
+
 class TaskActionsColumn(ActionsColumn):
     """Display actions for the task"""
     params = {

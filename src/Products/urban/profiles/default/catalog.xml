@@ -21,50 +21,67 @@
   <extra name="index_type" value="Okapi BM25 Rank"/>
   <extra name="lexicon_id" value="plone_lexicon"/>
   </index>
+
   <column value="getReference"/>
+
   <index name="folder_manager"
            meta_type="KeywordIndex">
     <indexed_attr value="folder_manager"/>
   </index>
   <column value="folder_manager"/>
+
   <index name="representatives"
            meta_type="KeywordIndex">
     <indexed_attr value="representatives"/>
   </index>
+
   <index name="last_key_event"
            meta_type="KeywordIndex">
     <indexed_attr value="last_key_event"/>
   </index>
   <column value="last_key_event"/>
+
   <index name="StreetsUID"
            meta_type="KeywordIndex">
     <indexed_attr value="StreetsUID"/>
   </index>
   <column value="StreetsUID"/>
+
   <index name="getRecipientAddress"
          meta_type="FieldIndex">
     <indexed_attr value="getRecipientAddress"/>
   </index>
+
   <column value="parcelInfosIndex"/>
   <index name="parcelInfosIndex" meta_type="KeywordIndex">
     <indexed_attr value="parcelInfosIndex"/>
   </index>
+
   <column value="eventDate"/>
+
   <index name="applicantInfosIndex" meta_type="ZCTextIndex">
     <indexed_attr value="applicantInfosIndex"/>
     <extra name="index_type" value="Okapi BM25 Rank"/>
     <extra name="lexicon_id" value="plone_lexicon"/>
   </index>
+
   <column value="applicantInfosIndex"/>
+
   <index name="extraValue"
            meta_type="KeywordIndex">
     <indexed_attr value="extraValue"/>
   </index>
+
   <index name="StreetNumber" meta_type="ZCTextIndex">
     <indexed_attr value="StreetNumber"/>
     <extra name="index_type" value="Okapi BM25 Rank"/>
     <extra name="lexicon_id" value="plone_lexicon"/>
   </index>
   <column value="StreetNumber"/>
+
+  <index name="licence_final_duedate" meta_type="DateIndex">
+      <property name="index_naive_time_as_local">True</property>
+  </index>
+  <column value="licence_final_duedate"/>
 <!-- ##/code-section FOOT -->
 </object>

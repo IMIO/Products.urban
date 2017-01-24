@@ -2,6 +2,8 @@
            xmlns:i18n="http://namespaces.zope.org/i18n"
            i18n_domain="urban">
 
+  <adapter name="licence_final_duedate" factory=".indexes.licence_final_duedate" />
+
   <adapter name="getReference" factory=".indexes.licence_reference_index" />
 
   <adapter name="StreetsUID" factory=".indexes.licence_street_index" />

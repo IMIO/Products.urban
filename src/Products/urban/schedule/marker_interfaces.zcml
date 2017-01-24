@@ -3,6 +3,10 @@
     i18n_domain="urban">
 
   <interface
+    interface=".interfaces.ILicenceDeliveryTask"
+    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+
+  <interface
     interface=".interfaces.ICreateOpinionRequestsTask"
     type="imio.schedule.interfaces.ITaskMarkerInterface"/>
 
