@@ -62,6 +62,15 @@
     for="zope.interface.Interface
          zope.publisher.interfaces.browser.IBrowserRequest
          collective.eeafaceted.z3ctable.interfaces.IFacetedTable"
+    factory=".columns.LicenceFinalDueDateColumn"
+    provides="collective.eeafaceted.z3ctable.interfaces.IFacetedColumn"
+    name="licence_final_duedate"
+    />
+
+  <adapter
+    for="zope.interface.Interface
+         zope.publisher.interfaces.browser.IBrowserRequest
+         collective.eeafaceted.z3ctable.interfaces.IFacetedTable"
     factory=".columns.TaskActionsColumn"
     provides="collective.eeafaceted.z3ctable.interfaces.IFacetedColumn"
     name="task_actions_column"
