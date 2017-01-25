@@ -61,6 +61,9 @@ msgstr "Géomètre"
 msgid "Inquiry"
 msgstr "Enquête publique"
 
+msgid "IntegratedLicence"
+msgstr "Permis intégré"
+
 msgid "Locality"
 msgstr "Lieu-dit"
 
@@ -121,6 +124,9 @@ msgstr "Cet événement n'est plus lié à une enquête publique !  Définissez 
 # validators
 msgid "This field only accept numbers, indents or points !"
 msgstr "Ce champ n'accepte que des chiffres, des tirets et des points !"
+
+msgid "UniqueLicence"
+msgstr "permis unique"
 
 msgid "UrbanCertificateOne"
 msgstr "Certificat d'urbanisme 1"

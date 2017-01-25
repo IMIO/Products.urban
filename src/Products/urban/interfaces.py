@@ -220,6 +220,14 @@ class IArticle127(IBaseBuildLicence):
     """Marker interface for .Article127.Article127
     """
 
+class IUniqueLicence(IBaseBuildLicence):
+    """Marker interface for .Article127.Article127
+    """
+
+class IIntegratedLicence(IBaseBuildLicence):
+    """Marker interface for .Article127.Article127
+    """
+
 ##code-section FOOT
 class ILicenceContainer(Interface):
     """

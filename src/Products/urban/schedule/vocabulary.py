@@ -8,11 +8,13 @@ from Products.urban.interfaces import IEnvClassOne
 from Products.urban.interfaces import IEnvClassThree
 from Products.urban.interfaces import IEnvClassTwo
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IIntegratedLicence
 from Products.urban.interfaces import IMiscDemand
 from Products.urban.interfaces import INotaryLetter
 from Products.urban.interfaces import IParcelOutLicence
 from Products.urban.interfaces import IPatrimonyCertificate
 from Products.urban.interfaces import IPreliminaryNotice
+from Products.urban.interfaces import IUniqueLicence
 from Products.urban.interfaces import IUrbanCertificateOne
 from Products.urban.interfaces import IUrbanCertificateTwo
 from Products.urban.interfaces import IUrbanEventOpinionRequest
@@ -26,6 +28,8 @@ URBAN_TYPES_INTERFACES = {
     'GenericLicence': IGenericLicence,
     'BuildLicence': IBuildLicence,
     'Article127': IArticle127,
+    'IntegratedLicence': IIntegratedLicence,
+    'UniqueLicence': IUniqueLicence,
     'ParcelOutLicence': IParcelOutLicence,
     'Declaration': IDeclaration,
     'Division': IDivision,

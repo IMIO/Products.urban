@@ -191,6 +191,9 @@ msgstr "Envoi du primo dossier"
 msgid "IWorkBeginning type marker interface"
 msgstr "Début des travaux"
 
+msgid "IntegratedLicence"
+msgstr "Permis intégré"
+
 msgid "Licence state"
 msgstr "Etat du permis"
 
@@ -276,6 +279,9 @@ msgstr "Trier par type de permis"
 msgid "Sort results by licence type first, then by delay time"
 msgstr "Trie les résultats d'abord par type de permis, puis par délai de retard."
 
+msgid "UniqueLicence"
+msgstr "Permis unique"
+
 #. Default: "Certificat d'urbanisme 1"
 msgid "UrbanCertificateOne"
 msgstr "Certificat d'urbanisme 1"
@@ -318,6 +324,9 @@ msgstr "Ajouter un permis d'environnementale classe 2"
 msgid "add_Geometrician"
 msgstr "Ajouter un Géomètre"
 
+msgid "add_IntegratedLicence"
+msgstr "Ajouter un permis intégré"
+
 msgid "add_MiscDemand"
 msgstr "Ajouter une demande diverse"
 
@@ -333,6 +342,9 @@ msgstr "Ajouter un Permis d'urbanisation"
 
 msgid "add_ParcellingTerm"
 msgstr "Ajouter un lotissement"
+
+msgid "add_UniqueLicence"
+msgstr "Ajouter un permis unique"
 
 msgid "add_UrbanCertificateOne"
 msgstr "Ajouter un Certificat d'Urbanisme 1"

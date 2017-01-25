@@ -132,6 +132,8 @@ def initialize(context):
     import EnvClassTwo
     import EnvClassOne
     import Article127
+    import UniqueLicence
+    import IntegratedLicence
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

@@ -74,6 +74,7 @@ ADD_CONTENT_PERMISSIONS = {
     'FolderManager': 'urban: Add FolderManager',
     'GenericLicence': 'urban: Add GenericLicence',
     'Inquiry': 'urban: Add Inquiry',
+    'IntegratedLicence': 'urban: Add IntegratedLicence',
     'Layer': 'urban: Add Layer',
     'LicenceConfig': 'urban: Add LicenceConfig',
     'Locality': 'urban: Add Locality',
@@ -91,6 +92,7 @@ ADD_CONTENT_PERMISSIONS = {
     'RecipientCadastre': 'urban: Add RecipientCadastre',
     'SpecificFeatureTerm': 'urban: Add SpecificFeatureTerm',
     'Street': 'urban: Add Street',
+    'UniqueLicence': 'urban: Add UniqueLicence',
     'UrbanEvent': 'urban: Add UrbanEvent',
     'UrbanEventInquiry': 'urban: Add UrbanEvent',
     'UrbanEventType': 'urban: Add UrbanEventType',
@@ -119,6 +121,7 @@ setDefaultRoles('urban: Add EnvironmentRubricTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Division', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add FolderManager', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add IntegratedLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Inquiry', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Layer', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add LicenceConfig', ("Manager", "Contributor"))
@@ -138,6 +141,7 @@ setDefaultRoles('urban: Add RecipientCadastre', ("Manager", "Contributor", "Edit
 setDefaultRoles('urban: Add SpecificFeatureTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Street', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanEvent', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add UniqueLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanEventType', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanCertificateBase', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanCertificateTwo', ("Manager", "Contributor"))
@@ -154,9 +158,10 @@ ADDITIONAL_LAYERS_FOLDER = "additional_layers"
 
 #a list where first element is the meetingConfigId and the second, the meta_type name
 URBAN_TYPES = [
-    'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'UrbanCertificateOne',
-    'UrbanCertificateTwo', 'MiscDemand', 'PreliminaryNotice', 'PatrimonyCertificate',
-    'NotaryLetter', 'Division', 'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
+    'BuildLicence', 'Article127', 'IntegratedLicence', 'UniqueLicence', 'ParcelOutLicence', 'Declaration',
+    'UrbanCertificateOne', 'UrbanCertificateTwo', 'MiscDemand', 'PreliminaryNotice',
+    'PatrimonyCertificate', 'NotaryLetter', 'Division',
+    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
 ]
 
 # all types that can be used as a licence applicant
