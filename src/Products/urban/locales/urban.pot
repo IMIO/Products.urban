@@ -159,6 +159,9 @@ msgstr ""
 msgid "IModificationDeposit type marker interface"
 msgstr ""
 
+msgid "IntegratedLicence"
+msgstr ""
+
 #. Default: "Opinion request"
 msgid "IOpinionRequest type marker interface"
 msgstr ""
@@ -283,6 +286,9 @@ msgstr ""
 msgid "UrbanCertificateTwo"
 msgstr ""
 
+msgid "UniqueLicence"
+msgstr ""
+
 # urban_actions
 msgid "View"
 msgstr ""
@@ -317,6 +323,9 @@ msgstr ""
 msgid "add_Geometrician"
 msgstr ""
 
+msgid "add_IntegratedLicence"
+msgstr ""
+
 msgid "add_MiscDemand"
 msgstr ""
 
@@ -331,6 +340,9 @@ msgid "add_ParcelOutLicence"
 msgstr ""
 
 msgid "add_ParcellingTerm"
+msgstr ""
+
+msgid "add_UniqueLicence"
 msgstr ""
 
 msgid "add_UrbanCertificateOne"

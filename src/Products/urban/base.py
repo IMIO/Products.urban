@@ -220,6 +220,8 @@ class UrbanBase(object):
         licenceTypes = {
             'BuildLicence': 'PU',
             'Article127': 'PU',
+            'UniqueLicence': 'U',
+            'IntegratedLicence': 'PI',
             'ParcelOutLicence': 'PL',
             'UrbanCertificateOne': 'CU1',
             'UrbanCertificateBase': 'CU1',

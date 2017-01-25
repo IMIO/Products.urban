@@ -933,7 +933,7 @@ def setupSchedule(context):
             os.path.dirname(__file__),
             folder_id
         )
-        _set_faceted_view(collection_folder, config_path, schedule_config)
+        _set_faceted_view(collection_folder, config_path, [schedule_config])
 
     setFolderAllowedTypes(schedule_folder, [])
 

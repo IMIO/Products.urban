@@ -2,6 +2,7 @@
 <rolemap>
   <roles>
     <role name="UrbanMapReader"/>
+    <role name="ClaimantEditor"/>
   </roles>
   <permissions>
       <permission name="Products.urban: ViewUrbanMap" acquire="True">

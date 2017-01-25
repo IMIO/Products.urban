@@ -298,7 +298,8 @@ default_values = {
         'decisions': [
             'UrbanVocabularyTerm', [
                 'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'Division', 'NotaryLetter',
-                'UrbanCertificateOne', 'UrbanCertificateTwo', 'EnvClassThree', 'MiscDemand'
+                'UrbanCertificateOne', 'UrbanCertificateTwo', 'EnvClassThree', 'MiscDemand',
+                'UniqueLicence', 'IntegratedLicence'
             ],
             {'id': "favorable", 'title': u"Favorable", 'extraValue': "Recevable"},
             {'id': "defavorable", 'title': u"Défavorable", 'extraValue': "Irrecevable"},
@@ -830,7 +831,7 @@ default_values = {
         ],
 
         'investigationarticles': [
-            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'ParcelOutLicence', 'UrbanCertificateTwo'],
+            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence', 'ParcelOutLicence', 'UrbanCertificateTwo'],
             {'id': "330-1", 'title': u"330 1° - « [...] bâtiments dont la hauteur est d'au moins quatre niveaux ou douze mètres sous corniche et [...] »", 'description': "<p>« la construction ou la reconstruction de bâtiments dont la hauteur est d'au moins quatre niveaux ou douze mètres sous corniche et dépasse de trois mètres ou plus la moyenne des hauteurs sous corniche des bâtiments situés dans la même rue jusqu'à cinquante mètres de part et d'autre de la construction projetée ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions »</p>", 'extraValue': "330 1°"},
             {'id': "330-2", 'title': u"330 2° - « [...] bâtiment dont la profondeur, mesurée [...] est supérieure à 15 mètres et dépasse de plus de 4 mètres les bâtiments [...] »", 'description': "<p>« la construction ou la reconstruction de bâtiments dont la profondeur, mesurée à partir de l'alignement ou du front de bâtisse lorsque les constructions voisines ne sont pas implantées sur l'alignement, est supérieure à 15 mètres et dépasse de plus de 4 mètres les bâtiments situés sur les parcelles contiguës (AGW du 23 décembre 1998, art 1er), la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions »</p>", 'extraValue': "330 2°"},
             {'id': "330-3", 'title': u"330 3° - « [...] un magasin [...] dont la surface nette de vente est supérieure à 400 m² [...] »", 'description': "<p>« la construction, la reconstruction d'un magasin ou la modification de la destination d'un bâtiment en magasin dont la surface nette de vente est supérieure à 400 m² ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions »</p>", 'extraValue': "330 3°"},
@@ -848,7 +849,7 @@ default_values = {
         ],
 
         'roadanalysis': [
-            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'ParcelOutLicence', 'UrbanCertificateTwo'],
+            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence', 'ParcelOutLicence', 'UrbanCertificateTwo'],
             {'id': "deficient-equipment", 'title': u"Voire insuffisamment équipée"},
             {'id': "transformation", 'title': u"Transformation sans nouveau raccordement à l'égout"},
             {'id': "extension", 'title': u"Extension de réseau"},
@@ -868,7 +869,7 @@ default_values = {
         ],
 
         'derogations': [
-            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'ParcelOutLicence', 'UrbanCertificateTwo'],
+            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence', 'ParcelOutLicence', 'UrbanCertificateTwo'],
             {'id': "dero-ps", 'title': u"au Plan de secteur"},
             {'id': "dero-pca", 'title': u"au Plan Communal d'Aménagement"},
             {'id': "dero-rru", 'title': u"au Règlement Régional d'Urbanisme"},
@@ -877,7 +878,7 @@ default_values = {
         ],
 
         'folderbuildworktypes': [
-            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'ParcelOutLicence', 'UrbanCertificateTwo'],
+            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence', 'ParcelOutLicence', 'UrbanCertificateTwo'],
             {'id': 'AUTRE', 'title': u"Autres", 'extraValue': 'AUTRE'},
             {'id': 'DEM', 'title': u"Démolition", 'extraValue': 'DEM'},
             {'id': 'DOM_PUB', 'title': u"Intégration dans voirie publique", 'extraValue': 'DOM_PUB'},
