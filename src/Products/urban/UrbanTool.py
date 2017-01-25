@@ -209,32 +209,6 @@ schema = Schema((
         write_permission=permissions.ManagePortal,
     ),
     StringField(
-        name='unoEnabledPython',
-        default="/usr/bin/python",
-        widget=StringField._properties['widget'](
-            label="Path of a UNO-enabled Python interpreter (ie /usr/bin/python)",
-            description="UnoEnabledPython",
-            description_msgid="uno_enabled_python",
-            label_msgid='urban_label_unoEnabledPython',
-            i18n_domain='urban',
-        ),
-        schemata='admin_settings',
-        write_permission=permissions.ManagePortal,
-    ),
-    IntegerField(
-        name='openOfficePort',
-        default=2002,
-        widget=IntegerField._properties['widget'](
-            description="OpenOfficePort",
-            description_msgid="open_office_port",
-            label='Openofficeport',
-            label_msgid='urban_label_openOfficePort',
-            i18n_domain='urban',
-        ),
-        schemata='admin_settings',
-        write_permission=permissions.ManagePortal,
-    ),
-    StringField(
         name='editionOutputFormat',
         default='odt',
         widget=SelectionWidget(
