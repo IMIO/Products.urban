@@ -16,8 +16,6 @@
                 <metal:body define-macro="body_macro" tal:define="linkedUrbanEventType view/getUrbaneventtypes;
                                                                   member context/@@plone_portal_state/member;">
 
-                    <tal:comment replace="nothing">Go back...</tal:comment>
-
                     <div class="action-bar">
                     <metal:listing use-macro="here/@@globalmacros/goBackToMacro" />
                         <div class="action-bar-text" i18n:domain="plone"
