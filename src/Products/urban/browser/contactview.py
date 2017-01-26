@@ -53,17 +53,15 @@ class ContactView(BrowserView):
         parent_portal_type = parent.portal_type
         if parent_portal_type in URBAN_TYPES:
             return parent.absolute_url()
-        #or an UrbanEventInquiry
-        elif parent_portal_type == "UrbanEventInquiry":
-            grandparent = parent.aq_inner.aq_parent
-            return grandparent.absolute_url()
         #or we have a "came_from_licence_uid" in the REQUEST
-        else:
+        elif context.REQUEST.get('came_from_licence_uid', None):
             came_from_licence_uid = context.REQUEST.get('came_from_licence_uid', None)
             uid_catalog = getToolByName(context, 'uid_catalog')
             linkedLicenceBrains = uid_catalog(UID=came_from_licence_uid)
             linkedLicence = linkedLicenceBrains[0].getObject()
             return linkedLicence.absolute_url()
+        else:
+            return parent.absolute_url()
 
     def showLinkToLinkedLicence(self):
         """
