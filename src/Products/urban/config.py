@@ -108,7 +108,7 @@ setDefaultRoles('urban: Add Applicant', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Article127', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add BuildLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add City', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Claimant', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Claimant', ("Manager", "Contributor", "ClaimantEditor"))
 setDefaultRoles('urban: Add Contact', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Corporation', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Declaration', ("Manager", "Contributor"))
@@ -158,10 +158,11 @@ ADDITIONAL_LAYERS_FOLDER = "additional_layers"
 
 #a list where first element is the meetingConfigId and the second, the meta_type name
 URBAN_TYPES = [
-    'BuildLicence', 'Article127', 'IntegratedLicence', 'UniqueLicence', 'ParcelOutLicence', 'Declaration',
-    'UrbanCertificateOne', 'UrbanCertificateTwo', 'MiscDemand', 'PreliminaryNotice',
-    'PatrimonyCertificate', 'NotaryLetter', 'Division',
-    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
+    'BuildLicence', 'Article127', 'IntegratedLicence', 'UniqueLicence', 'Declaration',
+    'UrbanCertificateOne', 'UrbanCertificateTwo', 'PreliminaryNotice',
+    'PatrimonyCertificate',
+    # 'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
+    # 'ParcelOutLicence', 'MiscDemand', 'Division', 'NotaryLetter',
 ]
 
 # all types that can be used as a licence applicant
