@@ -34,11 +34,6 @@
   <include package="plonetheme.imioapps"/>
 
 
-  <permission
-    id="urban.viewurbanmap"
-    title="Products.urban: ViewUrbanMap"
-    />
-
   <include package=".collectionwidget" />
   <include package=".dashboard" />
   <include package=".docgen" />
@@ -51,6 +46,7 @@
   <include package=".workflows" />
 
   <include file="grok.zcml" />
+  <include file="permissions.zcml" />
 
   <!-- needed to migrate UrbanDoc type, to remove in next release -->
   <adapter name="plone.app.blob.subtypes.file"
