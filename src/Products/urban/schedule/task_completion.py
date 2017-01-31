@@ -16,6 +16,7 @@ class MockTask(object):
         self.due_date = due_date
         self.end_date = end_date
         self.state = state
+        self.assigned_user = ''
 
     def Title(self):
         return self.title
