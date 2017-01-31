@@ -346,6 +346,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
 
     meta_type = 'UrbanEvent'
     _at_rename_after_creation = True
+    __ac_local_roles_block__ = True
 
     schema = UrbanEvent_schema
 
