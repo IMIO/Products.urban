@@ -11,10 +11,10 @@ class DefaultTextRenderer(TrustedAppPT, PageTemplate):
     """
 
     def __init__(self, urban_event):
-        self.event_helper = urban_event.restrictedTraverse('document_generation_helper_view')
+        self.event_helper = urban_event.unrestrictedTraverse('document_generation_helper_view')
         self.real_event = urban_event
         self.event = self.event_helper.context
-        self.licence_helper = urban_event.aq_parent.restrictedTraverse('document_generation_helper_view')
+        self.licence_helper = urban_event.aq_parent.unrestrictedTraverse('document_generation_helper_view')
         self.real_licence = urban_event.aq_parent
         self.licence = self.licence_helper.context
 
