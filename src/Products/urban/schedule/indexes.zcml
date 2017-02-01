@@ -10,6 +10,8 @@
 
   <adapter name="StreetNumber" factory=".indexes.licence_streetnumber_index" />
 
+  <adapter name="folder_manager" factory=".indexes.licence_folder.manager_index" />
+
   <adapter name="applicantInfosIndex" factory=".indexes.licence_applicant_index" />
 
 </configure>

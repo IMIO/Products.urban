@@ -6,6 +6,7 @@
 
   <include file="grok.zcml" />
   <include file="permissions.zcml" />
+  <include file="vocabulary.zcml" />
 
   <!-- ##code-section configure.zcml.header -->
   <!-- exclude can be removed when five.grok does the exclude -->
