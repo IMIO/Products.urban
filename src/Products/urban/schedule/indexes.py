@@ -7,6 +7,7 @@ from imio.schedule.content.task import IAutomatedTask
 from plone.indexer import indexer
 
 from Products.urban.indexes import genericlicence_applicantinfoindex
+from Products.urban.indexes import genericlicence_foldermanager
 from Products.urban.indexes import genericlicence_streetsuid
 from Products.urban.indexes import genericlicence_streetnumber
 from Products.urban.schedule.interfaces import ILicenceDeliveryTask
@@ -63,6 +64,17 @@ def licence_streetnumber_index(task):
     licence = task.get_container()
     street_numbers = genericlicence_streetnumber(licence)
     return street_numbers
+
+
+@indexer(IAutomatedTask)
+def licence_foldermanager_index(task):
+    """
+    Index licence folder_managers on their tasks to be able
+    to query on it.
+    """
+    licence = task.get_container()
+    foldermanagers = genericlicence_foldermanager(licence)
+    return foldermanagers
 
 
 @indexer(IAutomatedTask)
