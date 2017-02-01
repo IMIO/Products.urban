@@ -47,6 +47,9 @@ msgstr ""
 msgid "urban.schedule.condition.opinion_requests_created"
 msgstr ""
 
+msgid "urban.schedule.condition.opinion_requests_done"
+msgstr ""
+
 msgid "urban.schedule.condition.procedure_choice_done"
 msgstr ""
 
