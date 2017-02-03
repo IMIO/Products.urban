@@ -705,7 +705,7 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
         urban_voc = self.schema['missingParts'].vocabulary
         all_terms = urban_voc.listAllVocTerms(self)
 
-        display_values = [(term.Title().decode('utf-8'), term.id) for term in all_terms if str(composition) in term.getExtraValue()]
+        display_values = [(term.id, term.Title().decode('utf-8')) for term in all_terms if str(composition) in term.getExtraValue()]
 
         return DisplayList(display_values)
 
