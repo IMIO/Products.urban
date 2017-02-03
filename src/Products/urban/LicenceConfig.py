@@ -265,6 +265,28 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         else:
             self.numerotation = new_numerotation
 
+    def getReferenceTALExpression(self):
+        """
+        """
+        config_id = self.getNumerotationSource()
+        if config_id:
+            portal_urban = api.portal.get_tool('portal_urban')
+            config = getattr(portal_urban, config_id)
+            return config.referenceTALExpression
+        else:
+            return self.referenceTALExpression
+
+    def setReferenceTALExpression(self, new_tal_expr):
+        """
+        """
+        config_id = self.getNumerotationSource()
+        if config_id:
+            portal_urban = api.portal.get_tool('portal_urban')
+            config = getattr(portal_urban, config_id)
+            config.referenceTALExpression = new_tal_expr
+        else:
+            self.referenceTALExpression = new_tal_expr
+
     def generateReference(self, licence, **kwargs):
         """
          Generates a reference based on the numerotationTALExpression
