@@ -3,7 +3,7 @@
     <table class="no-style-table; clear">
         <tal:evtfield repeat="field fields" define="fields view/getFieldsToShow;">
             <tr valign="top" tal:define="field_name python: field.__name__;
-                                         field_label field/widget/label_msgid;">
+                                         field_label python: field_name != 'eventDate' and field.widget.label_msgid or view.getDateCustomLabel();">
                 <td>
                     <strong i18n:translate="" tal:content="field_label">Optional field label</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
