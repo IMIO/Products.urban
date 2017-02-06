@@ -47,6 +47,11 @@ class UrbanEventView(BrowserView):
         fields = [f for f in self.getActivatedFields() if not hasattr(f, 'pm_text_field')]
         return fields
 
+    def getDateCustomLabel(self):
+        """
+        """
+        return self.context.getUrbaneventtypes().getEventDateLabel()
+
     def getPmFields(self):
         """
         Return activated pm fields to build the pm summary
