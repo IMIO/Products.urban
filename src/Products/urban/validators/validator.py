@@ -2,6 +2,7 @@ from Products.validation.interfaces.IValidator import IValidator
 from zope.interface import implements
 from zope.i18n import translate
 from Products.urban import UrbanMessage as _
+from Products.urban.interfaces import  IGenericLicence
 from Products.CMFCore.utils import getToolByName
 
 
@@ -60,7 +61,7 @@ class isNotDuplicatedReferenceValidator:
     def __call__(self, value, *args, **kwargs):
         licence = kwargs['instance']
         catalog = getToolByName(licence, 'portal_catalog')
-        similar_licences = catalog(getReference=value)
+        similar_licences = catalog(getReference=value, object_provides=IGenericLicence.__identifier__)
         if not similar_licences or (len(similar_licences) == 1 and licence.UID() == similar_licences[0].UID):
             return 1
         return translate(
