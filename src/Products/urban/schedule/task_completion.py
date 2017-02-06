@@ -84,6 +84,7 @@ class OpinionRequestReceivedStatus(TaskEndStatusView):
             event_state = api.content.get_state(ask_opinion_event)
             title = ask_opinion_event.Title()
             due_date = ask_opinion_event.getTransmitDate()
+            due_date = due_date and due_date + 15 or None
             end_date = ask_opinion_event.getReceiptDate()
             if event_state == 'opinion_given':
                 opinion_task = MockTask(title, due_date, end_date, 'closed')
