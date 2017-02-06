@@ -139,6 +139,9 @@ class InquiryDatesDefinedCondition(Condition):
     def evaluate(self):
         licence = self.task_container
         inquiry = licence.getLastInquiry()
+        if not inquiry:
+            return False
+
         start_date = inquiry.getInvestigationStart()
         end_date = inquiry.getInvestigationEnd()
         dates_defined = start_date and end_date
