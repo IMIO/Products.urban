@@ -13,6 +13,7 @@ from Products.urban.utils import getCurrentFolderManager
 
 from zope.component import getGlobalSiteManager
 from zope.interface import implements
+from zope.i18n import translate
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.interfaces import IVocabularyFactory
@@ -32,7 +33,7 @@ class EventTypeType(grok.GlobalUtility):
         val = utranslate(domain='urban', msgid=EMPTY_VOCAB_VALUE, context=context, default=EMPTY_VOCAB_VALUE)
         items.append(SimpleTerm('', val, val))
         items = items + [SimpleTerm(interfaceName, interface.__doc__, utranslate(msgid=interface.__doc__, domain='urban', context=context, default=interface.__doc__))
-                 for interfaceName, interface in interfaces]
+                         for interfaceName, interface in interfaces]
 
         #sort elements by title
         def sort_function(x, y):
@@ -99,3 +100,51 @@ class folderManagersVocabulary():
         return current_foldermanager, foldermanagers
 
 folderManagersVocabularyFactory = folderManagersVocabulary()
+
+
+class LicenceStateVocabularyFactory(object):
+    """
+    Vocabulary factory for 'container_state' field.
+    """
+
+    def __call__(self, context):
+        """
+        Return workflow states vocabulary of a licence.
+        """
+        portal_type = self.get_portal_type(context)
+
+        wf_tool = api.portal.get_tool('portal_workflow')
+        request = api.portal.get().REQUEST
+
+        workfow = wf_tool.get(wf_tool.getChainForPortalType(portal_type)[0])
+        voc_terms = [
+            SimpleTerm(state_id, state_id, translate(state.title, 'plone', context=request))
+            for state_id, state in workfow.states.items()
+        ]
+
+        #sort elements by title
+        voc_terms.sort(lambda a, b: cmp(a.title, b.title))
+
+        vocabulary = SimpleVocabulary(voc_terms)
+
+        return vocabulary
+
+    def get_portal_type(self, context):
+        """
+        """
+        return context.portal_type
+
+
+class UrbanRootLicenceStateVocabularyFactory(LicenceStateVocabularyFactory):
+    """
+    Vocabulary factory for 'container_state' field.
+    """
+
+    def get_portal_type(self, context):
+        """
+        Return workflow states vocabulary of a licence.
+        """
+        portal_urban = api.portal.get_tool('portal_urban')
+        config = getattr(portal_urban, context.getProperty('urbanConfigId', ''), None)
+        portal_type = config and config.getLicencePortalType() or None
+        return portal_type

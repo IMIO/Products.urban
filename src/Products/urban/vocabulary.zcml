@@ -9,4 +9,16 @@
     name="urban.folder_managers"
   />
 
+  <utility
+    factory=".vocabularies.LicenceStateVocabularyFactory"
+    name="urban.licence_state"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+    factory=".vocabularies.UrbanRootLicenceStateVocabularyFactory"
+    name="urban.rootfolder_licence_state"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
 </configure>
