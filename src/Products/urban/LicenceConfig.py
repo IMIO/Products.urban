@@ -250,9 +250,9 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         if config_id:
             portal_urban = api.portal.get_tool('portal_urban')
             config = getattr(portal_urban, config_id)
-            return config.getField('numerotation').get()
+            return config.getField('numerotation').get(config)
         else:
-            return self.getField('numerotation').get()
+            return self.getField('numerotation').get(self)
 
     def getReferenceTALExpression(self):
         """
@@ -261,9 +261,9 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         if config_id:
             portal_urban = api.portal.get_tool('portal_urban')
             config = getattr(portal_urban, config_id)
-            return config.getField('referenceTALExpression').get()
+            return config.getField('referenceTALExpression').get(config)
         else:
-            return self.getField('referenceTALExpression').get()
+            return self.getField('referenceTALExpression').get(self)
 
     def generateReference(self, licence, **kwargs):
         """
