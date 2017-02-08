@@ -56,4 +56,13 @@
         />
     </configure>
 
+    <configure package="collective.faceted.task">
+        <browser:view
+          for="collective.task.behaviors.ITaskContainer"
+          name="faceted-table-view"
+          class="Products.urban.schedule.faceted_view.UrbanTaskTableView"
+          permission="zope2.View"
+        />
+    </configure>
+
 </configure>
