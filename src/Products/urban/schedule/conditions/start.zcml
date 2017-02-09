@@ -54,4 +54,13 @@
         name="urban.schedule.condition.opinion_requests_done"
     />
 
+    <!-- decision college event conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.LicenceDecisionCollegeEventCreated"
+        name="urban.schedule.condition.licence_decision_college_event_created"
+    />
+
 </configure>

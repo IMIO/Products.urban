@@ -263,3 +263,15 @@ class FDDecisionEventDoneCondition(Condition):
             fd_decision_done = api.content.get_state(fd_decision_event) == 'closed'
 
         return fd_decision_done
+
+
+class LicenceDecisionCollegeEventCreated(Condition):
+    """
+    TheLicence event is created.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        event_created = licence.getLastTheLicence()
+
+        return event_created
