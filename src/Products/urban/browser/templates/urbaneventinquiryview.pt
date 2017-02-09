@@ -132,7 +132,7 @@
                             <span>Claimants</span>
                         </dt>
                         <dd id="fieldset-event_inquiry_claimants">
-                            <form tal:condition="python: member.has_permission('urban: Add Contact', context)"
+                            <form tal:condition="python: member.has_permission('urban: Add Claimant', context)"
                                   tal:define="ctype python: context.portal_types.getTypeInfo('Claimant');
                                               member context/@@plone_portal_state/member;"
                                   i18n:domain="urban"
