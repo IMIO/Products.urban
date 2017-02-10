@@ -869,7 +869,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('municipaltax', with_empty_value=True),
+        vocabulary=UrbanVocabulary('municipaltax', inUrbanConfig=False),
         default_method='getDefaultValue',
     ),
 
