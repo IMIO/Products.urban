@@ -54,7 +54,8 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'urbanEventObj': self.context,
             'applicantobj': applicantobj,
             'proprietaryobj': proprietaryobj,
-            'tool': portal_urban
+            'tool': portal_urban,
+            'licence_view': licence_helper_view,
         }
 
         return generation_context
