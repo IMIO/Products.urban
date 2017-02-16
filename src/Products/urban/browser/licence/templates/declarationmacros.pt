@@ -2,6 +2,11 @@
 
     <!--tal:vars define="exclude python:[]"-->
         <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
+
+            <metal:applicants fill-slot="applicant_slot">
+                <metal:applicants_and_corporations_macro use-macro="here/@@licencemacros/urbanApplicantsAndCorporationsMacro" />
+            </metal:applicants>
+
         </metal:parent_call>
     <!--/tal:vars-->
 
