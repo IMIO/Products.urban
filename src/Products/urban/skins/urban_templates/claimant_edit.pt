@@ -19,7 +19,7 @@
                        dummy python:request.set(border, 1);
                        putils context/plone_utils;">
 
- <metal:contact_edit use-macro="here/@@contactmacros/editContactMacro" />
+ <metal:contact_edit use-macro="here/@@contactmacros/editClaimantMacro" />
 </metal:widgets>
 </metal:base_body>
 </div>
