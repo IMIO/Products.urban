@@ -642,7 +642,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         if date:
             if not translatemonth:
-                return ulocalized_time(date, long_format=long_format, context=self, request=self.REQUEST).encode('utf8')
+                if date.year() < 1900:
+                    return '{}/{}/{}'.format(date.day(), date.month(), date.year())
+                else:
+                    return ulocalized_time(date, long_format=long_format, context=self, request=self.REQUEST).encode('utf8')
             else:
                 #we need to translate the month and maybe the day (1er)
                 year, month, day, hour = str(date.strftime('%Y/%m/%d/%Hh%M')).split('/')

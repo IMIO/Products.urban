@@ -130,7 +130,7 @@ def genericlicence_streetnumber(licence):
 def genericlicence_lastkeyevent(object):
     for event in reversed(object.getUrbanEvents()):
         event_type = event.getUrbaneventtypes()
-        if event_type.getIsKeyEvent():
+        if event_type.getIsKeyEvent() and event.getEventDate().year() >= 1900:
             return "%s,  %s" % (event.getEventDate().strftime("%d/%m/%y"), event_type.Title())
 
 
