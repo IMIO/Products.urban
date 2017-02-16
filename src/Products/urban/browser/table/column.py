@@ -40,7 +40,11 @@ class EventDateColumn(UrbanColumn):
     def renderCell(self, urbanlist_item):
         event = urbanlist_item.getObject()
         date = event.getKeyDate()
+
+        if date and date.year() < 1900:
+            return '{}/{}/{}'.format(date.day(), date.month(), date.year())
         date = date and date.strftime('%d/%m/%Y') or 'no date defined'
+
         return date
 
     def getSortKey(self, urbanlist_item):
