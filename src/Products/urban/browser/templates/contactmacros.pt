@@ -127,3 +127,15 @@
         </tal:block>
     </tal:fields>
 </div>
+
+
+<div metal:define-macro="editClaimantMacro" i18n:domain="urban">
+    <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=False)">
+        <tal:block define="fieldName field/getName;">
+            <metal:widget define-slot="widget">
+                <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
+            </metal:widget>
+        </tal:block>
+    </tal:fields>
+</div>
+
