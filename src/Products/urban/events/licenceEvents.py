@@ -66,17 +66,19 @@ def _setManagerPermissionOnLicence(licence):
 
 def _checkNumerotation(licence):
     config = licence.getUrbanConfig()
+    portal_urban = config.aq_parent
+    source_config = getattr(portal_urban, config.getNumerotationSource())
     #increment the numerotation in the tool only if its the one that has been generated
     if config.generateReference(licence) == licence.getReference():
-        value = config.getNumerotation()
+        value = source_config.getNumerotation()
         if not str(value).isdigit():
             value = '0'
         else:
             value = int(value)
             value = value + 1
         #set the new value
-        config.setNumerotation(value)
-        config.reindexObject()
+        source_config.setNumerotation(value)
+        source_config.reindexObject()
 
 
 def setMarkerInterface(licence, event):

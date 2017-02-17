@@ -1,9 +1,16 @@
+# -*- coding: utf-8 -*-
+
+from plone import api
+
+from Products.urban import UrbanMessage as _
+from Products.urban.config import URBAN_TYPES
+
 from Products.validation.interfaces.IValidator import IValidator
+
 from zope.interface import implements
 from zope.i18n import translate
-from Products.urban import UrbanMessage as _
-from Products.urban.interfaces import  IGenericLicence
-from Products.CMFCore.utils import getToolByName
+
+import re
 
 
 class isTextFieldConfiguredValidator:
@@ -60,8 +67,15 @@ class isNotDuplicatedReferenceValidator:
 
     def __call__(self, value, *args, **kwargs):
         licence = kwargs['instance']
-        catalog = getToolByName(licence, 'portal_catalog')
-        similar_licences = catalog(getReference=value, object_provides=IGenericLicence.__identifier__)
+        catalog = api.portal.get_tool('portal_catalog')
+        portal_urban = api.portal.get_tool('portal_urban')
+
+        source = licence.getLicenceConfig().getNumerotationSource()
+        types_to_check = [t for t in URBAN_TYPES if getattr(portal_urban, t.lower()).getNumerotationSource() == source]
+        ref_num = re.match('\D*(\d*).*', value).groups()[0]
+
+        similar_licences = catalog(getReference=ref_num, portal_type=types_to_check)
+
         if not similar_licences or (len(similar_licences) == 1 and licence.UID() == similar_licences[0].UID):
             return 1
         return translate(

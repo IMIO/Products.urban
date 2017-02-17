@@ -254,17 +254,6 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         else:
             return self.getField('numerotation').get(self)
 
-    def getReferenceTALExpression(self):
-        """
-        """
-        config_id = self.getNumerotationSource()
-        if config_id:
-            portal_urban = api.portal.get_tool('portal_urban')
-            config = getattr(portal_urban, config_id)
-            return config.getField('referenceTALExpression').get(config)
-        else:
-            return self.getField('referenceTALExpression').get(self)
-
     def generateReference(self, licence, **kwargs):
         """
          Generates a reference based on the numerotationTALExpression
