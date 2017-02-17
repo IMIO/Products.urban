@@ -27,6 +27,7 @@
   <type portal_type="PersonTitleTerm"/>
   <type portal_type="Inquiry"/>
   <type portal_type="UrbanEventInquiry"/>
+  <type portal_type="UrbanEventCollege"/>
   <type portal_type="UrbanEventOpinionRequest"/>
   <type portal_type="OrganisationTerm"/>
   <type portal_type="MiscDemand"/>
@@ -43,5 +44,9 @@
   <type portal_type="EnvClassTwo"/>
   <type portal_type="EnvClassOne"/>
   <type portal_type="Article127"/>
+  <type portal_type="UniqueLicence"/>
+  <type portal_type="IntegratedLicence"/>
+  <type portal_type="PreliminaryNotice"/>
+  <type portal_type="PatrimonyCertificate"/>
  </factorytypes>
 </object>
