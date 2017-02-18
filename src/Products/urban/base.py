@@ -19,9 +19,11 @@ from zope.component.interface import interfaceToName
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import DisplayList
 
+from Products.urban.interfaces import IWorklocationSignaletic
 from Products.urban.utils import getCurrentFolderManager as currentFolderManager
 from Products.urban.utils import removeItems
 from plone import api
+from zope.component import queryAdapter
 from zope.i18n import translate
 from zope.interface import implements
 import interfaces
@@ -190,8 +192,21 @@ class UrbanBase(object):
         """
           Returns a string reprensenting the different worklocations
         """
+
+        adress_signaletic_adapter = queryAdapter(self, IWorklocationSignaletic)
+        if adress_signaletic_adapter:
+            return adress_signaletic_adapter.get_signaletic()
+
+        return self.getDefaultWorkLocationSignaletic()
+
+    security.declarePublic('getDefaultWorkLocationSignaletic')
+    def getDefaultWorkLocationSignaletic(self):
+        """
+          Returns a string reprensenting the different worklocations
+        """
         catalog = api.portal.get_tool("uid_catalog")
         signaletic = ''
+
         for wl in self.getWorkLocations():
             #wl is a dict with street as the street obj uid and number as the number in the street
             street = catalog(UID=wl['street'])[0].getObject()

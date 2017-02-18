@@ -378,4 +378,11 @@ class IOptionalFields(Interface):
 
 class IUrbanRootRedirects(Interface):
     """ """
+
+
+class IWorklocationSignaletic(Interface):
+    """ Adapts a licence into a displayable address for documents"""
+
+    def get_signaletic(self):
+        """ """
 ##/code-section FOOT
