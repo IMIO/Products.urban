@@ -100,7 +100,7 @@ class Declaration(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getApplicants(self):
         """
         """
-        applicants = self.getCorporations() or super(BaseBuildLicence, self).getApplicants()
+        applicants = self.getCorporations() or super(Declaration, self).getApplicants()
         return applicants
 
     security.declarePublic('getCorporations')
