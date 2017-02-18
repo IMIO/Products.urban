@@ -10,6 +10,13 @@
      name="licence_local_roles"
   />
 
+  <adapter
+     for="Products.urban.interfaces.IUrbanEvent"
+     provides="borg.localrole.interfaces.ILocalRoleProvider"
+     factory=".urbanevent_workflow.StateRolesMapping"
+     name="urbanevent_local_roles"
+  />
+
  <!-- register suspension workflow adaptation -->
  <utility
       name="urban.wfadaptations.suspension"
