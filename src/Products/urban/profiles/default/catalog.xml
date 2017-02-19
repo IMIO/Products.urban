@@ -57,6 +57,15 @@
     <indexed_attr value="parcelInfosIndex"/>
   </index>
 
+  <index name="address"
+         meta_type="ZCTextIndex">
+    <indexed_attr value="address"/>
+  <extra name="index_type" value="Okapi BM25 Rank"/>
+  <extra name="lexicon_id" value="plone_lexicon"/>
+  </index>
+
+  <column value="address"/>
+
   <column value="eventDate"/>
 
   <index name="applicantInfosIndex" meta_type="ZCTextIndex">

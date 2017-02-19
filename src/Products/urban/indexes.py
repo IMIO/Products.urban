@@ -127,6 +127,11 @@ def genericlicence_streetnumber(licence):
 
 
 @indexer(IGenericLicence)
+def genericlicence_address(licence):
+    return licence.getWorkLocationSignaletic()
+
+
+@indexer(IGenericLicence)
 def genericlicence_lastkeyevent(object):
     for event in reversed(object.getUrbanEvents()):
         event_type = event.getUrbaneventtypes()
@@ -175,6 +180,7 @@ def genericlicence_decisiondate(licence):
     decision_event = licence.getLastTheLicence(use_catalog=False)
     if decision_event:
         return decision_event.getEventDate()
+
 
 @indexer(IGenericLicence)
 def genericlicence_depositdate(licence):
