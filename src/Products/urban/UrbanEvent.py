@@ -430,7 +430,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             if prenom1!='':
                 toreturn=toreturn+' '
             toreturn=toreturn+nom1
-            if name.rfind('&') > 0:
+            if name.rfind('&') > 0 and i < name.rfind('&'):
                 while (i<len(name)) and (name[i] != '&'):
                     i=i+1
                 if name[i]=='&':
