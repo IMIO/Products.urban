@@ -375,7 +375,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         notary = ''
         proprietary = ''
-        proprietaries = self.getProprietaries()
+        proprietaries = self.getProprietaries() or self.getApplicants()
         if proprietaries:
             proprietary = proprietaries[0].Title()
         else:
