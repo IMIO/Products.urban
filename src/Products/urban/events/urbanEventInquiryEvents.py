@@ -5,5 +5,5 @@ def setLinkedInquiry(ob, event):
     #find the right inquiry and link me to it
     inquiries = ob.aq_inner.aq_parent.getAllInquiries()
     existingUrbanEventInquiries = ob.aq_inner.aq_parent.getUrbanEventInquiries()
-    myinquiry = inquiries[len(existingUrbanEventInquiries)-1]
+    myinquiry = inquiries[len(existingUrbanEventInquiries) - 1]
     ob.setLinkedInquiry(myinquiry)
