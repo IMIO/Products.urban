@@ -41,13 +41,19 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         proprietaries = licence.getProprietaries()
         applicantobj = applicants and applicants[0] or None
         proprietaryobj = proprietaries and proprietaries[0] or None
+        licence_helper_view = licence.restrictedTraverse('@@document_generation_helper_view')
+        event_helper_view = self.context.restrictedTraverse('@@document_generation_helper_view')
 
         generation_context = {
             'self': licence,
             'urbanEventObj': self.context,
             'applicantobj': applicantobj,
             'proprietaryobj': proprietaryobj,
-            'tool': portal_urban
+            'tool': portal_urban,
+            'licence_view': licence_helper_view,
+            'licence_helper': licence_helper_view.context,
+            'event_view': event_helper_view,
+            'event_helper': event_helper_view.context,
         }
 
         return generation_context
