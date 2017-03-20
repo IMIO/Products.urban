@@ -406,6 +406,39 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         return event
 
 
+class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
+    def get_parcellings(self):
+        """
+        # Lotissement
+        """
+        context = self.real_context
+        parcellings = context.getParcellings()
+        return parcellings.Title()
+
+    def get_parcellings_dict(self):
+        """
+        # Lotissement
+        """
+        context = self.real_context
+        parcellings = context.getParcellings()
+        parcellings_dict = {}
+        if parcellings:
+            parcellings_dict['label'] = parcellings.getLabel()
+            parcellings_dict['subdividerName'] = parcellings.getSubdividerName()
+            parcellings_dict['authorizationDate'] = parcellings.getAuthorizationDate()
+            parcellings_dict['approvalDate'] = parcellings.getApprovalDate()
+            parcellings_dict['DGO4Reference'] = parcellings.getDGO4Reference()
+            parcellings_dict['numberOfParcels'] = parcellings.getNumberOfParcels()
+            parcellings_dict['changesDescription'] = parcellings.getChangesDescription()
+        return parcellings_dict
+
+
+class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
+    """
+    """
+    pass
+
+
 class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
     def get_work_location_dict(self, index, folder):
         """
@@ -677,30 +710,3 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
 class EventDisplayProxyObject(ATDisplayProxyObject):
     """
     """
-
-
-class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
-    def get_parcellings(self):
-        """
-        # Lotissement
-        """
-        context = self.real_context
-        parcellings = context.getParcellings()
-        return parcellings.Title()
-
-    def get_parcellings_dict(self):
-        """
-        # Lotissement
-        """
-        context = self.real_context
-        parcellings = context.getParcellings()
-        parcellings_dict = {}
-        if parcellings:
-            parcellings_dict['label'] = parcellings.getLabel()
-            parcellings_dict['subdividerName'] = parcellings.getSubdividerName()
-            parcellings_dict['authorizationDate'] = parcellings.getAuthorizationDate()
-            parcellings_dict['approvalDate'] = parcellings.getApprovalDate()
-            parcellings_dict['DGO4Reference'] = parcellings.getDGO4Reference()
-            parcellings_dict['numberOfParcels'] = parcellings.getNumberOfParcels()
-            parcellings_dict['changesDescription'] = parcellings.getChangesDescription()
-        return parcellings_dict
