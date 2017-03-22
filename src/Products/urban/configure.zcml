@@ -36,7 +36,7 @@
   <include package="plone.app.referenceintegrity"/>
   <include package="plone.z3ctable"/>
   <include package="plonetheme.imioapps"/>
-
+  <include package="urban.vocabulary"/>
 
   <include package=".collectionwidget" />
   <include package=".dashboard" />
