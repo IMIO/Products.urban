@@ -1,82 +1,137 @@
 # -*- coding: utf-8 -*-
 
 from Products.Five import BrowserView
+from plone.i18n.normalizer.interfaces import IIDNormalizer
+from plone import api
+from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
+
+import collections
+import json
 
 from Products.urban.services import cadastre
 from Products.urban.services import parcel_coring
 
-from plone import api
 
-import json
+class CoringUtility(object):
+    fieldname = ''
+    vocabulary_name = ''
+    valuetype = 'list'
+    coring_attribute = u''
 
-MATCH_CORING = {'folderprotectedbuildings': {'coringids': [17, 20, 19, 16, 18],
-                                             'fieldname': 'protectedBuilding',
-                                             'valuetype': 'list',
-                                             },
-                'folerzones': {'coringids': [12, 2],
-                               'fieldname': 'folderZone',
-                               'valuetype': 'list',
-                               },
-                'PCA': {'coringids': [7],
-                        'fieldname': 'isInPCA',
-                        'valuetype': 'bool',
-                        },
-                'LOTISSEMENT': {'coringids': [8],
-                                'fieldname': 'isInSubdivision',
-                                'valuetype': 'bool',
-                                },
-                }
-
-
-class Coring(object):
-
-    def __init__(self, layer):
-        for l in layer:
-            setattr(self, l, layer[l])
-        self.catalog = api.portal.get_tool('portal_catalog')
-        self.portal_urban = api.portal.get_tool('portal_urban')
-        self.folderzone_folder = self.portal_urban.folderzones
+    def __init__(self, values, context):
+        self.values = values
+        self.context = context
+        voc = getUtility(IVocabularyFactory, name=self.vocabulary_name)
+        self.vocabulary = voc(context)
 
     @property
-    def type(self):
-        for key in MATCH_CORING:
-            if self.layer_id in MATCH_CORING[key]['coringids']:
-                return key
-
-    @property
-    def valuetype(self):
-        if self.type:
-            return MATCH_CORING[self.type]['valuetype']
-
-    @property
-    def fieldname(self):
-        if self.type:
-            return MATCH_CORING[self.type]['fieldname']
-
-    def getValues(self):
-        if self.valuetype == 'bool':
-            return self.fieldname, [True], 'Vrai'
-        voc_folder = self.portal_urban.get(self.type)
-        if not voc_folder:
-            return '', [], ''
-        folder_path = '/'.join(voc_folder.getPhysicalPath())
+    def _coring_values(self):
         values = []
-        display_values = []
-        for layer_value in self.attributes:
-            layer_name = layer_value['attributes'].get('layerName')
-            if self.layer_id not in voc_folder.objectIds():
-                voc_brains = self.catalog(portal_type='UrbanVocabularyTerm', path={'query': folder_path, 'depth': 1})
-                voc_brains = [i for i in voc_brains if i.getObject()['coring_id'] == self.layer_id]
-                if len(voc_brains) == 1:
-                    values.append(voc_brains[0].id)
-                    display_values.append(voc_brains[0].Title)
-                    continue
-                else:
-                    with api.env.adopt_roles(['Manager']):
-                        voc_folder.invokeFactory('UrbanVocabularyTerm', id=self.layer_id, coring_id=self.layer_id, title=layer_name)
-            values.append(self.layer_id)
-            display_values.append(layer_name)
-        return self.fieldname, values, ', '.join(display_values)
+        normalizer = getUtility(IIDNormalizer)
+        for attributes in self.values['attributes']:
+            values.append(attributes['attributes'][self.coring_attribute])
+        return map(normalizer.normalize, values)
+
+    def _get_terms(self, values):
+        return map(
+            self.vocabulary.getTermByToken,
+            [v for v in values if v in self.vocabulary.by_token],
+        )
+
+    @staticmethod
+    def _to_str(values):
+        return [u', '.join(values)]
+
+    def _to_boolean(self, values):
+        terms = self._get_terms(values)
+        return [True in [t.title for t in terms]]
+
+    def _convert_to_value(self, values):
+        method = getattr(self, '_to_{0}'.format(self.valuetype), None)
+        if method:
+            return method(values)
+        return values
+
+    def _display_values(self, values, raw_values):
+        if self.valuetype == 'str':
+            return values
+        terms = self._get_terms(raw_values)
+        return [t.title for t in terms]
+
+    def get_values(self):
+        raw_values = self._coring_values
+        values = self._convert_to_value(raw_values)
+        display_values = self._display_values(values, raw_values)
+        return self.fieldname, {
+            'values': values,
+            'display_values': display_values,
+            'type': self.valuetype,
+        }
+
+
+class CoringPCA(CoringUtility):
+    fieldname = 'pca'
+    vocabulary_name = 'urban.vocabulary.PCAZones'
+    valuetype = 'list'
+    coring_attribute = u'CODECARTO'
+
+
+class CoringPCABoolean(CoringPCA):
+    fieldname = 'isInPCA'
+    vocabulary_name = 'urban.vocabulary.PCAZonesBoolean'
+    valuetype = 'boolean'
+
+
+class CoringProtectedBuilding(CoringUtility):
+    fieldname = 'protectedBuilding'
+    vocabulary_name = 'urban.vocabulary.ProtectedBuilding'
+    valuetype = 'list'
+    coring_attribute = u'Code carto'
+
+
+class CoringNatura2000(CoringUtility):
+    fieldname = 'natura_2000'
+    vocabulary_name = 'urban.vocabulary.Natura2000'
+    valuetype = 'list'
+    coring_attribute = u'Code du site'
+
+
+class CoringParcellings(CoringUtility):
+    fieldname = 'subdivisionDetails'
+    vocabulary_name = 'urban.vocabulary.Parcellings'
+    valuetype = 'str'
+    coring_attribute = u'CODEUNIQUE'
+
+    def _to_str(self, values):
+        terms = self._get_terms(values)
+        values = [u'{0} ({1})'.format(t.title, t.token) for t in terms]
+        return [u', '.join(values)]
+
+
+class CoringParcellingsBoolean(CoringParcellings):
+    fieldname = 'isInSubdivision'
+    vocabulary_name = 'urban.vocabulary.ParcellingsBoolean'
+    valuetype = 'boolean'
+
+
+class CoringNoteworthyTrees(CoringUtility):
+    fieldname = 'noteworthyTrees'
+    vocabulary_name = 'urban.vocabulary.NoteworthyTrees'
+    valuetype = 'list'
+    coring_attribute = u'N\xb0 du site'
+
+
+MATCH_CORING = {
+    2: CoringNatura2000,
+    7: (CoringPCA, CoringPCABoolean),
+    8: (CoringParcellings, CoringParcellingsBoolean),
+    12: CoringProtectedBuilding,
+    16: CoringProtectedBuilding,
+    18: CoringProtectedBuilding,
+    14: CoringNoteworthyTrees,
+    15: CoringNoteworthyTrees,
+}
 
 
 class ParcelCoringView(BrowserView):
@@ -108,36 +163,43 @@ class ParcelCoringView(BrowserView):
         for layer in coring_json:
             if not layer.get('attributes'):
                 continue
-            layer = Coring(layer)
-            field_name, proposed_value, display_value = layer.getValues()
-            if not field_name:
+            if layer.get('layer_id') not in MATCH_CORING:
                 continue
-            if field_name not in fields:
-                fields[field_name] = []
-            fields[field_name].append({'field_name': field_name,
-                                       'proposed_value': proposed_value,
-                                       'proposed_display_value': display_value})
-        for key in fields:
-            field = fields[key]
-            proposed_value = []
-            proposed_display_value = []
-            [proposed_value.extend(value['proposed_value']) for value in field]
-            [proposed_display_value.append(value['proposed_display_value']) for value in field]
-            urban_field = self.context.getField(key)
-            line = {
-                'field_name': key,
-                'field_name_label': urban_field.widget.label_msgid,
-                'proposed_display_value': ', '.join(proposed_display_value),
-                'proposed_value': json.dumps(proposed_value),
-                'current_value': urban_field.get(self.context) or 'N.C.',
-            }
-            if isinstance(proposed_value[0], bool):
-                proposed_value = proposed_value[0]
-            else:
-                proposed_value = tuple(proposed_value)
-            if proposed_value != urban_field.get(self.context):
-                fields_to_update.append(line)
+            classes = MATCH_CORING[layer['layer_id']]
+            if not isinstance(classes, collections.Iterable):
+                classes = [classes]
+            for cls in classes:
+                coring = cls(layer, self.context)
+                fieldname, values = coring.get_values()
+                if fieldname not in fields:
+                    fields[fieldname] = []
+                fields[fieldname].append(values)
+        for key, field_values in fields.items():
+            context_field = self.context.getField(key)
+            if not context_field:
+                continue
+            current_value = context_field.get(self.context)
+            values, display_values = self._format_values(field_values)
+            if values != current_value:
+                fields_to_update.append({
+                    'field': key,
+                    'label': context_field.widget.label_msgid,
+                    'new_value_display': ', '.join(display_values),
+                    'new_value': json.dumps(values),
+                })
         return fields_to_update
+
+    def _format_values(self, field_values):
+        values = []
+        map(values.extend, [e['values'] for e in field_values])
+        if field_values[0]['type'] == 'boolean':
+            values = True in values
+            return values, [{True: u'Oui', False: u'Non'}.get(values)]
+        display_values = []
+        map(display_values.extend, [e['display_values'] for e in field_values])
+        if field_values[0]['type'] == 'str':
+            values = ', '.join(values)
+        return tuple(values), display_values
 
     def core(self, coring_type=None):
         """
@@ -151,7 +213,7 @@ class ParcelCoringView(BrowserView):
 
         status = coring_response.status_code
         if status != 200:
-            msg = '<h1>{status}</h1><p>{error}</p><p>polygon:</p><p>{polygon}</p>'.format(
+            msg = u'<h1>{status}</h1><p>{error}</p><p>polygon:</p><p>{polygon}</p>'.format(
                 status=status,
                 error=coring_response.text,
                 polygon=parcels_wkt
