@@ -18,13 +18,13 @@
                 <th>Mettre à jour</th>
             </thead>
             <tr tal:repeat="field_to_update data">
-                <tal:vars define="field_name python: field_to_update.get('field_name')">
-                    <td tal:content="python: field_to_update.get('field_name_label')" i18n:translate=""></td>
+                <tal:vars define="field_name field_to_update/field">
+                    <td tal:content="field_to_update/label" i18n:translate=""></td>
                     <td tal:content="python: view.helper.display(field_name)"></td>
-                    <td tal:content="python: field_to_update.get('proposed_display_value')" i18n:translate=""></td>
+                    <td tal:content="field_to_update/new_value_display" i18n:translate=""></td>
                     <td style="text-align:center; width:6em">
                         <input type="checkbox" value="" checked
-                               tal:attributes="value python: field_to_update.get('proposed_value');
+                               tal:attributes="value field_to_update/new_value;
                                                name field_name">
                     </td>
                 </tal:vars>
