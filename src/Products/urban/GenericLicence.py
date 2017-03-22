@@ -451,7 +451,7 @@ schema = Schema((
         ),
         schemata='urban_road',
         multiValued=1,
-        vocabulary=UrbanVocabulary('natura_2000', inUrbanConfig=False),
+        vocabulary_factory='urban.vocabulary.Natura2000',
         default_method='getDefaultValue',
     ),
     StringField(
@@ -601,7 +601,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=True,
-        vocabulary=UrbanVocabulary('pcazones', inUrbanConfig=False),
+        vocabulary_factory='urban.vocabulary.PCAZones',
         default_method='getDefaultValue',
     ),
     BooleanField(
@@ -769,7 +769,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=1,
-        vocabulary=UrbanVocabulary('folderprotectedbuildings', inUrbanConfig=False),
+        vocabulary_factory='urban.vocabulary.ProtectedBuilding',
         default_method='getDefaultValue',
     ),
     TextField(
@@ -899,7 +899,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=1,
-        vocabulary=UrbanVocabulary('reparcelling', inUrbanConfig=False),
+        vocabulary_factory='urban.vocabulary.Reparcelling',
         default_method='getDefaultValue',
     ),
     TextField(

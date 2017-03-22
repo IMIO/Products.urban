@@ -70,6 +70,7 @@ setup(name='Products.urban',
           'SQLAlchemy',
           'testfixtures',
           'zope.app.container',
+          'urban.vocabulary',
       ],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',
