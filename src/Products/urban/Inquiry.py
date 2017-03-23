@@ -210,9 +210,9 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         urban_tool = getToolByName(self, 'portal_urban')
 
         default_value = urban_tool.getVocabularyDefaultValue(
-            vocabulary=field.vocabulary,
+            vocabulary=field.vocabulary or field.vocabulary_factory,
             context=context,
-            multivalued=field.multiValued
+            multivalued=field.multiValued,
         )
         return default_value
 

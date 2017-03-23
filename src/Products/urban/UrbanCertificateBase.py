@@ -201,7 +201,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=True,
-        vocabulary=UrbanVocabulary('noteworthytrees'),
+        vocabulary_factory='urban.vocabulary.NoteworthyTrees',
         default_method='getDefaultValue',
     ),
     StringField(

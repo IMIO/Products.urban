@@ -27,7 +27,9 @@ from Products.DataGridField.Column import Column
 
 from Products.urban.config import *
 
+from zope.component import getUtility
 from zope.interface import implements
+from zope.schema.interfaces import IVocabularyFactory
 
 import interfaces
 
@@ -251,10 +253,14 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
          Return the first vocabulary term marked as default value of the vocabulary named vocabulary_name
         """
-        #search in an urbanConfig or in the tool
         empty_value = multivalued and [] or ''
-        voc_terms = vocabulary.getAllVocTerms(context).values()
-        default_values = [voc_term.id for voc_term in voc_terms if voc_term.getIsDefaultValue()]
+        if isinstance(vocabulary, basestring):
+            default_values = []
+        else:
+            #search in an urbanConfig or in the tool
+            voc_terms = vocabulary.getAllVocTerms(context).values()
+            default_values = [voc_term.id for voc_term in voc_terms
+                              if voc_term.getIsDefaultValue()]
         return default_values and default_values or empty_value
 
     security.declarePublic('getTextDefaultValue')
