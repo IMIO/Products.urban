@@ -53,16 +53,17 @@ class CoringUtility(object):
             return method(values)
         return values
 
-    def _display_values(self, values, raw_values):
+    def _display_values(self, values, terms):
         if self.valuetype == 'str':
             return values
-        terms = self._get_terms(raw_values)
         return [t.title for t in terms]
 
     def get_values(self):
         raw_values = self._coring_values
-        values = self._convert_to_value(raw_values)
-        display_values = self._display_values(values, raw_values)
+        terms = self._get_terms(raw_values)
+        values = [t.token for t in terms]
+        values = self._convert_to_value(values)
+        display_values = self._display_values(values, terms)
         return self.fieldname, {
             'values': values,
             'display_values': display_values,
@@ -165,6 +166,7 @@ class ParcelCoringView(BrowserView):
                 continue
             if layer.get('layer_id') not in MATCH_CORING:
                 continue
+            print layer
             classes = MATCH_CORING[layer['layer_id']]
             if not isinstance(classes, collections.Iterable):
                 classes = [classes]
@@ -179,15 +181,23 @@ class ParcelCoringView(BrowserView):
             if not context_field:
                 continue
             current_value = context_field.get(self.context)
-            values, display_values = self._format_values(field_values)
-            if values != current_value:
+            new_value, display_values = self._format_values(field_values)
+            if self._compare_values(new_value, current_value):
                 fields_to_update.append({
                     'field': key,
                     'label': context_field.widget.label_msgid,
                     'new_value_display': ', '.join(display_values),
-                    'new_value': json.dumps(values),
+                    'new_value': json.dumps(new_value),
                 })
         return fields_to_update
+
+    @staticmethod
+    def _compare_values(new_value, current_value):
+        if isinstance(new_value, collections.Iterable):
+            new_value = [e for e in new_value if e]
+        if isinstance(current_value, collections.Iterable):
+            current_value = [e for e in current_value if e]
+        return current_value != new_value
 
     def _format_values(self, field_values):
         values = []
@@ -198,7 +208,7 @@ class ParcelCoringView(BrowserView):
         display_values = []
         map(display_values.extend, [e['display_values'] for e in field_values])
         if field_values[0]['type'] == 'str':
-            values = ', '.join(values)
+            return ', '.join(values), display_values
         return tuple(values), display_values
 
     def core(self, coring_type=None):
