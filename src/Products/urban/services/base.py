@@ -6,13 +6,15 @@ from Products.urban.services.interfaces import ISQLSession
 
 from plone import api
 
-from sqlalchemy import create_engine
 from sqlalchemy import MetaData
 from sqlalchemy import Table
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
 
 from zope.component import getAdapter
 from zope.interface import implements
+from zope.sqlalchemy import ZopeTransactionExtension
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 
@@ -135,7 +137,10 @@ class SQLSession(object):
     def __init__(self, service):
         self.service = service
         self.tables = service.tables
-        self.session = sessionmaker(service.engine)()
+        self.session = scoped_session(sessionmaker(
+            bind=service.engine,
+            extension=ZopeTransactionExtension(),
+        ))
 
     def execute(self, str_query):
         """
