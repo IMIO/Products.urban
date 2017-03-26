@@ -70,6 +70,7 @@ setup(name='Products.urban',
           'SQLAlchemy',
           'testfixtures',
           'zope.app.container',
+          'zope.sqlalchemy',
           'urban.vocabulary',
       ],
       entry_points={
