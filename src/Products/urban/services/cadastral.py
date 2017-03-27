@@ -2,6 +2,8 @@
 
 from Products.urban.services.base import SQLService
 from Products.urban.services.base import SQLSession
+from plone.memoize import ram
+from time import time
 
 from sqlalchemy import and_
 from sqlalchemy import or_
@@ -41,11 +43,16 @@ class CadastreService(SQLService):
             )
 
 
+def all_divisions_cache_key(method, self):
+    return time() // 3600
+
+
 class CadastreSession(SQLSession):
     """
     Implements all the sql queries of cadastre DB with sqlalchemy methods
     """
 
+    @ram.cache(all_divisions_cache_key)
     def get_all_divisions(self):
         """Return all divisions records of da table"""
         query = self.session.query(self.tables.da.da, self.tables.da.divname)
