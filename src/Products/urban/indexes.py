@@ -18,11 +18,13 @@ from Products.Archetypes.interfaces import IBaseFolder
 
 from Products.urban.interfaces import IApplicant
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IParcellingTerm
 from Products.urban.interfaces import IPortionOut
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IUrbanEventType
+from Products.urban.interfaces import IUrbanEventInquiry
 
 from plone.indexer import indexer
 
@@ -159,6 +161,14 @@ def genericlicence_foldermanager(object):
 @indexer(IUrbanEvent)
 def urbanevent_foldermanager(object):
     return [foldermanager.UID() for foldermanager in object.aq_parent.getFoldermanagers()]
+
+
+@indexer(IBaseBuildLicence)
+def investigation_start_date(object):
+    if object.getUrbanEventInquiries():
+        event = object.getLastInquiry()
+        if event.getInvestigationStart():
+            return event.getInvestigationStart()
 
 
 @indexer(IBaseFolder)

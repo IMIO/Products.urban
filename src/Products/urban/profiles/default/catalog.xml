@@ -92,5 +92,7 @@
       <property name="index_naive_time_as_local">True</property>
   </index>
   <column value="licence_final_duedate"/>
+
+ <index name="investigationStart" meta_type="DateIndex"/>
 <!-- ##/code-section FOOT -->
 </object>
