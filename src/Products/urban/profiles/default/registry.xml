@@ -19,11 +19,11 @@
       <value key="ui_droppable">False</value>
       <value key="ui_resizable">False</value>
       <value key="ui_selectable">False</value>
-      <value key="ui_sortable">False</value>
+      <value key="ui_sortable">True</value>
       <value key="ui_accordion">False</value>
       <value key="ui_autocomplete">True</value>
       <value key="ui_button">False</value>
-      <value key="ui_dialog">False</value>
+      <value key="ui_dialog">True</value>
       <value key="ui_slider">False</value>
       <value key="ui_tabs">False</value>
       <value key="ui_datepicker">False</value>
