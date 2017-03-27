@@ -35,7 +35,7 @@ def _set_header_response(filename):
     )
 
 
-def _export_document_templates(licence_types=URBAN_TYPES):
+def _export_document_templates(licence_types=URBAN_TYPES, with_event_structure=True):
 
     export_path = '{path}/urban_templates-{timestamp}'.format(
         path=EXPORT_DIR,
@@ -49,18 +49,24 @@ def _export_document_templates(licence_types=URBAN_TYPES):
         print('exporting config: {}'.format(licence_type.lower()))
         config = portal_urban.get(licence_type.lower())
 
-        docs_path = '{path}/{licence_type}'.format(
+        licence_path = '{path}/{licence_type}'.format(
             path=export_path,
             licence_type=licence_type.lower()
         )
-        os.mkdir(docs_path)
+        os.mkdir(licence_path)
 
         urbanevents = config.urbaneventtypes
         for urbanevent in urbanevents.objectValues():
+            if with_event_structure:
+                event_path = '{path}/{event_name}'.format(
+                    path=licence_path,
+                    event_name=urbanevent.Title()
+                )
+            os.mkdir(event_path)
             for doc in urbanevent.objectValues():
                 print(' {} -> {}'.format(licence_type.lower(), doc.id))
                 doc_name = '{path}/{name}'.format(
-                    path=docs_path,
+                    path=with_event_structure and event_path or licence_path,
                     name=doc.id
                 )
                 doc_export = open(doc_name, 'arw')
