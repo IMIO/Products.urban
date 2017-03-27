@@ -62,7 +62,7 @@ def _export_document_templates(licence_types=URBAN_TYPES, with_event_structure=T
                     path=licence_path,
                     event_name=urbanevent.Title()
                 )
-            os.mkdir(event_path)
+                os.mkdir(event_path)
             for doc in urbanevent.objectValues():
                 print(' {} -> {}'.format(licence_type.lower(), doc.id))
                 doc_name = '{path}/{name}'.format(
