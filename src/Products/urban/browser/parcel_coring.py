@@ -88,14 +88,14 @@ class CoringProtectedBuilding(CoringUtility):
     fieldname = 'protectedBuilding'
     vocabulary_name = 'urban.vocabulary.ProtectedBuilding'
     valuetype = 'list'
-    coring_attribute = u'Code carto'
+    coring_attribute = u'CODECARTO'
 
 
 class CoringNatura2000(CoringUtility):
     fieldname = 'natura_2000'
     vocabulary_name = 'urban.vocabulary.Natura2000'
     valuetype = 'list'
-    coring_attribute = u'Code du site'
+    coring_attribute = u'CODE_SITE'
 
 
 class CoringParcellings(CoringUtility):
@@ -120,7 +120,7 @@ class CoringNoteworthyTrees(CoringUtility):
     fieldname = 'noteworthyTrees'
     vocabulary_name = 'urban.vocabulary.NoteworthyTrees'
     valuetype = 'list'
-    coring_attribute = u'N\xb0 du site'
+    coring_attribute = u'SITEAR'
 
 
 MATCH_CORING = {
@@ -166,7 +166,6 @@ class ParcelCoringView(BrowserView):
                 continue
             if layer.get('layer_id') not in MATCH_CORING:
                 continue
-            print layer
             classes = MATCH_CORING[layer['layer_id']]
             if not isinstance(classes, collections.Iterable):
                 classes = [classes]
