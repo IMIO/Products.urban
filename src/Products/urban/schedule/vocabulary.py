@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.interfaces import IArticle127
+from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.interfaces import IBuildLicence
 from Products.urban.interfaces import IDeclaration
 from Products.urban.interfaces import IDivision
@@ -42,6 +43,7 @@ URBAN_TYPES_INTERFACES = {
     'EnvClassOne': IEnvClassOne,
     'EnvClassTwo': IEnvClassTwo,
     'EnvClassThree': IEnvClassThree,
+    'Base BuildLicence (PU, 127, CU2)': IBaseBuildLicence,
 }
 
 
