@@ -568,6 +568,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         """
         contact = self._get_contact_dict(contact)
         gender_multiplicity = contact['gender'] + '-' + contact['multiplicity']
+        gender_multiplicity = gender_multiplicity.encode('utf8')
         contact_names = \
                 contact['personTitle'] + ' ' +\
                 contact['name2'] + ' ' +\
