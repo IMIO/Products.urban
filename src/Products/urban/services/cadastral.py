@@ -701,3 +701,17 @@ class ParcelHistoric(ParentParcel, ChildParcel):
             table.reverse()
 
         return table
+
+
+def parse_cadastral_reference(capakey):
+    """
+    """
+    reference_as_dict = {
+        'division': capakey[0:5],
+        'section': capakey[5],
+        'radical': int(capakey[6:10]) and str(int(capakey[6:10])) or '',
+        'bis': int(capakey[11:13]) and str(int(capakey[11:13])) or '',
+        'exposant': capakey[13] and capakey[13] or '',
+        'puissance': int(capakey[14:17]) and str(int(capakey[14:17])) or '',
+    }
+    return reference_as_dict
