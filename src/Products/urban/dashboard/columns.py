@@ -154,12 +154,5 @@ class LicenceFinalDueDateColumn(BaseColumn):
 class TaskActionsColumn(ActionsColumn):
     """Display actions for the task"""
     params = {
-        'useIcons': False,
-        'showHistory': False,
-        'showActions': False,
-        'showOwnDelete': False,
-        'showEdit': False,
-        'showTransitions': False,
         'showChangeOwner': True,
-        'useIcons': False,
     }
