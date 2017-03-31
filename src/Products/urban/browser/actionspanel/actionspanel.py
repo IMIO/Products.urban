@@ -74,15 +74,15 @@ class ConfigValueActionsPanelView(ActionsPanelView):
         self.ACCEPTABLE_ACTIONS = ('rename', )
 
 
-class TaskActionsPanelView(ActionsPanelView):
+class AutomatedTaskActionsPanelView(ActionsPanelView):
     """Actions pannel view of tasks"""
 
     def __init__(self, context, request):
-        super(TaskActionsPanelView, self).__init__(context, request)
-        self.SECTIONS_TO_RENDER = ('renderChangeOwner', )
+        super(AutomatedTaskActionsPanelView, self).__init__(context, request)
+        self.SECTIONS_TO_RENDER = ('renderChangeOwner',)
 
     def __call__(self,
-                 useIcons=True,
+                 useIcons=False,
                  showTransitions=False,
                  appendTypeNameToTransitionLabel=False,
                  showEdit=False,
@@ -91,17 +91,17 @@ class TaskActionsPanelView(ActionsPanelView):
                  showAddContent=False,
                  showHistory=False,
                  showHistoryLastEventHasComments=False,
-                 showChangeOwner=False,
+                 showChangeOwner=True,
                  **kwargs):
 
         self.showChangeOwner = showChangeOwner
 
-        return super(TaskActionsPanelView, self).__call__(
+        return super(AutomatedTaskActionsPanelView, self).__call__(
             useIcons=useIcons,
-            showTransitions=False,
+            showTransitions=showTransitions,
             appendTypeNameToTransitionLabel=False,
-            showEdit=False,
-            showOwnDelete=False,
+            showEdit=showEdit,
+            showOwnDelete=showOwnDelete,
             showActions=showActions,
             showAddContent=showAddContent,
             showHistory=showHistory,
@@ -113,6 +113,44 @@ class TaskActionsPanelView(ActionsPanelView):
         """Render a link for the change owner view"""
         if self.showChangeOwner:
             return ViewPageTemplateFile('actions_panel_change_owner.pt')(self)
+
+
+class SimpleTaskActionsPanelView(ActionsPanelView):
+    """Actions pannel view of tasks"""
+
+    def __init__(self, context, request):
+        super(SimpleTaskActionsPanelView, self).__init__(context, request)
+        self.SECTIONS_TO_RENDER = (
+            'renderTransitions',
+            'renderEdit',
+            'renderOwnDelete',
+            'renderActions',
+        )
+
+    def __call__(self,
+                 useIcons=True,
+                 showTransitions=True,
+                 appendTypeNameToTransitionLabel=False,
+                 showEdit=True,
+                 showOwnDelete=True,
+                 showActions=False,
+                 showAddContent=False,
+                 showHistory=False,
+                 showHistoryLastEventHasComments=False,
+                 **kwargs):
+
+        return super(SimpleTaskActionsPanelView, self).__call__(
+            useIcons=useIcons,
+            showTransitions=showTransitions,
+            appendTypeNameToTransitionLabel=False,
+            showEdit=showEdit,
+            showOwnDelete=showOwnDelete,
+            showActions=showActions,
+            showAddContent=showAddContent,
+            showHistory=showHistory,
+            showHistoryLastEventHasComments=showHistoryLastEventHasComments,
+            **kwargs
+        )
 
 
 class FolderActionsPanelView(ActionsPanelView):
