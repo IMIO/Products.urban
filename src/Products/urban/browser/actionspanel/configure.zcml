@@ -207,9 +207,19 @@
         permission="zope2.View" />
 
     <browser:page
+      for="collective.task.behaviors.ITask"
+      name="actions_panel"
+      class="Products.urban.browser.actionspanel.actionspanel.SimpleTaskActionsPanelView"
+      layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+      template="browser/actions_panel.pt"
+      allowed_attributes="render"
+      permission="zope2.View"
+      />
+
+    <browser:page
       for="imio.schedule.content.task.IAutomatedTask"
       name="actions_panel"
-      class="Products.urban.browser.actionspanel.actionspanel.TaskActionsPanelView"
+      class="Products.urban.browser.actionspanel.actionspanel.AutomatedTaskActionsPanelView"
       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
       template="browser/actions_panel.pt"
       allowed_attributes="render"
@@ -219,7 +229,7 @@
     <browser:page
       for="imio.schedule.content.task.IAutomatedMacroTask"
       name="actions_panel"
-      class="Products.urban.browser.actionspanel.actionspanel.TaskActionsPanelView"
+      class="Products.urban.browser.actionspanel.actionspanel.AutomatedTaskActionsPanelView"
       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
       template="browser/actions_panel.pt"
       allowed_attributes="render"
