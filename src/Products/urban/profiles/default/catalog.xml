@@ -93,6 +93,11 @@
   </index>
   <column value="licence_final_duedate"/>
 
+  <index name="archive" meta_type="BooleanIndex">
+    <indexed_attr value="archive"/>
+  </index>
+  <column value="archive"/>
+
  <index name="investigationStart" meta_type="DateIndex"/>
 <!-- ##/code-section FOOT -->
 </object>

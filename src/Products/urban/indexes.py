@@ -20,6 +20,7 @@ from Products.urban.interfaces import IApplicant
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.interfaces import IEnvironmentLicence
+from Products.urban.interfaces import IIsArchive
 from Products.urban.interfaces import IParcellingTerm
 from Products.urban.interfaces import IPortionOut
 from Products.urban.interfaces import IUrbanEvent
@@ -27,6 +28,8 @@ from Products.urban.interfaces import IUrbanEventType
 from Products.urban.interfaces import IUrbanEventInquiry
 
 from plone.indexer import indexer
+
+from zope.component import queryAdapter
 
 
 @indexer(IApplicant)
@@ -197,3 +200,12 @@ def genericlicence_depositdate(licence):
     deposit_event = licence.getFirstDeposit(use_catalog=False)
     if deposit_event:
         return deposit_event.getEventDate()
+
+
+@indexer(IGenericLicence)
+def genericlicence_archive(licence):
+    is_archive = False
+    archive_adapter = queryAdapter(licence, IIsArchive)
+    if archive_adapter:
+        is_archive = archive_adapter.is_archive()
+    return is_archive
