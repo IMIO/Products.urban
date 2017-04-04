@@ -59,3 +59,7 @@ class RenderLicenceTermView(RenderTermView):
 
     def get_link_class(self, licence_type):
         return "content-shortcuts contenttype-{}".format(licence_type.lower())
+
+    def display_number_of_items(self):
+        """If true, display the number of items in the collection."""
+        return False
