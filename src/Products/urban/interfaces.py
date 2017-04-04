@@ -385,4 +385,11 @@ class IWorklocationSignaletic(Interface):
 
     def get_signaletic(self):
         """ """
+
+
+class IIsArchive(Interface):
+    """ Adapts a licence into an archive"""
+
+    def is_archive(self):
+        """ """
 ##/code-section FOOT
