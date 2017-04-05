@@ -88,5 +88,6 @@ def notifyLicence(urban_event, event):
     """
     Notify the licence of changes so schedule events triggers.
     """
-    licence = urban_event.aq_parent
-    notify(ObjectModifiedEvent(licence))
+    if not urban_event.checkCreationFlag():
+        licence = urban_event.aq_parent
+        notify(ObjectModifiedEvent(licence))
