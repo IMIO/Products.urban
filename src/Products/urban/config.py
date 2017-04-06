@@ -194,11 +194,11 @@ DASHBOARD_TEMPLATES = {
             'portal_type': 'DashboardPODTemplate',
             'title':'Statistiques INS',
         },
-        {
-            'id':'folderlisting.odt',
-            'portal_type': 'DashboardPODTemplate',
-            'title':'Liste',
-        },
+        # {
+            # 'id':'folderlisting.odt',
+            # 'portal_type': 'DashboardPODTemplate',
+            # 'title':'Liste',
+        # },
     ],
 }
 #the different formats proposed for generating document
