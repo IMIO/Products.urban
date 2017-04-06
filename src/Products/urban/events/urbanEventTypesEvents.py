@@ -27,7 +27,6 @@ def updateKeyEvent(urbanEventType, event):
 def updateEventType(urban_event_type, event):
     """
     """
-    import ipdb; ipdb.set_trace()
     annotations = IAnnotations(urban_event_type)
     previous_eventtype_interface = annotations.get('urban.eventtype', [])
     new_eventtype_interface = urban_event_type.getEventTypeType()
