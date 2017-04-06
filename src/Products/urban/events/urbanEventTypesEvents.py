@@ -7,6 +7,7 @@ from Products.urban.interfaces import IEventTypeType
 
 from plone import api
 
+from zope.annotation import IAnnotations
 from zope.interface import noLongerProvides
 from zope.interface import providedBy
 
@@ -26,6 +27,15 @@ def updateKeyEvent(urbanEventType, event):
 def updateEventType(urban_event_type, event):
     """
     """
+    import ipdb; ipdb.set_trace()
+    annotations = IAnnotations(urban_event_type)
+    previous_eventtype_interface = annotations.get('urban.eventtype', [])
+    new_eventtype_interface = urban_event_type.getEventTypeType()
+    if previous_eventtype_interface == new_eventtype_interface:
+        return
+
+    annotations['urban.eventtype'] = new_eventtype_interface
+
     ref_catalog = api.portal.get_tool('reference_catalog')
     ref_brains = ref_catalog(targetUID=urban_event_type.UID())
     for ref_brain in ref_brains:
