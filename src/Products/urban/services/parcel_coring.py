@@ -20,6 +20,6 @@ class ParcelCoringService(WebService):
             'st': coring_type or self.coring_type,
             'geom': parcels_wkt,
         }
-        coring_response = requests.post(self.url, data=params)
+        coring_response = requests.post(self.url, data=params, verify='/etc/ssl/certs/ca-certificates.crt')
 
         return coring_response
