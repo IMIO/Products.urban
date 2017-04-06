@@ -60,7 +60,7 @@ setup(name='Products.urban',
           'plone.namedfile',  # ugly fix because TinyMce needs it but didnt declared it in its setup dependencies
           'plone.z3ctable',
           'plonetheme.imioapps',
-          'profilehooks',
+          'Products.cron4plone',
           'psycopg2',
           'python-dateutil',
           'python-Levenshtein',
