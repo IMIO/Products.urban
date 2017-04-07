@@ -123,7 +123,7 @@ class UrbainXMLExport(BrowserView):
                 html_list.append(
                     '<TR><TD>%s  %s</TD><TD>%s</TD></TR>'
                     % (str(licence.getReference()), licence.title.encode('iso-8859-1'),
-                    str(licence_brain.getDecisionDate()))
+                    str(licence_brain.getDecisionDate))
                 )
                 xml.append('  <Item220>')
                 xml.append('      <E_220_Ref_Toel>%s</E_220_Ref_Toel>' % str(licence.getReference()))
@@ -150,7 +150,7 @@ class UrbainXMLExport(BrowserView):
                     xml_worktype = worktype_map[worktype]
                 xml.append('      <E_220_Typ>%s</E_220_Typ>' % xml_worktype)
                 xml.append('      <E_220_Werk>%s</E_220_Werk>' % licence.licenceSubject.encode('iso-8859-1'))
-                strDecisionDate = str(licence_brain.getDecisionDate())
+                strDecisionDate = str(licence_brain.getDecisionDate)
                 xml.append('      <E_220_Datum_Verg>%s%s%s</E_220_Datum_Verg>' % (strDecisionDate[0: 4], strDecisionDate[5: 7], strDecisionDate[8: 10]))
                 xml.append('      <E_220_Instan>COM</E_220_Instan>')
                 xml.append('      <PERSOON>')
