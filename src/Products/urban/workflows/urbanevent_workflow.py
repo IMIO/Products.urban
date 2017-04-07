@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from liege.urban.workflows.adapter import LocalRoleAdapter
+from Products.urban.workflows.adapter import LocalRoleAdapter
 
 
 class StateRolesMapping(LocalRoleAdapter):

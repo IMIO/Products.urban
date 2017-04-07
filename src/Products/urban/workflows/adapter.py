@@ -3,6 +3,7 @@
 from borg.localrole.interfaces import ILocalRoleProvider
 
 from plone import api
+from plone.memoize.request import cache
 
 from Products.CMFCore.WorkflowCore import WorkflowException
 
@@ -17,9 +18,13 @@ class RoleNotFoundError(Exception):
     """ """
 
 
+def _get_rolemap_caching_key(method, localrole_adapter, state):
+    return (str(localrole_adapter.__class__), localrole_adapter.context.UID(), state)
+
+
 class LocalRoleAdapter(object):
     """
-        borg.localrole adapter to set localrole following type and state configuration
+    borg.localrole adapter to set localrole following type and state configuration.
     """
     implements(ILocalRoleProvider)
 
@@ -29,7 +34,9 @@ class LocalRoleAdapter(object):
         self.context = context
 
     def getRoles(self, principal):
-        """Grant permission for principal"""
+        """
+        Grant permission for principal.
+        """
         current_state = self.get_state()
         state_config = self.get_roles_mapping_for_state(current_state)
         if not state_config:
@@ -39,7 +46,9 @@ class LocalRoleAdapter(object):
         return tuple(state_config.get(principal))
 
     def getAllRoles(self):
-        """Grant permissions"""
+        """
+        Grant permissions.
+        """
         current_state = self.get_state()
         state_config = self.get_roles_mapping_for_state(current_state)
         if not state_config:
@@ -48,6 +57,7 @@ class LocalRoleAdapter(object):
         for principal, roles in state_config.items():
             yield (principal, tuple(roles))
 
+    @cache(get_key=_get_rolemap_caching_key, get_request='self.context.REQUEST')
     def get_roles_mapping_for_state(self, state):
         """
         Return the group/roles mapping of a given state.
@@ -68,24 +78,26 @@ class LocalRoleAdapter(object):
 
         return generated_mapping
 
-    def compute_value(self, value_name):
+    def compute_value(self, value):
         """
-        Values in the mapping can be either the value to return or a method name to
+        Values in the mapping can be either the value to return or a method to
         call to dynamically compute the value.
         """
-        if hasattr(self, value_name):
-            value_computation_method = getattr(self, value_name)
-            value = value_computation_method()
+        if callable(value):
+            computed_value = value(self)
         else:
-            value = [value_name]
-        return value
+            computed_value = [value]
+        return computed_value
 
     def compute_group_value(self, group_name):
         group_values = self.compute_value(group_name)
         for group_value in group_values:
             if not api.group.get(group_value):
-                if hasattr(self, group_name):
-                    msg = "Group '{}' computed by '{}' method does not exist.".format(group_value, group_name)
+                if callable(group_name):
+                    msg = "Group '{}' computed by '{}' method does not exist.".format(
+                        group_value,
+                        group_name.__func__.__name__
+                    )
                 else:
                     msg = "'{}' is neither an existing group nor a method on mapping object {}.".format(
                         group_name,
@@ -102,8 +114,11 @@ class LocalRoleAdapter(object):
         registered_roles = portal_roles.listRoleIds()
         for role_value in role_values:
             if role_value not in registered_roles:
-                if hasattr(self, role_name):
-                    msg = "Role '{}' computed by '{}' method does not exist.".format(role_value, role_name)
+                if callable(role_name):
+                    msg = "Role '{}' computed by '{}' method does not exist.".format(
+                        role_value,
+                        role_name.__func__.__name__
+                    )
                 else:
                     msg = "'{}' is neither an existing role nor a method on mapping object {}.".format(
                         role_name,
