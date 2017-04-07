@@ -6,19 +6,19 @@
 
     <assignment name="licences"
                 category="context"
-                key="/"
+                key="/urban"
                 manager="plone.leftcolumn"
                 type="imio.dashboard.FacetedCollectionPortlet" />
 
     <assignment name="tools"
                 category="context"
-                key="/"
+                key="/urban"
                 manager="plone.leftcolumn"
                 type="urban.portlet.urbantools" />
 
     <assignment name="config"
                 category="context"
-                key="/"
+                key="/urban"
                 manager="plone.leftcolumn"
                 type="urban.portlet.urbanconfig" />
 
