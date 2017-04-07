@@ -1,5 +1,6 @@
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
            i18n_domain="urban">
 
     <browser:viewlet
@@ -63,6 +64,19 @@
           class="Products.urban.schedule.faceted_view.UrbanTaskTableView"
           permission="zope2.View"
         />
+    </configure>
+
+    <!-- Portlets import should be done AFTER urban post install -->
+    <configure package="plone.app.portlets">
+        <genericsetup:importStep
+            name="portlets"
+            title="Portlets"
+            description="Import portlet managers, types, assignments and blacklistings"
+            handler=".exportimport.portlets.importPortlets">
+            <depends name="componentregistry"/>
+            <depends name="content"/>
+            <depends name="urban-postInstall"/>
+        </genericsetup:importStep>
     </configure>
 
 </configure>
