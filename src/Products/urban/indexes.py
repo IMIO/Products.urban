@@ -21,11 +21,13 @@ from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IIsArchive
+from Products.urban.interfaces import ILocality
 from Products.urban.interfaces import IParcellingTerm
 from Products.urban.interfaces import IPortionOut
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IUrbanEventType
 from Products.urban.interfaces import IUrbanEventInquiry
+from Products.urban.interfaces import IStreet
 
 from plone.indexer import indexer
 
@@ -134,6 +136,16 @@ def genericlicence_streetnumber(licence):
 @indexer(IGenericLicence)
 def genericlicence_address(licence):
     return licence.getWorkLocationSignaletic()
+
+
+@indexer(ILocality)
+def locality_title(street):
+    return street.getLocalityName()
+
+
+@indexer(IStreet)
+def street_title(street):
+    return street.getStreetName()
 
 
 @indexer(IGenericLicence)
