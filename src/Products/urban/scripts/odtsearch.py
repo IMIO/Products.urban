@@ -194,21 +194,12 @@ def searchAndReplaceOneODT(filename, findexpr, replace_expr=None, destination=No
 
 def createNewOdt(old_odt, newcontent, new_odt_name, destination_folder):
     new_odt = openZip(new_odt_name, 'a')
-    for name in old_odt.namelist():
-        temp_content = old_odt.read(name)
-        temp_file = open('.temp-odtsearch', 'w')
-        temp_file.write(temp_content)
-        temp_file.close()
-        if name != 'content.xml':
-            new_odt.write('.temp-odtsearch', name)
+    for item in old_odt.infolist():
+        if item.filename == 'content.xml':
+            new_odt.writestr('content.xml', newcontent)
         else:
-            newfile = open('.content.xml-TEMP', 'w')
-            newfile.write(newcontent)
-            newfile.close()
-            new_odt.write('.content.xml-TEMP', 'content.xml')
-            os.remove('.content.xml-TEMP')
+            new_odt.writestr(item, old_odt.read(item.filename))
     new_odt.close()
-    os.remove('.temp-odtsearch')
     return new_odt
 
 
