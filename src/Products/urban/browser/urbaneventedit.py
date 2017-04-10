@@ -2,7 +2,7 @@
 
 from Products.Archetypes.browser.edit import Edit
 
-from zope.component import getMultiAdapter
+from zope.component import queryMultiAdapter
 
 
 class UrbanEventEdit(Edit):
@@ -11,11 +11,11 @@ class UrbanEventEdit(Edit):
     """
 
     def get_editable_fields(self, schemata):
-        portal_state = getMultiAdapter(
+        portal_state = queryMultiAdapter(
             (self.context, self.request),
             name=u'plone_portal_state'
         )
-        ws4pmSettings = getMultiAdapter(
+        ws4pmSettings = queryMultiAdapter(
             (portal_state.portal(), self.request),
             name='ws4pmclient-settings'
         )
@@ -29,7 +29,7 @@ class UrbanEventEdit(Edit):
             field = self.context.getField(activatedField)
             fields.append(field)
 
-        if ws4pmSettings.checkAlreadySentToPloneMeeting(self.context):
+        if ws4pmSettings and ws4pmSettings.checkAlreadySentToPloneMeeting(self.context):
             return [f for f in fields if not getattr(f, 'pm_text_field', False)]
         else:
             return fields
