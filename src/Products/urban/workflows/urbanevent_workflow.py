@@ -9,18 +9,12 @@ class StateRolesMapping(LocalRoleAdapter):
 
     mapping = {
         'in_progress': {
-            'administrative_editors': ('Editor',),
-            'administrative_validators': ('Editor', 'Contributor'),
-            'technical_editors': ('Editor',),
-            'technical_validators': ('Editor', 'Contributor'),
+            'urban_editors': ('Editor',),
             'urban_readers': ('Reader',),
         },
 
         'closed': {
-            'administrative_editors': ('Reader',),
-            'administrative_validators': ('Reader',),
-            'technical_editors': ('Reader',),
-            'technical_validators': ('Reader',),
+            'urban_editors': ('Editor',),
             'urban_readers': ('Reader',),
         },
     }
