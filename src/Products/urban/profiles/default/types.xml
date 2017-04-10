@@ -17,6 +17,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="BuildLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="BuildLicenceCODT"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="ParcelOutLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="FolderManager"
