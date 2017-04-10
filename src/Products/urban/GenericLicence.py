@@ -149,7 +149,7 @@ schema = Schema((
         name='workLocations',
         schemata="urban_description",
         widget=DataGridWidget(
-            columns={'number': Column("Number"), 'street': ReferenceColumn("Street", surf_site=False, object_provides=('Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',), workflow_states=('enabled',))},
+            columns={'number': Column("Number"), 'street': ReferenceColumn("Street", surf_site=False, object_provides=('Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',), workflow_states=('enabled',), title_index='street_title')},
             helper_js=('datagridwidget.js', 'datagridautocomplete.js'),
             label='Worklocations',
             label_msgid='urban_label_workLocations',

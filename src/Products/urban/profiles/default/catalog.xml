@@ -60,11 +60,21 @@
   <index name="address"
          meta_type="ZCTextIndex">
     <indexed_attr value="address"/>
-  <extra name="index_type" value="Okapi BM25 Rank"/>
-  <extra name="lexicon_id" value="plone_lexicon"/>
+    <extra name="index_type" value="Okapi BM25 Rank"/>
+    <extra name="lexicon_id" value="plone_lexicon"/>
   </index>
 
   <column value="address"/>
+
+  <index name="street_title"
+         meta_type="ZCTextIndex">
+    <indexed_attr value="street_title"/>
+    <extra name="index_type" value="Okapi BM25 Rank"/>
+    <extra name="lexicon_id" value="plone_lexicon"/>
+  </index>
+
+  <column value="street_title"/>
+
 
   <column value="eventDate"/>
 
