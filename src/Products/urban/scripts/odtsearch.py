@@ -186,7 +186,9 @@ def searchAndReplaceOneODT(filename, findexpr, replace_expr=None, destination=No
         unzip(filename, tempFolder)
         zip_file = zipfile.ZipFile(filename)
         newcontent = getNewOdtContent(xml_tree, searchresult, replace_expr)
-        createNewOdt(zip_file, newcontent, 'replace-' + filename, destination)
+        replacefilename = os.path.basename(filename)
+        replacefilename = filename.replace(replacefilename, 'replace-%s' % replacefilename)
+        createNewOdt(zip_file, newcontent, replacefilename, destination)
         zip(filename, tempFolder, odf=True)
 
     return searchresult
