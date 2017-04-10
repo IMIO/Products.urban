@@ -163,7 +163,7 @@ def searchOneODT(filename, findexpr, ignorecase=False, silent=False):
     zip_file.close()
 
     if odt_content:
-        #search...
+        # search...
         xml_tree = xml.dom.minidom.parseString(odt_content)
         searchresult = searchInOdtXMLContent(xml_tree, filename, findexpr, ignorecase, silent)
 
@@ -224,8 +224,8 @@ def getNewOdtContent(xml_tree, searchresult, replace_expr):
 
 def searchInOdtXMLContent(xml_tree, filename, findexpr, ignorecase=False, silent=False):
     logging.debug("searching text content of '%s'" % filename)
-    #the two xml tags we want to browse are 'office:annotation' and 'text:text-input', since its the only place
-    #where appyPOD code can be written
+    # the two xml tags we want to browse are 'office:annotation' and 'text:text-input', since its the only place
+    # where appyPOD code can be written
     result = []
     annotations = [node.getElementsByTagName('text:p') for node in xml_tree.getElementsByTagName('office:annotation')]
 
@@ -397,7 +397,7 @@ def displaySearchSummary(searchresult, filenames, findexpr, replace_expr):
 
 
 ################################################################
-#parsing arguments code
+# parsing arguments code
 ################################################################
 req_version = (2, 7)
 cur_version = sys.version_info
