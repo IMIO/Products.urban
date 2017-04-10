@@ -97,6 +97,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UniqueLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="UniqueLicenceCODT"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="IntegratedLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="IntegratedLicenceCODT"
