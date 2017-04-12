@@ -1346,6 +1346,8 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
                 title=eventType.Title(), urbaneventtypes=(eventType,)
             )
             newUrbanEventObj = getattr(self, newUrbanEventId)
+            if eventType.id in self.solicitOpinionsToOptional:
+                newUrbanEventObj.isOptional = True
             newUrbanEventObj.processForm()
         return self.REQUEST.RESPONSE.redirect(self.absolute_url() + '/view?#fieldsetlegend-urban_events')
 

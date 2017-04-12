@@ -225,7 +225,7 @@
     <fieldset tal:repeat="inquiry inquiries">
         <legend i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</legend>
         <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
-               tal:define="exclude python: ['solicitOpinionsTo']" >
+               tal:define="exclude python: ['solicitOpinionsTo', 'solicitOpinionsToOptional']" >
             <tr tal:repeat="field view/getAdviceFields">
                 <tal:vars define="fieldname field/getName">
 
@@ -237,8 +237,8 @@
                     </td>
                 </tal:normal_field>
 
-                <tal:opinions condition="python: fieldname == 'solicitOpinionsTo'">
-                    <td tal:define="opinionIds inquiry/getSolicitOpinionsTo" style="padding-top: 1em;" colspan="3">
+                <tal:opinions condition="python: fieldname in ['solicitOpinionsTo', 'solicitOpinionsToOptional']">
+                    <td tal:define="opinionIds python:inquiry.getSolicitOpinionsTo() if fieldname == 'solicitOpinionsTo' else inquiry.getSolicitOpinionsToOptional()" style="padding-top: 1em;" colspan="3">
                         <table tal:condition="opinionIds" cellspacing="0" cellpadding="0" width="100%" class="listing">
                             <thead>
                                 <tr>

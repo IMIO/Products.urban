@@ -190,6 +190,15 @@ schema = Schema((
         optional=True,
         vocabulary='listAdviceAgreementLevels',
     ),
+    BooleanField(
+        name='isOptional',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Isoptional',
+            label_msgid='urban_label_isOptional',
+            i18n_domain='urban',
+        ),
+    ),
     StringField(
         name='externalDecision',
         widget=SelectionWidget(

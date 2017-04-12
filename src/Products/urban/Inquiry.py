@@ -166,6 +166,19 @@ schema = Schema((
         vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
         default_method='getDefaultValue',
     ),
+    LinesField(
+        name='solicitOpinionsToOptional',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Solicitopinionstooptional',
+            label_msgid='urban_label_solicitOpinionsToOptional',
+            i18n_domain='urban',
+        ),
+        schemata='urban_advices',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
+        default_method='getDefaultValue',
+    ),
 
 ),
 )
@@ -311,6 +324,13 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         """
         return self.Vocabulary('solicitOpinionsTo')[0].getValue(opinionId)
 
+    security.declarePublic('getSolicitOpinionOptionalValue')
+    def getSolicitOpinionOptionalValue(self, opinionId):
+        """
+          Return the corresponding opinion value from the given opinionId
+        """
+        return self.Vocabulary('solicitOpinionsToOptional')[0].getValue(opinionId)
+
     security.declarePublic('mayAddOpinionRequestEvent')
     def mayAddOpinionRequestEvent(self, organisation):
         """
@@ -318,10 +338,12 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
            We may add an OpinionRequest if we asked one in an inquiry on the licence
            We may add another if another inquiry defined on the licence ask for it and so on
         """
-        limit = organisation in self.getSolicitOpinionsTo() and 1 or 0
+        opinions = self.getSolicitOpinionsTo()
+        opinions += self.getSolicitOpinionsToOptional()
+        limit = organisation in opinions and 1 or 0
         inquiries = [inq for inq in self.getInquiries() if inq != self]
         for inquiry in inquiries:
-            if organisation in inquiry.getSolicitOpinionsTo():
+            if organisation in inquiry.getSolicitOpinionsTo() or organisation in inquiry.getSolicitOpinionsToOptional():
                 limit += 1
         limit = limit - len(self.getOpinionRequests(organisation))
         return limit > 0
