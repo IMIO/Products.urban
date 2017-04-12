@@ -226,7 +226,7 @@ EnvironmentBase_schema['title'].widget.visible = False
 setSchemataForInquiry(EnvironmentBase_schema)
 # hide Inquiry fields but 'solicitOpinionsTo'
 for field in EnvironmentBase_schema.filterFields(isMetadata=False):
-    if field.schemata == 'urban_investigation_and_advices' and field.getName() != 'solicitOpinionsTo':
+    if field.schemata == 'urban_investigation_and_advices' and field.getName() not in ['solicitOpinionsTo', 'solicitOpinionsToOptional']:
         field.widget.visible = False
 
 # change translation of some fields

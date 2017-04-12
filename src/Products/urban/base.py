@@ -740,6 +740,10 @@ class UrbanBase(object):
     def listSolicitOpinionsTo(self, unless=[]):
         return removeItems(list(self.getValuesForTemplate('solicitOpinionsTo')), unless)
 
+    security.declarePublic('listSolicitOpinionsToOptional')
+    def listSolicitOpinionsToOptional(self, unless=[]):
+        return removeItems(list(self.getValuesForTemplate('solicitOpinionsToOptional')), unless)
+
     security.declarePublic('getFirstGradeIdSfolderManager')
     def getFirstGradeIdSfolderManager(self, gradeId=''):
         folderManager = None
