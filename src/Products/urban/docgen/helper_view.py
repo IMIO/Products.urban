@@ -387,6 +387,30 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         subdivisionDetails = context.getSubdivisionDetails()
         return subdivisionDetails.lstrip('<p>').rstrip('</p>')
 
+    def _get_street_dict(self, uid):
+        street_dict = {}
+        catalog = api.portal.get_tool("uid_catalog")
+        street = catalog(UID=uid)[0].getObject()
+        street_dict['bestAddressKey'] = street.getBestAddressKey()
+        street_dict['streetCode'] = street.getStreetCode()
+        street_dict['streetName'] = street.getStreetName()
+        street_dict['startDate'] = street.getStartDate()
+        street_dict['endDate'] = street.getEndDate()
+        street_dict['regionalRoad'] = street.getRegionalRoad()
+        return street_dict
+
+    def get_work_location_dict(self, index):
+        """
+        # Adresse(s) des travaux
+        return a dictionary containing specific work locations informations
+        """
+        context = self.real_context
+        workLocation = context.getWorkLocations()[index]
+        work_location_dict = self._get_street_dict(workLocation['street'])
+        work_location_dict.update({'number': workLocation['number']})
+        return work_location_dict
+
+
     def getEvent(self, title=''):
         """
           Return a specific title's UrbanEvent
@@ -470,9 +494,8 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         return a dictionary containing specific work locations informations
         """
         context = self.context
-        workLocation = context.getWorkLocations()[index]
-        work_location_dict = self._get_street_dict(workLocation['street'])
-        work_location_dict.update({'number': workLocation['number']})
+        view = context.restrictedTraverse('document_generation_helper_view')
+        work_location_dict = view.get_work_location_dict(index)
         return work_location_dict
 
     def get_work_location_signaletic(self, workLocation):
