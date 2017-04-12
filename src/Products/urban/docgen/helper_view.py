@@ -354,7 +354,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         """
           Returns the licences related to a parcel
         """
-        context = self.real_context.aq_parent
+        context = self.real_context
         parcels = context.getParcels()
         relatedLicences = []
         for parcel in parcels:
@@ -472,6 +472,14 @@ class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
         view = folder.restrictedTraverse('document_generation_helper_view')
         work_location_dict = view.get_work_location_dict(index)
         return work_location_dict
+
+    def get_related_licences_of_parcel(self, folder):
+        """
+          Returns the licences related to a parcel
+        """
+        view = folder.restrictedTraverse('document_generation_helper_view')
+        relatedLicences = view.get_related_licences_of_parcel()
+        return relatedLicences
 
 class LicenceDisplayProxyObject(ATDisplayProxyObject):
     """
