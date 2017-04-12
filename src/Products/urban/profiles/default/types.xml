@@ -120,6 +120,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="NotaryLetter"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="NotaryLetterCODT"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Proprietary"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanCertificateOne"
