@@ -19,6 +19,7 @@ from zope.interface import implements
 import interfaces
 from Products.urban.BaseBuildLicence import BaseBuildLicence
 from Products.urban.BuildLicence import finalizeSchema
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -28,6 +29,17 @@ from Products.urban.config import *
 
 schema = Schema((
 
+    StringField(
+        name='authority',
+        widget=SelectionWidget(
+            label='Authority',
+            label_msgid='urban_label_authority',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        vocabulary=UrbanVocabulary('authority', inUrbanConfig=True),
+        default_method='getDefaultValue',
+    ),
 
 ),
 )
@@ -90,4 +102,5 @@ registerType(UniqueLicence, PROJECTNAME)
 
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
 finalizeSchema(UniqueLicence_schema)
+UniqueLicence_schema.moveField('authority', after='referenceDGATLP')
 ##/code-section module-footer
