@@ -33,8 +33,6 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Declaration"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="DeclarationCODT"
-         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="ParcellingTerm"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="PcaTerm"
@@ -140,11 +138,7 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="PreliminaryNotice"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="PreliminaryNoticeCODT"
-         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="PatrimonyCertificate"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="PatrimonyCertificateCODT"
          meta_type="Factory-based Type Information with dynamic views"/>
  <!-- ##/code-section TYPES -->
 </object>
