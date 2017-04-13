@@ -504,6 +504,11 @@ class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
         relatedLicences = view.get_related_licences_titles_of_parcel()
         return relatedLicences
 
+    def getEvent(self, folder, title=''):
+        view = folder.restrictedTraverse('document_generation_helper_view')
+        event = view.getEvent(title)
+        return event
+
     def format_date(self, folder, date=_date.today(), translatemonth=True, long_format=False):
         view = folder.restrictedTraverse('document_generation_helper_view')
         formated_date = view.format_date(date, translatemonth, long_format)
