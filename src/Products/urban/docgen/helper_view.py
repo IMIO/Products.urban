@@ -363,6 +363,21 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             relatedLicences += parcelRecordsView.getRelatedLicencesOfParcel()
         return relatedLicences
 
+    def get_related_licences_titles_of_parcel(self):
+        """
+          Returns the titles of licences related to a parcel
+        """
+        context = self.real_context
+        parcels = context.getParcels()
+        relatedLicencesTitles = []
+        for parcel in parcels:
+            parcelRecordsView = context.restrictedTraverse('parcelrecordsview')
+            parcelRecordsView.parcel_id = parcel.id
+            relatedLicences = parcelRecordsView.getRelatedLicencesOfParcel()
+            for relatedLicence in relatedLicences:
+                relatedLicencesTitles.append(relatedLicence['title'].decode('utf8'))
+        return relatedLicencesTitles
+
     def get_specific_features_text(self):
         """
         # Particularité(s) du bien
@@ -480,6 +495,19 @@ class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
         view = folder.restrictedTraverse('document_generation_helper_view')
         relatedLicences = view.get_related_licences_of_parcel()
         return relatedLicences
+
+    def get_related_licences_titles_of_parcel(self, folder):
+        """
+          Returns the licences related to a parcel
+        """
+        view = folder.restrictedTraverse('document_generation_helper_view')
+        relatedLicences = view.get_related_licences_titles_of_parcel()
+        return relatedLicences
+
+    def format_date(self, folder, date=_date.today(), translatemonth=True, long_format=False):
+        view = folder.restrictedTraverse('document_generation_helper_view')
+        formated_date = view.format_date(date, translatemonth, long_format)
+        return formated_date
 
 class LicenceDisplayProxyObject(ATDisplayProxyObject):
     """
