@@ -161,8 +161,26 @@ URBAN_TYPES = [
     'BuildLicence', 'Article127', 'IntegratedLicence', 'UniqueLicence', 'Declaration',
     'UrbanCertificateOne', 'UrbanCertificateTwo', 'PreliminaryNotice',
     'PatrimonyCertificate',
-    # 'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
-    # 'ParcelOutLicence', 'MiscDemand', 'Division', 'NotaryLetter',
+    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
+    'ParcelOutLicence', 'MiscDemand', 'Division', 'NotaryLetter',
+    'CODT_BuildLicence', 'CODT_Article127', 'CODT_IntegratedLicence', 'CODT_UniqueLicence',
+    'CODT_UrbanCertificateTwo'
+]
+
+URBAN_CWATUPE_TYPES = [
+    'BuildLicence', 'Article127', 'IntegratedLicence', 'UniqueLicence', 'Declaration',
+    'UrbanCertificateOne', 'UrbanCertificateTwo', 'PreliminaryNotice',
+    'PatrimonyCertificate', 'ParcelOutLicence', 'MiscDemand', 'Division', 'NotaryLetter',
+]
+
+URBAN_CODT_TYPES = [
+    'CODT_BuildLicence', 'CODT_Article127', 'CODT_IntegratedLicence', 'CODT_UniqueLicence',
+    'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne', 'CODT_NotaryLetter',
+    'MiscDemand', 'PreliminaryNotice', 'PatrimonyCertificate', 'Division',
+]
+
+URBAN_ENVIRONMENT_TYPES = [
+    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
 ]
 
 # all types that can be used as a licence applicant
