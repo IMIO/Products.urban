@@ -1,43 +1,46 @@
 <?xml version="1.0"?>
-<object name="UrbanCertificateTwoCODT"
+<object name="CODT_Article127"
         meta_type="Factory-based Type Information with dynamic views"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         i18n:domain="plone">
 
- <property name="title" i18n:translate="">UrbanCertificateTwoCODT</property>
+ <property name="title" i18n:translate="">CODT_Article127</property>
  <property name="description" i18n:translate=""></property>
- <property name="icon_expr">string:${portal_url}/UrbanCertificateTwo.png</property>
- <property name="content_meta_type">UrbanCertificateTwoCODT</property>
+ <property name="icon_expr">string:${portal_url}/Article127.png</property>
+ <property name="content_meta_type">CODT_Article127</property>
  <property name="product">urban</property>
- <property name="factory">addUrbanCertificateTwo</property>
- <property name="immediate_view">urbancertificatetwoview</property>
+ <property name="factory">addArticle127</property>
+ <!-- not a mistake, article127 and buildlicence are the same -->
+ <property name="immediate_view">buildlicenceview</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
+   <element value="Applicant"/>
+   <element value="Corporation"/>
    <element value="PortionOut"/>
    <element value="UrbanEvent"/>
    <element value="UrbanEventInquiry"/>
-   <element value="UrbanEventOpinionRequest"/>
    <element value="UrbanEventCollege"/>
    <element value="UrbanEventNotificationCollege"/>
-   <element value="Proprietary"/>
-   <element value="Corporation"/>
-   <element value="Applicant"/>
+   <element value="UrbanEventOpinionRequest"/>
+   <element value="Inquiry"/>
    <element value="File"/>
    <element value="task"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">urbancertificatetwoview</property>
+ <property name="default_view">buildlicenceview</property>
  <property name="view_methods">
   <element value="folder_summary_view"/>
   <element value="folder_tabular_view"/>
   <element value="atct_album_view"/>
   <element value="folder_listing"/>
-  <element value="urbancertificatetwoview"/>
+  <!-- not a mistake, article127 and buildlicence are the same -->
+  <element value="buildlicenceview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
- <alias from="view" to="urbancertificatetwoview"/>
+ <!-- not a mistake, article127 and buildlicence are the same -->
+ <alias from="view" to="buildlicenceview"/>
  <alias from="edit" to="base_edit"/>
  <alias from="sharing" to="@@sharing"/>
  <action title="View"

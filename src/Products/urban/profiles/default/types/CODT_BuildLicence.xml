@@ -1,30 +1,29 @@
 <?xml version="1.0"?>
-<object name="UniqueLicenceCODT"
+<object name="CODT_BuildLicence"
         meta_type="Factory-based Type Information with dynamic views"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         i18n:domain="plone">
 
- <property name="title" i18n:translate="">UniqueLicenceCODT</property>
+ <property name="title" i18n:translate="">CODT_BuildLicence</property>
  <property name="description" i18n:translate=""></property>
- <property name="icon_expr">string:${portal_url}/UniqueLicence.png</property>
- <property name="content_meta_type">UniqueLicenceCODT</property>
+ <property name="icon_expr">string:${portal_url}/BuildLicence.png</property>
+ <property name="content_meta_type">CODT_BuildLicence</property>
  <property name="product">urban</property>
- <property name="factory">addUniqueLicence</property>
- <!-- not a mistake, article127 and buildlicence are the same -->
+ <property name="factory">addBuildLicence</property>
  <property name="immediate_view">buildlicenceview</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
-   <element value="Applicant"/>
-   <element value="Corporation"/>
-   <element value="PortionOut"/>
-   <element value="UrbanEvent"/>
+   <element value="UrbanEventOpinionRequest"/>
    <element value="UrbanEventInquiry"/>
    <element value="UrbanEventCollege"/>
    <element value="UrbanEventNotificationCollege"/>
-   <element value="UrbanEventOpinionRequest"/>
+   <element value="Applicant"/>
+   <element value="Corporation"/>
    <element value="Inquiry"/>
+   <element value="UrbanEvent"/>
    <element value="File"/>
+   <element value="PortionOut"/>
    <element value="task"/>
  </property>
  <property name="allow_discussion">False</property>
@@ -34,12 +33,10 @@
   <element value="folder_tabular_view"/>
   <element value="atct_album_view"/>
   <element value="folder_listing"/>
-  <!-- not a mistake, article127 and buildlicence are the same -->
   <element value="buildlicenceview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
- <!-- not a mistake, article127 and buildlicence are the same -->
  <alias from="view" to="buildlicenceview"/>
  <alias from="edit" to="base_edit"/>
  <alias from="sharing" to="@@sharing"/>

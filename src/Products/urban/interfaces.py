@@ -36,199 +36,277 @@ CONTACT_INTERFACES = {
 
 ##/code-section HEAD
 
+
 class IGenericLicence(Interface):
     """Marker interface for .GenericLicence.GenericLicence
     """
+
 
 class IBaseBuildLicence (IGenericLicence):
     """Marker interface for .Article127.Article127
     """
 
+
+class ICODT_BaseBuildLicence (IGenericLicence):
+    """Marker interface for codt BaseBuildLicence
+    """
+
+
 class IContact(Interface):
     """Marker interface for .Contact.Contact
     """
+
 
 class IUrbanTool(Interface):
     """Marker interface for .UrbanTool.UrbanTool
     """
 
+
 class IStreet(Interface):
     """Marker interface for .Street.Street
     """
+
 
 class IUrbanEvent(Interface):
     """Marker interface for .UrbanEvent.UrbanEvent
     """
 
+
 class IUrbanEventType(Interface):
     """Marker interface for .UrbanEventType.UrbanEventType
     """
+
 
 class IRecipient(Interface):
     """Marker interface for .Recipient.Recipient
     """
 
+
 class IBuildLicence(IBaseBuildLicence):
     """Marker interface for .BuildLicence.BuildLicence
     """
+
+
+class ICODT_BuildLicence(ICODT_BaseBuildLicence):
+    """Marker interface for CODT BuildLicence
+    """
+
 
 class IParcelOutLicence(IBaseBuildLicence):
     """Marker interface for .ParcelOutLicence.ParcelOutLicence
     """
 
+
 class IFolderManager(Interface):
     """Marker interface for .FolderManager.FolderManager
     """
+
 
 class IUrbanVocabularyTerm(Interface):
     """Marker interface for .UrbanVocabularyTerm.UrbanVocabularyTerm
     """
 
+
 class IPortionOut(Interface):
     """Marker interface for .PortionOut.PortionOut
     """
+
 
 class IRecipientCadastre(Interface):
     """Marker interface for .RecipientCadastre.RecipientCadastre
     """
 
+
 class ILayer(Interface):
     """Marker interface for .Layer.Layer
     """
+
 
 class IDeclaration(IGenericLicence):
     """Marker interface for .Declaration.Declaration
     """
 
+
 class IParcellingTerm(Interface):
     """Marker interface for .ParcellingTerm.ParcellingTerm
     """
+
 
 class IPcaTerm(Interface):
     """Marker interface for .PcaTerm.PcaTerm
     """
 
+
 class ICity(Interface):
     """Marker interface for .City.City
     """
+
 
 class IUrbanCertificateBase(Interface):
     """Marker interface for .UrbanCertificateBase.UrbanCertificateBase
     """
 
+
 class IUrbanCertificateTwo(IBaseBuildLicence):
     """Marker interface for .UrbanCertificateTwo.UrbanCertificateTwo
     """
+
+
+class ICODT_UrbanCertificateTwo(ICODT_BaseBuildLicence):
+    """Marker interface for CODT UrbanCertificateTwo
+    """
+
 
 class IDivision(Interface):
     """Marker interface for .Division.Division
     """
 
+
 class IUrbanDelay(Interface):
     """Marker interface for .UrbanDelay.UrbanDelay
     """
+
 
 class ILocality(Interface):
     """Marker interface for .Locality.Locality
     """
 
+
 class ILicenceConfig(Interface):
     """Marker interface for .LicenceConfig.LicenceConfig
     """
+
 
 class IPersonTitleTerm(Interface):
     """Marker interface for .PersonTitleTerm.PersonTitleTerm
     """
 
+
 class IInquiry(Interface):
     """Marker interface for .Inquiry.Inquiry
     """
+
 
 class IUrbanEventInquiry(Interface):
     """Marker interface for .UrbanEventInquiry.UrbanEventInquiry
     """
 
+
 class IUrbanEventOpinionRequest(Interface):
     """Marker interface for .UrbanEventOpinionRequest.UrbanEventOpinionRequest
     """
+
 
 class IOrganisationTerm(Interface):
     """Marker interface for .OrganisationTerm.OrganisationTerm
     """
 
+
 class IMiscDemand(Interface):
     """Marker interface for .MiscDemand.MiscDemand
     """
+
 
 class IPreliminaryNotice(IGenericLicence):
     """Marker interface for .PreliminaryNotice.PreliminaryNotice
     """
 
+
 class IPatrimonyCertificate(IGenericLicence):
     """Marker interface for .PatrimonyCertificate.PatrimonyCertificate
     """
+
 
 class IUrbanConfigurationValue(Interface):
     """Marker interface for .UrbanConfigurationValue.UrbanConfigurationValue
     """
 
+
 class IEnvironmentBase(Interface):
     """Marker interface for .EnvironmentBase.EnvironmentBase
     """
+
 
 class IEnvironmentRubricTerm(Interface):
     """Marker interface for .EnvironmentRubricTerm.EnvironmentRubricTerm
     """
 
+
 class ISpecificFeatureTerm(Interface):
     """Marker interface for .SpecificFeatureTerm.SpecificFeatureTerm
     """
+
 
 class IOpinionRequestEventType(Interface):
     """Marker interface for .OpinionRequestEventType.OpinionRequestEventType
     """
 
+
 class IEnvironmentLicence(Interface):
     """Marker interface for .EnvironmentLicence.EnvironmentLicence
     """
+
 
 class IEnvClassThree(Interface):
     """Marker interface for .EnvClassThree.EnvClassThree
     """
 
+
 class ICorporation(Interface):
     """Marker interface for .Corporation.Corporation
     """
+
 
 class IClaimant(Interface):
     """Marker interface for .Claimant.Claimant
     """
 
+
 class IApplicant(Interface):
     """Marker interface for .Applicant.Applicant
     """
+
 
 class IEnvClassTwo(Interface):
     """Marker interface for .EnvClassTwo.EnvClassTwo
     """
 
+
 class IEnvClassOne(Interface):
     """Marker interface for .EnvClassOne.EnvClassOne
     """
+
 
 class IArticle127(IBaseBuildLicence):
     """Marker interface for .Article127.Article127
     """
 
+
 class IUniqueLicence(IBaseBuildLicence):
     """Marker interface for .Article127.Article127
     """
+
 
 class IIntegratedLicence(IBaseBuildLicence):
     """Marker interface for .Article127.Article127
     """
 
-##code-section FOOT
+
+class ICODT_Article127(ICODT_BaseBuildLicence):
+    """Marker interface for CODT Article127
+    """
+
+
+class ICODT_UniqueLicence(ICODT_BaseBuildLicence):
+    """Marker interface for CODT UniqueLicence
+    """
+
+
+class ICODT_IntegratedLicence(ICODT_BaseBuildLicence):
+    """Marker interface for  CODT IntegratedLicence
+    """
+
+
 class ILicenceContainer(Interface):
     """
     Marker interface for a folder containing Licences
@@ -243,6 +321,7 @@ class IEventTypeType(IInterface):
 
 class ICollegeEvent(Interface):
     __doc__ = _("""ICollege type marker interface""")
+
 
 class ITechnicalServiceOpinionRequestEvent(Interface):
     __doc__ = _("""ITechnicalServiceOpinionRequest type marker interface""")
@@ -342,8 +421,18 @@ class IUrbanCertificateOne(IGenericLicence):
     """
 
 
+class ICODT_UrbanCertificateOne(IGenericLicence):
+    """Marker interface for CODT UrbanCertificateOne
+    """
+
+
 class INotaryLetter(Interface):
-    """Marker interface for EnvClassThree
+    """Marker interface for NotaryLetter
+    """
+
+
+class ICODT_NotaryLetter(Interface):
+    """Marker interface for CODT NotaryLetter
     """
 
 

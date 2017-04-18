@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
-<object name="UrbanCertificateOneCODT"
+<object name="CODT_NotaryLetter"
         meta_type="Factory-based Type Information with dynamic views"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         i18n:domain="plone">
    
- <property name="title" i18n:translate="">UrbanCertificateOneCODT</property>
+ <property name="title" i18n:translate="">CODT_NotaryLetter</property>
  <property name="description" i18n:translate=""></property>
  <property name="content_meta_type">UrbanCertificateBase</property>
  <property name="product">urban</property>
  <property name="factory">addUrbanCertificateBase</property>
- <property name="immediate_view">urbancertificateoneview</property>
+ <property name="immediate_view">folder_listing</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
@@ -17,14 +17,16 @@
    <element value="PortionOut"/>
    <element value="UrbanEvent"/>
    <element value="WorkLocation"/>
-   <element value="Applicant"/>
    <element value="File"/>
    <element value="task"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">urbancertificateoneview</property>
+ <property name="default_view">notaryletterview</property>
  <property name="view_methods">
-  <element value="urbancertificateoneview"/>
+  <element value="folder_summary_view"/>
+  <element value="folder_tabular_view"/>
+  <element value="atct_album_view"/>
+  <element value="folder_listing"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
@@ -42,7 +44,7 @@
  <action title="Edit" 
          action_id="edit"
          category="object" 
-         condition_expr="python:context.mayShowEditAction()"
+         condition_expr="not:object/@@plone_lock_info/is_locked_for_current_user"
          url_expr="string:${object_url}/edit" 
          visible="True">
   <permission value="Modify portal content"/>
