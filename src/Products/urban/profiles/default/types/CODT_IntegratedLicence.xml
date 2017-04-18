@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
-<object name="Article127CODT"
+<object name="CODT_IntegratedLicence"
         meta_type="Factory-based Type Information with dynamic views"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         i18n:domain="plone">
 
- <property name="title" i18n:translate="">Article127CODT</property>
+ <property name="title" i18n:translate="">CODT_IntegratedLicence</property>
  <property name="description" i18n:translate=""></property>
- <property name="icon_expr">string:${portal_url}/Article127.png</property>
- <property name="content_meta_type">Article127CODT</property>
+ <property name="icon_expr">string:${portal_url}/IntegratedLicence.png</property>
+ <property name="content_meta_type">CODT_IntegratedLicence</property>
  <property name="product">urban</property>
- <property name="factory">addArticle127</property>
+ <property name="factory">addIntegratedLicence</property>
  <!-- not a mistake, article127 and buildlicence are the same -->
  <property name="immediate_view">buildlicenceview</property>
  <property name="global_allow">True</property>
