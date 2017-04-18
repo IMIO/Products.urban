@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# File: UniqueLicence.py
+# File: Article127.py
 #
 # Copyright (c) 2015 by CommunesPlone
 # Generator: ArchGenXML Version 2.7
@@ -16,9 +16,9 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
-import interfaces
-from Products.urban.BaseBuildLicence import BaseBuildLicence
-from Products.urban.BuildLicence import finalizeSchema
+from Products.urban import interfaces
+from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
+from Products.urban.content.licence.BuildLicence import finalizeSchema
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -35,7 +35,7 @@ schema = Schema((
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-UniqueLicence_schema = BaseFolderSchema.copy() + \
+Article127_schema = BaseFolderSchema.copy() + \
     getattr(BaseBuildLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
@@ -43,16 +43,16 @@ UniqueLicence_schema = BaseFolderSchema.copy() + \
 ##/code-section after-schema
 
 
-class UniqueLicence(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
+class Article127(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
-    implements(interfaces.IUniqueLicence)
+    implements(interfaces.IArticle127)
 
-    meta_type = 'UniqueLicence'
+    meta_type = 'Article127'
     _at_rename_after_creation = True
 
-    schema = UniqueLicence_schema
+    schema = Article127_schema
 
     # Methods
 
@@ -83,11 +83,11 @@ class UniqueLicence(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
         return self._getLastEvent(interfaces.IWalloonRegionDecisionEvent, use_catalog)
 
 
-registerType(UniqueLicence, PROJECTNAME)
-# end of class UniqueLicence
+registerType(Article127, PROJECTNAME)
+# end of class Article127
 
 ##code-section module-footer #fill in your manual code here
 
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
-finalizeSchema(UniqueLicence_schema)
+finalizeSchema(Article127_schema)
 ##/code-section module-footer

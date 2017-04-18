@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# File: Division.py
+# File: MiscDemand.py
 #
 # Copyright (c) 2015 by CommunesPlone
 # Generator: ArchGenXML Version 2.7
@@ -16,39 +16,41 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
-import interfaces
-from Products.urban.GenericLicence import GenericLicence
+from Products.urban import interfaces
+from Products.urban.content.licence.GenericLicence import GenericLicence
+from Products.urban.Inquiry import Inquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from zope.i18n import translate
 from Products.urban.utils import setOptionalAttributes
+from Products.urban.utils import setSchemataForInquiry
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
-
-optional_fields = []
+optional_fields = ['architects']
 ##/code-section module-header
 
 schema = Schema((
 
     ReferenceField(
-        name='notaryContact',
+        name='architects',
         widget=ReferenceBrowserWidget(
             allow_search=True,
             allow_browse=True,
             force_close_on_insert=True,
-            startup_directory='urban/notaries',
+            startup_directory='urban/architects',
             restrict_browsing_to_startup_directory=True,
-            label='Notarycontact',
-            label_msgid='urban_label_notaryContact',
+            wild_card_search=True,
+            show_index_selector=True,
+            label='Architects',
+            label_msgid='urban_label_architects',
             i18n_domain='urban',
         ),
         required=False,
         schemata='urban_description',
         multiValued=True,
-        relationship="notary",
-        allowed_types= ('Notary',),
+        relationship="miscdemandarchitects",
+        allowed_types='Architect',
     ),
 
 ),
@@ -58,24 +60,27 @@ schema = Schema((
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
-Division_schema = BaseFolderSchema.copy() + \
+MiscDemand_schema = BaseFolderSchema.copy() + \
     getattr(GenericLicence, 'schema', Schema(())).copy() + \
+    getattr(Inquiry, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-Division_schema['title'].required = False
+#put the the fields coming from Inquiry in a specific schemata
+setSchemataForInquiry(MiscDemand_schema)
 ##/code-section after-schema
 
-class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
+
+class MiscDemand(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
-    implements(interfaces.IDivision)
+    implements(interfaces.IMiscDemand)
 
-    meta_type = 'Division'
+    meta_type = 'MiscDemand'
     _at_rename_after_creation = True
 
-    schema = Division_schema
+    schema = MiscDemand_schema
 
     ##code-section class-header #fill in your manual code here
     schemata_order = ['urban_description', 'urban_road', 'urban_location']
@@ -83,41 +88,26 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     # Methods
 
-    # Manually created methods
+    security.declarePublic('getApplicants')
+
+    def getApplicants(self):
+        """
+        """
+        applicants = self.getCorporations() or super(MiscDemand, self).getApplicants()
+        return applicants
+
+    security.declarePublic('getCorporations')
+
+    def getCorporations(self):
+        corporations = [corp for corp in self.objectValues('Corporation')]
+        return corporations
 
     security.declarePublic('getRepresentatives')
+
     def getRepresentatives(self):
         """
         """
-        return self.getNotaryContact()
-
-    security.declarePublic('updateTitle')
-    def updateTitle(self):
-        """
-           Update the title to set a clearly identify the buildlicence
-        """
-        notary = ''
-        proprietary = ''
-        proprietaries = self.getProprietaries()
-        if proprietaries:
-            proprietary = proprietaries[0].Title()
-        else:
-            proprietary = translate('no_proprietary_defined', 'urban', context=self.REQUEST).encode('utf8')
-        if self.getNotaryContact():
-            notary = self.getNotaryContact()[0].Title()
-        else:
-            notary = translate('no_notary_defined', 'urban', context=self.REQUEST).encode('utf8')
-
-        if proprietary and notary:
-            title = "%s - %s - %s" % (self.getReference(), proprietary, notary)
-        elif proprietary:
-            title = "%s - %s" % (self.getReference(), proprietary)
-        elif notary:
-            title = "%s - %s" % (self.getReference(), notary)
-        else:
-            title = self.getReference()
-        self.setTitle(title)
-        self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
+        return self.getArchitects()
 
     def getLastDeposit(self, use_catalog=True):
         return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
@@ -129,19 +119,17 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
         return self._getLastEvent(interfaces.ITheLicenceEvent, use_catalog)
 
 
+registerType(MiscDemand, PROJECTNAME)
+# end of class MiscDemand
 
-registerType(Division, PROJECTNAME)
-# end of class Division
 
 ##code-section module-footer #fill in your manual code here
 def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
        Finalizes the type schema to alter some fields
     """
-    schema.moveField('description', after='notaryContact')
-    schema.moveField('foldermanagers', after='workLocations')
+    schema.moveField('description', after='architects')
     return schema
 
-finalizeSchema(Division_schema)
+finalizeSchema(MiscDemand_schema)
 ##/code-section module-footer
-
