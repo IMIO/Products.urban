@@ -1750,6 +1750,11 @@ msgstr "Rue et numéro (cadastre)"
 msgid "urban_label_adviceAgreementLevel"
 msgstr "Niveau de l'avis"
 
+#. Default: "Isoptional"
+#: UrbanEvent.py
+msgid "urban_label_isOptional"
+msgstr "Facultatif"
+
 #. Default: "Airportnoisezone"
 #: GenericLicence.py
 msgid "urban_label_airportNoiseZone"
@@ -3212,6 +3217,11 @@ msgstr "Un avis sera solicité par l'urbanisme à"
 #: GenericLicence.py
 msgid "urban_label_solicitOpinionsTo"
 msgstr "Avis sollicité(s)"
+
+#. Default: "Solicitopinionstooptional"
+#: Inquiry.py
+msgid "urban_label_solicitOpinionsToOptional"
+msgstr "Avis sollicité(s) facultatif"
 
 #. Default: "Solicitroadopinionsto"
 #: GenericLicence.py
