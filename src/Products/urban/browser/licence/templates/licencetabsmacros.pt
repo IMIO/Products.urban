@@ -239,6 +239,7 @@
 
                 <tal:opinions condition="python: fieldname in ['solicitOpinionsTo', 'solicitOpinionsToOptional']">
                     <td tal:define="opinionIds python:inquiry.getSolicitOpinionsTo() if fieldname == 'solicitOpinionsTo' else inquiry.getSolicitOpinionsToOptional()" style="padding-top: 1em;" colspan="3">
+                        <label tal:content="field/widget/label_msgid" i18n:translate=""></label>
                         <table tal:condition="opinionIds" cellspacing="0" cellpadding="0" width="100%" class="listing">
                             <thead>
                                 <tr>
