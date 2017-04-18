@@ -34,7 +34,7 @@ def getLicenceSchema(licencetype):
     types_tool = api.portal.get_tool('portal_types')
     type_info = types_tool.getTypeInfo(licencetype)
     metatype = type_info.getProperty('content_meta_type')
-    module_name = 'Products.urban.%s' % metatype
+    module_name = 'Products.urban.content.licence.%s' % metatype
     attribute = "%s_schema" % metatype
     module = __import__(module_name, fromlist=[attribute])
     return getattr(module, attribute)

@@ -9,7 +9,7 @@
  <property name="icon_expr">string:${portal_url}/Article127.png</property>
  <property name="content_meta_type">CODT_Article127</property>
  <property name="product">urban</property>
- <property name="factory">addArticle127</property>
+ <property name="factory">addCODT_Article127</property>
  <!-- not a mistake, article127 and buildlicence are the same -->
  <property name="immediate_view">buildlicenceview</property>
  <property name="global_allow">True</property>

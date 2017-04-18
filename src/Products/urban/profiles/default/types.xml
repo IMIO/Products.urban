@@ -17,7 +17,7 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="BuildLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="BuildLicenceCODT"
+ <object name="CODT_BuildLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="ParcelOutLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
@@ -43,7 +43,7 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanCertificateTwo"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanCertificateTwoCODT"
+ <object name="CODT_UrbanCertificateTwo"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Division"
          meta_type="Factory-based Type Information with dynamic views"/>
@@ -95,15 +95,15 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Article127"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Article127CODT"
+ <object name="CODT_Article127"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UniqueLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UniqueLicenceCODT"
+ <object name="CODT_UniqueLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="IntegratedLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="IntegratedLicenceCODT"
+ <object name="CODT_IntegratedLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
  <!-- ##code-section TYPES -->
  <object name="Applicant"
@@ -120,13 +120,13 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="NotaryLetter"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="NotaryLetterCODT"
+ <object name="CODT_NotaryLetter"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Proprietary"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanCertificateOne"
          meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanCertificateOneCODT"
+ <object name="CODT_UrbanCertificateOne"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="EnvClassOne"
          meta_type="Factory-based Type Information with dynamic views"/>
