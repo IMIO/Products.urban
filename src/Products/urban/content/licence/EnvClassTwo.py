@@ -16,8 +16,8 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
-import interfaces
-from Products.urban.EnvironmentLicence import EnvironmentLicence
+from Products.urban import interfaces
+from Products.urban.content.licence.EnvironmentLicence import EnvironmentLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *

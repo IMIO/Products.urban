@@ -26,7 +26,7 @@ from plone import api
 from zope.component import queryAdapter
 from zope.i18n import translate
 from zope.interface import implements
-import interfaces
+from Products.urban import interfaces
 
 
 class UrbanBase(object):

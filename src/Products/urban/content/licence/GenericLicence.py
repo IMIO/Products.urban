@@ -24,7 +24,7 @@ from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 
 from Products.Archetypes.atapi import *
 from zope.interface import implements
-import interfaces
+from Products.urban import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
@@ -39,7 +39,7 @@ from Products.urban.config import *
 from zope.i18n import translate
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
-from Products.urban.base import UrbanBase
+from Products.urban.content.licence.base import UrbanBase
 from Products.urban.interfaces import IOpinionRequestEvent
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import get_interface_by_path

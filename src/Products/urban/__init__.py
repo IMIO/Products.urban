@@ -89,51 +89,51 @@ def initialize(context):
 
     # imports packages and types for registration
 
-    import GenericLicence
+    import Applicant
+    import City
+    import Claimant
     import Contact
-    import UrbanTool
-    import Street
-    import UrbanEvent
-    import UrbanEventType
-    import Recipient
-    import BuildLicence
-    import ParcelOutLicence
+    import Corporation
+    import EnvironmentRubricTerm
     import FolderManager
-    import UrbanVocabularyTerm
-    import PortionOut
-    import RecipientCadastre
+    import Inquiry
     import Layer
-    import Declaration
+    import LicenceConfig
+    import Locality
+    import OpinionRequestEventType
+    import OrganisationTerm
     import ParcellingTerm
     import PcaTerm
-    import City
-    import UrbanCertificateBase
-    import UrbanCertificateTwo
-    import Division
-    import UrbanDelay
-    import Locality
-    import LicenceConfig
     import PersonTitleTerm
-    import Inquiry
+    import PortionOut
+    import Recipient
+    import RecipientCadastre
+    import SpecificFeatureTerm
+    import Street
+    import UrbanConfigurationValue
+    import UrbanDelay
+    import UrbanEvent
     import UrbanEventInquiry
     import UrbanEventOpinionRequest
-    import OrganisationTerm
-    import MiscDemand
-    import UrbanConfigurationValue
-    import EnvironmentBase
-    import EnvironmentRubricTerm
-    import SpecificFeatureTerm
-    import OpinionRequestEventType
-    import EnvironmentLicence
-    import EnvClassThree
-    import Corporation
-    import Claimant
-    import Applicant
-    import EnvClassTwo
-    import EnvClassOne
-    import Article127
-    import UniqueLicence
-    import IntegratedLicence
+    import UrbanEventType
+    import UrbanTool
+    import UrbanVocabularyTerm
+    import content.licence.Article127
+    import content.licence.BuildLicence
+    import content.licence.Declaration
+    import content.licence.Division
+    import content.licence.EnvClassThree
+    import content.licence.EnvClassTwo
+    import content.licence.EnvClassOne
+    import content.licence.EnvironmentBase
+    import content.licence.EnvironmentLicence
+    import content.licence.GenericLicence
+    import content.licence.IntegratedLicence
+    import content.licence.MiscDemand
+    import content.licence.ParcelOutLicence
+    import content.licence.UrbanCertificateBase
+    import content.licence.UrbanCertificateTwo
+    import content.licence.UniqueLicence
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

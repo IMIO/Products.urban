@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
-from Products.urban.BuildLicence import BuildLicence
+from Products.urban.content.licence.BuildLicence import BuildLicence
 from Products.urban.interfaces import IBuildLicence, IGenericLicence
 from Products.urban.testing import URBAN_TESTS_PROFILE_DEFAULT
 

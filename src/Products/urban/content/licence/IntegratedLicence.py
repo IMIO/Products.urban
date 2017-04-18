@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# File: Article127.py
+# File: IntegratedLicence.py
 #
 # Copyright (c) 2015 by CommunesPlone
 # Generator: ArchGenXML Version 2.7
@@ -16,9 +16,9 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
-import interfaces
-from Products.urban.BaseBuildLicence import BaseBuildLicence
-from Products.urban.BuildLicence import finalizeSchema
+from Products.urban import interfaces
+from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
+from Products.urban.content.licence.BuildLicence import finalizeSchema
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -35,7 +35,7 @@ schema = Schema((
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-Article127_schema = BaseFolderSchema.copy() + \
+IntegratedLicence_schema = BaseFolderSchema.copy() + \
     getattr(BaseBuildLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
@@ -43,16 +43,16 @@ Article127_schema = BaseFolderSchema.copy() + \
 ##/code-section after-schema
 
 
-class Article127(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
+class IntegratedLicence(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
-    implements(interfaces.IArticle127)
+    implements(interfaces.IIntegratedLicence)
 
-    meta_type = 'Article127'
+    meta_type = 'IntegratedLicence'
     _at_rename_after_creation = True
 
-    schema = Article127_schema
+    schema = IntegratedLicence_schema
 
     # Methods
 
@@ -83,11 +83,11 @@ class Article127(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
         return self._getLastEvent(interfaces.IWalloonRegionDecisionEvent, use_catalog)
 
 
-registerType(Article127, PROJECTNAME)
-# end of class Article127
+registerType(IntegratedLicence, PROJECTNAME)
+# end of class IntegratedLicence
 
 ##code-section module-footer #fill in your manual code here
 
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
-finalizeSchema(Article127_schema)
+finalizeSchema(IntegratedLicence_schema)
 ##/code-section module-footer
