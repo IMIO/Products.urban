@@ -9,7 +9,7 @@
  <property name="icon_expr">string:${portal_url}/UrbanCertificateTwo.png</property>
  <property name="content_meta_type">CODT_UrbanCertificateTwo</property>
  <property name="product">urban</property>
- <property name="factory">addUrbanCertificateTwo</property>
+ <property name="factory">addCODT_UrbanCertificateTwo</property>
  <property name="immediate_view">urbancertificatetwoview</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>

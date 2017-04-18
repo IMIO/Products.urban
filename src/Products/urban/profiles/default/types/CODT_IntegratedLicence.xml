@@ -9,7 +9,7 @@
  <property name="icon_expr">string:${portal_url}/IntegratedLicence.png</property>
  <property name="content_meta_type">CODT_IntegratedLicence</property>
  <property name="product">urban</property>
- <property name="factory">addIntegratedLicence</property>
+ <property name="factory">addCODT_IntegratedLicence</property>
  <!-- not a mistake, article127 and buildlicence are the same -->
  <property name="immediate_view">buildlicenceview</property>
  <property name="global_allow">True</property>

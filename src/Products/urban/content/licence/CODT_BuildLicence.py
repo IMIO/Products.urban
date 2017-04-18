@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
-from Products.urban.content.licence.CODT_BaseCODT_BuildLicence import CODT_BaseCODT_BuildLicence
+from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -35,14 +35,14 @@ schema = Schema((
 ##/code-section after-local-schema
 
 CODT_BuildLicence_schema = BaseFolderSchema.copy() + \
-    getattr(CODT_BaseCODT_BuildLicence, 'schema', Schema(())).copy() + \
+    getattr(CODT_BaseBuildLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
 
-class CODT_BuildLicence(BaseFolder, CODT_BaseCODT_BuildLicence, BrowserDefaultMixin):
+class CODT_BuildLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
