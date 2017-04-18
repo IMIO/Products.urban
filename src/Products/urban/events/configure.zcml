@@ -168,4 +168,8 @@
                    imio.pm.wsclient.interfaces.ISentToPMEvent"
               handler=".urbanEventEvents.notifyLicence" />
 
+  <subscriber for="Products.ATContentTypes.interfaces.IATFiles
+                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+              handler=".annex_events.reindex_annex" />
+
 </configure>
