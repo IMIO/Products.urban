@@ -28,6 +28,7 @@ from OFS.ObjectManager import BeforeDeleteException
 from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
+from collective.archetypes.select2.select2widget import Select2Widget
 
 optional_fields = [
     'derogationDetails', 'investigationDetails', 'investigationReasons',
@@ -155,11 +156,11 @@ schema = Schema((
     ),
     LinesField(
         name='solicitOpinionsTo',
-        widget=MultiSelectionWidget(
-            format='checkbox',
+        widget=Select2Widget(
             label='Solicitopinionsto',
             label_msgid='urban_label_solicitOpinionsTo',
             i18n_domain='urban',
+            multiple=True,
         ),
         schemata='urban_advices',
         multiValued=1,
@@ -168,11 +169,11 @@ schema = Schema((
     ),
     LinesField(
         name='solicitOpinionsToOptional',
-        widget=MultiSelectionWidget(
-            format='checkbox',
+        widget=Select2Widget(
             label='Solicitopinionstooptional',
             label_msgid='urban_label_solicitOpinionsToOptional',
             i18n_domain='urban',
+            multiple=True,
         ),
         schemata='urban_advices',
         multiValued=1,
