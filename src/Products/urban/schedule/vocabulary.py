@@ -2,6 +2,14 @@
 
 from Products.urban.interfaces import IArticle127
 from Products.urban.interfaces import IBaseBuildLicence
+from Products.urban.interfaces import ICODT_Article127
+from Products.urban.interfaces import ICODT_BaseBuildLicence
+from Products.urban.interfaces import ICODT_BuildLicence
+from Products.urban.interfaces import ICODT_IntegratedLicence
+from Products.urban.interfaces import ICODT_NotaryLetter
+from Products.urban.interfaces import ICODT_UniqueLicence
+from Products.urban.interfaces import ICODT_UrbanCertificateOne
+from Products.urban.interfaces import ICODT_UrbanCertificateTwo
 from Products.urban.interfaces import IBuildLicence
 from Products.urban.interfaces import IDeclaration
 from Products.urban.interfaces import IDivision
@@ -25,25 +33,33 @@ from imio.schedule.content.vocabulary import ScheduledContentTypeVocabulary
 from Products.urban import UrbanMessage
 
 URBAN_TYPES_INTERFACES = {
-    'UrbanEventOpinionRequest': IUrbanEventOpinionRequest,
-    'GenericLicence': IGenericLicence,
-    'BuildLicence': IBuildLicence,
+    'CODT_Article127': ICODT_Article127,
+    'CODT_BaseBuildLicence': ICODT_BaseBuildLicence,
+    'CODT_BuildLicence': ICODT_BuildLicence,
+    'CODT_IntegratedLicence': ICODT_IntegratedLicence,
+    'CODT_NotaryLetter': ICODT_NotaryLetter,
+    'CODT_UniqueLicence': ICODT_UniqueLicence,
+    'CODT_UrbanCertificateOne': ICODT_UrbanCertificateOne,
+    'CODT_UrbanCertificateTwo': ICODT_UrbanCertificateTwo,
     'Article127': IArticle127,
-    'IntegratedLicence': IIntegratedLicence,
-    'UniqueLicence': IUniqueLicence,
-    'ParcelOutLicence': IParcelOutLicence,
+    'Base BuildLicence (PU, 127, CU2)': IBaseBuildLicence,
+    'BuildLicence': IBuildLicence,
     'Declaration': IDeclaration,
     'Division': IDivision,
-    'UrbanCertificateOne': IUrbanCertificateOne,
-    'UrbanCertificateTwo': IUrbanCertificateTwo,
-    'NotaryLetter': INotaryLetter,
-    'MiscDemand': IMiscDemand,
-    'PatrimonyCertificate': IPatrimonyCertificate,
-    'PreliminaryNotice': IPreliminaryNotice,
     'EnvClassOne': IEnvClassOne,
     'EnvClassTwo': IEnvClassTwo,
     'EnvClassThree': IEnvClassThree,
-    'Base BuildLicence (PU, 127, CU2)': IBaseBuildLicence,
+    'GenericLicence': IGenericLicence,
+    'IntegratedLicence': IIntegratedLicence,
+    'MiscDemand': IMiscDemand,
+    'NotaryLetter': INotaryLetter,
+    'ParcelOutLicence': IParcelOutLicence,
+    'PatrimonyCertificate': IPatrimonyCertificate,
+    'PreliminaryNotice': IPreliminaryNotice,
+    'UniqueLicence': IUniqueLicence,
+    'UrbanCertificateOne': IUrbanCertificateOne,
+    'UrbanCertificateTwo': IUrbanCertificateTwo,
+    'UrbanEventOpinionRequest': IUrbanEventOpinionRequest,
 }
 
 
