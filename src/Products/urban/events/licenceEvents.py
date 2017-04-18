@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from plone import api
+
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
 
@@ -88,3 +90,21 @@ def setMarkerInterface(licence, event):
     marker_interface = URBAN_TYPES_INTERFACES.get(portal_type, None)
     if marker_interface and not marker_interface.providedBy(licence):
         alsoProvides(licence, marker_interface)
+
+
+def reindex_attachments_permissions(licence, event):
+    """
+    """
+    query = {
+        'portal_type': 'File',
+        'path': {
+            'query': '/'.join(licence.getPhysicalPath()),
+            'depth': 1,
+        },
+        'sort_on': 'created'
+    }
+    catalog = api.portal.get_tool('portal_catalog')
+    attachments = catalog(query)
+    for attachment_brain in attachments:
+        attachment = attachment_brain.getObject()
+        attachment.reindexObject(idxs=['allowedRolesAndUsers'])
