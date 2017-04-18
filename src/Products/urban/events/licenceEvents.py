@@ -92,13 +92,13 @@ def setMarkerInterface(licence, event):
         alsoProvides(licence, marker_interface)
 
 
-def reindex_attachments_permissions(licence, event):
+def reindex_attachments_permissions(container, event):
     """
     """
     query = {
         'portal_type': 'File',
         'path': {
-            'query': '/'.join(licence.getPhysicalPath()),
+            'query': '/'.join(container.getPhysicalPath()),
             'depth': 1,
         },
         'sort_on': 'created'
