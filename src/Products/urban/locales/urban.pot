@@ -75,6 +75,27 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+msgid "CODT_Article127"
+msgstr ""
+
+msgid "CODT_BuildLicence"
+msgstr ""
+
+msgid "CODT_IntegratedLicence"
+msgstr ""
+
+msgid "CODT_NotaryLetter"
+msgstr ""
+
+msgid "CODT_UniqueLicence"
+msgstr ""
+
+msgid "CODT_UrbanCertificateOne"
+msgstr ""
+
+msgid "CODT_UrbanCertificateTwo"
+msgstr ""
+
 msgid "Create proprietary/applicant"
 msgstr ""
 
@@ -2463,6 +2484,9 @@ msgstr ""
 msgid "urban_label_isOfficialParcel"
 msgstr ""
 
+msgid "urban_label_isOptional"
+msgstr ""
+
 #. Default: "Issameaddressasworks"
 #: Contact.py
 msgid "urban_label_isSameAddressAsWorks"
@@ -3185,6 +3209,9 @@ msgstr ""
 #. Default: "Solicitopinionsto"
 #: GenericLicence.py
 msgid "urban_label_solicitOpinionsTo"
+msgstr ""
+
+msgid "urban_label_solicitOpinionsToOptional"
 msgstr ""
 
 #. Default: "Solicitroadopinionsto"

@@ -64,6 +64,27 @@ msgstr "Conditions intégrales et sectorielles"
 msgid "CI_folder_title"
 msgstr "Conditions intégrales"
 
+msgid "CODT_Article127"
+msgstr "Article 127 (CODT)"
+
+msgid "CODT_BuildLicence"
+msgstr "Permis d'urbanisme (CODT)"
+
+msgid "CODT_IntegratedLicence"
+msgstr "Permis intégrés (CODT)"
+
+msgid "CODT_NotaryLetter"
+msgstr "Lettre de notaire (CODT)"
+
+msgid "CODT_UniqueLicence"
+msgstr "Permis Unique (CODT)"
+
+msgid "CODT_UrbanCertificateOne"
+msgstr "Certificat d'urbanisme 1 (CODT)"
+
+msgid "CODT_UrbanCertificateTwo"
+msgstr "Certificats d'urbanisme 2 (CODT)"
+
 msgid "CS_Eau_folder_title"
 msgstr "Conditions sectorielles Eau"
 
@@ -1750,11 +1771,6 @@ msgstr "Rue et numéro (cadastre)"
 msgid "urban_label_adviceAgreementLevel"
 msgstr "Niveau de l'avis"
 
-#. Default: "Isoptional"
-#: UrbanEvent.py
-msgid "urban_label_isOptional"
-msgstr "Facultatif"
-
 #. Default: "Airportnoisezone"
 #: GenericLicence.py
 msgid "urban_label_airportNoiseZone"
@@ -2475,6 +2491,10 @@ msgstr "Modification d'un permis existant?"
 #: PortionOut.py
 msgid "urban_label_isOfficialParcel"
 msgstr "Existe dans la base de donnée cadastrale"
+
+#. Default: "Isoptional"
+msgid "urban_label_isOptional"
+msgstr "Facultatif"
 
 #. Default: "Issameaddressasworks"
 #: Contact.py
@@ -3219,7 +3239,6 @@ msgid "urban_label_solicitOpinionsTo"
 msgstr "Avis sollicité(s)"
 
 #. Default: "Solicitopinionstooptional"
-#: Inquiry.py
 msgid "urban_label_solicitOpinionsToOptional"
 msgstr "Avis sollicité(s) facultatif"
 
