@@ -135,6 +135,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         vocabulary='listLicenceConfigs',
+        default_method='default_numerotaion_source',
         schemata='public_settings',
     ),
     StringField(
@@ -362,6 +363,9 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         vocabulary_fields = [(field.getName(), '%s %s' % (translate(field.widget.label_msgid, 'urban', context=self.REQUEST), abr[field.schemata])) for field in available_fields]
         #return a vocabulary containing the names of all the text fields of the schema
         return DisplayList(sorted(vocabulary_fields, key=lambda name: name[1]))
+
+    def default_numerotaion_source(self):
+        return self.id
 
 
 registerType(LicenceConfig, PROJECTNAME)
