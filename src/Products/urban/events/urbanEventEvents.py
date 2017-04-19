@@ -40,8 +40,8 @@ def setEventTypeType(urban_event, event):
     urban_eventTypeType = urban_eventType.getEventTypeType()
     if not urban_eventTypeType:
         return
-
     to_explore = set([getInterface('', urban_eventTypeType)])
+    
     while to_explore:
         type_interface = to_explore.pop()
         if IEventTypeType.providedBy(type_interface):

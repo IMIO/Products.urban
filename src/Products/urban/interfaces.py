@@ -482,3 +482,7 @@ class IIsArchive(Interface):
     def is_archive(self):
         """ """
 ##/code-section FOOT
+
+
+class ITestConfig(Interface):
+    """ Marker interface for TestConfig."""

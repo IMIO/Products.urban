@@ -161,6 +161,10 @@ def postInstall(context):
     logger.info("setupSchedule : starting...")
     setupSchedule(context)
     logger.info("setupSchedule : Done")
+    logger.info("setupTest : starting...")
+    setupTest(context.getSite())
+    logger.info("setupTest : Done")
+
     logger.info("setDefaultApplicationSecurity : starting...")
     setDefaultApplicationSecurity(context)
     logger.info("setDefaultApplicationSecurity : Done")
@@ -936,6 +940,25 @@ def setupSchedule(context):
         _set_faceted_view(collection_folder, config_path, [schedule_config])
 
     setFolderAllowedTypes(schedule_folder, [])
+
+
+def setupTest(context):
+    """
+    Enable schedule faceted navigation on schedule folder.
+    """
+    site = context
+    portal_urban = api.portal.get_tool('portal_urban')
+    for urban_type in URBAN_TYPES:
+        config_folder = getattr(portal_urban, urban_type.lower())
+        if 'test' not in config_folder:
+            test_folder = api.content.create(
+                type='ConfigTest',
+                title='Test',
+                container=config_folder)
+        else:
+            test_folder = config_folder['test']
+        setFolderAllowedTypes(test_folder, [urban_type])
+
 
 
 
