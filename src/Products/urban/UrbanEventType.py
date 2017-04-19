@@ -111,7 +111,6 @@ schema = Schema((
     StringField(
         name='eventTypeType',
         vocabulary_factory="eventTypeType",
-        default='UrbanEvent',
         widget=SelectionWidget(
             label='Eventtypetype',
             label_msgid='urban_label_eventTypeType',
@@ -121,6 +120,7 @@ schema = Schema((
     StringField(
         name='eventPortalType',
         vocabulary="listEventPortalTypes",
+        default='UrbanEvent',
         widget=SelectionWidget(
             label='Eventportaltype',
             label_msgid='urban_label_eventPortalType',
