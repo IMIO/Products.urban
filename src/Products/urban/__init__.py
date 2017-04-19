@@ -134,6 +134,7 @@ def initialize(context):
     import content.licence.UrbanCertificateBase
     import content.licence.UrbanCertificateTwo
     import content.licence.UniqueLicence
+    import ConfigTest
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

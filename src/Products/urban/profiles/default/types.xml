@@ -142,5 +142,7 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="PatrimonyCertificate"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="ConfigTest"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <!-- ##/code-section TYPES -->
 </object>

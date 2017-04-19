@@ -8,7 +8,6 @@
   <include package=".cron" />
   <include package=".licence" />
   <include package=".table" />
-
   <include file="portlets.zcml" />
 
   <browser:resourceDirectory
@@ -104,6 +103,22 @@
      name="licenceconfigview"
      class=".licenceconfigview.LicenceConfigView"
      template="templates/urbanconfigview.pt"
+     permission="zope2.View"
+  />
+
+   <browser:page
+     for="Products.urban.interfaces.ITestConfig"
+     name="configtestview"
+     class=".configtestview.ConfigTestView"
+     template="templates/urbanconfigtestview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.ITestConfig"
+     name="configtestprocessingview"
+     class=".configtestview.ConfigTestProcessingView"
+     attribute="processing"
      permission="zope2.View"
   />
 

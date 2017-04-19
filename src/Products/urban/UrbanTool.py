@@ -487,6 +487,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 if context.hasProperty('urbanConfigId'):
                     urbanConfigId = context.getProperty('urbanConfigId')
                     break
+                elif context.getPortalTypeName() in URBAN_TYPES:
+                    urbanConfigId = context.getPortalTypeName()
+                    break
+
                 context = context.getParentNode()
             #if no urbanConfigId was found, we return None...
             if not urbanConfigId:

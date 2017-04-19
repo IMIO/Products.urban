@@ -63,6 +63,7 @@ ADD_CONTENT_PERMISSIONS = {
     'Corporation': 'urban: Add Corporation',
     'City': 'urban: Add City',
     'Claimant': 'urban: Add Claimant',
+    'Configtest': 'urban: Add ConfigTest',
     'Declaration': 'urban: Add Declaration',
     'Division': 'urban: Add Division',
     'EnvClassOne': 'urban: Add EnvClassOne',
@@ -111,6 +112,7 @@ setDefaultRoles('urban: Add City', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Claimant', ("Manager", "Contributor", "ClaimantEditor"))
 setDefaultRoles('urban: Add Contact', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Corporation', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add ConfigTest', ("Manager", ))
 setDefaultRoles('urban: Add Declaration', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvClassOne', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvClassThree', ("Manager", "Contributor"))
