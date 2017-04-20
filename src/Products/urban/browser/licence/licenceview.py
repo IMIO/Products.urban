@@ -305,6 +305,11 @@ class LicenceView(BrowserView):
         return api.content.get_state(self.context)
 
 
+class CODTLicenceView(LicenceView):
+    """
+    """
+
+
 class UrbanCertificateBaseView(LicenceView):
     """
       This manage the view of UrbanCertificate and NotaryLetter Classes

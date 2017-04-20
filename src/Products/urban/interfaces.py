@@ -88,7 +88,7 @@ class IBuildLicence(IBaseBuildLicence):
 
 
 class ICODT_BuildLicence(ICODT_BaseBuildLicence):
-    """Marker interface for CODT BuildLicence
+    """Marker interface for CODT_ BuildLicence
     """
 
 
@@ -153,7 +153,7 @@ class IUrbanCertificateTwo(IBaseBuildLicence):
 
 
 class ICODT_UrbanCertificateTwo(ICODT_BaseBuildLicence):
-    """Marker interface for CODT UrbanCertificateTwo
+    """Marker interface for CODT_ UrbanCertificateTwo
     """
 
 
@@ -293,17 +293,17 @@ class IIntegratedLicence(IBaseBuildLicence):
 
 
 class ICODT_Article127(ICODT_BaseBuildLicence):
-    """Marker interface for CODT Article127
+    """Marker interface for CODT_ Article127
     """
 
 
 class ICODT_UniqueLicence(ICODT_BaseBuildLicence):
-    """Marker interface for CODT UniqueLicence
+    """Marker interface for CODT_ UniqueLicence
     """
 
 
 class ICODT_IntegratedLicence(ICODT_BaseBuildLicence):
-    """Marker interface for  CODT IntegratedLicence
+    """Marker interface for  CODT_ IntegratedLicence
     """
 
 
@@ -422,7 +422,7 @@ class IUrbanCertificateOne(IGenericLicence):
 
 
 class ICODT_UrbanCertificateOne(IGenericLicence):
-    """Marker interface for CODT UrbanCertificateOne
+    """Marker interface for CODT_ UrbanCertificateOne
     """
 
 
@@ -432,7 +432,7 @@ class INotaryLetter(Interface):
 
 
 class ICODT_NotaryLetter(Interface):
-    """Marker interface for CODT NotaryLetter
+    """Marker interface for CODT_ NotaryLetter
     """
 
 

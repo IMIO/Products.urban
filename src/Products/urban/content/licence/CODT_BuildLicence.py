@@ -53,17 +53,6 @@ class CODT_BuildLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
 
     schema = CODT_BuildLicence_schema
 
-    # Methods
-
-    def listProcedureChoices(self):
-        vocabulary = (
-            ('ukn', 'Non determiné'),
-            ('opinions', 'Sollicitation d\'avis (instance ou service interne/externe)'),
-            ('inquiry', 'Instruction d\'une enquête publique'),
-            ('FD', 'Sollicitation du fonctionnaire délégué'),
-        )
-        return DisplayList(vocabulary)
-
 
 registerType(CODT_BuildLicence, PROJECTNAME)
 # end of class CODT_BuildLicence

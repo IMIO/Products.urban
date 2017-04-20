@@ -12,6 +12,62 @@ vocabularies_with_HTML_description = [
 ]
 
 default_values = {
+    'CODT_BuildLicence': {
+        'folderdelays': [
+            'UrbanDelay',
+            {'id': "30j", 'title': u"30 jours", 'deadLineDelay': 30, 'alertDelay': 20},
+            {'id': "60j", 'title': u"60 jours", 'deadLineDelay': 60, 'alertDelay': 20},
+            {'id': "70j", 'title': u"70 jours", 'deadLineDelay': 70, 'alertDelay': 20},
+            {'id': "100", 'title': u"100 jours", 'deadLineDelay': 100, 'alertDelay': 20},
+            {'id': "115j", 'title': u"115 jours", 'deadLineDelay': 115, 'alertDelay': 20},
+            {'id': "145j", 'title': u"145 jours", 'deadLineDelay': 145, 'alertDelay': 20},
+            {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
+        ],
+    },
+    'CODT_Article127': {
+        'folderdelays': [
+            'UrbanDelay',
+            {'id': "30j", 'title': u"30 jours", 'deadLineDelay': 30, 'alertDelay': 20},
+            {'id': "60j", 'title': u"60 jours", 'deadLineDelay': 60, 'alertDelay': 20},
+            {'id': "70j", 'title': u"70 jours", 'deadLineDelay': 70, 'alertDelay': 20},
+            {'id': "100", 'title': u"100 jours", 'deadLineDelay': 100, 'alertDelay': 20},
+            {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
+        ],
+    },
+    'CODT_IntegratedLicence': {
+        'folderdelays': [
+            'UrbanDelay',
+            {'id': "30j", 'title': u"30 jours", 'deadLineDelay': 30, 'alertDelay': 20},
+            {'id': "60j", 'title': u"60 jours", 'deadLineDelay': 60, 'alertDelay': 20},
+            {'id': "70j", 'title': u"70 jours", 'deadLineDelay': 70, 'alertDelay': 20},
+            {'id': "100", 'title': u"100 jours", 'deadLineDelay': 100, 'alertDelay': 20},
+            {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
+        ],
+    },
+    'CODT_UniqueLicence': {
+        'folderdelays': [
+            'UrbanDelay',
+            {'id': "30j", 'title': u"30 jours", 'deadLineDelay': 30, 'alertDelay': 20},
+            {'id': "60j", 'title': u"60 jours", 'deadLineDelay': 60, 'alertDelay': 20},
+            {'id': "70j", 'title': u"70 jours", 'deadLineDelay': 70, 'alertDelay': 20},
+            {'id': "100", 'title': u"100 jours", 'deadLineDelay': 100, 'alertDelay': 20},
+            {'id': "115j", 'title': u"115 jours", 'deadLineDelay': 115, 'alertDelay': 20},
+            {'id': "145j", 'title': u"145 jours", 'deadLineDelay': 145, 'alertDelay': 20},
+            {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
+        ],
+    },
+    'CODT_UrbanCertificateTwo': {
+        'folderdelays': [
+            'UrbanDelay',
+            {'id': "30j", 'title': u"30 jours", 'deadLineDelay': 30, 'alertDelay': 20},
+            {'id': "60j", 'title': u"60 jours", 'deadLineDelay': 60, 'alertDelay': 20},
+            {'id': "70j", 'title': u"70 jours", 'deadLineDelay': 70, 'alertDelay': 20},
+            {'id': "100", 'title': u"100 jours", 'deadLineDelay': 100, 'alertDelay': 20},
+            {'id': "115j", 'title': u"115 jours", 'deadLineDelay': 115, 'alertDelay': 20},
+            {'id': "145j", 'title': u"145 jours", 'deadLineDelay': 145, 'alertDelay': 20},
+            {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
+        ],
+    },
     'BuildLicence': {
         'foldercategories': [
             'UrbanVocabularyTerm',

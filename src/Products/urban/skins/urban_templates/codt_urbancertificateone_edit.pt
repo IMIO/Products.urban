@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      i18n:domain="urban">
+
+<body>
+
+<div metal:define-macro="topslot">
+<metal:listing use-macro="here/@@globalmacros/hide_portlets" />
+</div>
+
+<div metal:define-macro="body">
+
+<metal:base_body use-macro="base_macros/body">
+
+<metal:widgets fill-slot="widgets"
+           tal:define="global body_onload string: init();
+                       member context/@@plone_portal_state/member;
+                       border python: test(member.has_role('Manager'), 'enable_border', 'disable_border');
+                       dummy python:request.set(border, 1);">
+
+      <metal:listing use-macro="here/@@urbancertificatebase_edit/editLicenceMacro" />
+</metal:widgets>
+</metal:base_body>
+</div>
+
+</body>
+</html>
