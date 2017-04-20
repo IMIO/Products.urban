@@ -41,7 +41,7 @@ def setEventTypeType(urban_event, event):
     if not urban_eventTypeType:
         return
     to_explore = set([getInterface('', urban_eventTypeType)])
-    
+
     while to_explore:
         type_interface = to_explore.pop()
         if IEventTypeType.providedBy(type_interface):
@@ -50,7 +50,6 @@ def setEventTypeType(urban_event, event):
                 to_explore.add(base_interface)
 
     urban_event.reindexObject(['object_provides'])
-
 
 def setCreationDate(urban_event, event):
     urban_event.setCreationDate(urban_event.getEventDate())

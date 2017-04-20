@@ -1,0 +1,5 @@
+<h1>ICI LE TITRE</h1>
+
+<form action="configtestprocessingview">
+  <input type="submit" value="générer traitement">
+</form>
