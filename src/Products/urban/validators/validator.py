@@ -97,6 +97,11 @@ class procedureChoiceValidator:
                 _('error_procedure_choice',
                   default=u"Cannot select 'unknown' with another value")
             )
+        if 'light_inquiry' in value and 'inquiry' in value:
+            return translate(
+                _('error_procedure_choice',
+                  default=u"Pleases elect only ONE of the inquiry types")
+            )
         return True
 
 
