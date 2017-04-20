@@ -166,7 +166,7 @@ URBAN_TYPES = [
     'EnvClassOne', 'EnvClassTwo', 'EnvClassThree',
     'ParcelOutLicence', 'MiscDemand', 'Division', 'NotaryLetter',
     'CODT_BuildLicence', 'CODT_Article127', 'CODT_IntegratedLicence', 'CODT_UniqueLicence',
-    'CODT_UrbanCertificateTwo'
+    'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne', 'CODT_NotaryLetter',
 ]
 
 URBAN_CWATUPE_TYPES = [

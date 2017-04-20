@@ -80,6 +80,21 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.ICODT_BaseBuildLicence"
+     name="codt_buildlicenceview"
+     class=".codt_buildlicenceview.CODTBuildLicenceView"
+     template="templates/buildlicenceview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="codt_buildlicence-macros"
+     for="Products.urban.interfaces.ICODT_BaseBuildLicence"
+     template="templates/codt_buildlicencemacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      name="buildlicence-macros"
      for="Products.urban.interfaces.IBaseBuildLicence"
      template="templates/buildlicencemacros.pt"

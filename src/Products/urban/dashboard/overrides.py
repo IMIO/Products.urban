@@ -21,7 +21,7 @@ class RenderLicenceTermView(RenderTermView):
         self.collection = term.value
         collection_id = self.collection.getId()
         for urban_type in URBAN_TYPES:
-            if urban_type.lower() in collection_id:
+            if 'collection_' + urban_type.lower() == collection_id:
                 self.licence_type = urban_type
                 return ViewPageTemplateFile("templates/licence_term.pt")(self)
         return self.index()

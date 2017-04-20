@@ -120,6 +120,11 @@ def initialize(context):
     import UrbanVocabularyTerm
     import content.licence.Article127
     import content.licence.BuildLicence
+    import content.licence.CODT_Article127
+    import content.licence.CODT_BuildLicence
+    import content.licence.CODT_IntegratedLicence
+    import content.licence.CODT_UniqueLicence
+    import content.licence.CODT_UrbanCertificateTwo
     import content.licence.Declaration
     import content.licence.Division
     import content.licence.EnvClassThree

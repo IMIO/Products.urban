@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
 <object name="portal_factory" meta_type="Plone Factory Tool">
  <factorytypes>
+  <type portal_type="CODT_Article127"/>
+  <type portal_type="CODT_BuildLicence"/>
+  <type portal_type="CODT_IntegratedLicence"/>
+  <type portal_type="CODT_NotaryLetter"/>
+  <type portal_type="CODT_UniqueLicence"/>
+  <type portal_type="CODT_UrbanCertificateOne"/>
+  <type portal_type="CODT_UrbanCertificateTwo"/>
   <type portal_type="GenericLicence"/>
   <type portal_type="Contact"/>
   <type portal_type="Street"/>

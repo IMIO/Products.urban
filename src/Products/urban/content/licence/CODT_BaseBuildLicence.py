@@ -652,7 +652,9 @@ class CODT_BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultM
     def listProcedureChoices(self):
         vocabulary = (
             ('ukn', 'Non determiné'),
-            ('opinions', 'Sollicitation d\'avis (instance ou service interne/externe)'),
+            ('internal_opinions', 'Sollicitation d\'avis internes'),
+            ('external_opinions', 'Sollicitation d\'avis externes'),
+            ('light_inquiry', 'Instruction d\'une annonce de projet'),
             ('inquiry', 'Instruction d\'une enquête publique'),
             ('FD', 'Sollicitation du fonctionnaire délégué'),
         )
@@ -661,24 +663,18 @@ class CODT_BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultM
     def getProcedureDelays(self, *values):
         selection = [v['val'] for v in values if v['selected']]
         unknown = 'ukn' in selection
-        opinions = 'opinions' in selection
-        inquiry = 'inquiry' in selection
+        opinions = 'external_opinions' in selection
+        inquiry = 'inquiry' in selection or 'light_inquiry' in selection
         FD = 'FD' in selection
 
         if unknown:
             return ''
         elif (opinions or inquiry) and FD:
             return '115j'
-        elif opinions and inquiry and not FD:
-            return '70j'
-        elif opinions and not (inquiry or FD):
-            return '70j'
-        elif inquiry and not (opinions or FD):
-            return '70j'
-        elif FD and not (opinions or inquiry):
-            return '75j'
-        else:
+        elif not opinions and not inquiry and not FD:
             return '30j'
+        else:
+            return '70j'
 
     def listCompositions(self):
         vocabulary = (
