@@ -243,6 +243,7 @@
                             <thead>
                                 <tr>
                                     <th i18n:translate="urban_label_requestedOrganisation">Organisation</th>
+                                    <th i18n:domain="plone" i18n:translate="">State</th>
                                     <th i18n:translate="urban_label_askingDate">Asking Date</th>
                                     <th i18n:translate="urban_label_receiptDate">Receipt date</th>
                                     <th i18n:translate="urban_label_externalDecision">Advice</th>
@@ -256,6 +257,13 @@
                                                 <a href="#" tal:attributes="href opinion/absolute_url" tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">
                                                     Opinion request
                                                 </a>
+                                            </td>
+                                            <td>
+                                                <span class="#"
+                                                      tal:attributes="class python: opinion and 'plain' or 'discreet'"
+                                                      tal:content="python: view.get_state(opinion)"
+                                                      i18n:translate="">None
+                                                </span>
                                             </td>
                                             <td tal:define="eventDate opinion/getEventDate">
                                                 <span class="#"
@@ -281,6 +289,7 @@
                                         </tal:anEventIsLinked>
                                         <tal:noEventIsLinked condition="python: opinion is None">
                                             <td tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">Opinion request</td>
+                                            <td><span class="discreet" i18n:translate="content_none">None</span></td>
                                             <td><span class="discreet" i18n:translate="content_none">None</span></td>
                                             <td><span class="discreet" i18n:translate="content_none">None</span></td>
                                             <td><span class="discreet" i18n:translate="content_none">None</span></td>
