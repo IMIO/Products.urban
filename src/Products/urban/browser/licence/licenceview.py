@@ -301,8 +301,10 @@ class LicenceView(BrowserView):
     def getHabitationFields(self, exclude=[]):
         return self.getSchemataFields('urban_habitation', exclude)
 
-    def get_state(self):
-        return api.content.get_state(self.context)
+    def get_state(self, obj=None):
+        obj = obj or self.context
+        state = api.content.get_state(obj.context)
+        return state
 
 
 class UrbanCertificateBaseView(LicenceView):
