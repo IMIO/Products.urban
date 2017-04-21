@@ -303,7 +303,7 @@ class LicenceView(BrowserView):
 
     def get_state(self, obj=None):
         obj = obj or self.context
-        state = api.content.get_state(obj.context)
+        state = api.content.get_state(obj)
         return state
 
 
