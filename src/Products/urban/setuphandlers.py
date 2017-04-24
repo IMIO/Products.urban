@@ -273,6 +273,26 @@ def createScheduleConfig(container, portal_type, id='schedule', title=''):
     return schedule_config
 
 
+def addScheduleConfigs(context):
+    if context.readDataFile('urban_extra_marker.txt') is None:
+        return
+
+    profile_name = context._profile_path.split('/')[-1]
+    module_name = 'Products.urban.profiles.%s.schedule_config' % profile_name
+    attribute = 'schedule_config'
+    module = __import__(module_name, fromlist=[attribute])
+    schedule_config = getattr(module, attribute)
+
+    portal_urban = api.portal.get_tool('portal_urban')
+
+    for urban_type in URBAN_TYPES:
+        licence_config_id = urban_type.lower()
+        if licence_config_id in schedule_config:
+            config_folder = getattr(portal_urban, licence_config_id)
+            schedule_folder = getattr(config_folder, 'schedule')
+            taskconfigs = schedule_config[licence_config_id]
+            _create_task_configs(schedule_folder, taskconfigs)
+
 
 def getSharedVocabularies(urban_type, licence_vocabularies):
     shared_vocs = licence_vocabularies.get('shared_vocabularies')
@@ -938,7 +958,6 @@ def setupSchedule(context):
             folder_id
         )
         _set_faceted_view(collection_folder, config_path, [schedule_config])
-
     setFolderAllowedTypes(schedule_folder, [])
 
 
@@ -1329,6 +1348,10 @@ def setupExtra(context):
     if not portal_urban:
         logger.error("Could not get the portal_urban tool!")
         return
+
+    logger.info('Setup default schedule configuration')
+    addScheduleConfigs(context)
+
     nis = portal_urban.getNISNum()
     if not nis:
         logger.error("No NIS defined in portal_urban!")
@@ -1392,3 +1415,35 @@ def setHTMLContentType(folder, fieldName):
             obj.setContentType('text/html', fieldName)
 
 ##/code-section FOOT
+
+
+def _create_task_configs(container, taskconfigs):
+    """
+    """
+    for taskconfig_kwargs in taskconfigs:
+        subtasks = taskconfig_kwargs.pop('subtasks', [])
+        task_config_id = taskconfig_kwargs['id']
+
+        if task_config_id not in container.objectIds():
+            marker_interface = taskconfig_kwargs.pop('marker_interface', None)
+
+            task_config_id = container.invokeFactory(**taskconfig_kwargs)
+            task_config = getattr(container, task_config_id)
+
+            # set custom view fields
+            task_config.dashboard_collection.customViewFields = (
+                u'sortable_title',
+                u'address_column',
+                u'assigned_user_column',
+                u'status',
+                u'due_date',
+                u'task_actions_column',
+            )
+
+            # set marker_interface
+            if marker_interface:
+                alsoProvides(task_config, marker_interface)
+
+        task_config = getattr(container, task_config_id)
+        for subtasks_kwargs in subtasks:
+            _create_task_configs(container=task_config, taskconfigs=subtasks)
