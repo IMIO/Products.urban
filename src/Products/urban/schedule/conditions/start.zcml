@@ -2,6 +2,15 @@
     xmlns="http://namespaces.zope.org/zope"
     i18n_domain="Products.urban">
 
+
+    <adapter
+        for="Products.urban.interfaces.IGenericLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.DepositDoneCondition"
+        name="urban.schedule.condition.deposit_done"
+    />
+
     <!-- folder complete conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseBuildLicence
@@ -12,6 +21,14 @@
     />
 
     <!-- acknowlegdment conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.AcknowledgmentCreatedCondition"
+        name="urban.schedule.condition.acknowledgment_created"
+    />
+
     <adapter
         for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
