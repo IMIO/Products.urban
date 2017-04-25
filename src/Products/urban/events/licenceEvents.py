@@ -2,6 +2,7 @@
 
 from plone import api
 
+from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
 
@@ -101,10 +102,13 @@ def reindex_attachments_permissions(container, event):
             'query': '/'.join(container.getPhysicalPath()),
             'depth': 1,
         },
-        'sort_on': 'created'
     }
     catalog = api.portal.get_tool('portal_catalog')
     attachments = catalog(query)
     for attachment_brain in attachments:
         attachment = attachment_brain.getObject()
         attachment.reindexObject(idxs=['allowedRolesAndUsers'])
+
+    if IUrbanEvent.providedBy(container):
+        licence = container.aq_parent
+        reindex_attachments_permissions(licence, event)
