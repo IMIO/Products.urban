@@ -115,6 +115,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IAnnouncementEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IInquiryEvent"
     type=".interfaces.IEventTypeType"/>
 
