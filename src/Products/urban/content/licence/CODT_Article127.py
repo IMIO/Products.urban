@@ -59,6 +59,7 @@ class CODT_Article127(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
     def listProcedureChoices(self):
         vocab = (
             ('ukn', 'Non determiné'),
+            ('small', 'Projet d\'impact limité'),
             ('internal_opinions', 'Sollicitation d\'avis internes'),
             ('external_opinions', 'Sollicitation d\'avis externes'),
             ('light_inquiry', 'Instruction d\'une annonce de projet'),
@@ -69,17 +70,20 @@ class CODT_Article127(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
     def getProcedureDelays(self, *values):
         selection = [v['val'] for v in values if v['selected']]
         unknown = 'ukn' in selection
+        small = 'small' in values
         opinions = 'external_opinions' in selection
         inquiry = 'inquiry' in selection or 'light_inquiry' in selection
 
         if unknown:
             return ''
+        elif small and not opinions and not inquiry:
+            return '60j'
         elif opinions and inquiry:
-            return '70j'
+            return '90j'
         elif opinions and not inquiry:
-            return '70'
+            return '90j'
         else:
-            return '30j'
+            return '130j'
 
     def getLastWalloonRegionDecisionEvent(self, use_catalog=True):
         return self._getLastEvent(interfaces.IWalloonRegionDecisionEvent, use_catalog)
