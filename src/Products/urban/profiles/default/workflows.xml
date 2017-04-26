@@ -100,6 +100,9 @@
   <type type_id="UrbanEvent">
      <bound-workflow workflow_id="urbanevent_workflow" />
   </type>
+  <type type_id="UrbanEventAnnouncement">
+     <bound-workflow workflow_id="urbanevent_workflow" />
+  </type>
   <type type_id="UrbanEventInquiry">
      <bound-workflow workflow_id="urbanevent_workflow" />
   </type>

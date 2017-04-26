@@ -65,7 +65,7 @@ msgid "CI_folder_title"
 msgstr "Conditions intégrales"
 
 msgid "CODT_Article127"
-msgstr "Article 127 (CODT)"
+msgstr "Permis Public (CODT)"
 
 msgid "CODT_BuildLicence"
 msgstr "Permis d'urbanisme (CODT)"
@@ -439,6 +439,9 @@ msgstr "Si ce lieu-dit est écrit de différentes manières, utilisez la manièr
 
 msgid "and"
 msgstr "et"
+
+msgid "announcement_data"
+msgstr "Données concernant l'annonce de projet"
 
 # buildlicence_view
 msgid "applicants"
@@ -1801,6 +1804,12 @@ msgstr "Délai annoncé"
 msgid "urban_label_annoncedDelayDetails"
 msgstr "Détails concernant le délai annoncé"
 
+msgid "urban_label_announcementArticles"
+msgstr "Article(s) de l'annonce de projet"
+
+msgid "urban_label_announcementArticlesText"
+msgstr "Article(s) de l'annonce de projet (texte)"
+
 #. Default: "Applicants"
 #: GenericLicence.py
 msgid "urban_label_applicants"
@@ -2114,6 +2123,12 @@ msgstr "Observations"
 msgid "urban_label_dispatchSInformation"
 msgstr "Informations de dispatch"
 
+msgid "urban_label_divergence"
+msgstr "Écart"
+
+msgid "urban_label_divergenceDetails"
+msgstr "Détails concernant l'écart"
+
 #. Default: "Division"
 #: PortionOut.py
 msgid "urban_label_division"
@@ -2376,6 +2391,9 @@ msgstr "Motifs d'irrecevabilité"
 msgid "urban_label_initials"
 msgstr "Initiales"
 
+msgid "urban_label_inquiry_type"
+msgstr "Type de publicité"
+
 #. Default: "Invertaddressnames"
 #: UrbanTool.py
 msgid "urban_label_invertAddressNames"
@@ -2399,7 +2417,7 @@ msgstr "Article(s) de l'enquête (texte)"
 #. Default: "Investigationdetails"
 #: GenericLicence.py
 msgid "urban_label_investigationDetails"
-msgstr "Observations sur l'enquête"
+msgstr "Observations"
 
 #. Default: "Investigationend"
 #: GenericLicence.py

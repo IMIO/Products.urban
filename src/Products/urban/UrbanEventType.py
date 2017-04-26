@@ -185,7 +185,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         """
          return a DisplayList of fields wich are marked as optional
         """
-        from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
+        from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
         lst = []
         fields = UrbanEventInquiry_schema.fields()
         additional_fields = queryAdapter(self, IOptionalFields)
@@ -208,7 +208,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
     def listTextFields(self):
         #we have to know from where the method has been called in order to know which text
         #fields to propose to be "default valued"
-        from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
+        from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
         urbanevent_fields = UrbanEventInquiry_schema.fields()
         additional_fields = queryAdapter(self, IOptionalFields)
         if additional_fields:
@@ -257,7 +257,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
     security.declarePublic('listActivatedDates')
 
     def listActivatedDates(self):
-        from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
+        from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
 
         activated_fields = self.getActivatedFields()
         activated_fields = type(activated_fields) == str and [activated_fields] or activated_fields

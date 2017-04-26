@@ -163,30 +163,17 @@ class UrbanEventView(BrowserView):
         return api.content.get_state(self.context)
 
 
-class UrbanEventInquiryView(UrbanEventView, MapView, LicenceView):
+class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
     """
-      This manage the view of UrbanEventInquiry
-      It is based on the default UrbanEventView
+    This manage the base view of UrbanEventInquiry
     """
+
     def __init__(self, context, request):
         super(BrowserView, self).__init__(context, request)
         self.context = context
         self.request = request
-        plone_utils = api.portal.get_tool('plone_utils')
-        self.linkedInquiry = self.context.getLinkedInquiry()
-        if not self.linkedInquiry:
-            plone_utils.addPortalMessage(_('This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !'), type="error")
-        if self.hasPOWithoutAddress():
-            plone_utils.addPortalMessage(_('There are parcel owners without any address found! Desactivate them!'), type="warning")
-        # disable portlets
         self.request.set('disable_plone.rightcolumn', 1)
         self.request.set('disable_plone.leftcolumn', 1)
-
-    def __call__(self):
-        if 'find_recipients_cadastre' in self.request.form:
-            radius = self.getInquiryRadius()
-            return self.getInvestigationPOs(radius)
-        return self.index()
 
     def getParcels(self):
         context = aq_inner(self.context)
@@ -199,36 +186,20 @@ class UrbanEventInquiryView(UrbanEventView, MapView, LicenceView):
         contactlisting.update()
         return contactlisting.render()
 
-    def renderRecipientsCadastreListing(self):
-        recipients = self.context.getRecipients()
-        if not recipients:
-            return ''
-        contactlisting = RecipientsCadastreTable(recipients, self.request)
-        contactlisting.update()
-        return contactlisting.render()
-
-    def getRecipients(self):
+    def getLinkedInquiry(self):
         context = aq_inner(self.context)
-        return context.getRecipients()
+        return context.getLinkedInquiry()
 
-    def hasPOWithoutAddress(self):
-        context = aq_inner(self.context)
-        for parcel_owner in context.getRecipients(onlyActive=True):
-            if not parcel_owner.getStreet() or not parcel_owner.getAdr1():
-                return True
-        return False
-
-    def getInquiryData(self):
+    def getInquiryFields(self):
         """
-          This will return data to display about the UrbanEventInquiry
-          See UrbanEventView.getData doc string
+          This will return fields to display about the Inquiry
         """
         context = aq_inner(self.context)
         linkedInquiry = context.getLinkedInquiry()
+        fields = []
         if not linkedInquiry:
             #this should not happen...
             return None
-        inquiryData = (linkedInquiry, [])
         displayed_fields = self.getUsedAttributes()
         inquiryAttributes = utils.getSchemataFields(linkedInquiry, displayed_fields, 'urban_inquiry')
         for inquiryAttribute in inquiryAttributes:
@@ -237,9 +208,9 @@ class UrbanEventInquiryView(UrbanEventView, MapView, LicenceView):
                 #as this text can be very long, we do not want to show it with the other
                 #fields, we will display it in the "Claimants" part of the template
                 continue
-            inquiryData[1].append(inquiryAttributeName)
+            fields.append(inquiryAttributeName)
 
-        return inquiryData
+        return fields
 
     def getInquiryReclamationNumbers(self):
 
@@ -277,6 +248,74 @@ class UrbanEventInquiryView(UrbanEventView, MapView, LicenceView):
                 return linkedInquiry.generateInquiryTitle()
             else:
                 return linkedInquiry.Title()
+
+
+class UrbanEventAnnouncementView(UrbanEventInquiryBaseView):
+    """
+    This manage the view of UrbanEventAnnouncement
+    """
+
+    def __init__(self, context, request):
+        super(UrbanEventAnnouncementView, self).__init__(context, request)
+        plone_utils = api.portal.get_tool('plone_utils')
+        self.linkedInquiry = self.context.getLinkedInquiry()
+        if not self.linkedInquiry:
+            plone_utils.addPortalMessage(_('This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !'), type="error")
+        # disable portlets
+        self.request.set('disable_plone.rightcolumn', 1)
+        self.request.set('disable_plone.leftcolumn', 1)
+
+    def getInquiryFields(self):
+        """
+        This will return fields to display about the Inquiry
+        """
+        context = aq_inner(self.context)
+        linked_inquiry = context.getLinkedInquiry()
+        fields_to_display = linked_inquiry.get_inquiry_fields_to_display()
+        return fields_to_display
+
+
+class UrbanEventInquiryView(UrbanEventInquiryBaseView):
+    """
+    This manage the view of UrbanEventInquiry
+    """
+
+    def __init__(self, context, request):
+        super(UrbanEventInquiryView, self).__init__(context, request)
+        plone_utils = api.portal.get_tool('plone_utils')
+        self.linkedInquiry = self.context.getLinkedInquiry()
+        if not self.linkedInquiry:
+            plone_utils.addPortalMessage(_('This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !'), type="error")
+        if self.hasPOWithoutAddress():
+            plone_utils.addPortalMessage(_('There are parcel owners without any address found! Desactivate them!'), type="warning")
+        # disable portlets
+        self.request.set('disable_plone.rightcolumn', 1)
+        self.request.set('disable_plone.leftcolumn', 1)
+
+    def __call__(self):
+        if 'find_recipients_cadastre' in self.request.form:
+            radius = self.getInquiryRadius()
+            return self.getInvestigationPOs(radius)
+        return self.index()
+
+    def renderRecipientsCadastreListing(self):
+        recipients = self.context.getRecipients()
+        if not recipients:
+            return ''
+        contactlisting = RecipientsCadastreTable(recipients, self.request)
+        contactlisting.update()
+        return contactlisting.render()
+
+    def getRecipients(self):
+        context = aq_inner(self.context)
+        return context.getRecipients()
+
+    def hasPOWithoutAddress(self):
+        context = aq_inner(self.context)
+        for parcel_owner in context.getRecipients(onlyActive=True):
+            if not parcel_owner.getStreet() or not parcel_owner.getAdr1():
+                return True
+        return False
 
     def getInvestigationPOs(self, radius=0):
         """

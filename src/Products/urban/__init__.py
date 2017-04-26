@@ -92,11 +92,12 @@ def initialize(context):
     import Applicant
     import City
     import Claimant
+    import content.CODT_Inquiry
     import Contact
     import Corporation
     import EnvironmentRubricTerm
     import FolderManager
-    import Inquiry
+    import content.Inquiry
     import Layer
     import LicenceConfig
     import Locality
@@ -113,7 +114,8 @@ def initialize(context):
     import UrbanConfigurationValue
     import UrbanDelay
     import UrbanEvent
-    import UrbanEventInquiry
+    import content.UrbanEventAnnouncement
+    import content.UrbanEventInquiry
     import UrbanEventOpinionRequest
     import UrbanEventType
     import UrbanTool

@@ -187,8 +187,23 @@ class IInquiry(Interface):
     """
 
 
-class IUrbanEventInquiry(Interface):
+class ICODT_Inquiry(IInquiry):
+    """Marker interface for .Inquiry.Inquiry
+    """
+
+
+class IUrbanEventBaseInquiry(Interface):
+    """base arker interface for inquiry events
+    """
+
+
+class IUrbanEventInquiry(IUrbanEventBaseInquiry):
     """Marker interface for .UrbanEventInquiry.UrbanEventInquiry
+    """
+
+
+class IUrbanEventAnnouncement(IUrbanEventBaseInquiry):
+    """Marker interface for .UrbanEventAnnouncement.UrbanEventAnnouncement
     """
 
 
