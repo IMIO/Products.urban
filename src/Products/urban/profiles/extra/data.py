@@ -41,6 +41,54 @@ default_texts = {
 
 
 urbanEventTypes = {
+    'codt_buildlicence': (
+        {
+            'id': "annonce-de-projet",
+            'title': "Annonce de projet",
+            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'deadLineDelay': 15,
+            'TALCondition': "here/mayAddInquiryEvent",
+            'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
+            'specialFunctionUrl': "addInvestigationPO",
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IAnnouncementEvent',
+            'eventPortalType': 'UrbanEventAnnouncement',
+            'textDefaultValues': (
+                {'text': '\n'.join(default_texts['investigationArticlesTextDefaultValue']), 'fieldname': 'investigationArticlesText'},
+                {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
+            ),
+        },
+        {
+            'id': "enquete-publique",
+            'title': "Enquête publique",
+            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'deadLineDelay': 15,
+            'TALCondition': "here/mayAddInquiryEvent",
+            'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
+            'specialFunctionUrl': "addInvestigationPO",
+            'podTemplates': (
+                {'id': "urb-enq-avis-riverains-annexe26.odt", 'title': "Avis enquête (annexe 26 - lettre riverains)"},
+                {'id': "urb-enq-certif-aff-annexe26.odt", 'title': "Certificat d'affichage (annexe 26)"},
+                {'id': "urb-enq-copie-rw-annexe26.odt", 'title': "Avis enquête (annexe 26 - copie RW)"},
+                {'id': "urb-enq-annexe25-dem.odt", 'title': "Affiche (annexe 25 - lettre au demandeur)"},
+                {'id': "urb-enq-annexe25.odt", 'title': "Affiche (annexe 25)"},
+                {'id': "urb-enq-ordre-mission.odt", 'title': "Ordre de mission"},
+                {'id': "urb-enq-accuse-reclamation.odt", 'title': "Accusé de réception d'une réclamation"},
+                {'id': "urb-enq-reunion-clot.odt", 'title': "Réunion de clôture d'enquête"},
+                {'id': "urb-enq-pv-clot.odt", 'title': "PV de clôture enquête"},
+                {'id': "urb-enq-frais.odt", 'title': "Frais d'enquête"},
+                {'id': "urb-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
+                {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventPortalType': 'UrbanEventInquiry',
+            'textDefaultValues': (
+                {'text': '\n'.join(default_texts['investigationArticlesTextDefaultValue']), 'fieldname': 'investigationArticlesText'},
+                {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
+            ),
+        },
+    ),
     'buildlicence': (
         {
             'id': "depot-de-la-demande",
