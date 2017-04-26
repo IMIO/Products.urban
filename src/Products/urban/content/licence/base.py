@@ -528,40 +528,6 @@ class UrbanBase(object):
         """
         return self.objectValues('UrbanEvent')  # UrbanEvent is the meta_type
 
-    security.declarePublic('getInquiries')
-    def getInquiries(self):
-        """
-          Returns the existing inquiries
-        """
-        #the first inquiry is the one defined on self itself
-        #and the others are extra Inquiry object added
-        all_inquiries = []
-        other_inquiries = self.objectValues('Inquiry')
-        if other_inquiries:
-            all_inquiries.append(self)
-        all_inquiries.extend(list(other_inquiries))
-        return all_inquiries
-
-    security.declarePublic('getAllInquiries')
-    def getAllInquiries(self):
-        """
-          Returns the existing inquiries
-        """
-        #the first inquiry is the one defined on self itself
-        #if a investigationStart is defined
-        #and the others are extra Inquiry object added
-        all_inquiries = [self]
-        other_inquiries = self.objectValues('Inquiry')
-        all_inquiries.extend(list(other_inquiries))
-        return all_inquiries
-
-    security.declarePublic('getUrbanEventInquiries')
-    def getUrbanEventInquiries(self):
-        """
-          Returns the existing UrbanEventInquiries
-        """
-        return self.listFolderContents({'portal_type': 'UrbanEventInquiry'})
-
     security.declarePublic('getUrbanEventOpinionRequests')
     def getUrbanEventOpinionRequests(self):
         """

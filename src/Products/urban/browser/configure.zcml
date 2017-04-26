@@ -153,6 +153,14 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IUrbanEventAnnouncement"
+     name="urbaneventannouncementview"
+     class=".urbaneventviews.UrbanEventAnnouncementView"
+     template="templates/urbaneventannouncementview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IUrbanEvent"
      name="urbaneventview"
      class=".urbaneventviews.UrbanEventView"

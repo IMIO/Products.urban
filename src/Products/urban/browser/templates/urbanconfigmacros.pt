@@ -138,7 +138,7 @@
             base_macros context/base/macros;
             folderlisting_macro base_macros/folderlisting;
             errors python:request.get('errors', {})">
-           <tal:block replace="structure context/test/configtestview" />
+           <!--tal:block replace="structure context/test/configtestview" /-->
            <metal:use_body use-macro="folderlisting_macro" />
         </metal:main_macro>
 

@@ -15,12 +15,13 @@
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
    <element value="UrbanEventOpinionRequest"/>
+   <element value="UrbanEventAnnouncement"/>
    <element value="UrbanEventInquiry"/>
    <element value="UrbanEventCollege"/>
    <element value="UrbanEventNotificationCollege"/>
    <element value="Applicant"/>
    <element value="Corporation"/>
-   <element value="Inquiry"/>
+   <element value="CODT_Inquiry"/>
    <element value="UrbanEvent"/>
    <element value="File"/>
    <element value="PortionOut"/>

@@ -5,7 +5,7 @@ from Acquisition import aq_inner
 from Products.Five import BrowserView
 
 from Products.urban import utils
-from Products.urban.UrbanEventInquiry import UrbanEventInquiry_schema
+from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
 from Products.urban.browser.table.urbantable import ApplicantTable
 from Products.urban.browser.table.urbantable import AttachmentsTable
 from Products.urban.browser.table.urbantable import EventsTable
@@ -308,6 +308,9 @@ class LicenceView(BrowserView):
 class CODTLicenceView(LicenceView):
     """
     """
+
+    def getInquiryFields(self, exclude=[]):
+        return self.context.get_inquiry_fields_to_display(exclude=exclude)
 
 
 class UrbanCertificateBaseView(LicenceView):

@@ -82,6 +82,7 @@ ADD_CONTENT_PERMISSIONS = {
     'FolderManager': 'urban: Add FolderManager',
     'GenericLicence': 'urban: Add GenericLicence',
     'Inquiry': 'urban: Add Inquiry',
+    'CODT_Inquiry': 'urban: Add CODT_Inquiry',
     'IntegratedLicence': 'urban: Add IntegratedLicence',
     'Layer': 'urban: Add Layer',
     'LicenceConfig': 'urban: Add LicenceConfig',
@@ -102,6 +103,7 @@ ADD_CONTENT_PERMISSIONS = {
     'Street': 'urban: Add Street',
     'UniqueLicence': 'urban: Add UniqueLicence',
     'UrbanEvent': 'urban: Add UrbanEvent',
+    'UrbanEventInquiry': 'urban: Add UrbanEvent',
     'UrbanEventInquiry': 'urban: Add UrbanEvent',
     'UrbanEventType': 'urban: Add UrbanEventType',
     'UrbanVocabularyTerm': 'urban: Add UrbanVocabularyTerm',
@@ -139,6 +141,7 @@ setDefaultRoles('urban: Add FolderManager', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add IntegratedLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Inquiry', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add CODT_Inquiry', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Layer', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add LicenceConfig', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Locality', ("Manager", "Contributor"))

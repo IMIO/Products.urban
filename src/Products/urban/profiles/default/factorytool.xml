@@ -33,6 +33,7 @@
   <type portal_type="LicenceConfig"/>
   <type portal_type="PersonTitleTerm"/>
   <type portal_type="Inquiry"/>
+  <type portal_type="CODT_Inquiry"/>
   <type portal_type="UrbanEventInquiry"/>
   <type portal_type="UrbanEventCollege"/>
   <type portal_type="UrbanEventOpinionRequest"/>

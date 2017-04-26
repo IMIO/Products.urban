@@ -54,6 +54,9 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
+msgid "announcement_data"
+msgstr ""
+
 msgid "BuildLicence"
 msgstr ""
 
@@ -1614,6 +1617,12 @@ msgstr ""
 msgid "urban_investigationStart"
 msgstr ""
 
+msgid "urban_label_announcementArticles"
+msgstr ""
+
+msgid "urban_label_announcementArticlesText"
+msgstr ""
+
 msgid "urban_label_askingDate"
 msgstr ""
 
@@ -2124,6 +2133,12 @@ msgstr ""
 msgid "urban_label_dispatchSInformation"
 msgstr ""
 
+msgid "urban_label_divergence"
+msgstr ""
+
+msgid "urban_label_divergenceDetails"
+msgstr ""
+
 #. Default: "Division"
 #: PortionOut.py
 msgid "urban_label_division"
@@ -2366,6 +2381,9 @@ msgstr ""
 #. Default: "Initials"
 #: FolderManager.py
 msgid "urban_label_initials"
+msgstr ""
+
+msgid "urban_label_inquiry_type"
 msgstr ""
 
 #. Default: "Invertaddressnames"

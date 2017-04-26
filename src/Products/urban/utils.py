@@ -76,8 +76,21 @@ def setSchemataForInquiry(schema):
     """
       Put the the fields coming from Inquiry in a specific schemata
     """
-    from Products.urban.Inquiry import Inquiry
+    from Products.urban.content.Inquiry import Inquiry
     inquiryFields = Inquiry.schema.filterFields(isMetadata=False)
+    #do not take the 2 first fields into account, this is 'id' and 'title'
+    inquiryFields = inquiryFields[2:]
+    for inquiryField in inquiryFields:
+        if schema[inquiryField.getName()].schemata == 'default':
+            schema[inquiryField.getName()].schemata = 'urban_inquiry'
+
+
+def setSchemataForCODT_Inquiry(schema):
+    """
+      Put the the fields coming from Inquiry in a specific schemata
+    """
+    from Products.urban.content.CODT_Inquiry import CODT_Inquiry
+    inquiryFields = CODT_Inquiry.schema.filterFields(isMetadata=False)
     #do not take the 2 first fields into account, this is 'id' and 'title'
     inquiryFields = inquiryFields[2:]
     for inquiryField in inquiryFields:

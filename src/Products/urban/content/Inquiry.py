@@ -16,7 +16,7 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
-import interfaces
+from Products.urban import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
@@ -97,27 +97,6 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
-    # TODO to remove after testing the update script of migration
-    # DateTimeField(
-    #     name='investigationStart',
-    #     widget=DateTimeField._properties['widget'](
-    #         show_hm=False,
-    #         format="%d/%m/%Y",
-    #         label='Investigationstart',
-    #         label_msgid='urban_label_investigationStart',
-    #         i18n_domain='urban',
-    #     ),
-    # ),
-    # DateTimeField(
-    #     name='investigationEnd',
-    #     widget=DateTimeField._properties['widget'](
-    #         show_hm=False,
-    #         format="%d/%m/%Y",
-    #         label='Investigationend',
-    #         label_msgid='urban_label_investigationEnd',
-    #         i18n_domain='urban',
-    #     ),
-    # ),
     TextField(
         name='investigationDetails',
         allowable_content_types=('text/html',),
@@ -309,6 +288,38 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         position = self._getSelfPosition()
         return translate('inquiry_title_and_number', 'urban', mapping={'number': position + 1}, context=self.REQUEST)
 
+    security.declarePublic('getInquiries')
+    def getInquiries(self):
+        """
+        Returns the existing inquiries
+        """
+        return self._get_inquiry_objs(all_=False)
+
+    security.declarePublic('getAllInquiries')
+    def getAllInquiries(self):
+        """
+        Returns the existing inquiries
+        """
+        return self._get_inquiry_objs(all_=True)
+
+    def _get_inquiry_objs(self, all_=False):
+        """
+        Returns the existing inquiries or announcements
+        """
+        all_inquiries = []
+        other_inquiries = self.objectValues('CODT_Inquiry')
+        if all_ or other_inquiries:
+            all_inquiries.append(self)
+        all_inquiries.extend(list(other_inquiries))
+        return all_inquiries
+
+    security.declarePublic('getUrbanEventInquiries')
+    def getUrbanEventInquiries(self):
+        """
+          Returns the existing UrbanEventInquiries
+        """
+        return self.listFolderContents({'portal_type': 'UrbanEventInquiry'})
+
     def getLastInquiry(self, use_catalog=True):
         return self._getLastEvent(interfaces.IInquiryEvent, use_catalog=use_catalog)
 
@@ -359,6 +370,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         #first of all, we can add an InquiryEvent if an inquiry is defined on the licence at least
         inquiries = self.getAllInquiries()
         urbanEventInquiries = self.getUrbanEventInquiries()
+        import ipdb; ipdb.set_trace()
         #if we have only the inquiry defined on the licence and no start date is defined
         #it means that no inquiryEvent can be added because no inquiry is defined...
         #or if every UrbanEventInquiry have already been added
