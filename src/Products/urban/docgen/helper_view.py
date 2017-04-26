@@ -507,6 +507,20 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             i = i + 1
         return event
 
+    def getEvents(self, title=''):
+        """
+          Return all title's UrbanEvent
+        """
+        opinionRequestsUrbanEvents = self.context.getUrbanEventOpinionRequests()
+        inquiryUrbanEvents = self.context.getUrbanEventInquiries()
+        urbanEvents = self.context.getUrbanEvents()
+        allEvents = opinionRequestsUrbanEvents + inquiryUrbanEvents + urbanEvents
+        events = []
+        for event in allEvents:
+            if event.Title() == title:
+                events.append(event)
+        return events
+
     def query_parcels_in_radius(self, radius='50'):
         """
         """
