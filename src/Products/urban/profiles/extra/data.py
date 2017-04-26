@@ -47,7 +47,7 @@ urbanEventTypes = {
             'title': "Annonce de projet",
             'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
-            'TALCondition': "here/mayAddInquiryEvent",
+            'TALCondition': "here/mayAddAnnouncementEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
