@@ -85,12 +85,10 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
             return ''
         elif (opinions or inquiry) and FD:
             return '115j'
-        elif (opinions or inquiry) and not FD:
-            return '75j'
-        elif FD and (not opinions and not inquiry):
-            return '75j'
-        else:
+        elif not opinions and not inquiry and not FD:
             return '30j'
+        else:
+            return '75j'
 
 
 # end of class CODT_BaseBuildLicence
