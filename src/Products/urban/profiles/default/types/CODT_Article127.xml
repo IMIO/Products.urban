@@ -19,6 +19,7 @@
    <element value="Corporation"/>
    <element value="PortionOut"/>
    <element value="UrbanEvent"/>
+   <element value="UrbanEventAnnouncement"/>
    <element value="UrbanEventInquiry"/>
    <element value="UrbanEventCollege"/>
    <element value="UrbanEventNotificationCollege"/>
