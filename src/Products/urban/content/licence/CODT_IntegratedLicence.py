@@ -77,7 +77,7 @@ class CODT_IntegratedLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMi
         elif opinions and inquiry:
             return '70j'
         elif opinions and not inquiry:
-            return '30j'
+            return '70j'
         else:
             return '30j'
 
