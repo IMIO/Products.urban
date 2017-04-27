@@ -917,11 +917,11 @@ def setupSchedule(context):
 
     if not hasattr(urban_folder, 'schedule'):
         urban_folder.invokeFactory('Folder', id='schedule')
-        # block parents portlet
-        manager = queryUtility(IPortletManager, name='plone.leftcolumn')
-        blacklist = getMultiAdapter((urban_folder, manager), ILocalPortletAssignmentManager)
-        blacklist.setBlacklistStatus(CONTEXT_CATEGORY, True)
     schedule_folder = getattr(urban_folder, 'schedule')
+    # block parents portlet
+    manager = queryUtility(IPortletManager, name='plone.leftcolumn')
+    blacklist = getMultiAdapter((schedule_folder, manager), ILocalPortletAssignmentManager)
+    blacklist.setBlacklistStatus(CONTEXT_CATEGORY, True)
 
     schedule_configs = []
     for urban_type in URBAN_TYPES:

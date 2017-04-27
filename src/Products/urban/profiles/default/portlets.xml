@@ -22,7 +22,7 @@
                 manager="plone.leftcolumn"
                 type="urban.portlet.urbanconfig" />
 
-    <assignment name="config"
+    <assignment name="schedule"
                 category="context"
                 key="/urban/schedule"
                 manager="plone.leftcolumn"
