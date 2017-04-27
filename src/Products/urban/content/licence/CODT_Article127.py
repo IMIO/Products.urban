@@ -78,9 +78,7 @@ class CODT_Article127(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
             return ''
         elif small and not opinions and not inquiry:
             return '60j'
-        elif opinions and inquiry:
-            return '90j'
-        elif opinions and not inquiry:
+        elif not small and not opinions and not inquiry:
             return '90j'
         else:
             return '130j'
