@@ -227,6 +227,11 @@ class IPreliminaryNotice(IGenericLicence):
     """
 
 
+class IProjectMeeting(IGenericLicence):
+    """Marker interface for .ProjectMeeting.ProjectMeeting
+    """
+
+
 class IPatrimonyCertificate(IGenericLicence):
     """Marker interface for .PatrimonyCertificate.PatrimonyCertificate
     """

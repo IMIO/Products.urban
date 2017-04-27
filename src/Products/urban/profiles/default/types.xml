@@ -144,6 +144,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="PreliminaryNotice"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="ProjectMeeting"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="PatrimonyCertificate"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="ConfigTest"

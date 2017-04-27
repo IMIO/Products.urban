@@ -260,6 +260,14 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IProjectMeeting"
+     name="projectmeetingview"
+     class=".projectmeetingview.ProjectMeetingView"
+     template="templates/projectmeetingview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      name="preliminarynotice-macros"
      for="Products.urban.interfaces.IPreliminaryNotice"
      template="templates/preliminarynoticemacros.pt"

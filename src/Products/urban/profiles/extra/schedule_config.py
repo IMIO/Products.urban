@@ -5,7 +5,7 @@ from imio.schedule.content.object_factories import StartConditionObject
 
 
 schedule_config = {
-    'buildlicence': [
+    'codt_buildlicence': [
         {
             'type_name': 'MacroTaskConfig',
             'id': 'incomplet',
