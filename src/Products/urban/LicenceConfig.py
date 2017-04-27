@@ -299,7 +299,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         default_names = {
             'description': 'Récapitulatif',
             'advices': 'Avis',
-            'inquiry': 'Enquêtes',
+            'inquiry': 'Publicité',
             'analysis': 'Analyse Urbanisme',
             'location': 'Aspects légaux',
             'road': 'Voirie',
