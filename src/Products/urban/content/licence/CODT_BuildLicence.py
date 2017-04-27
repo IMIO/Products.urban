@@ -53,6 +53,33 @@ class CODT_BuildLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
 
     schema = CODT_BuildLicence_schema
 
+    def listProcedureChoices(self):
+        vocab = (
+            ('ukn', 'Non determiné'),
+            ('internal_opinions', 'Sollicitation d\'avis internes'),
+            ('external_opinions', 'Sollicitation d\'avis externes'),
+            ('light_inquiry', 'Instruction d\'une annonce de projet'),
+            ('inquiry', 'Instruction d\'une enquête publique'),
+            ('FD', 'Sollicitation du fonctionnaire délégué'),
+        )
+        return DisplayList(vocab)
+
+    def getProcedureDelays(self, *values):
+        selection = [v['val'] for v in values if v['selected']]
+        unknown = 'ukn' in selection
+        opinions = 'external_opinions' in selection
+        inquiry = 'inquiry' in selection or 'light_inquiry' in selection
+        FD = 'FD' in selection
+
+        if unknown:
+            return ''
+        elif (opinions or inquiry) and FD:
+            return '115j'
+        elif not opinions and not inquiry and not FD:
+            return '30j'
+        else:
+            return '75j'
+
 
 registerType(CODT_BuildLicence, PROJECTNAME)
 # end of class CODT_BuildLicence
