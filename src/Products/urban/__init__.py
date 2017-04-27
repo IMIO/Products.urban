@@ -138,6 +138,8 @@ def initialize(context):
     import content.licence.IntegratedLicence
     import content.licence.MiscDemand
     import content.licence.ParcelOutLicence
+    import content.licence.PreliminaryNotice
+    import content.licence.ProjectMeeting
     import content.licence.UrbanCertificateBase
     import content.licence.UrbanCertificateTwo
     import content.licence.UniqueLicence

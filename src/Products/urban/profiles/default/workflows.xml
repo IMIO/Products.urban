@@ -100,6 +100,9 @@
   <type type_id="PreliminaryNotice">
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
+  <type type_id="ProjectMeeting">
+     <bound-workflow workflow_id="urban_licence_workflow" />
+  </type>
   <type type_id="RecipientCadastre">
      <bound-workflow workflow_id="activation_workflow" />
   </type>
