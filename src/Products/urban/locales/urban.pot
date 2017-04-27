@@ -2960,6 +2960,9 @@ msgstr ""
 msgid "urban_label_procedureChoice"
 msgstr ""
 
+msgid "urban_label_prorogation"
+msgstr ""
+
 #. Default: "Protectedbuilding"
 #: GenericLicence.py
 msgid "urban_label_protectedBuilding"
