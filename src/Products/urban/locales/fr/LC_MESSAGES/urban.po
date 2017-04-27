@@ -254,6 +254,9 @@ msgstr "Certificat de patrimoine"
 msgid "PreliminaryNotice"
 msgstr "Demande d'avis préalable"
 
+msgid "ProjectMeeting"
+msgstr "Réunion de projer"
+
 msgid "Proprietary data"
 msgstr "Coordonnées du propriétaire"
 
