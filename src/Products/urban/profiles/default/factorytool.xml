@@ -55,6 +55,7 @@
   <type portal_type="UniqueLicence"/>
   <type portal_type="IntegratedLicence"/>
   <type portal_type="PreliminaryNotice"/>
+  <type portal_type="ProjectMeeting"/>
   <type portal_type="PatrimonyCertificate"/>
  </factorytypes>
 </object>
