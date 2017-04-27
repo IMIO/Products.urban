@@ -23,6 +23,7 @@ from Products.urban.interfaces import INotaryLetter
 from Products.urban.interfaces import IParcelOutLicence
 from Products.urban.interfaces import IPatrimonyCertificate
 from Products.urban.interfaces import IPreliminaryNotice
+from Products.urban.interfaces import IProjectMeeting
 from Products.urban.interfaces import IUniqueLicence
 from Products.urban.interfaces import IUrbanCertificateOne
 from Products.urban.interfaces import IUrbanCertificateTwo
@@ -56,6 +57,7 @@ URBAN_TYPES_INTERFACES = {
     'ParcelOutLicence': IParcelOutLicence,
     'PatrimonyCertificate': IPatrimonyCertificate,
     'PreliminaryNotice': IPreliminaryNotice,
+    'ProjectMeeting': IProjectMeeting,
     'UniqueLicence': IUniqueLicence,
     'UrbanCertificateOne': IUrbanCertificateOne,
     'UrbanCertificateTwo': IUrbanCertificateTwo,
