@@ -2964,6 +2964,9 @@ msgstr "Détails concernant le Périmètre de Revitalisation Urbaine"
 msgid "urban_label_procedureChoice"
 msgstr "Choix de la procédure"
 
+msgid "urban_label_prorogation"
+msgstr "Prorogation"
+
 #. Default: "Protectedbuilding"
 #: GenericLicence.py
 msgid "urban_label_protectedBuilding"

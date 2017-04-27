@@ -16,6 +16,7 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban import interfaces
 from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
 from Products.urban.content.CODT_Inquiry import CODT_Inquiry
@@ -28,7 +29,27 @@ from Products.urban.config import *
 from Products.urban.utils import setSchemataForCODT_Inquiry
 ##/code-section module-header
 
+slave_fields_prorogation = (
+    {
+        'name': 'annoncedDelay',
+        'action': 'value',
+        'vocab_method': 'getProrogationDelays',
+        'control_param': 'values',
+    },
+)
+
 schema = Schema((
+    BooleanField(
+        name='prorogation',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_prorogation,
+            label='Prorogation',
+            label_msgid='urban_label_prorogation',
+            i18n_domain='urban',
+        ),
+        schemata='urban_analysis',
+    ),
 ),
 )
 
@@ -90,6 +111,18 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
         else:
             return '75j'
 
+    def getProrogationDelays(self, *values):
+        procedure_choice = [{'val': v, 'selected': True} for v in self.getProcedureChoice()]
+        base_delay = self.getProcedureDelays(*procedure_choice)
+        if False in values:
+            return base_delay
+
+        prorogated_delay = ''
+        if base_delay:
+            prorogated_delay = '{}j'.format(str(int(base_delay[:-1]) + 30))
+
+        return prorogated_delay
+
 
 # end of class CODT_BaseBuildLicence
 
@@ -113,7 +146,8 @@ def finalizeSchema(schema):
     schema.moveField('requirementFromFD', before='annoncedDelay')
     schema.moveField('townshipCouncilFolder', after='futureRoadCoating')
     schema.moveField('annoncedDelayDetails', after='annoncedDelay')
-    schema.moveField('impactStudy', after='annoncedDelayDetails')
+    schema.moveField('prorogation', after='annoncedDelayDetails')
+    schema.moveField('impactStudy', after='prorogation')
     schema.moveField('procedureChoice', before='description')
     schema.moveField('exemptFDArticle', after='procedureChoice')
     schema.moveField('water', after='futureRoadCoating')
