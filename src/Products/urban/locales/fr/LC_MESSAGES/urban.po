@@ -255,7 +255,7 @@ msgid "PreliminaryNotice"
 msgstr "Demande d'avis préalable"
 
 msgid "ProjectMeeting"
-msgstr "Réunion de projer"
+msgstr "Réunion de projet"
 
 msgid "Proprietary data"
 msgstr "Coordonnées du propriétaire"
