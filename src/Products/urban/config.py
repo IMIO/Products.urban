@@ -97,6 +97,7 @@ ADD_CONTENT_PERMISSIONS = {
     'PersonTitleTerm': 'urban: Add PersonTitleTerm',
     'PortionOut': 'urban: Add PortionOut',
     'PreliminaryNotice': 'urban: Add PreliminaryNotice',
+    'ProjectMeeting': 'urban: Add ProjectMeeting',
     'Recipient': 'urban: Add Recipient',
     'RecipientCadastre': 'urban: Add RecipientCadastre',
     'SpecificFeatureTerm': 'urban: Add SpecificFeatureTerm',
@@ -155,6 +156,7 @@ setDefaultRoles('urban: Add PcaTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PersonTitleTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PortionOut', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PreliminaryNotice', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add ProjectMeeting', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Recipient', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add RecipientCadastre', ("Manager", "Contributor", "Editor"))
 setDefaultRoles('urban: Add SpecificFeatureTerm', ("Manager", "Contributor"))
@@ -183,7 +185,7 @@ URBAN_TYPES = [
     'EnvClassOne', 'EnvClassTwo', 'EnvClassThree',
     'ParcelOutLicence', 'MiscDemand', 'Division', 'NotaryLetter',
     'CODT_BuildLicence', 'CODT_Article127', 'CODT_IntegratedLicence', 'CODT_UniqueLicence',
-    'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne', 'CODT_NotaryLetter',
+    'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne', 'CODT_NotaryLetter', 'ProjectMeeting'
 ]
 
 URBAN_CWATUPE_TYPES = [
@@ -194,7 +196,7 @@ URBAN_CWATUPE_TYPES = [
 
 URBAN_CODT_TYPES = [
     'CODT_BuildLicence', 'CODT_Article127', 'CODT_IntegratedLicence', 'CODT_UniqueLicence',
-    'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne', 'CODT_NotaryLetter',
+    'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne', 'CODT_NotaryLetter', 'ProjectMeeting'
     'MiscDemand', 'PreliminaryNotice', 'PatrimonyCertificate', 'Division',
 ]
 
