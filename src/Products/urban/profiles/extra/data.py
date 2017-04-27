@@ -45,7 +45,7 @@ urbanEventTypes = {
         {
             'id': "annonce-de-projet",
             'title': "Annonce de projet",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': [],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddAnnouncementEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -54,10 +54,6 @@ urbanEventTypes = {
             ),
             'eventTypeType': 'Products.urban.interfaces.IAnnouncementEvent',
             'eventPortalType': 'UrbanEventAnnouncement',
-            'textDefaultValues': (
-                {'text': '\n'.join(default_texts['investigationArticlesTextDefaultValue']), 'fieldname': 'investigationArticlesText'},
-                {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
-            ),
         },
         {
             'id': "enquete-publique",
@@ -84,7 +80,6 @@ urbanEventTypes = {
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
-                {'text': '\n'.join(default_texts['investigationArticlesTextDefaultValue']), 'fieldname': 'investigationArticlesText'},
                 {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
             ),
         },
