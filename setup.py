@@ -57,6 +57,7 @@ setup(name='Products.urban',
           'Products.ContentTypeValidator',
           'Products.DataGridField',
           'Products.MasterSelectWidget',
+          'Products.PasswordStrength',
           'plone.api',  # to remove once we use a plone version including plone.api
           'plone.app.referenceintegrity',
           'plone.namedfile',  # ugly fix because TinyMce needs it but didnt declared it in its setup dependencies
