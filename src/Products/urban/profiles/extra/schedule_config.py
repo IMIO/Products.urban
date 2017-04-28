@@ -2,6 +2,7 @@
 
 from imio.schedule.content.object_factories import EndConditionObject
 from imio.schedule.content.object_factories import StartConditionObject
+from imio.schedule.content.object_factories import CreationConditionObject
 
 
 schedule_config = {
@@ -97,6 +98,9 @@ schedule_config = {
                     'start_conditions': (
                         StartConditionObject('urban.schedule.condition.deposit_done'),
                     ),
+                    'end_conditions': (
+                        EndConditionObject('urban.schedule.condition.deposit_past_20days'),
+                    ),
                     'start_date': 'urban.schedule.start_date.deposit_date',
                     'recurrence_states': ('in_progress'),
                     'activate_recurrency': True,
@@ -119,7 +123,8 @@ schedule_config = {
                         StartConditionObject('urban.schedule.condition.deposit_done'),
                     ),
                     'end_conditions': (
-                        EndConditionObject('urban.schedule.condition.procedure_choice_done'),
+                        EndConditionObject('urban.schedule.condition.procedure_choice_done', 'OR'),
+                        EndConditionObject('urban.schedule.condition.deposit_past_20days'),
                     ),
                     'start_date': 'urban.schedule.start_date.deposit_date',
                     'calculation_delay': (
@@ -131,7 +136,7 @@ schedule_config = {
                     'type_name': 'TaskConfig',
                     'id': 'send_acknoledgment',
                     'title': "Envoyer l'accusé de réception",
-                    'default_assigned_group': 'technical_validators',
+                    'default_assigned_group': 'urban_editors',
                     'default_assigned_user': 'urban.assign_folder_manager',
                     'creation_state': ('accepted',),
                     'starting_states': ('accepted',),
@@ -139,13 +144,91 @@ schedule_config = {
                         StartConditionObject('urban.schedule.condition.acknowledgment_created'),
                     ),
                     'end_conditions': (
-                        EndConditionObject('urban.schedule.condition.acknowledgment_done'),
+                        EndConditionObject(
+                            'urban.schedule.condition.acknowledgment_done',
+                            operator='OR',
+                        ),
+                        EndConditionObject('urban.schedule.condition.deposit_past_20days'),
                     ),
                     'start_date': 'urban.schedule.start_date.deposit_date',
                     'calculation_delay': (
                         'schedule.calculation_default_delay',
                     ),
                     'additional_delay': 20,
+                },
+                {
+                    'type_name': 'TaskConfig',
+                    'id': 'procedure_choice_past_20days',
+                    'title': 'Choix de la procédure après 20 jours',
+                    'default_assigned_group': 'urban_editors',
+                    'default_assigned_user': 'urban.assign_folder_manager',
+                    'creation_state': ('accepted',),
+                    'starting_states': ('accepted',),
+                    'creation_conditions': (
+                        CreationConditionObject('urban.schedule.condition.deposit_past_20days'),
+                    ),
+                    'start_conditions': (
+                        StartConditionObject('urban.schedule.condition.deposit_done'),
+                    ),
+                    'end_conditions': (
+                        EndConditionObject('urban.schedule.condition.procedure_choice_done', 'OR'),
+                        EndConditionObject('urban.schedule.condition.deposit_past_30days'),
+                    ),
+                    'start_date': 'urban.schedule.start_date.deposit_date',
+                    'calculation_delay': (
+                        'schedule.calculation_default_delay',
+                    ),
+                    'additional_delay': 30,
+                },
+                {
+                    'type_name': 'TaskConfig',
+                    'id': 'send_acknoledgment_past_20days',
+                    'title': "Envoyer l'accusé de réception après 20 jours",
+                    'default_assigned_group': 'technical_validators',
+                    'default_assigned_user': 'urban.assign_folder_manager',
+                    'creation_state': ('accepted',),
+                    'starting_states': ('accepted',),
+                    'creation_conditions': (
+                        CreationConditionObject('urban.schedule.condition.deposit_past_20days'),
+                    ),
+                    'start_conditions': (
+                        StartConditionObject('urban.schedule.condition.acknowledgment_created'),
+                    ),
+                    'end_conditions': (
+                        EndConditionObject(
+                            'urban.schedule.condition.acknowledgment_done',
+                            operator='OR',
+                        ),
+                        EndConditionObject('urban.schedule.condition.deposit_past_30days'),
+                    ),
+                    'start_date': 'urban.schedule.start_date.deposit_date',
+                    'calculation_delay': (
+                        'schedule.calculation_default_delay',
+                    ),
+                    'additional_delay': 30,
+                },
+                {
+                    'type_name': 'TaskConfig',
+                    'id': 'procedure_choice_fd',
+                    'title': 'Choix de la procédure par le FD',
+                    'default_assigned_group': 'urban_editors',
+                    'default_assigned_user': 'urban.assign_folder_manager',
+                    'creation_state': ('accepted',),
+                    'starting_states': ('accepted',),
+                    'creation_conditions': (
+                        CreationConditionObject('urban.schedule.condition.deposit_past_30days'),
+                    ),
+                    'start_conditions': (
+                        StartConditionObject('urban.schedule.condition.deposit_done'),
+                    ),
+                    'end_conditions': (
+                        EndConditionObject('urban.schedule.condition.procedure_choice_done'),
+                    ),
+                    'start_date': 'urban.schedule.start_date.deposit_date',
+                    'calculation_delay': (
+                        'schedule.calculation_default_delay',
+                    ),
+                    'additional_delay': None,
                 },
             ],
         },
