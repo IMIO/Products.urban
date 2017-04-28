@@ -32,6 +32,7 @@
   <include package="Products.GenericSetup"/>
   <include package="Products.CMFCore" file="meta.zcml"/>
   <include package="Products.MasterSelectWidget"/>
+  <include package="Products.PasswordStrength"/>
   <include package="plone.app.dexterity" />
   <include package="plone.app.portlets" file="meta.zcml" />
   <include package="plone.app.referenceintegrity"/>
