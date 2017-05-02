@@ -20,6 +20,7 @@
   <include package="five.grok"/>
   <include package="imio.actionspanel"/>
   <include package="imio.dashboard"/>
+  <include package="imio.pm.locales"/>
   <include package="imio.pm.wsclient"/>
   <include package="imio.pm.locales"/>
   <include package="imio.schedule"/>
