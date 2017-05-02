@@ -136,7 +136,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         required=True,
-        schemata='urban_analysis',
+        schemata='urban_description',
         vocabulary='listUsages',
     ),
     StringField(
