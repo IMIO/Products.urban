@@ -70,9 +70,11 @@ class isNotDuplicatedReferenceValidator:
         catalog = api.portal.get_tool('portal_catalog')
         portal_urban = api.portal.get_tool('portal_urban')
 
-        source = licence.getLicenceConfig().getNumerotationSource()
+        licence_config = licence.getLicenceConfig()
+        source = licence_config.getNumerotationSource()
+        regex = licence_config.getReference_regex()
         types_to_check = [t for t in URBAN_TYPES if getattr(portal_urban, t.lower()).getNumerotationSource() == source]
-        ref_num = re.match('\D*(\d*).*', value).groups()[0]
+        ref_num = re.match(regex, value).groups()[0]
 
         similar_licences = catalog(getReference=ref_num, portal_type=types_to_check)
 

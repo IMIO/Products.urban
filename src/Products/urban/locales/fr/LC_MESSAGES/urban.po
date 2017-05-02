@@ -3060,6 +3060,9 @@ msgstr "Référence DGO3"
 msgid "urban_label_referenceTALExpression"
 msgstr "Expression TAL générant la référence"
 
+msgid "urban_label_reference_regex"
+msgstr "Regex d'identification de la référence"
+
 #. Default: "Regionalroad"
 #: Street.py
 msgid "urban_label_regionalRoad"
