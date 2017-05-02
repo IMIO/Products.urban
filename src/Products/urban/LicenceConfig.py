@@ -148,6 +148,16 @@ schema = Schema((
         ),
         schemata='public_settings',
     ),
+    StringField(
+        name='reference_regex',
+        default='\D*(\d*).*',
+        widget=StringField._properties['widget'](
+            label='Reference_regex',
+            label_msgid='urban_label_reference_regex',
+            i18n_domain='urban',
+        ),
+        schemata='public_settings',
+    ),
 
 ),
 )
