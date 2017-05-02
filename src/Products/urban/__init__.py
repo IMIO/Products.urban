@@ -81,6 +81,8 @@ from validators.validator import isNotDuplicatedReferenceValidator
 validation.register(isNotDuplicatedReferenceValidator('isNotDuplicatedReference'))
 ##/code-section custom-init-head
 
+import Products
+from Products.urban.content.licence.BuildLicence import BuildLicence
 
 def initialize(context):
     """initialize product (called by zope)"""
@@ -138,6 +140,7 @@ def initialize(context):
     import content.licence.IntegratedLicence
     import content.licence.MiscDemand
     import content.licence.ParcelOutLicence
+    import content.licence.PatrimonyCertificate
     import content.licence.PreliminaryNotice
     import content.licence.ProjectMeeting
     import content.licence.UrbanCertificateBase
