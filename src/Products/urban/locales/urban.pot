@@ -2948,6 +2948,9 @@ msgstr ""
 msgid "urban_label_prevuDetails"
 msgstr ""
 
+msgid "urban_label_reference_regex"
+msgstr ""
+
 #. Default: "Reparcellingdetails"
 #: GenericLicence.py
 msgid "urban_label_reparcellingDetails"
