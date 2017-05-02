@@ -13,6 +13,7 @@ from Products.urban.browser.table.urbantable import NestedAttachmentsTable
 from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.browser.table.urbantable import ProprietaryTable
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IInquiry
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.interfaces import IUrbanEvent
 
@@ -264,6 +265,8 @@ class LicenceView(BrowserView):
         context = aq_inner(self.context)
         urban_tool = api.portal.get_tool('portal_urban')
         inquirydates = []
+        if not IInquiry.providedBy(context):
+            return inquirydates
         for inquiry in context.getInquiries():
             event = [inq_event for inq_event in context.objectValues('UrbanEventInquiry') if inq_event.getLinkedInquiry() == inquiry]
             event = event and event[0] or None
