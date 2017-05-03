@@ -39,7 +39,7 @@ def migrate_inquiry_eventtype():
                 event_type.setEventPortalType('UrbanEventInquiry')
                 old_fields = event_type.getActivatedFields()
                 if 'investigationStart' not in old_fields:
-                    new_fields = ['investigationStart', 'investigationEnd'] + old_fields
+                    new_fields = ['investigationStart', 'investigationEnd'] + list(old_fields)
                     event_type.setActivatedFields(new_fields)
 
     logger.info("migration step done!")
