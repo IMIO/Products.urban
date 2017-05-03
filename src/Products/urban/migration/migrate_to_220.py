@@ -67,7 +67,7 @@ def block_urban_parent_portlets():
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.1')
     logger.info("starting migration steps")
-    setup_tool = api.portal.get_tool(context, 'portal_setup')
+    setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-imio.schedule:default')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
     block_urban_parent_portlets()
