@@ -1,6 +1,7 @@
 # encoding: utf-8
-from Products.CMFCore.utils import getToolByName
-from Products.urban.interfaces import IBuildLicence
+
+from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IInquiry
 from plone import api
 from zope.component import createObject
 
@@ -13,9 +14,12 @@ def migrateinquiry():
     logger = logging.getLogger('urban: migrate Inquiry into EventInquiry ->')
     logger.info("starting migration step")
     cat = api.portal.get_tool('portal_catalog')
-    licence_brains = cat(object_provides=IBuildLicence.__identifier__)
-    licences = [l.getObject() for l in licence_brains]
+    licence_brains = cat(object_provides=IInquiry.__identifier__)
+    licences = [l.getObject() for l in licence_brains if IGenericLicence.providedBy(l.getObject())]
     for licence in licences:
+        start_date = licence.investigationStart()
+        if not start_date:
+            continue
         event_inquiries = [o for o in licence.objectValues() if o.portal_type == 'UrbanEventInquiry']
         if not event_inquiries:
             event_inquiries = [createObject('UrbanEventInquiry', 'enquete-publique', licence)]
@@ -42,8 +46,4 @@ def migrate(context):
     logger.info("starting migration steps")
     migrateinquiry()
     migrateform_tabbing()
-    logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
-    setup_tool = getToolByName(context, 'portal_setup')
-    setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
-    logger.info("reinstalling urban done!")
     logger.info("migration done!")
