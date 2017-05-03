@@ -17,7 +17,7 @@ def migrateinquiry():
     licence_brains = cat(object_provides=IInquiry.__identifier__)
     licences = [l.getObject() for l in licence_brains if IGenericLicence.providedBy(l.getObject())]
     for licence in licences:
-        start_date = licence.investigationStart
+        start_date = getattr(licence, 'investigationStart', None)
         if not start_date:
             continue
         event_inquiries = [o for o in licence.objectValues() if o.portal_type == 'UrbanEventInquiry']
