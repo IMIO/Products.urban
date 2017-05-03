@@ -38,8 +38,9 @@ def migrate_inquiry_eventtype():
             if 'enquete-publique' in event_type.id:
                 event_type.setEventPortalType('UrbanEventInquiry')
                 old_fields = event_type.getActivatedFields()
-                new_fields = ['investigationStart', 'investigationEnd'] + old_fields
-                event_type.setActivatedFields(new_fields)
+                if 'investigationStart' not in old_fields:
+                    new_fields = ['investigationStart', 'investigationEnd'] + old_fields
+                    event_type.setActivatedFields(new_fields)
 
     logger.info("migration step done!")
 
@@ -68,6 +69,7 @@ def migrate(context):
     logger.info("starting migration steps")
     setup_tool = api.portal.get_tool(context, 'portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-imio.schedule:default')
+    setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
     block_urban_parent_portlets()
     migrate_inquiry_tabs()
     migrate_inquiry_eventtype()
