@@ -93,7 +93,7 @@
      tal:define="putils context/plone_utils;
                  tabs_config view/getTabs">
     <tal:fieldsets repeat="tab_config tabs_config">
-        <tal:tab define="fieldset python: 'urban_%s' % tab_config['value'];
+        <tal:tab define="fieldset python: tab_config['id'];
                          display_name python: tab_config['display_name']">
             <fieldset tal:define="fieldsetid python:putils.normalizeString(fieldset)">
                 <legend tal:content="display_name"
