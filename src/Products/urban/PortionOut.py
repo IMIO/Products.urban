@@ -148,8 +148,6 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
 
     meta_type = 'PortionOut'
     _at_rename_after_creation = True
-    # block local roles acquisition and let the workflow handle that
-    __ac_local_roles_block__ = True
 
     schema = PortionOut_schema
 
