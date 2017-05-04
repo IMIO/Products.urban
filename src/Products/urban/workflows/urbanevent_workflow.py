@@ -9,11 +9,13 @@ class StateRolesMapping(LocalRoleAdapter):
 
     mapping = {
         'in_progress': {
+            'urban_managers': ('Editor',),
             'urban_editors': ('Editor',),
             'urban_readers': ('Reader',),
         },
 
         'closed': {
+            'urban_managers': ('Editor',),
             'urban_editors': ('Editor',),
             'urban_readers': ('Reader',),
         },
