@@ -29,6 +29,11 @@ class ConfigTestProcessingView(BrowserView):
         context = api.content.create(container=self.context, type=portal_type.id, title='footitle', reference='test')
         mGenerateObject = GenerateObject(context=context, request=self.request)
         mGenerateObject.config_content()
+
+        applicant = api.content.create(container=context, type='Applicant', title='ApplicantTitle')
+
+
+
         # event manage
         mLicenceView = LicenceView(context, self.request)
         events = mLicenceView.getUrbanEventTypes()
@@ -40,6 +45,9 @@ class ConfigTestProcessingView(BrowserView):
                 mGeneratEvent.config_event()
             except:
                 print "event error name: %s" % (event.id)
+
+        mGenerateObjectApplicant = GenerateObject(context=applicant, request=self.request)
+        mGenerateObjectApplicant.config_applicant()
 
 
 class GenerateMixin(object):
@@ -76,9 +84,17 @@ class GenerateObject(GenerateMixin):
 
     def config_event(self):
         # TODO error with interface, need to check
+        self.IGNORED_FIELD.append('title')
         for name in self.names:
             if name not in self.IGNORED_FIELD:
                 process(name=name, fields=self.fields, context=self.context, request=self.request)
+
+    def config_applicant(self):
+        for name in self.names:
+            if name not in self.IGNORED_FIELD:
+                me = getattr(self, "_{0}".format(name), process)
+                me(name=name, fields=self.fields, context=self.context, request=self.request)
+
 
     # Custom method for process reference
 
@@ -98,6 +114,11 @@ class GenerateObject(GenerateMixin):
     def _roadEquipments(self, name, fields, context, request=None):
         value = {'road_equipment': 'eau', 'road_equipment_details': 'eau'}
         self.custum_setter(name, value, fields, context)
+
+    def _personTitle(self, name, fields, context, request=None):
+        value = 'master'
+        setter = getattr(context, fields[name].mutator)
+        setter(value)
 
     def custum_setter(self, name, value, fields, context):
         setter = getattr(context, fields[name].mutator)
@@ -129,10 +150,10 @@ def process(name, fields, context, request):
             msgid = getattr(field.widget, 'label_msgid', field.widget.label)
             domain = getattr(field.widget, 'domain', 'urban')
             value = translate(msgid, domain, context=request)
-
     setter = getattr(context, field.mutator)
     if value:
         setter(value)
+
 
 
 def process_vocabulary(field, context):
