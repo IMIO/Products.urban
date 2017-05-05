@@ -26,7 +26,7 @@ from Products.urban.config import *
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.utils import DisplayList
 from Products.urban.interfaces import IGenericLicence
-from Products.urban.services import cadastre
+from Products.urban import services
 ##/code-section module-header
 
 schema = Schema((
@@ -300,7 +300,9 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
          Return the "parcel historic" object of this parcel
         """
         reference = self.reference_as_dict()
+        cadastre = services.cadastre.new_session()
         historic = cadastre.query_parcel_historic(**reference)
+        cadastre.close()
         return historic
 
     def get_capakey(self):
