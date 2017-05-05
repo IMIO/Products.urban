@@ -3,7 +3,7 @@
 from Products.Five import BrowserView
 from Acquisition import aq_inner
 
-from Products.urban.services import cadastre
+from Products.urban import services
 
 from plone import api
 
@@ -29,6 +29,7 @@ class ParcelsConsistencyView(BrowserView):
             'critical_outdated_parcels': [],
             'outdated_parcels': [],
         }
+        cadastre = services.cadastre.new_session()
         for brain in parcelbrains:
             outdated = False
             parcel = brain.getObject()
@@ -43,4 +44,5 @@ class ParcelsConsistencyView(BrowserView):
                     result['critical_outdated_parcels'].append(infos)
                 else:
                     result['outdated_parcels'].append(infos)
+        cadastre.close()
         return result

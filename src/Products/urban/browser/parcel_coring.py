@@ -9,8 +9,7 @@ from zope.schema.interfaces import IVocabularyFactory
 import collections
 import json
 
-from Products.urban.services import cadastre
-from Products.urban.services import parcel_coring
+from Products.urban import services
 
 
 class CoringUtility(object):
@@ -214,11 +213,16 @@ class ParcelCoringView(BrowserView):
         """
         """
         parcels = self.context.getOfficialParcels()
+        cadastre = services.cadastre.new_session()
         parcels_wkt = cadastre.query_parcels_wkt(parcels)
+        cadastre.close()
+
+        parcel_coring = services.parcel_coring.new_session()
         coring_response = parcel_coring.get_coring(
             parcels_wkt,
             self.request.get('st', coring_type)
         )
+        parcel_coring.close()
 
         status = coring_response.status_code
         if status != 200:

@@ -30,7 +30,7 @@ from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import ILicenceContainer
 from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
-from Products.urban.services import cadastre
+from Products.urban import services
 from Products.urban.utils import generatePassword
 from Products.urban.utils import getAllLicenceFolderIds
 from Products.urban.utils import getLicenceFolderId
@@ -1215,7 +1215,11 @@ def createLicence(site, licence_type, data):
     # call post script
     licence.at_post_create_script()
     # add a dummy portion out
-    division_code = division = cadastre.can_connect() and str(cadastre.get_all_divisions()[0][0]) or ''
+    division_code = division = ''
+    if services.cadastre.can_connect():
+        session = services.cadastre.new_session()
+        division_code = division = str(session.get_all_divisions()[0][0])
+        session.close()
     portionout_data = {
         'divisionCode': division_code, 'division': division, 'section': 'A', 'radical': '84',
         'exposant': 'C', 'partie': False
@@ -1359,7 +1363,9 @@ def setupExtra(context):
 
     #we add the map coordinates
     if not portal_urban.getMapExtent() or portal_urban.getMapExtent().count(', ') != 3:
-        coords = cadastre.query_map_coordinates()
+        session = services.cadastre.new_session()
+        coords = session.query_map_coordinates()
+        session.close()
         portal_urban.setMapExtent(coords)
 
     if not hasattr(portal_urban, "additional_layers"):
