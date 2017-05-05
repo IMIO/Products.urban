@@ -45,8 +45,7 @@ def migrate_inquiry_eventtype():
                     new_fields = ['investigationStart', 'investigationEnd'] + list(old_fields)
                 if 'explanationsDate' in old_fields:
                     index = new_fields.index('explanationsDate')
-                    new_fields.remove(index)
-                    new_fields.insert(index, 'explanationStartSDate')
+                    new_fields[index] = 'explanationStartSDate'
                 event_type.setActivatedFields(new_fields)
 
     logger.info("migration step done!")
