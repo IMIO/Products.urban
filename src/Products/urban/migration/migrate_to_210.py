@@ -10,7 +10,7 @@ import logging
 logger = logging.getLogger('urban: migrations')
 
 
-def migrateinquiry():
+def migrate_inquiry_date_fields():
     logger = logging.getLogger('urban: migrate Inquiry into EventInquiry ->')
     logger.info("starting migration step")
     cat = api.portal.get_tool('portal_catalog')
@@ -44,6 +44,6 @@ def migrateform_tabbing():
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.1')
     logger.info("starting migration steps")
-    migrateinquiry()
+    migrate_inquiry_date_fields()
     migrateform_tabbing()
     logger.info("migration done!")

@@ -52,7 +52,7 @@ from Products.urban.utils import getCurrentFolderManager
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS
 from Products.urban.interfaces import IUrbanVocabularyTerm, IContactFolder
 from Products.urban.cartography import config as carto_config
-from Products.urban.services import cadastre
+from Products.urban import services
 
 from datetime import date as _date
 
@@ -234,6 +234,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if not cadastre.can_connect():
             return rows
 
+        cadastre = services.cadastre.new_session()
         for division in cadastre.get_all_divisions():
             division_id = str(division[0])
             name = division[1]
@@ -246,6 +247,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 }
             )
             rows.append(row)
+        cadastre.close()
         return rows
 
     security.declarePublic('getVocabularyDefaultValue')

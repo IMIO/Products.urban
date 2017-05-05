@@ -10,7 +10,7 @@ from Products.urban.browser.table.urbantable import DocumentsTable
 from Products.urban.browser.table.urbantable import AttachmentsTable
 from Products.urban.browser.table.urbantable import ClaimantsTable
 from Products.urban.browser.table.urbantable import RecipientsCadastreTable
-from Products.urban.services import cadastre
+from Products.urban import services
 
 from plone import api
 
@@ -332,6 +332,7 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         event_path = portal_url.getPortalPath() + '/' + '/'.join(portal_url.getRelativeContentPath(context))
 
         licence = context.aq_inner.aq_parent
+        cadastre = services.cadastre.new_session()
         neighbour_parcels = cadastre.query_parcels_in_radius(
             center_parcels=licence.getParcels(),
             radius=radius
@@ -371,6 +372,7 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                 #create the PortionOut using the createPortionOut method...
                 with api.env.adopt_roles(['Manager']):
                     context.portal_urban.createPortionOut(container=newrecipient, **parcel.reference_as_dict())
+        cadastre.close()
         return context.REQUEST.RESPONSE.redirect(context.absolute_url() + '/#fieldsetlegend-urbaneventinquiry_recipients')
 
     def getInquiryRadius(self):

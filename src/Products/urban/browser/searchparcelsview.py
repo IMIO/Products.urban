@@ -5,7 +5,7 @@ from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.interfaces import IDivision
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanCertificateBase
-from Products.urban.services import cadastre
+from Products.urban import services
 from Products.urban.services.cadastral import IGNORE
 
 from plone import api
@@ -64,12 +64,14 @@ class SearchParcelsView(BrowserView):
         return self.index()
 
     def _init_divisions(self):
-        if not cadastre.check_connection():
+        if not services.cadastre.check_connection():
             return None
 
         all_divisions = [('', translate('all_divisions', 'urban', context=self.request))]
+        cadastre = services.cadastre.new_session()
         for division in cadastre.get_all_divisions():
             all_divisions.append(division)
+        cadastre.close()
 
         return all_divisions
 
@@ -137,7 +139,9 @@ class SearchParcelsView(BrowserView):
         if options.get('parcel_history'):
             return []
 
+        cadastre = services.cadastre.new_session()
         query_result = cadastre.query_parcels(**search_args)
+        cadastre.close()
 
         if options.get('browse_old_parcels'):
             old_parcels = self.search_old_parcels(parcels_to_ignore=query_result)
@@ -152,7 +156,9 @@ class SearchParcelsView(BrowserView):
         to_ignore = set([str(prc) for prc in parcels_to_ignore])
         search_args = self.extract_search_criterions(self.request)
 
+        cadastre = services.cadastre.new_session()
         query_result = cadastre.query_old_parcels(**search_args)
+        cadastre.close()
 
         search_result = []
         for parcel in query_result:
@@ -167,7 +173,9 @@ class SearchParcelsView(BrowserView):
         Return the concerned parcels
         """
         search_args = self.extract_parcel_reference_criterions(self.request)
+        cadastre = services.cadastre.new_session()
         historic = cadastre.query_parcel_historic(**search_args)
+        cadastre.close()
         return historic
 
     def createParcelAndProprietary(self, parcel_data, proprietary_data):
