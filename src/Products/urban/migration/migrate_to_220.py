@@ -40,7 +40,7 @@ def migrate_inquiry_eventtype():
             if 'enquete-publique' in event_type.id:
                 event_type.setEventPortalType('UrbanEventInquiry')
                 old_fields = event_type.getActivatedFields()
-                new_fields = old_fields
+                new_fields = list(old_fields)
                 if 'investigationStart' not in old_fields:
                     new_fields = ['investigationStart', 'investigationEnd'] + list(old_fields)
                 if 'explanationsDate' in old_fields:
