@@ -4,7 +4,7 @@ from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import ILicencePortionOut
-from Products.urban.services import cadastre
+from Products.urban import services
 
 from plone import api
 
@@ -36,7 +36,9 @@ def setValidParcel(parcel, event):
     is_official = True
     references = parcel.reference_as_dict()
     try:
+        cadastre = services.cadastre.new_session()
         is_outdated = cadastre.is_outdated_parcel(**references)
+        cadastre.close()
         parcel.setOutdated(is_outdated)
     except:
         is_official = False
@@ -62,6 +64,7 @@ def setEnvironmentLicencePreviousLicencesField(parcel, event):
     catalog = api.portal.get_tool('portal_catalog')
     parcels = licence.objectValues('PortionOut')
     parcel_infos = set()
+    cadastre = services.cadastre.new_session()
 
     for parcel in parcels:
         parcel_infos.add(parcel.getIndexValue())
@@ -77,6 +80,8 @@ def setEnvironmentLicencePreviousLicencesField(parcel, event):
 
         for ref in parcel_historic.getAllIndexableRefs():
             parcel_infos.add(ref)
+
+    cadastre.close()
 
     related_brains = catalog(
         object_provides=IEnvironmentBase.__identifier__,

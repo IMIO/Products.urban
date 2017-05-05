@@ -3,7 +3,7 @@
 from Products.Five import BrowserView
 
 from Products.urban.interfaces import IGenericLicence
-from Products.urban.services import cadastre
+from Products.urban import services
 from Products.urban.services.cadastral import ParcelHistoric
 
 from plone import api
@@ -27,5 +27,7 @@ class ParcelsInfo(BrowserView):
         return licence_brains
 
     def get_parcel(self, capakey):
+        cadastre = services.cadastre.new_session()
         parcel = cadastre.query_parcel_by_capakey(capakey)
+        cadastre.close()
         return parcel

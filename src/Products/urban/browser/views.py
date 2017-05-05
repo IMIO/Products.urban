@@ -5,7 +5,7 @@ from Products.CMFPlone.utils import safe_hasattr
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.urban import config
 from Products.urban.cartography import config as carto_config
-from Products.urban.services import cadastre
+from Products.urban import services
 from Products.urban.utils import getMd5Signature
 
 from plone import api
@@ -113,7 +113,9 @@ class WMC(BrowserView):
         else:
             parcels = self.context.getParcels()
             if parcels:
+                cadastre = services.cadastre.new_session()
                 result = cadastre.query_parcels_coordinates(parcels)
+                cadastre.close()
                 try:
                     self.xmin = result[0]
                     self.ymin = result[1]
