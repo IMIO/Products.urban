@@ -4,6 +4,8 @@ from plone import api
 from plone.portlets.constants import CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_TYPE_CATEGORY
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import ILocalPortletAssignmentManager
+from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IInquiry
 from zope.component import getMultiAdapter
 from zope.component import getUtilitiesFor
 
@@ -38,10 +40,30 @@ def migrate_inquiry_eventtype():
             if 'enquete-publique' in event_type.id:
                 event_type.setEventPortalType('UrbanEventInquiry')
                 old_fields = event_type.getActivatedFields()
+                new_fields = old_fields
                 if 'investigationStart' not in old_fields:
                     new_fields = ['investigationStart', 'investigationEnd'] + list(old_fields)
-                    event_type.setActivatedFields(new_fields)
+                if 'explanationsDate' in old_fields:
+                    index = new_fields.index('explanationsDate')
+                    new_fields.remove(index)
+                    new_fields.insert(index, 'explanationStartSDate')
+                event_type.setActivatedFields(new_fields)
 
+    logger.info("migration step done!")
+
+
+def migrate_inquiry_explanationsdate_field():
+    logger = logging.getLogger('urban: migrate inquiry explanationsDate to explanationStartSDate')
+    logger.info("starting migration step")
+    cat = api.portal.get_tool('portal_catalog')
+    licence_brains = cat(object_provides=IInquiry.__identifier__)
+    licences = [l.getObject() for l in licence_brains if IGenericLicence.providedBy(l.getObject())]
+    for licence in licences:
+        event_inquiries = [o for o in licence.objectValues() if o.portal_type == 'UrbanEventInquiry']
+        for inquiry in event_inquiries:
+            if hasattr(inquiry, 'explanationsDate'):
+                inquiry.explanationStartSDate = inquiry.explanationsDate
+                delattr(inquiry, 'explanationsDate')
     logger.info("migration step done!")
 
 
@@ -73,4 +95,5 @@ def migrate(context):
     block_urban_parent_portlets()
     migrate_inquiry_tabs()
     migrate_inquiry_eventtype()
+    migrate_inquiry_explanationsdate_field()
     logger.info("migration done!")
