@@ -51,8 +51,7 @@
   </permission-map>
   <permission-map name="Modify view template"
                   acquired="False">
-   <permission-role>Manager
-Manager</permission-role>
+   <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="Review portal content"
                   acquired="False">
