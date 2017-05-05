@@ -231,7 +231,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         """
         rows = []
-        if not cadastre.can_connect():
+        if not services.cadastre.can_connect():
             return rows
 
         cadastre = services.cadastre.new_session()
