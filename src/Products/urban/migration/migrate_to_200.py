@@ -36,7 +36,6 @@ def migrate_deleted_permissions_workflow(context):
         licence.manage_permission('urban: Add UrbanEvent', roles=[], acquire=1)
         licence.manage_permission('urban: Add Layer', roles=[], acquire=1)
         licence.manage_permission('urban: Add Inquiry', roles=[], acquire=1)
-        licence.manage_permission('urban: Add WorkLocation', roles=[], acquire=1)
         logger.info("restored licence : %s" % licence.Title())
     logger.info("migration step done!")
 
