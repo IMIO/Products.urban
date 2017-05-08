@@ -78,7 +78,7 @@ def setEnvironmentLicencePreviousLicencesField(parcel, event):
         if not parcel_historic:
             break
 
-        for ref in parcel_historic.getAllIndexableRefs():
+        for ref in parcel_historic.get_all_reference_indexes():
             parcel_infos.add(ref)
 
     cadastre.close()
