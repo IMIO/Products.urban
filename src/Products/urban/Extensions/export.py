@@ -72,7 +72,7 @@ def _export_document_templates(licence_types=URBAN_TYPES, with_event_structure=T
                             name=doc.id,
                         )
                         if not doc.id.endswith('.odt'):
-                            doc_name += '.odt',
+                            doc_name += '.odt'
 
                         doc_export = open(doc_name, 'arw')
                         doc_export.write(doc.get_file().data)
