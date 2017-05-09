@@ -51,7 +51,7 @@ def _export_document_templates(licence_types=URBAN_TYPES, with_event_structure=T
 
         licence_path = '{path}/{licence_type}'.format(
             path=export_path,
-            licence_type=licence_type.lower().replace('/', ' ')
+            licence_type=licence_type.lower()
         )
         os.mkdir(licence_path)
 
@@ -67,9 +67,10 @@ def _export_document_templates(licence_types=URBAN_TYPES, with_event_structure=T
                 for doc in urbanevent.objectValues():
                     if api.content.get_state(doc) == 'enabled':
                         print(' {} -> {}'.format(licence_type.lower(), doc.id))
-                        doc_name = '{path}/{name}'.format(
+                        doc_name = '{path}/{name}{extension}'.format(
                             path=with_event_structure and event_path or licence_path,
-                            name=doc.id
+                            name=doc.id,
+                            extension=doc.id.endswith('.odt') and '' or '.odt',
                         )
                         doc_export = open(doc_name, 'arw')
                         doc_export.write(doc.get_file().data)
