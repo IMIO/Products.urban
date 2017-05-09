@@ -51,9 +51,9 @@ def _export_document_templates(licence_types=URBAN_TYPES, with_event_structure=T
 
         licence_path = '{path}/{licence_type}'.format(
             path=export_path,
-            licence_type=licence_type.lower()
+            licence_type=licence_type.lower().replace('/', ' ')
         )
-        os.mkdir(licence_path.replace('/', ' '))
+        os.mkdir(licence_path)
 
         urbanevents = config.urbaneventtypes
         for urbanevent in urbanevents.objectValues():
@@ -61,7 +61,7 @@ def _export_document_templates(licence_types=URBAN_TYPES, with_event_structure=T
                 if with_event_structure:
                     event_path = '{path}/{event_name}'.format(
                         path=licence_path,
-                        event_name=urbanevent.Title()
+                        event_name=urbanevent.Title().replace('/', ' ')
                     )
                     os.mkdir(event_path)
                 for doc in urbanevent.objectValues():
