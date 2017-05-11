@@ -4,6 +4,7 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.urban.events.urbanEventEvents import setEventTypeType
 from Products.urban.interfaces import IEventTypeType
+from Products.urban.interfaces import IUrbanEvent
 
 from plone import api
 
@@ -40,9 +41,10 @@ def updateEventType(urban_event_type, event):
     for ref_brain in ref_brains:
         ref = ref_brain.getObject()
         urban_event = ref.getSourceObject()
-        # clean previous event type interface
-        for provided_interface in providedBy(urban_event).flattened():
-            if IEventTypeType.providedBy(provided_interface):
-                noLongerProvides(urban_event, provided_interface)
-        # add new provided interface
-        setEventTypeType(urban_event, event)
+        if IUrbanEvent.providedBy(urban_event):
+            # clean previous event type interface
+            for provided_interface in providedBy(urban_event).flattened():
+                if IEventTypeType.providedBy(provided_interface):
+                    noLongerProvides(urban_event, provided_interface)
+            # add new provided interface
+            setEventTypeType(urban_event, event)
