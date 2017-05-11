@@ -6,6 +6,7 @@ from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import ILocalPortletAssignmentManager
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IInquiry
+from Products.urban.interfaces import IUrbanCertificateBase
 from zope.component import getMultiAdapter
 from zope.component import getUtilitiesFor
 
@@ -98,6 +99,39 @@ def block_urban_parent_portlets():
     logger.info("migration step done!")
 
 
+def migrate_python_expression_of_specificfeatures():
+    logger = logging.getLogger('urban: block urban folder portlets')
+    logger.info("starting migration step")
+    catalog = api.portal.get_tool('portal_catalog')
+
+    voc_term_brains = catalog(portal_type='SpecificFeatureTerm')
+    for brain in voc_term_brains:
+        voc_term = brain.getObject()
+        if '[[python: ' in voc_term.description():
+            new_description = voc_term.description().replace('[[python: ', '[[')
+            voc_term.setDescription(new_description)
+            voc_term.reindexObject()
+
+    field_ids = [
+        'specificFeatures',
+        'roadSpecificFeatures',
+        'locationSpecificFeatures',
+        'townshipSpecificFeatures'
+    ]
+    licence_brains = catalog(object_provides=IUrbanCertificateBase.__identifier__)
+    for brain in licence_brains:
+        licence = brain.getObject()
+        for field_id in field_ids:
+            specificfeature_field = licence.getField(field_id)
+            field_value = specificfeature_field.get(licence)
+            for row in field_value:
+                new_text = field_value['text'].replace('[[python: ', '[[')
+                field_value['text'] = new_text
+        logger.info("migrated licence {} {}".format(licence.id, licence.Title()))
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.1')
     logger.info("starting migration steps")
@@ -107,6 +141,7 @@ def migrate(context):
     block_urban_parent_portlets()
     migrate_inquiry_tabs()
     migrate_inquiry_eventtype()
-    migrate_opinionrequest_eventtype()
     migrate_inquiry_explanationsdate_field()
+    migrate_opinionrequest_eventtype()
+    migrate_python_expression_of_specificfeatures()
     logger.info("migration done!")
