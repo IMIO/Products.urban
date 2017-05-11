@@ -124,9 +124,12 @@ def migrate_python_expression_of_specificfeatures():
         for field_id in field_ids:
             specificfeature_field = licence.getField(field_id)
             field_value = specificfeature_field.get(licence)
+            new_field_value = []
             for row in field_value:
                 new_text = row['text'].replace('[[python: ', '[[')
                 row['text'] = new_text
+                new_field_value.append(row)
+            specificfeature_field.set(licence, new_field_value)
         logger.info("migrated licence {} {}".format(licence.id, licence.Title()))
 
     logger.info("migration step done!")
