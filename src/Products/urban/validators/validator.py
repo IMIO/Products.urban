@@ -74,7 +74,13 @@ class isNotDuplicatedReferenceValidator:
         source = licence_config.getNumerotationSource()
         regex = licence_config.getReference_regex()
         types_to_check = [t for t in URBAN_TYPES if getattr(portal_urban, t.lower()).getNumerotationSource() == source]
-        ref_num = re.match(regex, value).groups()
+        match = re.match(regex, value)
+        if not match:
+            return translate(
+                _('error_reference', default=u"This reference does not match the expected format of {}".format(regex))
+            )
+
+        ref_num = match.groups()
 
         similar_licences = catalog(getReference=ref_num, portal_type=types_to_check)
 
