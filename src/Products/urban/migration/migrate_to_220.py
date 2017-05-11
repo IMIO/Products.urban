@@ -66,6 +66,19 @@ def migrate_inquiry_explanationsdate_field():
     logger.info("migration step done!")
 
 
+def migrate_opinionrequest_eventtype():
+    logger = logging.getLogger('urban: migrate opinion request event type')
+    logger.info("starting migration step")
+    portal_urban = api.portal.get_tool('portal_urban')
+    licence_configs = portal_urban.objectValues('LicenceConfig')
+    for licence_config in licence_configs:
+        eventtype_folder = licence_config.urbaneventtypes
+        for event_type in eventtype_folder.objectValues('OpinionRequestEventType'):
+            event_type.setEventPortalType('UrbanEventOpinionRequest')
+
+    logger.info("migration step done!")
+
+
 def block_urban_parent_portlets():
     logger = logging.getLogger('urban: block urban folder portlets')
     logger.info("starting migration step")
@@ -94,5 +107,6 @@ def migrate(context):
     block_urban_parent_portlets()
     migrate_inquiry_tabs()
     migrate_inquiry_eventtype()
+    migrate_opinionrequest_eventtype()
     migrate_inquiry_explanationsdate_field()
     logger.info("migration done!")
