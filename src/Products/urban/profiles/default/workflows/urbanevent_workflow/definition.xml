@@ -15,12 +15,17 @@
  <permission>Review portal content</permission>
  <permission>Modify view template</permission>
  <permission>urban: Add Claimant</permission>
+ <permission>ATContentTypes: Add Image</permission>
  <permission>Access contents information</permission>
  <state state_id="closed"
         title="closed"
         i18n:attributes="title">
   <exit-transition transition_id="reopen"/>
   <permission-map name="ATContentTypes: Add File"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="ATContentTypes: Add Image"
                   acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
@@ -81,6 +86,12 @@
         i18n:attributes="title">
   <exit-transition transition_id="close"/>
   <permission-map name="ATContentTypes: Add File"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+  </permission-map>
+  <permission-map name="ATContentTypes: Add Image"
                   acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Contributor</permission-role>
