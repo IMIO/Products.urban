@@ -539,6 +539,27 @@ msgstr ""
 msgid "close_prevention_area"
 msgstr ""
 
+msgid "codt_article127_urbanconfig_title"
+msgstr ""
+
+msgid "codt_buildlicence_urbanconfig_title"
+msgstr ""
+
+msgid "codt_integratedlicence_urbanconfig_title"
+msgstr ""
+
+msgid "codt_notaryletter_urbanconfig_title"
+msgstr ""
+
+msgid "codt_uniquelicence_urbanconfig_title"
+msgstr ""
+
+msgid "codt_urbancertificateone_urbanconfig_title"
+msgstr ""
+
+msgid "codt_urbancertificatetwo_urbanconfig_title"
+msgstr ""
+
 # street_referencedatagridwidget
 msgid "colnameTitle"
 msgstr ""
@@ -925,6 +946,9 @@ msgstr ""
 msgid "inquiry_to"
 msgstr ""
 
+msgid "integratedlicence_urbanconfig_title"
+msgstr ""
+
 msgid "investigationarticles_folder_title"
 msgstr ""
 
@@ -1273,6 +1297,9 @@ msgstr ""
 msgid "pashs_folder_title"
 msgstr ""
 
+msgid "patrimonycertificate_urbanconfig_title"
+msgstr ""
+
 msgid "pca_fieldset_legend"
 msgstr ""
 
@@ -1343,6 +1370,9 @@ msgstr ""
 msgid "portionout_details"
 msgstr ""
 
+msgid "preliminarynotice_urbanconfig_title"
+msgstr ""
+
 msgid "prenu_folder_title"
 msgstr ""
 
@@ -1350,6 +1380,9 @@ msgid "prevu_folder_title"
 msgstr ""
 
 msgid "reparcelling_folder_title"
+msgstr ""
+
+msgid "projectmeeting_urbanconfig_title"
 msgstr ""
 
 msgid "proprietaries"
@@ -3660,6 +3693,9 @@ msgstr ""
 msgid "urbancertificatetwos"
 msgstr ""
 
+msgid "urbancertificatetwo_urbanconfig_title"
+msgstr ""
+
 msgid "urbaneventtypes_folder_title"
 msgstr ""
 
@@ -3703,6 +3739,9 @@ msgid "years"
 msgstr ""
 
 msgid "zip_folder_title"
+msgstr ""
+
+msgid "uniquelicence_urbanconfig_title"
 msgstr ""
 
 #. Default: "concentratedrunoffsrisk"
