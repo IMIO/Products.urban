@@ -100,7 +100,7 @@ def block_urban_parent_portlets():
 
 
 def migrate_python_expression_of_specificfeatures():
-    logger = logging.getLogger('urban: block urban folder portlets')
+    logger = logging.getLogger('urban: sepficic features python expressions')
     logger.info("starting migration step")
     catalog = api.portal.get_tool('portal_catalog')
 
@@ -135,6 +135,19 @@ def migrate_python_expression_of_specificfeatures():
     logger.info("migration step done!")
 
 
+def migrate_map_layers():
+    logger = logging.getLogger('urban: sepficic features python expressions')
+    logger.info("starting migration step")
+    catalog = api.portal.get_tool('portal_catalog')
+
+    layer_brains = catalog(portal_type='SpecificFeatureTerm')
+    for brain in layer_brains:
+        layer = brain.getObject()
+        layer.setWMSUrl('http://geoserver1.communesplone.be/geoserver/gwc/service/wms')
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.1')
     logger.info("starting migration steps")
@@ -147,4 +160,5 @@ def migrate(context):
     migrate_inquiry_explanationsdate_field()
     migrate_opinionrequest_eventtype()
     migrate_python_expression_of_specificfeatures()
+    migrate_map_layers()
     logger.info("migration done!")
