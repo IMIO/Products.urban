@@ -540,6 +540,27 @@ msgstr "Cliquez ici pour voir ou ajouter des documents"
 msgid "close_prevention_area"
 msgstr "Zone de prévention rapprochée"
 
+msgid "codt_article127_urbanconfig_title"
+msgstr "Paramètres des permis publics"
+
+msgid "codt_buildlicence_urbanconfig_title"
+msgstr "Paramètres des Permis d'urbanisme (CODT)"
+
+msgid "codt_integratedlicence_urbanconfig_title"
+msgstr "Paramètres des permis intégrés (CODT)"
+
+msgid "codt_notaryletter_urbanconfig_title"
+msgstr "Paramètres des lettres de notaire"
+
+msgid "codt_uniquelicence_urbanconfig_title"
+msgstr "Paramètres des permis uniques"
+
+msgid "codt_urbancertificateone_urbanconfig_title"
+msgstr "Paramètres des certificats d'urbanisme 1 (CODT)"
+
+msgid "codt_urbancertificatetwo_urbanconfig_title"
+msgstr "Paramètres des certificats d'urbanisme 2 (CODT)"
+
 # street_referencedatagridwidget
 msgid "colnameTitle"
 msgstr "Rue ou lieu-dit"
@@ -929,6 +950,9 @@ msgstr "Enquête n°${number}"
 msgid "inquiry_to"
 msgstr "au"
 
+msgid "integratedlicence_urbanconfig_title"
+msgstr "Paramètres des permis intégrés"
+
 msgid "investigationarticles_folder_title"
 msgstr "Articles pour les enquêtes"
 
@@ -1280,6 +1304,9 @@ msgstr "Couche parcelles"
 msgid "pashs_folder_title"
 msgstr "PASH"
 
+msgid "patrimonycertificate_urbanconfig_title"
+msgstr "Paramètres des certificats de patrimoine"
+
 msgid "pca_fieldset_legend"
 msgstr "Plan Communal d'Aménagement"
 
@@ -1344,11 +1371,17 @@ msgstr "Configuration de 'urban'"
 msgid "portionout_details"
 msgstr "Détails de la référence cadastrale"
 
+msgid "preliminarynotice_urbanconfig_title"
+msgstr "Paramètres des avis préalables"
+
 msgid "prenu_folder_title"
 msgstr "Périmètre de Rénovation Urbaine"
 
 msgid "prevu_folder_title"
 msgstr "Périmètre de Revitalisation Urbaine"
+
+msgid "projectmeeting_urbanconfig_title"
+msgstr "Paramètres des réunions de projet"
 
 msgid "proprietaries"
 msgstr "Propriétaire(s)"
@@ -1512,6 +1545,9 @@ msgstr "Catégories de dossiers communales"
 
 msgid "townshipspecificfeatures_folder_title"
 msgstr "Particularités du bien communales"
+
+msgid "uniquelicence_urbanconfig_title"
+msgstr "Paramètres des permis uniques"
 
 #. Default: "UnoEnabledPython"
 #: UrbanTool.py
@@ -3685,6 +3721,9 @@ msgstr "Paramètres des Certificats d'urbanisme 1"
 
 msgid "urbancertificateones"
 msgstr "Certificats d'urbanisme 1"
+
+msgid "urbancertificatetwo_urbanconfig_title"
+msgstr "Paramètres des certificats d'urbanisme 2"
 
 msgid "urbancertificatetwos"
 msgstr "Certificats d'urbanisme 2"

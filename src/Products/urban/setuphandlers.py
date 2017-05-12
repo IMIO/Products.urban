@@ -343,6 +343,7 @@ def addUrbanConfigFolders(context):
             config_folder.reindexObject()
         else:
             config_folder = getattr(tool, licenceConfigId)
+            config_folder.setTitle(_("%s_urbanconfig_title" % urban_type.lower(), 'urban'))
             config_folder.licencePortalType = urban_type
             config_folder.reindexObject()
 
