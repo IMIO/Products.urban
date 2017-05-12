@@ -140,7 +140,7 @@ def migrate_map_layers():
     logger.info("starting migration step")
     catalog = api.portal.get_tool('portal_catalog')
 
-    layer_brains = catalog(portal_type='SpecificFeatureTerm')
+    layer_brains = catalog(portal_type='Layer')
     for brain in layer_brains:
         layer = brain.getObject()
         layer.setWMSUrl('http://geoserver1.communesplone.be/geoserver/gwc/service/wms')
