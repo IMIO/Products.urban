@@ -65,6 +65,13 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IInquiry"
+     name="inquirymacros"
+     template="templates/inquiry.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="*"
      name="map"
      class=".mapview.MapView"
