@@ -23,7 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 
-##code-section module-header #fill in your manual code here
+#from #code-section module-header #fill in your manual code here
 ##/code-section module-header
 
 schema = Schema((
