@@ -16,9 +16,10 @@ schedule_config = {
             'creation_state': ('incomplete',),
             'starting_states': ('incomplete',),
             'ending_states': ('in_progress',),
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.incomplete_first_time'),
+            ),
             'start_date': 'schedule.start_date.subtask_highest_due_date',
-            'activate_recurrency': True,
-            'recurrence_states': ('incomplete',),
             'subtasks': [
                 {
                     'type_name': 'TaskConfig',
@@ -48,6 +49,36 @@ schedule_config = {
                         EndConditionObject('urban.schedule.condition.complements_received'),
                     ),
                     'start_date': None,  # infinite deadline
+                },
+            ],
+        },
+        {
+            'type_name': 'MacroTaskConfig',
+            'id': 'incomplet2',
+            'title': 'Incomplet pour la seconde fois',
+            'default_assigned_group': 'urban_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('incomplete',),
+            'starting_states': ('incomplete',),
+            'ending_states': ('refused',),
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.incomplete_second_time'),
+            ),
+            'start_date': 'schedule.start_date.subtask_highest_due_date',
+            'subtasks': [
+                {
+                    'type_name': 'TaskConfig',
+                    'id': 'notify_refused',
+                    'title': 'Notifier le refus',
+                    'default_assigned_group': 'urban_editors',
+                    'default_assigned_user': 'urban.assign_folder_manager',
+                    'creation_state': ('incomplete',),
+                    'starting_states': ('incomplete',),
+                    'end_conditions': (
+                        EndConditionObject('urban.schedule.condition.refused'),
+                    ),
+                    'start_date': 'urban.schedule.start_date.deposit_date',
+                    'additional_delay': 15,
                 },
             ],
         },
@@ -98,12 +129,7 @@ schedule_config = {
                     'start_conditions': (
                         StartConditionObject('urban.schedule.condition.deposit_done'),
                     ),
-                    'end_conditions': (
-                        EndConditionObject('urban.schedule.condition.deposit_past_20days'),
-                    ),
                     'start_date': 'urban.schedule.start_date.deposit_date',
-                    'recurrence_states': ('in_progress'),
-                    'activate_recurrency': True,
                     'calculation_delay': (
                         'schedule.calculation_default_delay',
                     ),
