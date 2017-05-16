@@ -308,3 +308,12 @@ class DepositDateIsPast30Days(Condition):
             date2 = datetime.now(date1.tzinfo)
             return  (date2.date() - date1.date()).days > 30
         return False
+
+
+class LicenceRefused(Condition):
+    """
+    Licence is refused.
+    """
+
+    def evaluate(self):
+        return api.content.get_state(self.task_container) == 'refused'

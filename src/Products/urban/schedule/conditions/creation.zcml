@@ -79,4 +79,21 @@
         name="urban.schedule.condition.deposit_past_30days"
     />
 
+    <!-- incomplete -->
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.IncompleteForTheFirstTime"
+        name="urban.schedule.condition.incomplete_first_time"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.IncompleteForTheSecondTime"
+        name="urban.schedule.condition.incomplete_second_time"
+    />
+
 </configure>

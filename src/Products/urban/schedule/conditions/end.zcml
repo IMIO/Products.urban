@@ -146,4 +146,13 @@
         name="urban.schedule.condition.deposit_past_30days"
     />
 
+    <!-- refused conditions -->
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.LicenceRefused"
+        name="urban.schedule.condition.refused"
+    />
+
 </configure>

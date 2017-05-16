@@ -131,7 +131,7 @@ class DepositDateIsPast20Days(CreationCondition):
         if deposit_event:
             date1 = deposit_event.eventDate.asdatetime()
             date2 = datetime.now(date1.tzinfo)
-            return  (date2.date() - date1.date()).days > 20
+            return (date2.date() - date1.date()).days > 20
         return False
 
 
@@ -147,5 +147,35 @@ class DepositDateIsPast30Days(CreationCondition):
         if deposit_event:
             date1 = deposit_event.eventDate.asdatetime()
             date2 = datetime.now(date1.tzinfo)
-            return  (date2.date() - date1.date()).days > 30
+            return (date2.date() - date1.date()).days > 30
         return False
+
+
+class IncompleteForTheFirstTime(CreationCondition):
+    """
+    This is the first time that the folder is incomplete
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        missing_part_deposit = licence.getLastMissingPartDeposit()
+        return missing_part_deposit is None
+
+
+class IncompleteForTheSecondTime(CreationCondition):
+    """
+    This is the second time that the folder is incomplete
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        missing_part_deposit = licence.getLastMissingPartDeposit()
+        if missing_part_deposit is None:
+            return False
+        incomplete_UID = self.task_config.aq_parent['incomplet'].UID()
+        brains = api.content.find(
+            context=licence,
+            task_config_UID=incomplete_UID,
+            review_state='closed',
+        )
+        return len(brains) > 0
