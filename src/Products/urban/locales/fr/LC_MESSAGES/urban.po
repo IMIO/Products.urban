@@ -1129,6 +1129,9 @@ msgstr "Avis conforme"
 msgid "location_fdrequirement_opinion"
 msgstr "Avis simple"
 
+msgid "location_fdrequirement_optional"
+msgstr "Avis facultatif"
+
 msgid "location_inside"
 msgstr "à l'intérieur"
 

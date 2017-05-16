@@ -123,6 +123,19 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
 
         return prorogated_delay
 
+    security.declarePublic('listRequirementsFromFD')
+
+    def listRequirementsFromFD(self):
+        """
+          This vocabulary for field requirementsFromFD returns this list: decision, opinion
+        """
+        vocab = (
+            ('opinion', 'location_fdrequirement_opinion'),
+            ('decision', 'location_fdrequirement_decision'),
+            ('optional', 'location_fdrequirement_optional'),
+        )
+        return DisplayList(vocab)
+
 
 # end of class CODT_BaseBuildLicence
 
