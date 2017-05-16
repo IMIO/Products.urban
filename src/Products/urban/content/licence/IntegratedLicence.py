@@ -24,6 +24,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 ##/code-section module-header
 
 schema = Schema((
