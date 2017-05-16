@@ -19,13 +19,15 @@ from Products.Archetypes.interfaces import IBaseFolder
 from Products.urban.interfaces import IApplicant
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IBaseBuildLicence
+from Products.urban.interfaces import ICODT_BaseBuildLicence
 from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IIsArchive
+from Products.urban.interfaces import IMiscDemand
 from Products.urban.interfaces import IParcellingTerm
+from Products.urban.interfaces import IPatrimonyCertificate
 from Products.urban.interfaces import IPortionOut
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IUrbanEventType
-from Products.urban.interfaces import IUrbanEventInquiry
 
 from plone.indexer import indexer
 
@@ -75,6 +77,21 @@ def _get_applicantsinfoindex(applicant):
     if hasattr(applicant, 'getBceNumber'):
         applicants_info.append(applicant.getBceNumber())
     return [info for info in applicants_info if info]
+
+
+@indexer(IBaseBuildLicence)
+@indexer(ICODT_BaseBuildLicence)
+@indexer(IMiscDemand)
+@indexer(IPatrimonyCertificate)
+def licence_architectinfoindex(object):
+    """
+    Return the informations to index about the architects
+    """
+    architects_info = []
+    architects = object.getArchitects()
+    for architect in architects:
+        architects_info.extend(_get_applicantsinfoindex(architect))
+    return list(set(architects_info))
 
 
 @indexer(IPortionOut)
