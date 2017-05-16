@@ -3,6 +3,7 @@
 from Products.CMFCore.utils import getToolByName
 
 from Products.urban.events.urbanEventEvents import setEventTypeType
+from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IEventTypeType
 from Products.urban.interfaces import IUrbanEvent
 
