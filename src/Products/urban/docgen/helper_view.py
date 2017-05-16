@@ -360,7 +360,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         for parcel in parcels:
             parcelRecordsView = context.restrictedTraverse('parcelrecordsview')
             parcelRecordsView.parcel_id = parcel.id
-            relatedLicences += parcelRecordsView.getRelatedLicencesOfParcel()
+            relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
         return relatedLicences
 
     def get_related_licences_titles_of_parcel(self):
