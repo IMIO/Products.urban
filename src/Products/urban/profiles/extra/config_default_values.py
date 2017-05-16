@@ -493,7 +493,7 @@ default_values = {
         ],
 
         'authority': [
-            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo'],
+            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'IntegratedLicence', 'UniqueLicence'],
             {'id': "college", 'title': u"Collège"},
             {'id': "ft", 'title': u"Fonctionnaire technique"},
         ],
