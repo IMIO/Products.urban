@@ -354,7 +354,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         """
           Returns the licences related to a parcel
         """
-        context = self.real_context.aq_parent
+        context = self.real_context
         parcels = context.getParcels()
         relatedLicences = []
         for parcel in parcels:
