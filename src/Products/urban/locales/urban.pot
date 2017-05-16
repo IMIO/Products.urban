@@ -1122,6 +1122,9 @@ msgstr ""
 msgid "location_fdrequirement_opinion"
 msgstr ""
 
+msgid "location_fdrequirement_optional"
+msgstr ""
+
 msgid "location_inside"
 msgstr ""
 

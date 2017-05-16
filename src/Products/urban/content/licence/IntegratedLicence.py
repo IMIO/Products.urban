@@ -28,6 +28,17 @@ from Products.urban.config import *
 
 schema = Schema((
 
+    StringField(
+        name='authority',
+        widget=SelectionWidget(
+            label='Authority',
+            label_msgid='urban_label_authority',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        vocabulary=UrbanVocabulary('authority', inUrbanConfig=True),
+        default_method='getDefaultValue',
+    ),
 
 ),
 )
