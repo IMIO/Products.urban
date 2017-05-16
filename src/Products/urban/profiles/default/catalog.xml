@@ -76,6 +76,14 @@
 
   <column value="applicantInfosIndex"/>
 
+  <index name="architectInfosIndex" meta_type="ZCTextIndex">
+    <indexed_attr value="architectInfosIndex"/>
+    <extra name="index_type" value="Okapi BM25 Rank"/>
+    <extra name="lexicon_id" value="plone_lexicon"/>
+  </index>
+
+  <column value="architectInfosIndex"/>
+
   <index name="extraValue"
            meta_type="KeywordIndex">
     <indexed_attr value="extraValue"/>
