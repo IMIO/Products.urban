@@ -435,6 +435,10 @@ class IProrogationEvent(Interface):
     __doc__ = _("""IProrogation type marker interface""")
 
 
+class IRefusedIncompletenessEvent(Interface):
+    __doc__ = _("""IRefusedIncompleteness type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase
     """
