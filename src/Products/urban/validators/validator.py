@@ -77,7 +77,7 @@ class isNotDuplicatedReferenceValidator:
         match = re.match(regex, value)
         if not match:
             return translate(
-                _('error_reference', default=u"This reference does not match the expected format of {}".format(regex))
+                _('error_reference_format', default=u"This reference does not match the expected format of {}".format(regex))
             )
 
         ref_num = match.groups()
@@ -102,13 +102,13 @@ class procedureChoiceValidator:
     def __call__(self, value, *args, **kwargs):
         if 'ukn' in value and len(value) > 2:
             return translate(
-                _('error_procedure_choice',
+                _('error_procedure_choice_unknown',
                   default=u"Cannot select 'unknown' with another value")
             )
         if 'light_inquiry' in value and 'inquiry' in value:
             return translate(
-                _('error_procedure_choice',
-                  default=u"Pleases elect only ONE of the inquiry types")
+                _('error_multiple_inquiry_type',
+                  default=u"Please select only ONE of the inquiry types")
             )
         return True
 
