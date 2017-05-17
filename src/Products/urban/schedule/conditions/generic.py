@@ -290,7 +290,7 @@ class DepositDateIsPast20Days(Condition):
         if deposit_event:
             date1 = deposit_event.eventDate.asdatetime()
             date2 = datetime.now(date1.tzinfo)
-            return  (date2.date() - date1.date()).days > 20
+            return (date2.date() - date1.date()).days > 20
         return False
 
 
@@ -306,7 +306,7 @@ class DepositDateIsPast30Days(Condition):
         if deposit_event:
             date1 = deposit_event.eventDate.asdatetime()
             date2 = datetime.now(date1.tzinfo)
-            return  (date2.date() - date1.date()).days > 30
+            return (date2.date() - date1.date()).days > 30
         return False
 
 
@@ -316,4 +316,9 @@ class LicenceRefused(Condition):
     """
 
     def evaluate(self):
-        return api.content.get_state(self.task_container) == 'refused'
+        licence = self.task_container
+
+        refused_event = licence.getLastRefusedNotification()
+        if refused_event:
+            return api.content.get_state(refused_event) == 'closed'
+        return False

@@ -83,8 +83,34 @@ urbanEventTypes = {
                 {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
             ),
         },
+        {
+            'id': "refused-incompleteness",
+            'title': "Refusé car incomplet pour le seconde fois (article XX)",
+            'activatedFields': [],
+            'deadLineDelay': 15,
+            'eventTypeType': 'Products.urban.interfaces.IRefusedIncompletenessEvent',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "urb-dossier-incomplet-refuse-demandeur.odt", 'title': "Dossier incomplet refusé (lettre demandeur)"},
+                {'id': "urb-dossier-incomplet-refuse-archi.odt", 'title': "Dossier incomplet refusé (lettre architecte)"},
+            ),
+        },
     ),
     'buildlicence': (
+        {
+            'id': "refused-incompleteness",
+            'title': "Refusé car incomplet pour le seconde fois (article XX)",
+            'activatedFields': [],
+            'deadLineDelay': 15,
+            'eventTypeType': 'Products.urban.interfaces.IRefusedIncompletenessEvent',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "urb-dossier-incomplet-refuse-demandeur.odt", 'title': "Dossier incomplet refusé (lettre demandeur)"},
+                {'id': "urb-dossier-incomplet-refuse-archi.odt", 'title': "Dossier incomplet refusé (lettre architecte)"},
+            ),
+        },
         {
             'id': "depot-de-la-demande",
             'title': "Dépôt de la demande (récépissé - article 115)",

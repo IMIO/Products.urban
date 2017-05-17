@@ -630,6 +630,12 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
     def getLastProrogation(self, use_catalog=True):
         return self._getLastEvent(interfaces.IProrogationEvent, use_catalog)
 
+    def getLastRefusedNotification(self, use_catalog=True):
+        return self._getLastEvent(
+            interfaces.IRefusedIncompletenessEvent,
+            use_catalog,
+        )
+
     def getAllMissingPartDeposits(self):
         return self._getAllEvents(interfaces.IMissingPartDepositEvent)
 
