@@ -35,7 +35,7 @@
                     <div>
                         <input type="button" value="Ok"
                                tal:attributes="onclick python: 'javascript:updateField(\'%s\')' % '|'.join(field_ids) "
-                               i18n:attributes="value label_cancel;" />
+                               i18n:attributes="value label_ok;" />
                         <input type="button" value="Cancel"
                                onclick="javascript:closePopup();"
                                i18n:attributes="value label_cancel;" />

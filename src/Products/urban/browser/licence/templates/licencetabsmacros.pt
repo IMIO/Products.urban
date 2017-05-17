@@ -127,7 +127,7 @@
 
 <div class="licence-column" metal:define-macro="analysis_macro" i18n:domain="urban">
     <fieldset>
-        <legend i18n:translate="legend_details"></legend>
+        <legend i18n:translate="legend_details">Details</legend>
         <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
                tal:define="default_custom python: [];
                            custom custom | python: []; custom python: custom + default_custom">
@@ -143,7 +143,7 @@
 
 <div class="licence-column" metal:define-macro="road_macro" i18n:domain="urban">
     <fieldset>
-        <legend i18n:translate="legend_details">Details parcel(s)</legend>
+        <legend i18n:translate="legend_details">Details</legend>
         <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
                tal:define="default_custom python: [];
                            custom custom | python: []; custom python: custom + default_custom">
@@ -159,7 +159,7 @@
 
 <div class="licence-column" metal:define-macro="location_macro" i18n:domain="urban">
     <fieldset>
-        <legend i18n:translate="legend_details">Details parcel(s)</legend>
+        <legend i18n:translate="legend_details">Details</legend>
         <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
                tal:define="default_custom python: ['isInPCA', 'isInSubdivision'];
                            default_exclude python: [
