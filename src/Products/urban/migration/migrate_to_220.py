@@ -154,6 +154,7 @@ def migrate_collection_all_licences_add_codt_licence():
     containerCollection = api.content.get(path='/urban/collection_all_licences')
     if 'CODT_BuildLicence' not in containerCollection.query[0]['v']:
         containerCollection.query[0]['v'].append('CODT_BuildLicence')
+        containerCollection.setQuery(containerCollection.query)
     logger.info("migration step done!")
 
 
