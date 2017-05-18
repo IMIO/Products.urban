@@ -148,6 +148,15 @@ def migrate_map_layers():
     logger.info("migration step done!")
 
 
+def migrate_collection_all_licences_add_codt_licence():
+    logger = logging.getLogger('urban: specific features python expressions')
+    logger.info("starting migration step")
+    containerCollection = api.content.get(path='/urban/collection_all_licences')
+    if 'CODT_BuildLicence' not in containerCollection.query[0]['v']:
+        containerCollection.query[0]['v'].append('CODT_BuildLicence')
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.1')
     logger.info("starting migration steps")
@@ -161,4 +170,5 @@ def migrate(context):
     migrate_opinionrequest_eventtype()
     migrate_python_expression_of_specificfeatures()
     migrate_map_layers()
+    migrate_collection_all_licences_add_codt_licence()
     logger.info("migration done!")
