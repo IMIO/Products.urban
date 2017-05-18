@@ -84,6 +84,49 @@ urbanEventTypes = {
             ),
         },
         {
+            'id': "depot-de-la-demande",
+            'title': "Dépôt de la demande (récépissé - article 115)",
+            'eventDateLabel': "Date de dépôt",
+            'activatedFields': [],
+            'deadLineDelay': 15,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+        },
+        {
+            'id': "recepisse-art15-complement",
+            'title': "Récépissé d'un complément à une demande de permis (article 115)",
+            'activatedFields': [],
+            'deadLineDelay': 15,
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+        },
+        {
+            'id': "dossier-incomplet",
+            'title': "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
+            'activatedFields': [],
+            'deadLineDelay': 15,
+            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+        },
+        {
+            'id': "accuse-de-reception",
+            'title': "Accusé de réception (dossier complet - article 116 § 1)",
+            'activatedFields': ['transmitDate'],
+            'deadLineDelay': 15,
+            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+        },
+        {
             'id': "refused-incompleteness",
             'title': "Refusé car incomplet pour le seconde fois (article XX)",
             'activatedFields': [],
