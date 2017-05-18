@@ -25,6 +25,9 @@
   <type type_id="CODT_NotaryLetter">
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
+  <type type_id="CODT_ParcelOutLicence">
+     <bound-workflow workflow_id="urban_licence_workflow" />
+  </type>
   <type type_id="CODT_UniqueLicence">
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>

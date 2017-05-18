@@ -127,6 +127,7 @@ def initialize(context):
     import content.licence.CODT_Article127
     import content.licence.CODT_BuildLicence
     import content.licence.CODT_IntegratedLicence
+    import content.licence.CODT_ParcelOutLicence
     import content.licence.CODT_UniqueLicence
     import content.licence.CODT_UrbanCertificateTwo
     import content.licence.Declaration

@@ -97,6 +97,11 @@ class IParcelOutLicence(IBaseBuildLicence):
     """
 
 
+class ICODT_ParcelOutLicence(IBaseBuildLicence):
+    """Marker interface for CODT_ParcelOutLicence
+    """
+
+
 class IFolderManager(Interface):
     """Marker interface for .FolderManager.FolderManager
     """
