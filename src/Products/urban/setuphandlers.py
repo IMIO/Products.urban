@@ -639,7 +639,7 @@ def addGlobalFolders(context):
         templates_id = tool.invokeFactory(
             "Folder",
             id="globaltemplates",
-            title=_("globaltemplates_folder_title", 'Global templates')
+            title=_("globaltemplates_folder_title", 'urban')
         )
         templates = getattr(tool, templates_id)
         templates.setConstrainTypesMode(1)
@@ -732,7 +732,7 @@ def addApplicationFolders(context):
     site.setLayout('redirectto_urban_root_view')
 
     if not hasattr(aq_base(site), "urban"):
-        newFolderid = site.invokeFactory("Folder", id="urban", title=_("urban"))
+        newFolderid = site.invokeFactory("Folder", id="urban", title=_('Urban', "urban"))
         newFolder = getattr(site, newFolderid)
     else:
         newFolder = getattr(site, 'urban')
