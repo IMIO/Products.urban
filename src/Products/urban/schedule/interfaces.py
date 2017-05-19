@@ -17,3 +17,13 @@ class ISendOpinionRequestsTask(Interface):
 
 class IReceiveOpinionRequestsTask(Interface):
     """ Marker interface for opinion requests reception task."""
+
+
+class ITaskCron(Interface):
+    """A cron task"""
+
+    def condition(self):
+        """A condition for the execution of the cron task"""
+
+    def execute(self):
+        """The execution method of the cron"""
