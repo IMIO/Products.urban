@@ -1226,6 +1226,9 @@ msgstr ""
 msgid "urban_label_BuildLicenceNumerotation"
 msgstr ""
 
+msgid "urban_label_delegateSignatures"
+msgstr ""
+
 #. Default: "Dgo4reference"
 #: ParcellingTerm.py
 msgid "urban_label_DGO4Reference"
