@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-05-18 11:08+0000\n"
+"POT-Creation-Date: 2017-05-18 14:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -155,6 +155,10 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: ../profiles.zcml:41
+msgid "Demo Extension profile for urban."
+msgstr ""
+
 msgid "Display each licence only once"
 msgstr ""
 
@@ -198,6 +202,14 @@ msgstr ""
 msgid "Events attachments"
 msgstr ""
 
+#: ../profiles.zcml:17
+msgid "Extension profile for urban."
+msgstr ""
+
+#: ../profiles.zcml:26
+msgid "Extra Extension profile for urban."
+msgstr ""
+
 msgid "Filter"
 msgstr ""
 
@@ -223,106 +235,106 @@ msgstr ""
 msgid "History of the parcel and related licences"
 msgstr ""
 
-#: ../interfaces.py:371
+#: ../interfaces.py:376
 msgid "IAcknowledgment type marker interface"
 msgstr ""
 
-#: ../interfaces.py:399
+#: ../interfaces.py:404
 msgid "IAnnouncement type marker interface"
 msgstr ""
 
-#: ../interfaces.py:343
+#: ../interfaces.py:348
 msgid "ICollege type marker interface"
 msgstr ""
 
-#: ../interfaces.py:411
+#: ../interfaces.py:416
 msgid "ICollegeReport type marker interface"
 msgstr ""
 
-#: ../interfaces.py:375
+#: ../interfaces.py:380
 msgid "ICommunalCouncil type marker interface"
 msgstr ""
 
-#: ../interfaces.py:379
+#: ../interfaces.py:384
 msgid "IDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:423
+#: ../interfaces.py:428
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:395
+#: ../interfaces.py:400
 msgid "IInquiry type marker interface"
 msgstr ""
 
-#: ../interfaces.py:403
+#: ../interfaces.py:408
 msgid "ILicenceDelivery type marker interface"
 msgstr ""
 
-#: ../interfaces.py:407
+#: ../interfaces.py:412
 msgid "ILicenceExpiration type marker interface"
 msgstr ""
 
-#: ../interfaces.py:391
+#: ../interfaces.py:396
 msgid "IMissingPart type marker interface"
 msgstr ""
 
-#: ../interfaces.py:383
+#: ../interfaces.py:388
 msgid "IMissingPartDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:387
+#: ../interfaces.py:392
 msgid "IModificationDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:351
+#: ../interfaces.py:356
 msgid "IOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:435
+#: ../interfaces.py:440
 msgid "IProrogation type marker interface"
 msgstr ""
 
-#: ../interfaces.py:427
+#: ../interfaces.py:432
 msgid "IRecourseEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:439
+#: ../interfaces.py:444
 msgid "IRefusedIncompleteness type marker interface"
 msgstr ""
 
-#: ../interfaces.py:367
+#: ../interfaces.py:372
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:347
+#: ../interfaces.py:352
 msgid "ITechnicalServiceOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:419
+#: ../interfaces.py:424
 msgid "ITheLicence type marker interface"
 msgstr ""
 
-#: ../interfaces.py:415
+#: ../interfaces.py:420
 msgid "ITheLicenceCollege type marker interface"
 msgstr ""
 
-#: ../interfaces.py:363
+#: ../interfaces.py:368
 msgid "IWalloonRegionDecisionEvent type marker interface"
 msgstr ""
 
 msgid "IWalloonRegionDesisionEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:359
+#: ../interfaces.py:364
 msgid "IWalloonRegionOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:355
+#: ../interfaces.py:360
 msgid "IWalloonRegionPrimo type marker interface"
 msgstr ""
 
-#: ../interfaces.py:431
+#: ../interfaces.py:436
 msgid "IWorkBeginning type marker interface"
 msgstr ""
 
@@ -337,6 +349,10 @@ msgstr ""
 
 #: ../profiles/default/actions.xml
 msgid "Map"
+msgstr ""
+
+#: ../profiles.zcml:34
+msgid "Migrations profile for urban."
 msgstr ""
 
 msgid "MiscDemand"
@@ -377,6 +393,10 @@ msgid "PatrimonyCertificate"
 msgstr ""
 
 msgid "PreliminaryNotice"
+msgstr ""
+
+#: ../profiles.zcml:48
+msgid "Profile for pm.wsclient in urban"
 msgstr ""
 
 msgid "ProjectMeeting"
@@ -449,6 +469,10 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
+#: ../testing.zcml:14
+msgid "Tests Extension profile for urban."
+msgstr ""
+
 #: ../browser/longtextview.py:30
 msgid "The field does not exist !!!"
 msgstr ""
@@ -484,6 +508,11 @@ msgid "Types de permis \ &Eacute;tats"
 msgstr ""
 
 msgid "UniqueLicence"
+msgstr ""
+
+#. Default: "urban"
+#: ../setuphandlers.py:735
+msgid "Urban"
 msgstr ""
 
 #. Default: "Certificat d'urbanisme 1"
@@ -757,7 +786,7 @@ msgstr ""
 msgid "click_to_view_or_add"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1218
+#: ../content/licence/GenericLicence.py:1219
 msgid "close_prevention_area"
 msgstr ""
 
@@ -1070,7 +1099,7 @@ msgstr ""
 msgid "externaldecisions_folder_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1219
+#: ../content/licence/GenericLicence.py:1220
 msgid "far_prevention_area"
 msgstr ""
 
@@ -1115,23 +1144,23 @@ msgstr ""
 msgid "firefox_viewlet_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1240
+#: ../content/licence/GenericLicence.py:1241
 msgid "flooding_level_high"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1238
+#: ../content/licence/GenericLicence.py:1239
 msgid "flooding_level_low"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1239
+#: ../content/licence/GenericLicence.py:1240
 msgid "flooding_level_moderate"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1236
+#: ../content/licence/GenericLicence.py:1237
 msgid "flooding_level_no"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1237
+#: ../content/licence/GenericLicence.py:1238
 msgid "flooding_level_verylow"
 msgstr ""
 
@@ -1629,7 +1658,7 @@ msgstr ""
 msgid "outdated_parcels_in_use"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1221
+#: ../content/licence/GenericLicence.py:1222
 msgid "outside_catchment"
 msgstr ""
 
@@ -1893,7 +1922,7 @@ msgstr ""
 msgid "subdivision_fieldset_legend"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1220
+#: ../content/licence/GenericLicence.py:1221
 msgid "supervision_area"
 msgstr ""
 
@@ -1944,25 +1973,48 @@ msgstr ""
 msgid "uno_enabled_python"
 msgstr ""
 
+#: ../profiles.zcml:17
 #: ../profiles/default/actions.xml
 #: ../setuphandlers.py:265
 msgid "urban"
 msgstr ""
 
+#: ../profiles.zcml:41
 msgid "urban-demo"
 msgstr ""
 
-# extension profile
+#: ../profiles.zcml:26
 msgid "urban-extra"
 msgstr ""
 
 msgid "urban-labruyere"
 msgstr ""
 
+#: ../profiles.zcml:34
 msgid "urban-migrations"
 msgstr ""
 
+#: ../profiles.zcml:48
+msgid "urban-pm-wsclient"
+msgstr ""
+
 msgid "urban-sambreville"
+msgstr ""
+
+#: ../testing.zcml:14
+msgid "urban-tests"
+msgstr ""
+
+#: ../testing.zcml:22
+msgid "urban-tests-imports"
+msgstr ""
+
+#: ../testing.zcml:30
+msgid "urban-testsWithConfig"
+msgstr ""
+
+#: ../testing.zcml:38
+msgid "urban-testsWithLicences"
 msgstr ""
 
 #. Default: Set the number of days the alert will be shown before the deadline delay
@@ -2545,6 +2597,9 @@ msgstr ""
 #. Default: "Delaycomputation"
 #: UrbanDelay.py
 msgid "urban_label_delayComputation"
+msgstr ""
+
+msgid "urban_label_delegateSignatures"
 msgstr ""
 
 #. Default: "Demanddisplay"
@@ -4226,4 +4281,3 @@ msgstr ""
 
 msgid "zip_folder_title"
 msgstr ""
-
