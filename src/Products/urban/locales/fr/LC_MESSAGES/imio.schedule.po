@@ -35,11 +35,23 @@ msgstr "Créer l'événement 'récépissé d'un complément' et le clôturer"
 msgid "urban.schedule.condition.deposit_done"
 msgstr "Créer l'événement de dépôt et le clôturer"
 
+msgid "urban.schedule.condition.deposit_past_20days"
+msgstr "La date de dépôt ne dépasse pas 20 jours"
+
+msgid "urban.schedule.condition.deposit_past_30days"
+msgstr "La date de dépôt ne dépasse pas 30 jours"
+
 msgid "urban.schedule.condition.folder_complete"
 msgstr "Accusé de réception fait."
 
 msgid "urban.schedule.condition.has_inquiry"
 msgstr "Une enquête publique est définie"
+
+msgid "urban.schedule.condition.incomplete_first_time"
+msgstr "Incomplet pour le première fois"
+
+msgid "urban.schedule.condition.incomplete_second_time"
+msgstr "Incomplet pour le seconde fois"
 
 msgid "urban.schedule.condition.inquiry_done"
 msgstr "Enquête terminée"
@@ -56,6 +68,9 @@ msgstr "Avis de service reçus"
 msgid "urban.schedule.condition.procedure_choice_done"
 msgstr "Sélectionner une valeur dans le champ 'Catégorie du dossier RW'"
 
+msgid "urban.schedule.condition.refused"
+msgstr "Refuser le dossier"
+
 msgid "urban.schedule.condition.suspension"
 msgstr "Suspendre le dossier"
 
@@ -70,3 +85,4 @@ msgstr "Date de dépôt du dossier"
 
 msgid "urban.start_date.inquiry_end_date"
 msgstr "Date de fin de l'enquête publique"
+

@@ -158,6 +158,9 @@ msgstr ""
 msgid "incomplete"
 msgstr ""
 
+msgid "complete"
+msgstr ""
+
 msgid "retired"
 msgstr ""
 
@@ -172,6 +175,9 @@ msgid "retire"
 msgstr ""
 
 msgid "isincomplete"
+msgstr ""
+
+msgid "iscomplete"
 msgstr ""
 
 msgid "close"
