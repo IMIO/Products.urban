@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-05-19 09:36+0000\n"
+"POT-Creation-Date: 2017-05-19 16:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -158,10 +158,6 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: ../profiles.zcml:41
-msgid "Demo Extension profile for urban."
-msgstr ""
-
 msgid "Display each licence only once"
 msgstr ""
 
@@ -203,14 +199,6 @@ msgstr ""
 
 #: ../browser/licence/templates/licencetabsmacros.pt:400
 msgid "Events attachments"
-msgstr ""
-
-#: ../profiles.zcml:17
-msgid "Extension profile for urban."
-msgstr ""
-
-#: ../profiles.zcml:26
-msgid "Extra Extension profile for urban."
 msgstr ""
 
 msgid "Filter"
@@ -354,10 +342,6 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
-#: ../profiles.zcml:34
-msgid "Migrations profile for urban."
-msgstr ""
-
 msgid "MiscDemand"
 msgstr ""
 
@@ -396,10 +380,6 @@ msgid "PatrimonyCertificate"
 msgstr ""
 
 msgid "PreliminaryNotice"
-msgstr ""
-
-#: ../profiles.zcml:48
-msgid "Profile for pm.wsclient in urban"
 msgstr ""
 
 msgid "ProjectMeeting"
@@ -470,10 +450,6 @@ msgstr ""
 
 #: ../browser/templates/urbanstatsview.pt:99
 msgid "Statistics"
-msgstr ""
-
-#: ../testing.zcml:14
-msgid "Tests Extension profile for urban."
 msgstr ""
 
 #: ../browser/longtextview.py:30
@@ -1991,48 +1967,25 @@ msgstr ""
 msgid "uno_enabled_python"
 msgstr ""
 
-#: ../profiles.zcml:17
 #: ../profiles/default/actions.xml
 #: ../setuphandlers.py:265
 msgid "urban"
 msgstr ""
 
-#: ../profiles.zcml:41
 msgid "urban-demo"
 msgstr ""
 
-#: ../profiles.zcml:26
+# extension profile
 msgid "urban-extra"
 msgstr ""
 
 msgid "urban-labruyere"
 msgstr ""
 
-#: ../profiles.zcml:34
 msgid "urban-migrations"
 msgstr ""
 
-#: ../profiles.zcml:48
-msgid "urban-pm-wsclient"
-msgstr ""
-
 msgid "urban-sambreville"
-msgstr ""
-
-#: ../testing.zcml:14
-msgid "urban-tests"
-msgstr ""
-
-#: ../testing.zcml:22
-msgid "urban-tests-imports"
-msgstr ""
-
-#: ../testing.zcml:30
-msgid "urban-testsWithConfig"
-msgstr ""
-
-#: ../testing.zcml:38
-msgid "urban-testsWithLicences"
 msgstr ""
 
 #. Default: Set the number of days the alert will be shown before the deadline delay
@@ -4320,3 +4273,4 @@ msgstr ""
 
 msgid "zip_folder_title"
 msgstr ""
+
