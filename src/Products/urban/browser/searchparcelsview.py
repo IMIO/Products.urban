@@ -168,6 +168,26 @@ class SearchParcelsView(BrowserView):
 
         return search_result
 
+
+    def search_parcels_custom(self, old=False, **search_args):
+        """
+        Return parcels matching method parameters.
+        """
+        search_result = []
+        cadastre = services.cadastre.new_session()
+        if old:
+            query_result_old = cadastre.query_old_parcels(**search_args)
+            for parcel in query_result_old:
+                setattr(parcel, 'old', True)
+                search_result.append(parcel)
+        else:
+            query_result = cadastre.query_parcels(**search_args)
+            search_result.append(query_result)
+        cadastre.close()
+
+        return search_result
+
+
     def search_historic_of_parcel(self):
         """
         Return the concerned parcels
