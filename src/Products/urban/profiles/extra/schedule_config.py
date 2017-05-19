@@ -125,7 +125,7 @@ schedule_config = {
                     'default_assigned_user': 'urban.assign_folder_manager',
                     'creation_state': ('in_progress',),
                     'starting_states': ('in_progress',),
-                    'ending_states': ('accepted', 'incomplete'),
+                    'ending_states': ('complete', 'incomplete'),
                     'start_conditions': (
                         StartConditionObject('urban.schedule.condition.deposit_done'),
                     ),
@@ -143,8 +143,8 @@ schedule_config = {
                     'title': 'Choix de la procédure',
                     'default_assigned_group': 'urban_editors',
                     'default_assigned_user': 'urban.assign_folder_manager',
-                    'creation_state': ('accepted',),
-                    'starting_states': ('accepted',),
+                    'creation_state': ('complete',),
+                    'starting_states': ('complete',),
                     'start_conditions': (
                         StartConditionObject('urban.schedule.condition.deposit_done'),
                     ),
@@ -164,8 +164,8 @@ schedule_config = {
                     'title': "Envoyer l'accusé de réception",
                     'default_assigned_group': 'urban_editors',
                     'default_assigned_user': 'urban.assign_folder_manager',
-                    'creation_state': ('accepted',),
-                    'starting_states': ('accepted',),
+                    'creation_state': ('complete',),
+                    'starting_states': ('complete',),
                     'start_conditions': (
                         StartConditionObject('urban.schedule.condition.acknowledgment_created'),
                     ),
@@ -188,8 +188,8 @@ schedule_config = {
                     'title': 'Choix de la procédure après 20 jours',
                     'default_assigned_group': 'urban_editors',
                     'default_assigned_user': 'urban.assign_folder_manager',
-                    'creation_state': ('accepted',),
-                    'starting_states': ('accepted',),
+                    'creation_state': ('complete',),
+                    'starting_states': ('complete',),
                     'creation_conditions': (
                         CreationConditionObject('urban.schedule.condition.deposit_past_20days'),
                     ),
@@ -212,8 +212,8 @@ schedule_config = {
                     'title': "Envoyer l'accusé de réception après 20 jours",
                     'default_assigned_group': 'technical_validators',
                     'default_assigned_user': 'urban.assign_folder_manager',
-                    'creation_state': ('accepted',),
-                    'starting_states': ('accepted',),
+                    'creation_state': ('complete',),
+                    'starting_states': ('complete',),
                     'creation_conditions': (
                         CreationConditionObject('urban.schedule.condition.deposit_past_20days'),
                     ),
@@ -239,8 +239,8 @@ schedule_config = {
                     'title': 'Choix de la procédure par le FD',
                     'default_assigned_group': 'urban_editors',
                     'default_assigned_user': 'urban.assign_folder_manager',
-                    'creation_state': ('accepted',),
-                    'starting_states': ('accepted',),
+                    'creation_state': ('complete',),
+                    'starting_states': ('complete',),
                     'creation_conditions': (
                         CreationConditionObject('urban.schedule.condition.deposit_past_30days'),
                     ),
