@@ -283,7 +283,7 @@ msgid "warning_add_an_applicant"
 msgstr "Veuillez renseigner le ou les demandeur(s)"
 
 msgid "warning_enter_search_criteria"
-msgstr "Veuillez indiquer d'avantages de termes de recherche"
+msgstr "Veuillez indiquer davantage de termes de recherche"
 
 msgid "workLocationStreet"
 msgstr "Rue"
