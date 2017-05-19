@@ -1394,8 +1394,12 @@ default_values = {
 
         'form_composition': [
             'UrbanVocabularyTerm',
-            {'id': "4", 'title': u"Annexe IV"},
-            {'id': "5", 'title': u"Annexe V"},
+            {'id': "4", 'title': u"Annexe IV - Demande de permis avec concours d'un architecte"},
+            {'id': "5", 'title': u"Annexe V - Modification de la destination ou modification de la répartition des surfaces de vente"},
+            {'id': "6", 'title': u"Annexe VI - Modification sensible du relief du sol - dépôt de véhicules, de mitrailles, de matériaux ou de déchets - installations mobiles - travaux d'aménagement au sol aux abords d'une construction autorisée"},
+            {'id': "7", 'title': u"Annexe VII - Boisement - déboisement - abattage - culture de sapins de Noël - modification de l'aspect d'un ou plusieurs arbres ou haies remarquables - défrichement - modification de la végétation"},
+            {'id': "8", 'title': u"Annexe VIII - Travaux techniques"},
+            {'id': "9", 'title': u"Annexe IX - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8"},
         ],
     },
 }
