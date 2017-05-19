@@ -11,7 +11,7 @@ class AutoAccepted20days(TaskCron):
         for brain in self.brains:
             api.content.transition(
                 obj=brain.getObject(),
-                to_state='accepted',
+                to_state='complete',
             )
 
     @property
