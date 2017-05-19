@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2017-05-18 14:12+0000\n"
+"POT-Creation-Date: 2017-05-19 09:36+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -114,6 +114,9 @@ msgstr "Permis intégrés (CODT)"
 
 msgid "CODT_NotaryLetter"
 msgstr "Lettre de notaire (CODT)"
+
+msgid "CODT_ParcelOutLicence"
+msgstr "Permis d'urbanisation (CODT)"
 
 msgid "CODT_UniqueLicence"
 msgstr "Permis Unique (CODT)"
@@ -821,10 +824,13 @@ msgid "codt_integratedlicence_urbanconfig_title"
 msgstr "Paramètres des permis intégrés (CODT)"
 
 msgid "codt_notaryletter_urbanconfig_title"
-msgstr "Paramètres des lettres de notaire"
+msgstr "Paramètres des lettres de notaire (CODT°"
+
+msgid "codt_parceloutlicence_urbanconfig_title"
+msgstr "Paramètres des permis d'urbanisation (CODT)"
 
 msgid "codt_uniquelicence_urbanconfig_title"
-msgstr "Paramètres des permis uniques"
+msgstr "Paramètres des permis uniques (CODT)"
 
 msgid "codt_urbancertificateone_urbanconfig_title"
 msgstr "Paramètres des certificats d'urbanisme 1 (CODT)"
@@ -949,6 +955,9 @@ msgstr "Voir la carte entière"
 #: UrbanDelay.py
 msgid "delay_computation_descr"
 msgstr "Entrez une expression TAL qui renvoie une DATE (DateTime object) du délai maximum. Les paramètres 'event' et 'licence' sont disponibles."
+
+msgid "delegatesignatures_folder_title"
+msgstr "Délégation de signature"
 
 msgid "deposittype_folder_title"
 msgstr "Type de dépôt"
@@ -1232,6 +1241,9 @@ msgstr "Types de voiries"
 
 msgid "folderzones_folder_title"
 msgstr "Zones du plan de secteur"
+
+msgid "form_composition_folder_title"
+msgstr "Composition (formulaire(s) de demande)"
 
 #. Default: "City issue on date"
 #: UrbanEvent.py
@@ -1839,6 +1851,9 @@ msgstr "Destinataires"
 msgid "recoursedecisions_folder_title"
 msgstr "Décisions d'un recours"
 
+msgid "regional_guide_folder_title"
+msgstr "Guide régional d'urbanisme"
+
 msgid "reparcelling_folder_title"
 msgstr "Périmètre de Remembrement"
 
@@ -1858,7 +1873,7 @@ msgid "rgbsr_folder_title"
 msgstr "Réglement général sur les bâtisses en site rural"
 
 msgid "road_adaptation_create"
-msgstr "Ouverture"
+msgstr "Ouverture (création)"
 
 msgid "road_adaptation_modify"
 msgstr "Modification"
@@ -1992,6 +2007,9 @@ msgstr "Recherches"
 
 msgid "topics_folder_title"
 msgstr "Recherches"
+
+msgid "township_guide_folder_title"
+msgstr "Guide communal d'urbanisme"
 
 msgid "townshipfoldercategories_folder_title"
 msgstr "Catégories de dossiers communales"
@@ -2226,6 +2244,9 @@ msgstr "Règlement Communal d'Urbanisme (R.C.U.)"
 
 msgid "urban_label_SAR"
 msgstr "Périmètre d'un site d'activité économique désaffecté"
+
+msgid "urban_label_SDC"
+msgstr "Schéma de développement communal"
 
 #. Default: "Srs"
 #: Layer.py
@@ -2858,6 +2879,9 @@ msgstr "Détails concernant le zonage"
 #: urbancertificatebase_foldermanager.py
 msgid "urban_label_foldermanagers"
 msgstr "Agent(s) traitant(s)"
+
+msgid "urban_label_form_composition"
+msgstr "Composition (formulaire(s) de demande)"
 
 #. Default: "Ftsolicitopinionsto"
 #: EnvironmentLicence.py
@@ -3613,6 +3637,12 @@ msgstr "Regex d'identification de la référence"
 msgid "urban_label_regionalRoad"
 msgstr "Code de route régionale"
 
+msgid "urban_label_regional_guide"
+msgstr "Guide régional d'urbanisme"
+
+msgid "urban_label_regional_guide_details"
+msgstr "Détails concernant le guide régional d'urbanisme"
+
 #. Default: "Registrationnumber"
 #: Contact.py
 msgid "urban_label_registrationNumber"
@@ -3745,6 +3775,9 @@ msgstr "Rubrique(s)"
 
 msgid "urban_label_sarDetails"
 msgstr "Détails concernant le périmètre du site d'activité économique désaffecté"
+
+msgid "urban_label_sdcDetails"
+msgstr "Détails concernant le schéma de développement communal"
 
 #. Default: "Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word"
 msgid "urban_label_searchbyfolderreference_descr"
@@ -4011,6 +4044,12 @@ msgstr "Particularité(s) communale(s) du bien"
 #: UrbanCertificateBase.py
 msgid "urban_label_townshipSpecificFeaturesDetail"
 msgstr "Détails"
+
+msgid "urban_label_township_guide"
+msgstr "Guide communal d'urbanisme"
+
+msgid "urban_label_township_guide_details"
+msgstr "Détails concernant le guide communal d'urbanisme"
 
 #. Default: "Transmitdate"
 #: UrbanEvent.py

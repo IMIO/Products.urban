@@ -34,7 +34,8 @@ default_values = {
         ],
         'investigationarticles': [
             'UrbanVocabularyTerm',
-            {'id': "enquete-derogation", 'title': u"Article D.IV.6 - Dérogation à un plan ou aux normes d'un guide régional", 'description': u"<p>Application des articles D.IV.6 à D.IV.13 du CoDT, demande de permis dérogatoire à un plan ou aux normes d'un guide régional</p>"},
+            {'id': "enquete-derogation", 'title': u"Article D.IV.40 - Dérogation à un plan ou aux normes d'un guide régional", 'description': u"<p>Application de l'article D.IV.40 : Les demandes impliquant une ou plusieurs dérogations au plan de secteur ou aux normes du guide régional sont soumises à enquête publique.</p> "},
+            {'id': "enquete-derogation-facultative", 'title': u"Article D.VIII.13 - Procédure d'enquête publique \"facultative\"", 'description': u"<p>Application de l'article D.VIII.13. L’autorité compétente pour adopter le plan, périmètre, schéma ou le guide et pour délivrer les<br /> permis et certificats d’urbanisme no 2, ainsi que les collèges communaux des communes organisant l’annonce de projet<br /> ou l’enquête publique, peuvent procéder à toute forme supplémentaire de publicité et d’information dans le respect des<br /> délais de décision qui sont impartis à l’autorité compétente.</p>"},
             {'id': "R.IV.40-1.1.1", 'title': u"R.IV.40-1.§1-1° - Hauteur des constructions", 'description': u"<p>Article R.IV.40-1.§1-2° du CoDT : «&nbsp;la construction, la reconstruction d'un magasin ou la modification de la destination d'un bâtiment en magasin dont la surface commerciale nette est supérieure à quatre cents mètres carrés ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p> "},
             {'id': "R.IV.40-1.1.2", 'title': u"R.IV.40-1.§1-2°- Magasin de plus de 400m2", 'description': u"<p>Article R.IV.40-1.§1.3° du CoDT: «&nbsp;la construction, la reconstruction de bureaux ou la modification de la destination d'un bâtiment en bureaux dont la superficie des planchers est supérieure à sixccent cinquante mètres carrés, la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
             {'id': "R.IV.40-1.1.3", 'title': u"R.IV.40-1.§1.3° - Usage destiné aux bureaux de plus de 650m2", 'description': u"<p>Article R.IV.40-1.§1.4° du CoDT : «&nbsp;la construction, la reconstruction ou la modification de la destination d'un bâtiment en atelier, entrepôt ou hall de stockage à caractère non agricole dont la superficie des planchers est supérieure à quatre cents mètres carrés, la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
@@ -46,7 +47,8 @@ default_values = {
         ],
         'announcementarticles': [
             'UrbanVocabularyTerm',
-            {'id': "ecarts", 'title': u"Article D.IV.5 - Ecarts à un schéma, à un guide ou à un permis d'urbanisation", 'description': u"<p>Application de l'article D.IV.5, écart par rapport à un schéma, à un guide ou un permis d'urbanisation</p>"},
+            {'id': "ecarts", 'title': u"Article D.IV.40 - Ecarts à un schéma, à un guide ou à un permis d'urbanisation", 'description': u"<p>Application de l'article D.IV.40. : Les demandes impliquant un ou plusieurs écarts aux plans communaux d’aménagement adoptés avant l’entrée en vigueur du Code et devenus schémas d’orientation locaux, aux règlements adoptés avant l’entrée en vigueur du Code et devenus guides et aux permis d’urbanisation sont soumises à annonce de projet, et ce, jusqu’à la révision ou à l’abrogation du schéma ou du guide.</p> "},
+            {'id': "ecarts-facultatifs", 'title': u"Article D.VIII.13 - Procédure d'annonce de projet \"facultative\"", 'description': u"<p>Art. D.VIII.13. L’autorité compétente pour adopter le plan, périmètre, schéma ou le guide et pour délivrer les<br /> permis et certificats d’urbanisme no 2, ainsi que les collèges communaux des communes organisant l’annonce de projet<br /> ou l’enquête publique, peuvent procéder à toute forme supplémentaire de publicité et d’information dans le respect des<br /> délais de décision qui sont impartis à l’autorité compétente.</p> "},
             {'id': "R.IV.40-2-1-1", 'title': u"R.IV.40-2.§1.1° - Hauteur des constructions", 'description': u"<p>Article R.IV.40-2.§1-1°du CoDT : «&nbsp;la construction ou la reconstruction de bâtiments dont la hauteur est d’au moins trois niveaux ou neuf mètres sous corniche et dépasse de trois mètres ou plus la moyenne des hauteurs sous corniche des bâtiments situés dans la même rue jusqu’à cinquante mètres de part et d’autre de la construction projetée; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions;»</p> "},
             {'id': "R.IV.40-2-1-2", 'title': u"R.IV.40-2 § 2° - Profondeur de bâtisse", 'description': u"<p>Article R.IV.40-2.§1-2°: «&nbsp;la construction ou la reconstruction de bâtiments dont la profondeur, mesurée à partir de l'alignement ou du front de bâtisse lorsque les constructions voisines ne sont pas implantées sur l'alignement, est supérieure à 15 mètres et dépasse de plus de 4 mètres les bâtiments situés sur les parcelles contiguës, la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
             {'id': "R.IV.40-2-1-3", 'title': u"R.IV.40-2.§1-3° - Magasin de moins de 400m2", 'description': u"<p>Article R.IV.40-2.§1-3 : «&nbsp;la construction, la reconstruction d'un magasin ou la modification de la destination d'un bâtiment en magasin dont la surface commerciale nette est inférieure à quatre cent mètres carrés ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
@@ -61,7 +63,7 @@ default_values = {
             {'id': "ecart-purba", 'title': u"au permis d'urbanisation"},
             {'id': "ecart-gcu", 'title': u"au Guide Communal d'Urbanisme"},
             {'id': "ecart-gru", 'title': u"au Règlement Régional d'Urbanisme"},
-            {'id': "ecart-gru", 'title': u"au Schéma d'Orientation Local"},
+            {'id': "ecart-sol", 'title': u"au Schéma d'Orientation Local"},
         ],
     },
     'CODT_Article127': {
@@ -1180,6 +1182,15 @@ default_values = {
             {'id': "rcu-aire-e", 'title': u"Aire E dominante rurale"},
         ],
 
+        'township_guide': [
+            'UrbanVocabularyTerm',
+            {'id': "rcu-aire-a", 'title': u"Aire A habitat centre des villages"},
+            {'id': "rcu-aire-b", 'title': u"Aire B habitat hors centre des villages"},
+            {'id': "rcu-aire-c", 'title': u"Aire C rives des habitats"},
+            {'id': "rcu-aire-d", 'title': u"Aire D activités économiques"},
+            {'id': "rcu-aire-e", 'title': u"Aire E dominante rurale"},
+        ],
+
         'ssc': [
             'UrbanVocabularyTerm',
             {'id': "ssc-centre-ville", 'title': u"Zone d'habitat urbain de centre-ville"},
@@ -1200,6 +1211,28 @@ default_values = {
             {'id': "ssc-forestiere-mixte", 'title': u"Zone forestière mixte"},
             {'id': "ssc-activites-economiques-mixtes", 'title': u"Zone d'activités économiques mixtes"},
             {'id': "ssc-activites-economiques-tertiaires", 'title': u"Zone d'activités économiques tertiaires"},
+        ],
+
+        'sdc': [
+            'UrbanVocabularyTerm',
+            {'id': "sdc-centre-ville", 'title': u"Zone d'habitat urbain de centre-ville"},
+            {'id': "sdc-suburbain", 'title': u"Zone d'habitat suburbain"},
+            {'id': "sdc-services-publics", 'title': u"Zone de services publics et d'équipements communautaires"},
+            {'id': "sdc-industrielle", 'title': u"Zone industrielle"},
+            {'id': "sdc-industrielle-verte", 'title': u"Zone industrielle verte"},
+            {'id': "sdc-militaire", 'title': u"Zone militaire"},
+            {'id': "sdc-habitat-urban-differe", 'title': u"Zone d'habitat urbain à aménagement différé"},
+            {'id': "sdc-extraction", 'title': u"Zone d'extraction"},
+            {'id': "sdc-loisirs", 'title': u"Zone de loisirs et de séjours"},
+            {'id': "sdc-agricole", 'title': u"Zone agricole"},
+            {'id': "sdc-vert-social", 'title': u"Zone d'espace vert social"},
+            {'id': "sdc-vert-eco", 'title': u"Zone d'espace vert ecologique"},
+            {'id': "sdc-vert-mixte", 'title': u"Zone d'espace vert mixte"},
+            {'id': "sdc-naturelle", 'title': u"Zone naturelle"},
+            {'id': "sdc-forestiere", 'title': u"Zone forestière"},
+            {'id': "sdc-forestiere-mixte", 'title': u"Zone forestière mixte"},
+            {'id': "sdc-activites-economiques-mixtes", 'title': u"Zone d'activités économiques mixtes"},
+            {'id': "sdc-activites-economiques-tertiaires", 'title': u"Zone d'activités économiques tertiaires"},
         ],
 
         'prenu': [
@@ -1224,6 +1257,18 @@ default_values = {
         ],
 
         'rgbsr': [
+            'UrbanVocabularyTerm',
+            {'id': "limoneux-brabancon", 'title': u"du Plateau Limoneux Brabançon (art. 322-15 (lire « article 420 »));"},
+            {'id': "limoneux-hennuyer", 'title': u"du Plateau Limoneux Hennuyer (art. 322-15 (lire « article 420 »));"},
+            {'id': "hesbaye", 'title': u"de la Hesbaye (art. 322-17 (lire « article 422 »));"},
+            {'id': "herve", 'title': u"du Pays de Herve (art. 322-18 (lire « article 423 »));"},
+            {'id': "condroz", 'title': u"du Condroz (art. 322,-19 (lire « article 424 »));"},
+            {'id': "famenne", 'title': u"de la Fagne-Famenne (art. 322-2 (lire « article 425 »));"},
+            {'id': "ardenne", 'title': u"de l’Ardenne (art. 322-21 (lire « article 426 »));"},
+            {'id': "lorraine", 'title': u"de la Lorraine (art. 322-22 (lire « article 427 »));"},
+        ],
+
+        'regional_guide': [
             'UrbanVocabularyTerm',
             {'id': "limoneux-brabancon", 'title': u"du Plateau Limoneux Brabançon (art. 322-15 (lire « article 420 »));"},
             {'id': "limoneux-hennuyer", 'title': u"du Plateau Limoneux Hennuyer (art. 322-15 (lire « article 420 »));"},
@@ -1340,6 +1385,17 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "xxx", 'title': u"Périmètre NATURA 2000 de XXX"},
             {'id': "yyy", 'title': u"Périmètre NATURA 2000 de YYY"},
+        ],
+
+        'delegatesignatures': [
+            'UrbanVocabularyTerm',
+            {'id': "adam", 'title': u"Adam Smith"},
+        ],
+
+        'form_composition': [
+            'UrbanVocabularyTerm',
+            {'id': "4", 'title': u"Annexe IV"},
+            {'id': "5", 'title': u"Annexe V"},
         ],
     },
 }

@@ -81,7 +81,6 @@ def finalizeSchema(schema):
     schema.moveField('exemptFDArticle', after='procedureChoice')
     schema.moveField('water', after='futureRoadCoating')
     schema.moveField('electricity', before='water')
-    schema.moveField('composition', before='missingParts')
     schema['missingParts'].widget.format = None
     return schema
 
