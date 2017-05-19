@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-05-18 14:12+0000\n"
+"POT-Creation-Date: 2017-05-19 09:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,6 +111,9 @@ msgid "CODT_IntegratedLicence"
 msgstr ""
 
 msgid "CODT_NotaryLetter"
+msgstr ""
+
+msgid "CODT_ParcelOutLicence"
 msgstr ""
 
 msgid "CODT_UniqueLicence"
@@ -802,6 +805,9 @@ msgstr ""
 msgid "codt_notaryletter_urbanconfig_title"
 msgstr ""
 
+msgid "codt_parceloutlicence_urbanconfig_title"
+msgstr ""
+
 msgid "codt_uniquelicence_urbanconfig_title"
 msgstr ""
 
@@ -925,6 +931,9 @@ msgstr ""
 #. Default: "Enter a TAL condition that defines the delay calculation. The parameters event and licence are available."
 #: UrbanDelay.py
 msgid "delay_computation_descr"
+msgstr ""
+
+msgid "delegatesignatures_folder_title"
 msgstr ""
 
 msgid "deposittype_folder_title"
@@ -1203,6 +1212,9 @@ msgid "folderroadtypes_folder_title"
 msgstr ""
 
 msgid "folderzones_folder_title"
+msgstr ""
+
+msgid "form_composition_folder_title"
 msgstr ""
 
 #. Default: "City issue on date"
@@ -1806,6 +1818,9 @@ msgstr ""
 msgid "recoursedecisions_folder_title"
 msgstr ""
 
+msgid "regional_guide_folder_title"
+msgstr ""
+
 msgid "reparcelling_folder_title"
 msgstr ""
 
@@ -1957,6 +1972,9 @@ msgid "topics"
 msgstr ""
 
 msgid "topics_folder_title"
+msgstr ""
+
+msgid "township_guide_folder_title"
 msgstr ""
 
 msgid "townshipfoldercategories_folder_title"
@@ -2190,6 +2208,9 @@ msgid "urban_label_RCU"
 msgstr ""
 
 msgid "urban_label_SAR"
+msgstr ""
+
+msgid "urban_label_SDC"
 msgstr ""
 
 #. Default: "Srs"
@@ -2821,6 +2842,9 @@ msgstr ""
 #: licenceFolderManagers.py
 #: urbancertificatebase_foldermanager.py
 msgid "urban_label_foldermanagers"
+msgstr ""
+
+msgid "urban_label_form_composition"
 msgstr ""
 
 #. Default: "Ftsolicitopinionsto"
@@ -3576,6 +3600,12 @@ msgstr ""
 msgid "urban_label_regionalRoad"
 msgstr ""
 
+msgid "urban_label_regional_guide"
+msgstr ""
+
+msgid "urban_label_regional_guide_details"
+msgstr ""
+
 #. Default: "Registrationnumber"
 #: Contact.py
 msgid "urban_label_registrationNumber"
@@ -3707,6 +3737,9 @@ msgid "urban_label_rubrics"
 msgstr ""
 
 msgid "urban_label_sarDetails"
+msgstr ""
+
+msgid "urban_label_sdcDetails"
 msgstr ""
 
 #. Default: "Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word"
@@ -3971,6 +4004,12 @@ msgstr ""
 #. Default: "Townshipspecificfeaturesdetail"
 #: UrbanCertificateBase.py
 msgid "urban_label_townshipSpecificFeaturesDetail"
+msgstr ""
+
+msgid "urban_label_township_guide"
+msgstr ""
+
+msgid "urban_label_township_guide_details"
 msgstr ""
 
 #. Default: "Transmitdate"

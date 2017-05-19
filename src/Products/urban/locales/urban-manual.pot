@@ -68,6 +68,9 @@ msgstr ""
 msgid "CODT_NotaryLetter"
 msgstr ""
 
+msgid "CODT_ParcelOutLicence"
+msgstr ""
+
 msgid "CODT_UniqueLicence"
 msgstr ""
 
@@ -389,6 +392,9 @@ msgstr ""
 msgid "codt_notaryletter_urbanconfig_title"
 msgstr ""
 
+msgid "codt_parceloutlicence_urbanconfig_title"
+msgstr ""
+
 msgid "codt_uniquelicence_urbanconfig_title"
 msgstr ""
 
@@ -447,6 +453,9 @@ msgstr ""
 #. Default: "Enter a TAL condition that defines the delay calculation. The parameters event and licence are available."
 #: UrbanDelay.py
 msgid "delay_computation_descr"
+msgstr ""
+
+msgid "delegatesignatures_folder_title"
 msgstr ""
 
 msgid "deposittype_folder_title"
@@ -585,6 +594,9 @@ msgid "folderroadtypes_folder_title"
 msgstr ""
 
 msgid "folderzones_folder_title"
+msgstr ""
+
+msgid "form_composition_folder_title"
 msgstr ""
 
 #. Default: "City issue on date"
@@ -996,6 +1008,9 @@ msgstr ""
 msgid "prevu_folder_title"
 msgstr ""
 
+msgid "regional_guide_folder_title"
+msgstr ""
+
 msgid "reparcelling_folder_title"
 msgstr ""
 
@@ -1117,6 +1132,9 @@ msgid "topics_folder_title"
 msgstr ""
 
 msgid "townshipfoldercategories_folder_title"
+msgstr ""
+
+msgid "township_guide_folder_title"
 msgstr ""
 
 msgid "townshipspecificfeatures_folder_title"
@@ -1304,6 +1322,9 @@ msgstr ""
 #. Default: "Srs"
 #: Layer.py
 msgid "urban_label_SRS"
+msgstr ""
+
+msgid "urban_label_SDC"
 msgstr ""
 
 #. Default: "Ssc"
@@ -1878,6 +1899,9 @@ msgstr ""
 #: licenceFolderManagers.py
 #: urbancertificatebase_foldermanager.py
 msgid "urban_label_foldermanagers"
+msgstr ""
+
+msgid "urban_label_form_composition"
 msgstr ""
 
 #. Default: "Ftsolicitopinionsto"
@@ -2495,6 +2519,12 @@ msgstr ""
 msgid "urban_label_reference_regex"
 msgstr ""
 
+msgid "urban_label_regional_guide"
+msgstr ""
+
+msgid "urban_label_regional_guide_details"
+msgstr ""
+
 #. Default: "Reparcellingdetails"
 #: GenericLicence.py
 msgid "urban_label_reparcellingDetails"
@@ -2798,6 +2828,9 @@ msgstr ""
 msgid "urban_label_sqlUser"
 msgstr ""
 
+msgid "urban_label_sdcDetails"
+msgstr ""
+
 #. Default: "Sscdetails"
 #: GenericLicence.py
 msgid "urban_label_sscDetails"
@@ -2934,6 +2967,12 @@ msgstr ""
 #. Default: "Townshipcouncilfolder"
 #: BuildLicence.py
 msgid "urban_label_townshipCouncilFolder"
+msgstr ""
+
+msgid "urban_label_township_guide"
+msgstr ""
+
+msgid "urban_label_township_guide_details"
 msgstr ""
 
 #. Default: "Townshipspecificfeatures"
