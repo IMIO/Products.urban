@@ -167,7 +167,7 @@ schedule_config = {
                     'creation_state': ('complete',),
                     'starting_states': ('complete',),
                     'start_conditions': (
-                        StartConditionObject('urban.schedule.condition.acknowledgment_created'),
+                        StartConditionObject('urban.schedule.condition.procedure_choice_done'),
                     ),
                     'end_conditions': (
                         EndConditionObject(

@@ -66,7 +66,7 @@ msgid "urban.schedule.condition.opinion_requests_done"
 msgstr "Avis de service reçus"
 
 msgid "urban.schedule.condition.procedure_choice_done"
-msgstr "Sélectionner une valeur dans le champ 'Catégorie du dossier RW'"
+msgstr "Sélectionner une valeur dans le champ 'choix de la procédure'"
 
 msgid "urban.schedule.condition.refused"
 msgstr "Refuser le dossier"
