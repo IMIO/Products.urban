@@ -2,6 +2,7 @@
 <object name="portal_workflow" meta_type="Plone Workflow Tool">
  <object name="activation_workflow" meta_type="Workflow"/>
  <object name="urban_licence_workflow" meta_type="Workflow"/>
+ <object name="buildlicence_workflow" meta_type="Workflow"/>
  <object name="urbandivision_workflow" meta_type="Workflow"/>
  <object name="urbanevent_workflow" meta_type="Workflow"/>
 <!-- ##code-section workflowobjects -->

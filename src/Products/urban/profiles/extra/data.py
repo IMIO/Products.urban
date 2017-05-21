@@ -44,7 +44,7 @@ urbanEventTypes = {
     'codt_buildlicence': (
         {
             'id': "depot-de-la-demande-codt",
-            'title': "Dépôt de la demande (récépissé - article 115)",
+            'title': "Dépôt de la demande",
             'eventDateLabel': "Date de dépôt",
             'activatedFields': [],
             'deadLineDelay': 15,
@@ -63,11 +63,12 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
+                {'id': "codt-dossier-incomplet-demandeur.odt", 'title': "Dossier incomplet (lettre au demandeur)"},
             ),
         },
         {
             'id': "recepisse-complement-codt",
-            'title': "Récépissé d'un complément à une demande de permis (article 115)",
+            'title': "Récépissé d'un complément à une demande de permis",
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': (
@@ -88,7 +89,7 @@ urbanEventTypes = {
         },
         {
             'id': "accuse-de-reception-codt",
-            'title': "Accusé de réception (dossier complet - article 116 § 1)",
+            'title': "Accusé de réception (dossier complet)",
             'activatedFields': ['transmitDate'],
             'deadLineDelay': 15,
             'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
