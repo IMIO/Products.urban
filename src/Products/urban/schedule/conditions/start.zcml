@@ -37,6 +37,14 @@
         name="urban.schedule.condition.acknowledgment_done"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.ProcedureChoiceDone"
+        name="urban.schedule.condition.procedure_choice_done"
+    />
+
     <!-- inquiry conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseBuildLicence

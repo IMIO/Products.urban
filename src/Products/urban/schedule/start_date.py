@@ -3,6 +3,15 @@
 from imio.schedule.content.logic import StartDate
 
 
+class InfiniteDate(StartDate):
+    """
+    Returns inifinite start date.
+    """
+
+    def start_date(self):
+        return None
+
+
 class CreationDate(StartDate):
     """
     Returns the deposit date of the licence.

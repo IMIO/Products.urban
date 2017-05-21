@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2016-05-23 07:57+0000\n"
+"POT-Creation-Date: 2017-05-19 16:52+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -302,6 +302,44 @@ msgstr "Trier par type de permis"
 
 msgid "Sort results by licence type first, then by delay time"
 msgstr "Trie les résultats d'abord par type de permis, puis par délai de retard."
+
+#: ../browser/templates/urbanstatsview.pt:99
+msgid "Statistics"
+msgstr ""
+
+#: ../browser/longtextview.py:30
+msgid "The field does not exist !!!"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:290
+msgid "There are parcel owners without any address found! Desactivate them!"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:263
+msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
+msgstr ""
+
+#: ../browser/portlets.py:178
+msgid "This portlet lists scheduled licences."
+msgstr ""
+
+#: ../browser/portlets.py:108
+msgid "This portlet lists urban configuration."
+msgstr ""
+
+#: ../browser/portlets.py:55
+msgid "This portlet lists various urban functionnalities."
+msgstr ""
+
+#: ../browser/licence/templates/licenceview.pt:27
+#: ../browser/templates/urbaneventannouncementview.pt:31
+#: ../browser/templates/urbaneventinquiryview.pt:31
+msgid "Transitions:"
+msgstr ""
+
+#: ../browser/templates/urbanstatsmacros.pt:10
+msgid "Types de permis \ &Eacute;tats"
+msgstr ""
 
 msgid "UniqueLicence"
 msgstr "Permis unique"
@@ -1557,6 +1595,8 @@ msgstr "Paramètres des permis uniques"
 msgid "uno_enabled_python"
 msgstr "Si l'interpréteur Python qui tourne Zope et Plone ne dispose pas de la librairie pyUNO (testez-le en essayant 'import uno'), vous pouvez spécifier ici le chemin absolu de l'exécutable d'un second interpréteur Python disposant de la librairie UNO (accès à OpenOffice). Par exemple, l'interpréteur Python /usr/bin/python livré avec Ubuntu."
 
+#: ../profiles/default/actions.xml
+#: ../setuphandlers.py:265
 msgid "urban"
 msgstr "Urbanisme"
 
@@ -2571,6 +2611,9 @@ msgstr "Établissement SEVESO"
 msgid "urban_label_isSupplementary"
 msgstr "Supplémentaire?"
 
+msgid "urban_label_is_in_parceloutlicences"
+msgstr "Le bien se situe dans un permis d'urbanisation"
+
 #. Default: "Karstconstraints"
 #: GenericLicence.py
 msgid "urban_label_karstConstraints"
@@ -2873,6 +2916,12 @@ msgstr "Propriétaire"
 #: licenceParcelling.py
 msgid "urban_label_parcellings"
 msgstr "Lotissement"
+
+msgid "urban_label_parceloutlicences"
+msgstr "Permis d'urbanisation"
+
+msgid "urban_label_parceloutlicences_details"
+msgstr "Détails sur le permis d'urbanisation"
 
 #. Default: "Parcels"
 #: GenericLicence.py
@@ -3776,3 +3825,4 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+

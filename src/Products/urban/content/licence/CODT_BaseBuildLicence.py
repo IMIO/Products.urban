@@ -172,6 +172,12 @@ def finalizeSchema(schema):
     schema.moveField('divergence', before='divergenceDetails')
     schema.moveField('inquiry_type', before='divergence')
     schema['missingParts'].widget.format = None
+    schema['parcellings'].widget.label_msgid = 'urban_label_parceloutlicences'
+    schema['isInSubdivision'].widget.label_msgid = 'urban_label_is_in_parceloutlicences'
+    schema['subdivisionDetails'].widget.label_msgid = 'urban_label_parceloutlicences_details'
+    schema['pca'].widget.label_msgid = 'urban_label_sol'
+    schema['isInPCA'].widget.label_msgid = 'urban_label_is_in_sol'
+    schema['pcaDetails'].widget.label_msgid = 'urban_label_sol_details'
     return schema
 
 finalizeSchema(CODT_BaseBuildLicence_schema)

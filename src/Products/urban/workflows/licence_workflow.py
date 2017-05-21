@@ -25,6 +25,12 @@ class StateRolesMapping(LocalRoleAdapter):
             'urban_managers': ('Reader', 'Editor', 'Contributor', 'Reviewer'),
         },
 
+        'complete': {
+            'urban_readers': ('Reader',),
+            'urban_editors': ('Reader', 'Editor', 'Contributor'),
+            'urban_managers': ('Reader', 'Editor', 'Contributor', 'Reviewer'),
+        },
+
         'refused': {
             'urban_readers': ('Reader',),
             'urban_editors': ('Reader', 'Contributor'),

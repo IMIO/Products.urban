@@ -183,6 +183,9 @@ msgstr "Clôturer"
 msgid "closed"
 msgstr "Clôturé"
 
+msgid "complete"
+msgstr "Complet"
+
 msgid "db_connection_error"
 msgstr "Une erreur est survenue lors de la connexion à la base de données.  Le message d'erreur est : '${error}'"
 
@@ -225,6 +228,9 @@ msgstr "En cours"
 
 msgid "incomplete"
 msgstr "Incomplet"
+
+msgid "iscomplete"
+msgstr "Complet"
 
 msgid "isincomplete"
 msgstr "Incomplet"
@@ -287,3 +293,4 @@ msgstr "Veuillez indiquer davantage de termes de recherche"
 
 msgid "workLocationStreet"
 msgstr "Rue"
+
