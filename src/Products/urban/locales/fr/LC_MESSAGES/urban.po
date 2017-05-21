@@ -3053,6 +3053,9 @@ msgstr "Établissement SEVESO"
 msgid "urban_label_isSupplementary"
 msgstr "Supplémentaire?"
 
+msgid "urban_label_is_in_parceloutlicences"
+msgstr "Le bien se situe dans un permis d'urbanisation"
+
 #. Default: "Karstconstraints"
 #: GenericLicence.py
 msgid "urban_label_karstConstraints"
@@ -3355,6 +3358,12 @@ msgstr "Propriétaire"
 #: licenceParcelling.py
 msgid "urban_label_parcellings"
 msgstr "Lotissement"
+
+msgid "urban_label_parceloutlicences"
+msgstr "Permis d'urbanisation"
+
+msgid "urban_label_parceloutlicences_details"
+msgstr "Détails sur le permis d'urbanisation"
 
 #. Default: "Parcels"
 #: GenericLicence.py

@@ -3017,6 +3017,9 @@ msgstr ""
 msgid "urban_label_isSupplementary"
 msgstr ""
 
+msgid "urban_label_is_in_parceloutlicences"
+msgstr ""
+
 #. Default: "Karstconstraints"
 #: GenericLicence.py
 msgid "urban_label_karstConstraints"
@@ -3318,6 +3321,12 @@ msgstr ""
 #. Default: "Parcellings"
 #: licenceParcelling.py
 msgid "urban_label_parcellings"
+msgstr ""
+
+msgid "urban_label_parceloutlicences"
+msgstr ""
+
+msgid "urban_label_parceloutlicences_details"
 msgstr ""
 
 #. Default: "Parcels"

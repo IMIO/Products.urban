@@ -65,6 +65,18 @@ default_values = {
             {'id': "ecart-gru", 'title': u"au Règlement Régional d'Urbanisme"},
             {'id': "ecart-sol", 'title': u"au Schéma d'Orientation Local"},
         ],
+        'missingparts': [
+            'UrbanVocabularyTerm',
+            {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
+            {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
+            {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+            {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement (annexe 1C) en 2 exemplaires"},
+            {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
+            {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+            {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
+        ],
     },
     'CODT_Article127': {
         'folderdelays': [
@@ -983,7 +995,10 @@ default_values = {
         ],
 
         'folderbuildworktypes': [
-            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence', 'ParcelOutLicence', 'UrbanCertificateTwo'],
+            'UrbanVocabularyTerm', [
+                'BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence', 'ParcelOutLicence', 'UrbanCertificateTwo',
+                'CODT_BuildLicence', 'CODT_UrbanCertificateTwo'
+            ],
             {'id': 'AUTRE', 'title': u"Autres", 'extraValue': 'AUTRE'},
             {'id': 'DEM', 'title': u"Démolition", 'extraValue': 'DEM'},
             {'id': 'DOM_PUB', 'title': u"Intégration dans voirie publique", 'extraValue': 'DOM_PUB'},
