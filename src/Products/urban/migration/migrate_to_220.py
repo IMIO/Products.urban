@@ -163,7 +163,7 @@ def migrate(context):
     logger.info("starting migration steps")
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-imio.schedule:default')
-    setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
+    setup_tool.runAllImportStepsFromProfile('profile-Products.urban:extra')
     block_urban_parent_portlets()
     migrate_inquiry_tabs()
     migrate_inquiry_eventtype()
