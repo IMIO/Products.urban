@@ -300,6 +300,12 @@ def finalizeSchema(schema):
     schema.moveField('township_guide_details', after='township_guide')
     schema.moveField('form_composition', before='missingParts')
     schema['missingParts'].widget.format = None
+    schema['parcellings'].widget.label_msgid = 'urban_label_parceloutlicences'
+    schema['isInSubdivision'].widget.label_msgid = 'urban_label_is_in_parceloutlicences'
+    schema['subdivisionDetails'].widget.label_msgid = 'urban_label_parceloutlicences_details'
+    schema['pca'].widget.label_msgid = 'urban_label_sol'
+    schema['isInPCA'].widget.label_msgid = 'urban_label_is_in_sol'
+    schema['pcaDetails'].widget.label_msgid = 'urban_label_sol_details'
     return schema
 
 finalizeSchema(CODT_BaseBuildLicence_schema)
