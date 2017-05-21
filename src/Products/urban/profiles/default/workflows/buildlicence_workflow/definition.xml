@@ -69,10 +69,8 @@
  <state state_id="in_progress"
         title="in_progress"
         i18n:attributes="title">
-  <exit-transition transition_id="refuse"/>
-  <exit-transition transition_id="accept"/>
   <exit-transition transition_id="isincomplete"/>
-  <exit-transition transition_id="retire"/>
+  <exit-transition transition_id="iscomplete"/>
   <permission-map name="Acces contents information"
                   acquired="False">
    <permission-role>Reader</permission-role>
@@ -126,8 +124,63 @@
  <state state_id="incomplete"
         title="incomplete"
         i18n:attributes="title">
-  <exit-transition transition_id="reopen"/>
+  <exit-transition transition_id="reopen_incomplete"/>
   <exit-transition transition_id="refuse"/>
+  <permission-map name="Acces contents information"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Add portal content"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Delete objects"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify view template"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Review portal content"
+                  acquired="False">
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="complete"
+        title="complete"
+        i18n:attributes="title">
+  <exit-transition transition_id="refuse"/>
+  <exit-transition transition_id="accept"/>
+  <exit-transition transition_id="retire"/>
   <permission-map name="Acces contents information"
                   acquired="False">
    <permission-role>Reader</permission-role>
@@ -296,6 +349,18 @@
     <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
+ <transition transition_id="iscomplete"
+             title="iscomplete"
+             new_state="complete"
+             trigger="USER"
+             before_script=""
+             after_script=""
+             i18n:attributes="title">
+  <action url="" icon="%(portal_url)s/iscomplete.png" category="workflow" i18n:translate="">iscomplete</action>
+  <guard>
+    <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </transition>
  <transition transition_id="isincomplete"
              title="isincomplete"
              new_state="incomplete"
@@ -321,6 +386,18 @@
   </guard>
  </transition>
  <transition transition_id="reopen"
+             title="reopen"
+             new_state="complete"
+             trigger="USER"
+             before_script=""
+             after_script=""
+             i18n:attributes="title">
+  <action url="" icon="%(portal_url)s/reopen.png" category="workflow" i18n:translate="">reopen</action>
+  <guard>
+    <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </transition>
+ <transition transition_id="reopen_incomplete"
              title="reopen"
              new_state="in_progress"
              trigger="USER"

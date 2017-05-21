@@ -14,28 +14,28 @@
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="CODT_Article127">
-     <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="buildlicence_workflow" />
   </type>
   <type type_id="CODT_BuildLicence">
-     <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="buildlicence_workflow" />
   </type>
   <type type_id="CODT_IntegratedLicence">
-     <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="buildlicence_workflow" />
   </type>
   <type type_id="CODT_NotaryLetter">
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="CODT_ParcelOutLicence">
-     <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="buildlicence_workflow" />
   </type>
   <type type_id="CODT_UniqueLicence">
-     <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="buildlicence_workflow" />
   </type>
   <type type_id="CODT_UrbanCertificateOne">
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="CODT_UrbanCertificateTwo">
-     <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="buildlicence_workflow" />
   </type>
   <type type_id="Declaration">
      <bound-workflow workflow_id="urban_licence_workflow" />
