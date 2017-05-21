@@ -64,7 +64,7 @@ class ProcedureChoiceDone(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        return licence.getFolderCategory()
+        return 'ukn' not in licence.getProcedureChoice()
 
 
 class UrbanAnalysisDone(Condition):

@@ -11,4 +11,11 @@
      permission="zope2.View"
   />
 
+  <browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="task-cron"
+    class=".tasks.TaskCronView"
+    permission="zope2.View"
+    />
+
 </configure>

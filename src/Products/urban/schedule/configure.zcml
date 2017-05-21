@@ -3,6 +3,7 @@
     i18n_domain="Products.urban">
 
     <include package=".conditions" />
+    <include package=".crons" />
 
     <include file="assign_principal.zcml" />
     <include file="delay.zcml" />

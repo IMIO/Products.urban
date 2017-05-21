@@ -6,6 +6,14 @@
         for="Products.urban.interfaces.IGenericLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.InfiniteDate"
+        name="urban.schedule.start_date.infinite"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IGenericLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
         factory=".start_date.CreationDate"
         name="urban.schedule.start_date.creation_date"
     />

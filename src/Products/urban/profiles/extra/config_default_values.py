@@ -23,6 +23,18 @@ default_values = {
             {'id': "145j", 'title': u"145 jours", 'deadLineDelay': 145, 'alertDelay': 20},
             {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
         ],
+        'missingparts': [
+            'UrbanVocabularyTerm',
+            {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
+            {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
+            {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+            {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement (annexe 1C) en 2 exemplaires"},
+            {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
+            {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+            {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
+        ],
     },
     'CODT_Article127': {
         'folderdelays': [
@@ -935,7 +947,10 @@ default_values = {
         ],
 
         'folderbuildworktypes': [
-            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence', 'ParcelOutLicence', 'UrbanCertificateTwo'],
+            'UrbanVocabularyTerm', [
+                'BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence', 'ParcelOutLicence', 'UrbanCertificateTwo',
+                'CODT_BuildLicence', 'CODT_UrbanCertificateTwo'
+            ],
             {'id': 'AUTRE', 'title': u"Autres", 'extraValue': 'AUTRE'},
             {'id': 'DEM', 'title': u"Démolition", 'extraValue': 'DEM'},
             {'id': 'DOM_PUB', 'title': u"Intégration dans voirie publique", 'extraValue': 'DOM_PUB'},
@@ -1294,6 +1309,21 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "xxx", 'title': u"Périmètre NATURA 2000 de XXX"},
             {'id': "yyy", 'title': u"Périmètre NATURA 2000 de YYY"},
+        ],
+
+        'delegatesignatures': [
+            'UrbanVocabularyTerm',
+            {'id': "adam", 'title': u"Adam Smith"},
+        ],
+
+        'form_composition': [
+            'UrbanVocabularyTerm',
+            {'id': "4", 'title': u"Annexe IV - Demande de permis avec concours d'un architecte"},
+            {'id': "5", 'title': u"Annexe V - Modification de la destination ou modification de la répartition des surfaces de vente"},
+            {'id': "6", 'title': u"Annexe VI - Modification sensible du relief du sol - dépôt de véhicules, de mitrailles, de matériaux ou de déchets - installations mobiles - travaux d'aménagement au sol aux abords d'une construction autorisée"},
+            {'id': "7", 'title': u"Annexe VII - Boisement - déboisement - abattage - culture de sapins de Noël - modification de l'aspect d'un ou plusieurs arbres ou haies remarquables - défrichement - modification de la végétation"},
+            {'id': "8", 'title': u"Annexe VIII - Travaux techniques"},
+            {'id': "9", 'title': u"Annexe IX - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8"},
         ],
     },
 }
