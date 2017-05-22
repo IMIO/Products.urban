@@ -129,4 +129,21 @@
         name="urban.schedule.condition.fd_decision_received"
     />
 
+    <!-- deposit date is past by x days -->
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.DepositDateIsPast20Days"
+        name="urban.schedule.condition.deposit_past_20days"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.DepositDateIsPast30Days"
+        name="urban.schedule.condition.deposit_past_30days"
+    />
+
 </configure>
