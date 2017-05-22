@@ -48,7 +48,7 @@ schedule_config = {
                     'end_conditions': (
                         EndConditionObject('urban.schedule.condition.complements_received'),
                     ),
-                    'start_date': None,  # infinite deadline
+                    'start_date': 'urban.schedule.start_date.infinite',  # infinite deadline
                 },
             ],
         },
