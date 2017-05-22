@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from datetime import datetime
 from plone import api
 
 from imio.schedule.content.condition import Condition
