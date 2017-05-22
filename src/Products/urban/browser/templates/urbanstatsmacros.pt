@@ -7,7 +7,7 @@
                 <thead i18n:domain="urban">
                 <tr>
                   <th>
-                    <strong i18n:translate="">Types de permis \ États</strong>
+                    <strong i18n:translate="">Types de permis \ &Eacute;tats</strong>
                   </th>
                   <th tal:repeat="licence_state python:type(licence_states) == list and licence_states or [licence_states]">
                      <div tal:content="licence_state" i18n:domain="plone" i18n:translate=""></div>

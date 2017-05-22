@@ -29,7 +29,7 @@
     <div class="parcel-action">
      <form tal:condition="python: member.has_permission('urban: Add PortionOut', context)" name="quickAdd"
            tal:attributes="action python: context.absolute_url() + '/searchparcels'" action="searchparcels" method="post">
-      <input type="submit" class="contenttype-portionout apButton" id="addPortionOut" value="search_parcels" i18n:attributes="value" />
+      <input type="submit" class="contenttype-portionout apButton" id="addPortionOut" value="" i18n:attributes="value search_parcels" />
      </form>
     </div>
     <div class="parcel-action">

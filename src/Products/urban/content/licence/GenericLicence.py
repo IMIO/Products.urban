@@ -96,7 +96,8 @@ optional_fields = [
     'description', 'rgbsr', 'rgbsrDetails', 'karstConstraints', 'karstConstraintsDetails',
     'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', 'sevesoSite', 'natura_2000', 'sewers',
     'sewersDetails', 'roadAnalysis', 'futureRoadCoating', 'expropriation', 'expropriationDetails',
-    'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails'
+    'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails',
+    'reparcelling', 'reparcellingDetails'
 ]
 ##/code-section module-header
 

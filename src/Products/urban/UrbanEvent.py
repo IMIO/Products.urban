@@ -331,6 +331,17 @@ schema = Schema((
         ),
         optional= True,
     ),
+    StringField(
+        name='delegateSignatures',
+        widget=SelectionWidget(
+            label='Delegatesignatures',
+            label_msgid='urban_label_delegateSignatures',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        optional=True,
+        vocabulary=UrbanVocabulary('delegatesignatures', inUrbanConfig=False),
+    ),
 
 ),
 )

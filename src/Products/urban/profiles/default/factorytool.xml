@@ -5,6 +5,7 @@
   <type portal_type="CODT_BuildLicence"/>
   <type portal_type="CODT_IntegratedLicence"/>
   <type portal_type="CODT_NotaryLetter"/>
+  <type portal_type="CODT_ParcelOutLicence"/>
   <type portal_type="CODT_UniqueLicence"/>
   <type portal_type="CODT_UrbanCertificateOne"/>
   <type portal_type="CODT_UrbanCertificateTwo"/>

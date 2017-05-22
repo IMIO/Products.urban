@@ -62,6 +62,7 @@ ADD_CONTENT_PERMISSIONS = {
     'CODT_Article127': 'urban: Add CODT_Article127',
     'CODT_BuildLicence': 'urban: Add CODT_BuildLicence',
     'CODT_IntegratedLicence': 'urban: Add CODT_IntegratedLicence',
+    'CODT_ParcelOutLicence': 'urban: Add CODT_ParcelOutLicence',
     'CODT_UniqueLicence': 'urban: Add CODT_UniqueLicence',
     'CODT_UrbanCertificateTwo': 'urban: Add CODT_UrbanCertificateTwo',
     'Contact': 'urban: Add Contact',
@@ -122,6 +123,7 @@ setDefaultRoles('urban: Add CODT_Article127', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_BuildLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_IntegratedLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_NotaryLetter', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add CODT_ParcelOutLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_UniqueLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_UrbanCertificateOne', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_UrbanCertificateTwo', ("Manager", "Contributor"))
@@ -182,8 +184,9 @@ URBAN_TYPES = [
     'PatrimonyCertificate',
     'EnvClassOne', 'EnvClassTwo', 'EnvClassThree',
     'ParcelOutLicence', 'MiscDemand', 'Division', 'NotaryLetter',
-    'CODT_BuildLicence', 'CODT_Article127', 'CODT_IntegratedLicence', 'CODT_UniqueLicence',
-    'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne', 'CODT_NotaryLetter', 'ProjectMeeting'
+    'CODT_BuildLicence', 'CODT_Article127', 'CODT_IntegratedLicence', 'CODT_ParcelOutLicence',
+    'CODT_UniqueLicence', 'CODT_UrbanCertificateTwo',
+    'CODT_UrbanCertificateOne', 'CODT_NotaryLetter', 'ProjectMeeting'
 ]
 
 URBAN_CWATUPE_TYPES = [
@@ -193,9 +196,10 @@ URBAN_CWATUPE_TYPES = [
 ]
 
 URBAN_CODT_TYPES = [
-    'CODT_BuildLicence', 'CODT_Article127', 'CODT_IntegratedLicence', 'CODT_UniqueLicence',
-    'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne', 'CODT_NotaryLetter', 'ProjectMeeting'
-    'MiscDemand', 'PreliminaryNotice', 'PatrimonyCertificate', 'Division',
+    'CODT_BuildLicence', 'CODT_Article127', 'CODT_IntegratedLicence', 'CODT_ParcelOutLicence',
+    'CODT_UniqueLicence', 'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne',
+    'CODT_NotaryLetter', 'ProjectMeeting', 'MiscDemand', 'PreliminaryNotice',
+    'PatrimonyCertificate', 'Division',
 ]
 
 URBAN_ENVIRONMENT_TYPES = [

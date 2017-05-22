@@ -18,7 +18,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
-from Products.urban.content.licence.BuildLicence import finalizeSchema
+from Products.urban.content.licence.CODT_BuildLicence import finalizeSchema
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *

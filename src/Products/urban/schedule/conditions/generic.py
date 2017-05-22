@@ -275,3 +275,49 @@ class LicenceDecisionCollegeEventCreated(Condition):
         event_created = licence.getLastTheLicence()
 
         return event_created
+
+
+class DepositDateIsPast20Days(Condition):
+    """
+    The deposit date is past by 20 days
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        deposit_event = licence.getLastDeposit()
+        if deposit_event:
+            date1 = deposit_event.eventDate.asdatetime()
+            date2 = datetime.now(date1.tzinfo)
+            return (date2.date() - date1.date()).days > 20
+        return False
+
+
+class DepositDateIsPast30Days(Condition):
+    """
+    The deposit date is past by 30 days
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        deposit_event = licence.getLastDeposit()
+        if deposit_event:
+            date1 = deposit_event.eventDate.asdatetime()
+            date2 = datetime.now(date1.tzinfo)
+            return (date2.date() - date1.date()).days > 30
+        return False
+
+
+class LicenceRefused(Condition):
+    """
+    Licence is refused.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        refused_event = licence.getLastRefusedNotification()
+        if refused_event:
+            return api.content.get_state(refused_event) == 'closed'
+        return False
