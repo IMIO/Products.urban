@@ -105,4 +105,13 @@
         name="urban.schedule.condition.deposit_past_30days"
     />
 
+    <!-- decision -->
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.DecisionNotified"
+        name="urban.schedule.condition.decision_notified"
+    />
+
 </configure>

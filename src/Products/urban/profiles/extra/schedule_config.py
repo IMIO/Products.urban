@@ -3,6 +3,7 @@
 from imio.schedule.content.object_factories import EndConditionObject
 from imio.schedule.content.object_factories import StartConditionObject
 from imio.schedule.content.object_factories import CreationConditionObject
+from imio.schedule.content.object_factories import MacroCreationConditionObject
 
 
 schedule_config = {
@@ -257,6 +258,40 @@ schedule_config = {
                     'additional_delay': None,
                 },
             ],
+        },
+        {
+            'type_name': 'MacroTaskConfig',
+            'id': 'decision-finale',
+            'title': 'Décision finale à notifier',
+            'default_assigned_group': 'urban_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('complete',),
+            'starting_states': ('complete',),
+            'ending_states': ('accepted', 'refused'),
+            'creation_conditions': (
+                MacroCreationConditionObject('urban.schedule.condition.acknowledgment_done'),
+            ),
+            'start_date': 'schedule.start_date.subtask_highest_due_date',
+            'additional_delay': 2,
+            'subtasks': [
+                {
+                    'type_name': 'TaskConfig',
+                    'id': 'rediger-proposition-decision',
+                    'title': 'Notifier la décision',
+                    'default_assigned_group': 'urban_editors',
+                    'default_assigned_user': 'urban.assign_folder_manager',
+                    'creation_state': ('complete',),
+                    'starting_states': ('complete',),
+                    'end_conditions': (
+                        EndConditionObject('urban.schedule.condition.decision_notified'),
+                    ),
+                    'start_date': 'schedule.start_date.task_starting_date',
+                    'calculation_delay': (
+                        'urban.schedule.delay.annonced_delay',
+                    ),
+                    'additional_delay': -7,
+                },
+            ]
         },
     ],
 }

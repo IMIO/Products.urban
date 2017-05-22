@@ -155,4 +155,13 @@
         name="urban.schedule.condition.refused"
     />
 
+    <!-- decision -->
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.DecisionNotified"
+        name="urban.schedule.condition.decision_notified"
+    />
+
 </configure>
