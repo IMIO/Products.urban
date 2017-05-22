@@ -184,7 +184,7 @@ URBAN_TYPES = [
     'PatrimonyCertificate',
     'EnvClassOne', 'EnvClassTwo', 'EnvClassThree',
     'ParcelOutLicence', 'MiscDemand', 'Division', 'NotaryLetter',
-    'CODT_BuildLicence', 'CODT_Article127', 'CODT_IntegratedLicence', 'CODT_ParcelOutLicence',
+    'CODT_BuildLicence', 'CODT_Article127', 'CODT_IntegratedLicence', # 'CODT_ParcelOutLicence',
     'CODT_UniqueLicence', 'CODT_UrbanCertificateTwo',
     'CODT_UrbanCertificateOne', 'CODT_NotaryLetter', 'ProjectMeeting'
 ]
