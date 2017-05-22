@@ -97,6 +97,11 @@ class IParcelOutLicence(IBaseBuildLicence):
     """
 
 
+class ICODT_ParcelOutLicence(IBaseBuildLicence):
+    """Marker interface for CODT_ParcelOutLicence
+    """
+
+
 class IFolderManager(Interface):
     """Marker interface for .FolderManager.FolderManager
     """
@@ -433,6 +438,10 @@ class IWorkBeginningEvent(Interface):
 
 class IProrogationEvent(Interface):
     __doc__ = _("""IProrogation type marker interface""")
+
+
+class IRefusedIncompletenessEvent(Interface):
+    __doc__ = _("""IRefusedIncompleteness type marker interface""")
 
 
 class IUrbanBase(Interface):

@@ -7,6 +7,7 @@ from Products.urban.interfaces import ICODT_BaseBuildLicence
 from Products.urban.interfaces import ICODT_BuildLicence
 from Products.urban.interfaces import ICODT_IntegratedLicence
 from Products.urban.interfaces import ICODT_NotaryLetter
+from Products.urban.interfaces import ICODT_ParcelOutLicence
 from Products.urban.interfaces import ICODT_UniqueLicence
 from Products.urban.interfaces import ICODT_UrbanCertificateOne
 from Products.urban.interfaces import ICODT_UrbanCertificateTwo
@@ -39,6 +40,7 @@ URBAN_TYPES_INTERFACES = {
     'CODT_BuildLicence': ICODT_BuildLicence,
     'CODT_IntegratedLicence': ICODT_IntegratedLicence,
     'CODT_NotaryLetter': ICODT_NotaryLetter,
+    'CODT_ParcelOutLicence': ICODT_ParcelOutLicence,
     'CODT_UniqueLicence': ICODT_UniqueLicence,
     'CODT_UrbanCertificateOne': ICODT_UrbanCertificateOne,
     'CODT_UrbanCertificateTwo': ICODT_UrbanCertificateTwo,

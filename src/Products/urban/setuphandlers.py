@@ -732,7 +732,7 @@ def addApplicationFolders(context):
     site.setLayout('redirectto_urban_root_view')
 
     if not hasattr(aq_base(site), "urban"):
-        newFolderid = site.invokeFactory("Folder", id="urban", title=_("urban", 'urban'))
+        newFolderid = site.invokeFactory("Folder", id="urban", title=_('Urban', "urban"))
         newFolder = getattr(site, newFolderid)
     else:
         newFolder = getattr(site, 'urban')

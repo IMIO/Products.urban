@@ -15,7 +15,7 @@
                 <br />
                 <tal:block condition="view/showLinkToLinkedLicence">
                     <a class="no_underline" href="#" tal:attributes="href view/getLinkToLinkedLicence">
-                        <img src="goback.png" />&nbsp;<span i18n:translate="go_back">Go back...</span>
+                        <img src="goback.png" />&nbsp;<span i18n:translate="go_back">Go back</span>...
                     </a>
                 </tal:block>
 

@@ -26,8 +26,16 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_Inquiry
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 ##/code-section module-header
+
+optional_fields = [
+    'SDC', 'sdcDetails', 'regional_guide', 'regional_guide_details',
+    'township_guide', 'township_guide_details',
+]
 
 slave_fields_prorogation = (
     {
@@ -38,6 +46,15 @@ slave_fields_prorogation = (
     },
 )
 
+
+slave_fields_form_composition = (
+    {
+        'name': 'missingParts',
+        'action': 'vocabulary',
+        'vocab_method': 'getCompositionMissingParts',
+        'control_param': 'composition',
+    },
+)
 schema = Schema((
     BooleanField(
         name='prorogation',
@@ -50,10 +67,98 @@ schema = Schema((
         ),
         schemata='urban_analysis',
     ),
+    StringField(
+        name='form_composition',
+        widget=MasterSelectWidget(
+            slave_fields=slave_fields_form_composition,
+            label='Form_composition',
+            label_msgid='urban_label_form_composition',
+            i18n_domain='urban',
+        ),
+        schemata='urban_analysis',
+        vocabulary=UrbanVocabulary('form_composition', inUrbanConfig=False),
+    ),
+    LinesField(
+        name='SDC',
+        widget=MultiSelectionWidget(
+            size=15,
+            label='Sdc',
+            label_msgid='urban_label_SDC',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('sdc', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='sdcDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Sdcdetails',
+            label_msgid='urban_label_sdcDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
+    ),
+    LinesField(
+        name='township_guide',
+        widget=MultiSelectionWidget(
+            size=10,
+            label='Township_guide',
+            label_msgid='urban_label_township_guide',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('township_guide', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='township_guide_details',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Township_guide_details',
+            label_msgid='urban_label_township_guide_details',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
+    ),
+    LinesField(
+        name='regional_guide',
+        widget=MultiSelectionWidget(
+            label='Regional_guide',
+            label_msgid='urban_label_regional_guide',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        vocabulary=UrbanVocabulary('regional_guide', inUrbanConfig=False, with_empty_value=True),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='regional_guide_details',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Regional_guide_details',
+            label_msgid='urban_label_regional_guide_details',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
+    ),
 ),
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 CODT_BaseBuildLicence_schema = BaseFolderSchema.copy() + \
@@ -64,6 +169,13 @@ CODT_BaseBuildLicence_schema = BaseFolderSchema.copy() + \
 
 ##code-section after-schema #fill in your manual code here
 CODT_BaseBuildLicence_schema['title'].required = False
+CODT_BaseBuildLicence_schema.delField('rgbsr')
+CODT_BaseBuildLicence_schema.delField('rgbsrDetails')
+CODT_BaseBuildLicence_schema.delField('SSC')
+CODT_BaseBuildLicence_schema.delField('sscDetails')
+CODT_BaseBuildLicence_schema.delField('RCU')
+CODT_BaseBuildLicence_schema.delField('rcuDetails')
+CODT_BaseBuildLicence_schema.delField('composition')
 #put the the fields coming from Inquiry in a specific schemata
 setSchemataForCODT_Inquiry(CODT_BaseBuildLicence_schema)
 ##/code-section after-schema
@@ -136,6 +248,16 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
         )
         return DisplayList(vocab)
 
+    def getCompositionMissingParts(self, composition):
+        """
+        """
+        urban_voc = self.schema['missingParts'].vocabulary
+        all_terms = urban_voc.listAllVocTerms(self)
+
+        display_values = [(term.id, term.Title().decode('utf-8')) for term in all_terms if str(composition) in term.getExtraValue()]
+
+        return DisplayList(display_values)
+
 
 # end of class CODT_BaseBuildLicence
 
@@ -165,12 +287,18 @@ def finalizeSchema(schema):
     schema.moveField('exemptFDArticle', after='procedureChoice')
     schema.moveField('water', after='futureRoadCoating')
     schema.moveField('electricity', before='water')
-    schema.moveField('composition', before='missingParts')
     schema.moveField('announcementArticlesText', before='derogation')
     schema.moveField('announcementArticles', before='announcementArticlesText')
     schema.moveField('divergenceDetails', before='announcementArticles')
     schema.moveField('divergence', before='divergenceDetails')
     schema.moveField('inquiry_type', before='divergence')
+    schema.moveField('SDC', after='protectedBuildingDetails')
+    schema.moveField('sdcDetails', after='SDC')
+    schema.moveField('regional_guide', after='reparcellingDetails')
+    schema.moveField('regional_guide_details', after='regional_guide')
+    schema.moveField('township_guide', after='sdcDetails')
+    schema.moveField('township_guide_details', after='township_guide')
+    schema.moveField('form_composition', before='missingParts')
     schema['missingParts'].widget.format = None
     schema['parcellings'].widget.label_msgid = 'urban_label_parceloutlicences'
     schema['isInSubdivision'].widget.label_msgid = 'urban_label_is_in_parceloutlicences'
