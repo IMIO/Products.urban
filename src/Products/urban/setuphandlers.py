@@ -174,10 +174,6 @@ def postInstall(context):
     logger.info("adaptDefaultPortal : starting...")
     adaptDefaultPortal(context)
     logger.info("adaptDefaultPortal : Done")
-    #refresh catalog after all these objects have been added...
-    logger.info("Refresh portal_catalog : starting...")
-    site.portal_catalog.refreshCatalog(clear=True)
-    logger.info("Refresh portal_catalog : Done!")
 
 
 
@@ -187,7 +183,7 @@ def _(msgid, domain):
     return translation_domain.translate(msgid, target_language='fr', default='')
 
 
-def extraPostInstall(context, refresh=True):
+def extraPostInstall(context):
     # all installation custom code not required for tests
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
@@ -204,11 +200,6 @@ def extraPostInstall(context, refresh=True):
     logger.info("addEventTypesAndTemplates : starting...")
     addEventTypesAndTemplates(context)
     logger.info("addEventTypesAndTemplates : Done")
-    if refresh:
-        #refresh catalog after all these objects have been added...
-        logger.info("Refresh portal_catalog : starting...")
-        site.portal_catalog.refreshCatalog(clear=True)
-        logger.info("Refresh portal_catalog : Done!")
 
 
 def setFolderAllowedTypes(folder, portal_types):
