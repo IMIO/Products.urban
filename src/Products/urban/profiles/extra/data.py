@@ -180,6 +180,18 @@ urbanEventTypes = {
             'podTemplates': (
             ),
         },
+        {
+            'id': "delivrance-du-permis-octroi-ou-refus-codt",
+            'title': "Délivrance du permis (octroi ou refus)",
+            'activatedFields': ['decisionDate', 'decision'],
+            'deadLineDelay': 15,
+            'eventDateLabel': "Date de notification",
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+        },
     ),
     'buildlicence': (
         {

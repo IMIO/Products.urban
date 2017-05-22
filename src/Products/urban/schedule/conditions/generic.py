@@ -322,3 +322,17 @@ class LicenceRefused(Condition):
         if refused_event:
             return api.content.get_state(refused_event) == 'closed'
         return False
+
+
+class DecisionNotified(Condition):
+    """
+    Licence decision was notified
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        decision_event = licence.getLastTheLicence()
+        if decision_event:
+            return api.content.get_state(decision_event) == 'closed'
+        return False
