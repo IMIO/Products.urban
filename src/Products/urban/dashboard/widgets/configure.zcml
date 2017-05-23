@@ -1,0 +1,8 @@
+<configure
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:faceted="http://namespaces.zope.org/faceted"
+  i18n_domain="urban">
+
+  <faceted:widget factory=".select_to_list.Widget" />
+
+</configure>
