@@ -6,6 +6,7 @@
     <include file="autocomplete.zcml" />
     <include file="columns.zcml" />
     <include file="vocabularies.zcml" />
+    <include package=".widgets" />
 
     <configure package="collective.eeafaceted.collectionwidget">
         <browser:page

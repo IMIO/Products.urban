@@ -21,4 +21,10 @@
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
 
+  <utility
+    component=".vocabularies.ProcedureCategoryVocabularyFactory"
+    name="urban.vocabularies.procedure_category"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
 </configure>

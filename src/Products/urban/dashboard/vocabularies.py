@@ -5,6 +5,9 @@ from imio.dashboard.vocabulary import ConditionAwareCollectionVocabulary
 from plone import api
 
 from Products.urban.config import URBAN_TYPES
+from Products.urban.config import URBAN_CWATUPE_TYPES
+from Products.urban.config import URBAN_CODT_TYPES
+from Products.urban.config import URBAN_ENVIRONMENT_TYPES
 
 from zope.i18n import translate as _
 from zope.schema.vocabulary import SimpleTerm
@@ -69,6 +72,37 @@ class DashboardCollections(ConditionAwareCollectionVocabulary):
             sort_on='getObjPositionInParent'
         )
         return list(brains)
+
+    def __call__(self, context, query=None):
+        terms = super(DashboardCollections, self).__call__(
+            context,
+            query=query,
+        )
+        filtered_terms = [t for t in terms
+                          if t.value.id in self.get_collection_ids(context)]
+        return SimpleVocabulary(filtered_terms)
+
+    def get_procedure_category(self, context):
+        """Get the procedure category (CODT or CWATUPE) from context"""
+        if context.id == 'urban':
+            return 'ALL'
+        if context.id.startswith('codt'):
+            return 'CODT'
+        return 'CWATUPE'
+
+    def _format_id(self, type):
+        """Format a UrbanType to the collection id"""
+        return 'collection_{0}'.format(type.lower())
+
+    def get_collection_ids(self, context):
+        ids = ['collection_all_licences']
+        ids.extend(map(self._format_id, URBAN_ENVIRONMENT_TYPES))
+        category = self.get_procedure_category(context)
+        if category == 'CODT' or category == 'ALL':
+            ids.extend(map(self._format_id, URBAN_CODT_TYPES))
+        if category == 'CWATUPE' or category == 'ALL':
+            ids.extend(map(self._format_id, URBAN_CWATUPE_TYPES))
+        return ids
 
 
 class CollectionCategory(object):
