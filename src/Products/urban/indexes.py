@@ -186,7 +186,7 @@ def urbanevent_foldermanager(object):
 @indexer(IBaseBuildLicence)
 def investigation_start_date(object):
     if object.getUrbanEventInquiries():
-        event = object.getLastInquiry()
+        event = object.getLastInquiry(use_catalog=False)
         if event.getInvestigationStart():
             return event.getInvestigationStart()
 
