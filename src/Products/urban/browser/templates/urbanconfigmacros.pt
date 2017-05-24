@@ -138,8 +138,16 @@
         base_macros context/base/macros;
         folderlisting_macro base_macros/folderlisting;
         errors python:request.get('errors', {})">
-        <form action="configtestprocessingview">
-            <metal:fieldMacro use-macro="python:here.widget('eventTypes', mode='edit')" />
+        <form action="test/configtestprocessingview">
+            <div tal:repeat="event view/get_events">
+                <tal:data tal:define="title event/title;
+                                  id event/id">
+                    <input type="checkbox" name="events_checked" tal:attributes="value id" checked>
+                    <span tal:content="title"></span>
+
+                </tal:data>
+            </div>
+            <!--<metal:fieldMacro use-macro="python:here.widget('eventTypes', mode='edit')" />-->
             <input type="submit" value="générer traitement">
         </form>
         </metal:main_macro>
