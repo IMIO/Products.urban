@@ -44,6 +44,18 @@ from DateTime import DateTime
 
 schema = Schema((
 
+    LinesField(
+        name='eventTypes',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Eventtype',
+            label_msgid='urban_label_eventtype',
+            i18n_domain='urban',
+        ),
+        schemata='urban_test',
+        multiValued=1,
+        vocabulary="listEventTypes",
+    ),
     StringField(
         name='licencePortalType',
         widget=StringField._properties['widget'](
@@ -194,6 +206,12 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
     # Methods
 
     # Manually created methods
+
+    security.declarePublic('listEventTypes')
+
+    def listEventTypes(self):
+        res = [(i.id, i.title) for i in self.urbaneventtypes.objectValues()]
+        return DisplayList(res)
 
     security.declarePublic('getEventTypesByInterface')
 
