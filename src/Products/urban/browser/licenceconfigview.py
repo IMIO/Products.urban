@@ -1,14 +1,15 @@
-
 # -*- coding: utf-8 -*-
 
 from Products.Five import BrowserView
 from Acquisition import aq_inner
+from plone import api
 
 
 class LicenceConfigView(BrowserView):
     """
       This manage methods common in all licences view
     """
+
     def __init__(self, context, request):
         super(LicenceConfigView, self).__init__(context, request)
         self.context = context
@@ -46,3 +47,13 @@ class LicenceConfigView(BrowserView):
         context = aq_inner(self.context)
         test_folder = getattr(context, 'test')
         return [test_folder]
+
+    def get_events(self):
+        licence = aq_inner(self.context)
+        tool = api.portal.get_tool('portal_types')
+        portal_type = tool[licence.licencePortalType]
+        config_id = portal_type.id.lower()
+        portal_urban = api.portal.get_tool('portal_urban')
+        eventtypes = portal_urban.listEventTypes(licence, urbanConfigId=config_id)
+        events_objects = [event.getObject() for event in eventtypes]
+        return events_objects
