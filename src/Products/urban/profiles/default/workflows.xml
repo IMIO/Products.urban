@@ -2,7 +2,7 @@
 <object name="portal_workflow" meta_type="Plone Workflow Tool">
  <object name="activation_workflow" meta_type="Workflow"/>
  <object name="urban_licence_workflow" meta_type="Workflow"/>
- <object name="buildlicence_workflow" meta_type="Workflow"/>
+ <object name="codt_buildlicence_workflow" meta_type="Workflow"/>
  <object name="urbandivision_workflow" meta_type="Workflow"/>
  <object name="urbanevent_workflow" meta_type="Workflow"/>
 <!-- ##code-section workflowobjects -->
@@ -15,28 +15,28 @@
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="CODT_Article127">
-     <bound-workflow workflow_id="buildlicence_workflow" />
+     <bound-workflow workflow_id="codt_buildlicence_workflow" />
   </type>
   <type type_id="CODT_BuildLicence">
-     <bound-workflow workflow_id="buildlicence_workflow" />
+     <bound-workflow workflow_id="codt_buildlicence_workflow" />
   </type>
   <type type_id="CODT_IntegratedLicence">
-     <bound-workflow workflow_id="buildlicence_workflow" />
+     <bound-workflow workflow_id="codt_buildlicence_workflow" />
   </type>
   <type type_id="CODT_NotaryLetter">
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="CODT_ParcelOutLicence">
-     <bound-workflow workflow_id="buildlicence_workflow" />
+     <bound-workflow workflow_id="codt_buildlicence_workflow" />
   </type>
   <type type_id="CODT_UniqueLicence">
-     <bound-workflow workflow_id="buildlicence_workflow" />
+     <bound-workflow workflow_id="codt_buildlicence_workflow" />
   </type>
   <type type_id="CODT_UrbanCertificateOne">
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="CODT_UrbanCertificateTwo">
-     <bound-workflow workflow_id="buildlicence_workflow" />
+     <bound-workflow workflow_id="codt_buildlicence_workflow" />
   </type>
   <type type_id="Declaration">
      <bound-workflow workflow_id="urban_licence_workflow" />
