@@ -15,12 +15,23 @@ class ConfigTestView(BrowserView):
         self.context = context
         self.request = request
 
+    def get_events(self):
+        licence = aq_parent(self.context)
+        tool = api.portal.get_tool('portal_types')
+        portal_type = tool[licence.licencePortalType]
+        config_id = portal_type.id.lower()
+        portal_urban = api.portal.get_tool('portal_urban')
+        eventtypes = portal_urban.listEventTypes(licence, urbanConfigId=config_id)
+        events_objects = [event.getObject() for event in eventtypes]
+        return events_objects
+
 
 class ConfigTestProcessingView(BrowserView):
     def __init__(self, context, request):
         super(ConfigTestProcessingView, self).__init__(context, request)
         self.context = context
         self.request = request
+        self.events_checked = self.request.get('events_checked')
 
     def processing(self):
         licence_config = aq_parent(self.context)
@@ -32,19 +43,15 @@ class ConfigTestProcessingView(BrowserView):
 
         applicant = api.content.create(container=context, type='Applicant', title='ApplicantTitle')
 
-
-
         # event manage
         mLicenceView = LicenceView(context, self.request)
         events = mLicenceView.getUrbanEventTypes()
         for event in events:
-            try:
+            if event.id in self.events_checked:
                 event = event.getObject()
                 event = mGenerateObject.context.createUrbanEvent(event)
                 mGeneratEvent = GenerateObject(context=event, request=self.request)
                 mGeneratEvent.config_event()
-            except:
-                print "event error name: %s" % (event.id)
 
         mGenerateObjectApplicant = GenerateObject(context=applicant, request=self.request)
         mGenerateObjectApplicant.config_applicant()
@@ -94,7 +101,6 @@ class GenerateObject(GenerateMixin):
             if name not in self.IGNORED_FIELD:
                 me = getattr(self, "_{0}".format(name), process)
                 me(name=name, fields=self.fields, context=self.context, request=self.request)
-
 
     # Custom method for process reference
 
@@ -155,7 +161,6 @@ def process(name, fields, context, request):
         setter(value)
 
 
-
 def process_vocabulary(field, context):
     """
     Return value for vocabulary
@@ -193,9 +198,12 @@ def get_custom_vocabulary(vocabulary_name, context):
     @param context:
     @return: value custom
     """
-    value = getattr(context, vocabulary_name)().keys()[-1]
-    if value is not None:
-        return value
+    if len(getattr(context, vocabulary_name)().keys()) > 0:
+        value = getattr(context, vocabulary_name)().keys()[-1]
+        if value is not None:
+            return value
+        else:
+            # raise error if not key in vocabualary
+            raise ValueError("Any key in custom vocabulary find!")
     else:
-        # raise error if not key in vocabualary
-        raise ValueError("Any key in custom vocabulary find!")
+        return []
