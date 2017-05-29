@@ -3221,3 +3221,15 @@ msgstr ""
 #: UrbanVocabularyTerm.py
 msgid "urban_help_coring_id"
 msgstr ""
+
+msgid "urban_label_is_in_sol"
+msgstr ""
+
+msgid "urban_label_sol_details"
+msgstr ""
+
+msgid "urban_label_sol"
+msgstr ""
+
+msgid "urban_label_exemptFDArticleCODT"
+msgstr ""

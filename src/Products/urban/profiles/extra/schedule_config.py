@@ -16,7 +16,7 @@ schedule_config = {
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('incomplete',),
             'starting_states': ('incomplete',),
-            'ending_states': ('in_progress',),
+            'ending_states': ('deposit',),
             'creation_conditions': (
                 CreationConditionObject('urban.schedule.condition.incomplete_first_time'),
             ),
@@ -61,7 +61,7 @@ schedule_config = {
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('incomplete',),
             'starting_states': ('incomplete',),
-            'ending_states': ('refused',),
+            'ending_states': ('inacceptable',),
             'creation_conditions': (
                 CreationConditionObject('urban.schedule.condition.incomplete_second_time'),
             ),
@@ -74,7 +74,7 @@ schedule_config = {
                     'default_assigned_group': 'urban_editors',
                     'default_assigned_user': 'urban.assign_folder_manager',
                     'creation_state': ('incomplete',),
-                    'starting_states': ('incomplete',),
+                    'starting_states': ('inacceptable',),
                     'end_conditions': (
                         EndConditionObject('urban.schedule.condition.refused'),
                     ),
@@ -89,14 +89,14 @@ schedule_config = {
             'title': 'Réception du dossier',
             'default_assigned_group': 'urban_editors',
             'default_assigned_user': 'urban.assign_folder_manager',
-            'creation_state': ('in_progress',),
-            'starting_states': ('in_progress',),
+            'creation_state': ('deposit',),
+            'starting_states': ('deposit',),
             'start_date': 'urban.schedule.start_date.deposit_date',
             'calculation_delay': (
                 'schedule.calculation_default_delay',
             ),
             'activate_recurrency': True,
-            'recurrence_states': ('in_progress', ),
+            'recurrence_states': ('deposit', ),
             'additional_delay': 30,
             'subtasks': [
                 {
@@ -105,8 +105,8 @@ schedule_config = {
                     'title': 'Renseigner la date de dépôt',
                     'default_assigned_group': 'urban_editors',
                     'default_assigned_user': 'urban.assign_folder_manager',
-                    'creation_state': ('in_progress', ),
-                    'starting_states': ('in_progress', ),
+                    'creation_state': ('deposit', ),
+                    'starting_states': ('deposit', ),
                     'start_date': 'urban.schedule.start_date.creation_date',
                     'end_conditions': (
                         EndConditionObject('urban.schedule.condition.deposit_done'),
@@ -114,49 +114,30 @@ schedule_config = {
                     'calculation_delay': (
                         'schedule.calculation_default_delay',
                     ),
-                    'activate_recurrency': True,
-                    'recurrence_states': ('in_progress', ),
+                    'recurrence_states': ('deposit', ),
                     'additional_delay': 5,
                 },
                 {
                     'type_name': 'TaskConfig',
-                    'id': 'verif_complet',
-                    'title': 'Vérification de la complétude',
+                    'id': 'check_completion',
+                    'title': 'Vérifier la complétude',
                     'default_assigned_group': 'urban_editors',
                     'default_assigned_user': 'urban.assign_folder_manager',
-                    'creation_state': ('in_progress',),
-                    'starting_states': ('in_progress',),
+                    'creation_state': ('deposit',),
+                    'starting_states': ('deposit',),
                     'ending_states': ('complete', 'incomplete'),
                     'start_conditions': (
                         StartConditionObject('urban.schedule.condition.deposit_done'),
                     ),
-                    'start_date': 'urban.schedule.start_date.deposit_date',
-                    'calculation_delay': (
-                        'schedule.calculation_default_delay',
-                    ),
-                    'activate_recurrency': True,
-                    'recurrence_states': ('in_progress', ),
-                    'additional_delay': 20,
-                },
-                {
-                    'type_name': 'TaskConfig',
-                    'id': 'choix',
-                    'title': 'Choix de la procédure',
-                    'default_assigned_group': 'urban_editors',
-                    'default_assigned_user': 'urban.assign_folder_manager',
-                    'creation_state': ('complete',),
-                    'starting_states': ('complete',),
-                    'start_conditions': (
-                        StartConditionObject('urban.schedule.condition.deposit_done'),
-                    ),
                     'end_conditions': (
-                        EndConditionObject('urban.schedule.condition.procedure_choice_done', 'OR'),
-                        EndConditionObject('urban.schedule.condition.deposit_past_20days'),
+                        EndConditionObject('urban.schedule.condition.deposit_past_20days', 'OR'),
+                        EndConditionObject('urban.schedule.condition.procedure_choice_done', 'AND'),
                     ),
                     'start_date': 'urban.schedule.start_date.deposit_date',
                     'calculation_delay': (
                         'schedule.calculation_default_delay',
                     ),
+                    'recurrence_states': ('deposit', ),
                     'additional_delay': 20,
                 },
                 {
@@ -168,14 +149,12 @@ schedule_config = {
                     'creation_state': ('complete',),
                     'starting_states': ('complete',),
                     'start_conditions': (
-                        StartConditionObject('urban.schedule.condition.procedure_choice_done'),
+                        StartConditionObject('urban.schedule.condition.deposit_done'),
                     ),
                     'end_conditions': (
-                        EndConditionObject(
-                            'urban.schedule.condition.acknowledgment_done',
-                            operator='OR',
-                        ),
+                        EndConditionObject('urban.schedule.condition.acknowledgment_done', 'OR'),
                         EndConditionObject('urban.schedule.condition.deposit_past_20days'),
+
                     ),
                     'start_date': 'urban.schedule.start_date.deposit_date',
                     'calculation_delay': (
@@ -192,41 +171,16 @@ schedule_config = {
                     'creation_state': ('complete',),
                     'starting_states': ('complete',),
                     'creation_conditions': (
-                        CreationConditionObject('urban.schedule.condition.deposit_past_20days'),
+                        CreationConditionObject('urban.schedule.condition.deposit_past_20days', 'AND'),
+                        CreationConditionObject('urban.schedule.condition.default_acknowledgement'),
                     ),
                     'start_conditions': (
                         StartConditionObject('urban.schedule.condition.deposit_done'),
                     ),
                     'end_conditions': (
-                        EndConditionObject('urban.schedule.condition.procedure_choice_done', 'OR'),
-                        EndConditionObject('urban.schedule.condition.deposit_past_30days'),
-                    ),
-                    'start_date': 'urban.schedule.start_date.deposit_date',
-                    'calculation_delay': (
-                        'schedule.calculation_default_delay',
-                    ),
-                    'additional_delay': 30,
-                },
-                {
-                    'type_name': 'TaskConfig',
-                    'id': 'send_acknoledgment_past_20days',
-                    'title': "Envoyer l'accusé de réception après 20 jours",
-                    'default_assigned_group': 'technical_validators',
-                    'default_assigned_user': 'urban.assign_folder_manager',
-                    'creation_state': ('complete',),
-                    'starting_states': ('complete',),
-                    'creation_conditions': (
-                        CreationConditionObject('urban.schedule.condition.deposit_past_20days'),
-                    ),
-                    'start_conditions': (
-                        StartConditionObject('urban.schedule.condition.acknowledgment_created'),
-                    ),
-                    'end_conditions': (
-                        EndConditionObject(
-                            'urban.schedule.condition.acknowledgment_done',
-                            operator='OR',
-                        ),
-                        EndConditionObject('urban.schedule.condition.deposit_past_30days'),
+                        EndConditionObject('urban.schedule.condition.deposit_past_30days', 'OR'),
+                        EndConditionObject('urban.schedule.condition.procedure_choice_done', 'AND'),
+                        EndConditionObject('urban.schedule.condition.procedure_choice_notified'),
                     ),
                     'start_date': 'urban.schedule.start_date.deposit_date',
                     'calculation_delay': (
@@ -243,12 +197,14 @@ schedule_config = {
                     'creation_state': ('complete',),
                     'starting_states': ('complete',),
                     'creation_conditions': (
-                        CreationConditionObject('urban.schedule.condition.deposit_past_30days'),
+                        CreationConditionObject('urban.schedule.condition.deposit_past_30days', 'AND'),
+                        CreationConditionObject('urban.schedule.condition.default_acknowledgement'),
                     ),
                     'start_conditions': (
                         StartConditionObject('urban.schedule.condition.deposit_done'),
                     ),
                     'end_conditions': (
+                        EndConditionObject('urban.schedule.condition.procedure_choice_received_from_FD', 'AND'),
                         EndConditionObject('urban.schedule.condition.procedure_choice_done'),
                     ),
                     'start_date': 'urban.schedule.start_date.deposit_date',

@@ -11,6 +11,14 @@
         name="urban.schedule.condition.acknowledgment_done"
     />
 
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.DefaultCODTAcknowledgmentCondition"
+        name="urban.schedule.condition.default_acknowledgement"
+    />
+
     <!-- inquiry conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseBuildLicence
