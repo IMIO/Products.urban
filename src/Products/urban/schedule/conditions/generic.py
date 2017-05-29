@@ -234,6 +234,16 @@ class LicenceSuspension(Condition):
         return is_suspended
 
 
+class LicenceInCompletionState(Condition):
+    """
+    Licence is in a state showing that completion check has been done
+    """
+
+    def evaluate(self):
+        checked_completion = api.content.get_state(self.task_container) in ['complete', 'incomplete']
+        return checked_completion
+
+
 class FDDecisionEventCreatedCondition(Condition):
     """
     Licence fd decision event is created but not closed.
@@ -292,6 +302,17 @@ class DepositDateIsPast20Days(Condition):
             date2 = datetime.now(date1.tzinfo)
             return (date2.date() - date1.date()).days > 20
         return False
+
+
+class ProcedureChoiceNotified(Condition):
+    """
+    The procedure choice has been notified to the applicant (or received from FD)
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        notification = licence.getLastProcedureChoiceNotification()
+        return notification
 
 
 class DepositDateIsPast30Days(Condition):

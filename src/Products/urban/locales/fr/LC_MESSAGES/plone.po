@@ -196,6 +196,9 @@ msgstr "Connexion à la base de donnée réussie."
 msgid "db_not_connected_error"
 msgstr "Une erreur est survenue avec la base de données.  Contactez votre administrateur système.  La base de données ne semble pas connectée."
 
+msgid "deposit"
+msgstr "Dépot du dossier"
+
 msgid "disable"
 msgstr "Désactiver"
 
@@ -226,11 +229,17 @@ msgstr "Echéance"
 msgid "in_progress"
 msgstr "En cours"
 
+msgid "inacceptable"
+msgstr "Irrecevable"
+
 msgid "incomplete"
 msgstr "Incomplet"
 
 msgid "iscomplete"
 msgstr "Complet"
+
+msgid "isinacceptable"
+msgstr "Déclarer irrecevable"
 
 msgid "isincomplete"
 msgstr "Incomplet"
@@ -293,4 +302,3 @@ msgstr "Veuillez indiquer d'avantages de termes de recherche"
 
 msgid "workLocationStreet"
 msgstr "Rue"
-

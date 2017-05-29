@@ -18,6 +18,14 @@
         name="urban.schedule.condition.procedure_choice_done"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.LicenceInCompletionState"
+        name="urban.schedule.condition.set_completion_state"
+    />
+
     <!-- folder complete conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseBuildLicence
@@ -50,6 +58,22 @@
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.AcknowledgmentDoneCondition"
         name="urban.schedule.condition.acknowledgment_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.ProcedureChoiceNotified"
+        name="urban.schedule.condition.procedure_choice_notified"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.ProcedureChoiceNotified"
+        name="urban.schedule.condition.procedure_choice_received_from_FD"
     />
 
     <!-- opinion requests conditions-->

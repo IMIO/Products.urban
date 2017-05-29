@@ -100,6 +100,36 @@ urbanEventTypes = {
             ),
         },
         {
+            'id': "dossier-recevable-par-defaut-codt",
+            'title': "Dossier recevable par défaut",
+            'deadLineDelay': 15,
+            'eventTypeType': 'Products.urban.interfaces.IDefaultCODTAcknowledgmentEvent',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+        },
+        {
+            'id': "notification-choix-procedure-codt",
+            'title': "Notification du choix de la procédure",
+            'deadLineDelay': 15,
+            'eventTypeType': 'Products.urban.interfaces.ICODTProcedureChoiceNotified',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+        },
+        {
+            'id': "reception-choix-procedure-FD-codt",
+            'title': "Réception du choix de la procédure par le FD",
+            'deadLineDelay': 15,
+            'eventTypeType': 'Products.urban.interfaces.ICODTProcedureChoiceNotified',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+        },
+        {
             'id': "transmis-1er-dossier-rw-codt",
             'title': "Transmis 1er dossier RW",
             'activatedFields': ['decisionDate', 'decision'],

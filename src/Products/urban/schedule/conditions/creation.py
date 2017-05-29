@@ -22,6 +22,17 @@ class AcknowledgmentDoneCondition(CreationCondition):
         return acknowledgment_done
 
 
+class DefaultCODTAcknowledgmentCondition(CreationCondition):
+    """
+    There's no default acknowlegdment created.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        acknowledgment_event = licence.getLastDefaultAcknowledgment()
+        return acknowledgment_event
+
+
 class WillHaveInquiry(CreationCondition):
     """
     'inquiry' is selected on the field 'procedureChoice'.
