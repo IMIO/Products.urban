@@ -27,6 +27,7 @@
    <element value="Applicant"/>
    <element value="File"/>
    <element value="task"/>
+   <element value="ConfigTest"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">codt_buildlicenceview</property>

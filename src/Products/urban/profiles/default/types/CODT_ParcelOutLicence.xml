@@ -25,6 +25,7 @@
    <element value="Inquiry"/>
    <element value="File"/>
    <element value="Task"/>
+   <element value="ConfigTest"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">parceloutlicenceview</property>

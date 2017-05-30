@@ -18,7 +18,7 @@
    <element value="Applicant"/>
    <element value="Corporation"/>
    <element value="PortionOut"/>
- t  <element value="UrbanEvent"/>
+   <element value="UrbanEvent"/>
    <element value="UrbanEventInquiry"/>
    <element value="UrbanEventCollege"/>
    <element value="UrbanEventNotificationCollege"/>
@@ -26,6 +26,7 @@
    <element value="CODT_Inquiry"/>
    <element value="File"/>
    <element value="task"/>
+   <element value="ConfigTest"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">codt_buildlicenceview</property>
