@@ -348,7 +348,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urbancertificatetwo': buildlicence_tabs_config,
             'codt_buildlicence': buildlicence_tabs_config,
             'codt_article127': buildlicence_tabs_config,
-            'codt_parceloutlicence': buildlicence_tabs_config,
+            'codt_parceloutlicence': inquiry_tabs_config,
             'codt_uniquelicence': buildlicence_tabs_config,
             'codt_integratedlicence': buildlicence_tabs_config,
             'codt_urbancertificatetwo': buildlicence_tabs_config,
