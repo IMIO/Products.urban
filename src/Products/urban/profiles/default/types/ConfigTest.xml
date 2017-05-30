@@ -20,6 +20,24 @@
   <element value="UrbanCertificateTwo"/>
   <element value="PreliminaryNotice"/>
   <element value="PatrimonyCertificate"/>
+  <element value="EnvClassOne"/>
+  <element value="EnvClassThree"/>
+  <element value="EnvClassTwo"/>
+  <element value="ParcelOutLicence"/>
+  <element value="MiscDemand"/>
+  <element value="Division"/>
+  <element value="ProjectMeeting"/>
+  <element value="NotaryLetter"/>
+  <element value="CODT_Article127"/>
+  <element value="CODT_BuildLicence"/>
+  <element value="CODT_Inquiry"/>
+  <element value="CODT_NotaryLetter"/>
+  <element value="CODT_ParcelOutLicence"/>
+  <element value="CODT_UniqueLicence"/>
+  <element value="CODT_UrbanCertificateOne"/>
+  <element value="CODT_UrbanCertificateTwo"/>
+  <element value="CODT_IntegratedLicence"/>
+
  </property>
  <property name="allow_discussion">False</property>
 

@@ -1,6 +1,7 @@
 # encoding: utf-8
 from Products.Five import BrowserView
 from Acquisition import aq_parent
+from Acquisition import aq_inner
 from plone import api
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
@@ -24,6 +25,14 @@ class ConfigTestView(BrowserView):
         eventtypes = portal_urban.listEventTypes(licence, urbanConfigId=config_id)
         events_objects = [event.getObject() for event in eventtypes]
         return events_objects
+
+    def get_generated_tests(self):
+        licence = aq_parent(self.context)
+        tool = api.portal.get_tool('portal_types')
+        portal_type = tool[licence.licencePortalType]
+        values = api.content.find(context=self.context, depth=1, portal_type=portal_type.id, sort_on='getObjPositionInParent')
+        lasts_generated = [item.id for item in reversed(values)]
+        return lasts_generated
 
 
 class ConfigTestProcessingView(BrowserView):
@@ -188,7 +197,10 @@ def process_vocabulary_factory(field, context):
     vocabulary_factory = field.vocabulary_factory
     factory = getUtility(IVocabularyFactory, vocabulary_factory)
     voc = factory(context)
-    return [voc._terms[0].value]
+    if len(voc._terms)>0:
+        return [voc._terms[0].value]
+    else:
+        return []
 
 
 def get_custom_vocabulary(vocabulary_name, context):

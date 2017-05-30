@@ -138,6 +138,7 @@
         base_macros context/base/macros;
         folderlisting_macro base_macros/folderlisting;
         errors python:request.get('errors', {})">
+
         <form action="test/configtestprocessingview">
             <div tal:repeat="event view/get_events">
                 <tal:data tal:define="title event/title;
