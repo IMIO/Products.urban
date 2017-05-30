@@ -8,7 +8,9 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_CWATUPE_TYPES
 from Products.urban.config import URBAN_CODT_TYPES
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
+from Products.urban.dashboard import utils
 
+from zope.globalrequest import getRequest
 from zope.i18n import translate as _
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
@@ -74,6 +76,10 @@ class DashboardCollections(ConditionAwareCollectionVocabulary):
         return list(brains)
 
     def __call__(self, context, query=None):
+        self.category = utils.get_procedure_category(
+            context,
+            self.get_request(context),
+        )
         terms = super(DashboardCollections, self).__call__(
             context,
             query=query,
@@ -82,13 +88,19 @@ class DashboardCollections(ConditionAwareCollectionVocabulary):
                           if t.value.id in self.get_collection_ids(context)]
         return SimpleVocabulary(filtered_terms)
 
-    def get_procedure_category(self, context):
-        """Get the procedure category (CODT or CWATUPE) from context"""
-        if context.id == 'urban':
-            return 'ALL'
-        if context.id.startswith('codt'):
-            return 'CODT'
-        return 'CWATUPE'
+    def _compute_redirect_to(self, collection, criterion):
+        """ """
+        redirect_to = super(DashboardCollections, self)._compute_redirect_to(
+            collection,
+            criterion,
+        )
+        return redirect_to.replace(
+            'no_redirect=1',
+            'no_redirect=1&category={0}'.format(self.category),
+        )
+
+    def get_request(self, context):
+        return getattr(context, 'REQUEST', getRequest())
 
     def _format_id(self, type):
         """Format a UrbanType to the collection id"""
@@ -97,10 +109,9 @@ class DashboardCollections(ConditionAwareCollectionVocabulary):
     def get_collection_ids(self, context):
         ids = ['collection_all_licences']
         ids.extend(map(self._format_id, URBAN_ENVIRONMENT_TYPES))
-        category = self.get_procedure_category(context)
-        if category == 'CODT' or category == 'ALL':
+        if self.category == 'CODT' or self.category == 'ALL':
             ids.extend(map(self._format_id, URBAN_CODT_TYPES))
-        if category == 'CWATUPE' or category == 'ALL':
+        if self.category == 'CWATUPE' or self.category == 'ALL':
             ids.extend(map(self._format_id, URBAN_CWATUPE_TYPES))
         return ids
 

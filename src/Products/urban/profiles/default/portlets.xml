@@ -4,6 +4,12 @@
 
     <dependency step="urban-postInstall"/>
 
+    <assignment name="category_switch"
+                category="context"
+                key="/urban"
+                manager="plone.leftcolumn"
+                type="Products.urban.dashboard.CategorySwitchPortlet" />
+
     <assignment name="licences"
                 category="context"
                 key="/urban"
