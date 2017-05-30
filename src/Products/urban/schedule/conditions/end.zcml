@@ -18,6 +18,22 @@
         name="urban.schedule.condition.procedure_choice_done"
     />
 
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.ProcedureChoiceDone"
+        name="urban.schedule.condition.procedure_choice_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.LicenceInCompletionState"
+        name="urban.schedule.condition.set_completion_state"
+    />
+
     <!-- folder complete conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseBuildLicence
@@ -28,7 +44,23 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.ComplementsAsked"
+        name="urban.schedule.condition.complements_asked"
+    />
+
+    <adapter
         for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.ComplementsReceived"
+        name="urban.schedule.condition.complements_received"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.ComplementsReceived"
@@ -45,11 +77,35 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.AcknowledgmentDoneCondition"
+        name="urban.schedule.condition.acknowledgment_done"
+    />
+
+    <adapter
         for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.AcknowledgmentDoneCondition"
         name="urban.schedule.condition.acknowledgment_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.ProcedureChoiceNotified"
+        name="urban.schedule.condition.procedure_choice_notified"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.ProcedureChoiceNotified"
+        name="urban.schedule.condition.procedure_choice_received_from_FD"
     />
 
     <!-- opinion requests conditions-->
@@ -131,7 +187,7 @@
 
     <!-- deposit date is past by x days -->
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.DepositDateIsPast20Days"
@@ -139,11 +195,36 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.DepositDateIsPast30Days"
         name="urban.schedule.condition.deposit_past_30days"
     />
 
+    <!-- refused conditions -->
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.LicenceRefused"
+        name="urban.schedule.condition.refused"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.LicenceRefused"
+        name="urban.schedule.condition.refused"
+    />
+
+    <!-- decision -->
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.DecisionNotified"
+        name="urban.schedule.condition.decision_notified"
+    />
 </configure>

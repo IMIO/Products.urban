@@ -179,14 +179,20 @@ ADDITIONAL_LAYERS_FOLDER = "additional_layers"
 
 #a list where first element is the meetingConfigId and the second, the meta_type name
 URBAN_TYPES = [
-    'BuildLicence', 'Article127', 'IntegratedLicence', 'UniqueLicence', 'Declaration',
-    'UrbanCertificateOne', 'UrbanCertificateTwo', 'PreliminaryNotice',
+    'BuildLicence', 'CODT_BuildLicence',
+    'Article127', 'CODT_Article127',
+    'IntegratedLicence', 'CODT_IntegratedLicence',
+    'UniqueLicence', 'CODT_UniqueLicence',
+    'Declaration',
+    'UrbanCertificateOne', 'CODT_UrbanCertificateOne',
+    'UrbanCertificateTwo', 'CODT_UrbanCertificateTwo',
+    'PreliminaryNotice',
     'PatrimonyCertificate',
     'EnvClassOne', 'EnvClassTwo', 'EnvClassThree',
-    'ParcelOutLicence', 'MiscDemand', 'Division', 'NotaryLetter',
-    'CODT_BuildLicence', 'CODT_Article127', 'CODT_IntegratedLicence', # 'CODT_ParcelOutLicence',
-    'CODT_UniqueLicence', 'CODT_UrbanCertificateTwo',
-    'CODT_UrbanCertificateOne', 'CODT_NotaryLetter', 'ProjectMeeting'
+    'ParcelOutLicence', 'CODT_ParcelOutLicence',
+    'MiscDemand', 'Division',
+    'NotaryLetter', 'CODT_NotaryLetter',
+    'ProjectMeeting'
 ]
 
 URBAN_CWATUPE_TYPES = [

@@ -26,7 +26,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
-from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_Inquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
@@ -52,7 +52,7 @@ slave_fields_form_composition = (
         'name': 'missingParts',
         'action': 'vocabulary',
         'vocab_method': 'getCompositionMissingParts',
-        'control_param': 'composition',
+        'control_param': 'values',
     },
 )
 schema = Schema((
@@ -69,7 +69,7 @@ schema = Schema((
     ),
     StringField(
         name='form_composition',
-        widget=MasterSelectWidget(
+        widget=MasterMultiSelectWidget(
             slave_fields=slave_fields_form_composition,
             label='Form_composition',
             label_msgid='urban_label_form_composition',
@@ -248,15 +248,28 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
         )
         return DisplayList(vocab)
 
-    def getCompositionMissingParts(self, composition):
+    def getCompositionMissingParts(self, *values):
         """
         """
+        selection = [v['val'] for v in values if v['selected']]
         urban_voc = self.schema['missingParts'].vocabulary
         all_terms = urban_voc.listAllVocTerms(self)
 
-        display_values = [(term.id, term.Title().decode('utf-8')) for term in all_terms if str(composition) in term.getExtraValue()]
+        display_values = []
+
+        for term in all_terms:
+            for composition in selection:
+                if str(composition) in term.getExtraValue():
+                    display_values.append((term.id, term.Title().decode('utf-8')))
+                    break
 
         return DisplayList(display_values)
+
+    def getLastProcedureChoiceNotification(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ICODTProcedureChoiceNotified, use_catalog)
+
+    def getLastDefaultAcknowledgment(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IDefaultCODTAcknowledgmentEvent, use_catalog)
 
 
 # end of class CODT_BaseBuildLicence
@@ -306,6 +319,7 @@ def finalizeSchema(schema):
     schema['pca'].widget.label_msgid = 'urban_label_sol'
     schema['isInPCA'].widget.label_msgid = 'urban_label_is_in_sol'
     schema['pcaDetails'].widget.label_msgid = 'urban_label_sol_details'
+    schema['exemptFDArticle'].widget.label_msgid = 'urban_label_exemptFDArticleCODT'
     return schema
 
 finalizeSchema(CODT_BaseBuildLicence_schema)

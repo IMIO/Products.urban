@@ -22,6 +22,6 @@ class AutoAccepted20days(TaskCron):
         }
         return api.content.find(
             portal_type='CODT_BuildLicence',
-            review_state='in_progress',
+            review_state='deposit',
             getDepositDate=date_range,
         )

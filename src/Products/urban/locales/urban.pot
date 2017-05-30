@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-05-19 16:52+0000\n"
+"POT-Creation-Date: 2017-05-30 12:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Domain: urban\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:238
+#: ../setuphandlers.py:241
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:337
+#: ../setuphandlers.py:340
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -27,6 +27,10 @@ msgstr ""
 #: ../browser/templates/urbaneventannouncementview.pt:35
 #: ../browser/templates/urbaneventinquiryview.pt:35
 msgid "Actions:"
+msgstr ""
+
+#: ../dashboard/portlet.py:46
+msgid "Add Category Switch Portlet"
 msgstr ""
 
 #: ../browser/portlets.py:107
@@ -64,7 +68,7 @@ msgid "Add this parcel"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:858
+#: ../setuphandlers.py:861
 msgid "All"
 msgstr ""
 
@@ -167,6 +171,10 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+#: ../dashboard/portlet.py:55
+msgid "Edit Category Switch Portlet"
+msgstr ""
+
 #: ../browser/portlets.py:116
 msgid "Edit Urban config Portlet"
 msgstr ""
@@ -226,106 +234,114 @@ msgstr ""
 msgid "History of the parcel and related licences"
 msgstr ""
 
-#: ../interfaces.py:376
+#: ../interfaces.py:375
 msgid "IAcknowledgment type marker interface"
 msgstr ""
 
-#: ../interfaces.py:404
+#: ../interfaces.py:411
 msgid "IAnnouncement type marker interface"
 msgstr ""
 
-#: ../interfaces.py:348
+#: ../interfaces.py:403
+msgid "ICODTProcedureChoiceNotified type marker interface"
+msgstr ""
+
+#: ../interfaces.py:347
 msgid "ICollege type marker interface"
 msgstr ""
 
-#: ../interfaces.py:416
+#: ../interfaces.py:423
 msgid "ICollegeReport type marker interface"
 msgstr ""
 
-#: ../interfaces.py:380
+#: ../interfaces.py:383
 msgid "ICommunalCouncil type marker interface"
 msgstr ""
 
-#: ../interfaces.py:384
+#: ../interfaces.py:379
+msgid "IDefaultCODTAcknowledgmentEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:387
 msgid "IDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:428
+#: ../interfaces.py:435
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:400
+#: ../interfaces.py:407
 msgid "IInquiry type marker interface"
 msgstr ""
 
-#: ../interfaces.py:408
+#: ../interfaces.py:415
 msgid "ILicenceDelivery type marker interface"
 msgstr ""
 
-#: ../interfaces.py:412
+#: ../interfaces.py:419
 msgid "ILicenceExpiration type marker interface"
 msgstr ""
 
-#: ../interfaces.py:396
+#: ../interfaces.py:399
 msgid "IMissingPart type marker interface"
 msgstr ""
 
-#: ../interfaces.py:388
+#: ../interfaces.py:391
 msgid "IMissingPartDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:392
+#: ../interfaces.py:395
 msgid "IModificationDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:356
+#: ../interfaces.py:355
 msgid "IOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:440
+#: ../interfaces.py:447
 msgid "IProrogation type marker interface"
 msgstr ""
 
-#: ../interfaces.py:432
+#: ../interfaces.py:439
 msgid "IRecourseEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:444
+#: ../interfaces.py:451
 msgid "IRefusedIncompleteness type marker interface"
 msgstr ""
 
-#: ../interfaces.py:372
+#: ../interfaces.py:371
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:352
+#: ../interfaces.py:351
 msgid "ITechnicalServiceOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:424
+#: ../interfaces.py:431
 msgid "ITheLicence type marker interface"
 msgstr ""
 
-#: ../interfaces.py:420
+#: ../interfaces.py:427
 msgid "ITheLicenceCollege type marker interface"
 msgstr ""
 
-#: ../interfaces.py:368
+#: ../interfaces.py:367
 msgid "IWalloonRegionDecisionEvent type marker interface"
 msgstr ""
 
 msgid "IWalloonRegionDesisionEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:364
+#: ../interfaces.py:363
 msgid "IWalloonRegionOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:360
+#: ../interfaces.py:359
 msgid "IWalloonRegionPrimo type marker interface"
 msgstr ""
 
-#: ../interfaces.py:436
+#: ../interfaces.py:443
 msgid "IWorkBeginning type marker interface"
 msgstr ""
 
@@ -414,7 +430,7 @@ msgid "Road type"
 msgstr ""
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:264
+#: ../setuphandlers.py:267
 msgid "ScheduleConfig"
 msgstr ""
 
@@ -436,6 +452,10 @@ msgstr ""
 
 #: ../docgen/UrbanTemplate.py:26
 msgid "Select for which content types the template will be available."
+msgstr ""
+
+#: ../dashboard/widgets/select_to_list.py:20
+msgid "Select to list"
 msgstr ""
 
 #: ../browser/templates/map.pt:76
@@ -476,6 +496,18 @@ msgstr ""
 msgid "This portlet lists various urban functionnalities."
 msgstr ""
 
+#: ../dashboard/portlet.py:47
+msgid "This portlet shows a switch button between procedure categories."
+msgstr ""
+
+#: ../dashboard/templates/portlet_categoryswitch.pt:8
+msgid "To CODT procedures"
+msgstr ""
+
+#: ../dashboard/templates/portlet_categoryswitch.pt:15
+msgid "To CWATUPE procedures"
+msgstr ""
+
 #: ../browser/licence/templates/licenceview.pt:27
 #: ../browser/templates/urbaneventannouncementview.pt:31
 #: ../browser/templates/urbaneventinquiryview.pt:31
@@ -490,7 +522,7 @@ msgid "UniqueLicence"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:735
+#: ../setuphandlers.py:738
 msgid "Urban"
 msgstr ""
 
@@ -623,7 +655,7 @@ msgid "additional_layers_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:676
+#: ../setuphandlers.py:679
 msgid "additonal_layers_folder_title"
 msgstr ""
 
@@ -670,7 +702,7 @@ msgid "applicationreasons_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:773
+#: ../setuphandlers.py:776
 msgid "architects_folder_title"
 msgstr ""
 
@@ -848,7 +880,7 @@ msgid "creation date"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:631
+#: ../setuphandlers.py:634
 msgid "dashboardtemplates_folder_title"
 msgstr ""
 
@@ -969,7 +1001,7 @@ msgid "envclasstwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:665
+#: ../setuphandlers.py:668
 msgid "environmenttemplates_folder_title"
 msgstr ""
 
@@ -1204,17 +1236,17 @@ msgid "formatted_date_with_cityname"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:707
+#: ../setuphandlers.py:710
 msgid "front_page_descr"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:708
+#: ../setuphandlers.py:711
 msgid "front_page_text"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:706
+#: ../setuphandlers.py:709
 msgid "front_page_title"
 msgstr ""
 
@@ -1237,13 +1269,13 @@ msgid "generate_a_linked_doc"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:787
+#: ../setuphandlers.py:790
 msgid "geometricians_folder_title"
 msgstr ""
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:642
+#: ../setuphandlers.py:645
 msgid "globaltemplates_folder_title"
 msgstr ""
 
@@ -1586,7 +1618,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:801
+#: ../setuphandlers.py:804
 msgid "notaries_folder_title"
 msgstr ""
 
@@ -1654,7 +1686,7 @@ msgid "parcelLinkedLicences"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:815
+#: ../setuphandlers.py:818
 msgid "parcellings_folder_title"
 msgstr ""
 
@@ -1752,7 +1784,7 @@ msgstr ""
 msgid "persontitle_mister"
 msgstr ""
 
-#: ../dashboard/vocabularies.py:31
+#: ../dashboard/vocabularies.py:36
 msgid "plone"
 msgstr ""
 
@@ -1968,7 +2000,7 @@ msgid "uno_enabled_python"
 msgstr ""
 
 #: ../profiles/default/actions.xml
-#: ../setuphandlers.py:265
+#: ../setuphandlers.py:268
 msgid "urban"
 msgstr ""
 
@@ -2691,6 +2723,9 @@ msgstr ""
 msgid "urban_label_exemptFDArticle"
 msgstr ""
 
+msgid "urban_label_exemptFDArticleCODT"
+msgstr ""
+
 #. Default: "Explanationendsdate"
 #: UrbanEventInquiry.py
 msgid "urban_label_explanationEndSDate"
@@ -3018,6 +3053,9 @@ msgid "urban_label_isSupplementary"
 msgstr ""
 
 msgid "urban_label_is_in_parceloutlicences"
+msgstr ""
+
+msgid "urban_label_is_in_sol"
 msgstr ""
 
 #. Default: "Karstconstraints"
@@ -3762,6 +3800,12 @@ msgstr ""
 msgid "urban_label_society"
 msgstr ""
 
+msgid "urban_label_sol"
+msgstr ""
+
+msgid "urban_label_sol_details"
+msgstr ""
+
 #. Default: "Solicitlocationopinionsto"
 #: GenericLicence.py
 msgid "urban_label_solicitLocationOpinionsTo"
@@ -4221,12 +4265,12 @@ msgid "urbancertificatetwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:357
+#: ../setuphandlers.py:360
 msgid "urbaneventtypes_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:654
+#: ../setuphandlers.py:657
 msgid "urbantemplates_folder_title"
 msgstr ""
 

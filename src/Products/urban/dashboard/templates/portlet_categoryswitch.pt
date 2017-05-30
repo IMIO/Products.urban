@@ -1,0 +1,23 @@
+<dl class="portlet portletCategorySwitch"
+    i18n:domain="urban"
+    tal:condition="view/available">
+    <dt class="portletHeader"
+        tal:define="category view/category">
+        <span class="portletTopLeft"></span>
+        <tal:if condition="python: category == 'CWATUPE'">
+        <a href="#"
+           class="tile"
+           tal:attributes="href string: ${view/url}?category=CODT"
+           i18n:translate="">
+           To CODT procedures</a>
+        </tal:if>
+        <tal:if condition="not: python: category == 'CWATUPE'">
+        <a href="#"
+           class="tile"
+           tal:attributes="href string: ${view/url}/urban?category=CWATUPE"
+           i18n:translate="">
+           To CWATUPE procedures</a>
+        </tal:if>
+        <span class="portletTopRight"></span>
+    </dt>
+</dl>

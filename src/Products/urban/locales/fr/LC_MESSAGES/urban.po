@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2017-05-19 16:52+0000\n"
+"POT-Creation-Date: 2017-05-30 12:26+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:238
+#: ../setuphandlers.py:241
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:337
+#: ../setuphandlers.py:340
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -28,6 +28,10 @@ msgstr ""
 #: ../browser/templates/urbaneventannouncementview.pt:35
 #: ../browser/templates/urbaneventinquiryview.pt:35
 msgid "Actions:"
+msgstr ""
+
+#: ../dashboard/portlet.py:46
+msgid "Add Category Switch Portlet"
 msgstr ""
 
 #: ../browser/portlets.py:107
@@ -66,7 +70,7 @@ msgid "Add this parcel"
 msgstr "Ajouter cette parcelle"
 
 #. Default: "urban"
-#: ../setuphandlers.py:858
+#: ../setuphandlers.py:861
 msgid "All"
 msgstr "Tous"
 
@@ -169,6 +173,10 @@ msgstr "Division"
 msgid "Edit"
 msgstr "Modifier le permis"
 
+#: ../dashboard/portlet.py:55
+msgid "Edit Category Switch Portlet"
+msgstr ""
+
 #: ../browser/portlets.py:116
 msgid "Edit Urban config Portlet"
 msgstr ""
@@ -229,102 +237,110 @@ msgid "History of the parcel and related licences"
 msgstr "Historique de la parcelle et dossiers liés"
 
 #. Default: "Acknowledgement"
-#: ../interfaces.py:376
+#: ../interfaces.py:375
 msgid "IAcknowledgment type marker interface"
 msgstr "Accusé de réception"
 
-#: ../interfaces.py:404
+#: ../interfaces.py:411
 msgid "IAnnouncement type marker interface"
 msgstr ""
 
-#: ../interfaces.py:348
+#: ../interfaces.py:403
+msgid "ICODTProcedureChoiceNotified type marker interface"
+msgstr "Notification du choix de la procédure"
+
+#: ../interfaces.py:347
 msgid "ICollege type marker interface"
 msgstr ""
 
 #. Default: "College report"
-#: ../interfaces.py:416
+#: ../interfaces.py:423
 msgid "ICollegeReport type marker interface"
 msgstr "Rapport du collège"
 
 #. Default: "Communal council"
-#: ../interfaces.py:380
+#: ../interfaces.py:383
 msgid "ICommunalCouncil type marker interface"
 msgstr "Conseil communal"
 
+#: ../interfaces.py:379
+msgid "IDefaultCODTAcknowledgmentEvent type marker interface"
+msgstr "Accusé de réception par défaut"
+
 #. Default: "Request deposit"
-#: ../interfaces.py:384
+#: ../interfaces.py:387
 msgid "IDeposit type marker interface"
 msgstr "Dépôt de la demande"
 
-#: ../interfaces.py:428
+#: ../interfaces.py:435
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr ""
 
 #. Default: "Inquiry"
-#: ../interfaces.py:400
+#: ../interfaces.py:407
 msgid "IInquiry type marker interface"
 msgstr "Enquête publique"
 
-#: ../interfaces.py:408
+#: ../interfaces.py:415
 msgid "ILicenceDelivery type marker interface"
 msgstr ""
 
-#: ../interfaces.py:412
+#: ../interfaces.py:419
 msgid "ILicenceExpiration type marker interface"
 msgstr ""
 
 #. Default: "Missing part"
-#: ../interfaces.py:396
+#: ../interfaces.py:399
 msgid "IMissingPart type marker interface"
 msgstr "Pièces manquantes"
 
 #. Default: "Missing part deposit"
-#: ../interfaces.py:388
+#: ../interfaces.py:391
 msgid "IMissingPartDeposit type marker interface"
 msgstr "Dépôt des pièces manquantes"
 
 #. Default: "Modification deposit"
-#: ../interfaces.py:392
+#: ../interfaces.py:395
 msgid "IModificationDeposit type marker interface"
 msgstr "Dépôt d'un modificatif de la demande"
 
 #. Default: "Opinion request"
-#: ../interfaces.py:356
+#: ../interfaces.py:355
 msgid "IOpinionRequest type marker interface"
 msgstr "Demande d'avis"
 
 #. Default: "Prorogation"
-#: ../interfaces.py:440
+#: ../interfaces.py:447
 msgid "IProrogation type marker interface"
 msgstr "Prorogation"
 
-#: ../interfaces.py:432
+#: ../interfaces.py:439
 msgid "IRecourseEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:444
+#: ../interfaces.py:451
 msgid "IRefusedIncompleteness type marker interface"
 msgstr ""
 
-#: ../interfaces.py:372
+#: ../interfaces.py:371
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
 #. Default: "Technical service opinion request"
-#: ../interfaces.py:352
+#: ../interfaces.py:351
 msgid "ITechnicalServiceOpinionRequest type marker interface"
 msgstr "Demande d'avis du service technique"
 
 #. Default: "Licence delivery"
-#: ../interfaces.py:424
+#: ../interfaces.py:431
 msgid "ITheLicence type marker interface"
 msgstr "Délivrance du permis/certificat/..."
 
-#: ../interfaces.py:420
+#: ../interfaces.py:427
 msgid "ITheLicenceCollege type marker interface"
 msgstr ""
 
-#: ../interfaces.py:368
+#: ../interfaces.py:367
 msgid "IWalloonRegionDecisionEvent type marker interface"
 msgstr ""
 
@@ -332,17 +348,17 @@ msgid "IWalloonRegionDesisionEvent type marker interface"
 msgstr "Décision de la région wallone"
 
 #. Default: "Walloon region opinion request"
-#: ../interfaces.py:364
+#: ../interfaces.py:363
 msgid "IWalloonRegionOpinionRequest type marker interface"
 msgstr "Demande d'avis à la région wallone"
 
 #. Default: "Walloon region primo"
-#: ../interfaces.py:360
+#: ../interfaces.py:359
 msgid "IWalloonRegionPrimo type marker interface"
 msgstr "Envoi du primo dossier"
 
 #. Default: "Work beginning"
-#: ../interfaces.py:436
+#: ../interfaces.py:443
 msgid "IWorkBeginning type marker interface"
 msgstr "Début des travaux"
 
@@ -431,7 +447,7 @@ msgid "Road type"
 msgstr "Type de voirie"
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:264
+#: ../setuphandlers.py:267
 msgid "ScheduleConfig"
 msgstr ""
 
@@ -454,6 +470,10 @@ msgstr "Voir tout..."
 
 #: ../docgen/UrbanTemplate.py:26
 msgid "Select for which content types the template will be available."
+msgstr ""
+
+#: ../dashboard/widgets/select_to_list.py:20
+msgid "Select to list"
 msgstr ""
 
 #: ../browser/templates/map.pt:76
@@ -494,6 +514,18 @@ msgstr ""
 msgid "This portlet lists various urban functionnalities."
 msgstr ""
 
+#: ../dashboard/portlet.py:47
+msgid "This portlet shows a switch button between procedure categories."
+msgstr ""
+
+#: ../dashboard/templates/portlet_categoryswitch.pt:8
+msgid "To CODT procedures"
+msgstr "Procédures CODT"
+
+#: ../dashboard/templates/portlet_categoryswitch.pt:15
+msgid "To CWATUPE procedures"
+msgstr "Procédures CWATUPE"
+
 #: ../browser/licence/templates/licenceview.pt:27
 #: ../browser/templates/urbaneventannouncementview.pt:31
 #: ../browser/templates/urbaneventinquiryview.pt:31
@@ -508,7 +540,7 @@ msgid "UniqueLicence"
 msgstr "Permis unique"
 
 #. Default: "urban"
-#: ../setuphandlers.py:735
+#: ../setuphandlers.py:738
 msgid "Urban"
 msgstr ""
 
@@ -642,7 +674,7 @@ msgid "additional_layers_folder_title"
 msgstr "Configuration des couches supplémentaires"
 
 #. Default: "urban"
-#: ../setuphandlers.py:676
+#: ../setuphandlers.py:679
 msgid "additonal_layers_folder_title"
 msgstr ""
 
@@ -690,7 +722,7 @@ msgid "applicationreasons_folder_title"
 msgstr "Motifs de la demande"
 
 #. Default: "urban"
-#: ../setuphandlers.py:773
+#: ../setuphandlers.py:776
 msgid "architects_folder_title"
 msgstr "Architectes"
 
@@ -871,7 +903,7 @@ msgid "creation date"
 msgstr "Date de création"
 
 #. Default: "urban"
-#: ../setuphandlers.py:631
+#: ../setuphandlers.py:634
 msgid "dashboardtemplates_folder_title"
 msgstr "Modèles tableaux de bord"
 
@@ -992,7 +1024,7 @@ msgid "envclasstwos"
 msgstr "Permis d'environnement classe 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:665
+#: ../setuphandlers.py:668
 msgid "environmenttemplates_folder_title"
 msgstr "modèles des procédures d'environnement"
 
@@ -1233,19 +1265,19 @@ msgstr "${cityName}, le ${formattedDate}"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:707
+#: ../setuphandlers.py:710
 msgid "front_page_descr"
 msgstr "Bienvenue sur le site vous permettant d'utiliser la gestion des permis d'urbanisme"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:708
+#: ../setuphandlers.py:711
 msgid "front_page_text"
 msgstr "<p>L'application intègre la gestion des permis d'urbanisme, d'urbanisation, des déclarations, divisions notariales, CU1, CU2, lettres d'informations notariales, rendez-vous, avant-projets et déclarations environnementales :</p><ul><li>gestion de la demande</li><li>gestion des demandeurs, architectes, agents traitants, ...</li><li>production des documents</li><li>workflow de suivi de la demande</li><li>cartographie avec calcul du rayon de 50m, visualisation des parcelles, ...</li><li>échéancier</li><li>...</li></ul><p><a href='urban'>Cliquez ici pour accéder à l'application</a></p><p class='discreet'>Vous devez disposer d'un nom d'utilisateur et d'un mot de passe pour accéder à l'application</p>"
 
 # title of the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:706
+#: ../setuphandlers.py:709
 msgid "front_page_title"
 msgstr "Gestion de l'Urbanisme"
 
@@ -1269,13 +1301,13 @@ msgid "generate_a_linked_doc"
 msgstr "Générer un document lié au dossier"
 
 #. Default: "urban"
-#: ../setuphandlers.py:787
+#: ../setuphandlers.py:790
 msgid "geometricians_folder_title"
 msgstr "Géomètres"
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:642
+#: ../setuphandlers.py:645
 msgid "globaltemplates_folder_title"
 msgstr "Modèles généraux"
 
@@ -1618,7 +1650,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr "Vous ne pouvez pas générer de documents"
 
 #. Default: "urban"
-#: ../setuphandlers.py:801
+#: ../setuphandlers.py:804
 msgid "notaries_folder_title"
 msgstr "Notaires"
 
@@ -1687,7 +1719,7 @@ msgid "parcelLinkedLicences"
 msgstr "Dossier(s) lié(s)"
 
 #. Default: "urban"
-#: ../setuphandlers.py:815
+#: ../setuphandlers.py:818
 msgid "parcellings_folder_title"
 msgstr "Lotissements"
 
@@ -1785,7 +1817,7 @@ msgstr "Mademoiselle"
 msgid "persontitle_mister"
 msgstr "Monsieur"
 
-#: ../dashboard/vocabularies.py:31
+#: ../dashboard/vocabularies.py:36
 msgid "plone"
 msgstr ""
 
@@ -2002,7 +2034,7 @@ msgid "uno_enabled_python"
 msgstr "Si l'interpréteur Python qui tourne Zope et Plone ne dispose pas de la librairie pyUNO (testez-le en essayant 'import uno'), vous pouvez spécifier ici le chemin absolu de l'exécutable d'un second interpréteur Python disposant de la librairie UNO (accès à OpenOffice). Par exemple, l'interpréteur Python /usr/bin/python livré avec Ubuntu."
 
 #: ../profiles/default/actions.xml
-#: ../setuphandlers.py:265
+#: ../setuphandlers.py:268
 msgid "urban"
 msgstr "Urbanisme"
 
@@ -2726,6 +2758,9 @@ msgstr "Catégorie du type d'événement"
 msgid "urban_label_exemptFDArticle"
 msgstr "Article 107"
 
+msgid "urban_label_exemptFDArticleCODT"
+msgstr "Article D IV.15"
+
 #. Default: "Explanationendsdate"
 #: UrbanEventInquiry.py
 msgid "urban_label_explanationEndSDate"
@@ -3055,6 +3090,9 @@ msgstr "Supplémentaire?"
 
 msgid "urban_label_is_in_parceloutlicences"
 msgstr "Le bien se situe dans un permis d'urbanisation"
+
+msgid "urban_label_is_in_sol"
+msgstr "Le bien se situe dans un SOL"
 
 #. Default: "Karstconstraints"
 #: GenericLicence.py
@@ -3798,6 +3836,12 @@ msgstr "Situation"
 msgid "urban_label_society"
 msgstr "Société"
 
+msgid "urban_label_sol"
+msgstr "SOL"
+
+msgid "urban_label_sol_details"
+msgstr "Détails concernant le SOL"
+
 #. Default: "Solicitlocationopinionsto"
 #: GenericLicence.py
 msgid "urban_label_solicitLocationOpinionsTo"
@@ -4259,12 +4303,12 @@ msgid "urbancertificatetwos"
 msgstr "Certificats d'urbanisme 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:357
+#: ../setuphandlers.py:360
 msgid "urbaneventtypes_folder_title"
 msgstr "Types d'évènements"
 
 #. Default: "urban"
-#: ../setuphandlers.py:654
+#: ../setuphandlers.py:657
 msgid "urbantemplates_folder_title"
 msgstr "modèles des procédures d'urbanisme"
 

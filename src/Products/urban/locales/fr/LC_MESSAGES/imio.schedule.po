@@ -32,6 +32,9 @@ msgstr "Créer l'événement 'dossier incomplet' et le clôturer"
 msgid "urban.schedule.condition.complements_received"
 msgstr "Créer l'événement 'récépissé d'un complément' et le clôturer"
 
+msgid "urban.schedule.condition.default_acknowledgement"
+msgstr "Le dossier est recevable par défaut"
+
 msgid "urban.schedule.condition.deposit_done"
 msgstr "Créer l'événement de dépôt et le clôturer"
 
@@ -68,6 +71,12 @@ msgstr "Avis de service reçus"
 msgid "urban.schedule.condition.procedure_choice_done"
 msgstr "Sélectionner une valeur dans le champ 'choix de la procédure'"
 
+msgid "urban.schedule.condition.procedure_choice_notified"
+msgstr "Créer l'événement 'Notification du choix de la procédure' et le clôturer"
+
+msgid "urban.schedule.condition.procedure_choice_received_from_FD"
+msgstr "Créer l'événement 'Réception du choix de la procédure par le FD' et le clôturer"
+
 msgid "urban.schedule.condition.refused"
 msgstr "Refuser le dossier"
 
@@ -85,4 +94,3 @@ msgstr "Date de dépôt du dossier"
 
 msgid "urban.start_date.inquiry_end_date"
 msgstr "Date de fin de l'enquête publique"
-

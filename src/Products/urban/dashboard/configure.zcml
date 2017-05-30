@@ -6,6 +6,7 @@
     <include file="autocomplete.zcml" />
     <include file="columns.zcml" />
     <include file="vocabularies.zcml" />
+    <include package=".widgets" />
 
     <configure package="collective.eeafaceted.collectionwidget">
         <browser:page
@@ -16,5 +17,15 @@
             permission="zope2.View"
             />
     </configure>
+
+    <!-- Register the portlet -->
+    <plone:portlet
+        name="Products.urban.dashboard.CategorySwitchPortlet"
+        interface=".portlet.ICategorySwitchPortlet"
+        assignment=".portlet.Assignment"
+        renderer=".portlet.Renderer"
+        addview=".portlet.AddForm"
+        editview=".portlet.EditForm"
+    />
 
 </configure>
