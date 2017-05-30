@@ -18,4 +18,14 @@
             />
     </configure>
 
+    <!-- Register the portlet -->
+    <plone:portlet
+        name="Products.urban.dashboard.CategorySwitchPortlet"
+        interface=".portlet.ICategorySwitchPortlet"
+        assignment=".portlet.Assignment"
+        renderer=".portlet.Renderer"
+        addview=".portlet.AddForm"
+        editview=".portlet.EditForm"
+    />
+
 </configure>
