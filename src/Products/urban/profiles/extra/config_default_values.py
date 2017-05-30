@@ -77,6 +77,15 @@ default_values = {
             {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
             {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
         ],
+        'exemptfdarticle': [
+            'UrbanVocabularyTerm',
+            {'id': "annexe4", 'title': u"Annexe 4 - Demande de permis avec concours d'un architecte"},
+            {'id': "annexe5", 'title': u"Annexe 5 - Modification de la destination ou modification de la répartition des surfaces de vente"},
+            {'id': "annexe6", 'title': u"Annexe 6 - Modification sensible du relief du sol - dépôt de véhicules, de mitrailles, de matériaux ou de déchets - installations mobiles - travaux d'aménagement au sol aux abords d'une construction autorisée"},
+            {'id': "annexe7", 'title': u"Annexe 7 - Boisement - déboisement - abattage - culture de sapins de Noël - modification de l'aspect d'un ou plusieurs arbres ou haies remarquables - défrichement - modification de la végétation"},
+            {'id': "annexe8", 'title': u"Annexe 8 - Travaux techniques"},
+            {'id': "annexe9", 'title': u"Annexe 9 - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8"},
+        ]
     },
     'CODT_Article127': {
         'folderdelays': [
