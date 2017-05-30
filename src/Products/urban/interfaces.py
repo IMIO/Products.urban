@@ -376,6 +376,10 @@ class IAcknowledgmentEvent(Interface):
     __doc__ = _("""IAcknowledgment type marker interface""")
 
 
+class IDefaultCODTAcknowledgmentEvent(Interface):
+    __doc__ = _("""IDefaultCODTAcknowledgmentEvent type marker interface""")
+
+
 class ICommunalCouncilEvent(Interface):
     __doc__ = _("""ICommunalCouncil type marker interface""")
 
@@ -394,6 +398,10 @@ class IModificationDepositEvent(IDepositEvent):
 
 class IMissingPartEvent(Interface):
     __doc__ = _("""IMissingPart type marker interface""")
+
+
+class ICODTProcedureChoiceNotified(Interface):
+    __doc__ = _("""ICODTProcedureChoiceNotified type marker interface""")
 
 
 class IInquiryEvent(Interface):

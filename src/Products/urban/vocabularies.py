@@ -5,6 +5,9 @@
 from Products.CMFPlone.i18nl10n import utranslate
 
 from plone import api
+from Products.urban.config import URBAN_CWATUPE_TYPES
+from Products.urban.config import URBAN_CODT_TYPES
+from Products.urban.config import URBAN_ENVIRONMENT_TYPES
 from Products.urban.config import EMPTY_VOCAB_VALUE
 from Products.urban.interfaces import IEventTypeType
 from Products.urban.interfaces import IFolderManager
@@ -148,3 +151,20 @@ class UrbanRootLicenceStateVocabularyFactory(LicenceStateVocabularyFactory):
         config = getattr(portal_urban, context.getProperty('urbanConfigId', ''), None)
         portal_type = config and config.getLicencePortalType() or None
         return portal_type
+
+
+class ProcedureCategoryVocabulary(object):
+
+    def __call__(self, context):
+        terms = []
+        codt_types = URBAN_ENVIRONMENT_TYPES + URBAN_CODT_TYPES
+        cwatupe_types = URBAN_ENVIRONMENT_TYPES + URBAN_CWATUPE_TYPES
+
+        terms = [
+            SimpleTerm('codt', ','.join(codt_types), 'CODT'),
+            SimpleTerm('cwatupe', ','.join(cwatupe_types), 'CWATUPE'),
+        ]
+        return SimpleVocabulary(terms)
+
+
+ProcedureCategoryVocabularyFactory = ProcedureCategoryVocabulary()

@@ -5,7 +5,12 @@ from imio.dashboard.vocabulary import ConditionAwareCollectionVocabulary
 from plone import api
 
 from Products.urban.config import URBAN_TYPES
+from Products.urban.config import URBAN_CWATUPE_TYPES
+from Products.urban.config import URBAN_CODT_TYPES
+from Products.urban.config import URBAN_ENVIRONMENT_TYPES
+from Products.urban.dashboard import utils
 
+from zope.globalrequest import getRequest
 from zope.i18n import translate as _
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
@@ -69,6 +74,46 @@ class DashboardCollections(ConditionAwareCollectionVocabulary):
             sort_on='getObjPositionInParent'
         )
         return list(brains)
+
+    def __call__(self, context, query=None):
+        self.category = utils.get_procedure_category(
+            context,
+            self.get_request(context),
+        )
+        terms = super(DashboardCollections, self).__call__(
+            context,
+            query=query,
+        )
+        filtered_terms = [t for t in terms
+                          if t.value.id in self.get_collection_ids(context)]
+        return SimpleVocabulary(filtered_terms)
+
+    def _compute_redirect_to(self, collection, criterion):
+        """ """
+        redirect_to = super(DashboardCollections, self)._compute_redirect_to(
+            collection,
+            criterion,
+        )
+        return redirect_to.replace(
+            'no_redirect=1',
+            'no_redirect=1&category={0}'.format(self.category),
+        )
+
+    def get_request(self, context):
+        return getattr(context, 'REQUEST', getRequest())
+
+    def _format_id(self, type):
+        """Format a UrbanType to the collection id"""
+        return 'collection_{0}'.format(type.lower())
+
+    def get_collection_ids(self, context):
+        ids = ['collection_all_licences']
+        ids.extend(map(self._format_id, URBAN_ENVIRONMENT_TYPES))
+        if self.category == 'CODT' or self.category == 'ALL':
+            ids.extend(map(self._format_id, URBAN_CODT_TYPES))
+        if self.category == 'CWATUPE' or self.category == 'ALL':
+            ids.extend(map(self._format_id, URBAN_CWATUPE_TYPES))
+        return ids
 
 
 class CollectionCategory(object):

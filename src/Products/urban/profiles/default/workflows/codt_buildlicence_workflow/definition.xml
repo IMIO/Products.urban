@@ -2,7 +2,7 @@
 <dc-workflow workflow_id="urban_licence_workflow"
              title="urban_licence_workflow"
              state_variable="review_state"
-             initial_state="in_progress"
+             initial_state="deposit"
              xmlns:i18n="http://xml.zope.org/namespaces/i18n"
              i18n:domain="plone">
  <permission>View</permission>
@@ -66,8 +66,8 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <state state_id="in_progress"
-        title="in_progress"
+ <state state_id="deposit"
+        title="deposit"
         i18n:attributes="title">
   <exit-transition transition_id="isincomplete"/>
   <exit-transition transition_id="iscomplete"/>
@@ -121,11 +121,64 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
+ <state state_id="inacceptable"
+        title="inacceptable"
+        i18n:attributes="title">
+  <exit-transition transition_id="reopen"/>
+  <permission-map name="Acces contents information"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Add portal content"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Delete objects"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify view template"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Review portal content"
+                  acquired="False">
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+ </state>
  <state state_id="incomplete"
         title="incomplete"
         i18n:attributes="title">
   <exit-transition transition_id="reopen_incomplete"/>
-  <exit-transition transition_id="refuse"/>
+  <exit-transition transition_id="isinacceptable"/>
   <permission-map name="Acces contents information"
                   acquired="False">
    <permission-role>Reader</permission-role>
@@ -349,6 +402,18 @@
     <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
+ <transition transition_id="isinacceptable"
+             title="isinacceptable"
+             new_state="inacceptable"
+             trigger="USER"
+             before_script=""
+             after_script=""
+             i18n:attributes="title">
+  <action url="" icon="%(portal_url)s/refuse.png" category="workflow" i18n:translate="">iscomplete</action>
+  <guard>
+    <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </transition>
  <transition transition_id="iscomplete"
              title="iscomplete"
              new_state="complete"
@@ -399,7 +464,7 @@
  </transition>
  <transition transition_id="reopen_incomplete"
              title="reopen"
-             new_state="in_progress"
+             new_state="deposit"
              trigger="USER"
              before_script=""
              after_script=""

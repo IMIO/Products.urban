@@ -292,3 +292,12 @@ msgstr ""
 
 msgid "Please, select a street from the list below!"
 msgstr ""
+
+msgid "deposit"
+msgstr ""
+
+msgid "inacceptable"
+msgstr ""
+
+msgid "isinacceptable"
+msgstr ""
