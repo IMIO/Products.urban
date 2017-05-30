@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2017-05-29 06:54+0000\n"
+"POT-Creation-Date: 2017-05-30 12:26+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -28,6 +28,10 @@ msgstr ""
 #: ../browser/templates/urbaneventannouncementview.pt:35
 #: ../browser/templates/urbaneventinquiryview.pt:35
 msgid "Actions:"
+msgstr ""
+
+#: ../dashboard/portlet.py:46
+msgid "Add Category Switch Portlet"
 msgstr ""
 
 #: ../browser/portlets.py:107
@@ -160,10 +164,6 @@ msgstr "Déclaration"
 msgid "Delete"
 msgstr "Supprimer le permis"
 
-#: ../profiles.zcml:41
-msgid "Demo Extension profile for urban."
-msgstr ""
-
 msgid "Display each licence only once"
 msgstr "N'afficher chaque dossier qu'une seule fois"
 
@@ -172,6 +172,10 @@ msgstr "Division"
 
 msgid "Edit"
 msgstr "Modifier le permis"
+
+#: ../dashboard/portlet.py:55
+msgid "Edit Category Switch Portlet"
+msgstr ""
 
 #: ../browser/portlets.py:116
 msgid "Edit Urban config Portlet"
@@ -207,14 +211,6 @@ msgstr "Événements"
 msgid "Events attachments"
 msgstr "Pièces jointes des événements"
 
-#: ../profiles.zcml:17
-msgid "Extension profile for urban."
-msgstr ""
-
-#: ../profiles.zcml:26
-msgid "Extra Extension profile for urban."
-msgstr ""
-
 msgid "Filter"
 msgstr "Filtrer"
 
@@ -241,110 +237,110 @@ msgid "History of the parcel and related licences"
 msgstr "Historique de la parcelle et dossiers liés"
 
 #. Default: "Acknowledgement"
-#: ../interfaces.py:376
+#: ../interfaces.py:375
 msgid "IAcknowledgment type marker interface"
 msgstr "Accusé de réception"
 
-#: ../interfaces.py:412
+#: ../interfaces.py:411
 msgid "IAnnouncement type marker interface"
 msgstr ""
 
-#: ../interfaces.py:404
+#: ../interfaces.py:403
 msgid "ICODTProcedureChoiceNotified type marker interface"
 msgstr "Notification du choix de la procédure"
 
-#: ../interfaces.py:348
+#: ../interfaces.py:347
 msgid "ICollege type marker interface"
 msgstr ""
 
 #. Default: "College report"
-#: ../interfaces.py:424
+#: ../interfaces.py:423
 msgid "ICollegeReport type marker interface"
 msgstr "Rapport du collège"
 
 #. Default: "Communal council"
-#: ../interfaces.py:384
+#: ../interfaces.py:383
 msgid "ICommunalCouncil type marker interface"
 msgstr "Conseil communal"
 
-#: ../interfaces.py:380
+#: ../interfaces.py:379
 msgid "IDefaultCODTAcknowledgmentEvent type marker interface"
 msgstr "Accusé de réception par défaut"
 
 #. Default: "Request deposit"
-#: ../interfaces.py:388
+#: ../interfaces.py:387
 msgid "IDeposit type marker interface"
 msgstr "Dépôt de la demande"
 
-#: ../interfaces.py:436
+#: ../interfaces.py:435
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr ""
 
 #. Default: "Inquiry"
-#: ../interfaces.py:408
+#: ../interfaces.py:407
 msgid "IInquiry type marker interface"
 msgstr "Enquête publique"
 
-#: ../interfaces.py:416
+#: ../interfaces.py:415
 msgid "ILicenceDelivery type marker interface"
 msgstr ""
 
-#: ../interfaces.py:420
+#: ../interfaces.py:419
 msgid "ILicenceExpiration type marker interface"
 msgstr ""
 
 #. Default: "Missing part"
-#: ../interfaces.py:400
+#: ../interfaces.py:399
 msgid "IMissingPart type marker interface"
 msgstr "Pièces manquantes"
 
 #. Default: "Missing part deposit"
-#: ../interfaces.py:392
+#: ../interfaces.py:391
 msgid "IMissingPartDeposit type marker interface"
 msgstr "Dépôt des pièces manquantes"
 
 #. Default: "Modification deposit"
-#: ../interfaces.py:396
+#: ../interfaces.py:395
 msgid "IModificationDeposit type marker interface"
 msgstr "Dépôt d'un modificatif de la demande"
 
 #. Default: "Opinion request"
-#: ../interfaces.py:356
+#: ../interfaces.py:355
 msgid "IOpinionRequest type marker interface"
 msgstr "Demande d'avis"
 
 #. Default: "Prorogation"
-#: ../interfaces.py:448
+#: ../interfaces.py:447
 msgid "IProrogation type marker interface"
 msgstr "Prorogation"
 
-#: ../interfaces.py:440
+#: ../interfaces.py:439
 msgid "IRecourseEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:452
+#: ../interfaces.py:451
 msgid "IRefusedIncompleteness type marker interface"
 msgstr ""
 
-#: ../interfaces.py:372
+#: ../interfaces.py:371
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
 #. Default: "Technical service opinion request"
-#: ../interfaces.py:352
+#: ../interfaces.py:351
 msgid "ITechnicalServiceOpinionRequest type marker interface"
 msgstr "Demande d'avis du service technique"
 
 #. Default: "Licence delivery"
-#: ../interfaces.py:432
+#: ../interfaces.py:431
 msgid "ITheLicence type marker interface"
 msgstr "Délivrance du permis/certificat/..."
 
-#: ../interfaces.py:428
+#: ../interfaces.py:427
 msgid "ITheLicenceCollege type marker interface"
 msgstr ""
 
-#: ../interfaces.py:368
+#: ../interfaces.py:367
 msgid "IWalloonRegionDecisionEvent type marker interface"
 msgstr ""
 
@@ -352,17 +348,17 @@ msgid "IWalloonRegionDesisionEvent type marker interface"
 msgstr "Décision de la région wallone"
 
 #. Default: "Walloon region opinion request"
-#: ../interfaces.py:364
+#: ../interfaces.py:363
 msgid "IWalloonRegionOpinionRequest type marker interface"
 msgstr "Demande d'avis à la région wallone"
 
 #. Default: "Walloon region primo"
-#: ../interfaces.py:360
+#: ../interfaces.py:359
 msgid "IWalloonRegionPrimo type marker interface"
 msgstr "Envoi du primo dossier"
 
 #. Default: "Work beginning"
-#: ../interfaces.py:444
+#: ../interfaces.py:443
 msgid "IWorkBeginning type marker interface"
 msgstr "Début des travaux"
 
@@ -378,10 +374,6 @@ msgstr "Type de permis"
 #: ../profiles/default/actions.xml
 msgid "Map"
 msgstr "Carte"
-
-#: ../profiles.zcml:34
-msgid "Migrations profile for urban."
-msgstr ""
 
 msgid "MiscDemand"
 msgstr "Demandes diverses"
@@ -422,10 +414,6 @@ msgstr "Certificat de patrimoine"
 
 msgid "PreliminaryNotice"
 msgstr "Demande d'avis préalable"
-
-#: ../profiles.zcml:48
-msgid "Profile for pm.wsclient in urban"
-msgstr ""
 
 msgid "ProjectMeeting"
 msgstr "Réunion de projet"
@@ -502,10 +490,6 @@ msgstr "Trie les résultats d'abord par type de permis, puis par délai de retar
 msgid "Statistics"
 msgstr ""
 
-#: ../testing.zcml:14
-msgid "Tests Extension profile for urban."
-msgstr ""
-
 #: ../browser/longtextview.py:30
 msgid "The field does not exist !!!"
 msgstr ""
@@ -529,6 +513,18 @@ msgstr ""
 #: ../browser/portlets.py:55
 msgid "This portlet lists various urban functionnalities."
 msgstr ""
+
+#: ../dashboard/portlet.py:47
+msgid "This portlet shows a switch button between procedure categories."
+msgstr ""
+
+#: ../dashboard/templates/portlet_categoryswitch.pt:8
+msgid "To CODT procedures"
+msgstr "Procédures CODT"
+
+#: ../dashboard/templates/portlet_categoryswitch.pt:15
+msgid "To CWATUPE procedures"
+msgstr "Procédures CWATUPE"
 
 #: ../browser/licence/templates/licenceview.pt:27
 #: ../browser/templates/urbaneventannouncementview.pt:31
@@ -1821,7 +1817,7 @@ msgstr "Mademoiselle"
 msgid "persontitle_mister"
 msgstr "Monsieur"
 
-#: ../dashboard/vocabularies.py:34
+#: ../dashboard/vocabularies.py:36
 msgid "plone"
 msgstr ""
 
@@ -2037,49 +2033,25 @@ msgstr "Paramètres des permis uniques"
 msgid "uno_enabled_python"
 msgstr "Si l'interpréteur Python qui tourne Zope et Plone ne dispose pas de la librairie pyUNO (testez-le en essayant 'import uno'), vous pouvez spécifier ici le chemin absolu de l'exécutable d'un second interpréteur Python disposant de la librairie UNO (accès à OpenOffice). Par exemple, l'interpréteur Python /usr/bin/python livré avec Ubuntu."
 
-#: ../profiles.zcml:17
 #: ../profiles/default/actions.xml
 #: ../setuphandlers.py:268
 msgid "urban"
 msgstr "Urbanisme"
 
-#: ../profiles.zcml:41
 msgid "urban-demo"
 msgstr "Urbanisme démo (permis d'exemples)"
 
-#: ../profiles.zcml:26
 msgid "urban-extra"
 msgstr "Urbanisme extra (valeurs de config et modèles par defaut)"
 
 msgid "urban-labruyere"
 msgstr "Urbanisme La Bruyère"
 
-#: ../profiles.zcml:34
 msgid "urban-migrations"
 msgstr "Urbanisme migrations"
 
-#: ../profiles.zcml:48
-msgid "urban-pm-wsclient"
-msgstr ""
-
 msgid "urban-sambreville"
 msgstr "Urbanisme Sambreville"
-
-#: ../testing.zcml:14
-msgid "urban-tests"
-msgstr ""
-
-#: ../testing.zcml:22
-msgid "urban-tests-imports"
-msgstr ""
-
-#: ../testing.zcml:30
-msgid "urban-testsWithConfig"
-msgstr ""
-
-#: ../testing.zcml:38
-msgid "urban-testsWithLicences"
-msgstr ""
 
 #. Default: Set the number of days the alert will be shown before the deadline delay
 msgid "urban_alertdelay_descr"
@@ -4394,3 +4366,4 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+

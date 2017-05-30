@@ -1,4 +1,5 @@
 <dl class="portlet portletCategorySwitch"
+    i18n:domain="urban"
     tal:condition="view/available">
     <dt class="portletHeader"
         tal:define="category view/category">
