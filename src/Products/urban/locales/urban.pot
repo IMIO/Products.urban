@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-05-29 06:54+0000\n"
+"POT-Creation-Date: 2017-05-30 12:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,6 +27,10 @@ msgstr ""
 #: ../browser/templates/urbaneventannouncementview.pt:35
 #: ../browser/templates/urbaneventinquiryview.pt:35
 msgid "Actions:"
+msgstr ""
+
+#: ../dashboard/portlet.py:46
+msgid "Add Category Switch Portlet"
 msgstr ""
 
 #: ../browser/portlets.py:107
@@ -158,10 +162,6 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: ../profiles.zcml:41
-msgid "Demo Extension profile for urban."
-msgstr ""
-
 msgid "Display each licence only once"
 msgstr ""
 
@@ -169,6 +169,10 @@ msgid "Division"
 msgstr ""
 
 msgid "Edit"
+msgstr ""
+
+#: ../dashboard/portlet.py:55
+msgid "Edit Category Switch Portlet"
 msgstr ""
 
 #: ../browser/portlets.py:116
@@ -205,14 +209,6 @@ msgstr ""
 msgid "Events attachments"
 msgstr ""
 
-#: ../profiles.zcml:17
-msgid "Extension profile for urban."
-msgstr ""
-
-#: ../profiles.zcml:26
-msgid "Extra Extension profile for urban."
-msgstr ""
-
 msgid "Filter"
 msgstr ""
 
@@ -238,114 +234,114 @@ msgstr ""
 msgid "History of the parcel and related licences"
 msgstr ""
 
-#: ../interfaces.py:376
+#: ../interfaces.py:375
 msgid "IAcknowledgment type marker interface"
 msgstr ""
 
-#: ../interfaces.py:412
+#: ../interfaces.py:411
 msgid "IAnnouncement type marker interface"
 msgstr ""
 
-#: ../interfaces.py:404
+#: ../interfaces.py:403
 msgid "ICODTProcedureChoiceNotified type marker interface"
 msgstr ""
 
-#: ../interfaces.py:348
+#: ../interfaces.py:347
 msgid "ICollege type marker interface"
 msgstr ""
 
-#: ../interfaces.py:424
+#: ../interfaces.py:423
 msgid "ICollegeReport type marker interface"
 msgstr ""
 
-#: ../interfaces.py:384
+#: ../interfaces.py:383
 msgid "ICommunalCouncil type marker interface"
 msgstr ""
 
-#: ../interfaces.py:380
+#: ../interfaces.py:379
 msgid "IDefaultCODTAcknowledgmentEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:388
+#: ../interfaces.py:387
 msgid "IDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:436
+#: ../interfaces.py:435
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:408
+#: ../interfaces.py:407
 msgid "IInquiry type marker interface"
 msgstr ""
 
-#: ../interfaces.py:416
+#: ../interfaces.py:415
 msgid "ILicenceDelivery type marker interface"
 msgstr ""
 
-#: ../interfaces.py:420
+#: ../interfaces.py:419
 msgid "ILicenceExpiration type marker interface"
 msgstr ""
 
-#: ../interfaces.py:400
+#: ../interfaces.py:399
 msgid "IMissingPart type marker interface"
 msgstr ""
 
-#: ../interfaces.py:392
+#: ../interfaces.py:391
 msgid "IMissingPartDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:396
+#: ../interfaces.py:395
 msgid "IModificationDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:356
+#: ../interfaces.py:355
 msgid "IOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:448
+#: ../interfaces.py:447
 msgid "IProrogation type marker interface"
 msgstr ""
 
-#: ../interfaces.py:440
+#: ../interfaces.py:439
 msgid "IRecourseEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:452
+#: ../interfaces.py:451
 msgid "IRefusedIncompleteness type marker interface"
 msgstr ""
 
-#: ../interfaces.py:372
+#: ../interfaces.py:371
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:352
+#: ../interfaces.py:351
 msgid "ITechnicalServiceOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:432
+#: ../interfaces.py:431
 msgid "ITheLicence type marker interface"
 msgstr ""
 
-#: ../interfaces.py:428
+#: ../interfaces.py:427
 msgid "ITheLicenceCollege type marker interface"
 msgstr ""
 
-#: ../interfaces.py:368
+#: ../interfaces.py:367
 msgid "IWalloonRegionDecisionEvent type marker interface"
 msgstr ""
 
 msgid "IWalloonRegionDesisionEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:364
+#: ../interfaces.py:363
 msgid "IWalloonRegionOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:360
+#: ../interfaces.py:359
 msgid "IWalloonRegionPrimo type marker interface"
 msgstr ""
 
-#: ../interfaces.py:444
+#: ../interfaces.py:443
 msgid "IWorkBeginning type marker interface"
 msgstr ""
 
@@ -360,10 +356,6 @@ msgstr ""
 
 #: ../profiles/default/actions.xml
 msgid "Map"
-msgstr ""
-
-#: ../profiles.zcml:34
-msgid "Migrations profile for urban."
 msgstr ""
 
 msgid "MiscDemand"
@@ -404,10 +396,6 @@ msgid "PatrimonyCertificate"
 msgstr ""
 
 msgid "PreliminaryNotice"
-msgstr ""
-
-#: ../profiles.zcml:48
-msgid "Profile for pm.wsclient in urban"
 msgstr ""
 
 msgid "ProjectMeeting"
@@ -484,10 +472,6 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-#: ../testing.zcml:14
-msgid "Tests Extension profile for urban."
-msgstr ""
-
 #: ../browser/longtextview.py:30
 msgid "The field does not exist !!!"
 msgstr ""
@@ -510,6 +494,18 @@ msgstr ""
 
 #: ../browser/portlets.py:55
 msgid "This portlet lists various urban functionnalities."
+msgstr ""
+
+#: ../dashboard/portlet.py:47
+msgid "This portlet shows a switch button between procedure categories."
+msgstr ""
+
+#: ../dashboard/templates/portlet_categoryswitch.pt:8
+msgid "To CODT procedures"
+msgstr ""
+
+#: ../dashboard/templates/portlet_categoryswitch.pt:15
+msgid "To CWATUPE procedures"
 msgstr ""
 
 #: ../browser/licence/templates/licenceview.pt:27
@@ -1788,7 +1784,7 @@ msgstr ""
 msgid "persontitle_mister"
 msgstr ""
 
-#: ../dashboard/vocabularies.py:34
+#: ../dashboard/vocabularies.py:36
 msgid "plone"
 msgstr ""
 
@@ -2003,48 +1999,25 @@ msgstr ""
 msgid "uno_enabled_python"
 msgstr ""
 
-#: ../profiles.zcml:17
 #: ../profiles/default/actions.xml
 #: ../setuphandlers.py:268
 msgid "urban"
 msgstr ""
 
-#: ../profiles.zcml:41
 msgid "urban-demo"
 msgstr ""
 
-#: ../profiles.zcml:26
+# extension profile
 msgid "urban-extra"
 msgstr ""
 
 msgid "urban-labruyere"
 msgstr ""
 
-#: ../profiles.zcml:34
 msgid "urban-migrations"
 msgstr ""
 
-#: ../profiles.zcml:48
-msgid "urban-pm-wsclient"
-msgstr ""
-
 msgid "urban-sambreville"
-msgstr ""
-
-#: ../testing.zcml:14
-msgid "urban-tests"
-msgstr ""
-
-#: ../testing.zcml:22
-msgid "urban-tests-imports"
-msgstr ""
-
-#: ../testing.zcml:30
-msgid "urban-testsWithConfig"
-msgstr ""
-
-#: ../testing.zcml:38
-msgid "urban-testsWithLicences"
 msgstr ""
 
 #. Default: Set the number of days the alert will be shown before the deadline delay
@@ -4353,3 +4326,4 @@ msgstr ""
 
 msgid "zip_folder_title"
 msgstr ""
+
