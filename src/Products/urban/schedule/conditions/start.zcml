@@ -20,6 +20,14 @@
         name="urban.schedule.condition.complements_asked"
     />
 
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.SingleComplementAsked"
+        name="urban.schedule.condition.complements_asked"
+    />
+
     <!-- acknowlegdment conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseBuildLicence
