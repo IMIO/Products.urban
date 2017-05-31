@@ -71,15 +71,19 @@ class CODT_IntegratedLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMi
         unknown = 'ukn' in selection
         opinions = 'external_opinions' in selection
         inquiry = 'inquiry' in selection or 'light_inquiry' in selection
+        delay = 30
 
         if unknown:
             return ''
         elif opinions and inquiry:
-            return '70j'
+            delay = 70
         elif opinions and not inquiry:
-            return '70j'
-        else:
-            return '30j'
+            delay = 70
+
+        if self.prorogation:
+            delay += 30
+
+        return '{}j'.format(str(delay))
 
     def getLastWalloonRegionDecisionEvent(self, use_catalog=True):
         return self._getLastEvent(interfaces.IWalloonRegionDecisionEvent, use_catalog)
