@@ -4,6 +4,7 @@ from imio.schedule.content.object_factories import EndConditionObject
 from imio.schedule.content.object_factories import StartConditionObject
 from imio.schedule.content.object_factories import CreationConditionObject
 from imio.schedule.content.object_factories import MacroCreationConditionObject
+from imio.schedule.content.object_factories import MacroEndConditionObject
 
 
 schedule_config = {
@@ -229,7 +230,7 @@ schedule_config = {
                 MacroCreationConditionObject('urban.schedule.condition.acknowledgment_done'),
             ),
             'end_conditions': (
-                EndConditionObject('urban.schedule.condition.decision_notified'),
+                MacroEndConditionObject('urban.schedule.condition.decision_notified'),
             ),
             'start_date': 'urban.schedule.start_date.acknowledgment_date',
             'calculation_delay': (
@@ -268,7 +269,7 @@ schedule_config = {
             'starting_states': ('incomplete',),
             'ending_states': ('deposit',),
             'creation_conditions': (
-                CreationConditionObject('urban.schedule.condition.incomplete_first_time'),
+                MacroCreationConditionObject('urban.schedule.condition.incomplete_first_time'),
             ),
             'start_date': 'schedule.start_date.subtask_highest_due_date',
             'subtasks': [
@@ -314,7 +315,7 @@ schedule_config = {
             'starting_states': ('incomplete',),
             'ending_states': ('inacceptable',),
             'creation_conditions': (
-                CreationConditionObject('urban.schedule.condition.incomplete_second_time'),
+                MacroCreationConditionObject('urban.schedule.condition.incomplete_second_time'),
             ),
             'start_date': 'schedule.start_date.subtask_highest_due_date',
             'subtasks': [
@@ -479,9 +480,9 @@ schedule_config = {
                 MacroCreationConditionObject('urban.schedule.condition.acknowledgment_done'),
             ),
             'end_conditions': (
-                EndConditionObject('urban.schedule.condition.decision_notified'),
+                MacroEndConditionObject('urban.schedule.condition.decision_notified'),
             ),
-            'start_date': 'schedule.start_date.acknowledgment_date',
+            'start_date': 'urban.schedule.start_date.acknowledgment_date',
             'calculation_delay': (
                 'urban.schedule.delay.annonced_delay',
             ),
@@ -498,7 +499,7 @@ schedule_config = {
                     'end_conditions': (
                         EndConditionObject('urban.schedule.condition.decision_notified'),
                     ),
-                    'start_date': 'schedule.start_date.acknowledgment_date',
+                    'start_date': 'urban.schedule.start_date.acknowledgment_date',
                     'calculation_delay': (
                         'urban.schedule.delay.annonced_delay',
                     ),
@@ -518,7 +519,7 @@ schedule_config = {
             'starting_states': ('incomplete',),
             'ending_states': ('deposit',),
             'creation_conditions': (
-                CreationConditionObject('urban.schedule.condition.incomplete_first_time'),
+                MacroCreationConditionObject('urban.schedule.condition.incomplete_first_time'),
             ),
             'start_date': 'schedule.start_date.subtask_highest_due_date',
             'subtasks': [
@@ -564,7 +565,7 @@ schedule_config = {
             'starting_states': ('incomplete',),
             'ending_states': ('inacceptable',),
             'creation_conditions': (
-                CreationConditionObject('urban.schedule.condition.incomplete_second_time'),
+                MacroCreationConditionObject('urban.schedule.condition.incomplete_second_time'),
             ),
             'start_date': 'schedule.start_date.subtask_highest_due_date',
             'subtasks': [
@@ -729,9 +730,9 @@ schedule_config = {
                 MacroCreationConditionObject('urban.schedule.condition.acknowledgment_done'),
             ),
             'end_conditions': (
-                EndConditionObject('urban.schedule.condition.decision_notified'),
+                MacroEndConditionObject('urban.schedule.condition.decision_notified'),
             ),
-            'start_date': 'schedule.start_date.acknowledgment_date',
+            'start_date': 'urban.schedule.start_date.acknowledgment_date',
             'calculation_delay': (
                 'urban.schedule.delay.annonced_delay',
             ),
@@ -748,7 +749,7 @@ schedule_config = {
                     'end_conditions': (
                         EndConditionObject('urban.schedule.condition.decision_notified'),
                     ),
-                    'start_date': 'schedule.start_date.acknowledgment_date',
+                    'start_date': 'urban.schedule.start_date.acknowledgment_date',
                     'calculation_delay': (
                         'urban.schedule.delay.annonced_delay',
                     ),
@@ -768,7 +769,7 @@ schedule_config = {
             'starting_states': ('incomplete',),
             'ending_states': ('deposit',),
             'creation_conditions': (
-                CreationConditionObject('urban.schedule.condition.incomplete_first_time'),
+                MacroCreationConditionObject('urban.schedule.condition.incomplete_first_time'),
             ),
             'start_date': 'schedule.start_date.subtask_highest_due_date',
             'subtasks': [
@@ -814,7 +815,7 @@ schedule_config = {
             'starting_states': ('incomplete',),
             'ending_states': ('inacceptable',),
             'creation_conditions': (
-                CreationConditionObject('urban.schedule.condition.incomplete_second_time'),
+                MacroCreationConditionObject('urban.schedule.condition.incomplete_second_time'),
             ),
             'start_date': 'schedule.start_date.subtask_highest_due_date',
             'subtasks': [
@@ -979,9 +980,9 @@ schedule_config = {
                 MacroCreationConditionObject('urban.schedule.condition.acknowledgment_done'),
             ),
             'end_conditions': (
-                EndConditionObject('urban.schedule.condition.decision_notified'),
+                MacroEndConditionObject('urban.schedule.condition.decision_notified'),
             ),
-            'start_date': 'schedule.start_date.acknowledgment_date',
+            'start_date': 'urban.schedule.start_date.acknowledgment_date',
             'calculation_delay': (
                 'urban.schedule.delay.annonced_delay',
             ),
@@ -998,7 +999,7 @@ schedule_config = {
                     'end_conditions': (
                         EndConditionObject('urban.schedule.condition.decision_notified'),
                     ),
-                    'start_date': 'schedule.start_date.acknowledgment_date',
+                    'start_date': 'urban.schedule.start_date.acknowledgment_date',
                     'calculation_delay': (
                         'urban.schedule.delay.annonced_delay',
                     ),
