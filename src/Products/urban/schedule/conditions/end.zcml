@@ -47,7 +47,7 @@
         for="Products.urban.interfaces.ICODT_BaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.ComplementsAsked"
+        factory=".generic.SingleComplementAsked"
         name="urban.schedule.condition.complements_asked"
     />
 
@@ -63,7 +63,7 @@
         for="Products.urban.interfaces.ICODT_BaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.ComplementsReceived"
+        factory=".generic.SingleComplementReceived"
         name="urban.schedule.condition.complements_received"
     />
 
