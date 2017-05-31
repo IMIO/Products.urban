@@ -18,7 +18,7 @@ schedule_config = {
             'starting_states': ('incomplete',),
             'ending_states': ('deposit',),
             'creation_conditions': (
-                CreationConditionObject('urban.schedule.condition.incomplete_first_time'),
+                MacroCreationConditionObject('urban.schedule.condition.incomplete_first_time'),
             ),
             'start_date': 'schedule.start_date.subtask_highest_due_date',
             'subtasks': [
