@@ -213,15 +213,19 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
         opinions = 'external_opinions' in selection
         inquiry = 'inquiry' in selection or 'light_inquiry' in selection
         FD = 'FD' in selection
+        delay = 75
 
         if unknown:
             return ''
         elif (opinions or inquiry) and FD:
-            return '115j'
+            delay = 115
         elif not opinions and not inquiry and not FD:
-            return '30j'
-        else:
-            return '75j'
+            delay = 30
+
+        if self.prorogation:
+            delay += 30
+
+        return '{}j'.format(str(delay))
 
     def getProrogationDelays(self, *values):
         procedure_choice = [{'val': v, 'selected': True} for v in self.getProcedureChoice()]

@@ -231,7 +231,7 @@ schedule_config = {
             'end_conditions': (
                 EndConditionObject('urban.schedule.condition.decision_notified'),
             ),
-            'start_date': 'schedule.start_date.acknowledgment_date',
+            'start_date': 'urban.schedule.start_date.acknowledgment_date',
             'calculation_delay': (
                 'urban.schedule.delay.annonced_delay',
             ),
@@ -248,11 +248,11 @@ schedule_config = {
                     'end_conditions': (
                         EndConditionObject('urban.schedule.condition.decision_notified'),
                     ),
-                    'start_date': 'schedule.start_date.acknowledgment_date',
+                    'start_date': 'urban.schedule.start_date.acknowledgment_date',
                     'calculation_delay': (
                         'urban.schedule.delay.annonced_delay',
                     ),
-                    'additional_delay': -7,
+                    'additional_delay': -1,
                 },
             ]
         },
