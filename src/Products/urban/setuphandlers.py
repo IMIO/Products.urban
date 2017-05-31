@@ -1360,59 +1360,59 @@ def setupExtra(context):
     logger.info('Setup default schedule configuration')
     addScheduleConfigs(context)
 
-    nis = portal_urban.getNISNum()
-    if not nis:
-        logger.error("No NIS defined in portal_urban!")
-        return
-
-    #we add the map coordinates
-    if not portal_urban.getMapExtent() or portal_urban.getMapExtent().count(', ') != 3:
-        session = services.cadastre.new_session()
-        coords = session.query_map_coordinates()
-        session.close()
-        portal_urban.setMapExtent(coords)
-
-    if not hasattr(portal_urban, "additional_layers"):
-        logger.warning("No 'additonal_layers' folder found in portal_urban, we create it.")
-        additional_layers_id = portal_urban.invokeFactory(
-            "Folder",
-            id="additional_layers",
-            title=_("additonal_layers_folder_title", 'urban')
-        )
-        additional_layers = getattr(portal_urban, additional_layers_id)
-        additional_layers.setConstrainTypesMode(1)
-        additional_layers.setLocallyAllowedTypes(['Layer'])
-        additional_layers.setImmediatelyAddableTypes(['Layer'])
-    else:
-        additional_layers = portal_urban.additional_layers
-
-    if not base_hasattr(additional_layers, 'orthophoto2009'):
-        additional_layers.invokeFactory("Layer", id="orthophoto2009", title=u"Orthophoto2009", WMSUrl="http://geowebcache1.communesplone.be/geoserver/gwc/service/wms", layers='rw-2009-2010', SRS="ESPG:31370", baseLayer=True, layerFormat="image/jpeg", visibility=False)
-
-    if not hasattr(aq_base(additional_layers), 'ppnc'):
-        additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://geoservercommon.communesplone.be/geoserver/gwc/service/wms", layers='PPNC', SRS="ESPG:31370", baseLayer=True, layerFormat="image/jpeg", visibility=False)
-#Layers order
-#PPNC
-#Parcelles
-#Rues
-#Batiments
-#N° parcelle
-#N° maison
-    if not hasattr(aq_base(additional_layers), 'parcelles'):
-        additional_layers.invokeFactory("Layer", id="parcelles", title=u"Parcelles", layers="urban%s:capa" % nis, SRS="ESPG:31370", transparent=False, visibility=True, layerFormat="image/png")
-        logger.info("Additional layer '%s' added" % 'parcelles')
-    if not hasattr(aq_base(additional_layers), 'rues'):
-        additional_layers.invokeFactory("Layer", id="rues", title=u"Nom des rues", layers="urban%s:toli" % nis, SRS="ESPG:31370", transparent=True, visibility=True, layerFormat="image/png")
-        logger.info("Additional layer '%s' added" % 'rues')
-    if not hasattr(aq_base(additional_layers), 'batiments'):
-        additional_layers.invokeFactory("Layer", id="batiments", title=u"Bâtiments", layers="urban%s:cabu" % nis, SRS="ESPG:31370", transparent=True, visibility=True, layerFormat="image/png")
-        logger.info("Additional layer '%s' added" % 'batiments')
-    if not hasattr(aq_base(additional_layers), 'num_parcelle'):
-        additional_layers.invokeFactory("Layer", id="num_parcelle", title=u"N° de parcelle", layers="urban%s:canu" % nis, styles="ParcelsNum", SRS="ESPG:31370", transparent=True, visibility=False, layerFormat="image/png")
-        logger.info("Additional layer '%s' added" % 'num_parcelle')
-    if not hasattr(aq_base(additional_layers), 'num_maisons'):
-        additional_layers.invokeFactory("Layer", id="num_maisons", title=u"N° de maison", layers="urban%s:canu" % nis, styles="HousesNum", SRS="ESPG:31370", transparent=True, visibility=False, layerFormat="image/png")
-        logger.info("Additional layer '%s' added" % 'num_maisons')
+#    nis = portal_urban.getNISNum()
+#    if not nis:
+#        logger.error("No NIS defined in portal_urban!")
+#        return
+#
+#    #we add the map coordinates
+#    if not portal_urban.getMapExtent() or portal_urban.getMapExtent().count(', ') != 3:
+#        session = services.cadastre.new_session()
+#        coords = session.query_map_coordinates()
+#        session.close()
+#        portal_urban.setMapExtent(coords)
+#
+#    if not hasattr(portal_urban, "additional_layers"):
+#        logger.warning("No 'additonal_layers' folder found in portal_urban, we create it.")
+#        additional_layers_id = portal_urban.invokeFactory(
+#            "Folder",
+#            id="additional_layers",
+#            title=_("additonal_layers_folder_title", 'urban')
+#        )
+#        additional_layers = getattr(portal_urban, additional_layers_id)
+#        additional_layers.setConstrainTypesMode(1)
+#        additional_layers.setLocallyAllowedTypes(['Layer'])
+#        additional_layers.setImmediatelyAddableTypes(['Layer'])
+#    else:
+#        additional_layers = portal_urban.additional_layers
+#
+#    if not base_hasattr(additional_layers, 'orthophoto2009'):
+#        additional_layers.invokeFactory("Layer", id="orthophoto2009", title=u"Orthophoto2009", WMSUrl="http://geowebcache1.communesplone.be/geoserver/gwc/service/wms", layers='rw-2009-2010', SRS="ESPG:31370", baseLayer=True, layerFormat="image/jpeg", visibility=False)
+#
+#    if not hasattr(aq_base(additional_layers), 'ppnc'):
+#        additional_layers.invokeFactory("Layer", id="ppnc", title=u"PPNC", WMSUrl="http://geoservercommon.communesplone.be/geoserver/gwc/service/wms", layers='PPNC', SRS="ESPG:31370", baseLayer=True, layerFormat="image/jpeg", visibility=False)
+##Layers order
+##PPNC
+##Parcelles
+##Rues
+##Batiments
+##N° parcelle
+##N° maison
+#    if not hasattr(aq_base(additional_layers), 'parcelles'):
+#        additional_layers.invokeFactory("Layer", id="parcelles", title=u"Parcelles", layers="urban%s:capa" % nis, SRS="ESPG:31370", transparent=False, visibility=True, layerFormat="image/png")
+#        logger.info("Additional layer '%s' added" % 'parcelles')
+#    if not hasattr(aq_base(additional_layers), 'rues'):
+#        additional_layers.invokeFactory("Layer", id="rues", title=u"Nom des rues", layers="urban%s:toli" % nis, SRS="ESPG:31370", transparent=True, visibility=True, layerFormat="image/png")
+#        logger.info("Additional layer '%s' added" % 'rues')
+#    if not hasattr(aq_base(additional_layers), 'batiments'):
+#        additional_layers.invokeFactory("Layer", id="batiments", title=u"Bâtiments", layers="urban%s:cabu" % nis, SRS="ESPG:31370", transparent=True, visibility=True, layerFormat="image/png")
+#        logger.info("Additional layer '%s' added" % 'batiments')
+#    if not hasattr(aq_base(additional_layers), 'num_parcelle'):
+#        additional_layers.invokeFactory("Layer", id="num_parcelle", title=u"N° de parcelle", layers="urban%s:canu" % nis, styles="ParcelsNum", SRS="ESPG:31370", transparent=True, visibility=False, layerFormat="image/png")
+#        logger.info("Additional layer '%s' added" % 'num_parcelle')
+#    if not hasattr(aq_base(additional_layers), 'num_maisons'):
+#        additional_layers.invokeFactory("Layer", id="num_maisons", title=u"N° de maison", layers="urban%s:canu" % nis, styles="HousesNum", SRS="ESPG:31370", transparent=True, visibility=False, layerFormat="image/png")
+#        logger.info("Additional layer '%s' added" % 'num_maisons')
 
 
 def setHTMLContentType(folder, fieldName):
