@@ -11,6 +11,13 @@
   />
 
   <adapter
+     for="Products.urban.interfaces.ICODT_BaseBuildLicence""
+     provides="borg.localrole.interfaces.ILocalRoleProvider"
+     factory=".codt_licence_workflow.StateRolesMapping"
+     name="licence_local_roles"
+  />
+
+  <adapter
      for="Products.urban.interfaces.IUrbanEvent"
      provides="borg.localrole.interfaces.ILocalRoleProvider"
      factory=".urbanevent_workflow.StateRolesMapping"
