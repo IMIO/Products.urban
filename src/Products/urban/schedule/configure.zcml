@@ -13,4 +13,10 @@
     <include file="start_date.zcml" />
     <include file="task_completion.zcml" />
 
+    <utility
+      provides="imio.schedule.interfaces.ICalendarExtraHolidays"
+      name="urban.schedule.college_holidays"
+      factory=".holidays.CollegeHolidays"
+      />
+
 </configure>

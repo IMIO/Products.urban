@@ -24,6 +24,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
+from collective.datagridcolumns.DateColumn import DateColumn
 
 from Products.urban.config import *
 
@@ -116,6 +117,23 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='public_settings',
+    ),
+    DataGridField(
+        name='collegeHolidays',
+        widget=DataGridWidget(
+            helper_js= ('datagridwidget.js', 'datagriddatepicker.js'),
+            columns={
+                'from': DateColumn('From', date_format='dd/mm/yy'),
+                'to': DateColumn('To', date_format='dd/mm/yy'),
+            },
+            label='College Holidays',
+            label_msgid='urban_label_collegeHolidays',
+            i18n_domain='urban',
+        ),
+        allow_oddeven=True,
+        allow_reorder=False,
+        schemata='public_settings',
+        columns=('from', 'to'),
     ),
     StringField(
         name='pylonsHost',
