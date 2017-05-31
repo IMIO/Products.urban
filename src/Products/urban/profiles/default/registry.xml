@@ -26,7 +26,7 @@
       <value key="ui_dialog">True</value>
       <value key="ui_slider">False</value>
       <value key="ui_tabs">False</value>
-      <value key="ui_datepicker">False</value>
+      <value key="ui_datepicker">True</value>
       <value key="ui_progressbar">False</value>
       <value key="effects_core">False</value>
       <value key="effects_blind">False</value>
