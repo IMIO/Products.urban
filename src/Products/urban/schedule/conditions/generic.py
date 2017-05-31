@@ -22,6 +22,38 @@ class DepositDoneCondition(Condition):
         return deposit_done
 
 
+class SingleComplementAsked(Condition):
+    """
+    Licence MissingPart event is created and closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        complements_asked = False
+        missing_part_event = licence.getLastMissingPart()
+        if missing_part_event:
+            complements_asked = api.content.get_state(missing_part_event) == 'closed'
+
+        return complements_asked
+
+
+class SingleComplementReceived(Condition):
+    """
+    Licence MissingPartDeposit event is created and closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        complements_received = False
+        deposit_part_event = licence.getLastMissingPartDeposit()
+        if deposit_part_event:
+            complements_received = api.content.get_state(deposit_part_event) == 'closed'
+
+        return complements_received
+
+
 class ComplementsAsked(Condition):
     """
     Licence MissingPart event is created and closed.
