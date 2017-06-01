@@ -520,11 +520,11 @@ msgstr ""
 
 #: ../dashboard/templates/portlet_categoryswitch.pt:8
 msgid "To CODT procedures"
-msgstr "Procédures CODT"
+msgstr "Vers les Procédures CODT"
 
 #: ../dashboard/templates/portlet_categoryswitch.pt:15
 msgid "To CWATUPE procedures"
-msgstr "Procédures CWATUPE"
+msgstr "Vers les Procédures CWATUP"
 
 #: ../browser/licence/templates/licenceview.pt:27
 #: ../browser/templates/urbaneventannouncementview.pt:31
