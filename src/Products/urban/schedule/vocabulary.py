@@ -2,6 +2,7 @@
 
 from Products.urban.interfaces import IArticle127
 from Products.urban.interfaces import IBaseBuildLicence
+from Products.urban.interfaces import IBaseAllBuildLicence
 from Products.urban.interfaces import ICODT_Article127
 from Products.urban.interfaces import ICODT_BaseBuildLicence
 from Products.urban.interfaces import ICODT_BuildLicence
@@ -46,6 +47,7 @@ URBAN_TYPES_INTERFACES = {
     'CODT_UrbanCertificateTwo': ICODT_UrbanCertificateTwo,
     'Article127': IArticle127,
     'Base BuildLicence (PU, 127, CU2)': IBaseBuildLicence,
+    'All Base BuildLicence (PU, 127, CU2 CWTUP and CODT)': IBaseAllBuildLicence,
     'BuildLicence': IBuildLicence,
     'Declaration': IDeclaration,
     'Division': IDivision,
