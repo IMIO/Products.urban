@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 
 from zope.interface import Interface
 
@@ -42,13 +42,18 @@ class IGenericLicence(Interface):
     """
 
 
-class IBaseBuildLicence (IGenericLicence):
-    """Marker interface for .Article127.Article127
+class IBaseAllBuildLicence(IGenericLicence):
+    """Marker interface for all the buildilicence likes procedures (cwatup and CODT).
     """
 
 
-class ICODT_BaseBuildLicence (IGenericLicence):
-    """Marker interface for codt BaseBuildLicence
+class IBaseBuildLicence (IBaseAllBuildLicence):
+    """Marker interface for all buildlicence procedures (cwatup)
+    """
+
+
+class ICODT_BaseBuildLicence (IBaseAllBuildLicence):
+    """Marker interface for all buildlicence procedures (codt)
     """
 
 
