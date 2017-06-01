@@ -68,6 +68,9 @@
   <type type_id="FolderManager">
      <bound-workflow workflow_id="activation_workflow" />
   </type>
+  <type type_id="IntegratedLicence">
+     <bound-workflow workflow_id="urban_licence_workflow" />
+  </type>
   <type type_id="GenericLicence">
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
@@ -202,6 +205,9 @@
  <bound-workflow workflow_id="urbanevent_workflow" />
 </type>
 <type type_id="UrbanEventCollege">
+ <bound-workflow workflow_id="urbanevent_workflow" />
+</type>
+<type type_id="UrbanEventNotificationCollege">
  <bound-workflow workflow_id="urbanevent_workflow" />
 </type>
 <type type_id="WorkLocation">
