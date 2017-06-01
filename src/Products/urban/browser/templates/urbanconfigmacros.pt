@@ -7,9 +7,9 @@
             folderlisting_macro base_macros/folderlisting;
             errors python:request.get('errors', {})">
 
-        <metal:use_body use-macro="folderlisting_macro" />
+            <metal:use_body use-macro="folderlisting_macro"/>
 
-      </metal:main_macro>
+        </metal:main_macro>
 
     </tal:filter>
 </div>
@@ -25,9 +25,9 @@
             folderlisting_macro base_macros/folderlisting;
             errors python:request.get('errors', {})">
 
-        <metal:use_body use-macro="folderlisting_macro" />
+            <metal:use_body use-macro="folderlisting_macro"/>
 
-      </metal:main_macro>
+        </metal:main_macro>
 
     </tal:filter>
 </div>
@@ -35,17 +35,15 @@
 
 <div metal:define-macro="public_settings_macro" i18n:domain="urban">
 
-    <tal:fields tal:define="field_macro field_macro | context/widgets/field/macros/view"
-                tal:repeat="field python:context.Schema().filterFields(schemata='public_settings')">
+    <tal:fields tal:define="field_macro field_macro | context/widgets/field/macros/view" tal:repeat="field python:context.Schema().filterFields(schemata='public_settings')">
 
-       <tal:if_visible define="purl nocall:context/portal_url;
+        <tal:if_visible define="purl nocall:context/portal_url;
                                portal purl/getPortalObject;
                                mode string:view;
                                visState python:field.widget.isVisible(here, mode);
-                               visCondition python:field.widget.testCondition(None, portal, context);"
-                     condition="python:visState == 'visible' and visCondition">
-          <metal:use_field use-macro="field_macro" />
-       </tal:if_visible>
+                               visCondition python:field.widget.testCondition(None, portal, context);" condition="python:visState == 'visible' and visCondition">
+            <metal:use_field use-macro="field_macro"/>
+        </tal:if_visible>
     </tal:fields>
 
     <tal:filter define="folderContents view/getMiscConfigFolders;
@@ -56,9 +54,9 @@
             folderlisting_macro base_macros/folderlisting;
             errors python:request.get('errors', {})">
 
-        <metal:use_body use-macro="folderlisting_macro" />
+            <metal:use_body use-macro="folderlisting_macro"/>
 
-      </metal:main_macro>
+        </metal:main_macro>
 
     </tal:filter>
 
@@ -67,17 +65,15 @@
 
 <div metal:define-macro="admin_settings_macro" i18n:domain="urban">
 
-    <tal:fields tal:define="field_macro field_macro | context/widgets/field/macros/view"
-                tal:repeat="field python:context.Schema().filterFields(schemata='admin_settings')">
+    <tal:fields tal:define="field_macro field_macro | context/widgets/field/macros/view" tal:repeat="field python:context.Schema().filterFields(schemata='admin_settings')">
 
-       <tal:if_visible define="purl nocall:context/portal_url;
+        <tal:if_visible define="purl nocall:context/portal_url;
                                portal purl/getPortalObject;
                                mode string:view;
                                visState python:field.widget.isVisible(here, mode);
-                               visCondition python:field.widget.testCondition(None, portal, context);"
-                    condition="python:visState == 'visible' and visCondition">
-          <metal:use_field use-macro="field_macro" />
-       </tal:if_visible>
+                               visCondition python:field.widget.testCondition(None, portal, context);" condition="python:visState == 'visible' and visCondition">
+            <metal:use_field use-macro="field_macro"/>
+        </tal:if_visible>
     </tal:fields>
 
     <tal:filter define="folderContents view/getAdminFolders;
@@ -88,9 +84,9 @@
             folderlisting_macro base_macros/folderlisting;
             errors python:request.get('errors', {})">
 
-        <metal:use_body use-macro="folderlisting_macro" />
+            <metal:use_body use-macro="folderlisting_macro"/>
 
-      </metal:main_macro>
+        </metal:main_macro>
 
     </tal:filter>
 
@@ -106,7 +102,7 @@
             folderlisting_macro base_macros/folderlisting;
             errors python:request.get('errors', {})">
 
-           <metal:use_body use-macro="folderlisting_macro" />
+            <metal:use_body use-macro="folderlisting_macro"/>
 
         </metal:main_macro>
 
@@ -123,7 +119,7 @@
             folderlisting_macro base_macros/folderlisting;
             errors python:request.get('errors', {})">
 
-           <metal:use_body use-macro="folderlisting_macro" />
+            <metal:use_body use-macro="folderlisting_macro"/>
 
         </metal:main_macro>
 
@@ -139,18 +135,23 @@
         folderlisting_macro base_macros/folderlisting;
         errors python:request.get('errors', {})">
 
-        <form action="test/configtestprocessingview">
-            <div tal:repeat="event view/get_events">
-                <tal:data tal:define="title event/title;
-                                  id event/id">
-                    <input type="checkbox" name="events_checked" tal:attributes="value id" checked>
-                    <span tal:content="title"></span>
 
-                </tal:data>
+            <form action="test/configtestprocessingview">
+                <div tal:repeat="event view/get_events">
+                    <tal:data tal:define="title event/title;
+                                  id event/id">
+                        <input type="checkbox" name="events_checked" tal:attributes="value id" checked>
+                        <span tal:content="title"></span>
+
+                    </tal:data>
+                </div>
+                <!--<metal:fieldMacro use-macro="python:here.widget('eventTypes', mode='edit')" />-->
+                <input type="submit" value="générer traitement">
+            </form>
+            <h2> Dernière(s) génération</h2>
+            <div tal:repeat="item view/get_generated_tests">
+                <a tal:attributes="href string:test/${item}" tal:content="item" target="_blank"></a>
             </div>
-            <!--<metal:fieldMacro use-macro="python:here.widget('eventTypes', mode='edit')" />-->
-            <input type="submit" value="générer traitement">
-        </form>
         </metal:main_macro>
 
     </tal:filter>
