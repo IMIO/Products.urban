@@ -129,7 +129,7 @@ schema = Schema((
             label_msgid='urban_label_decisionDate',
             i18n_domain='urban',
         ),
-        optional= True,
+        optional=True,
     ),
     StringField(
         name='decision',
@@ -153,7 +153,7 @@ schema = Schema((
         default_method='getDefaultText',
         default_content_type='text/html',
         default_output_type='text/html',
-        optional= True,
+        optional=True,
     ),
     DateTimeField(
         name='recourseDecisionDisplayDate',
@@ -165,7 +165,7 @@ schema = Schema((
             label_msgid='urban_label_recourseDecisionDisplayDate',
             i18n_domain='urban',
         ),
-        optional= True,
+        optional=True,
     ),
     StringField(
         name='recourseDecision',
@@ -244,12 +244,12 @@ schema = Schema((
             allow_browse=0,
             show_indexes=1,
             show_index_selector=1,
-            available_indexes={'getFirstname':'First name','getSurname': 'Surname'},
+            available_indexes={'getFirstname': 'First name', 'getSurname': 'Surname'},
             wild_card_search=True,
             label_msgid='urban_label_eventRecipient',
             i18n_domain='urban',
         ),
-        allowed_types= ('Recipient','Applicant','Architect'),
+        allowed_types= ('Recipient', 'Applicant', 'Architect'),
         optional=True,
         relationship="recipients",
     ),
@@ -343,6 +343,33 @@ schema = Schema((
         optional=True,
         vocabulary=UrbanVocabulary('delegatesignatures', inUrbanConfig=False),
     ),
+    StringField(
+        name='bank_account',
+        widget=StringField._properties['widget'](
+            label='Bank_account',
+            label_msgid='urban_label_bank_account',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
+    StringField(
+        name='bank_account_owner',
+        widget=StringField._properties['widget'](
+            label='Bank_account_owner',
+            label_msgid='urban_label_bank_account_owner',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
+    StringField(
+        name='amount_collected',
+        widget=StringField._properties['widget'](
+            label='Amount_collected',
+            label_msgid='urban_label_amount_collected',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
 
 ),
 )
@@ -356,8 +383,9 @@ UrbanEvent_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-UrbanEvent_schema['title'].widget.condition="python:here.showTitle()"
+UrbanEvent_schema['title'].widget.condition = "python:here.showTitle()"
 ##/code-section after-schema
+
 
 class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     """
@@ -603,7 +631,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             tool = getToolByName(self, 'portal_urban')
             res = getattr(tool.decisions, res)
         return res
-
 
 
 registerType(UrbanEvent, PROJECTNAME)
