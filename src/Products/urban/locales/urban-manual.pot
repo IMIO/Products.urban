@@ -123,9 +123,6 @@ msgstr ""
 msgid "IntegratedLicence"
 msgstr ""
 
-msgid "IWalloonRegionDesisionEvent type marker interface"
-msgstr ""
-
 msgid "Licence state"
 msgstr ""
 
@@ -861,9 +858,6 @@ msgstr ""
 msgid "no_result"
 msgstr ""
 
-msgid "not_permitted_to_add_aattachment"
-msgstr ""
-
 msgid "not_permitted_to_add_urbanevent"
 msgstr ""
 
@@ -1237,6 +1231,15 @@ msgid "urban_label_announcementArticles"
 msgstr ""
 
 msgid "urban_label_announcementArticlesText"
+msgstr ""
+
+msgid "urban_label_amount_collected"
+msgstr ""
+
+msgid "urban_label_bank_account"
+msgstr ""
+
+msgid "urban_label_bank_account_owner"
 msgstr ""
 
 #. Default: "Buildlicencenumerotation"
