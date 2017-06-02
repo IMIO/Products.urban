@@ -334,6 +334,7 @@ schema = Schema((
     StringField(
         name='delegateSignatures',
         widget=SelectionWidget(
+            format='radio',
             label='Delegatesignatures',
             label_msgid='urban_label_delegateSignatures',
             i18n_domain='urban',
