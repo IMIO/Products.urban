@@ -6,6 +6,7 @@ from datetime import date as _date
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.utils import getCurrentFolderManager
 from zope.i18n import translate
 from plone import api
 
@@ -79,6 +80,10 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
 
 # Demandeur(s)
 #------------------------------------------------------------------------------
+
+    def get_current_foldermanager(self):
+        return getCurrentFolderManager()
+
     def get_applicants_names_and_address(
             self,
             applicant_separator=', ',
