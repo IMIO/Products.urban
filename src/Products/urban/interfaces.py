@@ -381,7 +381,7 @@ class IAcknowledgmentEvent(Interface):
     __doc__ = _("""IAcknowledgment type marker interface""")
 
 
-class IDefaultCODTAcknowledgmentEvent(Interface):
+class IDefaultCODTAcknowledgmentEvent(IAcknowledgmentEvent):
     __doc__ = _("""IDefaultCODTAcknowledgmentEvent type marker interface""")
 
 

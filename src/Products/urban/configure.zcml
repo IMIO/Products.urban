@@ -106,6 +106,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IDefaultCODTAcknowledgmentEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.ICODTProcedureChoiceNotified"
     type=".interfaces.IEventTypeType"/>
 
