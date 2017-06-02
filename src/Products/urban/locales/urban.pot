@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-05-30 12:26+0000\n"
+"POT-Creation-Date: 2017-06-02 12:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -162,6 +162,10 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: ../profiles.zcml:41
+msgid "Demo Extension profile for urban."
+msgstr ""
+
 msgid "Display each licence only once"
 msgstr ""
 
@@ -209,6 +213,14 @@ msgstr ""
 msgid "Events attachments"
 msgstr ""
 
+#: ../profiles.zcml:17
+msgid "Extension profile for urban."
+msgstr ""
+
+#: ../profiles.zcml:26
+msgid "Extra Extension profile for urban."
+msgstr ""
+
 msgid "Filter"
 msgstr ""
 
@@ -234,114 +246,111 @@ msgstr ""
 msgid "History of the parcel and related licences"
 msgstr ""
 
-#: ../interfaces.py:375
+#: ../interfaces.py:381
 msgid "IAcknowledgment type marker interface"
 msgstr ""
 
-#: ../interfaces.py:411
+#: ../interfaces.py:417
 msgid "IAnnouncement type marker interface"
 msgstr ""
 
-#: ../interfaces.py:403
+#: ../interfaces.py:409
 msgid "ICODTProcedureChoiceNotified type marker interface"
 msgstr ""
 
-#: ../interfaces.py:347
+#: ../interfaces.py:353
 msgid "ICollege type marker interface"
 msgstr ""
 
-#: ../interfaces.py:423
+#: ../interfaces.py:429
 msgid "ICollegeReport type marker interface"
 msgstr ""
 
-#: ../interfaces.py:383
+#: ../interfaces.py:389
 msgid "ICommunalCouncil type marker interface"
 msgstr ""
 
-#: ../interfaces.py:379
+#: ../interfaces.py:385
 msgid "IDefaultCODTAcknowledgmentEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:387
+#: ../interfaces.py:393
 msgid "IDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:435
+#: ../interfaces.py:441
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:407
+#: ../interfaces.py:413
 msgid "IInquiry type marker interface"
 msgstr ""
 
-#: ../interfaces.py:415
+#: ../interfaces.py:421
 msgid "ILicenceDelivery type marker interface"
 msgstr ""
 
-#: ../interfaces.py:419
+#: ../interfaces.py:425
 msgid "ILicenceExpiration type marker interface"
 msgstr ""
 
-#: ../interfaces.py:399
+#: ../interfaces.py:405
 msgid "IMissingPart type marker interface"
 msgstr ""
 
-#: ../interfaces.py:391
+#: ../interfaces.py:397
 msgid "IMissingPartDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:395
+#: ../interfaces.py:401
 msgid "IModificationDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:355
+#: ../interfaces.py:361
 msgid "IOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:447
+#: ../interfaces.py:453
 msgid "IProrogation type marker interface"
 msgstr ""
 
-#: ../interfaces.py:439
+#: ../interfaces.py:445
 msgid "IRecourseEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:451
+#: ../interfaces.py:457
 msgid "IRefusedIncompleteness type marker interface"
 msgstr ""
 
-#: ../interfaces.py:371
+#: ../interfaces.py:377
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:351
+#: ../interfaces.py:357
 msgid "ITechnicalServiceOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:431
+#: ../interfaces.py:437
 msgid "ITheLicence type marker interface"
 msgstr ""
 
-#: ../interfaces.py:427
+#: ../interfaces.py:433
 msgid "ITheLicenceCollege type marker interface"
 msgstr ""
 
-#: ../interfaces.py:367
+#: ../interfaces.py:373
 msgid "IWalloonRegionDecisionEvent type marker interface"
 msgstr ""
 
-msgid "IWalloonRegionDesisionEvent type marker interface"
-msgstr ""
-
-#: ../interfaces.py:363
+#: ../interfaces.py:369
 msgid "IWalloonRegionOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:359
+#: ../interfaces.py:365
 msgid "IWalloonRegionPrimo type marker interface"
 msgstr ""
 
-#: ../interfaces.py:443
+#: ../interfaces.py:449
 msgid "IWorkBeginning type marker interface"
 msgstr ""
 
@@ -356,6 +365,10 @@ msgstr ""
 
 #: ../profiles/default/actions.xml
 msgid "Map"
+msgstr ""
+
+#: ../profiles.zcml:34
+msgid "Migrations profile for urban."
 msgstr ""
 
 msgid "MiscDemand"
@@ -396,6 +409,10 @@ msgid "PatrimonyCertificate"
 msgstr ""
 
 msgid "PreliminaryNotice"
+msgstr ""
+
+#: ../profiles.zcml:48
+msgid "Profile for pm.wsclient in urban"
 msgstr ""
 
 msgid "ProjectMeeting"
@@ -470,6 +487,10 @@ msgstr ""
 
 #: ../browser/templates/urbanstatsview.pt:99
 msgid "Statistics"
+msgstr ""
+
+#: ../testing.zcml:14
+msgid "Tests Extension profile for urban."
 msgstr ""
 
 #: ../browser/longtextview.py:30
@@ -1606,9 +1627,6 @@ msgstr ""
 msgid "no_result"
 msgstr ""
 
-msgid "not_permitted_to_add_aattachment"
-msgstr ""
-
 #. Default: "You can not add an attachment"
 #: ../browser/templates/urbaneventmacros.pt:92
 msgid "not_permitted_to_add_attachment"
@@ -1999,25 +2017,48 @@ msgstr ""
 msgid "uno_enabled_python"
 msgstr ""
 
+#: ../profiles.zcml:17
 #: ../profiles/default/actions.xml
 #: ../setuphandlers.py:268
 msgid "urban"
 msgstr ""
 
+#: ../profiles.zcml:41
 msgid "urban-demo"
 msgstr ""
 
-# extension profile
+#: ../profiles.zcml:26
 msgid "urban-extra"
 msgstr ""
 
 msgid "urban-labruyere"
 msgstr ""
 
+#: ../profiles.zcml:34
 msgid "urban-migrations"
 msgstr ""
 
+#: ../profiles.zcml:48
+msgid "urban-pm-wsclient"
+msgstr ""
+
 msgid "urban-sambreville"
+msgstr ""
+
+#: ../testing.zcml:14
+msgid "urban-tests"
+msgstr ""
+
+#: ../testing.zcml:22
+msgid "urban-tests-imports"
+msgstr ""
+
+#: ../testing.zcml:30
+msgid "urban-testsWithConfig"
+msgstr ""
+
+#: ../testing.zcml:38
+msgid "urban-testsWithLicences"
 msgstr ""
 
 #. Default: Set the number of days the alert will be shown before the deadline delay
@@ -2303,6 +2344,9 @@ msgstr ""
 msgid "urban_label_alsoCalled"
 msgstr ""
 
+msgid "urban_label_amount_collected"
+msgstr ""
+
 #. Default: "Annonceddelay"
 #: GenericLicence.py
 msgid "urban_label_annoncedDelay"
@@ -2372,6 +2416,12 @@ msgstr ""
 #. Default: "Authorizationdate"
 #: ParcellingTerm.py
 msgid "urban_label_authorizationDate"
+msgstr ""
+
+msgid "urban_label_bank_account"
+msgstr ""
+
+msgid "urban_label_bank_account_owner"
 msgstr ""
 
 #. Default: "Baselayer"
@@ -4326,4 +4376,3 @@ msgstr ""
 
 msgid "zip_folder_title"
 msgstr ""
-
