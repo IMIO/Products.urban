@@ -67,15 +67,17 @@ schema = Schema((
         ),
         schemata='urban_analysis',
     ),
-    StringField(
+    LinesField(
         name='form_composition',
         widget=MasterMultiSelectWidget(
+            format='checkbox',
             slave_fields=slave_fields_form_composition,
             label='Form_composition',
             label_msgid='urban_label_form_composition',
             i18n_domain='urban',
         ),
         schemata='urban_analysis',
+        multiValued=1,
         vocabulary=UrbanVocabulary('form_composition', inUrbanConfig=False),
     ),
     LinesField(
@@ -263,7 +265,7 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
 
         for term in all_terms:
             for composition in selection:
-                if str(composition) in term.getExtraValue():
+                if str(composition) in term.getExtraValue() or not term.getExtraValue():
                     display_values.append((term.id, term.Title().decode('utf-8')))
                     break
 
