@@ -219,8 +219,7 @@
 
 
 <div class="licence-column" metal:define-macro="advices_macro" i18n:domain="urban"
-     tal:define="ctype python: context.portal_types.getTypeInfo('Inquiry');
-                 inquiries view/getInquiriesForDisplay;
+     tal:define="inquiries view/getInquiriesForDisplay;
                  member context/@@plone_portal_state/member;">
     <fieldset tal:repeat="inquiry inquiries">
         <legend i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</legend>
@@ -301,7 +300,7 @@
 
 
 <div class="licence-column" metal:define-macro="inquiry_macro" i18n:domain="urban"
-     tal:define="ctype python: context.portal_types.getTypeInfo('Inquiry');
+     tal:define="inquiry_type view/getInquiryType;
                  inquiries view/getInquiriesForDisplay;
                  member context/@@plone_portal_state/member;">
     <fieldset tal:repeat="inquiry inquiries">
@@ -372,7 +371,7 @@
               i18n:domain="urban" name="quickAdd"
               tal:attributes="action python: context.absolute_url() + '/createObject'"
               action="createObject" method="post">
-            <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+            <input type="hidden" name="type_name" value="#" tal:attributes="value inquiry_type" />
             <input type="submit" class="context apButton contenttype-inquiry" id="event" value="add_an_inquiry" i18n:attributes="value" />
         </form>
     </metal:custom_add_inquiry>

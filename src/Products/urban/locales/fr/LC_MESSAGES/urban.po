@@ -4228,7 +4228,7 @@ msgstr "Code Postal"
 #. Default: "Click here to access the linked urban event inquiry"
 #: ../browser/licence/templates/licencetabsmacros.pt:357
 msgid "urban_link_to_the_linked_urbaneventinquiry"
-msgstr "Cliquez ici pour accéder à l'événement Enquête publique lié"
+msgstr "Cliquez ici pour accéder à l'événement lié"
 
 msgid "urban_linked_inquiry_help"
 msgstr "Vous retrouvez ici les informations concernant l'enquête.  Si vous souhaitez modifier ces informations, cliquez sur le lien de l'enquête liée ci-dessous."
