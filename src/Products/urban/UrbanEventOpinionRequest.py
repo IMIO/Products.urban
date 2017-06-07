@@ -99,7 +99,9 @@ class UrbanEventOpinionRequest(UrbanEvent, BrowserDefaultMixin):
         """
           Returns the id of the term that is linked to the linked UrbanEventType
         """
-        return self.getUrbaneventtypes().getId()
+        event_type = self.getUrbaneventtypes()
+        if event_type:
+            return event_type.getId()
 
 
 
