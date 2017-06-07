@@ -853,7 +853,7 @@ msgid "codt_integratedlicence_urbanconfig_title"
 msgstr "Paramètres des permis intégrés (CODT)"
 
 msgid "codt_notaryletter_urbanconfig_title"
-msgstr "Paramètres des lettres de notaire (CODT°"
+msgstr "Paramètres des lettres de notaire (CODT)"
 
 msgid "codt_parceloutlicence_urbanconfig_title"
 msgstr "Paramètres des permis d'urbanisation (CODT)"
