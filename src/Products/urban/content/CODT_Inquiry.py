@@ -183,6 +183,21 @@ class CODT_Inquiry(BaseContent, Inquiry, BrowserDefaultMixin):
 
     # Methods
 
+    security.declarePublic('getLinkedUrbanEventInquiry')
+
+    def getLinkedUrbanEventInquiry(self):
+        """
+          Return the linked UrbanEventInquiry object if exists
+        """
+        brefs = self.getBRefs('linkedInquiry')
+        if brefs:
+            #linkedInquiry may come from a UrbanEventInquiry or an UrbanEventOpinionRequest
+            for bref in brefs:
+                if bref and bref.portal_type == 'UrbanEventAnnouncement':
+                    return bref
+        else:
+            return None
+
     def list_inquiry_types(self):
         """
         """
@@ -210,6 +225,17 @@ class CODT_Inquiry(BaseContent, Inquiry, BrowserDefaultMixin):
         """
         inqs = [inq for inq in self._get_inquiry_objs(all_=True) if inq.getInquiry_type() == 'inquiry']
         return inqs
+
+    def _get_inquiry_objs(self, all_=False):
+        """
+        Returns the existing inquiries or announcements
+        """
+        all_inquiries = []
+        other_inquiries = self.objectValues('CODT_Inquiry')
+        if all_ or other_inquiries:
+            all_inquiries.append(self)
+        all_inquiries.extend(list(other_inquiries))
+        return all_inquiries
 
     security.declarePublic('getAnnouncements')
 

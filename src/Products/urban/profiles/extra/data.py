@@ -153,7 +153,7 @@ urbanEventTypes = {
         {
             'id': "annonce-de-projet-codt",
             'title': "Annonce de projet",
-            'activatedFields': [],
+            'activatedFields': ['investigationStart', 'investigationEnd'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddAnnouncementEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -167,7 +167,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique-codt",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -349,7 +349,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique-codt",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -531,7 +531,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique-codt",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -713,7 +713,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique-codt",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -901,7 +901,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -921,6 +921,7 @@ urbanEventTypes = {
                 {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['investigationArticlesTextDefaultValue']), 'fieldname': 'investigationArticlesText'},
                 {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
@@ -1521,7 +1522,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -1541,6 +1542,7 @@ urbanEventTypes = {
                 {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['investigationArticlesTextDefaultValue']), 'fieldname': 'investigationArticlesText'},
                 {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
@@ -2141,7 +2143,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -2161,6 +2163,7 @@ urbanEventTypes = {
                 {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['investigationArticlesTextDefaultValue']), 'fieldname': 'investigationArticlesText'},
                 {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
@@ -2771,7 +2774,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -2791,6 +2794,7 @@ urbanEventTypes = {
                 {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['investigationArticlesTextDefaultValue']), 'fieldname': 'investigationArticlesText'},
                 {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
@@ -3397,7 +3401,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -3417,6 +3421,7 @@ urbanEventTypes = {
                 {'id': "cu2-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
         },
         {
@@ -3845,7 +3850,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
@@ -3858,6 +3863,7 @@ urbanEventTypes = {
                 {'id': "env1-enq-ordre-mission.odt", 'title': "Ordre de mission"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
         },
         {
@@ -4293,7 +4299,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
@@ -4306,6 +4312,7 @@ urbanEventTypes = {
                 {'id': "env2-enq-ordre-mission.odt", 'title': "Ordre de mission"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
         },
         {
@@ -5202,7 +5209,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -5222,6 +5229,7 @@ urbanEventTypes = {
                 {'id': "lot-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
         },
         {
