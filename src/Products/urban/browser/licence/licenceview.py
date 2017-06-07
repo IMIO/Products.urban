@@ -76,6 +76,9 @@ class LicenceView(BrowserView):
             return True
         return False
 
+    def getInquiryType(self):
+        return 'Inquiry'
+
     def getInquiryReclamationNumbers(self):
 
         inquiryReclamationNumbers = []
@@ -316,6 +319,9 @@ class CODTLicenceView(LicenceView):
 
     def getInquiryFields(self, exclude=[]):
         return self.context.get_inquiry_fields_to_display(exclude=exclude)
+
+    def getInquiryType(self):
+        return 'CODT_Inquiry'
 
 
 class UrbanCertificateBaseView(LicenceView):
