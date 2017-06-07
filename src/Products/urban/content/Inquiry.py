@@ -307,7 +307,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         Returns the existing inquiries or announcements
         """
         all_inquiries = []
-        other_inquiries = self.objectValues('CODT_Inquiry')
+        other_inquiries = self.objectValues('Inquiry')
         if all_ or other_inquiries:
             all_inquiries.append(self)
         all_inquiries.extend(list(other_inquiries))
