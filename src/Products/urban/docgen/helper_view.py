@@ -30,6 +30,9 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         """
         return self.getEvent(title) != None
 
+    def get_current_foldermanager(self):
+        return getCurrentFolderManager()
+
     def display_date(self, field_name, long_format=False, custom_format=None):
         date = self.get_value(field_name)
         if custom_format:
@@ -669,9 +672,6 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
 
 # Agent(s) traitant(s)
 #------------------------------------------------------------------------------
-
-    def get_current_foldermanager(self):
-        return getCurrentFolderManager()
 
     def get_foldermanager_dict(self, index):
         """
