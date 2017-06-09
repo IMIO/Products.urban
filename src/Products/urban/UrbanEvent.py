@@ -294,6 +294,34 @@ schema = Schema((
         pm_text_field=True,
     ),
     TextField(
+        name='pmMotivation',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Pmmotivation',
+            label_msgid='urban_label_pmMotivation',
+            i18n_domain='urban',
+        ),
+        default_method='getDefaultText',
+        default_content_type='text/html',
+        default_output_type='text/html',
+        optional=True,
+        pm_text_field=True,
+    ),
+    TextField(
+        name='pmDecision',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Pmdecision',
+            label_msgid='urban_label_pmDecision',
+            i18n_domain='urban',
+        ),
+        default_method='getDefaultText',
+        default_content_type='text/html',
+        default_output_type='text/html',
+        optional=True,
+        pm_text_field=True,
+    ),
+    TextField(
         name='officeCoordinate',
         allowable_content_types=('text/html',),
         widget=RichWidget(
