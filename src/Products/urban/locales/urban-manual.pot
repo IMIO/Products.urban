@@ -2490,6 +2490,12 @@ msgstr ""
 msgid "urban_label_pmDescription"
 msgstr ""
 
+msgid "urban_label_pmDecision"
+msgstr ""
+
+msgid "urban_label_pmMotivation"
+msgstr ""
+
 #. Default: "Pmtitle"
 #: UrbanEvent.py
 msgid "urban_label_pmTitle"
