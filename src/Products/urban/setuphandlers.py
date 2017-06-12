@@ -174,6 +174,9 @@ def postInstall(context):
     logger.info("adaptDefaultPortal : starting...")
     adaptDefaultPortal(context)
     logger.info("adaptDefaultPortal : Done")
+    logger.info("set catalog multiplex: starting...")
+    setupCatalogMultiplex(site.portal_urban)
+    logger.info("set catalog multiplex: Done")
     logger.info("refresh catalog : starting...")
     recursive_reindex(site.portal_urban)
     logger.info("refresh catalog : Done")
@@ -212,6 +215,29 @@ def extraPostInstall(context):
     logger.info("refresh catalog : starting...")
     recursive_reindex(site.portal_urban)
     logger.info("refresh catalog : Done")
+
+
+def setupCatalogMultiplex(context):
+    """ Configure CatalogMultiplex.
+
+    explicit add classes (meta_types) be indexed in catalogs (white)
+    or removed from indexing in a catalog (black)
+    """
+    atool = api.portal.get_tool('archetype_tool')
+    catalogmap = {}
+    catalogmap['Applicant'] = {}
+    catalogmap['Applicant']['black'] = ['portal_catalog']
+    for meta_type in catalogmap:
+        submap = catalogmap[meta_type]
+        current_catalogs = set([c.id for c in atool.getCatalogsByType(meta_type)])
+        if 'white' in submap:
+            for catalog in submap['white']:
+                current_catalogs.update([catalog])
+        if 'black' in submap:
+            for catalog in submap['black']:
+                if catalog in current_catalogs:
+                    current_catalogs.remove(catalog)
+        atool.setCatalogsByType(meta_type, list(current_catalogs))
 
 
 def setFolderAllowedTypes(folder, portal_types):
