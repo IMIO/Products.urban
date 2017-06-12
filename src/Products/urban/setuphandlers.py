@@ -229,6 +229,8 @@ def setupCatalogMultiplex(context):
     catalogmap['Applicant']['black'] = ['portal_catalog']
     catalogmap['Corporation'] = {}
     catalogmap['Corporation']['black'] = ['portal_catalog']
+    catalogmap['PortionOut'] = {}
+    catalogmap['PortionOut']['black'] = ['portal_catalog']
     for meta_type in catalogmap:
         submap = catalogmap[meta_type]
         current_catalogs = set([c.id for c in atool.getCatalogsByType(meta_type)])

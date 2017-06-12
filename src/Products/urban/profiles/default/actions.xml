@@ -45,18 +45,6 @@
    </property>
    <property name="visible">True</property>
   </object>
-  <object name="urban_parcelsconsistency" meta_type="CMF Action" i18n:domain="urban">
-   <property name="title" i18n:translate="urban_check_parcelsconsistency">Check parcels consistency</property>
-   <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:$object_url/@@parcelsconsistency</property>
-   <property name="icon_expr">string:$portal_url/PortionOut.png</property>
-   <property name="available_expr">python: context.portal_type == 'UrbanTool'</property>
-   <property name="permissions">
-    <element value="View"/>
-   </property>
-   <property name="visible">True</property>
-  </object>
- </object>
  <object name="document_actions" meta_type="CMF Action Category">
   <property name="title"></property>
   <object name="urban_contact_emails" meta_type="CMF Action" i18n:domain="urban">
