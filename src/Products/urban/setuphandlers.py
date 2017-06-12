@@ -231,6 +231,14 @@ def setupCatalogMultiplex(context):
     catalogmap['Corporation']['black'] = ['portal_catalog']
     catalogmap['PortionOut'] = {}
     catalogmap['PortionOut']['black'] = ['portal_catalog']
+    catalogmap['UrbanEvent'] = {}
+    catalogmap['UrbanEvent']['black'] = ['portal_catalog']
+    catalogmap['UrbanEventCollege'] = {}
+    catalogmap['UrbanEventCollege']['black'] = ['portal_catalog']
+    catalogmap['UrbanEventInquiry'] = {}
+    catalogmap['UrbanEventInquiry']['black'] = ['portal_catalog']
+    catalogmap['UrbanEventOpinionRequest'] = {}
+    catalogmap['UrbanEventOpinionRequest']['black'] = ['portal_catalog']
     for meta_type in catalogmap:
         submap = catalogmap[meta_type]
         current_catalogs = set([c.id for c in atool.getCatalogsByType(meta_type)])
