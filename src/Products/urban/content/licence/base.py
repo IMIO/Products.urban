@@ -490,10 +490,7 @@ class UrbanBase(object):
         return toreturn
 
     def _getAllEvents(self,  eventInterface=None, use_catalog=True):
-#        if use_catalog:
-#            return self._getAllEventsByCatalog(eventInterface)
-        else:
-            return self._getAllEventsByObjectValues(eventInterface)
+        return self._getAllEventsByObjectValues(eventInterface)
 
     def _getAllEventsByObjectValues(self, eventInterface):
         return [evt for evt in self.objectValues() if eventInterface.providedBy(evt)]
