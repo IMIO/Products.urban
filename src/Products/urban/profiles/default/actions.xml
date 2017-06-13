@@ -45,6 +45,7 @@
    </property>
    <property name="visible">True</property>
   </object>
+ </object>
  <object name="document_actions" meta_type="CMF Action Category">
   <property name="title"></property>
   <object name="urban_contact_emails" meta_type="CMF Action" i18n:domain="urban">
