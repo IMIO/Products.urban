@@ -27,33 +27,6 @@ class SuggestView(BrowserView):
             pass
 
 
-class ApplicantSuggest(SuggestView):
-    """ Autocomplete suggestions of licence applicants."""
-
-    label = 'Demandeur(s)/propriétaire(s)'
-
-    def compute_suggestions(self):
-        term = self.request.get('term')
-        if not term:
-            return
-
-        terms = term.strip().split()
-
-        kwargs = {
-            'applicantInfosIndex': ' AND '.join(["%s*" % t for t in terms]),
-            'sort_on': 'sortable_title',
-            'sort_order': 'reverse',
-            'path': '/'.join(self.context.getPhysicalPath()),
-            'object_provides': 'Products.urban.interfaces.IApplicant',
-        }
-
-        catalog = api.portal.get_tool('portal_catalog')
-        brains = catalog(**kwargs)
-
-        suggestions = [{'label': b.Title, 'value': ' '.join(b.applicantInfosIndex)} for b in brains]
-        return suggestions
-
-
 class RepresentativeSuggestView(SuggestView):
     """
     Base class for autocomplete suggestions of licence representatives
