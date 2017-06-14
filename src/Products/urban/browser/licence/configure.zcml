@@ -35,6 +35,20 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.ICODT_Inquiry"
+     name="fielddisplay-macros"
+     template="templates/fieldscustomdisplay.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IInquiry"
+     name="fielddisplay-macros"
+     template="templates/fieldscustomdisplay.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IGenericLicence"
      name="fielddisplay-macros"
      template="templates/fieldscustomdisplay.pt"
