@@ -10,7 +10,7 @@
             <td width="10px"></td>
             <td valign="top" tal:condition="not: simpletext">
                 <tal:non_null_value condition="not: nullvalue">
-                    <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
+                    <metal:myfield use-macro="python:context.widget(fieldname, mode='view')" />
                 </tal:non_null_value>
                 <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
             </td>
@@ -352,6 +352,7 @@
         <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
                tal:define="custom python: ['investigationArticles'];
                            default_exclude python: [];
+                           context python: inquiry;
                            exclude exclude | default_exclude">
 
             <tal:loop repeat="field python: view.getInquiryFields(exclude)">
