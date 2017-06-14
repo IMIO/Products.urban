@@ -69,13 +69,14 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 5,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': [{'text': default_texts['claimsTextDefaultValue'], 'fieldname': 'claimsText'}],
         },
         {
@@ -235,13 +236,14 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
         },
         {
@@ -270,13 +272,14 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
         },
         {

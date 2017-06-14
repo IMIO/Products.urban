@@ -195,6 +195,9 @@
 <type type_id="NotaryLetter">
   <bound-workflow workflow_id="urban_licence_workflow" />
 </type>
+<type type_id="UniqueLicence">
+  <bound-workflow workflow_id="urban_licence_workflow" />
+</type>
 <type type_id="UrbanCertificateOne">
   <bound-workflow workflow_id="urban_licence_workflow" />
 </type>

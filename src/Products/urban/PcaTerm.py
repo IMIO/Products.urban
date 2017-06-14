@@ -148,9 +148,10 @@ class PcaTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMixin):
         """
            Override the Title method to display several data
         """
+        plone = self.restrictedTraverse('@@plone')
         label = self.getLabel()
         number = self.getNumber()
-        date = self.toLocalizedTime(self.getDecreeDate()).encode('utf8')
+        date = plone.toLocalizedTime(self.getDecreeDate()).encode('utf8')
         decree_type = self.displayValue(self.Vocabulary('decreeType')[0],
                 self.getDecreeType()).encode('utf8')
         result = "%s (%s - %s - %s)" % (

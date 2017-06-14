@@ -289,6 +289,13 @@
   />
 
   <browser:page
+     name="preliminarynotice-macros"
+     for="Products.urban.interfaces.IPreliminaryNotice"
+     template="templates/preliminarynoticemacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IProjectMeeting"
      name="projectmeetingview"
      class=".projectmeetingview.ProjectMeetingView"
@@ -297,9 +304,9 @@
   />
 
   <browser:page
-     name="preliminarynotice-macros"
-     for="Products.urban.interfaces.IPreliminaryNotice"
-     template="templates/preliminarynoticemacros.pt"
+     name="projectmeeting-macros"
+     for="Products.urban.interfaces.IProjectMeeting"
+     template="templates/projectmeetingmacros.pt"
      permission="zope2.View"
   />
 

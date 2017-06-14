@@ -39,6 +39,7 @@ class UrbanWithUsersLayer(IntegrationTesting):
     def setUp(self):
         super(UrbanWithUsersLayer, self).setUp()
         with helpers.ploneSite() as portal:
+            portal.setupCurrentSkin(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
             addTestUsers(portal)
 
@@ -56,6 +57,7 @@ class UrbanConfigLayer(UrbanWithUsersLayer):
     """
     def setUp(self):
         with helpers.ploneSite() as portal:
+            portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithConfig')
 
 URBAN_TESTS_CONFIG = UrbanConfigLayer(
@@ -71,6 +73,7 @@ class UrbanLicencesLayer(UrbanConfigLayer):
     """
     def setUp(self):
         with helpers.ploneSite() as portal:
+            portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
 
 URBAN_TESTS_LICENCES = UrbanLicencesLayer(
@@ -84,6 +87,7 @@ class UrbanImportsLayer(IntegrationTesting):
     """
     def setUp(self):
         with helpers.ploneSite() as portal:
+            portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:tests-imports')
 
 URBAN_IMPORTS = UrbanImportsLayer(
@@ -99,6 +103,7 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
     """
     def setUp(self):
         with helpers.ploneSite() as portal:
+            portal.setupCurrentSkin(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
             addTestUsers(portal)
 
@@ -116,6 +121,7 @@ class UrbanConfigFunctionalLayer(UrbanWithUsersFunctionalLayer):
     """
     def setUp(self):
         with helpers.ploneSite() as portal:
+            portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithConfig')
 
 
@@ -132,6 +138,7 @@ class UrbanLicencesFunctionalLayer(UrbanConfigFunctionalLayer):
     """
     def setUp(self):
         with helpers.ploneSite() as portal:
+            portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
 
 URBAN_TESTS_LICENCES_FUNCTIONAL = UrbanLicencesFunctionalLayer(
