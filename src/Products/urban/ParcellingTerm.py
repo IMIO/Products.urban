@@ -143,6 +143,7 @@ class ParcellingTerm(BaseFolder, BrowserDefaultMixin):
         """
            Update the title to set a clearly identify the buildlicence
         """
+        plone = self.restrictedTraverse('@@plone')
         parcel_baserefs = list(set(['"%s %s %s"' % (prc.getDivision(), prc.getSection(), prc.getRadical()) for prc in self.getParcels()]))
         refs = ''
         if parcel_baserefs:
@@ -153,11 +154,11 @@ class ParcellingTerm(BaseFolder, BrowserDefaultMixin):
 
         auth_date = self.getAuthorizationDate()
         if auth_date:
-            title = '%s - %s' % (title, self.toLocalizedTime(auth_date).encode('utf8'))
+            title = '%s - %s' % (title, plone.toLocalizedTime(auth_date).encode('utf8'))
 
         approval_date = self.getApprovalDate()
         if approval_date:
-            title = '%s - %s' % (title, self.toLocalizedTime(approval_date).encode('utf8'))
+            title = '%s - %s' % (title, plone.toLocalizedTime(approval_date).encode('utf8'))
 
         if refs:
             title = '%s - %s' % (title, refs)
