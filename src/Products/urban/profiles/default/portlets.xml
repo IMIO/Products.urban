@@ -2,8 +2,6 @@
 <portlets xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="urban">
 
-    <dependency step="urban-postInstall"/>
-
     <assignment name="category_switch"
                 category="context"
                 key="/urban"

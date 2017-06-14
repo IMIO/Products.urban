@@ -24,7 +24,7 @@
     <dependency>profile-collective.archetypes.select2:default</dependency>
     <dependency>profile-plone.app.referenceintegrity:default</dependency>
     <dependency>profile-Products.cron4plone:default</dependency>
-    <dependency>profile-Products.PasswordStrength:default</dependency>
+    <!--dependency>profile-Products.PasswordStrength:default</dependency-->
   </dependencies>
   <!-- ##/code-section METADATA -->
 </metadata>

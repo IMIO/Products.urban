@@ -466,23 +466,6 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         limit_date = DateTime('1977/01/01')
         return self.getLicenceOfTheParcels('ParcelOutLicence', limit_date)
 
-    security.declarePublic('hasEventNamed')
-    def hasEventNamed(self, title):
-        """
-        Tells if the licence contains an urbanEvent named 'title'
-        """
-        catalog = getToolByName(self, 'portal_catalog')
-        if catalog(portal_type='UrbanEvent', path=self.absolute_url_path(), Title=title):
-            return True
-        return False
-
-    security.declarePublic('hasNoEventNamed')
-    def hasNoEventNamed(self, title):
-        """
-        Tells if the licence does not contain any urbanEvent named 'title'
-        """
-        return not self.hasEventNamed(title)
-
     security.declarePublic('getApplicantsSignaletic')
     def getProprietariesSignaletic(self, withaddress=False):
         """

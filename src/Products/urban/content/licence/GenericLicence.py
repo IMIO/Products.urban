@@ -1378,9 +1378,9 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
         Tells if the licence contains an urbanEvent named 'title'
         """
-        catalog = api.portal.get_tool('portal_catalog')
-        if catalog(portal_type='UrbanEvent', path=self.absolute_url_path(), Title=title):
-            return True
+        for obj in self.objectValues():
+            if interfaces.IUrbanEvent.providedBy(obj) and obj.Title() == title:
+                return True
         return False
 
     security.declarePublic('hasNoEventNamed')
