@@ -3,6 +3,7 @@
            i18n_domain="urban">
 
     <include file="configure.zcml"/>
+    <includeOverrides file="overrides.zcml" />
 
     <genericsetup:registerProfile
         name="tests"
