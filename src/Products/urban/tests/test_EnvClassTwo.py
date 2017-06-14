@@ -251,7 +251,7 @@ class TestEnvClassTwoEvents(unittest.TestCase):
         notify(zopeevent)
 
         # an event providing ILicenceExpirationEvent should be created
-        expiration_event = licence._getLastEvent(ILicenceExpirationEvent)
+        expiration_event = licence.getLastEvent(ILicenceExpirationEvent)
         self.assertTrue(expiration_event)
 
     def test_expirationDate_is_computed_correctly(self):
@@ -273,7 +273,7 @@ class TestEnvClassTwoEvents(unittest.TestCase):
 
         notification_date = decision_event.getEventDate()
         expected_expiration_year = validity_delay + notification_date.year()
-        expiration_event = licence._getLastEvent(ILicenceExpirationEvent)
+        expiration_event = licence.getLastEvent(ILicenceExpirationEvent)
         expiration_date = expiration_event.getEventDate()
 
         self.assertEqual(expiration_date.year(), expected_expiration_year)
@@ -299,7 +299,7 @@ class TestEnvClassTwoEvents(unittest.TestCase):
         notify(zopeevent)
         notification_date = decision_event.getEventDate()
 
-        expiration_event = licence._getLastEvent(ILicenceExpirationEvent)
+        expiration_event = licence.getLastEvent(ILicenceExpirationEvent)
         expiration_date = expiration_event.getEventDate()
 
         self.assertEqual(expiration_date.year(), notification_date.year())

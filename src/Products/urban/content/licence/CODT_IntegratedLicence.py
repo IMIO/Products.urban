@@ -85,8 +85,8 @@ class CODT_IntegratedLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMi
 
         return '{}j'.format(str(delay))
 
-    def getLastWalloonRegionDecisionEvent(self, use_catalog=True):
-        return self._getLastEvent(interfaces.IWalloonRegionDecisionEvent, use_catalog)
+    def getLastWalloonRegionDecisionEvent(self):
+        return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)
 
 
 registerType(CODT_IntegratedLicence, PROJECTNAME)
