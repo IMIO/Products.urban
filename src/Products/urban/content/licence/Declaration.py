@@ -121,14 +121,14 @@ class Declaration(BaseFolder, GenericLicence, BrowserDefaultMixin):
         except AttributeError:
             return None
 
-    def getLastDeposit(self, use_catalog=True):
-        return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
+    def getLastDeposit(self):
+        return self.getLastEvent(interfaces.IDepositEvent)
 
-    def getLastCollegeReport(self, use_catalog=True):
-        return self._getLastEvent(interfaces.ICollegeReportEvent, use_catalog)
+    def getLastCollegeReport(self):
+        return self.getLastEvent(interfaces.ICollegeReportEvent)
 
-    def getLastTheLicence(self, use_catalog=True):
-        return self._getLastEvent(interfaces.ITheLicenceEvent, use_catalog)
+    def getLastTheLicence(self):
+        return self.getLastEvent(interfaces.ITheLicenceEvent)
 
     security.declarePublic('getReceivability')
     def getReceivability(self):

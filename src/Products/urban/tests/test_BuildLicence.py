@@ -42,12 +42,12 @@ class TestBuildLicence(unittest.TestCase):
         LICENCE_ID = 'buildlicence1'
         buildlicences.invokeFactory('BuildLicence', LICENCE_ID)
         buildlicence = getattr(buildlicences, LICENCE_ID)
-        self.assertEqual(buildlicence._getLastEvent(), None)
+        self.assertEqual(buildlicence.getLastEvent())
 
     def testGetLastEventWithOneEvent(self):
         buildlicence = self.buildlicence
         createdEvent = buildlicence.createUrbanEvent('depot-de-la-demande')
-        event = buildlicence._getLastEvent()
+        event = buildlicence.getLastEvent()
         self.assertEqual(createdEvent, event)
         self.failUnless(event is not None)
 
@@ -56,7 +56,7 @@ class TestBuildLicence(unittest.TestCase):
         buildlicence.createUrbanEvent('depot-de-la-demande', description='A')
         ev2 = buildlicence.createUrbanEvent('depot-de-la-demande', description='B')
         sleep(1)
-        event = buildlicence._getLastEvent()
+        event = buildlicence.getLastEvent()
         self.failUnless(event is not None)
         self.assertEqual(event.Description(), 'B')
         self.assertEqual(event, ev2)
