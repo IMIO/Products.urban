@@ -282,9 +282,9 @@ class LicenceView(BrowserView):
             })
         return inquirydates
 
-    def getSchemataFields(self, schemata='', exclude=[]):
+    def getSchemataFields(self, schemata='', exclude=[], context=None):
         displayed_fields = self.getUsedAttributes()
-        return utils.getSchemataFields(self.context, displayed_fields, schemata, exclude)
+        return utils.getSchemataFields(context or self.context, displayed_fields, schemata, exclude)
 
     def getDescriptionFields(self, exclude=[]):
         return self.getSchemataFields('urban_description', exclude)
@@ -304,6 +304,10 @@ class LicenceView(BrowserView):
     def getInquiryFields(self, exclude=[]):
         return self.getSchemataFields('urban_inquiry', exclude)
 
+    def getDefaultFields(self, exclude=[], context=None):
+        base_exclude = ['id', 'title']
+        return self.getSchemataFields('default', base_exclude + exclude, context=context)
+
     def getHabitationFields(self, exclude=[]):
         return self.getSchemataFields('urban_habitation', exclude)
 
@@ -317,7 +321,7 @@ class CODTLicenceView(LicenceView):
     """
     """
 
-    def getInquiryFields(self, exclude=[]):
+    def getInquiryFields(self, exclude=[], context=None):
         return self.context.get_inquiry_fields_to_display(exclude=exclude)
 
     def getInquiryType(self):
