@@ -412,12 +412,12 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         return res
 
     security.declarePublic('getLastDeposit')
-    def getLastDeposit(self, use_catalog=True):
-        return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
+    def getLastDeposit(self):
+        return self.getLastEvent(interfaces.IDepositEvent)
 
     security.declarePublic('getLastTheLicence')
-    def getLastTheLicence(self, use_catalog=True):
-        return self._getLastEvent(interfaces.ITheLicenceEvent, use_catalog)
+    def getLastTheLicence(self):
+        return self.getLastEvent(interfaces.ITheLicenceEvent)
 
     security.declarePublic('getSpecificFeaturesForTemplate')
     def getSpecificFeaturesForTemplate(self, where=[''], active_style='', inactive_style='striked'):
