@@ -26,6 +26,7 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.urban.utils import setOptionalAttributes
+from plone import api
 
 
 optional_fields = ['geometricians', 'notaryContact']
@@ -105,6 +106,19 @@ class CODT_UrbanCertificateTwo(BaseFolder, CODT_BaseBuildLicence, BrowserDefault
     ##/code-section class-header
 
     # Methods
+
+    security.declarePublic('geometriciansBaseQuery')
+    def geometriciansBaseQuery(self):
+        """
+          Do add some details for the base query
+          Here, we want to be sure that geometricians are alphabetically sorted
+        """
+        portal = api.portal.get()
+        rootPath = '/'.join(portal.getPhysicalPath())
+        dict = {}
+        dict['path'] = {'query': '%s/urban/geometricians' % rootPath, 'depth': 1}
+        dict['sort_on'] = 'sortable_title'
+        return dict
 
 
 registerType(CODT_UrbanCertificateTwo, PROJECTNAME)

@@ -27,6 +27,7 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import setOptionalAttributes
 from dateutil.relativedelta import relativedelta
+from plone import api
 ##/code-section module-header
 
 schema = Schema((
@@ -126,7 +127,7 @@ class ParcelOutLicence(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
           Do add some details for the base query
           Here, we want to be sure that geometricians are alphabetically sorted
         """
-        portal = getToolByName(self, 'portal_url').getPortalObject()
+        portal = api.portal.get()
         rootPath = '/'.join(portal.getPhysicalPath())
         dict = {}
         dict['path'] = {'query': '%s/urban/geometricians' % rootPath, 'depth': 1}
