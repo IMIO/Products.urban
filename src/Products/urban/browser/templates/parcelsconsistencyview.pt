@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+<body>
+<metal:main fill-slot="main">
+<metal:main_macro define-macro="main">
+<metal:body define-macro="body_macro"
+            tal:define="bla python: 1;
+                        bli python: False;
+                        result view/checkParcelsConsistency">
+
+<form action="" method="GET">
+    <input type="hidden" name="check" value="yes"/>
+    <input class="context" type="submit" value="Check parcels" i18n:attributes="value" />
+</form>
+<br/>
+<tal:result condition="result">
+    <table tal:define="critical_outdated_parcels python: result['critical_outdated_parcels'];
+                       outdated_parcels python: result['outdated_parcels'];">
+        <tr>
+            <th i18n:translate='outdated_parcels_in_use'>Outdated parcels used in licences in progress</th>
+        </tr>
+        <tr tal:repeat="parcel critical_outdated_parcels">
+            <td>
+                <a tal:attributes="href python: parcel['licence path']" tal:content="python: parcel['licence title']"></a>
+            </td>
+            <td>
+                <tal:parcel content="python: parcel['parcel']"></tal:parcel>
+            </td>
+        </tr>
+    </table>
+</tal:result>
+</metal:body>
+</metal:main_macro>
+</metal:main>
+</body>
+</html>

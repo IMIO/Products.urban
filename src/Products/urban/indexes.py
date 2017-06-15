@@ -25,6 +25,7 @@ from Products.urban.interfaces import IIsArchive
 from Products.urban.interfaces import IMiscDemand
 from Products.urban.interfaces import IParcellingTerm
 from Products.urban.interfaces import IPatrimonyCertificate
+from Products.urban.interfaces import IPortionOut
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IUrbanEventType
 
@@ -93,10 +94,10 @@ def licence_architectinfoindex(object):
     return list(set(architects_info))
 
 
-@indexer(IGenericLicence)
-def genericlicence_parcelinfoindex(obj):
+@indexer(IPortionOut)
+def parcelinfoindex(obj):
     """
-    Index parcels of a licence
+    Indexes some informations about the parcels of 'self'
     It builds a list of parcels infos.  Parcels infos are :
     - code divison
     - division
@@ -109,6 +110,14 @@ def genericlicence_parcelinfoindex(obj):
     What we need to do is to do an 'exact' search on it
     This index is a ZCTextIndex based on the plone_lexicon so we
     are sure that indexed values are lowercase
+    """
+    return [obj.getIndexValue()]
+
+
+@indexer(IGenericLicence)
+def genericlicence_parcelinfoindex(obj):
+    """
+    Index parcels of a licence
     """
     parcels_infos = []
     if hasattr(obj, 'getParcels'):
