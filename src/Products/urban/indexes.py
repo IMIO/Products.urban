@@ -96,9 +96,10 @@ def licence_architectinfoindex(object):
     return list(set(architects_info))
 
 
-@indexer(IGenericLicence)
-def genericlicence_parcelinfoindex(obj):
+@indexer(IPortionOut)
+def parcelinfoindex(obj):
     """
+    Indexes some informations about the parcels of 'self'
     Index parcels of a licence
     It builds a list of parcels infos.  Parcels infos are :
     - code divison
@@ -113,6 +114,11 @@ def genericlicence_parcelinfoindex(obj):
     This index is a ZCTextIndex based on the plone_lexicon so we
     are sure that indexed values are lowercase
     """
+    return [obj.getIndexValue()]
+
+
+@indexer(IGenericLicence)
+def genericlicence_parcelinfoindex(obj):
     parcels_infos = []
     if hasattr(obj, 'getParcels'):
         parcels_infos = list(set([p.getIndexValue() for p in obj.getParcels()]))
