@@ -256,16 +256,6 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
         },
-        {
-            'id': "expiration",
-            'title': "Valide jusqu'au",
-            'eventDateLabel': "Date de validité",
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (),
-            'TALCondition': "python: False",
-            'eventTypeType': 'Products.urban.interfaces.ILicenceExpirationEvent',
-        },
     ),
     'envclasstwo':
     (
@@ -291,16 +281,6 @@ urbanEventTypes = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
-        },
-        {
-            'id': "expiration",
-            'title': "Valide jusqu'au",
-            'eventDateLabel': "Date de validité",
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (),
-            'TALCondition': "python: False",
-            'eventTypeType': 'Products.urban.interfaces.ILicenceExpirationEvent',
         },
     ),
 }
