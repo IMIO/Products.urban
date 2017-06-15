@@ -318,6 +318,14 @@
       />
 
   <browser:page
+      for="Products.urban.interfaces.IUrbanTool"
+      name="parcelsconsistency"
+      class=".parcelsconsistencyview.ParcelsConsistencyView"
+      template="templates/parcelsconsistencyview.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
      name="parcellings_folderview"
      class=".urban_configfolderview.ParcellingsFolderView"
