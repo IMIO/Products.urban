@@ -171,7 +171,14 @@ class LicenceView(BrowserView):
         return self.renderListing(parceltable)
 
     def renderEventsListing(self):
-        events = self.context.getAllEvents(IUrbanEvent)
+        catalog = api.portal.get_tool('portal_catalog')
+        queryString = {
+            'object_provides': 'Products.urban.interfaces.IUrbanEvent',
+            'path': '/'.join(self.context.getPhysicalPath()),
+            'sort_on': 'getObjPositionInParent',
+            'sort_order': 'reverse',
+        }
+        events = catalog(queryString)
         if not events:
             return ''
         eventtable = EventsTable(events, self.request)

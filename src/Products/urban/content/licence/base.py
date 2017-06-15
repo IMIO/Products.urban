@@ -489,6 +489,35 @@ class UrbanBase(object):
             isFirst = False
         return toreturn
 
+    def _getAllEvents(self,  eventInterface=None, use_catalog=True):
+        return self._getAllEventsByObjectValues(eventInterface)
+
+    def _getAllEventsByObjectValues(self, eventInterface):
+        return [evt for evt in self.objectValues() if eventInterface.providedBy(evt)]
+
+    def _getAllEventsByCatalog(self, eventInterface):
+        catalog = api.portal.get_tool('portal_catalog')
+        currentPath = '/'.join(self.getPhysicalPath())
+        query = {'path': {'query': currentPath,
+                          'depth': 1},
+                 'meta_type': ['UrbanEvent', 'UrbanEventInquiry'],
+                 'sort_on': 'getObjPositionInParent'}
+        if eventInterface is not None:
+            interfaceName = interfaceToName(self, eventInterface)
+            query['object_provides'] = interfaceName
+            query.pop('meta_type')
+        return [brain.getObject() for brain in catalog(**query)]
+
+    def _getLastEvent(self, eventInterface=None, use_catalog=True):
+        events = self._getAllEvents(eventInterface, use_catalog)
+        if events:
+            return events[-1]
+
+    def _getFirstEvent(self, eventInterface=None, use_catalog=True):
+        events = self._getAllEvents(eventInterface, use_catalog)
+        if events:
+            return events[0]
+
     security.declarePublic('getUrbanEvents')
     def getUrbanEvents(self):
         """

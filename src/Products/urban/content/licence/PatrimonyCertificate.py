@@ -96,13 +96,13 @@ class PatrimonyCertificate(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMi
         return self.getArchitects()
 
     def getLastDeposit(self, use_catalog=True):
-        return self.getLastEvent(interfaces.IDepositEvent)
+        return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
 
     def getLastCollegeReport(self, use_catalog=True):
-        return self.getLastEvent(interfaces.ICollegeReportEvent)
+        return self._getLastEvent(interfaces.ICollegeReportEvent, use_catalog)
 
     def getLastTheLicence(self, use_catalog=True):
-        return self.getLastEvent(interfaces.ITheLicenceEvent)
+        return self._getLastEvent(interfaces.ITheLicenceEvent, use_catalog)
 
 
 

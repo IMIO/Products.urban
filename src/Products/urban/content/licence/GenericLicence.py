@@ -1418,8 +1418,8 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     security.declarePublic('getUrbanCertificateTwoOfTheParcels')
 
     def getUrbanCertificateTwoOfTheParcels(self, date=None):
-        # cu2 cannot be older than 2 years
-        if self.getLastTheLicence():
+        #cu2 cannot be older than 2 years
+        if  self.getLastTheLicence():
             limit_date = self.getLastTheLicence().getEventDate() - 731
         elif date:
             limit_date = date - 731
@@ -1427,27 +1427,12 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
             limit_date = self.getLastDeposit().getEventDate() - 731
         return self.getLicenceOfTheParcels('UrbanCertificateTwo', limit_date)
 
-    def getFirstDeposit(self):
-        return self.getFirstEvent(interfaces.IDepositEvent)
+    def getFirstDeposit(self, use_catalog=True):
+        return self._getFirstEvent(interfaces.IDepositEvent, use_catalog)
 
-    def getLastSimpleCollege(self):
-        return self.getLastEvent(interfaces.ISimpleCollegeEvent)
+    def getLastSimpleCollege(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ISimpleCollegeEvent, use_catalog)
 
-    def getAllEvents(self, eventInterface=None):
-        return self.getAllEventsByObjectValues(eventInterface)
-
-    def getAllEventsByObjectValues(self, eventInterface):
-        return [evt for evt in self.objectValues() if eventInterface.providedBy(evt)]
-
-    def getLastEvent(self, eventInterface=None):
-        events = self.getAllEvents(eventInterface)
-        if events:
-            return events[-1]
-
-    def getFirstEvent(self, eventInterface=None):
-        events = self.getAllEvents(eventInterface)
-        if events:
-            return events[0]
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence
