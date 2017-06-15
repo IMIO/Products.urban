@@ -226,11 +226,11 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     def previouslicencesBaseQuery(self):
         return {'object_provides': IEnvironmentBase.__identifier__}
 
-    def getLastLicenceDelivery(self, use_catalog=True):
-        return self._getLastEvent(ILicenceDeliveryEvent, use_catalog)
+    def getLastLicenceDelivery(self):
+        return self.getLastEvent(ILicenceDeliveryEvent)
 
-    def getLastMissingPart(self, use_catalog=True):
-        return self._getLastEvent(interfaces.IMissingPartEvent, use_catalog)
+    def getLastMissingPart(self):
+        return self.getLastEvent(interfaces.IMissingPartEvent)
 
     security.declarePublic('getFTOpinionRequestAddresses')
     def getFTOpinionRequestAddresses(self):
