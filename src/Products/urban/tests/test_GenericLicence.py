@@ -431,50 +431,6 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
             msg = "field 'protectedBuildingDetails' not visible on {}".format(licence.getPortalTypeName())
             self._is_field_visible("<span>Détails concernant le bien (classé ou assimilé)</span>:", licence, msg)
 
-    def test_has_attribute_SSC(self):
-        field_name = 'SSC'
-        for licence in self.licences:
-            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(licence.getField(field_name), msg)
-
-    def test_SSC(self):
-        for licence in self.licences:
-            msg = "field 'SSC' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Schéma de Structure Communal (S.S.C.)</span>:", licence, msg)
-
-    def test_has_attribute_sscDetails(self):
-        field_name = 'sscDetails'
-        for licence in self.licences:
-            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(licence.getField(field_name), msg)
-
-    def test_sscDetails(self):
-        for licence in self.licences:
-            msg = "field 'sscDetails' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Détails concernant le SSC</span>:", licence, msg)
-
-    def test_has_attribute_RCU(self):
-        field_name = 'RCU'
-        for licence in self.licences:
-            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(licence.getField(field_name), msg)
-
-    def test_RCU(self):
-        for licence in self.licences:
-            msg = "field 'RCU' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Règlement Communal d'Urbanisme (R.C.U.)</span>:", licence, msg)
-
-    def test_has_attribute_rcuDetails(self):
-        field_name = 'rcuDetails'
-        for licence in self.licences:
-            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-            self.assertTrue(licence.getField(field_name), msg)
-
-    def test_rcuDetails(self):
-        for licence in self.licences:
-            msg = "field 'rcuDetails' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Détails concernant le RCU</span>:", licence, msg)
-
     def test_has_attribute_solicitLocationOpinionsTo(self):
         field_name = 'solicitLocationOpinionsTo'
         for licence in self.licences:
