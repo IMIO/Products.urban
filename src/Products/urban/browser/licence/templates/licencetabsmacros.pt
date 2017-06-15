@@ -53,6 +53,9 @@
         <metal:custom_left_fieldset define-slot="custom_left_fieldset">
         </metal:custom_left_fieldset>
 
+        <fieldset tal:condition="useTabbing"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
+            <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
+        </fieldset>
     </div>
 
     <div class="licence-column">
@@ -175,9 +178,6 @@
         </table>
     </fieldset>
 
-    <fieldset tal:condition="useTabbing"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
-        <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
-    </fieldset>
 </div>
 
 
