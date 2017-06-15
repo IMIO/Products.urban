@@ -271,20 +271,20 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         """ to be overriden """
         return {}
 
-    def getLastDeposit(self):
-        return self.getLastEvent(interfaces.IDepositEvent)
+    def getLastDeposit(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IDepositEvent, use_catalog)
 
-    def getLastCollegeReport(self):
-        return self.getLastEvent(interfaces.ICollegeReportEvent)
+    def getLastCollegeReport(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ICollegeReportEvent, use_catalog)
 
     def getLastDisplayingTheDecision(self):
-        return self.getLastEvent(interfaces.IDisplayingTheDecisionEvent)
+        return self._getLastEvent(interfaces.IDisplayingTheDecisionEvent)
 
     def getLastRecourse(self):
-        return self.getLastEvent(interfaces.IRecourseEvent)
+        return self._getLastEvent(interfaces.IRecourseEvent)
 
     def getLicenceExpirationDate(self):
-        return self.getLastEvent(interfaces.ILicenceExpirationEvent)
+        return self._getLastEvent(interfaces.ILicenceExpirationEvent)
 
     security.declarePublic('getAdditionalLayers')
     def getAdditionalLayers(self):

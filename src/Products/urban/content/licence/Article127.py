@@ -79,8 +79,8 @@ class Article127(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
         else:
             return '30j'
 
-    def getLastWalloonRegionDecisionEvent(self):
-        return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)
+    def getLastWalloonRegionDecisionEvent(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IWalloonRegionDecisionEvent, use_catalog)
 
 
 registerType(Article127, PROJECTNAME)

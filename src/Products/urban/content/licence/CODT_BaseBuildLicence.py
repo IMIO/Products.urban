@@ -271,11 +271,11 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
 
         return DisplayList(display_values)
 
-    def getLastProcedureChoiceNotification(self):
-        return self.getLastEvent(interfaces.ICODTProcedureChoiceNotified)
+    def getLastProcedureChoiceNotification(self, use_catalog=True):
+        return self._getLastEvent(interfaces.ICODTProcedureChoiceNotified, use_catalog)
 
-    def getLastDefaultAcknowledgment(self):
-        return self.getLastEvent(interfaces.IDefaultCODTAcknowledgmentEvent)
+    def getLastDefaultAcknowledgment(self, use_catalog=True):
+        return self._getLastEvent(interfaces.IDefaultCODTAcknowledgmentEvent, use_catalog)
 
 
 # end of class CODT_BaseBuildLicence
