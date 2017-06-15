@@ -35,7 +35,7 @@ class TestUrbanTemplates(unittest.TestCase):
         self.assertTrue(not may_generate_document)
 
     def test_generation_condition_with_enabled_state(self):
-        may_generate_document = self.urbandoc_model.can_be_generated(self.portal)
+        may_generate_document = self.urbandoc_model.can_be_generated(self.urbandoc_model)
         self.assertTrue(may_generate_document)
 
 
