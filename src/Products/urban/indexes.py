@@ -17,15 +17,17 @@ __docformat__ = 'plaintext'
 from Products.Archetypes.interfaces import IBaseFolder
 
 from Products.urban.interfaces import IApplicant
-from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.interfaces import ICODT_BaseBuildLicence
+from Products.urban.interfaces import IContact
 from Products.urban.interfaces import IEnvironmentLicence
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IIsArchive
 from Products.urban.interfaces import IMiscDemand
 from Products.urban.interfaces import IParcellingTerm
 from Products.urban.interfaces import IPatrimonyCertificate
 from Products.urban.interfaces import IPortionOut
+from Products.urban.interfaces import IUrbanDoc
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IUrbanEventType
 
@@ -94,10 +96,10 @@ def licence_architectinfoindex(object):
     return list(set(architects_info))
 
 
-@indexer(IPortionOut)
-def parcelinfoindex(obj):
+@indexer(IGenericLicence)
+def genericlicence_parcelinfoindex(obj):
     """
-    Indexes some informations about the parcels of 'self'
+    Index parcels of a licence
     It builds a list of parcels infos.  Parcels infos are :
     - code divison
     - division
@@ -110,14 +112,6 @@ def parcelinfoindex(obj):
     What we need to do is to do an 'exact' search on it
     This index is a ZCTextIndex based on the plone_lexicon so we
     are sure that indexed values are lowercase
-    """
-    return [obj.getIndexValue()]
-
-
-@indexer(IGenericLicence)
-def genericlicence_parcelinfoindex(obj):
-    """
-    Index parcels of a licence
     """
     parcels_infos = []
     if hasattr(obj, 'getParcels'):
@@ -207,14 +201,14 @@ def genericlicence_representative(licence):
 
 @indexer(IGenericLicence)
 def genericlicence_decisiondate(licence):
-    decision_event = licence.getLastTheLicence(use_catalog=False)
+    decision_event = licence.getLastTheLicence()
     if decision_event:
         return decision_event.getEventDate()
 
 
 @indexer(IGenericLicence)
 def genericlicence_depositdate(licence):
-    deposit_event = licence.getFirstDeposit(use_catalog=False)
+    deposit_event = licence.getFirstDeposit()
     if deposit_event:
         return deposit_event.getEventDate()
 
@@ -226,3 +220,23 @@ def genericlicence_archive(licence):
     if archive_adapter:
         is_archive = archive_adapter.is_archive()
     return is_archive
+
+
+@indexer(IUrbanEvent)
+def event_not_indexed(obj):
+    raise AttributeError()
+
+
+@indexer(IUrbanDoc)
+def doc_not_indexed(obj):
+    raise AttributeError()
+
+
+@indexer(IContact)
+def contact_not_indexed(obj):
+    raise AttributeError()
+
+
+@indexer(IPortionOut)
+def portion_not_indexed(obj):
+    raise AttributeError()
