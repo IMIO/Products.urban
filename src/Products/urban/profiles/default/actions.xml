@@ -46,7 +46,7 @@
    <property name="visible">True</property>
   </object>
  </object>
- </object>
+ <object>
   <object name="urban_parcelsconsistency" meta_type="CMF Action" i18n:domain="urban">
    <property name="title" i18n:translate="urban_check_parcelsconsistency">Check parcels consistency</property>
    <property name="description" i18n:translate=""></property>
