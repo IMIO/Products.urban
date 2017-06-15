@@ -1,15 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from DateTime import DateTime
-
-from Products.urban.interfaces import IEnvironmentLicence
-from Products.urban.interfaces import IEnvClassThree
-from Products.urban.interfaces import ILicenceExpirationEvent
-
-from plone import api
-
-from zope.interface import directlyProvides
-
 
 def setExploitationConditions(licence, event):
     """
@@ -23,4 +13,3 @@ def setExploitationConditions(licence, event):
         condition_field = rubrics[0].getField('exploitationCondition')
         conditions_uid = list(set([condition_field.getRaw(rubric) for rubric in rubrics]))
         licence.setMinimumLegalConditions(conditions_uid)
-

@@ -4182,16 +4182,6 @@ urbanEventTypes = {
             'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
         },
         {
-            'id': "expiration",
-            'title': "Valide jusqu'au",
-            'eventDateLabel': "Date de validité",
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (),
-            'TALCondition': "python: False",
-            'eventTypeType': 'Products.urban.interfaces.ILicenceExpirationEvent',
-        },
-        {
             'id': "affichage-decision",
             'title': "Affichage de la décision",
             'eventDateLabel': "Date d'affichage",
@@ -4631,16 +4621,6 @@ urbanEventTypes = {
             'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
         },
         {
-            'id': "expiration",
-            'title': "Valide jusqu'au",
-            'eventDateLabel': "Date de validité",
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (),
-            'TALCondition': "python: False",
-            'eventTypeType': 'Products.urban.interfaces.ILicenceExpirationEvent',
-        },
-        {
             'id': "affichage-decision",
             'title': "Affichage de la décision",
             'eventDateLabel': "Date d'affichage",
@@ -4993,16 +4973,6 @@ urbanEventTypes = {
                     'TALCondition': "python: licence.getHasAdditionalConditions()"
                 },
             ),
-        },
-        {
-            'id': "expiration",
-            'title': "Valide jusqu'au",
-            'eventDateLabel': "Date de validité",
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (),
-            'TALCondition': "python: False",
-            'eventTypeType': 'Products.urban.interfaces.ILicenceExpirationEvent',
         },
     ),
     'miscdemand': (
