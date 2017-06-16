@@ -1438,7 +1438,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return self.getAllEventsByObjectValues(eventInterface)
 
     def getAllEventsByObjectValues(self, eventInterface):
-        return [evt for evt in self.objectValues() if eventInterface.providedBy(evt)]
+        return [evt for evt in self.objectValues() if not eventInterface or eventInterface.providedBy(evt)]
 
     def getLastEvent(self, eventInterface=None):
         events = self.getAllEvents(eventInterface)
