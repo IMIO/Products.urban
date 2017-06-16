@@ -247,6 +247,20 @@ class UrbanBase(object):
             'Declaration': 'Decl',
             'Division': 'Div',
             'MiscDemand': 'DD',
+            'PreliminaryNotice': 'AP',
+            'PatrimonyCertificate': 'CP',
+            'NotaryLetter': 'NOT',
+            'ProjectMeeting': 'RP',
+            'CODT_BuildLicence': 'PU',
+            'CODT_Article127': 'PU',
+            'CODT_IntegratedLicence': 'PI',
+            'CODT_IntegratedLicence': 'PI',
+            'CODT_UniqueLicence': 'U',
+            'CODT_UrbanCertificateOne': 'CU1',
+            'CODT_UrbanCertificateTwo': 'CU2',
+            'CODT_UrbanCertificateTwo': 'CU2',
+            'CODT_ParcelOutLicence': 'PL',
+            'CODT_NotaryLetter': 'NOT',
         }
         if "notaryletter" in self.id:
             return 'Not'
@@ -340,9 +354,9 @@ class UrbanBase(object):
         toreturn = '[CSV]Titre|TitreR|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for applicant in applicants:
             toreturn = toreturn + '%' + applicant.getPersonTitleValue() + '|' + \
-                       applicant.getPersonTitleValue(reverse=True) + '|' + applicant.getName1().decode('utf8') + '|' + \
+                       applicant.getPersonTitleValue(reverse=True).decode('utf8') + '|' + applicant.getName1().decode('utf8') + '|' + \
                        applicant.getName2().decode('utf8') + '|' + applicant.getStreet().decode('utf8') + ', ' + \
-                       applicant.getNumber() + '|' + applicant.getZipcode() + ' ' + applicant.getCity().decode('utf8')
+                       applicant.getNumber().decode('utf8') + '|' + applicant.getZipcode().decode('utf8') + ' ' + applicant.getCity().decode('utf8')
         toreturn = toreturn + '[/CSV]'
         return toreturn
     getMultipleApplicants = getMultipleApplicantsCSV
