@@ -168,7 +168,7 @@ class ParcelOutLicence(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
         return self.getLastEvent(interfaces.IProrogationEvent)
 
     def getAllMissingPartDeposits(self):
-        return self._getAllEvents(interfaces.IMissingPartDepositEvent)
+        return self.getAllEvents(interfaces.IMissingPartDepositEvent)
 
     def getProrogatedToDate(self, prorogation):
         """

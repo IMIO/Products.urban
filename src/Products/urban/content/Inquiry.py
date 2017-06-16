@@ -321,13 +321,13 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         return self.listFolderContents({'portal_type': 'UrbanEventInquiry'})
 
     def getLastInquiry(self, use_catalog=True):
-        return self._getLastEvent(interfaces.IInquiryEvent, use_catalog=use_catalog)
+        return self.getLastEvent(interfaces.IInquiryEvent)
 
     def getLastOpinionRequest(self):
-        return self._getLastEvent(interfaces.IOpinionRequestEvent)
+        return self.getLastEvent(interfaces.IOpinionRequestEvent)
 
     def getAllTechnicalServiceOpinionRequests(self):
-        return self._getAllEvents(interfaces.ITechnicalServiceOpinionRequestEvent)
+        return self.getAllEvents(interfaces.ITechnicalServiceOpinionRequestEvent)
 
     security.declarePublic('getSolicitOpinionValue')
     def getSolicitOpinionValue(self, opinionId):
@@ -387,7 +387,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
 
     def getAllOpinionRequests(self, organisation=""):
         if organisation == "":
-            return self._getAllEvents(interfaces.IOpinionRequestEvent)
+            return self.getAllEvents(interfaces.IOpinionRequestEvent)
         catalog = getToolByName(self, 'portal_catalog')
         query = {'path': {'query': self.absolute_url_path(),
                           'depth': 1},
@@ -405,7 +405,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         return allOpinionsNoDup.values()
 
     def getAllInquiryEvents(self):
-        return self._getAllEvents(interfaces.IInquiryEvent)
+        return self.getAllEvents(interfaces.IInquiryEvent)
 
     def getAllClaimsTexts(self):
         claimsTexts = []
