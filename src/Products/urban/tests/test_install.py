@@ -41,47 +41,32 @@ class TestInstall(unittest.TestCase):
         self.licence.createUrbanEvent('avis-etude-incidence')
 
     def testAcknowledgmentSearchByInterface(self):
-        urbanTool = getToolByName(self.portal, 'portal_urban')
-        urbanConfig = urbanTool.buildlicence
         licence = self.licence
-        eventTypes = urbanConfig.urbaneventtypes
         # there is already 10 events created on the licence
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 10)
-        urbanEvent = licence.createUrbanEvent('accuse-de-reception')
         self.assertEqual(len(licence.objectValues('UrbanEvent')), 11)
+        urbanEvent = licence.createUrbanEvent('accuse-de-reception')
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 12)
         self.failUnless(IAcknowledgmentEvent.providedBy(urbanEvent))
-        catalog = getToolByName(self.portal, 'portal_catalog')
-        interfaceName = interfaceToName(self.portal, IAcknowledgmentEvent)
-        eventTypes = catalog(object_provides=interfaceName,
-                             sort_on='sortable_title')
+        events = licence.getAllEvents(IAcknowledgmentEvent)
         # == 2 because there was an existing event 'accusé de réception' on the
         # licence
-        self.assertEqual(len(eventTypes), 2)
+        self.assertEqual(len(events), 2)
 
     def testInquirySearchByInterface(self):
         licence = self.licence
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 10)
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 11)
         # no need to create an inquiry event, its already existing in the test
         #licence
-        urbanEvent = licence.objectValues('UrbanEventInquiry')[0]
-        self.failUnless(IInquiryEvent.providedBy(urbanEvent))
+        urban_event = licence.getLastEvent(IInquiryEvent)
+        self.failUnless(IInquiryEvent.providedBy(urban_event))
 
     def testOpinionRequestMarkerInterface(self):
         licence = self.licence
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 10)
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 11)
         # no need to create an opinion request event, its already existing in
         # the test licence
-        urbanEvent = licence.objectValues('UrbanEventOpinionRequest')[0]
+        urbanEvent = licence.getLastEvent(IOpinionRequestEvent)
         self.failUnless(IOpinionRequestEvent.providedBy(urbanEvent))
-
-    def testAcknowledgmentEventTypeType(self):
-        portal = self.layer['portal']
-        urban = getToolByName(portal, 'portal_urban')
-        eventTypes = urban.buildlicence.urbaneventtypes
-        accuse = getattr(eventTypes, 'accuse-de-reception')
-        eventTypeType = accuse.getEventTypeType()
-        self.assertEqual(eventTypeType,
-                         'Products.urban.interfaces.IAcknowledgmentEvent')
 
 
 class TestContact(unittest.TestCase):
