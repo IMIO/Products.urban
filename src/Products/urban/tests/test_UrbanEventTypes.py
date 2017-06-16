@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 import unittest
 from zope import event
-from zope.component.interface import interfaceToName
 from plone import api
 from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_LICENCES
-from Products.urban.interfaces import IAcknowledgmentEvent
 from Products.Archetypes.event import ObjectEditedEvent
 
 
@@ -60,6 +58,7 @@ class TestUrbanEventTypes(unittest.TestCase):
         urban_event_type_b.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_b))
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
+        import ipdb; ipdb.set_trace()
         self.assertEqual(buildlicence_brain.last_key_event, None)
 
     def testOrderInKeyEventsWhenActivatingLastKeyEventProperty(self):
@@ -100,13 +99,10 @@ class TestUrbanEventTypes(unittest.TestCase):
         self.assertEqual(state, 'enabled')
 
     def testGeneratedDocumentIsNotUnderActivationWF(self):
-        portal = self.layer['portal']
-        catalog = self.catalog
         wf_tool = api.portal.get_tool('portal_workflow')
 
         #Check that generated .odt files in urbanEvents are NOT under any wf policy
-        interfaceName = interfaceToName(portal, IAcknowledgmentEvent)
-        urban_event = catalog(object_provides=interfaceName)[0].getObject()
+        urban_event = self.buildlicence.getLastAcknowledgment()
         document = getattr(urban_event, 'urb-accuse.odt', None)
         exception_msg = ""
         try:
