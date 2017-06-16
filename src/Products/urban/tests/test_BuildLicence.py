@@ -42,7 +42,7 @@ class TestBuildLicence(unittest.TestCase):
         LICENCE_ID = 'buildlicence1'
         buildlicences.invokeFactory('BuildLicence', LICENCE_ID)
         buildlicence = getattr(buildlicences, LICENCE_ID)
-        self.assertEqual(buildlicence.getLastEvent())
+        self.assertFalse(buildlicence.getLastEvent())
 
     def testGetLastEventWithOneEvent(self):
         buildlicence = self.buildlicence
