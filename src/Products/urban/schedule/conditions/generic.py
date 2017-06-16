@@ -213,6 +213,55 @@ class InquiryDoneCondition(Condition):
         return inquiry_done
 
 
+class AnnouncementDatesDefinedCondition(Condition):
+    """
+    Licence announcement start and end dates are defined.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        announcement = licence.getLastAnnouncement()
+        if not announcement:
+            return False
+
+        start_date = announcement.getInvestigationStart()
+        end_date = announcement.getInvestigationEnd()
+        dates_defined = start_date and end_date
+        return dates_defined
+
+
+class AnnouncementEventCreatedCondition(Condition):
+    """
+    Licence announcement event is created.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        created = False
+        announcement_event = licence.getLastAnnouncement()
+        if announcement_event:
+            created = api.content.get_state(announcement_event) != 'closed'
+
+        return created
+
+
+class AnnouncementDoneCondition(Condition):
+    """
+    Licence announcement event is closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        announcement_done = False
+        announcement_event = licence.getLastAnnouncement()
+        if announcement_event:
+            announcement_done = api.content.get_state(announcement_event) == 'closed'
+
+        return announcement_done
+
+
 class HasOpinionRequests(Condition):
     """
     There are some values selected in the field sollicitOpinionsTo.

@@ -26,11 +26,23 @@ msgstr "Créer l'événement d'accusé de réception et le clôturer"
 msgid "urban.schedule.condition.analysis_done"
 msgstr "Retour service urbanisme fait"
 
+msgid "urban.schedule.condition.announcement_dates_defined"
+msgstr "Définir les dates de début et fin de l'annonce de projet"
+
+msgid "urban.schedule.condition.announcement_done"
+msgstr "Cloturer l'événement d'annonce de projet"
+
+msgid "urban.schedule.condition.announcement_event_created"
+msgstr "Créer l'événement d'annonce de projet"
+
 msgid "urban.schedule.condition.complements_asked"
 msgstr "Créer l'événement 'dossier incomplet' et le clôturer"
 
 msgid "urban.schedule.condition.complements_received"
 msgstr "Créer l'événement 'récépissé d'un complément' et le clôturer"
+
+msgid "urban.schedule.condition.decision_notified"
+msgstr ""
 
 msgid "urban.schedule.condition.default_acknowledgement"
 msgstr "Le dossier est recevable par défaut"
@@ -85,6 +97,9 @@ msgstr "Suspendre le dossier"
 
 msgid "urban.start_date.acknowledgement_date"
 msgstr "Date d'accusé de réception du dossier"
+
+msgid "urban.start_date.announcement_end_date"
+msgstr "Date de fin de l'annonce de projet"
 
 msgid "urban.start_date.creation_date"
 msgstr "Date de création du dossier"
