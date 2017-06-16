@@ -149,6 +149,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "codt-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "annonce-de-projet-codt",
@@ -331,6 +332,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "codt-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "annonce-de-projet-codt",
@@ -513,6 +515,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "codt-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "annonce-de-projet-codt",
@@ -695,6 +698,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "codt-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "annonce-de-projet-codt",
@@ -934,6 +938,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "urb-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -946,6 +951,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('service-pop')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -958,6 +964,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spw-dgo1')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -970,6 +977,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dgrne')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -982,6 +990,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dnf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -994,6 +1003,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('stp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1006,6 +1016,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pi')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1018,6 +1029,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('bec')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1030,6 +1042,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('svp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1042,6 +1055,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('agriculture')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1054,6 +1068,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pn')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1066,6 +1081,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('crmsf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1078,6 +1094,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('swde')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1090,6 +1107,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('ccatm')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1102,6 +1120,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('inasep')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1114,6 +1133,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1126,6 +1146,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spge')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1138,6 +1159,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('cibe')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1150,6 +1172,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1162,6 +1185,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('infrabel')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1174,6 +1198,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('voo')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "rapport-du-college",
@@ -1555,6 +1580,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "urb-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1567,6 +1593,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('service-pop')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1579,6 +1606,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spw-dgo1')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1591,6 +1619,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dgrne')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1603,6 +1632,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dnf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1615,6 +1645,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('stp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1627,6 +1658,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pi')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1639,6 +1671,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('bec')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1651,6 +1684,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('svp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1663,6 +1697,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('agriculture')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1675,6 +1710,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pn')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1687,6 +1723,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('crmsf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1699,6 +1736,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('swde')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1711,6 +1749,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('ccatm')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1723,6 +1762,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('inasep')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1735,6 +1775,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1747,6 +1788,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spge')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1759,6 +1801,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('cibe')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1771,6 +1814,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1783,6 +1827,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('infrabel')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -1795,6 +1840,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('voo')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "rapport-du-college",
@@ -2176,6 +2222,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "urb-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2188,6 +2235,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('service-pop')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2200,6 +2248,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spw-dgo1')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2212,6 +2261,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dgrne')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2224,6 +2274,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dnf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2236,6 +2287,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('stp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2248,6 +2300,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pi')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2260,6 +2313,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('bec')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2272,6 +2326,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('svp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2284,6 +2339,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('agriculture')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2296,6 +2352,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pn')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2308,6 +2365,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('crmsf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2320,6 +2378,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('swde')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2332,6 +2391,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('ccatm')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2344,6 +2404,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('inasep')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2356,6 +2417,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2368,6 +2430,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spge')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2380,6 +2443,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('cibe')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2392,6 +2456,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2404,6 +2469,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('infrabel')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2416,6 +2482,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('voo')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "rapport-du-college",
@@ -2807,6 +2874,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "urb-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2819,6 +2887,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('service-pop')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2831,6 +2900,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spw-dgo1')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2843,6 +2913,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dgrne')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2855,6 +2926,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dnf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2867,6 +2939,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('stp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2879,6 +2952,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pi')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2891,6 +2965,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('bec')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2903,6 +2978,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('svp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2915,6 +2991,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('agriculture')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2927,6 +3004,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pn')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2939,6 +3017,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('crmsf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2951,6 +3030,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('swde')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2963,6 +3043,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('ccatm')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2975,6 +3056,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('inasep')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2987,6 +3069,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -2999,6 +3082,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spge')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3011,6 +3095,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('cibe')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3023,6 +3108,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3035,6 +3121,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('infrabel')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3047,6 +3134,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('voo')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "rapport-du-college",
@@ -3431,6 +3519,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "cu2-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3443,6 +3532,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('service-pop')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3455,6 +3545,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spw-dgo1')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3467,6 +3558,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dgrne')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3479,6 +3571,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dnf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3491,6 +3584,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('stp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3503,6 +3597,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pi')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3515,6 +3610,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('bec')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3527,6 +3623,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('svp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3539,6 +3636,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('agriculture')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3551,6 +3649,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pn')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3563,6 +3662,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('crmsf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3575,6 +3675,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('swde')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3587,6 +3688,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('ccatm')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3599,6 +3701,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('inasep')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3611,6 +3714,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3623,6 +3727,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spge')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3635,6 +3740,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('cibe')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3647,6 +3753,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3659,6 +3766,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('infrabel')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3671,6 +3779,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('voo')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "rapport-du-college",
@@ -3873,6 +3982,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "env3-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3885,6 +3995,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('service-pop')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3897,6 +4008,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spw-dgo1')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3909,6 +4021,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dgrne')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3921,6 +4034,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dnf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3933,6 +4047,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('stp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3945,6 +4060,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pi')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3957,6 +4073,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('bec')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3969,6 +4086,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('svp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3981,6 +4099,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('agriculture')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -3993,6 +4112,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pn')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4005,6 +4125,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('crmsf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4017,6 +4138,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('swde')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4029,6 +4151,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('ccatm')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4041,6 +4164,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('inasep')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4053,6 +4177,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4065,6 +4190,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spge')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4077,6 +4203,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('cibe')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4089,6 +4216,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4101,6 +4229,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('infrabel')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4113,6 +4242,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('voo')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "envoi-enquete-ft",
@@ -4312,6 +4442,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "env3-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4324,6 +4455,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('service-pop')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4336,6 +4468,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spw-dgo1')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4348,6 +4481,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dgrne')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4360,6 +4494,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dnf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4372,6 +4507,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('stp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4384,6 +4520,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pi')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4396,6 +4533,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('bec')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4408,6 +4546,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('svp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4420,6 +4559,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('agriculture')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4432,6 +4572,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pn')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4444,6 +4585,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('crmsf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4456,6 +4598,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('swde')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4468,6 +4611,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('ccatm')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4480,6 +4624,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('inasep')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4492,6 +4637,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4504,6 +4650,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spge')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4516,6 +4663,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('cibe')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4528,6 +4676,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4540,6 +4689,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('infrabel')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4552,6 +4702,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('voo')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "envoi-enquete-ft",
@@ -4682,6 +4833,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "env3-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4694,6 +4846,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('service-pop')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4706,6 +4859,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spw-dgo1')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4718,6 +4872,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dgrne')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4730,6 +4885,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dnf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4742,6 +4898,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('stp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4754,6 +4911,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pi')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4766,6 +4924,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('bec')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4778,6 +4937,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('svp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4790,6 +4950,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('agriculture')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4802,6 +4963,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pn')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4814,6 +4976,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('crmsf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4826,6 +4989,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('swde')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4838,6 +5002,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('ccatm')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4850,6 +5015,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('inasep')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4862,6 +5028,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4874,6 +5041,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spge')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4886,6 +5054,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('cibe')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4898,6 +5067,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4910,6 +5080,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('infrabel')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -4922,6 +5093,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('voo')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "acceptation-de-la-demande-cond",
@@ -4995,6 +5167,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "lot-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5006,6 +5179,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': 'deliberation-college',
@@ -5209,6 +5383,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "lot-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5221,6 +5396,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('service-pop')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5233,6 +5409,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spw-dgo1')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5245,6 +5422,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dgrne')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5257,6 +5435,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('dnf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5269,6 +5448,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('stp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5281,6 +5461,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pi')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5293,6 +5474,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('bec')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5305,6 +5487,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('svp')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5317,6 +5500,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('agriculture')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5329,6 +5513,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('pn')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5341,6 +5526,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('crmsf')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5353,6 +5539,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('swde')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5365,6 +5552,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('ccatm')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5377,6 +5565,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('inasep')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5389,6 +5578,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5401,6 +5591,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('spge')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5413,6 +5604,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('cibe')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5425,6 +5617,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5437,6 +5630,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('infrabel')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -5449,6 +5643,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('voo')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "rapport-du-college",

@@ -86,6 +86,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': ({'id': "urb-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -98,6 +99,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -110,6 +112,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "rapport-du-college",
@@ -170,6 +173,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -182,6 +186,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -194,6 +199,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
     ),
     'urbancertificatetwo':
@@ -205,6 +211,7 @@ urbanEventTypes = {
             'TALCondition': "python: False",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -217,6 +224,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -229,6 +237,7 @@ urbanEventTypes = {
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
         },
     ),
     'envclassone':
