@@ -43,9 +43,9 @@ class TestInstall(unittest.TestCase):
     def testAcknowledgmentSearchByInterface(self):
         licence = self.licence
         # there is already 10 events created on the licence
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 11)
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 10)
         urbanEvent = licence.createUrbanEvent('accuse-de-reception')
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 12)
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 11)
         self.failUnless(IAcknowledgmentEvent.providedBy(urbanEvent))
         events = licence.getAllEvents(IAcknowledgmentEvent)
         # == 2 because there was an existing event 'accusé de réception' on the
@@ -54,7 +54,7 @@ class TestInstall(unittest.TestCase):
 
     def testInquirySearchByInterface(self):
         licence = self.licence
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 11)
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 10)
         # no need to create an inquiry event, its already existing in the test
         #licence
         urban_event = licence.getLastEvent(IInquiryEvent)
@@ -62,7 +62,7 @@ class TestInstall(unittest.TestCase):
 
     def testOpinionRequestMarkerInterface(self):
         licence = self.licence
-        self.assertEqual(len(licence.objectValues('UrbanEvent')), 11)
+        self.assertEqual(len(licence.objectValues('UrbanEvent')), 10)
         # no need to create an opinion request event, its already existing in
         # the test licence
         urbanEvent = licence.getLastEvent(IOpinionRequestEvent)
