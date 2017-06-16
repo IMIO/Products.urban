@@ -110,6 +110,8 @@ class TestKeyEvent(BrowserTestCase):
         self.browser.open(buildlicence.absolute_url())
         self.assertTrue(date not in self.browser.contents)
 
+        old_fields = self.event_type.getActivatedFields()
+        self.event_type.setActivatedFields(old_fields + ('decisionDate',))
         self.event_type.setKeyDates(('decisionDate',))
         self.urban_event.setDecisionDate(date)
         transaction.commit()

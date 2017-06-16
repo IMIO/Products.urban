@@ -298,6 +298,15 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         )
         return event_types
 
+    def getLinkedUrbanEvents(self):
+        """
+        Return all the urban events linked to this urban event type.
+        """
+        ref_catalog = api.portal.get_tool('reference_catalog')
+        ref_brains = ref_catalog(targetUID=self.UID())
+        urban_events = [ref_brain.getObject().getSourceObject() for ref_brain in ref_brains]
+        return urban_events
+
 
 registerType(UrbanEventType, PROJECTNAME)
 # end of class UrbanEventType
