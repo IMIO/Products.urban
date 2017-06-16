@@ -41,6 +41,7 @@ from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban.content.licence.base import UrbanBase
 from Products.urban.interfaces import IOpinionRequestEvent
+from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import get_interface_by_path
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
@@ -1379,7 +1380,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         Tells if the licence contains an urbanEvent named 'title'
         """
         for obj in self.objectValues():
-            if interfaces.IUrbanEvent.providedBy(obj) and obj.Title() == title:
+            if IUrbanEvent.providedBy(obj) and obj.Title() == title:
                 return True
         return False
 
@@ -1433,7 +1434,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     def getLastSimpleCollege(self):
         return self.getLastEvent(interfaces.ISimpleCollegeEvent)
 
-    def getAllEvents(self, eventInterface=None):
+    def getAllEvents(self, eventInterface=IUrbanEvent):
         return self.getAllEventsByObjectValues(eventInterface)
 
     def getAllEventsByObjectValues(self, eventInterface):

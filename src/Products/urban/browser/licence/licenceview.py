@@ -15,7 +15,6 @@ from Products.urban.browser.table.urbantable import ProprietaryTable
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IInquiry
 from Products.urban.interfaces import IUrbanDoc
-from Products.urban.interfaces import IUrbanEvent
 
 from plone import api
 from plone.memoize import view
@@ -209,7 +208,6 @@ class LicenceView(BrowserView):
 
     def getKeyDates(self):
         context = aq_inner(self.context)
-        catalog = api.portal.get_tool('portal_catalog')
         urban_tool = api.portal.get_tool('portal_urban')
         config = context.getLicenceConfig()
         ordered_dates = []
@@ -230,21 +228,14 @@ class LicenceView(BrowserView):
 
         # now check each event to see if its a key Event, if yes, we gather the key date values found on this event
         linked_eventtype_field = UrbanEventInquiry_schema.get('urbaneventtypes')
-        event_brains = catalog(
-            path={'query': '/'.join(context.getPhysicalPath())},
-            object_provides=IUrbanEvent.__identifier__,
-            sort_on='created',
-            sort_order='ascending'
-        )
 
-        for event_brain in event_brains:
-            event = event_brain.getObject()
+        for event in self.context.getAllEvents():
             eventtype_uid = linked_eventtype_field.getRaw(event)
             if eventtype_uid in dates.keys() and not dates[eventtype_uid].get('url', ''):
                 for date in key_dates[eventtype_uid]:
                     date_value = getattr(event, date[0])
                     dates[eventtype_uid][date[0]]['dates'].append({
-                        'url': event_brain.getPath(),
+                        'url': event.absolute_url(),
                         'date':  date_value and urban_tool.formatDate(date_value, translatemonth=False) or None,
                     })
 
