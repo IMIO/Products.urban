@@ -219,6 +219,47 @@ schedule_config = {
         },
         {
             'type_name': 'MacroTaskConfig',
+            'id': 'announcement-preparation',
+            'title': 'Préparer l\'annonce de projet',
+            'default_assigned_group': 'urban_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('complete',),
+            'starting_states': ('complete',),
+            'start_date': 'urban.schedule.start_date.deposit_date',
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.will_have_announcement', 'AND'),
+            ),
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),
+                EndConditionObject('urban.schedule.condition.announcement_done', 'AND'),
+            ),
+            'calculation_delay': (
+                'schedule.calculation_default_delay',
+            ),
+            'additional_delay': 20,
+        },
+        {
+            'type_name': 'MacroTaskConfig',
+            'id': 'announcement',
+            'title': 'Annonce de projet',
+            'default_assigned_group': 'urban_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('complete',),
+            'starting_states': ('complete',),
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.announcement_done', 'AND'),
+            ),
+            'end_conditions': (
+                EndConditionObject('schedule.end_when_due_date_reached', 'AND'),
+            ),
+            'start_date': 'urban.schedule.start_date.announcement_end_date',
+            'calculation_delay': (
+                'schedule.calculation_default_delay',
+            ),
+            'additional_delay': 0,
+        },
+        {
+            'type_name': 'MacroTaskConfig',
             'id': 'decision-finale',
             'title': 'Décision finale à notifier',
             'default_assigned_group': 'urban_editors',

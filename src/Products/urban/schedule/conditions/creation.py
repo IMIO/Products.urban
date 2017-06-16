@@ -43,6 +43,16 @@ class WillHaveInquiry(CreationCondition):
         return 'inquiry' in licence.getProcedureChoice()
 
 
+class WillHaveAnnouncement(CreationCondition):
+    """
+    'light_inquiry' is selected on the field 'procedureChoice'.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        return 'light_inquiry' in licence.getProcedureChoice()
+
+
 class HasNewInquiryCondition(CreationCondition):
     """
     Licence has a new inquiry defined.
@@ -88,6 +98,22 @@ class InquiryCondition(CreationCondition):
         has_inquiry = bool(inquiry)
 
         return has_inquiry
+
+
+class AnnouncementDoneCondition(CreationCondition):
+    """
+    Licence announcement event is closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        announcement_done = False
+        announcement_event = licence.getLastAnnouncement()
+        if announcement_event:
+            announcement_done = api.content.get_state(announcement_event) == 'closed'
+
+        return announcement_done
 
 
 class HasOpinionRequests(CreationCondition):

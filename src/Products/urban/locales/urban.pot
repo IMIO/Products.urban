@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-06-09 09:20+0000\n"
+"POT-Creation-Date: 2017-06-16 14:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,11 +52,11 @@ msgstr ""
 msgid "Add a work location"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:444
+#: ../browser/licence/templates/licencetabsmacros.pt:454
 msgid "Add all advices"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:420
+#: ../browser/licence/templates/licencetabsmacros.pt:430
 msgid "Add an event"
 msgstr ""
 
@@ -91,7 +91,7 @@ msgstr ""
 msgid "Article127"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:384
+#: ../browser/licence/templates/licencetabsmacros.pt:394
 #: ../browser/licence/templates/licenceview.pt:50
 msgid "Attachments"
 msgstr ""
@@ -205,11 +205,11 @@ msgstr ""
 msgid "EnvClassTwo"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:428
+#: ../browser/licence/templates/licencetabsmacros.pt:438
 msgid "Events"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:399
+#: ../browser/licence/templates/licencetabsmacros.pt:409
 msgid "Events attachments"
 msgstr ""
 
@@ -652,7 +652,7 @@ msgstr ""
 msgid "add_an_applicant"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:393
+#: ../browser/licence/templates/licencetabsmacros.pt:403
 #: ../browser/templates/urbaneventmacros.pt:89
 msgid "add_an_attachment"
 msgstr ""
@@ -660,7 +660,7 @@ msgstr ""
 msgid "add_an_equipment"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:375
+#: ../browser/licence/templates/licencetabsmacros.pt:385
 msgid "add_an_inquiry"
 msgstr ""
 
@@ -668,7 +668,7 @@ msgid "add_event"
 msgstr ""
 
 #. Default: "This will automatically generate following advices:"
-#: ../browser/licence/templates/licencetabsmacros.pt:448
+#: ../browser/licence/templates/licencetabsmacros.pt:458
 msgid "add_every_advices_descr"
 msgstr ""
 
@@ -875,7 +875,7 @@ msgid "contact_recipients"
 msgstr ""
 
 #. Default: "There is no UrbanEventInquiry linked to this inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:361
+#: ../browser/licence/templates/licencetabsmacros.pt:371
 msgid "content_no_urbaneventinquiry"
 msgstr ""
 
@@ -1203,7 +1203,7 @@ msgid "flooding_level_verylow"
 msgstr ""
 
 #. Default: "Folder advices"
-#: ../browser/licence/templates/licencetabsmacros.pt:439
+#: ../browser/licence/templates/licencetabsmacros.pt:449
 msgid "folder_advice"
 msgstr ""
 
@@ -1332,7 +1332,7 @@ msgid "inquiry_item"
 msgstr ""
 
 #. Default: "Inquiry ${number}"
-#: ../browser/licence/templates/licencetabsmacros.pt:310
+#: ../browser/licence/templates/licencetabsmacros.pt:320
 msgid "inquiry_title_and_number"
 msgstr ""
 
@@ -1469,7 +1469,7 @@ msgstr ""
 msgid "label_colname_transmitDate"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:326
+#: ../browser/licence/templates/licencetabsmacros.pt:336
 msgid "label_edit"
 msgstr ""
 
@@ -1490,7 +1490,7 @@ msgstr ""
 msgid "label_ok"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:335
+#: ../browser/licence/templates/licencetabsmacros.pt:345
 msgid "label_remove"
 msgstr ""
 
@@ -2399,7 +2399,7 @@ msgid "urban_label_article"
 msgstr ""
 
 #. Default: "Asking Date"
-#: ../browser/licence/templates/licencetabsmacros.pt:246
+#: ../browser/licence/templates/licencetabsmacros.pt:247
 msgid "urban_label_askingDate"
 msgstr ""
 
@@ -2813,7 +2813,7 @@ msgid "urban_label_expropriationDetails"
 msgstr ""
 
 #. Default: "Advice"
-#: ../browser/licence/templates/licencetabsmacros.pt:248
+#: ../browser/licence/templates/licencetabsmacros.pt:249
 msgid "urban_label_externalDecision"
 msgstr ""
 
@@ -3599,7 +3599,7 @@ msgid "urban_label_rcuDetails"
 msgstr ""
 
 #. Default: "Receipt date"
-#: ../browser/licence/templates/licencetabsmacros.pt:247
+#: ../browser/licence/templates/licencetabsmacros.pt:248
 msgid "urban_label_receiptDate"
 msgstr ""
 
@@ -4193,7 +4193,7 @@ msgid "urban_label_zipcode"
 msgstr ""
 
 #. Default: "Click here to access the linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:356
+#: ../browser/licence/templates/licencetabsmacros.pt:366
 msgid "urban_link_to_the_linked_urbaneventinquiry"
 msgstr ""
 
@@ -4201,7 +4201,7 @@ msgid "urban_linked_inquiry_help"
 msgstr ""
 
 #. Default: "Linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:352
+#: ../browser/licence/templates/licencetabsmacros.pt:362
 msgid "urban_linked_urbaneventinquiry"
 msgstr ""
 
@@ -4211,7 +4211,7 @@ msgid "urban_no_event_added"
 msgstr ""
 
 #. Default: "No event type is defined in the configuration for this element"
-#: ../browser/licence/templates/licencetabsmacros.pt:422
+#: ../browser/licence/templates/licencetabsmacros.pt:432
 msgid "urban_no_eventtype_defined"
 msgstr ""
 

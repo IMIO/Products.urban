@@ -150,6 +150,55 @@
         name="urban.schedule.condition.inquiry_done"
     />
 
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.InquiryDatesDefinedCondition"
+        name="urban.schedule.condition.inquiry_dates_defined"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.InquiryEventCreatedCondition"
+        name="urban.schedule.condition.inquiry_event_created"
+    />
+
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.InquiryDoneCondition"
+        name="urban.schedule.condition.inquiry_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.AnnouncementDatesDefinedCondition"
+        name="urban.schedule.condition.announcement_dates_defined"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.AnnouncementEventCreatedCondition"
+        name="urban.schedule.condition.announcement_event_created"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.AnnouncementDoneCondition"
+        name="urban.schedule.condition.announcement_done"
+    />
+
     <!-- analysis conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseBuildLicence

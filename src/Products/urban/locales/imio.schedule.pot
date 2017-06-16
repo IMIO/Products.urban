@@ -44,6 +44,15 @@ msgstr ""
 msgid "urban.schedule.condition.inquiry_event_created"
 msgstr ""
 
+msgid "urban.schedule.condition.announcement_done"
+msgstr ""
+
+msgid "urban.schedule.condition.announcement_event_created"
+msgstr ""
+
+msgid "urban.schedule.condition.announcement_dates_defined"
+msgstr ""
+
 msgid "urban.schedule.condition.opinion_requests_created"
 msgstr ""
 
@@ -66,6 +75,9 @@ msgid "urban.start_date.creation_date"
 msgstr ""
 
 msgid "urban.start_date.deposit_date"
+msgstr ""
+
+msgid "urban.start_date.announcement_end_date"
 msgstr ""
 
 msgid "urban.start_date.inquiry_end_date"

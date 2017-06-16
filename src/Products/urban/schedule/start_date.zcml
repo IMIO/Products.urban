@@ -50,4 +50,12 @@
         name="urban.schedule.start_date.inquiry_end_date"
     />
 
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.AnnouncementEndDate"
+        name="urban.schedule.start_date.announcement_end_date"
+    />
+
 </configure>
