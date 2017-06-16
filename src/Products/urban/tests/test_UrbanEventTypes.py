@@ -51,14 +51,13 @@ class TestUrbanEventTypes(unittest.TestCase):
         for uet in self.portal_urban.buildlicence.urbaneventtypes.objectValues():
             uet.setIsKeyEvent(False)
             event.notify(ObjectEditedEvent(uet))
-        urban_event_type_b = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'belgacom', None)
+        urban_event_type_b = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'sncb', None)
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
         #set 'belgacom' as a key event, buildlicence last_key_event index should not change
         #as the corresponding urbanEvent has never been created in this buildlicence
         urban_event_type_b.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_b))
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
-        import ipdb; ipdb.set_trace()
         self.assertEqual(buildlicence_brain.last_key_event, None)
 
     def testOrderInKeyEventsWhenActivatingLastKeyEventProperty(self):
