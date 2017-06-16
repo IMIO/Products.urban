@@ -386,15 +386,10 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         return allOpinionsNoDup.values()
 
     def getAllOpinionRequests(self, organisation=""):
-        if organisation == "":
+        if not organisation:
             return self.getAllEvents(interfaces.IOpinionRequestEvent)
-        catalog = getToolByName(self, 'portal_catalog')
-        query = {'path': {'query': self.absolute_url_path(),
-                          'depth': 1},
-                 'object_provides': IOpinionRequestEvent.__identifier__,
-                 'sort_on': 'getObjPositionInParent',
-                 'id': organisation.lower()}
-        return [brain.getObject() for brain in catalog(**query)]
+        opinion_requests = [op for op in self.getAllEvents(interfaces.IOpinionRequestEvent) if organisation in op.id]
+        return opinion_requests
 
     def getAllOpinionRequestsNoDup(self):
         allOpinions = self.getAllOpinionRequests()
@@ -428,7 +423,6 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
             toreturn = toreturn + '%' + foldermaker.getAddressCSV()
         toreturn = toreturn + '</CSV>'
         return toreturn
-
 
 
 registerType(Inquiry, PROJECTNAME)
