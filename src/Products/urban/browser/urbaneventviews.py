@@ -348,9 +348,12 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                 if len(brains) > 0:
                     newrecipient = brains[0].getObject()
                 else:
+                    adr1 = owner.adr1 and str(owner.adr1.encode('utf-8')) or ''
+                    adr2 = owner.adr2 and str(owner.adr2.encode('utf-8')) or ''
+                    address = adr1 and adr2 and '{} {}'.format(adr1, adr2)
                     brains = context.portal_catalog(
                         portal_type="RecipientCadastre", path={'query': event_path},
-                        getRecipientAddress=(str(owner.adr1.encode('utf-8')) + ' ' + str(owner.adr2.encode('utf-8')))
+                        getRecipientAddress=address
                     )
                     if len(brains) > 0:
                         newrecipient = brains[0].getObject()
