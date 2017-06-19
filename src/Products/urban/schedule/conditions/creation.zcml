@@ -4,24 +4,16 @@
 
     <!-- acknowlegdment conditions-->
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.AcknowledgmentDoneCondition"
         name="urban.schedule.condition.acknowledgment_done"
     />
 
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.DefaultCODTAcknowledgmentCondition"
-        name="urban.schedule.condition.default_acknowledgement"
-    />
-
     <!-- inquiry conditions-->
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.WillHaveInquiry"
@@ -29,7 +21,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.NoInquiryCondition"
@@ -37,7 +29,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.InquiryCondition"
@@ -46,7 +38,7 @@
 
     <!-- opinion requests conditions-->
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.HasOpinionRequests"
@@ -54,7 +46,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.OpinionRequestsDone"
@@ -63,7 +55,7 @@
 
     <!-- FD opinions conditions-->
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.HasFDOpinionRequest"
@@ -72,7 +64,7 @@
 
     <!-- deposit date is past by x days -->
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.DepositDateIsPast20Days"
@@ -80,7 +72,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.DepositDateIsPast30Days"
@@ -88,8 +80,9 @@
     />
 
     <!-- incomplete -->
+
     <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+        for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.IncompleteForTheFirstTime"
@@ -97,23 +90,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.IncompleteForTheFirstTime"
-        name="urban.schedule.condition.incomplete_first_time"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.IncompleteForTheSecondTime"
-        name="urban.schedule.condition.incomplete_second_time"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.IncompleteForTheSecondTime"
