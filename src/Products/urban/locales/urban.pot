@@ -489,7 +489,7 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-#: ../testing.zcml:14
+#: ../testing.zcml:15
 msgid "Tests Extension profile for urban."
 msgstr ""
 
@@ -818,7 +818,7 @@ msgstr ""
 msgid "click_to_view_or_add"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1219
+#: ../content/licence/GenericLicence.py:1220
 msgid "close_prevention_area"
 msgstr ""
 
@@ -860,7 +860,7 @@ msgid "concentrated_runoff_s_risk_folder_title"
 msgstr ""
 
 #. Default: "Concerned parcel(s)"
-#: ../browser/licence/templates/licencetabsmacros.pt:178
+#: ../browser/licence/templates/licencetabsmacros.pt:56
 #: ../browser/licence/templates/parcels_macro.pt:3
 #: ../browser/templates/map.pt:32
 msgid "concerned_parcels"
@@ -1137,7 +1137,7 @@ msgstr ""
 msgid "externaldecisions_folder_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1220
+#: ../content/licence/GenericLicence.py:1221
 msgid "far_prevention_area"
 msgstr ""
 
@@ -1182,23 +1182,23 @@ msgstr ""
 msgid "firefox_viewlet_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1241
+#: ../content/licence/GenericLicence.py:1242
 msgid "flooding_level_high"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1239
+#: ../content/licence/GenericLicence.py:1240
 msgid "flooding_level_low"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1240
+#: ../content/licence/GenericLicence.py:1241
 msgid "flooding_level_moderate"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1237
+#: ../content/licence/GenericLicence.py:1238
 msgid "flooding_level_no"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1238
+#: ../content/licence/GenericLicence.py:1239
 msgid "flooding_level_verylow"
 msgstr ""
 
@@ -1696,7 +1696,7 @@ msgstr ""
 msgid "outdated_parcels_in_use"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1222
+#: ../content/licence/GenericLicence.py:1223
 msgid "outside_catchment"
 msgstr ""
 
@@ -1963,7 +1963,7 @@ msgstr ""
 msgid "subdivision_fieldset_legend"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1221
+#: ../content/licence/GenericLicence.py:1222
 msgid "supervision_area"
 msgstr ""
 
@@ -2045,19 +2045,19 @@ msgstr ""
 msgid "urban-sambreville"
 msgstr ""
 
-#: ../testing.zcml:14
+#: ../testing.zcml:15
 msgid "urban-tests"
 msgstr ""
 
-#: ../testing.zcml:22
+#: ../testing.zcml:23
 msgid "urban-tests-imports"
 msgstr ""
 
-#: ../testing.zcml:30
+#: ../testing.zcml:31
 msgid "urban-testsWithConfig"
 msgstr ""
 
-#: ../testing.zcml:38
+#: ../testing.zcml:39
 msgid "urban-testsWithLicences"
 msgstr ""
 
@@ -2068,11 +2068,6 @@ msgstr ""
 #. Default: "Browse old parcels (Only works with the parcel reference)"
 #: ../browser/templates/searchparcels.pt:162
 msgid "urban_browse_old_parcels"
-msgstr ""
-
-#. Default: "Check parcels consistency"
-#: ../profiles/default/actions.xml
-msgid "urban_check_parcelsconsistency"
 msgstr ""
 
 #. Default: "Here above are data defined for the inquiry. If you want to change these informations, click on the name of the linked inquiry here above."
@@ -2097,7 +2092,7 @@ msgid "urban_descr_usedAttributes"
 msgstr ""
 
 #. Default: "Key dates"
-#: ../browser/licence/templates/licencetabsmacros.pt:61
+#: ../browser/licence/templates/licencetabsmacros.pt:64
 msgid "urban_description_key_dates_legend"
 msgstr ""
 
@@ -2164,7 +2159,7 @@ msgid "urban_help_townshipCouncilFolder"
 msgstr ""
 
 #. Default: "from ${number}"
-#: ../browser/licence/templates/licencetabsmacros.pt:90
+#: ../browser/licence/templates/licencetabsmacros.pt:93
 msgid "urban_investigationStart"
 msgstr ""
 
@@ -2995,7 +2990,7 @@ msgid "urban_label_investigationDetails"
 msgstr ""
 
 #. Default: "to"
-#: ../browser/licence/templates/licencetabsmacros.pt:101
+#: ../browser/licence/templates/licencetabsmacros.pt:104
 msgid "urban_label_investigationEnd"
 msgstr ""
 
