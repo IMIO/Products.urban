@@ -78,7 +78,7 @@ class NoInquiryCondition(CreationCondition):
 
 class InquiryCondition(CreationCondition):
     """
-    Licence has an inquiry start date and end date defined.
+    Licence has an inquiry defined.
     """
 
     def evaluate(self):
