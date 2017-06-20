@@ -68,6 +68,9 @@ msgstr "Incomplet pour le première fois"
 msgid "urban.schedule.condition.incomplete_second_time"
 msgstr "Incomplet pour le seconde fois"
 
+msgid "urban.schedule.condition.inquiry_dates_defined"
+msgstr "Définir les dates d'enquêtes"
+
 msgid "urban.schedule.condition.inquiry_done"
 msgstr "Enquête terminée"
 
