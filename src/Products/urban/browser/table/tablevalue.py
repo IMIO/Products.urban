@@ -6,7 +6,6 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.browser.table.interfaces import IItemForUrbanTable
 from Products.urban.browser.table.interfaces import IBrainForUrbanTable
 from Products.urban.browser.table.interfaces import IObjectForUrbanTable
-from Products.urban.interfaces import IUrbanDoc
 
 from Products.ZCatalog.Lazy import LazyMap
 
@@ -172,16 +171,8 @@ class ValuesForFolderListing(ValuesForUrbanListing):
     """  return values from the context """
 
     def getItems(self):
-        context = self.context
-        catalog = api.portal.get_tool('portal_catalog')
-        query_string = {
-            'path': {
-                'query': '/'.join(context.getPhysicalPath()),
-                'depth': 1,
-            },
-        }
-        contact_brains = catalog(query_string)
-        return contact_brains
+        items = self.context.objectValues()
+        return items
 
 
 class ValuesForLicenceListing(ValuesForUrbanListing):
