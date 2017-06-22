@@ -5,6 +5,7 @@ from plone import api
 from Products.urban.browser.table.column import FoldermanagerColumn
 from Products.urban.browser.table.interfaces import ITitleCell
 from Products.urban.browser.table.interfaces import ITitleColumn
+from Products.urban.interfaces import IGenericLicence
 from imio.dashboard.columns import ActionsColumn
 
 from collective.eeafaceted.z3ctable.columns import BaseColumn
@@ -127,6 +128,8 @@ class ScheduleColumn(BaseColumn):
         catalog = api.portal.get_tool('portal_catalog')
         task = item.getObject()
         licence = task.get_container()
+        while not IGenericLicence.providedBy(licence):
+            licence = licence.aq_parent
         licence_brain = catalog(UID=licence.UID())[0]
         return licence_brain
 
