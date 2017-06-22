@@ -15,6 +15,7 @@ from Products.urban.browser.table.urbantable import ProprietaryTable
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IInquiry
 from Products.urban.interfaces import IUrbanDoc
+from Products.urban.interfaces import IUrbanEvent
 
 from plone import api
 from plone.memoize import view
@@ -170,8 +171,7 @@ class LicenceView(BrowserView):
         return self.renderListing(parceltable)
 
     def renderEventsListing(self):
-        events = [e for e in reversed(self.context.values())
-                  if e.portal_type == 'UrbanEvent']
+        events = [obj for obj in reversed(self.context.objectValues()) if IUrbanEvent.providedBy(obj)]
         if not events:
             return ''
         eventtable = EventsTable(events, self.request)
