@@ -19,7 +19,7 @@ from Products.Archetypes.interfaces import IBaseFolder
 from Products.urban.interfaces import IApplicant
 from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.interfaces import ICODT_BaseBuildLicence
-from Products.urban.interfaces import IContact
+from Products.urban.interfaces import ICorporation
 from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IIsArchive
@@ -27,6 +27,7 @@ from Products.urban.interfaces import IMiscDemand
 from Products.urban.interfaces import IParcellingTerm
 from Products.urban.interfaces import IPatrimonyCertificate
 from Products.urban.interfaces import IPortionOut
+from Products.urban.interfaces import IProprietary
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IUrbanEventType
@@ -238,7 +239,9 @@ def doc_not_indexed(obj):
     raise AttributeError()
 
 
-@indexer(IContact)
+@indexer(IApplicant)
+@indexer(IProprietary)
+@indexer(ICorporation)
 def contact_not_indexed(obj):
     raise AttributeError()
 
