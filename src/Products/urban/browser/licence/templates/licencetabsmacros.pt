@@ -50,6 +50,10 @@
             </table>
         </fieldset>
 
+        <metal:parcels define-slot="parcels">
+            <metal:applicants_macro use-macro="here/@@parcels-macro/parcels_macro" />
+        </metal:parcels>
+
         <metal:custom_left_fieldset define-slot="custom_left_fieldset">
         </metal:custom_left_fieldset>
 
@@ -117,10 +121,6 @@
 
         <metal:representatives define-slot="representatives">
         </metal:representatives>
-
-        <metal:parcels define-slot="parcels">
-            <metal:applicants_macro use-macro="here/@@parcels-macro/parcels_macro" />
-        </metal:parcels>
     </div>
 </div>
 
