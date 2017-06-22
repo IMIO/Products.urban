@@ -176,15 +176,17 @@ class SearchParcelsView(BrowserView):
         search_result = []
         search_args = dict((k, v) for k, v in search_args.iteritems() if v)
         cadastre = services.cadastre.new_session()
-        if old:
-            query_result_old = cadastre.query_old_parcels(**search_args)
-            for parcel in query_result_old:
-                setattr(parcel, 'old', True)
-                search_result.append(parcel)
-        else:
-            search_result = cadastre.query_parcels(**search_args)
-
-        cadastre.close()
+        try:
+            if old:
+                query_result_old = cadastre.query_old_parcels(**search_args)
+                for parcel in query_result_old:
+                    setattr(parcel, 'old', True)
+                    search_result.append(parcel)
+            else:
+                search_result = cadastre.query_parcels(**search_args)
+        finally:
+            cadastre.close()
+            
         return search_result
 
 
