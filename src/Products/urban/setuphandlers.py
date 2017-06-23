@@ -55,6 +55,7 @@ from zope.component import getUtilitiesFor
 from zope.component import queryUtility
 from zope.component.interface import getInterface
 from zope.i18n.interfaces import ITranslationDomain
+from zope.lifecycleevent import ObjectModifiedEvent
 from zope import event
 
 import pickle
@@ -932,6 +933,9 @@ def setupSchedule(context):
         config_folder = getattr(portal_urban, urban_type.lower())
         createScheduleConfig(container=config_folder, portal_type=urban_type)
         schedule_config = getattr(config_folder, 'schedule')
+        dashboard_collection = getattr(schedule_config, 'dashboard_collection', None)
+        if not dashboard_collection:
+            event.notify(ObjectModifiedEvent(schedule_config))
         schedule_config.dashboard_collection.customViewFields = (
             u'sortable_title',
             u'pretty_link',
