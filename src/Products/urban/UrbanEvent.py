@@ -434,7 +434,23 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
 
     # Manually created methods
 
+    security.declarePublic('getDefaultValue')
+
+    def getDefaultValue(self, context=None, field=None):
+        if not context or not field:
+            return ['']
+
+        urban_tool = api.portal.get_tool('portal_urban')
+
+        default_value = urban_tool.getVocabularyDefaultValue(
+            vocabulary=field.vocabulary or field.vocabulary_factory,
+            context=context,
+            multivalued=field.multiValued
+        )
+        return default_value
+
     security.declarePublic('getDefaultText')
+
     def getDefaultText(self, context=None, field=None, html=False):
         if not context or not field:
             return ""
@@ -600,7 +616,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
           Generates a fake CSV file used in POD templates
         """
         recipients=self.objectValues('RecipientCadastre')
-        toreturn='[CSV]TitreNomPrenom|AdresseLigne1|AdresseLigne2'
+        toreturn='<CSV>TitreNomPrenom|AdresseLigne1|AdresseLigne2'
         wft = getToolByName(self, 'portal_workflow')
         for recipient in recipients:
             #do not take "disabled" recipients into account
@@ -609,7 +625,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             street = recipient.getStreet() and recipient.getStreet() or ''
             address = recipient.getAdr1() and recipient.getAdr1() or ''
             toreturn=toreturn+'%'+recipient.getName()+'|'+street+'|'+address
-        toreturn=toreturn+'[/CSV]'
+        toreturn=toreturn+'</CSV>'
         return toreturn
 
     security.declarePublic('getFormattedDate')
