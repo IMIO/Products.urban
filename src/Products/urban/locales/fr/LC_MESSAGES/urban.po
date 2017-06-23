@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2017-06-20 06:46+0000\n"
+"POT-Creation-Date: 2017-06-23 12:16+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -54,11 +54,11 @@ msgstr "Ajouter"
 msgid "Add a work location"
 msgstr "Ajouter une adresse"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:445
+#: ../browser/licence/templates/licencetabsmacros.pt:442
 msgid "Add all advices"
 msgstr "Ajouter tous les avis"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:421
+#: ../browser/licence/templates/licencetabsmacros.pt:418
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
@@ -93,7 +93,7 @@ msgstr "Coordonnées de l'architecte"
 msgid "Article127"
 msgstr "Article 127"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:385
+#: ../browser/licence/templates/licencetabsmacros.pt:382
 #: ../browser/licence/templates/licenceview.pt:50
 msgid "Attachments"
 msgstr "Pièces jointes"
@@ -207,11 +207,11 @@ msgstr "Déclaration environnementale"
 msgid "EnvClassTwo"
 msgstr "Permis d'environnement classe 2"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:429
+#: ../browser/licence/templates/licencetabsmacros.pt:426
 msgid "Events"
 msgstr "Événements"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:400
+#: ../browser/licence/templates/licencetabsmacros.pt:397
 msgid "Events attachments"
 msgstr "Pièces jointes des événements"
 
@@ -671,7 +671,7 @@ msgid "add_an_applicant"
 msgstr "Ajouter un demandeur"
 
 # urbanevent_view
-#: ../browser/licence/templates/licencetabsmacros.pt:394
+#: ../browser/licence/templates/licencetabsmacros.pt:391
 #: ../browser/templates/urbaneventmacros.pt:89
 msgid "add_an_attachment"
 msgstr "Ajouter une pièce jointe"
@@ -679,7 +679,7 @@ msgstr "Ajouter une pièce jointe"
 msgid "add_an_equipment"
 msgstr "Ajouter une charge imposée"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:376
+#: ../browser/licence/templates/licencetabsmacros.pt:373
 msgid "add_an_inquiry"
 msgstr "Ajouter une enquête supplémentaire"
 
@@ -687,7 +687,7 @@ msgid "add_event"
 msgstr "Ajouter un événement"
 
 #. Default: "This will automatically generate following advices:"
-#: ../browser/licence/templates/licencetabsmacros.pt:449
+#: ../browser/licence/templates/licencetabsmacros.pt:446
 msgid "add_every_advices_descr"
 msgstr "Ceci ajoutera automatiquement les avis suivants :"
 
@@ -796,7 +796,7 @@ msgstr "Permis d'urbanisme"
 msgid "cannot_remove_urbaneventannouncement_notthelast"
 msgstr ""
 
-#: ../content/UrbanEventInquiry.py:179
+#: ../content/UrbanEventInquiry.py:212
 msgid "cannot_remove_urbaneventinquiry_notthelast"
 msgstr ""
 
@@ -883,9 +883,9 @@ msgid "concentrated_runoff_s_risk_folder_title"
 msgstr "Risque de ruissellement concentré"
 
 #. Default: "Concerned parcel(s)"
-#: ../browser/licence/templates/licencetabsmacros.pt:56
 #: ../browser/licence/templates/parcels_macro.pt:3
 #: ../browser/templates/map.pt:32
+#: ../browser/templates/parcellingtermview.pt:23
 msgid "concerned_parcels"
 msgstr "Parcelle(s) concernée(s)"
 
@@ -898,7 +898,7 @@ msgid "contact_recipients"
 msgstr "Destinataire(s) de contact"
 
 #. Default: "There is no UrbanEventInquiry linked to this inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:362
+#: ../browser/licence/templates/licencetabsmacros.pt:359
 msgid "content_no_urbaneventinquiry"
 msgstr "Aucun événement n'est encore lié à cette enquête publique"
 
@@ -1231,7 +1231,7 @@ msgid "flooding_level_verylow"
 msgstr "Risque très faible"
 
 #. Default: "Folder advices"
-#: ../browser/licence/templates/licencetabsmacros.pt:440
+#: ../browser/licence/templates/licencetabsmacros.pt:437
 msgid "folder_advice"
 msgstr "Avis du dossier"
 
@@ -1363,8 +1363,11 @@ msgstr "du"
 msgid "inquiry_item"
 msgstr "Point"
 
+msgid "inquiry_suspension_folder_title"
+msgstr "Périodes de suspension d'enquête"
+
 #. Default: "Inquiry ${number}"
-#: ../browser/licence/templates/licencetabsmacros.pt:310
+#: ../browser/licence/templates/licencetabsmacros.pt:307
 msgid "inquiry_title_and_number"
 msgstr "Enquête n°${number}"
 
@@ -1501,7 +1504,7 @@ msgstr "Retard (jours)"
 msgid "label_colname_transmitDate"
 msgstr "Date d'envoi"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:326
+#: ../browser/licence/templates/licencetabsmacros.pt:323
 msgid "label_edit"
 msgstr "Modifier"
 
@@ -1522,7 +1525,7 @@ msgstr "Non"
 msgid "label_ok"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:335
+#: ../browser/licence/templates/licencetabsmacros.pt:332
 msgid "label_remove"
 msgstr "Supprimer"
 
@@ -2126,7 +2129,7 @@ msgid "urban_descr_usedAttributes"
 msgstr "Sélectionner les champs optionnels à utiliser. Utiliser la touche CTRL pour une sélection multiple ou pour désélectionner"
 
 #. Default: "Key dates"
-#: ../browser/licence/templates/licencetabsmacros.pt:64
+#: ../browser/licence/templates/licencetabsmacros.pt:65
 msgid "urban_description_key_dates_legend"
 msgstr "Dates clés"
 
@@ -2193,7 +2196,7 @@ msgid "urban_help_townshipCouncilFolder"
 msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
 
 #. Default: "from ${number}"
-#: ../browser/licence/templates/licencetabsmacros.pt:93
+#: ../browser/licence/templates/licencetabsmacros.pt:94
 msgid "urban_investigationStart"
 msgstr "Enquête publique n°${number} du"
 
@@ -2428,7 +2431,7 @@ msgid "urban_label_article"
 msgstr "Article"
 
 #. Default: "Asking Date"
-#: ../browser/licence/templates/licencetabsmacros.pt:246
+#: ../browser/licence/templates/licencetabsmacros.pt:243
 msgid "urban_label_askingDate"
 msgstr "Date de demande"
 
@@ -2844,7 +2847,7 @@ msgid "urban_label_expropriationDetails"
 msgstr "Détails concernant le plan d'expropriation"
 
 #. Default: "Advice"
-#: ../browser/licence/templates/licencetabsmacros.pt:248
+#: ../browser/licence/templates/licencetabsmacros.pt:245
 msgid "urban_label_externalDecision"
 msgstr " Avis"
 
@@ -3026,7 +3029,7 @@ msgid "urban_label_investigationDetails"
 msgstr "Observations"
 
 #. Default: "to"
-#: ../browser/licence/templates/licencetabsmacros.pt:104
+#: ../browser/licence/templates/licencetabsmacros.pt:105
 msgid "urban_label_investigationEnd"
 msgstr "au"
 
@@ -3631,7 +3634,7 @@ msgid "urban_label_rcuDetails"
 msgstr "Détails concernant le RCU"
 
 #. Default: "Receipt date"
-#: ../browser/licence/templates/licencetabsmacros.pt:247
+#: ../browser/licence/templates/licencetabsmacros.pt:244
 msgid "urban_label_receiptDate"
 msgstr "Date de réception"
 
@@ -3725,7 +3728,7 @@ msgid "urban_label_representedBySociety"
 msgstr "Représenté par la société"
 
 #. Default: "Organisation"
-#: ../browser/licence/templates/licencetabsmacros.pt:245
+#: ../browser/licence/templates/licencetabsmacros.pt:242
 msgid "urban_label_requestedOrganisation"
 msgstr "Organisme"
 
@@ -3900,7 +3903,7 @@ msgid "urban_label_solicitLocationOpinionsTo"
 msgstr "Un avis sera solicité par l'urbanisme à"
 
 #. Default: "Solicit opinion to"
-#: ../browser/licence/templates/licencetabsmacros.pt:225
+#: ../browser/licence/templates/licencetabsmacros.pt:222
 msgid "urban_label_solicitOpinionsTo"
 msgstr "Avis sollicité(s) obligatoire(s)"
 
@@ -4005,6 +4008,9 @@ msgstr "Détails sur le lotissement"
 msgid "urban_label_subjects"
 msgstr "Rubriques"
 
+msgid "urban_label_suspension"
+msgstr "Suspension"
+
 msgid "urban_label_suspensionEndDate"
 msgstr "Date de fin de suspension"
 
@@ -4012,6 +4018,9 @@ msgstr "Date de fin de suspension"
 #: UrbanCertificateBase.py
 msgid "urban_label_suspensionReason"
 msgstr "Raison de la suspension"
+
+msgid "urban_label_suspension_period"
+msgstr "Période de suspension"
 
 #. Default: "Tabsconfig"
 #: LicenceConfig.py
@@ -4227,7 +4236,7 @@ msgid "urban_label_zipcode"
 msgstr "Code Postal"
 
 #. Default: "Click here to access the linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:357
+#: ../browser/licence/templates/licencetabsmacros.pt:354
 msgid "urban_link_to_the_linked_urbaneventinquiry"
 msgstr "Cliquez ici pour accéder à l'événement lié"
 
@@ -4235,7 +4244,7 @@ msgid "urban_linked_inquiry_help"
 msgstr "Vous retrouvez ici les informations concernant l'enquête.  Si vous souhaitez modifier ces informations, cliquez sur le lien de l'enquête liée ci-dessous."
 
 #. Default: "Linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:353
+#: ../browser/licence/templates/licencetabsmacros.pt:350
 msgid "urban_linked_urbaneventinquiry"
 msgstr "Événement lié"
 
@@ -4245,7 +4254,7 @@ msgid "urban_no_event_added"
 msgstr "Aucun élément n'a encore été ajouté"
 
 #. Default: "No event type is defined in the configuration for this element"
-#: ../browser/licence/templates/licencetabsmacros.pt:423
+#: ../browser/licence/templates/licencetabsmacros.pt:420
 msgid "urban_no_eventtype_defined"
 msgstr "Aucun type d'événement n'est défini dans la configuration pour cet élément"
 

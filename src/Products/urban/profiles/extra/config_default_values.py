@@ -1507,6 +1507,12 @@ default_values = {
             {'id': "zone-devel-b", 'title': u"Zone B au plan de Développement à Long Terme"},
         ],
 
+        'inquiry_suspension': [
+            'UrbanVocabularyTerm',
+            {'id': "summer", 'title': u"du 16 juillet au 15 août"},
+            {'id': "winter", 'title': u"du 24 décembre au 31 décembre"},
+        ],
+
         'persons_titles': [
             'PersonTitleTerm',
             {'id': "notitle", 'title': u"", 'extraValue': "Madame, Monsieur", 'abbreviation': "", 'gender': "male",
