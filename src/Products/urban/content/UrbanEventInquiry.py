@@ -25,9 +25,18 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from OFS.ObjectManager import BeforeDeleteException
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from plone import api
+
+suspension_slave_fields = (
+    {
+        'name': 'suspension_period',
+        'action': 'show',
+        'hide_values': (True,),
+    },
+)
 ##/code-section module-header
 
 schema = Schema((
@@ -121,6 +130,34 @@ schema = Schema((
         ),
         optional=True,
     ),
+    BooleanField(
+        name='suspension',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=suspension_slave_fields,
+            label='Suspension',
+            label_msgid='urban_label_suspension',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
+    StringField(
+        name='suspension_period',
+        widget=SelectionWidget(
+            format='select',
+            label='Suspension_period',
+            label_msgid='urban_label_suspension_period',
+            i18n_domain='urban',
+        ),
+        optional=True,
+        vocabulary=UrbanVocabulary(
+            'inquiry_suspension',
+            vocType="UrbanVocabularyTerm",
+            inUrbanConfig=False,
+            with_empty_value=True
+        ),
+        default_method='getDefaultValue',
+    ),
     ReferenceField(
         name='linkedInquiry',
         widget=ReferenceBrowserWidget(
@@ -148,6 +185,7 @@ UrbanEventInquiry_schema['eventDate'].widget.visible['edit'] = 'invisible'
 UrbanEventInquiry_schema['eventDate'].widget.visible['view'] = 'invisible'
 ##/code-section after-schema
 
+
 class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
     """
     """
@@ -167,6 +205,7 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
     # Manually created methods
 
     security.declarePrivate('manage_beforeDelete')
+
     def manage_beforeDelete(self, item, container):
         """
           We can only remove the last UrbanEventInquiry to avoid mismatch between
@@ -193,6 +232,7 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
         return brains
 
     security.declarePublic('getClaimants')
+
     def getClaimants(self):
         """
           Return the claimants for this UrbanEventInquiry
@@ -200,6 +240,7 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
         return self.listFolderContents({'portal_type': 'Claimant'})
 
     security.declarePublic('getParcels')
+
     def getParcels(self, onlyActive=False):
         """
           Returns the contained parcels
@@ -225,6 +266,7 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
         return parcels
 
     security.declarePublic('getAbbreviatedArticles')
+
     def getAbbreviatedArticles(self):
         """
           As we have a short version of the article in the title, if we need just
@@ -238,7 +280,3 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
 
 registerType(UrbanEventInquiry, PROJECTNAME)
 # end of class UrbanEventInquiry
-
-##code-section module-footer #fill in your manual code here
-##/code-section module-footer
-

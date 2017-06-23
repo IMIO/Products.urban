@@ -962,6 +962,9 @@ msgstr ""
 msgid "persons_titles_folder_title"
 msgstr ""
 
+msgid "inquiry_suspension_folder_title"
+msgstr ""
+
 msgid "karst_constraints_folder_title"
 msgstr ""
 
@@ -1333,6 +1336,12 @@ msgstr ""
 #. Default: "Ssc"
 #: GenericLicence.py
 msgid "urban_label_SSC"
+msgstr ""
+
+msgid "urban_label_suspension"
+msgstr ""
+
+msgid "urban_label_suspension_period"
 msgstr ""
 
 #. Default: "Talcondition"
