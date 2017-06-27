@@ -75,6 +75,7 @@ setup(name='Products.urban',
           'zope.app.container',
           'zope.sqlalchemy',
           'urban.vocabulary',
+          'python-dateutil',
       ],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',
