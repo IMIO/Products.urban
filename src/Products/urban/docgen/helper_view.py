@@ -3,6 +3,7 @@
 from collective.documentgenerator.helper.archetypes import ATDisplayProxyObject
 from collective.documentgenerator.helper.archetypes import ATDocumentGenerationHelperView
 from datetime import date as _date
+from dateutil.relativedelta import relativedelta
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
@@ -430,7 +431,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         work_location_dict.update({'number': workLocation['number']})
         return work_location_dict
 
-
     def getEvent(self, title=''):
         """
           Return a specific title's UrbanEvent
@@ -448,6 +448,11 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                 event = events[i]
             i = i + 1
         return event
+
+    def getExpirationDate(self, date=_date.today(), year=5):
+        import ipdb; ipdb.set_trace()
+        expirationDate = _date(date.year(), date.month(), date.day())
+        return self.format_date(expirationDate + relativedelta(years=year))
 
 
 class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
@@ -480,7 +485,6 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
 class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
     """
     """
-    pass
 
 
 class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
@@ -710,6 +714,9 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
 
 # Agent(s) traitant(s)
 #------------------------------------------------------------------------------
+    def get_current_foldermanager(self):
+        return getCurrentFolderManager()
+
     def get_foldermanager_dict(self, index):
         """
         """
