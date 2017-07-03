@@ -120,7 +120,7 @@ def createStreet(city, zipcode, streetcode, streetname, bestAddresskey=0, startd
         while hasattr(aq_base(cityObj), streetTest):
             i += 1
             if not disable:  # no need to warn for an historical record: normal case
-                out.append("info: Found existing id '%s' in entity '%s'" % (streetTest, cityObj.Title()))
+                out.append("info: Found existing id '%s' in entity '%s'" % (streetTest, cityObj.Title().decode('utf-8')))
             streetTest = streetId + str(i)
         streetId = streetTest
         try:
