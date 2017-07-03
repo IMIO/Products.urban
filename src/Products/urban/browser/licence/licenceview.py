@@ -109,7 +109,8 @@ class LicenceView(BrowserView):
         attachments = catalog(queryString)
         if not attachments:
             return ''
-        table = AttachmentsTable(attachments, self.request)
+        attachment_objects = [b.getObject() for b in attachments]
+        table = AttachmentsTable(attachment_objects, self.request)
         return self.renderListing(table)
 
     def renderNestedAttachmentsListing(self):
