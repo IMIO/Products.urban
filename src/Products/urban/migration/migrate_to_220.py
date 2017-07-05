@@ -165,6 +165,7 @@ def migrate_collection_all_licences_add_codt_licence():
 def activate_faceted_navigation_on_licence():
     """
     """
+    logger = logging.getLogger('urban: activate faceted navigation on licence')
     catalog = api.portal.get_tool('portal_catalog')
     licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
 
@@ -178,6 +179,7 @@ def activate_faceted_navigation_on_licence():
             subtyper.enable()
             IFacetedLayout(licence).update_layout('list_tasks')
             licence.manage_delProperties(['layout'])
+    logger.info("migration step done!")
 
 
 def migrate(context):
