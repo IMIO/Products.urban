@@ -59,6 +59,10 @@
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".licenceEvents.reindex_attachments_permissions" />
 
+  <subscriber for="..interfaces.IGenericLicence
+                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+              handler=".licenceEvents.set_faceted_navigation" />
+
   <subscriber for="..interfaces.IUrbanEvent
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".licenceEvents.reindex_attachments_permissions" />

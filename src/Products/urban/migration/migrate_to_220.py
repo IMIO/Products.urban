@@ -1,5 +1,9 @@
 # encoding: utf-8
 
+from eea.facetednavigation.interfaces import IFacetedNavigable
+from eea.facetednavigation.layout.interfaces import IFacetedLayout
+from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
+
 from plone import api
 from plone.portlets.constants import CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_TYPE_CATEGORY
 from plone.portlets.interfaces import IPortletManager
@@ -156,6 +160,24 @@ def migrate_collection_all_licences_add_codt_licence():
         containerCollection.query[0]['v'].append('CODT_BuildLicence')
         containerCollection.setQuery(containerCollection.query)
     logger.info("migration step done!")
+
+
+def activate_faceted_navigation_on_licence():
+    """
+    """
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+
+    for licence_brain in licence_brains:
+        licence = licence_brain.getObject()
+
+        if IFacetedNavigable.providedBy(licence):
+            return
+        elif IPossibleFacetedNavigable.providedBy(licence):
+            subtyper = licence.unrestrictedTraverse('@@faceted_subtyper')
+            subtyper.enable()
+            IFacetedLayout(licence).update_layout('list_tasks')
+            licence.manage_delProperties(['layout'])
 
 
 def migrate(context):
