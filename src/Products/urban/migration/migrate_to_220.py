@@ -181,7 +181,7 @@ def activate_faceted_navigation_on_licence():
 
 
 def migrate(context):
-    logger = logging.getLogger('urban: migrate to 2.1')
+    logger = logging.getLogger('urban: migrate to 2.2')
     logger.info("starting migration steps")
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-imio.schedule:default')
@@ -194,4 +194,5 @@ def migrate(context):
     migrate_python_expression_of_specificfeatures()
     migrate_map_layers()
     migrate_collection_all_licences_add_codt_licence()
+    activate_faceted_navigation_on_licence()
     logger.info("migration done!")
