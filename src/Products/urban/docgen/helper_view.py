@@ -409,7 +409,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         return event
 
     def getExpirationDate(self, date=_date.today(), year=5):
-        import ipdb; ipdb.set_trace()
         expirationDate = _date(date.year(), date.month(), date.day())
         return self.format_date(expirationDate + relativedelta(years=year))
 
@@ -847,7 +846,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         if applicants:
             applicants_names = self._get_contact(applicants[0], reversed_name=reversed_name)
             for applicant in applicants[1:]:
-                applicants_names += separator + self._get_contact(applicant, reversed_name)
+                applicants_names += separator + self._get_contact(applicant, reversed_name=reversed_name)
         return applicants_names
 
 class EventDisplayProxyObject(ATDisplayProxyObject):
