@@ -19,6 +19,7 @@ def setDefaultValuesEvent(licence, event):
         _setDefaultFolderManagers(licence)
         _setDefaultSelectValues(licence)
         _setDefaultTextValues(licence)
+        _setDefaultReference(licence)
 
 
 def _setDefaultSelectValues(licence):
@@ -40,6 +41,10 @@ def _setDefaultTextValues(licence):
 
 def _setDefaultFolderManagers(licence):
     licence.setFoldermanagers(getCurrentFolderManager())
+
+
+def _setDefaultReference(licence):
+    licence.setReference(licence.getDefaultReference())
 
 
 def postCreationActions(licence, event):
