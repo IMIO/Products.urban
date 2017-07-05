@@ -42,7 +42,7 @@ msgid "urban.schedule.condition.complements_received"
 msgstr "Créer l'événement 'récépissé d'un complément' et le clôturer"
 
 msgid "urban.schedule.condition.decision_notified"
-msgstr ""
+msgstr "Créer l'événement d'octroi/notification et le clôturer"
 
 msgid "urban.schedule.condition.default_acknowledgement"
 msgstr "Le dossier est recevable par défaut"
