@@ -88,7 +88,7 @@ full_inquiry_slave_fields = (
     {
         'name': 'investigationReasons',
         'action': 'hide',
-        'hide_values': ('none', 'announcement',),
+        'hide_values': ('none',),
     },
 )
 ##/code-section module-header
