@@ -133,7 +133,6 @@ schema = Schema((
             label_msgid='urban_label_reference',
             i18n_domain='urban',
         ),
-        default_method="getDefaultReference",
         schemata='urban_description',
         validators=('isNotDuplicatedReference',),
     ),
