@@ -54,7 +54,7 @@ class AcknowledgmentDate(StartDate):
     def start_date(self):
         licence = self.task_container
         ack = licence.getLastAcknowledgment(use_catalog=False)
-        ack_date = ack and ack.getEventDate() or None
+        ack_date = ack and (ack.getTransmitDate() or ack.getEventDate() or None)
         return ack_date
 
 
