@@ -6,6 +6,8 @@ from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
 
+from collective.faceted.task.events.task_events import activate_faceted_tasks_listing
+
 from zope.interface import alsoProvides
 
 
@@ -112,3 +114,10 @@ def reindex_attachments_permissions(container, event):
     if IUrbanEvent.providedBy(container):
         licence = container.aq_parent
         reindex_attachments_permissions(licence, event)
+
+
+def set_faceted_navigation(licence, event):
+    """
+    Activate faceted navigation licences.
+    """
+    activate_faceted_tasks_listing(licence, event)
