@@ -166,6 +166,7 @@ def activate_faceted_navigation_on_licence():
     """
     """
     logger = logging.getLogger('urban: activate faceted navigation on licence')
+    logger.info("starting migration step")
     catalog = api.portal.get_tool('portal_catalog')
     licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
 
