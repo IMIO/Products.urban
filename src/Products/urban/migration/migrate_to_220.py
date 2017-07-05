@@ -157,8 +157,29 @@ def migrate_collection_all_licences_add_codt_licence():
     logger.info("migration step done!")
 
 
+def activate_faceted_navigation_on_licence():
+    """
+    """
+    logger = logging.getLogger('urban: activate faceted navigation on licence')
+    logger.info("starting migration step")
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+
+    for licence_brain in licence_brains:
+        licence = licence_brain.getObject()
+
+        if IFacetedNavigable.providedBy(licence):
+            return
+        elif IPossibleFacetedNavigable.providedBy(licence):
+            subtyper = licence.unrestrictedTraverse('@@faceted_subtyper')
+            subtyper.enable()
+            IFacetedLayout(licence).update_layout('list_tasks')
+            licence.manage_delProperties(['layout'])
+    logger.info("migration step done!")
+
+
 def migrate(context):
-    logger = logging.getLogger('urban: migrate to 2.1')
+    logger = logging.getLogger('urban: migrate to 2.2')
     logger.info("starting migration steps")
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-imio.schedule:default')
@@ -171,4 +192,5 @@ def migrate(context):
     migrate_python_expression_of_specificfeatures()
     migrate_map_layers()
     migrate_collection_all_licences_add_codt_licence()
+    activate_faceted_navigation_on_licence()
     logger.info("migration done!")
