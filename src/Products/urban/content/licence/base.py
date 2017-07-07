@@ -20,6 +20,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import DisplayList
 
 from Products.urban.interfaces import IWorklocationSignaletic
+from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import getCurrentFolderManager as currentFolderManager
 from Products.urban.utils import removeItems
 from plone import api
@@ -503,7 +504,7 @@ class UrbanBase(object):
             isFirst = False
         return toreturn
 
-    def _getAllEvents(self,  eventInterface=None, use_catalog=True):
+    def _getAllEvents(self,  eventInterface=IUrbanEvent, use_catalog=True):
         if use_catalog:
             return self._getAllEventsByCatalog(eventInterface)
         else:
