@@ -504,7 +504,7 @@ class UrbanBase(object):
             isFirst = False
         return toreturn
 
-    def _getAllEvents(self,  eventInterface=IUrbanEvent, use_catalog=True):
+    def _getAllEvents(self, eventInterface=IUrbanEvent, use_catalog=True):
         if use_catalog:
             return self._getAllEventsByCatalog(eventInterface)
         else:
