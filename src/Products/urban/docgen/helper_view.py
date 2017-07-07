@@ -437,10 +437,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         """
         i = 0
         found = False
-        opinionRequestsUrbanEvents = self.context.getUrbanEventOpinionRequests()
-        inquiryUrbanEvents = self.context.getUrbanEventInquiries()
-        urbanEvents = self.context.getUrbanEvents()
-        events = opinionRequestsUrbanEvents + inquiryUrbanEvents + urbanEvents
+        events = self.context._getAllEvents(use_catalog=False)
         event = None
         while i < len(events) and not found:
             if events[i].Title() == title:
