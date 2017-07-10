@@ -61,6 +61,7 @@ schema = Schema((
         enforceVocabulary=True,
         optional=True,
         vocabulary=UrbanVocabulary('deposittype', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     DateTimeField(
         name='transmitDate',
@@ -141,6 +142,7 @@ schema = Schema((
         enforceVocabulary=True,
         optional=True,
         vocabulary=UrbanVocabulary('decisions', inUrbanConfig=True),
+        default_method='getDefaultValue',
     ),
     TextField(
         name='decisionText',
@@ -177,6 +179,7 @@ schema = Schema((
         enforceVocabulary=True,
         optional=True,
         vocabulary=UrbanVocabulary('recoursedecisions', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     StringField(
         name='adviceAgreementLevel',
@@ -209,6 +212,7 @@ schema = Schema((
         enforceVocabulary=True,
         optional=True,
         vocabulary=UrbanVocabulary('externaldecisions', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     TextField(
         name='opinionText',
@@ -370,6 +374,7 @@ schema = Schema((
         enforceVocabulary=True,
         optional=True,
         vocabulary=UrbanVocabulary('delegatesignatures', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     StringField(
         name='bank_account',

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.browser.default_text import DefaultTextRenderer
+from Products.urban.events.licenceEvents import _setDefaultSelectValues
 from Products.urban.interfaces import IEventTypeType
 from Products.urban.interfaces import ITheLicenceEvent
 
@@ -17,6 +18,7 @@ def setDefaultValuesEvent(urbanevent, event):
      set default values on urban event fields
     """
     _setDefaultTextValues(urbanevent)
+    _setDefaultSelectValues(urbanevent)
 
 
 def _setDefaultTextValues(urbanevent):
@@ -50,6 +52,7 @@ def setEventTypeType(urban_event, event):
                 to_explore.add(base_interface)
 
     urban_event.reindexObject(['object_provides'])
+
 
 def setCreationDate(urban_event, event):
     urban_event.setCreationDate(urban_event.getEventDate())
