@@ -33,7 +33,7 @@ from Products.urban.interfaces import IUrbanDoc
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
 
-fromplone import api
+from plone import api
 
 from zope.i18n import translate
 ##/code-section module-header
