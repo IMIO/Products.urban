@@ -361,6 +361,8 @@ default_values = {
         'externaldecisions': [
             'UrbanVocabularyTerm',
             {'id': "favorable", 'title': u"Favorable"},
+            {'id': "favorable-conditionnel", 'title': u"Favorable conditionnel"},
+            {'id': "defavorable", 'title': u"Défavorable"},
         ],
 
         'exploitationconditions': [

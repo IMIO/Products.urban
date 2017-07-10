@@ -4,8 +4,9 @@ from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.CMFCore.utils import getToolByName
 from Products.urban.config import URBAN_TYPES
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.content import UrbanEventInquiry
+from Products.urban.interfaces import IUrbanEvent
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from zope.event import notify
 from Products.Archetypes.event import EditBegunEvent
 
@@ -135,9 +136,53 @@ class TestEventDefaultValues(unittest.TestCase):
         login(portal, 'urbanmanager')
         #create a licence
         buildlicences = portal.urban.buildlicences
-        buildlicences.invokeFactory('BuildLicence', id='newlicence', title='blabla')
+        buildlicences.invokeFactory(
+            'BuildLicence',
+            id='newlicence',
+            title='blabla',
+            solicitOpinionsTo=['sncb']
+        )
         buildlicence = buildlicences.newlicence
         self.licence = buildlicence
+
+    def testNoDefaultValuesConfigured(self):
+        #create a new buildlicence
+        event = self.licence.createUrbanEvent('sncb')
+        #any configurable selection field should be empty by default
+        self.assertFalse(event.getAdviceAgreementLevel())
+        self.assertFalse(event.getExternalDecision())
+
+    def testSingleSelectionFieldWithOneDefaultValue(self):
+        #configure a default value for the field 'externalDecision'
+        vocabulary_term = self.portal_urban.externaldecisions.objectValues()[0]
+        vocabulary_term.setIsDefaultValue(True)
+        #create a new urban event
+        event = self.licence.createUrbanEvent('sncb')
+        #the value of folderCategory should be the one marked as default value
+        self.assertEqual([vocabulary_term.id], event.getExternalDecision())
+
+    def testSingleSelectionFieldWithMultipleDefaultValues(self):
+        #configure a default value for the field 'externalDecision'
+        vocabulary_term_1 = self.portal_urban.externaldecisions.objectValues()[0]
+        vocabulary_term_1.setIsDefaultValue(True)
+        vocabulary_term_2 = self.portal_urban.externaldecisions.objectValues()[2]
+        vocabulary_term_2.setIsDefaultValue(True)
+        #create a new urban event
+        event = self.licence.createUrbanEvent('sncb')
+        #the value of folderCategory should be the one marked as default value
+        self.assertEqual([vocabulary_term_2.id, vocabulary_term_1.id], event.getExternalDecision())
+
+    def testDefaultValueMethodIsDefinedForEachConfigurableListing(self):
+        #each field with a configurable listing (<=> has a UrbanVocabulary defined as its vocabulary) should
+        #have the 'getDefaultValue' method defined on it, else the default value system wont work
+        event = self.licence.createUrbanEvent('sncb')
+        site = self.site
+        catalog = getToolByName(site, 'portal_catalog')
+        test_events = [brain.getObject() for brain in catalog(object_provides=IUrbanEvent.__identifier__)]
+        for event in test_events:
+            for field in event.schema.fields():
+                if isinstance(field.vocabulary, UrbanVocabulary) and field.type != 'datagrid':
+                    self.assertEquals(field.default_method, 'getDefaultValue')
 
     def testNoTextDefaultValuesConfigured(self):
         #create a new event 'rappor du college'

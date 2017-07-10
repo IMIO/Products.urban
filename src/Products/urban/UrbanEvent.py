@@ -33,6 +33,8 @@ from Products.urban.interfaces import IUrbanDoc
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
 
+from plone import api
+
 from zope.i18n import translate
 ##/code-section module-header
 
@@ -61,6 +63,7 @@ schema = Schema((
         enforceVocabulary=True,
         optional=True,
         vocabulary=UrbanVocabulary('deposittype', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     DateTimeField(
         name='transmitDate',
@@ -141,6 +144,7 @@ schema = Schema((
         enforceVocabulary=True,
         optional=True,
         vocabulary=UrbanVocabulary('decisions', inUrbanConfig=True),
+        default_method='getDefaultValue',
     ),
     TextField(
         name='decisionText',
@@ -177,6 +181,7 @@ schema = Schema((
         enforceVocabulary=True,
         optional=True,
         vocabulary=UrbanVocabulary('recoursedecisions', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     StringField(
         name='adviceAgreementLevel',
@@ -209,6 +214,7 @@ schema = Schema((
         enforceVocabulary=True,
         optional=True,
         vocabulary=UrbanVocabulary('externaldecisions', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     TextField(
         name='opinionText',
@@ -370,6 +376,7 @@ schema = Schema((
         enforceVocabulary=True,
         optional=True,
         vocabulary=UrbanVocabulary('delegatesignatures', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     StringField(
         name='bank_account',
@@ -450,7 +457,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         return default_value
 
     security.declarePublic('getDefaultText')
-
     def getDefaultText(self, context=None, field=None, html=False):
         if not context or not field:
             return ""
@@ -616,7 +622,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
           Generates a fake CSV file used in POD templates
         """
         recipients=self.objectValues('RecipientCadastre')
-        toreturn='[CSV]TitreNomPrenom|AdresseLigne1|AdresseLigne2'
+        toreturn='<CSV>TitreNomPrenom|AdresseLigne1|AdresseLigne2'
         wft = getToolByName(self, 'portal_workflow')
         for recipient in recipients:
             #do not take "disabled" recipients into account
@@ -625,7 +631,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             street = recipient.getStreet() and recipient.getStreet() or ''
             address = recipient.getAdr1() and recipient.getAdr1() or ''
             toreturn=toreturn+'%'+recipient.getName()+'|'+street+'|'+address
-        toreturn=toreturn+'[/CSV]'
+        toreturn=toreturn+'</CSV>'
         return toreturn
 
     security.declarePublic('getFormattedDate')
