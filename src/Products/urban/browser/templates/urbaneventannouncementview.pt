@@ -113,13 +113,13 @@
                                        </fieldset>
                                        <fieldset>
                                             <legend i18n:translate="event_linked_documents">Event linked documents</legend>
-                                            <div style="float:right;margin-top:10px" class="clear">
+                                            <div style="margin-top:10px" class="clear">
                                                 <tal:listing content="structure view/renderGeneratedDocumentsListing" />
                                             </div>
                                        </fieldset>
                                        <fieldset>
                                             <legend i18n:translate="event_linked_attachments">Event linked attachments</legend>
-                                            <div style="float:right;margin-top:10px" class="clear">
+                                            <div style="margin-top:10px" class="clear">
                                                 <tal:listing content="structure view/renderAttachmentsListing" />
                                                 <metal:listing use-macro="context/@@urbanevent-macros/urbanEventAddAttachmentMacro" />
                                             </div>
