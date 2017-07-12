@@ -688,7 +688,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             },
             reversed_name=True,
         ):
-        applicants = self.get_applicants_list_dict()
+        applicants = self.getApplicants()
         applicants_names_and_address = ""
         if applicants:
             applicants_names_and_address = self._get_applicant_names_and_address(
