@@ -57,8 +57,7 @@
 </fieldset>
 
 <fieldset metal:define-macro="urbanEventGenerateDocumentMacro" i18n:domain="urban"
-          tal:define="templates_list view/getListOfTemplatesToGenerate;
-          mayAddUrbanEvent view/mayAddUrbanEvent">
+        tal:define="templates_list view/getListOfTemplatesToGenerate">
     <legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend>
     <tal:templates_link condition="python: templates_list">
         <table class="clear">
