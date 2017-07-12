@@ -79,77 +79,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             return "%s %s %s" % (translatedDay, translatedMonth, year)
         return ''
 
-# Demandeur(s)
-#------------------------------------------------------------------------------
-
-    def _get_applicant_names_and_address(self, applicant, resident, represented, reversed_name, representedBy_separator):
-        applicant_names_and_address = self._get_contact_names_and_address(applicant, resident, reversed_name)
-        if applicant['representedBySociety']:
-            gender_multiplicity = applicant['gender'] + '-' + applicant['multiplicity']
-            applicant_names_and_address += represented[gender_multiplicity] +\
-                    self._get_representedBy_names_and_address(applicant, resident, reversed_name, representedBy_separator)
-        return applicant_names_and_address
-
-    def get_applicants_list_dict(self):
-        context = self.real_context
-        applicants = context.getApplicants()
-        applicants_list_dict = []
-        for i in range(len(applicants)):
-            applicants_list_dict.append(self.get_applicant_dict(i))
-        return applicants_list_dict
-
-    def get_applicant_dict(self, index):
-        context = self.real_context
-        applicant = context.getApplicants()[index]
-        applicant_dict = self._get_contact_dict(applicant)
-        applicant_dict['representedBySociety'] = applicant.getRepresentedBySociety()
-        applicant_dict['isSameAddressAsWorks'] = applicant.getIsSameAddressAsWorks()
-        applicant_dict['representedBy'] = applicant.getRepresentedBy()
-        return applicant_dict
-
-    def _get_representedBy_names_and_address(self, applicant, resident, reversed_name, representedBy_separator):
-        representedBy_list = self._get_representedBy_list(applicant)
-        representedBy_names_and_address = ""
-        if representedBy_list:
-            representedBy_names_and_address = self._get_contact_names_and_address(
-                    representedBy_list[0],
-                    resident,
-                    reversed_name
-            )
-            for representedBy in representedBy_list[1:]:
-                representedBy_names_and_address += representedBy_separator + self._get_contact_names_and_address(
-                        representedBy,
-                        resident,
-                        reversed_name
-                )
-        return representedBy_names_and_address
-
-    def _get_representedBy_list(self, applicant):
-        representedBy_UIDs = applicant['representedBy']
-        representedBy_list = []
-        for representedBy_UID in representedBy_UIDs:
-            catalog = self.portal.portal_catalog
-            brains = catalog.searchResults(UID=representedBy_UID)
-            representedBy = brains[0].getObject()
-            contact_dict = self._get_contact_dict(representedBy)
-            representedBy_list.append(contact_dict)
-        return representedBy_list
-
-    def get_applicants_names(self, separator=', ', reversed_name=True):
-        applicants = self.get_applicants_list_dict()
-        applicants_names = ""
-        if applicants:
-            applicants_names = self._get_applicant_names(applicants[0], reversed_name)
-            for applicant in applicants[1:]:
-                applicants_names += separator + self._get_applicant_names(applicant, reversed_name)
-        return applicants_names
-
-    def _get_applicant_names(self, applicant, reversed_name=True):
-        applicant_names = applicant['personTitle'] + ' ' + applicant['name2'] + ' ' + applicant['name1']
-        if reversed_name:
-            applicant_names = applicant['personTitle'] + ' ' + applicant['name1'] + ' ' + applicant['name2']
-        return applicant_names
-
     def get_checked_specific_features_id_list(self):
         """
         # Particularité(s) du bien
@@ -784,7 +713,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         return applicants_names_and_address
 
     def _get_applicant_names_and_address(self, applicant, resident, represented, reversed_name, representedBy_separator):
-        applicant_names_and_address = self._get_contact_names_and_address(applicant, resident, reversed_name)
+        applicant_names_and_address = self._get_contacts(applicant, resident, reversed_name)
         if applicant['representedBySociety']:
             gender_multiplicity = applicant['gender'] + '-' + applicant['multiplicity']
             applicant_names_and_address += represented[gender_multiplicity] +\
@@ -812,13 +741,13 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         representedBy_list = self._get_representedBy_list(applicant)
         representedBy_names_and_address = ""
         if representedBy_list:
-            representedBy_names_and_address = self._get_contact_names_and_address(
+            representedBy_names_and_address = self._get_contacts(
                     representedBy_list[0],
                     resident,
                     reversed_name
             )
             for representedBy in representedBy_list[1:]:
-                representedBy_names_and_address += representedBy_separator + self._get_contact_names_and_address(
+                representedBy_names_and_address += representedBy_separator + self._get_contacts(
                         representedBy,
                         resident,
                         reversed_name
