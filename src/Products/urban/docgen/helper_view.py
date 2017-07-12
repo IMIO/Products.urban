@@ -713,7 +713,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         return applicants_names_and_address
 
     def _get_applicant_names_and_address(self, applicant, resident, represented, reversed_name, representedBy_separator):
-        applicant_names_and_address = self._get_contacts(applicant, resident, reversed_name)
+        applicant_names_and_address = self._get_contact(applicant, resident, reversed_name)
         if applicant['representedBySociety']:
             gender_multiplicity = applicant['gender'] + '-' + applicant['multiplicity']
             applicant_names_and_address += represented[gender_multiplicity] +\
@@ -741,13 +741,13 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         representedBy_list = self._get_representedBy_list(applicant)
         representedBy_names_and_address = ""
         if representedBy_list:
-            representedBy_names_and_address = self._get_contacts(
+            representedBy_names_and_address = self._get_contact(
                     representedBy_list[0],
                     resident,
                     reversed_name
             )
             for representedBy in representedBy_list[1:]:
-                representedBy_names_and_address += representedBy_separator + self._get_contacts(
+                representedBy_names_and_address += representedBy_separator + self._get_contact(
                         representedBy,
                         resident,
                         reversed_name
