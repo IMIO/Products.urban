@@ -185,6 +185,22 @@
         name="urban.schedule.condition.fd_decision_received"
     />
 
+    <adapter
+        for="Products.urban.interfaces.ICODT_Article127
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.FDDecisionEventCreatedCondition"
+        name="urban.schedule.condition.fd_decision_event_created"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_Article127
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.FDDecisionEventDoneCondition"
+        name="urban.schedule.condition.fd_decision_received"
+    />
+
     <!-- deposit date is past by x days -->
     <adapter
         for="Products.urban.interfaces.ICODT_BaseBuildLicence
