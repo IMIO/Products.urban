@@ -439,7 +439,10 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         """
         catalog = api.portal.get_tool("uid_catalog")
         street = catalog(UID=workLocation['street'])[0].getObject()
-        return "{} {}".format(workLocation['number'], street.Title())
+        number = workLocation['number']
+        zipCode = street.aq_parent.zipCode
+        locality = street.aq_parent.Title()
+        return "{} {}, {} {}".format(street, number, zipCode, locality)
 
     def get_work_locations_list_dict(self):
         """
