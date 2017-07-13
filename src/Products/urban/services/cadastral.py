@@ -298,15 +298,15 @@ class CadastreSession(SQLSession):
     def normalize_coordinates(self, subquery):
         """
         'subquery' should be a sqlalchemy subquery of this type:
-        FROM capa SELECT Extent(the_geom) as coordinates WHERE ...
+        FROM capa SELECT ST_Extent(the_geom) as coordinates WHERE ...
         """
-        Extent = func.Extent
+        ST_Extent = func.ST_Extent
         coordinates = subquery.c.coordinates
         query = self.session.query(
-            func.Xmin(Extent(coordinates)),
-            func.Ymin(Extent(coordinates)),
-            func.Xmax(Extent(coordinates)),
-            func.Ymax(Extent(coordinates)),
+            func.ST_Xmin(ST_Extent(coordinates)),
+            func.ST_Ymin(ST_Extent(coordinates)),
+            func.ST_Xmax(ST_Extent(coordinates)),
+            func.ST_Ymax(ST_Extent(coordinates)),
         )
         result = query.first()
 
@@ -317,7 +317,7 @@ class CadastreSession(SQLSession):
         Query wmc map coordinates.
         """
         query_geom = self.session.query(
-            func.Extent(self.tables.capa.the_geom).label('coordinates')
+            func.ST_Extent(self.tables.capa.the_geom).label('coordinates')
         )
         try:
             coordinates = self.normalize_coordinates(query_geom.subquery())
@@ -331,9 +331,9 @@ class CadastreSession(SQLSession):
         Query wmc coordinates of selected parcels.
         """
         capa = self.tables.capa
-        Extent = func.Extent
+        ST_Extent = func.ST_Extent
 
-        query_geom = self.session.query(Extent(capa.the_geom).label('coordinates'))
+        query_geom = self.session.query(ST_Extent(capa.the_geom).label('coordinates'))
         query_geom = query_geom.filter(capa.da == parcels[0].getDivisionCode())
 
         parcel_filters = []
