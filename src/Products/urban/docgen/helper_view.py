@@ -442,7 +442,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         number = workLocation['number']
         zipCode = street.aq_parent.zipCode
         locality = street.aq_parent.Title()
-        return "{} {}, {} {}".format(street, number, zipCode, locality)
+        return "{} {}, {} {}".format(street.getStreetName(), number, zipCode, locality)
 
     def get_work_locations_list_dict(self):
         """
