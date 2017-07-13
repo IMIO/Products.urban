@@ -770,9 +770,10 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         applicants = context.getApplicants()
         applicants_names = ""
         if applicants:
-            applicants_names = self._get_contact(applicants[0], reversed_name=reversed_name)
+            applicants_names = self._get_contact(applicants[0], reversed_name=reversed_name, withaddress=False)
             for applicant in applicants[1:]:
-                applicants_names += separator + self._get_contact(applicant, reversed_name=reversed_name)
+                applicants_names += separator + self._get_contact(applicant, reversed_name=reversed_name,
+                        withaddress=False)
         return applicants_names
 
 class EventDisplayProxyObject(ATDisplayProxyObject):
