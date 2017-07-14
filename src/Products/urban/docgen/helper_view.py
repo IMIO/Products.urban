@@ -342,6 +342,14 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         return self.format_date(expirationDate + relativedelta(years=year))
 
 
+    def getLimitDate(self):
+        context = self.real_context
+        annoncedDelay = context.getValueForTemplate('annoncedDelay', context, subfield='deadLineDelay')
+        firstDepositDate = context.getFirstDeposit().getEventDate()
+        limitDate = firstDepositDate + annoncedDelay
+        return limitDate
+
+
 class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
     def get_parcellings(self):
         """
