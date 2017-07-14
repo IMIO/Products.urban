@@ -1,0 +1,12 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="Products.urban">
+
+    <!-- Vocabulary of base searches for schedule faceted view -->
+    <utility
+        factory=".vocabulary.UsersFromGroupsVocabularyFactory"
+        name="urban.schedule_users"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+</configure>
