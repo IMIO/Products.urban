@@ -17,6 +17,9 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
     Urban implementation of document generation helper methods.
     """
 
+    def get_current_foldermanager(self):
+        return getCurrentFolderManager()
+
     def contains_road_equipment(self, road_equipment):
         roadEquipments = self.context.getRoadEquipments()
         answer = False
