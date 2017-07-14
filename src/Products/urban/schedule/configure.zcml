@@ -12,5 +12,6 @@
     <include file="marker_interfaces.zcml" />
     <include file="start_date.zcml" />
     <include file="task_completion.zcml" />
+    <include file="vocabulary.zcml" />
 
 </configure>
