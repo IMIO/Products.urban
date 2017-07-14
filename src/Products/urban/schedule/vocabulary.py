@@ -31,9 +31,15 @@ from Products.urban.interfaces import IUrbanCertificateOne
 from Products.urban.interfaces import IUrbanCertificateTwo
 from Products.urban.interfaces import IUrbanEventOpinionRequest
 
+from Products.urban import UrbanMessage
+
 from imio.schedule.content.vocabulary import ScheduledContentTypeVocabulary
 
-from Products.urban import UrbanMessage
+from plone import api
+
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
+
 
 URBAN_TYPES_INTERFACES = {
     'CODT_Article127': ICODT_Article127,
@@ -84,3 +90,43 @@ class UrbanScheduledTypeVocabulary(ScheduledContentTypeVocabulary):
 
     def get_message_factory(self):
         return UrbanMessage
+
+
+class UsersFromGroupsVocabularyFactory(object):
+    """
+    Vocabulary factory listing all the users of a group.
+    """
+
+    group_ids = ['urban_managers', 'urban_editors']  # to override
+    me_value = False  # set to True to add a value representing the current user
+
+    def __call__(self, context):
+        """
+        List users from a group as a vocabulary.
+        """
+        base_terms = []
+        me_id = ''
+        user_ids = set()
+        if self.me_value:
+            me = api.user.get_current()
+            me_id = me.id
+            base_terms.append(SimpleTerm(me_id, me_id, 'Moi'))
+            base_terms.append(SimpleTerm('to_assign', 'to_assign', 'À ASSIGNER'))
+
+        voc_terms = []
+        for group_id in self.group_ids:
+            group = api.group.get(group_id)
+
+            for user in api.user.get_users(group=group):
+                if user.id != me_id and user.id not in user_ids:
+                    user_ids.add(user.id)
+                    voc_terms.append(
+                        SimpleTerm(
+                            user.id,
+                            user.id,
+                            user.getProperty('fullname') or user.getUserName()
+                        )
+                    )
+
+        vocabulary = SimpleVocabulary(base_terms + sorted(voc_terms, key=lambda term: term.title))
+        return vocabulary
