@@ -112,9 +112,10 @@ def reindex_attachments_permissions(container, event):
     }
     catalog = api.portal.get_tool('portal_catalog')
     attachments = catalog(query)
-    for attachment_brain in attachments:
-        attachment = attachment_brain.getObject()
-        attachment.reindexObject(idxs=['allowedRolesAndUsers'])
+    with api.env.adopt_roles(['Manager']):
+        for attachment_brain in attachments:
+            attachment = attachment_brain.getObject()
+            attachment.reindexObject(idxs=['allowedRolesAndUsers'])
 
     if IUrbanEvent.providedBy(container):
         licence = container.aq_parent
