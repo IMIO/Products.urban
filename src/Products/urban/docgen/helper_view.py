@@ -338,13 +338,91 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         expirationDate = _date(date.year(), date.month(), date.day())
         return self.format_date(expirationDate + relativedelta(years=year))
 
-
-    def getLimitDate(self):
+    def getLimitDate(self, firstDepositDate):
         context = self.real_context
         annoncedDelay = context.getValueForTemplate('annoncedDelay', context, subfield='deadLineDelay')
-        firstDepositDate = context.getFirstDeposit().getEventDate()
         limitDate = firstDepositDate + annoncedDelay
         return limitDate
+
+    def get_parcels(self):
+        result = u""
+        context = self.real_context
+        parcels = context.getParcels()
+        #--------------------------------------------------------------------
+        print "parcelles initiales"
+        print "-----------------------------------------"
+        for parcel in parcels:
+            print "- {}".format(parcel.Title())
+        print "-----------------------------------------"
+        #--------------------------------------------------------------------
+        for i in range(len(parcels)):
+            for j in range(len(parcels)):
+                if parcels[i].Title() > parcels[j].Title():
+                    #-------------------------------------------------------
+                    print "{} > {}".format(parcels[i].Title(), parcels[j].Title())
+                    #-------------------------------------------------------
+                    parcels[i], parcels[j] = parcels[j], parcels[i]
+        #--------------------------------------------------------------------
+        print "parcelles triée par le titre"
+        print "-----------------------------------------"
+        for parcel in parcels:
+            print "- {}".format(parcel.Title())
+        print "-----------------------------------------"
+        #--------------------------------------------------------------------
+        list_grouped_parcels = []
+        grouped_parcels = []
+        division = ''
+        for parcel in parcels:
+            if parcel.getDivisionAlternativeName() != division:
+                division = parcel.getDivisionAlternativeName()
+                grouped_parcels = []
+                grouped_parcels.append(parcel)
+                list_grouped_parcels.append(grouped_parcels)
+            else:
+                grouped_parcels.append(parcel)
+        #--------------------------------------------------------------------
+        print "parcelles groupées"
+        print "-----------------------------------------"
+        for groupe in list_grouped_parcels:
+            for parcel in groupe:
+                print "- {}".format(parcel.Title())
+        print "-----------------------------------------"
+        #--------------------------------------------------------------------
+        for elms in list_grouped_parcels:
+            for i in range(len(elms)):
+                for j in range(len(elms)):
+                    if elms[i].getSection() > elms[j].getSection():
+                        elms[i], elms[j] = elms[j], elms[i]
+        #--------------------------------------------------------------------
+        print "parcelles groupées et triées"
+        print "-----------------------------------------"
+        for groupe in list_grouped_parcels:
+            for parcel in groupe:
+                print "- {}".format(parcel.Title())
+        print "-----------------------------------------"
+        #--------------------------------------------------------------------
+        for gp in enumerate(list_grouped_parcels):
+            result += gp[1][0].getDivisionAlternativeName() + ' '
+            section = gp[1][0].getSection()
+            result += 'section {} '.format(section)
+            for p in enumerate(gp[1]):
+                if section != p[1].getSection():
+                    section = p[1].getSection()
+                    result += 'section {} '.format(section)
+                result += u"n° {}{}{}{}".format(
+                    p[1].getRadical(), p[1].getBis(), p[1].getExposant(), p[1].getPuissance()
+                    )
+                if p[0]+1 != len(gp[1]):
+                    result += ', '
+            if gp[0]+1 != len(list_grouped_parcels):
+                result += ', '
+        #--------------------------------------------------------------------
+        print "résultat"
+        print "-----------------------------------------"
+        print result
+        print "-----------------------------------------"
+        #--------------------------------------------------------------------
+        return result
 
 
 class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
