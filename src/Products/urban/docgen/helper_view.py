@@ -348,27 +348,10 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         result = u""
         context = self.real_context
         parcels = context.getParcels()
-        #--------------------------------------------------------------------
-        print "parcelles initiales"
-        print "-----------------------------------------"
-        for parcel in parcels:
-            print "- {}".format(parcel.Title())
-        print "-----------------------------------------"
-        #--------------------------------------------------------------------
         for i in range(len(parcels)):
             for j in range(len(parcels)):
                 if parcels[i].Title() > parcels[j].Title():
-                    #-------------------------------------------------------
-                    print "{} > {}".format(parcels[i].Title(), parcels[j].Title())
-                    #-------------------------------------------------------
                     parcels[i], parcels[j] = parcels[j], parcels[i]
-        #--------------------------------------------------------------------
-        print "parcelles triée par le titre"
-        print "-----------------------------------------"
-        for parcel in parcels:
-            print "- {}".format(parcel.Title())
-        print "-----------------------------------------"
-        #--------------------------------------------------------------------
         list_grouped_parcels = []
         grouped_parcels = []
         division = ''
@@ -380,27 +363,11 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                 list_grouped_parcels.append(grouped_parcels)
             else:
                 grouped_parcels.append(parcel)
-        #--------------------------------------------------------------------
-        print "parcelles groupées"
-        print "-----------------------------------------"
-        for groupe in list_grouped_parcels:
-            for parcel in groupe:
-                print "- {}".format(parcel.Title())
-        print "-----------------------------------------"
-        #--------------------------------------------------------------------
         for elms in list_grouped_parcels:
             for i in range(len(elms)):
                 for j in range(len(elms)):
                     if elms[i].getSection() > elms[j].getSection():
                         elms[i], elms[j] = elms[j], elms[i]
-        #--------------------------------------------------------------------
-        print "parcelles groupées et triées"
-        print "-----------------------------------------"
-        for groupe in list_grouped_parcels:
-            for parcel in groupe:
-                print "- {}".format(parcel.Title())
-        print "-----------------------------------------"
-        #--------------------------------------------------------------------
         for gp in enumerate(list_grouped_parcels):
             result += gp[1][0].getDivisionAlternativeName() + ' '
             section = gp[1][0].getSection()
@@ -416,12 +383,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                     result += ', '
             if gp[0]+1 != len(list_grouped_parcels):
                 result += ', '
-        #--------------------------------------------------------------------
-        print "résultat"
-        print "-----------------------------------------"
-        print result
-        print "-----------------------------------------"
-        #--------------------------------------------------------------------
         return result
 
 
