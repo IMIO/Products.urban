@@ -16,7 +16,7 @@
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.DefaultAcknowledgmentCondition"
-        name="urban.schedule.condition.default_acknowledgment"
+        name="urban.schedule.condition.default_acknowledgement"
     />
 
     <!-- inquiry conditions-->
