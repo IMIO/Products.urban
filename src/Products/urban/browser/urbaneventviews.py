@@ -341,15 +341,16 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         for parcel in neighbour_parcels:
             owners = cadastre.query_owners_of_parcel(**parcel.reference_as_dict())
             for owner in owners:
-                print owner.pe, owner.adr1, owner.adr2
+                pe = owner.pe and str(owner.pe.encode('utf-8')) or ''
+                adr1 = owner.adr1 and str(owner.adr1.encode('utf-8')) or ''
+                adr2 = owner.adr2 and str(owner.adr2.encode('utf-8')) or ''
+                print pe, adr1, adr2
                 #to avoid having several times the same Recipient (that could for example be on several parcels
                 #we first look in portal_catalog where Recipients are catalogued
-                brains = context.portal_catalog(portal_type="RecipientCadastre", path={'query': event_path, }, Title=str(owner.pe))
+                brains = context.portal_catalog(portal_type="RecipientCadastre", path={'query': event_path, }, Title=pe)
                 if len(brains) > 0:
                     newrecipient = brains[0].getObject()
                 else:
-                    adr1 = owner.adr1 and str(owner.adr1.encode('utf-8')) or ''
-                    adr2 = owner.adr2 and str(owner.adr2.encode('utf-8')) or ''
                     address = adr1 and adr2 and '{} {}'.format(adr1, adr2)
                     brains = context.portal_catalog(
                         portal_type="RecipientCadastre", path={'query': event_path},
@@ -357,18 +358,18 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                     )
                     if len(brains) > 0:
                         newrecipient = brains[0].getObject()
-                        newrecipient.setTitle(newrecipient.Title() + ' & ' + owner.pe)
-                        newrecipient.setName(newrecipient.getName() + ' - ' + context.parseCadastreName(owner.pe))
+                        newrecipient.setTitle(newrecipient.Title() + ' & ' + pe)
+                        newrecipient.setName(newrecipient.getName() + ' - ' + context.parseCadastreName(pe))
                         newrecipient.reindexObject()
                     else:
                         newrecipientname = context.invokeFactory(
                             "RecipientCadastre",
                             id=context.generateUniqueId('RecipientCadastre'),
                             title=owner.pe,
-                            name=context.parseCadastreName(owner.pe),
+                            name=context.parseCadastreName(pe),
                             adr1=owner.adr1,
                             adr2=owner.adr2,
-                            street=context.parseCadastreStreet(owner.adr2),
+                            street=context.parseCadastreStreet(adr2),
                             daa=owner.daa
                         )
                         newrecipient = getattr(context, newrecipientname)
