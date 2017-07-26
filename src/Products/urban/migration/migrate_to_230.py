@@ -22,7 +22,7 @@ def copy_sol_values_from_pca(context):
             api.content.move(pca_term, sol_folder)
 
     pcazone_folder = urban_tool.pcazones
-    solzone_folder = urban_tool.solizones
+    solzone_folder = urban_tool.solzones
     if not sol_folder.objectIds():
         for pca_zone in pcazone_folder.objectValues():
             api.content.move(pca_zone, solzone_folder)
