@@ -34,6 +34,6 @@ def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.3')
     logger.info("starting migration steps")
     setup_tool = api.portal.get_tool('portal_setup')
-    setup_tool.runImportStepFromProfile('profile-imio.schedule:default', 'postInstall')
+    setup_tool.runImportStepFromProfile('profile-imio.schedule:default', 'urban-postInstall')
     copy_sol_values_from_pca(context)
     logger.info("migration done!")
