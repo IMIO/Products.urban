@@ -382,14 +382,6 @@ default_values = {
             {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
         ],
 
-        'pebcategories': [
-            'UrbanVocabularyTerm',
-            {'id': "not_applicable", 'title': 'peb_not_applicable'},
-            {'id': "complete_process", 'title': 'peb_complete_process'},
-            {'id': "form1_process", 'title': 'peb_form1_process'},
-            {'id': "form2_process", 'title': 'peb_form2_process'},
-        ],
-
         'exemptfdarticle': [
             'UrbanVocabularyTerm',
             {'id': "145", 'title': 'alinéa 145'},
@@ -436,13 +428,6 @@ default_values = {
             {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
         ],
 
-        'pebcategories': [
-            'UrbanVocabularyTerm',
-            {'id': "not_applicable", 'title': 'peb_not_applicable'},
-            {'id': "complete_process", 'title': 'peb_complete_process'},
-            {'id': "form1_process", 'title': 'peb_form1_process'},
-            {'id': "form2_process", 'title': 'peb_form2_process'},
-        ],
     },
     'ParcelOutLicence': {
         'foldercategories': [
@@ -624,6 +609,16 @@ default_values = {
             ],
             {'id': "favorable", 'title': u"Favorable", 'extraValue': "Recevable"},
             {'id': "defavorable", 'title': u"Défavorable", 'extraValue': "Irrecevable"},
+        ],
+
+        'pebcategories': [
+            'UrbanVocabularyTerm', [
+                'BuildLicence', 'Article127', 'CODT_BuildLicence', 'CODT_Article127',
+            ],
+            {'id': "not_applicable", 'title': 'peb_not_applicable'},
+            {'id': "complete_process", 'title': 'peb_complete_process'},
+            {'id': "form1_process", 'title': 'peb_form1_process'},
+            {'id': "form2_process", 'title': 'peb_form2_process'},
         ],
 
         'townshipfoldercategories': [
@@ -1278,6 +1273,57 @@ default_values = {
         ],
 
         'pcazones': [
+            'UrbanVocabularyTerm',
+            {
+                'id': "zone-de-construction-d-habitation-fermee",
+                'title': u"Zone de construction d'habitation fermée"
+            },
+            {
+                'id': "zone-de-construction-d-habitation-semi-ouverte",
+                'title': u"Zone de construction d'habitation semi ouverte"
+            },
+            {
+                'id': "zone-de-construction-d-habitation-ouverte",
+                'title': u"Zone de construction d'habitation ouverte"
+            },
+            {
+                'id': "zone-de-construction-en-annexe",
+                'title': u"Zone de construction en annexe"
+            },
+            {
+                'id': "zone-de-recul",
+                'title': u"Zone de recul"
+            },
+            {
+                'id': "zone-artisanale",
+                'title': u"Zone artisanale"
+            },
+            {
+                'id': "zone-de-voirie",
+                'title': u"Zone de voirie"
+            },
+            {
+                'id': "zone-affectee-a-l-eau",
+                'title': u"Zone affectée à l'eau"
+            },
+            {
+                'id': "zone-de-construction-a-destination-publique-indifferenciee",
+                'title': u"Zone de construction à destination publique indifférenciée"
+            },
+            {
+                'id': "zone-agricole-indiferenciee",
+                'title': u"Zone agricole indiférenciée"
+            },
+        ],
+
+        'sols': [
+            'PcaTerm',
+            {'id': "sol1", 'label': u"Schéma d'orientation local 1", 'number': '1', 'decreeDate': "2009/01/01", 'decreeType': "royal"},
+            {'id': "sol2", 'label': u"Schéma d'orientation local 2", 'number': '2', 'decreeDate': "2008/06/23", 'decreeType': "royal"},
+            {'id': "sol3", 'label': u"Schéma d'orientation local 3", 'number': '3', 'decreeDate': "2001/12/13", 'decreeType': "departmental"},
+        ],
+
+        'solzones': [
             'UrbanVocabularyTerm',
             {
                 'id': "zone-de-construction-d-habitation-fermee",

@@ -323,9 +323,12 @@ def finalizeSchema(schema):
     schema['isInSubdivision'].widget.label_msgid = 'urban_label_is_in_parceloutlicences'
     schema['subdivisionDetails'].widget.label_msgid = 'urban_label_parceloutlicences_details'
     schema['pca'].widget.label_msgid = 'urban_label_sol'
+    schema['pcaZone'].widget.label_msgid = 'urban_label_solZone'
     schema['isInPCA'].widget.label_msgid = 'urban_label_is_in_sol'
     schema['pcaDetails'].widget.label_msgid = 'urban_label_sol_details'
     schema['exemptFDArticle'].widget.label_msgid = 'urban_label_exemptFDArticleCODT'
+    schema['pca'].vocabulary = UrbanVocabulary('sols', vocType="PcaTerm", inUrbanConfig=False)
+    schema['pcaZone'].vocabulary = UrbanVocabulary('solzones', inUrbanConfig=False)
     return schema
 
 finalizeSchema(CODT_BaseBuildLicence_schema)
