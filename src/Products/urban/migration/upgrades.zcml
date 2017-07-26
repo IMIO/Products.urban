@@ -102,7 +102,7 @@
     <gs:upgradeStep
         title="Upgrade urban to 2.3.0"
         description="urban upgrade step"
-        source="2.1.0"
+        source="2.2.0"
         destination="2.3.0"
         handler=".migrate_to_230.migrate"
         profile="Products.urban:default" />
