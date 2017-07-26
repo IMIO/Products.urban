@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-06-23 12:16+0000\n"
+"POT-Creation-Date: 2017-07-26 09:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Domain: urban\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:241
+#: ../setuphandlers.py:242
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:340
+#: ../setuphandlers.py:341
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -68,7 +68,7 @@ msgid "Add this parcel"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:861
+#: ../setuphandlers.py:862
 msgid "All"
 msgstr ""
 
@@ -447,7 +447,7 @@ msgid "Road type"
 msgstr ""
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:267
+#: ../setuphandlers.py:268
 msgid "ScheduleConfig"
 msgstr ""
 
@@ -543,7 +543,7 @@ msgid "UniqueLicence"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:738
+#: ../setuphandlers.py:739
 msgid "Urban"
 msgstr ""
 
@@ -653,7 +653,7 @@ msgid "add_an_applicant"
 msgstr ""
 
 #: ../browser/licence/templates/licencetabsmacros.pt:391
-#: ../browser/templates/urbaneventmacros.pt:89
+#: ../browser/templates/urbaneventmacros.pt:88
 msgid "add_an_attachment"
 msgstr ""
 
@@ -676,7 +676,7 @@ msgid "additional_layers_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:679
+#: ../setuphandlers.py:680
 msgid "additonal_layers_folder_title"
 msgstr ""
 
@@ -723,7 +723,7 @@ msgid "applicationreasons_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:776
+#: ../setuphandlers.py:777
 msgid "architects_folder_title"
 msgstr ""
 
@@ -776,7 +776,7 @@ msgstr ""
 msgid "cannot_remove_urbaneventannouncement_notthelast"
 msgstr ""
 
-#: ../content/UrbanEventInquiry.py:212
+#: ../content/UrbanEventInquiry.py:218
 msgid "cannot_remove_urbaneventinquiry_notthelast"
 msgstr ""
 
@@ -818,7 +818,7 @@ msgstr ""
 msgid "click_to_view_or_add"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1220
+#: ../content/licence/GenericLicence.py:1219
 msgid "close_prevention_area"
 msgstr ""
 
@@ -901,7 +901,7 @@ msgid "creation date"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:634
+#: ../setuphandlers.py:635
 msgid "dashboardtemplates_folder_title"
 msgstr ""
 
@@ -1022,7 +1022,7 @@ msgid "envclasstwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:668
+#: ../setuphandlers.py:669
 msgid "environmenttemplates_folder_title"
 msgstr ""
 
@@ -1137,7 +1137,7 @@ msgstr ""
 msgid "externaldecisions_folder_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1221
+#: ../content/licence/GenericLicence.py:1220
 msgid "far_prevention_area"
 msgstr ""
 
@@ -1182,23 +1182,23 @@ msgstr ""
 msgid "firefox_viewlet_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1242
+#: ../content/licence/GenericLicence.py:1241
 msgid "flooding_level_high"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1240
+#: ../content/licence/GenericLicence.py:1239
 msgid "flooding_level_low"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1241
+#: ../content/licence/GenericLicence.py:1240
 msgid "flooding_level_moderate"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1238
+#: ../content/licence/GenericLicence.py:1237
 msgid "flooding_level_no"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1239
+#: ../content/licence/GenericLicence.py:1238
 msgid "flooding_level_verylow"
 msgstr ""
 
@@ -1257,17 +1257,17 @@ msgid "formatted_date_with_cityname"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:710
+#: ../setuphandlers.py:711
 msgid "front_page_descr"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:711
+#: ../setuphandlers.py:712
 msgid "front_page_text"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:709
+#: ../setuphandlers.py:710
 msgid "front_page_title"
 msgstr ""
 
@@ -1285,18 +1285,18 @@ msgid "gender_male"
 msgstr ""
 
 #. Default: "Generate a linked document"
-#: ../browser/templates/urbaneventmacros.pt:62
+#: ../browser/templates/urbaneventmacros.pt:61
 msgid "generate_a_linked_doc"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:790
+#: ../setuphandlers.py:791
 msgid "geometricians_folder_title"
 msgstr ""
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:645
+#: ../setuphandlers.py:646
 msgid "globaltemplates_folder_title"
 msgstr ""
 
@@ -1617,7 +1617,7 @@ msgid "no_applicant_defined"
 msgstr ""
 
 #. Default: "No document to generate"
-#: ../browser/templates/urbaneventmacros.pt:81
+#: ../browser/templates/urbaneventmacros.pt:80
 msgid "no_document_to_generate"
 msgstr ""
 
@@ -1631,7 +1631,7 @@ msgid "no_result"
 msgstr ""
 
 #. Default: "You can not add an attachment"
-#: ../browser/templates/urbaneventmacros.pt:92
+#: ../browser/templates/urbaneventmacros.pt:91
 msgid "not_permitted_to_add_attachment"
 msgstr ""
 
@@ -1639,7 +1639,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:804
+#: ../setuphandlers.py:805
 msgid "notaries_folder_title"
 msgstr ""
 
@@ -1699,7 +1699,7 @@ msgstr ""
 msgid "outdated_parcels_in_use"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1223
+#: ../content/licence/GenericLicence.py:1222
 msgid "outside_catchment"
 msgstr ""
 
@@ -1707,7 +1707,7 @@ msgid "parcelLinkedLicences"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:818
+#: ../setuphandlers.py:819
 msgid "parcellings_folder_title"
 msgstr ""
 
@@ -1745,7 +1745,6 @@ msgid "patrimonycertificate_urbanconfig_title"
 msgstr ""
 
 #. Default: "PCA"
-#: ../browser/licence/templates/licenceedit.pt:56
 #: ../browser/licence/templates/urbancertificatebase_edit.pt:20
 msgid "pca_fieldset_legend"
 msgstr ""
@@ -1961,12 +1960,11 @@ msgid "streets_folder_title"
 msgstr ""
 
 #. Default: "Subdivision"
-#: ../browser/licence/templates/licenceedit.pt:71
 #: ../browser/licence/templates/urbancertificatebase_edit.pt:36
 msgid "subdivision_fieldset_legend"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1222
+#: ../content/licence/GenericLicence.py:1221
 msgid "supervision_area"
 msgstr ""
 
@@ -2022,7 +2020,7 @@ msgstr ""
 
 #: ../profiles.zcml:17
 #: ../profiles/default/actions.xml
-#: ../setuphandlers.py:268
+#: ../setuphandlers.py:269
 msgid "urban"
 msgstr ""
 
@@ -3857,6 +3855,9 @@ msgstr ""
 msgid "urban_label_sol"
 msgstr ""
 
+msgid "urban_label_solZone"
+msgstr ""
+
 msgid "urban_label_sol_details"
 msgstr ""
 
@@ -4325,12 +4326,12 @@ msgid "urbancertificatetwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:360
+#: ../setuphandlers.py:361
 msgid "urbaneventtypes_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:657
+#: ../setuphandlers.py:658
 msgid "urbantemplates_folder_title"
 msgstr ""
 

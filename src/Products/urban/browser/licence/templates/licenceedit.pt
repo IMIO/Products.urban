@@ -53,7 +53,7 @@
                                                 nothing left to do when it is the 'Pca' field</tal:comment>
                 <tal:manage_pca condition="python: fieldName == 'isInPCA'">
                     <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
-                        <legend i18n:translate="pca_fieldset_legend">PCA</legend>
+                        <legend i18n:translate="" tal:content="python: context.getField('pca').widget.label_msgid">PCA</legend>
                         <metal:fieldMacro use-macro="python:here.widget('isInPCA', mode='edit')" />
                         <metal:fieldMacro use-macro="python:here.widget('pca', mode='edit')" />
                         <metal:fieldMacro use-macro="python:here.widget('pcaDetails', mode='edit')" />
@@ -68,7 +68,7 @@
                                         is nothing left to do when it is the 'subdivisionDetails' field</tal:comment>
                 <tal:manage_subdivision condition="python: fieldName == 'isInSubdivision'">
                     <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
-                        <legend i18n:translate="subdivision_fieldset_legend">Subdivision</legend>
+                        <legend i18n:translate="" tal:content="python: context.getField('parcellings').widget.label_msgid">Subdivision</legend>
                         <metal:fieldMacro use-macro="python:here.widget('isInSubdivision', mode='edit')" />
                         <metal:fieldMacro use-macro="python:here.widget('parcellings', mode='edit')" />
                         <metal:fieldMacro use-macro="python:here.widget('subdivisionDetails', mode='edit')" />
