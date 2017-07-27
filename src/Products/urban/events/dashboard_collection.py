@@ -12,7 +12,7 @@ def set_dashboard_columns(dashboard_collection, event):
         u'assigned_user_column',
         u'status',
         u'due_date',
-        u'final_duedate',
+        u'licence_final_duedate',
         u'task_actions_column'
     )
     if IScheduleConfig.providedBy(dashboard_collection.aq_parent):
@@ -23,7 +23,7 @@ def set_dashboard_columns(dashboard_collection, event):
             u'assigned_user_column',
             u'status',
             u'due_date',
-            u'final_duedate',
+            u'licence_final_duedate',
             u'task_actions_column'
         )
     dashboard_collection.setCustomViewFields(columns)
