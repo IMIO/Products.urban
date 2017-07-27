@@ -11,6 +11,14 @@ from zope.interface import providedBy
 
 
 def updateKeyEvent(urban_event_type, event):
+    annotations = IAnnotations(urban_event_type)
+    previous_key_event_value = annotations.get('urban.is_key_event', [])
+    is_key_event = urban_event_type.getIsKeyEvent()
+    if previous_key_event_value == is_key_event:
+        return
+
+    annotations['urban.eventtype'] = is_key_event
+
     for urban_event in urban_event_type.getLinkedUrbanEvents():
         licence = urban_event.aq_parent
         licence.reindexObject(['last_key_event'])
