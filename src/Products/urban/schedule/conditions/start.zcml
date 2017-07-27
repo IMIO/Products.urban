@@ -70,6 +70,14 @@
         name="urban.schedule.condition.inquiry_done"
     />
 
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.InquiryDoneCondition"
+        name="urban.schedule.condition.inquiry_done"
+    />
+
     <!-- opinion requests conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseBuildLicence

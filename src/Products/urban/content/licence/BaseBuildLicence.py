@@ -615,6 +615,9 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
     def getLastAcknowledgment(self):
         return self.getLastEvent(interfaces.IAcknowledgmentEvent)
 
+    def getLastAnnouncement(self):
+        return self.getLastEvent(interfaces.IAnnouncementEvent)
+
     def getLastCommunalCouncil(self):
         return self.getLastEvent(interfaces.ICommunalCouncilEvent)
 

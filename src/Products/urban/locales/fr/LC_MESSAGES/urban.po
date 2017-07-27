@@ -94,7 +94,6 @@ msgid "Article127"
 msgstr "Article 127"
 
 #: ../browser/licence/templates/licencetabsmacros.pt:382
-#: ../browser/licence/templates/licenceview.pt:50
 msgid "Attachments"
 msgstr "Pièces jointes"
 

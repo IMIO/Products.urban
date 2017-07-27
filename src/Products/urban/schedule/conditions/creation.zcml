@@ -21,6 +21,14 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.WillHaveAnnouncement"
+        name="urban.schedule.condition.will_have_announcement"
+    />
+
+    <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
@@ -34,6 +42,14 @@
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.InquiryCondition"
         name="urban.schedule.condition.has_inquiry"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.AnnouncementDoneCondition"
+        name="urban.schedule.condition.announcement_done"
     />
 
     <!-- opinion requests conditions-->

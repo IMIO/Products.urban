@@ -68,3 +68,15 @@ class InquriryEndDate(StartDate):
         inquiry = licence.getLastInquiry(use_catalog=False)
         end_date = inquiry and inquiry.getInvestigationEnd() or None
         return end_date
+
+
+class AnnouncementEndDate(StartDate):
+    """
+    Returns the announcement  end date of the licence.
+    """
+
+    def start_date(self):
+        licence = self.task_container
+        announcement = licence.getLastAnnouncement()
+        end_date = announcement and announcement.getInvestigationEnd() or None
+        return end_date
