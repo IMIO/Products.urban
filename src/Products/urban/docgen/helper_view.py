@@ -8,6 +8,7 @@ from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
+from Products.urban.services import cadastre 
 from zope.i18n import translate
 from plone import api
 
