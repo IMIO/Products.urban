@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from datetime import date
-
 from imio.schedule.content.task import IAutomatedTask
 
 from plone.indexer import indexer
 
 from Products.urban.indexes import genericlicence_applicantinfoindex
+from Products.urban.indexes import genericlicence_final_duedate
 from Products.urban.indexes import genericlicence_foldermanager
 from Products.urban.indexes import genericlicence_streetsuid
 from Products.urban.indexes import genericlicence_streetnumber
-from Products.urban.schedule.interfaces import ILicenceDeliveryTask
 
 
 @indexer(IAutomatedTask)
@@ -20,17 +18,8 @@ def licence_final_duedate(task):
     to query on it.
     """
     licence = task.get_container()
-    tasks_to_check = [obj for obj in licence.objectValues() if IAutomatedTask.providedBy(obj)]
-
-    while tasks_to_check:
-        task = tasks_to_check.pop()
-        if ILicenceDeliveryTask.providedBy(task):
-            return task.due_date
-        else:
-            subtasks = task.get_subtasks()
-            tasks_to_check.extend(subtasks)
-
-    return date(9999, 1, 1)
+    due_date = genericlicence_final_duedate(licence)
+    return due_date
 
 
 @indexer(IAutomatedTask)
