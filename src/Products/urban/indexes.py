@@ -14,6 +14,10 @@ Stephan GEULETTE <stephan.geulette@uvcw.be>,
 Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = 'plaintext'
 
+from datetime import date
+
+from imio.schedule.content.task import IAutomatedTask
+
 from Products.Archetypes.interfaces import IBaseFolder
 
 from Products.urban.interfaces import IApplicant
@@ -31,6 +35,7 @@ from Products.urban.interfaces import IProprietary
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IUrbanEventType
+from Products.urban.schedule.interfaces import ILicenceDeliveryTask
 
 from plone.indexer import indexer
 
@@ -249,3 +254,22 @@ def contact_not_indexed(obj):
 @indexer(IPortionOut)
 def portion_not_indexed(obj):
     raise AttributeError()
+
+
+@indexer(IGenericLicence)
+def genericlicence_final_duedate(licence):
+    """
+    Index licence reference on their tasks to be able
+    to query on it.
+    """
+    tasks_to_check = [obj for obj in licence.objectValues() if IAutomatedTask.providedBy(obj)]
+
+    while tasks_to_check:
+        task = tasks_to_check.pop()
+        if ILicenceDeliveryTask.providedBy(task):
+            return task.due_date
+        else:
+            subtasks = task.get_subtasks()
+            tasks_to_check.extend(subtasks)
+
+    return date(9999, 1, 1)

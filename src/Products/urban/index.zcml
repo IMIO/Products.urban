@@ -21,6 +21,7 @@
   <adapter name="getDecisionDate" factory=".indexes.genericlicence_decisiondate" />
   <adapter name="getDepositDate" factory=".indexes.genericlicence_depositdate" />
   <adapter name="archive" factory=".indexes.genericlicence_archive" />
+  <adapter name="licence_final_duedate" factory=".indexes.genericlicence_final_duedate" />
 
   <!-- Unindex UrbanEvent, UrbanDoc, Applicant and PortionOut -->
 
