@@ -347,7 +347,11 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                 print pe, adr1, adr2
                 #to avoid having several times the same Recipient (that could for example be on several parcels
                 #we first look in portal_catalog where Recipients are catalogued
-                brains = context.portal_catalog(portal_type="RecipientCadastre", path={'query': event_path, }, Title=pe)
+                brains = context.portal_catalog(
+                    portal_type="RecipientCadastre",
+                    path={'query': event_path, },
+                    Title=pe.replace('(', ' ').replace(')', ' ')
+                )
                 if len(brains) > 0:
                     newrecipient = brains[0].getObject()
                 else:
