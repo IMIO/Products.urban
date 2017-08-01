@@ -186,7 +186,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
          return a DisplayList of fields wich are marked as optional
         """
         from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
-        lst = []
+        vocabulary = []
         fields = UrbanEventInquiry_schema.fields()
         additional_fields = queryAdapter(self, IOptionalFields)
         if additional_fields:
@@ -195,11 +195,21 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         for field in fields:
             try:
                 if field.optional:
-                    lst.append((field.getName(), translate("urban_label_" + field.getName(), 'urban', default=field.getName(), context=self.REQUEST)))
+                    vocabulary.append(
+                        (
+                            field.getName(),
+                            translate(
+                                "urban_label_" + field.getName(),
+                                'urban', default=field.getName(),
+                                context=self.REQUEST
+                            )
+                        )
+                    )
             except AttributeError:
                 #most of time, the field has not the 'optional' attribute
                 pass
-        return DisplayList(lst)
+        optional_fields = DisplayList(sorted(vocabulary, key=lambda name: name[1]))
+        return optional_fields
 
     # Manually created methods
 
