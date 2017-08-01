@@ -405,6 +405,18 @@ schema = Schema((
         ),
         optional=True,
     ),
+    DateTimeField(
+        name='displayDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            format="%d/%m/%Y",
+            starting_year=1960,
+            label='Displaydate',
+            label_msgid='urban_label_displayDate',
+            i18n_domain='urban',
+        ),
+        optional=True,
+    ),
 
 ),
 )

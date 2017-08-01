@@ -1253,6 +1253,9 @@ msgstr ""
 msgid "urban_label_delegateSignatures"
 msgstr ""
 
+msgid "urban_label_displayDate"
+msgstr ""
+
 #. Default: "Dgo4reference"
 #: ParcellingTerm.py
 msgid "urban_label_DGO4Reference"
