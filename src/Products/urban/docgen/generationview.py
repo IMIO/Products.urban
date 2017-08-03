@@ -52,6 +52,8 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         generation_context = {
             'this': licence,
             'self': licence_helper_view.context,
+            'licence': licence_helper_view.context,
+            'event': self.context,
             'urbanEventObj': self.context,
             'applicantobj': applicantobj,
             'proprietaryobj': proprietaryobj,

@@ -8,7 +8,7 @@ from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
-from Products.urban.services import cadastre 
+from Products.urban.services import cadastre
 from zope.i18n import translate
 from plone import api
 
@@ -571,7 +571,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         contact_dict['email'] = contact.getEmail()
         contact_dict['phone'] = contact.getPhone()
         contact_dict['gsm'] = contact.getGsm()
-        contact_dict['fax'] = contact.getFax()
+        contact_dict['fax'] = hasattr(contact, 'getFax') and contact.getFax() or ''
         contact_dict['registrationNumber'] = contact.getRegistrationNumber()
         contact_dict['nationalRegister'] = contact.getNationalRegister()
         return contact_dict
