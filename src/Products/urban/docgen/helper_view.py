@@ -402,7 +402,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         locations.sort()
         return locations
 
-    def listAllVocTerms(self, field):
+    def listVocTerms(self, field):
         context = self.real_context
         field = context.getField(field)
         keys = type(field.getRaw(context)) in (list, tuple) and field.getRaw(context) or [field.getRaw(context)]
