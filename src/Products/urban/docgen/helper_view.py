@@ -401,7 +401,10 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
 
     def listAllVocTerms(self, field):
         context = self.real_context
-        return context.getField(field).vocabulary.listAllVocTerms(context)
+        field = context.getField(field)
+        keys = type(field.getRaw(context)) in (list, tuple) and field.getRaw(context) or [field.getRaw(context)]
+        objs = [field.vocabulary.getAllVocTerms(context).get(key, None) for key in keys]
+        return objs
 
 
 class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
