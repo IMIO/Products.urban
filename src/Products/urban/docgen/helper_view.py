@@ -399,6 +399,10 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         locations.sort()
         return locations
 
+    def listAllVocTerms(self, field):
+        context = self.real_context
+        return context.getField(field).vocabulary.listAllVocTerms(context)
+
 
 class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
     def get_parcellings(self):
