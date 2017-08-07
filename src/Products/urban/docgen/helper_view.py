@@ -39,18 +39,20 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         """
         return self.getEvent(title) is not None
 
-    def display_date(self, field_name, long_format=False, custom_format=None):
+    def display_date(self, field_name, long_format=False, translatemonth=True, custom_format=None):
         date = self.get_value(field_name)
         if custom_format:
             formatted_date = date.strftime(custom_format)
         else:
-            formatted_date = self.format_date(date, long_format=long_format)
+            formatted_date = self.format_date(date, long_format=long_format, translatemonth=translatemonth)
         return formatted_date
 
     def format_date(self, date=_date.today(), translatemonth=True, long_format=False):
         """
           Format the date for printing in pod templates
         """
+        if date.year == 9999:
+            return u"\u221E"
         if not translatemonth:
             u_date = ulocalized_time(str(date), long_format=long_format, context=self, request=self.request)
             u_date = u_date and u_date.encode('utf8') or ''
