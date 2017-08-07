@@ -52,7 +52,9 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
           Format the date for printing in pod templates
         """
         if not translatemonth:
-            return ulocalized_time(date, long_format=long_format, context=self, request=self.request).encode('utf8')
+            date = ulocalized_time(date, long_format=long_format, context=self, request=self.request)
+            date = date and date.encode('utf8') or ''
+            return date
         else:
             #we need to translate the month and maybe the day (1er)
             year, month, day, hour = str(date.strftime('%Y/%m/%d/%Hh%M')).split('/')
