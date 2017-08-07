@@ -37,7 +37,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         """
           find a specific title's UrbanEvent
         """
-        return self.getEvent(title) != None
+        return self.getEvent(title) is not None
 
     def display_date(self, field_name, long_format=False, custom_format=None):
         date = self.get_value(field_name)
@@ -193,15 +193,15 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         proprietaries_names_and_address = ""
         if proprietaries:
             proprietaries_names_and_address = self.get_proprietary_names_and_address(
-                    proprietaries[0],
-                    reversed_name,
-                    resident
+                proprietaries[0],
+                reversed_name,
+                resident
             )
             for proprietary in proprietaries[1:]:
                 proprietaries_names_and_address += separator + self.get_proprietary_names_and_address(
-                        proprietary,
-                        reversed_name,
-                        resident
+                    proprietary,
+                    reversed_name,
+                    resident
                 )
         return proprietaries_names_and_address
 
@@ -234,22 +234,22 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
 
     def get_proprietary_names_and_address(self, proprietary, reversed_name=True, resident=' domicilié '):
         proprietary_names_and_address = \
+            proprietary['personTitle'] + ' ' +\
+            proprietary['name2'] + ' ' +\
+            proprietary['name1'] + resident +\
+            proprietary['street'] + ' ' +\
+            proprietary['number'] + ' ' +\
+            proprietary['zipcode'] + ' ' +\
+            proprietary['city']
+        if reversed_name:
+            proprietary_names_and_address = \
                 proprietary['personTitle'] + ' ' +\
-                proprietary['name2'] + ' ' +\
-                proprietary['name1'] + resident +\
+                proprietary['name1'] + ' ' +\
+                proprietary['name2'] + resident +\
                 proprietary['street'] + ' ' +\
                 proprietary['number'] + ' ' +\
                 proprietary['zipcode'] + ' ' +\
                 proprietary['city']
-        if reversed_name:
-            proprietary_names_and_address = \
-                    proprietary['personTitle'] + ' ' +\
-                    proprietary['name1'] + ' ' +\
-                    proprietary['name2'] + resident +\
-                    proprietary['street'] + ' ' +\
-                    proprietary['number'] + ' ' +\
-                    proprietary['zipcode'] + ' ' +\
-                    proprietary['city']
         return proprietary_names_and_address
 
     def get_related_licences_of_parcel(self):
@@ -386,10 +386,10 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                     result += 'section {} '.format(section)
                 result += u"n° {}{}{}{}".format(
                     p[1].getRadical(), p[1].getBis(), p[1].getExposant(), p[1].getPuissance()
-                    )
-                if p[0]+1 != len(gp[1]):
+                )
+                if p[0] + 1 != len(gp[1]):
                     result += ', '
-            if gp[0]+1 != len(list_grouped_parcels):
+            if gp[0] + 1 != len(list_grouped_parcels):
                 result += ', '
         return result
 
@@ -405,13 +405,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         locations = [parcel.location for parcel in parcels]
         locations.sort()
         return locations
-
-    def listVocTerms(self, field):
-        context = self.real_context
-        field = context.getField(field)
-        keys = type(field.getRaw(context)) in (list, tuple) and field.getRaw(context) or [field.getRaw(context)]
-        objs = [field.vocabulary.getAllVocTerms(context).get(key, None) for key in keys]
-        return objs
 
 
 class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
@@ -594,41 +587,40 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
     def _get_contact(
             self,
             contact,
-            resident = {
-                'Masculin-Singulier':' domicilié ',
-                'Masculin-Pluriel':' domiciliés ',
-                'Féminin-Singulier':' domiciliée ',
-                'Féminin-Pluriel':' domiciliées '
-                },
-            reversed_name = False,
-            withaddress = True
-            ):
+            resident={
+                'Masculin-Singulier': ' domicilié ',
+                'Masculin-Pluriel': ' domiciliés ',
+                'Féminin-Singulier': ' domiciliée ',
+                'Féminin-Pluriel': ' domiciliées '
+            },
+            reversed_name=False,
+            withaddress=True
+                    ):
         """
         """
         contact = self._get_contact_dict(contact)
         gender_multiplicity = contact['gender'] + '-' + contact['multiplicity']
         gender_multiplicity = gender_multiplicity.encode('utf8')
         contact_names = \
-                contact['personTitle'] + ' ' +\
-                contact['name2'] + ' ' +\
-                contact['name1']
+            contact['personTitle'] + ' ' +\
+            contact['name2'] + ' ' +\
+            contact['name1']
         reversed_contact_names = \
-                contact['personTitle'] + ' ' +\
-                contact['name1'] + ' ' +\
-                contact['name2']
+            contact['personTitle'] + ' ' +\
+            contact['name1'] + ' ' +\
+            contact['name2']
         contact_address = \
-                resident[gender_multiplicity] +\
-                contact['street'] + ' ' +\
-                contact['number'] + ' ' +\
-                contact['zipcode'] + ' ' +\
-                contact['city']
+            resident[gender_multiplicity] +\
+            contact['street'] + ' ' +\
+            contact['number'] + ' ' +\
+            contact['zipcode'] + ' ' +\
+            contact['city']
         contact = contact_names
         if reversed_name:
             contact = reversed_contact_names
         if withaddress:
             contact += contact_address
         return contact
-
 
 # Architecte(s)
 #------------------------------------------------------------------------------
@@ -646,29 +638,29 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
     def _get_architect(
             self,
             architect,
-            resident = {
-                'Masculin-Singulier':' domicilié ',
-                'Masculin-Pluriel':' domiciliés ',
-                'Féminin-Singulier':' domiciliée ',
-                'Féminin-Pluriel':' domiciliées '
-                },
-            reversed_name = False,
-            withaddress = True
-            ):
+            resident={
+                'Masculin-Singulier': ' domicilié ',
+                'Masculin-Pluriel': ' domiciliés ',
+                'Féminin-Singulier': ' domiciliée ',
+                'Féminin-Pluriel': ' domiciliées '
+            },
+            reversed_name=False,
+            withaddress=True
+                      ):
         result = self._get_contact(architect, resident, reversed_name, withaddress)
         return result
 
     def get_architects(
             self,
-            resident = {
-                'Masculin-Singulier':' domicilié ',
-                'Masculin-Pluriel':' domiciliés ',
-                'Féminin-Singulier':' domiciliée ',
-                'Féminin-Pluriel':' domiciliées '
-                },
-            reversed_name = False,
-            withaddress = True,
-            separator = ', '
+            resident={
+                'Masculin-Singulier': ' domicilié ',
+                'Masculin-Pluriel': ' domiciliés ',
+                'Féminin-Singulier': ' domiciliée ',
+                'Féminin-Pluriel': ' domiciliées '
+            },
+            reversed_name=False,
+            withaddress=True,
+            separator=', '
             ):
         context = self.context
         architects = context.getArchitects()
@@ -676,7 +668,6 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         for architect in architects[1:]:
             result += separator + self._get_architect(architect, resident, reversed_name, withaddress)
         return result
-
 
 # Agent(s) traitant(s)
 #------------------------------------------------------------------------------
@@ -701,29 +692,29 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
     def _get_foldermanager(
             self,
             foldermanager,
-            resident = {
-                'Masculin-Singulier':' domicilié ',
-                'Masculin-Pluriel':' domiciliés ',
-                'Féminin-Singulier':' domiciliée ',
-                'Féminin-Pluriel':' domiciliées '
-                },
-            reversed_name = False,
-            withaddress = False
+            resident={
+                'Masculin-Singulier': ' domicilié ',
+                'Masculin-Pluriel': ' domiciliés ',
+                'Féminin-Singulier': ' domiciliée ',
+                'Féminin-Pluriel': ' domiciliées '
+            },
+            reversed_name=False,
+            withaddress=False
             ):
         result = self._get_contact(foldermanager, resident, reversed_name, withaddress)
         return result
 
     def get_foldermanagers(
             self,
-            resident = {
-                'Masculin-Singulier':' domicilié ',
-                'Masculin-Pluriel':' domiciliés ',
-                'Féminin-Singulier':' domiciliée ',
-                'Féminin-Pluriel':' domiciliées '
-                },
-            reversed_name = False,
-            withaddress = False,
-            separator = ', '
+            resident={
+                'Masculin-Singulier': ' domicilié ',
+                'Masculin-Pluriel': ' domiciliés ',
+                'Féminin-Singulier': ' domiciliée ',
+                'Féminin-Pluriel': ' domiciliées '
+            },
+            reversed_name=False,
+            withaddress=False,
+            separator=', '
             ):
         context = self.context
         foldermanagers = context.getFoldermanagers()
@@ -757,16 +748,16 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             applicant_separator=', ',
             representedBy_separator=' et ',
             resident={
-                'Masculin-Singulier':' domicilié ',
-                'Masculin-Pluriel':' domiciliés ',
-                'Féminin-Singulier':' domiciliée',
-                'Féminin-Pluriel':' domiciliées'
+                'Masculin-Singulier': ' domicilié ',
+                'Masculin-Pluriel': ' domiciliés ',
+                'Féminin-Singulier': ' domiciliée',
+                'Féminin-Pluriel': ' domiciliées'
             },
             represented={
-                'Masculin-Singulier':' représenté par ',
-                'Masculin-Pluriel':' représentés par ',
-                'Féminin-Singulier':' représentée par',
-                'Féminin-Pluriel':' représentées par'
+                'Masculin-Singulier': ' représenté par ',
+                'Masculin-Pluriel': ' représentés par ',
+                'Féminin-Singulier': ' représentée par',
+                'Féminin-Pluriel': ' représentées par'
             },
             reversed_name=True,
         ):
@@ -774,19 +765,19 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         applicants_names_and_address = ""
         if applicants:
             applicants_names_and_address = self._get_applicant_names_and_address(
-                    applicants[0],
+                applicants[0],
+                resident,
+                represented,
+                reversed_name,
+                representedBy_separator
+            )
+            for applicant in applicants[1:]:
+                applicants_names_and_address += applicant_separator + self._get_applicant_names_and_address(
+                    applicant,
                     resident,
                     represented,
                     reversed_name,
                     representedBy_separator
-            )
-            for applicant in applicants[1:]:
-                applicants_names_and_address += applicant_separator + self._get_applicant_names_and_address(
-                        applicant,
-                        resident,
-                        represented,
-                        reversed_name,
-                        representedBy_separator
                 )
         return applicants_names_and_address
 
@@ -855,6 +846,8 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         return applicants_names
 
     def _get_date(self, event, date_name='eventDate', translatemonth=True, long_format=False):
+        if not event:
+            return
         date_field = event.getField(date_name)
         raw_date = date_field.get(event)
         formatted_date = self.helper_view.format_date(raw_date, translatemonth, long_format)
