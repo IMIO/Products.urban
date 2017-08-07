@@ -498,8 +498,9 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         if attr_name.startswith('getLast'):
             urban_event = getattr(self.context, attr_name)()
             if urban_event:
-                proxy_event = getMultiAdapter((urban_event, self.display), IDisplayProxyObject)
-                return  proxy_event
+                helper_view = urban_event.restrictedTraverse('document_generation_helper_view')
+                proxy_event = helper_view.context
+                return proxy_event
             else:
                 class EventNotFound(object):
                     def __getattribute__(self, attr_name):
