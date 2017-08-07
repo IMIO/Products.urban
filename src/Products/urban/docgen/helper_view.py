@@ -495,7 +495,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         """
         Delegate field attribute access to display() method.
         """
-        if attr_name.startswith('getLast'):
+        if attr_name.startswith('getLast') or attr_name.startswith('getFirst'):
             urban_event = getattr(self.context, attr_name)()
             if urban_event:
                 helper_view = urban_event.restrictedTraverse('document_generation_helper_view')
