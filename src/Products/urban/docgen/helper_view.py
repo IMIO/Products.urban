@@ -18,6 +18,10 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
     Urban implementation of document generation helper methods.
     """
 
+    def __init__(self, context, request):
+        super(UrbanDocGenerationHelperView, self).__init__(context, request)
+        self.context.helper_view = self
+
     def get_current_foldermanager(self):
         return getCurrentFolderManager()
 
@@ -478,9 +482,13 @@ class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
         formated_date = view.format_date(date, translatemonth, long_format)
         return formated_date
 
+
 class LicenceDisplayProxyObject(ATDisplayProxyObject):
     """
     """
+
+    helper_view = None
+
     def _get_street_dict(self, uid):
         street_dict = {}
         catalog = api.portal.get_tool("uid_catalog")
@@ -578,7 +586,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         contact_dict['email'] = contact.getEmail()
         contact_dict['phone'] = contact.getPhone()
         contact_dict['gsm'] = contact.getGsm()
-        contact_dict['fax'] = hasattr(contact, 'getFax') and contact.getFax() or ''
+        contact_dict['fax'] = hasattr(contact, 'fax') and contact.getFax() or ''
         contact_dict['registrationNumber'] = contact.getRegistrationNumber()
         contact_dict['nationalRegister'] = contact.getNationalRegister()
         return contact_dict
@@ -845,6 +853,18 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                 applicants_names += separator + self._get_contact(applicant, reversed_name=reversed_name,
                         withaddress=False)
         return applicants_names
+
+    def _get_date(self, event, date_name='eventDate', translatemonth=True, long_format=False):
+        date_field = event.getField(date_name)
+        raw_date = date_field.get(event)
+        formatted_date = self.helper_view.format_date(raw_date, translatemonth, long_format)
+        return formatted_date
+
+    def get_notification_date(self, date_name='UrbanEventDate', translatemonth=True, long_format=False):
+        event = self.context.getLastTheLicence()
+        date = self._get_date(event, date_name, translatemonth, long_format)
+        return date
+
 
 class EventDisplayProxyObject(ATDisplayProxyObject):
     """
