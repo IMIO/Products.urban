@@ -75,6 +75,7 @@ class UrbanEventOpinionRequest(UrbanEvent, BrowserDefaultMixin):
     # Manually created methods
 
     security.declarePublic('getTemplates')
+
     def getTemplates(self):
         """
           Returns contained templates (File)
@@ -83,8 +84,8 @@ class UrbanEventOpinionRequest(UrbanEvent, BrowserDefaultMixin):
         if custom_templates:
             return custom_templates
 
-        urbantool = api.portal.get_tool('portal_urban')
-        opinionrequest_config = getattr(getattr(urbantool, self.aq_parent.portal_type.lower()).urbaneventtypes, "config-opinion-request")
+        licence_config = self.aq_parent.getUrbanConfig()
+        opinionrequest_config = getattr(licence_config.urbaneventtypes, "config-opinion-request")
         return opinionrequest_config.getTemplates()
 
     security.declarePublic('getLinkedOrganisationTerm')
