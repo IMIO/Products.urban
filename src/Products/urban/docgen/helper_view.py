@@ -853,7 +853,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         formatted_date = self.helper_view.format_date(raw_date, translatemonth, long_format)
         return formatted_date
 
-    def get_notification_date(self, date_name='UrbanEventDate', translatemonth=True, long_format=False):
+    def get_notification_date(self, date_name='eventDate', translatemonth=True, long_format=False):
         event = self.context.getLastTheLicence()
         date = self._get_date(event, date_name, translatemonth, long_format)
         return date
