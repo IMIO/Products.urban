@@ -848,8 +848,12 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
     def _get_date(self, event, date_name='eventDate', translatemonth=True, long_format=False):
         if not event:
             return
+
         date_field = event.getField(date_name)
         raw_date = date_field.get(event)
+        if not raw_date:
+            return
+
         formatted_date = self.helper_view.format_date(raw_date, translatemonth, long_format)
         return formatted_date
 
