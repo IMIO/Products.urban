@@ -2,13 +2,18 @@
 
 from collective.documentgenerator.helper.archetypes import ATDisplayProxyObject
 from collective.documentgenerator.helper.archetypes import ATDocumentGenerationHelperView
+from collective.documentgenerator.interfaces import IDisplayProxyObject
+
 from datetime import date as _date
 from dateutil.relativedelta import relativedelta
+
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.services import cadastre 
+
+from zope.component import getMultiAdapter
 from zope.i18n import translate
 from plone import api
 
@@ -478,6 +483,26 @@ class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
 class LicenceDisplayProxyObject(ATDisplayProxyObject):
     """
     """
+
+    def __getattr__(self, attr_name):
+        """
+        Delegate field attribute access to display() method.
+        """
+        if attr_name.startswith('getLast'):
+            urban_event = getattr(self.context, attr_name)()
+            if urban_event:
+                proxy_event = getMultiAdapter((urban_event, self.display), IDisplayProxyObject)
+                return  proxy_event
+            else:
+                class EventNotFound(object):
+                    def __getattribute__(self, attr_name):
+                        return None
+                return EventNotFound()
+
+        return super(LicenceDisplayProxyObject, self).__getattr__(attr_name)
+
+    helper_view = None
+
     def _get_street_dict(self, uid):
         street_dict = {}
         catalog = api.portal.get_tool("uid_catalog")
