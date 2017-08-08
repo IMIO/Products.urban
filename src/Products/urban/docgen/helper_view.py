@@ -484,6 +484,8 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
     """
     """
 
+    helper_view = None
+
     def __getattr__(self, attr_name):
         """
         Delegate field attribute access to display() method.
@@ -500,8 +502,6 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                 return EventNotFound()
 
         return super(LicenceDisplayProxyObject, self).__getattr__(attr_name)
-
-    helper_view = None
 
     def _get_street_dict(self, uid):
         street_dict = {}
