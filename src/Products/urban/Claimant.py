@@ -138,6 +138,18 @@ class Claimant(BaseContent, Contact, BrowserDefaultMixin):
         )
         return DisplayList(vocab)
 
+    def isOralComplaint(self):
+        return self.claimType == 'oralClaim'
+
+    def isWrittenComplaint(self):
+        return self.claimType == 'writedClaim'
+
+    def isPetition(self):
+        return self.claimType == 'writedClaim' and self.hasPetition
+
+    def hasSignatureComplaint(self):
+        return self.claimType == 'writedClaim' and self.hasPetition and self.signatureNumber
+
 registerType(Claimant, PROJECTNAME)
 # end of class Claimant
 

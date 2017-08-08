@@ -277,6 +277,38 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
     def getKeyDate(self):
         return self.getInvestigationStart()
 
+    def getNumberOfOralComplaint(self):
+        claimants = self.getClaimants()
+        number = 0
+        for claimant in claimants:
+            if claimant.isOralComplaint():
+                number += 1
+        return number
+
+    def getNumberOfWrittenComplaint(self):
+        claimants = self.getClaimants()
+        number = 0
+        for claimant in claimants:
+            if claimant.isWrittenComplaint():
+                number += 1
+        return number
+
+    def getNumberOfPetition(self):
+        claimants = self.getClaimants()
+        number = 0
+        for claimant in claimants:
+            if claimant.isPetition():
+                number += 1
+        return number
+
+    def getNumberOfSignature(self):
+        claimants = self.getClaimants()
+        number = 0
+        for claimant in claimants:
+            if claimant.hasSignatureComplaint():
+                number += claimant.getSignatureNumber()
+        return number
+
 
 registerType(UrbanEventInquiry, PROJECTNAME)
 # end of class UrbanEventInquiry
