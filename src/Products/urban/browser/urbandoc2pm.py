@@ -11,7 +11,7 @@ class UrbanDoc2PloneMeeting(BrowserView):
     """
     """
     def getAnnexes(self):
-	plone_utils = api.portal.get_tool('plone_utils')
+        plone_utils = api.portal.get_tool('plone_utils')
         documents = self.context.getAttachments()
         documents.extend(self.context.getDocuments())
         annexes = []
