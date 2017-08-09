@@ -41,7 +41,7 @@ from DateTime import DateTime
 
 optional_fields = ['specificFeatures', 'roadSpecificFeatures', 'locationSpecificFeatures',
                    'customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks',
-                   'basement', 'ZIP', 'noteworthyTrees', 'pollution', 'annoncedDelay', 'annoncedDelayDetails',
+                   'basement', 'ZIP', 'pollution', 'annoncedDelay', 'annoncedDelayDetails',
                    'notaryContact']
 ##/code-section module-header
 
@@ -189,19 +189,6 @@ schema = Schema((
         schemata='urban_location',
         multiValued=True,
         vocabulary=UrbanVocabulary('zip'),
-        default_method='getDefaultValue',
-    ),
-    LinesField(
-        name='noteworthyTrees',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label='Noteworthytrees',
-            label_msgid='urban_label_noteworthyTrees',
-            i18n_domain='urban',
-        ),
-        schemata='urban_location',
-        multiValued=True,
-        vocabulary_factory='urban.vocabulary.NoteworthyTrees',
         default_method='getDefaultValue',
     ),
     StringField(
@@ -496,8 +483,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('description', after='opinionsToAskIfWorks')
     schema.moveField('basement', after='RCU')
     schema.moveField('ZIP', after='basement')
-    schema.moveField('noteworthyTrees', after='ZIP')
-    schema.moveField('pollution', after='noteworthyTrees')
+    schema.moveField('pollution', after='ZIP')
     schema.moveField('folderCategoryTownship', after='pollution')
     return schema
 

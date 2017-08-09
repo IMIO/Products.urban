@@ -245,11 +245,6 @@ default_values = {
             {'id': "type-1", 'title': u"Type 1: zone à forte pression foncière"},
         ],
 
-        'noteworthytrees': [
-            'UrbanVocabularyTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter'],
-            {'id': "arbres", 'title': u"Arbres remarquables"},
-        ],
-
         'investigationarticles': [
             'UrbanVocabularyTerm', ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo'],
             {'id': "330-1", 'title': u"330 1° - « [...] bâtiments dont la hauteur est d'au moins quatre niveaux ou douze mètres sous corniche et [...] »", 'description': "<p>« la construction ou la reconstruction de bâtiments dont la hauteur est d'au moins quatre niveaux ou douze mètres sous corniche et dépasse de trois mètres ou plus la moyenne des hauteurs sous corniche des bâtiments situés dans la même rue jusqu'à cinquante mètres de part et d'autre de la construction projetée ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions »</p>", 'extraValue': "330 1°"},
@@ -336,6 +331,11 @@ default_values = {
         'airportnoisezone': [
             'UrbanVocabularyTerm',
             {'id': "zone-expo-a", 'title': u"Zone A au plan d'Exposition au bruit"},
+        ],
+
+        'noteworthytrees': [
+            'UrbanVocabularyTerm',
+            {'id': "arbres", 'title': u"Arbres remarquables"},
         ],
 
         'persons_titles': [

@@ -98,7 +98,7 @@ optional_fields = [
     'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', 'sevesoSite', 'natura_2000', 'sewers',
     'sewersDetails', 'roadAnalysis', 'futureRoadCoating', 'expropriation', 'expropriationDetails',
     'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails',
-    'reparcelling', 'reparcellingDetails'
+    'reparcelling', 'reparcellingDetails', 'noteworthyTrees'
 ]
 ##/code-section module-header
 
@@ -1040,6 +1040,19 @@ schema = Schema((
         schemata='urban_location',
         multiValued=False,
         relationship='licenceParcelling',
+    ),
+    LinesField(
+        name='noteworthyTrees',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='Noteworthytrees',
+            label_msgid='urban_label_noteworthyTrees',
+            i18n_domain='urban',
+        ),
+        schemata='urban_location',
+        multiValued=True,
+        vocabulary=UrbanVocabulary('noteworthytrees', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
 
 ),

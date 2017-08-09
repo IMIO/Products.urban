@@ -30,10 +30,32 @@ def copy_sol_values_from_pca(context):
     logger.info("migration step done!")
 
 
+def move_noteworthytrees_vocabulary(context):
+    """
+    """
+    logger = logging.getLogger('urban: move noteworthytrees vocabulary')
+    logger.info("starting migration step")
+    urban_tool = api.portal.get_tool('portal_urban')
+    noteworthytrees = urban_tool.noteworthytrees
+
+    for licence_config in urban_tool.objectValues('LicenceConfig'):
+        if hasattr(licence_config, 'noteworthytrees'):
+            for voc_id in licence_config.noteworthytrees.objectIds():
+                if voc_id not in noteworthytrees.objectIds():
+                    api.content.move(getattr(licence_config.noteworthytrees, voc_id), noteworthytrees)
+            try:
+                api.content.delete(licence_config.noteworthytrees)
+            except:
+                continue
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.3')
     logger.info("starting migration steps")
     setup_tool = api.portal.get_tool('portal_setup')
-    setup_tool.runImportStepFromProfile('profile-imio.schedule:default', 'urban-postInstall')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'urban-postInstall')
     copy_sol_values_from_pca(context)
+    move_noteworthytrees_vocabulary(context)
     logger.info("migration done!")
