@@ -31,6 +31,7 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.utils import is_attachment
 from Products.urban.utils import setOptionalAttributes
 
 from plone import api
@@ -616,9 +617,6 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         """
           Return the attachments (File) of the UrbanEvent
         """
-        def is_attachment(obj):
-            return IATFile.providedBy(obj) and not IUrbanDoc.providedBy(obj)
-
         attachments = [obj for obj in self.objectValues() if is_attachment(obj)]
         return attachments
 

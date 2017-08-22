@@ -20,6 +20,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import DisplayList
 
 from Products.urban.interfaces import IWorklocationSignaletic
+from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import getCurrentFolderManager as currentFolderManager
 from Products.urban.utils import removeItems
 from plone import api
@@ -494,7 +495,7 @@ class UrbanBase(object):
         """
           Return every contained UrbanEvents (of any type)...
         """
-        return self.objectValues('UrbanEvent')  # UrbanEvent is the meta_type
+        return [obj for obj in self.objectValues() if IUrbanEvent.providedBy(obj)]  # UrbanEvent is the meta_type
 
     security.declarePublic('getUrbanEventOpinionRequests')
     def getUrbanEventOpinionRequests(self):
