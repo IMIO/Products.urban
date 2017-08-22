@@ -6,7 +6,9 @@ from imio.schedule.utils import tuple_to_interface
 
 from HTMLParser import HTMLParser
 
+from Products.ATContentTypes.interfaces.file import IATFile
 from Products.urban.config import URBAN_TYPES
+from Products.urban.interfaces import IUrbanDoc
 
 from plone import api
 
@@ -166,3 +168,12 @@ def get_interface_by_path(interface_path):
     splitted_path = interface_path.split('.')
     interface_tuple = ('.'.join(splitted_path[0:-1]), splitted_path[-1])
     return tuple_to_interface(interface_tuple)
+
+
+def is_attachment(obj):
+    """
+    """
+    is_file = IATFile.providedBy(obj)
+    is_doc = IUrbanDoc.providedBy(obj)
+    is_attachment = is_file and not is_doc
+    return is_attachment

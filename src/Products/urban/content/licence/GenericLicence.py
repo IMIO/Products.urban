@@ -25,6 +25,7 @@ from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
+from Products.urban.utils import is_attachment
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
@@ -1303,6 +1304,15 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         title = "%s - %s - %s" % (self.getReference(), self.getLicenceSubject(), applicantTitle)
         self.setTitle(title)
         self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
+
+    security.declarePublic('getAttachments')
+
+    def getAttachments(self):
+        """
+          Return the attachments (File) of the UrbanEvent
+        """
+        attachments = [obj for obj in self.objectValues() if is_attachment(obj)]
+        return attachments
 
     security.declarePublic('getAnnoncedDelay')
 
