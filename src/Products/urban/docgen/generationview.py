@@ -46,9 +46,11 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         applicantobj = applicants and applicants[0] or None
         proprietaries = licence.getProprietaries()
         proprietaryobj = proprietaries and proprietaries[0] or None
-        claimants = licence.getLastInquiry and licence.getLastInquiry().getClaimants()\
-                or licence.getLastAnnouncement and licence.getLastAnnouncement().getClaimants()
+        publicity = licence.getLastInquiry() or licence.getLastAnnouncement()
+        claimants = publicity and publicity.getClaimants() or None
         claimants = [claimant.restrictedTraverse('@@document_generation_helper_view') for claimant in claimants]
+        claimants_view = claimants and [claimant.restrictedTraverse('@@document_generation_helper_view') for claimant in
+                claimants] or None
         licence_helper_view = licence.restrictedTraverse('@@document_generation_helper_view')
         event_helper_view = self.context.restrictedTraverse('@@document_generation_helper_view')
 
@@ -65,7 +67,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'licence_helper': licence_helper_view.context,
             'event_view': event_helper_view,
             'event_helper': event_helper_view.context,
-            'claimants': claimants,
+            'claimants': claimants_view,
         }
 
         return generation_context
