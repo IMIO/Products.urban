@@ -385,4 +385,8 @@ input.assign_user {
     width: 10px;
 }
 
+#form-widgets-annexes {
+   display: grid;
+}
+
 /* </dtml-with> */
