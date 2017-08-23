@@ -46,7 +46,8 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         applicantobj = applicants and applicants[0] or None
         proprietaries = licence.getProprietaries()
         proprietaryobj = proprietaries and proprietaries[0] or None
-        publicity = licence.getLastInquiry or licence.getLastAnnouncement or None
+        publicity = hasattr(licence, 'getLastInquiry') and licence.getLastInquiry() or hasattr(licence,
+                'getLastAnnouncement') and licence.getLastAnnouncement() or None
         claimants = publicity and publicity.getClaimants() or None
         claimants_view = claimants and [claimant.restrictedTraverse('@@document_generation_helper_view') for claimant in
                 claimants] or None
