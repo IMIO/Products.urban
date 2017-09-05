@@ -37,14 +37,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         """
         return self.getEvent(title) != None
 
-    def display_date(self, field_name, long_format=False, custom_format=None):
-        date = self.get_value(field_name)
-        if custom_format:
-            formatted_date = date.strftime(custom_format)
-        else:
-            formatted_date = self.format_date(date, long_format=long_format)
-        return formatted_date
-
     def format_date(self, date=_date.today(), translatemonth=True, long_format=False):
         """
           Format the date for printing in pod templates
