@@ -22,6 +22,17 @@ class AcknowledgmentDoneCondition(CreationCondition):
         return acknowledgment_done
 
 
+class DefaultAcknowledgmentCondition(CreationCondition):
+    """
+    Licence folderComplete event is created.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        acknowledgment_event = licence.getLastAcknowledgment()
+        return not acknowledgment_event
+
+
 class DefaultCODTAcknowledgmentCondition(CreationCondition):
     """
     There's no default acknowlegdment created.
