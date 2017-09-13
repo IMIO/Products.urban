@@ -1389,10 +1389,11 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         for eventType in listEventTypes:
             obj = eventType.getObject()
             if obj.eventTypeType and obj.eventTypeType != 'UrbanEvent':
-                type_interface = get_interface_by_path(obj.eventTypeType)
-                #an advice corresponding to IOpinionRequestEvent
-                if type_interface.isOrExtends(IOpinionRequestEvent):
-                    res.append(obj)
+                for type_interface_path in obj.getEventTypeType():
+                    type_interface = get_interface_by_path(type_interface_path)
+                    #an advice corresponding to IOpinionRequestEvent
+                    if type_interface.isOrExtends(IOpinionRequestEvent):
+                        res.append(obj)
         return res
 
     security.declarePublic('hasEventNamed')
