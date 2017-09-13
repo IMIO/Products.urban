@@ -149,10 +149,6 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.ITheLicenceCollegeEvent"
-    type=".interfaces.IEventTypeType"/>
-
-  <interface
     interface=".interfaces.ISimpleCollegeEvent"
     type=".interfaces.IEventTypeType"/>
 

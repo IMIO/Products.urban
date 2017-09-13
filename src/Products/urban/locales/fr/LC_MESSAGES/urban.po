@@ -348,10 +348,6 @@ msgstr "Demande d'avis du service technique"
 msgid "ITheLicence type marker interface"
 msgstr "Délivrance du permis/certificat/..."
 
-#: ../interfaces.py:433
-msgid "ITheLicenceCollege type marker interface"
-msgstr "Délivrance du permis"
-
 #: ../interfaces.py:373
 msgid "IWalloonRegionDecisionEvent type marker interface"
 msgstr "Décision de la la région wallone"
