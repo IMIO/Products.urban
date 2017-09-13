@@ -13,7 +13,7 @@
   />
 
   <browser:page
-     for="Products.ATContentTypes.interfaces.IATFolder"
+     for="eea.facetednavigation.subtypes.interfaces.ifacetednavigable"
      name="generate_urbain_220xml"
      class=".urbain_220.UrbainXMLExport"
      permission="zope2.View"
