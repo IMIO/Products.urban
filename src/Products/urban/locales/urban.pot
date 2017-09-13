@@ -334,10 +334,6 @@ msgstr ""
 msgid "ITheLicence type marker interface"
 msgstr ""
 
-#: ../interfaces.py:433
-msgid "ITheLicenceCollege type marker interface"
-msgstr ""
-
 #: ../interfaces.py:373
 msgid "IWalloonRegionDecisionEvent type marker interface"
 msgstr ""

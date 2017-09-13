@@ -429,10 +429,6 @@ class ICollegeReportEvent(Interface):
     __doc__ = _("""ICollegeReport type marker interface""")
 
 
-class ITheLicenceCollegeEvent(ICollegeEvent):
-    __doc__ = _("""ITheLicenceCollege type marker interface""")
-
-
 class ITheLicenceEvent(Interface):
     __doc__ = _("""ITheLicence type marker interface""")
 
