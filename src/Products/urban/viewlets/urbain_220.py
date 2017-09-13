@@ -29,9 +29,13 @@ class Urbain220Viewlet(ViewletBase):
         """
         This viewlet is only visible on buildlicences faceted view if we queried by date.
         """
-        buildlicences = self.context.id == 'buildlicences'
+        allowed_contexts = [
+            'buildlicences',
+            'codt_buildlicences'
+        ]
+        allowed = self.context.id in allowed_contexts
         faceted_context = bool(IFacetedNavigable.providedBy(self.context))
-        return faceted_context and buildlicences and self.get_date_range()
+        return faceted_context and allowed and self.get_date_range()
 
     def get_date_range(self):
         """
