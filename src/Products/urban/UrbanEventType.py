@@ -108,10 +108,10 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
-    StringField(
+    LinesField(
         name='eventTypeType',
         vocabulary_factory="eventTypeType",
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
             label='Eventtypetype',
             label_msgid='urban_label_eventTypeType',
             i18n_domain='urban',

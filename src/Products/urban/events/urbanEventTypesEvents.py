@@ -30,12 +30,12 @@ def updateEventType(urban_event_type, event):
     """
     """
     annotations = IAnnotations(urban_event_type)
-    previous_eventtype_interface = annotations.get('urban.eventtype', [])
-    new_eventtype_interface = urban_event_type.getEventTypeType()
+    previous_eventtype_interface = annotations.get('urban.eventtype', set([]))
+    new_eventtype_interface = set(urban_event_type.getEventTypeType())
     if previous_eventtype_interface == new_eventtype_interface:
         return
 
-    annotations['urban.eventtype'] = new_eventtype_interface
+    annotations['urban.eventtype'] = set(new_eventtype_interface)
 
     ref_catalog = api.portal.get_tool('reference_catalog')
     ref_brains = ref_catalog(targetUID=urban_event_type.UID())
