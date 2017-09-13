@@ -210,10 +210,7 @@ class UrbanBase(object):
 
         for wl in self.getWorkLocations():
             #wl is a dict with street as the street obj uid and number as the number in the street
-            street_brains = catalog(UID=wl['street'])
-            if not street_brains:
-                continue
-            street = street_brains[0].getObject()
+            street = catalog(UID=wl['street'])[0].getObject()
             city = street.getParentNode()
             if street.getPortalTypeName() == 'Locality':
                 streetName = street.getLocalityName()
