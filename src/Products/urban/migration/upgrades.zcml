@@ -99,12 +99,4 @@
         handler=".update_220.migrate"
         profile="Products.urban:default" />
 
-    <gs:upgradeStep
-        title="Upgrade urban 2.3.0"
-        description="urban upgrade step"
-        source="2.2.0"
-        destination="2.3.0"
-        handler=".migrate_to_230.migrate"
-        profile="Products.urban:default" />
-
 </configure>
