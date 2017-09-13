@@ -295,7 +295,7 @@ msgstr "Enquête publique"
 
 #: ../interfaces.py:421
 msgid "ILicenceDelivery type marker interface"
-msgstr "Délivrance du permis"
+msgstr "Délivrance du permis (environnement)"
 
 #: ../interfaces.py:425
 msgid "ILicenceExpiration type marker interface"
