@@ -39,17 +39,19 @@ def _setDefaultTextValues(urbanevent):
 
 def setEventTypeType(urban_event, event):
     urban_eventType = urban_event.getUrbaneventtypes()
-    urban_eventTypeType = urban_eventType.getEventTypeType()
-    if not urban_eventTypeType:
+    urban_eventTypeTypes = urban_eventType.getEventTypeType()
+    if not urban_eventTypeTypes:
         return
-    to_explore = set([getInterface('', urban_eventTypeType)])
 
-    while to_explore:
-        type_interface = to_explore.pop()
-        if IEventTypeType.providedBy(type_interface):
-            alsoProvides(urban_event, type_interface)
-            for base_interface in type_interface.getBases():
-                to_explore.add(base_interface)
+    for urban_eventTypeType in urban_eventTypeTypes:
+        to_explore = set([getInterface('', urban_eventTypeType)])
+
+        while to_explore:
+            type_interface = to_explore.pop()
+            if IEventTypeType.providedBy(type_interface):
+                alsoProvides(urban_event, type_interface)
+                for base_interface in type_interface.getBases():
+                    to_explore.add(base_interface)
 
     urban_event.reindexObject(['object_provides'])
 
