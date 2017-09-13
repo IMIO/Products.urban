@@ -56,7 +56,7 @@ class Urbain220Viewlet(ViewletBase):
 class UrbainXMLExport(BrowserView):
 
     def __call__(self):
-        dateto, datefrom = self.get_date_range()
+        datefrom, dateto = self.get_date_range()
         brains = getDashboardQueryResult(self.context)
         return self.generateUrbainXML(brains, datefrom, dateto)
 
