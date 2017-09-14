@@ -282,6 +282,6 @@
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.LicenceEndedCondition"
-        name="liege.urban.schedule.licence_ended"
+        name="urban.schedule.licence_ended"
     />
 </configure>
