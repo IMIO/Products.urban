@@ -5,6 +5,8 @@ from plone import api
 
 from imio.schedule.content.condition import Condition
 
+from Products.urban.config import LICENCE_FINAL_STATES
+
 
 class DepositDoneCondition(Condition):
     """
@@ -438,3 +440,14 @@ class DecisionNotified(Condition):
         if decision_event:
             return api.content.get_state(decision_event) == 'closed'
         return False
+
+
+class LicenceEndedCondition(Condition):
+    """
+    Licence is in a final state
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        is_ended = api.content.get_state(licence) in LICENCE_FINAL_STATES
+        return is_ended
