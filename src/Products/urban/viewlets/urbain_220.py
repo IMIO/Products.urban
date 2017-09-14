@@ -80,12 +80,15 @@ class UrbainXMLExport(BrowserView):
         """
         Tell the browser that the resulting page contains ODT.
         """
+        portal_urban = api.portal.get_tool('portal_urban')
+        townshipname = portal_urban.getCityName()
         from_date, to_date = self.get_date_range()
         response = self.request.RESPONSE
         response.setHeader('Content-type', 'text/xml')
         response.setHeader(
             'Content-disposition',
-            u'attachment;filename="urbain_export-{from_date}-{to_date}.xml"'.format(
+            u'attachment;filename="urbain_{name}_{from_date}-{to_date}.xml"'.format(
+                name=townshipname,
                 from_date=from_date.strftime('%d_%m_%Y'),
                 to_date=to_date.strftime('%d_%m_%Y')
             )
