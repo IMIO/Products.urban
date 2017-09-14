@@ -18,6 +18,7 @@ from plone import api
 from plone.app.layout.viewlets import ViewletBase
 
 import json
+import unidecode
 
 
 class Urbain220Viewlet(ViewletBase):
