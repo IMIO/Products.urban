@@ -18,7 +18,6 @@ from plone import api
 from plone.app.layout.viewlets import ViewletBase
 
 import json
-import unidecode
 
 
 class Urbain220Viewlet(ViewletBase):
@@ -89,7 +88,7 @@ class UrbainXMLExport(BrowserView):
         response.setHeader(
             'Content-disposition',
             u'attachment;filename="urbain_{name}_{from_date}-{to_date}.xml"'.format(
-                name=unidecode.unidecode(townshipname),
+                name=unidecode.unidecode(townshipname.decode('utf-8')),
                 from_date=from_date.strftime('%d_%m_%Y'),
                 to_date=to_date.strftime('%d_%m_%Y')
             )
