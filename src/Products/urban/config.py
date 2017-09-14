@@ -212,6 +212,13 @@ URBAN_ENVIRONMENT_TYPES = [
     'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
 ]
 
+LICENCE_FINAL_STATES = [
+    'accepted',
+    'refused',
+    'retired',
+    'inacceptable',
+]
+
 # all types that can be used as a licence applicant
 APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation']
 
