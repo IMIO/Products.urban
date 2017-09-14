@@ -281,7 +281,7 @@
         for="Products.urban.interfaces.IGenericLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
-        factory=".conditions.LicenceEndedCondition"
+        factory=".generic.LicenceEndedCondition"
         name="liege.urban.schedule.licence_ended"
     />
 </configure>
