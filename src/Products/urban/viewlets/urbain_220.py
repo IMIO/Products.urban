@@ -125,7 +125,7 @@ class UrbainXMLExport(BrowserView):
             licence = licence_brain.getObject()
             applicantObj = licence.getApplicants() and licence.getApplicants()[0] or None
             architects = licence.getField('architects') and licence.getArchitects() or []
-            if api.content.get_state(licence) == 'accepted':
+            if api.content.get_state(licence) in ['accepted', 'authorized']:
                 html_list.append(
                     '<TR><TD>%s  %s</TD><TD>%s</TD></TR>'
                     % (str(licence.getReference()), licence.title.encode('iso-8859-1'),
