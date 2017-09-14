@@ -42,6 +42,8 @@ class Urbain220Viewlet(ViewletBase):
         Return the faceted query date range.
         """
         criterion = getCriterionByIndex(self.context, u'getDecisionDate')
+        if not criterion:
+            return
         decisiondate_id = '{}[]'.format(criterion.getId())
         date_range = self.request.get(decisiondate_id, None)
         return date_range
