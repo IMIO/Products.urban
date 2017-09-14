@@ -293,4 +293,12 @@
         name="urban.schedule.condition.decision_notified"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IGenericLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.LicenceEndedCondition"
+        name="urban.schedule.licence_ended"
+    />
+
 </configure>
