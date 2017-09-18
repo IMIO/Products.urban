@@ -30,61 +30,61 @@ class TestDefaultValues(unittest.TestCase):
         buildlicences = self.buildlicences
         buildlicences.invokeFactory('BuildLicence', id='newlicence', title='blabla')
         newlicence = buildlicences.newlicence
-        #simulate edition events to trigger default value system
+        # simulate edition events to trigger default value system
         notify(EditBegunEvent(newlicence))
         return newlicence
 
     def testNoDefaultValuesConfigured(self):
-        #create a new buildlicence
+        # create a new buildlicence
         newlicence = self.createNewLicence()
-        #any configurable selection field should be empty by default
+        # any configurable selection field should be empty by default
         self.assertEqual(True, not newlicence.getWorkType())
         self.assertEqual((), newlicence.getMissingParts())
         self.assertEqual(True, not newlicence.getMissingParts())
 
     def testSingleSelectionFieldWithOneDefaultValue(self):
-        #configure a default value for the field 'folder category'
+        # configure a default value for the field 'folder category'
         vocabulary_term = self.portal_urban.buildlicence.missingparts.objectValues()[0]
         vocabulary_term.setIsDefaultValue(True)
-        #create a new buildlicence
+        # create a new buildlicence
         newlicence = self.createNewLicence()
-        #the value of folderCategory should be the one marked as default value
+        # the value of folderCategory should be the one marked as default value
         self.assertEqual((vocabulary_term.id,), newlicence.getMissingParts())
 
     def testMultiSelectionFieldWithOneDefaultValue(self):
-        #configure a default value for the field 'missing parts'
+        # configure a default value for the field 'missing parts'
         vocabulary_term = self.portal_urban.buildlicence.missingparts.objectValues()[0]
         vocabulary_term.setIsDefaultValue(True)
-        #create a new buildlicence
+        # create a new buildlicence
         newlicence = self.createNewLicence()
-        #the value of missing parts should be the one marked as default value
+        # the value of missing parts should be the one marked as default value
         self.assertEqual((vocabulary_term.id, ), newlicence.getMissingParts())
 
     def testSingleSelectionFieldWithMultipleDefaultValues(self):
-        #configure a default value for the field 'folder category'
+        # configure a default value for the field 'folder category'
         vocabulary_term_1 = self.portal_urban.buildlicence.missingparts.objectValues()[0]
         vocabulary_term_1.setIsDefaultValue(True)
         vocabulary_term_2 = self.portal_urban.buildlicence.missingparts.objectValues()[2]
         vocabulary_term_2.setIsDefaultValue(True)
-        #create a new buildlicence
+        # create a new buildlicence
         newlicence = self.createNewLicence()
-        #the value of folderCategory should be the one marked as default value
+        # the value of folderCategory should be the one marked as default value
         self.assertEqual((vocabulary_term_1.id, vocabulary_term_2.id), newlicence.getMissingParts())
 
     def testMultiSelectionFieldWithMultiplesDefaultValues(self):
-        #configure a default value for the field 'missing parts'
+        # configure a default value for the field 'missing parts'
         vocabulary_term_1 = self.portal_urban.buildlicence.missingparts.objectValues()[0]
         vocabulary_term_1.setIsDefaultValue(True)
         vocabulary_term_2 = self.portal_urban.buildlicence.missingparts.objectValues()[2]
         vocabulary_term_2.setIsDefaultValue(True)
-        #create a new buildlicence
+        # create a new buildlicence
         newlicence = self.createNewLicence()
-        #the value of missing parts should be the one marked as default value
+        # the value of missing parts should be the one marked as default value
         self.assertEqual((vocabulary_term_1.id, vocabulary_term_2.id, ), newlicence.getMissingParts())
 
     def testDefaultValueMethodIsDefinedForEachConfigurableListing(self):
-        #each field with a configurable listing (<=> has a UrbanVocabulary defined as its vocabulary) should
-        #have the 'getDefaultValue' method defined on it, else the default value system wont work
+        # each field with a configurable listing (<=> has a UrbanVocabulary defined as its vocabulary) should
+        # have the 'getDefaultValue' method defined on it, else the default value system wont work
         site = self.site
         catalog = getToolByName(site, 'portal_catalog')
         test_licences = [brain.getObject() for brain in catalog(portal_type=URBAN_TYPES)]
@@ -97,22 +97,23 @@ class TestDefaultValues(unittest.TestCase):
     Tests for the text default values
     """
     def testNoTextDefaultValuesConfigured(self):
-        #create a new buildlicence
+        # create a new buildlicence
         newlicence = self.createNewLicence()
-        #text fields should be empty by default
+        # text fields should be empty by default
         self.assertEqual('<p></p>', newlicence.Description())
 
     def testTextValueConfigured(self):
         licence_config = self.site.portal_urban.buildlicence
-        #set the default text value fotr the fdescription field
+        # set the default text value fotr the fdescription field
         default_text = '<p>Bla bla</p>'
         licence_config.setTextDefaultValues(({'text': default_text, 'fieldname': 'description'}, ))
-        #any new licence should have this text as value for the description field
+        # any new licence should have this text as value for the description field
         newlicence = self.createNewLicence()
         self.assertEquals(default_text, newlicence.Description())
 
     def testDefaultTextMethodIsDefinedForEachTextField(self):
-        #each text field  should have the 'getDefaultText' method defined on it, else the default value system wont work
+        # each text field  should have the 'getDefaultText' method defined on it, else the default value system wont
+        # work
         site = self.site
         catalog = getToolByName(site, 'portal_catalog')
         test_licences = [brain.getObject() for brain in catalog(portal_type=URBAN_TYPES)]
@@ -134,7 +135,7 @@ class TestEventDefaultValues(unittest.TestCase):
         self.portal_urban = portal.portal_urban
         self.site = portal
         login(portal, 'urbanmanager')
-        #create a licence
+        # create a licence
         buildlicences = portal.urban.buildlicences
         buildlicences.invokeFactory(
             'BuildLicence',
@@ -146,35 +147,35 @@ class TestEventDefaultValues(unittest.TestCase):
         self.licence = buildlicence
 
     def testNoDefaultValuesConfigured(self):
-        #create a new buildlicence
+        # create a new buildlicence
         event = self.licence.createUrbanEvent('sncb')
-        #any configurable selection field should be empty by default
+        # any configurable selection field should be empty by default
         self.assertFalse(event.getAdviceAgreementLevel())
         self.assertFalse(event.getExternalDecision())
 
     def testSingleSelectionFieldWithOneDefaultValue(self):
-        #configure a default value for the field 'externalDecision'
+        # configure a default value for the field 'externalDecision'
         vocabulary_term = self.portal_urban.externaldecisions.objectValues()[0]
         vocabulary_term.setIsDefaultValue(True)
-        #create a new urban event
+        # create a new urban event
         event = self.licence.createUrbanEvent('sncb')
-        #the value of folderCategory should be the one marked as default value
+        # the value of folderCategory should be the one marked as default value
         self.assertEqual([vocabulary_term.id], event.getExternalDecision())
 
     def testSingleSelectionFieldWithMultipleDefaultValues(self):
-        #configure a default value for the field 'externalDecision'
+        # configure a default value for the field 'externalDecision'
         vocabulary_term_1 = self.portal_urban.externaldecisions.objectValues()[0]
         vocabulary_term_1.setIsDefaultValue(True)
         vocabulary_term_2 = self.portal_urban.externaldecisions.objectValues()[2]
         vocabulary_term_2.setIsDefaultValue(True)
-        #create a new urban event
+        # create a new urban event
         event = self.licence.createUrbanEvent('sncb')
-        #the value of folderCategory should be the one marked as default value
+        # the value of folderCategory should be the one marked as default value
         self.assertEqual([vocabulary_term_2.id, vocabulary_term_1.id], event.getExternalDecision())
 
     def testDefaultValueMethodIsDefinedForEachConfigurableListing(self):
-        #each field with a configurable listing (<=> has a UrbanVocabulary defined as its vocabulary) should
-        #have the 'getDefaultValue' method defined on it, else the default value system wont work
+        # each field with a configurable listing (<=> has a UrbanVocabulary defined as its vocabulary) should
+        # have the 'getDefaultValue' method defined on it, else the default value system wont work
         event = self.licence.createUrbanEvent('sncb')
         site = self.site
         catalog = getToolByName(site, 'portal_catalog')
@@ -185,8 +186,8 @@ class TestEventDefaultValues(unittest.TestCase):
                     self.assertEquals(field.default_method, 'getDefaultValue')
 
     def testNoTextDefaultValuesConfigured(self):
-        #create a new event 'rappor du college'
-        #text field 'decisionText' should be empty by default
+        # create a new event 'rappor du college'
+        # text field 'decisionText' should be empty by default
         event = self.licence.createUrbanEvent('rapport-du-college')
         decision_text = event.getDecisionText()
         self.failUnless(decision_text == '<p></p>')
@@ -216,7 +217,8 @@ class TestEventDefaultValues(unittest.TestCase):
         self.assertTrue(decision_text == expected_text)
 
     def testDefaultTextMethodIsDefinedForEachTextField(self):
-        #each text field  should have the 'getDefaultText' method defined on it, else the default value system wont work
+        # each text field  should have the 'getDefaultText' method defined on it, else the default value system wont
+        # work
         for field in UrbanEventInquiry.UrbanEventInquiry_schema.fields():
             if hasattr(field, 'defaut_content_type') and field.default_content_type.startswith('text'):
                 self.assertEquals(field.default_method, 'getDefaultText')
