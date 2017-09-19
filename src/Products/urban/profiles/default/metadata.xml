@@ -1,30 +1,7 @@
 <?xml version="1.0"?>
 <metadata>
   <version>2.2</version>
-  <!-- ##code-section METADATA -->
-  <!-- !!! its important to call the imio apps plonetheme profile first !!!
-       (so any element applied on all themes register correctly)-->
   <dependencies>
-    <dependency>profile-imio.actionspanel:default</dependency>
-    <dependency>profile-Products.CMFPlacefulWorkflow:CMFPlacefulWorkflow</dependency>
-    <dependency>profile-Products.DataGridField:default</dependency>
-    <dependency>profile-imio.dashboard:default</dependency>
-    <dependency>profile-imio.schedule:default</dependency>
-    <dependency>profile-collective.faceted.task:base</dependency>
-    <dependency>profile-collective.faceted.task:default</dependency>
-    <dependency>profile-Products.MasterSelectWidget:default</dependency>
-    <dependency>profile-plonetheme.imioapps:default</dependency>
-    <dependency>profile-collective.datagridcolumns:default</dependency>
-    <dependency>profile-collective.documentgenerator:default</dependency>
-    <dependency>profile-collective.externaleditor:default</dependency>
-    <dependency>profile-collective.iconifieddocumentactions:default</dependency>
-    <dependency>profile-collective.js.jqueryui:default</dependency>
-    <dependency>profile-collective.z3cform.datagridfield:default</dependency>
-    <dependency>profile-eea.jquery:23-select2</dependency>
-    <dependency>profile-collective.archetypes.select2:default</dependency>
-    <dependency>profile-plone.app.referenceintegrity:default</dependency>
-    <dependency>profile-Products.cron4plone:default</dependency>
-    <!--dependency>profile-Products.PasswordStrength:default</dependency-->
+    <dependency>profile-Products.urban:preinstall</dependency>
   </dependencies>
-  <!-- ##/code-section METADATA -->
 </metadata>
