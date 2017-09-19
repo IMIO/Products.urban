@@ -123,12 +123,12 @@ def getDefaultSubTemplates(context, template_id):
     available_subtemplates = availableSubTemplates(context)
 
     footer_template = available_subtemplates[category].get('footer', None)
-    subtemplates = footer_template and [{'pod_context_name': 'footer', 'template': footer_template}] or []
+    subtemplates = footer_template and [{'pod_context_name': 'footer', 'template': footer_template, 'do_rendering': True}] or []
     for result in search_results:
         subtemplate_name = result['match'][0].groups()[0]
         subtemplate = available_subtemplates[category].get(subtemplate_name, None)
         if subtemplate:
-            line = {'pod_context_name': subtemplate_name, 'template': subtemplate}
+            line = {'pod_context_name': subtemplate_name, 'template': subtemplate, 'do_rendering': True}
             subtemplates.append(line)
 
     return subtemplates
