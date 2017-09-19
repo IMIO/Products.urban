@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<import-steps>
+
+ <import-step 
+    id="urban-postInstall" 
+    handler="Products.urban.setuphandlers.postInstall"
+    title="manual coded post-install for urban"
+    version="2015-06-02T09:05:41.873479">
+   manual coded post-install for urban
+ </import-step>
+
+</import-steps>
+ 

@@ -41,6 +41,7 @@
 
   <include file="grok.zcml" />
   <include file="permissions.zcml" />
+  <include file="profiles.zcml" />
   <include file="vocabulary.zcml" />
 
   <include package=".collectionwidget" />
@@ -177,8 +178,6 @@
   <!-- ##/code-section configure.zcml.header -->
 
   <i18n:registerTranslations directory="locales" />
-
-  <include file="profiles.zcml" />
 
   <include file="generatedsubscribers.zcml"/>
 
