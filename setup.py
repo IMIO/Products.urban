@@ -28,6 +28,7 @@ setup(name='Products.urban',
               'testfixtures',
               'plone.app.testing',
               'plone.app.robotframework[debug, test]',
+              'ipdb',
           ],
           templates=[
               'Genshi',

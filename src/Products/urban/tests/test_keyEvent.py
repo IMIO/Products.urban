@@ -48,11 +48,11 @@ class TestKeyEvent(BrowserTestCase):
         urban_event = buildlicence.objectValues('UrbanEvent')[-1]
         urban_event_type = urban_event.getUrbaneventtypes()
 
-        #we delete the urban event from the buildlicence and set the urbanEventType UET as a key event
+        # we delete the urban event from the buildlicence and set the urbanEventType UET as a key event
         buildlicence.manage_delObjects(urban_event.id)
         urban_event_type.setIsKeyEvent(True)
 
-        #we add an urbanEvent of type UET, the index last_key_event of the licence should be updated
+        # we add an urbanEvent of type UET, the index last_key_event of the licence should be updated
         buildlicence.createUrbanEvent(urban_event_type)
         urban_event = buildlicence.objectValues('UrbanEvent')[-1]
         event = ObjectModifiedEvent(urban_event)
@@ -75,7 +75,7 @@ class TestKeyEvent(BrowserTestCase):
 
         self.assertTrue(buildlicence_brain.last_key_event != old_index_value)
 
-        #we remove the key event, the index last_key_event of the licence should be back to its original value
+        # we remove the key event, the index last_key_event of the licence should be back to its original value
         buildlicence.manage_delObjects(urban_event.id)
         event = ObjectRemovedEvent(urban_event)
         notify(event)
@@ -130,7 +130,7 @@ class TestKeyEvent(BrowserTestCase):
         date_2 = '18/09/2006'
 
         self.browser.open(buildlicence.absolute_url())
-        #so far the dates shouldnt appears
+        # so far the dates shouldnt appears
         self.assertTrue(date_1 not in self.browser.contents)
         self.assertTrue(date_2 not in self.browser.contents)
 
