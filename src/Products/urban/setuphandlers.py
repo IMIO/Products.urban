@@ -1193,6 +1193,9 @@ def createLicence(site, licence_type, data):
     licence_folder.invokeFactory(licence_type, id=licence_id)
     logger.info('creating test %s' % licence_type)
     licence = getattr(licence_folder, licence_id)
+
+    licence.processForm()
+
     #fill each licence field with a dummy value
     logger.info('   test %s --> fill fields with dummy data' % licence_type)
     if type(data) is tuple:
@@ -1210,7 +1213,7 @@ def createLicence(site, licence_type, data):
                 field_value = getDummyValueForField(field, licence)
             if field_value:
                 mutator(field_value)
-    licence.processForm()
+
     # add an applicant or a proprietary
     logger.info('   test %s --> add an applicant and a dummy parcel' % licence_type)
     contact_data = {
