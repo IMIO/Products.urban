@@ -27,6 +27,7 @@ from Products.DataGridField.Column import Column
 from collective.datagridcolumns.DateColumn import DateColumn
 
 from Products.urban.config import *
+from Products.urban.interfaces import IUrbanEventType
 
 from zope.component import getUtility
 from zope.interface import implements
@@ -590,7 +591,12 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         urbanConfig = self.getUrbanConfig(context=None, urbanConfigId=urbanConfigId)
         cat = getToolByName(self, 'portal_catalog')
         path = '/'.join(urbanConfig.getPhysicalPath())
-        brains = cat(path=path, sort_on='getObjPositionInParent', meta_type=['UrbanEventType', 'OpinionRequestEventType'], review_state="enabled")
+        brains = cat(
+            path=path,
+            sort_on='getObjPositionInParent',
+            object_provides=IUrbanEventType.__identifier__,
+            review_state="enabled"
+        )
         res = []
         #now evaluate the TAL condition for every brain
         for brain in brains:
