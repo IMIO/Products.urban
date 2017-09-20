@@ -19,9 +19,9 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
          - mark the document with IUrbanDoc interface
          - return the url of the generated doc (to open it in external edit)
         """
-        pod_template, output_format = self._get_base_args(template_uid, output_format)
+        self.pod_template, self.output_format = self._get_base_args(template_uid, output_format)
 
-        persisted_doc = self.generate_persistent_doc(pod_template, output_format)
+        persisted_doc = self.generate_persistent_doc(self.pod_template, self.output_format)
         alsoProvides(persisted_doc, IUrbanDoc)
 
         return persisted_doc.absolute_url()
