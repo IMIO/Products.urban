@@ -1194,6 +1194,7 @@ def createLicence(site, licence_type, data):
     logger.info('creating test %s' % licence_type)
     licence = getattr(licence_folder, licence_id)
 
+    event.notify(EditBegunEvent(licence))
     licence.processForm()
 
     #fill each licence field with a dummy value
