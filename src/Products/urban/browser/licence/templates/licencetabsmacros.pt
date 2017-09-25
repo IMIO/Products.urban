@@ -250,7 +250,7 @@
                             <tbody tal:define="tool python: context.portal_urban">
                                 <tr tal:repeat="opinionId opinionIds">
                                     <tal:block define="opinion python: inquiry.getLinkedUrbanEventOpinionRequest(opinionId);
-                                                       can_see python: opinion is None or checkPermission('View', opinion)">
+                                                       can_see python: opinion is not None and checkPermission('View', opinion)">
                                         <tal:anEventIsLinked condition="can_see">
                                             <td>
                                                 <a href="#" tal:attributes="href opinion/absolute_url" tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">
@@ -279,7 +279,7 @@
                                                 </span>
                                             </td>
                                         </tal:anEventIsLinked>
-                                        <tal:noEventIsLinked condition="not can_see">
+                                        <tal:noEventIsLinked condition="not: can_see">
                                             <td tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">Opinion request</td>
                                             <td><span class="discreet" i18n:translate="content_none">None</span></td>
                                             <td><span class="discreet" i18n:translate="content_none">None</span></td>
