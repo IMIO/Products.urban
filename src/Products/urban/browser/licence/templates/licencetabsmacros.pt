@@ -234,7 +234,9 @@
                 </tal:normal_field>
 
                 <tal:opinions condition="python: fieldname in ['solicitOpinionsTo', 'solicitOpinionsToOptional']">
-                    <td tal:define="opinionIds python:inquiry.getSolicitOpinionsTo() if fieldname == 'solicitOpinionsTo' else inquiry.getSolicitOpinionsToOptional()" style="padding-top: 1em;" colspan="3">
+                    <td tal:define="opinionIds python:inquiry.getSolicitOpinionsTo() if fieldname == 'solicitOpinionsTo' else inquiry.getSolicitOpinionsToOptional();
+                                    checkPermission python: here.portal_membership.checkPermission"
+                        style="padding-top: 1em;" colspan="3">
                         <label tal:content="field/widget/label_msgid" i18n:translate=""></label>
                         <table tal:condition="opinionIds" cellspacing="0" cellpadding="0" width="100%" class="listing">
                             <thead>
@@ -247,8 +249,9 @@
                             </thead>
                             <tbody tal:define="tool python: context.portal_urban">
                                 <tr tal:repeat="opinionId opinionIds">
-                                    <tal:block define="opinion python: inquiry.getLinkedUrbanEventOpinionRequest(opinionId)">
-                                        <tal:anEventIsLinked condition="python: opinion is not None">
+                                    <tal:block define="opinion python: inquiry.getLinkedUrbanEventOpinionRequest(opinionId);
+                                                       can_see python: opinion is None or checkPermission('View', opinion)">
+                                        <tal:anEventIsLinked condition="can_see">
                                             <td>
                                                 <a href="#" tal:attributes="href opinion/absolute_url" tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">
                                                     Opinion request
@@ -276,7 +279,7 @@
                                                 </span>
                                             </td>
                                         </tal:anEventIsLinked>
-                                        <tal:noEventIsLinked condition="python: opinion is None">
+                                        <tal:noEventIsLinked condition="not can_see">
                                             <td tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">Opinion request</td>
                                             <td><span class="discreet" i18n:translate="content_none">None</span></td>
                                             <td><span class="discreet" i18n:translate="content_none">None</span></td>
