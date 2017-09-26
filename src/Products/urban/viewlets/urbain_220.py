@@ -31,6 +31,7 @@ class Urbain220Viewlet(ViewletBase):
         This viewlet is only visible on buildlicences faceted view if we queried by date.
         """
         allowed_contexts = [
+            'urban',
             'buildlicences',
             'codt_buildlicences'
         ]
