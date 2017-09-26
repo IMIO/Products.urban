@@ -633,8 +633,6 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         """
         """
         contact = self._get_contact_dict(contact)
-        gender_multiplicity = contact['gender'] + '-' + contact['multiplicity']
-        gender_multiplicity = gender_multiplicity.encode('utf8')
         contact_names = \
             contact['personTitle'] + ' ' +\
             contact['name2'] + ' ' +\
@@ -643,16 +641,18 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             contact['personTitle'] + ' ' +\
             contact['name1'] + ' ' +\
             contact['name2']
-        contact_address = \
-            resident[gender_multiplicity] +\
-            contact['street'] + ' ' +\
-            contact['number'] + ' ' +\
-            contact['zipcode'] + ' ' +\
-            contact['city']
         contact = contact_names
         if reversed_name:
             contact = reversed_contact_names
         if withaddress:
+            gender_multiplicity = contact['gender'] + '-' + contact['multiplicity']
+            gender_multiplicity = gender_multiplicity.encode('utf8')
+            contact_address = \
+                resident[gender_multiplicity] +\
+                contact['street'] + ' ' +\
+                contact['number'] + ' ' +\
+                contact['zipcode'] + ' ' +\
+                contact['city']
             contact += contact_address
         return contact
 
