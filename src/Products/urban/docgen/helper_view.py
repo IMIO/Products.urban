@@ -634,11 +634,11 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         """
         contact = self._get_contact_dict(contact)
         contact_names = \
-            contact['personTitle'] + ' ' +\
+            contact.get('personTitle', '') + ' ' +\
             contact['name2'] + ' ' +\
             contact['name1']
         reversed_contact_names = \
-            contact['personTitle'] + ' ' +\
+            contact.get('personTitle', '') + ' ' +\
             contact['name1'] + ' ' +\
             contact['name2']
         contact = contact_names
