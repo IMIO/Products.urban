@@ -203,8 +203,8 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
             ('ukn', 'Non determiné'),
             ('internal_opinions', 'Sollicitation d\'avis internes'),
             ('external_opinions', 'Sollicitation d\'avis externes'),
-            ('light_inquiry', 'Instruction d\'une annonce de projet'),
             ('initiative_light_inquiry', 'Annonce de projet de d\'initiative'),
+            ('light_inquiry', 'Instruction d\'une annonce de projet'),
             ('inquiry', 'Instruction d\'une enquête publique'),
             ('FD', 'Sollicitation du fonctionnaire délégué'),
         )
