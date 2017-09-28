@@ -62,6 +62,7 @@ class CODT_Article127(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
             ('small', 'Projet d\'impact limité'),
             ('internal_opinions', 'Sollicitation d\'avis internes'),
             ('external_opinions', 'Sollicitation d\'avis externes'),
+            ('initiative_light_inquiry', 'Annonce de projet de d\'initiative'),
             ('light_inquiry', 'Instruction d\'une annonce de projet'),
             ('inquiry', 'Instruction d\'une enquête publique'),
         )
