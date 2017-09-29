@@ -17,5 +17,6 @@ def update_schedule_collections():
 
         if ITaskConfig.providedBy(parent) or IScheduleConfig.providedBy(parent):
             new_query = collection.query
+            new_query[0] = dict(new_query[0])
             new_query[0]['v'] = parent.UID()
             collection.setQuery(new_query)
