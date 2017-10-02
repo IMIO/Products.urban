@@ -433,6 +433,10 @@ class ITheLicenceEvent(Interface):
     __doc__ = _("""ITheLicence type marker interface""")
 
 
+class ILicenceNotificationEvent(Interface):
+    __doc__ = _("""ILicenceNotification type marker interface""")
+
+
 class IDisplayingTheDecisionEvent(Interface):
     __doc__ = _("""IDisplayingTheDecisionEvent type marker interface""")
 
