@@ -142,6 +142,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ILicenceNotificationEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IDisplayingTheDecisionEvent"
     type=".interfaces.IEventTypeType"/>
 
