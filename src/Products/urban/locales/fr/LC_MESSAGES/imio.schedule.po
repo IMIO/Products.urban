@@ -101,6 +101,9 @@ msgstr "Suspendre le dossier"
 msgid "urban.start_date.acknowledgement_date"
 msgstr "Date d'accusé de réception du dossier"
 
+msgid "urban.start_date.acknowledgement_transmit_date"
+msgstr "Date de transmis de l'accusé de réception"
+
 msgid "urban.start_date.announcement_end_date"
 msgstr "Date de fin de l'annonce de projet"
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-08-01 06:41+0000\n"
+"POT-Creation-Date: 2017-10-03 11:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,11 +52,11 @@ msgstr ""
 msgid "Add a work location"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:442
+#: ../browser/licence/templates/licencetabsmacros.pt:445
 msgid "Add all advices"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:418
+#: ../browser/licence/templates/licencetabsmacros.pt:421
 msgid "Add an event"
 msgstr ""
 
@@ -91,9 +91,13 @@ msgstr ""
 msgid "Article127"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:382
+#: ../browser/licence/templates/licencetabsmacros.pt:385
 #: ../browser/licence/templates/licenceview.pt:50
 msgid "Attachments"
+msgstr ""
+
+#: ../profiles.zcml:17
+msgid "Base preinstall profile for urban."
 msgstr ""
 
 msgid "BuildLicence"
@@ -162,7 +166,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: ../profiles.zcml:41
+#: ../profiles.zcml:49
 msgid "Demo Extension profile for urban."
 msgstr ""
 
@@ -205,20 +209,16 @@ msgstr ""
 msgid "EnvClassTwo"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:426
+#: ../browser/licence/templates/licencetabsmacros.pt:429
 msgid "Events"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:397
+#: ../browser/licence/templates/licencetabsmacros.pt:400
 msgid "Events attachments"
 msgstr ""
 
-#: ../profiles.zcml:17
+#: ../profiles.zcml:25
 msgid "Extension profile for urban."
-msgstr ""
-
-#: ../profiles.zcml:26
-msgid "Extra Extension profile for urban."
 msgstr ""
 
 msgid "Filter"
@@ -232,6 +232,10 @@ msgstr ""
 
 #: ../browser/templates/searchparcels.pt:178
 msgid "Found parcel(s)"
+msgstr ""
+
+#: ../profiles.zcml:34
+msgid "Full config profile for urban."
 msgstr ""
 
 msgid "Geometrician data"
@@ -278,7 +282,7 @@ msgstr ""
 msgid "IDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:441
+#: ../interfaces.py:445
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr ""
 
@@ -292,6 +296,10 @@ msgstr ""
 
 #: ../interfaces.py:425
 msgid "ILicenceExpiration type marker interface"
+msgstr ""
+
+#: ../interfaces.py:441
+msgid "ILicenceNotification type marker interface"
 msgstr ""
 
 #: ../interfaces.py:405
@@ -310,15 +318,15 @@ msgstr ""
 msgid "IOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:453
+#: ../interfaces.py:457
 msgid "IProrogation type marker interface"
 msgstr ""
 
-#: ../interfaces.py:445
+#: ../interfaces.py:449
 msgid "IRecourseEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:457
+#: ../interfaces.py:461
 msgid "IRefusedIncompleteness type marker interface"
 msgstr ""
 
@@ -330,7 +338,7 @@ msgstr ""
 msgid "ITechnicalServiceOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:437
+#: ../interfaces.py:433
 msgid "ITheLicence type marker interface"
 msgstr ""
 
@@ -346,7 +354,7 @@ msgstr ""
 msgid "IWalloonRegionPrimo type marker interface"
 msgstr ""
 
-#: ../interfaces.py:449
+#: ../interfaces.py:453
 msgid "IWorkBeginning type marker interface"
 msgstr ""
 
@@ -363,7 +371,7 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
-#: ../profiles.zcml:34
+#: ../profiles.zcml:42
 msgid "Migrations profile for urban."
 msgstr ""
 
@@ -407,7 +415,7 @@ msgstr ""
 msgid "PreliminaryNotice"
 msgstr ""
 
-#: ../profiles.zcml:48
+#: ../profiles.zcml:56
 msgid "Profile for pm.wsclient in urban"
 msgstr ""
 
@@ -559,7 +567,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: ../UrbanEventType.py:255
+#: ../UrbanEventType.py:265
 msgid "You can not create this UrbanEvent !"
 msgstr ""
 
@@ -648,7 +656,7 @@ msgstr ""
 msgid "add_an_applicant"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:391
+#: ../browser/licence/templates/licencetabsmacros.pt:394
 #: ../browser/templates/urbaneventmacros.pt:88
 msgid "add_an_attachment"
 msgstr ""
@@ -656,7 +664,7 @@ msgstr ""
 msgid "add_an_equipment"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:373
+#: ../browser/licence/templates/licencetabsmacros.pt:376
 msgid "add_an_inquiry"
 msgstr ""
 
@@ -664,7 +672,7 @@ msgid "add_event"
 msgstr ""
 
 #. Default: "This will automatically generate following advices:"
-#: ../browser/licence/templates/licencetabsmacros.pt:446
+#: ../browser/licence/templates/licencetabsmacros.pt:449
 msgid "add_every_advices_descr"
 msgstr ""
 
@@ -814,7 +822,7 @@ msgstr ""
 msgid "click_to_view_or_add"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1219
+#: ../content/licence/GenericLicence.py:1233
 msgid "close_prevention_area"
 msgstr ""
 
@@ -871,7 +879,7 @@ msgid "contact_recipients"
 msgstr ""
 
 #. Default: "There is no UrbanEventInquiry linked to this inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:359
+#: ../browser/licence/templates/licencetabsmacros.pt:362
 msgid "content_no_urbaneventinquiry"
 msgstr ""
 
@@ -1133,7 +1141,7 @@ msgstr ""
 msgid "externaldecisions_folder_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1220
+#: ../content/licence/GenericLicence.py:1234
 msgid "far_prevention_area"
 msgstr ""
 
@@ -1178,28 +1186,28 @@ msgstr ""
 msgid "firefox_viewlet_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1241
+#: ../content/licence/GenericLicence.py:1255
 msgid "flooding_level_high"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1239
+#: ../content/licence/GenericLicence.py:1253
 msgid "flooding_level_low"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1240
+#: ../content/licence/GenericLicence.py:1254
 msgid "flooding_level_moderate"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1237
+#: ../content/licence/GenericLicence.py:1251
 msgid "flooding_level_no"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1238
+#: ../content/licence/GenericLicence.py:1252
 msgid "flooding_level_verylow"
 msgstr ""
 
 #. Default: "Folder advices"
-#: ../browser/licence/templates/licencetabsmacros.pt:437
+#: ../browser/licence/templates/licencetabsmacros.pt:440
 msgid "folder_advice"
 msgstr ""
 
@@ -1331,7 +1339,7 @@ msgid "inquiry_suspension_folder_title"
 msgstr ""
 
 #. Default: "Inquiry ${number}"
-#: ../browser/licence/templates/licencetabsmacros.pt:307
+#: ../browser/licence/templates/licencetabsmacros.pt:310
 msgid "inquiry_title_and_number"
 msgstr ""
 
@@ -1468,7 +1476,7 @@ msgstr ""
 msgid "label_colname_transmitDate"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:323
+#: ../browser/licence/templates/licencetabsmacros.pt:326
 msgid "label_edit"
 msgstr ""
 
@@ -1489,7 +1497,7 @@ msgstr ""
 msgid "label_ok"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:332
+#: ../browser/licence/templates/licencetabsmacros.pt:335
 msgid "label_remove"
 msgstr ""
 
@@ -1695,7 +1703,7 @@ msgstr ""
 msgid "outdated_parcels_in_use"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1222
+#: ../content/licence/GenericLicence.py:1236
 msgid "outside_catchment"
 msgstr ""
 
@@ -1960,7 +1968,7 @@ msgstr ""
 msgid "subdivision_fieldset_legend"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1221
+#: ../content/licence/GenericLicence.py:1235
 msgid "supervision_area"
 msgstr ""
 
@@ -2014,29 +2022,33 @@ msgstr ""
 msgid "uno_enabled_python"
 msgstr ""
 
-#: ../profiles.zcml:17
+#: ../profiles.zcml:25
 #: ../profiles/default/actions.xml
 #: ../setuphandlers.py:269
 msgid "urban"
 msgstr ""
 
-#: ../profiles.zcml:41
+#: ../profiles.zcml:49
 msgid "urban-demo"
 msgstr ""
 
-#: ../profiles.zcml:26
+#: ../profiles.zcml:34
 msgid "urban-extra"
 msgstr ""
 
 msgid "urban-labruyere"
 msgstr ""
 
-#: ../profiles.zcml:34
+#: ../profiles.zcml:42
 msgid "urban-migrations"
 msgstr ""
 
-#: ../profiles.zcml:48
+#: ../profiles.zcml:56
 msgid "urban-pm-wsclient"
+msgstr ""
+
+#: ../profiles.zcml:17
+msgid "urban-preinstall"
 msgstr ""
 
 msgid "urban-sambreville"
@@ -2391,7 +2403,7 @@ msgid "urban_label_article"
 msgstr ""
 
 #. Default: "Asking Date"
-#: ../browser/licence/templates/licencetabsmacros.pt:243
+#: ../browser/licence/templates/licencetabsmacros.pt:245
 msgid "urban_label_askingDate"
 msgstr ""
 
@@ -2808,7 +2820,7 @@ msgid "urban_label_expropriationDetails"
 msgstr ""
 
 #. Default: "Advice"
-#: ../browser/licence/templates/licencetabsmacros.pt:245
+#: ../browser/licence/templates/licencetabsmacros.pt:247
 msgid "urban_label_externalDecision"
 msgstr ""
 
@@ -3594,7 +3606,7 @@ msgid "urban_label_rcuDetails"
 msgstr ""
 
 #. Default: "Receipt date"
-#: ../browser/licence/templates/licencetabsmacros.pt:244
+#: ../browser/licence/templates/licencetabsmacros.pt:246
 msgid "urban_label_receiptDate"
 msgstr ""
 
@@ -3688,7 +3700,7 @@ msgid "urban_label_representedBySociety"
 msgstr ""
 
 #. Default: "Organisation"
-#: ../browser/licence/templates/licencetabsmacros.pt:242
+#: ../browser/licence/templates/licencetabsmacros.pt:244
 msgid "urban_label_requestedOrganisation"
 msgstr ""
 
@@ -4197,7 +4209,7 @@ msgid "urban_label_zipcode"
 msgstr ""
 
 #. Default: "Click here to access the linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:354
+#: ../browser/licence/templates/licencetabsmacros.pt:357
 msgid "urban_link_to_the_linked_urbaneventinquiry"
 msgstr ""
 
@@ -4205,7 +4217,7 @@ msgid "urban_linked_inquiry_help"
 msgstr ""
 
 #. Default: "Linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:350
+#: ../browser/licence/templates/licencetabsmacros.pt:353
 msgid "urban_linked_urbaneventinquiry"
 msgstr ""
 
@@ -4215,7 +4227,7 @@ msgid "urban_no_event_added"
 msgstr ""
 
 #. Default: "No event type is defined in the configuration for this element"
-#: ../browser/licence/templates/licencetabsmacros.pt:420
+#: ../browser/licence/templates/licencetabsmacros.pt:423
 msgid "urban_no_eventtype_defined"
 msgstr ""
 

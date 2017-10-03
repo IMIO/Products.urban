@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2017-08-01 06:41+0000\n"
+"POT-Creation-Date: 2017-10-03 11:32+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -54,11 +54,11 @@ msgstr "Ajouter"
 msgid "Add a work location"
 msgstr "Ajouter une adresse"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:442
+#: ../browser/licence/templates/licencetabsmacros.pt:445
 msgid "Add all advices"
 msgstr "Ajouter tous les avis"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:418
+#: ../browser/licence/templates/licencetabsmacros.pt:421
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
@@ -93,10 +93,14 @@ msgstr "Coordonnées de l'architecte"
 msgid "Article127"
 msgstr "Article 127"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:382
+#: ../browser/licence/templates/licencetabsmacros.pt:385
 #: ../browser/licence/templates/licenceview.pt:50
 msgid "Attachments"
 msgstr "Pièces jointes"
+
+#: ../profiles.zcml:17
+msgid "Base preinstall profile for urban."
+msgstr ""
 
 msgid "BuildLicence"
 msgstr "Permis d'urbanisme"
@@ -164,7 +168,7 @@ msgstr "Déclaration"
 msgid "Delete"
 msgstr "Supprimer le permis"
 
-#: ../profiles.zcml:41
+#: ../profiles.zcml:49
 msgid "Demo Extension profile for urban."
 msgstr "Profile de démo urban"
 
@@ -207,20 +211,16 @@ msgstr "Déclaration environnementale"
 msgid "EnvClassTwo"
 msgstr "Permis d'environnement classe 2"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:426
+#: ../browser/licence/templates/licencetabsmacros.pt:429
 msgid "Events"
 msgstr "Événements"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:397
+#: ../browser/licence/templates/licencetabsmacros.pt:400
 msgid "Events attachments"
 msgstr "Pièces jointes des événements"
 
-#: ../profiles.zcml:17
+#: ../profiles.zcml:25
 msgid "Extension profile for urban."
-msgstr ""
-
-#: ../profiles.zcml:26
-msgid "Extra Extension profile for urban."
 msgstr ""
 
 msgid "Filter"
@@ -235,6 +235,10 @@ msgstr "Dossier(s) trouvé(s)"
 #: ../browser/templates/searchparcels.pt:178
 msgid "Found parcel(s)"
 msgstr "Parcelle(s) trouvée(s)"
+
+#: ../profiles.zcml:34
+msgid "Full config profile for urban."
+msgstr ""
 
 msgid "Geometrician data"
 msgstr "Coordonnées du géomètre"
@@ -284,7 +288,7 @@ msgstr "Accusé de réception par défaut"
 msgid "IDeposit type marker interface"
 msgstr "Dépôt de la demande"
 
-#: ../interfaces.py:441
+#: ../interfaces.py:445
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr "Affichage de la décision"
 
@@ -300,6 +304,10 @@ msgstr "Délivrance du permis (environnement)"
 #: ../interfaces.py:425
 msgid "ILicenceExpiration type marker interface"
 msgstr "Expiration du permis"
+
+#: ../interfaces.py:441
+msgid "ILicenceNotification type marker interface"
+msgstr "Notification du permis"
 
 #. Default: "Missing part"
 #: ../interfaces.py:405
@@ -322,15 +330,15 @@ msgid "IOpinionRequest type marker interface"
 msgstr "Demande d'avis"
 
 #. Default: "Prorogation"
-#: ../interfaces.py:453
+#: ../interfaces.py:457
 msgid "IProrogation type marker interface"
 msgstr "Prorogation"
 
-#: ../interfaces.py:445
+#: ../interfaces.py:449
 msgid "IRecourseEvent type marker interface"
 msgstr "Recours"
 
-#: ../interfaces.py:457
+#: ../interfaces.py:461
 msgid "IRefusedIncompleteness type marker interface"
 msgstr "Refus pour incomplétude"
 
@@ -344,7 +352,7 @@ msgid "ITechnicalServiceOpinionRequest type marker interface"
 msgstr "Demande d'avis du service technique"
 
 #. Default: "Licence delivery"
-#: ../interfaces.py:437
+#: ../interfaces.py:433
 msgid "ITheLicence type marker interface"
 msgstr "Délivrance du permis/certificat/..."
 
@@ -363,7 +371,7 @@ msgid "IWalloonRegionPrimo type marker interface"
 msgstr "Envoi du primo dossier"
 
 #. Default: "Work beginning"
-#: ../interfaces.py:449
+#: ../interfaces.py:453
 msgid "IWorkBeginning type marker interface"
 msgstr "Début des travaux"
 
@@ -380,7 +388,7 @@ msgstr "Type de permis"
 msgid "Map"
 msgstr "Carte"
 
-#: ../profiles.zcml:34
+#: ../profiles.zcml:42
 msgid "Migrations profile for urban."
 msgstr ""
 
@@ -424,7 +432,7 @@ msgstr "Certificat de patrimoine"
 msgid "PreliminaryNotice"
 msgstr "Demande d'avis préalable"
 
-#: ../profiles.zcml:48
+#: ../profiles.zcml:56
 msgid "Profile for pm.wsclient in urban"
 msgstr ""
 
@@ -577,7 +585,7 @@ msgstr ""
 msgid "View"
 msgstr "Voir le permis"
 
-#: ../UrbanEventType.py:255
+#: ../UrbanEventType.py:265
 msgid "You can not create this UrbanEvent !"
 msgstr "Vous ne pouvez pas créer cet événement"
 
@@ -667,7 +675,7 @@ msgid "add_an_applicant"
 msgstr "Ajouter un demandeur"
 
 # urbanevent_view
-#: ../browser/licence/templates/licencetabsmacros.pt:391
+#: ../browser/licence/templates/licencetabsmacros.pt:394
 #: ../browser/templates/urbaneventmacros.pt:88
 msgid "add_an_attachment"
 msgstr "Ajouter une pièce jointe"
@@ -675,7 +683,7 @@ msgstr "Ajouter une pièce jointe"
 msgid "add_an_equipment"
 msgstr "Ajouter une charge imposée"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:373
+#: ../browser/licence/templates/licencetabsmacros.pt:376
 msgid "add_an_inquiry"
 msgstr "Ajouter une enquête supplémentaire"
 
@@ -683,7 +691,7 @@ msgid "add_event"
 msgstr "Ajouter un événement"
 
 #. Default: "This will automatically generate following advices:"
-#: ../browser/licence/templates/licencetabsmacros.pt:446
+#: ../browser/licence/templates/licencetabsmacros.pt:449
 msgid "add_every_advices_descr"
 msgstr "Ceci ajoutera automatiquement les avis suivants :"
 
@@ -835,7 +843,7 @@ msgid "click_to_view_or_add"
 msgstr "Cliquez ici pour voir ou ajouter des documents"
 
 #. Default: "Close prevention area"
-#: ../content/licence/GenericLicence.py:1219
+#: ../content/licence/GenericLicence.py:1233
 msgid "close_prevention_area"
 msgstr "Zone de prévention rapprochée"
 
@@ -894,7 +902,7 @@ msgid "contact_recipients"
 msgstr "Destinataire(s) de contact"
 
 #. Default: "There is no UrbanEventInquiry linked to this inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:359
+#: ../browser/licence/templates/licencetabsmacros.pt:362
 msgid "content_no_urbaneventinquiry"
 msgstr "Aucun événement n'est encore lié à cette enquête publique"
 
@@ -1157,7 +1165,7 @@ msgid "externaldecisions_folder_title"
 msgstr "Décision des avis externes"
 
 #. Default: "Far prevention area"
-#: ../content/licence/GenericLicence.py:1220
+#: ../content/licence/GenericLicence.py:1234
 msgid "far_prevention_area"
 msgstr "Zone de prévention éloignée"
 
@@ -1203,31 +1211,31 @@ msgid "firefox_viewlet_title"
 msgstr "Cette application fonctionne mieux avec Firefox."
 
 #. Default: "High risk"
-#: ../content/licence/GenericLicence.py:1241
+#: ../content/licence/GenericLicence.py:1255
 msgid "flooding_level_high"
 msgstr "Risque élevé"
 
 #. Default: "Low risk"
-#: ../content/licence/GenericLicence.py:1239
+#: ../content/licence/GenericLicence.py:1253
 msgid "flooding_level_low"
 msgstr "Risque faible"
 
 #. Default: "Moderate risk"
-#: ../content/licence/GenericLicence.py:1240
+#: ../content/licence/GenericLicence.py:1254
 msgid "flooding_level_moderate"
 msgstr "Risque moyen"
 
 #. Default: "No"
-#: ../content/licence/GenericLicence.py:1237
+#: ../content/licence/GenericLicence.py:1251
 msgid "flooding_level_no"
 msgstr "Non"
 
-#: ../content/licence/GenericLicence.py:1238
+#: ../content/licence/GenericLicence.py:1252
 msgid "flooding_level_verylow"
 msgstr "Risque très faible"
 
 #. Default: "Folder advices"
-#: ../browser/licence/templates/licencetabsmacros.pt:437
+#: ../browser/licence/templates/licencetabsmacros.pt:440
 msgid "folder_advice"
 msgstr "Avis du dossier"
 
@@ -1363,7 +1371,7 @@ msgid "inquiry_suspension_folder_title"
 msgstr "Périodes de suspension d'enquête"
 
 #. Default: "Inquiry ${number}"
-#: ../browser/licence/templates/licencetabsmacros.pt:307
+#: ../browser/licence/templates/licencetabsmacros.pt:310
 msgid "inquiry_title_and_number"
 msgstr "Enquête n°${number}"
 
@@ -1500,7 +1508,7 @@ msgstr "Retard (jours)"
 msgid "label_colname_transmitDate"
 msgstr "Date d'envoi"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:323
+#: ../browser/licence/templates/licencetabsmacros.pt:326
 msgid "label_edit"
 msgstr "Modifier"
 
@@ -1521,7 +1529,7 @@ msgstr "Non"
 msgid "label_ok"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:332
+#: ../browser/licence/templates/licencetabsmacros.pt:335
 msgid "label_remove"
 msgstr "Supprimer"
 
@@ -1728,7 +1736,7 @@ msgid "outdated_parcels_in_use"
 msgstr "Permis en cours contenant une parcelle à mettre jour"
 
 #. Default: "Outside catchment"
-#: ../content/licence/GenericLicence.py:1222
+#: ../content/licence/GenericLicence.py:1236
 msgid "outside_catchment"
 msgstr "Hors captage"
 
@@ -1994,7 +2002,7 @@ msgid "subdivision_fieldset_legend"
 msgstr "Lotissement"
 
 #. Default: "Supervision area"
-#: ../content/licence/GenericLicence.py:1221
+#: ../content/licence/GenericLicence.py:1235
 msgid "supervision_area"
 msgstr "Zone de surveillance"
 
@@ -2048,29 +2056,33 @@ msgstr "Paramètres des permis uniques"
 msgid "uno_enabled_python"
 msgstr "Si l'interpréteur Python qui tourne Zope et Plone ne dispose pas de la librairie pyUNO (testez-le en essayant 'import uno'), vous pouvez spécifier ici le chemin absolu de l'exécutable d'un second interpréteur Python disposant de la librairie UNO (accès à OpenOffice). Par exemple, l'interpréteur Python /usr/bin/python livré avec Ubuntu."
 
-#: ../profiles.zcml:17
+#: ../profiles.zcml:25
 #: ../profiles/default/actions.xml
 #: ../setuphandlers.py:269
 msgid "urban"
 msgstr "Urbanisme"
 
-#: ../profiles.zcml:41
+#: ../profiles.zcml:49
 msgid "urban-demo"
 msgstr "Urbanisme démo (permis d'exemples)"
 
-#: ../profiles.zcml:26
+#: ../profiles.zcml:34
 msgid "urban-extra"
 msgstr "Urbanisme extra (valeurs de config et modèles par defaut)"
 
 msgid "urban-labruyere"
 msgstr "Urbanisme La Bruyère"
 
-#: ../profiles.zcml:34
+#: ../profiles.zcml:42
 msgid "urban-migrations"
 msgstr "Urbanisme migrations"
 
-#: ../profiles.zcml:48
+#: ../profiles.zcml:56
 msgid "urban-pm-wsclient"
+msgstr ""
+
+#: ../profiles.zcml:17
+msgid "urban-preinstall"
 msgstr ""
 
 msgid "urban-sambreville"
@@ -2425,7 +2437,7 @@ msgid "urban_label_article"
 msgstr "Article"
 
 #. Default: "Asking Date"
-#: ../browser/licence/templates/licencetabsmacros.pt:243
+#: ../browser/licence/templates/licencetabsmacros.pt:245
 msgid "urban_label_askingDate"
 msgstr "Date de demande"
 
@@ -2844,7 +2856,7 @@ msgid "urban_label_expropriationDetails"
 msgstr "Détails concernant le plan d'expropriation"
 
 #. Default: "Advice"
-#: ../browser/licence/templates/licencetabsmacros.pt:245
+#: ../browser/licence/templates/licencetabsmacros.pt:247
 msgid "urban_label_externalDecision"
 msgstr " Avis"
 
@@ -3631,7 +3643,7 @@ msgid "urban_label_rcuDetails"
 msgstr "Détails concernant le RCU"
 
 #. Default: "Receipt date"
-#: ../browser/licence/templates/licencetabsmacros.pt:244
+#: ../browser/licence/templates/licencetabsmacros.pt:246
 msgid "urban_label_receiptDate"
 msgstr "Date de réception"
 
@@ -3725,7 +3737,7 @@ msgid "urban_label_representedBySociety"
 msgstr "Représenté par la société"
 
 #. Default: "Organisation"
-#: ../browser/licence/templates/licencetabsmacros.pt:242
+#: ../browser/licence/templates/licencetabsmacros.pt:244
 msgid "urban_label_requestedOrganisation"
 msgstr "Organisme"
 
@@ -4236,7 +4248,7 @@ msgid "urban_label_zipcode"
 msgstr "Code Postal"
 
 #. Default: "Click here to access the linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:354
+#: ../browser/licence/templates/licencetabsmacros.pt:357
 msgid "urban_link_to_the_linked_urbaneventinquiry"
 msgstr "Cliquez ici pour accéder à l'événement lié"
 
@@ -4244,7 +4256,7 @@ msgid "urban_linked_inquiry_help"
 msgstr "Vous retrouvez ici les informations concernant l'enquête.  Si vous souhaitez modifier ces informations, cliquez sur le lien de l'enquête liée ci-dessous."
 
 #. Default: "Linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:350
+#: ../browser/licence/templates/licencetabsmacros.pt:353
 msgid "urban_linked_urbaneventinquiry"
 msgstr "Événement lié"
 
@@ -4254,7 +4266,7 @@ msgid "urban_no_event_added"
 msgstr "Aucun élément n'a encore été ajouté"
 
 #. Default: "No event type is defined in the configuration for this element"
-#: ../browser/licence/templates/licencetabsmacros.pt:420
+#: ../browser/licence/templates/licencetabsmacros.pt:423
 msgid "urban_no_eventtype_defined"
 msgstr "Aucun type d'événement n'est défini dans la configuration pour cet élément"
 
