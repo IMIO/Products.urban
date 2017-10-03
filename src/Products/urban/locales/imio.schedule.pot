@@ -74,6 +74,9 @@ msgstr ""
 msgid "urban.start_date.acknowledgement_date"
 msgstr ""
 
+msgid "urban.start_date.acknowledgement_transmit_date"
+msgstr ""
+
 msgid "urban.start_date.creation_date"
 msgstr ""
 

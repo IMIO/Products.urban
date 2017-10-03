@@ -58,6 +58,18 @@ class AcknowledgmentDate(StartDate):
         return ack_date
 
 
+class AcknowledgmentTransmitDate(StartDate):
+    """
+    Returns the deposit date of the licence.
+    """
+
+    def start_date(self):
+        licence = self.task_container
+        ack = licence.getLastAcknowledgment()
+        ack_transmit_date = ack and ack.getTransmitDate() or None
+        return ack_transmit_date
+
+
 class InquriryEndDate(StartDate):
     """
     Returns the inquiry end date of the licence.
