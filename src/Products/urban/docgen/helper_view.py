@@ -2,7 +2,6 @@
 
 from collective.documentgenerator.helper.archetypes import ATDisplayProxyObject
 from collective.documentgenerator.helper.archetypes import ATDocumentGenerationHelperView
-from collective.documentgenerator.interfaces import IDisplayProxyObject
 
 from datetime import date as _date
 from dateutil.relativedelta import relativedelta
@@ -13,7 +12,6 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.services import cadastre
 
-from zope.component import getMultiAdapter
 from zope.i18n import translate
 from plone import api
 
@@ -504,16 +502,14 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         Delegate field attribute access to display() method.
         """
         if attr_name.startswith('getLast') or attr_name.startswith('getFirst'):
-            urban_event = getattr(self.context, attr_name)()
-            if urban_event:
-                helper_view = urban_event.restrictedTraverse('document_generation_helper_view')
-                proxy_event = helper_view.context
-                return proxy_event
-            else:
-                class EventNotFound(object):
-                    def __getattribute__(self, attr_name):
-                        return None
-                return EventNotFound()
+            def getUrbanEventProxy(*args, **kwargs):
+                urban_event = getattr(self.context, attr_name)(*args, **kwargs)
+                if urban_event:
+                    helper_view = urban_event.restrictedTraverse('document_generation_helper_view')
+                    proxy_event = helper_view.context
+                    return proxy_event
+                return None
+            return getUrbanEventProxy
 
         return super(LicenceDisplayProxyObject, self).__getattr__(attr_name)
 
