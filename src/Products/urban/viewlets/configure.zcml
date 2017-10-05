@@ -36,7 +36,7 @@
       />
 
   <adapter
-      for="Products.urban.IGenericLicence"
+      for="Products.urban.interfaces.IGenericLicence"
       provides="Products.urban.interfaces.IToUrbain220Street"
       factory=".urbain_220.LicenceToUrbain220Street"
       permission="zope2.View"
