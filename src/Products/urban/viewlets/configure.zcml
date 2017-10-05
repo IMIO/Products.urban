@@ -35,4 +35,11 @@
       template="templates/firefox.pt"
       />
 
+  <adapter
+      for="Products.urban.IGenericLicence"
+      provides="Products.urban.interfaces.IToUrbain220Street"
+      factory=".urbain_220.LicenceToUrbain220Street"
+      permission="zope2.View"
+      />
+
 </configure>

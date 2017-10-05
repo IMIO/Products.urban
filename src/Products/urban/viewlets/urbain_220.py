@@ -5,6 +5,7 @@ from DateTime import DateTime
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from Products.urban.interfaces import IToUrbain220Street
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 from StringIO import StringIO
@@ -16,6 +17,9 @@ from imio.dashboard.utils import getCriterionByIndex
 
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
+
+from zope.component import getAdapter
+from zope.interface import implements
 
 import json
 import unidecode
@@ -59,6 +63,28 @@ class Urbain220Viewlet(ViewletBase):
         )
         link = {'link': url, 'title': 'Liste 220', 'output_format': output_format, 'template_uid': ''}
         return [link]
+
+
+class LicenceToUrbain220Street(object):
+    """ """
+
+    implements(IToUrbain220Street)
+
+    def __init__(self, licence):
+        catalog = api.content.get_tool('portal_catalog')
+        addresses = licence.getWorkLocations()
+        first_address = addresses and addresses[0]
+        street_brain = catalog(UID=first_address['street'])
+        self.first_street = street_brain and street_brain[0].getObject()
+        self.street_number = first_address['number']
+
+    @property
+    def street_name(self):
+        return self.first_street and self.first_street.getStreetName()
+
+    @property
+    def street_code(self):
+        return self.first_street.getStreetCode()
 
 
 class UrbainXMLExport(BrowserView):
@@ -112,7 +138,6 @@ class UrbainXMLExport(BrowserView):
             return condition
 
         portal_urban = api.portal.get_tool('portal_urban')
-        catalog = api.portal.get_tool('portal_catalog')
 
         xml = []
         error = []
@@ -141,14 +166,14 @@ class UrbainXMLExport(BrowserView):
                 parcels = licence.getParcels()
                 if check(parcels, 'no parcels found on licence %s' % str(licence.getReference())):
                     xml.append('      <Doc_Afd>%s</Doc_Afd>' % parcels[0].getDivisionCode())
-                street = number = None
-                if licence.getWorkLocations():
-                    number = licence.getWorkLocations()[0]['number']
-                    street = catalog.searchResults(UID=licence.getWorkLocations()[0]['street'])
-                if check(street, 'no street found on licence %s' % str(licence.getReference())):
-                    street = street[0].getObject()
-                    xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street.getStreetCode()))
-                    xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street.getStreetName()).decode('iso-8859-1').encode('iso-8859-1'))
+                street_info = getAdapter(licence, IToUrbain220Street)
+                number = street_info.street_number
+                street_name = street_info.street_name
+                street_code = street_info.street_code
+                if check(street_code, 'no street (with code) found on licence %s' % str(licence.getReference())):
+                    xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street_code))
+                if check(street_name, 'no street found on licence %s' % str(licence.getReference())):
+                    xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street_code).decode('iso-8859-1').encode('iso-8859-1'))
                 if number:
                     xml.append('      <E_220_huisnr>%s</E_220_huisnr>' % number)
                 worktype = licence.getWorkType() and licence.getWorkType()[0] or ''
