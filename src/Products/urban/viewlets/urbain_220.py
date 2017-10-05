@@ -175,7 +175,7 @@ class UrbainXMLExport(BrowserView):
                     if check(street_name, 'no street name found on licence %s' % str(licence.getReference())):
                         xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street_name).decode('iso-8859-1').encode('iso-8859-1'))
                 if number:
-                    xml.append('      <E_220_huisnr>%s</E_220_huisnr>' % number)
+                    xml.append('      <E_220_huisnr>%s</E_220_huisnr>' % str(number))
                 worktype = licence.getWorkType() and licence.getWorkType()[0] or ''
                 work_types = UrbanVocabulary('folderbuildworktypes').getAllVocTerms(licence)
                 worktype_map = {}
