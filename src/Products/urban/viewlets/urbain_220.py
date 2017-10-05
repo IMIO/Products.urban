@@ -172,8 +172,8 @@ class UrbainXMLExport(BrowserView):
                 street_code = street_info.street_code
                 if check(street_code, 'no street (with code) found on licence %s' % str(licence.getReference())):
                     xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street_code))
-                if check(street_name, 'no street found on licence %s' % str(licence.getReference())):
-                    xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street_code).decode('iso-8859-1').encode('iso-8859-1'))
+                    if check(street_name, 'no street name found on licence %s' % str(licence.getReference())):
+                        xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street_name).decode('iso-8859-1').encode('iso-8859-1'))
                 if number:
                     xml.append('      <E_220_huisnr>%s</E_220_huisnr>' % number)
                 worktype = licence.getWorkType() and licence.getWorkType()[0] or ''
