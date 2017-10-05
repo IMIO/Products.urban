@@ -526,6 +526,15 @@ class IWorklocationSignaletic(Interface):
         """ """
 
 
+class IToUrbain220Street(Interface):
+    """
+    Adapts an object into streets infos needed for urbain 220:
+    street_number
+    street_name
+    street_code
+    """
+
+
 class IIsArchive(Interface):
     """ Adapts a licence into an archive"""
 
