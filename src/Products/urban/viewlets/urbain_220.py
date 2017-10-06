@@ -189,37 +189,39 @@ class UrbainXMLExport(BrowserView):
                 strDecisionDate = str(licence_brain.getDecisionDate)
                 xml.append('      <E_220_Datum_Verg>%s%s%s</E_220_Datum_Verg>' % (strDecisionDate[0: 4], strDecisionDate[5: 7], strDecisionDate[8: 10]))
                 xml.append('      <E_220_Instan>COM</E_220_Instan>')
-                xml.append('      <PERSOON>')
-                xml.append('        <naam>%s %s</naam>' % (applicantObj.getName1().decode('iso-8859-1').encode('iso-8859-1'), applicantObj.getName2().decode('iso-8859-1').encode('iso-8859-1')))
-                xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().decode('iso-8859-1').encode('iso-8859-1'))
-                xml.append('        <huisnr>%s</huisnr>' % applicantObj.getNumber())
-                xml.append('        <postcode>%s</postcode>' % applicantObj.getZipcode())
-                xml.append('        <gemeente>%s</gemeente>' % applicantObj.getCity().decode('iso-8859-1').encode('iso-8859-1'))
-                xml.append('        <hoedanig>DEMANDEUR</hoedanig>')
-                xml.append('      </PERSOON>')
-                if architects:
-                    architectObj = architects[0]
-                    list_architects_terms = ["NON REQUIS", "lui-meme", "Eux-memes", "elle-meme", "lui-meme", "lui-même", "lui-meme ", "Lui-meme", "A COMPLETER "]
-                    if architectObj.getName1() in list_architects_terms:
-                        xml.append('      <PERSOON>')
-                        xml.append('        <naam>%s %s</naam>'
-                                   % (applicantObj.getName1().encode('iso-8859-1'), applicantObj.name2.encode('iso-8859-1')))
-                        xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().encode('iso-8859-1'))
-                        xml.append('        <huisnr>%s</huisnr>' % applicantObj.getNumber())
-                        xml.append('        <postcode>%s</postcode>' % applicantObj.getZipcode())
-                        xml.append('        <gemeente>%s</gemeente>' % applicantObj.getCity().encode('iso-8859-1'))
-                        xml.append('        <hoedanig>ARCHITECTE</hoedanig>')
-                        xml.append('      </PERSOON>')
-                    else:
-                        xml.append('      <PERSOON>')
-                        xml.append('        <naam>%s %s</naam>'
-                                   % (architectObj.getName1().decode('iso-8859-1').encode('iso-8859-1'), architectObj.getName2().decode('iso-8859-1').encode('iso-8859-1')))
-                        xml.append('        <straatnaam>%s</straatnaam>' % architectObj.getStreet().decode('iso-8859-1').encode('iso-8859-1'))
-                        xml.append('        <huisnr>%s</huisnr>' % architectObj.getNumber())
-                        xml.append('        <postcode>%s</postcode>' % architectObj.getZipcode())
-                        xml.append('        <gemeente>%s</gemeente>' % architectObj.getCity().decode('iso-8859-1').encode('iso-8859-1'))
-                        xml.append('        <hoedanig>ARCHITECTE</hoedanig>')
-                        xml.append('      </PERSOON>')
+                if check(applicantObj, 'no applicant found on licence %s' % str(licence.getReference())):
+                    firstname = applicantObj.portal_type == 'Corporation' and applicantObj.getDenomination() or applicantObj.getName1()
+                    lastname = applicantObj.portal_type == 'Corporation' and applicantObj.getLegalForm() or applicantObj.getName2()
+                    xml.append('      <PERSOON>')
+                    xml.append('        <naam>%s %s</naam>' % (firstname.decode('iso-8859-1').encode('iso-8859-1'), lastname.decode('iso-8859-1').encode('iso-8859-1')))
+                    xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().decode('iso-8859-1').encode('iso-8859-1'))
+                    xml.append('        <huisnr>%s</huisnr>' % applicantObj.getNumber())
+                    xml.append('        <postcode>%s</postcode>' % applicantObj.getZipcode())
+                    xml.append('        <gemeente>%s</gemeente>' % applicantObj.getCity().decode('iso-8859-1').encode('iso-8859-1'))
+                    xml.append('        <hoedanig>DEMANDEUR</hoedanig>')
+                    xml.append('      </PERSOON>')
+                    if architects:
+                        architectObj = architects[0]
+                        list_architects_terms = ["NON REQUIS", "lui-meme", "Eux-memes", "elle-meme", "lui-meme", "lui-même", "lui-meme ", "Lui-meme", "A COMPLETER "]
+                        if architectObj.getName1() in list_architects_terms:
+                            xml.append('      <PERSOON>')
+                            xml.append('        <naam>%s %s</naam>' % (firstname.encode('iso-8859-1'), lastname.encode('iso-8859-1')))
+                            xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().encode('iso-8859-1'))
+                            xml.append('        <huisnr>%s</huisnr>' % applicantObj.getNumber())
+                            xml.append('        <postcode>%s</postcode>' % applicantObj.getZipcode())
+                            xml.append('        <gemeente>%s</gemeente>' % applicantObj.getCity().encode('iso-8859-1'))
+                            xml.append('        <hoedanig>ARCHITECTE</hoedanig>')
+                            xml.append('      </PERSOON>')
+                        else:
+                            xml.append('      <PERSOON>')
+                            xml.append('        <naam>%s %s</naam>'
+                                    % (architectObj.getName1().decode('iso-8859-1').encode('iso-8859-1'), architectObj.getName2().decode('iso-8859-1').encode('iso-8859-1')))
+                            xml.append('        <straatnaam>%s</straatnaam>' % architectObj.getStreet().decode('iso-8859-1').encode('iso-8859-1'))
+                            xml.append('        <huisnr>%s</huisnr>' % architectObj.getNumber())
+                            xml.append('        <postcode>%s</postcode>' % architectObj.getZipcode())
+                            xml.append('        <gemeente>%s</gemeente>' % architectObj.getCity().decode('iso-8859-1').encode('iso-8859-1'))
+                            xml.append('        <hoedanig>ARCHITECTE</hoedanig>')
+                            xml.append('      </PERSOON>')
                 for prc in parcels:
                     xml.append('      <PERCELEN>')
                     try:
