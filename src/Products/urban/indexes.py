@@ -36,6 +36,7 @@ from Products.urban.interfaces import IUrbanDoc
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IUrbanEventType
 from Products.urban.schedule.interfaces import ILicenceDeliveryTask
+from Products.urban.utils import get_ws_meetingitem_infos
 
 from plone.indexer import indexer
 
@@ -215,6 +216,11 @@ def genericlicence_representative(licence):
 def genericlicence_decisiondate(licence):
     decision_event = licence.getLastTheLicence()
     if decision_event:
+        linked_pm_items = get_ws_meetingitem_infos(decision_event)
+        if linked_pm_items:
+            meeting_date = linked_pm_items[0]['meeting_date']
+            if not (meeting_date.day == meeting_date.month == 1 and meeting_date.year == 1950):
+                return meeting_date
         return decision_event.getEventDate()
 
 
@@ -272,4 +278,5 @@ def genericlicence_final_duedate(licence):
             subtasks = task.get_subtasks()
             tasks_to_check.extend(subtasks)
 
+    return date(2017, 9, 9)
     return date(9999, 1, 1)
