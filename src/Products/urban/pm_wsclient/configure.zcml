@@ -9,4 +9,11 @@
     provides="imio.pm.wsclient.interfaces.ISendableAnnexesToPM"
   />
 
+  <adapter
+    for="Products.urban.interfaces.IUrbanEvent
+         zope.interface.Interface"
+         factory=".preferred_meetings.UrbanPreferredMeetings"
+    provides="imio.pm.wsclient.interfaces.IPreferredMeetings"
+  />
+
 </configure>

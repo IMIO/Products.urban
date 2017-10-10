@@ -12,6 +12,9 @@ from Products.urban.interfaces import IUrbanDoc
 
 from plone import api
 
+from zope.annotation import IAnnotations
+from zope.component import getMultiAdapter
+
 import random
 import string
 import hashlib
@@ -177,3 +180,21 @@ def is_attachment(obj):
     is_doc = IUrbanDoc.providedBy(obj)
     is_attachment = is_file and not is_doc
     return is_attachment
+
+
+def get_ws_meetingitem_infos(urban_event):
+    """
+    """
+    annotations = IAnnotations(urban_event)
+    if 'imio.pm.wsclient-sent_to' in annotations:
+        request = api.portal.getRequest()
+        portal_state = getMultiAdapter(
+            (urban_event, request),
+            name=u'plone_portal_state'
+        )
+        ws4pmSettings = getMultiAdapter(
+            (portal_state.portal(), request),
+            name='ws4pmclient-settings'
+        )
+        items = ws4pmSettings._soap_searchItems({'externalIdentifier': urban_event.UID()})
+        return items
