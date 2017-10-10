@@ -54,6 +54,8 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         """
           Format the date for printing in pod templates
         """
+        if not date:
+            return ''
         if date.year == 9999:
             return u"\u221E"
         if not translatemonth:
