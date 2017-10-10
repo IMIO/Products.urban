@@ -508,6 +508,11 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                     helper_view = urban_event.restrictedTraverse('document_generation_helper_view')
                     proxy_event = helper_view.context
                     return proxy_event
+                else:
+                    class EventNotFound(object):
+                        def __getattribute__(self, attr_name):
+                            return None
+                    return EventNotFound()
                 return None
             return getUrbanEventProxy
 
