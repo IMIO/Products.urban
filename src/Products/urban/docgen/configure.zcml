@@ -54,4 +54,13 @@
       factory=".condition.UrbanTemplateCondition"
     />
 
+    <adapter
+        for="Products.Archetypes.interfaces.field.IObjectField
+             Products.Archetypes.Widget.CalendarWidget
+             Products.urban.interfaces.IUrbanEvent"
+        provides="collective.documentgenerator.interfaces.IFieldRendererForDocument"
+        factory="Products.urban.docgen.fields_renderer.DateATFieldRenderer"
+        permission="zope2.View"
+     />
+
 </configure>
