@@ -10,6 +10,7 @@ from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
+from Products.urban.utils import get_ws_meetingitem_infos
 from Products.urban.services import cadastre
 
 from zope.i18n import translate
@@ -515,6 +516,8 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                     class EventNotFound(object):
                         def __getattribute__(self, attr_name):
                             return None
+                        def __nonzero__(self):
+                            return False
                     return EventNotFound()
             return getUrbanEventProxy
 
@@ -904,3 +907,17 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
 class EventDisplayProxyObject(ATDisplayProxyObject):
     """
     """
+
+    def get_wspm_decision_date(self, translatemonth=True, long_format=False):
+        decision_date = 'NO DATE FOUND'
+        linked_pm_items = get_ws_meetingitem_infos(self.context)
+        if linked_pm_items:
+            meeting_date = linked_pm_items[0]['meeting_date']
+            if not (meeting_date.day == meeting_date.month == 1 and meeting_date.year == 1950):
+                raw_date = meeting_date
+                decision_date = self.helper_view.format_date(
+                    date=raw_date,
+                    translatemonth=translatemonth,
+                    long_format=long_format
+                )
+                return decision_date
