@@ -441,8 +441,8 @@ class ILicenceNotificationEvent(Interface):
     __doc__ = _("""ILicenceNotification type marker interface""")
 
 
-class IDisplayingTheDecisionEvent(Interface):
-    __doc__ = _("""IDisplayingTheDecisionEvent type marker interface""")
+class idisplayingthedecisionevent(interface):
+    __doc__ = _("""idisplayingthedecisionevent type marker interface""")
 
 
 class IRecourseEvent(Interface):
@@ -451,6 +451,10 @@ class IRecourseEvent(Interface):
 
 class IWorkBeginningEvent(Interface):
     __doc__ = _("""IWorkBeginning type marker interface""")
+
+
+class IWorkEndEvent(Interface):
+    __doc__ = _("""IWorkEnd type marker interface""")
 
 
 class IProrogationEvent(Interface):

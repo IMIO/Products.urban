@@ -161,6 +161,9 @@ class CODT_ParcelOutLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMix
     def getLastWorkBeginning(self):
         return self.getLastEvent(interfaces.IWorkBeginningEvent)
 
+    def getLastWorkEnd(self):
+        return self.getLastEvent(interfaces.IWorkEndEvent)
+
     def getLastProrogation(self):
         return self.getLastEvent(interfaces.IProrogationEvent)
 

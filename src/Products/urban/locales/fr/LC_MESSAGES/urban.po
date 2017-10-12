@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2017-10-03 11:32+0000\n"
+"POT-Creation-Date: 2017-10-12 07:18+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -288,10 +288,6 @@ msgstr "Accusé de réception par défaut"
 msgid "IDeposit type marker interface"
 msgstr "Dépôt de la demande"
 
-#: ../interfaces.py:445
-msgid "IDisplayingTheDecisionEvent type marker interface"
-msgstr "Affichage de la décision"
-
 #. Default: "Inquiry"
 #: ../interfaces.py:413
 msgid "IInquiry type marker interface"
@@ -330,7 +326,7 @@ msgid "IOpinionRequest type marker interface"
 msgstr "Demande d'avis"
 
 #. Default: "Prorogation"
-#: ../interfaces.py:457
+#: ../interfaces.py:461
 msgid "IProrogation type marker interface"
 msgstr "Prorogation"
 
@@ -338,7 +334,7 @@ msgstr "Prorogation"
 msgid "IRecourseEvent type marker interface"
 msgstr "Recours"
 
-#: ../interfaces.py:461
+#: ../interfaces.py:465
 msgid "IRefusedIncompleteness type marker interface"
 msgstr "Refus pour incomplétude"
 
@@ -374,6 +370,10 @@ msgstr "Envoi du primo dossier"
 #: ../interfaces.py:453
 msgid "IWorkBeginning type marker interface"
 msgstr "Début des travaux"
+
+#: ../interfaces.py:457
+msgid "IWorkEnd type marker interface"
+msgstr "Fin des travaux"
 
 msgid "IntegratedLicence"
 msgstr "Permis intégré"
@@ -1352,6 +1352,10 @@ msgstr "Vous ne pouvez pas effectuer de recherche pour l'instant car une erreur 
 #: ../browser/templates/searchparcels.pt:49
 msgid "help_search_parcels"
 msgstr "Choisissez une des 3 recherches ci-dessous.  Si vous savez exactement ce que vous cherchez, vous pouvez croiser les critères de recherche (encoder l'adresse et le nom du propriétaire par exemple)"
+
+#: ../interfaces.py:445
+msgid "idisplayingthedecisionevent type marker interface"
+msgstr ""
 
 msgid "inadmissibilityreasons_folder_title"
 msgstr "Motifs d'irrecevabilité"

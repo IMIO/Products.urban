@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-10-03 11:32+0000\n"
+"POT-Creation-Date: 2017-10-12 07:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -282,10 +282,6 @@ msgstr ""
 msgid "IDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:445
-msgid "IDisplayingTheDecisionEvent type marker interface"
-msgstr ""
-
 #: ../interfaces.py:413
 msgid "IInquiry type marker interface"
 msgstr ""
@@ -318,7 +314,7 @@ msgstr ""
 msgid "IOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:457
+#: ../interfaces.py:461
 msgid "IProrogation type marker interface"
 msgstr ""
 
@@ -326,7 +322,7 @@ msgstr ""
 msgid "IRecourseEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:461
+#: ../interfaces.py:465
 msgid "IRefusedIncompleteness type marker interface"
 msgstr ""
 
@@ -356,6 +352,10 @@ msgstr ""
 
 #: ../interfaces.py:453
 msgid "IWorkBeginning type marker interface"
+msgstr ""
+
+#: ../interfaces.py:457
+msgid "IWorkEnd type marker interface"
 msgstr ""
 
 msgid "IntegratedLicence"
@@ -1319,6 +1319,10 @@ msgstr ""
 #. Default: "Choose one of the following forms to search for parcels. You can cumulate criteria if you exactly know what you are looking for"
 #: ../browser/templates/searchparcels.pt:49
 msgid "help_search_parcels"
+msgstr ""
+
+#: ../interfaces.py:445
+msgid "idisplayingthedecisionevent type marker interface"
 msgstr ""
 
 msgid "inadmissibilityreasons_folder_title"
