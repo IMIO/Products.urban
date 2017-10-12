@@ -636,6 +636,9 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
     def getLastWorkEnd(self):
         return self.getLastEvent(interfaces.IWorkEndEvent)
 
+    def getLastRecourse(self):
+        return self.getLastEvent(interfaces.IRecourseEvent)
+
     def getLastProrogation(self):
         return self.getLastEvent(interfaces.IProrogationEvent)
 
