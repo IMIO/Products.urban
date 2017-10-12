@@ -15,7 +15,6 @@ __docformat__ = 'plaintext'
 
 from collective.delaycalculator import workday
 from datetime import date
-from zope.component.interface import interfaceToName
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import DisplayList
 
@@ -63,7 +62,7 @@ class UrbanBase(object):
         return proprietaries
 
     security.declarePublic('getApplicantsSignaletic')
-    def getApplicantsSignaletic(self, withaddress=False):
+    def getApplicantsSignaletic(self, withaddress=False, linebyline=False):
         """
           Returns a string representing the signaletic of every applicants
         """
@@ -73,7 +72,7 @@ class UrbanBase(object):
             #if the signaletic is not empty, we are adding several applicants
             if signaletic:
                 signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
-            signaletic += applicant.getSignaletic(withaddress=withaddress)
+            signaletic += applicant.getSignaletic(withaddress=withaddress, linebyline=linebyline)
         return signaletic
 
     security.declarePublic('getFolderManagersSignaletic')
