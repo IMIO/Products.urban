@@ -36,8 +36,16 @@ class Urbain220Viewlet(ViewletBase):
         """
         allowed_contexts = [
             'urban',
+            'articles127s',
             'buildlicences',
+            'declarations',
+            'integratedldlicences',
+            'uniquelicences',
+            'preliminarynotices',
+            'codt_articles127s',
             'codt_buildlicences'
+            'codt_integratedldlicences',
+            'codt_uniquelicences',
         ]
         allowed = self.context.id in allowed_contexts
         faceted_context = bool(IFacetedNavigable.providedBy(self.context))
