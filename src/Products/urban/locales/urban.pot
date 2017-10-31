@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-10-12 07:18+0000\n"
+"POT-Creation-Date: 2017-10-30 14:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -282,6 +282,10 @@ msgstr ""
 msgid "IDeposit type marker interface"
 msgstr ""
 
+#: ../interfaces.py:445
+msgid "IDisplayingTheDecisionEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:413
 msgid "IInquiry type marker interface"
 msgstr ""
@@ -540,7 +544,7 @@ msgid "Transitions:"
 msgstr ""
 
 #: ../browser/templates/urbanstatsmacros.pt:10
-msgid "Types de permis \ &Eacute;tats"
+msgid "Types de permis"
 msgstr ""
 
 msgid "UniqueLicence"
@@ -1319,10 +1323,6 @@ msgstr ""
 #. Default: "Choose one of the following forms to search for parcels. You can cumulate criteria if you exactly know what you are looking for"
 #: ../browser/templates/searchparcels.pt:49
 msgid "help_search_parcels"
-msgstr ""
-
-#: ../interfaces.py:445
-msgid "idisplayingthedecisionevent type marker interface"
 msgstr ""
 
 msgid "inadmissibilityreasons_folder_title"
@@ -2876,6 +2876,9 @@ msgstr ""
 msgid "urban_label_folderReference"
 msgstr ""
 
+msgid "urban_label_folderTendency"
+msgstr ""
+
 #. Default: "Folderzone"
 #: GenericLicence.py
 msgid "urban_label_folderZone"
@@ -3652,6 +3655,12 @@ msgid "urban_label_referenceDGATLP"
 msgstr ""
 
 msgid "urban_label_referenceDGO3"
+msgstr ""
+
+msgid "urban_label_referenceFT"
+msgstr ""
+
+msgid "urban_label_referenceSPE"
 msgstr ""
 
 #. Default: "Referencetalexpression"

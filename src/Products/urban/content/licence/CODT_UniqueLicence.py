@@ -18,21 +18,71 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
-from Products.urban.content.licence.CODT_BuildLicence import finalizeSchema
+from Products.urban.content.licence.CODT_BuildLicence import finalizeSchema as baseFinalizeSchema
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.utils import setOptionalAttributes
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+optional_fields = [
+    'referenceSPE', 'referenceFT'
+]
 ##/code-section module-header
 
 schema = Schema((
 
+    StringField(
+        name='referenceSPE',
+        widget=StringField._properties['widget'](
+            size=30,
+            label='Referencespe',
+            label_msgid='urban_label_referenceSPE',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+    ),
 
+    StringField(
+        name='referenceFT',
+        widget=StringField._properties['widget'](
+            size=30,
+            label='Referenceft',
+            label_msgid='urban_label_referenceFT',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+    ),
+    StringField(
+        name='authority',
+        widget=SelectionWidget(
+            label='Authority',
+            label_msgid='urban_label_authority',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        vocabulary=UrbanVocabulary('authority', inUrbanConfig=True),
+        default_method='getDefaultValue',
+    ),
+    StringField(
+        name='folderTendency',
+        widget=SelectionWidget(
+            format='select',
+            label='Foldertendency',
+            label_msgid='urban_label_folderTendency',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        schemata='urban_description',
+        vocabulary=UrbanVocabulary('foldertendencies', with_empty_value=True),
+        default_method='getDefaultValue',
+    ),
 ),
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 CODT_UniqueLicence_schema = BaseFolderSchema.copy() + \
@@ -94,6 +144,17 @@ registerType(CODT_UniqueLicence, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 
+
+def finalizeSchema(schema):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('referenceSPE', after='reference')
+    schema.moveField('referenceFT', after='referenceDGATLP')
+    schema.moveField('authority', before='folderCategory')
+    schema.moveField('folderTendency', after='folderCategory')
+
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
+baseFinalizeSchema(CODT_UniqueLicence_schema)
 finalizeSchema(CODT_UniqueLicence_schema)
 ##/code-section module-footer

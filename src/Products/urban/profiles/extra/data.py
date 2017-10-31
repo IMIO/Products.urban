@@ -221,7 +221,7 @@ urbanEventTypes = {
             'keyDates': ('eventDate',),
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
     ),
     'codt_parceloutlicence': (
@@ -404,7 +404,7 @@ urbanEventTypes = {
             'keyDates': ('eventDate',),
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
     ),
     'codt_integratedlicence': (
@@ -587,7 +587,7 @@ urbanEventTypes = {
             'keyDates': ('eventDate',),
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
     ),
     'codt_urbancertificateone': (
@@ -770,7 +770,7 @@ urbanEventTypes = {
             'keyDates': ('eventDate',),
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
     ),
     'buildlicence': (
@@ -1262,7 +1262,7 @@ urbanEventTypes = {
                 {'id': "urb-debut-travaux.odt", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
                 {'id': "urb-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
         {
             'id': "fiche-recap",
@@ -1323,6 +1323,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IWorkEndEvent',
         },
         {
             'id': "peb-declaration-finale",
@@ -1402,6 +1403,7 @@ urbanEventTypes = {
             'activatedFields': ['auditionDate', ],
             'deadLineDelay': 0,
             'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
         {
             'id': "recours-decision-au-gouvernement",
@@ -1413,6 +1415,7 @@ urbanEventTypes = {
                 {'id': "urb-recours-GW-ville-vs-FD.odt", 'title': "Recours de la ville au GW contre décision du FD"},
                 {'id': "urb-recours-GW-transmis-decision-GW-PU.odt", 'title': "Transmis au réclamant de la décision du GW concernant recours au GW"},
             ),
+            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
     ),
     'uniquelicence': (
@@ -1904,7 +1907,7 @@ urbanEventTypes = {
                 {'id': "urb-debut-travaux.odt", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
                 {'id': "urb-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
         {
             'id': "fiche-recap",
@@ -1965,6 +1968,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IWorkEndEvent',
         },
         {
             'id': "peb-declaration-finale",
@@ -2044,6 +2048,7 @@ urbanEventTypes = {
             'activatedFields': ['auditionDate', ],
             'deadLineDelay': 0,
             'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
         {
             'id': "recours-decision-au-gouvernement",
@@ -2055,6 +2060,7 @@ urbanEventTypes = {
                 {'id': "urb-recours-GW-ville-vs-FD.odt", 'title': "Recours de la ville au GW contre décision du FD"},
                 {'id': "urb-recours-GW-transmis-decision-GW-PU.odt", 'title': "Transmis au réclamant de la décision du GW concernant recours au GW"},
             ),
+            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
     ),
     'integratedlicence': (
@@ -2546,7 +2552,7 @@ urbanEventTypes = {
                 {'id': "urb-debut-travaux.odt", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
                 {'id': "urb-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
         {
             'id': "fiche-recap",
@@ -2607,6 +2613,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IWorkEndEvent',
         },
         {
             'id': "peb-declaration-finale",
@@ -2686,6 +2693,7 @@ urbanEventTypes = {
             'activatedFields': ['auditionDate', ],
             'deadLineDelay': 0,
             'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
         {
             'id': "recours-decision-au-gouvernement",
@@ -2697,6 +2705,7 @@ urbanEventTypes = {
                 {'id': "urb-recours-GW-ville-vs-FD.odt", 'title': "Recours de la ville au GW contre décision du FD"},
                 {'id': "urb-recours-GW-transmis-decision-GW-PU.odt", 'title': "Transmis au réclamant de la décision du GW concernant recours au GW"},
             ),
+            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
     ),
     'article127': (
@@ -3197,7 +3206,7 @@ urbanEventTypes = {
                 {'id': "urb-debut-travaux.odt", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
                 {'id': "urb-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
         {
             'id': "fiche-recap",
@@ -3258,6 +3267,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IWorkEndEvent',
         },
         {
             'id': "peb-declaration-finale",
@@ -3337,6 +3347,7 @@ urbanEventTypes = {
             'activatedFields': ['auditionDate', ],
             'deadLineDelay': 0,
             'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
         {
             'id': "recours-decision-au-gouvernement",
@@ -3348,6 +3359,7 @@ urbanEventTypes = {
                 {'id': "urb-recours-GW-ville-vs-FD.odt", 'title': "Recours de la ville au GW contre décision du FD"},
                 {'id': "urb-recours-GW-transmis-decision-FD-art127.odt", 'title': "Transmis au réclamant de la décision du FD concernant recours au GW contre art 127"},
             ),
+            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
     ),
     'declaration': (
@@ -3398,7 +3410,7 @@ urbanEventTypes = {
                 {'id': "decl-transmis-decision-fd.odt", 'title': "Transmis décision au FD"},
                 {'id': "decl-transmis-decision-demandeur.odt", 'title': "Transmis décision au demandeur"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
     ),
     'urbancertificateone': (
@@ -3460,7 +3472,7 @@ urbanEventTypes = {
                 {'id': "cu1-demande-paiement.odt", 'title': "Demande de paiement"},
                 {'id': "cu1-rappel-demande-paiement.odt", 'title': "Rappel paiement"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
     ),
     'urbancertificatetwo': (
@@ -3823,7 +3835,7 @@ urbanEventTypes = {
                 },
                 {'id': "cu2-certif.odt", 'title': "Certificat d'urbanisme 2 (annexe 35 formulaire II B)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
     ),
     'division': (
@@ -3872,7 +3884,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "not-lettre-information-notariale.odt", 'title': "Lettre d'information notariale (annexe 49 formulaire III)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
     ),
     'envclassone': (
@@ -4792,6 +4804,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
     ),
     'envclassthree': (
@@ -5205,7 +5218,7 @@ urbanEventTypes = {
             'podTemplates': (
                 {'id': "miscdemand-transmis-decision-demandeur.odt", 'title': "Transmis décision au demandeur"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
     ),
     'preliminarynotice': (
@@ -5234,7 +5247,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
             'podTemplates': (),
         },
         {
@@ -5703,7 +5716,7 @@ urbanEventTypes = {
                 {'id': "lot-decision-frais.odt", 'title': "Ventilation des frais"},
                 {'id': "lot-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
         {
             'id': "suspension-du-permis",
@@ -5739,6 +5752,7 @@ urbanEventTypes = {
             'activatedFields': ['auditionDate', ],
             'deadLineDelay': 0,
             'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
         {
             'id': "recours-decision-au-gouvernement",
@@ -5751,6 +5765,7 @@ urbanEventTypes = {
                 {'id': "lot-recours-GW-transmis-decision-FD-art127.odt", 'title': "Transmis au réclamant de la décision du FD concernant recours au GW contre art 127"},
                 {'id': "lot-recours-GW-transmis-decision-GW-PU.odt", 'title': "Transmis au réclamant de la décision du GW concernant recours au GW"},
             ),
+            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
     ),
 }

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2017-10-12 07:18+0000\n"
+"POT-Creation-Date: 2017-10-30 14:34+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -288,6 +288,10 @@ msgstr "Accusé de réception par défaut"
 msgid "IDeposit type marker interface"
 msgstr "Dépôt de la demande"
 
+#: ../interfaces.py:445
+msgid "IDisplayingTheDecisionEvent type marker interface"
+msgstr ""
+
 #. Default: "Inquiry"
 #: ../interfaces.py:413
 msgid "IInquiry type marker interface"
@@ -558,7 +562,7 @@ msgid "Transitions:"
 msgstr ""
 
 #: ../browser/templates/urbanstatsmacros.pt:10
-msgid "Types de permis \ &Eacute;tats"
+msgid "Types de permis"
 msgstr ""
 
 msgid "UniqueLicence"
@@ -857,7 +861,7 @@ msgid "codt_integratedlicence_urbanconfig_title"
 msgstr "Paramètres des permis intégrés (CODT)"
 
 msgid "codt_notaryletter_urbanconfig_title"
-msgstr "Paramètres des lettres de notaire (CODT°"
+msgstr "Paramètres des lettres de notaire (CODT)"
 
 msgid "codt_parceloutlicence_urbanconfig_title"
 msgstr "Paramètres des permis d'urbanisation (CODT)"
@@ -1352,10 +1356,6 @@ msgstr "Vous ne pouvez pas effectuer de recherche pour l'instant car une erreur 
 #: ../browser/templates/searchparcels.pt:49
 msgid "help_search_parcels"
 msgstr "Choisissez une des 3 recherches ci-dessous.  Si vous savez exactement ce que vous cherchez, vous pouvez croiser les critères de recherche (encoder l'adresse et le nom du propriétaire par exemple)"
-
-#: ../interfaces.py:445
-msgid "idisplayingthedecisionevent type marker interface"
-msgstr ""
 
 msgid "inadmissibilityreasons_folder_title"
 msgstr "Motifs d'irrecevabilité"
@@ -2912,6 +2912,9 @@ msgstr "Agent(s) traitant(s)"
 msgid "urban_label_folderReference"
 msgstr "Numéro de dossier"
 
+msgid "urban_label_folderTendency"
+msgstr "Tendance du dossier"
+
 #. Default: "Folderzone"
 #: GenericLicence.py
 msgid "urban_label_folderZone"
@@ -3690,6 +3693,12 @@ msgstr "Référence DGO4"
 
 msgid "urban_label_referenceDGO3"
 msgstr "Référence DGO3"
+
+msgid "urban_label_referenceFT"
+msgstr "Référence FT"
+
+msgid "urban_label_referenceSPE"
+msgstr "Référence SPE"
 
 #. Default: "Referencetalexpression"
 #: LicenceConfig.py
