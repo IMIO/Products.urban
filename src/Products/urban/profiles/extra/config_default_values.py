@@ -611,6 +611,14 @@ default_values = {
             {'id': "defavorable", 'title': u"Défavorable", 'extraValue': "Irrecevable"},
         ],
 
+        'foldertendencies': [
+            'UrbanVocabularyTerm', [
+                'UniqueLicence', 'CODT_UniqueLicence'
+            ],
+            {'id': "env", 'title': u"Environnementale"},
+            {'id': "urb", 'title': u"Urbanistique"},
+        ],
+
         'pebcategories': [
             'UrbanVocabularyTerm', [
                 'BuildLicence', 'Article127', 'CODT_BuildLicence', 'CODT_Article127',
@@ -752,7 +760,7 @@ default_values = {
         ],
 
         'authority': [
-            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo'],
+            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'UniqueLicence', 'CODT_UniqueLicence'],
             {'id': "college", 'title': u"Collège"},
             {'id': "ft", 'title': u"Fonctionnaire technique"},
         ],
