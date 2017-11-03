@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="collective.documentgenerator">
+
+    <adapter
+        for="Products.Archetypes.interfaces.field.IObjectField
+             collective.archetypes.select2.select2widget.Select2Widget
+             Products.Archetypes.interfaces.IBaseObject"
+        provides="collective.documentgenerator.interfaces.IFieldRendererForDocument"
+        factory="collective.documentgenerator.AT_renderer.VocabularyATFieldRenderer"
+        permission="zope2.View"
+     />
+
+</configure>
