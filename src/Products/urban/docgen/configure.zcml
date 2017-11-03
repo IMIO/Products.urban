@@ -4,6 +4,8 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="Products.urban">
 
+    <include file="renderer.zcml"/>
+
     <browser:page
         for="*"
         name="urban-document-generation"
