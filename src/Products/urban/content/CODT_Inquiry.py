@@ -315,8 +315,12 @@ def finalizeSchema(schema):
     """
        Finalizes the type schema to alter some fields
     """
+    schema.moveField('derogationDetails', after='derogation')
+    schema.moveField('announcementArticlesText', before='derogation')
+    schema.moveField('announcementArticles', before='announcementArticlesText')
+    schema.moveField('divergenceDetails', before='announcementArticles')
     schema.moveField('divergence', before='divergenceDetails')
-    schema.moveField('divergenceDetails', before='derogation')
+    schema.moveField('inquiry_type', before='divergence')
     return schema
 
 finalizeSchema(CODT_Inquiry_schema)

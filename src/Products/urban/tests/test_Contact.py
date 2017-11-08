@@ -40,7 +40,8 @@ class TestContactFields(SchemaFieldsTestCase):
         self.browserLogin('urbaneditor')
 
     def tearDown(self):
-        api.content.delete(self.licence)
+        with api.env.adopt_roles(['Manager']):
+            api.content.delete(self.licence)
         transaction.commit()
 
     def test_contact_has_attribute_personTitle(self):
@@ -221,7 +222,8 @@ class TestApplicantFields(SchemaFieldsTestCase):
         self.browserLogin('urbaneditor')
 
     def tearDown(self):
-        api.content.delete(self.licence)
+        with api.env.adopt_roles(['Manager']):
+            api.content.delete(self.licence)
         transaction.commit()
 
     def test_applicant_has_attribute_representedBySociety(self):
@@ -350,7 +352,8 @@ class TestCorporationFields(SchemaFieldsTestCase):
         self.browserLogin('urbaneditor')
 
     def tearDown(self):
-        api.content.delete(self.licence)
+        with api.env.adopt_roles(['Manager']):
+            api.content.delete(self.licence)
         transaction.commit()
 
     def test_corporation_has_attribute_denomination(self):

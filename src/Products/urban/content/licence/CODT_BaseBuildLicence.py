@@ -307,6 +307,7 @@ def finalizeSchema(schema):
     schema.moveField('exemptFDArticle', after='procedureChoice')
     schema.moveField('water', after='futureRoadCoating')
     schema.moveField('electricity', before='water')
+    schema.moveField('derogationDetails', after='derogation')
     schema.moveField('announcementArticlesText', before='derogation')
     schema.moveField('announcementArticles', before='announcementArticlesText')
     schema.moveField('divergenceDetails', before='announcementArticles')

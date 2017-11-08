@@ -17,10 +17,16 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
+from Products.urban.content.CODT_UniqueLicenceInquiry import CODT_UniqueLicenceInquiry
+from Products.urban.content.CODT_UniqueLicenceInquiry import finalizeSchema as thirdBaseFinalizeSchema
+from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
-from Products.urban.content.licence.CODT_BuildLicence import finalizeSchema as baseFinalizeSchema
+from Products.urban.content.licence.CODT_BaseBuildLicence import finalizeSchema as firstBaseFinalizeSchema
+from Products.urban.content.licence.CODT_BuildLicence import finalizeSchema as secondBaseFinalizeSchema
+from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
+from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -86,14 +92,26 @@ setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 CODT_UniqueLicence_schema = BaseFolderSchema.copy() + \
+    getattr(BaseBuildLicence, 'schema', Schema(())).copy() + \
     getattr(CODT_BaseBuildLicence, 'schema', Schema(())).copy() + \
+    getattr(CODT_UniqueLicenceInquiry, 'schema', Schema(())).copy() + \
+    getattr(GenericLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+CODT_UniqueLicence_schema['title'].required = False
+CODT_UniqueLicence_schema.delField('rgbsr')
+CODT_UniqueLicence_schema.delField('rgbsrDetails')
+CODT_UniqueLicence_schema.delField('SSC')
+CODT_UniqueLicence_schema.delField('sscDetails')
+CODT_UniqueLicence_schema.delField('RCU')
+CODT_UniqueLicence_schema.delField('rcuDetails')
+CODT_UniqueLicence_schema.delField('composition')
+setSchemataForCODT_UniqueLicenceInquiry(CODT_UniqueLicence_schema)
 ##/code-section after-schema
 
 
-class CODT_UniqueLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
+class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -155,6 +173,8 @@ def finalizeSchema(schema):
     schema.moveField('folderTendency', after='folderCategory')
 
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
-baseFinalizeSchema(CODT_UniqueLicence_schema)
+firstBaseFinalizeSchema(CODT_UniqueLicence_schema)
+secondBaseFinalizeSchema(CODT_UniqueLicence_schema)
+thirdBaseFinalizeSchema(CODT_UniqueLicence_schema)
 finalizeSchema(CODT_UniqueLicence_schema)
 ##/code-section module-footer
