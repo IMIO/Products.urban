@@ -33,9 +33,10 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
         self.browserLogin('urbaneditor')
 
     def tearDown(self):
-        for licence in self.licences:
-            api.content.delete(licence)
-            transaction.commit()
+        with api.env.adopt_roles(['Manager']):
+            for licence in self.licences:
+                api.content.delete(licence)
+        transaction.commit()
 
     def test_has_attribute_licenceSubject(self):
         field_name = 'licenceSubject'

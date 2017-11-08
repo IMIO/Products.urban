@@ -1,5 +1,7 @@
 #-*- coding: utf-8 -*-
 
+from plone import api
+
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 
 import unittest
@@ -28,20 +30,23 @@ class SchemaFieldsTestCase(BrowserTestCase):
 
     def _is_field_visible(self, expected_fieldname, obj=None, msg=''):
         obj = obj or self.licence
-        self.browser.open(obj.absolute_url())
+        with api.env.adopt_roles(['Manager']):
+            self.browser.open(obj.absolute_url())
         contents = self.browser.contents
         self.assertTrue(expected_fieldname in contents, msg)
 
     def _is_field_visible_in_edit(self, expected_fieldname, obj=None, msg=''):
         obj = obj or self.licence
         edit_url = '{}/edit'.format(obj.absolute_url())
-        self.browser.open(edit_url)
+        with api.env.adopt_roles(['Manager']):
+            self.browser.open(edit_url)
         contents = self.browser.contents
         self.assertTrue(expected_fieldname in contents, msg)
 
     def _is_field_hidden(self, expected_fieldname, obj=None, msg=''):
         obj = obj or self.licence
-        self.browser.open(obj.absolute_url())
+        with api.env.adopt_roles(['Manager']):
+            self.browser.open(obj.absolute_url())
         contents = self.browser.contents
         self.assertTrue(expected_fieldname not in contents, msg)
 

@@ -202,6 +202,11 @@ class ICODT_Inquiry(IInquiry):
     """
 
 
+class ICODT_UniqueLicenceInquiry(IInquiry):
+    """Marker interface for CODT_uniqueLicence inquiry
+    """
+
+
 class IUrbanEventBaseInquiry(Interface):
     """base arker interface for inquiry events
     """

@@ -38,7 +38,8 @@ class TestKeyEvent(BrowserTestCase):
         self.browserLogin('urbaneditor')
 
     def tearDown(self):
-        api.content.delete(self.licence)
+        with api.env.adopt_roles(['Manager']):
+            api.content.delete(self.licence)
         transaction.commit()
 
     def testCreateKeyEvent(self):

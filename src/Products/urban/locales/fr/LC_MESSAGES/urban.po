@@ -3016,6 +3016,9 @@ msgstr "Motifs d'irrecevabilité"
 msgid "urban_label_initials"
 msgstr "Initiales"
 
+msgid "urban_label_inquiry_category"
+msgstr "Type d'enquête"
+
 msgid "urban_label_inquiry_type"
 msgstr "Type de publicité"
 

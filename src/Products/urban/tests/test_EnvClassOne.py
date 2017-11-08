@@ -93,7 +93,8 @@ class TestEnvClassOneInstance(SchemaFieldsTestCase):
     def tearDown(self):
         if self.licence.wl_isLocked():
             self.licence.wl_clearLocks()
-        api.content.delete(self.licence)
+        with api.env.adopt_roles(['Manager']):
+            api.content.delete(self.licence)
         transaction.commit()
 
     def test_envclassone_licence_exists(self):

@@ -82,12 +82,7 @@ def setSchemataForInquiry(schema):
       Put the the fields coming from Inquiry in a specific schemata
     """
     from Products.urban.content.Inquiry import Inquiry
-    inquiryFields = Inquiry.schema.filterFields(isMetadata=False)
-    #do not take the 2 first fields into account, this is 'id' and 'title'
-    inquiryFields = inquiryFields[2:]
-    for inquiryField in inquiryFields:
-        if schema[inquiryField.getName()].schemata == 'default':
-            schema[inquiryField.getName()].schemata = 'urban_inquiry'
+    _setSchemataForInquiry(schema, Inquiry)
 
 
 def setSchemataForCODT_Inquiry(schema):
@@ -95,7 +90,22 @@ def setSchemataForCODT_Inquiry(schema):
       Put the the fields coming from Inquiry in a specific schemata
     """
     from Products.urban.content.CODT_Inquiry import CODT_Inquiry
-    inquiryFields = CODT_Inquiry.schema.filterFields(isMetadata=False)
+    _setSchemataForInquiry(schema, CODT_Inquiry)
+
+
+def setSchemataForCODT_UniqueLicenceInquiry(schema):
+    """
+      Put the the fields coming from Inquiry in a specific schemata
+    """
+    from Products.urban.content.CODT_UniqueLicenceInquiry import CODT_UniqueLicenceInquiry
+    _setSchemataForInquiry(schema, CODT_UniqueLicenceInquiry)
+
+
+def _setSchemataForInquiry(schema, inquiry_class):
+    """
+      Put the the fields coming from Inquiry in a specific schemata
+    """
+    inquiryFields = inquiry_class.schema.filterFields(isMetadata=False)
     #do not take the 2 first fields into account, this is 'id' and 'title'
     inquiryFields = inquiryFields[2:]
     for inquiryField in inquiryFields:
@@ -148,11 +158,11 @@ def getSchemataFields(context, displayed_fields, schemata='', exclude=[]):
     def isDisplayable(field):
         if hasattr(field, 'optional') and field.optional and field.getName() not in displayed_fields:
             return False
-        if hasattr(field, 'edit_only') and field.edit_only:
-            return False
         if field.getName() in exclude:
             return False
         if not field.widget.visible:
+            return False
+        if field.widget.visible.get('view', None) not in [True, 'visible']:
             return False
         if not field.checkPermission('r', context):
             return False

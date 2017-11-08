@@ -2980,6 +2980,9 @@ msgstr ""
 msgid "urban_label_initials"
 msgstr ""
 
+msgid "urban_label_inquiry_category"
+msgstr ""
+
 msgid "urban_label_inquiry_type"
 msgstr ""
 
