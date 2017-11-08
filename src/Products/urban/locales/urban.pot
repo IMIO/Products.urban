@@ -2970,6 +2970,9 @@ msgstr ""
 msgid "urban_label_implantation"
 msgstr ""
 
+msgid "urban_label_implantationCODT"
+msgstr ""
+
 #. Default: "Inadmissibilityreasons"
 #: EnvironmentBase.py
 msgid "urban_label_inadmissibilityReasons"
