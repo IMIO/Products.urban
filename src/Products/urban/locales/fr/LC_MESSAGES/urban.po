@@ -3006,6 +3006,9 @@ msgstr "Etude d'incidence?"
 msgid "urban_label_implantation"
 msgstr "Implantation (art. 137)"
 
+msgid "urban_label_implantationCODT"
+msgstr "Implantation (art D.IV.172)"
+
 #. Default: "Inadmissibilityreasons"
 #: EnvironmentBase.py
 msgid "urban_label_inadmissibilityReasons"
