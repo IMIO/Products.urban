@@ -296,6 +296,9 @@ class LicenceView(BrowserView):
     def getHabitationFields(self, exclude=[]):
         return self.getSchemataFields('urban_habitation', exclude)
 
+    def getImpactStudyInfos(self):
+        return {}
+
     def get_state(self):
         return api.content.get_state(self.context)
 
