@@ -208,6 +208,15 @@ class CODT_Inquiry(BaseContent, Inquiry, BrowserDefaultMixin):
         )
         return DisplayList(vocabulary)
 
+    security.declarePublic('getInquiriesAndAnnouncements')
+
+    def getInquiriesAndAnnouncements(self):
+        """
+        Returns the existing inquiries
+        """
+        inqs = [inq for inq in self._get_inquiry_objs(all_=False)]
+        return inqs
+
     security.declarePublic('getInquiries')
 
     def getInquiries(self):
