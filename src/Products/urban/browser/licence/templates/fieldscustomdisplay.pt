@@ -5,6 +5,20 @@
 </metal:foldermanagers>
 
 
+<metal:subdivision define-macro="impactStudy">
+    <td valign="top"><b><span i18n:translate="urban_label_impactStudy">In subdivision?</span>:</b></td>
+    <td width="10px"></td>
+    <td width="49%" valign="top" valign="top" tal:define="has_impact_study context/getImpactStudy; info view/getImpactStudyInfos">
+        <tal:has_impact_study condition="python: not info or not info['date']">
+            <metal:myfield use-macro="python:here.widget('impactStudy', mode='view')" />
+        </tal:has_impact_study>
+        <tal:has_impact_study condition="python: info and info['date']">
+            <a href="#" tal:condition="python: info and info['date']" tal:attributes="href python: info['url']" tal:content="python: info['date']">Content</a>
+        </tal:has_impact_study>
+    </td>
+</metal:subdivision>
+
+
 <metal:subdivision define-macro="isInSubdivision">
     <td valign="top"><b><span i18n:translate="urban_label_isInSubdivision">In subdivision?</span>:</b></td>
     <td width="10px"></td>
