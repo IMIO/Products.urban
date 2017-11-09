@@ -470,6 +470,10 @@ class IRefusedIncompletenessEvent(Interface):
     __doc__ = _("""IRefusedIncompleteness type marker interface""")
 
 
+class IImpactStudyEvent(Interface):
+    __doc__ = _("""ImpactStudy event type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase
     """

@@ -292,6 +292,9 @@ msgstr "Dépôt de la demande"
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr ""
 
+msgid "ImpactStudy event type marker interface"
+msgstr "Étude d'incidence"
+
 #. Default: "Inquiry"
 #: ../interfaces.py:413
 msgid "IInquiry type marker interface"

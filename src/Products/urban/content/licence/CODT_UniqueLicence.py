@@ -156,6 +156,9 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
     def getLastWalloonRegionDecisionEvent(self):
         return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)
 
+    def getLastImpactStudyEvent(self):
+        return self.getLastEvent(interfaces.IImpactStudyEvent)
+
 
 registerType(CODT_UniqueLicence, PROJECTNAME)
 # end of class CODT_UniqueLicence

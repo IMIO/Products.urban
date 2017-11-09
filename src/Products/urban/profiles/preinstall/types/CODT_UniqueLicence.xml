@@ -11,7 +11,7 @@
  <property name="product">urban</property>
  <property name="factory">addCODT_UniqueLicence</property>
  <!-- not a mistake, article127 and buildlicence are the same -->
- <property name="immediate_view">codt_buildlicenceview</property>
+ <property name="immediate_view">codt_uniquelicenceview</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
@@ -30,7 +30,7 @@
    <element value="ConfigTest"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">codt_buildlicenceview</property>
+ <property name="default_view">codt_uniquelicenceview</property>
  <property name="view_methods">
   <element value="folder_summary_view"/>
   <element value="folder_tabular_view"/>
