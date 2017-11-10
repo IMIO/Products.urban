@@ -444,6 +444,19 @@ schema = Schema((
         default_method='getDefaultValue',
     ),
     LinesField(
+        name='pipelines',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label='pipelines',
+            label_msgid='urban_label_pipelines',
+            i18n_domain='urban',
+        ),
+        schemata='urban_road',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('pipelines', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    LinesField(
         name='natura_2000',
         widget=MultiSelectionWidget(
             format='checkbox',

@@ -725,6 +725,9 @@ msgstr ""
 msgid "announcement_data"
 msgstr ""
 
+msgid "announcementarticles_folder_title"
+msgstr ""
+
 #. Default: "Applicant(s)"
 #: ../browser/licence/templates/licencemacros.pt:63
 msgid "applicants"
@@ -982,6 +985,9 @@ msgstr ""
 msgid "derogations_folder_title"
 msgstr ""
 
+msgid "divergences_folder_title"
+msgstr ""
+
 msgid "division_urbanconfig_title"
 msgstr ""
 
@@ -1219,6 +1225,9 @@ msgid "folder_advice"
 msgstr ""
 
 msgid "folder_events"
+msgstr ""
+
+msgid "foldertendencies_folder_title"
 msgstr ""
 
 msgid "folderbuildworktypes_folder_title"
@@ -1624,6 +1633,9 @@ msgstr ""
 msgid "multiplicity_single"
 msgstr ""
 
+msgid "natura_2000_folder_title"
+msgstr ""
+
 msgid "no_applicant_defined"
 msgstr ""
 
@@ -1766,7 +1778,7 @@ msgstr ""
 msgid "pcas_folder_title"
 msgstr ""
 
-msgid "pcaszone_folder_title"
+msgid "pcazones_folder_title"
 msgstr ""
 
 msgid "peb_complete_process"
@@ -1813,6 +1825,9 @@ msgstr ""
 #. Default: "Mister"
 #: Contact.py
 msgid "persontitle_mister"
+msgstr ""
+
+msgid "pipelines_folder_title"
 msgstr ""
 
 #: ../dashboard/vocabularies.py:36
@@ -1933,10 +1948,19 @@ msgstr ""
 msgid "searchlots"
 msgstr ""
 
+msgid "seveso_site_folder_title"
+msgstr ""
+
 msgid "sewers_folder_title"
 msgstr ""
 
 msgid "simple-map_title"
+msgstr ""
+
+msgid "sols_folder_title"
+msgstr ""
+
+msgid "solzones_folder_title"
 msgstr ""
 
 msgid "sort_by"
@@ -3511,6 +3535,9 @@ msgstr ""
 #. Default: "Phone"
 #: Contact.py
 msgid "urban_label_phone"
+msgstr ""
+
+msgid "urban_label_pipelines"
 msgstr ""
 
 #. Default: "Plone user id"
