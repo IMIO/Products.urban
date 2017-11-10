@@ -3885,6 +3885,9 @@ msgstr "Type de voirie"
 msgid "urban_label_rubrics"
 msgstr "Rubrique(s)"
 
+msgid "urban_label_rubricsDetails"
+msgstr "Explications sur les rubriques"
+
 msgid "urban_label_sarDetails"
 msgstr "Détails concernant le périmètre du site d'activité économique désaffecté"
 
