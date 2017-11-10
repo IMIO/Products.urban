@@ -3848,6 +3848,9 @@ msgstr ""
 msgid "urban_label_rubrics"
 msgstr ""
 
+msgid "urban_label_rubricsDetails"
+msgstr ""
+
 msgid "urban_label_sarDetails"
 msgstr ""
 

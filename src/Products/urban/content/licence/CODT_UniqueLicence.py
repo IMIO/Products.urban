@@ -15,6 +15,7 @@ __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban.content.CODT_UniqueLicenceInquiry import CODT_UniqueLicenceInquiry
@@ -23,6 +24,7 @@ from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
 from Products.urban.content.licence.CODT_BaseBuildLicence import finalizeSchema as firstBaseFinalizeSchema
 from Products.urban.content.licence.CODT_BuildLicence import finalizeSchema as secondBaseFinalizeSchema
+from Products.urban.content.licence.EnvironmentBase import EnvironmentBase
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
@@ -84,6 +86,68 @@ schema = Schema((
         vocabulary=UrbanVocabulary('foldertendencies', with_empty_value=True),
         default_method='getDefaultValue',
     ),
+    ReferenceField(
+        name='rubrics',
+        widget=ReferenceBrowserWidget(
+            allow_search=True,
+            allow_browse=True,
+            force_close_on_insert=True,
+            startup_directory='portal_urban/rubrics',
+            show_indexes=False,
+            wild_card_search=True,
+            restrict_browsing_to_startup_directory=True,
+            base_query='rubrics_base_query',
+            label='Rubrics',
+            label_msgid='urban_label_rubrics',
+            i18n_domain='urban',
+        ),
+        allowed_types=('EnvironmentRubricTerm',),
+        schemata='urban_description',
+        multiValued=True,
+        relationship="rubric",
+    ),
+    TextField(
+        name='rubricsDetails',
+        widget=RichWidget(
+            label='Rubricsdetails',
+            label_msgid='urban_label_rubricsDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_description',
+        default_method='getDefaultText',
+        default_output_type='text/html',
+    ),
+    ReferenceField(
+        name='minimumLegalConditions',
+        widget=ReferenceBrowserWidget(
+            label='Minimumlegalconditions',
+            label_msgid='urban_label_minimumLegalConditions',
+            i18n_domain='urban',
+        ),
+        schemata="urban_description",
+        multiValued=True,
+        relationship='minimumconditions',
+    ),
+    ReferenceField(
+        name='additionalLegalConditions',
+        widget=ReferenceBrowserWidget(
+            allow_browse=True,
+            allow_search=True,
+            default_search_index='Title',
+            startup_directory='portal_urban/exploitationconditions',
+            restrict_browsing_to_startup_directory=True,
+            wild_card_search=True,
+            label='Additionallegalconditions',
+            label_msgid='urban_label_additionalLegalConditions',
+            i18n_domain='urban',
+        ),
+        allowed_types=('UrbanVocabularyTerm',),
+        schemata="urban_description",
+        multiValued=True,
+        relationship='additionalconditions',
+    ),
 ),
 )
 
@@ -111,7 +175,7 @@ setSchemataForCODT_UniqueLicenceInquiry(CODT_UniqueLicence_schema)
 ##/code-section after-schema
 
 
-class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLicence, BrowserDefaultMixin):
+class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLicence, EnvironmentBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -174,6 +238,11 @@ def finalizeSchema(schema):
     schema.moveField('referenceFT', after='referenceDGATLP')
     schema.moveField('authority', before='folderCategory')
     schema.moveField('folderTendency', after='folderCategory')
+    schema.moveField('rubrics', after='folderTendency')
+    schema.moveField('rubricsDetails', after='rubrics')
+    schema.moveField('minimumLegalConditions', after='rubricsDetails')
+    schema.moveField('additionalLegalConditions', after='minimumLegalConditions')
+    schema.moveField('description', after='impactStudy')
 
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
 firstBaseFinalizeSchema(CODT_UniqueLicence_schema)
