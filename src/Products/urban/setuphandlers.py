@@ -244,6 +244,7 @@ def createVocabularyFolder(container, folder_id, site, allowedtypes='UrbanVocabu
         setFolderAllowedTypes(new_folder, allowedtypes)
     else:
         new_folder = getattr(container, folder_id)
+        new_folder.setTitle(_("%s_folder_title" % folder_id, 'urban'))
     return new_folder
 
 

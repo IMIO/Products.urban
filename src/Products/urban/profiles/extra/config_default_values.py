@@ -1660,6 +1660,13 @@ default_values = {
             {'id': "seuil-haut", 'title': u"Seuil haut"},
         ],
 
+        'pipelines': [
+            'UrbanVocabularyTerm',
+            {'id': "fluxys", 'title': u"Fluxys"},
+            {'id': "oxyduc", 'title': u"Oxyduc"},
+            {'id': "otan", 'title': u"Otan"},
+        ],
+
         'natura_2000': [
             'UrbanVocabularyTerm',
             {'id': "xxx", 'title': u"Périmètre NATURA 2000 de XXX"},
