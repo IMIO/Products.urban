@@ -923,6 +923,9 @@ msgstr "Aucun événement n'est encore lié à cette enquête publique"
 msgid "content_none"
 msgstr "N.C."
 
+msgid "corporation_contactPerson_fieldset_legend"
+msgstr "Personne de contact"
+
 #. Default: "Represented by"
 #: ../browser/templates/contactmacros.pt:114
 msgid "corporation_representative_fieldset_legend"

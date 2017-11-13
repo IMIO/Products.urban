@@ -25,6 +25,7 @@ from Products.urban.config import *
 import cgi
 
 ##code-section module-header #fill in your manual code here
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 ##/code-section module-header
 
 schema = Schema((
@@ -66,6 +67,47 @@ schema = Schema((
         widget=StringField._properties['widget'](
             label='Personrole',
             label_msgid='urban_label_personRole',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='contactPersonTitle',
+        widget=SelectionWidget(
+            label='Persontitle',
+            label_msgid='urban_label_personTitle',
+            i18n_domain='urban',
+        ),
+        vocabulary=UrbanVocabulary('persons_titles', vocType='PersonTitleTerm', inUrbanConfig=False),
+    ),
+    StringField(
+        name='contactPersonName',
+        widget=StringField._properties['widget'](
+            label='Name1',
+            label_msgid='urban_label_name1',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='contactPersonFirstname',
+        widget=StringField._properties['widget'](
+            label='Name2',
+            label_msgid='urban_label_name2',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='contactPersonEmail',
+        widget=StringField._properties['widget'](
+            label='Email',
+            label_msgid='urban_label_email',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='contactPersonPhone',
+        widget=StringField._properties['widget'](
+            label='Phone',
+            label_msgid='urban_label_phone',
             i18n_domain='urban',
         ),
     ),
