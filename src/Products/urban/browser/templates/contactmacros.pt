@@ -114,22 +114,18 @@
             <tal:representative condition="python: fieldName == representativeFields[0]">
                 <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
                     <legend i18n:translate="corporation_representative_fieldset_legend">Represented by</legend>
-                        <tal:rep_fields repeat="field_name representativeFields">
-                            <metal:fieldMacro use-macro="python:here.widget(field_name, mode='edit')" />
-                        </tal:rep_fields>
-                    <!--metal:fieldMacro use-macro="python:here.widget('personTitle', mode='edit')" />
-                    <metal:fieldMacro use-macro="python:here.widget('personRole', mode='edit')" />
-                    <metal:fieldMacro use-macro="python:here.widget('name1', mode='edit')" />
-                    <metal:fieldMacro use-macro="python:here.widget('name2', mode='edit')" /-->
+                    <tal:rep_fields repeat="field_name representativeFields">
+                        <metal:fieldMacro use-macro="python:here.widget(field_name, mode='edit')" />
+                    </tal:rep_fields>
                 </fieldset>
             </tal:representative>
 
             <tal:contactPerson condition="python: fieldName == contactPersonFields[0]">
                 <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
                     <legend i18n:translate="corporation_contactPerson_fieldset_legend">Contact person</legend>
-                        <tal:cp_fields repeat="field_name contactPersonFields">
-                            <metal:fieldMacro use-macro="python:here.widget(field_name, mode='edit')" />
-                        </tal:cp_fields>
+                    <tal:cp_fields repeat="field_name contactPersonFields">
+                        <metal:fieldMacro use-macro="python:here.widget(field_name, mode='edit')" />
+                    </tal:cp_fields>
                 </fieldset>
             </tal:contactPerson>
 
