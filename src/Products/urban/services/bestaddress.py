@@ -8,8 +8,8 @@ class BestaddressService(SQLService):
     """
     """
 
-    def __init__(self, dialect='postgresql+psycopg2', user='bestaddressreader', host='',
-                 db_name='bestaddress', password=''):
+    def __init__(self, dialect='postgresql+psycopg2', user='bestaddressreader', host='devel.imio.be',
+                 db_name='bestaddress', password='ploneisthebest'):
         super(BestaddressService, self).__init__(dialect, user, host, db_name, password)
 
         if self.can_connect():
