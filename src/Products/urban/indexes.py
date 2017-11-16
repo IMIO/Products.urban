@@ -278,5 +278,4 @@ def genericlicence_final_duedate(licence):
             subtasks = task.get_subtasks()
             tasks_to_check.extend(subtasks)
 
-    return date(2017, 9, 9)
     return date(9999, 1, 1)
