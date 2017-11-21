@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.tests.helpers import BrowserTestCase
@@ -111,7 +111,7 @@ class TestEnvClassOneInstance(SchemaFieldsTestCase):
     def test_envclassone_view(self):
         try:
             self.browser.open(self.licence.absolute_url())
-        except urllib2.HTTPError,  e:
+        except urllib2.HTTPError, e:
             self.fail(msg="Got HTTP response code:" + str(e.code))
 
     def test_envclassone_edit(self):
