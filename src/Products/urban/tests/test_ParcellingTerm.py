@@ -14,7 +14,7 @@ class TestParcellingTerm(unittest.TestCase):
         self.portal = portal
         self.parcellingterm = portal.urban.parcellings.objectValues()[0]
         self.portal_urban = portal.portal_urban
-        login(portal, 'urbaneditor')
+        login(self.portal, self.layer.default_user)
 
     def testParcellingTitleUpdate(self):
         parcelling = self.parcellingterm

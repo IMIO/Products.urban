@@ -18,7 +18,7 @@ class TestBase(unittest.TestCase):
         portal = self.layer['portal']
         self.portal = portal
         self.portal_urban = portal.portal_urban
-        login(portal, 'urbaneditor')
+        login(self.portal, self.layer.default_user)
 
         # create a test EnvClassOne licence
         self.licences = []

@@ -36,6 +36,9 @@ class UrbanWithUsersLayer(IntegrationTesting):
     Must collaborate with a layer that installs Plone and Urban
     Useful for performances: Plone site is instanciated only once
     """
+    default_user = 'urbanmanager'
+    default_password = 'urbanmanager'
+
     def setUp(self):
         super(UrbanWithUsersLayer, self).setUp()
         with helpers.ploneSite() as portal:
