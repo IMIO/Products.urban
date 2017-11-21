@@ -51,7 +51,9 @@ class TestUrbanEventInstance(SchemaFieldsTestCase):
         self.urban = self.portal.urban
 
         # create a test BuildLicence
-        login(self.portal, 'urbaneditor')
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        login(self.portal, default_user)
         buildlicence_folder = self.urban.buildlicences
         testlicence_id = 'test_buildlicence'
         buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
@@ -65,7 +67,7 @@ class TestUrbanEventInstance(SchemaFieldsTestCase):
         transaction.commit()
 
         self.browser = Browser(self.portal)
-        self.browserLogin('urbaneditor')
+        self.browserLogin(default_user, default_password)
 
     def tearDown(self):
         with api.env.adopt_roles(['Manager']):

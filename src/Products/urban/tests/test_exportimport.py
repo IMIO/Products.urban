@@ -15,7 +15,7 @@ class TestStreetImports(unittest.TestCase):
         self.utool = portal.portal_urban
         self.wtool = portal.portal_workflow
         self.streets = self.utool.streets
-        login(portal, 'urbanmanager')
+        login(portal, self.layer.default_user)
 
     def testCreateStreet(self):
         ex_streets = {}

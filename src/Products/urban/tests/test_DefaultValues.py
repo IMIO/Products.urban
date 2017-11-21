@@ -20,7 +20,7 @@ class TestDefaultValues(unittest.TestCase):
         self.portal_urban = portal.portal_urban
         self.site = portal
         self.buildlicences = portal.urban.buildlicences
-        login(portal, 'urbanmanager')
+        login(portal, self.layer.default_user)
 
     """
     Tests for the configurable listing default values
@@ -134,16 +134,16 @@ class TestEventDefaultValues(unittest.TestCase):
         portal = self.layer['portal']
         self.portal_urban = portal.portal_urban
         self.site = portal
-        login(portal, 'urbanmanager')
+        login(portal, self.layer.default_user)
         # create a licence
         buildlicences = portal.urban.buildlicences
         buildlicences.invokeFactory(
             'BuildLicence',
             id='newlicence',
             title='blabla',
-            solicitOpinionsTo=['sncb']
         )
         buildlicence = buildlicences.newlicence
+        buildlicence.setSolicitOpinionsTo('sncb')
         self.licence = buildlicence
 
     def testNoDefaultValuesConfigured(self):

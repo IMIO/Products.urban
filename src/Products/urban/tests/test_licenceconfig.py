@@ -17,9 +17,11 @@ class TestLicenceConfig(BrowserTestCase):
         self.portal_urban = portal.portal_urban
         self.licenceconfigs = [config for config in self.portal_urban.objectValues('LicenceConfig')]
 
-        login(portal, 'urbanmanager')
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        login(self.portal, default_user)
         self.browser = Browser(self.portal)
-        self.browserLogin('urbanmanager')
+        self.browserLogin(default_user, default_password)
         self.browser.handleErrors = False
 
     def test_licenceconfig_view_display(self):

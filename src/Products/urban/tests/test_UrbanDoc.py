@@ -20,7 +20,7 @@ class TestUrbanDoc(BrowserTestCase):
         self.portal_urban.setGenerateSingletonDocuments(False)
 
         # create a test BuildLicence
-        login(self.portal, 'urbaneditor')
+        login(self.portal, self.layer.default_user)
         buildlicence_folder = self.portal.urban.buildlicences
         testlicence_id = 'test_buildlicence'
         buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
