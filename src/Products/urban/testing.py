@@ -6,6 +6,7 @@ from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import helpers
 
 from plone.testing import z2
+from Products.urban.utils import run_entry_points
 
 import Products.urban
 
@@ -20,6 +21,8 @@ URBAN_TESTS_PROFILE_DEFAULT = PloneWithPackageLayer(
     ),
     gs_profile_id='Products.urban:tests',
     name="URBAN_TESTS_PROFILE_DEFAULT")
+
+run_entry_points('Products.urban.testing.profile', URBAN_TESTS_PROFILE_DEFAULT)
 
 
 URBAN_TESTS_PROFILE_INTEGRATION = IntegrationTesting(
