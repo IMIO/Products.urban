@@ -18,6 +18,7 @@ from zope.component import getMultiAdapter
 import random
 import string
 import hashlib
+import pkg_resources
 
 
 def getCurrentFolderManager():
@@ -208,3 +209,9 @@ def get_ws_meetingitem_infos(urban_event):
         )
         items = ws4pmSettings._soap_searchItems({'externalIdentifier': urban_event.UID()})
         return items
+
+
+def run_entry_points(group, *args, **kwargs):
+    for entrypoint in pkg_resources.iter_entry_points(group=group):
+        plugin = entrypoint.load()
+        plugin(*args, **kwargs)
