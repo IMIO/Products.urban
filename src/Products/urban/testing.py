@@ -22,7 +22,7 @@ URBAN_TESTS_PROFILE_DEFAULT = PloneWithPackageLayer(
     gs_profile_id='Products.urban:tests',
     name="URBAN_TESTS_PROFILE_DEFAULT")
 
-run_entry_points('Products.urban.testing.profile', URBAN_TESTS_PROFILE_DEFAULT)
+run_entry_points('Products.urban.testing.profile', 'base', URBAN_TESTS_PROFILE_DEFAULT)
 
 
 URBAN_TESTS_PROFILE_INTEGRATION = IntegrationTesting(
@@ -107,6 +107,9 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
     Must collaborate with a layer that installs Plone and Urban
     Useful for performances: Plone site is instanciated only once
     """
+    default_user = 'urbaneditor'
+    default_password = 'urbaneditor'
+
     def setUp(self):
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
@@ -157,5 +160,12 @@ URBAN_TEST_ROBOT = UrbanConfigFunctionalLayer(
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
         z2.ZSERVER_FIXTURE
     ),
-    name="URBAN_ROBOT"
+    name="URBAN_TEST_ROBOT"
 )
+
+# override test layers by those overriden in specific profiles
+all_layers = [obj for obj in locals().values() if isinstance(obj, (IntegrationTesting, FunctionalTesting))]
+new_layers = run_entry_points('Products.urban.testing.profile', 'layers', all_layers)
+_this_module_ = globals()
+for layer_name, new_layer in new_layers.iteritems():
+    _this_module_[layer_name] = new_layer
