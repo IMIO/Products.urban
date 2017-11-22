@@ -516,8 +516,13 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                     class EventNotFound(object):
                         def __getattribute__(self, attr_name):
                             return None
+
                         def __nonzero__(self):
                             return False
+
+                        def __call__(self):
+                            return  None
+
                     return EventNotFound()
             return getUrbanEventProxy
 
