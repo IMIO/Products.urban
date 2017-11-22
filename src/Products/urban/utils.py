@@ -211,7 +211,7 @@ def get_ws_meetingitem_infos(urban_event):
         return items
 
 
-def run_entry_points(group, *args, **kwargs):
-    for entrypoint in pkg_resources.iter_entry_points(group=group):
+def run_entry_points(group, name, *args, **kwargs):
+    for entrypoint in pkg_resources.iter_entry_points(group=group, name=name):
         plugin = entrypoint.load()
-        plugin(*args, **kwargs)
+        return plugin(*args, **kwargs)
