@@ -133,10 +133,12 @@ class TestUrbanEventInquiryView(BrowserTestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
-        login(self.portal, 'urbaneditor')
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        login(self.portal, default_user)
 
         self.browser = Browser(self.portal)
-        self.browserLogin('urbaneditor')
+        self.browserLogin(default_user, default_password)
 
     def _create_test_licence_with_inquiry(self, portal_type):
         licence_folder = utils.getLicenceFolder(portal_type)

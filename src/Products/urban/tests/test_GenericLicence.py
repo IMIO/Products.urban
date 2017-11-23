@@ -19,7 +19,9 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
 
-        login(self.portal, 'urbaneditor')
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        login(self.portal, default_user)
         self.licences = []
         for content_type in URBAN_TYPES:
             licence_folder = utils.getLicenceFolder(content_type)
@@ -30,7 +32,7 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
         transaction.commit()
 
         self.browser = Browser(self.portal)
-        self.browserLogin('urbaneditor')
+        self.browserLogin(default_user, default_password)
 
     def tearDown(self):
         with api.env.adopt_roles(['Manager']):

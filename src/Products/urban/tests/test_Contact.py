@@ -25,7 +25,9 @@ class TestContactFields(SchemaFieldsTestCase):
         self.urban = self.portal.urban
         self.portal_urban = self.portal.portal_urban
 
-        login(self.portal, 'urbaneditor')
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        login(self.portal, default_user)
         buildlicence_folder = self.urban.buildlicences
         testlicence_id = 'test_buildlicence'
         buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
@@ -37,7 +39,7 @@ class TestContactFields(SchemaFieldsTestCase):
         self.contact = getattr(self.licence, contact_id)
 
         self.browser = Browser(self.portal)
-        self.browserLogin('urbaneditor')
+        self.browserLogin(default_user, default_password)
 
     def tearDown(self):
         with api.env.adopt_roles(['Manager']):
@@ -207,7 +209,9 @@ class TestApplicantFields(SchemaFieldsTestCase):
         self.urban = self.portal.urban
         self.portal_urban = self.portal.portal_urban
 
-        login(self.portal, 'urbaneditor')
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        login(self.portal, default_user)
         buildlicence_folder = self.urban.buildlicences
         testlicence_id = 'test_buildlicence'
         buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
@@ -219,7 +223,7 @@ class TestApplicantFields(SchemaFieldsTestCase):
         self.applicant = getattr(self.licence, applicant_id)
 
         self.browser = Browser(self.portal)
-        self.browserLogin('urbaneditor')
+        self.browserLogin(default_user, default_password)
 
     def tearDown(self):
         with api.env.adopt_roles(['Manager']):
@@ -337,7 +341,9 @@ class TestCorporationFields(SchemaFieldsTestCase):
         self.urban = self.portal.urban
         self.portal_urban = self.portal.portal_urban
 
-        login(self.portal, 'urbaneditor')
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        login(self.portal, default_user)
         envclassone_folder = self.urban.envclassones
         testlicence_id = 'test_envclassone'
         envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
@@ -349,7 +355,7 @@ class TestCorporationFields(SchemaFieldsTestCase):
         self.corporation = getattr(self.licence, corporation_id)
 
         self.browser = Browser(self.portal)
-        self.browserLogin('urbaneditor')
+        self.browserLogin(default_user, default_password)
 
     def tearDown(self):
         with api.env.adopt_roles(['Manager']):

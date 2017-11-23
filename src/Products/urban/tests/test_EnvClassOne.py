@@ -22,7 +22,9 @@ class TestEnvClassOneInstall(BrowserTestCase):
         self.urban = self.portal.urban
         self.portal_urban = self.portal.portal_urban
         self.browser = Browser(self.portal)
-        self.browserLogin('urbaneditor')
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        self.browserLogin(default_user, default_password)
 
     def test_envclassone_config_folder_exists(self):
         msg = 'envclassone config folder not created'
@@ -80,7 +82,9 @@ class TestEnvClassOneInstance(SchemaFieldsTestCase):
         self.urban = self.portal.urban
 
         # create a test EnvClassOne licence
-        login(self.portal, 'urbaneditor')
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        login(self.portal, default_user)
         envclassone_folder = self.urban.envclassones
         testlicence_id = 'test_envclassone'
         envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
@@ -88,7 +92,7 @@ class TestEnvClassOneInstance(SchemaFieldsTestCase):
         self.licence = getattr(envclassone_folder, testlicence_id)
 
         self.browser = Browser(self.portal)
-        self.browserLogin('urbaneditor')
+        self.browserLogin(default_user, default_password)
 
     def tearDown(self):
         if self.licence.wl_isLocked():

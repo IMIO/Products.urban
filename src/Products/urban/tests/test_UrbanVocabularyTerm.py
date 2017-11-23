@@ -15,7 +15,8 @@ class TestUrbanVocabularyTerm(unittest.TestCase):
         urban = portal.urban
         self.urbancertificateones = urban.urbancertificateones
         LICENCE_ID = 'licence1'
-        login(portal, 'urbaneditor')
+        default_user = self.layer.default_user
+        login(portal, default_user)
         self.urbancertificateones.invokeFactory('UrbanCertificateOne', LICENCE_ID)
         self.certificate = getattr(self.urbancertificateones, LICENCE_ID)
         #set language to 'fr' as we do some translations above
