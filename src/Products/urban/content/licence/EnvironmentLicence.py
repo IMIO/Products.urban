@@ -138,7 +138,7 @@ EnvironmentLicence_schema = BaseFolderSchema.copy() + \
 
 ##code-section after-schema #fill in your manual code here
 for field in EnvironmentLicence_schema.filterFields(isMetadata=False):
-    field.widget.visible = True
+    field.widget.visible = {'view': True, 'edit': False}
 
 EnvironmentLicence_schema['roadMissingPartsDetails'].widget.label_msgid = 'urban_label_complement'
 EnvironmentLicence_schema['investigationDetails'].widget.label_msgid = 'urban_label_investigationSubject'

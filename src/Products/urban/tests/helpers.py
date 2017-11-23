@@ -31,7 +31,10 @@ class SchemaFieldsTestCase(BrowserTestCase):
     def _is_field_visible(self, expected_fieldname, obj=None, msg=''):
         obj = obj or self.licence
         with api.env.adopt_roles(['Manager']):
-            self.browser.open(obj.absolute_url())
+            try:
+                self.browser.open(obj.absolute_url())
+            except:
+                import ipdb; ipdb.set_trace()
         contents = self.browser.contents
         self.assertTrue(expected_fieldname in contents, msg)
 

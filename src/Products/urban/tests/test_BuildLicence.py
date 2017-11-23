@@ -146,7 +146,9 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
         self.urban = self.portal.urban
 
         # create a test EnvClassOne licence
-        login(self.portal, 'urbaneditor')
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        login(self.portal, default_user)
         self.licences = []
         for content_type in ['BuildLicence', 'ParcelOutLicence']:
             licence_folder = utils.getLicenceFolder(content_type)
@@ -159,7 +161,7 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
         self.licence = self.test_buildlicence
 
         self.browser = Browser(self.portal)
-        self.browserLogin('urbaneditor')
+        self.browserLogin(default_user, default_password)
 
     def tearDown(self):
         with api.env.adopt_roles(['Manager']):

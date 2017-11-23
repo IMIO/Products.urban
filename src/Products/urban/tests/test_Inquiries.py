@@ -20,7 +20,8 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         self.urban = portal.urban
 
         # create a test BuildLicence
-        login(portal, 'urbaneditor')
+        default_user = self.layer.default_user
+        login(portal, default_user)
         buildlicence_folder = self.urban.buildlicences
         testlicence_id = 'test_buildlicence'
         buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
@@ -29,8 +30,6 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         # create un inquiry event
         createObject('UrbanEventInquiry', 'enquete-publique', self.licence)
         transaction.commit()
-
-        login(portal, 'urbaneditor')
 
     def _addInquiry(self):
         """
