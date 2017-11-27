@@ -167,6 +167,16 @@ class HasFDOpinionRequest(CreationCondition):
         return 'FD' in licence.getProcedureChoice()
 
 
+class HasNoFDOpinionRequest(CreationCondition):
+    """
+    'FD' is not selected on the field 'procedureChoice'.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        return 'FD' not in licence.getProcedureChoice()
+
+
 class DepositDateIsPast20Days(CreationCondition):
     """
     The deposit date is past by 20 days
