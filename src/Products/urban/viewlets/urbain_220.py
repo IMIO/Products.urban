@@ -196,7 +196,11 @@ class UrbainXMLExport(BrowserView):
                 xml.append('      <E_220_Werk>%s</E_220_Werk>' % licence.licenceSubject.encode('iso-8859-1'))
                 strDecisionDate = str(licence_brain.getDecisionDate)
                 xml.append('      <E_220_Datum_Verg>%s%s%s</E_220_Datum_Verg>' % (strDecisionDate[0: 4], strDecisionDate[5: 7], strDecisionDate[8: 10]))
-                xml.append('      <E_220_Instan>COM</E_220_Instan>')
+                authority = licence.portal_type in ['Article127', 'CODT_Article127'] and 'REGION' or 'COM'
+                if hasattr(licence, 'authority'):
+                    auth_map = {'college': 'COM', 'ft': 'REGION'}
+                    authority = auth_map[licence.getAuthority()]
+                xml.append('      <E_220_Instan>%s</E_220_Instan>' % authority)
                 if check(applicantObj, 'no applicant found on licence %s' % str(licence.getReference())):
                     firstname = applicantObj.portal_type == 'Corporation' and applicantObj.getDenomination() or applicantObj.getName1()
                     lastname = applicantObj.portal_type == 'Corporation' and applicantObj.getLegalForm() or applicantObj.getName2()
