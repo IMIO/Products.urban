@@ -57,7 +57,7 @@ msgid "urban.schedule.condition.deposit_past_30days"
 msgstr "La date de dépôt ne dépasse pas 30 jours"
 
 msgid "urban.schedule.condition.dont_need_FD_opinion"
-msgstr "Avis du FD sélectionné dans le type de procédure"
+msgstr "Avis du FD pas sélectionné dans le type de procédure"
 
 msgid "urban.schedule.condition.folder_complete"
 msgstr "Accusé de réception fait."
@@ -81,7 +81,7 @@ msgid "urban.schedule.condition.inquiry_event_created"
 msgstr "Créer l'événement d'enquête publique"
 
 msgid "urban.schedule.condition.need_FD_opinion"
-msgstr "Avis du FD pas sélectionné dans le type de procédure"
+msgstr "Avis du FD sélectionné dans le type de procédure"
 
 msgid "urban.schedule.condition.opinion_requests_created"
 msgstr "Créer les événements de demande d'avis"
