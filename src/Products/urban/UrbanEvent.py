@@ -477,7 +477,12 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         return urban_tool.getTextDefaultValue(field.getName(), context, html=html, config=self.getUrbaneventtypes())
 
     def getKeyDate(self):
-        return self.getEventDate()
+        event_type = self.getUrbaneventtypes()
+        keydate_fields = [date for date in event_type.getKeyDates()]
+        keydate_field = keydate_fields and keydate_fields[0] or 'eventDate'
+        keydate = self.getField(keydate_field).get(self)
+        return keydate
+
 
     def getDefaultTime(self):
         return DateTime()
