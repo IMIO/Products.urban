@@ -500,6 +500,19 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
 
         return super(LicenceDisplayProxyObject, self).__getattr__(attr_name)
 
+    def format_date(self, field, formatstring='date_format_short'):
+        """
+          Format the date for printing in pod templates
+        """
+        date = getattr(self.context, field)
+        if formatstring == 'date_format_long':
+            formatstring = '%d/%m/%Y %H:%M'
+        elif formatstring == 'date_format_short':
+            formatstring = '%d/%m/%Y'
+        elif formatstring == 'time_format':
+            formatstring = '%H:%M'
+        return date.strftime(formatstring)
+
     def _get_street_dict(self, uid):
         street_dict = {}
         catalog = api.portal.get_tool("uid_catalog")
@@ -868,6 +881,14 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                 applicants_names += separator + self._get_contact(applicant, reversed_name=reversed_name,
                         withaddress=False)
         return applicants_names
+
+    def get_solicitOpinions_descriptions(self):
+        context = self.context
+        opinions = context.getUrbanEventOpinionRequests()
+        descriptions = []
+        for opinion in opinions:
+            descriptions.append(opinion.getLinkedOrganisationTerm().Description())
+        return descriptions
 
 class EventDisplayProxyObject(ATDisplayProxyObject):
     """
