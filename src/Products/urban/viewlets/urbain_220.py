@@ -5,6 +5,7 @@ from DateTime import DateTime
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from Products.urban.interfaces import IToUrbain220Street
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 from StringIO import StringIO
@@ -17,7 +18,11 @@ from imio.dashboard.utils import getCriterionByIndex
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
 
+from zope.component import getAdapter
+from zope.interface import implements
+
 import json
+import unidecode
 
 
 class Urbain220Viewlet(ViewletBase):
@@ -29,15 +34,30 @@ class Urbain220Viewlet(ViewletBase):
         """
         This viewlet is only visible on buildlicences faceted view if we queried by date.
         """
-        buildlicences = self.context.id == 'buildlicences'
+        allowed_contexts = [
+            'urban',
+            'articles127s',
+            'buildlicences',
+            'declarations',
+            'integratedldlicences',
+            'uniquelicences',
+            'preliminarynotices',
+            'codt_articles127s',
+            'codt_buildlicences'
+            'codt_integratedldlicences',
+            'codt_uniquelicences',
+        ]
+        allowed = self.context.id in allowed_contexts
         faceted_context = bool(IFacetedNavigable.providedBy(self.context))
-        return faceted_context and buildlicences and self.get_date_range()
+        return faceted_context and allowed and self.get_date_range()
 
     def get_date_range(self):
         """
         Return the faceted query date range.
         """
         criterion = getCriterionByIndex(self.context, u'getDecisionDate')
+        if not criterion:
+            return
         decisiondate_id = '{}[]'.format(criterion.getId())
         date_range = self.request.get(decisiondate_id, None)
         return date_range
@@ -51,6 +71,28 @@ class Urbain220Viewlet(ViewletBase):
         )
         link = {'link': url, 'title': 'Liste 220', 'output_format': output_format, 'template_uid': ''}
         return [link]
+
+
+class LicenceToUrbain220Street(object):
+    """ """
+
+    implements(IToUrbain220Street)
+
+    def __init__(self, licence):
+        catalog = api.content.get_tool('portal_catalog')
+        addresses = licence.getWorkLocations()
+        first_address = addresses and addresses[0]
+        street_brain = catalog(UID=first_address['street'])
+        self.first_street = street_brain and street_brain[0].getObject()
+        self.street_number = first_address['number']
+
+    @property
+    def street_name(self):
+        return self.first_street and self.first_street.getStreetName()
+
+    @property
+    def street_code(self):
+        return self.first_street.getStreetCode()
 
 
 class UrbainXMLExport(BrowserView):
@@ -74,12 +116,15 @@ class UrbainXMLExport(BrowserView):
         """
         Tell the browser that the resulting page contains ODT.
         """
+        portal_urban = api.portal.get_tool('portal_urban')
+        townshipname = portal_urban.getCityName()
         from_date, to_date = self.get_date_range()
         response = self.request.RESPONSE
         response.setHeader('Content-type', 'text/xml')
         response.setHeader(
             'Content-disposition',
-            u'attachment;filename="urbain_export-{from_date}-{to_date}.xml"'.format(
+            u'attachment;filename="urbain_{name}_{from_date}-{to_date}.xml"'.format(
+                name=unidecode.unidecode(townshipname.decode('utf-8')),
                 from_date=from_date.strftime('%d_%m_%Y'),
                 to_date=to_date.strftime('%d_%m_%Y')
             )
@@ -101,7 +146,6 @@ class UrbainXMLExport(BrowserView):
             return condition
 
         portal_urban = api.portal.get_tool('portal_urban')
-        catalog = api.portal.get_tool('portal_catalog')
 
         xml = []
         error = []
@@ -119,7 +163,7 @@ class UrbainXMLExport(BrowserView):
             licence = licence_brain.getObject()
             applicantObj = licence.getApplicants() and licence.getApplicants()[0] or None
             architects = licence.getField('architects') and licence.getArchitects() or []
-            if api.content.get_state(licence) == 'accepted':
+            if api.content.get_state(licence) in ['accepted', 'authorized']:
                 html_list.append(
                     '<TR><TD>%s  %s</TD><TD>%s</TD></TR>'
                     % (str(licence.getReference()), licence.title.encode('iso-8859-1'),
@@ -130,16 +174,16 @@ class UrbainXMLExport(BrowserView):
                 parcels = licence.getParcels()
                 if check(parcels, 'no parcels found on licence %s' % str(licence.getReference())):
                     xml.append('      <Doc_Afd>%s</Doc_Afd>' % parcels[0].getDivisionCode())
-                street = number = None
-                if licence.getWorkLocations():
-                    number = licence.getWorkLocations()[0]['number']
-                    street = catalog.searchResults(UID=licence.getWorkLocations()[0]['street'])
-                if check(street, 'no street found on licence %s' % str(licence.getReference())):
-                    street = street[0].getObject()
-                    xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street.getStreetCode()))
-                    xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street.getStreetName()).decode('iso-8859-1').encode('iso-8859-1'))
+                street_info = getAdapter(licence, IToUrbain220Street)
+                number = street_info.street_number
+                street_name = street_info.street_name
+                street_code = street_info.street_code
+                if check(street_code, 'no street (with code) found on licence %s' % str(licence.getReference())):
+                    xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street_code))
+                    if check(street_name, 'no street name found on licence %s' % str(licence.getReference())):
+                        xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street_name).decode('iso-8859-1').encode('iso-8859-1'))
                 if number:
-                    xml.append('      <E_220_huisnr>%s</E_220_huisnr>' % number)
+                    xml.append('      <E_220_huisnr>%s</E_220_huisnr>' % str(number))
                 worktype = licence.getWorkType() and licence.getWorkType()[0] or ''
                 work_types = UrbanVocabulary('folderbuildworktypes').getAllVocTerms(licence)
                 worktype_map = {}
@@ -152,38 +196,51 @@ class UrbainXMLExport(BrowserView):
                 xml.append('      <E_220_Werk>%s</E_220_Werk>' % licence.licenceSubject.encode('iso-8859-1'))
                 strDecisionDate = str(licence_brain.getDecisionDate)
                 xml.append('      <E_220_Datum_Verg>%s%s%s</E_220_Datum_Verg>' % (strDecisionDate[0: 4], strDecisionDate[5: 7], strDecisionDate[8: 10]))
-                xml.append('      <E_220_Instan>COM</E_220_Instan>')
-                xml.append('      <PERSOON>')
-                xml.append('        <naam>%s %s</naam>' % (applicantObj.getName1().decode('iso-8859-1').encode('iso-8859-1'), applicantObj.getName2().decode('iso-8859-1').encode('iso-8859-1')))
-                xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().decode('iso-8859-1').encode('iso-8859-1'))
-                xml.append('        <huisnr>%s</huisnr>' % applicantObj.getNumber())
-                xml.append('        <postcode>%s</postcode>' % applicantObj.getZipcode())
-                xml.append('        <gemeente>%s</gemeente>' % applicantObj.getCity().decode('iso-8859-1').encode('iso-8859-1'))
-                xml.append('        <hoedanig>DEMANDEUR</hoedanig>')
-                xml.append('      </PERSOON>')
-                if architects:
-                    architectObj = architects[0]
-                    list_architects_terms = ["NON REQUIS", "lui-meme", "Eux-memes", "elle-meme", "lui-meme", "lui-même", "lui-meme ", "Lui-meme", "A COMPLETER "]
-                    if architectObj.getName1() in list_architects_terms:
-                        xml.append('      <PERSOON>')
-                        xml.append('        <naam>%s %s</naam>'
-                                   % (applicantObj.getName1().encode('iso-8859-1'), applicantObj.name2.encode('iso-8859-1')))
-                        xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().encode('iso-8859-1'))
-                        xml.append('        <huisnr>%s</huisnr>' % applicantObj.getNumber())
-                        xml.append('        <postcode>%s</postcode>' % applicantObj.getZipcode())
-                        xml.append('        <gemeente>%s</gemeente>' % applicantObj.getCity().encode('iso-8859-1'))
-                        xml.append('        <hoedanig>ARCHITECTE</hoedanig>')
-                        xml.append('      </PERSOON>')
-                    else:
-                        xml.append('      <PERSOON>')
-                        xml.append('        <naam>%s %s</naam>'
-                                   % (architectObj.getName1().decode('iso-8859-1').encode('iso-8859-1'), architectObj.getName2().decode('iso-8859-1').encode('iso-8859-1')))
-                        xml.append('        <straatnaam>%s</straatnaam>' % architectObj.getStreet().decode('iso-8859-1').encode('iso-8859-1'))
-                        xml.append('        <huisnr>%s</huisnr>' % architectObj.getNumber())
-                        xml.append('        <postcode>%s</postcode>' % architectObj.getZipcode())
-                        xml.append('        <gemeente>%s</gemeente>' % architectObj.getCity().decode('iso-8859-1').encode('iso-8859-1'))
-                        xml.append('        <hoedanig>ARCHITECTE</hoedanig>')
-                        xml.append('      </PERSOON>')
+                authority = 'COM'
+                if licence.portal_type in ['Article127', 'CODT_Article127']:
+                    authority = 'REGION'
+                else:
+                    if hasattr(licence, 'authority'):
+                        auth_map = {'college': 'COM', 'ft': 'REGION'}
+                        authority = auth_map[licence.getAuthority()]
+                    elif licence.getLastRecourse():
+                        authority = 'MINISTRE'
+                    elif licence.getLastRecourse():
+                        authority = 'MINISTRE'
+                xml.append('      <E_220_Instan>%s</E_220_Instan>' % authority)
+                if check(applicantObj, 'no applicant found on licence %s' % str(licence.getReference())):
+                    firstname = applicantObj.portal_type == 'Corporation' and applicantObj.getDenomination() or applicantObj.getName1()
+                    lastname = applicantObj.portal_type == 'Corporation' and applicantObj.getLegalForm() or applicantObj.getName2()
+                    xml.append('      <PERSOON>')
+                    xml.append('        <naam>%s %s</naam>' % (firstname.decode('iso-8859-1').encode('iso-8859-1'), lastname.decode('iso-8859-1').encode('iso-8859-1')))
+                    xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().decode('iso-8859-1').encode('iso-8859-1'))
+                    xml.append('        <huisnr>%s</huisnr>' % applicantObj.getNumber())
+                    xml.append('        <postcode>%s</postcode>' % applicantObj.getZipcode())
+                    xml.append('        <gemeente>%s</gemeente>' % applicantObj.getCity().decode('iso-8859-1').encode('iso-8859-1'))
+                    xml.append('        <hoedanig>DEMANDEUR</hoedanig>')
+                    xml.append('      </PERSOON>')
+                    if architects:
+                        architectObj = architects[0]
+                        list_architects_terms = ["NON REQUIS", "lui-meme", "Eux-memes", "elle-meme", "lui-meme", "lui-même", "lui-meme ", "Lui-meme", "A COMPLETER "]
+                        if architectObj.getName1() in list_architects_terms:
+                            xml.append('      <PERSOON>')
+                            xml.append('        <naam>%s %s</naam>' % (firstname.encode('iso-8859-1'), lastname.encode('iso-8859-1')))
+                            xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().encode('iso-8859-1'))
+                            xml.append('        <huisnr>%s</huisnr>' % applicantObj.getNumber())
+                            xml.append('        <postcode>%s</postcode>' % applicantObj.getZipcode())
+                            xml.append('        <gemeente>%s</gemeente>' % applicantObj.getCity().encode('iso-8859-1'))
+                            xml.append('        <hoedanig>ARCHITECTE</hoedanig>')
+                            xml.append('      </PERSOON>')
+                        else:
+                            xml.append('      <PERSOON>')
+                            xml.append('        <naam>%s %s</naam>'
+                                    % (architectObj.getName1().decode('iso-8859-1').encode('iso-8859-1'), architectObj.getName2().decode('iso-8859-1').encode('iso-8859-1')))
+                            xml.append('        <straatnaam>%s</straatnaam>' % architectObj.getStreet().decode('iso-8859-1').encode('iso-8859-1'))
+                            xml.append('        <huisnr>%s</huisnr>' % architectObj.getNumber())
+                            xml.append('        <postcode>%s</postcode>' % architectObj.getZipcode())
+                            xml.append('        <gemeente>%s</gemeente>' % architectObj.getCity().decode('iso-8859-1').encode('iso-8859-1'))
+                            xml.append('        <hoedanig>ARCHITECTE</hoedanig>')
+                            xml.append('      </PERSOON>')
                 for prc in parcels:
                     xml.append('      <PERCELEN>')
                     try:
