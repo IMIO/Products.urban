@@ -39,7 +39,7 @@ class Urbain220Viewlet(ViewletBase):
             'articles127s',
             'buildlicences',
             'declarations',
-            'integratedldlicences',
+            'integratedlicences',
             'uniquelicences',
             'preliminarynotices',
             'codt_articles127s',
@@ -79,7 +79,7 @@ class LicenceToUrbain220Street(object):
     implements(IToUrbain220Street)
 
     def __init__(self, licence):
-        catalog = api.content.get_tool('portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
         addresses = licence.getWorkLocations()
         first_address = addresses and addresses[0]
         street_brain = catalog(UID=first_address['street'])
@@ -196,10 +196,15 @@ class UrbainXMLExport(BrowserView):
                 xml.append('      <E_220_Werk>%s</E_220_Werk>' % licence.licenceSubject.encode('iso-8859-1'))
                 strDecisionDate = str(licence_brain.getDecisionDate)
                 xml.append('      <E_220_Datum_Verg>%s%s%s</E_220_Datum_Verg>' % (strDecisionDate[0: 4], strDecisionDate[5: 7], strDecisionDate[8: 10]))
-                authority = licence.portal_type in ['Article127', 'CODT_Article127'] and 'REGION' or 'COM'
-                if hasattr(licence, 'authority'):
-                    auth_map = {'college': 'COM', 'ft': 'REGION'}
-                    authority = auth_map[licence.getAuthority()]
+                authority = 'COM'
+                if licence.portal_type in ['Article127', 'CODT_Article127']:
+                    authority = 'REGION'
+                else:
+                    if hasattr(licence, 'authority'):
+                        auth_map = {'college': 'COM', 'ft': 'REGION'}
+                        authority = auth_map[licence.getAuthority()]
+                    elif licence.getLastRecourse():
+                        authority = 'MINISTRE'
                 xml.append('      <E_220_Instan>%s</E_220_Instan>' % authority)
                 if check(applicantObj, 'no applicant found on licence %s' % str(licence.getReference())):
                     firstname = applicantObj.portal_type == 'Corporation' and applicantObj.getDenomination() or applicantObj.getName1()
