@@ -9,7 +9,7 @@
         <ul class="urban-list">
             <li>
                 <img src="../schedule.png" />
-                <a href="" tal:attributes="href python: view.site_url() + '/urban/schedule/buildlicence'" >Échéancier</a>
+                <a href="" tal:attributes="href python: view.site_url() + '/urban/schedule/codt_buildlicence'" >Échéancier</a>
             </li>
             <li>
                 <img src="../link_icon.png" />
