@@ -39,7 +39,7 @@ class Urbain220Viewlet(ViewletBase):
             'articles127s',
             'buildlicences',
             'declarations',
-            'integratedldlicences',
+            'integratedlicences',
             'uniquelicences',
             'preliminarynotices',
             'codt_articles127s',
@@ -79,7 +79,7 @@ class LicenceToUrbain220Street(object):
     implements(IToUrbain220Street)
 
     def __init__(self, licence):
-        catalog = api.content.get_tool('portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
         addresses = licence.getWorkLocations()
         first_address = addresses and addresses[0]
         street_brain = catalog(UID=first_address['street'])
@@ -203,8 +203,6 @@ class UrbainXMLExport(BrowserView):
                     if hasattr(licence, 'authority'):
                         auth_map = {'college': 'COM', 'ft': 'REGION'}
                         authority = auth_map[licence.getAuthority()]
-                    elif licence.getLastRecourse():
-                        authority = 'MINISTRE'
                     elif licence.getLastRecourse():
                         authority = 'MINISTRE'
                 xml.append('      <E_220_Instan>%s</E_220_Instan>' % authority)
