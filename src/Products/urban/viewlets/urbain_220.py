@@ -43,8 +43,8 @@ class Urbain220Viewlet(ViewletBase):
             'uniquelicences',
             'preliminarynotices',
             'codt_articles127s',
-            'codt_buildlicences'
-            'codt_integratedldlicences',
+            'codt_buildlicences',
+            'codt_integratedlicences',
             'codt_uniquelicences',
         ]
         allowed = self.context.id in allowed_contexts
