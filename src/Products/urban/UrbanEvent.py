@@ -478,9 +478,12 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
 
     def getKeyDate(self):
         event_type = self.getUrbaneventtypes()
-        keydate_fields = [date for date in event_type.getKeyDates()]
-        keydate_field = keydate_fields and keydate_fields[0] or 'eventDate'
+        keydate_field = 'eventDate'
+        if event_type:
+            keydate_fields = [date for date in event_type.getKeyDates()]
+            keydate_field = keydate_fields and keydate_fields[0] or 'eventDate'
         keydate = self.getField(keydate_field).get(self)
+
         return keydate
 
 
