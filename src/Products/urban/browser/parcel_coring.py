@@ -70,16 +70,16 @@ class CoringUtility(object):
         }
 
 
-class CoringPCA(CoringUtility):
-    fieldname = 'pca'
-    vocabulary_name = 'urban.vocabulary.PCAZones'
+class CoringSOL(CoringUtility):
+    fieldname = 'pcaZone'
+    vocabulary_name = 'urban.vocabulary.SOLZones'
     valuetype = 'list'
     coring_attribute = u'CODECARTO'
 
 
-class CoringPCABoolean(CoringPCA):
+class CoringSOLBoolean(CoringSOL):
     fieldname = 'isInPCA'
-    vocabulary_name = 'urban.vocabulary.PCAZonesBoolean'
+    vocabulary_name = 'urban.vocabulary.SOLZonesBoolean'
     valuetype = 'boolean'
 
 
@@ -124,7 +124,7 @@ class CoringNoteworthyTrees(CoringUtility):
 
 MATCH_CORING = {
     2: CoringNatura2000,
-    7: (CoringPCA, CoringPCABoolean),
+    7: (CoringSOL, CoringSOLBoolean),
     8: (CoringParcellings, CoringParcellingsBoolean),
     12: CoringProtectedBuilding,
     16: CoringProtectedBuilding,
@@ -191,11 +191,25 @@ class ParcelCoringView(BrowserView):
 
     @staticmethod
     def _compare_values(new_value, current_value):
-        if isinstance(new_value, collections.Iterable):
-            new_value = [e for e in new_value if e]
-        if isinstance(current_value, collections.Iterable):
-            current_value = [e for e in current_value if e]
+        new_value = ParcelCoringView._cleanup_for_comparison(new_value)
+        current_value = ParcelCoringView._cleanup_for_comparison(current_value)
         return current_value != new_value
+
+    @staticmethod
+    def _cleanup_for_comparison(value):
+        """cleanup value for comparison"""
+        if isinstance(value, collections.Iterable) and not isinstance(value, basestring):
+            value = [e for e in value if e]
+        else:
+            value = [value]
+        tags = ('<p>', '</p>', '<b>', '</b>', '<strong>', '</strong>')
+        result = []
+        for v in value:
+            for tag in tags:
+                if isinstance(v, basestring):
+                    v = v.replace(tag, '')
+            result.append(v)
+        return result
 
     def _format_values(self, field_values):
         values = []
@@ -217,12 +231,11 @@ class ParcelCoringView(BrowserView):
         parcels_wkt = cadastre.query_parcels_wkt(parcels)
         cadastre.close()
 
-        parcel_coring = services.parcel_coring.new_session()
+        parcel_coring = services.parcel_coring
         coring_response = parcel_coring.get_coring(
             parcels_wkt,
             self.request.get('st', coring_type)
         )
-        parcel_coring.close()
 
         status = coring_response.status_code
         if status != 200:
