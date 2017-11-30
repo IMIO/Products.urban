@@ -331,7 +331,7 @@ def finalizeSchema(schema):
     schema['exemptFDArticle'].widget.label_msgid = 'urban_label_exemptFDArticleCODT'
     schema['implantation'].widget.label_msgid = 'urban_label_implantationCODT'
     schema['pca'].vocabulary = UrbanVocabulary('sols', vocType="PcaTerm", inUrbanConfig=False)
-    schema['pcaZone'].vocabulary = UrbanVocabulary('solzones', inUrbanConfig=False)
+    schema['pcaZone'].vocabulary_factory = 'urban.vocabulary.SOLZones'
     return schema
 
 finalizeSchema(CODT_BaseBuildLicence_schema)
