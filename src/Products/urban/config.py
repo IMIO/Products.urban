@@ -325,4 +325,5 @@ def registerClasses():
         if key in Products.Archetypes.ATToolModule._types:
             # Unregister the class
             del Products.Archetypes.ATToolModule._types[key]
+        delattr(klass, '__ac_permissions__')
         registerType(klass, PROJECTNAME)
