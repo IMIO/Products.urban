@@ -389,4 +389,9 @@ input.assign_user {
    display: grid;
 }
 
+/* Style parcel coring */
+table#coring-update td p {
+  margin-bottom: 0;
+}
+
 /* </dtml-with> */
