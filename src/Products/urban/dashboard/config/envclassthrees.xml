@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<object name="urbancertificateones" meta_type="ATFolder">
+<object name="envclassthrees" meta_type="ATFolder">
  <criteria>
   <criterion name="c1">
    <property name="widget">sorting</property>
@@ -25,7 +25,7 @@
    <property name="hidealloption">1</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
-   <property name="default">85cd057dd23647d78d053c5be4849eba</property>
+   <property name="default">7bd7720dbb2141a6b9328ed3f7fc0b24</property>
   </criterion>
   <criterion name="c10">
    <property name="widget">autocomplete</property>
@@ -37,17 +37,6 @@
    <property name="default"></property>
    <property
       name="autocomplete_view">applicants-autocomplete-suggest</property>
-   <property name="onlyallelements">1</property>
-  </criterion>
-  <criterion name="c9">
-   <property name="widget">autocomplete</property>
-   <property name="title">Notaire</property>
-   <property name="position">top</property>
-   <property name="section">advanced</property>
-   <property name="hidden">0</property>
-   <property name="index">representatives</property>
-   <property name="default"></property>
-   <property name="autocomplete_view">notaries-autocomplete-suggest</property>
    <property name="onlyallelements">1</property>
   </criterion>
   <criterion name="c4">
@@ -85,16 +74,15 @@
    <property name="onlyallelements">1</property>
   </criterion>
   <criterion name="c5">
-   <property name="widget">autocomplete</property>
-   <property name="title">Référence</property>
+   <property name="widget">text</property>
+   <property name="title">Titre, référence</property>
    <property name="position">center</property>
    <property name="section">default</property>
    <property name="hidden">0</property>
-   <property name="index">getReference</property>
+   <property name="index">Title</property>
    <property name="default"></property>
-   <property
-      name="autocomplete_view">reference-autocomplete-suggest</property>
    <property name="onlyallelements">1</property>
+   <property name="wildcard">1</property>
   </criterion>
   <criterion name="c6">
    <property name="widget">select</property>

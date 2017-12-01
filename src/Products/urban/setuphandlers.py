@@ -869,7 +869,7 @@ def setupImioDashboard(context):
 
     for urban_type in URBAN_TYPES:
         folder = getattr(urban_folder, urban_type.lower() + 's')
-        _activate_dashboard_navigation(folder, '/dashboard/config/%s.xml' % urban_type)
+        _activate_dashboard_navigation(folder, '/dashboard/config/%ss.xml' % urban_type.lower())
         collection_id = 'collection_%s' % urban_type.lower()
         if collection_id not in folder.objectIds():
             setFolderAllowedTypes(folder, 'DashboardCollection')
