@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<object name="buildlicences" meta_type="ATFolder">
+<object name="notaryletters" meta_type="ATFolder">
  <criteria>
   <criterion name="c1">
    <property name="widget">sorting</property>
@@ -25,17 +25,7 @@
    <property name="hidealloption">1</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
-   <property name="default">5681a5887fe94dd18d651de49ac1361f</property>
-  </criterion>
-  <criterion name="c11">
-   <property name="widget">daterange</property>
-   <property name="title">Date de la décision</property>
-   <property name="position">top</property>
-   <property name="section">advanced</property>
-   <property name="hidden">0</property>
-   <property name="index">getDecisionDate</property>
-   <property name="default"></property>
-   <property name="calYearRange">c-10:c+10</property>
+   <property name="default">4739edc4dd28477f9873d29060d33c4c</property>
   </criterion>
   <criterion name="c10">
    <property name="widget">autocomplete</property>
@@ -51,14 +41,13 @@
   </criterion>
   <criterion name="c9">
    <property name="widget">autocomplete</property>
-   <property name="title">Architecte</property>
+   <property name="title">Notaire</property>
    <property name="position">top</property>
    <property name="section">advanced</property>
    <property name="hidden">0</property>
    <property name="index">representatives</property>
    <property name="default"></property>
-   <property
-      name="autocomplete_view">architects-autocomplete-suggest</property>
+   <property name="autocomplete_view">notaries-autocomplete-suggest</property>
    <property name="onlyallelements">1</property>
   </criterion>
   <criterion name="c4">
@@ -95,27 +84,16 @@
       name="autocomplete_view">cadastral-autocomplete-suggest</property>
    <property name="onlyallelements">1</property>
   </criterion>
-  <criterion name="c12">
-   <property name="widget">daterange</property>
-   <property name="title">Date de début d'enquête</property>
-   <property name="position">top</property>
-   <property name="section">advanced</property>
-   <property name="hidden">0</property>
-   <property name="index">investigationStart</property>
-   <property name="default"></property>
-   <property name="calYearRange">c-10:c+10</property>
-  </criterion>
   <criterion name="c5">
-   <property name="widget">autocomplete</property>
-   <property name="title">Référence</property>
+   <property name="widget">text</property>
+   <property name="title">Titre, référence</property>
    <property name="position">center</property>
    <property name="section">default</property>
    <property name="hidden">0</property>
-   <property name="index">getReference</property>
+   <property name="index">Title</property>
    <property name="default"></property>
-   <property
-      name="autocomplete_view">reference-autocomplete-suggest</property>
    <property name="onlyallelements">1</property>
+   <property name="wildcard">1</property>
   </criterion>
   <criterion name="c6">
    <property name="widget">select</property>
