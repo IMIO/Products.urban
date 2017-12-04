@@ -27,4 +27,16 @@
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
 
+  <utility
+    component=".vocabularies.LicenceTypeVocabularyFactory"
+    name="urban.vocabularies.licence_types"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+    component=".vocabularies.DateIndexVocabularyFactory"
+    name="urban.vocabularies.licence_date_indexes"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
 </configure>

@@ -394,4 +394,12 @@ table#coring-update td p {
   margin-bottom: 0;
 }
 
+#form-widgets-licence_type {
+   display: inline;
+}
+
+span.option {
+   display: block;
+}
+
 /* </dtml-with> */
