@@ -24,10 +24,6 @@ URBAN_TESTS_PROFILE_DEFAULT = PloneWithPackageLayer(
 
 run_entry_points('Products.urban.testing.profile', 'base', URBAN_TESTS_PROFILE_DEFAULT)
 
-
-URBAN_TESTS_PROFILE_INTEGRATION = IntegrationTesting(
-    bases=(URBAN_TESTS_PROFILE_DEFAULT,), name="URBAN_TESTS_PROFILE_INTEGRATION")
-
 URBAN_TESTS_PROFILE_FUNCTIONAL = FunctionalTesting(
     bases=(URBAN_TESTS_PROFILE_DEFAULT,), name="URBAN_TESTS_PROFILE_FUNCTIONAL")
 
