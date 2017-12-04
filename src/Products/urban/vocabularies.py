@@ -8,6 +8,7 @@ from plone import api
 from Products.urban.config import URBAN_CWATUPE_TYPES
 from Products.urban.config import URBAN_CODT_TYPES
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
+from Products.urban.config import URBAN_TYPES
 from Products.urban.config import EMPTY_VOCAB_VALUE
 from Products.urban.interfaces import IEventTypeType
 from Products.urban.interfaces import IFolderManager
@@ -168,3 +169,38 @@ class ProcedureCategoryVocabulary(object):
 
 
 ProcedureCategoryVocabularyFactory = ProcedureCategoryVocabulary()
+
+
+class LicenceTypeVocabulary(object):
+
+    def __call__(self, context):
+        request = api.portal.get().REQUEST
+        terms = [SimpleTerm(ltype, ltype, translate(ltype, 'urban', context=request)) for ltype in URBAN_TYPES]
+
+        return SimpleVocabulary(terms)
+
+
+LicenceTypeVocabularyFactory = LicenceTypeVocabulary()
+
+
+class DateIndexVocabulary(object):
+
+    def __call__(self, context):
+        request = api.portal.get().REQUEST
+        terms = [
+            SimpleTerm(
+                'created',
+                'created',
+                translate('creation date', 'urban', context=request)
+            ),
+            SimpleTerm(
+                'getDepositDate',
+                'getDepositDate',
+                translate('IDeposit type marker interface', 'urban', context=request)
+            ),
+        ]
+
+        return SimpleVocabulary(terms)
+
+
+DateIndexVocabularyFactory = DateIndexVocabulary()
