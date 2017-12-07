@@ -149,6 +149,8 @@ class ClaimantsTable(ContactTable):
     """
     implements(IClaimantsTable)
 
+    batchSize = 999
+
 
 class RecipientsCadastreTable(UrbanTable, SequenceTable):
     """  """
