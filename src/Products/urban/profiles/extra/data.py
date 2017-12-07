@@ -51,6 +51,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
+                {'id': "codt_pu_depot_de_la_demande.odt", 'title': "Dépôt de la demande"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
@@ -63,7 +64,9 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt-dossier-incomplet-demandeur.odt", 'title': "Dossier incomplet (lettre au demandeur)"},
+                {'id': "codt_pu_annexe_17_dossier_incomplet_demandeur.odt", 'title': "Dossier incomplet (lettre au demandeur, Annexe 17)"},
+                {'id': "codt_pu_dossier_incomplet_architecte.odt", 'title': "Dossier incomplet (lettre à l'architecte)"},
+                {'id': "codt_pu_dossier_incomplet_fd.odt", 'title': "Dossier incomplet (lettre au FD)"},
             ),
         },
         {
@@ -72,7 +75,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': (
-                {'id': "codt-recepisse-complement.odt", 'title': "Récépissé de dépôt de compléments"},
+                {'id': "codt_pu_recepisse_depot_complements.odt", 'title': "Récépissé de dépôt de compléments"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
         },
@@ -85,6 +88,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
+                {'id': "codt_pu_dossier_incomplet_2eme_fois_irrecevable.odt", 'title': "Deuxième dossier incomplet (irrecevable)"},
             ),
         },
         {
@@ -96,7 +100,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt-accuse.odt", 'title': "Accusé de réception"},
+                {'id': "codt_pu_annexe_18_accuse_reception.odt", 'title': "Accusé de réception (Annexe 18)"},
             ),
         },
         {
@@ -138,7 +142,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi du premier dossier à la RW"},
+                {'id': "codt_pu_form_envoi_premier_dossier_rw.odt", 'title': "Formulaire d'envoi du premier dossier à la RW"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
         },
@@ -147,7 +151,7 @@ urbanEventTypes = {
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': [],
             'TALCondition': "python: False",
-            'podTemplates': ({'id': "codt-avis.odt", 'title': "Courrier de demande d'avis"},),
+            'podTemplates': ({'id': "codt_pu_courrier_demande_avis_gen.odt", 'title': "Courrier de demande d'avis"},),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
@@ -160,7 +164,7 @@ urbanEventTypes = {
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
-                {'id': "codt-enq-affiche-verte.odt", 'title': "Affiche verte"},
+                {'id': "codt_pu_annexe_25_affiche_verte.odt", 'title': "Affiche verte (Annexe 25)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IAnnouncementEvent',
             'eventPortalType': 'UrbanEventAnnouncement',
@@ -174,8 +178,8 @@ urbanEventTypes = {
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
-                {'id': "codt-enq-avis-riverains.odt", 'title': "Avis enquête (annexe 26 - lettre riverains)"},
-                {'id': "codt-enq-affiche.odt", 'title': "Affiche (annexe 25)"},
+                {'id': "codt_pu_annexe_26_enq_pub_avis_riverains.odt", 'title': "Avis enquête (Lettre riverains, Annexe 26)"},
+                {'id': "codt_pu_annexe_26_enq_pub_avis_riverains_affiche.odt", 'title': "Lettre aux riverains : Affiche (Annexe 26)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
             'eventPortalType': 'UrbanEventInquiry',
@@ -195,6 +199,10 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
+                {'id': "codt_pu_prorogation_si_non_automatique_deliberation.odt", 'title': "Délibération CODT - PROROGATION si non automatique"},
+                {'id': "codt_pu_prorogation_info_demandeur.odt", 'title': "Information au demandeur de la prorogation"},
+                {'id': "codt_pu_prorogation_info_architecte.odt", 'title': "Information à l'architecte de la prorogation"},
+                {'id': "codt_pu_formulaire_envoi_prorogation_fd_grille.odt", 'title': "Formulaire d'envoi de la prorogation au FD (GRILLE)"},
             ),
         },
         {
@@ -220,6 +228,8 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
+                {'id': "codt_pu_annexe_12_decision_octroi_refus.odt", 'title': "Décision (Annexe 12)"},
+                {'id': "codt_pu_decision_octroi_refus_lettre_architecte.odt", 'title': "Décision lettre à l'architecte"},
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
