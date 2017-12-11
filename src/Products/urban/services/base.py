@@ -9,6 +9,7 @@ from plone import api
 from sqlalchemy import MetaData
 from sqlalchemy import Table
 from sqlalchemy import create_engine
+from sqlalchemy.exc import NoSuchTableError
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
 
@@ -32,6 +33,17 @@ class WebService(object):
 class SQLTables(object):
     """
     """
+
+
+class UnknownSQLTable(object):
+    """
+    """
+
+    def __init__(self, name):
+        self.name = name
+
+    def __getattribute__(self, name):
+        raise NoSuchTableError(self.name)
 
 
 class SQLService(object):
@@ -67,9 +79,12 @@ class SQLService(object):
         be queried, do it with this method.
         Each table is set as an attribute of self.tables .
         """
-        table = Table(table_name, self.metadata, autoload=True)
-        for column_name in column_names:
-            setattr(table, column_name, table.columns[column_name])
+        try:
+            table = Table(table_name, self.metadata, autoload=True)
+            for column_name in column_names:
+                setattr(table, column_name, table.columns[column_name])
+        except NoSuchTableError:
+            table = UnknownSQLTable(table_name)
         setattr(self.tables, table_name, table)
 
     def __getattr__(self, attr_name):
