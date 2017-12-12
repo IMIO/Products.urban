@@ -111,6 +111,20 @@ class InquiryCondition(CreationCondition):
         return has_inquiry
 
 
+class AnnouncementCondition(CreationCondition):
+    """
+    Licence has an announcement defined.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        announcement = licence.getLastAnnouncement()
+        has_announcement = bool(announcement)
+
+        return has_announcement
+
+
 class AnnouncementDoneCondition(CreationCondition):
     """
     Licence announcement event is closed.

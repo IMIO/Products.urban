@@ -62,6 +62,9 @@ msgstr "Avis du FD pas sélectionné dans le type de procédure"
 msgid "urban.schedule.condition.folder_complete"
 msgstr "Accusé de réception fait."
 
+msgid "urban.schedule.condition.has_announcement"
+msgstr "Une annonce de projet est définie"
+
 msgid "urban.schedule.condition.has_inquiry"
 msgstr "Une enquête publique est définie"
 
