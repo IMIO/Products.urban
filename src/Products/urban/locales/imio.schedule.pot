@@ -35,6 +35,9 @@ msgstr ""
 msgid "urban.schedule.condition.folder_complete"
 msgstr ""
 
+msgid "urban.schedule.condition.has_announcement"
+msgstr ""
+
 msgid "urban.schedule.condition.has_inquiry"
 msgstr ""
 
