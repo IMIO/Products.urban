@@ -3258,7 +3258,7 @@ msgstr "Evénement"
 msgid "urban_label_licenceeventtypes"
 msgstr "Type d'événement"
 
-msgid "urban_label_Limitedimpact"
+msgid "urban_label_limitedImpact"
 msgstr "Dossier d'impact limité"
 
 #. Default: "Linkedcu2s"
