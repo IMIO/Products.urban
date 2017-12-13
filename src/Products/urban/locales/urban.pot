@@ -2231,6 +2231,9 @@ msgstr ""
 msgid "urban_label_EnvClassThreeNumerotation"
 msgstr ""
 
+msgid "urban_label_Limitedimpact"
+msgstr ""
+
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"
@@ -2275,6 +2278,9 @@ msgid "urban_label_SAR"
 msgstr ""
 
 msgid "urban_label_SDC"
+msgstr ""
+
+msgid "urban_label_SDC_divergence"
 msgstr ""
 
 #. Default: "Srs"
