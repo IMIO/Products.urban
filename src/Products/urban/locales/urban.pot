@@ -2231,9 +2231,6 @@ msgstr ""
 msgid "urban_label_EnvClassThreeNumerotation"
 msgstr ""
 
-msgid "urban_label_Limitedimpact"
-msgstr ""
-
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"
@@ -3222,6 +3219,9 @@ msgstr ""
 #. Default: "Licenceeventtypes"
 #: LicenceEvent.py
 msgid "urban_label_licenceeventtypes"
+msgstr ""
+
+msgid "urban_label_limitedImpact"
 msgstr ""
 
 #. Default: "Linkedcu2s"
