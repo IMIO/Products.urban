@@ -2265,6 +2265,9 @@ msgstr "Numérotation des divisions"
 msgid "urban_label_EnvClassThreeNumerotation"
 msgstr "Numérotation des déclarations environnementales"
 
+msgid "urban_label_Limitedimpact"
+msgstr "Dossier d'impact limité"
+
 #. Default: "Linkedopinionrequestevent"
 #: LinkedOpinionRequestEvent.py
 msgid "urban_label_LinkedOpinionRequestEvent"
@@ -2311,6 +2314,9 @@ msgstr "Périmètre d'un site d'activité économique désaffecté"
 
 msgid "urban_label_SDC"
 msgstr "Schéma de développement communal"
+
+msgid "urban_label_SDC_divergence"
+msgstr "dossier en écart au Schéma de développement communal"
 
 #. Default: "Srs"
 #: Layer.py

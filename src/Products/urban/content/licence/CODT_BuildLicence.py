@@ -18,20 +18,43 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
+from Products.urban.utils import setOptionalAttributes
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+optional_fields = ['limitedImpact', 'SDC_divergence']
 ##/code-section module-header
 
 schema = Schema((
 
+    BooleanField(
+        name='limitedImpact',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='Limitedimpact',
+            label_msgid='urban_label_limitedImpact',
+            i18n_domain='urban',
+        ),
+        schemata='urban_analysis',
+    ),
+    BooleanField(
+        name='SDC_divergence',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label='SDC_divergence',
+            label_msgid='urban_label_SDC_divergence',
+            i18n_domain='urban',
+        ),
+        schemata='urban_analysis',
+    ),
 
 ),
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 CODT_BuildLicence_schema = BaseFolderSchema.copy() + \
@@ -84,5 +107,14 @@ def finalizeSchema(schema):
     schema['missingParts'].widget.format = None
     return schema
 
+
+def finalizeSpecificSchema(schema):
+    """
+       Finalizes the type schema to alter some fields specific to BuildLicence schema
+    """
+    schema.moveField('limitedImpact', after='prorogation')
+    schema.moveField('SDC_divergence', after='limitedImpact')
+
 finalizeSchema(CODT_BuildLicence_schema)
+finalizeSpecificSchema(CODT_BuildLicence_schema)
 ##/code-section module-footer
