@@ -233,6 +233,9 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
     def getProrogationDelays(self, *values):
         procedure_choice = [{'val': v, 'selected': True} for v in self.getProcedureChoice()]
         base_delay = self.getProcedureDelays(*procedure_choice)
+        if self.prorogation:
+            base_delay = '{}j'.format(str(int(base_delay[:-1]) - 30))
+
         if False in values:
             return base_delay
 
