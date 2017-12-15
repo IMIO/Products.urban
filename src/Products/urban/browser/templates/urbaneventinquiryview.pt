@@ -15,7 +15,7 @@
                 <metal:body define-macro="body_macro" tal:define="useTabbing python: True;
                                                                   member context/@@plone_portal_state/member;
                                                                   recipients context/getRecipients;
-                                                                  linkedUrbanEventType view/getUrbaneventtypes;
+                                                                  linkedUrbanEventType context/getUrbaneventtypes;
                                                                   global parcels view/getParcels;">
 
                     <div class="action-bar">
@@ -187,7 +187,7 @@
                                 </div>
                             </tal:recipients>
                             <tal:block condition="python: member.has_permission('Modify portal content', context)
-                                                          and linkedUrbanEventType.getEventTypeType() == 'Products.urban.interfaces.IInquiryEvent'">
+                                                          and 'Products.urban.interfaces.IInquiryEvent' in linkedUrbanEventType.getEventTypeType()">
                                 <form name="quickAdd" method="post"
                                       tal:condition="python: member.has_permission('urban: Add RecipientCadastre', context)"
                                       tal:attributes="action python: context.absolute_url() + '/createObject?type_name=RecipientCadastre'">
