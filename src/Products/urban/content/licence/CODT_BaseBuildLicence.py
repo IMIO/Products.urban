@@ -34,7 +34,7 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 optional_fields = [
     'SDC', 'sdcDetails', 'regional_guide', 'regional_guide_details',
-    'township_guide', 'township_guide_details',
+    'township_guide', 'township_guide_details', 'prorogation',
 ]
 
 slave_fields_prorogation = (
