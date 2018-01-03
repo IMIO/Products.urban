@@ -216,6 +216,7 @@ LICENCE_FINAL_STATES = [
     'accepted',
     'refused',
     'retired',
+    'abandoned',
     'inacceptable',
 ]
 
