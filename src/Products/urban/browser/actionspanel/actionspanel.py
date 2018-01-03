@@ -55,6 +55,16 @@ class TransitionsPanelView(ActionsPanelView):
             **kwargs
         )
 
+    def sortTransitions(self, lst):
+        """ Sort the list of transitions """
+        super(TransitionsPanelView, self).sortTransitions(lst)
+        end_transition_ids = ['abandon', 'suspend']
+        to_move = []
+        for transition in lst:
+            if transition['id'] in end_transition_ids:
+                to_move.append(lst.pop(lst.index(transition)))
+        lst.extend(to_move)
+
     def _transitionsToConfirm(self):
         portal_workflow = api.portal.get_tool('portal_workflow')
         workflow = portal_workflow.getWorkflowsFor(self.context)[0]
