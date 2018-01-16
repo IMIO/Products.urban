@@ -457,10 +457,6 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
     """
     """
 
-    def __init__(self, context, request):
-        super(UrbanDocGenerationEventHelperView, self).__init__(context, request)
-        self.context.helper_view = self
-
 
 class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
     def get_work_location_dict(self, index, folder):
