@@ -956,13 +956,9 @@ class EventDisplayProxyObject(ATDisplayProxyObject):
     def get_wspm_description_text(self):
         field_name = 'description'
         description_text = self._get_wspm_field(field_name)
-        if description_text != 'NO FIELD {} FOUND'.format(field_name):
-            description_text = self.helper_view.appy_renderer.renderXhtml(description_text)
         return description_text
 
     def get_wspm_decision_text(self):
         field_name = 'decision'
         decision_text = self._get_wspm_field(field_name)
-        if decision_text != 'NO FIELD {} FOUND'.format(field_name):
-            decision_text = self.helper_view.appy_renderer.renderXhtml(decision_text)
         return decision_text
