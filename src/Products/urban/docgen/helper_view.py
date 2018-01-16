@@ -934,16 +934,35 @@ class EventDisplayProxyObject(ATDisplayProxyObject):
     """
     """
 
-    def get_wspm_decision_date(self, translatemonth=True, long_format=False):
-        decision_date = 'NO DATE FOUND'
+    def _get_wspm_field(self, field_name):
+        field = 'NO FIELD {} FOUND'.format(field_name)
         linked_pm_items = get_ws_meetingitem_infos(self.context)
-        if linked_pm_items:
-            meeting_date = linked_pm_items[0]['meeting_date']
-            if not (meeting_date.day == meeting_date.month == 1 and meeting_date.year == 1950):
-                raw_date = meeting_date
-                decision_date = self.helper_view.format_date(
-                    date=raw_date,
-                    translatemonth=translatemonth,
-                    long_format=long_format
-                )
+        if linked_pm_items and field_name in linked_pm_items[0]:
+            field = linked_pm_items[0][field_name]
+        return field
+
+    def get_wspm_decision_date(self, translatemonth=True, long_format=False):
+        field_name = 'meeting_date'
+        decision_date = 'NO FIELD {} FOUND'.format(field_name)
+        raw_date = self._get_wspm_field(field_name)
+        if raw_date != decision_date:
+            decision_date = self.helper_view.format_date(
+                date=raw_date,
+                translatemonth=translatemonth,
+                long_format=long_format
+            )
         return decision_date
+
+    def get_wspm_description_text(self):
+        field_name = 'description'
+        description_text = self._get_wspm_field(field_name)
+        if description_text != 'NO FIELD {} FOUND'.format(field_name):
+            description_text = self.helper_view.appy_renderer.renderXhtml(description_text)
+        return description_text
+
+    def get_wspm_decision_text(self):
+        field_name = 'decision'
+        decision_text = self._get_wspm_field(field_name)
+        if decision_text != 'NO FIELD {} FOUND'.format(field_name):
+            decision_text = self.helper_view.appy_renderer.renderXhtml(decision_text)
+        return decision_text
