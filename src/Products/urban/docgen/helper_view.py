@@ -929,6 +929,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             descriptions.append(opinion.getLinkedOrganisationTerm().Description())
         return descriptions
 
+
 class EventDisplayProxyObject(ATDisplayProxyObject):
     """
     """
@@ -945,4 +946,4 @@ class EventDisplayProxyObject(ATDisplayProxyObject):
                     translatemonth=translatemonth,
                     long_format=long_format
                 )
-                return decision_date
+        return decision_date
