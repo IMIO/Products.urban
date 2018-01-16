@@ -68,7 +68,6 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'event_view': event_helper_view,
             'event_helper': event_helper_view.context,
             'claimants': claimants_view,
-            'view': event_helper_view,  # ensure appy renderer is set on event helper view
         }
 
         return generation_context
