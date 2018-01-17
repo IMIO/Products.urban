@@ -77,6 +77,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             helper_view,
             generation_context['licence_view'],
             generation_context['event_view'],
-            generation_context['claimants_view'],
         ]
+        if generation_context['claimants']:
+            views.extend(generation_context['claimants'])
         return views
