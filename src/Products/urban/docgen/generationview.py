@@ -71,3 +71,12 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         }
 
         return generation_context
+
+    def get_views_for_appy_renderer(self, generation_context, helper_view):
+        views = [
+            helper_view,
+            generation_context['licence_view'],
+            generation_context['event_view'],
+            generation_context['claimants_view'],
+        ]
+        return views
