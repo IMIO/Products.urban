@@ -218,7 +218,7 @@ schedule_config = {
             ],
         },
         {
-            'type_name': 'MacroTaskConfig',
+            'type_name': 'TaskConfig',
             'id': 'announcement-preparation',
             'title': 'Préparer l\'annonce de projet',
             'default_assigned_group': 'urban_editors',
@@ -239,7 +239,7 @@ schedule_config = {
             'additional_delay': 20,
         },
         {
-            'type_name': 'MacroTaskConfig',
+            'type_name': 'TaskConfig',
             'id': 'announcement',
             'title': 'Annonce de projet',
             'default_assigned_group': 'urban_editors',
