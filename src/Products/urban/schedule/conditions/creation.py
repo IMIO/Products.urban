@@ -56,12 +56,16 @@ class WillHaveInquiry(CreationCondition):
 
 class WillHaveAnnouncement(CreationCondition):
     """
-    'light_inquiry' is selected on the field 'procedureChoice'.
+    'light_inquiry' or 'initative_light_inquiry' is selected
+    on the field 'procedureChoice'.
     """
 
     def evaluate(self):
         licence = self.task_container
-        return 'light_inquiry' in licence.getProcedureChoice()
+        light_inquiry = 'light_inquiry' in licence.getProcedureChoice()
+        initiative_light_inquiry = 'initiative_light_inquiry' in licence.getProcedureChoice()
+        announcement = light_inquiry or initiative_light_inquiry
+        return announcement
 
 
 class HasNewInquiryCondition(CreationCondition):
