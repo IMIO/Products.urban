@@ -28,7 +28,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
 
     def xhtml(self, html_code, style='UrbanBody'):
         urban_tool = api.portal.get_tool('portal_urban')
-        decorated_html = urban_tool.decorateHTML(html_code, style)
+        decorated_html = urban_tool.decorateHTML(style, html_code)
         xhtml = self.appy_renderer.renderXhtml(decorated_html)
         return xhtml
 
