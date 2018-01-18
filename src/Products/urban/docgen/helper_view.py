@@ -22,6 +22,19 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
     Urban implementation of document generation helper methods.
     """
 
+    def __init__(self, context, request):
+        super(UrbanDocGenerationHelperView, self).__init__(context, request)
+        self.context.helper_view = self
+
+    def xhtml(self, html_code, style='UrbanBody'):
+        urban_tool = api.portal.get_tool('portal_urban')
+        decorated_html = urban_tool.decorateHTML(html_code, style)
+        xhtml = self.helper_view.appy_renderer.renderXhtml(decorated_html)
+        return xhtml
+
+    def get_current_foldermanager(self):
+        return getCurrentFolderManager()
+
     def contains_road_equipment(self, road_equipment):
         roadEquipments = self.context.getRoadEquipments()
         answer = False
@@ -917,12 +930,12 @@ class EventDisplayProxyObject(ATDisplayProxyObject):
         field_name = 'description'
         description_text = self._get_wspm_field(field_name)
         if description_text != 'NO FIELD {} FOUND'.format(field_name):
-            description_text = self.helper_view.appy_renderer.renderXhtml(description_text)
+            description_text = self.helper_view.xhtml(description_text)
         return description_text
 
     def get_wspm_decision_text(self):
         field_name = 'decision'
         decision_text = self._get_wspm_field(field_name)
         if decision_text != 'NO FIELD {} FOUND'.format(field_name):
-            decision_text = self.helper_view.appy_renderer.renderXhtml(decision_text)
+            decision_text = self.helper_view.xhtml(decision_text)
         return decision_text
