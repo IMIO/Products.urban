@@ -14,6 +14,8 @@ from Products.urban import services
 
 from plone import api
 
+import csv
+
 
 class UrbanEventView(BrowserView):
     """
@@ -248,6 +250,62 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
                 return linkedInquiry.generateInquiryTitle()
             else:
                 return linkedInquiry.Title()
+
+    def import_claimants_from_csv(self):
+        portal_urban = api.portal.get_tool('portal_urban')
+        fieldnames = [
+            'id',
+            'personTitle',
+            'name1',
+            'name2',
+            'society',
+            'street',
+            'number',
+            'zipcode',
+            'city',
+            'country',
+            'email',
+            'phone',
+            'gsm',
+            'nationalRegister',
+            'claimType',
+            'hasPetition',
+            'outOfTime',
+            'claimDate',
+            'claimsText',
+        ]
+
+        titles_mapping = {'': ''}
+        titles_folder = portal_urban.persons_titles
+        for title_obj in titles_folder.objectValues():
+            titles_mapping[title_obj.Title()] = title_obj.id
+
+        country_mapping = {'': ''}
+        country_folder = portal_urban.country
+        for country_obj in country_folder.objectValues():
+            country_mapping[country_obj.Title()] = country_obj.id
+
+        claimants_file = open('claimants.csv', 'r')
+        reader = csv.DictReader(claimants_file, fieldnames, delimiter=';', quotechar='"')
+        claimant_args = [row for row in reader if row['id']][1:]
+        for claimant_arg in claimant_args:
+            # default values
+            if not claimant_arg['claimType']:
+                claimant_arg['claimType'] = 'writedClaim'
+            if not claimant_arg['hasPetition']:
+                claimant_arg['hasPetition'] = False
+            if not claimant_arg['outOfTime']:
+                claimant_arg['outOfTime'] = False
+            # mappings
+            claimant_arg['personTitle'] = titles_mapping[claimant_arg['personTitle']]
+            claimant_arg['country'] = country_mapping[claimant_arg['country']]
+            # create claimant
+            self.context.invokeFactory('Claimant', **claimant_arg)
+            print 'imported claimant {id}, {name} {surname}'.format(
+                id=claimant_arg['id'],
+                name=claimant_arg['name1'],
+                surname=claimant_arg['name1'],
+            )
 
 
 class UrbanEventAnnouncementView(UrbanEventInquiryBaseView):
