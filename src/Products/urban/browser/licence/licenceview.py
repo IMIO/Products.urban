@@ -277,6 +277,9 @@ class LicenceView(BrowserView):
     def getAnalysisFields(self, exclude=[]):
         return self.getSchemataFields('urban_analysis', exclude)
 
+    def getEnvironmentFields(self, exclude=[]):
+        return self.getSchemataFields('urban_environment', exclude)
+
     def getRoadFields(self, exclude=[]):
         return self.getSchemataFields('urban_road', exclude)
 

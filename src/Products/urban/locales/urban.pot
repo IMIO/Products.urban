@@ -2789,6 +2789,9 @@ msgstr ""
 msgid "urban_label_enoughRoadEquipmentDetails"
 msgstr ""
 
+msgid "urban_label_environmentTechnicalAdviceAfterInquiry"
+msgstr ""
+
 #. Default: "Equipmentandroadrequirements"
 #: GenericLicence.py
 msgid "urban_label_equipmentAndRoadRequirements"

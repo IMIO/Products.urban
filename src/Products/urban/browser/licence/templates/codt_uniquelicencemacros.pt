@@ -21,6 +21,11 @@
     </metal:parent_call>
 </metal:analysis>
 
+<metal:environment define-macro="environment_macro" i18n:domain="urban">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/environment_macro">
+    </metal:parent_call>
+</metal:environment>
+
 <metal:road define-macro="road_macro" i18n:domain="urban">
     <metal:parent_call use-macro="here/@@licencetabs-macros/road_macro">
     </metal:parent_call>

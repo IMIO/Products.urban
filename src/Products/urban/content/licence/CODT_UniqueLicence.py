@@ -148,6 +148,19 @@ schema = Schema((
         multiValued=True,
         relationship='additionalconditions',
     ),
+    TextField(
+        name='environmentTechnicalAdviceAfterInquiry',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Environmenttechnicaladviceafterinquiry',
+            label_msgid='urban_label_environmentTechnicalAdviceAfterInquiry',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_environment',
+        default_output_type='text/html',
+    ),
 ),
 )
 
