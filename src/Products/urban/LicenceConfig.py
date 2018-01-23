@@ -329,6 +329,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'advices': 'Avis',
             'inquiry': 'Publicité',
             'analysis': 'Analyse Urbanisme',
+            'environment': 'Analyse Environnement',
             'location': 'Aspects légaux',
             'road': 'Voirie',
             'habitation': 'Logement',
@@ -338,6 +339,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         advice_tabs_config = ['description', 'advices', 'analysis', 'location', 'road']
         inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road']
         buildlicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation', 'peb']
+        uniquelicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road', 'habitation', 'peb']
 
         types = {
             'buildlicence': buildlicence_tabs_config,
@@ -349,7 +351,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'codt_buildlicence': buildlicence_tabs_config,
             'codt_article127': buildlicence_tabs_config,
             'codt_parceloutlicence': inquiry_tabs_config,
-            'codt_uniquelicence': buildlicence_tabs_config,
+            'codt_uniquelicence': uniquelicence_tabs_config,
             'codt_integratedlicence': buildlicence_tabs_config,
             'codt_urbancertificatetwo': buildlicence_tabs_config,
             'envclassthree': advice_tabs_config,

@@ -2824,6 +2824,9 @@ msgstr "Voirie suffisamment équipée"
 msgid "urban_label_enoughRoadEquipmentDetails"
 msgstr "Détails concernant l'équipement suffisant de la voirie"
 
+msgid "urban_label_environmentTechnicalAdviceAfterInquiry"
+msgstr "Avis technique après enquête (environnement)"
+
 #. Default: "Equipmentandroadrequirements"
 #: GenericLicence.py
 msgid "urban_label_equipmentAndRoadRequirements"

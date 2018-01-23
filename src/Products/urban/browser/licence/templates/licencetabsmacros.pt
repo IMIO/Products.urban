@@ -141,6 +141,22 @@
 </div>
 
 
+<div class="licence-column" metal:define-macro="environment_macro" i18n:domain="urban">
+    <fieldset>
+        <legend i18n:translate="legend_details">Details</legend>
+        <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+               tal:define="default_custom python: [];
+                           custom custom | python: []; custom python: custom + default_custom">
+
+            <tal:loop repeat="field view/getEnvironmentFields">
+                <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+            </tal:loop>
+
+        </table>
+    </fieldset>
+</div>
+
+
 <div class="licence-column" metal:define-macro="road_macro" i18n:domain="urban">
     <fieldset>
         <legend i18n:translate="legend_details">Details</legend>
