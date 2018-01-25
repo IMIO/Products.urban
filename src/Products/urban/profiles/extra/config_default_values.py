@@ -87,6 +87,81 @@ default_values = {
             {'id': "annexe9", 'title': u"Annexe 9 - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8"},
         ]
     },
+    'CODT_ParcelOutLicence': {
+        'folderdelays': [
+            'UrbanDelay',
+            {'id': "30j", 'title': u"30 jours", 'deadLineDelay': 30, 'alertDelay': 20},
+            {'id': "60j", 'title': u"60 jours", 'deadLineDelay': 60, 'alertDelay': 20},
+            {'id': "75j", 'title': u"75 jours", 'deadLineDelay': 70, 'alertDelay': 20},
+            {'id': "105j", 'title': u"105 jours", 'deadLineDelay': 105, 'alertDelay': 20},
+            {'id': "115j", 'title': u"115 jours", 'deadLineDelay': 115, 'alertDelay': 20},
+            {'id': "145j", 'title': u"145 jours", 'deadLineDelay': 145, 'alertDelay': 20},
+            {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
+        ],
+        'foldercategories': [
+            'UrbanVocabularyTerm',
+            {'id': "uco", 'title': u"Hors SDC/SOL/GCU - UCO: permis d’urbanisme du Collège avec AVIS du FD (sans «écart»)"},
+            {'id': "uco-d", 'title': u"Hors SDC/SOL/GCU – UCO/D: permis d'urbanisme avec dérogation du FD pour Plan Secteur / norme GRU "},
+            {'id': "uco-a", 'title': u"Dans SDC/SOL/GCU - UCO/A: permis d’urbanisme du Collège avec avis FACULTATIF du FD"},
+            {'id': "uco-pd", 'title': u"Dans SDC/SOL/GCU – UCO/PD : permis d’urbanisme direct du Collège"},
+            {'id': "uco-fd", 'title': u"Dans SDC/SOL/GCU – UCO/ED : permis avec écart et/ou dérogation Plan Secteur / norme GRU"},
+            {'id': "inconnu", 'title': u"Inconnu"},
+        ],
+        'investigationarticles': [
+            'UrbanVocabularyTerm',
+            {'id': "enquete-derogation", 'title': u"Article D.IV.40 - Dérogation à un plan ou aux normes d'un guide régional", 'description': u"<p>Application de l'article D.IV.40 : Les demandes impliquant une ou plusieurs dérogations au plan de secteur ou aux normes du guide régional sont soumises à enquête publique.</p> "},
+            {'id': "enquete-derogation-facultative", 'title': u"Article D.VIII.13 - Procédure d'enquête publique \"facultative\"", 'description': u"<p>Application de l'article D.VIII.13. L’autorité compétente pour adopter le plan, périmètre, schéma ou le guide et pour délivrer les<br /> permis et certificats d’urbanisme no 2, ainsi que les collèges communaux des communes organisant l’annonce de projet<br /> ou l’enquête publique, peuvent procéder à toute forme supplémentaire de publicité et d’information dans le respect des<br /> délais de décision qui sont impartis à l’autorité compétente.</p>"},
+            {'id': "R.IV.40-1.1.1", 'title': u"R.IV.40-1.§1-1° - Hauteur des constructions", 'description': u"<p>Article R.IV.40-1.§1-2° du CoDT : «&nbsp;la construction, la reconstruction d'un magasin ou la modification de la destination d'un bâtiment en magasin dont la surface commerciale nette est supérieure à quatre cents mètres carrés ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p> "},
+            {'id': "R.IV.40-1.1.2", 'title': u"R.IV.40-1.§1-2°- Magasin de plus de 400m2", 'description': u"<p>Article R.IV.40-1.§1.3° du CoDT: «&nbsp;la construction, la reconstruction de bureaux ou la modification de la destination d'un bâtiment en bureaux dont la superficie des planchers est supérieure à sixccent cinquante mètres carrés, la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
+            {'id': "R.IV.40-1.1.3", 'title': u"R.IV.40-1.§1.3° - Usage destiné aux bureaux de plus de 650m2", 'description': u"<p>Article R.IV.40-1.§1.4° du CoDT : «&nbsp;la construction, la reconstruction ou la modification de la destination d'un bâtiment en atelier, entrepôt ou hall de stockage à caractère non agricole dont la superficie des planchers est supérieure à quatre cents mètres carrés, la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
+            {'id': "R.IV.40-1.1.4", 'title': u"R.IV.40-1.§1.4° - Destination à usage de stockage supérieur à 400m2", 'description': u"<p>Article R.IV.40-1.§1.5° du CoDT : «&nbsp;l'utilisation habituelle d'un terrain pour le dépôt d'un ou plusieurs véhicules usagés, de mitrailles, de matériaux ou de déchets&nbsp;»</p> "},
+            {'id': "R.IV.40-1.1.5", 'title': u"R.IV.40-1.§1.5° - Utilisation habituelle d'un terrain pour le dépôt d'un ou plusieurs véhicules usagés, de mitrailles, de matériaux ou de déchets", 'description': u"<p>Article R.IV.40-1.§1.6° du CoDT : «&nbsp;la construction, la reconstruction ou la transformation d'un bâtiment qui se rapporte à des biens immobiliers inscrits sur la liste de sauvegarde, classés, situés dans une zone de protectioon visée à l'article 209 du Code wallon du Patrimoine ou localisés dans un site repris à l'inventaire du patrimoine archéologique visé à l'article 233 du Code wallon du Patrimoine »</p> "},
+            {'id': "R.IV.40-1.1.6", 'title': u"R.IV.40-1.§1.6° - Les demandes de permis d'urbanisation et les demandes de permis d'urbanisme relatives à la construction, la reconstruction ou la transformation d'un bâtiment inscrit sur la liste de sauvegarde ou classés", 'description': u""},
+            {'id': "R.IV.40-1.1.7", 'title': u"R.IV.40-1.§1.7° - Ouverture ou modification de la voirie communale", 'description': u"i<p>Article R.IV.40-1.§1.7° du CoDT« les demande de permis d'urbanisation, de permis d'urbanisme ou de certificats d'urbanisme n°2 visées à l'article D.IV.41 »</p> "},
+            {'id': "R.IV.40-1.1.8", 'title': u"R.IV.40-1.§1.8° - Voiries régionales", 'description': u"<p>Article R.IV.40-1.§1.8° du CoD - \" les voiries visées à l'article R.II.21-1,1° pour autant que les actes et travaux impliquent une modification de leur gabarit\"</p>"},
+        ],
+        'announcementarticles': [
+            'UrbanVocabularyTerm',
+            {'id': "ecarts", 'title': u"Article D.IV.40 - Ecarts à un schéma, à un guide ou à un permis d'urbanisation", 'description': u"<p>Application de l'article D.IV.40. : Les demandes impliquant un ou plusieurs écarts aux plans communaux d’aménagement adoptés avant l’entrée en vigueur du Code et devenus schémas d’orientation locaux, aux règlements adoptés avant l’entrée en vigueur du Code et devenus guides et aux permis d’urbanisation sont soumises à annonce de projet, et ce, jusqu’à la révision ou à l’abrogation du schéma ou du guide.</p> "},
+            {'id': "ecarts-facultatifs", 'title': u"Article D.VIII.13 - Procédure d'annonce de projet \"facultative\"", 'description': u"<p>Art. D.VIII.13. L’autorité compétente pour adopter le plan, périmètre, schéma ou le guide et pour délivrer les<br /> permis et certificats d’urbanisme no 2, ainsi que les collèges communaux des communes organisant l’annonce de projet<br /> ou l’enquête publique, peuvent procéder à toute forme supplémentaire de publicité et d’information dans le respect des<br /> délais de décision qui sont impartis à l’autorité compétente.</p> "},
+            {'id': "R.IV.40-2-1-1", 'title': u"R.IV.40-2.§1.1° - Hauteur des constructions", 'description': u"<p>Article R.IV.40-2.§1-1°du CoDT : «&nbsp;la construction ou la reconstruction de bâtiments dont la hauteur est d’au moins trois niveaux ou neuf mètres sous corniche et dépasse de trois mètres ou plus la moyenne des hauteurs sous corniche des bâtiments situés dans la même rue jusqu’à cinquante mètres de part et d’autre de la construction projetée; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions;»</p> "},
+            {'id': "R.IV.40-2-1-2", 'title': u"R.IV.40-2 § 2° - Profondeur de bâtisse", 'description': u"<p>Article R.IV.40-2.§1-2°: «&nbsp;la construction ou la reconstruction de bâtiments dont la profondeur, mesurée à partir de l'alignement ou du front de bâtisse lorsque les constructions voisines ne sont pas implantées sur l'alignement, est supérieure à 15 mètres et dépasse de plus de 4 mètres les bâtiments situés sur les parcelles contiguës, la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
+            {'id': "R.IV.40-2-1-3", 'title': u"R.IV.40-2.§1-3° - Magasin de moins de 400m2", 'description': u"<p>Article R.IV.40-2.§1-3 : «&nbsp;la construction, la reconstruction d'un magasin ou la modification de la destination d'un bâtiment en magasin dont la surface commerciale nette est inférieure à quatre cent mètres carrés ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
+        ],
+        'derogations': [
+            'UrbanVocabularyTerm',
+            {'id': "dero-ps", 'title': u"au plan de secteur"},
+            {'id': "dero-gru", 'title': u"à une ou des norme(s) du Guide Régional d'Urbanisme "},
+        ],
+        'divergences': [
+            'UrbanVocabularyTerm',
+            {'id': "ecart-purba", 'title': u"au permis d'urbanisation"},
+            {'id': "ecart-gcu", 'title': u"au Guide Communal d'Urbanisme"},
+            {'id': "ecart-gru", 'title': u"au Règlement Régional d'Urbanisme"},
+            {'id': "ecart-sol", 'title': u"au Schéma d'Orientation Local"},
+        ],
+        'missingparts': [
+            'UrbanVocabularyTerm',
+            {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
+            {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
+            {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+            {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement (annexe 1C) en 2 exemplaires"},
+            {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
+            {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+            {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
+        ],
+        'exemptfdarticle': [
+            'UrbanVocabularyTerm',
+            {'id': "annexe4", 'title': u"Annexe 4 - Demande de permis avec concours d'un architecte"},
+            {'id': "annexe5", 'title': u"Annexe 5 - Modification de la destination ou modification de la répartition des surfaces de vente"},
+            {'id': "annexe6", 'title': u"Annexe 6 - Modification sensible du relief du sol - dépôt de véhicules, de mitrailles, de matériaux ou de déchets - installations mobiles - travaux d'aménagement au sol aux abords d'une construction autorisée"},
+            {'id': "annexe7", 'title': u"Annexe 7 - Boisement - déboisement - abattage - culture de sapins de Noël - modification de l'aspect d'un ou plusieurs arbres ou haies remarquables - défrichement - modification de la végétation"},
+            {'id': "annexe8", 'title': u"Annexe 8 - Travaux techniques"},
+            {'id': "annexe9", 'title': u"Annexe 9 - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8"},
+        ]
+    },
     'CODT_Article127': {
         'folderdelays': [
             'UrbanDelay',
@@ -621,7 +696,7 @@ default_values = {
 
         'pebcategories': [
             'UrbanVocabularyTerm', [
-                'BuildLicence', 'Article127', 'CODT_BuildLicence', 'CODT_Article127',
+                'BuildLicence', 'Article127', 'CODT_BuildLicence', 'CODT_ParcelOutLicence', 'CODT_Article127',
             ],
             {'id': "not_applicable", 'title': 'peb_not_applicable'},
             {'id': "complete_process", 'title': 'peb_complete_process'},
@@ -1197,7 +1272,7 @@ default_values = {
         'folderbuildworktypes': [
             'UrbanVocabularyTerm', [
                 'BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence', 'ParcelOutLicence', 'UrbanCertificateTwo',
-                'CODT_BuildLicence', 'CODT_UrbanCertificateTwo'
+                'CODT_BuildLicence', 'CODT_ParcelOutLicence', 'CODT_UrbanCertificateTwo'
             ],
             {'id': 'AUTRE', 'title': u"Autres", 'extraValue': 'AUTRE'},
             {'id': 'DEM', 'title': u"Démolition", 'extraValue': 'DEM'},
