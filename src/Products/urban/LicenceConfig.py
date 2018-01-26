@@ -242,6 +242,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_analysis': '(analyse) ',
             'urban_advices': '(avis) ',
             'urban_habitation': '(log) ',
+            'urban_environment': '(environnement) ',
             'urban_peb': '(peb) ',
         }
         if not getLicenceSchema(self.getLicencePortalType()):
@@ -393,6 +394,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_inquiry': '(enq) ',
             'urban_advices': '(avis) ',
             'urban_analysis': '(analyse) ',
+            'urban_environment': '(environnement) ',
             'urban_description': '',
         }
         available_fields = [field for field in licence_schema.fields() if field.getType() == 'Products.Archetypes.Field.TextField' and field.getName() != 'rights']

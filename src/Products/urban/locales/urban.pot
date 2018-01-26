@@ -2581,6 +2581,9 @@ msgstr ""
 msgid "urban_label_claimsText"
 msgstr ""
 
+msgid "urban_label_claimsSynthesis"
+msgstr ""
+
 msgid "urban_label_collegeReportDecisionDate"
 msgstr ""
 
@@ -2597,6 +2600,9 @@ msgstr ""
 #. Default: "Comments"
 #: Division.py
 msgid "urban_label_comments"
+msgstr ""
+
+msgid "urban_label_commentsOnSPWOpinion"
 msgstr ""
 
 msgid "urban_label_complement"
@@ -2621,6 +2627,9 @@ msgid "urban_label_concerned_elements"
 msgstr ""
 
 msgid "urban_label_concertationDate"
+msgstr ""
+
+msgid "urban_label_conclusions"
 msgstr ""
 
 #. Default: "Linked inquiry"
@@ -2790,6 +2799,9 @@ msgid "urban_label_enoughRoadEquipmentDetails"
 msgstr ""
 
 msgid "urban_label_environmentTechnicalAdviceAfterInquiry"
+msgstr ""
+
+msgid "urban_label_environmentTechnicalRemarks"
 msgstr ""
 
 #. Default: "Equipmentandroadrequirements"
@@ -3553,6 +3565,9 @@ msgid "urban_label_phone"
 msgstr ""
 
 msgid "urban_label_pipelines"
+msgstr ""
+
+msgid "urban_label_pipelinesDetails"
 msgstr ""
 
 #. Default: "Plone user id"
