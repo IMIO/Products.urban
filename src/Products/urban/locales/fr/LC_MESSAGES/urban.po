@@ -3330,6 +3330,9 @@ msgstr "Détails"
 msgid "urban_label_locationTechnicalAdvice"
 msgstr "Avis technique urbanisme"
 
+msgid "urban_label_locationTechnicalAdviceAfterInquiry"
+msgstr "Avis technique après enquête (urbanisme)"
+
 #. Default: "Locationtechnicalconditions"
 #: BuildLicence.py
 msgid "urban_label_locationTechnicalConditions"

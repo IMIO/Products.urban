@@ -1,6 +1,6 @@
 <metal:description define-macro="description_macro" i18n:domain="urban">
 
-    <tal:vars define="custom python:['impactStudy', 'rubrics', 'minimumLegalConditions', 'hasAdditionalConditions'];">
+    <tal:vars define="custom python:['impactStudy',];">
         <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
 
             <metal:applicants fill-slot="applicant_slot">
@@ -22,8 +22,10 @@
 </metal:analysis>
 
 <metal:environment define-macro="environment_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/environment_macro">
-    </metal:parent_call>
+    <tal:vars define="custom python:['rubrics', 'minimumLegalConditions', 'hasAdditionalConditions'];">
+        <metal:parent_call use-macro="here/@@licencetabs-macros/environment_macro">
+        </metal:parent_call>
+    </tal:vars>
 </metal:environment>
 
 <metal:road define-macro="road_macro" i18n:domain="urban">
