@@ -2610,6 +2610,9 @@ msgstr "Texte de la réclamation"
 msgid "urban_label_claimsDate"
 msgstr "Date de début de la séance de réclamations"
 
+msgid "urban_label_claimsSynthesis"
+msgstr "Synthèse des réclamations"
+
 #. Default: "Claimstext"
 #: UrbanEvent.py
 msgid "urban_label_claimsText"
@@ -2632,6 +2635,9 @@ msgstr "Commentaire"
 #: Division.py
 msgid "urban_label_comments"
 msgstr "Commentaires"
+
+msgid "urban_label_commentsOnSPWOpinion"
+msgstr "Commentaires sur la décision du SPW"
 
 msgid "urban_label_complement"
 msgstr "Compléments"
@@ -2656,6 +2662,9 @@ msgstr "Eléments concernés"
 
 msgid "urban_label_concertationDate"
 msgstr "Date de réunion de concertation"
+
+msgid "urban_label_conclusions"
+msgstr "Conclusions"
 
 #. Default: "Linked inquiry"
 #: ../browser/templates/urbaneventannouncementview.pt:66
@@ -2826,6 +2835,9 @@ msgstr "Détails concernant l'équipement suffisant de la voirie"
 
 msgid "urban_label_environmentTechnicalAdviceAfterInquiry"
 msgstr "Avis technique après enquête (environnement)"
+
+msgid "urban_label_environmentTechnicalRemarks"
+msgstr "Observations"
 
 #. Default: "Equipmentandroadrequirements"
 #: GenericLicence.py
@@ -3591,6 +3603,9 @@ msgstr "Téléphone"
 
 msgid "urban_label_pipelines"
 msgstr "Canalisations"
+
+msgid "urban_label_pipelinesDetails"
+msgstr "Détails sur les canalisations"
 
 #. Default: "Plone user id"
 #: FolderManager.py

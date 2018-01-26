@@ -99,7 +99,7 @@ optional_fields = [
     'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', 'sevesoSite', 'natura_2000', 'sewers',
     'sewersDetails', 'roadAnalysis', 'futureRoadCoating', 'expropriation', 'expropriationDetails',
     'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails',
-    'reparcelling', 'reparcellingDetails', 'noteworthyTrees'
+    'reparcelling', 'reparcellingDetails', 'noteworthyTrees', 'pipelines', 'pipelinesDetails'
 ]
 ##/code-section module-header
 
@@ -455,6 +455,19 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary('pipelines', inUrbanConfig=False),
         default_method='getDefaultValue',
+    ),
+    TextField(
+        name='pipelinesDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Pipelinesdetails',
+            label_msgid='urban_label_pipelinesDetails',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_road',
+        default_output_type='text/plain',
     ),
     LinesField(
         name='natura_2000',
