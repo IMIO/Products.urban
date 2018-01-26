@@ -200,7 +200,7 @@ class UrbainXMLExport(BrowserView):
                 if licence.portal_type in ['Article127', 'CODT_Article127']:
                     authority = 'REGION'
                 else:
-                    if hasattr(licence, 'authority'):
+                    if hasattr(licence, 'getAuthority'):
                         auth_map = {'college': 'COM', 'ft': 'REGION'}
                         authority = auth_map[licence.getAuthority()]
                     elif licence.getLastRecourse():
