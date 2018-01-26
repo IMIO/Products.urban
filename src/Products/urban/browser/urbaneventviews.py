@@ -304,7 +304,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             print 'imported claimant {id}, {name} {surname}'.format(
                 id=claimant_arg['id'],
                 name=claimant_arg['name1'],
-                surname=claimant_arg['name1'],
+                surname=claimant_arg['name2'],
             )
 
 
