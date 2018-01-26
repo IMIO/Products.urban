@@ -102,7 +102,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         allowed_types=('EnvironmentRubricTerm',),
-        schemata='urban_description',
+        schemata='urban_environment',
         multiValued=True,
         relationship="rubric",
     ),
@@ -115,7 +115,7 @@ schema = Schema((
         ),
         default_content_type='text/html',
         allowable_content_types=('text/html',),
-        schemata='urban_description',
+        schemata='urban_environment',
         default_method='getDefaultText',
         default_output_type='text/html',
     ),
@@ -126,7 +126,7 @@ schema = Schema((
             label_msgid='urban_label_minimumLegalConditions',
             i18n_domain='urban',
         ),
-        schemata="urban_description",
+        schemata="urban_environment",
         multiValued=True,
         relationship='minimumconditions',
     ),
@@ -144,9 +144,22 @@ schema = Schema((
             i18n_domain='urban',
         ),
         allowed_types=('UrbanVocabularyTerm',),
-        schemata="urban_description",
+        schemata="urban_environment",
         multiValued=True,
         relationship='additionalconditions',
+    ),
+    TextField(
+        name='locationTechnicalAdviceAfterInquiry',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Environmenttechnicaladviceafterinquiry',
+            label_msgid='urban_label_locationTechnicalAdviceAfterInquiry',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_analysis',
+        default_output_type='text/html',
     ),
     TextField(
         name='environmentTechnicalAdviceAfterInquiry',
@@ -256,6 +269,7 @@ def finalizeSchema(schema):
     schema.moveField('minimumLegalConditions', after='rubricsDetails')
     schema.moveField('additionalLegalConditions', after='minimumLegalConditions')
     schema.moveField('description', after='impactStudy')
+    schema.moveField('locationTechnicalAdviceAfterInquiry', after='locationTechnicalAdvice')
 
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
 firstBaseFinalizeSchema(CODT_UniqueLicence_schema)

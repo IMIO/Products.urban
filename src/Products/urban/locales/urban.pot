@@ -3293,6 +3293,9 @@ msgstr ""
 msgid "urban_label_locationTechnicalAdvice"
 msgstr ""
 
+msgid "urban_label_locationTechnicalAdviceAfterInquiry"
+msgstr ""
+
 #. Default: "Locationtechnicalconditions"
 #: BuildLicence.py
 msgid "urban_label_locationTechnicalConditions"
