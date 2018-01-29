@@ -235,23 +235,19 @@ class LicenceView(BrowserView):
             if eventtype_uid in dates.keys() and not dates[eventtype_uid].get('url', ''):
                 for date in key_dates[eventtype_uid]:
                     date_value = getattr(event, date[0])
-                    dates[eventtype_uid][date[0]]['dates'].append({
-                        'url': event.absolute_url(),
-                        'date':  date_value and urban_tool.formatDate(date_value, translatemonth=False) or None,
-                    })
+                    if with_empty_dates or date_value:
+                        dates[eventtype_uid][date[0]]['dates'].append({
+                            'url': event.absolute_url(),
+                            'date':  date_value and urban_tool.formatDate(date_value, translatemonth=False) or None,
+                        })
 
         # flatten the result to a list before returning it
         dates_list = []
         for uid, date_names in ordered_dates:
             for date in date_names:
                 date_value = dates[uid].get(date, None)
-                if with_empty_dates:
+                if date_value['dates'] or with_empty_dates:
                     dates_list.append(date_value)
-                elif date_value['dates']:
-                    # if we dont display empty dates, only append if theres dates defined
-                    defined_dates = any([d['date'] for d in date_value['dates']])
-                    if defined_dates:
-                        dates_list.append(date_value)
 
         return dates_list
 
