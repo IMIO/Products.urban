@@ -2784,6 +2784,9 @@ msgstr "Informations de dispatch"
 msgid "urban_label_displayDate"
 msgstr "Date d'affichage"
 
+msgid "urban_label_displayEmptyKeyDates"
+msgstr "Afficher les dates clés vides"
+
 msgid "urban_label_divergence"
 msgstr "Écart"
 

@@ -209,6 +209,7 @@ class LicenceView(BrowserView):
     def getKeyDates(self):
         context = aq_inner(self.context)
         urban_tool = api.portal.get_tool('portal_urban')
+        with_empty_dates = urban_tool.getDisplayEmptyKeyDates()
         config = context.getLicenceConfig()
         ordered_dates = []
         key_dates = {}
@@ -243,7 +244,13 @@ class LicenceView(BrowserView):
         dates_list = []
         for uid, date_names in ordered_dates:
             for date in date_names:
-                dates_list.append(dates[uid].get(date, None))
+                date_value = dates[uid].get(date, None)
+                if with_empty_dates:
+                    dates_list.append(date_value)
+                # if we dont display empty dates, only append if theres dates defined
+                elif date_value['dates']:
+                    dates_list.append(date_value)
+
         return dates_list
 
     def getInquiryDates(self):
