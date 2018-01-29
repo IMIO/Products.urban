@@ -247,9 +247,11 @@ class LicenceView(BrowserView):
                 date_value = dates[uid].get(date, None)
                 if with_empty_dates:
                     dates_list.append(date_value)
-                # if we dont display empty dates, only append if theres dates defined
                 elif date_value['dates']:
-                    dates_list.append(date_value)
+                    # if we dont display empty dates, only append if theres dates defined
+                    defined_dates = any([d['date'] for d in date_value['dates']])
+                    if defined_dates:
+                        dates_list.append(date_value)
 
         return dates_list
 
