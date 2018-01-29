@@ -173,6 +173,10 @@
     interface=".interfaces.IImpactStudyEvent"
     type=".interfaces.IEventTypeType"/>
 
+  <interface
+    interface=".interfaces.IInternalPreliminaryAdviceEvent"
+    type=".interfaces.IEventTypeType"/>
+
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware
         Products.Archetypes.interfaces.IUIDCatalog"

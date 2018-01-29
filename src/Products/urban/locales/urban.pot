@@ -290,6 +290,9 @@ msgstr ""
 msgid "IInquiry type marker interface"
 msgstr ""
 
+msgid "IInternalPrelimaryAdvice type marker interface"
+msgstr ""
+
 msgid "ImpactStudy event type marker interface"
 msgstr ""
 
