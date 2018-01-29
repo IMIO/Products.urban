@@ -474,6 +474,10 @@ class IImpactStudyEvent(Interface):
     __doc__ = _("""ImpactStudy event type marker interface""")
 
 
+class IInternalPreliminaryAdviceEvent(Interface):
+    __doc__ = _("""IInternalPrelimaryAdvice type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase
     """
