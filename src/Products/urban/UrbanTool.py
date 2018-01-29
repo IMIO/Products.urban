@@ -119,6 +119,16 @@ schema = Schema((
         ),
         schemata='public_settings',
     ),
+    BooleanField(
+        name='displayEmptyKeyDates',
+        default=True,
+        widget=BooleanField._properties['widget'](
+            label='Displayemptykeydates',
+            label_msgid='urban_label_displayEmptyKeyDates',
+            i18n_domain='urban',
+        ),
+        schemata='public_settings',
+    ),
     DataGridField(
         name='collegeHolidays',
         widget=DataGridWidget(
