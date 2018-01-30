@@ -418,6 +418,19 @@ schema = Schema((
         ),
         optional=True,
     ),
+    TextField(
+        name='decisionProject',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Decisionproject',
+            label_msgid='urban_label_decisionProject',
+            i18n_domain='urban',
+        ),
+        default_method='getDefaultText',
+        default_content_type='text/html',
+        default_output_type='text/html',
+        optional=True,
+    ),
 
 ),
 )
