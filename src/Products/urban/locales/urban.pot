@@ -2204,11 +2204,6 @@ msgstr ""
 msgid "urban_help_townshipCouncilFolder"
 msgstr ""
 
-#. Default: "from ${number}"
-#: ../browser/licence/templates/licencetabsmacros.pt:94
-msgid "urban_investigationStart"
-msgstr ""
-
 #. Default: "Buildlicencenumerotation"
 #: UrbanTool.py
 msgid "urban_label_BuildLicenceNumerotation"
@@ -2673,6 +2668,9 @@ msgstr ""
 #. Default: "Decisiondate"
 #: UrbanEvent.py
 msgid "urban_label_decisionDate"
+msgstr ""
+
+msgid "urban_label_decisionProject"
 msgstr ""
 
 #. Default: "Decisionterm"

@@ -2238,11 +2238,6 @@ msgstr "Si ce champ n'est pas rempli, l'identifiant de ce terme sera utilisé"
 msgid "urban_help_townshipCouncilFolder"
 msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
 
-#. Default: "from ${number}"
-#: ../browser/licence/templates/licencetabsmacros.pt:94
-msgid "urban_investigationStart"
-msgstr "Enquête publique n°${number} du"
-
 #. Default: "Buildlicencenumerotation"
 #: UrbanTool.py
 msgid "urban_label_BuildLicenceNumerotation"
@@ -2708,6 +2703,9 @@ msgstr "Décision"
 #: UrbanEvent.py
 msgid "urban_label_decisionDate"
 msgstr "Date de la décision"
+
+msgid "urban_label_decisionProject"
+msgstr "Projet de décision"
 
 #. Default: "Decisionterm"
 #: Decision.py
