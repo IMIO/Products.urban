@@ -13,7 +13,6 @@ from Products.urban.browser.table.urbantable import NestedAttachmentsTable
 from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.browser.table.urbantable import ProprietaryTable
 from Products.urban.interfaces import IGenericLicence
-from Products.urban.interfaces import IInquiry
 from Products.urban.interfaces import IUrbanDoc
 
 from plone import api
@@ -250,27 +249,6 @@ class LicenceView(BrowserView):
                     dates_list.append(date_value)
 
         return dates_list
-
-    def getInquiryDates(self):
-        """
-          return the start/end dates of each inquiry and a link to its corresponding urbanEventInquiry (if it exists)
-        """
-        context = aq_inner(self.context)
-        urban_tool = api.portal.get_tool('portal_urban')
-        inquirydates = []
-        if not IInquiry.providedBy(context):
-            return inquirydates
-        for inquiry in context.getInquiries():
-            event = [inq_event for inq_event in context.objectValues('UrbanEventInquiry') if inq_event.getLinkedInquiry() == inquiry]
-            event = event and event[0] or None
-            start_date = event and event.getInvestigationStart() or None
-            end_date = event and event.getInvestigationEnd() or None
-            inquirydates.append({
-                'start_date': start_date and urban_tool.formatDate(start_date, translatemonth=False) or None,
-                'end_date': end_date and urban_tool.formatDate(end_date, translatemonth=False) or None,
-                'url': event and event.absolute_url() or None,
-            })
-        return inquirydates
 
     def getSchemataFields(self, schemata='', exclude=[], context=None):
         displayed_fields = self.getUsedAttributes()

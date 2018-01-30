@@ -63,8 +63,7 @@
 
         <fieldset>
             <legend i18n:translate="urban_description_key_dates_legend">Key dates</legend>
-            <table tal:define="keyDates view/getKeyDates;
-                               inquiryDates view/getInquiryDates"
+            <table tal:define="keyDates view/getKeyDates"
                    class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
                 <tal:key_dates repeat="key_dates keyDates">
                     <tal:vars define="dates python: key_dates['dates'];
@@ -88,30 +87,6 @@
                         </tr>
                     </tal:vars>
                 </tal:key_dates>
-                <tal:inquiries repeat="inquiry inquiryDates">
-                    <tr>
-                        <td valign="top">
-                            <b><span i18n:translate="urban_investigationStart">from <span i18n:name="number" tal:content="repeat/inquiry/number"/></span>:</b>
-                        </td>
-                        <td width="10px"></td>
-                        <td valign="top" tal:define="start_date python: inquiry['start_date'];
-                                                     url python: inquiry['url']">
-                            <a href="#" tal:condition="python: start_date and url" tal:attributes="href url" tal:content="python: start_date">Content</a>
-                            <span tal:condition="python: start_date and not url" tal:content="python: start_date">end date</span>
-                            <span tal:condition="not: start_date" class="discreet" i18n:translate="content_none">None</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td valign="top"><b><span i18n:translate="urban_label_investigationEnd">to</span>:</b></td>
-                        <td width="10px"></td>
-                        <td valign="top" tal:define="end_date python: inquiry['end_date'];
-                                                     url python: inquiry['url']">
-                            <a href="#" tal:condition="python: end_date and url" tal:attributes="href url" tal:content="python: end_date">Content</a>
-                            <span tal:condition="python: end_date and not url" tal:content="python: end_date">end date</span>
-                            <span tal:condition="not: end_date" class="discreet" i18n:translate="content_none">None</span>
-                        </td>
-                    </tr>
-                </tal:inquiries>
             </table>
         </fieldset>
 
