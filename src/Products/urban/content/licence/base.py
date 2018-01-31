@@ -188,7 +188,7 @@ class UrbanBase(object):
         return cities
 
     security.declarePublic('getWorkLocationSignaletic')
-    def getWorkLocationSignaletic(self):
+    def getWorkLocationSignaletic(self, auto_back_to_the_line = False):
         """
           Returns a string reprensenting the different worklocations
         """
@@ -197,10 +197,10 @@ class UrbanBase(object):
         if adress_signaletic_adapter:
             return adress_signaletic_adapter.get_signaletic()
 
-        return self.getDefaultWorkLocationSignaletic()
+        return self.getDefaultWorkLocationSignaletic(auto_back_to_the_line)
 
     security.declarePublic('getDefaultWorkLocationSignaletic')
-    def getDefaultWorkLocationSignaletic(self):
+    def getDefaultWorkLocationSignaletic(self, auto_back_to_the_line = False):
         """
           Returns a string reprensenting the different worklocations
         """
@@ -228,6 +228,9 @@ class UrbanBase(object):
                 signaletic += "%s %s à %s %s" % (streetName, number, city.getZipCode(), city.Title())
             else:
                 signaletic += "%s - %s %s" % (streetName, city.getZipCode(), city.Title())
+            if auto_back_to_the_line:
+                signaletic += "\n"
+
         return signaletic
 
     security.declarePublic('getLicenceTypeAcronym')
