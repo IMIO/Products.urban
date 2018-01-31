@@ -238,7 +238,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
             return "%s %s %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2())
 
     security.declarePublic('getSignaletic')
-    def getSignaletic(self, short=False, withaddress=False, linebyline=False, reverse=False):
+    def getSignaletic(self, short=False, withaddress=False, linebyline=False, reverse=False, remove_comma=False):
         """
           Returns the contact base signaletic : title and names
         """
@@ -252,7 +252,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 return '<p>%s</p>' % nameSignaletic
         else:
             #escape HTML special characters like HTML entities
-            addressSignaletic = self.getAddress(linebyline=linebyline)
+            addressSignaletic = self.getAddress(linebyline=linebyline, remove_comma=remove_comma)
             if not linebyline:
                 mapping = dict(name=nameSignaletic.decode('utf8'),
                                address=addressSignaletic.decode('utf8'))
@@ -328,7 +328,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         return None
 
     security.declarePublic('getAddress')
-    def getAddress(self, linebyline=False):
+    def getAddress(self, linebyline=False, remove_comma=False):
         """
           Returns the contact address
         """
@@ -339,6 +339,8 @@ class Contact(BaseContent, BrowserDefaultMixin):
         if not linebyline:
             result = []
             if street:
+                if remove_comma:
+                    street = street.replace(",", " ")
                 result.append(street)
             if number:
                 result.append(number)
@@ -352,7 +354,11 @@ class Contact(BaseContent, BrowserDefaultMixin):
             street = cgi.escape(street)
             zip = cgi.escape(zip)
             city = cgi.escape(city)
-            return "<p>%s, %s<br />%s %s</p>" % (street, number, zip, city)
+            if remove_comma:
+                mask_address = "<p>%s %s<br />%s %s</p>"
+            else:
+                mask_address = "<p>%s, %s<br />%s %s</p>"
+            return mask_address % (street, number, zip, city)
 
     security.declarePublic('getPersonTitle')
     def getPersonTitle(self, short=False, reverse=False, theObject=False):
