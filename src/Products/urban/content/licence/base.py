@@ -62,7 +62,7 @@ class UrbanBase(object):
         return proprietaries
 
     security.declarePublic('getApplicantsSignaletic')
-    def getApplicantsSignaletic(self, withaddress=False, linebyline=False):
+    def getApplicantsSignaletic(self, withaddress=False, linebyline=False, remove_comma=False):
         """
           Returns a string representing the signaletic of every applicants
         """
@@ -72,7 +72,7 @@ class UrbanBase(object):
             #if the signaletic is not empty, we are adding several applicants
             if signaletic:
                 signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
-            signaletic += applicant.getSignaletic(withaddress=withaddress, linebyline=linebyline)
+            signaletic += applicant.getSignaletic(withaddress=withaddress, linebyline=linebyline, remove_comma=False)
         return signaletic
 
     security.declarePublic('getFolderManagersSignaletic')
@@ -105,7 +105,7 @@ class UrbanBase(object):
         return "Calculated/Reference/%s" % str(self.getReference())
 
     security.declarePublic('getNotariesSignaletic')
-    def getNotariesSignaletic(self, withaddress=False, linebyline=False):
+    def getNotariesSignaletic(self, withaddress=False, linebyline=False, remove_comma=False):
         """
           Returns a string reprensenting the signaletic of every notaries
         """
@@ -115,11 +115,11 @@ class UrbanBase(object):
             #if the signaletic is not empty, we are adding several notaries
             if signaletic:
                 signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
-            signaletic += notary.getSignaletic(withaddress=withaddress, linebyline=linebyline)
+            signaletic += notary.getSignaletic(withaddress=withaddress, linebyline=linebyline, remove_comma=remove_comma)
         return signaletic
 
     security.declarePublic('getContactsSignaletic')
-    def getContactsSignaletic(self, contacts, withaddress=False):
+    def getContactsSignaletic(self, contacts, withaddress=False, remove_comma=False):
         """
           Returns a string reprensenting the signaletic of every contact
         """
@@ -128,7 +128,7 @@ class UrbanBase(object):
             #if the signaletic is not empty, we are adding several contacts
             if signaletic:
                 signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
-            signaletic += contact.getSignaletic(withaddress=withaddress)
+            signaletic += contact.getSignaletic(withaddress=withaddress, remove_comma=remove_comma)
         return signaletic
 
     security.declarePublic('getCurrentFolderManager')
@@ -136,18 +136,18 @@ class UrbanBase(object):
         return currentFolderManager()
 
     security.declarePublic('getArchitectsSignaletic')
-    def getArchitectsSignaletic(self, withaddress=False):
+    def getArchitectsSignaletic(self, withaddress=False, remove_comma=False):
         """
           Returns a string reprensenting the signaletic of every architects
         """
-        return self.getContactsSignaletic(self.getArchitects(), withaddress=withaddress)
+        return self.getContactsSignaletic(self.getArchitects(), withaddress=withaddress, remove_comma=remove_comma)
 
     security.declarePublic('getGeometriciansSignaletic')
-    def getGeometriciansSignaletic(self, withaddress=False):
+    def getGeometriciansSignaletic(self, withaddress=False, remove_comma=False):
         """
           Returns a string reprensenting the signaletic of every geometricians
         """
-        return self.getContactsSignaletic(self.getGeometricians(), withaddress=withaddress)
+        return self.getContactsSignaletic(self.getGeometricians(), withaddress=withaddress, remove_comma=remove_comma)
 
     security.declarePublic('submittedBy')
     def submittedBy(self):
