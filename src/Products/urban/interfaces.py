@@ -386,6 +386,10 @@ class IEnvironmentSimpleCollegeEvent(ICollegeEvent):
     __doc__ = _("""IEnvironmentSimpleCollegeEvent type marker interface""")
 
 
+class ITransmitToSPWEvent(Interface):
+    __doc__ = _("""ITransmitToSPWEvent type marker interface""")
+
+
 class IAcknowledgmentEvent(Interface):
     __doc__ = _("""IAcknowledgment type marker interface""")
 

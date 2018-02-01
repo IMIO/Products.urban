@@ -67,6 +67,15 @@
         name="urban.schedule.condition.complements_received"
     />
 
+    <!-- SPW transmit conditions-->
+    <adapter
+        for="Products.urban.interfaces.ICODT_UniqueLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.TransmitToSPWCondition"
+        name="urban.schedule.condition.transmit_to_spw_done"
+    />
+
     <!-- acknowlegdment conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseBuildLicence

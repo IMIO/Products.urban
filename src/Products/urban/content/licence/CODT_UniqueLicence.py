@@ -296,6 +296,9 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
 
         return '{}j'.format(str(delay))
 
+    def getLastTransmitToSPW(self):
+        return self.getLastEvent(interfaces.ITransmitToSPWEvent)
+
     def getLastWalloonRegionDecisionEvent(self):
         return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)
 

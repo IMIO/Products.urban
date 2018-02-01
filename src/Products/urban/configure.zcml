@@ -86,6 +86,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ITransmitToSPWEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IAcknowledgmentEvent"
     type=".interfaces.IEventTypeType"/>
 

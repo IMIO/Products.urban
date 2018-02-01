@@ -123,6 +123,22 @@ class UrbanAnalysisDone(Condition):
         return analysis_done
 
 
+class TransmitSPWDoneCondition(Condition):
+    """
+    Licence folderComplete event is created.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        transmit_done = False
+        transmit_event = licence.getLastTransmitToSPW()
+        if transmit_event:
+            transmit_done = api.content.get_state(transmit_event) == 'closed'
+
+        return transmit_done
+
+
 class AcknowledgmentCreatedCondition(Condition):
     """
     Licence acknowlegdment event is created but not closed.
