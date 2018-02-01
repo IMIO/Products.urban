@@ -351,6 +351,9 @@ msgstr ""
 msgid "ITheLicence type marker interface"
 msgstr ""
 
+msgid "ITransmitToSPWEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:373
 msgid "IWalloonRegionDecisionEvent type marker interface"
 msgstr ""

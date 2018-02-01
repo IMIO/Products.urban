@@ -362,6 +362,9 @@ msgstr "Demande d'avis du service technique"
 msgid "ITheLicence type marker interface"
 msgstr "Délivrance du permis/certificat/..."
 
+msgid "ITransmitToSPWEvent type marker interface"
+msgstr "Transmis du dossier au SPW"
+
 #: ../interfaces.py:373
 msgid "IWalloonRegionDecisionEvent type marker interface"
 msgstr "Décision de la la région wallone"

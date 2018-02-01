@@ -107,6 +107,9 @@ msgstr "Refuser le dossier"
 msgid "urban.schedule.condition.suspension"
 msgstr "Suspendre le dossier"
 
+msgid "urban.schedule.condition.transmit_to_spw_done"
+msgstr "Créer l'évenement de 'transmis du dossier au SPW' et le clôturer"
+
 msgid "urban.start_date.acknowledgement_date"
 msgstr "Date d'accusé de réception du dossier"
 

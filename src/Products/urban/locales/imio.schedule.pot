@@ -71,6 +71,9 @@ msgstr ""
 msgid "urban.schedule.condition.suspension"
 msgstr ""
 
+msgid "urban.schedule.condition.transmit_to_spw_done"
+msgstr ""
+
 msgid "urban.assign_folder_manager"
 msgstr ""
 
