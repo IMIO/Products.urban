@@ -286,6 +286,9 @@ msgstr ""
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr ""
 
+msgid "IEnvironmentSimpleCollegeEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:413
 msgid "IInquiry type marker interface"
 msgstr ""

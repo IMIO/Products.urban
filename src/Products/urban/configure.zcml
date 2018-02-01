@@ -162,6 +162,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IEnvironmentSimpleCollegeEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IProrogationEvent"
     type=".interfaces.IEventTypeType"/>
 
