@@ -313,10 +313,10 @@ class ObjectCreationDateColumn(CreationDateColumn):
     """ """
 
     def renderCell(self, obj):
-        return obj.creation_date.strftime('%d/%m/%Y')
+        return obj.created.strftime('%d/%m/%Y')
 
     def getSortKey(self, obj):
-        return obj.creation_date
+        return obj.created
 
 
 class BrainCreationDateColumn(CreationDateColumn):
