@@ -290,7 +290,10 @@ msgstr "Dépôt de la demande"
 
 #: ../interfaces.py:445
 msgid "IDisplayingTheDecisionEvent type marker interface"
-msgstr ""
+msgstr "Affichage de la décision"
+
+msgid "IEnvironmentSimpleCollegeEvent type marker interface"
+msgstr "Collège simple (environnement)"
 
 #. Default: "Inquiry"
 #: ../interfaces.py:413
