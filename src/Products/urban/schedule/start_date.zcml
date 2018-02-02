@@ -66,4 +66,12 @@
         name="urban.schedule.start_date.announcement_end_date"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.SPWReceiptDate"
+        name="urban.schedule.start_date.spw_receipt_date"
+    />
+
 </configure>

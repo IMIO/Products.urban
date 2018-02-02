@@ -92,3 +92,15 @@ class AnnouncementEndDate(StartDate):
         announcement = licence.getLastAnnouncement()
         end_date = announcement and announcement.getInvestigationEnd() or None
         return end_date
+
+
+class SPWTransmitDate(StartDate):
+    """
+    Returns the date of the licence receipt by the SPW.
+    """
+
+    def start_date(self):
+        licence = self.task_container
+        transmit = licence.getLastTransmitToSPW()
+        transmit_date = transmit and transmit.getTransmitDate() or None
+        return transmit_date

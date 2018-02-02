@@ -110,20 +110,23 @@ msgstr "Suspendre le dossier"
 msgid "urban.schedule.condition.transmit_to_spw_done"
 msgstr "Créer l'évenement de 'transmis du dossier au SPW' et le clôturer"
 
-msgid "urban.start_date.acknowledgement_date"
+msgid "urban.schedule.start_date.acknowledgement_date"
 msgstr "Date d'accusé de réception du dossier"
 
-msgid "urban.start_date.acknowledgement_transmit_date"
+msgid "urban.schedule.start_date.acknowledgement_transmit_date"
 msgstr "Date de transmis de l'accusé de réception"
 
-msgid "urban.start_date.announcement_end_date"
+msgid "urban.schedule.start_date.announcement_end_date"
 msgstr "Date de fin de l'annonce de projet"
 
-msgid "urban.start_date.creation_date"
+msgid "urban.schedule.start_date.creation_date"
 msgstr "Date de création du dossier"
 
-msgid "urban.start_date.deposit_date"
+msgid "urban.schedule.start_date.deposit_date"
 msgstr "Date de dépôt du dossier"
 
-msgid "urban.start_date.inquiry_end_date"
+msgid "urban.schedule.start_date.inquiry_end_date"
 msgstr "Date de fin de l'enquête publique"
+
+msgid "urban.schedule.start_date.spw_receipt_date"
+msgstr "Date de transmis du dossier au SPW"

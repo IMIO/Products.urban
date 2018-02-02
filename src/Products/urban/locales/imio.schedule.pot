@@ -77,22 +77,25 @@ msgstr ""
 msgid "urban.assign_folder_manager"
 msgstr ""
 
-msgid "urban.start_date.acknowledgement_date"
+msgid "urban.schedule.start_date.acknowledgement_date"
 msgstr ""
 
-msgid "urban.start_date.acknowledgement_transmit_date"
+msgid "urban.schedule.start_date.acknowledgement_transmit_date"
 msgstr ""
 
-msgid "urban.start_date.creation_date"
+msgid "urban.schedule.start_date.creation_date"
 msgstr ""
 
-msgid "urban.start_date.deposit_date"
+msgid "urban.schedule.start_date.deposit_date"
 msgstr ""
 
-msgid "urban.start_date.announcement_end_date"
+msgid "urban.schedule.start_date.announcement_end_date"
 msgstr ""
 
-msgid "urban.start_date.inquiry_end_date"
+msgid "urban.schedule.start_date.inquiry_end_date"
+msgstr ""
+
+msgid "urban.schedule.start_date.spw_receipt_date"
 msgstr ""
 
 msgid "urban.schedule.condition.deposit_past_20days"
