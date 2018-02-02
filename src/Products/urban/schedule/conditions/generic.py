@@ -323,6 +323,22 @@ class OpinionRequestsDone(Condition):
         return True
 
 
+class CollegeOpinionTransmitToSPWDoneCondition(Condition):
+    """
+    Licence 'college opinion transmit to SPW' event is closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        college_opinion_transmit_done = False
+        college_opinion_transmit_event = licence.getLastCollegeOpinionTransmitToSPW()
+        if college_opinion_transmit_event:
+            college_opinion_transmit_done = api.content.get_state(college_opinion_transmit_event) == 'closed'
+
+        return college_opinion_transmit_done
+
+
 class LicenceSuspension(Condition):
     """
     Licence is suspended.
