@@ -130,6 +130,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ICollegeOpinionTransmitToSPWEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.ILicenceDeliveryEvent"
     type=".interfaces.IEventTypeType"/>
 
