@@ -2,6 +2,15 @@
     xmlns="http://namespaces.zope.org/zope"
     i18n_domain="Products.urban">
 
+    <!-- unique licence incomplete conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.IncompleteForSixMonths"
+        name="urban.schedule.condition.incomplete_for_6_months"
+    />
+
     <!-- acknowlegdment conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence
