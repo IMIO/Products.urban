@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from DateTime import DateTime
 from datetime import datetime
 from plone import api
 
@@ -42,6 +43,21 @@ class DefaultCODTAcknowledgmentCondition(CreationCondition):
         licence = self.task_container
         acknowledgment_event = licence.getLastDefaultAcknowledgment()
         return acknowledgment_event
+
+
+class IncompleteForSixMonths(CreationCondition):
+    """
+    Unique licence have been incomplete for 6 months
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        missing_part_event = licence.getLastMissingPart()
+        days_delta = 0
+        if missing_part_event:
+            days_delta = DateTime() - missing_part_event.getEventDate()
+
+        return days_delta >= 183
 
 
 class WillHaveInquiry(CreationCondition):
