@@ -41,6 +41,9 @@ msgstr ""
 msgid "urban.schedule.condition.has_inquiry"
 msgstr ""
 
+msgid "urban.schedule.condition.incomplete_for_6_months"
+msgstr ""
+
 msgid "urban.schedule.condition.inquiry_done"
 msgstr ""
 

@@ -71,6 +71,9 @@ msgstr "Une enquête publique est définie"
 msgid "urban.schedule.condition.incomplete_first_time"
 msgstr "Incomplet pour le première fois"
 
+msgid "urban.schedule.condition.incomplete_for_6_months"
+msgstr "Incomplet depuis 6 mois"
+
 msgid "urban.schedule.condition.incomplete_second_time"
 msgstr "Incomplet pour le seconde fois"
 
