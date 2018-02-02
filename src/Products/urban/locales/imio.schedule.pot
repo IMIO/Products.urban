@@ -23,6 +23,9 @@ msgstr ""
 msgid "urban.schedule.condition.analysis_done"
 msgstr ""
 
+msgid "urban.schedule.condition.college_opinion_transmit_done"
+msgstr ""
+
 msgid "urban.schedule.condition.complements_asked"
 msgstr ""
 

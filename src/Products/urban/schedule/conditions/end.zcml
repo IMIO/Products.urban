@@ -134,6 +134,15 @@
         name="urban.schedule.condition.opinion_requests_done"
     />
 
+    <!-- College opinion transmit for unique licences  -->
+    <adapter
+        for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.CollegeOpinionTransmitToSPWDoneCondition"
+        name="urban.schedule.condition.college_opinion_transmit_done"
+    />
+
     <!-- inquiry conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseBuildLicence
