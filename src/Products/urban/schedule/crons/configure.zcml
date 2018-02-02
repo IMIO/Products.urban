@@ -2,6 +2,13 @@
     xmlns="http://namespaces.zope.org/zope"
     i18n_domain="Products.urban">
 
+    <browser:page
+        name="update_uniquelicence_incompletion_tasks"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        permission="cmf.ManagePortal"
+        class=".cron.UpdateUniqueLicenceIncompletionTasks"
+    />
+
   <utility
     factory=".delay.AutoAccepted20days"
     name="codt_auto_accepted_20_days"
