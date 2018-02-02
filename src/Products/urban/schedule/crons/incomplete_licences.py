@@ -10,7 +10,7 @@ from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
 
-class UpdateCollegeEventDoneTasks(BrowserView):
+class UpdateUniqueLicenceIncompletionTasks(BrowserView):
     """
     Touch incomplete unique licences once a day to trigger
     incompletion tasks.

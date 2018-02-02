@@ -7,7 +7,7 @@
         name="update_uniquelicence_incompletion_tasks"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         permission="cmf.ManagePortal"
-        class=".cron.UpdateUniqueLicenceIncompletionTasks"
+        class=".incomplete_licences.UpdateUniqueLicenceIncompletionTasks"
     />
 
   <utility
