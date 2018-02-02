@@ -269,6 +269,9 @@ msgstr "Notification du choix de la procédure"
 msgid "ICollege type marker interface"
 msgstr "College"
 
+msgid "ICollegeOpinionTransmitToSPWEvent type marker interface"
+msgstr "Transmis de l'avis collège au SPW"
+
 #. Default: "College report"
 #: ../interfaces.py:429
 msgid "ICollegeReport type marker interface"

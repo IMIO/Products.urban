@@ -266,6 +266,9 @@ msgstr ""
 msgid "ICollege type marker interface"
 msgstr ""
 
+msgid "ICollegeOpinionTransmitToSPWEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:429
 msgid "ICollegeReport type marker interface"
 msgstr ""
