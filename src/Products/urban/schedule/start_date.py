@@ -96,11 +96,23 @@ class AnnouncementEndDate(StartDate):
 
 class SPWReceiptDate(StartDate):
     """
-    Returns the date of the licence receipt by the SPW.
+    Returns the date of the licence receipt to the SPW.
     """
 
     def start_date(self):
         licence = self.task_container
         transmit = licence.getLastTransmitToSPW()
         receipt_date = transmit and transmit.getReceiptDate() or None
+        return receipt_date
+
+
+class WalloonRegionDecisionDate(StartDate):
+    """
+    Returns the receipt date of the licence project sent by the SPW.
+    """
+
+    def start_date(self):
+        licence = self.task_container
+        receipt = licence.getLastWalloonRegionDecisionEvent()
+        receipt_date = receipt and receipt.getEventDate() or None
         return receipt_date
