@@ -74,4 +74,12 @@
         name="urban.schedule.start_date.spw_receipt_date"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.WalloonRegionDecisionDate"
+        name="urban.schedule.start_date.walloonregion_decision_date"
+    />
+
 </configure>

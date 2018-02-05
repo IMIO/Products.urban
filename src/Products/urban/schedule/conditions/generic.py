@@ -484,7 +484,7 @@ class DecisionNotified(Condition):
     def evaluate(self):
         licence = self.task_container
 
-        decision_event = licence.getLastTheLicence()
+        decision_event = licence.getLastLicenceNotification()
         if decision_event:
             return api.content.get_state(decision_event) == 'closed'
         return False

@@ -45,7 +45,7 @@ msgid "urban.schedule.condition.complements_received"
 msgstr "Créer l'événement 'récépissé d'un complément' et le clôturer"
 
 msgid "urban.schedule.condition.decision_notified"
-msgstr "Créer l'évenement 'délivrance du permis (octroi ou refus)' et le clôturer"
+msgstr "Créer l'évenement de notification du permis et le clôturer"
 
 msgid "urban.schedule.condition.default_acknowledgement"
 msgstr "Le dossier est recevable par défaut"
@@ -139,3 +139,6 @@ msgstr "Date de fin de l'enquête publique"
 
 msgid "urban.schedule.start_date.spw_receipt_date"
 msgstr "Date de transmis du dossier au SPW"
+
+msgid "urban.schedule.start_date.walloonregion_decision_date"
+msgstr "Date de la décision de la région wallonne"
