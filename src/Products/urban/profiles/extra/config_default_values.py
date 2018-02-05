@@ -279,12 +279,10 @@ default_values = {
     'CODT_UniqueLicence': {
         'folderdelays': [
             'UrbanDelay',
-            {'id': "30j", 'title': u"30 jours", 'deadLineDelay': 30, 'alertDelay': 20},
-            {'id': "60j", 'title': u"60 jours", 'deadLineDelay': 60, 'alertDelay': 20},
-            {'id': "75j", 'title': u"75 jours", 'deadLineDelay': 75, 'alertDelay': 20},
-            {'id': "105j", 'title': u"105 jours", 'deadLineDelay': 105, 'alertDelay': 20},
-            {'id': "115j", 'title': u"115 jours", 'deadLineDelay': 115, 'alertDelay': 20},
-            {'id': "145j", 'title': u"145 jours", 'deadLineDelay': 145, 'alertDelay': 20},
+            {'id': "90j", 'title': u"90 jours", 'deadLineDelay': 90, 'alertDelay': 20},
+            {'id': "120j", 'title': u"120 jours", 'deadLineDelay': 120, 'alertDelay': 20},
+            {'id': "140j", 'title': u"140 jours", 'deadLineDelay': 140, 'alertDelay': 20},
+            {'id': "170j", 'title': u"170 jours", 'deadLineDelay': 170, 'alertDelay': 20},
             {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
         ],
         'investigationarticles': [
