@@ -38,6 +38,15 @@ optional_fields = [
     'referenceSPE', 'referenceFT', 'environmentTechnicalRemarks',
     'claimsSynthesis', 'conclusions', 'commentsOnSPWOpinion',
 ]
+
+slave_fields_ = (
+    {
+        'name': 'annoncedDelay',
+        'action': 'value',
+        'vocab_method': 'getProrogationDelays',
+        'control_param': 'values',
+    },
+)
 ##/code-section module-header
 
 schema = Schema((
@@ -270,26 +279,22 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
     def listProcedureChoices(self):
         vocab = (
             ('ukn', 'Non determiné'),
-            ('internal_opinions', 'Sollicitation d\'avis internes'),
-            ('external_opinions', 'Sollicitation d\'avis externes'),
-            ('light_inquiry', 'Instruction d\'une annonce de projet'),
-            ('inquiry', 'Instruction d\'une enquête publique'),
+            ('class_1', 'Classe 1'),
+            ('class_2', 'Classe 2'),
         )
         return DisplayList(vocab)
 
     def getProcedureDelays(self, *values):
         selection = [v['val'] for v in values if v['selected']]
         unknown = 'ukn' in selection
-        opinions = 'external_opinions' in selection
-        inquiry = 'inquiry' in selection or 'light_inquiry' in selection
-        delay = 30
+        delay = 90
 
         if unknown:
             return ''
-        elif opinions and inquiry:
-            delay = 70
-        elif opinions and not inquiry:
-            delay = 70
+        elif 'class_1' in selection:
+            delay = 90
+        elif 'class_2' in selection:
+            delay = 140
 
         if self.prorogation:
             delay += 30
@@ -298,6 +303,9 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
 
     def getLastTransmitToSPW(self):
         return self.getLastEvent(interfaces.ITransmitToSPWEvent)
+
+    def getLastCollegeOpinionTransmitToSPW(self):
+        return self.getLastEvent(interfaces.ICollegeOpinionTransmitToSPWEvent)
 
     def getLastWalloonRegionDecisionEvent(self):
         return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)

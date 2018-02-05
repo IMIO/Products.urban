@@ -110,6 +110,11 @@ class procedureChoiceValidator:
                 _('error_multiple_inquiry_type',
                   default=u"Please select only ONE of the inquiry types")
             )
+        if 'class_1' in value and 'class_2' in value:
+            return translate(
+                _('error_multiple_class_type',
+                  default=u"Cannot select class 1 and class 2 toghether")
+            )
         return True
 
 
