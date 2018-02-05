@@ -339,6 +339,22 @@ class CollegeOpinionTransmitToSPWDoneCondition(Condition):
         return college_opinion_transmit_done
 
 
+class SPWProjectReceivedCondition(Condition):
+    """
+    Licence SPW projetc receipt event is closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        receipt_done = False
+        receipt_event = licence.getLastWalloonRegionDecisionEvent()
+        if receipt_event:
+            receipt_done = api.content.get_state(receipt_event) == 'closed'
+
+        return receipt_done
+
+
 class LicenceSuspension(Condition):
     """
     Licence is suspended.
