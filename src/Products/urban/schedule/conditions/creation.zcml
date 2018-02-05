@@ -146,4 +146,13 @@
         name="urban.schedule.condition.incomplete_second_time"
     />
 
+    <!-- SPW project receipt for unique licences -->
+    <adapter
+        for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".generic.SPWProjectReceivedCondition"
+        name="urban.schedule.condition.spw_project_receipt_done"
+    />
+
 </configure>
