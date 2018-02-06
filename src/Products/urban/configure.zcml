@@ -134,6 +134,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IDecisionProjectFromSPWEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.ILicenceDeliveryEvent"
     type=".interfaces.IEventTypeType"/>
 
