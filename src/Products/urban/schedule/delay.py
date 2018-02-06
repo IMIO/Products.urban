@@ -26,7 +26,7 @@ class UniqueLicenceAnnoncedDelay(BaseCalculationDelay):
         raw_delay = licence.getAnnoncedDelay()
         delay = 0
         if raw_delay.endswith('j'):
-            delay = int(delay[:-1])
+            delay = int(raw_delay[:-1])
             if 'class_1' in licence.getProcedureChoice():
                 delay = delay - 30
             if 'class_2' in licence.getProcedureChoice():
