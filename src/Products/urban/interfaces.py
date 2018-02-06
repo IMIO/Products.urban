@@ -434,6 +434,10 @@ class ICollegeOpinionTransmitToSPWEvent(Interface):
     __doc__ = _("""ICollegeOpinionTransmitToSPWEvent type marker interface""")
 
 
+class IDecisionProjectFromSPWEvent(Interface):
+    __doc__ = _("""IDecisionProjectFromSPWEvent type marker interface""")
+
+
 class ILicenceDeliveryEvent(Interface):
     __doc__ = _("""ILicenceDelivery type marker interface""")
 
