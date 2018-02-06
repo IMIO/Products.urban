@@ -291,9 +291,9 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
 
         if unknown:
             return ''
-        elif 'class_1' in selection:
-            delay = 90
         elif 'class_2' in selection:
+            delay = 90
+        elif 'class_1' in selection:
             delay = 140
 
         if self.prorogation:
