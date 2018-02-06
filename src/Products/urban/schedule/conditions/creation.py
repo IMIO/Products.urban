@@ -271,3 +271,19 @@ class IncompleteForTheSecondTime(CreationCondition):
             review_state='closed',
         )
         return len(brains) > 0
+
+
+class SPWProjectReceivedCondition(CreationCondition):
+    """
+    Licence SPW projetc receipt event is closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        receipt_done = False
+        receipt_event = licence.getLastDecisionProjectFromSPW()
+        if receipt_event:
+            receipt_done = api.content.get_state(receipt_event) == 'closed'
+
+        return receipt_done

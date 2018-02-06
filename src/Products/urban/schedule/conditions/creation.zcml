@@ -151,7 +151,7 @@
         for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".generic.SPWProjectReceivedCondition"
+        factory=".creation.SPWProjectReceivedCondition"
         name="urban.schedule.condition.spw_project_receipt_done"
     />
 
