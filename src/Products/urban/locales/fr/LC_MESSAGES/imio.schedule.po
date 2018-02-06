@@ -45,7 +45,7 @@ msgid "urban.schedule.condition.complements_received"
 msgstr "Créer l'événement 'récépissé d'un complément' et le clôturer"
 
 msgid "urban.schedule.condition.decision_notified"
-msgstr "Créer l'évenement de notification du permis et le clôturer"
+msgstr "Créer l'événement de notification du permis et le clôturer"
 
 msgid "urban.schedule.condition.default_acknowledgement"
 msgstr "Le dossier est recevable par défaut"
@@ -119,6 +119,15 @@ msgstr "Suspendre le dossier"
 msgid "urban.schedule.condition.transmit_to_spw_done"
 msgstr "Créer l'évenement de 'transmis du dossier au SPW' et le clôturer"
 
+msgid "urban.schedule.delay.annonced_delay"
+msgstr "Délai annoncé de la procédure"
+
+msgid "urban.schedule.delay.unique_licence_annonced_delay"
+msgstr "Délai annoncé des permis uniques"
+
+msgid "urban.schedule.delay.unique_licence_notification_delay"
+msgstr "Délai de notification des permis uniques"
+
 msgid "urban.schedule.start_date.acknowledgement_date"
 msgstr "Date d'accusé de réception du dossier"
 
@@ -136,6 +145,9 @@ msgstr "Date de dépôt du dossier"
 
 msgid "urban.schedule.start_date.inquiry_end_date"
 msgstr "Date de fin de l'enquête publique"
+
+msgid "urban.schedule.start_date.spw_decision_project_receipt_date"
+msgstr "Date de réception du projet de décision du SPW"
 
 msgid "urban.schedule.start_date.spw_receipt_date"
 msgstr "Date de transmis du dossier au SPW"

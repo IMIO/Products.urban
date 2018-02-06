@@ -282,6 +282,9 @@ msgstr "Rapport du collège"
 msgid "ICommunalCouncil type marker interface"
 msgstr "Conseil communal"
 
+msgid "IDecisionProjectFromSPWEvent type marker interface"
+msgstr "Projet de décision du SPW"
+
 #: ../interfaces.py:385
 msgid "IDefaultCODTAcknowledgmentEvent type marker interface"
 msgstr "Accusé de réception par défaut"

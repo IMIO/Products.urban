@@ -18,4 +18,20 @@
         name="urban.schedule.delay.annonced_delay"
     />
 
+    <adapter
+        for="Products.urban.interfaces.ICODT_UniqueLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.ICalculationDelay"
+        factory=".delay.UniqueLicenceAnnoncedDelay"
+        name="urban.schedule.delay.unique_licence_annonced_delay"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_UniqueLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.ICalculationDelay"
+        factory=".delay.UniqueLicenceNotificationDelay"
+        name="urban.schedule.delay.unique_licence_notification_delay"
+    />
+
 </configure>
