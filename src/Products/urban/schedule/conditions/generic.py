@@ -348,7 +348,7 @@ class SPWProjectReceivedCondition(Condition):
         licence = self.task_container
 
         receipt_done = False
-        receipt_event = licence.getLastWalloonRegionDecisionEvent()
+        receipt_event = licence.getLastDecisionProjectFromSPW()
         if receipt_event:
             receipt_done = api.content.get_state(receipt_event) == 'closed'
 

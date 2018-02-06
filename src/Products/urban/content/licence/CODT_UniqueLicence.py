@@ -307,6 +307,9 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
     def getLastCollegeOpinionTransmitToSPW(self):
         return self.getLastEvent(interfaces.ICollegeOpinionTransmitToSPWEvent)
 
+    def getLastDecisionProjectFromSPW(self):
+        return self.getLastEvent(interfaces.IDecisionProjectFromSPWEvent)
+
     def getLastWalloonRegionDecisionEvent(self):
         return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)
 

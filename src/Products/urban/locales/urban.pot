@@ -277,6 +277,9 @@ msgstr ""
 msgid "ICommunalCouncil type marker interface"
 msgstr ""
 
+msgid "IDecisionProjectFromSPWEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:385
 msgid "IDefaultCODTAcknowledgmentEvent type marker interface"
 msgstr ""
