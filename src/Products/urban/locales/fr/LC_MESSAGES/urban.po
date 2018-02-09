@@ -298,6 +298,9 @@ msgstr "Dépôt de la demande"
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr "Affichage de la décision"
 
+msgid "IEnvironmentOnly type marker interface"
+msgstr "Événement exclusif à l'environnement (permis unique)"
+
 msgid "IEnvironmentSimpleCollegeEvent type marker interface"
 msgstr "Collège simple (environnement)"
 
@@ -370,6 +373,12 @@ msgstr "Délivrance du permis/certificat/..."
 
 msgid "ITransmitToSPWEvent type marker interface"
 msgstr "Transmis du dossier au SPW"
+
+msgid "IUrbanAndEnvironment type marker interface"
+msgstr "Événement commun à l'urbanisme et l'environnement (permis unique)"
+
+msgid "IUrbanOrEnvironment type marker interface"
+msgstr "Événement exclusif au service de la tendance du dossier (permis unique)"
 
 #: ../interfaces.py:373
 msgid "IWalloonRegionDecisionEvent type marker interface"
