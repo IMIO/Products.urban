@@ -193,6 +193,18 @@
     interface=".interfaces.IInternalPreliminaryAdviceEvent"
     type=".interfaces.IEventTypeType"/>
 
+  <interface
+    interface=".interfaces.IEnvironmentOnlyEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IUrbanOrEnvironmentEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IUrbanAndEnvironmentEvent"
+    type=".interfaces.IEventTypeType"/>
+
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware
         Products.Archetypes.interfaces.IUIDCatalog"

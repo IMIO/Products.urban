@@ -486,6 +486,18 @@ class IRefusedIncompletenessEvent(Interface):
     __doc__ = _("""IRefusedIncompleteness type marker interface""")
 
 
+class IEnvironmentOnlyEvent(Interface):
+    __doc__ = _("""IEnvironmentOnly type marker interface""")
+
+
+class IUrbanOrEnvironmentEvent(Interface):
+    __doc__ = _("""IUrbanOrEnvironment type marker interface""")
+
+
+class IUrbanAndEnvironmentEvent(Interface):
+    __doc__ = _("""IUrbanAndEnvironment type marker interface""")
+
+
 class IImpactStudyEvent(Interface):
     __doc__ = _("""ImpactStudy event type marker interface""")
 

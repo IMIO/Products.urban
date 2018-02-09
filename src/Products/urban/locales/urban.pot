@@ -292,6 +292,9 @@ msgstr ""
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr ""
 
+msgid "IEnvironmentOnly type marker interface"
+msgstr ""
+
 msgid "IEnvironmentSimpleCollegeEvent type marker interface"
 msgstr ""
 
@@ -358,6 +361,12 @@ msgid "ITheLicence type marker interface"
 msgstr ""
 
 msgid "ITransmitToSPWEvent type marker interface"
+msgstr ""
+
+msgid "IUrbanAndEnvironment type marker interface"
+msgstr ""
+
+msgid "IUrbanOrEnvironment type marker interface"
 msgstr ""
 
 #: ../interfaces.py:373
