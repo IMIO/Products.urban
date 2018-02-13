@@ -90,7 +90,7 @@ class LocalRoleAdapter(object):
         return computed_value
 
     def compute_group_value(self, group_name):
-        group_values = self.compute_value(group_name)
+        group_values = self.compute_value(group_name) or []
         for group_value in group_values:
             if not api.group.get(group_value):
                 if callable(group_name):
@@ -107,7 +107,7 @@ class LocalRoleAdapter(object):
         return group_values
 
     def compute_role_value(self, role_name):
-        role_values = self.compute_value(role_name)
+        role_values = self.compute_value(role_name) or []
 
         portal = api.portal.getSite()
         portal_roles = portal.acl_users.portal_role_manager
