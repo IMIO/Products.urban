@@ -31,13 +31,13 @@ class UrbanEventFactory(grok.GlobalUtility):
         urban_event_id = licence.invokeFactory(
             portal_type,
             id=id or portal_urban.generateUniqueId(portal_type),
-            title=event_type.Title(),
             **kwargs
         )
         urban_event = getattr(licence, urban_event_id)
         # 'urbaneventtypes' is sometimes not initialized correctly with
-        # invokeFactory, so explicitiley set it after
+        # invokeFactory, so explicitly set it after
         urban_event.setUrbaneventtypes(event_type.UID())
+        urban_event.setTitle(event_type.Title())
         urban_event._at_rename_after_creation = False
         urban_event.processForm()
 
@@ -57,10 +57,10 @@ class UrbanEventInquiryFactory(grok.GlobalUtility):
         urbanEventId = urbanTool.generateUniqueId('UrbanEventInquiry')
         licence.invokeFactory("UrbanEventInquiry",
                               id=urbanEventId,
-                              title=eventtypetype.Title(),
-                              urbaneventtypes=(eventtypetype,),
                               **kwargs)
         urbanEvent = getattr(licence, urbanEventId)
+        urbanEvent.setUrbaneventtypes(eventtypetype.UID())
+        urbanEvent.setTitle(eventtypetype.Title())
         urbanEvent._at_rename_after_creation = False
         urbanEvent.processForm()
 
