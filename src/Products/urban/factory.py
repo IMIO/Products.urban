@@ -35,6 +35,8 @@ class UrbanEventFactory(grok.GlobalUtility):
             **kwargs
         )
         urban_event = getattr(licence, urban_event_id)
+        # 'urbaneventtypes' is sometimes not initialized correctly with
+        # invokeFactory, so explicitiley set it after
         urban_event.setUrbaneventtypes(event_type.UID())
         urban_event._at_rename_after_creation = False
         urban_event.processForm()
