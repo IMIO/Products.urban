@@ -32,10 +32,10 @@ class UrbanEventFactory(grok.GlobalUtility):
             portal_type,
             id=id or portal_urban.generateUniqueId(portal_type),
             title=event_type.Title(),
-            urbaneventtypes=(event_type,),
             **kwargs
         )
         urban_event = getattr(licence, urban_event_id)
+        urban_event.setUrbaneventtypes(event_type.UID())
         urban_event._at_rename_after_creation = False
         urban_event.processForm()
 
