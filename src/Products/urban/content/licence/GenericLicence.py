@@ -15,6 +15,7 @@ __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
 
+from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from collective.faceted.task.interfaces import IFacetedTaskContainer
 
 from collective.task.behaviors import ITask
@@ -789,7 +790,7 @@ schema = Schema((
     ),
     LinesField(
         name='protectedBuilding',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label='Protectedbuilding',
             label_msgid='urban_label_protectedBuilding',
