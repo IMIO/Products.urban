@@ -32,7 +32,7 @@ msgstr ""
 
 #: ../browser/templates/coring_update.pt:17
 msgid "Actual value"
-msgstr ""
+msgstr "Valeur actuelle"
 
 #: ../dashboard/portlet.py:46
 msgid "Add Category Switch Portlet"
@@ -225,7 +225,7 @@ msgstr "Pièces jointes des événements"
 
 #: ../browser/templates/coring_update.pt:16
 msgid "Field"
-msgstr ""
+msgstr "Champ"
 
 msgid "Filter"
 msgstr "Filtrer"
@@ -437,7 +437,7 @@ msgstr "Demandes diverses"
 
 #: ../browser/templates/coring_update.pt:36
 msgid "No data to update"
-msgstr ""
+msgstr "Aucune donnée à mettre à jour"
 
 #: ../browser/templates/parcelrecordsview.pt:17
 msgid "No related licences"
@@ -481,7 +481,7 @@ msgstr "Réunion de projet"
 
 #: ../browser/templates/coring_update.pt:18
 msgid "Proposed value"
-msgstr ""
+msgstr "Valeur proposée"
 
 msgid "Proprietary data"
 msgstr "Coordonnées du propriétaire"
@@ -557,7 +557,7 @@ msgstr ""
 
 #: ../browser/templates/coring_update.pt:34
 msgid "Submit"
-msgstr ""
+msgstr "Valider"
 
 #: ../browser/longtextview.py:30
 msgid "The field does not exist !!!"
@@ -610,7 +610,7 @@ msgstr "Permis unique"
 
 #: ../browser/templates/coring_update.pt:19
 msgid "Update"
-msgstr ""
+msgstr "Mettre à jour"
 
 #. Default: "urban"
 #: ../setuphandlers.py:740
