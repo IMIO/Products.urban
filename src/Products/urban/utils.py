@@ -8,6 +8,7 @@ from HTMLParser import HTMLParser
 
 from Products.ATContentTypes.interfaces.file import IATFile
 from Products.urban.config import URBAN_TYPES
+from Products.urban.config import URBAN_ENVIRONMENT_TYPES
 from Products.urban.interfaces import IUrbanDoc
 
 from plone import api
@@ -140,6 +141,14 @@ def getLicenceFolderId(licencetype):
 
 def getAllLicenceFolderIds():
     return [getLicenceFolderId(licencetype) for licencetype in URBAN_TYPES]
+
+
+def getUrbanOnlyLicenceFolderIds():
+    return [getLicenceFolderId(licencetype) for licencetype in URBAN_TYPES and licencetype not in URBAN_ENVIRONMENT_TYPES]
+
+
+def getEnvironmentLicenceFolderIds():
+    return [getLicenceFolderId(licencetype) for licencetype in URBAN_ENVIRONMENT_TYPES]
 
 
 def getLicenceFolder(licencetype):

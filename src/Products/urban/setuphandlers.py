@@ -33,7 +33,9 @@ from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
 from Products.urban import services
 from Products.urban.utils import generatePassword
 from Products.urban.utils import getAllLicenceFolderIds
+from Products.urban.utils import getEnvironmentLicenceFolderIds
 from Products.urban.utils import getLicenceFolderId
+from Products.urban.utils import getUrbanOnlyLicenceFolderIds
 
 from datetime import date
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
@@ -546,6 +548,14 @@ def addUrbanGroups(context):
     #one with urban Editors
     site.portal_groups.addGroup("urban_editors", title="Urban Editors")
     site.portal_groups.setRolesForGroup('urban_editors', ('UrbanMapReader', ))
+    site.portal_groups.addPrincipalToGroup("urban_editors", 'urban_readers')
+    #one with environment Readers
+    site.portal_groups.addGroup("environment_readers", title="Environment Readers")
+    site.portal_groups.setRolesForGroup('environment_readers', ('UrbanMapReader', ))
+    #one with environment Editors
+    site.portal_groups.addGroup("environment_editors", title="Environment Editors")
+    site.portal_groups.setRolesForGroup('environment_editors', ('UrbanMapReader', ))
+    site.portal_groups.addPrincipalToGroup("environment_editors", 'environment_readers')
     #one with map Readers
     site.portal_groups.addGroup("urban_map_readers", title="Urban Map Readers")
     site.portal_groups.setRolesForGroup('urban_map_readers', ('UrbanMapReader', ))
@@ -583,7 +593,9 @@ def setDefaultApplicationSecurity(context):
         app_folder.manage_permission('Manage properties', ['Manager', ], acquire=0)
 
     licencesfolder_names = getAllLicenceFolderIds()
-
+    urban_folder_names = getUrbanOnlyLicenceFolderIds()
+    uniquelicences_names = [getLicenceFolderId('UniqueLicence'), getLicenceFolderId('CODT_UniqueLicence')]
+    environment_folder_names = getEnvironmentLicenceFolderIds() + uniquelicences_names
     #licence folder : "urban_readers" can read and "urban_editors" can edit...
     for folder_name in licencesfolder_names:
         if hasattr(app_folder, folder_name):
@@ -594,9 +606,14 @@ def setDefaultApplicationSecurity(context):
                 folder.manage_addProperty('urbanConfigId', folder_name.strip('s'), 'string')
             except BadRequest:
                 pass
-            folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
-            folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-            folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
+            if folder_name in urban_folder_names:
+                folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
+                folder.manage_addLocalRoles("urban_readers", ("Reader", ))
+                folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
+            elif folder_name in environment_folder_names:
+                folder.manage_addLocalRoles("environment_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
+                folder.manage_addLocalRoles("environment_readers", ("Reader", ))
+                folder.manage_addLocalRoles("environment_editors", ("Editor", "Contributor"))
 
     #objects application folder : "urban_readers" can read and "urban_editors" can edit...
     objectsfolder_names = ['architects', 'geometricians', 'notaries', 'parcellings']
@@ -607,6 +624,9 @@ def setDefaultApplicationSecurity(context):
             folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
             folder.manage_addLocalRoles("urban_readers", ("Reader", ))
             folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
+            folder.manage_addLocalRoles("environment_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
+            folder.manage_addLocalRoles("environment_readers", ("Reader", ))
+            folder.manage_addLocalRoles("environment_editors", ("Editor", "Contributor"))
             # mark them with IContactFolder interface use some view methods, like 'getemails', on it
             alsoProvides(folder, IContactFolder)
 
@@ -974,7 +994,6 @@ def setupTest(context):
     """
     Enable schedule faceted navigation on schedule folder.
     """
-    site = context
     portal_urban = api.portal.get_tool('portal_urban')
     for urban_type in URBAN_TYPES:
         config_folder = getattr(portal_urban, urban_type.lower())
@@ -986,7 +1005,6 @@ def setupTest(context):
         else:
             test_folder = config_folder['test']
         setFolderAllowedTypes(test_folder, [urban_type])
-
 
 
 

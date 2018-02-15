@@ -1,52 +1,45 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.workflows.adapter import LocalRoleAdapter
+from Products.urban.workflows.licence_workflow import StateRolesMapping as BaseRoleMapping
 
 
-class StateRolesMapping(LocalRoleAdapter):
+class StateRolesMapping(BaseRoleMapping):
     """ """
 
     mapping = {
         'deposit': {
-            'urban_readers': ('Reader',),
-            'urban_editors': ('Reader', 'Editor', 'Contributor'),
-            'urban_managers': ('Reader', 'Editor', 'Contributor', 'Reviewer'),
+            BaseRoleMapping.get_readers: ('Reader',),
+            BaseRoleMapping.get_editors: ('Reader', 'Editor', 'Contributor'),
         },
 
         'accepted': {
-            'urban_readers': ('Reader',),
-            'urban_editors': ('Reader', 'Reviewer'),
-            'urban_managers': ('Reader', 'Reviewer'),
+            BaseRoleMapping.get_readers: ('Reader',),
+            BaseRoleMapping.get_editors: ('Reader', 'Reviewer'),
         },
 
         'incomplete': {
-            'urban_readers': ('Reader',),
-            'urban_editors': ('Reader', 'Editor', 'Contributor'),
-            'urban_managers': ('Reader', 'Editor', 'Contributor', 'Reviewer'),
+            BaseRoleMapping.get_readers: ('Reader',),
+            BaseRoleMapping.get_editors: ('Reader', 'Editor', 'Contributor'),
         },
 
         'complete': {
-            'urban_readers': ('Reader',),
-            'urban_editors': ('Reader', 'Editor', 'Contributor'),
-            'urban_managers': ('Reader', 'Editor', 'Contributor', 'Reviewer'),
+            BaseRoleMapping.get_readers: ('Reader',),
+            BaseRoleMapping.get_editors: ('Reader', 'Editor', 'Contributor'),
         },
 
         'refused': {
-            'urban_readers': ('Reader',),
-            'urban_editors': ('Reader', 'Contributor'),
-            'urban_managers': ('Reader', 'Contributor'),
+            BaseRoleMapping.get_readers: ('Reader',),
+            BaseRoleMapping.get_editors: ('Reader', 'Contributor'),
         },
 
         'retired': {
-            'urban_readers': ('Reader',),
-            'urban_editors': ('Reader', 'Contributor'),
-            'urban_managers': ('Reader', 'Contributor'),
+            BaseRoleMapping.get_readers: ('Reader',),
+            BaseRoleMapping.get_editors: ('Reader', 'Contributor'),
         },
 
         'inacceptable': {
-            'urban_readers': ('Reader',),
-            'urban_editors': ('Reader', 'Contributor'),
-            'urban_managers': ('Reader', 'Contributor'),
+            BaseRoleMapping.get_readers: ('Reader',),
+            BaseRoleMapping.get_editors: ('Reader', 'Contributor'),
         },
 
     }
