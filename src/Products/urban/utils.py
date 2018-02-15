@@ -144,7 +144,7 @@ def getAllLicenceFolderIds():
 
 
 def getUrbanOnlyLicenceFolderIds():
-    return [getLicenceFolderId(licencetype) for licencetype in URBAN_TYPES and licencetype not in URBAN_ENVIRONMENT_TYPES]
+    return [getLicenceFolderId(licencetype) for licencetype in URBAN_TYPES if licencetype not in URBAN_ENVIRONMENT_TYPES]
 
 
 def getEnvironmentLicenceFolderIds():
