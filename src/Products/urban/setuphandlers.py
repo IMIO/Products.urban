@@ -611,11 +611,9 @@ def setDefaultApplicationSecurity(context):
             except BadRequest:
                 pass
             if folder_name in urban_folder_names:
-                folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
                 folder.manage_addLocalRoles("urban_readers", ("Reader", ))
                 folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-            elif folder_name in environment_folder_names:
-                folder.manage_addLocalRoles("environment_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
+            if folder_name in environment_folder_names:
                 folder.manage_addLocalRoles("environment_readers", ("Reader", ))
                 folder.manage_addLocalRoles("environment_editors", ("Editor", "Contributor"))
 
