@@ -577,6 +577,8 @@ def setDefaultApplicationSecurity(context):
     site.portal_urban.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
     site.portal_urban.manage_addLocalRoles("urban_readers", ("Reader", ))
     site.portal_urban.manage_addLocalRoles("urban_editors", ("Reader", ))
+    site.portal_urban.manage_addLocalRoles("environment_readers", ("Reader", ))
+    site.portal_urban.manage_addLocalRoles("environment_editors", ("Reader", ))
     site.portal_urban.manage_addLocalRoles("urban_map_readers", ("Reader", ))
 
     #application folders local roles
