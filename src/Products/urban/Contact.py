@@ -260,31 +260,38 @@ class Contact(BaseContent, BrowserDefaultMixin):
                     nameSignaletic.decode('utf8'),
                     addressSignaletic.decode('utf8')
                 )
-                if self.portal_type != 'Corporation':
-                    if self.isMasculineSingular():
-                        result = translate(
-                            u'masculine_singular_residing',
-                            domain=u'urban',
-                            mapping=mapping, context=self.REQUEST
-                        )
-                    elif self.isFeminineSingular():
-                        result = translate(
-                            u'feminine_singular_residing',
-                            domain=u'urban',
-                            mapping=mapping, context=self.REQUEST
-                        )
-                    elif self.isFemininePlural():
-                        result = translate(
-                            u'feminine_plural_residing',
-                            domain=u'urban',
-                            mapping=mapping, context=self.REQUEST
-                        )
-                    else:
-                        result = translate(
-                            u'mixed_residing',
-                            domain=u'urban',
-                            mapping=mapping, context=self.REQUEST
-                        )
+                if self.portal_type == 'Architect':
+                    result = translate(
+                        u'architect_residing',
+                        domain=u'urban',
+                        mapping=mapping, context=self.REQUEST
+                    )
+                else:
+                    if self.portal_type != 'Corporation':
+                        if self.isMasculineSingular():
+                            result = translate(
+                                u'masculine_singular_residing',
+                                domain=u'urban',
+                                mapping=mapping, context=self.REQUEST
+                            )
+                        elif self.isFeminineSingular():
+                            result = translate(
+                                u'feminine_singular_residing',
+                                domain=u'urban',
+                                mapping=mapping, context=self.REQUEST
+                            )
+                        elif self.isFemininePlural():
+                            result = translate(
+                                u'feminine_plural_residing',
+                                domain=u'urban',
+                                mapping=mapping, context=self.REQUEST
+                            )
+                        else:
+                            result = translate(
+                                u'mixed_residing',
+                                domain=u'urban',
+                                mapping=mapping, context=self.REQUEST
+                            )
                 return result.encode('utf8')
             else:
                 #remove the <p></p> from adressSignaletic
@@ -298,8 +305,10 @@ class Contact(BaseContent, BrowserDefaultMixin):
         names = '%s %s' % (self.getName1(), self.getName2())
         if invertnames:
             names = '%s %s' % (self.getName2(), self.getName1())
+        names = names.strip()
         namepart = namedefined and names or self.getSociety()
         nameSignaletic = '%s %s' % (title, namepart.decode('utf8'))
+        nameSignaletic = nameSignaletic.strip()
         nameSignaletic = nameSignaletic.encode('utf8')
         if linebyline:
             #escape HTML special characters like HTML entities
