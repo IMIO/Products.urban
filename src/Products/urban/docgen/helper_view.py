@@ -605,6 +605,23 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             workLocation_signaletic += separator + self.get_work_location_signaletic(workLocation)
         return workLocation_signaletic
 
+    def get_last_opinions_round(self):
+        opinions = self._get_last_opinions('solicitOpinionsTo')
+        return opinions
+
+    def get_last_optional_opinions_round(self):
+        opinions = self._get_last_opinions('solicitOpinionsToOptional')
+        return opinions
+
+    def _get_last_opinions(self, field_name):
+        licence = self.context
+        inquiries = licence._get_inquiry_objs(all_=True)
+        if inquiries:
+            last_inquiry = inquiries[-1]
+            opinions = licence.getValuesForTemplate(field_name, obj=last_inquiry)
+            return opinions
+        return []
+
 # Contact(s)
 #------------------------------------------------------------------------------
     def _get_personTitle_dict(self, id):
