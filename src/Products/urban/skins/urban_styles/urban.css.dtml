@@ -31,6 +31,10 @@ color: grey !important;
 color: red !important;
 }
 
+.state-authorized {
+color: green !important;
+}
+
 .state-accepted {
 color: green !important;
 }
