@@ -311,7 +311,14 @@
         name="urban.schedule.condition.refused"
     />
 
-    <!-- decision -->
+    <!-- decision college event conditions-->
+    <adapter
+        for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.LicenceDecisionCollegeEventCreated"
+        name="urban.schedule.condition.licence_decision_college_event_created"
+    />
     <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task.IAutomatedTask"
