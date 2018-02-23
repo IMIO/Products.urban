@@ -89,6 +89,9 @@ msgstr "Enquête terminée"
 msgid "urban.schedule.condition.inquiry_event_created"
 msgstr "Créer l'événement d'enquête publique"
 
+msgid "urban.schedule.condition.licence_decision_college_event_created"
+msgstr "Créer l'événement de décision collège"
+
 msgid "urban.schedule.condition.need_FD_opinion"
 msgstr "Avis du FD sélectionné dans le type de procédure"
 
