@@ -315,7 +315,7 @@
     <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IStartCondition"
+        provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.LicenceDecisionCollegeEventCreated"
         name="urban.schedule.condition.licence_decision_college_event_created"
     />
