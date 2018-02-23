@@ -1,9 +1,17 @@
 # -*- coding: utf-8 -*-
 
+from imio.schedule.config import CREATION
+from imio.schedule.config import STARTED
+from imio.schedule.config import states_by_status
+from imio.schedule.content.task import IAutomatedTask
 from imio.schedule.content.object_factories import EndConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 
 from Products.urban.config import LICENCE_FINAL_STATES
+from Products.urban.interfaces import IGenericLicence
+
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
 
 from plone import api
 
@@ -40,3 +48,17 @@ def add_licence_ended_condition():
                 old_ending_states = list(task_cfg.ending_states)
                 new_ending_states = list(set(old_ending_states + LICENCE_FINAL_STATES))
                 task_cfg.ending_states = new_ending_states
+
+
+def close_old_tasks():
+    catalog = api.portal.get_tool('portal_catalog')
+    states = states_by_status[CREATION] = states_by_status[STARTED]
+    task_brains = catalog(
+        object_provides=IAutomatedTask.__identifier__,
+        review_state=states
+    )
+    open_tasks = [b.getObject() for b in task_brains]
+    licences = set([t.aq_parent for t in open_tasks if IGenericLicence.providedBy(t.aq_parent) and api.content.get_state(t.aq_parent) in LICENCE_FINAL_STATES])
+    for licence in licences:
+        notify(ObjectModifiedEvent(licence))
+        print "notified licence {}".format(licence)
