@@ -3,6 +3,8 @@
 from imio.schedule.content.object_factories import EndConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 
+from Products.urban.config import LICENCE_FINAL_STATES
+
 from plone import api
 
 
@@ -34,3 +36,7 @@ def add_licence_ended_condition():
                         display_status=False
                     )
                 task_cfg.end_conditions = (condition,) + tuple(end_conditions)
+            elif ending_states:
+                old_ending_states = list(task_cfg.ending_states)
+                new_ending_states = list(set(old_ending_states + LICENCE_FINAL_STATES))
+                task_cfg.ending_states = new_ending_states
