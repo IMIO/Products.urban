@@ -11,6 +11,10 @@
                 <img src="../schedule.png" />
                 <a href="" tal:attributes="href python: view.site_url() + '/urban/schedule/codt_buildlicence'" >Échéancier</a>
             </li>
+            <li tal:condition="view/is_opinion_editor">
+                <img src="../schedule.png" />
+                <a href="" tal:attributes="href python: view.site_url() + '/urban/opinions_schedule'" >Échéancier demande d'avis</a>
+            </li>
             <li>
                 <img src="../link_icon.png" />
                 <a href="fullmap" i18n:translate="urban_fullmap_descr">Full map</a>
