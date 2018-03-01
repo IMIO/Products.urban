@@ -15,6 +15,7 @@
   <include package="collective.js.jqueryui"/>
   <include package="collective.z3cform.datagridfield"/>
   <include package="collective.archetypes.select2"/>
+  <include package="collective.faceted.datewidget"/>
   <include package="five.grok"/>
   <include package="imio.actionspanel"/>
   <include package="imio.dashboard"/>
