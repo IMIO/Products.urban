@@ -198,6 +198,15 @@ def investigation_start_date(object):
             return event.getInvestigationStart()
 
 
+@indexer(IBaseBuildLicence)
+def investigation_end_date(object):
+    if object.getUrbanEventInquiries():
+        event = object.getLastInquiry(use_catalog=False)
+        end_date = event.getInvestigationEnd()
+        if end_date:
+            return end_date
+
+
 @indexer(IBaseFolder)
 def rubricsfolders_extravalue(object):
     if object.portal_type == 'Folder' and 'rubrics' in object.getPhysicalPath():
