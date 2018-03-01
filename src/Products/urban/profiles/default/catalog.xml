@@ -106,6 +106,7 @@
   </index>
   <column value="archive"/>
 
- <index name="investigationStart" meta_type="DateIndex"/>
+  <index name="investigationStart" meta_type="DateIndex"/>
+  <index name="investigationEnd" meta_type="DateIndex"/>
 <!-- ##/code-section FOOT -->
 </object>
