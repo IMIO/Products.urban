@@ -167,6 +167,6 @@ class CadastralReferenceSuggest(SuggestView):
 
         terms = term.strip().split()
         all_parcels = self._all_parcels_values()
-        raw_suggestions = [(prc, index) for prc, index in all_parcels if all([t in prc for t in terms])]
+        raw_suggestions = [(prc, index) for prc, index in all_parcels if all([t.lower() in prc.lower() for t in terms])]
         suggestions = [{'label': x[0], 'value': x[1]} for x in raw_suggestions]
         return suggestions
