@@ -23,6 +23,7 @@ __docformat__ = 'plaintext'
 # AppConfig.py in your product's root directory. The items in there
 # will be included (by importing) in this file if found.
 
+from collections import OrderedDict
 from ConfigParser import ConfigParser
 
 from Products.CMFCore.permissions import setDefaultRoles
@@ -226,18 +227,18 @@ APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation']
 GLOBAL_TEMPLATES = {
     '.': [],
     'urbantemplates': [
+        {'id':'styles.odt', 'portal_type': 'StyleTemplate', 'title':'Styles urbanisme'},
         {'id':'header.odt', 'portal_type': 'SubTemplate', 'title':'En-tête urbanisme'},
         {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page urbanisme'},
         {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' urbanisme'},
         {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures urbanisme'},
-        {'id':'styles.odt', 'portal_type': 'StyleTemplate', 'title':'Styles urbanisme'},
     ],
     'environmenttemplates': [
+        {'id':'styles.odt', 'portal_type': 'StyleTemplate', 'title':'Styles environnement'},
         {'id':'header.odt', 'portal_type': 'SubTemplate', 'title':'En-tête environnement'},
         {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page environnement'},
         {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' environnement'},
         {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures environnement'},
-        {'id':'styles.odt', 'portal_type': 'StyleTemplate', 'title':'Styles environnement'},
     ],
 }
 
