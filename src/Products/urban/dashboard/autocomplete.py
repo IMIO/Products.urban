@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 from Products.Five import BrowserView
+from Products.urban.services import cadastre
 from Products.ZCTextIndex.ParseTree import ParseError
 
 from eea.faceted.vocabularies.autocomplete import IAutocompleteSuggest
@@ -149,31 +150,23 @@ class CadastralReferenceSuggest(SuggestView):
 
     label = 'Parcelles urban'
 
+    def _all_parcels_values(self):
+        cat = api.portal.get_tool('portal_catalog')
+        values = [v for v in cat.Indexes['parcelInfosIndex'].uniqueValues()]
+        session = cadastre.new_session()
+        all_divisions = dict(session.get_all_divisions())
+        session.close()
+        all_divisions = dict([(str(int(k)), v) for k, v in all_divisions.iteritems()])
+        all_values = [(v.replace(v.split(',')[0], all_divisions.get(v.split(',')[0])), v) for v in values]
+        return all_values
+
     def compute_suggestions(self):
         term = self.request.get('term')
-        if not term:
+        if len(term) < 4:
             return
 
         terms = term.strip().split()
-
-        kwargs = {
-            'Title': ' AND '.join(["%s*" % x for x in terms]),
-            'sort_on': 'sortable_title',
-            'sort_order': 'reverse',
-            'path': '/'.join(self.context.getPhysicalPath()),
-            'object_provides': 'Products.urban.interfaces.ILicencePortionOut',
-        }
-
-        catalog = api.portal.get_tool('portal_catalog')
-        brains = catalog(**kwargs)
-        unique_brains = []
-        unique_info = set()
-        for brain in brains:
-            parcel_reference = brain.parcelInfosIndex[0]
-            if parcel_reference in unique_info:
-                continue
-            unique_info.add(parcel_reference)
-            unique_brains.append(brain)
-
-        suggestions = [{'label': x.Title, 'value': x.parcelInfosIndex[0]} for x in unique_brains]
+        all_parcels = self._all_parcels_values()
+        raw_suggestions = [(prc, index) for prc, index in all_parcels if all([t in prc for t in terms])]
+        suggestions = [{'label': x[0], 'value': x[1]} for x in raw_suggestions]
         return suggestions
