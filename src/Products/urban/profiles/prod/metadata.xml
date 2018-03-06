@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<metadata>
+  <version>2.2</version>
+  <dependencies>
+    <dependency>profile-Products.urban:default</dependency>
+    <!-- password strength and fingerpoiting mess with the tests -->
+    <dependency>profile-Products.PasswordStrength:default</dependency>
+    <dependency>profile-collective.fingerpointing:default</dependency>
+  </dependencies>
+</metadata>

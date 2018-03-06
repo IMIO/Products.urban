@@ -1,0 +1,34 @@
+<registry>
+    <record name="collective.fingerpointing.interfaces.IFingerPointingSettings.audit_lifecycle" interface="collective.fingerpointing.interfaces.IFingerPointingSettings" field="audit_lifecycle">
+      <field type="plone.registry.field.Bool">
+        <default>True</default>
+        <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.fingerpointing" ns0:translate="">Log content type life cycle events like object creation, modification and removal.</description>
+        <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.fingerpointing" ns0:translate="">Audit Content Type Life Cycle?</title>
+      </field>
+      <value>True</value>
+    </record>
+    <record name="collective.fingerpointing.interfaces.IFingerPointingSettings.audit_pas" interface="collective.fingerpointing.interfaces.IFingerPointingSettings" field="audit_pas">
+      <field type="plone.registry.field.Bool">
+        <default>True</default>
+        <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.fingerpointing" ns0:translate="">Log authentication events like users logging in and loggin out.</description>
+        <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.fingerpointing" ns0:translate="">Audit Authentication Service?</title>
+      </field>
+      <value>True</value>
+    </record>
+    <record name="collective.fingerpointing.interfaces.IFingerPointingSettings.audit_registry" interface="collective.fingerpointing.interfaces.IFingerPointingSettings" field="audit_registry">
+      <field type="plone.registry.field.Bool">
+        <default>True</default>
+        <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.fingerpointing" ns0:translate="">Log registry events like records being modified.</description>
+        <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.fingerpointing" ns0:translate="">Audit Registry?</title>
+      </field>
+      <value>False</value>
+    </record>
+    <record name="collective.fingerpointing.interfaces.IFingerPointingSettings.audit_workflow" interface="collective.fingerpointing.interfaces.IFingerPointingSettings" field="audit_workflow">
+      <field type="plone.registry.field.Bool">
+        <default>True</default>
+        <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.fingerpointing" ns0:translate="">Log workflow transitions like object publishing.</description>
+        <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.fingerpointing" ns0:translate="">Audit Workflow Transitions?</title>
+      </field>
+      <value>True</value>
+    </record>
+</registry>
