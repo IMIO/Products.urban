@@ -668,7 +668,7 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
         vocabulary = (
             ('ukn', 'Non determiné'),
             ('opinions', 'Sollicitation d\'avis (instance ou service interne/externe)'),
-            ('inquiry', 'Instruction d\'une enquête publique'),
+            ('inquiry', 'Enquête publique'),
             ('FD', 'Sollicitation du fonctionnaire délégué'),
         )
         return DisplayList(vocabulary)
