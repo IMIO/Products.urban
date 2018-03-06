@@ -61,8 +61,10 @@ class CODT_IntegratedLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMi
             ('ukn', 'Non determiné'),
             ('internal_opinions', 'Sollicitation d\'avis internes'),
             ('external_opinions', 'Sollicitation d\'avis externes'),
-            ('light_inquiry', 'Instruction d\'une annonce de projet'),
-            ('inquiry', 'Instruction d\'une enquête publique'),
+            ('light_inquiry', 'Annonce de projet'),
+            ('initiative_light_inquiry', 'Annonce de projet d\'initiative'),
+            ('inquiry', 'Enquête publique'),
+            ('initiative_inquiry', 'Enquête publique d\'initiative'),
         )
         return DisplayList(vocab)
 

@@ -60,7 +60,7 @@ class UniqueLicence(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
         vocab = (
             ('ukn', 'Non determiné'),
             ('opinions', 'Sollicitation d\'avis (instance ou service interne/externe)'),
-            ('inquiry', 'Instruction d\'une enquête publique'),
+            ('inquiry', 'Enquête publique'),
         )
         return DisplayList(vocab)
 
