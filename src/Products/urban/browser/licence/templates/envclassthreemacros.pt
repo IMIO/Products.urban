@@ -5,23 +5,7 @@
                       custom python:['rubrics', 'minimumLegalConditions', 'hasAdditionalConditions'];">
         <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
             <metal:worklocations fill-slot="worklocations">
-
-                <fieldset tal:define="workLocations context/getWorkLocations">
-                    <legend i18n:translate="urban_label_situation">Situation</legend>
-                    <div tal:condition="workLocations">
-                        <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" />
-                    </div>
-                    <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
-                </fieldset>
-
-                <fieldset tal:define="workLocations context/getBusinessOldLocation">
-                    <legend i18n:translate="urban_label_businessOldLocation">Old business location</legend>
-                    <div tal:condition="workLocations">
-                        <metal:myfield use-macro="python:here.widget('businessOldLocation', mode='view')" />
-                    </div>
-                    <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
-                </fieldset>
-
+                <metal:worklocation use-macro="here/@@worklocation-macro/env_worklocations_macro" />
             </metal:worklocations>
         </metal:parent_call>
     </tal:vars>
