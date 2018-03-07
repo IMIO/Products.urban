@@ -23,6 +23,14 @@
       description="Extension profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+
+  <genericsetup:registerProfile
+      name="prod"
+      title="urban"
+      directory="profiles/prod"
+      description="Production extension profile for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
   
   <!-- ##code-section profiles.zcml-bottom #fill in your manual code here -->
   <genericsetup:registerProfile
