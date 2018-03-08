@@ -268,7 +268,6 @@ schema = Schema((
         allowable_content_types=('text/html',),
         widget=RichWidget(
             label=_('urban_label_pmMotivation', default='Pmmotivation'),
-            label_msgid=,
             i18n_domain='urban',
         ),
         default_method='getDefaultText',
