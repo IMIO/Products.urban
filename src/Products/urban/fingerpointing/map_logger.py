@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
+
 from collective.fingerpointing.config import AUDIT_MESSAGE
-from collective.fingerpointing.interfaces import IFingerPointingSettings
 from collective.fingerpointing.logger import log_info
 from collective.fingerpointing.utils import get_request_information
 from plone import api
@@ -8,9 +8,8 @@ from plone import api
 
 def log_map_access(context, request):
     """Log urban map access"""
-    name = IFingerPointingSettings.__identifier__ + '.audit_urbanmap'
-    audit_profile_imports = api.portal.get_registry_record(name, default=False)
-    if not audit_profile_imports:
+    portal_urban = api.portal.get_tool('portal_urban')
+    if not portal_urban.getLogMapRequests():
         return
 
     try:

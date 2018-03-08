@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-03-08 11:08+0000\n"
+"POT-Creation-Date: 2018-03-08 11:13+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -2498,7 +2498,7 @@ msgid "urban_label_alsoCalled"
 msgstr "Synonymes"
 
 #. Default: "Amount_collected"
-#: ../UrbanEvent.py:354
+#: ../UrbanEvent.py:353
 msgid "urban_label_amount_collected"
 msgstr "Montant perçu"
 
@@ -2579,12 +2579,12 @@ msgid "urban_label_authorizationDate"
 msgstr "Date d'autorisation"
 
 #. Default: "Bank_account"
-#: ../UrbanEvent.py:339
+#: ../UrbanEvent.py:338
 msgid "urban_label_bank_account"
 msgstr "N° de compte"
 
 #. Default: "Bank_account_owner"
-#: ../UrbanEvent.py:346
+#: ../UrbanEvent.py:345
 msgid "urban_label_bank_account_owner"
 msgstr "Titulaire du compte"
 
@@ -2813,7 +2813,7 @@ msgid "urban_label_decisionDate"
 msgstr "Date de la décision"
 
 #. Default: "Decisionproject"
-#: ../UrbanEvent.py:372
+#: ../UrbanEvent.py:371
 msgid "urban_label_decisionProject"
 msgstr "Projet de décision"
 
@@ -2851,7 +2851,7 @@ msgid "urban_label_delayComputation"
 msgstr "Calcul de la date limite"
 
 #. Default: "Delegatesignatures"
-#: ../UrbanEvent.py:328
+#: ../UrbanEvent.py:327
 msgid "urban_label_delegateSignatures"
 msgstr "Déléguer la signature à"
 
@@ -2891,7 +2891,7 @@ msgid "urban_label_dispatchSInformation"
 msgstr "Informations de dispatch"
 
 #. Default: "Displaydate"
-#: ../UrbanEvent.py:364
+#: ../UrbanEvent.py:363
 msgid "urban_label_displayDate"
 msgstr "Date d'affichage"
 
@@ -3499,6 +3499,11 @@ msgstr "Conditions d'octroi du permis"
 msgid "urban_label_locationTechnicalRemarks"
 msgstr "Remarques techniques (Fiche Urbanisme)"
 
+#. Default: "Logmaprequests"
+#: ../UrbanTool.py:198
+msgid "urban_label_logMapRequests"
+msgstr "Logger les accès à la cartographie avec collective.fingerpointing"
+
 #. Default: "Manageablelicences"
 #: FolderManager.py
 msgid "urban_label_manageableLicences"
@@ -3616,7 +3621,7 @@ msgid "urban_label_numerotationTALExpression"
 msgstr "Expression TAL gérant la référence des permis"
 
 #. Default: "Officecoordinate"
-#: ../UrbanEvent.py:296
+#: ../UrbanEvent.py:295
 msgid "urban_label_officeCoordinate"
 msgstr "Coordonnées du bureau d'études"
 
@@ -3768,7 +3773,7 @@ msgid "urban_label_ploneUserId"
 msgstr "Identifiant de l'utilisateur Plone lié"
 
 #. Default: "Pmdecision"
-#: ../UrbanEvent.py:284
+#: ../UrbanEvent.py:283
 msgid "urban_label_pmDecision"
 msgstr "Décision du point PloneMeeting"
 
@@ -4287,12 +4292,12 @@ msgid "urban_label_suspension"
 msgstr "Suspension"
 
 #. Default: "suspensionEndDate"
-#: ../UrbanEvent.py:320
+#: ../UrbanEvent.py:319
 msgid "urban_label_suspensionEndDate"
 msgstr "Date de fin de suspension"
 
 #. Default: "Suspensionreason"
-#: ../UrbanEvent.py:307
+#: ../UrbanEvent.py:306
 msgid "urban_label_suspensionReason"
 msgstr "Raison de la suspension"
 
@@ -4452,7 +4457,7 @@ msgid "urban_label_usage"
 msgstr "Statistiques INS"
 
 #. Default: "Useplonemeetingwsclient"
-#: ../UrbanTool.py:198
+#: ../UrbanTool.py:207
 msgid "urban_label_usePloneMeetingWSClient"
 msgstr "Utiliser le lien PloneMeeting plutôt que les documents de délibération du collège"
 
