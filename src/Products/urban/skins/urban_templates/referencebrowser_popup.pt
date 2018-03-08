@@ -36,7 +36,7 @@
                       field python: context.portal_urban.getReferenceBrowserSearchAtField(at_obj, fieldRealName);
                       widget python:field.widget;
                       multi python:test(field.multiValued, '1', '0');
-                      title python: context.utranslate(msgid=widget.label_msgid, domain=widget.i18n_domain);
+                      title python: context.utranslate(msgid=getattr(widget, 'label_msgid', widget.label), domain=getattr(widget, i18n_domain, None));
                       description python:widget.Description(at_obj);
                       search_index python:here.REQUEST.get('search_index', widget.default_search_index);
                       show_indexes widget/show_indexes;

@@ -359,6 +359,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'envclassthree': advice_tabs_config,
             'envclassone': inquiry_tabs_config,
             'envclasstwo': inquiry_tabs_config,
+            'explosivespossession': ['description', 'inquiry', 'analysis', 'location', 'road'],
         }
         licence_type = self.id
 
