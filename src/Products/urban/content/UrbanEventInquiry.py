@@ -77,7 +77,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=True,
             format="%d/%m/%Y %H:%M",
-            label=_('urban_label_explanationEndSDate'i,
+            label=_('urban_label_explanationEndSDate',
                     default='Explanationendsdate'),
         ),
         optional=True,
