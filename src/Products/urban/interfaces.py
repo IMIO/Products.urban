@@ -354,6 +354,12 @@ class IEventTypeType(IInterface):
     """
 
 
+class IExplosivesPossession(Interface):
+    """
+    Marker interface for explosives possession
+    """
+
+
 class ICollegeEvent(Interface):
     __doc__ = _("""ICollege type marker interface""")
 

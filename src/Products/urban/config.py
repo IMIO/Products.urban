@@ -113,6 +113,7 @@ ADD_CONTENT_PERMISSIONS = {
     'UrbanDelay': 'urban: Add UrbanDelay',
     'UrbanEventOpinionRequest': 'urban: Add UrbanEventOpinionRequest',
     'UrbanConfigurationValue': 'urban: Add UrbanConfigurationValue',
+    'ExplosivesPossession': 'urban: Add ExplosivesPossession',
 }
 
 setDefaultRoles('urban: Add Applicant', ("Manager", "Contributor"))
@@ -171,6 +172,7 @@ setDefaultRoles('urban: Add UrbanDelay', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanEventOpinionRequest', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanConfigurationValue',  ('Manager', ))
 setDefaultRoles('urban: Add UrbanVocabularyTerm', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add ExplosivesPossession', ("Manager", "Contributor"))
 
 product_globals = globals()
 
@@ -193,7 +195,7 @@ URBAN_TYPES = [
     'ParcelOutLicence', 'CODT_ParcelOutLicence',
     'MiscDemand', 'Division',
     'NotaryLetter', 'CODT_NotaryLetter',
-    'ProjectMeeting'
+    'ProjectMeeting', 'ExplosivesPossession',
 ]
 
 URBAN_CWATUPE_TYPES = [
@@ -210,7 +212,7 @@ URBAN_CODT_TYPES = [
 ]
 
 URBAN_ENVIRONMENT_TYPES = [
-    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree'
+    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'ExplosivesPossession',
 ]
 
 LICENCE_FINAL_STATES = [

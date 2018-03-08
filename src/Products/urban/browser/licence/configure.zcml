@@ -340,4 +340,19 @@
      permission="zope2.View"
   />
 
+  <browser:page
+     for="Products.urban.interfaces.IExplosivesPossession"
+     name="explosivespossessionview"
+     class=".explosivespossessionview.ExplosivesPossessionView"
+     template="templates/explosivespossessionview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="explosivespossession-macros"
+     for="Products.urban.interfaces.IExplosivesPossession"
+     template="templates/explosivespossessionmacros.pt"
+     permission="zope2.View"
+  />
+
 </configure>

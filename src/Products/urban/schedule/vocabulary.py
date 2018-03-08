@@ -30,6 +30,8 @@ from Products.urban.interfaces import IUniqueLicence
 from Products.urban.interfaces import IUrbanCertificateOne
 from Products.urban.interfaces import IUrbanCertificateTwo
 from Products.urban.interfaces import IUrbanEventOpinionRequest
+from Products.urban.interfaces import IExplosivesPossession
+
 
 from Products.urban import UrbanMessage
 
@@ -72,6 +74,7 @@ URBAN_TYPES_INTERFACES = {
     'UrbanCertificateOne': IUrbanCertificateOne,
     'UrbanCertificateTwo': IUrbanCertificateTwo,
     'UrbanEventOpinionRequest': IUrbanEventOpinionRequest,
+    'ExplosivesPossession': IExplosivesPossession,
 }
 
 
