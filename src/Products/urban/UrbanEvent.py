@@ -90,7 +90,7 @@ schema = Schema((
             show_hm=False,
             format="%d/%m/%Y",
             starting_year=1960,
-            label=_('urban_label_receiptDate', default='Receiptdate'),
+            label=_('urban_label_receiptDate', default='Receipt date'),
         ),
         optional=True,
     ),
@@ -185,7 +185,7 @@ schema = Schema((
     StringField(
         name='externalDecision',
         widget=SelectionWidget(
-            label=_('urban_label_externalDecision', default='Externaldecision'),
+            label=_('urban_label_externalDecision', default='Advice'),
         ),
         enforceVocabulary=True,
         optional=True,
