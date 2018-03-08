@@ -18,6 +18,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban import utils
+from Products.urban import UrbanMessage as _
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
@@ -31,9 +32,8 @@ schema = Schema((
     StringField(
         name='inquiry_category',
         widget=SelectionWidget(
-            label='Inquiry_category',
-            label_msgid='urban_label_inquiry_category',
-            i18n_domain='urban',
+            label=_('urban_label_inquiry_category',
+                    default='Inquiry_category'),
         ),
         vocabulary='list_inquiry_category',
     ),

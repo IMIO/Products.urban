@@ -32,6 +32,7 @@ from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 optional_fields = [
@@ -55,9 +56,7 @@ schema = Schema((
         name='referenceSPE',
         widget=StringField._properties['widget'](
             size=30,
-            label='Referencespe',
-            label_msgid='urban_label_referenceSPE',
-            i18n_domain='urban',
+            label=_('urban_label_referenceSPE', default='Referencespe'),
         ),
         schemata='urban_description',
     ),
@@ -66,18 +65,14 @@ schema = Schema((
         name='referenceFT',
         widget=StringField._properties['widget'](
             size=30,
-            label='Referenceft',
-            label_msgid='urban_label_referenceFT',
-            i18n_domain='urban',
+            label=_('urban_label_referenceFT', default='Referenceft'),
         ),
         schemata='urban_description',
     ),
     StringField(
         name='authority',
         widget=SelectionWidget(
-            label='Authority',
-            label_msgid='urban_label_authority',
-            i18n_domain='urban',
+            label=_('urban_label_authority', default='Authority'),
         ),
         schemata='urban_description',
         vocabulary=UrbanVocabulary('authority', inUrbanConfig=True),
@@ -87,9 +82,7 @@ schema = Schema((
         name='folderTendency',
         widget=SelectionWidget(
             format='select',
-            label='Foldertendency',
-            label_msgid='urban_label_folderTendency',
-            i18n_domain='urban',
+            label=_('urban_label_folderTendency', default='Foldertendency'),
         ),
         enforceVocabulary=True,
         schemata='urban_description',
@@ -107,9 +100,7 @@ schema = Schema((
             wild_card_search=True,
             restrict_browsing_to_startup_directory=True,
             base_query='rubrics_base_query',
-            label='Rubrics',
-            label_msgid='urban_label_rubrics',
-            i18n_domain='urban',
+            label=_('urban_label_rubrics', default='Rubrics'),
         ),
         allowed_types=('EnvironmentRubricTerm',),
         schemata='urban_environment',
@@ -119,9 +110,7 @@ schema = Schema((
     TextField(
         name='rubricsDetails',
         widget=RichWidget(
-            label='Rubricsdetails',
-            label_msgid='urban_label_rubricsDetails',
-            i18n_domain='urban',
+            label=_('urban_label_rubricsDetails', default='Rubricsdetails'),
         ),
         default_content_type='text/html',
         allowable_content_types=('text/html',),
@@ -132,9 +121,7 @@ schema = Schema((
     ReferenceField(
         name='minimumLegalConditions',
         widget=ReferenceBrowserWidget(
-            label='Minimumlegalconditions',
-            label_msgid='urban_label_minimumLegalConditions',
-            i18n_domain='urban',
+            label=_('urban_label_minimumLegalConditions', default='Minimumlegalconditions'),
         ),
         schemata="urban_environment",
         multiValued=True,
@@ -149,9 +136,7 @@ schema = Schema((
             startup_directory='portal_urban/exploitationconditions',
             restrict_browsing_to_startup_directory=True,
             wild_card_search=True,
-            label='Additionallegalconditions',
-            label_msgid='urban_label_additionalLegalConditions',
-            i18n_domain='urban',
+            label=_('urban_label_additionalLegalConditions', default='Additionallegalconditions'),
         ),
         allowed_types=('UrbanVocabularyTerm',),
         schemata="urban_environment",
@@ -162,9 +147,8 @@ schema = Schema((
         name='locationTechnicalAdviceAfterInquiry',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Environmenttechnicaladviceafterinquiry',
-            label_msgid='urban_label_locationTechnicalAdviceAfterInquiry',
-            i18n_domain='urban',
+            label=_('urban_label_locationTechnicalAdviceAfterInquiry',
+                    default='Environmenttechnicaladviceafterinquiry'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -175,9 +159,7 @@ schema = Schema((
         name='claimsSynthesis',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Claimssynthesis',
-            label_msgid='urban_label_claimsSynthesis',
-            i18n_domain='urban',
+            label=_('urban_label_claimsSynthesis', default='Claimssynthesis'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -188,9 +170,8 @@ schema = Schema((
         name='environmentTechnicalAdviceAfterInquiry',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Environmenttechnicaladviceafterinquiry',
-            label_msgid='urban_label_environmentTechnicalAdviceAfterInquiry',
-            i18n_domain='urban',
+            label=_('urban_label_environmentTechnicalAdviceAfterInquiry',
+                    default='Environmenttechnicaladviceafterinquiry'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -201,9 +182,8 @@ schema = Schema((
         name='commentsOnSPWOpinion',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Commentsonspwopinion',
-            label_msgid='urban_label_commentsOnSPWOpinion',
-            i18n_domain='urban',
+            label=_('urban_label_commentsOnSPWOpinion',
+                    default='Commentsonspwopinion'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -214,9 +194,7 @@ schema = Schema((
         name='conclusions',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Conclusions',
-            label_msgid='urban_label_conclusions',
-            i18n_domain='urban',
+            label=_('urban_label_conclusions', default='Conclusions'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -227,9 +205,8 @@ schema = Schema((
         name='environmentTechnicalRemarks',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Environmenttechnicalremarks',
-            label_msgid='urban_label_environmentTechnicalRemarks',
-            i18n_domain='urban',
+            label=_('urban_label_environmentTechnicalRemarks',
+                    default='Environmenttechnicalremarks'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',

@@ -22,6 +22,7 @@ from Products.urban.utils import setOptionalAttributes
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 optional_fields = ['limitedImpact', 'SDC_divergence']
@@ -33,9 +34,7 @@ schema = Schema((
         name='limitedImpact',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Limitedimpact',
-            label_msgid='urban_label_limitedImpact',
-            i18n_domain='urban',
+            label=_('urban_label_limitedImpact', default='Limitedimpact'),
         ),
         schemata='urban_analysis',
     ),
@@ -43,9 +42,7 @@ schema = Schema((
         name='SDC_divergence',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='SDC_divergence',
-            label_msgid='urban_label_SDC_divergence',
-            i18n_domain='urban',
+            label=_('urban_label_SDC_divergence', default='SDC_divergence'),
         ),
         schemata='urban_analysis',
     ),

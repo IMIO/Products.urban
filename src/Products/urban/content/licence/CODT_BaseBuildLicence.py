@@ -24,6 +24,7 @@ from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
@@ -61,9 +62,7 @@ schema = Schema((
         default=False,
         widget=MasterBooleanWidget(
             slave_fields=slave_fields_prorogation,
-            label='Prorogation',
-            label_msgid='urban_label_prorogation',
-            i18n_domain='urban',
+            label=_('urban_label_prorogation', default='Prorogation'),
         ),
         schemata='urban_analysis',
     ),
@@ -72,9 +71,7 @@ schema = Schema((
         widget=MasterMultiSelectWidget(
             format='checkbox',
             slave_fields=slave_fields_form_composition,
-            label='Form_composition',
-            label_msgid='urban_label_form_composition',
-            i18n_domain='urban',
+            label=_('urban_label_form_composition', default='Form_composition'),
         ),
         schemata='urban_analysis',
         multiValued=1,
@@ -84,9 +81,7 @@ schema = Schema((
         name='SDC',
         widget=MultiSelectionWidget(
             size=15,
-            label='Sdc',
-            label_msgid='urban_label_SDC',
-            i18n_domain='urban',
+            label=_('urban_label_SDC', default='Sdc'),
         ),
         schemata='urban_location',
         multiValued=1,
@@ -97,9 +92,7 @@ schema = Schema((
         name='sdcDetails',
         allowable_content_types=('text/plain',),
         widget=TextAreaWidget(
-            label='Sdcdetails',
-            label_msgid='urban_label_sdcDetails',
-            i18n_domain='urban',
+            label=_('urban_label_sdcDetails', default='Sdcdetails'),
         ),
         default_content_type='text/plain',
         default_method='getDefaultText',
@@ -110,9 +103,7 @@ schema = Schema((
         name='township_guide',
         widget=MultiSelectionWidget(
             size=10,
-            label='Township_guide',
-            label_msgid='urban_label_township_guide',
-            i18n_domain='urban',
+            label=_('urban_label_township_guide', default='Township_guide'),
         ),
         schemata='urban_location',
         multiValued=1,
@@ -123,9 +114,8 @@ schema = Schema((
         name='township_guide_details',
         allowable_content_types=('text/plain',),
         widget=TextAreaWidget(
-            label='Township_guide_details',
-            label_msgid='urban_label_township_guide_details',
-            i18n_domain='urban',
+            label=_('urban_label_township_guide_details',
+                    default='Township_guide_details'),
         ),
         default_content_type='text/plain',
         default_method='getDefaultText',
@@ -135,9 +125,7 @@ schema = Schema((
     LinesField(
         name='regional_guide',
         widget=MultiSelectionWidget(
-            label='Regional_guide',
-            label_msgid='urban_label_regional_guide',
-            i18n_domain='urban',
+            label=_('urban_label_regional_guide', default='Regional_guide'),
         ),
         schemata='urban_location',
         vocabulary=UrbanVocabulary('regional_guide', inUrbanConfig=False, with_empty_value=True),
@@ -147,9 +135,8 @@ schema = Schema((
         name='regional_guide_details',
         allowable_content_types=('text/plain',),
         widget=TextAreaWidget(
-            label='Regional_guide_details',
-            label_msgid='urban_label_regional_guide_details',
-            i18n_domain='urban',
+            label=_('urban_label_regional_guide_details',
+                    default='Regional_guide_details'),
         ),
         default_content_type='text/plain',
         default_method='getDefaultText',
@@ -325,15 +312,15 @@ def finalizeSchema(schema):
     schema.moveField('township_guide_details', after='township_guide')
     schema.moveField('form_composition', before='missingParts')
     schema['missingParts'].widget.format = None
-    schema['parcellings'].widget.label_msgid = 'urban_label_parceloutlicences'
-    schema['isInSubdivision'].widget.label_msgid = 'urban_label_is_in_parceloutlicences'
-    schema['subdivisionDetails'].widget.label_msgid = 'urban_label_parceloutlicences_details'
-    schema['pca'].widget.label_msgid = 'urban_label_sol'
-    schema['pcaZone'].widget.label_msgid = 'urban_label_solZone'
-    schema['isInPCA'].widget.label_msgid = 'urban_label_is_in_sol'
-    schema['pcaDetails'].widget.label_msgid = 'urban_label_sol_details'
-    schema['exemptFDArticle'].widget.label_msgid = 'urban_label_exemptFDArticleCODT'
-    schema['implantation'].widget.label_msgid = 'urban_label_implantationCODT'
+    schema['parcellings'].widget.label = _('urban_label_parceloutlicences')
+    schema['isInSubdivision'].widget.label = _('urban_label_is_in_parceloutlicences')
+    schema['subdivisionDetails'].widget.label = _('urban_label_parceloutlicences_details')
+    schema['pca'].widget.label = _('urban_label_sol')
+    schema['pcaZone'].widget.label = _('urban_label_solZone')
+    schema['isInPCA'].widget.label = _('urban_label_is_in_sol')
+    schema['pcaDetails'].widget.label = _('urban_label_sol_details')
+    schema['exemptFDArticle'].widget.label = _('urban_label_exemptFDArticleCODT')
+    schema['implantation'].widget.label = _('urban_label_implantationCODT')
     schema['pca'].vocabulary = UrbanVocabulary('sols', vocType="PcaTerm", inUrbanConfig=False)
     schema['pcaZone'].vocabulary_factory = 'urban.vocabulary.SOLZones'
     return schema

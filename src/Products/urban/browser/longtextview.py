@@ -60,7 +60,11 @@ class PmSummaryTextView(BrowserView):
             text = field.get(self.context)
             summary_text.append(text)
             widget = field.widget
-            field_name = translate(widget.label_msgid, context=self.request, domain=widget.i18n_domain)
+            field_name = translate(
+                getattr(widget, 'label_msgid', widget.label),
+                context=self.request,
+                domain=widget.i18n_domain,
+            )
             summary.append('<strong>{}:</strong>'.format(field_name.encode('utf-8')))
             summary.append(text)
 

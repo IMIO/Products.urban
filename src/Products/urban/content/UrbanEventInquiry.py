@@ -22,6 +22,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 from OFS.ObjectManager import BeforeDeleteException
@@ -46,9 +47,8 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            label='Investigationstart',
-            label_msgid='urban_label_investigationStart',
-            i18n_domain='urban',
+            label=_('urban_label_investigationStart',
+                    default='Investigationstart'),
         ),
         optional=True,
     ),
@@ -57,9 +57,8 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            label='Investigationend',
-            label_msgid='urban_label_investigationEnd',
-            i18n_domain='urban',
+            label=_('urban_label_investigationEnd',
+                    default='Investigationend'),
         ),
         optional=True,
     ),
@@ -68,9 +67,8 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=True,
             format="%d/%m/%Y %H:%M",
-            label='Explanationstartsdate',
-            label_msgid='urban_label_explanationStartSDate',
-            i18n_domain='urban',
+            label=_('urban_label_explanationStartSDate',
+                    default='Explanationstartsdate'),
         ),
         optional=True,
     ),
@@ -79,9 +77,8 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=True,
             format="%d/%m/%Y %H:%M",
-            label='Explanationendsdate',
-            label_msgid='urban_label_explanationEndSDate',
-            i18n_domain='urban',
+            label=_('urban_label_explanationEndSDate'i,
+                    default='Explanationendsdate'),
         ),
         optional=True,
     ),
@@ -90,9 +87,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=True,
             format="%d/%m/%Y %H:%M",
-            label='Claimsdate',
-            label_msgid='urban_label_claimsDate',
-            i18n_domain='urban',
+            label=_('urban_label_claimsDate', default='Claimsdate'),
         ),
         optional=True,
     ),
@@ -101,9 +96,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=True,
             format="%d/%m/%Y %H:%M",
-            label='Claimendsdate',
-            label_msgid='urban_label_claimEndSDate',
-            i18n_domain='urban',
+            label=_('urban_label_claimEndSDate', default='Claimendsdate'),
         ),
         optional=True,
     ),
@@ -111,9 +104,7 @@ schema = Schema((
         name='claimsText',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Claimstext',
-            label_msgid='urban_label_claimsText',
-            i18n_domain='urban',
+            label=_('urban_label_claimsText', default='Claimstext'),
         ),
         default_method='getDefaultText',
         default_output_type='text/html',
@@ -124,9 +115,8 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            label='Concertationdate',
-            label_msgid='urban_label_concertationDate',
-            i18n_domain='urban',
+            label=_('urban_label_concertationDate',
+                    default='Concertationdate'),
         ),
         optional=True,
     ),
@@ -135,9 +125,7 @@ schema = Schema((
         default=False,
         widget=MasterBooleanWidget(
             slave_fields=suspension_slave_fields,
-            label='Suspension',
-            label_msgid='urban_label_suspension',
-            i18n_domain='urban',
+            label=_('urban_label_suspension', default='Suspension'),
         ),
         optional=True,
     ),
@@ -145,9 +133,8 @@ schema = Schema((
         name='suspension_period',
         widget=SelectionWidget(
             format='select',
-            label='Suspension_period',
-            label_msgid='urban_label_suspension_period',
-            i18n_domain='urban',
+            label=_('urban_label_suspension_period',
+                    default='Suspension_period'),
         ),
         optional=True,
         vocabulary=UrbanVocabulary(
@@ -162,9 +149,8 @@ schema = Schema((
         name='linkedInquiry',
         widget=ReferenceBrowserWidget(
             visible={'edit': 'invisible', 'view': 'invisible'},
-            label='Linkedinquiry',
-            label_msgid='urban_label_linkedInquiry',
-            i18n_domain='urban',
+            label=_('urban_label_linkedInquiry',
+                    default='Linkedinquiry'),
         ),
         allowed_types=('Inquiry', 'UrbanCertificateTwo', 'BuildLicence', 'EnvironmentBase', 'MiscDemand'),
         multiValued=0,
