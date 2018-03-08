@@ -41,7 +41,8 @@ schema = Schema((
         widget=DataGridWidget(
             columns={'number': Column("Number"), 'street': ReferenceColumn("Street", surf_site=False, object_provides=('Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',))},
             helper_js=('datagridwidget.js', 'datagridautocomplete.js'),
-            label=_('urban_label_businessOldLocation', default='Businessoldlocation'),
+            label=_('urban_label_businessOldLocation',
+                    default='Old business location'),
         ),
         allow_oddeven=True,
         columns=('number', 'street'),

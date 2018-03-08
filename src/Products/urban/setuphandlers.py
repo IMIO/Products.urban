@@ -666,7 +666,11 @@ def addGlobalFolders(context):
         templates_id = tool.invokeFactory(
             "Folder",
             id="globaltemplates",
-            title=_("globaltemplates_folder_title", 'urban')
+            title=_(
+                "globaltemplates_folder_title",
+                default='Global templates',
+                domain='urban',
+            ),
         )
         templates = getattr(tool, templates_id)
         templates.setConstrainTypesMode(1)
