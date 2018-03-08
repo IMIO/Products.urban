@@ -2711,7 +2711,7 @@ msgstr "Texte des réclamations"
 #. Default: "Class"
 #: ../content/licence/ExplosivesPossession.py:31
 msgid "urban_label_class"
-msgstr ""
+msgstr "Classe"
 
 #. Default: "College Holidays"
 #: ../UrbanTool.py:130
