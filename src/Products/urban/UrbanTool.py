@@ -28,6 +28,7 @@ from collective.datagridcolumns.DateColumn import DateColumn
 
 from Products.urban.config import *
 from Products.urban.interfaces import IUrbanEventType
+from Products.urban import UrbanMessage as _
 
 from zope.component import getUtility
 from zope.interface import implements
@@ -68,17 +69,13 @@ schema = Schema((
         name='title',
         widget=StringField._properties['widget'](
             visible=False,
-            label='Title',
-            label_msgid='urban_label_title',
-            i18n_domain='urban',
+            label=_('urban_label_title', default='Title'),
         ),
     ),
     StringField(
         name='NISNum',
         widget=StringField._properties['widget'](
-            label='Nisnum',
-            label_msgid='urban_label_NISNum',
-            i18n_domain='urban',
+            label=_('urban_label_NISNum', default='Nisnum'),
         ),
         schemata='admin_settings',
         write_permission=permissions.ManagePortal,
@@ -87,9 +84,7 @@ schema = Schema((
         name='cityName',
         default='MaCommune',
         widget=StringField._properties['widget'](
-            label='Cityname',
-            label_msgid='urban_label_cityName',
-            i18n_domain='urban',
+            label=_('urban_label_cityName', default='Cityname'),
         ),
         schemata='public_settings',
     ),
@@ -97,9 +92,7 @@ schema = Schema((
         name='divisionsRenaming',
         widget=DataGridWidget(
             columns={'division': FixedColumn('Division', visible=False), 'name': FixedColumn('Name'), 'alternative_name': Column('Alternative Name')},
-            label='Divisionsrenaming',
-            label_msgid='urban_label_divisionsRenaming',
-            i18n_domain='urban',
+            label=_('urban_label_divisionsRenaming', default='Divisionsrenaming'),
         ),
         fixed_rows='getDivisionsConfigRows',
         allow_insert=False,
@@ -113,9 +106,7 @@ schema = Schema((
         name='isDecentralized',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Isdecentralized',
-            label_msgid='urban_label_isDecentralized',
-            i18n_domain='urban',
+            label=_('urban_label_isDecentralized', default='Isdecentralized'),
         ),
         schemata='public_settings',
     ),
@@ -123,9 +114,8 @@ schema = Schema((
         name='displayEmptyKeyDates',
         default=True,
         widget=BooleanField._properties['widget'](
-            label='Displayemptykeydates',
-            label_msgid='urban_label_displayEmptyKeyDates',
-            i18n_domain='urban',
+            label=_('urban_label_displayEmptyKeyDates',
+                    default='Displayemptykeydates'),
         ),
         schemata='public_settings',
     ),
@@ -137,9 +127,7 @@ schema = Schema((
                 'from': DateColumn('From', date_format='dd/mm/yy'),
                 'to': DateColumn('To', date_format='dd/mm/yy'),
             },
-            label='College Holidays',
-            label_msgid='urban_label_collegeHolidays',
-            i18n_domain='urban',
+            label=_('urban_label_collegeHolidays', default='College Holidays'),
         ),
         allow_oddeven=True,
         allow_reorder=False,
@@ -149,9 +137,7 @@ schema = Schema((
     StringField(
         name='pylonsHost',
         widget=StringField._properties['widget'](
-            label='Pylonshost',
-            label_msgid='urban_label_pylonsHost',
-            i18n_domain='urban',
+            label=_('urban_label_pylonsHost', default='Pylonshost'),
         ),
         schemata='admin_settings',
         write_permission=permissions.ManagePortal,
@@ -161,9 +147,7 @@ schema = Schema((
         widget=StringField._properties['widget'](
             description="Enter the 4 coordinates of the map, each coordinate separated by a comma.",
             description_msgid="urban_descr_mapExtent",
-            label='Mapextent',
-            label_msgid='urban_label_mapExtent',
-            i18n_domain='urban',
+            label=_('urban_label_mapExtent', default='Mapextent'),
         ),
         schemata='admin_settings',
         write_permission=permissions.ManagePortal,
@@ -173,9 +157,7 @@ schema = Schema((
         widget=StringField._properties['widget'](
             description="Enter the url of the geonode map",
             description_msgid="urban_descr_mapUrl",
-            label='Map Url',
-            label_msgid='urban_label_mapUrl',
-            i18n_domain='urban',
+            label=_('urban_label_mapUrl', default='Map Url'),
         ),
         schemata='admin_settings',
         write_permission=permissions.ManagePortal,
@@ -184,9 +166,8 @@ schema = Schema((
         name='editionOutputFormat',
         default='odt',
         widget=SelectionWidget(
-            label='Editionoutputformat',
-            label_msgid='urban_label_editionOutputFormat',
-            i18n_domain='urban',
+            label=_('urban_label_editionOutputFormat',
+                    default='Editionoutputformat'),
         ),
         enforceVocabulary=True,
         schemata='public_settings',
@@ -196,9 +177,8 @@ schema = Schema((
         name='generateSingletonDocuments',
         default=True,
         widget=BooleanField._properties['widget'](
-            label='Generatesingletondocuments',
-            label_msgid='urban_label_generateSingletonDocuments',
-            i18n_domain='urban',
+            label=_('urban_label_generateSingletonDocuments',
+                    default='Generatesingletondocuments'),
         ),
         schemata='public_settings',
     ),
@@ -206,9 +186,8 @@ schema = Schema((
         name='invertAddressNames',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Invertaddressnames',
-            label_msgid='urban_label_invertAddressNames',
-            i18n_domain='urban',
+            label=_('urban_label_invertAddressNames',
+                    default='Invertaddressnames'),
         ),
         schemata='public_settings',
     ),
@@ -216,9 +195,8 @@ schema = Schema((
         name='usePloneMeetingWSClient',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Useplonemeetingwsclient',
-            label_msgid='urban_label_usePloneMeetingWSClient',
-            i18n_domain='urban',
+            label=_('urban_label_usePloneMeetingWSClient',
+                    default='Useplonemeetingwsclient'),
         ),
         schemata='public_settings',
     ),

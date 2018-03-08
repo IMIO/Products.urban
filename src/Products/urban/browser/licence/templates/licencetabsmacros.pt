@@ -1,12 +1,11 @@
 <metal:field_display define-macro="field_display">
     <tr tal:define="fieldname field/getName;
-                    field_label field/widget/label_msgid;
                     value python: field.getAccessor(context)();
                     nullvalue python: value == '' or value == ();
                     simpletext python: field.type == 'text' and getattr(field, 'default_content_type', '') == 'text/plain'">
 
         <tal:normal_field condition="python: fieldname not in custom">
-            <td valign="top"><b><span tal:content="field_label" i18n:translate=""></span>:</b></td>
+            <td valign="top"><b><span tal:content="field/widget/label_msgid | field/widget/label" i18n:translate=""></span>:</b></td>
             <td width="10px"></td>
             <td valign="top" tal:condition="not: simpletext">
                 <tal:non_null_value condition="not: nullvalue">
@@ -228,7 +227,7 @@
                     <td tal:define="opinionIds python:inquiry.getSolicitOpinionsTo() if fieldname == 'solicitOpinionsTo' else inquiry.getSolicitOpinionsToOptional();
                                     checkPermission python: here.portal_membership.checkPermission"
                         style="padding-top: 1em;" colspan="3">
-                        <label tal:content="field/widget/label_msgid" i18n:translate=""></label>
+                        <label tal:content="field/widget/label_msgid | field/widget/label" i18n:translate=""></label>
                         <table tal:condition="opinionIds" cellspacing="0" cellpadding="0" width="100%" class="listing">
                             <thead>
                                 <tr>
