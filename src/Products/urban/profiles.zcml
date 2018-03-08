@@ -26,7 +26,7 @@
 
   <genericsetup:registerProfile
       name="prod"
-      title="urban"
+      title="urban-prod"
       directory="profiles/prod"
       description="Production extension profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
