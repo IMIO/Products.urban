@@ -2593,3 +2593,6 @@ msgstr ""
 
 msgid "foldertendencies_folder_title"
 msgstr ""
+
+msgid "ExplosivesPossession"
+msgstr ""

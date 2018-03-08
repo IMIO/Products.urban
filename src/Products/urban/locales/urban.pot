@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-03-08 10:16+0000\n"
+"POT-Creation-Date: 2018-03-08 10:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -219,6 +219,9 @@ msgstr ""
 
 #: ../browser/licence/templates/licencetabsmacros.pt:390
 msgid "Events attachments"
+msgstr ""
+
+msgid "ExplosivesPossession"
 msgstr ""
 
 #: ../profiles.zcml:25
