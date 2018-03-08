@@ -45,9 +45,7 @@ schema = Schema((
         name='claimType',
         widget=SelectionWidget(
             format='select',
-            label='ClaimType',
-            label_msgid='urban_label_claimType',
-            i18n_domain='urban',
+            label=_('urban_label_claimType', defautl='ClaimType'),
         ),
         vocabulary='listClaimTypeChoices',
 
@@ -56,26 +54,20 @@ schema = Schema((
         name='hasPetition',
         widget=MasterBooleanWidget(
             slave_fields=slave_fields_signature_number,
-            label='HasPetition',
-            label_msgid='urban_label_hasPetition',
-            i18n_domain='urban',
+            label=_('urban_label_hasPetition', default='HasPetition'),
         ),
     ),
     IntegerField(
         name='signatureNumber',
         widget=IntegerWidget(
-            label='signatureNumber',
-            label_msgid='urban_label_signatureNumber',
-            i18n_domain='urban',
+            label=_('urban_label_signatureNumber', default='signatureNumber'),
         ),
         validators=('isInt', ),
     ),
     BooleanField(
         name='outOfTime',
         widget=BooleanWidget(
-            label='OutOfTime',
-            label_msgid='urban_label_outOfTime',
-            i18n_domain='urban',
+            label=_('urban_label_outOfTime', default='OutOfTime'),
         ),
     ),
     DateTimeField(
@@ -83,18 +75,14 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            label='Claimdate',
-            label_msgid='urban_label_claimDate',
-            i18n_domain='urban',
+            label=_('urban_label_claimDate', default='Claimdate'),
         ),
     ),
     TextField(
         name='claimingText',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Claimingtext',
-            label_msgid='urban_label_claimingText',
-            i18n_domain='urban',
+            label=_('urban_label_claimingText', default='Claimingtext'),
         ),
         default_output_type='text/html',
     ),
