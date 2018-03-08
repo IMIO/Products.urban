@@ -45,7 +45,7 @@ schema = Schema((
         name='claimType',
         widget=SelectionWidget(
             format='select',
-            label=_('urban_label_claimType', defautl='ClaimType'),
+            label=_('urban_label_claimType', default='ClaimType'),
         ),
         vocabulary='listClaimTypeChoices',
 
