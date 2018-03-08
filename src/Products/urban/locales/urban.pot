@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-03-08 11:13+0000\n"
+"POT-Creation-Date: 2018-03-08 11:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,14 @@ msgstr ""
 
 #: ../setuphandlers.py:344
 msgid "%s_urbanconfig_title"
+msgstr ""
+
+#: ../content/licence/ExplosivesPossession.py:139
+msgid "1st class"
+msgstr ""
+
+#: ../content/licence/ExplosivesPossession.py:140
+msgid "2nd class"
 msgstr ""
 
 #: ../browser/licence/templates/licenceview.pt:31

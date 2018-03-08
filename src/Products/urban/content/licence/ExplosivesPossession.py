@@ -136,8 +136,8 @@ class ExplosivesPossession(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMi
         This vocabulary for field class return the list of classes
         """
         vocabulary = (
-            ('first', '1st class'),
-            ('second', '2nd class'),
+            ('first', _('1st class')),
+            ('second', _('2nd class')),
         )
         return DisplayList(vocabulary)
 
