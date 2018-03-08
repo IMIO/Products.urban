@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-03-08 10:05+0000\n"
+"POT-Creation-Date: 2018-03-08 10:16+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1189,7 +1189,7 @@ msgid "error_section"
 msgstr "La section doit être une seule lettre majuscule (ex: C)"
 
 #. Default: "Nombre de signature obligatoire"
-#: ../Claimant.py:132
+#: ../Claimant.py:120
 msgid "error_signatureNumber"
 msgstr "Nombre de signature obligatoire"
 
@@ -2671,7 +2671,7 @@ msgid "urban_label_cityName"
 msgstr "Nom de la commune"
 
 #. Default: "Claimdate"
-#: Claimant.py
+#: ../Claimant.py:78
 msgid "urban_label_claimDate"
 msgstr "Date de réception"
 
@@ -2681,14 +2681,14 @@ msgid "urban_label_claimEndSDate"
 msgstr "Date de fin de la séance de réclamations"
 
 #. Default: "ClaimType"
-#: Claimant.py
+#: ../Claimant.py:48
 msgid "urban_label_claimType"
 msgstr "Type de réclamation"
 
 #. Default: "Claimingtext"
-#: Contact.py
+#: ../Claimant.py:85
 msgid "urban_label_claimingText"
-msgstr ""
+msgstr "Texte de la réclamation"
 
 #. Default: "Claimsdate"
 #: ../content/UrbanEventInquiry.py:90
@@ -3127,7 +3127,6 @@ msgstr "Fonction, Département"
 
 #. Default: "Futureroadcoating"
 #: ../content/licence/GenericLicence.py:261
-#, fuzzy
 msgid "urban_label_futureRoadCoating"
 msgstr "Revêtement futur"
 
@@ -3173,7 +3172,7 @@ msgid "urban_label_hasEnvironmentImpactStudy"
 msgstr "Étude d'incidences sur l'environnement"
 
 #. Default: "HasPetition"
-#: Claimant.py
+#: ../Claimant.py:57
 msgid "urban_label_hasPetition"
 msgstr "Pétition"
 
@@ -3236,7 +3235,6 @@ msgstr "Observations"
 
 #. Default: "Investigationend"
 #: ../content/UrbanEventInquiry.py:60
-#, fuzzy
 msgid "urban_label_investigationEnd"
 msgstr "au"
 
@@ -3646,7 +3644,7 @@ msgid "urban_label_organization"
 msgstr "Organisation"
 
 #. Default: "OutOfTime"
-#: Claimant.py
+#: ../Claimant.py:70
 msgid "urban_label_outOfTime"
 msgstr "Hors délai"
 
@@ -3968,7 +3966,6 @@ msgstr "Champs liés"
 
 #. Default: "Prevu"
 #: ../content/licence/GenericLicence.py:819
-#, fuzzy
 msgid "urban_label_reparcelling"
 msgstr "Périmètre de Remembrement"
 
@@ -4122,7 +4119,6 @@ msgstr ""
 
 #. Default: "sevesosite"
 #: ../content/licence/GenericLicence.py:395
-#, fuzzy
 msgid "urban_label_sevesoSite"
 msgstr "Sites Seveso"
 
@@ -4133,7 +4129,6 @@ msgstr "Réseau d'égouttage"
 
 #. Default: "Sewersdetails"
 #: ../content/licence/GenericLicence.py:291
-#, fuzzy
 msgid "urban_label_sewersDetails"
 msgstr "Détails concernant le réseau d'égouttage"
 
@@ -4145,8 +4140,8 @@ msgstr "Immeuble à sous numéroter"
 msgid "urban_label_showTitle"
 msgstr "Edition du titre"
 
-#. Default: "SignatureNumber"
-#: Claimant.py
+#. Default: "signatureNumber"
+#: ../Claimant.py:63
 msgid "urban_label_signatureNumber"
 msgstr "Nombre de signature"
 
@@ -4295,7 +4290,6 @@ msgstr "Date de fin de suspension"
 
 #. Default: "Suspensionreason"
 #: ../UrbanEvent.py:307
-#, fuzzy
 msgid "urban_label_suspensionReason"
 msgstr "Raison de la suspension"
 

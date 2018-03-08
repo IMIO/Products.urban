@@ -1447,36 +1447,6 @@ msgstr ""
 msgid "urban_label_city"
 msgstr ""
 
-#. Default: "Claimdate"
-#: Claimant.py
-msgid "urban_label_claimDate"
-msgstr ""
-
-#. Default: "OutOfTime"
-#: Claimant.py
-msgid "urban_label_outOfTime"
-msgstr ""
-
-#. Default: "ClaimType"
-#: Claimant.py
-msgid "urban_label_claimType"
-msgstr ""
-
-#. Default: "HasPetition"
-#: Claimant.py
-msgid "urban_label_hasPetition"
-msgstr ""
-
-#. Default: "SignatureNumber"
-#: Claimant.py
-msgid "urban_label_signatureNumber"
-msgstr ""
-
-#. Default: "Claimingtext"
-#: Contact.py
-msgid "urban_label_claimingText"
-msgstr ""
-
 msgid "urban_label_collegeReportDecisionDate"
 msgstr ""
 

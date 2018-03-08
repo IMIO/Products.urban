@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-03-08 10:05+0000\n"
+"POT-Creation-Date: 2018-03-08 10:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1166,7 +1166,7 @@ msgid "error_section"
 msgstr ""
 
 #. Default: "Nombre de signature obligatoire"
-#: ../Claimant.py:132
+#: ../Claimant.py:120
 msgid "error_signatureNumber"
 msgstr ""
 
@@ -2637,7 +2637,7 @@ msgid "urban_label_cityName"
 msgstr ""
 
 #. Default: "Claimdate"
-#: Claimant.py
+#: ../Claimant.py:78
 msgid "urban_label_claimDate"
 msgstr ""
 
@@ -2647,12 +2647,12 @@ msgid "urban_label_claimEndSDate"
 msgstr ""
 
 #. Default: "ClaimType"
-#: Claimant.py
+#: ../Claimant.py:48
 msgid "urban_label_claimType"
 msgstr ""
 
 #. Default: "Claimingtext"
-#: Contact.py
+#: ../Claimant.py:85
 msgid "urban_label_claimingText"
 msgstr ""
 
@@ -3136,7 +3136,7 @@ msgid "urban_label_hasEnvironmentImpactStudy"
 msgstr ""
 
 #. Default: "HasPetition"
-#: Claimant.py
+#: ../Claimant.py:57
 msgid "urban_label_hasPetition"
 msgstr ""
 
@@ -3608,7 +3608,7 @@ msgid "urban_label_organization"
 msgstr ""
 
 #. Default: "OutOfTime"
-#: Claimant.py
+#: ../Claimant.py:70
 msgid "urban_label_outOfTime"
 msgstr ""
 
@@ -4104,8 +4104,8 @@ msgstr ""
 msgid "urban_label_showTitle"
 msgstr ""
 
-#. Default: "SignatureNumber"
-#: Claimant.py
+#. Default: "signatureNumber"
+#: ../Claimant.py:63
 msgid "urban_label_signatureNumber"
 msgstr ""
 
