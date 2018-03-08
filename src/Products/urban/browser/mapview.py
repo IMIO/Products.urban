@@ -4,6 +4,7 @@ from Acquisition import aq_inner, aq_base
 
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five import BrowserView
+from Products.urban.fingerpointing import map_logger
 from Products.urban.interfaces import IInquiry
 from Products.urban.browser.table.urbantable import ParcelsTable
 
@@ -25,6 +26,11 @@ class MapView(BrowserView):
             plone_utils.addPortalMessage(_('warning_add_a_parcel'), type="warning")
         if not self.context.getApplicants():
             plone_utils.addPortalMessage(_('warning_add_an_applicant'), type="warning")
+
+    def __call__(self, **kwargs):
+        map_logger.log_map_access(self.context, self.request)
+        map_call = super(MapView, self).__call__(**kwargs)
+        return map_call
 
     def isUsingTabbing(self):
         context = aq_inner(self.context)
