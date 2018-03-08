@@ -184,6 +184,16 @@ schema = Schema((
         schemata='public_settings',
     ),
     BooleanField(
+        name='logMapRequests',
+        default=True,
+        widget=BooleanField._properties['widget'](
+            label='Logmaprequest',
+            label_msgid='urban_label_logMapRequests',
+            i18n_domain='urban',
+        ),
+        schemata='admin_settings',
+    ),
+    BooleanField(
         name='usePloneMeetingWSClient',
         default=False,
         widget=BooleanField._properties['widget'](
