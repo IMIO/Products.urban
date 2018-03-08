@@ -115,6 +115,13 @@ class CoringParcellingsBoolean(CoringParcellings):
     valuetype = 'boolean'
 
 
+class CoringReparcellings(CoringUtility):
+    fieldname = 'reparcelling'
+    vocabulary_name = 'urban.vocabulary.Reparcelling'
+    valuetype = 'list'
+    coring_attribute = u'ID_PERIM'
+
+
 class CoringNoteworthyTrees(CoringUtility):
     fieldname = 'noteworthyTrees'
     vocabulary_name = 'urban.vocabulary.NoteworthyTrees'
@@ -126,6 +133,7 @@ MATCH_CORING = {
     2: CoringNatura2000,
     7: (CoringSOL, CoringSOLBoolean),
     8: (CoringParcellings, CoringParcellingsBoolean),
+    9: CoringReparcellings,
     12: CoringProtectedBuilding,
     16: CoringProtectedBuilding,
     18: CoringProtectedBuilding,
@@ -183,7 +191,8 @@ class ParcelCoringView(BrowserView):
             if self._compare_values(new_value, current_value):
                 fields_to_update.append({
                     'field': key,
-                    'label': context_field.widget.label_msgid,
+                    'label': getattr(context_field.widget, 'label_msgid',
+                                     context_field.widget.label),
                     'new_value_display': ', '.join(display_values),
                     'new_value': json.dumps(new_value),
                 })
