@@ -7,6 +7,7 @@
                 <metal:applicants_and_corporations_macro use-macro="here/@@licencemacros/urbanApplicantsAndCorporationsMacro" />
             </metal:applicants>
 
+
             <metal:representatives fill-slot="representatives">
                 <metal:representatives_macro use-macro="here/@@licencemacros/urbanGeometriciansMacro" />
                 <metal:representatives_macro use-macro="here/@@licencemacros/urbanArchitectsMacro" />
