@@ -95,3 +95,5 @@ def notifyLicence(urban_event, event):
     if not urban_event.checkCreationFlag():
         licence = urban_event.aq_parent
         notify(ObjectModifiedEvent(licence))
+
+
