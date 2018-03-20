@@ -33,6 +33,7 @@ from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from datetime import date
 from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.widget.historizereferencewidget import HistorizeReferenceBrowserWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
@@ -59,7 +60,7 @@ schema = Schema((
 
     ReferenceField(
         name='rubrics',
-        widget=ReferenceBrowserWidget(
+        widget=HistorizeReferenceBrowserWidget(
             allow_search=True,
             allow_browse=True,
             force_close_on_insert=True,
