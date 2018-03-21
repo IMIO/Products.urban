@@ -79,6 +79,8 @@ from validators.validator import isValidPuissanceValidator
 validation.register(isValidPuissanceValidator('isValidPuissance'))
 from validators.validator import isNotDuplicatedReferenceValidator
 validation.register(isNotDuplicatedReferenceValidator('isNotDuplicatedReference'))
+from validators.validator import isReferenceValidator
+validation.register(isReferenceValidator('isReference'))
 ##/code-section custom-init-head
 
 import Products
