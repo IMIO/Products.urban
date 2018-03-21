@@ -216,6 +216,9 @@
 <type type_id="WorkLocation">
   <bound-workflow workflow_id="" />
 </type>
+<type type_id="ExplosivesPossession">
+  <bound-workflow workflow_id="urban_licence_workflow" />
+</type>
 <!-- ##/code-section workflowbindings -->
  </bindings>
 </object>
