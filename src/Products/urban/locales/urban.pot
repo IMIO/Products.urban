@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-03-08 11:26+0000\n"
+"POT-Creation-Date: 2018-03-21 15:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,11 +23,11 @@ msgstr ""
 msgid "%s_urbanconfig_title"
 msgstr ""
 
-#: ../content/licence/ExplosivesPossession.py:139
+#: ../content/licence/ExplosivesPossession.py:151
 msgid "1st class"
 msgstr ""
 
-#: ../content/licence/ExplosivesPossession.py:140
+#: ../content/licence/ExplosivesPossession.py:152
 msgid "2nd class"
 msgstr ""
 
@@ -2608,7 +2608,7 @@ msgstr ""
 
 #. Default: "Old business location"
 #: ../browser/licence/templates/worklocation_macro.pt:21
-#: ../content/licence/ExplosivesPossession.py:44
+#: ../content/licence/ExplosivesPossession.py:56
 msgid "urban_label_businessOldLocation"
 msgstr ""
 
@@ -2683,7 +2683,7 @@ msgid "urban_label_claimsText"
 msgstr ""
 
 #. Default: "Class"
-#: ../content/licence/ExplosivesPossession.py:31
+#: ../content/licence/ExplosivesPossession.py:33
 msgid "urban_label_class"
 msgstr ""
 
@@ -3692,6 +3692,11 @@ msgstr ""
 #. Default: "Pcazone"
 #: ../content/licence/GenericLicence.py:559
 msgid "urban_label_pcaZone"
+msgstr ""
+
+#. Default: "PE Reference"
+#: ../content/licence/ExplosivesPossession.py:43
+msgid "urban_label_pe_reference"
 msgstr ""
 
 #. Default: "Pebdetails"
