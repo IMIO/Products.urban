@@ -179,3 +179,21 @@ class isValidPuissanceValidator:
         if value == '' or (len(value) < 3 and value.isdigit()):
             return 1
         return translate(_('error_puissance', default=u"Puissance should be a number < 100"))
+
+
+class isReferenceValidator(object):
+    """
+    Check that the reference is used by a licence
+    """
+    implements(IValidator)
+
+    def __init__(self, name):
+        self.name = name
+
+    def __call__(self, value, *args, **kwargs):
+        catalog = api.portal.get_tool('portal_catalog')
+        if not value:
+            return 1
+        if len(catalog(getReference=value)) > 0:
+            return 1
+        return translate(_('error_reference', default=u"The reference does not exist"))

@@ -7,6 +7,7 @@ from Products.Archetypes.atapi import DisplayList
 from Products.Archetypes.atapi import Schema
 from Products.Archetypes.atapi import SelectionWidget
 from Products.Archetypes.atapi import StringField
+from Products.Archetypes.atapi import StringWidget
 from Products.Archetypes.atapi import registerType
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.DataGridField import DataGridField
@@ -22,6 +23,7 @@ from Products.urban.config import PROJECTNAME
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.Inquiry import Inquiry
 from Products.urban.utils import setSchemataForInquiry
+from Products.urban.widget.urbanreferencewidget import UrbanReferenceWidget
 
 
 schema = Schema((
@@ -34,6 +36,16 @@ schema = Schema((
         required=True,
         schemata='urban_description',
         default_method='getDefaultValue',
+    ),
+    StringField(
+        name='pe_reference',
+        widget=UrbanReferenceWidget(
+            label=_('urban_label_pe_reference', default='PE Reference'),
+        ),
+        required=False,
+        schemata='urban_description',
+        default_method='getDefaultText',
+        validators=('isReference', ),
     ),
     DataGridField(
         name='businessOldLocation',
