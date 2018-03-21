@@ -3733,7 +3733,7 @@ msgstr "Zone de pca"
 #. Default: "PE Reference"
 #: ../content/licence/ExplosivesPossession.py:43
 msgid "urban_label_pe_reference"
-msgstr ""
+msgstr "Référence du permis d'environnement"
 
 #. Default: "Pebdetails"
 #: BuildLicence.py
