@@ -116,10 +116,14 @@ class CoringParcellingsBoolean(CoringParcellings):
 
 
 class CoringReparcellings(CoringUtility):
-    fieldname = 'reparcelling'
+    fieldname = 'reparcellingDetails'
     vocabulary_name = 'urban.vocabulary.Reparcelling'
-    valuetype = 'list'
-    coring_attribute = u'ID_PERIM'
+    valuetype = 'str'
+    coring_attribute = u'CODECARTO'
+
+    def _to_str(self, values):
+        terms = self._get_terms(values)
+        return [u', '.join([t.title for t in terms])]
 
 
 class CoringNoteworthyTrees(CoringUtility):
@@ -133,12 +137,12 @@ MATCH_CORING = {
     2: CoringNatura2000,
     7: (CoringSOL, CoringSOLBoolean),
     8: (CoringParcellings, CoringParcellingsBoolean),
-    9: CoringReparcellings,
     12: CoringProtectedBuilding,
     16: CoringProtectedBuilding,
     18: CoringProtectedBuilding,
     14: CoringNoteworthyTrees,
     15: CoringNoteworthyTrees,
+    30: CoringReparcellings,
 }
 
 

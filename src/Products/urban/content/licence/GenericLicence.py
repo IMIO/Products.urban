@@ -820,7 +820,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=1,
-        vocabulary_factory='urban.vocabulary.Reparcelling',
+        vocabulary=UrbanVocabulary('reparcelling', inUrbanConfig=False),
         default_method='getDefaultValue',
     ),
     TextField(
