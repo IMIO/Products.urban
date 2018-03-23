@@ -46,12 +46,12 @@ slave_fields_natura2000 = (
     {
         'name': 'natura2000Details',
         'action': 'show',
-        'hide_values': (True, ),
+        'hide_values': (True,),
     },
     {
         'name': 'natura2000location',
         'action': 'show',
-        'hide_values': (True, ),
+        'hide_values': (True,),
     },
 )
 ##/code-section module-header
@@ -67,13 +67,13 @@ schema = Schema((
             startup_directory='portal_urban/rubrics',
             show_indexes=False,
             wild_card_search=True,
-            restrict_browsing_to_startup_directory= True,
+            restrict_browsing_to_startup_directory=True,
             base_query='rubrics_base_query',
             label='Rubrics',
             label_msgid='urban_label_rubrics',
             i18n_domain='urban',
         ),
-        allowed_types= ('EnvironmentRubricTerm',),
+        allowed_types=('EnvironmentRubricTerm',),
         schemata='urban_description',
         multiValued=True,
         relationship="rubric",
@@ -91,7 +91,7 @@ schema = Schema((
     ),
     ReferenceField(
         name='additionalLegalConditions',
-        widget=ReferenceBrowserWidget(
+        widget=HistorizeReferenceBrowserWidget(
             allow_browse=True,
             allow_search=True,
             default_search_index='Title',
@@ -102,7 +102,7 @@ schema = Schema((
             label_msgid='urban_label_additionalLegalConditions',
             i18n_domain='urban',
         ),
-        allowed_types= ('UrbanVocabularyTerm',),
+        allowed_types=('UrbanVocabularyTerm',),
         schemata="urban_description",
         multiValued=True,
         relationship='additionalconditions',
@@ -124,7 +124,8 @@ schema = Schema((
         name='businessOldLocation',
         schemata="urban_description",
         widget=DataGridWidget(
-            columns={'number' : Column("Number"), 'street' : ReferenceColumn("Street", surf_site=False, object_provides=('Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',))},
+            columns={'number': Column("Number"), 'street': ReferenceColumn("Street", surf_site=False, object_provides=(
+                'Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',))},
             helper_js=('datagridwidget.js', 'datagridautocomplete.js'),
             label='Businessoldlocation',
             label_msgid='urban_label_businessOldLocation',
@@ -217,9 +218,9 @@ setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 EnvironmentBase_schema = BaseFolderSchema.copy() + \
-    getattr(GenericLicence, 'schema', Schema(())).copy() + \
-    getattr(Inquiry, 'schema', Schema(())).copy() + \
-    schema.copy()
+                         getattr(GenericLicence, 'schema', Schema(())).copy() + \
+                         getattr(Inquiry, 'schema', Schema(())).copy() + \
+                         schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 EnvironmentBase_schema['title'].required = False
@@ -227,12 +228,14 @@ EnvironmentBase_schema['title'].widget.visible = False
 setSchemataForInquiry(EnvironmentBase_schema)
 # hide Inquiry fields but 'solicitOpinionsTo'
 for field in EnvironmentBase_schema.filterFields(isMetadata=False):
-    if field.schemata == 'urban_investigation_and_advices' and field.getName() not in ['solicitOpinionsTo', 'solicitOpinionsToOptional']:
+    if field.schemata == 'urban_investigation_and_advices' and field.getName() not in ['solicitOpinionsTo',
+                                                                                       'solicitOpinionsToOptional']:
         field.widget.visible = False
 
 # change translation of some fields
 EnvironmentBase_schema['referenceDGATLP'].widget.label_msgid = 'urban_label_referenceDGO3'
 EnvironmentBase_schema['workLocations'].widget.label_msgid = 'urban_label_situation'
+
 
 ##/code-section after-schema
 
@@ -248,7 +251,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     schema = EnvironmentBase_schema
 
     ##code-section class-header #fill in your manual code here
-    schemata_order = ['urban_description', 'urban_road', 'urban_location',\
+    schemata_order = ['urban_description', 'urban_road', 'urban_location', \
                       'urban_investigation_and_advices']
     ##/code-section class-header
 
@@ -257,6 +260,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     # Manually created methods
 
     security.declarePublic('listNatura2000Locations')
+
     def listNatura2000Locations(self):
         """
           This vocabulary for field location returns a list of
@@ -288,6 +292,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         return self.getLastEvent(interfaces.ILicenceExpirationEvent)
 
     security.declarePublic('getAdditionalLayers')
+
     def getAdditionalLayers(self):
         """
           Return a list of additional layers that will be used
@@ -304,12 +309,14 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         return config_path
 
     security.declarePrivate('_getConditions')
+
     def _getConditions(self, restrict=['CI/CS', 'CI', 'CS']):
         all_conditions = self.getMinimumLegalConditions()
         all_conditions.extend(self.getAdditionalLegalConditions())
         return [cond for cond in all_conditions if cond.getExtraValue() in restrict]
 
     security.declarePublic('getIntegralConditions')
+
     def getIntegralConditions(self):
         """
          Return all the integral conditions,
@@ -317,6 +324,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         return self._getConditions(restrict=['CI'])
 
     security.declarePublic('getSectorialConditions')
+
     def getSectorialConditions(self):
         """
          Return all the sectorial conditions,
@@ -324,6 +332,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         return self._getConditions(restrict=['CS'])
 
     security.declarePublic('getIandSConditions')
+
     def getIandSConditions(self):
         """
          Return all the integral & sectorial conditions,
@@ -331,12 +340,14 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         return self._getConditions(restrict=['CI/CS'])
 
     security.declarePublic('getLicenceSEnforceableDate')
+
     def getLicenceSEnforceableDate(self, displayDay, periodForAppeal):
         return workday(date(displayDay.year(), displayDay.month(), displayDay.day()), periodForAppeal)
 
 
-
 registerType(EnvironmentBase, PROJECTNAME)
+
+
 # end of class EnvironmentBase
 
 ##code-section module-footer #fill in your manual code here
@@ -350,6 +361,6 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('description', after='additionalLegalConditions')
     return schema
 
+
 finalizeSchema(EnvironmentBase_schema)
 ##/code-section module-footer
-
