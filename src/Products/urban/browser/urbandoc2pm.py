@@ -19,7 +19,7 @@ class UrbanDoc2PloneMeeting(BrowserView):
             annexes.append(
                 {
                     'title': plone_utils.normalizeString(doc.title),
-                    'filename': plone_utils.normalizeString(doc.getFilename().encode('utf-8')),
+                    'filename': plone_utils.normalizeString(doc.getFilename().decode('utf-8')),
                     'file': base64.b64encode(doc.getFile().data),
                 }
             )
