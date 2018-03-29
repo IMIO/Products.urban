@@ -193,6 +193,16 @@ schema = Schema((
         schemata='urban_description',
         default_output_type='text/html',
     ),
+    IntegerField(
+        name='validityDelay',
+        default=20,
+        widget=IntegerField._properties['widget'](
+            label='Validitydelay',
+            label_msgid='urban_label_validityDelay',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+    ),
     TextField(
         name='roadTechnicalAdvice',
         allowable_content_types=('text/html',),
