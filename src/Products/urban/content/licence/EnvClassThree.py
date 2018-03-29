@@ -40,19 +40,6 @@ optional_fields =['inadmissibilityReasons']
 
 schema = Schema((
 
-    TextField(
-        name='businessDescription',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label='Businessdescription',
-            label_msgid='urban_label_businessDescription',
-            i18n_domain='urban',
-        ),
-        default_content_type='text/html',
-        default_method='getDefaultText',
-        schemata='urban_description',
-        default_output_type='text/html',
-    ),
     BooleanField(
         name='hasAdditionalConditions',
         default=False,

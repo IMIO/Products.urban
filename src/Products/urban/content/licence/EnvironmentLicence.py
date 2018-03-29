@@ -25,6 +25,7 @@ from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 from Products.urban.interfaces import IEnvironmentBase
@@ -123,6 +124,64 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary('ftSolicitOpinionsTo', inUrbanConfig=True),
         default_method='getDefaultValue',
+    ),
+    TextField(
+        name='claimsSynthesis',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_claimsSynthesis', default='Claimssynthesis'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_environment',
+        default_output_type='text/html',
+    ),
+    TextField(
+        name='environmentTechnicalAdviceAfterInquiry',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_environmentTechnicalAdviceAfterInquiry',
+                    default='Environmenttechnicaladviceafterinquiry'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_environment',
+        default_output_type='text/html',
+    ),
+    TextField(
+        name='commentsOnSPWOpinion',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_commentsOnSPWOpinion',
+                    default='Commentsonspwopinion'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_environment',
+        default_output_type='text/html',
+    ),
+    TextField(
+        name='conclusions',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_conclusions', default='Conclusions'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_environment',
+        default_output_type='text/html',
+    ),
+    TextField(
+        name='environmentTechnicalRemarks',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_environmentTechnicalRemarks',
+                    default='Environmenttechnicalremarks'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_environment',
+        default_output_type='text/html',
     ),
 
 ),
