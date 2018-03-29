@@ -42,6 +42,8 @@ from zope.i18n import translate
 
 optional_fields = [
     'publicRoadModifications',
+    'referenceSPE', 'referenceFT', 'environmentTechnicalRemarks',
+    'claimsSynthesis', 'conclusions', 'commentsOnSPWOpinion',
 ]
 ##/code-section module-header
 
@@ -98,16 +100,6 @@ schema = Schema((
         widget=BooleanField._properties['widget'](
             label='Isseveso',
             label_msgid='urban_label_isSeveso',
-            i18n_domain='urban',
-        ),
-        schemata='urban_description',
-    ),
-    IntegerField(
-        name='validityDelay',
-        default=20,
-        widget=IntegerField._properties['widget'](
-            label='Validitydelay',
-            label_msgid='urban_label_validityDelay',
             i18n_domain='urban',
         ),
         schemata='urban_description',

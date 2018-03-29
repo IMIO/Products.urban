@@ -128,6 +128,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('description', after='additionalLegalConditions')
     schema.moveField('missingParts', after='inadmissibilityReasons')
     schema.moveField('missingPartsDetails', after='missingParts')
+    schema['validityDelay'].default = 10
     return schema
 
 finalizeSchema(EnvClassThree_schema)
