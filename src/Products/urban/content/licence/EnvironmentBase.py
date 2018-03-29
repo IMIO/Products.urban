@@ -26,6 +26,7 @@ from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 from collective.delaycalculator import workday
@@ -78,6 +79,17 @@ schema = Schema((
         multiValued=True,
         relationship="rubric",
     ),
+    TextField(
+        name='rubricsDetails',
+        widget=RichWidget(
+            label=_('urban_label_rubricsDetails', default='Rubricsdetails'),
+        ),
+        default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_environment',
+        default_method='getDefaultText',
+        default_output_type='text/html',
+    ),
     ReferenceField(
         name='minimumLegalConditions',
         widget=ReferenceBrowserWidget(
@@ -124,8 +136,7 @@ schema = Schema((
         name='businessOldLocation',
         schemata="urban_description",
         widget=DataGridWidget(
-            columns={'number': Column("Number"), 'street': ReferenceColumn("Street", surf_site=False, object_provides=(
-                'Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',))},
+            columns={'number': Column("Number"), 'street': ReferenceColumn("Street", surf_site=False, object_provides=('Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',))},
             helper_js=('datagridwidget.js', 'datagridautocomplete.js'),
             label='Businessoldlocation',
             label_msgid='urban_label_businessOldLocation',
@@ -134,6 +145,19 @@ schema = Schema((
         allow_oddeven=True,
         columns=('number', 'street'),
         validators=('isValidStreetName',),
+    ),
+    TextField(
+        name='businessDescription',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label='Businessdescription',
+            label_msgid='urban_label_businessDescription',
+            i18n_domain='urban',
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_description',
+        default_output_type='text/html',
     ),
     BooleanField(
         name='natura2000',

@@ -338,10 +338,11 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'peb': 'PEB',
         }
         minimum_tabs_config = ['description', 'analysis', 'location', 'road']
-        advice_tabs_config = ['description', 'advices', 'analysis', 'location', 'road']
         inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road']
         buildlicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation', 'peb']
         uniquelicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road', 'habitation', 'peb']
+        env_advice_tabs_config = ['description', 'advices', 'analysis', 'environment', 'location', 'road']
+        env_inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road']
 
         types = {
             'buildlicence': buildlicence_tabs_config,
@@ -356,9 +357,9 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'codt_uniquelicence': uniquelicence_tabs_config,
             'codt_integratedlicence': buildlicence_tabs_config,
             'codt_urbancertificatetwo': buildlicence_tabs_config,
-            'envclassthree': advice_tabs_config,
-            'envclassone': inquiry_tabs_config,
-            'envclasstwo': inquiry_tabs_config,
+            'envclassthree': env_advice_tabs_config,
+            'envclassone': env_inquiry_tabs_config,
+            'envclasstwo': env_inquiry_tabs_config,
             'explosivespossession': ['description', 'inquiry', 'analysis', 'location', 'road'],
         }
         licence_type = self.id
