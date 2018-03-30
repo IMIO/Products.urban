@@ -62,6 +62,13 @@ class EnvClassOne(BaseFolder, EnvironmentLicence, BrowserDefaultMixin):
     def rubrics_base_query(self):
         return {'extraValue': ['0', '1', '2', '3']}
 
+    def getProcedureDelays(self, *values):
+        selection = [v['val'] for v in values if v['selected']]
+        if 'simple' in selection:
+            return '140j'
+        elif 'temporary' in selection:
+            return '40j'
+        return ''
 
 
 registerType(EnvClassOne, PROJECTNAME)
