@@ -35,6 +35,7 @@ from datetime import date
 from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
 optional_fields = [
@@ -54,6 +55,16 @@ slave_fields_natura2000 = (
         'hide_values': (True, ),
     },
 )
+
+slave_fields_procedurechoice = (
+    {
+        'name': 'annoncedDelay',
+        'action': 'value',
+        'vocab_method': 'getProcedureDelays',
+        'control_param': 'values',
+    },
+)
+
 ##/code-section module-header
 
 schema = Schema((
@@ -156,6 +167,44 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_description',
+        default_output_type='text/html',
+    ),
+    StringField(
+        name='procedureChoice',
+        default='ukn',
+        widget=MasterSelectWidget(
+            slave_fields=slave_fields_procedurechoice,
+            label='Procedurechoice',
+            label_msgid='urban_label_procedureChoice',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        validators=('isValidProcedureChoice',),
+        multiValued=1,
+        vocabulary='listProcedureChoices',
+    ),
+    StringField(
+        name='annoncedDelay',
+        widget=SelectionWidget(
+            label='Annonceddelay',
+            label_msgid='urban_label_annoncedDelay',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='annoncedDelayDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label='Annonceddelaydetails',
+            label_msgid='urban_label_annoncedDelayDetails',
+            i18n_domain='urban',
+        ),
+        schemata='urban_analysis',
+        default_method='getDefaultText',
+        default_content_type='text/plain',
         default_output_type='text/html',
     ),
     BooleanField(
@@ -305,6 +354,16 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     def rubrics_base_query(self):
         """ to be overriden """
         return {}
+
+    def listProcedureChoices(self):
+        """
+        To implements in subclasses
+        """
+
+    def getProcedureDelays(self, *values):
+        """
+        To implements in subclasses
+        """
 
     def getLastDeposit(self):
         return self.getLastEvent(interfaces.IDepositEvent)

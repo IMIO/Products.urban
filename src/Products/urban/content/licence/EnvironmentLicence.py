@@ -210,6 +210,19 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
 
     # Manually created methods
 
+    def listProcedureChoices(self):
+        vocabulary = (
+            ('ukn', 'Non determiné'),
+            ('simple', 'Simple'),
+            ('temporary', 'Temporaire'),
+        )
+        return DisplayList(vocabulary)
+
+    def getProcedureDelays(self, *values):
+        """
+        To implements in subclasses
+        """
+
     security.declarePublic('getApplicants')
     def getApplicants(self):
         """
