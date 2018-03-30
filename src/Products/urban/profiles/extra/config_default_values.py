@@ -585,12 +585,24 @@ default_values = {
             {'id': "octroi", 'title': u"Octroi", 'extraValue': "Recevable"},
             {'id': "refus", 'title': u"Refus", 'extraValue': "Irrecevable"},
         ],
+        'folderdelays': [
+            'UrbanDelay',
+            {'id': "40j", 'title': u"40 jours", 'deadLineDelay': 40, 'alertDelay': 20},
+            {'id': "140j", 'title': u"140 jours", 'deadLineDelay': 140, 'alertDelay': 20},
+            {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
+        ],
     },
     'EnvClassTwo': {
         'decisions': [
             'UrbanVocabularyTerm',
             {'id': "octroi", 'title': u"Octroi", 'extraValue': "Recevable"},
             {'id': "refus", 'title': u"Refus", 'extraValue': "Irrecevable"},
+        ],
+        'folderdelays': [
+            'UrbanDelay',
+            {'id': "40j", 'title': u"40 jours", 'deadLineDelay': 40, 'alertDelay': 20},
+            {'id': "90j", 'title': u"90 jours", 'deadLineDelay': 90, 'alertDelay': 20},
+            {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
         ],
     },
     'EnvClassThree': {
@@ -610,6 +622,10 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "form_demande", 'title': u"Formulaire de demande en 4 exemplaires"},
             {'id': "plan", 'title': u"Plans"},
+        ],
+        'folderdelays': [
+            'UrbanDelay',
+            {'id': "15j", 'title': u"15 jours", 'deadLineDelay': 15, 'alertDelay': 0},
         ],
     },
     'Division': {
