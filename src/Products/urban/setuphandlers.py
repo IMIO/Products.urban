@@ -190,9 +190,9 @@ def recursive_reindex(context):
 
 
 ##code-section FOOT
-def _(msgid, domain):
+def _(msgid, default='', domain='urban'):
     translation_domain = queryUtility(ITranslationDomain, domain)
-    return translation_domain.translate(msgid, target_language='fr', default='')
+    return translation_domain.translate(msgid, target_language='fr', default=default)
 
 
 def extraPostInstall(context):
