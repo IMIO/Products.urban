@@ -26,7 +26,7 @@ Configuration générale
 Mise en place des demandes d'avis
 *********************************
 
-Cette procédure permet de créer de nouvelles demandes d'avis.
+Cette procédure permet de créer de nouvelles demandes d'avis à partir d'un canevas existant, l'événement \*\*\*Demande d'avis CONFIG\*\*\*.
 
 1) Se positionner dans la liste des types d'événement d'une procédure.
 2) Ajouter un élément et choisir "OpinionRequestEventType".
@@ -48,7 +48,7 @@ Cette procédure permet de créer de nouvelles demandes d'avis.
 
 Par défaut, les nouvelles demandes vont utiliser le modèle de base dans \*\*\*Demande d'avis CONFIG\*\*\*, avec les données de contact renseignées dans le champ "Organisation".
 
-Pour utiliser un modèle spécifique à une demande, le rajouter dans la apge de la demande (ajout d'un élément -> UrbanTemplate). Attention, le modèle de base ne sera **plus** utilisé.
+Pour utiliser un modèle spécifique à une demande, le rajouter dans la page de la demande (ajout d'un élément -> UrbanTemplate). Attention, le modèle de base ne sera **plus** utilisé.
 
 ###################
 Sortir la liste 220
