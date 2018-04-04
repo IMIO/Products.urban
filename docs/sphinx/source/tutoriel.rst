@@ -28,21 +28,27 @@ Mise en place des demandes d'avis
 
 Cette procédure permet de créer de nouvelles demandes d'avis.
 
-1) Se positionner dans la liste des types d'événement d'une procédure: paramètres des procédures -> choisir la procédure -> événements -> types d'événements.
+1) Se positionner dans la liste des types d'événement d'une procédure.
 2) Ajouter un élément et choisir "OpinionRequestEventType".
 3) Remplir les champs suivants :
 
-	* Titre
-	* Observation: indiquer les données de contact (organisation, adresse, ville,...), celles-ci seront reprises dans le cadre du destinataire à la génération de la demande d'avis.
-	* Catégorie du type d'événement: sélectionner "Demande d'avis"
-	* Eventportaltype: sélectionner "Evénement lié à une demande d'avis"
-	* Valeur supplémentaire: indiquer un identifiant permettant de retrouver facilement la demande d'avis parmi les autres, par exemple le nom de l'organisation (Fluxys, Service Incendie, etc). Cette valeur sera utilisée dans l'onglet "Avis" d'un procédure: en tapant "Fluxys" l'application proposera alors la demande d'avis pour Fluxys.
-	Puis enregistrer.
-	Une dernière étape est nécessaire: modifier le document	
-4) Enregistrer, puis modifier à nouveau la demande d'avis pour remplir le champ "Condition TAL" par : python: here.mayAddOpinionRequestEvent('*demande-davis-fluxys*'). Modifier la valeur en gras entre apostrophe par la valeur se trouvant à la fin de l'url. Exemple : https://macommune-urban.imio-app.be/portal_urban/codt_buildlicence/urbaneventtypes/*demande-davis-fluxys*
-
+	* Titre.
+	* Observation: les données de contact (nom de l'organisation, rue, ville,...).
+	* Catégorie du type d'événement: sélectionner "Demande d'avis".
+	* Eventportaltype: sélectionner "Evénement lié à une demande d'avis".
+	* Valeur supplémentaire: label permettant de la retrouver facilement, exemple: fluxys pour une demande concernant cette organisation.
 	
+	* (optionnel) Champs activés: sélectionner les champs qui apparaitront à la création de l'événement dans une procédure. Un champ de date d'événement existe par défaut.
 
+4) Enregistrer, et récupérer l'identifiant de l'événement situé à la fin de l'url, exemple : :samp:`macommune-urban.imio-app.be/portal_urban/codt_buildlicence/urbaneventtypes/{demande-davis-fluxys}`
+
+5) Modifier à nouveau la demande, et placer dans le champ "Condition TAL": :samp:`python: here.mayAddOpinionRequestEvent('{demande-davis-fluxys}')` avec l'identifiant de la demande entre les apostrophes.
+
+6) Enregistrer, puis tester sur un dossier de test si besoin. C'est terminé !
+
+Par défaut, les nouvelles demandes vont utiliser le modèle de base dans \*\*\*Demande d'avis CONFIG\*\*\*, avec les données de contact renseignées dans le champ "Organisation".
+
+Pour utiliser un modèle spécifique à une demande, le rajouter dans la apge de la demande (ajout d'un élément -> UrbanTemplate). Attention, le modèle de base ne sera **plus** utilisé.
 
 ###################
 Sortir la liste 220
