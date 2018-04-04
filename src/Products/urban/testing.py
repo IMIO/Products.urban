@@ -161,7 +161,7 @@ URBAN_TEST_ROBOT = UrbanConfigFunctionalLayer(
 
 # override test layers with those defined in specific profiles
 all_layers = [obj for obj in locals().values() if isinstance(obj, (IntegrationTesting, FunctionalTesting))]
-new_layers = run_entry_points('Products.urban.testing.profile', 'layers', all_layers)
+new_layers = run_entry_points('Products.urban.testing.profile', 'layers', all_layers) or {}
 _this_module_ = globals()
 for layer_name, new_layer in new_layers.iteritems():
     _this_module_[layer_name] = new_layer
