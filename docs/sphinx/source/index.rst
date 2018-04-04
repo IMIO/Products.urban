@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Documentation iA.Urban Gestion de l'urbanisme
-=============================================
+Documentation iA.Urban Gestion de l'urbanisme3
+==============================================
 
 Contents:
 
