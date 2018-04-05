@@ -80,6 +80,8 @@ class UrbanEventOpinionRequest(UrbanEvent, BrowserDefaultMixin):
         """
           Returns contained templates (File)
         """
+        if not self.getUrbaneventtypes():
+            return []
         custom_templates = self.getUrbaneventtypes().getTemplates()
         if custom_templates:
             return custom_templates

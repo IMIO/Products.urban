@@ -452,6 +452,8 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         """
           Returns contained templates (File)
         """
+        if not self.getUrbaneventtypes():
+            return []
         return self.getUrbaneventtypes().getTemplates()
 
     security.declarePublic('eventDateLabel')

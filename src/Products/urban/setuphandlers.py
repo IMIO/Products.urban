@@ -549,6 +549,7 @@ def addUrbanGroups(context):
     site.portal_groups.addGroup("urban_editors", title="Urban Editors")
     site.portal_groups.setRolesForGroup('urban_editors', ('UrbanMapReader', ))
     site.portal_groups.addPrincipalToGroup("urban_editors", 'urban_readers')
+    site.portal_groups.addPrincipalToGroup("urban_managers", 'urban_editors')
     #one with environment Readers
     site.portal_groups.addGroup("environment_readers", title="Environment Readers")
     site.portal_groups.setRolesForGroup('environment_readers', ('UrbanMapReader', ))
@@ -556,6 +557,7 @@ def addUrbanGroups(context):
     site.portal_groups.addGroup("environment_editors", title="Environment Editors")
     site.portal_groups.setRolesForGroup('environment_editors', ('UrbanMapReader', ))
     site.portal_groups.addPrincipalToGroup("environment_editors", 'environment_readers')
+    site.portal_groups.addPrincipalToGroup("environment_managers", 'environment_editors')
     #one with map Readers
     site.portal_groups.addGroup("urban_map_readers", title="Urban Map Readers")
     site.portal_groups.setRolesForGroup('urban_map_readers', ('UrbanMapReader', ))
@@ -1013,33 +1015,30 @@ def setupTest(context):
         setFolderAllowedTypes(test_folder, [urban_type])
 
 
-
 def addTestUsers(site):
+    users = [
+        ('urbanmanager', 'urban_managers', True),
+        ('urbanreader', 'urban_readers'),
+        ('urbaneditor', 'urban_editors', True),
+        ('environmentmanager', 'environment_managers', True),
+        ('environmentreader', 'environment_readers'),
+        ('environmenteditor', 'environment_editors', True),
+        ('urbanmapreader', 'urban_map_readers')
+    ]
+    for user_info in users:
+        _addTestUser(site, *user_info)
+
+
+def _addTestUser(site, username, groupname, external_editor=False):
     is_mountpoint = len(site.absolute_url_path().split('/')) > 2
     try:
-        password = 'urbanmanager'
+        password = username
         if is_mountpoint:
             password = generatePassword(8)
-        member = site.portal_registration.addMember(id="urbanmanager", password=password)
-        member.setMemberProperties({'ext_editor': True})
-        password = 'urbanreader'
-        if is_mountpoint:
-            password = generatePassword(8)
-        site.portal_registration.addMember(id="urbanreader", password=password)
-        password = 'urbaneditor'
-        if is_mountpoint:
-            password = generatePassword(8)
-        member = site.portal_registration.addMember(id="urbaneditor", password=password)
-        member.setMemberProperties({'ext_editor': True})
-        password = 'urbanmapreader'
-        if is_mountpoint:
-            password = generatePassword(8)
-        site.portal_registration.addMember(id="urbanmapreader", password=password)
-        #put users in the correct group
-        site.acl_users.source_groups.addPrincipalToGroup("urbanmanager", "urban_managers")
-        site.acl_users.source_groups.addPrincipalToGroup("urbanreader", "urban_readers")
-        site.acl_users.source_groups.addPrincipalToGroup("urbaneditor", "urban_editors")
-        site.acl_users.source_groups.addPrincipalToGroup("urbanmapreader", "urban_map_readers")
+        member = site.portal_registration.addMember(id=username, password=password)
+        if external_editor:
+            member.setMemberProperties({'ext_editor': True})
+        site.acl_users.source_groups.addPrincipalToGroup(username, groupname)
     except:
         #if something wrong happens (one object already exists), we pass...
         pass
