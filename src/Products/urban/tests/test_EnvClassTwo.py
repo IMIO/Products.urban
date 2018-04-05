@@ -22,8 +22,8 @@ class TestEnvClassTwoInstall(BrowserTestCase):
         self.urban = self.portal.urban
         self.portal_urban = self.portal.portal_urban
         self.browser = Browser(self.portal)
-        default_user = self.layer.default_user
-        default_password = self.layer.default_password
+        default_user = self.layer.environment_default_user
+        default_password = self.layer.environment_default_password
         self.browserLogin(default_user, default_password)
 
     def test_envclasstwo_config_folder_exists(self):
@@ -82,8 +82,8 @@ class TestEnvClassTwoInstance(SchemaFieldsTestCase):
         self.urban = self.portal.urban
 
         # create a test EnvClassTwo licence
-        default_user = self.layer.default_user
-        default_password = self.layer.default_password
+        default_user = self.layer.environment_default_user
+        default_password = self.layer.environment_default_password
         login(self.portal, default_user)
         envclasstwo_folder = self.urban.envclasstwos
         testlicence_id = 'test_envclasstwo'
