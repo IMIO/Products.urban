@@ -6,7 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = build
-DEPLOYDEST    = gitlab@sphinx.imio.be:/var/www/html/iaurban
+DEPLOYDEST    = urban@sphinx.imio.be:/var/www/html/iaurban
 
 # User-friendly check for sphinx-build
 ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
