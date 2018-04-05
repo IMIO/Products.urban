@@ -18,7 +18,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban.content.licence.GenericLicence import GenericLicence
-from Products.urban.content.Inquiry import Inquiry
+from Products.urban.content.CODT_UniqueLicenceInquiry import CODT_UniqueLicenceInquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget
@@ -32,7 +32,7 @@ from Products.urban import UrbanMessage as _
 from collective.delaycalculator import workday
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from datetime import date
-from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
+from Products.urban.utils import setOptionalAttributes, setSchemataForCODT_UniqueLicenceInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.widget.historizereferencewidget import HistorizeReferenceBrowserWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
@@ -301,14 +301,14 @@ setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 EnvironmentBase_schema = BaseFolderSchema.copy() + \
-                         getattr(GenericLicence, 'schema', Schema(())).copy() + \
-                         getattr(Inquiry, 'schema', Schema(())).copy() + \
-                         schema.copy()
+    getattr(GenericLicence, 'schema', Schema(())).copy() + \
+    getattr(CODT_UniqueLicenceInquiry, 'schema', Schema(())).copy() + \
+    schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 EnvironmentBase_schema['title'].required = False
 EnvironmentBase_schema['title'].widget.visible = False
-setSchemataForInquiry(EnvironmentBase_schema)
+setSchemataForCODT_UniqueLicenceInquiry(EnvironmentBase_schema)
 # hide Inquiry fields but 'solicitOpinionsTo'
 for field in EnvironmentBase_schema.filterFields(isMetadata=False):
     if field.schemata == 'urban_investigation_and_advices' and field.getName() not in ['solicitOpinionsTo',
@@ -322,7 +322,7 @@ EnvironmentBase_schema['workLocations'].widget.label_msgid = 'urban_label_situat
 
 ##/code-section after-schema
 
-class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
+class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
