@@ -341,8 +341,8 @@ class TestCorporationFields(SchemaFieldsTestCase):
         self.urban = self.portal.urban
         self.portal_urban = self.portal.portal_urban
 
-        default_user = self.layer.default_user
-        default_password = self.layer.default_password
+        default_user = self.layer.environment_default_user
+        default_password = self.layer.environment_default_password
         login(self.portal, default_user)
         envclassone_folder = self.urban.envclassones
         testlicence_id = 'test_envclassone'

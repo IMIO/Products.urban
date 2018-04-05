@@ -145,7 +145,6 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
 
-        # create a test EnvClassOne licence
         default_user = self.layer.default_user
         default_password = self.layer.default_password
         login(self.portal, default_user)

@@ -549,7 +549,6 @@ def addUrbanGroups(context):
     site.portal_groups.addGroup("urban_editors", title="Urban Editors")
     site.portal_groups.setRolesForGroup('urban_editors', ('UrbanMapReader', ))
     site.portal_groups.addPrincipalToGroup("urban_editors", 'urban_readers')
-    site.portal_groups.addPrincipalToGroup("urban_managers", 'urban_editors')
     #one with environment Readers
     site.portal_groups.addGroup("environment_readers", title="Environment Readers")
     site.portal_groups.setRolesForGroup('environment_readers', ('UrbanMapReader', ))
@@ -557,7 +556,6 @@ def addUrbanGroups(context):
     site.portal_groups.addGroup("environment_editors", title="Environment Editors")
     site.portal_groups.setRolesForGroup('environment_editors', ('UrbanMapReader', ))
     site.portal_groups.addPrincipalToGroup("environment_editors", 'environment_readers')
-    site.portal_groups.addPrincipalToGroup("environment_managers", 'environment_editors')
     #one with map Readers
     site.portal_groups.addGroup("urban_map_readers", title="Urban Map Readers")
     site.portal_groups.setRolesForGroup('urban_map_readers', ('UrbanMapReader', ))
@@ -1020,7 +1018,6 @@ def addTestUsers(site):
         ('urbanmanager', 'urban_managers', True),
         ('urbanreader', 'urban_readers'),
         ('urbaneditor', 'urban_editors', True),
-        ('environmentmanager', 'environment_managers', True),
         ('environmentreader', 'environment_readers'),
         ('environmenteditor', 'environment_editors', True),
         ('urbanmapreader', 'urban_map_readers')
