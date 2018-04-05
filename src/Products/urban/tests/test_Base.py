@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import unittest2 as unittest
-from Products.urban.config import URBAN_TYPES
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban import utils
 
@@ -18,16 +17,17 @@ class TestBase(unittest.TestCase):
         portal = self.layer['portal']
         self.portal = portal
         self.portal_urban = portal.portal_urban
-        login(self.portal, self.layer.default_user)
+        default_user = self.layer.default_user
+        login(self.portal, default_user)
 
         # create a test EnvClassOne licence
         self.licences = []
-        for content_type in URBAN_TYPES:
-            licence_folder = utils.getLicenceFolder(content_type)
-            testlicence_id = 'test_{}'.format(content_type.lower())
-            licence_folder.invokeFactory(content_type, id=testlicence_id)
-            test_licence = getattr(licence_folder, testlicence_id)
-            self.licences.append(test_licence)
+        content_type = 'BuildLicence'
+        licence_folder = utils.getLicenceFolder(content_type)
+        testlicence_id = 'test_{}'.format(content_type.lower())
+        licence_folder.invokeFactory(content_type, id=testlicence_id)
+        test_licence = getattr(licence_folder, testlicence_id)
+        self.licences.append(test_licence)
         transaction.commit()
 
     def tearDown(self):

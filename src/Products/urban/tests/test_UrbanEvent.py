@@ -163,20 +163,16 @@ class TestUrbanEventInquiryView(BrowserTestCase):
 
     def test_EnvClassOne_UrbanEventInquiry_view_display(self):
         """ Test UrbanEventInquiry view is not broken """
-        self.default_user = 'environmenteditor'
-        self.default_password = 'environmenteditor'
-        login(self.portal, self.default_user)
+        login(self.portal, self.layer.environment_default_user)
         self.browser = Browser(self.portal)
-        self.browserLogin(self.default_user, self.default_password)
+        self.browserLogin(self.layer.environment_default_user, self.layer.environment_default_password)
         envclassone, inquiry = self._create_test_licence_with_inquiry('EnvClassOne')
         self.browser.open(inquiry.absolute_url())
 
     def test_200m_radius_when_EnvironmentImpactStudy(self):
-        self.default_user = 'environmenteditor'
-        self.default_password = 'environmenteditor'
-        login(self.portal, self.default_user)
+        login(self.portal, self.layer.environment_default_user)
         self.browser = Browser(self.portal)
-        self.browserLogin(self.default_user, self.default_password)
+        self.browserLogin(self.layer.environment_default_user, self.layer.environment_default_password)
 
         envclassone, inquiry = self._create_test_licence_with_inquiry('EnvClassOne')
         envclassone.setHasEnvironmentImpactStudy(False)
