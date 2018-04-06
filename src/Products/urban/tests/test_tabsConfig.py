@@ -25,9 +25,11 @@ class TestTabsConfigView(BrowserTestCase):
         quickInstallProduct(self.portal, 'Products.MasterSelectWidget')
         quickInstallProduct(self.portal, 'collective.datagridcolumns')
 
-        login(self.portal, 'urbanmanager')
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        login(self.portal, default_user)
         self.browser = Browser(self.portal)
-        self.browserLogin('urbanmanager')
+        self.browserLogin(default_user, default_password)
         self.browser.handleErrors = False
 
     def testLicenceViewsDisplay(self):
