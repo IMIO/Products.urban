@@ -425,13 +425,15 @@ class TestCorporation(BrowserTestCase):
         self.portal = self.layer['portal']
         self.urban = self.portal.urban
         self.portal_urban = self.portal.portal_urban
+        default_user = self.layer.environment_default_user
+        default_password = self.layer.environment_default_password
 
-        login(self.portal, 'urbaneditor')
+        login(self.portal, 'environmenteditor')
         self.licence = self.portal.urban.envclassones.objectValues()[-1]
         self.corporation = self.licence.getCorporations()[0]
 
         self.browser = Browser(self.portal)
-        self.browserLogin('urbaneditor')
+        self.browserLogin(default_user, default_password)
 
     def test_address_display_when_sameAddressAsWorks_is_checked(self):
         self.corporation.setStreet('Rue kikoulo')
