@@ -356,9 +356,12 @@ class EnvironmentBase(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         return {}
 
     def listProcedureChoices(self):
-        """
-        To implements in subclasses
-        """
+        vocabulary = (
+            ('ukn', 'Non determiné'),
+            ('simple', 'Simple'),
+            ('temporary', 'Temporaire'),
+        )
+        return DisplayList(vocabulary)
 
     def getProcedureDelays(self, *values):
         """
