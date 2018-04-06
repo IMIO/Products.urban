@@ -360,9 +360,12 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
         return {}
 
     def listProcedureChoices(self):
-        """
-        To implements in subclasses
-        """
+        vocabulary = (
+            ('ukn', 'Non determiné'),
+            ('simple', 'Simple'),
+            ('temporary', 'Temporaire'),
+        )
+        return DisplayList(vocabulary)
 
     def getProcedureDelays(self, *values):
         """

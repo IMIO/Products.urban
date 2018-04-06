@@ -21,6 +21,7 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
 
         default_user = self.layer.default_user
         default_password = self.layer.default_password
+        self.portal.acl_users.source_groups.addPrincipalToGroup(default_user, 'environment_editors')
         login(self.portal, default_user)
         self.licences = []
         for content_type in URBAN_TYPES:
@@ -38,6 +39,8 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
         with api.env.adopt_roles(['Manager']):
             for licence in self.licences:
                 api.content.delete(licence)
+        default_user = self.layer.default_user
+        self.portal.acl_users.source_groups.removePrincipalFromGroup(default_user, 'environment_editors')
         transaction.commit()
 
     def test_has_attribute_licenceSubject(self):
