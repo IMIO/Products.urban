@@ -106,7 +106,7 @@ class TestEnvClassTwoInstance(SchemaFieldsTestCase):
 
     def test_envclasstwo_view_is_registered(self):
         msg = 'EnvClassTwo view is not registered'
-        login(self.portal, 'urbaneditor')
+        login(self.portal, 'environmenteditor')
         try:
             self.licence.restrictedTraverse('envclasstwoview')
         except AttributeError:
