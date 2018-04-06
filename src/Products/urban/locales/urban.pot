@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-03-21 15:01+0000\n"
+"POT-Creation-Date: 2018-04-06 12:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -999,11 +999,11 @@ msgstr ""
 msgid "date_day_01"
 msgstr ""
 
-#: ../services/base.py:127
+#: ../services/base.py:129
 msgid "db_connection_error"
 msgstr ""
 
-#: ../services/base.py:122
+#: ../services/base.py:124
 msgid "db_connection_successfull"
 msgstr ""
 
@@ -2137,7 +2137,7 @@ msgstr ""
 
 #: ../profiles.zcml:25
 #: ../profiles/default/actions.xml
-#: ../setuphandlers.py:272
+#: ../setuphandlers.py:193
 msgid "urban"
 msgstr ""
 
@@ -2415,7 +2415,7 @@ msgid "urban_label_activatedFields"
 msgstr ""
 
 #. Default: "Additionalconditions"
-#: EnvironmentBase.py
+#: ../content/licence/EnvClassThree.py:76
 msgid "urban_label_additionalConditions"
 msgstr ""
 
@@ -2674,6 +2674,7 @@ msgstr ""
 
 #. Default: "Claimssynthesis"
 #: ../content/licence/CODT_UniqueLicence.py:162
+#: ../content/licence/EnvironmentLicence.py:124
 msgid "urban_label_claimsSynthesis"
 msgstr ""
 
@@ -2712,9 +2713,11 @@ msgstr ""
 
 #. Default: "Commentsonspwopinion"
 #: ../content/licence/CODT_UniqueLicence.py:185
+#: ../content/licence/EnvironmentLicence.py:147
 msgid "urban_label_commentsOnSPWOpinion"
 msgstr ""
 
+#: ../content/licence/EnvironmentLicence.py:191
 msgid "urban_label_complement"
 msgstr ""
 
@@ -2743,6 +2746,7 @@ msgstr ""
 
 #. Default: "Conclusions"
 #: ../content/licence/CODT_UniqueLicence.py:197
+#: ../content/licence/EnvironmentLicence.py:159
 msgid "urban_label_conclusions"
 msgstr ""
 
@@ -2841,6 +2845,7 @@ msgstr ""
 
 #. Default: "Deposittype"
 #: ../UrbanEvent.py:59
+#: ../content/licence/EnvClassThree.py:48
 msgid "urban_label_depositType"
 msgstr ""
 
@@ -2931,11 +2936,13 @@ msgstr ""
 
 #. Default: "Environmenttechnicaladviceafterinquiry"
 #: ../content/licence/CODT_UniqueLicence.py:173
+#: ../content/licence/EnvironmentLicence.py:135
 msgid "urban_label_environmentTechnicalAdviceAfterInquiry"
 msgstr ""
 
 #. Default: "Environmenttechnicalremarks"
 #: ../content/licence/CODT_UniqueLicence.py:208
+#: ../content/licence/EnvironmentLicence.py:170
 msgid "urban_label_environmentTechnicalRemarks"
 msgstr ""
 
@@ -3137,7 +3144,7 @@ msgid "urban_label_habitationsBeforeLicence"
 msgstr ""
 
 #. Default: "Hasadditionalconditions"
-#: EnvironmentBase.py
+#: ../content/licence/EnvClassThree.py:67
 msgid "urban_label_hasAdditionalConditions"
 msgstr ""
 
@@ -3166,7 +3173,7 @@ msgid "urban_label_implantationCODT"
 msgstr ""
 
 #. Default: "Inadmissibilityreasons"
-#: EnvironmentBase.py
+#: ../content/licence/EnvClassThree.py:85
 msgid "urban_label_inadmissibilityReasons"
 msgstr ""
 
@@ -3903,6 +3910,7 @@ msgstr ""
 msgid "urban_label_referenceDGATLP"
 msgstr ""
 
+#: ../content/licence/EnvironmentBase.py:318
 msgid "urban_label_referenceDGO3"
 msgstr ""
 
@@ -4071,6 +4079,7 @@ msgstr ""
 
 #. Default: "Rubricsdetails"
 #: ../content/licence/CODT_UniqueLicence.py:113
+#: ../content/licence/EnvironmentBase.py:95
 msgid "urban_label_rubricsDetails"
 msgstr ""
 
@@ -4132,6 +4141,7 @@ msgstr ""
 
 #. Default: "Situation"
 #: ../browser/licence/templates/worklocation_macro.pt:13
+#: ../content/licence/EnvironmentBase.py:319
 msgid "urban_label_situation"
 msgstr ""
 
@@ -4260,6 +4270,11 @@ msgstr ""
 #. Default: "Subjects"
 #: EnvClassThree.py
 msgid "urban_label_subjects"
+msgstr ""
+
+#. Default: "Submissionnumber"
+#: ../content/licence/EnvClassThree.py:57
+msgid "urban_label_submissionNumber"
 msgstr ""
 
 #. Default: "Suspension"
