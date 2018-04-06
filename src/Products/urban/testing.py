@@ -39,6 +39,8 @@ class UrbanWithUsersLayer(IntegrationTesting):
     default_password = 'urbaneditor'
     environment_default_user = 'environmenteditor'
     environment_default_password = 'environmenteditor'
+    default_admin_user = 'urbanmanager'
+    default_admin_password = 'urbanmanager'
 
     def setUp(self):
         super(UrbanWithUsersLayer, self).setUp()

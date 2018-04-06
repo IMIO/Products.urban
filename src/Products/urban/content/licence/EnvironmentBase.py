@@ -316,8 +316,8 @@ for field in EnvironmentBase_schema.filterFields(isMetadata=False):
         field.widget.visible = False
 
 # change translation of some fields
-EnvironmentBase_schema['referenceDGATLP'].widget.label_msgid = 'urban_label_referenceDGO3'
-EnvironmentBase_schema['workLocations'].widget.label_msgid = 'urban_label_situation'
+EnvironmentBase_schema['referenceDGATLP'].widget.label = _('urban_label_referenceDGO3')
+EnvironmentBase_schema['workLocations'].widget.label = _('urban_label_situation')
 
 
 ##/code-section after-schema
