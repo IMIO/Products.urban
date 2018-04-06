@@ -11,6 +11,9 @@ from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 
+from zope.event import notify
+from zope.lifecycleevent import ObjectCreatedEvent
+
 import transaction
 import unittest
 
@@ -30,14 +33,17 @@ class TestUrbanEvent(unittest.TestCase):
         #if the option is not selected, no document should be generated at all
         self.portal_urban.setGenerateSingletonDocuments(False)
         createdEvent = self.licence.createUrbanEvent('accuse-de-reception')
+        notify(ObjectCreatedEvent(createdEvent))
         self.failUnless(len(createdEvent.objectValues()) == 0)
 
         #now check the behaviour when the option is selected
         self.portal_urban.setGenerateSingletonDocuments(True)
         createdEvent = self.licence.createUrbanEvent('accuse-de-reception')
+        notify(ObjectCreatedEvent(createdEvent))
         #if the urbanEvent can generate a single document, this document should be generated
         self.failUnless(len(createdEvent.objectValues()) == 1)
         createdEvent = self.licence.createUrbanEvent('rapport-du-college')
+        notify(ObjectCreatedEvent(createdEvent))
         #if the urbanEvent can generate more than one document, no document should be generated at all
         self.failUnless(len(createdEvent.objectValues()) == 0)
 
