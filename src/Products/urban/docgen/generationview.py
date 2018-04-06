@@ -51,6 +51,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         claimants = (publicity and hasattr(publicity, 'getClaimants')) and publicity.getClaimants() or None
         claimants_view = claimants and [claimant.restrictedTraverse('@@document_generation_helper_view') for claimant in
                 claimants] or None
+        claimants_view = claimants_view and [(view.context, view) for view in claimants_view]
         proprietaries = (publicity and hasattr(publicity, 'getRecipients')) and publicity.getRecipients() or None
         proprietaries_views = proprietaries and [proprietary.restrictedTraverse('@@document_generation_helper_view') for proprietary in
                 proprietaries] or None
@@ -84,7 +85,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             generation_context['event_view'],
         ]
         if generation_context['claimants']:
-            views.extend(generation_context['claimants'])
+            views.extend([view for proxy, view in generation_context['claimants']])
         if generation_context['inquiry_proprietaries']:
             views.extend([view for proxy, view in generation_context['inquiry_proprietaries']])
         return views
