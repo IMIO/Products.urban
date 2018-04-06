@@ -188,8 +188,8 @@ EnvironmentLicence_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-EnvironmentLicence_schema['roadMissingPartsDetails'].widget.label_msgid = 'urban_label_complement'
-EnvironmentLicence_schema['investigationDetails'].widget.label_msgid = 'urban_label_investigationSubject'
+EnvironmentLicence_schema['roadMissingPartsDetails'].widget.label = _('urban_label_complement')
+EnvironmentLicence_schema['investigationDetails'].widget.label = _('urban_label_investigationSubject')
 ##/code-section after-schema
 
 class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):

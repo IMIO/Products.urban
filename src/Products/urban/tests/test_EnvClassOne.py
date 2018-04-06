@@ -187,7 +187,7 @@ class TestEnvClassOneInstance(SchemaFieldsTestCase):
 
     def test_envclassone_referenceDGATLP_translation(self):
         """
-        Field referenceDGATLP should be translated as 'reference DGO3'
+        Field referenceDGATLP should be translated as 'reference DGO4'
         """
         self._is_field_visible("Référence DGO3")
         self._is_field_visible_in_edit("Référence DGO3")
