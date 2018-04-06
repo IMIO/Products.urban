@@ -187,6 +187,7 @@ schema = Schema((
     StringField(
         name='annoncedDelay',
         widget=SelectionWidget(
+            format='select',
             label='Annonceddelay',
             label_msgid='urban_label_annoncedDelay',
             i18n_domain='urban',
