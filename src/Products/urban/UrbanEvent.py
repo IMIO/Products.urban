@@ -208,7 +208,7 @@ schema = Schema((
         name='analysis',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label=_('urban_label_analysis', default='Analysisi'),
+            label=_('urban_label_analysis', default='Analysis'),
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
@@ -381,11 +381,11 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_description', default='Description'),
         ),
-        default_content_type='text/html',
         allowable_content_types=('text/html',),
         default_method='getDefaultText',
+        default_content_type='text/html',
         default_output_type='text/html',
-        accessor="Description",
+        optional=True,
     ),
 
 ),
