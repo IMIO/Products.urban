@@ -49,6 +49,7 @@ schema = Schema((
             format="%d/%m/%Y",
             label_method="eventDateLabel",
             starting_year=1960,
+            ending_year=2100,
             label=_('urban_label_eventDate', default='Eventdate'),
         ),
         default_method='getDefaultTime',
