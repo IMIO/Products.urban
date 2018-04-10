@@ -385,7 +385,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
     def getLastRecourse(self):
         return self.getLastEvent(interfaces.IRecourseEvent)
 
-    def getLicenceExpirationDate(self):
+    def getLastLicenceExpiration(self):
         return self.getLastEvent(interfaces.ILicenceExpirationEvent)
 
     security.declarePublic('getAdditionalLayers')
