@@ -53,6 +53,7 @@
   <type portal_type="Applicant"/>
   <type portal_type="EnvClassTwo"/>
   <type portal_type="EnvClassOne"/>
+  <type portal_type="EnvClassBordering"/>
   <type portal_type="Article127"/>
   <type portal_type="UniqueLicence"/>
   <type portal_type="IntegratedLicence"/>

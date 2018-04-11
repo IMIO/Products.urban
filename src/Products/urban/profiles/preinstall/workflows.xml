@@ -50,6 +50,9 @@
   <type type_id="EnvClassOne">
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
+  <type type_id="EnvClassBordering">
+     <bound-workflow workflow_id="urban_licence_workflow" />
+  </type>
   <type type_id="EnvClassThree">
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
@@ -163,6 +166,9 @@
   <bound-workflow workflow_id="activation_workflow" />
 </type>
 <type type_id="EnvClassOne">
+  <bound-workflow workflow_id="urban_licence_workflow" />
+</type>
+<type type_id="EnvClassBordering">
   <bound-workflow workflow_id="urban_licence_workflow" />
 </type>
 <type type_id="EnvClassTwo">

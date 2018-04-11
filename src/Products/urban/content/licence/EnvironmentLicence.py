@@ -64,7 +64,7 @@ schema = Schema((
         widget=ReferenceBrowserWidget(
             label=_('urban_label_previousLicences', 'Previouslicences'),
         ),
-        allowed_types=('EnvClassThree', 'EnvClassTwo', 'EnvClassOne'),
+        allowed_types=('EnvClassThree', 'EnvClassTwo', 'EnvClassOne', 'EnvClassBordering'),
         schemata='urban_description',
         multiValued=True,
         relationship='previousLicences',

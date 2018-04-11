@@ -259,6 +259,14 @@
   />
 
   <browser:page
+          for="Products.urban.interfaces.IEnvironmentLicence"
+          name="envclassborderingview"
+          class=".envclassoneview.EnvClassOneView"
+          template="templates/envclassoneview.pt"
+          permission="zope2.View"
+  />
+
+  <browser:page
      name="envclasstwo-macros"
      for="Products.urban.interfaces.IEnvironmentBase"
      template="templates/envclasstwomacros.pt"
