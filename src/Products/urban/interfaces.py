@@ -312,6 +312,9 @@ class IEnvClassOne(IEnvironmentLicence):
     """Marker interface for .EnvClassOne.EnvClassOne
     """
 
+class IEnvClassBordering(Interface):
+    """Marker interface for .EnvClassOne.EnvClassOne
+    """
 
 class IArticle127(IBaseBuildLicence):
     """Marker interface for .Article127.Article127
@@ -552,6 +555,11 @@ class IEnvClassThree(Interface):
 
 
 class IEnvCLassOne(Interface):
+    """Marker interface for EnvClassOne
+    """
+
+
+class IEnvClassBordering(Interface):
     """Marker interface for EnvClassOne
     """
 

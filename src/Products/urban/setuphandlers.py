@@ -136,6 +136,7 @@ def postInstall(context):
         'UrbanCertificateTwo': 1,
         'EnvClassThree': 1,
         'EnvClassOne': 1,
+        'EnvClassBordering': 1,
         'NotaryLetter': 1,
         'PreliminaryNotice': 1,
         'PatrimonyCertificate': 1,
@@ -795,7 +796,7 @@ def addApplicationFolders(context):
                 licence_folder.manage_permission('urban: Add UrbanCertificateBase', ['Manager', 'Contributor', ], acquire=0)
             if urban_type in ['EnvClassThree', ]:
                 licence_folder.manage_permission('urban: Add EnvironmentBase', ['Manager', 'Contributor', ], acquire=0)
-            if urban_type in ['EnvClassOne', 'EnvClassTwo']:
+            if urban_type in ['EnvClassOne', 'EnvClassTwo', 'EnvClassBordering']:
                 licence_folder.manage_permission('urban: Add EnvironmentLicence', ['Manager', 'Contributor', ], acquire=0)
         newFolder.moveObjectsToBottom([licence_folder_id])
 

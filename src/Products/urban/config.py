@@ -76,6 +76,7 @@ ADD_CONTENT_PERMISSIONS = {
     'EnvClassOne': 'urban: Add EnvClassOne',
     'EnvClassThree': 'urban: Add EnvClassThree',
     'EnvClassTwo': 'urban: Add EnvClassTwo',
+    'EnvClassBordering': 'urban: Add EnvClassBordering',
     'EnvironmentBase': 'urban: Add EnvironmentBase',
     'EnvironmentLicence': 'urban: Add EnvironmentLicence',
     'EnvironmentRubricTerm': 'urban: Add EnvironmentRubricTerm',
@@ -136,6 +137,7 @@ setDefaultRoles('urban: Add Declaration', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvClassOne', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvClassThree', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvClassTwo', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add EnvClassBordering', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvironmentBase', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvironmentLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvironmentRubricTerm', ("Manager", "Contributor"))
@@ -191,7 +193,7 @@ URBAN_TYPES = [
     'UrbanCertificateTwo', 'CODT_UrbanCertificateTwo',
     'PreliminaryNotice',
     'PatrimonyCertificate',
-    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree',
+    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'EnvClassBordering',
     'ParcelOutLicence', 'CODT_ParcelOutLicence',
     'MiscDemand', 'Division',
     'NotaryLetter', 'CODT_NotaryLetter',
@@ -212,7 +214,7 @@ URBAN_CODT_TYPES = [
 ]
 
 URBAN_ENVIRONMENT_TYPES = [
-    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'ExplosivesPossession',
+    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'ExplosivesPossession', 'EnvClassBordering',
 ]
 
 LICENCE_FINAL_STATES = [
