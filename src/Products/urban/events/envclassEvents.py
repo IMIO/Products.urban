@@ -2,48 +2,38 @@
 from imio.history.utils import add_event_to_history
 
 
-def updateHistory(obj, event):
-    update_rubric_history(obj)
-    update_alc_history(obj)
+def update_history(obj, event):
+    update_history_for_vocabulary_field(obj, 'rubrics')
+    update_history_for_vocabulary_field(obj, 'additionalLegalConditions')
 
 
-def update_rubric_history(obj):
-    """
-    update history of Rubric object
-    """
-    rubrics = obj.getRubrics()
-    if rubrics is not None:
-        extra_rubrics = dict()
-        extra_rubrics['rubrics_history'] = [rubric.id for rubric in rubrics]
-        if has_changes(extra_rubrics['rubrics_history'], get_value_history_by_index(obj, 'rubrics_history', -1)):
-            add_event_to_history(obj, 'rubrics_history', 'update_rubrics', extra_infos=extra_rubrics)
-
-
-def update_alc_history(obj):
-    """
-    update history of AdditionalLegalConditions object
-    """
-    additionalLegalConditions = obj.getAdditionalLegalConditions()
-    if additionalLegalConditions is not None:
-        extra_alc = dict()
-        extra_alc['alc_history'] = [alc.id for alc in additionalLegalConditions]
-        if has_changes(extra_alc['alc_history'], get_value_history_by_index(obj, 'alc_history', -1)):
-            add_event_to_history(obj, 'alc_history', 'update_alc', extra_infos=extra_alc)
+def update_history_for_vocabulary_field(obj, fieldname):
+    getter = 'get{0}{1}'.format(
+        fieldname[0].upper(),
+        fieldname[1:],
+    )
+    getter_function = getattr(obj, getter)
+    value = getter_function()
+    if value is not None:
+        key = '{0}_history'.format(fieldname)
+        action = 'update_{0}'.format(fieldname)
+        history_values = {key: [e.id for e in value]}
+        last_values = get_value_history_by_index(obj, key, -1)
+        if has_changes(history_values[key], last_values[key]):
+            add_event_to_history(obj, key, action, extra_infos=history_values)
 
 
 def get_value_history_by_index(obj, history_attr, index):
     """
-    get history -2 value. the last position is the actual value
-    :param obj:
-    :param history_attr:
-    :return:
+    Return given history record by index -1 is the latest, -2 the previous, ...
     """
-    if getattr(obj, history_attr, False):
-        if len(getattr(obj, history_attr)) == 1:
-            return getattr(obj, history_attr)[-1]
-        if len(getattr(obj, history_attr)) > 1:
-            return getattr(obj, history_attr)[index]
-    return []
+    default = {history_attr: []}
+    if not hasattr(obj, history_attr):
+        return default
+    history = getattr(obj, history_attr)
+    if index > len(history) or index * -1 > len(history):
+        return default
+    return history[index]
 
 
 def has_changes(current_values, last_history_values):

@@ -145,7 +145,7 @@
 
   <subscriber for="..interfaces.IEnvClassOne
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".envclassEvents.updateHistory"/>
+              handler=".envclassEvents.update_history"/>
 
   <subscriber for="..interfaces.IEnvironmentBase
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
