@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-04-06 12:57+0000\n"
+"POT-Creation-Date: 2018-04-13 11:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -289,7 +289,7 @@ msgstr ""
 msgid "ICollegeOpinionTransmitToSPWEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:456
+#: ../interfaces.py:460
 msgid "ICollegeReport type marker interface"
 msgstr ""
 
@@ -309,11 +309,11 @@ msgstr ""
 msgid "IDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:472
+#: ../interfaces.py:476
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:496
+#: ../interfaces.py:500
 msgid "IEnvironmentOnly type marker interface"
 msgstr ""
 
@@ -325,7 +325,7 @@ msgstr ""
 msgid "IInquiry type marker interface"
 msgstr ""
 
-#: ../interfaces.py:512
+#: ../interfaces.py:516
 msgid "IInternalPrelimaryAdvice type marker interface"
 msgstr ""
 
@@ -334,10 +334,14 @@ msgid "ILicenceDelivery type marker interface"
 msgstr ""
 
 #: ../interfaces.py:452
+msgid "ILicenceEffectiveStart type marker interface"
+msgstr ""
+
+#: ../interfaces.py:456
 msgid "ILicenceExpiration type marker interface"
 msgstr ""
 
-#: ../interfaces.py:468
+#: ../interfaces.py:472
 msgid "ILicenceNotification type marker interface"
 msgstr ""
 
@@ -357,15 +361,15 @@ msgstr ""
 msgid "IOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:488
+#: ../interfaces.py:492
 msgid "IProrogation type marker interface"
 msgstr ""
 
-#: ../interfaces.py:476
+#: ../interfaces.py:480
 msgid "IRecourseEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:492
+#: ../interfaces.py:496
 msgid "IRefusedIncompleteness type marker interface"
 msgstr ""
 
@@ -377,7 +381,7 @@ msgstr ""
 msgid "ITechnicalServiceOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:460
+#: ../interfaces.py:464
 msgid "ITheLicence type marker interface"
 msgstr ""
 
@@ -385,11 +389,11 @@ msgstr ""
 msgid "ITransmitToSPWEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:504
+#: ../interfaces.py:508
 msgid "IUrbanAndEnvironment type marker interface"
 msgstr ""
 
-#: ../interfaces.py:500
+#: ../interfaces.py:504
 msgid "IUrbanOrEnvironment type marker interface"
 msgstr ""
 
@@ -405,15 +409,15 @@ msgstr ""
 msgid "IWalloonRegionPrimo type marker interface"
 msgstr ""
 
-#: ../interfaces.py:480
+#: ../interfaces.py:484
 msgid "IWorkBeginning type marker interface"
 msgstr ""
 
-#: ../interfaces.py:484
+#: ../interfaces.py:488
 msgid "IWorkEnd type marker interface"
 msgstr ""
 
-#: ../interfaces.py:508
+#: ../interfaces.py:512
 msgid "ImpactStudy event type marker interface"
 msgstr ""
 
@@ -2447,7 +2451,7 @@ msgid "urban_label_adr2"
 msgstr ""
 
 #. Default: "Adviceagreementlevel"
-#: ../UrbanEvent.py:171
+#: ../UrbanEvent.py:172
 msgid "urban_label_adviceAgreementLevel"
 msgstr ""
 
@@ -2472,12 +2476,12 @@ msgid "urban_label_alsoCalled"
 msgstr ""
 
 #. Default: "Amount_collected"
-#: ../UrbanEvent.py:353
+#: ../UrbanEvent.py:354
 msgid "urban_label_amount_collected"
 msgstr ""
 
-#. Default: "Analysisi"
-#: ../UrbanEvent.py:210
+#. Default: "Analysis"
+#: ../UrbanEvent.py:211
 msgid "urban_label_analysis"
 msgstr ""
 
@@ -2538,7 +2542,7 @@ msgid "urban_label_askingDate"
 msgstr ""
 
 #. Default: "Auditiondate"
-#: ../UrbanEvent.py:111
+#: ../UrbanEvent.py:112
 msgid "urban_label_auditionDate"
 msgstr ""
 
@@ -2553,12 +2557,12 @@ msgid "urban_label_authorizationDate"
 msgstr ""
 
 #. Default: "Bank_account"
-#: ../UrbanEvent.py:338
+#: ../UrbanEvent.py:339
 msgid "urban_label_bank_account"
 msgstr ""
 
 #. Default: "Bank_account_owner"
-#: ../UrbanEvent.py:345
+#: ../UrbanEvent.py:346
 msgid "urban_label_bank_account_owner"
 msgstr ""
 
@@ -2607,7 +2611,7 @@ msgid "urban_label_businessLocation"
 msgstr ""
 
 #. Default: "Old business location"
-#: ../browser/licence/templates/worklocation_macro.pt:21
+#: ../browser/licence/templates/worklocation_macro.pt:22
 #: ../content/licence/ExplosivesPossession.py:56
 msgid "urban_label_businessOldLocation"
 msgstr ""
@@ -2781,17 +2785,17 @@ msgid "urban_label_deadLineDelay"
 msgstr ""
 
 #. Default: "Decision"
-#: ../UrbanEvent.py:128
+#: ../UrbanEvent.py:129
 msgid "urban_label_decision"
 msgstr ""
 
 #. Default: "Decisiondate"
-#: ../UrbanEvent.py:121
+#: ../UrbanEvent.py:122
 msgid "urban_label_decisionDate"
 msgstr ""
 
 #. Default: "Decisionproject"
-#: ../UrbanEvent.py:371
+#: ../UrbanEvent.py:372
 msgid "urban_label_decisionProject"
 msgstr ""
 
@@ -2801,7 +2805,7 @@ msgid "urban_label_decisionTerm"
 msgstr ""
 
 #. Default: "Decisiontext"
-#: ../UrbanEvent.py:139
+#: ../UrbanEvent.py:140
 msgid "urban_label_decisionText"
 msgstr ""
 
@@ -2829,7 +2833,7 @@ msgid "urban_label_delayComputation"
 msgstr ""
 
 #. Default: "Delegatesignatures"
-#: ../UrbanEvent.py:327
+#: ../UrbanEvent.py:328
 msgid "urban_label_delegateSignatures"
 msgstr ""
 
@@ -2844,7 +2848,7 @@ msgid "urban_label_denomination"
 msgstr ""
 
 #. Default: "Deposittype"
-#: ../UrbanEvent.py:59
+#: ../UrbanEvent.py:60
 #: ../content/licence/EnvClassThree.py:48
 msgid "urban_label_depositType"
 msgstr ""
@@ -2860,6 +2864,7 @@ msgid "urban_label_derogationDetails"
 msgstr ""
 
 #. Default: "Description"
+#: ../UrbanEvent.py:382
 #: ../content/licence/GenericLicence.py:193
 msgid "urban_label_description"
 msgstr ""
@@ -2870,7 +2875,7 @@ msgid "urban_label_dispatchSInformation"
 msgstr ""
 
 #. Default: "Displaydate"
-#: ../UrbanEvent.py:363
+#: ../UrbanEvent.py:364
 msgid "urban_label_displayDate"
 msgstr ""
 
@@ -2952,7 +2957,7 @@ msgid "urban_label_equipmentAndRoadRequirements"
 msgstr ""
 
 #. Default: "Eventdate"
-#: ../UrbanEvent.py:52
+#: ../UrbanEvent.py:53
 msgid "urban_label_eventDate"
 msgstr ""
 
@@ -2962,7 +2967,7 @@ msgid "urban_label_eventDateLabel"
 msgstr ""
 
 #. Default: "Destinataire"
-#: ../UrbanEvent.py:220
+#: ../UrbanEvent.py:221
 msgid "urban_label_eventRecipient"
 msgstr ""
 
@@ -3019,7 +3024,7 @@ msgid "urban_label_expropriationDetails"
 msgstr ""
 
 #. Default: "Advice"
-#: ../UrbanEvent.py:188
+#: ../UrbanEvent.py:189
 #: ../browser/licence/templates/licencetabsmacros.pt:237
 msgid "urban_label_externalDecision"
 msgstr ""
@@ -3305,7 +3310,7 @@ msgid "urban_label_isOfficialParcel"
 msgstr ""
 
 #. Default: "Isoptional"
-#: ../UrbanEvent.py:182
+#: ../UrbanEvent.py:183
 msgid "urban_label_isOptional"
 msgstr ""
 
@@ -3600,7 +3605,7 @@ msgid "urban_label_numerotationTALExpression"
 msgstr ""
 
 #. Default: "Officecoordinate"
-#: ../UrbanEvent.py:295
+#: ../UrbanEvent.py:296
 msgid "urban_label_officeCoordinate"
 msgstr ""
 
@@ -3616,7 +3621,7 @@ msgid "urban_label_opinionRequestsTransmitDate"
 msgstr ""
 
 #. Default: "Opiniontext"
-#: ../UrbanEvent.py:199
+#: ../UrbanEvent.py:200
 msgid "urban_label_opinionText"
 msgstr ""
 
@@ -3757,22 +3762,22 @@ msgid "urban_label_ploneUserId"
 msgstr ""
 
 #. Default: "Pmdecision"
-#: ../UrbanEvent.py:283
+#: ../UrbanEvent.py:284
 msgid "urban_label_pmDecision"
 msgstr ""
 
 #. Default: "Pmdescription"
-#: ../UrbanEvent.py:258
+#: ../UrbanEvent.py:259
 msgid "urban_label_pmDescription"
 msgstr ""
 
 #. Default: "Pmmotivation"
-#: ../UrbanEvent.py:270
+#: ../UrbanEvent.py:271
 msgid "urban_label_pmMotivation"
 msgstr ""
 
 #. Default: "Pmtitle"
-#: ../UrbanEvent.py:246
+#: ../UrbanEvent.py:247
 msgid "urban_label_pmTitle"
 msgstr ""
 
@@ -3870,13 +3875,13 @@ msgid "urban_label_rcuDetails"
 msgstr ""
 
 #. Default: "Receipt date"
-#: ../UrbanEvent.py:93
+#: ../UrbanEvent.py:94
 #: ../browser/licence/templates/licencetabsmacros.pt:236
 msgid "urban_label_receiptDate"
 msgstr ""
 
 #. Default: "Receiveddocumentreference"
-#: ../UrbanEvent.py:100
+#: ../UrbanEvent.py:101
 msgid "urban_label_receivedDocumentReference"
 msgstr ""
 
@@ -3891,12 +3896,12 @@ msgid "urban_label_recipients"
 msgstr ""
 
 #. Default: "Recoursedecision"
-#: ../UrbanEvent.py:160
+#: ../UrbanEvent.py:161
 msgid "urban_label_recourseDecision"
 msgstr ""
 
 #. Default: "Recoursedecisiondisplaydate"
-#: ../UrbanEvent.py:152
+#: ../UrbanEvent.py:153
 msgid "urban_label_recourseDecisionDisplayDate"
 msgstr ""
 
@@ -4283,12 +4288,12 @@ msgid "urban_label_suspension"
 msgstr ""
 
 #. Default: "suspensionEndDate"
-#: ../UrbanEvent.py:319
+#: ../UrbanEvent.py:320
 msgid "urban_label_suspensionEndDate"
 msgstr ""
 
 #. Default: "Suspensionreason"
-#: ../UrbanEvent.py:306
+#: ../UrbanEvent.py:307
 msgid "urban_label_suspensionReason"
 msgstr ""
 
@@ -4395,12 +4400,12 @@ msgid "urban_label_township_guide_details"
 msgstr ""
 
 #. Default: "Transmitdate"
-#: ../UrbanEvent.py:72
+#: ../UrbanEvent.py:73
 msgid "urban_label_transmitDate"
 msgstr ""
 
 #. Default: "Transmittoclaimantsdate"
-#: ../UrbanEvent.py:82
+#: ../UrbanEvent.py:83
 msgid "urban_label_transmitToClaimantsDate"
 msgstr ""
 
@@ -4439,7 +4444,7 @@ msgid "urban_label_urbandelays"
 msgstr ""
 
 #. Default: "Urbaneventtypes"
-#: ../UrbanEvent.py:236
+#: ../UrbanEvent.py:237
 msgid "urban_label_urbaneventtypes"
 msgstr ""
 

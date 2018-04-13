@@ -448,6 +448,10 @@ class ILicenceDeliveryEvent(Interface):
     __doc__ = _("""ILicenceDelivery type marker interface""")
 
 
+class ILicenceEffectiveStartEvent(Interface):
+    __doc__ = _("""ILicenceEffectiveStart type marker interface""")
+
+
 class ILicenceExpirationEvent(Interface):
     __doc__ = _("""ILicenceExpiration type marker interface""")
 
