@@ -292,6 +292,15 @@ def genericlicence_final_duedate(licence):
 
 
 @indexer(IEnvironmentBase)
+def environmentlicence_effectivestart_date(licence):
+    """
+    """
+    expiration_event = licence.getLastLicenceEffective()
+    if expiration_event:
+        return expiration_event.getEventDate()
+
+
+@indexer(IEnvironmentBase)
 def environmentlicence_expiration_date(licence):
     """
     """
