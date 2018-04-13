@@ -16,7 +16,7 @@ Contents:
 Configuration
 =============
 
-Voici un chapitre traitant des fonctionnalités accessibles dans le menu "Configuration urban" accessible en bas à gauche sur l'accueil. Un rôle "Urban Manager" est requis.
+Voici un chapitre traitant des fonctionalités accessibles dans le menu "Configuration urban" accessible en bas à gauche sur l'accueil. Un rôle "Urban Manager" est requis.
 
 Configuration générale
 ----------------------
@@ -70,15 +70,15 @@ Que peut on configurer sur les événements ?
 * Modifier les délais et délais d'alerte de l'événement.
 * Ajouter ou supprimer des modèles de documents à générer pour un événement donné.
 
-	**Ajouter un événement**
+   **Ajouter un événement**
 	
 	
 	
-	**Retirer un événement**
+   **Retirer un événement**
 	
 	
 	
-	**Ajouter ou supprimer des modèles de documents**
+   **Ajouter ou supprimer des modèles de documents**
 
 
 
@@ -140,10 +140,10 @@ Au dessus du tableau se trouve des fonctionalités de recherche. Il est par exem
 Lorsqu'une tâche a été effectuée et que la procédure du permis en question a été mise à jour, le suivi va passer automatiquement à la tâche suivante dans la procédure de permis.
 
 
-Sortir la liste 220
-===================
+Exporter la liste 220
+=====================
 
-Cette fonctionnalité permet d'obtenir le fichier correspondant à la liste 220 à utiliser dans l'application URBAIN du SPF.
+Cette fonctionalité permet d'obtenir le fichier correspondant à la liste 220 à utiliser dans l'application URBAIN du SPF.
 
 #. Sélectionner une procédure.
 #. Dans la recherche avancée, entrer un intervalle de temps pour les dates de décision.
@@ -152,19 +152,69 @@ Cette fonctionnalité permet d'obtenir le fichier correspondant à la liste 220 
 Si au moment d'enregistrer la liste, une page d'erreur apparait à la place, certains champs obligatoires pour la liste 220 n'ont pas été renseignés.
 Exemple, si une erreur :samp:`unknown worktype  on licence PU/2017/4161/DC` apparait: le type de travaux n'a pas été renseigné pour le permis qui a comme référence ``PU/2017/4161/DC``. Il faut alors rechercher ce permis par référence et modifier les champs nécessaires.
 
-Sortir le fichier de statistiques INS
-=====================================
+Exporter le fichier de statistiques INS
+=======================================
 
-Cette fonctionnalité permet d'obtenir le fichier correspondant aux statistiques INS.
+Similaire à l'exportation de la liste 220, cette fonctionalité permet d'obtenir le fichier correspondant aux statistiques INS.
 
 #. Sélectionner une procédure.
-#. Un bouton "Statistiques INS" apparait en haut à droite des résultats de recherche.
+#. Optionnellement, sélectionner des critères de recherche pour sortir un fichier INS plus ciblé.
+#. Un bouton "Statistiques INS" apparait en haut à droite des résultats de recherche, et permet d'enregistrer le document.
 
-.. todo::
+Le canevas du fichier de statistiques INS se trouve lui dans les modèles généraux de la configuration urban. Il ne faut normalement pas le modifier.
 
 Utiliser l'édition externe avec ZopeEdit
 ========================================
 
-Il est possible dans Urban d'utiliser un éditeur externe pour éditer certains types d'éléments, comme les documents qui vont être générés par l'application.
+Il est possible d'utiliser un éditeur externe pour éditer les documents présents dans l'application Urban. Par exemple, ouvrir dans Word ou LibreOffice un document afin de l'éditer et d'enregistrer les modifications: celles-ci sont directement répercutées dans Urban.
+
+On utilise le logiciel ZopeEdit (diminutif de Zope External Editor) afin de faire le lien entre l'éditeur de texte et l'application Urban. Il est donc nécessaire de compléter l'installation de ce logiciel, étape par étape.
+
+La première étape est l'activation de l'édition externe dans Urban (sur certains types d'éléments seulement). On obtiendra alors pour ces éléments un lien pour l'édition externe, représentée par un crayon rouge. Ce lien va créer un fichier :samp:`.zem`, qu'il est nécessaire d'ouvrir via le logiciel ZopeEdit.
+
+La seconde étape consiste donc en l'installation sur le poste client du logiciel ZopeEdit, qui pourra faire le lien entre ces fichiers et un éditeur de texte classique.
+
+Ces étapes sont normalement faites à la mise en place de l'application Urban. Si un problème survenait avec l'édition externe, il est quand même intéressant de vérifier que ces deux étapes sont correctes.
+
+Activation et configuration dans Urban
+--------------------------------------
+
+#. En tant qu'administrateur, aller dans la "Configuration du site" puis "Modules". Il faut activer sur cette page le module "collective.externaleditor".
+#. Une fois le module activé, retourner à la "Configuration du site", un lien "Édition externe" est maintenant disponible. Cocher la case "Activer la fonctionalité d'édition externe" si ce n'est pas déjà fait. Il est aussi possible de choisir sur quels éléments l'édition externe est activée.
+#. Il est aussi nécessaire d'activer cette option par utilisateur. Dans les "Préférences" d'un utilisateur, aller dans l'onglet "Préférences personnelles" et cocher la case "Activer l'édition externe".
+
+
+Installation de ZopeEdit
+------------------------
+
+La procédure est différente suivant le système d'exploitation.
+
+Windows
+^^^^^^^
+
+#. `Téléchargez le logiciel à cette adresse. <http://www.imio.be/support/documentation/fichiers/zopeedit>`_
+#. Suivez les instructions pour l'installation.
+#. Redémarrez le PC.
+
+Mac
+^^^
+
+#. `Téléchargez le logiciel à cette adresse <http://download.gocept.com/packages/ZopeEditManager-0.9.8.dmg>`_
+#. Dans les préférences, onglet "Helper Apps", ajouter le format odt comme suit:
+
+	* Type: applications/odt **OU** si ça ne fonctionne pas: application/vnd.oasis.opendocument.text
+	* Editor: LibreOffice
+	* Extension : .odt
+
+Linux
+^^^^^
+
+.. todo::
+
+Résolution des problèmes
+------------------------
+
+Configuration de Firefox
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. todo::
