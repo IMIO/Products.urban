@@ -199,7 +199,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
                         (
                             field.getName(),
                             translate(
-                                "urban_label_" + field.getName(),
+                                field.widget.label,
                                 'urban', default=field.getName(),
                                 context=self.REQUEST
                             )

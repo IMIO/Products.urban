@@ -20,7 +20,11 @@ class UrbanEventEdit(Edit):
             name='ws4pmclient-settings'
         )
 
-        fields = [i for i in self.context.schema.fields() if i.schemata == 'default' and not hasattr(i, 'optional') and i.widget.visible and i.widget.visible['view'] == 'visible']
+        fields = []
+        for field in self.context.schema.fields():
+            if field.schemata == 'default' and not hasattr(field, 'optional') and field.widget.visible and field.widget.visible['view']:
+                fields.append(field)
+
         linkedUrbanEventType = self.context.getUrbaneventtypes()
 
         for activatedField in linkedUrbanEventType.getActivatedFields():

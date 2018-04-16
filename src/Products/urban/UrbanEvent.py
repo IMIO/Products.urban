@@ -377,11 +377,11 @@ schema = Schema((
         optional=True,
     ),
     TextField(
-        name='description',
+        name='misc_description',
+        allowable_content_types=('text/html',),
         widget=RichWidget(
             label=_('urban_label_description', default='Description'),
         ),
-        allowable_content_types=('text/html',),
         default_method='getDefaultText',
         default_content_type='text/html',
         default_output_type='text/html',
