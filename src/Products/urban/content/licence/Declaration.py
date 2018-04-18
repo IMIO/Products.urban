@@ -21,6 +21,7 @@ from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
@@ -36,9 +37,7 @@ schema = Schema((
     LinesField(
         name='article',
         widget=MultiSelectionWidget(
-            label='Article',
-            label_msgid='urban_label_article',
-            i18n_domain='urban',
+            label=_('urban_label_article', default='Article'),
         ),
         schemata='urban_description',
         multiValued=1,
@@ -51,9 +50,7 @@ schema = Schema((
             allow_browse=0,
             base_query='CU2BaseQuery',
             show_results_without_query=True,
-            label='Linkedcu2s',
-            label_msgid='urban_label_linkedCU2s',
-            i18n_domain='urban',
+            label=_('urban_label_linkedCU2s', default='Linkedcu2s'),
         ),
         allowed_types=('UrbanCertificateTwo',),
         schemata='urban_location',

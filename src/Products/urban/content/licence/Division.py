@@ -21,6 +21,7 @@ from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
@@ -40,9 +41,7 @@ schema = Schema((
             force_close_on_insert=True,
             startup_directory='urban/notaries',
             restrict_browsing_to_startup_directory=True,
-            label='Notarycontact',
-            label_msgid='urban_label_notaryContact',
-            i18n_domain='urban',
+            label=_('urban_label_notaryContact', default='Notarycontact'),
         ),
         required=False,
         schemata='urban_description',
