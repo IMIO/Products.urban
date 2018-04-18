@@ -24,6 +24,7 @@ from Products.urban.interfaces import IApplicant
 from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.interfaces import ICODT_BaseBuildLicence
 from Products.urban.interfaces import ICorporation
+from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IIsArchive
@@ -288,3 +289,21 @@ def genericlicence_final_duedate(licence):
             tasks_to_check.extend(subtasks)
 
     return date(9999, 1, 1)
+
+
+@indexer(IEnvironmentBase)
+def environmentlicence_effectivestart_date(licence):
+    """
+    """
+    expiration_event = licence.getLastLicenceEffective()
+    if expiration_event:
+        return expiration_event.getEventDate()
+
+
+@indexer(IEnvironmentBase)
+def environmentlicence_expiration_date(licence):
+    """
+    """
+    expiration_event = licence.getLastLicenceExpiration()
+    if expiration_event:
+        return expiration_event.getEventDate()

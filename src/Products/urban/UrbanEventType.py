@@ -199,7 +199,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
                         (
                             field.getName(),
                             translate(
-                                "urban_label_" + field.getName(),
+                                field.widget.label,
                                 'urban', default=field.getName(),
                                 context=self.REQUEST
                             )
@@ -224,7 +224,7 @@ class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
         if additional_fields:
             urbanevent_fields += additional_fields.get()
 
-        blacklist = ['rights', 'description']
+        blacklist = ['rights']
         available_fields = [field for field in urbanevent_fields if field.getType() == 'Products.Archetypes.Field.TextField' and field.getName() not in blacklist]
         vocabulary_fields = [
             (

@@ -143,6 +143,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ILicenceEffectiveStartEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.ILicenceExpirationEvent"
     type=".interfaces.IEventTypeType"/>
 

@@ -20,6 +20,7 @@ from Products.urban import interfaces
 from Products.urban.content.licence.EnvironmentBase import EnvironmentBase
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.urban import UrbanMessage as _
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -34,20 +35,37 @@ slave_fields_additionalconditions = (
     },
 )
 
-optional_fields =['inadmissibilityReasons']
+optional_fields = ['depositType', 'submissionNumber', 'inadmissibilityReasons']
 
 ##/code-section module-header
 
 schema = Schema((
 
+    StringField(
+        name='depositType',
+        widget=SelectionWidget(
+            format='select',
+            label=_('urban_label_depositType', default='Deposittype'),
+        ),
+        vocabulary=UrbanVocabulary('deposittype', inUrbanConfig=True),
+        default_method='getDefaultValue',
+        schemata='urban_description',
+    ),
+    StringField(
+        name='submissionNumber',
+        widget=StringField._properties['widget'](
+            label=_('urban_label_submissionNumber',
+                    default='Submissionnumber'),
+        ),
+        schemata='urban_description',
+    ),
     BooleanField(
         name='hasAdditionalConditions',
         default=False,
         widget=MasterBooleanWidget(
             slave_fields=slave_fields_additionalconditions,
-            label='Hasadditionalconditions',
-            label_msgid='urban_label_hasAdditionalConditions',
-            i18n_domain='urban',
+            label=_('urban_label_hasAdditionalConditions',
+                    default='Hasadditionalconditions'),
         ),
         schemata='urban_description',
     ),
@@ -55,9 +73,8 @@ schema = Schema((
         name='additionalConditions',
         schemata='urban_description',
         widget=FileField._properties['widget'](
-            label='Additionalconditions',
-            label_msgid='urban_label_additionalConditions',
-            i18n_domain='urban',
+            label=_('urban_label_additionalConditions',
+                    default='Additionalconditions'),
         ),
         storage=AnnotationStorage(),
     ),
@@ -65,9 +82,8 @@ schema = Schema((
         name='inadmissibilityReasons',
         widget=MultiSelectionWidget(
             format='checkbox',
-            label='Inadmissibilityreasons',
-            label_msgid='urban_label_inadmissibilityReasons',
-            i18n_domain='urban',
+            label=_('urban_label_inadmissibilityReasons',
+                    default='Inadmissibilityreasons'),
         ),
         schemata='urban_description',
         multiValued=1,
@@ -126,7 +142,9 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField('businessOldLocation', after='workLocations')
     schema.moveField('foldermanagers', after='businessOldLocation')
-    schema.moveField('rubrics', after='folderCategory')
+    schema.moveField('depositType', after='folderCategory')
+    schema.moveField('submissionNumber', after='depositType')
+    schema.moveField('rubrics', after='submissionNumber')
     schema.moveField('description', after='additionalLegalConditions')
     schema.moveField('missingParts', after='inadmissibilityReasons')
     schema.moveField('missingPartsDetails', after='missingParts')

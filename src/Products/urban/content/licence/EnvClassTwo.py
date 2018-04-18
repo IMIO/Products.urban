@@ -21,6 +21,7 @@ from Products.urban.content.licence.EnvironmentLicence import EnvironmentLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 ##/code-section module-header
@@ -31,9 +32,7 @@ schema = Schema((
         name='temporaryExploitation',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Temporaryexploitation',
-            label_msgid='urban_label_temporaryExploitation',
-            i18n_domain='urban',
+            label=_('urban_label_temporaryExploitation', default='Temporaryexploitation'),
         ),
         schemata='urban_description',
     ),

@@ -49,6 +49,7 @@ schema = Schema((
             format="%d/%m/%Y",
             label_method="eventDateLabel",
             starting_year=1960,
+            ending_year=2100,
             label=_('urban_label_eventDate', default='Eventdate'),
         ),
         default_method='getDefaultTime',
@@ -207,7 +208,7 @@ schema = Schema((
         name='analysis',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label=_('urban_label_analysis', default='Analysisi'),
+            label=_('urban_label_analysis', default='Analysis'),
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
@@ -369,6 +370,17 @@ schema = Schema((
         allowable_content_types=('text/html',),
         widget=RichWidget(
             label=_('urban_label_decisionProject', default='Decisionproject'),
+        ),
+        default_method='getDefaultText',
+        default_content_type='text/html',
+        default_output_type='text/html',
+        optional=True,
+    ),
+    TextField(
+        name='misc_description',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_description', default='Description'),
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
