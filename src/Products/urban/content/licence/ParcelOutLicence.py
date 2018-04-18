@@ -20,6 +20,7 @@ from Products.urban import interfaces
 from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.urban import UrbanMessage as _
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -36,9 +37,7 @@ schema = Schema((
         name='isModification',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Ismodification',
-            label_msgid='urban_label_isModification',
-            i18n_domain='urban',
+            label=_('urban_label_isModification', default='Ismodification'),
         ),
         schemata='urban_description',
     ),
@@ -54,9 +53,7 @@ schema = Schema((
             base_query='geometriciansBaseQuery',
             wild_card_search=True,
             show_results_without_query=True,
-            label='Geometricians',
-            label_msgid='urban_label_geometricians',
-            i18n_domain='urban',
+            label=_('urban_label_geometricians', default='Geometricians'),
         ),
         required=True,
         schemata='urban_description',

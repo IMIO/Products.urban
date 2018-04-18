@@ -22,6 +22,7 @@ from Products.urban import utils
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
 from Products.urban.content.Inquiry import Inquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
@@ -98,9 +99,7 @@ schema = Schema((
         name='inquiry_type',
         widget=MasterSelectWidget(
             slave_fields=full_inquiry_slave_fields,
-            label='Inquiry_type',
-            label_msgid='urban_label_inquiry_type',
-            i18n_domain='urban',
+            label=_('urban_label_inquiry_type', default='Inquiry_type'),
         ),
         vocabulary='list_inquiry_types',
     ),
@@ -108,9 +107,7 @@ schema = Schema((
         name='divergence',
         widget=MultiSelectionWidget(
             format='checkbox',
-            label='Divergence',
-            label_msgid='urban_label_divergence',
-            i18n_domain='urban',
+            label=_('urban_label_divergence', default='Divergence'),
         ),
         multiValued=1,
         vocabulary=UrbanVocabulary('divergences'),
@@ -120,9 +117,7 @@ schema = Schema((
         name='divergenceDetails',
         allowable_content_types=('text/plain',),
         widget=TextAreaWidget(
-            label='Divergencedetails',
-            label_msgid='urban_label_divergenceDetails',
-            i18n_domain='urban',
+            label=_('urban_label_divergenceDetails', default='Divergencedetails'),
         ),
         default_output_type='text/plain',
         default_content_type='text/plain',
@@ -132,9 +127,7 @@ schema = Schema((
         name='announcementArticles',
         widget=MultiSelectionWidget(
             size=10,
-            label='Announcementarticles',
-            label_msgid='urban_label_announcementArticles',
-            i18n_domain='urban',
+            label=_('urban_label_announcementArticles', default='Announcementarticles'),
         ),
         multiValued=True,
         vocabulary=UrbanVocabulary('announcementarticles'),
@@ -144,9 +137,7 @@ schema = Schema((
         name='announcementArticlesText',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Announcementarticlestext',
-            label_msgid='urban_label_announcementArticlesText',
-            i18n_domain='urban',
+            label=_('urban_label_announcementArticlesText', default='Announcementarticlestext'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',

@@ -25,6 +25,7 @@ from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
@@ -57,9 +58,7 @@ schema = Schema((
             restrict_browsing_to_startup_directory=1,
             popup_name='popup',
             wild_card_search=True,
-            label='Notarycontact',
-            label_msgid='urban_label_notaryContact',
-            i18n_domain='urban',
+            label=_('urban_label_notaryContact', default='Notarycontact'),
         ),
         required=False,
         schemata='urban_description',
@@ -71,9 +70,7 @@ schema = Schema((
         name='specificFeatures',
         widget=DataGridWidget(
             columns= {'id': FormFocusColumn('id'), 'check': CheckboxColumn('Select'), 'value': FixedColumn('Value'), 'text': TextAreaColumn('Text', rows=1, cols=50)},
-            label='Specificfeatures',
-            label_msgid='urban_label_specificFeatures',
-            i18n_domain='urban',
+            label=_('urban_label_specificFeatures', default='Specificfeatures'),
         ),
         fixed_rows='getSpecificFeaturesRows',
         allow_insert= False,
@@ -87,9 +84,7 @@ schema = Schema((
         name='roadSpecificFeatures',
         widget=DataGridWidget(
             columns= {'id': FormFocusColumn('id'), 'check': CheckboxColumn('Select'), 'value': FixedColumn('Value'), 'text': TextAreaColumn('Text', rows=1, cols=50)},
-            label='Roadspecificfeatures',
-            label_msgid='urban_label_roadSpecificFeatures',
-            i18n_domain='urban',
+            label=_('urban_label_roadSpecificFeatures', default='Roadspecificfeatures'),
         ),
         fixed_rows='getRoadFeaturesRows',
         allow_insert= False,
@@ -103,9 +98,7 @@ schema = Schema((
         name='locationSpecificFeatures',
         widget=DataGridWidget(
             columns= {'id': FormFocusColumn('id'), 'check': CheckboxColumn('Select'), 'value': FixedColumn('Value'), 'text': TextAreaColumn('Text', rows=1, cols=50)},
-            label='Locationspecificfeatures',
-            label_msgid='urban_label_locationSpecificFeatures',
-            i18n_domain='urban',
+            label=_('urban_label_locationSpecificFeatures', default='Locationspecificfeatures'),
         ),
         fixed_rows='getLocationFeaturesRows',
         allow_insert= False,
@@ -119,9 +112,7 @@ schema = Schema((
         name='customSpecificFeatures',
         widget=DataGridWidget(
             columns={'text': TextAreaColumn("Feature", rows=1, cols=50)},
-            label='Customspecificfeatures',
-            label_msgid='urban_label_customSpecificFeatures',
-            i18n_domain='urban',
+            label=_('urban_label_customSpecificFeatures', default='Customspecificfeatures'),
         ),
         schemata='urban_description',
         columns=('text',),
@@ -130,9 +121,7 @@ schema = Schema((
         name='townshipSpecificFeatures',
         widget=DataGridWidget(
             columns= {'id': FormFocusColumn('id'), 'check': CheckboxColumn('Select'), 'value': FixedColumn('Value'), 'text': TextAreaColumn('Text', rows=1, cols=50)},
-            label='Townshipspecificfeatures',
-            label_msgid='urban_label_townshipSpecificFeatures',
-            i18n_domain='urban',
+            label=_('urban_label_townshipSpecificFeatures', default='Townshipspecificfeatures'),
         ),
         fixed_rows='getTownshipFeaturesRows',
         allow_insert= False,
@@ -146,9 +135,7 @@ schema = Schema((
         name='opinionsToAskIfWorks',
         widget=MultiSelectionWidget(
             format='checkbox',
-            label='Opinionstoaskifworks',
-            label_msgid='urban_label_opinionsToAskIfWorks',
-            i18n_domain='urban',
+            label=_('urban_label_opinionsToAskIfWorks', default='Opinionstoaskifworks'),
         ),
         schemata='urban_description',
         multiValued=1,
@@ -159,9 +146,7 @@ schema = Schema((
         name='basement',
         widget=MultiSelectionWidget(
             format='checkbox',
-            label='Basement',
-            label_msgid='urban_label_basement',
-            i18n_domain='urban',
+            label=_('urban_label_basement', default='Basement'),
         ),
         schemata='urban_location',
         multiValued=True,
@@ -172,9 +157,7 @@ schema = Schema((
         name='pollution',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Pollution',
-            label_msgid='urban_label_pollution',
-            i18n_domain='urban',
+            label=_('urban_label_pollution', default='Pollution'),
         ),
         schemata='urban_location',
     ),
@@ -182,9 +165,7 @@ schema = Schema((
         name='ZIP',
         widget=MultiSelectionWidget(
             format='checkbox',
-            label='Zip',
-            label_msgid='urban_label_ZIP',
-            i18n_domain='urban',
+            label=_('urban_label_ZIP', default='Zip'),
         ),
         schemata='urban_location',
         multiValued=True,
@@ -194,9 +175,7 @@ schema = Schema((
     StringField(
         name='annoncedDelay',
         widget=SelectionWidget(
-            label='Annonceddelay',
-            label_msgid='urban_label_annoncedDelay',
-            i18n_domain='urban',
+            label=_('urban_label_annoncedDelay', default='Annonceddelay'),
         ),
         schemata='urban_description',
         vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
@@ -206,9 +185,7 @@ schema = Schema((
         name='annoncedDelayDetails',
         allowable_content_types=('text/plain',),
         widget=TextAreaWidget(
-            label='Annonceddelaydetails',
-            label_msgid='urban_label_annoncedDelayDetails',
-            i18n_domain='urban',
+            label=_('urban_label_annoncedDelayDetails', default='Annonceddelaydetails'),
         ),
         schemata='urban_description',
         default_method='getDefaultText',

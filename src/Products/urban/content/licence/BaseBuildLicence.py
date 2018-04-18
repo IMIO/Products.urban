@@ -22,6 +22,7 @@ from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
@@ -119,9 +120,7 @@ schema = Schema((
     LinesField(
         name='workType',
         widget=MultiSelectionWidget(
-            label='Worktype',
-            label_msgid='urban_label_workType',
-            i18n_domain='urban',
+            label=_('urban_label_workType', default='Worktype'),
         ),
         schemata='urban_description',
         multiValued=1,
@@ -131,9 +130,7 @@ schema = Schema((
     StringField(
         name='usage',
         widget=SelectionWidget(
-            label='Usage',
-            label_msgid='urban_label_usage',
-            i18n_domain='urban',
+            label=_('urban_label_usage', default='Usage'),
         ),
         required=True,
         schemata='urban_description',
@@ -142,9 +139,7 @@ schema = Schema((
     StringField(
         name='annoncedDelay',
         widget=SelectionWidget(
-            label='Annonceddelay',
-            label_msgid='urban_label_annoncedDelay',
-            i18n_domain='urban',
+            label=_('urban_label_annoncedDelay', default='Annonceddelay'),
         ),
         schemata='urban_analysis',
         vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
@@ -154,9 +149,7 @@ schema = Schema((
         name='annoncedDelayDetails',
         allowable_content_types=('text/plain',),
         widget=TextAreaWidget(
-            label='Annonceddelaydetails',
-            label_msgid='urban_label_annoncedDelayDetails',
-            i18n_domain='urban',
+            label=_('urban_label_annoncedDelayDetails', default='Annonceddelaydetails'),
         ),
         schemata='urban_analysis',
         default_method='getDefaultText',
@@ -168,10 +161,8 @@ schema = Schema((
         default=False,
         widget=BooleanField._properties['widget'](
             description="If checked, an additional paragraph will be added in the licence document",
-            label='Townshipcouncilfolder',
-            label_msgid='urban_label_townshipCouncilFolder',
+            label=_('urban_label_townshipCouncilFolder', default='Townshipcouncilfolder'),
             description_msgid='urban_help_townshipCouncilFolder',
-            i18n_domain='urban',
         ),
         schemata='urban_road',
     ),
@@ -179,9 +170,7 @@ schema = Schema((
         name='impactStudy',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Impactstudy',
-            label_msgid='urban_label_impactStudy',
-            i18n_domain='urban',
+            label=_('urban_label_impactStudy', default='Impactstudy'),
         ),
         schemata='urban_description',
     ),
@@ -189,18 +178,14 @@ schema = Schema((
         name='implantation',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Implantation',
-            label_msgid='urban_label_implantation',
-            i18n_domain='urban',
+            label=_('urban_label_implantation', default='Implantation'),
         ),
         schemata='urban_analysis',
     ),
     StringField(
         name='pebType',
         widget=SelectionWidget(
-            label='Pebtype',
-            label_msgid='urban_label_pebType',
-            i18n_domain='urban',
+            label=_('urban_label_pebType', default='Pebtype'),
         ),
         enforceVocabulary=True,
         schemata='urban_peb',
@@ -211,9 +196,7 @@ schema = Schema((
         name='pebDetails',
         allowable_content_types=('text/plain',),
         widget=TextAreaWidget(
-            label='Pebdetails',
-            label_msgid='urban_label_pebDetails',
-            i18n_domain='urban',
+            label=_('urban_label_pebDetails', default='Pebdetails'),
         ),
         schemata='urban_peb',
         default_method='getDefaultText',
@@ -224,9 +207,7 @@ schema = Schema((
         name='pebStudy',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Pebstudy',
-            label_msgid='urban_label_pebStudy',
-            i18n_domain='urban',
+            label=_('urban_label_pebStudy', default='Pebstudy'),
         ),
         schemata='urban_peb',
     ),
@@ -235,9 +216,7 @@ schema = Schema((
         default=True,
         widget=MasterBooleanWidget(
             slave_fields=slave_fields_habitation,
-            label='Noapplication',
-            label_msgid='urban_label_noApplication',
-            i18n_domain='urban',
+            label=_('urban_label_noApplication', default='Noapplication'),
         ),
         schemata='urban_habitation',
     ),
@@ -245,9 +224,7 @@ schema = Schema((
         name='shouldNumerotateBuildings',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Shouldnumerotatebuildings',
-            label_msgid='urban_label_shouldNumerotateBuilding',
-            i18n_domain='urban',
+            label=_('urban_label_shouldNumerotateBuilding', default='Shouldnumerotatebuildings'),
         ),
         schemata='urban_habitation',
     ),
@@ -255,9 +232,7 @@ schema = Schema((
         name='habitationsBeforeLicence',
         default=0,
         widget=IntegerField._properties['widget'](
-            label='Habitationsbeforelicence',
-            label_msgid='urban_label_habitationsBeforeLicence',
-            i18n_domain='urban',
+            label=_('urban_label_habitationsBeforeLicence', default='Habitationsbeforelicence'),
         ),
         schemata='urban_habitation',
     ),
@@ -265,9 +240,7 @@ schema = Schema((
         name='additionalHabitationsAsked',
         default=0,
         widget=IntegerField._properties['widget'](
-            label='Additionalhabitationsasked',
-            label_msgid='urban_label_additionalHabitationsAsked',
-            i18n_domain='urban',
+            label=_('urban_label_additionalHabitationsAsked', default='Additionalhabitationsasked'),
         ),
         schemata='urban_habitation',
     ),
@@ -275,9 +248,7 @@ schema = Schema((
         name='additionalHabitationsGiven',
         default=0,
         widget=IntegerField._properties['widget'](
-            label='Additionalhabitationsgiven',
-            label_msgid='urban_label_additionalHabitationsGiven',
-            i18n_domain='urban',
+            label=_('urban_label_additionalHabitationsGiven', default='Additionalhabitationsgiven'),
         ),
         schemata='urban_habitation',
     ),
@@ -285,9 +256,7 @@ schema = Schema((
         name='habitationsAfterLicence',
         default=0,
         widget=IntegerField._properties['widget'](
-            label='Habitationsafterlicence',
-            label_msgid='urban_label_habitationsAfterLicence',
-            i18n_domain='urban',
+            label=_('urban_label_habitationsAfterLicence', default='Habitationsafterlicence'),
         ),
         schemata='urban_habitation',
     ),
@@ -295,9 +264,7 @@ schema = Schema((
         name='mayNeedLocationLicence',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Mayneedlocationlicence',
-            label_msgid='urban_label_mayNeedLocationLicence',
-            i18n_domain='urban',
+            label=_('urban_label_mayNeedLocationLicence', default='Mayneedlocationlicence'),
         ),
         schemata='urban_habitation',
     ),
@@ -306,9 +273,7 @@ schema = Schema((
         default='no',
         widget=MultiSelectionWidget(
             format='checkbox',
-            label='Roadadaptation',
-            label_msgid='urban_label_roadAdaptation',
-            i18n_domain='urban',
+            label=_('urban_label_roadAdaptation', default='Roadadaptation'),
         ),
         schemata='urban_road',
         vocabulary='listRoadAdaptations',
@@ -317,9 +282,7 @@ schema = Schema((
         name='roadMiscDescription',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Roadmiscdescription',
-            label_msgid='urban_label_roadMiscDescription',
-            i18n_domain='urban',
+            label=_('urban_label_roadMiscDescription', default='Roadmiscdescription'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -331,10 +294,8 @@ schema = Schema((
         default=False,
         widget=BooleanField._properties['widget'](
             description="If checked, an additional paragraph will be added in the licence document",
-            label='Roaddgrneunderground',
-            label_msgid='urban_label_roadDgrneUnderground',
+            label=_('urban_label_roadDgrneUnderground', default='Roaddgrneunderground'),
             description_msgid='urban_help_roadDgrneUnderground',
-            i18n_domain='urban',
         ),
         schemata='urban_road',
     ),
@@ -342,9 +303,7 @@ schema = Schema((
         name='roadTechnicalAdvice',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Roadtechnicaladvice',
-            label_msgid='urban_label_roadTechnicalAdvice',
-            i18n_domain='urban',
+            label=_('urban_label_roadTechnicalAdvice', default='Roadtechnicaladvice'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -356,10 +315,8 @@ schema = Schema((
         default=False,
         widget=BooleanField._properties['widget'](
             description="If checked, an additional paragraph will be added in the licence document",
-            label='Locationdgrneunderground',
-            label_msgid='urban_label_locationDgrneUnderground',
+            label=_('urban_label_locationDgrneUnderground', default='Locationdgrneunderground'),
             description_msgid='urban_help_locationDgrneUnderground',
-            i18n_domain='urban',
         ),
         schemata='urban_location',
     ),
@@ -367,9 +324,7 @@ schema = Schema((
         name='locationTechnicalAdvice',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Locationtechnicaladvice',
-            label_msgid='urban_label_locationTechnicalAdvice',
-            i18n_domain='urban',
+            label=_('urban_label_locationTechnicalAdvice', default='Locationtechnicaladvice'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -380,9 +335,7 @@ schema = Schema((
         name='locationTechnicalConditions',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Locationtechnicalconditions',
-            label_msgid='urban_label_locationTechnicalConditions',
-            i18n_domain='urban',
+            label=_('urban_label_locationTechnicalConditions', default='Locationtechnicalconditions'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -393,9 +346,7 @@ schema = Schema((
         name='pebTechnicalAdvice',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Pebtechnicaladvice',
-            label_msgid='urban_label_pebTechnicalAdvice',
-            i18n_domain='urban',
+            label=_('urban_label_pebTechnicalAdvice', default='Pebtechnicaladvice'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -414,9 +365,7 @@ schema = Schema((
             startup_directory="urban/architects",
             wild_card_search=True,
             restrict_browsing_to_startup_directory=1,
-            label='Architects',
-            label_msgid='urban_label_architects',
-            i18n_domain='urban',
+            label=_('urban_label_architects', default='Architects'),
         ),
         allowed_types=('Architect',),
         schemata='urban_description',
@@ -429,9 +378,7 @@ schema = Schema((
         widget=MasterMultiSelectWidget(
             format='checkbox',
             slave_fields=slave_fields_procedurechoice,
-            label='Procedurechoice',
-            label_msgid='urban_label_procedureChoice',
-            i18n_domain='urban',
+            label=_('urban_label_procedureChoice', default='Procedurechoice'),
         ),
         schemata='urban_analysis',
         validators=('isValidProcedureChoice',),
@@ -442,9 +389,7 @@ schema = Schema((
         name='requirementFromFD',
         widget=MultiSelectionWidget(
             format='checkbox',
-            label='Requirementfromfd',
-            label_msgid='urban_label_requirementFromFD',
-            i18n_domain='urban',
+            label=_('urban_label_requirementFromFD', default='Requirementfromfd'),
         ),
         schemata='urban_analysis',
         multiValued=1,
@@ -454,9 +399,7 @@ schema = Schema((
         name='exemptFDArticle',
         widget=SelectionWidget(
             format='select',
-            label='Exemptfdarticle',
-            label_msgid='urban_label_exemptFDArticle',
-            i18n_domain='urban',
+            label=_('urban_label_exemptFDArticle', default='Exemptfdarticle'),
         ),
         schemata='urban_analysis',
         vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=True),
@@ -466,9 +409,7 @@ schema = Schema((
         name='water',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Water',
-            label_msgid='urban_label_water',
-            i18n_domain='urban',
+            label=_('urban_label_water', default='Water'),
         ),
         schemata='urban_road',
     ),
@@ -476,9 +417,7 @@ schema = Schema((
         name='electricity',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Electricity',
-            label_msgid='urban_label_electricity',
-            i18n_domain='urban',
+            label=_('urban_label_electricity', default='Electricity'),
         ),
         schemata='urban_road',
     ),
@@ -486,9 +425,7 @@ schema = Schema((
         name='composition',
         widget=MasterSelectWidget(
             slave_fields=slave_fields_composition,
-            label='Composition',
-            label_msgid='urban_label_composition',
-            i18n_domain='urban',
+            label=_('urban_label_composition', default='Composition'),
         ),
         schemata='urban_analysis',
         vocabulary='listCompositions',
