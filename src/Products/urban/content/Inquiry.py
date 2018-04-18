@@ -20,6 +20,7 @@ from Products.urban import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.urban import UrbanMessage as _
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -43,9 +44,7 @@ schema = Schema((
         name='derogation',
         widget=MultiSelectionWidget(
             format='checkbox',
-            label='Derogation',
-            label_msgid='urban_label_derogation',
-            i18n_domain='urban',
+            label=_('urban_label_derogation', default='Derogation'),
         ),
         multiValued=1,
         vocabulary=UrbanVocabulary('derogations'),
@@ -55,9 +54,7 @@ schema = Schema((
         name='derogationDetails',
         allowable_content_types=('text/plain',),
         widget=TextAreaWidget(
-            label='Derogationdetails',
-            label_msgid='urban_label_derogationDetails',
-            i18n_domain='urban',
+            label=_('urban_label_derogationDetails', default='Derogationdetails'),
         ),
         default_output_type='text/plain',
         default_content_type='text/plain',
@@ -67,9 +64,7 @@ schema = Schema((
         name='investigationArticles',
         widget=MultiSelectionWidget(
             size=10,
-            label='Investigationarticles',
-            label_msgid='urban_label_investigationArticles',
-            i18n_domain='urban',
+            label=_('urban_label_investigationArticles', default='Investigationarticles'),
         ),
         multiValued=True,
         vocabulary=UrbanVocabulary('investigationarticles'),
@@ -79,9 +74,7 @@ schema = Schema((
         name='investigationArticlesText',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Investigationarticlestext',
-            label_msgid='urban_label_investigationArticlesText',
-            i18n_domain='urban',
+            label=_('urban_label_investigationArticlesText', default='Investigationarticlestext'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -92,18 +85,14 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            label='Demanddisplay',
-            label_msgid='urban_label_demandDisplay',
-            i18n_domain='urban',
+            label=_('urban_label_demandDisplay', default='Demanddisplay'),
         ),
     ),
     TextField(
         name='investigationDetails',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Investigationdetails',
-            label_msgid='urban_label_investigationDetails',
-            i18n_domain='urban',
+            label=_('urban_label_investigationDetails', default='Investigationdetails'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -113,9 +102,7 @@ schema = Schema((
         name='investigationReasons',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Investigationreasons',
-            label_msgid='urban_label_investigationReasons',
-            i18n_domain='urban',
+            label=_('urban_label_investigationReasons', default='Investigationreasons'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -125,9 +112,7 @@ schema = Schema((
         name='roadModificationSubject',
         allowable_content_types=('text/html',),
         widget=RichWidget(
-            label='Roadmodificationsubject',
-            label_msgid='urban_label_roadModificationSubject',
-            i18n_domain='urban',
+            label=_('urban_label_roadModificationSubject', default='Roadmodificationsubject'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -136,9 +121,7 @@ schema = Schema((
     LinesField(
         name='solicitOpinionsTo',
         widget=Select2Widget(
-            label='Solicitopinionsto',
-            label_msgid='urban_label_solicitOpinionsTo',
-            i18n_domain='urban',
+            label=_('urban_label_solicitOpinionsTo', default='Solicitopinionsto'),
             multiple=True,
         ),
         schemata='urban_advices',
@@ -149,9 +132,7 @@ schema = Schema((
     LinesField(
         name='solicitOpinionsToOptional',
         widget=Select2Widget(
-            label='Solicitopinionstooptional',
-            label_msgid='urban_label_solicitOpinionsToOptional',
-            i18n_domain='urban',
+            label=_('urban_label_solicitOpinionsToOptional', default='Solicitopinionstooptional'),
             multiple=True,
         ),
         schemata='urban_advices',

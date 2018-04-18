@@ -17,7 +17,8 @@
         <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
     </fieldset>
 
-    <fieldset tal:define="workLocations context/getBusinessOldLocation">
+    <fieldset tal:define="workLocations context/getBusinessOldLocation"
+              tal:condition="python: 'businessOldLocation' in view.getUsedAttributes()">
         <legend i18n:translate="urban_label_businessOldLocation">Old business location</legend>
         <div tal:condition="workLocations">
             <metal:myfield use-macro="python:here.widget('businessOldLocation', mode='view')" />

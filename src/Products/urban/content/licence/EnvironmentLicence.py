@@ -41,7 +41,7 @@ from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from zope.i18n import translate
 
 optional_fields = [
-    'publicRoadModifications',
+    'publicRoadModifications', 'previousLicences',
     'referenceSPE', 'referenceFT', 'environmentTechnicalRemarks',
     'claimsSynthesis', 'conclusions', 'commentsOnSPWOpinion',
 ]
@@ -52,9 +52,7 @@ schema = Schema((
     StringField(
         name='authority',
         widget=SelectionWidget(
-            label='Authority',
-            label_msgid='urban_label_authority',
-            i18n_domain='urban',
+            label=_('urban_label_authority', 'Authority'),
         ),
         schemata='urban_description',
         vocabulary=UrbanVocabulary('authority', inUrbanConfig=True),
@@ -63,9 +61,7 @@ schema = Schema((
     ReferenceField(
         name='previousLicences',
         widget=ReferenceBrowserWidget(
-            label='Previouslicences',
-            label_msgid='urban_label_previousLicences',
-            i18n_domain='urban',
+            label=_('urban_label_previousLicences', 'Previouslicences'),
         ),
         allowed_types=('EnvClassThree', 'EnvClassTwo', 'EnvClassOne'),
         schemata='urban_description',
@@ -77,9 +73,7 @@ schema = Schema((
         allow_oddeven=True,
         widget=DataGridWidget(
             columns={'street': ReferenceColumn("Street", surf_site=False, object_provides=('Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',)), 'modification': TextAreaColumn('Modification'), 'justification': TextAreaColumn('Justification')},
-            label='Publicroadmodifications',
-            label_msgid='urban_label_publicRoadModifications',
-            i18n_domain='urban',
+            label=_('urban_label_publicRoadModifications', default='Publicroadmodifications'),
         ),
         schemata='urban_description',
         columns=('street', 'modification', 'justification'),
@@ -88,9 +82,7 @@ schema = Schema((
         name='hasEnvironmentImpactStudy',
         default=True,
         widget=BooleanField._properties['widget'](
-            label='Hasenvironmentimpactstudy',
-            label_msgid='urban_label_hasEnvironmentImpactStudy',
-            i18n_domain='urban',
+            label=_('urban_label_hasEnvironmentImpactStudy', default='Hasenvironmentimpactstudy'),
         ),
         schemata='urban_description',
     ),
@@ -98,9 +90,7 @@ schema = Schema((
         name='isSeveso',
         default=False,
         widget=BooleanField._properties['widget'](
-            label='Isseveso',
-            label_msgid='urban_label_isSeveso',
-            i18n_domain='urban',
+            label=_('urban_label_isSeveso', default='Isseveso'),
         ),
         schemata='urban_description',
     ),
@@ -108,9 +98,7 @@ schema = Schema((
         name='ftSolicitOpinionsTo',
         widget=MultiSelectionWidget(
             format='checkbox',
-            label='Ftsolicitopinionsto',
-            label_msgid='urban_label_ftSolicitOpinionsTo',
-            i18n_domain='urban',
+            label=_('urban_label_ftSolicitOpinionsTo', default='Ftsolicitopinionsto'),
         ),
         schemata='urban_description',
         multiValued=1,

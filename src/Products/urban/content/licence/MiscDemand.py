@@ -21,6 +21,7 @@ from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.Inquiry import Inquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.urban import UrbanMessage as _
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -42,9 +43,7 @@ schema = Schema((
             restrict_browsing_to_startup_directory=True,
             wild_card_search=True,
             show_index_selector=True,
-            label='Architects',
-            label_msgid='urban_label_architects',
-            i18n_domain='urban',
+            label=_('urban_label_architects', default='Architects'),
         ),
         required=False,
         schemata='urban_description',

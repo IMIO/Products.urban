@@ -626,6 +626,12 @@ default_values = {
         'folderdelays': [
             'UrbanDelay',
             {'id': "15j", 'title': u"15 jours", 'deadLineDelay': 15, 'alertDelay': 0},
+            {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
+        ],
+        'deposittype': [
+            'UrbanVocabularyTerm',
+            {'id': "papier", 'title': u"Papier"},
+            {'id': "soumission", 'title': u"Soumission"},
         ],
     },
     'Division': {

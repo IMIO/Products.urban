@@ -379,9 +379,7 @@ schema = Schema((
         name='concentratedRunoffSRiskDetails',
         allowable_content_types=('text/plain',),
         widget=TextAreaWidget(
-            label='concentratedrunoffsriskdetails',
-            label_msgid='urban_label_concentratedRunoffSRiskDetails',
-            i18n_domain='urban',
+            label=_('urban_label_concentratedRunoffSRiskDetails', default='concentratedrunoffsriskdetails'),
         ),
         default_content_type='text/plain',
         default_method='getDefaultText',
