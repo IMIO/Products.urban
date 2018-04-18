@@ -6,7 +6,11 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = build
+SOURCEDIR     = source
 DEPLOYDEST    = urban@sphinx.imio.be:/var/www/html/iaurban
+DEPLOYRESDIR  = _downloads
+PDF_FILENAME  = iaurban.pdf
+EPUB_FILENAME = iaurban.epub
 
 # User-friendly check for sphinx-build
 ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
@@ -59,10 +63,24 @@ html:
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
+.PHONY: create_pdf
+create_pdf:
+	@echo
+	$(SPHINXBUILD) -b pdf $(SOURCEDIR) $(DEPLOYRESDIR)
+	@echo "Pdf creation finished."
+
+.PHONY: create_epub
+create_epub:
+	@echo
+	$(SPHINXBUILD) -b epub $(SOURCEDIR) $(DEPLOYRESDIR)
+	@echo "Epub creation finished."
+
 .PHONY: html_and_deploy
-html_and_deploy: html
+html_and_deploy: create_pdf create_epub html
 	@echo
 	rsync -rv ./$(BUILDDIR)/html/* $(DEPLOYDEST)
+	scp ./$(DEPLOYRESDIR)/$(PDF_FILENAME) $(DEPLOYDEST)/$(DEPLOYRESDIR)/$(PDF_FILENAME)
+	scp ./$(DEPLOYRESDIR)/$(EPUB_FILENAME) $(DEPLOYDEST)/$(DEPLOYRESDIR)/$(EPUB_FILENAME)
 	@echo "Deploy finished on $(DEPLOYDEST)."
 
 .PHONY: dirhtml
