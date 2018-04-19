@@ -25,5 +25,14 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
+##########
+Ressources
+##########
+
+* Télécharger cette documentation:
+   `PDF <http://docs.imio.be/iaurban/_downloads/iaurban.pdf>`_ / `Epub <http://docs.imio.be/iaurban/_downloads/iaurban.epub>`_
+
+
+
 
 

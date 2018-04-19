@@ -31,6 +31,7 @@ import os
 extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.ifconfig',
+    'rst2pdf.pdfbuilder',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -51,6 +52,8 @@ master_doc = 'index'
 project = u'iA.Urban'
 copyright = u'2018, IMIO'
 author = u'jja'
+
+pdf_documents = [(master_doc, u'iaurban', u'iA.Urban doc', u'Imio'),]
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -296,6 +299,7 @@ epub_copyright = copyright
 
 # The basename for the epub file. It defaults to the project name.
 #epub_basename = project
+epub_basename = 'iaurban'
 
 # The HTML theme for the epub output. Since the default themes are not
 # optimized for small screen space, using the same theme for HTML and epub
