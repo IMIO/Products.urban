@@ -214,7 +214,54 @@ Linux
 Résolution des problèmes
 ------------------------
 
+Problèmes à l'ouverture du fichier
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Il faut vérifier en premier lieu si Firefox est bien configuré pour ouvrir les fichiers ZopeEdit.
+
+#. Si c'est bien le cas et que le problème d'ouverture persiste, il est possible de modifier la configuration de ZopeEdit.
+
+#. En dernier recours, consulter le fichier de log et nous l'envoyer via un ticket de support.
+
+**Note:** Pour les applications iA.Urban et iA.Docs, les documents générés et les modèles à éditer sont au format :samp:`.odt` et il est impératif de les ouvrir avec LibreOffice, comme indiqué dans les prérequis.
+
+Si un autre éditeur de texte ouvre le document, se référer à la `Configuration de ZopeEdit`_  et modifier aussi la ligne :samp:`editor=` avec le chemin de l'exécutable de LibreOffice Writer. Sur une installation par défaut, ce sera par exemple: :samp:`editor=C:\Program Files\LibreOffice\program\swriter.exe`.
+
 Configuration de Firefox
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
+A la première utilisation de la fonction d'édition externe, le navigateur demande quoi faire avec le fichier :samp:`.zem`. Si ZopeEdit a bien été installé, le navigateur va proposer automatiquement l'association dans le choix "Ouvrir avec".
+
+Toutefois, si ZopeEdit n'est pas proposé par le navigateur, il faut aller le chercher manuellement. Il faut cliquer dans la liste déroulante sur "Autre", une fenêtre de sélection apparait permettant de choisir dans la liste des programmes. Si ZopeEdit n'est toujours pas dans cette liste, cliquer sur le bouton "Parcourir..." et sélectionner :samp:`zopeedit.exe` dans le répertoire d'installation (si il n'a pas été modifié à l'installation : :samp:`C:\\ProgramFiles\\ZopeExternalEditor`).
+
+Il est toujours possible de modifier ultérieurement une mauvaise association. Pour ce faire, aller dans le menu "Préférences" de Firefox, et dérouler jusqu'à "Applications". En recherchant "Zope" dans la boite de dialogue, on peut à nouveau définir l'utilisation de :samp:`zopeedit.exe` pour le type de contenu ZopeEdit.
+
+Configuration de ZopeEdit
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Une fois installé, ZopeEdit dispose d'un fichier de configuration, placé dans un dossier de configuration de Windows.
+
+Il n'est pas recommandé de changer les options de ce fichier, sauf si les réglages par défaut ne sont pas suffisants. En effet, par défaut, ZopeEdit laisse faire le système d'exploitation (Windows) et le navigateur (Firefox) pour associer les fichiers ZopeEdit. Parfois, ces associations ne sont pas correctes malgré les réglages dans Firefox, il est alors possible de les forcer via le fichier de configuration.
+
+Avant de modifier ce fichier de configuration, il faut donc être certain que le navigateur est bien configuré.
+
+Pour ouvrir ce fichier, le plus simple est de passer par le menu "Démarrer" et de lancer "Zope External Editor". La première fois, le fichier de configuration s'ouvre dans un éditeur de texte.
+
+La seconde partie du fichier contient les associations entre le type de fichiers, son extension et le programme à utiliser pour l'ouvrir. C'est cette partie qu'il faut modifier ou compléter.
+
+Voici ce qu'il faut y mettre::
+
+	[content-type:application/vnd.oasis.opendocument.text]
+	extension=.odt
+	editor=
+	
+Il est nécessaire d'enregistrer le fichier.
+
+Si l'on lance à nouveau Zope External Editor, une fenêtre demande de réinitialiser le fichier avec les valeurs par défaut: il faut répondre "Non".
+
+Fichier de log
+^^^^^^^^^^^^^^
+
+ZopeEdit écrit ses messages d'erreur dans un fichier de log. En cas de problème, il est recommandé de consulter ce fichier afin d'avoir le maximum d'informations concernant le problème rencontré.
+
+Le fichier de log se situe dans le dossier :samp:`%TEMP%`, qui est un dossier spécial sur Windows. Vous pouvez y accéder soit en tapant %TEMP% dans la barre d'adresse des dossiers, ou via :samp:`C:\\Documents and Settings\\{utilisateur}\\Local Settings\\Temp`.
