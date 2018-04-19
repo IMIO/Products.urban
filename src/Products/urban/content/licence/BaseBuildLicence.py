@@ -486,9 +486,9 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
           road adaptations : no, yes modify, yes create
         """
         vocab = (
-            ('modify', 'road_adaptation_modify'),
-            ('create', 'road_adaptation_create'),
-            ('supress', 'road_adaptation_supress'),
+            ('modify', _('road_adaptation_modify')),
+            ('create', _('road_adaptation_create')),
+            ('supress', _('road_adaptation_supress')),
         )
         return DisplayList(vocab)
 
@@ -500,9 +500,9 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
           building usage : for habitation, not for habitation
         """
         vocab = (
-            ('for_habitation', 'usage_for_habitation'),
-            ('not_for_habitation', 'usage_not_for_habitation'),
-            ('not_applicable', 'usage_not_applicable'),
+            ('for_habitation', _('usage_for_habitation')),
+            ('not_for_habitation', _('usage_not_for_habitation')),
+            ('not_applicable', _('usage_not_applicable')),
         )
         return DisplayList(vocab)
 
