@@ -16,6 +16,7 @@
    <element value="Proprietary"/>
    <element value="PortionOut"/>
    <element value="UrbanEvent"/>
+   <element value="UrbanEventCollege"/>
    <element value="WorkLocation"/>
    <element value="Applicant"/>
    <element value="File"/>
