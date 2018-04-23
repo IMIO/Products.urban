@@ -5,7 +5,7 @@
       i18n:domain="urban">
 
   <body>
-  <metal:main fill-slot="main">
+    <metal:main fill-slot="main">
       <tal:main_macro define="main_macro view/getLicenceMainTemplateMacro">
         <metal:test use-macro="main_macro" />
       </tal:main_macro>

@@ -259,11 +259,11 @@
   />
 
   <browser:page
-          for="Products.urban.interfaces.IEnvironmentLicence"
-          name="envclassborderingview"
-          class=".envclassoneview.EnvClassOneView"
-          template="templates/envclassoneview.pt"
-          permission="zope2.View"
+    for="Products.urban.interfaces.IEnvironmentLicence"
+    name="envclassborderingview"
+    class=".envclassborderingview.EnvClassBorderingView"
+    template="templates/envclassborderingview.pt"
+    permission="zope2.View"
   />
 
   <browser:page
@@ -285,6 +285,13 @@
      name="envclassone-macros"
      for="Products.urban.interfaces.IEnvironmentBase"
      template="templates/envclassonemacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="envclassbordering-macros"
+     for="Products.urban.interfaces.IEnvironmentBase"
+     template="templates/envclassborderingmacros.pt"
      permission="zope2.View"
   />
 
