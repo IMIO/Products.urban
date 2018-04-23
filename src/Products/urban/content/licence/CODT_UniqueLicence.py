@@ -278,6 +278,9 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
 
         return '{}j'.format(str(delay))
 
+    def getLastInternalPreliminaryAdvice(self):
+        return self.getLastEvent(interfaces.IInternalPreliminaryAdviceEvent)
+
     def getLastTransmitToSPW(self):
         return self.getLastEvent(interfaces.ITransmitToSPWEvent)
 
