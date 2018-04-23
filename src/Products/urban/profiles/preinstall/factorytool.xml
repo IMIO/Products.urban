@@ -37,6 +37,7 @@
   <type portal_type="CODT_Inquiry"/>
   <type portal_type="UrbanEventInquiry"/>
   <type portal_type="UrbanEventCollege"/>
+  <type portal_type="UrbanEventMayor"/>
   <type portal_type="UrbanEventOpinionRequest"/>
   <type portal_type="OrganisationTerm"/>
   <type portal_type="MiscDemand"/>

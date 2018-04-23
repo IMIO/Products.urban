@@ -18,6 +18,7 @@
    <element value="UrbanEvent"/>
    <element value="WorkLocation"/>
    <element value="Applicant"/>
+   <element value="UrbanEventCollege"/>
    <element value="File"/>
    <element value="task"/>
  </property>

@@ -67,6 +67,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanEventCollege"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="UrbanEventMayor"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanEventAnnouncement"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanEventInquiry"
