@@ -57,12 +57,12 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             formatted_date = self.format_date(date, long_format=long_format, translatemonth=translatemonth)
         return formatted_date
 
-    def format_date(self, date=_date.today(), translatemonth=True, long_format=False):
+    def format_date(self, date=None, translatemonth=True, long_format=False):
         """
           Format the date for printing in pod templates
         """
         if not date:
-            return ''
+            date = _date.today()
         if date.year == 9999:
             return u"\u221E"
         if not translatemonth:
@@ -70,16 +70,16 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             u_date = u_date and u_date.encode('utf8') or ''
             return u_date
         else:
-            #we need to translate the month and maybe the day (1er)
+            # we need to translate the month and maybe the day (1er)
             year, month, day, hour = str(date.strftime('%Y/%m/%d/%Hh%M')).split('/')
-            #special case when the day need to be translated
-            #for example in french '1' becomes '1er' but in english, '1' becomes '1st'
-            #if no translation is available, then we use the default where me remove foregoing '0'
-            #'09' becomes '9', ...
+            # special case when the day need to be translated
+            # for example in french '1' becomes '1er' but in english, '1' becomes '1st'
+            # if no translation is available, then we use the default where me remove foregoing '0'
+            # '09' becomes '9', ...
             daymsgid = "date_day_%s" % day
             translatedDay = translate(daymsgid, 'urban', context=self.request, default=day.lstrip('0')).encode('utf8')
-            #translate the month
-            #msgids already exist in the 'plonelocales' domain
+            # translate the month
+            # msgids already exist in the 'plonelocales' domain
             monthMappings = {
                 '01': 'jan',
                 '02': 'feb',
@@ -358,7 +358,9 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             i = i + 1
         return event
 
-    def getExpirationDate(self, date=_date.today(), year=5):
+    def getExpirationDate(self, date=None, year=5):
+        if not date:
+            date = _date.today()
         expirationDate = _date(date.year(), date.month(), date.day())
         return self.format_date(expirationDate + relativedelta(years=year))
 
@@ -495,7 +497,9 @@ class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
         event = view.getEvent(title)
         return event
 
-    def format_date(self, folder, date=_date.today(), translatemonth=True, long_format=False):
+    def format_date(self, folder, date=None, translatemonth=True, long_format=False):
+        if not date:
+            date = _date.today()
         view = folder.restrictedTraverse('document_generation_helper_view')
         formated_date = view.format_date(date, translatemonth, long_format)
         return formated_date
