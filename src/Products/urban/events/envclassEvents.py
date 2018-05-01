@@ -18,12 +18,12 @@ def update_history_for_vocabulary_field(obj, fieldname):
         key = '{0}_history'.format(fieldname)
         action = 'update_{0}'.format(fieldname)
         history_values = {key: [e.id for e in value]}
-        last_values = get_value_history_by_index(obj, key, -1)
+        last_values = get_value_history_by_index(obj, key, -1, action=action)
         if has_changes(history_values[key], last_values[key]):
             add_event_to_history(obj, key, action, extra_infos=history_values)
 
 
-def get_value_history_by_index(obj, history_attr, index):
+def get_value_history_by_index(obj, history_attr, index, action=None):
     """
     Return given history record by index -1 is the latest, -2 the previous, ...
     """
@@ -31,6 +31,8 @@ def get_value_history_by_index(obj, history_attr, index):
     if not hasattr(obj, history_attr):
         return default
     history = getattr(obj, history_attr)
+    if action is not None:
+        history = [e for e in history if e['action'] == action]
     if index > len(history) or index * -1 > len(history):
         return default
     return history[index]
