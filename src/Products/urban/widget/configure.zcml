@@ -1,17 +1,18 @@
 <configure
-        xmlns:five="http://namespaces.zope.org/five"
-        xmlns:zcml="http://namespaces.zope.org/zcml"
-        xmlns:browser="http://namespaces.zope.org/browser"
-        xmlns="http://namespaces.zope.org/zope"
-        i18n_domain="urban">
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="urban">
 
 
     <browser:page
-            for="*"
-            name="refhistorybrowser_popup"
-            permission="zope2.View"
-            template="templates/historizereferenceformview.pt"
-            class=".historizereferencewidget.HistorizeReferenceView"/>
+        for="*"
+        name="refhistorybrowser_popup"
+        permission="zope2.View"
+        template="templates/historizereferenceformview.pt"
+        class=".historizereferencewidget.HistorizeReferenceView"
+        />
 
 
 </configure>
