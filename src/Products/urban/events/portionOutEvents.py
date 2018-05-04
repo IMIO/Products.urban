@@ -32,9 +32,13 @@ def setValidParcel(parcel, event):
      Check if the manually added parcel exists in he cadastral DB
      and set its "isvalidparcel" attribute accordingly.
     """
-
     is_official = True
-    references = parcel.reference_as_dict()
+    parcel.setDivisionCode(parcel.getDivision())
+    parcel.bis = '0' if parcel.bis == '' else parcel.bis
+    parcel.puissance = '0' if parcel.puissance == '' else parcel.puissance
+    parcel.reindexObject()
+
+    references = parcel.reference_as_dict(True)
     try:
         cadastre = services.cadastre.new_session()
         is_outdated = cadastre.is_outdated_parcel(**references)
