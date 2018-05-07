@@ -2,27 +2,36 @@
 import unittest
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 
-from Products.urban.events.envclassEvents import update_rubric_history
-from Products.urban.events.envclassEvents import get_last_value_history
+from Products.urban.events import envclassEvents
+
 
 class TestEnvEvent(unittest.TestCase):
     layer = URBAN_TESTS_INTEGRATION
 
-    def setUp(self):
+    def test_update_history_for_vocabulary_field(self):
         pass
-        self.rubric = type('Rubric', (object,),)
-        self.rubric.rubrics_history = []
-        self.acl = type('ACL', (object,),)
-        self.acl.acl_history = []
 
+    def test_get_value_history_by_index_without_history(self):
+        """
+        Test get_value_history_by_index function when there is no history
+        """
+        pass
 
+    def test_get_value_history_by_index_without_history_index(self):
+        """
+        Test get_value_history_by_index function when there is no history
+        record for the given index
+        """
+        pass
 
-    def testCreationDatefoo(self):
-        self.rubric.rubrics_history = ['element1']
-        new_element = ['element1', 'element2']
-        foo = get_last_value_history(self.rubric, 'rubrics_history')
+    def test_get_value_history_by_index_with_action(self):
+        """
+        Test get_value_history_by_index function when an action is specified
+        """
+        pass
 
-        update_rubric_history(self.rubric)
-        import pdb;pdb.set_trace()
-        self.assertTrue(True)
+    def test_get_value_history_by_index(self):
+        pass
 
+    def test_has_changes(self):
+        pass
