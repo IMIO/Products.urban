@@ -88,11 +88,13 @@ class EnvironmentRubricTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixi
     def getClass(self):
         return self.getExtraValue()
 
+    security.declarePublic('updateTitle')
     def updateTitle(self):
         class_number = self.getClass()
         rubric_number = self.getNumber()
-        description = strip_tags(self.Description())
-        new_title =  "classe %s,  %s : %s" % (class_number, rubric_number, description)
+        description = strip_tags(self.Description()).decode('utf-8')
+        description = len(description) > 220 and u'{}...'.format(description[:220]) or description
+        new_title =  u"classe %s,  %s : %s" % (class_number, rubric_number, description)
         self.setTitle(new_title)
         self.reindexObject(idxs=('Title', 'SearchableText', 'sortable_title', ))
 

@@ -147,7 +147,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         vocabulary='listLicenceConfigs',
-        default_method='default_numerotaion_source',
+        default_method='default_numerotation_source',
         schemata='public_settings',
     ),
     StringField(
@@ -418,7 +418,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         #return a vocabulary containing the names of all the text fields of the schema
         return DisplayList(sorted(vocabulary_fields, key=lambda name: name[1]))
 
-    def default_numerotaion_source(self):
+    def default_numerotation_source(self):
         return self.id
 
 
