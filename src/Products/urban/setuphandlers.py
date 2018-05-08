@@ -480,6 +480,8 @@ def addRubricValues(context, config_folder):
                     field = old_rubric.getField(fieldname)
                     mutator = field.getMutator(old_rubric)
                     mutator(newvalue)
+            new_rubric = getattr(rubric_folder, rubric_id)
+            new_rubric.processForm()
 
             bound_condition = mapping[rubric_id]
             if bound_condition:
