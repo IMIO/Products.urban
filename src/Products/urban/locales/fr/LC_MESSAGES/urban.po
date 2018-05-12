@@ -169,7 +169,7 @@ msgstr "Clôturer le permis"
 
 #: ../widget/historizereferencewidget.py:77
 msgid "Comment - {0}"
-msgstr ""
+msgstr "Commentaire - {0}"
 
 #: ../browser/templates/coring_update.pt:7
 msgid "Coring"
@@ -273,7 +273,7 @@ msgstr ""
 
 #: ../widget/templates/historizereferenceformview.pt:9
 msgid "History of changes"
-msgstr ""
+msgstr "Historique des changements"
 
 #: ../browser/templates/parcelhistoricrecordsview.pt:19
 msgid "History of the parcel and related licences"
@@ -281,7 +281,7 @@ msgstr "Historique de la parcelle et dossiers liés"
 
 #: ../widget/historizereferencewidget.py:124
 msgid "History saved"
-msgstr ""
+msgstr "Historique sauvegardé"
 
 #. Default: "Acknowledgement"
 #: ../interfaces.py:400
@@ -844,7 +844,7 @@ msgstr "Demandeur(s)"
 #. Default: "Applicant(s) history"
 #: ../browser/licence/templates/licencemacros.pt:133
 msgid "applicants_history"
-msgstr ""
+msgstr "Historique des demandeurs"
 
 msgid "applicationreasons_folder_title"
 msgstr "Motifs de la demande"
@@ -1529,7 +1529,7 @@ msgstr "Très faible"
 #. Default: "Cancel"
 #: ../browser/templates/fieldoverlay_edit.pt:39
 msgid "label_cancel"
-msgstr ""
+msgstr "Annuler"
 
 msgid "label_colname_Creator"
 msgstr "Créateur"
@@ -3525,7 +3525,6 @@ msgstr "Nom généralement constaté pour le lieu-dit"
 
 #. Default: "Natura2000location"
 #: ../content/licence/EnvironmentBase.py:206
-#, fuzzy
 msgid "urban_label_location"
 msgstr "Emplacement"
 
