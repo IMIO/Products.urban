@@ -7,6 +7,7 @@ from Products.Five import BrowserView
 from Products.urban import utils
 from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
 from Products.urban.browser.table.urbantable import ApplicantTable
+from Products.urban.browser.table.urbantable import ApplicantHistoryTable
 from Products.urban.browser.table.urbantable import AttachmentsTable
 from Products.urban.browser.table.urbantable import EventsTable
 from Products.urban.browser.table.urbantable import NestedAttachmentsTable
@@ -154,6 +155,12 @@ class LicenceView(BrowserView):
         if not self.context.getApplicants():
             return ''
         contacttable = ApplicantTable(self.context, self.request)
+        return self.renderListing(contacttable)
+
+    def renderApplicantHistoryListing(self):
+        if not self.context.getApplicants():
+            return ''
+        contacttable = ApplicantHistoryTable(self.context, self.request)
         return self.renderListing(contacttable)
 
     def renderProprietaryListing(self):
