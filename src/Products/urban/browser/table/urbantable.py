@@ -8,6 +8,7 @@ from zope.interface import implements
 from Products.ZCatalog.Lazy import LazyMap
 
 from Products.urban.browser.table.interfaces import IApplicantTable
+from Products.urban.browser.table.interfaces import IApplicantHistoryTable
 from Products.urban.browser.table.interfaces import IArchitectsTable
 from Products.urban.browser.table.interfaces import IAttachmentsTable
 from Products.urban.browser.table.interfaces import IClaimantsTable
@@ -96,6 +97,14 @@ class ApplicantTable(ContactTable):
     """
     """
     implements(IApplicantTable)
+
+    cssClasses = {'table': 'listing largetable'}
+
+
+class ApplicantHistoryTable(ContactTable):
+    """
+    """
+    implements(IApplicantHistoryTable)
 
     cssClasses = {'table': 'listing largetable'}
 

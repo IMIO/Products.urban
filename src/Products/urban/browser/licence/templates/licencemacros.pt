@@ -127,3 +127,17 @@
         </form>
     </div>
 </fieldset>
+
+
+<fieldset metal:define-macro="urbanApplicantsHistoricAndCorporationsMacro" i18n:domain="urban">
+    <legend i18n:translate="applicants_history">Applicant(s) history</legend>
+    <div class="#" tal:define="corporations context/getCorporations;
+                               applicants context/getApplicants"
+                   tal:attributes="class python: (applicants or corporations) and 'field' or 'field warning'">
+        <p tal:condition="python: not (corporations or applicants)" i18n:translate="warning_add_an_applicant">
+            You must encode applicant(s)
+        </p>
+        <tal:listing content="structure view/renderApplicantHistoryListing" />
+
+    </div>
+</fieldset>

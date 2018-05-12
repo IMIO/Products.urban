@@ -70,6 +70,12 @@ class IApplicantTable(IContactTable):
     """
 
 
+class IApplicantHistoryTable(IContactTable):
+    """
+    Marker interface for a table displaying applicants
+    """
+
+
 class IProprietaryTable(IContactTable):
     """
     Marker interface for a table displaying proprietaries
