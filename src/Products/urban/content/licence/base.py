@@ -490,8 +490,8 @@ class UrbanBase(object):
                     '|' + claimant.getPersonTitleValue(reverse=True).decode('utf8') +\
                     '|' + claimant.getName1().decode('utf8') +\
                     '|' + claimant.getName2().decode('utf8') +\
-                    '|' + claimant.getNumber().decode('utf8') +\
-                    ', ' + claimant.getStreet().decode('utf8') +\
+                    '|' + claimant.getStreet.decode('utf8') +\
+                    ', ' + claimant.getNumber()().decode('utf8') +\
                     '|' + claimant.getZipcode().decode('utf8') +\
                     ' ' + claimant.getCity().decode('utf8') +\
                     '|' + tool.formatDate(claimant.getClaimDate()).decode('utf8')
@@ -507,7 +507,7 @@ class UrbanBase(object):
         toreturn = '[CSV]Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for architect in architects:
             toreturn = toreturn + '%' + architect.getPersonTitleValue() + '|' + architect.getName1() + '|' +\
-                    architect.getName2() + '|' + architect.getNumber() + ', ' + architect.getStreet() + '|' + \
+                    architect.getName2() + '|' + architect.getStreet() + ', ' + architect.getNumber() + '|' + \
                     architect.getZipcode() + ' ' + architect.getCity()
         toreturn = toreturn + '[/CSV]'
         return toreturn
@@ -521,7 +521,7 @@ class UrbanBase(object):
         toreturn = '[CSV]Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for geometrician in geometricians:
             toreturn = toreturn + '%' + geometrician.getPersonTitleValue() + '|' + geometrician.getName1() + '|' +\
-                    geometrician.getName2() + '|' + geometrician.getNumber() + ', ' + geometrician.getStreet() + '|' + \
+                    geometrician.getName2() + '|' + geometrician.getStreet() + ', ' + geometrician.getNumber() + '|' + \
                     geometrician.getZipcode() + ' ' + geometrician.getCity()
         toreturn = toreturn + '[/CSV]'
         return toreturn
@@ -535,7 +535,7 @@ class UrbanBase(object):
         toreturn = '[CSV]Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for notary in notaries:
             toreturn = toreturn + '%' + notary.getPersonTitleValue() + '|' + notary.getName1() + '|' +\
-                    notary.getName2() + '|' + notary.getNumber() + ', ' + notary.getStreet() + '|' +\
+                    notary.getName2() + '|' + notary.getStreet() + ', ' + notary.getNumber() + '|' +\
                     notary.getZipcode() + ' ' + notary.getCity()
         toreturn = toreturn + '[/CSV]'
         return toreturn
