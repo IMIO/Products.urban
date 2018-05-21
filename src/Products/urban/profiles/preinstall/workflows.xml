@@ -148,7 +148,7 @@
   </type>
 <!-- ##code-section workflowbindings -->
 <type type_id="Applicant">
-  <bound-workflow workflow_id="" />
+  <bound-workflow workflow_id="activation_workflow" />
 </type>
 <type type_id="Architect">
   <bound-workflow workflow_id="activation_workflow" />
