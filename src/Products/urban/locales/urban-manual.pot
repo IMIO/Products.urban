@@ -1014,6 +1014,12 @@ msgstr ""
 msgid "projectmeeting_urbanconfig_title"
 msgstr ""
 
+msgid "explosivespossession_urbanconfig_title"
+msgstr ""
+
+msgid "explosivespossessions"
+msgstr ""
+
 #. Default: "RCU"
 #: setuphandlers.py
 msgid "rcu_folder_title"

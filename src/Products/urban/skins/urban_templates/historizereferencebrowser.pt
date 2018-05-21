@@ -168,11 +168,12 @@
                tal:condition="not:multiValued"
                tal:attributes="data-fieldname fieldName;
                                data-multivalued multiValued"/>
-        <input type="button" class="searchButton addreference" value="History register"
+        <input type="button" class="searchButton addHistory" value="History register"
+               i18n:domain="urban"
                i18n:attributes="value label_history"
                tal:define="popup_width widget/popup_width|string:500;
                            popup_height widget/popup_height|string:550;"
-               tal:attributes="src string:${startup_directory}/refhistorybrowser_popup?fieldName=${fieldName}&amp;fieldRealName=${field/getName}&amp;at_url=${at_url}&amp;_authenticator=${context/@@authenticator/token|nothing};
+               tal:attributes="src string:${context/absolute_url}/refhistorybrowser_popup?form.widgets.field=${field/getName}&amp;at_url=${at_url}&amp;_authenticator=${context/@@authenticator/token|nothing};
                            rel string:#history_${overlay_id}" />
            </div><div id="atrb" tal:attributes="id overlay_id" class="overlay overlay-ajax"><div class="close"><span>Close</span></div>
            <div class="pb-ajax">
@@ -181,10 +182,19 @@
              <!-- <a href="" i18n:translate="referencebrowser_back" class="refbrowser_back">Back</a> -->
            </div>
            </div>
-           <div id="atrb" tal:attributes="id string:history_${overlay_id}" class="overlay overlay-ajax"><div class="close"><span>Close</span></div>
+           <div id="atrb" tal:attributes="id string:history_${overlay_id}" class="overlay overlay-ajax overlay-history"><div class="close"><span>Close</span></div>
            <div class="pb-ajax">
              <div class="overlaycontent" style="font-size: 125%"></div>
            </div>
+           <script type="text/javascript">
+              jQuery(document).ready(function($) {
+                $('input.addHistory').prepOverlay({
+                  subtype: 'ajax',
+                  formselector: 'form',
+                  noform: 'reload',
+                });
+              });
+           </script>
            </div>
 
       <!-- Todo? -->
