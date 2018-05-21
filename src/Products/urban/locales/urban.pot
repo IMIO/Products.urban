@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-05-21 13:57+0000\n"
+"POT-Creation-Date: 2018-05-21 14:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1609,6 +1609,11 @@ msgid "label_export"
 msgstr ""
 
 msgid "label_from"
+msgstr ""
+
+#. Default: "History register"
+#: ../skins/urban_templates/historizereferencebrowser.pt:171
+msgid "label_history"
 msgstr ""
 
 msgid "label_list_only"
