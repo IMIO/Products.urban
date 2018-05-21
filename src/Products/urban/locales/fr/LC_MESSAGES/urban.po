@@ -1278,7 +1278,7 @@ msgid "exploitationconditions_folder_title"
 msgstr "Conditions d'exploitation"
 
 msgid "explosivespossession_urbanconfig_title"
-msgstr "Détention d'explosifs"
+msgstr "Paramètres des détentions d'explosifs"
 
 msgid "explosivespossessions"
 msgstr "Détention d'explosifs"
