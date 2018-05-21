@@ -12,6 +12,7 @@
   <img src="#" tal:attributes="src string:${context/@@plone_portal_state/portal_url}/${context/portal_type}.png" />
   <span tal:replace="here/Title" tal:omit-tag="">Title</span>
  </h1>
+
 </metal:titleWithIcon>
 
 

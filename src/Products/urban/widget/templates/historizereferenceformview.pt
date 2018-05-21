@@ -1,0 +1,13 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      i18n:domain="urban">
+<head>
+</head>
+<body>
+  <div id="change-owner">
+      <h1 i18n:translate="">History of changes</h1>
+      <tal:block replace="structure view/contents"></tal:block>
+  </div>
+</body>
+</html>
