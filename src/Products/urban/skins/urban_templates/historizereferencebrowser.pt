@@ -169,6 +169,7 @@
                tal:attributes="data-fieldname fieldName;
                                data-multivalued multiValued"/>
         <input type="button" class="searchButton addHistory" value="History register"
+               i18n:domain="urban"
                i18n:attributes="value label_history"
                tal:define="popup_width widget/popup_width|string:500;
                            popup_height widget/popup_height|string:550;"

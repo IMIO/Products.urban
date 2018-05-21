@@ -12,6 +12,7 @@ from z3c.form.field import Fields
 from z3c.form.form import EditForm
 from z3c.form.form import Form
 from zope import schema
+from zope.i18n import translate
 from zope.interface import Interface
 from zope.interface import implements
 from zope.interface.interface import InterfaceClass
@@ -73,8 +74,9 @@ class HistorizeReferenceForm(Form):
             for idx, value in enumerate(values):
                 key = 'IHistorizeReference{0}'.format(idx)
                 field_title = self.get_title(historize_field, value)
+                title = translate(_(u'Comment - {0}'), context=self.request)
                 field = schema.Text(
-                    title=_(u'Comment - {0}'.format(field_title)),
+                    title=title.format(field_title),
                     required=False,
                 )
                 self.fields += Fields(
