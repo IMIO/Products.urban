@@ -406,4 +406,12 @@ span.option {
    display: block;
 }
 
+.searchButton.addHistory {
+    font-size: 90%;
+    height: 2em;
+    vertical-align: top;
+    background-position: 3px 4px;
+    padding-bottom: 3px;
+}
+
 /* </dtml-with> */
