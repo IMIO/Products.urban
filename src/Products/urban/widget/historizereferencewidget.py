@@ -74,9 +74,8 @@ class HistorizeReferenceForm(Form):
             for idx, value in enumerate(values):
                 key = 'IHistorizeReference{0}'.format(idx)
                 field_title = self.get_title(historize_field, value)
-                title = translate(_(u'Comment - {0}'), context=self.request)
                 field = schema.Text(
-                    title=title.format(field_title),
+                    title=self._formated_title(field_title),
                     required=False,
                 )
                 self.fields += Fields(
@@ -87,6 +86,12 @@ class HistorizeReferenceForm(Form):
                 )
 
         super(HistorizeReferenceForm, self).update()
+
+    def _formated_title(self, field_title):
+        title = translate(_(u'Comment - {0}'), context=self.request)
+        title = title.format(field_title)
+        # Remove new lines
+        return u''.join(title.splitlines())
 
     def updateWidgets(self, *args, **kwargs):
         super(HistorizeReferenceForm, self).updateWidgets(*args, **kwargs)
