@@ -160,7 +160,7 @@
   <bound-workflow workflow_id="" />
 </type>
 <type type_id="Corporation">
-  <bound-workflow workflow_id="" />
+  <bound-workflow workflow_id="activation_workflow" />
 </type>
 <type type_id="EnvClassOne">
   <bound-workflow workflow_id="urban_licence_workflow" />
