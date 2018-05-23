@@ -29,6 +29,7 @@ from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
+from Products.urban.widget.historizereferencewidget import HistorizeReferenceBrowserWidget
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -91,7 +92,7 @@ schema = Schema((
     ),
     ReferenceField(
         name='rubrics',
-        widget=ReferenceBrowserWidget(
+        widget=HistorizeReferenceBrowserWidget(
             allow_search=True,
             allow_browse=True,
             force_close_on_insert=True,
@@ -129,7 +130,7 @@ schema = Schema((
     ),
     ReferenceField(
         name='additionalLegalConditions',
-        widget=ReferenceBrowserWidget(
+        widget=HistorizeReferenceBrowserWidget(
             allow_browse=True,
             allow_search=True,
             default_search_index='Title',

@@ -143,7 +143,11 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".rubricTermEvents.updateTitle" />
 
-  <subscriber for="..interfaces.IEnvClassOne
+  <subscriber for="..interfaces.IEnvironmentBase
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".envclassEvents.update_history"/>
+
+  <subscriber for="..interfaces.IUniqueLicence
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".envclassEvents.update_history"/>
 
