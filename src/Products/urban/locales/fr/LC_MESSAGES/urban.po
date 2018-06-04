@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-05-21 14:34+0000\n"
+"POT-Creation-Date: 2018-06-04 09:35+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -167,7 +167,7 @@ msgstr "Coordonnées du réclamant"
 msgid "Close"
 msgstr "Clôturer le permis"
 
-#: ../widget/historizereferencewidget.py:77
+#: ../widget/historizereferencewidget.py:91
 msgid "Comment - {0}"
 msgstr "Commentaire - {0}"
 
@@ -279,7 +279,7 @@ msgstr "Historique des changements"
 msgid "History of the parcel and related licences"
 msgstr "Historique de la parcelle et dossiers liés"
 
-#: ../widget/historizereferencewidget.py:124
+#: ../widget/historizereferencewidget.py:131
 msgid "History saved"
 msgstr "Historique sauvegardé"
 
@@ -2500,7 +2500,7 @@ msgid "urban_label_additionalHabitationsGiven"
 msgstr "Nombre de logements octroyés"
 
 #. Default: "Additionallegalconditions"
-#: ../content/licence/CODT_UniqueLicence.py:139
+#: ../content/licence/CODT_UniqueLicence.py:140
 #: ../content/licence/EnvironmentBase.py:120
 msgid "urban_label_additionalLegalConditions"
 msgstr "Conditions intégrales et sectorielles supplémentaires"
@@ -2627,7 +2627,7 @@ msgid "urban_label_auditionDate"
 msgstr "Date de la séance d'audition"
 
 #. Default: "Authority"
-#: ../content/licence/CODT_UniqueLicence.py:75
+#: ../content/licence/CODT_UniqueLicence.py:76
 #: ../content/licence/EnvironmentLicence.py:55
 msgid "urban_label_authority"
 msgstr "Autorité compétente"
@@ -2759,7 +2759,7 @@ msgid "urban_label_claimsDate"
 msgstr "Date de début de la séance de réclamations"
 
 #. Default: "Claimssynthesis"
-#: ../content/licence/CODT_UniqueLicence.py:162
+#: ../content/licence/CODT_UniqueLicence.py:163
 #: ../content/licence/EnvironmentLicence.py:112
 msgid "urban_label_claimsSynthesis"
 msgstr "Synthèse des réclamations"
@@ -2798,7 +2798,7 @@ msgid "urban_label_comments"
 msgstr "Commentaires"
 
 #. Default: "Commentsonspwopinion"
-#: ../content/licence/CODT_UniqueLicence.py:185
+#: ../content/licence/CODT_UniqueLicence.py:186
 #: ../content/licence/EnvironmentLicence.py:135
 msgid "urban_label_commentsOnSPWOpinion"
 msgstr "Commentaires sur la décision du SPW"
@@ -2836,7 +2836,7 @@ msgid "urban_label_concertationDate"
 msgstr "Date de réunion de concertation"
 
 #. Default: "Conclusions"
-#: ../content/licence/CODT_UniqueLicence.py:197
+#: ../content/licence/CODT_UniqueLicence.py:198
 #: ../content/licence/EnvironmentLicence.py:147
 msgid "urban_label_conclusions"
 msgstr "Conclusions"
@@ -3034,13 +3034,13 @@ msgid "urban_label_enoughRoadEquipmentDetails"
 msgstr "Détails concernant l'équipement suffisant de la voirie"
 
 #. Default: "Environmenttechnicaladviceafterinquiry"
-#: ../content/licence/CODT_UniqueLicence.py:173
+#: ../content/licence/CODT_UniqueLicence.py:174
 #: ../content/licence/EnvironmentLicence.py:123
 msgid "urban_label_environmentTechnicalAdviceAfterInquiry"
 msgstr "Avis technique après enquête (environnement)"
 
 #. Default: "Environmenttechnicalremarks"
-#: ../content/licence/CODT_UniqueLicence.py:208
+#: ../content/licence/CODT_UniqueLicence.py:209
 #: ../content/licence/EnvironmentLicence.py:158
 msgid "urban_label_environmentTechnicalRemarks"
 msgstr "Observations"
@@ -3175,7 +3175,7 @@ msgid "urban_label_folderReference"
 msgstr "Numéro de dossier"
 
 #. Default: "Foldertendency"
-#: ../content/licence/CODT_UniqueLicence.py:85
+#: ../content/licence/CODT_UniqueLicence.py:86
 msgid "urban_label_folderTendency"
 msgstr "Tendance du dossier"
 
@@ -3576,7 +3576,7 @@ msgid "urban_label_locationTechnicalAdvice"
 msgstr "Avis technique urbanisme"
 
 #. Default: "Environmenttechnicaladviceafterinquiry"
-#: ../content/licence/CODT_UniqueLicence.py:150
+#: ../content/licence/CODT_UniqueLicence.py:151
 msgid "urban_label_locationTechnicalAdviceAfterInquiry"
 msgstr "Avis technique après enquête (urbanisme)"
 
@@ -3616,7 +3616,7 @@ msgid "urban_label_mayNeedLocationLicence"
 msgstr "Possibilité de permis de location"
 
 #. Default: "Minimumlegalconditions"
-#: ../content/licence/CODT_UniqueLicence.py:124
+#: ../content/licence/CODT_UniqueLicence.py:125
 #: ../content/licence/EnvironmentBase.py:105
 msgid "urban_label_minimumLegalConditions"
 msgstr "Conditions intégrales et sectorielles"
@@ -4035,12 +4035,12 @@ msgid "urban_label_referenceDGO3"
 msgstr "Référence DGO3"
 
 #. Default: "Referenceft"
-#: ../content/licence/CODT_UniqueLicence.py:68
+#: ../content/licence/CODT_UniqueLicence.py:69
 msgid "urban_label_referenceFT"
 msgstr "Référence FT"
 
 #. Default: "Referencespe"
-#: ../content/licence/CODT_UniqueLicence.py:59
+#: ../content/licence/CODT_UniqueLicence.py:60
 msgid "urban_label_referenceSPE"
 msgstr "Référence SPE"
 
@@ -4194,13 +4194,13 @@ msgid "urban_label_roadType"
 msgstr "Type de voirie"
 
 #. Default: "Rubrics"
-#: ../content/licence/CODT_UniqueLicence.py:103
+#: ../content/licence/CODT_UniqueLicence.py:104
 #: ../content/licence/EnvironmentBase.py:84
 msgid "urban_label_rubrics"
 msgstr "Rubrique(s)"
 
 #. Default: "Rubricsdetails"
-#: ../content/licence/CODT_UniqueLicence.py:113
+#: ../content/licence/CODT_UniqueLicence.py:114
 #: ../content/licence/EnvironmentBase.py:94
 msgid "urban_label_rubricsDetails"
 msgstr "Explications sur les rubriques"

@@ -301,3 +301,15 @@ msgstr ""
 
 msgid "isinacceptable"
 msgstr ""
+
+msgid "update_rubrics"
+msgstr ""
+
+msgid "update_additionalLegalConditions"
+msgstr ""
+
+msgid "rubrics_history"
+msgstr ""
+
+msgid "additionalLegalConditions_history"
+msgstr ""
