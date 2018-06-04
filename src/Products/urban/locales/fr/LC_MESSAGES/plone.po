@@ -171,6 +171,9 @@ msgstr "Accepter"
 msgid "accepted"
 msgstr "Accepté"
 
+msgid "additionalLegalConditions_history"
+msgstr ""
+
 msgid "cannot_remove_inquiry_linkedurbaneventinquiry"
 msgstr "Vous ne pouvez pas supprimer cette enquête car un événement 'Enquête publique' y est lié.  Supprimez d'abord l'événement lié.  <a href='${linkedurbaneventurl}'>Cliquez ici pour y accéder</a>"
 
@@ -289,6 +292,15 @@ msgstr "Retirer"
 
 msgid "retired"
 msgstr "Retiré"
+
+msgid "rubrics_history"
+msgstr ""
+
+msgid "update_additionalLegalConditions"
+msgstr ""
+
+msgid "update_rubrics"
+msgstr ""
 
 # error messages...
 msgid "warning_add_a_parcel"
