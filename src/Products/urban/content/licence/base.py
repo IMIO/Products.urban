@@ -50,8 +50,19 @@ class UrbanBase(object):
         """
            Return the list of applicants for the Licence
         """
-        applicants = [app for app in self.objectValues('Applicant') if app.portal_type == 'Applicant']
+        applicants = [app for app in self.objectValues('Applicant')
+                      if app.portal_type == 'Applicant'
+                      and api.content.get_state(app) == 'enabled']
         return applicants
+
+    security.declarePublic('get_applicants_history')
+    def get_applicants_history(self):
+        """
+        Return the history of applicants for the Licence
+        """
+        return [app for app in self.objectValues('Applicant')
+                if app.portal_type == 'Applicant'
+                and api.content.get_state(app) == 'disabled']
 
     security.declarePublic('getProprietaries')
     def getProprietaries(self):
