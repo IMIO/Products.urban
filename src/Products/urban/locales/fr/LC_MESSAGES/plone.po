@@ -172,7 +172,7 @@ msgid "accepted"
 msgstr "Accepté"
 
 msgid "additionalLegalConditions_history"
-msgstr ""
+msgstr "Registre des modifications pour les conditions intégrales et sectorielles supplémentaires"
 
 msgid "cannot_remove_inquiry_linkedurbaneventinquiry"
 msgstr "Vous ne pouvez pas supprimer cette enquête car un événement 'Enquête publique' y est lié.  Supprimez d'abord l'événement lié.  <a href='${linkedurbaneventurl}'>Cliquez ici pour y accéder</a>"
@@ -294,13 +294,13 @@ msgid "retired"
 msgstr "Retiré"
 
 msgid "rubrics_history"
-msgstr ""
+msgstr "Registre des modifications pour les rubriques"
 
 msgid "update_additionalLegalConditions"
-msgstr ""
+msgstr "Mise à jour des Registre des conditions intégrales et sectorielles supplémentaires"
 
 msgid "update_rubrics"
-msgstr ""
+msgstr "Mise à jour des rubriques"
 
 # error messages...
 msgid "warning_add_a_parcel"
