@@ -1,0 +1,30 @@
+<configure
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="urban">
+
+
+  <browser:view
+      for="Products.urban.interfaces.IEnvironmentBase"
+      name="contenthistory"
+      class=".view.HistoryView"
+      layer="imio.history.interfaces.IImioHistoryLayer"
+      permission="zope.Public"
+      />
+
+  <adapter
+    for="Products.urban.interfaces.IEnvironmentBase"
+    factory=".environment.EnvironmentRubricsHistory"
+    name="rubrics_history"
+    provides="imio.history.interfaces.IImioHistory"
+    />
+
+  <adapter
+    for="Products.urban.interfaces.IEnvironmentBase"
+    factory=".environment.EnvironmentAdditionalLegalConditionsHistory"
+    name="additionalLegalCondition_history"
+    provides="imio.history.interfaces.IImioHistory"
+    />
+
+</configure>

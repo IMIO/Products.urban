@@ -57,6 +57,7 @@
   <include package=".viewlets" />
   <include package=".workflows" />
   <include package=".widget" />
+  <include package=".history" />
 
   <!-- needed to migrate UrbanDoc type, to remove in next release -->
   <adapter name="plone.app.blob.subtypes.file"
