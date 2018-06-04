@@ -4,8 +4,8 @@ Changes
 =======
 
 
-2.2 (2018-06-04)
-----------------
+2.2.1 (2018-06-04)
+------------------
 - add query_parcels_in_radius method to view
   [fngaha]
 
