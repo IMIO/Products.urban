@@ -5,15 +5,19 @@ version = '2.2'
 
 setup(name='Products.urban',
       version=version,
-      description="Urban Certificate Management",
+      description="Urban licences management. Integrated cartography. Official documents generation",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
+          "Environment :: Web Environment",
+          "Framework :: Plone",
+          "Framework :: Plone :: 4.3.8",
           "Programming Language :: Python",
+          "Programming Language :: Python :: 2.7",
       ],
-      keywords='',
-      author='',
-      author_email='',
+      keywords='urban imio cartography cadastre buildlicences environmentlicences',
+      author='Simon Delcourt, Gauthier Bastien',
+      author_email='simon.delcourt@imio.be',
       url='http://www.communesplone.org/les-outils/applications-metier/'
           'gestion-des-permis-durbanisme',
       license='GPL',
