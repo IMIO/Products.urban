@@ -158,7 +158,7 @@ class LicenceView(BrowserView):
         return self.renderListing(contacttable)
 
     def renderApplicantHistoryListing(self):
-        if not self.context.getApplicants():
+        if not self.context.get_applicants_history():
             return ''
         contacttable = ApplicantHistoryTable(self.context, self.request)
         return self.renderListing(contacttable)
