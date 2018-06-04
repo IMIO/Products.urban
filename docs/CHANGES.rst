@@ -4,7 +4,7 @@ Changes
 =======
 
 
-2.2.2 (unreleased)
+2.2.1 (2018-06-04)
 ------------------
 
 - Nothing changed yet.
