@@ -206,7 +206,8 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     def getApplicants(self):
         """
         """
-        applicants = self.getCorporations() or super(EnvironmentLicence, self).getApplicants()
+        applicants = self.getCorporations()
+        applicants.extend(super(EnvironmentLicence, self).getApplicants())
         return applicants
 
     security.declarePublic('getCorporations')
