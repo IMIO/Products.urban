@@ -35,3 +35,4 @@
   recursive-include src *.xml
   recursive-include src *.zargo
   recursive-include src *.zcml
+  recursive-include docs *.GPL
