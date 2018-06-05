@@ -125,7 +125,7 @@ class HistorizeReferenceForm(Form):
             add_event_to_history(
                 self.context,
                 '{0}_history'.format(self.fieldname),
-                'history_register',
+                '{0}_history'.format(self.fieldname),
                 extra_infos=data,
             )
         self.status = _('History saved')

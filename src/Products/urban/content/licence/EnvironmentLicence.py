@@ -19,6 +19,7 @@ from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban.content.licence.EnvironmentBase import EnvironmentBase
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from plone import api
 
 from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
@@ -206,13 +207,26 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     def getApplicants(self):
         """
         """
-        applicants = self.getCorporations() or super(EnvironmentLicence, self).getApplicants()
+        applicants = self.getCorporations()
+        applicants.extend(super(EnvironmentLicence, self).getApplicants())
+        return applicants
+
+    security.declarePublic('get_applicants_history')
+    def get_applicants_history(self):
+        applicants = self.get_corporations_history()
+        applicants.extend(super(EnvironmentLicence, self).get_applicants_history())
         return applicants
 
     security.declarePublic('getCorporations')
     def getCorporations(self):
-        corporations = [corp for corp in self.objectValues('Corporation')]
+        corporations = [corp for corp in self.objectValues('Corporation')
+                        if api.content.get_state(corp) == 'enabled']
         return corporations
+
+    security.declarePublic('get_corporations_history')
+    def get_corporations_history(self):
+        return [corp for corp in self.objectValues('Corporation')
+                if api.content.get_state(corp) == 'disabled']
 
     security.declarePublic('getFtSolicitOpinionsTo')
     def getFtSolicitOpinionsTo(self, get_obj=False):
