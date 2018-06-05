@@ -7,7 +7,8 @@ Changes
 2.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix eea faceted install.
+  [sdelcourt]
 
 
 2.2.1 (2018-06-04)
