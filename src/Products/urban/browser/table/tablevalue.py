@@ -147,16 +147,14 @@ class ValuesForApplicantListing(ValuesForUrbanListing):
     """  return contact values from the context """
 
     def getItems(self):
-        applicants = [applicant for applicant in self.context.getApplicants() if api.content.get_state(obj=applicant) == 'enabled']
-        return applicants
+        return self.context.getApplicants()
 
 
 class ValuesForApplicantHistoryListing(ValuesForUrbanListing):
     """  return contact values from the context """
 
     def getItems(self):
-        applicants = [applicant for applicant in self.context.getApplicants() if api.content.get_state(obj=applicant) == 'disabled']
-        return applicants
+        return self.context.get_applicants_history()
 
 
 class ValuesForProprietariesListing(ValuesForUrbanListing):

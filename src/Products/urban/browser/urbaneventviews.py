@@ -253,8 +253,8 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
 
     def import_claimants_from_csv(self):
         portal_urban = api.portal.get_tool('portal_urban')
+        site = api.portal.get()
         fieldnames = [
-            'id',
             'personTitle',
             'name1',
             'name2',
@@ -287,7 +287,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
 
         claimants_file = open('claimants.csv', 'r')
         reader = csv.DictReader(claimants_file, fieldnames, delimiter=';', quotechar='"')
-        claimant_args = [row for row in reader if row['id']][1:]
+        claimant_args = [row for row in reader if row['name1']][1:]
         for claimant_arg in claimant_args:
             # default values
             if not claimant_arg['claimType']:
@@ -299,6 +299,12 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             # mappings
             claimant_arg['personTitle'] = titles_mapping[claimant_arg['personTitle']]
             claimant_arg['country'] = country_mapping[claimant_arg['country']]
+            claimant_arg['id'] = site.plone_utils.normalizeString(claimant_arg['name1'] + claimant_arg['name2'])
+            count = 0
+            while claimant_arg['id'] in self.context.objectIds():
+                count += 1
+            if count:
+                claimant_arg['id'] = claimant_arg['id'] + '-' + str(count)
             # create claimant
             self.context.invokeFactory('Claimant', **claimant_arg)
             print 'imported claimant {id}, {name} {surname}'.format(
