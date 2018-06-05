@@ -4,7 +4,7 @@ Changes
 =======
 
 
-2.2.2 (unreleased)
+2.2.2 (2018-06-05)
 ------------------
 
 - Fix eea faceted install.
