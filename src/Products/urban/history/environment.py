@@ -42,6 +42,7 @@ class EnvironmentRubricsHistory(BaseEnvironmentHistoryAdapter):
     @memoize
     def get_history_data(self):
         history = super(EnvironmentRubricsHistory, self).get_history_data()
+        history = [l for l in history if l['action'] != 'history_register']
         return map(self.format_history, history)
 
 
@@ -52,4 +53,5 @@ class EnvironmentAdditionalLegalConditionsHistory(BaseEnvironmentHistoryAdapter)
     @memoize
     def get_history_data(self):
         history = super(EnvironmentAdditionalLegalConditionsHistory, self).get_history_data()
+        history = [l for l in history if l['action'] != 'history_register']
         return map(self.format_history, history)
