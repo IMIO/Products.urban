@@ -20,6 +20,7 @@ from Products.urban import interfaces
 from Products.urban.content.Inquiry import Inquiry
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from plone import api
 
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
@@ -469,14 +470,29 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
     def getApplicants(self):
         """
         """
-        applicants = self.getCorporations() or super(BaseBuildLicence, self).getApplicants()
+        applicants = self.getCorporations()
+        applicants.extend(super(BaseBuildLicence, self).getApplicants())
+        return applicants
+
+    security.declarePublic('get_applicants_history')
+
+    def get_applicants_history(self):
+        applicants = self.get_corporations_history()
+        applicants.extend(super(BaseBuildLicence, self).get_applicants_history())
         return applicants
 
     security.declarePublic('getCorporations')
 
     def getCorporations(self):
-        corporations = [corp for corp in self.objectValues('Corporation')]
+        corporations = [corp for corp in self.objectValues('Corporation')
+                        if api.content.get_state(corp) == 'enabled']
         return corporations
+
+    security.declarePublic('get_corporations_history')
+
+    def get_corporations_history(self):
+        return [corp for corp in self.objectValues('Corporation')
+                if api.content.get_state(corp) == 'disabled']
 
     security.declarePublic('listRoadAdaptations')
 
