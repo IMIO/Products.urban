@@ -1,0 +1,5 @@
+#
+# taken into account by: svn propset svn:ignore -F svn.ignore .
+#
+*.mo
+*.egg-info
