@@ -18,7 +18,7 @@ class BaseEnvironmentHistoryAdapter(BaseImioHistoryAdapter):
         keys = [k.replace('comment_', '') for k in line.keys()
                 if k.startswith('comment_')]
         values = [
-            '<span class="discreet">{0}: {1}</span>'.format(
+            u'<span class="discreet">{0}: {1}</span>'.format(
                 k, line['comment_{0}'.format(k)]
             )
             for k in keys
