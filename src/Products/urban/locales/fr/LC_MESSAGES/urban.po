@@ -24,13 +24,13 @@ msgstr ""
 msgid "%s_urbanconfig_title"
 msgstr ""
 
-#: ../content/licence/ExplosivesPossession.py:151
+#: ../content/licence/ExplosivesPossession.py:132
 msgid "1st class"
-msgstr "1ère classe"
+msgstr "1ère classe : Collège provincial"
 
-#: ../content/licence/ExplosivesPossession.py:152
+#: ../content/licence/ExplosivesPossession.py:133
 msgid "2nd class"
-msgstr "2ème classe"
+msgstr "2ème classe : Collège communal"
 
 #: ../browser/licence/templates/licenceview.pt:31
 #: ../browser/templates/urbaneventannouncementview.pt:35
@@ -2805,7 +2805,7 @@ msgstr "Commentaires sur la décision du SPW"
 
 #: ../content/licence/ExplosivesPossession.py:56
 msgid "urban_label_comments_on_decision_project"
-msgstr ""
+msgstr "Commentaires sur le projet de décision"
 
 #: ../content/licence/EnvironmentLicence.py:180
 msgid "urban_label_complement"
