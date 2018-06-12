@@ -7,13 +7,10 @@ from Products.Archetypes.atapi import DisplayList
 from Products.Archetypes.atapi import Schema
 from Products.Archetypes.atapi import SelectionWidget
 from Products.Archetypes.atapi import StringField
-from Products.Archetypes.atapi import StringWidget
+from Products.Archetypes.atapi import TextField
+from Products.Archetypes.atapi import RichWidget
 from Products.Archetypes.atapi import registerType
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-from Products.DataGridField import DataGridField
-from Products.DataGridField import DataGridWidget
-from Products.DataGridField.Column import Column
-from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from zope.i18n import translate
 from zope.interface import implements
 
@@ -21,6 +18,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban import interfaces
 from Products.urban.config import PROJECTNAME
 from Products.urban.content.licence.GenericLicence import GenericLicence
+from Products.urban.content.licence.EnvironmentLicence import EnvironmentLicence
 from Products.urban.content.Inquiry import Inquiry
 from Products.urban.utils import setSchemataForInquiry
 from Products.urban.widget.urbanreferencewidget import UrbanReferenceWidget
@@ -47,33 +45,18 @@ schema = Schema((
         default_method='getDefaultText',
         validators=('isReference', ),
     ),
-    DataGridField(
-        name='businessOldLocation',
-        schemata="urban_description",
-        widget=DataGridWidget(
-            columns={'number': Column("Number"), 'street': ReferenceColumn("Street", surf_site=False, object_provides=('Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',))},
-            helper_js=('datagridwidget.js', 'datagridautocomplete.js'),
-            label=_('urban_label_businessOldLocation',
-                    default='Old business location'),
-        ),
-        allow_oddeven=True,
-        columns=('number', 'street'),
-        validators=('isValidStreetName',),
-    ),
 ))
 
 
 ExplosivesPossession_schema = BaseFolderSchema.copy() + \
-    getattr(GenericLicence, 'schema').copy() + \
-    getattr(Inquiry, 'schema').copy() + \
+    getattr(EnvironmentLicence, 'schema', Schema(())).copy() + \
     schema.copy()
-setSchemataForInquiry(ExplosivesPossession_schema)
-for field in ExplosivesPossession_schema.filterFields(isMetadata=False):
-    if field.schemata == 'urban_investigation_and_advices' and field.getName() not in ['solicitOpinionsTo', 'solicitOpinionsToOptional']:
-        field.widget.visible = False
+
+ExplosivesPossession_schema['workLocations'].widget.label = _('urban_label_businessLocation')
+ExplosivesPossession_schema['commentsOnSPWOpinion'].widget.label = _('urban_label_comments_on_decision_project')
 
 
-class ExplosivesPossession(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
+class ExplosivesPossession(BaseFolder, EnvironmentLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -85,8 +68,6 @@ class ExplosivesPossession(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMi
     schema = ExplosivesPossession_schema
     schemata_order = [
         'urban_description',
-        'urban_road',
-        'urban_location',
         'urban_investigation_and_advices',
     ]
 
@@ -161,5 +142,42 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
        Finalizes the type schema to alter some fields
     """
+    schema.moveField('description', after='pe_reference')
+    to_remove_fields = (
+        'referenceDGATLP',
+        'authority',
+        'rubricsDetails',
+        'folderCategory',
+        'applicationReasons',
+        'procedureChoice',
+        'annoncedDelay',
+        'validityDelay',
+        'publicRoadModifications',
+        'hasEnvironmentImpactStudy',
+        'investigationArticles',
+        'investigationArticlesText',
+        'derogation',
+        'derogationDetails',
+        'divergence',
+        'divergenceDetails',
+        'demandDisplay',
+        'inquiry_category',
+        'investigationReasons',
+        'investigationReasons',
+        'roadModificationSubject',
+    )
+    for field in to_remove_fields:
+        if field in schema:
+            del schema[field]
+    schema['pipelines'].schemata = 'urban_environment'
+    schema['pipelinesDetails'].schemata = 'urban_environment'
+    hidden_fields = (
+        'businessOldLocation',
+        'additionalLegalConditions',
+        'rubrics',
+    )
+    for field in hidden_fields:
+        schema[field].widget.visible = {'edit': 'invisible'}
+    return schema
 
 finalizeSchema(ExplosivesPossession_schema)

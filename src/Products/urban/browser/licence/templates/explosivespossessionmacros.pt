@@ -20,18 +20,12 @@
 
 </metal:description>
 
-<metal:analysis define-macro="analysis_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/analysis_macro">
-    </metal:parent_call>
-</metal:analysis>
-
-<metal:road define-macro="road_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/road_macro" />
-</metal:road>
-
-<metal:location define-macro="location_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro" />
-</metal:location>
+<metal:environment define-macro="environment_macro" i18n:domain="urban">
+    <tal:vars define="custom python:['rubrics', 'minimumLegalConditions', 'hasAdditionalConditions'];">
+        <metal:parent_call use-macro="here/@@licencetabs-macros/environment_macro">
+        </metal:parent_call>
+    </tal:vars>
+</metal:environment>
 
 <metal:advices define-macro="advices_macro" i18n:domain="urban">
     <metal:parent_call use-macro="here/@@licencetabs-macros/advices_macro" />

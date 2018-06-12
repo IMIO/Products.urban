@@ -19,7 +19,6 @@ from zope.interface import implements
 import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
 from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
@@ -360,7 +359,12 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'envclassthree': env_advice_tabs_config,
             'envclassone': env_inquiry_tabs_config,
             'envclasstwo': env_inquiry_tabs_config,
-            'explosivespossession': ['description', 'inquiry', 'analysis', 'location', 'road'],
+            'explosivespossession': [
+                'description',
+                'advices',
+                'inquiry',
+                'environment',
+            ],
         }
         licence_type = self.id
 

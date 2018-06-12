@@ -3,8 +3,10 @@ from imio.history.utils import add_event_to_history
 
 
 def update_history(obj, event):
-    update_history_for_vocabulary_field(obj, 'rubrics')
-    update_history_for_vocabulary_field(obj, 'additionalLegalConditions')
+    if hasattr(obj, 'rubrics'):
+        update_history_for_vocabulary_field(obj, 'rubrics')
+    if hasattr(obj, 'additionalLegalConditions'):
+        update_history_for_vocabulary_field(obj, 'additionalLegalConditions')
 
 
 def update_history_for_vocabulary_field(obj, fieldname):
