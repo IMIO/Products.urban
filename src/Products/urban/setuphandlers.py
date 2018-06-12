@@ -612,12 +612,14 @@ def setDefaultApplicationSecurity(context):
                 folder.manage_addProperty('urbanConfigId', folder_name.strip('s'), 'string')
             except BadRequest:
                 pass
+            folder.manage_delLocalRoles(["urban_editors"])
+            folder.manage_delLocalRoles(["environment_editors"])
             if folder_name in urban_folder_names:
                 folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-                folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
+                folder.manage_addLocalRoles("urban_editors", ("Contributor",))
             if folder_name in environment_folder_names:
                 folder.manage_addLocalRoles("environment_readers", ("Reader", ))
-                folder.manage_addLocalRoles("environment_editors", ("Editor", "Contributor"))
+                folder.manage_addLocalRoles("environment_editors", ("Contributor",))
 
     #objects application folder : "urban_readers" can read and "urban_editors" can edit...
     objectsfolder_names = ['architects', 'geometricians', 'notaries', 'parcellings']
@@ -630,7 +632,7 @@ def setDefaultApplicationSecurity(context):
             folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
             folder.manage_addLocalRoles("environment_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
             folder.manage_addLocalRoles("environment_readers", ("Reader", ))
-            folder.manage_addLocalRoles("environment_editors", ("Editor", "Contributor"))
+            folder.manage_addLocalRoles("environment_editors", ("Contributor",))
             # mark them with IContactFolder interface use some view methods, like 'getemails', on it
             alsoProvides(folder, IContactFolder)
 
@@ -778,24 +780,24 @@ def addApplicationFolders(context):
     for i, urban_type in enumerate(URBAN_TYPES):
         licence_folder_id = getLicenceFolderId(urban_type)
         if not hasattr(newFolder, licence_folder_id):
-            newFolderid = newFolder.invokeFactory(
+            licence_folder_id = newFolder.invokeFactory(
                 "Folder", id=licence_folder_id,
                 title=_(urban_type, 'urban')
             )
-            newSubFolder = getattr(newFolder, newFolderid)
-            alsoProvides(newSubFolder, ILicenceContainer)
-            setFolderAllowedTypes(newSubFolder, urban_type)
-            #manage the 'Add' permissions...
-            try:
-                newSubFolder.manage_permission('urban: Add %s' % urban_type, ['Manager', 'Editor', ], acquire=0)
-            except ValueError:
-                #exception for some portal_types having a different meta_type
-                if urban_type in ['UrbanCertificateOne', 'NotaryLetter', ]:
-                    newSubFolder.manage_permission('urban: Add UrbanCertificateBase', ['Manager', 'Editor', ], acquire=0)
-                if urban_type in ['EnvClassThree', ]:
-                    newSubFolder.manage_permission('urban: Add EnvironmentBase', ['Manager', 'Editor', ], acquire=0)
-                if urban_type in ['EnvClassOne', 'EnvClassTwo']:
-                    newSubFolder.manage_permission('urban: Add EnvironmentLicence', ['Manager', 'Editor', ], acquire=0)
+        licence_folder = getattr(newFolder, licence_folder_id)
+        alsoProvides(licence_folder, ILicenceContainer)
+        setFolderAllowedTypes(licence_folder, urban_type)
+        #manage the 'Add' permissions...
+        try:
+            licence_folder.manage_permission('urban: Add %s' % urban_type, ['Manager', 'Contributor', ], acquire=0)
+        except ValueError:
+            #exception for some portal_types having a different meta_type
+            if urban_type in ['UrbanCertificateOne', 'NotaryLetter', ]:
+                licence_folder.manage_permission('urban: Add UrbanCertificateBase', ['Manager', 'Contributor', ], acquire=0)
+            if urban_type in ['EnvClassThree', ]:
+                licence_folder.manage_permission('urban: Add EnvironmentBase', ['Manager', 'Contributor', ], acquire=0)
+            if urban_type in ['EnvClassOne', 'EnvClassTwo']:
+                licence_folder.manage_permission('urban: Add EnvironmentLicence', ['Manager', 'Contributor', ], acquire=0)
         newFolder.moveObjectsToBottom([licence_folder_id])
 
     #add a folder that will contains architects
