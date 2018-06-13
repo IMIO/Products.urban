@@ -34,6 +34,12 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
+from Products.CMFCore.Expression import Expression
+from Products.PageTemplates.Expressions import getEngine
+
+from plone import api
+from DateTime import DateTime
+from zope.i18n import translate
 
 ##code-section module-header #fill in your manual code here
 optional_fields = [
@@ -60,6 +66,7 @@ schema = Schema((
             label=_('urban_label_referenceSPE', default='Referencespe'),
         ),
         schemata='urban_description',
+        default_method='getDefaultSPEReference',
     ),
 
     StringField(
@@ -254,6 +261,25 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
 
     # Methods
 
+    security.declarePublic('updateTitle')
+
+    def updateTitle(self):
+        """
+           Update the title to clearly identify the licence
+        """
+        if self.getApplicants():
+            applicantTitle = self.getApplicants()[0].Title()
+        else:
+            applicantTitle = translate('no_applicant_defined', 'urban', context=self.REQUEST).encode('utf8')
+        title = "%s - %s - %s - %s" % (
+            self.getReferenceSPE(),
+            self.getReference(),
+            self.getLicenceSubject(),
+            applicantTitle
+        )
+        self.setTitle(title)
+        self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
+
     def listProcedureChoices(self):
         vocab = (
             ('ukn', 'Non determiné'),
@@ -296,6 +322,34 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
 
     def getLastImpactStudyEvent(self):
         return self.getLastEvent(interfaces.IImpactStudyEvent)
+
+    security.declarePublic('getDefaultSPEReference')
+
+    def getDefaultSPEReference(self):
+        """
+          Returns the reference for the new element
+        """
+        registry = api.portal.get_tool('portal_registry')
+
+        tal_expression = registry['Products.urban.interfaces.ICODT_UniqueLicence_spe_reference_config.tal_expression']
+        last_value = registry['Products.urban.interfaces.ICODT_UniqueLicence_spe_reference_config.numerotation']
+        last_value = last_value + 1
+
+        #evaluate the numerotationTALExpression and pass it obj, lastValue and self
+        data = {
+            'obj': self,
+            'tool': api.portal.get_tool('portal_urban'),
+            'numerotation': str(last_value),
+            'portal': api.portal.getSite(),
+            'date': DateTime(),
+        }
+        res = ''
+        try:
+            ctx = getEngine().getContext(data)
+            res = Expression(tal_expression)(ctx)
+        except Exception:
+            pass
+        return res
 
 
 registerType(CODT_UniqueLicence, PROJECTNAME)
