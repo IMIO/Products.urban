@@ -43,6 +43,10 @@
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".licenceEvents.postCreationActions"/>
 
+  <subscriber for="..interfaces.ICODT_UniqueLicence
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+              handler=".codt_uniquelicence_events.UniqueLicencePostCreationActions"/>
+
   <subscriber for="..interfaces.IGenericLicence
                    zope.lifecycleevent.IObjectModifiedEvent"
               handler=".licenceEvents.updateLicenceTitle"/>
@@ -179,7 +183,6 @@
   <subscriber for="imio.dashboard.interfaces.IDashboardCollection
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".dashboard_collection.set_dashboard_columns" />
-
 
 
 </configure>

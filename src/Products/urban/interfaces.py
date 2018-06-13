@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 
 from zope.interface import Interface
+from zope import schema
 
 ##code-section HEAD
 from zope.interface.interfaces import IInterface
@@ -600,3 +601,15 @@ class IIsArchive(Interface):
 
 class ITestConfig(Interface):
     """ Marker interface for TestConfig."""
+
+
+class ICODT_UniqueLicence_spe_reference_config(Interface):
+    """ """
+    numerotation = schema.Int(
+        title=u"Numérotation",
+        default=0
+    )
+    tal_expression = schema.TextLine(
+        title=u"Generation expression",
+        default=u"python: 'PU/' + numerotation"
+    )
