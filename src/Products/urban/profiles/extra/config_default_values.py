@@ -750,7 +750,7 @@ default_values = {
         ],
 
         'ftSolicitOpinionsTo': [
-            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo'],
+            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'CODT_UniqueLicence'],
             {
                 'id': 'spw-dgo1',
                 'title': "SPW-DGO1",

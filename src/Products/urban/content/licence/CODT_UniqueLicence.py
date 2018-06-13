@@ -45,6 +45,7 @@ from zope.i18n import translate
 optional_fields = [
     'referenceSPE', 'referenceFT', 'environmentTechnicalRemarks',
     'claimsSynthesis', 'conclusions', 'commentsOnSPWOpinion',
+    'ftSolicitOpinionsTo'
 ]
 
 slave_fields_ = (
@@ -95,6 +96,17 @@ schema = Schema((
         enforceVocabulary=True,
         schemata='urban_description',
         vocabulary=UrbanVocabulary('foldertendencies', with_empty_value=True),
+        default_method='getDefaultValue',
+    ),
+    LinesField(
+        name='ftSolicitOpinionsTo',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label=_('urban_label_ftSolicitOpinionsTo', default='Ftsolicitopinionsto'),
+        ),
+        schemata='urban_description',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('ftSolicitOpinionsTo', inUrbanConfig=True),
         default_method='getDefaultValue',
     ),
     ReferenceField(
@@ -370,7 +382,8 @@ def finalizeSchema(schema):
     schema.moveField('rubricsDetails', after='rubrics')
     schema.moveField('minimumLegalConditions', after='rubricsDetails')
     schema.moveField('additionalLegalConditions', after='minimumLegalConditions')
-    schema.moveField('description', after='impactStudy')
+    schema.moveField('ftSolicitOpinionsTo', after='impactStudy')
+    schema.moveField('description', after='ftSolicitOpinionsTo')
     schema.moveField('locationTechnicalAdviceAfterInquiry', after='locationTechnicalAdvice')
 
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
