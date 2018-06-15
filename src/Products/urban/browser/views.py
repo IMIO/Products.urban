@@ -21,8 +21,16 @@ namespaces = {'ctx': "http://www.opengis.net/context"}
 ET.register_namespace('', 'http://www.opengis.net/context')
 ET.register_namespace('ol', 'http://openlayers.org/context')
 
+CADASTRE_SESSION = None
+
 
 class WMC(BrowserView):
+
+    def __init__(self, context, request):
+        if not CADASTRE_SESSION:
+            global CADASTRE_SESSION
+            CADASTRE_SESSION = services.cadastre.new_session()
+        super(WMC, self).__init__(context, request)
 
     def minx(self):
         return self.xmin
@@ -113,9 +121,7 @@ class WMC(BrowserView):
         else:
             parcels = self.context.getParcels()
             if parcels:
-                cadastre = services.cadastre.new_session()
-                result = cadastre.query_parcels_coordinates(parcels)
-                cadastre.close()
+                result = CADASTRE_SESSION.query_parcels_coordinates(parcels)
                 try:
                     self.xmin = result[0]
                     self.ymin = result[1]
