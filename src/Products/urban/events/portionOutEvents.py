@@ -34,8 +34,8 @@ def setValidParcel(parcel, event):
     """
     is_official = True
     parcel.setDivisionCode(parcel.getDivision())
-    parcel.bis = '0' if parcel.bis == '' else parcel.bis
-    parcel.puissance = '0' if parcel.puissance == '' else parcel.puissance
+    parcel.bis = parcel.bis or '0'
+    parcel.puissance = parcel.puissance or '0'
     parcel.reindexObject()
 
     references = parcel.reference_as_dict(True)
