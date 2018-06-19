@@ -3,8 +3,12 @@
 Changes
 =======
 
+2.3.x (unreleased)
+-------------------
+- Update MultipleContactCSV methods with an optional number_street_inverted (#17811)
+  [jjaumotte]
 
-1.11.1 (unreleased)
+1.11.1 (unknown release date)
 -------------------
 - add query_parcels_in_radius method to view
   [fngaha]
