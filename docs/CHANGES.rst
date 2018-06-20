@@ -3,6 +3,16 @@
 Changes
 =======
 
+2.3.x (unreleased)
+-------------------
+- add generic "Permis Publics" templates and linked event configuration
+  [jjaumotte]
+
+- add generic "Notary Letters" template and linked event configuration
+  [jjaumotte]
+
+- fix advanced searching Applicant field for all licences, and not just 'all'
+  [jjaumotte]
 
 1.11.1 (unreleased)
 -------------------
