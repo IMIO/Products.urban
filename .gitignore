@@ -1,7 +1,3 @@
 *.py?
 *.mo
-<<<<<<< HEAD
 *.egg-info
-=======
-*.egg-info
->>>>>>> 5849900b343abbfaa650eb7d8a75a7b12e62d846
