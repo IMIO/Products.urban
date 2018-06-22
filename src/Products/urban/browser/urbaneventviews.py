@@ -203,14 +203,13 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             #this should not happen...
             return None
         displayed_fields = self.getUsedAttributes()
-        inquiryAttributes = utils.getSchemataFields(linkedInquiry, displayed_fields, 'urban_inquiry')
-        for inquiryAttribute in inquiryAttributes:
-            inquiryAttributeName = inquiryAttribute.getName()
-            if inquiryAttributeName == "claimsText":
+        inquiry_fields = utils.getSchemataFields(linkedInquiry, displayed_fields, 'urban_inquiry')
+        for inquiry_field in inquiry_fields:
+            if inquiry_field.__name__ == "claimsText":
                 #as this text can be very long, we do not want to show it with the other
                 #fields, we will display it in the "Claimants" part of the template
                 continue
-            fields.append(inquiryAttributeName)
+            fields.append(inquiry_field)
 
         return fields
 

@@ -1,11 +1,12 @@
-<fieldset metal:define-macro="urbanEventDataMacro" i18n:domain="urban" height="100%">
+<fieldset metal:define-macro="urbanEventDataMacro"  height="100%">
     <legend i18n:translate="event_data">Event data</legend>
     <table class="no-style-table; clear">
         <tal:evtfield repeat="field fields" define="fields view/getFieldsToShow;">
             <tr valign="top" tal:define="field_name python: field.__name__;
-                                         field_label python: field_name != 'eventDate' and str(field.widget.label) or view.getDateCustomLabel();">
+                                         field_label python: field_name != 'eventDate' and field.widget.label or view.getDateCustomLabel();"
+                             i18n:domain="">
                 <td>
-                    <strong i18n:translate="" tal:content="field_label">Optional field label</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong tal:content="field_label">Optional field label</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
                 <tal:manage_show_nc_if_needed define="value python: field.getAccessor(context)()">
                     <td tal:condition="python: bool(value)">
