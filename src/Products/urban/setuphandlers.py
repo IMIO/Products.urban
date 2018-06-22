@@ -630,7 +630,6 @@ def setDefaultApplicationSecurity(context):
             folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
             folder.manage_addLocalRoles("urban_readers", ("Reader", ))
             folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-            folder.manage_addLocalRoles("environment_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
             folder.manage_addLocalRoles("environment_readers", ("Reader", ))
             folder.manage_addLocalRoles("environment_editors", ("Contributor",))
             # mark them with IContactFolder interface use some view methods, like 'getemails', on it
