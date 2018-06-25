@@ -538,8 +538,8 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
           This vocabulary for field requirementsFromFD returns this list: decision, opinion
         """
         vocab = (
-            ('opinion', 'location_fdrequirement_opinion'),
-            ('decision', 'location_fdrequirement_decision'),
+            ('opinion', 'Avis simple'),
+            ('decision', 'Avis conforme'),
         )
         return DisplayList(vocab)
 
