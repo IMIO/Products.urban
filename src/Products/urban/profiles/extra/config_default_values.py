@@ -718,10 +718,10 @@ default_values = {
             'UrbanVocabularyTerm', [
                 'BuildLicence', 'Article127', 'CODT_BuildLicence', 'CODT_ParcelOutLicence', 'CODT_Article127',
             ],
-            {'id': "not_applicable", 'title': 'peb_not_applicable'},
-            {'id': "complete_process", 'title': 'peb_complete_process'},
-            {'id': "form1_process", 'title': 'peb_form1_process'},
-            {'id': "form2_process", 'title': 'peb_form2_process'},
+            {'id': "not_applicable", 'title': 'Non applicable'},
+            {'id': "complete_process", 'title': 'Procédure complète'},
+            {'id': "form1_process", 'title': 'Déclaration simplifiée'},
+            {'id': "form2_process", 'title': 'Engagement PEB'},
         ],
 
         'townshipfoldercategories': [
@@ -750,7 +750,7 @@ default_values = {
         ],
 
         'ftSolicitOpinionsTo': [
-            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'CODT_UniqueLicence'],
+            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo'],
             {
                 'id': 'spw-dgo1',
                 'title': "SPW-DGO1",
