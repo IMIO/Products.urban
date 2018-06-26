@@ -1,7 +1,7 @@
 <registry>
   <records interface="Products.urban.interfaces.ICODT_UniqueLicence_spe_reference_config">
-      <!--value key="numerotation">0</value>
-      <value key="tal_expression">python: 'PUUU' + numerotation</value-->
+      <value key="numerotation">0</value>
+      <value key="tal_expression">python: 'PU/2/' + numerotation</value>
   </records>
   <records interface="plone.app.referenceintegrity.interfaces.ISettings">
     <value key="reference_types">
