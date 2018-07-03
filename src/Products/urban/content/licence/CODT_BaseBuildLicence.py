@@ -34,7 +34,7 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 ##/code-section module-header
 
 optional_fields = [
-    'SDC', 'sdcDetails', 'regional_guide', 'regional_guide_details',
+    'SCT', 'sctDetails', 'SDC', 'sdcDetails', 'regional_guide', 'regional_guide_details',
     'township_guide', 'township_guide_details', 'prorogation',
 ]
 
@@ -76,6 +76,28 @@ schema = Schema((
         schemata='urban_analysis',
         multiValued=1,
         vocabulary=UrbanVocabulary('form_composition', inUrbanConfig=False),
+    ),
+    LinesField(
+        name='SCT',
+        widget=MultiSelectionWidget(
+            size=15,
+            label=_('urban_label_SCT', default='Sct'),
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('sct', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='sctDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label=_('urban_label_sctDetails', default='Sctdetails'),
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
     ),
     LinesField(
         name='SDC',
