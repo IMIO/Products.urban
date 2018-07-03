@@ -79,7 +79,7 @@ def setEnvironmentLicencePreviousLicencesField(parcel, event):
         references = parcel.reference_as_dict()
         try:
             parcel_historic = cadastre.query_parcel_historic(**references)
-        except UnreferencedParcelError:
+        except services.cadastral.UnreferencedParcelError:
             continue
 
         if not parcel_historic:
