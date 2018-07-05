@@ -14,11 +14,10 @@ class StateRolesMapping(LocalRoleAdapter):
         self.licence = self.context
 
     def get_allowed_groups(self, licence):
-        if IEnvironmentBase.providedBy(licence):
-            if IUniqueLicence.providedBy(licence) or ICODT_UniqueLicence.providedBy(licence):
-                return 'urban_and_environment'
-            else:
-                return 'environment_only'
+        if IUniqueLicence.providedBy(licence) or ICODT_UniqueLicence.providedBy(licence):
+            return 'urban_and_environment'
+        elif IEnvironmentBase.providedBy(licence):
+            return 'environment_only'
         else:
             return 'urban_only'
 
