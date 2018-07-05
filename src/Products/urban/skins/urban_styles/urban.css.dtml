@@ -406,7 +406,7 @@ span.option {
    display: block;
 }
 
-.searchButton.addHistory {
+.searchButton.addHistory, .searchButton.showHistory {
     font-size: 90%;
     height: 2em;
     vertical-align: top;

@@ -13,6 +13,14 @@
       permission="zope.Public"
       />
 
+  <browser:view
+          for="Products.urban.interfaces.IEnvironmentBase"
+          name="specificcontenthistory"
+          class=".view.SpecificHistoryView"
+          layer="imio.history.interfaces.IImioHistoryLayer"
+          permission="zope.Public"
+  />
+
   <adapter
     for="Products.urban.interfaces.IEnvironmentBase"
     factory=".environment.EnvironmentRubricsHistory"
@@ -23,7 +31,7 @@
   <adapter
     for="Products.urban.interfaces.IEnvironmentBase"
     factory=".environment.EnvironmentAdditionalLegalConditionsHistory"
-    name="additionalLegalCondition_history"
+    name="additionalLegalConditions_history"
     provides="imio.history.interfaces.IImioHistory"
     />
 
