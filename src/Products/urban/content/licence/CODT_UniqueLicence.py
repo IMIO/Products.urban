@@ -82,7 +82,7 @@ schema = Schema((
         name='authority',
         widget=SelectionWidget(
             format='select',
-            label=_('urban_label_authority', default='Authority'),
+            label=_('urban_label_authority', default='Authority', with_empty_value=False),
         ),
         schemata='urban_description',
         vocabulary=UrbanVocabulary('authority', inUrbanConfig=True),
