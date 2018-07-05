@@ -81,6 +81,7 @@ schema = Schema((
     StringField(
         name='authority',
         widget=SelectionWidget(
+            format='select',
             label=_('urban_label_authority', default='Authority'),
         ),
         schemata='urban_description',
