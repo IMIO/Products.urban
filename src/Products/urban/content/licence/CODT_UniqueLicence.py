@@ -82,10 +82,10 @@ schema = Schema((
         name='authority',
         widget=SelectionWidget(
             format='select',
-            label=_('urban_label_authority', default='Authority', with_empty_value=False),
+            label=_('urban_label_authority', default='Authority'),
         ),
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('authority', inUrbanConfig=True),
+        vocabulary=UrbanVocabulary('authority', inUrbanConfig=True, with_empty_value=False),
         default_method='getDefaultValue',
     ),
     StringField(
