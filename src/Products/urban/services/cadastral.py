@@ -28,7 +28,7 @@ class CadastreService(SQLService):
         if self.can_connect():
             self._init_table('da', column_names=['da', 'divname'])
             self._init_table('pe', column_names=['pe', 'adr1', 'adr2', 'daa'])
-            self._init_table('prc', column_names=['prc', 'daa', 'na1'])
+            self._init_table('prc', column_names=['prc', 'daa', 'na1', 'capakey'])
             self._init_table(
                 'pas',
                 column_names=['da', 'section', 'radical', 'exposant', 'bis', 'puissance', 'prcb1', 'prcc', 'prca']
@@ -271,22 +271,17 @@ class CadastreSession(SQLSession):
         parcels_in_radius = [ActualParcel(**record._asdict()) for record in records]
         return parcels_in_radius
 
-    def query_owners_of_parcel(self, division, section=None, radical='0', bis='0',
-                               exposant=None, puissance='0'):
+    def query_owners_of_parcel(self, capakey):
         """
         Return estate owners of a given parcel.
         """
 
         pe = self.tables.pe
         prc = self.tables.prc
-        prc_value = compute_prc(division, section, radical, bis, exposant, puissance)
 
         query = self.session.query(pe.pe, pe.adr1, pe.adr2, pe.daa)
         query = query.filter(pe.daa == prc.daa)
-        query = query.filter(prc.prc == prc_value)
-        # daa = division followed by some number of length 5 so we can do divide
-        # it by 10^5 and match it with the division
-        query = query.filter(func.round(prc.daa / 100000) == division)
+        query = query.filter(prc.capakey == capakey)
 
         result = query.all()
         return result
