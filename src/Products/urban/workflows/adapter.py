@@ -7,6 +7,10 @@ from plone.memoize.request import cache
 
 from Products.CMFCore.WorkflowCore import WorkflowException
 
+from Products.urban.interfaces import ICODT_UniqueLicence
+from Products.urban.interfaces import IEnvironmentBase
+from Products.urban.interfaces import IUniqueLicence
+
 from zope.interface import implements
 
 
