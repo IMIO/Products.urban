@@ -288,6 +288,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         reader = csv.DictReader(claimants_file, fieldnames, delimiter=';', quotechar='"')
         claimant_args = [row for row in reader if row['name1']][1:]
         for claimant_arg in claimant_args:
+            claimant_arg.pop(None, None)
             # default values
             if not claimant_arg['claimType']:
                 claimant_arg['claimType'] = 'writedClaim'
