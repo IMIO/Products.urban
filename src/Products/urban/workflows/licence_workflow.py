@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.interfaces import ICODT_UniqueLicence
-from Products.urban.interfaces import IEnvironmentBase
-from Products.urban.interfaces import IUniqueLicence
 from Products.urban.workflows.adapter import LocalRoleAdapter
 
 
