@@ -339,7 +339,7 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         )
 
         for parcel in neighbour_parcels:
-            owners = cadastre.query_owners_of_parcel(**parcel.reference_as_dict())
+            owners = cadastre.query_owners_of_parcel(parcel.capakey)
             for owner in owners:
                 pe = owner.pe and str(owner.pe.encode('utf-8')) or ''
                 adr1 = owner.adr1 and str(owner.adr1.encode('utf-8')) or ''
