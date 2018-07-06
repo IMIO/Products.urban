@@ -32,6 +32,53 @@ class LocalRoleAdapter(object):
 
     def __init__(self, context):
         self.context = context
+        self.licence = self.context
+
+    def get_allowed_groups(self, licence):
+        if IUniqueLicence.providedBy(licence) or ICODT_UniqueLicence.providedBy(licence):
+            return 'urban_and_environment'
+        elif IEnvironmentBase.providedBy(licence):
+            return 'environment_only'
+        else:
+            return 'urban_only'
+
+    def get_editors(self):
+        """ """
+        licence = self.licence
+        mapping = {
+            'urban_only': [
+                'urban_editors',
+            ],
+            'environment_only': [
+                'environment_editors',
+            ],
+            'urban_and_environment': [
+                'urban_editors',
+                'environment_editors',
+            ]
+        }
+        allowed_group = self.get_allowed_groups(licence)
+        if allowed_group in mapping:
+            return mapping.get(allowed_group)
+
+    def get_readers(self):
+        """ """
+        licence = self.licence
+        mapping = {
+            'urban_only': [
+                'urban_readers',
+            ],
+            'environment_only': [
+                'environment_readers',
+            ],
+            'urban_and_environment': [
+                'urban_readers',
+                'environment_readers',
+            ]
+        }
+        allowed_group = self.get_allowed_groups(licence)
+        if allowed_group in mapping:
+            return mapping.get(allowed_group)
 
     def getRoles(self, principal):
         """
