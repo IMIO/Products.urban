@@ -211,23 +211,6 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         applicants.extend(super(EnvironmentLicence, self).getApplicants())
         return applicants
 
-    security.declarePublic('get_applicants_history')
-    def get_applicants_history(self):
-        applicants = self.get_corporations_history()
-        applicants.extend(super(EnvironmentLicence, self).get_applicants_history())
-        return applicants
-
-    security.declarePublic('getCorporations')
-    def getCorporations(self):
-        corporations = [corp for corp in self.objectValues('Corporation')
-                        if api.content.get_state(corp) == 'enabled']
-        return corporations
-
-    security.declarePublic('get_corporations_history')
-    def get_corporations_history(self):
-        return [corp for corp in self.objectValues('Corporation')
-                if api.content.get_state(corp) == 'disabled']
-
     security.declarePublic('getFtSolicitOpinionsTo')
     def getFtSolicitOpinionsTo(self, get_obj=False):
         """
