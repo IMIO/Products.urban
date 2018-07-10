@@ -203,14 +203,6 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         To implements in subclasses
         """
 
-    security.declarePublic('getApplicants')
-    def getApplicants(self):
-        """
-        """
-        applicants = self.getCorporations()
-        applicants.extend(super(EnvironmentLicence, self).getApplicants())
-        return applicants
-
     security.declarePublic('getFtSolicitOpinionsTo')
     def getFtSolicitOpinionsTo(self, get_obj=False):
         """
