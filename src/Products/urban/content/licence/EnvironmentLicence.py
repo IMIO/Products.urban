@@ -43,8 +43,8 @@ from zope.i18n import translate
 
 optional_fields = [
     'publicRoadModifications', 'previousLicences',
-    'referenceSPE', 'referenceFT', 'environmentTechnicalRemarks',
-    'claimsSynthesis', 'conclusions', 'commentsOnSPWOpinion',
+    'referenceSPE', 'referenceFT', 'claimsSynthesis',
+    'conclusions', 'commentsOnSPWOpinion',
 ]
 ##/code-section module-header
 
@@ -146,18 +146,6 @@ schema = Schema((
         allowable_content_types=('text/html',),
         widget=RichWidget(
             label=_('urban_label_conclusions', default='Conclusions'),
-        ),
-        default_content_type='text/html',
-        default_method='getDefaultText',
-        schemata='urban_environment',
-        default_output_type='text/html',
-    ),
-    TextField(
-        name='environmentTechnicalRemarks',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_environmentTechnicalRemarks',
-                    default='Environmenttechnicalremarks'),
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -303,6 +291,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('natura2000location', after='natura2000')
     schema.moveField('natura2000Details', after='natura2000location')
     schema.moveField('description', after='validityDelay')
+    schema.moveField('environmentTechnicalRemarks', after='conclusions')
 
 finalizeSchema(EnvironmentLicence_schema)
 ##/code-section module-footer

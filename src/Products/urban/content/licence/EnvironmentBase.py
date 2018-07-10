@@ -43,7 +43,8 @@ from plone import api
 
 optional_fields = [
     'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalLegalConditions',
-    'businessOldLocation', 'applicationReasons', 'validityDelay'
+    'businessOldLocation', 'applicationReasons', 'validityDelay',
+    'environmentTechnicalRemarks',
 ]
 
 slave_fields_natura2000 = (
@@ -262,6 +263,18 @@ schema = Schema((
         default_method='getDefaultText',
         default_output_type='text/html',
         accessor="Description",
+    ),
+    TextField(
+        name='environmentTechnicalRemarks',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_environmentTechnicalRemarks',
+                    default='Environmenttechnicalremarks'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_environment',
+        default_output_type='text/html',
     ),
 
 ),
