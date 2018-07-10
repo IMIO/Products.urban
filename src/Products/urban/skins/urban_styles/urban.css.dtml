@@ -39,6 +39,14 @@ color: green !important;
 color: green !important;
 }
 
+.state-acceptable {
+color: green !important;
+}
+
+.state-inacceptable {
+color: red !important;
+}
+
 .state-retired {
 color: grey !important;
 }
