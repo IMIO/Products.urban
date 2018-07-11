@@ -490,6 +490,20 @@ class DecisionNotified(Condition):
         return False
 
 
+class DecisionDelivered(Condition):
+    """
+    Environment Licence decision was notified
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        decision_event = licence.getLastLicenceDelivery()
+        if decision_event:
+            return api.content.get_state(decision_event) == 'closed'
+        return False
+
+
 class LicenceEndedCondition(Condition):
     """
     Licence is in a final state

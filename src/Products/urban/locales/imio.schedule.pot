@@ -125,6 +125,9 @@ msgstr ""
 msgid "urban.schedule.condition.refused"
 msgstr ""
 
+msgid "urban.schedule.condition.decision_delivered"
+msgstr ""
+
 msgid "urban.schedule.condition.decision_notified"
 msgstr ""
 
