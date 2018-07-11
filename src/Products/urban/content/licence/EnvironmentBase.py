@@ -389,6 +389,9 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
     def getLastDisplayingTheDecision(self):
         return self.getLastEvent(interfaces.IDisplayingTheDecisionEvent)
 
+    def getLastLicenceDelivery(self):
+        return self.getLastEvent(interfaces.ILicenceDeliveryEvent)
+
     def getLastRecourse(self):
         return self.getLastEvent(interfaces.IRecourseEvent)
 

@@ -383,14 +383,6 @@ class EnvironmentLicenceView(LicenceView):
         min_conditions = context.getMinimumLegalConditions()
         return self._sortConditions(min_conditions)
 
-    def getAdditionalConditions(self):
-        """
-        sort the conditions from the field 'additionalLegalConditions'  by type (integral, sectorial, ...)
-        """
-        context = aq_inner(self.context)
-        sup_conditions = context.getAdditionalLegalConditions()
-        return self._sortConditions(sup_conditions)
-
 
 class ShowEditTabbing(BrowserView):
     """ call this view to see if a licence should display the tabbing with edit icons """
