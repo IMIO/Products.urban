@@ -243,9 +243,6 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     def previouslicencesBaseQuery(self):
         return {'object_provides': IEnvironmentBase.__identifier__}
 
-    def getLastLicenceDelivery(self):
-        return self.getLastEvent(ILicenceDeliveryEvent)
-
     def getLastMissingPart(self):
         return self.getLastEvent(interfaces.IMissingPartEvent)
 
