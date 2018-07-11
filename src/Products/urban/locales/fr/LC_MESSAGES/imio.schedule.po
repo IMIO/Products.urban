@@ -44,6 +44,9 @@ msgstr "Créer l'événement 'dossier incomplet' et le clôturer"
 msgid "urban.schedule.condition.complements_received"
 msgstr "Créer l'événement 'récépissé d'un complément' et le clôturer"
 
+msgid "urban.schedule.condition.decision_delivered"
+msgstr "Créer l'événement de notification de la décision du permis d'environnement et le clôturer"
+
 msgid "urban.schedule.condition.decision_notified"
 msgstr "Créer l'événement de notification du permis et le clôturer"
 
