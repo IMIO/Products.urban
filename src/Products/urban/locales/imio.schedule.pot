@@ -89,6 +89,9 @@ msgstr ""
 msgid "urban.schedule.start_date.acknowledgement_transmit_date"
 msgstr ""
 
+msgid "urban.schedule.start_date.ask_complements_date"
+msgstr ""
+
 msgid "urban.schedule.start_date.creation_date"
 msgstr ""
 

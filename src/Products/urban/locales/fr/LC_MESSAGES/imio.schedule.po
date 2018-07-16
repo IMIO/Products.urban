@@ -143,6 +143,9 @@ msgstr "Date de transmis de l'accusé de réception"
 msgid "urban.schedule.start_date.announcement_end_date"
 msgstr "Date de fin de l'annonce de projet"
 
+msgid "urban.schedule.start_date.ask_complements_date"
+msgstr "Date d'incomplétude du dossier"
+
 msgid "urban.schedule.start_date.creation_date"
 msgstr "Date de création du dossier"
 
