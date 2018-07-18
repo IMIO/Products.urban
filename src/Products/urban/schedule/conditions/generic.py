@@ -92,6 +92,37 @@ class ComplementsReceived(Condition):
         return complements_received
 
 
+class ComplementsTransmitToSPW(Condition):
+    """
+    Licence MissingPartTransmitToSPW event is created and closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        complements_transmit = False
+        deposit_part_event = licence.getLastMissingPartTransmitToSPW()
+        if deposit_part_event:
+            complements_transmit = api.content.get_state(deposit_part_event) == 'closed'
+
+        return complements_transmit
+
+
+class IncompleteForSixMonths(Condition):
+    """
+    Unique licence have been incomplete for 6 months
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        missing_part_event = licence.getLastMissingPart()
+        days_delta = 0
+        if missing_part_event:
+            days_delta = DateTime() - missing_part_event.getEventDate()
+
+        return days_delta >= 183
+
+
 class ProcedureChoiceDone(Condition):
     """
     Licence has some value selected in the field 'folderCategory'.

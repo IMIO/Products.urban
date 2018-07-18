@@ -13,7 +13,7 @@
 
     <!-- SPW transmit conditions-->
     <adapter
-        for="Products.urban.interfaces.ICODT_UniqueLicence
+        for="Products.urban.interfaces.IEnvironmentLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IStartCondition"
         factory=".generic.TransmitSPWDoneCondition"
@@ -35,6 +35,30 @@
         provides="imio.schedule.interfaces.IStartCondition"
         factory=".generic.SingleComplementAsked"
         name="urban.schedule.condition.complements_asked"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.ComplementsAsked"
+        name="urban.schedule.condition.complements_asked"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.SingleComplementReceived"
+        name="urban.schedule.condition.complements_received"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.ComplementsTransmitToSPW"
+        name="urban.schedule.condition.complements_transmit_to_spw"
     />
 
     <!-- acknowlegdment conditions-->
@@ -98,6 +122,22 @@
 
     <adapter
         for="Products.urban.interfaces.IBaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.OpinionRequestsDone"
+        name="urban.schedule.condition.opinion_requests_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.HasOpinionRequests"
+        name="urban.schedule.condition.has_opinion_requests"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IStartCondition"
         factory=".generic.OpinionRequestsDone"

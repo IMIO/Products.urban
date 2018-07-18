@@ -52,6 +52,14 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.SingleComplementAsked"
+        name="urban.schedule.condition.complements_asked"
+    />
+
+    <adapter
         for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
@@ -67,9 +75,33 @@
         name="urban.schedule.condition.complements_received"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.SingleComplementReceived"
+        name="urban.schedule.condition.complements_received"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.ComplementsTransmitToSPW"
+        name="urban.schedule.condition.complements_transmit_to_spw"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.SingleComplementReceived"
+        name="urban.schedule.condition.incomplete_for_6_months"
+    />
+
     <!-- SPW transmit conditions-->
     <adapter
-        for="Products.urban.interfaces.ICODT_UniqueLicence
+        for="Products.urban.interfaces.IEnvironmentLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.TransmitSPWDoneCondition"
@@ -134,6 +166,22 @@
         name="urban.schedule.condition.opinion_requests_done"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.OpinionRequestsEventsCreated"
+        name="urban.schedule.condition.opinion_requests_created"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.OpinionRequestsDone"
+        name="urban.schedule.condition.opinion_requests_done"
+    />
+
     <!-- College opinion transmit for unique licences -->
     <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence
@@ -146,6 +194,14 @@
     <!-- SPW project receipt for unique licences -->
     <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.SPWProjectReceivedCondition"
+        name="urban.schedule.condition.spw_project_receipt_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.SPWProjectReceivedCondition"

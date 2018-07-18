@@ -32,6 +32,9 @@ msgstr ""
 msgid "urban.schedule.condition.complements_received"
 msgstr ""
 
+msgid "urban.schedule.condition.complements_transmit_to_spw"
+msgstr ""
+
 msgid "urban.schedule.condition.deposit_done"
 msgstr ""
 
@@ -90,6 +93,9 @@ msgid "urban.schedule.start_date.acknowledgement_transmit_date"
 msgstr ""
 
 msgid "urban.schedule.start_date.ask_complements_date"
+msgstr ""
+
+msgid "urban.schedule.start_date.complements_deposit_date"
 msgstr ""
 
 msgid "urban.schedule.start_date.creation_date"

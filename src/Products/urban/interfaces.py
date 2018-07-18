@@ -303,12 +303,12 @@ class IApplicant(Interface):
     """
 
 
-class IEnvClassTwo(Interface):
+class IEnvClassTwo(IEnvironmentLicence):
     """Marker interface for .EnvClassTwo.EnvClassTwo
     """
 
 
-class IEnvClassOne(Interface):
+class IEnvClassOne(IEnvironmentLicence):
     """Marker interface for .EnvClassOne.EnvClassOne
     """
 
@@ -415,6 +415,10 @@ class IDepositEvent(Interface):
 
 class IMissingPartDepositEvent(IDepositEvent):
     __doc__ = _("""IMissingPartDeposit type marker interface""")
+
+
+class IMissingPartTransmitToSPWEvent(IDepositEvent):
+    __doc__ = _("""IMissingPartTransmitToSPWEvent type marker interface""")
 
 
 class IModificationDepositEvent(IDepositEvent):

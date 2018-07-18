@@ -30,7 +30,6 @@ from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 from Products.urban.interfaces import IEnvironmentBase
-from Products.urban.interfaces import ILicenceDeliveryEvent
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
@@ -243,8 +242,17 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     def previouslicencesBaseQuery(self):
         return {'object_provides': IEnvironmentBase.__identifier__}
 
+    def getLastTransmitToSPW(self):
+        return self.getLastEvent(interfaces.ITransmitToSPWEvent)
+
     def getLastMissingPart(self):
         return self.getLastEvent(interfaces.IMissingPartEvent)
+
+    def getLastMissingPartDeposit(self):
+        return self.getLastEvent(interfaces.IMissingPartDepositEvent)
+
+    def getLastMissingPartTransmitToSPW(self):
+        return self.getLastEvent(interfaces.IMissingPartTransmitToSPWEvent)
 
     security.declarePublic('getFTOpinionRequestAddresses')
     def getFTOpinionRequestAddresses(self):
